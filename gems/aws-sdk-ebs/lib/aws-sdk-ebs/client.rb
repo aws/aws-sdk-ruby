@@ -497,7 +497,7 @@ module Aws::EBS
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-ebs'
-      context[:gem_version] = '1.5.1'
+      context[:gem_version] = '1.6.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

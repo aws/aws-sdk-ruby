@@ -25,6 +25,7 @@ module Aws::EBS
     class Block < Struct.new(
       :block_index,
       :block_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -53,6 +54,7 @@ module Aws::EBS
       :block_index,
       :first_block_token,
       :second_block_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -89,6 +91,7 @@ module Aws::EBS
       :snapshot_id,
       :block_index,
       :block_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -116,6 +119,7 @@ module Aws::EBS
       :block_data,
       :checksum,
       :checksum_algorithm)
+      SENSITIVE = [:block_data]
       include Aws::Structure
     end
 
@@ -167,6 +171,7 @@ module Aws::EBS
       :next_token,
       :max_results,
       :starting_block_index)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -199,6 +204,7 @@ module Aws::EBS
       :volume_size,
       :block_size,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -238,6 +244,7 @@ module Aws::EBS
       :next_token,
       :max_results,
       :starting_block_index)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -270,6 +277,7 @@ module Aws::EBS
       :volume_size,
       :block_size,
       :next_token)
+      SENSITIVE = [:blocks]
       include Aws::Structure
     end
 
@@ -282,6 +290,7 @@ module Aws::EBS
     #
     class ResourceNotFoundException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -299,6 +308,7 @@ module Aws::EBS
     class ValidationException < Struct.new(
       :message,
       :reason)
+      SENSITIVE = []
       include Aws::Structure
     end
 

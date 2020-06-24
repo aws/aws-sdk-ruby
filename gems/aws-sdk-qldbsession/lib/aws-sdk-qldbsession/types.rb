@@ -38,6 +38,7 @@ module Aws::QLDBSession
     class BadRequestException < Struct.new(
       :message,
       :code)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -67,6 +68,7 @@ module Aws::QLDBSession
     class CommitTransactionRequest < Struct.new(
       :transaction_id,
       :commit_digest)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -85,6 +87,7 @@ module Aws::QLDBSession
     class CommitTransactionResult < Struct.new(
       :transaction_id,
       :commit_digest)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -137,6 +140,7 @@ module Aws::QLDBSession
       :transaction_id,
       :statement,
       :parameters)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -150,6 +154,7 @@ module Aws::QLDBSession
     #
     class ExecuteStatementResult < Struct.new(
       :first_page)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -176,6 +181,7 @@ module Aws::QLDBSession
     class FetchPageRequest < Struct.new(
       :transaction_id,
       :next_page_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -189,6 +195,7 @@ module Aws::QLDBSession
     #
     class FetchPageResult < Struct.new(
       :page)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -206,6 +213,7 @@ module Aws::QLDBSession
     class InvalidSessionException < Struct.new(
       :message,
       :code)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -219,6 +227,7 @@ module Aws::QLDBSession
     #
     class LimitExceededException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -233,6 +242,7 @@ module Aws::QLDBSession
     #
     class OccConflictException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -251,6 +261,7 @@ module Aws::QLDBSession
     class Page < Struct.new(
       :values,
       :next_page_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -263,6 +274,7 @@ module Aws::QLDBSession
     #
     class RateExceededException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -349,6 +361,7 @@ module Aws::QLDBSession
       :abort_transaction,
       :execute_statement,
       :fetch_page)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -392,6 +405,7 @@ module Aws::QLDBSession
       :abort_transaction,
       :execute_statement,
       :fetch_page)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -412,6 +426,7 @@ module Aws::QLDBSession
     #
     class StartSessionRequest < Struct.new(
       :ledger_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -427,6 +442,7 @@ module Aws::QLDBSession
     #
     class StartSessionResult < Struct.new(
       :session_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -448,6 +464,7 @@ module Aws::QLDBSession
     #
     class StartTransactionResult < Struct.new(
       :transaction_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -476,6 +493,7 @@ module Aws::QLDBSession
     class ValueHolder < Struct.new(
       :ion_binary,
       :ion_text)
+      SENSITIVE = []
       include Aws::Structure
     end
 

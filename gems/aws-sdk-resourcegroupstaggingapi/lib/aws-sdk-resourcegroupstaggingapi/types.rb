@@ -34,6 +34,7 @@ module Aws::ResourceGroupsTaggingAPI
       :noncompliant_keys,
       :keys_with_noncompliant_values,
       :compliance_status)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -47,6 +48,7 @@ module Aws::ResourceGroupsTaggingAPI
     #
     class ConcurrentModificationException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -79,6 +81,7 @@ module Aws::ResourceGroupsTaggingAPI
     #
     class ConstraintViolationException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -120,6 +123,7 @@ module Aws::ResourceGroupsTaggingAPI
       :status,
       :s3_location,
       :error_message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -176,6 +180,7 @@ module Aws::ResourceGroupsTaggingAPI
       :status_code,
       :error_code,
       :error_message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -268,6 +273,7 @@ module Aws::ResourceGroupsTaggingAPI
       :group_by,
       :max_results,
       :pagination_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -287,6 +293,7 @@ module Aws::ResourceGroupsTaggingAPI
     class GetComplianceSummaryOutput < Struct.new(
       :summary_list,
       :pagination_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -443,6 +450,7 @@ module Aws::ResourceGroupsTaggingAPI
       :resource_type_filters,
       :include_compliance_details,
       :exclude_compliant_resources)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -463,6 +471,7 @@ module Aws::ResourceGroupsTaggingAPI
     class GetResourcesOutput < Struct.new(
       :pagination_token,
       :resource_tag_mapping_list)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -484,6 +493,7 @@ module Aws::ResourceGroupsTaggingAPI
     #
     class GetTagKeysInput < Struct.new(
       :pagination_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -503,6 +513,7 @@ module Aws::ResourceGroupsTaggingAPI
     class GetTagKeysOutput < Struct.new(
       :pagination_token,
       :tag_keys)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -531,6 +542,7 @@ module Aws::ResourceGroupsTaggingAPI
     class GetTagValuesInput < Struct.new(
       :pagination_token,
       :key)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -550,6 +562,7 @@ module Aws::ResourceGroupsTaggingAPI
     class GetTagValuesOutput < Struct.new(
       :pagination_token,
       :tag_values)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -563,6 +576,7 @@ module Aws::ResourceGroupsTaggingAPI
     #
     class InternalServiceException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -591,6 +605,7 @@ module Aws::ResourceGroupsTaggingAPI
     #
     class InvalidParameterException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -604,6 +619,7 @@ module Aws::ResourceGroupsTaggingAPI
     #
     class PaginationTokenExpiredException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -630,6 +646,7 @@ module Aws::ResourceGroupsTaggingAPI
       :resource_arn,
       :tags,
       :compliance_details)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -654,6 +671,7 @@ module Aws::ResourceGroupsTaggingAPI
     #
     class StartReportCreationInput < Struct.new(
       :s3_bucket)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -703,6 +721,7 @@ module Aws::ResourceGroupsTaggingAPI
       :region,
       :resource_type,
       :non_compliant_resources)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -731,6 +750,7 @@ module Aws::ResourceGroupsTaggingAPI
     class Tag < Struct.new(
       :key,
       :value)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -761,6 +781,7 @@ module Aws::ResourceGroupsTaggingAPI
     class TagFilter < Struct.new(
       :key,
       :values)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -794,6 +815,7 @@ module Aws::ResourceGroupsTaggingAPI
     class TagResourcesInput < Struct.new(
       :resource_arn_list,
       :tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -809,6 +831,7 @@ module Aws::ResourceGroupsTaggingAPI
     #
     class TagResourcesOutput < Struct.new(
       :failed_resources_map)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -821,6 +844,7 @@ module Aws::ResourceGroupsTaggingAPI
     #
     class ThrottledException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -852,6 +876,7 @@ module Aws::ResourceGroupsTaggingAPI
     class UntagResourcesInput < Struct.new(
       :resource_arn_list,
       :tag_keys)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -864,6 +889,7 @@ module Aws::ResourceGroupsTaggingAPI
     #
     class UntagResourcesOutput < Struct.new(
       :failed_resources_map)
+      SENSITIVE = []
       include Aws::Structure
     end
 

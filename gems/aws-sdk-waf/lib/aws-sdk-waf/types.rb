@@ -174,6 +174,7 @@ module Aws::WAF
       :override_action,
       :type,
       :excluded_rules)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -232,6 +233,7 @@ module Aws::WAF
       :byte_match_set_id,
       :name,
       :byte_match_tuples)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -272,6 +274,7 @@ module Aws::WAF
     class ByteMatchSetSummary < Struct.new(
       :byte_match_set_id,
       :name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -326,6 +329,7 @@ module Aws::WAF
     class ByteMatchSetUpdate < Struct.new(
       :action,
       :byte_match_tuple)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -563,6 +567,7 @@ module Aws::WAF
       :target_string,
       :text_transformation,
       :positional_constraint)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -588,6 +593,7 @@ module Aws::WAF
     class CreateByteMatchSetRequest < Struct.new(
       :name,
       :change_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -606,6 +612,7 @@ module Aws::WAF
     class CreateByteMatchSetResponse < Struct.new(
       :byte_match_set,
       :change_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -631,6 +638,7 @@ module Aws::WAF
     class CreateGeoMatchSetRequest < Struct.new(
       :name,
       :change_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -650,6 +658,7 @@ module Aws::WAF
     class CreateGeoMatchSetResponse < Struct.new(
       :geo_match_set,
       :change_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -675,6 +684,7 @@ module Aws::WAF
     class CreateIPSetRequest < Struct.new(
       :name,
       :change_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -693,6 +703,7 @@ module Aws::WAF
     class CreateIPSetResponse < Struct.new(
       :ip_set,
       :change_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -761,6 +772,7 @@ module Aws::WAF
       :rate_limit,
       :change_token,
       :tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -780,6 +792,7 @@ module Aws::WAF
     class CreateRateBasedRuleResponse < Struct.new(
       :rule,
       :change_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -805,6 +818,7 @@ module Aws::WAF
     class CreateRegexMatchSetRequest < Struct.new(
       :name,
       :change_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -823,6 +837,7 @@ module Aws::WAF
     class CreateRegexMatchSetResponse < Struct.new(
       :regex_match_set,
       :change_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -848,6 +863,7 @@ module Aws::WAF
     class CreateRegexPatternSetRequest < Struct.new(
       :name,
       :change_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -867,6 +883,7 @@ module Aws::WAF
     class CreateRegexPatternSetResponse < Struct.new(
       :regex_pattern_set,
       :change_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -913,6 +930,7 @@ module Aws::WAF
       :metric_name,
       :change_token,
       :tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -931,6 +949,7 @@ module Aws::WAF
     class CreateRuleGroupResponse < Struct.new(
       :rule_group,
       :change_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -977,6 +996,7 @@ module Aws::WAF
       :metric_name,
       :change_token,
       :tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -995,6 +1015,7 @@ module Aws::WAF
     class CreateRuleResponse < Struct.new(
       :rule,
       :change_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1020,6 +1041,7 @@ module Aws::WAF
     class CreateSizeConstraintSetRequest < Struct.new(
       :name,
       :change_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1039,6 +1061,7 @@ module Aws::WAF
     class CreateSizeConstraintSetResponse < Struct.new(
       :size_constraint_set,
       :change_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1067,6 +1090,7 @@ module Aws::WAF
     class CreateSqlInjectionMatchSetRequest < Struct.new(
       :name,
       :change_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1088,6 +1112,7 @@ module Aws::WAF
     class CreateSqlInjectionMatchSetResponse < Struct.new(
       :sql_injection_match_set,
       :change_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1137,6 +1162,7 @@ module Aws::WAF
       :web_acl_id,
       :s3_bucket_name,
       :ignore_unsupported_type)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1148,6 +1174,7 @@ module Aws::WAF
     #
     class CreateWebACLMigrationStackResponse < Struct.new(
       :s3_object_url)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1204,6 +1231,7 @@ module Aws::WAF
       :default_action,
       :change_token,
       :tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1222,6 +1250,7 @@ module Aws::WAF
     class CreateWebACLResponse < Struct.new(
       :web_acl,
       :change_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1250,6 +1279,7 @@ module Aws::WAF
     class CreateXssMatchSetRequest < Struct.new(
       :name,
       :change_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1270,6 +1300,7 @@ module Aws::WAF
     class CreateXssMatchSetResponse < Struct.new(
       :xss_match_set,
       :change_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1296,6 +1327,7 @@ module Aws::WAF
     class DeleteByteMatchSetRequest < Struct.new(
       :byte_match_set_id,
       :change_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1309,6 +1341,7 @@ module Aws::WAF
     #
     class DeleteByteMatchSetResponse < Struct.new(
       :change_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1335,6 +1368,7 @@ module Aws::WAF
     class DeleteGeoMatchSetRequest < Struct.new(
       :geo_match_set_id,
       :change_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1348,6 +1382,7 @@ module Aws::WAF
     #
     class DeleteGeoMatchSetResponse < Struct.new(
       :change_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1373,6 +1408,7 @@ module Aws::WAF
     class DeleteIPSetRequest < Struct.new(
       :ip_set_id,
       :change_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1386,6 +1422,7 @@ module Aws::WAF
     #
     class DeleteIPSetResponse < Struct.new(
       :change_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1405,6 +1442,7 @@ module Aws::WAF
     #
     class DeleteLoggingConfigurationRequest < Struct.new(
       :resource_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1430,6 +1468,7 @@ module Aws::WAF
     #
     class DeletePermissionPolicyRequest < Struct.new(
       :resource_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1459,6 +1498,7 @@ module Aws::WAF
     class DeleteRateBasedRuleRequest < Struct.new(
       :rule_id,
       :change_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1472,6 +1512,7 @@ module Aws::WAF
     #
     class DeleteRateBasedRuleResponse < Struct.new(
       :change_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1498,6 +1539,7 @@ module Aws::WAF
     class DeleteRegexMatchSetRequest < Struct.new(
       :regex_match_set_id,
       :change_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1511,6 +1553,7 @@ module Aws::WAF
     #
     class DeleteRegexMatchSetResponse < Struct.new(
       :change_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1537,6 +1580,7 @@ module Aws::WAF
     class DeleteRegexPatternSetRequest < Struct.new(
       :regex_pattern_set_id,
       :change_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1551,6 +1595,7 @@ module Aws::WAF
     #
     class DeleteRegexPatternSetResponse < Struct.new(
       :change_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1576,6 +1621,7 @@ module Aws::WAF
     class DeleteRuleGroupRequest < Struct.new(
       :rule_group_id,
       :change_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1589,6 +1635,7 @@ module Aws::WAF
     #
     class DeleteRuleGroupResponse < Struct.new(
       :change_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1614,6 +1661,7 @@ module Aws::WAF
     class DeleteRuleRequest < Struct.new(
       :rule_id,
       :change_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1627,6 +1675,7 @@ module Aws::WAF
     #
     class DeleteRuleResponse < Struct.new(
       :change_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1653,6 +1702,7 @@ module Aws::WAF
     class DeleteSizeConstraintSetRequest < Struct.new(
       :size_constraint_set_id,
       :change_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1667,6 +1717,7 @@ module Aws::WAF
     #
     class DeleteSizeConstraintSetResponse < Struct.new(
       :change_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1695,6 +1746,7 @@ module Aws::WAF
     class DeleteSqlInjectionMatchSetRequest < Struct.new(
       :sql_injection_match_set_id,
       :change_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1712,6 +1764,7 @@ module Aws::WAF
     #
     class DeleteSqlInjectionMatchSetResponse < Struct.new(
       :change_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1737,6 +1790,7 @@ module Aws::WAF
     class DeleteWebACLRequest < Struct.new(
       :web_acl_id,
       :change_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1750,6 +1804,7 @@ module Aws::WAF
     #
     class DeleteWebACLResponse < Struct.new(
       :change_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1778,6 +1833,7 @@ module Aws::WAF
     class DeleteXssMatchSetRequest < Struct.new(
       :xss_match_set_id,
       :change_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1793,6 +1849,7 @@ module Aws::WAF
     #
     class DeleteXssMatchSetResponse < Struct.new(
       :change_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1829,6 +1886,7 @@ module Aws::WAF
     #
     class ExcludedRule < Struct.new(
       :rule_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1913,6 +1971,7 @@ module Aws::WAF
     class FieldToMatch < Struct.new(
       :type,
       :data)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1955,6 +2014,7 @@ module Aws::WAF
     class GeoMatchConstraint < Struct.new(
       :type,
       :value)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2001,6 +2061,7 @@ module Aws::WAF
       :geo_match_set_id,
       :name,
       :geo_match_constraints)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2036,6 +2097,7 @@ module Aws::WAF
     class GeoMatchSetSummary < Struct.new(
       :geo_match_set_id,
       :name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2082,6 +2144,7 @@ module Aws::WAF
     class GeoMatchSetUpdate < Struct.new(
       :action,
       :geo_match_constraint)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2102,6 +2165,7 @@ module Aws::WAF
     #
     class GetByteMatchSetRequest < Struct.new(
       :byte_match_set_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2124,6 +2188,7 @@ module Aws::WAF
     #
     class GetByteMatchSetResponse < Struct.new(
       :byte_match_set)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2143,6 +2208,7 @@ module Aws::WAF
     #
     class GetChangeTokenResponse < Struct.new(
       :change_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2162,6 +2228,7 @@ module Aws::WAF
     #
     class GetChangeTokenStatusRequest < Struct.new(
       :change_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2173,6 +2240,7 @@ module Aws::WAF
     #
     class GetChangeTokenStatusResponse < Struct.new(
       :change_token_status)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2193,6 +2261,7 @@ module Aws::WAF
     #
     class GetGeoMatchSetRequest < Struct.new(
       :geo_match_set_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2207,6 +2276,7 @@ module Aws::WAF
     #
     class GetGeoMatchSetResponse < Struct.new(
       :geo_match_set)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2226,6 +2296,7 @@ module Aws::WAF
     #
     class GetIPSetRequest < Struct.new(
       :ip_set_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2243,6 +2314,7 @@ module Aws::WAF
     #
     class GetIPSetResponse < Struct.new(
       :ip_set)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2262,6 +2334,7 @@ module Aws::WAF
     #
     class GetLoggingConfigurationRequest < Struct.new(
       :resource_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2273,6 +2346,7 @@ module Aws::WAF
     #
     class GetLoggingConfigurationResponse < Struct.new(
       :logging_configuration)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2292,6 +2366,7 @@ module Aws::WAF
     #
     class GetPermissionPolicyRequest < Struct.new(
       :resource_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2303,6 +2378,7 @@ module Aws::WAF
     #
     class GetPermissionPolicyResponse < Struct.new(
       :policy)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2330,6 +2406,7 @@ module Aws::WAF
     class GetRateBasedRuleManagedKeysRequest < Struct.new(
       :rule_id,
       :next_marker)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2347,6 +2424,7 @@ module Aws::WAF
     class GetRateBasedRuleManagedKeysResponse < Struct.new(
       :managed_keys,
       :next_marker)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2366,6 +2444,7 @@ module Aws::WAF
     #
     class GetRateBasedRuleRequest < Struct.new(
       :rule_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2378,6 +2457,7 @@ module Aws::WAF
     #
     class GetRateBasedRuleResponse < Struct.new(
       :rule)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2398,6 +2478,7 @@ module Aws::WAF
     #
     class GetRegexMatchSetRequest < Struct.new(
       :regex_match_set_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2411,6 +2492,7 @@ module Aws::WAF
     #
     class GetRegexMatchSetResponse < Struct.new(
       :regex_match_set)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2431,6 +2513,7 @@ module Aws::WAF
     #
     class GetRegexPatternSetRequest < Struct.new(
       :regex_pattern_set_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2445,6 +2528,7 @@ module Aws::WAF
     #
     class GetRegexPatternSetResponse < Struct.new(
       :regex_pattern_set)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2464,6 +2548,7 @@ module Aws::WAF
     #
     class GetRuleGroupRequest < Struct.new(
       :rule_group_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2476,6 +2561,7 @@ module Aws::WAF
     #
     class GetRuleGroupResponse < Struct.new(
       :rule_group)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2495,6 +2581,7 @@ module Aws::WAF
     #
     class GetRuleRequest < Struct.new(
       :rule_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2513,6 +2600,7 @@ module Aws::WAF
     #
     class GetRuleResponse < Struct.new(
       :rule)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2570,6 +2658,7 @@ module Aws::WAF
       :rule_id,
       :time_window,
       :max_items)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2600,6 +2689,7 @@ module Aws::WAF
       :sampled_requests,
       :population_size,
       :time_window)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2620,6 +2710,7 @@ module Aws::WAF
     #
     class GetSizeConstraintSetRequest < Struct.new(
       :size_constraint_set_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2642,6 +2733,7 @@ module Aws::WAF
     #
     class GetSizeConstraintSetResponse < Struct.new(
       :size_constraint_set)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2664,6 +2756,7 @@ module Aws::WAF
     #
     class GetSqlInjectionMatchSetRequest < Struct.new(
       :sql_injection_match_set_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2687,6 +2780,7 @@ module Aws::WAF
     #
     class GetSqlInjectionMatchSetResponse < Struct.new(
       :sql_injection_match_set)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2706,6 +2800,7 @@ module Aws::WAF
     #
     class GetWebACLRequest < Struct.new(
       :web_acl_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2728,6 +2823,7 @@ module Aws::WAF
     #
     class GetWebACLResponse < Struct.new(
       :web_acl)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2750,6 +2846,7 @@ module Aws::WAF
     #
     class GetXssMatchSetRequest < Struct.new(
       :xss_match_set_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2773,6 +2870,7 @@ module Aws::WAF
     #
     class GetXssMatchSetResponse < Struct.new(
       :xss_match_set)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2809,6 +2907,7 @@ module Aws::WAF
     class HTTPHeader < Struct.new(
       :name,
       :value)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2884,6 +2983,7 @@ module Aws::WAF
       :method,
       :http_version,
       :headers)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2943,6 +3043,7 @@ module Aws::WAF
       :ip_set_id,
       :name,
       :ip_set_descriptors)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3012,6 +3113,7 @@ module Aws::WAF
     class IPSetDescriptor < Struct.new(
       :type,
       :value)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3046,6 +3148,7 @@ module Aws::WAF
     class IPSetSummary < Struct.new(
       :ip_set_id,
       :name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3091,6 +3194,7 @@ module Aws::WAF
     class IPSetUpdate < Struct.new(
       :action,
       :ip_set_descriptor)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3132,6 +3236,7 @@ module Aws::WAF
       :rule_group_id,
       :next_marker,
       :limit)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3153,6 +3258,7 @@ module Aws::WAF
     class ListActivatedRulesInRuleGroupResponse < Struct.new(
       :next_marker,
       :activated_rules)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3186,6 +3292,7 @@ module Aws::WAF
     class ListByteMatchSetsRequest < Struct.new(
       :next_marker,
       :limit)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3207,6 +3314,7 @@ module Aws::WAF
     class ListByteMatchSetsResponse < Struct.new(
       :next_marker,
       :byte_match_sets)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3240,6 +3348,7 @@ module Aws::WAF
     class ListGeoMatchSetsRequest < Struct.new(
       :next_marker,
       :limit)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3261,6 +3370,7 @@ module Aws::WAF
     class ListGeoMatchSetsResponse < Struct.new(
       :next_marker,
       :geo_match_sets)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3292,6 +3402,7 @@ module Aws::WAF
     class ListIPSetsRequest < Struct.new(
       :next_marker,
       :limit)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3310,6 +3421,7 @@ module Aws::WAF
     class ListIPSetsResponse < Struct.new(
       :next_marker,
       :ip_sets)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3344,6 +3456,7 @@ module Aws::WAF
     class ListLoggingConfigurationsRequest < Struct.new(
       :next_marker,
       :limit)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3365,6 +3478,7 @@ module Aws::WAF
     class ListLoggingConfigurationsResponse < Struct.new(
       :logging_configurations,
       :next_marker)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3397,6 +3511,7 @@ module Aws::WAF
     class ListRateBasedRulesRequest < Struct.new(
       :next_marker,
       :limit)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3417,6 +3532,7 @@ module Aws::WAF
     class ListRateBasedRulesResponse < Struct.new(
       :next_marker,
       :rules)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3451,6 +3567,7 @@ module Aws::WAF
     class ListRegexMatchSetsRequest < Struct.new(
       :next_marker,
       :limit)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3472,6 +3589,7 @@ module Aws::WAF
     class ListRegexMatchSetsResponse < Struct.new(
       :next_marker,
       :regex_match_sets)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3506,6 +3624,7 @@ module Aws::WAF
     class ListRegexPatternSetsRequest < Struct.new(
       :next_marker,
       :limit)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3527,6 +3646,7 @@ module Aws::WAF
     class ListRegexPatternSetsResponse < Struct.new(
       :next_marker,
       :regex_pattern_sets)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3559,6 +3679,7 @@ module Aws::WAF
     class ListRuleGroupsRequest < Struct.new(
       :next_marker,
       :limit)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3579,6 +3700,7 @@ module Aws::WAF
     class ListRuleGroupsResponse < Struct.new(
       :next_marker,
       :rule_groups)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3611,6 +3733,7 @@ module Aws::WAF
     class ListRulesRequest < Struct.new(
       :next_marker,
       :limit)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3631,6 +3754,7 @@ module Aws::WAF
     class ListRulesResponse < Struct.new(
       :next_marker,
       :rules)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3665,6 +3789,7 @@ module Aws::WAF
     class ListSizeConstraintSetsRequest < Struct.new(
       :next_marker,
       :limit)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3686,6 +3811,7 @@ module Aws::WAF
     class ListSizeConstraintSetsResponse < Struct.new(
       :next_marker,
       :size_constraint_sets)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3723,6 +3849,7 @@ module Aws::WAF
     class ListSqlInjectionMatchSetsRequest < Struct.new(
       :next_marker,
       :limit)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3746,6 +3873,7 @@ module Aws::WAF
     class ListSqlInjectionMatchSetsResponse < Struct.new(
       :next_marker,
       :sql_injection_match_sets)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3779,6 +3907,7 @@ module Aws::WAF
     class ListSubscribedRuleGroupsRequest < Struct.new(
       :next_marker,
       :limit)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3799,6 +3928,7 @@ module Aws::WAF
     class ListSubscribedRuleGroupsResponse < Struct.new(
       :next_marker,
       :rule_groups)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3826,6 +3956,7 @@ module Aws::WAF
       :next_marker,
       :limit,
       :resource_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3840,6 +3971,7 @@ module Aws::WAF
     class ListTagsForResourceResponse < Struct.new(
       :next_marker,
       :tag_info_for_resource)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3874,6 +4006,7 @@ module Aws::WAF
     class ListWebACLsRequest < Struct.new(
       :next_marker,
       :limit)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3894,6 +4027,7 @@ module Aws::WAF
     class ListWebACLsResponse < Struct.new(
       :next_marker,
       :web_acls)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3929,6 +4063,7 @@ module Aws::WAF
     class ListXssMatchSetsRequest < Struct.new(
       :next_marker,
       :limit)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3952,6 +4087,7 @@ module Aws::WAF
     class ListXssMatchSetsResponse < Struct.new(
       :next_marker,
       :xss_match_sets)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4007,6 +4143,7 @@ module Aws::WAF
       :resource_arn,
       :log_destination_configs,
       :redacted_fields)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4071,6 +4208,7 @@ module Aws::WAF
       :negated,
       :type,
       :data_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4105,6 +4243,7 @@ module Aws::WAF
     #
     class PutLoggingConfigurationRequest < Struct.new(
       :logging_configuration)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4116,6 +4255,7 @@ module Aws::WAF
     #
     class PutLoggingConfigurationResponse < Struct.new(
       :logging_configuration)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4141,6 +4281,7 @@ module Aws::WAF
     class PutPermissionPolicyRequest < Struct.new(
       :resource_arn,
       :policy)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4232,6 +4373,7 @@ module Aws::WAF
       :match_predicates,
       :rate_key,
       :rate_limit)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4298,6 +4440,7 @@ module Aws::WAF
       :regex_match_set_id,
       :name,
       :regex_match_tuples)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4338,6 +4481,7 @@ module Aws::WAF
     class RegexMatchSetSummary < Struct.new(
       :regex_match_set_id,
       :name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4392,6 +4536,7 @@ module Aws::WAF
     class RegexMatchSetUpdate < Struct.new(
       :action,
       :regex_match_tuple)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4536,6 +4681,7 @@ module Aws::WAF
       :field_to_match,
       :text_transformation,
       :regex_pattern_set_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4583,6 +4729,7 @@ module Aws::WAF
       :regex_pattern_set_id,
       :name,
       :regex_pattern_strings)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4623,6 +4770,7 @@ module Aws::WAF
     class RegexPatternSetSummary < Struct.new(
       :regex_pattern_set_id,
       :name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4666,6 +4814,7 @@ module Aws::WAF
     class RegexPatternSetUpdate < Struct.new(
       :action,
       :regex_pattern_string)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4735,6 +4884,7 @@ module Aws::WAF
       :name,
       :metric_name,
       :predicates)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4793,6 +4943,7 @@ module Aws::WAF
       :rule_group_id,
       :name,
       :metric_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4833,6 +4984,7 @@ module Aws::WAF
     class RuleGroupSummary < Struct.new(
       :rule_group_id,
       :name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4893,6 +5045,7 @@ module Aws::WAF
     class RuleGroupUpdate < Struct.new(
       :action,
       :activated_rule)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4933,6 +5086,7 @@ module Aws::WAF
     class RuleSummary < Struct.new(
       :rule_id,
       :name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4980,6 +5134,7 @@ module Aws::WAF
     class RuleUpdate < Struct.new(
       :action,
       :predicate)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5039,6 +5194,7 @@ module Aws::WAF
       :timestamp,
       :action,
       :rule_within_rule_group)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5209,6 +5365,7 @@ module Aws::WAF
       :text_transformation,
       :comparison_operator,
       :size)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5259,6 +5416,7 @@ module Aws::WAF
       :size_constraint_set_id,
       :name,
       :size_constraints)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5299,6 +5457,7 @@ module Aws::WAF
     class SizeConstraintSetSummary < Struct.new(
       :size_constraint_set_id,
       :name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5355,6 +5514,7 @@ module Aws::WAF
     class SizeConstraintSetUpdate < Struct.new(
       :action,
       :size_constraint)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5408,6 +5568,7 @@ module Aws::WAF
       :sql_injection_match_set_id,
       :name,
       :sql_injection_match_tuples)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5449,6 +5610,7 @@ module Aws::WAF
     class SqlInjectionMatchSetSummary < Struct.new(
       :sql_injection_match_set_id,
       :name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5502,6 +5664,7 @@ module Aws::WAF
     class SqlInjectionMatchSetUpdate < Struct.new(
       :action,
       :sql_injection_match_tuple)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5622,6 +5785,7 @@ module Aws::WAF
     class SqlInjectionMatchTuple < Struct.new(
       :field_to_match,
       :text_transformation)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5665,6 +5829,7 @@ module Aws::WAF
       :rule_group_id,
       :name,
       :metric_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5712,6 +5877,7 @@ module Aws::WAF
     class Tag < Struct.new(
       :key,
       :value)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5752,6 +5918,7 @@ module Aws::WAF
     class TagInfoForResource < Struct.new(
       :resource_arn,
       :tag_list)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5779,6 +5946,7 @@ module Aws::WAF
     class TagResourceRequest < Struct.new(
       :resource_arn,
       :tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5848,6 +6016,7 @@ module Aws::WAF
     class TimeWindow < Struct.new(
       :start_time,
       :end_time)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5870,6 +6039,7 @@ module Aws::WAF
     class UntagResourceRequest < Struct.new(
       :resource_arn,
       :tag_keys)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5928,6 +6098,7 @@ module Aws::WAF
       :byte_match_set_id,
       :change_token,
       :updates)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5941,6 +6112,7 @@ module Aws::WAF
     #
     class UpdateByteMatchSetResponse < Struct.new(
       :change_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5991,6 +6163,7 @@ module Aws::WAF
       :geo_match_set_id,
       :change_token,
       :updates)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6004,6 +6177,7 @@ module Aws::WAF
     #
     class UpdateGeoMatchSetResponse < Struct.new(
       :change_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6051,6 +6225,7 @@ module Aws::WAF
       :ip_set_id,
       :change_token,
       :updates)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6064,6 +6239,7 @@ module Aws::WAF
     #
     class UpdateIPSetResponse < Struct.new(
       :change_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6116,6 +6292,7 @@ module Aws::WAF
       :change_token,
       :updates,
       :rate_limit)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6129,6 +6306,7 @@ module Aws::WAF
     #
     class UpdateRateBasedRuleResponse < Struct.new(
       :change_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6175,6 +6353,7 @@ module Aws::WAF
       :regex_match_set_id,
       :updates,
       :change_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6188,6 +6367,7 @@ module Aws::WAF
     #
     class UpdateRegexMatchSetResponse < Struct.new(
       :change_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6226,6 +6406,7 @@ module Aws::WAF
       :regex_pattern_set_id,
       :updates,
       :change_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6240,6 +6421,7 @@ module Aws::WAF
     #
     class UpdateRegexPatternSetResponse < Struct.new(
       :change_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6300,6 +6482,7 @@ module Aws::WAF
       :rule_group_id,
       :updates,
       :change_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6313,6 +6496,7 @@ module Aws::WAF
     #
     class UpdateRuleGroupResponse < Struct.new(
       :change_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6361,6 +6545,7 @@ module Aws::WAF
       :rule_id,
       :change_token,
       :updates)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6374,6 +6559,7 @@ module Aws::WAF
     #
     class UpdateRuleResponse < Struct.new(
       :change_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6428,6 +6614,7 @@ module Aws::WAF
       :size_constraint_set_id,
       :change_token,
       :updates)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6442,6 +6629,7 @@ module Aws::WAF
     #
     class UpdateSizeConstraintSetResponse < Struct.new(
       :change_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6497,6 +6685,7 @@ module Aws::WAF
       :sql_injection_match_set_id,
       :change_token,
       :updates)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6513,6 +6702,7 @@ module Aws::WAF
     #
     class UpdateSqlInjectionMatchSetResponse < Struct.new(
       :change_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6589,6 +6779,7 @@ module Aws::WAF
       :change_token,
       :updates,
       :default_action)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6602,6 +6793,7 @@ module Aws::WAF
     #
     class UpdateWebACLResponse < Struct.new(
       :change_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6655,6 +6847,7 @@ module Aws::WAF
       :xss_match_set_id,
       :change_token,
       :updates)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6670,6 +6863,7 @@ module Aws::WAF
     #
     class UpdateXssMatchSetResponse < Struct.new(
       :change_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6680,6 +6874,7 @@ module Aws::WAF
     #
     class WAFBadRequestException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6692,6 +6887,7 @@ module Aws::WAF
     #
     class WAFDisallowedNameException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6732,6 +6928,7 @@ module Aws::WAF
       :message,
       :migration_error_type,
       :migration_error_reason)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6745,6 +6942,7 @@ module Aws::WAF
     #
     class WAFInternalErrorException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6779,6 +6977,7 @@ module Aws::WAF
     #
     class WAFInvalidOperationException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6825,6 +7024,7 @@ module Aws::WAF
       :field,
       :parameter,
       :reason)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6861,6 +7061,7 @@ module Aws::WAF
     #
     class WAFInvalidPermissionPolicyException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6874,6 +7075,7 @@ module Aws::WAF
     #
     class WAFInvalidRegexPatternException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6892,6 +7094,7 @@ module Aws::WAF
     #
     class WAFLimitsExceededException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6917,6 +7120,7 @@ module Aws::WAF
     #
     class WAFNonEmptyEntityException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6942,6 +7146,7 @@ module Aws::WAF
     #
     class WAFNonexistentContainerException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6954,6 +7159,7 @@ module Aws::WAF
     #
     class WAFNonexistentItemException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6972,6 +7178,7 @@ module Aws::WAF
     #
     class WAFReferencedItemException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6992,6 +7199,7 @@ module Aws::WAF
     #
     class WAFServiceLinkedRoleErrorException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -7005,6 +7213,7 @@ module Aws::WAF
     #
     class WAFStaleDataException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -7017,6 +7226,7 @@ module Aws::WAF
     #
     class WAFSubscriptionNotFoundException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -7027,6 +7237,7 @@ module Aws::WAF
     #
     class WAFTagOperationException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -7037,6 +7248,7 @@ module Aws::WAF
     #
     class WAFTagOperationInternalErrorException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -7087,6 +7299,7 @@ module Aws::WAF
     #
     class WafAction < Struct.new(
       :type)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -7124,6 +7337,7 @@ module Aws::WAF
     #
     class WafOverrideAction < Struct.new(
       :type)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -7198,6 +7412,7 @@ module Aws::WAF
       :default_action,
       :rules,
       :web_acl_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -7236,6 +7451,7 @@ module Aws::WAF
     class WebACLSummary < Struct.new(
       :web_acl_id,
       :name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -7296,6 +7512,7 @@ module Aws::WAF
     class WebACLUpdate < Struct.new(
       :action,
       :activated_rule)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -7347,6 +7564,7 @@ module Aws::WAF
       :xss_match_set_id,
       :name,
       :xss_match_tuples)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -7386,6 +7604,7 @@ module Aws::WAF
     class XssMatchSetSummary < Struct.new(
       :xss_match_set_id,
       :name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -7437,6 +7656,7 @@ module Aws::WAF
     class XssMatchSetUpdate < Struct.new(
       :action,
       :xss_match_tuple)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -7557,6 +7777,7 @@ module Aws::WAF
     class XssMatchTuple < Struct.new(
       :field_to_match,
       :text_transformation)
+      SENSITIVE = []
       include Aws::Structure
     end
 

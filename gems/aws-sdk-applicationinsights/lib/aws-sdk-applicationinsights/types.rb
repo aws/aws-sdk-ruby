@@ -37,6 +37,7 @@ module Aws::ApplicationInsights
       :resource_type,
       :tier,
       :monitor)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -85,6 +86,7 @@ module Aws::ApplicationInsights
       :ops_center_enabled,
       :cwe_monitor_enabled,
       :remarks)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -97,6 +99,7 @@ module Aws::ApplicationInsights
     #
     class BadRequestException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -138,6 +141,7 @@ module Aws::ApplicationInsights
       :event_time,
       :event_detail,
       :event_resource_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -192,6 +196,7 @@ module Aws::ApplicationInsights
       :cwe_monitor_enabled,
       :ops_item_sns_topic_arn,
       :tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -203,6 +208,7 @@ module Aws::ApplicationInsights
     #
     class CreateApplicationResponse < Struct.new(
       :application_info)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -233,6 +239,7 @@ module Aws::ApplicationInsights
       :resource_group_name,
       :component_name,
       :resource_list)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -279,6 +286,7 @@ module Aws::ApplicationInsights
       :pattern_name,
       :pattern,
       :rank)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -295,6 +303,7 @@ module Aws::ApplicationInsights
     class CreateLogPatternResponse < Struct.new(
       :log_pattern,
       :resource_group_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -313,6 +322,7 @@ module Aws::ApplicationInsights
     #
     class DeleteApplicationRequest < Struct.new(
       :resource_group_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -341,6 +351,7 @@ module Aws::ApplicationInsights
     class DeleteComponentRequest < Struct.new(
       :resource_group_name,
       :component_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -375,6 +386,7 @@ module Aws::ApplicationInsights
       :resource_group_name,
       :pattern_set_name,
       :pattern_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -397,6 +409,7 @@ module Aws::ApplicationInsights
     #
     class DescribeApplicationRequest < Struct.new(
       :resource_group_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -408,6 +421,7 @@ module Aws::ApplicationInsights
     #
     class DescribeApplicationResponse < Struct.new(
       :application_info)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -440,6 +454,7 @@ module Aws::ApplicationInsights
       :resource_group_name,
       :component_name,
       :tier)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -452,6 +467,7 @@ module Aws::ApplicationInsights
     #
     class DescribeComponentConfigurationRecommendationResponse < Struct.new(
       :component_configuration)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -476,6 +492,7 @@ module Aws::ApplicationInsights
     class DescribeComponentConfigurationRequest < Struct.new(
       :resource_group_name,
       :component_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -500,6 +517,7 @@ module Aws::ApplicationInsights
       :monitor,
       :tier,
       :component_configuration)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -524,6 +542,7 @@ module Aws::ApplicationInsights
     class DescribeComponentRequest < Struct.new(
       :resource_group_name,
       :component_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -541,6 +560,7 @@ module Aws::ApplicationInsights
     class DescribeComponentResponse < Struct.new(
       :application_component,
       :resource_list)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -571,6 +591,7 @@ module Aws::ApplicationInsights
       :resource_group_name,
       :pattern_set_name,
       :pattern_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -587,6 +608,7 @@ module Aws::ApplicationInsights
     class DescribeLogPatternResponse < Struct.new(
       :resource_group_name,
       :log_pattern)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -605,6 +627,7 @@ module Aws::ApplicationInsights
     #
     class DescribeObservationRequest < Struct.new(
       :observation_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -616,6 +639,7 @@ module Aws::ApplicationInsights
     #
     class DescribeObservationResponse < Struct.new(
       :observation)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -634,6 +658,7 @@ module Aws::ApplicationInsights
     #
     class DescribeProblemObservationsRequest < Struct.new(
       :problem_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -645,6 +670,7 @@ module Aws::ApplicationInsights
     #
     class DescribeProblemObservationsResponse < Struct.new(
       :related_observations)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -663,6 +689,7 @@ module Aws::ApplicationInsights
     #
     class DescribeProblemRequest < Struct.new(
       :problem_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -674,6 +701,7 @@ module Aws::ApplicationInsights
     #
     class DescribeProblemResponse < Struct.new(
       :problem)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -687,6 +715,7 @@ module Aws::ApplicationInsights
     #
     class InternalServerException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -713,6 +742,7 @@ module Aws::ApplicationInsights
     class ListApplicationsRequest < Struct.new(
       :max_results,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -730,6 +760,7 @@ module Aws::ApplicationInsights
     class ListApplicationsResponse < Struct.new(
       :application_info_list,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -762,6 +793,7 @@ module Aws::ApplicationInsights
       :resource_group_name,
       :max_results,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -778,6 +810,7 @@ module Aws::ApplicationInsights
     class ListComponentsResponse < Struct.new(
       :application_component_list,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -839,6 +872,7 @@ module Aws::ApplicationInsights
       :event_status,
       :max_results,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -859,6 +893,7 @@ module Aws::ApplicationInsights
     class ListConfigurationHistoryResponse < Struct.new(
       :event_list,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -891,6 +926,7 @@ module Aws::ApplicationInsights
       :resource_group_name,
       :max_results,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -913,6 +949,7 @@ module Aws::ApplicationInsights
       :resource_group_name,
       :log_pattern_sets,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -951,6 +988,7 @@ module Aws::ApplicationInsights
       :pattern_set_name,
       :max_results,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -973,6 +1011,7 @@ module Aws::ApplicationInsights
       :resource_group_name,
       :log_patterns,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1020,6 +1059,7 @@ module Aws::ApplicationInsights
       :end_time,
       :max_results,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1037,6 +1077,7 @@ module Aws::ApplicationInsights
     class ListProblemsResponse < Struct.new(
       :problem_list,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1056,6 +1097,7 @@ module Aws::ApplicationInsights
     #
     class ListTagsForResourceRequest < Struct.new(
       :resource_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1069,6 +1111,7 @@ module Aws::ApplicationInsights
     #
     class ListTagsForResourceResponse < Struct.new(
       :tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1105,6 +1148,7 @@ module Aws::ApplicationInsights
       :pattern_name,
       :pattern,
       :rank)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1291,6 +1335,7 @@ module Aws::ApplicationInsights
       :x_ray_request_average_latency,
       :x_ray_node_name,
       :x_ray_node_type)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1349,6 +1394,7 @@ module Aws::ApplicationInsights
       :severity_level,
       :resource_group_name,
       :feedback)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1362,6 +1408,7 @@ module Aws::ApplicationInsights
     #
     class RelatedObservations < Struct.new(
       :observation_list)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1374,6 +1421,7 @@ module Aws::ApplicationInsights
     #
     class ResourceInUseException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1386,6 +1434,7 @@ module Aws::ApplicationInsights
     #
     class ResourceNotFoundException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1438,6 +1487,7 @@ module Aws::ApplicationInsights
     class Tag < Struct.new(
       :key,
       :value)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1471,6 +1521,7 @@ module Aws::ApplicationInsights
     class TagResourceRequest < Struct.new(
       :resource_arn,
       :tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1487,6 +1538,7 @@ module Aws::ApplicationInsights
     #
     class TagsAlreadyExistException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1506,6 +1558,7 @@ module Aws::ApplicationInsights
     class TooManyTagsException < Struct.new(
       :message,
       :resource_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1537,6 +1590,7 @@ module Aws::ApplicationInsights
     class UntagResourceRequest < Struct.new(
       :resource_arn,
       :tag_keys)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1589,6 +1643,7 @@ module Aws::ApplicationInsights
       :cwe_monitor_enabled,
       :ops_item_sns_topic_arn,
       :remove_sns_topic)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1600,6 +1655,7 @@ module Aws::ApplicationInsights
     #
     class UpdateApplicationResponse < Struct.new(
       :application_info)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1655,6 +1711,7 @@ module Aws::ApplicationInsights
       :monitor,
       :tier,
       :component_configuration)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1695,6 +1752,7 @@ module Aws::ApplicationInsights
       :component_name,
       :new_component_name,
       :resource_list)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1741,6 +1799,7 @@ module Aws::ApplicationInsights
       :pattern_name,
       :pattern,
       :rank)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1757,6 +1816,7 @@ module Aws::ApplicationInsights
     class UpdateLogPatternResponse < Struct.new(
       :resource_group_name,
       :log_pattern)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1769,6 +1829,7 @@ module Aws::ApplicationInsights
     #
     class ValidationException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 

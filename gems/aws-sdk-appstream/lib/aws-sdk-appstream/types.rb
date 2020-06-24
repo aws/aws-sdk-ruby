@@ -40,6 +40,7 @@ module Aws::AppStream
     class AccessEndpoint < Struct.new(
       :endpoint_type,
       :vpce_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -84,6 +85,7 @@ module Aws::AppStream
       :launch_parameters,
       :enabled,
       :metadata)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -114,6 +116,7 @@ module Aws::AppStream
     class ApplicationSettings < Struct.new(
       :enabled,
       :settings_group)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -142,6 +145,7 @@ module Aws::AppStream
       :enabled,
       :settings_group,
       :s3_bucket_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -166,6 +170,7 @@ module Aws::AppStream
     class AssociateFleetRequest < Struct.new(
       :fleet_name,
       :stack_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -195,6 +200,7 @@ module Aws::AppStream
     #
     class BatchAssociateUserStackRequest < Struct.new(
       :user_stack_associations)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -206,6 +212,7 @@ module Aws::AppStream
     #
     class BatchAssociateUserStackResult < Struct.new(
       :errors)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -231,6 +238,7 @@ module Aws::AppStream
     #
     class BatchDisassociateUserStackRequest < Struct.new(
       :user_stack_associations)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -242,6 +250,7 @@ module Aws::AppStream
     #
     class BatchDisassociateUserStackResult < Struct.new(
       :errors)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -262,6 +271,7 @@ module Aws::AppStream
     #
     class ComputeCapacity < Struct.new(
       :desired_instances)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -292,6 +302,7 @@ module Aws::AppStream
       :running,
       :in_use,
       :available)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -305,6 +316,7 @@ module Aws::AppStream
     #
     class ConcurrentModificationException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -345,6 +357,7 @@ module Aws::AppStream
       :destination_image_name,
       :destination_region,
       :destination_image_description)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -356,6 +369,7 @@ module Aws::AppStream
     #
     class CopyImageResponse < Struct.new(
       :destination_image_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -392,6 +406,7 @@ module Aws::AppStream
       :directory_name,
       :organizational_unit_distinguished_names,
       :service_account_credentials)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -403,6 +418,7 @@ module Aws::AppStream
     #
     class CreateDirectoryConfigResult < Struct.new(
       :directory_config)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -645,6 +661,7 @@ module Aws::AppStream
       :tags,
       :idle_disconnect_timeout_in_seconds,
       :iam_role_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -656,6 +673,7 @@ module Aws::AppStream
     #
     class CreateFleetResult < Struct.new(
       :fleet)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -836,6 +854,7 @@ module Aws::AppStream
       :appstream_agent_version,
       :tags,
       :access_endpoints)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -847,6 +866,7 @@ module Aws::AppStream
     #
     class CreateImageBuilderResult < Struct.new(
       :image_builder)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -872,6 +892,7 @@ module Aws::AppStream
     class CreateImageBuilderStreamingURLRequest < Struct.new(
       :name,
       :validity)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -889,6 +910,7 @@ module Aws::AppStream
     class CreateImageBuilderStreamingURLResult < Struct.new(
       :streaming_url,
       :expires)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1015,6 +1037,7 @@ module Aws::AppStream
       :tags,
       :access_endpoints,
       :embed_host_domains)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1026,6 +1049,7 @@ module Aws::AppStream
     #
     class CreateStackResult < Struct.new(
       :stack)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1081,6 +1105,7 @@ module Aws::AppStream
       :application_id,
       :validity,
       :session_context)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1098,6 +1123,7 @@ module Aws::AppStream
     class CreateStreamingURLResult < Struct.new(
       :streaming_url,
       :expires)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1128,6 +1154,7 @@ module Aws::AppStream
     class CreateUsageReportSubscriptionResult < Struct.new(
       :s3_bucket_name,
       :schedule)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1187,6 +1214,7 @@ module Aws::AppStream
       :first_name,
       :last_name,
       :authentication_type)
+      SENSITIVE = [:user_name, :first_name, :last_name]
       include Aws::Structure
     end
 
@@ -1209,6 +1237,7 @@ module Aws::AppStream
     #
     class DeleteDirectoryConfigRequest < Struct.new(
       :directory_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1231,6 +1260,7 @@ module Aws::AppStream
     #
     class DeleteFleetRequest < Struct.new(
       :name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1253,6 +1283,7 @@ module Aws::AppStream
     #
     class DeleteImageBuilderRequest < Struct.new(
       :name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1264,6 +1295,7 @@ module Aws::AppStream
     #
     class DeleteImageBuilderResult < Struct.new(
       :image_builder)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1289,6 +1321,7 @@ module Aws::AppStream
     class DeleteImagePermissionsRequest < Struct.new(
       :name,
       :shared_account_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1311,6 +1344,7 @@ module Aws::AppStream
     #
     class DeleteImageRequest < Struct.new(
       :name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1322,6 +1356,7 @@ module Aws::AppStream
     #
     class DeleteImageResult < Struct.new(
       :image)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1340,6 +1375,7 @@ module Aws::AppStream
     #
     class DeleteStackRequest < Struct.new(
       :name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1382,6 +1418,7 @@ module Aws::AppStream
     class DeleteUserRequest < Struct.new(
       :user_name,
       :authentication_type)
+      SENSITIVE = [:user_name]
       include Aws::Structure
     end
 
@@ -1417,6 +1454,7 @@ module Aws::AppStream
       :directory_names,
       :max_results,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1436,6 +1474,7 @@ module Aws::AppStream
     class DescribeDirectoryConfigsResult < Struct.new(
       :directory_configs,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1461,6 +1500,7 @@ module Aws::AppStream
     class DescribeFleetsRequest < Struct.new(
       :names,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1478,6 +1518,7 @@ module Aws::AppStream
     class DescribeFleetsResult < Struct.new(
       :fleets,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1509,6 +1550,7 @@ module Aws::AppStream
       :names,
       :max_results,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1526,6 +1568,7 @@ module Aws::AppStream
     class DescribeImageBuildersResult < Struct.new(
       :image_builders,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1565,6 +1608,7 @@ module Aws::AppStream
       :max_results,
       :shared_aws_account_ids,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1587,6 +1631,7 @@ module Aws::AppStream
       :name,
       :shared_image_permissions_list,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1630,6 +1675,7 @@ module Aws::AppStream
       :type,
       :next_token,
       :max_results)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1647,6 +1693,7 @@ module Aws::AppStream
     class DescribeImagesResult < Struct.new(
       :images,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1699,6 +1746,7 @@ module Aws::AppStream
       :next_token,
       :limit,
       :authentication_type)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1716,6 +1764,7 @@ module Aws::AppStream
     class DescribeSessionsResult < Struct.new(
       :sessions,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1741,6 +1790,7 @@ module Aws::AppStream
     class DescribeStacksRequest < Struct.new(
       :names,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1758,6 +1808,7 @@ module Aws::AppStream
     class DescribeStacksResult < Struct.new(
       :stacks,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1783,6 +1834,7 @@ module Aws::AppStream
     class DescribeUsageReportSubscriptionsRequest < Struct.new(
       :max_results,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1800,6 +1852,7 @@ module Aws::AppStream
     class DescribeUsageReportSubscriptionsResult < Struct.new(
       :usage_report_subscriptions,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1848,6 +1901,7 @@ module Aws::AppStream
       :authentication_type,
       :max_results,
       :next_token)
+      SENSITIVE = [:user_name]
       include Aws::Structure
     end
 
@@ -1865,6 +1919,7 @@ module Aws::AppStream
     class DescribeUserStackAssociationsResult < Struct.new(
       :user_stack_associations,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1897,6 +1952,7 @@ module Aws::AppStream
       :authentication_type,
       :max_results,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1914,6 +1970,7 @@ module Aws::AppStream
     class DescribeUsersResult < Struct.new(
       :users,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1946,6 +2003,7 @@ module Aws::AppStream
       :organizational_unit_distinguished_names,
       :service_account_credentials,
       :created_time)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1974,6 +2032,7 @@ module Aws::AppStream
     class DisableUserRequest < Struct.new(
       :user_name,
       :authentication_type)
+      SENSITIVE = [:user_name]
       include Aws::Structure
     end
 
@@ -2002,6 +2061,7 @@ module Aws::AppStream
     class DisassociateFleetRequest < Struct.new(
       :fleet_name,
       :stack_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2035,6 +2095,7 @@ module Aws::AppStream
     class DomainJoinInfo < Struct.new(
       :directory_name,
       :organizational_unit_distinguished_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2066,6 +2127,7 @@ module Aws::AppStream
     class EnableUserRequest < Struct.new(
       :user_name,
       :authentication_type)
+      SENSITIVE = [:user_name]
       include Aws::Structure
     end
 
@@ -2088,6 +2150,7 @@ module Aws::AppStream
     #
     class ExpireSessionRequest < Struct.new(
       :session_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2302,6 +2365,7 @@ module Aws::AppStream
       :domain_join_info,
       :idle_disconnect_timeout_in_seconds,
       :iam_role_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2320,6 +2384,7 @@ module Aws::AppStream
     class FleetError < Struct.new(
       :error_code,
       :error_message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2415,6 +2480,7 @@ module Aws::AppStream
       :public_base_image_released_date,
       :appstream_agent_version,
       :image_permissions)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2573,6 +2639,7 @@ module Aws::AppStream
       :image_builder_errors,
       :appstream_agent_version,
       :access_endpoints)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2591,6 +2658,7 @@ module Aws::AppStream
     class ImageBuilderStateChangeReason < Struct.new(
       :code,
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2617,6 +2685,7 @@ module Aws::AppStream
     class ImagePermissions < Struct.new(
       :allow_fleet,
       :allow_image_builder)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2635,6 +2704,7 @@ module Aws::AppStream
     class ImageStateChangeReason < Struct.new(
       :code,
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2648,6 +2718,7 @@ module Aws::AppStream
     #
     class IncompatibleImageException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2662,6 +2733,7 @@ module Aws::AppStream
     #
     class InvalidAccountStatusException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2676,6 +2748,7 @@ module Aws::AppStream
     #
     class InvalidParameterCombinationException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2689,6 +2762,7 @@ module Aws::AppStream
     #
     class InvalidRoleException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2710,6 +2784,7 @@ module Aws::AppStream
     class LastReportGenerationExecutionError < Struct.new(
       :error_code,
       :error_message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2723,6 +2798,7 @@ module Aws::AppStream
     #
     class LimitExceededException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2748,6 +2824,7 @@ module Aws::AppStream
     class ListAssociatedFleetsRequest < Struct.new(
       :stack_name,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2765,6 +2842,7 @@ module Aws::AppStream
     class ListAssociatedFleetsResult < Struct.new(
       :names,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2790,6 +2868,7 @@ module Aws::AppStream
     class ListAssociatedStacksRequest < Struct.new(
       :fleet_name,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2807,6 +2886,7 @@ module Aws::AppStream
     class ListAssociatedStacksResult < Struct.new(
       :names,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2825,6 +2905,7 @@ module Aws::AppStream
     #
     class ListTagsForResourceRequest < Struct.new(
       :resource_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2836,6 +2917,7 @@ module Aws::AppStream
     #
     class ListTagsForResourceResponse < Struct.new(
       :tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2857,6 +2939,7 @@ module Aws::AppStream
     class NetworkAccessConfiguration < Struct.new(
       :eni_private_ip_address,
       :eni_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2870,6 +2953,7 @@ module Aws::AppStream
     #
     class OperationNotPermittedException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2883,6 +2967,7 @@ module Aws::AppStream
     #
     class ResourceAlreadyExistsException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2906,6 +2991,7 @@ module Aws::AppStream
       :error_code,
       :error_message,
       :error_timestamp)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2919,6 +3005,7 @@ module Aws::AppStream
     #
     class ResourceInUseException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2932,6 +3019,7 @@ module Aws::AppStream
     #
     class ResourceNotAvailableException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2945,6 +3033,7 @@ module Aws::AppStream
     #
     class ResourceNotFoundException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2975,6 +3064,7 @@ module Aws::AppStream
     class ServiceAccountCredentials < Struct.new(
       :account_name,
       :account_password)
+      SENSITIVE = [:account_name, :account_password]
       include Aws::Structure
     end
 
@@ -3042,6 +3132,7 @@ module Aws::AppStream
       :max_expiration_time,
       :authentication_type,
       :network_access_configuration)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3062,6 +3153,7 @@ module Aws::AppStream
     class SharedImagePermissions < Struct.new(
       :shared_account_id,
       :image_permissions)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3143,6 +3235,7 @@ module Aws::AppStream
       :application_settings,
       :access_endpoints,
       :embed_host_domains)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3161,6 +3254,7 @@ module Aws::AppStream
     class StackError < Struct.new(
       :error_code,
       :error_message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3179,6 +3273,7 @@ module Aws::AppStream
     #
     class StartFleetRequest < Struct.new(
       :name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3209,6 +3304,7 @@ module Aws::AppStream
     class StartImageBuilderRequest < Struct.new(
       :name,
       :appstream_agent_version)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3220,6 +3316,7 @@ module Aws::AppStream
     #
     class StartImageBuilderResult < Struct.new(
       :image_builder)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3238,6 +3335,7 @@ module Aws::AppStream
     #
     class StopFleetRequest < Struct.new(
       :name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3260,6 +3358,7 @@ module Aws::AppStream
     #
     class StopImageBuilderRequest < Struct.new(
       :name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3271,6 +3370,7 @@ module Aws::AppStream
     #
     class StopImageBuilderResult < Struct.new(
       :image_builder)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3303,6 +3403,7 @@ module Aws::AppStream
       :connector_type,
       :resource_identifier,
       :domains)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3338,6 +3439,7 @@ module Aws::AppStream
     class TagResourceRequest < Struct.new(
       :resource_arn,
       :tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3366,6 +3468,7 @@ module Aws::AppStream
     class UntagResourceRequest < Struct.new(
       :resource_arn,
       :tag_keys)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3405,6 +3508,7 @@ module Aws::AppStream
       :directory_name,
       :organizational_unit_distinguished_names,
       :service_account_credentials)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3416,6 +3520,7 @@ module Aws::AppStream
     #
     class UpdateDirectoryConfigResult < Struct.new(
       :directory_config)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3627,6 +3732,7 @@ module Aws::AppStream
       :idle_disconnect_timeout_in_seconds,
       :attributes_to_delete,
       :iam_role_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3638,6 +3744,7 @@ module Aws::AppStream
     #
     class UpdateFleetResult < Struct.new(
       :fleet)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3672,6 +3779,7 @@ module Aws::AppStream
       :name,
       :shared_account_id,
       :image_permissions)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3790,6 +3898,7 @@ module Aws::AppStream
       :application_settings,
       :access_endpoints,
       :embed_host_domains)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3801,6 +3910,7 @@ module Aws::AppStream
     #
     class UpdateStackResult < Struct.new(
       :stack)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3838,6 +3948,7 @@ module Aws::AppStream
       :schedule,
       :last_generated_report_date,
       :subscription_errors)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3902,6 +4013,7 @@ module Aws::AppStream
       :last_name,
       :created_time,
       :authentication_type)
+      SENSITIVE = [:user_name, :first_name, :last_name]
       include Aws::Structure
     end
 
@@ -3929,6 +4041,7 @@ module Aws::AppStream
     class UserSetting < Struct.new(
       :action,
       :permission)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3972,6 +4085,7 @@ module Aws::AppStream
       :user_name,
       :authentication_type,
       :send_email_notification)
+      SENSITIVE = [:user_name]
       include Aws::Structure
     end
 
@@ -3998,6 +4112,7 @@ module Aws::AppStream
       :user_stack_association,
       :error_code,
       :error_message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4028,6 +4143,7 @@ module Aws::AppStream
     class VpcConfig < Struct.new(
       :subnet_ids,
       :security_group_ids)
+      SENSITIVE = []
       include Aws::Structure
     end
 

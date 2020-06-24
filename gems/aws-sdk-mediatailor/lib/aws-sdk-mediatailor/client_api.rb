@@ -15,6 +15,7 @@ module Aws::MediaTailor
 
     AvailSuppression = Shapes::StructureShape.new(name: 'AvailSuppression')
     BadRequestException = Shapes::StructureShape.new(name: 'BadRequestException')
+    Bumper = Shapes::StructureShape.new(name: 'Bumper')
     CdnConfiguration = Shapes::StructureShape.new(name: 'CdnConfiguration')
     DashConfiguration = Shapes::StructureShape.new(name: 'DashConfiguration')
     DashConfigurationForPut = Shapes::StructureShape.new(name: 'DashConfigurationForPut')
@@ -56,6 +57,10 @@ module Aws::MediaTailor
     BadRequestException.add_member(:message, Shapes::ShapeRef.new(shape: __string, location_name: "Message"))
     BadRequestException.struct_class = Types::BadRequestException
 
+    Bumper.add_member(:end_url, Shapes::ShapeRef.new(shape: __string, location_name: "EndUrl"))
+    Bumper.add_member(:start_url, Shapes::ShapeRef.new(shape: __string, location_name: "StartUrl"))
+    Bumper.struct_class = Types::Bumper
+
     CdnConfiguration.add_member(:ad_segment_url_prefix, Shapes::ShapeRef.new(shape: __string, location_name: "AdSegmentUrlPrefix"))
     CdnConfiguration.add_member(:content_segment_url_prefix, Shapes::ShapeRef.new(shape: __string, location_name: "ContentSegmentUrlPrefix"))
     CdnConfiguration.struct_class = Types::CdnConfiguration
@@ -79,6 +84,7 @@ module Aws::MediaTailor
 
     GetPlaybackConfigurationResponse.add_member(:ad_decision_server_url, Shapes::ShapeRef.new(shape: __string, location_name: "AdDecisionServerUrl"))
     GetPlaybackConfigurationResponse.add_member(:avail_suppression, Shapes::ShapeRef.new(shape: AvailSuppression, location_name: "AvailSuppression"))
+    GetPlaybackConfigurationResponse.add_member(:bumper, Shapes::ShapeRef.new(shape: Bumper, location_name: "Bumper"))
     GetPlaybackConfigurationResponse.add_member(:cdn_configuration, Shapes::ShapeRef.new(shape: CdnConfiguration, location_name: "CdnConfiguration"))
     GetPlaybackConfigurationResponse.add_member(:personalization_threshold_seconds, Shapes::ShapeRef.new(shape: __integerMin1, location_name: "PersonalizationThresholdSeconds"))
     GetPlaybackConfigurationResponse.add_member(:dash_configuration, Shapes::ShapeRef.new(shape: DashConfiguration, location_name: "DashConfiguration"))
@@ -132,6 +138,7 @@ module Aws::MediaTailor
 
     PutPlaybackConfigurationRequest.add_member(:ad_decision_server_url, Shapes::ShapeRef.new(shape: __string, location_name: "AdDecisionServerUrl"))
     PutPlaybackConfigurationRequest.add_member(:avail_suppression, Shapes::ShapeRef.new(shape: AvailSuppression, location_name: "AvailSuppression"))
+    PutPlaybackConfigurationRequest.add_member(:bumper, Shapes::ShapeRef.new(shape: Bumper, location_name: "Bumper"))
     PutPlaybackConfigurationRequest.add_member(:cdn_configuration, Shapes::ShapeRef.new(shape: CdnConfiguration, location_name: "CdnConfiguration"))
     PutPlaybackConfigurationRequest.add_member(:personalization_threshold_seconds, Shapes::ShapeRef.new(shape: __integerMin1, location_name: "PersonalizationThresholdSeconds"))
     PutPlaybackConfigurationRequest.add_member(:dash_configuration, Shapes::ShapeRef.new(shape: DashConfigurationForPut, location_name: "DashConfiguration"))
@@ -145,6 +152,7 @@ module Aws::MediaTailor
 
     PutPlaybackConfigurationResponse.add_member(:ad_decision_server_url, Shapes::ShapeRef.new(shape: __string, location_name: "AdDecisionServerUrl"))
     PutPlaybackConfigurationResponse.add_member(:avail_suppression, Shapes::ShapeRef.new(shape: AvailSuppression, location_name: "AvailSuppression"))
+    PutPlaybackConfigurationResponse.add_member(:bumper, Shapes::ShapeRef.new(shape: Bumper, location_name: "Bumper"))
     PutPlaybackConfigurationResponse.add_member(:cdn_configuration, Shapes::ShapeRef.new(shape: CdnConfiguration, location_name: "CdnConfiguration"))
     PutPlaybackConfigurationResponse.add_member(:dash_configuration, Shapes::ShapeRef.new(shape: DashConfiguration, location_name: "DashConfiguration"))
     PutPlaybackConfigurationResponse.add_member(:hls_configuration, Shapes::ShapeRef.new(shape: HlsConfiguration, location_name: "HlsConfiguration"))

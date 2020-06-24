@@ -26,6 +26,7 @@ module Aws::PI
     class DataPoint < Struct.new(
       :timestamp,
       :value)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -170,6 +171,7 @@ module Aws::PI
       :filter,
       :max_results,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -211,6 +213,7 @@ module Aws::PI
       :partition_keys,
       :keys,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -291,6 +294,7 @@ module Aws::PI
       :group,
       :dimensions,
       :limit)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -317,6 +321,7 @@ module Aws::PI
       :dimensions,
       :total,
       :partitions)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -428,6 +433,7 @@ module Aws::PI
       :period_in_seconds,
       :max_results,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -472,6 +478,7 @@ module Aws::PI
       :identifier,
       :metric_list,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -484,6 +491,7 @@ module Aws::PI
     #
     class InternalServiceError < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -496,6 +504,7 @@ module Aws::PI
     #
     class InvalidArgumentException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -516,6 +525,7 @@ module Aws::PI
     class MetricKeyDataPoints < Struct.new(
       :key,
       :data_points)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -576,6 +586,7 @@ module Aws::PI
       :metric,
       :group_by,
       :filter)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -588,6 +599,7 @@ module Aws::PI
     #
     class NotAuthorizedException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -603,6 +615,7 @@ module Aws::PI
     #
     class ResponsePartitionKey < Struct.new(
       :dimensions)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -630,6 +643,7 @@ module Aws::PI
     class ResponseResourceMetricKey < Struct.new(
       :metric,
       :dimensions)
+      SENSITIVE = []
       include Aws::Structure
     end
 

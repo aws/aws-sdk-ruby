@@ -60,6 +60,7 @@ module Aws::MediaPackageVod
       :source_arn,
       :source_role_arn,
       :tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -98,6 +99,7 @@ module Aws::MediaPackageVod
       :source_arn,
       :source_role_arn,
       :tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -117,6 +119,7 @@ module Aws::MediaPackageVod
     class AssetList < Struct.new(
       :assets,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -165,6 +168,7 @@ module Aws::MediaPackageVod
       :source_arn,
       :source_role_arn,
       :tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -193,6 +197,7 @@ module Aws::MediaPackageVod
     class Authorization < Struct.new(
       :cdn_identifier_secret,
       :secrets_role_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -219,6 +224,7 @@ module Aws::MediaPackageVod
     #
     class CmafEncryption < Struct.new(
       :speke_key_provider)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -271,6 +277,7 @@ module Aws::MediaPackageVod
       :encryption,
       :hls_manifests,
       :segment_duration_seconds)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -316,6 +323,7 @@ module Aws::MediaPackageVod
       :source_arn,
       :source_role_arn,
       :tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -359,6 +367,7 @@ module Aws::MediaPackageVod
       :source_arn,
       :source_role_arn,
       :tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -506,6 +515,7 @@ module Aws::MediaPackageVod
       :mss_package,
       :packaging_group_id,
       :tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -550,6 +560,7 @@ module Aws::MediaPackageVod
       :mss_package,
       :packaging_group_id,
       :tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -584,6 +595,7 @@ module Aws::MediaPackageVod
       :authorization,
       :id,
       :tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -612,6 +624,7 @@ module Aws::MediaPackageVod
       :domain_name,
       :id,
       :tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -639,6 +652,7 @@ module Aws::MediaPackageVod
     #
     class DashEncryption < Struct.new(
       :speke_key_provider)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -693,6 +707,7 @@ module Aws::MediaPackageVod
       :min_buffer_time_seconds,
       :profile,
       :stream_selection)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -768,6 +783,7 @@ module Aws::MediaPackageVod
       :period_triggers,
       :segment_duration_seconds,
       :segment_template_format)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -785,6 +801,7 @@ module Aws::MediaPackageVod
     #
     class DeleteAssetRequest < Struct.new(
       :id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -806,6 +823,7 @@ module Aws::MediaPackageVod
     #
     class DeletePackagingConfigurationRequest < Struct.new(
       :id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -827,6 +845,7 @@ module Aws::MediaPackageVod
     #
     class DeletePackagingGroupRequest < Struct.new(
       :id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -848,6 +867,7 @@ module Aws::MediaPackageVod
     #
     class DescribeAssetRequest < Struct.new(
       :id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -891,6 +911,7 @@ module Aws::MediaPackageVod
       :source_arn,
       :source_role_arn,
       :tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -908,6 +929,7 @@ module Aws::MediaPackageVod
     #
     class DescribePackagingConfigurationRequest < Struct.new(
       :id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -952,6 +974,7 @@ module Aws::MediaPackageVod
       :mss_package,
       :packaging_group_id,
       :tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -969,6 +992,7 @@ module Aws::MediaPackageVod
     #
     class DescribePackagingGroupRequest < Struct.new(
       :id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -997,6 +1021,7 @@ module Aws::MediaPackageVod
       :domain_name,
       :id,
       :tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1016,6 +1041,7 @@ module Aws::MediaPackageVod
     class EgressEndpoint < Struct.new(
       :packaging_configuration_id,
       :url)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1026,6 +1052,7 @@ module Aws::MediaPackageVod
     #
     class ForbiddenException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1065,6 +1092,7 @@ module Aws::MediaPackageVod
       :constant_initialization_vector,
       :encryption_method,
       :speke_key_provider)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1134,6 +1162,7 @@ module Aws::MediaPackageVod
       :program_date_time_interval_seconds,
       :repeat_ext_x_key,
       :stream_selection)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1195,6 +1224,7 @@ module Aws::MediaPackageVod
       :hls_manifests,
       :segment_duration_seconds,
       :use_audio_rendition_group)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1205,6 +1235,7 @@ module Aws::MediaPackageVod
     #
     class InternalServerErrorException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1232,6 +1263,7 @@ module Aws::MediaPackageVod
       :max_results,
       :next_token,
       :packaging_group_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1246,6 +1278,7 @@ module Aws::MediaPackageVod
     class ListAssetsResponse < Struct.new(
       :assets,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1273,6 +1306,7 @@ module Aws::MediaPackageVod
       :max_results,
       :next_token,
       :packaging_group_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1287,6 +1321,7 @@ module Aws::MediaPackageVod
     class ListPackagingConfigurationsResponse < Struct.new(
       :next_token,
       :packaging_configurations)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1309,6 +1344,7 @@ module Aws::MediaPackageVod
     class ListPackagingGroupsRequest < Struct.new(
       :max_results,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1323,6 +1359,7 @@ module Aws::MediaPackageVod
     class ListPackagingGroupsResponse < Struct.new(
       :next_token,
       :packaging_groups)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1340,6 +1377,7 @@ module Aws::MediaPackageVod
     #
     class ListTagsForResourceRequest < Struct.new(
       :resource_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1350,6 +1388,7 @@ module Aws::MediaPackageVod
     #
     class ListTagsForResourceResponse < Struct.new(
       :tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1376,6 +1415,7 @@ module Aws::MediaPackageVod
     #
     class MssEncryption < Struct.new(
       :speke_key_provider)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1406,6 +1446,7 @@ module Aws::MediaPackageVod
     class MssManifest < Struct.new(
       :manifest_name,
       :stream_selection)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1453,6 +1494,7 @@ module Aws::MediaPackageVod
       :encryption,
       :mss_manifests,
       :segment_duration_seconds)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1463,6 +1505,7 @@ module Aws::MediaPackageVod
     #
     class NotFoundException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1512,6 +1555,7 @@ module Aws::MediaPackageVod
       :mss_package,
       :packaging_group_id,
       :tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1557,6 +1601,7 @@ module Aws::MediaPackageVod
       :mss_package,
       :packaging_group_id,
       :tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1576,6 +1621,7 @@ module Aws::MediaPackageVod
     class PackagingConfigurationList < Struct.new(
       :next_token,
       :packaging_configurations)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1609,6 +1655,7 @@ module Aws::MediaPackageVod
       :domain_name,
       :id,
       :tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1633,6 +1680,7 @@ module Aws::MediaPackageVod
       :authorization,
       :id,
       :tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1652,6 +1700,7 @@ module Aws::MediaPackageVod
     class PackagingGroupList < Struct.new(
       :next_token,
       :packaging_groups)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1665,6 +1714,7 @@ module Aws::MediaPackageVod
     #
     class PackagingGroupUpdateParameters < Struct.new(
       :authorization)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1675,6 +1725,7 @@ module Aws::MediaPackageVod
     #
     class ServiceUnavailableException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1709,6 +1760,7 @@ module Aws::MediaPackageVod
       :role_arn,
       :system_ids,
       :url)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1741,6 +1793,7 @@ module Aws::MediaPackageVod
       :max_video_bits_per_second,
       :min_video_bits_per_second,
       :stream_order)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1765,6 +1818,7 @@ module Aws::MediaPackageVod
     class TagResourceRequest < Struct.new(
       :resource_arn,
       :tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1776,6 +1830,7 @@ module Aws::MediaPackageVod
     #
     class TagsModel < Struct.new(
       :tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1786,6 +1841,7 @@ module Aws::MediaPackageVod
     #
     class TooManyRequestsException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1796,6 +1852,7 @@ module Aws::MediaPackageVod
     #
     class UnprocessableEntityException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1818,6 +1875,7 @@ module Aws::MediaPackageVod
     class UntagResourceRequest < Struct.new(
       :resource_arn,
       :tag_keys)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1844,6 +1902,7 @@ module Aws::MediaPackageVod
     class UpdatePackagingGroupRequest < Struct.new(
       :authorization,
       :id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1872,6 +1931,7 @@ module Aws::MediaPackageVod
       :domain_name,
       :id,
       :tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 

@@ -20,6 +20,7 @@ module Aws::AutoScaling
     #
     class ActiveInstanceRefreshNotFoundFault < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -41,6 +42,7 @@ module Aws::AutoScaling
     class ActivitiesType < Struct.new(
       :activities,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -102,6 +104,7 @@ module Aws::AutoScaling
       :status_message,
       :progress,
       :details)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -113,6 +116,7 @@ module Aws::AutoScaling
     #
     class ActivityType < Struct.new(
       :activity)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -127,6 +131,7 @@ module Aws::AutoScaling
     #
     class AdjustmentType < Struct.new(
       :adjustment_type)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -145,6 +150,7 @@ module Aws::AutoScaling
     class Alarm < Struct.new(
       :alarm_name,
       :alarm_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -158,6 +164,7 @@ module Aws::AutoScaling
     #
     class AlreadyExistsFault < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -182,6 +189,7 @@ module Aws::AutoScaling
     class AttachInstancesQuery < Struct.new(
       :instance_ids,
       :auto_scaling_group_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -211,6 +219,7 @@ module Aws::AutoScaling
     class AttachLoadBalancerTargetGroupsType < Struct.new(
       :auto_scaling_group_name,
       :target_group_arns)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -240,6 +249,7 @@ module Aws::AutoScaling
     class AttachLoadBalancersType < Struct.new(
       :auto_scaling_group_name,
       :load_balancer_names)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -392,6 +402,7 @@ module Aws::AutoScaling
       :new_instances_protected_from_scale_in,
       :service_linked_role_arn,
       :max_instance_lifetime)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -429,6 +440,7 @@ module Aws::AutoScaling
       :auto_scaling_group_names,
       :next_token,
       :max_records)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -449,6 +461,7 @@ module Aws::AutoScaling
     class AutoScalingGroupsType < Struct.new(
       :auto_scaling_groups,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -516,6 +529,7 @@ module Aws::AutoScaling
       :launch_template,
       :protected_from_scale_in,
       :weighted_capacity)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -536,6 +550,7 @@ module Aws::AutoScaling
     class AutoScalingInstancesType < Struct.new(
       :auto_scaling_instances,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -548,6 +563,7 @@ module Aws::AutoScaling
     #
     class BatchDeleteScheduledActionAnswer < Struct.new(
       :failed_scheduled_actions)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -573,6 +589,7 @@ module Aws::AutoScaling
     class BatchDeleteScheduledActionType < Struct.new(
       :auto_scaling_group_name,
       :scheduled_action_names)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -585,6 +602,7 @@ module Aws::AutoScaling
     #
     class BatchPutScheduledUpdateGroupActionAnswer < Struct.new(
       :failed_scheduled_update_group_actions)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -619,6 +637,7 @@ module Aws::AutoScaling
     class BatchPutScheduledUpdateGroupActionType < Struct.new(
       :auto_scaling_group_name,
       :scheduled_update_group_actions)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -682,6 +701,7 @@ module Aws::AutoScaling
       :device_name,
       :ebs,
       :no_device)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -693,6 +713,7 @@ module Aws::AutoScaling
     #
     class CancelInstanceRefreshAnswer < Struct.new(
       :instance_refresh_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -711,6 +732,7 @@ module Aws::AutoScaling
     #
     class CancelInstanceRefreshType < Struct.new(
       :auto_scaling_group_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -761,6 +783,7 @@ module Aws::AutoScaling
       :lifecycle_action_token,
       :lifecycle_action_result,
       :instance_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1158,6 +1181,7 @@ module Aws::AutoScaling
       :tags,
       :service_linked_role_arn,
       :max_instance_lifetime)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1475,6 +1499,7 @@ module Aws::AutoScaling
       :ebs_optimized,
       :associate_public_ip_address,
       :placement_tenancy)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1501,6 +1526,7 @@ module Aws::AutoScaling
     #
     class CreateOrUpdateTagsType < Struct.new(
       :tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1575,6 +1601,7 @@ module Aws::AutoScaling
       :dimensions,
       :statistic,
       :unit)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1602,6 +1629,7 @@ module Aws::AutoScaling
     class DeleteAutoScalingGroupType < Struct.new(
       :auto_scaling_group_name,
       :force_delete)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1630,6 +1658,7 @@ module Aws::AutoScaling
     class DeleteLifecycleHookType < Struct.new(
       :lifecycle_hook_name,
       :auto_scaling_group_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1655,6 +1684,7 @@ module Aws::AutoScaling
     class DeleteNotificationConfigurationType < Struct.new(
       :auto_scaling_group_name,
       :topic_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1679,6 +1709,7 @@ module Aws::AutoScaling
     class DeletePolicyType < Struct.new(
       :auto_scaling_group_name,
       :policy_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1703,6 +1734,7 @@ module Aws::AutoScaling
     class DeleteScheduledActionType < Struct.new(
       :auto_scaling_group_name,
       :scheduled_action_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1729,6 +1761,7 @@ module Aws::AutoScaling
     #
     class DeleteTagsType < Struct.new(
       :tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1757,6 +1790,7 @@ module Aws::AutoScaling
       :max_number_of_launch_configurations,
       :number_of_auto_scaling_groups,
       :number_of_launch_configurations)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1768,6 +1802,7 @@ module Aws::AutoScaling
     #
     class DescribeAdjustmentTypesAnswer < Struct.new(
       :adjustment_types)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1803,6 +1838,7 @@ module Aws::AutoScaling
       :instance_ids,
       :max_records,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1814,6 +1850,7 @@ module Aws::AutoScaling
     #
     class DescribeAutoScalingNotificationTypesAnswer < Struct.new(
       :auto_scaling_notification_types)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1841,6 +1878,7 @@ module Aws::AutoScaling
     class DescribeInstanceRefreshesAnswer < Struct.new(
       :instance_refreshes,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1879,6 +1917,7 @@ module Aws::AutoScaling
       :instance_refresh_ids,
       :next_token,
       :max_records)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1890,6 +1929,7 @@ module Aws::AutoScaling
     #
     class DescribeLifecycleHookTypesAnswer < Struct.new(
       :lifecycle_hook_types)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1901,6 +1941,7 @@ module Aws::AutoScaling
     #
     class DescribeLifecycleHooksAnswer < Struct.new(
       :lifecycle_hooks)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1926,6 +1967,7 @@ module Aws::AutoScaling
     class DescribeLifecycleHooksType < Struct.new(
       :auto_scaling_group_name,
       :lifecycle_hook_names)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1958,6 +2000,7 @@ module Aws::AutoScaling
       :auto_scaling_group_name,
       :next_token,
       :max_records)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1978,6 +2021,7 @@ module Aws::AutoScaling
     class DescribeLoadBalancerTargetGroupsResponse < Struct.new(
       :load_balancer_target_groups,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2010,6 +2054,7 @@ module Aws::AutoScaling
       :auto_scaling_group_name,
       :next_token,
       :max_records)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2030,6 +2075,7 @@ module Aws::AutoScaling
     class DescribeLoadBalancersResponse < Struct.new(
       :load_balancers,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2046,6 +2092,7 @@ module Aws::AutoScaling
     class DescribeMetricCollectionTypesAnswer < Struct.new(
       :metrics,
       :granularities)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2066,6 +2113,7 @@ module Aws::AutoScaling
     class DescribeNotificationConfigurationsAnswer < Struct.new(
       :notification_configurations,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2098,6 +2146,7 @@ module Aws::AutoScaling
       :auto_scaling_group_names,
       :next_token,
       :max_records)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2146,6 +2195,7 @@ module Aws::AutoScaling
       :policy_types,
       :next_token,
       :max_records)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2188,6 +2238,7 @@ module Aws::AutoScaling
       :auto_scaling_group_name,
       :max_records,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2243,6 +2294,7 @@ module Aws::AutoScaling
       :end_time,
       :next_token,
       :max_records)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2282,6 +2334,7 @@ module Aws::AutoScaling
       :filters,
       :next_token,
       :max_records)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2296,6 +2349,7 @@ module Aws::AutoScaling
     #
     class DescribeTerminationPolicyTypesAnswer < Struct.new(
       :termination_policy_types)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2308,6 +2362,7 @@ module Aws::AutoScaling
     #
     class DetachInstancesAnswer < Struct.new(
       :activities)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2339,6 +2394,7 @@ module Aws::AutoScaling
       :instance_ids,
       :auto_scaling_group_name,
       :should_decrement_desired_capacity)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2368,6 +2424,7 @@ module Aws::AutoScaling
     class DetachLoadBalancerTargetGroupsType < Struct.new(
       :auto_scaling_group_name,
       :target_group_arns)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2397,6 +2454,7 @@ module Aws::AutoScaling
     class DetachLoadBalancersType < Struct.new(
       :auto_scaling_group_name,
       :load_balancer_names)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2449,6 +2507,7 @@ module Aws::AutoScaling
     class DisableMetricsCollectionQuery < Struct.new(
       :auto_scaling_group_name,
       :metrics)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2570,6 +2629,7 @@ module Aws::AutoScaling
       :delete_on_termination,
       :iops,
       :encrypted)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2633,6 +2693,7 @@ module Aws::AutoScaling
       :auto_scaling_group_name,
       :metrics,
       :granularity)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2677,6 +2738,7 @@ module Aws::AutoScaling
     class EnabledMetric < Struct.new(
       :metric,
       :granularity)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2688,6 +2750,7 @@ module Aws::AutoScaling
     #
     class EnterStandbyAnswer < Struct.new(
       :activities)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2719,6 +2782,7 @@ module Aws::AutoScaling
       :instance_ids,
       :auto_scaling_group_name,
       :should_decrement_desired_capacity)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2785,6 +2849,7 @@ module Aws::AutoScaling
       :honor_cooldown,
       :metric_value,
       :breach_threshold)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2796,6 +2861,7 @@ module Aws::AutoScaling
     #
     class ExitStandbyAnswer < Struct.new(
       :activities)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2820,6 +2886,7 @@ module Aws::AutoScaling
     class ExitStandbyQuery < Struct.new(
       :instance_ids,
       :auto_scaling_group_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2844,6 +2911,7 @@ module Aws::AutoScaling
       :scheduled_action_name,
       :error_code,
       :error_message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2879,6 +2947,7 @@ module Aws::AutoScaling
     class Filter < Struct.new(
       :name,
       :values)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2940,6 +3009,7 @@ module Aws::AutoScaling
       :launch_template,
       :protected_from_scale_in,
       :weighted_capacity)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2962,6 +3032,7 @@ module Aws::AutoScaling
     #
     class InstanceMonitoring < Struct.new(
       :enabled)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3033,6 +3104,7 @@ module Aws::AutoScaling
       :end_time,
       :percentage_complete,
       :instances_to_update)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3046,6 +3118,7 @@ module Aws::AutoScaling
     #
     class InstanceRefreshInProgressFault < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3177,6 +3250,7 @@ module Aws::AutoScaling
       :spot_allocation_strategy,
       :spot_instance_pools,
       :spot_max_price)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3189,6 +3263,7 @@ module Aws::AutoScaling
     #
     class InvalidNextToken < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3411,6 +3486,7 @@ module Aws::AutoScaling
       :ebs_optimized,
       :associate_public_ip_address,
       :placement_tenancy)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3429,6 +3505,7 @@ module Aws::AutoScaling
     #
     class LaunchConfigurationNameType < Struct.new(
       :launch_configuration_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3462,6 +3539,7 @@ module Aws::AutoScaling
       :launch_configuration_names,
       :next_token,
       :max_records)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3482,6 +3560,7 @@ module Aws::AutoScaling
     class LaunchConfigurationsType < Struct.new(
       :launch_configurations,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3533,6 +3612,7 @@ module Aws::AutoScaling
     class LaunchTemplate < Struct.new(
       :launch_template_specification,
       :overrides)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3585,6 +3665,7 @@ module Aws::AutoScaling
     class LaunchTemplateOverrides < Struct.new(
       :instance_type,
       :weighted_capacity)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3662,6 +3743,7 @@ module Aws::AutoScaling
       :launch_template_id,
       :launch_template_name,
       :version)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3735,6 +3817,7 @@ module Aws::AutoScaling
       :heartbeat_timeout,
       :global_timeout,
       :default_result)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3844,6 +3927,7 @@ module Aws::AutoScaling
       :default_result,
       :notification_target_arn,
       :role_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3863,6 +3947,7 @@ module Aws::AutoScaling
     #
     class LimitExceededFault < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3909,6 +3994,7 @@ module Aws::AutoScaling
     class LoadBalancerState < Struct.new(
       :load_balancer_name,
       :state)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3952,6 +4038,7 @@ module Aws::AutoScaling
     class LoadBalancerTargetGroupState < Struct.new(
       :load_balancer_target_group_arn,
       :state)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3981,6 +4068,7 @@ module Aws::AutoScaling
     #
     class MetricCollectionType < Struct.new(
       :metric)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4007,6 +4095,7 @@ module Aws::AutoScaling
     class MetricDimension < Struct.new(
       :name,
       :value)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4020,6 +4109,7 @@ module Aws::AutoScaling
     #
     class MetricGranularityType < Struct.new(
       :granularity)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4086,6 +4176,7 @@ module Aws::AutoScaling
     class MixedInstancesPolicy < Struct.new(
       :launch_template,
       :instances_distribution)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4120,6 +4211,7 @@ module Aws::AutoScaling
       :auto_scaling_group_name,
       :topic_arn,
       :notification_type)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4140,6 +4232,7 @@ module Aws::AutoScaling
     class PoliciesType < Struct.new(
       :scaling_policies,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4159,6 +4252,7 @@ module Aws::AutoScaling
     class PolicyARNType < Struct.new(
       :policy_arn,
       :alarms)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4222,6 +4316,7 @@ module Aws::AutoScaling
     class PredefinedMetricSpecification < Struct.new(
       :predefined_metric_type,
       :resource_label)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4260,6 +4355,7 @@ module Aws::AutoScaling
     #
     class ProcessType < Struct.new(
       :process_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4271,6 +4367,7 @@ module Aws::AutoScaling
     #
     class ProcessesType < Struct.new(
       :processes)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4373,6 +4470,7 @@ module Aws::AutoScaling
       :notification_metadata,
       :heartbeat_timeout,
       :default_result)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4406,6 +4504,7 @@ module Aws::AutoScaling
       :auto_scaling_group_name,
       :topic_arn,
       :notification_types)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4600,6 +4699,7 @@ module Aws::AutoScaling
       :estimated_instance_warmup,
       :target_tracking_configuration,
       :enabled)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4691,6 +4791,7 @@ module Aws::AutoScaling
       :min_size,
       :max_size,
       :desired_capacity)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4734,6 +4835,7 @@ module Aws::AutoScaling
       :auto_scaling_group_name,
       :lifecycle_action_token,
       :instance_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4770,6 +4872,7 @@ module Aws::AutoScaling
     class RefreshPreferences < Struct.new(
       :min_healthy_percentage,
       :instance_warmup)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4784,6 +4887,7 @@ module Aws::AutoScaling
     #
     class ResourceContentionFault < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4796,6 +4900,7 @@ module Aws::AutoScaling
     #
     class ResourceInUseFault < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4809,6 +4914,7 @@ module Aws::AutoScaling
     #
     class ScalingActivityInProgressFault < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4906,6 +5012,7 @@ module Aws::AutoScaling
       :alarms,
       :target_tracking_configuration,
       :enabled)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4950,6 +5057,7 @@ module Aws::AutoScaling
     class ScalingProcessQuery < Struct.new(
       :auto_scaling_group_name,
       :scaling_processes)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4970,6 +5078,7 @@ module Aws::AutoScaling
     class ScheduledActionsType < Struct.new(
       :scheduled_update_group_actions,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5035,6 +5144,7 @@ module Aws::AutoScaling
       :min_size,
       :max_size,
       :desired_capacity)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5119,6 +5229,7 @@ module Aws::AutoScaling
       :min_size,
       :max_size,
       :desired_capacity)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5131,6 +5242,7 @@ module Aws::AutoScaling
     #
     class ServiceLinkedRoleFailure < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5167,6 +5279,7 @@ module Aws::AutoScaling
       :auto_scaling_group_name,
       :desired_capacity,
       :honor_cooldown)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5211,6 +5324,7 @@ module Aws::AutoScaling
       :instance_id,
       :health_status,
       :should_respect_grace_period)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5246,6 +5360,7 @@ module Aws::AutoScaling
       :instance_ids,
       :auto_scaling_group_name,
       :protected_from_scale_in)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5257,6 +5372,7 @@ module Aws::AutoScaling
     #
     class StartInstanceRefreshAnswer < Struct.new(
       :instance_refresh_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5298,6 +5414,7 @@ module Aws::AutoScaling
       :auto_scaling_group_name,
       :strategy,
       :preferences)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5378,6 +5495,7 @@ module Aws::AutoScaling
       :metric_interval_lower_bound,
       :metric_interval_upper_bound,
       :scaling_adjustment)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5403,6 +5521,7 @@ module Aws::AutoScaling
     class SuspendedProcess < Struct.new(
       :process_name,
       :suspension_reason)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5449,6 +5568,7 @@ module Aws::AutoScaling
       :key,
       :value,
       :propagate_at_launch)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5484,6 +5604,7 @@ module Aws::AutoScaling
       :key,
       :value,
       :propagate_at_launch)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5504,6 +5625,7 @@ module Aws::AutoScaling
     class TagsType < Struct.new(
       :tags,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5563,6 +5685,7 @@ module Aws::AutoScaling
       :customized_metric_specification,
       :target_value,
       :disable_scale_in)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5588,6 +5711,7 @@ module Aws::AutoScaling
     class TerminateInstanceInAutoScalingGroupType < Struct.new(
       :instance_id,
       :should_decrement_desired_capacity)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5848,6 +5972,7 @@ module Aws::AutoScaling
       :new_instances_protected_from_scale_in,
       :service_linked_role_arn,
       :max_instance_lifetime)
+      SENSITIVE = []
       include Aws::Structure
     end
 

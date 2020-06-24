@@ -32,6 +32,7 @@ module Aws::MediaTailor
     class AvailSuppression < Struct.new(
       :mode,
       :value)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -45,6 +46,33 @@ module Aws::MediaTailor
     #
     class BadRequestException < Struct.new(
       :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The configuration for bumpers. Bumpers are short audio or video clips
+    # that play at the start or before the end of an ad break.
+    #
+    # @note When making an API call, you may pass Bumper
+    #   data as a hash:
+    #
+    #       {
+    #         end_url: "__string",
+    #         start_url: "__string",
+    #       }
+    #
+    # @!attribute [rw] end_url
+    #   @return [String]
+    #
+    # @!attribute [rw] start_url
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediatailor-2018-04-23/Bumper AWS API Documentation
+    #
+    class Bumper < Struct.new(
+      :end_url,
+      :start_url)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -84,6 +112,7 @@ module Aws::MediaTailor
     class CdnConfiguration < Struct.new(
       :ad_segment_url_prefix,
       :content_segment_url_prefix)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -122,6 +151,7 @@ module Aws::MediaTailor
       :manifest_endpoint_prefix,
       :mpd_location,
       :origin_manifest_type)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -161,6 +191,7 @@ module Aws::MediaTailor
     class DashConfigurationForPut < Struct.new(
       :mpd_location,
       :origin_manifest_type)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -178,6 +209,7 @@ module Aws::MediaTailor
     #
     class DeletePlaybackConfigurationRequest < Struct.new(
       :name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -199,6 +231,7 @@ module Aws::MediaTailor
     #
     class GetPlaybackConfigurationRequest < Struct.new(
       :name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -214,6 +247,11 @@ module Aws::MediaTailor
     # @!attribute [rw] avail_suppression
     #   The configuration for Avail Suppression.
     #   @return [Types::AvailSuppression]
+    #
+    # @!attribute [rw] bumper
+    #   The configuration for bumpers. Bumpers are short audio or video
+    #   clips that play at the start or before the end of an ad break.
+    #   @return [Types::Bumper]
     #
     # @!attribute [rw] cdn_configuration
     #   The configuration for using a content delivery network (CDN), like
@@ -286,6 +324,7 @@ module Aws::MediaTailor
     class GetPlaybackConfigurationResponse < Struct.new(
       :ad_decision_server_url,
       :avail_suppression,
+      :bumper,
       :cdn_configuration,
       :personalization_threshold_seconds,
       :dash_configuration,
@@ -299,6 +338,7 @@ module Aws::MediaTailor
       :tags,
       :transcode_profile_name,
       :video_content_source_url)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -313,6 +353,7 @@ module Aws::MediaTailor
     #
     class HlsConfiguration < Struct.new(
       :manifest_endpoint_prefix)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -335,6 +376,7 @@ module Aws::MediaTailor
     class ListPlaybackConfigurationsRequest < Struct.new(
       :max_results,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -355,6 +397,7 @@ module Aws::MediaTailor
     class ListPlaybackConfigurationsResponse < Struct.new(
       :items,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -372,6 +415,7 @@ module Aws::MediaTailor
     #
     class ListTagsForResourceRequest < Struct.new(
       :resource_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -382,6 +426,7 @@ module Aws::MediaTailor
     #
     class ListTagsForResourceResponse < Struct.new(
       :tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -444,6 +489,7 @@ module Aws::MediaTailor
       :tags,
       :transcode_profile_name,
       :video_content_source_url)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -478,6 +524,7 @@ module Aws::MediaTailor
     class LivePreRollConfiguration < Struct.new(
       :ad_decision_server_url,
       :max_duration_seconds)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -489,6 +536,10 @@ module Aws::MediaTailor
     #         avail_suppression: {
     #           mode: "OFF", # accepts OFF, BEHIND_LIVE_EDGE
     #           value: "__string",
+    #         },
+    #         bumper: {
+    #           end_url: "__string",
+    #           start_url: "__string",
     #         },
     #         cdn_configuration: {
     #           ad_segment_url_prefix: "__string",
@@ -524,6 +575,11 @@ module Aws::MediaTailor
     # @!attribute [rw] avail_suppression
     #   The configuration for Avail Suppression.
     #   @return [Types::AvailSuppression]
+    #
+    # @!attribute [rw] bumper
+    #   The configuration for bumpers. Bumpers are short audio or video
+    #   clips that play at the start or before the end of an ad break.
+    #   @return [Types::Bumper]
     #
     # @!attribute [rw] cdn_configuration
     #   The configuration for using a content delivery network (CDN), like
@@ -578,6 +634,7 @@ module Aws::MediaTailor
     class PutPlaybackConfigurationRequest < Struct.new(
       :ad_decision_server_url,
       :avail_suppression,
+      :bumper,
       :cdn_configuration,
       :personalization_threshold_seconds,
       :dash_configuration,
@@ -587,6 +644,7 @@ module Aws::MediaTailor
       :tags,
       :transcode_profile_name,
       :video_content_source_url)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -595,6 +653,11 @@ module Aws::MediaTailor
     #
     # @!attribute [rw] avail_suppression
     #   @return [Types::AvailSuppression]
+    #
+    # @!attribute [rw] bumper
+    #   The configuration for bumpers. Bumpers are short audio or video
+    #   clips that play at the start or before the end of an ad break.
+    #   @return [Types::Bumper]
     #
     # @!attribute [rw] cdn_configuration
     #   The configuration for using a content delivery network (CDN), like
@@ -642,6 +705,7 @@ module Aws::MediaTailor
     class PutPlaybackConfigurationResponse < Struct.new(
       :ad_decision_server_url,
       :avail_suppression,
+      :bumper,
       :cdn_configuration,
       :dash_configuration,
       :hls_configuration,
@@ -654,6 +718,7 @@ module Aws::MediaTailor
       :tags,
       :transcode_profile_name,
       :video_content_source_url)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -678,6 +743,7 @@ module Aws::MediaTailor
     class TagResourceRequest < Struct.new(
       :resource_arn,
       :tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -692,6 +758,7 @@ module Aws::MediaTailor
     #
     class TagsModel < Struct.new(
       :tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -714,6 +781,7 @@ module Aws::MediaTailor
     class UntagResourceRequest < Struct.new(
       :resource_arn,
       :tag_keys)
+      SENSITIVE = []
       include Aws::Structure
     end
 

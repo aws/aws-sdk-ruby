@@ -25,6 +25,7 @@ module Aws::EventBridge
     #
     class ActivateEventSourceRequest < Struct.new(
       :name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -65,6 +66,7 @@ module Aws::EventBridge
       :subnets,
       :security_groups,
       :assign_public_ip)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -89,6 +91,7 @@ module Aws::EventBridge
     #
     class BatchArrayProperties < Struct.new(
       :size)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -140,6 +143,7 @@ module Aws::EventBridge
       :job_name,
       :array_properties,
       :retry_strategy)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -163,6 +167,7 @@ module Aws::EventBridge
     #
     class BatchRetryStrategy < Struct.new(
       :attempts)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -212,6 +217,7 @@ module Aws::EventBridge
       :type,
       :key,
       :value)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -255,6 +261,7 @@ module Aws::EventBridge
       :name,
       :event_source_name,
       :tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -266,6 +273,7 @@ module Aws::EventBridge
     #
     class CreateEventBusResponse < Struct.new(
       :event_bus_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -295,6 +303,7 @@ module Aws::EventBridge
     class CreatePartnerEventSourceRequest < Struct.new(
       :name,
       :account)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -306,6 +315,7 @@ module Aws::EventBridge
     #
     class CreatePartnerEventSourceResponse < Struct.new(
       :event_source_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -324,6 +334,7 @@ module Aws::EventBridge
     #
     class DeactivateEventSourceRequest < Struct.new(
       :name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -342,6 +353,7 @@ module Aws::EventBridge
     #
     class DeleteEventBusRequest < Struct.new(
       :name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -367,6 +379,7 @@ module Aws::EventBridge
     class DeletePartnerEventSourceRequest < Struct.new(
       :name,
       :account)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -402,6 +415,7 @@ module Aws::EventBridge
       :name,
       :event_bus_name,
       :force)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -421,6 +435,7 @@ module Aws::EventBridge
     #
     class DescribeEventBusRequest < Struct.new(
       :name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -444,6 +459,7 @@ module Aws::EventBridge
       :name,
       :arn,
       :policy)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -462,6 +478,7 @@ module Aws::EventBridge
     #
     class DescribeEventSourceRequest < Struct.new(
       :name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -504,6 +521,7 @@ module Aws::EventBridge
       :expiration_time,
       :name,
       :state)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -522,6 +540,7 @@ module Aws::EventBridge
     #
     class DescribePartnerEventSourceRequest < Struct.new(
       :name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -538,6 +557,7 @@ module Aws::EventBridge
     class DescribePartnerEventSourceResponse < Struct.new(
       :arn,
       :name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -563,6 +583,7 @@ module Aws::EventBridge
     class DescribeRuleRequest < Struct.new(
       :name,
       :event_bus_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -623,6 +644,7 @@ module Aws::EventBridge
       :role_arn,
       :managed_by,
       :event_bus_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -648,6 +670,7 @@ module Aws::EventBridge
     class DisableRuleRequest < Struct.new(
       :name,
       :event_bus_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -734,6 +757,7 @@ module Aws::EventBridge
       :network_configuration,
       :platform_version,
       :group)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -759,6 +783,7 @@ module Aws::EventBridge
     class EnableRuleRequest < Struct.new(
       :name,
       :event_bus_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -789,6 +814,7 @@ module Aws::EventBridge
       :name,
       :arn,
       :policy)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -836,6 +862,7 @@ module Aws::EventBridge
       :expiration_time,
       :name,
       :state)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -912,6 +939,7 @@ module Aws::EventBridge
     class InputTransformer < Struct.new(
       :input_paths_map,
       :input_template)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -960,6 +988,7 @@ module Aws::EventBridge
     #
     class KinesisParameters < Struct.new(
       :partition_key_path)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1001,6 +1030,7 @@ module Aws::EventBridge
       :name_prefix,
       :next_token,
       :limit)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1018,6 +1048,7 @@ module Aws::EventBridge
     class ListEventBusesResponse < Struct.new(
       :event_buses,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1052,6 +1083,7 @@ module Aws::EventBridge
       :name_prefix,
       :next_token,
       :limit)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1069,6 +1101,7 @@ module Aws::EventBridge
     class ListEventSourcesResponse < Struct.new(
       :event_sources,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1103,6 +1136,7 @@ module Aws::EventBridge
       :event_source_name,
       :next_token,
       :limit)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1120,6 +1154,7 @@ module Aws::EventBridge
     class ListPartnerEventSourceAccountsResponse < Struct.new(
       :partner_event_source_accounts,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1154,6 +1189,7 @@ module Aws::EventBridge
       :name_prefix,
       :next_token,
       :limit)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1171,6 +1207,7 @@ module Aws::EventBridge
     class ListPartnerEventSourcesResponse < Struct.new(
       :partner_event_sources,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1209,6 +1246,7 @@ module Aws::EventBridge
       :event_bus_name,
       :next_token,
       :limit)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1226,6 +1264,7 @@ module Aws::EventBridge
     class ListRuleNamesByTargetResponse < Struct.new(
       :rule_names,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1264,6 +1303,7 @@ module Aws::EventBridge
       :event_bus_name,
       :next_token,
       :limit)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1281,6 +1321,7 @@ module Aws::EventBridge
     class ListRulesResponse < Struct.new(
       :rules,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1299,6 +1340,7 @@ module Aws::EventBridge
     #
     class ListTagsForResourceRequest < Struct.new(
       :resource_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1311,6 +1353,7 @@ module Aws::EventBridge
     #
     class ListTagsForResourceResponse < Struct.new(
       :tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1349,6 +1392,7 @@ module Aws::EventBridge
       :event_bus_name,
       :next_token,
       :limit)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1366,6 +1410,7 @@ module Aws::EventBridge
     class ListTargetsByRuleResponse < Struct.new(
       :targets,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1405,6 +1450,7 @@ module Aws::EventBridge
     #
     class NetworkConfiguration < Struct.new(
       :awsvpc_configuration)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1426,6 +1472,7 @@ module Aws::EventBridge
     class PartnerEventSource < Struct.new(
       :arn,
       :name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1460,6 +1507,7 @@ module Aws::EventBridge
       :creation_time,
       :expiration_time,
       :state)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1496,6 +1544,7 @@ module Aws::EventBridge
     #
     class PutEventsRequest < Struct.new(
       :entries)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1556,6 +1605,7 @@ module Aws::EventBridge
       :detail_type,
       :detail,
       :event_bus_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1575,6 +1625,7 @@ module Aws::EventBridge
     class PutEventsResponse < Struct.new(
       :failed_entry_count,
       :entries)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1598,6 +1649,7 @@ module Aws::EventBridge
       :event_id,
       :error_code,
       :error_message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1624,6 +1676,7 @@ module Aws::EventBridge
     #
     class PutPartnerEventsRequest < Struct.new(
       :entries)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1672,6 +1725,7 @@ module Aws::EventBridge
       :resources,
       :detail_type,
       :detail)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1690,6 +1744,7 @@ module Aws::EventBridge
     class PutPartnerEventsResponse < Struct.new(
       :failed_entry_count,
       :entries)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1713,6 +1768,7 @@ module Aws::EventBridge
       :event_id,
       :error_code,
       :error_message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1788,6 +1844,7 @@ module Aws::EventBridge
       :principal,
       :statement_id,
       :condition)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1861,6 +1918,7 @@ module Aws::EventBridge
       :role_arn,
       :tags,
       :event_bus_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1872,6 +1930,7 @@ module Aws::EventBridge
     #
     class PutRuleResponse < Struct.new(
       :rule_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1955,6 +2014,7 @@ module Aws::EventBridge
       :rule,
       :event_bus_name,
       :targets)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1971,6 +2031,7 @@ module Aws::EventBridge
     class PutTargetsResponse < Struct.new(
       :failed_entry_count,
       :failed_entries)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1996,6 +2057,7 @@ module Aws::EventBridge
       :target_id,
       :error_code,
       :error_message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2022,6 +2084,7 @@ module Aws::EventBridge
     class RemovePermissionRequest < Struct.new(
       :statement_id,
       :event_bus_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2062,6 +2125,7 @@ module Aws::EventBridge
       :event_bus_name,
       :ids,
       :force)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2078,6 +2142,7 @@ module Aws::EventBridge
     class RemoveTargetsResponse < Struct.new(
       :failed_entry_count,
       :failed_entries)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2103,6 +2168,7 @@ module Aws::EventBridge
       :target_id,
       :error_code,
       :error_message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2177,6 +2243,7 @@ module Aws::EventBridge
       :role_arn,
       :managed_by,
       :event_bus_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2204,6 +2271,7 @@ module Aws::EventBridge
     #
     class RunCommandParameters < Struct.new(
       :run_command_targets)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2234,6 +2302,7 @@ module Aws::EventBridge
     class RunCommandTarget < Struct.new(
       :key,
       :values)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2255,6 +2324,7 @@ module Aws::EventBridge
     #
     class SqsParameters < Struct.new(
       :message_group_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2283,6 +2353,7 @@ module Aws::EventBridge
     class Tag < Struct.new(
       :key,
       :value)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2312,6 +2383,7 @@ module Aws::EventBridge
     class TagResourceRequest < Struct.new(
       :resource_arn,
       :tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2485,6 +2557,7 @@ module Aws::EventBridge
       :ecs_parameters,
       :batch_parameters,
       :sqs_parameters)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2514,6 +2587,7 @@ module Aws::EventBridge
     class TestEventPatternRequest < Struct.new(
       :event_pattern,
       :event)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2525,6 +2599,7 @@ module Aws::EventBridge
     #
     class TestEventPatternResponse < Struct.new(
       :result)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2550,6 +2625,7 @@ module Aws::EventBridge
     class UntagResourceRequest < Struct.new(
       :resource_arn,
       :tag_keys)
+      SENSITIVE = []
       include Aws::Structure
     end
 

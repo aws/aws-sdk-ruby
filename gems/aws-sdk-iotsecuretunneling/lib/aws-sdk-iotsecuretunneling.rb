@@ -47,6 +47,6 @@ require_relative 'aws-sdk-iotsecuretunneling/customizations'
 # @service
 module Aws::IoTSecureTunneling
 
-  GEM_VERSION = '1.4.1'
+  GEM_VERSION = '1.5.0'
 
 end

@@ -69,6 +69,7 @@ module Aws::Personalize
       :role_arn,
       :creation_date_time,
       :last_updated_date_time)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -87,6 +88,7 @@ module Aws::Personalize
     class AlgorithmImage < Struct.new(
       :name,
       :docker_uri)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -116,6 +118,7 @@ module Aws::Personalize
     class AutoMLConfig < Struct.new(
       :metric_name,
       :recipe_list)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -131,6 +134,7 @@ module Aws::Personalize
     #
     class AutoMLResult < Struct.new(
       :best_recipe_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -214,6 +218,7 @@ module Aws::Personalize
       :status,
       :creation_date_time,
       :last_updated_date_time)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -239,6 +244,7 @@ module Aws::Personalize
     #
     class BatchInferenceJobInput < Struct.new(
       :s3_data_source)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -263,6 +269,7 @@ module Aws::Personalize
     #
     class BatchInferenceJobOutput < Struct.new(
       :s3_data_destination)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -317,6 +324,7 @@ module Aws::Personalize
       :last_updated_date_time,
       :failure_reason,
       :solution_version_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -382,6 +390,7 @@ module Aws::Personalize
       :creation_date_time,
       :last_updated_date_time,
       :latest_campaign_update)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -428,6 +437,7 @@ module Aws::Personalize
       :creation_date_time,
       :last_updated_date_time,
       :failure_reason)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -477,6 +487,7 @@ module Aws::Personalize
       :failure_reason,
       :creation_date_time,
       :last_updated_date_time)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -503,6 +514,7 @@ module Aws::Personalize
     class CategoricalHyperParameterRange < Struct.new(
       :name,
       :values)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -535,6 +547,7 @@ module Aws::Personalize
       :name,
       :min_value,
       :max_value)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -606,6 +619,7 @@ module Aws::Personalize
       :job_input,
       :job_output,
       :role_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -617,6 +631,7 @@ module Aws::Personalize
     #
     class CreateBatchInferenceJobResponse < Struct.new(
       :batch_inference_job_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -649,6 +664,7 @@ module Aws::Personalize
       :name,
       :solution_version_arn,
       :min_provisioned_tps)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -660,6 +676,7 @@ module Aws::Personalize
     #
     class CreateCampaignResponse < Struct.new(
       :campaign_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -692,6 +709,7 @@ module Aws::Personalize
       :name,
       :role_arn,
       :kms_key_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -703,6 +721,7 @@ module Aws::Personalize
     #
     class CreateDatasetGroupResponse < Struct.new(
       :dataset_group_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -742,6 +761,7 @@ module Aws::Personalize
       :dataset_arn,
       :data_source,
       :role_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -753,6 +773,7 @@ module Aws::Personalize
     #
     class CreateDatasetImportJobResponse < Struct.new(
       :dataset_import_job_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -799,6 +820,7 @@ module Aws::Personalize
       :schema_arn,
       :dataset_group_arn,
       :dataset_type)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -810,6 +832,7 @@ module Aws::Personalize
     #
     class CreateDatasetResponse < Struct.new(
       :dataset_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -835,6 +858,7 @@ module Aws::Personalize
     class CreateEventTrackerRequest < Struct.new(
       :name,
       :dataset_group_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -856,6 +880,7 @@ module Aws::Personalize
     class CreateEventTrackerResponse < Struct.new(
       :event_tracker_arn,
       :tracking_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -895,6 +920,7 @@ module Aws::Personalize
       :name,
       :dataset_group_arn,
       :filter_expression)
+      SENSITIVE = [:filter_expression]
       include Aws::Structure
     end
 
@@ -906,6 +932,7 @@ module Aws::Personalize
     #
     class CreateFilterResponse < Struct.new(
       :filter_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -930,6 +957,7 @@ module Aws::Personalize
     class CreateSchemaRequest < Struct.new(
       :name,
       :schema)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -941,6 +969,7 @@ module Aws::Personalize
     #
     class CreateSchemaResponse < Struct.new(
       :schema_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1058,6 +1087,7 @@ module Aws::Personalize
       :dataset_group_arn,
       :event_type,
       :solution_config)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1069,6 +1099,7 @@ module Aws::Personalize
     #
     class CreateSolutionResponse < Struct.new(
       :solution_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1105,6 +1136,7 @@ module Aws::Personalize
     class CreateSolutionVersionRequest < Struct.new(
       :solution_arn,
       :training_mode)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1116,6 +1148,7 @@ module Aws::Personalize
     #
     class CreateSolutionVersionResponse < Struct.new(
       :solution_version_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1140,6 +1173,7 @@ module Aws::Personalize
     #
     class DataSource < Struct.new(
       :data_location)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1202,6 +1236,7 @@ module Aws::Personalize
       :status,
       :creation_date_time,
       :last_updated_date_time)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1267,6 +1302,7 @@ module Aws::Personalize
       :creation_date_time,
       :last_updated_date_time,
       :failure_reason)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1314,6 +1350,7 @@ module Aws::Personalize
       :creation_date_time,
       :last_updated_date_time,
       :failure_reason)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1385,6 +1422,7 @@ module Aws::Personalize
       :creation_date_time,
       :last_updated_date_time,
       :failure_reason)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1432,6 +1470,7 @@ module Aws::Personalize
       :creation_date_time,
       :last_updated_date_time,
       :failure_reason)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1466,6 +1505,7 @@ module Aws::Personalize
       :schema,
       :creation_date_time,
       :last_updated_date_time)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1495,6 +1535,7 @@ module Aws::Personalize
       :schema_arn,
       :creation_date_time,
       :last_updated_date_time)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1549,6 +1590,7 @@ module Aws::Personalize
       :status,
       :creation_date_time,
       :last_updated_date_time)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1575,6 +1617,7 @@ module Aws::Personalize
       :name,
       :values,
       :is_tunable)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1605,6 +1648,7 @@ module Aws::Personalize
       :min_value,
       :max_value,
       :is_tunable)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1629,6 +1673,7 @@ module Aws::Personalize
       :integer_hyper_parameter_ranges,
       :continuous_hyper_parameter_ranges,
       :categorical_hyper_parameter_ranges)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1660,6 +1705,7 @@ module Aws::Personalize
       :min_value,
       :max_value,
       :is_tunable)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1678,6 +1724,7 @@ module Aws::Personalize
     #
     class DeleteCampaignRequest < Struct.new(
       :campaign_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1696,6 +1743,7 @@ module Aws::Personalize
     #
     class DeleteDatasetGroupRequest < Struct.new(
       :dataset_group_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1714,6 +1762,7 @@ module Aws::Personalize
     #
     class DeleteDatasetRequest < Struct.new(
       :dataset_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1732,6 +1781,7 @@ module Aws::Personalize
     #
     class DeleteEventTrackerRequest < Struct.new(
       :event_tracker_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1750,6 +1800,7 @@ module Aws::Personalize
     #
     class DeleteFilterRequest < Struct.new(
       :filter_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1768,6 +1819,7 @@ module Aws::Personalize
     #
     class DeleteSchemaRequest < Struct.new(
       :schema_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1786,6 +1838,7 @@ module Aws::Personalize
     #
     class DeleteSolutionRequest < Struct.new(
       :solution_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1804,6 +1857,7 @@ module Aws::Personalize
     #
     class DescribeAlgorithmRequest < Struct.new(
       :algorithm_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1815,6 +1869,7 @@ module Aws::Personalize
     #
     class DescribeAlgorithmResponse < Struct.new(
       :algorithm)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1833,6 +1888,7 @@ module Aws::Personalize
     #
     class DescribeBatchInferenceJobRequest < Struct.new(
       :batch_inference_job_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1844,6 +1900,7 @@ module Aws::Personalize
     #
     class DescribeBatchInferenceJobResponse < Struct.new(
       :batch_inference_job)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1862,6 +1919,7 @@ module Aws::Personalize
     #
     class DescribeCampaignRequest < Struct.new(
       :campaign_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1873,6 +1931,7 @@ module Aws::Personalize
     #
     class DescribeCampaignResponse < Struct.new(
       :campaign)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1891,6 +1950,7 @@ module Aws::Personalize
     #
     class DescribeDatasetGroupRequest < Struct.new(
       :dataset_group_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1902,6 +1962,7 @@ module Aws::Personalize
     #
     class DescribeDatasetGroupResponse < Struct.new(
       :dataset_group)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1921,6 +1982,7 @@ module Aws::Personalize
     #
     class DescribeDatasetImportJobRequest < Struct.new(
       :dataset_import_job_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1942,6 +2004,7 @@ module Aws::Personalize
     #
     class DescribeDatasetImportJobResponse < Struct.new(
       :dataset_import_job)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1960,6 +2023,7 @@ module Aws::Personalize
     #
     class DescribeDatasetRequest < Struct.new(
       :dataset_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1971,6 +2035,7 @@ module Aws::Personalize
     #
     class DescribeDatasetResponse < Struct.new(
       :dataset)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1989,6 +2054,7 @@ module Aws::Personalize
     #
     class DescribeEventTrackerRequest < Struct.new(
       :event_tracker_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2000,6 +2066,7 @@ module Aws::Personalize
     #
     class DescribeEventTrackerResponse < Struct.new(
       :event_tracker)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2019,6 +2086,7 @@ module Aws::Personalize
     #
     class DescribeFeatureTransformationRequest < Struct.new(
       :feature_transformation_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2030,6 +2098,7 @@ module Aws::Personalize
     #
     class DescribeFeatureTransformationResponse < Struct.new(
       :feature_transformation)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2048,6 +2117,7 @@ module Aws::Personalize
     #
     class DescribeFilterRequest < Struct.new(
       :filter_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2059,6 +2129,7 @@ module Aws::Personalize
     #
     class DescribeFilterResponse < Struct.new(
       :filter)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2077,6 +2148,7 @@ module Aws::Personalize
     #
     class DescribeRecipeRequest < Struct.new(
       :recipe_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2088,6 +2160,7 @@ module Aws::Personalize
     #
     class DescribeRecipeResponse < Struct.new(
       :recipe)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2106,6 +2179,7 @@ module Aws::Personalize
     #
     class DescribeSchemaRequest < Struct.new(
       :schema_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2117,6 +2191,7 @@ module Aws::Personalize
     #
     class DescribeSchemaResponse < Struct.new(
       :schema)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2135,6 +2210,7 @@ module Aws::Personalize
     #
     class DescribeSolutionRequest < Struct.new(
       :solution_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2146,6 +2222,7 @@ module Aws::Personalize
     #
     class DescribeSolutionResponse < Struct.new(
       :solution)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2164,6 +2241,7 @@ module Aws::Personalize
     #
     class DescribeSolutionVersionRequest < Struct.new(
       :solution_version_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2175,6 +2253,7 @@ module Aws::Personalize
     #
     class DescribeSolutionVersionResponse < Struct.new(
       :solution_version)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2238,6 +2317,7 @@ module Aws::Personalize
       :status,
       :creation_date_time,
       :last_updated_date_time)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2280,6 +2360,7 @@ module Aws::Personalize
       :status,
       :creation_date_time,
       :last_updated_date_time)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2329,6 +2410,7 @@ module Aws::Personalize
       :creation_date_time,
       :last_updated_date_time,
       :status)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2385,6 +2467,7 @@ module Aws::Personalize
       :failure_reason,
       :filter_expression,
       :status)
+      SENSITIVE = [:filter_expression]
       include Aws::Structure
     end
 
@@ -2428,6 +2511,7 @@ module Aws::Personalize
       :dataset_group_arn,
       :failure_reason,
       :status)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2447,6 +2531,7 @@ module Aws::Personalize
     #
     class GetSolutionMetricsRequest < Struct.new(
       :solution_version_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2463,6 +2548,7 @@ module Aws::Personalize
     class GetSolutionMetricsResponse < Struct.new(
       :solution_version_arn,
       :metrics)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2525,6 +2611,7 @@ module Aws::Personalize
       :hpo_objective,
       :hpo_resource_config,
       :algorithm_hyper_parameter_ranges)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2558,6 +2645,7 @@ module Aws::Personalize
       :type,
       :metric_name,
       :metric_regex)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2588,6 +2676,7 @@ module Aws::Personalize
     class HPOResourceConfig < Struct.new(
       :max_number_of_training_jobs,
       :max_parallel_training_jobs)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2638,6 +2727,7 @@ module Aws::Personalize
       :integer_hyper_parameter_ranges,
       :continuous_hyper_parameter_ranges,
       :categorical_hyper_parameter_ranges)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2670,6 +2760,7 @@ module Aws::Personalize
       :name,
       :min_value,
       :max_value)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2682,6 +2773,7 @@ module Aws::Personalize
     #
     class InvalidInputException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2694,6 +2786,7 @@ module Aws::Personalize
     #
     class InvalidNextTokenException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2706,6 +2799,7 @@ module Aws::Personalize
     #
     class LimitExceededException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2738,6 +2832,7 @@ module Aws::Personalize
       :solution_version_arn,
       :next_token,
       :max_results)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2755,6 +2850,7 @@ module Aws::Personalize
     class ListBatchInferenceJobsResponse < Struct.new(
       :batch_inference_jobs,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2788,6 +2884,7 @@ module Aws::Personalize
       :solution_arn,
       :next_token,
       :max_results)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2804,6 +2901,7 @@ module Aws::Personalize
     class ListCampaignsResponse < Struct.new(
       :campaigns,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2829,6 +2927,7 @@ module Aws::Personalize
     class ListDatasetGroupsRequest < Struct.new(
       :next_token,
       :max_results)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2845,6 +2944,7 @@ module Aws::Personalize
     class ListDatasetGroupsResponse < Struct.new(
       :dataset_groups,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2877,6 +2977,7 @@ module Aws::Personalize
       :dataset_arn,
       :next_token,
       :max_results)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2894,6 +2995,7 @@ module Aws::Personalize
     class ListDatasetImportJobsResponse < Struct.new(
       :dataset_import_jobs,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2926,6 +3028,7 @@ module Aws::Personalize
       :dataset_group_arn,
       :next_token,
       :max_results)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2943,6 +3046,7 @@ module Aws::Personalize
     class ListDatasetsResponse < Struct.new(
       :datasets,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2974,6 +3078,7 @@ module Aws::Personalize
       :dataset_group_arn,
       :next_token,
       :max_results)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2990,6 +3095,7 @@ module Aws::Personalize
     class ListEventTrackersResponse < Struct.new(
       :event_trackers,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3021,6 +3127,7 @@ module Aws::Personalize
       :dataset_group_arn,
       :next_token,
       :max_results)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3037,6 +3144,7 @@ module Aws::Personalize
     class ListFiltersResponse < Struct.new(
       :filters,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3068,6 +3176,7 @@ module Aws::Personalize
       :recipe_provider,
       :next_token,
       :max_results)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3084,6 +3193,7 @@ module Aws::Personalize
     class ListRecipesResponse < Struct.new(
       :recipes,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3109,6 +3219,7 @@ module Aws::Personalize
     class ListSchemasRequest < Struct.new(
       :next_token,
       :max_results)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3125,6 +3236,7 @@ module Aws::Personalize
     class ListSchemasResponse < Struct.new(
       :schemas,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3156,6 +3268,7 @@ module Aws::Personalize
       :solution_arn,
       :next_token,
       :max_results)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3173,6 +3286,7 @@ module Aws::Personalize
     class ListSolutionVersionsResponse < Struct.new(
       :solution_versions,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3204,6 +3318,7 @@ module Aws::Personalize
       :dataset_group_arn,
       :next_token,
       :max_results)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3220,6 +3335,7 @@ module Aws::Personalize
     class ListSolutionsResponse < Struct.new(
       :solutions,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3282,6 +3398,7 @@ module Aws::Personalize
       :creation_date_time,
       :recipe_type,
       :last_updated_date_time)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3316,6 +3433,7 @@ module Aws::Personalize
       :status,
       :creation_date_time,
       :last_updated_date_time)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3328,6 +3446,7 @@ module Aws::Personalize
     #
     class ResourceAlreadyExistsException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3340,6 +3459,7 @@ module Aws::Personalize
     #
     class ResourceInUseException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3352,6 +3472,7 @@ module Aws::Personalize
     #
     class ResourceNotFoundException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3380,6 +3501,7 @@ module Aws::Personalize
     class S3DataConfig < Struct.new(
       :path,
       :kms_key_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3468,6 +3590,7 @@ module Aws::Personalize
       :creation_date_time,
       :last_updated_date_time,
       :latest_solution_version)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3553,6 +3676,7 @@ module Aws::Personalize
       :algorithm_hyper_parameters,
       :feature_transformation_parameters,
       :auto_ml_config)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3594,6 +3718,7 @@ module Aws::Personalize
       :status,
       :creation_date_time,
       :last_updated_date_time)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3707,6 +3832,7 @@ module Aws::Personalize
       :failure_reason,
       :creation_date_time,
       :last_updated_date_time)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3750,6 +3876,7 @@ module Aws::Personalize
       :creation_date_time,
       :last_updated_date_time,
       :failure_reason)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3764,6 +3891,7 @@ module Aws::Personalize
     #
     class TunedHPOParams < Struct.new(
       :algorithm_hyper_parameters)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3795,6 +3923,7 @@ module Aws::Personalize
       :campaign_arn,
       :solution_version_arn,
       :min_provisioned_tps)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3806,6 +3935,7 @@ module Aws::Personalize
     #
     class UpdateCampaignResponse < Struct.new(
       :campaign_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 

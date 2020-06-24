@@ -44,6 +44,7 @@ module Aws::IoT1ClickProjects
       :placement_name,
       :device_id,
       :device_template_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -77,6 +78,7 @@ module Aws::IoT1ClickProjects
       :placement_name,
       :project_name,
       :attributes)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -137,6 +139,7 @@ module Aws::IoT1ClickProjects
       :description,
       :placement_template,
       :tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -161,6 +164,7 @@ module Aws::IoT1ClickProjects
     class DeletePlacementRequest < Struct.new(
       :placement_name,
       :project_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -179,6 +183,7 @@ module Aws::IoT1ClickProjects
     #
     class DeleteProjectRequest < Struct.new(
       :project_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -203,6 +208,7 @@ module Aws::IoT1ClickProjects
     class DescribePlacementRequest < Struct.new(
       :placement_name,
       :project_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -212,6 +218,7 @@ module Aws::IoT1ClickProjects
     #
     class DescribePlacementResponse < Struct.new(
       :placement)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -228,6 +235,7 @@ module Aws::IoT1ClickProjects
     #
     class DescribeProjectRequest < Struct.new(
       :project_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -237,6 +245,7 @@ module Aws::IoT1ClickProjects
     #
     class DescribeProjectResponse < Struct.new(
       :project)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -265,6 +274,7 @@ module Aws::IoT1ClickProjects
     class DeviceTemplate < Struct.new(
       :device_type,
       :callback_overrides)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -293,6 +303,7 @@ module Aws::IoT1ClickProjects
       :project_name,
       :placement_name,
       :device_template_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -317,6 +328,7 @@ module Aws::IoT1ClickProjects
     class GetDevicesInPlacementRequest < Struct.new(
       :project_name,
       :placement_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -327,6 +339,7 @@ module Aws::IoT1ClickProjects
     #
     class GetDevicesInPlacementResponse < Struct.new(
       :devices)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -339,6 +352,7 @@ module Aws::IoT1ClickProjects
     class InternalFailureException < Struct.new(
       :code,
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -351,6 +365,7 @@ module Aws::IoT1ClickProjects
     class InvalidRequestException < Struct.new(
       :code,
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -380,6 +395,7 @@ module Aws::IoT1ClickProjects
       :project_name,
       :next_token,
       :max_results)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -395,6 +411,7 @@ module Aws::IoT1ClickProjects
     class ListPlacementsResponse < Struct.new(
       :placements,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -418,6 +435,7 @@ module Aws::IoT1ClickProjects
     class ListProjectsRequest < Struct.new(
       :next_token,
       :max_results)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -433,6 +451,7 @@ module Aws::IoT1ClickProjects
     class ListProjectsResponse < Struct.new(
       :projects,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -449,6 +468,7 @@ module Aws::IoT1ClickProjects
     #
     class ListTagsForResourceRequest < Struct.new(
       :resource_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -459,6 +479,7 @@ module Aws::IoT1ClickProjects
     #
     class ListTagsForResourceResponse < Struct.new(
       :tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -493,6 +514,7 @@ module Aws::IoT1ClickProjects
       :attributes,
       :created_date,
       :updated_date)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -522,6 +544,7 @@ module Aws::IoT1ClickProjects
       :placement_name,
       :created_date,
       :updated_date)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -557,6 +580,7 @@ module Aws::IoT1ClickProjects
     class PlacementTemplate < Struct.new(
       :default_attributes,
       :device_templates)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -602,6 +626,7 @@ module Aws::IoT1ClickProjects
       :updated_date,
       :placement_template,
       :tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -637,6 +662,7 @@ module Aws::IoT1ClickProjects
       :created_date,
       :updated_date,
       :tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -649,6 +675,7 @@ module Aws::IoT1ClickProjects
     class ResourceConflictException < Struct.new(
       :code,
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -661,6 +688,7 @@ module Aws::IoT1ClickProjects
     class ResourceNotFoundException < Struct.new(
       :code,
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -691,6 +719,7 @@ module Aws::IoT1ClickProjects
     class TagResourceRequest < Struct.new(
       :resource_arn,
       :tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -705,6 +734,7 @@ module Aws::IoT1ClickProjects
     class TooManyRequestsException < Struct.new(
       :code,
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -727,6 +757,7 @@ module Aws::IoT1ClickProjects
     class UntagResourceRequest < Struct.new(
       :resource_arn,
       :tag_keys)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -760,6 +791,7 @@ module Aws::IoT1ClickProjects
       :placement_name,
       :project_name,
       :attributes)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -806,6 +838,7 @@ module Aws::IoT1ClickProjects
       :project_name,
       :description,
       :placement_template)
+      SENSITIVE = []
       include Aws::Structure
     end
 

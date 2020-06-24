@@ -30,6 +30,7 @@ module Aws::AlexaForBusiness
       :address_book_arn,
       :name,
       :description)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -53,6 +54,7 @@ module Aws::AlexaForBusiness
       :address_book_arn,
       :name,
       :description)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -65,6 +67,7 @@ module Aws::AlexaForBusiness
     #
     class AlreadyExistsException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -83,6 +86,7 @@ module Aws::AlexaForBusiness
     #
     class ApproveSkillRequest < Struct.new(
       :skill_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -111,6 +115,7 @@ module Aws::AlexaForBusiness
     class AssociateContactWithAddressBookRequest < Struct.new(
       :contact_arn,
       :address_book_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -139,6 +144,7 @@ module Aws::AlexaForBusiness
     class AssociateDeviceWithNetworkProfileRequest < Struct.new(
       :device_arn,
       :network_profile_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -167,6 +173,7 @@ module Aws::AlexaForBusiness
     class AssociateDeviceWithRoomRequest < Struct.new(
       :device_arn,
       :room_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -196,6 +203,7 @@ module Aws::AlexaForBusiness
     class AssociateSkillGroupWithRoomRequest < Struct.new(
       :skill_group_arn,
       :room_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -224,6 +232,7 @@ module Aws::AlexaForBusiness
     class AssociateSkillWithSkillGroupRequest < Struct.new(
       :skill_group_arn,
       :skill_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -246,6 +255,7 @@ module Aws::AlexaForBusiness
     #
     class AssociateSkillWithUsersRequest < Struct.new(
       :skill_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -297,6 +307,7 @@ module Aws::AlexaForBusiness
     class Audio < Struct.new(
       :locale,
       :location)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -331,6 +342,7 @@ module Aws::AlexaForBusiness
       :s3_location,
       :delivery_time,
       :download_url)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -351,6 +363,7 @@ module Aws::AlexaForBusiness
     #
     class BusinessReportContentRange < Struct.new(
       :interval)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -371,6 +384,7 @@ module Aws::AlexaForBusiness
     #
     class BusinessReportRecurrence < Struct.new(
       :start_date)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -389,6 +403,7 @@ module Aws::AlexaForBusiness
     class BusinessReportS3Location < Struct.new(
       :path,
       :bucket_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -439,6 +454,7 @@ module Aws::AlexaForBusiness
       :content_range,
       :recurrence,
       :last_business_report)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -459,6 +475,7 @@ module Aws::AlexaForBusiness
     class Category < Struct.new(
       :category_id,
       :category_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -471,6 +488,7 @@ module Aws::AlexaForBusiness
     #
     class ConcurrentModificationException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -492,6 +510,7 @@ module Aws::AlexaForBusiness
     #
     class ConferencePreference < Struct.new(
       :default_conference_provider_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -533,6 +552,7 @@ module Aws::AlexaForBusiness
       :ip_dial_in,
       :pstn_dial_in,
       :meeting_setting)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -581,6 +601,7 @@ module Aws::AlexaForBusiness
       :phone_number,
       :phone_numbers,
       :sip_addresses)
+      SENSITIVE = [:phone_number]
       include Aws::Structure
     end
 
@@ -629,6 +650,7 @@ module Aws::AlexaForBusiness
       :phone_number,
       :phone_numbers,
       :sip_addresses)
+      SENSITIVE = [:phone_number]
       include Aws::Structure
     end
 
@@ -677,6 +699,7 @@ module Aws::AlexaForBusiness
       :text_list,
       :ssml_list,
       :audio_list)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -711,6 +734,7 @@ module Aws::AlexaForBusiness
       :name,
       :description,
       :client_request_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -722,6 +746,7 @@ module Aws::AlexaForBusiness
     #
     class CreateAddressBookResponse < Struct.new(
       :address_book_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -798,6 +823,7 @@ module Aws::AlexaForBusiness
       :recurrence,
       :client_request_token,
       :tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -809,6 +835,7 @@ module Aws::AlexaForBusiness
     #
     class CreateBusinessReportScheduleResponse < Struct.new(
       :schedule_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -870,6 +897,7 @@ module Aws::AlexaForBusiness
       :pstn_dial_in,
       :meeting_setting,
       :client_request_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -881,6 +909,7 @@ module Aws::AlexaForBusiness
     #
     class CreateConferenceProviderResponse < Struct.new(
       :conference_provider_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -954,6 +983,7 @@ module Aws::AlexaForBusiness
       :phone_numbers,
       :sip_addresses,
       :client_request_token)
+      SENSITIVE = [:phone_number]
       include Aws::Structure
     end
 
@@ -965,6 +995,7 @@ module Aws::AlexaForBusiness
     #
     class CreateContactResponse < Struct.new(
       :contact_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1000,6 +1031,7 @@ module Aws::AlexaForBusiness
       :reminder_at_minutes,
       :reminder_type,
       :enabled)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1034,6 +1066,7 @@ module Aws::AlexaForBusiness
       :name,
       :description,
       :client_request_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1045,6 +1078,7 @@ module Aws::AlexaForBusiness
     #
     class CreateGatewayGroupResponse < Struct.new(
       :gateway_group_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1076,6 +1110,7 @@ module Aws::AlexaForBusiness
     class CreateInstantBooking < Struct.new(
       :duration_in_minutes,
       :enabled)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1130,6 +1165,7 @@ module Aws::AlexaForBusiness
       :end_of_meeting_reminder,
       :instant_booking,
       :require_check_in)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1214,6 +1250,7 @@ module Aws::AlexaForBusiness
       :certificate_authority_arn,
       :trust_anchors,
       :client_request_token)
+      SENSITIVE = [:current_password, :next_password]
       include Aws::Structure
     end
 
@@ -1225,6 +1262,7 @@ module Aws::AlexaForBusiness
     #
     class CreateNetworkProfileResponse < Struct.new(
       :network_profile_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1340,6 +1378,7 @@ module Aws::AlexaForBusiness
       :pstn_enabled,
       :meeting_room_configuration,
       :tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1351,6 +1390,7 @@ module Aws::AlexaForBusiness
     #
     class CreateProfileResponse < Struct.new(
       :profile_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1381,6 +1421,7 @@ module Aws::AlexaForBusiness
     class CreateRequireCheckIn < Struct.new(
       :release_after_minutes,
       :enabled)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1438,6 +1479,7 @@ module Aws::AlexaForBusiness
       :provider_calendar_id,
       :client_request_token,
       :tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1449,6 +1491,7 @@ module Aws::AlexaForBusiness
     #
     class CreateRoomResponse < Struct.new(
       :room_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1494,6 +1537,7 @@ module Aws::AlexaForBusiness
       :description,
       :client_request_token,
       :tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1505,6 +1549,7 @@ module Aws::AlexaForBusiness
     #
     class CreateSkillGroupResponse < Struct.new(
       :skill_group_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1562,6 +1607,7 @@ module Aws::AlexaForBusiness
       :email,
       :client_request_token,
       :tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1573,6 +1619,7 @@ module Aws::AlexaForBusiness
     #
     class CreateUserResponse < Struct.new(
       :user_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1591,6 +1638,7 @@ module Aws::AlexaForBusiness
     #
     class DeleteAddressBookRequest < Struct.new(
       :address_book_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1613,6 +1661,7 @@ module Aws::AlexaForBusiness
     #
     class DeleteBusinessReportScheduleRequest < Struct.new(
       :schedule_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1635,6 +1684,7 @@ module Aws::AlexaForBusiness
     #
     class DeleteConferenceProviderRequest < Struct.new(
       :conference_provider_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1657,6 +1707,7 @@ module Aws::AlexaForBusiness
     #
     class DeleteContactRequest < Struct.new(
       :contact_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1679,6 +1730,7 @@ module Aws::AlexaForBusiness
     #
     class DeleteDeviceRequest < Struct.new(
       :device_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1707,6 +1759,7 @@ module Aws::AlexaForBusiness
     class DeleteDeviceUsageDataRequest < Struct.new(
       :device_arn,
       :device_usage_type)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1729,6 +1782,7 @@ module Aws::AlexaForBusiness
     #
     class DeleteGatewayGroupRequest < Struct.new(
       :gateway_group_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1751,6 +1805,7 @@ module Aws::AlexaForBusiness
     #
     class DeleteNetworkProfileRequest < Struct.new(
       :network_profile_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1773,6 +1828,7 @@ module Aws::AlexaForBusiness
     #
     class DeleteProfileRequest < Struct.new(
       :profile_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1795,6 +1851,7 @@ module Aws::AlexaForBusiness
     #
     class DeleteRoomRequest < Struct.new(
       :room_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1831,6 +1888,7 @@ module Aws::AlexaForBusiness
       :room_arn,
       :skill_id,
       :parameter_key)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1859,6 +1917,7 @@ module Aws::AlexaForBusiness
     class DeleteSkillAuthorizationRequest < Struct.new(
       :skill_id,
       :room_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1881,6 +1940,7 @@ module Aws::AlexaForBusiness
     #
     class DeleteSkillGroupRequest < Struct.new(
       :skill_group_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1909,6 +1969,7 @@ module Aws::AlexaForBusiness
     class DeleteUserRequest < Struct.new(
       :user_arn,
       :enrollment_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1941,6 +2002,7 @@ module Aws::AlexaForBusiness
       :privacy_policy,
       :email,
       :url)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2000,6 +2062,7 @@ module Aws::AlexaForBusiness
       :device_status,
       :device_status_info,
       :network_profile_info)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2073,6 +2136,7 @@ module Aws::AlexaForBusiness
       :room_name,
       :device_status_info,
       :created_time)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2096,6 +2160,7 @@ module Aws::AlexaForBusiness
       :type,
       :value,
       :timestamp)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2119,6 +2184,7 @@ module Aws::AlexaForBusiness
       :network_profile_arn,
       :certificate_arn,
       :certificate_expiration_time)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2132,6 +2198,7 @@ module Aws::AlexaForBusiness
     #
     class DeviceNotRegisteredException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2150,6 +2217,7 @@ module Aws::AlexaForBusiness
     class DeviceStatusDetail < Struct.new(
       :feature,
       :code)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2174,6 +2242,7 @@ module Aws::AlexaForBusiness
       :device_status_details,
       :connection_status,
       :connection_status_updated_time)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2198,6 +2267,7 @@ module Aws::AlexaForBusiness
     class DisassociateContactFromAddressBookRequest < Struct.new(
       :contact_arn,
       :address_book_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2220,6 +2290,7 @@ module Aws::AlexaForBusiness
     #
     class DisassociateDeviceFromRoomRequest < Struct.new(
       :device_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2248,6 +2319,7 @@ module Aws::AlexaForBusiness
     class DisassociateSkillFromSkillGroupRequest < Struct.new(
       :skill_group_arn,
       :skill_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2271,6 +2343,7 @@ module Aws::AlexaForBusiness
     #
     class DisassociateSkillFromUsersRequest < Struct.new(
       :skill_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2300,6 +2373,7 @@ module Aws::AlexaForBusiness
     class DisassociateSkillGroupFromRoomRequest < Struct.new(
       :skill_group_arn,
       :room_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2330,6 +2404,7 @@ module Aws::AlexaForBusiness
       :reminder_at_minutes,
       :reminder_type,
       :enabled)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2358,6 +2433,7 @@ module Aws::AlexaForBusiness
     class Filter < Struct.new(
       :key,
       :values)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2376,6 +2452,7 @@ module Aws::AlexaForBusiness
     #
     class ForgetSmartHomeAppliancesRequest < Struct.new(
       :room_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2414,6 +2491,7 @@ module Aws::AlexaForBusiness
       :description,
       :gateway_group_arn,
       :software_version)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2437,6 +2515,7 @@ module Aws::AlexaForBusiness
       :arn,
       :name,
       :description)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2460,6 +2539,7 @@ module Aws::AlexaForBusiness
       :arn,
       :name,
       :description)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2494,6 +2574,7 @@ module Aws::AlexaForBusiness
       :description,
       :gateway_group_arn,
       :software_version)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2512,6 +2593,7 @@ module Aws::AlexaForBusiness
     #
     class GetAddressBookRequest < Struct.new(
       :address_book_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2523,6 +2605,7 @@ module Aws::AlexaForBusiness
     #
     class GetAddressBookResponse < Struct.new(
       :address_book)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2540,6 +2623,7 @@ module Aws::AlexaForBusiness
     #
     class GetConferencePreferenceResponse < Struct.new(
       :preference)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2558,6 +2642,7 @@ module Aws::AlexaForBusiness
     #
     class GetConferenceProviderRequest < Struct.new(
       :conference_provider_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2569,6 +2654,7 @@ module Aws::AlexaForBusiness
     #
     class GetConferenceProviderResponse < Struct.new(
       :conference_provider)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2587,6 +2673,7 @@ module Aws::AlexaForBusiness
     #
     class GetContactRequest < Struct.new(
       :contact_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2598,6 +2685,7 @@ module Aws::AlexaForBusiness
     #
     class GetContactResponse < Struct.new(
       :contact)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2616,6 +2704,7 @@ module Aws::AlexaForBusiness
     #
     class GetDeviceRequest < Struct.new(
       :device_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2627,6 +2716,7 @@ module Aws::AlexaForBusiness
     #
     class GetDeviceResponse < Struct.new(
       :device)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2645,6 +2735,7 @@ module Aws::AlexaForBusiness
     #
     class GetGatewayGroupRequest < Struct.new(
       :gateway_group_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2656,6 +2747,7 @@ module Aws::AlexaForBusiness
     #
     class GetGatewayGroupResponse < Struct.new(
       :gateway_group)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2674,6 +2766,7 @@ module Aws::AlexaForBusiness
     #
     class GetGatewayRequest < Struct.new(
       :gateway_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2685,6 +2778,7 @@ module Aws::AlexaForBusiness
     #
     class GetGatewayResponse < Struct.new(
       :gateway)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2715,6 +2809,7 @@ module Aws::AlexaForBusiness
       :organization_name,
       :contact_email,
       :private_skill_ids)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2733,6 +2828,7 @@ module Aws::AlexaForBusiness
     #
     class GetNetworkProfileRequest < Struct.new(
       :network_profile_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2744,6 +2840,7 @@ module Aws::AlexaForBusiness
     #
     class GetNetworkProfileResponse < Struct.new(
       :network_profile)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2762,6 +2859,7 @@ module Aws::AlexaForBusiness
     #
     class GetProfileRequest < Struct.new(
       :profile_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2773,6 +2871,7 @@ module Aws::AlexaForBusiness
     #
     class GetProfileResponse < Struct.new(
       :profile)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2791,6 +2890,7 @@ module Aws::AlexaForBusiness
     #
     class GetRoomRequest < Struct.new(
       :room_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2802,6 +2902,7 @@ module Aws::AlexaForBusiness
     #
     class GetRoomResponse < Struct.new(
       :room)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2834,6 +2935,7 @@ module Aws::AlexaForBusiness
       :room_arn,
       :skill_id,
       :parameter_key)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2845,6 +2947,7 @@ module Aws::AlexaForBusiness
     #
     class GetRoomSkillParameterResponse < Struct.new(
       :room_skill_parameter)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2863,6 +2966,7 @@ module Aws::AlexaForBusiness
     #
     class GetSkillGroupRequest < Struct.new(
       :skill_group_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2874,6 +2978,7 @@ module Aws::AlexaForBusiness
     #
     class GetSkillGroupResponse < Struct.new(
       :skill_group)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2900,6 +3005,7 @@ module Aws::AlexaForBusiness
     class IPDialIn < Struct.new(
       :endpoint,
       :comms_protocol)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2923,6 +3029,7 @@ module Aws::AlexaForBusiness
     class InstantBooking < Struct.new(
       :duration_in_minutes,
       :enabled)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2935,6 +3042,7 @@ module Aws::AlexaForBusiness
     #
     class InvalidCertificateAuthorityException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2947,6 +3055,7 @@ module Aws::AlexaForBusiness
     #
     class InvalidDeviceException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2959,6 +3068,7 @@ module Aws::AlexaForBusiness
     #
     class InvalidSecretsManagerResourceException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2971,6 +3081,7 @@ module Aws::AlexaForBusiness
     #
     class InvalidServiceLinkedRoleStateException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2984,6 +3095,7 @@ module Aws::AlexaForBusiness
     #
     class InvalidUserStatusException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2997,6 +3109,7 @@ module Aws::AlexaForBusiness
     #
     class LimitExceededException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3022,6 +3135,7 @@ module Aws::AlexaForBusiness
     class ListBusinessReportSchedulesRequest < Struct.new(
       :next_token,
       :max_results)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3039,6 +3153,7 @@ module Aws::AlexaForBusiness
     class ListBusinessReportSchedulesResponse < Struct.new(
       :business_report_schedules,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3064,6 +3179,7 @@ module Aws::AlexaForBusiness
     class ListConferenceProvidersRequest < Struct.new(
       :next_token,
       :max_results)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3080,6 +3196,7 @@ module Aws::AlexaForBusiness
     class ListConferenceProvidersResponse < Struct.new(
       :conference_providers,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3126,6 +3243,7 @@ module Aws::AlexaForBusiness
       :event_type,
       :next_token,
       :max_results)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3142,6 +3260,7 @@ module Aws::AlexaForBusiness
     class ListDeviceEventsResponse < Struct.new(
       :device_events,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3168,6 +3287,7 @@ module Aws::AlexaForBusiness
     class ListGatewayGroupsRequest < Struct.new(
       :next_token,
       :max_results)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3185,6 +3305,7 @@ module Aws::AlexaForBusiness
     class ListGatewayGroupsResponse < Struct.new(
       :gateway_groups,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3217,6 +3338,7 @@ module Aws::AlexaForBusiness
       :gateway_group_arn,
       :next_token,
       :max_results)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3234,6 +3356,7 @@ module Aws::AlexaForBusiness
     class ListGatewaysResponse < Struct.new(
       :gateways,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3282,6 +3405,7 @@ module Aws::AlexaForBusiness
       :skill_type,
       :next_token,
       :max_results)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3298,6 +3422,7 @@ module Aws::AlexaForBusiness
     class ListSkillsResponse < Struct.new(
       :skill_summaries,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3322,6 +3447,7 @@ module Aws::AlexaForBusiness
     class ListSkillsStoreCategoriesRequest < Struct.new(
       :next_token,
       :max_results)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3338,6 +3464,7 @@ module Aws::AlexaForBusiness
     class ListSkillsStoreCategoriesResponse < Struct.new(
       :category_list,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3369,6 +3496,7 @@ module Aws::AlexaForBusiness
       :category_id,
       :next_token,
       :max_results)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3385,6 +3513,7 @@ module Aws::AlexaForBusiness
     class ListSkillsStoreSkillsByCategoryResponse < Struct.new(
       :skills_store_skills,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3416,6 +3545,7 @@ module Aws::AlexaForBusiness
       :room_arn,
       :max_results,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3432,6 +3562,7 @@ module Aws::AlexaForBusiness
     class ListSmartHomeAppliancesResponse < Struct.new(
       :smart_home_appliances,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3468,6 +3599,7 @@ module Aws::AlexaForBusiness
       :arn,
       :next_token,
       :max_results)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3484,6 +3616,7 @@ module Aws::AlexaForBusiness
     class ListTagsResponse < Struct.new(
       :tags,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3518,6 +3651,7 @@ module Aws::AlexaForBusiness
       :end_of_meeting_reminder,
       :instant_booking,
       :require_check_in)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3546,6 +3680,7 @@ module Aws::AlexaForBusiness
     #
     class MeetingSetting < Struct.new(
       :require_pin)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3558,6 +3693,7 @@ module Aws::AlexaForBusiness
     #
     class NameInUseException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3624,6 +3760,7 @@ module Aws::AlexaForBusiness
       :next_password,
       :certificate_authority_arn,
       :trust_anchors)
+      SENSITIVE = [:current_password, :next_password]
       include Aws::Structure
     end
 
@@ -3671,6 +3808,7 @@ module Aws::AlexaForBusiness
       :security_type,
       :eap_method,
       :certificate_authority_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3683,6 +3821,7 @@ module Aws::AlexaForBusiness
     #
     class NotFoundException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3728,6 +3867,7 @@ module Aws::AlexaForBusiness
       :phone_number,
       :one_click_id_delay,
       :one_click_pin_delay)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3755,6 +3895,7 @@ module Aws::AlexaForBusiness
     class PhoneNumber < Struct.new(
       :number,
       :type)
+      SENSITIVE = [:number, :type]
       include Aws::Structure
     end
 
@@ -3834,6 +3975,7 @@ module Aws::AlexaForBusiness
       :pstn_enabled,
       :address_book_arn,
       :meeting_room_configuration)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3888,6 +4030,7 @@ module Aws::AlexaForBusiness
       :temperature_unit,
       :wake_word,
       :locale)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3908,6 +4051,7 @@ module Aws::AlexaForBusiness
     #
     class PutConferencePreferenceRequest < Struct.new(
       :conference_preference)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3945,6 +4089,7 @@ module Aws::AlexaForBusiness
       :organization_name,
       :contact_email,
       :private_skill_ids)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3984,6 +4129,7 @@ module Aws::AlexaForBusiness
       :room_arn,
       :skill_id,
       :room_skill_parameter)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4022,6 +4168,7 @@ module Aws::AlexaForBusiness
       :authorization_result,
       :skill_id,
       :room_arn)
+      SENSITIVE = [:authorization_result]
       include Aws::Structure
     end
 
@@ -4074,6 +4221,7 @@ module Aws::AlexaForBusiness
       :product_id,
       :device_serial_number,
       :amazon_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4085,6 +4233,7 @@ module Aws::AlexaForBusiness
     #
     class RegisterAVSDeviceResponse < Struct.new(
       :device_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4103,6 +4252,7 @@ module Aws::AlexaForBusiness
     #
     class RejectSkillRequest < Struct.new(
       :skill_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4128,6 +4278,7 @@ module Aws::AlexaForBusiness
     class RequireCheckIn < Struct.new(
       :release_after_minutes,
       :enabled)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4152,6 +4303,7 @@ module Aws::AlexaForBusiness
     class ResolveRoomRequest < Struct.new(
       :user_id,
       :skill_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4173,6 +4325,7 @@ module Aws::AlexaForBusiness
       :room_arn,
       :room_name,
       :room_skill_parameters)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4185,6 +4338,7 @@ module Aws::AlexaForBusiness
     #
     class ResourceAssociatedException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4203,6 +4357,7 @@ module Aws::AlexaForBusiness
     class ResourceInUseException < Struct.new(
       :message,
       :client_request_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4228,6 +4383,7 @@ module Aws::AlexaForBusiness
     class RevokeInvitationRequest < Struct.new(
       :user_arn,
       :enrollment_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4265,6 +4421,7 @@ module Aws::AlexaForBusiness
       :description,
       :provider_calendar_id,
       :profile_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4303,6 +4460,7 @@ module Aws::AlexaForBusiness
       :provider_calendar_id,
       :profile_arn,
       :profile_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4331,6 +4489,7 @@ module Aws::AlexaForBusiness
     class RoomSkillParameter < Struct.new(
       :parameter_key,
       :parameter_value)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4385,6 +4544,7 @@ module Aws::AlexaForBusiness
       :sort_criteria,
       :next_token,
       :max_results)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4407,6 +4567,7 @@ module Aws::AlexaForBusiness
       :address_books,
       :next_token,
       :total_count)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4462,6 +4623,7 @@ module Aws::AlexaForBusiness
       :sort_criteria,
       :next_token,
       :max_results)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4484,6 +4646,7 @@ module Aws::AlexaForBusiness
       :contacts,
       :next_token,
       :total_count)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4543,6 +4706,7 @@ module Aws::AlexaForBusiness
       :max_results,
       :filters,
       :sort_criteria)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4565,6 +4729,7 @@ module Aws::AlexaForBusiness
       :devices,
       :next_token,
       :total_count)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4620,6 +4785,7 @@ module Aws::AlexaForBusiness
       :max_results,
       :filters,
       :sort_criteria)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4645,6 +4811,7 @@ module Aws::AlexaForBusiness
       :network_profiles,
       :next_token,
       :total_count)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4699,6 +4866,7 @@ module Aws::AlexaForBusiness
       :max_results,
       :filters,
       :sort_criteria)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4721,6 +4889,7 @@ module Aws::AlexaForBusiness
       :profiles,
       :next_token,
       :total_count)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4775,6 +4944,7 @@ module Aws::AlexaForBusiness
       :max_results,
       :filters,
       :sort_criteria)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4797,6 +4967,7 @@ module Aws::AlexaForBusiness
       :rooms,
       :next_token,
       :total_count)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4851,6 +5022,7 @@ module Aws::AlexaForBusiness
       :max_results,
       :filters,
       :sort_criteria)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4872,6 +5044,7 @@ module Aws::AlexaForBusiness
       :skill_groups,
       :next_token,
       :total_count)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4928,6 +5101,7 @@ module Aws::AlexaForBusiness
       :max_results,
       :filters,
       :sort_criteria)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4950,6 +5124,7 @@ module Aws::AlexaForBusiness
       :users,
       :next_token,
       :total_count)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5019,6 +5194,7 @@ module Aws::AlexaForBusiness
       :content,
       :time_to_live_in_seconds,
       :client_request_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5030,6 +5206,7 @@ module Aws::AlexaForBusiness
     #
     class SendAnnouncementResponse < Struct.new(
       :announcement_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5048,6 +5225,7 @@ module Aws::AlexaForBusiness
     #
     class SendInvitationRequest < Struct.new(
       :user_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5079,6 +5257,7 @@ module Aws::AlexaForBusiness
     class SipAddress < Struct.new(
       :uri,
       :type)
+      SENSITIVE = [:uri, :type]
       include Aws::Structure
     end
 
@@ -5141,6 +5320,7 @@ module Aws::AlexaForBusiness
       :skill_types,
       :reviews,
       :developer_info)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5164,6 +5344,7 @@ module Aws::AlexaForBusiness
       :skill_group_arn,
       :skill_group_name,
       :description)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5187,6 +5368,7 @@ module Aws::AlexaForBusiness
       :skill_group_arn,
       :skill_group_name,
       :description)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5199,6 +5381,7 @@ module Aws::AlexaForBusiness
     #
     class SkillNotLinkedException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5233,6 +5416,7 @@ module Aws::AlexaForBusiness
       :supports_linking,
       :enablement_type,
       :skill_type)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5276,6 +5460,7 @@ module Aws::AlexaForBusiness
       :sample_utterances,
       :skill_details,
       :supports_linking)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5300,6 +5485,7 @@ module Aws::AlexaForBusiness
       :friendly_name,
       :description,
       :manufacturer_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5326,6 +5512,7 @@ module Aws::AlexaForBusiness
     class Sort < Struct.new(
       :key,
       :value)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5357,6 +5544,7 @@ module Aws::AlexaForBusiness
     class Ssml < Struct.new(
       :locale,
       :value)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5388,6 +5576,7 @@ module Aws::AlexaForBusiness
       :room_arn,
       :device_arn,
       :features)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5410,6 +5599,7 @@ module Aws::AlexaForBusiness
     #
     class StartSmartHomeApplianceDiscoveryRequest < Struct.new(
       :room_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5440,6 +5630,7 @@ module Aws::AlexaForBusiness
     class Tag < Struct.new(
       :key,
       :value)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5470,6 +5661,7 @@ module Aws::AlexaForBusiness
     class TagResourceRequest < Struct.new(
       :arn,
       :tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5500,6 +5692,7 @@ module Aws::AlexaForBusiness
     class Text < Struct.new(
       :locale,
       :value)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5513,6 +5706,7 @@ module Aws::AlexaForBusiness
     #
     class UnauthorizedException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5539,6 +5733,7 @@ module Aws::AlexaForBusiness
     class UntagResourceRequest < Struct.new(
       :arn,
       :tag_keys)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5573,6 +5768,7 @@ module Aws::AlexaForBusiness
       :address_book_arn,
       :name,
       :description)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5628,6 +5824,7 @@ module Aws::AlexaForBusiness
       :format,
       :schedule_name,
       :recurrence)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5684,6 +5881,7 @@ module Aws::AlexaForBusiness
       :ip_dial_in,
       :pstn_dial_in,
       :meeting_setting)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5755,6 +5953,7 @@ module Aws::AlexaForBusiness
       :phone_number,
       :phone_numbers,
       :sip_addresses)
+      SENSITIVE = [:phone_number]
       include Aws::Structure
     end
 
@@ -5783,6 +5982,7 @@ module Aws::AlexaForBusiness
     class UpdateDeviceRequest < Struct.new(
       :device_arn,
       :device_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5824,6 +6024,7 @@ module Aws::AlexaForBusiness
       :reminder_at_minutes,
       :reminder_type,
       :enabled)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5854,6 +6055,7 @@ module Aws::AlexaForBusiness
       :gateway_group_arn,
       :name,
       :description)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5895,6 +6097,7 @@ module Aws::AlexaForBusiness
       :name,
       :description,
       :software_version)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5929,6 +6132,7 @@ module Aws::AlexaForBusiness
     class UpdateInstantBooking < Struct.new(
       :duration_in_minutes,
       :enabled)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5983,6 +6187,7 @@ module Aws::AlexaForBusiness
       :end_of_meeting_reminder,
       :instant_booking,
       :require_check_in)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6043,6 +6248,7 @@ module Aws::AlexaForBusiness
       :next_password,
       :certificate_authority_arn,
       :trust_anchors)
+      SENSITIVE = [:current_password, :next_password]
       include Aws::Structure
     end
 
@@ -6154,6 +6360,7 @@ module Aws::AlexaForBusiness
       :max_volume_limit,
       :pstn_enabled,
       :meeting_room_configuration)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6188,6 +6395,7 @@ module Aws::AlexaForBusiness
     class UpdateRequireCheckIn < Struct.new(
       :release_after_minutes,
       :enabled)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6230,6 +6438,7 @@ module Aws::AlexaForBusiness
       :description,
       :provider_calendar_id,
       :profile_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6264,6 +6473,7 @@ module Aws::AlexaForBusiness
       :skill_group_arn,
       :skill_group_name,
       :description)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6306,6 +6516,7 @@ module Aws::AlexaForBusiness
       :email,
       :enrollment_status,
       :enrollment_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 

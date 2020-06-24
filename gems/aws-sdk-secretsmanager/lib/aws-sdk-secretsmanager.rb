@@ -47,6 +47,6 @@ require_relative 'aws-sdk-secretsmanager/customizations'
 # @service
 module Aws::SecretsManager
 
-  GEM_VERSION = '1.37.1'
+  GEM_VERSION = '1.38.0'
 
 end

@@ -19,6 +19,7 @@ module Aws::NetworkManager
     #
     class AccessDeniedException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -60,6 +61,7 @@ module Aws::NetworkManager
       :global_network_id,
       :device_id,
       :link_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -71,6 +73,7 @@ module Aws::NetworkManager
     #
     class AssociateCustomerGatewayResponse < Struct.new(
       :customer_gateway_association)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -101,6 +104,7 @@ module Aws::NetworkManager
       :global_network_id,
       :device_id,
       :link_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -112,6 +116,7 @@ module Aws::NetworkManager
     #
     class AssociateLinkResponse < Struct.new(
       :link_association)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -138,6 +143,7 @@ module Aws::NetworkManager
     class Bandwidth < Struct.new(
       :upload_speed,
       :download_speed)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -161,6 +167,7 @@ module Aws::NetworkManager
       :message,
       :resource_id,
       :resource_type)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -244,6 +251,7 @@ module Aws::NetworkManager
       :location,
       :site_id,
       :tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -255,6 +263,7 @@ module Aws::NetworkManager
     #
     class CreateDeviceResponse < Struct.new(
       :device)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -286,6 +295,7 @@ module Aws::NetworkManager
     class CreateGlobalNetworkRequest < Struct.new(
       :description,
       :tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -297,6 +307,7 @@ module Aws::NetworkManager
     #
     class CreateGlobalNetworkResponse < Struct.new(
       :global_network)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -369,6 +380,7 @@ module Aws::NetworkManager
       :provider,
       :site_id,
       :tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -380,6 +392,7 @@ module Aws::NetworkManager
     #
     class CreateLinkResponse < Struct.new(
       :link)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -435,6 +448,7 @@ module Aws::NetworkManager
       :description,
       :location,
       :tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -446,6 +460,7 @@ module Aws::NetworkManager
     #
     class CreateSiteResponse < Struct.new(
       :site)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -480,6 +495,7 @@ module Aws::NetworkManager
       :device_id,
       :link_id,
       :state)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -504,6 +520,7 @@ module Aws::NetworkManager
     class DeleteDeviceRequest < Struct.new(
       :global_network_id,
       :device_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -515,6 +532,7 @@ module Aws::NetworkManager
     #
     class DeleteDeviceResponse < Struct.new(
       :device)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -533,6 +551,7 @@ module Aws::NetworkManager
     #
     class DeleteGlobalNetworkRequest < Struct.new(
       :global_network_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -544,6 +563,7 @@ module Aws::NetworkManager
     #
     class DeleteGlobalNetworkResponse < Struct.new(
       :global_network)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -568,6 +588,7 @@ module Aws::NetworkManager
     class DeleteLinkRequest < Struct.new(
       :global_network_id,
       :link_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -579,6 +600,7 @@ module Aws::NetworkManager
     #
     class DeleteLinkResponse < Struct.new(
       :link)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -603,6 +625,7 @@ module Aws::NetworkManager
     class DeleteSiteRequest < Struct.new(
       :global_network_id,
       :site_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -614,6 +637,7 @@ module Aws::NetworkManager
     #
     class DeleteSiteResponse < Struct.new(
       :site)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -638,6 +662,7 @@ module Aws::NetworkManager
     class DeregisterTransitGatewayRequest < Struct.new(
       :global_network_id,
       :transit_gateway_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -649,6 +674,7 @@ module Aws::NetworkManager
     #
     class DeregisterTransitGatewayResponse < Struct.new(
       :transit_gateway_registration)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -679,6 +705,7 @@ module Aws::NetworkManager
       :global_network_ids,
       :max_results,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -695,6 +722,7 @@ module Aws::NetworkManager
     class DescribeGlobalNetworksResponse < Struct.new(
       :global_networks,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -768,6 +796,7 @@ module Aws::NetworkManager
       :created_at,
       :state,
       :tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -797,6 +826,7 @@ module Aws::NetworkManager
     class DisassociateCustomerGatewayRequest < Struct.new(
       :global_network_id,
       :customer_gateway_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -808,6 +838,7 @@ module Aws::NetworkManager
     #
     class DisassociateCustomerGatewayResponse < Struct.new(
       :customer_gateway_association)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -838,6 +869,7 @@ module Aws::NetworkManager
       :global_network_id,
       :device_id,
       :link_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -849,6 +881,7 @@ module Aws::NetworkManager
     #
     class DisassociateLinkResponse < Struct.new(
       :link_association)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -891,6 +924,7 @@ module Aws::NetworkManager
       :customer_gateway_arns,
       :max_results,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -907,6 +941,7 @@ module Aws::NetworkManager
     class GetCustomerGatewayAssociationsResponse < Struct.new(
       :customer_gateway_associations,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -949,6 +984,7 @@ module Aws::NetworkManager
       :site_id,
       :max_results,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -965,6 +1001,7 @@ module Aws::NetworkManager
     class GetDevicesResponse < Struct.new(
       :devices,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1007,6 +1044,7 @@ module Aws::NetworkManager
       :link_id,
       :max_results,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1023,6 +1061,7 @@ module Aws::NetworkManager
     class GetLinkAssociationsResponse < Struct.new(
       :link_associations,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1077,6 +1116,7 @@ module Aws::NetworkManager
       :provider,
       :max_results,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1093,6 +1133,7 @@ module Aws::NetworkManager
     class GetLinksResponse < Struct.new(
       :links,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1129,6 +1170,7 @@ module Aws::NetworkManager
       :site_ids,
       :max_results,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1145,6 +1187,7 @@ module Aws::NetworkManager
     class GetSitesResponse < Struct.new(
       :sites,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1182,6 +1225,7 @@ module Aws::NetworkManager
       :transit_gateway_arns,
       :max_results,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1198,6 +1242,7 @@ module Aws::NetworkManager
     class GetTransitGatewayRegistrationsResponse < Struct.new(
       :transit_gateway_registrations,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1236,6 +1281,7 @@ module Aws::NetworkManager
       :created_at,
       :state,
       :tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1253,6 +1299,7 @@ module Aws::NetworkManager
     class InternalServerException < Struct.new(
       :message,
       :retry_after_seconds)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1316,6 +1363,7 @@ module Aws::NetworkManager
       :created_at,
       :state,
       :tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1344,6 +1392,7 @@ module Aws::NetworkManager
       :device_id,
       :link_id,
       :link_association_state)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1362,6 +1411,7 @@ module Aws::NetworkManager
     #
     class ListTagsForResourceRequest < Struct.new(
       :resource_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1373,6 +1423,7 @@ module Aws::NetworkManager
     #
     class ListTagsForResourceResponse < Struct.new(
       :tag_list)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1405,6 +1456,7 @@ module Aws::NetworkManager
       :address,
       :latitude,
       :longitude)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1434,6 +1486,7 @@ module Aws::NetworkManager
     class RegisterTransitGatewayRequest < Struct.new(
       :global_network_id,
       :transit_gateway_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1445,6 +1498,7 @@ module Aws::NetworkManager
     #
     class RegisterTransitGatewayResponse < Struct.new(
       :transit_gateway_registration)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1467,6 +1521,7 @@ module Aws::NetworkManager
       :message,
       :resource_id,
       :resource_type)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1500,6 +1555,7 @@ module Aws::NetworkManager
       :resource_type,
       :limit_code,
       :service_code)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1548,6 +1604,7 @@ module Aws::NetworkManager
       :created_at,
       :state,
       :tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1578,6 +1635,7 @@ module Aws::NetworkManager
     class Tag < Struct.new(
       :key,
       :value)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1607,6 +1665,7 @@ module Aws::NetworkManager
     class TagResourceRequest < Struct.new(
       :resource_arn,
       :tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1628,6 +1687,7 @@ module Aws::NetworkManager
     class ThrottlingException < Struct.new(
       :message,
       :retry_after_seconds)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1651,6 +1711,7 @@ module Aws::NetworkManager
       :global_network_id,
       :transit_gateway_arn,
       :state)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1669,6 +1730,7 @@ module Aws::NetworkManager
     class TransitGatewayRegistrationStateReason < Struct.new(
       :code,
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1693,6 +1755,7 @@ module Aws::NetworkManager
     class UntagResourceRequest < Struct.new(
       :resource_arn,
       :tag_keys)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1775,6 +1838,7 @@ module Aws::NetworkManager
       :serial_number,
       :location,
       :site_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1786,6 +1850,7 @@ module Aws::NetworkManager
     #
     class UpdateDeviceResponse < Struct.new(
       :device)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1812,6 +1877,7 @@ module Aws::NetworkManager
     class UpdateGlobalNetworkRequest < Struct.new(
       :global_network_id,
       :description)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1823,6 +1889,7 @@ module Aws::NetworkManager
     #
     class UpdateGlobalNetworkResponse < Struct.new(
       :global_network)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1880,6 +1947,7 @@ module Aws::NetworkManager
       :type,
       :bandwidth,
       :provider)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1891,6 +1959,7 @@ module Aws::NetworkManager
     #
     class UpdateLinkResponse < Struct.new(
       :link)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1939,6 +2008,7 @@ module Aws::NetworkManager
       :site_id,
       :description,
       :location)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1950,6 +2020,7 @@ module Aws::NetworkManager
     #
     class UpdateSiteResponse < Struct.new(
       :site)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1972,6 +2043,7 @@ module Aws::NetworkManager
       :message,
       :reason,
       :fields)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1990,6 +2062,7 @@ module Aws::NetworkManager
     class ValidationExceptionField < Struct.new(
       :name,
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 

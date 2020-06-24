@@ -1110,6 +1110,7 @@ module Aws::EMR
     #   resp.managed_scaling_policy.compute_limits.minimum_capacity_units #=> Integer
     #   resp.managed_scaling_policy.compute_limits.maximum_capacity_units #=> Integer
     #   resp.managed_scaling_policy.compute_limits.maximum_on_demand_capacity_units #=> Integer
+    #   resp.managed_scaling_policy.compute_limits.maximum_core_capacity_units #=> Integer
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticmapreduce-2009-03-31/GetManagedScalingPolicy AWS API Documentation
     #
@@ -1895,6 +1896,7 @@ module Aws::EMR
     #         minimum_capacity_units: 1, # required
     #         maximum_capacity_units: 1, # required
     #         maximum_on_demand_capacity_units: 1,
+    #         maximum_core_capacity_units: 1,
     #       },
     #     },
     #   })
@@ -2479,6 +2481,7 @@ module Aws::EMR
     #         minimum_capacity_units: 1, # required
     #         maximum_capacity_units: 1, # required
     #         maximum_on_demand_capacity_units: 1,
+    #         maximum_core_capacity_units: 1,
     #       },
     #     },
     #   })
@@ -2633,7 +2636,7 @@ module Aws::EMR
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-emr'
-      context[:gem_version] = '1.30.1'
+      context[:gem_version] = '1.32.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

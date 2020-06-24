@@ -335,8 +335,8 @@ module Aws::OpsWorksCM
     # On a Puppet server, this command is an alternative to the `puppet cert
     # sign` command that signs a Puppet node CSR.
     #
-    # Example (Chef): `aws opsworks-cm associate-node --server-name MyServer
-    # --node-name MyManagedNode --engine-attributes
+    # Example (Puppet): `aws opsworks-cm associate-node --server-name
+    # MyServer --node-name MyManagedNode --engine-attributes
     # "Name=PUPPET_NODE_CSR,Value=csr-pem"`
     #
     # A node can can only be associated with servers that are in a `HEALTHY`
@@ -584,7 +584,7 @@ module Aws::OpsWorksCM
     #   Enable or disable scheduled backups. Valid values are `true` or
     #   `false`. The default value is `true`.
     #
-    # @option params [String] :engine
+    # @option params [required, String] :engine
     #   The configuration management engine to use. Valid values include
     #   `ChefAutomate` and `Puppet`.
     #
@@ -594,8 +594,8 @@ module Aws::OpsWorksCM
     #
     # @option params [String] :engine_version
     #   The major release version of the engine that you want to use. For a
-    #   Chef server, the valid value for EngineVersion is currently `12`. For
-    #   a Puppet server, the valid value is `2017`.
+    #   Chef server, the valid value for EngineVersion is currently `2`. For a
+    #   Puppet server, the valid value is `2017`.
     #
     # @option params [Array<Types::EngineAttribute>] :engine_attributes
     #   Optional engine attributes on a specified server.
@@ -661,10 +661,10 @@ module Aws::OpsWorksCM
     # @option params [String] :preferred_maintenance_window
     #   The start time for a one-hour period each week during which AWS
     #   OpsWorks CM performs maintenance on the instance. Valid values must be
-    #   specified in the following format: `DDD:HH:MM`. The specified time is
-    #   in coordinated universal time (UTC). The default value is a random
-    #   one-hour period on Tuesday, Wednesday, or Friday. See
-    #   `TimeWindowDefinition` for more information.
+    #   specified in the following format: `DDD:HH:MM`. `MM` must be specified
+    #   as `00`. The specified time is in coordinated universal time (UTC).
+    #   The default value is a random one-hour period on Tuesday, Wednesday,
+    #   or Friday. See `TimeWindowDefinition` for more information.
     #
     #   **Example:** `Mon:08:00`, which represents a start time of every
     #   Monday at 08:00 UTC. (8:00 a.m.)
@@ -679,8 +679,8 @@ module Aws::OpsWorksCM
     #
     #   * `DDD:HH:MM` for weekly backups
     #
-    #   The specified time is in coordinated universal time (UTC). The default
-    #   value is a random, daily start time.
+    #   `MM` must be specified as `00`. The specified time is in coordinated
+    #   universal time (UTC). The default value is a random, daily start time.
     #
     #   **Example:** `08:00`, which represents a daily start time of 08:00
     #   UTC.
@@ -762,7 +762,7 @@ module Aws::OpsWorksCM
     #     custom_certificate: "CustomCertificate",
     #     custom_private_key: "CustomPrivateKey",
     #     disable_automated_backup: false,
-    #     engine: "String",
+    #     engine: "String", # required
     #     engine_model: "String",
     #     engine_version: "String",
     #     engine_attributes: [
@@ -1769,7 +1769,7 @@ module Aws::OpsWorksCM
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-opsworkscm'
-      context[:gem_version] = '1.35.1'
+      context[:gem_version] = '1.37.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

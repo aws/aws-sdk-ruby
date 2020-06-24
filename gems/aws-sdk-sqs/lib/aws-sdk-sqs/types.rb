@@ -72,6 +72,7 @@ module Aws::SQS
       :label,
       :aws_account_ids,
       :actions)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -95,7 +96,8 @@ module Aws::SQS
     #   @return [String]
     #
     # @!attribute [rw] sender_fault
-    #   Specifies whether the error happened due to the producer.
+    #   Specifies whether the error happened due to the caller of the batch
+    #   API action.
     #   @return [Boolean]
     #
     # @!attribute [rw] code
@@ -113,6 +115,7 @@ module Aws::SQS
       :sender_fault,
       :code,
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -147,6 +150,7 @@ module Aws::SQS
     class ChangeMessageVisibilityBatchRequest < Struct.new(
       :queue_url,
       :entries)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -177,7 +181,11 @@ module Aws::SQS
     #   An identifier for this particular receipt handle used to communicate
     #   the result.
     #
-    #   <note markdown="1"> The `Id`s of a batch request need to be unique within a request
+    #   <note markdown="1"> The `Id`s of a batch request need to be unique within a request.
+    #
+    #    This identifier can have up to 80 characters. The following
+    #   characters are accepted: alphanumeric characters, hyphens(-), and
+    #   underscores (\_).
     #
     #    </note>
     #   @return [String]
@@ -196,6 +204,7 @@ module Aws::SQS
       :id,
       :receipt_handle,
       :visibility_timeout)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -216,6 +225,7 @@ module Aws::SQS
     class ChangeMessageVisibilityBatchResult < Struct.new(
       :successful,
       :failed)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -230,6 +240,7 @@ module Aws::SQS
     #
     class ChangeMessageVisibilityBatchResultEntry < Struct.new(
       :id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -266,6 +277,7 @@ module Aws::SQS
       :queue_url,
       :receipt_handle,
       :visibility_timeout)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -301,40 +313,40 @@ module Aws::SQS
     #   The following lists the names, descriptions, and values of the
     #   special request parameters that the `CreateQueue` action uses:
     #
-    #   * `DelaySeconds` - The length of time, in seconds, for which the
+    #   * `DelaySeconds` – The length of time, in seconds, for which the
     #     delivery of all messages in the queue is delayed. Valid values: An
     #     integer from 0 to 900 seconds (15 minutes). Default: 0.
     #
-    #   * `MaximumMessageSize` - The limit of how many bytes a message can
+    #   * `MaximumMessageSize` – The limit of how many bytes a message can
     #     contain before Amazon SQS rejects it. Valid values: An integer
     #     from 1,024 bytes (1 KiB) to 262,144 bytes (256 KiB). Default:
     #     262,144 (256 KiB).
     #
-    #   * `MessageRetentionPeriod` - The length of time, in seconds, for
+    #   * `MessageRetentionPeriod` – The length of time, in seconds, for
     #     which Amazon SQS retains a message. Valid values: An integer from
     #     60 seconds (1 minute) to 1,209,600 seconds (14 days). Default:
     #     345,600 (4 days).
     #
-    #   * `Policy` - The queue's policy. A valid AWS policy. For more
+    #   * `Policy` – The queue's policy. A valid AWS policy. For more
     #     information about policy structure, see [Overview of AWS IAM
     #     Policies][1] in the *Amazon IAM User Guide*.
     #
-    #   * `ReceiveMessageWaitTimeSeconds` - The length of time, in seconds,
+    #   * `ReceiveMessageWaitTimeSeconds` – The length of time, in seconds,
     #     for which a ` ReceiveMessage ` action waits for a message to
     #     arrive. Valid values: An integer from 0 to 20 (seconds). Default:
     #     0.
     #
-    #   * `RedrivePolicy` - The string that includes the parameters for the
-    #     dead-letter queue functionality of the source queue. For more
-    #     information about the redrive policy and dead-letter queues, see
-    #     [Using Amazon SQS Dead-Letter Queues][2] in the *Amazon Simple
-    #     Queue Service Developer Guide*.
+    #   * `RedrivePolicy` – The string that includes the parameters for the
+    #     dead-letter queue functionality of the source queue as a JSON
+    #     object. For more information about the redrive policy and
+    #     dead-letter queues, see [Using Amazon SQS Dead-Letter Queues][2]
+    #     in the *Amazon Simple Queue Service Developer Guide*.
     #
-    #     * `deadLetterTargetArn` - The Amazon Resource Name (ARN) of the
+    #     * `deadLetterTargetArn` – The Amazon Resource Name (ARN) of the
     #       dead-letter queue to which Amazon SQS moves messages after the
     #       value of `maxReceiveCount` is exceeded.
     #
-    #     * `maxReceiveCount` - The number of times a message is delivered
+    #     * `maxReceiveCount` – The number of times a message is delivered
     #       to the source queue before being moved to the dead-letter queue.
     #       When the `ReceiveCount` for a message exceeds the
     #       `maxReceiveCount` for a queue, Amazon SQS moves the message to
@@ -346,7 +358,7 @@ module Aws::SQS
     #
     #      </note>
     #
-    #   * `VisibilityTimeout` - The visibility timeout for the queue, in
+    #   * `VisibilityTimeout` – The visibility timeout for the queue, in
     #     seconds. Valid values: An integer from 0 to 43,200 (12 hours).
     #     Default: 30. For more information about the visibility timeout,
     #     see [Visibility Timeout][3] in the *Amazon Simple Queue Service
@@ -354,14 +366,14 @@ module Aws::SQS
     #
     #   The following attributes apply only to [server-side-encryption][4]\:
     #
-    #   * `KmsMasterKeyId` - The ID of an AWS-managed customer master key
+    #   * `KmsMasterKeyId` – The ID of an AWS-managed customer master key
     #     (CMK) for Amazon SQS or a custom CMK. For more information, see
     #     [Key Terms][5]. While the alias of the AWS-managed CMK for Amazon
     #     SQS is always `alias/aws/sqs`, the alias of a custom CMK can, for
     #     example, be `alias/MyAlias `. For more examples, see [KeyId][6] in
     #     the *AWS Key Management Service API Reference*.
     #
-    #   * `KmsDataKeyReusePeriodSeconds` - The length of time, in seconds,
+    #   * `KmsDataKeyReusePeriodSeconds` – The length of time, in seconds,
     #     for which Amazon SQS can reuse a [data key][7] to encrypt or
     #     decrypt messages before calling AWS KMS again. An integer
     #     representing seconds, between 60 seconds (1 minute) and 86,400
@@ -373,7 +385,7 @@ module Aws::SQS
     #   The following attributes apply only to [FIFO (first-in-first-out)
     #   queues][9]\:
     #
-    #   * `FifoQueue` - Designates a queue as FIFO. Valid values: `true`,
+    #   * `FifoQueue` – Designates a queue as FIFO. Valid values: `true`,
     #     `false`. If you don't specify the `FifoQueue` attribute, Amazon
     #     SQS creates a standard queue. You can provide this attribute only
     #     during queue creation. You can't change it for an existing queue.
@@ -383,7 +395,7 @@ module Aws::SQS
     #     For more information, see [FIFO Queue Logic][10] in the *Amazon
     #     Simple Queue Service Developer Guide*.
     #
-    #   * `ContentBasedDeduplication` - Enables content-based deduplication.
+    #   * `ContentBasedDeduplication` – Enables content-based deduplication.
     #     Valid values: `true`, `false`. For more information, see
     #     [Exactly-Once Processing][11] in the *Amazon Simple Queue Service
     #     Developer Guide*.
@@ -473,6 +485,7 @@ module Aws::SQS
       :queue_name,
       :attributes,
       :tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -486,6 +499,7 @@ module Aws::SQS
     #
     class CreateQueueResult < Struct.new(
       :queue_url)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -517,6 +531,7 @@ module Aws::SQS
     class DeleteMessageBatchRequest < Struct.new(
       :queue_url,
       :entries)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -534,7 +549,11 @@ module Aws::SQS
     #   An identifier for this particular receipt handle. This is used to
     #   communicate the result.
     #
-    #   <note markdown="1"> The `Id`s of a batch request need to be unique within a request
+    #   <note markdown="1"> The `Id`s of a batch request need to be unique within a request.
+    #
+    #    This identifier can have up to 80 characters. The following
+    #   characters are accepted: alphanumeric characters, hyphens(-), and
+    #   underscores (\_).
     #
     #    </note>
     #   @return [String]
@@ -548,6 +567,7 @@ module Aws::SQS
     class DeleteMessageBatchRequestEntry < Struct.new(
       :id,
       :receipt_handle)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -568,6 +588,7 @@ module Aws::SQS
     class DeleteMessageBatchResult < Struct.new(
       :successful,
       :failed)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -581,6 +602,7 @@ module Aws::SQS
     #
     class DeleteMessageBatchResultEntry < Struct.new(
       :id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -607,6 +629,7 @@ module Aws::SQS
     class DeleteMessageRequest < Struct.new(
       :queue_url,
       :receipt_handle)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -627,6 +650,7 @@ module Aws::SQS
     #
     class DeleteQueueRequest < Struct.new(
       :queue_url)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -662,74 +686,81 @@ module Aws::SQS
     #
     #   The following attributes are supported:
     #
-    #   * `All` - Returns all values.
+    #   The `ApproximateNumberOfMessagesDelayed`,
+    #   `ApproximateNumberOfMessagesNotVisible`, and
+    #   `ApproximateNumberOfMessagesVisible` metrics may not achieve
+    #   consistency until at least 1 minute after the producers stop sending
+    #   messages. This period is required for the queue metadata to reach
+    #   eventual consistency.
     #
-    #   * `ApproximateNumberOfMessages` - Returns the approximate number of
+    #   * `All` – Returns all values.
+    #
+    #   * `ApproximateNumberOfMessages` – Returns the approximate number of
     #     messages available for retrieval from the queue.
     #
-    #   * `ApproximateNumberOfMessagesDelayed` - Returns the approximate
+    #   * `ApproximateNumberOfMessagesDelayed` – Returns the approximate
     #     number of messages in the queue that are delayed and not available
     #     for reading immediately. This can happen when the queue is
     #     configured as a delay queue or when a message has been sent with a
     #     delay parameter.
     #
-    #   * `ApproximateNumberOfMessagesNotVisible` - Returns the approximate
+    #   * `ApproximateNumberOfMessagesNotVisible` – Returns the approximate
     #     number of messages that are in flight. Messages are considered to
     #     be *in flight* if they have been sent to a client but have not yet
     #     been deleted or have not yet reached the end of their visibility
     #     window.
     #
-    #   * `CreatedTimestamp` - Returns the time when the queue was created
+    #   * `CreatedTimestamp` – Returns the time when the queue was created
     #     in seconds ([epoch time][1]).
     #
-    #   * `DelaySeconds` - Returns the default delay on the queue in
+    #   * `DelaySeconds` – Returns the default delay on the queue in
     #     seconds.
     #
-    #   * `LastModifiedTimestamp` - Returns the time when the queue was last
+    #   * `LastModifiedTimestamp` – Returns the time when the queue was last
     #     changed in seconds ([epoch time][1]).
     #
-    #   * `MaximumMessageSize` - Returns the limit of how many bytes a
+    #   * `MaximumMessageSize` – Returns the limit of how many bytes a
     #     message can contain before Amazon SQS rejects it.
     #
-    #   * `MessageRetentionPeriod` - Returns the length of time, in seconds,
+    #   * `MessageRetentionPeriod` – Returns the length of time, in seconds,
     #     for which Amazon SQS retains a message.
     #
-    #   * `Policy` - Returns the policy of the queue.
+    #   * `Policy` – Returns the policy of the queue.
     #
-    #   * `QueueArn` - Returns the Amazon resource name (ARN) of the queue.
+    #   * `QueueArn` – Returns the Amazon resource name (ARN) of the queue.
     #
-    #   * `ReceiveMessageWaitTimeSeconds` - Returns the length of time, in
+    #   * `ReceiveMessageWaitTimeSeconds` – Returns the length of time, in
     #     seconds, for which the `ReceiveMessage` action waits for a message
     #     to arrive.
     #
-    #   * `RedrivePolicy` - Returns the string that includes the parameters
-    #     for dead-letter queue functionality of the source queue. For more
-    #     information about the redrive policy and dead-letter queues, see
-    #     [Using Amazon SQS Dead-Letter Queues][2] in the *Amazon Simple
-    #     Queue Service Developer Guide*.
+    #   * `RedrivePolicy` – The string that includes the parameters for the
+    #     dead-letter queue functionality of the source queue as a JSON
+    #     object. For more information about the redrive policy and
+    #     dead-letter queues, see [Using Amazon SQS Dead-Letter Queues][2]
+    #     in the *Amazon Simple Queue Service Developer Guide*.
     #
-    #     * `deadLetterTargetArn` - The Amazon Resource Name (ARN) of the
+    #     * `deadLetterTargetArn` – The Amazon Resource Name (ARN) of the
     #       dead-letter queue to which Amazon SQS moves messages after the
     #       value of `maxReceiveCount` is exceeded.
     #
-    #     * `maxReceiveCount` - The number of times a message is delivered
+    #     * `maxReceiveCount` – The number of times a message is delivered
     #       to the source queue before being moved to the dead-letter queue.
     #       When the `ReceiveCount` for a message exceeds the
     #       `maxReceiveCount` for a queue, Amazon SQS moves the message to
     #       the dead-letter-queue.
     #
-    #   * `VisibilityTimeout` - Returns the visibility timeout for the
+    #   * `VisibilityTimeout` – Returns the visibility timeout for the
     #     queue. For more information about the visibility timeout, see
     #     [Visibility Timeout][3] in the *Amazon Simple Queue Service
     #     Developer Guide*.
     #
     #   The following attributes apply only to [server-side-encryption][4]\:
     #
-    #   * `KmsMasterKeyId` - Returns the ID of an AWS-managed customer
+    #   * `KmsMasterKeyId` – Returns the ID of an AWS-managed customer
     #     master key (CMK) for Amazon SQS or a custom CMK. For more
     #     information, see [Key Terms][5].
     #
-    #   * `KmsDataKeyReusePeriodSeconds` - Returns the length of time, in
+    #   * `KmsDataKeyReusePeriodSeconds` – Returns the length of time, in
     #     seconds, for which Amazon SQS can reuse a data key to encrypt or
     #     decrypt messages before calling AWS KMS again. For more
     #     information, see [How Does the Data Key Reuse Period Work?][6].
@@ -737,7 +768,7 @@ module Aws::SQS
     #   The following attributes apply only to [FIFO (first-in-first-out)
     #   queues][7]\:
     #
-    #   * `FifoQueue` - Returns whether the queue is FIFO. For more
+    #   * `FifoQueue` – Returns whether the queue is FIFO. For more
     #     information, see [FIFO Queue Logic][8] in the *Amazon Simple Queue
     #     Service Developer Guide*.
     #
@@ -746,7 +777,7 @@ module Aws::SQS
     #
     #      </note>
     #
-    #   * `ContentBasedDeduplication` - Returns whether content-based
+    #   * `ContentBasedDeduplication` – Returns whether content-based
     #     deduplication is enabled for the queue. For more information, see
     #     [Exactly-Once Processing][9] in the *Amazon Simple Queue Service
     #     Developer Guide*.
@@ -769,6 +800,7 @@ module Aws::SQS
     class GetQueueAttributesRequest < Struct.new(
       :queue_url,
       :attribute_names)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -782,6 +814,7 @@ module Aws::SQS
     #
     class GetQueueAttributesResult < Struct.new(
       :attributes)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -810,6 +843,7 @@ module Aws::SQS
     class GetQueueUrlRequest < Struct.new(
       :queue_name,
       :queue_owner_aws_account_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -828,6 +862,7 @@ module Aws::SQS
     #
     class GetQueueUrlResult < Struct.new(
       :queue_url)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -861,6 +896,8 @@ module Aws::SQS
     #
     #       {
     #         queue_url: "String", # required
+    #         next_token: "Token",
+    #         max_results: 1,
     #       }
     #
     # @!attribute [rw] queue_url
@@ -869,10 +906,21 @@ module Aws::SQS
     #   Queue URLs and names are case-sensitive.
     #   @return [String]
     #
+    # @!attribute [rw] next_token
+    #   Pagination token to request the next set of results.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   Maximum number of results to include in the response.
+    #   @return [Integer]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sqs-2012-11-05/ListDeadLetterSourceQueuesRequest AWS API Documentation
     #
     class ListDeadLetterSourceQueuesRequest < Struct.new(
-      :queue_url)
+      :queue_url,
+      :next_token,
+      :max_results)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -883,10 +931,16 @@ module Aws::SQS
     #   attribute configured with a dead-letter queue.
     #   @return [Array<String>]
     #
+    # @!attribute [rw] next_token
+    #   Pagination token to include in the next request.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sqs-2012-11-05/ListDeadLetterSourceQueuesResult AWS API Documentation
     #
     class ListDeadLetterSourceQueuesResult < Struct.new(
-      :queue_urls)
+      :queue_urls,
+      :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -905,6 +959,7 @@ module Aws::SQS
     #
     class ListQueueTagsRequest < Struct.new(
       :queue_url)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -916,6 +971,7 @@ module Aws::SQS
     #
     class ListQueueTagsResult < Struct.new(
       :tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -924,6 +980,8 @@ module Aws::SQS
     #
     #       {
     #         queue_name_prefix: "String",
+    #         next_token: "Token",
+    #         max_results: 1,
     #       }
     #
     # @!attribute [rw] queue_name_prefix
@@ -933,23 +991,41 @@ module Aws::SQS
     #   Queue URLs and names are case-sensitive.
     #   @return [String]
     #
+    # @!attribute [rw] next_token
+    #   Pagination token to request the next set of results.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   Maximum number of results to include in the response.
+    #   @return [Integer]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sqs-2012-11-05/ListQueuesRequest AWS API Documentation
     #
     class ListQueuesRequest < Struct.new(
-      :queue_name_prefix)
+      :queue_name_prefix,
+      :next_token,
+      :max_results)
+      SENSITIVE = []
       include Aws::Structure
     end
 
     # A list of your queues.
     #
     # @!attribute [rw] queue_urls
-    #   A list of queue URLs, up to 1,000 entries.
+    #   A list of queue URLs, up to 1,000 entries, or the value of
+    #   MaxResults that you sent in the request.
     #   @return [Array<String>]
+    #
+    # @!attribute [rw] next_token
+    #   Pagination token to include in the next request.
+    #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sqs-2012-11-05/ListQueuesResult AWS API Documentation
     #
     class ListQueuesResult < Struct.new(
-      :queue_urls)
+      :queue_urls,
+      :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1034,6 +1110,7 @@ module Aws::SQS
       :attributes,
       :md5_of_message_attributes,
       :message_attributes)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1101,6 +1178,7 @@ module Aws::SQS
       :string_list_values,
       :binary_list_values,
       :data_type)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1172,6 +1250,7 @@ module Aws::SQS
       :string_list_values,
       :binary_list_values,
       :data_type)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1210,6 +1289,7 @@ module Aws::SQS
     #
     class PurgeQueueRequest < Struct.new(
       :queue_url)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1263,16 +1343,16 @@ module Aws::SQS
     #   A list of attributes that need to be returned along with each
     #   message. These attributes include:
     #
-    #   * `All` - Returns all values.
+    #   * `All` – Returns all values.
     #
-    #   * `ApproximateFirstReceiveTimestamp` - Returns the time the message
+    #   * `ApproximateFirstReceiveTimestamp` – Returns the time the message
     #     was first received from the queue ([epoch time][1] in
     #     milliseconds).
     #
-    #   * `ApproximateReceiveCount` - Returns the number of times a message
-    #     has been received from the queue but not deleted.
+    #   * `ApproximateReceiveCount` – Returns the number of times a message
+    #     has been received across all queues but not deleted.
     #
-    #   * `AWSTraceHeader` - Returns the AWS X-Ray trace header string.
+    #   * `AWSTraceHeader` – Returns the AWS X-Ray trace header string.
     #
     #   * `SenderId`
     #
@@ -1282,17 +1362,17 @@ module Aws::SQS
     #     * For an IAM role, returns the IAM role ID, for example
     #       `ABCDE1F2GH3I4JK5LMNOP:i-a123b456`.
     #
-    #   * `SentTimestamp` - Returns the time the message was sent to the
+    #   * `SentTimestamp` – Returns the time the message was sent to the
     #     queue ([epoch time][1] in milliseconds).
     #
-    #   * `MessageDeduplicationId` - Returns the value provided by the
+    #   * `MessageDeduplicationId` – Returns the value provided by the
     #     producer that calls the ` SendMessage ` action.
     #
-    #   * `MessageGroupId` - Returns the value provided by the producer that
+    #   * `MessageGroupId` – Returns the value provided by the producer that
     #     calls the ` SendMessage ` action. Messages with the same
     #     `MessageGroupId` are returned in sequence.
     #
-    #   * `SequenceNumber` - Returns the value provided by Amazon SQS.
+    #   * `SequenceNumber` – Returns the value provided by Amazon SQS.
     #
     #
     #
@@ -1340,6 +1420,18 @@ module Aws::SQS
     #   call returns sooner than `WaitTimeSeconds`. If no messages are
     #   available and the wait time expires, the call returns successfully
     #   with an empty list of messages.
+    #
+    #   To avoid HTTP errors, ensure that the HTTP response timeout for
+    #   `ReceiveMessage` requests is longer than the `WaitTimeSeconds`
+    #   parameter. For example, with the Java SDK, you can set HTTP
+    #   transport settings using the [ NettyNioAsyncHttpClient][1] for
+    #   asynchronous clients, or the [ ApacheHttpClient][2] for synchronous
+    #   clients.
+    #
+    #
+    #
+    #   [1]: https://sdk.amazonaws.com/java/api/latest/software/amazon/awssdk/http/nio/netty/NettyNioAsyncHttpClient.html
+    #   [2]: https://sdk.amazonaws.com/java/api/latest/software/amazon/awssdk/http/apache/ApacheHttpClient.html
     #   @return [Integer]
     #
     # @!attribute [rw] receive_request_attempt_id
@@ -1347,10 +1439,10 @@ module Aws::SQS
     #
     #   The token used for deduplication of `ReceiveMessage` calls. If a
     #   networking issue occurs after a `ReceiveMessage` action, and instead
-    #   of a response you receive a generic error, you can retry the same
-    #   action with an identical `ReceiveRequestAttemptId` to retrieve the
-    #   same set of messages, even if their visibility timeout has not yet
-    #   expired.
+    #   of a response you receive a generic error, it is possible to retry
+    #   the same action with an identical `ReceiveRequestAttemptId` to
+    #   retrieve the same set of messages, even if their visibility timeout
+    #   has not yet expired.
     #
     #   * You can use `ReceiveRequestAttemptId` only for 5 minutes after a
     #     `ReceiveMessage` action.
@@ -1362,7 +1454,7 @@ module Aws::SQS
     #     `ReceiveRequestAttemptId`, Amazon SQS generates a
     #     `ReceiveRequestAttemptId`.
     #
-    #   * You can retry the `ReceiveMessage` action with the same
+    #   * It is possible to retry the `ReceiveMessage` action with the same
     #     `ReceiveRequestAttemptId` if none of the messages have been
     #     modified (deleted or had their visibility changes).
     #
@@ -1396,7 +1488,7 @@ module Aws::SQS
     #     visibility timeout expires. As a result, delays might occur but
     #     the messages in the queue remain in a strict order.
     #
-    #   The length of `ReceiveRequestAttemptId` is 128 characters.
+    #   The maximum length of `ReceiveRequestAttemptId` is 128 characters.
     #   `ReceiveRequestAttemptId` can contain alphanumeric characters
     #   (`a-z`, `A-Z`, `0-9`) and punctuation (``
     #   !"#$%&'()*+,-./:;<=>?@[\]^_`\{|\}~ ``).
@@ -1421,6 +1513,7 @@ module Aws::SQS
       :visibility_timeout,
       :wait_time_seconds,
       :receive_request_attempt_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1434,6 +1527,7 @@ module Aws::SQS
     #
     class ReceiveMessageResult < Struct.new(
       :messages)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1461,6 +1555,7 @@ module Aws::SQS
     class RemovePermissionRequest < Struct.new(
       :queue_url,
       :label)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1513,6 +1608,7 @@ module Aws::SQS
     class SendMessageBatchRequest < Struct.new(
       :queue_url,
       :entries)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1552,7 +1648,7 @@ module Aws::SQS
     #   An identifier for a message in this batch used to communicate the
     #   result.
     #
-    #   <note markdown="1"> The `Id`s of a batch request need to be unique within a request
+    #   <note markdown="1"> The `Id`s of a batch request need to be unique within a request.
     #
     #    This identifier can have up to 80 characters. The following
     #   characters are accepted: alphanumeric characters, hyphens(-), and
@@ -1594,7 +1690,7 @@ module Aws::SQS
     #
     #   * Currently, the only supported message system attribute is
     #     `AWSTraceHeader`. Its type must be `String` and its value must be
-    #     a correctly formatted AWS X-Ray trace string.
+    #     a correctly formatted AWS X-Ray trace header string.
     #
     #   * The size of a message system attribute doesn't count towards the
     #     total size of a message.
@@ -1712,6 +1808,7 @@ module Aws::SQS
       :message_system_attributes,
       :message_deduplication_id,
       :message_group_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1733,6 +1830,7 @@ module Aws::SQS
     class SendMessageBatchResult < Struct.new(
       :successful,
       :failed)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1802,6 +1900,7 @@ module Aws::SQS
       :md5_of_message_attributes,
       :md5_of_message_system_attributes,
       :sequence_number)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1886,7 +1985,7 @@ module Aws::SQS
     #
     #   * Currently, the only supported message system attribute is
     #     `AWSTraceHeader`. Its type must be `String` and its value must be
-    #     a correctly formatted AWS X-Ray trace string.
+    #     a correctly formatted AWS X-Ray trace header string.
     #
     #   * The size of a message system attribute doesn't count towards the
     #     total size of a message.
@@ -1943,7 +2042,7 @@ module Aws::SQS
     #
     #    </note>
     #
-    #   The length of `MessageDeduplicationId` is 128 characters.
+    #   The maximum length of `MessageDeduplicationId` is 128 characters.
     #   `MessageDeduplicationId` can contain alphanumeric characters (`a-z`,
     #   `A-Z`, `0-9`) and punctuation (`` !"#$%&'()*+,-./:;<=>?@[\]^_`\{|\}~
     #   ``).
@@ -2004,6 +2103,7 @@ module Aws::SQS
       :message_system_attributes,
       :message_deduplication_id,
       :message_group_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2068,6 +2168,7 @@ module Aws::SQS
       :md5_of_message_system_attributes,
       :message_id,
       :sequence_number)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2094,40 +2195,40 @@ module Aws::SQS
     #   special request parameters that the `SetQueueAttributes` action
     #   uses:
     #
-    #   * `DelaySeconds` - The length of time, in seconds, for which the
+    #   * `DelaySeconds` – The length of time, in seconds, for which the
     #     delivery of all messages in the queue is delayed. Valid values: An
     #     integer from 0 to 900 (15 minutes). Default: 0.
     #
-    #   * `MaximumMessageSize` - The limit of how many bytes a message can
+    #   * `MaximumMessageSize` – The limit of how many bytes a message can
     #     contain before Amazon SQS rejects it. Valid values: An integer
     #     from 1,024 bytes (1 KiB) up to 262,144 bytes (256 KiB). Default:
     #     262,144 (256 KiB).
     #
-    #   * `MessageRetentionPeriod` - The length of time, in seconds, for
+    #   * `MessageRetentionPeriod` – The length of time, in seconds, for
     #     which Amazon SQS retains a message. Valid values: An integer
     #     representing seconds, from 60 (1 minute) to 1,209,600 (14 days).
     #     Default: 345,600 (4 days).
     #
-    #   * `Policy` - The queue's policy. A valid AWS policy. For more
+    #   * `Policy` – The queue's policy. A valid AWS policy. For more
     #     information about policy structure, see [Overview of AWS IAM
     #     Policies][1] in the *Amazon IAM User Guide*.
     #
-    #   * `ReceiveMessageWaitTimeSeconds` - The length of time, in seconds,
+    #   * `ReceiveMessageWaitTimeSeconds` – The length of time, in seconds,
     #     for which a ` ReceiveMessage ` action waits for a message to
-    #     arrive. Valid values: an integer from 0 to 20 (seconds). Default:
+    #     arrive. Valid values: An integer from 0 to 20 (seconds). Default:
     #     0.
     #
-    #   * `RedrivePolicy` - The string that includes the parameters for the
-    #     dead-letter queue functionality of the source queue. For more
-    #     information about the redrive policy and dead-letter queues, see
-    #     [Using Amazon SQS Dead-Letter Queues][2] in the *Amazon Simple
-    #     Queue Service Developer Guide*.
+    #   * `RedrivePolicy` – The string that includes the parameters for the
+    #     dead-letter queue functionality of the source queue as a JSON
+    #     object. For more information about the redrive policy and
+    #     dead-letter queues, see [Using Amazon SQS Dead-Letter Queues][2]
+    #     in the *Amazon Simple Queue Service Developer Guide*.
     #
-    #     * `deadLetterTargetArn` - The Amazon Resource Name (ARN) of the
+    #     * `deadLetterTargetArn` – The Amazon Resource Name (ARN) of the
     #       dead-letter queue to which Amazon SQS moves messages after the
     #       value of `maxReceiveCount` is exceeded.
     #
-    #     * `maxReceiveCount` - The number of times a message is delivered
+    #     * `maxReceiveCount` – The number of times a message is delivered
     #       to the source queue before being moved to the dead-letter queue.
     #       When the `ReceiveCount` for a message exceeds the
     #       `maxReceiveCount` for a queue, Amazon SQS moves the message to
@@ -2139,22 +2240,22 @@ module Aws::SQS
     #
     #      </note>
     #
-    #   * `VisibilityTimeout` - The visibility timeout for the queue, in
-    #     seconds. Valid values: an integer from 0 to 43,200 (12 hours).
+    #   * `VisibilityTimeout` – The visibility timeout for the queue, in
+    #     seconds. Valid values: An integer from 0 to 43,200 (12 hours).
     #     Default: 30. For more information about the visibility timeout,
     #     see [Visibility Timeout][3] in the *Amazon Simple Queue Service
     #     Developer Guide*.
     #
     #   The following attributes apply only to [server-side-encryption][4]\:
     #
-    #   * `KmsMasterKeyId` - The ID of an AWS-managed customer master key
+    #   * `KmsMasterKeyId` – The ID of an AWS-managed customer master key
     #     (CMK) for Amazon SQS or a custom CMK. For more information, see
     #     [Key Terms][5]. While the alias of the AWS-managed CMK for Amazon
     #     SQS is always `alias/aws/sqs`, the alias of a custom CMK can, for
     #     example, be `alias/MyAlias `. For more examples, see [KeyId][6] in
     #     the *AWS Key Management Service API Reference*.
     #
-    #   * `KmsDataKeyReusePeriodSeconds` - The length of time, in seconds,
+    #   * `KmsDataKeyReusePeriodSeconds` – The length of time, in seconds,
     #     for which Amazon SQS can reuse a [data key][7] to encrypt or
     #     decrypt messages before calling AWS KMS again. An integer
     #     representing seconds, between 60 seconds (1 minute) and 86,400
@@ -2166,7 +2267,7 @@ module Aws::SQS
     #   The following attribute applies only to [FIFO (first-in-first-out)
     #   queues][9]\:
     #
-    #   * `ContentBasedDeduplication` - Enables content-based deduplication.
+    #   * `ContentBasedDeduplication` – Enables content-based deduplication.
     #     For more information, see [Exactly-Once Processing][10] in the
     #     *Amazon Simple Queue Service Developer Guide*.
     #
@@ -2217,6 +2318,7 @@ module Aws::SQS
     class SetQueueAttributesRequest < Struct.new(
       :queue_url,
       :attributes)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2243,6 +2345,7 @@ module Aws::SQS
     class TagQueueRequest < Struct.new(
       :queue_url,
       :tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2279,6 +2382,7 @@ module Aws::SQS
     class UntagQueueRequest < Struct.new(
       :queue_url,
       :tag_keys)
+      SENSITIVE = []
       include Aws::Structure
     end
 

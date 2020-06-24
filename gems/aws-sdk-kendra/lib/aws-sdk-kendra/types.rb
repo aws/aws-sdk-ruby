@@ -27,6 +27,7 @@ module Aws::Kendra
     #
     class AccessControlListConfiguration < Struct.new(
       :key_path)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -37,6 +38,7 @@ module Aws::Kendra
     #
     class AccessDeniedException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -61,6 +63,7 @@ module Aws::Kendra
     #
     class AclConfiguration < Struct.new(
       :allowed_groups_column_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -84,6 +87,7 @@ module Aws::Kendra
       :key,
       :value_type,
       :value)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -98,6 +102,7 @@ module Aws::Kendra
     #
     class AdditionalResultAttributeValue < Struct.new(
       :text_with_highlights_value)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -478,6 +483,7 @@ module Aws::Kendra
       :greater_than_or_equals,
       :less_than,
       :less_than_or_equals)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -511,6 +517,7 @@ module Aws::Kendra
       :index_id,
       :document_id_list,
       :data_source_sync_job_metric_target)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -524,6 +531,7 @@ module Aws::Kendra
     #
     class BatchDeleteDocumentResponse < Struct.new(
       :failed_documents)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -551,6 +559,7 @@ module Aws::Kendra
       :id,
       :error_code,
       :error_message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -632,6 +641,7 @@ module Aws::Kendra
       :index_id,
       :role_arn,
       :documents)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -654,6 +664,7 @@ module Aws::Kendra
     #
     class BatchPutDocumentResponse < Struct.new(
       :failed_documents)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -677,6 +688,7 @@ module Aws::Kendra
       :id,
       :error_code,
       :error_message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -707,6 +719,7 @@ module Aws::Kendra
     class CapacityUnitsConfiguration < Struct.new(
       :storage_capacity_units,
       :query_capacity_units)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -735,6 +748,7 @@ module Aws::Kendra
     class ClickFeedback < Struct.new(
       :result_id,
       :click_time)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -789,6 +803,7 @@ module Aws::Kendra
       :document_title_column_name,
       :field_mappings,
       :change_detecting_columns)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -799,6 +814,7 @@ module Aws::Kendra
     #
     class ConflictException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -853,6 +869,7 @@ module Aws::Kendra
       :database_name,
       :table_name,
       :secret_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1119,6 +1136,7 @@ module Aws::Kendra
       :schedule,
       :role_arn,
       :tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1130,6 +1148,7 @@ module Aws::Kendra
     #
     class CreateDataSourceResponse < Struct.new(
       :id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1194,6 +1213,7 @@ module Aws::Kendra
       :s3_path,
       :role_arn,
       :tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1205,6 +1225,7 @@ module Aws::Kendra
     #
     class CreateFaqResponse < Struct.new(
       :id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1282,6 +1303,7 @@ module Aws::Kendra
       :description,
       :client_token,
       :tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1294,6 +1316,7 @@ module Aws::Kendra
     #
     class CreateIndexResponse < Struct.new(
       :id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1529,6 +1552,7 @@ module Aws::Kendra
       :salesforce_configuration,
       :one_drive_configuration,
       :service_now_configuration)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1569,6 +1593,7 @@ module Aws::Kendra
       :created_at,
       :updated_at,
       :status)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1627,6 +1652,7 @@ module Aws::Kendra
       :error_code,
       :data_source_error_code,
       :metrics)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1653,6 +1679,7 @@ module Aws::Kendra
     class DataSourceSyncJobMetricTarget < Struct.new(
       :data_source_id,
       :data_source_sync_job_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1693,6 +1720,7 @@ module Aws::Kendra
       :documents_deleted,
       :documents_failed,
       :documents_scanned)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1727,6 +1755,7 @@ module Aws::Kendra
       :data_source_field_name,
       :date_field_format,
       :index_field_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1757,6 +1786,7 @@ module Aws::Kendra
     class DataSourceVpcConfiguration < Struct.new(
       :subnet_ids,
       :security_group_ids)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1826,6 +1856,7 @@ module Aws::Kendra
       :vpc_configuration,
       :column_configuration,
       :acl_configuration)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1850,6 +1881,7 @@ module Aws::Kendra
     class DeleteDataSourceRequest < Struct.new(
       :id,
       :index_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1874,6 +1906,7 @@ module Aws::Kendra
     class DeleteFaqRequest < Struct.new(
       :id,
       :index_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1892,6 +1925,7 @@ module Aws::Kendra
     #
     class DeleteIndexRequest < Struct.new(
       :id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1916,6 +1950,7 @@ module Aws::Kendra
     class DescribeDataSourceRequest < Struct.new(
       :id,
       :index_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1990,6 +2025,7 @@ module Aws::Kendra
       :schedule,
       :role_arn,
       :error_message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2014,6 +2050,7 @@ module Aws::Kendra
     class DescribeFaqRequest < Struct.new(
       :id,
       :index_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2073,6 +2110,7 @@ module Aws::Kendra
       :status,
       :role_arn,
       :error_message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2091,6 +2129,7 @@ module Aws::Kendra
     #
     class DescribeIndexRequest < Struct.new(
       :id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2174,6 +2213,7 @@ module Aws::Kendra
       :index_statistics,
       :error_message,
       :capacity_units)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2258,6 +2298,7 @@ module Aws::Kendra
       :attributes,
       :access_control_list,
       :content_type)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2289,6 +2330,7 @@ module Aws::Kendra
     class DocumentAttribute < Struct.new(
       :key,
       :value)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2328,6 +2370,7 @@ module Aws::Kendra
       :string_list_value,
       :long_value,
       :date_value)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2348,6 +2391,7 @@ module Aws::Kendra
     class DocumentAttributeValueCountPair < Struct.new(
       :document_attribute_value,
       :count)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2399,6 +2443,7 @@ module Aws::Kendra
       :type,
       :relevance,
       :search)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2424,6 +2469,7 @@ module Aws::Kendra
     #
     class DocumentsMetadataConfiguration < Struct.new(
       :s3_prefix)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2444,6 +2490,7 @@ module Aws::Kendra
     #
     class Facet < Struct.new(
       :document_attribute_key)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2465,6 +2512,7 @@ module Aws::Kendra
     class FacetResult < Struct.new(
       :document_attribute_key,
       :document_attribute_value_count_pairs)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2480,6 +2528,7 @@ module Aws::Kendra
     #
     class FaqStatistics < Struct.new(
       :indexed_question_answers_count)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2516,6 +2565,7 @@ module Aws::Kendra
       :status,
       :created_at,
       :updated_at)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2543,6 +2593,7 @@ module Aws::Kendra
       :begin_offset,
       :end_offset,
       :top_answer)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2586,6 +2637,7 @@ module Aws::Kendra
       :created_at,
       :updated_at,
       :status)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2605,6 +2657,7 @@ module Aws::Kendra
     class IndexStatistics < Struct.new(
       :faq_statistics,
       :text_document_statistics)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2615,6 +2668,7 @@ module Aws::Kendra
     #
     class InternalServerException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2672,6 +2726,7 @@ module Aws::Kendra
       :max_results,
       :start_time_filter,
       :status_filter)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2693,6 +2748,7 @@ module Aws::Kendra
     class ListDataSourceSyncJobsResponse < Struct.new(
       :history,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2726,6 +2782,7 @@ module Aws::Kendra
       :index_id,
       :next_token,
       :max_results)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2744,6 +2801,7 @@ module Aws::Kendra
     class ListDataSourcesResponse < Struct.new(
       :summary_items,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2777,6 +2835,7 @@ module Aws::Kendra
       :index_id,
       :next_token,
       :max_results)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2797,6 +2856,7 @@ module Aws::Kendra
     class ListFaqsResponse < Struct.new(
       :next_token,
       :faq_summary_items)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2824,6 +2884,7 @@ module Aws::Kendra
     class ListIndicesRequest < Struct.new(
       :next_token,
       :max_results)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2842,6 +2903,7 @@ module Aws::Kendra
     class ListIndicesResponse < Struct.new(
       :index_configuration_summary_items,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2861,6 +2923,7 @@ module Aws::Kendra
     #
     class ListTagsForResourceRequest < Struct.new(
       :resource_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2872,6 +2935,7 @@ module Aws::Kendra
     #
     class ListTagsForResourceResponse < Struct.new(
       :tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2951,6 +3015,7 @@ module Aws::Kendra
       :inclusion_patterns,
       :exclusion_patterns,
       :field_mappings)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2985,6 +3050,7 @@ module Aws::Kendra
     class OneDriveUsers < Struct.new(
       :one_drive_user_list,
       :one_drive_user_s3_path)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3017,6 +3083,7 @@ module Aws::Kendra
       :name,
       :type,
       :access)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3176,6 +3243,7 @@ module Aws::Kendra
       :query_result_type_filter,
       :page_number,
       :page_size)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3206,6 +3274,7 @@ module Aws::Kendra
       :result_items,
       :facet_results,
       :total_number_of_results)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3263,6 +3332,7 @@ module Aws::Kendra
       :document_excerpt,
       :document_uri,
       :document_attributes)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3345,6 +3415,7 @@ module Aws::Kendra
       :duration,
       :rank_order,
       :value_importance_map)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3374,6 +3445,7 @@ module Aws::Kendra
     class RelevanceFeedback < Struct.new(
       :result_id,
       :relevance_value)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3384,6 +3456,7 @@ module Aws::Kendra
     #
     class ResourceAlreadyExistException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3394,6 +3467,7 @@ module Aws::Kendra
     #
     class ResourceInUseException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3404,6 +3478,7 @@ module Aws::Kendra
     #
     class ResourceNotFoundException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3414,6 +3489,7 @@ module Aws::Kendra
     #
     class ResourceUnavailableException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3477,6 +3553,7 @@ module Aws::Kendra
       :exclusion_patterns,
       :documents_metadata_configuration,
       :access_control_list_configuration)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3503,6 +3580,7 @@ module Aws::Kendra
     class S3Path < Struct.new(
       :bucket,
       :key)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3556,6 +3634,7 @@ module Aws::Kendra
       :document_title_field_name,
       :field_mappings,
       :include_filter_types)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3724,6 +3803,7 @@ module Aws::Kendra
       :standard_object_attachment_configuration,
       :include_attachment_file_patterns,
       :exclude_attachment_file_patterns)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3772,6 +3852,7 @@ module Aws::Kendra
       :document_data_field_name,
       :document_title_field_name,
       :field_mappings)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3834,6 +3915,7 @@ module Aws::Kendra
       :included_states,
       :standard_knowledge_article_type_configuration,
       :custom_knowledge_article_type_configurations)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3875,6 +3957,7 @@ module Aws::Kendra
       :document_data_field_name,
       :document_title_field_name,
       :field_mappings)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3909,6 +3992,7 @@ module Aws::Kendra
     class SalesforceStandardObjectAttachmentConfiguration < Struct.new(
       :document_title_field_name,
       :field_mappings)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3958,6 +4042,7 @@ module Aws::Kendra
       :document_data_field_name,
       :document_title_field_name,
       :field_mappings)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3998,6 +4083,7 @@ module Aws::Kendra
       :facetable,
       :searchable,
       :displayable)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4021,6 +4107,7 @@ module Aws::Kendra
     #
     class ServerSideEncryptionConfiguration < Struct.new(
       :kms_key_id)
+      SENSITIVE = [:kms_key_id]
       include Aws::Structure
     end
 
@@ -4099,6 +4186,7 @@ module Aws::Kendra
       :service_now_build_version,
       :knowledge_article_configuration,
       :service_catalog_configuration)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4164,6 +4252,7 @@ module Aws::Kendra
       :document_data_field_name,
       :document_title_field_name,
       :field_mappings)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4227,6 +4316,7 @@ module Aws::Kendra
       :document_data_field_name,
       :document_title_field_name,
       :field_mappings)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4237,6 +4327,7 @@ module Aws::Kendra
     #
     class ServiceQuotaExceededException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4359,6 +4450,7 @@ module Aws::Kendra
       :vpc_configuration,
       :field_mappings,
       :document_title_field_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4383,6 +4475,7 @@ module Aws::Kendra
     class StartDataSourceSyncJobRequest < Struct.new(
       :id,
       :index_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4394,6 +4487,7 @@ module Aws::Kendra
     #
     class StartDataSourceSyncJobResponse < Struct.new(
       :execution_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4419,6 +4513,7 @@ module Aws::Kendra
     class StopDataSourceSyncJobRequest < Struct.new(
       :id,
       :index_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4468,6 +4563,7 @@ module Aws::Kendra
       :query_id,
       :click_feedback_items,
       :relevance_feedback_items)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4498,6 +4594,7 @@ module Aws::Kendra
     class Tag < Struct.new(
       :key,
       :value)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4530,6 +4627,7 @@ module Aws::Kendra
     class TagResourceRequest < Struct.new(
       :resource_arn,
       :tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4552,6 +4650,7 @@ module Aws::Kendra
     class TextDocumentStatistics < Struct.new(
       :indexed_text_documents_count,
       :indexed_text_bytes)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4570,6 +4669,7 @@ module Aws::Kendra
     class TextWithHighlights < Struct.new(
       :text,
       :highlights)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4580,6 +4680,7 @@ module Aws::Kendra
     #
     class ThrottlingException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4606,6 +4707,7 @@ module Aws::Kendra
     class TimeRange < Struct.new(
       :start_time,
       :end_time)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4632,6 +4734,7 @@ module Aws::Kendra
     class UntagResourceRequest < Struct.new(
       :resource_arn,
       :tag_keys)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4880,6 +4983,7 @@ module Aws::Kendra
       :description,
       :schedule,
       :role_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4957,6 +5061,7 @@ module Aws::Kendra
       :description,
       :document_metadata_configuration_updates,
       :capacity_units)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4967,6 +5072,7 @@ module Aws::Kendra
     #
     class ValidationException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 

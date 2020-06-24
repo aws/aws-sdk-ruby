@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.89.0 (2020-06-23)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.88.0 (2020-06-22)
+------------------
+
+* Feature - Added paginators for various APIs.
+
 1.87.0 (2020-06-18)
 ------------------
 

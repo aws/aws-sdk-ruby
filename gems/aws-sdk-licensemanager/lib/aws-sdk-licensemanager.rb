@@ -47,6 +47,6 @@ require_relative 'aws-sdk-licensemanager/customizations'
 # @service
 module Aws::LicenseManager
 
-  GEM_VERSION = '1.15.1'
+  GEM_VERSION = '1.16.0'
 
 end

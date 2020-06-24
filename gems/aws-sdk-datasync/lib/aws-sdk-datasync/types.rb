@@ -32,6 +32,7 @@ module Aws::DataSync
       :agent_arn,
       :name,
       :status)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -52,6 +53,7 @@ module Aws::DataSync
     #
     class CancelTaskExecutionRequest < Struct.new(
       :task_execution_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -151,6 +153,7 @@ module Aws::DataSync
       :vpc_endpoint_id,
       :subnet_arns,
       :security_group_arns)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -166,6 +169,7 @@ module Aws::DataSync
     #
     class CreateAgentResponse < Struct.new(
       :agent_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -244,6 +248,7 @@ module Aws::DataSync
       :efs_filesystem_arn,
       :ec2_config,
       :tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -258,6 +263,7 @@ module Aws::DataSync
     #
     class CreateLocationEfsResponse < Struct.new(
       :location_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -327,6 +333,7 @@ module Aws::DataSync
       :user,
       :domain,
       :password)
+      SENSITIVE = [:password]
       include Aws::Structure
     end
 
@@ -339,6 +346,7 @@ module Aws::DataSync
     #
     class CreateLocationFsxWindowsResponse < Struct.new(
       :location_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -425,6 +433,7 @@ module Aws::DataSync
       :on_prem_config,
       :mount_options,
       :tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -439,6 +448,7 @@ module Aws::DataSync
     #
     class CreateLocationNfsResponse < Struct.new(
       :location_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -507,6 +517,7 @@ module Aws::DataSync
       :s3_storage_class,
       :s3_config,
       :tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -521,6 +532,7 @@ module Aws::DataSync
     #
     class CreateLocationS3Response < Struct.new(
       :location_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -622,6 +634,7 @@ module Aws::DataSync
       :agent_arns,
       :mount_options,
       :tags)
+      SENSITIVE = [:password]
       include Aws::Structure
     end
 
@@ -636,6 +649,7 @@ module Aws::DataSync
     #
     class CreateLocationSmbResponse < Struct.new(
       :location_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -746,6 +760,7 @@ module Aws::DataSync
       :excludes,
       :schedule,
       :tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -759,6 +774,7 @@ module Aws::DataSync
     #
     class CreateTaskResponse < Struct.new(
       :task_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -781,6 +797,7 @@ module Aws::DataSync
     #
     class DeleteAgentRequest < Struct.new(
       :agent_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -805,6 +822,7 @@ module Aws::DataSync
     #
     class DeleteLocationRequest < Struct.new(
       :location_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -829,6 +847,7 @@ module Aws::DataSync
     #
     class DeleteTaskRequest < Struct.new(
       :task_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -853,6 +872,7 @@ module Aws::DataSync
     #
     class DescribeAgentRequest < Struct.new(
       :agent_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -905,6 +925,7 @@ module Aws::DataSync
       :creation_time,
       :endpoint_type,
       :private_link_config)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -925,6 +946,7 @@ module Aws::DataSync
     #
     class DescribeLocationEfsRequest < Struct.new(
       :location_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -958,6 +980,7 @@ module Aws::DataSync
       :location_uri,
       :ec2_config,
       :creation_time)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -977,6 +1000,7 @@ module Aws::DataSync
     #
     class DescribeLocationFsxWindowsRequest < Struct.new(
       :location_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1017,6 +1041,7 @@ module Aws::DataSync
       :creation_time,
       :user,
       :domain)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1037,6 +1062,7 @@ module Aws::DataSync
     #
     class DescribeLocationNfsRequest < Struct.new(
       :location_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1072,6 +1098,7 @@ module Aws::DataSync
       :on_prem_config,
       :mount_options,
       :creation_time)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1093,6 +1120,7 @@ module Aws::DataSync
     #
     class DescribeLocationS3Request < Struct.new(
       :location_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1139,6 +1167,7 @@ module Aws::DataSync
       :s3_storage_class,
       :s3_config,
       :creation_time)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1159,6 +1188,7 @@ module Aws::DataSync
     #
     class DescribeLocationSmbRequest < Struct.new(
       :location_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1206,6 +1236,7 @@ module Aws::DataSync
       :domain,
       :mount_options,
       :creation_time)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1226,6 +1257,7 @@ module Aws::DataSync
     #
     class DescribeTaskExecutionRequest < Struct.new(
       :task_execution_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1336,6 +1368,7 @@ module Aws::DataSync
       :bytes_written,
       :bytes_transferred,
       :result)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1356,6 +1389,7 @@ module Aws::DataSync
     #
     class DescribeTaskRequest < Struct.new(
       :task_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1465,6 +1499,7 @@ module Aws::DataSync
       :error_code,
       :error_detail,
       :creation_time)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1497,6 +1532,7 @@ module Aws::DataSync
     class Ec2Config < Struct.new(
       :subnet_arn,
       :security_group_arns)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1527,6 +1563,7 @@ module Aws::DataSync
     class FilterRule < Struct.new(
       :filter_type,
       :value)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1544,6 +1581,7 @@ module Aws::DataSync
     class InternalException < Struct.new(
       :message,
       :error_code)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1560,6 +1598,7 @@ module Aws::DataSync
     class InvalidRequestException < Struct.new(
       :message,
       :error_code)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1587,6 +1626,7 @@ module Aws::DataSync
     class ListAgentsRequest < Struct.new(
       :max_results,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1606,6 +1646,7 @@ module Aws::DataSync
     class ListAgentsResponse < Struct.new(
       :agents,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1633,6 +1674,7 @@ module Aws::DataSync
     class ListLocationsRequest < Struct.new(
       :max_results,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1652,6 +1694,7 @@ module Aws::DataSync
     class ListLocationsResponse < Struct.new(
       :locations,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1685,6 +1728,7 @@ module Aws::DataSync
       :resource_arn,
       :max_results,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1704,6 +1748,7 @@ module Aws::DataSync
     class ListTagsForResourceResponse < Struct.new(
       :tags,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1738,6 +1783,7 @@ module Aws::DataSync
       :task_arn,
       :max_results,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1757,6 +1803,7 @@ module Aws::DataSync
     class ListTaskExecutionsResponse < Struct.new(
       :task_executions,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1784,6 +1831,7 @@ module Aws::DataSync
     class ListTasksRequest < Struct.new(
       :max_results,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1803,6 +1851,7 @@ module Aws::DataSync
     class ListTasksResponse < Struct.new(
       :tasks,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1844,6 +1893,7 @@ module Aws::DataSync
     class LocationListEntry < Struct.new(
       :location_arn,
       :location_uri)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1884,6 +1934,7 @@ module Aws::DataSync
     #
     class NfsMountOptions < Struct.new(
       :version)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1905,6 +1956,7 @@ module Aws::DataSync
     #
     class OnPremConfig < Struct.new(
       :agent_arns)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2119,6 +2171,7 @@ module Aws::DataSync
       :bytes_per_second,
       :task_queueing,
       :log_level)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2160,6 +2213,7 @@ module Aws::DataSync
       :private_link_endpoint,
       :subnet_arns,
       :security_group_arns)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2185,6 +2239,7 @@ module Aws::DataSync
     #
     class S3Config < Struct.new(
       :bucket_access_role_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2209,6 +2264,7 @@ module Aws::DataSync
     #
     class SmbMountOptions < Struct.new(
       :version)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2271,6 +2327,7 @@ module Aws::DataSync
       :task_arn,
       :override_options,
       :includes)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2285,6 +2342,7 @@ module Aws::DataSync
     #
     class StartTaskExecutionResponse < Struct.new(
       :task_execution_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2313,6 +2371,7 @@ module Aws::DataSync
     class TagListEntry < Struct.new(
       :key,
       :value)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2344,6 +2403,7 @@ module Aws::DataSync
     class TagResourceRequest < Struct.new(
       :resource_arn,
       :tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2369,6 +2429,7 @@ module Aws::DataSync
     class TaskExecutionListEntry < Struct.new(
       :task_execution_arn,
       :status)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2431,6 +2492,7 @@ module Aws::DataSync
       :verify_status,
       :error_code,
       :error_detail)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2457,6 +2519,7 @@ module Aws::DataSync
       :task_arn,
       :status,
       :name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2484,6 +2547,7 @@ module Aws::DataSync
     #
     class TaskSchedule < Struct.new(
       :schedule_expression)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2511,6 +2575,7 @@ module Aws::DataSync
     class UntagResourceRequest < Struct.new(
       :resource_arn,
       :keys)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2541,6 +2606,7 @@ module Aws::DataSync
     class UpdateAgentRequest < Struct.new(
       :agent_arn,
       :name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2634,6 +2700,7 @@ module Aws::DataSync
       :schedule,
       :name,
       :cloud_watch_log_group_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 

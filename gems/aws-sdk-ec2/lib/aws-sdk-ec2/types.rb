@@ -49,6 +49,7 @@ module Aws::EC2
       :dry_run,
       :reserved_instance_ids,
       :target_configurations)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -62,6 +63,7 @@ module Aws::EC2
     #
     class AcceptReservedInstancesExchangeQuoteResult < Struct.new(
       :exchange_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -89,6 +91,7 @@ module Aws::EC2
     class AcceptTransitGatewayPeeringAttachmentRequest < Struct.new(
       :transit_gateway_attachment_id,
       :dry_run)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -100,6 +103,7 @@ module Aws::EC2
     #
     class AcceptTransitGatewayPeeringAttachmentResult < Struct.new(
       :transit_gateway_peering_attachment)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -127,6 +131,7 @@ module Aws::EC2
     class AcceptTransitGatewayVpcAttachmentRequest < Struct.new(
       :transit_gateway_attachment_id,
       :dry_run)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -138,6 +143,7 @@ module Aws::EC2
     #
     class AcceptTransitGatewayVpcAttachmentResult < Struct.new(
       :transit_gateway_vpc_attachment)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -171,6 +177,7 @@ module Aws::EC2
       :dry_run,
       :service_id,
       :vpc_endpoint_ids)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -183,6 +190,7 @@ module Aws::EC2
     #
     class AcceptVpcEndpointConnectionsResult < Struct.new(
       :unsuccessful)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -211,6 +219,7 @@ module Aws::EC2
     class AcceptVpcPeeringConnectionRequest < Struct.new(
       :dry_run,
       :vpc_peering_connection_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -222,6 +231,7 @@ module Aws::EC2
     #
     class AcceptVpcPeeringConnectionResult < Struct.new(
       :vpc_peering_connection)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -240,6 +250,7 @@ module Aws::EC2
     class AccountAttribute < Struct.new(
       :attribute_name,
       :attribute_values)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -253,6 +264,7 @@ module Aws::EC2
     #
     class AccountAttributeValue < Struct.new(
       :attribute_value)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -284,6 +296,7 @@ module Aws::EC2
       :instance_type,
       :spot_instance_request_id,
       :instance_health)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -360,6 +373,7 @@ module Aws::EC2
       :network_border_group,
       :customer_owned_ip,
       :customer_owned_ipv_4_pool)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -389,6 +403,7 @@ module Aws::EC2
     class AdvertiseByoipCidrRequest < Struct.new(
       :cidr,
       :dry_run)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -400,6 +415,7 @@ module Aws::EC2
     #
     class AdvertiseByoipCidrResult < Struct.new(
       :byoip_cidr)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -481,6 +497,7 @@ module Aws::EC2
       :network_border_group,
       :customer_owned_ipv_4_pool,
       :dry_run)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -524,6 +541,7 @@ module Aws::EC2
       :domain,
       :customer_owned_ip,
       :customer_owned_ipv_4_pool)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -539,7 +557,7 @@ module Aws::EC2
     #         quantity: 1, # required
     #         tag_specifications: [
     #           {
-    #             resource_type: "client-vpn-endpoint", # accepts client-vpn-endpoint, customer-gateway, dedicated-host, dhcp-options, elastic-ip, fleet, fpga-image, host-reservation, image, instance, internet-gateway, key-pair, launch-template, natgateway, network-acl, network-interface, placement-group, reserved-instances, route-table, security-group, snapshot, spot-fleet-request, spot-instances-request, subnet, traffic-mirror-filter, traffic-mirror-session, traffic-mirror-target, transit-gateway, transit-gateway-attachment, transit-gateway-multicast-domain, transit-gateway-route-table, volume, vpc, vpc-peering-connection, vpn-connection, vpn-gateway, vpc-flow-log
+    #             resource_type: "client-vpn-endpoint", # accepts client-vpn-endpoint, customer-gateway, dedicated-host, dhcp-options, elastic-ip, elastic-gpu, export-image-task, export-instance-task, fleet, fpga-image, host-reservation, image, import-image-task, import-snapshot-task, instance, internet-gateway, key-pair, launch-template, local-gateway-route-table-vpc-association, natgateway, network-acl, network-interface, placement-group, reserved-instances, route-table, security-group, snapshot, spot-fleet-request, spot-instances-request, subnet, traffic-mirror-filter, traffic-mirror-session, traffic-mirror-target, transit-gateway, transit-gateway-attachment, transit-gateway-multicast-domain, transit-gateway-route-table, volume, vpc, vpc-peering-connection, vpn-connection, vpn-gateway, vpc-flow-log
     #             tags: [
     #               {
     #                 key: "String",
@@ -634,6 +652,7 @@ module Aws::EC2
       :quantity,
       :tag_specifications,
       :host_recovery)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -648,6 +667,7 @@ module Aws::EC2
     #
     class AllocateHostsResult < Struct.new(
       :host_ids)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -666,6 +686,7 @@ module Aws::EC2
     class AllowedPrincipal < Struct.new(
       :principal_type,
       :principal)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -707,6 +728,7 @@ module Aws::EC2
       :vpc_id,
       :security_group_ids,
       :dry_run)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -718,6 +740,7 @@ module Aws::EC2
     #
     class ApplySecurityGroupsToClientVpnTargetNetworkResult < Struct.new(
       :security_group_ids)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -753,6 +776,7 @@ module Aws::EC2
       :ipv_6_address_count,
       :ipv_6_addresses,
       :network_interface_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -769,6 +793,7 @@ module Aws::EC2
     class AssignIpv6AddressesResult < Struct.new(
       :assigned_ipv_6_addresses,
       :network_interface_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -816,6 +841,7 @@ module Aws::EC2
       :network_interface_id,
       :private_ip_addresses,
       :secondary_private_ip_address_count)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -832,6 +858,7 @@ module Aws::EC2
     class AssignPrivateIpAddressesResult < Struct.new(
       :network_interface_id,
       :assigned_private_ip_addresses)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -845,6 +872,7 @@ module Aws::EC2
     #
     class AssignedPrivateIpAddress < Struct.new(
       :private_ip_address)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -920,6 +948,7 @@ module Aws::EC2
       :dry_run,
       :network_interface_id,
       :private_ip_address)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -932,6 +961,7 @@ module Aws::EC2
     #
     class AssociateAddressResult < Struct.new(
       :association_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -980,6 +1010,7 @@ module Aws::EC2
       :subnet_id,
       :client_token,
       :dry_run)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -996,6 +1027,7 @@ module Aws::EC2
     class AssociateClientVpnTargetNetworkResult < Struct.new(
       :association_id,
       :status)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1030,6 +1062,7 @@ module Aws::EC2
       :dhcp_options_id,
       :vpc_id,
       :dry_run)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1057,6 +1090,7 @@ module Aws::EC2
     class AssociateIamInstanceProfileRequest < Struct.new(
       :iam_instance_profile,
       :instance_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1068,6 +1102,7 @@ module Aws::EC2
     #
     class AssociateIamInstanceProfileResult < Struct.new(
       :iam_instance_profile_association)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1107,6 +1142,7 @@ module Aws::EC2
       :route_table_id,
       :subnet_id,
       :gateway_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1124,6 +1160,7 @@ module Aws::EC2
     class AssociateRouteTableResult < Struct.new(
       :association_id,
       :association_state)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1149,6 +1186,7 @@ module Aws::EC2
     class AssociateSubnetCidrBlockRequest < Struct.new(
       :ipv_6_cidr_block,
       :subnet_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1165,6 +1203,7 @@ module Aws::EC2
     class AssociateSubnetCidrBlockResult < Struct.new(
       :ipv_6_cidr_block_association,
       :subnet_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1206,6 +1245,7 @@ module Aws::EC2
       :transit_gateway_attachment_id,
       :subnet_ids,
       :dry_run)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1217,6 +1257,7 @@ module Aws::EC2
     #
     class AssociateTransitGatewayMulticastDomainResult < Struct.new(
       :associations)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1250,6 +1291,7 @@ module Aws::EC2
       :transit_gateway_route_table_id,
       :transit_gateway_attachment_id,
       :dry_run)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1261,6 +1303,7 @@ module Aws::EC2
     #
     class AssociateTransitGatewayRouteTableResult < Struct.new(
       :association)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1323,6 +1366,7 @@ module Aws::EC2
       :ipv_6_cidr_block_network_border_group,
       :ipv_6_pool,
       :ipv_6_cidr_block)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1344,6 +1388,7 @@ module Aws::EC2
       :ipv_6_cidr_block_association,
       :cidr_block_association,
       :vpc_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1363,6 +1408,7 @@ module Aws::EC2
     class AssociatedTargetNetwork < Struct.new(
       :network_id,
       :network_type)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1382,6 +1428,7 @@ module Aws::EC2
     class AssociationStatus < Struct.new(
       :code,
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1423,6 +1470,7 @@ module Aws::EC2
       :groups,
       :instance_id,
       :vpc_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1435,6 +1483,7 @@ module Aws::EC2
     #
     class AttachClassicLinkVpcResult < Struct.new(
       :return)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1468,6 +1517,7 @@ module Aws::EC2
       :dry_run,
       :internet_gateway_id,
       :vpc_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1509,6 +1559,7 @@ module Aws::EC2
       :dry_run,
       :instance_id,
       :network_interface_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1522,6 +1573,7 @@ module Aws::EC2
     #
     class AttachNetworkInterfaceResult < Struct.new(
       :attachment_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1562,6 +1614,7 @@ module Aws::EC2
       :instance_id,
       :volume_id,
       :dry_run)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1597,6 +1650,7 @@ module Aws::EC2
       :vpc_id,
       :vpn_gateway_id,
       :dry_run)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1610,6 +1664,7 @@ module Aws::EC2
     #
     class AttachVpnGatewayResult < Struct.new(
       :vpc_attachment)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1630,6 +1685,7 @@ module Aws::EC2
     #
     class AttributeBooleanValue < Struct.new(
       :value)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1650,6 +1706,7 @@ module Aws::EC2
     #
     class AttributeValue < Struct.new(
       :value)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1692,6 +1749,7 @@ module Aws::EC2
       :access_all,
       :destination_cidr,
       :status)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1762,6 +1820,7 @@ module Aws::EC2
       :description,
       :client_token,
       :dry_run)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1773,6 +1832,7 @@ module Aws::EC2
     #
     class AuthorizeClientVpnIngressResult < Struct.new(
       :status)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1882,6 +1942,7 @@ module Aws::EC2
       :to_port,
       :source_security_group_name,
       :source_security_group_owner_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2036,6 +2097,7 @@ module Aws::EC2
       :source_security_group_owner_id,
       :to_port,
       :dry_run)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2092,6 +2154,7 @@ module Aws::EC2
       :zone_id,
       :group_name,
       :network_border_group)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2105,6 +2168,7 @@ module Aws::EC2
     #
     class AvailabilityZoneMessage < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2129,6 +2193,7 @@ module Aws::EC2
     class AvailableCapacity < Struct.new(
       :available_instance_capacity,
       :available_v_cpus)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2146,6 +2211,7 @@ module Aws::EC2
     #
     class BlobAttributeValue < Struct.new(
       :value)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2208,6 +2274,7 @@ module Aws::EC2
       :virtual_name,
       :ebs,
       :no_device)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2260,6 +2327,7 @@ module Aws::EC2
       :instance_id,
       :storage,
       :dry_run)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2273,6 +2341,7 @@ module Aws::EC2
     #
     class BundleInstanceResult < Struct.new(
       :bundle_task)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2321,6 +2390,7 @@ module Aws::EC2
       :state,
       :storage,
       :update_time)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2339,6 +2409,7 @@ module Aws::EC2
     class BundleTaskError < Struct.new(
       :code,
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2369,6 +2440,7 @@ module Aws::EC2
       :description,
       :status_message,
       :state)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2398,6 +2470,7 @@ module Aws::EC2
     class CancelBundleTaskRequest < Struct.new(
       :bundle_id,
       :dry_run)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2411,6 +2484,7 @@ module Aws::EC2
     #
     class CancelBundleTaskResult < Struct.new(
       :bundle_task)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2438,6 +2512,7 @@ module Aws::EC2
     class CancelCapacityReservationRequest < Struct.new(
       :capacity_reservation_id,
       :dry_run)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2450,6 +2525,7 @@ module Aws::EC2
     #
     class CancelCapacityReservationResult < Struct.new(
       :return)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2483,6 +2559,7 @@ module Aws::EC2
       :conversion_task_id,
       :dry_run,
       :reason_message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2502,6 +2579,7 @@ module Aws::EC2
     #
     class CancelExportTaskRequest < Struct.new(
       :export_task_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2535,6 +2613,7 @@ module Aws::EC2
       :cancel_reason,
       :dry_run,
       :import_task_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2556,6 +2635,7 @@ module Aws::EC2
       :import_task_id,
       :previous_state,
       :state)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2576,6 +2656,7 @@ module Aws::EC2
     #
     class CancelReservedInstancesListingRequest < Struct.new(
       :reserved_instances_listing_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2589,6 +2670,7 @@ module Aws::EC2
     #
     class CancelReservedInstancesListingResult < Struct.new(
       :reserved_instances_listings)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2607,6 +2689,7 @@ module Aws::EC2
     class CancelSpotFleetRequestsError < Struct.new(
       :code,
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2625,6 +2708,7 @@ module Aws::EC2
     class CancelSpotFleetRequestsErrorItem < Struct.new(
       :error,
       :spot_fleet_request_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2661,6 +2745,7 @@ module Aws::EC2
       :dry_run,
       :spot_fleet_request_ids,
       :terminate_instances)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2681,6 +2766,7 @@ module Aws::EC2
     class CancelSpotFleetRequestsResponse < Struct.new(
       :successful_fleet_requests,
       :unsuccessful_fleet_requests)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2704,6 +2790,7 @@ module Aws::EC2
       :current_spot_fleet_request_state,
       :previous_spot_fleet_request_state,
       :spot_fleet_request_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2733,6 +2820,7 @@ module Aws::EC2
     class CancelSpotInstanceRequestsRequest < Struct.new(
       :dry_run,
       :spot_instance_request_ids)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2746,6 +2834,7 @@ module Aws::EC2
     #
     class CancelSpotInstanceRequestsResult < Struct.new(
       :cancelled_spot_instance_requests)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2764,6 +2853,7 @@ module Aws::EC2
     class CancelledSpotInstanceRequest < Struct.new(
       :spot_instance_request_id,
       :state)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2922,6 +3012,7 @@ module Aws::EC2
       :instance_match_criteria,
       :create_date,
       :tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2965,6 +3056,7 @@ module Aws::EC2
     #
     class CapacityReservationOptions < Struct.new(
       :usage_strategy)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3015,6 +3107,7 @@ module Aws::EC2
     #
     class CapacityReservationOptionsRequest < Struct.new(
       :usage_strategy)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3061,6 +3154,7 @@ module Aws::EC2
     class CapacityReservationSpecification < Struct.new(
       :capacity_reservation_preference,
       :capacity_reservation_target)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3093,6 +3187,7 @@ module Aws::EC2
     class CapacityReservationSpecificationResponse < Struct.new(
       :capacity_reservation_preference,
       :capacity_reservation_target)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3113,6 +3208,7 @@ module Aws::EC2
     #
     class CapacityReservationTarget < Struct.new(
       :capacity_reservation_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3126,6 +3222,7 @@ module Aws::EC2
     #
     class CapacityReservationTargetResponse < Struct.new(
       :capacity_reservation_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3139,6 +3236,7 @@ module Aws::EC2
     #
     class CertificateAuthentication < Struct.new(
       :client_root_certificate_chain)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3162,6 +3260,7 @@ module Aws::EC2
     #
     class CertificateAuthenticationRequest < Struct.new(
       :client_root_certificate_chain_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3195,6 +3294,7 @@ module Aws::EC2
     class CidrAuthorizationContext < Struct.new(
       :message,
       :signature)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3208,6 +3308,7 @@ module Aws::EC2
     #
     class CidrBlock < Struct.new(
       :cidr_block)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3226,6 +3327,7 @@ module Aws::EC2
     class ClassicLinkDnsSupport < Struct.new(
       :classic_link_dns_supported,
       :vpc_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3254,6 +3356,7 @@ module Aws::EC2
       :instance_id,
       :tags,
       :vpc_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3274,6 +3377,7 @@ module Aws::EC2
     #
     class ClassicLoadBalancer < Struct.new(
       :name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3300,6 +3404,7 @@ module Aws::EC2
     #
     class ClassicLoadBalancersConfig < Struct.new(
       :classic_load_balancers)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3319,6 +3424,7 @@ module Aws::EC2
     class ClientCertificateRevocationListStatus < Struct.new(
       :code,
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3357,6 +3463,7 @@ module Aws::EC2
       :upload_end,
       :upload_size,
       :upload_start)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3391,6 +3498,7 @@ module Aws::EC2
       :active_directory,
       :mutual_authentication,
       :federated_authentication)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3447,6 +3555,7 @@ module Aws::EC2
       :active_directory,
       :mutual_authentication,
       :federated_authentication)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3465,6 +3574,7 @@ module Aws::EC2
     class ClientVpnAuthorizationRuleStatus < Struct.new(
       :code,
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3541,6 +3651,7 @@ module Aws::EC2
       :common_name,
       :status,
       :connection_end_time)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3559,6 +3670,7 @@ module Aws::EC2
     class ClientVpnConnectionStatus < Struct.new(
       :code,
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3677,6 +3789,7 @@ module Aws::EC2
       :tags,
       :security_group_ids,
       :vpc_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3709,6 +3822,7 @@ module Aws::EC2
     class ClientVpnEndpointStatus < Struct.new(
       :code,
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3757,6 +3871,7 @@ module Aws::EC2
       :origin,
       :status,
       :description)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3776,6 +3891,7 @@ module Aws::EC2
     class ClientVpnRouteStatus < Struct.new(
       :code,
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3804,6 +3920,7 @@ module Aws::EC2
       :aws_account_id,
       :aws_service,
       :co_ip)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3832,6 +3949,7 @@ module Aws::EC2
       :pool_cidrs,
       :local_gateway_route_table_id,
       :tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3865,6 +3983,7 @@ module Aws::EC2
       :instance_id,
       :product_code,
       :dry_run)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3884,6 +4003,7 @@ module Aws::EC2
     class ConfirmProductInstanceResult < Struct.new(
       :owner_id,
       :return)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3918,6 +4038,7 @@ module Aws::EC2
       :enabled,
       :cloudwatch_log_group,
       :cloudwatch_log_stream)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3945,6 +4066,7 @@ module Aws::EC2
       :enabled,
       :cloudwatch_log_group,
       :cloudwatch_log_stream)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3990,6 +4112,7 @@ module Aws::EC2
       :connection_notification_arn,
       :connection_events,
       :connection_notification_state)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4036,6 +4159,7 @@ module Aws::EC2
       :state,
       :status_message,
       :tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4093,6 +4217,7 @@ module Aws::EC2
       :name,
       :source_region,
       :client_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4104,6 +4229,7 @@ module Aws::EC2
     #
     class CopyFpgaImageResult < Struct.new(
       :fpga_image_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4212,6 +4338,7 @@ module Aws::EC2
       :source_image_id,
       :source_region,
       :dry_run)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4225,6 +4352,7 @@ module Aws::EC2
     #
     class CopyImageResult < Struct.new(
       :image_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4241,7 +4369,7 @@ module Aws::EC2
     #         source_snapshot_id: "String", # required
     #         tag_specifications: [
     #           {
-    #             resource_type: "client-vpn-endpoint", # accepts client-vpn-endpoint, customer-gateway, dedicated-host, dhcp-options, elastic-ip, fleet, fpga-image, host-reservation, image, instance, internet-gateway, key-pair, launch-template, natgateway, network-acl, network-interface, placement-group, reserved-instances, route-table, security-group, snapshot, spot-fleet-request, spot-instances-request, subnet, traffic-mirror-filter, traffic-mirror-session, traffic-mirror-target, transit-gateway, transit-gateway-attachment, transit-gateway-multicast-domain, transit-gateway-route-table, volume, vpc, vpc-peering-connection, vpn-connection, vpn-gateway, vpc-flow-log
+    #             resource_type: "client-vpn-endpoint", # accepts client-vpn-endpoint, customer-gateway, dedicated-host, dhcp-options, elastic-ip, elastic-gpu, export-image-task, export-instance-task, fleet, fpga-image, host-reservation, image, import-image-task, import-snapshot-task, instance, internet-gateway, key-pair, launch-template, local-gateway-route-table-vpc-association, natgateway, network-acl, network-interface, placement-group, reserved-instances, route-table, security-group, snapshot, spot-fleet-request, spot-instances-request, subnet, traffic-mirror-filter, traffic-mirror-session, traffic-mirror-target, transit-gateway, transit-gateway-attachment, transit-gateway-multicast-domain, transit-gateway-route-table, volume, vpc, vpc-peering-connection, vpn-connection, vpn-gateway, vpc-flow-log
     #             tags: [
     #               {
     #                 key: "String",
@@ -4361,6 +4489,7 @@ module Aws::EC2
       :source_snapshot_id,
       :tag_specifications,
       :dry_run)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4377,6 +4506,7 @@ module Aws::EC2
     class CopySnapshotResult < Struct.new(
       :snapshot_id,
       :tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4395,6 +4525,7 @@ module Aws::EC2
     class CpuOptions < Struct.new(
       :core_count,
       :threads_per_core)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4424,6 +4555,7 @@ module Aws::EC2
     class CpuOptionsRequest < Struct.new(
       :core_count,
       :threads_per_core)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4445,7 +4577,7 @@ module Aws::EC2
     #         instance_match_criteria: "open", # accepts open, targeted
     #         tag_specifications: [
     #           {
-    #             resource_type: "client-vpn-endpoint", # accepts client-vpn-endpoint, customer-gateway, dedicated-host, dhcp-options, elastic-ip, fleet, fpga-image, host-reservation, image, instance, internet-gateway, key-pair, launch-template, natgateway, network-acl, network-interface, placement-group, reserved-instances, route-table, security-group, snapshot, spot-fleet-request, spot-instances-request, subnet, traffic-mirror-filter, traffic-mirror-session, traffic-mirror-target, transit-gateway, transit-gateway-attachment, transit-gateway-multicast-domain, transit-gateway-route-table, volume, vpc, vpc-peering-connection, vpn-connection, vpn-gateway, vpc-flow-log
+    #             resource_type: "client-vpn-endpoint", # accepts client-vpn-endpoint, customer-gateway, dedicated-host, dhcp-options, elastic-ip, elastic-gpu, export-image-task, export-instance-task, fleet, fpga-image, host-reservation, image, import-image-task, import-snapshot-task, instance, internet-gateway, key-pair, launch-template, local-gateway-route-table-vpc-association, natgateway, network-acl, network-interface, placement-group, reserved-instances, route-table, security-group, snapshot, spot-fleet-request, spot-instances-request, subnet, traffic-mirror-filter, traffic-mirror-session, traffic-mirror-target, transit-gateway, transit-gateway-attachment, transit-gateway-multicast-domain, transit-gateway-route-table, volume, vpc, vpc-peering-connection, vpn-connection, vpn-gateway, vpc-flow-log
     #             tags: [
     #               {
     #                 key: "String",
@@ -4597,6 +4729,7 @@ module Aws::EC2
       :instance_match_criteria,
       :tag_specifications,
       :dry_run)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4608,6 +4741,7 @@ module Aws::EC2
     #
     class CreateCapacityReservationResult < Struct.new(
       :capacity_reservation)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4645,7 +4779,7 @@ module Aws::EC2
     #         client_token: "String",
     #         tag_specifications: [
     #           {
-    #             resource_type: "client-vpn-endpoint", # accepts client-vpn-endpoint, customer-gateway, dedicated-host, dhcp-options, elastic-ip, fleet, fpga-image, host-reservation, image, instance, internet-gateway, key-pair, launch-template, natgateway, network-acl, network-interface, placement-group, reserved-instances, route-table, security-group, snapshot, spot-fleet-request, spot-instances-request, subnet, traffic-mirror-filter, traffic-mirror-session, traffic-mirror-target, transit-gateway, transit-gateway-attachment, transit-gateway-multicast-domain, transit-gateway-route-table, volume, vpc, vpc-peering-connection, vpn-connection, vpn-gateway, vpc-flow-log
+    #             resource_type: "client-vpn-endpoint", # accepts client-vpn-endpoint, customer-gateway, dedicated-host, dhcp-options, elastic-ip, elastic-gpu, export-image-task, export-instance-task, fleet, fpga-image, host-reservation, image, import-image-task, import-snapshot-task, instance, internet-gateway, key-pair, launch-template, local-gateway-route-table-vpc-association, natgateway, network-acl, network-interface, placement-group, reserved-instances, route-table, security-group, snapshot, spot-fleet-request, spot-instances-request, subnet, traffic-mirror-filter, traffic-mirror-session, traffic-mirror-target, transit-gateway, transit-gateway-attachment, transit-gateway-multicast-domain, transit-gateway-route-table, volume, vpc, vpc-peering-connection, vpn-connection, vpn-gateway, vpc-flow-log
     #             tags: [
     #               {
     #                 key: "String",
@@ -4791,6 +4925,7 @@ module Aws::EC2
       :tag_specifications,
       :security_group_ids,
       :vpc_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4813,6 +4948,7 @@ module Aws::EC2
       :client_vpn_endpoint_id,
       :status,
       :dns_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4887,6 +5023,7 @@ module Aws::EC2
       :description,
       :client_token,
       :dry_run)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4898,6 +5035,7 @@ module Aws::EC2
     #
     class CreateClientVpnRouteResult < Struct.new(
       :status)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4957,6 +5095,7 @@ module Aws::EC2
       :type,
       :device_name,
       :dry_run)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4970,6 +5109,7 @@ module Aws::EC2
     #
     class CreateCustomerGatewayResult < Struct.new(
       :customer_gateway)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4997,6 +5137,7 @@ module Aws::EC2
     class CreateDefaultSubnetRequest < Struct.new(
       :availability_zone,
       :dry_run)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5008,6 +5149,7 @@ module Aws::EC2
     #
     class CreateDefaultSubnetResult < Struct.new(
       :subnet)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5029,6 +5171,7 @@ module Aws::EC2
     #
     class CreateDefaultVpcRequest < Struct.new(
       :dry_run)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5040,6 +5183,7 @@ module Aws::EC2
     #
     class CreateDefaultVpcResult < Struct.new(
       :vpc)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5072,6 +5216,7 @@ module Aws::EC2
     class CreateDhcpOptionsRequest < Struct.new(
       :dhcp_configurations,
       :dry_run)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5083,6 +5228,7 @@ module Aws::EC2
     #
     class CreateDhcpOptionsResult < Struct.new(
       :dhcp_options)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5123,6 +5269,7 @@ module Aws::EC2
       :client_token,
       :dry_run,
       :vpc_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5140,6 +5287,7 @@ module Aws::EC2
     class CreateEgressOnlyInternetGatewayResult < Struct.new(
       :client_token,
       :egress_only_internet_gateway)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5183,6 +5331,7 @@ module Aws::EC2
       :lifecycle,
       :error_code,
       :error_message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5220,6 +5369,7 @@ module Aws::EC2
       :instance_ids,
       :instance_type,
       :platform)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5291,7 +5441,7 @@ module Aws::EC2
     #         replace_unhealthy_instances: false,
     #         tag_specifications: [
     #           {
-    #             resource_type: "client-vpn-endpoint", # accepts client-vpn-endpoint, customer-gateway, dedicated-host, dhcp-options, elastic-ip, fleet, fpga-image, host-reservation, image, instance, internet-gateway, key-pair, launch-template, natgateway, network-acl, network-interface, placement-group, reserved-instances, route-table, security-group, snapshot, spot-fleet-request, spot-instances-request, subnet, traffic-mirror-filter, traffic-mirror-session, traffic-mirror-target, transit-gateway, transit-gateway-attachment, transit-gateway-multicast-domain, transit-gateway-route-table, volume, vpc, vpc-peering-connection, vpn-connection, vpn-gateway, vpc-flow-log
+    #             resource_type: "client-vpn-endpoint", # accepts client-vpn-endpoint, customer-gateway, dedicated-host, dhcp-options, elastic-ip, elastic-gpu, export-image-task, export-instance-task, fleet, fpga-image, host-reservation, image, import-image-task, import-snapshot-task, instance, internet-gateway, key-pair, launch-template, local-gateway-route-table-vpc-association, natgateway, network-acl, network-interface, placement-group, reserved-instances, route-table, security-group, snapshot, spot-fleet-request, spot-instances-request, subnet, traffic-mirror-filter, traffic-mirror-session, traffic-mirror-target, transit-gateway, transit-gateway-attachment, transit-gateway-multicast-domain, transit-gateway-route-table, volume, vpc, vpc-peering-connection, vpn-connection, vpn-gateway, vpc-flow-log
     #             tags: [
     #               {
     #                 key: "String",
@@ -5408,6 +5558,7 @@ module Aws::EC2
       :valid_until,
       :replace_unhealthy_instances,
       :tag_specifications)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5431,6 +5582,7 @@ module Aws::EC2
       :fleet_id,
       :errors,
       :instances)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5450,7 +5602,7 @@ module Aws::EC2
     #         log_format: "String",
     #         tag_specifications: [
     #           {
-    #             resource_type: "client-vpn-endpoint", # accepts client-vpn-endpoint, customer-gateway, dedicated-host, dhcp-options, elastic-ip, fleet, fpga-image, host-reservation, image, instance, internet-gateway, key-pair, launch-template, natgateway, network-acl, network-interface, placement-group, reserved-instances, route-table, security-group, snapshot, spot-fleet-request, spot-instances-request, subnet, traffic-mirror-filter, traffic-mirror-session, traffic-mirror-target, transit-gateway, transit-gateway-attachment, transit-gateway-multicast-domain, transit-gateway-route-table, volume, vpc, vpc-peering-connection, vpn-connection, vpn-gateway, vpc-flow-log
+    #             resource_type: "client-vpn-endpoint", # accepts client-vpn-endpoint, customer-gateway, dedicated-host, dhcp-options, elastic-ip, elastic-gpu, export-image-task, export-instance-task, fleet, fpga-image, host-reservation, image, import-image-task, import-snapshot-task, instance, internet-gateway, key-pair, launch-template, local-gateway-route-table-vpc-association, natgateway, network-acl, network-interface, placement-group, reserved-instances, route-table, security-group, snapshot, spot-fleet-request, spot-instances-request, subnet, traffic-mirror-filter, traffic-mirror-session, traffic-mirror-target, transit-gateway, transit-gateway-attachment, transit-gateway-multicast-domain, transit-gateway-route-table, volume, vpc, vpc-peering-connection, vpn-connection, vpn-gateway, vpc-flow-log
     #             tags: [
     #               {
     #                 key: "String",
@@ -5598,6 +5750,7 @@ module Aws::EC2
       :log_format,
       :tag_specifications,
       :max_aggregation_interval)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5621,6 +5774,7 @@ module Aws::EC2
       :client_token,
       :flow_log_ids,
       :unsuccessful)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5642,7 +5796,7 @@ module Aws::EC2
     #         client_token: "String",
     #         tag_specifications: [
     #           {
-    #             resource_type: "client-vpn-endpoint", # accepts client-vpn-endpoint, customer-gateway, dedicated-host, dhcp-options, elastic-ip, fleet, fpga-image, host-reservation, image, instance, internet-gateway, key-pair, launch-template, natgateway, network-acl, network-interface, placement-group, reserved-instances, route-table, security-group, snapshot, spot-fleet-request, spot-instances-request, subnet, traffic-mirror-filter, traffic-mirror-session, traffic-mirror-target, transit-gateway, transit-gateway-attachment, transit-gateway-multicast-domain, transit-gateway-route-table, volume, vpc, vpc-peering-connection, vpn-connection, vpn-gateway, vpc-flow-log
+    #             resource_type: "client-vpn-endpoint", # accepts client-vpn-endpoint, customer-gateway, dedicated-host, dhcp-options, elastic-ip, elastic-gpu, export-image-task, export-instance-task, fleet, fpga-image, host-reservation, image, import-image-task, import-snapshot-task, instance, internet-gateway, key-pair, launch-template, local-gateway-route-table-vpc-association, natgateway, network-acl, network-interface, placement-group, reserved-instances, route-table, security-group, snapshot, spot-fleet-request, spot-instances-request, subnet, traffic-mirror-filter, traffic-mirror-session, traffic-mirror-target, transit-gateway, transit-gateway-attachment, transit-gateway-multicast-domain, transit-gateway-route-table, volume, vpc, vpc-peering-connection, vpn-connection, vpn-gateway, vpc-flow-log
     #             tags: [
     #               {
     #                 key: "String",
@@ -5701,6 +5855,7 @@ module Aws::EC2
       :name,
       :client_token,
       :tag_specifications)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5717,6 +5872,7 @@ module Aws::EC2
     class CreateFpgaImageResult < Struct.new(
       :fpga_image_id,
       :fpga_image_global_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5793,6 +5949,7 @@ module Aws::EC2
       :instance_id,
       :name,
       :no_reboot)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5804,6 +5961,7 @@ module Aws::EC2
     #
     class CreateImageResult < Struct.new(
       :image_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5820,11 +5978,22 @@ module Aws::EC2
     #         },
     #         instance_id: "InstanceId", # required
     #         target_environment: "citrix", # accepts citrix, vmware, microsoft
+    #         tag_specifications: [
+    #           {
+    #             resource_type: "client-vpn-endpoint", # accepts client-vpn-endpoint, customer-gateway, dedicated-host, dhcp-options, elastic-ip, elastic-gpu, export-image-task, export-instance-task, fleet, fpga-image, host-reservation, image, import-image-task, import-snapshot-task, instance, internet-gateway, key-pair, launch-template, local-gateway-route-table-vpc-association, natgateway, network-acl, network-interface, placement-group, reserved-instances, route-table, security-group, snapshot, spot-fleet-request, spot-instances-request, subnet, traffic-mirror-filter, traffic-mirror-session, traffic-mirror-target, transit-gateway, transit-gateway-attachment, transit-gateway-multicast-domain, transit-gateway-route-table, volume, vpc, vpc-peering-connection, vpn-connection, vpn-gateway, vpc-flow-log
+    #             tags: [
+    #               {
+    #                 key: "String",
+    #                 value: "String",
+    #               },
+    #             ],
+    #           },
+    #         ],
     #       }
     #
     # @!attribute [rw] description
     #   A description for the conversion task or the resource being
-    #   exported. The maximum length is 255 bytes.
+    #   exported. The maximum length is 255 characters.
     #   @return [String]
     #
     # @!attribute [rw] export_to_s3_task
@@ -5839,13 +6008,19 @@ module Aws::EC2
     #   The target virtualization environment.
     #   @return [String]
     #
+    # @!attribute [rw] tag_specifications
+    #   The tags to apply to the instance export task during creation.
+    #   @return [Array<Types::TagSpecification>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CreateInstanceExportTaskRequest AWS API Documentation
     #
     class CreateInstanceExportTaskRequest < Struct.new(
       :description,
       :export_to_s3_task,
       :instance_id,
-      :target_environment)
+      :target_environment,
+      :tag_specifications)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5857,6 +6032,7 @@ module Aws::EC2
     #
     class CreateInstanceExportTaskResult < Struct.new(
       :export_task)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5878,6 +6054,7 @@ module Aws::EC2
     #
     class CreateInternetGatewayRequest < Struct.new(
       :dry_run)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5889,6 +6066,7 @@ module Aws::EC2
     #
     class CreateInternetGatewayResult < Struct.new(
       :internet_gateway)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5900,7 +6078,7 @@ module Aws::EC2
     #         dry_run: false,
     #         tag_specifications: [
     #           {
-    #             resource_type: "client-vpn-endpoint", # accepts client-vpn-endpoint, customer-gateway, dedicated-host, dhcp-options, elastic-ip, fleet, fpga-image, host-reservation, image, instance, internet-gateway, key-pair, launch-template, natgateway, network-acl, network-interface, placement-group, reserved-instances, route-table, security-group, snapshot, spot-fleet-request, spot-instances-request, subnet, traffic-mirror-filter, traffic-mirror-session, traffic-mirror-target, transit-gateway, transit-gateway-attachment, transit-gateway-multicast-domain, transit-gateway-route-table, volume, vpc, vpc-peering-connection, vpn-connection, vpn-gateway, vpc-flow-log
+    #             resource_type: "client-vpn-endpoint", # accepts client-vpn-endpoint, customer-gateway, dedicated-host, dhcp-options, elastic-ip, elastic-gpu, export-image-task, export-instance-task, fleet, fpga-image, host-reservation, image, import-image-task, import-snapshot-task, instance, internet-gateway, key-pair, launch-template, local-gateway-route-table-vpc-association, natgateway, network-acl, network-interface, placement-group, reserved-instances, route-table, security-group, snapshot, spot-fleet-request, spot-instances-request, subnet, traffic-mirror-filter, traffic-mirror-session, traffic-mirror-target, transit-gateway, transit-gateway-attachment, transit-gateway-multicast-domain, transit-gateway-route-table, volume, vpc, vpc-peering-connection, vpn-connection, vpn-gateway, vpc-flow-log
     #             tags: [
     #               {
     #                 key: "String",
@@ -5934,6 +6112,7 @@ module Aws::EC2
       :key_name,
       :dry_run,
       :tag_specifications)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6016,7 +6195,7 @@ module Aws::EC2
     #           user_data: "String",
     #           tag_specifications: [
     #             {
-    #               resource_type: "client-vpn-endpoint", # accepts client-vpn-endpoint, customer-gateway, dedicated-host, dhcp-options, elastic-ip, fleet, fpga-image, host-reservation, image, instance, internet-gateway, key-pair, launch-template, natgateway, network-acl, network-interface, placement-group, reserved-instances, route-table, security-group, snapshot, spot-fleet-request, spot-instances-request, subnet, traffic-mirror-filter, traffic-mirror-session, traffic-mirror-target, transit-gateway, transit-gateway-attachment, transit-gateway-multicast-domain, transit-gateway-route-table, volume, vpc, vpc-peering-connection, vpn-connection, vpn-gateway, vpc-flow-log
+    #               resource_type: "client-vpn-endpoint", # accepts client-vpn-endpoint, customer-gateway, dedicated-host, dhcp-options, elastic-ip, elastic-gpu, export-image-task, export-instance-task, fleet, fpga-image, host-reservation, image, import-image-task, import-snapshot-task, instance, internet-gateway, key-pair, launch-template, local-gateway-route-table-vpc-association, natgateway, network-acl, network-interface, placement-group, reserved-instances, route-table, security-group, snapshot, spot-fleet-request, spot-instances-request, subnet, traffic-mirror-filter, traffic-mirror-session, traffic-mirror-target, transit-gateway, transit-gateway-attachment, transit-gateway-multicast-domain, transit-gateway-route-table, volume, vpc, vpc-peering-connection, vpn-connection, vpn-gateway, vpc-flow-log
     #               tags: [
     #                 {
     #                   key: "String",
@@ -6077,7 +6256,7 @@ module Aws::EC2
     #         },
     #         tag_specifications: [
     #           {
-    #             resource_type: "client-vpn-endpoint", # accepts client-vpn-endpoint, customer-gateway, dedicated-host, dhcp-options, elastic-ip, fleet, fpga-image, host-reservation, image, instance, internet-gateway, key-pair, launch-template, natgateway, network-acl, network-interface, placement-group, reserved-instances, route-table, security-group, snapshot, spot-fleet-request, spot-instances-request, subnet, traffic-mirror-filter, traffic-mirror-session, traffic-mirror-target, transit-gateway, transit-gateway-attachment, transit-gateway-multicast-domain, transit-gateway-route-table, volume, vpc, vpc-peering-connection, vpn-connection, vpn-gateway, vpc-flow-log
+    #             resource_type: "client-vpn-endpoint", # accepts client-vpn-endpoint, customer-gateway, dedicated-host, dhcp-options, elastic-ip, elastic-gpu, export-image-task, export-instance-task, fleet, fpga-image, host-reservation, image, import-image-task, import-snapshot-task, instance, internet-gateway, key-pair, launch-template, local-gateway-route-table-vpc-association, natgateway, network-acl, network-interface, placement-group, reserved-instances, route-table, security-group, snapshot, spot-fleet-request, spot-instances-request, subnet, traffic-mirror-filter, traffic-mirror-session, traffic-mirror-target, transit-gateway, transit-gateway-attachment, transit-gateway-multicast-domain, transit-gateway-route-table, volume, vpc, vpc-peering-connection, vpn-connection, vpn-gateway, vpc-flow-log
     #             tags: [
     #               {
     #                 key: "String",
@@ -6132,6 +6311,7 @@ module Aws::EC2
       :version_description,
       :launch_template_data,
       :tag_specifications)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6150,6 +6330,7 @@ module Aws::EC2
     class CreateLaunchTemplateResult < Struct.new(
       :launch_template,
       :warning)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6234,7 +6415,7 @@ module Aws::EC2
     #           user_data: "String",
     #           tag_specifications: [
     #             {
-    #               resource_type: "client-vpn-endpoint", # accepts client-vpn-endpoint, customer-gateway, dedicated-host, dhcp-options, elastic-ip, fleet, fpga-image, host-reservation, image, instance, internet-gateway, key-pair, launch-template, natgateway, network-acl, network-interface, placement-group, reserved-instances, route-table, security-group, snapshot, spot-fleet-request, spot-instances-request, subnet, traffic-mirror-filter, traffic-mirror-session, traffic-mirror-target, transit-gateway, transit-gateway-attachment, transit-gateway-multicast-domain, transit-gateway-route-table, volume, vpc, vpc-peering-connection, vpn-connection, vpn-gateway, vpc-flow-log
+    #               resource_type: "client-vpn-endpoint", # accepts client-vpn-endpoint, customer-gateway, dedicated-host, dhcp-options, elastic-ip, elastic-gpu, export-image-task, export-instance-task, fleet, fpga-image, host-reservation, image, import-image-task, import-snapshot-task, instance, internet-gateway, key-pair, launch-template, local-gateway-route-table-vpc-association, natgateway, network-acl, network-interface, placement-group, reserved-instances, route-table, security-group, snapshot, spot-fleet-request, spot-instances-request, subnet, traffic-mirror-filter, traffic-mirror-session, traffic-mirror-target, transit-gateway, transit-gateway-attachment, transit-gateway-multicast-domain, transit-gateway-route-table, volume, vpc, vpc-peering-connection, vpn-connection, vpn-gateway, vpc-flow-log
     #               tags: [
     #                 {
     #                   key: "String",
@@ -6351,6 +6532,7 @@ module Aws::EC2
       :source_version,
       :version_description,
       :launch_template_data)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6369,6 +6551,7 @@ module Aws::EC2
     class CreateLaunchTemplateVersionResult < Struct.new(
       :launch_template_version,
       :warning)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6409,6 +6592,7 @@ module Aws::EC2
       :local_gateway_route_table_id,
       :local_gateway_virtual_interface_group_id,
       :dry_run)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6420,6 +6604,7 @@ module Aws::EC2
     #
     class CreateLocalGatewayRouteResult < Struct.new(
       :route)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6431,7 +6616,7 @@ module Aws::EC2
     #         vpc_id: "VpcId", # required
     #         tag_specifications: [
     #           {
-    #             resource_type: "client-vpn-endpoint", # accepts client-vpn-endpoint, customer-gateway, dedicated-host, dhcp-options, elastic-ip, fleet, fpga-image, host-reservation, image, instance, internet-gateway, key-pair, launch-template, natgateway, network-acl, network-interface, placement-group, reserved-instances, route-table, security-group, snapshot, spot-fleet-request, spot-instances-request, subnet, traffic-mirror-filter, traffic-mirror-session, traffic-mirror-target, transit-gateway, transit-gateway-attachment, transit-gateway-multicast-domain, transit-gateway-route-table, volume, vpc, vpc-peering-connection, vpn-connection, vpn-gateway, vpc-flow-log
+    #             resource_type: "client-vpn-endpoint", # accepts client-vpn-endpoint, customer-gateway, dedicated-host, dhcp-options, elastic-ip, elastic-gpu, export-image-task, export-instance-task, fleet, fpga-image, host-reservation, image, import-image-task, import-snapshot-task, instance, internet-gateway, key-pair, launch-template, local-gateway-route-table-vpc-association, natgateway, network-acl, network-interface, placement-group, reserved-instances, route-table, security-group, snapshot, spot-fleet-request, spot-instances-request, subnet, traffic-mirror-filter, traffic-mirror-session, traffic-mirror-target, transit-gateway, transit-gateway-attachment, transit-gateway-multicast-domain, transit-gateway-route-table, volume, vpc, vpc-peering-connection, vpn-connection, vpn-gateway, vpc-flow-log
     #             tags: [
     #               {
     #                 key: "String",
@@ -6469,6 +6654,7 @@ module Aws::EC2
       :vpc_id,
       :tag_specifications,
       :dry_run)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6480,6 +6666,7 @@ module Aws::EC2
     #
     class CreateLocalGatewayRouteTableVpcAssociationResult < Struct.new(
       :local_gateway_route_table_vpc_association)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6493,7 +6680,7 @@ module Aws::EC2
     #         subnet_id: "SubnetId", # required
     #         tag_specifications: [
     #           {
-    #             resource_type: "client-vpn-endpoint", # accepts client-vpn-endpoint, customer-gateway, dedicated-host, dhcp-options, elastic-ip, fleet, fpga-image, host-reservation, image, instance, internet-gateway, key-pair, launch-template, natgateway, network-acl, network-interface, placement-group, reserved-instances, route-table, security-group, snapshot, spot-fleet-request, spot-instances-request, subnet, traffic-mirror-filter, traffic-mirror-session, traffic-mirror-target, transit-gateway, transit-gateway-attachment, transit-gateway-multicast-domain, transit-gateway-route-table, volume, vpc, vpc-peering-connection, vpn-connection, vpn-gateway, vpc-flow-log
+    #             resource_type: "client-vpn-endpoint", # accepts client-vpn-endpoint, customer-gateway, dedicated-host, dhcp-options, elastic-ip, elastic-gpu, export-image-task, export-instance-task, fleet, fpga-image, host-reservation, image, import-image-task, import-snapshot-task, instance, internet-gateway, key-pair, launch-template, local-gateway-route-table-vpc-association, natgateway, network-acl, network-interface, placement-group, reserved-instances, route-table, security-group, snapshot, spot-fleet-request, spot-instances-request, subnet, traffic-mirror-filter, traffic-mirror-session, traffic-mirror-target, transit-gateway, transit-gateway-attachment, transit-gateway-multicast-domain, transit-gateway-route-table, volume, vpc, vpc-peering-connection, vpn-connection, vpn-gateway, vpc-flow-log
     #             tags: [
     #               {
     #                 key: "String",
@@ -6548,6 +6735,7 @@ module Aws::EC2
       :dry_run,
       :subnet_id,
       :tag_specifications)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6566,6 +6754,7 @@ module Aws::EC2
     class CreateNatGatewayResult < Struct.new(
       :client_token,
       :nat_gateway)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6665,6 +6854,7 @@ module Aws::EC2
       :protocol,
       :rule_action,
       :rule_number)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6692,6 +6882,7 @@ module Aws::EC2
     class CreateNetworkAclRequest < Struct.new(
       :dry_run,
       :vpc_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6703,6 +6894,7 @@ module Aws::EC2
     #
     class CreateNetworkAclResult < Struct.new(
       :network_acl)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6750,6 +6942,7 @@ module Aws::EC2
       :aws_service,
       :permission,
       :dry_run)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6763,6 +6956,7 @@ module Aws::EC2
     #
     class CreateNetworkInterfacePermissionResult < Struct.new(
       :interface_permission)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6879,6 +7073,7 @@ module Aws::EC2
       :secondary_private_ip_address_count,
       :interface_type,
       :subnet_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6892,6 +7087,7 @@ module Aws::EC2
     #
     class CreateNetworkInterfaceResult < Struct.new(
       :network_interface)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6905,7 +7101,7 @@ module Aws::EC2
     #         partition_count: 1,
     #         tag_specifications: [
     #           {
-    #             resource_type: "client-vpn-endpoint", # accepts client-vpn-endpoint, customer-gateway, dedicated-host, dhcp-options, elastic-ip, fleet, fpga-image, host-reservation, image, instance, internet-gateway, key-pair, launch-template, natgateway, network-acl, network-interface, placement-group, reserved-instances, route-table, security-group, snapshot, spot-fleet-request, spot-instances-request, subnet, traffic-mirror-filter, traffic-mirror-session, traffic-mirror-target, transit-gateway, transit-gateway-attachment, transit-gateway-multicast-domain, transit-gateway-route-table, volume, vpc, vpc-peering-connection, vpn-connection, vpn-gateway, vpc-flow-log
+    #             resource_type: "client-vpn-endpoint", # accepts client-vpn-endpoint, customer-gateway, dedicated-host, dhcp-options, elastic-ip, elastic-gpu, export-image-task, export-instance-task, fleet, fpga-image, host-reservation, image, import-image-task, import-snapshot-task, instance, internet-gateway, key-pair, launch-template, local-gateway-route-table-vpc-association, natgateway, network-acl, network-interface, placement-group, reserved-instances, route-table, security-group, snapshot, spot-fleet-request, spot-instances-request, subnet, traffic-mirror-filter, traffic-mirror-session, traffic-mirror-target, transit-gateway, transit-gateway-attachment, transit-gateway-multicast-domain, transit-gateway-route-table, volume, vpc, vpc-peering-connection, vpn-connection, vpn-gateway, vpc-flow-log
     #             tags: [
     #               {
     #                 key: "String",
@@ -6951,6 +7147,7 @@ module Aws::EC2
       :strategy,
       :partition_count,
       :tag_specifications)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6962,6 +7159,7 @@ module Aws::EC2
     #
     class CreatePlacementGroupResult < Struct.new(
       :placement_group)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -7016,6 +7214,7 @@ module Aws::EC2
       :instance_count,
       :price_schedules,
       :reserved_instances_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -7029,6 +7228,7 @@ module Aws::EC2
     #
     class CreateReservedInstancesListingResult < Struct.new(
       :reserved_instances_listings)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -7121,6 +7321,7 @@ module Aws::EC2
       :network_interface_id,
       :route_table_id,
       :vpc_peering_connection_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -7133,6 +7334,7 @@ module Aws::EC2
     #
     class CreateRouteResult < Struct.new(
       :return)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -7160,6 +7362,7 @@ module Aws::EC2
     class CreateRouteTableRequest < Struct.new(
       :dry_run,
       :vpc_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -7171,6 +7374,7 @@ module Aws::EC2
     #
     class CreateRouteTableResult < Struct.new(
       :route_table)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -7225,6 +7429,7 @@ module Aws::EC2
       :group_name,
       :vpc_id,
       :dry_run)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -7236,6 +7441,7 @@ module Aws::EC2
     #
     class CreateSecurityGroupResult < Struct.new(
       :group_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -7247,7 +7453,7 @@ module Aws::EC2
     #         volume_id: "VolumeId", # required
     #         tag_specifications: [
     #           {
-    #             resource_type: "client-vpn-endpoint", # accepts client-vpn-endpoint, customer-gateway, dedicated-host, dhcp-options, elastic-ip, fleet, fpga-image, host-reservation, image, instance, internet-gateway, key-pair, launch-template, natgateway, network-acl, network-interface, placement-group, reserved-instances, route-table, security-group, snapshot, spot-fleet-request, spot-instances-request, subnet, traffic-mirror-filter, traffic-mirror-session, traffic-mirror-target, transit-gateway, transit-gateway-attachment, transit-gateway-multicast-domain, transit-gateway-route-table, volume, vpc, vpc-peering-connection, vpn-connection, vpn-gateway, vpc-flow-log
+    #             resource_type: "client-vpn-endpoint", # accepts client-vpn-endpoint, customer-gateway, dedicated-host, dhcp-options, elastic-ip, elastic-gpu, export-image-task, export-instance-task, fleet, fpga-image, host-reservation, image, import-image-task, import-snapshot-task, instance, internet-gateway, key-pair, launch-template, local-gateway-route-table-vpc-association, natgateway, network-acl, network-interface, placement-group, reserved-instances, route-table, security-group, snapshot, spot-fleet-request, spot-instances-request, subnet, traffic-mirror-filter, traffic-mirror-session, traffic-mirror-target, transit-gateway, transit-gateway-attachment, transit-gateway-multicast-domain, transit-gateway-route-table, volume, vpc, vpc-peering-connection, vpn-connection, vpn-gateway, vpc-flow-log
     #             tags: [
     #               {
     #                 key: "String",
@@ -7285,6 +7491,7 @@ module Aws::EC2
       :volume_id,
       :tag_specifications,
       :dry_run)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -7299,7 +7506,7 @@ module Aws::EC2
     #         },
     #         tag_specifications: [
     #           {
-    #             resource_type: "client-vpn-endpoint", # accepts client-vpn-endpoint, customer-gateway, dedicated-host, dhcp-options, elastic-ip, fleet, fpga-image, host-reservation, image, instance, internet-gateway, key-pair, launch-template, natgateway, network-acl, network-interface, placement-group, reserved-instances, route-table, security-group, snapshot, spot-fleet-request, spot-instances-request, subnet, traffic-mirror-filter, traffic-mirror-session, traffic-mirror-target, transit-gateway, transit-gateway-attachment, transit-gateway-multicast-domain, transit-gateway-route-table, volume, vpc, vpc-peering-connection, vpn-connection, vpn-gateway, vpc-flow-log
+    #             resource_type: "client-vpn-endpoint", # accepts client-vpn-endpoint, customer-gateway, dedicated-host, dhcp-options, elastic-ip, elastic-gpu, export-image-task, export-instance-task, fleet, fpga-image, host-reservation, image, import-image-task, import-snapshot-task, instance, internet-gateway, key-pair, launch-template, local-gateway-route-table-vpc-association, natgateway, network-acl, network-interface, placement-group, reserved-instances, route-table, security-group, snapshot, spot-fleet-request, spot-instances-request, subnet, traffic-mirror-filter, traffic-mirror-session, traffic-mirror-target, transit-gateway, transit-gateway-attachment, transit-gateway-multicast-domain, transit-gateway-route-table, volume, vpc, vpc-peering-connection, vpn-connection, vpn-gateway, vpc-flow-log
     #             tags: [
     #               {
     #                 key: "String",
@@ -7345,6 +7552,7 @@ module Aws::EC2
       :tag_specifications,
       :dry_run,
       :copy_tags_from_source)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -7356,6 +7564,7 @@ module Aws::EC2
     #
     class CreateSnapshotsResult < Struct.new(
       :snapshots)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -7391,6 +7600,7 @@ module Aws::EC2
       :bucket,
       :dry_run,
       :prefix)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -7404,6 +7614,7 @@ module Aws::EC2
     #
     class CreateSpotDatafeedSubscriptionResult < Struct.new(
       :spot_datafeed_subscription)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -7481,6 +7692,7 @@ module Aws::EC2
       :outpost_arn,
       :vpc_id,
       :dry_run)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -7492,6 +7704,7 @@ module Aws::EC2
     #
     class CreateSubnetResult < Struct.new(
       :subnet)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -7535,6 +7748,7 @@ module Aws::EC2
       :dry_run,
       :resources,
       :tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -7545,7 +7759,7 @@ module Aws::EC2
     #         description: "String",
     #         tag_specifications: [
     #           {
-    #             resource_type: "client-vpn-endpoint", # accepts client-vpn-endpoint, customer-gateway, dedicated-host, dhcp-options, elastic-ip, fleet, fpga-image, host-reservation, image, instance, internet-gateway, key-pair, launch-template, natgateway, network-acl, network-interface, placement-group, reserved-instances, route-table, security-group, snapshot, spot-fleet-request, spot-instances-request, subnet, traffic-mirror-filter, traffic-mirror-session, traffic-mirror-target, transit-gateway, transit-gateway-attachment, transit-gateway-multicast-domain, transit-gateway-route-table, volume, vpc, vpc-peering-connection, vpn-connection, vpn-gateway, vpc-flow-log
+    #             resource_type: "client-vpn-endpoint", # accepts client-vpn-endpoint, customer-gateway, dedicated-host, dhcp-options, elastic-ip, elastic-gpu, export-image-task, export-instance-task, fleet, fpga-image, host-reservation, image, import-image-task, import-snapshot-task, instance, internet-gateway, key-pair, launch-template, local-gateway-route-table-vpc-association, natgateway, network-acl, network-interface, placement-group, reserved-instances, route-table, security-group, snapshot, spot-fleet-request, spot-instances-request, subnet, traffic-mirror-filter, traffic-mirror-session, traffic-mirror-target, transit-gateway, transit-gateway-attachment, transit-gateway-multicast-domain, transit-gateway-route-table, volume, vpc, vpc-peering-connection, vpn-connection, vpn-gateway, vpc-flow-log
     #             tags: [
     #               {
     #                 key: "String",
@@ -7593,6 +7807,7 @@ module Aws::EC2
       :tag_specifications,
       :dry_run,
       :client_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -7615,6 +7830,7 @@ module Aws::EC2
     class CreateTrafficMirrorFilterResult < Struct.new(
       :traffic_mirror_filter,
       :client_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -7726,6 +7942,7 @@ module Aws::EC2
       :description,
       :dry_run,
       :client_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -7748,6 +7965,7 @@ module Aws::EC2
     class CreateTrafficMirrorFilterRuleResult < Struct.new(
       :traffic_mirror_filter_rule,
       :client_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -7764,7 +7982,7 @@ module Aws::EC2
     #         description: "String",
     #         tag_specifications: [
     #           {
-    #             resource_type: "client-vpn-endpoint", # accepts client-vpn-endpoint, customer-gateway, dedicated-host, dhcp-options, elastic-ip, fleet, fpga-image, host-reservation, image, instance, internet-gateway, key-pair, launch-template, natgateway, network-acl, network-interface, placement-group, reserved-instances, route-table, security-group, snapshot, spot-fleet-request, spot-instances-request, subnet, traffic-mirror-filter, traffic-mirror-session, traffic-mirror-target, transit-gateway, transit-gateway-attachment, transit-gateway-multicast-domain, transit-gateway-route-table, volume, vpc, vpc-peering-connection, vpn-connection, vpn-gateway, vpc-flow-log
+    #             resource_type: "client-vpn-endpoint", # accepts client-vpn-endpoint, customer-gateway, dedicated-host, dhcp-options, elastic-ip, elastic-gpu, export-image-task, export-instance-task, fleet, fpga-image, host-reservation, image, import-image-task, import-snapshot-task, instance, internet-gateway, key-pair, launch-template, local-gateway-route-table-vpc-association, natgateway, network-acl, network-interface, placement-group, reserved-instances, route-table, security-group, snapshot, spot-fleet-request, spot-instances-request, subnet, traffic-mirror-filter, traffic-mirror-session, traffic-mirror-target, transit-gateway, transit-gateway-attachment, transit-gateway-multicast-domain, transit-gateway-route-table, volume, vpc, vpc-peering-connection, vpn-connection, vpn-gateway, vpc-flow-log
     #             tags: [
     #               {
     #                 key: "String",
@@ -7861,6 +8079,7 @@ module Aws::EC2
       :tag_specifications,
       :dry_run,
       :client_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -7883,6 +8102,7 @@ module Aws::EC2
     class CreateTrafficMirrorSessionResult < Struct.new(
       :traffic_mirror_session,
       :client_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -7895,7 +8115,7 @@ module Aws::EC2
     #         description: "String",
     #         tag_specifications: [
     #           {
-    #             resource_type: "client-vpn-endpoint", # accepts client-vpn-endpoint, customer-gateway, dedicated-host, dhcp-options, elastic-ip, fleet, fpga-image, host-reservation, image, instance, internet-gateway, key-pair, launch-template, natgateway, network-acl, network-interface, placement-group, reserved-instances, route-table, security-group, snapshot, spot-fleet-request, spot-instances-request, subnet, traffic-mirror-filter, traffic-mirror-session, traffic-mirror-target, transit-gateway, transit-gateway-attachment, transit-gateway-multicast-domain, transit-gateway-route-table, volume, vpc, vpc-peering-connection, vpn-connection, vpn-gateway, vpc-flow-log
+    #             resource_type: "client-vpn-endpoint", # accepts client-vpn-endpoint, customer-gateway, dedicated-host, dhcp-options, elastic-ip, elastic-gpu, export-image-task, export-instance-task, fleet, fpga-image, host-reservation, image, import-image-task, import-snapshot-task, instance, internet-gateway, key-pair, launch-template, local-gateway-route-table-vpc-association, natgateway, network-acl, network-interface, placement-group, reserved-instances, route-table, security-group, snapshot, spot-fleet-request, spot-instances-request, subnet, traffic-mirror-filter, traffic-mirror-session, traffic-mirror-target, transit-gateway, transit-gateway-attachment, transit-gateway-multicast-domain, transit-gateway-route-table, volume, vpc, vpc-peering-connection, vpn-connection, vpn-gateway, vpc-flow-log
     #             tags: [
     #               {
     #                 key: "String",
@@ -7954,6 +8174,7 @@ module Aws::EC2
       :tag_specifications,
       :dry_run,
       :client_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -7976,6 +8197,7 @@ module Aws::EC2
     class CreateTrafficMirrorTargetResult < Struct.new(
       :traffic_mirror_target,
       :client_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -7986,7 +8208,7 @@ module Aws::EC2
     #         transit_gateway_id: "TransitGatewayId", # required
     #         tag_specifications: [
     #           {
-    #             resource_type: "client-vpn-endpoint", # accepts client-vpn-endpoint, customer-gateway, dedicated-host, dhcp-options, elastic-ip, fleet, fpga-image, host-reservation, image, instance, internet-gateway, key-pair, launch-template, natgateway, network-acl, network-interface, placement-group, reserved-instances, route-table, security-group, snapshot, spot-fleet-request, spot-instances-request, subnet, traffic-mirror-filter, traffic-mirror-session, traffic-mirror-target, transit-gateway, transit-gateway-attachment, transit-gateway-multicast-domain, transit-gateway-route-table, volume, vpc, vpc-peering-connection, vpn-connection, vpn-gateway, vpc-flow-log
+    #             resource_type: "client-vpn-endpoint", # accepts client-vpn-endpoint, customer-gateway, dedicated-host, dhcp-options, elastic-ip, elastic-gpu, export-image-task, export-instance-task, fleet, fpga-image, host-reservation, image, import-image-task, import-snapshot-task, instance, internet-gateway, key-pair, launch-template, local-gateway-route-table-vpc-association, natgateway, network-acl, network-interface, placement-group, reserved-instances, route-table, security-group, snapshot, spot-fleet-request, spot-instances-request, subnet, traffic-mirror-filter, traffic-mirror-session, traffic-mirror-target, transit-gateway, transit-gateway-attachment, transit-gateway-multicast-domain, transit-gateway-route-table, volume, vpc, vpc-peering-connection, vpn-connection, vpn-gateway, vpc-flow-log
     #             tags: [
     #               {
     #                 key: "String",
@@ -8019,6 +8241,7 @@ module Aws::EC2
       :transit_gateway_id,
       :tag_specifications,
       :dry_run)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -8030,6 +8253,7 @@ module Aws::EC2
     #
     class CreateTransitGatewayMulticastDomainResult < Struct.new(
       :transit_gateway_multicast_domain)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -8043,7 +8267,7 @@ module Aws::EC2
     #         peer_region: "String", # required
     #         tag_specifications: [
     #           {
-    #             resource_type: "client-vpn-endpoint", # accepts client-vpn-endpoint, customer-gateway, dedicated-host, dhcp-options, elastic-ip, fleet, fpga-image, host-reservation, image, instance, internet-gateway, key-pair, launch-template, natgateway, network-acl, network-interface, placement-group, reserved-instances, route-table, security-group, snapshot, spot-fleet-request, spot-instances-request, subnet, traffic-mirror-filter, traffic-mirror-session, traffic-mirror-target, transit-gateway, transit-gateway-attachment, transit-gateway-multicast-domain, transit-gateway-route-table, volume, vpc, vpc-peering-connection, vpn-connection, vpn-gateway, vpc-flow-log
+    #             resource_type: "client-vpn-endpoint", # accepts client-vpn-endpoint, customer-gateway, dedicated-host, dhcp-options, elastic-ip, elastic-gpu, export-image-task, export-instance-task, fleet, fpga-image, host-reservation, image, import-image-task, import-snapshot-task, instance, internet-gateway, key-pair, launch-template, local-gateway-route-table-vpc-association, natgateway, network-acl, network-interface, placement-group, reserved-instances, route-table, security-group, snapshot, spot-fleet-request, spot-instances-request, subnet, traffic-mirror-filter, traffic-mirror-session, traffic-mirror-target, transit-gateway, transit-gateway-attachment, transit-gateway-multicast-domain, transit-gateway-route-table, volume, vpc, vpc-peering-connection, vpn-connection, vpn-gateway, vpc-flow-log
     #             tags: [
     #               {
     #                 key: "String",
@@ -8092,6 +8316,7 @@ module Aws::EC2
       :peer_region,
       :tag_specifications,
       :dry_run)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -8103,6 +8328,7 @@ module Aws::EC2
     #
     class CreateTransitGatewayPeeringAttachmentResult < Struct.new(
       :transit_gateway_peering_attachment)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -8122,7 +8348,7 @@ module Aws::EC2
     #         },
     #         tag_specifications: [
     #           {
-    #             resource_type: "client-vpn-endpoint", # accepts client-vpn-endpoint, customer-gateway, dedicated-host, dhcp-options, elastic-ip, fleet, fpga-image, host-reservation, image, instance, internet-gateway, key-pair, launch-template, natgateway, network-acl, network-interface, placement-group, reserved-instances, route-table, security-group, snapshot, spot-fleet-request, spot-instances-request, subnet, traffic-mirror-filter, traffic-mirror-session, traffic-mirror-target, transit-gateway, transit-gateway-attachment, transit-gateway-multicast-domain, transit-gateway-route-table, volume, vpc, vpc-peering-connection, vpn-connection, vpn-gateway, vpc-flow-log
+    #             resource_type: "client-vpn-endpoint", # accepts client-vpn-endpoint, customer-gateway, dedicated-host, dhcp-options, elastic-ip, elastic-gpu, export-image-task, export-instance-task, fleet, fpga-image, host-reservation, image, import-image-task, import-snapshot-task, instance, internet-gateway, key-pair, launch-template, local-gateway-route-table-vpc-association, natgateway, network-acl, network-interface, placement-group, reserved-instances, route-table, security-group, snapshot, spot-fleet-request, spot-instances-request, subnet, traffic-mirror-filter, traffic-mirror-session, traffic-mirror-target, transit-gateway, transit-gateway-attachment, transit-gateway-multicast-domain, transit-gateway-route-table, volume, vpc, vpc-peering-connection, vpn-connection, vpn-gateway, vpc-flow-log
     #             tags: [
     #               {
     #                 key: "String",
@@ -8160,6 +8386,7 @@ module Aws::EC2
       :options,
       :tag_specifications,
       :dry_run)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -8171,6 +8398,7 @@ module Aws::EC2
     #
     class CreateTransitGatewayResult < Struct.new(
       :transit_gateway)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -8217,6 +8445,7 @@ module Aws::EC2
       :transit_gateway_attachment_id,
       :blackhole,
       :dry_run)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -8228,6 +8457,7 @@ module Aws::EC2
     #
     class CreateTransitGatewayRouteResult < Struct.new(
       :route)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -8238,7 +8468,7 @@ module Aws::EC2
     #         transit_gateway_id: "TransitGatewayId", # required
     #         tag_specifications: [
     #           {
-    #             resource_type: "client-vpn-endpoint", # accepts client-vpn-endpoint, customer-gateway, dedicated-host, dhcp-options, elastic-ip, fleet, fpga-image, host-reservation, image, instance, internet-gateway, key-pair, launch-template, natgateway, network-acl, network-interface, placement-group, reserved-instances, route-table, security-group, snapshot, spot-fleet-request, spot-instances-request, subnet, traffic-mirror-filter, traffic-mirror-session, traffic-mirror-target, transit-gateway, transit-gateway-attachment, transit-gateway-multicast-domain, transit-gateway-route-table, volume, vpc, vpc-peering-connection, vpn-connection, vpn-gateway, vpc-flow-log
+    #             resource_type: "client-vpn-endpoint", # accepts client-vpn-endpoint, customer-gateway, dedicated-host, dhcp-options, elastic-ip, elastic-gpu, export-image-task, export-instance-task, fleet, fpga-image, host-reservation, image, import-image-task, import-snapshot-task, instance, internet-gateway, key-pair, launch-template, local-gateway-route-table-vpc-association, natgateway, network-acl, network-interface, placement-group, reserved-instances, route-table, security-group, snapshot, spot-fleet-request, spot-instances-request, subnet, traffic-mirror-filter, traffic-mirror-session, traffic-mirror-target, transit-gateway, transit-gateway-attachment, transit-gateway-multicast-domain, transit-gateway-route-table, volume, vpc, vpc-peering-connection, vpn-connection, vpn-gateway, vpc-flow-log
     #             tags: [
     #               {
     #                 key: "String",
@@ -8271,6 +8501,7 @@ module Aws::EC2
       :transit_gateway_id,
       :tag_specifications,
       :dry_run)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -8282,6 +8513,7 @@ module Aws::EC2
     #
     class CreateTransitGatewayRouteTableResult < Struct.new(
       :transit_gateway_route_table)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -8298,7 +8530,7 @@ module Aws::EC2
     #         },
     #         tag_specifications: [
     #           {
-    #             resource_type: "client-vpn-endpoint", # accepts client-vpn-endpoint, customer-gateway, dedicated-host, dhcp-options, elastic-ip, fleet, fpga-image, host-reservation, image, instance, internet-gateway, key-pair, launch-template, natgateway, network-acl, network-interface, placement-group, reserved-instances, route-table, security-group, snapshot, spot-fleet-request, spot-instances-request, subnet, traffic-mirror-filter, traffic-mirror-session, traffic-mirror-target, transit-gateway, transit-gateway-attachment, transit-gateway-multicast-domain, transit-gateway-route-table, volume, vpc, vpc-peering-connection, vpn-connection, vpn-gateway, vpc-flow-log
+    #             resource_type: "client-vpn-endpoint", # accepts client-vpn-endpoint, customer-gateway, dedicated-host, dhcp-options, elastic-ip, elastic-gpu, export-image-task, export-instance-task, fleet, fpga-image, host-reservation, image, import-image-task, import-snapshot-task, instance, internet-gateway, key-pair, launch-template, local-gateway-route-table-vpc-association, natgateway, network-acl, network-interface, placement-group, reserved-instances, route-table, security-group, snapshot, spot-fleet-request, spot-instances-request, subnet, traffic-mirror-filter, traffic-mirror-session, traffic-mirror-target, transit-gateway, transit-gateway-attachment, transit-gateway-multicast-domain, transit-gateway-route-table, volume, vpc, vpc-peering-connection, vpn-connection, vpn-gateway, vpc-flow-log
     #             tags: [
     #               {
     #                 key: "String",
@@ -8349,6 +8581,7 @@ module Aws::EC2
       :options,
       :tag_specifications,
       :dry_run)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -8375,6 +8608,7 @@ module Aws::EC2
     class CreateTransitGatewayVpcAttachmentRequestOptions < Struct.new(
       :dns_support,
       :ipv_6_support)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -8386,6 +8620,7 @@ module Aws::EC2
     #
     class CreateTransitGatewayVpcAttachmentResult < Struct.new(
       :transit_gateway_vpc_attachment)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -8413,6 +8648,7 @@ module Aws::EC2
     class CreateVolumePermission < Struct.new(
       :group,
       :user_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -8450,6 +8686,7 @@ module Aws::EC2
     class CreateVolumePermissionModifications < Struct.new(
       :add,
       :remove)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -8468,7 +8705,7 @@ module Aws::EC2
     #         dry_run: false,
     #         tag_specifications: [
     #           {
-    #             resource_type: "client-vpn-endpoint", # accepts client-vpn-endpoint, customer-gateway, dedicated-host, dhcp-options, elastic-ip, fleet, fpga-image, host-reservation, image, instance, internet-gateway, key-pair, launch-template, natgateway, network-acl, network-interface, placement-group, reserved-instances, route-table, security-group, snapshot, spot-fleet-request, spot-instances-request, subnet, traffic-mirror-filter, traffic-mirror-session, traffic-mirror-target, transit-gateway, transit-gateway-attachment, transit-gateway-multicast-domain, transit-gateway-route-table, volume, vpc, vpc-peering-connection, vpn-connection, vpn-gateway, vpc-flow-log
+    #             resource_type: "client-vpn-endpoint", # accepts client-vpn-endpoint, customer-gateway, dedicated-host, dhcp-options, elastic-ip, elastic-gpu, export-image-task, export-instance-task, fleet, fpga-image, host-reservation, image, import-image-task, import-snapshot-task, instance, internet-gateway, key-pair, launch-template, local-gateway-route-table-vpc-association, natgateway, network-acl, network-interface, placement-group, reserved-instances, route-table, security-group, snapshot, spot-fleet-request, spot-instances-request, subnet, traffic-mirror-filter, traffic-mirror-session, traffic-mirror-target, transit-gateway, transit-gateway-attachment, transit-gateway-multicast-domain, transit-gateway-route-table, volume, vpc, vpc-peering-connection, vpn-connection, vpn-gateway, vpc-flow-log
     #             tags: [
     #               {
     #                 key: "String",
@@ -8610,6 +8847,7 @@ module Aws::EC2
       :dry_run,
       :tag_specifications,
       :multi_attach_enabled)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -8668,6 +8906,7 @@ module Aws::EC2
       :connection_notification_arn,
       :connection_events,
       :client_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -8685,6 +8924,7 @@ module Aws::EC2
     class CreateVpcEndpointConnectionNotificationResult < Struct.new(
       :connection_notification,
       :client_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -8706,7 +8946,7 @@ module Aws::EC2
     #         private_dns_enabled: false,
     #         tag_specifications: [
     #           {
-    #             resource_type: "client-vpn-endpoint", # accepts client-vpn-endpoint, customer-gateway, dedicated-host, dhcp-options, elastic-ip, fleet, fpga-image, host-reservation, image, instance, internet-gateway, key-pair, launch-template, natgateway, network-acl, network-interface, placement-group, reserved-instances, route-table, security-group, snapshot, spot-fleet-request, spot-instances-request, subnet, traffic-mirror-filter, traffic-mirror-session, traffic-mirror-target, transit-gateway, transit-gateway-attachment, transit-gateway-multicast-domain, transit-gateway-route-table, volume, vpc, vpc-peering-connection, vpn-connection, vpn-gateway, vpc-flow-log
+    #             resource_type: "client-vpn-endpoint", # accepts client-vpn-endpoint, customer-gateway, dedicated-host, dhcp-options, elastic-ip, elastic-gpu, export-image-task, export-instance-task, fleet, fpga-image, host-reservation, image, import-image-task, import-snapshot-task, instance, internet-gateway, key-pair, launch-template, local-gateway-route-table-vpc-association, natgateway, network-acl, network-interface, placement-group, reserved-instances, route-table, security-group, snapshot, spot-fleet-request, spot-instances-request, subnet, traffic-mirror-filter, traffic-mirror-session, traffic-mirror-target, transit-gateway, transit-gateway-attachment, transit-gateway-multicast-domain, transit-gateway-route-table, volume, vpc, vpc-peering-connection, vpn-connection, vpn-gateway, vpc-flow-log
     #             tags: [
     #               {
     #                 key: "String",
@@ -8806,6 +9046,7 @@ module Aws::EC2
       :client_token,
       :private_dns_enabled,
       :tag_specifications)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -8825,6 +9066,7 @@ module Aws::EC2
     class CreateVpcEndpointResult < Struct.new(
       :vpc_endpoint,
       :client_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -8839,7 +9081,7 @@ module Aws::EC2
     #         client_token: "String",
     #         tag_specifications: [
     #           {
-    #             resource_type: "client-vpn-endpoint", # accepts client-vpn-endpoint, customer-gateway, dedicated-host, dhcp-options, elastic-ip, fleet, fpga-image, host-reservation, image, instance, internet-gateway, key-pair, launch-template, natgateway, network-acl, network-interface, placement-group, reserved-instances, route-table, security-group, snapshot, spot-fleet-request, spot-instances-request, subnet, traffic-mirror-filter, traffic-mirror-session, traffic-mirror-target, transit-gateway, transit-gateway-attachment, transit-gateway-multicast-domain, transit-gateway-route-table, volume, vpc, vpc-peering-connection, vpn-connection, vpn-gateway, vpc-flow-log
+    #             resource_type: "client-vpn-endpoint", # accepts client-vpn-endpoint, customer-gateway, dedicated-host, dhcp-options, elastic-ip, elastic-gpu, export-image-task, export-instance-task, fleet, fpga-image, host-reservation, image, import-image-task, import-snapshot-task, instance, internet-gateway, key-pair, launch-template, local-gateway-route-table-vpc-association, natgateway, network-acl, network-interface, placement-group, reserved-instances, route-table, security-group, snapshot, spot-fleet-request, spot-instances-request, subnet, traffic-mirror-filter, traffic-mirror-session, traffic-mirror-target, transit-gateway, transit-gateway-attachment, transit-gateway-multicast-domain, transit-gateway-route-table, volume, vpc, vpc-peering-connection, vpn-connection, vpn-gateway, vpc-flow-log
     #             tags: [
     #               {
     #                 key: "String",
@@ -8895,6 +9137,7 @@ module Aws::EC2
       :network_load_balancer_arns,
       :client_token,
       :tag_specifications)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -8912,6 +9155,7 @@ module Aws::EC2
     class CreateVpcEndpointServiceConfigurationResult < Struct.new(
       :service_configuration,
       :client_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -8964,6 +9208,7 @@ module Aws::EC2
       :peer_vpc_id,
       :vpc_id,
       :peer_region)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -8975,6 +9220,7 @@ module Aws::EC2
     #
     class CreateVpcPeeringConnectionResult < Struct.new(
       :vpc_peering_connection)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -9054,6 +9300,7 @@ module Aws::EC2
       :dry_run,
       :instance_tenancy,
       :ipv_6_cidr_block_network_border_group)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -9065,6 +9312,7 @@ module Aws::EC2
     #
     class CreateVpcResult < Struct.new(
       :vpc)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -9170,6 +9418,7 @@ module Aws::EC2
       :transit_gateway_id,
       :dry_run,
       :options)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -9183,6 +9432,7 @@ module Aws::EC2
     #
     class CreateVpnConnectionResult < Struct.new(
       :vpn_connection)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -9210,6 +9460,7 @@ module Aws::EC2
     class CreateVpnConnectionRouteRequest < Struct.new(
       :destination_cidr_block,
       :vpn_connection_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -9256,6 +9507,7 @@ module Aws::EC2
       :type,
       :amazon_side_asn,
       :dry_run)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -9269,6 +9521,7 @@ module Aws::EC2
     #
     class CreateVpnGatewayResult < Struct.new(
       :vpn_gateway)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -9283,6 +9536,7 @@ module Aws::EC2
     #
     class CreditSpecification < Struct.new(
       :cpu_credits)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -9304,6 +9558,7 @@ module Aws::EC2
     #
     class CreditSpecificationRequest < Struct.new(
       :cpu_credits)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -9356,6 +9611,7 @@ module Aws::EC2
       :type,
       :device_name,
       :tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -9383,6 +9639,7 @@ module Aws::EC2
     class DeleteClientVpnEndpointRequest < Struct.new(
       :client_vpn_endpoint_id,
       :dry_run)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -9394,6 +9651,7 @@ module Aws::EC2
     #
     class DeleteClientVpnEndpointResult < Struct.new(
       :status)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -9435,6 +9693,7 @@ module Aws::EC2
       :target_vpc_subnet_id,
       :destination_cidr_block,
       :dry_run)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -9446,6 +9705,7 @@ module Aws::EC2
     #
     class DeleteClientVpnRouteResult < Struct.new(
       :status)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -9475,6 +9735,7 @@ module Aws::EC2
     class DeleteCustomerGatewayRequest < Struct.new(
       :customer_gateway_id,
       :dry_run)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -9502,6 +9763,7 @@ module Aws::EC2
     class DeleteDhcpOptionsRequest < Struct.new(
       :dhcp_options_id,
       :dry_run)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -9529,6 +9791,7 @@ module Aws::EC2
     class DeleteEgressOnlyInternetGatewayRequest < Struct.new(
       :dry_run,
       :egress_only_internet_gateway_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -9541,6 +9804,7 @@ module Aws::EC2
     #
     class DeleteEgressOnlyInternetGatewayResult < Struct.new(
       :return_code)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -9559,6 +9823,7 @@ module Aws::EC2
     class DeleteFleetError < Struct.new(
       :code,
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -9577,6 +9842,7 @@ module Aws::EC2
     class DeleteFleetErrorItem < Struct.new(
       :error,
       :fleet_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -9600,6 +9866,7 @@ module Aws::EC2
       :current_fleet_state,
       :previous_fleet_state,
       :fleet_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -9634,6 +9901,7 @@ module Aws::EC2
       :dry_run,
       :fleet_ids,
       :terminate_instances)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -9650,6 +9918,7 @@ module Aws::EC2
     class DeleteFleetsResult < Struct.new(
       :successful_fleet_deletions,
       :unsuccessful_fleet_deletions)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -9679,6 +9948,7 @@ module Aws::EC2
     class DeleteFlowLogsRequest < Struct.new(
       :dry_run,
       :flow_log_ids)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -9691,6 +9961,7 @@ module Aws::EC2
     #
     class DeleteFlowLogsResult < Struct.new(
       :unsuccessful)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -9718,6 +9989,7 @@ module Aws::EC2
     class DeleteFpgaImageRequest < Struct.new(
       :dry_run,
       :fpga_image_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -9729,6 +10001,7 @@ module Aws::EC2
     #
     class DeleteFpgaImageResult < Struct.new(
       :return)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -9756,6 +10029,7 @@ module Aws::EC2
     class DeleteInternetGatewayRequest < Struct.new(
       :dry_run,
       :internet_gateway_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -9789,6 +10063,7 @@ module Aws::EC2
       :key_name,
       :key_pair_id,
       :dry_run)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -9824,6 +10099,7 @@ module Aws::EC2
       :dry_run,
       :launch_template_id,
       :launch_template_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -9835,6 +10111,7 @@ module Aws::EC2
     #
     class DeleteLaunchTemplateResult < Struct.new(
       :launch_template)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -9877,6 +10154,7 @@ module Aws::EC2
       :launch_template_id,
       :launch_template_name,
       :versions)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -9905,6 +10183,7 @@ module Aws::EC2
       :launch_template_name,
       :version_number,
       :response_error)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -9928,6 +10207,7 @@ module Aws::EC2
       :launch_template_id,
       :launch_template_name,
       :version_number)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -9946,6 +10226,7 @@ module Aws::EC2
     class DeleteLaunchTemplateVersionsResult < Struct.new(
       :successfully_deleted_launch_template_versions,
       :unsuccessfully_deleted_launch_template_versions)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -9980,6 +10261,7 @@ module Aws::EC2
       :destination_cidr_block,
       :local_gateway_route_table_id,
       :dry_run)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -9991,6 +10273,7 @@ module Aws::EC2
     #
     class DeleteLocalGatewayRouteResult < Struct.new(
       :route)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -10018,6 +10301,7 @@ module Aws::EC2
     class DeleteLocalGatewayRouteTableVpcAssociationRequest < Struct.new(
       :local_gateway_route_table_vpc_association_id,
       :dry_run)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -10029,6 +10313,7 @@ module Aws::EC2
     #
     class DeleteLocalGatewayRouteTableVpcAssociationResult < Struct.new(
       :local_gateway_route_table_vpc_association)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -10056,6 +10341,7 @@ module Aws::EC2
     class DeleteNatGatewayRequest < Struct.new(
       :dry_run,
       :nat_gateway_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -10067,6 +10353,7 @@ module Aws::EC2
     #
     class DeleteNatGatewayResult < Struct.new(
       :nat_gateway_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -10106,6 +10393,7 @@ module Aws::EC2
       :egress,
       :network_acl_id,
       :rule_number)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -10133,6 +10421,7 @@ module Aws::EC2
     class DeleteNetworkAclRequest < Struct.new(
       :dry_run,
       :network_acl_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -10169,6 +10458,7 @@ module Aws::EC2
       :network_interface_permission_id,
       :force,
       :dry_run)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -10182,6 +10472,7 @@ module Aws::EC2
     #
     class DeleteNetworkInterfacePermissionResult < Struct.new(
       :return)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -10211,6 +10502,7 @@ module Aws::EC2
     class DeleteNetworkInterfaceRequest < Struct.new(
       :dry_run,
       :network_interface_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -10238,6 +10530,7 @@ module Aws::EC2
     class DeletePlacementGroupRequest < Struct.new(
       :dry_run,
       :group_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -10257,6 +10550,7 @@ module Aws::EC2
     class DeleteQueuedReservedInstancesError < Struct.new(
       :code,
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -10284,6 +10578,7 @@ module Aws::EC2
     class DeleteQueuedReservedInstancesRequest < Struct.new(
       :dry_run,
       :reserved_instances_ids)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -10301,6 +10596,7 @@ module Aws::EC2
     class DeleteQueuedReservedInstancesResult < Struct.new(
       :successful_queued_purchase_deletions,
       :failed_queued_purchase_deletions)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -10342,6 +10638,7 @@ module Aws::EC2
       :destination_ipv_6_cidr_block,
       :dry_run,
       :route_table_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -10369,6 +10666,7 @@ module Aws::EC2
     class DeleteRouteTableRequest < Struct.new(
       :dry_run,
       :route_table_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -10403,6 +10701,7 @@ module Aws::EC2
       :group_id,
       :group_name,
       :dry_run)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -10430,6 +10729,7 @@ module Aws::EC2
     class DeleteSnapshotRequest < Struct.new(
       :snapshot_id,
       :dry_run)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -10453,6 +10753,7 @@ module Aws::EC2
     #
     class DeleteSpotDatafeedSubscriptionRequest < Struct.new(
       :dry_run)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -10480,6 +10781,7 @@ module Aws::EC2
     class DeleteSubnetRequest < Struct.new(
       :subnet_id,
       :dry_run)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -10529,6 +10831,7 @@ module Aws::EC2
       :dry_run,
       :resources,
       :tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -10556,6 +10859,7 @@ module Aws::EC2
     class DeleteTrafficMirrorFilterRequest < Struct.new(
       :traffic_mirror_filter_id,
       :dry_run)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -10567,6 +10871,7 @@ module Aws::EC2
     #
     class DeleteTrafficMirrorFilterResult < Struct.new(
       :traffic_mirror_filter_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -10594,6 +10899,7 @@ module Aws::EC2
     class DeleteTrafficMirrorFilterRuleRequest < Struct.new(
       :traffic_mirror_filter_rule_id,
       :dry_run)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -10605,6 +10911,7 @@ module Aws::EC2
     #
     class DeleteTrafficMirrorFilterRuleResult < Struct.new(
       :traffic_mirror_filter_rule_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -10632,6 +10939,7 @@ module Aws::EC2
     class DeleteTrafficMirrorSessionRequest < Struct.new(
       :traffic_mirror_session_id,
       :dry_run)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -10643,6 +10951,7 @@ module Aws::EC2
     #
     class DeleteTrafficMirrorSessionResult < Struct.new(
       :traffic_mirror_session_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -10670,6 +10979,7 @@ module Aws::EC2
     class DeleteTrafficMirrorTargetRequest < Struct.new(
       :traffic_mirror_target_id,
       :dry_run)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -10681,6 +10991,7 @@ module Aws::EC2
     #
     class DeleteTrafficMirrorTargetResult < Struct.new(
       :traffic_mirror_target_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -10708,6 +11019,7 @@ module Aws::EC2
     class DeleteTransitGatewayMulticastDomainRequest < Struct.new(
       :transit_gateway_multicast_domain_id,
       :dry_run)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -10719,6 +11031,7 @@ module Aws::EC2
     #
     class DeleteTransitGatewayMulticastDomainResult < Struct.new(
       :transit_gateway_multicast_domain)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -10746,6 +11059,7 @@ module Aws::EC2
     class DeleteTransitGatewayPeeringAttachmentRequest < Struct.new(
       :transit_gateway_attachment_id,
       :dry_run)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -10757,6 +11071,7 @@ module Aws::EC2
     #
     class DeleteTransitGatewayPeeringAttachmentResult < Struct.new(
       :transit_gateway_peering_attachment)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -10784,6 +11099,7 @@ module Aws::EC2
     class DeleteTransitGatewayRequest < Struct.new(
       :transit_gateway_id,
       :dry_run)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -10795,6 +11111,7 @@ module Aws::EC2
     #
     class DeleteTransitGatewayResult < Struct.new(
       :transit_gateway)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -10829,6 +11146,7 @@ module Aws::EC2
       :transit_gateway_route_table_id,
       :destination_cidr_block,
       :dry_run)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -10840,6 +11158,7 @@ module Aws::EC2
     #
     class DeleteTransitGatewayRouteResult < Struct.new(
       :route)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -10867,6 +11186,7 @@ module Aws::EC2
     class DeleteTransitGatewayRouteTableRequest < Struct.new(
       :transit_gateway_route_table_id,
       :dry_run)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -10878,6 +11198,7 @@ module Aws::EC2
     #
     class DeleteTransitGatewayRouteTableResult < Struct.new(
       :transit_gateway_route_table)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -10905,6 +11226,7 @@ module Aws::EC2
     class DeleteTransitGatewayVpcAttachmentRequest < Struct.new(
       :transit_gateway_attachment_id,
       :dry_run)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -10916,6 +11238,7 @@ module Aws::EC2
     #
     class DeleteTransitGatewayVpcAttachmentResult < Struct.new(
       :transit_gateway_vpc_attachment)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -10943,6 +11266,7 @@ module Aws::EC2
     class DeleteVolumeRequest < Struct.new(
       :volume_id,
       :dry_run)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -10970,6 +11294,7 @@ module Aws::EC2
     class DeleteVpcEndpointConnectionNotificationsRequest < Struct.new(
       :dry_run,
       :connection_notification_ids)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -10982,6 +11307,7 @@ module Aws::EC2
     #
     class DeleteVpcEndpointConnectionNotificationsResult < Struct.new(
       :unsuccessful)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -11009,6 +11335,7 @@ module Aws::EC2
     class DeleteVpcEndpointServiceConfigurationsRequest < Struct.new(
       :dry_run,
       :service_ids)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -11021,6 +11348,7 @@ module Aws::EC2
     #
     class DeleteVpcEndpointServiceConfigurationsResult < Struct.new(
       :unsuccessful)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -11050,6 +11378,7 @@ module Aws::EC2
     class DeleteVpcEndpointsRequest < Struct.new(
       :dry_run,
       :vpc_endpoint_ids)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -11064,6 +11393,7 @@ module Aws::EC2
     #
     class DeleteVpcEndpointsResult < Struct.new(
       :unsuccessful)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -11091,6 +11421,7 @@ module Aws::EC2
     class DeleteVpcPeeringConnectionRequest < Struct.new(
       :dry_run,
       :vpc_peering_connection_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -11103,6 +11434,7 @@ module Aws::EC2
     #
     class DeleteVpcPeeringConnectionResult < Struct.new(
       :return)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -11130,6 +11462,7 @@ module Aws::EC2
     class DeleteVpcRequest < Struct.new(
       :vpc_id,
       :dry_run)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -11159,6 +11492,7 @@ module Aws::EC2
     class DeleteVpnConnectionRequest < Struct.new(
       :vpn_connection_id,
       :dry_run)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -11186,6 +11520,7 @@ module Aws::EC2
     class DeleteVpnConnectionRouteRequest < Struct.new(
       :destination_cidr_block,
       :vpn_connection_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -11215,6 +11550,7 @@ module Aws::EC2
     class DeleteVpnGatewayRequest < Struct.new(
       :vpn_gateway_id,
       :dry_run)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -11243,6 +11579,7 @@ module Aws::EC2
     class DeprovisionByoipCidrRequest < Struct.new(
       :cidr,
       :dry_run)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -11254,6 +11591,7 @@ module Aws::EC2
     #
     class DeprovisionByoipCidrResult < Struct.new(
       :byoip_cidr)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -11283,6 +11621,7 @@ module Aws::EC2
     class DeregisterImageRequest < Struct.new(
       :image_id,
       :dry_run)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -11313,6 +11652,7 @@ module Aws::EC2
     class DeregisterInstanceEventNotificationAttributesRequest < Struct.new(
       :dry_run,
       :instance_tag_attribute)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -11324,6 +11664,7 @@ module Aws::EC2
     #
     class DeregisterInstanceEventNotificationAttributesResult < Struct.new(
       :instance_tag_attribute)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -11354,6 +11695,7 @@ module Aws::EC2
     class DeregisterInstanceTagAttributeRequest < Struct.new(
       :include_all_tags_of_instance,
       :instance_tag_keys)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -11393,6 +11735,7 @@ module Aws::EC2
       :group_ip_address,
       :network_interface_ids,
       :dry_run)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -11404,6 +11747,7 @@ module Aws::EC2
     #
     class DeregisterTransitGatewayMulticastGroupMembersResult < Struct.new(
       :deregistered_multicast_group_members)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -11443,6 +11787,7 @@ module Aws::EC2
       :group_ip_address,
       :network_interface_ids,
       :dry_run)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -11454,6 +11799,7 @@ module Aws::EC2
     #
     class DeregisterTransitGatewayMulticastGroupSourcesResult < Struct.new(
       :deregistered_multicast_group_sources)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -11481,6 +11827,7 @@ module Aws::EC2
     class DescribeAccountAttributesRequest < Struct.new(
       :attribute_names,
       :dry_run)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -11492,6 +11839,7 @@ module Aws::EC2
     #
     class DescribeAccountAttributesResult < Struct.new(
       :account_attributes)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -11571,6 +11919,7 @@ module Aws::EC2
       :public_ips,
       :allocation_ids,
       :dry_run)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -11582,6 +11931,7 @@ module Aws::EC2
     #
     class DescribeAddressesResult < Struct.new(
       :addresses)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -11603,6 +11953,7 @@ module Aws::EC2
     #
     class DescribeAggregateIdFormatRequest < Struct.new(
       :dry_run)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -11621,6 +11972,7 @@ module Aws::EC2
     class DescribeAggregateIdFormatResult < Struct.new(
       :use_long_ids_aggregated,
       :statuses)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -11697,6 +12049,7 @@ module Aws::EC2
       :zone_ids,
       :all_availability_zones,
       :dry_run)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -11708,6 +12061,7 @@ module Aws::EC2
     #
     class DescribeAvailabilityZonesResult < Struct.new(
       :availability_zones)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -11772,6 +12126,7 @@ module Aws::EC2
       :bundle_ids,
       :filters,
       :dry_run)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -11783,6 +12138,7 @@ module Aws::EC2
     #
     class DescribeBundleTasksResult < Struct.new(
       :bundle_tasks)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -11818,6 +12174,7 @@ module Aws::EC2
       :dry_run,
       :max_results,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -11835,6 +12192,7 @@ module Aws::EC2
     class DescribeByoipCidrsResult < Struct.new(
       :byoip_cidrs,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -11966,6 +12324,7 @@ module Aws::EC2
       :max_results,
       :filters,
       :dry_run)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -11983,6 +12342,7 @@ module Aws::EC2
     class DescribeCapacityReservationsResult < Struct.new(
       :next_token,
       :capacity_reservations)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -12058,6 +12418,7 @@ module Aws::EC2
       :instance_ids,
       :max_results,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -12075,6 +12436,7 @@ module Aws::EC2
     class DescribeClassicLinkInstancesResult < Struct.new(
       :instances,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -12135,6 +12497,7 @@ module Aws::EC2
       :next_token,
       :filters,
       :max_results)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -12152,6 +12515,7 @@ module Aws::EC2
     class DescribeClientVpnAuthorizationRulesResult < Struct.new(
       :authorization_rules,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -12209,6 +12573,7 @@ module Aws::EC2
       :next_token,
       :max_results,
       :dry_run)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -12226,6 +12591,7 @@ module Aws::EC2
     class DescribeClientVpnConnectionsResult < Struct.new(
       :connections,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -12282,6 +12648,7 @@ module Aws::EC2
       :next_token,
       :filters,
       :dry_run)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -12299,6 +12666,7 @@ module Aws::EC2
     class DescribeClientVpnEndpointsResult < Struct.new(
       :client_vpn_endpoints,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -12359,6 +12727,7 @@ module Aws::EC2
       :max_results,
       :next_token,
       :dry_run)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -12376,6 +12745,7 @@ module Aws::EC2
     class DescribeClientVpnRoutesResult < Struct.new(
       :routes,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -12442,6 +12812,7 @@ module Aws::EC2
       :next_token,
       :filters,
       :dry_run)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -12459,6 +12830,7 @@ module Aws::EC2
     class DescribeClientVpnTargetNetworksResult < Struct.new(
       :client_vpn_target_networks,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -12520,6 +12892,7 @@ module Aws::EC2
       :max_results,
       :next_token,
       :dry_run)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -12537,6 +12910,7 @@ module Aws::EC2
     class DescribeCoipPoolsResult < Struct.new(
       :coip_pools,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -12564,6 +12938,7 @@ module Aws::EC2
     class DescribeConversionTasksRequest < Struct.new(
       :conversion_task_ids,
       :dry_run)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -12575,6 +12950,7 @@ module Aws::EC2
     #
     class DescribeConversionTasksResult < Struct.new(
       :conversion_tasks)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -12641,6 +13017,7 @@ module Aws::EC2
       :customer_gateway_ids,
       :filters,
       :dry_run)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -12654,6 +13031,7 @@ module Aws::EC2
     #
     class DescribeCustomerGatewaysResult < Struct.new(
       :customer_gateways)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -12728,6 +13106,7 @@ module Aws::EC2
       :dry_run,
       :next_token,
       :max_results)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -12745,6 +13124,7 @@ module Aws::EC2
     class DescribeDhcpOptionsResult < Struct.new(
       :dhcp_options,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -12807,6 +13187,7 @@ module Aws::EC2
       :max_results,
       :next_token,
       :filters)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -12824,6 +13205,7 @@ module Aws::EC2
     class DescribeEgressOnlyInternetGatewaysResult < Struct.new(
       :egress_only_internet_gateways,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -12891,6 +13273,7 @@ module Aws::EC2
       :filters,
       :max_results,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -12916,6 +13299,7 @@ module Aws::EC2
       :elastic_gpu_set,
       :max_results,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -12967,6 +13351,7 @@ module Aws::EC2
       :export_image_task_ids,
       :max_results,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -12984,6 +13369,7 @@ module Aws::EC2
     class DescribeExportImageTasksResult < Struct.new(
       :export_image_tasks,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -13013,6 +13399,7 @@ module Aws::EC2
     class DescribeExportTasksRequest < Struct.new(
       :export_task_ids,
       :filters)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -13024,6 +13411,7 @@ module Aws::EC2
     #
     class DescribeExportTasksResult < Struct.new(
       :export_tasks)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -13102,6 +13490,7 @@ module Aws::EC2
       :enabled_time,
       :disabling_time,
       :disabled_time)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -13159,6 +13548,7 @@ module Aws::EC2
       :max_results,
       :next_token,
       :dry_run)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -13176,6 +13566,7 @@ module Aws::EC2
     class DescribeFastSnapshotRestoresResult < Struct.new(
       :fast_snapshot_restores,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -13219,6 +13610,7 @@ module Aws::EC2
       :lifecycle,
       :error_code,
       :error_message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -13275,6 +13667,7 @@ module Aws::EC2
       :next_token,
       :fleet_id,
       :start_time)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -13312,6 +13705,7 @@ module Aws::EC2
       :next_token,
       :fleet_id,
       :start_time)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -13369,6 +13763,7 @@ module Aws::EC2
       :next_token,
       :fleet_id,
       :filters)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -13391,6 +13786,7 @@ module Aws::EC2
       :active_instances,
       :next_token,
       :fleet_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -13428,6 +13824,7 @@ module Aws::EC2
       :instance_ids,
       :instance_type,
       :platform)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -13498,6 +13895,7 @@ module Aws::EC2
       :next_token,
       :fleet_ids,
       :filters)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -13514,6 +13912,7 @@ module Aws::EC2
     class DescribeFleetsResult < Struct.new(
       :next_token,
       :fleets)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -13594,6 +13993,7 @@ module Aws::EC2
       :flow_log_ids,
       :max_results,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -13611,6 +14011,7 @@ module Aws::EC2
     class DescribeFlowLogsResult < Struct.new(
       :flow_logs,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -13644,6 +14045,7 @@ module Aws::EC2
       :dry_run,
       :fpga_image_id,
       :attribute)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -13655,6 +14057,7 @@ module Aws::EC2
     #
     class DescribeFpgaImageAttributeResult < Struct.new(
       :fpga_image_attribute)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -13744,6 +14147,7 @@ module Aws::EC2
       :filters,
       :next_token,
       :max_results)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -13761,6 +14165,7 @@ module Aws::EC2
     class DescribeFpgaImagesResult < Struct.new(
       :fpga_images,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -13833,6 +14238,7 @@ module Aws::EC2
       :min_duration,
       :next_token,
       :offering_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -13850,6 +14256,7 @@ module Aws::EC2
     class DescribeHostReservationOfferingsResult < Struct.new(
       :next_token,
       :offering_set)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -13913,6 +14320,7 @@ module Aws::EC2
       :host_reservation_id_set,
       :max_results,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -13930,6 +14338,7 @@ module Aws::EC2
     class DescribeHostReservationsResult < Struct.new(
       :host_reservation_set,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -14001,6 +14410,7 @@ module Aws::EC2
       :host_ids,
       :max_results,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -14018,6 +14428,7 @@ module Aws::EC2
     class DescribeHostsResult < Struct.new(
       :hosts,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -14066,6 +14477,7 @@ module Aws::EC2
       :filters,
       :max_results,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -14083,6 +14495,7 @@ module Aws::EC2
     class DescribeIamInstanceProfileAssociationsResult < Struct.new(
       :iam_instance_profile_associations,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -14110,6 +14523,7 @@ module Aws::EC2
     #
     class DescribeIdFormatRequest < Struct.new(
       :resource)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -14121,6 +14535,7 @@ module Aws::EC2
     #
     class DescribeIdFormatResult < Struct.new(
       :statuses)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -14155,6 +14570,7 @@ module Aws::EC2
     class DescribeIdentityIdFormatRequest < Struct.new(
       :principal_arn,
       :resource)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -14166,6 +14582,7 @@ module Aws::EC2
     #
     class DescribeIdentityIdFormatResult < Struct.new(
       :statuses)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -14206,6 +14623,7 @@ module Aws::EC2
       :attribute,
       :image_id,
       :dry_run)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -14354,6 +14772,7 @@ module Aws::EC2
       :image_ids,
       :owners,
       :dry_run)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -14365,6 +14784,7 @@ module Aws::EC2
     #
     class DescribeImagesResult < Struct.new(
       :images)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -14416,6 +14836,7 @@ module Aws::EC2
       :import_task_ids,
       :max_results,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -14434,6 +14855,7 @@ module Aws::EC2
     class DescribeImportImageTasksResult < Struct.new(
       :import_image_tasks,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -14486,6 +14908,7 @@ module Aws::EC2
       :import_task_ids,
       :max_results,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -14504,6 +14927,7 @@ module Aws::EC2
     class DescribeImportSnapshotTasksResult < Struct.new(
       :import_snapshot_tasks,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -14539,6 +14963,7 @@ module Aws::EC2
       :attribute,
       :dry_run,
       :instance_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -14601,6 +15026,7 @@ module Aws::EC2
       :instance_ids,
       :max_results,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -14618,6 +15044,7 @@ module Aws::EC2
     class DescribeInstanceCreditSpecificationsResult < Struct.new(
       :instance_credit_specifications,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -14639,6 +15066,7 @@ module Aws::EC2
     #
     class DescribeInstanceEventNotificationAttributesRequest < Struct.new(
       :dry_run)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -14650,6 +15078,7 @@ module Aws::EC2
     #
     class DescribeInstanceEventNotificationAttributesResult < Struct.new(
       :instance_tag_attribute)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -14764,6 +15193,7 @@ module Aws::EC2
       :next_token,
       :dry_run,
       :include_all_instances)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -14781,6 +15211,7 @@ module Aws::EC2
     class DescribeInstanceStatusResult < Struct.new(
       :instance_statuses,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -14839,6 +15270,7 @@ module Aws::EC2
       :filters,
       :max_results,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -14856,6 +15288,7 @@ module Aws::EC2
     class DescribeInstanceTypeOfferingsResult < Struct.new(
       :instance_type_offerings,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -15018,6 +15451,7 @@ module Aws::EC2
       :filters,
       :max_results,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -15040,6 +15474,7 @@ module Aws::EC2
     class DescribeInstanceTypesResult < Struct.new(
       :instance_types,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -15375,6 +15810,7 @@ module Aws::EC2
       :dry_run,
       :max_results,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -15392,6 +15828,7 @@ module Aws::EC2
     class DescribeInstancesResult < Struct.new(
       :reservations,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -15467,6 +15904,7 @@ module Aws::EC2
       :internet_gateway_ids,
       :next_token,
       :max_results)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -15484,6 +15922,7 @@ module Aws::EC2
     class DescribeInternetGatewaysResult < Struct.new(
       :internet_gateways,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -15546,6 +15985,7 @@ module Aws::EC2
       :max_results,
       :dry_run,
       :filters)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -15563,6 +16003,7 @@ module Aws::EC2
     class DescribeIpv6PoolsResult < Struct.new(
       :ipv_6_pools,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -15625,6 +16066,7 @@ module Aws::EC2
       :key_names,
       :key_pair_ids,
       :dry_run)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -15636,6 +16078,7 @@ module Aws::EC2
     #
     class DescribeKeyPairsResult < Struct.new(
       :key_pairs)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -15732,6 +16175,7 @@ module Aws::EC2
       :next_token,
       :max_results,
       :filters)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -15749,6 +16193,7 @@ module Aws::EC2
     class DescribeLaunchTemplateVersionsResult < Struct.new(
       :launch_template_versions,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -15821,6 +16266,7 @@ module Aws::EC2
       :filters,
       :next_token,
       :max_results)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -15838,6 +16284,7 @@ module Aws::EC2
     class DescribeLaunchTemplatesResult < Struct.new(
       :launch_templates,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -15903,6 +16350,7 @@ module Aws::EC2
       :max_results,
       :next_token,
       :dry_run)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -15920,6 +16368,7 @@ module Aws::EC2
     class DescribeLocalGatewayRouteTableVirtualInterfaceGroupAssociationsResult < Struct.new(
       :local_gateway_route_table_virtual_interface_group_associations,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -15984,6 +16433,7 @@ module Aws::EC2
       :max_results,
       :next_token,
       :dry_run)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -16001,6 +16451,7 @@ module Aws::EC2
     class DescribeLocalGatewayRouteTableVpcAssociationsResult < Struct.new(
       :local_gateway_route_table_vpc_associations,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -16062,6 +16513,7 @@ module Aws::EC2
       :max_results,
       :next_token,
       :dry_run)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -16079,6 +16531,7 @@ module Aws::EC2
     class DescribeLocalGatewayRouteTablesResult < Struct.new(
       :local_gateway_route_tables,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -16139,6 +16592,7 @@ module Aws::EC2
       :max_results,
       :next_token,
       :dry_run)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -16156,6 +16610,7 @@ module Aws::EC2
     class DescribeLocalGatewayVirtualInterfaceGroupsResult < Struct.new(
       :local_gateway_virtual_interface_groups,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -16208,6 +16663,7 @@ module Aws::EC2
       :max_results,
       :next_token,
       :dry_run)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -16225,6 +16681,7 @@ module Aws::EC2
     class DescribeLocalGatewayVirtualInterfacesResult < Struct.new(
       :local_gateway_virtual_interfaces,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -16292,6 +16749,7 @@ module Aws::EC2
       :max_results,
       :next_token,
       :dry_run)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -16309,6 +16767,7 @@ module Aws::EC2
     class DescribeLocalGatewaysResult < Struct.new(
       :local_gateways,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -16370,6 +16829,7 @@ module Aws::EC2
       :max_results,
       :next_token,
       :public_ips)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -16387,6 +16847,7 @@ module Aws::EC2
     class DescribeMovingAddressesResult < Struct.new(
       :moving_address_statuses,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -16459,6 +16920,7 @@ module Aws::EC2
       :max_results,
       :nat_gateway_ids,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -16476,6 +16938,7 @@ module Aws::EC2
     class DescribeNatGatewaysResult < Struct.new(
       :nat_gateways,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -16581,6 +17044,7 @@ module Aws::EC2
       :network_acl_ids,
       :next_token,
       :max_results)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -16598,6 +17062,7 @@ module Aws::EC2
     class DescribeNetworkAclsResult < Struct.new(
       :network_acls,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -16633,6 +17098,7 @@ module Aws::EC2
       :attribute,
       :dry_run,
       :network_interface_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -16666,6 +17132,7 @@ module Aws::EC2
       :groups,
       :network_interface_id,
       :source_dest_check)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -16726,6 +17193,7 @@ module Aws::EC2
       :filters,
       :next_token,
       :max_results)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -16744,6 +17212,7 @@ module Aws::EC2
     class DescribeNetworkInterfacePermissionsResult < Struct.new(
       :network_interface_permissions,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -16912,6 +17381,7 @@ module Aws::EC2
       :network_interface_ids,
       :next_token,
       :max_results)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -16931,6 +17401,7 @@ module Aws::EC2
     class DescribeNetworkInterfacesResult < Struct.new(
       :network_interfaces,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -16996,6 +17467,7 @@ module Aws::EC2
       :dry_run,
       :group_names,
       :group_ids)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -17007,6 +17479,7 @@ module Aws::EC2
     #
     class DescribePlacementGroupsResult < Struct.new(
       :placement_groups)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -17063,6 +17536,7 @@ module Aws::EC2
       :max_results,
       :next_token,
       :prefix_list_ids)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -17080,6 +17554,7 @@ module Aws::EC2
     class DescribePrefixListsResult < Struct.new(
       :next_token,
       :prefix_lists)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -17130,6 +17605,7 @@ module Aws::EC2
       :resources,
       :max_results,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -17147,6 +17623,7 @@ module Aws::EC2
     class DescribePrincipalIdFormatResult < Struct.new(
       :principals,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -17200,6 +17677,7 @@ module Aws::EC2
       :next_token,
       :max_results,
       :filters)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -17217,6 +17695,7 @@ module Aws::EC2
     class DescribePublicIpv4PoolsResult < Struct.new(
       :public_ipv_4_pools,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -17271,6 +17750,7 @@ module Aws::EC2
       :region_names,
       :dry_run,
       :all_regions)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -17282,6 +17762,7 @@ module Aws::EC2
     #
     class DescribeRegionsResult < Struct.new(
       :regions)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -17329,6 +17810,7 @@ module Aws::EC2
       :filters,
       :reserved_instances_id,
       :reserved_instances_listing_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -17342,6 +17824,7 @@ module Aws::EC2
     #
     class DescribeReservedInstancesListingsResult < Struct.new(
       :reserved_instances_listings)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -17420,6 +17903,7 @@ module Aws::EC2
       :filters,
       :reserved_instances_modification_ids,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -17439,6 +17923,7 @@ module Aws::EC2
     class DescribeReservedInstancesModificationsResult < Struct.new(
       :next_token,
       :reserved_instances_modifications)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -17621,6 +18106,7 @@ module Aws::EC2
       :max_results,
       :next_token,
       :offering_type)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -17640,6 +18126,7 @@ module Aws::EC2
     class DescribeReservedInstancesOfferingsResult < Struct.new(
       :reserved_instances_offerings,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -17748,6 +18235,7 @@ module Aws::EC2
       :reserved_instances_ids,
       :dry_run,
       :offering_type)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -17761,6 +18249,7 @@ module Aws::EC2
     #
     class DescribeReservedInstancesResult < Struct.new(
       :reserved_instances)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -17884,6 +18373,7 @@ module Aws::EC2
       :route_table_ids,
       :next_token,
       :max_results)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -17903,6 +18393,7 @@ module Aws::EC2
     class DescribeRouteTablesResult < Struct.new(
       :route_tables,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -17999,6 +18490,7 @@ module Aws::EC2
       :min_slot_duration_in_hours,
       :next_token,
       :recurrence)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -18018,6 +18510,7 @@ module Aws::EC2
     class DescribeScheduledInstanceAvailabilityResult < Struct.new(
       :next_token,
       :scheduled_instance_availability_set)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -18092,6 +18585,7 @@ module Aws::EC2
       :next_token,
       :scheduled_instance_ids,
       :slot_start_time_range)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -18111,6 +18605,7 @@ module Aws::EC2
     class DescribeScheduledInstancesResult < Struct.new(
       :next_token,
       :scheduled_instance_set)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -18138,6 +18633,7 @@ module Aws::EC2
     class DescribeSecurityGroupReferencesRequest < Struct.new(
       :dry_run,
       :group_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -18149,6 +18645,7 @@ module Aws::EC2
     #
     class DescribeSecurityGroupReferencesResult < Struct.new(
       :security_group_reference_set)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -18296,6 +18793,7 @@ module Aws::EC2
       :dry_run,
       :next_token,
       :max_results)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -18313,6 +18811,7 @@ module Aws::EC2
     class DescribeSecurityGroupsResult < Struct.new(
       :security_groups,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -18346,6 +18845,7 @@ module Aws::EC2
       :attribute,
       :snapshot_id,
       :dry_run)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -18368,6 +18868,7 @@ module Aws::EC2
       :create_volume_permissions,
       :product_codes,
       :snapshot_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -18487,6 +18988,7 @@ module Aws::EC2
       :restorable_by_user_ids,
       :snapshot_ids,
       :dry_run)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -18507,6 +19009,7 @@ module Aws::EC2
     class DescribeSnapshotsResult < Struct.new(
       :snapshots,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -18530,6 +19033,7 @@ module Aws::EC2
     #
     class DescribeSpotDatafeedSubscriptionRequest < Struct.new(
       :dry_run)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -18543,6 +19047,7 @@ module Aws::EC2
     #
     class DescribeSpotDatafeedSubscriptionResult < Struct.new(
       :spot_datafeed_subscription)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -18587,6 +19092,7 @@ module Aws::EC2
       :max_results,
       :next_token,
       :spot_fleet_request_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -18612,6 +19118,7 @@ module Aws::EC2
       :active_instances,
       :next_token,
       :spot_fleet_request_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -18670,6 +19177,7 @@ module Aws::EC2
       :next_token,
       :spot_fleet_request_id,
       :start_time)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -18711,6 +19219,7 @@ module Aws::EC2
       :next_token,
       :spot_fleet_request_id,
       :start_time)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -18755,6 +19264,7 @@ module Aws::EC2
       :max_results,
       :next_token,
       :spot_fleet_request_ids)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -18774,6 +19284,7 @@ module Aws::EC2
     class DescribeSpotFleetRequestsResponse < Struct.new(
       :next_token,
       :spot_fleet_request_configs)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -18948,6 +19459,7 @@ module Aws::EC2
       :spot_instance_request_ids,
       :next_token,
       :max_results)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -18967,6 +19479,7 @@ module Aws::EC2
     class DescribeSpotInstanceRequestsResult < Struct.new(
       :spot_instance_requests,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -19068,6 +19581,7 @@ module Aws::EC2
       :next_token,
       :product_descriptions,
       :start_time)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -19087,6 +19601,7 @@ module Aws::EC2
     class DescribeSpotPriceHistoryResult < Struct.new(
       :next_token,
       :spot_price_history)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -19129,6 +19644,7 @@ module Aws::EC2
       :max_results,
       :next_token,
       :vpc_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -19146,6 +19662,7 @@ module Aws::EC2
     class DescribeStaleSecurityGroupsResult < Struct.new(
       :next_token,
       :stale_security_group_set)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -19247,6 +19764,7 @@ module Aws::EC2
       :dry_run,
       :next_token,
       :max_results)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -19264,6 +19782,7 @@ module Aws::EC2
     class DescribeSubnetsResult < Struct.new(
       :subnets,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -19332,6 +19851,7 @@ module Aws::EC2
       :filters,
       :max_results,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -19349,6 +19869,7 @@ module Aws::EC2
     class DescribeTagsResult < Struct.new(
       :next_token,
       :tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -19405,6 +19926,7 @@ module Aws::EC2
       :filters,
       :max_results,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -19422,6 +19944,7 @@ module Aws::EC2
     class DescribeTrafficMirrorFiltersResult < Struct.new(
       :traffic_mirror_filters,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -19496,6 +20019,7 @@ module Aws::EC2
       :filters,
       :max_results,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -19515,6 +20039,7 @@ module Aws::EC2
     class DescribeTrafficMirrorSessionsResult < Struct.new(
       :traffic_mirror_sessions,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -19580,6 +20105,7 @@ module Aws::EC2
       :filters,
       :max_results,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -19597,6 +20123,7 @@ module Aws::EC2
     class DescribeTrafficMirrorTargetsResult < Struct.new(
       :traffic_mirror_targets,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -19673,6 +20200,7 @@ module Aws::EC2
       :max_results,
       :next_token,
       :dry_run)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -19690,6 +20218,7 @@ module Aws::EC2
     class DescribeTransitGatewayAttachmentsResult < Struct.new(
       :transit_gateway_attachments,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -19750,6 +20279,7 @@ module Aws::EC2
       :max_results,
       :next_token,
       :dry_run)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -19767,6 +20297,7 @@ module Aws::EC2
     class DescribeTransitGatewayMulticastDomainsResult < Struct.new(
       :transit_gateway_multicast_domains,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -19834,6 +20365,7 @@ module Aws::EC2
       :max_results,
       :next_token,
       :dry_run)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -19851,6 +20383,7 @@ module Aws::EC2
     class DescribeTransitGatewayPeeringAttachmentsResult < Struct.new(
       :transit_gateway_peering_attachments,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -19920,6 +20453,7 @@ module Aws::EC2
       :max_results,
       :next_token,
       :dry_run)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -19937,6 +20471,7 @@ module Aws::EC2
     class DescribeTransitGatewayRouteTablesResult < Struct.new(
       :transit_gateway_route_tables,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -19999,6 +20534,7 @@ module Aws::EC2
       :max_results,
       :next_token,
       :dry_run)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -20016,6 +20552,7 @@ module Aws::EC2
     class DescribeTransitGatewayVpcAttachmentsResult < Struct.new(
       :transit_gateway_vpc_attachments,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -20104,6 +20641,7 @@ module Aws::EC2
       :max_results,
       :next_token,
       :dry_run)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -20121,6 +20659,7 @@ module Aws::EC2
     class DescribeTransitGatewaysResult < Struct.new(
       :transit_gateways,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -20154,6 +20693,7 @@ module Aws::EC2
       :attribute,
       :volume_id,
       :dry_run)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -20175,6 +20715,7 @@ module Aws::EC2
       :auto_enable_io,
       :product_codes,
       :volume_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -20271,6 +20812,7 @@ module Aws::EC2
       :next_token,
       :volume_ids,
       :dry_run)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -20288,6 +20830,7 @@ module Aws::EC2
     class DescribeVolumeStatusResult < Struct.new(
       :next_token,
       :volume_statuses)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -20366,6 +20909,7 @@ module Aws::EC2
       :filters,
       :next_token,
       :max_results)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -20382,6 +20926,7 @@ module Aws::EC2
     class DescribeVolumesModificationsResult < Struct.new(
       :volumes_modifications,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -20500,6 +21045,7 @@ module Aws::EC2
       :dry_run,
       :max_results,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -20520,6 +21066,7 @@ module Aws::EC2
     class DescribeVolumesResult < Struct.new(
       :volumes,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -20553,6 +21100,7 @@ module Aws::EC2
       :attribute,
       :vpc_id,
       :dry_run)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -20579,6 +21127,7 @@ module Aws::EC2
       :vpc_id,
       :enable_dns_hostnames,
       :enable_dns_support)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -20611,6 +21160,7 @@ module Aws::EC2
       :max_results,
       :next_token,
       :vpc_ids)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -20628,6 +21178,7 @@ module Aws::EC2
     class DescribeVpcClassicLinkDnsSupportResult < Struct.new(
       :next_token,
       :vpcs)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -20680,6 +21231,7 @@ module Aws::EC2
       :filters,
       :dry_run,
       :vpc_ids)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -20691,6 +21243,7 @@ module Aws::EC2
     #
     class DescribeVpcClassicLinkResult < Struct.new(
       :vpcs)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -20758,6 +21311,7 @@ module Aws::EC2
       :filters,
       :max_results,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -20775,6 +21329,7 @@ module Aws::EC2
     class DescribeVpcEndpointConnectionNotificationsResult < Struct.new(
       :connection_notification_set,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -20834,6 +21389,7 @@ module Aws::EC2
       :filters,
       :max_results,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -20851,6 +21407,7 @@ module Aws::EC2
     class DescribeVpcEndpointConnectionsResult < Struct.new(
       :vpc_endpoint_connections,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -20922,6 +21479,7 @@ module Aws::EC2
       :filters,
       :max_results,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -20939,6 +21497,7 @@ module Aws::EC2
     class DescribeVpcEndpointServiceConfigurationsResult < Struct.new(
       :service_configurations,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -20998,6 +21557,7 @@ module Aws::EC2
       :filters,
       :max_results,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -21015,6 +21575,7 @@ module Aws::EC2
     class DescribeVpcEndpointServicePermissionsResult < Struct.new(
       :allowed_principals,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -21085,6 +21646,7 @@ module Aws::EC2
       :filters,
       :max_results,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -21109,6 +21671,7 @@ module Aws::EC2
       :service_names,
       :service_details,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -21187,6 +21750,7 @@ module Aws::EC2
       :filters,
       :max_results,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -21206,6 +21770,7 @@ module Aws::EC2
     class DescribeVpcEndpointsResult < Struct.new(
       :vpc_endpoints,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -21299,6 +21864,7 @@ module Aws::EC2
       :vpc_peering_connection_ids,
       :next_token,
       :max_results)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -21316,6 +21882,7 @@ module Aws::EC2
     class DescribeVpcPeeringConnectionsResult < Struct.new(
       :vpc_peering_connections,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -21416,6 +21983,7 @@ module Aws::EC2
       :dry_run,
       :next_token,
       :max_results)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -21433,6 +22001,7 @@ module Aws::EC2
     class DescribeVpcsResult < Struct.new(
       :vpcs,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -21515,6 +22084,7 @@ module Aws::EC2
       :filters,
       :vpn_connection_ids,
       :dry_run)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -21528,6 +22098,7 @@ module Aws::EC2
     #
     class DescribeVpnConnectionsResult < Struct.new(
       :vpn_connections)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -21600,6 +22171,7 @@ module Aws::EC2
       :filters,
       :vpn_gateway_ids,
       :dry_run)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -21613,6 +22185,7 @@ module Aws::EC2
     #
     class DescribeVpnGatewaysResult < Struct.new(
       :vpn_gateways)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -21646,6 +22219,7 @@ module Aws::EC2
       :dry_run,
       :instance_id,
       :vpc_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -21658,6 +22232,7 @@ module Aws::EC2
     #
     class DetachClassicLinkVpcResult < Struct.new(
       :return)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -21691,6 +22266,7 @@ module Aws::EC2
       :dry_run,
       :internet_gateway_id,
       :vpc_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -21746,6 +22322,7 @@ module Aws::EC2
       :attachment_id,
       :dry_run,
       :force)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -21799,6 +22376,7 @@ module Aws::EC2
       :instance_id,
       :volume_id,
       :dry_run)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -21834,6 +22412,7 @@ module Aws::EC2
       :vpc_id,
       :vpn_gateway_id,
       :dry_run)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -21852,6 +22431,7 @@ module Aws::EC2
     class DhcpConfiguration < Struct.new(
       :key,
       :values)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -21880,6 +22460,7 @@ module Aws::EC2
       :dhcp_options_id,
       :owner_id,
       :tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -21893,6 +22474,7 @@ module Aws::EC2
     #
     class DirectoryServiceAuthentication < Struct.new(
       :directory_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -21913,6 +22495,7 @@ module Aws::EC2
     #
     class DirectoryServiceAuthenticationRequest < Struct.new(
       :directory_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -21934,6 +22517,7 @@ module Aws::EC2
     #
     class DisableEbsEncryptionByDefaultRequest < Struct.new(
       :dry_run)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -21945,6 +22529,7 @@ module Aws::EC2
     #
     class DisableEbsEncryptionByDefaultResult < Struct.new(
       :ebs_encryption_by_default)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -21964,6 +22549,7 @@ module Aws::EC2
     class DisableFastSnapshotRestoreErrorItem < Struct.new(
       :snapshot_id,
       :fast_snapshot_restore_state_errors)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -21983,6 +22569,7 @@ module Aws::EC2
     class DisableFastSnapshotRestoreStateError < Struct.new(
       :code,
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -22002,6 +22589,7 @@ module Aws::EC2
     class DisableFastSnapshotRestoreStateErrorItem < Struct.new(
       :availability_zone,
       :error)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -22080,6 +22668,7 @@ module Aws::EC2
       :enabled_time,
       :disabling_time,
       :disabled_time)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -22114,6 +22703,7 @@ module Aws::EC2
       :availability_zones,
       :source_snapshot_ids,
       :dry_run)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -22132,6 +22722,7 @@ module Aws::EC2
     class DisableFastSnapshotRestoresResult < Struct.new(
       :successful,
       :unsuccessful)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -22165,6 +22756,7 @@ module Aws::EC2
       :transit_gateway_route_table_id,
       :transit_gateway_attachment_id,
       :dry_run)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -22176,6 +22768,7 @@ module Aws::EC2
     #
     class DisableTransitGatewayRouteTablePropagationResult < Struct.new(
       :propagation)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -22211,6 +22804,7 @@ module Aws::EC2
       :gateway_id,
       :route_table_id,
       :dry_run)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -22229,6 +22823,7 @@ module Aws::EC2
     #
     class DisableVpcClassicLinkDnsSupportRequest < Struct.new(
       :vpc_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -22241,6 +22836,7 @@ module Aws::EC2
     #
     class DisableVpcClassicLinkDnsSupportResult < Struct.new(
       :return)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -22268,6 +22864,7 @@ module Aws::EC2
     class DisableVpcClassicLinkRequest < Struct.new(
       :dry_run,
       :vpc_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -22280,6 +22877,7 @@ module Aws::EC2
     #
     class DisableVpcClassicLinkResult < Struct.new(
       :return)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -22313,6 +22911,7 @@ module Aws::EC2
       :association_id,
       :public_ip,
       :dry_run)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -22347,6 +22946,7 @@ module Aws::EC2
       :client_vpn_endpoint_id,
       :association_id,
       :dry_run)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -22363,6 +22963,7 @@ module Aws::EC2
     class DisassociateClientVpnTargetNetworkResult < Struct.new(
       :association_id,
       :status)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -22381,6 +22982,7 @@ module Aws::EC2
     #
     class DisassociateIamInstanceProfileRequest < Struct.new(
       :association_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -22392,6 +22994,7 @@ module Aws::EC2
     #
     class DisassociateIamInstanceProfileResult < Struct.new(
       :iam_instance_profile_association)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -22420,6 +23023,7 @@ module Aws::EC2
     class DisassociateRouteTableRequest < Struct.new(
       :association_id,
       :dry_run)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -22438,6 +23042,7 @@ module Aws::EC2
     #
     class DisassociateSubnetCidrBlockRequest < Struct.new(
       :association_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -22454,6 +23059,7 @@ module Aws::EC2
     class DisassociateSubnetCidrBlockResult < Struct.new(
       :ipv_6_cidr_block_association,
       :subnet_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -22493,6 +23099,7 @@ module Aws::EC2
       :transit_gateway_attachment_id,
       :subnet_ids,
       :dry_run)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -22504,6 +23111,7 @@ module Aws::EC2
     #
     class DisassociateTransitGatewayMulticastDomainResult < Struct.new(
       :associations)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -22537,6 +23145,7 @@ module Aws::EC2
       :transit_gateway_route_table_id,
       :transit_gateway_attachment_id,
       :dry_run)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -22548,6 +23157,7 @@ module Aws::EC2
     #
     class DisassociateTransitGatewayRouteTableResult < Struct.new(
       :association)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -22566,6 +23176,7 @@ module Aws::EC2
     #
     class DisassociateVpcCidrBlockRequest < Struct.new(
       :association_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -22587,6 +23198,7 @@ module Aws::EC2
       :ipv_6_cidr_block_association,
       :cidr_block_association,
       :vpc_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -22625,6 +23237,7 @@ module Aws::EC2
       :description,
       :image,
       :volume)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -22665,6 +23278,7 @@ module Aws::EC2
       :format,
       :import_manifest_url,
       :size)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -22710,6 +23324,7 @@ module Aws::EC2
       :bytes,
       :format,
       :import_manifest_url)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -22728,6 +23343,7 @@ module Aws::EC2
     class DiskImageVolumeDescription < Struct.new(
       :id,
       :size)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -22751,6 +23367,7 @@ module Aws::EC2
       :size_in_gb,
       :count,
       :type)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -22769,6 +23386,7 @@ module Aws::EC2
     class DnsEntry < Struct.new(
       :dns_name,
       :hosted_zone_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -22799,6 +23417,7 @@ module Aws::EC2
     class DnsServersOptionsModifyStructure < Struct.new(
       :custom_dns_servers,
       :enabled)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -22925,6 +23544,7 @@ module Aws::EC2
       :volume_type,
       :kms_key_id,
       :encrypted)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -22959,6 +23579,7 @@ module Aws::EC2
       :encryption_support,
       :ebs_optimized_info,
       :nvme_support)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -22988,6 +23609,7 @@ module Aws::EC2
       :delete_on_termination,
       :status,
       :volume_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -23015,6 +23637,7 @@ module Aws::EC2
     class EbsInstanceBlockDeviceSpecification < Struct.new(
       :delete_on_termination,
       :volume_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -23059,6 +23682,7 @@ module Aws::EC2
       :maximum_bandwidth_in_mbps,
       :maximum_throughput_in_m_bps,
       :maximum_iops)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -23083,6 +23707,7 @@ module Aws::EC2
       :attachments,
       :egress_only_internet_gateway_id,
       :tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -23114,6 +23739,7 @@ module Aws::EC2
       :elastic_gpu_association_id,
       :elastic_gpu_association_state,
       :elastic_gpu_association_time)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -23127,6 +23753,7 @@ module Aws::EC2
     #
     class ElasticGpuHealth < Struct.new(
       :status)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -23154,6 +23781,7 @@ module Aws::EC2
     #
     class ElasticGpuSpecification < Struct.new(
       :type)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -23167,6 +23795,7 @@ module Aws::EC2
     #
     class ElasticGpuSpecificationResponse < Struct.new(
       :type)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -23212,6 +23841,7 @@ module Aws::EC2
       :elastic_gpu_state,
       :instance_id,
       :tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -23243,6 +23873,7 @@ module Aws::EC2
     class ElasticInferenceAccelerator < Struct.new(
       :type,
       :count)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -23273,6 +23904,7 @@ module Aws::EC2
       :elastic_inference_accelerator_association_id,
       :elastic_inference_accelerator_association_state,
       :elastic_inference_accelerator_association_time)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -23294,6 +23926,7 @@ module Aws::EC2
     #
     class EnableEbsEncryptionByDefaultRequest < Struct.new(
       :dry_run)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -23305,6 +23938,7 @@ module Aws::EC2
     #
     class EnableEbsEncryptionByDefaultResult < Struct.new(
       :ebs_encryption_by_default)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -23324,6 +23958,7 @@ module Aws::EC2
     class EnableFastSnapshotRestoreErrorItem < Struct.new(
       :snapshot_id,
       :fast_snapshot_restore_state_errors)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -23342,6 +23977,7 @@ module Aws::EC2
     class EnableFastSnapshotRestoreStateError < Struct.new(
       :code,
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -23361,6 +23997,7 @@ module Aws::EC2
     class EnableFastSnapshotRestoreStateErrorItem < Struct.new(
       :availability_zone,
       :error)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -23439,6 +24076,7 @@ module Aws::EC2
       :enabled_time,
       :disabling_time,
       :disabled_time)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -23474,6 +24112,7 @@ module Aws::EC2
       :availability_zones,
       :source_snapshot_ids,
       :dry_run)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -23492,6 +24131,7 @@ module Aws::EC2
     class EnableFastSnapshotRestoresResult < Struct.new(
       :successful,
       :unsuccessful)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -23525,6 +24165,7 @@ module Aws::EC2
       :transit_gateway_route_table_id,
       :transit_gateway_attachment_id,
       :dry_run)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -23536,6 +24177,7 @@ module Aws::EC2
     #
     class EnableTransitGatewayRouteTablePropagationResult < Struct.new(
       :propagation)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -23574,6 +24216,7 @@ module Aws::EC2
       :gateway_id,
       :route_table_id,
       :dry_run)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -23601,6 +24244,7 @@ module Aws::EC2
     class EnableVolumeIORequest < Struct.new(
       :dry_run,
       :volume_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -23619,6 +24263,7 @@ module Aws::EC2
     #
     class EnableVpcClassicLinkDnsSupportRequest < Struct.new(
       :vpc_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -23631,6 +24276,7 @@ module Aws::EC2
     #
     class EnableVpcClassicLinkDnsSupportResult < Struct.new(
       :return)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -23658,6 +24304,7 @@ module Aws::EC2
     class EnableVpcClassicLinkRequest < Struct.new(
       :dry_run,
       :vpc_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -23670,6 +24317,7 @@ module Aws::EC2
     #
     class EnableVpcClassicLinkResult < Struct.new(
       :return)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -23763,6 +24411,7 @@ module Aws::EC2
       :event_description,
       :event_sub_type,
       :instance_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -23790,6 +24439,7 @@ module Aws::EC2
     class ExportClientVpnClientCertificateRevocationListRequest < Struct.new(
       :client_vpn_endpoint_id,
       :dry_run)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -23806,6 +24456,7 @@ module Aws::EC2
     class ExportClientVpnClientCertificateRevocationListResult < Struct.new(
       :certificate_revocation_list,
       :status)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -23833,6 +24484,7 @@ module Aws::EC2
     class ExportClientVpnClientConfigurationRequest < Struct.new(
       :client_vpn_endpoint_id,
       :dry_run)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -23844,6 +24496,7 @@ module Aws::EC2
     #
     class ExportClientVpnClientConfigurationResult < Struct.new(
       :client_configuration)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -23861,6 +24514,17 @@ module Aws::EC2
     #           s3_prefix: "String",
     #         },
     #         role_name: "String",
+    #         tag_specifications: [
+    #           {
+    #             resource_type: "client-vpn-endpoint", # accepts client-vpn-endpoint, customer-gateway, dedicated-host, dhcp-options, elastic-ip, elastic-gpu, export-image-task, export-instance-task, fleet, fpga-image, host-reservation, image, import-image-task, import-snapshot-task, instance, internet-gateway, key-pair, launch-template, local-gateway-route-table-vpc-association, natgateway, network-acl, network-interface, placement-group, reserved-instances, route-table, security-group, snapshot, spot-fleet-request, spot-instances-request, subnet, traffic-mirror-filter, traffic-mirror-session, traffic-mirror-target, transit-gateway, transit-gateway-attachment, transit-gateway-multicast-domain, transit-gateway-route-table, volume, vpc, vpc-peering-connection, vpn-connection, vpn-gateway, vpc-flow-log
+    #             tags: [
+    #               {
+    #                 key: "String",
+    #                 value: "String",
+    #               },
+    #             ],
+    #           },
+    #         ],
     #       }
     #
     # @!attribute [rw] client_token
@@ -23872,7 +24536,7 @@ module Aws::EC2
     #
     # @!attribute [rw] description
     #   A description of the image being exported. The maximum length is 255
-    #   bytes.
+    #   characters.
     #   @return [String]
     #
     # @!attribute [rw] disk_image_format
@@ -23891,16 +24555,20 @@ module Aws::EC2
     #   @return [String]
     #
     # @!attribute [rw] s3_export_location
-    #   Information about the destination S3 bucket. The bucket must exist
-    #   and grant WRITE and READ\_ACP permissions to the AWS account
+    #   Information about the destination Amazon S3 bucket. The bucket must
+    #   exist and grant WRITE and READ\_ACP permissions to the AWS account
     #   vm-import-export@amazon.com.
     #   @return [Types::ExportTaskS3LocationRequest]
     #
     # @!attribute [rw] role_name
     #   The name of the role that grants VM Import/Export permission to
-    #   export images to your S3 bucket. If this parameter is not specified,
-    #   the default role is named 'vmimport'.
+    #   export images to your Amazon S3 bucket. If this parameter is not
+    #   specified, the default role is named 'vmimport'.
     #   @return [String]
+    #
+    # @!attribute [rw] tag_specifications
+    #   The tags to apply to the image being exported.
+    #   @return [Array<Types::TagSpecification>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ExportImageRequest AWS API Documentation
     #
@@ -23911,7 +24579,9 @@ module Aws::EC2
       :dry_run,
       :image_id,
       :s3_export_location,
-      :role_name)
+      :role_name,
+      :tag_specifications)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -23933,7 +24603,7 @@ module Aws::EC2
     #
     # @!attribute [rw] role_name
     #   The name of the role that grants VM Import/Export permission to
-    #   export images to your S3 bucket.
+    #   export images to your Amazon S3 bucket.
     #   @return [String]
     #
     # @!attribute [rw] progress
@@ -23941,7 +24611,7 @@ module Aws::EC2
     #   @return [String]
     #
     # @!attribute [rw] s3_export_location
-    #   Information about the destination S3 bucket.
+    #   Information about the destination Amazon S3 bucket.
     #   @return [Types::ExportTaskS3Location]
     #
     # @!attribute [rw] status
@@ -23952,6 +24622,10 @@ module Aws::EC2
     # @!attribute [rw] status_message
     #   The status message for the export image task.
     #   @return [String]
+    #
+    # @!attribute [rw] tags
+    #   Any tags assigned to the image being exported.
+    #   @return [Array<Types::Tag>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ExportImageResult AWS API Documentation
     #
@@ -23964,7 +24638,9 @@ module Aws::EC2
       :progress,
       :s3_export_location,
       :status,
-      :status_message)
+      :status_message,
+      :tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -23987,7 +24663,7 @@ module Aws::EC2
     #   @return [String]
     #
     # @!attribute [rw] s3_export_location
-    #   Information about the destination S3 bucket.
+    #   Information about the destination Amazon S3 bucket.
     #   @return [Types::ExportTaskS3Location]
     #
     # @!attribute [rw] status
@@ -23999,6 +24675,10 @@ module Aws::EC2
     #   The status message for the export image task.
     #   @return [String]
     #
+    # @!attribute [rw] tags
+    #   Any tags assigned to the image being exported.
+    #   @return [Array<Types::Tag>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ExportImageTask AWS API Documentation
     #
     class ExportImageTask < Struct.new(
@@ -24008,7 +24688,9 @@ module Aws::EC2
       :progress,
       :s3_export_location,
       :status,
-      :status_message)
+      :status_message,
+      :tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -24052,13 +24734,14 @@ module Aws::EC2
       :state,
       :status_message,
       :tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
     # Describes the destination for an export image task.
     #
     # @!attribute [rw] s3_bucket
-    #   The destination S3 bucket.
+    #   The destination Amazon S3 bucket.
     #   @return [String]
     #
     # @!attribute [rw] s3_prefix
@@ -24070,6 +24753,7 @@ module Aws::EC2
     class ExportTaskS3Location < Struct.new(
       :s3_bucket,
       :s3_prefix)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -24084,7 +24768,7 @@ module Aws::EC2
     #       }
     #
     # @!attribute [rw] s3_bucket
-    #   The destination S3 bucket.
+    #   The destination Amazon S3 bucket.
     #   @return [String]
     #
     # @!attribute [rw] s3_prefix
@@ -24096,6 +24780,7 @@ module Aws::EC2
     class ExportTaskS3LocationRequest < Struct.new(
       :s3_bucket,
       :s3_prefix)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -24111,9 +24796,9 @@ module Aws::EC2
     #   @return [String]
     #
     # @!attribute [rw] s3_bucket
-    #   The S3 bucket for the destination image. The destination bucket must
-    #   exist and grant WRITE and READ\_ACP permissions to the AWS account
-    #   `vm-import-export@amazon.com`.
+    #   The Amazon S3 bucket for the destination image. The destination
+    #   bucket must exist and grant WRITE and READ\_ACP permissions to the
+    #   AWS account `vm-import-export@amazon.com`.
     #   @return [String]
     #
     # @!attribute [rw] s3_key
@@ -24127,6 +24812,7 @@ module Aws::EC2
       :disk_image_format,
       :s3_bucket,
       :s3_key)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -24152,14 +24838,14 @@ module Aws::EC2
     #   @return [String]
     #
     # @!attribute [rw] s3_bucket
-    #   The S3 bucket for the destination image. The destination bucket must
-    #   exist and grant WRITE and READ\_ACP permissions to the AWS account
-    #   `vm-import-export@amazon.com`.
+    #   The Amazon S3 bucket for the destination image. The destination
+    #   bucket must exist and grant WRITE and READ\_ACP permissions to the
+    #   AWS account `vm-import-export@amazon.com`.
     #   @return [String]
     #
     # @!attribute [rw] s3_prefix
-    #   The image is written to a single object in the S3 bucket at the S3
-    #   key s3prefix + exportTaskId + '.' + diskImageFormat.
+    #   The image is written to a single object in the Amazon S3 bucket at
+    #   the S3 key s3prefix + exportTaskId + '.' + diskImageFormat.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ExportToS3TaskSpecification AWS API Documentation
@@ -24169,6 +24855,7 @@ module Aws::EC2
       :disk_image_format,
       :s3_bucket,
       :s3_prefix)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -24242,6 +24929,7 @@ module Aws::EC2
       :filters,
       :s3_bucket,
       :dry_run)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -24254,6 +24942,7 @@ module Aws::EC2
     #
     class ExportTransitGatewayRoutesResult < Struct.new(
       :s3_location)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -24272,6 +24961,7 @@ module Aws::EC2
     class FailedQueuedPurchaseDeletion < Struct.new(
       :error,
       :reserved_instances_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -24286,6 +24976,7 @@ module Aws::EC2
     #
     class FederatedAuthentication < Struct.new(
       :saml_provider_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -24306,6 +24997,7 @@ module Aws::EC2
     #
     class FederatedAuthenticationRequest < Struct.new(
       :saml_provider_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -24356,6 +25048,7 @@ module Aws::EC2
     class Filter < Struct.new(
       :name,
       :values)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -24501,6 +25194,7 @@ module Aws::EC2
       :tags,
       :errors,
       :instances)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -24520,6 +25214,7 @@ module Aws::EC2
     class FleetLaunchTemplateConfig < Struct.new(
       :launch_template_specification,
       :overrides)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -24571,6 +25266,7 @@ module Aws::EC2
     class FleetLaunchTemplateConfigRequest < Struct.new(
       :launch_template_specification,
       :overrides)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -24621,6 +25317,7 @@ module Aws::EC2
       :weighted_capacity,
       :priority,
       :placement)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -24696,6 +25393,7 @@ module Aws::EC2
       :weighted_capacity,
       :priority,
       :placement)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -24745,6 +25443,7 @@ module Aws::EC2
       :launch_template_id,
       :launch_template_name,
       :version)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -24794,6 +25493,7 @@ module Aws::EC2
       :launch_template_id,
       :launch_template_name,
       :version)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -24897,6 +25597,7 @@ module Aws::EC2
       :log_format,
       :tags,
       :max_aggregation_interval)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -24925,6 +25626,7 @@ module Aws::EC2
       :manufacturer,
       :count,
       :memory_info)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -24938,6 +25640,7 @@ module Aws::EC2
     #
     class FpgaDeviceMemoryInfo < Struct.new(
       :size_in_mi_b)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -25022,6 +25725,7 @@ module Aws::EC2
       :tags,
       :public,
       :data_retention_support)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -25055,6 +25759,7 @@ module Aws::EC2
       :description,
       :load_permissions,
       :product_codes)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -25082,6 +25787,7 @@ module Aws::EC2
     class FpgaImageState < Struct.new(
       :code,
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -25100,6 +25806,7 @@ module Aws::EC2
     class FpgaInfo < Struct.new(
       :fpgas,
       :total_fpga_memory_in_mi_b)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -25141,6 +25848,7 @@ module Aws::EC2
       :next_token,
       :max_results,
       :dry_run)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -25158,6 +25866,7 @@ module Aws::EC2
     class GetAssociatedIpv6PoolCidrsResult < Struct.new(
       :ipv_6_cidr_associations,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -25201,6 +25910,7 @@ module Aws::EC2
       :next_token,
       :max_results,
       :dry_run)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -25265,6 +25975,7 @@ module Aws::EC2
       :available_instance_count,
       :state,
       :instance_usages)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -25336,6 +26047,7 @@ module Aws::EC2
       :max_results,
       :next_token,
       :dry_run)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -25357,6 +26069,7 @@ module Aws::EC2
       :coip_pool_id,
       :coip_address_usages,
       :local_gateway_route_table_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -25392,6 +26105,7 @@ module Aws::EC2
       :instance_id,
       :dry_run,
       :latest)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -25414,6 +26128,7 @@ module Aws::EC2
       :instance_id,
       :output,
       :timestamp)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -25448,6 +26163,7 @@ module Aws::EC2
       :dry_run,
       :instance_id,
       :wake_up)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -25464,6 +26180,7 @@ module Aws::EC2
     class GetConsoleScreenshotResult < Struct.new(
       :image_data,
       :instance_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -25491,6 +26208,7 @@ module Aws::EC2
     class GetDefaultCreditSpecificationRequest < Struct.new(
       :dry_run,
       :instance_family)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -25502,6 +26220,7 @@ module Aws::EC2
     #
     class GetDefaultCreditSpecificationResult < Struct.new(
       :instance_family_credit_specification)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -25523,6 +26242,7 @@ module Aws::EC2
     #
     class GetEbsDefaultKmsKeyIdRequest < Struct.new(
       :dry_run)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -25535,6 +26255,7 @@ module Aws::EC2
     #
     class GetEbsDefaultKmsKeyIdResult < Struct.new(
       :kms_key_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -25556,6 +26277,7 @@ module Aws::EC2
     #
     class GetEbsEncryptionByDefaultRequest < Struct.new(
       :dry_run)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -25567,6 +26289,7 @@ module Aws::EC2
     #
     class GetEbsEncryptionByDefaultResult < Struct.new(
       :ebs_encryption_by_default)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -25592,6 +26315,7 @@ module Aws::EC2
     class GetHostReservationPurchasePreviewRequest < Struct.new(
       :host_id_set,
       :offering_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -25621,6 +26345,7 @@ module Aws::EC2
       :purchase,
       :total_hourly_price,
       :total_upfront_price)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -25648,6 +26373,7 @@ module Aws::EC2
     class GetLaunchTemplateDataRequest < Struct.new(
       :dry_run,
       :instance_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -25659,6 +26385,7 @@ module Aws::EC2
     #
     class GetLaunchTemplateDataResult < Struct.new(
       :launch_template_data)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -25686,6 +26413,7 @@ module Aws::EC2
     class GetPasswordDataRequest < Struct.new(
       :instance_id,
       :dry_run)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -25708,6 +26436,7 @@ module Aws::EC2
       :instance_id,
       :password_data,
       :timestamp)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -25749,6 +26478,7 @@ module Aws::EC2
       :dry_run,
       :reserved_instance_ids,
       :target_configurations)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -25803,6 +26533,7 @@ module Aws::EC2
       :target_configuration_value_rollup,
       :target_configuration_value_set,
       :validation_failure_reason)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -25860,6 +26591,7 @@ module Aws::EC2
       :max_results,
       :next_token,
       :dry_run)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -25877,6 +26609,7 @@ module Aws::EC2
     class GetTransitGatewayAttachmentPropagationsResult < Struct.new(
       :transit_gateway_attachment_propagations,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -25942,6 +26675,7 @@ module Aws::EC2
       :max_results,
       :next_token,
       :dry_run)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -25959,6 +26693,7 @@ module Aws::EC2
     class GetTransitGatewayMulticastDomainAssociationsResult < Struct.new(
       :multicast_domain_associations,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -26017,6 +26752,7 @@ module Aws::EC2
       :max_results,
       :next_token,
       :dry_run)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -26034,6 +26770,7 @@ module Aws::EC2
     class GetTransitGatewayRouteTableAssociationsResult < Struct.new(
       :associations,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -26092,6 +26829,7 @@ module Aws::EC2
       :max_results,
       :next_token,
       :dry_run)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -26109,6 +26847,7 @@ module Aws::EC2
     class GetTransitGatewayRouteTablePropagationsResult < Struct.new(
       :transit_gateway_route_table_propagations,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -26137,6 +26876,7 @@ module Aws::EC2
       :manufacturer,
       :count,
       :memory_info)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -26150,6 +26890,7 @@ module Aws::EC2
     #
     class GpuDeviceMemoryInfo < Struct.new(
       :size_in_mi_b)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -26169,6 +26910,7 @@ module Aws::EC2
     class GpuInfo < Struct.new(
       :gpus,
       :total_gpu_memory_in_mi_b)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -26195,6 +26937,7 @@ module Aws::EC2
     class GroupIdentifier < Struct.new(
       :group_name,
       :group_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -26217,6 +26960,7 @@ module Aws::EC2
     #
     class HibernationOptions < Struct.new(
       :configured)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -26248,6 +26992,7 @@ module Aws::EC2
     #
     class HibernationOptionsRequest < Struct.new(
       :configured)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -26281,6 +27026,7 @@ module Aws::EC2
       :event_information,
       :event_type,
       :timestamp)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -26305,6 +27051,7 @@ module Aws::EC2
       :event_information,
       :event_type,
       :timestamp)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -26415,6 +27162,7 @@ module Aws::EC2
       :owner_id,
       :availability_zone_id,
       :member_of_service_linked_resource_group)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -26439,6 +27187,7 @@ module Aws::EC2
       :instance_id,
       :instance_type,
       :owner_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -26483,6 +27232,7 @@ module Aws::EC2
       :offering_id,
       :payment_option,
       :upfront_price)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -26519,6 +27269,7 @@ module Aws::EC2
       :instance_family,
       :sockets,
       :total_v_cpus)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -26604,6 +27355,7 @@ module Aws::EC2
       :state,
       :upfront_price,
       :tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -26617,6 +27369,7 @@ module Aws::EC2
     #
     class IKEVersionsListValue < Struct.new(
       :value)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -26637,6 +27390,7 @@ module Aws::EC2
     #
     class IKEVersionsRequestListValue < Struct.new(
       :value)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -26655,6 +27409,7 @@ module Aws::EC2
     class IamInstanceProfile < Struct.new(
       :arn,
       :id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -26689,6 +27444,7 @@ module Aws::EC2
       :iam_instance_profile,
       :state,
       :timestamp)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -26715,6 +27471,7 @@ module Aws::EC2
     class IamInstanceProfileSpecification < Struct.new(
       :arn,
       :name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -26742,6 +27499,7 @@ module Aws::EC2
     class IcmpTypeCode < Struct.new(
       :code,
       :type)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -26768,6 +27526,7 @@ module Aws::EC2
       :deadline,
       :resource,
       :use_long_ids)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -26933,6 +27692,7 @@ module Aws::EC2
       :state_reason,
       :tags,
       :virtualization_type)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -26982,6 +27742,7 @@ module Aws::EC2
       :kernel_id,
       :ramdisk_id,
       :sriov_net_support)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -27013,7 +27774,7 @@ module Aws::EC2
     # @!attribute [rw] format
     #   The format of the disk image being imported.
     #
-    #   Valid values: `VHD` \| `VMDK` \| `OVA`
+    #   Valid values: `OVA` \| `VHD` \| `VHDX` \|`VMDK`
     #   @return [String]
     #
     # @!attribute [rw] snapshot_id
@@ -27038,6 +27799,7 @@ module Aws::EC2
       :snapshot_id,
       :url,
       :user_bucket)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -27078,6 +27840,7 @@ module Aws::EC2
       :client_vpn_endpoint_id,
       :certificate_revocation_list,
       :dry_run)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -27090,6 +27853,7 @@ module Aws::EC2
     #
     class ImportClientVpnClientCertificateRevocationListResult < Struct.new(
       :return)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -27110,6 +27874,7 @@ module Aws::EC2
     #
     class ImportImageLicenseConfigurationRequest < Struct.new(
       :license_configuration_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -27123,6 +27888,7 @@ module Aws::EC2
     #
     class ImportImageLicenseConfigurationResponse < Struct.new(
       :license_configuration_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -27162,6 +27928,17 @@ module Aws::EC2
     #         license_specifications: [
     #           {
     #             license_configuration_arn: "String",
+    #           },
+    #         ],
+    #         tag_specifications: [
+    #           {
+    #             resource_type: "client-vpn-endpoint", # accepts client-vpn-endpoint, customer-gateway, dedicated-host, dhcp-options, elastic-ip, elastic-gpu, export-image-task, export-instance-task, fleet, fpga-image, host-reservation, image, import-image-task, import-snapshot-task, instance, internet-gateway, key-pair, launch-template, local-gateway-route-table-vpc-association, natgateway, network-acl, network-interface, placement-group, reserved-instances, route-table, security-group, snapshot, spot-fleet-request, spot-instances-request, subnet, traffic-mirror-filter, traffic-mirror-session, traffic-mirror-target, transit-gateway, transit-gateway-attachment, transit-gateway-multicast-domain, transit-gateway-route-table, volume, vpc, vpc-peering-connection, vpn-connection, vpn-gateway, vpc-flow-log
+    #             tags: [
+    #               {
+    #                 key: "String",
+    #                 value: "String",
+    #               },
+    #             ],
     #           },
     #         ],
     #       }
@@ -27285,6 +28062,10 @@ module Aws::EC2
     #   The ARNs of the license configurations.
     #   @return [Array<Types::ImportImageLicenseConfigurationRequest>]
     #
+    # @!attribute [rw] tag_specifications
+    #   The tags to apply to the image being imported.
+    #   @return [Array<Types::TagSpecification>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ImportImageRequest AWS API Documentation
     #
     class ImportImageRequest < Struct.new(
@@ -27300,7 +28081,9 @@ module Aws::EC2
       :license_type,
       :platform,
       :role_name,
-      :license_specifications)
+      :license_specifications,
+      :tag_specifications)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -27313,7 +28096,7 @@ module Aws::EC2
     #   @return [String]
     #
     # @!attribute [rw] encrypted
-    #   Indicates whether the AMI is encypted.
+    #   Indicates whether the AMI is encrypted.
     #   @return [Boolean]
     #
     # @!attribute [rw] hypervisor
@@ -27362,6 +28145,10 @@ module Aws::EC2
     #   The ARNs of the license configurations.
     #   @return [Array<Types::ImportImageLicenseConfigurationResponse>]
     #
+    # @!attribute [rw] tags
+    #   Any tags assigned to the image being imported.
+    #   @return [Array<Types::Tag>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ImportImageResult AWS API Documentation
     #
     class ImportImageResult < Struct.new(
@@ -27378,7 +28165,9 @@ module Aws::EC2
       :snapshot_details,
       :status,
       :status_message,
-      :license_specifications)
+      :license_specifications,
+      :tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -27469,6 +28258,7 @@ module Aws::EC2
       :status_message,
       :tags,
       :license_specifications)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -27569,6 +28359,7 @@ module Aws::EC2
       :private_ip_address,
       :subnet_id,
       :user_data)
+      SENSITIVE = [:user_data]
       include Aws::Structure
     end
 
@@ -27649,6 +28440,7 @@ module Aws::EC2
       :dry_run,
       :launch_specification,
       :platform)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -27660,6 +28452,7 @@ module Aws::EC2
     #
     class ImportInstanceResult < Struct.new(
       :conversion_task)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -27688,6 +28481,7 @@ module Aws::EC2
       :instance_id,
       :platform,
       :volumes)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -27731,6 +28525,7 @@ module Aws::EC2
       :status,
       :status_message,
       :volume)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -27743,7 +28538,7 @@ module Aws::EC2
     #         public_key_material: "data", # required
     #         tag_specifications: [
     #           {
-    #             resource_type: "client-vpn-endpoint", # accepts client-vpn-endpoint, customer-gateway, dedicated-host, dhcp-options, elastic-ip, fleet, fpga-image, host-reservation, image, instance, internet-gateway, key-pair, launch-template, natgateway, network-acl, network-interface, placement-group, reserved-instances, route-table, security-group, snapshot, spot-fleet-request, spot-instances-request, subnet, traffic-mirror-filter, traffic-mirror-session, traffic-mirror-target, transit-gateway, transit-gateway-attachment, transit-gateway-multicast-domain, transit-gateway-route-table, volume, vpc, vpc-peering-connection, vpn-connection, vpn-gateway, vpc-flow-log
+    #             resource_type: "client-vpn-endpoint", # accepts client-vpn-endpoint, customer-gateway, dedicated-host, dhcp-options, elastic-ip, elastic-gpu, export-image-task, export-instance-task, fleet, fpga-image, host-reservation, image, import-image-task, import-snapshot-task, instance, internet-gateway, key-pair, launch-template, local-gateway-route-table-vpc-association, natgateway, network-acl, network-interface, placement-group, reserved-instances, route-table, security-group, snapshot, spot-fleet-request, spot-instances-request, subnet, traffic-mirror-filter, traffic-mirror-session, traffic-mirror-target, transit-gateway, transit-gateway-attachment, transit-gateway-multicast-domain, transit-gateway-route-table, volume, vpc, vpc-peering-connection, vpn-connection, vpn-gateway, vpc-flow-log
     #             tags: [
     #               {
     #                 key: "String",
@@ -27781,6 +28576,7 @@ module Aws::EC2
       :key_name,
       :public_key_material,
       :tag_specifications)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -27808,6 +28604,7 @@ module Aws::EC2
       :key_name,
       :key_pair_id,
       :tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -27836,6 +28633,17 @@ module Aws::EC2
     #         encrypted: false,
     #         kms_key_id: "KmsKeyId",
     #         role_name: "String",
+    #         tag_specifications: [
+    #           {
+    #             resource_type: "client-vpn-endpoint", # accepts client-vpn-endpoint, customer-gateway, dedicated-host, dhcp-options, elastic-ip, elastic-gpu, export-image-task, export-instance-task, fleet, fpga-image, host-reservation, image, import-image-task, import-snapshot-task, instance, internet-gateway, key-pair, launch-template, local-gateway-route-table-vpc-association, natgateway, network-acl, network-interface, placement-group, reserved-instances, route-table, security-group, snapshot, spot-fleet-request, spot-instances-request, subnet, traffic-mirror-filter, traffic-mirror-session, traffic-mirror-target, transit-gateway, transit-gateway-attachment, transit-gateway-multicast-domain, transit-gateway-route-table, volume, vpc, vpc-peering-connection, vpn-connection, vpn-gateway, vpc-flow-log
+    #             tags: [
+    #               {
+    #                 key: "String",
+    #                 value: "String",
+    #               },
+    #             ],
+    #           },
+    #         ],
     #       }
     #
     # @!attribute [rw] client_data
@@ -27916,6 +28724,10 @@ module Aws::EC2
     #   'vmimport'.
     #   @return [String]
     #
+    # @!attribute [rw] tag_specifications
+    #   The tags to apply to the snapshot being imported.
+    #   @return [Array<Types::TagSpecification>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ImportSnapshotRequest AWS API Documentation
     #
     class ImportSnapshotRequest < Struct.new(
@@ -27926,7 +28738,9 @@ module Aws::EC2
       :dry_run,
       :encrypted,
       :kms_key_id,
-      :role_name)
+      :role_name,
+      :tag_specifications)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -27942,12 +28756,18 @@ module Aws::EC2
     #   Information about the import snapshot task.
     #   @return [Types::SnapshotTaskDetail]
     #
+    # @!attribute [rw] tags
+    #   Any tags assigned to the snapshot being imported.
+    #   @return [Array<Types::Tag>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ImportSnapshotResult AWS API Documentation
     #
     class ImportSnapshotResult < Struct.new(
       :description,
       :import_task_id,
-      :snapshot_task_detail)
+      :snapshot_task_detail,
+      :tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -27976,6 +28796,7 @@ module Aws::EC2
       :import_task_id,
       :snapshot_task_detail,
       :tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -28027,6 +28848,7 @@ module Aws::EC2
       :dry_run,
       :image,
       :volume)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -28038,6 +28860,7 @@ module Aws::EC2
     #
     class ImportVolumeResult < Struct.new(
       :conversion_task)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -28071,6 +28894,7 @@ module Aws::EC2
       :description,
       :image,
       :volume)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -28084,6 +28908,7 @@ module Aws::EC2
     #
     class InferenceAcceleratorInfo < Struct.new(
       :accelerators)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -28107,6 +28932,7 @@ module Aws::EC2
       :count,
       :name,
       :manufacturer)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -28384,6 +29210,7 @@ module Aws::EC2
       :hibernation_options,
       :licenses,
       :metadata_options)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -28475,6 +29302,7 @@ module Aws::EC2
       :source_dest_check,
       :sriov_net_support,
       :user_data)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -28494,6 +29322,7 @@ module Aws::EC2
     class InstanceBlockDeviceMapping < Struct.new(
       :device_name,
       :ebs)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -28536,6 +29365,7 @@ module Aws::EC2
       :ebs,
       :no_device,
       :virtual_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -28562,6 +29392,7 @@ module Aws::EC2
       :available_capacity,
       :instance_type,
       :total_capacity)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -28581,6 +29412,7 @@ module Aws::EC2
     class InstanceCount < Struct.new(
       :instance_count,
       :state)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -28601,6 +29433,7 @@ module Aws::EC2
     class InstanceCreditSpecification < Struct.new(
       :instance_id,
       :cpu_credits)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -28629,6 +29462,7 @@ module Aws::EC2
     class InstanceCreditSpecificationRequest < Struct.new(
       :instance_id,
       :cpu_credits)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -28647,6 +29481,7 @@ module Aws::EC2
     class InstanceExportDetails < Struct.new(
       :instance_id,
       :target_environment)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -28667,6 +29502,7 @@ module Aws::EC2
     class InstanceFamilyCreditSpecification < Struct.new(
       :instance_family,
       :cpu_credits)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -28687,6 +29523,7 @@ module Aws::EC2
     #
     class InstanceIpv6Address < Struct.new(
       :ipv_6_address)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -28707,6 +29544,7 @@ module Aws::EC2
     #
     class InstanceIpv6AddressRequest < Struct.new(
       :ipv_6_address)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -28739,6 +29577,7 @@ module Aws::EC2
     class InstanceMarketOptionsRequest < Struct.new(
       :market_type,
       :spot_options)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -28798,6 +29637,7 @@ module Aws::EC2
       :http_tokens,
       :http_put_response_hop_limit,
       :http_endpoint)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -28859,6 +29699,7 @@ module Aws::EC2
       :http_tokens,
       :http_put_response_hop_limit,
       :http_endpoint)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -28877,6 +29718,7 @@ module Aws::EC2
     class InstanceMonitoring < Struct.new(
       :instance_id,
       :monitoring)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -28970,6 +29812,7 @@ module Aws::EC2
       :subnet_id,
       :vpc_id,
       :interface_type)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -28994,6 +29837,7 @@ module Aws::EC2
       :ip_owner_id,
       :public_dns_name,
       :public_ip)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -29029,6 +29873,7 @@ module Aws::EC2
       :delete_on_termination,
       :device_index,
       :status)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -29187,6 +30032,7 @@ module Aws::EC2
       :secondary_private_ip_address_count,
       :subnet_id,
       :interface_type)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -29217,6 +30063,7 @@ module Aws::EC2
       :primary,
       :private_dns_name,
       :private_ip_address)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -29243,6 +30090,7 @@ module Aws::EC2
     class InstanceSpecification < Struct.new(
       :instance_id,
       :exclude_boot_volume)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -29286,6 +30134,7 @@ module Aws::EC2
     class InstanceState < Struct.new(
       :code,
       :name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -29309,6 +30158,7 @@ module Aws::EC2
       :current_state,
       :instance_id,
       :previous_state)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -29356,6 +30206,7 @@ module Aws::EC2
       :instance_state,
       :instance_status,
       :system_status)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -29381,6 +30232,7 @@ module Aws::EC2
       :impaired_since,
       :name,
       :status)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -29423,6 +30275,7 @@ module Aws::EC2
       :not_after,
       :not_before,
       :not_before_deadline)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -29441,6 +30294,7 @@ module Aws::EC2
     class InstanceStatusSummary < Struct.new(
       :details,
       :status)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -29459,6 +30313,7 @@ module Aws::EC2
     class InstanceStorageInfo < Struct.new(
       :total_size_in_gb,
       :disks)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -29479,6 +30334,7 @@ module Aws::EC2
     class InstanceTagNotificationAttribute < Struct.new(
       :instance_tag_keys,
       :include_all_tags_of_instance)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -29610,6 +30466,7 @@ module Aws::EC2
       :burstable_performance_supported,
       :dedicated_hosts_supported,
       :auto_recovery_supported)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -29640,6 +30497,7 @@ module Aws::EC2
       :instance_type,
       :location_type,
       :location)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -29660,6 +30518,7 @@ module Aws::EC2
     class InstanceUsage < Struct.new(
       :account_id,
       :used_instance_count)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -29688,6 +30547,7 @@ module Aws::EC2
       :internet_gateway_id,
       :owner_id,
       :tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -29709,6 +30569,7 @@ module Aws::EC2
     class InternetGatewayAttachment < Struct.new(
       :state,
       :vpc_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -29810,6 +30671,7 @@ module Aws::EC2
       :prefix_list_ids,
       :to_port,
       :user_id_group_pairs)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -29842,6 +30704,7 @@ module Aws::EC2
     class IpRange < Struct.new(
       :cidr_ip,
       :description)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -29860,6 +30723,7 @@ module Aws::EC2
     class Ipv6CidrAssociation < Struct.new(
       :ipv_6_cidr,
       :associated_resource)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -29873,6 +30737,7 @@ module Aws::EC2
     #
     class Ipv6CidrBlock < Struct.new(
       :ipv_6_cidr_block)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -29901,6 +30766,7 @@ module Aws::EC2
       :description,
       :pool_cidr_blocks,
       :tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -29933,6 +30799,7 @@ module Aws::EC2
     class Ipv6Range < Struct.new(
       :cidr_ipv_6,
       :description)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -29966,6 +30833,7 @@ module Aws::EC2
       :key_name,
       :key_pair_id,
       :tags)
+      SENSITIVE = [:key_material]
       include Aws::Structure
     end
 
@@ -29997,6 +30865,7 @@ module Aws::EC2
       :key_fingerprint,
       :key_name,
       :tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -30015,6 +30884,7 @@ module Aws::EC2
     class LastError < Struct.new(
       :message,
       :code)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -30041,6 +30911,7 @@ module Aws::EC2
     class LaunchPermission < Struct.new(
       :group,
       :user_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -30079,6 +30950,7 @@ module Aws::EC2
     class LaunchPermissionModifications < Struct.new(
       :add,
       :remove)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -30174,6 +31046,7 @@ module Aws::EC2
       :ramdisk_id,
       :subnet_id,
       :monitoring)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -30217,6 +31090,7 @@ module Aws::EC2
       :default_version_number,
       :latest_version_number,
       :tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -30236,6 +31110,7 @@ module Aws::EC2
     class LaunchTemplateAndOverridesResponse < Struct.new(
       :launch_template_specification,
       :overrides)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -30265,6 +31140,7 @@ module Aws::EC2
       :virtual_name,
       :ebs,
       :no_device)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -30318,6 +31194,7 @@ module Aws::EC2
       :virtual_name,
       :ebs,
       :no_device)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -30360,6 +31237,7 @@ module Aws::EC2
     class LaunchTemplateCapacityReservationSpecificationRequest < Struct.new(
       :capacity_reservation_preference,
       :capacity_reservation_target)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -30386,6 +31264,7 @@ module Aws::EC2
     class LaunchTemplateCapacityReservationSpecificationResponse < Struct.new(
       :capacity_reservation_preference,
       :capacity_reservation_target)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -30426,6 +31305,7 @@ module Aws::EC2
     class LaunchTemplateConfig < Struct.new(
       :launch_template_specification,
       :overrides)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -30444,6 +31324,7 @@ module Aws::EC2
     class LaunchTemplateCpuOptions < Struct.new(
       :core_count,
       :threads_per_core)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -30473,6 +31354,7 @@ module Aws::EC2
     class LaunchTemplateCpuOptionsRequest < Struct.new(
       :core_count,
       :threads_per_core)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -30518,6 +31400,7 @@ module Aws::EC2
       :snapshot_id,
       :volume_size,
       :volume_type)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -30596,6 +31479,7 @@ module Aws::EC2
       :snapshot_id,
       :volume_size,
       :volume_type)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -30626,6 +31510,7 @@ module Aws::EC2
     class LaunchTemplateElasticInferenceAccelerator < Struct.new(
       :type,
       :count)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -30648,6 +31533,7 @@ module Aws::EC2
     class LaunchTemplateElasticInferenceAcceleratorResponse < Struct.new(
       :type,
       :count)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -30662,6 +31548,7 @@ module Aws::EC2
     #
     class LaunchTemplateHibernationOptions < Struct.new(
       :configured)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -30691,6 +31578,7 @@ module Aws::EC2
     #
     class LaunchTemplateHibernationOptionsRequest < Struct.new(
       :configured)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -30709,6 +31597,7 @@ module Aws::EC2
     class LaunchTemplateIamInstanceProfileSpecification < Struct.new(
       :arn,
       :name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -30735,6 +31624,7 @@ module Aws::EC2
     class LaunchTemplateIamInstanceProfileSpecificationRequest < Struct.new(
       :arn,
       :name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -30753,6 +31643,7 @@ module Aws::EC2
     class LaunchTemplateInstanceMarketOptions < Struct.new(
       :market_type,
       :spot_options)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -30785,6 +31676,7 @@ module Aws::EC2
     class LaunchTemplateInstanceMarketOptionsRequest < Struct.new(
       :market_type,
       :spot_options)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -30852,6 +31744,7 @@ module Aws::EC2
       :http_tokens,
       :http_put_response_hop_limit,
       :http_endpoint)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -30917,6 +31810,7 @@ module Aws::EC2
       :http_tokens,
       :http_put_response_hop_limit,
       :http_endpoint)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -30993,6 +31887,7 @@ module Aws::EC2
       :private_ip_addresses,
       :secondary_private_ip_address_count,
       :subnet_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -31113,6 +32008,7 @@ module Aws::EC2
       :private_ip_addresses,
       :secondary_private_ip_address_count,
       :subnet_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -31126,6 +32022,7 @@ module Aws::EC2
     #
     class LaunchTemplateLicenseConfiguration < Struct.new(
       :license_configuration_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -31146,6 +32043,7 @@ module Aws::EC2
     #
     class LaunchTemplateLicenseConfigurationRequest < Struct.new(
       :license_configuration_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -31203,6 +32101,7 @@ module Aws::EC2
       :availability_zone,
       :weighted_capacity,
       :priority)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -31254,6 +32153,7 @@ module Aws::EC2
       :spread_domain,
       :host_resource_group_arn,
       :partition_number)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -31321,6 +32221,7 @@ module Aws::EC2
       :spread_domain,
       :host_resource_group_arn,
       :partition_number)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -31356,6 +32257,7 @@ module Aws::EC2
       :launch_template_id,
       :launch_template_name,
       :version)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -31395,6 +32297,7 @@ module Aws::EC2
       :block_duration_minutes,
       :valid_until,
       :instance_interruption_behavior)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -31447,6 +32350,7 @@ module Aws::EC2
       :block_duration_minutes,
       :valid_until,
       :instance_interruption_behavior)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -31465,6 +32369,7 @@ module Aws::EC2
     class LaunchTemplateTagSpecification < Struct.new(
       :resource_type,
       :tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -31474,7 +32379,7 @@ module Aws::EC2
     #   data as a hash:
     #
     #       {
-    #         resource_type: "client-vpn-endpoint", # accepts client-vpn-endpoint, customer-gateway, dedicated-host, dhcp-options, elastic-ip, fleet, fpga-image, host-reservation, image, instance, internet-gateway, key-pair, launch-template, natgateway, network-acl, network-interface, placement-group, reserved-instances, route-table, security-group, snapshot, spot-fleet-request, spot-instances-request, subnet, traffic-mirror-filter, traffic-mirror-session, traffic-mirror-target, transit-gateway, transit-gateway-attachment, transit-gateway-multicast-domain, transit-gateway-route-table, volume, vpc, vpc-peering-connection, vpn-connection, vpn-gateway, vpc-flow-log
+    #         resource_type: "client-vpn-endpoint", # accepts client-vpn-endpoint, customer-gateway, dedicated-host, dhcp-options, elastic-ip, elastic-gpu, export-image-task, export-instance-task, fleet, fpga-image, host-reservation, image, import-image-task, import-snapshot-task, instance, internet-gateway, key-pair, launch-template, local-gateway-route-table-vpc-association, natgateway, network-acl, network-interface, placement-group, reserved-instances, route-table, security-group, snapshot, spot-fleet-request, spot-instances-request, subnet, traffic-mirror-filter, traffic-mirror-session, traffic-mirror-target, transit-gateway, transit-gateway-attachment, transit-gateway-multicast-domain, transit-gateway-route-table, volume, vpc, vpc-peering-connection, vpn-connection, vpn-gateway, vpc-flow-log
     #         tags: [
     #           {
     #             key: "String",
@@ -31502,6 +32407,7 @@ module Aws::EC2
     class LaunchTemplateTagSpecificationRequest < Struct.new(
       :resource_type,
       :tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -31550,6 +32456,7 @@ module Aws::EC2
       :created_by,
       :default_version,
       :launch_template_data)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -31564,6 +32471,7 @@ module Aws::EC2
     #
     class LaunchTemplatesMonitoring < Struct.new(
       :enabled)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -31585,6 +32493,7 @@ module Aws::EC2
     #
     class LaunchTemplatesMonitoringRequest < Struct.new(
       :enabled)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -31598,6 +32507,7 @@ module Aws::EC2
     #
     class LicenseConfiguration < Struct.new(
       :license_configuration_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -31618,6 +32528,7 @@ module Aws::EC2
     #
     class LicenseConfigurationRequest < Struct.new(
       :license_configuration_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -31657,6 +32568,7 @@ module Aws::EC2
     class LoadBalancersConfig < Struct.new(
       :classic_load_balancers_config,
       :target_groups_config)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -31675,6 +32587,7 @@ module Aws::EC2
     class LoadPermission < Struct.new(
       :user_id,
       :group)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -31712,6 +32625,7 @@ module Aws::EC2
     class LoadPermissionModifications < Struct.new(
       :add,
       :remove)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -31738,6 +32652,7 @@ module Aws::EC2
     class LoadPermissionRequest < Struct.new(
       :group,
       :user_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -31771,6 +32686,7 @@ module Aws::EC2
       :owner_id,
       :state,
       :tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -31804,6 +32720,7 @@ module Aws::EC2
       :type,
       :state,
       :local_gateway_route_table_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -31837,6 +32754,7 @@ module Aws::EC2
       :outpost_arn,
       :state,
       :tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -31876,6 +32794,7 @@ module Aws::EC2
       :local_gateway_route_table_id,
       :state,
       :tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -31915,6 +32834,7 @@ module Aws::EC2
       :vpc_id,
       :state,
       :tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -31964,6 +32884,7 @@ module Aws::EC2
       :local_bgp_asn,
       :peer_bgp_asn,
       :tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -31992,6 +32913,7 @@ module Aws::EC2
       :local_gateway_virtual_interface_ids,
       :local_gateway_id,
       :tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -32005,6 +32927,7 @@ module Aws::EC2
     #
     class MemoryInfo < Struct.new(
       :size_in_mi_b)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -32044,6 +32967,7 @@ module Aws::EC2
       :group_name,
       :opt_in_status,
       :dry_run)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -32055,6 +32979,7 @@ module Aws::EC2
     #
     class ModifyAvailabilityZoneGroupResult < Struct.new(
       :return)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -32121,6 +33046,7 @@ module Aws::EC2
       :end_date,
       :end_date_type,
       :dry_run)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -32133,6 +33059,7 @@ module Aws::EC2
     #
     class ModifyCapacityReservationResult < Struct.new(
       :return)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -32243,6 +33170,7 @@ module Aws::EC2
       :dry_run,
       :security_group_ids,
       :vpc_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -32255,6 +33183,7 @@ module Aws::EC2
     #
     class ModifyClientVpnEndpointResult < Struct.new(
       :return)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -32290,6 +33219,7 @@ module Aws::EC2
       :dry_run,
       :instance_family,
       :cpu_credits)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -32301,6 +33231,7 @@ module Aws::EC2
     #
     class ModifyDefaultCreditSpecificationResult < Struct.new(
       :instance_family_credit_specification)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -32349,6 +33280,7 @@ module Aws::EC2
     class ModifyEbsDefaultKmsKeyIdRequest < Struct.new(
       :kms_key_id,
       :dry_run)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -32361,6 +33293,7 @@ module Aws::EC2
     #
     class ModifyEbsDefaultKmsKeyIdResult < Struct.new(
       :kms_key_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -32407,6 +33340,7 @@ module Aws::EC2
       :excess_capacity_termination_policy,
       :fleet_id,
       :target_capacity_specification)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -32418,6 +33352,7 @@ module Aws::EC2
     #
     class ModifyFleetResult < Struct.new(
       :return)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -32510,6 +33445,7 @@ module Aws::EC2
       :load_permission,
       :description,
       :name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -32521,6 +33457,7 @@ module Aws::EC2
     #
     class ModifyFpgaImageAttributeResult < Struct.new(
       :fpga_image_attribute)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -32583,6 +33520,7 @@ module Aws::EC2
       :host_recovery,
       :instance_type,
       :instance_family)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -32600,6 +33538,7 @@ module Aws::EC2
     class ModifyHostsResult < Struct.new(
       :successful,
       :unsuccessful)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -32637,6 +33576,7 @@ module Aws::EC2
     class ModifyIdFormatRequest < Struct.new(
       :resource,
       :use_long_ids)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -32682,6 +33622,7 @@ module Aws::EC2
       :principal_arn,
       :resource,
       :use_long_ids)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -32779,6 +33720,7 @@ module Aws::EC2
       :user_ids,
       :value,
       :dry_run)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -32971,6 +33913,7 @@ module Aws::EC2
       :sriov_net_support,
       :user_data,
       :value)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -33009,6 +33952,7 @@ module Aws::EC2
       :instance_id,
       :capacity_reservation_specification,
       :dry_run)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -33021,6 +33965,7 @@ module Aws::EC2
     #
     class ModifyInstanceCapacityReservationAttributesResult < Struct.new(
       :return)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -33065,6 +34010,7 @@ module Aws::EC2
       :dry_run,
       :client_token,
       :instance_credit_specifications)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -33083,6 +34029,7 @@ module Aws::EC2
     class ModifyInstanceCreditSpecificationResult < Struct.new(
       :successful_instance_credit_specifications,
       :unsuccessful_instance_credit_specifications)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -33122,6 +34069,7 @@ module Aws::EC2
       :instance_id,
       :instance_event_id,
       :not_before)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -33133,6 +34081,7 @@ module Aws::EC2
     #
     class ModifyInstanceEventStartTimeResult < Struct.new(
       :event)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -33204,6 +34153,7 @@ module Aws::EC2
       :http_put_response_hop_limit,
       :http_endpoint,
       :dry_run)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -33220,6 +34170,7 @@ module Aws::EC2
     class ModifyInstanceMetadataOptionsResult < Struct.new(
       :instance_id,
       :instance_metadata_options)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -33280,6 +34231,7 @@ module Aws::EC2
       :tenancy,
       :partition_number,
       :host_resource_group_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -33291,6 +34243,7 @@ module Aws::EC2
     #
     class ModifyInstancePlacementResult < Struct.new(
       :return)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -33347,6 +34300,7 @@ module Aws::EC2
       :launch_template_id,
       :launch_template_name,
       :default_version)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -33358,6 +34312,7 @@ module Aws::EC2
     #
     class ModifyLaunchTemplateResult < Struct.new(
       :launch_template)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -33430,6 +34385,7 @@ module Aws::EC2
       :groups,
       :network_interface_id,
       :source_dest_check)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -33476,6 +34432,7 @@ module Aws::EC2
       :reserved_instances_ids,
       :client_token,
       :target_configurations)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -33489,6 +34446,7 @@ module Aws::EC2
     #
     class ModifyReservedInstancesResult < Struct.new(
       :reserved_instances_modification_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -33560,6 +34518,7 @@ module Aws::EC2
       :snapshot_id,
       :user_ids,
       :dry_run)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -33600,6 +34559,7 @@ module Aws::EC2
       :spot_fleet_request_id,
       :target_capacity,
       :on_demand_target_capacity)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -33613,6 +34573,7 @@ module Aws::EC2
     #
     class ModifySpotFleetRequestResponse < Struct.new(
       :return)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -33678,6 +34639,7 @@ module Aws::EC2
       :subnet_id,
       :map_customer_owned_ip_on_launch,
       :customer_owned_ipv_4_pool)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -33719,6 +34681,7 @@ module Aws::EC2
       :add_network_services,
       :remove_network_services,
       :dry_run)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -33731,6 +34694,7 @@ module Aws::EC2
     #
     class ModifyTrafficMirrorFilterNetworkServicesResult < Struct.new(
       :traffic_mirror_filter)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -33831,6 +34795,7 @@ module Aws::EC2
       :description,
       :remove_fields,
       :dry_run)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -33842,6 +34807,7 @@ module Aws::EC2
     #
     class ModifyTrafficMirrorFilterRuleResult < Struct.new(
       :traffic_mirror_filter_rule)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -33925,6 +34891,7 @@ module Aws::EC2
       :description,
       :remove_fields,
       :dry_run)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -33936,6 +34903,7 @@ module Aws::EC2
     #
     class ModifyTrafficMirrorSessionResult < Struct.new(
       :traffic_mirror_session)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -33989,6 +34957,7 @@ module Aws::EC2
       :remove_subnet_ids,
       :options,
       :dry_run)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -34015,6 +34984,7 @@ module Aws::EC2
     class ModifyTransitGatewayVpcAttachmentRequestOptions < Struct.new(
       :dns_support,
       :ipv_6_support)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -34026,6 +34996,7 @@ module Aws::EC2
     #
     class ModifyTransitGatewayVpcAttachmentResult < Struct.new(
       :transit_gateway_vpc_attachment)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -34062,6 +35033,7 @@ module Aws::EC2
       :auto_enable_io,
       :volume_id,
       :dry_run)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -34128,6 +35100,7 @@ module Aws::EC2
       :size,
       :volume_type,
       :iops)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -34139,6 +35112,7 @@ module Aws::EC2
     #
     class ModifyVolumeResult < Struct.new(
       :volume_modification)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -34187,6 +35161,7 @@ module Aws::EC2
       :enable_dns_hostnames,
       :enable_dns_support,
       :vpc_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -34227,6 +35202,7 @@ module Aws::EC2
       :connection_notification_id,
       :connection_notification_arn,
       :connection_events)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -34239,6 +35215,7 @@ module Aws::EC2
     #
     class ModifyVpcEndpointConnectionNotificationResult < Struct.new(
       :return_value)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -34332,6 +35309,7 @@ module Aws::EC2
       :add_security_group_ids,
       :remove_security_group_ids,
       :private_dns_enabled)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -34344,6 +35322,7 @@ module Aws::EC2
     #
     class ModifyVpcEndpointResult < Struct.new(
       :return)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -34404,6 +35383,7 @@ module Aws::EC2
       :acceptance_required,
       :add_network_load_balancer_arns,
       :remove_network_load_balancer_arns)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -34416,6 +35396,7 @@ module Aws::EC2
     #
     class ModifyVpcEndpointServiceConfigurationResult < Struct.new(
       :return)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -34458,6 +35439,7 @@ module Aws::EC2
       :service_id,
       :add_allowed_principals,
       :remove_allowed_principals)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -34470,6 +35452,7 @@ module Aws::EC2
     #
     class ModifyVpcEndpointServicePermissionsResult < Struct.new(
       :return_value)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -34517,6 +35500,7 @@ module Aws::EC2
       :dry_run,
       :requester_peering_connection_options,
       :vpc_peering_connection_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -34535,6 +35519,7 @@ module Aws::EC2
     class ModifyVpcPeeringConnectionOptionsResult < Struct.new(
       :accepter_peering_connection_options,
       :requester_peering_connection_options)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -34568,6 +35553,7 @@ module Aws::EC2
       :vpc_id,
       :instance_tenancy,
       :dry_run)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -34579,6 +35565,7 @@ module Aws::EC2
     #
     class ModifyVpcTenancyResult < Struct.new(
       :return_value)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -34625,6 +35612,7 @@ module Aws::EC2
       :customer_gateway_id,
       :vpn_gateway_id,
       :dry_run)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -34636,6 +35624,7 @@ module Aws::EC2
     #
     class ModifyVpnConnectionResult < Struct.new(
       :vpn_connection)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -34669,6 +35658,7 @@ module Aws::EC2
       :vpn_connection_id,
       :vpn_tunnel_outside_ip_address,
       :dry_run)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -34680,6 +35670,7 @@ module Aws::EC2
     #
     class ModifyVpnTunnelCertificateResult < Struct.new(
       :vpn_connection)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -34763,6 +35754,7 @@ module Aws::EC2
       :vpn_tunnel_outside_ip_address,
       :tunnel_options,
       :dry_run)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -34774,6 +35766,7 @@ module Aws::EC2
     #
     class ModifyVpnTunnelOptionsResult < Struct.new(
       :vpn_connection)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -34982,6 +35975,7 @@ module Aws::EC2
       :phase_1_dh_group_numbers,
       :phase_2_dh_group_numbers,
       :ike_versions)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -35009,6 +36003,7 @@ module Aws::EC2
     class MonitorInstancesRequest < Struct.new(
       :instance_ids,
       :dry_run)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -35020,6 +36015,7 @@ module Aws::EC2
     #
     class MonitorInstancesResult < Struct.new(
       :instance_monitorings)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -35034,6 +36030,7 @@ module Aws::EC2
     #
     class Monitoring < Struct.new(
       :state)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -35061,6 +36058,7 @@ module Aws::EC2
     class MoveAddressToVpcRequest < Struct.new(
       :dry_run,
       :public_ip)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -35077,6 +36075,7 @@ module Aws::EC2
     class MoveAddressToVpcResult < Struct.new(
       :allocation_id,
       :status)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -35096,6 +36095,7 @@ module Aws::EC2
     class MovingAddressStatus < Struct.new(
       :move_status,
       :public_ip)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -35206,6 +36206,7 @@ module Aws::EC2
       :subnet_id,
       :vpc_id,
       :tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -35236,6 +36237,7 @@ module Aws::EC2
       :network_interface_id,
       :private_ip,
       :public_ip)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -35279,6 +36281,7 @@ module Aws::EC2
       :tags,
       :vpc_id,
       :owner_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -35302,6 +36305,7 @@ module Aws::EC2
       :network_acl_association_id,
       :network_acl_id,
       :subnet_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -35353,6 +36357,7 @@ module Aws::EC2
       :protocol,
       :rule_action,
       :rule_number)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -35396,6 +36401,7 @@ module Aws::EC2
       :ipv_6_supported,
       :ena_support,
       :efa_supported)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -35511,6 +36517,7 @@ module Aws::EC2
       :subnet_id,
       :tag_set,
       :vpc_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -35546,6 +36553,7 @@ module Aws::EC2
       :ip_owner_id,
       :public_dns_name,
       :public_ip)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -35591,6 +36599,7 @@ module Aws::EC2
       :instance_id,
       :instance_owner_id,
       :status)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -35618,6 +36627,7 @@ module Aws::EC2
     class NetworkInterfaceAttachmentChanges < Struct.new(
       :attachment_id,
       :delete_on_termination)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -35631,6 +36641,7 @@ module Aws::EC2
     #
     class NetworkInterfaceIpv6Address < Struct.new(
       :ipv_6_address)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -35669,6 +36680,7 @@ module Aws::EC2
       :aws_service,
       :permission,
       :permission_state)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -35687,6 +36699,7 @@ module Aws::EC2
     class NetworkInterfacePermissionState < Struct.new(
       :state,
       :status_message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -35717,6 +36730,7 @@ module Aws::EC2
       :primary,
       :private_dns_name,
       :private_ip_address)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -35739,6 +36753,7 @@ module Aws::EC2
     class NewDhcpConfiguration < Struct.new(
       :key,
       :values)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -35791,6 +36806,7 @@ module Aws::EC2
       :single_availability_zone,
       :min_target_capacity,
       :max_total_price)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -35857,6 +36873,7 @@ module Aws::EC2
       :single_availability_zone,
       :min_target_capacity,
       :max_total_price)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -35886,6 +36903,7 @@ module Aws::EC2
       :vendor_id,
       :subsystem_id,
       :subsystem_vendor_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -35904,6 +36922,7 @@ module Aws::EC2
     class PeeringAttachmentStatus < Struct.new(
       :code,
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -35933,6 +36952,7 @@ module Aws::EC2
       :allow_dns_resolution_from_remote_vpc,
       :allow_egress_from_local_classic_link_to_remote_vpc,
       :allow_egress_from_local_vpc_to_remote_classic_link)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -35970,6 +36990,7 @@ module Aws::EC2
       :allow_dns_resolution_from_remote_vpc,
       :allow_egress_from_local_classic_link_to_remote_vpc,
       :allow_egress_from_local_vpc_to_remote_classic_link)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -35993,6 +37014,7 @@ module Aws::EC2
       :transit_gateway_id,
       :owner_id,
       :region)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -36006,6 +37028,7 @@ module Aws::EC2
     #
     class Phase1DHGroupNumbersListValue < Struct.new(
       :value)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -36027,6 +37050,7 @@ module Aws::EC2
     #
     class Phase1DHGroupNumbersRequestListValue < Struct.new(
       :value)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -36040,6 +37064,7 @@ module Aws::EC2
     #
     class Phase1EncryptionAlgorithmsListValue < Struct.new(
       :value)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -36061,6 +37086,7 @@ module Aws::EC2
     #
     class Phase1EncryptionAlgorithmsRequestListValue < Struct.new(
       :value)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -36074,6 +37100,7 @@ module Aws::EC2
     #
     class Phase1IntegrityAlgorithmsListValue < Struct.new(
       :value)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -36095,6 +37122,7 @@ module Aws::EC2
     #
     class Phase1IntegrityAlgorithmsRequestListValue < Struct.new(
       :value)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -36108,6 +37136,7 @@ module Aws::EC2
     #
     class Phase2DHGroupNumbersListValue < Struct.new(
       :value)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -36129,6 +37158,7 @@ module Aws::EC2
     #
     class Phase2DHGroupNumbersRequestListValue < Struct.new(
       :value)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -36142,6 +37172,7 @@ module Aws::EC2
     #
     class Phase2EncryptionAlgorithmsListValue < Struct.new(
       :value)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -36163,6 +37194,7 @@ module Aws::EC2
     #
     class Phase2EncryptionAlgorithmsRequestListValue < Struct.new(
       :value)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -36176,6 +37208,7 @@ module Aws::EC2
     #
     class Phase2IntegrityAlgorithmsListValue < Struct.new(
       :value)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -36197,6 +37230,7 @@ module Aws::EC2
     #
     class Phase2IntegrityAlgorithmsRequestListValue < Struct.new(
       :value)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -36315,6 +37349,7 @@ module Aws::EC2
       :tenancy,
       :spread_domain,
       :host_resource_group_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -36354,6 +37389,7 @@ module Aws::EC2
       :partition_count,
       :group_id,
       :tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -36367,6 +37403,7 @@ module Aws::EC2
     #
     class PlacementGroupInfo < Struct.new(
       :supported_strategies)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -36380,6 +37417,7 @@ module Aws::EC2
     #
     class PlacementResponse < Struct.new(
       :group_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -36393,6 +37431,7 @@ module Aws::EC2
     #
     class PoolCidrBlock < Struct.new(
       :cidr)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -36419,6 +37458,7 @@ module Aws::EC2
     class PortRange < Struct.new(
       :from,
       :to)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -36442,6 +37482,7 @@ module Aws::EC2
       :cidrs,
       :prefix_list_id,
       :prefix_list_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -36472,6 +37513,7 @@ module Aws::EC2
     class PrefixListId < Struct.new(
       :description,
       :prefix_list_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -36513,6 +37555,7 @@ module Aws::EC2
       :currency_code,
       :price,
       :term)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -36548,6 +37591,7 @@ module Aws::EC2
       :currency_code,
       :price,
       :term)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -36566,6 +37610,7 @@ module Aws::EC2
     class PricingDetail < Struct.new(
       :count,
       :price)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -36584,6 +37629,7 @@ module Aws::EC2
     class PrincipalIdFormat < Struct.new(
       :arn,
       :statuses)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -36624,6 +37670,7 @@ module Aws::EC2
       :type,
       :value,
       :name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -36651,6 +37698,7 @@ module Aws::EC2
     class PrivateIpAddressSpecification < Struct.new(
       :primary,
       :private_ip_address)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -36669,6 +37717,7 @@ module Aws::EC2
     class ProcessorInfo < Struct.new(
       :supported_architectures,
       :sustained_clock_speed_in_ghz)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -36687,6 +37736,7 @@ module Aws::EC2
     class ProductCode < Struct.new(
       :product_code_id,
       :product_code_type)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -36700,6 +37750,7 @@ module Aws::EC2
     #
     class PropagatingVgw < Struct.new(
       :gateway_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -36717,7 +37768,7 @@ module Aws::EC2
     #         dry_run: false,
     #         pool_tag_specifications: [
     #           {
-    #             resource_type: "client-vpn-endpoint", # accepts client-vpn-endpoint, customer-gateway, dedicated-host, dhcp-options, elastic-ip, fleet, fpga-image, host-reservation, image, instance, internet-gateway, key-pair, launch-template, natgateway, network-acl, network-interface, placement-group, reserved-instances, route-table, security-group, snapshot, spot-fleet-request, spot-instances-request, subnet, traffic-mirror-filter, traffic-mirror-session, traffic-mirror-target, transit-gateway, transit-gateway-attachment, transit-gateway-multicast-domain, transit-gateway-route-table, volume, vpc, vpc-peering-connection, vpn-connection, vpn-gateway, vpc-flow-log
+    #             resource_type: "client-vpn-endpoint", # accepts client-vpn-endpoint, customer-gateway, dedicated-host, dhcp-options, elastic-ip, elastic-gpu, export-image-task, export-instance-task, fleet, fpga-image, host-reservation, image, import-image-task, import-snapshot-task, instance, internet-gateway, key-pair, launch-template, local-gateway-route-table-vpc-association, natgateway, network-acl, network-interface, placement-group, reserved-instances, route-table, security-group, snapshot, spot-fleet-request, spot-instances-request, subnet, traffic-mirror-filter, traffic-mirror-session, traffic-mirror-target, transit-gateway, transit-gateway-attachment, transit-gateway-multicast-domain, transit-gateway-route-table, volume, vpc, vpc-peering-connection, vpn-connection, vpn-gateway, vpc-flow-log
     #             tags: [
     #               {
     #                 key: "String",
@@ -36772,6 +37823,7 @@ module Aws::EC2
       :description,
       :dry_run,
       :pool_tag_specifications)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -36783,6 +37835,7 @@ module Aws::EC2
     #
     class ProvisionByoipCidrResult < Struct.new(
       :byoip_cidr)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -36852,6 +37905,7 @@ module Aws::EC2
       :request_time,
       :requested,
       :status)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -36897,6 +37951,7 @@ module Aws::EC2
       :total_available_address_count,
       :network_border_group,
       :tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -36925,6 +37980,7 @@ module Aws::EC2
       :last_address,
       :address_count,
       :available_address_count)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -36975,6 +38031,7 @@ module Aws::EC2
       :instance_family,
       :payment_option,
       :upfront_price)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -37032,6 +38089,7 @@ module Aws::EC2
       :host_id_set,
       :limit_price,
       :offering_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -37072,6 +38130,7 @@ module Aws::EC2
       :purchase,
       :total_hourly_price,
       :total_upfront_price)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -37098,6 +38157,7 @@ module Aws::EC2
     class PurchaseRequest < Struct.new(
       :instance_count,
       :purchase_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -37151,6 +38211,7 @@ module Aws::EC2
       :dry_run,
       :limit_price,
       :purchase_time)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -37164,6 +38225,7 @@ module Aws::EC2
     #
     class PurchaseReservedInstancesOfferingResult < Struct.new(
       :reserved_instances_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -37212,6 +38274,7 @@ module Aws::EC2
       :client_token,
       :dry_run,
       :purchase_requests)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -37225,6 +38288,7 @@ module Aws::EC2
     #
     class PurchaseScheduledInstancesResult < Struct.new(
       :scheduled_instance_set)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -37252,6 +38316,7 @@ module Aws::EC2
     class RebootInstancesRequest < Struct.new(
       :instance_ids,
       :dry_run)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -37270,6 +38335,7 @@ module Aws::EC2
     class RecurringCharge < Struct.new(
       :amount,
       :frequency)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -37294,6 +38360,7 @@ module Aws::EC2
       :endpoint,
       :region_name,
       :opt_in_status)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -37435,6 +38502,7 @@ module Aws::EC2
       :root_device_name,
       :sriov_net_support,
       :virtualization_type)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -37448,6 +38516,7 @@ module Aws::EC2
     #
     class RegisterImageResult < Struct.new(
       :image_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -37478,6 +38547,7 @@ module Aws::EC2
     class RegisterInstanceEventNotificationAttributesRequest < Struct.new(
       :dry_run,
       :instance_tag_attribute)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -37489,6 +38559,7 @@ module Aws::EC2
     #
     class RegisterInstanceEventNotificationAttributesResult < Struct.new(
       :instance_tag_attribute)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -37519,6 +38590,7 @@ module Aws::EC2
     class RegisterInstanceTagAttributeRequest < Struct.new(
       :include_all_tags_of_instance,
       :instance_tag_keys)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -37559,6 +38631,7 @@ module Aws::EC2
       :group_ip_address,
       :network_interface_ids,
       :dry_run)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -37571,6 +38644,7 @@ module Aws::EC2
     #
     class RegisterTransitGatewayMulticastGroupMembersResult < Struct.new(
       :registered_multicast_group_members)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -37611,6 +38685,7 @@ module Aws::EC2
       :group_ip_address,
       :network_interface_ids,
       :dry_run)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -37622,6 +38697,7 @@ module Aws::EC2
     #
     class RegisterTransitGatewayMulticastGroupSourcesResult < Struct.new(
       :registered_multicast_group_sources)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -37649,6 +38725,7 @@ module Aws::EC2
     class RejectTransitGatewayPeeringAttachmentRequest < Struct.new(
       :transit_gateway_attachment_id,
       :dry_run)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -37660,6 +38737,7 @@ module Aws::EC2
     #
     class RejectTransitGatewayPeeringAttachmentResult < Struct.new(
       :transit_gateway_peering_attachment)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -37687,6 +38765,7 @@ module Aws::EC2
     class RejectTransitGatewayVpcAttachmentRequest < Struct.new(
       :transit_gateway_attachment_id,
       :dry_run)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -37698,6 +38777,7 @@ module Aws::EC2
     #
     class RejectTransitGatewayVpcAttachmentResult < Struct.new(
       :transit_gateway_vpc_attachment)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -37731,6 +38811,7 @@ module Aws::EC2
       :dry_run,
       :service_id,
       :vpc_endpoint_ids)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -37743,6 +38824,7 @@ module Aws::EC2
     #
     class RejectVpcEndpointConnectionsResult < Struct.new(
       :unsuccessful)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -37770,6 +38852,7 @@ module Aws::EC2
     class RejectVpcPeeringConnectionRequest < Struct.new(
       :dry_run,
       :vpc_peering_connection_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -37782,6 +38865,7 @@ module Aws::EC2
     #
     class RejectVpcPeeringConnectionResult < Struct.new(
       :return)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -37836,6 +38920,7 @@ module Aws::EC2
       :public_ip,
       :network_border_group,
       :dry_run)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -37854,6 +38939,7 @@ module Aws::EC2
     #
     class ReleaseHostsRequest < Struct.new(
       :host_ids)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -37871,6 +38957,7 @@ module Aws::EC2
     class ReleaseHostsResult < Struct.new(
       :successful,
       :unsuccessful)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -37898,6 +38985,7 @@ module Aws::EC2
     class ReplaceIamInstanceProfileAssociationRequest < Struct.new(
       :iam_instance_profile,
       :association_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -37909,6 +38997,7 @@ module Aws::EC2
     #
     class ReplaceIamInstanceProfileAssociationResult < Struct.new(
       :iam_instance_profile_association)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -37943,6 +39032,7 @@ module Aws::EC2
       :association_id,
       :dry_run,
       :network_acl_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -37954,6 +39044,7 @@ module Aws::EC2
     #
     class ReplaceNetworkAclAssociationResult < Struct.new(
       :new_association_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -38050,6 +39141,7 @@ module Aws::EC2
       :protocol,
       :rule_action,
       :rule_number)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -38148,6 +39240,7 @@ module Aws::EC2
       :network_interface_id,
       :route_table_id,
       :vpc_peering_connection_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -38181,6 +39274,7 @@ module Aws::EC2
       :association_id,
       :dry_run,
       :route_table_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -38197,6 +39291,7 @@ module Aws::EC2
     class ReplaceRouteTableAssociationResult < Struct.new(
       :new_association_id,
       :association_state)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -38243,6 +39338,7 @@ module Aws::EC2
       :transit_gateway_attachment_id,
       :blackhole,
       :dry_run)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -38254,6 +39350,7 @@ module Aws::EC2
     #
     class ReplaceTransitGatewayRouteResult < Struct.new(
       :route)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -38336,6 +39433,7 @@ module Aws::EC2
       :reason_codes,
       :start_time,
       :status)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -38415,7 +39513,7 @@ module Aws::EC2
     #         user_data: "String",
     #         tag_specifications: [
     #           {
-    #             resource_type: "client-vpn-endpoint", # accepts client-vpn-endpoint, customer-gateway, dedicated-host, dhcp-options, elastic-ip, fleet, fpga-image, host-reservation, image, instance, internet-gateway, key-pair, launch-template, natgateway, network-acl, network-interface, placement-group, reserved-instances, route-table, security-group, snapshot, spot-fleet-request, spot-instances-request, subnet, traffic-mirror-filter, traffic-mirror-session, traffic-mirror-target, transit-gateway, transit-gateway-attachment, transit-gateway-multicast-domain, transit-gateway-route-table, volume, vpc, vpc-peering-connection, vpn-connection, vpn-gateway, vpc-flow-log
+    #             resource_type: "client-vpn-endpoint", # accepts client-vpn-endpoint, customer-gateway, dedicated-host, dhcp-options, elastic-ip, elastic-gpu, export-image-task, export-instance-task, fleet, fpga-image, host-reservation, image, import-image-task, import-snapshot-task, instance, internet-gateway, key-pair, launch-template, local-gateway-route-table-vpc-association, natgateway, network-acl, network-interface, placement-group, reserved-instances, route-table, security-group, snapshot, spot-fleet-request, spot-instances-request, subnet, traffic-mirror-filter, traffic-mirror-session, traffic-mirror-target, transit-gateway, transit-gateway-attachment, transit-gateway-multicast-domain, transit-gateway-route-table, volume, vpc, vpc-peering-connection, vpn-connection, vpn-gateway, vpc-flow-log
     #             tags: [
     #               {
     #                 key: "String",
@@ -38708,6 +39806,7 @@ module Aws::EC2
       :license_specifications,
       :hibernation_options,
       :metadata_options)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -38801,7 +39900,7 @@ module Aws::EC2
     #               weighted_capacity: 1.0,
     #               tag_specifications: [
     #                 {
-    #                   resource_type: "client-vpn-endpoint", # accepts client-vpn-endpoint, customer-gateway, dedicated-host, dhcp-options, elastic-ip, fleet, fpga-image, host-reservation, image, instance, internet-gateway, key-pair, launch-template, natgateway, network-acl, network-interface, placement-group, reserved-instances, route-table, security-group, snapshot, spot-fleet-request, spot-instances-request, subnet, traffic-mirror-filter, traffic-mirror-session, traffic-mirror-target, transit-gateway, transit-gateway-attachment, transit-gateway-multicast-domain, transit-gateway-route-table, volume, vpc, vpc-peering-connection, vpn-connection, vpn-gateway, vpc-flow-log
+    #                   resource_type: "client-vpn-endpoint", # accepts client-vpn-endpoint, customer-gateway, dedicated-host, dhcp-options, elastic-ip, elastic-gpu, export-image-task, export-instance-task, fleet, fpga-image, host-reservation, image, import-image-task, import-snapshot-task, instance, internet-gateway, key-pair, launch-template, local-gateway-route-table-vpc-association, natgateway, network-acl, network-interface, placement-group, reserved-instances, route-table, security-group, snapshot, spot-fleet-request, spot-instances-request, subnet, traffic-mirror-filter, traffic-mirror-session, traffic-mirror-target, transit-gateway, transit-gateway-attachment, transit-gateway-multicast-domain, transit-gateway-route-table, volume, vpc, vpc-peering-connection, vpn-connection, vpn-gateway, vpc-flow-log
     #                   tags: [
     #                     {
     #                       key: "String",
@@ -38861,7 +39960,7 @@ module Aws::EC2
     #           instance_pools_to_use_count: 1,
     #           tag_specifications: [
     #             {
-    #               resource_type: "client-vpn-endpoint", # accepts client-vpn-endpoint, customer-gateway, dedicated-host, dhcp-options, elastic-ip, fleet, fpga-image, host-reservation, image, instance, internet-gateway, key-pair, launch-template, natgateway, network-acl, network-interface, placement-group, reserved-instances, route-table, security-group, snapshot, spot-fleet-request, spot-instances-request, subnet, traffic-mirror-filter, traffic-mirror-session, traffic-mirror-target, transit-gateway, transit-gateway-attachment, transit-gateway-multicast-domain, transit-gateway-route-table, volume, vpc, vpc-peering-connection, vpn-connection, vpn-gateway, vpc-flow-log
+    #               resource_type: "client-vpn-endpoint", # accepts client-vpn-endpoint, customer-gateway, dedicated-host, dhcp-options, elastic-ip, elastic-gpu, export-image-task, export-instance-task, fleet, fpga-image, host-reservation, image, import-image-task, import-snapshot-task, instance, internet-gateway, key-pair, launch-template, local-gateway-route-table-vpc-association, natgateway, network-acl, network-interface, placement-group, reserved-instances, route-table, security-group, snapshot, spot-fleet-request, spot-instances-request, subnet, traffic-mirror-filter, traffic-mirror-session, traffic-mirror-target, transit-gateway, transit-gateway-attachment, transit-gateway-multicast-domain, transit-gateway-route-table, volume, vpc, vpc-peering-connection, vpn-connection, vpn-gateway, vpc-flow-log
     #               tags: [
     #                 {
     #                   key: "String",
@@ -38889,6 +39988,7 @@ module Aws::EC2
     class RequestSpotFleetRequest < Struct.new(
       :dry_run,
       :spot_fleet_request_config)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -38902,6 +40002,7 @@ module Aws::EC2
     #
     class RequestSpotFleetResponse < Struct.new(
       :spot_fleet_request_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -39117,6 +40218,7 @@ module Aws::EC2
       :valid_from,
       :valid_until,
       :instance_interruption_behavior)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -39130,6 +40232,7 @@ module Aws::EC2
     #
     class RequestSpotInstancesResult < Struct.new(
       :spot_instance_requests)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -39311,6 +40414,7 @@ module Aws::EC2
       :ramdisk_id,
       :subnet_id,
       :user_data)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -39345,6 +40449,7 @@ module Aws::EC2
       :owner_id,
       :requester_id,
       :reservation_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -39369,6 +40474,7 @@ module Aws::EC2
       :hourly_price,
       :remaining_total_value,
       :remaining_upfront_value)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -39397,6 +40503,7 @@ module Aws::EC2
     class ReservedInstanceLimitPrice < Struct.new(
       :amount,
       :currency_code)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -39416,6 +40523,7 @@ module Aws::EC2
     class ReservedInstanceReservationValue < Struct.new(
       :reservation_value,
       :reserved_instance_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -39516,6 +40624,7 @@ module Aws::EC2
       :recurring_charges,
       :scope,
       :tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -39567,6 +40676,7 @@ module Aws::EC2
       :instance_type,
       :platform,
       :scope)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -39580,6 +40690,7 @@ module Aws::EC2
     #
     class ReservedInstancesId < Struct.new(
       :reserved_instances_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -39645,6 +40756,7 @@ module Aws::EC2
       :status_message,
       :tags,
       :update_date)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -39705,6 +40817,7 @@ module Aws::EC2
       :status,
       :status_message,
       :update_date)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -39726,6 +40839,7 @@ module Aws::EC2
     class ReservedInstancesModificationResult < Struct.new(
       :reserved_instances_id,
       :target_configuration)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -39818,6 +40932,7 @@ module Aws::EC2
       :pricing_details,
       :recurring_charges,
       :scope)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -39839,6 +40954,7 @@ module Aws::EC2
     #
     class ResetEbsDefaultKmsKeyIdRequest < Struct.new(
       :dry_run)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -39851,6 +40967,7 @@ module Aws::EC2
     #
     class ResetEbsDefaultKmsKeyIdResult < Struct.new(
       :kms_key_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -39884,6 +41001,7 @@ module Aws::EC2
       :dry_run,
       :fpga_image_id,
       :attribute)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -39895,6 +41013,7 @@ module Aws::EC2
     #
     class ResetFpgaImageAttributeResult < Struct.new(
       :return)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -39931,6 +41050,7 @@ module Aws::EC2
       :attribute,
       :image_id,
       :dry_run)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -39968,6 +41088,7 @@ module Aws::EC2
       :attribute,
       :dry_run,
       :instance_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -40004,6 +41125,7 @@ module Aws::EC2
       :dry_run,
       :network_interface_id,
       :source_dest_check)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -40038,6 +41160,7 @@ module Aws::EC2
       :attribute,
       :snapshot_id,
       :dry_run)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -40057,6 +41180,7 @@ module Aws::EC2
     class ResponseError < Struct.new(
       :code,
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -40216,6 +41340,7 @@ module Aws::EC2
       :license_specifications,
       :hibernation_options,
       :metadata_options)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -40243,6 +41368,7 @@ module Aws::EC2
     class RestoreAddressToClassicRequest < Struct.new(
       :dry_run,
       :public_ip)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -40259,6 +41385,7 @@ module Aws::EC2
     class RestoreAddressToClassicResult < Struct.new(
       :public_ip,
       :status)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -40306,6 +41433,7 @@ module Aws::EC2
       :access_group_id,
       :revoke_all_groups,
       :dry_run)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -40317,6 +41445,7 @@ module Aws::EC2
     #
     class RevokeClientVpnIngressResult < Struct.new(
       :status)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -40426,6 +41555,7 @@ module Aws::EC2
       :to_port,
       :source_security_group_name,
       :source_security_group_owner_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -40562,6 +41692,7 @@ module Aws::EC2
       :source_security_group_owner_id,
       :to_port,
       :dry_run)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -40651,6 +41782,7 @@ module Aws::EC2
       :origin,
       :state,
       :vpc_peering_connection_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -40695,6 +41827,7 @@ module Aws::EC2
       :tags,
       :vpc_id,
       :owner_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -40735,6 +41868,7 @@ module Aws::EC2
       :subnet_id,
       :gateway_id,
       :association_state)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -40754,6 +41888,7 @@ module Aws::EC2
     class RouteTableAssociationState < Struct.new(
       :state,
       :status_message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -40775,6 +41910,7 @@ module Aws::EC2
     #
     class RunInstancesMonitoringEnabled < Struct.new(
       :enabled)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -40878,7 +42014,7 @@ module Aws::EC2
     #         ],
     #         tag_specifications: [
     #           {
-    #             resource_type: "client-vpn-endpoint", # accepts client-vpn-endpoint, customer-gateway, dedicated-host, dhcp-options, elastic-ip, fleet, fpga-image, host-reservation, image, instance, internet-gateway, key-pair, launch-template, natgateway, network-acl, network-interface, placement-group, reserved-instances, route-table, security-group, snapshot, spot-fleet-request, spot-instances-request, subnet, traffic-mirror-filter, traffic-mirror-session, traffic-mirror-target, transit-gateway, transit-gateway-attachment, transit-gateway-multicast-domain, transit-gateway-route-table, volume, vpc, vpc-peering-connection, vpn-connection, vpn-gateway, vpc-flow-log
+    #             resource_type: "client-vpn-endpoint", # accepts client-vpn-endpoint, customer-gateway, dedicated-host, dhcp-options, elastic-ip, elastic-gpu, export-image-task, export-instance-task, fleet, fpga-image, host-reservation, image, import-image-task, import-snapshot-task, instance, internet-gateway, key-pair, launch-template, local-gateway-route-table-vpc-association, natgateway, network-acl, network-interface, placement-group, reserved-instances, route-table, security-group, snapshot, spot-fleet-request, spot-instances-request, subnet, traffic-mirror-filter, traffic-mirror-session, traffic-mirror-target, transit-gateway, transit-gateway-attachment, transit-gateway-multicast-domain, transit-gateway-route-table, volume, vpc, vpc-peering-connection, vpn-connection, vpn-gateway, vpc-flow-log
     #             tags: [
     #               {
     #                 key: "String",
@@ -41329,6 +42465,7 @@ module Aws::EC2
       :hibernation_options,
       :license_specifications,
       :metadata_options)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -41449,6 +42586,7 @@ module Aws::EC2
       :instance_count,
       :launch_specification,
       :scheduled_instance_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -41462,6 +42600,7 @@ module Aws::EC2
     #
     class RunScheduledInstancesResult < Struct.new(
       :instance_id_set)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -41517,6 +42656,7 @@ module Aws::EC2
       :prefix,
       :upload_policy,
       :upload_policy_signature)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -41600,6 +42740,7 @@ module Aws::EC2
       :term_end_date,
       :term_start_date,
       :total_scheduled_instance_hours)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -41674,6 +42815,7 @@ module Aws::EC2
       :recurrence,
       :slot_duration_in_hours,
       :total_scheduled_instance_hours)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -41711,6 +42853,7 @@ module Aws::EC2
       :occurrence_day_set,
       :occurrence_relative_to_end,
       :occurrence_unit)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -41765,6 +42908,7 @@ module Aws::EC2
       :occurrence_days,
       :occurrence_relative_to_end,
       :occurrence_unit)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -41822,6 +42966,7 @@ module Aws::EC2
       :ebs,
       :no_device,
       :virtual_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -41898,6 +43043,7 @@ module Aws::EC2
       :snapshot_id,
       :volume_size,
       :volume_type)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -41924,6 +43070,7 @@ module Aws::EC2
     class ScheduledInstancesIamInstanceProfile < Struct.new(
       :arn,
       :name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -41944,6 +43091,7 @@ module Aws::EC2
     #
     class ScheduledInstancesIpv6Address < Struct.new(
       :ipv_6_address)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -42099,6 +43247,7 @@ module Aws::EC2
       :security_group_ids,
       :subnet_id,
       :user_data)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -42119,6 +43268,7 @@ module Aws::EC2
     #
     class ScheduledInstancesMonitoring < Struct.new(
       :enabled)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -42221,6 +43371,7 @@ module Aws::EC2
       :private_ip_address_configs,
       :secondary_private_ip_address_count,
       :subnet_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -42247,6 +43398,7 @@ module Aws::EC2
     class ScheduledInstancesPlacement < Struct.new(
       :availability_zone,
       :group_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -42274,6 +43426,7 @@ module Aws::EC2
     class ScheduledInstancesPrivateIpAddressConfig < Struct.new(
       :primary,
       :private_ip_address)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -42326,6 +43479,7 @@ module Aws::EC2
       :max_results,
       :next_token,
       :dry_run)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -42343,6 +43497,7 @@ module Aws::EC2
     class SearchLocalGatewayRoutesResult < Struct.new(
       :routes,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -42424,6 +43579,7 @@ module Aws::EC2
       :max_results,
       :next_token,
       :dry_run)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -42441,6 +43597,7 @@ module Aws::EC2
     class SearchTransitGatewayMulticastGroupsResult < Struct.new(
       :multicast_groups,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -42513,6 +43670,7 @@ module Aws::EC2
       :filters,
       :max_results,
       :dry_run)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -42529,6 +43687,7 @@ module Aws::EC2
     class SearchTransitGatewayRoutesResult < Struct.new(
       :routes,
       :additional_routes_available)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -42577,6 +43736,7 @@ module Aws::EC2
       :ip_permissions_egress,
       :tags,
       :vpc_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -42595,6 +43755,7 @@ module Aws::EC2
     class SecurityGroupIdentifier < Struct.new(
       :group_id,
       :group_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -42619,6 +43780,7 @@ module Aws::EC2
       :group_id,
       :referencing_vpc_id,
       :vpc_peering_connection_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -42646,6 +43808,7 @@ module Aws::EC2
     class SendDiagnosticInterruptRequest < Struct.new(
       :instance_id,
       :dry_run)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -42719,6 +43882,7 @@ module Aws::EC2
       :private_dns_name,
       :private_dns_name_configuration,
       :tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -42793,6 +43957,7 @@ module Aws::EC2
       :manages_vpc_endpoints,
       :tags,
       :private_dns_name_verification_state)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -42806,6 +43971,7 @@ module Aws::EC2
     #
     class ServiceTypeDetail < Struct.new(
       :service_type)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -42836,6 +44002,7 @@ module Aws::EC2
     class SlotDateTimeRangeRequest < Struct.new(
       :earliest_time,
       :latest_time)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -42865,6 +44032,7 @@ module Aws::EC2
     class SlotStartTimeRangeRequest < Struct.new(
       :earliest_time,
       :latest_time)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -42964,6 +44132,7 @@ module Aws::EC2
       :volume_size,
       :owner_alias,
       :tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -43006,7 +44175,7 @@ module Aws::EC2
     #   @return [String]
     #
     # @!attribute [rw] user_bucket
-    #   The S3 bucket for the disk image.
+    #   The Amazon S3 bucket for the disk image.
     #   @return [Types::UserBucketDetails]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/SnapshotDetail AWS API Documentation
@@ -43022,6 +44191,7 @@ module Aws::EC2
       :status_message,
       :url,
       :user_bucket)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -43056,7 +44226,7 @@ module Aws::EC2
     #   @return [String]
     #
     # @!attribute [rw] user_bucket
-    #   The S3 bucket for the disk image.
+    #   The Amazon S3 bucket for the disk image.
     #   @return [Types::UserBucket]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/SnapshotDiskContainer AWS API Documentation
@@ -43066,6 +44236,7 @@ module Aws::EC2
       :format,
       :url,
       :user_bucket)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -43126,6 +44297,7 @@ module Aws::EC2
       :progress,
       :owner_id,
       :snapshot_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -43173,7 +44345,7 @@ module Aws::EC2
     #   @return [String]
     #
     # @!attribute [rw] user_bucket
-    #   The S3 bucket for the disk image.
+    #   The Amazon S3 bucket for the disk image.
     #   @return [Types::UserBucketDetails]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/SnapshotTaskDetail AWS API Documentation
@@ -43190,6 +44362,7 @@ module Aws::EC2
       :status_message,
       :url,
       :user_bucket)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -43223,6 +44396,7 @@ module Aws::EC2
       :owner_id,
       :prefix,
       :state)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -43312,7 +44486,7 @@ module Aws::EC2
     #         weighted_capacity: 1.0,
     #         tag_specifications: [
     #           {
-    #             resource_type: "client-vpn-endpoint", # accepts client-vpn-endpoint, customer-gateway, dedicated-host, dhcp-options, elastic-ip, fleet, fpga-image, host-reservation, image, instance, internet-gateway, key-pair, launch-template, natgateway, network-acl, network-interface, placement-group, reserved-instances, route-table, security-group, snapshot, spot-fleet-request, spot-instances-request, subnet, traffic-mirror-filter, traffic-mirror-session, traffic-mirror-target, transit-gateway, transit-gateway-attachment, transit-gateway-multicast-domain, transit-gateway-route-table, volume, vpc, vpc-peering-connection, vpn-connection, vpn-gateway, vpc-flow-log
+    #             resource_type: "client-vpn-endpoint", # accepts client-vpn-endpoint, customer-gateway, dedicated-host, dhcp-options, elastic-ip, elastic-gpu, export-image-task, export-instance-task, fleet, fpga-image, host-reservation, image, import-image-task, import-snapshot-task, instance, internet-gateway, key-pair, launch-template, local-gateway-route-table-vpc-association, natgateway, network-acl, network-interface, placement-group, reserved-instances, route-table, security-group, snapshot, spot-fleet-request, spot-instances-request, subnet, traffic-mirror-filter, traffic-mirror-session, traffic-mirror-target, transit-gateway, transit-gateway-attachment, transit-gateway-multicast-domain, transit-gateway-route-table, volume, vpc, vpc-peering-connection, vpn-connection, vpn-gateway, vpc-flow-log
     #             tags: [
     #               {
     #                 key: "String",
@@ -43447,6 +44621,7 @@ module Aws::EC2
       :user_data,
       :weighted_capacity,
       :tag_specifications)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -43469,6 +44644,7 @@ module Aws::EC2
     #
     class SpotFleetMonitoring < Struct.new(
       :enabled)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -43512,6 +44688,7 @@ module Aws::EC2
       :spot_fleet_request_id,
       :spot_fleet_request_state,
       :tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -43603,7 +44780,7 @@ module Aws::EC2
     #             weighted_capacity: 1.0,
     #             tag_specifications: [
     #               {
-    #                 resource_type: "client-vpn-endpoint", # accepts client-vpn-endpoint, customer-gateway, dedicated-host, dhcp-options, elastic-ip, fleet, fpga-image, host-reservation, image, instance, internet-gateway, key-pair, launch-template, natgateway, network-acl, network-interface, placement-group, reserved-instances, route-table, security-group, snapshot, spot-fleet-request, spot-instances-request, subnet, traffic-mirror-filter, traffic-mirror-session, traffic-mirror-target, transit-gateway, transit-gateway-attachment, transit-gateway-multicast-domain, transit-gateway-route-table, volume, vpc, vpc-peering-connection, vpn-connection, vpn-gateway, vpc-flow-log
+    #                 resource_type: "client-vpn-endpoint", # accepts client-vpn-endpoint, customer-gateway, dedicated-host, dhcp-options, elastic-ip, elastic-gpu, export-image-task, export-instance-task, fleet, fpga-image, host-reservation, image, import-image-task, import-snapshot-task, instance, internet-gateway, key-pair, launch-template, local-gateway-route-table-vpc-association, natgateway, network-acl, network-interface, placement-group, reserved-instances, route-table, security-group, snapshot, spot-fleet-request, spot-instances-request, subnet, traffic-mirror-filter, traffic-mirror-session, traffic-mirror-target, transit-gateway, transit-gateway-attachment, transit-gateway-multicast-domain, transit-gateway-route-table, volume, vpc, vpc-peering-connection, vpn-connection, vpn-gateway, vpc-flow-log
     #                 tags: [
     #                   {
     #                     key: "String",
@@ -43663,7 +44840,7 @@ module Aws::EC2
     #         instance_pools_to_use_count: 1,
     #         tag_specifications: [
     #           {
-    #             resource_type: "client-vpn-endpoint", # accepts client-vpn-endpoint, customer-gateway, dedicated-host, dhcp-options, elastic-ip, fleet, fpga-image, host-reservation, image, instance, internet-gateway, key-pair, launch-template, natgateway, network-acl, network-interface, placement-group, reserved-instances, route-table, security-group, snapshot, spot-fleet-request, spot-instances-request, subnet, traffic-mirror-filter, traffic-mirror-session, traffic-mirror-target, transit-gateway, transit-gateway-attachment, transit-gateway-multicast-domain, transit-gateway-route-table, volume, vpc, vpc-peering-connection, vpn-connection, vpn-gateway, vpc-flow-log
+    #             resource_type: "client-vpn-endpoint", # accepts client-vpn-endpoint, customer-gateway, dedicated-host, dhcp-options, elastic-ip, elastic-gpu, export-image-task, export-instance-task, fleet, fpga-image, host-reservation, image, import-image-task, import-snapshot-task, instance, internet-gateway, key-pair, launch-template, local-gateway-route-table-vpc-association, natgateway, network-acl, network-interface, placement-group, reserved-instances, route-table, security-group, snapshot, spot-fleet-request, spot-instances-request, subnet, traffic-mirror-filter, traffic-mirror-session, traffic-mirror-target, transit-gateway, transit-gateway-attachment, transit-gateway-multicast-domain, transit-gateway-route-table, volume, vpc, vpc-peering-connection, vpn-connection, vpn-gateway, vpc-flow-log
     #             tags: [
     #               {
     #                 key: "String",
@@ -43903,6 +45080,7 @@ module Aws::EC2
       :load_balancers_config,
       :instance_pools_to_use_count,
       :tag_specifications)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -43912,7 +45090,7 @@ module Aws::EC2
     #   data as a hash:
     #
     #       {
-    #         resource_type: "client-vpn-endpoint", # accepts client-vpn-endpoint, customer-gateway, dedicated-host, dhcp-options, elastic-ip, fleet, fpga-image, host-reservation, image, instance, internet-gateway, key-pair, launch-template, natgateway, network-acl, network-interface, placement-group, reserved-instances, route-table, security-group, snapshot, spot-fleet-request, spot-instances-request, subnet, traffic-mirror-filter, traffic-mirror-session, traffic-mirror-target, transit-gateway, transit-gateway-attachment, transit-gateway-multicast-domain, transit-gateway-route-table, volume, vpc, vpc-peering-connection, vpn-connection, vpn-gateway, vpc-flow-log
+    #         resource_type: "client-vpn-endpoint", # accepts client-vpn-endpoint, customer-gateway, dedicated-host, dhcp-options, elastic-ip, elastic-gpu, export-image-task, export-instance-task, fleet, fpga-image, host-reservation, image, import-image-task, import-snapshot-task, instance, internet-gateway, key-pair, launch-template, local-gateway-route-table-vpc-association, natgateway, network-acl, network-interface, placement-group, reserved-instances, route-table, security-group, snapshot, spot-fleet-request, spot-instances-request, subnet, traffic-mirror-filter, traffic-mirror-session, traffic-mirror-target, transit-gateway, transit-gateway-attachment, transit-gateway-multicast-domain, transit-gateway-route-table, volume, vpc, vpc-peering-connection, vpn-connection, vpn-gateway, vpc-flow-log
     #         tags: [
     #           {
     #             key: "String",
@@ -43941,6 +45119,7 @@ module Aws::EC2
     class SpotFleetTagSpecification < Struct.new(
       :resource_type,
       :tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -44066,6 +45245,7 @@ module Aws::EC2
       :valid_from,
       :valid_until,
       :instance_interruption_behavior)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -44084,6 +45264,7 @@ module Aws::EC2
     class SpotInstanceStateFault < Struct.new(
       :code,
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -44113,6 +45294,7 @@ module Aws::EC2
       :code,
       :message,
       :update_time)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -44172,6 +45354,7 @@ module Aws::EC2
       :block_duration_minutes,
       :valid_until,
       :instance_interruption_behavior)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -44238,6 +45421,7 @@ module Aws::EC2
       :single_availability_zone,
       :min_target_capacity,
       :max_total_price)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -44317,6 +45501,7 @@ module Aws::EC2
       :single_availability_zone,
       :min_target_capacity,
       :max_total_price)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -44354,6 +45539,7 @@ module Aws::EC2
       :availability_zone,
       :group_name,
       :tenancy)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -44390,6 +45576,7 @@ module Aws::EC2
       :product_description,
       :spot_price,
       :timestamp)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -44437,6 +45624,7 @@ module Aws::EC2
       :prefix_list_ids,
       :to_port,
       :user_id_group_pairs)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -44476,6 +45664,7 @@ module Aws::EC2
       :stale_ip_permissions,
       :stale_ip_permissions_egress,
       :vpc_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -44509,6 +45698,7 @@ module Aws::EC2
       :instance_ids,
       :additional_info,
       :dry_run)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -44520,6 +45710,7 @@ module Aws::EC2
     #
     class StartInstancesResult < Struct.new(
       :starting_instances)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -44547,6 +45738,7 @@ module Aws::EC2
     class StartVpcEndpointServicePrivateDnsVerificationRequest < Struct.new(
       :dry_run,
       :service_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -44559,6 +45751,7 @@ module Aws::EC2
     #
     class StartVpcEndpointServicePrivateDnsVerificationResult < Struct.new(
       :return_value)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -44618,6 +45811,7 @@ module Aws::EC2
     class StateReason < Struct.new(
       :code,
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -44671,6 +45865,7 @@ module Aws::EC2
       :hibernate,
       :dry_run,
       :force)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -44682,6 +45877,7 @@ module Aws::EC2
     #
     class StopInstancesResult < Struct.new(
       :stopping_instances)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -44708,6 +45904,7 @@ module Aws::EC2
     #
     class Storage < Struct.new(
       :s3)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -44734,6 +45931,7 @@ module Aws::EC2
     class StorageLocation < Struct.new(
       :bucket,
       :key)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -44834,6 +46032,7 @@ module Aws::EC2
       :tags,
       :subnet_arn,
       :outpost_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -44853,6 +46052,7 @@ module Aws::EC2
     class SubnetAssociation < Struct.new(
       :subnet_id,
       :state)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -44871,6 +46071,7 @@ module Aws::EC2
     class SubnetCidrBlockState < Struct.new(
       :state,
       :status_message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -44894,6 +46095,7 @@ module Aws::EC2
       :association_id,
       :ipv_6_cidr_block,
       :ipv_6_cidr_block_state)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -44908,6 +46110,7 @@ module Aws::EC2
     #
     class SuccessfulInstanceCreditSpecificationItem < Struct.new(
       :instance_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -44922,6 +46125,7 @@ module Aws::EC2
     #
     class SuccessfulQueuedPurchaseDeletion < Struct.new(
       :reserved_instances_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -44954,6 +46158,7 @@ module Aws::EC2
     class Tag < Struct.new(
       :key,
       :value)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -44982,6 +46187,7 @@ module Aws::EC2
       :resource_id,
       :resource_type,
       :value)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -44991,7 +46197,7 @@ module Aws::EC2
     #   data as a hash:
     #
     #       {
-    #         resource_type: "client-vpn-endpoint", # accepts client-vpn-endpoint, customer-gateway, dedicated-host, dhcp-options, elastic-ip, fleet, fpga-image, host-reservation, image, instance, internet-gateway, key-pair, launch-template, natgateway, network-acl, network-interface, placement-group, reserved-instances, route-table, security-group, snapshot, spot-fleet-request, spot-instances-request, subnet, traffic-mirror-filter, traffic-mirror-session, traffic-mirror-target, transit-gateway, transit-gateway-attachment, transit-gateway-multicast-domain, transit-gateway-route-table, volume, vpc, vpc-peering-connection, vpn-connection, vpn-gateway, vpc-flow-log
+    #         resource_type: "client-vpn-endpoint", # accepts client-vpn-endpoint, customer-gateway, dedicated-host, dhcp-options, elastic-ip, elastic-gpu, export-image-task, export-instance-task, fleet, fpga-image, host-reservation, image, import-image-task, import-snapshot-task, instance, internet-gateway, key-pair, launch-template, local-gateway-route-table-vpc-association, natgateway, network-acl, network-interface, placement-group, reserved-instances, route-table, security-group, snapshot, spot-fleet-request, spot-instances-request, subnet, traffic-mirror-filter, traffic-mirror-session, traffic-mirror-target, transit-gateway, transit-gateway-attachment, transit-gateway-multicast-domain, transit-gateway-route-table, volume, vpc, vpc-peering-connection, vpn-connection, vpn-gateway, vpc-flow-log
     #         tags: [
     #           {
     #             key: "String",
@@ -45029,6 +46235,7 @@ module Aws::EC2
     class TagSpecification < Struct.new(
       :resource_type,
       :tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -45082,6 +46289,7 @@ module Aws::EC2
       :on_demand_target_capacity,
       :spot_target_capacity,
       :default_target_capacity_type)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -45142,6 +46350,7 @@ module Aws::EC2
       :on_demand_target_capacity,
       :spot_target_capacity,
       :default_target_capacity_type)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -45162,6 +46371,7 @@ module Aws::EC2
     class TargetConfiguration < Struct.new(
       :instance_count,
       :offering_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -45190,6 +46400,7 @@ module Aws::EC2
     class TargetConfigurationRequest < Struct.new(
       :instance_count,
       :offering_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -45210,6 +46421,7 @@ module Aws::EC2
     #
     class TargetGroup < Struct.new(
       :arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -45235,6 +46447,7 @@ module Aws::EC2
     #
     class TargetGroupsConfig < Struct.new(
       :target_groups)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -45275,6 +46488,7 @@ module Aws::EC2
       :client_vpn_endpoint_id,
       :status,
       :security_groups)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -45296,6 +46510,7 @@ module Aws::EC2
     class TargetReservationValue < Struct.new(
       :reservation_value,
       :target_configuration)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -45338,6 +46553,7 @@ module Aws::EC2
       :connection_id,
       :username,
       :dry_run)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -45359,6 +46575,7 @@ module Aws::EC2
       :client_vpn_endpoint_id,
       :username,
       :connection_statuses)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -45382,6 +46599,7 @@ module Aws::EC2
       :connection_id,
       :previous_status,
       :current_status)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -45412,6 +46630,7 @@ module Aws::EC2
     class TerminateInstancesRequest < Struct.new(
       :instance_ids,
       :dry_run)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -45423,6 +46642,7 @@ module Aws::EC2
     #
     class TerminateInstancesResult < Struct.new(
       :terminating_instances)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -45464,6 +46684,7 @@ module Aws::EC2
       :network_services,
       :description,
       :tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -45528,6 +46749,7 @@ module Aws::EC2
       :destination_cidr_block,
       :source_cidr_block,
       :description)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -45548,6 +46770,7 @@ module Aws::EC2
     class TrafficMirrorPortRange < Struct.new(
       :from_port,
       :to_port)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -45576,6 +46799,7 @@ module Aws::EC2
     class TrafficMirrorPortRangeRequest < Struct.new(
       :from_port,
       :to_port)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -45643,6 +46867,7 @@ module Aws::EC2
       :virtual_network_id,
       :description,
       :tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -45686,6 +46911,7 @@ module Aws::EC2
       :description,
       :owner_id,
       :tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -45734,6 +46960,7 @@ module Aws::EC2
       :creation_time,
       :options,
       :tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -45768,6 +46995,7 @@ module Aws::EC2
       :resource_id,
       :resource_type,
       :state)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -45826,6 +47054,7 @@ module Aws::EC2
       :association,
       :creation_time,
       :tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -45844,6 +47073,7 @@ module Aws::EC2
     class TransitGatewayAttachmentAssociation < Struct.new(
       :transit_gateway_route_table_id,
       :state)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -45862,6 +47092,7 @@ module Aws::EC2
     class TransitGatewayAttachmentPropagation < Struct.new(
       :transit_gateway_route_table_id,
       :state)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -45885,6 +47116,7 @@ module Aws::EC2
       :transit_gateway_multicast_domain_id,
       :deregistered_network_interface_ids,
       :group_ip_address)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -45908,6 +47140,7 @@ module Aws::EC2
       :transit_gateway_multicast_domain_id,
       :deregistered_network_interface_ids,
       :group_ip_address)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -45941,6 +47174,7 @@ module Aws::EC2
       :state,
       :creation_time,
       :tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -45970,6 +47204,7 @@ module Aws::EC2
       :resource_id,
       :resource_type,
       :subnet)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -46003,6 +47238,7 @@ module Aws::EC2
       :resource_id,
       :resource_type,
       :subnets)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -46063,6 +47299,7 @@ module Aws::EC2
       :group_source,
       :member_type,
       :source_type)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -46086,6 +47323,7 @@ module Aws::EC2
       :transit_gateway_multicast_domain_id,
       :registered_network_interface_ids,
       :group_ip_address)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -46111,6 +47349,7 @@ module Aws::EC2
       :transit_gateway_multicast_domain_id,
       :registered_network_interface_ids,
       :group_ip_address)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -46168,6 +47407,7 @@ module Aws::EC2
       :vpn_ecmp_support,
       :dns_support,
       :multicast_support)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -46211,6 +47451,7 @@ module Aws::EC2
       :state,
       :creation_time,
       :tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -46244,6 +47485,7 @@ module Aws::EC2
       :resource_type,
       :transit_gateway_route_table_id,
       :state)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -46305,6 +47547,7 @@ module Aws::EC2
       :vpn_ecmp_support,
       :dns_support,
       :multicast_support)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -46333,6 +47576,7 @@ module Aws::EC2
       :transit_gateway_attachments,
       :type,
       :state)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -46356,6 +47600,7 @@ module Aws::EC2
       :resource_id,
       :transit_gateway_attachment_id,
       :resource_type)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -46401,6 +47646,7 @@ module Aws::EC2
       :default_propagation_route_table,
       :creation_time,
       :tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -46430,6 +47676,7 @@ module Aws::EC2
       :resource_id,
       :resource_type,
       :state)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -46458,6 +47705,7 @@ module Aws::EC2
       :resource_id,
       :resource_type,
       :state)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -46511,6 +47759,7 @@ module Aws::EC2
       :creation_time,
       :options,
       :tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -46529,6 +47778,7 @@ module Aws::EC2
     class TransitGatewayVpcAttachmentOptions < Struct.new(
       :dns_support,
       :ipv_6_support)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -46628,6 +47878,7 @@ module Aws::EC2
       :phase_1_dh_group_numbers,
       :phase_2_dh_group_numbers,
       :ike_versions)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -46652,6 +47903,7 @@ module Aws::EC2
     class UnassignIpv6AddressesRequest < Struct.new(
       :ipv_6_addresses,
       :network_interface_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -46669,6 +47921,7 @@ module Aws::EC2
     class UnassignIpv6AddressesResult < Struct.new(
       :network_interface_id,
       :unassigned_ipv_6_addresses)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -46697,6 +47950,7 @@ module Aws::EC2
     class UnassignPrivateIpAddressesRequest < Struct.new(
       :network_interface_id,
       :private_ip_addresses)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -46724,6 +47978,7 @@ module Aws::EC2
     class UnmonitorInstancesRequest < Struct.new(
       :instance_ids,
       :dry_run)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -46735,6 +47990,7 @@ module Aws::EC2
     #
     class UnmonitorInstancesResult < Struct.new(
       :instance_monitorings)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -46755,6 +48011,7 @@ module Aws::EC2
     class UnsuccessfulInstanceCreditSpecificationItem < Struct.new(
       :instance_id,
       :error)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -46774,6 +48031,7 @@ module Aws::EC2
     class UnsuccessfulInstanceCreditSpecificationItemError < Struct.new(
       :code,
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -46793,6 +48051,7 @@ module Aws::EC2
     class UnsuccessfulItem < Struct.new(
       :error,
       :resource_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -46816,6 +48075,7 @@ module Aws::EC2
     class UnsuccessfulItemError < Struct.new(
       :code,
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -46894,6 +48154,7 @@ module Aws::EC2
       :group_id,
       :group_name,
       :ip_permissions)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -46905,6 +48166,7 @@ module Aws::EC2
     #
     class UpdateSecurityGroupRuleDescriptionsEgressResult < Struct.new(
       :return)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -46983,6 +48245,7 @@ module Aws::EC2
       :group_id,
       :group_name,
       :ip_permissions)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -46994,10 +48257,11 @@ module Aws::EC2
     #
     class UpdateSecurityGroupRuleDescriptionsIngressResult < Struct.new(
       :return)
+      SENSITIVE = []
       include Aws::Structure
     end
 
-    # Describes the S3 bucket for the disk image.
+    # Describes the Amazon S3 bucket for the disk image.
     #
     # @note When making an API call, you may pass UserBucket
     #   data as a hash:
@@ -47008,7 +48272,7 @@ module Aws::EC2
     #       }
     #
     # @!attribute [rw] s3_bucket
-    #   The name of the S3 bucket where the disk image is located.
+    #   The name of the Amazon S3 bucket where the disk image is located.
     #   @return [String]
     #
     # @!attribute [rw] s3_key
@@ -47020,13 +48284,14 @@ module Aws::EC2
     class UserBucket < Struct.new(
       :s3_bucket,
       :s3_key)
+      SENSITIVE = []
       include Aws::Structure
     end
 
-    # Describes the S3 bucket for the disk image.
+    # Describes the Amazon S3 bucket for the disk image.
     #
     # @!attribute [rw] s3_bucket
-    #   The S3 bucket from which the disk image was created.
+    #   The Amazon S3 bucket from which the disk image was created.
     #   @return [String]
     #
     # @!attribute [rw] s3_key
@@ -47038,6 +48303,7 @@ module Aws::EC2
     class UserBucketDetails < Struct.new(
       :s3_bucket,
       :s3_key)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -47060,6 +48326,7 @@ module Aws::EC2
     #
     class UserData < Struct.new(
       :data)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -47132,6 +48399,7 @@ module Aws::EC2
       :user_id,
       :vpc_id,
       :vpc_peering_connection_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -47167,6 +48435,7 @@ module Aws::EC2
       :default_threads_per_core,
       :valid_cores,
       :valid_threads_per_core)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -47199,6 +48468,7 @@ module Aws::EC2
     class ValidationError < Struct.new(
       :code,
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -47214,6 +48484,7 @@ module Aws::EC2
     #
     class ValidationWarning < Struct.new(
       :errors)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -47254,6 +48525,7 @@ module Aws::EC2
       :status,
       :status_message,
       :certificate_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -47362,6 +48634,7 @@ module Aws::EC2
       :volume_type,
       :fast_restored,
       :multi_attach_enabled)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -47400,6 +48673,7 @@ module Aws::EC2
       :state,
       :volume_id,
       :delete_on_termination)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -47420,6 +48694,7 @@ module Aws::EC2
     #
     class VolumeDetail < Struct.new(
       :size)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -47492,6 +48767,7 @@ module Aws::EC2
       :progress,
       :start_time,
       :end_time)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -47520,6 +48796,7 @@ module Aws::EC2
       :description,
       :event_id,
       :event_type)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -47538,6 +48815,7 @@ module Aws::EC2
     class VolumeStatusAttachmentStatus < Struct.new(
       :io_performance,
       :instance_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -47556,6 +48834,7 @@ module Aws::EC2
     class VolumeStatusDetails < Struct.new(
       :name,
       :status)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -47594,6 +48873,7 @@ module Aws::EC2
       :not_after,
       :not_before,
       :instance_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -47612,6 +48892,7 @@ module Aws::EC2
     class VolumeStatusInfo < Struct.new(
       :details,
       :status)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -47655,6 +48936,7 @@ module Aws::EC2
       :volume_id,
       :volume_status,
       :attachment_statuses)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -47714,6 +48996,7 @@ module Aws::EC2
       :cidr_block_association_set,
       :is_default,
       :tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -47732,6 +49015,7 @@ module Aws::EC2
     class VpcAttachment < Struct.new(
       :state,
       :vpc_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -47755,6 +49039,7 @@ module Aws::EC2
       :association_id,
       :cidr_block,
       :cidr_block_state)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -47773,6 +49058,7 @@ module Aws::EC2
     class VpcCidrBlockState < Struct.new(
       :state,
       :status_message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -47796,6 +49082,7 @@ module Aws::EC2
       :classic_link_enabled,
       :tags,
       :vpc_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -47894,6 +49181,7 @@ module Aws::EC2
       :tags,
       :owner_id,
       :last_error)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -47938,6 +49226,7 @@ module Aws::EC2
       :creation_timestamp,
       :dns_entries,
       :network_load_balancer_arns)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -47973,6 +49262,7 @@ module Aws::EC2
       :ipv_6_cidr_block_state,
       :network_border_group,
       :ipv_6_pool)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -48013,6 +49303,7 @@ module Aws::EC2
       :status,
       :tags,
       :vpc_peering_connection_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -48039,6 +49330,7 @@ module Aws::EC2
       :allow_dns_resolution_from_remote_vpc,
       :allow_egress_from_local_classic_link_to_remote_vpc,
       :allow_egress_from_local_vpc_to_remote_classic_link)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -48058,6 +49350,7 @@ module Aws::EC2
     class VpcPeeringConnectionStateReason < Struct.new(
       :code,
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -48102,6 +49395,7 @@ module Aws::EC2
       :peering_options,
       :vpc_id,
       :region)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -48177,6 +49471,7 @@ module Aws::EC2
       :routes,
       :tags,
       :vgw_telemetry)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -48201,6 +49496,7 @@ module Aws::EC2
       :enable_acceleration,
       :static_routes_only,
       :tunnel_options)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -48286,6 +49582,7 @@ module Aws::EC2
       :enable_acceleration,
       :static_routes_only,
       :tunnel_options)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -48331,6 +49628,7 @@ module Aws::EC2
       :vpn_gateway_id,
       :amazon_side_asn,
       :tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -48355,6 +49653,7 @@ module Aws::EC2
       :destination_cidr_block,
       :source,
       :state)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -48563,6 +49862,7 @@ module Aws::EC2
       :phase_1_dh_group_numbers,
       :phase_2_dh_group_numbers,
       :ike_versions)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -48590,6 +49890,7 @@ module Aws::EC2
     class WithdrawByoipCidrRequest < Struct.new(
       :cidr,
       :dry_run)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -48601,6 +49902,7 @@ module Aws::EC2
     #
     class WithdrawByoipCidrResult < Struct.new(
       :byoip_cidr)
+      SENSITIVE = []
       include Aws::Structure
     end
 

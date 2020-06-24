@@ -20,6 +20,7 @@ module Aws::KinesisVideoArchivedMedia
     #
     class ClientLimitExceededException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -58,6 +59,7 @@ module Aws::KinesisVideoArchivedMedia
     class ClipFragmentSelector < Struct.new(
       :fragment_selector_type,
       :timestamp_range)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -105,6 +107,7 @@ module Aws::KinesisVideoArchivedMedia
     class ClipTimestampRange < Struct.new(
       :start_timestamp,
       :end_timestamp)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -165,6 +168,7 @@ module Aws::KinesisVideoArchivedMedia
     class DASHFragmentSelector < Struct.new(
       :fragment_selector_type,
       :timestamp_range)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -227,6 +231,7 @@ module Aws::KinesisVideoArchivedMedia
     class DASHTimestampRange < Struct.new(
       :start_timestamp,
       :end_timestamp)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -263,6 +268,7 @@ module Aws::KinesisVideoArchivedMedia
       :producer_timestamp,
       :server_timestamp,
       :fragment_length_in_milliseconds)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -310,6 +316,7 @@ module Aws::KinesisVideoArchivedMedia
     class FragmentSelector < Struct.new(
       :fragment_selector_type,
       :timestamp_range)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -352,6 +359,7 @@ module Aws::KinesisVideoArchivedMedia
       :stream_name,
       :stream_arn,
       :clip_fragment_selector)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -372,6 +380,7 @@ module Aws::KinesisVideoArchivedMedia
     class GetClipOutput < Struct.new(
       :content_type,
       :payload)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -561,6 +570,7 @@ module Aws::KinesisVideoArchivedMedia
       :dash_fragment_selector,
       :expires,
       :max_manifest_fragment_results)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -573,6 +583,7 @@ module Aws::KinesisVideoArchivedMedia
     #
     class GetDASHStreamingSessionURLOutput < Struct.new(
       :dash_streaming_session_url)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -798,6 +809,7 @@ module Aws::KinesisVideoArchivedMedia
       :display_fragment_timestamp,
       :expires,
       :max_media_playlist_fragment_results)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -810,6 +822,7 @@ module Aws::KinesisVideoArchivedMedia
     #
     class GetHLSStreamingSessionURLOutput < Struct.new(
       :hls_streaming_session_url)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -835,6 +848,7 @@ module Aws::KinesisVideoArchivedMedia
     class GetMediaForFragmentListInput < Struct.new(
       :stream_name,
       :fragments)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -879,6 +893,7 @@ module Aws::KinesisVideoArchivedMedia
     class GetMediaForFragmentListOutput < Struct.new(
       :content_type,
       :payload)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -939,6 +954,7 @@ module Aws::KinesisVideoArchivedMedia
     class HLSFragmentSelector < Struct.new(
       :fragment_selector_type,
       :timestamp_range)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1001,6 +1017,7 @@ module Aws::KinesisVideoArchivedMedia
     class HLSTimestampRange < Struct.new(
       :start_timestamp,
       :end_timestamp)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1014,6 +1031,7 @@ module Aws::KinesisVideoArchivedMedia
     #
     class InvalidArgumentException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1027,6 +1045,7 @@ module Aws::KinesisVideoArchivedMedia
     #
     class InvalidCodecPrivateDataException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1040,6 +1059,7 @@ module Aws::KinesisVideoArchivedMedia
     #
     class InvalidMediaFrameException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1087,6 +1107,7 @@ module Aws::KinesisVideoArchivedMedia
       :max_results,
       :next_token,
       :fragment_selector)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1107,6 +1128,7 @@ module Aws::KinesisVideoArchivedMedia
     class ListFragmentsOutput < Struct.new(
       :fragments,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1120,6 +1142,7 @@ module Aws::KinesisVideoArchivedMedia
     #
     class MissingCodecPrivateDataException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1133,6 +1156,7 @@ module Aws::KinesisVideoArchivedMedia
     #
     class NoDataRetentionException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1146,6 +1170,7 @@ module Aws::KinesisVideoArchivedMedia
     #
     class NotAuthorizedException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1166,6 +1191,7 @@ module Aws::KinesisVideoArchivedMedia
     #
     class ResourceNotFoundException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1194,6 +1220,7 @@ module Aws::KinesisVideoArchivedMedia
     class TimestampRange < Struct.new(
       :start_timestamp,
       :end_timestamp)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1210,6 +1237,7 @@ module Aws::KinesisVideoArchivedMedia
     #
     class UnsupportedStreamMediaTypeException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 

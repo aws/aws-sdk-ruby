@@ -47,6 +47,6 @@ require_relative 'aws-sdk-textract/customizations'
 # @service
 module Aws::Textract
 
-  GEM_VERSION = '1.16.1'
+  GEM_VERSION = '1.17.0'
 
 end

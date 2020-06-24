@@ -59,6 +59,7 @@ module Aws::SavingsPlans
       :upfront_payment_amount,
       :client_token,
       :tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -70,6 +71,7 @@ module Aws::SavingsPlans
     #
     class CreateSavingsPlanResponse < Struct.new(
       :savings_plan_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -113,6 +115,7 @@ module Aws::SavingsPlans
       :filters,
       :next_token,
       :max_results)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -135,6 +138,7 @@ module Aws::SavingsPlans
       :savings_plan_id,
       :search_results,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -214,6 +218,7 @@ module Aws::SavingsPlans
       :filters,
       :next_token,
       :max_results)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -231,6 +236,7 @@ module Aws::SavingsPlans
     class DescribeSavingsPlansOfferingRatesResponse < Struct.new(
       :search_results,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -328,6 +334,7 @@ module Aws::SavingsPlans
       :filters,
       :next_token,
       :max_results)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -345,6 +352,7 @@ module Aws::SavingsPlans
     class DescribeSavingsPlansOfferingsResponse < Struct.new(
       :search_results,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -400,6 +408,7 @@ module Aws::SavingsPlans
       :max_results,
       :states,
       :filters)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -417,6 +426,7 @@ module Aws::SavingsPlans
     class DescribeSavingsPlansResponse < Struct.new(
       :savings_plans,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -429,6 +439,7 @@ module Aws::SavingsPlans
     #
     class InternalServerException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -447,6 +458,7 @@ module Aws::SavingsPlans
     #
     class ListTagsForResourceRequest < Struct.new(
       :resource_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -458,6 +470,7 @@ module Aws::SavingsPlans
     #
     class ListTagsForResourceResponse < Struct.new(
       :tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -496,6 +509,7 @@ module Aws::SavingsPlans
       :duration_seconds,
       :currency,
       :plan_description)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -508,6 +522,7 @@ module Aws::SavingsPlans
     #
     class ResourceNotFoundException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -606,6 +621,7 @@ module Aws::SavingsPlans
       :recurring_payment_amount,
       :term_duration_in_seconds,
       :tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -632,6 +648,7 @@ module Aws::SavingsPlans
     class SavingsPlanFilter < Struct.new(
       :name,
       :values)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -695,6 +712,7 @@ module Aws::SavingsPlans
       :usage_type,
       :operation,
       :properties)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -721,6 +739,7 @@ module Aws::SavingsPlans
     class SavingsPlanOfferingFilterElement < Struct.new(
       :name,
       :values)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -739,6 +758,7 @@ module Aws::SavingsPlans
     class SavingsPlanOfferingProperty < Struct.new(
       :name,
       :value)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -787,6 +807,7 @@ module Aws::SavingsPlans
       :usage_type,
       :operation,
       :properties)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -813,6 +834,7 @@ module Aws::SavingsPlans
     class SavingsPlanOfferingRateFilterElement < Struct.new(
       :name,
       :values)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -831,6 +853,7 @@ module Aws::SavingsPlans
     class SavingsPlanOfferingRateProperty < Struct.new(
       :name,
       :value)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -879,6 +902,7 @@ module Aws::SavingsPlans
       :usage_type,
       :operation,
       :properties)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -905,6 +929,7 @@ module Aws::SavingsPlans
     class SavingsPlanRateFilter < Struct.new(
       :name,
       :values)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -923,6 +948,7 @@ module Aws::SavingsPlans
     class SavingsPlanRateProperty < Struct.new(
       :name,
       :value)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -935,6 +961,7 @@ module Aws::SavingsPlans
     #
     class ServiceQuotaExceededException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -962,6 +989,7 @@ module Aws::SavingsPlans
     class TagResourceRequest < Struct.new(
       :resource_arn,
       :tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -990,6 +1018,7 @@ module Aws::SavingsPlans
     class UntagResourceRequest < Struct.new(
       :resource_arn,
       :tag_keys)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1006,6 +1035,7 @@ module Aws::SavingsPlans
     #
     class ValidationException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 

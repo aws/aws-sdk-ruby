@@ -33,6 +33,7 @@ module Aws::Neptune
     class AddRoleToDBClusterMessage < Struct.new(
       :db_cluster_identifier,
       :role_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -72,6 +73,7 @@ module Aws::Neptune
     class AddSourceIdentifierToSubscriptionMessage < Struct.new(
       :subscription_name,
       :source_identifier)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -84,6 +86,7 @@ module Aws::Neptune
     #
     class AddSourceIdentifierToSubscriptionResult < Struct.new(
       :event_subscription)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -119,6 +122,7 @@ module Aws::Neptune
     class AddTagsToResourceMessage < Struct.new(
       :resource_name,
       :tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -169,6 +173,7 @@ module Aws::Neptune
       :resource_identifier,
       :apply_action,
       :opt_in_type)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -180,6 +185,7 @@ module Aws::Neptune
     #
     class ApplyPendingMaintenanceActionResult < Struct.new(
       :resource_pending_maintenance_actions)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -203,6 +209,7 @@ module Aws::Neptune
     #
     class AvailabilityZone < Struct.new(
       :name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -227,6 +234,7 @@ module Aws::Neptune
     class CharacterSet < Struct.new(
       :character_set_name,
       :character_set_description)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -257,6 +265,7 @@ module Aws::Neptune
     class CloudwatchLogsExportConfiguration < Struct.new(
       :enable_log_types,
       :disable_log_types)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -329,6 +338,7 @@ module Aws::Neptune
       :target_db_cluster_parameter_group_identifier,
       :target_db_cluster_parameter_group_description,
       :tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -344,6 +354,7 @@ module Aws::Neptune
     #
     class CopyDBClusterParameterGroupResult < Struct.new(
       :db_cluster_parameter_group)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -440,6 +451,7 @@ module Aws::Neptune
       :pre_signed_url,
       :copy_tags,
       :tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -454,6 +466,7 @@ module Aws::Neptune
     #
     class CopyDBClusterSnapshotResult < Struct.new(
       :db_cluster_snapshot)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -520,6 +533,7 @@ module Aws::Neptune
       :target_db_parameter_group_identifier,
       :target_db_parameter_group_description,
       :tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -534,6 +548,7 @@ module Aws::Neptune
     #
     class CopyDBParameterGroupResult < Struct.new(
       :db_parameter_group)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -820,6 +835,7 @@ module Aws::Neptune
       :enable_iam_database_authentication,
       :enable_cloudwatch_logs_exports,
       :deletion_protection)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -875,6 +891,7 @@ module Aws::Neptune
       :db_parameter_group_family,
       :description,
       :tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -890,6 +907,7 @@ module Aws::Neptune
     #
     class CreateDBClusterParameterGroupResult < Struct.new(
       :db_cluster_parameter_group)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -904,6 +922,7 @@ module Aws::Neptune
     #
     class CreateDBClusterResult < Struct.new(
       :db_cluster)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -959,6 +978,7 @@ module Aws::Neptune
       :db_cluster_snapshot_identifier,
       :db_cluster_identifier,
       :tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -973,6 +993,7 @@ module Aws::Neptune
     #
     class CreateDBClusterSnapshotResult < Struct.new(
       :db_cluster_snapshot)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1410,6 +1431,7 @@ module Aws::Neptune
       :performance_insights_kms_key_id,
       :enable_cloudwatch_logs_exports,
       :deletion_protection)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1424,6 +1446,7 @@ module Aws::Neptune
     #
     class CreateDBInstanceResult < Struct.new(
       :db_instance)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1480,6 +1503,7 @@ module Aws::Neptune
       :db_parameter_group_family,
       :description,
       :tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1494,6 +1518,7 @@ module Aws::Neptune
     #
     class CreateDBParameterGroupResult < Struct.new(
       :db_parameter_group)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1541,6 +1566,7 @@ module Aws::Neptune
       :db_subnet_group_description,
       :subnet_ids,
       :tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1555,6 +1581,7 @@ module Aws::Neptune
     #
     class CreateDBSubnetGroupResult < Struct.new(
       :db_subnet_group)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1647,6 +1674,7 @@ module Aws::Neptune
       :source_ids,
       :enabled,
       :tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1659,6 +1687,7 @@ module Aws::Neptune
     #
     class CreateEventSubscriptionResult < Struct.new(
       :event_subscription)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1899,6 +1928,7 @@ module Aws::Neptune
       :cluster_create_time,
       :enabled_cloudwatch_logs_exports,
       :deletion_protection)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1937,6 +1967,7 @@ module Aws::Neptune
       :is_cluster_writer,
       :db_cluster_parameter_group_status,
       :promotion_tier)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1954,6 +1985,7 @@ module Aws::Neptune
     class DBClusterMessage < Struct.new(
       :marker,
       :db_clusters)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1978,6 +2010,7 @@ module Aws::Neptune
     class DBClusterOptionGroupStatus < Struct.new(
       :db_cluster_option_group_name,
       :status)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2011,6 +2044,7 @@ module Aws::Neptune
       :db_parameter_group_family,
       :description,
       :db_cluster_parameter_group_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2030,6 +2064,7 @@ module Aws::Neptune
     class DBClusterParameterGroupDetails < Struct.new(
       :parameters,
       :marker)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2053,6 +2088,7 @@ module Aws::Neptune
     #
     class DBClusterParameterGroupNameMessage < Struct.new(
       :db_cluster_parameter_group_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2079,6 +2115,7 @@ module Aws::Neptune
     class DBClusterParameterGroupsMessage < Struct.new(
       :marker,
       :db_cluster_parameter_groups)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2117,6 +2154,7 @@ module Aws::Neptune
     class DBClusterRole < Struct.new(
       :role_arn,
       :status)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2275,6 +2313,7 @@ module Aws::Neptune
       :db_cluster_snapshot_arn,
       :source_db_cluster_snapshot_arn,
       :iam_database_authentication_enabled)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2315,6 +2354,7 @@ module Aws::Neptune
     class DBClusterSnapshotAttribute < Struct.new(
       :attribute_name,
       :attribute_values)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2340,6 +2380,7 @@ module Aws::Neptune
     class DBClusterSnapshotAttributesResult < Struct.new(
       :db_cluster_snapshot_identifier,
       :db_cluster_snapshot_attributes)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2359,6 +2400,7 @@ module Aws::Neptune
     class DBClusterSnapshotMessage < Struct.new(
       :marker,
       :db_cluster_snapshots)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2440,6 +2482,7 @@ module Aws::Neptune
       :exportable_log_types,
       :supports_log_exports_to_cloudwatch_logs,
       :supports_read_replica)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2458,6 +2501,7 @@ module Aws::Neptune
     class DBEngineVersionMessage < Struct.new(
       :marker,
       :db_engine_versions)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2778,6 +2822,7 @@ module Aws::Neptune
       :performance_insights_kms_key_id,
       :enabled_cloudwatch_logs_exports,
       :deletion_protection)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2802,6 +2847,7 @@ module Aws::Neptune
     class DBInstanceMessage < Struct.new(
       :marker,
       :db_instances)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2839,6 +2885,7 @@ module Aws::Neptune
       :normal,
       :status,
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2872,6 +2919,7 @@ module Aws::Neptune
       :db_parameter_group_family,
       :description,
       :db_parameter_group_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2896,6 +2944,7 @@ module Aws::Neptune
     class DBParameterGroupDetails < Struct.new(
       :parameters,
       :marker)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2907,6 +2956,7 @@ module Aws::Neptune
     #
     class DBParameterGroupNameMessage < Struct.new(
       :db_parameter_group_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2949,6 +2999,7 @@ module Aws::Neptune
     class DBParameterGroupStatus < Struct.new(
       :db_parameter_group_name,
       :parameter_apply_status)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2967,6 +3018,7 @@ module Aws::Neptune
     class DBParameterGroupsMessage < Struct.new(
       :marker,
       :db_parameter_groups)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2985,6 +3037,7 @@ module Aws::Neptune
     class DBSecurityGroupMembership < Struct.new(
       :db_security_group_name,
       :status)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3044,6 +3097,7 @@ module Aws::Neptune
       :subnet_group_status,
       :subnets,
       :db_subnet_group_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3075,6 +3129,7 @@ module Aws::Neptune
     class DBSubnetGroupMessage < Struct.new(
       :marker,
       :db_subnet_groups)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3163,6 +3218,7 @@ module Aws::Neptune
       :db_cluster_identifier,
       :skip_final_snapshot,
       :final_db_snapshot_identifier)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3189,6 +3245,7 @@ module Aws::Neptune
     #
     class DeleteDBClusterParameterGroupMessage < Struct.new(
       :db_cluster_parameter_group_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3203,6 +3260,7 @@ module Aws::Neptune
     #
     class DeleteDBClusterResult < Struct.new(
       :db_cluster)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3224,6 +3282,7 @@ module Aws::Neptune
     #
     class DeleteDBClusterSnapshotMessage < Struct.new(
       :db_cluster_snapshot_identifier)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3238,6 +3297,7 @@ module Aws::Neptune
     #
     class DeleteDBClusterSnapshotResult < Struct.new(
       :db_cluster_snapshot)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3308,6 +3368,7 @@ module Aws::Neptune
       :db_instance_identifier,
       :skip_final_snapshot,
       :final_db_snapshot_identifier)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3322,6 +3383,7 @@ module Aws::Neptune
     #
     class DeleteDBInstanceResult < Struct.new(
       :db_instance)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3348,6 +3410,7 @@ module Aws::Neptune
     #
     class DeleteDBParameterGroupMessage < Struct.new(
       :db_parameter_group_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3377,6 +3440,7 @@ module Aws::Neptune
     #
     class DeleteDBSubnetGroupMessage < Struct.new(
       :db_subnet_group_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3395,6 +3459,7 @@ module Aws::Neptune
     #
     class DeleteEventSubscriptionMessage < Struct.new(
       :subscription_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3407,6 +3472,7 @@ module Aws::Neptune
     #
     class DeleteEventSubscriptionResult < Struct.new(
       :event_subscription)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3466,6 +3532,7 @@ module Aws::Neptune
       :filters,
       :max_records,
       :marker)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3532,6 +3599,7 @@ module Aws::Neptune
       :filters,
       :max_records,
       :marker)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3551,6 +3619,7 @@ module Aws::Neptune
     #
     class DescribeDBClusterSnapshotAttributesMessage < Struct.new(
       :db_cluster_snapshot_identifier)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3568,6 +3637,7 @@ module Aws::Neptune
     #
     class DescribeDBClusterSnapshotAttributesResult < Struct.new(
       :db_cluster_snapshot_attributes_result)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3700,6 +3770,7 @@ module Aws::Neptune
       :marker,
       :include_shared,
       :include_public)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3772,6 +3843,7 @@ module Aws::Neptune
       :filters,
       :max_records,
       :marker)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3866,6 +3938,7 @@ module Aws::Neptune
       :default_only,
       :list_supported_character_sets,
       :list_supported_timezones)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3939,6 +4012,7 @@ module Aws::Neptune
       :filters,
       :max_records,
       :marker)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3997,6 +4071,7 @@ module Aws::Neptune
       :filters,
       :max_records,
       :marker)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4064,6 +4139,7 @@ module Aws::Neptune
       :filters,
       :max_records,
       :marker)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4115,6 +4191,7 @@ module Aws::Neptune
       :filters,
       :max_records,
       :marker)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4167,6 +4244,7 @@ module Aws::Neptune
       :filters,
       :max_records,
       :marker)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4179,6 +4257,7 @@ module Aws::Neptune
     #
     class DescribeEngineDefaultClusterParametersResult < Struct.new(
       :engine_defaults)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4230,6 +4309,7 @@ module Aws::Neptune
       :filters,
       :max_records,
       :marker)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4242,6 +4322,7 @@ module Aws::Neptune
     #
     class DescribeEngineDefaultParametersResult < Struct.new(
       :engine_defaults)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4274,6 +4355,7 @@ module Aws::Neptune
     class DescribeEventCategoriesMessage < Struct.new(
       :source_type,
       :filters)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4326,6 +4408,7 @@ module Aws::Neptune
       :filters,
       :max_records,
       :marker)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4446,6 +4529,7 @@ module Aws::Neptune
       :filters,
       :max_records,
       :marker)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4526,6 +4610,7 @@ module Aws::Neptune
       :filters,
       :max_records,
       :marker)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4589,6 +4674,7 @@ module Aws::Neptune
       :filters,
       :marker,
       :max_records)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4607,6 +4693,7 @@ module Aws::Neptune
     #
     class DescribeValidDBInstanceModificationsMessage < Struct.new(
       :db_instance_identifier)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4621,6 +4708,7 @@ module Aws::Neptune
     #
     class DescribeValidDBInstanceModificationsResult < Struct.new(
       :valid_db_instance_modifications_message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4652,6 +4740,7 @@ module Aws::Neptune
       :status,
       :fqdn,
       :iam_role_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4676,6 +4765,7 @@ module Aws::Neptune
     class DoubleRange < Struct.new(
       :from,
       :to)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4700,6 +4790,7 @@ module Aws::Neptune
       :address,
       :port,
       :hosted_zone_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4728,6 +4819,7 @@ module Aws::Neptune
       :db_parameter_group_family,
       :marker,
       :parameters)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4767,6 +4859,7 @@ module Aws::Neptune
       :event_categories,
       :date,
       :source_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4786,6 +4879,7 @@ module Aws::Neptune
     class EventCategoriesMap < Struct.new(
       :source_type,
       :event_categories)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4797,6 +4891,7 @@ module Aws::Neptune
     #
     class EventCategoriesMessage < Struct.new(
       :event_categories_map_list)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4868,6 +4963,7 @@ module Aws::Neptune
       :event_categories_list,
       :enabled,
       :event_subscription_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4893,6 +4989,7 @@ module Aws::Neptune
     class EventSubscriptionsMessage < Struct.new(
       :marker,
       :event_subscriptions_list)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4911,6 +5008,7 @@ module Aws::Neptune
     class EventsMessage < Struct.new(
       :marker,
       :events)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4945,6 +5043,7 @@ module Aws::Neptune
     class FailoverDBClusterMessage < Struct.new(
       :db_cluster_identifier,
       :target_db_instance_identifier)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4959,6 +5058,7 @@ module Aws::Neptune
     #
     class FailoverDBClusterResult < Struct.new(
       :db_cluster)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4985,6 +5085,7 @@ module Aws::Neptune
     class Filter < Struct.new(
       :name,
       :values)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5131,6 +5232,7 @@ module Aws::Neptune
     class ListTagsForResourceMessage < Struct.new(
       :resource_name,
       :filters)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5323,6 +5425,7 @@ module Aws::Neptune
       :cloudwatch_logs_export_configuration,
       :engine_version,
       :deletion_protection)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5360,6 +5463,7 @@ module Aws::Neptune
     class ModifyDBClusterParameterGroupMessage < Struct.new(
       :db_cluster_parameter_group_name,
       :parameters)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5374,6 +5478,7 @@ module Aws::Neptune
     #
     class ModifyDBClusterResult < Struct.new(
       :db_cluster)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5431,6 +5536,7 @@ module Aws::Neptune
       :attribute_name,
       :values_to_add,
       :values_to_remove)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5448,6 +5554,7 @@ module Aws::Neptune
     #
     class ModifyDBClusterSnapshotAttributeResult < Struct.new(
       :db_cluster_snapshot_attributes_result)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5872,6 +5979,7 @@ module Aws::Neptune
       :performance_insights_kms_key_id,
       :cloudwatch_logs_export_configuration,
       :deletion_protection)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5886,6 +5994,7 @@ module Aws::Neptune
     #
     class ModifyDBInstanceResult < Struct.new(
       :db_instance)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5942,6 +6051,7 @@ module Aws::Neptune
     class ModifyDBParameterGroupMessage < Struct.new(
       :db_parameter_group_name,
       :parameters)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5978,6 +6088,7 @@ module Aws::Neptune
       :db_subnet_group_name,
       :db_subnet_group_description,
       :subnet_ids)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5992,6 +6103,7 @@ module Aws::Neptune
     #
     class ModifyDBSubnetGroupResult < Struct.new(
       :db_subnet_group)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6044,6 +6156,7 @@ module Aws::Neptune
       :source_type,
       :event_categories,
       :enabled)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6056,6 +6169,7 @@ module Aws::Neptune
     #
     class ModifyEventSubscriptionResult < Struct.new(
       :event_subscription)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6078,6 +6192,7 @@ module Aws::Neptune
     class OptionGroupMembership < Struct.new(
       :option_group_name,
       :status)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6197,6 +6312,7 @@ module Aws::Neptune
       :max_iops_per_db_instance,
       :min_iops_per_gib,
       :max_iops_per_gib)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6217,6 +6333,7 @@ module Aws::Neptune
     class OrderableDBInstanceOptionsMessage < Struct.new(
       :orderable_db_instance_options,
       :marker)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6293,6 +6410,7 @@ module Aws::Neptune
       :is_modifiable,
       :minimum_engine_version,
       :apply_method)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6316,6 +6434,7 @@ module Aws::Neptune
     class PendingCloudwatchLogsExports < Struct.new(
       :log_types_to_enable,
       :log_types_to_disable)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6368,6 +6487,7 @@ module Aws::Neptune
       :opt_in_status,
       :current_apply_date,
       :description)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6387,6 +6507,7 @@ module Aws::Neptune
     class PendingMaintenanceActionsMessage < Struct.new(
       :pending_maintenance_actions,
       :marker)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6477,6 +6598,7 @@ module Aws::Neptune
       :ca_certificate_identifier,
       :db_subnet_group_name,
       :pending_cloudwatch_logs_exports)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6495,6 +6617,7 @@ module Aws::Neptune
     #
     class PromoteReadReplicaDBClusterMessage < Struct.new(
       :db_cluster_identifier)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6509,6 +6632,7 @@ module Aws::Neptune
     #
     class PromoteReadReplicaDBClusterResult < Struct.new(
       :db_cluster)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6542,6 +6666,7 @@ module Aws::Neptune
       :from,
       :to,
       :step)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6576,6 +6701,7 @@ module Aws::Neptune
     class RebootDBInstanceMessage < Struct.new(
       :db_instance_identifier,
       :force_failover)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6590,6 +6716,7 @@ module Aws::Neptune
     #
     class RebootDBInstanceResult < Struct.new(
       :db_instance)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6616,6 +6743,7 @@ module Aws::Neptune
     class RemoveRoleFromDBClusterMessage < Struct.new(
       :db_cluster_identifier,
       :role_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6643,6 +6771,7 @@ module Aws::Neptune
     class RemoveSourceIdentifierFromSubscriptionMessage < Struct.new(
       :subscription_name,
       :source_identifier)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6655,6 +6784,7 @@ module Aws::Neptune
     #
     class RemoveSourceIdentifierFromSubscriptionResult < Struct.new(
       :event_subscription)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6686,6 +6816,7 @@ module Aws::Neptune
     class RemoveTagsFromResourceMessage < Struct.new(
       :resource_name,
       :tag_keys)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6734,6 +6865,7 @@ module Aws::Neptune
       :db_cluster_parameter_group_name,
       :reset_all_parameters,
       :parameters)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6792,6 +6924,7 @@ module Aws::Neptune
       :db_parameter_group_name,
       :reset_all_parameters,
       :parameters)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6817,6 +6950,7 @@ module Aws::Neptune
     class ResourcePendingMaintenanceActions < Struct.new(
       :resource_identifier,
       :pending_maintenance_action_details)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6999,6 +7133,7 @@ module Aws::Neptune
       :enable_cloudwatch_logs_exports,
       :db_cluster_parameter_group_name,
       :deletion_protection)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -7013,6 +7148,7 @@ module Aws::Neptune
     #
     class RestoreDBClusterFromSnapshotResult < Struct.new(
       :db_cluster)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -7214,6 +7350,7 @@ module Aws::Neptune
       :enable_cloudwatch_logs_exports,
       :db_cluster_parameter_group_name,
       :deletion_protection)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -7228,6 +7365,7 @@ module Aws::Neptune
     #
     class RestoreDBClusterToPointInTimeResult < Struct.new(
       :db_cluster)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -7285,6 +7423,7 @@ module Aws::Neptune
     #
     class StartDBClusterMessage < Struct.new(
       :db_cluster_identifier)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -7299,6 +7438,7 @@ module Aws::Neptune
     #
     class StartDBClusterResult < Struct.new(
       :db_cluster)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -7318,6 +7458,7 @@ module Aws::Neptune
     #
     class StopDBClusterMessage < Struct.new(
       :db_cluster_identifier)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -7332,6 +7473,7 @@ module Aws::Neptune
     #
     class StopDBClusterResult < Struct.new(
       :db_cluster)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -7371,6 +7513,7 @@ module Aws::Neptune
       :subnet_identifier,
       :subnet_availability_zone,
       :subnet_status)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -7432,6 +7575,7 @@ module Aws::Neptune
     class Tag < Struct.new(
       :key,
       :value)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -7443,6 +7587,7 @@ module Aws::Neptune
     #
     class TagListMessage < Struct.new(
       :tag_list)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -7456,6 +7601,7 @@ module Aws::Neptune
     #
     class Timezone < Struct.new(
       :timezone_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -7493,6 +7639,7 @@ module Aws::Neptune
       :description,
       :auto_upgrade,
       :is_major_version_upgrade)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -7509,6 +7656,7 @@ module Aws::Neptune
     #
     class ValidDBInstanceModificationsMessage < Struct.new(
       :storage)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -7543,6 +7691,7 @@ module Aws::Neptune
       :storage_size,
       :provisioned_iops,
       :iops_to_storage_ratio)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -7562,6 +7711,7 @@ module Aws::Neptune
     class VpcSecurityGroupMembership < Struct.new(
       :vpc_security_group_id,
       :status)
+      SENSITIVE = []
       include Aws::Structure
     end
 

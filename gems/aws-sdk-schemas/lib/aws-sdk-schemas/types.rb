@@ -21,6 +21,7 @@ module Aws::Schemas
     class BadRequestException < Struct.new(
       :code,
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -47,6 +48,7 @@ module Aws::Schemas
       :last_modified,
       :schema_version,
       :status)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -61,6 +63,7 @@ module Aws::Schemas
     class ConflictException < Struct.new(
       :code,
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -82,6 +85,7 @@ module Aws::Schemas
       :description,
       :source_arn,
       :tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -112,6 +116,7 @@ module Aws::Schemas
       :description,
       :source_arn,
       :tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -143,6 +148,7 @@ module Aws::Schemas
       :source_arn,
       :state,
       :tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -159,6 +165,7 @@ module Aws::Schemas
     class CreateRegistryInput < Struct.new(
       :description,
       :tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -189,6 +196,7 @@ module Aws::Schemas
       :description,
       :registry_name,
       :tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -212,6 +220,7 @@ module Aws::Schemas
       :registry_arn,
       :registry_name,
       :tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -238,6 +247,7 @@ module Aws::Schemas
       :description,
       :tags,
       :type)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -283,6 +293,7 @@ module Aws::Schemas
       :schema_name,
       :tags,
       :type)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -322,6 +333,7 @@ module Aws::Schemas
       :tags,
       :type,
       :version_created_date)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -339,6 +351,7 @@ module Aws::Schemas
     #
     class DeleteDiscovererRequest < Struct.new(
       :discoverer_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -356,6 +369,7 @@ module Aws::Schemas
     #
     class DeleteRegistryRequest < Struct.new(
       :registry_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -373,6 +387,7 @@ module Aws::Schemas
     #
     class DeleteResourcePolicyRequest < Struct.new(
       :registry_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -395,6 +410,7 @@ module Aws::Schemas
     class DeleteSchemaRequest < Struct.new(
       :registry_name,
       :schema_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -422,6 +438,7 @@ module Aws::Schemas
       :registry_name,
       :schema_name,
       :schema_version)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -454,6 +471,7 @@ module Aws::Schemas
       :registry_name,
       :schema_name,
       :schema_version)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -476,6 +494,7 @@ module Aws::Schemas
       :last_modified,
       :schema_version,
       :status)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -493,6 +512,7 @@ module Aws::Schemas
     #
     class DescribeDiscovererRequest < Struct.new(
       :discoverer_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -524,6 +544,7 @@ module Aws::Schemas
       :source_arn,
       :state,
       :tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -541,6 +562,7 @@ module Aws::Schemas
     #
     class DescribeRegistryRequest < Struct.new(
       :registry_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -564,6 +586,7 @@ module Aws::Schemas
       :registry_arn,
       :registry_name,
       :tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -615,6 +638,7 @@ module Aws::Schemas
       :tags,
       :type,
       :version_created_date)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -642,6 +666,7 @@ module Aws::Schemas
       :registry_name,
       :schema_name,
       :schema_version)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -685,6 +710,7 @@ module Aws::Schemas
       :tags,
       :type,
       :version_created_date)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -721,6 +747,7 @@ module Aws::Schemas
       :source_arn,
       :state,
       :tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -737,6 +764,7 @@ module Aws::Schemas
     class DiscovererStateOutput < Struct.new(
       :discoverer_id,
       :state)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -768,6 +796,7 @@ module Aws::Schemas
       :source_arn,
       :state,
       :tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -784,6 +813,7 @@ module Aws::Schemas
     class ErrorOutput < Struct.new(
       :code,
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -798,6 +828,7 @@ module Aws::Schemas
     class ForbiddenException < Struct.new(
       :code,
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -830,6 +861,7 @@ module Aws::Schemas
       :registry_name,
       :schema_name,
       :schema_version)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -840,6 +872,7 @@ module Aws::Schemas
     #
     class GetCodeBindingSourceResponse < Struct.new(
       :body)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -858,6 +891,7 @@ module Aws::Schemas
     class GetDiscoveredSchemaInput < Struct.new(
       :events,
       :type)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -869,6 +903,7 @@ module Aws::Schemas
     #
     class GetDiscoveredSchemaOutput < Struct.new(
       :content)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -891,6 +926,7 @@ module Aws::Schemas
     class GetDiscoveredSchemaRequest < Struct.new(
       :events,
       :type)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -901,6 +937,7 @@ module Aws::Schemas
     #
     class GetDiscoveredSchemaResponse < Struct.new(
       :content)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -919,6 +956,7 @@ module Aws::Schemas
     class GetResourcePolicyOutput < Struct.new(
       :policy,
       :revision_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -936,6 +974,7 @@ module Aws::Schemas
     #
     class GetResourcePolicyRequest < Struct.new(
       :registry_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -950,6 +989,7 @@ module Aws::Schemas
     class GetResourcePolicyResponse < Struct.new(
       :policy,
       :revision_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -964,6 +1004,7 @@ module Aws::Schemas
     class GoneException < Struct.new(
       :code,
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -978,6 +1019,7 @@ module Aws::Schemas
     class InternalServerErrorException < Struct.new(
       :code,
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -996,6 +1038,7 @@ module Aws::Schemas
     class ListDiscoverersOutput < Struct.new(
       :discoverers,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1028,6 +1071,7 @@ module Aws::Schemas
       :limit,
       :next_token,
       :source_arn_prefix)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1042,6 +1086,7 @@ module Aws::Schemas
     class ListDiscoverersResponse < Struct.new(
       :discoverers,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1062,6 +1107,7 @@ module Aws::Schemas
     class ListRegistriesOutput < Struct.new(
       :next_token,
       :registries)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1094,6 +1140,7 @@ module Aws::Schemas
       :next_token,
       :registry_name_prefix,
       :scope)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1108,6 +1155,7 @@ module Aws::Schemas
     class ListRegistriesResponse < Struct.new(
       :next_token,
       :registries)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1126,6 +1174,7 @@ module Aws::Schemas
     class ListSchemaVersionsOutput < Struct.new(
       :next_token,
       :schema_versions)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1158,6 +1207,7 @@ module Aws::Schemas
       :next_token,
       :registry_name,
       :schema_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1172,6 +1222,7 @@ module Aws::Schemas
     class ListSchemaVersionsResponse < Struct.new(
       :next_token,
       :schema_versions)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1190,6 +1241,7 @@ module Aws::Schemas
     class ListSchemasOutput < Struct.new(
       :next_token,
       :schemas)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1222,6 +1274,7 @@ module Aws::Schemas
       :next_token,
       :registry_name,
       :schema_name_prefix)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1236,6 +1289,7 @@ module Aws::Schemas
     class ListSchemasResponse < Struct.new(
       :next_token,
       :schemas)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1247,6 +1301,7 @@ module Aws::Schemas
     #
     class ListTagsForResourceOutput < Struct.new(
       :tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1264,6 +1319,7 @@ module Aws::Schemas
     #
     class ListTagsForResourceRequest < Struct.new(
       :resource_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1275,6 +1331,7 @@ module Aws::Schemas
     #
     class ListTagsForResourceResponse < Struct.new(
       :tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1289,6 +1346,7 @@ module Aws::Schemas
     class LockServiceLinkedRoleInput < Struct.new(
       :role_arn,
       :timeout)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1307,6 +1365,7 @@ module Aws::Schemas
       :can_be_deleted,
       :reason_of_failure,
       :related_resources)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1321,6 +1380,7 @@ module Aws::Schemas
     class LockServiceLinkedRoleRequest < Struct.new(
       :role_arn,
       :timeout)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1339,6 +1399,7 @@ module Aws::Schemas
       :can_be_deleted,
       :reason_of_failure,
       :related_resources)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1353,6 +1414,7 @@ module Aws::Schemas
     class NotFoundException < Struct.new(
       :code,
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1367,6 +1429,7 @@ module Aws::Schemas
     class PreconditionFailedException < Struct.new(
       :code,
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1399,6 +1462,7 @@ module Aws::Schemas
       :registry_name,
       :schema_name,
       :schema_version)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1421,6 +1485,7 @@ module Aws::Schemas
       :last_modified,
       :schema_version,
       :status)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1441,6 +1506,7 @@ module Aws::Schemas
     class PutResourcePolicyInput < Struct.new(
       :policy,
       :revision_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1459,6 +1525,7 @@ module Aws::Schemas
     class PutResourcePolicyOutput < Struct.new(
       :policy,
       :revision_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1486,6 +1553,7 @@ module Aws::Schemas
       :policy,
       :registry_name,
       :revision_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1500,6 +1568,7 @@ module Aws::Schemas
     class PutResourcePolicyResponse < Struct.new(
       :policy,
       :revision_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1526,6 +1595,7 @@ module Aws::Schemas
       :registry_arn,
       :registry_name,
       :tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1547,6 +1617,7 @@ module Aws::Schemas
       :registry_arn,
       :registry_name,
       :tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1593,6 +1664,7 @@ module Aws::Schemas
       :tags,
       :type,
       :version_created_date)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1626,6 +1698,7 @@ module Aws::Schemas
       :schema_name,
       :tags,
       :version_count)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1647,6 +1720,7 @@ module Aws::Schemas
       :schema_arn,
       :schema_name,
       :schema_version)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1673,6 +1747,7 @@ module Aws::Schemas
       :schema_arn,
       :schema_name,
       :schema_versions)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1689,6 +1764,7 @@ module Aws::Schemas
     class SearchSchemaVersionSummary < Struct.new(
       :created_date,
       :schema_version)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1707,6 +1783,7 @@ module Aws::Schemas
     class SearchSchemasOutput < Struct.new(
       :next_token,
       :schemas)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1739,6 +1816,7 @@ module Aws::Schemas
       :limit,
       :next_token,
       :registry_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1753,6 +1831,7 @@ module Aws::Schemas
     class SearchSchemasResponse < Struct.new(
       :next_token,
       :schemas)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1767,6 +1846,7 @@ module Aws::Schemas
     class ServiceUnavailableException < Struct.new(
       :code,
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1784,6 +1864,7 @@ module Aws::Schemas
     #
     class StartDiscovererRequest < Struct.new(
       :discoverer_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1798,6 +1879,7 @@ module Aws::Schemas
     class StartDiscovererResponse < Struct.new(
       :discoverer_id,
       :state)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1815,6 +1897,7 @@ module Aws::Schemas
     #
     class StopDiscovererRequest < Struct.new(
       :discoverer_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1829,6 +1912,7 @@ module Aws::Schemas
     class StopDiscovererResponse < Struct.new(
       :discoverer_id,
       :state)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1840,6 +1924,7 @@ module Aws::Schemas
     #
     class TagResourceInput < Struct.new(
       :tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1865,6 +1950,7 @@ module Aws::Schemas
     class TagResourceRequest < Struct.new(
       :resource_arn,
       :tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1879,6 +1965,7 @@ module Aws::Schemas
     class TooManyRequestsException < Struct.new(
       :code,
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1893,6 +1980,7 @@ module Aws::Schemas
     class UnauthorizedException < Struct.new(
       :code,
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1903,6 +1991,7 @@ module Aws::Schemas
     #
     class UnlockServiceLinkedRoleInput < Struct.new(
       :role_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1913,6 +2002,7 @@ module Aws::Schemas
     #
     class UnlockServiceLinkedRoleRequest < Struct.new(
       :role_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1939,6 +2029,7 @@ module Aws::Schemas
     class UntagResourceRequest < Struct.new(
       :resource_arn,
       :tag_keys)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1950,6 +2041,7 @@ module Aws::Schemas
     #
     class UpdateDiscovererInput < Struct.new(
       :description)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1972,6 +2064,7 @@ module Aws::Schemas
     class UpdateDiscovererRequest < Struct.new(
       :description,
       :discoverer_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2003,6 +2096,7 @@ module Aws::Schemas
       :source_arn,
       :state,
       :tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2014,6 +2108,7 @@ module Aws::Schemas
     #
     class UpdateRegistryInput < Struct.new(
       :description)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2036,6 +2131,7 @@ module Aws::Schemas
     class UpdateRegistryRequest < Struct.new(
       :description,
       :registry_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2059,6 +2155,7 @@ module Aws::Schemas
       :registry_arn,
       :registry_name,
       :tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2088,6 +2185,7 @@ module Aws::Schemas
       :content,
       :description,
       :type)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2132,6 +2230,7 @@ module Aws::Schemas
       :registry_name,
       :schema_name,
       :type)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2171,6 +2270,7 @@ module Aws::Schemas
       :tags,
       :type,
       :version_created_date)
+      SENSITIVE = []
       include Aws::Structure
     end
 

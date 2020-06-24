@@ -19,6 +19,8 @@ module Aws::Rekognition
     Assets = Shapes::ListShape.new(name: 'Assets')
     Attribute = Shapes::StringShape.new(name: 'Attribute')
     Attributes = Shapes::ListShape.new(name: 'Attributes')
+    AudioMetadata = Shapes::StructureShape.new(name: 'AudioMetadata')
+    AudioMetadataList = Shapes::ListShape.new(name: 'AudioMetadataList')
     Beard = Shapes::StructureShape.new(name: 'Beard')
     Boolean = Shapes::BooleanShape.new(name: 'Boolean')
     BoundingBox = Shapes::StructureShape.new(name: 'BoundingBox')
@@ -131,6 +133,8 @@ module Aws::Rekognition
     GetLabelDetectionResponse = Shapes::StructureShape.new(name: 'GetLabelDetectionResponse')
     GetPersonTrackingRequest = Shapes::StructureShape.new(name: 'GetPersonTrackingRequest')
     GetPersonTrackingResponse = Shapes::StructureShape.new(name: 'GetPersonTrackingResponse')
+    GetSegmentDetectionRequest = Shapes::StructureShape.new(name: 'GetSegmentDetectionRequest')
+    GetSegmentDetectionResponse = Shapes::StructureShape.new(name: 'GetSegmentDetectionResponse')
     GetTextDetectionRequest = Shapes::StructureShape.new(name: 'GetTextDetectionRequest')
     GetTextDetectionResponse = Shapes::StructureShape.new(name: 'GetTextDetectionResponse')
     GroundTruthManifest = Shapes::StructureShape.new(name: 'GroundTruthManifest')
@@ -240,6 +244,14 @@ module Aws::Rekognition
     SearchFacesByImageResponse = Shapes::StructureShape.new(name: 'SearchFacesByImageResponse')
     SearchFacesRequest = Shapes::StructureShape.new(name: 'SearchFacesRequest')
     SearchFacesResponse = Shapes::StructureShape.new(name: 'SearchFacesResponse')
+    SegmentConfidence = Shapes::FloatShape.new(name: 'SegmentConfidence')
+    SegmentDetection = Shapes::StructureShape.new(name: 'SegmentDetection')
+    SegmentDetections = Shapes::ListShape.new(name: 'SegmentDetections')
+    SegmentType = Shapes::StringShape.new(name: 'SegmentType')
+    SegmentTypeInfo = Shapes::StructureShape.new(name: 'SegmentTypeInfo')
+    SegmentTypes = Shapes::ListShape.new(name: 'SegmentTypes')
+    SegmentTypesInfo = Shapes::ListShape.new(name: 'SegmentTypesInfo')
+    ShotSegment = Shapes::StructureShape.new(name: 'ShotSegment')
     Smile = Shapes::StructureShape.new(name: 'Smile')
     StartCelebrityRecognitionRequest = Shapes::StructureShape.new(name: 'StartCelebrityRecognitionRequest')
     StartCelebrityRecognitionResponse = Shapes::StructureShape.new(name: 'StartCelebrityRecognitionResponse')
@@ -255,8 +267,13 @@ module Aws::Rekognition
     StartPersonTrackingResponse = Shapes::StructureShape.new(name: 'StartPersonTrackingResponse')
     StartProjectVersionRequest = Shapes::StructureShape.new(name: 'StartProjectVersionRequest')
     StartProjectVersionResponse = Shapes::StructureShape.new(name: 'StartProjectVersionResponse')
+    StartSegmentDetectionFilters = Shapes::StructureShape.new(name: 'StartSegmentDetectionFilters')
+    StartSegmentDetectionRequest = Shapes::StructureShape.new(name: 'StartSegmentDetectionRequest')
+    StartSegmentDetectionResponse = Shapes::StructureShape.new(name: 'StartSegmentDetectionResponse')
+    StartShotDetectionFilter = Shapes::StructureShape.new(name: 'StartShotDetectionFilter')
     StartStreamProcessorRequest = Shapes::StructureShape.new(name: 'StartStreamProcessorRequest')
     StartStreamProcessorResponse = Shapes::StructureShape.new(name: 'StartStreamProcessorResponse')
+    StartTechnicalCueDetectionFilter = Shapes::StructureShape.new(name: 'StartTechnicalCueDetectionFilter')
     StartTextDetectionFilters = Shapes::StructureShape.new(name: 'StartTextDetectionFilters')
     StartTextDetectionRequest = Shapes::StructureShape.new(name: 'StartTextDetectionRequest')
     StartTextDetectionResponse = Shapes::StructureShape.new(name: 'StartTextDetectionResponse')
@@ -276,6 +293,8 @@ module Aws::Rekognition
     String = Shapes::StringShape.new(name: 'String')
     Summary = Shapes::StructureShape.new(name: 'Summary')
     Sunglasses = Shapes::StructureShape.new(name: 'Sunglasses')
+    TechnicalCueSegment = Shapes::StructureShape.new(name: 'TechnicalCueSegment')
+    TechnicalCueType = Shapes::StringShape.new(name: 'TechnicalCueType')
     TestingData = Shapes::StructureShape.new(name: 'TestingData')
     TestingDataResult = Shapes::StructureShape.new(name: 'TestingDataResult')
     TextDetection = Shapes::StructureShape.new(name: 'TextDetection')
@@ -284,6 +303,7 @@ module Aws::Rekognition
     TextDetectionResults = Shapes::ListShape.new(name: 'TextDetectionResults')
     TextTypes = Shapes::StringShape.new(name: 'TextTypes')
     ThrottlingException = Shapes::StructureShape.new(name: 'ThrottlingException')
+    Timecode = Shapes::StringShape.new(name: 'Timecode')
     Timestamp = Shapes::IntegerShape.new(name: 'Timestamp')
     TrainingData = Shapes::StructureShape.new(name: 'TrainingData')
     TrainingDataResult = Shapes::StructureShape.new(name: 'TrainingDataResult')
@@ -298,6 +318,7 @@ module Aws::Rekognition
     Video = Shapes::StructureShape.new(name: 'Video')
     VideoJobStatus = Shapes::StringShape.new(name: 'VideoJobStatus')
     VideoMetadata = Shapes::StructureShape.new(name: 'VideoMetadata')
+    VideoMetadataList = Shapes::ListShape.new(name: 'VideoMetadataList')
     VideoTooLargeException = Shapes::StructureShape.new(name: 'VideoTooLargeException')
 
     AccessDeniedException.struct_class = Types::AccessDeniedException
@@ -312,6 +333,14 @@ module Aws::Rekognition
     Assets.member = Shapes::ShapeRef.new(shape: Asset)
 
     Attributes.member = Shapes::ShapeRef.new(shape: Attribute)
+
+    AudioMetadata.add_member(:codec, Shapes::ShapeRef.new(shape: String, location_name: "Codec"))
+    AudioMetadata.add_member(:duration_millis, Shapes::ShapeRef.new(shape: ULong, location_name: "DurationMillis"))
+    AudioMetadata.add_member(:sample_rate, Shapes::ShapeRef.new(shape: ULong, location_name: "SampleRate"))
+    AudioMetadata.add_member(:number_of_channels, Shapes::ShapeRef.new(shape: ULong, location_name: "NumberOfChannels"))
+    AudioMetadata.struct_class = Types::AudioMetadata
+
+    AudioMetadataList.member = Shapes::ShapeRef.new(shape: AudioMetadata)
 
     Beard.add_member(:value, Shapes::ShapeRef.new(shape: Boolean, location_name: "Value"))
     Beard.add_member(:confidence, Shapes::ShapeRef.new(shape: Percent, location_name: "Confidence"))
@@ -723,6 +752,20 @@ module Aws::Rekognition
     GetPersonTrackingResponse.add_member(:persons, Shapes::ShapeRef.new(shape: PersonDetections, location_name: "Persons"))
     GetPersonTrackingResponse.struct_class = Types::GetPersonTrackingResponse
 
+    GetSegmentDetectionRequest.add_member(:job_id, Shapes::ShapeRef.new(shape: JobId, required: true, location_name: "JobId"))
+    GetSegmentDetectionRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location_name: "MaxResults"))
+    GetSegmentDetectionRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location_name: "NextToken"))
+    GetSegmentDetectionRequest.struct_class = Types::GetSegmentDetectionRequest
+
+    GetSegmentDetectionResponse.add_member(:job_status, Shapes::ShapeRef.new(shape: VideoJobStatus, location_name: "JobStatus"))
+    GetSegmentDetectionResponse.add_member(:status_message, Shapes::ShapeRef.new(shape: StatusMessage, location_name: "StatusMessage"))
+    GetSegmentDetectionResponse.add_member(:video_metadata, Shapes::ShapeRef.new(shape: VideoMetadataList, location_name: "VideoMetadata"))
+    GetSegmentDetectionResponse.add_member(:audio_metadata, Shapes::ShapeRef.new(shape: AudioMetadataList, location_name: "AudioMetadata"))
+    GetSegmentDetectionResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location_name: "NextToken"))
+    GetSegmentDetectionResponse.add_member(:segments, Shapes::ShapeRef.new(shape: SegmentDetections, location_name: "Segments"))
+    GetSegmentDetectionResponse.add_member(:selected_segment_types, Shapes::ShapeRef.new(shape: SegmentTypesInfo, location_name: "SelectedSegmentTypes"))
+    GetSegmentDetectionResponse.struct_class = Types::GetSegmentDetectionResponse
+
     GetTextDetectionRequest.add_member(:job_id, Shapes::ShapeRef.new(shape: JobId, required: true, location_name: "JobId"))
     GetTextDetectionRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location_name: "MaxResults"))
     GetTextDetectionRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location_name: "NextToken"))
@@ -990,6 +1033,31 @@ module Aws::Rekognition
     SearchFacesResponse.add_member(:face_model_version, Shapes::ShapeRef.new(shape: String, location_name: "FaceModelVersion"))
     SearchFacesResponse.struct_class = Types::SearchFacesResponse
 
+    SegmentDetection.add_member(:type, Shapes::ShapeRef.new(shape: SegmentType, location_name: "Type"))
+    SegmentDetection.add_member(:start_timestamp_millis, Shapes::ShapeRef.new(shape: Timestamp, location_name: "StartTimestampMillis"))
+    SegmentDetection.add_member(:end_timestamp_millis, Shapes::ShapeRef.new(shape: Timestamp, location_name: "EndTimestampMillis"))
+    SegmentDetection.add_member(:duration_millis, Shapes::ShapeRef.new(shape: ULong, location_name: "DurationMillis"))
+    SegmentDetection.add_member(:start_timecode_smpte, Shapes::ShapeRef.new(shape: Timecode, location_name: "StartTimecodeSMPTE"))
+    SegmentDetection.add_member(:end_timecode_smpte, Shapes::ShapeRef.new(shape: Timecode, location_name: "EndTimecodeSMPTE"))
+    SegmentDetection.add_member(:duration_smpte, Shapes::ShapeRef.new(shape: Timecode, location_name: "DurationSMPTE"))
+    SegmentDetection.add_member(:technical_cue_segment, Shapes::ShapeRef.new(shape: TechnicalCueSegment, location_name: "TechnicalCueSegment"))
+    SegmentDetection.add_member(:shot_segment, Shapes::ShapeRef.new(shape: ShotSegment, location_name: "ShotSegment"))
+    SegmentDetection.struct_class = Types::SegmentDetection
+
+    SegmentDetections.member = Shapes::ShapeRef.new(shape: SegmentDetection)
+
+    SegmentTypeInfo.add_member(:type, Shapes::ShapeRef.new(shape: SegmentType, location_name: "Type"))
+    SegmentTypeInfo.add_member(:model_version, Shapes::ShapeRef.new(shape: String, location_name: "ModelVersion"))
+    SegmentTypeInfo.struct_class = Types::SegmentTypeInfo
+
+    SegmentTypes.member = Shapes::ShapeRef.new(shape: SegmentType)
+
+    SegmentTypesInfo.member = Shapes::ShapeRef.new(shape: SegmentTypeInfo)
+
+    ShotSegment.add_member(:index, Shapes::ShapeRef.new(shape: ULong, location_name: "Index"))
+    ShotSegment.add_member(:confidence, Shapes::ShapeRef.new(shape: SegmentConfidence, location_name: "Confidence"))
+    ShotSegment.struct_class = Types::ShotSegment
+
     Smile.add_member(:value, Shapes::ShapeRef.new(shape: Boolean, location_name: "Value"))
     Smile.add_member(:confidence, Shapes::ShapeRef.new(shape: Percent, location_name: "Confidence"))
     Smile.struct_class = Types::Smile
@@ -1060,10 +1128,31 @@ module Aws::Rekognition
     StartProjectVersionResponse.add_member(:status, Shapes::ShapeRef.new(shape: ProjectVersionStatus, location_name: "Status"))
     StartProjectVersionResponse.struct_class = Types::StartProjectVersionResponse
 
+    StartSegmentDetectionFilters.add_member(:technical_cue_filter, Shapes::ShapeRef.new(shape: StartTechnicalCueDetectionFilter, location_name: "TechnicalCueFilter"))
+    StartSegmentDetectionFilters.add_member(:shot_filter, Shapes::ShapeRef.new(shape: StartShotDetectionFilter, location_name: "ShotFilter"))
+    StartSegmentDetectionFilters.struct_class = Types::StartSegmentDetectionFilters
+
+    StartSegmentDetectionRequest.add_member(:video, Shapes::ShapeRef.new(shape: Video, required: true, location_name: "Video"))
+    StartSegmentDetectionRequest.add_member(:client_request_token, Shapes::ShapeRef.new(shape: ClientRequestToken, location_name: "ClientRequestToken"))
+    StartSegmentDetectionRequest.add_member(:notification_channel, Shapes::ShapeRef.new(shape: NotificationChannel, location_name: "NotificationChannel"))
+    StartSegmentDetectionRequest.add_member(:job_tag, Shapes::ShapeRef.new(shape: JobTag, location_name: "JobTag"))
+    StartSegmentDetectionRequest.add_member(:filters, Shapes::ShapeRef.new(shape: StartSegmentDetectionFilters, location_name: "Filters"))
+    StartSegmentDetectionRequest.add_member(:segment_types, Shapes::ShapeRef.new(shape: SegmentTypes, required: true, location_name: "SegmentTypes"))
+    StartSegmentDetectionRequest.struct_class = Types::StartSegmentDetectionRequest
+
+    StartSegmentDetectionResponse.add_member(:job_id, Shapes::ShapeRef.new(shape: JobId, location_name: "JobId"))
+    StartSegmentDetectionResponse.struct_class = Types::StartSegmentDetectionResponse
+
+    StartShotDetectionFilter.add_member(:min_segment_confidence, Shapes::ShapeRef.new(shape: SegmentConfidence, location_name: "MinSegmentConfidence"))
+    StartShotDetectionFilter.struct_class = Types::StartShotDetectionFilter
+
     StartStreamProcessorRequest.add_member(:name, Shapes::ShapeRef.new(shape: StreamProcessorName, required: true, location_name: "Name"))
     StartStreamProcessorRequest.struct_class = Types::StartStreamProcessorRequest
 
     StartStreamProcessorResponse.struct_class = Types::StartStreamProcessorResponse
+
+    StartTechnicalCueDetectionFilter.add_member(:min_segment_confidence, Shapes::ShapeRef.new(shape: SegmentConfidence, location_name: "MinSegmentConfidence"))
+    StartTechnicalCueDetectionFilter.struct_class = Types::StartTechnicalCueDetectionFilter
 
     StartTextDetectionFilters.add_member(:word_filter, Shapes::ShapeRef.new(shape: DetectionFilter, location_name: "WordFilter"))
     StartTextDetectionFilters.add_member(:regions_of_interest, Shapes::ShapeRef.new(shape: RegionsOfInterest, location_name: "RegionsOfInterest"))
@@ -1111,6 +1200,10 @@ module Aws::Rekognition
     Sunglasses.add_member(:value, Shapes::ShapeRef.new(shape: Boolean, location_name: "Value"))
     Sunglasses.add_member(:confidence, Shapes::ShapeRef.new(shape: Percent, location_name: "Confidence"))
     Sunglasses.struct_class = Types::Sunglasses
+
+    TechnicalCueSegment.add_member(:type, Shapes::ShapeRef.new(shape: TechnicalCueType, location_name: "Type"))
+    TechnicalCueSegment.add_member(:confidence, Shapes::ShapeRef.new(shape: SegmentConfidence, location_name: "Confidence"))
+    TechnicalCueSegment.struct_class = Types::TechnicalCueSegment
 
     TestingData.add_member(:assets, Shapes::ShapeRef.new(shape: Assets, location_name: "Assets"))
     TestingData.add_member(:auto_create, Shapes::ShapeRef.new(shape: Boolean, location_name: "AutoCreate"))
@@ -1165,6 +1258,8 @@ module Aws::Rekognition
     VideoMetadata.add_member(:frame_height, Shapes::ShapeRef.new(shape: ULong, location_name: "FrameHeight"))
     VideoMetadata.add_member(:frame_width, Shapes::ShapeRef.new(shape: ULong, location_name: "FrameWidth"))
     VideoMetadata.struct_class = Types::VideoMetadata
+
+    VideoMetadataList.member = Shapes::ShapeRef.new(shape: VideoMetadata)
 
     VideoTooLargeException.struct_class = Types::VideoTooLargeException
 
@@ -1628,6 +1723,27 @@ module Aws::Rekognition
         )
       end)
 
+      api.add_operation(:get_segment_detection, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetSegmentDetection"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: GetSegmentDetectionRequest)
+        o.output = Shapes::ShapeRef.new(shape: GetSegmentDetectionResponse)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerError)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidPaginationTokenException)
+        o.errors << Shapes::ShapeRef.new(shape: ProvisionedThroughputExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
       api.add_operation(:get_text_detection, Seahorse::Model::Operation.new.tap do |o|
         o.name = "GetTextDetection"
         o.http_method = "POST"
@@ -1893,6 +2009,23 @@ module Aws::Rekognition
         o.errors << Shapes::ShapeRef.new(shape: InternalServerError)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: ProvisionedThroughputExceededException)
+      end)
+
+      api.add_operation(:start_segment_detection, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "StartSegmentDetection"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: StartSegmentDetectionRequest)
+        o.output = Shapes::ShapeRef.new(shape: StartSegmentDetectionResponse)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: IdempotentParameterMismatchException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidS3ObjectException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerError)
+        o.errors << Shapes::ShapeRef.new(shape: VideoTooLargeException)
+        o.errors << Shapes::ShapeRef.new(shape: ProvisionedThroughputExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
       end)
 
       api.add_operation(:start_stream_processor, Seahorse::Model::Operation.new.tap do |o|

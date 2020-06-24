@@ -19,6 +19,7 @@ module Aws::CloudDirectory
     #
     class AccessDeniedException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -77,6 +78,7 @@ module Aws::CloudDirectory
       :schema_facet,
       :object_attribute_list,
       :object_reference)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -107,6 +109,7 @@ module Aws::CloudDirectory
     class ApplySchemaRequest < Struct.new(
       :published_schema_arn,
       :directory_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -127,6 +130,7 @@ module Aws::CloudDirectory
     class ApplySchemaResponse < Struct.new(
       :applied_schema_arn,
       :directory_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -168,6 +172,7 @@ module Aws::CloudDirectory
       :parent_reference,
       :child_reference,
       :link_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -180,6 +185,7 @@ module Aws::CloudDirectory
     #
     class AttachObjectResponse < Struct.new(
       :attached_object_identifier)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -216,6 +222,7 @@ module Aws::CloudDirectory
       :directory_arn,
       :policy_reference,
       :object_reference)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -255,6 +262,7 @@ module Aws::CloudDirectory
       :directory_arn,
       :index_reference,
       :target_reference)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -266,6 +274,7 @@ module Aws::CloudDirectory
     #
     class AttachToIndexResponse < Struct.new(
       :attached_object_identifier)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -328,6 +337,7 @@ module Aws::CloudDirectory
       :target_object_reference,
       :typed_link_facet,
       :attributes)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -339,6 +349,7 @@ module Aws::CloudDirectory
     #
     class AttachTypedLinkResponse < Struct.new(
       :typed_link_specifier)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -372,6 +383,7 @@ module Aws::CloudDirectory
       :schema_arn,
       :facet_name,
       :name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -408,6 +420,7 @@ module Aws::CloudDirectory
     class AttributeKeyAndValue < Struct.new(
       :key,
       :value)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -440,6 +453,7 @@ module Aws::CloudDirectory
     class AttributeNameAndValue < Struct.new(
       :attribute_name,
       :value)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -492,6 +506,7 @@ module Aws::CloudDirectory
       :schema_facet,
       :object_attribute_list,
       :object_reference)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -534,6 +549,7 @@ module Aws::CloudDirectory
       :parent_reference,
       :child_reference,
       :link_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -547,6 +563,7 @@ module Aws::CloudDirectory
     #
     class BatchAttachObjectResponse < Struct.new(
       :attached_object_identifier)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -580,6 +597,7 @@ module Aws::CloudDirectory
     class BatchAttachPolicy < Struct.new(
       :policy_reference,
       :object_reference)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -618,6 +636,7 @@ module Aws::CloudDirectory
     class BatchAttachToIndex < Struct.new(
       :index_reference,
       :target_reference)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -631,6 +650,7 @@ module Aws::CloudDirectory
     #
     class BatchAttachToIndexResponse < Struct.new(
       :attached_object_identifier)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -690,6 +710,7 @@ module Aws::CloudDirectory
       :target_object_reference,
       :typed_link_facet,
       :attributes)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -703,6 +724,7 @@ module Aws::CloudDirectory
     #
     class BatchAttachTypedLinkResponse < Struct.new(
       :typed_link_specifier)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -763,6 +785,7 @@ module Aws::CloudDirectory
       :parent_reference,
       :link_name,
       :batch_reference_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -776,6 +799,7 @@ module Aws::CloudDirectory
     #
     class BatchCreateIndexResponse < Struct.new(
       :object_identifier)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -850,6 +874,7 @@ module Aws::CloudDirectory
       :parent_reference,
       :link_name,
       :batch_reference_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -863,6 +888,7 @@ module Aws::CloudDirectory
     #
     class BatchCreateObjectResponse < Struct.new(
       :object_identifier)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -885,6 +911,7 @@ module Aws::CloudDirectory
     #
     class BatchDeleteObject < Struct.new(
       :object_reference)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -923,6 +950,7 @@ module Aws::CloudDirectory
     class BatchDetachFromIndex < Struct.new(
       :index_reference,
       :target_reference)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -937,6 +965,7 @@ module Aws::CloudDirectory
     #
     class BatchDetachFromIndexResponse < Struct.new(
       :detached_object_identifier)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -977,6 +1006,7 @@ module Aws::CloudDirectory
       :parent_reference,
       :link_name,
       :batch_reference_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -990,6 +1020,7 @@ module Aws::CloudDirectory
     #
     class BatchDetachObjectResponse < Struct.new(
       :detached_object_identifier)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1023,6 +1054,7 @@ module Aws::CloudDirectory
     class BatchDetachPolicy < Struct.new(
       :policy_reference,
       :object_reference)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1074,6 +1106,7 @@ module Aws::CloudDirectory
     #
     class BatchDetachTypedLink < Struct.new(
       :typed_link_specifier)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1131,6 +1164,7 @@ module Aws::CloudDirectory
     class BatchGetLinkAttributes < Struct.new(
       :typed_link_specifier,
       :attribute_names)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1144,6 +1178,7 @@ module Aws::CloudDirectory
     #
     class BatchGetLinkAttributesResponse < Struct.new(
       :attributes)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1185,6 +1220,7 @@ module Aws::CloudDirectory
       :object_reference,
       :schema_facet,
       :attribute_names)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1198,6 +1234,7 @@ module Aws::CloudDirectory
     #
     class BatchGetObjectAttributesResponse < Struct.new(
       :attributes)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1222,6 +1259,7 @@ module Aws::CloudDirectory
     #
     class BatchGetObjectInformation < Struct.new(
       :object_reference)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1240,6 +1278,7 @@ module Aws::CloudDirectory
     class BatchGetObjectInformationResponse < Struct.new(
       :schema_facets,
       :object_identifier)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1276,6 +1315,7 @@ module Aws::CloudDirectory
       :target_reference,
       :next_token,
       :max_results)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1294,6 +1334,7 @@ module Aws::CloudDirectory
     class BatchListAttachedIndicesResponse < Struct.new(
       :index_attachments,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1374,6 +1415,7 @@ module Aws::CloudDirectory
       :filter_typed_link,
       :next_token,
       :max_results)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1392,6 +1434,7 @@ module Aws::CloudDirectory
     class BatchListIncomingTypedLinksResponse < Struct.new(
       :link_specifiers,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1460,6 +1503,7 @@ module Aws::CloudDirectory
       :index_reference,
       :max_results,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1478,6 +1522,7 @@ module Aws::CloudDirectory
     class BatchListIndexResponse < Struct.new(
       :index_attachments,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1523,6 +1568,7 @@ module Aws::CloudDirectory
       :next_token,
       :max_results,
       :facet_filter)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1542,6 +1588,7 @@ module Aws::CloudDirectory
     class BatchListObjectAttributesResponse < Struct.new(
       :attributes,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1577,6 +1624,7 @@ module Aws::CloudDirectory
       :object_reference,
       :next_token,
       :max_results)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1596,6 +1644,7 @@ module Aws::CloudDirectory
     class BatchListObjectChildrenResponse < Struct.new(
       :children,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1634,6 +1683,7 @@ module Aws::CloudDirectory
       :object_reference,
       :next_token,
       :max_results)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1653,6 +1703,7 @@ module Aws::CloudDirectory
     class BatchListObjectParentPathsResponse < Struct.new(
       :path_to_object_identifiers_list,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1683,6 +1734,7 @@ module Aws::CloudDirectory
       :object_reference,
       :next_token,
       :max_results)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1697,6 +1749,7 @@ module Aws::CloudDirectory
     class BatchListObjectParentsResponse < Struct.new(
       :parent_links,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1734,6 +1787,7 @@ module Aws::CloudDirectory
       :object_reference,
       :next_token,
       :max_results)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1753,6 +1807,7 @@ module Aws::CloudDirectory
     class BatchListObjectPoliciesResponse < Struct.new(
       :attached_policy_ids,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1833,6 +1888,7 @@ module Aws::CloudDirectory
       :filter_typed_link,
       :next_token,
       :max_results)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1851,6 +1907,7 @@ module Aws::CloudDirectory
     class BatchListOutgoingTypedLinksResponse < Struct.new(
       :typed_link_specifiers,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1887,6 +1944,7 @@ module Aws::CloudDirectory
       :policy_reference,
       :next_token,
       :max_results)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1905,6 +1963,7 @@ module Aws::CloudDirectory
     class BatchListPolicyAttachmentsResponse < Struct.new(
       :object_identifiers,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1942,6 +2001,7 @@ module Aws::CloudDirectory
       :object_reference,
       :next_token,
       :max_results)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1966,6 +2026,7 @@ module Aws::CloudDirectory
     class BatchLookupPolicyResponse < Struct.new(
       :policy_to_path_list,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1985,6 +2046,7 @@ module Aws::CloudDirectory
     class BatchReadException < Struct.new(
       :type,
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2306,6 +2368,7 @@ module Aws::CloudDirectory
       :list_outgoing_typed_links,
       :list_incoming_typed_links,
       :get_link_attributes)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2324,6 +2387,7 @@ module Aws::CloudDirectory
     class BatchReadOperationResponse < Struct.new(
       :successful_response,
       :exception_response)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2564,6 +2628,7 @@ module Aws::CloudDirectory
       :directory_arn,
       :operations,
       :consistency_level)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2575,6 +2640,7 @@ module Aws::CloudDirectory
     #
     class BatchReadResponse < Struct.new(
       :responses)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2686,6 +2752,7 @@ module Aws::CloudDirectory
       :list_incoming_typed_links,
       :get_link_attributes,
       :list_object_parents)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2717,6 +2784,7 @@ module Aws::CloudDirectory
     class BatchRemoveFacetFromObject < Struct.new(
       :schema_facet,
       :object_reference)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2793,6 +2861,7 @@ module Aws::CloudDirectory
     class BatchUpdateLinkAttributes < Struct.new(
       :typed_link_specifier,
       :attribute_updates)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2845,6 +2914,7 @@ module Aws::CloudDirectory
     class BatchUpdateObjectAttributes < Struct.new(
       :object_reference,
       :attribute_updates)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2858,6 +2928,7 @@ module Aws::CloudDirectory
     #
     class BatchUpdateObjectAttributesResponse < Struct.new(
       :object_identifier)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2878,6 +2949,7 @@ module Aws::CloudDirectory
       :index,
       :type,
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3233,6 +3305,7 @@ module Aws::CloudDirectory
       :attach_typed_link,
       :detach_typed_link,
       :update_link_attributes)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3332,6 +3405,7 @@ module Aws::CloudDirectory
       :attach_typed_link,
       :detach_typed_link,
       :update_link_attributes)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3610,6 +3684,7 @@ module Aws::CloudDirectory
     class BatchWriteRequest < Struct.new(
       :directory_arn,
       :operations)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3621,6 +3696,7 @@ module Aws::CloudDirectory
     #
     class BatchWriteResponse < Struct.new(
       :responses)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3633,6 +3709,7 @@ module Aws::CloudDirectory
     #
     class CannotListParentOfRootException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3658,6 +3735,7 @@ module Aws::CloudDirectory
     class CreateDirectoryRequest < Struct.new(
       :name,
       :schema_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3687,6 +3765,7 @@ module Aws::CloudDirectory
       :name,
       :object_identifier,
       :applied_schema_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3786,6 +3865,7 @@ module Aws::CloudDirectory
       :attributes,
       :object_type,
       :facet_style)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3842,6 +3922,7 @@ module Aws::CloudDirectory
       :is_unique,
       :parent_reference,
       :link_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3853,6 +3934,7 @@ module Aws::CloudDirectory
     #
     class CreateIndexResponse < Struct.new(
       :object_identifier)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3921,6 +4003,7 @@ module Aws::CloudDirectory
       :object_attribute_list,
       :parent_reference,
       :link_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3932,6 +4015,7 @@ module Aws::CloudDirectory
     #
     class CreateObjectResponse < Struct.new(
       :object_identifier)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3951,6 +4035,7 @@ module Aws::CloudDirectory
     #
     class CreateSchemaRequest < Struct.new(
       :name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3963,6 +4048,7 @@ module Aws::CloudDirectory
     #
     class CreateSchemaResponse < Struct.new(
       :schema_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4014,6 +4100,7 @@ module Aws::CloudDirectory
     class CreateTypedLinkFacetRequest < Struct.new(
       :schema_arn,
       :facet)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4036,6 +4123,7 @@ module Aws::CloudDirectory
     #
     class DeleteDirectoryRequest < Struct.new(
       :directory_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4047,6 +4135,7 @@ module Aws::CloudDirectory
     #
     class DeleteDirectoryResponse < Struct.new(
       :directory_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4072,6 +4161,7 @@ module Aws::CloudDirectory
     class DeleteFacetRequest < Struct.new(
       :schema_arn,
       :name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4103,6 +4193,7 @@ module Aws::CloudDirectory
     class DeleteObjectRequest < Struct.new(
       :directory_arn,
       :object_reference)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4126,6 +4217,7 @@ module Aws::CloudDirectory
     #
     class DeleteSchemaRequest < Struct.new(
       :schema_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4138,6 +4230,7 @@ module Aws::CloudDirectory
     #
     class DeleteSchemaResponse < Struct.new(
       :schema_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4163,6 +4256,7 @@ module Aws::CloudDirectory
     class DeleteTypedLinkFacetRequest < Struct.new(
       :schema_arn,
       :name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4202,6 +4296,7 @@ module Aws::CloudDirectory
       :directory_arn,
       :index_reference,
       :target_reference)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4214,6 +4309,7 @@ module Aws::CloudDirectory
     #
     class DetachFromIndexResponse < Struct.new(
       :detached_object_identifier)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4248,6 +4344,7 @@ module Aws::CloudDirectory
       :directory_arn,
       :parent_reference,
       :link_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4259,6 +4356,7 @@ module Aws::CloudDirectory
     #
     class DetachObjectResponse < Struct.new(
       :detached_object_identifier)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4295,6 +4393,7 @@ module Aws::CloudDirectory
       :directory_arn,
       :policy_reference,
       :object_reference)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4347,6 +4446,7 @@ module Aws::CloudDirectory
     class DetachTypedLinkRequest < Struct.new(
       :directory_arn,
       :typed_link_specifier)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4378,6 +4478,7 @@ module Aws::CloudDirectory
       :directory_arn,
       :state,
       :creation_date_time)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4391,6 +4492,7 @@ module Aws::CloudDirectory
     #
     class DirectoryAlreadyExistsException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4405,6 +4507,7 @@ module Aws::CloudDirectory
     #
     class DirectoryDeletedException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4417,6 +4520,7 @@ module Aws::CloudDirectory
     #
     class DirectoryNotDisabledException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4429,6 +4533,7 @@ module Aws::CloudDirectory
     #
     class DirectoryNotEnabledException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4447,6 +4552,7 @@ module Aws::CloudDirectory
     #
     class DisableDirectoryRequest < Struct.new(
       :directory_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4458,6 +4564,7 @@ module Aws::CloudDirectory
     #
     class DisableDirectoryResponse < Struct.new(
       :directory_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4476,6 +4583,7 @@ module Aws::CloudDirectory
     #
     class EnableDirectoryRequest < Struct.new(
       :directory_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4487,6 +4595,7 @@ module Aws::CloudDirectory
     #
     class EnableDirectoryResponse < Struct.new(
       :directory_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4519,6 +4628,7 @@ module Aws::CloudDirectory
       :name,
       :object_type,
       :facet_style)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4531,6 +4641,7 @@ module Aws::CloudDirectory
     #
     class FacetAlreadyExistsException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4601,6 +4712,7 @@ module Aws::CloudDirectory
       :attribute_definition,
       :attribute_reference,
       :required_behavior)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4657,6 +4769,7 @@ module Aws::CloudDirectory
       :default_value,
       :is_immutable,
       :rules)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4694,6 +4807,7 @@ module Aws::CloudDirectory
     class FacetAttributeReference < Struct.new(
       :target_facet_name,
       :target_attribute_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4746,6 +4860,7 @@ module Aws::CloudDirectory
     class FacetAttributeUpdate < Struct.new(
       :attribute,
       :action)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4759,6 +4874,7 @@ module Aws::CloudDirectory
     #
     class FacetInUseException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4771,6 +4887,7 @@ module Aws::CloudDirectory
     #
     class FacetNotFoundException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4784,6 +4901,7 @@ module Aws::CloudDirectory
     #
     class FacetValidationException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4802,6 +4920,7 @@ module Aws::CloudDirectory
     #
     class GetAppliedSchemaVersionRequest < Struct.new(
       :schema_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4814,6 +4933,7 @@ module Aws::CloudDirectory
     #
     class GetAppliedSchemaVersionResponse < Struct.new(
       :applied_schema_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4832,6 +4952,7 @@ module Aws::CloudDirectory
     #
     class GetDirectoryRequest < Struct.new(
       :directory_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4843,6 +4964,7 @@ module Aws::CloudDirectory
     #
     class GetDirectoryResponse < Struct.new(
       :directory)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4868,6 +4990,7 @@ module Aws::CloudDirectory
     class GetFacetRequest < Struct.new(
       :schema_arn,
       :name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4879,6 +5002,7 @@ module Aws::CloudDirectory
     #
     class GetFacetResponse < Struct.new(
       :facet)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4945,6 +5069,7 @@ module Aws::CloudDirectory
       :typed_link_specifier,
       :attribute_names,
       :consistency_level)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4956,6 +5081,7 @@ module Aws::CloudDirectory
     #
     class GetLinkAttributesResponse < Struct.new(
       :attributes)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5007,6 +5133,7 @@ module Aws::CloudDirectory
       :consistency_level,
       :schema_facet,
       :attribute_names)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5018,6 +5145,7 @@ module Aws::CloudDirectory
     #
     class GetObjectAttributesResponse < Struct.new(
       :attributes)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5050,6 +5178,7 @@ module Aws::CloudDirectory
       :directory_arn,
       :object_reference,
       :consistency_level)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5069,6 +5198,7 @@ module Aws::CloudDirectory
     class GetObjectInformationResponse < Struct.new(
       :schema_facets,
       :object_identifier)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5087,6 +5217,7 @@ module Aws::CloudDirectory
     #
     class GetSchemaAsJsonRequest < Struct.new(
       :schema_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5103,6 +5234,7 @@ module Aws::CloudDirectory
     class GetSchemaAsJsonResponse < Struct.new(
       :name,
       :document)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5128,6 +5260,7 @@ module Aws::CloudDirectory
     class GetTypedLinkFacetInformationRequest < Struct.new(
       :schema_arn,
       :name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5152,6 +5285,7 @@ module Aws::CloudDirectory
     #
     class GetTypedLinkFacetInformationResponse < Struct.new(
       :identity_attribute_order)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5166,6 +5300,7 @@ module Aws::CloudDirectory
     #
     class IncompatibleSchemaException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5188,6 +5323,7 @@ module Aws::CloudDirectory
     class IndexAttachment < Struct.new(
       :indexed_attributes,
       :object_identifier)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5201,6 +5337,7 @@ module Aws::CloudDirectory
     #
     class IndexedAttributeMissingException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5221,6 +5358,7 @@ module Aws::CloudDirectory
     #
     class InternalServiceException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5233,6 +5371,7 @@ module Aws::CloudDirectory
     #
     class InvalidArnException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5248,6 +5387,7 @@ module Aws::CloudDirectory
     #
     class InvalidAttachmentException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5260,6 +5400,7 @@ module Aws::CloudDirectory
     #
     class InvalidFacetUpdateException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5272,6 +5413,7 @@ module Aws::CloudDirectory
     #
     class InvalidNextTokenException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5284,6 +5426,7 @@ module Aws::CloudDirectory
     #
     class InvalidRuleException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5296,6 +5439,7 @@ module Aws::CloudDirectory
     #
     class InvalidSchemaDocException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5310,6 +5454,7 @@ module Aws::CloudDirectory
     #
     class InvalidTaggingRequestException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5327,6 +5472,7 @@ module Aws::CloudDirectory
     #
     class LimitExceededException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5360,6 +5506,7 @@ module Aws::CloudDirectory
     class LinkAttributeAction < Struct.new(
       :attribute_action_type,
       :attribute_update_value)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5399,6 +5546,7 @@ module Aws::CloudDirectory
     class LinkAttributeUpdate < Struct.new(
       :attribute_key,
       :attribute_action)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5412,6 +5560,7 @@ module Aws::CloudDirectory
     #
     class LinkNameAlreadyInUseException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5449,6 +5598,7 @@ module Aws::CloudDirectory
       :schema_arn,
       :next_token,
       :max_results)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5465,6 +5615,7 @@ module Aws::CloudDirectory
     class ListAppliedSchemaArnsResponse < Struct.new(
       :schema_arns,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5509,6 +5660,7 @@ module Aws::CloudDirectory
       :next_token,
       :max_results,
       :consistency_level)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5525,6 +5677,7 @@ module Aws::CloudDirectory
     class ListAttachedIndicesResponse < Struct.new(
       :index_attachments,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5549,6 +5702,7 @@ module Aws::CloudDirectory
     class ListDevelopmentSchemaArnsRequest < Struct.new(
       :next_token,
       :max_results)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5565,6 +5719,7 @@ module Aws::CloudDirectory
     class ListDevelopmentSchemaArnsResponse < Struct.new(
       :schema_arns,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5596,6 +5751,7 @@ module Aws::CloudDirectory
       :next_token,
       :max_results,
       :state)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5613,6 +5769,7 @@ module Aws::CloudDirectory
     class ListDirectoriesResponse < Struct.new(
       :directories,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5649,6 +5806,7 @@ module Aws::CloudDirectory
       :name,
       :next_token,
       :max_results)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5665,6 +5823,7 @@ module Aws::CloudDirectory
     class ListFacetAttributesResponse < Struct.new(
       :attributes,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5695,6 +5854,7 @@ module Aws::CloudDirectory
       :schema_arn,
       :next_token,
       :max_results)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5711,6 +5871,7 @@ module Aws::CloudDirectory
     class ListFacetNamesResponse < Struct.new(
       :facet_names,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5799,6 +5960,7 @@ module Aws::CloudDirectory
       :next_token,
       :max_results,
       :consistency_level)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5815,6 +5977,7 @@ module Aws::CloudDirectory
     class ListIncomingTypedLinksResponse < Struct.new(
       :link_specifiers,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5897,6 +6060,7 @@ module Aws::CloudDirectory
       :max_results,
       :next_token,
       :consistency_level)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5913,6 +6077,7 @@ module Aws::CloudDirectory
     class ListIndexResponse < Struct.new(
       :index_attachments,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5944,6 +6109,7 @@ module Aws::CloudDirectory
       :schema_arn,
       :next_token,
       :max_results)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5960,6 +6126,7 @@ module Aws::CloudDirectory
     class ListManagedSchemaArnsResponse < Struct.new(
       :schema_arns,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6019,6 +6186,7 @@ module Aws::CloudDirectory
       :max_results,
       :consistency_level,
       :facet_filter)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6036,6 +6204,7 @@ module Aws::CloudDirectory
     class ListObjectAttributesResponse < Struct.new(
       :attributes,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6085,6 +6254,7 @@ module Aws::CloudDirectory
       :next_token,
       :max_results,
       :consistency_level)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6102,6 +6272,7 @@ module Aws::CloudDirectory
     class ListObjectChildrenResponse < Struct.new(
       :children,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6142,6 +6313,7 @@ module Aws::CloudDirectory
       :object_reference,
       :next_token,
       :max_results)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6159,6 +6331,7 @@ module Aws::CloudDirectory
     class ListObjectParentPathsResponse < Struct.new(
       :path_to_object_identifiers_list,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6215,6 +6388,7 @@ module Aws::CloudDirectory
       :max_results,
       :consistency_level,
       :include_all_links_to_each_parent)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6237,6 +6411,7 @@ module Aws::CloudDirectory
       :parents,
       :next_token,
       :parent_links)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6286,6 +6461,7 @@ module Aws::CloudDirectory
       :next_token,
       :max_results,
       :consistency_level)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6303,6 +6479,7 @@ module Aws::CloudDirectory
     class ListObjectPoliciesResponse < Struct.new(
       :attached_policy_ids,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6391,6 +6568,7 @@ module Aws::CloudDirectory
       :next_token,
       :max_results,
       :consistency_level)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6407,6 +6585,7 @@ module Aws::CloudDirectory
     class ListOutgoingTypedLinksResponse < Struct.new(
       :typed_link_specifiers,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6455,6 +6634,7 @@ module Aws::CloudDirectory
       :next_token,
       :max_results,
       :consistency_level)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6471,6 +6651,7 @@ module Aws::CloudDirectory
     class ListPolicyAttachmentsResponse < Struct.new(
       :object_identifiers,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6502,6 +6683,7 @@ module Aws::CloudDirectory
       :schema_arn,
       :next_token,
       :max_results)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6518,6 +6700,7 @@ module Aws::CloudDirectory
     class ListPublishedSchemaArnsResponse < Struct.new(
       :schema_arns,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6552,6 +6735,7 @@ module Aws::CloudDirectory
       :resource_arn,
       :next_token,
       :max_results)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6569,6 +6753,7 @@ module Aws::CloudDirectory
     class ListTagsForResourceResponse < Struct.new(
       :tags,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6606,6 +6791,7 @@ module Aws::CloudDirectory
       :name,
       :next_token,
       :max_results)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6622,6 +6808,7 @@ module Aws::CloudDirectory
     class ListTypedLinkFacetAttributesResponse < Struct.new(
       :attributes,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6653,6 +6840,7 @@ module Aws::CloudDirectory
       :schema_arn,
       :next_token,
       :max_results)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6669,6 +6857,7 @@ module Aws::CloudDirectory
     class ListTypedLinkFacetNamesResponse < Struct.new(
       :facet_names,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6710,6 +6899,7 @@ module Aws::CloudDirectory
       :object_reference,
       :next_token,
       :max_results)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6732,6 +6922,7 @@ module Aws::CloudDirectory
     class LookupPolicyResponse < Struct.new(
       :policy_to_path_list,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6745,6 +6936,7 @@ module Aws::CloudDirectory
     #
     class NotIndexException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6759,6 +6951,7 @@ module Aws::CloudDirectory
     #
     class NotNodeException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6772,6 +6965,7 @@ module Aws::CloudDirectory
     #
     class NotPolicyException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6784,6 +6978,7 @@ module Aws::CloudDirectory
     #
     class ObjectAlreadyDetachedException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6816,6 +7011,7 @@ module Aws::CloudDirectory
     class ObjectAttributeAction < Struct.new(
       :object_attribute_action_type,
       :object_attribute_update_value)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6863,6 +7059,7 @@ module Aws::CloudDirectory
     class ObjectAttributeRange < Struct.new(
       :attribute_key,
       :range)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6902,6 +7099,7 @@ module Aws::CloudDirectory
     class ObjectAttributeUpdate < Struct.new(
       :object_attribute_key,
       :object_attribute_action)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6920,6 +7118,7 @@ module Aws::CloudDirectory
     class ObjectIdentifierAndLinkNameTuple < Struct.new(
       :object_identifier,
       :link_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6933,6 +7132,7 @@ module Aws::CloudDirectory
     #
     class ObjectNotDetachedException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6972,6 +7172,7 @@ module Aws::CloudDirectory
     #
     class ObjectReference < Struct.new(
       :selector)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6993,6 +7194,7 @@ module Aws::CloudDirectory
     class PathToObjectIdentifiers < Struct.new(
       :path,
       :object_identifiers)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -7021,6 +7223,7 @@ module Aws::CloudDirectory
       :policy_id,
       :object_identifier,
       :policy_type)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -7041,6 +7244,7 @@ module Aws::CloudDirectory
     class PolicyToPath < Struct.new(
       :path,
       :policies)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -7082,6 +7286,7 @@ module Aws::CloudDirectory
       :version,
       :minor_version,
       :name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -7094,6 +7299,7 @@ module Aws::CloudDirectory
     #
     class PublishSchemaResponse < Struct.new(
       :published_schema_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -7118,6 +7324,7 @@ module Aws::CloudDirectory
     class PutSchemaFromJsonRequest < Struct.new(
       :schema_arn,
       :document)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -7129,6 +7336,7 @@ module Aws::CloudDirectory
     #
     class PutSchemaFromJsonResponse < Struct.new(
       :arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -7164,6 +7372,7 @@ module Aws::CloudDirectory
       :directory_arn,
       :schema_facet,
       :object_reference)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -7180,6 +7389,7 @@ module Aws::CloudDirectory
     #
     class ResourceNotFoundException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -7198,6 +7408,7 @@ module Aws::CloudDirectory
     #
     class RetryableConflictException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -7228,6 +7439,7 @@ module Aws::CloudDirectory
     class Rule < Struct.new(
       :type,
       :parameters)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -7241,6 +7453,7 @@ module Aws::CloudDirectory
     #
     class SchemaAlreadyExistsException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -7253,6 +7466,7 @@ module Aws::CloudDirectory
     #
     class SchemaAlreadyPublishedException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -7285,6 +7499,7 @@ module Aws::CloudDirectory
     class SchemaFacet < Struct.new(
       :schema_arn,
       :facet_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -7298,6 +7513,7 @@ module Aws::CloudDirectory
     #
     class StillContainsLinksException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -7324,6 +7540,7 @@ module Aws::CloudDirectory
     class Tag < Struct.new(
       :key,
       :value)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -7354,6 +7571,7 @@ module Aws::CloudDirectory
     class TagResourceRequest < Struct.new(
       :resource_arn,
       :tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -7404,6 +7622,7 @@ module Aws::CloudDirectory
       :boolean_value,
       :number_value,
       :datetime_value)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -7459,6 +7678,7 @@ module Aws::CloudDirectory
       :start_value,
       :end_mode,
       :end_value)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -7522,6 +7742,7 @@ module Aws::CloudDirectory
       :is_immutable,
       :rules,
       :required_behavior)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -7566,6 +7787,7 @@ module Aws::CloudDirectory
     class TypedLinkAttributeRange < Struct.new(
       :attribute_name,
       :range)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -7628,6 +7850,7 @@ module Aws::CloudDirectory
       :name,
       :attributes,
       :identity_attribute_order)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -7674,6 +7897,7 @@ module Aws::CloudDirectory
     class TypedLinkFacetAttributeUpdate < Struct.new(
       :attribute,
       :action)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -7702,6 +7926,7 @@ module Aws::CloudDirectory
     class TypedLinkSchemaAndFacetName < Struct.new(
       :schema_arn,
       :typed_link_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -7765,6 +7990,7 @@ module Aws::CloudDirectory
       :source_object_reference,
       :target_object_reference,
       :identity_attribute_values)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -7777,6 +8003,7 @@ module Aws::CloudDirectory
     #
     class UnsupportedIndexTypeException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -7802,6 +8029,7 @@ module Aws::CloudDirectory
     class UntagResourceRequest < Struct.new(
       :resource_arn,
       :tag_keys)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -7877,6 +8105,7 @@ module Aws::CloudDirectory
       :name,
       :attribute_updates,
       :object_type)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -7958,6 +8187,7 @@ module Aws::CloudDirectory
       :directory_arn,
       :typed_link_specifier,
       :attribute_updates)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -8013,6 +8243,7 @@ module Aws::CloudDirectory
       :directory_arn,
       :object_reference,
       :attribute_updates)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -8024,6 +8255,7 @@ module Aws::CloudDirectory
     #
     class UpdateObjectAttributesResponse < Struct.new(
       :object_identifier)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -8049,6 +8281,7 @@ module Aws::CloudDirectory
     class UpdateSchemaRequest < Struct.new(
       :schema_arn,
       :name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -8061,6 +8294,7 @@ module Aws::CloudDirectory
     #
     class UpdateSchemaResponse < Struct.new(
       :schema_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -8136,6 +8370,7 @@ module Aws::CloudDirectory
       :name,
       :attribute_updates,
       :identity_attribute_order)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -8174,6 +8409,7 @@ module Aws::CloudDirectory
       :published_schema_arn,
       :directory_arn,
       :dry_run)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -8191,6 +8427,7 @@ module Aws::CloudDirectory
     class UpgradeAppliedSchemaResponse < Struct.new(
       :upgraded_schema_arn,
       :directory_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -8233,6 +8470,7 @@ module Aws::CloudDirectory
       :published_schema_arn,
       :minor_version,
       :dry_run)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -8245,6 +8483,7 @@ module Aws::CloudDirectory
     #
     class UpgradePublishedSchemaResponse < Struct.new(
       :upgraded_schema_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -8258,6 +8497,7 @@ module Aws::CloudDirectory
     #
     class ValidationException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 

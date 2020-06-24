@@ -12,7 +12,7 @@ module Aws
 
         # @return [Array<Hash,Cipher>] Creates an returns a new encryption
         #   envelope and encryption cipher.
-        def encryption_cipher
+        def encryption_cipher(options = {})
           cipher = Utils.aes_encryption_cipher(:GCM)
           cek_alg = 'AES/GCM/NoPadding'
           if @key_provider.encryption_materials.key.is_a? OpenSSL::PKey::RSA
@@ -36,15 +36,14 @@ module Aws
 
         # @return [Cipher] Given an encryption envelope, returns a
         #   decryption cipher.
-        def decryption_cipher(envelope)
+        def decryption_cipher(envelope, options = {})
+          master_key = @key_provider.key_for(envelope['x-amz-matdesc'])
           if envelope.key? 'x-amz-key'
             # Support for decryption of legacy objects
-            master_key = @key_provider.key_for(envelope['x-amz-matdesc'])
             key = Utils.decrypt(master_key, decode64(envelope['x-amz-key']))
             iv = decode64(envelope['x-amz-iv'])
             Utils.aes_decryption_cipher(:CBC, key, iv)
           else
-            master_key = @key_provider.key_for(envelope['x-amz-matdesc'])
             if envelope['x-amz-cek-alg'] != 'AES/GCM/NoPadding'
               raise ArgumentError, 'Unsupported cek-alg: ' \
                 "#{envelope['x-amz-cek-alg']}"

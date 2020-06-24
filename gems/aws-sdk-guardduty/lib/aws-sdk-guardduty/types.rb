@@ -39,6 +39,7 @@ module Aws::GuardDuty
       :detector_id,
       :master_id,
       :invitation_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -64,6 +65,7 @@ module Aws::GuardDuty
     class AccessControlList < Struct.new(
       :allows_public_read_access,
       :allows_public_write_access)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -92,6 +94,7 @@ module Aws::GuardDuty
       :principal_id,
       :user_name,
       :user_type)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -118,6 +121,7 @@ module Aws::GuardDuty
     class AccountDetail < Struct.new(
       :account_id,
       :email)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -133,6 +137,7 @@ module Aws::GuardDuty
     #
     class AccountLevelPermissions < Struct.new(
       :block_public_access)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -168,6 +173,7 @@ module Aws::GuardDuty
       :dns_request_action,
       :network_connection_action,
       :port_probe_action)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -188,6 +194,7 @@ module Aws::GuardDuty
     class AdminAccount < Struct.new(
       :admin_account_id,
       :admin_status)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -213,6 +220,7 @@ module Aws::GuardDuty
     class ArchiveFindingsRequest < Struct.new(
       :detector_id,
       :finding_ids)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -250,6 +258,7 @@ module Aws::GuardDuty
       :domain_details,
       :remote_ip_details,
       :service_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -268,6 +277,7 @@ module Aws::GuardDuty
     class BadRequestException < Struct.new(
       :message,
       :type)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -303,6 +313,7 @@ module Aws::GuardDuty
       :restrict_public_buckets,
       :block_public_acls,
       :block_public_policy)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -329,6 +340,7 @@ module Aws::GuardDuty
       :access_control_list,
       :bucket_policy,
       :block_public_access)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -349,6 +361,7 @@ module Aws::GuardDuty
     class BucketPolicy < Struct.new(
       :allows_public_read_access,
       :allows_public_write_access)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -362,6 +375,7 @@ module Aws::GuardDuty
     #
     class City < Struct.new(
       :city_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -460,6 +474,7 @@ module Aws::GuardDuty
       :greater_than_or_equal,
       :less_than,
       :less_than_or_equal)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -479,6 +494,7 @@ module Aws::GuardDuty
     class Country < Struct.new(
       :country_code,
       :country_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -522,6 +538,7 @@ module Aws::GuardDuty
       :client_token,
       :finding_publishing_frequency,
       :tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -533,6 +550,7 @@ module Aws::GuardDuty
     #
     class CreateDetectorResponse < Struct.new(
       :detector_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -731,6 +749,7 @@ module Aws::GuardDuty
       :finding_criteria,
       :client_token,
       :tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -742,6 +761,7 @@ module Aws::GuardDuty
     #
     class CreateFilterResponse < Struct.new(
       :name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -807,6 +827,7 @@ module Aws::GuardDuty
       :activate,
       :client_token,
       :tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -818,6 +839,7 @@ module Aws::GuardDuty
     #
     class CreateIPSetResponse < Struct.new(
       :ip_set_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -849,6 +871,7 @@ module Aws::GuardDuty
     class CreateMembersRequest < Struct.new(
       :detector_id,
       :account_details)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -861,6 +884,7 @@ module Aws::GuardDuty
     #
     class CreateMembersResponse < Struct.new(
       :unprocessed_accounts)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -906,6 +930,7 @@ module Aws::GuardDuty
       :destination_type,
       :destination_properties,
       :client_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -917,6 +942,7 @@ module Aws::GuardDuty
     #
     class CreatePublishingDestinationResponse < Struct.new(
       :destination_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -941,6 +967,7 @@ module Aws::GuardDuty
     class CreateSampleFindingsRequest < Struct.new(
       :detector_id,
       :finding_types)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1009,6 +1036,7 @@ module Aws::GuardDuty
       :activate,
       :client_token,
       :tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1020,6 +1048,7 @@ module Aws::GuardDuty
     #
     class CreateThreatIntelSetResponse < Struct.new(
       :threat_intel_set_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1040,6 +1069,7 @@ module Aws::GuardDuty
     #
     class DeclineInvitationsRequest < Struct.new(
       :account_ids)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1052,6 +1082,7 @@ module Aws::GuardDuty
     #
     class DeclineInvitationsResponse < Struct.new(
       :unprocessed_accounts)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1076,6 +1107,7 @@ module Aws::GuardDuty
     class DefaultServerSideEncryption < Struct.new(
       :encryption_type,
       :kms_master_key_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1094,6 +1126,7 @@ module Aws::GuardDuty
     #
     class DeleteDetectorRequest < Struct.new(
       :detector_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1122,6 +1155,7 @@ module Aws::GuardDuty
     class DeleteFilterRequest < Struct.new(
       :detector_id,
       :filter_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1150,6 +1184,7 @@ module Aws::GuardDuty
     class DeleteIPSetRequest < Struct.new(
       :detector_id,
       :ip_set_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1173,6 +1208,7 @@ module Aws::GuardDuty
     #
     class DeleteInvitationsRequest < Struct.new(
       :account_ids)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1185,6 +1221,7 @@ module Aws::GuardDuty
     #
     class DeleteInvitationsResponse < Struct.new(
       :unprocessed_accounts)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1211,6 +1248,7 @@ module Aws::GuardDuty
     class DeleteMembersRequest < Struct.new(
       :detector_id,
       :account_ids)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1222,6 +1260,7 @@ module Aws::GuardDuty
     #
     class DeleteMembersResponse < Struct.new(
       :unprocessed_accounts)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1247,6 +1286,7 @@ module Aws::GuardDuty
     class DeletePublishingDestinationRequest < Struct.new(
       :detector_id,
       :destination_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1276,6 +1316,7 @@ module Aws::GuardDuty
     class DeleteThreatIntelSetRequest < Struct.new(
       :detector_id,
       :threat_intel_set_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1299,6 +1340,7 @@ module Aws::GuardDuty
     #
     class DescribeOrganizationConfigurationRequest < Struct.new(
       :detector_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1317,6 +1359,7 @@ module Aws::GuardDuty
     class DescribeOrganizationConfigurationResponse < Struct.new(
       :auto_enable,
       :member_account_limit_reached)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1342,6 +1385,7 @@ module Aws::GuardDuty
     class DescribePublishingDestinationRequest < Struct.new(
       :detector_id,
       :destination_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1376,6 +1420,7 @@ module Aws::GuardDuty
       :status,
       :publishing_failure_start_timestamp,
       :destination_properties)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1401,6 +1446,7 @@ module Aws::GuardDuty
       :destination_id,
       :destination_type,
       :status)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1429,6 +1475,7 @@ module Aws::GuardDuty
     class DestinationProperties < Struct.new(
       :destination_arn,
       :kms_key_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1448,6 +1495,7 @@ module Aws::GuardDuty
     #
     class DisableOrganizationAdminAccountRequest < Struct.new(
       :admin_account_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1470,6 +1518,7 @@ module Aws::GuardDuty
     #
     class DisassociateFromMasterAccountRequest < Struct.new(
       :detector_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1500,6 +1549,7 @@ module Aws::GuardDuty
     class DisassociateMembersRequest < Struct.new(
       :detector_id,
       :account_ids)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1512,6 +1562,7 @@ module Aws::GuardDuty
     #
     class DisassociateMembersResponse < Struct.new(
       :unprocessed_accounts)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1526,6 +1577,7 @@ module Aws::GuardDuty
     #
     class DnsRequestAction < Struct.new(
       :domain)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1539,6 +1591,7 @@ module Aws::GuardDuty
     #
     class DomainDetails < Struct.new(
       :domain)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1558,6 +1611,7 @@ module Aws::GuardDuty
     #
     class EnableOrganizationAdminAccountRequest < Struct.new(
       :admin_account_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1575,6 +1629,7 @@ module Aws::GuardDuty
     #
     class Evidence < Struct.new(
       :threat_intelligence_details)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1660,6 +1715,7 @@ module Aws::GuardDuty
       :title,
       :type,
       :updated_at)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1696,6 +1752,7 @@ module Aws::GuardDuty
     #
     class FindingCriteria < Struct.new(
       :criterion)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1710,6 +1767,7 @@ module Aws::GuardDuty
     #
     class FindingStatistics < Struct.new(
       :count_by_severity)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1728,6 +1786,7 @@ module Aws::GuardDuty
     class GeoLocation < Struct.new(
       :lat,
       :lon)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1746,6 +1805,7 @@ module Aws::GuardDuty
     #
     class GetDetectorRequest < Struct.new(
       :detector_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1782,6 +1842,7 @@ module Aws::GuardDuty
       :status,
       :updated_at,
       :tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1806,6 +1867,7 @@ module Aws::GuardDuty
     class GetFilterRequest < Struct.new(
       :detector_id,
       :filter_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1846,6 +1908,7 @@ module Aws::GuardDuty
       :rank,
       :finding_criteria,
       :tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1880,6 +1943,7 @@ module Aws::GuardDuty
       :detector_id,
       :finding_ids,
       :sort_criteria)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1891,6 +1955,7 @@ module Aws::GuardDuty
     #
     class GetFindingsResponse < Struct.new(
       :findings)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1939,6 +2004,7 @@ module Aws::GuardDuty
       :detector_id,
       :finding_statistic_types,
       :finding_criteria)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1950,6 +2016,7 @@ module Aws::GuardDuty
     #
     class GetFindingsStatisticsResponse < Struct.new(
       :finding_statistics)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1974,6 +2041,7 @@ module Aws::GuardDuty
     class GetIPSetRequest < Struct.new(
       :detector_id,
       :ip_set_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2006,6 +2074,7 @@ module Aws::GuardDuty
       :location,
       :status,
       :tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2023,6 +2092,7 @@ module Aws::GuardDuty
     #
     class GetInvitationsCountResponse < Struct.new(
       :invitations_count)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2041,6 +2111,7 @@ module Aws::GuardDuty
     #
     class GetMasterAccountRequest < Struct.new(
       :detector_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2052,6 +2123,7 @@ module Aws::GuardDuty
     #
     class GetMasterAccountResponse < Struct.new(
       :master)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2078,6 +2150,7 @@ module Aws::GuardDuty
     class GetMembersRequest < Struct.new(
       :detector_id,
       :account_ids)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2095,6 +2168,7 @@ module Aws::GuardDuty
     class GetMembersResponse < Struct.new(
       :members,
       :unprocessed_accounts)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2120,6 +2194,7 @@ module Aws::GuardDuty
     class GetThreatIntelSetRequest < Struct.new(
       :detector_id,
       :threat_intel_set_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2154,6 +2229,7 @@ module Aws::GuardDuty
       :location,
       :status,
       :tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2172,6 +2248,7 @@ module Aws::GuardDuty
     class IamInstanceProfile < Struct.new(
       :arn,
       :id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2246,6 +2323,7 @@ module Aws::GuardDuty
       :platform,
       :product_codes,
       :tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2264,6 +2342,7 @@ module Aws::GuardDuty
     class InternalServerErrorException < Struct.new(
       :message,
       :type)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2294,6 +2373,7 @@ module Aws::GuardDuty
       :invitation_id,
       :relationship_status,
       :invited_at)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2335,6 +2415,7 @@ module Aws::GuardDuty
       :account_ids,
       :disable_email_notification,
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2347,6 +2428,7 @@ module Aws::GuardDuty
     #
     class InviteMembersResponse < Struct.new(
       :unprocessed_accounts)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2377,6 +2459,7 @@ module Aws::GuardDuty
     class ListDetectorsRequest < Struct.new(
       :max_results,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2394,6 +2477,7 @@ module Aws::GuardDuty
     class ListDetectorsResponse < Struct.new(
       :detector_ids,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2430,6 +2514,7 @@ module Aws::GuardDuty
       :detector_id,
       :max_results,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2447,6 +2532,7 @@ module Aws::GuardDuty
     class ListFiltersResponse < Struct.new(
       :filter_names,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2622,6 +2708,7 @@ module Aws::GuardDuty
       :sort_criteria,
       :max_results,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2639,6 +2726,7 @@ module Aws::GuardDuty
     class ListFindingsResponse < Struct.new(
       :finding_ids,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2675,6 +2763,7 @@ module Aws::GuardDuty
       :detector_id,
       :max_results,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2692,6 +2781,7 @@ module Aws::GuardDuty
     class ListIPSetsResponse < Struct.new(
       :ip_set_ids,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2722,6 +2812,7 @@ module Aws::GuardDuty
     class ListInvitationsRequest < Struct.new(
       :max_results,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2739,6 +2830,7 @@ module Aws::GuardDuty
     class ListInvitationsResponse < Struct.new(
       :invitations,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2783,6 +2875,7 @@ module Aws::GuardDuty
       :max_results,
       :next_token,
       :only_associated)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2800,6 +2893,7 @@ module Aws::GuardDuty
     class ListMembersResponse < Struct.new(
       :members,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2828,6 +2922,7 @@ module Aws::GuardDuty
     class ListOrganizationAdminAccountsRequest < Struct.new(
       :max_results,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2846,6 +2941,7 @@ module Aws::GuardDuty
     class ListOrganizationAdminAccountsResponse < Struct.new(
       :admin_accounts,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2880,6 +2976,7 @@ module Aws::GuardDuty
       :detector_id,
       :max_results,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2901,6 +2998,7 @@ module Aws::GuardDuty
     class ListPublishingDestinationsResponse < Struct.new(
       :destinations,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2919,6 +3017,7 @@ module Aws::GuardDuty
     #
     class ListTagsForResourceRequest < Struct.new(
       :resource_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2930,6 +3029,7 @@ module Aws::GuardDuty
     #
     class ListTagsForResourceResponse < Struct.new(
       :tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2967,6 +3067,7 @@ module Aws::GuardDuty
       :detector_id,
       :max_results,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2984,6 +3085,7 @@ module Aws::GuardDuty
     class ListThreatIntelSetsResponse < Struct.new(
       :threat_intel_set_ids,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2997,6 +3099,7 @@ module Aws::GuardDuty
     #
     class LocalIpDetails < Struct.new(
       :ip_address_v4)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3015,6 +3118,7 @@ module Aws::GuardDuty
     class LocalPortDetails < Struct.new(
       :port,
       :port_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3044,6 +3148,7 @@ module Aws::GuardDuty
       :invitation_id,
       :relationship_status,
       :invited_at)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3087,6 +3192,7 @@ module Aws::GuardDuty
       :relationship_status,
       :invited_at,
       :updated_at)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3132,6 +3238,7 @@ module Aws::GuardDuty
       :local_ip_details,
       :remote_ip_details,
       :remote_port_details)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3191,6 +3298,7 @@ module Aws::GuardDuty
       :security_groups,
       :subnet_id,
       :vpc_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3221,6 +3329,7 @@ module Aws::GuardDuty
       :asn_org,
       :isp,
       :org)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3240,6 +3349,7 @@ module Aws::GuardDuty
     #
     class Owner < Struct.new(
       :id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3261,6 +3371,7 @@ module Aws::GuardDuty
     class PermissionConfiguration < Struct.new(
       :bucket_level_permissions,
       :account_level_permissions)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3281,6 +3392,7 @@ module Aws::GuardDuty
     class PortProbeAction < Struct.new(
       :blocked,
       :port_probe_details)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3304,6 +3416,7 @@ module Aws::GuardDuty
       :local_port_details,
       :local_ip_details,
       :remote_ip_details)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3322,6 +3435,7 @@ module Aws::GuardDuty
     class PrivateIpAddressDetails < Struct.new(
       :private_dns_name,
       :private_ip_address)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3340,6 +3454,7 @@ module Aws::GuardDuty
     class ProductCode < Struct.new(
       :code,
       :product_type)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3360,6 +3475,7 @@ module Aws::GuardDuty
     class PublicAccess < Struct.new(
       :permission_configuration,
       :effective_permission)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3393,6 +3509,7 @@ module Aws::GuardDuty
       :geo_location,
       :ip_address_v4,
       :organization)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3411,6 +3528,7 @@ module Aws::GuardDuty
     class RemotePortDetails < Struct.new(
       :port,
       :port_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3443,6 +3561,7 @@ module Aws::GuardDuty
       :s3_bucket_details,
       :instance_details,
       :resource_type)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3489,6 +3608,7 @@ module Aws::GuardDuty
       :tags,
       :default_server_side_encryption,
       :public_access)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3508,6 +3628,7 @@ module Aws::GuardDuty
     class SecurityGroup < Struct.new(
       :group_id,
       :group_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3568,6 +3689,7 @@ module Aws::GuardDuty
       :resource_role,
       :service_name,
       :user_feedback)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3595,6 +3717,7 @@ module Aws::GuardDuty
     class SortCriteria < Struct.new(
       :attribute_name,
       :order_by)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3621,6 +3744,7 @@ module Aws::GuardDuty
     class StartMonitoringMembersRequest < Struct.new(
       :detector_id,
       :account_ids)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3633,6 +3757,7 @@ module Aws::GuardDuty
     #
     class StartMonitoringMembersResponse < Struct.new(
       :unprocessed_accounts)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3658,6 +3783,7 @@ module Aws::GuardDuty
     class StopMonitoringMembersRequest < Struct.new(
       :detector_id,
       :account_ids)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3671,6 +3797,7 @@ module Aws::GuardDuty
     #
     class StopMonitoringMembersResponse < Struct.new(
       :unprocessed_accounts)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3689,6 +3816,7 @@ module Aws::GuardDuty
     class Tag < Struct.new(
       :key,
       :value)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3716,6 +3844,7 @@ module Aws::GuardDuty
     class TagResourceRequest < Struct.new(
       :resource_arn,
       :tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3740,6 +3869,7 @@ module Aws::GuardDuty
     class ThreatIntelligenceDetail < Struct.new(
       :threat_list_name,
       :threat_names)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3764,6 +3894,7 @@ module Aws::GuardDuty
     class UnarchiveFindingsRequest < Struct.new(
       :detector_id,
       :finding_ids)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3786,6 +3917,7 @@ module Aws::GuardDuty
     class UnprocessedAccount < Struct.new(
       :account_id,
       :result)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3810,6 +3942,7 @@ module Aws::GuardDuty
     class UntagResourceRequest < Struct.new(
       :resource_arn,
       :tag_keys)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3845,6 +3978,7 @@ module Aws::GuardDuty
       :detector_id,
       :enable,
       :finding_publishing_frequency)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3919,6 +4053,7 @@ module Aws::GuardDuty
       :action,
       :rank,
       :finding_criteria)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3930,6 +4065,7 @@ module Aws::GuardDuty
     #
     class UpdateFilterResponse < Struct.new(
       :name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3968,6 +4104,7 @@ module Aws::GuardDuty
       :finding_ids,
       :feedback,
       :comments)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4017,6 +4154,7 @@ module Aws::GuardDuty
       :name,
       :location,
       :activate)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4046,6 +4184,7 @@ module Aws::GuardDuty
     class UpdateOrganizationConfigurationRequest < Struct.new(
       :detector_id,
       :auto_enable)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4085,6 +4224,7 @@ module Aws::GuardDuty
       :detector_id,
       :destination_id,
       :destination_properties)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4136,6 +4276,7 @@ module Aws::GuardDuty
       :name,
       :location,
       :activate)
+      SENSITIVE = []
       include Aws::Structure
     end
 

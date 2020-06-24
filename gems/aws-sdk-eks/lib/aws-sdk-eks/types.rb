@@ -22,6 +22,7 @@ module Aws::EKS
     #
     class AutoScalingGroup < Struct.new(
       :name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -36,6 +37,7 @@ module Aws::EKS
     #
     class BadRequestException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -52,6 +54,7 @@ module Aws::EKS
     #
     class Certificate < Struct.new(
       :data)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -77,6 +80,7 @@ module Aws::EKS
       :cluster_name,
       :nodegroup_name,
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -182,6 +186,7 @@ module Aws::EKS
       :platform_version,
       :tags,
       :encryption_config)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -305,6 +310,7 @@ module Aws::EKS
       :client_request_token,
       :tags,
       :encryption_config)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -316,6 +322,7 @@ module Aws::EKS
     #
     class CreateClusterResponse < Struct.new(
       :cluster)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -402,6 +409,7 @@ module Aws::EKS
       :selectors,
       :client_request_token,
       :tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -413,6 +421,7 @@ module Aws::EKS
     #
     class CreateFargateProfileResponse < Struct.new(
       :fargate_profile)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -562,6 +571,7 @@ module Aws::EKS
       :client_request_token,
       :version,
       :release_version)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -573,6 +583,7 @@ module Aws::EKS
     #
     class CreateNodegroupResponse < Struct.new(
       :nodegroup)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -591,6 +602,7 @@ module Aws::EKS
     #
     class DeleteClusterRequest < Struct.new(
       :name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -602,6 +614,7 @@ module Aws::EKS
     #
     class DeleteClusterResponse < Struct.new(
       :cluster)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -627,6 +640,7 @@ module Aws::EKS
     class DeleteFargateProfileRequest < Struct.new(
       :cluster_name,
       :fargate_profile_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -638,6 +652,7 @@ module Aws::EKS
     #
     class DeleteFargateProfileResponse < Struct.new(
       :fargate_profile)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -663,6 +678,7 @@ module Aws::EKS
     class DeleteNodegroupRequest < Struct.new(
       :cluster_name,
       :nodegroup_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -674,6 +690,7 @@ module Aws::EKS
     #
     class DeleteNodegroupResponse < Struct.new(
       :nodegroup)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -692,6 +709,7 @@ module Aws::EKS
     #
     class DescribeClusterRequest < Struct.new(
       :name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -703,6 +721,7 @@ module Aws::EKS
     #
     class DescribeClusterResponse < Struct.new(
       :cluster)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -728,6 +747,7 @@ module Aws::EKS
     class DescribeFargateProfileRequest < Struct.new(
       :cluster_name,
       :fargate_profile_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -739,6 +759,7 @@ module Aws::EKS
     #
     class DescribeFargateProfileResponse < Struct.new(
       :fargate_profile)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -763,6 +784,7 @@ module Aws::EKS
     class DescribeNodegroupRequest < Struct.new(
       :cluster_name,
       :nodegroup_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -774,6 +796,7 @@ module Aws::EKS
     #
     class DescribeNodegroupResponse < Struct.new(
       :nodegroup)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -804,6 +827,7 @@ module Aws::EKS
       :name,
       :update_id,
       :nodegroup_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -815,6 +839,7 @@ module Aws::EKS
     #
     class DescribeUpdateResponse < Struct.new(
       :update)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -845,6 +870,7 @@ module Aws::EKS
     class EncryptionConfig < Struct.new(
       :resources,
       :provider)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -891,6 +917,7 @@ module Aws::EKS
       :error_code,
       :error_message,
       :resource_ids)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -957,6 +984,7 @@ module Aws::EKS
       :selectors,
       :status,
       :tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -987,6 +1015,7 @@ module Aws::EKS
     class FargateProfileSelector < Struct.new(
       :namespace,
       :labels)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1006,6 +1035,7 @@ module Aws::EKS
     #
     class Identity < Struct.new(
       :oidc)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1034,6 +1064,7 @@ module Aws::EKS
       :nodegroup_name,
       :fargate_profile_name,
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1057,6 +1088,7 @@ module Aws::EKS
       :cluster_name,
       :nodegroup_name,
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1134,6 +1166,7 @@ module Aws::EKS
       :code,
       :message,
       :resource_ids)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1174,6 +1207,7 @@ module Aws::EKS
     class ListClustersRequest < Struct.new(
       :max_results,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1194,6 +1228,7 @@ module Aws::EKS
     class ListClustersResponse < Struct.new(
       :clusters,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1237,6 +1272,7 @@ module Aws::EKS
       :cluster_name,
       :max_results,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1258,6 +1294,7 @@ module Aws::EKS
     class ListFargateProfilesResponse < Struct.new(
       :fargate_profile_names,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1300,6 +1337,7 @@ module Aws::EKS
       :cluster_name,
       :max_results,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1321,6 +1359,7 @@ module Aws::EKS
     class ListNodegroupsResponse < Struct.new(
       :nodegroups,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1341,6 +1380,7 @@ module Aws::EKS
     #
     class ListTagsForResourceRequest < Struct.new(
       :resource_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1352,6 +1392,7 @@ module Aws::EKS
     #
     class ListTagsForResourceResponse < Struct.new(
       :tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1398,6 +1439,7 @@ module Aws::EKS
       :nodegroup_name,
       :next_token,
       :max_results)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1417,6 +1459,7 @@ module Aws::EKS
     class ListUpdatesResponse < Struct.new(
       :update_ids,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1447,6 +1490,7 @@ module Aws::EKS
     class LogSetup < Struct.new(
       :types,
       :enabled)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1473,6 +1517,7 @@ module Aws::EKS
     #
     class Logging < Struct.new(
       :cluster_logging)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1618,6 +1663,7 @@ module Aws::EKS
       :disk_size,
       :health,
       :tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1631,6 +1677,7 @@ module Aws::EKS
     #
     class NodegroupHealth < Struct.new(
       :issues)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1651,6 +1698,7 @@ module Aws::EKS
     class NodegroupResources < Struct.new(
       :auto_scaling_groups,
       :remote_access_security_group)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1688,6 +1736,7 @@ module Aws::EKS
       :min_size,
       :max_size,
       :desired_size)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1701,6 +1750,7 @@ module Aws::EKS
     #
     class NotFoundException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1719,6 +1769,7 @@ module Aws::EKS
     #
     class OIDC < Struct.new(
       :issuer)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1749,6 +1800,7 @@ module Aws::EKS
     #
     class Provider < Struct.new(
       :key_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1792,6 +1844,7 @@ module Aws::EKS
     class RemoteAccessConfig < Struct.new(
       :ec2_ssh_key,
       :source_security_groups)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1814,6 +1867,7 @@ module Aws::EKS
       :cluster_name,
       :nodegroup_name,
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1836,6 +1890,7 @@ module Aws::EKS
       :cluster_name,
       :nodegroup_name,
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1866,6 +1921,7 @@ module Aws::EKS
       :nodegroup_name,
       :fargate_profile_name,
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1888,6 +1944,7 @@ module Aws::EKS
       :cluster_name,
       :nodegroup_name,
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1900,6 +1957,7 @@ module Aws::EKS
     #
     class ServiceUnavailableException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1929,6 +1987,7 @@ module Aws::EKS
     class TagResourceRequest < Struct.new(
       :resource_arn,
       :tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1964,6 +2023,7 @@ module Aws::EKS
       :cluster_name,
       :nodegroup_name,
       :valid_zones)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1990,6 +2050,7 @@ module Aws::EKS
     class UntagResourceRequest < Struct.new(
       :resource_arn,
       :tag_keys)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2033,6 +2094,7 @@ module Aws::EKS
       :params,
       :created_at,
       :errors)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2102,6 +2164,7 @@ module Aws::EKS
       :resources_vpc_config,
       :logging,
       :client_request_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2113,6 +2176,7 @@ module Aws::EKS
     #
     class UpdateClusterConfigResponse < Struct.new(
       :update)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2147,6 +2211,7 @@ module Aws::EKS
       :name,
       :version,
       :client_request_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2158,6 +2223,7 @@ module Aws::EKS
     #
     class UpdateClusterVersionResponse < Struct.new(
       :update)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2187,6 +2253,7 @@ module Aws::EKS
     class UpdateLabelsPayload < Struct.new(
       :add_or_update_labels,
       :remove_labels)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2245,6 +2312,7 @@ module Aws::EKS
       :labels,
       :scaling_config,
       :client_request_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2256,6 +2324,7 @@ module Aws::EKS
     #
     class UpdateNodegroupConfigResponse < Struct.new(
       :update)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2325,6 +2394,7 @@ module Aws::EKS
       :release_version,
       :force,
       :client_request_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2336,6 +2406,7 @@ module Aws::EKS
     #
     class UpdateNodegroupVersionResponse < Struct.new(
       :update)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2354,6 +2425,7 @@ module Aws::EKS
     class UpdateParam < Struct.new(
       :type,
       :value)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2441,6 +2513,7 @@ module Aws::EKS
       :endpoint_public_access,
       :endpoint_private_access,
       :public_access_cidrs)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2516,6 +2589,7 @@ module Aws::EKS
       :endpoint_public_access,
       :endpoint_private_access,
       :public_access_cidrs)
+      SENSITIVE = []
       include Aws::Structure
     end
 

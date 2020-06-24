@@ -48,6 +48,6 @@ require_relative 'aws-sdk-iotsitewise/customizations'
 # @service
 module Aws::IoTSiteWise
 
-  GEM_VERSION = '1.5.1'
+  GEM_VERSION = '1.6.0'
 
 end

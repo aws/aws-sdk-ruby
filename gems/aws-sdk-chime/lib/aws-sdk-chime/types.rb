@@ -23,6 +23,7 @@ module Aws::Chime
     class AccessDeniedException < Struct.new(
       :code,
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -78,6 +79,7 @@ module Aws::Chime
       :default_license,
       :supported_licenses,
       :signin_delegate_groups)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -119,6 +121,7 @@ module Aws::Chime
     class AccountSettings < Struct.new(
       :disable_remote_control,
       :enable_dial_out)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -146,6 +149,7 @@ module Aws::Chime
     class AlexaForBusinessMetadata < Struct.new(
       :is_alexa_for_business_enabled,
       :alexa_for_business_room_arn)
+      SENSITIVE = [:alexa_for_business_room_arn]
       include Aws::Structure
     end
 
@@ -176,6 +180,7 @@ module Aws::Chime
       :account_id,
       :user_id,
       :e164_phone_number)
+      SENSITIVE = [:e164_phone_number]
       include Aws::Structure
     end
 
@@ -213,6 +218,7 @@ module Aws::Chime
       :voice_connector_group_id,
       :e164_phone_numbers,
       :force_associate)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -226,6 +232,7 @@ module Aws::Chime
     #
     class AssociatePhoneNumbersWithVoiceConnectorGroupResponse < Struct.new(
       :phone_number_errors)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -259,6 +266,7 @@ module Aws::Chime
       :voice_connector_id,
       :e164_phone_numbers,
       :force_associate)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -272,6 +280,7 @@ module Aws::Chime
     #
     class AssociatePhoneNumbersWithVoiceConnectorResponse < Struct.new(
       :phone_number_errors)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -300,6 +309,7 @@ module Aws::Chime
     class AssociateSigninDelegateGroupsWithAccountRequest < Struct.new(
       :account_id,
       :signin_delegate_groups)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -336,6 +346,7 @@ module Aws::Chime
       :external_user_id,
       :attendee_id,
       :join_token)
+      SENSITIVE = [:external_user_id, :join_token]
       include Aws::Structure
     end
 
@@ -352,6 +363,7 @@ module Aws::Chime
     class BadRequestException < Struct.new(
       :code,
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -386,6 +398,7 @@ module Aws::Chime
     class BatchCreateAttendeeRequest < Struct.new(
       :meeting_id,
       :attendees)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -404,6 +417,7 @@ module Aws::Chime
     class BatchCreateAttendeeResponse < Struct.new(
       :attendees,
       :errors)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -439,6 +453,7 @@ module Aws::Chime
       :account_id,
       :room_id,
       :membership_item_list)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -452,6 +467,7 @@ module Aws::Chime
     #
     class BatchCreateRoomMembershipResponse < Struct.new(
       :errors)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -470,6 +486,7 @@ module Aws::Chime
     #
     class BatchDeletePhoneNumberRequest < Struct.new(
       :phone_number_ids)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -483,6 +500,7 @@ module Aws::Chime
     #
     class BatchDeletePhoneNumberResponse < Struct.new(
       :phone_number_errors)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -507,6 +525,7 @@ module Aws::Chime
     class BatchSuspendUserRequest < Struct.new(
       :account_id,
       :user_id_list)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -520,6 +539,7 @@ module Aws::Chime
     #
     class BatchSuspendUserResponse < Struct.new(
       :user_errors)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -544,6 +564,7 @@ module Aws::Chime
     class BatchUnsuspendUserRequest < Struct.new(
       :account_id,
       :user_id_list)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -557,6 +578,7 @@ module Aws::Chime
     #
     class BatchUnsuspendUserResponse < Struct.new(
       :user_errors)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -582,6 +604,7 @@ module Aws::Chime
     #
     class BatchUpdatePhoneNumberRequest < Struct.new(
       :update_phone_number_request_items)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -595,6 +618,7 @@ module Aws::Chime
     #
     class BatchUpdatePhoneNumberResponse < Struct.new(
       :phone_number_errors)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -629,6 +653,7 @@ module Aws::Chime
     class BatchUpdateUserRequest < Struct.new(
       :account_id,
       :update_user_request_items)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -642,6 +667,7 @@ module Aws::Chime
     #
     class BatchUpdateUserResponse < Struct.new(
       :user_errors)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -697,6 +723,7 @@ module Aws::Chime
       :updated_timestamp,
       :bot_email,
       :security_token)
+      SENSITIVE = [:display_name, :bot_email, :security_token]
       include Aws::Structure
     end
 
@@ -719,6 +746,7 @@ module Aws::Chime
     #
     class BusinessCallingSettings < Struct.new(
       :cdr_bucket)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -736,6 +764,7 @@ module Aws::Chime
     class ConflictException < Struct.new(
       :code,
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -757,6 +786,7 @@ module Aws::Chime
     #
     class ConversationRetentionSettings < Struct.new(
       :retention_days)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -775,6 +805,7 @@ module Aws::Chime
     #
     class CreateAccountRequest < Struct.new(
       :name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -786,6 +817,7 @@ module Aws::Chime
     #
     class CreateAccountResponse < Struct.new(
       :account)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -812,6 +844,7 @@ module Aws::Chime
       :external_user_id,
       :error_code,
       :error_message)
+      SENSITIVE = [:external_user_id]
       include Aws::Structure
     end
 
@@ -848,6 +881,7 @@ module Aws::Chime
       :meeting_id,
       :external_user_id,
       :tags)
+      SENSITIVE = [:external_user_id]
       include Aws::Structure
     end
 
@@ -881,6 +915,7 @@ module Aws::Chime
     class CreateAttendeeRequestItem < Struct.new(
       :external_user_id,
       :tags)
+      SENSITIVE = [:external_user_id]
       include Aws::Structure
     end
 
@@ -892,6 +927,7 @@ module Aws::Chime
     #
     class CreateAttendeeResponse < Struct.new(
       :attendee)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -922,6 +958,7 @@ module Aws::Chime
       :account_id,
       :display_name,
       :domain)
+      SENSITIVE = [:display_name]
       include Aws::Structure
     end
 
@@ -933,6 +970,7 @@ module Aws::Chime
     #
     class CreateBotResponse < Struct.new(
       :bot)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -999,6 +1037,7 @@ module Aws::Chime
       :media_region,
       :tags,
       :notifications_configuration)
+      SENSITIVE = [:client_request_token, :external_meeting_id, :meeting_host_id]
       include Aws::Structure
     end
 
@@ -1011,6 +1050,7 @@ module Aws::Chime
     #
     class CreateMeetingResponse < Struct.new(
       :meeting)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1095,6 +1135,7 @@ module Aws::Chime
       :tags,
       :notifications_configuration,
       :attendees)
+      SENSITIVE = [:client_request_token, :external_meeting_id, :meeting_host_id]
       include Aws::Structure
     end
 
@@ -1118,6 +1159,7 @@ module Aws::Chime
       :meeting,
       :attendees,
       :errors)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1142,6 +1184,7 @@ module Aws::Chime
     class CreatePhoneNumberOrderRequest < Struct.new(
       :product_type,
       :e164_phone_numbers)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1153,6 +1196,7 @@ module Aws::Chime
     #
     class CreatePhoneNumberOrderResponse < Struct.new(
       :phone_number_order)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1218,6 +1262,7 @@ module Aws::Chime
       :number_selection_behavior,
       :geo_match_level,
       :geo_match_params)
+      SENSITIVE = [:name]
       include Aws::Structure
     end
 
@@ -1229,6 +1274,7 @@ module Aws::Chime
     #
     class CreateProxySessionResponse < Struct.new(
       :proxy_session)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1265,6 +1311,7 @@ module Aws::Chime
       :room_id,
       :member_id,
       :role)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1276,6 +1323,7 @@ module Aws::Chime
     #
     class CreateRoomMembershipResponse < Struct.new(
       :room_membership)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1309,6 +1357,7 @@ module Aws::Chime
       :account_id,
       :name,
       :client_request_token)
+      SENSITIVE = [:name, :client_request_token]
       include Aws::Structure
     end
 
@@ -1320,6 +1369,7 @@ module Aws::Chime
     #
     class CreateRoomResponse < Struct.new(
       :room)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1356,6 +1406,7 @@ module Aws::Chime
       :username,
       :email,
       :user_type)
+      SENSITIVE = [:email]
       include Aws::Structure
     end
 
@@ -1367,6 +1418,7 @@ module Aws::Chime
     #
     class CreateUserResponse < Struct.new(
       :user)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1396,6 +1448,7 @@ module Aws::Chime
     class CreateVoiceConnectorGroupRequest < Struct.new(
       :name,
       :voice_connector_items)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1407,6 +1460,7 @@ module Aws::Chime
     #
     class CreateVoiceConnectorGroupResponse < Struct.new(
       :voice_connector_group)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1439,6 +1493,7 @@ module Aws::Chime
       :name,
       :aws_region,
       :require_encryption)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1450,6 +1505,7 @@ module Aws::Chime
     #
     class CreateVoiceConnectorResponse < Struct.new(
       :voice_connector)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1479,6 +1535,7 @@ module Aws::Chime
     class Credential < Struct.new(
       :username,
       :password)
+      SENSITIVE = [:username, :password]
       include Aws::Structure
     end
 
@@ -1497,6 +1554,7 @@ module Aws::Chime
     #
     class DeleteAccountRequest < Struct.new(
       :account_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1525,6 +1583,7 @@ module Aws::Chime
     class DeleteAttendeeRequest < Struct.new(
       :meeting_id,
       :attendee_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1549,6 +1608,7 @@ module Aws::Chime
     class DeleteEventsConfigurationRequest < Struct.new(
       :account_id,
       :bot_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1567,6 +1627,7 @@ module Aws::Chime
     #
     class DeleteMeetingRequest < Struct.new(
       :meeting_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1585,6 +1646,7 @@ module Aws::Chime
     #
     class DeletePhoneNumberRequest < Struct.new(
       :phone_number_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1609,6 +1671,7 @@ module Aws::Chime
     class DeleteProxySessionRequest < Struct.new(
       :voice_connector_id,
       :proxy_session_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1639,6 +1702,7 @@ module Aws::Chime
       :account_id,
       :room_id,
       :member_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1663,6 +1727,7 @@ module Aws::Chime
     class DeleteRoomRequest < Struct.new(
       :account_id,
       :room_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1681,6 +1746,7 @@ module Aws::Chime
     #
     class DeleteVoiceConnectorGroupRequest < Struct.new(
       :voice_connector_group_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1699,6 +1765,7 @@ module Aws::Chime
     #
     class DeleteVoiceConnectorOriginationRequest < Struct.new(
       :voice_connector_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1717,6 +1784,7 @@ module Aws::Chime
     #
     class DeleteVoiceConnectorProxyRequest < Struct.new(
       :voice_connector_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1735,6 +1803,7 @@ module Aws::Chime
     #
     class DeleteVoiceConnectorRequest < Struct.new(
       :voice_connector_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1753,6 +1822,7 @@ module Aws::Chime
     #
     class DeleteVoiceConnectorStreamingConfigurationRequest < Struct.new(
       :voice_connector_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1778,6 +1848,7 @@ module Aws::Chime
     class DeleteVoiceConnectorTerminationCredentialsRequest < Struct.new(
       :voice_connector_id,
       :usernames)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1796,6 +1867,7 @@ module Aws::Chime
     #
     class DeleteVoiceConnectorTerminationRequest < Struct.new(
       :voice_connector_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1820,6 +1892,7 @@ module Aws::Chime
     class DisassociatePhoneNumberFromUserRequest < Struct.new(
       :account_id,
       :user_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1848,6 +1921,7 @@ module Aws::Chime
     class DisassociatePhoneNumbersFromVoiceConnectorGroupRequest < Struct.new(
       :voice_connector_group_id,
       :e164_phone_numbers)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1861,6 +1935,7 @@ module Aws::Chime
     #
     class DisassociatePhoneNumbersFromVoiceConnectorGroupResponse < Struct.new(
       :phone_number_errors)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1885,6 +1960,7 @@ module Aws::Chime
     class DisassociatePhoneNumbersFromVoiceConnectorRequest < Struct.new(
       :voice_connector_id,
       :e164_phone_numbers)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1898,6 +1974,7 @@ module Aws::Chime
     #
     class DisassociatePhoneNumbersFromVoiceConnectorResponse < Struct.new(
       :phone_number_errors)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1922,6 +1999,7 @@ module Aws::Chime
     class DisassociateSigninDelegateGroupsFromAccountRequest < Struct.new(
       :account_id,
       :group_names)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1950,6 +2028,7 @@ module Aws::Chime
       :bot_id,
       :outbound_events_https_endpoint,
       :lambda_function_arn)
+      SENSITIVE = [:outbound_events_https_endpoint, :lambda_function_arn]
       include Aws::Structure
     end
 
@@ -1968,6 +2047,7 @@ module Aws::Chime
     class ForbiddenException < Struct.new(
       :code,
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1995,6 +2075,7 @@ module Aws::Chime
     class GeoMatchParams < Struct.new(
       :country,
       :area_code)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2013,6 +2094,7 @@ module Aws::Chime
     #
     class GetAccountRequest < Struct.new(
       :account_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2024,6 +2106,7 @@ module Aws::Chime
     #
     class GetAccountResponse < Struct.new(
       :account)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2042,6 +2125,7 @@ module Aws::Chime
     #
     class GetAccountSettingsRequest < Struct.new(
       :account_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2053,6 +2137,7 @@ module Aws::Chime
     #
     class GetAccountSettingsResponse < Struct.new(
       :account_settings)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2077,6 +2162,7 @@ module Aws::Chime
     class GetAttendeeRequest < Struct.new(
       :meeting_id,
       :attendee_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2088,6 +2174,7 @@ module Aws::Chime
     #
     class GetAttendeeResponse < Struct.new(
       :attendee)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2112,6 +2199,7 @@ module Aws::Chime
     class GetBotRequest < Struct.new(
       :account_id,
       :bot_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2123,6 +2211,7 @@ module Aws::Chime
     #
     class GetBotResponse < Struct.new(
       :bot)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2147,6 +2236,7 @@ module Aws::Chime
     class GetEventsConfigurationRequest < Struct.new(
       :account_id,
       :bot_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2158,6 +2248,7 @@ module Aws::Chime
     #
     class GetEventsConfigurationResponse < Struct.new(
       :events_configuration)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2174,6 +2265,7 @@ module Aws::Chime
     class GetGlobalSettingsResponse < Struct.new(
       :business_calling,
       :voice_connector)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2192,6 +2284,7 @@ module Aws::Chime
     #
     class GetMeetingRequest < Struct.new(
       :meeting_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2203,6 +2296,7 @@ module Aws::Chime
     #
     class GetMeetingResponse < Struct.new(
       :meeting)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2221,6 +2315,7 @@ module Aws::Chime
     #
     class GetPhoneNumberOrderRequest < Struct.new(
       :phone_number_order_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2232,6 +2327,7 @@ module Aws::Chime
     #
     class GetPhoneNumberOrderResponse < Struct.new(
       :phone_number_order)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2250,6 +2346,7 @@ module Aws::Chime
     #
     class GetPhoneNumberRequest < Struct.new(
       :phone_number_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2261,6 +2358,7 @@ module Aws::Chime
     #
     class GetPhoneNumberResponse < Struct.new(
       :phone_number)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2277,6 +2375,7 @@ module Aws::Chime
     class GetPhoneNumberSettingsResponse < Struct.new(
       :calling_name,
       :calling_name_updated_timestamp)
+      SENSITIVE = [:calling_name]
       include Aws::Structure
     end
 
@@ -2301,6 +2400,7 @@ module Aws::Chime
     class GetProxySessionRequest < Struct.new(
       :voice_connector_id,
       :proxy_session_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2312,6 +2412,7 @@ module Aws::Chime
     #
     class GetProxySessionResponse < Struct.new(
       :proxy_session)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2330,6 +2431,7 @@ module Aws::Chime
     #
     class GetRetentionSettingsRequest < Struct.new(
       :account_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2347,6 +2449,7 @@ module Aws::Chime
     class GetRetentionSettingsResponse < Struct.new(
       :retention_settings,
       :initiate_deletion_timestamp)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2371,6 +2474,7 @@ module Aws::Chime
     class GetRoomRequest < Struct.new(
       :account_id,
       :room_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2382,6 +2486,7 @@ module Aws::Chime
     #
     class GetRoomResponse < Struct.new(
       :room)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2406,6 +2511,7 @@ module Aws::Chime
     class GetUserRequest < Struct.new(
       :account_id,
       :user_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2417,6 +2523,7 @@ module Aws::Chime
     #
     class GetUserResponse < Struct.new(
       :user)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2441,6 +2548,7 @@ module Aws::Chime
     class GetUserSettingsRequest < Struct.new(
       :account_id,
       :user_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2452,6 +2560,7 @@ module Aws::Chime
     #
     class GetUserSettingsResponse < Struct.new(
       :user_settings)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2470,6 +2579,7 @@ module Aws::Chime
     #
     class GetVoiceConnectorGroupRequest < Struct.new(
       :voice_connector_group_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2481,6 +2591,7 @@ module Aws::Chime
     #
     class GetVoiceConnectorGroupResponse < Struct.new(
       :voice_connector_group)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2499,6 +2610,7 @@ module Aws::Chime
     #
     class GetVoiceConnectorLoggingConfigurationRequest < Struct.new(
       :voice_connector_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2510,6 +2622,7 @@ module Aws::Chime
     #
     class GetVoiceConnectorLoggingConfigurationResponse < Struct.new(
       :logging_configuration)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2528,6 +2641,7 @@ module Aws::Chime
     #
     class GetVoiceConnectorOriginationRequest < Struct.new(
       :voice_connector_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2539,6 +2653,7 @@ module Aws::Chime
     #
     class GetVoiceConnectorOriginationResponse < Struct.new(
       :origination)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2557,6 +2672,7 @@ module Aws::Chime
     #
     class GetVoiceConnectorProxyRequest < Struct.new(
       :voice_connector_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2568,6 +2684,7 @@ module Aws::Chime
     #
     class GetVoiceConnectorProxyResponse < Struct.new(
       :proxy)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2586,6 +2703,7 @@ module Aws::Chime
     #
     class GetVoiceConnectorRequest < Struct.new(
       :voice_connector_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2597,6 +2715,7 @@ module Aws::Chime
     #
     class GetVoiceConnectorResponse < Struct.new(
       :voice_connector)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2615,6 +2734,7 @@ module Aws::Chime
     #
     class GetVoiceConnectorStreamingConfigurationRequest < Struct.new(
       :voice_connector_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2626,6 +2746,7 @@ module Aws::Chime
     #
     class GetVoiceConnectorStreamingConfigurationResponse < Struct.new(
       :streaming_configuration)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2644,6 +2765,7 @@ module Aws::Chime
     #
     class GetVoiceConnectorTerminationHealthRequest < Struct.new(
       :voice_connector_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2655,6 +2777,7 @@ module Aws::Chime
     #
     class GetVoiceConnectorTerminationHealthResponse < Struct.new(
       :termination_health)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2673,6 +2796,7 @@ module Aws::Chime
     #
     class GetVoiceConnectorTerminationRequest < Struct.new(
       :voice_connector_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2684,6 +2808,7 @@ module Aws::Chime
     #
     class GetVoiceConnectorTerminationResponse < Struct.new(
       :termination)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2713,6 +2838,7 @@ module Aws::Chime
       :status,
       :email_address,
       :email_status)
+      SENSITIVE = [:email_address]
       include Aws::Structure
     end
 
@@ -2743,6 +2869,7 @@ module Aws::Chime
       :account_id,
       :user_email_list,
       :user_type)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2754,6 +2881,7 @@ module Aws::Chime
     #
     class InviteUsersResponse < Struct.new(
       :invites)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2791,6 +2919,7 @@ module Aws::Chime
       :user_email,
       :next_token,
       :max_results)
+      SENSITIVE = [:user_email]
       include Aws::Structure
     end
 
@@ -2807,6 +2936,7 @@ module Aws::Chime
     class ListAccountsResponse < Struct.new(
       :accounts,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2831,6 +2961,7 @@ module Aws::Chime
     class ListAttendeeTagsRequest < Struct.new(
       :meeting_id,
       :attendee_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2842,6 +2973,7 @@ module Aws::Chime
     #
     class ListAttendeeTagsResponse < Struct.new(
       :tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2872,6 +3004,7 @@ module Aws::Chime
       :meeting_id,
       :next_token,
       :max_results)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2888,6 +3021,7 @@ module Aws::Chime
     class ListAttendeesResponse < Struct.new(
       :attendees,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2919,6 +3053,7 @@ module Aws::Chime
       :account_id,
       :max_results,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2935,6 +3070,7 @@ module Aws::Chime
     class ListBotsResponse < Struct.new(
       :bots,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2953,6 +3089,7 @@ module Aws::Chime
     #
     class ListMeetingTagsRequest < Struct.new(
       :meeting_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2964,6 +3101,7 @@ module Aws::Chime
     #
     class ListMeetingTagsResponse < Struct.new(
       :tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2988,6 +3126,7 @@ module Aws::Chime
     class ListMeetingsRequest < Struct.new(
       :next_token,
       :max_results)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3004,6 +3143,7 @@ module Aws::Chime
     class ListMeetingsResponse < Struct.new(
       :meetings,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3028,6 +3168,7 @@ module Aws::Chime
     class ListPhoneNumberOrdersRequest < Struct.new(
       :next_token,
       :max_results)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3044,6 +3185,7 @@ module Aws::Chime
     class ListPhoneNumberOrdersResponse < Struct.new(
       :phone_number_orders,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3092,6 +3234,7 @@ module Aws::Chime
       :filter_value,
       :max_results,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3108,6 +3251,7 @@ module Aws::Chime
     class ListPhoneNumbersResponse < Struct.new(
       :phone_numbers,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3144,6 +3288,7 @@ module Aws::Chime
       :status,
       :next_token,
       :max_results)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3160,6 +3305,7 @@ module Aws::Chime
     class ListProxySessionsResponse < Struct.new(
       :proxy_sessions,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3196,6 +3342,7 @@ module Aws::Chime
       :room_id,
       :max_results,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3212,6 +3359,7 @@ module Aws::Chime
     class ListRoomMembershipsResponse < Struct.new(
       :room_memberships,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3248,6 +3396,7 @@ module Aws::Chime
       :member_id,
       :max_results,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3264,6 +3413,7 @@ module Aws::Chime
     class ListRoomsResponse < Struct.new(
       :rooms,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3282,6 +3432,7 @@ module Aws::Chime
     #
     class ListTagsForResourceRequest < Struct.new(
       :resource_arn)
+      SENSITIVE = [:resource_arn]
       include Aws::Structure
     end
 
@@ -3293,6 +3444,7 @@ module Aws::Chime
     #
     class ListTagsForResourceResponse < Struct.new(
       :tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3336,6 +3488,7 @@ module Aws::Chime
       :user_type,
       :max_results,
       :next_token)
+      SENSITIVE = [:user_email]
       include Aws::Structure
     end
 
@@ -3352,6 +3505,7 @@ module Aws::Chime
     class ListUsersResponse < Struct.new(
       :users,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3376,6 +3530,7 @@ module Aws::Chime
     class ListVoiceConnectorGroupsRequest < Struct.new(
       :next_token,
       :max_results)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3392,6 +3547,7 @@ module Aws::Chime
     class ListVoiceConnectorGroupsResponse < Struct.new(
       :voice_connector_groups,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3410,6 +3566,7 @@ module Aws::Chime
     #
     class ListVoiceConnectorTerminationCredentialsRequest < Struct.new(
       :voice_connector_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3421,6 +3578,7 @@ module Aws::Chime
     #
     class ListVoiceConnectorTerminationCredentialsResponse < Struct.new(
       :usernames)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3445,6 +3603,7 @@ module Aws::Chime
     class ListVoiceConnectorsRequest < Struct.new(
       :next_token,
       :max_results)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3461,6 +3620,7 @@ module Aws::Chime
     class ListVoiceConnectorsResponse < Struct.new(
       :voice_connectors,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3484,6 +3644,7 @@ module Aws::Chime
     #
     class LoggingConfiguration < Struct.new(
       :enable_sip_logs)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3508,6 +3669,7 @@ module Aws::Chime
     class LogoutUserRequest < Struct.new(
       :account_id,
       :user_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3556,6 +3718,7 @@ module Aws::Chime
       :screen_viewing_url,
       :signaling_url,
       :turn_control_url)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3588,6 +3751,7 @@ module Aws::Chime
       :external_meeting_id,
       :media_placement,
       :media_region)
+      SENSITIVE = [:external_meeting_id]
       include Aws::Structure
     end
 
@@ -3617,6 +3781,7 @@ module Aws::Chime
     class MeetingNotificationConfiguration < Struct.new(
       :sns_topic_arn,
       :sqs_queue_arn)
+      SENSITIVE = [:sns_topic_arn, :sqs_queue_arn]
       include Aws::Structure
     end
 
@@ -3651,6 +3816,7 @@ module Aws::Chime
       :email,
       :full_name,
       :account_id)
+      SENSITIVE = [:email, :full_name]
       include Aws::Structure
     end
 
@@ -3674,6 +3840,7 @@ module Aws::Chime
       :member_id,
       :error_code,
       :error_message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3700,6 +3867,7 @@ module Aws::Chime
     class MembershipItem < Struct.new(
       :member_id,
       :role)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3717,6 +3885,7 @@ module Aws::Chime
     class NotFoundException < Struct.new(
       :code,
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3735,6 +3904,7 @@ module Aws::Chime
     class OrderedPhoneNumber < Struct.new(
       :e164_phone_number,
       :status)
+      SENSITIVE = [:e164_phone_number]
       include Aws::Structure
     end
 
@@ -3772,6 +3942,7 @@ module Aws::Chime
     class Origination < Struct.new(
       :routes,
       :disabled)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3822,6 +3993,7 @@ module Aws::Chime
       :protocol,
       :priority,
       :weight)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3841,6 +4013,7 @@ module Aws::Chime
     class Participant < Struct.new(
       :phone_number,
       :proxy_phone_number)
+      SENSITIVE = [:phone_number, :proxy_phone_number]
       include Aws::Structure
     end
 
@@ -3910,6 +4083,7 @@ module Aws::Chime
       :created_timestamp,
       :updated_timestamp,
       :deletion_timestamp)
+      SENSITIVE = [:e164_phone_number, :calling_name]
       include Aws::Structure
     end
 
@@ -3937,6 +4111,7 @@ module Aws::Chime
       :value,
       :name,
       :associated_timestamp)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3981,6 +4156,7 @@ module Aws::Chime
       :outbound_sms,
       :inbound_mms,
       :outbound_mms)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4006,6 +4182,7 @@ module Aws::Chime
       :phone_number_id,
       :error_code,
       :error_message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4045,6 +4222,7 @@ module Aws::Chime
       :ordered_phone_numbers,
       :created_timestamp,
       :updated_timestamp)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4074,6 +4252,7 @@ module Aws::Chime
       :disabled,
       :fall_back_phone_number,
       :phone_number_countries)
+      SENSITIVE = [:fall_back_phone_number]
       include Aws::Structure
     end
 
@@ -4149,6 +4328,7 @@ module Aws::Chime
       :number_selection_behavior,
       :geo_match_level,
       :geo_match_params)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4185,6 +4365,7 @@ module Aws::Chime
       :bot_id,
       :outbound_events_https_endpoint,
       :lambda_function_arn)
+      SENSITIVE = [:outbound_events_https_endpoint, :lambda_function_arn]
       include Aws::Structure
     end
 
@@ -4197,6 +4378,7 @@ module Aws::Chime
     #
     class PutEventsConfigurationResponse < Struct.new(
       :events_configuration)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4228,6 +4410,7 @@ module Aws::Chime
     class PutRetentionSettingsRequest < Struct.new(
       :account_id,
       :retention_settings)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4245,6 +4428,7 @@ module Aws::Chime
     class PutRetentionSettingsResponse < Struct.new(
       :retention_settings,
       :initiate_deletion_timestamp)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4271,6 +4455,7 @@ module Aws::Chime
     class PutVoiceConnectorLoggingConfigurationRequest < Struct.new(
       :voice_connector_id,
       :logging_configuration)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4282,6 +4467,7 @@ module Aws::Chime
     #
     class PutVoiceConnectorLoggingConfigurationResponse < Struct.new(
       :logging_configuration)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4317,6 +4503,7 @@ module Aws::Chime
     class PutVoiceConnectorOriginationRequest < Struct.new(
       :voice_connector_id,
       :origination)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4328,6 +4515,7 @@ module Aws::Chime
     #
     class PutVoiceConnectorOriginationResponse < Struct.new(
       :origination)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4371,6 +4559,7 @@ module Aws::Chime
       :phone_number_pool_countries,
       :fall_back_phone_number,
       :disabled)
+      SENSITIVE = [:fall_back_phone_number]
       include Aws::Structure
     end
 
@@ -4382,6 +4571,7 @@ module Aws::Chime
     #
     class PutVoiceConnectorProxyResponse < Struct.new(
       :proxy)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4414,6 +4604,7 @@ module Aws::Chime
     class PutVoiceConnectorStreamingConfigurationRequest < Struct.new(
       :voice_connector_id,
       :streaming_configuration)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4425,6 +4616,7 @@ module Aws::Chime
     #
     class PutVoiceConnectorStreamingConfigurationResponse < Struct.new(
       :streaming_configuration)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4454,6 +4646,7 @@ module Aws::Chime
     class PutVoiceConnectorTerminationCredentialsRequest < Struct.new(
       :voice_connector_id,
       :credentials)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4484,6 +4677,7 @@ module Aws::Chime
     class PutVoiceConnectorTerminationRequest < Struct.new(
       :voice_connector_id,
       :termination)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4495,6 +4689,7 @@ module Aws::Chime
     #
     class PutVoiceConnectorTerminationResponse < Struct.new(
       :termination)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4525,6 +4720,7 @@ module Aws::Chime
       :account_id,
       :conversation_id,
       :message_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4559,6 +4755,7 @@ module Aws::Chime
       :account_id,
       :room_id,
       :message_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4587,6 +4784,7 @@ module Aws::Chime
     class RegenerateSecurityTokenRequest < Struct.new(
       :account_id,
       :bot_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4599,6 +4797,7 @@ module Aws::Chime
     #
     class RegenerateSecurityTokenResponse < Struct.new(
       :bot)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4623,6 +4822,7 @@ module Aws::Chime
     class ResetPersonalPINRequest < Struct.new(
       :account_id,
       :user_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4634,6 +4834,7 @@ module Aws::Chime
     #
     class ResetPersonalPINResponse < Struct.new(
       :user)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4650,6 +4851,7 @@ module Aws::Chime
     class ResourceLimitExceededException < Struct.new(
       :code,
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4668,6 +4870,7 @@ module Aws::Chime
     #
     class RestorePhoneNumberRequest < Struct.new(
       :phone_number_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4679,6 +4882,7 @@ module Aws::Chime
     #
     class RestorePhoneNumberResponse < Struct.new(
       :phone_number)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4711,6 +4915,7 @@ module Aws::Chime
     class RetentionSettings < Struct.new(
       :room_retention_settings,
       :conversation_retention_settings)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4749,6 +4954,7 @@ module Aws::Chime
       :created_by,
       :created_timestamp,
       :updated_timestamp)
+      SENSITIVE = [:name]
       include Aws::Structure
     end
 
@@ -4783,6 +4989,7 @@ module Aws::Chime
       :role,
       :invited_by,
       :updated_timestamp)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4804,6 +5011,7 @@ module Aws::Chime
     #
     class RoomRetentionSettings < Struct.new(
       :retention_days)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4858,6 +5066,7 @@ module Aws::Chime
       :toll_free_prefix,
       :max_results,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4869,6 +5078,7 @@ module Aws::Chime
     #
     class SearchAvailablePhoneNumbersResponse < Struct.new(
       :e164_phone_numbers)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4885,6 +5095,7 @@ module Aws::Chime
     class ServiceFailureException < Struct.new(
       :code,
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4901,6 +5112,7 @@ module Aws::Chime
     class ServiceUnavailableException < Struct.new(
       :code,
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4922,6 +5134,7 @@ module Aws::Chime
     #
     class SigninDelegateGroup < Struct.new(
       :group_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4961,6 +5174,7 @@ module Aws::Chime
       :data_retention_in_hours,
       :disabled,
       :streaming_notification_targets)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4981,6 +5195,7 @@ module Aws::Chime
     #
     class StreamingNotificationTarget < Struct.new(
       :notification_target)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5007,6 +5222,7 @@ module Aws::Chime
     class Tag < Struct.new(
       :key,
       :value)
+      SENSITIVE = [:key, :value]
       include Aws::Structure
     end
 
@@ -5042,6 +5258,7 @@ module Aws::Chime
       :meeting_id,
       :attendee_id,
       :tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5071,6 +5288,7 @@ module Aws::Chime
     class TagMeetingRequest < Struct.new(
       :meeting_id,
       :tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5100,6 +5318,7 @@ module Aws::Chime
     class TagResourceRequest < Struct.new(
       :resource_arn,
       :tags)
+      SENSITIVE = [:resource_arn]
       include Aws::Structure
     end
 
@@ -5133,6 +5352,7 @@ module Aws::Chime
       :inbound_calling,
       :outbound_calling,
       :sms)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5181,6 +5401,7 @@ module Aws::Chime
       :calling_regions,
       :cidr_allowed_list,
       :disabled)
+      SENSITIVE = [:default_phone_number]
       include Aws::Structure
     end
 
@@ -5201,6 +5422,7 @@ module Aws::Chime
     class TerminationHealth < Struct.new(
       :timestamp,
       :source)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5217,6 +5439,7 @@ module Aws::Chime
     class ThrottledClientException < Struct.new(
       :code,
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5233,6 +5456,7 @@ module Aws::Chime
     class UnauthorizedClientException < Struct.new(
       :code,
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5250,6 +5474,7 @@ module Aws::Chime
     class UnprocessableEntityException < Struct.new(
       :code,
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5280,6 +5505,7 @@ module Aws::Chime
       :meeting_id,
       :attendee_id,
       :tag_keys)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5304,6 +5530,7 @@ module Aws::Chime
     class UntagMeetingRequest < Struct.new(
       :meeting_id,
       :tag_keys)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5328,6 +5555,7 @@ module Aws::Chime
     class UntagResourceRequest < Struct.new(
       :resource_arn,
       :tag_keys)
+      SENSITIVE = [:resource_arn]
       include Aws::Structure
     end
 
@@ -5352,6 +5580,7 @@ module Aws::Chime
     class UpdateAccountRequest < Struct.new(
       :account_id,
       :name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5363,6 +5592,7 @@ module Aws::Chime
     #
     class UpdateAccountResponse < Struct.new(
       :account)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5390,6 +5620,7 @@ module Aws::Chime
     class UpdateAccountSettingsRequest < Struct.new(
       :account_id,
       :account_settings)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5424,6 +5655,7 @@ module Aws::Chime
       :account_id,
       :bot_id,
       :disabled)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5435,6 +5667,7 @@ module Aws::Chime
     #
     class UpdateBotResponse < Struct.new(
       :bot)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5463,6 +5696,7 @@ module Aws::Chime
     class UpdateGlobalSettingsRequest < Struct.new(
       :business_calling,
       :voice_connector)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5493,6 +5727,7 @@ module Aws::Chime
       :phone_number_id,
       :product_type,
       :calling_name)
+      SENSITIVE = [:calling_name]
       include Aws::Structure
     end
 
@@ -5526,6 +5761,7 @@ module Aws::Chime
       :phone_number_id,
       :product_type,
       :calling_name)
+      SENSITIVE = [:calling_name]
       include Aws::Structure
     end
 
@@ -5537,6 +5773,7 @@ module Aws::Chime
     #
     class UpdatePhoneNumberResponse < Struct.new(
       :phone_number)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5555,6 +5792,7 @@ module Aws::Chime
     #
     class UpdatePhoneNumberSettingsRequest < Struct.new(
       :calling_name)
+      SENSITIVE = [:calling_name]
       include Aws::Structure
     end
 
@@ -5591,6 +5829,7 @@ module Aws::Chime
       :proxy_session_id,
       :capabilities,
       :expiry_minutes)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5602,6 +5841,7 @@ module Aws::Chime
     #
     class UpdateProxySessionResponse < Struct.new(
       :proxy_session)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5638,6 +5878,7 @@ module Aws::Chime
       :room_id,
       :member_id,
       :role)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5649,6 +5890,7 @@ module Aws::Chime
     #
     class UpdateRoomMembershipResponse < Struct.new(
       :room_membership)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5679,6 +5921,7 @@ module Aws::Chime
       :account_id,
       :room_id,
       :name)
+      SENSITIVE = [:name]
       include Aws::Structure
     end
 
@@ -5690,6 +5933,7 @@ module Aws::Chime
     #
     class UpdateRoomResponse < Struct.new(
       :room)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5736,6 +5980,7 @@ module Aws::Chime
       :license_type,
       :user_type,
       :alexa_for_business_metadata)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5778,6 +6023,7 @@ module Aws::Chime
       :license_type,
       :user_type,
       :alexa_for_business_metadata)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5789,6 +6035,7 @@ module Aws::Chime
     #
     class UpdateUserResponse < Struct.new(
       :user)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5825,6 +6072,7 @@ module Aws::Chime
       :account_id,
       :user_id,
       :user_settings)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5860,6 +6108,7 @@ module Aws::Chime
       :voice_connector_group_id,
       :name,
       :voice_connector_items)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5871,6 +6120,7 @@ module Aws::Chime
     #
     class UpdateVoiceConnectorGroupResponse < Struct.new(
       :voice_connector_group)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5902,6 +6152,7 @@ module Aws::Chime
       :voice_connector_id,
       :name,
       :require_encryption)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5913,6 +6164,7 @@ module Aws::Chime
     #
     class UpdateVoiceConnectorResponse < Struct.new(
       :voice_connector)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5987,6 +6239,7 @@ module Aws::Chime
       :invited_on,
       :alexa_for_business_metadata,
       :personal_pin)
+      SENSITIVE = [:primary_email, :primary_provisioned_number, :display_name]
       include Aws::Structure
     end
 
@@ -6012,6 +6265,7 @@ module Aws::Chime
       :user_id,
       :error_code,
       :error_message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6037,6 +6291,7 @@ module Aws::Chime
     #
     class UserSettings < Struct.new(
       :telephony)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6085,6 +6340,7 @@ module Aws::Chime
       :require_encryption,
       :created_timestamp,
       :updated_timestamp)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6124,6 +6380,7 @@ module Aws::Chime
       :voice_connector_items,
       :created_timestamp,
       :updated_timestamp)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6155,6 +6412,7 @@ module Aws::Chime
     class VoiceConnectorItem < Struct.new(
       :voice_connector_id,
       :priority)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6176,6 +6434,7 @@ module Aws::Chime
     #
     class VoiceConnectorSettings < Struct.new(
       :cdr_bucket)
+      SENSITIVE = []
       include Aws::Structure
     end
 

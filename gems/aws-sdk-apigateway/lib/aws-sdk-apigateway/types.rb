@@ -33,6 +33,7 @@ module Aws::APIGateway
     class AccessLogSettings < Struct.new(
       :format,
       :destination_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -103,6 +104,7 @@ module Aws::APIGateway
       :throttle_settings,
       :features,
       :api_key_version)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -173,6 +175,7 @@ module Aws::APIGateway
       :last_updated_date,
       :stage_keys,
       :tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -189,6 +192,7 @@ module Aws::APIGateway
     class ApiKeyIds < Struct.new(
       :ids,
       :warnings)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -219,6 +223,7 @@ module Aws::APIGateway
       :warnings,
       :position,
       :items)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -255,6 +260,7 @@ module Aws::APIGateway
       :api_id,
       :stage,
       :throttle)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -373,6 +379,7 @@ module Aws::APIGateway
       :identity_source,
       :identity_validation_expression,
       :authorizer_result_ttl_in_seconds)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -398,6 +405,7 @@ module Aws::APIGateway
     class Authorizers < Struct.new(
       :position,
       :items)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -410,6 +418,7 @@ module Aws::APIGateway
     #
     class BadRequestException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -446,6 +455,7 @@ module Aws::APIGateway
       :base_path,
       :rest_api_id,
       :stage)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -469,6 +479,7 @@ module Aws::APIGateway
     class BasePathMappings < Struct.new(
       :position,
       :items)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -511,6 +522,7 @@ module Aws::APIGateway
       :deployment_id,
       :stage_variable_overrides,
       :use_stage_cache)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -565,6 +577,7 @@ module Aws::APIGateway
       :created_date,
       :expiration_date,
       :tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -588,6 +601,7 @@ module Aws::APIGateway
     class ClientCertificates < Struct.new(
       :position,
       :items)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -599,6 +613,7 @@ module Aws::APIGateway
     #
     class ConflictException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -672,6 +687,7 @@ module Aws::APIGateway
       :stage_keys,
       :customer_id,
       :tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -795,6 +811,7 @@ module Aws::APIGateway
       :identity_source,
       :identity_validation_expression,
       :authorizer_result_ttl_in_seconds)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -837,6 +854,7 @@ module Aws::APIGateway
       :base_path,
       :rest_api_id,
       :stage)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -920,6 +938,7 @@ module Aws::APIGateway
       :variables,
       :canary_settings,
       :tracing_enabled)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -960,6 +979,7 @@ module Aws::APIGateway
       :rest_api_id,
       :location,
       :properties)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -996,6 +1016,7 @@ module Aws::APIGateway
       :documentation_version,
       :stage_name,
       :description)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1099,6 +1120,7 @@ module Aws::APIGateway
       :endpoint_configuration,
       :tags,
       :security_policy)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1147,6 +1169,7 @@ module Aws::APIGateway
       :description,
       :schema,
       :content_type)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1186,6 +1209,7 @@ module Aws::APIGateway
       :name,
       :validate_request_body,
       :validate_request_parameters)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1216,6 +1240,7 @@ module Aws::APIGateway
       :rest_api_id,
       :parent_id,
       :path_part)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1307,6 +1332,7 @@ module Aws::APIGateway
       :endpoint_configuration,
       :policy,
       :tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1404,6 +1430,7 @@ module Aws::APIGateway
       :canary_settings,
       :tracing_enabled,
       :tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1439,6 +1466,7 @@ module Aws::APIGateway
       :usage_plan_id,
       :key_id,
       :key_type)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1511,6 +1539,7 @@ module Aws::APIGateway
       :throttle,
       :quota,
       :tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1556,6 +1585,7 @@ module Aws::APIGateway
       :description,
       :target_arns,
       :tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1574,6 +1604,7 @@ module Aws::APIGateway
     #
     class DeleteApiKeyRequest < Struct.new(
       :api_key)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1598,6 +1629,7 @@ module Aws::APIGateway
     class DeleteAuthorizerRequest < Struct.new(
       :rest_api_id,
       :authorizer_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1626,6 +1658,7 @@ module Aws::APIGateway
     class DeleteBasePathMappingRequest < Struct.new(
       :domain_name,
       :base_path)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1645,6 +1678,7 @@ module Aws::APIGateway
     #
     class DeleteClientCertificateRequest < Struct.new(
       :client_certificate_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1669,6 +1703,7 @@ module Aws::APIGateway
     class DeleteDeploymentRequest < Struct.new(
       :rest_api_id,
       :deployment_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1693,6 +1728,7 @@ module Aws::APIGateway
     class DeleteDocumentationPartRequest < Struct.new(
       :rest_api_id,
       :documentation_part_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1718,6 +1754,7 @@ module Aws::APIGateway
     class DeleteDocumentationVersionRequest < Struct.new(
       :rest_api_id,
       :documentation_version)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1736,6 +1773,7 @@ module Aws::APIGateway
     #
     class DeleteDomainNameRequest < Struct.new(
       :domain_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1782,6 +1820,7 @@ module Aws::APIGateway
     class DeleteGatewayResponseRequest < Struct.new(
       :rest_api_id,
       :response_type)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1813,6 +1852,7 @@ module Aws::APIGateway
       :rest_api_id,
       :resource_id,
       :http_method)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1852,6 +1892,7 @@ module Aws::APIGateway
       :resource_id,
       :http_method,
       :status_code)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1882,6 +1923,7 @@ module Aws::APIGateway
       :rest_api_id,
       :resource_id,
       :http_method)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1920,6 +1962,7 @@ module Aws::APIGateway
       :resource_id,
       :http_method,
       :status_code)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1944,6 +1987,7 @@ module Aws::APIGateway
     class DeleteModelRequest < Struct.new(
       :rest_api_id,
       :model_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1968,6 +2012,7 @@ module Aws::APIGateway
     class DeleteRequestValidatorRequest < Struct.new(
       :rest_api_id,
       :request_validator_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1992,6 +2037,7 @@ module Aws::APIGateway
     class DeleteResourceRequest < Struct.new(
       :rest_api_id,
       :resource_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2010,6 +2056,7 @@ module Aws::APIGateway
     #
     class DeleteRestApiRequest < Struct.new(
       :rest_api_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2034,6 +2081,7 @@ module Aws::APIGateway
     class DeleteStageRequest < Struct.new(
       :rest_api_id,
       :stage_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2061,6 +2109,7 @@ module Aws::APIGateway
     class DeleteUsagePlanKeyRequest < Struct.new(
       :usage_plan_id,
       :key_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2079,6 +2128,7 @@ module Aws::APIGateway
     #
     class DeleteUsagePlanRequest < Struct.new(
       :usage_plan_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2098,6 +2148,7 @@ module Aws::APIGateway
     #
     class DeleteVpcLinkRequest < Struct.new(
       :vpc_link_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2143,6 +2194,7 @@ module Aws::APIGateway
       :description,
       :created_date,
       :api_summary)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2181,6 +2233,7 @@ module Aws::APIGateway
       :percent_traffic,
       :stage_variable_overrides,
       :use_stage_cache)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2216,6 +2269,7 @@ module Aws::APIGateway
     class Deployments < Struct.new(
       :position,
       :items)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2276,6 +2330,7 @@ module Aws::APIGateway
       :id,
       :location,
       :properties)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2308,6 +2363,7 @@ module Aws::APIGateway
     class DocumentationPartIds < Struct.new(
       :ids,
       :warnings)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2380,6 +2436,7 @@ module Aws::APIGateway
       :method,
       :status_code,
       :name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2405,6 +2462,7 @@ module Aws::APIGateway
     class DocumentationParts < Struct.new(
       :position,
       :items)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2441,6 +2499,7 @@ module Aws::APIGateway
       :version,
       :created_date,
       :description)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2470,6 +2529,7 @@ module Aws::APIGateway
     class DocumentationVersions < Struct.new(
       :position,
       :items)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2617,6 +2677,7 @@ module Aws::APIGateway
       :domain_name_status_message,
       :security_policy,
       :tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2640,6 +2701,7 @@ module Aws::APIGateway
     class DomainNames < Struct.new(
       :position,
       :items)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2670,6 +2732,7 @@ module Aws::APIGateway
     class EndpointConfiguration < Struct.new(
       :types,
       :vpc_endpoint_ids)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2693,6 +2756,7 @@ module Aws::APIGateway
       :content_type,
       :content_disposition,
       :body)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2717,6 +2781,7 @@ module Aws::APIGateway
     class FlushStageAuthorizersCacheRequest < Struct.new(
       :rest_api_id,
       :stage_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2741,6 +2806,7 @@ module Aws::APIGateway
     class FlushStageCacheRequest < Struct.new(
       :rest_api_id,
       :stage_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2834,6 +2900,7 @@ module Aws::APIGateway
       :response_parameters,
       :response_templates,
       :default_response)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2887,6 +2954,7 @@ module Aws::APIGateway
     class GatewayResponses < Struct.new(
       :position,
       :items)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2915,6 +2983,7 @@ module Aws::APIGateway
     class GenerateClientCertificateRequest < Struct.new(
       :description,
       :tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2947,6 +3016,7 @@ module Aws::APIGateway
     class GetApiKeyRequest < Struct.new(
       :api_key,
       :include_value)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2992,6 +3062,7 @@ module Aws::APIGateway
       :name_query,
       :customer_id,
       :include_values)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3016,6 +3087,7 @@ module Aws::APIGateway
     class GetAuthorizerRequest < Struct.new(
       :rest_api_id,
       :authorizer_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3047,6 +3119,7 @@ module Aws::APIGateway
       :rest_api_id,
       :position,
       :limit)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3076,6 +3149,7 @@ module Aws::APIGateway
     class GetBasePathMappingRequest < Struct.new(
       :domain_name,
       :base_path)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3108,6 +3182,7 @@ module Aws::APIGateway
       :domain_name,
       :position,
       :limit)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3128,6 +3203,7 @@ module Aws::APIGateway
     #
     class GetClientCertificateRequest < Struct.new(
       :client_certificate_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3154,6 +3230,7 @@ module Aws::APIGateway
     class GetClientCertificatesRequest < Struct.new(
       :position,
       :limit)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3195,6 +3272,7 @@ module Aws::APIGateway
       :rest_api_id,
       :deployment_id,
       :embed)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3227,6 +3305,7 @@ module Aws::APIGateway
       :rest_api_id,
       :position,
       :limit)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3251,6 +3330,7 @@ module Aws::APIGateway
     class GetDocumentationPartRequest < Struct.new(
       :rest_api_id,
       :documentation_part_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3310,6 +3390,7 @@ module Aws::APIGateway
       :position,
       :limit,
       :location_status)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3335,6 +3416,7 @@ module Aws::APIGateway
     class GetDocumentationVersionRequest < Struct.new(
       :rest_api_id,
       :documentation_version)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3366,6 +3448,7 @@ module Aws::APIGateway
       :rest_api_id,
       :position,
       :limit)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3384,6 +3467,7 @@ module Aws::APIGateway
     #
     class GetDomainNameRequest < Struct.new(
       :domain_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3409,6 +3493,7 @@ module Aws::APIGateway
     class GetDomainNamesRequest < Struct.new(
       :position,
       :limit)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3465,6 +3550,7 @@ module Aws::APIGateway
       :export_type,
       :parameters,
       :accepts)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3511,6 +3597,7 @@ module Aws::APIGateway
     class GetGatewayResponseRequest < Struct.new(
       :rest_api_id,
       :response_type)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3548,6 +3635,7 @@ module Aws::APIGateway
       :rest_api_id,
       :position,
       :limit)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3579,6 +3667,7 @@ module Aws::APIGateway
       :rest_api_id,
       :resource_id,
       :http_method)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3618,6 +3707,7 @@ module Aws::APIGateway
       :resource_id,
       :http_method,
       :status_code)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3648,6 +3738,7 @@ module Aws::APIGateway
       :rest_api_id,
       :resource_id,
       :http_method)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3685,6 +3776,7 @@ module Aws::APIGateway
       :resource_id,
       :http_method,
       :status_code)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3718,6 +3810,7 @@ module Aws::APIGateway
       :rest_api_id,
       :model_name,
       :flatten)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3743,6 +3836,7 @@ module Aws::APIGateway
     class GetModelTemplateRequest < Struct.new(
       :rest_api_id,
       :model_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3774,6 +3868,7 @@ module Aws::APIGateway
       :rest_api_id,
       :position,
       :limit)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3798,6 +3893,7 @@ module Aws::APIGateway
     class GetRequestValidatorRequest < Struct.new(
       :rest_api_id,
       :request_validator_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3829,6 +3925,7 @@ module Aws::APIGateway
       :rest_api_id,
       :position,
       :limit)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3865,6 +3962,7 @@ module Aws::APIGateway
       :rest_api_id,
       :resource_id,
       :embed)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3908,6 +4006,7 @@ module Aws::APIGateway
       :position,
       :limit,
       :embed)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3927,6 +4026,7 @@ module Aws::APIGateway
     #
     class GetRestApiRequest < Struct.new(
       :rest_api_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3952,6 +4052,7 @@ module Aws::APIGateway
     class GetRestApisRequest < Struct.new(
       :position,
       :limit)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3998,6 +4099,7 @@ module Aws::APIGateway
       :stage_name,
       :sdk_type,
       :parameters)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4016,6 +4118,7 @@ module Aws::APIGateway
     #
     class GetSdkTypeRequest < Struct.new(
       :id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4041,6 +4144,7 @@ module Aws::APIGateway
     class GetSdkTypesRequest < Struct.new(
       :position,
       :limit)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4066,6 +4170,7 @@ module Aws::APIGateway
     class GetStageRequest < Struct.new(
       :rest_api_id,
       :stage_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4091,6 +4196,7 @@ module Aws::APIGateway
     class GetStagesRequest < Struct.new(
       :rest_api_id,
       :deployment_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4123,6 +4229,7 @@ module Aws::APIGateway
       :resource_arn,
       :position,
       :limit)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4150,6 +4257,7 @@ module Aws::APIGateway
     class GetUsagePlanKeyRequest < Struct.new(
       :usage_plan_id,
       :key_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4191,6 +4299,7 @@ module Aws::APIGateway
       :position,
       :limit,
       :name_query)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4210,6 +4319,7 @@ module Aws::APIGateway
     #
     class GetUsagePlanRequest < Struct.new(
       :usage_plan_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4241,6 +4351,7 @@ module Aws::APIGateway
       :position,
       :key_id,
       :limit)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4292,6 +4403,7 @@ module Aws::APIGateway
       :end_date,
       :position,
       :limit)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4311,6 +4423,7 @@ module Aws::APIGateway
     #
     class GetVpcLinkRequest < Struct.new(
       :vpc_link_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4337,6 +4450,7 @@ module Aws::APIGateway
     class GetVpcLinksRequest < Struct.new(
       :position,
       :limit)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4375,6 +4489,7 @@ module Aws::APIGateway
       :body,
       :format,
       :fail_on_warnings)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4418,6 +4533,7 @@ module Aws::APIGateway
       :mode,
       :fail_on_warnings,
       :body)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4480,6 +4596,7 @@ module Aws::APIGateway
       :fail_on_warnings,
       :parameters,
       :body)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4730,6 +4847,7 @@ module Aws::APIGateway
       :cache_key_parameters,
       :integration_responses,
       :tls_config)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4805,6 +4923,7 @@ module Aws::APIGateway
       :response_parameters,
       :response_templates,
       :content_handling)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4820,6 +4939,7 @@ module Aws::APIGateway
     class LimitExceededException < Struct.new(
       :retry_after_seconds,
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5020,6 +5140,7 @@ module Aws::APIGateway
       :method_responses,
       :method_integration,
       :authorization_scopes)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5092,6 +5213,7 @@ module Aws::APIGateway
       :status_code,
       :response_parameters,
       :response_models)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5181,6 +5303,7 @@ module Aws::APIGateway
       :cache_data_encrypted,
       :require_authorization_for_cache_control,
       :unauthorized_cache_control_header_strategy)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5201,6 +5324,7 @@ module Aws::APIGateway
     class MethodSnapshot < Struct.new(
       :authorization_type,
       :api_key_required)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5262,6 +5386,7 @@ module Aws::APIGateway
       :description,
       :schema,
       :content_type)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5285,6 +5410,7 @@ module Aws::APIGateway
     class Models < Struct.new(
       :position,
       :items)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5296,6 +5422,7 @@ module Aws::APIGateway
     #
     class NotFoundException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5366,6 +5493,7 @@ module Aws::APIGateway
       :path,
       :value,
       :from)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5436,6 +5564,7 @@ module Aws::APIGateway
       :status_code,
       :response_parameters,
       :response_templates)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5640,6 +5769,7 @@ module Aws::APIGateway
       :content_handling,
       :timeout_in_millis,
       :tls_config)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5730,6 +5860,7 @@ module Aws::APIGateway
       :response_parameters,
       :response_templates,
       :content_handling)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5840,6 +5971,7 @@ module Aws::APIGateway
       :request_models,
       :request_validator_id,
       :authorization_scopes)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5908,6 +6040,7 @@ module Aws::APIGateway
       :status_code,
       :response_parameters,
       :response_models)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5964,6 +6097,7 @@ module Aws::APIGateway
       :fail_on_warnings,
       :parameters,
       :body)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5997,6 +6131,7 @@ module Aws::APIGateway
       :limit,
       :offset,
       :period)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6043,6 +6178,7 @@ module Aws::APIGateway
       :name,
       :validate_request_body,
       :validate_request_parameters)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6073,6 +6209,7 @@ module Aws::APIGateway
     class RequestValidators < Struct.new(
       :position,
       :items)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6138,6 +6275,7 @@ module Aws::APIGateway
       :path_part,
       :path,
       :resource_methods)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6161,6 +6299,7 @@ module Aws::APIGateway
     class Resources < Struct.new(
       :position,
       :items)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6250,6 +6389,7 @@ module Aws::APIGateway
       :endpoint_configuration,
       :policy,
       :tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6275,6 +6415,7 @@ module Aws::APIGateway
     class RestApis < Struct.new(
       :position,
       :items)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6308,6 +6449,7 @@ module Aws::APIGateway
       :description,
       :required,
       :default_value)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6330,6 +6472,7 @@ module Aws::APIGateway
       :content_type,
       :content_disposition,
       :body)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6356,6 +6499,7 @@ module Aws::APIGateway
       :friendly_name,
       :description,
       :configuration_properties)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6371,6 +6515,7 @@ module Aws::APIGateway
     class SdkTypes < Struct.new(
       :position,
       :items)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6386,6 +6531,7 @@ module Aws::APIGateway
     class ServiceUnavailableException < Struct.new(
       :retry_after_seconds,
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6497,6 +6643,7 @@ module Aws::APIGateway
       :tags,
       :created_date,
       :last_updated_date)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6522,6 +6669,7 @@ module Aws::APIGateway
     class StageKey < Struct.new(
       :rest_api_id,
       :stage_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6542,6 +6690,7 @@ module Aws::APIGateway
     #
     class Stages < Struct.new(
       :item)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6571,6 +6720,7 @@ module Aws::APIGateway
     class TagResourceRequest < Struct.new(
       :resource_arn,
       :tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6584,6 +6734,7 @@ module Aws::APIGateway
     #
     class Tags < Struct.new(
       :tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6608,6 +6759,7 @@ module Aws::APIGateway
     #
     class Template < Struct.new(
       :value)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6685,6 +6837,7 @@ module Aws::APIGateway
       :body,
       :stage_variables,
       :additional_context)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6732,6 +6885,7 @@ module Aws::APIGateway
       :policy,
       :authorization,
       :claims)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6811,6 +6965,7 @@ module Aws::APIGateway
       :multi_value_headers,
       :client_certificate_id,
       :stage_variables)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6856,6 +7011,7 @@ module Aws::APIGateway
       :multi_value_headers,
       :log,
       :latency)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6882,6 +7038,7 @@ module Aws::APIGateway
     class ThrottleSettings < Struct.new(
       :burst_limit,
       :rate_limit)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6910,6 +7067,7 @@ module Aws::APIGateway
     #
     class TlsConfig < Struct.new(
       :insecure_skip_verification)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6925,6 +7083,7 @@ module Aws::APIGateway
     class TooManyRequestsException < Struct.new(
       :retry_after_seconds,
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6935,6 +7094,7 @@ module Aws::APIGateway
     #
     class UnauthorizedException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6959,6 +7119,7 @@ module Aws::APIGateway
     class UntagResourceRequest < Struct.new(
       :resource_arn,
       :tag_keys)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6986,6 +7147,7 @@ module Aws::APIGateway
     #
     class UpdateAccountRequest < Struct.new(
       :patch_operations)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -7018,6 +7180,7 @@ module Aws::APIGateway
     class UpdateApiKeyRequest < Struct.new(
       :api_key,
       :patch_operations)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -7056,6 +7219,7 @@ module Aws::APIGateway
       :rest_api_id,
       :authorizer_id,
       :patch_operations)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -7098,6 +7262,7 @@ module Aws::APIGateway
       :domain_name,
       :base_path,
       :patch_operations)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -7131,6 +7296,7 @@ module Aws::APIGateway
     class UpdateClientCertificateRequest < Struct.new(
       :client_certificate_id,
       :patch_operations)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -7171,6 +7337,7 @@ module Aws::APIGateway
       :rest_api_id,
       :deployment_id,
       :patch_operations)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -7209,6 +7376,7 @@ module Aws::APIGateway
       :rest_api_id,
       :documentation_part_id,
       :patch_operations)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -7248,6 +7416,7 @@ module Aws::APIGateway
       :rest_api_id,
       :documentation_version,
       :patch_operations)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -7280,6 +7449,7 @@ module Aws::APIGateway
     class UpdateDomainNameRequest < Struct.new(
       :domain_name,
       :patch_operations)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -7340,6 +7510,7 @@ module Aws::APIGateway
       :rest_api_id,
       :response_type,
       :patch_operations)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -7386,6 +7557,7 @@ module Aws::APIGateway
       :resource_id,
       :http_method,
       :patch_operations)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -7439,6 +7611,7 @@ module Aws::APIGateway
       :http_method,
       :status_code,
       :patch_operations)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -7483,6 +7656,7 @@ module Aws::APIGateway
       :resource_id,
       :http_method,
       :patch_operations)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -7534,6 +7708,7 @@ module Aws::APIGateway
       :http_method,
       :status_code,
       :patch_operations)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -7572,6 +7747,7 @@ module Aws::APIGateway
       :rest_api_id,
       :model_name,
       :patch_operations)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -7610,6 +7786,7 @@ module Aws::APIGateway
       :rest_api_id,
       :request_validator_id,
       :patch_operations)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -7648,6 +7825,7 @@ module Aws::APIGateway
       :rest_api_id,
       :resource_id,
       :patch_operations)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -7680,6 +7858,7 @@ module Aws::APIGateway
     class UpdateRestApiRequest < Struct.new(
       :rest_api_id,
       :patch_operations)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -7719,6 +7898,7 @@ module Aws::APIGateway
       :rest_api_id,
       :stage_name,
       :patch_operations)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -7751,6 +7931,7 @@ module Aws::APIGateway
     class UpdateUsagePlanRequest < Struct.new(
       :usage_plan_id,
       :patch_operations)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -7793,6 +7974,7 @@ module Aws::APIGateway
       :usage_plan_id,
       :key_id,
       :patch_operations)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -7826,6 +8008,7 @@ module Aws::APIGateway
     class UpdateVpcLinkRequest < Struct.new(
       :vpc_link_id,
       :patch_operations)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -7872,6 +8055,7 @@ module Aws::APIGateway
       :end_date,
       :position,
       :items)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -7937,6 +8121,7 @@ module Aws::APIGateway
       :quota,
       :product_code,
       :tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -7978,6 +8163,7 @@ module Aws::APIGateway
       :type,
       :value,
       :name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -8002,6 +8188,7 @@ module Aws::APIGateway
     class UsagePlanKeys < Struct.new(
       :position,
       :items)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -8025,6 +8212,7 @@ module Aws::APIGateway
     class UsagePlans < Struct.new(
       :position,
       :items)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -8085,6 +8273,7 @@ module Aws::APIGateway
       :status,
       :status_message,
       :tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -8110,6 +8299,7 @@ module Aws::APIGateway
     class VpcLinks < Struct.new(
       :position,
       :items)
+      SENSITIVE = []
       include Aws::Structure
     end
 

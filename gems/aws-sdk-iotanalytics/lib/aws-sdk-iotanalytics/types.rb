@@ -46,6 +46,7 @@ module Aws::IoTAnalytics
       :name,
       :attributes,
       :next)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -68,6 +69,7 @@ module Aws::IoTAnalytics
       :message_id,
       :error_code,
       :error_message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -118,6 +120,7 @@ module Aws::IoTAnalytics
     class BatchPutMessageRequest < Struct.new(
       :channel_name,
       :messages)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -128,6 +131,7 @@ module Aws::IoTAnalytics
     #
     class BatchPutMessageResponse < Struct.new(
       :batch_put_message_error_entries)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -151,6 +155,7 @@ module Aws::IoTAnalytics
     class CancelPipelineReprocessingRequest < Struct.new(
       :pipeline_name,
       :reprocessing_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -198,6 +203,7 @@ module Aws::IoTAnalytics
       :retention_period,
       :creation_time,
       :last_update_time)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -229,6 +235,7 @@ module Aws::IoTAnalytics
       :name,
       :channel_name,
       :next)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -240,6 +247,7 @@ module Aws::IoTAnalytics
     #
     class ChannelStatistics < Struct.new(
       :size)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -279,6 +287,7 @@ module Aws::IoTAnalytics
     class ChannelStorage < Struct.new(
       :service_managed_s3,
       :customer_managed_s3)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -296,6 +305,7 @@ module Aws::IoTAnalytics
     class ChannelStorageSummary < Struct.new(
       :service_managed_s3,
       :customer_managed_s3)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -327,6 +337,7 @@ module Aws::IoTAnalytics
       :status,
       :creation_time,
       :last_update_time)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -389,6 +400,7 @@ module Aws::IoTAnalytics
       :execution_role_arn,
       :resource_configuration,
       :variables)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -444,6 +456,7 @@ module Aws::IoTAnalytics
       :channel_storage,
       :retention_period,
       :tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -463,6 +476,7 @@ module Aws::IoTAnalytics
       :channel_name,
       :channel_arn,
       :retention_period)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -479,6 +493,7 @@ module Aws::IoTAnalytics
     #
     class CreateDatasetContentRequest < Struct.new(
       :dataset_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -488,6 +503,7 @@ module Aws::IoTAnalytics
     #
     class CreateDatasetContentResponse < Struct.new(
       :version_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -629,6 +645,7 @@ module Aws::IoTAnalytics
       :retention_period,
       :versioning_configuration,
       :tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -648,6 +665,7 @@ module Aws::IoTAnalytics
       :dataset_name,
       :dataset_arn,
       :retention_period)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -703,6 +721,7 @@ module Aws::IoTAnalytics
       :datastore_storage,
       :retention_period,
       :tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -722,6 +741,7 @@ module Aws::IoTAnalytics
       :datastore_name,
       :datastore_arn,
       :retention_period)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -827,6 +847,7 @@ module Aws::IoTAnalytics
       :pipeline_name,
       :pipeline_activities,
       :tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -841,6 +862,7 @@ module Aws::IoTAnalytics
     class CreatePipelineResponse < Struct.new(
       :pipeline_name,
       :pipeline_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -879,6 +901,7 @@ module Aws::IoTAnalytics
       :bucket,
       :key_prefix,
       :role_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -904,6 +927,7 @@ module Aws::IoTAnalytics
       :bucket,
       :key_prefix,
       :role_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -942,6 +966,7 @@ module Aws::IoTAnalytics
       :bucket,
       :key_prefix,
       :role_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -967,6 +992,7 @@ module Aws::IoTAnalytics
       :bucket,
       :key_prefix,
       :role_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1032,6 +1058,7 @@ module Aws::IoTAnalytics
       :last_update_time,
       :retention_period,
       :versioning_configuration)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1098,6 +1125,7 @@ module Aws::IoTAnalytics
       :action_name,
       :query_action,
       :container_action)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1117,6 +1145,7 @@ module Aws::IoTAnalytics
     class DatasetActionSummary < Struct.new(
       :action_name,
       :action_type)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1154,6 +1183,7 @@ module Aws::IoTAnalytics
     class DatasetContentDeliveryDestination < Struct.new(
       :iot_events_destination_configuration,
       :s3_destination_configuration)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1193,6 +1223,7 @@ module Aws::IoTAnalytics
     class DatasetContentDeliveryRule < Struct.new(
       :entry_name,
       :destination)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1211,6 +1242,7 @@ module Aws::IoTAnalytics
     class DatasetContentStatus < Struct.new(
       :state,
       :reason)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1244,6 +1276,7 @@ module Aws::IoTAnalytics
       :creation_time,
       :schedule_time,
       :completion_time)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1264,6 +1297,7 @@ module Aws::IoTAnalytics
     #
     class DatasetContentVersionValue < Struct.new(
       :dataset_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1280,6 +1314,7 @@ module Aws::IoTAnalytics
     class DatasetEntry < Struct.new(
       :entry_name,
       :data_uri)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1319,6 +1354,7 @@ module Aws::IoTAnalytics
       :last_update_time,
       :triggers,
       :actions)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1349,6 +1385,7 @@ module Aws::IoTAnalytics
     class DatasetTrigger < Struct.new(
       :schedule,
       :dataset)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1407,6 +1444,7 @@ module Aws::IoTAnalytics
       :retention_period,
       :creation_time,
       :last_update_time)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1432,6 +1470,7 @@ module Aws::IoTAnalytics
     class DatastoreActivity < Struct.new(
       :name,
       :datastore_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1443,6 +1482,7 @@ module Aws::IoTAnalytics
     #
     class DatastoreStatistics < Struct.new(
       :size)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1482,6 +1522,7 @@ module Aws::IoTAnalytics
     class DatastoreStorage < Struct.new(
       :service_managed_s3,
       :customer_managed_s3)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1499,6 +1540,7 @@ module Aws::IoTAnalytics
     class DatastoreStorageSummary < Struct.new(
       :service_managed_s3,
       :customer_managed_s3)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1530,6 +1572,7 @@ module Aws::IoTAnalytics
       :status,
       :creation_time,
       :last_update_time)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1546,6 +1589,7 @@ module Aws::IoTAnalytics
     #
     class DeleteChannelRequest < Struct.new(
       :channel_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1571,6 +1615,7 @@ module Aws::IoTAnalytics
     class DeleteDatasetContentRequest < Struct.new(
       :dataset_name,
       :version_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1587,6 +1632,7 @@ module Aws::IoTAnalytics
     #
     class DeleteDatasetRequest < Struct.new(
       :dataset_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1603,6 +1649,7 @@ module Aws::IoTAnalytics
     #
     class DeleteDatastoreRequest < Struct.new(
       :datastore_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1619,6 +1666,7 @@ module Aws::IoTAnalytics
     #
     class DeletePipelineRequest < Struct.new(
       :pipeline_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1656,6 +1704,7 @@ module Aws::IoTAnalytics
     class DeltaTime < Struct.new(
       :offset_seconds,
       :time_expression)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1680,6 +1729,7 @@ module Aws::IoTAnalytics
     class DescribeChannelRequest < Struct.new(
       :channel_name,
       :include_statistics)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1695,6 +1745,7 @@ module Aws::IoTAnalytics
     class DescribeChannelResponse < Struct.new(
       :channel,
       :statistics)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1711,6 +1762,7 @@ module Aws::IoTAnalytics
     #
     class DescribeDatasetRequest < Struct.new(
       :dataset_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1720,6 +1772,7 @@ module Aws::IoTAnalytics
     #
     class DescribeDatasetResponse < Struct.new(
       :dataset)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1744,6 +1797,7 @@ module Aws::IoTAnalytics
     class DescribeDatastoreRequest < Struct.new(
       :datastore_name,
       :include_statistics)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1759,6 +1813,7 @@ module Aws::IoTAnalytics
     class DescribeDatastoreResponse < Struct.new(
       :datastore,
       :statistics)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1772,6 +1827,7 @@ module Aws::IoTAnalytics
     #
     class DescribeLoggingOptionsResponse < Struct.new(
       :logging_options)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1788,6 +1844,7 @@ module Aws::IoTAnalytics
     #
     class DescribePipelineRequest < Struct.new(
       :pipeline_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1797,6 +1854,7 @@ module Aws::IoTAnalytics
     #
     class DescribePipelineResponse < Struct.new(
       :pipeline)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1842,6 +1900,7 @@ module Aws::IoTAnalytics
       :thing_name,
       :role_arn,
       :next)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1886,6 +1945,7 @@ module Aws::IoTAnalytics
       :thing_name,
       :role_arn,
       :next)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1902,6 +1962,7 @@ module Aws::IoTAnalytics
     class EstimatedResourceSize < Struct.new(
       :estimated_size_in_bytes,
       :estimated_on)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1933,6 +1994,7 @@ module Aws::IoTAnalytics
       :name,
       :filter,
       :next)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1958,6 +2020,7 @@ module Aws::IoTAnalytics
     class GetDatasetContentRequest < Struct.new(
       :dataset_name,
       :version_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1977,6 +2040,7 @@ module Aws::IoTAnalytics
       :entries,
       :timestamp,
       :status)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2007,6 +2071,7 @@ module Aws::IoTAnalytics
     class GlueConfiguration < Struct.new(
       :table_name,
       :database_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2017,6 +2082,7 @@ module Aws::IoTAnalytics
     #
     class InternalFailureException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2027,6 +2093,7 @@ module Aws::IoTAnalytics
     #
     class InvalidRequestException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2054,6 +2121,7 @@ module Aws::IoTAnalytics
     class IotEventsDestinationConfiguration < Struct.new(
       :input_name,
       :role_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2094,6 +2162,7 @@ module Aws::IoTAnalytics
       :lambda_name,
       :batch_size,
       :next)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2104,6 +2173,7 @@ module Aws::IoTAnalytics
     #
     class LimitExceededException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2128,6 +2198,7 @@ module Aws::IoTAnalytics
     class ListChannelsRequest < Struct.new(
       :next_token,
       :max_results)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2143,6 +2214,7 @@ module Aws::IoTAnalytics
     class ListChannelsResponse < Struct.new(
       :channel_summaries,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2188,6 +2260,7 @@ module Aws::IoTAnalytics
       :max_results,
       :scheduled_on_or_after,
       :scheduled_before)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2203,6 +2276,7 @@ module Aws::IoTAnalytics
     class ListDatasetContentsResponse < Struct.new(
       :dataset_content_summaries,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2227,6 +2301,7 @@ module Aws::IoTAnalytics
     class ListDatasetsRequest < Struct.new(
       :next_token,
       :max_results)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2242,6 +2317,7 @@ module Aws::IoTAnalytics
     class ListDatasetsResponse < Struct.new(
       :dataset_summaries,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2266,6 +2342,7 @@ module Aws::IoTAnalytics
     class ListDatastoresRequest < Struct.new(
       :next_token,
       :max_results)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2281,6 +2358,7 @@ module Aws::IoTAnalytics
     class ListDatastoresResponse < Struct.new(
       :datastore_summaries,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2305,6 +2383,7 @@ module Aws::IoTAnalytics
     class ListPipelinesRequest < Struct.new(
       :next_token,
       :max_results)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2320,6 +2399,7 @@ module Aws::IoTAnalytics
     class ListPipelinesResponse < Struct.new(
       :pipeline_summaries,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2336,6 +2416,7 @@ module Aws::IoTAnalytics
     #
     class ListTagsForResourceRequest < Struct.new(
       :resource_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2345,6 +2426,7 @@ module Aws::IoTAnalytics
     #
     class ListTagsForResourceResponse < Struct.new(
       :tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2376,6 +2458,7 @@ module Aws::IoTAnalytics
       :role_arn,
       :level,
       :enabled)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2415,6 +2498,7 @@ module Aws::IoTAnalytics
       :attribute,
       :math,
       :next)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2442,6 +2526,7 @@ module Aws::IoTAnalytics
     class Message < Struct.new(
       :message_id,
       :payload)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2462,6 +2547,7 @@ module Aws::IoTAnalytics
     #
     class OutputFileUriValue < Struct.new(
       :file_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2498,6 +2584,7 @@ module Aws::IoTAnalytics
       :reprocessing_summaries,
       :creation_time,
       :last_update_time)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2620,6 +2707,7 @@ module Aws::IoTAnalytics
       :math,
       :device_registry_enrich,
       :device_shadow_enrich)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2646,6 +2734,7 @@ module Aws::IoTAnalytics
       :reprocessing_summaries,
       :creation_time,
       :last_update_time)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2666,6 +2755,7 @@ module Aws::IoTAnalytics
     #
     class PutLoggingOptionsRequest < Struct.new(
       :logging_options)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2689,6 +2779,7 @@ module Aws::IoTAnalytics
     #
     class QueryFilter < Struct.new(
       :delta_time)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2719,6 +2810,7 @@ module Aws::IoTAnalytics
       :name,
       :attributes,
       :next)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2740,6 +2832,7 @@ module Aws::IoTAnalytics
       :id,
       :status,
       :creation_time)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2760,6 +2853,7 @@ module Aws::IoTAnalytics
       :message,
       :resource_id,
       :resource_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2788,6 +2882,7 @@ module Aws::IoTAnalytics
     class ResourceConfiguration < Struct.new(
       :compute_type,
       :volume_size_in_gb)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2798,6 +2893,7 @@ module Aws::IoTAnalytics
     #
     class ResourceNotFoundException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2823,6 +2919,7 @@ module Aws::IoTAnalytics
     class RetentionPeriod < Struct.new(
       :unlimited,
       :number_of_days)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2908,6 +3005,7 @@ module Aws::IoTAnalytics
     class RunPipelineActivityRequest < Struct.new(
       :pipeline_activity,
       :payloads)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2925,6 +3023,7 @@ module Aws::IoTAnalytics
     class RunPipelineActivityResponse < Struct.new(
       :payloads,
       :log_result)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2975,6 +3074,7 @@ module Aws::IoTAnalytics
       :key,
       :glue_configuration,
       :role_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3011,6 +3111,7 @@ module Aws::IoTAnalytics
       :max_messages,
       :start_time,
       :end_time)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3021,6 +3122,7 @@ module Aws::IoTAnalytics
     #
     class SampleChannelDataResponse < Struct.new(
       :payloads)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3045,6 +3147,7 @@ module Aws::IoTAnalytics
     #
     class Schedule < Struct.new(
       :expression)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3076,6 +3179,7 @@ module Aws::IoTAnalytics
       :name,
       :attributes,
       :next)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3113,6 +3217,7 @@ module Aws::IoTAnalytics
     #
     class ServiceUnavailableException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3144,6 +3249,7 @@ module Aws::IoTAnalytics
     class SqlQueryDatasetAction < Struct.new(
       :sql_query,
       :filters)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3172,6 +3278,7 @@ module Aws::IoTAnalytics
       :pipeline_name,
       :start_time,
       :end_time)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3181,6 +3288,7 @@ module Aws::IoTAnalytics
     #
     class StartPipelineReprocessingResponse < Struct.new(
       :reprocessing_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3205,6 +3313,7 @@ module Aws::IoTAnalytics
     class Tag < Struct.new(
       :key,
       :value)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3232,6 +3341,7 @@ module Aws::IoTAnalytics
     class TagResourceRequest < Struct.new(
       :resource_arn,
       :tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3244,6 +3354,7 @@ module Aws::IoTAnalytics
     #
     class ThrottlingException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3264,6 +3375,7 @@ module Aws::IoTAnalytics
     #
     class TriggeringDataset < Struct.new(
       :name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3286,6 +3398,7 @@ module Aws::IoTAnalytics
     class UntagResourceRequest < Struct.new(
       :resource_arn,
       :tag_keys)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3332,6 +3445,7 @@ module Aws::IoTAnalytics
       :channel_name,
       :channel_storage,
       :retention_period)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3455,6 +3569,7 @@ module Aws::IoTAnalytics
       :content_delivery_rules,
       :retention_period,
       :versioning_configuration)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3499,6 +3614,7 @@ module Aws::IoTAnalytics
       :datastore_name,
       :retention_period,
       :datastore_storage)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3593,6 +3709,7 @@ module Aws::IoTAnalytics
     class UpdatePipelineRequest < Struct.new(
       :pipeline_name,
       :pipeline_activities)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3644,6 +3761,7 @@ module Aws::IoTAnalytics
       :double_value,
       :dataset_content_version_value,
       :output_file_uri_value)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3669,6 +3787,7 @@ module Aws::IoTAnalytics
     class VersioningConfiguration < Struct.new(
       :unlimited,
       :max_versions)
+      SENSITIVE = []
       include Aws::Structure
     end
 

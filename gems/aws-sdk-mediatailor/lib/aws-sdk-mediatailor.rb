@@ -47,6 +47,6 @@ require_relative 'aws-sdk-mediatailor/customizations'
 # @service
 module Aws::MediaTailor
 
-  GEM_VERSION = '1.28.1'
+  GEM_VERSION = '1.29.0'
 
 end

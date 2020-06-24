@@ -50,6 +50,7 @@ module Aws::CognitoIdentity
       :provider_name,
       :client_id,
       :server_side_token_check)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -63,6 +64,7 @@ module Aws::CognitoIdentity
     #
     class ConcurrentModificationException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -157,6 +159,7 @@ module Aws::CognitoIdentity
       :cognito_identity_providers,
       :saml_provider_arns,
       :identity_pool_tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -185,6 +188,7 @@ module Aws::CognitoIdentity
       :secret_key,
       :session_token,
       :expiration)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -205,6 +209,7 @@ module Aws::CognitoIdentity
     #
     class DeleteIdentitiesInput < Struct.new(
       :identity_ids_to_delete)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -219,6 +224,7 @@ module Aws::CognitoIdentity
     #
     class DeleteIdentitiesResponse < Struct.new(
       :unprocessed_identity_ids)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -239,6 +245,7 @@ module Aws::CognitoIdentity
     #
     class DeleteIdentityPoolInput < Struct.new(
       :identity_pool_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -259,6 +266,7 @@ module Aws::CognitoIdentity
     #
     class DescribeIdentityInput < Struct.new(
       :identity_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -279,6 +287,7 @@ module Aws::CognitoIdentity
     #
     class DescribeIdentityPoolInput < Struct.new(
       :identity_pool_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -293,6 +302,7 @@ module Aws::CognitoIdentity
     #
     class DeveloperUserAlreadyRegisteredException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -307,6 +317,7 @@ module Aws::CognitoIdentity
     #
     class ExternalServiceException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -359,6 +370,7 @@ module Aws::CognitoIdentity
       :identity_id,
       :logins,
       :custom_role_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -378,6 +390,7 @@ module Aws::CognitoIdentity
     class GetCredentialsForIdentityResponse < Struct.new(
       :identity_id,
       :credentials)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -429,6 +442,7 @@ module Aws::CognitoIdentity
       :account_id,
       :identity_pool_id,
       :logins)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -442,6 +456,7 @@ module Aws::CognitoIdentity
     #
     class GetIdResponse < Struct.new(
       :identity_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -462,6 +477,7 @@ module Aws::CognitoIdentity
     #
     class GetIdentityPoolRolesInput < Struct.new(
       :identity_pool_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -489,6 +505,7 @@ module Aws::CognitoIdentity
       :identity_pool_id,
       :roles,
       :role_mappings)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -551,6 +568,7 @@ module Aws::CognitoIdentity
       :identity_id,
       :logins,
       :token_duration)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -570,6 +588,7 @@ module Aws::CognitoIdentity
     class GetOpenIdTokenForDeveloperIdentityResponse < Struct.new(
       :identity_id,
       :token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -602,6 +621,7 @@ module Aws::CognitoIdentity
     class GetOpenIdTokenInput < Struct.new(
       :identity_id,
       :logins)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -621,6 +641,7 @@ module Aws::CognitoIdentity
     class GetOpenIdTokenResponse < Struct.new(
       :identity_id,
       :token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -649,6 +670,7 @@ module Aws::CognitoIdentity
       :logins,
       :creation_date,
       :last_modified_date)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -743,6 +765,7 @@ module Aws::CognitoIdentity
       :cognito_identity_providers,
       :saml_provider_arns,
       :identity_pool_tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -761,6 +784,7 @@ module Aws::CognitoIdentity
     class IdentityPoolShortDescription < Struct.new(
       :identity_pool_id,
       :identity_pool_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -775,6 +799,7 @@ module Aws::CognitoIdentity
     #
     class InternalErrorException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -790,6 +815,7 @@ module Aws::CognitoIdentity
     #
     class InvalidIdentityPoolConfigurationException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -803,6 +829,7 @@ module Aws::CognitoIdentity
     #
     class InvalidParameterException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -817,6 +844,7 @@ module Aws::CognitoIdentity
     #
     class LimitExceededException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -857,6 +885,7 @@ module Aws::CognitoIdentity
       :max_results,
       :next_token,
       :hide_disabled)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -880,6 +909,7 @@ module Aws::CognitoIdentity
       :identity_pool_id,
       :identities,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -906,6 +936,7 @@ module Aws::CognitoIdentity
     class ListIdentityPoolsInput < Struct.new(
       :max_results,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -924,6 +955,7 @@ module Aws::CognitoIdentity
     class ListIdentityPoolsResponse < Struct.new(
       :identity_pools,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -943,6 +975,7 @@ module Aws::CognitoIdentity
     #
     class ListTagsForResourceInput < Struct.new(
       :resource_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -954,6 +987,7 @@ module Aws::CognitoIdentity
     #
     class ListTagsForResourceResponse < Struct.new(
       :tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1006,6 +1040,7 @@ module Aws::CognitoIdentity
       :developer_user_identifier,
       :max_results,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1037,6 +1072,7 @@ module Aws::CognitoIdentity
       :identity_id,
       :developer_user_identifier_list,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1079,6 +1115,7 @@ module Aws::CognitoIdentity
       :match_type,
       :value,
       :role_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1124,6 +1161,7 @@ module Aws::CognitoIdentity
       :destination_user_identifier,
       :developer_provider_name,
       :identity_pool_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1138,6 +1176,7 @@ module Aws::CognitoIdentity
     #
     class MergeDeveloperIdentitiesResponse < Struct.new(
       :identity_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1151,6 +1190,7 @@ module Aws::CognitoIdentity
     #
     class NotAuthorizedException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1165,6 +1205,7 @@ module Aws::CognitoIdentity
     #
     class ResourceConflictException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1179,6 +1220,7 @@ module Aws::CognitoIdentity
     #
     class ResourceNotFoundException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1232,6 +1274,7 @@ module Aws::CognitoIdentity
       :type,
       :ambiguous_role_resolution,
       :rules_configuration)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1263,6 +1306,7 @@ module Aws::CognitoIdentity
     #
     class RulesConfigurationType < Struct.new(
       :rules)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1319,6 +1363,7 @@ module Aws::CognitoIdentity
       :identity_pool_id,
       :roles,
       :role_mappings)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1346,6 +1391,7 @@ module Aws::CognitoIdentity
     class TagResourceInput < Struct.new(
       :resource_arn,
       :tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1363,6 +1409,7 @@ module Aws::CognitoIdentity
     #
     class TooManyRequestsException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1402,6 +1449,7 @@ module Aws::CognitoIdentity
       :identity_pool_id,
       :developer_provider_name,
       :developer_user_identifier)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1437,6 +1485,7 @@ module Aws::CognitoIdentity
       :identity_id,
       :logins,
       :logins_to_remove)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1456,6 +1505,7 @@ module Aws::CognitoIdentity
     class UnprocessedIdentityId < Struct.new(
       :identity_id,
       :error_code)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1481,6 +1531,7 @@ module Aws::CognitoIdentity
     class UntagResourceInput < Struct.new(
       :resource_arn,
       :tag_keys)
+      SENSITIVE = []
       include Aws::Structure
     end
 

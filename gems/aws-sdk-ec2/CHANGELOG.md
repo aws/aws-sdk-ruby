@@ -1,6 +1,21 @@
 Unreleased Changes
 ------------------
 
+1.170.0 (2020-06-23)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.169.0 (2020-06-22)
+------------------
+
+* Feature - This release adds Tag On Create feature support for the ImportImage, ImportSnapshot, ExportImage and CreateInstanceExportTask APIs.
+
+1.168.0 (2020-06-19)
+------------------
+
+* Feature - Adds support to tag elastic-gpu on the RunInstances api
+
 1.167.0 (2020-06-17)
 ------------------
 

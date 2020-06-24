@@ -1,6 +1,14 @@
 Unreleased Changes
 ------------------
 
+3.101.0 (2020-06-23)
+------------------
+
+* Feature - Updated Aws::STS::Client with the latest API changes.
+
+* Feature - Added sensitive params to request and response Types instead of just on a large list.
+* Feature - Provide an option `:filter_sensitive_params` for `Aws::Log::Formatter` to allow disabling of the sensitive param filter (#2312, #2105, #2082).
+
 3.100.0 (2020-06-15)
 ------------------
 

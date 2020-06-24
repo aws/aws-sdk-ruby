@@ -19,6 +19,7 @@ module Aws::ComputeOptimizer
     #
     class AccessDeniedException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -50,6 +51,7 @@ module Aws::ComputeOptimizer
       :min_size,
       :max_size,
       :instance_type)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -126,6 +128,7 @@ module Aws::ComputeOptimizer
       :current_configuration,
       :recommendation_options,
       :last_refresh_timestamp)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -165,6 +168,7 @@ module Aws::ComputeOptimizer
       :projected_utilization_metrics,
       :performance_risk,
       :rank)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -217,6 +221,7 @@ module Aws::ComputeOptimizer
       :filters,
       :next_token,
       :max_results)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -236,6 +241,7 @@ module Aws::ComputeOptimizer
     class DescribeRecommendationExportJobsResponse < Struct.new(
       :recommendation_export_jobs,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -337,6 +343,7 @@ module Aws::ComputeOptimizer
       :s3_destination_config,
       :file_format,
       :include_member_accounts)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -357,6 +364,7 @@ module Aws::ComputeOptimizer
     class ExportAutoScalingGroupRecommendationsResponse < Struct.new(
       :job_id,
       :s3_destination)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -373,6 +381,7 @@ module Aws::ComputeOptimizer
     #
     class ExportDestination < Struct.new(
       :s3)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -471,6 +480,7 @@ module Aws::ComputeOptimizer
       :s3_destination_config,
       :file_format,
       :include_member_accounts)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -491,6 +501,7 @@ module Aws::ComputeOptimizer
     class ExportEC2InstanceRecommendationsResponse < Struct.new(
       :job_id,
       :s3_destination)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -536,6 +547,7 @@ module Aws::ComputeOptimizer
     class Filter < Struct.new(
       :name,
       :values)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -597,6 +609,7 @@ module Aws::ComputeOptimizer
       :next_token,
       :max_results,
       :filters)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -626,6 +639,7 @@ module Aws::ComputeOptimizer
       :next_token,
       :auto_scaling_group_recommendations,
       :errors)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -686,6 +700,7 @@ module Aws::ComputeOptimizer
       :max_results,
       :filters,
       :account_ids)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -714,6 +729,7 @@ module Aws::ComputeOptimizer
       :next_token,
       :instance_recommendations,
       :errors)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -757,6 +773,7 @@ module Aws::ComputeOptimizer
       :period,
       :start_time,
       :end_time)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -768,6 +785,7 @@ module Aws::ComputeOptimizer
     #
     class GetEC2RecommendationProjectedMetricsResponse < Struct.new(
       :recommended_option_projected_metrics)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -800,6 +818,7 @@ module Aws::ComputeOptimizer
       :status,
       :status_reason,
       :member_accounts_enrolled)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -827,6 +846,7 @@ module Aws::ComputeOptimizer
       :identifier,
       :code,
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -868,6 +888,7 @@ module Aws::ComputeOptimizer
       :account_ids,
       :next_token,
       :max_results)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -888,6 +909,7 @@ module Aws::ComputeOptimizer
     class GetRecommendationSummariesResponse < Struct.new(
       :next_token,
       :recommendation_summaries)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -979,6 +1001,7 @@ module Aws::ComputeOptimizer
       :recommendation_options,
       :recommendation_sources,
       :last_refresh_timestamp)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1016,6 +1039,7 @@ module Aws::ComputeOptimizer
       :projected_utilization_metrics,
       :performance_risk,
       :rank)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1028,6 +1052,7 @@ module Aws::ComputeOptimizer
     #
     class InternalServerException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1040,6 +1065,7 @@ module Aws::ComputeOptimizer
     #
     class InvalidParameterValueException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1082,6 +1108,7 @@ module Aws::ComputeOptimizer
     class JobFilter < Struct.new(
       :name,
       :values)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1094,6 +1121,7 @@ module Aws::ComputeOptimizer
     #
     class LimitExceededException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1107,6 +1135,7 @@ module Aws::ComputeOptimizer
     #
     class MissingAuthenticationToken < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1119,6 +1148,7 @@ module Aws::ComputeOptimizer
     #
     class OptInRequiredException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1153,6 +1183,7 @@ module Aws::ComputeOptimizer
       :name,
       :timestamps,
       :values)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1203,6 +1234,7 @@ module Aws::ComputeOptimizer
       :creation_timestamp,
       :last_updated_timestamp,
       :failure_reason)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1222,6 +1254,7 @@ module Aws::ComputeOptimizer
     class RecommendationSource < Struct.new(
       :recommendation_source_arn,
       :recommendation_source_type)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1245,6 +1278,7 @@ module Aws::ComputeOptimizer
       :summaries,
       :recommendation_resource_type,
       :account_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1275,6 +1309,7 @@ module Aws::ComputeOptimizer
       :recommended_instance_type,
       :rank,
       :projected_metrics)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1287,6 +1322,7 @@ module Aws::ComputeOptimizer
     #
     class ResourceNotFoundException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1319,6 +1355,7 @@ module Aws::ComputeOptimizer
       :bucket,
       :key,
       :metadata_key)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1361,6 +1398,7 @@ module Aws::ComputeOptimizer
     class S3DestinationConfig < Struct.new(
       :bucket,
       :key_prefix)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1373,6 +1411,7 @@ module Aws::ComputeOptimizer
     #
     class ServiceUnavailableException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1391,6 +1430,7 @@ module Aws::ComputeOptimizer
     class Summary < Struct.new(
       :name,
       :value)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1403,6 +1443,7 @@ module Aws::ComputeOptimizer
     #
     class ThrottlingException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1431,6 +1472,7 @@ module Aws::ComputeOptimizer
     class UpdateEnrollmentStatusRequest < Struct.new(
       :status,
       :include_member_accounts)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1449,6 +1491,7 @@ module Aws::ComputeOptimizer
     class UpdateEnrollmentStatusResponse < Struct.new(
       :status,
       :status_reason)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1483,6 +1526,7 @@ module Aws::ComputeOptimizer
       :name,
       :statistic,
       :value)
+      SENSITIVE = []
       include Aws::Structure
     end
 

@@ -56,6 +56,7 @@ module Aws::ServiceCatalog
       :accept_language,
       :portfolio_id,
       :portfolio_share_type)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -94,6 +95,7 @@ module Aws::ServiceCatalog
     class AccessLevelFilter < Struct.new(
       :key,
       :value)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -118,6 +120,7 @@ module Aws::ServiceCatalog
     class AssociateBudgetWithResourceInput < Struct.new(
       :budget_name,
       :resource_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -164,6 +167,7 @@ module Aws::ServiceCatalog
       :portfolio_id,
       :principal_arn,
       :principal_type)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -210,6 +214,7 @@ module Aws::ServiceCatalog
       :product_id,
       :portfolio_id,
       :source_portfolio_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -258,6 +263,7 @@ module Aws::ServiceCatalog
       :provisioning_artifact_id,
       :service_action_id,
       :accept_language)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -286,6 +292,7 @@ module Aws::ServiceCatalog
     class AssociateTagOptionWithResourceInput < Struct.new(
       :resource_id,
       :tag_option_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -327,6 +334,7 @@ module Aws::ServiceCatalog
     class BatchAssociateServiceActionWithProvisioningArtifactInput < Struct.new(
       :service_action_associations,
       :accept_language)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -339,6 +347,7 @@ module Aws::ServiceCatalog
     #
     class BatchAssociateServiceActionWithProvisioningArtifactOutput < Struct.new(
       :failed_service_action_associations)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -376,6 +385,7 @@ module Aws::ServiceCatalog
     class BatchDisassociateServiceActionFromProvisioningArtifactInput < Struct.new(
       :service_action_associations,
       :accept_language)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -388,6 +398,7 @@ module Aws::ServiceCatalog
     #
     class BatchDisassociateServiceActionFromProvisioningArtifactOutput < Struct.new(
       :failed_service_action_associations)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -401,6 +412,7 @@ module Aws::ServiceCatalog
     #
     class BudgetDetail < Struct.new(
       :budget_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -414,6 +426,7 @@ module Aws::ServiceCatalog
     #
     class CloudWatchDashboard < Struct.new(
       :name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -464,6 +477,7 @@ module Aws::ServiceCatalog
       :owner,
       :product_id,
       :portfolio_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -490,6 +504,7 @@ module Aws::ServiceCatalog
     class ConstraintSummary < Struct.new(
       :type,
       :description)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -564,6 +579,7 @@ module Aws::ServiceCatalog
       :source_provisioning_artifact_identifiers,
       :copy_options,
       :idempotency_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -575,6 +591,7 @@ module Aws::ServiceCatalog
     #
     class CopyProductOutput < Struct.new(
       :copy_product_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -722,6 +739,7 @@ module Aws::ServiceCatalog
       :type,
       :description,
       :idempotency_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -743,6 +761,7 @@ module Aws::ServiceCatalog
       :constraint_detail,
       :constraint_parameters,
       :status)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -807,6 +826,7 @@ module Aws::ServiceCatalog
       :provider_name,
       :tags,
       :idempotency_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -823,6 +843,7 @@ module Aws::ServiceCatalog
     class CreatePortfolioOutput < Struct.new(
       :portfolio_detail,
       :tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -873,6 +894,7 @@ module Aws::ServiceCatalog
       :portfolio_id,
       :account_id,
       :organization_node)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -885,6 +907,7 @@ module Aws::ServiceCatalog
     #
     class CreatePortfolioShareOutput < Struct.new(
       :portfolio_share_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -993,6 +1016,7 @@ module Aws::ServiceCatalog
       :tags,
       :provisioning_artifact_parameters,
       :idempotency_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1014,6 +1038,7 @@ module Aws::ServiceCatalog
       :product_view_detail,
       :provisioning_artifact_detail,
       :tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1125,6 +1150,7 @@ module Aws::ServiceCatalog
       :provisioning_parameters,
       :idempotency_token,
       :tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1156,6 +1182,7 @@ module Aws::ServiceCatalog
       :provision_product_id,
       :provisioned_product_name,
       :provisioning_artifact_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1211,6 +1238,7 @@ module Aws::ServiceCatalog
       :product_id,
       :parameters,
       :idempotency_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1232,6 +1260,7 @@ module Aws::ServiceCatalog
       :provisioning_artifact_detail,
       :info,
       :status)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1322,6 +1351,7 @@ module Aws::ServiceCatalog
       :description,
       :accept_language,
       :idempotency_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1333,6 +1363,7 @@ module Aws::ServiceCatalog
     #
     class CreateServiceActionOutput < Struct.new(
       :service_action_detail)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1357,6 +1388,7 @@ module Aws::ServiceCatalog
     class CreateTagOptionInput < Struct.new(
       :key,
       :value)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1368,6 +1400,7 @@ module Aws::ServiceCatalog
     #
     class CreateTagOptionOutput < Struct.new(
       :tag_option_detail)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1398,6 +1431,7 @@ module Aws::ServiceCatalog
     class DeleteConstraintInput < Struct.new(
       :accept_language,
       :id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1432,6 +1466,7 @@ module Aws::ServiceCatalog
     class DeletePortfolioInput < Struct.new(
       :accept_language,
       :id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1481,6 +1516,7 @@ module Aws::ServiceCatalog
       :portfolio_id,
       :account_id,
       :organization_node)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1493,6 +1529,7 @@ module Aws::ServiceCatalog
     #
     class DeletePortfolioShareOutput < Struct.new(
       :portfolio_share_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1523,6 +1560,7 @@ module Aws::ServiceCatalog
     class DeleteProductInput < Struct.new(
       :accept_language,
       :id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1565,6 +1603,7 @@ module Aws::ServiceCatalog
       :accept_language,
       :plan_id,
       :ignore_errors)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1605,6 +1644,7 @@ module Aws::ServiceCatalog
       :accept_language,
       :product_id,
       :provisioning_artifact_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1640,6 +1680,7 @@ module Aws::ServiceCatalog
     class DeleteServiceActionInput < Struct.new(
       :id,
       :accept_language)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1662,6 +1703,7 @@ module Aws::ServiceCatalog
     #
     class DeleteTagOptionInput < Struct.new(
       :id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1696,6 +1738,7 @@ module Aws::ServiceCatalog
     class DescribeConstraintInput < Struct.new(
       :accept_language,
       :id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1717,6 +1760,7 @@ module Aws::ServiceCatalog
       :constraint_detail,
       :constraint_parameters,
       :status)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1748,6 +1792,7 @@ module Aws::ServiceCatalog
     class DescribeCopyProductStatusInput < Struct.new(
       :accept_language,
       :copy_product_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1769,6 +1814,7 @@ module Aws::ServiceCatalog
       :copy_product_status,
       :target_product_id,
       :status_detail)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1799,6 +1845,7 @@ module Aws::ServiceCatalog
     class DescribePortfolioInput < Struct.new(
       :accept_language,
       :id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1825,6 +1872,7 @@ module Aws::ServiceCatalog
       :tags,
       :tag_options,
       :budgets)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1844,6 +1892,7 @@ module Aws::ServiceCatalog
     #
     class DescribePortfolioShareStatusInput < Struct.new(
       :portfolio_share_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1877,6 +1926,7 @@ module Aws::ServiceCatalog
       :organization_node_value,
       :status,
       :share_details)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1913,6 +1963,7 @@ module Aws::ServiceCatalog
       :accept_language,
       :id,
       :name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1945,6 +1996,7 @@ module Aws::ServiceCatalog
       :tags,
       :tag_options,
       :budgets)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1981,6 +2033,7 @@ module Aws::ServiceCatalog
       :accept_language,
       :id,
       :name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2008,6 +2061,7 @@ module Aws::ServiceCatalog
       :provisioning_artifacts,
       :budgets,
       :launch_paths)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2038,6 +2092,7 @@ module Aws::ServiceCatalog
     class DescribeProductViewInput < Struct.new(
       :accept_language,
       :id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2054,6 +2109,7 @@ module Aws::ServiceCatalog
     class DescribeProductViewOutput < Struct.new(
       :product_view_summary,
       :provisioning_artifacts)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2084,6 +2140,7 @@ module Aws::ServiceCatalog
     class DescribeProvisionedProductInput < Struct.new(
       :accept_language,
       :id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2101,6 +2158,7 @@ module Aws::ServiceCatalog
     class DescribeProvisionedProductOutput < Struct.new(
       :provisioned_product_detail,
       :cloud_watch_dashboards)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2144,6 +2202,7 @@ module Aws::ServiceCatalog
       :plan_id,
       :page_size,
       :page_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2167,6 +2226,7 @@ module Aws::ServiceCatalog
       :provisioned_product_plan_details,
       :resource_changes,
       :next_page_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2221,6 +2281,7 @@ module Aws::ServiceCatalog
       :provisioning_artifact_name,
       :product_name,
       :verbose)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2242,6 +2303,7 @@ module Aws::ServiceCatalog
       :provisioning_artifact_detail,
       :info,
       :status)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2286,6 +2348,7 @@ module Aws::ServiceCatalog
       :product_id,
       :provisioning_artifact_id,
       :path_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2320,6 +2383,7 @@ module Aws::ServiceCatalog
       :usage_instructions,
       :tag_options,
       :provisioning_artifact_preferences)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2364,6 +2428,7 @@ module Aws::ServiceCatalog
       :id,
       :page_token,
       :page_size)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2388,6 +2453,7 @@ module Aws::ServiceCatalog
       :record_detail,
       :record_outputs,
       :next_page_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2424,6 +2490,7 @@ module Aws::ServiceCatalog
       :provisioned_product_id,
       :service_action_id,
       :accept_language)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2435,6 +2502,7 @@ module Aws::ServiceCatalog
     #
     class DescribeServiceActionExecutionParametersOutput < Struct.new(
       :service_action_parameters)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2465,6 +2533,7 @@ module Aws::ServiceCatalog
     class DescribeServiceActionInput < Struct.new(
       :id,
       :accept_language)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2476,6 +2545,7 @@ module Aws::ServiceCatalog
     #
     class DescribeServiceActionOutput < Struct.new(
       :service_action_detail)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2494,6 +2564,7 @@ module Aws::ServiceCatalog
     #
     class DescribeTagOptionInput < Struct.new(
       :id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2505,6 +2576,7 @@ module Aws::ServiceCatalog
     #
     class DescribeTagOptionOutput < Struct.new(
       :tag_option_detail)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2540,6 +2612,7 @@ module Aws::ServiceCatalog
     class DisassociateBudgetFromResourceInput < Struct.new(
       :budget_name,
       :resource_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2580,6 +2653,7 @@ module Aws::ServiceCatalog
       :accept_language,
       :portfolio_id,
       :principal_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2620,6 +2694,7 @@ module Aws::ServiceCatalog
       :accept_language,
       :product_id,
       :portfolio_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2668,6 +2743,7 @@ module Aws::ServiceCatalog
       :provisioning_artifact_id,
       :service_action_id,
       :accept_language)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2696,6 +2772,7 @@ module Aws::ServiceCatalog
     class DisassociateTagOptionFromResourceInput < Struct.new(
       :resource_id,
       :tag_option_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2757,6 +2834,7 @@ module Aws::ServiceCatalog
       :accept_language,
       :plan_id,
       :idempotency_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2768,6 +2846,7 @@ module Aws::ServiceCatalog
     #
     class ExecuteProvisionedProductPlanOutput < Struct.new(
       :record_detail)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2827,6 +2906,7 @@ module Aws::ServiceCatalog
       :execute_token,
       :accept_language,
       :parameters)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2839,6 +2919,7 @@ module Aws::ServiceCatalog
     #
     class ExecuteProvisionedProductServiceActionOutput < Struct.new(
       :record_detail)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2863,6 +2944,7 @@ module Aws::ServiceCatalog
       :name,
       :type,
       :default_values)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2900,6 +2982,7 @@ module Aws::ServiceCatalog
       :provisioning_artifact_id,
       :error_code,
       :error_message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2917,6 +3000,7 @@ module Aws::ServiceCatalog
     #
     class GetAWSOrganizationsAccessStatusOutput < Struct.new(
       :access_status)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2949,6 +3033,7 @@ module Aws::ServiceCatalog
     class LaunchPath < Struct.new(
       :id,
       :name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2977,6 +3062,7 @@ module Aws::ServiceCatalog
       :constraint_summaries,
       :tags,
       :name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3036,6 +3122,7 @@ module Aws::ServiceCatalog
       :page_token,
       :page_size,
       :portfolio_share_type)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3053,6 +3140,7 @@ module Aws::ServiceCatalog
     class ListAcceptedPortfolioSharesOutput < Struct.new(
       :portfolio_details,
       :next_page_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3096,6 +3184,7 @@ module Aws::ServiceCatalog
       :resource_id,
       :page_size,
       :page_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3113,6 +3202,7 @@ module Aws::ServiceCatalog
     class ListBudgetsForResourceOutput < Struct.new(
       :budgets,
       :next_page_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3162,6 +3252,7 @@ module Aws::ServiceCatalog
       :product_id,
       :page_size,
       :page_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3179,6 +3270,7 @@ module Aws::ServiceCatalog
     class ListConstraintsForPortfolioOutput < Struct.new(
       :constraint_details,
       :next_page_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3222,6 +3314,7 @@ module Aws::ServiceCatalog
       :product_id,
       :page_size,
       :page_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3239,6 +3332,7 @@ module Aws::ServiceCatalog
     class ListLaunchPathsOutput < Struct.new(
       :launch_path_summaries,
       :next_page_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3296,6 +3390,7 @@ module Aws::ServiceCatalog
       :organization_node_type,
       :page_token,
       :page_size)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3313,6 +3408,7 @@ module Aws::ServiceCatalog
     class ListOrganizationPortfolioAccessOutput < Struct.new(
       :organization_nodes,
       :next_page_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3364,6 +3460,7 @@ module Aws::ServiceCatalog
       :organization_parent_id,
       :page_token,
       :page_size)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3381,6 +3478,7 @@ module Aws::ServiceCatalog
     class ListPortfolioAccessOutput < Struct.new(
       :account_ids,
       :next_page_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3424,6 +3522,7 @@ module Aws::ServiceCatalog
       :product_id,
       :page_token,
       :page_size)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3441,6 +3540,7 @@ module Aws::ServiceCatalog
     class ListPortfoliosForProductOutput < Struct.new(
       :portfolio_details,
       :next_page_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3478,6 +3578,7 @@ module Aws::ServiceCatalog
       :accept_language,
       :page_token,
       :page_size)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3495,6 +3596,7 @@ module Aws::ServiceCatalog
     class ListPortfoliosOutput < Struct.new(
       :portfolio_details,
       :next_page_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3538,6 +3640,7 @@ module Aws::ServiceCatalog
       :portfolio_id,
       :page_size,
       :page_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3555,6 +3658,7 @@ module Aws::ServiceCatalog
     class ListPrincipalsForPortfolioOutput < Struct.new(
       :principals,
       :next_page_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3607,6 +3711,7 @@ module Aws::ServiceCatalog
       :page_size,
       :page_token,
       :access_level_filter)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3624,6 +3729,7 @@ module Aws::ServiceCatalog
     class ListProvisionedProductPlansOutput < Struct.new(
       :provisioned_product_plans,
       :next_page_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3668,6 +3774,7 @@ module Aws::ServiceCatalog
       :page_size,
       :page_token,
       :accept_language)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3686,6 +3793,7 @@ module Aws::ServiceCatalog
     class ListProvisioningArtifactsForServiceActionOutput < Struct.new(
       :provisioning_artifact_views,
       :next_page_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3716,6 +3824,7 @@ module Aws::ServiceCatalog
     class ListProvisioningArtifactsInput < Struct.new(
       :accept_language,
       :product_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3733,6 +3842,7 @@ module Aws::ServiceCatalog
     class ListProvisioningArtifactsOutput < Struct.new(
       :provisioning_artifact_details,
       :next_page_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3788,6 +3898,7 @@ module Aws::ServiceCatalog
       :search_filter,
       :page_size,
       :page_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3805,6 +3916,7 @@ module Aws::ServiceCatalog
     class ListRecordHistoryOutput < Struct.new(
       :record_details,
       :next_page_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3837,6 +3949,7 @@ module Aws::ServiceCatalog
     class ListRecordHistorySearchFilter < Struct.new(
       :key,
       :value)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3878,6 +3991,7 @@ module Aws::ServiceCatalog
       :resource_type,
       :page_size,
       :page_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3895,6 +4009,7 @@ module Aws::ServiceCatalog
     class ListResourcesForTagOptionOutput < Struct.new(
       :resource_details,
       :page_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3945,6 +4060,7 @@ module Aws::ServiceCatalog
       :page_size,
       :page_token,
       :accept_language)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3963,6 +4079,7 @@ module Aws::ServiceCatalog
     class ListServiceActionsForProvisioningArtifactOutput < Struct.new(
       :service_action_summaries,
       :next_page_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4000,6 +4117,7 @@ module Aws::ServiceCatalog
       :accept_language,
       :page_size,
       :page_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4018,6 +4136,7 @@ module Aws::ServiceCatalog
     class ListServiceActionsOutput < Struct.new(
       :service_action_summaries,
       :next_page_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4061,6 +4180,7 @@ module Aws::ServiceCatalog
       :provisioned_product_id,
       :page_token,
       :page_size)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4078,6 +4198,7 @@ module Aws::ServiceCatalog
     class ListStackInstancesForProvisionedProductOutput < Struct.new(
       :stack_instances,
       :next_page_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4110,6 +4231,7 @@ module Aws::ServiceCatalog
       :key,
       :value,
       :active)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4146,6 +4268,7 @@ module Aws::ServiceCatalog
       :filters,
       :page_size,
       :page_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4163,6 +4286,7 @@ module Aws::ServiceCatalog
     class ListTagOptionsOutput < Struct.new(
       :tag_option_details,
       :page_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4195,6 +4319,7 @@ module Aws::ServiceCatalog
     class OrganizationNode < Struct.new(
       :type,
       :value)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4208,6 +4333,7 @@ module Aws::ServiceCatalog
     #
     class ParameterConstraints < Struct.new(
       :allowed_values)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4246,6 +4372,7 @@ module Aws::ServiceCatalog
       :description,
       :created_time,
       :provider_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4264,6 +4391,7 @@ module Aws::ServiceCatalog
     class Principal < Struct.new(
       :principal_arn,
       :principal_type)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4283,6 +4411,7 @@ module Aws::ServiceCatalog
     class ProductViewAggregationValue < Struct.new(
       :value,
       :approximate_count)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4318,6 +4447,7 @@ module Aws::ServiceCatalog
       :status,
       :product_arn,
       :created_time)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4389,6 +4519,7 @@ module Aws::ServiceCatalog
       :support_email,
       :support_description,
       :support_url)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4495,6 +4626,7 @@ module Aws::ServiceCatalog
       :tags,
       :notification_arns,
       :provision_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4506,6 +4638,7 @@ module Aws::ServiceCatalog
     #
     class ProvisionProductOutput < Struct.new(
       :record_detail)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4618,6 +4751,7 @@ module Aws::ServiceCatalog
       :provisioning_artifact_id,
       :user_arn,
       :user_arn_session)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4709,6 +4843,7 @@ module Aws::ServiceCatalog
       :last_record_id,
       :product_id,
       :provisioning_artifact_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4796,6 +4931,7 @@ module Aws::ServiceCatalog
       :provisioning_parameters,
       :tags,
       :status_message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4834,6 +4970,7 @@ module Aws::ServiceCatalog
       :provision_product_name,
       :plan_type,
       :provisioning_artifact_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4869,6 +5006,7 @@ module Aws::ServiceCatalog
       :description,
       :created_time,
       :guidance)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4920,6 +5058,7 @@ module Aws::ServiceCatalog
       :created_time,
       :active,
       :guidance)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4960,6 +5099,7 @@ module Aws::ServiceCatalog
       :is_no_echo,
       :description,
       :parameter_constraints)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4998,6 +5138,7 @@ module Aws::ServiceCatalog
     class ProvisioningArtifactPreferences < Struct.new(
       :stack_set_accounts,
       :stack_set_regions)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5058,6 +5199,7 @@ module Aws::ServiceCatalog
       :info,
       :type,
       :disable_template_validation)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5093,6 +5235,7 @@ module Aws::ServiceCatalog
       :description,
       :created_time,
       :provisioning_artifact_metadata)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5113,6 +5256,7 @@ module Aws::ServiceCatalog
     class ProvisioningArtifactView < Struct.new(
       :product_view_summary,
       :provisioning_artifact)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5139,6 +5283,7 @@ module Aws::ServiceCatalog
     class ProvisioningParameter < Struct.new(
       :key,
       :value)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5264,6 +5409,7 @@ module Aws::ServiceCatalog
       :stack_set_failure_tolerance_percentage,
       :stack_set_max_concurrency_count,
       :stack_set_max_concurrency_percentage)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5358,6 +5504,7 @@ module Aws::ServiceCatalog
       :path_id,
       :record_errors,
       :record_tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5376,6 +5523,7 @@ module Aws::ServiceCatalog
     class RecordError < Struct.new(
       :code,
       :description)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5401,6 +5549,7 @@ module Aws::ServiceCatalog
       :output_key,
       :output_value,
       :description)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5419,6 +5568,7 @@ module Aws::ServiceCatalog
     class RecordTag < Struct.new(
       :key,
       :value)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5468,6 +5618,7 @@ module Aws::ServiceCatalog
       :accept_language,
       :portfolio_id,
       :portfolio_share_type)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5517,6 +5668,7 @@ module Aws::ServiceCatalog
       :replacement,
       :scope,
       :details)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5543,6 +5695,7 @@ module Aws::ServiceCatalog
       :target,
       :evaluation,
       :causing_entity)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5576,6 +5729,7 @@ module Aws::ServiceCatalog
       :name,
       :description,
       :created_time)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5614,6 +5768,7 @@ module Aws::ServiceCatalog
       :attribute,
       :name,
       :requires_recreation)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5660,6 +5815,7 @@ module Aws::ServiceCatalog
       :access_level_filter,
       :page_size,
       :page_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5677,6 +5833,7 @@ module Aws::ServiceCatalog
     class ScanProvisionedProductsOutput < Struct.new(
       :provisioned_products,
       :next_page_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5749,6 +5906,7 @@ module Aws::ServiceCatalog
       :page_token,
       :page_size,
       :product_source)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5766,6 +5924,7 @@ module Aws::ServiceCatalog
     class SearchProductsAsAdminOutput < Struct.new(
       :product_view_details,
       :next_page_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5826,6 +5985,7 @@ module Aws::ServiceCatalog
       :sort_by,
       :sort_order,
       :page_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5848,6 +6008,7 @@ module Aws::ServiceCatalog
       :product_view_summaries,
       :product_view_aggregations,
       :next_page_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5924,6 +6085,7 @@ module Aws::ServiceCatalog
       :sort_order,
       :page_size,
       :page_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5946,6 +6108,7 @@ module Aws::ServiceCatalog
       :provisioned_products,
       :total_results_count,
       :next_page_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5981,6 +6144,7 @@ module Aws::ServiceCatalog
       :service_action_id,
       :product_id,
       :provisioning_artifact_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6000,6 +6164,7 @@ module Aws::ServiceCatalog
     class ServiceActionDetail < Struct.new(
       :service_action_summary,
       :definition)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6029,6 +6194,7 @@ module Aws::ServiceCatalog
       :name,
       :description,
       :definition_type)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6047,6 +6213,7 @@ module Aws::ServiceCatalog
     class ShareDetails < Struct.new(
       :successful_shares,
       :share_errors)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6070,6 +6237,7 @@ module Aws::ServiceCatalog
       :accounts,
       :message,
       :error)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6118,6 +6286,7 @@ module Aws::ServiceCatalog
       :account,
       :region,
       :stack_instance_status)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6145,6 +6314,7 @@ module Aws::ServiceCatalog
     class Tag < Struct.new(
       :key,
       :value)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6173,6 +6343,7 @@ module Aws::ServiceCatalog
       :value,
       :active,
       :id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6200,6 +6371,7 @@ module Aws::ServiceCatalog
     class TagOptionSummary < Struct.new(
       :key,
       :values)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6259,6 +6431,7 @@ module Aws::ServiceCatalog
       :terminate_token,
       :ignore_errors,
       :accept_language)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6270,6 +6443,7 @@ module Aws::ServiceCatalog
     #
     class TerminateProvisionedProductOutput < Struct.new(
       :record_detail)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6384,6 +6558,7 @@ module Aws::ServiceCatalog
       :id,
       :description,
       :parameters)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6405,6 +6580,7 @@ module Aws::ServiceCatalog
       :constraint_detail,
       :constraint_parameters,
       :status)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6470,6 +6646,7 @@ module Aws::ServiceCatalog
       :provider_name,
       :add_tags,
       :remove_tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6486,6 +6663,7 @@ module Aws::ServiceCatalog
     class UpdatePortfolioOutput < Struct.new(
       :portfolio_detail,
       :tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6575,6 +6753,7 @@ module Aws::ServiceCatalog
       :support_url,
       :add_tags,
       :remove_tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6591,6 +6770,7 @@ module Aws::ServiceCatalog
     class UpdateProductOutput < Struct.new(
       :product_view_detail,
       :tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6698,6 +6878,7 @@ module Aws::ServiceCatalog
       :provisioning_preferences,
       :tags,
       :update_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6709,6 +6890,7 @@ module Aws::ServiceCatalog
     #
     class UpdateProvisionedProductOutput < Struct.new(
       :record_detail)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6779,6 +6961,7 @@ module Aws::ServiceCatalog
       :provisioned_product_id,
       :provisioned_product_properties,
       :idempotency_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6805,6 +6988,7 @@ module Aws::ServiceCatalog
       :provisioned_product_properties,
       :record_id,
       :status)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6877,6 +7061,7 @@ module Aws::ServiceCatalog
       :description,
       :active,
       :guidance)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6898,6 +7083,7 @@ module Aws::ServiceCatalog
       :provisioning_artifact_detail,
       :info,
       :status)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6931,6 +7117,7 @@ module Aws::ServiceCatalog
       :key,
       :value,
       :use_previous_value)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -7083,6 +7270,7 @@ module Aws::ServiceCatalog
       :stack_set_max_concurrency_count,
       :stack_set_max_concurrency_percentage,
       :stack_set_operation_type)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -7133,6 +7321,7 @@ module Aws::ServiceCatalog
       :definition,
       :description,
       :accept_language)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -7144,6 +7333,7 @@ module Aws::ServiceCatalog
     #
     class UpdateServiceActionOutput < Struct.new(
       :service_action_detail)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -7174,6 +7364,7 @@ module Aws::ServiceCatalog
       :id,
       :value,
       :active)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -7185,6 +7376,7 @@ module Aws::ServiceCatalog
     #
     class UpdateTagOptionOutput < Struct.new(
       :tag_option_detail)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -7203,6 +7395,7 @@ module Aws::ServiceCatalog
     class UsageInstruction < Struct.new(
       :type,
       :value)
+      SENSITIVE = []
       include Aws::Structure
     end
 

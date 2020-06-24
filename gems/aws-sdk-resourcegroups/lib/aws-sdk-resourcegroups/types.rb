@@ -20,6 +20,7 @@ module Aws::ResourceGroups
     #
     class BadRequestException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -72,6 +73,7 @@ module Aws::ResourceGroups
       :description,
       :resource_query,
       :tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -93,6 +95,7 @@ module Aws::ResourceGroups
       :group,
       :resource_query,
       :tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -111,6 +114,7 @@ module Aws::ResourceGroups
     #
     class DeleteGroupInput < Struct.new(
       :group_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -122,6 +126,7 @@ module Aws::ResourceGroups
     #
     class DeleteGroupOutput < Struct.new(
       :group)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -134,6 +139,7 @@ module Aws::ResourceGroups
     #
     class ForbiddenException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -152,6 +158,7 @@ module Aws::ResourceGroups
     #
     class GetGroupInput < Struct.new(
       :group_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -163,6 +170,7 @@ module Aws::ResourceGroups
     #
     class GetGroupOutput < Struct.new(
       :group)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -181,6 +189,7 @@ module Aws::ResourceGroups
     #
     class GetGroupQueryInput < Struct.new(
       :group_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -192,6 +201,7 @@ module Aws::ResourceGroups
     #
     class GetGroupQueryOutput < Struct.new(
       :group_query)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -211,6 +221,7 @@ module Aws::ResourceGroups
     #
     class GetTagsInput < Struct.new(
       :arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -227,6 +238,7 @@ module Aws::ResourceGroups
     class GetTagsOutput < Struct.new(
       :arn,
       :tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -250,6 +262,7 @@ module Aws::ResourceGroups
       :group_arn,
       :name,
       :description)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -278,6 +291,7 @@ module Aws::ResourceGroups
     class GroupFilter < Struct.new(
       :name,
       :values)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -296,6 +310,7 @@ module Aws::ResourceGroups
     class GroupIdentifier < Struct.new(
       :group_name,
       :group_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -317,6 +332,7 @@ module Aws::ResourceGroups
     class GroupQuery < Struct.new(
       :group_name,
       :resource_query)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -329,6 +345,7 @@ module Aws::ResourceGroups
     #
     class InternalServerErrorException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -382,6 +399,7 @@ module Aws::ResourceGroups
       :filters,
       :max_results,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -408,6 +426,7 @@ module Aws::ResourceGroups
       :resource_identifiers,
       :next_token,
       :query_errors)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -453,6 +472,7 @@ module Aws::ResourceGroups
       :filters,
       :max_results,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -476,6 +496,7 @@ module Aws::ResourceGroups
       :group_identifiers,
       :groups,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -489,6 +510,7 @@ module Aws::ResourceGroups
     #
     class MethodNotAllowedException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -501,6 +523,7 @@ module Aws::ResourceGroups
     #
     class NotFoundException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -530,6 +553,7 @@ module Aws::ResourceGroups
     class QueryError < Struct.new(
       :error_code,
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -558,6 +582,7 @@ module Aws::ResourceGroups
     class ResourceFilter < Struct.new(
       :name,
       :values)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -576,6 +601,7 @@ module Aws::ResourceGroups
     class ResourceIdentifier < Struct.new(
       :resource_arn,
       :resource_type)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -646,6 +672,7 @@ module Aws::ResourceGroups
     class ResourceQuery < Struct.new(
       :type,
       :query)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -685,6 +712,7 @@ module Aws::ResourceGroups
       :resource_query,
       :max_results,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -711,6 +739,7 @@ module Aws::ResourceGroups
       :resource_identifiers,
       :next_token,
       :query_errors)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -740,6 +769,7 @@ module Aws::ResourceGroups
     class TagInput < Struct.new(
       :arn,
       :tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -756,6 +786,7 @@ module Aws::ResourceGroups
     class TagOutput < Struct.new(
       :arn,
       :tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -768,6 +799,7 @@ module Aws::ResourceGroups
     #
     class TooManyRequestsException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -781,6 +813,7 @@ module Aws::ResourceGroups
     #
     class UnauthorizedException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -805,6 +838,7 @@ module Aws::ResourceGroups
     class UntagInput < Struct.new(
       :arn,
       :keys)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -821,6 +855,7 @@ module Aws::ResourceGroups
     class UntagOutput < Struct.new(
       :arn,
       :keys)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -848,6 +883,7 @@ module Aws::ResourceGroups
     class UpdateGroupInput < Struct.new(
       :group_name,
       :description)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -860,6 +896,7 @@ module Aws::ResourceGroups
     #
     class UpdateGroupOutput < Struct.new(
       :group)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -888,6 +925,7 @@ module Aws::ResourceGroups
     class UpdateGroupQueryInput < Struct.new(
       :group_name,
       :resource_query)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -900,6 +938,7 @@ module Aws::ResourceGroups
     #
     class UpdateGroupQueryOutput < Struct.new(
       :group_query)
+      SENSITIVE = []
       include Aws::Structure
     end
 

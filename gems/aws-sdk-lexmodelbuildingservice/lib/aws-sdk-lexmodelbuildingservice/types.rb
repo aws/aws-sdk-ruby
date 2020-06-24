@@ -20,6 +20,7 @@ module Aws::LexModelBuildingService
     #
     class BadRequestException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -70,6 +71,7 @@ module Aws::LexModelBuildingService
       :created_date,
       :checksum,
       :conversation_logs)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -144,6 +146,7 @@ module Aws::LexModelBuildingService
       :bot_configuration,
       :status,
       :failure_reason)
+      SENSITIVE = [:bot_configuration]
       include Aws::Structure
     end
 
@@ -184,6 +187,7 @@ module Aws::LexModelBuildingService
       :last_updated_date,
       :created_date,
       :version)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -208,6 +212,7 @@ module Aws::LexModelBuildingService
     class BuiltinIntentMetadata < Struct.new(
       :signature,
       :supported_locales)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -221,6 +226,7 @@ module Aws::LexModelBuildingService
     #
     class BuiltinIntentSlot < Struct.new(
       :name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -245,6 +251,7 @@ module Aws::LexModelBuildingService
     class BuiltinSlotTypeMetadata < Struct.new(
       :signature,
       :supported_locales)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -274,6 +281,7 @@ module Aws::LexModelBuildingService
     class CodeHook < Struct.new(
       :uri,
       :message_version)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -286,6 +294,7 @@ module Aws::LexModelBuildingService
     #
     class ConflictException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -329,6 +338,7 @@ module Aws::LexModelBuildingService
     class ConversationLogsRequest < Struct.new(
       :log_settings,
       :iam_role_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -349,6 +359,7 @@ module Aws::LexModelBuildingService
     class ConversationLogsResponse < Struct.new(
       :log_settings,
       :iam_role_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -379,6 +390,7 @@ module Aws::LexModelBuildingService
     class CreateBotVersionRequest < Struct.new(
       :name,
       :checksum)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -504,6 +516,7 @@ module Aws::LexModelBuildingService
       :locale,
       :child_directed,
       :detect_sentiment)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -534,6 +547,7 @@ module Aws::LexModelBuildingService
     class CreateIntentVersionRequest < Struct.new(
       :name,
       :checksum)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -629,6 +643,7 @@ module Aws::LexModelBuildingService
       :version,
       :checksum,
       :kendra_configuration)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -659,6 +674,7 @@ module Aws::LexModelBuildingService
     class CreateSlotTypeVersionRequest < Struct.new(
       :name,
       :checksum)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -719,6 +735,7 @@ module Aws::LexModelBuildingService
       :value_selection_strategy,
       :parent_slot_type_signature,
       :slot_type_configurations)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -743,6 +760,7 @@ module Aws::LexModelBuildingService
     class DeleteBotAliasRequest < Struct.new(
       :name,
       :bot_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -774,6 +792,7 @@ module Aws::LexModelBuildingService
       :name,
       :bot_name,
       :bot_alias)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -792,6 +811,7 @@ module Aws::LexModelBuildingService
     #
     class DeleteBotRequest < Struct.new(
       :name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -818,6 +838,7 @@ module Aws::LexModelBuildingService
     class DeleteBotVersionRequest < Struct.new(
       :name,
       :version)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -836,6 +857,7 @@ module Aws::LexModelBuildingService
     #
     class DeleteIntentRequest < Struct.new(
       :name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -862,6 +884,7 @@ module Aws::LexModelBuildingService
     class DeleteIntentVersionRequest < Struct.new(
       :name,
       :version)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -880,6 +903,7 @@ module Aws::LexModelBuildingService
     #
     class DeleteSlotTypeRequest < Struct.new(
       :name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -906,6 +930,7 @@ module Aws::LexModelBuildingService
     class DeleteSlotTypeVersionRequest < Struct.new(
       :name,
       :version)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -937,6 +962,7 @@ module Aws::LexModelBuildingService
     class DeleteUtterancesRequest < Struct.new(
       :bot_name,
       :user_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -974,6 +1000,7 @@ module Aws::LexModelBuildingService
     class EnumerationValue < Struct.new(
       :value,
       :synonyms)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1023,6 +1050,7 @@ module Aws::LexModelBuildingService
     class FollowUpPrompt < Struct.new(
       :prompt,
       :rejection_statement)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1072,6 +1100,7 @@ module Aws::LexModelBuildingService
     class FulfillmentActivity < Struct.new(
       :type,
       :code_hook)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1096,6 +1125,7 @@ module Aws::LexModelBuildingService
     class GetBotAliasRequest < Struct.new(
       :name,
       :bot_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1144,6 +1174,7 @@ module Aws::LexModelBuildingService
       :created_date,
       :checksum,
       :conversation_logs)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1186,6 +1217,7 @@ module Aws::LexModelBuildingService
       :next_token,
       :max_results,
       :name_contains)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1205,6 +1237,7 @@ module Aws::LexModelBuildingService
     class GetBotAliasesResponse < Struct.new(
       :bot_aliases,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1237,6 +1270,7 @@ module Aws::LexModelBuildingService
       :name,
       :bot_name,
       :bot_alias)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1300,6 +1334,7 @@ module Aws::LexModelBuildingService
       :bot_configuration,
       :status,
       :failure_reason)
+      SENSITIVE = [:bot_configuration]
       include Aws::Structure
     end
 
@@ -1351,6 +1386,7 @@ module Aws::LexModelBuildingService
       :next_token,
       :max_results,
       :name_contains)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1372,6 +1408,7 @@ module Aws::LexModelBuildingService
     class GetBotChannelAssociationsResponse < Struct.new(
       :bot_channel_associations,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1396,6 +1433,7 @@ module Aws::LexModelBuildingService
     class GetBotRequest < Struct.new(
       :name,
       :version_or_alias)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1533,6 +1571,7 @@ module Aws::LexModelBuildingService
       :locale,
       :child_directed,
       :detect_sentiment)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1567,6 +1606,7 @@ module Aws::LexModelBuildingService
       :name,
       :next_token,
       :max_results)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1587,6 +1627,7 @@ module Aws::LexModelBuildingService
     class GetBotVersionsResponse < Struct.new(
       :bots,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1623,6 +1664,7 @@ module Aws::LexModelBuildingService
       :next_token,
       :max_results,
       :name_contains)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1640,6 +1682,7 @@ module Aws::LexModelBuildingService
     class GetBotsResponse < Struct.new(
       :bots,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1664,6 +1707,7 @@ module Aws::LexModelBuildingService
     #
     class GetBuiltinIntentRequest < Struct.new(
       :signature)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1686,6 +1730,7 @@ module Aws::LexModelBuildingService
       :signature,
       :supported_locales,
       :slots)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1734,6 +1779,7 @@ module Aws::LexModelBuildingService
       :signature_contains,
       :next_token,
       :max_results)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1754,6 +1800,7 @@ module Aws::LexModelBuildingService
     class GetBuiltinIntentsResponse < Struct.new(
       :intents,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1796,6 +1843,7 @@ module Aws::LexModelBuildingService
       :signature_contains,
       :next_token,
       :max_results)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1815,6 +1863,7 @@ module Aws::LexModelBuildingService
     class GetBuiltinSlotTypesResponse < Struct.new(
       :slot_types,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1851,6 +1900,7 @@ module Aws::LexModelBuildingService
       :version,
       :resource_type,
       :export_type)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1902,6 +1952,7 @@ module Aws::LexModelBuildingService
       :export_status,
       :failure_reason,
       :url)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1920,6 +1971,7 @@ module Aws::LexModelBuildingService
     #
     class GetImportRequest < Struct.new(
       :import_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1963,6 +2015,7 @@ module Aws::LexModelBuildingService
       :import_status,
       :failure_reason,
       :created_date)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1987,6 +2040,7 @@ module Aws::LexModelBuildingService
     class GetIntentRequest < Struct.new(
       :name,
       :version)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2085,6 +2139,7 @@ module Aws::LexModelBuildingService
       :version,
       :checksum,
       :kendra_configuration)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2119,6 +2174,7 @@ module Aws::LexModelBuildingService
       :name,
       :next_token,
       :max_results)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2139,6 +2195,7 @@ module Aws::LexModelBuildingService
     class GetIntentVersionsResponse < Struct.new(
       :intents,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2175,6 +2232,7 @@ module Aws::LexModelBuildingService
       :next_token,
       :max_results,
       :name_contains)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2193,6 +2251,7 @@ module Aws::LexModelBuildingService
     class GetIntentsResponse < Struct.new(
       :intents,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2217,6 +2276,7 @@ module Aws::LexModelBuildingService
     class GetSlotTypeRequest < Struct.new(
       :name,
       :version)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2277,6 +2337,7 @@ module Aws::LexModelBuildingService
       :value_selection_strategy,
       :parent_slot_type_signature,
       :slot_type_configurations)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2311,6 +2372,7 @@ module Aws::LexModelBuildingService
       :name,
       :next_token,
       :max_results)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2331,6 +2393,7 @@ module Aws::LexModelBuildingService
     class GetSlotTypeVersionsResponse < Struct.new(
       :slot_types,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2367,6 +2430,7 @@ module Aws::LexModelBuildingService
       :next_token,
       :max_results,
       :name_contains)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2387,6 +2451,7 @@ module Aws::LexModelBuildingService
     class GetSlotTypesResponse < Struct.new(
       :slot_types,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2421,6 +2486,7 @@ module Aws::LexModelBuildingService
       :bot_name,
       :bot_versions,
       :status_type)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2441,6 +2507,7 @@ module Aws::LexModelBuildingService
     class GetUtterancesViewResponse < Struct.new(
       :bot_name,
       :utterances)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2467,6 +2534,7 @@ module Aws::LexModelBuildingService
     class Intent < Struct.new(
       :intent_name,
       :intent_version)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2501,6 +2569,7 @@ module Aws::LexModelBuildingService
       :last_updated_date,
       :created_date,
       :version)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2513,6 +2582,7 @@ module Aws::LexModelBuildingService
     #
     class InternalFailureException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2569,6 +2639,7 @@ module Aws::LexModelBuildingService
       :kendra_index,
       :query_filter_string,
       :role)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2585,6 +2656,7 @@ module Aws::LexModelBuildingService
     class LimitExceededException < Struct.new(
       :retry_after_seconds,
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2604,6 +2676,7 @@ module Aws::LexModelBuildingService
     #
     class ListTagsForResourceRequest < Struct.new(
       :resource_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2615,6 +2688,7 @@ module Aws::LexModelBuildingService
     #
     class ListTagsForResourceResponse < Struct.new(
       :tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2659,6 +2733,7 @@ module Aws::LexModelBuildingService
       :destination,
       :kms_key_arn,
       :resource_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2697,6 +2772,7 @@ module Aws::LexModelBuildingService
       :kms_key_arn,
       :resource_arn,
       :resource_prefix)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2731,6 +2807,7 @@ module Aws::LexModelBuildingService
       :content_type,
       :content,
       :group_number)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2744,6 +2821,7 @@ module Aws::LexModelBuildingService
     #
     class NotFoundException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2758,6 +2836,7 @@ module Aws::LexModelBuildingService
     #
     class PreconditionFailedException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2805,6 +2884,7 @@ module Aws::LexModelBuildingService
       :messages,
       :max_attempts,
       :response_card)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2886,6 +2966,7 @@ module Aws::LexModelBuildingService
       :checksum,
       :conversation_logs,
       :tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2939,6 +3020,7 @@ module Aws::LexModelBuildingService
       :checksum,
       :conversation_logs,
       :tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3203,6 +3285,7 @@ module Aws::LexModelBuildingService
       :detect_sentiment,
       :create_version,
       :tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3356,6 +3439,7 @@ module Aws::LexModelBuildingService
       :create_version,
       :detect_sentiment,
       :tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3645,6 +3729,7 @@ module Aws::LexModelBuildingService
       :checksum,
       :create_version,
       :kendra_configuration)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3751,6 +3836,7 @@ module Aws::LexModelBuildingService
       :checksum,
       :create_version,
       :kendra_configuration)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3875,6 +3961,7 @@ module Aws::LexModelBuildingService
       :create_version,
       :parent_slot_type_signature,
       :slot_type_configurations)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3943,6 +4030,7 @@ module Aws::LexModelBuildingService
       :create_version,
       :parent_slot_type_signature,
       :slot_type_configurations)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3973,6 +4061,7 @@ module Aws::LexModelBuildingService
     class ResourceInUseException < Struct.new(
       :reference_type,
       :example_reference)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3995,6 +4084,7 @@ module Aws::LexModelBuildingService
     class ResourceReference < Struct.new(
       :name,
       :version)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4101,6 +4191,7 @@ module Aws::LexModelBuildingService
       :sample_utterances,
       :response_card,
       :obfuscation_setting)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4123,6 +4214,7 @@ module Aws::LexModelBuildingService
     #
     class SlotTypeConfiguration < Struct.new(
       :regex_configuration)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4157,6 +4249,7 @@ module Aws::LexModelBuildingService
       :last_updated_date,
       :created_date,
       :version)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4195,6 +4288,7 @@ module Aws::LexModelBuildingService
     #
     class SlotTypeRegexConfiguration < Struct.new(
       :pattern)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4257,6 +4351,7 @@ module Aws::LexModelBuildingService
       :resource_type,
       :merge_strategy,
       :tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4299,6 +4394,7 @@ module Aws::LexModelBuildingService
       :import_status,
       :tags,
       :created_date)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4339,6 +4435,7 @@ module Aws::LexModelBuildingService
     class Statement < Struct.new(
       :messages,
       :response_card)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4368,6 +4465,7 @@ module Aws::LexModelBuildingService
     class Tag < Struct.new(
       :key,
       :value)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4399,6 +4497,7 @@ module Aws::LexModelBuildingService
     class TagResourceRequest < Struct.new(
       :resource_arn,
       :tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4429,6 +4528,7 @@ module Aws::LexModelBuildingService
     class UntagResourceRequest < Struct.new(
       :resource_arn,
       :tag_keys)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4468,6 +4568,7 @@ module Aws::LexModelBuildingService
       :distinct_users,
       :first_uttered_date,
       :last_uttered_date)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4489,6 +4590,7 @@ module Aws::LexModelBuildingService
     class UtteranceList < Struct.new(
       :bot_version,
       :utterances)
+      SENSITIVE = []
       include Aws::Structure
     end
 

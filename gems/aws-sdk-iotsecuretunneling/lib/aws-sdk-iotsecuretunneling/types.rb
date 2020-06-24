@@ -30,6 +30,7 @@ module Aws::IoTSecureTunneling
     class CloseTunnelRequest < Struct.new(
       :tunnel_id,
       :delete)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -49,6 +50,7 @@ module Aws::IoTSecureTunneling
     class ConnectionState < Struct.new(
       :status,
       :last_updated_at)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -65,6 +67,7 @@ module Aws::IoTSecureTunneling
     #
     class DescribeTunnelRequest < Struct.new(
       :tunnel_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -74,6 +77,7 @@ module Aws::IoTSecureTunneling
     #
     class DescribeTunnelResponse < Struct.new(
       :tunnel)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -103,6 +107,7 @@ module Aws::IoTSecureTunneling
     class DestinationConfig < Struct.new(
       :thing_name,
       :services)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -113,6 +118,7 @@ module Aws::IoTSecureTunneling
     #
     class LimitExceededException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -129,6 +135,7 @@ module Aws::IoTSecureTunneling
     #
     class ListTagsForResourceRequest < Struct.new(
       :resource_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -138,6 +145,7 @@ module Aws::IoTSecureTunneling
     #
     class ListTagsForResourceResponse < Struct.new(
       :tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -166,6 +174,7 @@ module Aws::IoTSecureTunneling
       :thing_name,
       :max_results,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -180,6 +189,7 @@ module Aws::IoTSecureTunneling
     class ListTunnelsResponse < Struct.new(
       :tunnel_summaries,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -224,6 +234,7 @@ module Aws::IoTSecureTunneling
       :tags,
       :destination_config,
       :timeout_config)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -251,6 +262,7 @@ module Aws::IoTSecureTunneling
       :tunnel_arn,
       :source_access_token,
       :destination_access_token)
+      SENSITIVE = [:source_access_token, :destination_access_token]
       include Aws::Structure
     end
 
@@ -262,6 +274,7 @@ module Aws::IoTSecureTunneling
     #
     class ResourceNotFoundException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -287,6 +300,7 @@ module Aws::IoTSecureTunneling
     class Tag < Struct.new(
       :key,
       :value)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -314,6 +328,7 @@ module Aws::IoTSecureTunneling
     class TagResourceRequest < Struct.new(
       :resource_arn,
       :tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -336,6 +351,7 @@ module Aws::IoTSecureTunneling
     #
     class TimeoutConfig < Struct.new(
       :max_lifetime_timeout_minutes)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -400,6 +416,7 @@ module Aws::IoTSecureTunneling
       :tags,
       :created_at,
       :last_updated_at)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -437,6 +454,7 @@ module Aws::IoTSecureTunneling
       :description,
       :created_at,
       :last_updated_at)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -459,6 +477,7 @@ module Aws::IoTSecureTunneling
     class UntagResourceRequest < Struct.new(
       :resource_arn,
       :tag_keys)
+      SENSITIVE = []
       include Aws::Structure
     end
 

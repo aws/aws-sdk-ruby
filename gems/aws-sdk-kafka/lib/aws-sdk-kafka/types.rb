@@ -23,6 +23,7 @@ module Aws::Kafka
     class BadRequestException < Struct.new(
       :invalid_parameter,
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -51,6 +52,7 @@ module Aws::Kafka
     class BrokerEBSVolumeInfo < Struct.new(
       :kafka_broker_node_id,
       :volume_size_gb)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -94,6 +96,7 @@ module Aws::Kafka
       :cloud_watch_logs,
       :firehose,
       :s3)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -156,6 +159,7 @@ module Aws::Kafka
       :instance_type,
       :security_groups,
       :storage_info)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -195,6 +199,7 @@ module Aws::Kafka
       :client_vpc_ip_address,
       :current_broker_software_info,
       :endpoints)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -220,6 +225,7 @@ module Aws::Kafka
       :configuration_arn,
       :configuration_revision,
       :kafka_version)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -242,6 +248,7 @@ module Aws::Kafka
     #
     class ClientAuthentication < Struct.new(
       :tls)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -269,6 +276,7 @@ module Aws::Kafka
     class CloudWatchLogs < Struct.new(
       :enabled,
       :log_group)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -371,6 +379,7 @@ module Aws::Kafka
       :state,
       :tags,
       :zookeeper_connect_string)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -434,6 +443,7 @@ module Aws::Kafka
       :operation_type,
       :source_cluster_info,
       :target_cluster_info)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -452,6 +462,7 @@ module Aws::Kafka
     class ClusterOperationStep < Struct.new(
       :step_info,
       :step_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -465,6 +476,7 @@ module Aws::Kafka
     #
     class ClusterOperationStepInfo < Struct.new(
       :step_status)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -481,6 +493,7 @@ module Aws::Kafka
     class CompatibleKafkaVersion < Struct.new(
       :source_version,
       :target_versions)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -522,6 +535,7 @@ module Aws::Kafka
       :kafka_versions,
       :latest_revision,
       :name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -548,6 +562,7 @@ module Aws::Kafka
     class ConfigurationInfo < Struct.new(
       :arn,
       :revision)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -571,6 +586,7 @@ module Aws::Kafka
       :creation_time,
       :description,
       :revision)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -587,6 +603,7 @@ module Aws::Kafka
     class ConflictException < Struct.new(
       :invalid_parameter,
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -721,6 +738,7 @@ module Aws::Kafka
       :number_of_broker_nodes,
       :open_monitoring,
       :tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -745,6 +763,7 @@ module Aws::Kafka
       :cluster_arn,
       :cluster_name,
       :state)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -784,6 +803,7 @@ module Aws::Kafka
       :kafka_versions,
       :name,
       :server_properties)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -813,6 +833,7 @@ module Aws::Kafka
       :creation_time,
       :latest_revision,
       :name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -835,6 +856,7 @@ module Aws::Kafka
     class DeleteClusterRequest < Struct.new(
       :cluster_arn,
       :current_version)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -854,6 +876,7 @@ module Aws::Kafka
     class DeleteClusterResponse < Struct.new(
       :cluster_arn,
       :state)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -871,6 +894,7 @@ module Aws::Kafka
     #
     class DescribeClusterOperationRequest < Struct.new(
       :cluster_operation_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -884,6 +908,7 @@ module Aws::Kafka
     #
     class DescribeClusterOperationResponse < Struct.new(
       :cluster_operation_info)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -901,6 +926,7 @@ module Aws::Kafka
     #
     class DescribeClusterRequest < Struct.new(
       :cluster_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -914,6 +940,7 @@ module Aws::Kafka
     #
     class DescribeClusterResponse < Struct.new(
       :cluster_info)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -931,6 +958,7 @@ module Aws::Kafka
     #
     class DescribeConfigurationRequest < Struct.new(
       :arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -971,6 +999,7 @@ module Aws::Kafka
       :kafka_versions,
       :latest_revision,
       :name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -993,6 +1022,7 @@ module Aws::Kafka
     class DescribeConfigurationRevisionRequest < Struct.new(
       :arn,
       :revision)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1025,6 +1055,7 @@ module Aws::Kafka
       :description,
       :revision,
       :server_properties)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1047,6 +1078,7 @@ module Aws::Kafka
     #
     class EBSStorageInfo < Struct.new(
       :volume_size)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1068,6 +1100,7 @@ module Aws::Kafka
     #
     class EncryptionAtRest < Struct.new(
       :data_volume_kms_key_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1109,6 +1142,7 @@ module Aws::Kafka
     class EncryptionInTransit < Struct.new(
       :client_broker,
       :in_cluster)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1142,6 +1176,7 @@ module Aws::Kafka
     class EncryptionInfo < Struct.new(
       :encryption_at_rest,
       :encryption_in_transit)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1160,6 +1195,7 @@ module Aws::Kafka
     class Error < Struct.new(
       :invalid_parameter,
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1188,6 +1224,7 @@ module Aws::Kafka
     class Firehose < Struct.new(
       :delivery_stream,
       :enabled)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1206,6 +1243,7 @@ module Aws::Kafka
     class ErrorInfo < Struct.new(
       :error_code,
       :error_string)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1222,6 +1260,7 @@ module Aws::Kafka
     class ForbiddenException < Struct.new(
       :invalid_parameter,
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1239,6 +1278,7 @@ module Aws::Kafka
     #
     class GetBootstrapBrokersRequest < Struct.new(
       :cluster_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1260,6 +1300,7 @@ module Aws::Kafka
     class GetBootstrapBrokersResponse < Struct.new(
       :bootstrap_broker_string,
       :bootstrap_broker_string_tls)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1277,6 +1318,7 @@ module Aws::Kafka
     #
     class GetCompatibleKafkaVersionsRequest < Struct.new(
       :cluster_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1290,6 +1332,7 @@ module Aws::Kafka
     #
     class GetCompatibleKafkaVersionsResponse < Struct.new(
       :compatible_kafka_versions)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1306,6 +1349,7 @@ module Aws::Kafka
     class InternalServerErrorException < Struct.new(
       :invalid_parameter,
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1324,6 +1368,7 @@ module Aws::Kafka
     class KafkaVersion < Struct.new(
       :version,
       :status)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1351,6 +1396,7 @@ module Aws::Kafka
       :cluster_arn,
       :max_results,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1372,6 +1418,7 @@ module Aws::Kafka
     class ListClusterOperationsResponse < Struct.new(
       :cluster_operation_info_list,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1399,6 +1446,7 @@ module Aws::Kafka
       :cluster_name_filter,
       :max_results,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1421,6 +1469,7 @@ module Aws::Kafka
     class ListClustersResponse < Struct.new(
       :cluster_info_list,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1448,6 +1497,7 @@ module Aws::Kafka
       :arn,
       :max_results,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1466,6 +1516,7 @@ module Aws::Kafka
     class ListConfigurationRevisionsResponse < Struct.new(
       :next_token,
       :revisions)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1488,6 +1539,7 @@ module Aws::Kafka
     class ListConfigurationsRequest < Struct.new(
       :max_results,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1510,6 +1562,7 @@ module Aws::Kafka
     class ListConfigurationsResponse < Struct.new(
       :configurations,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1532,6 +1585,7 @@ module Aws::Kafka
     class ListKafkaVersionsRequest < Struct.new(
       :max_results,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1550,6 +1604,7 @@ module Aws::Kafka
     class ListKafkaVersionsResponse < Struct.new(
       :kafka_versions,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1577,6 +1632,7 @@ module Aws::Kafka
       :cluster_arn,
       :max_results,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1598,6 +1654,7 @@ module Aws::Kafka
     class ListNodesResponse < Struct.new(
       :next_token,
       :node_info_list)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1615,6 +1672,7 @@ module Aws::Kafka
     #
     class ListTagsForResourceRequest < Struct.new(
       :resource_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1628,6 +1686,7 @@ module Aws::Kafka
     #
     class ListTagsForResourceResponse < Struct.new(
       :tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1666,6 +1725,7 @@ module Aws::Kafka
     #
     class LoggingInfo < Struct.new(
       :broker_logs)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1711,6 +1771,7 @@ module Aws::Kafka
       :enhanced_monitoring,
       :kafka_version,
       :logging_info)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1749,6 +1810,7 @@ module Aws::Kafka
       :node_arn,
       :node_type,
       :zookeeper_node_info)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1765,6 +1827,7 @@ module Aws::Kafka
     class NotFoundException < Struct.new(
       :invalid_parameter,
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1781,6 +1844,7 @@ module Aws::Kafka
     class ServiceUnavailableException < Struct.new(
       :invalid_parameter,
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1801,6 +1865,7 @@ module Aws::Kafka
     class StateInfo < Struct.new(
       :code,
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1824,6 +1889,7 @@ module Aws::Kafka
     #
     class StorageInfo < Struct.new(
       :ebs_storage_info)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1851,6 +1917,7 @@ module Aws::Kafka
     class TagResourceRequest < Struct.new(
       :resource_arn,
       :tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1871,6 +1938,7 @@ module Aws::Kafka
     #
     class Tls < Struct.new(
       :certificate_authority_arn_list)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1887,6 +1955,7 @@ module Aws::Kafka
     class TooManyRequestsException < Struct.new(
       :invalid_parameter,
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1903,6 +1972,7 @@ module Aws::Kafka
     class UnauthorizedException < Struct.new(
       :invalid_parameter,
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1925,6 +1995,7 @@ module Aws::Kafka
     class UntagResourceRequest < Struct.new(
       :resource_arn,
       :tag_keys)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1957,6 +2028,7 @@ module Aws::Kafka
       :cluster_arn,
       :current_version,
       :target_number_of_broker_nodes)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1975,6 +2047,7 @@ module Aws::Kafka
     class UpdateBrokerCountResponse < Struct.new(
       :cluster_arn,
       :cluster_operation_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2019,6 +2092,7 @@ module Aws::Kafka
       :cluster_arn,
       :current_version,
       :target_broker_ebs_volume_info)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2037,6 +2111,7 @@ module Aws::Kafka
     class UpdateBrokerStorageResponse < Struct.new(
       :cluster_arn,
       :cluster_operation_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2072,6 +2147,7 @@ module Aws::Kafka
       :cluster_arn,
       :configuration_info,
       :current_version)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2090,6 +2166,7 @@ module Aws::Kafka
     class UpdateClusterConfigurationResponse < Struct.new(
       :cluster_arn,
       :cluster_operation_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2130,6 +2207,7 @@ module Aws::Kafka
       :configuration_info,
       :current_version,
       :target_kafka_version)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2148,6 +2226,7 @@ module Aws::Kafka
     class UpdateClusterKafkaVersionResponse < Struct.new(
       :cluster_arn,
       :cluster_operation_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2218,6 +2297,7 @@ module Aws::Kafka
       :enhanced_monitoring,
       :open_monitoring,
       :logging_info)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2236,6 +2316,7 @@ module Aws::Kafka
     class UpdateMonitoringResponse < Struct.new(
       :cluster_arn,
       :cluster_operation_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2269,6 +2350,7 @@ module Aws::Kafka
       :endpoints,
       :zookeeper_id,
       :zookeeper_version)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2282,6 +2364,7 @@ module Aws::Kafka
     #
     class OpenMonitoring < Struct.new(
       :prometheus)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2309,6 +2392,7 @@ module Aws::Kafka
     #
     class OpenMonitoringInfo < Struct.new(
       :prometheus)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2327,6 +2411,7 @@ module Aws::Kafka
     class Prometheus < Struct.new(
       :jmx_exporter,
       :node_exporter)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2357,6 +2442,7 @@ module Aws::Kafka
     class PrometheusInfo < Struct.new(
       :jmx_exporter,
       :node_exporter)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2390,6 +2476,7 @@ module Aws::Kafka
       :bucket,
       :enabled,
       :prefix)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2403,6 +2490,7 @@ module Aws::Kafka
     #
     class JmxExporter < Struct.new(
       :enabled_in_broker)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2423,6 +2511,7 @@ module Aws::Kafka
     #
     class JmxExporterInfo < Struct.new(
       :enabled_in_broker)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2436,6 +2525,7 @@ module Aws::Kafka
     #
     class NodeExporter < Struct.new(
       :enabled_in_broker)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2456,6 +2546,7 @@ module Aws::Kafka
     #
     class NodeExporterInfo < Struct.new(
       :enabled_in_broker)
+      SENSITIVE = []
       include Aws::Structure
     end
 

@@ -44,6 +44,7 @@ module Aws::MarketplaceMetering
     class BatchMeterUsageRequest < Struct.new(
       :usage_records,
       :product_code)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -68,6 +69,7 @@ module Aws::MarketplaceMetering
     class BatchMeterUsageResult < Struct.new(
       :results,
       :unprocessed_records)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -81,6 +83,7 @@ module Aws::MarketplaceMetering
     #
     class CustomerNotEntitledException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -93,6 +96,7 @@ module Aws::MarketplaceMetering
     #
     class DisabledApiException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -107,6 +111,7 @@ module Aws::MarketplaceMetering
     #
     class DuplicateRequestException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -124,6 +129,7 @@ module Aws::MarketplaceMetering
     #
     class ExpiredTokenException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -137,6 +143,7 @@ module Aws::MarketplaceMetering
     #
     class InternalServiceErrorException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -149,6 +156,7 @@ module Aws::MarketplaceMetering
     #
     class InvalidCustomerIdentifierException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -163,6 +171,7 @@ module Aws::MarketplaceMetering
     #
     class InvalidEndpointRegionException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -176,6 +185,7 @@ module Aws::MarketplaceMetering
     #
     class InvalidProductCodeException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -188,6 +198,7 @@ module Aws::MarketplaceMetering
     #
     class InvalidPublicKeyVersionException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -202,6 +213,7 @@ module Aws::MarketplaceMetering
     #
     class InvalidRegionException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -214,6 +226,7 @@ module Aws::MarketplaceMetering
     #
     class InvalidTokenException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -227,6 +240,7 @@ module Aws::MarketplaceMetering
     #
     class InvalidUsageDimensionException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -278,6 +292,7 @@ module Aws::MarketplaceMetering
       :usage_dimension,
       :usage_quantity,
       :dry_run)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -289,6 +304,7 @@ module Aws::MarketplaceMetering
     #
     class MeterUsageResult < Struct.new(
       :metering_record_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -303,6 +319,7 @@ module Aws::MarketplaceMetering
     #
     class PlatformNotSupportedException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -336,6 +353,7 @@ module Aws::MarketplaceMetering
       :product_code,
       :public_key_version,
       :nonce)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -352,6 +370,7 @@ module Aws::MarketplaceMetering
     class RegisterUsageResult < Struct.new(
       :public_key_rotation_timestamp,
       :signature)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -375,6 +394,7 @@ module Aws::MarketplaceMetering
     #
     class ResolveCustomerRequest < Struct.new(
       :registration_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -398,6 +418,7 @@ module Aws::MarketplaceMetering
     class ResolveCustomerResult < Struct.new(
       :customer_identifier,
       :product_code)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -410,6 +431,7 @@ module Aws::MarketplaceMetering
     #
     class ThrottlingException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -423,6 +445,7 @@ module Aws::MarketplaceMetering
     #
     class TimestampOutOfBoundsException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -473,6 +496,7 @@ module Aws::MarketplaceMetering
       :customer_identifier,
       :dimension,
       :quantity)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -510,6 +534,7 @@ module Aws::MarketplaceMetering
       :usage_record,
       :metering_record_id,
       :status)
+      SENSITIVE = []
       include Aws::Structure
     end
 

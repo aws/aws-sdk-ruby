@@ -21,6 +21,7 @@ module Aws::MediaConnect
     #
     class AddFlowOutputs420Exception < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -74,6 +75,7 @@ module Aws::MediaConnect
     class AddFlowOutputsRequest < Struct.new(
       :flow_arn,
       :outputs)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -93,6 +95,7 @@ module Aws::MediaConnect
     class AddFlowOutputsResponse < Struct.new(
       :flow_arn,
       :outputs)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -142,6 +145,7 @@ module Aws::MediaConnect
     class AddFlowSourcesRequest < Struct.new(
       :flow_arn,
       :sources)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -161,6 +165,7 @@ module Aws::MediaConnect
     class AddFlowSourcesResponse < Struct.new(
       :flow_arn,
       :sources)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -193,6 +198,7 @@ module Aws::MediaConnect
     class AddFlowVpcInterfacesRequest < Struct.new(
       :flow_arn,
       :vpc_interfaces)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -212,6 +218,7 @@ module Aws::MediaConnect
     class AddFlowVpcInterfacesResponse < Struct.new(
       :flow_arn,
       :vpc_interfaces)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -319,6 +326,7 @@ module Aws::MediaConnect
       :smoothing_latency,
       :stream_id,
       :vpc_interface_attachment)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -333,6 +341,7 @@ module Aws::MediaConnect
     #
     class BadRequestException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -347,6 +356,7 @@ module Aws::MediaConnect
     #
     class CreateFlow420Exception < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -512,6 +522,7 @@ module Aws::MediaConnect
       :source_failover_config,
       :sources,
       :vpc_interfaces)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -526,6 +537,7 @@ module Aws::MediaConnect
     #
     class CreateFlowResponse < Struct.new(
       :flow)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -543,6 +555,7 @@ module Aws::MediaConnect
     #
     class DeleteFlowRequest < Struct.new(
       :flow_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -561,6 +574,7 @@ module Aws::MediaConnect
     class DeleteFlowResponse < Struct.new(
       :flow_arn,
       :status)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -578,6 +592,7 @@ module Aws::MediaConnect
     #
     class DescribeFlowRequest < Struct.new(
       :flow_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -597,6 +612,7 @@ module Aws::MediaConnect
     class DescribeFlowResponse < Struct.new(
       :flow,
       :messages)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -682,6 +698,7 @@ module Aws::MediaConnect
       :role_arn,
       :secret_arn,
       :url)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -724,6 +741,7 @@ module Aws::MediaConnect
       :entitlement_arn,
       :name,
       :subscribers)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -749,6 +767,7 @@ module Aws::MediaConnect
     class FailoverConfig < Struct.new(
       :recovery_window,
       :state)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -821,6 +840,7 @@ module Aws::MediaConnect
       :sources,
       :status,
       :vpc_interfaces)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -835,6 +855,7 @@ module Aws::MediaConnect
     #
     class ForbiddenException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -896,6 +917,7 @@ module Aws::MediaConnect
       :encryption,
       :name,
       :subscribers)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -910,6 +932,7 @@ module Aws::MediaConnect
     #
     class GrantFlowEntitlements420Exception < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -953,6 +976,7 @@ module Aws::MediaConnect
     class GrantFlowEntitlementsRequest < Struct.new(
       :entitlements,
       :flow_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -971,6 +995,7 @@ module Aws::MediaConnect
     class GrantFlowEntitlementsResponse < Struct.new(
       :entitlements,
       :flow_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -985,6 +1010,7 @@ module Aws::MediaConnect
     #
     class InternalServerErrorException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1007,6 +1033,7 @@ module Aws::MediaConnect
     class ListEntitlementsRequest < Struct.new(
       :max_results,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1033,6 +1060,7 @@ module Aws::MediaConnect
     class ListEntitlementsResponse < Struct.new(
       :entitlements,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1055,6 +1083,7 @@ module Aws::MediaConnect
     class ListFlowsRequest < Struct.new(
       :max_results,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1079,6 +1108,7 @@ module Aws::MediaConnect
     class ListFlowsResponse < Struct.new(
       :flows,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1096,6 +1126,7 @@ module Aws::MediaConnect
     #
     class ListTagsForResourceRequest < Struct.new(
       :resource_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1111,6 +1142,7 @@ module Aws::MediaConnect
     #
     class ListTagsForResourceResponse < Struct.new(
       :tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1135,6 +1167,7 @@ module Aws::MediaConnect
       :data_transfer_subscriber_fee_percent,
       :entitlement_arn,
       :entitlement_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1177,6 +1210,7 @@ module Aws::MediaConnect
       :name,
       :source_type,
       :status)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1191,6 +1225,7 @@ module Aws::MediaConnect
     #
     class Messages < Struct.new(
       :errors)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1205,6 +1240,7 @@ module Aws::MediaConnect
     #
     class NotFoundException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1275,6 +1311,7 @@ module Aws::MediaConnect
       :port,
       :transport,
       :vpc_interface_attachment)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1297,6 +1334,7 @@ module Aws::MediaConnect
     class RemoveFlowOutputRequest < Struct.new(
       :flow_arn,
       :output_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1316,6 +1354,7 @@ module Aws::MediaConnect
     class RemoveFlowOutputResponse < Struct.new(
       :flow_arn,
       :output_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1338,6 +1377,7 @@ module Aws::MediaConnect
     class RemoveFlowSourceRequest < Struct.new(
       :flow_arn,
       :source_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1357,6 +1397,7 @@ module Aws::MediaConnect
     class RemoveFlowSourceResponse < Struct.new(
       :flow_arn,
       :source_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1379,6 +1420,7 @@ module Aws::MediaConnect
     class RemoveFlowVpcInterfaceRequest < Struct.new(
       :flow_arn,
       :vpc_interface_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1405,6 +1447,7 @@ module Aws::MediaConnect
       :flow_arn,
       :non_deleted_network_interface_ids,
       :vpc_interface_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1420,6 +1463,7 @@ module Aws::MediaConnect
     #
     class ResponseError < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1442,6 +1486,7 @@ module Aws::MediaConnect
     class RevokeFlowEntitlementRequest < Struct.new(
       :entitlement_arn,
       :flow_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1462,6 +1507,7 @@ module Aws::MediaConnect
     class RevokeFlowEntitlementResponse < Struct.new(
       :entitlement_arn,
       :flow_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1476,6 +1522,7 @@ module Aws::MediaConnect
     #
     class ServiceUnavailableException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1575,6 +1622,7 @@ module Aws::MediaConnect
       :stream_id,
       :vpc_interface_name,
       :whitelist_cidr)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1649,6 +1697,7 @@ module Aws::MediaConnect
       :transport,
       :vpc_interface_name,
       :whitelist_cidr)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1666,6 +1715,7 @@ module Aws::MediaConnect
     #
     class StartFlowRequest < Struct.new(
       :flow_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1684,6 +1734,7 @@ module Aws::MediaConnect
     class StartFlowResponse < Struct.new(
       :flow_arn,
       :status)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1701,6 +1752,7 @@ module Aws::MediaConnect
     #
     class StopFlowRequest < Struct.new(
       :flow_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1719,6 +1771,7 @@ module Aws::MediaConnect
     class StopFlowResponse < Struct.new(
       :flow_arn,
       :status)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1750,6 +1803,7 @@ module Aws::MediaConnect
     class TagResourceRequest < Struct.new(
       :resource_arn,
       :tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1764,6 +1818,7 @@ module Aws::MediaConnect
     #
     class TooManyRequestsException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1814,6 +1869,7 @@ module Aws::MediaConnect
       :remote_id,
       :smoothing_latency,
       :stream_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1836,6 +1892,7 @@ module Aws::MediaConnect
     class UntagResourceRequest < Struct.new(
       :resource_arn,
       :tag_keys)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1921,6 +1978,7 @@ module Aws::MediaConnect
       :role_arn,
       :secret_arn,
       :url)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1946,6 +2004,7 @@ module Aws::MediaConnect
     class UpdateFailoverConfig < Struct.new(
       :recovery_window,
       :state)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2003,6 +2062,7 @@ module Aws::MediaConnect
       :entitlement_arn,
       :flow_arn,
       :subscribers)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2023,6 +2083,7 @@ module Aws::MediaConnect
     class UpdateFlowEntitlementResponse < Struct.new(
       :entitlement,
       :flow_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2134,6 +2195,7 @@ module Aws::MediaConnect
       :smoothing_latency,
       :stream_id,
       :vpc_interface_attachment)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2153,6 +2215,7 @@ module Aws::MediaConnect
     class UpdateFlowOutputResponse < Struct.new(
       :flow_arn,
       :output)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2181,6 +2244,7 @@ module Aws::MediaConnect
     class UpdateFlowRequest < Struct.new(
       :flow_arn,
       :source_failover_config)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2195,6 +2259,7 @@ module Aws::MediaConnect
     #
     class UpdateFlowResponse < Struct.new(
       :flow)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2298,6 +2363,7 @@ module Aws::MediaConnect
       :stream_id,
       :vpc_interface_name,
       :whitelist_cidr)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2318,6 +2384,7 @@ module Aws::MediaConnect
     class UpdateFlowSourceResponse < Struct.new(
       :flow_arn,
       :source)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2354,6 +2421,7 @@ module Aws::MediaConnect
       :role_arn,
       :security_group_ids,
       :subnet_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2374,6 +2442,7 @@ module Aws::MediaConnect
     #
     class VpcInterfaceAttachment < Struct.new(
       :vpc_interface_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2414,6 +2483,7 @@ module Aws::MediaConnect
       :role_arn,
       :security_group_ids,
       :subnet_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 

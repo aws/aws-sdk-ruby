@@ -31,6 +31,7 @@ module Aws::CloudSearch
     class AccessPoliciesStatus < Struct.new(
       :options,
       :status)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -107,6 +108,7 @@ module Aws::CloudSearch
       :stemming_dictionary,
       :japanese_tokenization_dictionary,
       :algorithmic_stemming)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -153,6 +155,7 @@ module Aws::CloudSearch
       :analysis_scheme_name,
       :analysis_scheme_language,
       :analysis_options)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -173,6 +176,7 @@ module Aws::CloudSearch
     class AnalysisSchemeStatus < Struct.new(
       :options,
       :status)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -189,6 +193,7 @@ module Aws::CloudSearch
     class AvailabilityOptionsStatus < Struct.new(
       :options,
       :status)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -205,6 +210,7 @@ module Aws::CloudSearch
     class BaseException < Struct.new(
       :code,
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -227,6 +233,7 @@ module Aws::CloudSearch
     #
     class BuildSuggestersRequest < Struct.new(
       :domain_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -239,6 +246,7 @@ module Aws::CloudSearch
     #
     class BuildSuggestersResponse < Struct.new(
       :field_names)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -261,6 +269,7 @@ module Aws::CloudSearch
     #
     class CreateDomainRequest < Struct.new(
       :domain_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -273,6 +282,7 @@ module Aws::CloudSearch
     #
     class CreateDomainResponse < Struct.new(
       :domain_status)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -319,6 +329,7 @@ module Aws::CloudSearch
       :facet_enabled,
       :search_enabled,
       :return_enabled)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -387,6 +398,7 @@ module Aws::CloudSearch
       :search_enabled,
       :return_enabled,
       :sort_enabled)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -430,6 +442,7 @@ module Aws::CloudSearch
     class DefineAnalysisSchemeRequest < Struct.new(
       :domain_name,
       :analysis_scheme)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -442,6 +455,7 @@ module Aws::CloudSearch
     #
     class DefineAnalysisSchemeResponse < Struct.new(
       :analysis_scheme)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -476,6 +490,7 @@ module Aws::CloudSearch
     class DefineExpressionRequest < Struct.new(
       :domain_name,
       :expression)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -488,6 +503,7 @@ module Aws::CloudSearch
     #
     class DefineExpressionResponse < Struct.new(
       :expression)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -603,6 +619,7 @@ module Aws::CloudSearch
     class DefineIndexFieldRequest < Struct.new(
       :domain_name,
       :index_field)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -615,6 +632,7 @@ module Aws::CloudSearch
     #
     class DefineIndexFieldResponse < Struct.new(
       :index_field)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -654,6 +672,7 @@ module Aws::CloudSearch
     class DefineSuggesterRequest < Struct.new(
       :domain_name,
       :suggester)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -666,6 +685,7 @@ module Aws::CloudSearch
     #
     class DefineSuggesterResponse < Struct.new(
       :suggester)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -695,6 +715,7 @@ module Aws::CloudSearch
     class DeleteAnalysisSchemeRequest < Struct.new(
       :domain_name,
       :analysis_scheme_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -707,6 +728,7 @@ module Aws::CloudSearch
     #
     class DeleteAnalysisSchemeResponse < Struct.new(
       :analysis_scheme)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -726,6 +748,7 @@ module Aws::CloudSearch
     #
     class DeleteDomainRequest < Struct.new(
       :domain_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -739,6 +762,7 @@ module Aws::CloudSearch
     #
     class DeleteDomainResponse < Struct.new(
       :domain_status)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -768,6 +792,7 @@ module Aws::CloudSearch
     class DeleteExpressionRequest < Struct.new(
       :domain_name,
       :expression_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -780,6 +805,7 @@ module Aws::CloudSearch
     #
     class DeleteExpressionResponse < Struct.new(
       :expression)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -810,6 +836,7 @@ module Aws::CloudSearch
     class DeleteIndexFieldRequest < Struct.new(
       :domain_name,
       :index_field_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -821,6 +848,7 @@ module Aws::CloudSearch
     #
     class DeleteIndexFieldResponse < Struct.new(
       :index_field)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -850,6 +878,7 @@ module Aws::CloudSearch
     class DeleteSuggesterRequest < Struct.new(
       :domain_name,
       :suggester_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -862,6 +891,7 @@ module Aws::CloudSearch
     #
     class DeleteSuggesterResponse < Struct.new(
       :suggester)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -898,6 +928,7 @@ module Aws::CloudSearch
       :domain_name,
       :analysis_scheme_names,
       :deployed)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -910,6 +941,7 @@ module Aws::CloudSearch
     #
     class DescribeAnalysisSchemesResponse < Struct.new(
       :analysis_schemes)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -938,6 +970,7 @@ module Aws::CloudSearch
     class DescribeAvailabilityOptionsRequest < Struct.new(
       :domain_name,
       :deployed)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -952,6 +985,7 @@ module Aws::CloudSearch
     #
     class DescribeAvailabilityOptionsResponse < Struct.new(
       :availability_options)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -981,6 +1015,7 @@ module Aws::CloudSearch
     class DescribeDomainEndpointOptionsRequest < Struct.new(
       :domain_name,
       :deployed)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -993,6 +1028,7 @@ module Aws::CloudSearch
     #
     class DescribeDomainEndpointOptionsResponse < Struct.new(
       :domain_endpoint_options)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1014,6 +1050,7 @@ module Aws::CloudSearch
     #
     class DescribeDomainsRequest < Struct.new(
       :domain_names)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1026,6 +1063,7 @@ module Aws::CloudSearch
     #
     class DescribeDomainsResponse < Struct.new(
       :domain_status_list)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1062,6 +1100,7 @@ module Aws::CloudSearch
       :domain_name,
       :expression_names,
       :deployed)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1074,6 +1113,7 @@ module Aws::CloudSearch
     #
     class DescribeExpressionsResponse < Struct.new(
       :expressions)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1110,6 +1150,7 @@ module Aws::CloudSearch
       :domain_name,
       :field_names,
       :deployed)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1122,6 +1163,7 @@ module Aws::CloudSearch
     #
     class DescribeIndexFieldsResponse < Struct.new(
       :index_fields)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1144,6 +1186,7 @@ module Aws::CloudSearch
     #
     class DescribeScalingParametersRequest < Struct.new(
       :domain_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1157,6 +1200,7 @@ module Aws::CloudSearch
     #
     class DescribeScalingParametersResponse < Struct.new(
       :scaling_parameters)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1185,6 +1229,7 @@ module Aws::CloudSearch
     class DescribeServiceAccessPoliciesRequest < Struct.new(
       :domain_name,
       :deployed)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1196,6 +1241,7 @@ module Aws::CloudSearch
     #
     class DescribeServiceAccessPoliciesResponse < Struct.new(
       :access_policies)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1231,6 +1277,7 @@ module Aws::CloudSearch
       :domain_name,
       :suggester_names,
       :deployed)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1242,6 +1289,7 @@ module Aws::CloudSearch
     #
     class DescribeSuggestersResponse < Struct.new(
       :suggesters)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1288,6 +1336,7 @@ module Aws::CloudSearch
       :source_field,
       :fuzzy_matching,
       :sort_expression)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1312,6 +1361,7 @@ module Aws::CloudSearch
     class DomainEndpointOptions < Struct.new(
       :enforce_https,
       :tls_security_policy)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1328,6 +1378,7 @@ module Aws::CloudSearch
     class DomainEndpointOptionsStatus < Struct.new(
       :options,
       :status)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1418,6 +1469,7 @@ module Aws::CloudSearch
       :search_partition_count,
       :search_instance_count,
       :limits)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1464,6 +1516,7 @@ module Aws::CloudSearch
       :facet_enabled,
       :search_enabled,
       :return_enabled)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1517,6 +1570,7 @@ module Aws::CloudSearch
       :search_enabled,
       :return_enabled,
       :sort_enabled)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1551,6 +1605,7 @@ module Aws::CloudSearch
     class Expression < Struct.new(
       :expression_name,
       :expression_value)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1568,6 +1623,7 @@ module Aws::CloudSearch
     class ExpressionStatus < Struct.new(
       :options,
       :status)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1590,6 +1646,7 @@ module Aws::CloudSearch
     #
     class IndexDocumentsRequest < Struct.new(
       :domain_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1602,6 +1659,7 @@ module Aws::CloudSearch
     #
     class IndexDocumentsResponse < Struct.new(
       :field_names)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1813,6 +1871,7 @@ module Aws::CloudSearch
       :literal_array_options,
       :text_array_options,
       :date_array_options)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1831,6 +1890,7 @@ module Aws::CloudSearch
     class IndexFieldStatus < Struct.new(
       :options,
       :status)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1877,6 +1937,7 @@ module Aws::CloudSearch
       :facet_enabled,
       :search_enabled,
       :return_enabled)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1930,6 +1991,7 @@ module Aws::CloudSearch
       :search_enabled,
       :return_enabled,
       :sort_enabled)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2013,6 +2075,7 @@ module Aws::CloudSearch
       :search_enabled,
       :return_enabled,
       :sort_enabled)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2030,6 +2093,7 @@ module Aws::CloudSearch
     class Limits < Struct.new(
       :maximum_replication_count,
       :maximum_partition_count)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2042,6 +2106,7 @@ module Aws::CloudSearch
     #
     class ListDomainNamesResponse < Struct.new(
       :domain_names)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2088,6 +2153,7 @@ module Aws::CloudSearch
       :facet_enabled,
       :search_enabled,
       :return_enabled)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2154,6 +2220,7 @@ module Aws::CloudSearch
       :search_enabled,
       :return_enabled,
       :sort_enabled)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2197,6 +2264,7 @@ module Aws::CloudSearch
       :update_version,
       :state,
       :pending_deletion)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2237,6 +2305,7 @@ module Aws::CloudSearch
       :desired_instance_type,
       :desired_replication_count,
       :desired_partition_count)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2254,6 +2323,7 @@ module Aws::CloudSearch
     class ScalingParametersStatus < Struct.new(
       :options,
       :status)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2269,6 +2339,7 @@ module Aws::CloudSearch
     #
     class ServiceEndpoint < Struct.new(
       :endpoint)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2301,6 +2372,7 @@ module Aws::CloudSearch
     class Suggester < Struct.new(
       :suggester_name,
       :document_suggester_options)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2320,6 +2392,7 @@ module Aws::CloudSearch
     class SuggesterStatus < Struct.new(
       :options,
       :status)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2367,6 +2440,7 @@ module Aws::CloudSearch
       :return_enabled,
       :highlight_enabled,
       :analysis_scheme)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2434,6 +2508,7 @@ module Aws::CloudSearch
       :sort_enabled,
       :highlight_enabled,
       :analysis_scheme)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2466,6 +2541,7 @@ module Aws::CloudSearch
     class UpdateAvailabilityOptionsRequest < Struct.new(
       :domain_name,
       :multi_az)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2479,6 +2555,7 @@ module Aws::CloudSearch
     #
     class UpdateAvailabilityOptionsResponse < Struct.new(
       :availability_options)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2511,6 +2588,7 @@ module Aws::CloudSearch
     class UpdateDomainEndpointOptionsRequest < Struct.new(
       :domain_name,
       :domain_endpoint_options)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2523,6 +2601,7 @@ module Aws::CloudSearch
     #
     class UpdateDomainEndpointOptionsResponse < Struct.new(
       :domain_endpoint_options)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2557,6 +2636,7 @@ module Aws::CloudSearch
     class UpdateScalingParametersRequest < Struct.new(
       :domain_name,
       :scaling_parameters)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2570,6 +2650,7 @@ module Aws::CloudSearch
     #
     class UpdateScalingParametersResponse < Struct.new(
       :scaling_parameters)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2600,6 +2681,7 @@ module Aws::CloudSearch
     class UpdateServiceAccessPoliciesRequest < Struct.new(
       :domain_name,
       :access_policies)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2612,6 +2694,7 @@ module Aws::CloudSearch
     #
     class UpdateServiceAccessPoliciesResponse < Struct.new(
       :access_policies)
+      SENSITIVE = []
       include Aws::Structure
     end
 

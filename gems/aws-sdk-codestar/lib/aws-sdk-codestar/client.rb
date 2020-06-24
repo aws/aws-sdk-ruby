@@ -1147,7 +1147,7 @@ module Aws::CodeStar
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-codestar'
-      context[:gem_version] = '1.22.1'
+      context[:gem_version] = '1.23.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

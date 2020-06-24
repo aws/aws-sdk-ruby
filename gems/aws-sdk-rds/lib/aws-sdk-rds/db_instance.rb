@@ -3224,8 +3224,6 @@ module Aws::RDS
     #         values: ["String"], # required
     #       },
     #     ],
-    #     marker: "String",
-    #     max_records: 1,
     #   })
     # @param [Hash] options ({})
     # @option options [String] :resource_identifier
@@ -3244,38 +3242,26 @@ module Aws::RDS
     #   * `db-instance-id` - Accepts DB instance identifiers and DB instance
     #     ARNs. The results list will only include pending maintenance actions
     #     for the DB instances identified by these ARNs.
-    # @option options [String] :marker
-    #   An optional pagination token provided by a previous
-    #   `DescribePendingMaintenanceActions` request. If this parameter is
-    #   specified, the response includes only records beyond the marker, up to
-    #   a number of records specified by `MaxRecords`.
-    # @option options [Integer] :max_records
-    #   The maximum number of records to include in the response. If more
-    #   records exist than the specified `MaxRecords` value, a pagination
-    #   token called a marker is included in the response so that you can
-    #   retrieve the remaining results.
-    #
-    #   Default: 100
-    #
-    #   Constraints: Minimum 20, maximum 100.
     # @return [PendingMaintenanceAction::Collection]
     def pending_maintenance_actions(options = {})
       batches = Enumerator.new do |y|
-        batch = []
         options = Aws::Util.deep_merge(options, filters: [{
           name: "db-instance-id",
           values: [@id]
         }])
         resp = @client.describe_pending_maintenance_actions(options)
-        resp.data.pending_maintenance_actions_0.pending_maintenance_action_details.each do |p|
-          batch << PendingMaintenanceAction.new(
-            target_arn: resp.data.pending_maintenance_actions[0].resource_identifier,
-            name: p.action,
-            data: p,
-            client: @client
-          )
+        resp.each_page do |page|
+          batch = []
+          page.data.pending_maintenance_actions_0.pending_maintenance_action_details.each do |p|
+            batch << PendingMaintenanceAction.new(
+              target_arn: resp.data.pending_maintenance_actions[0].resource_identifier,
+              name: p.action,
+              data: p,
+              client: @client
+            )
+          end
+          y.yield(batch)
         end
-        y.yield(batch)
       end
       PendingMaintenanceAction::Collection.new(batches)
     end

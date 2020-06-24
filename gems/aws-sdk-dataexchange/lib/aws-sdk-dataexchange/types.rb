@@ -20,6 +20,7 @@ module Aws::DataExchange
     #
     class AccessDeniedException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -52,6 +53,7 @@ module Aws::DataExchange
       :asset_id,
       :bucket,
       :key)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -63,6 +65,7 @@ module Aws::DataExchange
     #
     class AssetDetails < Struct.new(
       :s3_snapshot_asset)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -130,6 +133,7 @@ module Aws::DataExchange
       :revision_id,
       :source_id,
       :updated_at)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -156,6 +160,7 @@ module Aws::DataExchange
     class AssetSourceEntry < Struct.new(
       :bucket,
       :key)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -173,6 +178,7 @@ module Aws::DataExchange
     #
     class CancelJobRequest < Struct.new(
       :job_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -198,6 +204,7 @@ module Aws::DataExchange
       :message,
       :resource_id,
       :resource_type)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -244,6 +251,7 @@ module Aws::DataExchange
       :description,
       :name,
       :tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -311,6 +319,7 @@ module Aws::DataExchange
       :source_id,
       :tags,
       :updated_at)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -379,6 +388,7 @@ module Aws::DataExchange
     class CreateJobRequest < Struct.new(
       :details,
       :type)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -425,6 +435,7 @@ module Aws::DataExchange
       :state,
       :type,
       :updated_at)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -465,6 +476,7 @@ module Aws::DataExchange
       :comment,
       :data_set_id,
       :tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -516,6 +528,7 @@ module Aws::DataExchange
       :source_id,
       :tags,
       :updated_at)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -580,6 +593,7 @@ module Aws::DataExchange
       :origin_details,
       :source_id,
       :updated_at)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -607,6 +621,7 @@ module Aws::DataExchange
       :asset_id,
       :data_set_id,
       :revision_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -624,6 +639,7 @@ module Aws::DataExchange
     #
     class DeleteDataSetRequest < Struct.new(
       :data_set_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -646,6 +662,7 @@ module Aws::DataExchange
     class DeleteRevisionRequest < Struct.new(
       :data_set_id,
       :revision_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -661,6 +678,7 @@ module Aws::DataExchange
     class Details < Struct.new(
       :import_asset_from_signed_url_job_error_details,
       :import_assets_from_s3_job_error_details)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -696,6 +714,7 @@ module Aws::DataExchange
       :asset_id,
       :data_set_id,
       :revision_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -731,6 +750,7 @@ module Aws::DataExchange
       :revision_id,
       :signed_url,
       :signed_url_expires_at)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -780,6 +800,7 @@ module Aws::DataExchange
       :data_set_id,
       :encryption,
       :revision_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -810,6 +831,7 @@ module Aws::DataExchange
       :data_set_id,
       :encryption,
       :revision_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -841,6 +863,7 @@ module Aws::DataExchange
     class ExportServerSideEncryption < Struct.new(
       :kms_key_arn,
       :type)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -868,6 +891,7 @@ module Aws::DataExchange
       :asset_id,
       :data_set_id,
       :revision_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -929,6 +953,7 @@ module Aws::DataExchange
       :revision_id,
       :source_id,
       :updated_at)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -946,6 +971,7 @@ module Aws::DataExchange
     #
     class GetDataSetRequest < Struct.new(
       :data_set_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1013,6 +1039,7 @@ module Aws::DataExchange
       :source_id,
       :tags,
       :updated_at)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1030,6 +1057,7 @@ module Aws::DataExchange
     #
     class GetJobRequest < Struct.new(
       :job_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1076,6 +1104,7 @@ module Aws::DataExchange
       :state,
       :type,
       :updated_at)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1098,6 +1127,7 @@ module Aws::DataExchange
     class GetRevisionRequest < Struct.new(
       :data_set_id,
       :revision_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1149,6 +1179,7 @@ module Aws::DataExchange
       :source_id,
       :tags,
       :updated_at)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1162,6 +1193,7 @@ module Aws::DataExchange
     #
     class ImportAssetFromSignedUrlJobErrorDetails < Struct.new(
       :asset_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1204,6 +1236,7 @@ module Aws::DataExchange
       :data_set_id,
       :md_5_hash,
       :revision_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1247,6 +1280,7 @@ module Aws::DataExchange
       :revision_id,
       :signed_url,
       :signed_url_expires_at)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1286,6 +1320,7 @@ module Aws::DataExchange
       :asset_sources,
       :data_set_id,
       :revision_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1311,6 +1346,7 @@ module Aws::DataExchange
       :asset_sources,
       :data_set_id,
       :revision_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1324,6 +1360,7 @@ module Aws::DataExchange
     #
     class InternalServerException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1376,6 +1413,7 @@ module Aws::DataExchange
       :state,
       :type,
       :updated_at)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1418,6 +1456,7 @@ module Aws::DataExchange
       :message,
       :resource_id,
       :resource_type)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1445,6 +1484,7 @@ module Aws::DataExchange
       :data_set_id,
       :max_results,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1461,6 +1501,7 @@ module Aws::DataExchange
     class ListDataSetRevisionsResponse < Struct.new(
       :next_token,
       :revisions)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1488,6 +1529,7 @@ module Aws::DataExchange
       :max_results,
       :next_token,
       :origin)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1504,6 +1546,7 @@ module Aws::DataExchange
     class ListDataSetsResponse < Struct.new(
       :data_sets,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1536,6 +1579,7 @@ module Aws::DataExchange
       :max_results,
       :next_token,
       :revision_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1552,6 +1596,7 @@ module Aws::DataExchange
     class ListJobsResponse < Struct.new(
       :jobs,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1584,6 +1629,7 @@ module Aws::DataExchange
       :max_results,
       :next_token,
       :revision_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1600,6 +1646,7 @@ module Aws::DataExchange
     class ListRevisionAssetsResponse < Struct.new(
       :assets,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1617,6 +1664,7 @@ module Aws::DataExchange
     #
     class ListTagsForResourceRequest < Struct.new(
       :resource_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1627,6 +1675,7 @@ module Aws::DataExchange
     #
     class ListTagsForResourceResponse < Struct.new(
       :tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1637,6 +1686,7 @@ module Aws::DataExchange
     #
     class OriginDetails < Struct.new(
       :product_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1707,6 +1757,7 @@ module Aws::DataExchange
       :export_assets_to_s3,
       :import_asset_from_signed_url,
       :import_assets_from_s3)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1730,6 +1781,7 @@ module Aws::DataExchange
       :message,
       :resource_id,
       :resource_type)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1758,6 +1810,7 @@ module Aws::DataExchange
       :export_assets_to_s3,
       :import_asset_from_signed_url,
       :import_assets_from_s3)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1819,6 +1872,7 @@ module Aws::DataExchange
       :id,
       :source_id,
       :updated_at)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1832,6 +1886,7 @@ module Aws::DataExchange
     #
     class S3SnapshotAsset < Struct.new(
       :size)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1852,6 +1907,7 @@ module Aws::DataExchange
       :limit_name,
       :limit_value,
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1869,6 +1925,7 @@ module Aws::DataExchange
     #
     class StartJobRequest < Struct.new(
       :job_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1897,6 +1954,7 @@ module Aws::DataExchange
     class TagResourceRequest < Struct.new(
       :resource_arn,
       :tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1910,6 +1968,7 @@ module Aws::DataExchange
     #
     class ThrottlingException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1932,6 +1991,7 @@ module Aws::DataExchange
     class UntagResourceRequest < Struct.new(
       :resource_arn,
       :tag_keys)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1969,6 +2029,7 @@ module Aws::DataExchange
       :data_set_id,
       :name,
       :revision_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2030,6 +2091,7 @@ module Aws::DataExchange
       :revision_id,
       :source_id,
       :updated_at)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2061,6 +2123,7 @@ module Aws::DataExchange
       :data_set_id,
       :description,
       :name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2124,6 +2187,7 @@ module Aws::DataExchange
       :origin_details,
       :source_id,
       :updated_at)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2162,6 +2226,7 @@ module Aws::DataExchange
       :data_set_id,
       :finalized,
       :revision_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2209,6 +2274,7 @@ module Aws::DataExchange
       :id,
       :source_id,
       :updated_at)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2223,6 +2289,7 @@ module Aws::DataExchange
     #
     class ValidationException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 

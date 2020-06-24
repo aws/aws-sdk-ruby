@@ -31,6 +31,7 @@ module Aws::CodeBuild
     #
     class BatchDeleteBuildsInput < Struct.new(
       :ids)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -47,6 +48,7 @@ module Aws::CodeBuild
     class BatchDeleteBuildsOutput < Struct.new(
       :builds_deleted,
       :builds_not_deleted)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -65,6 +67,7 @@ module Aws::CodeBuild
     #
     class BatchGetBuildsInput < Struct.new(
       :ids)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -81,6 +84,7 @@ module Aws::CodeBuild
     class BatchGetBuildsOutput < Struct.new(
       :builds,
       :builds_not_found)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -101,6 +105,7 @@ module Aws::CodeBuild
     #
     class BatchGetProjectsInput < Struct.new(
       :names)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -118,6 +123,7 @@ module Aws::CodeBuild
     class BatchGetProjectsOutput < Struct.new(
       :projects,
       :projects_not_found)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -137,6 +143,7 @@ module Aws::CodeBuild
     #
     class BatchGetReportGroupsInput < Struct.new(
       :report_group_arns)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -154,6 +161,7 @@ module Aws::CodeBuild
     class BatchGetReportGroupsOutput < Struct.new(
       :report_groups,
       :report_groups_not_found)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -172,6 +180,7 @@ module Aws::CodeBuild
     #
     class BatchGetReportsInput < Struct.new(
       :report_arns)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -189,6 +198,7 @@ module Aws::CodeBuild
     class BatchGetReportsOutput < Struct.new(
       :reports,
       :reports_not_found)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -428,6 +438,7 @@ module Aws::CodeBuild
       :exported_environment_variables,
       :report_arns,
       :file_system_locations)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -487,6 +498,7 @@ module Aws::CodeBuild
       :override_artifact_name,
       :encryption_disabled,
       :artifact_identifier)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -506,6 +518,7 @@ module Aws::CodeBuild
     class BuildNotDeleted < Struct.new(
       :id,
       :status_code)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -591,6 +604,7 @@ module Aws::CodeBuild
       :end_time,
       :duration_in_seconds,
       :contexts)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -640,6 +654,7 @@ module Aws::CodeBuild
       :status,
       :group_name,
       :stream_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -936,6 +951,7 @@ module Aws::CodeBuild
       :badge_enabled,
       :logs_config,
       :file_system_locations)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -947,6 +963,7 @@ module Aws::CodeBuild
     #
     class CreateProjectOutput < Struct.new(
       :project)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1001,6 +1018,7 @@ module Aws::CodeBuild
       :type,
       :export_config,
       :tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1012,6 +1030,7 @@ module Aws::CodeBuild
     #
     class CreateReportGroupOutput < Struct.new(
       :report_group)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1064,6 +1083,7 @@ module Aws::CodeBuild
       :project_name,
       :branch_filter,
       :filter_groups)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1076,6 +1096,7 @@ module Aws::CodeBuild
     #
     class CreateWebhookOutput < Struct.new(
       :webhook)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1094,6 +1115,7 @@ module Aws::CodeBuild
     #
     class DeleteProjectInput < Struct.new(
       :name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1116,6 +1138,7 @@ module Aws::CodeBuild
     #
     class DeleteReportGroupInput < Struct.new(
       :arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1138,6 +1161,7 @@ module Aws::CodeBuild
     #
     class DeleteReportInput < Struct.new(
       :arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1160,6 +1184,7 @@ module Aws::CodeBuild
     #
     class DeleteResourcePolicyInput < Struct.new(
       :resource_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1182,6 +1207,7 @@ module Aws::CodeBuild
     #
     class DeleteSourceCredentialsInput < Struct.new(
       :arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1193,6 +1219,7 @@ module Aws::CodeBuild
     #
     class DeleteSourceCredentialsOutput < Struct.new(
       :arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1211,6 +1238,7 @@ module Aws::CodeBuild
     #
     class DeleteWebhookInput < Struct.new(
       :project_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1261,6 +1289,7 @@ module Aws::CodeBuild
       :next_token,
       :max_results,
       :filter)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1283,6 +1312,7 @@ module Aws::CodeBuild
     class DescribeTestCasesOutput < Struct.new(
       :next_token,
       :test_cases)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1306,6 +1336,7 @@ module Aws::CodeBuild
       :name,
       :description,
       :versions)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1326,6 +1357,7 @@ module Aws::CodeBuild
     class EnvironmentLanguage < Struct.new(
       :language,
       :images)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1346,6 +1378,7 @@ module Aws::CodeBuild
     class EnvironmentPlatform < Struct.new(
       :platform,
       :languages)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1404,6 +1437,7 @@ module Aws::CodeBuild
       :name,
       :value,
       :type)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1430,6 +1464,7 @@ module Aws::CodeBuild
     class ExportedEnvironmentVariable < Struct.new(
       :name,
       :value)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1448,6 +1483,7 @@ module Aws::CodeBuild
     #
     class GetResourcePolicyInput < Struct.new(
       :resource_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1460,6 +1496,7 @@ module Aws::CodeBuild
     #
     class GetResourcePolicyOutput < Struct.new(
       :policy)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1482,6 +1519,7 @@ module Aws::CodeBuild
     #
     class GitSubmodulesConfig < Struct.new(
       :fetch_submodules)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1532,6 +1570,7 @@ module Aws::CodeBuild
       :server_type,
       :auth_type,
       :should_overwrite)
+      SENSITIVE = [:token]
       include Aws::Structure
     end
 
@@ -1543,6 +1582,7 @@ module Aws::CodeBuild
     #
     class ImportSourceCredentialsOutput < Struct.new(
       :arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1568,6 +1608,7 @@ module Aws::CodeBuild
     #
     class InvalidateProjectCacheInput < Struct.new(
       :project_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1612,6 +1653,7 @@ module Aws::CodeBuild
       :project_name,
       :sort_order,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1632,6 +1674,7 @@ module Aws::CodeBuild
     class ListBuildsForProjectOutput < Struct.new(
       :ids,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1666,6 +1709,7 @@ module Aws::CodeBuild
     class ListBuildsInput < Struct.new(
       :sort_order,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1685,6 +1729,7 @@ module Aws::CodeBuild
     class ListBuildsOutput < Struct.new(
       :ids,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1703,6 +1748,7 @@ module Aws::CodeBuild
     #
     class ListCuratedEnvironmentImagesOutput < Struct.new(
       :platforms)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1758,6 +1804,7 @@ module Aws::CodeBuild
       :sort_by,
       :sort_order,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1778,6 +1825,7 @@ module Aws::CodeBuild
     class ListProjectsOutput < Struct.new(
       :next_token,
       :projects)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1831,6 +1879,7 @@ module Aws::CodeBuild
       :sort_by,
       :next_token,
       :max_results)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1853,6 +1902,7 @@ module Aws::CodeBuild
     class ListReportGroupsOutput < Struct.new(
       :next_token,
       :report_groups)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1907,6 +1957,7 @@ module Aws::CodeBuild
       :sort_order,
       :max_results,
       :filter)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1929,6 +1980,7 @@ module Aws::CodeBuild
     class ListReportsForReportGroupOutput < Struct.new(
       :next_token,
       :reports)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1982,6 +2034,7 @@ module Aws::CodeBuild
       :next_token,
       :max_results,
       :filter)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2005,6 +2058,7 @@ module Aws::CodeBuild
     class ListReportsOutput < Struct.new(
       :next_token,
       :reports)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2060,6 +2114,7 @@ module Aws::CodeBuild
       :sort_order,
       :max_results,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2083,6 +2138,7 @@ module Aws::CodeBuild
     class ListSharedProjectsOutput < Struct.new(
       :next_token,
       :projects)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2138,6 +2194,7 @@ module Aws::CodeBuild
       :sort_by,
       :next_token,
       :max_results)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2161,6 +2218,7 @@ module Aws::CodeBuild
     class ListSharedReportGroupsOutput < Struct.new(
       :next_token,
       :report_groups)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2180,6 +2238,7 @@ module Aws::CodeBuild
     #
     class ListSourceCredentialsOutput < Struct.new(
       :source_credentials_infos)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2217,6 +2276,7 @@ module Aws::CodeBuild
     class LogsConfig < Struct.new(
       :cloud_watch_logs,
       :s3_logs)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2278,6 +2338,7 @@ module Aws::CodeBuild
       :s3_logs_arn,
       :cloud_watch_logs,
       :s3_logs)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2296,6 +2357,7 @@ module Aws::CodeBuild
     class NetworkInterface < Struct.new(
       :subnet_id,
       :network_interface_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2322,6 +2384,7 @@ module Aws::CodeBuild
     class PhaseContext < Struct.new(
       :status_code,
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2504,6 +2567,7 @@ module Aws::CodeBuild
       :badge,
       :logs_config,
       :file_system_locations)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2679,6 +2743,7 @@ module Aws::CodeBuild
       :override_artifact_name,
       :encryption_disabled,
       :artifact_identifier)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2702,6 +2767,7 @@ module Aws::CodeBuild
     class ProjectBadge < Struct.new(
       :badge_enabled,
       :badge_request_url)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2785,6 +2851,7 @@ module Aws::CodeBuild
       :type,
       :location,
       :modes)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2953,6 +3020,7 @@ module Aws::CodeBuild
       :certificate,
       :registry_credential,
       :image_pull_credentials_type)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3027,6 +3095,7 @@ module Aws::CodeBuild
       :mount_point,
       :identifier,
       :mount_options)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3196,6 +3265,7 @@ module Aws::CodeBuild
       :report_build_status,
       :insecure_ssl,
       :source_identifier)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3248,6 +3318,7 @@ module Aws::CodeBuild
     class ProjectSourceVersion < Struct.new(
       :source_identifier,
       :source_version)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3280,6 +3351,7 @@ module Aws::CodeBuild
     class PutResourcePolicyInput < Struct.new(
       :policy,
       :resource_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3292,6 +3364,7 @@ module Aws::CodeBuild
     #
     class PutResourcePolicyOutput < Struct.new(
       :resource_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3338,6 +3411,7 @@ module Aws::CodeBuild
     class RegistryCredential < Struct.new(
       :credential,
       :credential_provider)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3411,6 +3485,7 @@ module Aws::CodeBuild
       :export_config,
       :truncated,
       :test_summary)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3448,6 +3523,7 @@ module Aws::CodeBuild
     class ReportExportConfig < Struct.new(
       :export_config_type,
       :s3_destination)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3470,6 +3546,7 @@ module Aws::CodeBuild
     #
     class ReportFilter < Struct.new(
       :status)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3520,6 +3597,7 @@ module Aws::CodeBuild
       :created,
       :last_modified,
       :tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3573,6 +3651,7 @@ module Aws::CodeBuild
       :status,
       :location,
       :encryption_disabled)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3626,6 +3705,7 @@ module Aws::CodeBuild
       :packaging,
       :encryption_key,
       :encryption_disabled)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3661,6 +3741,7 @@ module Aws::CodeBuild
     class SourceAuth < Struct.new(
       :type,
       :resource)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3687,6 +3768,7 @@ module Aws::CodeBuild
       :arn,
       :server_type,
       :auth_type)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4052,6 +4134,7 @@ module Aws::CodeBuild
       :logs_config_override,
       :registry_credential_override,
       :image_pull_credentials_type_override)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4063,6 +4146,7 @@ module Aws::CodeBuild
     #
     class StartBuildOutput < Struct.new(
       :build)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4081,6 +4165,7 @@ module Aws::CodeBuild
     #
     class StopBuildInput < Struct.new(
       :id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4092,6 +4177,7 @@ module Aws::CodeBuild
     #
     class StopBuildOutput < Struct.new(
       :build)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4121,6 +4207,7 @@ module Aws::CodeBuild
     class Tag < Struct.new(
       :key,
       :value)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4177,6 +4264,7 @@ module Aws::CodeBuild
       :duration_in_nano_seconds,
       :message,
       :expired)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4199,6 +4287,7 @@ module Aws::CodeBuild
     #
     class TestCaseFilter < Struct.new(
       :status)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4225,6 +4314,7 @@ module Aws::CodeBuild
       :total,
       :status_counts,
       :duration_in_nano_seconds)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4526,6 +4616,7 @@ module Aws::CodeBuild
       :badge_enabled,
       :logs_config,
       :file_system_locations)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4537,6 +4628,7 @@ module Aws::CodeBuild
     #
     class UpdateProjectOutput < Struct.new(
       :project)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4589,6 +4681,7 @@ module Aws::CodeBuild
       :arn,
       :export_config,
       :tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4600,6 +4693,7 @@ module Aws::CodeBuild
     #
     class UpdateReportGroupOutput < Struct.new(
       :report_group)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4656,6 +4750,7 @@ module Aws::CodeBuild
       :branch_filter,
       :rotate_secret,
       :filter_groups)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4668,6 +4763,7 @@ module Aws::CodeBuild
     #
     class UpdateWebhookOutput < Struct.new(
       :webhook)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4700,6 +4796,7 @@ module Aws::CodeBuild
       :vpc_id,
       :subnets,
       :security_group_ids)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4758,6 +4855,7 @@ module Aws::CodeBuild
       :branch_filter,
       :filter_groups,
       :last_modified_secret)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4854,6 +4952,7 @@ module Aws::CodeBuild
       :type,
       :pattern,
       :exclude_matched_pattern)
+      SENSITIVE = []
       include Aws::Structure
     end
 

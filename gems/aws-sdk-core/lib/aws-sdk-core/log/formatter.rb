@@ -85,6 +85,9 @@ module Aws
       #   The default list of filtered parameters is documented on the
       #   {ParamFilter} class.
       #
+      # @option options [Boolean] :filter_sensitive_params (true) Set to false
+      #   to disable the sensitive parameter filtering when logging
+      #   `:request_params`.
       def initialize(pattern, options = {})
         @pattern = pattern
         @param_formatter = ParamFormatter.new(options)
@@ -99,7 +102,7 @@ module Aws
       # @param [Seahorse::Client::Response] response
       # @return [String]
       def format(response)
-        pattern.gsub(/:(\w+)/) {|sym| send("_#{sym[1..-1]}", response) }
+        pattern.gsub(/:(\w+)/) { |sym| send("_#{sym[1..-1]}", response) }
       end
 
       # @api private
@@ -123,7 +126,8 @@ module Aws
 
       def _request_params(response)
         params = response.context.params
-        @param_formatter.summarize(@param_filter.filter(params))
+        type = response.context.operation.input.shape.struct_class
+        @param_formatter.summarize(@param_filter.filter(params, type))
       end
 
       def _time(response)

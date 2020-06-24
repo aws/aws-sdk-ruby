@@ -25,6 +25,7 @@ module Aws::ECR
     class Attribute < Struct.new(
       :key,
       :value)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -55,6 +56,7 @@ module Aws::ECR
       :authorization_token,
       :expires_at,
       :proxy_endpoint)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -88,6 +90,7 @@ module Aws::ECR
       :registry_id,
       :repository_name,
       :layer_digests)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -105,6 +108,7 @@ module Aws::ECR
     class BatchCheckLayerAvailabilityResponse < Struct.new(
       :layers,
       :failures)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -147,6 +151,7 @@ module Aws::ECR
       :registry_id,
       :repository_name,
       :image_ids)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -163,6 +168,7 @@ module Aws::ECR
     class BatchDeleteImageResponse < Struct.new(
       :image_ids,
       :failures)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -212,6 +218,7 @@ module Aws::ECR
       :repository_name,
       :image_ids,
       :accepted_media_types)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -229,6 +236,7 @@ module Aws::ECR
     class BatchGetImageResponse < Struct.new(
       :images,
       :failures)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -268,6 +276,7 @@ module Aws::ECR
       :repository_name,
       :upload_id,
       :layer_digests)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -294,6 +303,7 @@ module Aws::ECR
       :repository_name,
       :upload_id,
       :layer_digest)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -350,6 +360,7 @@ module Aws::ECR
       :tags,
       :image_tag_mutability,
       :image_scanning_configuration)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -361,6 +372,7 @@ module Aws::ECR
     #
     class CreateRepositoryResponse < Struct.new(
       :repository)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -387,6 +399,7 @@ module Aws::ECR
     class DeleteLifecyclePolicyRequest < Struct.new(
       :registry_id,
       :repository_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -413,6 +426,7 @@ module Aws::ECR
       :repository_name,
       :lifecycle_policy_text,
       :last_evaluated_at)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -440,6 +454,7 @@ module Aws::ECR
     class DeleteRepositoryPolicyRequest < Struct.new(
       :registry_id,
       :repository_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -461,6 +476,7 @@ module Aws::ECR
       :registry_id,
       :repository_name,
       :policy_text)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -493,6 +509,7 @@ module Aws::ECR
       :registry_id,
       :repository_name,
       :force)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -504,6 +521,7 @@ module Aws::ECR
     #
     class DeleteRepositoryResponse < Struct.new(
       :repository)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -565,6 +583,7 @@ module Aws::ECR
       :image_id,
       :next_token,
       :max_results)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -605,6 +624,7 @@ module Aws::ECR
       :image_scan_status,
       :image_scan_findings,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -626,6 +646,7 @@ module Aws::ECR
     #
     class DescribeImagesFilter < Struct.new(
       :tag_status)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -698,6 +719,7 @@ module Aws::ECR
       :next_token,
       :max_results,
       :filter)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -718,6 +740,7 @@ module Aws::ECR
     class DescribeImagesResponse < Struct.new(
       :image_details,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -778,6 +801,7 @@ module Aws::ECR
       :repository_names,
       :next_token,
       :max_results)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -798,6 +822,7 @@ module Aws::ECR
     class DescribeRepositoriesResponse < Struct.new(
       :repositories,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -811,6 +836,7 @@ module Aws::ECR
     #
     class EmptyUploadException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -831,6 +857,7 @@ module Aws::ECR
     #
     class GetAuthorizationTokenRequest < Struct.new(
       :registry_ids)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -843,6 +870,7 @@ module Aws::ECR
     #
     class GetAuthorizationTokenResponse < Struct.new(
       :authorization_data)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -876,6 +904,7 @@ module Aws::ECR
       :registry_id,
       :repository_name,
       :layer_digest)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -892,6 +921,7 @@ module Aws::ECR
     class GetDownloadUrlForLayerResponse < Struct.new(
       :download_url,
       :layer_digest)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -966,6 +996,7 @@ module Aws::ECR
       :next_token,
       :max_results,
       :filter)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1011,6 +1042,7 @@ module Aws::ECR
       :next_token,
       :preview_results,
       :summary)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1037,6 +1069,7 @@ module Aws::ECR
     class GetLifecyclePolicyRequest < Struct.new(
       :registry_id,
       :repository_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1063,6 +1096,7 @@ module Aws::ECR
       :repository_name,
       :lifecycle_policy_text,
       :last_evaluated_at)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1089,6 +1123,7 @@ module Aws::ECR
     class GetRepositoryPolicyRequest < Struct.new(
       :registry_id,
       :repository_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1110,6 +1145,7 @@ module Aws::ECR
       :registry_id,
       :repository_name,
       :policy_text)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1145,6 +1181,7 @@ module Aws::ECR
       :image_id,
       :image_manifest,
       :image_manifest_media_type)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1159,6 +1196,7 @@ module Aws::ECR
     #
     class ImageAlreadyExistsException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1221,6 +1259,7 @@ module Aws::ECR
       :image_pushed_at,
       :image_scan_status,
       :image_scan_findings_summary)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1244,6 +1283,7 @@ module Aws::ECR
       :image_id,
       :failure_code,
       :failure_reason)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1270,6 +1310,7 @@ module Aws::ECR
     class ImageIdentifier < Struct.new(
       :image_digest,
       :image_tag)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1282,6 +1323,7 @@ module Aws::ECR
     #
     class ImageNotFoundException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1317,6 +1359,7 @@ module Aws::ECR
       :uri,
       :severity,
       :attributes)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1345,6 +1388,7 @@ module Aws::ECR
       :vulnerability_source_updated_at,
       :findings,
       :finding_severity_counts)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1368,6 +1412,7 @@ module Aws::ECR
       :image_scan_completed_at,
       :vulnerability_source_updated_at,
       :finding_severity_counts)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1386,6 +1431,7 @@ module Aws::ECR
     class ImageScanStatus < Struct.new(
       :status,
       :description)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1410,6 +1456,7 @@ module Aws::ECR
     #
     class ImageScanningConfiguration < Struct.new(
       :scan_on_push)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1423,6 +1470,7 @@ module Aws::ECR
     #
     class ImageTagAlreadyExistsException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1449,6 +1497,7 @@ module Aws::ECR
     class InitiateLayerUploadRequest < Struct.new(
       :registry_id,
       :repository_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1467,6 +1516,7 @@ module Aws::ECR
     class InitiateLayerUploadResponse < Struct.new(
       :upload_id,
       :part_size)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1481,6 +1531,7 @@ module Aws::ECR
     #
     class InvalidLayerException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1516,6 +1567,7 @@ module Aws::ECR
       :upload_id,
       :last_valid_byte_received,
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1530,6 +1582,7 @@ module Aws::ECR
     #
     class InvalidParameterException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1544,6 +1597,7 @@ module Aws::ECR
     #
     class InvalidTagParameterException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1574,6 +1628,7 @@ module Aws::ECR
       :layer_availability,
       :layer_size,
       :media_type)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1587,6 +1642,7 @@ module Aws::ECR
     #
     class LayerAlreadyExistsException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1610,6 +1666,7 @@ module Aws::ECR
       :layer_digest,
       :failure_code,
       :failure_reason)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1624,6 +1681,7 @@ module Aws::ECR
     #
     class LayerInaccessibleException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1637,6 +1695,7 @@ module Aws::ECR
     #
     class LayerPartTooSmallException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1651,6 +1710,7 @@ module Aws::ECR
     #
     class LayersNotFoundException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1664,6 +1724,7 @@ module Aws::ECR
     #
     class LifecyclePolicyNotFoundException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1684,6 +1745,7 @@ module Aws::ECR
     #
     class LifecyclePolicyPreviewFilter < Struct.new(
       :tag_status)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1697,6 +1759,7 @@ module Aws::ECR
     #
     class LifecyclePolicyPreviewInProgressException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1709,6 +1772,7 @@ module Aws::ECR
     #
     class LifecyclePolicyPreviewNotFoundException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1743,6 +1807,7 @@ module Aws::ECR
       :image_pushed_at,
       :action,
       :applied_rule_priority)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1756,6 +1821,7 @@ module Aws::ECR
     #
     class LifecyclePolicyPreviewSummary < Struct.new(
       :expiring_image_total_count)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1769,6 +1835,7 @@ module Aws::ECR
     #
     class LifecyclePolicyRuleAction < Struct.new(
       :type)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1788,6 +1855,7 @@ module Aws::ECR
     #
     class LimitExceededException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1809,6 +1877,7 @@ module Aws::ECR
     #
     class ListImagesFilter < Struct.new(
       :tag_status)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1873,6 +1942,7 @@ module Aws::ECR
       :next_token,
       :max_results,
       :filter)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1892,6 +1962,7 @@ module Aws::ECR
     class ListImagesResponse < Struct.new(
       :image_ids,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1912,6 +1983,7 @@ module Aws::ECR
     #
     class ListTagsForResourceRequest < Struct.new(
       :resource_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1923,6 +1995,7 @@ module Aws::ECR
     #
     class ListTagsForResourceResponse < Struct.new(
       :tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1971,6 +2044,7 @@ module Aws::ECR
       :image_manifest,
       :image_manifest_media_type,
       :image_tag)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1982,6 +2056,7 @@ module Aws::ECR
     #
     class PutImageResponse < Struct.new(
       :image)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2020,6 +2095,7 @@ module Aws::ECR
       :registry_id,
       :repository_name,
       :image_scanning_configuration)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2041,6 +2117,7 @@ module Aws::ECR
       :registry_id,
       :repository_name,
       :image_scanning_configuration)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2077,6 +2154,7 @@ module Aws::ECR
       :registry_id,
       :repository_name,
       :image_tag_mutability)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2098,6 +2176,7 @@ module Aws::ECR
       :registry_id,
       :repository_name,
       :image_tag_mutability)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2130,6 +2209,7 @@ module Aws::ECR
       :registry_id,
       :repository_name,
       :lifecycle_policy_text)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2151,6 +2231,7 @@ module Aws::ECR
       :registry_id,
       :repository_name,
       :lifecycle_policy_text)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2163,6 +2244,7 @@ module Aws::ECR
     #
     class ReferencedImagesNotFoundException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2213,6 +2295,7 @@ module Aws::ECR
       :created_at,
       :image_tag_mutability,
       :image_scanning_configuration)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2226,6 +2309,7 @@ module Aws::ECR
     #
     class RepositoryAlreadyExistsException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2241,6 +2325,7 @@ module Aws::ECR
     #
     class RepositoryNotEmptyException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2256,6 +2341,7 @@ module Aws::ECR
     #
     class RepositoryNotFoundException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2270,6 +2356,7 @@ module Aws::ECR
     #
     class RepositoryPolicyNotFoundException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2283,6 +2370,7 @@ module Aws::ECR
     #
     class ScanNotFoundException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2296,6 +2384,7 @@ module Aws::ECR
     #
     class ServerException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2343,6 +2432,7 @@ module Aws::ECR
       :repository_name,
       :policy_text,
       :force)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2364,6 +2454,7 @@ module Aws::ECR
       :registry_id,
       :repository_name,
       :policy_text)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2399,6 +2490,7 @@ module Aws::ECR
       :registry_id,
       :repository_name,
       :image_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2425,6 +2517,7 @@ module Aws::ECR
       :repository_name,
       :image_id,
       :image_scan_status)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2458,6 +2551,7 @@ module Aws::ECR
       :registry_id,
       :repository_name,
       :lifecycle_policy_text)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2484,6 +2578,7 @@ module Aws::ECR
       :repository_name,
       :lifecycle_policy_text,
       :status)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2517,6 +2612,7 @@ module Aws::ECR
     class Tag < Struct.new(
       :key,
       :value)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2551,6 +2647,7 @@ module Aws::ECR
     class TagResourceRequest < Struct.new(
       :resource_arn,
       :tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2568,6 +2665,7 @@ module Aws::ECR
     #
     class TooManyTagsException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2580,6 +2678,7 @@ module Aws::ECR
     #
     class UnsupportedImageTypeException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2606,6 +2705,7 @@ module Aws::ECR
     class UntagResourceRequest < Struct.new(
       :resource_arn,
       :tag_keys)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2663,6 +2763,7 @@ module Aws::ECR
       :part_first_byte,
       :part_last_byte,
       :layer_part_blob)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2689,6 +2790,7 @@ module Aws::ECR
       :repository_name,
       :upload_id,
       :last_byte_received)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2703,6 +2805,7 @@ module Aws::ECR
     #
     class UploadNotFoundException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 

@@ -72,6 +72,7 @@ module Aws::DeviceFarm
       :max_slots,
       :default_job_timeout_minutes,
       :skip_app_resign)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -85,6 +86,7 @@ module Aws::DeviceFarm
     #
     class ArgumentException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -179,6 +181,7 @@ module Aws::DeviceFarm
       :type,
       :extension,
       :url)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -204,6 +207,7 @@ module Aws::DeviceFarm
       :frequency,
       :architecture,
       :clock)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -216,6 +220,7 @@ module Aws::DeviceFarm
     #
     class CannotDeleteException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -259,6 +264,7 @@ module Aws::DeviceFarm
       :errored,
       :stopped,
       :skipped)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -316,6 +322,7 @@ module Aws::DeviceFarm
       :description,
       :rules,
       :max_devices)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -329,6 +336,7 @@ module Aws::DeviceFarm
     #
     class CreateDevicePoolResult < Struct.new(
       :device_pool)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -377,6 +385,7 @@ module Aws::DeviceFarm
       :package_cleanup,
       :exclude_app_packages_from_cleanup,
       :reboot_after_use)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -388,6 +397,7 @@ module Aws::DeviceFarm
     #
     class CreateInstanceProfileResult < Struct.new(
       :instance_profile)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -481,6 +491,7 @@ module Aws::DeviceFarm
       :downlink_jitter_ms,
       :uplink_loss_percent,
       :downlink_loss_percent)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -493,6 +504,7 @@ module Aws::DeviceFarm
     #
     class CreateNetworkProfileResult < Struct.new(
       :network_profile)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -521,6 +533,7 @@ module Aws::DeviceFarm
     class CreateProjectRequest < Struct.new(
       :name,
       :default_job_timeout_minutes)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -534,6 +547,7 @@ module Aws::DeviceFarm
     #
     class CreateProjectResult < Struct.new(
       :project)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -561,6 +575,7 @@ module Aws::DeviceFarm
     class CreateRemoteAccessSessionConfiguration < Struct.new(
       :billing_method,
       :vpce_configuration_arns)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -701,6 +716,7 @@ module Aws::DeviceFarm
       :configuration,
       :interaction_mode,
       :skip_app_resign)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -716,6 +732,7 @@ module Aws::DeviceFarm
     #
     class CreateRemoteAccessSessionResult < Struct.new(
       :remote_access_session)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -740,6 +757,7 @@ module Aws::DeviceFarm
     class CreateTestGridProjectRequest < Struct.new(
       :name,
       :description)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -751,6 +769,7 @@ module Aws::DeviceFarm
     #
     class CreateTestGridProjectResult < Struct.new(
       :test_grid_project)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -776,6 +795,7 @@ module Aws::DeviceFarm
     class CreateTestGridUrlRequest < Struct.new(
       :project_arn,
       :expires_in_seconds)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -794,6 +814,7 @@ module Aws::DeviceFarm
     class CreateTestGridUrlResult < Struct.new(
       :url,
       :expires)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -906,6 +927,7 @@ module Aws::DeviceFarm
       :name,
       :type,
       :content_type)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -919,6 +941,7 @@ module Aws::DeviceFarm
     #
     class CreateUploadResult < Struct.new(
       :upload)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -959,6 +982,7 @@ module Aws::DeviceFarm
       :vpce_service_name,
       :service_dns_name,
       :vpce_configuration_description)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -971,6 +995,7 @@ module Aws::DeviceFarm
     #
     class CreateVPCEConfigurationResult < Struct.new(
       :vpce_configuration)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1014,6 +1039,7 @@ module Aws::DeviceFarm
       :ios_paths,
       :android_paths,
       :device_host_paths)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1035,6 +1061,7 @@ module Aws::DeviceFarm
     #
     class DeleteDevicePoolRequest < Struct.new(
       :arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1060,6 +1087,7 @@ module Aws::DeviceFarm
     #
     class DeleteInstanceProfileRequest < Struct.new(
       :arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1082,6 +1110,7 @@ module Aws::DeviceFarm
     #
     class DeleteNetworkProfileRequest < Struct.new(
       :arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1107,6 +1136,7 @@ module Aws::DeviceFarm
     #
     class DeleteProjectRequest < Struct.new(
       :arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1134,6 +1164,7 @@ module Aws::DeviceFarm
     #
     class DeleteRemoteAccessSessionRequest < Struct.new(
       :arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1161,6 +1192,7 @@ module Aws::DeviceFarm
     #
     class DeleteRunRequest < Struct.new(
       :arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1186,6 +1218,7 @@ module Aws::DeviceFarm
     #
     class DeleteTestGridProjectRequest < Struct.new(
       :project_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1211,6 +1244,7 @@ module Aws::DeviceFarm
     #
     class DeleteUploadRequest < Struct.new(
       :arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1236,6 +1270,7 @@ module Aws::DeviceFarm
     #
     class DeleteVPCEConfigurationRequest < Struct.new(
       :arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1375,6 +1410,7 @@ module Aws::DeviceFarm
       :fleet_name,
       :instances,
       :availability)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1521,6 +1557,7 @@ module Aws::DeviceFarm
       :attribute,
       :operator,
       :values)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1559,6 +1596,7 @@ module Aws::DeviceFarm
       :status,
       :udid,
       :instance_profile)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1587,6 +1625,7 @@ module Aws::DeviceFarm
       :total,
       :metered,
       :unmetered)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1640,6 +1679,7 @@ module Aws::DeviceFarm
       :type,
       :rules,
       :max_devices)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1663,6 +1703,7 @@ module Aws::DeviceFarm
       :device,
       :compatible,
       :incompatibility_messages)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1780,6 +1821,7 @@ module Aws::DeviceFarm
     class DeviceSelectionConfiguration < Struct.new(
       :filters,
       :max_devices)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1807,6 +1849,7 @@ module Aws::DeviceFarm
       :filters,
       :matched_devices_count,
       :max_devices)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1864,6 +1907,7 @@ module Aws::DeviceFarm
       :app_packages_cleanup,
       :video_capture,
       :skip_app_resign)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1886,6 +1930,7 @@ module Aws::DeviceFarm
     #
     class GetAccountSettingsResult < Struct.new(
       :account_settings)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1905,6 +1950,7 @@ module Aws::DeviceFarm
     #
     class GetDeviceInstanceRequest < Struct.new(
       :arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1916,6 +1962,7 @@ module Aws::DeviceFarm
     #
     class GetDeviceInstanceResult < Struct.new(
       :device_instance)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2032,6 +2079,7 @@ module Aws::DeviceFarm
       :test_type,
       :test,
       :configuration)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2050,6 +2098,7 @@ module Aws::DeviceFarm
     class GetDevicePoolCompatibilityResult < Struct.new(
       :compatible_devices,
       :incompatible_devices)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2070,6 +2119,7 @@ module Aws::DeviceFarm
     #
     class GetDevicePoolRequest < Struct.new(
       :arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2083,6 +2133,7 @@ module Aws::DeviceFarm
     #
     class GetDevicePoolResult < Struct.new(
       :device_pool)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2103,6 +2154,7 @@ module Aws::DeviceFarm
     #
     class GetDeviceRequest < Struct.new(
       :arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2116,6 +2168,7 @@ module Aws::DeviceFarm
     #
     class GetDeviceResult < Struct.new(
       :device)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2134,6 +2187,7 @@ module Aws::DeviceFarm
     #
     class GetInstanceProfileRequest < Struct.new(
       :arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2145,6 +2199,7 @@ module Aws::DeviceFarm
     #
     class GetInstanceProfileResult < Struct.new(
       :instance_profile)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2165,6 +2220,7 @@ module Aws::DeviceFarm
     #
     class GetJobRequest < Struct.new(
       :arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2178,6 +2234,7 @@ module Aws::DeviceFarm
     #
     class GetJobResult < Struct.new(
       :job)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2196,6 +2253,7 @@ module Aws::DeviceFarm
     #
     class GetNetworkProfileRequest < Struct.new(
       :arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2207,6 +2265,7 @@ module Aws::DeviceFarm
     #
     class GetNetworkProfileResult < Struct.new(
       :network_profile)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2230,6 +2289,7 @@ module Aws::DeviceFarm
     #
     class GetOfferingStatusRequest < Struct.new(
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2255,6 +2315,7 @@ module Aws::DeviceFarm
       :current,
       :next_period,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2275,6 +2336,7 @@ module Aws::DeviceFarm
     #
     class GetProjectRequest < Struct.new(
       :arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2288,6 +2350,7 @@ module Aws::DeviceFarm
     #
     class GetProjectResult < Struct.new(
       :project)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2310,6 +2373,7 @@ module Aws::DeviceFarm
     #
     class GetRemoteAccessSessionRequest < Struct.new(
       :arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2325,6 +2389,7 @@ module Aws::DeviceFarm
     #
     class GetRemoteAccessSessionResult < Struct.new(
       :remote_access_session)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2345,6 +2410,7 @@ module Aws::DeviceFarm
     #
     class GetRunRequest < Struct.new(
       :arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2358,6 +2424,7 @@ module Aws::DeviceFarm
     #
     class GetRunResult < Struct.new(
       :run)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2378,6 +2445,7 @@ module Aws::DeviceFarm
     #
     class GetSuiteRequest < Struct.new(
       :arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2391,6 +2459,7 @@ module Aws::DeviceFarm
     #
     class GetSuiteResult < Struct.new(
       :suite)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2410,6 +2479,7 @@ module Aws::DeviceFarm
     #
     class GetTestGridProjectRequest < Struct.new(
       :project_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2421,6 +2491,7 @@ module Aws::DeviceFarm
     #
     class GetTestGridProjectResult < Struct.new(
       :test_grid_project)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2452,6 +2523,7 @@ module Aws::DeviceFarm
       :project_arn,
       :session_id,
       :session_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2463,6 +2535,7 @@ module Aws::DeviceFarm
     #
     class GetTestGridSessionResult < Struct.new(
       :test_grid_session)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2483,6 +2556,7 @@ module Aws::DeviceFarm
     #
     class GetTestRequest < Struct.new(
       :arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2496,6 +2570,7 @@ module Aws::DeviceFarm
     #
     class GetTestResult < Struct.new(
       :test)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2516,6 +2591,7 @@ module Aws::DeviceFarm
     #
     class GetUploadRequest < Struct.new(
       :arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2530,6 +2606,7 @@ module Aws::DeviceFarm
     #
     class GetUploadResult < Struct.new(
       :upload)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2549,6 +2626,7 @@ module Aws::DeviceFarm
     #
     class GetVPCEConfigurationRequest < Struct.new(
       :arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2561,6 +2639,7 @@ module Aws::DeviceFarm
     #
     class GetVPCEConfigurationResult < Struct.new(
       :vpce_configuration)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2574,6 +2653,7 @@ module Aws::DeviceFarm
     #
     class IdempotencyException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2606,6 +2686,7 @@ module Aws::DeviceFarm
     class IncompatibilityMessage < Struct.new(
       :message,
       :type)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2635,6 +2716,7 @@ module Aws::DeviceFarm
     class InstallToRemoteAccessSessionRequest < Struct.new(
       :remote_access_session_arn,
       :app_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2649,6 +2731,7 @@ module Aws::DeviceFarm
     #
     class InstallToRemoteAccessSessionResult < Struct.new(
       :app_upload)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2693,6 +2776,7 @@ module Aws::DeviceFarm
       :reboot_after_use,
       :name,
       :description)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2707,6 +2791,7 @@ module Aws::DeviceFarm
     #
     class InternalServiceException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2720,6 +2805,7 @@ module Aws::DeviceFarm
     #
     class InvalidOperationException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2880,6 +2966,7 @@ module Aws::DeviceFarm
       :device_minutes,
       :video_endpoint,
       :video_capture)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2893,6 +2980,7 @@ module Aws::DeviceFarm
     #
     class LimitExceededException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2935,6 +3023,7 @@ module Aws::DeviceFarm
       :arn,
       :type,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2956,6 +3045,7 @@ module Aws::DeviceFarm
     class ListArtifactsResult < Struct.new(
       :artifacts,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2983,6 +3073,7 @@ module Aws::DeviceFarm
     class ListDeviceInstancesRequest < Struct.new(
       :max_results,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3000,6 +3091,7 @@ module Aws::DeviceFarm
     class ListDeviceInstancesResult < Struct.new(
       :device_instances,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3042,6 +3134,7 @@ module Aws::DeviceFarm
       :arn,
       :type,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3063,6 +3156,7 @@ module Aws::DeviceFarm
     class ListDevicePoolsResult < Struct.new(
       :device_pools,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3172,6 +3266,7 @@ module Aws::DeviceFarm
       :arn,
       :next_token,
       :filters)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3193,6 +3288,7 @@ module Aws::DeviceFarm
     class ListDevicesResult < Struct.new(
       :devices,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3220,6 +3316,7 @@ module Aws::DeviceFarm
     class ListInstanceProfilesRequest < Struct.new(
       :max_results,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3237,6 +3334,7 @@ module Aws::DeviceFarm
     class ListInstanceProfilesResult < Struct.new(
       :instance_profiles,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3265,6 +3363,7 @@ module Aws::DeviceFarm
     class ListJobsRequest < Struct.new(
       :arn,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3286,6 +3385,7 @@ module Aws::DeviceFarm
     class ListJobsResult < Struct.new(
       :jobs,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3320,6 +3420,7 @@ module Aws::DeviceFarm
       :arn,
       :type,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3338,6 +3439,7 @@ module Aws::DeviceFarm
     class ListNetworkProfilesResult < Struct.new(
       :network_profiles,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3358,6 +3460,7 @@ module Aws::DeviceFarm
     #
     class ListOfferingPromotionsRequest < Struct.new(
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3375,6 +3478,7 @@ module Aws::DeviceFarm
     class ListOfferingPromotionsResult < Struct.new(
       :offering_promotions,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3397,6 +3501,7 @@ module Aws::DeviceFarm
     #
     class ListOfferingTransactionsRequest < Struct.new(
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3418,6 +3523,7 @@ module Aws::DeviceFarm
     class ListOfferingTransactionsResult < Struct.new(
       :offering_transactions,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3440,6 +3546,7 @@ module Aws::DeviceFarm
     #
     class ListOfferingsRequest < Struct.new(
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3460,6 +3567,7 @@ module Aws::DeviceFarm
     class ListOfferingsResult < Struct.new(
       :offerings,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3490,6 +3598,7 @@ module Aws::DeviceFarm
     class ListProjectsRequest < Struct.new(
       :arn,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3511,6 +3620,7 @@ module Aws::DeviceFarm
     class ListProjectsResult < Struct.new(
       :projects,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3541,6 +3651,7 @@ module Aws::DeviceFarm
     class ListRemoteAccessSessionsRequest < Struct.new(
       :arn,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3563,6 +3674,7 @@ module Aws::DeviceFarm
     class ListRemoteAccessSessionsResult < Struct.new(
       :remote_access_sessions,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3592,6 +3704,7 @@ module Aws::DeviceFarm
     class ListRunsRequest < Struct.new(
       :arn,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3613,6 +3726,7 @@ module Aws::DeviceFarm
     class ListRunsResult < Struct.new(
       :runs,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3641,6 +3755,7 @@ module Aws::DeviceFarm
     class ListSamplesRequest < Struct.new(
       :arn,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3662,6 +3777,7 @@ module Aws::DeviceFarm
     class ListSamplesResult < Struct.new(
       :samples,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3690,6 +3806,7 @@ module Aws::DeviceFarm
     class ListSuitesRequest < Struct.new(
       :arn,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3711,6 +3828,7 @@ module Aws::DeviceFarm
     class ListSuitesResult < Struct.new(
       :suites,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3733,6 +3851,7 @@ module Aws::DeviceFarm
     #
     class ListTagsForResourceRequest < Struct.new(
       :resource_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3746,6 +3865,7 @@ module Aws::DeviceFarm
     #
     class ListTagsForResourceResponse < Struct.new(
       :tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3770,6 +3890,7 @@ module Aws::DeviceFarm
     class ListTestGridProjectsRequest < Struct.new(
       :max_result,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3788,6 +3909,7 @@ module Aws::DeviceFarm
     class ListTestGridProjectsResult < Struct.new(
       :test_grid_projects,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3818,6 +3940,7 @@ module Aws::DeviceFarm
       :session_arn,
       :max_result,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3834,6 +3957,7 @@ module Aws::DeviceFarm
     class ListTestGridSessionActionsResult < Struct.new(
       :actions,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3870,6 +3994,7 @@ module Aws::DeviceFarm
       :type,
       :max_result,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3886,6 +4011,7 @@ module Aws::DeviceFarm
     class ListTestGridSessionArtifactsResult < Struct.new(
       :artifacts,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3946,6 +4072,7 @@ module Aws::DeviceFarm
       :end_time_before,
       :max_result,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3963,6 +4090,7 @@ module Aws::DeviceFarm
     class ListTestGridSessionsResult < Struct.new(
       :test_grid_sessions,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3991,6 +4119,7 @@ module Aws::DeviceFarm
     class ListTestsRequest < Struct.new(
       :arn,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4012,6 +4141,7 @@ module Aws::DeviceFarm
     class ListTestsResult < Struct.new(
       :tests,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4040,6 +4170,7 @@ module Aws::DeviceFarm
     class ListUniqueProblemsRequest < Struct.new(
       :arn,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4077,6 +4208,7 @@ module Aws::DeviceFarm
     class ListUniqueProblemsResult < Struct.new(
       :unique_problems,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4178,6 +4310,7 @@ module Aws::DeviceFarm
       :arn,
       :type,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4199,6 +4332,7 @@ module Aws::DeviceFarm
     class ListUploadsResult < Struct.new(
       :uploads,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4226,6 +4360,7 @@ module Aws::DeviceFarm
     class ListVPCEConfigurationsRequest < Struct.new(
       :max_results,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4245,6 +4380,7 @@ module Aws::DeviceFarm
     class ListVPCEConfigurationsResult < Struct.new(
       :vpce_configurations,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4274,6 +4410,7 @@ module Aws::DeviceFarm
     class Location < Struct.new(
       :latitude,
       :longitude)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4294,6 +4431,7 @@ module Aws::DeviceFarm
     class MonetaryAmount < Struct.new(
       :amount,
       :currency_code)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4371,6 +4509,7 @@ module Aws::DeviceFarm
       :downlink_jitter_ms,
       :uplink_loss_percent,
       :downlink_loss_percent)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4385,6 +4524,7 @@ module Aws::DeviceFarm
     #
     class NotEligibleException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4398,6 +4538,7 @@ module Aws::DeviceFarm
     #
     class NotFoundException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4431,6 +4572,7 @@ module Aws::DeviceFarm
       :type,
       :platform,
       :recurring_charges)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4449,6 +4591,7 @@ module Aws::DeviceFarm
     class OfferingPromotion < Struct.new(
       :id,
       :description)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4477,6 +4620,7 @@ module Aws::DeviceFarm
       :offering,
       :quantity,
       :effective_on)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4510,6 +4654,7 @@ module Aws::DeviceFarm
       :offering_promotion_id,
       :created_on,
       :cost)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4569,6 +4714,7 @@ module Aws::DeviceFarm
       :device,
       :result,
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4587,6 +4733,7 @@ module Aws::DeviceFarm
     class ProblemDetail < Struct.new(
       :arn,
       :name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4617,6 +4764,7 @@ module Aws::DeviceFarm
       :name,
       :default_job_timeout_minutes,
       :created)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4649,6 +4797,7 @@ module Aws::DeviceFarm
       :offering_id,
       :quantity,
       :offering_promotion_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4662,6 +4811,7 @@ module Aws::DeviceFarm
     #
     class PurchaseOfferingResult < Struct.new(
       :offering_transaction)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4705,6 +4855,7 @@ module Aws::DeviceFarm
       :bluetooth,
       :nfc,
       :gps)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4723,6 +4874,7 @@ module Aws::DeviceFarm
     class RecurringCharge < Struct.new(
       :cost,
       :frequency)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4930,6 +5082,7 @@ module Aws::DeviceFarm
       :device_udid,
       :interaction_mode,
       :skip_app_resign)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4956,6 +5109,7 @@ module Aws::DeviceFarm
     class RenewOfferingRequest < Struct.new(
       :offering_id,
       :quantity)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4969,6 +5123,7 @@ module Aws::DeviceFarm
     #
     class RenewOfferingResult < Struct.new(
       :offering_transaction)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4988,6 +5143,7 @@ module Aws::DeviceFarm
     class Resolution < Struct.new(
       :width,
       :height)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5117,6 +5273,7 @@ module Aws::DeviceFarm
       :attribute,
       :operator,
       :value)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5393,6 +5550,7 @@ module Aws::DeviceFarm
       :skip_app_resign,
       :test_spec_arn,
       :device_selection_result)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5459,6 +5617,7 @@ module Aws::DeviceFarm
       :arn,
       :type,
       :url)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5552,6 +5711,7 @@ module Aws::DeviceFarm
       :radios,
       :auxiliary_apps,
       :billing_method)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5667,6 +5827,7 @@ module Aws::DeviceFarm
       :test,
       :configuration,
       :execution_configuration)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5680,6 +5841,7 @@ module Aws::DeviceFarm
     #
     class ScheduleRunResult < Struct.new(
       :run)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5853,6 +6015,7 @@ module Aws::DeviceFarm
       :test_spec_arn,
       :filter,
       :parameters)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5866,6 +6029,7 @@ module Aws::DeviceFarm
     #
     class ServiceAccountException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5885,6 +6049,7 @@ module Aws::DeviceFarm
     #
     class StopJobRequest < Struct.new(
       :arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5896,6 +6061,7 @@ module Aws::DeviceFarm
     #
     class StopJobResult < Struct.new(
       :job)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5916,6 +6082,7 @@ module Aws::DeviceFarm
     #
     class StopRemoteAccessSessionRequest < Struct.new(
       :arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5931,6 +6098,7 @@ module Aws::DeviceFarm
     #
     class StopRemoteAccessSessionResult < Struct.new(
       :remote_access_session)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5952,6 +6120,7 @@ module Aws::DeviceFarm
     #
     class StopRunRequest < Struct.new(
       :arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5965,6 +6134,7 @@ module Aws::DeviceFarm
     #
     class StopRunResult < Struct.new(
       :run)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6109,6 +6279,7 @@ module Aws::DeviceFarm
       :counters,
       :message,
       :device_minutes)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6141,6 +6312,7 @@ module Aws::DeviceFarm
     class Tag < Struct.new(
       :key,
       :value)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6157,6 +6329,7 @@ module Aws::DeviceFarm
     class TagOperationException < Struct.new(
       :message,
       :resource_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6174,6 +6347,7 @@ module Aws::DeviceFarm
     class TagPolicyException < Struct.new(
       :message,
       :resource_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6209,6 +6383,7 @@ module Aws::DeviceFarm
     class TagResourceRequest < Struct.new(
       :resource_arn,
       :tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6356,6 +6531,7 @@ module Aws::DeviceFarm
       :counters,
       :message,
       :device_minutes)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6385,6 +6561,7 @@ module Aws::DeviceFarm
       :name,
       :description,
       :created)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6425,6 +6602,7 @@ module Aws::DeviceFarm
       :ended,
       :billing_minutes,
       :selenium_properties)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6459,6 +6637,7 @@ module Aws::DeviceFarm
       :duration,
       :status_code,
       :request_method)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6488,6 +6667,7 @@ module Aws::DeviceFarm
       :filename,
       :type,
       :url)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6505,6 +6685,7 @@ module Aws::DeviceFarm
     class TooManyTagsException < Struct.new(
       :message,
       :resource_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6525,6 +6706,7 @@ module Aws::DeviceFarm
     class TrialMinutes < Struct.new(
       :total,
       :remaining)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6543,6 +6725,7 @@ module Aws::DeviceFarm
     class UniqueProblem < Struct.new(
       :message,
       :problems)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6571,6 +6754,7 @@ module Aws::DeviceFarm
     class UntagResourceRequest < Struct.new(
       :resource_arn,
       :tag_keys)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6607,6 +6791,7 @@ module Aws::DeviceFarm
       :arn,
       :profile_arn,
       :labels)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6618,6 +6803,7 @@ module Aws::DeviceFarm
     #
     class UpdateDeviceInstanceResult < Struct.new(
       :device_instance)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6695,6 +6881,7 @@ module Aws::DeviceFarm
       :rules,
       :max_devices,
       :clear_max_devices)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6708,6 +6895,7 @@ module Aws::DeviceFarm
     #
     class UpdateDevicePoolResult < Struct.new(
       :device_pool)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6762,6 +6950,7 @@ module Aws::DeviceFarm
       :package_cleanup,
       :exclude_app_packages_from_cleanup,
       :reboot_after_use)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6773,6 +6962,7 @@ module Aws::DeviceFarm
     #
     class UpdateInstanceProfileResult < Struct.new(
       :instance_profile)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6869,6 +7059,7 @@ module Aws::DeviceFarm
       :downlink_jitter_ms,
       :uplink_loss_percent,
       :downlink_loss_percent)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6880,6 +7071,7 @@ module Aws::DeviceFarm
     #
     class UpdateNetworkProfileResult < Struct.new(
       :network_profile)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6914,6 +7106,7 @@ module Aws::DeviceFarm
       :arn,
       :name,
       :default_job_timeout_minutes)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6927,6 +7120,7 @@ module Aws::DeviceFarm
     #
     class UpdateProjectResult < Struct.new(
       :project)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6957,6 +7151,7 @@ module Aws::DeviceFarm
       :project_arn,
       :name,
       :description)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6968,6 +7163,7 @@ module Aws::DeviceFarm
     #
     class UpdateTestGridProjectResult < Struct.new(
       :test_grid_project)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -7007,6 +7203,7 @@ module Aws::DeviceFarm
       :name,
       :content_type,
       :edit_content)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -7018,6 +7215,7 @@ module Aws::DeviceFarm
     #
     class UpdateUploadResult < Struct.new(
       :upload)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -7065,6 +7263,7 @@ module Aws::DeviceFarm
       :vpce_service_name,
       :service_dns_name,
       :vpce_configuration_description)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -7077,6 +7276,7 @@ module Aws::DeviceFarm
     #
     class UpdateVPCEConfigurationResult < Struct.new(
       :vpce_configuration)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -7220,6 +7420,7 @@ module Aws::DeviceFarm
       :content_type,
       :message,
       :category)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -7258,6 +7459,7 @@ module Aws::DeviceFarm
       :vpce_service_name,
       :service_dns_name,
       :vpce_configuration_description)
+      SENSITIVE = []
       include Aws::Structure
     end
 

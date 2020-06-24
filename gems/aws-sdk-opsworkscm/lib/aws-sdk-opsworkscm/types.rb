@@ -38,6 +38,7 @@ module Aws::OpsWorksCM
       :name,
       :maximum,
       :used)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -89,6 +90,7 @@ module Aws::OpsWorksCM
       :server_name,
       :node_name,
       :engine_attributes)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -102,6 +104,7 @@ module Aws::OpsWorksCM
     #
     class AssociateNodeResponse < Struct.new(
       :node_association_status_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -248,6 +251,7 @@ module Aws::OpsWorksCM
       :subnet_ids,
       :tools_version,
       :user_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -300,6 +304,7 @@ module Aws::OpsWorksCM
       :server_name,
       :description,
       :tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -311,6 +316,7 @@ module Aws::OpsWorksCM
     #
     class CreateBackupResponse < Struct.new(
       :backup)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -323,7 +329,7 @@ module Aws::OpsWorksCM
     #         custom_certificate: "CustomCertificate",
     #         custom_private_key: "CustomPrivateKey",
     #         disable_automated_backup: false,
-    #         engine: "String",
+    #         engine: "String", # required
     #         engine_model: "String",
     #         engine_version: "String",
     #         engine_attributes: [
@@ -417,8 +423,8 @@ module Aws::OpsWorksCM
     #
     # @!attribute [rw] engine_version
     #   The major release version of the engine that you want to use. For a
-    #   Chef server, the valid value for EngineVersion is currently `12`.
-    #   For a Puppet server, the valid value is `2017`.
+    #   Chef server, the valid value for EngineVersion is currently `2`. For
+    #   a Puppet server, the valid value is `2017`.
     #   @return [String]
     #
     # @!attribute [rw] engine_attributes
@@ -491,10 +497,11 @@ module Aws::OpsWorksCM
     # @!attribute [rw] preferred_maintenance_window
     #   The start time for a one-hour period each week during which AWS
     #   OpsWorks CM performs maintenance on the instance. Valid values must
-    #   be specified in the following format: `DDD:HH:MM`. The specified
-    #   time is in coordinated universal time (UTC). The default value is a
-    #   random one-hour period on Tuesday, Wednesday, or Friday. See
-    #   `TimeWindowDefinition` for more information.
+    #   be specified in the following format: `DDD:HH:MM`. `MM` must be
+    #   specified as `00`. The specified time is in coordinated universal
+    #   time (UTC). The default value is a random one-hour period on
+    #   Tuesday, Wednesday, or Friday. See `TimeWindowDefinition` for more
+    #   information.
     #
     #   **Example:** `Mon:08:00`, which represents a start time of every
     #   Monday at 08:00 UTC. (8:00 a.m.)
@@ -510,8 +517,9 @@ module Aws::OpsWorksCM
     #
     #   * `DDD:HH:MM` for weekly backups
     #
-    #   The specified time is in coordinated universal time (UTC). The
-    #   default value is a random, daily start time.
+    #   `MM` must be specified as `00`. The specified time is in coordinated
+    #   universal time (UTC). The default value is a random, daily start
+    #   time.
     #
     #   **Example:** `08:00`, which represents a daily start time of 08:00
     #   UTC.
@@ -612,6 +620,7 @@ module Aws::OpsWorksCM
       :subnet_ids,
       :tags,
       :backup_id)
+      SENSITIVE = [:custom_private_key]
       include Aws::Structure
     end
 
@@ -623,6 +632,7 @@ module Aws::OpsWorksCM
     #
     class CreateServerResponse < Struct.new(
       :server)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -643,6 +653,7 @@ module Aws::OpsWorksCM
     #
     class DeleteBackupRequest < Struct.new(
       :backup_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -665,6 +676,7 @@ module Aws::OpsWorksCM
     #
     class DeleteServerRequest < Struct.new(
       :server_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -686,6 +698,7 @@ module Aws::OpsWorksCM
     #
     class DescribeAccountAttributesResponse < Struct.new(
       :attributes)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -722,6 +735,7 @@ module Aws::OpsWorksCM
       :server_name,
       :next_token,
       :max_results)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -738,6 +752,7 @@ module Aws::OpsWorksCM
     class DescribeBackupsResponse < Struct.new(
       :backups,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -780,6 +795,7 @@ module Aws::OpsWorksCM
       :server_name,
       :next_token,
       :max_results)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -804,6 +820,7 @@ module Aws::OpsWorksCM
     class DescribeEventsResponse < Struct.new(
       :server_events,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -829,6 +846,7 @@ module Aws::OpsWorksCM
     class DescribeNodeAssociationStatusRequest < Struct.new(
       :node_association_status_token,
       :server_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -856,6 +874,7 @@ module Aws::OpsWorksCM
     class DescribeNodeAssociationStatusResponse < Struct.new(
       :node_association_status,
       :engine_attributes)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -886,6 +905,7 @@ module Aws::OpsWorksCM
       :server_name,
       :next_token,
       :max_results)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -915,6 +935,7 @@ module Aws::OpsWorksCM
     class DescribeServersResponse < Struct.new(
       :servers,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -959,6 +980,7 @@ module Aws::OpsWorksCM
       :server_name,
       :node_name,
       :engine_attributes)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -972,6 +994,7 @@ module Aws::OpsWorksCM
     #
     class DisassociateNodeResponse < Struct.new(
       :node_association_status_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -998,6 +1021,7 @@ module Aws::OpsWorksCM
     class EngineAttribute < Struct.new(
       :name,
       :value)
+      SENSITIVE = [:value]
       include Aws::Structure
     end
 
@@ -1055,6 +1079,7 @@ module Aws::OpsWorksCM
       :export_attribute_name,
       :server_name,
       :input_attributes)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1071,6 +1096,7 @@ module Aws::OpsWorksCM
     class ExportServerEngineAttributeResponse < Struct.new(
       :engine_attribute,
       :server_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1085,6 +1111,7 @@ module Aws::OpsWorksCM
     #
     class InvalidNextTokenException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1101,6 +1128,7 @@ module Aws::OpsWorksCM
     #
     class InvalidStateException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1115,6 +1143,7 @@ module Aws::OpsWorksCM
     #
     class LimitExceededException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1160,6 +1189,7 @@ module Aws::OpsWorksCM
       :resource_arn,
       :next_token,
       :max_results)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1177,6 +1207,7 @@ module Aws::OpsWorksCM
     class ListTagsForResourceResponse < Struct.new(
       :tags,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1191,6 +1222,7 @@ module Aws::OpsWorksCM
     #
     class ResourceAlreadyExistsException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1205,6 +1237,7 @@ module Aws::OpsWorksCM
     #
     class ResourceNotFoundException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1246,6 +1279,7 @@ module Aws::OpsWorksCM
       :server_name,
       :instance_type,
       :key_pair)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1337,7 +1371,7 @@ module Aws::OpsWorksCM
     #
     # @!attribute [rw] engine_version
     #   The engine version of the server. For a Chef server, the valid value
-    #   for EngineVersion is currently `12`. For a Puppet server, the valid
+    #   for EngineVersion is currently `2`. For a Puppet server, the valid
     #   value is `2017`.
     #   @return [String]
     #
@@ -1425,6 +1459,7 @@ module Aws::OpsWorksCM
       :status_reason,
       :subnet_ids,
       :server_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1454,6 +1489,7 @@ module Aws::OpsWorksCM
       :server_name,
       :message,
       :log_url)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1498,6 +1534,7 @@ module Aws::OpsWorksCM
     class StartMaintenanceRequest < Struct.new(
       :server_name,
       :engine_attributes)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1509,6 +1546,7 @@ module Aws::OpsWorksCM
     #
     class StartMaintenanceResponse < Struct.new(
       :server)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1545,6 +1583,7 @@ module Aws::OpsWorksCM
     class Tag < Struct.new(
       :key,
       :value)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1593,6 +1632,7 @@ module Aws::OpsWorksCM
     class TagResourceRequest < Struct.new(
       :resource_arn,
       :tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1623,6 +1663,7 @@ module Aws::OpsWorksCM
     class UntagResourceRequest < Struct.new(
       :resource_arn,
       :tag_keys)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1657,6 +1698,7 @@ module Aws::OpsWorksCM
       :server_name,
       :attribute_name,
       :attribute_value)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1668,6 +1710,7 @@ module Aws::OpsWorksCM
     #
     class UpdateServerEngineAttributesResponse < Struct.new(
       :server)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1719,6 +1762,7 @@ module Aws::OpsWorksCM
       :server_name,
       :preferred_maintenance_window,
       :preferred_backup_window)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1730,6 +1774,7 @@ module Aws::OpsWorksCM
     #
     class UpdateServerResponse < Struct.new(
       :server)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1744,6 +1789,7 @@ module Aws::OpsWorksCM
     #
     class ValidationException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 

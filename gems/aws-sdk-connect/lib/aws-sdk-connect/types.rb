@@ -33,6 +33,7 @@ module Aws::Connect
     class ChatMessage < Struct.new(
       :content_type,
       :content)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -61,6 +62,7 @@ module Aws::Connect
       :arn,
       :name,
       :contact_flow_type)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -74,6 +76,7 @@ module Aws::Connect
     #
     class ContactNotFoundException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -173,6 +176,7 @@ module Aws::Connect
       :hierarchy_group_id,
       :instance_id,
       :tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -189,6 +193,7 @@ module Aws::Connect
     class CreateUserResponse < Struct.new(
       :user_id,
       :user_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -220,6 +225,7 @@ module Aws::Connect
       :access_token_expiration,
       :refresh_token,
       :refresh_token_expiration)
+      SENSITIVE = [:access_token, :refresh_token]
       include Aws::Structure
     end
 
@@ -246,6 +252,7 @@ module Aws::Connect
     class CurrentMetric < Struct.new(
       :name,
       :unit)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -264,6 +271,7 @@ module Aws::Connect
     class CurrentMetricData < Struct.new(
       :metric,
       :value)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -282,6 +290,7 @@ module Aws::Connect
     class CurrentMetricResult < Struct.new(
       :dimensions,
       :collections)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -306,6 +315,7 @@ module Aws::Connect
     class DeleteUserRequest < Struct.new(
       :instance_id,
       :user_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -330,6 +340,7 @@ module Aws::Connect
     class DescribeUserHierarchyGroupRequest < Struct.new(
       :hierarchy_group_id,
       :instance_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -341,6 +352,7 @@ module Aws::Connect
     #
     class DescribeUserHierarchyGroupResponse < Struct.new(
       :hierarchy_group)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -359,6 +371,7 @@ module Aws::Connect
     #
     class DescribeUserHierarchyStructureRequest < Struct.new(
       :instance_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -370,6 +383,7 @@ module Aws::Connect
     #
     class DescribeUserHierarchyStructureResponse < Struct.new(
       :hierarchy_structure)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -394,6 +408,7 @@ module Aws::Connect
     class DescribeUserRequest < Struct.new(
       :user_id,
       :instance_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -405,6 +420,7 @@ module Aws::Connect
     #
     class DescribeUserResponse < Struct.new(
       :user)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -418,6 +434,7 @@ module Aws::Connect
     #
     class DestinationNotAllowedException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -436,6 +453,7 @@ module Aws::Connect
     class Dimensions < Struct.new(
       :queue,
       :channel)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -448,6 +466,7 @@ module Aws::Connect
     #
     class DuplicateResourceException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -475,6 +494,7 @@ module Aws::Connect
     class Filters < Struct.new(
       :queues,
       :channels)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -499,6 +519,7 @@ module Aws::Connect
     class GetContactAttributesRequest < Struct.new(
       :instance_id,
       :initial_contact_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -510,6 +531,7 @@ module Aws::Connect
     #
     class GetContactAttributesResponse < Struct.new(
       :attributes)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -636,6 +658,7 @@ module Aws::Connect
       :current_metrics,
       :next_token,
       :max_results)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -663,6 +686,7 @@ module Aws::Connect
       :next_token,
       :metric_results,
       :data_snapshot_time)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -681,6 +705,7 @@ module Aws::Connect
     #
     class GetFederationTokenRequest < Struct.new(
       :instance_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -692,6 +717,7 @@ module Aws::Connect
     #
     class GetFederationTokenResponse < Struct.new(
       :credentials)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -947,6 +973,7 @@ module Aws::Connect
       :historical_metrics,
       :next_token,
       :max_results)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -970,6 +997,7 @@ module Aws::Connect
     class GetMetricDataResponse < Struct.new(
       :next_token,
       :metric_results)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1003,6 +1031,7 @@ module Aws::Connect
       :name,
       :level_id,
       :hierarchy_path)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1026,6 +1055,7 @@ module Aws::Connect
       :id,
       :arn,
       :name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1049,6 +1079,7 @@ module Aws::Connect
       :id,
       :arn,
       :name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1082,6 +1113,7 @@ module Aws::Connect
       :level_three,
       :level_four,
       :level_five)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1115,6 +1147,7 @@ module Aws::Connect
       :level_three,
       :level_four,
       :level_five)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1156,6 +1189,7 @@ module Aws::Connect
       :threshold,
       :statistic,
       :unit)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1174,6 +1208,7 @@ module Aws::Connect
     class HistoricalMetricData < Struct.new(
       :metric,
       :value)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1192,6 +1227,7 @@ module Aws::Connect
     class HistoricalMetricResult < Struct.new(
       :dimensions,
       :collections)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1216,6 +1252,7 @@ module Aws::Connect
       :id,
       :arn,
       :name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1229,6 +1266,7 @@ module Aws::Connect
     #
     class InternalServiceException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1242,6 +1280,7 @@ module Aws::Connect
     #
     class InvalidParameterException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1255,6 +1294,7 @@ module Aws::Connect
     #
     class InvalidRequestException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1268,6 +1308,7 @@ module Aws::Connect
     #
     class LimitExceededException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1306,6 +1347,7 @@ module Aws::Connect
       :contact_flow_types,
       :next_token,
       :max_results)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1323,6 +1365,7 @@ module Aws::Connect
     class ListContactFlowsResponse < Struct.new(
       :contact_flow_summary_list,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1355,6 +1398,7 @@ module Aws::Connect
       :instance_id,
       :next_token,
       :max_results)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1372,6 +1416,7 @@ module Aws::Connect
     class ListHoursOfOperationsResponse < Struct.new(
       :hours_of_operation_summary_list,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1416,6 +1461,7 @@ module Aws::Connect
       :phone_number_country_codes,
       :next_token,
       :max_results)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1433,6 +1479,7 @@ module Aws::Connect
     class ListPhoneNumbersResponse < Struct.new(
       :phone_number_summary_list,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1471,6 +1518,7 @@ module Aws::Connect
       :queue_types,
       :next_token,
       :max_results)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1488,6 +1536,7 @@ module Aws::Connect
     class ListQueuesResponse < Struct.new(
       :queue_summary_list,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1520,6 +1569,7 @@ module Aws::Connect
       :instance_id,
       :next_token,
       :max_results)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1537,6 +1587,7 @@ module Aws::Connect
     class ListRoutingProfilesResponse < Struct.new(
       :routing_profile_summary_list,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1569,6 +1620,7 @@ module Aws::Connect
       :instance_id,
       :next_token,
       :max_results)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1586,6 +1638,7 @@ module Aws::Connect
     class ListSecurityProfilesResponse < Struct.new(
       :security_profile_summary_list,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1604,6 +1657,7 @@ module Aws::Connect
     #
     class ListTagsForResourceRequest < Struct.new(
       :resource_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1615,6 +1669,7 @@ module Aws::Connect
     #
     class ListTagsForResourceResponse < Struct.new(
       :tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1647,6 +1702,7 @@ module Aws::Connect
       :instance_id,
       :next_token,
       :max_results)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1664,6 +1720,7 @@ module Aws::Connect
     class ListUserHierarchyGroupsResponse < Struct.new(
       :user_hierarchy_group_summary_list,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1696,6 +1753,7 @@ module Aws::Connect
       :instance_id,
       :next_token,
       :max_results)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1713,6 +1771,7 @@ module Aws::Connect
     class ListUsersResponse < Struct.new(
       :user_summary_list,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1726,6 +1785,7 @@ module Aws::Connect
     #
     class OutboundContactNotPermittedException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1746,6 +1806,7 @@ module Aws::Connect
     #
     class ParticipantDetails < Struct.new(
       :display_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1780,6 +1841,7 @@ module Aws::Connect
       :phone_number,
       :phone_number_type,
       :phone_number_country_code)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1799,6 +1861,7 @@ module Aws::Connect
     class QueueReference < Struct.new(
       :id,
       :arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1827,6 +1890,7 @@ module Aws::Connect
       :arn,
       :name,
       :queue_type)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1840,6 +1904,7 @@ module Aws::Connect
     #
     class ResourceNotFoundException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1863,6 +1928,7 @@ module Aws::Connect
       :id,
       :arn,
       :name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1886,6 +1952,7 @@ module Aws::Connect
       :id,
       :arn,
       :name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1951,6 +2018,7 @@ module Aws::Connect
       :participant_details,
       :initial_message,
       :client_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1979,6 +2047,7 @@ module Aws::Connect
       :contact_id,
       :participant_id,
       :participant_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2053,6 +2122,7 @@ module Aws::Connect
       :source_phone_number,
       :queue_id,
       :attributes)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2064,6 +2134,7 @@ module Aws::Connect
     #
     class StartOutboundVoiceContactResponse < Struct.new(
       :contact_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2088,6 +2159,7 @@ module Aws::Connect
     class StopContactRequest < Struct.new(
       :contact_id,
       :instance_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2119,6 +2191,7 @@ module Aws::Connect
     class TagResourceRequest < Struct.new(
       :resource_arn,
       :tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2146,6 +2219,7 @@ module Aws::Connect
     class Threshold < Struct.new(
       :comparison,
       :threshold_value)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2158,6 +2232,7 @@ module Aws::Connect
     #
     class ThrottlingException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2182,6 +2257,7 @@ module Aws::Connect
     class UntagResourceRequest < Struct.new(
       :resource_arn,
       :tag_keys)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2220,6 +2296,7 @@ module Aws::Connect
       :initial_contact_id,
       :instance_id,
       :attributes)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2254,6 +2331,7 @@ module Aws::Connect
       :hierarchy_group_id,
       :user_id,
       :instance_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2288,6 +2366,7 @@ module Aws::Connect
       :identity_info,
       :user_id,
       :instance_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2323,6 +2402,7 @@ module Aws::Connect
       :phone_config,
       :user_id,
       :instance_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2353,6 +2433,7 @@ module Aws::Connect
       :routing_profile_id,
       :user_id,
       :instance_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2383,6 +2464,7 @@ module Aws::Connect
       :security_profile_ids,
       :user_id,
       :instance_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2443,6 +2525,7 @@ module Aws::Connect
       :routing_profile_id,
       :hierarchy_group_id,
       :tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2478,6 +2561,7 @@ module Aws::Connect
       :first_name,
       :last_name,
       :email)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2491,6 +2575,7 @@ module Aws::Connect
     #
     class UserNotFoundException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2530,6 +2615,7 @@ module Aws::Connect
       :auto_accept,
       :after_contact_work_time_limit,
       :desk_phone_number)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2553,6 +2639,7 @@ module Aws::Connect
       :id,
       :arn,
       :username)
+      SENSITIVE = []
       include Aws::Structure
     end
 

@@ -32,6 +32,7 @@ module Aws::IoT
     #
     class AbortConfig < Struct.new(
       :criteria_list)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -73,6 +74,7 @@ module Aws::IoT
       :action,
       :threshold_percentage,
       :min_number_of_executed_things)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -98,6 +100,7 @@ module Aws::IoT
     class AcceptCertificateTransferRequest < Struct.new(
       :certificate_id,
       :set_as_active)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -347,6 +350,7 @@ module Aws::IoT
       :iot_site_wise,
       :step_functions,
       :http)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -390,6 +394,7 @@ module Aws::IoT
       :last_violation_value,
       :last_violation_time,
       :violation_start_time)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -424,6 +429,7 @@ module Aws::IoT
       :billing_group_arn,
       :thing_name,
       :thing_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -469,6 +475,7 @@ module Aws::IoT
       :thing_name,
       :thing_arn,
       :override_dynamic_groups)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -501,6 +508,7 @@ module Aws::IoT
     class AddThingsToThingGroupParams < Struct.new(
       :thing_group_names,
       :override_dynamic_groups)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -526,6 +534,7 @@ module Aws::IoT
     class AlertTarget < Struct.new(
       :alert_target_arn,
       :role_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -537,6 +546,7 @@ module Aws::IoT
     #
     class Allowed < Struct.new(
       :policies)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -564,6 +574,7 @@ module Aws::IoT
     class AssetPropertyTimestamp < Struct.new(
       :time_in_seconds,
       :offset_in_nanos)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -603,6 +614,7 @@ module Aws::IoT
       :value,
       :timestamp,
       :quality)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -643,6 +655,7 @@ module Aws::IoT
       :integer_value,
       :double_value,
       :boolean_value)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -672,6 +685,7 @@ module Aws::IoT
       :targets,
       :job_id,
       :comment)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -691,6 +705,7 @@ module Aws::IoT
       :job_arn,
       :job_id,
       :description)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -717,6 +732,7 @@ module Aws::IoT
     class AttachPolicyRequest < Struct.new(
       :policy_name,
       :target)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -742,6 +758,7 @@ module Aws::IoT
     class AttachPrincipalPolicyRequest < Struct.new(
       :policy_name,
       :principal)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -765,6 +782,7 @@ module Aws::IoT
     class AttachSecurityProfileRequest < Struct.new(
       :security_profile_name,
       :security_profile_target_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -792,6 +810,7 @@ module Aws::IoT
     class AttachThingPrincipalRequest < Struct.new(
       :thing_name,
       :principal)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -835,6 +854,7 @@ module Aws::IoT
     class AttributePayload < Struct.new(
       :attributes,
       :merge)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -853,6 +873,7 @@ module Aws::IoT
     #
     class AuditCheckConfiguration < Struct.new(
       :enabled)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -896,6 +917,7 @@ module Aws::IoT
       :non_compliant_resources_count,
       :error_code,
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -953,6 +975,7 @@ module Aws::IoT
       :related_resources,
       :reason_for_non_compliance,
       :reason_for_non_compliance_code)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1011,6 +1034,7 @@ module Aws::IoT
       :end_time,
       :error_code,
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1033,6 +1057,7 @@ module Aws::IoT
       :task_id,
       :start_time,
       :task_status)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1071,6 +1096,7 @@ module Aws::IoT
       :audit_task_id,
       :finding_ids,
       :audit_check_to_reason_code_filter)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1103,6 +1129,7 @@ module Aws::IoT
       :target_arn,
       :role_arn,
       :enabled)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1126,6 +1153,7 @@ module Aws::IoT
       :task_id,
       :task_status,
       :task_type)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1151,6 +1179,7 @@ module Aws::IoT
     class AuthInfo < Struct.new(
       :action_type,
       :resources)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1185,6 +1214,7 @@ module Aws::IoT
       :denied,
       :auth_decision,
       :missing_context_values)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1210,6 +1240,7 @@ module Aws::IoT
     class AuthorizerConfig < Struct.new(
       :default_authorizer_name,
       :allow_authorizer_override)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1263,6 +1294,7 @@ module Aws::IoT
       :creation_date,
       :last_modified_date,
       :signing_disabled)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1279,6 +1311,7 @@ module Aws::IoT
     class AuthorizerSummary < Struct.new(
       :authorizer_name,
       :authorizer_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1304,6 +1337,7 @@ module Aws::IoT
     #
     class AwsJobAbortConfig < Struct.new(
       :abort_criteria_list)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1345,6 +1379,7 @@ module Aws::IoT
       :action,
       :threshold_percentage,
       :min_number_of_executed_things)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1377,6 +1412,7 @@ module Aws::IoT
     class AwsJobExecutionsRolloutConfig < Struct.new(
       :maximum_per_minute,
       :exponential_rate)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1417,6 +1453,7 @@ module Aws::IoT
       :base_rate_per_minute,
       :increment_factor,
       :rate_increase_criteria)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1438,6 +1475,7 @@ module Aws::IoT
     #
     class AwsJobPresignedUrlConfig < Struct.new(
       :expires_in_sec)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1464,6 +1502,7 @@ module Aws::IoT
     class AwsJobRateIncreaseCriteria < Struct.new(
       :number_of_notified_things,
       :number_of_succeeded_things)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1492,6 +1531,7 @@ module Aws::IoT
     #
     class AwsJobTimeoutConfig < Struct.new(
       :in_progress_timeout_in_minutes)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1548,6 +1588,7 @@ module Aws::IoT
       :metric,
       :metric_dimension,
       :criteria)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1616,6 +1657,7 @@ module Aws::IoT
       :consecutive_datapoints_to_alarm,
       :consecutive_datapoints_to_clear,
       :statistical_threshold)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1627,6 +1669,7 @@ module Aws::IoT
     #
     class BillingGroupMetadata < Struct.new(
       :creation_date)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1645,6 +1688,7 @@ module Aws::IoT
     #
     class BillingGroupProperties < Struct.new(
       :billing_group_description)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1674,6 +1718,7 @@ module Aws::IoT
       :certificate_id,
       :status,
       :creation_date)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1736,6 +1781,7 @@ module Aws::IoT
       :customer_version,
       :generation_id,
       :validity)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1752,6 +1798,7 @@ module Aws::IoT
     #
     class CancelAuditMitigationActionsTaskRequest < Struct.new(
       :task_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1771,6 +1818,7 @@ module Aws::IoT
     #
     class CancelAuditTaskRequest < Struct.new(
       :task_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1792,6 +1840,7 @@ module Aws::IoT
     #
     class CancelCertificateTransferRequest < Struct.new(
       :certificate_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1852,6 +1901,7 @@ module Aws::IoT
       :force,
       :expected_version,
       :status_details)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1894,6 +1944,7 @@ module Aws::IoT
       :reason_code,
       :comment,
       :force)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1913,6 +1964,7 @@ module Aws::IoT
       :job_arn,
       :job_id,
       :description)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1948,6 +2000,7 @@ module Aws::IoT
       :status,
       :certificate_mode,
       :creation_date)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1962,6 +2015,7 @@ module Aws::IoT
     #
     class CertificateConflictException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2039,6 +2093,7 @@ module Aws::IoT
       :generation_id,
       :validity,
       :certificate_mode)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2050,6 +2105,7 @@ module Aws::IoT
     #
     class CertificateStateException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2061,6 +2117,7 @@ module Aws::IoT
     #
     class CertificateValidationException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2077,6 +2134,7 @@ module Aws::IoT
     class CertificateValidity < Struct.new(
       :not_before,
       :not_after)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2120,6 +2178,7 @@ module Aws::IoT
       :alarm_name,
       :state_reason,
       :state_value)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2144,6 +2203,7 @@ module Aws::IoT
     class CloudwatchLogsAction < Struct.new(
       :role_arn,
       :log_group_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2200,6 +2260,7 @@ module Aws::IoT
       :metric_value,
       :metric_unit,
       :metric_timestamp)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2253,6 +2314,7 @@ module Aws::IoT
       :aws_signer_job_id,
       :start_signing_job_parameter,
       :custom_code_signing)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2278,6 +2340,7 @@ module Aws::IoT
     class CodeSigningCertificateChain < Struct.new(
       :certificate_name,
       :inline_document)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2297,6 +2360,7 @@ module Aws::IoT
     #
     class CodeSigningSignature < Struct.new(
       :inline_document)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2315,6 +2379,7 @@ module Aws::IoT
     #
     class Configuration < Struct.new(
       :enabled)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2332,6 +2397,7 @@ module Aws::IoT
     #
     class ConfirmTopicRuleDestinationRequest < Struct.new(
       :confirmation_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2346,6 +2412,7 @@ module Aws::IoT
     #
     class ConflictingResourceUpdateException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2419,6 +2486,7 @@ module Aws::IoT
       :status,
       :tags,
       :signing_disabled)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2433,6 +2501,7 @@ module Aws::IoT
     class CreateAuthorizerResponse < Struct.new(
       :authorizer_name,
       :authorizer_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2468,6 +2537,7 @@ module Aws::IoT
       :billing_group_name,
       :billing_group_properties,
       :tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2487,6 +2557,7 @@ module Aws::IoT
       :billing_group_name,
       :billing_group_arn,
       :billing_group_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2511,6 +2582,7 @@ module Aws::IoT
     class CreateCertificateFromCsrRequest < Struct.new(
       :certificate_signing_request,
       :set_as_active)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2534,6 +2606,7 @@ module Aws::IoT
       :certificate_arn,
       :certificate_id,
       :certificate_pem)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2589,6 +2662,7 @@ module Aws::IoT
       :string_values,
       :tags,
       :client_request_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2603,6 +2677,7 @@ module Aws::IoT
     class CreateDimensionResponse < Struct.new(
       :name,
       :arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2684,6 +2759,7 @@ module Aws::IoT
       :authorizer_config,
       :service_type,
       :tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2698,6 +2774,7 @@ module Aws::IoT
     class CreateDomainConfigurationResponse < Struct.new(
       :domain_configuration_name,
       :domain_configuration_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2772,6 +2849,7 @@ module Aws::IoT
       :query_string,
       :query_version,
       :tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2806,6 +2884,7 @@ module Aws::IoT
       :index_name,
       :query_string,
       :query_version)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2934,6 +3013,7 @@ module Aws::IoT
       :abort_config,
       :timeout_config,
       :tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2953,6 +3033,7 @@ module Aws::IoT
       :job_arn,
       :job_id,
       :description)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2971,6 +3052,7 @@ module Aws::IoT
     #
     class CreateKeysAndCertificateRequest < Struct.new(
       :set_as_active)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2998,6 +3080,7 @@ module Aws::IoT
       :certificate_id,
       :certificate_pem,
       :key_pair)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3060,6 +3143,7 @@ module Aws::IoT
       :role_arn,
       :action_params,
       :tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3074,6 +3158,7 @@ module Aws::IoT
     class CreateMitigationActionResponse < Struct.new(
       :action_arn,
       :action_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3253,6 +3338,7 @@ module Aws::IoT
       :role_arn,
       :additional_parameters,
       :tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3282,6 +3368,7 @@ module Aws::IoT
       :ota_update_arn,
       :aws_iot_job_arn,
       :ota_update_status)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3330,6 +3417,7 @@ module Aws::IoT
       :policy_name,
       :policy_document,
       :tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3356,6 +3444,7 @@ module Aws::IoT
       :policy_arn,
       :policy_document,
       :policy_version_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3390,6 +3479,7 @@ module Aws::IoT
       :policy_name,
       :policy_document,
       :set_as_default)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3416,6 +3506,7 @@ module Aws::IoT
       :policy_document,
       :policy_version_id,
       :is_default_version)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3432,6 +3523,7 @@ module Aws::IoT
     #
     class CreateProvisioningClaimRequest < Struct.new(
       :template_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3456,6 +3548,7 @@ module Aws::IoT
       :certificate_pem,
       :key_pair,
       :expiration)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3529,6 +3622,7 @@ module Aws::IoT
       :provisioning_role_arn,
       :pre_provisioning_hook,
       :tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3548,6 +3642,7 @@ module Aws::IoT
       :template_arn,
       :template_name,
       :default_version_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3576,6 +3671,7 @@ module Aws::IoT
       :template_name,
       :template_body,
       :set_as_default)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3601,6 +3697,7 @@ module Aws::IoT
       :template_name,
       :version_id,
       :is_default_version)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3652,6 +3749,7 @@ module Aws::IoT
       :role_arn,
       :credential_duration_seconds,
       :tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3666,6 +3764,7 @@ module Aws::IoT
     class CreateRoleAliasResponse < Struct.new(
       :role_alias,
       :role_alias_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3731,6 +3830,7 @@ module Aws::IoT
       :target_check_names,
       :scheduled_audit_name,
       :tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3740,6 +3840,7 @@ module Aws::IoT
     #
     class CreateScheduledAuditResponse < Struct.new(
       :scheduled_audit_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3843,6 +3944,7 @@ module Aws::IoT
       :additional_metrics_to_retain,
       :additional_metrics_to_retain_v2,
       :tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3857,6 +3959,7 @@ module Aws::IoT
     class CreateSecurityProfileResponse < Struct.new(
       :security_profile_name,
       :security_profile_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3912,6 +4015,7 @@ module Aws::IoT
       :files,
       :role_arn,
       :tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3936,6 +4040,7 @@ module Aws::IoT
       :stream_arn,
       :description,
       :stream_version)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3983,6 +4088,7 @@ module Aws::IoT
       :parent_group_name,
       :thing_group_properties,
       :tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4002,6 +4108,7 @@ module Aws::IoT
       :thing_group_name,
       :thing_group_arn,
       :thing_group_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4050,6 +4157,7 @@ module Aws::IoT
       :thing_type_name,
       :attribute_payload,
       :billing_group_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4071,6 +4179,7 @@ module Aws::IoT
       :thing_name,
       :thing_arn,
       :thing_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4111,6 +4220,7 @@ module Aws::IoT
       :thing_type_name,
       :thing_type_properties,
       :tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4132,6 +4242,7 @@ module Aws::IoT
       :thing_type_name,
       :thing_type_arn,
       :thing_type_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4152,6 +4263,7 @@ module Aws::IoT
     #
     class CreateTopicRuleDestinationRequest < Struct.new(
       :destination_configuration)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4161,6 +4273,7 @@ module Aws::IoT
     #
     class CreateTopicRuleDestinationResponse < Struct.new(
       :topic_rule_destination)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4491,6 +4604,7 @@ module Aws::IoT
       :rule_name,
       :topic_rule_payload,
       :tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4532,6 +4646,7 @@ module Aws::IoT
       :certificate_chain,
       :hash_algorithm,
       :signature_algorithm)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4548,6 +4663,7 @@ module Aws::IoT
     #
     class DeleteAccountAuditConfigurationRequest < Struct.new(
       :delete_scheduled_audits)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4566,6 +4682,7 @@ module Aws::IoT
     #
     class DeleteAuthorizerRequest < Struct.new(
       :authorizer_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4593,6 +4710,7 @@ module Aws::IoT
     class DeleteBillingGroupRequest < Struct.new(
       :billing_group_name,
       :expected_version)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4614,6 +4732,7 @@ module Aws::IoT
     #
     class DeleteCACertificateRequest < Struct.new(
       :certificate_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4644,6 +4763,7 @@ module Aws::IoT
     class DeleteCertificateRequest < Struct.new(
       :certificate_id,
       :force_delete)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4656,6 +4776,7 @@ module Aws::IoT
     #
     class DeleteConflictException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4672,6 +4793,7 @@ module Aws::IoT
     #
     class DeleteDimensionRequest < Struct.new(
       :name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4690,6 +4812,7 @@ module Aws::IoT
     #
     class DeleteDomainConfigurationRequest < Struct.new(
       :domain_configuration_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4714,6 +4837,7 @@ module Aws::IoT
     class DeleteDynamicThingGroupRequest < Struct.new(
       :thing_group_name,
       :expected_version)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4766,6 +4890,7 @@ module Aws::IoT
       :thing_name,
       :execution_number,
       :force)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4804,6 +4929,7 @@ module Aws::IoT
     class DeleteJobRequest < Struct.new(
       :job_id,
       :force)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4820,6 +4946,7 @@ module Aws::IoT
     #
     class DeleteMitigationActionRequest < Struct.new(
       :action_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4852,6 +4979,7 @@ module Aws::IoT
       :ota_update_id,
       :delete_stream,
       :force_delete_aws_job)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4872,6 +5000,7 @@ module Aws::IoT
     #
     class DeletePolicyRequest < Struct.new(
       :policy_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4896,6 +5025,7 @@ module Aws::IoT
     class DeletePolicyVersionRequest < Struct.new(
       :policy_name,
       :policy_version_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4912,6 +5042,7 @@ module Aws::IoT
     #
     class DeleteProvisioningTemplateRequest < Struct.new(
       :template_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4936,6 +5067,7 @@ module Aws::IoT
     class DeleteProvisioningTemplateVersionRequest < Struct.new(
       :template_name,
       :version_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4964,6 +5096,7 @@ module Aws::IoT
     #
     class DeleteRoleAliasRequest < Struct.new(
       :role_alias)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4982,6 +5115,7 @@ module Aws::IoT
     #
     class DeleteScheduledAuditRequest < Struct.new(
       :scheduled_audit_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5009,6 +5143,7 @@ module Aws::IoT
     class DeleteSecurityProfileRequest < Struct.new(
       :security_profile_name,
       :expected_version)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5027,6 +5162,7 @@ module Aws::IoT
     #
     class DeleteStreamRequest < Struct.new(
       :stream_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5051,6 +5187,7 @@ module Aws::IoT
     class DeleteThingGroupRequest < Struct.new(
       :thing_group_name,
       :expected_version)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5080,6 +5217,7 @@ module Aws::IoT
     class DeleteThingRequest < Struct.new(
       :thing_name,
       :expected_version)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5102,6 +5240,7 @@ module Aws::IoT
     #
     class DeleteThingTypeRequest < Struct.new(
       :thing_type_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5122,6 +5261,7 @@ module Aws::IoT
     #
     class DeleteTopicRuleDestinationRequest < Struct.new(
       :arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5142,6 +5282,7 @@ module Aws::IoT
     #
     class DeleteTopicRuleRequest < Struct.new(
       :rule_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5165,6 +5306,7 @@ module Aws::IoT
     class DeleteV2LoggingLevelRequest < Struct.new(
       :target_type,
       :target_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5183,6 +5325,7 @@ module Aws::IoT
     class Denied < Struct.new(
       :implicit_deny,
       :explicit_deny)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5209,6 +5352,7 @@ module Aws::IoT
     class DeprecateThingTypeRequest < Struct.new(
       :thing_type_name,
       :undo_deprecate)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5242,6 +5386,7 @@ module Aws::IoT
       :role_arn,
       :audit_notification_target_configurations,
       :audit_check_configurations)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5259,6 +5404,7 @@ module Aws::IoT
     #
     class DescribeAuditFindingRequest < Struct.new(
       :finding_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5268,6 +5414,7 @@ module Aws::IoT
     #
     class DescribeAuditFindingResponse < Struct.new(
       :finding)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5284,6 +5431,7 @@ module Aws::IoT
     #
     class DescribeAuditMitigationActionsTaskRequest < Struct.new(
       :task_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5327,6 +5475,7 @@ module Aws::IoT
       :target,
       :audit_check_to_actions_mapping,
       :actions_definition)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5343,6 +5492,7 @@ module Aws::IoT
     #
     class DescribeAuditTaskRequest < Struct.new(
       :task_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5380,6 +5530,7 @@ module Aws::IoT
       :task_statistics,
       :scheduled_audit_name,
       :audit_details)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5396,6 +5547,7 @@ module Aws::IoT
     #
     class DescribeAuthorizerRequest < Struct.new(
       :authorizer_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5405,6 +5557,7 @@ module Aws::IoT
     #
     class DescribeAuthorizerResponse < Struct.new(
       :authorizer_description)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5421,6 +5574,7 @@ module Aws::IoT
     #
     class DescribeBillingGroupRequest < Struct.new(
       :billing_group_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5455,6 +5609,7 @@ module Aws::IoT
       :version,
       :billing_group_properties,
       :billing_group_metadata)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5473,6 +5628,7 @@ module Aws::IoT
     #
     class DescribeCACertificateRequest < Struct.new(
       :certificate_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5489,6 +5645,7 @@ module Aws::IoT
     class DescribeCACertificateResponse < Struct.new(
       :certificate_description,
       :registration_config)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5508,6 +5665,7 @@ module Aws::IoT
     #
     class DescribeCertificateRequest < Struct.new(
       :certificate_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5519,6 +5677,7 @@ module Aws::IoT
     #
     class DescribeCertificateResponse < Struct.new(
       :certificate_description)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5532,6 +5691,7 @@ module Aws::IoT
     #
     class DescribeDefaultAuthorizerResponse < Struct.new(
       :authorizer_description)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5548,6 +5708,7 @@ module Aws::IoT
     #
     class DescribeDimensionRequest < Struct.new(
       :name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5584,6 +5745,7 @@ module Aws::IoT
       :string_values,
       :creation_date,
       :last_modified_date)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5600,6 +5762,7 @@ module Aws::IoT
     #
     class DescribeDomainConfigurationRequest < Struct.new(
       :domain_configuration_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5646,6 +5809,7 @@ module Aws::IoT
       :domain_configuration_status,
       :service_type,
       :domain_type)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5689,6 +5853,7 @@ module Aws::IoT
     #
     class DescribeEndpointRequest < Struct.new(
       :endpoint_type)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5701,6 +5866,7 @@ module Aws::IoT
     #
     class DescribeEndpointResponse < Struct.new(
       :endpoint_address)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5724,6 +5890,7 @@ module Aws::IoT
       :event_configurations,
       :creation_date,
       :last_modified_date)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5740,6 +5907,7 @@ module Aws::IoT
     #
     class DescribeIndexRequest < Struct.new(
       :index_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5772,6 +5940,7 @@ module Aws::IoT
       :index_name,
       :index_status,
       :schema)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5801,6 +5970,7 @@ module Aws::IoT
       :job_id,
       :thing_name,
       :execution_number)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5810,6 +5980,7 @@ module Aws::IoT
     #
     class DescribeJobExecutionResponse < Struct.new(
       :execution)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5826,6 +5997,7 @@ module Aws::IoT
     #
     class DescribeJobRequest < Struct.new(
       :job_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5840,6 +6012,7 @@ module Aws::IoT
     class DescribeJobResponse < Struct.new(
       :document_source,
       :job)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5856,6 +6029,7 @@ module Aws::IoT
     #
     class DescribeMitigationActionRequest < Struct.new(
       :action_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5902,6 +6076,7 @@ module Aws::IoT
       :action_params,
       :creation_date,
       :last_modified_date)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5918,6 +6093,7 @@ module Aws::IoT
     #
     class DescribeProvisioningTemplateRequest < Struct.new(
       :template_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5973,6 +6149,7 @@ module Aws::IoT
       :enabled,
       :provisioning_role_arn,
       :pre_provisioning_hook)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5995,6 +6172,7 @@ module Aws::IoT
     class DescribeProvisioningTemplateVersionRequest < Struct.new(
       :template_name,
       :version_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6021,6 +6199,7 @@ module Aws::IoT
       :creation_date,
       :template_body,
       :is_default_version)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6037,6 +6216,7 @@ module Aws::IoT
     #
     class DescribeRoleAliasRequest < Struct.new(
       :role_alias)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6046,6 +6226,7 @@ module Aws::IoT
     #
     class DescribeRoleAliasResponse < Struct.new(
       :role_alias_description)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6062,6 +6243,7 @@ module Aws::IoT
     #
     class DescribeScheduledAuditRequest < Struct.new(
       :scheduled_audit_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6107,6 +6289,7 @@ module Aws::IoT
       :target_check_names,
       :scheduled_audit_name,
       :scheduled_audit_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6123,6 +6306,7 @@ module Aws::IoT
     #
     class DescribeSecurityProfileRequest < Struct.new(
       :security_profile_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6187,6 +6371,7 @@ module Aws::IoT
       :version,
       :creation_date,
       :last_modified_date)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6203,6 +6388,7 @@ module Aws::IoT
     #
     class DescribeStreamRequest < Struct.new(
       :stream_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6212,6 +6398,7 @@ module Aws::IoT
     #
     class DescribeStreamResponse < Struct.new(
       :stream_info)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6228,6 +6415,7 @@ module Aws::IoT
     #
     class DescribeThingGroupRequest < Struct.new(
       :thing_group_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6282,6 +6470,7 @@ module Aws::IoT
       :query_string,
       :query_version,
       :status)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6298,6 +6487,7 @@ module Aws::IoT
     #
     class DescribeThingRegistrationTaskRequest < Struct.new(
       :task_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6363,6 +6553,7 @@ module Aws::IoT
       :success_count,
       :failure_count,
       :percentage_progress)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6381,6 +6572,7 @@ module Aws::IoT
     #
     class DescribeThingRequest < Struct.new(
       :thing_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6442,6 +6634,7 @@ module Aws::IoT
       :attributes,
       :version,
       :billing_group_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6460,6 +6653,7 @@ module Aws::IoT
     #
     class DescribeThingTypeRequest < Struct.new(
       :thing_type_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6496,6 +6690,7 @@ module Aws::IoT
       :thing_type_arn,
       :thing_type_properties,
       :thing_type_metadata)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6517,6 +6712,7 @@ module Aws::IoT
     #
     class Destination < Struct.new(
       :s3_destination)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6539,6 +6735,7 @@ module Aws::IoT
     class DetachPolicyRequest < Struct.new(
       :policy_name,
       :target)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6567,6 +6764,7 @@ module Aws::IoT
     class DetachPrincipalPolicyRequest < Struct.new(
       :policy_name,
       :principal)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6590,6 +6788,7 @@ module Aws::IoT
     class DetachSecurityProfileRequest < Struct.new(
       :security_profile_name,
       :security_profile_target_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6618,6 +6817,7 @@ module Aws::IoT
     class DetachThingPrincipalRequest < Struct.new(
       :thing_name,
       :principal)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6640,6 +6840,7 @@ module Aws::IoT
     #
     class DisableTopicRuleRequest < Struct.new(
       :rule_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6677,6 +6878,7 @@ module Aws::IoT
       :domain_configuration_name,
       :domain_configuration_arn,
       :service_type)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6768,6 +6970,7 @@ module Aws::IoT
       :range_key_value,
       :range_key_type,
       :payload_field)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6804,6 +7007,7 @@ module Aws::IoT
     class DynamoDBv2Action < Struct.new(
       :role_arn,
       :put_item)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6825,6 +7029,7 @@ module Aws::IoT
       :policy_name,
       :policy_arn,
       :policy_document)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6868,6 +7073,7 @@ module Aws::IoT
       :index,
       :type,
       :id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6893,6 +7099,7 @@ module Aws::IoT
     class EnableIoTLoggingParams < Struct.new(
       :role_arn_for_logging,
       :log_level)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6911,6 +7118,7 @@ module Aws::IoT
     #
     class EnableTopicRuleRequest < Struct.new(
       :rule_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6927,6 +7135,7 @@ module Aws::IoT
     class ErrorInfo < Struct.new(
       :code,
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6938,6 +7147,7 @@ module Aws::IoT
     #
     class ExplicitDeny < Struct.new(
       :policies)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6976,6 +7186,7 @@ module Aws::IoT
       :base_rate_per_minute,
       :increment_factor,
       :rate_increase_criteria)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -7000,6 +7211,7 @@ module Aws::IoT
     class Field < Struct.new(
       :name,
       :type)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -7031,6 +7243,7 @@ module Aws::IoT
     class FileLocation < Struct.new(
       :stream,
       :s3_location)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -7065,6 +7278,7 @@ module Aws::IoT
       :role_arn,
       :delivery_stream_name,
       :separator)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -7099,6 +7313,7 @@ module Aws::IoT
       :query_string,
       :aggregation_field,
       :query_version)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -7108,6 +7323,7 @@ module Aws::IoT
     #
     class GetCardinalityResponse < Struct.new(
       :cardinality)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -7136,6 +7352,7 @@ module Aws::IoT
       :principal,
       :cognito_identity_pool_id,
       :thing_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -7145,6 +7362,7 @@ module Aws::IoT
     #
     class GetEffectivePoliciesResponse < Struct.new(
       :effective_policies)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -7163,6 +7381,7 @@ module Aws::IoT
     class GetIndexingConfigurationResponse < Struct.new(
       :thing_indexing_configuration,
       :thing_group_indexing_configuration)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -7179,6 +7398,7 @@ module Aws::IoT
     #
     class GetJobDocumentRequest < Struct.new(
       :job_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -7188,6 +7408,7 @@ module Aws::IoT
     #
     class GetJobDocumentResponse < Struct.new(
       :document)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -7210,6 +7431,7 @@ module Aws::IoT
     class GetLoggingOptionsResponse < Struct.new(
       :role_arn,
       :log_level)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -7226,6 +7448,7 @@ module Aws::IoT
     #
     class GetOTAUpdateRequest < Struct.new(
       :ota_update_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -7235,6 +7458,7 @@ module Aws::IoT
     #
     class GetOTAUpdateResponse < Struct.new(
       :ota_update_info)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -7275,6 +7499,7 @@ module Aws::IoT
       :aggregation_field,
       :query_version,
       :percents)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -7284,6 +7509,7 @@ module Aws::IoT
     #
     class GetPercentilesResponse < Struct.new(
       :percentiles)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -7302,6 +7528,7 @@ module Aws::IoT
     #
     class GetPolicyRequest < Struct.new(
       :policy_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -7343,6 +7570,7 @@ module Aws::IoT
       :creation_date,
       :last_modified_date,
       :generation_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -7367,6 +7595,7 @@ module Aws::IoT
     class GetPolicyVersionRequest < Struct.new(
       :policy_name,
       :policy_version_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -7413,6 +7642,7 @@ module Aws::IoT
       :creation_date,
       :last_modified_date,
       :generation_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -7430,6 +7660,7 @@ module Aws::IoT
     #
     class GetRegistrationCodeResponse < Struct.new(
       :registration_code)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -7465,6 +7696,7 @@ module Aws::IoT
       :query_string,
       :aggregation_field,
       :query_version)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -7475,6 +7707,7 @@ module Aws::IoT
     #
     class GetStatisticsResponse < Struct.new(
       :statistics)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -7491,6 +7724,7 @@ module Aws::IoT
     #
     class GetTopicRuleDestinationRequest < Struct.new(
       :arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -7500,6 +7734,7 @@ module Aws::IoT
     #
     class GetTopicRuleDestinationResponse < Struct.new(
       :topic_rule_destination)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -7518,6 +7753,7 @@ module Aws::IoT
     #
     class GetTopicRuleRequest < Struct.new(
       :rule_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -7534,6 +7770,7 @@ module Aws::IoT
     class GetTopicRuleResponse < Struct.new(
       :rule_arn,
       :rule)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -7557,6 +7794,7 @@ module Aws::IoT
       :role_arn,
       :default_log_level,
       :disable_all_logs)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -7573,6 +7811,7 @@ module Aws::IoT
     class GroupNameAndArn < Struct.new(
       :group_name,
       :group_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -7629,6 +7868,7 @@ module Aws::IoT
       :confirmation_url,
       :headers,
       :auth)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -7653,6 +7893,7 @@ module Aws::IoT
     class HttpActionHeader < Struct.new(
       :key,
       :value)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -7680,6 +7921,7 @@ module Aws::IoT
     #
     class HttpAuthorization < Struct.new(
       :sigv4)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -7706,6 +7948,7 @@ module Aws::IoT
     class HttpContext < Struct.new(
       :headers,
       :query_string)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -7726,6 +7969,7 @@ module Aws::IoT
     #
     class HttpUrlDestinationConfiguration < Struct.new(
       :confirmation_url)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -7737,6 +7981,7 @@ module Aws::IoT
     #
     class HttpUrlDestinationProperties < Struct.new(
       :confirmation_url)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -7749,6 +7994,7 @@ module Aws::IoT
     #
     class HttpUrlDestinationSummary < Struct.new(
       :confirmation_url)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -7763,6 +8009,7 @@ module Aws::IoT
     #
     class ImplicitDeny < Struct.new(
       :policies)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -7774,6 +8021,7 @@ module Aws::IoT
     #
     class IndexNotReadyException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -7785,6 +8033,7 @@ module Aws::IoT
     #
     class InternalException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -7796,6 +8045,7 @@ module Aws::IoT
     #
     class InternalFailureException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -7806,6 +8056,7 @@ module Aws::IoT
     #
     class InvalidAggregationException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -7817,6 +8068,7 @@ module Aws::IoT
     #
     class InvalidQueryException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -7828,6 +8080,7 @@ module Aws::IoT
     #
     class InvalidRequestException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -7839,6 +8092,7 @@ module Aws::IoT
     #
     class InvalidResponseException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -7852,6 +8106,7 @@ module Aws::IoT
     #
     class InvalidStateTransitionException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -7886,6 +8141,7 @@ module Aws::IoT
       :channel_arn,
       :channel_name,
       :role_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -7919,6 +8175,7 @@ module Aws::IoT
       :input_name,
       :message_id,
       :role_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -7969,6 +8226,7 @@ module Aws::IoT
     class IotSiteWiseAction < Struct.new(
       :put_asset_property_value_entries,
       :role_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -8074,6 +8332,7 @@ module Aws::IoT
       :completed_at,
       :job_process_details,
       :timeout_config)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -8151,6 +8410,7 @@ module Aws::IoT
       :execution_number,
       :version_number,
       :approximate_seconds_before_timed_out)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -8162,6 +8422,7 @@ module Aws::IoT
     #
     class JobExecutionStatusDetails < Struct.new(
       :details_map)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -8199,6 +8460,7 @@ module Aws::IoT
       :started_at,
       :last_updated_at,
       :execution_number)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -8216,6 +8478,7 @@ module Aws::IoT
     class JobExecutionSummaryForJob < Struct.new(
       :thing_arn,
       :job_execution_summary)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -8232,6 +8495,7 @@ module Aws::IoT
     class JobExecutionSummaryForThing < Struct.new(
       :job_id,
       :job_execution_summary)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -8265,6 +8529,7 @@ module Aws::IoT
     class JobExecutionsRolloutConfig < Struct.new(
       :maximum_per_minute,
       :exponential_rate)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -8320,6 +8585,7 @@ module Aws::IoT
       :number_of_in_progress_things,
       :number_of_removed_things,
       :number_of_timed_out_things)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -8371,6 +8637,7 @@ module Aws::IoT
       :created_at,
       :last_updated_at,
       :completed_at)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -8387,6 +8654,7 @@ module Aws::IoT
     class KeyPair < Struct.new(
       :public_key,
       :private_key)
+      SENSITIVE = [:private_key]
       include Aws::Structure
     end
 
@@ -8418,6 +8686,7 @@ module Aws::IoT
       :role_arn,
       :stream_name,
       :partition_key)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -8436,6 +8705,7 @@ module Aws::IoT
     #
     class LambdaAction < Struct.new(
       :function_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -8447,6 +8717,7 @@ module Aws::IoT
     #
     class LimitExceededException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -8482,6 +8753,7 @@ module Aws::IoT
       :security_profile_name,
       :next_token,
       :max_results)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -8497,6 +8769,7 @@ module Aws::IoT
     class ListActiveViolationsResponse < Struct.new(
       :active_violations,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -8531,6 +8804,7 @@ module Aws::IoT
       :recursive,
       :marker,
       :page_size)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -8546,6 +8820,7 @@ module Aws::IoT
     class ListAttachedPoliciesResponse < Struct.new(
       :policies,
       :next_marker)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -8618,6 +8893,7 @@ module Aws::IoT
       :next_token,
       :start_time,
       :end_time)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -8633,6 +8909,7 @@ module Aws::IoT
     class ListAuditFindingsResponse < Struct.new(
       :findings,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -8677,6 +8954,7 @@ module Aws::IoT
       :finding_id,
       :max_results,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -8693,6 +8971,7 @@ module Aws::IoT
     class ListAuditMitigationActionsExecutionsResponse < Struct.new(
       :actions_executions,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -8751,6 +9030,7 @@ module Aws::IoT
       :next_token,
       :start_time,
       :end_time)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -8766,6 +9046,7 @@ module Aws::IoT
     class ListAuditMitigationActionsTasksResponse < Struct.new(
       :tasks,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -8818,6 +9099,7 @@ module Aws::IoT
       :task_status,
       :next_token,
       :max_results)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -8833,6 +9115,7 @@ module Aws::IoT
     class ListAuditTasksResponse < Struct.new(
       :tasks,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -8867,6 +9150,7 @@ module Aws::IoT
       :marker,
       :ascending_order,
       :status)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -8881,6 +9165,7 @@ module Aws::IoT
     class ListAuthorizersResponse < Struct.new(
       :authorizers,
       :next_marker)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -8910,6 +9195,7 @@ module Aws::IoT
       :next_token,
       :max_results,
       :name_prefix_filter)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -8925,6 +9211,7 @@ module Aws::IoT
     class ListBillingGroupsResponse < Struct.new(
       :billing_groups,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -8955,6 +9242,7 @@ module Aws::IoT
       :page_size,
       :marker,
       :ascending_order)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -8971,6 +9259,7 @@ module Aws::IoT
     class ListCACertificatesResponse < Struct.new(
       :certificates,
       :next_marker)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -9010,6 +9299,7 @@ module Aws::IoT
       :page_size,
       :marker,
       :ascending_order)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -9027,6 +9317,7 @@ module Aws::IoT
     class ListCertificatesByCAResponse < Struct.new(
       :certificates,
       :next_marker)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -9058,6 +9349,7 @@ module Aws::IoT
       :page_size,
       :marker,
       :ascending_order)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -9075,6 +9367,7 @@ module Aws::IoT
     class ListCertificatesResponse < Struct.new(
       :certificates,
       :next_marker)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -9097,6 +9390,7 @@ module Aws::IoT
     class ListDimensionsRequest < Struct.new(
       :next_token,
       :max_results)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -9113,6 +9407,7 @@ module Aws::IoT
     class ListDimensionsResponse < Struct.new(
       :dimension_names,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -9141,6 +9436,7 @@ module Aws::IoT
       :marker,
       :page_size,
       :service_type)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -9156,6 +9452,7 @@ module Aws::IoT
     class ListDomainConfigurationsResponse < Struct.new(
       :domain_configurations,
       :next_marker)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -9179,6 +9476,7 @@ module Aws::IoT
     class ListIndicesRequest < Struct.new(
       :next_token,
       :max_results)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -9194,6 +9492,7 @@ module Aws::IoT
     class ListIndicesResponse < Struct.new(
       :index_names,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -9228,6 +9527,7 @@ module Aws::IoT
       :status,
       :max_results,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -9243,6 +9543,7 @@ module Aws::IoT
     class ListJobExecutionsForJobResponse < Struct.new(
       :execution_summaries,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -9278,6 +9579,7 @@ module Aws::IoT
       :status,
       :max_results,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -9293,6 +9595,7 @@ module Aws::IoT
     class ListJobExecutionsForThingResponse < Struct.new(
       :execution_summaries,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -9347,6 +9650,7 @@ module Aws::IoT
       :next_token,
       :thing_group_name,
       :thing_group_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -9362,6 +9666,7 @@ module Aws::IoT
     class ListJobsResponse < Struct.new(
       :jobs,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -9392,6 +9697,7 @@ module Aws::IoT
       :action_type,
       :max_results,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -9406,6 +9712,7 @@ module Aws::IoT
     class ListMitigationActionsResponse < Struct.new(
       :action_identifiers,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -9434,6 +9741,7 @@ module Aws::IoT
       :max_results,
       :next_token,
       :ota_update_status)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -9448,6 +9756,7 @@ module Aws::IoT
     class ListOTAUpdatesResponse < Struct.new(
       :ota_updates,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -9479,6 +9788,7 @@ module Aws::IoT
       :page_size,
       :marker,
       :ascending_order)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -9495,6 +9805,7 @@ module Aws::IoT
     class ListOutgoingCertificatesResponse < Struct.new(
       :outgoing_certificates,
       :next_marker)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -9526,6 +9837,7 @@ module Aws::IoT
       :marker,
       :page_size,
       :ascending_order)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -9543,6 +9855,7 @@ module Aws::IoT
     class ListPoliciesResponse < Struct.new(
       :policies,
       :next_marker)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -9580,6 +9893,7 @@ module Aws::IoT
       :marker,
       :page_size,
       :ascending_order)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -9597,6 +9911,7 @@ module Aws::IoT
     class ListPolicyPrincipalsResponse < Struct.new(
       :principals,
       :next_marker)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -9615,6 +9930,7 @@ module Aws::IoT
     #
     class ListPolicyVersionsRequest < Struct.new(
       :policy_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -9626,6 +9942,7 @@ module Aws::IoT
     #
     class ListPolicyVersionsResponse < Struct.new(
       :policy_versions)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -9663,6 +9980,7 @@ module Aws::IoT
       :marker,
       :page_size,
       :ascending_order)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -9680,6 +9998,7 @@ module Aws::IoT
     class ListPrincipalPoliciesResponse < Struct.new(
       :policies,
       :next_marker)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -9710,6 +10029,7 @@ module Aws::IoT
       :next_token,
       :max_results,
       :principal)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -9727,6 +10047,7 @@ module Aws::IoT
     class ListPrincipalThingsResponse < Struct.new(
       :things,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -9755,6 +10076,7 @@ module Aws::IoT
       :template_name,
       :max_results,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -9769,6 +10091,7 @@ module Aws::IoT
     class ListProvisioningTemplateVersionsResponse < Struct.new(
       :versions,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -9791,6 +10114,7 @@ module Aws::IoT
     class ListProvisioningTemplatesRequest < Struct.new(
       :max_results,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -9805,6 +10129,7 @@ module Aws::IoT
     class ListProvisioningTemplatesResponse < Struct.new(
       :templates,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -9833,6 +10158,7 @@ module Aws::IoT
       :page_size,
       :marker,
       :ascending_order)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -9847,6 +10173,7 @@ module Aws::IoT
     class ListRoleAliasesResponse < Struct.new(
       :role_aliases,
       :next_marker)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -9870,6 +10197,7 @@ module Aws::IoT
     class ListScheduledAuditsRequest < Struct.new(
       :next_token,
       :max_results)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -9885,6 +10213,7 @@ module Aws::IoT
     class ListScheduledAuditsResponse < Struct.new(
       :scheduled_audits,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -9920,6 +10249,7 @@ module Aws::IoT
       :max_results,
       :recursive,
       :security_profile_target_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -9935,6 +10265,7 @@ module Aws::IoT
     class ListSecurityProfilesForTargetResponse < Struct.new(
       :security_profile_target_mappings,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -9964,6 +10295,7 @@ module Aws::IoT
       :next_token,
       :max_results,
       :dimension_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -9979,6 +10311,7 @@ module Aws::IoT
     class ListSecurityProfilesResponse < Struct.new(
       :security_profile_identifiers,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -10007,6 +10340,7 @@ module Aws::IoT
       :max_results,
       :next_token,
       :ascending_order)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -10021,6 +10355,7 @@ module Aws::IoT
     class ListStreamsResponse < Struct.new(
       :streams,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -10043,6 +10378,7 @@ module Aws::IoT
     class ListTagsForResourceRequest < Struct.new(
       :resource_arn,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -10058,6 +10394,7 @@ module Aws::IoT
     class ListTagsForResourceResponse < Struct.new(
       :tags,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -10086,6 +10423,7 @@ module Aws::IoT
       :policy_name,
       :marker,
       :page_size)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -10100,6 +10438,7 @@ module Aws::IoT
     class ListTargetsForPolicyResponse < Struct.new(
       :targets,
       :next_marker)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -10128,6 +10467,7 @@ module Aws::IoT
       :security_profile_name,
       :next_token,
       :max_results)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -10143,6 +10483,7 @@ module Aws::IoT
     class ListTargetsForSecurityProfileResponse < Struct.new(
       :security_profile_targets,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -10171,6 +10512,7 @@ module Aws::IoT
       :thing_name,
       :next_token,
       :max_results)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -10186,6 +10528,7 @@ module Aws::IoT
     class ListThingGroupsForThingResponse < Struct.new(
       :thing_groups,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -10228,6 +10571,7 @@ module Aws::IoT
       :parent_group,
       :name_prefix_filter,
       :recursive)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -10243,6 +10587,7 @@ module Aws::IoT
     class ListThingGroupsResponse < Struct.new(
       :thing_groups,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -10261,6 +10606,7 @@ module Aws::IoT
     #
     class ListThingPrincipalsRequest < Struct.new(
       :thing_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -10272,6 +10618,7 @@ module Aws::IoT
     #
     class ListThingPrincipalsResponse < Struct.new(
       :principals)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -10306,6 +10653,7 @@ module Aws::IoT
       :report_type,
       :next_token,
       :max_results)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -10326,6 +10674,7 @@ module Aws::IoT
       :resource_links,
       :report_type,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -10354,6 +10703,7 @@ module Aws::IoT
       :next_token,
       :max_results,
       :status)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -10369,6 +10719,7 @@ module Aws::IoT
     class ListThingRegistrationTasksResponse < Struct.new(
       :task_ids,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -10399,6 +10750,7 @@ module Aws::IoT
       :next_token,
       :max_results,
       :thing_type_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -10416,6 +10768,7 @@ module Aws::IoT
     class ListThingTypesResponse < Struct.new(
       :thing_types,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -10444,6 +10797,7 @@ module Aws::IoT
       :billing_group_name,
       :next_token,
       :max_results)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -10459,6 +10813,7 @@ module Aws::IoT
     class ListThingsInBillingGroupResponse < Struct.new(
       :things,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -10494,6 +10849,7 @@ module Aws::IoT
       :recursive,
       :next_token,
       :max_results)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -10509,6 +10865,7 @@ module Aws::IoT
     class ListThingsInThingGroupResponse < Struct.new(
       :things,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -10551,6 +10908,7 @@ module Aws::IoT
       :attribute_name,
       :attribute_value,
       :thing_type_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -10568,6 +10926,7 @@ module Aws::IoT
     class ListThingsResponse < Struct.new(
       :things,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -10590,6 +10949,7 @@ module Aws::IoT
     class ListTopicRuleDestinationsRequest < Struct.new(
       :max_results,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -10604,6 +10964,7 @@ module Aws::IoT
     class ListTopicRuleDestinationsResponse < Struct.new(
       :destination_summaries,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -10640,6 +11001,7 @@ module Aws::IoT
       :max_results,
       :next_token,
       :rule_disabled)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -10656,6 +11018,7 @@ module Aws::IoT
     class ListTopicRulesResponse < Struct.new(
       :rules,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -10686,6 +11049,7 @@ module Aws::IoT
       :target_type,
       :next_token,
       :max_results)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -10701,6 +11065,7 @@ module Aws::IoT
     class ListV2LoggingLevelsResponse < Struct.new(
       :log_target_configurations,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -10749,6 +11114,7 @@ module Aws::IoT
       :security_profile_name,
       :next_token,
       :max_results)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -10766,6 +11132,7 @@ module Aws::IoT
     class ListViolationEventsResponse < Struct.new(
       :violation_events,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -10790,6 +11157,7 @@ module Aws::IoT
     class LogTarget < Struct.new(
       :target_type,
       :target_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -10806,6 +11174,7 @@ module Aws::IoT
     class LogTargetConfiguration < Struct.new(
       :log_target,
       :log_level)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -10830,6 +11199,7 @@ module Aws::IoT
     class LoggingOptionsPayload < Struct.new(
       :role_arn,
       :log_level)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -10841,6 +11211,7 @@ module Aws::IoT
     #
     class MalformedPolicyException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -10871,6 +11242,7 @@ module Aws::IoT
     class MetricDimension < Struct.new(
       :dimension_name,
       :operator)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -10898,6 +11270,7 @@ module Aws::IoT
     class MetricToRetain < Struct.new(
       :metric,
       :metric_dimension)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -10931,6 +11304,7 @@ module Aws::IoT
       :count,
       :cidrs,
       :ports)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -10959,6 +11333,7 @@ module Aws::IoT
       :id,
       :role_arn,
       :action_params)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -10981,6 +11356,7 @@ module Aws::IoT
       :action_name,
       :action_arn,
       :creation_date)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -11053,6 +11429,7 @@ module Aws::IoT
       :replace_default_policy_version_params,
       :enable_io_t_logging_params,
       :publish_finding_to_sns_params)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -11083,6 +11460,7 @@ module Aws::IoT
       :username,
       :password,
       :client_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -11105,6 +11483,7 @@ module Aws::IoT
       :resource_type,
       :resource_identifier,
       :additional_info)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -11116,6 +11495,7 @@ module Aws::IoT
     #
     class NotConfiguredException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -11197,6 +11577,7 @@ module Aws::IoT
       :file_location,
       :code_signing,
       :attributes)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -11292,6 +11673,7 @@ module Aws::IoT
       :aws_iot_job_arn,
       :error_info,
       :additional_parameters)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -11313,6 +11695,7 @@ module Aws::IoT
       :ota_update_id,
       :ota_update_arn,
       :creation_date)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -11349,6 +11732,7 @@ module Aws::IoT
       :transfer_date,
       :transfer_message,
       :creation_date)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -11365,6 +11749,7 @@ module Aws::IoT
     class PercentPair < Struct.new(
       :percent,
       :value)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -11381,6 +11766,7 @@ module Aws::IoT
     class Policy < Struct.new(
       :policy_name,
       :policy_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -11402,6 +11788,7 @@ module Aws::IoT
       :version_id,
       :is_default_version,
       :create_date)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -11427,6 +11814,7 @@ module Aws::IoT
     class PolicyVersionIdentifier < Struct.new(
       :policy_name,
       :policy_version_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -11455,6 +11843,7 @@ module Aws::IoT
     class PresignedUrlConfig < Struct.new(
       :role_arn,
       :expires_in_sec)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -11483,6 +11872,7 @@ module Aws::IoT
     class ProvisioningHook < Struct.new(
       :payload_version,
       :target_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -11520,6 +11910,7 @@ module Aws::IoT
       :creation_date,
       :last_modified_date,
       :enabled)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -11542,6 +11933,7 @@ module Aws::IoT
       :version_id,
       :creation_date,
       :is_default_version)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -11562,6 +11954,7 @@ module Aws::IoT
     #
     class PublishFindingToSnsParams < Struct.new(
       :topic_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -11627,6 +12020,7 @@ module Aws::IoT
       :property_id,
       :property_alias,
       :property_values)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -11646,6 +12040,7 @@ module Aws::IoT
     #
     class PutItemInput < Struct.new(
       :table_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -11673,6 +12068,7 @@ module Aws::IoT
     class RateIncreaseCriteria < Struct.new(
       :number_of_notified_things,
       :number_of_succeeded_things)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -11742,6 +12138,7 @@ module Aws::IoT
       :allow_auto_registration,
       :registration_config,
       :tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -11758,6 +12155,7 @@ module Aws::IoT
     class RegisterCACertificateResponse < Struct.new(
       :certificate_arn,
       :certificate_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -11795,6 +12193,7 @@ module Aws::IoT
       :ca_certificate_pem,
       :set_as_active,
       :status)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -11811,6 +12210,7 @@ module Aws::IoT
     class RegisterCertificateResponse < Struct.new(
       :certificate_arn,
       :certificate_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -11833,6 +12233,7 @@ module Aws::IoT
     class RegisterCertificateWithoutCARequest < Struct.new(
       :certificate_pem,
       :status)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -11848,6 +12249,7 @@ module Aws::IoT
     class RegisterCertificateWithoutCAResponse < Struct.new(
       :certificate_arn,
       :certificate_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -11882,6 +12284,7 @@ module Aws::IoT
     class RegisterThingRequest < Struct.new(
       :template_body,
       :parameters)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -11896,6 +12299,7 @@ module Aws::IoT
     class RegisterThingResponse < Struct.new(
       :certificate_pem,
       :resource_arns)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -11907,6 +12311,7 @@ module Aws::IoT
     #
     class RegistrationCodeValidationException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -11931,6 +12336,7 @@ module Aws::IoT
     class RegistrationConfig < Struct.new(
       :template_body,
       :role_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -11956,6 +12362,7 @@ module Aws::IoT
     class RejectCertificateTransferRequest < Struct.new(
       :certificate_id,
       :reject_reason)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -11977,6 +12384,7 @@ module Aws::IoT
       :resource_type,
       :resource_identifier,
       :additional_info)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -12011,6 +12419,7 @@ module Aws::IoT
       :billing_group_arn,
       :thing_name,
       :thing_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -12047,6 +12456,7 @@ module Aws::IoT
       :thing_group_arn,
       :thing_name,
       :thing_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -12069,6 +12479,7 @@ module Aws::IoT
     #
     class ReplaceDefaultPolicyVersionParams < Struct.new(
       :template_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -12382,6 +12793,7 @@ module Aws::IoT
     class ReplaceTopicRuleRequest < Struct.new(
       :rule_name,
       :topic_rule_payload)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -12413,6 +12825,7 @@ module Aws::IoT
       :role_arn,
       :topic,
       :qos)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -12434,6 +12847,7 @@ module Aws::IoT
       :message,
       :resource_id,
       :resource_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -12497,6 +12911,7 @@ module Aws::IoT
       :account,
       :iam_role_arn,
       :role_alias_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -12508,6 +12923,7 @@ module Aws::IoT
     #
     class ResourceNotFoundException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -12519,6 +12935,7 @@ module Aws::IoT
     #
     class ResourceRegistrationFailureException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -12560,6 +12977,7 @@ module Aws::IoT
       :credential_duration_seconds,
       :creation_date,
       :last_modified_date)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -12602,6 +13020,7 @@ module Aws::IoT
       :bucket_name,
       :key,
       :canned_acl)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -12626,6 +13045,7 @@ module Aws::IoT
     class S3Destination < Struct.new(
       :bucket,
       :prefix)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -12656,6 +13076,7 @@ module Aws::IoT
       :bucket,
       :key,
       :version)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -12685,6 +13106,7 @@ module Aws::IoT
     class SalesforceAction < Struct.new(
       :token,
       :url)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -12720,6 +13142,7 @@ module Aws::IoT
       :frequency,
       :day_of_month,
       :day_of_week)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -12761,6 +13184,7 @@ module Aws::IoT
       :next_token,
       :max_results,
       :query_version)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -12781,6 +13205,7 @@ module Aws::IoT
       :next_token,
       :things,
       :thing_groups)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -12797,6 +13222,7 @@ module Aws::IoT
     class SecurityProfileIdentifier < Struct.new(
       :name,
       :arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -12809,6 +13235,7 @@ module Aws::IoT
     #
     class SecurityProfileTarget < Struct.new(
       :arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -12827,6 +13254,7 @@ module Aws::IoT
     class SecurityProfileTargetMapping < Struct.new(
       :security_profile_identifier,
       :target)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -12848,6 +13276,7 @@ module Aws::IoT
       :server_certificate_arn,
       :server_certificate_status,
       :server_certificate_status_detail)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -12859,6 +13288,7 @@ module Aws::IoT
     #
     class ServiceUnavailableException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -12875,6 +13305,7 @@ module Aws::IoT
     #
     class SetDefaultAuthorizerRequest < Struct.new(
       :authorizer_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -12889,6 +13320,7 @@ module Aws::IoT
     class SetDefaultAuthorizerResponse < Struct.new(
       :authorizer_name,
       :authorizer_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -12913,6 +13345,7 @@ module Aws::IoT
     class SetDefaultPolicyVersionRequest < Struct.new(
       :policy_name,
       :policy_version_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -12934,6 +13367,7 @@ module Aws::IoT
     #
     class SetLoggingOptionsRequest < Struct.new(
       :logging_options_payload)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -12959,6 +13393,7 @@ module Aws::IoT
     class SetV2LoggingLevelRequest < Struct.new(
       :log_target,
       :log_level)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -12987,6 +13422,7 @@ module Aws::IoT
       :role_arn,
       :default_log_level,
       :disable_all_logs)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -13017,6 +13453,7 @@ module Aws::IoT
       :signing_region,
       :service_name,
       :role_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -13047,6 +13484,7 @@ module Aws::IoT
       :certificate_arn,
       :platform,
       :certificate_path_on_device)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -13087,6 +13525,7 @@ module Aws::IoT
       :target_arn,
       :role_arn,
       :message_format)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -13098,6 +13537,7 @@ module Aws::IoT
     #
     class SqlParseException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -13128,6 +13568,7 @@ module Aws::IoT
       :role_arn,
       :queue_url,
       :use_base_64)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -13180,6 +13621,7 @@ module Aws::IoT
       :target,
       :audit_check_to_actions_mapping,
       :client_request_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -13190,6 +13632,7 @@ module Aws::IoT
     #
     class StartAuditMitigationActionsTaskResponse < Struct.new(
       :task_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -13211,6 +13654,7 @@ module Aws::IoT
     #
     class StartOnDemandAuditTaskRequest < Struct.new(
       :target_check_names)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -13220,6 +13664,7 @@ module Aws::IoT
     #
     class StartOnDemandAuditTaskResponse < Struct.new(
       :task_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -13259,6 +13704,7 @@ module Aws::IoT
       :signing_profile_parameter,
       :signing_profile_name,
       :destination)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -13295,6 +13741,7 @@ module Aws::IoT
       :input_file_bucket,
       :input_file_key,
       :role_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -13304,6 +13751,7 @@ module Aws::IoT
     #
     class StartThingRegistrationTaskResponse < Struct.new(
       :task_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -13332,6 +13780,7 @@ module Aws::IoT
     #
     class StatisticalThreshold < Struct.new(
       :statistic)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -13379,6 +13828,7 @@ module Aws::IoT
       :sum_of_squares,
       :variance,
       :std_deviation)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -13414,6 +13864,7 @@ module Aws::IoT
       :execution_name_prefix,
       :state_machine_name,
       :role_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -13430,6 +13881,7 @@ module Aws::IoT
     #
     class StopThingRegistrationTaskRequest < Struct.new(
       :task_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -13456,6 +13908,7 @@ module Aws::IoT
     class Stream < Struct.new(
       :stream_id,
       :file_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -13484,6 +13937,7 @@ module Aws::IoT
     class StreamFile < Struct.new(
       :file_id,
       :s3_location)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -13530,6 +13984,7 @@ module Aws::IoT
       :created_at,
       :last_updated_at,
       :role_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -13556,6 +14011,7 @@ module Aws::IoT
       :stream_arn,
       :stream_version,
       :description)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -13580,6 +14036,7 @@ module Aws::IoT
     class Tag < Struct.new(
       :key,
       :value)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -13607,6 +14064,7 @@ module Aws::IoT
     class TagResourceRequest < Struct.new(
       :resource_arn,
       :tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -13620,6 +14078,7 @@ module Aws::IoT
     #
     class TaskAlreadyExistsException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -13662,6 +14121,7 @@ module Aws::IoT
       :non_compliant_checks,
       :failed_checks,
       :canceled_checks)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -13699,6 +14159,7 @@ module Aws::IoT
       :succeeded_findings_count,
       :skipped_findings_count,
       :canceled_findings_count)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -13754,6 +14215,7 @@ module Aws::IoT
       :client_id,
       :policy_names_to_add,
       :policy_names_to_skip)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -13763,6 +14225,7 @@ module Aws::IoT
     #
     class TestAuthorizationResponse < Struct.new(
       :auth_results)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -13821,6 +14284,7 @@ module Aws::IoT
       :http_context,
       :mqtt_context,
       :tls_context)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -13851,6 +14315,7 @@ module Aws::IoT
       :policy_documents,
       :refresh_after_in_seconds,
       :disconnect_after_in_seconds)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -13884,6 +14349,7 @@ module Aws::IoT
       :thing_arn,
       :attributes,
       :version)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -13903,6 +14369,7 @@ module Aws::IoT
     class ThingConnectivity < Struct.new(
       :connected,
       :timestamp)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -13944,6 +14411,7 @@ module Aws::IoT
       :attributes,
       :shadow,
       :connectivity)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -13975,6 +14443,7 @@ module Aws::IoT
       :thing_group_description,
       :attributes,
       :parent_group_names)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -14020,6 +14489,7 @@ module Aws::IoT
       :thing_group_indexing_mode,
       :managed_fields,
       :custom_fields)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -14041,6 +14511,7 @@ module Aws::IoT
       :parent_group_name,
       :root_to_parent_thing_groups,
       :creation_date)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -14070,6 +14541,7 @@ module Aws::IoT
     class ThingGroupProperties < Struct.new(
       :thing_group_description,
       :attribute_payload)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -14135,6 +14607,7 @@ module Aws::IoT
       :thing_connectivity_indexing_mode,
       :managed_fields,
       :custom_fields)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -14165,6 +14638,7 @@ module Aws::IoT
       :thing_type_arn,
       :thing_type_properties,
       :thing_type_metadata)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -14190,6 +14664,7 @@ module Aws::IoT
       :deprecated,
       :deprecation_date,
       :creation_date)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -14216,6 +14691,7 @@ module Aws::IoT
     class ThingTypeProperties < Struct.new(
       :thing_type_description,
       :searchable_attributes)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -14227,6 +14703,7 @@ module Aws::IoT
     #
     class ThrottlingException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -14255,6 +14732,7 @@ module Aws::IoT
     #
     class TimeoutConfig < Struct.new(
       :in_progress_timeout_in_minutes)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -14273,6 +14751,7 @@ module Aws::IoT
     #
     class TlsContext < Struct.new(
       :server_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -14320,6 +14799,7 @@ module Aws::IoT
       :rule_disabled,
       :aws_iot_sql_version,
       :error_action)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -14376,6 +14856,7 @@ module Aws::IoT
       :status,
       :status_reason,
       :http_url_properties)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -14396,6 +14877,7 @@ module Aws::IoT
     #
     class TopicRuleDestinationConfiguration < Struct.new(
       :http_url_configuration)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -14451,6 +14933,7 @@ module Aws::IoT
       :status,
       :status_reason,
       :http_url_summary)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -14482,6 +14965,7 @@ module Aws::IoT
       :topic_pattern,
       :created_at,
       :rule_disabled)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -14817,6 +15301,7 @@ module Aws::IoT
       :rule_disabled,
       :aws_iot_sql_version,
       :error_action)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -14829,6 +15314,7 @@ module Aws::IoT
     #
     class TransferAlreadyCompletedException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -14860,6 +15346,7 @@ module Aws::IoT
       :certificate_id,
       :target_aws_account,
       :transfer_message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -14871,6 +15358,7 @@ module Aws::IoT
     #
     class TransferCertificateResponse < Struct.new(
       :transferred_certificate_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -14883,6 +15371,7 @@ module Aws::IoT
     #
     class TransferConflictException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -14914,6 +15403,7 @@ module Aws::IoT
       :transfer_date,
       :accept_date,
       :reject_date)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -14925,6 +15415,7 @@ module Aws::IoT
     #
     class UnauthorizedException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -14947,6 +15438,7 @@ module Aws::IoT
     class UntagResourceRequest < Struct.new(
       :resource_arn,
       :tag_keys)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -15002,6 +15494,7 @@ module Aws::IoT
       :role_arn,
       :audit_notification_target_configurations,
       :audit_check_configurations)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -15046,6 +15539,7 @@ module Aws::IoT
       :token_key_name,
       :token_signing_public_keys,
       :status)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -15060,6 +15554,7 @@ module Aws::IoT
     class UpdateAuthorizerResponse < Struct.new(
       :authorizer_name,
       :authorizer_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -15093,6 +15588,7 @@ module Aws::IoT
       :billing_group_name,
       :billing_group_properties,
       :expected_version)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -15102,6 +15598,7 @@ module Aws::IoT
     #
     class UpdateBillingGroupResponse < Struct.new(
       :version)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -15122,6 +15619,7 @@ module Aws::IoT
     #
     class UpdateCACertificateParams < Struct.new(
       :action)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -15171,6 +15669,7 @@ module Aws::IoT
       :new_auto_registration_status,
       :registration_config,
       :remove_auto_registration)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -15204,6 +15703,7 @@ module Aws::IoT
     class UpdateCertificateRequest < Struct.new(
       :certificate_id,
       :new_status)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -15224,6 +15724,7 @@ module Aws::IoT
     #
     class UpdateDeviceCertificateParams < Struct.new(
       :action)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -15250,6 +15751,7 @@ module Aws::IoT
     class UpdateDimensionRequest < Struct.new(
       :name,
       :string_values)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -15288,6 +15790,7 @@ module Aws::IoT
       :string_values,
       :creation_date,
       :last_modified_date)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -15325,6 +15828,7 @@ module Aws::IoT
       :authorizer_config,
       :domain_configuration_status,
       :remove_authorizer_config)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -15339,6 +15843,7 @@ module Aws::IoT
     class UpdateDomainConfigurationResponse < Struct.new(
       :domain_configuration_name,
       :domain_configuration_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -15402,6 +15907,7 @@ module Aws::IoT
       :index_name,
       :query_string,
       :query_version)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -15411,6 +15917,7 @@ module Aws::IoT
     #
     class UpdateDynamicThingGroupResponse < Struct.new(
       :version)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -15431,6 +15938,7 @@ module Aws::IoT
     #
     class UpdateEventConfigurationsRequest < Struct.new(
       :event_configurations)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -15484,6 +15992,7 @@ module Aws::IoT
     class UpdateIndexingConfigurationRequest < Struct.new(
       :thing_indexing_configuration,
       :thing_group_indexing_configuration)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -15560,6 +16069,7 @@ module Aws::IoT
       :job_executions_rollout_config,
       :abort_config,
       :timeout_config)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -15611,6 +16121,7 @@ module Aws::IoT
       :action_name,
       :role_arn,
       :action_params)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -15625,6 +16136,7 @@ module Aws::IoT
     class UpdateMitigationActionResponse < Struct.new(
       :action_arn,
       :action_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -15681,6 +16193,7 @@ module Aws::IoT
       :provisioning_role_arn,
       :pre_provisioning_hook,
       :remove_pre_provisioning_hook)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -15711,6 +16224,7 @@ module Aws::IoT
       :role_alias,
       :role_arn,
       :credential_duration_seconds)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -15725,6 +16239,7 @@ module Aws::IoT
     class UpdateRoleAliasResponse < Struct.new(
       :role_alias,
       :role_alias_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -15779,6 +16294,7 @@ module Aws::IoT
       :day_of_week,
       :target_check_names,
       :scheduled_audit_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -15788,6 +16304,7 @@ module Aws::IoT
     #
     class UpdateScheduledAuditResponse < Struct.new(
       :scheduled_audit_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -15911,6 +16428,7 @@ module Aws::IoT
       :delete_alert_targets,
       :delete_additional_metrics_to_retain,
       :expected_version)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -15973,6 +16491,7 @@ module Aws::IoT
       :version,
       :creation_date,
       :last_modified_date)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -16017,6 +16536,7 @@ module Aws::IoT
       :description,
       :files,
       :role_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -16041,6 +16561,7 @@ module Aws::IoT
       :stream_arn,
       :description,
       :stream_version)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -16078,6 +16599,7 @@ module Aws::IoT
       :thing_group_name,
       :thing_group_properties,
       :expected_version)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -16087,6 +16609,7 @@ module Aws::IoT
     #
     class UpdateThingGroupResponse < Struct.new(
       :version)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -16124,6 +16647,7 @@ module Aws::IoT
       :thing_groups_to_add,
       :thing_groups_to_remove,
       :override_dynamic_groups)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -16187,6 +16711,7 @@ module Aws::IoT
       :attribute_payload,
       :expected_version,
       :remove_thing_type)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -16242,6 +16767,7 @@ module Aws::IoT
     class UpdateTopicRuleDestinationRequest < Struct.new(
       :arn,
       :status)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -16284,6 +16810,7 @@ module Aws::IoT
     #
     class ValidateSecurityProfileBehaviorsRequest < Struct.new(
       :behaviors)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -16298,6 +16825,7 @@ module Aws::IoT
     class ValidateSecurityProfileBehaviorsResponse < Struct.new(
       :valid,
       :validation_errors)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -16309,6 +16837,7 @@ module Aws::IoT
     #
     class ValidationError < Struct.new(
       :error_message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -16322,6 +16851,7 @@ module Aws::IoT
     #
     class VersionConflictException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -16333,6 +16863,7 @@ module Aws::IoT
     #
     class VersionsLimitExceededException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -16375,6 +16906,7 @@ module Aws::IoT
       :metric_value,
       :violation_event_type,
       :violation_event_time)
+      SENSITIVE = []
       include Aws::Structure
     end
 

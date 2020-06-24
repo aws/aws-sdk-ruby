@@ -28,6 +28,7 @@ module Aws::QuickSight
     class AccessDeniedException < Struct.new(
       :message,
       :request_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -46,6 +47,7 @@ module Aws::QuickSight
     class ActiveIAMPolicyAssignment < Struct.new(
       :assignment_name,
       :policy_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -66,6 +68,7 @@ module Aws::QuickSight
     #
     class AdHocFilteringOption < Struct.new(
       :availability_status)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -86,6 +89,7 @@ module Aws::QuickSight
     #
     class AmazonElasticsearchParameters < Struct.new(
       :domain)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -106,6 +110,7 @@ module Aws::QuickSight
     #
     class AthenaParameters < Struct.new(
       :work_group)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -138,6 +143,7 @@ module Aws::QuickSight
       :host,
       :port,
       :database)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -170,6 +176,7 @@ module Aws::QuickSight
       :host,
       :port,
       :database)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -190,6 +197,7 @@ module Aws::QuickSight
     #
     class AwsIotAnalyticsParameters < Struct.new(
       :data_set_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -225,6 +233,7 @@ module Aws::QuickSight
       :column_name,
       :column_id,
       :expression)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -255,6 +264,7 @@ module Aws::QuickSight
       :aws_account_id,
       :data_set_id,
       :ingestion_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -281,6 +291,7 @@ module Aws::QuickSight
       :ingestion_id,
       :request_id,
       :status)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -315,6 +326,7 @@ module Aws::QuickSight
       :column_name,
       :new_column_type,
       :format)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -341,6 +353,7 @@ module Aws::QuickSight
     #
     class ColumnGroup < Struct.new(
       :geo_spatial_column_group)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -355,6 +368,7 @@ module Aws::QuickSight
     #
     class ColumnGroupColumnSchema < Struct.new(
       :name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -373,6 +387,7 @@ module Aws::QuickSight
     class ColumnGroupSchema < Struct.new(
       :name,
       :column_group_column_schema_list)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -396,6 +411,7 @@ module Aws::QuickSight
       :name,
       :data_type,
       :geographic_role)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -418,6 +434,7 @@ module Aws::QuickSight
     #
     class ColumnTag < Struct.new(
       :column_geographic_role)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -435,6 +452,7 @@ module Aws::QuickSight
     class ConcurrentUpdatingException < Struct.new(
       :message,
       :request_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -452,6 +470,7 @@ module Aws::QuickSight
     class ConflictException < Struct.new(
       :message,
       :request_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -479,6 +498,7 @@ module Aws::QuickSight
     #
     class CreateColumnsOperation < Struct.new(
       :columns)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -631,6 +651,7 @@ module Aws::QuickSight
       :tags,
       :version_description,
       :dashboard_publish_options)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -668,6 +689,7 @@ module Aws::QuickSight
       :creation_status,
       :status,
       :request_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -857,6 +879,7 @@ module Aws::QuickSight
       :permissions,
       :row_level_permission_data_set,
       :tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -896,6 +919,7 @@ module Aws::QuickSight
       :ingestion_id,
       :request_id,
       :status)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1083,6 +1107,7 @@ module Aws::QuickSight
       :vpc_connection_properties,
       :ssl_properties,
       :tags)
+      SENSITIVE = [:credentials]
       include Aws::Structure
     end
 
@@ -1115,6 +1140,7 @@ module Aws::QuickSight
       :creation_status,
       :request_id,
       :status)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1153,6 +1179,7 @@ module Aws::QuickSight
       :group_name,
       :aws_account_id,
       :namespace)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1174,6 +1201,7 @@ module Aws::QuickSight
       :group_member,
       :request_id,
       :status)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1214,6 +1242,7 @@ module Aws::QuickSight
       :description,
       :aws_account_id,
       :namespace)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1237,6 +1266,7 @@ module Aws::QuickSight
       :group,
       :request_id,
       :status)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1299,6 +1329,7 @@ module Aws::QuickSight
       :policy_arn,
       :identities,
       :namespace)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1352,6 +1383,7 @@ module Aws::QuickSight
       :identities,
       :request_id,
       :status)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1382,6 +1414,7 @@ module Aws::QuickSight
       :data_set_id,
       :ingestion_id,
       :aws_account_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1413,6 +1446,7 @@ module Aws::QuickSight
       :ingestion_status,
       :request_id,
       :status)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1452,6 +1486,7 @@ module Aws::QuickSight
       :template_id,
       :alias_name,
       :template_version_number)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1473,6 +1508,7 @@ module Aws::QuickSight
       :template_alias,
       :status,
       :request_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1561,6 +1597,7 @@ module Aws::QuickSight
       :source_entity,
       :tags,
       :version_description)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1598,6 +1635,7 @@ module Aws::QuickSight
       :creation_status,
       :status,
       :request_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1625,6 +1663,7 @@ module Aws::QuickSight
     class CredentialPair < Struct.new(
       :username,
       :password)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1668,6 +1707,7 @@ module Aws::QuickSight
       :name,
       :sql_query,
       :columns)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1711,6 +1751,7 @@ module Aws::QuickSight
       :created_time,
       :last_published_time,
       :last_updated_time)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1729,6 +1770,7 @@ module Aws::QuickSight
     class DashboardError < Struct.new(
       :type,
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1767,6 +1809,7 @@ module Aws::QuickSight
       :ad_hoc_filtering_option,
       :export_to_csv_option,
       :sheet_controls_option)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1803,6 +1846,7 @@ module Aws::QuickSight
       :operator,
       :name,
       :value)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1831,6 +1875,7 @@ module Aws::QuickSight
     #
     class DashboardSourceEntity < Struct.new(
       :source_template)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1862,6 +1907,7 @@ module Aws::QuickSight
     class DashboardSourceTemplate < Struct.new(
       :data_set_references,
       :arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1905,6 +1951,7 @@ module Aws::QuickSight
       :last_updated_time,
       :published_version_number,
       :last_published_time)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1954,6 +2001,7 @@ module Aws::QuickSight
       :source_entity_arn,
       :data_set_arns,
       :description)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1992,6 +2040,7 @@ module Aws::QuickSight
       :status,
       :source_entity_arn,
       :description)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2065,6 +2114,7 @@ module Aws::QuickSight
       :consumed_spice_capacity_in_bytes,
       :column_groups,
       :row_level_permission_data_set)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2088,6 +2138,7 @@ module Aws::QuickSight
       :placeholder,
       :data_set_schema,
       :column_group_schema_list)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2114,6 +2165,7 @@ module Aws::QuickSight
     class DataSetReference < Struct.new(
       :data_set_placeholder,
       :data_set_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2127,6 +2179,7 @@ module Aws::QuickSight
     #
     class DataSetSchema < Struct.new(
       :column_schema_list)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2170,6 +2223,7 @@ module Aws::QuickSight
       :last_updated_time,
       :import_mode,
       :row_level_permission_data_set)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2241,6 +2295,7 @@ module Aws::QuickSight
       :vpc_connection_properties,
       :ssl_properties,
       :error_info)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2264,6 +2319,7 @@ module Aws::QuickSight
     #
     class DataSourceCredentials < Struct.new(
       :credential_pair)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2282,6 +2338,7 @@ module Aws::QuickSight
     class DataSourceErrorInfo < Struct.new(
       :type,
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2477,6 +2534,7 @@ module Aws::QuickSight
       :sql_server_parameters,
       :teradata_parameters,
       :twitter_parameters)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2503,6 +2561,7 @@ module Aws::QuickSight
     class DateTimeParameter < Struct.new(
       :name,
       :values)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2529,6 +2588,7 @@ module Aws::QuickSight
     class DecimalParameter < Struct.new(
       :name,
       :values)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2561,6 +2621,7 @@ module Aws::QuickSight
       :aws_account_id,
       :dashboard_id,
       :version_number)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2588,6 +2649,7 @@ module Aws::QuickSight
       :arn,
       :dashboard_id,
       :request_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2613,6 +2675,7 @@ module Aws::QuickSight
     class DeleteDataSetRequest < Struct.new(
       :aws_account_id,
       :data_set_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2640,6 +2703,7 @@ module Aws::QuickSight
       :data_set_id,
       :request_id,
       :status)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2665,6 +2729,7 @@ module Aws::QuickSight
     class DeleteDataSourceRequest < Struct.new(
       :aws_account_id,
       :data_source_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2692,6 +2757,7 @@ module Aws::QuickSight
       :data_source_id,
       :request_id,
       :status)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2731,6 +2797,7 @@ module Aws::QuickSight
       :group_name,
       :aws_account_id,
       :namespace)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2747,6 +2814,7 @@ module Aws::QuickSight
     class DeleteGroupMembershipResponse < Struct.new(
       :request_id,
       :status)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2779,6 +2847,7 @@ module Aws::QuickSight
       :group_name,
       :aws_account_id,
       :namespace)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2795,6 +2864,7 @@ module Aws::QuickSight
     class DeleteGroupResponse < Struct.new(
       :request_id,
       :status)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2826,6 +2896,7 @@ module Aws::QuickSight
       :aws_account_id,
       :assignment_name,
       :namespace)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2847,6 +2918,7 @@ module Aws::QuickSight
       :assignment_name,
       :request_id,
       :status)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2880,6 +2952,7 @@ module Aws::QuickSight
       :aws_account_id,
       :template_id,
       :alias_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2911,6 +2984,7 @@ module Aws::QuickSight
       :alias_name,
       :arn,
       :request_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2944,6 +3018,7 @@ module Aws::QuickSight
       :aws_account_id,
       :template_id,
       :version_number)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2970,6 +3045,7 @@ module Aws::QuickSight
       :arn,
       :template_id,
       :status)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3002,6 +3078,7 @@ module Aws::QuickSight
       :principal_id,
       :aws_account_id,
       :namespace)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3018,6 +3095,7 @@ module Aws::QuickSight
     class DeleteUserByPrincipalIdResponse < Struct.new(
       :request_id,
       :status)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3050,6 +3128,7 @@ module Aws::QuickSight
       :user_name,
       :aws_account_id,
       :namespace)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3066,6 +3145,7 @@ module Aws::QuickSight
     class DeleteUserResponse < Struct.new(
       :request_id,
       :status)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3091,6 +3171,7 @@ module Aws::QuickSight
     class DescribeDashboardPermissionsRequest < Struct.new(
       :aws_account_id,
       :dashboard_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3122,6 +3203,7 @@ module Aws::QuickSight
       :permissions,
       :status,
       :request_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3160,6 +3242,7 @@ module Aws::QuickSight
       :dashboard_id,
       :version_number,
       :alias_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3181,6 +3264,7 @@ module Aws::QuickSight
       :dashboard,
       :status,
       :request_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3206,6 +3290,7 @@ module Aws::QuickSight
     class DescribeDataSetPermissionsRequest < Struct.new(
       :aws_account_id,
       :data_set_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3238,6 +3323,7 @@ module Aws::QuickSight
       :permissions,
       :request_id,
       :status)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3263,6 +3349,7 @@ module Aws::QuickSight
     class DescribeDataSetRequest < Struct.new(
       :aws_account_id,
       :data_set_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3284,6 +3371,7 @@ module Aws::QuickSight
       :data_set,
       :request_id,
       :status)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3309,6 +3397,7 @@ module Aws::QuickSight
     class DescribeDataSourcePermissionsRequest < Struct.new(
       :aws_account_id,
       :data_source_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3341,6 +3430,7 @@ module Aws::QuickSight
       :permissions,
       :request_id,
       :status)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3366,6 +3456,7 @@ module Aws::QuickSight
     class DescribeDataSourceRequest < Struct.new(
       :aws_account_id,
       :data_source_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3387,6 +3478,7 @@ module Aws::QuickSight
       :data_source,
       :request_id,
       :status)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3419,6 +3511,7 @@ module Aws::QuickSight
       :group_name,
       :aws_account_id,
       :namespace)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3440,6 +3533,7 @@ module Aws::QuickSight
       :group,
       :request_id,
       :status)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3471,6 +3565,7 @@ module Aws::QuickSight
       :aws_account_id,
       :assignment_name,
       :namespace)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3492,6 +3587,7 @@ module Aws::QuickSight
       :iam_policy_assignment,
       :request_id,
       :status)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3522,6 +3618,7 @@ module Aws::QuickSight
       :aws_account_id,
       :data_set_id,
       :ingestion_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3543,6 +3640,7 @@ module Aws::QuickSight
       :ingestion,
       :request_id,
       :status)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3578,6 +3676,7 @@ module Aws::QuickSight
       :aws_account_id,
       :template_id,
       :alias_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3599,6 +3698,7 @@ module Aws::QuickSight
       :template_alias,
       :status,
       :request_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3624,6 +3724,7 @@ module Aws::QuickSight
     class DescribeTemplatePermissionsRequest < Struct.new(
       :aws_account_id,
       :template_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3655,6 +3756,7 @@ module Aws::QuickSight
       :permissions,
       :request_id,
       :status)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3698,6 +3800,7 @@ module Aws::QuickSight
       :template_id,
       :version_number,
       :alias_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3714,6 +3817,7 @@ module Aws::QuickSight
     class DescribeTemplateResponse < Struct.new(
       :template,
       :status)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3746,6 +3850,7 @@ module Aws::QuickSight
       :user_name,
       :aws_account_id,
       :namespace)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3767,6 +3872,7 @@ module Aws::QuickSight
       :user,
       :request_id,
       :status)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3786,6 +3892,7 @@ module Aws::QuickSight
     class DomainNotWhitelistedException < Struct.new(
       :message,
       :request_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3804,6 +3911,7 @@ module Aws::QuickSight
     class ErrorInfo < Struct.new(
       :type,
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3824,6 +3932,7 @@ module Aws::QuickSight
     #
     class ExportToCSVOption < Struct.new(
       :availability_status)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3845,6 +3954,7 @@ module Aws::QuickSight
     #
     class FilterOperation < Struct.new(
       :condition_expression)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3877,6 +3987,7 @@ module Aws::QuickSight
       :name,
       :country_code,
       :columns)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3946,6 +4057,7 @@ module Aws::QuickSight
       :undo_redo_disabled,
       :reset_disabled,
       :user_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3970,6 +4082,7 @@ module Aws::QuickSight
       :embed_url,
       :status,
       :request_id)
+      SENSITIVE = [:embed_url]
       include Aws::Structure
     end
 
@@ -4001,6 +4114,7 @@ module Aws::QuickSight
       :group_name,
       :description,
       :principal_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4020,6 +4134,7 @@ module Aws::QuickSight
     class GroupMember < Struct.new(
       :arn,
       :member_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4058,6 +4173,7 @@ module Aws::QuickSight
       :policy_arn,
       :identities,
       :assignment_status)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4076,6 +4192,7 @@ module Aws::QuickSight
     class IAMPolicyAssignmentSummary < Struct.new(
       :assignment_name,
       :assignment_status)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4094,6 +4211,7 @@ module Aws::QuickSight
     class IdentityTypeNotSupportedException < Struct.new(
       :message,
       :request_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4157,6 +4275,7 @@ module Aws::QuickSight
       :ingestion_size_in_bytes,
       :request_source,
       :request_type)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4184,6 +4303,7 @@ module Aws::QuickSight
     class InputColumn < Struct.new(
       :name,
       :type)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4210,6 +4330,7 @@ module Aws::QuickSight
     class IntegerParameter < Struct.new(
       :name,
       :values)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4227,6 +4348,7 @@ module Aws::QuickSight
     class InternalFailureException < Struct.new(
       :message,
       :request_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4244,6 +4366,7 @@ module Aws::QuickSight
     class InvalidNextTokenException < Struct.new(
       :message,
       :request_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4261,6 +4384,7 @@ module Aws::QuickSight
     class InvalidParameterValueException < Struct.new(
       :message,
       :request_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4281,6 +4405,7 @@ module Aws::QuickSight
     #
     class JiraParameters < Struct.new(
       :site_base_url)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4319,6 +4444,7 @@ module Aws::QuickSight
       :right_operand,
       :type,
       :on_clause)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4341,6 +4467,7 @@ module Aws::QuickSight
       :message,
       :resource_type,
       :request_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4379,6 +4506,7 @@ module Aws::QuickSight
       :dashboard_id,
       :next_token,
       :max_results)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4407,6 +4535,7 @@ module Aws::QuickSight
       :next_token,
       :status,
       :request_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4439,6 +4568,7 @@ module Aws::QuickSight
       :aws_account_id,
       :next_token,
       :max_results)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4467,6 +4597,7 @@ module Aws::QuickSight
       :next_token,
       :status,
       :request_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4498,6 +4629,7 @@ module Aws::QuickSight
       :aws_account_id,
       :next_token,
       :max_results)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4525,6 +4657,7 @@ module Aws::QuickSight
       :next_token,
       :request_id,
       :status)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4556,6 +4689,7 @@ module Aws::QuickSight
       :aws_account_id,
       :next_token,
       :max_results)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4583,6 +4717,7 @@ module Aws::QuickSight
       :next_token,
       :request_id,
       :status)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4627,6 +4762,7 @@ module Aws::QuickSight
       :max_results,
       :aws_account_id,
       :namespace)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4653,6 +4789,7 @@ module Aws::QuickSight
       :next_token,
       :request_id,
       :status)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4691,6 +4828,7 @@ module Aws::QuickSight
       :next_token,
       :max_results,
       :namespace)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4717,6 +4855,7 @@ module Aws::QuickSight
       :next_token,
       :request_id,
       :status)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4760,6 +4899,7 @@ module Aws::QuickSight
       :next_token,
       :max_results,
       :namespace)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4787,6 +4927,7 @@ module Aws::QuickSight
       :request_id,
       :next_token,
       :status)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4831,6 +4972,7 @@ module Aws::QuickSight
       :namespace,
       :next_token,
       :max_results)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4858,6 +5000,7 @@ module Aws::QuickSight
       :next_token,
       :request_id,
       :status)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4895,6 +5038,7 @@ module Aws::QuickSight
       :next_token,
       :aws_account_id,
       :max_results)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4922,6 +5066,7 @@ module Aws::QuickSight
       :next_token,
       :request_id,
       :status)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4941,6 +5086,7 @@ module Aws::QuickSight
     #
     class ListTagsForResourceRequest < Struct.new(
       :resource_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4963,6 +5109,7 @@ module Aws::QuickSight
       :tags,
       :request_id,
       :status)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5001,6 +5148,7 @@ module Aws::QuickSight
       :template_id,
       :next_token,
       :max_results)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5028,6 +5176,7 @@ module Aws::QuickSight
       :status,
       :request_id,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5066,6 +5215,7 @@ module Aws::QuickSight
       :template_id,
       :next_token,
       :max_results)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5094,6 +5244,7 @@ module Aws::QuickSight
       :next_token,
       :status,
       :request_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5126,6 +5277,7 @@ module Aws::QuickSight
       :aws_account_id,
       :next_token,
       :max_results)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5153,6 +5305,7 @@ module Aws::QuickSight
       :next_token,
       :status,
       :request_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5197,6 +5350,7 @@ module Aws::QuickSight
       :namespace,
       :next_token,
       :max_results)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5223,6 +5377,7 @@ module Aws::QuickSight
       :next_token,
       :request_id,
       :status)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5261,6 +5416,7 @@ module Aws::QuickSight
       :next_token,
       :max_results,
       :namespace)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5287,6 +5443,7 @@ module Aws::QuickSight
       :next_token,
       :request_id,
       :status)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5366,6 +5523,7 @@ module Aws::QuickSight
       :alias,
       :data_transforms,
       :source)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5399,6 +5557,7 @@ module Aws::QuickSight
     class LogicalTableSource < Struct.new(
       :join_instruction,
       :physical_table_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5425,6 +5584,7 @@ module Aws::QuickSight
     class ManifestFileLocation < Struct.new(
       :bucket,
       :key)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5457,6 +5617,7 @@ module Aws::QuickSight
       :host,
       :port,
       :database)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5489,6 +5650,7 @@ module Aws::QuickSight
       :host,
       :port,
       :database)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5507,6 +5669,7 @@ module Aws::QuickSight
     class OutputColumn < Struct.new(
       :name,
       :type)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5565,6 +5728,7 @@ module Aws::QuickSight
       :integer_parameters,
       :decimal_parameters,
       :date_time_parameters)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5636,6 +5800,7 @@ module Aws::QuickSight
       :relational_table,
       :custom_sql,
       :s3_source)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5668,6 +5833,7 @@ module Aws::QuickSight
       :host,
       :port,
       :database)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5685,6 +5851,7 @@ module Aws::QuickSight
     class PreconditionNotMetException < Struct.new(
       :message,
       :request_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5717,6 +5884,7 @@ module Aws::QuickSight
       :host,
       :port,
       :catalog)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5738,6 +5906,7 @@ module Aws::QuickSight
     #
     class ProjectOperation < Struct.new(
       :projected_columns)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5757,6 +5926,7 @@ module Aws::QuickSight
     class QueueInfo < Struct.new(
       :waiting_on_ingestion,
       :queued_ingestion)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5776,6 +5946,7 @@ module Aws::QuickSight
     class QuickSightUserNotFoundException < Struct.new(
       :message,
       :request_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5802,6 +5973,7 @@ module Aws::QuickSight
     class RdsParameters < Struct.new(
       :instance_id,
       :database)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5843,6 +6015,7 @@ module Aws::QuickSight
       :port,
       :database,
       :cluster_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5939,6 +6112,7 @@ module Aws::QuickSight
       :aws_account_id,
       :namespace,
       :user_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5967,6 +6141,7 @@ module Aws::QuickSight
       :user_invitation_url,
       :request_id,
       :status)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6011,6 +6186,7 @@ module Aws::QuickSight
       :schema,
       :name,
       :input_columns)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6037,6 +6213,7 @@ module Aws::QuickSight
     class RenameColumnOperation < Struct.new(
       :column_name,
       :new_column_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6059,6 +6236,7 @@ module Aws::QuickSight
       :message,
       :resource_type,
       :request_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6081,6 +6259,7 @@ module Aws::QuickSight
       :message,
       :resource_type,
       :request_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6111,6 +6290,7 @@ module Aws::QuickSight
     class ResourcePermission < Struct.new(
       :principal,
       :actions)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6133,6 +6313,7 @@ module Aws::QuickSight
       :message,
       :resource_type,
       :request_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6151,6 +6332,7 @@ module Aws::QuickSight
     class RowInfo < Struct.new(
       :rows_ingested,
       :rows_dropped)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6177,6 +6359,7 @@ module Aws::QuickSight
     class RowLevelPermissionDataSet < Struct.new(
       :arn,
       :permission_policy)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6201,6 +6384,7 @@ module Aws::QuickSight
     #
     class S3Parameters < Struct.new(
       :manifest_file_location)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6244,6 +6428,7 @@ module Aws::QuickSight
       :data_source_arn,
       :upload_settings,
       :input_columns)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6291,6 +6476,7 @@ module Aws::QuickSight
       :filters,
       :next_token,
       :max_results)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6319,6 +6505,7 @@ module Aws::QuickSight
       :next_token,
       :status,
       :request_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6339,6 +6526,7 @@ module Aws::QuickSight
     #
     class ServiceNowParameters < Struct.new(
       :site_base_url)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6357,6 +6545,7 @@ module Aws::QuickSight
     class SessionLifetimeInMinutesInvalidException < Struct.new(
       :message,
       :request_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6377,6 +6566,7 @@ module Aws::QuickSight
     #
     class SheetControlsOption < Struct.new(
       :visibility_state)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6409,6 +6599,7 @@ module Aws::QuickSight
       :host,
       :database,
       :warehouse)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6435,6 +6626,7 @@ module Aws::QuickSight
     class SparkParameters < Struct.new(
       :host,
       :port)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6467,6 +6659,7 @@ module Aws::QuickSight
       :host,
       :port,
       :database)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6488,6 +6681,7 @@ module Aws::QuickSight
     #
     class SslProperties < Struct.new(
       :disable_ssl)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6514,6 +6708,7 @@ module Aws::QuickSight
     class StringParameter < Struct.new(
       :name,
       :values)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6541,6 +6736,7 @@ module Aws::QuickSight
     class Tag < Struct.new(
       :key,
       :value)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6576,6 +6772,7 @@ module Aws::QuickSight
     class TagColumnOperation < Struct.new(
       :column_name,
       :tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6606,6 +6803,7 @@ module Aws::QuickSight
     class TagResourceRequest < Struct.new(
       :resource_arn,
       :tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6622,6 +6820,7 @@ module Aws::QuickSight
     class TagResourceResponse < Struct.new(
       :request_id,
       :status)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6671,6 +6870,7 @@ module Aws::QuickSight
       :template_id,
       :last_updated_time,
       :created_time)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6694,6 +6894,7 @@ module Aws::QuickSight
       :alias_name,
       :arn,
       :template_version_number)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6713,6 +6914,7 @@ module Aws::QuickSight
     class TemplateError < Struct.new(
       :type,
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6745,6 +6947,7 @@ module Aws::QuickSight
     class TemplateSourceAnalysis < Struct.new(
       :arn,
       :data_set_references)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6781,6 +6984,7 @@ module Aws::QuickSight
     class TemplateSourceEntity < Struct.new(
       :source_analysis,
       :source_template)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6801,6 +7005,7 @@ module Aws::QuickSight
     #
     class TemplateSourceTemplate < Struct.new(
       :arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6841,6 +7046,7 @@ module Aws::QuickSight
       :latest_version_number,
       :created_time,
       :last_updated_time)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6887,6 +7093,7 @@ module Aws::QuickSight
       :data_set_configurations,
       :description,
       :source_entity_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6920,6 +7127,7 @@ module Aws::QuickSight
       :created_time,
       :status,
       :description)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6952,6 +7160,7 @@ module Aws::QuickSight
       :host,
       :port,
       :database)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6969,6 +7178,7 @@ module Aws::QuickSight
     class ThrottlingException < Struct.new(
       :message,
       :request_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -7049,6 +7259,7 @@ module Aws::QuickSight
       :rename_column_operation,
       :cast_column_type_operation,
       :tag_column_operation)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -7075,6 +7286,7 @@ module Aws::QuickSight
     class TwitterParameters < Struct.new(
       :query,
       :max_rows)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -7096,6 +7308,7 @@ module Aws::QuickSight
     class UnsupportedUserEditionException < Struct.new(
       :message,
       :request_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -7122,6 +7335,7 @@ module Aws::QuickSight
     class UntagResourceRequest < Struct.new(
       :resource_arn,
       :tag_keys)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -7138,6 +7352,7 @@ module Aws::QuickSight
     class UntagResourceResponse < Struct.new(
       :request_id,
       :status)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -7185,6 +7400,7 @@ module Aws::QuickSight
       :dashboard_id,
       :grant_permissions,
       :revoke_permissions)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -7216,6 +7432,7 @@ module Aws::QuickSight
       :permissions,
       :request_id,
       :status)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -7247,6 +7464,7 @@ module Aws::QuickSight
       :aws_account_id,
       :dashboard_id,
       :version_number)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -7273,6 +7491,7 @@ module Aws::QuickSight
       :dashboard_arn,
       :status,
       :request_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -7394,6 +7613,7 @@ module Aws::QuickSight
       :parameters,
       :version_description,
       :dashboard_publish_options)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -7430,6 +7650,7 @@ module Aws::QuickSight
       :creation_status,
       :status,
       :request_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -7477,6 +7698,7 @@ module Aws::QuickSight
       :data_set_id,
       :grant_permissions,
       :revoke_permissions)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -7504,6 +7726,7 @@ module Aws::QuickSight
       :data_set_id,
       :request_id,
       :status)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -7670,6 +7893,7 @@ module Aws::QuickSight
       :import_mode,
       :column_groups,
       :row_level_permission_data_set)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -7709,6 +7933,7 @@ module Aws::QuickSight
       :ingestion_id,
       :request_id,
       :status)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -7758,6 +7983,7 @@ module Aws::QuickSight
       :data_source_id,
       :grant_permissions,
       :revoke_permissions)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -7785,6 +8011,7 @@ module Aws::QuickSight
       :data_source_id,
       :request_id,
       :status)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -7939,6 +8166,7 @@ module Aws::QuickSight
       :credentials,
       :vpc_connection_properties,
       :ssl_properties)
+      SENSITIVE = [:credentials]
       include Aws::Structure
     end
 
@@ -7971,6 +8199,7 @@ module Aws::QuickSight
       :update_status,
       :request_id,
       :status)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -8009,6 +8238,7 @@ module Aws::QuickSight
       :description,
       :aws_account_id,
       :namespace)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -8030,6 +8260,7 @@ module Aws::QuickSight
       :group,
       :request_id,
       :status)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -8092,6 +8323,7 @@ module Aws::QuickSight
       :assignment_status,
       :policy_arn,
       :identities)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -8144,6 +8376,7 @@ module Aws::QuickSight
       :assignment_status,
       :request_id,
       :status)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -8185,6 +8418,7 @@ module Aws::QuickSight
       :template_id,
       :alias_name,
       :template_version_number)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -8206,6 +8440,7 @@ module Aws::QuickSight
       :template_alias,
       :status,
       :request_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -8252,6 +8487,7 @@ module Aws::QuickSight
       :template_id,
       :grant_permissions,
       :revoke_permissions)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -8283,6 +8519,7 @@ module Aws::QuickSight
       :permissions,
       :request_id,
       :status)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -8344,6 +8581,7 @@ module Aws::QuickSight
       :source_entity,
       :version_description,
       :name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -8381,6 +8619,7 @@ module Aws::QuickSight
       :creation_status,
       :status,
       :request_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -8434,6 +8673,7 @@ module Aws::QuickSight
       :namespace,
       :email,
       :role)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -8455,6 +8695,7 @@ module Aws::QuickSight
       :user,
       :request_id,
       :status)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -8500,6 +8741,7 @@ module Aws::QuickSight
       :contains_header,
       :text_qualifier,
       :delimiter)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -8561,6 +8803,7 @@ module Aws::QuickSight
       :identity_type,
       :active,
       :principal_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -8581,6 +8824,7 @@ module Aws::QuickSight
     #
     class VpcConnectionProperties < Struct.new(
       :vpc_connection_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 

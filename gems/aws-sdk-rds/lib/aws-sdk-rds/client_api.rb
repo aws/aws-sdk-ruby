@@ -3776,6 +3776,12 @@ module Aws::RDS
         o.input = Shapes::ShapeRef.new(shape: DescribeCertificatesMessage)
         o.output = Shapes::ShapeRef.new(shape: CertificateMessage)
         o.errors << Shapes::ShapeRef.new(shape: CertificateNotFoundFault)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_records",
+          tokens: {
+            "marker" => "marker"
+          }
+        )
       end)
 
       api.add_operation(:describe_custom_availability_zones, Seahorse::Model::Operation.new.tap do |o|
@@ -3801,6 +3807,12 @@ module Aws::RDS
         o.output = Shapes::ShapeRef.new(shape: DBClusterBacktrackMessage)
         o.errors << Shapes::ShapeRef.new(shape: DBClusterNotFoundFault)
         o.errors << Shapes::ShapeRef.new(shape: DBClusterBacktrackNotFoundFault)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_records",
+          tokens: {
+            "marker" => "marker"
+          }
+        )
       end)
 
       api.add_operation(:describe_db_cluster_endpoints, Seahorse::Model::Operation.new.tap do |o|
@@ -3810,6 +3822,12 @@ module Aws::RDS
         o.input = Shapes::ShapeRef.new(shape: DescribeDBClusterEndpointsMessage)
         o.output = Shapes::ShapeRef.new(shape: DBClusterEndpointMessage)
         o.errors << Shapes::ShapeRef.new(shape: DBClusterNotFoundFault)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_records",
+          tokens: {
+            "marker" => "marker"
+          }
+        )
       end)
 
       api.add_operation(:describe_db_cluster_parameter_groups, Seahorse::Model::Operation.new.tap do |o|
@@ -3819,6 +3837,12 @@ module Aws::RDS
         o.input = Shapes::ShapeRef.new(shape: DescribeDBClusterParameterGroupsMessage)
         o.output = Shapes::ShapeRef.new(shape: DBClusterParameterGroupsMessage)
         o.errors << Shapes::ShapeRef.new(shape: DBParameterGroupNotFoundFault)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_records",
+          tokens: {
+            "marker" => "marker"
+          }
+        )
       end)
 
       api.add_operation(:describe_db_cluster_parameters, Seahorse::Model::Operation.new.tap do |o|
@@ -3828,6 +3852,12 @@ module Aws::RDS
         o.input = Shapes::ShapeRef.new(shape: DescribeDBClusterParametersMessage)
         o.output = Shapes::ShapeRef.new(shape: DBClusterParameterGroupDetails)
         o.errors << Shapes::ShapeRef.new(shape: DBParameterGroupNotFoundFault)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_records",
+          tokens: {
+            "marker" => "marker"
+          }
+        )
       end)
 
       api.add_operation(:describe_db_cluster_snapshot_attributes, Seahorse::Model::Operation.new.tap do |o|
@@ -3846,6 +3876,12 @@ module Aws::RDS
         o.input = Shapes::ShapeRef.new(shape: DescribeDBClusterSnapshotsMessage)
         o.output = Shapes::ShapeRef.new(shape: DBClusterSnapshotMessage)
         o.errors << Shapes::ShapeRef.new(shape: DBClusterSnapshotNotFoundFault)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_records",
+          tokens: {
+            "marker" => "marker"
+          }
+        )
       end)
 
       api.add_operation(:describe_db_clusters, Seahorse::Model::Operation.new.tap do |o|
@@ -4210,6 +4246,12 @@ module Aws::RDS
         o.input = Shapes::ShapeRef.new(shape: DescribePendingMaintenanceActionsMessage)
         o.output = Shapes::ShapeRef.new(shape: PendingMaintenanceActionsMessage)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundFault)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_records",
+          tokens: {
+            "marker" => "marker"
+          }
+        )
       end)
 
       api.add_operation(:describe_reserved_db_instances, Seahorse::Model::Operation.new.tap do |o|
@@ -4248,6 +4290,12 @@ module Aws::RDS
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: DescribeSourceRegionsMessage)
         o.output = Shapes::ShapeRef.new(shape: SourceRegionMessage)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_records",
+          tokens: {
+            "marker" => "marker"
+          }
+        )
       end)
 
       api.add_operation(:describe_valid_db_instance_modifications, Seahorse::Model::Operation.new.tap do |o|

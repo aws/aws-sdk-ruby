@@ -21,6 +21,7 @@ module Aws::AugmentedAIRuntime
     #
     class ConflictException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -39,6 +40,7 @@ module Aws::AugmentedAIRuntime
     #
     class DeleteHumanLoopRequest < Struct.new(
       :human_loop_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -61,6 +63,7 @@ module Aws::AugmentedAIRuntime
     #
     class DescribeHumanLoopRequest < Struct.new(
       :human_loop_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -111,6 +114,7 @@ module Aws::AugmentedAIRuntime
       :human_loop_arn,
       :flow_definition_arn,
       :human_loop_output)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -136,6 +140,7 @@ module Aws::AugmentedAIRuntime
     #
     class HumanLoopDataAttributes < Struct.new(
       :content_classifiers)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -157,6 +162,7 @@ module Aws::AugmentedAIRuntime
     #
     class HumanLoopInput < Struct.new(
       :input_content)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -171,6 +177,7 @@ module Aws::AugmentedAIRuntime
     #
     class HumanLoopOutput < Struct.new(
       :output_s3_uri)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -206,6 +213,7 @@ module Aws::AugmentedAIRuntime
       :creation_time,
       :failure_reason,
       :flow_definition_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -219,6 +227,7 @@ module Aws::AugmentedAIRuntime
     #
     class InternalServerException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -273,6 +282,7 @@ module Aws::AugmentedAIRuntime
       :sort_order,
       :next_token,
       :max_results)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -289,6 +299,7 @@ module Aws::AugmentedAIRuntime
     class ListHumanLoopsResponse < Struct.new(
       :human_loop_summaries,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -301,6 +312,7 @@ module Aws::AugmentedAIRuntime
     #
     class ResourceNotFoundException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -314,6 +326,7 @@ module Aws::AugmentedAIRuntime
     #
     class ServiceQuotaExceededException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -357,6 +370,7 @@ module Aws::AugmentedAIRuntime
       :flow_definition_arn,
       :human_loop_input,
       :data_attributes)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -368,6 +382,7 @@ module Aws::AugmentedAIRuntime
     #
     class StartHumanLoopResponse < Struct.new(
       :human_loop_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -386,6 +401,7 @@ module Aws::AugmentedAIRuntime
     #
     class StopHumanLoopRequest < Struct.new(
       :human_loop_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -402,6 +418,7 @@ module Aws::AugmentedAIRuntime
     #
     class ThrottlingException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -414,6 +431,7 @@ module Aws::AugmentedAIRuntime
     #
     class ValidationException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 

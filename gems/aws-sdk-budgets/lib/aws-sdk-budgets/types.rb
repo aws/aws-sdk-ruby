@@ -19,6 +19,7 @@ module Aws::Budgets
     #
     class AccessDeniedException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -213,6 +214,7 @@ module Aws::Budgets
       :calculated_spend,
       :budget_type,
       :last_updated_time)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -256,6 +258,7 @@ module Aws::Budgets
       :cost_types,
       :time_unit,
       :budgeted_and_actual_amounts_list)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -278,6 +281,7 @@ module Aws::Budgets
       :budgeted_amount,
       :actual_amount,
       :time_period)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -316,6 +320,7 @@ module Aws::Budgets
     class CalculatedSpend < Struct.new(
       :actual_spend,
       :forecasted_spend)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -421,6 +426,7 @@ module Aws::Budgets
       :include_support,
       :include_discount,
       :use_amortized)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -516,6 +522,7 @@ module Aws::Budgets
       :account_id,
       :budget,
       :notifications_with_subscribers)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -571,6 +578,7 @@ module Aws::Budgets
       :budget_name,
       :notification,
       :subscribers)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -623,6 +631,7 @@ module Aws::Budgets
       :budget_name,
       :notification,
       :subscriber)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -638,6 +647,7 @@ module Aws::Budgets
     #
     class CreationLimitExceededException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -663,6 +673,7 @@ module Aws::Budgets
     class DeleteBudgetRequest < Struct.new(
       :account_id,
       :budget_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -704,6 +715,7 @@ module Aws::Budgets
       :account_id,
       :budget_name,
       :notification)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -754,6 +766,7 @@ module Aws::Budgets
       :budget_name,
       :notification,
       :subscriber)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -804,6 +817,7 @@ module Aws::Budgets
       :time_period,
       :max_results,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -824,6 +838,7 @@ module Aws::Budgets
     class DescribeBudgetPerformanceHistoryResponse < Struct.new(
       :budget_performance_history,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -849,6 +864,7 @@ module Aws::Budgets
     class DescribeBudgetRequest < Struct.new(
       :account_id,
       :budget_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -860,6 +876,7 @@ module Aws::Budgets
     #
     class DescribeBudgetResponse < Struct.new(
       :budget)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -893,6 +910,7 @@ module Aws::Budgets
       :account_id,
       :max_results,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -910,6 +928,7 @@ module Aws::Budgets
     class DescribeBudgetsResponse < Struct.new(
       :budgets,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -949,6 +968,7 @@ module Aws::Budgets
       :budget_name,
       :max_results,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -966,6 +986,7 @@ module Aws::Budgets
     class DescribeNotificationsForBudgetResponse < Struct.new(
       :notifications,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1017,6 +1038,7 @@ module Aws::Budgets
       :notification,
       :max_results,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1034,6 +1056,7 @@ module Aws::Budgets
     class DescribeSubscribersForNotificationResponse < Struct.new(
       :subscribers,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1046,6 +1069,7 @@ module Aws::Budgets
     #
     class DuplicateRecordException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1057,6 +1081,7 @@ module Aws::Budgets
     #
     class ExpiredNextTokenException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1069,6 +1094,7 @@ module Aws::Budgets
     #
     class InternalErrorException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1080,6 +1106,7 @@ module Aws::Budgets
     #
     class InvalidNextTokenException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1092,6 +1119,7 @@ module Aws::Budgets
     #
     class InvalidParameterException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1103,6 +1131,7 @@ module Aws::Budgets
     #
     class NotFoundException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1172,6 +1201,7 @@ module Aws::Budgets
       :threshold,
       :threshold_type,
       :notification_state)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1209,6 +1239,7 @@ module Aws::Budgets
     class NotificationWithSubscribers < Struct.new(
       :notification,
       :subscribers)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1242,6 +1273,7 @@ module Aws::Budgets
     class Spend < Struct.new(
       :amount,
       :unit)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1277,6 +1309,7 @@ module Aws::Budgets
     class Subscriber < Struct.new(
       :subscription_type,
       :address)
+      SENSITIVE = [:address]
       include Aws::Structure
     end
 
@@ -1318,6 +1351,7 @@ module Aws::Budgets
     class TimePeriod < Struct.new(
       :start,
       :end)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1388,6 +1422,7 @@ module Aws::Budgets
     class UpdateBudgetRequest < Struct.new(
       :account_id,
       :new_budget)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1441,6 +1476,7 @@ module Aws::Budgets
       :budget_name,
       :old_notification,
       :new_notification)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1502,6 +1538,7 @@ module Aws::Budgets
       :notification,
       :old_subscriber,
       :new_subscriber)
+      SENSITIVE = []
       include Aws::Structure
     end
 

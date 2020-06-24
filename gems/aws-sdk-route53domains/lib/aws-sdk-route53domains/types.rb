@@ -44,6 +44,7 @@ module Aws::Route53Domains
     class AcceptDomainTransferFromAnotherAwsAccountRequest < Struct.new(
       :domain_name,
       :password)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -63,6 +64,7 @@ module Aws::Route53Domains
     #
     class AcceptDomainTransferFromAnotherAwsAccountResponse < Struct.new(
       :operation_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -106,6 +108,7 @@ module Aws::Route53Domains
       :invoice_id,
       :bill_date,
       :price)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -128,6 +131,7 @@ module Aws::Route53Domains
     #
     class CancelDomainTransferToAnotherAwsAccountRequest < Struct.new(
       :domain_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -145,6 +149,7 @@ module Aws::Route53Domains
     #
     class CancelDomainTransferToAnotherAwsAccountResponse < Struct.new(
       :operation_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -198,6 +203,7 @@ module Aws::Route53Domains
     class CheckDomainAvailabilityRequest < Struct.new(
       :domain_name,
       :idn_lang_code)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -259,6 +265,7 @@ module Aws::Route53Domains
     #
     class CheckDomainAvailabilityResponse < Struct.new(
       :availability)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -308,6 +315,7 @@ module Aws::Route53Domains
     class CheckDomainTransferabilityRequest < Struct.new(
       :domain_name,
       :auth_code)
+      SENSITIVE = [:auth_code]
       include Aws::Structure
     end
 
@@ -323,6 +331,7 @@ module Aws::Route53Domains
     #
     class CheckDomainTransferabilityResponse < Struct.new(
       :transferability)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -453,6 +462,7 @@ module Aws::Route53Domains
       :email,
       :fax,
       :extra_params)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -479,6 +489,7 @@ module Aws::Route53Domains
     class DeleteTagsForDomainRequest < Struct.new(
       :domain_name,
       :tags_to_delete)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -502,6 +513,7 @@ module Aws::Route53Domains
     #
     class DisableDomainAutoRenewRequest < Struct.new(
       :domain_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -527,6 +539,7 @@ module Aws::Route53Domains
     #
     class DisableDomainTransferLockRequest < Struct.new(
       :domain_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -545,6 +558,7 @@ module Aws::Route53Domains
     #
     class DisableDomainTransferLockResponse < Struct.new(
       :operation_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -560,6 +574,7 @@ module Aws::Route53Domains
     #
     class DomainLimitExceeded < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -627,6 +642,7 @@ module Aws::Route53Domains
     class DomainSuggestion < Struct.new(
       :domain_name,
       :availability)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -658,6 +674,7 @@ module Aws::Route53Domains
       :auto_renew,
       :transfer_lock,
       :expiry)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -691,6 +708,7 @@ module Aws::Route53Domains
     #
     class DomainTransferability < Struct.new(
       :transferable)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -704,6 +722,7 @@ module Aws::Route53Domains
     #
     class DuplicateRequest < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -723,6 +742,7 @@ module Aws::Route53Domains
     #
     class EnableDomainAutoRenewRequest < Struct.new(
       :domain_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -747,6 +767,7 @@ module Aws::Route53Domains
     #
     class EnableDomainTransferLockRequest < Struct.new(
       :domain_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -761,6 +782,7 @@ module Aws::Route53Domains
     #
     class EnableDomainTransferLockResponse < Struct.new(
       :operation_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1138,6 +1160,7 @@ module Aws::Route53Domains
     class ExtraParam < Struct.new(
       :name,
       :value)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1157,6 +1180,7 @@ module Aws::Route53Domains
     #
     class GetContactReachabilityStatusRequest < Struct.new(
       :domain_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1188,6 +1212,7 @@ module Aws::Route53Domains
     class GetContactReachabilityStatusResponse < Struct.new(
       :domain_name,
       :status)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1209,6 +1234,7 @@ module Aws::Route53Domains
     #
     class GetDomainDetailRequest < Struct.new(
       :domain_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1370,6 +1396,7 @@ module Aws::Route53Domains
       :reseller,
       :dns_sec,
       :status_list)
+      SENSITIVE = [:admin_contact, :registrant_contact, :tech_contact]
       include Aws::Structure
     end
 
@@ -1430,6 +1457,7 @@ module Aws::Route53Domains
       :domain_name,
       :suggestion_count,
       :only_available)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1443,6 +1471,7 @@ module Aws::Route53Domains
     #
     class GetDomainSuggestionsResponse < Struct.new(
       :suggestions_list)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1469,6 +1498,7 @@ module Aws::Route53Domains
     #
     class GetOperationDetailRequest < Struct.new(
       :operation_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1507,6 +1537,7 @@ module Aws::Route53Domains
       :domain_name,
       :type,
       :submitted_date)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1527,6 +1558,7 @@ module Aws::Route53Domains
     #
     class InvalidInput < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1564,6 +1596,7 @@ module Aws::Route53Domains
     class ListDomainsRequest < Struct.new(
       :marker,
       :max_items)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1584,6 +1617,7 @@ module Aws::Route53Domains
     class ListDomainsResponse < Struct.new(
       :domains,
       :next_page_marker)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1627,6 +1661,7 @@ module Aws::Route53Domains
       :submitted_since,
       :marker,
       :max_items)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1647,6 +1682,7 @@ module Aws::Route53Domains
     class ListOperationsResponse < Struct.new(
       :operations,
       :next_page_marker)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1667,6 +1703,7 @@ module Aws::Route53Domains
     #
     class ListTagsForDomainRequest < Struct.new(
       :domain_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1680,6 +1717,7 @@ module Aws::Route53Domains
     #
     class ListTagsForDomainResponse < Struct.new(
       :tag_list)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1715,6 +1753,7 @@ module Aws::Route53Domains
     class Nameserver < Struct.new(
       :name,
       :glue_ips)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1730,6 +1769,7 @@ module Aws::Route53Domains
     #
     class OperationLimitExceeded < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1758,6 +1798,7 @@ module Aws::Route53Domains
       :status,
       :type,
       :submitted_date)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1968,6 +2009,7 @@ module Aws::Route53Domains
       :privacy_protect_admin_contact,
       :privacy_protect_registrant_contact,
       :privacy_protect_tech_contact)
+      SENSITIVE = [:admin_contact, :registrant_contact, :tech_contact]
       include Aws::Structure
     end
 
@@ -1986,6 +2028,7 @@ module Aws::Route53Domains
     #
     class RegisterDomainResponse < Struct.new(
       :operation_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2012,6 +2055,7 @@ module Aws::Route53Domains
     #
     class RejectDomainTransferFromAnotherAwsAccountRequest < Struct.new(
       :domain_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2029,6 +2073,7 @@ module Aws::Route53Domains
     #
     class RejectDomainTransferFromAnotherAwsAccountResponse < Struct.new(
       :operation_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2073,6 +2118,7 @@ module Aws::Route53Domains
       :domain_name,
       :duration_in_years,
       :current_expiry_year)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2089,6 +2135,7 @@ module Aws::Route53Domains
     #
     class RenewDomainResponse < Struct.new(
       :operation_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2108,6 +2155,7 @@ module Aws::Route53Domains
     #
     class ResendContactReachabilityEmailRequest < Struct.new(
       :domain_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2132,6 +2180,7 @@ module Aws::Route53Domains
       :domain_name,
       :email_address,
       :is_already_verified)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2155,6 +2204,7 @@ module Aws::Route53Domains
     #
     class RetrieveDomainAuthCodeRequest < Struct.new(
       :domain_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2168,6 +2218,7 @@ module Aws::Route53Domains
     #
     class RetrieveDomainAuthCodeResponse < Struct.new(
       :auth_code)
+      SENSITIVE = [:auth_code]
       include Aws::Structure
     end
 
@@ -2181,6 +2232,7 @@ module Aws::Route53Domains
     #
     class TLDRulesViolation < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2215,6 +2267,7 @@ module Aws::Route53Domains
     class Tag < Struct.new(
       :key,
       :value)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2416,6 +2469,7 @@ module Aws::Route53Domains
       :privacy_protect_admin_contact,
       :privacy_protect_registrant_contact,
       :privacy_protect_tech_contact)
+      SENSITIVE = [:auth_code, :admin_contact, :registrant_contact, :tech_contact]
       include Aws::Structure
     end
 
@@ -2434,6 +2488,7 @@ module Aws::Route53Domains
     #
     class TransferDomainResponse < Struct.new(
       :operation_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2463,6 +2518,7 @@ module Aws::Route53Domains
     class TransferDomainToAnotherAwsAccountRequest < Struct.new(
       :domain_name,
       :account_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2495,6 +2551,7 @@ module Aws::Route53Domains
     class TransferDomainToAnotherAwsAccountResponse < Struct.new(
       :operation_id,
       :password)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2508,6 +2565,7 @@ module Aws::Route53Domains
     #
     class UnsupportedTLD < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2563,6 +2621,7 @@ module Aws::Route53Domains
       :admin_privacy,
       :registrant_privacy,
       :tech_privacy)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2578,6 +2637,7 @@ module Aws::Route53Domains
     #
     class UpdateDomainContactPrivacyResponse < Struct.new(
       :operation_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2677,6 +2737,7 @@ module Aws::Route53Domains
       :admin_contact,
       :registrant_contact,
       :tech_contact)
+      SENSITIVE = [:admin_contact, :registrant_contact, :tech_contact]
       include Aws::Structure
     end
 
@@ -2695,6 +2756,7 @@ module Aws::Route53Domains
     #
     class UpdateDomainContactResponse < Struct.new(
       :operation_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2740,6 +2802,7 @@ module Aws::Route53Domains
       :domain_name,
       :fi_auth_key,
       :nameservers)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2758,6 +2821,7 @@ module Aws::Route53Domains
     #
     class UpdateDomainNameserversResponse < Struct.new(
       :operation_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2791,6 +2855,7 @@ module Aws::Route53Domains
     class UpdateTagsForDomainRequest < Struct.new(
       :domain_name,
       :tags_to_update)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2848,6 +2913,7 @@ module Aws::Route53Domains
       :end,
       :marker,
       :max_items)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2868,6 +2934,7 @@ module Aws::Route53Domains
     class ViewBillingResponse < Struct.new(
       :next_page_marker,
       :billing_records)
+      SENSITIVE = []
       include Aws::Structure
     end
 

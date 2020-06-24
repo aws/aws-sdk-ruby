@@ -1,7 +1,5 @@
 # frozen_string_literal: true
 
-require 'open3'
-
 module Aws
 
   # A credential provider that executes a given process and attempts
@@ -36,7 +34,8 @@ module Aws
     private
     def credentials_from_process(proc_invocation)
       begin
-        raw_out, process_status = Open3.capture2(proc_invocation)
+        raw_out = `#{proc_invocation}`
+        process_status = $?
       rescue Errno::ENOENT
         raise Errors::InvalidProcessCredentialsPayload.new("Could not find process #{proc_invocation}")
       end

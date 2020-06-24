@@ -74,6 +74,7 @@ module Aws::WorkMail
       :not_user_ids,
       :date_created,
       :date_modified)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -104,6 +105,7 @@ module Aws::WorkMail
       :organization_id,
       :resource_id,
       :entity_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -138,6 +140,7 @@ module Aws::WorkMail
       :organization_id,
       :group_id,
       :member_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -178,6 +181,7 @@ module Aws::WorkMail
       :auto_accept_requests,
       :auto_decline_recurring_requests,
       :auto_decline_conflicting_requests)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -208,6 +212,7 @@ module Aws::WorkMail
       :organization_id,
       :entity_id,
       :alias)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -236,6 +241,7 @@ module Aws::WorkMail
     class CreateGroupRequest < Struct.new(
       :organization_id,
       :name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -247,6 +253,7 @@ module Aws::WorkMail
     #
     class CreateGroupResponse < Struct.new(
       :group_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -279,6 +286,7 @@ module Aws::WorkMail
       :organization_id,
       :name,
       :type)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -290,6 +298,7 @@ module Aws::WorkMail
     #
     class CreateResourceResponse < Struct.new(
       :resource_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -327,6 +336,7 @@ module Aws::WorkMail
       :name,
       :display_name,
       :password)
+      SENSITIVE = [:password]
       include Aws::Structure
     end
 
@@ -338,6 +348,7 @@ module Aws::WorkMail
     #
     class CreateUserResponse < Struct.new(
       :user_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -358,6 +369,7 @@ module Aws::WorkMail
     class Delegate < Struct.new(
       :id,
       :type)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -382,6 +394,7 @@ module Aws::WorkMail
     class DeleteAccessControlRuleRequest < Struct.new(
       :organization_id,
       :name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -419,6 +432,7 @@ module Aws::WorkMail
       :organization_id,
       :entity_id,
       :alias)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -447,6 +461,7 @@ module Aws::WorkMail
     class DeleteGroupRequest < Struct.new(
       :organization_id,
       :group_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -483,6 +498,7 @@ module Aws::WorkMail
       :organization_id,
       :entity_id,
       :grantee_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -512,6 +528,7 @@ module Aws::WorkMail
     class DeleteResourceRequest < Struct.new(
       :organization_id,
       :resource_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -540,6 +557,7 @@ module Aws::WorkMail
     class DeleteRetentionPolicyRequest < Struct.new(
       :organization_id,
       :id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -568,6 +586,7 @@ module Aws::WorkMail
     class DeleteUserRequest < Struct.new(
       :organization_id,
       :user_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -597,6 +616,7 @@ module Aws::WorkMail
     class DeregisterFromWorkMailRequest < Struct.new(
       :organization_id,
       :entity_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -625,6 +645,7 @@ module Aws::WorkMail
     class DescribeGroupRequest < Struct.new(
       :organization_id,
       :group_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -664,6 +685,7 @@ module Aws::WorkMail
       :state,
       :enabled_date,
       :disabled_date)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -682,6 +704,7 @@ module Aws::WorkMail
     #
     class DescribeOrganizationRequest < Struct.new(
       :organization_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -736,6 +759,7 @@ module Aws::WorkMail
       :completed_date,
       :error_message,
       :arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -761,6 +785,7 @@ module Aws::WorkMail
     class DescribeResourceRequest < Struct.new(
       :organization_id,
       :resource_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -810,6 +835,7 @@ module Aws::WorkMail
       :state,
       :enabled_date,
       :disabled_date)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -834,6 +860,7 @@ module Aws::WorkMail
     class DescribeUserRequest < Struct.new(
       :organization_id,
       :user_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -889,6 +916,7 @@ module Aws::WorkMail
       :user_role,
       :enabled_date,
       :disabled_date)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -902,6 +930,7 @@ module Aws::WorkMail
     #
     class DirectoryServiceAuthenticationFailedException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -915,6 +944,7 @@ module Aws::WorkMail
     #
     class DirectoryUnavailableException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -947,6 +977,7 @@ module Aws::WorkMail
       :organization_id,
       :resource_id,
       :entity_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -981,6 +1012,7 @@ module Aws::WorkMail
       :organization_id,
       :group_id,
       :member_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -998,6 +1030,7 @@ module Aws::WorkMail
     #
     class EmailAddressInUseException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1011,6 +1044,7 @@ module Aws::WorkMail
     #
     class EntityAlreadyRegisteredException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1024,6 +1058,7 @@ module Aws::WorkMail
     #
     class EntityNotFoundException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1037,6 +1072,7 @@ module Aws::WorkMail
     #
     class EntityStateException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1072,6 +1108,7 @@ module Aws::WorkMail
       :name,
       :action,
       :period)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1110,6 +1147,7 @@ module Aws::WorkMail
       :ip_address,
       :action,
       :user_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1126,6 +1164,7 @@ module Aws::WorkMail
     class GetAccessControlEffectResponse < Struct.new(
       :effect,
       :matched_rules)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1144,6 +1183,7 @@ module Aws::WorkMail
     #
     class GetDefaultRetentionPolicyRequest < Struct.new(
       :organization_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1170,6 +1210,7 @@ module Aws::WorkMail
       :name,
       :description,
       :folder_configurations)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1196,6 +1237,7 @@ module Aws::WorkMail
     class GetMailboxDetailsRequest < Struct.new(
       :organization_id,
       :user_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1212,6 +1254,7 @@ module Aws::WorkMail
     class GetMailboxDetailsResponse < Struct.new(
       :mailbox_quota,
       :mailbox_size)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1252,6 +1295,7 @@ module Aws::WorkMail
       :state,
       :enabled_date,
       :disabled_date)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1266,6 +1310,7 @@ module Aws::WorkMail
     #
     class InvalidConfigurationException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1279,6 +1324,7 @@ module Aws::WorkMail
     #
     class InvalidParameterException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1292,6 +1338,7 @@ module Aws::WorkMail
     #
     class InvalidPasswordException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1304,6 +1351,7 @@ module Aws::WorkMail
     #
     class LimitExceededException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1322,6 +1370,7 @@ module Aws::WorkMail
     #
     class ListAccessControlRulesRequest < Struct.new(
       :organization_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1333,6 +1382,7 @@ module Aws::WorkMail
     #
     class ListAccessControlRulesResponse < Struct.new(
       :rules)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1370,6 +1420,7 @@ module Aws::WorkMail
       :entity_id,
       :next_token,
       :max_results)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1387,6 +1438,7 @@ module Aws::WorkMail
     class ListAliasesResponse < Struct.new(
       :aliases,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1425,6 +1477,7 @@ module Aws::WorkMail
       :group_id,
       :next_token,
       :max_results)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1442,6 +1495,7 @@ module Aws::WorkMail
     class ListGroupMembersResponse < Struct.new(
       :members,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1473,6 +1527,7 @@ module Aws::WorkMail
       :organization_id,
       :next_token,
       :max_results)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1490,6 +1545,7 @@ module Aws::WorkMail
     class ListGroupsResponse < Struct.new(
       :groups,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1529,6 +1585,7 @@ module Aws::WorkMail
       :entity_id,
       :next_token,
       :max_results)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1546,6 +1603,7 @@ module Aws::WorkMail
     class ListMailboxPermissionsResponse < Struct.new(
       :permissions,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1571,6 +1629,7 @@ module Aws::WorkMail
     class ListOrganizationsRequest < Struct.new(
       :next_token,
       :max_results)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1589,6 +1648,7 @@ module Aws::WorkMail
     class ListOrganizationsResponse < Struct.new(
       :organization_summaries,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1627,6 +1687,7 @@ module Aws::WorkMail
       :resource_id,
       :next_token,
       :max_results)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1645,6 +1706,7 @@ module Aws::WorkMail
     class ListResourceDelegatesResponse < Struct.new(
       :delegates,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1676,6 +1738,7 @@ module Aws::WorkMail
       :organization_id,
       :next_token,
       :max_results)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1694,6 +1757,7 @@ module Aws::WorkMail
     class ListResourcesResponse < Struct.new(
       :resources,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1712,6 +1776,7 @@ module Aws::WorkMail
     #
     class ListTagsForResourceRequest < Struct.new(
       :resource_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1723,6 +1788,7 @@ module Aws::WorkMail
     #
     class ListTagsForResourceResponse < Struct.new(
       :tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1754,6 +1820,7 @@ module Aws::WorkMail
       :organization_id,
       :next_token,
       :max_results)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1771,6 +1838,7 @@ module Aws::WorkMail
     class ListUsersResponse < Struct.new(
       :users,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1784,6 +1852,7 @@ module Aws::WorkMail
     #
     class MailDomainNotFoundException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1797,6 +1866,7 @@ module Aws::WorkMail
     #
     class MailDomainStateException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1837,6 +1907,7 @@ module Aws::WorkMail
       :state,
       :enabled_date,
       :disabled_date)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1849,6 +1920,7 @@ module Aws::WorkMail
     #
     class NameAvailabilityException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1862,6 +1934,7 @@ module Aws::WorkMail
     #
     class OrganizationNotFoundException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1875,6 +1948,7 @@ module Aws::WorkMail
     #
     class OrganizationStateException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1906,6 +1980,7 @@ module Aws::WorkMail
       :alias,
       :error_message,
       :state)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1937,6 +2012,7 @@ module Aws::WorkMail
       :grantee_id,
       :grantee_type,
       :permission_values)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2013,6 +2089,7 @@ module Aws::WorkMail
       :user_ids,
       :not_user_ids,
       :organization_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2062,6 +2139,7 @@ module Aws::WorkMail
       :entity_id,
       :grantee_id,
       :permission_values)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2114,6 +2192,7 @@ module Aws::WorkMail
       :name,
       :description,
       :folder_configurations)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2149,6 +2228,7 @@ module Aws::WorkMail
       :organization_id,
       :entity_id,
       :email)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2165,6 +2245,7 @@ module Aws::WorkMail
     #
     class ReservedNameException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2196,6 +2277,7 @@ module Aws::WorkMail
       :organization_id,
       :user_id,
       :password)
+      SENSITIVE = [:password]
       include Aws::Structure
     end
 
@@ -2246,6 +2328,7 @@ module Aws::WorkMail
       :state,
       :enabled_date,
       :disabled_date)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2258,6 +2341,7 @@ module Aws::WorkMail
     #
     class ResourceNotFoundException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2284,6 +2368,7 @@ module Aws::WorkMail
     class Tag < Struct.new(
       :key,
       :value)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2313,6 +2398,7 @@ module Aws::WorkMail
     class TagResourceRequest < Struct.new(
       :resource_arn,
       :tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2329,6 +2415,7 @@ module Aws::WorkMail
     #
     class TooManyTagsException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2341,6 +2428,7 @@ module Aws::WorkMail
     #
     class UnsupportedOperationException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2365,6 +2453,7 @@ module Aws::WorkMail
     class UntagResourceRequest < Struct.new(
       :resource_arn,
       :tag_keys)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2400,6 +2489,7 @@ module Aws::WorkMail
       :organization_id,
       :user_id,
       :mailbox_quota)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2435,6 +2525,7 @@ module Aws::WorkMail
       :organization_id,
       :entity_id,
       :email)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2480,6 +2571,7 @@ module Aws::WorkMail
       :resource_id,
       :name,
       :booking_options)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2534,6 +2626,7 @@ module Aws::WorkMail
       :user_role,
       :enabled_date,
       :disabled_date)
+      SENSITIVE = []
       include Aws::Structure
     end
 

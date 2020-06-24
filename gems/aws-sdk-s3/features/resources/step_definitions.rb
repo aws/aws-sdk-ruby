@@ -120,11 +120,25 @@ Given(/^I have an encryption client$/) do
   })
 end
 
+Given(/^I have a V2 encryption client$/) do
+  @cse = Aws::S3::EncryptionV2::Client.new(
+   client: @s3.client,
+   encryption_key: Base64.decode64("w1WLio3agRWRTSJK/Ouh8NHoqRQ6fn5WbSXDTHjXMSo=")
+  )
+end
+
 Given(/^I have an encryption client configured to use KMS$/) do
   @cse = Aws::S3::Encryption::Client.new({
     client: @s3.client,
     kms_key_id: @kms_key_id,
   })
+end
+
+Given(/^I have a V2 encryption client configured to use KMS$/) do
+  @cse = Aws::S3::EncryptionV2::Client.new(
+   client: @s3.client,
+   kms_key_id: @kms_key_id
+  )
 end
 
 Given(/^I have an encryption client configured for :instruction_file$/) do
@@ -135,6 +149,14 @@ Given(/^I have an encryption client configured for :instruction_file$/) do
   })
 end
 
+Given(/^I have a V2 encryption client configured for :instruction_file$/) do
+  @cse = Aws::S3::EncryptionV2::Client.new(
+   client: @s3.client,
+   encryption_key: Base64.decode64("w1WLio3agRWRTSJK/Ouh8NHoqRQ6fn5WbSXDTHjXMSo="),
+   envelope_location: :instruction_file
+  )
+end
+
 When(/^I perform an encrypted PUT of the value "(.*?)"$/) do |value|
   @key = 'encrypted'
   @plain_text = value
@@ -143,6 +165,14 @@ end
 
 When(/^I GET the object with a non\-encryption client$/) do
   @cipher_text = @s3.client.get_object(bucket: @bucket_name, key: @key).body.read
+end
+
+When(/^I GET the object with a V2 encryption client$/) do
+  cse_v2 = Aws::S3::EncryptionV2::Client.new(
+    client: @s3.client,
+    encryption_key: Base64.decode64("w1WLio3agRWRTSJK/Ouh8NHoqRQ6fn5WbSXDTHjXMSo=")
+  )
+  @cipher_text = cse_v2.get_object(bucket: @bucket_name, key: @key).body.read
 end
 
 Then(/^the object data should be encrypted$/) do
@@ -186,6 +216,12 @@ Given(/^I have an encryption client configured to read a Java encrypted object$/
     profile: @profile,
     kms_key_id: @kms_key_id,
   )
+end
+Given(/^I have a V2 encryption client configured to read a Java encrypted object$/) do
+  @cse = Aws::S3::EncryptionV2::Client.new(
+    profile: @profile,
+    kms_key_id: @kms_key_id,
+    )
 end
 
 Then(/^I should be able to multipart copy the object to a different bucket$/) do

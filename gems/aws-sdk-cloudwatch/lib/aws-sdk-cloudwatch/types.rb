@@ -45,6 +45,7 @@ module Aws::CloudWatch
       :history_item_type,
       :history_summary,
       :history_data)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -89,6 +90,7 @@ module Aws::CloudWatch
       :stat,
       :configuration,
       :state_value)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -135,6 +137,7 @@ module Aws::CloudWatch
     class AnomalyDetectorConfiguration < Struct.new(
       :excluded_time_ranges,
       :metric_timezone)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -215,6 +218,7 @@ module Aws::CloudWatch
       :state_reason_data,
       :state_updated_timestamp,
       :state_value)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -251,6 +255,7 @@ module Aws::CloudWatch
       :dashboard_arn,
       :last_modified,
       :size)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -267,6 +272,7 @@ module Aws::CloudWatch
     class DashboardInvalidInputError < Struct.new(
       :message,
       :dashboard_validation_messages)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -279,6 +285,7 @@ module Aws::CloudWatch
     #
     class DashboardNotFoundError < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -297,6 +304,7 @@ module Aws::CloudWatch
     class DashboardValidationMessage < Struct.new(
       :data_path,
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -347,6 +355,7 @@ module Aws::CloudWatch
       :maximum,
       :unit,
       :extended_statistics)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -365,6 +374,7 @@ module Aws::CloudWatch
     #
     class DeleteAlarmsInput < Struct.new(
       :alarm_names)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -408,6 +418,7 @@ module Aws::CloudWatch
       :metric_name,
       :dimensions,
       :stat)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -430,6 +441,7 @@ module Aws::CloudWatch
     #
     class DeleteDashboardsInput < Struct.new(
       :dashboard_names)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -457,6 +469,7 @@ module Aws::CloudWatch
     #
     class DeleteInsightRulesInput < Struct.new(
       :rule_names)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -469,6 +482,7 @@ module Aws::CloudWatch
     #
     class DeleteInsightRulesOutput < Struct.new(
       :failures)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -535,6 +549,7 @@ module Aws::CloudWatch
       :max_records,
       :next_token,
       :scan_by)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -552,6 +567,7 @@ module Aws::CloudWatch
     class DescribeAlarmHistoryOutput < Struct.new(
       :alarm_history_items,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -615,6 +631,7 @@ module Aws::CloudWatch
       :dimensions,
       :period,
       :unit)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -626,6 +643,7 @@ module Aws::CloudWatch
     #
     class DescribeAlarmsForMetricOutput < Struct.new(
       :metric_alarms)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -738,6 +756,7 @@ module Aws::CloudWatch
       :action_prefix,
       :max_records,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -761,6 +780,7 @@ module Aws::CloudWatch
       :composite_alarms,
       :metric_alarms,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -820,6 +840,7 @@ module Aws::CloudWatch
       :namespace,
       :metric_name,
       :dimensions)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -837,6 +858,7 @@ module Aws::CloudWatch
     class DescribeAnomalyDetectorsOutput < Struct.new(
       :anomaly_detectors,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -862,6 +884,7 @@ module Aws::CloudWatch
     class DescribeInsightRulesInput < Struct.new(
       :next_token,
       :max_results)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -878,6 +901,7 @@ module Aws::CloudWatch
     class DescribeInsightRulesOutput < Struct.new(
       :next_token,
       :insight_rules)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -904,6 +928,7 @@ module Aws::CloudWatch
     class Dimension < Struct.new(
       :name,
       :value)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -930,6 +955,7 @@ module Aws::CloudWatch
     class DimensionFilter < Struct.new(
       :name,
       :value)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -948,6 +974,7 @@ module Aws::CloudWatch
     #
     class DisableAlarmActionsInput < Struct.new(
       :alarm_names)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -971,6 +998,7 @@ module Aws::CloudWatch
     #
     class DisableInsightRulesInput < Struct.new(
       :rule_names)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -983,6 +1011,7 @@ module Aws::CloudWatch
     #
     class DisableInsightRulesOutput < Struct.new(
       :failures)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1001,6 +1030,7 @@ module Aws::CloudWatch
     #
     class EnableAlarmActionsInput < Struct.new(
       :alarm_names)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1024,6 +1054,7 @@ module Aws::CloudWatch
     #
     class EnableInsightRulesInput < Struct.new(
       :rule_names)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1036,6 +1067,7 @@ module Aws::CloudWatch
     #
     class EnableInsightRulesOutput < Struct.new(
       :failures)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1054,6 +1086,7 @@ module Aws::CloudWatch
     #
     class GetDashboardInput < Struct.new(
       :dashboard_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1082,6 +1115,7 @@ module Aws::CloudWatch
       :dashboard_arn,
       :dashboard_body,
       :dashboard_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1172,6 +1206,7 @@ module Aws::CloudWatch
       :max_contributor_count,
       :metrics,
       :order_by)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1217,6 +1252,7 @@ module Aws::CloudWatch
       :approximate_unique_count,
       :contributors,
       :metric_datapoints)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1339,6 +1375,7 @@ module Aws::CloudWatch
       :next_token,
       :scan_by,
       :max_datapoints)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1370,6 +1407,7 @@ module Aws::CloudWatch
       :metric_data_results,
       :next_token,
       :messages)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1519,6 +1557,7 @@ module Aws::CloudWatch
       :statistics,
       :extended_statistics,
       :unit)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1535,6 +1574,7 @@ module Aws::CloudWatch
     class GetMetricStatisticsOutput < Struct.new(
       :label,
       :datapoints)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1603,6 +1643,7 @@ module Aws::CloudWatch
     class GetMetricWidgetImageInput < Struct.new(
       :metric_widget,
       :output_format)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1614,6 +1655,7 @@ module Aws::CloudWatch
     #
     class GetMetricWidgetImageOutput < Struct.new(
       :metric_widget_image)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1653,6 +1695,7 @@ module Aws::CloudWatch
       :state,
       :schema,
       :definition)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1691,6 +1734,7 @@ module Aws::CloudWatch
       :keys,
       :approximate_aggregate_value,
       :datapoints)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1718,6 +1762,7 @@ module Aws::CloudWatch
     class InsightRuleContributorDatapoint < Struct.new(
       :timestamp,
       :approximate_value)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1802,6 +1847,7 @@ module Aws::CloudWatch
       :sum,
       :minimum,
       :maximum)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1815,6 +1861,7 @@ module Aws::CloudWatch
     #
     class InternalServiceFault < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1827,6 +1874,7 @@ module Aws::CloudWatch
     #
     class InvalidFormatFault < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1839,6 +1887,7 @@ module Aws::CloudWatch
     #
     class InvalidNextToken < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1851,6 +1900,7 @@ module Aws::CloudWatch
     #
     class InvalidParameterCombinationException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1863,6 +1913,7 @@ module Aws::CloudWatch
     #
     class InvalidParameterValueException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1881,6 +1932,7 @@ module Aws::CloudWatch
     #
     class LimitExceededFault < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1909,6 +1961,7 @@ module Aws::CloudWatch
     class ListDashboardsInput < Struct.new(
       :dashboard_name_prefix,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1926,6 +1979,7 @@ module Aws::CloudWatch
     class ListDashboardsOutput < Struct.new(
       :dashboard_entries,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1968,6 +2022,7 @@ module Aws::CloudWatch
       :metric_name,
       :dimensions,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1985,6 +2040,7 @@ module Aws::CloudWatch
     class ListMetricsOutput < Struct.new(
       :metrics,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2018,6 +2074,7 @@ module Aws::CloudWatch
     #
     class ListTagsForResourceInput < Struct.new(
       :resource_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2030,6 +2087,7 @@ module Aws::CloudWatch
     #
     class ListTagsForResourceOutput < Struct.new(
       :tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2049,6 +2107,7 @@ module Aws::CloudWatch
     class MessageData < Struct.new(
       :code,
       :value)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2086,6 +2145,7 @@ module Aws::CloudWatch
       :namespace,
       :metric_name,
       :dimensions)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2254,6 +2314,7 @@ module Aws::CloudWatch
       :evaluate_low_sample_count_percentile,
       :metrics,
       :threshold_metric_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2393,6 +2454,7 @@ module Aws::CloudWatch
       :label,
       :return_data,
       :period)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2445,6 +2507,7 @@ module Aws::CloudWatch
       :values,
       :status_code,
       :messages)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2564,6 +2627,7 @@ module Aws::CloudWatch
       :counts,
       :unit,
       :storage_resolution)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2643,6 +2707,7 @@ module Aws::CloudWatch
       :period,
       :stat,
       :unit)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2655,6 +2720,7 @@ module Aws::CloudWatch
     #
     class MissingRequiredParameterException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2685,6 +2751,7 @@ module Aws::CloudWatch
       :exception_type,
       :failure_code,
       :failure_description)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2749,6 +2816,7 @@ module Aws::CloudWatch
       :dimensions,
       :stat,
       :configuration)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2893,6 +2961,7 @@ module Aws::CloudWatch
       :insufficient_data_actions,
       :ok_actions,
       :tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2930,6 +2999,7 @@ module Aws::CloudWatch
     class PutDashboardInput < Struct.new(
       :dashboard_name,
       :dashboard_body)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2949,6 +3019,7 @@ module Aws::CloudWatch
     #
     class PutDashboardOutput < Struct.new(
       :dashboard_validation_messages)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3013,6 +3084,7 @@ module Aws::CloudWatch
       :rule_state,
       :rule_definition,
       :tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3385,6 +3457,7 @@ module Aws::CloudWatch
       :metrics,
       :tags,
       :threshold_metric_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3435,6 +3508,7 @@ module Aws::CloudWatch
     class PutMetricDataInput < Struct.new(
       :namespace,
       :metric_data)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3464,6 +3538,7 @@ module Aws::CloudWatch
     class Range < Struct.new(
       :start_time,
       :end_time)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3476,6 +3551,7 @@ module Aws::CloudWatch
     #
     class ResourceNotFound < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3492,6 +3568,7 @@ module Aws::CloudWatch
     class ResourceNotFoundException < Struct.new(
       :resource_type,
       :resource_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3536,6 +3613,7 @@ module Aws::CloudWatch
       :state_value,
       :state_reason,
       :state_reason_data)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3574,6 +3652,7 @@ module Aws::CloudWatch
       :sum,
       :minimum,
       :maximum)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3601,6 +3680,7 @@ module Aws::CloudWatch
     class Tag < Struct.new(
       :key,
       :value)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3645,6 +3725,7 @@ module Aws::CloudWatch
     class TagResourceInput < Struct.new(
       :resource_arn,
       :tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3688,6 +3769,7 @@ module Aws::CloudWatch
     class UntagResourceInput < Struct.new(
       :resource_arn,
       :tag_keys)
+      SENSITIVE = []
       include Aws::Structure
     end
 

@@ -109,6 +109,7 @@ module Aws::MediaConvert
       :sample_rate,
       :specification,
       :vbr_quality)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -182,6 +183,7 @@ module Aws::MediaConvert
       :lfe_filter,
       :metadata_control,
       :sample_rate)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -204,6 +206,7 @@ module Aws::MediaConvert
     #
     class AccelerationSettings < Struct.new(
       :mode)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -240,6 +243,7 @@ module Aws::MediaConvert
       :bit_depth,
       :channels,
       :sample_rate)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -279,6 +283,7 @@ module Aws::MediaConvert
       :convert_608_to_708,
       :source_ancillary_channel_number,
       :terminate_captions)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -301,6 +306,7 @@ module Aws::MediaConvert
     #
     class AssociateCertificateRequest < Struct.new(
       :arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -496,6 +502,7 @@ module Aws::MediaConvert
       :opus_settings,
       :vorbis_settings,
       :wav_settings)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -737,6 +744,7 @@ module Aws::MediaConvert
       :language_code_control,
       :remix_settings,
       :stream_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -807,6 +815,7 @@ module Aws::MediaConvert
       :loudness_logging,
       :peak_calculation,
       :target_lkfs)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -914,6 +923,7 @@ module Aws::MediaConvert
       :remix_settings,
       :selector_type,
       :tracks)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -938,6 +948,7 @@ module Aws::MediaConvert
     #
     class AudioSelectorGroup < Struct.new(
       :audio_selector_names)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -982,6 +993,7 @@ module Aws::MediaConvert
     class Av1QvbrSettings < Struct.new(
       :qvbr_quality_level,
       :qvbr_quality_level_fine_tune)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1113,6 +1125,7 @@ module Aws::MediaConvert
       :rate_control_mode,
       :slices,
       :spatial_adaptive_quantization)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1134,6 +1147,7 @@ module Aws::MediaConvert
     #
     class AvailBlanking < Struct.new(
       :avail_blanking_image)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1144,6 +1158,7 @@ module Aws::MediaConvert
     #
     class BadRequestException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1318,6 +1333,7 @@ module Aws::MediaConvert
       :teletext_spacing,
       :x_position,
       :y_position)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1338,6 +1354,7 @@ module Aws::MediaConvert
     #
     class CancelJobRequest < Struct.new(
       :id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1465,6 +1482,7 @@ module Aws::MediaConvert
       :destination_settings,
       :language_code,
       :language_description)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1580,6 +1598,7 @@ module Aws::MediaConvert
       :destination_settings,
       :language_code,
       :language_description)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1702,6 +1721,7 @@ module Aws::MediaConvert
       :scc_destination_settings,
       :teletext_destination_settings,
       :ttml_destination_settings)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1782,6 +1802,7 @@ module Aws::MediaConvert
       :custom_language_code,
       :language_code,
       :source_settings)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1821,6 +1842,7 @@ module Aws::MediaConvert
     class CaptionSourceFramerate < Struct.new(
       :framerate_denominator,
       :framerate_numerator)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1911,6 +1933,7 @@ module Aws::MediaConvert
       :source_type,
       :teletext_source_settings,
       :track_source_settings)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1939,6 +1962,7 @@ module Aws::MediaConvert
     #
     class ChannelMapping < Struct.new(
       :output_channels)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1978,6 +2002,7 @@ module Aws::MediaConvert
     class CmafAdditionalManifest < Struct.new(
       :manifest_name_modifier,
       :selected_outputs)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2051,6 +2076,7 @@ module Aws::MediaConvert
       :speke_key_provider,
       :static_key_provider,
       :type)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2277,6 +2303,7 @@ module Aws::MediaConvert
       :write_dash_manifest,
       :write_hls_manifest,
       :write_segment_timeline_in_representation)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2310,6 +2337,7 @@ module Aws::MediaConvert
     class CmfcSettings < Struct.new(
       :scte_35_esam,
       :scte_35_source)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2392,6 +2420,7 @@ module Aws::MediaConvert
       :hdr_10_metadata,
       :hue,
       :saturation)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2402,6 +2431,7 @@ module Aws::MediaConvert
     #
     class ConflictException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2573,6 +2603,7 @@ module Aws::MediaConvert
       :mp_4_settings,
       :mpd_settings,
       :mxf_settings)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3725,6 +3756,7 @@ module Aws::MediaConvert
       :status_update_interval,
       :tags,
       :user_metadata)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3740,6 +3772,7 @@ module Aws::MediaConvert
     #
     class CreateJobResponse < Struct.new(
       :job)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4852,6 +4885,7 @@ module Aws::MediaConvert
       :settings,
       :status_update_interval,
       :tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4866,6 +4900,7 @@ module Aws::MediaConvert
     #
     class CreateJobTemplateResponse < Struct.new(
       :job_template)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5509,6 +5544,7 @@ module Aws::MediaConvert
       :name,
       :settings,
       :tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5524,6 +5560,7 @@ module Aws::MediaConvert
     #
     class CreatePresetResponse < Struct.new(
       :preset)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5593,6 +5630,7 @@ module Aws::MediaConvert
       :reservation_plan_settings,
       :status,
       :tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5611,6 +5649,7 @@ module Aws::MediaConvert
     #
     class CreateQueueResponse < Struct.new(
       :queue)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5645,6 +5684,7 @@ module Aws::MediaConvert
     class DashAdditionalManifest < Struct.new(
       :manifest_name_modifier,
       :selected_outputs)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5685,6 +5725,7 @@ module Aws::MediaConvert
     class DashIsoEncryptionSettings < Struct.new(
       :playback_device_compatibility,
       :speke_key_provider)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5833,6 +5874,7 @@ module Aws::MediaConvert
       :segment_control,
       :segment_length,
       :write_segment_timeline_in_representation)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5883,6 +5925,7 @@ module Aws::MediaConvert
       :algorithm,
       :control,
       :mode)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5903,6 +5946,7 @@ module Aws::MediaConvert
     #
     class DeleteJobTemplateRequest < Struct.new(
       :name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5930,6 +5974,7 @@ module Aws::MediaConvert
     #
     class DeletePresetRequest < Struct.new(
       :name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5959,6 +6004,7 @@ module Aws::MediaConvert
     #
     class DeleteQueueRequest < Struct.new(
       :name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6005,6 +6051,7 @@ module Aws::MediaConvert
       :max_results,
       :mode,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6024,6 +6071,7 @@ module Aws::MediaConvert
     class DescribeEndpointsResponse < Struct.new(
       :endpoints,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6053,6 +6101,7 @@ module Aws::MediaConvert
     #
     class DestinationSettings < Struct.new(
       :s3_settings)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6076,6 +6125,7 @@ module Aws::MediaConvert
     #
     class DisassociateCertificateRequest < Struct.new(
       :arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6123,6 +6173,7 @@ module Aws::MediaConvert
       :l6_metadata,
       :l6_mode,
       :profile)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6153,6 +6204,7 @@ module Aws::MediaConvert
     class DolbyVisionLevel6Metadata < Struct.new(
       :max_cll,
       :max_fall)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6188,6 +6240,7 @@ module Aws::MediaConvert
       :network_id,
       :network_name,
       :nit_interval)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6237,6 +6290,7 @@ module Aws::MediaConvert
       :sdt_interval,
       :service_name,
       :service_provider_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6420,6 +6474,7 @@ module Aws::MediaConvert
       :teletext_spacing,
       :x_position,
       :y_position)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6442,6 +6497,7 @@ module Aws::MediaConvert
     #
     class DvbSubSourceSettings < Struct.new(
       :pid)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6464,6 +6520,7 @@ module Aws::MediaConvert
     #
     class DvbTdtSettings < Struct.new(
       :tdt_interval)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6598,6 +6655,7 @@ module Aws::MediaConvert
       :speech_threshold,
       :stereo_downmix,
       :surround_ex_mode)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6797,6 +6855,7 @@ module Aws::MediaConvert
       :stereo_downmix,
       :surround_ex_mode,
       :surround_mode)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6839,6 +6898,7 @@ module Aws::MediaConvert
     class EmbeddedDestinationSettings < Struct.new(
       :destination_608_channel_number,
       :destination_708_service_number)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6886,6 +6946,7 @@ module Aws::MediaConvert
       :source_608_channel_number,
       :source_608_track_number,
       :terminate_captions)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6899,6 +6960,7 @@ module Aws::MediaConvert
     #
     class Endpoint < Struct.new(
       :url)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6923,6 +6985,7 @@ module Aws::MediaConvert
     #
     class EsamManifestConfirmConditionNotification < Struct.new(
       :mcc_xml)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6969,6 +7032,7 @@ module Aws::MediaConvert
       :manifest_confirm_condition_notification,
       :response_signal_preroll,
       :signal_processing_notification)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6999,6 +7063,7 @@ module Aws::MediaConvert
     #
     class EsamSignalProcessingNotification < Struct.new(
       :scc_xml)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -7009,6 +7074,7 @@ module Aws::MediaConvert
     #
     class ExceptionBody < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -7031,6 +7097,7 @@ module Aws::MediaConvert
     #
     class F4vSettings < Struct.new(
       :moov_placement)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -7073,6 +7140,7 @@ module Aws::MediaConvert
     class FileGroupSettings < Struct.new(
       :destination,
       :destination_settings)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -7131,6 +7199,7 @@ module Aws::MediaConvert
       :framerate,
       :source_file,
       :time_delta)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -7141,6 +7210,7 @@ module Aws::MediaConvert
     #
     class ForbiddenException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -7191,6 +7261,7 @@ module Aws::MediaConvert
       :framerate_numerator,
       :max_captures,
       :quality)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -7211,6 +7282,7 @@ module Aws::MediaConvert
     #
     class GetJobRequest < Struct.new(
       :id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -7227,6 +7299,7 @@ module Aws::MediaConvert
     #
     class GetJobResponse < Struct.new(
       :job)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -7247,6 +7320,7 @@ module Aws::MediaConvert
     #
     class GetJobTemplateRequest < Struct.new(
       :name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -7262,6 +7336,7 @@ module Aws::MediaConvert
     #
     class GetJobTemplateResponse < Struct.new(
       :job_template)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -7282,6 +7357,7 @@ module Aws::MediaConvert
     #
     class GetPresetRequest < Struct.new(
       :name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -7298,6 +7374,7 @@ module Aws::MediaConvert
     #
     class GetPresetResponse < Struct.new(
       :preset)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -7319,6 +7396,7 @@ module Aws::MediaConvert
     #
     class GetQueueRequest < Struct.new(
       :name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -7337,6 +7415,7 @@ module Aws::MediaConvert
     #
     class GetQueueResponse < Struct.new(
       :queue)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -7393,6 +7472,7 @@ module Aws::MediaConvert
       :max_average_bitrate,
       :qvbr_quality_level,
       :qvbr_quality_level_fine_tune)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -7753,6 +7833,7 @@ module Aws::MediaConvert
       :telecine,
       :temporal_adaptive_quantization,
       :unregistered_sei_timecode)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -7809,6 +7890,7 @@ module Aws::MediaConvert
       :max_average_bitrate,
       :qvbr_quality_level,
       :qvbr_quality_level_fine_tune)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -8184,6 +8266,7 @@ module Aws::MediaConvert
       :tiles,
       :unregistered_sei_timecode,
       :write_mp_4_packaging_type)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -8306,6 +8389,7 @@ module Aws::MediaConvert
       :red_primary_y,
       :white_point_x,
       :white_point_y)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -8344,6 +8428,7 @@ module Aws::MediaConvert
     class HlsAdditionalManifest < Struct.new(
       :manifest_name_modifier,
       :selected_outputs)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -8384,6 +8469,7 @@ module Aws::MediaConvert
       :custom_language_code,
       :language_code,
       :language_description)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -8465,6 +8551,7 @@ module Aws::MediaConvert
       :speke_key_provider,
       :static_key_provider,
       :type)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -8722,6 +8809,7 @@ module Aws::MediaConvert
       :timed_metadata_id_3_frame,
       :timed_metadata_id_3_period,
       :timestamp_delta_milliseconds)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -8795,6 +8883,7 @@ module Aws::MediaConvert
       :audio_track_type,
       :i_frame_only_manifest,
       :segment_modifier)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -8838,6 +8927,7 @@ module Aws::MediaConvert
       :priority,
       :queue,
       :wait_minutes)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -8868,6 +8958,7 @@ module Aws::MediaConvert
     class Id3Insertion < Struct.new(
       :id_3,
       :timecode)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -8905,6 +8996,7 @@ module Aws::MediaConvert
     #
     class ImageInserter < Struct.new(
       :insertable_images)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -8929,6 +9021,7 @@ module Aws::MediaConvert
     #
     class ImscDestinationSettings < Struct.new(
       :style_passthrough)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -9255,6 +9348,7 @@ module Aws::MediaConvert
       :timecode_source,
       :timecode_start,
       :video_selector)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -9301,6 +9395,7 @@ module Aws::MediaConvert
     class InputClipping < Struct.new(
       :end_timecode,
       :start_timecode)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -9353,6 +9448,7 @@ module Aws::MediaConvert
       :encrypted_decryption_key,
       :initialization_vector,
       :kms_key_region)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -9640,6 +9736,7 @@ module Aws::MediaConvert
       :timecode_source,
       :timecode_start,
       :video_selector)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -9747,6 +9844,7 @@ module Aws::MediaConvert
       :opacity,
       :start_time,
       :width)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -9757,6 +9855,7 @@ module Aws::MediaConvert
     #
     class InternalServerErrorException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -9937,6 +10036,7 @@ module Aws::MediaConvert
       :status_update_interval,
       :timing,
       :user_metadata)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -9958,6 +10058,7 @@ module Aws::MediaConvert
     class JobMessages < Struct.new(
       :info,
       :warning)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -11057,6 +11158,7 @@ module Aws::MediaConvert
       :output_groups,
       :timecode_config,
       :timed_metadata_insertion)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -11142,6 +11244,7 @@ module Aws::MediaConvert
       :settings,
       :status_update_interval,
       :type)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -12234,6 +12337,7 @@ module Aws::MediaConvert
       :output_groups,
       :timecode_config,
       :timed_metadata_insertion)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -12289,6 +12393,7 @@ module Aws::MediaConvert
       :max_results,
       :next_token,
       :order)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -12309,6 +12414,7 @@ module Aws::MediaConvert
     class ListJobTemplatesResponse < Struct.new(
       :job_templates,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -12362,6 +12468,7 @@ module Aws::MediaConvert
       :order,
       :queue,
       :status)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -12382,6 +12489,7 @@ module Aws::MediaConvert
     class ListJobsResponse < Struct.new(
       :jobs,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -12436,6 +12544,7 @@ module Aws::MediaConvert
       :max_results,
       :next_token,
       :order)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -12456,6 +12565,7 @@ module Aws::MediaConvert
     class ListPresetsResponse < Struct.new(
       :next_token,
       :presets)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -12502,6 +12612,7 @@ module Aws::MediaConvert
       :max_results,
       :next_token,
       :order)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -12522,6 +12633,7 @@ module Aws::MediaConvert
     class ListQueuesResponse < Struct.new(
       :next_token,
       :queues)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -12545,6 +12657,7 @@ module Aws::MediaConvert
     #
     class ListTagsForResourceRequest < Struct.new(
       :arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -12560,6 +12673,7 @@ module Aws::MediaConvert
     #
     class ListTagsForResourceResponse < Struct.new(
       :resource_tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -12584,6 +12698,7 @@ module Aws::MediaConvert
     #
     class M2tsScte35Esam < Struct.new(
       :scte_35_esam_pid)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -12925,6 +13040,7 @@ module Aws::MediaConvert
       :timed_metadata_pid,
       :transport_stream_id,
       :video_pid)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -13061,6 +13177,7 @@ module Aws::MediaConvert
       :timed_metadata_pid,
       :transport_stream_id,
       :video_pid)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -13156,6 +13273,7 @@ module Aws::MediaConvert
       :offset,
       :playback,
       :start_time)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -13187,6 +13305,7 @@ module Aws::MediaConvert
     class MotionImageInsertionFramerate < Struct.new(
       :framerate_denominator,
       :framerate_numerator)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -13216,6 +13335,7 @@ module Aws::MediaConvert
     class MotionImageInsertionOffset < Struct.new(
       :image_x,
       :image_y)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -13268,6 +13388,7 @@ module Aws::MediaConvert
       :mpeg_2_four_cc_control,
       :padding_control,
       :reference)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -13304,6 +13425,7 @@ module Aws::MediaConvert
       :bitrate,
       :channels,
       :sample_rate)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -13354,6 +13476,7 @@ module Aws::MediaConvert
       :rate_control_mode,
       :sample_rate,
       :vbr_quality)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -13412,6 +13535,7 @@ module Aws::MediaConvert
       :free_space_box,
       :moov_placement,
       :mp_4_major_brand)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -13457,6 +13581,7 @@ module Aws::MediaConvert
       :caption_container_type,
       :scte_35_esam,
       :scte_35_source)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -13743,6 +13868,7 @@ module Aws::MediaConvert
       :syntax,
       :telecine,
       :temporal_adaptive_quantization)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -13779,6 +13905,7 @@ module Aws::MediaConvert
     class MsSmoothAdditionalManifest < Struct.new(
       :manifest_name_modifier,
       :selected_outputs)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -13808,6 +13935,7 @@ module Aws::MediaConvert
     #
     class MsSmoothEncryptionSettings < Struct.new(
       :speke_key_provider)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -13903,6 +14031,7 @@ module Aws::MediaConvert
       :encryption,
       :fragment_length,
       :manifest_encoding)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -13932,6 +14061,7 @@ module Aws::MediaConvert
     #
     class MxfSettings < Struct.new(
       :afd_signaling)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -13991,6 +14121,7 @@ module Aws::MediaConvert
       :payload,
       :preset,
       :strength)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -14026,6 +14157,7 @@ module Aws::MediaConvert
     class NielsenConfiguration < Struct.new(
       :breakout_code,
       :distributor_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -14086,6 +14218,7 @@ module Aws::MediaConvert
       :filter_settings,
       :spatial_filter_settings,
       :temporal_filter_settings)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -14107,6 +14240,7 @@ module Aws::MediaConvert
     #
     class NoiseReducerFilterSettings < Struct.new(
       :strength)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -14142,6 +14276,7 @@ module Aws::MediaConvert
       :post_filter_sharpen_strength,
       :speed,
       :strength)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -14194,6 +14329,7 @@ module Aws::MediaConvert
       :post_temporal_sharpening,
       :speed,
       :strength)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -14204,6 +14340,7 @@ module Aws::MediaConvert
     #
     class NotFoundException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -14242,6 +14379,7 @@ module Aws::MediaConvert
       :bitrate,
       :channels,
       :sample_rate)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -14929,6 +15067,7 @@ module Aws::MediaConvert
       :output_settings,
       :preset,
       :video_description)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -14949,6 +15088,7 @@ module Aws::MediaConvert
     #
     class OutputChannelMapping < Struct.new(
       :input_channels)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -14967,6 +15107,7 @@ module Aws::MediaConvert
     class OutputDetail < Struct.new(
       :duration_in_ms,
       :video_details)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -15826,6 +15967,7 @@ module Aws::MediaConvert
       :name,
       :output_group_settings,
       :outputs)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -15840,6 +15982,7 @@ module Aws::MediaConvert
     #
     class OutputGroupDetail < Struct.new(
       :output_details)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -16096,6 +16239,7 @@ module Aws::MediaConvert
       :hls_group_settings,
       :ms_smooth_group_settings,
       :type)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -16123,6 +16267,7 @@ module Aws::MediaConvert
     #
     class OutputSettings < Struct.new(
       :hls_settings)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -16152,6 +16297,7 @@ module Aws::MediaConvert
     #
     class PartnerWatermarking < Struct.new(
       :nexguard_file_marker_settings)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -16204,6 +16350,7 @@ module Aws::MediaConvert
       :name,
       :settings,
       :type)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -16839,6 +16986,7 @@ module Aws::MediaConvert
       :caption_descriptions,
       :container_settings,
       :video_description)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -16971,6 +17119,7 @@ module Aws::MediaConvert
       :par_numerator,
       :slow_pal,
       :telecine)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -17050,6 +17199,7 @@ module Aws::MediaConvert
       :status,
       :submitted_jobs_count,
       :type)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -17075,6 +17225,7 @@ module Aws::MediaConvert
       :destination_queue,
       :source_queue,
       :timestamp)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -17115,6 +17266,7 @@ module Aws::MediaConvert
       :width,
       :x,
       :y)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -17164,6 +17316,7 @@ module Aws::MediaConvert
       :channel_mapping,
       :channels_in,
       :channels_out)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -17215,6 +17368,7 @@ module Aws::MediaConvert
       :renewal_type,
       :reserved_slots,
       :status)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -17261,6 +17415,7 @@ module Aws::MediaConvert
       :commitment,
       :renewal_type,
       :reserved_slots)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -17280,6 +17435,7 @@ module Aws::MediaConvert
     class ResourceTags < Struct.new(
       :arn,
       :tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -17304,6 +17460,7 @@ module Aws::MediaConvert
     #
     class S3DestinationAccessControl < Struct.new(
       :canned_acl)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -17339,6 +17496,7 @@ module Aws::MediaConvert
     class S3DestinationSettings < Struct.new(
       :access_control,
       :encryption)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -17385,6 +17543,7 @@ module Aws::MediaConvert
     class S3EncryptionSettings < Struct.new(
       :encryption_type,
       :kms_key_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -17411,6 +17570,7 @@ module Aws::MediaConvert
     #
     class SccDestinationSettings < Struct.new(
       :framerate)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -17461,6 +17621,7 @@ module Aws::MediaConvert
       :resource_id,
       :system_ids,
       :url)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -17521,6 +17682,7 @@ module Aws::MediaConvert
       :hls_signaled_system_ids,
       :resource_id,
       :url)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -17564,6 +17726,7 @@ module Aws::MediaConvert
       :key_format_versions,
       :static_key_value,
       :url)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -17596,6 +17759,7 @@ module Aws::MediaConvert
     class TagResourceRequest < Struct.new(
       :arn,
       :tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -17637,6 +17801,7 @@ module Aws::MediaConvert
     class TeletextDestinationSettings < Struct.new(
       :page_number,
       :page_types)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -17660,6 +17825,7 @@ module Aws::MediaConvert
     #
     class TeletextSourceSettings < Struct.new(
       :page_number)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -17701,6 +17867,7 @@ module Aws::MediaConvert
       :font_size,
       :position,
       :prefix)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -17773,6 +17940,7 @@ module Aws::MediaConvert
       :source,
       :start,
       :timestamp_offset)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -17801,6 +17969,7 @@ module Aws::MediaConvert
     #
     class TimedMetadataInsertion < Struct.new(
       :id_3_insertions)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -17825,6 +17994,7 @@ module Aws::MediaConvert
       :finish_time,
       :start_time,
       :submit_time)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -17835,6 +18005,7 @@ module Aws::MediaConvert
     #
     class TooManyRequestsException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -17864,6 +18035,7 @@ module Aws::MediaConvert
     #
     class TrackSourceSettings < Struct.new(
       :track_number)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -17886,6 +18058,7 @@ module Aws::MediaConvert
     #
     class TtmlDestinationSettings < Struct.new(
       :style_passthrough)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -17916,6 +18089,7 @@ module Aws::MediaConvert
     class UntagResourceRequest < Struct.new(
       :arn,
       :tag_keys)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -19019,6 +19193,7 @@ module Aws::MediaConvert
       :queue,
       :settings,
       :status_update_interval)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -19034,6 +19209,7 @@ module Aws::MediaConvert
     #
     class UpdateJobTemplateResponse < Struct.new(
       :job_template)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -19669,6 +19845,7 @@ module Aws::MediaConvert
       :description,
       :name,
       :settings)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -19684,6 +19861,7 @@ module Aws::MediaConvert
     #
     class UpdatePresetResponse < Struct.new(
       :preset)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -19735,6 +19913,7 @@ module Aws::MediaConvert
       :name,
       :reservation_plan_settings,
       :status)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -19753,6 +19932,7 @@ module Aws::MediaConvert
     #
     class UpdateQueueResponse < Struct.new(
       :queue)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -20018,6 +20198,7 @@ module Aws::MediaConvert
       :prores_settings,
       :vp_8_settings,
       :vp_9_settings)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -20471,6 +20652,7 @@ module Aws::MediaConvert
       :timecode_insertion,
       :video_preprocessors,
       :width)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -20489,6 +20671,7 @@ module Aws::MediaConvert
     class VideoDetail < Struct.new(
       :height_in_px,
       :width_in_px)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -20632,6 +20815,7 @@ module Aws::MediaConvert
       :noise_reducer,
       :partner_watermarking,
       :timecode_burnin)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -20755,6 +20939,7 @@ module Aws::MediaConvert
       :pid,
       :program_number,
       :rotate)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -20795,6 +20980,7 @@ module Aws::MediaConvert
       :channels,
       :sample_rate,
       :vbr_quality)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -20940,6 +21126,7 @@ module Aws::MediaConvert
       :par_numerator,
       :quality_tuning_level,
       :rate_control_mode)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -21080,6 +21267,7 @@ module Aws::MediaConvert
       :par_numerator,
       :quality_tuning_level,
       :rate_control_mode)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -21125,6 +21313,7 @@ module Aws::MediaConvert
       :channels,
       :format,
       :sample_rate)
+      SENSITIVE = []
       include Aws::Structure
     end
 

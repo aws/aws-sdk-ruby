@@ -47,6 +47,6 @@ require_relative 'aws-sdk-ram/customizations'
 # @service
 module Aws::RAM
 
-  GEM_VERSION = '1.18.1'
+  GEM_VERSION = '1.19.0'
 
 end

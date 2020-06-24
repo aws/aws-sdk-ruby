@@ -127,6 +127,7 @@ module Aws::ACMPCA
       :initials,
       :pseudonym,
       :generation_qualifier)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -209,6 +210,7 @@ module Aws::ACMPCA
       :certificate_authority_configuration,
       :revocation_configuration,
       :restorable_until)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -267,6 +269,7 @@ module Aws::ACMPCA
       :key_algorithm,
       :signing_algorithm,
       :subject)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -280,6 +283,7 @@ module Aws::ACMPCA
     #
     class CertificateMismatchException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -292,6 +296,7 @@ module Aws::ACMPCA
     #
     class ConcurrentModificationException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -327,6 +332,7 @@ module Aws::ACMPCA
       :certificate_authority_arn,
       :s3_bucket_name,
       :audit_report_response_format)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -344,6 +350,7 @@ module Aws::ACMPCA
     class CreateCertificateAuthorityAuditReportResponse < Struct.new(
       :audit_report_id,
       :s3_key)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -439,6 +446,7 @@ module Aws::ACMPCA
       :certificate_authority_type,
       :idempotency_token,
       :tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -454,6 +462,7 @@ module Aws::ACMPCA
     #
     class CreateCertificateAuthorityResponse < Struct.new(
       :certificate_authority_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -498,6 +507,7 @@ module Aws::ACMPCA
       :principal,
       :source_account,
       :actions)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -612,6 +622,7 @@ module Aws::ACMPCA
       :expiration_in_days,
       :custom_cname,
       :s3_bucket_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -642,6 +653,7 @@ module Aws::ACMPCA
     class DeleteCertificateAuthorityRequest < Struct.new(
       :certificate_authority_arn,
       :permanent_deletion_time_in_days)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -680,6 +692,7 @@ module Aws::ACMPCA
       :certificate_authority_arn,
       :principal,
       :source_account)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -709,6 +722,7 @@ module Aws::ACMPCA
     class DescribeCertificateAuthorityAuditReportRequest < Struct.new(
       :certificate_authority_arn,
       :audit_report_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -737,6 +751,7 @@ module Aws::ACMPCA
       :s3_bucket_name,
       :s3_key,
       :created_at)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -759,6 +774,7 @@ module Aws::ACMPCA
     #
     class DescribeCertificateAuthorityRequest < Struct.new(
       :certificate_authority_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -771,6 +787,7 @@ module Aws::ACMPCA
     #
     class DescribeCertificateAuthorityResponse < Struct.new(
       :certificate_authority)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -793,6 +810,7 @@ module Aws::ACMPCA
     #
     class GetCertificateAuthorityCertificateRequest < Struct.new(
       :certificate_authority_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -813,6 +831,7 @@ module Aws::ACMPCA
     class GetCertificateAuthorityCertificateResponse < Struct.new(
       :certificate,
       :certificate_chain)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -835,6 +854,7 @@ module Aws::ACMPCA
     #
     class GetCertificateAuthorityCsrRequest < Struct.new(
       :certificate_authority_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -847,6 +867,7 @@ module Aws::ACMPCA
     #
     class GetCertificateAuthorityCsrResponse < Struct.new(
       :csr)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -879,6 +900,7 @@ module Aws::ACMPCA
     class GetCertificateRequest < Struct.new(
       :certificate_authority_arn,
       :certificate_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -898,6 +920,7 @@ module Aws::ACMPCA
     class GetCertificateResponse < Struct.new(
       :certificate,
       :certificate_chain)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -941,6 +964,7 @@ module Aws::ACMPCA
       :certificate_authority_arn,
       :certificate,
       :certificate_chain)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -953,6 +977,7 @@ module Aws::ACMPCA
     #
     class InvalidArgsException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -966,6 +991,7 @@ module Aws::ACMPCA
     #
     class InvalidArnException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -979,6 +1005,7 @@ module Aws::ACMPCA
     #
     class InvalidNextTokenException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -993,6 +1020,7 @@ module Aws::ACMPCA
     #
     class InvalidPolicyException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1005,6 +1033,7 @@ module Aws::ACMPCA
     #
     class InvalidRequestException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1018,6 +1047,7 @@ module Aws::ACMPCA
     #
     class InvalidStateException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1031,6 +1061,7 @@ module Aws::ACMPCA
     #
     class InvalidTagException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1129,6 +1160,7 @@ module Aws::ACMPCA
       :template_arn,
       :validity,
       :idempotency_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1144,6 +1176,7 @@ module Aws::ACMPCA
     #
     class IssueCertificateResponse < Struct.new(
       :certificate_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1157,6 +1190,7 @@ module Aws::ACMPCA
     #
     class LimitExceededException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1188,6 +1222,7 @@ module Aws::ACMPCA
     class ListCertificateAuthoritiesRequest < Struct.new(
       :next_token,
       :max_results)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1206,6 +1241,7 @@ module Aws::ACMPCA
     class ListCertificateAuthoritiesResponse < Struct.new(
       :certificate_authorities,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1247,6 +1283,7 @@ module Aws::ACMPCA
       :certificate_authority_arn,
       :next_token,
       :max_results)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1266,6 +1303,7 @@ module Aws::ACMPCA
     class ListPermissionsResponse < Struct.new(
       :permissions,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1306,6 +1344,7 @@ module Aws::ACMPCA
       :certificate_authority_arn,
       :next_token,
       :max_results)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1323,6 +1362,7 @@ module Aws::ACMPCA
     class ListTagsResponse < Struct.new(
       :tags,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1335,6 +1375,7 @@ module Aws::ACMPCA
     #
     class MalformedCSRException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1347,6 +1388,7 @@ module Aws::ACMPCA
     #
     class MalformedCertificateException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1394,6 +1436,7 @@ module Aws::ACMPCA
       :source_account,
       :actions,
       :policy)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1406,6 +1449,7 @@ module Aws::ACMPCA
     #
     class PermissionAlreadyExistsException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1418,6 +1462,7 @@ module Aws::ACMPCA
     #
     class RequestAlreadyProcessedException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1430,6 +1475,7 @@ module Aws::ACMPCA
     #
     class RequestFailedException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1442,6 +1488,7 @@ module Aws::ACMPCA
     #
     class RequestInProgressException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1455,6 +1502,7 @@ module Aws::ACMPCA
     #
     class ResourceNotFoundException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1477,6 +1525,7 @@ module Aws::ACMPCA
     #
     class RestoreCertificateAuthorityRequest < Struct.new(
       :certificate_authority_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1508,6 +1557,7 @@ module Aws::ACMPCA
     #
     class RevocationConfiguration < Struct.new(
       :crl_configuration)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1558,6 +1608,7 @@ module Aws::ACMPCA
       :certificate_authority_arn,
       :certificate_serial,
       :revocation_reason)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1588,6 +1639,7 @@ module Aws::ACMPCA
     class Tag < Struct.new(
       :key,
       :value)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1621,6 +1673,7 @@ module Aws::ACMPCA
     class TagCertificateAuthorityRequest < Struct.new(
       :certificate_authority_arn,
       :tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1634,6 +1687,7 @@ module Aws::ACMPCA
     #
     class TooManyTagsException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1667,6 +1721,7 @@ module Aws::ACMPCA
     class UntagCertificateAuthorityRequest < Struct.new(
       :certificate_authority_arn,
       :tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1708,6 +1763,7 @@ module Aws::ACMPCA
       :certificate_authority_arn,
       :revocation_configuration,
       :status)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1738,6 +1794,7 @@ module Aws::ACMPCA
     class Validity < Struct.new(
       :value,
       :type)
+      SENSITIVE = []
       include Aws::Structure
     end
 

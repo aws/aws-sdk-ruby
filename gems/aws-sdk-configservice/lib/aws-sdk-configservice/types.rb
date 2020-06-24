@@ -39,6 +39,7 @@ module Aws::ConfigService
       :account_ids,
       :all_aws_regions,
       :aws_regions)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -73,6 +74,7 @@ module Aws::ConfigService
       :compliance,
       :account_id,
       :aws_region)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -92,6 +94,7 @@ module Aws::ConfigService
     class AggregateComplianceCount < Struct.new(
       :group_name,
       :compliance_summary)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -143,6 +146,7 @@ module Aws::ConfigService
       :annotation,
       :account_id,
       :aws_region)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -189,6 +193,7 @@ module Aws::ConfigService
       :resource_id,
       :resource_type,
       :resource_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -240,6 +245,7 @@ module Aws::ConfigService
       :last_update_time,
       :last_error_code,
       :last_error_message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -269,6 +275,7 @@ module Aws::ConfigService
       :authorized_account_id,
       :authorized_aws_region,
       :creation_time)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -350,6 +357,7 @@ module Aws::ConfigService
       :resource_creation_time,
       :configuration,
       :supplementary_configuration)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -382,6 +390,7 @@ module Aws::ConfigService
     class BatchGetAggregateResourceConfigRequest < Struct.new(
       :configuration_aggregator_name,
       :resource_identifiers)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -400,6 +409,7 @@ module Aws::ConfigService
     class BatchGetAggregateResourceConfigResponse < Struct.new(
       :base_configuration_items,
       :unprocessed_resource_identifiers)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -425,6 +435,7 @@ module Aws::ConfigService
     #
     class BatchGetResourceConfigRequest < Struct.new(
       :resource_keys)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -447,6 +458,7 @@ module Aws::ConfigService
     class BatchGetResourceConfigResponse < Struct.new(
       :base_configuration_items,
       :unprocessed_resource_keys)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -483,6 +495,7 @@ module Aws::ConfigService
     class Compliance < Struct.new(
       :compliance_type,
       :compliance_contributor_count)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -503,6 +516,7 @@ module Aws::ConfigService
     class ComplianceByConfigRule < Struct.new(
       :config_rule_name,
       :compliance)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -530,6 +544,7 @@ module Aws::ConfigService
       :resource_type,
       :resource_id,
       :compliance)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -550,6 +565,7 @@ module Aws::ConfigService
     class ComplianceContributorCount < Struct.new(
       :capped_count,
       :cap_exceeded)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -576,6 +592,7 @@ module Aws::ConfigService
       :compliant_resource_count,
       :non_compliant_resource_count,
       :compliance_summary_timestamp)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -596,6 +613,7 @@ module Aws::ConfigService
     class ComplianceSummaryByResourceType < Struct.new(
       :resource_type,
       :compliance_summary)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -637,6 +655,7 @@ module Aws::ConfigService
       :last_attempt_time,
       :last_successful_time,
       :next_delivery_time)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -791,6 +810,7 @@ module Aws::ConfigService
       :maximum_execution_frequency,
       :config_rule_state,
       :created_by)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -834,6 +854,7 @@ module Aws::ConfigService
       :compliance_type,
       :account_id,
       :aws_region)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -860,6 +881,7 @@ module Aws::ConfigService
     class ConfigRuleComplianceSummaryFilters < Struct.new(
       :account_id,
       :aws_region)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -944,6 +966,7 @@ module Aws::ConfigService
       :last_error_code,
       :last_error_message,
       :first_evaluation_started)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1003,6 +1026,7 @@ module Aws::ConfigService
     #
     class ConfigSnapshotDeliveryProperties < Struct.new(
       :delivery_frequency)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1040,6 +1064,7 @@ module Aws::ConfigService
       :last_error_code,
       :last_error_message,
       :last_status_change_time)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1079,6 +1104,7 @@ module Aws::ConfigService
       :organization_aggregation_source,
       :creation_time,
       :last_updated_time)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1197,6 +1223,7 @@ module Aws::ConfigService
       :relationships,
       :configuration,
       :supplementary_configuration)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1238,6 +1265,7 @@ module Aws::ConfigService
       :name,
       :role_arn,
       :recording_group)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1286,6 +1314,7 @@ module Aws::ConfigService
       :last_error_code,
       :last_error_message,
       :last_status_change_time)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1315,6 +1344,7 @@ module Aws::ConfigService
     class ConformancePackComplianceFilters < Struct.new(
       :config_rule_names,
       :compliance_type)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1334,6 +1364,7 @@ module Aws::ConfigService
     class ConformancePackComplianceSummary < Struct.new(
       :conformance_pack_name,
       :conformance_pack_compliance_status)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1386,6 +1417,7 @@ module Aws::ConfigService
       :conformance_pack_input_parameters,
       :last_update_requested_time,
       :created_by)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1433,6 +1465,7 @@ module Aws::ConfigService
       :compliance_type,
       :resource_type,
       :resource_ids)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1470,6 +1503,7 @@ module Aws::ConfigService
       :config_rule_invoked_time,
       :result_recorded_time,
       :annotation)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1499,6 +1533,7 @@ module Aws::ConfigService
     class ConformancePackInputParameter < Struct.new(
       :parameter_name,
       :parameter_value)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1521,6 +1556,7 @@ module Aws::ConfigService
     class ConformancePackRuleCompliance < Struct.new(
       :config_rule_name,
       :compliance_type)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1586,6 +1622,7 @@ module Aws::ConfigService
       :conformance_pack_status_reason,
       :last_update_requested_time,
       :last_update_completed_time)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1616,6 +1653,7 @@ module Aws::ConfigService
     class DeleteAggregationAuthorizationRequest < Struct.new(
       :authorized_account_id,
       :authorized_aws_region)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1634,6 +1672,7 @@ module Aws::ConfigService
     #
     class DeleteConfigRuleRequest < Struct.new(
       :config_rule_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1652,6 +1691,7 @@ module Aws::ConfigService
     #
     class DeleteConfigurationAggregatorRequest < Struct.new(
       :configuration_aggregator_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1674,6 +1714,7 @@ module Aws::ConfigService
     #
     class DeleteConfigurationRecorderRequest < Struct.new(
       :configuration_recorder_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1692,6 +1733,7 @@ module Aws::ConfigService
     #
     class DeleteConformancePackRequest < Struct.new(
       :conformance_pack_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1713,6 +1755,7 @@ module Aws::ConfigService
     #
     class DeleteDeliveryChannelRequest < Struct.new(
       :delivery_channel_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1732,6 +1775,7 @@ module Aws::ConfigService
     #
     class DeleteEvaluationResultsRequest < Struct.new(
       :config_rule_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1757,6 +1801,7 @@ module Aws::ConfigService
     #
     class DeleteOrganizationConfigRuleRequest < Struct.new(
       :organization_config_rule_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1775,6 +1820,7 @@ module Aws::ConfigService
     #
     class DeleteOrganizationConformancePackRequest < Struct.new(
       :organization_conformance_pack_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1799,6 +1845,7 @@ module Aws::ConfigService
     class DeletePendingAggregationRequestRequest < Struct.new(
       :requester_account_id,
       :requester_aws_region)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1824,6 +1871,7 @@ module Aws::ConfigService
     class DeleteRemediationConfigurationRequest < Struct.new(
       :config_rule_name,
       :resource_type)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1860,6 +1908,7 @@ module Aws::ConfigService
     class DeleteRemediationExceptionsRequest < Struct.new(
       :config_rule_name,
       :resource_keys)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1873,6 +1922,7 @@ module Aws::ConfigService
     #
     class DeleteRemediationExceptionsResponse < Struct.new(
       :failed_batches)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1897,6 +1947,7 @@ module Aws::ConfigService
     class DeleteResourceConfigRequest < Struct.new(
       :resource_type,
       :resource_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1915,6 +1966,7 @@ module Aws::ConfigService
     #
     class DeleteRetentionConfigurationRequest < Struct.new(
       :retention_configuration_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1936,6 +1988,7 @@ module Aws::ConfigService
     #
     class DeliverConfigSnapshotRequest < Struct.new(
       :delivery_channel_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1949,6 +2002,7 @@ module Aws::ConfigService
     #
     class DeliverConfigSnapshotResponse < Struct.new(
       :config_snapshot_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2022,6 +2076,7 @@ module Aws::ConfigService
       :s3_key_prefix,
       :sns_topic_arn,
       :config_snapshot_delivery_properties)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2055,6 +2110,7 @@ module Aws::ConfigService
       :config_snapshot_delivery_info,
       :config_history_delivery_info,
       :config_stream_delivery_info)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2098,6 +2154,7 @@ module Aws::ConfigService
       :filters,
       :limit,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2115,6 +2172,7 @@ module Aws::ConfigService
     class DescribeAggregateComplianceByConfigRulesResponse < Struct.new(
       :aggregate_compliance_by_config_rules,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2142,6 +2200,7 @@ module Aws::ConfigService
     class DescribeAggregationAuthorizationsRequest < Struct.new(
       :limit,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2160,6 +2219,7 @@ module Aws::ConfigService
     class DescribeAggregationAuthorizationsResponse < Struct.new(
       :aggregation_authorizations,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2194,6 +2254,7 @@ module Aws::ConfigService
       :config_rule_names,
       :compliance_types,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2212,6 +2273,7 @@ module Aws::ConfigService
     class DescribeComplianceByConfigRuleResponse < Struct.new(
       :compliance_by_config_rules,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2265,6 +2327,7 @@ module Aws::ConfigService
       :compliance_types,
       :limit,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2283,6 +2346,7 @@ module Aws::ConfigService
     class DescribeComplianceByResourceResponse < Struct.new(
       :compliance_by_resources,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2326,6 +2390,7 @@ module Aws::ConfigService
       :config_rule_names,
       :next_token,
       :limit)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2343,6 +2408,7 @@ module Aws::ConfigService
     class DescribeConfigRuleEvaluationStatusResponse < Struct.new(
       :config_rules_evaluation_status,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2370,6 +2436,7 @@ module Aws::ConfigService
     class DescribeConfigRulesRequest < Struct.new(
       :config_rule_names,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2387,6 +2454,7 @@ module Aws::ConfigService
     class DescribeConfigRulesResponse < Struct.new(
       :config_rules,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2432,6 +2500,7 @@ module Aws::ConfigService
       :update_status,
       :next_token,
       :limit)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2449,6 +2518,7 @@ module Aws::ConfigService
     class DescribeConfigurationAggregatorSourcesStatusResponse < Struct.new(
       :aggregated_source_status_list,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2482,6 +2552,7 @@ module Aws::ConfigService
       :configuration_aggregator_names,
       :next_token,
       :limit)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2499,6 +2570,7 @@ module Aws::ConfigService
     class DescribeConfigurationAggregatorsResponse < Struct.new(
       :configuration_aggregators,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2521,6 +2593,7 @@ module Aws::ConfigService
     #
     class DescribeConfigurationRecorderStatusRequest < Struct.new(
       :configuration_recorder_names)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2535,6 +2608,7 @@ module Aws::ConfigService
     #
     class DescribeConfigurationRecorderStatusResponse < Struct.new(
       :configuration_recorders_status)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2555,6 +2629,7 @@ module Aws::ConfigService
     #
     class DescribeConfigurationRecordersRequest < Struct.new(
       :configuration_recorder_names)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2569,6 +2644,7 @@ module Aws::ConfigService
     #
     class DescribeConfigurationRecordersResponse < Struct.new(
       :configuration_recorders)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2610,6 +2686,7 @@ module Aws::ConfigService
       :filters,
       :limit,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2632,6 +2709,7 @@ module Aws::ConfigService
       :conformance_pack_name,
       :conformance_pack_rule_compliance_list,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2664,6 +2742,7 @@ module Aws::ConfigService
       :conformance_pack_names,
       :limit,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2681,6 +2760,7 @@ module Aws::ConfigService
     class DescribeConformancePackStatusResponse < Struct.new(
       :conformance_pack_status_details,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2714,6 +2794,7 @@ module Aws::ConfigService
       :conformance_pack_names,
       :limit,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2731,6 +2812,7 @@ module Aws::ConfigService
     class DescribeConformancePacksResponse < Struct.new(
       :conformance_pack_details,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2751,6 +2833,7 @@ module Aws::ConfigService
     #
     class DescribeDeliveryChannelStatusRequest < Struct.new(
       :delivery_channel_names)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2764,6 +2847,7 @@ module Aws::ConfigService
     #
     class DescribeDeliveryChannelStatusResponse < Struct.new(
       :delivery_channels_status)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2784,6 +2868,7 @@ module Aws::ConfigService
     #
     class DescribeDeliveryChannelsRequest < Struct.new(
       :delivery_channel_names)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2798,6 +2883,7 @@ module Aws::ConfigService
     #
     class DescribeDeliveryChannelsResponse < Struct.new(
       :delivery_channels)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2833,6 +2919,7 @@ module Aws::ConfigService
       :organization_config_rule_names,
       :limit,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2850,6 +2937,7 @@ module Aws::ConfigService
     class DescribeOrganizationConfigRuleStatusesResponse < Struct.new(
       :organization_config_rule_statuses,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2885,6 +2973,7 @@ module Aws::ConfigService
       :organization_config_rule_names,
       :limit,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2902,6 +2991,7 @@ module Aws::ConfigService
     class DescribeOrganizationConfigRulesResponse < Struct.new(
       :organization_config_rules,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2937,6 +3027,7 @@ module Aws::ConfigService
       :organization_conformance_pack_names,
       :limit,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2954,6 +3045,7 @@ module Aws::ConfigService
     class DescribeOrganizationConformancePackStatusesResponse < Struct.new(
       :organization_conformance_pack_statuses,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2987,6 +3079,7 @@ module Aws::ConfigService
       :organization_conformance_pack_names,
       :limit,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3004,6 +3097,7 @@ module Aws::ConfigService
     class DescribeOrganizationConformancePacksResponse < Struct.new(
       :organization_conformance_packs,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3030,6 +3124,7 @@ module Aws::ConfigService
     class DescribePendingAggregationRequestsRequest < Struct.new(
       :limit,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3047,6 +3142,7 @@ module Aws::ConfigService
     class DescribePendingAggregationRequestsResponse < Struct.new(
       :pending_aggregation_requests,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3066,6 +3162,7 @@ module Aws::ConfigService
     #
     class DescribeRemediationConfigurationsRequest < Struct.new(
       :config_rule_names)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3077,6 +3174,7 @@ module Aws::ConfigService
     #
     class DescribeRemediationConfigurationsResponse < Struct.new(
       :remediation_configurations)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3123,6 +3221,7 @@ module Aws::ConfigService
       :resource_keys,
       :limit,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3140,6 +3239,7 @@ module Aws::ConfigService
     class DescribeRemediationExceptionsResponse < Struct.new(
       :remediation_exceptions,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3186,6 +3286,7 @@ module Aws::ConfigService
       :resource_keys,
       :limit,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3203,6 +3304,7 @@ module Aws::ConfigService
     class DescribeRemediationExecutionStatusResponse < Struct.new(
       :remediation_execution_statuses,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3235,6 +3337,7 @@ module Aws::ConfigService
     class DescribeRetentionConfigurationsRequest < Struct.new(
       :retention_configuration_names,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3252,6 +3355,7 @@ module Aws::ConfigService
     class DescribeRetentionConfigurationsResponse < Struct.new(
       :retention_configurations,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3314,6 +3418,7 @@ module Aws::ConfigService
       :compliance_type,
       :annotation,
       :ordering_timestamp)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3363,6 +3468,7 @@ module Aws::ConfigService
       :config_rule_invoked_time,
       :annotation,
       :result_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3386,6 +3492,7 @@ module Aws::ConfigService
     class EvaluationResultIdentifier < Struct.new(
       :evaluation_result_qualifier,
       :ordering_timestamp)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3410,6 +3517,7 @@ module Aws::ConfigService
       :config_rule_name,
       :resource_type,
       :resource_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3433,6 +3541,7 @@ module Aws::ConfigService
     #
     class ExecutionControls < Struct.new(
       :ssm_controls)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3454,6 +3563,7 @@ module Aws::ConfigService
     class FailedDeleteRemediationExceptionsBatch < Struct.new(
       :failure_message,
       :failed_items)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3473,6 +3583,7 @@ module Aws::ConfigService
     class FailedRemediationBatch < Struct.new(
       :failure_message,
       :failed_items)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3494,6 +3605,7 @@ module Aws::ConfigService
     class FailedRemediationExceptionBatch < Struct.new(
       :failure_message,
       :failed_items)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3507,6 +3619,7 @@ module Aws::ConfigService
     #
     class FieldInfo < Struct.new(
       :name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3572,6 +3685,7 @@ module Aws::ConfigService
       :compliance_type,
       :limit,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3589,6 +3703,7 @@ module Aws::ConfigService
     class GetAggregateComplianceDetailsByConfigRuleResponse < Struct.new(
       :aggregate_evaluation_results,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3638,6 +3753,7 @@ module Aws::ConfigService
       :group_by_key,
       :limit,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3660,6 +3776,7 @@ module Aws::ConfigService
       :group_by_key,
       :aggregate_compliance_counts,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3709,6 +3826,7 @@ module Aws::ConfigService
       :group_by_key,
       :limit,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3738,6 +3856,7 @@ module Aws::ConfigService
       :group_by_key,
       :grouped_resource_counts,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3768,6 +3887,7 @@ module Aws::ConfigService
     class GetAggregateResourceConfigRequest < Struct.new(
       :configuration_aggregator_name,
       :resource_identifier)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3779,6 +3899,7 @@ module Aws::ConfigService
     #
     class GetAggregateResourceConfigResponse < Struct.new(
       :configuration_item)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3822,6 +3943,7 @@ module Aws::ConfigService
       :compliance_types,
       :limit,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3840,6 +3962,7 @@ module Aws::ConfigService
     class GetComplianceDetailsByConfigRuleResponse < Struct.new(
       :evaluation_results,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3882,6 +4005,7 @@ module Aws::ConfigService
       :resource_id,
       :compliance_types,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3900,6 +4024,7 @@ module Aws::ConfigService
     class GetComplianceDetailsByResourceResponse < Struct.new(
       :evaluation_results,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3912,6 +4037,7 @@ module Aws::ConfigService
     #
     class GetComplianceSummaryByConfigRuleResponse < Struct.new(
       :compliance_summary)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3936,6 +4062,7 @@ module Aws::ConfigService
     #
     class GetComplianceSummaryByResourceTypeRequest < Struct.new(
       :resource_types)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3950,6 +4077,7 @@ module Aws::ConfigService
     #
     class GetComplianceSummaryByResourceTypeResponse < Struct.new(
       :compliance_summaries_by_resource_type)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3994,6 +4122,7 @@ module Aws::ConfigService
       :filters,
       :limit,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4016,6 +4145,7 @@ module Aws::ConfigService
       :conformance_pack_name,
       :conformance_pack_rule_evaluation_results,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4047,6 +4177,7 @@ module Aws::ConfigService
       :conformance_pack_names,
       :limit,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4064,6 +4195,7 @@ module Aws::ConfigService
     class GetConformancePackComplianceSummaryResponse < Struct.new(
       :conformance_pack_compliance_summary_list,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4111,6 +4243,7 @@ module Aws::ConfigService
       :resource_types,
       :limit,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4149,6 +4282,7 @@ module Aws::ConfigService
       :total_discovered_resources,
       :resource_counts,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4192,6 +4326,7 @@ module Aws::ConfigService
       :filters,
       :limit,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4209,6 +4344,7 @@ module Aws::ConfigService
     class GetOrganizationConfigRuleDetailedStatusResponse < Struct.new(
       :organization_config_rule_detailed_status,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4252,6 +4388,7 @@ module Aws::ConfigService
       :filters,
       :limit,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4269,6 +4406,7 @@ module Aws::ConfigService
     class GetOrganizationConformancePackDetailedStatusResponse < Struct.new(
       :organization_conformance_pack_detailed_statuses,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4332,6 +4470,7 @@ module Aws::ConfigService
       :chronological_order,
       :limit,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4352,6 +4491,7 @@ module Aws::ConfigService
     class GetResourceConfigHistoryResponse < Struct.new(
       :configuration_items,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4372,6 +4512,7 @@ module Aws::ConfigService
     class GroupedResourceCount < Struct.new(
       :group_name,
       :resource_count)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4551,6 +4692,7 @@ module Aws::ConfigService
       :filters,
       :limit,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4568,6 +4710,7 @@ module Aws::ConfigService
     class ListAggregateDiscoveredResourcesResponse < Struct.new(
       :resource_identifiers,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4626,6 +4769,7 @@ module Aws::ConfigService
       :limit,
       :include_deleted_resources,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4645,6 +4789,7 @@ module Aws::ConfigService
     class ListDiscoveredResourcesResponse < Struct.new(
       :resource_identifiers,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4681,6 +4826,7 @@ module Aws::ConfigService
       :resource_arn,
       :limit,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4698,6 +4844,7 @@ module Aws::ConfigService
     class ListTagsForResourceResponse < Struct.new(
       :tags,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4833,6 +4980,7 @@ module Aws::ConfigService
       :error_code,
       :error_message,
       :last_update_time)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4980,6 +5128,7 @@ module Aws::ConfigService
       :role_arn,
       :aws_regions,
       :all_aws_regions)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5027,6 +5176,7 @@ module Aws::ConfigService
       :organization_custom_rule_metadata,
       :excluded_accounts,
       :last_update_time)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5100,6 +5250,7 @@ module Aws::ConfigService
       :error_code,
       :error_message,
       :last_update_time)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5147,6 +5298,7 @@ module Aws::ConfigService
       :conformance_pack_input_parameters,
       :excluded_accounts,
       :last_update_time)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5227,6 +5379,7 @@ module Aws::ConfigService
       :error_code,
       :error_message,
       :last_update_time)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5301,6 +5454,7 @@ module Aws::ConfigService
       :error_code,
       :error_message,
       :last_update_time)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5407,6 +5561,7 @@ module Aws::ConfigService
       :resource_id_scope,
       :tag_key_scope,
       :tag_value_scope)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5489,6 +5644,7 @@ module Aws::ConfigService
       :resource_id_scope,
       :tag_key_scope,
       :tag_value_scope)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5554,6 +5710,7 @@ module Aws::ConfigService
     class OrganizationResourceDetailedStatusFilters < Struct.new(
       :account_id,
       :status)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5579,6 +5736,7 @@ module Aws::ConfigService
     class PendingAggregationRequest < Struct.new(
       :requester_account_id,
       :requester_aws_region)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5614,6 +5772,7 @@ module Aws::ConfigService
       :authorized_account_id,
       :authorized_aws_region,
       :tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5625,6 +5784,7 @@ module Aws::ConfigService
     #
     class PutAggregationAuthorizationResponse < Struct.new(
       :aggregation_authorization)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5680,6 +5840,7 @@ module Aws::ConfigService
     class PutConfigRuleRequest < Struct.new(
       :config_rule,
       :tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5731,6 +5892,7 @@ module Aws::ConfigService
       :account_aggregation_sources,
       :organization_aggregation_source,
       :tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5742,6 +5904,7 @@ module Aws::ConfigService
     #
     class PutConfigurationAggregatorResponse < Struct.new(
       :configuration_aggregator)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5771,6 +5934,7 @@ module Aws::ConfigService
     #
     class PutConfigurationRecorderRequest < Struct.new(
       :configuration_recorder)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5839,6 +6003,7 @@ module Aws::ConfigService
       :delivery_s3_bucket,
       :delivery_s3_key_prefix,
       :conformance_pack_input_parameters)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5850,6 +6015,7 @@ module Aws::ConfigService
     #
     class PutConformancePackResponse < Struct.new(
       :conformance_pack_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5880,6 +6046,7 @@ module Aws::ConfigService
     #
     class PutDeliveryChannelRequest < Struct.new(
       :delivery_channel)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5931,6 +6098,7 @@ module Aws::ConfigService
       :evaluations,
       :result_token,
       :test_mode)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5942,6 +6110,7 @@ module Aws::ConfigService
     #
     class PutEvaluationsResponse < Struct.new(
       :failed_evaluations)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5998,6 +6167,7 @@ module Aws::ConfigService
       :organization_managed_rule_metadata,
       :organization_custom_rule_metadata,
       :excluded_accounts)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6009,6 +6179,7 @@ module Aws::ConfigService
     #
     class PutOrganizationConfigRuleResponse < Struct.new(
       :organization_config_rule_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6087,6 +6258,7 @@ module Aws::ConfigService
       :delivery_s3_key_prefix,
       :conformance_pack_input_parameters,
       :excluded_accounts)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6098,6 +6270,7 @@ module Aws::ConfigService
     #
     class PutOrganizationConformancePackResponse < Struct.new(
       :organization_conformance_pack_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6145,6 +6318,7 @@ module Aws::ConfigService
     #
     class PutRemediationConfigurationsRequest < Struct.new(
       :remediation_configurations)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6156,6 +6330,7 @@ module Aws::ConfigService
     #
     class PutRemediationConfigurationsResponse < Struct.new(
       :failed_batches)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6200,6 +6375,7 @@ module Aws::ConfigService
       :resource_keys,
       :message,
       :expiration_time)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6213,6 +6389,7 @@ module Aws::ConfigService
     #
     class PutRemediationExceptionsResponse < Struct.new(
       :failed_batches)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6276,6 +6453,7 @@ module Aws::ConfigService
       :resource_name,
       :configuration,
       :tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6298,6 +6476,7 @@ module Aws::ConfigService
     #
     class PutRetentionConfigurationRequest < Struct.new(
       :retention_period_in_days)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6309,6 +6488,7 @@ module Aws::ConfigService
     #
     class PutRetentionConfigurationResponse < Struct.new(
       :retention_configuration)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6322,6 +6502,7 @@ module Aws::ConfigService
     #
     class QueryInfo < Struct.new(
       :select_fields)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6431,6 +6612,7 @@ module Aws::ConfigService
       :all_supported,
       :include_global_resource_types,
       :resource_types)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6459,6 +6641,7 @@ module Aws::ConfigService
       :resource_id,
       :resource_name,
       :relationship_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6573,6 +6756,7 @@ module Aws::ConfigService
       :retry_attempt_seconds,
       :arn,
       :created_by_service)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6609,6 +6793,7 @@ module Aws::ConfigService
       :resource_id,
       :message,
       :expiration_time)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6636,6 +6821,7 @@ module Aws::ConfigService
     class RemediationExceptionResourceKey < Struct.new(
       :resource_type,
       :resource_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6671,6 +6857,7 @@ module Aws::ConfigService
       :step_details,
       :invocation_time,
       :last_updated_time)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6704,6 +6891,7 @@ module Aws::ConfigService
       :error_message,
       :start_time,
       :stop_time)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6742,6 +6930,7 @@ module Aws::ConfigService
     class RemediationParameterValue < Struct.new(
       :resource_value,
       :static_value)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6760,6 +6949,7 @@ module Aws::ConfigService
     class ResourceCount < Struct.new(
       :resource_type,
       :count)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6793,6 +6983,7 @@ module Aws::ConfigService
       :resource_type,
       :account_id,
       :region)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6832,6 +7023,7 @@ module Aws::ConfigService
       :resource_id,
       :resource_name,
       :region)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6862,6 +7054,7 @@ module Aws::ConfigService
       :resource_id,
       :resource_name,
       :resource_deletion_time)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6919,6 +7112,7 @@ module Aws::ConfigService
     class ResourceKey < Struct.new(
       :resource_type,
       :resource_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6952,6 +7146,7 @@ module Aws::ConfigService
     #
     class ResourceValue < Struct.new(
       :value)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6976,6 +7171,7 @@ module Aws::ConfigService
     class RetentionConfiguration < Struct.new(
       :name,
       :retention_period_in_days)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -7027,6 +7223,7 @@ module Aws::ConfigService
       :tag_key,
       :tag_value,
       :compliance_resource_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -7069,6 +7266,7 @@ module Aws::ConfigService
       :limit,
       :max_results,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -7091,6 +7289,7 @@ module Aws::ConfigService
       :results,
       :query_info,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -7122,6 +7321,7 @@ module Aws::ConfigService
       :expression,
       :limit,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -7144,6 +7344,7 @@ module Aws::ConfigService
       :results,
       :query_info,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -7196,6 +7397,7 @@ module Aws::ConfigService
       :owner,
       :source_identifier,
       :source_details)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -7270,6 +7472,7 @@ module Aws::ConfigService
       :event_source,
       :message_type,
       :maximum_execution_frequency)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -7303,6 +7506,7 @@ module Aws::ConfigService
     class SsmControls < Struct.new(
       :concurrent_execution_rate_percentage,
       :error_percentage)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -7322,6 +7526,7 @@ module Aws::ConfigService
     #
     class StartConfigRulesEvaluationRequest < Struct.new(
       :config_rule_names)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -7350,6 +7555,7 @@ module Aws::ConfigService
     #
     class StartConfigurationRecorderRequest < Struct.new(
       :configuration_recorder_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -7382,6 +7588,7 @@ module Aws::ConfigService
     class StartRemediationExecutionRequest < Struct.new(
       :config_rule_name,
       :resource_keys)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -7400,6 +7607,7 @@ module Aws::ConfigService
     class StartRemediationExecutionResponse < Struct.new(
       :failure_message,
       :failed_items)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -7420,6 +7628,7 @@ module Aws::ConfigService
     #
     class StaticValue < Struct.new(
       :values)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -7484,6 +7693,7 @@ module Aws::ConfigService
     class StatusDetailFilters < Struct.new(
       :account_id,
       :member_account_rule_status)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -7505,6 +7715,7 @@ module Aws::ConfigService
     #
     class StopConfigurationRecorderRequest < Struct.new(
       :configuration_recorder_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -7537,6 +7748,7 @@ module Aws::ConfigService
     class Tag < Struct.new(
       :key,
       :value)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -7569,6 +7781,7 @@ module Aws::ConfigService
     class TagResourceRequest < Struct.new(
       :resource_arn,
       :tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -7603,6 +7816,7 @@ module Aws::ConfigService
     class UntagResourceRequest < Struct.new(
       :resource_arn,
       :tag_keys)
+      SENSITIVE = []
       include Aws::Structure
     end
 
