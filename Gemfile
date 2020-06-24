@@ -94,6 +94,7 @@ group :test do
 
   gem 'multipart-post'
   gem 'rspec'
+  gem 'rspec-retry'
 end
 
 group :build do

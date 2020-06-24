@@ -4,7 +4,7 @@ require_relative '../spec_helper'
 
 module Aws
   module S3
-    describe Object do
+    describe Object, retry: 3 do
       let(:object) do
         S3::Object.new('bucket', 'unescaped/key path', stub_responses: true)
       end

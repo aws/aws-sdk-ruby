@@ -7,6 +7,7 @@ $LOAD_PATH.unshift(File.expand_path('../../../aws-eventstream/lib',  __FILE__))
 $LOAD_PATH.unshift(File.expand_path('../../../aws-partitions/lib',  __FILE__))
 
 require 'webmock/rspec'
+require 'rspec/retry'
 
 # Prevent the SDK unit tests from loading actual credentials while under test.
 # By default the SDK attempts to load credentials from:
@@ -32,6 +33,9 @@ RSpec.configure do |config|
 
     Aws.shared_config.fresh
   end
+
+  config.verbose_retry = true
+  config.display_try_failure_messages = true
 
   # Thread.report_on_exception was set to default true in Ruby 2.5
   # When testing code that intentionally has threads that raise exceptions
