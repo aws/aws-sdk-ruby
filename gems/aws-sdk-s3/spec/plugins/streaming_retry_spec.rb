@@ -103,6 +103,50 @@ module Aws
             expect(resp.body.read).to eq(full_test_data)
           end
         end
+
+        context 'response_target is a file' do
+          let(:tempfile) { Tempfile.new('test') }
+          let(:request) { {key: 'test', bucket: 'test-bucket', response_target: tempfile.path} }
+
+          it 'retries multiple requests with range set' do
+            parts = %w[data_part_1 part2 longer_data_at_end_part3]
+            full_test_data = parts.join
+
+            stub_request(:get, 'https://test-bucket.s3.amazonaws.com/test')
+              .to_return(status: 200, body: parts[0], headers: { 'content-length' => full_test_data.bytesize })
+
+            # second request, on retry should have range
+            stub_request(:get, 'https://test-bucket.s3.amazonaws.com/test')
+              .with(headers: { 'range' => "bytes=#{parts[0].bytesize}-" })
+              .to_return(status: 200, body: parts[1], headers: { 'content-length' => (parts[1] + parts[2]).bytesize })
+
+            stub_request(:get, 'https://test-bucket.s3.amazonaws.com/test')
+              .with(headers: { 'range' => "bytes=#{(parts[0] + parts[1]).bytesize}-" })
+              .to_return(status: 200, body: parts[2], headers: { 'content-length' => parts[2].bytesize })
+
+            client.get_object(request)
+            expect(File.read(tempfile.path)).to eq(full_test_data)
+          end
+
+          it 'handles an error after an initial retry' do
+            parts = %w[data_part_1 longer_data_at_end_part2]
+            full_test_data = parts.join
+
+            stub_request(:get, 'https://test-bucket.s3.amazonaws.com/test')
+              .to_return(status: 200, body: parts[0], headers: { 'content-length' => full_test_data.bytesize })
+
+            # second request, on retry should have range
+            stub_request(:get, 'https://test-bucket.s3.amazonaws.com/test')
+              .with(headers: { 'range' => "bytes=#{parts[0].bytesize}-" })
+              .to_return(status: 500, body: 'error message')
+
+            expect do
+              client.get_object(request)
+            end.to raise_error(Errors::Http500Error)
+            output.rewind
+            expect(File.read(tempfile.path)).to eq(parts[0])
+          end
+        end
       end
     end
   end

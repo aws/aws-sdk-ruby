@@ -40,7 +40,8 @@ module Aws
           end
         end
 
-        handler(Handler,
+        handler(
+          Handler,
           step: :sign,
           operations: [
             :complete_multipart_upload,

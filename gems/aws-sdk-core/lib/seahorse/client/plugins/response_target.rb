@@ -17,10 +17,9 @@ module Seahorse
 
           def call(context)
             if context.params.is_a?(Hash) && context.params[:response_target]
-              target = context.params.delete(:response_target)
-            else
-              target = context[:response_target]
+              context[:response_target] = context.params.delete(:response_target)
             end
+            target = context[:response_target]
             add_event_listeners(context, target) if target
             @handler.call(context)
           end
@@ -41,7 +40,7 @@ module Seahorse
 
             context.http_response.on_success(200..299) do
               body = context.http_response.body
-              if ManagedFile === body && body.open?
+              if body.is_a?(ManagedFile) && body.open?
                 body.close
               end
             end
