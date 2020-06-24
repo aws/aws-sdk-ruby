@@ -288,8 +288,7 @@ module Aws::AutoScaling
     #   @return [Integer]
     #
     # @!attribute [rw] default_cooldown
-    #   The amount of time, in seconds, after a scaling activity completes
-    #   before another scaling activity can start.
+    #   The duration of the default cooldown period, in seconds.
     #   @return [Integer]
     #
     # @!attribute [rw] availability_zones
@@ -975,8 +974,10 @@ module Aws::AutoScaling
     #   before another scaling activity can start. The default value is
     #   `300`.
     #
-    #   For more information, see [Scaling Cooldowns][1] in the *Amazon EC2
-    #   Auto Scaling User Guide*.
+    #   This setting applies when using simple scaling policies, but not
+    #   when using other scaling policies or scheduled scaling. For more
+    #   information, see [Scaling Cooldowns for Amazon EC2 Auto Scaling][1]
+    #   in the *Amazon EC2 Auto Scaling User Guide*.
     #
     #
     #
@@ -1042,8 +1043,7 @@ module Aws::AutoScaling
     #   For more information, see [Health Check Grace Period][1] in the
     #   *Amazon EC2 Auto Scaling User Guide*.
     #
-    #   Conditional: This parameter is required if you are adding an `ELB`
-    #   health check.
+    #   Required if you are adding an `ELB` health check.
     #
     #
     #
@@ -1856,13 +1856,6 @@ module Aws::AutoScaling
 
     # @!attribute [rw] instance_refreshes
     #   The instance refreshes for the specified group.
-    #
-    #   For more information, see [Replacing Auto Scaling Instances Based on
-    #   an Instance Refresh][1].
-    #
-    #
-    #
-    #   [1]: https://docs.aws.amazon.com/autoscaling/ec2/userguide/asg-instance-refresh.html
     #   @return [Array<Types::InstanceRefresh>]
     #
     # @!attribute [rw] next_token
@@ -2529,9 +2522,9 @@ module Aws::AutoScaling
     # @!attribute [rw] snapshot_id
     #   The snapshot ID of the volume to use.
     #
-    #   Conditional: This parameter is optional if you specify a volume
-    #   size. If you specify both `SnapshotId` and `VolumeSize`,
-    #   `VolumeSize` must be equal or greater than the size of the snapshot.
+    #   `SnapshotId` is optional if you specify a volume size. If you
+    #   specify both `SnapshotId` and `VolumeSize`, the volume size must be
+    #   equal or greater than the size of the snapshot.
     #   @return [String]
     #
     # @!attribute [rw] volume_size
@@ -2545,7 +2538,7 @@ module Aws::AutoScaling
     #   Default: If you create a volume from a snapshot and you don't
     #   specify a volume size, the default is the snapshot size.
     #
-    #   <note markdown="1"> At least one of VolumeSize or SnapshotId is required.
+    #   <note markdown="1"> At least one of `VolumeSize` or `SnapshotId` is required.
     #
     #    </note>
     #   @return [Integer]
@@ -2575,8 +2568,8 @@ module Aws::AutoScaling
     #   For more information, see [Amazon EBS Volume Types][1] in the
     #   *Amazon EC2 User Guide for Linux Instances*.
     #
-    #   Conditional: This parameter is required when the volume type is
-    #   `io1`. (Not used with `standard`, `gp2`, `st1`, or `sc1` volumes.)
+    #   Required when the volume type is `io1`. (Not used with `standard`,
+    #   `gp2`, `st1`, or `sc1` volumes.)
     #
     #
     #
@@ -2812,8 +2805,8 @@ module Aws::AutoScaling
     #   This parameter is not supported if the policy type is `StepScaling`
     #   or `TargetTrackingScaling`.
     #
-    #   For more information, see [Scaling Cooldowns][1] in the *Amazon EC2
-    #   Auto Scaling User Guide*.
+    #   For more information, see [Scaling Cooldowns for Amazon EC2 Auto
+    #   Scaling][1] in the *Amazon EC2 Auto Scaling User Guide*.
     #
     #
     #
@@ -2830,15 +2823,15 @@ module Aws::AutoScaling
     #   If you specify a metric value that doesn't correspond to a step
     #   adjustment for the policy, the call returns an error.
     #
-    #   Conditional: This parameter is required if the policy type is
-    #   `StepScaling` and not supported otherwise.
+    #   Required if the policy type is `StepScaling` and not supported
+    #   otherwise.
     #   @return [Float]
     #
     # @!attribute [rw] breach_threshold
     #   The breach threshold for the alarm.
     #
-    #   Conditional: This parameter is required if the policy type is
-    #   `StepScaling` and not supported otherwise.
+    #   Required if the policy type is `StepScaling` and not supported
+    #   otherwise.
     #   @return [Float]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/ExecutePolicyType AWS API Documentation
@@ -4123,7 +4116,7 @@ module Aws::AutoScaling
     # You can create a mixed instances policy for a new Auto Scaling group,
     # or you can create it for an existing group by updating the group to
     # specify `MixedInstancesPolicy` as the top-level parameter instead of a
-    # launch configuration or template. For more information, see
+    # launch configuration or launch template. For more information, see
     # CreateAutoScalingGroup and UpdateAutoScalingGroup.
     #
     #
@@ -4160,8 +4153,7 @@ module Aws::AutoScaling
     # @!attribute [rw] launch_template
     #   The launch template and instance types (overrides).
     #
-    #   This parameter must be specified when creating a mixed instances
-    #   policy.
+    #   Required when creating a mixed instances policy.
     #   @return [Types::LaunchTemplate]
     #
     # @!attribute [rw] instances_distribution
@@ -4405,8 +4397,8 @@ module Aws::AutoScaling
     #
     #   * autoscaling:EC2\_INSTANCE\_TERMINATING
     #
-    #   Conditional: This parameter is required for new lifecycle hooks, but
-    #   optional when updating existing hooks.
+    #   Required for new lifecycle hooks, but optional when updating
+    #   existing hooks.
     #   @return [String]
     #
     # @!attribute [rw] role_arn
@@ -4414,8 +4406,8 @@ module Aws::AutoScaling
     #   publish to the specified notification target, for example, an Amazon
     #   SNS topic or an Amazon SQS queue.
     #
-    #   Conditional: This parameter is required for new lifecycle hooks, but
-    #   optional when updating existing hooks.
+    #   Required for new lifecycle hooks, but optional when updating
+    #   existing hooks.
     #   @return [String]
     #
     # @!attribute [rw] notification_target_arn
@@ -4561,19 +4553,23 @@ module Aws::AutoScaling
     #   @return [String]
     #
     # @!attribute [rw] policy_type
-    #   The policy type. The valid values are `SimpleScaling`,
-    #   `StepScaling`, and `TargetTrackingScaling`. If the policy type is
-    #   null, the value is treated as `SimpleScaling`.
+    #   One of the following policy types:
+    #
+    #   * `TargetTrackingScaling`
+    #
+    #   * `StepScaling`
+    #
+    #   * `SimpleScaling` (default)
     #   @return [String]
     #
     # @!attribute [rw] adjustment_type
-    #   Specifies whether the `ScalingAdjustment` parameter is an absolute
-    #   number or a percentage of the current capacity. The valid values are
+    #   Specifies how the scaling adjustment is interpreted (either an
+    #   absolute number or a percentage). The valid values are
     #   `ChangeInCapacity`, `ExactCapacity`, and `PercentChangeInCapacity`.
     #
-    #   Valid only if the policy type is `StepScaling` or `SimpleScaling`.
-    #   For more information, see [Scaling Adjustment Types][1] in the
-    #   *Amazon EC2 Auto Scaling User Guide*.
+    #   Required if the policy type is `StepScaling` or `SimpleScaling`. For
+    #   more information, see [Scaling Adjustment Types][1] in the *Amazon
+    #   EC2 Auto Scaling User Guide*.
     #
     #
     #
@@ -4586,18 +4582,23 @@ module Aws::AutoScaling
     #   @return [Integer]
     #
     # @!attribute [rw] min_adjustment_magnitude
-    #   The minimum value to scale by when scaling by percentages. For
-    #   example, suppose that you create a step scaling policy to scale out
-    #   an Auto Scaling group by 25 percent and you specify a
-    #   `MinAdjustmentMagnitude` of 2. If the group has 4 instances and the
-    #   scaling policy is performed, 25 percent of 4 is 1. However, because
-    #   you specified a `MinAdjustmentMagnitude` of 2, Amazon EC2 Auto
-    #   Scaling scales out the group by 2 instances.
+    #   The minimum value to scale by when the adjustment type is
+    #   `PercentChangeInCapacity`. For example, suppose that you create a
+    #   step scaling policy to scale out an Auto Scaling group by 25 percent
+    #   and you specify a `MinAdjustmentMagnitude` of 2. If the group has 4
+    #   instances and the scaling policy is performed, 25 percent of 4 is 1.
+    #   However, because you specified a `MinAdjustmentMagnitude` of 2,
+    #   Amazon EC2 Auto Scaling scales out the group by 2 instances.
     #
-    #   Valid only if the policy type is `StepScaling` or `SimpleScaling`
-    #   and the adjustment type is `PercentChangeInCapacity`. For more
-    #   information, see [Scaling Adjustment Types][1] in the *Amazon EC2
-    #   Auto Scaling User Guide*.
+    #   Valid only if the policy type is `StepScaling` or `SimpleScaling`.
+    #   For more information, see [Scaling Adjustment Types][1] in the
+    #   *Amazon EC2 Auto Scaling User Guide*.
+    #
+    #   <note markdown="1"> Some Auto Scaling groups use instance weights. In this case, set the
+    #   `MinAdjustmentMagnitude` to a value that is at least as large as
+    #   your largest instance weight.
+    #
+    #    </note>
     #
     #
     #
@@ -4605,26 +4606,23 @@ module Aws::AutoScaling
     #   @return [Integer]
     #
     # @!attribute [rw] scaling_adjustment
-    #   The amount by which a simple scaling policy scales the Auto Scaling
-    #   group in response to an alarm breach. The adjustment is based on the
-    #   value that you specified in the `AdjustmentType` parameter (either
-    #   an absolute number or a percentage). A positive value adds to the
-    #   current capacity and a negative value subtracts from the current
-    #   capacity. For exact capacity, you must specify a positive value.
+    #   The amount by which to scale, based on the specified adjustment
+    #   type. A positive value adds to the current capacity while a negative
+    #   number removes from the current capacity. For exact capacity, you
+    #   must specify a positive value.
     #
-    #   Conditional: If you specify `SimpleScaling` for the policy type, you
-    #   must specify this parameter. (Not used with any other policy type.)
+    #   Required if the policy type is `SimpleScaling`. (Not used with any
+    #   other policy type.)
     #   @return [Integer]
     #
     # @!attribute [rw] cooldown
-    #   The amount of time, in seconds, after a scaling activity completes
-    #   before any further dynamic scaling activities can start. If this
-    #   parameter is not specified, the default cooldown period for the
-    #   group applies.
+    #   The duration of the policy's cooldown period, in seconds. When a
+    #   cooldown period is specified here, it overrides the default cooldown
+    #   period defined for the Auto Scaling group.
     #
     #   Valid only if the policy type is `SimpleScaling`. For more
-    #   information, see [Scaling Cooldowns][1] in the *Amazon EC2 Auto
-    #   Scaling User Guide*.
+    #   information, see [Scaling Cooldowns for Amazon EC2 Auto Scaling][1]
+    #   in the *Amazon EC2 Auto Scaling User Guide*.
     #
     #
     #
@@ -4643,29 +4641,42 @@ module Aws::AutoScaling
     #   A set of adjustments that enable you to scale based on the size of
     #   the alarm breach.
     #
-    #   Conditional: If you specify `StepScaling` for the policy type, you
-    #   must specify this parameter. (Not used with any other policy type.)
+    #   Required if the policy type is `StepScaling`. (Not used with any
+    #   other policy type.)
     #   @return [Array<Types::StepAdjustment>]
     #
     # @!attribute [rw] estimated_instance_warmup
     #   The estimated time, in seconds, until a newly launched instance can
-    #   contribute to the CloudWatch metrics. The default is to use the
-    #   value specified for the default cooldown period for the group.
+    #   contribute to the CloudWatch metrics. If not provided, the default
+    #   is to use the value from the default cooldown period for the Auto
+    #   Scaling group.
     #
-    #   Valid only if the policy type is `StepScaling` or
-    #   `TargetTrackingScaling`.
+    #   Valid only if the policy type is `TargetTrackingScaling` or
+    #   `StepScaling`.
     #   @return [Integer]
     #
     # @!attribute [rw] target_tracking_configuration
     #   A target tracking scaling policy. Includes support for predefined or
     #   customized metrics.
     #
+    #   The following predefined metrics are available:
+    #
+    #   * `ASGAverageCPUUtilization`
+    #
+    #   * `ASGAverageNetworkIn`
+    #
+    #   * `ASGAverageNetworkOut`
+    #
+    #   * `ALBRequestCountPerTarget`
+    #
+    #   If you specify `ALBRequestCountPerTarget` for the metric, you must
+    #   specify the `ResourceLabel` parameter with the
+    #   `PredefinedMetricSpecification`.
+    #
     #   For more information, see [TargetTrackingConfiguration][1] in the
     #   *Amazon EC2 Auto Scaling API Reference*.
     #
-    #   Conditional: If you specify `TargetTrackingScaling` for the policy
-    #   type, you must specify this parameter. (Not used with any other
-    #   policy type.)
+    #   Required if the policy type is `TargetTrackingScaling`.
     #
     #
     #
@@ -4861,10 +4872,7 @@ module Aws::AutoScaling
     #   The number of seconds until a newly launched instance is configured
     #   and ready to use. During this time, Amazon EC2 Auto Scaling does not
     #   immediately move on to the next replacement. The default is to use
-    #   the value specified for the health check grace period for the group.
-    #
-    #   Note: While warming up, a newly launched instance is not counted
-    #   toward the aggregated metrics of the Auto Scaling group.
+    #   the value for the health check grace period defined for the group.
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/RefreshPreferences AWS API Documentation
@@ -4933,14 +4941,28 @@ module Aws::AutoScaling
     #   @return [String]
     #
     # @!attribute [rw] policy_type
-    #   The policy type. The valid values are `SimpleScaling`,
-    #   `StepScaling`, and `TargetTrackingScaling`.
+    #   One of the following policy types:
+    #
+    #   * `TargetTrackingScaling`
+    #
+    #   * `StepScaling`
+    #
+    #   * `SimpleScaling` (default)
+    #
+    #   For more information, see [Target Tracking Scaling Policies][1] and
+    #   [Step and Simple Scaling Policies][2] in the *Amazon EC2 Auto
+    #   Scaling User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/autoscaling/ec2/userguide/as-scaling-target-tracking.html
+    #   [2]: https://docs.aws.amazon.com/autoscaling/ec2/userguide/as-scaling-simple-step.html
     #   @return [String]
     #
     # @!attribute [rw] adjustment_type
-    #   The adjustment type, which specifies how `ScalingAdjustment` is
-    #   interpreted. The valid values are `ChangeInCapacity`,
-    #   `ExactCapacity`, and `PercentChangeInCapacity`.
+    #   Specifies how the scaling adjustment is interpreted (either an
+    #   absolute number or a percentage). The valid values are
+    #   `ChangeInCapacity`, `ExactCapacity`, and `PercentChangeInCapacity`.
     #   @return [String]
     #
     # @!attribute [rw] min_adjustment_step
@@ -4949,10 +4971,8 @@ module Aws::AutoScaling
     #   @return [Integer]
     #
     # @!attribute [rw] min_adjustment_magnitude
-    #   The minimum number of instances to scale. If the value of
-    #   `AdjustmentType` is `PercentChangeInCapacity`, the scaling policy
-    #   changes the `DesiredCapacity` of the Auto Scaling group by at least
-    #   this many instances. Otherwise, the error is `ValidationError`.
+    #   The minimum value to scale by when the adjustment type is
+    #   `PercentChangeInCapacity`.
     #   @return [Integer]
     #
     # @!attribute [rw] scaling_adjustment
@@ -4962,8 +4982,7 @@ module Aws::AutoScaling
     #   @return [Integer]
     #
     # @!attribute [rw] cooldown
-    #   The amount of time, in seconds, after a scaling activity completes
-    #   before any further dynamic scaling activities can start.
+    #   The duration of the policy's cooldown period, in seconds.
     #   @return [Integer]
     #
     # @!attribute [rw] step_adjustments
@@ -5399,13 +5418,25 @@ module Aws::AutoScaling
     #   A rolling update is an update that is applied to all instances in an
     #   Auto Scaling group until all instances have been updated. A rolling
     #   update can fail due to failed health checks or if instances are on
-    #   standby or are protected from scale-in. If the rolling update
+    #   standby or are protected from scale in. If the rolling update
     #   process fails, any instances that were already replaced are not
     #   rolled back to their previous configuration.
     #   @return [String]
     #
     # @!attribute [rw] preferences
     #   Set of preferences associated with the instance refresh request.
+    #
+    #   If not provided, the default values are used. For
+    #   `MinHealthyPercentage`, the default value is `90`. For
+    #   `InstanceWarmup`, the default is to use the value specified for the
+    #   health check grace period for the Auto Scaling group.
+    #
+    #   For more information, see [RefreshPreferences][1] in the *Amazon EC2
+    #   Auto Scaling API Reference*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/autoscaling/ec2/APIReference/API_RefreshPreferences.html
     #   @return [Types::RefreshPreferences]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/StartInstanceRefreshType AWS API Documentation
@@ -5834,13 +5865,12 @@ module Aws::AutoScaling
     # @!attribute [rw] default_cooldown
     #   The amount of time, in seconds, after a scaling activity completes
     #   before another scaling activity can start. The default value is
-    #   `300`. This cooldown period is not used when a scaling-specific
-    #   cooldown is specified.
+    #   `300`.
     #
-    #   Cooldown periods are not supported for target tracking scaling
-    #   policies, step scaling policies, or scheduled scaling. For more
-    #   information, see [Scaling Cooldowns][1] in the *Amazon EC2 Auto
-    #   Scaling User Guide*.
+    #   This setting applies when using simple scaling policies, but not
+    #   when using other scaling policies or scheduled scaling. For more
+    #   information, see [Scaling Cooldowns for Amazon EC2 Auto Scaling][1]
+    #   in the *Amazon EC2 Auto Scaling User Guide*.
     #
     #
     #
@@ -5866,8 +5896,7 @@ module Aws::AutoScaling
     #   For more information, see [Health Check Grace Period][1] in the
     #   *Amazon EC2 Auto Scaling User Guide*.
     #
-    #   Conditional: This parameter is required if you are adding an `ELB`
-    #   health check.
+    #   Required if you are adding an `ELB` health check.
     #
     #
     #

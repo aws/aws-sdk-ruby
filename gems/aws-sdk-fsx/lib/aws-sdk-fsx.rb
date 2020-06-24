@@ -47,6 +47,6 @@ require_relative 'aws-sdk-fsx/customizations'
 # @service
 module Aws::FSx
 
-  GEM_VERSION = '1.22.0'
+  GEM_VERSION = '1.23.0'
 
 end

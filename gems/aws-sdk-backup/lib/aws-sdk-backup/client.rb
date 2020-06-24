@@ -716,6 +716,7 @@ module Aws::Backup
     #
     # @return [Types::DescribeBackupJobOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
+    #   * {Types::DescribeBackupJobOutput#account_id #account_id} => String
     #   * {Types::DescribeBackupJobOutput#backup_job_id #backup_job_id} => String
     #   * {Types::DescribeBackupJobOutput#backup_vault_name #backup_vault_name} => String
     #   * {Types::DescribeBackupJobOutput#backup_vault_arn #backup_vault_arn} => String
@@ -742,6 +743,7 @@ module Aws::Backup
     #
     # @example Response structure
     #
+    #   resp.account_id #=> String
     #   resp.backup_job_id #=> String
     #   resp.backup_vault_name #=> String
     #   resp.backup_vault_arn #=> String
@@ -830,6 +832,7 @@ module Aws::Backup
     #
     # @example Response structure
     #
+    #   resp.copy_job.account_id #=> String
     #   resp.copy_job.copy_job_id #=> String
     #   resp.copy_job.source_backup_vault_arn #=> String
     #   resp.copy_job.source_recovery_point_arn #=> String
@@ -967,12 +970,12 @@ module Aws::Backup
       req.send_request(options)
     end
 
-    # Returns the current service opt-in settings for the region. If the
-    # service has a value set to true, AWS Backup will attempt to protect
-    # that service's resources in this region, when included in an
-    # on-demand backup or scheduled backup plan. If the value is set to
-    # false for a service, AWS Backup will not attempt to protect that
-    # service's resources in this region.
+    # Returns the current service opt-in settings for the Region. If the
+    # service has a value set to `true`, AWS Backup attempts to protect that
+    # service's resources in this Region, when included in an on-demand
+    # backup or scheduled backup plan. If the value is set to `false` for a
+    # service, AWS Backup does not attempt to protect that service's
+    # resources in this Region.
     #
     # @return [Types::DescribeRegionSettingsOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1000,6 +1003,7 @@ module Aws::Backup
     #
     # @return [Types::DescribeRestoreJobOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
+    #   * {Types::DescribeRestoreJobOutput#account_id #account_id} => String
     #   * {Types::DescribeRestoreJobOutput#restore_job_id #restore_job_id} => String
     #   * {Types::DescribeRestoreJobOutput#recovery_point_arn #recovery_point_arn} => String
     #   * {Types::DescribeRestoreJobOutput#creation_date #creation_date} => Time
@@ -1011,6 +1015,7 @@ module Aws::Backup
     #   * {Types::DescribeRestoreJobOutput#iam_role_arn #iam_role_arn} => String
     #   * {Types::DescribeRestoreJobOutput#expected_completion_time_minutes #expected_completion_time_minutes} => Integer
     #   * {Types::DescribeRestoreJobOutput#created_resource_arn #created_resource_arn} => String
+    #   * {Types::DescribeRestoreJobOutput#resource_type #resource_type} => String
     #
     # @example Request syntax with placeholder values
     #
@@ -1020,6 +1025,7 @@ module Aws::Backup
     #
     # @example Response structure
     #
+    #   resp.account_id #=> String
     #   resp.restore_job_id #=> String
     #   resp.recovery_point_arn #=> String
     #   resp.creation_date #=> Time
@@ -1031,6 +1037,7 @@ module Aws::Backup
     #   resp.iam_role_arn #=> String
     #   resp.expected_completion_time_minutes #=> Integer
     #   resp.created_resource_arn #=> String
+    #   resp.resource_type #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/backup-2018-11-15/DescribeRestoreJob AWS API Documentation
     #
@@ -1442,11 +1449,17 @@ module Aws::Backup
     #
     #   * `EBS` for Amazon Elastic Block Store
     #
+    #   * `EC2` for Amazon Elastic Compute Cloud
+    #
     #   * `EFS` for Amazon Elastic File System
     #
     #   * `RDS` for Amazon Relational Database Service
     #
     #   * `Storage Gateway` for AWS Storage Gateway
+    #
+    # @option params [String] :by_account_id
+    #   The account ID to list the jobs from. Returns only backup jobs
+    #   associated with the specified account ID.
     #
     # @return [Types::ListBackupJobsOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1466,11 +1479,13 @@ module Aws::Backup
     #     by_created_before: Time.now,
     #     by_created_after: Time.now,
     #     by_resource_type: "ResourceType",
+    #     by_account_id: "AccountId",
     #   })
     #
     # @example Response structure
     #
     #   resp.backup_jobs #=> Array
+    #   resp.backup_jobs[0].account_id #=> String
     #   resp.backup_jobs[0].backup_job_id #=> String
     #   resp.backup_jobs[0].backup_vault_name #=> String
     #   resp.backup_jobs[0].backup_vault_arn #=> String
@@ -1774,7 +1789,11 @@ module Aws::Backup
     # @option params [String] :by_resource_type
     #   Returns only backup jobs for the specified resources:
     #
+    #   * `DynamoDB` for Amazon DynamoDB
+    #
     #   * `EBS` for Amazon Elastic Block Store
+    #
+    #   * `EC2` for Amazon Elastic Compute Cloud
     #
     #   * `EFS` for Amazon Elastic File System
     #
@@ -1786,6 +1805,10 @@ module Aws::Backup
     #   An Amazon Resource Name (ARN) that uniquely identifies a source backup
     #   vault to copy from; for example,
     #   `arn:aws:backup:us-east-1:123456789012:vault:aBackupVault`.
+    #
+    # @option params [String] :by_account_id
+    #   The account ID to list the jobs from. Returns only copy jobs
+    #   associated with the specified account ID.
     #
     # @return [Types::ListCopyJobsOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1805,11 +1828,13 @@ module Aws::Backup
     #     by_created_after: Time.now,
     #     by_resource_type: "ResourceType",
     #     by_destination_vault_arn: "string",
+    #     by_account_id: "AccountId",
     #   })
     #
     # @example Response structure
     #
     #   resp.copy_jobs #=> Array
+    #   resp.copy_jobs[0].account_id #=> String
     #   resp.copy_jobs[0].copy_job_id #=> String
     #   resp.copy_jobs[0].source_backup_vault_arn #=> String
     #   resp.copy_jobs[0].source_recovery_point_arn #=> String
@@ -2036,6 +2061,19 @@ module Aws::Backup
     # @option params [Integer] :max_results
     #   The maximum number of items to be returned.
     #
+    # @option params [String] :by_account_id
+    #   The account ID to list the jobs from. Returns only restore jobs
+    #   associated with the specified account ID.
+    #
+    # @option params [Time,DateTime,Date,Integer,String] :by_created_before
+    #   Returns only restore jobs that were created before the specified date.
+    #
+    # @option params [Time,DateTime,Date,Integer,String] :by_created_after
+    #   Returns only restore jobs that were created after the specified date.
+    #
+    # @option params [String] :by_status
+    #   Returns only restore jobs associated with the specified job status.
+    #
     # @return [Types::ListRestoreJobsOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::ListRestoreJobsOutput#restore_jobs #restore_jobs} => Array&lt;Types::RestoreJobsListMember&gt;
@@ -2048,11 +2086,16 @@ module Aws::Backup
     #   resp = client.list_restore_jobs({
     #     next_token: "string",
     #     max_results: 1,
+    #     by_account_id: "AccountId",
+    #     by_created_before: Time.now,
+    #     by_created_after: Time.now,
+    #     by_status: "PENDING", # accepts PENDING, RUNNING, COMPLETED, ABORTED, FAILED
     #   })
     #
     # @example Response structure
     #
     #   resp.restore_jobs #=> Array
+    #   resp.restore_jobs[0].account_id #=> String
     #   resp.restore_jobs[0].restore_job_id #=> String
     #   resp.restore_jobs[0].recovery_point_arn #=> String
     #   resp.restore_jobs[0].creation_date #=> Time
@@ -2064,6 +2107,7 @@ module Aws::Backup
     #   resp.restore_jobs[0].iam_role_arn #=> String
     #   resp.restore_jobs[0].expected_completion_time_minutes #=> Integer
     #   resp.restore_jobs[0].created_resource_arn #=> String
+    #   resp.restore_jobs[0].resource_type #=> String
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/backup-2018-11-15/ListRestoreJobs AWS API Documentation
@@ -2404,15 +2448,17 @@ module Aws::Backup
     #   Starts a job to restore a recovery point for one of the following
     #   resources:
     #
+    #   * `DynamoDB` for Amazon DynamoDB
+    #
     #   * `EBS` for Amazon Elastic Block Store
     #
-    #   * `Storage Gateway` for AWS Storage Gateway
+    #   * `EC2` for Amazon Elastic Compute Cloud
+    #
+    #   * `EFS` for Amazon Elastic File System
     #
     #   * `RDS` for Amazon Relational Database Service
     #
-    #   * `DDB` for Amazon DynamoDB
-    #
-    #   * `EFS` for Amazon Elastic File System
+    #   * `Storage Gateway` for AWS Storage Gateway
     #
     # @return [Types::StartRestoreJobOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -2663,12 +2709,12 @@ module Aws::Backup
       req.send_request(options)
     end
 
-    # Updates the current service opt-in settings for the region. If the
-    # service has a value set to true, AWS Backup will attempt to protect
-    # that service's resources in this region, when included in an
-    # on-demand backup or scheduled backup plan. If the value is set to
-    # false for a service, AWS Backup will not attempt to protect that
-    # service's resources in this region.
+    # Updates the current service opt-in settings for the Region. If the
+    # service has a value set to `true`, AWS Backup attempts to protect that
+    # service's resources in this Region, when included in an on-demand
+    # backup or scheduled backup plan. If the value is set to `false` for a
+    # service, AWS Backup does not attempt to protect that service's
+    # resources in this Region.
     #
     # @option params [Hash<String,Boolean>] :resource_type_opt_in_preference
     #   Updates the list of services along with the opt-in preferences for the
@@ -2706,7 +2752,7 @@ module Aws::Backup
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-backup'
-      context[:gem_version] = '1.17.0'
+      context[:gem_version] = '1.18.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

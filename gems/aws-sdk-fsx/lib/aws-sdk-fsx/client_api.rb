@@ -71,6 +71,8 @@ module Aws::FSx
     DataRepositoryTasks = Shapes::ListShape.new(name: 'DataRepositoryTasks')
     DeleteBackupRequest = Shapes::StructureShape.new(name: 'DeleteBackupRequest')
     DeleteBackupResponse = Shapes::StructureShape.new(name: 'DeleteBackupResponse')
+    DeleteFileSystemLustreConfiguration = Shapes::StructureShape.new(name: 'DeleteFileSystemLustreConfiguration')
+    DeleteFileSystemLustreResponse = Shapes::StructureShape.new(name: 'DeleteFileSystemLustreResponse')
     DeleteFileSystemRequest = Shapes::StructureShape.new(name: 'DeleteFileSystemRequest')
     DeleteFileSystemResponse = Shapes::StructureShape.new(name: 'DeleteFileSystemResponse')
     DeleteFileSystemWindowsConfiguration = Shapes::StructureShape.new(name: 'DeleteFileSystemWindowsConfiguration')
@@ -266,6 +268,7 @@ module Aws::FSx
     CreateFileSystemFromBackupRequest.add_member(:security_group_ids, Shapes::ShapeRef.new(shape: SecurityGroupIds, location_name: "SecurityGroupIds"))
     CreateFileSystemFromBackupRequest.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "Tags"))
     CreateFileSystemFromBackupRequest.add_member(:windows_configuration, Shapes::ShapeRef.new(shape: CreateFileSystemWindowsConfiguration, location_name: "WindowsConfiguration"))
+    CreateFileSystemFromBackupRequest.add_member(:lustre_configuration, Shapes::ShapeRef.new(shape: CreateFileSystemLustreConfiguration, location_name: "LustreConfiguration"))
     CreateFileSystemFromBackupRequest.add_member(:storage_type, Shapes::ShapeRef.new(shape: StorageType, location_name: "StorageType"))
     CreateFileSystemFromBackupRequest.struct_class = Types::CreateFileSystemFromBackupRequest
 
@@ -278,6 +281,9 @@ module Aws::FSx
     CreateFileSystemLustreConfiguration.add_member(:imported_file_chunk_size, Shapes::ShapeRef.new(shape: Megabytes, location_name: "ImportedFileChunkSize"))
     CreateFileSystemLustreConfiguration.add_member(:deployment_type, Shapes::ShapeRef.new(shape: LustreDeploymentType, location_name: "DeploymentType"))
     CreateFileSystemLustreConfiguration.add_member(:per_unit_storage_throughput, Shapes::ShapeRef.new(shape: PerUnitStorageThroughput, location_name: "PerUnitStorageThroughput"))
+    CreateFileSystemLustreConfiguration.add_member(:daily_automatic_backup_start_time, Shapes::ShapeRef.new(shape: DailyTime, location_name: "DailyAutomaticBackupStartTime"))
+    CreateFileSystemLustreConfiguration.add_member(:automatic_backup_retention_days, Shapes::ShapeRef.new(shape: AutomaticBackupRetentionDays, location_name: "AutomaticBackupRetentionDays"))
+    CreateFileSystemLustreConfiguration.add_member(:copy_tags_to_backups, Shapes::ShapeRef.new(shape: Flag, location_name: "CopyTagsToBackups"))
     CreateFileSystemLustreConfiguration.struct_class = Types::CreateFileSystemLustreConfiguration
 
     CreateFileSystemRequest.add_member(:client_request_token, Shapes::ShapeRef.new(shape: ClientRequestToken, location_name: "ClientRequestToken", metadata: {"idempotencyToken"=>true}))
@@ -364,14 +370,24 @@ module Aws::FSx
     DeleteBackupResponse.add_member(:lifecycle, Shapes::ShapeRef.new(shape: BackupLifecycle, location_name: "Lifecycle"))
     DeleteBackupResponse.struct_class = Types::DeleteBackupResponse
 
+    DeleteFileSystemLustreConfiguration.add_member(:skip_final_backup, Shapes::ShapeRef.new(shape: Flag, location_name: "SkipFinalBackup"))
+    DeleteFileSystemLustreConfiguration.add_member(:final_backup_tags, Shapes::ShapeRef.new(shape: Tags, location_name: "FinalBackupTags"))
+    DeleteFileSystemLustreConfiguration.struct_class = Types::DeleteFileSystemLustreConfiguration
+
+    DeleteFileSystemLustreResponse.add_member(:final_backup_id, Shapes::ShapeRef.new(shape: BackupId, location_name: "FinalBackupId"))
+    DeleteFileSystemLustreResponse.add_member(:final_backup_tags, Shapes::ShapeRef.new(shape: Tags, location_name: "FinalBackupTags"))
+    DeleteFileSystemLustreResponse.struct_class = Types::DeleteFileSystemLustreResponse
+
     DeleteFileSystemRequest.add_member(:file_system_id, Shapes::ShapeRef.new(shape: FileSystemId, required: true, location_name: "FileSystemId"))
     DeleteFileSystemRequest.add_member(:client_request_token, Shapes::ShapeRef.new(shape: ClientRequestToken, location_name: "ClientRequestToken", metadata: {"idempotencyToken"=>true}))
     DeleteFileSystemRequest.add_member(:windows_configuration, Shapes::ShapeRef.new(shape: DeleteFileSystemWindowsConfiguration, location_name: "WindowsConfiguration"))
+    DeleteFileSystemRequest.add_member(:lustre_configuration, Shapes::ShapeRef.new(shape: DeleteFileSystemLustreConfiguration, location_name: "LustreConfiguration"))
     DeleteFileSystemRequest.struct_class = Types::DeleteFileSystemRequest
 
     DeleteFileSystemResponse.add_member(:file_system_id, Shapes::ShapeRef.new(shape: FileSystemId, location_name: "FileSystemId"))
     DeleteFileSystemResponse.add_member(:lifecycle, Shapes::ShapeRef.new(shape: FileSystemLifecycle, location_name: "Lifecycle"))
     DeleteFileSystemResponse.add_member(:windows_response, Shapes::ShapeRef.new(shape: DeleteFileSystemWindowsResponse, location_name: "WindowsResponse"))
+    DeleteFileSystemResponse.add_member(:lustre_response, Shapes::ShapeRef.new(shape: DeleteFileSystemLustreResponse, location_name: "LustreResponse"))
     DeleteFileSystemResponse.struct_class = Types::DeleteFileSystemResponse
 
     DeleteFileSystemWindowsConfiguration.add_member(:skip_final_backup, Shapes::ShapeRef.new(shape: Flag, location_name: "SkipFinalBackup"))
@@ -488,6 +504,9 @@ module Aws::FSx
     LustreFileSystemConfiguration.add_member(:deployment_type, Shapes::ShapeRef.new(shape: LustreDeploymentType, location_name: "DeploymentType"))
     LustreFileSystemConfiguration.add_member(:per_unit_storage_throughput, Shapes::ShapeRef.new(shape: PerUnitStorageThroughput, location_name: "PerUnitStorageThroughput"))
     LustreFileSystemConfiguration.add_member(:mount_name, Shapes::ShapeRef.new(shape: LustreFileSystemMountName, location_name: "MountName"))
+    LustreFileSystemConfiguration.add_member(:daily_automatic_backup_start_time, Shapes::ShapeRef.new(shape: DailyTime, location_name: "DailyAutomaticBackupStartTime"))
+    LustreFileSystemConfiguration.add_member(:automatic_backup_retention_days, Shapes::ShapeRef.new(shape: AutomaticBackupRetentionDays, location_name: "AutomaticBackupRetentionDays"))
+    LustreFileSystemConfiguration.add_member(:copy_tags_to_backups, Shapes::ShapeRef.new(shape: Flag, location_name: "CopyTagsToBackups"))
     LustreFileSystemConfiguration.struct_class = Types::LustreFileSystemConfiguration
 
     MissingFileSystemConfiguration.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
@@ -561,6 +580,8 @@ module Aws::FSx
     UntagResourceResponse.struct_class = Types::UntagResourceResponse
 
     UpdateFileSystemLustreConfiguration.add_member(:weekly_maintenance_start_time, Shapes::ShapeRef.new(shape: WeeklyTime, location_name: "WeeklyMaintenanceStartTime"))
+    UpdateFileSystemLustreConfiguration.add_member(:daily_automatic_backup_start_time, Shapes::ShapeRef.new(shape: DailyTime, location_name: "DailyAutomaticBackupStartTime"))
+    UpdateFileSystemLustreConfiguration.add_member(:automatic_backup_retention_days, Shapes::ShapeRef.new(shape: AutomaticBackupRetentionDays, location_name: "AutomaticBackupRetentionDays"))
     UpdateFileSystemLustreConfiguration.struct_class = Types::UpdateFileSystemLustreConfiguration
 
     UpdateFileSystemRequest.add_member(:file_system_id, Shapes::ShapeRef.new(shape: FileSystemId, required: true, location_name: "FileSystemId"))
@@ -684,6 +705,7 @@ module Aws::FSx
         o.errors << Shapes::ShapeRef.new(shape: ActiveDirectoryError)
         o.errors << Shapes::ShapeRef.new(shape: IncompatibleParameterError)
         o.errors << Shapes::ShapeRef.new(shape: InvalidNetworkSettings)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidPerUnitStorageThroughput)
         o.errors << Shapes::ShapeRef.new(shape: ServiceLimitExceeded)
         o.errors << Shapes::ShapeRef.new(shape: BackupNotFound)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerError)

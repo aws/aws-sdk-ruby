@@ -104,6 +104,7 @@ module Aws
   autoload :GroundStation, 'aws-sdk-groundstation'
   autoload :GuardDuty, 'aws-sdk-guardduty'
   autoload :Health, 'aws-sdk-health'
+  autoload :Honeycode, 'aws-sdk-honeycode'
   autoload :IAM, 'aws-sdk-iam'
   autoload :Imagebuilder, 'aws-sdk-imagebuilder'
   autoload :ImportExport, 'aws-sdk-importexport'

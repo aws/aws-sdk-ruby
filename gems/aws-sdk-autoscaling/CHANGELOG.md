@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.41.0 (2020-06-24)
+------------------
+
+* Feature - Documentation updates for Amazon EC2 Auto Scaling.
+
 1.40.0 (2020-06-23)
 ------------------
 

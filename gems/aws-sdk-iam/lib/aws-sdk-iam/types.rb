@@ -4979,8 +4979,8 @@ module Aws::IAM
     end
 
     # The request was rejected because it attempted to create resources
-    # beyond the current AWS account limits. The error message describes the
-    # limit exceeded.
+    # beyond the current AWS account limitations. The error message
+    # describes the limit exceeded.
     #
     # @!attribute [rw] message
     #   @return [String]

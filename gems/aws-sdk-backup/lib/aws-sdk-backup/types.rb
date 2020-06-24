@@ -45,6 +45,10 @@ module Aws::Backup
 
     # Contains detailed information about a backup job.
     #
+    # @!attribute [rw] account_id
+    #   The account ID that owns the backup job.
+    #   @return [String]
+    #
     # @!attribute [rw] backup_job_id
     #   Uniquely identifies a request to AWS Backup to back up a resource.
     #   @return [String]
@@ -148,6 +152,7 @@ module Aws::Backup
     # @see http://docs.aws.amazon.com/goto/WebAPI/backup-2018-11-15/BackupJob AWS API Documentation
     #
     class BackupJob < Struct.new(
+      :account_id,
       :backup_job_id,
       :backup_vault_name,
       :backup_vault_arn,
@@ -230,7 +235,7 @@ module Aws::Backup
     #       }
     #
     # @!attribute [rw] backup_plan_name
-    #   The display name of a backup plan.
+    #   The optional display name of a backup plan.
     #   @return [String]
     #
     # @!attribute [rw] rules
@@ -756,6 +761,10 @@ module Aws::Backup
 
     # Contains detailed information about a copy job.
     #
+    # @!attribute [rw] account_id
+    #   The account ID that owns the copy job.
+    #   @return [String]
+    #
     # @!attribute [rw] copy_job_id
     #   Uniquely identifies a copy job.
     #   @return [String]
@@ -792,14 +801,14 @@ module Aws::Backup
     #
     # @!attribute [rw] creation_date
     #   The date and time a copy job is created, in Unix format and
-    #   Coordinated Universal Time (UTC). The value of CreationDate is
+    #   Coordinated Universal Time (UTC). The value of `CreationDate` is
     #   accurate to milliseconds. For example, the value 1516925490.087
     #   represents Friday, January 26, 2018 12:11:30.087 AM.
     #   @return [Time]
     #
     # @!attribute [rw] completion_date
     #   The date and time a copy job is completed, in Unix format and
-    #   Coordinated Universal Time (UTC). The value of CompletionDate is
+    #   Coordinated Universal Time (UTC). The value of `CompletionDate` is
     #   accurate to milliseconds. For example, the value 1516925490.087
     #   represents Friday, January 26, 2018 12:11:30.087 AM.
     #   @return [Time]
@@ -836,6 +845,7 @@ module Aws::Backup
     # @see http://docs.aws.amazon.com/goto/WebAPI/backup-2018-11-15/CopyJob AWS API Documentation
     #
     class CopyJob < Struct.new(
+      :account_id,
       :copy_job_id,
       :source_backup_vault_arn,
       :source_recovery_point_arn,
@@ -1133,7 +1143,7 @@ module Aws::Backup
     #
     # @!attribute [rw] deletion_date
     #   The date and time a backup plan is deleted, in Unix format and
-    #   Coordinated Universal Time (UTC). The value of `CreationDate` is
+    #   Coordinated Universal Time (UTC). The value of `DeletionDate` is
     #   accurate to milliseconds. For example, the value 1516925490.087
     #   represents Friday, January 26, 2018 12:11:30.087 AM.
     #   @return [Time]
@@ -1321,6 +1331,10 @@ module Aws::Backup
       include Aws::Structure
     end
 
+    # @!attribute [rw] account_id
+    #   Returns the account ID that owns the backup job.
+    #   @return [String]
+    #
     # @!attribute [rw] backup_job_id
     #   Uniquely identifies a request to AWS Backup to back up a resource.
     #   @return [String]
@@ -1358,7 +1372,7 @@ module Aws::Backup
     # @!attribute [rw] completion_date
     #   The date and time that a job to create a backup job is completed, in
     #   Unix format and Coordinated Universal Time (UTC). The value of
-    #   `CreationDate` is accurate to milliseconds. For example, the value
+    #   `CompletionDate` is accurate to milliseconds. For example, the value
     #   1516925490.087 represents Friday, January 26, 2018 12:11:30.087 AM.
     #   @return [Time]
     #
@@ -1424,6 +1438,7 @@ module Aws::Backup
     # @see http://docs.aws.amazon.com/goto/WebAPI/backup-2018-11-15/DescribeBackupJobOutput AWS API Documentation
     #
     class DescribeBackupJobOutput < Struct.new(
+      :account_id,
       :backup_job_id,
       :backup_vault_name,
       :backup_vault_arn,
@@ -1796,6 +1811,10 @@ module Aws::Backup
       include Aws::Structure
     end
 
+    # @!attribute [rw] account_id
+    #   Returns the account ID that owns the restore job.
+    #   @return [String]
+    #
     # @!attribute [rw] restore_job_id
     #   Uniquely identifies the job that restores a recovery point.
     #   @return [String]
@@ -1826,8 +1845,7 @@ module Aws::Backup
     #   @return [String]
     #
     # @!attribute [rw] status_message
-    #   A detailed message explaining the status of a job to restore a
-    #   recovery point.
+    #   A message showing the status of a job to restore a recovery point.
     #   @return [String]
     #
     # @!attribute [rw] percent_done
@@ -1855,9 +1873,15 @@ module Aws::Backup
     #   depends on the resource type of the backed-up resource.
     #   @return [String]
     #
+    # @!attribute [rw] resource_type
+    #   Returns metadata associated with a restore job listed by resource
+    #   type.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/backup-2018-11-15/DescribeRestoreJobOutput AWS API Documentation
     #
     class DescribeRestoreJobOutput < Struct.new(
+      :account_id,
       :restore_job_id,
       :recovery_point_arn,
       :creation_date,
@@ -1868,7 +1892,8 @@ module Aws::Backup
       :backup_size_in_bytes,
       :iam_role_arn,
       :expected_completion_time_minutes,
-      :created_resource_arn)
+      :created_resource_arn,
+      :resource_type)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2034,7 +2059,7 @@ module Aws::Backup
     #
     # @!attribute [rw] deletion_date
     #   The date and time that a backup plan is deleted, in Unix format and
-    #   Coordinated Universal Time (UTC). The value of `CreationDate` is
+    #   Coordinated Universal Time (UTC). The value of `DeletionDate` is
     #   accurate to milliseconds. For example, the value 1516925490.087
     #   represents Friday, January 26, 2018 12:11:30.087 AM.
     #   @return [Time]
@@ -2292,15 +2317,17 @@ module Aws::Backup
     # @!attribute [rw] resource_types
     #   Contains a string with the supported AWS resource types:
     #
+    #   * `DynamoDB` for Amazon DynamoDB
+    #
     #   * `EBS` for Amazon Elastic Block Store
     #
-    #   * `Storage Gateway` for AWS Storage Gateway
+    #   * `EC2` for Amazon Elastic Compute Cloud
+    #
+    #   * `EFS` for Amazon Elastic File System
     #
     #   * `RDS` for Amazon Relational Database Service
     #
-    #   * `DDB` for Amazon DynamoDB
-    #
-    #   * `EFS` for Amazon Elastic File System
+    #   * `Storage Gateway` for AWS Storage Gateway
     #   @return [Array<String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/backup-2018-11-15/GetSupportedResourceTypesOutput AWS API Documentation
@@ -2438,6 +2465,7 @@ module Aws::Backup
     #         by_created_before: Time.now,
     #         by_created_after: Time.now,
     #         by_resource_type: "ResourceType",
+    #         by_account_id: "AccountId",
     #       }
     #
     # @!attribute [rw] next_token
@@ -2483,11 +2511,18 @@ module Aws::Backup
     #
     #   * `EBS` for Amazon Elastic Block Store
     #
+    #   * `EC2` for Amazon Elastic Compute Cloud
+    #
     #   * `EFS` for Amazon Elastic File System
     #
     #   * `RDS` for Amazon Relational Database Service
     #
     #   * `Storage Gateway` for AWS Storage Gateway
+    #   @return [String]
+    #
+    # @!attribute [rw] by_account_id
+    #   The account ID to list the jobs from. Returns only backup jobs
+    #   associated with the specified account ID.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/backup-2018-11-15/ListBackupJobsInput AWS API Documentation
@@ -2500,7 +2535,8 @@ module Aws::Backup
       :by_backup_vault_name,
       :by_created_before,
       :by_created_after,
-      :by_resource_type)
+      :by_resource_type,
+      :by_account_id)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2804,6 +2840,7 @@ module Aws::Backup
     #         by_created_after: Time.now,
     #         by_resource_type: "ResourceType",
     #         by_destination_vault_arn: "string",
+    #         by_account_id: "AccountId",
     #       }
     #
     # @!attribute [rw] next_token
@@ -2837,7 +2874,11 @@ module Aws::Backup
     # @!attribute [rw] by_resource_type
     #   Returns only backup jobs for the specified resources:
     #
+    #   * `DynamoDB` for Amazon DynamoDB
+    #
     #   * `EBS` for Amazon Elastic Block Store
+    #
+    #   * `EC2` for Amazon Elastic Compute Cloud
     #
     #   * `EFS` for Amazon Elastic File System
     #
@@ -2852,6 +2893,11 @@ module Aws::Backup
     #   `arn:aws:backup:us-east-1:123456789012:vault:aBackupVault`.
     #   @return [String]
     #
+    # @!attribute [rw] by_account_id
+    #   The account ID to list the jobs from. Returns only copy jobs
+    #   associated with the specified account ID.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/backup-2018-11-15/ListCopyJobsInput AWS API Documentation
     #
     class ListCopyJobsInput < Struct.new(
@@ -2862,7 +2908,8 @@ module Aws::Backup
       :by_created_before,
       :by_created_after,
       :by_resource_type,
-      :by_destination_vault_arn)
+      :by_destination_vault_arn,
+      :by_account_id)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3092,6 +3139,10 @@ module Aws::Backup
     #       {
     #         next_token: "string",
     #         max_results: 1,
+    #         by_account_id: "AccountId",
+    #         by_created_before: Time.now,
+    #         by_created_after: Time.now,
+    #         by_status: "PENDING", # accepts PENDING, RUNNING, COMPLETED, ABORTED, FAILED
     #       }
     #
     # @!attribute [rw] next_token
@@ -3105,11 +3156,34 @@ module Aws::Backup
     #   The maximum number of items to be returned.
     #   @return [Integer]
     #
+    # @!attribute [rw] by_account_id
+    #   The account ID to list the jobs from. Returns only restore jobs
+    #   associated with the specified account ID.
+    #   @return [String]
+    #
+    # @!attribute [rw] by_created_before
+    #   Returns only restore jobs that were created before the specified
+    #   date.
+    #   @return [Time]
+    #
+    # @!attribute [rw] by_created_after
+    #   Returns only restore jobs that were created after the specified
+    #   date.
+    #   @return [Time]
+    #
+    # @!attribute [rw] by_status
+    #   Returns only restore jobs associated with the specified job status.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/backup-2018-11-15/ListRestoreJobsInput AWS API Documentation
     #
     class ListRestoreJobsInput < Struct.new(
       :next_token,
-      :max_results)
+      :max_results,
+      :by_account_id,
+      :by_created_before,
+      :by_created_after,
+      :by_status)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3547,6 +3621,10 @@ module Aws::Backup
 
     # Contains metadata about a restore job.
     #
+    # @!attribute [rw] account_id
+    #   The account ID that owns the restore job.
+    #   @return [String]
+    #
     # @!attribute [rw] restore_job_id
     #   Uniquely identifies the job that restores a recovery point.
     #   @return [String]
@@ -3604,9 +3682,16 @@ module Aws::Backup
     #   The format of the ARN depends on the resource type.
     #   @return [String]
     #
+    # @!attribute [rw] resource_type
+    #   The resource type of the listed restore jobs; for example, an Amazon
+    #   Elastic Block Store (Amazon EBS) volume or an Amazon Relational
+    #   Database Service (Amazon RDS) database.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/backup-2018-11-15/RestoreJobsListMember AWS API Documentation
     #
     class RestoreJobsListMember < Struct.new(
+      :account_id,
       :restore_job_id,
       :recovery_point_arn,
       :creation_date,
@@ -3617,7 +3702,8 @@ module Aws::Backup
       :backup_size_in_bytes,
       :iam_role_arn,
       :expected_completion_time_minutes,
-      :created_resource_arn)
+      :created_resource_arn,
+      :resource_type)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3915,15 +4001,17 @@ module Aws::Backup
     #   Starts a job to restore a recovery point for one of the following
     #   resources:
     #
+    #   * `DynamoDB` for Amazon DynamoDB
+    #
     #   * `EBS` for Amazon Elastic Block Store
     #
-    #   * `Storage Gateway` for AWS Storage Gateway
+    #   * `EC2` for Amazon Elastic Compute Cloud
+    #
+    #   * `EFS` for Amazon Elastic File System
     #
     #   * `RDS` for Amazon Relational Database Service
     #
-    #   * `DDB` for Amazon DynamoDB
-    #
-    #   * `EFS` for Amazon Elastic File System
+    #   * `Storage Gateway` for AWS Storage Gateway
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/backup-2018-11-15/StartRestoreJobInput AWS API Documentation

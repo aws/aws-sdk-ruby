@@ -321,6 +321,7 @@ module Aws
             'GroundStation' => 'groundstation',
             'GuardDuty' => 'guardduty',
             'Health' => 'health',
+            'Honeycode' => 'honeycode',
             'IAM' => 'iam',
             'Imagebuilder' => 'imagebuilder',
             'ImportExport' => 'importexport',

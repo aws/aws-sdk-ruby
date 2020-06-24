@@ -53,10 +53,14 @@ module Aws::EMR
     #             },
     #           ],
     #           launch_specifications: {
-    #             spot_specification: { # required
+    #             spot_specification: {
     #               timeout_duration_minutes: 1, # required
     #               timeout_action: "SWITCH_TO_ON_DEMAND", # required, accepts SWITCH_TO_ON_DEMAND, TERMINATE_CLUSTER
     #               block_duration_minutes: 1,
+    #               allocation_strategy: "capacity-optimized", # accepts capacity-optimized
+    #             },
+    #             on_demand_specification: {
+    #               allocation_strategy: "lowest-price", # required, accepts lowest-price
     #             },
     #           },
     #         },
@@ -2177,10 +2181,14 @@ module Aws::EMR
     #           },
     #         ],
     #         launch_specifications: {
-    #           spot_specification: { # required
+    #           spot_specification: {
     #             timeout_duration_minutes: 1, # required
     #             timeout_action: "SWITCH_TO_ON_DEMAND", # required, accepts SWITCH_TO_ON_DEMAND, TERMINATE_CLUSTER
     #             block_duration_minutes: 1,
+    #             allocation_strategy: "capacity-optimized", # accepts capacity-optimized
+    #           },
+    #           on_demand_specification: {
+    #             allocation_strategy: "lowest-price", # required, accepts lowest-price
     #           },
     #         },
     #       }
@@ -2305,10 +2313,13 @@ module Aws::EMR
     end
 
     # The launch specification for Spot instances in the fleet, which
-    # determines the defined duration and provisioning timeout behavior.
+    # determines the defined duration, provisioning timeout behavior, and
+    # allocation strategy.
     #
     # <note markdown="1"> The instance fleet configuration is available only in Amazon EMR
-    # versions 4.8.0 and later, excluding 5.0.x versions.
+    # versions 4.8.0 and later, excluding 5.0.x versions. On-Demand and Spot
+    # instance allocation strategies are available in Amazon EMR version
+    # 5.12.1 and later.
     #
     #  </note>
     #
@@ -2316,22 +2327,40 @@ module Aws::EMR
     #   data as a hash:
     #
     #       {
-    #         spot_specification: { # required
+    #         spot_specification: {
     #           timeout_duration_minutes: 1, # required
     #           timeout_action: "SWITCH_TO_ON_DEMAND", # required, accepts SWITCH_TO_ON_DEMAND, TERMINATE_CLUSTER
     #           block_duration_minutes: 1,
+    #           allocation_strategy: "capacity-optimized", # accepts capacity-optimized
+    #         },
+    #         on_demand_specification: {
+    #           allocation_strategy: "lowest-price", # required, accepts lowest-price
     #         },
     #       }
     #
     # @!attribute [rw] spot_specification
     #   The launch specification for Spot instances in the fleet, which
-    #   determines the defined duration and provisioning timeout behavior.
+    #   determines the defined duration, provisioning timeout behavior, and
+    #   allocation strategy.
     #   @return [Types::SpotProvisioningSpecification]
+    #
+    # @!attribute [rw] on_demand_specification
+    #   The launch specification for On-Demand instances in the instance
+    #   fleet, which determines the allocation strategy.
+    #
+    #   <note markdown="1"> The instance fleet configuration is available only in Amazon EMR
+    #   versions 4.8.0 and later, excluding 5.0.x versions. On-Demand
+    #   instances allocation strategy is available in Amazon EMR version
+    #   5.12.1 and later.
+    #
+    #    </note>
+    #   @return [Types::OnDemandProvisioningSpecification]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticmapreduce-2009-03-31/InstanceFleetProvisioningSpecifications AWS API Documentation
     #
     class InstanceFleetProvisioningSpecifications < Struct.new(
-      :spot_specification)
+      :spot_specification,
+      :on_demand_specification)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3498,10 +3527,14 @@ module Aws::EMR
     #               },
     #             ],
     #             launch_specifications: {
-    #               spot_specification: { # required
+    #               spot_specification: {
     #                 timeout_duration_minutes: 1, # required
     #                 timeout_action: "SWITCH_TO_ON_DEMAND", # required, accepts SWITCH_TO_ON_DEMAND, TERMINATE_CLUSTER
     #                 block_duration_minutes: 1,
+    #                 allocation_strategy: "capacity-optimized", # accepts capacity-optimized
+    #               },
+    #               on_demand_specification: {
+    #                 allocation_strategy: "lowest-price", # required, accepts lowest-price
     #               },
     #             },
     #           },
@@ -4392,6 +4425,37 @@ module Aws::EMR
       include Aws::Structure
     end
 
+    # The launch specification for On-Demand instances in the instance
+    # fleet, which determines the allocation strategy.
+    #
+    # <note markdown="1"> The instance fleet configuration is available only in Amazon EMR
+    # versions 4.8.0 and later, excluding 5.0.x versions. On-Demand
+    # instances allocation strategy is available in Amazon EMR version
+    # 5.12.1 and later.
+    #
+    #  </note>
+    #
+    # @note When making an API call, you may pass OnDemandProvisioningSpecification
+    #   data as a hash:
+    #
+    #       {
+    #         allocation_strategy: "lowest-price", # required, accepts lowest-price
+    #       }
+    #
+    # @!attribute [rw] allocation_strategy
+    #   Specifies the strategy to use in launching On-Demand instance
+    #   fleets. Currently, the only option is lowest-price (the default),
+    #   which launches the lowest price first.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticmapreduce-2009-03-31/OnDemandProvisioningSpecification AWS API Documentation
+    #
+    class OnDemandProvisioningSpecification < Struct.new(
+      :allocation_strategy)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The Amazon EC2 Availability Zone configuration of the cluster (job
     # flow).
     #
@@ -4862,10 +4926,14 @@ module Aws::EMR
     #                 },
     #               ],
     #               launch_specifications: {
-    #                 spot_specification: { # required
+    #                 spot_specification: {
     #                   timeout_duration_minutes: 1, # required
     #                   timeout_action: "SWITCH_TO_ON_DEMAND", # required, accepts SWITCH_TO_ON_DEMAND, TERMINATE_CLUSTER
     #                   block_duration_minutes: 1,
+    #                   allocation_strategy: "capacity-optimized", # accepts capacity-optimized
+    #                 },
+    #                 on_demand_specification: {
+    #                   allocation_strategy: "lowest-price", # required, accepts lowest-price
     #                 },
     #               },
     #             },
@@ -5638,11 +5706,13 @@ module Aws::EMR
     end
 
     # The launch specification for Spot instances in the instance fleet,
-    # which determines the defined duration and provisioning timeout
-    # behavior.
+    # which determines the defined duration, provisioning timeout behavior,
+    # and allocation strategy.
     #
     # <note markdown="1"> The instance fleet configuration is available only in Amazon EMR
-    # versions 4.8.0 and later, excluding 5.0.x versions.
+    # versions 4.8.0 and later, excluding 5.0.x versions. Spot instance
+    # allocation strategy is available in Amazon EMR version 5.12.1 and
+    # later.
     #
     #  </note>
     #
@@ -5653,6 +5723,7 @@ module Aws::EMR
     #         timeout_duration_minutes: 1, # required
     #         timeout_action: "SWITCH_TO_ON_DEMAND", # required, accepts SWITCH_TO_ON_DEMAND, TERMINATE_CLUSTER
     #         block_duration_minutes: 1,
+    #         allocation_strategy: "capacity-optimized", # accepts capacity-optimized
     #       }
     #
     # @!attribute [rw] timeout_duration_minutes
@@ -5685,12 +5756,20 @@ module Aws::EMR
     #   before it terminates.
     #   @return [Integer]
     #
+    # @!attribute [rw] allocation_strategy
+    #   Specifies the strategy to use in launching Spot instance fleets.
+    #   Currently, the only option is capacity-optimized (the default),
+    #   which launches instances from Spot instance pools with optimal
+    #   capacity for the number of instances that are launching.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticmapreduce-2009-03-31/SpotProvisioningSpecification AWS API Documentation
     #
     class SpotProvisioningSpecification < Struct.new(
       :timeout_duration_minutes,
       :timeout_action,
-      :block_duration_minutes)
+      :block_duration_minutes,
+      :allocation_strategy)
       SENSITIVE = []
       include Aws::Structure
     end

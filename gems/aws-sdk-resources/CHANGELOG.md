@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+3.75.0 (2020-06-24)
+------------------
+
+* Feature - Added a dependency on the new `aws-sdk-honeycode` gem.
+
 3.74.1 (2020-06-11)
 ------------------
 

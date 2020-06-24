@@ -821,7 +821,9 @@ module Aws::CodeCommit
       include Aws::Structure
     end
 
-    # The specified branch name already exists.
+    # Cannot create the branch with the specified name because the commit
+    # conflicts with an existing branch with the same name. Branch names
+    # must be unique.
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/BranchNameExistsException AWS API Documentation
     #
@@ -907,6 +909,16 @@ module Aws::CodeCommit
     #   request that used that token.
     #   @return [String]
     #
+    # @!attribute [rw] caller_reactions
+    #   The emoji reactions to a comment, if any, submitted by the user
+    #   whose credentials are associated with the call to the API.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] reaction_counts
+    #   A string to integer map that represents the number of individual
+    #   users who have responded to a comment with the specified reactions.
+    #   @return [Hash<String,Integer>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/Comment AWS API Documentation
     #
     class Comment < Struct.new(
@@ -917,7 +929,9 @@ module Aws::CodeCommit
       :last_modified_date,
       :author_arn,
       :deleted,
-      :client_request_token)
+      :client_request_token,
+      :caller_reactions,
+      :reaction_counts)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1381,7 +1395,7 @@ module Aws::CodeCommit
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/iam/latest/UserGuide/reference_identifiers.html
+    #   [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_identifiers.html
     #   @return [String]
     #
     # @!attribute [rw] approval_rule_template_description
@@ -1637,7 +1651,7 @@ module Aws::CodeCommit
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/iam/latest/UserGuide/reference_identifiers.html
+    #   [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_identifiers.html
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/CreatePullRequestApprovalRuleInput AWS API Documentation
@@ -2983,6 +2997,66 @@ module Aws::CodeCommit
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass GetCommentReactionsInput
+    #   data as a hash:
+    #
+    #       {
+    #         comment_id: "CommentId", # required
+    #         reaction_user_arn: "Arn",
+    #         next_token: "NextToken",
+    #         max_results: 1,
+    #       }
+    #
+    # @!attribute [rw] comment_id
+    #   The ID of the comment for which you want to get reactions
+    #   information.
+    #   @return [String]
+    #
+    # @!attribute [rw] reaction_user_arn
+    #   Optional. The Amazon Resource Name (ARN) of the user or identity for
+    #   which you want to get reaction information.
+    #   @return [String]
+    #
+    # @!attribute [rw] next_token
+    #   An enumeration token that, when provided in a request, returns the
+    #   next batch of the results.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   A non-zero, non-negative integer used to limit the number of
+    #   returned results. The default is the same as the allowed maximum,
+    #   1,000.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/GetCommentReactionsInput AWS API Documentation
+    #
+    class GetCommentReactionsInput < Struct.new(
+      :comment_id,
+      :reaction_user_arn,
+      :next_token,
+      :max_results)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] reactions_for_comment
+    #   An array of reactions to the specified comment.
+    #   @return [Array<Types::ReactionForComment>]
+    #
+    # @!attribute [rw] next_token
+    #   An enumeration token that can be used in a request to return the
+    #   next batch of the results.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/GetCommentReactionsOutput AWS API Documentation
+    #
+    class GetCommentReactionsOutput < Struct.new(
+      :reactions_for_comment,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass GetCommentsForComparedCommitInput
     #   data as a hash:
     #
@@ -4154,6 +4228,23 @@ module Aws::CodeCommit
     # @see http://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/InvalidPullRequestStatusUpdateException AWS API Documentation
     #
     class InvalidPullRequestStatusUpdateException < Aws::EmptyStructure; end
+
+    # The Amazon Resource Name (ARN) of the user or identity is not valid.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/InvalidReactionUserArnException AWS API Documentation
+    #
+    class InvalidReactionUserArnException < Aws::EmptyStructure; end
+
+    # The value of the reaction is not valid. For more information, see the
+    # [AWS CodeCommit User Guide][1].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/codecommit/latest/userguide/welcome.html
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/InvalidReactionValueException AWS API Documentation
+    #
+    class InvalidReactionValueException < Aws::EmptyStructure; end
 
     # The specified reference name format is not valid. Reference names must
     # conform to the Git references format (for example, refs/heads/master).
@@ -6390,6 +6481,38 @@ module Aws::CodeCommit
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass PutCommentReactionInput
+    #   data as a hash:
+    #
+    #       {
+    #         comment_id: "CommentId", # required
+    #         reaction_value: "ReactionValue", # required
+    #       }
+    #
+    # @!attribute [rw] comment_id
+    #   The ID of the comment to which you want to add or update a reaction.
+    #   @return [String]
+    #
+    # @!attribute [rw] reaction_value
+    #   The emoji reaction you want to add or update. To remove a reaction,
+    #   provide a value of blank or null. You can also provide the value of
+    #   none. For information about emoji reaction values supported in AWS
+    #   CodeCommit, see the [AWS CodeCommit User Guide][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/codecommit/latest/userguide/how-to-commit-comment.html#emoji-reaction-table
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/PutCommentReactionInput AWS API Documentation
+    #
+    class PutCommentReactionInput < Struct.new(
+      :comment_id,
+      :reaction_value)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Information about a file added or updated as part of a commit.
     #
     # @note When making an API call, you may pass PutFileEntry
@@ -6601,6 +6724,74 @@ module Aws::CodeCommit
       SENSITIVE = []
       include Aws::Structure
     end
+
+    # Information about the reaction values provided by users on a comment.
+    #
+    # @!attribute [rw] reaction
+    #   The reaction for a specified comment.
+    #   @return [Types::ReactionValueFormats]
+    #
+    # @!attribute [rw] reaction_users
+    #   The Amazon Resource Names (ARNs) of users who have provided
+    #   reactions to the comment.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] reactions_from_deleted_users_count
+    #   A numerical count of users who reacted with the specified emoji
+    #   whose identities have been subsequently deleted from IAM. While
+    #   these IAM users or roles no longer exist, the reactions might still
+    #   appear in total reaction counts.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/ReactionForComment AWS API Documentation
+    #
+    class ReactionForComment < Struct.new(
+      :reaction,
+      :reaction_users,
+      :reactions_from_deleted_users_count)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The number of reactions has been exceeded. Reactions are limited to
+    # one reaction per user for each individual comment ID.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/ReactionLimitExceededException AWS API Documentation
+    #
+    class ReactionLimitExceededException < Aws::EmptyStructure; end
+
+    # Information about the values for reactions to a comment. AWS
+    # CodeCommit supports a limited set of reactions.
+    #
+    # @!attribute [rw] emoji
+    #   The Emoji Version 1.0 graphic of the reaction. These graphics are
+    #   interpreted slightly differently on different operating systems.
+    #   @return [String]
+    #
+    # @!attribute [rw] short_code
+    #   The emoji short code for the reaction. Short codes are interpreted
+    #   slightly differently on different operating systems.
+    #   @return [String]
+    #
+    # @!attribute [rw] unicode
+    #   The Unicode codepoint for the reaction.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/ReactionValueFormats AWS API Documentation
+    #
+    class ReactionValueFormats < Struct.new(
+      :emoji,
+      :short_code,
+      :unicode)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A reaction value is required.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/ReactionValueRequiredException AWS API Documentation
+    #
+    class ReactionValueRequiredException < Aws::EmptyStructure; end
 
     # The specified reference does not exist. You must provide a full commit
     # ID.
@@ -7539,7 +7730,7 @@ module Aws::CodeCommit
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/iam/latest/UserGuide/reference_identifiers.html
+    #   [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_identifiers.html
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/UpdatePullRequestApprovalRuleContentInput AWS API Documentation

@@ -10,91 +10,102 @@
 module Aws::Amplify
   module Types
 
-    # Amplify App represents different branches of a repository for
-    # building, deploying, and hosting.
+    # Represents the different branches of a repository for building,
+    # deploying, and hosting an Amplify app.
     #
     # @!attribute [rw] app_id
-    #   Unique Id for the Amplify App.
+    #   The unique ID of the Amplify app.
     #   @return [String]
     #
     # @!attribute [rw] app_arn
-    #   ARN for the Amplify App.
+    #   The Amazon Resource Name (ARN) of the Amplify app.
     #   @return [String]
     #
     # @!attribute [rw] name
-    #   Name for the Amplify App.
+    #   The name for the Amplify app.
     #   @return [String]
     #
     # @!attribute [rw] tags
-    #   Tag for Amplify App.
+    #   The tag for the Amplify app.
     #   @return [Hash<String,String>]
     #
     # @!attribute [rw] description
-    #   Description for the Amplify App.
+    #   The description for the Amplify app.
     #   @return [String]
     #
     # @!attribute [rw] repository
-    #   Repository for the Amplify App.
+    #   The repository for the Amplify app.
     #   @return [String]
     #
     # @!attribute [rw] platform
-    #   Platform for the Amplify App.
+    #   The platform for the Amplify app.
     #   @return [String]
     #
     # @!attribute [rw] create_time
-    #   Create date / time for the Amplify App.
+    #   Creates a date and time for the Amplify app.
     #   @return [Time]
     #
     # @!attribute [rw] update_time
-    #   Update date / time for the Amplify App.
+    #   Updates the date and time for the Amplify app.
     #   @return [Time]
     #
     # @!attribute [rw] iam_service_role_arn
-    #   IAM service role ARN for the Amplify App.
+    #   The AWS Identity and Access Management (IAM) service role for the
+    #   Amazon Resource Name (ARN) of the Amplify app.
     #   @return [String]
     #
     # @!attribute [rw] environment_variables
-    #   Environment Variables for the Amplify App.
+    #   The environment variables for the Amplify app.
     #   @return [Hash<String,String>]
     #
     # @!attribute [rw] default_domain
-    #   Default domain for the Amplify App.
+    #   The default domain for the Amplify app.
     #   @return [String]
     #
     # @!attribute [rw] enable_branch_auto_build
-    #   Enables auto-building of branches for the Amplify App.
+    #   Enables the auto-building of branches for the Amplify app.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] enable_branch_auto_deletion
+    #   Automatically disconnects a branch in the Amplify Console when you
+    #   delete a branch from your Git repository.
     #   @return [Boolean]
     #
     # @!attribute [rw] enable_basic_auth
-    #   Enables Basic Authorization for branches for the Amplify App.
+    #   Enables basic authorization for the Amplify app's branches.
     #   @return [Boolean]
     #
     # @!attribute [rw] basic_auth_credentials
-    #   Basic Authorization credentials for branches for the Amplify App.
+    #   The basic authorization credentials for branches for the Amplify
+    #   app.
     #   @return [String]
     #
     # @!attribute [rw] custom_rules
-    #   Custom redirect / rewrite rules for the Amplify App.
+    #   Describes the custom redirect and rewrite rules for the Amplify app.
     #   @return [Array<Types::CustomRule>]
     #
     # @!attribute [rw] production_branch
-    #   Structure with Production Branch information.
+    #   Describes the information about a production branch of the Amplify
+    #   app.
     #   @return [Types::ProductionBranch]
     #
     # @!attribute [rw] build_spec
-    #   BuildSpec content for Amplify App.
+    #   Describes the content of the build specification (build spec) for
+    #   the Amplify app.
     #   @return [String]
     #
     # @!attribute [rw] enable_auto_branch_creation
-    #   Enables automated branch creation for the Amplify App.
+    #   Enables automated branch creation for the Amplify app.
     #   @return [Boolean]
     #
     # @!attribute [rw] auto_branch_creation_patterns
-    #   Automated branch creation glob patterns for the Amplify App.
+    #   Describes the automated branch creation glob patterns for the
+    #   Amplify app.
     #   @return [Array<String>]
     #
     # @!attribute [rw] auto_branch_creation_config
-    #   Automated branch creation config for the Amplify App.
+    #   Describes the automated branch creation configuration for the
+    #   Amplify app.
     #   @return [Types::AutoBranchCreationConfig]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/amplify-2017-07-25/App AWS API Documentation
@@ -113,6 +124,7 @@ module Aws::Amplify
       :environment_variables,
       :default_domain,
       :enable_branch_auto_build,
+      :enable_branch_auto_deletion,
       :enable_basic_auth,
       :basic_auth_credentials,
       :custom_rules,
@@ -121,18 +133,18 @@ module Aws::Amplify
       :enable_auto_branch_creation,
       :auto_branch_creation_patterns,
       :auto_branch_creation_config)
-      SENSITIVE = []
+      SENSITIVE = [:basic_auth_credentials]
       include Aws::Structure
     end
 
-    # Structure for artifact.
+    # Describes an artifact.
     #
     # @!attribute [rw] artifact_file_name
-    #   File name for the artifact.
+    #   The file name for the artifact.
     #   @return [String]
     #
     # @!attribute [rw] artifact_id
-    #   Unique Id for a artifact.
+    #   The unique ID for the artifact.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/amplify-2017-07-25/Artifact AWS API Documentation
@@ -144,7 +156,7 @@ module Aws::Amplify
       include Aws::Structure
     end
 
-    # Structure with auto branch creation config.
+    # Describes the automated branch creation configuration.
     #
     # @note When making an API call, you may pass AutoBranchCreationConfig
     #   data as a hash:
@@ -164,39 +176,39 @@ module Aws::Amplify
     #       }
     #
     # @!attribute [rw] stage
-    #   Stage for the auto created branch.
+    #   Describes the current stage for the autocreated branch.
     #   @return [String]
     #
     # @!attribute [rw] framework
-    #   Framework for the auto created branch.
+    #   The framework for the autocreated branch.
     #   @return [String]
     #
     # @!attribute [rw] enable_auto_build
-    #   Enables auto building for the auto created branch.
+    #   Enables auto building for the autocreated branch.
     #   @return [Boolean]
     #
     # @!attribute [rw] environment_variables
-    #   Environment Variables for the auto created branch.
+    #   The environment variables for the autocreated branch.
     #   @return [Hash<String,String>]
     #
     # @!attribute [rw] basic_auth_credentials
-    #   Basic Authorization credentials for the auto created branch.
+    #   The basic authorization credentials for the autocreated branch.
     #   @return [String]
     #
     # @!attribute [rw] enable_basic_auth
-    #   Enables Basic Auth for the auto created branch.
+    #   Enables basic authorization for the autocreated branch.
     #   @return [Boolean]
     #
     # @!attribute [rw] build_spec
-    #   BuildSpec for the auto created branch.
+    #   The build specification (build spec) for the autocreated branch.
     #   @return [String]
     #
     # @!attribute [rw] enable_pull_request_preview
-    #   Enables Pull Request Preview for auto created branch.
+    #   Enables pull request preview for the autocreated branch.
     #   @return [Boolean]
     #
     # @!attribute [rw] pull_request_environment_name
-    #   The Amplify Environment name for the pull request.
+    #   The Amplify environment name for the pull request.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/amplify-2017-07-25/AutoBranchCreationConfig AWS API Documentation
@@ -211,36 +223,37 @@ module Aws::Amplify
       :build_spec,
       :enable_pull_request_preview,
       :pull_request_environment_name)
-      SENSITIVE = []
+      SENSITIVE = [:basic_auth_credentials]
       include Aws::Structure
     end
 
-    # Backend environment for an Amplify App.
+    # Describes the backend environment for an Amplify app.
     #
     # @!attribute [rw] backend_environment_arn
-    #   Arn for a backend environment, part of an Amplify App.
+    #   The Amazon Resource Name (ARN) for a backend environment that is
+    #   part of an Amplify app.
     #   @return [String]
     #
     # @!attribute [rw] environment_name
-    #   Name for a backend environment, part of an Amplify App.
+    #   The name for a backend environment that is part of an Amplify app.
     #   @return [String]
     #
     # @!attribute [rw] stack_name
-    #   CloudFormation stack name of backend environment.
+    #   The AWS CloudFormation stack name of a backend environment.
     #   @return [String]
     #
     # @!attribute [rw] deployment_artifacts
-    #   Name of deployment artifacts.
+    #   The name of deployment artifacts.
     #   @return [String]
     #
     # @!attribute [rw] create_time
-    #   Creation date and time for a backend environment, part of an Amplify
-    #   App.
+    #   The creation date and time for a backend environment that is part of
+    #   an Amplify app.
     #   @return [Time]
     #
     # @!attribute [rw] update_time
-    #   Last updated date and time for a backend environment, part of an
-    #   Amplify App.
+    #   The last updated date and time for a backend environment that is
+    #   part of an Amplify app.
     #   @return [Time]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/amplify-2017-07-25/BackendEnvironment AWS API Documentation
@@ -256,7 +269,7 @@ module Aws::Amplify
       include Aws::Structure
     end
 
-    # Exception thrown when a request contains unexpected data.
+    # A request contains unexpected data.
     #
     # @!attribute [rw] message
     #   @return [String]
@@ -269,100 +282,104 @@ module Aws::Amplify
       include Aws::Structure
     end
 
-    # Branch for an Amplify App, which maps to a 3rd party repository
+    # The branch for an Amplify app, which maps to a third-party repository
     # branch.
     #
     # @!attribute [rw] branch_arn
-    #   ARN for a branch, part of an Amplify App.
+    #   The Amazon Resource Name (ARN) for a branch that is part of an
+    #   Amplify app.
     #   @return [String]
     #
     # @!attribute [rw] branch_name
-    #   Name for a branch, part of an Amplify App.
+    #   The name for the branch that is part of an Amplify app.
     #   @return [String]
     #
     # @!attribute [rw] description
-    #   Description for a branch, part of an Amplify App.
+    #   The description for the branch that is part of an Amplify app.
     #   @return [String]
     #
     # @!attribute [rw] tags
-    #   Tag for branch for Amplify App.
+    #   The tag for the branch of an Amplify app.
     #   @return [Hash<String,String>]
     #
     # @!attribute [rw] stage
-    #   Stage for a branch, part of an Amplify App.
+    #   The current stage for the branch that is part of an Amplify app.
     #   @return [String]
     #
     # @!attribute [rw] display_name
-    #   Display name for a branch, will use as the default domain prefix.
+    #   The display name for the branch. This is used as the default domain
+    #   prefix.
     #   @return [String]
     #
     # @!attribute [rw] enable_notification
-    #   Enables notifications for a branch, part of an Amplify App.
+    #   Enables notifications for a branch that is part of an Amplify app.
     #   @return [Boolean]
     #
     # @!attribute [rw] create_time
-    #   Creation date and time for a branch, part of an Amplify App.
+    #   The creation date and time for a branch that is part of an Amplify
+    #   app.
     #   @return [Time]
     #
     # @!attribute [rw] update_time
-    #   Last updated date and time for a branch, part of an Amplify App.
+    #   The last updated date and time for a branch that is part of an
+    #   Amplify app.
     #   @return [Time]
     #
     # @!attribute [rw] environment_variables
-    #   Environment Variables specific to a branch, part of an Amplify App.
+    #   The environment variables specific to a branch of an Amplify app.
     #   @return [Hash<String,String>]
     #
     # @!attribute [rw] enable_auto_build
-    #   Enables auto-building on push for a branch, part of an Amplify App.
+    #   Enables auto-building on push for a branch of an Amplify app.
     #   @return [Boolean]
     #
     # @!attribute [rw] custom_domains
-    #   Custom domains for a branch, part of an Amplify App.
+    #   The custom domains for a branch of an Amplify app.
     #   @return [Array<String>]
     #
     # @!attribute [rw] framework
-    #   Framework for a branch, part of an Amplify App.
+    #   The framework for a branch of an Amplify app.
     #   @return [String]
     #
     # @!attribute [rw] active_job_id
-    #   Id of the active job for a branch, part of an Amplify App.
+    #   The ID of the active job for a branch of an Amplify app.
     #   @return [String]
     #
     # @!attribute [rw] total_number_of_jobs
-    #   Total number of Jobs part of an Amplify App.
+    #   The total number of jobs that are part of an Amplify app.
     #   @return [String]
     #
     # @!attribute [rw] enable_basic_auth
-    #   Enables Basic Authorization for a branch, part of an Amplify App.
+    #   Enables basic authorization for a branch of an Amplify app.
     #   @return [Boolean]
     #
     # @!attribute [rw] thumbnail_url
-    #   Thumbnail URL for the branch.
+    #   The thumbnail URL for the branch of an Amplify app.
     #   @return [String]
     #
     # @!attribute [rw] basic_auth_credentials
-    #   Basic Authorization credentials for a branch, part of an Amplify
-    #   App.
+    #   The basic authorization credentials for a branch of an Amplify app.
     #   @return [String]
     #
     # @!attribute [rw] build_spec
-    #   BuildSpec content for branch for Amplify App.
+    #   The build specification (build spec) content for the branch of an
+    #   Amplify app.
     #   @return [String]
     #
     # @!attribute [rw] ttl
-    #   The content TTL for the website in seconds.
+    #   The content Time to Live (TTL) for the website in seconds.
     #   @return [String]
     #
     # @!attribute [rw] associated_resources
-    #   List of custom resources that are linked to this branch.
+    #   A list of custom resources that are linked to this branch.
     #   @return [Array<String>]
     #
     # @!attribute [rw] enable_pull_request_preview
-    #   Enables Pull Request Preview for this branch.
+    #   Enables pull request preview for the branch.
     #   @return [Boolean]
     #
     # @!attribute [rw] pull_request_environment_name
-    #   The Amplify Environment name for the pull request.
+    #   The Amplify environment name for the pull request.
     #   @return [String]
     #
     # @!attribute [rw] destination_branch
@@ -374,7 +391,8 @@ module Aws::Amplify
     #   @return [String]
     #
     # @!attribute [rw] backend_environment_arn
-    #   ARN for a Backend Environment, part of an Amplify App.
+    #   The Amazon Resource Name (ARN) for a backend environment that is
+    #   part of an Amplify app.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/amplify-2017-07-25/Branch AWS API Documentation
@@ -406,11 +424,11 @@ module Aws::Amplify
       :destination_branch,
       :source_branch,
       :backend_environment_arn)
-      SENSITIVE = []
+      SENSITIVE = [:basic_auth_credentials]
       include Aws::Structure
     end
 
-    # Request structure used to create Apps in Amplify.
+    # The request structure used to create apps in Amplify.
     #
     # @note When making an API call, you may pass CreateAppRequest
     #   data as a hash:
@@ -427,6 +445,7 @@ module Aws::Amplify
     #           "EnvKey" => "EnvValue",
     #         },
     #         enable_branch_auto_build: false,
+    #         enable_branch_auto_deletion: false,
     #         enable_basic_auth: false,
     #         basic_auth_credentials: "BasicAuthCredentials",
     #         custom_rules: [
@@ -459,76 +478,82 @@ module Aws::Amplify
     #       }
     #
     # @!attribute [rw] name
-    #   Name for the Amplify App
+    #   The name for the Amplify app.
     #   @return [String]
     #
     # @!attribute [rw] description
-    #   Description for an Amplify App
+    #   The description for an Amplify app.
     #   @return [String]
     #
     # @!attribute [rw] repository
-    #   Repository for an Amplify App
+    #   The repository for an Amplify app.
     #   @return [String]
     #
     # @!attribute [rw] platform
-    #   Platform / framework for an Amplify App
+    #   The platform or framework for an Amplify app.
     #   @return [String]
     #
     # @!attribute [rw] iam_service_role_arn
-    #   AWS IAM service role for an Amplify App
+    #   The AWS Identity and Access Management (IAM) service role for an
+    #   Amplify app.
     #   @return [String]
     #
     # @!attribute [rw] oauth_token
-    #   OAuth token for 3rd party source control system for an Amplify App,
-    #   used to create webhook and read-only deploy key. OAuth token is not
-    #   stored.
+    #   The OAuth token for a third-party source control system for an
+    #   Amplify app. The OAuth token is used to create a webhook and a
+    #   read-only deploy key. The OAuth token is not stored.
     #   @return [String]
     #
     # @!attribute [rw] access_token
-    #   Personal Access token for 3rd party source control system for an
-    #   Amplify App, used to create webhook and read-only deploy key. Token
-    #   is not stored.
+    #   The personal access token for a third-party source control system
+    #   for an Amplify app. The personal access token is used to create a
+    #   webhook and a read-only deploy key. The token is not stored.
     #   @return [String]
     #
     # @!attribute [rw] environment_variables
-    #   Environment variables map for an Amplify App.
+    #   The environment variables map for an Amplify app.
     #   @return [Hash<String,String>]
     #
     # @!attribute [rw] enable_branch_auto_build
-    #   Enable the auto building of branches for an Amplify App.
+    #   Enables the auto building of branches for an Amplify app.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] enable_branch_auto_deletion
+    #   Automatically disconnects a branch in the Amplify Console when you
+    #   delete a branch from your Git repository.
     #   @return [Boolean]
     #
     # @!attribute [rw] enable_basic_auth
-    #   Enable Basic Authorization for an Amplify App, this will apply to
-    #   all branches part of this App.
+    #   Enables basic authorization for an Amplify app. This will apply to
+    #   all branches that are part of this app.
     #   @return [Boolean]
     #
     # @!attribute [rw] basic_auth_credentials
-    #   Credentials for Basic Authorization for an Amplify App.
+    #   The credentials for basic authorization for an Amplify app.
     #   @return [String]
     #
     # @!attribute [rw] custom_rules
-    #   Custom rewrite / redirect rules for an Amplify App.
+    #   The custom rewrite and redirect rules for an Amplify app.
     #   @return [Array<Types::CustomRule>]
     #
     # @!attribute [rw] tags
-    #   Tag for an Amplify App
+    #   The tag for an Amplify app.
     #   @return [Hash<String,String>]
     #
     # @!attribute [rw] build_spec
-    #   BuildSpec for an Amplify App
+    #   The build specification (build spec) for an Amplify app.
     #   @return [String]
     #
     # @!attribute [rw] enable_auto_branch_creation
-    #   Enables automated branch creation for the Amplify App.
+    #   Enables automated branch creation for the Amplify app.
     #   @return [Boolean]
     #
     # @!attribute [rw] auto_branch_creation_patterns
-    #   Automated branch creation glob patterns for the Amplify App.
+    #   The automated branch creation glob patterns for the Amplify app.
     #   @return [Array<String>]
     #
     # @!attribute [rw] auto_branch_creation_config
-    #   Automated branch creation config for the Amplify App.
+    #   The automated branch creation configuration for the Amplify app.
     #   @return [Types::AutoBranchCreationConfig]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/amplify-2017-07-25/CreateAppRequest AWS API Documentation
@@ -543,6 +568,7 @@ module Aws::Amplify
       :access_token,
       :environment_variables,
       :enable_branch_auto_build,
+      :enable_branch_auto_deletion,
       :enable_basic_auth,
       :basic_auth_credentials,
       :custom_rules,
@@ -551,13 +577,13 @@ module Aws::Amplify
       :enable_auto_branch_creation,
       :auto_branch_creation_patterns,
       :auto_branch_creation_config)
-      SENSITIVE = []
+      SENSITIVE = [:oauth_token, :access_token, :basic_auth_credentials]
       include Aws::Structure
     end
 
     # @!attribute [rw] app
-    #   Amplify App represents different branches of a repository for
-    #   building, deploying, and hosting.
+    #   Represents the different branches of a repository for building,
+    #   deploying, and hosting an Amplify app.
     #   @return [Types::App]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/amplify-2017-07-25/CreateAppResult AWS API Documentation
@@ -568,7 +594,7 @@ module Aws::Amplify
       include Aws::Structure
     end
 
-    # Request structure for a backend environment create request.
+    # The request structure for the backend environment create request.
     #
     # @note When making an API call, you may pass CreateBackendEnvironmentRequest
     #   data as a hash:
@@ -581,19 +607,19 @@ module Aws::Amplify
     #       }
     #
     # @!attribute [rw] app_id
-    #   Unique Id for an Amplify App.
+    #   The unique ID for an Amplify app.
     #   @return [String]
     #
     # @!attribute [rw] environment_name
-    #   Name for the backend environment.
+    #   The name for the backend environment.
     #   @return [String]
     #
     # @!attribute [rw] stack_name
-    #   CloudFormation stack name of backend environment.
+    #   The AWS CloudFormation stack name of a backend environment.
     #   @return [String]
     #
     # @!attribute [rw] deployment_artifacts
-    #   Name of deployment artifacts.
+    #   The name of deployment artifacts.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/amplify-2017-07-25/CreateBackendEnvironmentRequest AWS API Documentation
@@ -607,10 +633,10 @@ module Aws::Amplify
       include Aws::Structure
     end
 
-    # Result structure for create backend environment.
+    # The result structure for the create backend environment request.
     #
     # @!attribute [rw] backend_environment
-    #   Backend environment structure for an amplify App.
+    #   Describes the backend environment for an Amplify app.
     #   @return [Types::BackendEnvironment]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/amplify-2017-07-25/CreateBackendEnvironmentResult AWS API Documentation
@@ -621,7 +647,7 @@ module Aws::Amplify
       include Aws::Structure
     end
 
-    # Request structure for a branch create request.
+    # The request structure for the create branch request.
     #
     # @note When making an API call, you may pass CreateBranchRequest
     #   data as a hash:
@@ -651,23 +677,23 @@ module Aws::Amplify
     #       }
     #
     # @!attribute [rw] app_id
-    #   Unique Id for an Amplify App.
+    #   The unique ID for an Amplify app.
     #   @return [String]
     #
     # @!attribute [rw] branch_name
-    #   Name for the branch.
+    #   The name for the branch.
     #   @return [String]
     #
     # @!attribute [rw] description
-    #   Description for the branch.
+    #   The description for the branch.
     #   @return [String]
     #
     # @!attribute [rw] stage
-    #   Stage for the branch.
+    #   Describes the current stage for the branch.
     #   @return [String]
     #
     # @!attribute [rw] framework
-    #   Framework for the branch.
+    #   The framework for the branch.
     #   @return [String]
     #
     # @!attribute [rw] enable_notification
@@ -679,43 +705,45 @@ module Aws::Amplify
     #   @return [Boolean]
     #
     # @!attribute [rw] environment_variables
-    #   Environment Variables for the branch.
+    #   The environment variables for the branch.
     #   @return [Hash<String,String>]
     #
     # @!attribute [rw] basic_auth_credentials
-    #   Basic Authorization credentials for the branch.
+    #   The basic authorization credentials for the branch.
     #   @return [String]
     #
     # @!attribute [rw] enable_basic_auth
-    #   Enables Basic Auth for the branch.
+    #   Enables basic authorization for the branch.
     #   @return [Boolean]
     #
     # @!attribute [rw] tags
-    #   Tag for the branch.
+    #   The tag for the branch.
     #   @return [Hash<String,String>]
     #
     # @!attribute [rw] build_spec
-    #   BuildSpec for the branch.
+    #   The build specification (build spec) for the branch.
     #   @return [String]
     #
     # @!attribute [rw] ttl
-    #   The content TTL for the website in seconds.
+    #   The content Time To Live (TTL) for the website in seconds.
     #   @return [String]
     #
     # @!attribute [rw] display_name
-    #   Display name for a branch, will use as the default domain prefix.
+    #   The display name for a branch. This is used as the default domain
+    #   prefix.
     #   @return [String]
     #
     # @!attribute [rw] enable_pull_request_preview
-    #   Enables Pull Request Preview for this branch.
+    #   Enables pull request preview for this branch.
     #   @return [Boolean]
     #
     # @!attribute [rw] pull_request_environment_name
-    #   The Amplify Environment name for the pull request.
+    #   The Amplify environment name for the pull request.
     #   @return [String]
     #
     # @!attribute [rw] backend_environment_arn
-    #   ARN for a Backend Environment, part of an Amplify App.
+    #   The Amazon Resource Name (ARN) for a backend environment that is
+    #   part of an Amplify app.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/amplify-2017-07-25/CreateBranchRequest AWS API Documentation
@@ -738,14 +766,15 @@ module Aws::Amplify
       :enable_pull_request_preview,
       :pull_request_environment_name,
       :backend_environment_arn)
-      SENSITIVE = []
+      SENSITIVE = [:basic_auth_credentials]
       include Aws::Structure
     end
 
-    # Result structure for create branch request.
+    # The result structure for create branch request.
     #
     # @!attribute [rw] branch
-    #   Branch structure for an Amplify App.
+    #   Describes the branch for an Amplify app, which maps to a third-party
+    #   repository branch.
     #   @return [Types::Branch]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/amplify-2017-07-25/CreateBranchResult AWS API Documentation
@@ -756,7 +785,7 @@ module Aws::Amplify
       include Aws::Structure
     end
 
-    # Request structure for create a new deployment.
+    # The request structure for the create a new deployment request.
     #
     # @note When making an API call, you may pass CreateDeploymentRequest
     #   data as a hash:
@@ -770,18 +799,19 @@ module Aws::Amplify
     #       }
     #
     # @!attribute [rw] app_id
-    #   Unique Id for an Amplify App.
+    #   The unique ID for an Amplify app.
     #   @return [String]
     #
     # @!attribute [rw] branch_name
-    #   Name for the branch, for the Job.
+    #   The name for the branch, for the job.
     #   @return [String]
     #
     # @!attribute [rw] file_map
-    #   Optional file map that contains file name as the key and file
-    #   content md5 hash as the value. If this argument is provided, the
-    #   service will generate different upload url per file. Otherwise, the
-    #   service will only generate a single upload url for the zipped files.
+    #   An optional file map that contains the file name as the key and the
+    #   file content md5 hash as the value. If this argument is provided,
+    #   the service will generate a unique upload URL per file. Otherwise,
+    #   the service will only generate a single upload URL for the zipped
+    #   files.
     #   @return [Hash<String,String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/amplify-2017-07-25/CreateDeploymentRequest AWS API Documentation
@@ -794,20 +824,20 @@ module Aws::Amplify
       include Aws::Structure
     end
 
-    # Result structure for create a new deployment.
+    # The result structure for the create a new deployment request.
     #
     # @!attribute [rw] job_id
-    #   The jobId for this deployment, will supply to start deployment api.
+    #   The job ID for this deployment. will supply to start deployment api.
     #   @return [String]
     #
     # @!attribute [rw] file_upload_urls
-    #   When the fileMap argument is provided in the request, the
-    #   fileUploadUrls will contain a map of file names to upload url.
+    #   When the `fileMap` argument is provided in the request,
+    #   `fileUploadUrls` will contain a map of file names to upload URLs.
     #   @return [Hash<String,String>]
     #
     # @!attribute [rw] zip_upload_url
-    #   When the fileMap argument is NOT provided. This zipUploadUrl will be
-    #   returned.
+    #   When the `fileMap` argument is not provided in the request, this
+    #   `zipUploadUrl` is returned.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/amplify-2017-07-25/CreateDeploymentResult AWS API Documentation
@@ -820,7 +850,7 @@ module Aws::Amplify
       include Aws::Structure
     end
 
-    # Request structure for create Domain Association request.
+    # The request structure for the create domain association request.
     #
     # @note When making an API call, you may pass CreateDomainAssociationRequest
     #   data as a hash:
@@ -835,24 +865,35 @@ module Aws::Amplify
     #             branch_name: "BranchName", # required
     #           },
     #         ],
+    #         auto_sub_domain_creation_patterns: ["AutoSubDomainCreationPattern"],
+    #         auto_sub_domain_iam_role: "AutoSubDomainIAMRole",
     #       }
     #
     # @!attribute [rw] app_id
-    #   Unique Id for an Amplify App.
+    #   The unique ID for an Amplify app.
     #   @return [String]
     #
     # @!attribute [rw] domain_name
-    #   Domain name for the Domain Association.
+    #   The domain name for the domain association.
     #   @return [String]
     #
     # @!attribute [rw] enable_auto_sub_domain
-    #   Enables automated creation of Subdomains for branches. (Currently
-    #   not supported)
+    #   Enables the automated creation of subdomains for branches.
     #   @return [Boolean]
     #
     # @!attribute [rw] sub_domain_settings
-    #   Setting structure for the Subdomain.
+    #   The setting for the subdomain.
     #   @return [Array<Types::SubDomainSetting>]
+    #
+    # @!attribute [rw] auto_sub_domain_creation_patterns
+    #   Sets the branch patterns for automatic subdomain creation.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] auto_sub_domain_iam_role
+    #   The required AWS Identity and Access Management (IAM) service role
+    #   for the Amazon Resource Name (ARN) for automatically creating
+    #   subdomains.
+    #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/amplify-2017-07-25/CreateDomainAssociationRequest AWS API Documentation
     #
@@ -860,15 +901,18 @@ module Aws::Amplify
       :app_id,
       :domain_name,
       :enable_auto_sub_domain,
-      :sub_domain_settings)
+      :sub_domain_settings,
+      :auto_sub_domain_creation_patterns,
+      :auto_sub_domain_iam_role)
       SENSITIVE = []
       include Aws::Structure
     end
 
-    # Result structure for the create Domain Association request.
+    # The result structure for the create domain association request.
     #
     # @!attribute [rw] domain_association
-    #   Domain Association structure.
+    #   Describes the structure of a domain association, which associates a
+    #   custom domain with an Amplify app.
     #   @return [Types::DomainAssociation]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/amplify-2017-07-25/CreateDomainAssociationResult AWS API Documentation
@@ -879,7 +923,7 @@ module Aws::Amplify
       include Aws::Structure
     end
 
-    # Request structure for create webhook request.
+    # The request structure for the create webhook request.
     #
     # @note When making an API call, you may pass CreateWebhookRequest
     #   data as a hash:
@@ -891,15 +935,15 @@ module Aws::Amplify
     #       }
     #
     # @!attribute [rw] app_id
-    #   Unique Id for an Amplify App.
+    #   The unique ID for an Amplify app.
     #   @return [String]
     #
     # @!attribute [rw] branch_name
-    #   Name for a branch, part of an Amplify App.
+    #   The name for a branch that is part of an Amplify app.
     #   @return [String]
     #
     # @!attribute [rw] description
-    #   Description for a webhook.
+    #   The description for a webhook.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/amplify-2017-07-25/CreateWebhookRequest AWS API Documentation
@@ -912,10 +956,11 @@ module Aws::Amplify
       include Aws::Structure
     end
 
-    # Result structure for the create webhook request.
+    # The result structure for the create webhook request.
     #
     # @!attribute [rw] webhook
-    #   Webhook structure.
+    #   Describes a webhook that connects repository events to an Amplify
+    #   app.
     #   @return [Types::Webhook]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/amplify-2017-07-25/CreateWebhookResult AWS API Documentation
@@ -926,7 +971,7 @@ module Aws::Amplify
       include Aws::Structure
     end
 
-    # Custom rewrite / redirect rule.
+    # Describes a custom rewrite or redirect rule.
     #
     # @note When making an API call, you may pass CustomRule
     #   data as a hash:
@@ -951,7 +996,8 @@ module Aws::Amplify
     #   @return [String]
     #
     # @!attribute [rw] condition
-    #   The condition for a URL rewrite or redirect rule, e.g. country code.
+    #   The condition for a URL rewrite or redirect rule, such as a country
+    #   code.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/amplify-2017-07-25/CustomRule AWS API Documentation
@@ -965,7 +1011,7 @@ module Aws::Amplify
       include Aws::Structure
     end
 
-    # Request structure for an Amplify App delete request.
+    # Describes the request structure for the delete app request.
     #
     # @note When making an API call, you may pass DeleteAppRequest
     #   data as a hash:
@@ -975,7 +1021,7 @@ module Aws::Amplify
     #       }
     #
     # @!attribute [rw] app_id
-    #   Unique Id for an Amplify App.
+    #   The unique ID for an Amplify app.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/amplify-2017-07-25/DeleteAppRequest AWS API Documentation
@@ -986,11 +1032,11 @@ module Aws::Amplify
       include Aws::Structure
     end
 
-    # Result structure for an Amplify App delete request.
+    # The result structure for the delete app request.
     #
     # @!attribute [rw] app
-    #   Amplify App represents different branches of a repository for
-    #   building, deploying, and hosting.
+    #   Represents the different branches of a repository for building,
+    #   deploying, and hosting an Amplify app.
     #   @return [Types::App]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/amplify-2017-07-25/DeleteAppResult AWS API Documentation
@@ -1001,7 +1047,7 @@ module Aws::Amplify
       include Aws::Structure
     end
 
-    # Request structure for delete backend environment request.
+    # The request structure for the delete backend environment request.
     #
     # @note When making an API call, you may pass DeleteBackendEnvironmentRequest
     #   data as a hash:
@@ -1012,11 +1058,11 @@ module Aws::Amplify
     #       }
     #
     # @!attribute [rw] app_id
-    #   Unique Id of an Amplify App.
+    #   The unique ID of an Amplify app.
     #   @return [String]
     #
     # @!attribute [rw] environment_name
-    #   Name of a backend environment of an Amplify App.
+    #   The name of a backend environment of an Amplify app.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/amplify-2017-07-25/DeleteBackendEnvironmentRequest AWS API Documentation
@@ -1028,10 +1074,10 @@ module Aws::Amplify
       include Aws::Structure
     end
 
-    # Result structure of a delete backend environment result.
+    # The result structure of the delete backend environment result.
     #
     # @!attribute [rw] backend_environment
-    #   Backend environment structure for an Amplify App.
+    #   Describes the backend environment for an Amplify app.
     #   @return [Types::BackendEnvironment]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/amplify-2017-07-25/DeleteBackendEnvironmentResult AWS API Documentation
@@ -1042,7 +1088,7 @@ module Aws::Amplify
       include Aws::Structure
     end
 
-    # Request structure for delete branch request.
+    # The request structure for the delete branch request.
     #
     # @note When making an API call, you may pass DeleteBranchRequest
     #   data as a hash:
@@ -1053,11 +1099,11 @@ module Aws::Amplify
     #       }
     #
     # @!attribute [rw] app_id
-    #   Unique Id for an Amplify App.
+    #   The unique ID for an Amplify app.
     #   @return [String]
     #
     # @!attribute [rw] branch_name
-    #   Name for the branch.
+    #   The name for the branch.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/amplify-2017-07-25/DeleteBranchRequest AWS API Documentation
@@ -1069,10 +1115,11 @@ module Aws::Amplify
       include Aws::Structure
     end
 
-    # Result structure for delete branch request.
+    # The result structure for the delete branch request.
     #
     # @!attribute [rw] branch
-    #   Branch structure for an Amplify App.
+    #   The branch for an Amplify app, which maps to a third-party
+    #   repository branch.
     #   @return [Types::Branch]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/amplify-2017-07-25/DeleteBranchResult AWS API Documentation
@@ -1083,7 +1130,7 @@ module Aws::Amplify
       include Aws::Structure
     end
 
-    # Request structure for the delete Domain Association request.
+    # The request structure for the delete domain association request.
     #
     # @note When making an API call, you may pass DeleteDomainAssociationRequest
     #   data as a hash:
@@ -1094,11 +1141,11 @@ module Aws::Amplify
     #       }
     #
     # @!attribute [rw] app_id
-    #   Unique Id for an Amplify App.
+    #   The unique id for an Amplify app.
     #   @return [String]
     #
     # @!attribute [rw] domain_name
-    #   Name of the domain.
+    #   The name of the domain.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/amplify-2017-07-25/DeleteDomainAssociationRequest AWS API Documentation
@@ -1111,8 +1158,8 @@ module Aws::Amplify
     end
 
     # @!attribute [rw] domain_association
-    #   Structure for Domain Association, which associates a custom domain
-    #   with an Amplify App.
+    #   Describes a domain association that associates a custom domain with
+    #   an Amplify app.
     #   @return [Types::DomainAssociation]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/amplify-2017-07-25/DeleteDomainAssociationResult AWS API Documentation
@@ -1123,7 +1170,7 @@ module Aws::Amplify
       include Aws::Structure
     end
 
-    # Request structure for delete job request.
+    # The request structure for the delete job request.
     #
     # @note When making an API call, you may pass DeleteJobRequest
     #   data as a hash:
@@ -1135,15 +1182,15 @@ module Aws::Amplify
     #       }
     #
     # @!attribute [rw] app_id
-    #   Unique Id for an Amplify App.
+    #   The unique ID for an Amplify app.
     #   @return [String]
     #
     # @!attribute [rw] branch_name
-    #   Name for the branch, for the Job.
+    #   The name for the branch, for the job.
     #   @return [String]
     #
     # @!attribute [rw] job_id
-    #   Unique Id for the Job.
+    #   The unique ID for the job.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/amplify-2017-07-25/DeleteJobRequest AWS API Documentation
@@ -1156,10 +1203,10 @@ module Aws::Amplify
       include Aws::Structure
     end
 
-    # Result structure for the delete job request.
+    # The result structure for the delete job request.
     #
     # @!attribute [rw] job_summary
-    #   Structure for the summary of a Job.
+    #   Describes the summary for an execution job for an Amplify app.
     #   @return [Types::JobSummary]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/amplify-2017-07-25/DeleteJobResult AWS API Documentation
@@ -1170,7 +1217,7 @@ module Aws::Amplify
       include Aws::Structure
     end
 
-    # Request structure for the delete webhook request.
+    # The request structure for the delete webhook request.
     #
     # @note When making an API call, you may pass DeleteWebhookRequest
     #   data as a hash:
@@ -1180,7 +1227,7 @@ module Aws::Amplify
     #       }
     #
     # @!attribute [rw] webhook_id
-    #   Unique Id for a webhook.
+    #   The unique ID for a webhook.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/amplify-2017-07-25/DeleteWebhookRequest AWS API Documentation
@@ -1191,10 +1238,11 @@ module Aws::Amplify
       include Aws::Structure
     end
 
-    # Result structure for the delete webhook request.
+    # The result structure for the delete webhook request.
     #
     # @!attribute [rw] webhook
-    #   Webhook structure.
+    #   Describes a webhook that connects repository events to an Amplify
+    #   app.
     #   @return [Types::Webhook]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/amplify-2017-07-25/DeleteWebhookResult AWS API Documentation
@@ -1205,8 +1253,7 @@ module Aws::Amplify
       include Aws::Structure
     end
 
-    # Exception thrown when an operation fails due to a dependent service
-    # throwing an exception.
+    # An operation failed because a dependent service threw an exception.
     #
     # @!attribute [rw] message
     #   @return [String]
@@ -1219,36 +1266,45 @@ module Aws::Amplify
       include Aws::Structure
     end
 
-    # Structure for Domain Association, which associates a custom domain
-    # with an Amplify App.
+    # Describes a domain association that associates a custom domain with an
+    # Amplify app.
     #
     # @!attribute [rw] domain_association_arn
-    #   ARN for the Domain Association.
+    #   The Amazon Resource Name (ARN) for the domain association.
     #   @return [String]
     #
     # @!attribute [rw] domain_name
-    #   Name of the domain.
+    #   The name of the domain.
     #   @return [String]
     #
     # @!attribute [rw] enable_auto_sub_domain
-    #   Enables automated creation of Subdomains for branches. (Currently
-    #   not supported)
+    #   Enables the automated creation of subdomains for branches.
     #   @return [Boolean]
     #
+    # @!attribute [rw] auto_sub_domain_creation_patterns
+    #   Sets branch patterns for automatic subdomain creation.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] auto_sub_domain_iam_role
+    #   The required AWS Identity and Access Management (IAM) service role
+    #   for the Amazon Resource Name (ARN) for automatically creating
+    #   subdomains.
+    #   @return [String]
+    #
     # @!attribute [rw] domain_status
-    #   Status fo the Domain Association.
+    #   The current status of the domain association.
     #   @return [String]
     #
     # @!attribute [rw] status_reason
-    #   Reason for the current status of the Domain Association.
+    #   The reason for the current status of the domain association.
     #   @return [String]
     #
     # @!attribute [rw] certificate_verification_dns_record
-    #   DNS Record for certificate verification.
+    #   The DNS record for certificate verification.
     #   @return [String]
     #
     # @!attribute [rw] sub_domains
-    #   Subdomains for the Domain Association.
+    #   The subdomains for the domain association.
     #   @return [Array<Types::SubDomain>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/amplify-2017-07-25/DomainAssociation AWS API Documentation
@@ -1257,6 +1313,8 @@ module Aws::Amplify
       :domain_association_arn,
       :domain_name,
       :enable_auto_sub_domain,
+      :auto_sub_domain_creation_patterns,
+      :auto_sub_domain_iam_role,
       :domain_status,
       :status_reason,
       :certificate_verification_dns_record,
@@ -1265,7 +1323,7 @@ module Aws::Amplify
       include Aws::Structure
     end
 
-    # Request structure for the generate access logs request.
+    # The request structure for the generate access logs request.
     #
     # @note When making an API call, you may pass GenerateAccessLogsRequest
     #   data as a hash:
@@ -1278,19 +1336,21 @@ module Aws::Amplify
     #       }
     #
     # @!attribute [rw] start_time
-    #   The time at which the logs should start, inclusive.
+    #   The time at which the logs should start. The time range specified is
+    #   inclusive of the start time.
     #   @return [Time]
     #
     # @!attribute [rw] end_time
-    #   The time at which the logs should end, inclusive.
+    #   The time at which the logs should end. The time range specified is
+    #   inclusive of the end time.
     #   @return [Time]
     #
     # @!attribute [rw] domain_name
-    #   Name of the domain.
+    #   The name of the domain.
     #   @return [String]
     #
     # @!attribute [rw] app_id
-    #   Unique Id for an Amplify App.
+    #   The unique ID for an Amplify app.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/amplify-2017-07-25/GenerateAccessLogsRequest AWS API Documentation
@@ -1304,10 +1364,10 @@ module Aws::Amplify
       include Aws::Structure
     end
 
-    # Result structure for the generate access logs request.
+    # The result structure for the generate access logs request.
     #
     # @!attribute [rw] log_url
-    #   Pre-signed URL for the requested access logs.
+    #   The pre-signed URL for the requested access logs.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/amplify-2017-07-25/GenerateAccessLogsResult AWS API Documentation
@@ -1318,7 +1378,7 @@ module Aws::Amplify
       include Aws::Structure
     end
 
-    # Request structure for get App request.
+    # The request structure for the get app request.
     #
     # @note When making an API call, you may pass GetAppRequest
     #   data as a hash:
@@ -1328,7 +1388,7 @@ module Aws::Amplify
     #       }
     #
     # @!attribute [rw] app_id
-    #   Unique Id for an Amplify App.
+    #   The unique ID for an Amplify app.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/amplify-2017-07-25/GetAppRequest AWS API Documentation
@@ -1340,8 +1400,8 @@ module Aws::Amplify
     end
 
     # @!attribute [rw] app
-    #   Amplify App represents different branches of a repository for
-    #   building, deploying, and hosting.
+    #   Represents the different branches of a repository for building,
+    #   deploying, and hosting an Amplify app.
     #   @return [Types::App]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/amplify-2017-07-25/GetAppResult AWS API Documentation
@@ -1352,7 +1412,7 @@ module Aws::Amplify
       include Aws::Structure
     end
 
-    # Request structure for the get artifact request.
+    # Returns the request structure for the get artifact request.
     #
     # @note When making an API call, you may pass GetArtifactUrlRequest
     #   data as a hash:
@@ -1362,7 +1422,7 @@ module Aws::Amplify
     #       }
     #
     # @!attribute [rw] artifact_id
-    #   Unique Id for a artifact.
+    #   The unique ID for an artifact.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/amplify-2017-07-25/GetArtifactUrlRequest AWS API Documentation
@@ -1373,14 +1433,14 @@ module Aws::Amplify
       include Aws::Structure
     end
 
-    # Result structure for the get artifact request.
+    # Returns the result structure for the get artifact request.
     #
     # @!attribute [rw] artifact_id
-    #   Unique Id for a artifact.
+    #   The unique ID for an artifact.
     #   @return [String]
     #
     # @!attribute [rw] artifact_url
-    #   Presigned url for the artifact.
+    #   The presigned URL for the artifact.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/amplify-2017-07-25/GetArtifactUrlResult AWS API Documentation
@@ -1392,7 +1452,7 @@ module Aws::Amplify
       include Aws::Structure
     end
 
-    # Request structure for get backend environment request.
+    # The request structure for the get backend environment request.
     #
     # @note When making an API call, you may pass GetBackendEnvironmentRequest
     #   data as a hash:
@@ -1403,11 +1463,11 @@ module Aws::Amplify
     #       }
     #
     # @!attribute [rw] app_id
-    #   Unique Id for an Amplify App.
+    #   The unique id for an Amplify app.
     #   @return [String]
     #
     # @!attribute [rw] environment_name
-    #   Name for the backend environment.
+    #   The name for the backend environment.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/amplify-2017-07-25/GetBackendEnvironmentRequest AWS API Documentation
@@ -1419,10 +1479,10 @@ module Aws::Amplify
       include Aws::Structure
     end
 
-    # Result structure for get backend environment result.
+    # The result structure for the get backend environment result.
     #
     # @!attribute [rw] backend_environment
-    #   Backend environment structure for an an Amplify App.
+    #   Describes the backend environment for an Amplify app.
     #   @return [Types::BackendEnvironment]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/amplify-2017-07-25/GetBackendEnvironmentResult AWS API Documentation
@@ -1433,7 +1493,7 @@ module Aws::Amplify
       include Aws::Structure
     end
 
-    # Request structure for get branch request.
+    # The request structure for the get branch request.
     #
     # @note When making an API call, you may pass GetBranchRequest
     #   data as a hash:
@@ -1444,11 +1504,11 @@ module Aws::Amplify
     #       }
     #
     # @!attribute [rw] app_id
-    #   Unique Id for an Amplify App.
+    #   The unique ID for an Amplify app.
     #   @return [String]
     #
     # @!attribute [rw] branch_name
-    #   Name for the branch.
+    #   The name for the branch.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/amplify-2017-07-25/GetBranchRequest AWS API Documentation
@@ -1461,8 +1521,8 @@ module Aws::Amplify
     end
 
     # @!attribute [rw] branch
-    #   Branch for an Amplify App, which maps to a 3rd party repository
-    #   branch.
+    #   The branch for an Amplify app, which maps to a third-party
+    #   repository branch.
     #   @return [Types::Branch]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/amplify-2017-07-25/GetBranchResult AWS API Documentation
@@ -1473,7 +1533,7 @@ module Aws::Amplify
       include Aws::Structure
     end
 
-    # Request structure for the get Domain Association request.
+    # The request structure for the get domain association request.
     #
     # @note When making an API call, you may pass GetDomainAssociationRequest
     #   data as a hash:
@@ -1484,11 +1544,11 @@ module Aws::Amplify
     #       }
     #
     # @!attribute [rw] app_id
-    #   Unique Id for an Amplify App.
+    #   The unique id for an Amplify app.
     #   @return [String]
     #
     # @!attribute [rw] domain_name
-    #   Name of the domain.
+    #   The name of the domain.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/amplify-2017-07-25/GetDomainAssociationRequest AWS API Documentation
@@ -1500,10 +1560,11 @@ module Aws::Amplify
       include Aws::Structure
     end
 
-    # Result structure for the get Domain Association request.
+    # The result structure for the get domain association request.
     #
     # @!attribute [rw] domain_association
-    #   Domain Association structure.
+    #   Describes the structure of a domain association, which associates a
+    #   custom domain with an Amplify app.
     #   @return [Types::DomainAssociation]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/amplify-2017-07-25/GetDomainAssociationResult AWS API Documentation
@@ -1514,7 +1575,7 @@ module Aws::Amplify
       include Aws::Structure
     end
 
-    # Request structure for get job request.
+    # The request structure for the get job request.
     #
     # @note When making an API call, you may pass GetJobRequest
     #   data as a hash:
@@ -1526,15 +1587,15 @@ module Aws::Amplify
     #       }
     #
     # @!attribute [rw] app_id
-    #   Unique Id for an Amplify App.
+    #   The unique ID for an Amplify app.
     #   @return [String]
     #
     # @!attribute [rw] branch_name
-    #   Name for the branch, for the Job.
+    #   The branch name for the job.
     #   @return [String]
     #
     # @!attribute [rw] job_id
-    #   Unique Id for the Job.
+    #   The unique ID for the job.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/amplify-2017-07-25/GetJobRequest AWS API Documentation
@@ -1548,7 +1609,7 @@ module Aws::Amplify
     end
 
     # @!attribute [rw] job
-    #   Structure for an execution job for an Amplify App.
+    #   Describes an execution job for an Amplify app.
     #   @return [Types::Job]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/amplify-2017-07-25/GetJobResult AWS API Documentation
@@ -1559,7 +1620,7 @@ module Aws::Amplify
       include Aws::Structure
     end
 
-    # Request structure for the get webhook request.
+    # The request structure for the get webhook request.
     #
     # @note When making an API call, you may pass GetWebhookRequest
     #   data as a hash:
@@ -1569,7 +1630,7 @@ module Aws::Amplify
     #       }
     #
     # @!attribute [rw] webhook_id
-    #   Unique Id for a webhook.
+    #   The unique ID for a webhook.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/amplify-2017-07-25/GetWebhookRequest AWS API Documentation
@@ -1580,10 +1641,10 @@ module Aws::Amplify
       include Aws::Structure
     end
 
-    # Result structure for the get webhook request.
+    # The result structure for the get webhook request.
     #
     # @!attribute [rw] webhook
-    #   Webhook structure.
+    #   Describes the structure of a webhook.
     #   @return [Types::Webhook]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/amplify-2017-07-25/GetWebhookResult AWS API Documentation
@@ -1594,8 +1655,7 @@ module Aws::Amplify
       include Aws::Structure
     end
 
-    # Exception thrown when the service fails to perform an operation due to
-    # an internal issue.
+    # The service failed to perform an operation due to an internal issue.
     #
     # @!attribute [rw] message
     #   @return [String]
@@ -1608,14 +1668,14 @@ module Aws::Amplify
       include Aws::Structure
     end
 
-    # Structure for an execution job for an Amplify App.
+    # Describes an execution job for an Amplify app.
     #
     # @!attribute [rw] summary
-    #   Summary for an execution job for an Amplify App.
+    #   Describes the summary for an execution job for an Amplify app.
     #   @return [Types::JobSummary]
     #
     # @!attribute [rw] steps
-    #   Execution steps for an execution job, for an Amplify App.
+    #   The execution steps for an execution job, for an Amplify app.
     #   @return [Array<Types::Step>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/amplify-2017-07-25/Job AWS API Documentation
@@ -1627,44 +1687,47 @@ module Aws::Amplify
       include Aws::Structure
     end
 
-    # Structure for the summary of a Job.
+    # Describes the summary for an execution job for an Amplify app.
     #
     # @!attribute [rw] job_arn
-    #   Arn for the Job.
+    #   The Amazon Resource Name (ARN) for the job.
     #   @return [String]
     #
     # @!attribute [rw] job_id
-    #   Unique Id for the Job.
+    #   The unique ID for the job.
     #   @return [String]
     #
     # @!attribute [rw] commit_id
-    #   Commit Id from 3rd party repository provider for the Job.
+    #   The commit ID from a third-party repository provider for the job.
     #   @return [String]
     #
     # @!attribute [rw] commit_message
-    #   Commit message from 3rd party repository provider for the Job.
+    #   The commit message from a third-party repository provider for the
+    #   job.
     #   @return [String]
     #
     # @!attribute [rw] commit_time
-    #   Commit date / time for the Job.
+    #   The commit date and time for the job.
     #   @return [Time]
     #
     # @!attribute [rw] start_time
-    #   Start date / time for the Job.
+    #   The start date and time for the job.
     #   @return [Time]
     #
     # @!attribute [rw] status
-    #   Status for the Job.
+    #   The current status for the job.
     #   @return [String]
     #
     # @!attribute [rw] end_time
-    #   End date / time for the Job.
+    #   The end date and time for the job.
     #   @return [Time]
     #
     # @!attribute [rw] job_type
-    #   Type for the Job. \\n "RELEASE": Manually released from source by
-    #   using StartJob API. "RETRY": Manually retried by using StartJob
-    #   API. "WEB\_HOOK": Automatically triggered by WebHooks.
+    #   The type for the job. If the value is `RELEASE`, the job was
+    #   manually released from its source by using the `StartJob` API. If
+    #   the value is `RETRY`, the job was manually retried using the
+    #   `StartJob` API. If the value is `WEB_HOOK`, the job was
+    #   automatically triggered by webhooks.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/amplify-2017-07-25/JobSummary AWS API Documentation
@@ -1683,8 +1746,7 @@ module Aws::Amplify
       include Aws::Structure
     end
 
-    # Exception thrown when a resource could not be created because of
-    # service limits.
+    # A resource could not be created because service quotas were exceeded.
     #
     # @!attribute [rw] message
     #   @return [String]
@@ -1697,7 +1759,7 @@ module Aws::Amplify
       include Aws::Structure
     end
 
-    # Request structure for an Amplify App list request.
+    # The request structure for the list apps request.
     #
     # @note When making an API call, you may pass ListAppsRequest
     #   data as a hash:
@@ -1708,13 +1770,13 @@ module Aws::Amplify
     #       }
     #
     # @!attribute [rw] next_token
-    #   Pagination token. If non-null pagination token is returned in a
-    #   result, then pass its value in another request to fetch more
+    #   A pagination token. If non-null, the pagination token is returned in
+    #   a result. Pass its value in another request to retrieve more
     #   entries.
     #   @return [String]
     #
     # @!attribute [rw] max_results
-    #   Maximum number of records to list in a single response.
+    #   The maximum number of records to list in a single response.
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/amplify-2017-07-25/ListAppsRequest AWS API Documentation
@@ -1726,15 +1788,15 @@ module Aws::Amplify
       include Aws::Structure
     end
 
-    # Result structure for an Amplify App list request.
+    # The result structure for an Amplify app list request.
     #
     # @!attribute [rw] apps
-    #   List of Amplify Apps.
+    #   A list of Amplify apps.
     #   @return [Array<Types::App>]
     #
     # @!attribute [rw] next_token
-    #   Pagination token. Set to null to start listing Apps from start. If
-    #   non-null pagination token is returned in a result, then pass its
+    #   A pagination token. Set to null to start listing apps from start. If
+    #   non-null, the pagination token is returned in a result. Pass its
     #   value in here to list more projects.
     #   @return [String]
     #
@@ -1747,7 +1809,7 @@ module Aws::Amplify
       include Aws::Structure
     end
 
-    # Request structure for the list artifacts request.
+    # Describes the request structure for the list artifacts request.
     #
     # @note When making an API call, you may pass ListArtifactsRequest
     #   data as a hash:
@@ -1761,25 +1823,25 @@ module Aws::Amplify
     #       }
     #
     # @!attribute [rw] app_id
-    #   Unique Id for an Amplify App.
+    #   The unique ID for an Amplify app.
     #   @return [String]
     #
     # @!attribute [rw] branch_name
-    #   Name for a branch, part of an Amplify App.
+    #   The name of a branch that is part of an Amplify app.
     #   @return [String]
     #
     # @!attribute [rw] job_id
-    #   Unique Id for an Job.
+    #   The unique ID for a job.
     #   @return [String]
     #
     # @!attribute [rw] next_token
-    #   Pagination token. Set to null to start listing artifacts from start.
-    #   If non-null pagination token is returned in a result, then pass its
-    #   value in here to list more artifacts.
+    #   A pagination token. Set to null to start listing artifacts from
+    #   start. If a non-null pagination token is returned in a result, pass
+    #   its value in here to list more artifacts.
     #   @return [String]
     #
     # @!attribute [rw] max_results
-    #   Maximum number of records to list in a single response.
+    #   The maximum number of records to list in a single response.
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/amplify-2017-07-25/ListArtifactsRequest AWS API Documentation
@@ -1794,16 +1856,15 @@ module Aws::Amplify
       include Aws::Structure
     end
 
-    # Result structure for the list artifacts request.
+    # The result structure for the list artifacts request.
     #
     # @!attribute [rw] artifacts
-    #   List of artifacts.
+    #   A list of artifacts.
     #   @return [Array<Types::Artifact>]
     #
     # @!attribute [rw] next_token
-    #   Pagination token. If non-null pagination token is returned in a
-    #   result, then pass its value in another request to fetch more
-    #   entries.
+    #   A pagination token. If a non-null pagination token is returned in a
+    #   result, pass its value in another request to retrieve more entries.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/amplify-2017-07-25/ListArtifactsResult AWS API Documentation
@@ -1815,7 +1876,7 @@ module Aws::Amplify
       include Aws::Structure
     end
 
-    # Request structure for list backend environments request.
+    # The request structure for the list backend environments request.
     #
     # @note When making an API call, you may pass ListBackendEnvironmentsRequest
     #   data as a hash:
@@ -1828,21 +1889,22 @@ module Aws::Amplify
     #       }
     #
     # @!attribute [rw] app_id
-    #   Unique Id for an amplify App.
+    #   The unique ID for an Amplify app.
     #   @return [String]
     #
     # @!attribute [rw] environment_name
-    #   Name of the backend environment
+    #   The name of the backend environment
     #   @return [String]
     #
     # @!attribute [rw] next_token
-    #   Pagination token. Set to null to start listing backen environments
-    #   from start. If a non-null pagination token is returned in a result,
-    #   then pass its value in here to list more backend environments.
+    #   A pagination token. Set to null to start listing backend
+    #   environments from the start. If a non-null pagination token is
+    #   returned in a result, pass its value in here to list more backend
+    #   environments.
     #   @return [String]
     #
     # @!attribute [rw] max_results
-    #   Maximum number of records to list in a single response.
+    #   The maximum number of records to list in a single response.
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/amplify-2017-07-25/ListBackendEnvironmentsRequest AWS API Documentation
@@ -1856,16 +1918,15 @@ module Aws::Amplify
       include Aws::Structure
     end
 
-    # Result structure for list backend environments result.
+    # The result structure for the list backend environments result.
     #
     # @!attribute [rw] backend_environments
-    #   List of backend environments for an Amplify App.
+    #   The list of backend environments for an Amplify app.
     #   @return [Array<Types::BackendEnvironment>]
     #
     # @!attribute [rw] next_token
-    #   Pagination token. If non-null pagination token is returned in a
-    #   result, then pass its value in another request to fetch more
-    #   entries.
+    #   A pagination token. If a non-null pagination token is returned in a
+    #   result, pass its value in another request to retrieve more entries.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/amplify-2017-07-25/ListBackendEnvironmentsResult AWS API Documentation
@@ -1877,7 +1938,7 @@ module Aws::Amplify
       include Aws::Structure
     end
 
-    # Request structure for list branches request.
+    # The request structure for the list branches request.
     #
     # @note When making an API call, you may pass ListBranchesRequest
     #   data as a hash:
@@ -1889,17 +1950,17 @@ module Aws::Amplify
     #       }
     #
     # @!attribute [rw] app_id
-    #   Unique Id for an Amplify App.
+    #   The unique ID for an Amplify app.
     #   @return [String]
     #
     # @!attribute [rw] next_token
-    #   Pagination token. Set to null to start listing branches from start.
-    #   If a non-null pagination token is returned in a result, then pass
+    #   A pagination token. Set to null to start listing branches from the
+    #   start. If a non-null pagination token is returned in a result, pass
     #   its value in here to list more branches.
     #   @return [String]
     #
     # @!attribute [rw] max_results
-    #   Maximum number of records to list in a single response.
+    #   The maximum number of records to list in a single response.
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/amplify-2017-07-25/ListBranchesRequest AWS API Documentation
@@ -1912,16 +1973,15 @@ module Aws::Amplify
       include Aws::Structure
     end
 
-    # Result structure for list branches request.
+    # The result structure for the list branches request.
     #
     # @!attribute [rw] branches
-    #   List of branches for an Amplify App.
+    #   A list of branches for an Amplify app.
     #   @return [Array<Types::Branch>]
     #
     # @!attribute [rw] next_token
-    #   Pagination token. If non-null pagination token is returned in a
-    #   result, then pass its value in another request to fetch more
-    #   entries.
+    #   A pagination token. If a non-null pagination token is returned in a
+    #   result, pass its value in another request to retrieve more entries.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/amplify-2017-07-25/ListBranchesResult AWS API Documentation
@@ -1933,7 +1993,7 @@ module Aws::Amplify
       include Aws::Structure
     end
 
-    # Request structure for the list Domain Associations request.
+    # The request structure for the list domain associations request.
     #
     # @note When making an API call, you may pass ListDomainAssociationsRequest
     #   data as a hash:
@@ -1945,17 +2005,17 @@ module Aws::Amplify
     #       }
     #
     # @!attribute [rw] app_id
-    #   Unique Id for an Amplify App.
+    #   The unique ID for an Amplify app.
     #   @return [String]
     #
     # @!attribute [rw] next_token
-    #   Pagination token. Set to null to start listing Apps from start. If
-    #   non-null pagination token is returned in a result, then pass its
-    #   value in here to list more projects.
+    #   A pagination token. Set to null to start listing apps from the
+    #   start. If non-null, a pagination token is returned in a result. Pass
+    #   its value in here to list more projects.
     #   @return [String]
     #
     # @!attribute [rw] max_results
-    #   Maximum number of records to list in a single response.
+    #   The maximum number of records to list in a single response.
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/amplify-2017-07-25/ListDomainAssociationsRequest AWS API Documentation
@@ -1968,16 +2028,15 @@ module Aws::Amplify
       include Aws::Structure
     end
 
-    # Result structure for the list Domain Association request.
+    # The result structure for the list domain association request.
     #
     # @!attribute [rw] domain_associations
-    #   List of Domain Associations.
+    #   A list of domain associations.
     #   @return [Array<Types::DomainAssociation>]
     #
     # @!attribute [rw] next_token
-    #   Pagination token. If non-null pagination token is returned in a
-    #   result, then pass its value in another request to fetch more
-    #   entries.
+    #   A pagination token. If non-null, a pagination token is returned in a
+    #   result. Pass its value in another request to retrieve more entries.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/amplify-2017-07-25/ListDomainAssociationsResult AWS API Documentation
@@ -1989,7 +2048,7 @@ module Aws::Amplify
       include Aws::Structure
     end
 
-    # Request structure for list job request.
+    # The request structure for the list jobs request.
     #
     # @note When making an API call, you may pass ListJobsRequest
     #   data as a hash:
@@ -2002,21 +2061,21 @@ module Aws::Amplify
     #       }
     #
     # @!attribute [rw] app_id
-    #   Unique Id for an Amplify App.
+    #   The unique ID for an Amplify app.
     #   @return [String]
     #
     # @!attribute [rw] branch_name
-    #   Name for a branch.
+    #   The name for a branch.
     #   @return [String]
     #
     # @!attribute [rw] next_token
-    #   Pagination token. Set to null to start listing steps from start. If
-    #   a non-null pagination token is returned in a result, then pass its
-    #   value in here to list more steps.
+    #   A pagination token. Set to null to start listing steps from the
+    #   start. If a non-null pagination token is returned in a result, pass
+    #   its value in here to list more steps.
     #   @return [String]
     #
     # @!attribute [rw] max_results
-    #   Maximum number of records to list in a single response.
+    #   The maximum number of records to list in a single response.
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/amplify-2017-07-25/ListJobsRequest AWS API Documentation
@@ -2030,15 +2089,15 @@ module Aws::Amplify
       include Aws::Structure
     end
 
-    # Maximum number of records to list in a single response.
+    # The maximum number of records to list in a single response.
     #
     # @!attribute [rw] job_summaries
-    #   Result structure for list job result request.
+    #   The result structure for the list job result request.
     #   @return [Array<Types::JobSummary>]
     #
     # @!attribute [rw] next_token
-    #   Pagination token. If non-null pagination token is returned in a
-    #   result, then pass its value in another request to fetch more
+    #   A pagination token. If non-null the pagination token is returned in
+    #   a result. Pass its value in another request to retrieve more
     #   entries.
     #   @return [String]
     #
@@ -2051,7 +2110,7 @@ module Aws::Amplify
       include Aws::Structure
     end
 
-    # Request structure used to list tags for resource.
+    # The request structure to use to list tags for a resource.
     #
     # @note When making an API call, you may pass ListTagsForResourceRequest
     #   data as a hash:
@@ -2061,7 +2120,7 @@ module Aws::Amplify
     #       }
     #
     # @!attribute [rw] resource_arn
-    #   Resource arn used to list tags.
+    #   The Amazon Resource Name (ARN) to use to list tags.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/amplify-2017-07-25/ListTagsForResourceRequest AWS API Documentation
@@ -2072,10 +2131,10 @@ module Aws::Amplify
       include Aws::Structure
     end
 
-    # Response for list tags.
+    # The response for the list tags for resource request.
     #
     # @!attribute [rw] tags
-    #   Tags result for response.
+    #   A list of tags for the specified The Amazon Resource Name (ARN).
     #   @return [Hash<String,String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/amplify-2017-07-25/ListTagsForResourceResponse AWS API Documentation
@@ -2086,7 +2145,7 @@ module Aws::Amplify
       include Aws::Structure
     end
 
-    # Request structure for the list webhooks request.
+    # The request structure for the list webhooks request.
     #
     # @note When making an API call, you may pass ListWebhooksRequest
     #   data as a hash:
@@ -2098,17 +2157,17 @@ module Aws::Amplify
     #       }
     #
     # @!attribute [rw] app_id
-    #   Unique Id for an Amplify App.
+    #   The unique ID for an Amplify app.
     #   @return [String]
     #
     # @!attribute [rw] next_token
-    #   Pagination token. Set to null to start listing webhooks from start.
-    #   If non-null pagination token is returned in a result, then pass its
-    #   value in here to list more webhooks.
+    #   A pagination token. Set to null to start listing webhooks from the
+    #   start. If non-null,the pagination token is returned in a result.
+    #   Pass its value in here to list more webhooks.
     #   @return [String]
     #
     # @!attribute [rw] max_results
-    #   Maximum number of records to list in a single response.
+    #   The maximum number of records to list in a single response.
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/amplify-2017-07-25/ListWebhooksRequest AWS API Documentation
@@ -2121,15 +2180,15 @@ module Aws::Amplify
       include Aws::Structure
     end
 
-    # Result structure for the list webhooks request.
+    # The result structure for the list webhooks request.
     #
     # @!attribute [rw] webhooks
-    #   List of webhooks.
+    #   A list of webhooks.
     #   @return [Array<Types::Webhook>]
     #
     # @!attribute [rw] next_token
-    #   Pagination token. If non-null pagination token is returned in a
-    #   result, then pass its value in another request to fetch more
+    #   A pagination token. If non-null, the pagination token is returned in
+    #   a result. Pass its value in another request to retrieve more
     #   entries.
     #   @return [String]
     #
@@ -2142,8 +2201,7 @@ module Aws::Amplify
       include Aws::Structure
     end
 
-    # Exception thrown when an entity has not been found during an
-    # operation.
+    # An entity was not found during an operation.
     #
     # @!attribute [rw] message
     #   @return [String]
@@ -2156,22 +2214,23 @@ module Aws::Amplify
       include Aws::Structure
     end
 
-    # Structure with Production Branch information.
+    # Describes the information about a production branch for an Amplify
+    # app.
     #
     # @!attribute [rw] last_deploy_time
-    #   Last Deploy Time of Production Branch.
+    #   The last deploy time of the production branch.
     #   @return [Time]
     #
     # @!attribute [rw] status
-    #   Status of Production Branch.
+    #   The status of the production branch.
     #   @return [String]
     #
     # @!attribute [rw] thumbnail_url
-    #   Thumbnail URL for Production Branch.
+    #   The thumbnail URL for the production branch.
     #   @return [String]
     #
     # @!attribute [rw] branch_name
-    #   Branch Name for Production Branch.
+    #   The branch name for the production branch.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/amplify-2017-07-25/ProductionBranch AWS API Documentation
@@ -2185,7 +2244,7 @@ module Aws::Amplify
       include Aws::Structure
     end
 
-    # Exception thrown when an operation fails due to non-existent resource.
+    # An operation failed due to a non-existent resource.
     #
     # @!attribute [rw] code
     #   @return [String]
@@ -2202,7 +2261,7 @@ module Aws::Amplify
       include Aws::Structure
     end
 
-    # Request structure for start a deployment.
+    # The request structure for the start a deployment request.
     #
     # @note When making an API call, you may pass StartDeploymentRequest
     #   data as a hash:
@@ -2215,22 +2274,23 @@ module Aws::Amplify
     #       }
     #
     # @!attribute [rw] app_id
-    #   Unique Id for an Amplify App.
+    #   The unique ID for an Amplify app.
     #   @return [String]
     #
     # @!attribute [rw] branch_name
-    #   Name for the branch, for the Job.
+    #   The name for the branch, for the job.
     #   @return [String]
     #
     # @!attribute [rw] job_id
-    #   The job id for this deployment, generated by create deployment
+    #   The job ID for this deployment, generated by the create deployment
     #   request.
     #   @return [String]
     #
     # @!attribute [rw] source_url
-    #   The sourceUrl for this deployment, used when calling start
-    #   deployment without create deployment. SourceUrl can be any HTTP GET
-    #   url that is public accessible and downloads a single zip.
+    #   The source URL for this deployment, used when calling start
+    #   deployment without create deployment. The source URL can be any HTTP
+    #   GET URL that is publicly accessible and downloads a single .zip
+    #   file.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/amplify-2017-07-25/StartDeploymentRequest AWS API Documentation
@@ -2244,10 +2304,10 @@ module Aws::Amplify
       include Aws::Structure
     end
 
-    # Result structure for start a deployment.
+    # The result structure for the start a deployment request.
     #
     # @!attribute [rw] job_summary
-    #   Summary for the Job.
+    #   The summary for the job.
     #   @return [Types::JobSummary]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/amplify-2017-07-25/StartDeploymentResult AWS API Documentation
@@ -2258,7 +2318,7 @@ module Aws::Amplify
       include Aws::Structure
     end
 
-    # Request structure for Start job request.
+    # The request structure for the start job request.
     #
     # @note When making an API call, you may pass StartJobRequest
     #   data as a hash:
@@ -2275,38 +2335,41 @@ module Aws::Amplify
     #       }
     #
     # @!attribute [rw] app_id
-    #   Unique Id for an Amplify App.
+    #   The unique ID for an Amplify app.
     #   @return [String]
     #
     # @!attribute [rw] branch_name
-    #   Name for the branch, for the Job.
+    #   The branch name for the job.
     #   @return [String]
     #
     # @!attribute [rw] job_id
-    #   Unique Id for an existing job. Required for "RETRY" JobType.
+    #   The unique ID for an existing job. This is required if the value of
+    #   `jobType` is `RETRY`.
     #   @return [String]
     #
     # @!attribute [rw] job_type
-    #   Type for the Job. Available JobTypes are: \\n "RELEASE": Start a
-    #   new job with the latest change from the specified branch. Only
-    #   available for apps that have connected to a repository. "RETRY":
-    #   Retry an existing job. JobId is required for this type of job.
+    #   Describes the type for the job. The job type `RELEASE` starts a new
+    #   job with the latest change from the specified branch. This value is
+    #   available only for apps that are connected to a repository. The job
+    #   type `RETRY` retries an existing job. If the job type value is
+    #   `RETRY`, the `jobId` is also required.
     #   @return [String]
     #
     # @!attribute [rw] job_reason
-    #   Descriptive reason for starting this job.
+    #   A descriptive reason for starting this job.
     #   @return [String]
     #
     # @!attribute [rw] commit_id
-    #   Commit Id from 3rd party repository provider for the Job.
+    #   The commit ID from a third-party repository provider for the job.
     #   @return [String]
     #
     # @!attribute [rw] commit_message
-    #   Commit message from 3rd party repository provider for the Job.
+    #   The commit message from a third-party repository provider for the
+    #   job.
     #   @return [String]
     #
     # @!attribute [rw] commit_time
-    #   Commit date / time for the Job.
+    #   The commit date and time for the job.
     #   @return [Time]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/amplify-2017-07-25/StartJobRequest AWS API Documentation
@@ -2324,10 +2387,10 @@ module Aws::Amplify
       include Aws::Structure
     end
 
-    # Result structure for run job request.
+    # The result structure for the run job request.
     #
     # @!attribute [rw] job_summary
-    #   Summary for the Job.
+    #   The summary for the job.
     #   @return [Types::JobSummary]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/amplify-2017-07-25/StartJobResult AWS API Documentation
@@ -2338,52 +2401,51 @@ module Aws::Amplify
       include Aws::Structure
     end
 
-    # Structure for an execution step for an execution job, for an Amplify
-    # App.
+    # Describes an execution step, for an execution job, for an Amplify app.
     #
     # @!attribute [rw] step_name
-    #   Name of the execution step.
+    #   The name of the execution step.
     #   @return [String]
     #
     # @!attribute [rw] start_time
-    #   Start date/ time of the execution step.
+    #   The start date and time of the execution step.
     #   @return [Time]
     #
     # @!attribute [rw] status
-    #   Status of the execution step.
+    #   The status of the execution step.
     #   @return [String]
     #
     # @!attribute [rw] end_time
-    #   End date/ time of the execution step.
+    #   The end date and time of the execution step.
     #   @return [Time]
     #
     # @!attribute [rw] log_url
-    #   URL to the logs for the execution step.
+    #   The URL to the logs for the execution step.
     #   @return [String]
     #
     # @!attribute [rw] artifacts_url
-    #   URL to the artifact for the execution step.
+    #   The URL to the artifact for the execution step.
     #   @return [String]
     #
     # @!attribute [rw] test_artifacts_url
-    #   URL to the test artifact for the execution step.
+    #   The URL to the test artifact for the execution step.
     #   @return [String]
     #
     # @!attribute [rw] test_config_url
-    #   URL to the test config for the execution step.
+    #   The URL to the test configuration for the execution step.
     #   @return [String]
     #
     # @!attribute [rw] screenshots
-    #   List of screenshot URLs for the execution step, if relevant.
+    #   The list of screenshot URLs for the execution step, if relevant.
     #   @return [Hash<String,String>]
     #
     # @!attribute [rw] status_reason
-    #   The reason for current step status.
+    #   The reason for the current step status.
     #   @return [String]
     #
     # @!attribute [rw] context
-    #   The context for current step, will include build image if step is
-    #   build.
+    #   The context for the current step. Includes a build image if the step
+    #   is build.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/amplify-2017-07-25/Step AWS API Documentation
@@ -2404,7 +2466,7 @@ module Aws::Amplify
       include Aws::Structure
     end
 
-    # Request structure for stop job request.
+    # The request structure for the stop job request.
     #
     # @note When making an API call, you may pass StopJobRequest
     #   data as a hash:
@@ -2416,15 +2478,15 @@ module Aws::Amplify
     #       }
     #
     # @!attribute [rw] app_id
-    #   Unique Id for an Amplify App.
+    #   The unique ID for an Amplify app.
     #   @return [String]
     #
     # @!attribute [rw] branch_name
-    #   Name for the branch, for the Job.
+    #   The name for the branch, for the job.
     #   @return [String]
     #
     # @!attribute [rw] job_id
-    #   Unique Id for the Job.
+    #   The unique id for the job.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/amplify-2017-07-25/StopJobRequest AWS API Documentation
@@ -2437,10 +2499,10 @@ module Aws::Amplify
       include Aws::Structure
     end
 
-    # Result structure for the stop job request.
+    # The result structure for the stop job request.
     #
     # @!attribute [rw] job_summary
-    #   Summary for the Job.
+    #   The summary for the job.
     #   @return [Types::JobSummary]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/amplify-2017-07-25/StopJobResult AWS API Documentation
@@ -2451,18 +2513,18 @@ module Aws::Amplify
       include Aws::Structure
     end
 
-    # Subdomain for the Domain Association.
+    # The subdomain for the domain association.
     #
     # @!attribute [rw] sub_domain_setting
-    #   Setting structure for the Subdomain.
+    #   Describes the settings for the subdomain.
     #   @return [Types::SubDomainSetting]
     #
     # @!attribute [rw] verified
-    #   Verified status of the Subdomain
+    #   The verified status of the subdomain
     #   @return [Boolean]
     #
     # @!attribute [rw] dns_record
-    #   DNS record for the Subdomain.
+    #   The DNS record for the subdomain.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/amplify-2017-07-25/SubDomain AWS API Documentation
@@ -2475,7 +2537,7 @@ module Aws::Amplify
       include Aws::Structure
     end
 
-    # Setting for the Subdomain.
+    # Describes the settings for the subdomain.
     #
     # @note When making an API call, you may pass SubDomainSetting
     #   data as a hash:
@@ -2486,11 +2548,11 @@ module Aws::Amplify
     #       }
     #
     # @!attribute [rw] prefix
-    #   Prefix setting for the Subdomain.
+    #   The prefix setting for the subdomain.
     #   @return [String]
     #
     # @!attribute [rw] branch_name
-    #   Branch name setting for the Subdomain.
+    #   The branch name setting for the subdomain.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/amplify-2017-07-25/SubDomainSetting AWS API Documentation
@@ -2502,7 +2564,7 @@ module Aws::Amplify
       include Aws::Structure
     end
 
-    # Request structure used to tag resource.
+    # The request structure to tag a resource with a tag key and value.
     #
     # @note When making an API call, you may pass TagResourceRequest
     #   data as a hash:
@@ -2515,11 +2577,11 @@ module Aws::Amplify
     #       }
     #
     # @!attribute [rw] resource_arn
-    #   Resource arn used to tag resource.
+    #   The Amazon Resource Name (ARN) to use to tag a resource.
     #   @return [String]
     #
     # @!attribute [rw] tags
-    #   Tags used to tag resource.
+    #   The tags used to tag the resource.
     #   @return [Hash<String,String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/amplify-2017-07-25/TagResourceRequest AWS API Documentation
@@ -2531,13 +2593,13 @@ module Aws::Amplify
       include Aws::Structure
     end
 
-    # Response for tag resource.
+    # The response for the tag resource request.
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/amplify-2017-07-25/TagResourceResponse AWS API Documentation
     #
     class TagResourceResponse < Aws::EmptyStructure; end
 
-    # Exception thrown when an operation fails due to a lack of access.
+    # An operation failed due to a lack of access.
     #
     # @!attribute [rw] message
     #   @return [String]
@@ -2550,7 +2612,7 @@ module Aws::Amplify
       include Aws::Structure
     end
 
-    # Request structure used to untag resource.
+    # The request structure for the untag resource request.
     #
     # @note When making an API call, you may pass UntagResourceRequest
     #   data as a hash:
@@ -2561,11 +2623,11 @@ module Aws::Amplify
     #       }
     #
     # @!attribute [rw] resource_arn
-    #   Resource arn used to untag resource.
+    #   The Amazon Resource Name (ARN) to use to untag a resource.
     #   @return [String]
     #
     # @!attribute [rw] tag_keys
-    #   Tag keys used to untag resource.
+    #   The tag keys to use to untag a resource.
     #   @return [Array<String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/amplify-2017-07-25/UntagResourceRequest AWS API Documentation
@@ -2577,13 +2639,13 @@ module Aws::Amplify
       include Aws::Structure
     end
 
-    # Response for untag resource.
+    # The response for the untag resource request.
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/amplify-2017-07-25/UntagResourceResponse AWS API Documentation
     #
     class UntagResourceResponse < Aws::EmptyStructure; end
 
-    # Request structure for update App request.
+    # The request structure for the update app request.
     #
     # @note When making an API call, you may pass UpdateAppRequest
     #   data as a hash:
@@ -2598,6 +2660,7 @@ module Aws::Amplify
     #           "EnvKey" => "EnvValue",
     #         },
     #         enable_branch_auto_build: false,
+    #         enable_branch_auto_deletion: false,
     #         enable_basic_auth: false,
     #         basic_auth_credentials: "BasicAuthCredentials",
     #         custom_rules: [
@@ -2630,75 +2693,82 @@ module Aws::Amplify
     #       }
     #
     # @!attribute [rw] app_id
-    #   Unique Id for an Amplify App.
+    #   The unique ID for an Amplify app.
     #   @return [String]
     #
     # @!attribute [rw] name
-    #   Name for an Amplify App.
+    #   The name for an Amplify app.
     #   @return [String]
     #
     # @!attribute [rw] description
-    #   Description for an Amplify App.
+    #   The description for an Amplify app.
     #   @return [String]
     #
     # @!attribute [rw] platform
-    #   Platform for an Amplify App.
+    #   The platform for an Amplify app.
     #   @return [String]
     #
     # @!attribute [rw] iam_service_role_arn
-    #   IAM service role for an Amplify App.
+    #   The AWS Identity and Access Management (IAM) service role for an
+    #   Amplify app.
     #   @return [String]
     #
     # @!attribute [rw] environment_variables
-    #   Environment Variables for an Amplify App.
+    #   The environment variables for an Amplify app.
     #   @return [Hash<String,String>]
     #
     # @!attribute [rw] enable_branch_auto_build
-    #   Enables branch auto-building for an Amplify App.
+    #   Enables branch auto-building for an Amplify app.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] enable_branch_auto_deletion
+    #   Automatically disconnects a branch in the Amplify Console when you
+    #   delete a branch from your Git repository.
     #   @return [Boolean]
     #
     # @!attribute [rw] enable_basic_auth
-    #   Enables Basic Authorization for an Amplify App.
+    #   Enables basic authorization for an Amplify app.
     #   @return [Boolean]
     #
     # @!attribute [rw] basic_auth_credentials
-    #   Basic Authorization credentials for an Amplify App.
+    #   The basic authorization credentials for an Amplify app.
     #   @return [String]
     #
     # @!attribute [rw] custom_rules
-    #   Custom redirect / rewrite rules for an Amplify App.
+    #   The custom redirect and rewrite rules for an Amplify app.
     #   @return [Array<Types::CustomRule>]
     #
     # @!attribute [rw] build_spec
-    #   BuildSpec for an Amplify App.
+    #   The build specification (build spec) for an Amplify app.
     #   @return [String]
     #
     # @!attribute [rw] enable_auto_branch_creation
-    #   Enables automated branch creation for the Amplify App.
+    #   Enables automated branch creation for the Amplify app.
     #   @return [Boolean]
     #
     # @!attribute [rw] auto_branch_creation_patterns
-    #   Automated branch creation glob patterns for the Amplify App.
+    #   Describes the automated branch creation glob patterns for the
+    #   Amplify app.
     #   @return [Array<String>]
     #
     # @!attribute [rw] auto_branch_creation_config
-    #   Automated branch creation branchConfig for the Amplify App.
+    #   The automated branch creation configuration for the Amplify app.
     #   @return [Types::AutoBranchCreationConfig]
     #
     # @!attribute [rw] repository
-    #   Repository for an Amplify App
+    #   The name of the repository for an Amplify app
     #   @return [String]
     #
     # @!attribute [rw] oauth_token
-    #   OAuth token for 3rd party source control system for an Amplify App,
-    #   used to create webhook and read-only deploy key. OAuth token is not
-    #   stored.
+    #   The OAuth token for a third-party source control system for an
+    #   Amplify app. The token is used to create a webhook and a read-only
+    #   deploy key. The OAuth token is not stored.
     #   @return [String]
     #
     # @!attribute [rw] access_token
-    #   Personal Access token for 3rd party source control system for an
-    #   Amplify App, used to create webhook and read-only deploy key. Token
-    #   is not stored.
+    #   The personal access token for a third-party source control system
+    #   for an Amplify app. The token is used to create webhook and a
+    #   read-only deploy key. The token is not stored.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/amplify-2017-07-25/UpdateAppRequest AWS API Documentation
@@ -2711,6 +2781,7 @@ module Aws::Amplify
       :iam_service_role_arn,
       :environment_variables,
       :enable_branch_auto_build,
+      :enable_branch_auto_deletion,
       :enable_basic_auth,
       :basic_auth_credentials,
       :custom_rules,
@@ -2721,14 +2792,14 @@ module Aws::Amplify
       :repository,
       :oauth_token,
       :access_token)
-      SENSITIVE = []
+      SENSITIVE = [:basic_auth_credentials, :oauth_token, :access_token]
       include Aws::Structure
     end
 
-    # Result structure for an Amplify App update request.
+    # The result structure for an Amplify app update request.
     #
     # @!attribute [rw] app
-    #   App structure for the updated App.
+    #   Represents the updated Amplify app.
     #   @return [Types::App]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/amplify-2017-07-25/UpdateAppResult AWS API Documentation
@@ -2739,7 +2810,7 @@ module Aws::Amplify
       include Aws::Structure
     end
 
-    # Request structure for update branch request.
+    # The request structure for the update branch request.
     #
     # @note When making an API call, you may pass UpdateBranchRequest
     #   data as a hash:
@@ -2766,23 +2837,23 @@ module Aws::Amplify
     #       }
     #
     # @!attribute [rw] app_id
-    #   Unique Id for an Amplify App.
+    #   The unique ID for an Amplify app.
     #   @return [String]
     #
     # @!attribute [rw] branch_name
-    #   Name for the branch.
+    #   The name for the branch.
     #   @return [String]
     #
     # @!attribute [rw] description
-    #   Description for the branch.
+    #   The description for the branch.
     #   @return [String]
     #
     # @!attribute [rw] framework
-    #   Framework for the branch.
+    #   The framework for the branch.
     #   @return [String]
     #
     # @!attribute [rw] stage
-    #   Stage for the branch.
+    #   Describes the current stage for the branch.
     #   @return [String]
     #
     # @!attribute [rw] enable_notification
@@ -2794,39 +2865,41 @@ module Aws::Amplify
     #   @return [Boolean]
     #
     # @!attribute [rw] environment_variables
-    #   Environment Variables for the branch.
+    #   The environment variables for the branch.
     #   @return [Hash<String,String>]
     #
     # @!attribute [rw] basic_auth_credentials
-    #   Basic Authorization credentials for the branch.
+    #   The basic authorization credentials for the branch.
     #   @return [String]
     #
     # @!attribute [rw] enable_basic_auth
-    #   Enables Basic Auth for the branch.
+    #   Enables basic authorization for the branch.
     #   @return [Boolean]
     #
     # @!attribute [rw] build_spec
-    #   BuildSpec for the branch.
+    #   The build specification (build spec) for the branch.
     #   @return [String]
     #
     # @!attribute [rw] ttl
-    #   The content TTL for the website in seconds.
+    #   The content Time to Live (TTL) for the website in seconds.
     #   @return [String]
     #
     # @!attribute [rw] display_name
-    #   Display name for a branch, will use as the default domain prefix.
+    #   The display name for a branch. This is used as the default domain
+    #   prefix.
     #   @return [String]
     #
     # @!attribute [rw] enable_pull_request_preview
-    #   Enables Pull Request Preview for this branch.
+    #   Enables pull request preview for this branch.
     #   @return [Boolean]
     #
     # @!attribute [rw] pull_request_environment_name
-    #   The Amplify Environment name for the pull request.
+    #   The Amplify environment name for the pull request.
     #   @return [String]
     #
     # @!attribute [rw] backend_environment_arn
-    #   ARN for a Backend Environment, part of an Amplify App.
+    #   The Amazon Resource Name (ARN) for a backend environment that is
+    #   part of an Amplify app.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/amplify-2017-07-25/UpdateBranchRequest AWS API Documentation
@@ -2848,14 +2921,15 @@ module Aws::Amplify
       :enable_pull_request_preview,
       :pull_request_environment_name,
       :backend_environment_arn)
-      SENSITIVE = []
+      SENSITIVE = [:basic_auth_credentials]
       include Aws::Structure
     end
 
-    # Result structure for update branch request.
+    # The result structure for the update branch request.
     #
     # @!attribute [rw] branch
-    #   Branch structure for an Amplify App.
+    #   The branch for an Amplify app, which maps to a third-party
+    #   repository branch.
     #   @return [Types::Branch]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/amplify-2017-07-25/UpdateBranchResult AWS API Documentation
@@ -2866,7 +2940,7 @@ module Aws::Amplify
       include Aws::Structure
     end
 
-    # Request structure for update Domain Association request.
+    # The request structure for the update domain association request.
     #
     # @note When making an API call, you may pass UpdateDomainAssociationRequest
     #   data as a hash:
@@ -2881,24 +2955,35 @@ module Aws::Amplify
     #             branch_name: "BranchName", # required
     #           },
     #         ],
+    #         auto_sub_domain_creation_patterns: ["AutoSubDomainCreationPattern"],
+    #         auto_sub_domain_iam_role: "AutoSubDomainIAMRole",
     #       }
     #
     # @!attribute [rw] app_id
-    #   Unique Id for an Amplify App.
+    #   The unique ID for an Amplify app.
     #   @return [String]
     #
     # @!attribute [rw] domain_name
-    #   Name of the domain.
+    #   The name of the domain.
     #   @return [String]
     #
     # @!attribute [rw] enable_auto_sub_domain
-    #   Enables automated creation of Subdomains for branches. (Currently
-    #   not supported)
+    #   Enables the automated creation of subdomains for branches.
     #   @return [Boolean]
     #
     # @!attribute [rw] sub_domain_settings
-    #   Setting structure for the Subdomain.
+    #   Describes the settings for the subdomain.
     #   @return [Array<Types::SubDomainSetting>]
+    #
+    # @!attribute [rw] auto_sub_domain_creation_patterns
+    #   Sets the branch patterns for automatic subdomain creation.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] auto_sub_domain_iam_role
+    #   The required AWS Identity and Access Management (IAM) service role
+    #   for the Amazon Resource Name (ARN) for automatically creating
+    #   subdomains.
+    #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/amplify-2017-07-25/UpdateDomainAssociationRequest AWS API Documentation
     #
@@ -2906,15 +2991,18 @@ module Aws::Amplify
       :app_id,
       :domain_name,
       :enable_auto_sub_domain,
-      :sub_domain_settings)
+      :sub_domain_settings,
+      :auto_sub_domain_creation_patterns,
+      :auto_sub_domain_iam_role)
       SENSITIVE = []
       include Aws::Structure
     end
 
-    # Result structure for the update Domain Association request.
+    # The result structure for the update domain association request.
     #
     # @!attribute [rw] domain_association
-    #   Domain Association structure.
+    #   Describes a domain association, which associates a custom domain
+    #   with an Amplify app.
     #   @return [Types::DomainAssociation]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/amplify-2017-07-25/UpdateDomainAssociationResult AWS API Documentation
@@ -2925,7 +3013,7 @@ module Aws::Amplify
       include Aws::Structure
     end
 
-    # Request structure for update webhook request.
+    # The request structure for the update webhook request.
     #
     # @note When making an API call, you may pass UpdateWebhookRequest
     #   data as a hash:
@@ -2937,15 +3025,15 @@ module Aws::Amplify
     #       }
     #
     # @!attribute [rw] webhook_id
-    #   Unique Id for a webhook.
+    #   The unique ID for a webhook.
     #   @return [String]
     #
     # @!attribute [rw] branch_name
-    #   Name for a branch, part of an Amplify App.
+    #   The name for a branch that is part of an Amplify app.
     #   @return [String]
     #
     # @!attribute [rw] description
-    #   Description for a webhook.
+    #   The description for a webhook.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/amplify-2017-07-25/UpdateWebhookRequest AWS API Documentation
@@ -2958,10 +3046,11 @@ module Aws::Amplify
       include Aws::Structure
     end
 
-    # Result structure for the update webhook request.
+    # The result structure for the update webhook request.
     #
     # @!attribute [rw] webhook
-    #   Webhook structure.
+    #   Describes a webhook that connects repository events to an Amplify
+    #   app.
     #   @return [Types::Webhook]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/amplify-2017-07-25/UpdateWebhookResult AWS API Documentation
@@ -2972,34 +3061,34 @@ module Aws::Amplify
       include Aws::Structure
     end
 
-    # Structure for webhook, which associates a webhook with an Amplify App.
+    # Describes a webhook that connects repository events to an Amplify app.
     #
     # @!attribute [rw] webhook_arn
-    #   ARN for the webhook.
+    #   The Amazon Resource Name (ARN) for the webhook.
     #   @return [String]
     #
     # @!attribute [rw] webhook_id
-    #   Id of the webhook.
+    #   The ID of the webhook.
     #   @return [String]
     #
     # @!attribute [rw] webhook_url
-    #   Url of the webhook.
+    #   The URL of the webhook.
     #   @return [String]
     #
     # @!attribute [rw] branch_name
-    #   Name for a branch, part of an Amplify App.
+    #   The name for a branch that is part of an Amplify app.
     #   @return [String]
     #
     # @!attribute [rw] description
-    #   Description for a webhook.
+    #   The description for a webhook.
     #   @return [String]
     #
     # @!attribute [rw] create_time
-    #   Create date / time for a webhook.
+    #   The create date and time for a webhook.
     #   @return [Time]
     #
     # @!attribute [rw] update_time
-    #   Update date / time for a webhook.
+    #   Updates the date and time for a webhook.
     #   @return [Time]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/amplify-2017-07-25/Webhook AWS API Documentation

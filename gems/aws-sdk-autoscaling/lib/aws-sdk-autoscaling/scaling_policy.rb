@@ -47,16 +47,30 @@ module Aws::AutoScaling
       data[:policy_arn]
     end
 
-    # The policy type. The valid values are `SimpleScaling`, `StepScaling`,
-    # and `TargetTrackingScaling`.
+    # One of the following policy types:
+    #
+    # * `TargetTrackingScaling`
+    #
+    # * `StepScaling`
+    #
+    # * `SimpleScaling` (default)
+    #
+    # For more information, see [Target Tracking Scaling Policies][1] and
+    # [Step and Simple Scaling Policies][2] in the *Amazon EC2 Auto Scaling
+    # User Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/autoscaling/ec2/userguide/as-scaling-target-tracking.html
+    # [2]: https://docs.aws.amazon.com/autoscaling/ec2/userguide/as-scaling-simple-step.html
     # @return [String]
     def policy_type
       data[:policy_type]
     end
 
-    # The adjustment type, which specifies how `ScalingAdjustment` is
-    # interpreted. The valid values are `ChangeInCapacity`, `ExactCapacity`,
-    # and `PercentChangeInCapacity`.
+    # Specifies how the scaling adjustment is interpreted (either an
+    # absolute number or a percentage). The valid values are
+    # `ChangeInCapacity`, `ExactCapacity`, and `PercentChangeInCapacity`.
     # @return [String]
     def adjustment_type
       data[:adjustment_type]
@@ -69,10 +83,8 @@ module Aws::AutoScaling
       data[:min_adjustment_step]
     end
 
-    # The minimum number of instances to scale. If the value of
-    # `AdjustmentType` is `PercentChangeInCapacity`, the scaling policy
-    # changes the `DesiredCapacity` of the Auto Scaling group by at least
-    # this many instances. Otherwise, the error is `ValidationError`.
+    # The minimum value to scale by when the adjustment type is
+    # `PercentChangeInCapacity`.
     # @return [Integer]
     def min_adjustment_magnitude
       data[:min_adjustment_magnitude]
@@ -86,8 +98,7 @@ module Aws::AutoScaling
       data[:scaling_adjustment]
     end
 
-    # The amount of time, in seconds, after a scaling activity completes
-    # before any further dynamic scaling activities can start.
+    # The duration of the policy's cooldown period, in seconds.
     # @return [Integer]
     def cooldown
       data[:cooldown]
@@ -300,8 +311,8 @@ module Aws::AutoScaling
     #   This parameter is not supported if the policy type is `StepScaling` or
     #   `TargetTrackingScaling`.
     #
-    #   For more information, see [Scaling Cooldowns][1] in the *Amazon EC2
-    #   Auto Scaling User Guide*.
+    #   For more information, see [Scaling Cooldowns for Amazon EC2 Auto
+    #   Scaling][1] in the *Amazon EC2 Auto Scaling User Guide*.
     #
     #
     #
@@ -316,13 +327,13 @@ module Aws::AutoScaling
     #   If you specify a metric value that doesn't correspond to a step
     #   adjustment for the policy, the call returns an error.
     #
-    #   Conditional: This parameter is required if the policy type is
-    #   `StepScaling` and not supported otherwise.
+    #   Required if the policy type is `StepScaling` and not supported
+    #   otherwise.
     # @option options [Float] :breach_threshold
     #   The breach threshold for the alarm.
     #
-    #   Conditional: This parameter is required if the policy type is
-    #   `StepScaling` and not supported otherwise.
+    #   Required if the policy type is `StepScaling` and not supported
+    #   otherwise.
     # @return [EmptyStructure]
     def execute(options = {})
       options = options.merge(policy_name: @name)

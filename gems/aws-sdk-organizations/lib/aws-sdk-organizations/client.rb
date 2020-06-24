@@ -461,53 +461,23 @@ module Aws::Organizations
 
     # Attaches a policy to a root, an organizational unit (OU), or an
     # individual account. How the policy affects accounts depends on the
-    # type of policy:
+    # type of policy. Refer to the *AWS Organizations User Guide* for
+    # information about each policy type:
     #
-    # * **Service control policy (SCP)** - An SCP specifies what permissions
-    #   can be delegated to users in affected member accounts. The scope of
-    #   influence for a policy depends on what you attach the policy to:
+    # * [BACKUP\_POLICY][1]
     #
-    #   * If you attach an SCP to a root, it affects all accounts in the
-    #     organization.
+    # * [SERVICE\_CONTROL\_POLICY][2]
     #
-    #   * If you attach an SCP to an OU, it affects all accounts in that OU
-    #     and in any child OUs.
-    #
-    #   * If you attach the policy directly to an account, it affects only
-    #     that account.
-    #
-    #   SCPs are JSON policies that specify the maximum permissions for an
-    #   organization or organizational unit (OU). You can attach one SCP to
-    #   a higher level root or OU, and a different SCP to a child OU or to
-    #   an account. The child policy can further restrict only the
-    #   permissions that pass through the parent filter and are available to
-    #   the child. An SCP that is attached to a child can't grant a
-    #   permission that the parent hasn't already granted. For example,
-    #   imagine that the parent SCP allows permissions A, B, C, D, and E.
-    #   The child SCP allows C, D, E, F, and G. The result is that the
-    #   accounts affected by the child SCP are allowed to use only C, D, and
-    #   E. They can't use A or B because the child OU filtered them out.
-    #   They also can't use F and G because the parent OU filtered them
-    #   out. They can't be granted back by the child SCP; child SCPs can
-    #   only filter the permissions they receive from the parent SCP.
-    #
-    #   AWS Organizations attaches a default SCP named `"FullAWSAccess` to
-    #   every root, OU, and account. This default SCP allows all services
-    #   and actions, enabling any new child OU or account to inherit the
-    #   permissions of the parent root or OU. If you detach the default
-    #   policy, you must replace it with a policy that specifies the
-    #   permissions that you want to allow in that OU or account.
-    #
-    #   For more information about how AWS Organizations policies
-    #   permissions work, see [Using Service Control Policies][1] in the
-    #   *AWS Organizations User Guide.*
+    # * [TAG\_POLICY][3]
     #
     # This operation can be called only from the organization's master
     # account.
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_scp.html
+    # [1]: http://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_backup.html
+    # [2]: http://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_scp.html
+    # [3]: http://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_tag-policies.html
     #
     # @option params [required, String] :policy_id
     #   The unique identifier (ID) of the policy that you want to attach to
@@ -969,12 +939,13 @@ module Aws::Organizations
     #
     # * When you create an account in an organization using the AWS
     #   Organizations console, API, or CLI commands, the information
-    #   required for the account to operate as a standalone account, such as
-    #   a payment method and signing the end user license agreement (EULA)
-    #   is *not* automatically collected. If you must remove an account from
-    #   your organization later, you can do so only after you provide the
-    #   missing information. Follow the steps at [ To leave an organization
-    #   as a member account][7] in the *AWS Organizations User Guide.*
+    #   required for the account to operate as a standalone account is *not*
+    #   automatically collected. This includes a payment method and signing
+    #   the end user license agreement (EULA). If you must remove an account
+    #   from your organization later, you can do so only after you provide
+    #   the missing information. Follow the steps at [ To leave an
+    #   organization as a member account][7] in the *AWS Organizations User
+    #   Guide.*
     #
     # * If you get an exception that indicates that you exceeded your
     #   account limits for the organization, contact [AWS Support][8].
@@ -1219,7 +1190,7 @@ module Aws::Organizations
     #   resp.organization.master_account_id #=> String
     #   resp.organization.master_account_email #=> String
     #   resp.organization.available_policy_types #=> Array
-    #   resp.organization.available_policy_types[0].type #=> String, one of "SERVICE_CONTROL_POLICY", "TAG_POLICY"
+    #   resp.organization.available_policy_types[0].type #=> String, one of "SERVICE_CONTROL_POLICY", "TAG_POLICY", "BACKUP_POLICY"
     #   resp.organization.available_policy_types[0].status #=> String, one of "ENABLED", "PENDING_ENABLE", "PENDING_DISABLE"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/CreateOrganization AWS API Documentation
@@ -1329,17 +1300,9 @@ module Aws::Organizations
     # [1]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies.html
     #
     # @option params [required, String] :content
-    #   The policy content to add to the new policy. For example, if you
-    #   create a [service control policy][1] (SCP), this string must be JSON
-    #   text that specifies the permissions that admins in attached accounts
-    #   can delegate to their users, groups, and roles. For more information
-    #   about the SCP syntax, see [Service Control Policy Syntax][2] in the
-    #   *AWS Organizations User Guide.*
-    #
-    #
-    #
-    #   [1]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_scp.html
-    #   [2]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_reference_scp-syntax.html
+    #   The policy text content to add to the new policy. The text that you
+    #   supply must adhere to the rules of the policy type you specify in the
+    #   `Type` parameter.
     #
     # @option params [required, String] :description
     #   An optional description to assign to the policy.
@@ -1355,12 +1318,20 @@ module Aws::Organizations
     #   [1]: http://wikipedia.org/wiki/regex
     #
     # @option params [required, String] :type
-    #   The type of policy to create.
+    #   The type of policy to create. You can specify one of the following
+    #   values:
     #
-    #   <note markdown="1"> In the current release, the only type of policy that you can create is
-    #   a service control policy (SCP).
+    #   * [BACKUP\_POLICY][1]
     #
-    #    </note>
+    #   * [SERVICE\_CONTROL\_POLICY][2]
+    #
+    #   * [TAG\_POLICY][3]
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_backup.html
+    #   [2]: http://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_scp.html
+    #   [3]: http://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_tag-policies.html
     #
     # @return [Types::CreatePolicyResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1400,7 +1371,7 @@ module Aws::Organizations
     #     content: "PolicyContent", # required
     #     description: "PolicyDescription", # required
     #     name: "PolicyName", # required
-    #     type: "SERVICE_CONTROL_POLICY", # required, accepts SERVICE_CONTROL_POLICY, TAG_POLICY
+    #     type: "SERVICE_CONTROL_POLICY", # required, accepts SERVICE_CONTROL_POLICY, TAG_POLICY, BACKUP_POLICY
     #   })
     #
     # @example Response structure
@@ -1409,7 +1380,7 @@ module Aws::Organizations
     #   resp.policy.policy_summary.arn #=> String
     #   resp.policy.policy_summary.name #=> String
     #   resp.policy.policy_summary.description #=> String
-    #   resp.policy.policy_summary.type #=> String, one of "SERVICE_CONTROL_POLICY", "TAG_POLICY"
+    #   resp.policy.policy_summary.type #=> String, one of "SERVICE_CONTROL_POLICY", "TAG_POLICY", "BACKUP_POLICY"
     #   resp.policy.policy_summary.aws_managed #=> Boolean
     #   resp.policy.content #=> String
     #
@@ -1829,14 +1800,15 @@ module Aws::Organizations
       req.send_request(options)
     end
 
-    # Returns the contents of the effective tag policy for the account. The
-    # effective tag policy is the aggregation of any tag policies the
-    # account inherits, plus any policy directly that is attached to the
-    # account.
+    # Returns the contents of the effective policy for specified policy type
+    # and account. The effective policy is the aggregation of any policies
+    # of the specified type that the account inherits, plus any policy of
+    # that type that is directly attached to the account.
     #
-    # This action returns information on tag policies only.
+    # This operation applies only to policy types *other* than service
+    # control policies (SCPs).
     #
-    # For more information on policy inheritance, see [How Policy
+    # For more information about policy inheritance, see [How Policy
     # Inheritance Works][1] in the *AWS Organizations User Guide*.
     #
     # This operation can be called only from the organization's master
@@ -1848,12 +1820,22 @@ module Aws::Organizations
     # [1]: http://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies-inheritance.html
     #
     # @option params [required, String] :policy_type
-    #   The type of policy that you want information about.
+    #   The type of policy that you want information about. You can specify
+    #   one of the following values:
+    #
+    #   * [BACKUP\_POLICY][1]
+    #
+    #   * [TAG\_POLICY][2]
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_backup.html
+    #   [2]: http://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_tag-policies.html
     #
     # @option params [String] :target_id
     #   When you're signed in as the master account, specify the ID of the
     #   account that you want details about. Specifying an organization root
-    #   or OU as the target is not supported.
+    #   or organizational unit (OU) as the target is not supported.
     #
     # @return [Types::DescribeEffectivePolicyResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1862,7 +1844,7 @@ module Aws::Organizations
     # @example Request syntax with placeholder values
     #
     #   resp = client.describe_effective_policy({
-    #     policy_type: "TAG_POLICY", # required, accepts TAG_POLICY
+    #     policy_type: "TAG_POLICY", # required, accepts TAG_POLICY, BACKUP_POLICY
     #     target_id: "PolicyTargetId",
     #   })
     #
@@ -1871,7 +1853,7 @@ module Aws::Organizations
     #   resp.effective_policy.policy_content #=> String
     #   resp.effective_policy.last_updated_timestamp #=> Time
     #   resp.effective_policy.target_id #=> String
-    #   resp.effective_policy.policy_type #=> String, one of "TAG_POLICY"
+    #   resp.effective_policy.policy_type #=> String, one of "TAG_POLICY", "BACKUP_POLICY"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/DescribeEffectivePolicy AWS API Documentation
     #
@@ -2042,7 +2024,7 @@ module Aws::Organizations
     #   resp.organization.master_account_id #=> String
     #   resp.organization.master_account_email #=> String
     #   resp.organization.available_policy_types #=> Array
-    #   resp.organization.available_policy_types[0].type #=> String, one of "SERVICE_CONTROL_POLICY", "TAG_POLICY"
+    #   resp.organization.available_policy_types[0].type #=> String, one of "SERVICE_CONTROL_POLICY", "TAG_POLICY", "BACKUP_POLICY"
     #   resp.organization.available_policy_types[0].status #=> String, one of "ENABLED", "PENDING_ENABLE", "PENDING_DISABLE"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/DescribeOrganization AWS API Documentation
@@ -2176,7 +2158,7 @@ module Aws::Organizations
     #   resp.policy.policy_summary.arn #=> String
     #   resp.policy.policy_summary.name #=> String
     #   resp.policy.policy_summary.description #=> String
-    #   resp.policy.policy_summary.type #=> String, one of "SERVICE_CONTROL_POLICY", "TAG_POLICY"
+    #   resp.policy.policy_summary.type #=> String, one of "SERVICE_CONTROL_POLICY", "TAG_POLICY", "BACKUP_POLICY"
     #   resp.policy.policy_summary.aws_managed #=> Boolean
     #   resp.policy.content #=> String
     #
@@ -2190,18 +2172,20 @@ module Aws::Organizations
     end
 
     # Detaches a policy from a target root, organizational unit (OU), or
-    # account. If the policy being detached is a service control policy
-    # (SCP), the changes to permissions for IAM users and roles in affected
-    # accounts are immediate.
+    # account.
     #
-    # **Note:** Every root, OU, and account must have at least one SCP
-    # attached. If you want to replace the default `FullAWSAccess` policy
-    # with one that limits the permissions that can be delegated, you must
-    # attach the replacement policy before you can remove the default one.
-    # This is the authorization strategy of an "[allow list][1]". If you
-    # instead attach a second SCP and leave the `FullAWSAccess` SCP still
-    # attached, and specify `"Effect": "Deny"` in the second SCP to override
-    # the `"Effect": "Allow"` in the `FullAWSAccess` policy (or any other
+    # If the policy being detached is a service control policy (SCP), the
+    # changes to permissions for AWS Identity and Access Management (IAM)
+    # users and roles in affected accounts are immediate.
+    #
+    # Every root, OU, and account must have at least one SCP attached. If
+    # you want to replace the default `FullAWSAccess` policy with an SCP
+    # that limits the permissions that can be delegated, you must attach the
+    # replacement SCP before you can remove the default SCP. This is the
+    # authorization strategy of an "[allow list][1]". If you instead
+    # attach a second SCP and leave the `FullAWSAccess` SCP still attached,
+    # and specify `"Effect": "Deny"` in the second SCP to override the
+    # `"Effect": "Allow"` in the `FullAWSAccess` policy (or any other
     # attached SCP), you're using the authorization strategy of a "[deny
     # list][2]".
     #
@@ -2210,8 +2194,8 @@ module Aws::Organizations
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_about-scps.html#orgs_policies_whitelist
-    # [2]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_about-scps.html#orgs_policies_blacklist
+    # [1]: https://docs.aws.amazon.com/organizations/latest/userguide/SCP_strategies.html#orgs_policies_allowlist
+    # [2]: https://docs.aws.amazon.com/organizations/latest/userguide/SCP_strategies.html#orgs_policies_denylist
     #
     # @option params [required, String] :policy_id
     #   The unique identifier (ID) of the policy you want to detach. You can
@@ -2334,18 +2318,19 @@ module Aws::Organizations
       req.send_request(options)
     end
 
-    # Disables an organizational control policy type in a root. A policy of
-    # a certain type can be attached to entities in a root only if that type
+    # Disables an organizational policy type in a root. A policy of a
+    # certain type can be attached to entities in a root only if that type
     # is enabled in the root. After you perform this operation, you no
     # longer can attach policies of the specified type to that root or to
     # any organizational unit (OU) or account in that root. You can undo
     # this by using the EnablePolicyType operation.
     #
     # This is an asynchronous request that AWS performs in the background.
-    # If you disable a policy for a root, it still appears enabled for the
-    # organization if [all features][1] are enabled for the organization.
-    # AWS recommends that you first use ListRoots to see the status of
-    # policy types for a specified root, and then use this operation.
+    # If you disable a policy type for a root, it still appears enabled for
+    # the organization if [all features][1] are enabled for the
+    # organization. AWS recommends that you first use ListRoots to see the
+    # status of policy types for a specified root, and then use this
+    # operation.
     #
     # This operation can be called only from the organization's master
     # account.
@@ -2369,7 +2354,20 @@ module Aws::Organizations
     #   [1]: http://wikipedia.org/wiki/regex
     #
     # @option params [required, String] :policy_type
-    #   The policy type that you want to disable in this root.
+    #   The policy type that you want to disable in this root. You can specify
+    #   one of the following values:
+    #
+    #   * [BACKUP\_POLICY][1]
+    #
+    #   * [SERVICE\_CONTROL\_POLICY][2]
+    #
+    #   * [TAG\_POLICY][3]
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_backup.html
+    #   [2]: http://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_scp.html
+    #   [3]: http://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_tag-policies.html
     #
     # @return [Types::DisablePolicyTypeResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -2401,7 +2399,7 @@ module Aws::Organizations
     #
     #   resp = client.disable_policy_type({
     #     root_id: "RootId", # required
-    #     policy_type: "SERVICE_CONTROL_POLICY", # required, accepts SERVICE_CONTROL_POLICY, TAG_POLICY
+    #     policy_type: "SERVICE_CONTROL_POLICY", # required, accepts SERVICE_CONTROL_POLICY, TAG_POLICY, BACKUP_POLICY
     #   })
     #
     # @example Response structure
@@ -2410,7 +2408,7 @@ module Aws::Organizations
     #   resp.root.arn #=> String
     #   resp.root.name #=> String
     #   resp.root.policy_types #=> Array
-    #   resp.root.policy_types[0].type #=> String, one of "SERVICE_CONTROL_POLICY", "TAG_POLICY"
+    #   resp.root.policy_types[0].type #=> String, one of "SERVICE_CONTROL_POLICY", "TAG_POLICY", "BACKUP_POLICY"
     #   resp.root.policy_types[0].status #=> String, one of "ENABLED", "PENDING_ENABLE", "PENDING_DISABLE"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/DisablePolicyType AWS API Documentation
@@ -2603,7 +2601,20 @@ module Aws::Organizations
     #   [1]: http://wikipedia.org/wiki/regex
     #
     # @option params [required, String] :policy_type
-    #   The policy type that you want to enable.
+    #   The policy type that you want to enable. You can specify one of the
+    #   following values:
+    #
+    #   * [BACKUP\_POLICY][1]
+    #
+    #   * [SERVICE\_CONTROL\_POLICY][2]
+    #
+    #   * [TAG\_POLICY][3]
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_backup.html
+    #   [2]: http://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_scp.html
+    #   [3]: http://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_tag-policies.html
     #
     # @return [Types::EnablePolicyTypeResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -2639,7 +2650,7 @@ module Aws::Organizations
     #
     #   resp = client.enable_policy_type({
     #     root_id: "RootId", # required
-    #     policy_type: "SERVICE_CONTROL_POLICY", # required, accepts SERVICE_CONTROL_POLICY, TAG_POLICY
+    #     policy_type: "SERVICE_CONTROL_POLICY", # required, accepts SERVICE_CONTROL_POLICY, TAG_POLICY, BACKUP_POLICY
     #   })
     #
     # @example Response structure
@@ -2648,7 +2659,7 @@ module Aws::Organizations
     #   resp.root.arn #=> String
     #   resp.root.name #=> String
     #   resp.root.policy_types #=> Array
-    #   resp.root.policy_types[0].type #=> String, one of "SERVICE_CONTROL_POLICY", "TAG_POLICY"
+    #   resp.root.policy_types[0].type #=> String, one of "SERVICE_CONTROL_POLICY", "TAG_POLICY", "BACKUP_POLICY"
     #   resp.root.policy_types[0].status #=> String, one of "ENABLED", "PENDING_ENABLE", "PENDING_DISABLE"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/EnablePolicyType AWS API Documentation
@@ -4118,6 +4129,19 @@ module Aws::Organizations
     #
     # @option params [required, String] :filter
     #   Specifies the type of policy that you want to include in the response.
+    #   You must specify one of the following values:
+    #
+    #   * [BACKUP\_POLICY][1]
+    #
+    #   * [SERVICE\_CONTROL\_POLICY][2]
+    #
+    #   * [TAG\_POLICY][3]
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_backup.html
+    #   [2]: http://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_scp.html
+    #   [3]: http://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_tag-policies.html
     #
     # @option params [String] :next_token
     #   The parameter for receiving additional results if you receive a
@@ -4187,7 +4211,7 @@ module Aws::Organizations
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_policies({
-    #     filter: "SERVICE_CONTROL_POLICY", # required, accepts SERVICE_CONTROL_POLICY, TAG_POLICY
+    #     filter: "SERVICE_CONTROL_POLICY", # required, accepts SERVICE_CONTROL_POLICY, TAG_POLICY, BACKUP_POLICY
     #     next_token: "NextToken",
     #     max_results: 1,
     #   })
@@ -4199,7 +4223,7 @@ module Aws::Organizations
     #   resp.policies[0].arn #=> String
     #   resp.policies[0].name #=> String
     #   resp.policies[0].description #=> String
-    #   resp.policies[0].type #=> String, one of "SERVICE_CONTROL_POLICY", "TAG_POLICY"
+    #   resp.policies[0].type #=> String, one of "SERVICE_CONTROL_POLICY", "TAG_POLICY", "BACKUP_POLICY"
     #   resp.policies[0].aws_managed #=> Boolean
     #   resp.next_token #=> String
     #
@@ -4250,7 +4274,20 @@ module Aws::Organizations
     #   [1]: http://wikipedia.org/wiki/regex
     #
     # @option params [required, String] :filter
-    #   The type of policy that you want to include in the returned list.
+    #   The type of policy that you want to include in the returned list. You
+    #   must specify one of the following values:
+    #
+    #   * [BACKUP\_POLICY][1]
+    #
+    #   * [SERVICE\_CONTROL\_POLICY][2]
+    #
+    #   * [TAG\_POLICY][3]
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_backup.html
+    #   [2]: http://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_scp.html
+    #   [3]: http://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_tag-policies.html
     #
     # @option params [String] :next_token
     #   The parameter for receiving additional results if you receive a
@@ -4308,7 +4345,7 @@ module Aws::Organizations
     #
     #   resp = client.list_policies_for_target({
     #     target_id: "PolicyTargetId", # required
-    #     filter: "SERVICE_CONTROL_POLICY", # required, accepts SERVICE_CONTROL_POLICY, TAG_POLICY
+    #     filter: "SERVICE_CONTROL_POLICY", # required, accepts SERVICE_CONTROL_POLICY, TAG_POLICY, BACKUP_POLICY
     #     next_token: "NextToken",
     #     max_results: 1,
     #   })
@@ -4320,7 +4357,7 @@ module Aws::Organizations
     #   resp.policies[0].arn #=> String
     #   resp.policies[0].name #=> String
     #   resp.policies[0].description #=> String
-    #   resp.policies[0].type #=> String, one of "SERVICE_CONTROL_POLICY", "TAG_POLICY"
+    #   resp.policies[0].type #=> String, one of "SERVICE_CONTROL_POLICY", "TAG_POLICY", "BACKUP_POLICY"
     #   resp.policies[0].aws_managed #=> Boolean
     #   resp.next_token #=> String
     #
@@ -4421,7 +4458,7 @@ module Aws::Organizations
     #   resp.roots[0].arn #=> String
     #   resp.roots[0].name #=> String
     #   resp.roots[0].policy_types #=> Array
-    #   resp.roots[0].policy_types[0].type #=> String, one of "SERVICE_CONTROL_POLICY", "TAG_POLICY"
+    #   resp.roots[0].policy_types[0].type #=> String, one of "SERVICE_CONTROL_POLICY", "TAG_POLICY", "BACKUP_POLICY"
     #   resp.roots[0].policy_types[0].status #=> String, one of "ENABLED", "PENDING_ENABLE", "PENDING_DISABLE"
     #   resp.next_token #=> String
     #
@@ -4803,9 +4840,9 @@ module Aws::Organizations
     #   The ID of the resource to add a tag to.
     #
     # @option params [required, Array<Types::Tag>] :tags
-    #   The tag to add to the specified resource. Specifying the tag key is
-    #   required. You can set the value of a tag to an empty string, but you
-    #   can't set the value of a tag to null.
+    #   The tag to add to the specified resource. You must specify both a tag
+    #   key and value. You can set the value of a tag to an empty string, but
+    #   you can't set it to null.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -5048,7 +5085,7 @@ module Aws::Organizations
     #   resp.policy.policy_summary.arn #=> String
     #   resp.policy.policy_summary.name #=> String
     #   resp.policy.policy_summary.description #=> String
-    #   resp.policy.policy_summary.type #=> String, one of "SERVICE_CONTROL_POLICY", "TAG_POLICY"
+    #   resp.policy.policy_summary.type #=> String, one of "SERVICE_CONTROL_POLICY", "TAG_POLICY", "BACKUP_POLICY"
     #   resp.policy.policy_summary.aws_managed #=> Boolean
     #   resp.policy.content #=> String
     #
@@ -5074,7 +5111,7 @@ module Aws::Organizations
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-organizations'
-      context[:gem_version] = '1.43.0'
+      context[:gem_version] = '1.44.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

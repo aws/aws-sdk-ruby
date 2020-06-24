@@ -361,11 +361,20 @@ module Aws::FSx
       req.send_request(options)
     end
 
-    # Creates a backup of an existing Amazon FSx for Windows File Server
-    # file system. Creating regular backups for your file system is a best
-    # practice that complements the replication that Amazon FSx for Windows
-    # File Server performs for your file system. It also enables you to
-    # restore from user modification of data.
+    # Creates a backup of an existing Amazon FSx file system. Creating
+    # regular backups for your file system is a best practice, enabling you
+    # to restore a file system from a backup if an issue arises with the
+    # original file system.
+    #
+    # For Amazon FSx for Lustre file systems, you can create a backup only
+    # for file systems with the following configuration:
+    #
+    # * a Persistent deployment type
+    #
+    # * is *not* linked to an Amazon S3 data respository.
+    #
+    # For more information, see
+    # [https://docs.aws.amazon.com/fsx/latest/LustreGuide/lustre-backups.html][1].
     #
     # If a backup with the specified client request token exists, and the
     # parameters match, this operation returns the description of the
@@ -386,30 +395,33 @@ module Aws::FSx
     # request token and the initial call created a backup, the operation
     # returns a successful result because all the parameters are the same.
     #
-    # The `CreateFileSystem` operation returns while the backup's lifecycle
-    # state is still `CREATING`. You can check the file system creation
-    # status by calling the DescribeBackups operation, which returns the
-    # backup state along with other information.
+    # The `CreateBackup` operation returns while the backup's lifecycle
+    # state is still `CREATING`. You can check the backup creation status by
+    # calling the DescribeBackups operation, which returns the backup state
+    # along with other information.
     #
-    # <note markdown="1">
     #
-    #  </note>
+    #
+    # [1]: https://docs.aws.amazon.com/fsx/latest/LustreGuide/lustre-backups.html
     #
     # @option params [required, String] :file_system_id
     #   The ID of the file system to back up.
     #
     # @option params [String] :client_request_token
-    #   (Optional) A string of up to 64 ASCII characters that Amazon FSx uses
-    #   to ensure idempotent creation. This string is automatically filled on
-    #   your behalf when you use the AWS Command Line Interface (AWS CLI) or
-    #   an AWS SDK.
+    #   A string of up to 64 ASCII characters that Amazon FSx uses to ensure
+    #   idempotent creation. This string is automatically filled on your
+    #   behalf when you use the AWS Command Line Interface (AWS CLI) or an AWS
+    #   SDK.
     #
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.**
     #
     # @option params [Array<Types::Tag>] :tags
     #   The tags to apply to the backup at backup creation. The key value of
-    #   the `Name` tag appears in the console as the backup name.
+    #   the `Name` tag appears in the console as the backup name. If you have
+    #   set `CopyTagsToBackups` to true, and you specify one or more tags
+    #   using the `CreateBackup` action, no existing tags on the file system
+    #   are copied from the file system to the backup.
     #
     # @return [Types::CreateBackupResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -529,6 +541,9 @@ module Aws::FSx
     #   resp.backup.file_system.lustre_configuration.deployment_type #=> String, one of "SCRATCH_1", "SCRATCH_2", "PERSISTENT_1"
     #   resp.backup.file_system.lustre_configuration.per_unit_storage_throughput #=> Integer
     #   resp.backup.file_system.lustre_configuration.mount_name #=> String
+    #   resp.backup.file_system.lustre_configuration.daily_automatic_backup_start_time #=> String
+    #   resp.backup.file_system.lustre_configuration.automatic_backup_retention_days #=> Integer
+    #   resp.backup.file_system.lustre_configuration.copy_tags_to_backups #=> Boolean
     #   resp.backup.file_system.administrative_actions #=> Array
     #   resp.backup.file_system.administrative_actions[0].administrative_action_type #=> String, one of "FILE_SYSTEM_UPDATE", "STORAGE_OPTIMIZATION"
     #   resp.backup.file_system.administrative_actions[0].progress_percent #=> Integer
@@ -697,10 +712,10 @@ module Aws::FSx
     #  </note>
     #
     # @option params [String] :client_request_token
-    #   (Optional) A string of up to 64 ASCII characters that Amazon FSx uses
-    #   to ensure idempotent creation. This string is automatically filled on
-    #   your behalf when you use the AWS Command Line Interface (AWS CLI) or
-    #   an AWS SDK.
+    #   A string of up to 64 ASCII characters that Amazon FSx uses to ensure
+    #   idempotent creation. This string is automatically filled on your
+    #   behalf when you use the AWS Command Line Interface (AWS CLI) or an AWS
+    #   SDK.
     #
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.**
@@ -892,6 +907,9 @@ module Aws::FSx
     #       imported_file_chunk_size: 1,
     #       deployment_type: "SCRATCH_1", # accepts SCRATCH_1, SCRATCH_2, PERSISTENT_1
     #       per_unit_storage_throughput: 1,
+    #       daily_automatic_backup_start_time: "DailyTime",
+    #       automatic_backup_retention_days: 1,
+    #       copy_tags_to_backups: false,
     #     },
     #   })
     #
@@ -941,6 +959,9 @@ module Aws::FSx
     #   resp.file_system.lustre_configuration.deployment_type #=> String, one of "SCRATCH_1", "SCRATCH_2", "PERSISTENT_1"
     #   resp.file_system.lustre_configuration.per_unit_storage_throughput #=> Integer
     #   resp.file_system.lustre_configuration.mount_name #=> String
+    #   resp.file_system.lustre_configuration.daily_automatic_backup_start_time #=> String
+    #   resp.file_system.lustre_configuration.automatic_backup_retention_days #=> Integer
+    #   resp.file_system.lustre_configuration.copy_tags_to_backups #=> Boolean
     #   resp.file_system.administrative_actions #=> Array
     #   resp.file_system.administrative_actions[0].administrative_action_type #=> String, one of "FILE_SYSTEM_UPDATE", "STORAGE_OPTIMIZATION"
     #   resp.file_system.administrative_actions[0].progress_percent #=> Integer
@@ -958,8 +979,8 @@ module Aws::FSx
       req.send_request(options)
     end
 
-    # Creates a new Amazon FSx file system from an existing Amazon FSx for
-    # Windows File Server backup.
+    # Creates a new Amazon FSx file system from an existing Amazon FSx
+    # backup.
     #
     # If a file system with the specified client request token exists and
     # the parameters match, this operation returns the description of the
@@ -1000,10 +1021,10 @@ module Aws::FSx
     #   a file system from an existing backup.
     #
     # @option params [String] :client_request_token
-    #   (Optional) A string of up to 64 ASCII characters that Amazon FSx uses
-    #   to ensure idempotent creation. This string is automatically filled on
-    #   your behalf when you use the AWS Command Line Interface (AWS CLI) or
-    #   an AWS SDK.
+    #   A string of up to 64 ASCII characters that Amazon FSx uses to ensure
+    #   idempotent creation. This string is automatically filled on your
+    #   behalf when you use the AWS Command Line Interface (AWS CLI) or an AWS
+    #   SDK.
     #
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.**
@@ -1033,6 +1054,9 @@ module Aws::FSx
     #
     # @option params [Types::CreateFileSystemWindowsConfiguration] :windows_configuration
     #   The configuration for this Microsoft Windows file system.
+    #
+    # @option params [Types::CreateFileSystemLustreConfiguration] :lustre_configuration
+    #   The Lustre configuration for the file system being created.
     #
     # @option params [String] :storage_type
     #   Sets the storage type for the Windows file system you're creating
@@ -1146,6 +1170,17 @@ module Aws::FSx
     #       automatic_backup_retention_days: 1,
     #       copy_tags_to_backups: false,
     #     },
+    #     lustre_configuration: {
+    #       weekly_maintenance_start_time: "WeeklyTime",
+    #       import_path: "ArchivePath",
+    #       export_path: "ArchivePath",
+    #       imported_file_chunk_size: 1,
+    #       deployment_type: "SCRATCH_1", # accepts SCRATCH_1, SCRATCH_2, PERSISTENT_1
+    #       per_unit_storage_throughput: 1,
+    #       daily_automatic_backup_start_time: "DailyTime",
+    #       automatic_backup_retention_days: 1,
+    #       copy_tags_to_backups: false,
+    #     },
     #     storage_type: "SSD", # accepts SSD, HDD
     #   })
     #
@@ -1195,6 +1230,9 @@ module Aws::FSx
     #   resp.file_system.lustre_configuration.deployment_type #=> String, one of "SCRATCH_1", "SCRATCH_2", "PERSISTENT_1"
     #   resp.file_system.lustre_configuration.per_unit_storage_throughput #=> Integer
     #   resp.file_system.lustre_configuration.mount_name #=> String
+    #   resp.file_system.lustre_configuration.daily_automatic_backup_start_time #=> String
+    #   resp.file_system.lustre_configuration.automatic_backup_retention_days #=> Integer
+    #   resp.file_system.lustre_configuration.copy_tags_to_backups #=> Boolean
     #   resp.file_system.administrative_actions #=> Array
     #   resp.file_system.administrative_actions[0].administrative_action_type #=> String, one of "FILE_SYSTEM_UPDATE", "STORAGE_OPTIMIZATION"
     #   resp.file_system.administrative_actions[0].progress_percent #=> Integer
@@ -1212,9 +1250,8 @@ module Aws::FSx
       req.send_request(options)
     end
 
-    # Deletes an Amazon FSx for Windows File Server backup, deleting its
-    # contents. After deletion, the backup no longer exists, and its data is
-    # gone.
+    # Deletes an Amazon FSx backup, deleting its contents. After deletion,
+    # the backup no longer exists, and its data is gone.
     #
     # The `DeleteBackup` call returns instantly. The backup will not show up
     # in later `DescribeBackups` calls.
@@ -1226,9 +1263,9 @@ module Aws::FSx
     #   The ID of the backup you want to delete.
     #
     # @option params [String] :client_request_token
-    #   (Optional) A string of up to 64 ASCII characters that Amazon FSx uses
-    #   to ensure idempotent deletion. This is automatically filled on your
-    #   behalf when using the AWS CLI or SDK.
+    #   A string of up to 64 ASCII characters that Amazon FSx uses to ensure
+    #   idempotent deletion. This is automatically filled on your behalf when
+    #   using the AWS CLI or SDK.
     #
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.**
@@ -1303,9 +1340,9 @@ module Aws::FSx
     #   The ID of the file system you want to delete.
     #
     # @option params [String] :client_request_token
-    #   (Optional) A string of up to 64 ASCII characters that Amazon FSx uses
-    #   to ensure idempotent deletion. This is automatically filled on your
-    #   behalf when using the AWS CLI or SDK.
+    #   A string of up to 64 ASCII characters that Amazon FSx uses to ensure
+    #   idempotent deletion. This is automatically filled on your behalf when
+    #   using the AWS CLI or SDK.
     #
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.**
@@ -1314,11 +1351,16 @@ module Aws::FSx
     #   The configuration object for the Microsoft Windows file system used in
     #   the `DeleteFileSystem` operation.
     #
+    # @option params [Types::DeleteFileSystemLustreConfiguration] :lustre_configuration
+    #   The configuration object for the Amazon FSx for Lustre file system
+    #   being deleted in the `DeleteFileSystem` operation.
+    #
     # @return [Types::DeleteFileSystemResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::DeleteFileSystemResponse#file_system_id #file_system_id} => String
     #   * {Types::DeleteFileSystemResponse#lifecycle #lifecycle} => String
     #   * {Types::DeleteFileSystemResponse#windows_response #windows_response} => Types::DeleteFileSystemWindowsResponse
+    #   * {Types::DeleteFileSystemResponse#lustre_response #lustre_response} => Types::DeleteFileSystemLustreResponse
     #
     #
     # @example Example: To delete a file system
@@ -1349,6 +1391,15 @@ module Aws::FSx
     #         },
     #       ],
     #     },
+    #     lustre_configuration: {
+    #       skip_final_backup: false,
+    #       final_backup_tags: [
+    #         {
+    #           key: "TagKey",
+    #           value: "TagValue",
+    #         },
+    #       ],
+    #     },
     #   })
     #
     # @example Response structure
@@ -1359,6 +1410,10 @@ module Aws::FSx
     #   resp.windows_response.final_backup_tags #=> Array
     #   resp.windows_response.final_backup_tags[0].key #=> String
     #   resp.windows_response.final_backup_tags[0].value #=> String
+    #   resp.lustre_response.final_backup_id #=> String
+    #   resp.lustre_response.final_backup_tags #=> Array
+    #   resp.lustre_response.final_backup_tags[0].key #=> String
+    #   resp.lustre_response.final_backup_tags[0].value #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/fsx-2018-03-01/DeleteFileSystem AWS API Documentation
     #
@@ -1369,10 +1424,10 @@ module Aws::FSx
       req.send_request(options)
     end
 
-    # Returns the description of specific Amazon FSx for Windows File Server
-    # backups, if a `BackupIds` value is provided for that backup.
-    # Otherwise, it returns all backups owned by your AWS account in the AWS
-    # Region of the endpoint that you're calling.
+    # Returns the description of specific Amazon FSx backups, if a
+    # `BackupIds` value is provided for that backup. Otherwise, it returns
+    # all backups owned by your AWS account in the AWS Region of the
+    # endpoint that you're calling.
     #
     # When retrieving all backups, you can optionally specify the
     # `MaxResults` parameter to limit the number of backups in a response.
@@ -1397,25 +1452,23 @@ module Aws::FSx
     #   responses of a multi-call iteration is unspecified.
     #
     # @option params [Array<String>] :backup_ids
-    #   (Optional) IDs of the backups you want to retrieve (String). This
-    #   overrides any filters. If any IDs are not found, BackupNotFound will
-    #   be thrown.
+    #   IDs of the backups you want to retrieve (String). This overrides any
+    #   filters. If any IDs are not found, BackupNotFound will be thrown.
     #
     # @option params [Array<Types::Filter>] :filters
-    #   (Optional) Filters structure. Supported names are file-system-id and
-    #   backup-type.
+    #   Filters structure. Supported names are file-system-id and backup-type.
     #
     # @option params [Integer] :max_results
-    #   (Optional) Maximum number of backups to return in the response
-    #   (integer). This parameter value must be greater than 0. The number of
-    #   items that Amazon FSx returns is the minimum of the `MaxResults`
-    #   parameter specified in the request and the service's internal maximum
-    #   number of items per page.
+    #   Maximum number of backups to return in the response (integer). This
+    #   parameter value must be greater than 0. The number of items that
+    #   Amazon FSx returns is the minimum of the `MaxResults` parameter
+    #   specified in the request and the service's internal maximum number of
+    #   items per page.
     #
     # @option params [String] :next_token
-    #   (Optional) Opaque pagination token returned from a previous
-    #   `DescribeBackups` operation (String). If a token present, the action
-    #   continues the list from where the returning call left off.
+    #   Opaque pagination token returned from a previous `DescribeBackups`
+    #   operation (String). If a token present, the action continues the list
+    #   from where the returning call left off.
     #
     # @return [Types::DescribeBackupsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1468,7 +1521,7 @@ module Aws::FSx
     #     backup_ids: ["BackupId"],
     #     filters: [
     #       {
-    #         name: "file-system-id", # accepts file-system-id, backup-type
+    #         name: "file-system-id", # accepts file-system-id, backup-type, file-system-type
     #         values: ["FilterValue"],
     #       },
     #     ],
@@ -1534,6 +1587,9 @@ module Aws::FSx
     #   resp.backups[0].file_system.lustre_configuration.deployment_type #=> String, one of "SCRATCH_1", "SCRATCH_2", "PERSISTENT_1"
     #   resp.backups[0].file_system.lustre_configuration.per_unit_storage_throughput #=> Integer
     #   resp.backups[0].file_system.lustre_configuration.mount_name #=> String
+    #   resp.backups[0].file_system.lustre_configuration.daily_automatic_backup_start_time #=> String
+    #   resp.backups[0].file_system.lustre_configuration.automatic_backup_retention_days #=> Integer
+    #   resp.backups[0].file_system.lustre_configuration.copy_tags_to_backups #=> Boolean
     #   resp.backups[0].file_system.administrative_actions #=> Array
     #   resp.backups[0].file_system.administrative_actions[0].administrative_action_type #=> String, one of "FILE_SYSTEM_UPDATE", "STORAGE_OPTIMIZATION"
     #   resp.backups[0].file_system.administrative_actions[0].progress_percent #=> Integer
@@ -1673,20 +1729,20 @@ module Aws::FSx
     #   across the responses of a multicall iteration is unspecified.
     #
     # @option params [Array<String>] :file_system_ids
-    #   (Optional) IDs of the file systems whose descriptions you want to
-    #   retrieve (String).
+    #   IDs of the file systems whose descriptions you want to retrieve
+    #   (String).
     #
     # @option params [Integer] :max_results
-    #   (Optional) Maximum number of file systems to return in the response
-    #   (integer). This parameter value must be greater than 0. The number of
-    #   items that Amazon FSx returns is the minimum of the `MaxResults`
-    #   parameter specified in the request and the service's internal maximum
-    #   number of items per page.
+    #   Maximum number of file systems to return in the response (integer).
+    #   This parameter value must be greater than 0. The number of items that
+    #   Amazon FSx returns is the minimum of the `MaxResults` parameter
+    #   specified in the request and the service's internal maximum number of
+    #   items per page.
     #
     # @option params [String] :next_token
-    #   (Optional) Opaque pagination token returned from a previous
-    #   `DescribeFileSystems` operation (String). If a token present, the
-    #   action continues the list from where the returning call left off.
+    #   Opaque pagination token returned from a previous `DescribeFileSystems`
+    #   operation (String). If a token present, the action continues the list
+    #   from where the returning call left off.
     #
     # @return [Types::DescribeFileSystemsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1794,6 +1850,9 @@ module Aws::FSx
     #   resp.file_systems[0].lustre_configuration.deployment_type #=> String, one of "SCRATCH_1", "SCRATCH_2", "PERSISTENT_1"
     #   resp.file_systems[0].lustre_configuration.per_unit_storage_throughput #=> Integer
     #   resp.file_systems[0].lustre_configuration.mount_name #=> String
+    #   resp.file_systems[0].lustre_configuration.daily_automatic_backup_start_time #=> String
+    #   resp.file_systems[0].lustre_configuration.automatic_backup_retention_days #=> Integer
+    #   resp.file_systems[0].lustre_configuration.copy_tags_to_backups #=> Boolean
     #   resp.file_systems[0].administrative_actions #=> Array
     #   resp.file_systems[0].administrative_actions[0].administrative_action_type #=> String, one of "FILE_SYSTEM_UPDATE", "STORAGE_OPTIMIZATION"
     #   resp.file_systems[0].administrative_actions[0].progress_percent #=> Integer
@@ -1840,16 +1899,16 @@ module Aws::FSx
     #   The ARN of the Amazon FSx resource that will have its tags listed.
     #
     # @option params [Integer] :max_results
-    #   (Optional) Maximum number of tags to return in the response (integer).
-    #   This parameter value must be greater than 0. The number of items that
+    #   Maximum number of tags to return in the response (integer). This
+    #   parameter value must be greater than 0. The number of items that
     #   Amazon FSx returns is the minimum of the `MaxResults` parameter
     #   specified in the request and the service's internal maximum number of
     #   items per page.
     #
     # @option params [String] :next_token
-    #   (Optional) Opaque pagination token returned from a previous
-    #   `ListTagsForResource` operation (String). If a token present, the
-    #   action continues the list from where the returning call left off.
+    #   Opaque pagination token returned from a previous `ListTagsForResource`
+    #   operation (String). If a token present, the action continues the list
+    #   from where the returning call left off.
     #
     # @return [Types::ListTagsForResourceResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -2106,6 +2165,8 @@ module Aws::FSx
     #     },
     #     lustre_configuration: {
     #       weekly_maintenance_start_time: "WeeklyTime",
+    #       daily_automatic_backup_start_time: "DailyTime",
+    #       automatic_backup_retention_days: 1,
     #     },
     #   })
     #
@@ -2155,6 +2216,9 @@ module Aws::FSx
     #   resp.file_system.lustre_configuration.deployment_type #=> String, one of "SCRATCH_1", "SCRATCH_2", "PERSISTENT_1"
     #   resp.file_system.lustre_configuration.per_unit_storage_throughput #=> Integer
     #   resp.file_system.lustre_configuration.mount_name #=> String
+    #   resp.file_system.lustre_configuration.daily_automatic_backup_start_time #=> String
+    #   resp.file_system.lustre_configuration.automatic_backup_retention_days #=> Integer
+    #   resp.file_system.lustre_configuration.copy_tags_to_backups #=> Boolean
     #   resp.file_system.administrative_actions #=> Array
     #   resp.file_system.administrative_actions[0].administrative_action_type #=> String, one of "FILE_SYSTEM_UPDATE", "STORAGE_OPTIMIZATION"
     #   resp.file_system.administrative_actions[0].progress_percent #=> Integer
@@ -2185,7 +2249,7 @@ module Aws::FSx
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-fsx'
-      context[:gem_version] = '1.22.0'
+      context[:gem_version] = '1.23.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

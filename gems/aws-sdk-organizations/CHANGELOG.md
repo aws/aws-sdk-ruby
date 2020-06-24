@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.44.0 (2020-06-24)
+------------------
+
+* Feature - This release adds support for a new backup policy type for AWS Organizations.
+
 1.43.0 (2020-06-23)
 ------------------
 

@@ -417,10 +417,12 @@ module Aws::Organizations
     # (SCP) from an OU or root, inviting or creating too many accounts to
     # the organization, or attaching too many policies to an account, OU, or
     # root. This exception includes a reason that contains additional
-    # information about the violated limit.
+    # information about the violated limit:
     #
-    # Some of the reasons in the following list might not be applicable to
-    # this specific API or operation:
+    # <note markdown="1"> Some of the reasons in the following list might not be applicable to
+    # this specific API or operation.
+    #
+    #  </note>
     #
     # * ACCOUNT\_CANNOT\_LEAVE\_ORGANIZAION: You attempted to remove the
     #   master account from the organization. You can't remove the master
@@ -431,15 +433,15 @@ module Aws::Organizations
     #   account from the organization that doesn't yet have enough
     #   information to exist as a standalone account. This account requires
     #   you to first agree to the AWS Customer Agreement. Follow the steps
-    #   at [To leave an organization when all required account information
-    #   has not yet been provided][1] in the *AWS Organizations User Guide.*
+    #   at [Removing a member account from your organization][1]in the *AWS
+    #   Organizations User Guide.*
     #
     # * ACCOUNT\_CANNOT\_LEAVE\_WITHOUT\_PHONE\_VERIFICATION: You attempted
     #   to remove an account from the organization that doesn't yet have
     #   enough information to exist as a standalone account. This account
     #   requires you to first complete phone verification. Follow the steps
-    #   at [To leave an organization when all required account information
-    #   has not yet been provided][1] in the *AWS Organizations User Guide.*
+    #   at [Removing a member account from your organization][1] in the *AWS
+    #   Organizations User Guide.*
     #
     # * ACCOUNT\_CREATION\_RATE\_LIMIT\_EXCEEDED: You attempted to exceed
     #   the number of accounts that you can create in one day.
@@ -458,9 +460,9 @@ module Aws::Organizations
     #
     #    </note>
     #
-    #   If you get receive this exception when running a command immediately
-    #   after creating the organization, wait one hour and try again. If
-    #   after an hour it continues to fail with this error, contact [AWS
+    #   If you get this exception when running a command immediately after
+    #   creating the organization, wait one hour and try again. After an
+    #   hour, if the command continues to fail with this error, contact [AWS
     #   Support][2].
     #
     # * CANNOT\_REGISTER\_MASTER\_AS\_DELEGATED\_ADMINISTRATOR: You
@@ -506,7 +508,7 @@ module Aws::Organizations
     #   support.
     #
     # * MASTER\_ACCOUNT\_MISSING\_CONTACT\_INFO: To complete this operation,
-    #   you must first provide contact a valid address and phone number for
+    #   you must first provide a valid contact address and phone number for
     #   the master account. Then try the operation again.
     #
     # * MASTER\_ACCOUNT\_NOT\_GOVCLOUD\_ENABLED: To complete this operation,
@@ -518,7 +520,7 @@ module Aws::Organizations
     #   organization with this master account, you first must associate a
     #   valid payment instrument, such as a credit card, with the account.
     #   Follow the steps at [To leave an organization when all required
-    #   account information has not yet been provided][1] in the *AWS
+    #   account information has not yet been provided][4] in the *AWS
     #   Organizations User Guide.*
     #
     # * MAX\_DELEGATED\_ADMINISTRATORS\_FOR\_SERVICE\_LIMIT\_EXCEEDED: You
@@ -536,7 +538,7 @@ module Aws::Organizations
     #   operation with this member account, you first must associate a valid
     #   payment instrument, such as a credit card, with the account. Follow
     #   the steps at [To leave an organization when all required account
-    #   information has not yet been provided][1] in the *AWS Organizations
+    #   information has not yet been provided][4] in the *AWS Organizations
     #   User Guide.*
     #
     # * MIN\_POLICY\_TYPE\_ATTACHMENT\_LIMIT\_EXCEEDED: You attempted to
@@ -567,9 +569,10 @@ module Aws::Organizations
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_accounts_remove.html#leave-without-all-info
+    # [1]: http://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_accounts_remove.html#orgs_manage_accounts_remove-from-master
     # [2]: https://console.aws.amazon.com/support/home#/
     # [3]: http://docs.aws.amazon.com/govcloud-us/latest/UserGuide/govcloud-organizations.html
+    # [4]: http://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_accounts_remove.html#leave-without-all-info
     #
     # @!attribute [rw] message
     #   @return [String]
@@ -1011,21 +1014,13 @@ module Aws::Organizations
     #         content: "PolicyContent", # required
     #         description: "PolicyDescription", # required
     #         name: "PolicyName", # required
-    #         type: "SERVICE_CONTROL_POLICY", # required, accepts SERVICE_CONTROL_POLICY, TAG_POLICY
+    #         type: "SERVICE_CONTROL_POLICY", # required, accepts SERVICE_CONTROL_POLICY, TAG_POLICY, BACKUP_POLICY
     #       }
     #
     # @!attribute [rw] content
-    #   The policy content to add to the new policy. For example, if you
-    #   create a [service control policy][1] (SCP), this string must be JSON
-    #   text that specifies the permissions that admins in attached accounts
-    #   can delegate to their users, groups, and roles. For more information
-    #   about the SCP syntax, see [Service Control Policy Syntax][2] in the
-    #   *AWS Organizations User Guide.*
-    #
-    #
-    #
-    #   [1]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_scp.html
-    #   [2]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_reference_scp-syntax.html
+    #   The policy text content to add to the new policy. The text that you
+    #   supply must adhere to the rules of the policy type you specify in
+    #   the `Type` parameter.
     #   @return [String]
     #
     # @!attribute [rw] description
@@ -1044,12 +1039,20 @@ module Aws::Organizations
     #   @return [String]
     #
     # @!attribute [rw] type
-    #   The type of policy to create.
+    #   The type of policy to create. You can specify one of the following
+    #   values:
     #
-    #   <note markdown="1"> In the current release, the only type of policy that you can create
-    #   is a service control policy (SCP).
+    #   * [BACKUP\_POLICY][1]
     #
-    #    </note>
+    #   * [SERVICE\_CONTROL\_POLICY][2]
+    #
+    #   * [TAG\_POLICY][3]
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_backup.html
+    #   [2]: http://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_scp.html
+    #   [3]: http://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_tag-policies.html
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/CreatePolicyRequest AWS API Documentation
@@ -1373,18 +1376,28 @@ module Aws::Organizations
     #   data as a hash:
     #
     #       {
-    #         policy_type: "TAG_POLICY", # required, accepts TAG_POLICY
+    #         policy_type: "TAG_POLICY", # required, accepts TAG_POLICY, BACKUP_POLICY
     #         target_id: "PolicyTargetId",
     #       }
     #
     # @!attribute [rw] policy_type
-    #   The type of policy that you want information about.
+    #   The type of policy that you want information about. You can specify
+    #   one of the following values:
+    #
+    #   * [BACKUP\_POLICY][1]
+    #
+    #   * [TAG\_POLICY][2]
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_backup.html
+    #   [2]: http://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_tag-policies.html
     #   @return [String]
     #
     # @!attribute [rw] target_id
     #   When you're signed in as the master account, specify the ID of the
     #   account that you want details about. Specifying an organization root
-    #   or OU as the target is not supported.
+    #   or organizational unit (OU) as the target is not supported.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/DescribeEffectivePolicyRequest AWS API Documentation
@@ -1640,7 +1653,7 @@ module Aws::Organizations
     #
     #       {
     #         root_id: "RootId", # required
-    #         policy_type: "SERVICE_CONTROL_POLICY", # required, accepts SERVICE_CONTROL_POLICY, TAG_POLICY
+    #         policy_type: "SERVICE_CONTROL_POLICY", # required, accepts SERVICE_CONTROL_POLICY, TAG_POLICY, BACKUP_POLICY
     #       }
     #
     # @!attribute [rw] root_id
@@ -1656,7 +1669,20 @@ module Aws::Organizations
     #   @return [String]
     #
     # @!attribute [rw] policy_type
-    #   The policy type that you want to disable in this root.
+    #   The policy type that you want to disable in this root. You can
+    #   specify one of the following values:
+    #
+    #   * [BACKUP\_POLICY][1]
+    #
+    #   * [SERVICE\_CONTROL\_POLICY][2]
+    #
+    #   * [TAG\_POLICY][3]
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_backup.html
+    #   [2]: http://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_scp.html
+    #   [3]: http://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_tag-policies.html
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/DisablePolicyTypeRequest AWS API Documentation
@@ -1844,7 +1870,7 @@ module Aws::Organizations
     #
     #       {
     #         root_id: "RootId", # required
-    #         policy_type: "SERVICE_CONTROL_POLICY", # required, accepts SERVICE_CONTROL_POLICY, TAG_POLICY
+    #         policy_type: "SERVICE_CONTROL_POLICY", # required, accepts SERVICE_CONTROL_POLICY, TAG_POLICY, BACKUP_POLICY
     #       }
     #
     # @!attribute [rw] root_id
@@ -1860,7 +1886,20 @@ module Aws::Organizations
     #   @return [String]
     #
     # @!attribute [rw] policy_type
-    #   The policy type that you want to enable.
+    #   The policy type that you want to enable. You can specify one of the
+    #   following values:
+    #
+    #   * [BACKUP\_POLICY][1]
+    #
+    #   * [SERVICE\_CONTROL\_POLICY][2]
+    #
+    #   * [TAG\_POLICY][3]
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_backup.html
+    #   [2]: http://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_scp.html
+    #   [3]: http://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_tag-policies.html
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/EnablePolicyTypeRequest AWS API Documentation
@@ -2278,7 +2317,7 @@ module Aws::Organizations
     # reason that contains additional information about the violated limit:
     #
     # <note markdown="1"> Some of the reasons in the following list might not be applicable to
-    # this specific API or operation:
+    # this specific API or operation.
     #
     #  </note>
     #
@@ -3210,7 +3249,7 @@ module Aws::Organizations
     #
     #       {
     #         target_id: "PolicyTargetId", # required
-    #         filter: "SERVICE_CONTROL_POLICY", # required, accepts SERVICE_CONTROL_POLICY, TAG_POLICY
+    #         filter: "SERVICE_CONTROL_POLICY", # required, accepts SERVICE_CONTROL_POLICY, TAG_POLICY, BACKUP_POLICY
     #         next_token: "NextToken",
     #         max_results: 1,
     #       }
@@ -3240,6 +3279,19 @@ module Aws::Organizations
     #
     # @!attribute [rw] filter
     #   The type of policy that you want to include in the returned list.
+    #   You must specify one of the following values:
+    #
+    #   * [BACKUP\_POLICY][1]
+    #
+    #   * [SERVICE\_CONTROL\_POLICY][2]
+    #
+    #   * [TAG\_POLICY][3]
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_backup.html
+    #   [2]: http://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_scp.html
+    #   [3]: http://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_tag-policies.html
     #   @return [String]
     #
     # @!attribute [rw] next_token
@@ -3299,14 +3351,26 @@ module Aws::Organizations
     #   data as a hash:
     #
     #       {
-    #         filter: "SERVICE_CONTROL_POLICY", # required, accepts SERVICE_CONTROL_POLICY, TAG_POLICY
+    #         filter: "SERVICE_CONTROL_POLICY", # required, accepts SERVICE_CONTROL_POLICY, TAG_POLICY, BACKUP_POLICY
     #         next_token: "NextToken",
     #         max_results: 1,
     #       }
     #
     # @!attribute [rw] filter
     #   Specifies the type of policy that you want to include in the
-    #   response.
+    #   response. You must specify one of the following values:
+    #
+    #   * [BACKUP\_POLICY][1]
+    #
+    #   * [SERVICE\_CONTROL\_POLICY][2]
+    #
+    #   * [TAG\_POLICY][3]
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_backup.html
+    #   [2]: http://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_scp.html
+    #   [3]: http://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_tag-policies.html
     #   @return [String]
     #
     # @!attribute [rw] next_token
@@ -4115,8 +4179,8 @@ module Aws::Organizations
     # You can't use the specified policy type with the feature set
     # currently enabled for this organization. For example, you can enable
     # SCPs only after you enable all features in the organization. For more
-    # information, see [Enabling and Disabling a Policy Type on a Root][1]
-    # in the *AWS Organizations User Guide.*
+    # information, see [Managing AWS Organizations Policies][1]in the *AWS
+    # Organizations User Guide.*
     #
     #
     #
@@ -4384,9 +4448,9 @@ module Aws::Organizations
     #   @return [String]
     #
     # @!attribute [rw] tags
-    #   The tag to add to the specified resource. Specifying the tag key is
-    #   required. You can set the value of a tag to an empty string, but you
-    #   can't set the value of a tag to null.
+    #   The tag to add to the specified resource. You must specify both a
+    #   tag key and value. You can set the value of a tag to an empty
+    #   string, but you can't set it to null.
     #   @return [Array<Types::Tag>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/TagResourceRequest AWS API Documentation
@@ -4413,11 +4477,12 @@ module Aws::Organizations
     end
 
     # You have sent too many requests in too short a period of time. The
-    # limit helps protect against denial-of-service attacks. Try again
+    # quota helps protect against denial-of-service attacks. Try again
     # later.
     #
-    # For information on limits that affect AWS Organizations, see [Limits
-    # of AWS Organizations][1] in the *AWS Organizations User Guide.*
+    # For information about quotas that affect AWS Organizations, see
+    # [Quotas for AWS Organizations][1]in the *AWS Organizations User
+    # Guide.*
     #
     #
     #
@@ -4438,7 +4503,7 @@ module Aws::Organizations
       include Aws::Structure
     end
 
-    # This action isn't available in the current Region.
+    # This action isn't available in the current AWS Region.
     #
     # @!attribute [rw] message
     #   @return [String]

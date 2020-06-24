@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.42.0 (2020-06-24)
+------------------
+
+* Feature - Documentation updates for iam
+
 1.41.0 (2020-06-23)
 ------------------
 

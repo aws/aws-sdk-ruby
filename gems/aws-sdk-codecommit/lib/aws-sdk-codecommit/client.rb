@@ -730,7 +730,7 @@ module Aws::CodeCommit
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/iam/latest/UserGuide/reference_identifiers.html
+    #   [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_identifiers.html
     #
     # @option params [String] :approval_rule_template_description
     #   The description of the approval rule template. Consider providing a
@@ -1050,7 +1050,7 @@ module Aws::CodeCommit
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/iam/latest/UserGuide/reference_identifiers.html
+    #   [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_identifiers.html
     #
     # @return [Types::CreatePullRequestApprovalRuleOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1359,6 +1359,10 @@ module Aws::CodeCommit
     #   resp.comment.author_arn #=> String
     #   resp.comment.deleted #=> Boolean
     #   resp.comment.client_request_token #=> String
+    #   resp.comment.caller_reactions #=> Array
+    #   resp.comment.caller_reactions[0] #=> String
+    #   resp.comment.reaction_counts #=> Hash
+    #   resp.comment.reaction_counts["ReactionValue"] #=> Integer
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/DeleteCommentContent AWS API Documentation
     #
@@ -1892,6 +1896,12 @@ module Aws::CodeCommit
     # Returns the content of a comment made on a change, file, or commit in
     # a repository.
     #
+    # <note markdown="1"> Reaction counts might include numbers from user identities who were
+    # deleted after the reaction was made. For a count of reactions from
+    # active identities, use GetCommentReactions.
+    #
+    #  </note>
+    #
     # @option params [required, String] :comment_id
     #   The unique, system-generated ID of the comment. To get this ID, use
     #   GetCommentsForComparedCommit or GetCommentsForPullRequest.
@@ -1916,6 +1926,10 @@ module Aws::CodeCommit
     #   resp.comment.author_arn #=> String
     #   resp.comment.deleted #=> Boolean
     #   resp.comment.client_request_token #=> String
+    #   resp.comment.caller_reactions #=> Array
+    #   resp.comment.caller_reactions[0] #=> String
+    #   resp.comment.reaction_counts #=> Hash
+    #   resp.comment.reaction_counts["ReactionValue"] #=> Integer
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/GetComment AWS API Documentation
     #
@@ -1926,8 +1940,69 @@ module Aws::CodeCommit
       req.send_request(options)
     end
 
+    # Returns information about reactions to a specified comment ID.
+    # Reactions from users who have been deleted will not be included in the
+    # count.
+    #
+    # @option params [required, String] :comment_id
+    #   The ID of the comment for which you want to get reactions information.
+    #
+    # @option params [String] :reaction_user_arn
+    #   Optional. The Amazon Resource Name (ARN) of the user or identity for
+    #   which you want to get reaction information.
+    #
+    # @option params [String] :next_token
+    #   An enumeration token that, when provided in a request, returns the
+    #   next batch of the results.
+    #
+    # @option params [Integer] :max_results
+    #   A non-zero, non-negative integer used to limit the number of returned
+    #   results. The default is the same as the allowed maximum, 1,000.
+    #
+    # @return [Types::GetCommentReactionsOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetCommentReactionsOutput#reactions_for_comment #reactions_for_comment} => Array&lt;Types::ReactionForComment&gt;
+    #   * {Types::GetCommentReactionsOutput#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_comment_reactions({
+    #     comment_id: "CommentId", # required
+    #     reaction_user_arn: "Arn",
+    #     next_token: "NextToken",
+    #     max_results: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.reactions_for_comment #=> Array
+    #   resp.reactions_for_comment[0].reaction.emoji #=> String
+    #   resp.reactions_for_comment[0].reaction.short_code #=> String
+    #   resp.reactions_for_comment[0].reaction.unicode #=> String
+    #   resp.reactions_for_comment[0].reaction_users #=> Array
+    #   resp.reactions_for_comment[0].reaction_users[0] #=> String
+    #   resp.reactions_for_comment[0].reactions_from_deleted_users_count #=> Integer
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/GetCommentReactions AWS API Documentation
+    #
+    # @overload get_comment_reactions(params = {})
+    # @param [Hash] params ({})
+    def get_comment_reactions(params = {}, options = {})
+      req = build_request(:get_comment_reactions, params)
+      req.send_request(options)
+    end
+
     # Returns information about comments made on the comparison between two
     # commits.
+    #
+    # <note markdown="1"> Reaction counts might include numbers from user identities who were
+    # deleted after the reaction was made. For a count of reactions from
+    # active identities, use GetCommentReactions.
+    #
+    #  </note>
     #
     # @option params [required, String] :repository_name
     #   The name of the repository where you want to compare commits.
@@ -1985,6 +2060,10 @@ module Aws::CodeCommit
     #   resp.comments_for_compared_commit_data[0].comments[0].author_arn #=> String
     #   resp.comments_for_compared_commit_data[0].comments[0].deleted #=> Boolean
     #   resp.comments_for_compared_commit_data[0].comments[0].client_request_token #=> String
+    #   resp.comments_for_compared_commit_data[0].comments[0].caller_reactions #=> Array
+    #   resp.comments_for_compared_commit_data[0].comments[0].caller_reactions[0] #=> String
+    #   resp.comments_for_compared_commit_data[0].comments[0].reaction_counts #=> Hash
+    #   resp.comments_for_compared_commit_data[0].comments[0].reaction_counts["ReactionValue"] #=> Integer
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/GetCommentsForComparedCommit AWS API Documentation
@@ -1997,6 +2076,12 @@ module Aws::CodeCommit
     end
 
     # Returns comments made on a pull request.
+    #
+    # <note markdown="1"> Reaction counts might include numbers from user identities who were
+    # deleted after the reaction was made. For a count of reactions from
+    # active identities, use GetCommentReactions.
+    #
+    #  </note>
     #
     # @option params [required, String] :pull_request_id
     #   The system-generated ID of the pull request. To get this ID, use
@@ -2061,6 +2146,10 @@ module Aws::CodeCommit
     #   resp.comments_for_pull_request_data[0].comments[0].author_arn #=> String
     #   resp.comments_for_pull_request_data[0].comments[0].deleted #=> Boolean
     #   resp.comments_for_pull_request_data[0].comments[0].client_request_token #=> String
+    #   resp.comments_for_pull_request_data[0].comments[0].caller_reactions #=> Array
+    #   resp.comments_for_pull_request_data[0].comments[0].caller_reactions[0] #=> String
+    #   resp.comments_for_pull_request_data[0].comments[0].reaction_counts #=> Hash
+    #   resp.comments_for_pull_request_data[0].comments[0].reaction_counts["ReactionValue"] #=> Integer
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/GetCommentsForPullRequest AWS API Documentation
@@ -3767,6 +3856,10 @@ module Aws::CodeCommit
     #   resp.comment.author_arn #=> String
     #   resp.comment.deleted #=> Boolean
     #   resp.comment.client_request_token #=> String
+    #   resp.comment.caller_reactions #=> Array
+    #   resp.comment.caller_reactions[0] #=> String
+    #   resp.comment.reaction_counts #=> Hash
+    #   resp.comment.reaction_counts["ReactionValue"] #=> Integer
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/PostCommentForComparedCommit AWS API Documentation
     #
@@ -3861,6 +3954,10 @@ module Aws::CodeCommit
     #   resp.comment.author_arn #=> String
     #   resp.comment.deleted #=> Boolean
     #   resp.comment.client_request_token #=> String
+    #   resp.comment.caller_reactions #=> Array
+    #   resp.comment.caller_reactions[0] #=> String
+    #   resp.comment.reaction_counts #=> Hash
+    #   resp.comment.reaction_counts["ReactionValue"] #=> Integer
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/PostCommentForPullRequest AWS API Documentation
     #
@@ -3914,6 +4011,10 @@ module Aws::CodeCommit
     #   resp.comment.author_arn #=> String
     #   resp.comment.deleted #=> Boolean
     #   resp.comment.client_request_token #=> String
+    #   resp.comment.caller_reactions #=> Array
+    #   resp.comment.caller_reactions[0] #=> String
+    #   resp.comment.reaction_counts #=> Hash
+    #   resp.comment.reaction_counts["ReactionValue"] #=> Integer
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/PostCommentReply AWS API Documentation
     #
@@ -3921,6 +4022,42 @@ module Aws::CodeCommit
     # @param [Hash] params ({})
     def post_comment_reply(params = {}, options = {})
       req = build_request(:post_comment_reply, params)
+      req.send_request(options)
+    end
+
+    # Adds or updates a reaction to a specified comment for the user whose
+    # identity is used to make the request. You can only add or update a
+    # reaction for yourself. You cannot add, modify, or delete a reaction
+    # for another user.
+    #
+    # @option params [required, String] :comment_id
+    #   The ID of the comment to which you want to add or update a reaction.
+    #
+    # @option params [required, String] :reaction_value
+    #   The emoji reaction you want to add or update. To remove a reaction,
+    #   provide a value of blank or null. You can also provide the value of
+    #   none. For information about emoji reaction values supported in AWS
+    #   CodeCommit, see the [AWS CodeCommit User Guide][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/codecommit/latest/userguide/how-to-commit-comment.html#emoji-reaction-table
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.put_comment_reaction({
+    #     comment_id: "CommentId", # required
+    #     reaction_value: "ReactionValue", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/PutCommentReaction AWS API Documentation
+    #
+    # @overload put_comment_reaction(params = {})
+    # @param [Hash] params ({})
+    def put_comment_reaction(params = {}, options = {})
+      req = build_request(:put_comment_reaction, params)
       req.send_request(options)
     end
 
@@ -4322,6 +4459,10 @@ module Aws::CodeCommit
     #   resp.comment.author_arn #=> String
     #   resp.comment.deleted #=> Boolean
     #   resp.comment.client_request_token #=> String
+    #   resp.comment.caller_reactions #=> Array
+    #   resp.comment.caller_reactions[0] #=> String
+    #   resp.comment.reaction_counts #=> Hash
+    #   resp.comment.reaction_counts["ReactionValue"] #=> Integer
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/UpdateComment AWS API Documentation
     #
@@ -4414,7 +4555,7 @@ module Aws::CodeCommit
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/iam/latest/UserGuide/reference_identifiers.html
+    #   [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_identifiers.html
     #
     # @return [Types::UpdatePullRequestApprovalRuleContentOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -4756,7 +4897,7 @@ module Aws::CodeCommit
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-codecommit'
-      context[:gem_version] = '1.35.0'
+      context[:gem_version] = '1.36.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

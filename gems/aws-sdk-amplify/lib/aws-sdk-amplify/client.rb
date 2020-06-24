@@ -312,63 +312,68 @@ module Aws::Amplify
 
     # @!group API Operations
 
-    # Creates a new Amplify App.
+    # Creates a new Amplify app.
     #
     # @option params [required, String] :name
-    #   Name for the Amplify App
+    #   The name for the Amplify app.
     #
     # @option params [String] :description
-    #   Description for an Amplify App
+    #   The description for an Amplify app.
     #
     # @option params [String] :repository
-    #   Repository for an Amplify App
+    #   The repository for an Amplify app.
     #
     # @option params [String] :platform
-    #   Platform / framework for an Amplify App
+    #   The platform or framework for an Amplify app.
     #
     # @option params [String] :iam_service_role_arn
-    #   AWS IAM service role for an Amplify App
+    #   The AWS Identity and Access Management (IAM) service role for an
+    #   Amplify app.
     #
     # @option params [String] :oauth_token
-    #   OAuth token for 3rd party source control system for an Amplify App,
-    #   used to create webhook and read-only deploy key. OAuth token is not
-    #   stored.
+    #   The OAuth token for a third-party source control system for an Amplify
+    #   app. The OAuth token is used to create a webhook and a read-only
+    #   deploy key. The OAuth token is not stored.
     #
     # @option params [String] :access_token
-    #   Personal Access token for 3rd party source control system for an
-    #   Amplify App, used to create webhook and read-only deploy key. Token is
-    #   not stored.
+    #   The personal access token for a third-party source control system for
+    #   an Amplify app. The personal access token is used to create a webhook
+    #   and a read-only deploy key. The token is not stored.
     #
     # @option params [Hash<String,String>] :environment_variables
-    #   Environment variables map for an Amplify App.
+    #   The environment variables map for an Amplify app.
     #
     # @option params [Boolean] :enable_branch_auto_build
-    #   Enable the auto building of branches for an Amplify App.
+    #   Enables the auto building of branches for an Amplify app.
+    #
+    # @option params [Boolean] :enable_branch_auto_deletion
+    #   Automatically disconnects a branch in the Amplify Console when you
+    #   delete a branch from your Git repository.
     #
     # @option params [Boolean] :enable_basic_auth
-    #   Enable Basic Authorization for an Amplify App, this will apply to all
-    #   branches part of this App.
+    #   Enables basic authorization for an Amplify app. This will apply to all
+    #   branches that are part of this app.
     #
     # @option params [String] :basic_auth_credentials
-    #   Credentials for Basic Authorization for an Amplify App.
+    #   The credentials for basic authorization for an Amplify app.
     #
     # @option params [Array<Types::CustomRule>] :custom_rules
-    #   Custom rewrite / redirect rules for an Amplify App.
+    #   The custom rewrite and redirect rules for an Amplify app.
     #
     # @option params [Hash<String,String>] :tags
-    #   Tag for an Amplify App
+    #   The tag for an Amplify app.
     #
     # @option params [String] :build_spec
-    #   BuildSpec for an Amplify App
+    #   The build specification (build spec) for an Amplify app.
     #
     # @option params [Boolean] :enable_auto_branch_creation
-    #   Enables automated branch creation for the Amplify App.
+    #   Enables automated branch creation for the Amplify app.
     #
     # @option params [Array<String>] :auto_branch_creation_patterns
-    #   Automated branch creation glob patterns for the Amplify App.
+    #   The automated branch creation glob patterns for the Amplify app.
     #
     # @option params [Types::AutoBranchCreationConfig] :auto_branch_creation_config
-    #   Automated branch creation config for the Amplify App.
+    #   The automated branch creation configuration for the Amplify app.
     #
     # @return [Types::CreateAppResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -388,6 +393,7 @@ module Aws::Amplify
     #       "EnvKey" => "EnvValue",
     #     },
     #     enable_branch_auto_build: false,
+    #     enable_branch_auto_deletion: false,
     #     enable_basic_auth: false,
     #     basic_auth_credentials: "BasicAuthCredentials",
     #     custom_rules: [
@@ -436,6 +442,7 @@ module Aws::Amplify
     #   resp.app.environment_variables["EnvKey"] #=> String
     #   resp.app.default_domain #=> String
     #   resp.app.enable_branch_auto_build #=> Boolean
+    #   resp.app.enable_branch_auto_deletion #=> Boolean
     #   resp.app.enable_basic_auth #=> Boolean
     #   resp.app.basic_auth_credentials #=> String
     #   resp.app.custom_rules #=> Array
@@ -471,19 +478,19 @@ module Aws::Amplify
       req.send_request(options)
     end
 
-    # Creates a new backend environment for an Amplify App.
+    # Creates a new backend environment for an Amplify app.
     #
     # @option params [required, String] :app_id
-    #   Unique Id for an Amplify App.
+    #   The unique ID for an Amplify app.
     #
     # @option params [required, String] :environment_name
-    #   Name for the backend environment.
+    #   The name for the backend environment.
     #
     # @option params [String] :stack_name
-    #   CloudFormation stack name of backend environment.
+    #   The AWS CloudFormation stack name of a backend environment.
     #
     # @option params [String] :deployment_artifacts
-    #   Name of deployment artifacts.
+    #   The name of deployment artifacts.
     #
     # @return [Types::CreateBackendEnvironmentResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -516,22 +523,22 @@ module Aws::Amplify
       req.send_request(options)
     end
 
-    # Creates a new Branch for an Amplify App.
+    # Creates a new branch for an Amplify app.
     #
     # @option params [required, String] :app_id
-    #   Unique Id for an Amplify App.
+    #   The unique ID for an Amplify app.
     #
     # @option params [required, String] :branch_name
-    #   Name for the branch.
+    #   The name for the branch.
     #
     # @option params [String] :description
-    #   Description for the branch.
+    #   The description for the branch.
     #
     # @option params [String] :stage
-    #   Stage for the branch.
+    #   Describes the current stage for the branch.
     #
     # @option params [String] :framework
-    #   Framework for the branch.
+    #   The framework for the branch.
     #
     # @option params [Boolean] :enable_notification
     #   Enables notifications for the branch.
@@ -540,34 +547,36 @@ module Aws::Amplify
     #   Enables auto building for the branch.
     #
     # @option params [Hash<String,String>] :environment_variables
-    #   Environment Variables for the branch.
+    #   The environment variables for the branch.
     #
     # @option params [String] :basic_auth_credentials
-    #   Basic Authorization credentials for the branch.
+    #   The basic authorization credentials for the branch.
     #
     # @option params [Boolean] :enable_basic_auth
-    #   Enables Basic Auth for the branch.
+    #   Enables basic authorization for the branch.
     #
     # @option params [Hash<String,String>] :tags
-    #   Tag for the branch.
+    #   The tag for the branch.
     #
     # @option params [String] :build_spec
-    #   BuildSpec for the branch.
+    #   The build specification (build spec) for the branch.
     #
     # @option params [String] :ttl
-    #   The content TTL for the website in seconds.
+    #   The content Time To Live (TTL) for the website in seconds.
     #
     # @option params [String] :display_name
-    #   Display name for a branch, will use as the default domain prefix.
+    #   The display name for a branch. This is used as the default domain
+    #   prefix.
     #
     # @option params [Boolean] :enable_pull_request_preview
-    #   Enables Pull Request Preview for this branch.
+    #   Enables pull request preview for this branch.
     #
     # @option params [String] :pull_request_environment_name
-    #   The Amplify Environment name for the pull request.
+    #   The Amplify environment name for the pull request.
     #
     # @option params [String] :backend_environment_arn
-    #   ARN for a Backend Environment, part of an Amplify App.
+    #   The Amazon Resource Name (ARN) for a backend environment that is part
+    #   of an Amplify app.
     #
     # @return [Types::CreateBranchResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -641,20 +650,20 @@ module Aws::Amplify
       req.send_request(options)
     end
 
-    # Create a deployment for manual deploy apps. (Apps are not connected to
-    # repository)
+    # Creates a deployment for a manually deployed Amplify app. Manually
+    # deployed apps are not connected to a repository.
     #
     # @option params [required, String] :app_id
-    #   Unique Id for an Amplify App.
+    #   The unique ID for an Amplify app.
     #
     # @option params [required, String] :branch_name
-    #   Name for the branch, for the Job.
+    #   The name for the branch, for the job.
     #
     # @option params [Hash<String,String>] :file_map
-    #   Optional file map that contains file name as the key and file content
-    #   md5 hash as the value. If this argument is provided, the service will
-    #   generate different upload url per file. Otherwise, the service will
-    #   only generate a single upload url for the zipped files.
+    #   An optional file map that contains the file name as the key and the
+    #   file content md5 hash as the value. If this argument is provided, the
+    #   service will generate a unique upload URL per file. Otherwise, the
+    #   service will only generate a single upload URL for the zipped files.
     #
     # @return [Types::CreateDeploymentResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -688,20 +697,27 @@ module Aws::Amplify
       req.send_request(options)
     end
 
-    # Create a new DomainAssociation on an App
+    # Creates a new domain association for an Amplify app. This action
+    # associates a custom domain with the Amplify app
     #
     # @option params [required, String] :app_id
-    #   Unique Id for an Amplify App.
+    #   The unique ID for an Amplify app.
     #
     # @option params [required, String] :domain_name
-    #   Domain name for the Domain Association.
+    #   The domain name for the domain association.
     #
     # @option params [Boolean] :enable_auto_sub_domain
-    #   Enables automated creation of Subdomains for branches. (Currently not
-    #   supported)
+    #   Enables the automated creation of subdomains for branches.
     #
     # @option params [required, Array<Types::SubDomainSetting>] :sub_domain_settings
-    #   Setting structure for the Subdomain.
+    #   The setting for the subdomain.
+    #
+    # @option params [Array<String>] :auto_sub_domain_creation_patterns
+    #   Sets the branch patterns for automatic subdomain creation.
+    #
+    # @option params [String] :auto_sub_domain_iam_role
+    #   The required AWS Identity and Access Management (IAM) service role for
+    #   the Amazon Resource Name (ARN) for automatically creating subdomains.
     #
     # @return [Types::CreateDomainAssociationResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -719,6 +735,8 @@ module Aws::Amplify
     #         branch_name: "BranchName", # required
     #       },
     #     ],
+    #     auto_sub_domain_creation_patterns: ["AutoSubDomainCreationPattern"],
+    #     auto_sub_domain_iam_role: "AutoSubDomainIAMRole",
     #   })
     #
     # @example Response structure
@@ -726,6 +744,9 @@ module Aws::Amplify
     #   resp.domain_association.domain_association_arn #=> String
     #   resp.domain_association.domain_name #=> String
     #   resp.domain_association.enable_auto_sub_domain #=> Boolean
+    #   resp.domain_association.auto_sub_domain_creation_patterns #=> Array
+    #   resp.domain_association.auto_sub_domain_creation_patterns[0] #=> String
+    #   resp.domain_association.auto_sub_domain_iam_role #=> String
     #   resp.domain_association.domain_status #=> String, one of "PENDING_VERIFICATION", "IN_PROGRESS", "AVAILABLE", "PENDING_DEPLOYMENT", "FAILED", "CREATING", "REQUESTING_CERTIFICATE", "UPDATING"
     #   resp.domain_association.status_reason #=> String
     #   resp.domain_association.certificate_verification_dns_record #=> String
@@ -744,16 +765,16 @@ module Aws::Amplify
       req.send_request(options)
     end
 
-    # Create a new webhook on an App.
+    # Creates a new webhook on an Amplify app.
     #
     # @option params [required, String] :app_id
-    #   Unique Id for an Amplify App.
+    #   The unique ID for an Amplify app.
     #
     # @option params [required, String] :branch_name
-    #   Name for a branch, part of an Amplify App.
+    #   The name for a branch that is part of an Amplify app.
     #
     # @option params [String] :description
-    #   Description for a webhook.
+    #   The description for a webhook.
     #
     # @return [Types::CreateWebhookResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -786,10 +807,10 @@ module Aws::Amplify
       req.send_request(options)
     end
 
-    # Delete an existing Amplify App by appId.
+    # Deletes an existing Amplify app specified by an app ID.
     #
     # @option params [required, String] :app_id
-    #   Unique Id for an Amplify App.
+    #   The unique ID for an Amplify app.
     #
     # @return [Types::DeleteAppResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -818,6 +839,7 @@ module Aws::Amplify
     #   resp.app.environment_variables["EnvKey"] #=> String
     #   resp.app.default_domain #=> String
     #   resp.app.enable_branch_auto_build #=> Boolean
+    #   resp.app.enable_branch_auto_deletion #=> Boolean
     #   resp.app.enable_basic_auth #=> Boolean
     #   resp.app.basic_auth_credentials #=> String
     #   resp.app.custom_rules #=> Array
@@ -853,13 +875,13 @@ module Aws::Amplify
       req.send_request(options)
     end
 
-    # Delete backend environment for an Amplify App.
+    # Deletes a backend environment for an Amplify app.
     #
     # @option params [required, String] :app_id
-    #   Unique Id of an Amplify App.
+    #   The unique ID of an Amplify app.
     #
     # @option params [required, String] :environment_name
-    #   Name of a backend environment of an Amplify App.
+    #   The name of a backend environment of an Amplify app.
     #
     # @return [Types::DeleteBackendEnvironmentResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -890,13 +912,13 @@ module Aws::Amplify
       req.send_request(options)
     end
 
-    # Deletes a branch for an Amplify App.
+    # Deletes a branch for an Amplify app.
     #
     # @option params [required, String] :app_id
-    #   Unique Id for an Amplify App.
+    #   The unique ID for an Amplify app.
     #
     # @option params [required, String] :branch_name
-    #   Name for the branch.
+    #   The name for the branch.
     #
     # @return [Types::DeleteBranchResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -951,13 +973,13 @@ module Aws::Amplify
       req.send_request(options)
     end
 
-    # Deletes a DomainAssociation.
+    # Deletes a domain association for an Amplify app.
     #
     # @option params [required, String] :app_id
-    #   Unique Id for an Amplify App.
+    #   The unique id for an Amplify app.
     #
     # @option params [required, String] :domain_name
-    #   Name of the domain.
+    #   The name of the domain.
     #
     # @return [Types::DeleteDomainAssociationResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -975,6 +997,9 @@ module Aws::Amplify
     #   resp.domain_association.domain_association_arn #=> String
     #   resp.domain_association.domain_name #=> String
     #   resp.domain_association.enable_auto_sub_domain #=> Boolean
+    #   resp.domain_association.auto_sub_domain_creation_patterns #=> Array
+    #   resp.domain_association.auto_sub_domain_creation_patterns[0] #=> String
+    #   resp.domain_association.auto_sub_domain_iam_role #=> String
     #   resp.domain_association.domain_status #=> String, one of "PENDING_VERIFICATION", "IN_PROGRESS", "AVAILABLE", "PENDING_DEPLOYMENT", "FAILED", "CREATING", "REQUESTING_CERTIFICATE", "UPDATING"
     #   resp.domain_association.status_reason #=> String
     #   resp.domain_association.certificate_verification_dns_record #=> String
@@ -993,16 +1018,16 @@ module Aws::Amplify
       req.send_request(options)
     end
 
-    # Delete a job, for an Amplify branch, part of Amplify App.
+    # Deletes a job for a branch of an Amplify app.
     #
     # @option params [required, String] :app_id
-    #   Unique Id for an Amplify App.
+    #   The unique ID for an Amplify app.
     #
     # @option params [required, String] :branch_name
-    #   Name for the branch, for the Job.
+    #   The name for the branch, for the job.
     #
     # @option params [required, String] :job_id
-    #   Unique Id for the Job.
+    #   The unique ID for the job.
     #
     # @return [Types::DeleteJobResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1040,7 +1065,7 @@ module Aws::Amplify
     # Deletes a webhook.
     #
     # @option params [required, String] :webhook_id
-    #   Unique Id for a webhook.
+    #   The unique ID for a webhook.
     #
     # @return [Types::DeleteWebhookResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1071,20 +1096,22 @@ module Aws::Amplify
       req.send_request(options)
     end
 
-    # Retrieve website access logs for a specific time range via a
-    # pre-signed URL.
+    # Returns the website access logs for a specific time range using a
+    # presigned URL.
     #
     # @option params [Time,DateTime,Date,Integer,String] :start_time
-    #   The time at which the logs should start, inclusive.
+    #   The time at which the logs should start. The time range specified is
+    #   inclusive of the start time.
     #
     # @option params [Time,DateTime,Date,Integer,String] :end_time
-    #   The time at which the logs should end, inclusive.
+    #   The time at which the logs should end. The time range specified is
+    #   inclusive of the end time.
     #
     # @option params [required, String] :domain_name
-    #   Name of the domain.
+    #   The name of the domain.
     #
     # @option params [required, String] :app_id
-    #   Unique Id for an Amplify App.
+    #   The unique ID for an Amplify app.
     #
     # @return [Types::GenerateAccessLogsResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1112,10 +1139,10 @@ module Aws::Amplify
       req.send_request(options)
     end
 
-    # Retrieves an existing Amplify App by appId.
+    # Returns an existing Amplify app by appID.
     #
     # @option params [required, String] :app_id
-    #   Unique Id for an Amplify App.
+    #   The unique ID for an Amplify app.
     #
     # @return [Types::GetAppResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1144,6 +1171,7 @@ module Aws::Amplify
     #   resp.app.environment_variables["EnvKey"] #=> String
     #   resp.app.default_domain #=> String
     #   resp.app.enable_branch_auto_build #=> Boolean
+    #   resp.app.enable_branch_auto_deletion #=> Boolean
     #   resp.app.enable_basic_auth #=> Boolean
     #   resp.app.basic_auth_credentials #=> String
     #   resp.app.custom_rules #=> Array
@@ -1179,10 +1207,10 @@ module Aws::Amplify
       req.send_request(options)
     end
 
-    # Retrieves artifact info that corresponds to a artifactId.
+    # Returns the artifact info that corresponds to an artifact id.
     #
     # @option params [required, String] :artifact_id
-    #   Unique Id for a artifact.
+    #   The unique ID for an artifact.
     #
     # @return [Types::GetArtifactUrlResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1209,13 +1237,13 @@ module Aws::Amplify
       req.send_request(options)
     end
 
-    # Retrieves a backend environment for an Amplify App.
+    # Returns a backend environment for an Amplify app.
     #
     # @option params [required, String] :app_id
-    #   Unique Id for an Amplify App.
+    #   The unique id for an Amplify app.
     #
     # @option params [required, String] :environment_name
-    #   Name for the backend environment.
+    #   The name for the backend environment.
     #
     # @return [Types::GetBackendEnvironmentResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1246,13 +1274,13 @@ module Aws::Amplify
       req.send_request(options)
     end
 
-    # Retrieves a branch for an Amplify App.
+    # Returns a branch for an Amplify app.
     #
     # @option params [required, String] :app_id
-    #   Unique Id for an Amplify App.
+    #   The unique ID for an Amplify app.
     #
     # @option params [required, String] :branch_name
-    #   Name for the branch.
+    #   The name for the branch.
     #
     # @return [Types::GetBranchResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1307,13 +1335,13 @@ module Aws::Amplify
       req.send_request(options)
     end
 
-    # Retrieves domain info that corresponds to an appId and domainName.
+    # Returns the domain information for an Amplify app.
     #
     # @option params [required, String] :app_id
-    #   Unique Id for an Amplify App.
+    #   The unique id for an Amplify app.
     #
     # @option params [required, String] :domain_name
-    #   Name of the domain.
+    #   The name of the domain.
     #
     # @return [Types::GetDomainAssociationResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1331,6 +1359,9 @@ module Aws::Amplify
     #   resp.domain_association.domain_association_arn #=> String
     #   resp.domain_association.domain_name #=> String
     #   resp.domain_association.enable_auto_sub_domain #=> Boolean
+    #   resp.domain_association.auto_sub_domain_creation_patterns #=> Array
+    #   resp.domain_association.auto_sub_domain_creation_patterns[0] #=> String
+    #   resp.domain_association.auto_sub_domain_iam_role #=> String
     #   resp.domain_association.domain_status #=> String, one of "PENDING_VERIFICATION", "IN_PROGRESS", "AVAILABLE", "PENDING_DEPLOYMENT", "FAILED", "CREATING", "REQUESTING_CERTIFICATE", "UPDATING"
     #   resp.domain_association.status_reason #=> String
     #   resp.domain_association.certificate_verification_dns_record #=> String
@@ -1349,16 +1380,16 @@ module Aws::Amplify
       req.send_request(options)
     end
 
-    # Get a job for a branch, part of an Amplify App.
+    # Returns a job for a branch of an Amplify app.
     #
     # @option params [required, String] :app_id
-    #   Unique Id for an Amplify App.
+    #   The unique ID for an Amplify app.
     #
     # @option params [required, String] :branch_name
-    #   Name for the branch, for the Job.
+    #   The branch name for the job.
     #
     # @option params [required, String] :job_id
-    #   Unique Id for the Job.
+    #   The unique ID for the job.
     #
     # @return [Types::GetJobResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1406,10 +1437,11 @@ module Aws::Amplify
       req.send_request(options)
     end
 
-    # Retrieves webhook info that corresponds to a webhookId.
+    # Returns the webhook information that corresponds to a specified
+    # webhook ID.
     #
     # @option params [required, String] :webhook_id
-    #   Unique Id for a webhook.
+    #   The unique ID for a webhook.
     #
     # @return [Types::GetWebhookResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1440,14 +1472,14 @@ module Aws::Amplify
       req.send_request(options)
     end
 
-    # Lists existing Amplify Apps.
+    # Returns a list of the existing Amplify apps.
     #
     # @option params [String] :next_token
-    #   Pagination token. If non-null pagination token is returned in a
-    #   result, then pass its value in another request to fetch more entries.
+    #   A pagination token. If non-null, the pagination token is returned in a
+    #   result. Pass its value in another request to retrieve more entries.
     #
     # @option params [Integer] :max_results
-    #   Maximum number of records to list in a single response.
+    #   The maximum number of records to list in a single response.
     #
     # @return [Types::ListAppsResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1479,6 +1511,7 @@ module Aws::Amplify
     #   resp.apps[0].environment_variables["EnvKey"] #=> String
     #   resp.apps[0].default_domain #=> String
     #   resp.apps[0].enable_branch_auto_build #=> Boolean
+    #   resp.apps[0].enable_branch_auto_deletion #=> Boolean
     #   resp.apps[0].enable_basic_auth #=> Boolean
     #   resp.apps[0].basic_auth_credentials #=> String
     #   resp.apps[0].custom_rules #=> Array
@@ -1515,24 +1548,24 @@ module Aws::Amplify
       req.send_request(options)
     end
 
-    # List artifacts with an app, a branch, a job and an artifact type.
+    # Returns a list of artifacts for a specified app, branch, and job.
     #
     # @option params [required, String] :app_id
-    #   Unique Id for an Amplify App.
+    #   The unique ID for an Amplify app.
     #
     # @option params [required, String] :branch_name
-    #   Name for a branch, part of an Amplify App.
+    #   The name of a branch that is part of an Amplify app.
     #
     # @option params [required, String] :job_id
-    #   Unique Id for an Job.
+    #   The unique ID for a job.
     #
     # @option params [String] :next_token
-    #   Pagination token. Set to null to start listing artifacts from start.
-    #   If non-null pagination token is returned in a result, then pass its
-    #   value in here to list more artifacts.
+    #   A pagination token. Set to null to start listing artifacts from start.
+    #   If a non-null pagination token is returned in a result, pass its value
+    #   in here to list more artifacts.
     #
     # @option params [Integer] :max_results
-    #   Maximum number of records to list in a single response.
+    #   The maximum number of records to list in a single response.
     #
     # @return [Types::ListArtifactsResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1565,21 +1598,21 @@ module Aws::Amplify
       req.send_request(options)
     end
 
-    # Lists backend environments for an Amplify App.
+    # Lists the backend environments for an Amplify app.
     #
     # @option params [required, String] :app_id
-    #   Unique Id for an amplify App.
+    #   The unique ID for an Amplify app.
     #
     # @option params [String] :environment_name
-    #   Name of the backend environment
+    #   The name of the backend environment
     #
     # @option params [String] :next_token
-    #   Pagination token. Set to null to start listing backen environments
-    #   from start. If a non-null pagination token is returned in a result,
-    #   then pass its value in here to list more backend environments.
+    #   A pagination token. Set to null to start listing backend environments
+    #   from the start. If a non-null pagination token is returned in a
+    #   result, pass its value in here to list more backend environments.
     #
     # @option params [Integer] :max_results
-    #   Maximum number of records to list in a single response.
+    #   The maximum number of records to list in a single response.
     #
     # @return [Types::ListBackendEnvironmentsResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1615,18 +1648,18 @@ module Aws::Amplify
       req.send_request(options)
     end
 
-    # Lists branches for an Amplify App.
+    # Lists the branches of an Amplify app.
     #
     # @option params [required, String] :app_id
-    #   Unique Id for an Amplify App.
+    #   The unique ID for an Amplify app.
     #
     # @option params [String] :next_token
-    #   Pagination token. Set to null to start listing branches from start. If
-    #   a non-null pagination token is returned in a result, then pass its
-    #   value in here to list more branches.
+    #   A pagination token. Set to null to start listing branches from the
+    #   start. If a non-null pagination token is returned in a result, pass
+    #   its value in here to list more branches.
     #
     # @option params [Integer] :max_results
-    #   Maximum number of records to list in a single response.
+    #   The maximum number of records to list in a single response.
     #
     # @return [Types::ListBranchesResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1685,18 +1718,18 @@ module Aws::Amplify
       req.send_request(options)
     end
 
-    # List domains with an app
+    # Returns the domain associations for an Amplify app.
     #
     # @option params [required, String] :app_id
-    #   Unique Id for an Amplify App.
+    #   The unique ID for an Amplify app.
     #
     # @option params [String] :next_token
-    #   Pagination token. Set to null to start listing Apps from start. If
-    #   non-null pagination token is returned in a result, then pass its value
-    #   in here to list more projects.
+    #   A pagination token. Set to null to start listing apps from the start.
+    #   If non-null, a pagination token is returned in a result. Pass its
+    #   value in here to list more projects.
     #
     # @option params [Integer] :max_results
-    #   Maximum number of records to list in a single response.
+    #   The maximum number of records to list in a single response.
     #
     # @return [Types::ListDomainAssociationsResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1717,6 +1750,9 @@ module Aws::Amplify
     #   resp.domain_associations[0].domain_association_arn #=> String
     #   resp.domain_associations[0].domain_name #=> String
     #   resp.domain_associations[0].enable_auto_sub_domain #=> Boolean
+    #   resp.domain_associations[0].auto_sub_domain_creation_patterns #=> Array
+    #   resp.domain_associations[0].auto_sub_domain_creation_patterns[0] #=> String
+    #   resp.domain_associations[0].auto_sub_domain_iam_role #=> String
     #   resp.domain_associations[0].domain_status #=> String, one of "PENDING_VERIFICATION", "IN_PROGRESS", "AVAILABLE", "PENDING_DEPLOYMENT", "FAILED", "CREATING", "REQUESTING_CERTIFICATE", "UPDATING"
     #   resp.domain_associations[0].status_reason #=> String
     #   resp.domain_associations[0].certificate_verification_dns_record #=> String
@@ -1736,21 +1772,21 @@ module Aws::Amplify
       req.send_request(options)
     end
 
-    # List Jobs for a branch, part of an Amplify App.
+    # Lists the jobs for a branch of an Amplify app.
     #
     # @option params [required, String] :app_id
-    #   Unique Id for an Amplify App.
+    #   The unique ID for an Amplify app.
     #
     # @option params [required, String] :branch_name
-    #   Name for a branch.
+    #   The name for a branch.
     #
     # @option params [String] :next_token
-    #   Pagination token. Set to null to start listing steps from start. If a
-    #   non-null pagination token is returned in a result, then pass its value
+    #   A pagination token. Set to null to start listing steps from the start.
+    #   If a non-null pagination token is returned in a result, pass its value
     #   in here to list more steps.
     #
     # @option params [Integer] :max_results
-    #   Maximum number of records to list in a single response.
+    #   The maximum number of records to list in a single response.
     #
     # @return [Types::ListJobsResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1789,10 +1825,10 @@ module Aws::Amplify
       req.send_request(options)
     end
 
-    # List tags for resource.
+    # Returns a list of tags for a specified Amazon Resource Name (ARN).
     #
     # @option params [required, String] :resource_arn
-    #   Resource arn used to list tags.
+    #   The Amazon Resource Name (ARN) to use to list tags.
     #
     # @return [Types::ListTagsForResourceResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1818,18 +1854,18 @@ module Aws::Amplify
       req.send_request(options)
     end
 
-    # List webhooks with an app.
+    # Returns a list of webhooks for an Amplify app.
     #
     # @option params [required, String] :app_id
-    #   Unique Id for an Amplify App.
+    #   The unique ID for an Amplify app.
     #
     # @option params [String] :next_token
-    #   Pagination token. Set to null to start listing webhooks from start. If
-    #   non-null pagination token is returned in a result, then pass its value
-    #   in here to list more webhooks.
+    #   A pagination token. Set to null to start listing webhooks from the
+    #   start. If non-null,the pagination token is returned in a result. Pass
+    #   its value in here to list more webhooks.
     #
     # @option params [Integer] :max_results
-    #   Maximum number of records to list in a single response.
+    #   The maximum number of records to list in a single response.
     #
     # @return [Types::ListWebhooksResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1865,23 +1901,23 @@ module Aws::Amplify
       req.send_request(options)
     end
 
-    # Start a deployment for manual deploy apps. (Apps are not connected to
-    # repository)
+    # Starts a deployment for a manually deployed app. Manually deployed
+    # apps are not connected to a repository.
     #
     # @option params [required, String] :app_id
-    #   Unique Id for an Amplify App.
+    #   The unique ID for an Amplify app.
     #
     # @option params [required, String] :branch_name
-    #   Name for the branch, for the Job.
+    #   The name for the branch, for the job.
     #
     # @option params [String] :job_id
-    #   The job id for this deployment, generated by create deployment
+    #   The job ID for this deployment, generated by the create deployment
     #   request.
     #
     # @option params [String] :source_url
-    #   The sourceUrl for this deployment, used when calling start deployment
-    #   without create deployment. SourceUrl can be any HTTP GET url that is
-    #   public accessible and downloads a single zip.
+    #   The source URL for this deployment, used when calling start deployment
+    #   without create deployment. The source URL can be any HTTP GET URL that
+    #   is publicly accessible and downloads a single .zip file.
     #
     # @return [Types::StartDeploymentResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1917,34 +1953,36 @@ module Aws::Amplify
       req.send_request(options)
     end
 
-    # Starts a new job for a branch, part of an Amplify App.
+    # Starts a new job for a branch of an Amplify app.
     #
     # @option params [required, String] :app_id
-    #   Unique Id for an Amplify App.
+    #   The unique ID for an Amplify app.
     #
     # @option params [required, String] :branch_name
-    #   Name for the branch, for the Job.
+    #   The branch name for the job.
     #
     # @option params [String] :job_id
-    #   Unique Id for an existing job. Required for "RETRY" JobType.
+    #   The unique ID for an existing job. This is required if the value of
+    #   `jobType` is `RETRY`.
     #
     # @option params [required, String] :job_type
-    #   Type for the Job. Available JobTypes are: \\n "RELEASE": Start a new
-    #   job with the latest change from the specified branch. Only available
-    #   for apps that have connected to a repository. "RETRY": Retry an
-    #   existing job. JobId is required for this type of job.
+    #   Describes the type for the job. The job type `RELEASE` starts a new
+    #   job with the latest change from the specified branch. This value is
+    #   available only for apps that are connected to a repository. The job
+    #   type `RETRY` retries an existing job. If the job type value is
+    #   `RETRY`, the `jobId` is also required.
     #
     # @option params [String] :job_reason
-    #   Descriptive reason for starting this job.
+    #   A descriptive reason for starting this job.
     #
     # @option params [String] :commit_id
-    #   Commit Id from 3rd party repository provider for the Job.
+    #   The commit ID from a third-party repository provider for the job.
     #
     # @option params [String] :commit_message
-    #   Commit message from 3rd party repository provider for the Job.
+    #   The commit message from a third-party repository provider for the job.
     #
     # @option params [Time,DateTime,Date,Integer,String] :commit_time
-    #   Commit date / time for the Job.
+    #   The commit date and time for the job.
     #
     # @return [Types::StartJobResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1984,17 +2022,16 @@ module Aws::Amplify
       req.send_request(options)
     end
 
-    # Stop a job that is in progress, for an Amplify branch, part of Amplify
-    # App.
+    # Stops a job that is in progress for a branch of an Amplify app.
     #
     # @option params [required, String] :app_id
-    #   Unique Id for an Amplify App.
+    #   The unique ID for an Amplify app.
     #
     # @option params [required, String] :branch_name
-    #   Name for the branch, for the Job.
+    #   The name for the branch, for the job.
     #
     # @option params [required, String] :job_id
-    #   Unique Id for the Job.
+    #   The unique id for the job.
     #
     # @return [Types::StopJobResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -2029,13 +2066,13 @@ module Aws::Amplify
       req.send_request(options)
     end
 
-    # Tag resource with tag key and value.
+    # Tags the resource with a tag key and value.
     #
     # @option params [required, String] :resource_arn
-    #   Resource arn used to tag resource.
+    #   The Amazon Resource Name (ARN) to use to tag a resource.
     #
     # @option params [required, Hash<String,String>] :tags
-    #   Tags used to tag resource.
+    #   The tags used to tag the resource.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -2057,13 +2094,13 @@ module Aws::Amplify
       req.send_request(options)
     end
 
-    # Untag resource with resourceArn.
+    # Untags a resource with a specified Amazon Resource Name (ARN).
     #
     # @option params [required, String] :resource_arn
-    #   Resource arn used to untag resource.
+    #   The Amazon Resource Name (ARN) to use to untag a resource.
     #
     # @option params [required, Array<String>] :tag_keys
-    #   Tag keys used to untag resource.
+    #   The tag keys to use to untag a resource.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -2083,62 +2120,68 @@ module Aws::Amplify
       req.send_request(options)
     end
 
-    # Updates an existing Amplify App.
+    # Updates an existing Amplify app.
     #
     # @option params [required, String] :app_id
-    #   Unique Id for an Amplify App.
+    #   The unique ID for an Amplify app.
     #
     # @option params [String] :name
-    #   Name for an Amplify App.
+    #   The name for an Amplify app.
     #
     # @option params [String] :description
-    #   Description for an Amplify App.
+    #   The description for an Amplify app.
     #
     # @option params [String] :platform
-    #   Platform for an Amplify App.
+    #   The platform for an Amplify app.
     #
     # @option params [String] :iam_service_role_arn
-    #   IAM service role for an Amplify App.
+    #   The AWS Identity and Access Management (IAM) service role for an
+    #   Amplify app.
     #
     # @option params [Hash<String,String>] :environment_variables
-    #   Environment Variables for an Amplify App.
+    #   The environment variables for an Amplify app.
     #
     # @option params [Boolean] :enable_branch_auto_build
-    #   Enables branch auto-building for an Amplify App.
+    #   Enables branch auto-building for an Amplify app.
+    #
+    # @option params [Boolean] :enable_branch_auto_deletion
+    #   Automatically disconnects a branch in the Amplify Console when you
+    #   delete a branch from your Git repository.
     #
     # @option params [Boolean] :enable_basic_auth
-    #   Enables Basic Authorization for an Amplify App.
+    #   Enables basic authorization for an Amplify app.
     #
     # @option params [String] :basic_auth_credentials
-    #   Basic Authorization credentials for an Amplify App.
+    #   The basic authorization credentials for an Amplify app.
     #
     # @option params [Array<Types::CustomRule>] :custom_rules
-    #   Custom redirect / rewrite rules for an Amplify App.
+    #   The custom redirect and rewrite rules for an Amplify app.
     #
     # @option params [String] :build_spec
-    #   BuildSpec for an Amplify App.
+    #   The build specification (build spec) for an Amplify app.
     #
     # @option params [Boolean] :enable_auto_branch_creation
-    #   Enables automated branch creation for the Amplify App.
+    #   Enables automated branch creation for the Amplify app.
     #
     # @option params [Array<String>] :auto_branch_creation_patterns
-    #   Automated branch creation glob patterns for the Amplify App.
+    #   Describes the automated branch creation glob patterns for the Amplify
+    #   app.
     #
     # @option params [Types::AutoBranchCreationConfig] :auto_branch_creation_config
-    #   Automated branch creation branchConfig for the Amplify App.
+    #   The automated branch creation configuration for the Amplify app.
     #
     # @option params [String] :repository
-    #   Repository for an Amplify App
+    #   The name of the repository for an Amplify app
     #
     # @option params [String] :oauth_token
-    #   OAuth token for 3rd party source control system for an Amplify App,
-    #   used to create webhook and read-only deploy key. OAuth token is not
-    #   stored.
+    #   The OAuth token for a third-party source control system for an Amplify
+    #   app. The token is used to create a webhook and a read-only deploy key.
+    #   The OAuth token is not stored.
     #
     # @option params [String] :access_token
-    #   Personal Access token for 3rd party source control system for an
-    #   Amplify App, used to create webhook and read-only deploy key. Token is
-    #   not stored.
+    #   The personal access token for a third-party source control system for
+    #   an Amplify app. The token is used to create webhook and a read-only
+    #   deploy key. The token is not stored.
     #
     # @return [Types::UpdateAppResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -2156,6 +2199,7 @@ module Aws::Amplify
     #       "EnvKey" => "EnvValue",
     #     },
     #     enable_branch_auto_build: false,
+    #     enable_branch_auto_deletion: false,
     #     enable_basic_auth: false,
     #     basic_auth_credentials: "BasicAuthCredentials",
     #     custom_rules: [
@@ -2204,6 +2248,7 @@ module Aws::Amplify
     #   resp.app.environment_variables["EnvKey"] #=> String
     #   resp.app.default_domain #=> String
     #   resp.app.enable_branch_auto_build #=> Boolean
+    #   resp.app.enable_branch_auto_deletion #=> Boolean
     #   resp.app.enable_basic_auth #=> Boolean
     #   resp.app.basic_auth_credentials #=> String
     #   resp.app.custom_rules #=> Array
@@ -2239,22 +2284,22 @@ module Aws::Amplify
       req.send_request(options)
     end
 
-    # Updates a branch for an Amplify App.
+    # Updates a branch for an Amplify app.
     #
     # @option params [required, String] :app_id
-    #   Unique Id for an Amplify App.
+    #   The unique ID for an Amplify app.
     #
     # @option params [required, String] :branch_name
-    #   Name for the branch.
+    #   The name for the branch.
     #
     # @option params [String] :description
-    #   Description for the branch.
+    #   The description for the branch.
     #
     # @option params [String] :framework
-    #   Framework for the branch.
+    #   The framework for the branch.
     #
     # @option params [String] :stage
-    #   Stage for the branch.
+    #   Describes the current stage for the branch.
     #
     # @option params [Boolean] :enable_notification
     #   Enables notifications for the branch.
@@ -2263,31 +2308,33 @@ module Aws::Amplify
     #   Enables auto building for the branch.
     #
     # @option params [Hash<String,String>] :environment_variables
-    #   Environment Variables for the branch.
+    #   The environment variables for the branch.
     #
     # @option params [String] :basic_auth_credentials
-    #   Basic Authorization credentials for the branch.
+    #   The basic authorization credentials for the branch.
     #
     # @option params [Boolean] :enable_basic_auth
-    #   Enables Basic Auth for the branch.
+    #   Enables basic authorization for the branch.
     #
     # @option params [String] :build_spec
-    #   BuildSpec for the branch.
+    #   The build specification (build spec) for the branch.
     #
     # @option params [String] :ttl
-    #   The content TTL for the website in seconds.
+    #   The content Time to Live (TTL) for the website in seconds.
     #
     # @option params [String] :display_name
-    #   Display name for a branch, will use as the default domain prefix.
+    #   The display name for a branch. This is used as the default domain
+    #   prefix.
     #
     # @option params [Boolean] :enable_pull_request_preview
-    #   Enables Pull Request Preview for this branch.
+    #   Enables pull request preview for this branch.
     #
     # @option params [String] :pull_request_environment_name
-    #   The Amplify Environment name for the pull request.
+    #   The Amplify environment name for the pull request.
     #
     # @option params [String] :backend_environment_arn
-    #   ARN for a Backend Environment, part of an Amplify App.
+    #   The Amazon Resource Name (ARN) for a backend environment that is part
+    #   of an Amplify app.
     #
     # @return [Types::UpdateBranchResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -2358,20 +2405,26 @@ module Aws::Amplify
       req.send_request(options)
     end
 
-    # Create a new DomainAssociation on an App
+    # Creates a new domain association for an Amplify app.
     #
     # @option params [required, String] :app_id
-    #   Unique Id for an Amplify App.
+    #   The unique ID for an Amplify app.
     #
     # @option params [required, String] :domain_name
-    #   Name of the domain.
+    #   The name of the domain.
     #
     # @option params [Boolean] :enable_auto_sub_domain
-    #   Enables automated creation of Subdomains for branches. (Currently not
-    #   supported)
+    #   Enables the automated creation of subdomains for branches.
     #
     # @option params [required, Array<Types::SubDomainSetting>] :sub_domain_settings
-    #   Setting structure for the Subdomain.
+    #   Describes the settings for the subdomain.
+    #
+    # @option params [Array<String>] :auto_sub_domain_creation_patterns
+    #   Sets the branch patterns for automatic subdomain creation.
+    #
+    # @option params [String] :auto_sub_domain_iam_role
+    #   The required AWS Identity and Access Management (IAM) service role for
+    #   the Amazon Resource Name (ARN) for automatically creating subdomains.
     #
     # @return [Types::UpdateDomainAssociationResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -2389,6 +2442,8 @@ module Aws::Amplify
     #         branch_name: "BranchName", # required
     #       },
     #     ],
+    #     auto_sub_domain_creation_patterns: ["AutoSubDomainCreationPattern"],
+    #     auto_sub_domain_iam_role: "AutoSubDomainIAMRole",
     #   })
     #
     # @example Response structure
@@ -2396,6 +2451,9 @@ module Aws::Amplify
     #   resp.domain_association.domain_association_arn #=> String
     #   resp.domain_association.domain_name #=> String
     #   resp.domain_association.enable_auto_sub_domain #=> Boolean
+    #   resp.domain_association.auto_sub_domain_creation_patterns #=> Array
+    #   resp.domain_association.auto_sub_domain_creation_patterns[0] #=> String
+    #   resp.domain_association.auto_sub_domain_iam_role #=> String
     #   resp.domain_association.domain_status #=> String, one of "PENDING_VERIFICATION", "IN_PROGRESS", "AVAILABLE", "PENDING_DEPLOYMENT", "FAILED", "CREATING", "REQUESTING_CERTIFICATE", "UPDATING"
     #   resp.domain_association.status_reason #=> String
     #   resp.domain_association.certificate_verification_dns_record #=> String
@@ -2414,16 +2472,16 @@ module Aws::Amplify
       req.send_request(options)
     end
 
-    # Update a webhook.
+    # Updates a webhook.
     #
     # @option params [required, String] :webhook_id
-    #   Unique Id for a webhook.
+    #   The unique ID for a webhook.
     #
     # @option params [String] :branch_name
-    #   Name for a branch, part of an Amplify App.
+    #   The name for a branch that is part of an Amplify app.
     #
     # @option params [String] :description
-    #   Description for a webhook.
+    #   The description for a webhook.
     #
     # @return [Types::UpdateWebhookResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -2469,7 +2527,7 @@ module Aws::Amplify
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-amplify'
-      context[:gem_version] = '1.19.0'
+      context[:gem_version] = '1.20.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 
