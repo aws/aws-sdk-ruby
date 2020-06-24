@@ -1,6 +1,8 @@
 Unreleased Changes
 ------------------
 
+* Issue - Don't overwrite `host` header in sigv4 signer if given.
+
 1.2.0 (2020-06-17)
 ------------------
 

@@ -144,6 +144,16 @@ module Aws
           expect(signature.headers['host']).to eq('domain.com')
         end
 
+        context 'when a Host header is provided' do
+          it 'uses the provided Host header' do
+            signature = Signer.new(options).sign_request(
+              request.merge(headers: { 'host' => 'otherdomain.com' })
+            )
+
+            expect(signature.headers['host']).to eql('otherdomain.com')
+          end
+        end
+
         context 'when credentials are not set' do
           let(:creds) do
             Credentials.new(access_key_id: '', secret_access_key: '')
