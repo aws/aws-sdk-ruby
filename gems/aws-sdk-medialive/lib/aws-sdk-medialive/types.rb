@@ -1105,6 +1105,20 @@ module Aws::MediaLive
     #               hls_timed_metadata_settings: {
     #                 id_3: "__string", # required
     #               },
+    #               input_prepare_settings: {
+    #                 input_attachment_name_reference: "__string", # required
+    #                 input_clipping_settings: {
+    #                   input_timecode_source: "ZEROBASED", # required, accepts ZEROBASED, EMBEDDED
+    #                   start_timecode: {
+    #                     timecode: "__string",
+    #                   },
+    #                   stop_timecode: {
+    #                     last_frame_clipping_behavior: "EXCLUDE_LAST_FRAME", # accepts EXCLUDE_LAST_FRAME, INCLUDE_LAST_FRAME
+    #                     timecode: "__string",
+    #                   },
+    #                 },
+    #                 url_path: ["__string"],
+    #               },
     #               input_switch_settings: {
     #                 input_attachment_name_reference: "__string", # required
     #                 input_clipping_settings: {
@@ -1271,6 +1285,20 @@ module Aws::MediaLive
     #                 },
     #                 hls_timed_metadata_settings: {
     #                   id_3: "__string", # required
+    #                 },
+    #                 input_prepare_settings: {
+    #                   input_attachment_name_reference: "__string", # required
+    #                   input_clipping_settings: {
+    #                     input_timecode_source: "ZEROBASED", # required, accepts ZEROBASED, EMBEDDED
+    #                     start_timecode: {
+    #                       timecode: "__string",
+    #                     },
+    #                     stop_timecode: {
+    #                       last_frame_clipping_behavior: "EXCLUDE_LAST_FRAME", # accepts EXCLUDE_LAST_FRAME, INCLUDE_LAST_FRAME
+    #                       timecode: "__string",
+    #                     },
+    #                   },
+    #                   url_path: ["__string"],
     #                 },
     #                 input_switch_settings: {
     #                   input_attachment_name_reference: "__string", # required
@@ -2558,6 +2586,9 @@ module Aws::MediaLive
     #               name: "__string", # required
     #             },
     #           ],
+    #           feature_activations: {
+    #             input_prepare_schedule_actions: "DISABLED", # accepts DISABLED, ENABLED
+    #           },
     #           global_configuration: {
     #             initial_audio_gain: 1,
     #             input_end_action: "NONE", # accepts NONE, SWITCH_AND_LOOP_INPUTS
@@ -5424,6 +5455,9 @@ module Aws::MediaLive
     #             name: "__string", # required
     #           },
     #         ],
+    #         feature_activations: {
+    #           input_prepare_schedule_actions: "DISABLED", # accepts DISABLED, ENABLED
+    #         },
     #         global_configuration: {
     #           initial_audio_gain: 1,
     #           input_end_action: "NONE", # accepts NONE, SWITCH_AND_LOOP_INPUTS
@@ -5948,6 +5982,10 @@ module Aws::MediaLive
     #   Settings for caption decriptions
     #   @return [Array<Types::CaptionDescription>]
     #
+    # @!attribute [rw] feature_activations
+    #   Feature Activations
+    #   @return [Types::FeatureActivations]
+    #
     # @!attribute [rw] global_configuration
     #   Configuration settings that apply to the event as a whole.
     #   @return [Types::GlobalConfiguration]
@@ -5975,11 +6013,35 @@ module Aws::MediaLive
       :avail_configuration,
       :blackout_slate,
       :caption_descriptions,
+      :feature_activations,
       :global_configuration,
       :nielsen_configuration,
       :output_groups,
       :timecode_config,
       :video_descriptions)
+      include Aws::Structure
+    end
+
+    # Feature Activations
+    #
+    # @note When making an API call, you may pass FeatureActivations
+    #   data as a hash:
+    #
+    #       {
+    #         input_prepare_schedule_actions: "DISABLED", # accepts DISABLED, ENABLED
+    #       }
+    #
+    # @!attribute [rw] input_prepare_schedule_actions
+    #   Enables the Input Prepare feature. You can create Input Prepare
+    #   actions in the schedule only if this feature is enabled. If you
+    #   disable the feature on an existing schedule, make sure that you
+    #   first delete all input prepare actions from the schedule.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/FeatureActivations AWS API Documentation
+    #
+    class FeatureActivations < Struct.new(
+      :input_prepare_schedule_actions)
       include Aws::Structure
     end
 
@@ -8655,6 +8717,53 @@ module Aws::MediaLive
       :input_loss_image_slate,
       :input_loss_image_type,
       :repeat_frame_msec)
+      include Aws::Structure
+    end
+
+    # Action to prepare an input for a future immediate input switch.
+    #
+    # @note When making an API call, you may pass InputPrepareScheduleActionSettings
+    #   data as a hash:
+    #
+    #       {
+    #         input_attachment_name_reference: "__string", # required
+    #         input_clipping_settings: {
+    #           input_timecode_source: "ZEROBASED", # required, accepts ZEROBASED, EMBEDDED
+    #           start_timecode: {
+    #             timecode: "__string",
+    #           },
+    #           stop_timecode: {
+    #             last_frame_clipping_behavior: "EXCLUDE_LAST_FRAME", # accepts EXCLUDE_LAST_FRAME, INCLUDE_LAST_FRAME
+    #             timecode: "__string",
+    #           },
+    #         },
+    #         url_path: ["__string"],
+    #       }
+    #
+    # @!attribute [rw] input_attachment_name_reference
+    #   The name of the input attachment that should be prepared by this
+    #   action. If no name is provided, the action will stop the most recent
+    #   prepare (if any) when activated.
+    #   @return [String]
+    #
+    # @!attribute [rw] input_clipping_settings
+    #   Settings to let you create a clip of the file input, in order to set
+    #   up the input to ingest only a portion of the file.
+    #   @return [Types::InputClippingSettings]
+    #
+    # @!attribute [rw] url_path
+    #   The value for the variable portion of the URL for the dynamic input,
+    #   for this instance of the input. Each time you use the same dynamic
+    #   input in an input switch action, you can provide a different value,
+    #   in order to connect the input to a different content source.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/InputPrepareScheduleActionSettings AWS API Documentation
+    #
+    class InputPrepareScheduleActionSettings < Struct.new(
+      :input_attachment_name_reference,
+      :input_clipping_settings,
+      :url_path)
       include Aws::Structure
     end
 
@@ -12937,6 +13046,20 @@ module Aws::MediaLive
     #           hls_timed_metadata_settings: {
     #             id_3: "__string", # required
     #           },
+    #           input_prepare_settings: {
+    #             input_attachment_name_reference: "__string", # required
+    #             input_clipping_settings: {
+    #               input_timecode_source: "ZEROBASED", # required, accepts ZEROBASED, EMBEDDED
+    #               start_timecode: {
+    #                 timecode: "__string",
+    #               },
+    #               stop_timecode: {
+    #                 last_frame_clipping_behavior: "EXCLUDE_LAST_FRAME", # accepts EXCLUDE_LAST_FRAME, INCLUDE_LAST_FRAME
+    #                 timecode: "__string",
+    #               },
+    #             },
+    #             url_path: ["__string"],
+    #           },
     #           input_switch_settings: {
     #             input_attachment_name_reference: "__string", # required
     #             input_clipping_settings: {
@@ -13063,6 +13186,20 @@ module Aws::MediaLive
     #         hls_timed_metadata_settings: {
     #           id_3: "__string", # required
     #         },
+    #         input_prepare_settings: {
+    #           input_attachment_name_reference: "__string", # required
+    #           input_clipping_settings: {
+    #             input_timecode_source: "ZEROBASED", # required, accepts ZEROBASED, EMBEDDED
+    #             start_timecode: {
+    #               timecode: "__string",
+    #             },
+    #             stop_timecode: {
+    #               last_frame_clipping_behavior: "EXCLUDE_LAST_FRAME", # accepts EXCLUDE_LAST_FRAME, INCLUDE_LAST_FRAME
+    #               timecode: "__string",
+    #             },
+    #           },
+    #           url_path: ["__string"],
+    #         },
     #         input_switch_settings: {
     #           input_attachment_name_reference: "__string", # required
     #           input_clipping_settings: {
@@ -13147,6 +13284,10 @@ module Aws::MediaLive
     #   Action to insert HLS metadata
     #   @return [Types::HlsTimedMetadataScheduleActionSettings]
     #
+    # @!attribute [rw] input_prepare_settings
+    #   Action to prepare an input for a future immediate input switch
+    #   @return [Types::InputPrepareScheduleActionSettings]
+    #
     # @!attribute [rw] input_switch_settings
     #   Action to switch the input
     #   @return [Types::InputSwitchScheduleActionSettings]
@@ -13180,6 +13321,7 @@ module Aws::MediaLive
     class ScheduleActionSettings < Struct.new(
       :hls_id_3_segment_tagging_settings,
       :hls_timed_metadata_settings,
+      :input_prepare_settings,
       :input_switch_settings,
       :pause_state_settings,
       :scte_35_return_to_network_settings,
@@ -15018,6 +15160,9 @@ module Aws::MediaLive
     #               name: "__string", # required
     #             },
     #           ],
+    #           feature_activations: {
+    #             input_prepare_schedule_actions: "DISABLED", # accepts DISABLED, ENABLED
+    #           },
     #           global_configuration: {
     #             initial_audio_gain: 1,
     #             input_end_action: "NONE", # accepts NONE, SWITCH_AND_LOOP_INPUTS

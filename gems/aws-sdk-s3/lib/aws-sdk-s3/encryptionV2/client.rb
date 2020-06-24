@@ -252,16 +252,22 @@ module Aws
         # Uploads an object to Amazon S3, encrypting data client-side.
         # See {S3::Client#put_object} for documentation on accepted
         # request parameters.
+        # @option params [Hash] :kms_encryption_context Additional encryption
+        #   context to use with KMS.  Applies only when KMS is used. In order
+        #   to decrypt the object you will need to provide the identical
+        #   :kms_encryption_context to `get_object`.
         # @option (see S3::Client#put_object)
         # @return (see S3::Client#put_object)
         # @see S3::Client#put_object
         def put_object(params = {})
+          kms_encryption_context = params.delete(:kms_encryption_context)
           req = @client.build_request(:put_object, params)
           req.handlers.add(EncryptHandler, priority: 95)
           req.context[:encryption] = {
             cipher_provider: @cipher_provider,
             envelope_location: @envelope_location,
             instruction_file_suffix: @instruction_file_suffix,
+            kms_encryption_context: kms_encryption_context
           }
           req.send_request
         end
@@ -274,6 +280,8 @@ module Aws
         #   envelope. You should not set this option when the envelope
         #   is stored in the object metadata. Defaults to
         #   {#instruction_file_suffix}.
+        # @option params [Hash] :kms_encryption_context Additional encryption
+        #   context to use with KMS.  Applies only when KMS is used.
         # @option params [String] :instruction_file_suffix
         # @option (see S3::Client#get_object)
         # @return (see S3::Client#get_object)
@@ -284,12 +292,14 @@ module Aws
             raise NotImplementedError, '#get_object with :range not supported'
           end
           envelope_location, instruction_file_suffix = envelope_options(params)
+          kms_encryption_context = params.delete(:kms_encryption_context)
           req = @client.build_request(:get_object, params)
           req.handlers.add(DecryptHandler)
           req.context[:encryption] = {
             cipher_provider: @cipher_provider,
             envelope_location: envelope_location,
             instruction_file_suffix: instruction_file_suffix,
+            kms_encryption_context: kms_encryption_context
           }
           req.send_request(target: block)
         end

@@ -1449,9 +1449,9 @@ module Aws::ElastiCache
     # @!attribute [rw] preferred_availability_zone
     #   The EC2 Availability Zone in which the cluster is created.
     #
-    #   All nodes belonging to this Memcached cluster are placed in the
-    #   preferred Availability Zone. If you want to create your nodes across
-    #   multiple Availability Zones, use `PreferredAvailabilityZones`.
+    #   All nodes belonging to this cluster are placed in the preferred
+    #   Availability Zone. If you want to create your nodes across multiple
+    #   Availability Zones, use `PreferredAvailabilityZones`.
     #
     #   Default: System chosen Availability Zone.
     #   @return [String]
@@ -2084,9 +2084,6 @@ module Aws::ElastiCache
     #   Specifies whether a read-only replica is automatically promoted to
     #   read/write primary if the existing primary fails.
     #
-    #   If `true`, Multi-AZ is enabled for this replication group. If
-    #   `false`, Multi-AZ is disabled for this replication group.
-    #
     #   `AutomaticFailoverEnabled` must be enabled for Redis (cluster mode
     #   enabled) replication groups.
     #
@@ -2103,10 +2100,17 @@ module Aws::ElastiCache
     #   @return [Boolean]
     #
     # @!attribute [rw] multi_az_enabled
+    #   A flag indicating if you have Multi-AZ enabled to enhance fault
+    #   tolerance. For more information, see [Minimizing Downtime:
+    #   Multi-AZ][1].
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/AutoFailover.html
     #   @return [Boolean]
     #
     # @!attribute [rw] num_cache_clusters
-    #   The number of nodes in the cluster.
+    #   The number of clusters this replication group initially has.
     #
     #   This parameter is not used if there is more than one node group
     #   (shard). You should use `ReplicasPerNodeGroup` instead.
@@ -5416,6 +5420,13 @@ module Aws::ElastiCache
     #   @return [Boolean]
     #
     # @!attribute [rw] multi_az_enabled
+    #   A flag indicating if you have Multi-AZ enabled to enhance fault
+    #   tolerance. For more information, see [Minimizing Downtime:
+    #   Multi-AZ][1].
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/AutoFailover.html
     #   @return [Boolean]
     #
     # @!attribute [rw] node_group_id
@@ -5741,7 +5752,7 @@ module Aws::ElastiCache
     #
     # @!attribute [rw] status
     #   The current state of this replication group - `creating`,
-    #   `available`, etc.
+    #   `available`, `modifying`, `deleting`.
     #   @return [String]
     #
     # @!attribute [rw] primary_endpoint
@@ -6485,6 +6496,13 @@ module Aws::ElastiCache
     #   @return [String]
     #
     # @!attribute [rw] multi_az
+    #   A flag indicating if you have Multi-AZ enabled to enhance fault
+    #   tolerance. For more information, see [Minimizing Downtime:
+    #   Multi-AZ][1]
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/AutoFailover.html
     #   @return [String]
     #
     # @!attribute [rw] configuration_endpoint

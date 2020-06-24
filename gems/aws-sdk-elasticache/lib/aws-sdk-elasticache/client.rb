@@ -913,9 +913,9 @@ module Aws::ElastiCache
     # @option params [String] :preferred_availability_zone
     #   The EC2 Availability Zone in which the cluster is created.
     #
-    #   All nodes belonging to this Memcached cluster are placed in the
-    #   preferred Availability Zone. If you want to create your nodes across
-    #   multiple Availability Zones, use `PreferredAvailabilityZones`.
+    #   All nodes belonging to this cluster are placed in the preferred
+    #   Availability Zone. If you want to create your nodes across multiple
+    #   Availability Zones, use `PreferredAvailabilityZones`.
     #
     #   Default: System chosen Availability Zone.
     #
@@ -1760,9 +1760,6 @@ module Aws::ElastiCache
     #   Specifies whether a read-only replica is automatically promoted to
     #   read/write primary if the existing primary fails.
     #
-    #   If `true`, Multi-AZ is enabled for this replication group. If `false`,
-    #   Multi-AZ is disabled for this replication group.
-    #
     #   `AutomaticFailoverEnabled` must be enabled for Redis (cluster mode
     #   enabled) replication groups.
     #
@@ -1778,9 +1775,16 @@ module Aws::ElastiCache
     #   * Redis (cluster mode enabled): T1 node types.
     #
     # @option params [Boolean] :multi_az_enabled
+    #   A flag indicating if you have Multi-AZ enabled to enhance fault
+    #   tolerance. For more information, see [Minimizing Downtime:
+    #   Multi-AZ][1].
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/AutoFailover.html
     #
     # @option params [Integer] :num_cache_clusters
-    #   The number of nodes in the cluster.
+    #   The number of clusters this replication group initially has.
     #
     #   This parameter is not used if there is more than one node group
     #   (shard). You should use `ReplicasPerNodeGroup` instead.
@@ -6682,7 +6686,7 @@ module Aws::ElastiCache
     end
 
     # Used to failover the primary region to a selected secondary region.
-    # The selected secondary region will be come primary, and all other
+    # The selected secondary region will become primary, and all other
     # clusters will become secondary.
     #
     # @option params [required, String] :global_replication_group_id
@@ -7802,6 +7806,13 @@ module Aws::ElastiCache
     #   * Redis (cluster mode enabled): T1 node types.
     #
     # @option params [Boolean] :multi_az_enabled
+    #   A flag indicating if you have Multi-AZ enabled to enhance fault
+    #   tolerance. For more information, see [Minimizing Downtime:
+    #   Multi-AZ][1].
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/AutoFailover.html
     #
     # @option params [String] :node_group_id
     #   Deprecated. This parameter is not used.
@@ -8933,7 +8944,7 @@ module Aws::ElastiCache
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-elasticache'
-      context[:gem_version] = '1.37.1'
+      context[:gem_version] = '1.38.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

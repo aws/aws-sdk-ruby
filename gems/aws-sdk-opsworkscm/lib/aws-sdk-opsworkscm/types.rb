@@ -323,7 +323,7 @@ module Aws::OpsWorksCM
     #         custom_certificate: "CustomCertificate",
     #         custom_private_key: "CustomPrivateKey",
     #         disable_automated_backup: false,
-    #         engine: "String",
+    #         engine: "String", # required
     #         engine_model: "String",
     #         engine_version: "String",
     #         engine_attributes: [
@@ -417,8 +417,8 @@ module Aws::OpsWorksCM
     #
     # @!attribute [rw] engine_version
     #   The major release version of the engine that you want to use. For a
-    #   Chef server, the valid value for EngineVersion is currently `12`.
-    #   For a Puppet server, the valid value is `2017`.
+    #   Chef server, the valid value for EngineVersion is currently `2`. For
+    #   a Puppet server, the valid value is `2017`.
     #   @return [String]
     #
     # @!attribute [rw] engine_attributes
@@ -491,10 +491,11 @@ module Aws::OpsWorksCM
     # @!attribute [rw] preferred_maintenance_window
     #   The start time for a one-hour period each week during which AWS
     #   OpsWorks CM performs maintenance on the instance. Valid values must
-    #   be specified in the following format: `DDD:HH:MM`. The specified
-    #   time is in coordinated universal time (UTC). The default value is a
-    #   random one-hour period on Tuesday, Wednesday, or Friday. See
-    #   `TimeWindowDefinition` for more information.
+    #   be specified in the following format: `DDD:HH:MM`. `MM` must be
+    #   specified as `00`. The specified time is in coordinated universal
+    #   time (UTC). The default value is a random one-hour period on
+    #   Tuesday, Wednesday, or Friday. See `TimeWindowDefinition` for more
+    #   information.
     #
     #   **Example:** `Mon:08:00`, which represents a start time of every
     #   Monday at 08:00 UTC. (8:00 a.m.)
@@ -510,8 +511,9 @@ module Aws::OpsWorksCM
     #
     #   * `DDD:HH:MM` for weekly backups
     #
-    #   The specified time is in coordinated universal time (UTC). The
-    #   default value is a random, daily start time.
+    #   `MM` must be specified as `00`. The specified time is in coordinated
+    #   universal time (UTC). The default value is a random, daily start
+    #   time.
     #
     #   **Example:** `08:00`, which represents a daily start time of 08:00
     #   UTC.
@@ -1337,7 +1339,7 @@ module Aws::OpsWorksCM
     #
     # @!attribute [rw] engine_version
     #   The engine version of the server. For a Chef server, the valid value
-    #   for EngineVersion is currently `12`. For a Puppet server, the valid
+    #   for EngineVersion is currently `2`. For a Puppet server, the valid
     #   value is `2017`.
     #   @return [String]
     #

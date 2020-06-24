@@ -913,9 +913,8 @@ module Aws::Rekognition
     end
 
     # Deletes an Amazon Rekognition Custom Labels project. To delete a
-    # project you must first delete all versions of the model associated
-    # with the project. To delete a version of a model, see
-    # DeleteProjectVersion.
+    # project you must first delete all models associated with the project.
+    # To delete a model, see DeleteProjectVersion.
     #
     # This operation requires permissions to perform the
     # `rekognition:DeleteProject` action.
@@ -944,12 +943,12 @@ module Aws::Rekognition
       req.send_request(options)
     end
 
-    # Deletes a version of a model.
+    # Deletes an Amazon Rekognition Custom Labels model.
     #
-    # You must first stop the model before you can delete it. To check if a
-    # model is running, use the `Status` field returned from
+    # You can't delete a model if it is running or if it is training. To
+    # check the status of a model, use the `Status` field returned from
     # DescribeProjectVersions. To stop a running model call
-    # StopProjectVersion.
+    # StopProjectVersion. If the model is training, wait until it finishes.
     #
     # This operation requires permissions to perform the
     # `rekognition:DeleteProjectVersion` action.
@@ -1056,7 +1055,11 @@ module Aws::Rekognition
     # @option params [Array<String>] :version_names
     #   A list of model version names that you want to describe. You can add
     #   up to 10 model version names to the list. If you don't specify a
-    #   value, all model descriptions are returned.
+    #   value, all model descriptions are returned. A version name is part of
+    #   a model (ProjectVersion) ARN. For example,
+    #   `my-model.2020-01-21T09.10.15` is the version name in the following
+    #   ARN.
+    #   `arn:aws:rekognition:us-east-1:123456789012:project/getting-started/version/my-model.2020-01-21T09.10.15/1234567890123`.
     #
     # @option params [String] :next_token
     #   If the previous response was incomplete (because there is more results
@@ -2714,6 +2717,116 @@ module Aws::Rekognition
       req.send_request(options)
     end
 
+    # Gets the segment detection results of a Amazon Rekognition Video
+    # analysis started by StartSegmentDetection.
+    #
+    # Segment detection with Amazon Rekognition Video is an asynchronous
+    # operation. You start segment detection by calling
+    # StartSegmentDetection which returns a job identifier (`JobId`). When
+    # the segment detection operation finishes, Amazon Rekognition publishes
+    # a completion status to the Amazon Simple Notification Service topic
+    # registered in the initial call to `StartSegmentDetection`. To get the
+    # results of the segment detection operation, first check that the
+    # status value published to the Amazon SNS topic is `SUCCEEDED`. if so,
+    # call `GetSegmentDetection` and pass the job identifier (`JobId`) from
+    # the initial call of `StartSegmentDetection`.
+    #
+    # `GetSegmentDetection` returns detected segments in an array
+    # (`Segments`) of SegmentDetection objects. `Segments` is sorted by the
+    # segment types specified in the `SegmentTypes` input parameter of
+    # `StartSegmentDetection`. Each element of the array includes the
+    # detected segment, the precentage confidence in the acuracy of the
+    # detected segment, the type of the segment, and the frame in which the
+    # segment was detected.
+    #
+    # Use `SelectedSegmentTypes` to find out the type of segment detection
+    # requested in the call to `StartSegmentDetection`.
+    #
+    # Use the `MaxResults` parameter to limit the number of segment
+    # detections returned. If there are more results than specified in
+    # `MaxResults`, the value of `NextToken` in the operation response
+    # contains a pagination token for getting the next set of results. To
+    # get the next page of results, call `GetSegmentDetection` and populate
+    # the `NextToken` request parameter with the token value returned from
+    # the previous call to `GetSegmentDetection`.
+    #
+    # For more information, see Detecting Video Segments in Stored Video in
+    # the Amazon Rekognition Developer Guide.
+    #
+    # @option params [required, String] :job_id
+    #   Job identifier for the text detection operation for which you want
+    #   results returned. You get the job identifer from an initial call to
+    #   `StartSegmentDetection`.
+    #
+    # @option params [Integer] :max_results
+    #   Maximum number of results to return per paginated call. The largest
+    #   value you can specify is 1000.
+    #
+    # @option params [String] :next_token
+    #   If the response is truncated, Amazon Rekognition Video returns this
+    #   token that you can use in the subsequent request to retrieve the next
+    #   set of text.
+    #
+    # @return [Types::GetSegmentDetectionResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetSegmentDetectionResponse#job_status #job_status} => String
+    #   * {Types::GetSegmentDetectionResponse#status_message #status_message} => String
+    #   * {Types::GetSegmentDetectionResponse#video_metadata #video_metadata} => Array&lt;Types::VideoMetadata&gt;
+    #   * {Types::GetSegmentDetectionResponse#audio_metadata #audio_metadata} => Array&lt;Types::AudioMetadata&gt;
+    #   * {Types::GetSegmentDetectionResponse#next_token #next_token} => String
+    #   * {Types::GetSegmentDetectionResponse#segments #segments} => Array&lt;Types::SegmentDetection&gt;
+    #   * {Types::GetSegmentDetectionResponse#selected_segment_types #selected_segment_types} => Array&lt;Types::SegmentTypeInfo&gt;
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_segment_detection({
+    #     job_id: "JobId", # required
+    #     max_results: 1,
+    #     next_token: "PaginationToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.job_status #=> String, one of "IN_PROGRESS", "SUCCEEDED", "FAILED"
+    #   resp.status_message #=> String
+    #   resp.video_metadata #=> Array
+    #   resp.video_metadata[0].codec #=> String
+    #   resp.video_metadata[0].duration_millis #=> Integer
+    #   resp.video_metadata[0].format #=> String
+    #   resp.video_metadata[0].frame_rate #=> Float
+    #   resp.video_metadata[0].frame_height #=> Integer
+    #   resp.video_metadata[0].frame_width #=> Integer
+    #   resp.audio_metadata #=> Array
+    #   resp.audio_metadata[0].codec #=> String
+    #   resp.audio_metadata[0].duration_millis #=> Integer
+    #   resp.audio_metadata[0].sample_rate #=> Integer
+    #   resp.audio_metadata[0].number_of_channels #=> Integer
+    #   resp.next_token #=> String
+    #   resp.segments #=> Array
+    #   resp.segments[0].type #=> String, one of "TECHNICAL_CUE", "SHOT"
+    #   resp.segments[0].start_timestamp_millis #=> Integer
+    #   resp.segments[0].end_timestamp_millis #=> Integer
+    #   resp.segments[0].duration_millis #=> Integer
+    #   resp.segments[0].start_timecode_smpte #=> String
+    #   resp.segments[0].end_timecode_smpte #=> String
+    #   resp.segments[0].duration_smpte #=> String
+    #   resp.segments[0].technical_cue_segment.type #=> String, one of "ColorBars", "EndCredits", "BlackFrames"
+    #   resp.segments[0].technical_cue_segment.confidence #=> Float
+    #   resp.segments[0].shot_segment.index #=> Integer
+    #   resp.segments[0].shot_segment.confidence #=> Float
+    #   resp.selected_segment_types #=> Array
+    #   resp.selected_segment_types[0].type #=> String, one of "TECHNICAL_CUE", "SHOT"
+    #   resp.selected_segment_types[0].model_version #=> String
+    #
+    # @overload get_segment_detection(params = {})
+    # @param [Hash] params ({})
+    def get_segment_detection(params = {}, options = {})
+      req = build_request(:get_segment_detection, params)
+      req.send_request(options)
+    end
+
     # Gets the text detection results of a Amazon Rekognition Video analysis
     # started by StartTextDetection.
     #
@@ -2746,7 +2859,7 @@ module Aws::Rekognition
     # to `GetTextDetection`.
     #
     # @option params [required, String] :job_id
-    #   Job identifier for the label detection operation for which you want
+    #   Job identifier for the text detection operation for which you want
     #   results returned. You get the job identifer from an initial call to
     #   `StartTextDetection`.
     #
@@ -2845,7 +2958,7 @@ module Aws::Rekognition
     # For more information, see Model Versioning in the Amazon Rekognition
     # Developer Guide.
     #
-    # If you provide the optional `ExternalImageID` for the input image you
+    # If you provide the optional `ExternalImageId` for the input image you
     # provided, Amazon Rekognition associates this ID with all faces that it
     # detects. When you call the ListFaces operation, the response returns
     # the external ID. You can use this external image ID to create a
@@ -4480,6 +4593,103 @@ module Aws::Rekognition
       req.send_request(options)
     end
 
+    # Starts asynchronous detection of segment detection in a stored video.
+    #
+    # Amazon Rekognition Video can detect segments in a video stored in an
+    # Amazon S3 bucket. Use Video to specify the bucket name and the
+    # filename of the video. `StartSegmentDetection` returns a job
+    # identifier (`JobId`) which you use to get the results of the
+    # operation. When segment detection is finished, Amazon Rekognition
+    # Video publishes a completion status to the Amazon Simple Notification
+    # Service topic that you specify in `NotificationChannel`.
+    #
+    # You can use the `Filters` (StartSegmentDetectionFilters) input
+    # parameter to specify the minimum detection confidence returned in the
+    # response. Within `Filters`, use `ShotFilter`
+    # (StartShotDetectionFilter) to filter detected shots. Use
+    # `TechnicalCueFilter` (StartTechnicalCueDetectionFilter) to filter
+    # technical cues.
+    #
+    # To get the results of the segment detection operation, first check
+    # that the status value published to the Amazon SNS topic is
+    # `SUCCEEDED`. if so, call GetSegmentDetection and pass the job
+    # identifier (`JobId`) from the initial call to `StartSegmentDetection`.
+    #
+    # For more information, see Detecting Video Segments in Stored Video in
+    # the Amazon Rekognition Developer Guide.
+    #
+    # @option params [required, Types::Video] :video
+    #   Video file stored in an Amazon S3 bucket. Amazon Rekognition video
+    #   start operations such as StartLabelDetection use `Video` to specify a
+    #   video for analysis. The supported file formats are .mp4, .mov and
+    #   .avi.
+    #
+    # @option params [String] :client_request_token
+    #   Idempotent token used to identify the start request. If you use the
+    #   same token with multiple `StartSegmentDetection` requests, the same
+    #   `JobId` is returned. Use `ClientRequestToken` to prevent the same job
+    #   from being accidently started more than once.
+    #
+    # @option params [Types::NotificationChannel] :notification_channel
+    #   The ARN of the Amazon SNS topic to which you want Amazon Rekognition
+    #   Video to publish the completion status of the segment detection
+    #   operation.
+    #
+    # @option params [String] :job_tag
+    #   An identifier you specify that's returned in the completion
+    #   notification that's published to your Amazon Simple Notification
+    #   Service topic. For example, you can use `JobTag` to group related jobs
+    #   and identify them in the completion notification.
+    #
+    # @option params [Types::StartSegmentDetectionFilters] :filters
+    #   Filters for technical cue or shot detection.
+    #
+    # @option params [required, Array<String>] :segment_types
+    #   An array of segment types to detect in the video. Valid values are
+    #   TECHNICAL\_CUE and SHOT.
+    #
+    # @return [Types::StartSegmentDetectionResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::StartSegmentDetectionResponse#job_id #job_id} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.start_segment_detection({
+    #     video: { # required
+    #       s3_object: {
+    #         bucket: "S3Bucket",
+    #         name: "S3ObjectName",
+    #         version: "S3ObjectVersion",
+    #       },
+    #     },
+    #     client_request_token: "ClientRequestToken",
+    #     notification_channel: {
+    #       sns_topic_arn: "SNSTopicArn", # required
+    #       role_arn: "RoleArn", # required
+    #     },
+    #     job_tag: "JobTag",
+    #     filters: {
+    #       technical_cue_filter: {
+    #         min_segment_confidence: 1.0,
+    #       },
+    #       shot_filter: {
+    #         min_segment_confidence: 1.0,
+    #       },
+    #     },
+    #     segment_types: ["TECHNICAL_CUE"], # required, accepts TECHNICAL_CUE, SHOT
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.job_id #=> String
+    #
+    # @overload start_segment_detection(params = {})
+    # @param [Hash] params ({})
+    def start_segment_detection(params = {}, options = {})
+      req = build_request(:start_segment_detection, params)
+      req.send_request(options)
+    end
+
     # Starts processing a stream processor. You create a stream processor by
     # calling CreateStreamProcessor. To tell `StartStreamProcessor` which
     # stream processor to start, use the value of the `Name` field specified
@@ -4660,7 +4870,7 @@ module Aws::Rekognition
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-rekognition'
-      context[:gem_version] = '1.39.1'
+      context[:gem_version] = '1.40.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 
