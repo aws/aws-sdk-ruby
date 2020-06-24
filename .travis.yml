@@ -3,9 +3,13 @@ language: ruby
 before_install:
   - gem install bundler -v '< 2'
 
-dist: bionic
+dist: xenial
+group: edge
 
 rvm:
+  - 1.9.3
+  - 2.0
+  - 2.1
   - 2.2
   - 2.3
   - 2.4
@@ -36,12 +40,6 @@ matrix:
     - rvm: jruby-9.2
       env: KITCHEN_SINK=1
   include:
-    - rvm: 1.9.3
-      dist: xenial
-    - rvm: 2.0
-      dist: xenial
-    - rvm: 2.1
-      dist: xenial
     - rvm: 2.3
       env: OLD_OJ=1
     - rvm: 2.3
