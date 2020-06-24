@@ -34,6 +34,7 @@ module Aws::MTurk
     class AcceptQualificationRequestRequest < Struct.new(
       :qualification_request_id,
       :integer_value)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -71,6 +72,7 @@ module Aws::MTurk
       :assignment_id,
       :requester_feedback,
       :override_rejection)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -165,6 +167,7 @@ module Aws::MTurk
       :deadline,
       :answer,
       :requester_feedback)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -206,6 +209,7 @@ module Aws::MTurk
       :worker_id,
       :integer_value,
       :send_notification)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -243,6 +247,7 @@ module Aws::MTurk
       :assignment_id,
       :reason,
       :grant_time)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -279,6 +284,7 @@ module Aws::MTurk
       :hit_id,
       :number_of_additional_assignments,
       :unique_request_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -505,6 +511,7 @@ module Aws::MTurk
       :hit_review_policy,
       :hit_layout_id,
       :hit_layout_parameters)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -518,6 +525,7 @@ module Aws::MTurk
     #
     class CreateHITResponse < Struct.new(
       :hit)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -608,6 +616,7 @@ module Aws::MTurk
       :keywords,
       :description,
       :qualification_requirements)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -619,6 +628,7 @@ module Aws::MTurk
     #
     class CreateHITTypeResponse < Struct.new(
       :hit_type_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -769,6 +779,7 @@ module Aws::MTurk
       :hit_review_policy,
       :hit_layout_id,
       :hit_layout_parameters)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -782,6 +793,7 @@ module Aws::MTurk
     #
     class CreateHITWithHITTypeResponse < Struct.new(
       :hit)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -895,6 +907,7 @@ module Aws::MTurk
       :test_duration_in_seconds,
       :auto_granted,
       :auto_granted_value)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -907,6 +920,7 @@ module Aws::MTurk
     #
     class CreateQualificationTypeResponse < Struct.new(
       :qualification_type)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -933,6 +947,7 @@ module Aws::MTurk
     class CreateWorkerBlockRequest < Struct.new(
       :worker_id,
       :reason)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -955,6 +970,7 @@ module Aws::MTurk
     #
     class DeleteHITRequest < Struct.new(
       :hit_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -977,6 +993,7 @@ module Aws::MTurk
     #
     class DeleteQualificationTypeRequest < Struct.new(
       :qualification_type_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1006,6 +1023,7 @@ module Aws::MTurk
     class DeleteWorkerBlockRequest < Struct.new(
       :worker_id,
       :reason)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1041,6 +1059,7 @@ module Aws::MTurk
       :worker_id,
       :qualification_type_id,
       :reason)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1067,6 +1086,7 @@ module Aws::MTurk
     class GetAccountBalanceResponse < Struct.new(
       :available_balance,
       :on_hold_balance)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1085,6 +1105,7 @@ module Aws::MTurk
     #
     class GetAssignmentRequest < Struct.new(
       :assignment_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1102,6 +1123,7 @@ module Aws::MTurk
     class GetAssignmentResponse < Struct.new(
       :assignment,
       :hit)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1128,6 +1150,7 @@ module Aws::MTurk
     class GetFileUploadURLRequest < Struct.new(
       :assignment_id,
       :question_identifier)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1140,6 +1163,7 @@ module Aws::MTurk
     #
     class GetFileUploadURLResponse < Struct.new(
       :file_upload_url)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1158,6 +1182,7 @@ module Aws::MTurk
     #
     class GetHITRequest < Struct.new(
       :hit_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1169,6 +1194,7 @@ module Aws::MTurk
     #
     class GetHITResponse < Struct.new(
       :hit)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1193,6 +1219,7 @@ module Aws::MTurk
     class GetQualificationScoreRequest < Struct.new(
       :qualification_type_id,
       :worker_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1205,6 +1232,7 @@ module Aws::MTurk
     #
     class GetQualificationScoreResponse < Struct.new(
       :qualification)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1223,6 +1251,7 @@ module Aws::MTurk
     #
     class GetQualificationTypeRequest < Struct.new(
       :qualification_type_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1234,6 +1263,7 @@ module Aws::MTurk
     #
     class GetQualificationTypeResponse < Struct.new(
       :qualification_type)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1370,6 +1400,7 @@ module Aws::MTurk
       :number_of_assignments_pending,
       :number_of_assignments_available,
       :number_of_assignments_completed)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1399,6 +1430,7 @@ module Aws::MTurk
     class HITLayoutParameter < Struct.new(
       :name,
       :value)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1435,6 +1467,7 @@ module Aws::MTurk
       :next_token,
       :max_results,
       :assignment_statuses)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1460,6 +1493,7 @@ module Aws::MTurk
       :next_token,
       :num_results,
       :assignments)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1501,6 +1535,7 @@ module Aws::MTurk
       :assignment_id,
       :next_token,
       :max_results)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1528,6 +1563,7 @@ module Aws::MTurk
       :num_results,
       :next_token,
       :bonus_payments)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1558,6 +1594,7 @@ module Aws::MTurk
       :qualification_type_id,
       :next_token,
       :max_results)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1583,6 +1620,7 @@ module Aws::MTurk
       :next_token,
       :num_results,
       :hits)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1606,6 +1644,7 @@ module Aws::MTurk
     class ListHITsRequest < Struct.new(
       :next_token,
       :max_results)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1631,6 +1670,7 @@ module Aws::MTurk
       :next_token,
       :num_results,
       :hits)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1664,6 +1704,7 @@ module Aws::MTurk
       :qualification_type_id,
       :next_token,
       :max_results)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1692,6 +1733,7 @@ module Aws::MTurk
       :num_results,
       :next_token,
       :qualification_requests)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1746,6 +1788,7 @@ module Aws::MTurk
       :must_be_owned_by_caller,
       :next_token,
       :max_results)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1772,6 +1815,7 @@ module Aws::MTurk
       :num_results,
       :next_token,
       :qualification_types)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1825,6 +1869,7 @@ module Aws::MTurk
       :retrieve_results,
       :next_token,
       :max_results)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1868,6 +1913,7 @@ module Aws::MTurk
       :assignment_review_report,
       :hit_review_report,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1906,6 +1952,7 @@ module Aws::MTurk
       :status,
       :next_token,
       :max_results)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1931,6 +1978,7 @@ module Aws::MTurk
       :next_token,
       :num_results,
       :hits)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1954,6 +2002,7 @@ module Aws::MTurk
     class ListWorkerBlocksRequest < Struct.new(
       :next_token,
       :max_results)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1980,6 +2029,7 @@ module Aws::MTurk
       :next_token,
       :num_results,
       :worker_blocks)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2017,6 +2067,7 @@ module Aws::MTurk
       :status,
       :next_token,
       :max_results)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2043,6 +2094,7 @@ module Aws::MTurk
       :next_token,
       :num_results,
       :qualifications)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2073,6 +2125,7 @@ module Aws::MTurk
     class Locale < Struct.new(
       :country,
       :subdivision)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2126,6 +2179,7 @@ module Aws::MTurk
       :transport,
       :version,
       :event_types)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2150,6 +2204,7 @@ module Aws::MTurk
       :notify_workers_failure_code,
       :notify_workers_failure_message,
       :worker_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2183,6 +2238,7 @@ module Aws::MTurk
       :subject,
       :message_text,
       :worker_ids)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2196,6 +2252,7 @@ module Aws::MTurk
     #
     class NotifyWorkersResponse < Struct.new(
       :notify_workers_failure_statuses)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2227,6 +2284,7 @@ module Aws::MTurk
     class ParameterMapEntry < Struct.new(
       :key,
       :values)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2264,6 +2322,7 @@ module Aws::MTurk
       :key,
       :values,
       :map_entries)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2309,6 +2368,7 @@ module Aws::MTurk
       :integer_value,
       :locale_value,
       :status)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2360,6 +2420,7 @@ module Aws::MTurk
       :test,
       :answer,
       :submit_time)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2471,6 +2532,7 @@ module Aws::MTurk
       :locale_values,
       :required_to_preview,
       :actions_guarded)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2577,6 +2639,7 @@ module Aws::MTurk
       :is_requestable,
       :auto_granted,
       :auto_granted_value)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2603,6 +2666,7 @@ module Aws::MTurk
     class RejectAssignmentRequest < Struct.new(
       :assignment_id,
       :requester_feedback)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2633,6 +2697,7 @@ module Aws::MTurk
     class RejectQualificationRequestRequest < Struct.new(
       :qualification_request_id,
       :reason)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2653,6 +2718,7 @@ module Aws::MTurk
     class RequestError < Struct.new(
       :message,
       :turk_error_code)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2707,6 +2773,7 @@ module Aws::MTurk
       :complete_time,
       :result,
       :error_code)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2746,6 +2813,7 @@ module Aws::MTurk
     class ReviewPolicy < Struct.new(
       :policy_name,
       :parameters)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2767,6 +2835,7 @@ module Aws::MTurk
     class ReviewReport < Struct.new(
       :review_results,
       :review_actions)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2815,6 +2884,7 @@ module Aws::MTurk
       :question_id,
       :key,
       :value)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2866,6 +2936,7 @@ module Aws::MTurk
       :assignment_id,
       :reason,
       :unique_request_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2905,6 +2976,7 @@ module Aws::MTurk
     class SendTestEventNotificationRequest < Struct.new(
       :notification,
       :test_event_type)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2926,6 +2998,7 @@ module Aws::MTurk
     class ServiceFault < Struct.new(
       :message,
       :turk_error_code)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2950,6 +3023,7 @@ module Aws::MTurk
     class UpdateExpirationForHITRequest < Struct.new(
       :hit_id,
       :expire_at)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2984,6 +3058,7 @@ module Aws::MTurk
     class UpdateHITReviewStatusRequest < Struct.new(
       :hit_id,
       :revert)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3012,6 +3087,7 @@ module Aws::MTurk
     class UpdateHITTypeOfHITRequest < Struct.new(
       :hit_id,
       :hit_type_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3055,6 +3131,7 @@ module Aws::MTurk
       :hit_type_id,
       :notification,
       :active)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3149,6 +3226,7 @@ module Aws::MTurk
       :retry_delay_in_seconds,
       :auto_granted,
       :auto_granted_value)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3160,6 +3238,7 @@ module Aws::MTurk
     #
     class UpdateQualificationTypeResponse < Struct.new(
       :qualification_type)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3180,6 +3259,7 @@ module Aws::MTurk
     class WorkerBlock < Struct.new(
       :worker_id,
       :reason)
+      SENSITIVE = []
       include Aws::Structure
     end
 

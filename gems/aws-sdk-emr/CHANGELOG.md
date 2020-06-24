@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.32.0 (2020-06-23)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.31.0 (2020-06-22)
+------------------
+
+* Feature - Adding support for MaximumCoreCapacityUnits parameter for EMR Managed Scaling. It allows users to control how many units/nodes are added to the CORE group/fleet. Remaining units/nodes are added to the TASK groups/fleet in the cluster.
+
 1.30.1 (2020-06-11)
 ------------------
 

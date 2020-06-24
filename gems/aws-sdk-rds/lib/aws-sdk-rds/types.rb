@@ -22,6 +22,7 @@ module Aws::RDS
     #
     class AccountAttributesMessage < Struct.new(
       :account_quotas)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -133,6 +134,7 @@ module Aws::RDS
       :account_quota_name,
       :used,
       :max)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -167,6 +169,7 @@ module Aws::RDS
       :db_cluster_identifier,
       :role_arn,
       :feature_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -201,6 +204,7 @@ module Aws::RDS
       :db_instance_identifier,
       :role_arn,
       :feature_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -240,6 +244,7 @@ module Aws::RDS
     class AddSourceIdentifierToSubscriptionMessage < Struct.new(
       :subscription_name,
       :source_identifier)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -252,6 +257,7 @@ module Aws::RDS
     #
     class AddSourceIdentifierToSubscriptionResult < Struct.new(
       :event_subscription)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -287,6 +293,7 @@ module Aws::RDS
     class AddTagsToResourceMessage < Struct.new(
       :resource_name,
       :tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -338,6 +345,7 @@ module Aws::RDS
       :resource_identifier,
       :apply_action,
       :opt_in_type)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -349,6 +357,7 @@ module Aws::RDS
     #
     class ApplyPendingMaintenanceActionResult < Struct.new(
       :resource_pending_maintenance_actions)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -425,6 +434,7 @@ module Aws::RDS
       :ec2_security_group_name,
       :ec2_security_group_id,
       :ec2_security_group_owner_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -439,6 +449,7 @@ module Aws::RDS
     #
     class AuthorizeDBSecurityGroupIngressResult < Struct.new(
       :db_security_group)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -455,6 +466,7 @@ module Aws::RDS
     #
     class AvailabilityZone < Struct.new(
       :name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -489,6 +501,7 @@ module Aws::RDS
       :name,
       :default_value,
       :allowed_values)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -562,6 +575,7 @@ module Aws::RDS
       :backtrack_to,
       :force,
       :use_earliest_time_on_point_in_time_unavailable)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -584,6 +598,7 @@ module Aws::RDS
     #
     class CancelExportTaskMessage < Struct.new(
       :export_task_identifier)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -633,6 +648,7 @@ module Aws::RDS
       :certificate_arn,
       :customer_override,
       :customer_override_valid_till)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -654,6 +670,7 @@ module Aws::RDS
     class CertificateMessage < Struct.new(
       :certificates,
       :marker)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -679,6 +696,7 @@ module Aws::RDS
     class CharacterSet < Struct.new(
       :character_set_name,
       :character_set_description)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -716,6 +734,7 @@ module Aws::RDS
     class CloudwatchLogsExportConfiguration < Struct.new(
       :enable_log_types,
       :disable_log_types)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -805,6 +824,7 @@ module Aws::RDS
       :connection_borrow_timeout,
       :session_pinning_filters,
       :init_query)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -869,6 +889,7 @@ module Aws::RDS
       :connection_borrow_timeout,
       :session_pinning_filters,
       :init_query)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -947,6 +968,7 @@ module Aws::RDS
       :target_db_cluster_parameter_group_identifier,
       :target_db_cluster_parameter_group_description,
       :tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -961,6 +983,7 @@ module Aws::RDS
     #
     class CopyDBClusterParameterGroupResult < Struct.new(
       :db_cluster_parameter_group)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1132,6 +1155,7 @@ module Aws::RDS
       :tags,
       :destination_region,
       :source_region)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1146,6 +1170,7 @@ module Aws::RDS
     #
     class CopyDBClusterSnapshotResult < Struct.new(
       :db_cluster_snapshot)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1217,6 +1242,7 @@ module Aws::RDS
       :target_db_parameter_group_identifier,
       :target_db_parameter_group_description,
       :tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1231,6 +1257,7 @@ module Aws::RDS
     #
     class CopyDBParameterGroupResult < Struct.new(
       :db_parameter_group)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1433,6 +1460,7 @@ module Aws::RDS
       :option_group_name,
       :destination_region,
       :source_region)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1447,6 +1475,7 @@ module Aws::RDS
     #
     class CopyDBSnapshotResult < Struct.new(
       :db_snapshot)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1523,6 +1552,7 @@ module Aws::RDS
       :target_option_group_identifier,
       :target_option_group_description,
       :tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1533,6 +1563,7 @@ module Aws::RDS
     #
     class CopyOptionGroupResult < Struct.new(
       :option_group)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1576,6 +1607,7 @@ module Aws::RDS
       :existing_vpn_id,
       :new_vpn_tunnel_name,
       :vpn_tunnel_originator_ip)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1595,6 +1627,7 @@ module Aws::RDS
     #
     class CreateCustomAvailabilityZoneResult < Struct.new(
       :custom_availability_zone)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1654,6 +1687,7 @@ module Aws::RDS
       :static_members,
       :excluded_members,
       :tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2181,6 +2215,7 @@ module Aws::RDS
       :enable_global_write_forwarding,
       :destination_region,
       :source_region)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2244,6 +2279,7 @@ module Aws::RDS
       :db_parameter_group_family,
       :description,
       :tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2258,6 +2294,7 @@ module Aws::RDS
     #
     class CreateDBClusterParameterGroupResult < Struct.new(
       :db_cluster_parameter_group)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2272,6 +2309,7 @@ module Aws::RDS
     #
     class CreateDBClusterResult < Struct.new(
       :db_cluster)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2327,6 +2365,7 @@ module Aws::RDS
       :db_cluster_snapshot_identifier,
       :db_cluster_identifier,
       :tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2341,6 +2380,7 @@ module Aws::RDS
     #
     class CreateDBClusterSnapshotResult < Struct.new(
       :db_cluster_snapshot)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3361,6 +3401,7 @@ module Aws::RDS
       :processor_features,
       :deletion_protection,
       :max_allocated_storage)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3879,6 +3920,7 @@ module Aws::RDS
       :domain_iam_role_name,
       :destination_region,
       :source_region)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3893,6 +3935,7 @@ module Aws::RDS
     #
     class CreateDBInstanceReadReplicaResult < Struct.new(
       :db_instance)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3907,6 +3950,7 @@ module Aws::RDS
     #
     class CreateDBInstanceResult < Struct.new(
       :db_instance)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3973,6 +4017,7 @@ module Aws::RDS
       :db_parameter_group_family,
       :description,
       :tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3987,6 +4032,7 @@ module Aws::RDS
     #
     class CreateDBParameterGroupResult < Struct.new(
       :db_parameter_group)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4093,6 +4139,7 @@ module Aws::RDS
       :idle_client_timeout,
       :debug_logging,
       :tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4104,6 +4151,7 @@ module Aws::RDS
     #
     class CreateDBProxyResponse < Struct.new(
       :db_proxy)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4152,6 +4200,7 @@ module Aws::RDS
       :db_security_group_name,
       :db_security_group_description,
       :tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4166,6 +4215,7 @@ module Aws::RDS
     #
     class CreateDBSecurityGroupResult < Struct.new(
       :db_security_group)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4225,6 +4275,7 @@ module Aws::RDS
       :db_snapshot_identifier,
       :db_instance_identifier,
       :tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4239,6 +4290,7 @@ module Aws::RDS
     #
     class CreateDBSnapshotResult < Struct.new(
       :db_snapshot)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4286,6 +4338,7 @@ module Aws::RDS
       :db_subnet_group_description,
       :subnet_ids,
       :tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4300,6 +4353,7 @@ module Aws::RDS
     #
     class CreateDBSubnetGroupResult < Struct.new(
       :db_subnet_group)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4403,6 +4457,7 @@ module Aws::RDS
       :source_ids,
       :enabled,
       :tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4415,6 +4470,7 @@ module Aws::RDS
     #
     class CreateEventSubscriptionResult < Struct.new(
       :event_subscription)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4475,6 +4531,7 @@ module Aws::RDS
       :deletion_protection,
       :database_name,
       :storage_encrypted)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4486,6 +4543,7 @@ module Aws::RDS
     #
     class CreateGlobalClusterResult < Struct.new(
       :global_cluster)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4545,6 +4603,7 @@ module Aws::RDS
       :major_engine_version,
       :option_group_description,
       :tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4555,6 +4614,7 @@ module Aws::RDS
     #
     class CreateOptionGroupResult < Struct.new(
       :option_group)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4595,6 +4655,7 @@ module Aws::RDS
       :custom_availability_zone_name,
       :custom_availability_zone_status,
       :vpn_details)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4621,6 +4682,7 @@ module Aws::RDS
     class CustomAvailabilityZoneMessage < Struct.new(
       :marker,
       :custom_availability_zones)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5027,6 +5089,7 @@ module Aws::RDS
       :domain_memberships,
       :global_write_forwarding_status,
       :global_write_forwarding_requested)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5086,6 +5149,7 @@ module Aws::RDS
       :backtracked_from,
       :backtrack_request_creation_time,
       :status)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5106,6 +5170,7 @@ module Aws::RDS
     class DBClusterBacktrackMessage < Struct.new(
       :marker,
       :db_cluster_backtracks)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5147,6 +5212,7 @@ module Aws::RDS
       :current_capacity,
       :seconds_before_timeout,
       :timeout_action)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5227,6 +5293,7 @@ module Aws::RDS
       :static_members,
       :excluded_members,
       :db_cluster_endpoint_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5254,6 +5321,7 @@ module Aws::RDS
     class DBClusterEndpointMessage < Struct.new(
       :marker,
       :db_cluster_endpoints)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5303,6 +5371,7 @@ module Aws::RDS
       :is_cluster_writer,
       :db_cluster_parameter_group_status,
       :promotion_tier)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5323,6 +5392,7 @@ module Aws::RDS
     class DBClusterMessage < Struct.new(
       :marker,
       :db_clusters)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5347,6 +5417,7 @@ module Aws::RDS
     class DBClusterOptionGroupStatus < Struct.new(
       :db_cluster_option_group_name,
       :status)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5380,6 +5451,7 @@ module Aws::RDS
       :db_parameter_group_family,
       :description,
       :db_cluster_parameter_group_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5402,6 +5474,7 @@ module Aws::RDS
     class DBClusterParameterGroupDetails < Struct.new(
       :parameters,
       :marker)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5425,6 +5498,7 @@ module Aws::RDS
     #
     class DBClusterParameterGroupNameMessage < Struct.new(
       :db_cluster_parameter_group_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5451,6 +5525,7 @@ module Aws::RDS
     class DBClusterParameterGroupsMessage < Struct.new(
       :marker,
       :db_cluster_parameter_groups)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5496,6 +5571,7 @@ module Aws::RDS
       :role_arn,
       :status,
       :feature_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5639,6 +5715,7 @@ module Aws::RDS
       :db_cluster_snapshot_arn,
       :source_db_cluster_snapshot_arn,
       :iam_database_authentication_enabled)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5679,6 +5756,7 @@ module Aws::RDS
     class DBClusterSnapshotAttribute < Struct.new(
       :attribute_name,
       :attribute_values)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5704,6 +5782,7 @@ module Aws::RDS
     class DBClusterSnapshotAttributesResult < Struct.new(
       :db_cluster_snapshot_identifier,
       :db_cluster_snapshot_attributes)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5726,6 +5805,7 @@ module Aws::RDS
     class DBClusterSnapshotMessage < Struct.new(
       :marker,
       :db_cluster_snapshots)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5838,6 +5918,7 @@ module Aws::RDS
       :supported_engine_modes,
       :supported_feature_names,
       :status)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5859,6 +5940,7 @@ module Aws::RDS
     class DBEngineVersionMessage < Struct.new(
       :marker,
       :db_engine_versions)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6287,6 +6369,7 @@ module Aws::RDS
       :associated_roles,
       :listener_endpoint,
       :max_allocated_storage)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6444,6 +6527,7 @@ module Aws::RDS
       :kms_key_id,
       :timezone,
       :iam_database_authentication_enabled)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6465,6 +6549,7 @@ module Aws::RDS
     class DBInstanceAutomatedBackupMessage < Struct.new(
       :marker,
       :db_instance_automated_backups)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6500,6 +6585,7 @@ module Aws::RDS
     class DBInstanceMessage < Struct.new(
       :marker,
       :db_instances)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6544,6 +6630,7 @@ module Aws::RDS
       :role_arn,
       :feature_name,
       :status)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6597,6 +6684,7 @@ module Aws::RDS
       :normal,
       :status,
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6636,6 +6724,7 @@ module Aws::RDS
       :db_parameter_group_family,
       :description,
       :db_parameter_group_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6663,6 +6752,7 @@ module Aws::RDS
     class DBParameterGroupDetails < Struct.new(
       :parameters,
       :marker)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6677,6 +6767,7 @@ module Aws::RDS
     #
     class DBParameterGroupNameMessage < Struct.new(
       :db_parameter_group_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6723,6 +6814,7 @@ module Aws::RDS
     class DBParameterGroupStatus < Struct.new(
       :db_parameter_group_name,
       :parameter_apply_status)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6744,6 +6836,7 @@ module Aws::RDS
     class DBParameterGroupsMessage < Struct.new(
       :marker,
       :db_parameter_groups)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6854,6 +6947,7 @@ module Aws::RDS
       :debug_logging,
       :created_date,
       :updated_date)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6935,6 +7029,7 @@ module Aws::RDS
       :port,
       :type,
       :target_health)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -7009,6 +7104,7 @@ module Aws::RDS
       :connection_pool_config,
       :created_date,
       :updated_date)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -7069,6 +7165,7 @@ module Aws::RDS
       :ec2_security_groups,
       :ip_ranges,
       :db_security_group_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -7102,6 +7199,7 @@ module Aws::RDS
     class DBSecurityGroupMembership < Struct.new(
       :db_security_group_name,
       :status)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -7123,6 +7221,7 @@ module Aws::RDS
     class DBSecurityGroupMessage < Struct.new(
       :marker,
       :db_security_groups)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -7310,6 +7409,7 @@ module Aws::RDS
       :iam_database_authentication_enabled,
       :processor_features,
       :dbi_resource_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -7349,6 +7449,7 @@ module Aws::RDS
     class DBSnapshotAttribute < Struct.new(
       :attribute_name,
       :attribute_values)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -7373,6 +7474,7 @@ module Aws::RDS
     class DBSnapshotAttributesResult < Struct.new(
       :db_snapshot_identifier,
       :db_snapshot_attributes)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -7394,6 +7496,7 @@ module Aws::RDS
     class DBSnapshotMessage < Struct.new(
       :marker,
       :db_snapshots)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -7441,6 +7544,7 @@ module Aws::RDS
       :subnet_group_status,
       :subnets,
       :db_subnet_group_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -7475,6 +7579,7 @@ module Aws::RDS
     class DBSubnetGroupMessage < Struct.new(
       :marker,
       :db_subnet_groups)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -7527,6 +7632,7 @@ module Aws::RDS
     #
     class DeleteCustomAvailabilityZoneMessage < Struct.new(
       :custom_availability_zone_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -7546,6 +7652,7 @@ module Aws::RDS
     #
     class DeleteCustomAvailabilityZoneResult < Struct.new(
       :custom_availability_zone)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -7565,6 +7672,7 @@ module Aws::RDS
     #
     class DeleteDBClusterEndpointMessage < Struct.new(
       :db_cluster_endpoint_identifier)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -7627,6 +7735,7 @@ module Aws::RDS
       :db_cluster_identifier,
       :skip_final_snapshot,
       :final_db_snapshot_identifier)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -7653,6 +7762,7 @@ module Aws::RDS
     #
     class DeleteDBClusterParameterGroupMessage < Struct.new(
       :db_cluster_parameter_group_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -7667,6 +7777,7 @@ module Aws::RDS
     #
     class DeleteDBClusterResult < Struct.new(
       :db_cluster)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -7688,6 +7799,7 @@ module Aws::RDS
     #
     class DeleteDBClusterSnapshotMessage < Struct.new(
       :db_cluster_snapshot_identifier)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -7702,6 +7814,7 @@ module Aws::RDS
     #
     class DeleteDBClusterSnapshotResult < Struct.new(
       :db_cluster_snapshot)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -7723,6 +7836,7 @@ module Aws::RDS
     #
     class DeleteDBInstanceAutomatedBackupMessage < Struct.new(
       :dbi_resource_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -7736,6 +7850,7 @@ module Aws::RDS
     #
     class DeleteDBInstanceAutomatedBackupResult < Struct.new(
       :db_instance_automated_backup)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -7813,6 +7928,7 @@ module Aws::RDS
       :skip_final_snapshot,
       :final_db_snapshot_identifier,
       :delete_automated_backups)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -7827,6 +7943,7 @@ module Aws::RDS
     #
     class DeleteDBInstanceResult < Struct.new(
       :db_instance)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -7853,6 +7970,7 @@ module Aws::RDS
     #
     class DeleteDBParameterGroupMessage < Struct.new(
       :db_parameter_group_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -7871,6 +7989,7 @@ module Aws::RDS
     #
     class DeleteDBProxyRequest < Struct.new(
       :db_proxy_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -7883,6 +8002,7 @@ module Aws::RDS
     #
     class DeleteDBProxyResponse < Struct.new(
       :db_proxy)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -7915,6 +8035,7 @@ module Aws::RDS
     #
     class DeleteDBSecurityGroupMessage < Struct.new(
       :db_security_group_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -7936,6 +8057,7 @@ module Aws::RDS
     #
     class DeleteDBSnapshotMessage < Struct.new(
       :db_snapshot_identifier)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -7950,6 +8072,7 @@ module Aws::RDS
     #
     class DeleteDBSnapshotResult < Struct.new(
       :db_snapshot)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -7979,6 +8102,7 @@ module Aws::RDS
     #
     class DeleteDBSubnetGroupMessage < Struct.new(
       :db_subnet_group_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -7998,6 +8122,7 @@ module Aws::RDS
     #
     class DeleteEventSubscriptionMessage < Struct.new(
       :subscription_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -8010,6 +8135,7 @@ module Aws::RDS
     #
     class DeleteEventSubscriptionResult < Struct.new(
       :event_subscription)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -8028,6 +8154,7 @@ module Aws::RDS
     #
     class DeleteGlobalClusterMessage < Struct.new(
       :global_cluster_identifier)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -8039,6 +8166,7 @@ module Aws::RDS
     #
     class DeleteGlobalClusterResult < Struct.new(
       :global_cluster)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -8057,6 +8185,7 @@ module Aws::RDS
     #
     class DeleteInstallationMediaMessage < Struct.new(
       :installation_media_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -8079,6 +8208,7 @@ module Aws::RDS
     #
     class DeleteOptionGroupMessage < Struct.new(
       :option_group_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -8116,6 +8246,7 @@ module Aws::RDS
       :target_group_name,
       :db_instance_identifiers,
       :db_cluster_identifiers)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -8185,6 +8316,7 @@ module Aws::RDS
       :filters,
       :max_records,
       :marker)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -8237,6 +8369,7 @@ module Aws::RDS
       :filters,
       :max_records,
       :marker)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -8339,6 +8472,7 @@ module Aws::RDS
       :filters,
       :max_records,
       :marker)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -8410,6 +8544,7 @@ module Aws::RDS
       :filters,
       :max_records,
       :marker)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -8469,6 +8604,7 @@ module Aws::RDS
       :filters,
       :max_records,
       :marker)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -8535,6 +8671,7 @@ module Aws::RDS
       :filters,
       :max_records,
       :marker)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -8554,6 +8691,7 @@ module Aws::RDS
     #
     class DescribeDBClusterSnapshotAttributesMessage < Struct.new(
       :db_cluster_snapshot_identifier)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -8571,6 +8709,7 @@ module Aws::RDS
     #
     class DescribeDBClusterSnapshotAttributesResult < Struct.new(
       :db_cluster_snapshot_attributes_result)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -8717,6 +8856,7 @@ module Aws::RDS
       :marker,
       :include_shared,
       :include_public)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -8791,6 +8931,7 @@ module Aws::RDS
       :max_records,
       :marker,
       :include_shared)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -8900,6 +9041,7 @@ module Aws::RDS
       :list_supported_character_sets,
       :list_supported_timezones,
       :include_all)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -8982,6 +9124,7 @@ module Aws::RDS
       :filters,
       :max_records,
       :marker)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -9063,6 +9206,7 @@ module Aws::RDS
       :filters,
       :max_records,
       :marker)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -9086,6 +9230,7 @@ module Aws::RDS
       :log_file_name,
       :last_written,
       :size)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -9160,6 +9305,7 @@ module Aws::RDS
       :filters,
       :max_records,
       :marker)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -9179,6 +9325,7 @@ module Aws::RDS
     class DescribeDBLogFilesResponse < Struct.new(
       :describe_db_log_files,
       :marker)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -9237,6 +9384,7 @@ module Aws::RDS
       :filters,
       :max_records,
       :marker)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -9304,6 +9452,7 @@ module Aws::RDS
       :filters,
       :max_records,
       :marker)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -9354,6 +9503,7 @@ module Aws::RDS
       :filters,
       :marker,
       :max_records)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -9373,6 +9523,7 @@ module Aws::RDS
     class DescribeDBProxiesResponse < Struct.new(
       :db_proxies,
       :marker)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -9429,6 +9580,7 @@ module Aws::RDS
       :filters,
       :marker,
       :max_records)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -9448,6 +9600,7 @@ module Aws::RDS
     class DescribeDBProxyTargetGroupsResponse < Struct.new(
       :target_groups,
       :marker)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -9504,6 +9657,7 @@ module Aws::RDS
       :filters,
       :marker,
       :max_records)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -9523,6 +9677,7 @@ module Aws::RDS
     class DescribeDBProxyTargetsResponse < Struct.new(
       :targets,
       :marker)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -9574,6 +9729,7 @@ module Aws::RDS
       :filters,
       :max_records,
       :marker)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -9592,6 +9748,7 @@ module Aws::RDS
     #
     class DescribeDBSnapshotAttributesMessage < Struct.new(
       :db_snapshot_identifier)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -9608,6 +9765,7 @@ module Aws::RDS
     #
     class DescribeDBSnapshotAttributesResult < Struct.new(
       :db_snapshot_attributes_result)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -9769,6 +9927,7 @@ module Aws::RDS
       :include_shared,
       :include_public,
       :dbi_resource_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -9820,6 +9979,7 @@ module Aws::RDS
       :filters,
       :max_records,
       :marker)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -9872,6 +10032,7 @@ module Aws::RDS
       :filters,
       :max_records,
       :marker)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -9884,6 +10045,7 @@ module Aws::RDS
     #
     class DescribeEngineDefaultClusterParametersResult < Struct.new(
       :engine_defaults)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -9935,6 +10097,7 @@ module Aws::RDS
       :filters,
       :max_records,
       :marker)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -9947,6 +10110,7 @@ module Aws::RDS
     #
     class DescribeEngineDefaultParametersResult < Struct.new(
       :engine_defaults)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -9979,6 +10143,7 @@ module Aws::RDS
     class DescribeEventCategoriesMessage < Struct.new(
       :source_type,
       :filters)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -10031,6 +10196,7 @@ module Aws::RDS
       :filters,
       :max_records,
       :marker)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -10151,6 +10317,7 @@ module Aws::RDS
       :filters,
       :max_records,
       :marker)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -10224,6 +10391,7 @@ module Aws::RDS
       :filters,
       :marker,
       :max_records)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -10291,6 +10459,7 @@ module Aws::RDS
       :filters,
       :max_records,
       :marker)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -10349,6 +10518,7 @@ module Aws::RDS
       :filters,
       :max_records,
       :marker)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -10407,6 +10577,7 @@ module Aws::RDS
       :filters,
       :max_records,
       :marker)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -10474,6 +10645,7 @@ module Aws::RDS
       :max_records,
       :engine_name,
       :major_engine_version)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -10565,6 +10737,7 @@ module Aws::RDS
       :filters,
       :max_records,
       :marker)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -10628,6 +10801,7 @@ module Aws::RDS
       :filters,
       :marker,
       :max_records)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -10739,6 +10913,7 @@ module Aws::RDS
       :filters,
       :max_records,
       :marker)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -10838,6 +11013,7 @@ module Aws::RDS
       :filters,
       :max_records,
       :marker)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -10895,6 +11071,7 @@ module Aws::RDS
       :max_records,
       :marker,
       :filters)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -10913,6 +11090,7 @@ module Aws::RDS
     #
     class DescribeValidDBInstanceModificationsMessage < Struct.new(
       :db_instance_identifier)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -10927,6 +11105,7 @@ module Aws::RDS
     #
     class DescribeValidDBInstanceModificationsResult < Struct.new(
       :valid_db_instance_modifications_message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -10959,6 +11138,7 @@ module Aws::RDS
       :status,
       :fqdn,
       :iam_role_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -10983,6 +11163,7 @@ module Aws::RDS
     class DoubleRange < Struct.new(
       :from,
       :to)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -11009,6 +11190,7 @@ module Aws::RDS
       :log_file_data,
       :marker,
       :additional_data_pending)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -11077,6 +11259,7 @@ module Aws::RDS
       :log_file_name,
       :marker,
       :number_of_lines)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -11113,6 +11296,7 @@ module Aws::RDS
       :ec2_security_group_name,
       :ec2_security_group_id,
       :ec2_security_group_owner_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -11148,6 +11332,7 @@ module Aws::RDS
       :address,
       :port,
       :hosted_zone_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -11176,6 +11361,7 @@ module Aws::RDS
       :db_parameter_group_family,
       :marker,
       :parameters)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -11215,6 +11401,7 @@ module Aws::RDS
       :event_categories,
       :date,
       :source_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -11234,6 +11421,7 @@ module Aws::RDS
     class EventCategoriesMap < Struct.new(
       :source_type,
       :event_categories)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -11247,6 +11435,7 @@ module Aws::RDS
     #
     class EventCategoriesMessage < Struct.new(
       :event_categories_map_list)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -11319,6 +11508,7 @@ module Aws::RDS
       :event_categories_list,
       :enabled,
       :event_subscription_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -11346,6 +11536,7 @@ module Aws::RDS
     class EventSubscriptionsMessage < Struct.new(
       :marker,
       :event_subscriptions_list)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -11367,6 +11558,7 @@ module Aws::RDS
     class EventsMessage < Struct.new(
       :marker,
       :events)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -11476,6 +11668,7 @@ module Aws::RDS
       :total_extracted_data_in_gb,
       :failure_cause,
       :warning_message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -11506,6 +11699,7 @@ module Aws::RDS
     class ExportTasksMessage < Struct.new(
       :marker,
       :export_tasks)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -11540,6 +11734,7 @@ module Aws::RDS
     class FailoverDBClusterMessage < Struct.new(
       :db_cluster_identifier,
       :target_db_instance_identifier)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -11554,6 +11749,7 @@ module Aws::RDS
     #
     class FailoverDBClusterResult < Struct.new(
       :db_cluster)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -11600,6 +11796,7 @@ module Aws::RDS
     class Filter < Struct.new(
       :name,
       :values)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -11663,6 +11860,7 @@ module Aws::RDS
       :storage_encrypted,
       :deletion_protection,
       :global_cluster_members)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -11701,6 +11899,7 @@ module Aws::RDS
       :readers,
       :is_writer,
       :global_write_forwarding_status)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -11728,6 +11927,7 @@ module Aws::RDS
     class GlobalClustersMessage < Struct.new(
       :marker,
       :global_clusters)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -11748,6 +11948,7 @@ module Aws::RDS
     class IPRange < Struct.new(
       :status,
       :cidrip)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -11838,6 +12039,7 @@ module Aws::RDS
       :engine_version,
       :engine_installation_media_path,
       :os_installation_media_path)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -11889,6 +12091,7 @@ module Aws::RDS
       :os_installation_media_path,
       :status,
       :failure_cause)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -11910,6 +12113,7 @@ module Aws::RDS
     #
     class InstallationMediaFailureCause < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -11929,6 +12133,7 @@ module Aws::RDS
     class InstallationMediaMessage < Struct.new(
       :marker,
       :installation_media)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -12158,6 +12363,7 @@ module Aws::RDS
     class ListTagsForResourceMessage < Struct.new(
       :resource_name,
       :filters)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -12177,6 +12383,7 @@ module Aws::RDS
     class MinimumEngineVersionPerAllowedValue < Struct.new(
       :allowed_value,
       :minimum_engine_version)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -12207,6 +12414,7 @@ module Aws::RDS
     class ModifyCertificatesMessage < Struct.new(
       :certificate_identifier,
       :remove_customer_override)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -12218,6 +12426,7 @@ module Aws::RDS
     #
     class ModifyCertificatesResult < Struct.new(
       :certificate)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -12285,6 +12494,7 @@ module Aws::RDS
       :capacity,
       :seconds_before_timeout,
       :timeout_action)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -12326,6 +12536,7 @@ module Aws::RDS
       :endpoint_type,
       :static_members,
       :excluded_members)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -12682,6 +12893,7 @@ module Aws::RDS
       :enable_http_endpoint,
       :copy_tags_to_snapshot,
       :enable_global_write_forwarding)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -12720,6 +12932,7 @@ module Aws::RDS
     class ModifyDBClusterParameterGroupMessage < Struct.new(
       :db_cluster_parameter_group_name,
       :parameters)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -12734,6 +12947,7 @@ module Aws::RDS
     #
     class ModifyDBClusterResult < Struct.new(
       :db_cluster)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -12796,6 +13010,7 @@ module Aws::RDS
       :attribute_name,
       :values_to_add,
       :values_to_remove)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -12813,6 +13028,7 @@ module Aws::RDS
     #
     class ModifyDBClusterSnapshotAttributeResult < Struct.new(
       :db_cluster_snapshot_attributes_result)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -13589,6 +13805,7 @@ module Aws::RDS
       :deletion_protection,
       :max_allocated_storage,
       :certificate_rotation_restart)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -13603,6 +13820,7 @@ module Aws::RDS
     #
     class ModifyDBInstanceResult < Struct.new(
       :db_instance)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -13661,6 +13879,7 @@ module Aws::RDS
     class ModifyDBParameterGroupMessage < Struct.new(
       :db_parameter_group_name,
       :parameters)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -13744,6 +13963,7 @@ module Aws::RDS
       :debug_logging,
       :role_arn,
       :security_groups)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -13755,6 +13975,7 @@ module Aws::RDS
     #
     class ModifyDBProxyResponse < Struct.new(
       :db_proxy)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -13801,6 +14022,7 @@ module Aws::RDS
       :db_proxy_name,
       :connection_pool_config,
       :new_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -13812,6 +14034,7 @@ module Aws::RDS
     #
     class ModifyDBProxyTargetGroupResponse < Struct.new(
       :db_proxy_target_group)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -13872,6 +14095,7 @@ module Aws::RDS
       :attribute_name,
       :values_to_add,
       :values_to_remove)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -13888,6 +14112,7 @@ module Aws::RDS
     #
     class ModifyDBSnapshotAttributeResult < Struct.new(
       :db_snapshot_attributes_result)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -13954,6 +14179,7 @@ module Aws::RDS
       :db_snapshot_identifier,
       :engine_version,
       :option_group_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -13968,6 +14194,7 @@ module Aws::RDS
     #
     class ModifyDBSnapshotResult < Struct.new(
       :db_snapshot)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -14004,6 +14231,7 @@ module Aws::RDS
       :db_subnet_group_name,
       :db_subnet_group_description,
       :subnet_ids)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -14018,6 +14246,7 @@ module Aws::RDS
     #
     class ModifyDBSubnetGroupResult < Struct.new(
       :db_subnet_group)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -14075,6 +14304,7 @@ module Aws::RDS
       :source_type,
       :event_categories,
       :enabled)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -14087,6 +14317,7 @@ module Aws::RDS
     #
     class ModifyEventSubscriptionResult < Struct.new(
       :event_subscription)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -14138,6 +14369,7 @@ module Aws::RDS
       :global_cluster_identifier,
       :new_global_cluster_identifier,
       :deletion_protection)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -14149,6 +14381,7 @@ module Aws::RDS
     #
     class ModifyGlobalClusterResult < Struct.new(
       :global_cluster)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -14215,6 +14448,7 @@ module Aws::RDS
       :options_to_include,
       :options_to_remove,
       :apply_immediately)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -14225,6 +14459,7 @@ module Aws::RDS
     #
     class ModifyOptionGroupResult < Struct.new(
       :option_group)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -14280,6 +14515,7 @@ module Aws::RDS
       :option_settings,
       :db_security_group_memberships,
       :vpc_security_group_memberships)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -14344,6 +14580,7 @@ module Aws::RDS
       :db_security_group_memberships,
       :vpc_security_group_memberships,
       :option_settings)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -14399,6 +14636,7 @@ module Aws::RDS
       :allows_vpc_and_non_vpc_instance_memberships,
       :vpc_id,
       :option_group_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -14427,6 +14665,7 @@ module Aws::RDS
     class OptionGroupMembership < Struct.new(
       :option_group_name,
       :status)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -14534,6 +14773,7 @@ module Aws::RDS
       :supports_option_version_downgrade,
       :option_group_option_settings,
       :option_group_option_versions)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -14587,6 +14827,7 @@ module Aws::RDS
       :is_modifiable,
       :is_required,
       :minimum_engine_version_per_allowed_value)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -14605,6 +14846,7 @@ module Aws::RDS
     class OptionGroupOptionsMessage < Struct.new(
       :option_group_options,
       :marker)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -14631,6 +14873,7 @@ module Aws::RDS
     class OptionGroups < Struct.new(
       :option_groups_list,
       :marker)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -14704,6 +14947,7 @@ module Aws::RDS
       :allowed_values,
       :is_modifiable,
       :is_collection)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -14724,6 +14968,7 @@ module Aws::RDS
     class OptionVersion < Struct.new(
       :version,
       :is_default)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -14872,6 +15117,7 @@ module Aws::RDS
       :supported_engine_modes,
       :supports_storage_autoscaling,
       :supports_kerberos_authentication)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -14895,6 +15141,7 @@ module Aws::RDS
     class OrderableDBInstanceOptionsMessage < Struct.new(
       :orderable_db_instance_options,
       :marker)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -14981,6 +15228,7 @@ module Aws::RDS
       :minimum_engine_version,
       :apply_method,
       :supported_engine_modes)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -15004,6 +15252,7 @@ module Aws::RDS
     class PendingCloudwatchLogsExports < Struct.new(
       :log_types_to_enable,
       :log_types_to_disable)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -15055,6 +15304,7 @@ module Aws::RDS
       :opt_in_status,
       :current_apply_date,
       :description)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -15076,6 +15326,7 @@ module Aws::RDS
     class PendingMaintenanceActionsMessage < Struct.new(
       :pending_maintenance_actions,
       :marker)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -15173,6 +15424,7 @@ module Aws::RDS
       :db_subnet_group_name,
       :pending_cloudwatch_logs_exports,
       :processor_features)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -15244,6 +15496,7 @@ module Aws::RDS
     class ProcessorFeature < Struct.new(
       :name,
       :value)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -15271,6 +15524,7 @@ module Aws::RDS
     #
     class PromoteReadReplicaDBClusterMessage < Struct.new(
       :db_cluster_identifier)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -15285,6 +15539,7 @@ module Aws::RDS
     #
     class PromoteReadReplicaDBClusterResult < Struct.new(
       :db_cluster)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -15356,6 +15611,7 @@ module Aws::RDS
       :db_instance_identifier,
       :backup_retention_period,
       :preferred_backup_window)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -15370,6 +15626,7 @@ module Aws::RDS
     #
     class PromoteReadReplicaResult < Struct.new(
       :db_instance)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -15428,6 +15685,7 @@ module Aws::RDS
       :reserved_db_instance_id,
       :db_instance_count,
       :tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -15441,6 +15699,7 @@ module Aws::RDS
     #
     class PurchaseReservedDBInstancesOfferingResult < Struct.new(
       :reserved_db_instance)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -15468,6 +15727,7 @@ module Aws::RDS
       :from,
       :to,
       :step)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -15503,6 +15763,7 @@ module Aws::RDS
     class RebootDBInstanceMessage < Struct.new(
       :db_instance_identifier,
       :force_failover)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -15517,6 +15778,7 @@ module Aws::RDS
     #
     class RebootDBInstanceResult < Struct.new(
       :db_instance)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -15537,6 +15799,7 @@ module Aws::RDS
     class RecurringCharge < Struct.new(
       :recurring_charge_amount,
       :recurring_charge_frequency)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -15574,6 +15837,7 @@ module Aws::RDS
       :target_group_name,
       :db_instance_identifiers,
       :db_cluster_identifiers)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -15586,6 +15850,7 @@ module Aws::RDS
     #
     class RegisterDBProxyTargetsResponse < Struct.new(
       :db_proxy_targets)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -15612,6 +15877,7 @@ module Aws::RDS
     class RemoveFromGlobalClusterMessage < Struct.new(
       :global_cluster_identifier,
       :db_cluster_identifier)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -15623,6 +15889,7 @@ module Aws::RDS
     #
     class RemoveFromGlobalClusterResult < Struct.new(
       :global_cluster)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -15657,6 +15924,7 @@ module Aws::RDS
       :db_cluster_identifier,
       :role_arn,
       :feature_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -15691,6 +15959,7 @@ module Aws::RDS
       :db_instance_identifier,
       :role_arn,
       :feature_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -15718,6 +15987,7 @@ module Aws::RDS
     class RemoveSourceIdentifierFromSubscriptionMessage < Struct.new(
       :subscription_name,
       :source_identifier)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -15730,6 +16000,7 @@ module Aws::RDS
     #
     class RemoveSourceIdentifierFromSubscriptionResult < Struct.new(
       :event_subscription)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -15761,6 +16032,7 @@ module Aws::RDS
     class RemoveTagsFromResourceMessage < Struct.new(
       :resource_name,
       :tag_keys)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -15857,6 +16129,7 @@ module Aws::RDS
       :recurring_charges,
       :reserved_db_instance_arn,
       :lease_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -15884,6 +16157,7 @@ module Aws::RDS
     class ReservedDBInstanceMessage < Struct.new(
       :marker,
       :reserved_db_instances)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -15955,6 +16229,7 @@ module Aws::RDS
       :offering_type,
       :multi_az,
       :recurring_charges)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -15976,6 +16251,7 @@ module Aws::RDS
     class ReservedDBInstancesOfferingMessage < Struct.new(
       :marker,
       :reserved_db_instances_offerings)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -16031,6 +16307,7 @@ module Aws::RDS
       :db_cluster_parameter_group_name,
       :reset_all_parameters,
       :parameters)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -16107,6 +16384,7 @@ module Aws::RDS
       :db_parameter_group_name,
       :reset_all_parameters,
       :parameters)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -16132,6 +16410,7 @@ module Aws::RDS
     class ResourcePendingMaintenanceActions < Struct.new(
       :resource_identifier,
       :pending_maintenance_action_details)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -16206,7 +16485,7 @@ module Aws::RDS
     #
     # @!attribute [rw] db_cluster_identifier
     #   The name of the DB cluster to create from the source data in the
-    #   Amazon S3 bucket. This parameter is isn't case-sensitive.
+    #   Amazon S3 bucket. This parameter isn't case-sensitive.
     #
     #   Constraints:
     #
@@ -16416,9 +16695,9 @@ module Aws::RDS
     # @!attribute [rw] source_engine_version
     #   The version of the database that the backup files were created from.
     #
-    #   MySQL version 5.5 and 5.6 are supported.
+    #   MySQL versions 5.5, 5.6, and 5.7 are supported.
     #
-    #   Example: `5.6.22`
+    #   Example: `5.6.40`
     #   @return [String]
     #
     # @!attribute [rw] s3_bucket_name
@@ -16533,6 +16812,7 @@ module Aws::RDS
       :copy_tags_to_snapshot,
       :domain,
       :domain_iam_role_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -16547,6 +16827,7 @@ module Aws::RDS
     #
     class RestoreDBClusterFromS3Result < Struct.new(
       :db_cluster)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -16840,6 +17121,7 @@ module Aws::RDS
       :copy_tags_to_snapshot,
       :domain,
       :domain_iam_role_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -16854,6 +17136,7 @@ module Aws::RDS
     #
     class RestoreDBClusterFromSnapshotResult < Struct.new(
       :db_cluster)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -17132,6 +17415,7 @@ module Aws::RDS
       :copy_tags_to_snapshot,
       :domain,
       :domain_iam_role_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -17146,6 +17430,7 @@ module Aws::RDS
     #
     class RestoreDBClusterToPointInTimeResult < Struct.new(
       :db_cluster)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -17541,6 +17826,7 @@ module Aws::RDS
       :use_default_processor_features,
       :db_parameter_group_name,
       :deletion_protection)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -17555,6 +17841,7 @@ module Aws::RDS
     #
     class RestoreDBInstanceFromDBSnapshotResult < Struct.new(
       :db_instance)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -17943,9 +18230,11 @@ module Aws::RDS
     #   @return [String]
     #
     # @!attribute [rw] source_engine_version
-    #   The engine version of your source database.
+    #   The version of the database that the backup files were created from.
     #
-    #   Valid Values: `5.6`
+    #   MySQL versions 5.6 and 5.7 are supported.
+    #
+    #   Example: `5.6.40`
     #   @return [String]
     #
     # @!attribute [rw] s3_bucket_name
@@ -18068,6 +18357,7 @@ module Aws::RDS
       :processor_features,
       :use_default_processor_features,
       :deletion_protection)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -18082,6 +18372,7 @@ module Aws::RDS
     #
     class RestoreDBInstanceFromS3Result < Struct.new(
       :db_instance)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -18497,6 +18788,7 @@ module Aws::RDS
       :db_parameter_group_name,
       :deletion_protection,
       :source_dbi_resource_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -18511,6 +18803,7 @@ module Aws::RDS
     #
     class RestoreDBInstanceToPointInTimeResult < Struct.new(
       :db_instance)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -18529,6 +18822,7 @@ module Aws::RDS
     class RestoreWindow < Struct.new(
       :earliest_time,
       :latest_time)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -18584,6 +18878,7 @@ module Aws::RDS
       :ec2_security_group_name,
       :ec2_security_group_id,
       :ec2_security_group_owner_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -18598,6 +18893,7 @@ module Aws::RDS
     #
     class RevokeDBSecurityGroupIngressResult < Struct.new(
       :db_security_group)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -18714,6 +19010,7 @@ module Aws::RDS
       :auto_pause,
       :seconds_until_auto_pause,
       :timeout_action)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -18764,6 +19061,7 @@ module Aws::RDS
       :auto_pause,
       :seconds_until_auto_pause,
       :timeout_action)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -18808,6 +19106,7 @@ module Aws::RDS
       :region_name,
       :endpoint,
       :status)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -18831,6 +19130,7 @@ module Aws::RDS
     class SourceRegionMessage < Struct.new(
       :marker,
       :source_regions)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -18875,6 +19175,7 @@ module Aws::RDS
       :mode,
       :kms_key_id,
       :apply_immediately)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -18910,6 +19211,7 @@ module Aws::RDS
       :status,
       :mode,
       :apply_immediately)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -18929,6 +19231,7 @@ module Aws::RDS
     #
     class StartDBClusterMessage < Struct.new(
       :db_cluster_identifier)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -18943,6 +19246,7 @@ module Aws::RDS
     #
     class StartDBClusterResult < Struct.new(
       :db_cluster)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -18961,6 +19265,7 @@ module Aws::RDS
     #
     class StartDBInstanceMessage < Struct.new(
       :db_instance_identifier)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -18975,6 +19280,7 @@ module Aws::RDS
     #
     class StartDBInstanceResult < Struct.new(
       :db_instance)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -19054,6 +19360,7 @@ module Aws::RDS
       :kms_key_id,
       :s3_prefix,
       :export_only)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -19082,6 +19389,7 @@ module Aws::RDS
     class StopActivityStreamRequest < Struct.new(
       :resource_arn,
       :apply_immediately)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -19105,6 +19413,7 @@ module Aws::RDS
       :kms_key_id,
       :kinesis_stream_name,
       :status)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -19124,6 +19433,7 @@ module Aws::RDS
     #
     class StopDBClusterMessage < Struct.new(
       :db_cluster_identifier)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -19138,6 +19448,7 @@ module Aws::RDS
     #
     class StopDBClusterResult < Struct.new(
       :db_cluster)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -19163,6 +19474,7 @@ module Aws::RDS
     class StopDBInstanceMessage < Struct.new(
       :db_instance_identifier,
       :db_snapshot_identifier)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -19177,6 +19489,7 @@ module Aws::RDS
     #
     class StopDBInstanceResult < Struct.new(
       :db_instance)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -19218,6 +19531,7 @@ module Aws::RDS
       :subnet_identifier,
       :subnet_availability_zone,
       :subnet_status)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -19279,6 +19593,7 @@ module Aws::RDS
     class Tag < Struct.new(
       :key,
       :value)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -19290,6 +19605,7 @@ module Aws::RDS
     #
     class TagListMessage < Struct.new(
       :tag_list)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -19324,6 +19640,7 @@ module Aws::RDS
       :state,
       :reason,
       :description)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -19339,6 +19656,7 @@ module Aws::RDS
     #
     class Timezone < Struct.new(
       :timezone_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -19376,6 +19694,7 @@ module Aws::RDS
       :description,
       :auto_upgrade,
       :is_major_version_upgrade)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -19431,6 +19750,7 @@ module Aws::RDS
       :auth_scheme,
       :secret_arn,
       :iam_auth)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -19475,6 +19795,7 @@ module Aws::RDS
       :auth_scheme,
       :secret_arn,
       :iam_auth)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -19496,6 +19817,7 @@ module Aws::RDS
     class ValidDBInstanceModificationsMessage < Struct.new(
       :storage,
       :valid_processor_features)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -19534,6 +19856,7 @@ module Aws::RDS
       :provisioned_iops,
       :iops_to_storage_ratio,
       :supports_storage_autoscaling)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -19553,6 +19876,7 @@ module Aws::RDS
     class VpcSecurityGroupMembership < Struct.new(
       :vpc_security_group_id,
       :status)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -19601,6 +19925,7 @@ module Aws::RDS
       :vpn_psk,
       :vpn_name,
       :vpn_state)
+      SENSITIVE = [:vpn_psk]
       include Aws::Structure
     end
 

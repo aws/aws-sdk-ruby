@@ -219,7 +219,7 @@ module Aws
         content_sha256 ||= sha256_hexdigest(request[:body] || '')
 
         sigv4_headers = {}
-        sigv4_headers['host'] = host(url)
+        sigv4_headers['host'] = headers['host'] || host(url)
         sigv4_headers['x-amz-date'] = datetime
         sigv4_headers['x-amz-security-token'] = creds.session_token if creds.session_token
         sigv4_headers['x-amz-content-sha256'] ||= content_sha256 if @apply_checksum_header
@@ -376,7 +376,7 @@ module Aws
         url = extract_url(options)
 
         headers = downcase_headers(options[:headers])
-        headers['host'] = host(url)
+        headers['host'] ||= host(url)
 
         datetime = headers['x-amz-date']
         datetime ||= (options[:time] || Time.now).utc.strftime("%Y%m%dT%H%M%SZ")

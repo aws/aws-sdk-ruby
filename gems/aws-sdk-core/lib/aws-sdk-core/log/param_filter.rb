@@ -6,7 +6,10 @@ require 'set'
 module Aws
   module Log
     class ParamFilter
-
+      # DEPRECATED - this must exist for backwards compatibility. Sensitive
+      # members are now computed for each request/response type. This can be
+      # removed in a new major version.
+      #
       # A managed list of sensitive parameters that should be filtered from
       # logs. This is updated automatically as part of each release. See the
       # `tasks/update-sensitive-params.rake` for more information.
@@ -17,29 +20,41 @@ module Aws
       # end
 
       def initialize(options = {})
-        @filters = Set.new(SENSITIVE + Array(options[:filter]))
+        @enabled = options[:filter_sensitive_params] != false
+        @additional_filters = options[:filter] || []
       end
 
-      def filter(value)
-        case value
-        when Struct, Hash then filter_hash(value)
-        when Array then filter_array(value)
-        else value
+      def filter(values, type)
+        case values
+        when Struct, Hash then filter_hash(values, type)
+        when Array then filter_array(values, type)
+        else values
         end
       end
 
       private
 
-      def filter_hash(values)
+      def filter_hash(values, type)
+        if type.const_defined?('SENSITIVE')
+          filters = type::SENSITIVE + @additional_filters
+        else
+          # Support backwards compatibility (new core + old service)
+          filters = SENSITIVE + @additional_filters
+        end
+
         filtered = {}
         values.each_pair do |key, value|
-          filtered[key] = @filters.any? { |f| f.to_s.casecmp(key.to_s).zero? } ? '[FILTERED]' : filter(value)
+          filtered[key] = if @enabled && filters.include?(key)
+            '[FILTERED]'
+          else
+            filter(value, type)
+          end
         end
         filtered
       end
 
-      def filter_array(values)
-        values.map { |value| filter(value) }
+      def filter_array(values, type)
+        values.map { |value| filter(value, type) }
       end
 
     end

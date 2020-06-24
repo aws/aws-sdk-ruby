@@ -64,39 +64,39 @@ module Aws::SQS
     #   The following lists the names, descriptions, and values of the special
     #   request parameters that the `CreateQueue` action uses:
     #
-    #   * `DelaySeconds` - The length of time, in seconds, for which the
+    #   * `DelaySeconds` – The length of time, in seconds, for which the
     #     delivery of all messages in the queue is delayed. Valid values: An
     #     integer from 0 to 900 seconds (15 minutes). Default: 0.
     #
-    #   * `MaximumMessageSize` - The limit of how many bytes a message can
+    #   * `MaximumMessageSize` – The limit of how many bytes a message can
     #     contain before Amazon SQS rejects it. Valid values: An integer from
     #     1,024 bytes (1 KiB) to 262,144 bytes (256 KiB). Default: 262,144
     #     (256 KiB).
     #
-    #   * `MessageRetentionPeriod` - The length of time, in seconds, for which
+    #   * `MessageRetentionPeriod` – The length of time, in seconds, for which
     #     Amazon SQS retains a message. Valid values: An integer from 60
     #     seconds (1 minute) to 1,209,600 seconds (14 days). Default: 345,600
     #     (4 days).
     #
-    #   * `Policy` - The queue's policy. A valid AWS policy. For more
+    #   * `Policy` – The queue's policy. A valid AWS policy. For more
     #     information about policy structure, see [Overview of AWS IAM
     #     Policies][1] in the *Amazon IAM User Guide*.
     #
-    #   * `ReceiveMessageWaitTimeSeconds` - The length of time, in seconds,
+    #   * `ReceiveMessageWaitTimeSeconds` – The length of time, in seconds,
     #     for which a ` ReceiveMessage ` action waits for a message to arrive.
     #     Valid values: An integer from 0 to 20 (seconds). Default: 0.
     #
-    #   * `RedrivePolicy` - The string that includes the parameters for the
-    #     dead-letter queue functionality of the source queue. For more
-    #     information about the redrive policy and dead-letter queues, see
-    #     [Using Amazon SQS Dead-Letter Queues][2] in the *Amazon Simple Queue
-    #     Service Developer Guide*.
+    #   * `RedrivePolicy` – The string that includes the parameters for the
+    #     dead-letter queue functionality of the source queue as a JSON
+    #     object. For more information about the redrive policy and
+    #     dead-letter queues, see [Using Amazon SQS Dead-Letter Queues][2] in
+    #     the *Amazon Simple Queue Service Developer Guide*.
     #
-    #     * `deadLetterTargetArn` - The Amazon Resource Name (ARN) of the
+    #     * `deadLetterTargetArn` – The Amazon Resource Name (ARN) of the
     #       dead-letter queue to which Amazon SQS moves messages after the
     #       value of `maxReceiveCount` is exceeded.
     #
-    #     * `maxReceiveCount` - The number of times a message is delivered to
+    #     * `maxReceiveCount` – The number of times a message is delivered to
     #       the source queue before being moved to the dead-letter queue. When
     #       the `ReceiveCount` for a message exceeds the `maxReceiveCount` for
     #       a queue, Amazon SQS moves the message to the dead-letter-queue.
@@ -107,7 +107,7 @@ module Aws::SQS
     #
     #      </note>
     #
-    #   * `VisibilityTimeout` - The visibility timeout for the queue, in
+    #   * `VisibilityTimeout` – The visibility timeout for the queue, in
     #     seconds. Valid values: An integer from 0 to 43,200 (12 hours).
     #     Default: 30. For more information about the visibility timeout, see
     #     [Visibility Timeout][3] in the *Amazon Simple Queue Service
@@ -115,14 +115,14 @@ module Aws::SQS
     #
     #   The following attributes apply only to [server-side-encryption][4]\:
     #
-    #   * `KmsMasterKeyId` - The ID of an AWS-managed customer master key
+    #   * `KmsMasterKeyId` – The ID of an AWS-managed customer master key
     #     (CMK) for Amazon SQS or a custom CMK. For more information, see [Key
     #     Terms][5]. While the alias of the AWS-managed CMK for Amazon SQS is
     #     always `alias/aws/sqs`, the alias of a custom CMK can, for example,
     #     be `alias/MyAlias `. For more examples, see [KeyId][6] in the *AWS
     #     Key Management Service API Reference*.
     #
-    #   * `KmsDataKeyReusePeriodSeconds` - The length of time, in seconds, for
+    #   * `KmsDataKeyReusePeriodSeconds` – The length of time, in seconds, for
     #     which Amazon SQS can reuse a [data key][7] to encrypt or decrypt
     #     messages before calling AWS KMS again. An integer representing
     #     seconds, between 60 seconds (1 minute) and 86,400 seconds (24
@@ -134,7 +134,7 @@ module Aws::SQS
     #   The following attributes apply only to [FIFO (first-in-first-out)
     #   queues][9]\:
     #
-    #   * `FifoQueue` - Designates a queue as FIFO. Valid values: `true`,
+    #   * `FifoQueue` – Designates a queue as FIFO. Valid values: `true`,
     #     `false`. If you don't specify the `FifoQueue` attribute, Amazon SQS
     #     creates a standard queue. You can provide this attribute only during
     #     queue creation. You can't change it for an existing queue. When you
@@ -144,7 +144,7 @@ module Aws::SQS
     #     For more information, see [FIFO Queue Logic][10] in the *Amazon
     #     Simple Queue Service Developer Guide*.
     #
-    #   * `ContentBasedDeduplication` - Enables content-based deduplication.
+    #   * `ContentBasedDeduplication` – Enables content-based deduplication.
     #     Valid values: `true`, `false`. For more information, see
     #     [Exactly-Once Processing][11] in the *Amazon Simple Queue Service
     #     Developer Guide*.
@@ -282,15 +282,17 @@ module Aws::SQS
     # @return [Queue::Collection]
     def queues(options = {})
       batches = Enumerator.new do |y|
-        batch = []
         resp = @client.list_queues(options)
-        resp.data.queue_urls.each do |q|
-          batch << Queue.new(
-            url: q,
-            client: @client
-          )
+        resp.each_page do |page|
+          batch = []
+          page.data.queue_urls.each do |q|
+            batch << Queue.new(
+              url: q,
+              client: @client
+            )
+          end
+          y.yield(batch)
         end
-        y.yield(batch)
       end
       Queue::Collection.new(batches)
     end

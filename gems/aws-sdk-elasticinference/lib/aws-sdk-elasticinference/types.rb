@@ -31,6 +31,7 @@ module Aws::ElasticInference
       :accelerator_type_name,
       :memory_info,
       :throughput_info)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -60,6 +61,7 @@ module Aws::ElasticInference
       :accelerator_type,
       :location_type,
       :location)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -72,6 +74,7 @@ module Aws::ElasticInference
     #
     class BadRequestException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -102,6 +105,7 @@ module Aws::ElasticInference
     class DescribeAcceleratorOfferingsRequest < Struct.new(
       :location_type,
       :accelerator_types)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -113,6 +117,7 @@ module Aws::ElasticInference
     #
     class DescribeAcceleratorOfferingsResponse < Struct.new(
       :accelerator_type_offerings)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -130,6 +135,7 @@ module Aws::ElasticInference
     #
     class DescribeAcceleratorTypesResponse < Struct.new(
       :accelerator_types)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -180,6 +186,7 @@ module Aws::ElasticInference
       :filters,
       :max_results,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -197,6 +204,7 @@ module Aws::ElasticInference
     class DescribeAcceleratorsResponse < Struct.new(
       :accelerator_set,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -232,6 +240,7 @@ module Aws::ElasticInference
       :accelerator_id,
       :availability_zone,
       :attached_resource)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -245,6 +254,7 @@ module Aws::ElasticInference
     #
     class ElasticInferenceAcceleratorHealth < Struct.new(
       :status)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -274,6 +284,7 @@ module Aws::ElasticInference
     class Filter < Struct.new(
       :name,
       :values)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -286,6 +297,7 @@ module Aws::ElasticInference
     #
     class InternalServerException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -307,6 +319,7 @@ module Aws::ElasticInference
     class KeyValuePair < Struct.new(
       :key,
       :value)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -325,6 +338,7 @@ module Aws::ElasticInference
     #
     class ListTagsForResourceRequest < Struct.new(
       :resource_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -336,6 +350,7 @@ module Aws::ElasticInference
     #
     class ListTagsForResourceResult < Struct.new(
       :tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -349,6 +364,7 @@ module Aws::ElasticInference
     #
     class MemoryInfo < Struct.new(
       :size_in_mi_b)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -361,6 +377,7 @@ module Aws::ElasticInference
     #
     class ResourceNotFoundException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -387,6 +404,7 @@ module Aws::ElasticInference
     class TagResourceRequest < Struct.new(
       :resource_arn,
       :tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -415,6 +433,7 @@ module Aws::ElasticInference
     class UntagResourceRequest < Struct.new(
       :resource_arn,
       :tag_keys)
+      SENSITIVE = []
       include Aws::Structure
     end
 

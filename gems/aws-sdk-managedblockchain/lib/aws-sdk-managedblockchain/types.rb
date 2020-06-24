@@ -61,6 +61,7 @@ module Aws::ManagedBlockchain
       :threshold_percentage,
       :proposal_duration_in_hours,
       :threshold_comparator)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -123,6 +124,7 @@ module Aws::ManagedBlockchain
       :invitation_id,
       :network_id,
       :member_configuration)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -134,6 +136,7 @@ module Aws::ManagedBlockchain
     #
     class CreateMemberOutput < Struct.new(
       :member_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -231,6 +234,7 @@ module Aws::ManagedBlockchain
       :framework_configuration,
       :voting_policy,
       :member_configuration)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -247,6 +251,7 @@ module Aws::ManagedBlockchain
     class CreateNetworkOutput < Struct.new(
       :network_id,
       :member_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -307,6 +312,7 @@ module Aws::ManagedBlockchain
       :network_id,
       :member_id,
       :node_configuration)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -318,6 +324,7 @@ module Aws::ManagedBlockchain
     #
     class CreateNodeOutput < Struct.new(
       :node_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -385,6 +392,7 @@ module Aws::ManagedBlockchain
       :member_id,
       :actions,
       :description)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -396,6 +404,7 @@ module Aws::ManagedBlockchain
     #
     class CreateProposalOutput < Struct.new(
       :proposal_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -421,6 +430,7 @@ module Aws::ManagedBlockchain
     class DeleteMemberInput < Struct.new(
       :network_id,
       :member_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -455,6 +465,7 @@ module Aws::ManagedBlockchain
       :network_id,
       :member_id,
       :node_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -483,6 +494,7 @@ module Aws::ManagedBlockchain
     class GetMemberInput < Struct.new(
       :network_id,
       :member_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -494,6 +506,7 @@ module Aws::ManagedBlockchain
     #
     class GetMemberOutput < Struct.new(
       :member)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -512,6 +525,7 @@ module Aws::ManagedBlockchain
     #
     class GetNetworkInput < Struct.new(
       :network_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -523,6 +537,7 @@ module Aws::ManagedBlockchain
     #
     class GetNetworkOutput < Struct.new(
       :network)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -553,6 +568,7 @@ module Aws::ManagedBlockchain
       :network_id,
       :member_id,
       :node_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -564,6 +580,7 @@ module Aws::ManagedBlockchain
     #
     class GetNodeOutput < Struct.new(
       :node)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -588,6 +605,7 @@ module Aws::ManagedBlockchain
     class GetProposalInput < Struct.new(
       :network_id,
       :proposal_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -599,6 +617,7 @@ module Aws::ManagedBlockchain
     #
     class GetProposalOutput < Struct.new(
       :proposal)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -609,6 +628,7 @@ module Aws::ManagedBlockchain
     #
     class IllegalActionException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -629,6 +649,7 @@ module Aws::ManagedBlockchain
     #
     class InvalidRequestException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -681,6 +702,7 @@ module Aws::ManagedBlockchain
       :expiration_date,
       :status,
       :network_summary)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -703,6 +725,7 @@ module Aws::ManagedBlockchain
     #
     class InviteAction < Struct.new(
       :principal)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -728,6 +751,7 @@ module Aws::ManagedBlockchain
     class ListInvitationsInput < Struct.new(
       :max_results,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -745,6 +769,7 @@ module Aws::ManagedBlockchain
     class ListInvitationsOutput < Struct.new(
       :invitations,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -798,6 +823,7 @@ module Aws::ManagedBlockchain
       :is_owned,
       :max_results,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -816,6 +842,7 @@ module Aws::ManagedBlockchain
     class ListMembersOutput < Struct.new(
       :members,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -861,6 +888,7 @@ module Aws::ManagedBlockchain
       :status,
       :max_results,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -879,6 +907,7 @@ module Aws::ManagedBlockchain
     class ListNetworksOutput < Struct.new(
       :networks,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -923,6 +952,7 @@ module Aws::ManagedBlockchain
       :status,
       :max_results,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -941,6 +971,7 @@ module Aws::ManagedBlockchain
     class ListNodesOutput < Struct.new(
       :nodes,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -978,6 +1009,7 @@ module Aws::ManagedBlockchain
       :proposal_id,
       :max_results,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -995,6 +1027,7 @@ module Aws::ManagedBlockchain
     class ListProposalVotesOutput < Struct.new(
       :proposal_votes,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1026,6 +1059,7 @@ module Aws::ManagedBlockchain
       :network_id,
       :max_results,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1043,6 +1077,7 @@ module Aws::ManagedBlockchain
     class ListProposalsOutput < Struct.new(
       :proposals,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1063,6 +1098,7 @@ module Aws::ManagedBlockchain
     #
     class LogConfiguration < Struct.new(
       :enabled)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1085,6 +1121,7 @@ module Aws::ManagedBlockchain
     #
     class LogConfigurations < Struct.new(
       :cloudwatch)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1154,6 +1191,7 @@ module Aws::ManagedBlockchain
       :log_publishing_configuration,
       :status,
       :creation_date)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1205,6 +1243,7 @@ module Aws::ManagedBlockchain
       :description,
       :framework_configuration,
       :log_publishing_configuration)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1224,6 +1263,7 @@ module Aws::ManagedBlockchain
     class MemberFabricAttributes < Struct.new(
       :admin_username,
       :ca_endpoint)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1256,6 +1296,7 @@ module Aws::ManagedBlockchain
     class MemberFabricConfiguration < Struct.new(
       :admin_username,
       :admin_password)
+      SENSITIVE = [:admin_password]
       include Aws::Structure
     end
 
@@ -1285,6 +1326,7 @@ module Aws::ManagedBlockchain
     #
     class MemberFabricLogPublishingConfiguration < Struct.new(
       :ca_logs)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1300,6 +1342,7 @@ module Aws::ManagedBlockchain
     #
     class MemberFrameworkAttributes < Struct.new(
       :fabric)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1325,6 +1368,7 @@ module Aws::ManagedBlockchain
     #
     class MemberFrameworkConfiguration < Struct.new(
       :fabric)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1354,6 +1398,7 @@ module Aws::ManagedBlockchain
     #
     class MemberLogPublishingConfiguration < Struct.new(
       :fabric)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1412,6 +1457,7 @@ module Aws::ManagedBlockchain
       :status,
       :creation_date,
       :is_owned)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1473,6 +1519,7 @@ module Aws::ManagedBlockchain
       :voting_policy,
       :status,
       :creation_date)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1497,6 +1544,7 @@ module Aws::ManagedBlockchain
     class NetworkFabricAttributes < Struct.new(
       :ordering_service_endpoint,
       :edition)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1522,6 +1570,7 @@ module Aws::ManagedBlockchain
     #
     class NetworkFabricConfiguration < Struct.new(
       :edition)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1537,6 +1586,7 @@ module Aws::ManagedBlockchain
     #
     class NetworkFrameworkAttributes < Struct.new(
       :fabric)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1561,6 +1611,7 @@ module Aws::ManagedBlockchain
     #
     class NetworkFrameworkConfiguration < Struct.new(
       :fabric)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1604,6 +1655,7 @@ module Aws::ManagedBlockchain
       :framework_version,
       :status,
       :creation_date)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1656,6 +1708,7 @@ module Aws::ManagedBlockchain
       :log_publishing_configuration,
       :status,
       :creation_date)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1700,6 +1753,7 @@ module Aws::ManagedBlockchain
       :instance_type,
       :availability_zone,
       :log_publishing_configuration)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1721,6 +1775,7 @@ module Aws::ManagedBlockchain
     class NodeFabricAttributes < Struct.new(
       :peer_endpoint,
       :peer_event_endpoint)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1764,6 +1819,7 @@ module Aws::ManagedBlockchain
     class NodeFabricLogPublishingConfiguration < Struct.new(
       :chaincode_logs,
       :peer_logs)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1779,6 +1835,7 @@ module Aws::ManagedBlockchain
     #
     class NodeFrameworkAttributes < Struct.new(
       :fabric)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1813,6 +1870,7 @@ module Aws::ManagedBlockchain
     #
     class NodeLogPublishingConfiguration < Struct.new(
       :fabric)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1846,6 +1904,7 @@ module Aws::ManagedBlockchain
       :creation_date,
       :availability_zone,
       :instance_type)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1941,6 +2000,7 @@ module Aws::ManagedBlockchain
       :yes_vote_count,
       :no_vote_count,
       :outstanding_vote_count)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1978,6 +2038,7 @@ module Aws::ManagedBlockchain
     class ProposalActions < Struct.new(
       :invitations,
       :removals)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2045,6 +2106,7 @@ module Aws::ManagedBlockchain
       :status,
       :creation_date,
       :expiration_date)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2063,6 +2125,7 @@ module Aws::ManagedBlockchain
     #
     class RejectInvitationInput < Struct.new(
       :invitation_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2089,6 +2152,7 @@ module Aws::ManagedBlockchain
     #
     class RemoveAction < Struct.new(
       :member_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2101,6 +2165,7 @@ module Aws::ManagedBlockchain
     #
     class ResourceAlreadyExistsException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2115,6 +2180,7 @@ module Aws::ManagedBlockchain
     #
     class ResourceLimitExceededException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2128,6 +2194,7 @@ module Aws::ManagedBlockchain
     #
     class ResourceNotFoundException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2141,6 +2208,7 @@ module Aws::ManagedBlockchain
     #
     class ResourceNotReadyException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2190,6 +2258,7 @@ module Aws::ManagedBlockchain
       :network_id,
       :member_id,
       :log_publishing_configuration)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2244,6 +2313,7 @@ module Aws::ManagedBlockchain
       :member_id,
       :node_id,
       :log_publishing_configuration)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2284,6 +2354,7 @@ module Aws::ManagedBlockchain
       :proposal_id,
       :voter_member_id,
       :vote)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2311,6 +2382,7 @@ module Aws::ManagedBlockchain
       :vote,
       :member_name,
       :member_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2338,6 +2410,7 @@ module Aws::ManagedBlockchain
     #
     class VotingPolicy < Struct.new(
       :approval_threshold_policy)
+      SENSITIVE = []
       include Aws::Structure
     end
 

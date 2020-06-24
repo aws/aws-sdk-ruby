@@ -19,6 +19,7 @@ module Aws::AccessAnalyzer
     #
     class AccessDeniedException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -86,6 +87,7 @@ module Aws::AccessAnalyzer
       :shared_via,
       :status,
       :updated_at)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -109,6 +111,7 @@ module Aws::AccessAnalyzer
       :resource_arn,
       :resource_owner_account,
       :resource_type)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -174,6 +177,7 @@ module Aws::AccessAnalyzer
       :status_reason,
       :tags,
       :type)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -202,6 +206,7 @@ module Aws::AccessAnalyzer
       :filter,
       :rule_name,
       :updated_at)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -224,6 +229,7 @@ module Aws::AccessAnalyzer
       :message,
       :resource_id,
       :resource_type)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -288,6 +294,7 @@ module Aws::AccessAnalyzer
       :client_token,
       :tags,
       :type)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -301,6 +308,7 @@ module Aws::AccessAnalyzer
     #
     class CreateAnalyzerResponse < Struct.new(
       :arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -349,6 +357,7 @@ module Aws::AccessAnalyzer
       :client_token,
       :filter,
       :rule_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -391,6 +400,7 @@ module Aws::AccessAnalyzer
       :eq,
       :exists,
       :neq)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -420,6 +430,7 @@ module Aws::AccessAnalyzer
     class DeleteAnalyzerRequest < Struct.new(
       :analyzer_name,
       :client_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -456,6 +467,7 @@ module Aws::AccessAnalyzer
       :analyzer_name,
       :client_token,
       :rule_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -540,6 +552,7 @@ module Aws::AccessAnalyzer
       :sources,
       :status,
       :updated_at)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -561,6 +574,7 @@ module Aws::AccessAnalyzer
     class FindingSource < Struct.new(
       :detail,
       :type)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -575,6 +589,7 @@ module Aws::AccessAnalyzer
     #
     class FindingSourceDetail < Struct.new(
       :access_point_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -660,6 +675,7 @@ module Aws::AccessAnalyzer
       :sources,
       :status,
       :updated_at)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -686,6 +702,7 @@ module Aws::AccessAnalyzer
     class GetAnalyzedResourceRequest < Struct.new(
       :analyzer_arn,
       :resource_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -700,6 +717,7 @@ module Aws::AccessAnalyzer
     #
     class GetAnalyzedResourceResponse < Struct.new(
       :resource)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -720,6 +738,7 @@ module Aws::AccessAnalyzer
     #
     class GetAnalyzerRequest < Struct.new(
       :analyzer_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -734,6 +753,7 @@ module Aws::AccessAnalyzer
     #
     class GetAnalyzerResponse < Struct.new(
       :analyzer)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -760,6 +780,7 @@ module Aws::AccessAnalyzer
     class GetArchiveRuleRequest < Struct.new(
       :analyzer_name,
       :rule_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -773,6 +794,7 @@ module Aws::AccessAnalyzer
     #
     class GetArchiveRuleResponse < Struct.new(
       :archive_rule)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -799,6 +821,7 @@ module Aws::AccessAnalyzer
     class GetFindingRequest < Struct.new(
       :analyzer_arn,
       :id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -812,6 +835,7 @@ module Aws::AccessAnalyzer
     #
     class GetFindingResponse < Struct.new(
       :finding)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -846,6 +870,7 @@ module Aws::AccessAnalyzer
     class InlineArchiveRule < Struct.new(
       :filter,
       :rule_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -863,6 +888,7 @@ module Aws::AccessAnalyzer
     class InternalServerException < Struct.new(
       :message,
       :retry_after_seconds)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -902,6 +928,7 @@ module Aws::AccessAnalyzer
       :max_results,
       :next_token,
       :resource_type)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -920,6 +947,7 @@ module Aws::AccessAnalyzer
     class ListAnalyzedResourcesResponse < Struct.new(
       :analyzed_resources,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -952,6 +980,7 @@ module Aws::AccessAnalyzer
       :max_results,
       :next_token,
       :type)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -970,6 +999,7 @@ module Aws::AccessAnalyzer
     class ListAnalyzersResponse < Struct.new(
       :analyzers,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1002,6 +1032,7 @@ module Aws::AccessAnalyzer
       :analyzer_name,
       :max_results,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1020,6 +1051,7 @@ module Aws::AccessAnalyzer
     class ListArchiveRulesResponse < Struct.new(
       :archive_rules,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1074,6 +1106,7 @@ module Aws::AccessAnalyzer
       :max_results,
       :next_token,
       :sort)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1093,6 +1126,7 @@ module Aws::AccessAnalyzer
     class ListFindingsResponse < Struct.new(
       :findings,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1113,6 +1147,7 @@ module Aws::AccessAnalyzer
     #
     class ListTagsForResourceRequest < Struct.new(
       :resource_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1126,6 +1161,7 @@ module Aws::AccessAnalyzer
     #
     class ListTagsForResourceResponse < Struct.new(
       :tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1148,6 +1184,7 @@ module Aws::AccessAnalyzer
       :message,
       :resource_id,
       :resource_type)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1170,6 +1207,7 @@ module Aws::AccessAnalyzer
       :message,
       :resource_id,
       :resource_type)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1196,6 +1234,7 @@ module Aws::AccessAnalyzer
     class SortCriteria < Struct.new(
       :attribute_name,
       :order_by)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1223,6 +1262,7 @@ module Aws::AccessAnalyzer
     class StartResourceScanRequest < Struct.new(
       :analyzer_arn,
       :resource_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1240,6 +1280,7 @@ module Aws::AccessAnalyzer
     #
     class StatusReason < Struct.new(
       :code)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1268,6 +1309,7 @@ module Aws::AccessAnalyzer
     class TagResourceRequest < Struct.new(
       :resource_arn,
       :tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1291,6 +1333,7 @@ module Aws::AccessAnalyzer
     class ThrottlingException < Struct.new(
       :message,
       :retry_after_seconds)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1317,6 +1360,7 @@ module Aws::AccessAnalyzer
     class UntagResourceRequest < Struct.new(
       :resource_arn,
       :tag_keys)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1372,6 +1416,7 @@ module Aws::AccessAnalyzer
       :client_token,
       :filter,
       :rule_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1422,6 +1467,7 @@ module Aws::AccessAnalyzer
       :ids,
       :resource_arn,
       :status)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1444,6 +1490,7 @@ module Aws::AccessAnalyzer
       :field_list,
       :message,
       :reason)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1462,6 +1509,7 @@ module Aws::AccessAnalyzer
     class ValidationExceptionField < Struct.new(
       :message,
       :name)
+      SENSITIVE = []
       include Aws::Structure
     end
 

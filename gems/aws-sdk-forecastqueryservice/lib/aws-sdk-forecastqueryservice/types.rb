@@ -25,6 +25,7 @@ module Aws::ForecastQueryService
     class DataPoint < Struct.new(
       :timestamp,
       :value)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -48,6 +49,7 @@ module Aws::ForecastQueryService
     #
     class Forecast < Struct.new(
       :predictions)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -60,6 +62,7 @@ module Aws::ForecastQueryService
     #
     class InvalidInputException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -72,6 +75,7 @@ module Aws::ForecastQueryService
     #
     class InvalidNextTokenException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -84,6 +88,7 @@ module Aws::ForecastQueryService
     #
     class LimitExceededException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -145,6 +150,7 @@ module Aws::ForecastQueryService
       :end_date,
       :filters,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -156,6 +162,7 @@ module Aws::ForecastQueryService
     #
     class QueryForecastResponse < Struct.new(
       :forecast)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -168,6 +175,7 @@ module Aws::ForecastQueryService
     #
     class ResourceInUseException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -181,6 +189,7 @@ module Aws::ForecastQueryService
     #
     class ResourceNotFoundException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 

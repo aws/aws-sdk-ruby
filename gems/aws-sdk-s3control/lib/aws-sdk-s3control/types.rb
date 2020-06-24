@@ -41,6 +41,7 @@ module Aws::S3Control
       :network_origin,
       :vpc_configuration,
       :bucket)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -51,6 +52,7 @@ module Aws::S3Control
     #
     class BadRequestException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -111,6 +113,7 @@ module Aws::S3Control
       :bucket,
       :vpc_configuration,
       :public_access_block_configuration)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -318,6 +321,7 @@ module Aws::S3Control
       :priority,
       :role_arn,
       :tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -330,6 +334,7 @@ module Aws::S3Control
     #
     class CreateJobResult < Struct.new(
       :job_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -354,6 +359,7 @@ module Aws::S3Control
     class DeleteAccessPointPolicyRequest < Struct.new(
       :account_id,
       :name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -378,6 +384,7 @@ module Aws::S3Control
     class DeleteAccessPointRequest < Struct.new(
       :account_id,
       :name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -404,6 +411,7 @@ module Aws::S3Control
     class DeleteJobTaggingRequest < Struct.new(
       :account_id,
       :job_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -427,6 +435,7 @@ module Aws::S3Control
     #
     class DeletePublicAccessBlockRequest < Struct.new(
       :account_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -450,6 +459,7 @@ module Aws::S3Control
     class DescribeJobRequest < Struct.new(
       :account_id,
       :job_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -462,6 +472,7 @@ module Aws::S3Control
     #
     class DescribeJobResult < Struct.new(
       :job)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -486,6 +497,7 @@ module Aws::S3Control
     class GetAccessPointPolicyRequest < Struct.new(
       :account_id,
       :name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -497,6 +509,7 @@ module Aws::S3Control
     #
     class GetAccessPointPolicyResult < Struct.new(
       :policy)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -522,6 +535,7 @@ module Aws::S3Control
     class GetAccessPointPolicyStatusRequest < Struct.new(
       :account_id,
       :name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -533,6 +547,7 @@ module Aws::S3Control
     #
     class GetAccessPointPolicyStatusResult < Struct.new(
       :policy_status)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -558,6 +573,7 @@ module Aws::S3Control
     class GetAccessPointRequest < Struct.new(
       :account_id,
       :name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -608,6 +624,7 @@ module Aws::S3Control
       :vpc_configuration,
       :public_access_block_configuration,
       :creation_date)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -634,6 +651,7 @@ module Aws::S3Control
     class GetJobTaggingRequest < Struct.new(
       :account_id,
       :job_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -645,6 +663,7 @@ module Aws::S3Control
     #
     class GetJobTaggingResult < Struct.new(
       :tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -657,6 +676,7 @@ module Aws::S3Control
     #
     class GetPublicAccessBlockOutput < Struct.new(
       :public_access_block_configuration)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -676,6 +696,7 @@ module Aws::S3Control
     #
     class GetPublicAccessBlockRequest < Struct.new(
       :account_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -686,6 +707,7 @@ module Aws::S3Control
     #
     class IdempotencyException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -696,6 +718,7 @@ module Aws::S3Control
     #
     class InternalServiceException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -706,6 +729,7 @@ module Aws::S3Control
     #
     class InvalidNextTokenException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -716,6 +740,7 @@ module Aws::S3Control
     #
     class InvalidRequestException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -825,6 +850,7 @@ module Aws::S3Control
       :role_arn,
       :suspended_date,
       :suspended_cause)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -843,6 +869,7 @@ module Aws::S3Control
     class JobFailure < Struct.new(
       :failure_code,
       :failure_reason)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -898,6 +925,7 @@ module Aws::S3Control
       :creation_time,
       :termination_date,
       :progress_summary)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -934,6 +962,7 @@ module Aws::S3Control
     class JobManifest < Struct.new(
       :spec,
       :location)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -967,6 +996,7 @@ module Aws::S3Control
       :object_arn,
       :object_version_id,
       :etag)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -997,6 +1027,7 @@ module Aws::S3Control
     class JobManifestSpec < Struct.new(
       :format,
       :fields)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1166,6 +1197,7 @@ module Aws::S3Control
       :s3_initiate_restore_object,
       :s3_put_object_legal_hold,
       :s3_put_object_retention)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1188,6 +1220,7 @@ module Aws::S3Control
       :total_number_of_tasks,
       :number_of_tasks_succeeded,
       :number_of_tasks_failed)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1238,6 +1271,7 @@ module Aws::S3Control
       :enabled,
       :prefix,
       :report_scope)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1248,6 +1282,7 @@ module Aws::S3Control
     #
     class JobStatusException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1269,6 +1304,7 @@ module Aws::S3Control
     #
     class LambdaInvokeOperation < Struct.new(
       :function_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1314,6 +1350,7 @@ module Aws::S3Control
       :bucket,
       :next_token,
       :max_results)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1334,6 +1371,7 @@ module Aws::S3Control
     class ListAccessPointsResult < Struct.new(
       :access_point_list,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1375,6 +1413,7 @@ module Aws::S3Control
       :job_statuses,
       :next_token,
       :max_results)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1394,6 +1433,7 @@ module Aws::S3Control
     class ListJobsResult < Struct.new(
       :next_token,
       :jobs)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1408,6 +1448,7 @@ module Aws::S3Control
     #
     class NoSuchPublicAccessBlockConfiguration < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1418,6 +1459,7 @@ module Aws::S3Control
     #
     class NotFoundException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1437,6 +1479,7 @@ module Aws::S3Control
     #
     class PolicyStatus < Struct.new(
       :is_public)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1513,6 +1556,7 @@ module Aws::S3Control
       :ignore_public_acls,
       :block_public_policy,
       :restrict_public_buckets)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1552,6 +1596,7 @@ module Aws::S3Control
       :account_id,
       :name,
       :policy)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1590,6 +1635,7 @@ module Aws::S3Control
       :account_id,
       :job_id,
       :tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1625,6 +1671,7 @@ module Aws::S3Control
     class PutPublicAccessBlockRequest < Struct.new(
       :public_access_block_configuration,
       :account_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1659,6 +1706,7 @@ module Aws::S3Control
     class S3AccessControlList < Struct.new(
       :owner,
       :grants)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1696,6 +1744,7 @@ module Aws::S3Control
     class S3AccessControlPolicy < Struct.new(
       :access_control_list,
       :canned_access_control_list)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1831,6 +1880,7 @@ module Aws::S3Control
       :object_lock_legal_hold_status,
       :object_lock_mode,
       :object_lock_retain_until_date)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1857,6 +1907,7 @@ module Aws::S3Control
     class S3Grant < Struct.new(
       :grantee,
       :permission)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1884,6 +1935,7 @@ module Aws::S3Control
       :type_identifier,
       :identifier,
       :display_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1915,6 +1967,7 @@ module Aws::S3Control
     class S3InitiateRestoreObjectOperation < Struct.new(
       :expiration_in_days,
       :glacier_job_tier)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1934,6 +1987,7 @@ module Aws::S3Control
     #
     class S3ObjectLockLegalHold < Struct.new(
       :status)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2003,6 +2057,7 @@ module Aws::S3Control
       :http_expires_date,
       :requester_charged,
       :sse_algorithm)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2025,6 +2080,7 @@ module Aws::S3Control
     class S3ObjectOwner < Struct.new(
       :id,
       :display_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2051,6 +2107,7 @@ module Aws::S3Control
     class S3Retention < Struct.new(
       :retain_until_date,
       :mode)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2095,6 +2152,7 @@ module Aws::S3Control
     #
     class S3SetObjectAclOperation < Struct.new(
       :access_control_policy)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2125,6 +2183,7 @@ module Aws::S3Control
     #
     class S3SetObjectLegalHoldOperation < Struct.new(
       :legal_hold)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2164,6 +2223,7 @@ module Aws::S3Control
     class S3SetObjectRetentionOperation < Struct.new(
       :bypass_governance_retention,
       :retention)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2195,6 +2255,7 @@ module Aws::S3Control
     #
     class S3SetObjectTaggingOperation < Struct.new(
       :tag_set)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2217,6 +2278,7 @@ module Aws::S3Control
     class S3Tag < Struct.new(
       :key,
       :value)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2227,6 +2289,7 @@ module Aws::S3Control
     #
     class TooManyRequestsException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2237,6 +2300,7 @@ module Aws::S3Control
     #
     class TooManyTagsException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2266,6 +2330,7 @@ module Aws::S3Control
       :account_id,
       :job_id,
       :priority)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2282,6 +2347,7 @@ module Aws::S3Control
     class UpdateJobPriorityResult < Struct.new(
       :job_id,
       :priority)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2319,6 +2385,7 @@ module Aws::S3Control
       :job_id,
       :requested_job_status,
       :status_update_reason)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2340,6 +2407,7 @@ module Aws::S3Control
       :job_id,
       :status,
       :status_update_reason)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2361,6 +2429,7 @@ module Aws::S3Control
     #
     class VpcConfiguration < Struct.new(
       :vpc_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 

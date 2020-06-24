@@ -47,10 +47,15 @@ module AwsSdkCodeGenerator
           # eventstream shape will be inheriting from enumerator
           if shape['eventstream']
             list
-          elsif struct_type?(shape)
+          elsif shape['type'] == 'structure'
+            struct_members = struct_members(shape)
+            sensitive_params = struct_members.select(&:sensitive).map do |m|
+              m.member_name.to_sym
+            end
             list << StructClass.new(
               class_name: shape_name,
-              members: struct_members(shape),
+              members: struct_members,
+              sensitive_params: sensitive_params,
               documentation: struct_class_docs(shape_name)
             )
           else
@@ -78,10 +83,17 @@ module AwsSdkCodeGenerator
 
       def struct_members(shape)
         return if shape['members'].nil?
-        members = shape['members'].map do |member_name, _|
-          StructMember.new(member_name: underscore(member_name))
+        members = shape['members'].map do |member_name, member_ref|
+          sensitive = !!(member_ref['sensitive'] ||
+            @api['shapes'][member_ref['shape']]['sensitive'])
+          StructMember.new(
+            member_name: underscore(member_name),
+            sensitive: sensitive
+          )
         end
-        members << StructMember.new(member_name: "event_type") if shape['event']
+        if shape['event']
+          members << StructMember.new(member_name: 'event_type')
+        end
         members
       end
 
@@ -155,10 +167,6 @@ module AwsSdkCodeGenerator
         if @api['metadata']['protocol'] != 'api-gateway' && Crosslink.taggable?(uid)
           Crosslink.tag_string(uid, shape_name)
         end
-      end
-
-      def struct_type?(shape)
-        shape['type'] == 'structure'
       end
 
       def compute_input_shapes(api)
@@ -236,6 +244,7 @@ module AwsSdkCodeGenerator
           @class_name = options.fetch(:class_name)
           @members = options.fetch(:members)
           @documentation = options.fetch(:documentation)
+          @sensitive_params = options.fetch(:sensitive_params)
           if @members.nil? || @members.empty?
             @empty = true
           else
@@ -253,22 +262,28 @@ module AwsSdkCodeGenerator
         # @return [String, nil]
         attr_accessor :documentation
 
+        # @return [Array<Symbol>]
+        attr_accessor :sensitive_params
+
         # @return [Boolean]
         def empty?
           @empty
         end
-
       end
 
       class StructMember
 
         def initialize(options)
           @member_name = options.fetch(:member_name)
+          @sensitive = options.fetch(:sensitive, false)
           @last = false
         end
 
         # @return [String]
         attr_accessor :member_name
+
+        # @return [Boolean]
+        attr_accessor :sensitive
 
         # @return [Boolean]
         attr_accessor :last

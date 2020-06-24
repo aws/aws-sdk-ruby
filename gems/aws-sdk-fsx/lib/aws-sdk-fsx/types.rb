@@ -27,6 +27,7 @@ module Aws::FSx
     class ActiveDirectoryBackupAttributes < Struct.new(
       :domain_name,
       :active_directory_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -50,6 +51,7 @@ module Aws::FSx
       :active_directory_id,
       :type,
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -131,6 +133,7 @@ module Aws::FSx
       :status,
       :target_file_system_values,
       :failure_details)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -144,6 +147,7 @@ module Aws::FSx
     #
     class AdministrativeActionFailureDetails < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -212,6 +216,7 @@ module Aws::FSx
       :tags,
       :file_system,
       :directory_information)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -226,6 +231,7 @@ module Aws::FSx
     #
     class BackupFailureDetails < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -240,6 +246,7 @@ module Aws::FSx
     #
     class BackupInProgress < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -253,6 +260,7 @@ module Aws::FSx
     #
     class BackupNotFound < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -272,6 +280,7 @@ module Aws::FSx
     class BackupRestoring < Struct.new(
       :message,
       :file_system_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -285,6 +294,7 @@ module Aws::FSx
     #
     class BadRequest < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -305,6 +315,7 @@ module Aws::FSx
     #
     class CancelDataRepositoryTaskRequest < Struct.new(
       :task_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -336,6 +347,7 @@ module Aws::FSx
     class CancelDataRepositoryTaskResponse < Struct.new(
       :lifecycle,
       :task_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -398,6 +410,7 @@ module Aws::FSx
       :path,
       :format,
       :scope)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -442,6 +455,7 @@ module Aws::FSx
       :file_system_id,
       :client_request_token,
       :tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -455,6 +469,7 @@ module Aws::FSx
     #
     class CreateBackupResponse < Struct.new(
       :backup)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -533,6 +548,7 @@ module Aws::FSx
       :report,
       :client_request_token,
       :tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -544,6 +560,7 @@ module Aws::FSx
     #
     class CreateDataRepositoryTaskResponse < Struct.new(
       :data_repository_task)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -662,6 +679,7 @@ module Aws::FSx
       :tags,
       :windows_configuration,
       :storage_type)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -675,6 +693,7 @@ module Aws::FSx
     #
     class CreateFileSystemFromBackupResponse < Struct.new(
       :file_system)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -790,6 +809,7 @@ module Aws::FSx
       :imported_file_chunk_size,
       :deployment_type,
       :per_unit_storage_throughput)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -955,6 +975,7 @@ module Aws::FSx
       :kms_key_id,
       :windows_configuration,
       :lustre_configuration)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -968,6 +989,7 @@ module Aws::FSx
     #
     class CreateFileSystemResponse < Struct.new(
       :file_system)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1088,6 +1110,7 @@ module Aws::FSx
       :daily_automatic_backup_start_time,
       :automatic_backup_retention_days,
       :copy_tags_to_backups)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1125,6 +1148,7 @@ module Aws::FSx
       :import_path,
       :export_path,
       :imported_file_chunk_size)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1250,6 +1274,7 @@ module Aws::FSx
       :failure_details,
       :status,
       :report)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1264,6 +1289,7 @@ module Aws::FSx
     #
     class DataRepositoryTaskEnded < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1279,6 +1305,7 @@ module Aws::FSx
     #
     class DataRepositoryTaskExecuting < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1293,6 +1320,7 @@ module Aws::FSx
     #
     class DataRepositoryTaskFailureDetails < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1332,6 +1360,7 @@ module Aws::FSx
     class DataRepositoryTaskFilter < Struct.new(
       :name,
       :values)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1345,6 +1374,7 @@ module Aws::FSx
     #
     class DataRepositoryTaskNotFound < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1380,6 +1410,7 @@ module Aws::FSx
       :succeeded_count,
       :failed_count,
       :last_updated_time)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1411,6 +1442,7 @@ module Aws::FSx
     class DeleteBackupRequest < Struct.new(
       :backup_id,
       :client_request_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1429,6 +1461,7 @@ module Aws::FSx
     class DeleteBackupResponse < Struct.new(
       :backup_id,
       :lifecycle)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1475,6 +1508,7 @@ module Aws::FSx
       :file_system_id,
       :client_request_token,
       :windows_configuration)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1500,6 +1534,7 @@ module Aws::FSx
       :file_system_id,
       :lifecycle,
       :windows_response)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1536,6 +1571,7 @@ module Aws::FSx
     class DeleteFileSystemWindowsConfiguration < Struct.new(
       :skip_final_backup,
       :final_backup_tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1555,6 +1591,7 @@ module Aws::FSx
     class DeleteFileSystemWindowsResponse < Struct.new(
       :final_backup_id,
       :final_backup_tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1607,6 +1644,7 @@ module Aws::FSx
       :filters,
       :max_results,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1627,6 +1665,7 @@ module Aws::FSx
     class DescribeBackupsResponse < Struct.new(
       :backups,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1675,6 +1714,7 @@ module Aws::FSx
       :filters,
       :max_results,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1694,6 +1734,7 @@ module Aws::FSx
     class DescribeDataRepositoryTasksResponse < Struct.new(
       :data_repository_tasks,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1733,6 +1774,7 @@ module Aws::FSx
       :file_system_ids,
       :max_results,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1753,6 +1795,7 @@ module Aws::FSx
     class DescribeFileSystemsResponse < Struct.new(
       :file_systems,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1918,6 +1961,7 @@ module Aws::FSx
       :windows_configuration,
       :lustre_configuration,
       :administrative_actions)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1933,6 +1977,7 @@ module Aws::FSx
     #
     class FileSystemFailureDetails < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1946,6 +1991,7 @@ module Aws::FSx
     #
     class FileSystemNotFound < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1975,6 +2021,7 @@ module Aws::FSx
     class Filter < Struct.new(
       :name,
       :values)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1995,6 +2042,7 @@ module Aws::FSx
     class IncompatibleParameterError < Struct.new(
       :parameter,
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2008,6 +2056,7 @@ module Aws::FSx
     #
     class InternalServerError < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2021,6 +2070,7 @@ module Aws::FSx
     #
     class InvalidExportPath < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2034,6 +2084,7 @@ module Aws::FSx
     #
     class InvalidImportPath < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2076,6 +2127,7 @@ module Aws::FSx
       :message,
       :invalid_subnet_id,
       :invalid_security_group_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2090,6 +2142,7 @@ module Aws::FSx
     #
     class InvalidPerUnitStorageThroughput < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2128,6 +2181,7 @@ module Aws::FSx
       :resource_arn,
       :max_results,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2148,6 +2202,7 @@ module Aws::FSx
     class ListTagsForResourceResponse < Struct.new(
       :tags,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2192,6 +2247,7 @@ module Aws::FSx
       :deployment_type,
       :per_unit_storage_throughput,
       :mount_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2205,6 +2261,7 @@ module Aws::FSx
     #
     class MissingFileSystemConfiguration < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2225,6 +2282,7 @@ module Aws::FSx
     class NotServiceResourceError < Struct.new(
       :resource_arn,
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2244,6 +2302,7 @@ module Aws::FSx
     class ResourceDoesNotSupportTagging < Struct.new(
       :resource_arn,
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2263,6 +2322,7 @@ module Aws::FSx
     class ResourceNotFound < Struct.new(
       :resource_arn,
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2302,6 +2362,7 @@ module Aws::FSx
       :file_system_administrators_group,
       :user_name,
       :dns_ips)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2394,6 +2455,7 @@ module Aws::FSx
       :user_name,
       :password,
       :dns_ips)
+      SENSITIVE = [:password]
       include Aws::Structure
     end
 
@@ -2433,6 +2495,7 @@ module Aws::FSx
       :user_name,
       :password,
       :dns_ips)
+      SENSITIVE = [:password]
       include Aws::Structure
     end
 
@@ -2452,6 +2515,7 @@ module Aws::FSx
     class ServiceLimitExceeded < Struct.new(
       :limit,
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2482,6 +2546,7 @@ module Aws::FSx
     class Tag < Struct.new(
       :key,
       :value)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2516,6 +2581,7 @@ module Aws::FSx
     class TagResourceRequest < Struct.new(
       :resource_arn,
       :tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2535,6 +2601,7 @@ module Aws::FSx
     #
     class UnsupportedOperation < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2562,6 +2629,7 @@ module Aws::FSx
     class UntagResourceRequest < Struct.new(
       :resource_arn,
       :tag_keys)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2591,6 +2659,7 @@ module Aws::FSx
     #
     class UpdateFileSystemLustreConfiguration < Struct.new(
       :weekly_maintenance_start_time)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2667,6 +2736,7 @@ module Aws::FSx
       :storage_capacity,
       :windows_configuration,
       :lustre_configuration)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2680,6 +2750,7 @@ module Aws::FSx
     #
     class UpdateFileSystemResponse < Struct.new(
       :file_system)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2752,6 +2823,7 @@ module Aws::FSx
       :automatic_backup_retention_days,
       :throughput_capacity,
       :self_managed_active_directory_configuration)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2889,6 +2961,7 @@ module Aws::FSx
       :daily_automatic_backup_start_time,
       :automatic_backup_retention_days,
       :copy_tags_to_backups)
+      SENSITIVE = []
       include Aws::Structure
     end
 

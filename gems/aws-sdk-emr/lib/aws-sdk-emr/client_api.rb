@@ -423,6 +423,7 @@ module Aws::EMR
     ComputeLimits.add_member(:minimum_capacity_units, Shapes::ShapeRef.new(shape: Integer, required: true, location_name: "MinimumCapacityUnits"))
     ComputeLimits.add_member(:maximum_capacity_units, Shapes::ShapeRef.new(shape: Integer, required: true, location_name: "MaximumCapacityUnits"))
     ComputeLimits.add_member(:maximum_on_demand_capacity_units, Shapes::ShapeRef.new(shape: Integer, location_name: "MaximumOnDemandCapacityUnits"))
+    ComputeLimits.add_member(:maximum_core_capacity_units, Shapes::ShapeRef.new(shape: Integer, location_name: "MaximumCoreCapacityUnits"))
     ComputeLimits.struct_class = Types::ComputeLimits
 
     Configuration.add_member(:classification, Shapes::ShapeRef.new(shape: String, location_name: "Classification"))

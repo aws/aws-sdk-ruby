@@ -32,6 +32,7 @@ module Aws::Rekognition
     class AgeRange < Struct.new(
       :low,
       :high)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -58,6 +59,36 @@ module Aws::Rekognition
     #
     class Asset < Struct.new(
       :ground_truth_manifest)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Metadata information about an audio stream. An array of
+    # `AudioMetadata` objects for the audio streams found in a stored video
+    # is returned by GetSegmentDetection.
+    #
+    # @!attribute [rw] codec
+    #   The audio codec used to encode or decode the audio stream.
+    #   @return [String]
+    #
+    # @!attribute [rw] duration_millis
+    #   The duration of the audio stream in milliseconds.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] sample_rate
+    #   The sample rate for the audio stream.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] number_of_channels
+    #   The number of audio channels in the segement.
+    #   @return [Integer]
+    #
+    class AudioMetadata < Struct.new(
+      :codec,
+      :duration_millis,
+      :sample_rate,
+      :number_of_channels)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -75,6 +106,7 @@ module Aws::Rekognition
     class Beard < Struct.new(
       :value,
       :confidence)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -136,6 +168,7 @@ module Aws::Rekognition
       :height,
       :left,
       :top)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -172,6 +205,7 @@ module Aws::Rekognition
       :id,
       :face,
       :match_confidence)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -209,6 +243,7 @@ module Aws::Rekognition
       :confidence,
       :bounding_box,
       :face)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -228,6 +263,7 @@ module Aws::Rekognition
     class CelebrityRecognition < Struct.new(
       :timestamp,
       :celebrity)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -249,6 +285,7 @@ module Aws::Rekognition
     class CompareFacesMatch < Struct.new(
       :similarity,
       :face)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -324,6 +361,7 @@ module Aws::Rekognition
       :target_image,
       :similarity_threshold,
       :quality_filter)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -384,6 +422,7 @@ module Aws::Rekognition
       :unmatched_faces,
       :source_image_orientation_correction,
       :target_image_orientation_correction)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -417,6 +456,7 @@ module Aws::Rekognition
       :landmarks,
       :pose,
       :quality)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -437,6 +477,7 @@ module Aws::Rekognition
     class ComparedSourceImageFace < Struct.new(
       :bounding_box,
       :confidence)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -454,6 +495,7 @@ module Aws::Rekognition
     class ContentModerationDetection < Struct.new(
       :timestamp,
       :moderation_label)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -470,6 +512,7 @@ module Aws::Rekognition
     #
     class CreateCollectionRequest < Struct.new(
       :collection_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -491,6 +534,7 @@ module Aws::Rekognition
       :status_code,
       :collection_arn,
       :face_model_version)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -507,6 +551,7 @@ module Aws::Rekognition
     #
     class CreateProjectRequest < Struct.new(
       :project_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -517,6 +562,7 @@ module Aws::Rekognition
     #
     class CreateProjectResponse < Struct.new(
       :project_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -586,6 +632,7 @@ module Aws::Rekognition
       :output_config,
       :training_data,
       :testing_data)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -597,6 +644,7 @@ module Aws::Rekognition
     #
     class CreateProjectVersionResponse < Struct.new(
       :project_version_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -659,6 +707,7 @@ module Aws::Rekognition
       :name,
       :settings,
       :role_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -668,6 +717,7 @@ module Aws::Rekognition
     #
     class CreateStreamProcessorResponse < Struct.new(
       :stream_processor_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -694,6 +744,7 @@ module Aws::Rekognition
       :name,
       :confidence,
       :geometry)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -710,6 +761,7 @@ module Aws::Rekognition
     #
     class DeleteCollectionRequest < Struct.new(
       :collection_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -719,6 +771,7 @@ module Aws::Rekognition
     #
     class DeleteCollectionResponse < Struct.new(
       :status_code)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -741,6 +794,7 @@ module Aws::Rekognition
     class DeleteFacesRequest < Struct.new(
       :collection_id,
       :face_ids)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -750,6 +804,7 @@ module Aws::Rekognition
     #
     class DeleteFacesResponse < Struct.new(
       :deleted_faces)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -767,6 +822,7 @@ module Aws::Rekognition
     #
     class DeleteProjectRequest < Struct.new(
       :project_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -776,6 +832,7 @@ module Aws::Rekognition
     #
     class DeleteProjectResponse < Struct.new(
       :status)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -793,6 +850,7 @@ module Aws::Rekognition
     #
     class DeleteProjectVersionRequest < Struct.new(
       :project_version_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -802,6 +860,7 @@ module Aws::Rekognition
     #
     class DeleteProjectVersionResponse < Struct.new(
       :status)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -818,6 +877,7 @@ module Aws::Rekognition
     #
     class DeleteStreamProcessorRequest < Struct.new(
       :name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -836,6 +896,7 @@ module Aws::Rekognition
     #
     class DescribeCollectionRequest < Struct.new(
       :collection_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -867,6 +928,7 @@ module Aws::Rekognition
       :face_model_version,
       :collection_arn,
       :creation_timestamp)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -888,7 +950,11 @@ module Aws::Rekognition
     # @!attribute [rw] version_names
     #   A list of model version names that you want to describe. You can add
     #   up to 10 model version names to the list. If you don't specify a
-    #   value, all model descriptions are returned.
+    #   value, all model descriptions are returned. A version name is part
+    #   of a model (ProjectVersion) ARN. For example,
+    #   `my-model.2020-01-21T09.10.15` is the version name in the following
+    #   ARN.
+    #   `arn:aws:rekognition:us-east-1:123456789012:project/getting-started/version/my-model.2020-01-21T09.10.15/1234567890123`.
     #   @return [Array<String>]
     #
     # @!attribute [rw] next_token
@@ -910,6 +976,7 @@ module Aws::Rekognition
       :version_names,
       :next_token,
       :max_results)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -928,6 +995,7 @@ module Aws::Rekognition
     class DescribeProjectVersionsResponse < Struct.new(
       :project_version_descriptions,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -956,6 +1024,7 @@ module Aws::Rekognition
     class DescribeProjectsRequest < Struct.new(
       :next_token,
       :max_results)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -974,6 +1043,7 @@ module Aws::Rekognition
     class DescribeProjectsResponse < Struct.new(
       :project_descriptions,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -990,6 +1060,7 @@ module Aws::Rekognition
     #
     class DescribeStreamProcessorRequest < Struct.new(
       :name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1049,6 +1120,7 @@ module Aws::Rekognition
       :output,
       :role_arn,
       :settings)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1122,6 +1194,7 @@ module Aws::Rekognition
       :image,
       :max_results,
       :min_confidence)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1131,6 +1204,7 @@ module Aws::Rekognition
     #
     class DetectCustomLabelsResponse < Struct.new(
       :custom_labels)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1177,6 +1251,7 @@ module Aws::Rekognition
     class DetectFacesRequest < Struct.new(
       :image,
       :attributes)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1204,6 +1279,7 @@ module Aws::Rekognition
     class DetectFacesResponse < Struct.new(
       :face_details,
       :orientation_correction)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1254,6 +1330,7 @@ module Aws::Rekognition
       :image,
       :max_labels,
       :min_confidence)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1287,6 +1364,7 @@ module Aws::Rekognition
       :labels,
       :orientation_correction,
       :label_model_version)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1341,6 +1419,7 @@ module Aws::Rekognition
       :image,
       :min_confidence,
       :human_loop_config)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1362,6 +1441,7 @@ module Aws::Rekognition
       :moderation_labels,
       :moderation_model_version,
       :human_loop_activation_output)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1404,6 +1484,7 @@ module Aws::Rekognition
     class DetectTextFilters < Struct.new(
       :word_filter,
       :regions_of_interest)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1457,6 +1538,7 @@ module Aws::Rekognition
     class DetectTextRequest < Struct.new(
       :image,
       :filters)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1471,6 +1553,7 @@ module Aws::Rekognition
     class DetectTextResponse < Struct.new(
       :text_detections,
       :text_model_version)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1509,6 +1592,7 @@ module Aws::Rekognition
       :min_confidence,
       :min_bounding_box_height,
       :min_bounding_box_width)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1530,6 +1614,7 @@ module Aws::Rekognition
     class Emotion < Struct.new(
       :type,
       :confidence)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1550,6 +1635,7 @@ module Aws::Rekognition
     class EvaluationResult < Struct.new(
       :f1_score,
       :summary)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1567,6 +1653,7 @@ module Aws::Rekognition
     class EyeOpen < Struct.new(
       :value,
       :confidence)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1585,6 +1672,7 @@ module Aws::Rekognition
     class Eyeglasses < Struct.new(
       :value,
       :confidence)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1619,6 +1707,7 @@ module Aws::Rekognition
       :image_id,
       :external_image_id,
       :confidence)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1738,6 +1827,7 @@ module Aws::Rekognition
       :pose,
       :quality,
       :confidence)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1756,6 +1846,7 @@ module Aws::Rekognition
     class FaceDetection < Struct.new(
       :timestamp,
       :face)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1775,6 +1866,7 @@ module Aws::Rekognition
     class FaceMatch < Struct.new(
       :similarity,
       :face)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1796,6 +1888,7 @@ module Aws::Rekognition
     class FaceRecord < Struct.new(
       :face,
       :face_detail)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1825,6 +1918,7 @@ module Aws::Rekognition
     class FaceSearchSettings < Struct.new(
       :collection_id,
       :face_match_threshold)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1857,6 +1951,7 @@ module Aws::Rekognition
     class Gender < Struct.new(
       :value,
       :confidence)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1876,6 +1971,7 @@ module Aws::Rekognition
     class Geometry < Struct.new(
       :bounding_box,
       :polygon)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1894,6 +1990,7 @@ module Aws::Rekognition
     #
     class GetCelebrityInfoRequest < Struct.new(
       :id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1908,6 +2005,7 @@ module Aws::Rekognition
     class GetCelebrityInfoResponse < Struct.new(
       :urls,
       :name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1952,6 +2050,7 @@ module Aws::Rekognition
       :max_results,
       :next_token,
       :sort_by)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1986,6 +2085,7 @@ module Aws::Rekognition
       :video_metadata,
       :next_token,
       :celebrities)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2031,6 +2131,7 @@ module Aws::Rekognition
       :max_results,
       :next_token,
       :sort_by)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2072,6 +2173,7 @@ module Aws::Rekognition
       :moderation_labels,
       :next_token,
       :moderation_model_version)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2107,6 +2209,7 @@ module Aws::Rekognition
       :job_id,
       :max_results,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2143,6 +2246,7 @@ module Aws::Rekognition
       :video_metadata,
       :next_token,
       :faces)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2186,6 +2290,7 @@ module Aws::Rekognition
       :max_results,
       :next_token,
       :sort_by)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2227,6 +2332,7 @@ module Aws::Rekognition
       :next_token,
       :video_metadata,
       :persons)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2273,6 +2379,7 @@ module Aws::Rekognition
       :max_results,
       :next_token,
       :sort_by)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2315,6 +2422,7 @@ module Aws::Rekognition
       :next_token,
       :labels,
       :label_model_version)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2360,6 +2468,7 @@ module Aws::Rekognition
       :max_results,
       :next_token,
       :sort_by)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2396,6 +2505,96 @@ module Aws::Rekognition
       :video_metadata,
       :next_token,
       :persons)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass GetSegmentDetectionRequest
+    #   data as a hash:
+    #
+    #       {
+    #         job_id: "JobId", # required
+    #         max_results: 1,
+    #         next_token: "PaginationToken",
+    #       }
+    #
+    # @!attribute [rw] job_id
+    #   Job identifier for the text detection operation for which you want
+    #   results returned. You get the job identifer from an initial call to
+    #   `StartSegmentDetection`.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   Maximum number of results to return per paginated call. The largest
+    #   value you can specify is 1000.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   If the response is truncated, Amazon Rekognition Video returns this
+    #   token that you can use in the subsequent request to retrieve the
+    #   next set of text.
+    #   @return [String]
+    #
+    class GetSegmentDetectionRequest < Struct.new(
+      :job_id,
+      :max_results,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] job_status
+    #   Current status of the segment detection job.
+    #   @return [String]
+    #
+    # @!attribute [rw] status_message
+    #   If the job fails, `StatusMessage` provides a descriptive error
+    #   message.
+    #   @return [String]
+    #
+    # @!attribute [rw] video_metadata
+    #   Currently, Amazon Rekognition Video returns a single object in the
+    #   `VideoMetadata` array. The object contains information about the
+    #   video stream in the input file that Amazon Rekognition Video chose
+    #   to analyze. The `VideoMetadata` object includes the video codec,
+    #   video format and other information. Video metadata is returned in
+    #   each page of information returned by `GetSegmentDetection`.
+    #   @return [Array<Types::VideoMetadata>]
+    #
+    # @!attribute [rw] audio_metadata
+    #   An array of objects. There can be multiple audio streams. Each
+    #   `AudioMetadata` object contains metadata for a single audio stream.
+    #   Audio information in an `AudioMetadata` objects includes the audio
+    #   codec, the number of audio channels, the duration of the audio
+    #   stream, and the sample rate. Audio metadata is returned in each page
+    #   of information returned by `GetSegmentDetection`.
+    #   @return [Array<Types::AudioMetadata>]
+    #
+    # @!attribute [rw] next_token
+    #   If the previous response was incomplete (because there are more
+    #   labels to retrieve), Amazon Rekognition Video returns a pagination
+    #   token in the response. You can use this pagination token to retrieve
+    #   the next set of text.
+    #   @return [String]
+    #
+    # @!attribute [rw] segments
+    #   An array of segments detected in a video.
+    #   @return [Array<Types::SegmentDetection>]
+    #
+    # @!attribute [rw] selected_segment_types
+    #   An array containing the segment types requested in the call to
+    #   `StartSegmentDetection`.
+    #   @return [Array<Types::SegmentTypeInfo>]
+    #
+    class GetSegmentDetectionResponse < Struct.new(
+      :job_status,
+      :status_message,
+      :video_metadata,
+      :audio_metadata,
+      :next_token,
+      :segments,
+      :selected_segment_types)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2409,7 +2608,7 @@ module Aws::Rekognition
     #       }
     #
     # @!attribute [rw] job_id
-    #   Job identifier for the label detection operation for which you want
+    #   Job identifier for the text detection operation for which you want
     #   results returned. You get the job identifer from an initial call to
     #   `StartTextDetection`.
     #   @return [String]
@@ -2430,6 +2629,7 @@ module Aws::Rekognition
       :job_id,
       :max_results,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2472,6 +2672,7 @@ module Aws::Rekognition
       :text_detections,
       :next_token,
       :text_model_version)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2501,6 +2702,7 @@ module Aws::Rekognition
     #
     class GroundTruthManifest < Struct.new(
       :s3_object)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2524,6 +2726,7 @@ module Aws::Rekognition
       :human_loop_arn,
       :human_loop_activation_reasons,
       :human_loop_activation_conditions_evaluation_results)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2548,7 +2751,13 @@ module Aws::Rekognition
     #   @return [String]
     #
     # @!attribute [rw] flow_definition_arn
-    #   The Amazon Resource Name (ARN) of the flow definition.
+    #   The Amazon Resource Name (ARN) of the flow definition. You can
+    #   create a flow definition by using the Amazon Sagemaker
+    #   [CreateFlowDefinition][1] Operation.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/sagemaker/latest/dg/API_CreateFlowDefinition.html
     #   @return [String]
     #
     # @!attribute [rw] data_attributes
@@ -2559,6 +2768,7 @@ module Aws::Rekognition
       :human_loop_name,
       :flow_definition_arn,
       :data_attributes)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2579,6 +2789,7 @@ module Aws::Rekognition
     #
     class HumanLoopDataAttributes < Struct.new(
       :content_classifiers)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2586,18 +2797,22 @@ module Aws::Rekognition
     # number allowed.
     #
     # @!attribute [rw] resource_type
+    #   The resource type.
     #   @return [String]
     #
     # @!attribute [rw] quota_code
+    #   The quota code.
     #   @return [String]
     #
     # @!attribute [rw] service_code
+    #   The service code.
     #   @return [String]
     #
     class HumanLoopQuotaExceededException < Struct.new(
       :resource_type,
       :quota_code,
       :service_code)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2658,6 +2873,7 @@ module Aws::Rekognition
     class Image < Struct.new(
       :bytes,
       :s3_object)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2678,6 +2894,7 @@ module Aws::Rekognition
     class ImageQuality < Struct.new(
       :brightness,
       :sharpness)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2784,6 +3001,7 @@ module Aws::Rekognition
       :detection_attributes,
       :max_faces,
       :quality_filter)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2840,6 +3058,7 @@ module Aws::Rekognition
       :orientation_correction,
       :face_model_version,
       :unindexed_faces)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2858,6 +3077,7 @@ module Aws::Rekognition
     class Instance < Struct.new(
       :bounding_box,
       :confidence)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2901,6 +3121,7 @@ module Aws::Rekognition
     #
     class KinesisDataStream < Struct.new(
       :arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2922,6 +3143,7 @@ module Aws::Rekognition
     #
     class KinesisVideoStream < Struct.new(
       :arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2953,6 +3175,7 @@ module Aws::Rekognition
       :confidence,
       :instances,
       :parents)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2971,6 +3194,7 @@ module Aws::Rekognition
     class LabelDetection < Struct.new(
       :timestamp,
       :label)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2998,6 +3222,7 @@ module Aws::Rekognition
       :type,
       :x,
       :y)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3029,6 +3254,7 @@ module Aws::Rekognition
     class ListCollectionsRequest < Struct.new(
       :next_token,
       :max_results)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3053,6 +3279,7 @@ module Aws::Rekognition
       :collection_ids,
       :next_token,
       :face_model_versions)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3084,6 +3311,7 @@ module Aws::Rekognition
       :collection_id,
       :next_token,
       :max_results)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3106,6 +3334,7 @@ module Aws::Rekognition
       :faces,
       :next_token,
       :face_model_version)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3132,6 +3361,7 @@ module Aws::Rekognition
     class ListStreamProcessorsRequest < Struct.new(
       :next_token,
       :max_results)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3148,6 +3378,7 @@ module Aws::Rekognition
     class ListStreamProcessorsResponse < Struct.new(
       :next_token,
       :stream_processors)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3178,6 +3409,7 @@ module Aws::Rekognition
       :confidence,
       :name,
       :parent_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3196,6 +3428,7 @@ module Aws::Rekognition
     class MouthOpen < Struct.new(
       :value,
       :confidence)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3213,6 +3446,7 @@ module Aws::Rekognition
     class Mustache < Struct.new(
       :value,
       :confidence)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3241,6 +3475,7 @@ module Aws::Rekognition
     class NotificationChannel < Struct.new(
       :sns_topic_arn,
       :role_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3265,6 +3500,7 @@ module Aws::Rekognition
     class OutputConfig < Struct.new(
       :s3_bucket,
       :s3_key_prefix)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3276,6 +3512,7 @@ module Aws::Rekognition
     #
     class Parent < Struct.new(
       :name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3299,6 +3536,7 @@ module Aws::Rekognition
       :index,
       :bounding_box,
       :face)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3322,6 +3560,7 @@ module Aws::Rekognition
     class PersonDetection < Struct.new(
       :timestamp,
       :person)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3350,6 +3589,7 @@ module Aws::Rekognition
       :timestamp,
       :person,
       :face_matches)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3374,6 +3614,7 @@ module Aws::Rekognition
     class Point < Struct.new(
       :x,
       :y)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3396,6 +3637,7 @@ module Aws::Rekognition
       :roll,
       :yaw,
       :pitch)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3418,6 +3660,7 @@ module Aws::Rekognition
       :project_arn,
       :creation_timestamp,
       :status)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3483,6 +3726,7 @@ module Aws::Rekognition
       :training_data_result,
       :testing_data_result,
       :evaluation_result)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3518,6 +3762,7 @@ module Aws::Rekognition
     #
     class RecognizeCelebritiesRequest < Struct.new(
       :image)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3553,6 +3798,7 @@ module Aws::Rekognition
       :celebrity_faces,
       :unrecognized_faces,
       :orientation_correction)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3582,6 +3828,7 @@ module Aws::Rekognition
     #
     class RegionOfInterest < Struct.new(
       :bounding_box)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3589,6 +3836,8 @@ module Aws::Rekognition
     #
     class ResourceAlreadyExistsException < Aws::EmptyStructure; end
 
+    # The specified resource is already being used.
+    #
     class ResourceInUseException < Aws::EmptyStructure; end
 
     # The collection specified in the request cannot be found.
@@ -3636,6 +3885,7 @@ module Aws::Rekognition
       :bucket,
       :name,
       :version)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3705,6 +3955,7 @@ module Aws::Rekognition
       :max_faces,
       :face_match_threshold,
       :quality_filter)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3733,6 +3984,7 @@ module Aws::Rekognition
       :searched_face_confidence,
       :face_matches,
       :face_model_version)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3770,6 +4022,7 @@ module Aws::Rekognition
       :face_id,
       :max_faces,
       :face_match_threshold)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3791,6 +4044,109 @@ module Aws::Rekognition
       :searched_face_id,
       :face_matches,
       :face_model_version)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A technical cue or shot detection segment detected in a video. An
+    # array of `SegmentDetection` objects containing all segments detected
+    # in a stored video is returned by GetSegmentDetection.
+    #
+    # @!attribute [rw] type
+    #   The type of the segment. Valid values are `TECHNICAL_CUE` and
+    #   `SHOT`.
+    #   @return [String]
+    #
+    # @!attribute [rw] start_timestamp_millis
+    #   The start time of the detected segment in milliseconds from the
+    #   start of the video.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] end_timestamp_millis
+    #   The end time of the detected segment, in milliseconds, from the
+    #   start of the video.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] duration_millis
+    #   The duration of the detected segment in milliseconds.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] start_timecode_smpte
+    #   The frame-accurate SMPTE timecode, from the start of a video, for
+    #   the start of a detected segment. `StartTimecode` is in *HH:MM:SS:fr*
+    #   format (and *;fr* for drop frame-rates).
+    #   @return [String]
+    #
+    # @!attribute [rw] end_timecode_smpte
+    #   The frame-accurate SMPTE timecode, from the start of a video, for
+    #   the end of a detected segment. `EndTimecode` is in *HH:MM:SS:fr*
+    #   format (and *;fr* for drop frame-rates).
+    #   @return [String]
+    #
+    # @!attribute [rw] duration_smpte
+    #   The duration of the timecode for the detected segment in SMPTE
+    #   format.
+    #   @return [String]
+    #
+    # @!attribute [rw] technical_cue_segment
+    #   If the segment is a technical cue, contains information about the
+    #   technical cue.
+    #   @return [Types::TechnicalCueSegment]
+    #
+    # @!attribute [rw] shot_segment
+    #   If the segment is a shot detection, contains information about the
+    #   shot detection.
+    #   @return [Types::ShotSegment]
+    #
+    class SegmentDetection < Struct.new(
+      :type,
+      :start_timestamp_millis,
+      :end_timestamp_millis,
+      :duration_millis,
+      :start_timecode_smpte,
+      :end_timecode_smpte,
+      :duration_smpte,
+      :technical_cue_segment,
+      :shot_segment)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Information about the type of a segment requested in a call to
+    # StartSegmentDetection. An array of `SegmentTypeInfo` objects is
+    # returned by the response from GetSegmentDetection.
+    #
+    # @!attribute [rw] type
+    #   The type of a segment (technical cue or shot detection).
+    #   @return [String]
+    #
+    # @!attribute [rw] model_version
+    #   The version of the model used to detect segments.
+    #   @return [String]
+    #
+    class SegmentTypeInfo < Struct.new(
+      :type,
+      :model_version)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Information about a shot detection segment detected in a video. For
+    # more information, see SegmentDetection.
+    #
+    # @!attribute [rw] index
+    #   An Identifier for a shot detection segment detected in a video
+    #   @return [Integer]
+    #
+    # @!attribute [rw] confidence
+    #   The confidence that Amazon Rekognition Video has in the accuracy of
+    #   the detected segment.
+    #   @return [Float]
+    #
+    class ShotSegment < Struct.new(
+      :index,
+      :confidence)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3808,6 +4164,7 @@ module Aws::Rekognition
     class Smile < Struct.new(
       :value,
       :confidence)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3860,6 +4217,7 @@ module Aws::Rekognition
       :client_request_token,
       :notification_channel,
       :job_tag)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3871,6 +4229,7 @@ module Aws::Rekognition
     #
     class StartCelebrityRecognitionResponse < Struct.new(
       :job_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3935,6 +4294,7 @@ module Aws::Rekognition
       :client_request_token,
       :notification_channel,
       :job_tag)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3945,6 +4305,7 @@ module Aws::Rekognition
     #
     class StartContentModerationResponse < Struct.new(
       :job_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4008,6 +4369,7 @@ module Aws::Rekognition
       :notification_channel,
       :face_attributes,
       :job_tag)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4018,6 +4380,7 @@ module Aws::Rekognition
     #
     class StartFaceDetectionResponse < Struct.new(
       :job_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4083,6 +4446,7 @@ module Aws::Rekognition
       :collection_id,
       :notification_channel,
       :job_tag)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4093,6 +4457,7 @@ module Aws::Rekognition
     #
     class StartFaceSearchResponse < Struct.new(
       :job_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4158,6 +4523,7 @@ module Aws::Rekognition
       :min_confidence,
       :notification_channel,
       :job_tag)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4168,6 +4534,7 @@ module Aws::Rekognition
     #
     class StartLabelDetectionResponse < Struct.new(
       :job_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4219,6 +4586,7 @@ module Aws::Rekognition
       :client_request_token,
       :notification_channel,
       :job_tag)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4229,6 +4597,7 @@ module Aws::Rekognition
     #
     class StartPersonTrackingResponse < Struct.new(
       :job_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4256,6 +4625,7 @@ module Aws::Rekognition
     class StartProjectVersionRequest < Struct.new(
       :project_version_arn,
       :min_inference_units)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4265,6 +4635,153 @@ module Aws::Rekognition
     #
     class StartProjectVersionResponse < Struct.new(
       :status)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Filters applied to the technical cue or shot detection segments. For
+    # more information, see StartSegmentDetection.
+    #
+    # @note When making an API call, you may pass StartSegmentDetectionFilters
+    #   data as a hash:
+    #
+    #       {
+    #         technical_cue_filter: {
+    #           min_segment_confidence: 1.0,
+    #         },
+    #         shot_filter: {
+    #           min_segment_confidence: 1.0,
+    #         },
+    #       }
+    #
+    # @!attribute [rw] technical_cue_filter
+    #   Filters that are specific to technical cues.
+    #   @return [Types::StartTechnicalCueDetectionFilter]
+    #
+    # @!attribute [rw] shot_filter
+    #   Filters that are specific to shot detections.
+    #   @return [Types::StartShotDetectionFilter]
+    #
+    class StartSegmentDetectionFilters < Struct.new(
+      :technical_cue_filter,
+      :shot_filter)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass StartSegmentDetectionRequest
+    #   data as a hash:
+    #
+    #       {
+    #         video: { # required
+    #           s3_object: {
+    #             bucket: "S3Bucket",
+    #             name: "S3ObjectName",
+    #             version: "S3ObjectVersion",
+    #           },
+    #         },
+    #         client_request_token: "ClientRequestToken",
+    #         notification_channel: {
+    #           sns_topic_arn: "SNSTopicArn", # required
+    #           role_arn: "RoleArn", # required
+    #         },
+    #         job_tag: "JobTag",
+    #         filters: {
+    #           technical_cue_filter: {
+    #             min_segment_confidence: 1.0,
+    #           },
+    #           shot_filter: {
+    #             min_segment_confidence: 1.0,
+    #           },
+    #         },
+    #         segment_types: ["TECHNICAL_CUE"], # required, accepts TECHNICAL_CUE, SHOT
+    #       }
+    #
+    # @!attribute [rw] video
+    #   Video file stored in an Amazon S3 bucket. Amazon Rekognition video
+    #   start operations such as StartLabelDetection use `Video` to specify
+    #   a video for analysis. The supported file formats are .mp4, .mov and
+    #   .avi.
+    #   @return [Types::Video]
+    #
+    # @!attribute [rw] client_request_token
+    #   Idempotent token used to identify the start request. If you use the
+    #   same token with multiple `StartSegmentDetection` requests, the same
+    #   `JobId` is returned. Use `ClientRequestToken` to prevent the same
+    #   job from being accidently started more than once.
+    #   @return [String]
+    #
+    # @!attribute [rw] notification_channel
+    #   The ARN of the Amazon SNS topic to which you want Amazon Rekognition
+    #   Video to publish the completion status of the segment detection
+    #   operation.
+    #   @return [Types::NotificationChannel]
+    #
+    # @!attribute [rw] job_tag
+    #   An identifier you specify that's returned in the completion
+    #   notification that's published to your Amazon Simple Notification
+    #   Service topic. For example, you can use `JobTag` to group related
+    #   jobs and identify them in the completion notification.
+    #   @return [String]
+    #
+    # @!attribute [rw] filters
+    #   Filters for technical cue or shot detection.
+    #   @return [Types::StartSegmentDetectionFilters]
+    #
+    # @!attribute [rw] segment_types
+    #   An array of segment types to detect in the video. Valid values are
+    #   TECHNICAL\_CUE and SHOT.
+    #   @return [Array<String>]
+    #
+    class StartSegmentDetectionRequest < Struct.new(
+      :video,
+      :client_request_token,
+      :notification_channel,
+      :job_tag,
+      :filters,
+      :segment_types)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] job_id
+    #   Unique identifier for the segment detection job. The `JobId` is
+    #   returned from `StartSegmentDetection`.
+    #   @return [String]
+    #
+    class StartSegmentDetectionResponse < Struct.new(
+      :job_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Filters for the shot detection segments returned by
+    # `GetSegmentDetection`. For more information, see
+    # StartSegmentDetectionFilters.
+    #
+    # @note When making an API call, you may pass StartShotDetectionFilter
+    #   data as a hash:
+    #
+    #       {
+    #         min_segment_confidence: 1.0,
+    #       }
+    #
+    # @!attribute [rw] min_segment_confidence
+    #   Specifies the minimum confidence that Amazon Rekognition Video must
+    #   have in order to return a detected segment. Confidence represents
+    #   how certain Amazon Rekognition is that a segment is correctly
+    #   identified. 0 is the lowest confidence. 100 is the highest
+    #   confidence. Amazon Rekognition Video doesn't return any segments
+    #   with a confidence level lower than this specified value.
+    #
+    #   If you don't specify `MinSegmentConfidence`, the
+    #   `GetSegmentDetection` returns segments with confidence values
+    #   greater than or equal to 50 percent.
+    #   @return [Float]
+    #
+    class StartShotDetectionFilter < Struct.new(
+      :min_segment_confidence)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4281,10 +4798,40 @@ module Aws::Rekognition
     #
     class StartStreamProcessorRequest < Struct.new(
       :name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
     class StartStreamProcessorResponse < Aws::EmptyStructure; end
+
+    # Filters for the technical segments returned by GetSegmentDetection.
+    # For more information, see StartSegmentDetectionFilters.
+    #
+    # @note When making an API call, you may pass StartTechnicalCueDetectionFilter
+    #   data as a hash:
+    #
+    #       {
+    #         min_segment_confidence: 1.0,
+    #       }
+    #
+    # @!attribute [rw] min_segment_confidence
+    #   Specifies the minimum confidence that Amazon Rekognition Video must
+    #   have in order to return a detected segment. Confidence represents
+    #   how certain Amazon Rekognition is that a segment is correctly
+    #   identified. 0 is the lowest confidence. 100 is the highest
+    #   confidence. Amazon Rekognition Video doesn't return any segments
+    #   with a confidence level lower than this specified value.
+    #
+    #   If you don't specify `MinSegmentConfidence`, `GetSegmentDetection`
+    #   returns segments with confidence values greater than or equal to 50
+    #   percent.
+    #   @return [Float]
+    #
+    class StartTechnicalCueDetectionFilter < Struct.new(
+      :min_segment_confidence)
+      SENSITIVE = []
+      include Aws::Structure
+    end
 
     # Set of optional parameters that let you set the criteria text must
     # meet to be included in your response. `WordFilter` looks at a word's
@@ -4325,6 +4872,7 @@ module Aws::Rekognition
     class StartTextDetectionFilters < Struct.new(
       :word_filter,
       :regions_of_interest)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4402,6 +4950,7 @@ module Aws::Rekognition
       :notification_channel,
       :job_tag,
       :filters)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4412,6 +4961,7 @@ module Aws::Rekognition
     #
     class StartTextDetectionResponse < Struct.new(
       :job_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4432,6 +4982,7 @@ module Aws::Rekognition
     #
     class StopProjectVersionRequest < Struct.new(
       :project_version_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4441,6 +4992,7 @@ module Aws::Rekognition
     #
     class StopProjectVersionResponse < Struct.new(
       :status)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4457,6 +5009,7 @@ module Aws::Rekognition
     #
     class StopStreamProcessorRequest < Struct.new(
       :name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4480,6 +5033,7 @@ module Aws::Rekognition
     class StreamProcessor < Struct.new(
       :name,
       :status)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4501,6 +5055,7 @@ module Aws::Rekognition
     #
     class StreamProcessorInput < Struct.new(
       :kinesis_video_stream)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4525,6 +5080,7 @@ module Aws::Rekognition
     #
     class StreamProcessorOutput < Struct.new(
       :kinesis_data_stream)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4547,6 +5103,7 @@ module Aws::Rekognition
     #
     class StreamProcessorSettings < Struct.new(
       :face_search)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4570,6 +5127,7 @@ module Aws::Rekognition
     #
     class Summary < Struct.new(
       :s3_object)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4588,6 +5146,26 @@ module Aws::Rekognition
     class Sunglasses < Struct.new(
       :value,
       :confidence)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Information about a technical cue segment. For more information, see
+    # SegmentDetection.
+    #
+    # @!attribute [rw] type
+    #   The type of the technical cue.
+    #   @return [String]
+    #
+    # @!attribute [rw] confidence
+    #   The confidence that Amazon Rekognition Video has in the accuracy of
+    #   the detected segment.
+    #   @return [Float]
+    #
+    class TechnicalCueSegment < Struct.new(
+      :type,
+      :confidence)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4625,6 +5203,7 @@ module Aws::Rekognition
     class TestingData < Struct.new(
       :assets,
       :auto_create)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4644,6 +5223,7 @@ module Aws::Rekognition
     class TestingDataResult < Struct.new(
       :input,
       :output)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4698,6 +5278,7 @@ module Aws::Rekognition
       :parent_id,
       :confidence,
       :geometry)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4717,6 +5298,7 @@ module Aws::Rekognition
     class TextDetectionResult < Struct.new(
       :timestamp,
       :text_detection)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4751,6 +5333,7 @@ module Aws::Rekognition
     #
     class TrainingData < Struct.new(
       :assets)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4769,6 +5352,7 @@ module Aws::Rekognition
     class TrainingDataResult < Struct.new(
       :input,
       :output)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4803,6 +5387,7 @@ module Aws::Rekognition
     class UnindexedFace < Struct.new(
       :reasons,
       :face_detail)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4828,6 +5413,7 @@ module Aws::Rekognition
     #
     class Video < Struct.new(
       :s3_object)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4866,6 +5452,7 @@ module Aws::Rekognition
       :frame_rate,
       :frame_height,
       :frame_width)
+      SENSITIVE = []
       include Aws::Structure
     end
 

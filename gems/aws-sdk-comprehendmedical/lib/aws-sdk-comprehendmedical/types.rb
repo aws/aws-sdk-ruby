@@ -79,6 +79,7 @@ module Aws::ComprehendMedical
       :text,
       :category,
       :traits)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -124,6 +125,7 @@ module Aws::ComprehendMedical
       :job_status,
       :submit_time_before,
       :submit_time_after)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -213,6 +215,7 @@ module Aws::ComprehendMedical
       :manifest_file_path,
       :kms_key,
       :model_version)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -233,6 +236,7 @@ module Aws::ComprehendMedical
     #
     class DescribeEntitiesDetectionV2JobRequest < Struct.new(
       :job_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -245,6 +249,7 @@ module Aws::ComprehendMedical
     #
     class DescribeEntitiesDetectionV2JobResponse < Struct.new(
       :comprehend_medical_async_job_properties)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -265,6 +270,7 @@ module Aws::ComprehendMedical
     #
     class DescribeICD10CMInferenceJobRequest < Struct.new(
       :job_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -277,6 +283,7 @@ module Aws::ComprehendMedical
     #
     class DescribeICD10CMInferenceJobResponse < Struct.new(
       :comprehend_medical_async_job_properties)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -297,6 +304,7 @@ module Aws::ComprehendMedical
     #
     class DescribePHIDetectionJobRequest < Struct.new(
       :job_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -309,6 +317,7 @@ module Aws::ComprehendMedical
     #
     class DescribePHIDetectionJobResponse < Struct.new(
       :comprehend_medical_async_job_properties)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -329,6 +338,7 @@ module Aws::ComprehendMedical
     #
     class DescribeRxNormInferenceJobRequest < Struct.new(
       :job_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -341,6 +351,7 @@ module Aws::ComprehendMedical
     #
     class DescribeRxNormInferenceJobResponse < Struct.new(
       :comprehend_medical_async_job_properties)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -361,6 +372,7 @@ module Aws::ComprehendMedical
     #
     class DetectEntitiesRequest < Struct.new(
       :text)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -397,6 +409,7 @@ module Aws::ComprehendMedical
       :unmapped_attributes,
       :pagination_token,
       :model_version)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -417,6 +430,7 @@ module Aws::ComprehendMedical
     #
     class DetectEntitiesV2Request < Struct.new(
       :text)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -451,6 +465,7 @@ module Aws::ComprehendMedical
       :unmapped_attributes,
       :pagination_token,
       :model_version)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -471,6 +486,7 @@ module Aws::ComprehendMedical
     #
     class DetectPHIRequest < Struct.new(
       :text)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -500,6 +516,7 @@ module Aws::ComprehendMedical
       :entities,
       :pagination_token,
       :model_version)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -559,6 +576,7 @@ module Aws::ComprehendMedical
       :type,
       :traits,
       :attributes)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -620,6 +638,7 @@ module Aws::ComprehendMedical
       :end_offset,
       :text,
       :traits)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -646,6 +665,7 @@ module Aws::ComprehendMedical
       :description,
       :code,
       :score)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -722,6 +742,7 @@ module Aws::ComprehendMedical
       :attributes,
       :traits,
       :icd10cm_concepts)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -742,6 +763,7 @@ module Aws::ComprehendMedical
     class ICD10CMTrait < Struct.new(
       :name,
       :score)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -761,6 +783,7 @@ module Aws::ComprehendMedical
     #
     class InferICD10CMRequest < Struct.new(
       :text)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -788,6 +811,7 @@ module Aws::ComprehendMedical
       :entities,
       :pagination_token,
       :model_version)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -807,6 +831,7 @@ module Aws::ComprehendMedical
     #
     class InferRxNormRequest < Struct.new(
       :text)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -834,6 +859,7 @@ module Aws::ComprehendMedical
       :entities,
       :pagination_token,
       :model_version)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -866,6 +892,7 @@ module Aws::ComprehendMedical
     class InputDataConfig < Struct.new(
       :s3_bucket,
       :s3_key)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -878,6 +905,7 @@ module Aws::ComprehendMedical
     #
     class InternalServerException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -891,6 +919,7 @@ module Aws::ComprehendMedical
     #
     class InvalidEncodingException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -904,6 +933,7 @@ module Aws::ComprehendMedical
     #
     class InvalidRequestException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -942,6 +972,7 @@ module Aws::ComprehendMedical
       :filter,
       :next_token,
       :max_results)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -958,6 +989,7 @@ module Aws::ComprehendMedical
     class ListEntitiesDetectionV2JobsResponse < Struct.new(
       :comprehend_medical_async_job_properties_list,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -996,6 +1028,7 @@ module Aws::ComprehendMedical
       :filter,
       :next_token,
       :max_results)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1012,6 +1045,7 @@ module Aws::ComprehendMedical
     class ListICD10CMInferenceJobsResponse < Struct.new(
       :comprehend_medical_async_job_properties_list,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1050,6 +1084,7 @@ module Aws::ComprehendMedical
       :filter,
       :next_token,
       :max_results)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1066,6 +1101,7 @@ module Aws::ComprehendMedical
     class ListPHIDetectionJobsResponse < Struct.new(
       :comprehend_medical_async_job_properties_list,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1103,6 +1139,7 @@ module Aws::ComprehendMedical
       :filter,
       :next_token,
       :max_results)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1120,6 +1157,7 @@ module Aws::ComprehendMedical
     class ListRxNormInferenceJobsResponse < Struct.new(
       :comprehend_medical_async_job_properties_list,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1153,6 +1191,7 @@ module Aws::ComprehendMedical
     class OutputDataConfig < Struct.new(
       :s3_bucket,
       :s3_key)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1166,6 +1205,7 @@ module Aws::ComprehendMedical
     #
     class ResourceNotFoundException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1228,6 +1268,7 @@ module Aws::ComprehendMedical
       :end_offset,
       :text,
       :traits)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1253,6 +1294,7 @@ module Aws::ComprehendMedical
       :description,
       :code,
       :score)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1328,6 +1370,7 @@ module Aws::ComprehendMedical
       :attributes,
       :traits,
       :rx_norm_concepts)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1349,6 +1392,7 @@ module Aws::ComprehendMedical
     class RxNormTrait < Struct.new(
       :name,
       :score)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1362,6 +1406,7 @@ module Aws::ComprehendMedical
     #
     class ServiceUnavailableException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1435,6 +1480,7 @@ module Aws::ComprehendMedical
       :client_request_token,
       :kms_key,
       :language_code)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1448,6 +1494,7 @@ module Aws::ComprehendMedical
     #
     class StartEntitiesDetectionV2JobResponse < Struct.new(
       :job_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1521,6 +1568,7 @@ module Aws::ComprehendMedical
       :client_request_token,
       :kms_key,
       :language_code)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1533,6 +1581,7 @@ module Aws::ComprehendMedical
     #
     class StartICD10CMInferenceJobResponse < Struct.new(
       :job_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1606,6 +1655,7 @@ module Aws::ComprehendMedical
       :client_request_token,
       :kms_key,
       :language_code)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1618,6 +1668,7 @@ module Aws::ComprehendMedical
     #
     class StartPHIDetectionJobResponse < Struct.new(
       :job_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1691,6 +1742,7 @@ module Aws::ComprehendMedical
       :client_request_token,
       :kms_key,
       :language_code)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1702,6 +1754,7 @@ module Aws::ComprehendMedical
     #
     class StartRxNormInferenceJobResponse < Struct.new(
       :job_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1720,6 +1773,7 @@ module Aws::ComprehendMedical
     #
     class StopEntitiesDetectionV2JobRequest < Struct.new(
       :job_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1732,6 +1786,7 @@ module Aws::ComprehendMedical
     #
     class StopEntitiesDetectionV2JobResponse < Struct.new(
       :job_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1750,6 +1805,7 @@ module Aws::ComprehendMedical
     #
     class StopICD10CMInferenceJobRequest < Struct.new(
       :job_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1762,6 +1818,7 @@ module Aws::ComprehendMedical
     #
     class StopICD10CMInferenceJobResponse < Struct.new(
       :job_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1780,6 +1837,7 @@ module Aws::ComprehendMedical
     #
     class StopPHIDetectionJobRequest < Struct.new(
       :job_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1791,6 +1849,7 @@ module Aws::ComprehendMedical
     #
     class StopPHIDetectionJobResponse < Struct.new(
       :job_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1809,6 +1868,7 @@ module Aws::ComprehendMedical
     #
     class StopRxNormInferenceJobRequest < Struct.new(
       :job_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1821,6 +1881,7 @@ module Aws::ComprehendMedical
     #
     class StopRxNormInferenceJobResponse < Struct.new(
       :job_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1835,6 +1896,7 @@ module Aws::ComprehendMedical
     #
     class TextSizeLimitExceededException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1849,6 +1911,7 @@ module Aws::ComprehendMedical
     #
     class TooManyRequestsException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1868,6 +1931,7 @@ module Aws::ComprehendMedical
     class Trait < Struct.new(
       :name,
       :score)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1891,6 +1955,7 @@ module Aws::ComprehendMedical
     class UnmappedAttribute < Struct.new(
       :type,
       :attribute)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1904,6 +1969,7 @@ module Aws::ComprehendMedical
     #
     class ValidationException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 

@@ -45,6 +45,7 @@ module Aws::IoTSiteWise
       :permission,
       :creation_date,
       :last_update_date)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -67,6 +68,7 @@ module Aws::IoTSiteWise
       :timestamp,
       :quality,
       :value)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -106,6 +108,7 @@ module Aws::IoTSiteWise
       :minimum,
       :sum,
       :standard_deviation)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -128,6 +131,7 @@ module Aws::IoTSiteWise
       :asset_id,
       :code,
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -150,6 +154,7 @@ module Aws::IoTSiteWise
     class AssetHierarchy < Struct.new(
       :id,
       :name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -189,6 +194,7 @@ module Aws::IoTSiteWise
       :id,
       :name,
       :child_asset_model_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -221,6 +227,7 @@ module Aws::IoTSiteWise
     class AssetModelHierarchyDefinition < Struct.new(
       :name,
       :child_asset_model_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -298,6 +305,7 @@ module Aws::IoTSiteWise
       :data_type,
       :unit,
       :type)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -371,6 +379,7 @@ module Aws::IoTSiteWise
       :data_type,
       :unit,
       :type)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -393,6 +402,7 @@ module Aws::IoTSiteWise
     class AssetModelStatus < Struct.new(
       :state,
       :error)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -440,6 +450,7 @@ module Aws::IoTSiteWise
       :creation_date,
       :last_update_date,
       :status)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -489,6 +500,7 @@ module Aws::IoTSiteWise
       :notification,
       :data_type,
       :unit)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -527,6 +539,7 @@ module Aws::IoTSiteWise
       :value,
       :timestamp,
       :quality)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -549,6 +562,7 @@ module Aws::IoTSiteWise
     class AssetStatus < Struct.new(
       :state,
       :error)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -602,6 +616,7 @@ module Aws::IoTSiteWise
       :last_update_date,
       :status,
       :hierarchies)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -648,6 +663,7 @@ module Aws::IoTSiteWise
       :hierarchy_id,
       :child_asset_id,
       :client_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -701,6 +717,7 @@ module Aws::IoTSiteWise
       :last_update_date,
       :status,
       :hierarchies)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -732,6 +749,7 @@ module Aws::IoTSiteWise
     #
     class Attribute < Struct.new(
       :default_value)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -765,6 +783,7 @@ module Aws::IoTSiteWise
       :project_id,
       :asset_ids,
       :client_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -774,6 +793,7 @@ module Aws::IoTSiteWise
     #
     class BatchAssociateProjectAssetsResponse < Struct.new(
       :errors)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -807,6 +827,7 @@ module Aws::IoTSiteWise
       :project_id,
       :asset_ids,
       :client_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -816,6 +837,7 @@ module Aws::IoTSiteWise
     #
     class BatchDisassociateProjectAssetsResponse < Struct.new(
       :errors)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -838,6 +860,7 @@ module Aws::IoTSiteWise
       :error_code,
       :error_message,
       :timestamps)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -859,6 +882,7 @@ module Aws::IoTSiteWise
     class BatchPutAssetPropertyErrorEntry < Struct.new(
       :entry_id,
       :errors)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -898,6 +922,7 @@ module Aws::IoTSiteWise
     #
     class BatchPutAssetPropertyValueRequest < Struct.new(
       :entries)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -908,6 +933,7 @@ module Aws::IoTSiteWise
     #
     class BatchPutAssetPropertyValueResponse < Struct.new(
       :error_entries)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -930,6 +956,7 @@ module Aws::IoTSiteWise
       :message,
       :resource_id,
       :resource_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1000,6 +1027,7 @@ module Aws::IoTSiteWise
       :access_policy_permission,
       :client_token,
       :tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1020,6 +1048,7 @@ module Aws::IoTSiteWise
     class CreateAccessPolicyResponse < Struct.new(
       :access_policy_id,
       :access_policy_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1146,6 +1175,7 @@ module Aws::IoTSiteWise
       :asset_model_hierarchies,
       :client_token,
       :tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1173,6 +1203,7 @@ module Aws::IoTSiteWise
       :asset_model_id,
       :asset_model_arn,
       :asset_model_status)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1220,6 +1251,7 @@ module Aws::IoTSiteWise
       :asset_model_id,
       :client_token,
       :tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1247,6 +1279,7 @@ module Aws::IoTSiteWise
       :asset_id,
       :asset_arn,
       :asset_status)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1312,6 +1345,7 @@ module Aws::IoTSiteWise
       :dashboard_definition,
       :client_token,
       :tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1332,6 +1366,7 @@ module Aws::IoTSiteWise
     class CreateDashboardResponse < Struct.new(
       :dashboard_id,
       :dashboard_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1373,6 +1408,7 @@ module Aws::IoTSiteWise
       :gateway_name,
       :gateway_platform,
       :tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1394,6 +1430,7 @@ module Aws::IoTSiteWise
     class CreateGatewayResponse < Struct.new(
       :gateway_id,
       :gateway_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1471,6 +1508,7 @@ module Aws::IoTSiteWise
       :portal_logo_image_file,
       :role_arn,
       :tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1507,6 +1545,7 @@ module Aws::IoTSiteWise
       :portal_start_url,
       :portal_status,
       :sso_application_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1560,6 +1599,7 @@ module Aws::IoTSiteWise
       :project_description,
       :client_token,
       :tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1580,6 +1620,7 @@ module Aws::IoTSiteWise
     class CreateProjectResponse < Struct.new(
       :project_id,
       :project_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1611,6 +1652,7 @@ module Aws::IoTSiteWise
       :description,
       :creation_date,
       :last_update_date)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1638,6 +1680,7 @@ module Aws::IoTSiteWise
     class DeleteAccessPolicyRequest < Struct.new(
       :access_policy_id,
       :client_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1667,6 +1710,7 @@ module Aws::IoTSiteWise
     class DeleteAssetModelRequest < Struct.new(
       :asset_model_id,
       :client_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1677,6 +1721,7 @@ module Aws::IoTSiteWise
     #
     class DeleteAssetModelResponse < Struct.new(
       :asset_model_status)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1704,6 +1749,7 @@ module Aws::IoTSiteWise
     class DeleteAssetRequest < Struct.new(
       :asset_id,
       :client_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1714,6 +1760,7 @@ module Aws::IoTSiteWise
     #
     class DeleteAssetResponse < Struct.new(
       :asset_status)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1741,6 +1788,7 @@ module Aws::IoTSiteWise
     class DeleteDashboardRequest < Struct.new(
       :dashboard_id,
       :client_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1759,6 +1807,7 @@ module Aws::IoTSiteWise
     #
     class DeleteGatewayRequest < Struct.new(
       :gateway_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1786,6 +1835,7 @@ module Aws::IoTSiteWise
     class DeletePortalRequest < Struct.new(
       :portal_id,
       :client_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1796,6 +1846,7 @@ module Aws::IoTSiteWise
     #
     class DeletePortalResponse < Struct.new(
       :portal_status)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1823,6 +1874,7 @@ module Aws::IoTSiteWise
     class DeleteProjectRequest < Struct.new(
       :project_id,
       :client_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1841,6 +1893,7 @@ module Aws::IoTSiteWise
     #
     class DescribeAccessPolicyRequest < Struct.new(
       :access_policy_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1889,6 +1942,7 @@ module Aws::IoTSiteWise
       :access_policy_permission,
       :access_policy_creation_date,
       :access_policy_last_update_date)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1905,6 +1959,7 @@ module Aws::IoTSiteWise
     #
     class DescribeAssetModelRequest < Struct.new(
       :asset_model_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1964,6 +2019,7 @@ module Aws::IoTSiteWise
       :asset_model_creation_date,
       :asset_model_last_update_date,
       :asset_model_status)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1986,6 +2042,7 @@ module Aws::IoTSiteWise
     class DescribeAssetPropertyRequest < Struct.new(
       :asset_id,
       :property_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2010,6 +2067,7 @@ module Aws::IoTSiteWise
       :asset_name,
       :asset_model_id,
       :asset_property)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2026,6 +2084,7 @@ module Aws::IoTSiteWise
     #
     class DescribeAssetRequest < Struct.new(
       :asset_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2083,6 +2142,7 @@ module Aws::IoTSiteWise
       :asset_creation_date,
       :asset_last_update_date,
       :asset_status)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2099,6 +2159,7 @@ module Aws::IoTSiteWise
     #
     class DescribeDashboardRequest < Struct.new(
       :dashboard_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2155,6 +2216,7 @@ module Aws::IoTSiteWise
       :dashboard_definition,
       :dashboard_creation_date,
       :dashboard_last_update_date)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2181,6 +2243,7 @@ module Aws::IoTSiteWise
     class DescribeGatewayCapabilityConfigurationRequest < Struct.new(
       :gateway_id,
       :capability_namespace)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2219,6 +2282,7 @@ module Aws::IoTSiteWise
       :capability_namespace,
       :capability_configuration,
       :capability_sync_status)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2235,6 +2299,7 @@ module Aws::IoTSiteWise
     #
     class DescribeGatewayRequest < Struct.new(
       :gateway_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2287,6 +2352,7 @@ module Aws::IoTSiteWise
       :gateway_capability_summaries,
       :creation_date,
       :last_update_date)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2300,6 +2366,7 @@ module Aws::IoTSiteWise
     #
     class DescribeLoggingOptionsResponse < Struct.new(
       :logging_options)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2316,6 +2383,7 @@ module Aws::IoTSiteWise
     #
     class DescribePortalRequest < Struct.new(
       :portal_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2397,6 +2465,7 @@ module Aws::IoTSiteWise
       :portal_last_update_date,
       :portal_logo_image_location,
       :role_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2413,6 +2482,7 @@ module Aws::IoTSiteWise
     #
     class DescribeProjectRequest < Struct.new(
       :project_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2458,6 +2528,7 @@ module Aws::IoTSiteWise
       :project_description,
       :project_creation_date,
       :project_last_update_date)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2506,6 +2577,7 @@ module Aws::IoTSiteWise
       :hierarchy_id,
       :child_asset_id,
       :client_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2522,6 +2594,7 @@ module Aws::IoTSiteWise
     class ErrorDetails < Struct.new(
       :code,
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2550,6 +2623,7 @@ module Aws::IoTSiteWise
     class ExpressionVariable < Struct.new(
       :name,
       :value)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2578,6 +2652,7 @@ module Aws::IoTSiteWise
     class GatewayCapabilitySummary < Struct.new(
       :capability_namespace,
       :capability_sync_status)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2598,6 +2673,7 @@ module Aws::IoTSiteWise
     #
     class GatewayPlatform < Struct.new(
       :greengrass)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2636,6 +2712,7 @@ module Aws::IoTSiteWise
       :gateway_capability_summaries,
       :creation_date,
       :last_update_date)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2722,6 +2799,7 @@ module Aws::IoTSiteWise
       :time_ordering,
       :next_token,
       :max_results)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2737,6 +2815,7 @@ module Aws::IoTSiteWise
     class GetAssetPropertyAggregatesResponse < Struct.new(
       :aggregated_values,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2811,6 +2890,7 @@ module Aws::IoTSiteWise
       :time_ordering,
       :next_token,
       :max_results)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2826,6 +2906,7 @@ module Aws::IoTSiteWise
     class GetAssetPropertyValueHistoryResponse < Struct.new(
       :asset_property_value_history,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2862,6 +2943,7 @@ module Aws::IoTSiteWise
       :asset_id,
       :property_id,
       :property_alias)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2871,6 +2953,7 @@ module Aws::IoTSiteWise
     #
     class GetAssetPropertyValueResponse < Struct.new(
       :property_value)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2906,6 +2989,7 @@ module Aws::IoTSiteWise
     #
     class Greengrass < Struct.new(
       :group_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2924,6 +3008,7 @@ module Aws::IoTSiteWise
     #
     class GroupIdentity < Struct.new(
       :id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2962,6 +3047,7 @@ module Aws::IoTSiteWise
     class Identity < Struct.new(
       :user,
       :group)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2995,6 +3081,7 @@ module Aws::IoTSiteWise
     class Image < Struct.new(
       :id,
       :file)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3020,6 +3107,7 @@ module Aws::IoTSiteWise
     class ImageFile < Struct.new(
       :data,
       :type)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3038,6 +3126,7 @@ module Aws::IoTSiteWise
     class ImageLocation < Struct.new(
       :id,
       :url)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3049,6 +3138,7 @@ module Aws::IoTSiteWise
     #
     class InternalFailureException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3061,6 +3151,7 @@ module Aws::IoTSiteWise
     #
     class InvalidRequestException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3081,6 +3172,7 @@ module Aws::IoTSiteWise
     #
     class LimitExceededException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3131,6 +3223,7 @@ module Aws::IoTSiteWise
       :resource_id,
       :next_token,
       :max_results)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3146,6 +3239,7 @@ module Aws::IoTSiteWise
     class ListAccessPoliciesResponse < Struct.new(
       :access_policy_summaries,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3168,6 +3262,7 @@ module Aws::IoTSiteWise
     class ListAssetModelsRequest < Struct.new(
       :next_token,
       :max_results)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3183,6 +3278,7 @@ module Aws::IoTSiteWise
     class ListAssetModelsResponse < Struct.new(
       :asset_model_summaries,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3225,6 +3321,7 @@ module Aws::IoTSiteWise
       :max_results,
       :asset_model_id,
       :filter)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3240,6 +3337,7 @@ module Aws::IoTSiteWise
     class ListAssetsResponse < Struct.new(
       :asset_summaries,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3285,6 +3383,7 @@ module Aws::IoTSiteWise
       :hierarchy_id,
       :next_token,
       :max_results)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3300,6 +3399,7 @@ module Aws::IoTSiteWise
     class ListAssociatedAssetsResponse < Struct.new(
       :asset_summaries,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3328,6 +3428,7 @@ module Aws::IoTSiteWise
       :project_id,
       :next_token,
       :max_results)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3343,6 +3444,7 @@ module Aws::IoTSiteWise
     class ListDashboardsResponse < Struct.new(
       :dashboard_summaries,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3365,6 +3467,7 @@ module Aws::IoTSiteWise
     class ListGatewaysRequest < Struct.new(
       :next_token,
       :max_results)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3380,6 +3483,7 @@ module Aws::IoTSiteWise
     class ListGatewaysResponse < Struct.new(
       :gateway_summaries,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3402,6 +3506,7 @@ module Aws::IoTSiteWise
     class ListPortalsRequest < Struct.new(
       :next_token,
       :max_results)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3417,6 +3522,7 @@ module Aws::IoTSiteWise
     class ListPortalsResponse < Struct.new(
       :portal_summaries,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3445,6 +3551,7 @@ module Aws::IoTSiteWise
       :project_id,
       :next_token,
       :max_results)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3461,6 +3568,7 @@ module Aws::IoTSiteWise
     class ListProjectAssetsResponse < Struct.new(
       :asset_ids,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3489,6 +3597,7 @@ module Aws::IoTSiteWise
       :portal_id,
       :next_token,
       :max_results)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3504,6 +3613,7 @@ module Aws::IoTSiteWise
     class ListProjectsResponse < Struct.new(
       :project_summaries,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3524,6 +3634,7 @@ module Aws::IoTSiteWise
     #
     class ListTagsForResourceRequest < Struct.new(
       :resource_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3539,6 +3650,7 @@ module Aws::IoTSiteWise
     #
     class ListTagsForResourceResponse < Struct.new(
       :tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3557,6 +3669,7 @@ module Aws::IoTSiteWise
     #
     class LoggingOptions < Struct.new(
       :level)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3638,6 +3751,7 @@ module Aws::IoTSiteWise
       :expression,
       :variables,
       :window)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3659,6 +3773,7 @@ module Aws::IoTSiteWise
     #
     class MetricWindow < Struct.new(
       :tumbling)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3675,6 +3790,7 @@ module Aws::IoTSiteWise
     class MonitorErrorDetails < Struct.new(
       :code,
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3693,6 +3809,7 @@ module Aws::IoTSiteWise
     #
     class PortalResource < Struct.new(
       :id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3709,6 +3826,7 @@ module Aws::IoTSiteWise
     class PortalStatus < Struct.new(
       :state,
       :error)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3759,6 +3877,7 @@ module Aws::IoTSiteWise
       :creation_date,
       :last_update_date,
       :role_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3777,6 +3896,7 @@ module Aws::IoTSiteWise
     #
     class ProjectResource < Struct.new(
       :id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3808,6 +3928,7 @@ module Aws::IoTSiteWise
       :description,
       :creation_date,
       :last_update_date)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3863,6 +3984,7 @@ module Aws::IoTSiteWise
       :data_type,
       :unit,
       :type)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3888,6 +4010,7 @@ module Aws::IoTSiteWise
     class PropertyNotification < Struct.new(
       :topic,
       :state)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3969,6 +4092,7 @@ module Aws::IoTSiteWise
       :measurement,
       :transform,
       :metric)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4040,6 +4164,7 @@ module Aws::IoTSiteWise
       :property_id,
       :property_alias,
       :property_values)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4058,6 +4183,7 @@ module Aws::IoTSiteWise
     #
     class PutLoggingOptionsRequest < Struct.new(
       :logging_options)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4089,6 +4215,7 @@ module Aws::IoTSiteWise
     class Resource < Struct.new(
       :portal,
       :project)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4109,6 +4236,7 @@ module Aws::IoTSiteWise
       :message,
       :resource_id,
       :resource_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4119,6 +4247,7 @@ module Aws::IoTSiteWise
     #
     class ResourceNotFoundException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4129,6 +4258,7 @@ module Aws::IoTSiteWise
     #
     class ServiceUnavailableException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4163,6 +4293,7 @@ module Aws::IoTSiteWise
     class TagResourceRequest < Struct.new(
       :resource_arn,
       :tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4184,6 +4315,7 @@ module Aws::IoTSiteWise
     #
     class ThrottlingException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4209,6 +4341,7 @@ module Aws::IoTSiteWise
     class TimeInNanos < Struct.new(
       :time_in_seconds,
       :offset_in_nanos)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4230,6 +4363,7 @@ module Aws::IoTSiteWise
     class TooManyTagsException < Struct.new(
       :message,
       :resource_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4284,6 +4418,7 @@ module Aws::IoTSiteWise
     class Transform < Struct.new(
       :expression,
       :variables)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4314,6 +4449,7 @@ module Aws::IoTSiteWise
     #
     class TumblingWindow < Struct.new(
       :interval)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4340,6 +4476,7 @@ module Aws::IoTSiteWise
     class UntagResourceRequest < Struct.new(
       :resource_arn,
       :tag_keys)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4404,6 +4541,7 @@ module Aws::IoTSiteWise
       :access_policy_resource,
       :access_policy_permission,
       :client_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4527,6 +4665,7 @@ module Aws::IoTSiteWise
       :asset_model_properties,
       :asset_model_hierarchies,
       :client_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4537,6 +4676,7 @@ module Aws::IoTSiteWise
     #
     class UpdateAssetModelResponse < Struct.new(
       :asset_model_status)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4603,6 +4743,7 @@ module Aws::IoTSiteWise
       :property_alias,
       :property_notification_state,
       :client_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4636,6 +4777,7 @@ module Aws::IoTSiteWise
       :asset_id,
       :asset_name,
       :client_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4646,6 +4788,7 @@ module Aws::IoTSiteWise
     #
     class UpdateAssetResponse < Struct.new(
       :asset_status)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4697,6 +4840,7 @@ module Aws::IoTSiteWise
       :dashboard_description,
       :dashboard_definition,
       :client_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4737,6 +4881,7 @@ module Aws::IoTSiteWise
       :gateway_id,
       :capability_namespace,
       :capability_configuration)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4763,6 +4908,7 @@ module Aws::IoTSiteWise
     class UpdateGatewayCapabilityConfigurationResponse < Struct.new(
       :capability_namespace,
       :capability_sync_status)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4785,6 +4931,7 @@ module Aws::IoTSiteWise
     class UpdateGatewayRequest < Struct.new(
       :gateway_id,
       :gateway_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4861,6 +5008,7 @@ module Aws::IoTSiteWise
       :portal_logo_image,
       :role_arn,
       :client_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4871,6 +5019,7 @@ module Aws::IoTSiteWise
     #
     class UpdatePortalResponse < Struct.new(
       :portal_status)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4910,6 +5059,7 @@ module Aws::IoTSiteWise
       :project_name,
       :project_description,
       :client_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4930,6 +5080,7 @@ module Aws::IoTSiteWise
     #
     class UserIdentity < Struct.new(
       :id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4966,6 +5117,7 @@ module Aws::IoTSiteWise
     class VariableValue < Struct.new(
       :property_id,
       :hierarchy_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5002,6 +5154,7 @@ module Aws::IoTSiteWise
       :integer_value,
       :double_value,
       :boolean_value)
+      SENSITIVE = []
       include Aws::Structure
     end
 

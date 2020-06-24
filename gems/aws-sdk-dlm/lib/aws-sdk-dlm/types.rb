@@ -112,6 +112,7 @@ module Aws::DLM
       :state,
       :policy_details,
       :tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -123,6 +124,7 @@ module Aws::DLM
     #
     class CreateLifecyclePolicyResponse < Struct.new(
       :policy_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -176,6 +178,7 @@ module Aws::DLM
       :interval_unit,
       :times,
       :cron_expression)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -203,6 +206,7 @@ module Aws::DLM
     class CrossRegionCopyRetainRule < Struct.new(
       :interval,
       :interval_unit)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -256,6 +260,7 @@ module Aws::DLM
       :cmk_arn,
       :copy_tags,
       :retain_rule)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -274,6 +279,7 @@ module Aws::DLM
     #
     class DeleteLifecyclePolicyRequest < Struct.new(
       :policy_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -319,6 +325,7 @@ module Aws::DLM
       :interval,
       :interval_unit,
       :availability_zones)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -368,6 +375,7 @@ module Aws::DLM
       :resource_types,
       :target_tags,
       :tags_to_add)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -379,6 +387,7 @@ module Aws::DLM
     #
     class GetLifecyclePoliciesResponse < Struct.new(
       :policies)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -397,6 +406,7 @@ module Aws::DLM
     #
     class GetLifecyclePolicyRequest < Struct.new(
       :policy_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -408,6 +418,7 @@ module Aws::DLM
     #
     class GetLifecyclePolicyResponse < Struct.new(
       :policy)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -424,6 +435,7 @@ module Aws::DLM
     class InternalServerException < Struct.new(
       :message,
       :code)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -451,6 +463,7 @@ module Aws::DLM
       :code,
       :required_parameters,
       :mutually_exclusive_parameters)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -510,6 +523,7 @@ module Aws::DLM
       :policy_details,
       :tags,
       :policy_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -538,6 +552,7 @@ module Aws::DLM
       :description,
       :state,
       :tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -559,6 +574,7 @@ module Aws::DLM
       :message,
       :code,
       :resource_type)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -577,6 +593,7 @@ module Aws::DLM
     #
     class ListTagsForResourceRequest < Struct.new(
       :resource_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -588,6 +605,7 @@ module Aws::DLM
     #
     class ListTagsForResourceResponse < Struct.new(
       :tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -616,6 +634,7 @@ module Aws::DLM
     #
     class Parameters < Struct.new(
       :exclude_boot_volume)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -716,6 +735,7 @@ module Aws::DLM
       :target_tags,
       :schedules,
       :parameters)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -742,6 +762,7 @@ module Aws::DLM
       :code,
       :resource_type,
       :resource_ids)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -777,6 +798,7 @@ module Aws::DLM
       :count,
       :interval,
       :interval_unit)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -880,6 +902,7 @@ module Aws::DLM
       :retain_rule,
       :fast_restore_rule,
       :cross_region_copy_rules)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -906,6 +929,7 @@ module Aws::DLM
     class Tag < Struct.new(
       :key,
       :value)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -932,6 +956,7 @@ module Aws::DLM
     class TagResourceRequest < Struct.new(
       :resource_arn,
       :tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -960,6 +985,7 @@ module Aws::DLM
     class UntagResourceRequest < Struct.new(
       :resource_arn,
       :tag_keys)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1067,6 +1093,7 @@ module Aws::DLM
       :state,
       :description,
       :policy_details)
+      SENSITIVE = []
       include Aws::Structure
     end
 

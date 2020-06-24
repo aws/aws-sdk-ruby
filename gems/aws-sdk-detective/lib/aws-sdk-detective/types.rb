@@ -28,6 +28,7 @@ module Aws::Detective
     #
     class AcceptInvitationRequest < Struct.new(
       :graph_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -54,6 +55,7 @@ module Aws::Detective
     class Account < Struct.new(
       :account_id,
       :email_address)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -66,6 +68,7 @@ module Aws::Detective
     #
     class ConflictException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -77,6 +80,7 @@ module Aws::Detective
     #
     class CreateGraphResponse < Struct.new(
       :graph_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -116,6 +120,7 @@ module Aws::Detective
       :graph_arn,
       :message,
       :accounts)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -138,6 +143,7 @@ module Aws::Detective
     class CreateMembersResponse < Struct.new(
       :members,
       :unprocessed_accounts)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -156,6 +162,7 @@ module Aws::Detective
     #
     class DeleteGraphRequest < Struct.new(
       :graph_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -181,6 +188,7 @@ module Aws::Detective
     class DeleteMembersRequest < Struct.new(
       :graph_arn,
       :account_ids)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -200,6 +208,7 @@ module Aws::Detective
     class DeleteMembersResponse < Struct.new(
       :account_ids,
       :unprocessed_accounts)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -221,6 +230,7 @@ module Aws::Detective
     #
     class DisassociateMembershipRequest < Struct.new(
       :graph_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -250,6 +260,7 @@ module Aws::Detective
     class GetMembersRequest < Struct.new(
       :graph_arn,
       :account_ids)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -271,6 +282,7 @@ module Aws::Detective
     class GetMembersResponse < Struct.new(
       :member_details,
       :unprocessed_accounts)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -290,6 +302,7 @@ module Aws::Detective
     class Graph < Struct.new(
       :arn,
       :created_time)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -303,6 +316,7 @@ module Aws::Detective
     #
     class InternalServerException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -331,6 +345,7 @@ module Aws::Detective
     class ListGraphsRequest < Struct.new(
       :next_token,
       :max_results)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -349,6 +364,7 @@ module Aws::Detective
     class ListGraphsResponse < Struct.new(
       :graph_list,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -377,6 +393,7 @@ module Aws::Detective
     class ListInvitationsRequest < Struct.new(
       :next_token,
       :max_results)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -396,6 +413,7 @@ module Aws::Detective
     class ListInvitationsResponse < Struct.new(
       :invitations,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -431,6 +449,7 @@ module Aws::Detective
       :graph_arn,
       :next_token,
       :max_results)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -454,6 +473,7 @@ module Aws::Detective
     class ListMembersResponse < Struct.new(
       :member_details,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -564,6 +584,7 @@ module Aws::Detective
       :updated_time,
       :percent_of_graph_utilization,
       :percent_of_graph_utilization_updated_time)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -585,6 +606,7 @@ module Aws::Detective
     #
     class RejectInvitationRequest < Struct.new(
       :graph_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -597,6 +619,7 @@ module Aws::Detective
     #
     class ResourceNotFoundException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -620,6 +643,7 @@ module Aws::Detective
     #
     class ServiceQuotaExceededException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -647,6 +671,7 @@ module Aws::Detective
     class StartMonitoringMemberRequest < Struct.new(
       :graph_arn,
       :account_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -667,6 +692,7 @@ module Aws::Detective
     class UnprocessedAccount < Struct.new(
       :account_id,
       :reason)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -679,6 +705,7 @@ module Aws::Detective
     #
     class ValidationException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 

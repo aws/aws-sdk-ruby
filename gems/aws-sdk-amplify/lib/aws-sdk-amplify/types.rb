@@ -121,6 +121,7 @@ module Aws::Amplify
       :enable_auto_branch_creation,
       :auto_branch_creation_patterns,
       :auto_branch_creation_config)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -139,6 +140,7 @@ module Aws::Amplify
     class Artifact < Struct.new(
       :artifact_file_name,
       :artifact_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -209,6 +211,7 @@ module Aws::Amplify
       :build_spec,
       :enable_pull_request_preview,
       :pull_request_environment_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -249,6 +252,7 @@ module Aws::Amplify
       :deployment_artifacts,
       :create_time,
       :update_time)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -261,6 +265,7 @@ module Aws::Amplify
     #
     class BadRequestException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -401,6 +406,7 @@ module Aws::Amplify
       :destination_branch,
       :source_branch,
       :backend_environment_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -545,6 +551,7 @@ module Aws::Amplify
       :enable_auto_branch_creation,
       :auto_branch_creation_patterns,
       :auto_branch_creation_config)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -557,6 +564,7 @@ module Aws::Amplify
     #
     class CreateAppResult < Struct.new(
       :app)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -595,6 +603,7 @@ module Aws::Amplify
       :environment_name,
       :stack_name,
       :deployment_artifacts)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -608,6 +617,7 @@ module Aws::Amplify
     #
     class CreateBackendEnvironmentResult < Struct.new(
       :backend_environment)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -728,6 +738,7 @@ module Aws::Amplify
       :enable_pull_request_preview,
       :pull_request_environment_name,
       :backend_environment_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -741,6 +752,7 @@ module Aws::Amplify
     #
     class CreateBranchResult < Struct.new(
       :branch)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -778,6 +790,7 @@ module Aws::Amplify
       :app_id,
       :branch_name,
       :file_map)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -803,6 +816,7 @@ module Aws::Amplify
       :job_id,
       :file_upload_urls,
       :zip_upload_url)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -847,6 +861,7 @@ module Aws::Amplify
       :domain_name,
       :enable_auto_sub_domain,
       :sub_domain_settings)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -860,6 +875,7 @@ module Aws::Amplify
     #
     class CreateDomainAssociationResult < Struct.new(
       :domain_association)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -892,6 +908,7 @@ module Aws::Amplify
       :app_id,
       :branch_name,
       :description)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -905,6 +922,7 @@ module Aws::Amplify
     #
     class CreateWebhookResult < Struct.new(
       :webhook)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -943,6 +961,7 @@ module Aws::Amplify
       :target,
       :status,
       :condition)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -963,6 +982,7 @@ module Aws::Amplify
     #
     class DeleteAppRequest < Struct.new(
       :app_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -977,6 +997,7 @@ module Aws::Amplify
     #
     class DeleteAppResult < Struct.new(
       :app)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1003,6 +1024,7 @@ module Aws::Amplify
     class DeleteBackendEnvironmentRequest < Struct.new(
       :app_id,
       :environment_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1016,6 +1038,7 @@ module Aws::Amplify
     #
     class DeleteBackendEnvironmentResult < Struct.new(
       :backend_environment)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1042,6 +1065,7 @@ module Aws::Amplify
     class DeleteBranchRequest < Struct.new(
       :app_id,
       :branch_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1055,6 +1079,7 @@ module Aws::Amplify
     #
     class DeleteBranchResult < Struct.new(
       :branch)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1081,6 +1106,7 @@ module Aws::Amplify
     class DeleteDomainAssociationRequest < Struct.new(
       :app_id,
       :domain_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1093,6 +1119,7 @@ module Aws::Amplify
     #
     class DeleteDomainAssociationResult < Struct.new(
       :domain_association)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1125,6 +1152,7 @@ module Aws::Amplify
       :app_id,
       :branch_name,
       :job_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1138,6 +1166,7 @@ module Aws::Amplify
     #
     class DeleteJobResult < Struct.new(
       :job_summary)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1158,6 +1187,7 @@ module Aws::Amplify
     #
     class DeleteWebhookRequest < Struct.new(
       :webhook_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1171,6 +1201,7 @@ module Aws::Amplify
     #
     class DeleteWebhookResult < Struct.new(
       :webhook)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1184,6 +1215,7 @@ module Aws::Amplify
     #
     class DependentServiceFailureException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1229,6 +1261,7 @@ module Aws::Amplify
       :status_reason,
       :certificate_verification_dns_record,
       :sub_domains)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1267,6 +1300,7 @@ module Aws::Amplify
       :end_time,
       :domain_name,
       :app_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1280,6 +1314,7 @@ module Aws::Amplify
     #
     class GenerateAccessLogsResult < Struct.new(
       :log_url)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1300,6 +1335,7 @@ module Aws::Amplify
     #
     class GetAppRequest < Struct.new(
       :app_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1312,6 +1348,7 @@ module Aws::Amplify
     #
     class GetAppResult < Struct.new(
       :app)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1332,6 +1369,7 @@ module Aws::Amplify
     #
     class GetArtifactUrlRequest < Struct.new(
       :artifact_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1350,6 +1388,7 @@ module Aws::Amplify
     class GetArtifactUrlResult < Struct.new(
       :artifact_id,
       :artifact_url)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1376,6 +1415,7 @@ module Aws::Amplify
     class GetBackendEnvironmentRequest < Struct.new(
       :app_id,
       :environment_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1389,6 +1429,7 @@ module Aws::Amplify
     #
     class GetBackendEnvironmentResult < Struct.new(
       :backend_environment)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1415,6 +1456,7 @@ module Aws::Amplify
     class GetBranchRequest < Struct.new(
       :app_id,
       :branch_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1427,6 +1469,7 @@ module Aws::Amplify
     #
     class GetBranchResult < Struct.new(
       :branch)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1453,6 +1496,7 @@ module Aws::Amplify
     class GetDomainAssociationRequest < Struct.new(
       :app_id,
       :domain_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1466,6 +1510,7 @@ module Aws::Amplify
     #
     class GetDomainAssociationResult < Struct.new(
       :domain_association)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1498,6 +1543,7 @@ module Aws::Amplify
       :app_id,
       :branch_name,
       :job_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1509,6 +1555,7 @@ module Aws::Amplify
     #
     class GetJobResult < Struct.new(
       :job)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1529,6 +1576,7 @@ module Aws::Amplify
     #
     class GetWebhookRequest < Struct.new(
       :webhook_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1542,6 +1590,7 @@ module Aws::Amplify
     #
     class GetWebhookResult < Struct.new(
       :webhook)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1555,6 +1604,7 @@ module Aws::Amplify
     #
     class InternalFailureException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1573,6 +1623,7 @@ module Aws::Amplify
     class Job < Struct.new(
       :summary,
       :steps)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1628,6 +1679,7 @@ module Aws::Amplify
       :status,
       :end_time,
       :job_type)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1641,6 +1693,7 @@ module Aws::Amplify
     #
     class LimitExceededException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1669,6 +1722,7 @@ module Aws::Amplify
     class ListAppsRequest < Struct.new(
       :next_token,
       :max_results)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1689,6 +1743,7 @@ module Aws::Amplify
     class ListAppsResult < Struct.new(
       :apps,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1735,6 +1790,7 @@ module Aws::Amplify
       :job_id,
       :next_token,
       :max_results)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1755,6 +1811,7 @@ module Aws::Amplify
     class ListArtifactsResult < Struct.new(
       :artifacts,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1795,6 +1852,7 @@ module Aws::Amplify
       :environment_name,
       :next_token,
       :max_results)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1815,6 +1873,7 @@ module Aws::Amplify
     class ListBackendEnvironmentsResult < Struct.new(
       :backend_environments,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1849,6 +1908,7 @@ module Aws::Amplify
       :app_id,
       :next_token,
       :max_results)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1869,6 +1929,7 @@ module Aws::Amplify
     class ListBranchesResult < Struct.new(
       :branches,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1903,6 +1964,7 @@ module Aws::Amplify
       :app_id,
       :next_token,
       :max_results)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1923,6 +1985,7 @@ module Aws::Amplify
     class ListDomainAssociationsResult < Struct.new(
       :domain_associations,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1963,6 +2026,7 @@ module Aws::Amplify
       :branch_name,
       :next_token,
       :max_results)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1983,6 +2047,7 @@ module Aws::Amplify
     class ListJobsResult < Struct.new(
       :job_summaries,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2003,6 +2068,7 @@ module Aws::Amplify
     #
     class ListTagsForResourceRequest < Struct.new(
       :resource_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2016,6 +2082,7 @@ module Aws::Amplify
     #
     class ListTagsForResourceResponse < Struct.new(
       :tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2050,6 +2117,7 @@ module Aws::Amplify
       :app_id,
       :next_token,
       :max_results)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2070,6 +2138,7 @@ module Aws::Amplify
     class ListWebhooksResult < Struct.new(
       :webhooks,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2083,6 +2152,7 @@ module Aws::Amplify
     #
     class NotFoundException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2111,6 +2181,7 @@ module Aws::Amplify
       :status,
       :thumbnail_url,
       :branch_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2127,6 +2198,7 @@ module Aws::Amplify
     class ResourceNotFoundException < Struct.new(
       :code,
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2168,6 +2240,7 @@ module Aws::Amplify
       :branch_name,
       :job_id,
       :source_url)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2181,6 +2254,7 @@ module Aws::Amplify
     #
     class StartDeploymentResult < Struct.new(
       :job_summary)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2246,6 +2320,7 @@ module Aws::Amplify
       :commit_id,
       :commit_message,
       :commit_time)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2259,6 +2334,7 @@ module Aws::Amplify
     #
     class StartJobResult < Struct.new(
       :job_summary)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2324,6 +2400,7 @@ module Aws::Amplify
       :screenshots,
       :status_reason,
       :context)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2356,6 +2433,7 @@ module Aws::Amplify
       :app_id,
       :branch_name,
       :job_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2369,6 +2447,7 @@ module Aws::Amplify
     #
     class StopJobResult < Struct.new(
       :job_summary)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2392,6 +2471,7 @@ module Aws::Amplify
       :sub_domain_setting,
       :verified,
       :dns_record)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2418,6 +2498,7 @@ module Aws::Amplify
     class SubDomainSetting < Struct.new(
       :prefix,
       :branch_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2446,6 +2527,7 @@ module Aws::Amplify
     class TagResourceRequest < Struct.new(
       :resource_arn,
       :tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2464,6 +2546,7 @@ module Aws::Amplify
     #
     class UnauthorizedException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2490,6 +2573,7 @@ module Aws::Amplify
     class UntagResourceRequest < Struct.new(
       :resource_arn,
       :tag_keys)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2637,6 +2721,7 @@ module Aws::Amplify
       :repository,
       :oauth_token,
       :access_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2650,6 +2735,7 @@ module Aws::Amplify
     #
     class UpdateAppResult < Struct.new(
       :app)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2762,6 +2848,7 @@ module Aws::Amplify
       :enable_pull_request_preview,
       :pull_request_environment_name,
       :backend_environment_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2775,6 +2862,7 @@ module Aws::Amplify
     #
     class UpdateBranchResult < Struct.new(
       :branch)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2819,6 +2907,7 @@ module Aws::Amplify
       :domain_name,
       :enable_auto_sub_domain,
       :sub_domain_settings)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2832,6 +2921,7 @@ module Aws::Amplify
     #
     class UpdateDomainAssociationResult < Struct.new(
       :domain_association)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2864,6 +2954,7 @@ module Aws::Amplify
       :webhook_id,
       :branch_name,
       :description)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2877,6 +2968,7 @@ module Aws::Amplify
     #
     class UpdateWebhookResult < Struct.new(
       :webhook)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2920,6 +3012,7 @@ module Aws::Amplify
       :description,
       :create_time,
       :update_time)
+      SENSITIVE = []
       include Aws::Structure
     end
 

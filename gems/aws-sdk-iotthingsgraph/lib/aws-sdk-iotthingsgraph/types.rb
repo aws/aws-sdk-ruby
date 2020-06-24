@@ -40,6 +40,7 @@ module Aws::IoTThingsGraph
       :thing_name,
       :entity_id,
       :namespace_version)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -69,6 +70,7 @@ module Aws::IoTThingsGraph
     class CreateFlowTemplateRequest < Struct.new(
       :definition,
       :compatible_namespace_version)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -78,6 +80,7 @@ module Aws::IoTThingsGraph
     #
     class CreateFlowTemplateResponse < Struct.new(
       :summary)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -153,6 +156,7 @@ module Aws::IoTThingsGraph
       :s3_bucket_name,
       :metrics_configuration,
       :flow_actions_role_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -162,6 +166,7 @@ module Aws::IoTThingsGraph
     #
     class CreateSystemInstanceResponse < Struct.new(
       :summary)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -189,6 +194,7 @@ module Aws::IoTThingsGraph
     class CreateSystemTemplateRequest < Struct.new(
       :definition,
       :compatible_namespace_version)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -198,6 +204,7 @@ module Aws::IoTThingsGraph
     #
     class CreateSystemTemplateResponse < Struct.new(
       :summary)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -223,6 +230,7 @@ module Aws::IoTThingsGraph
     class DefinitionDocument < Struct.new(
       :language,
       :text)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -243,6 +251,7 @@ module Aws::IoTThingsGraph
     #
     class DeleteFlowTemplateRequest < Struct.new(
       :id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -263,6 +272,7 @@ module Aws::IoTThingsGraph
     class DeleteNamespaceResponse < Struct.new(
       :namespace_arn,
       :namespace_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -279,6 +289,7 @@ module Aws::IoTThingsGraph
     #
     class DeleteSystemInstanceRequest < Struct.new(
       :id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -301,6 +312,7 @@ module Aws::IoTThingsGraph
     #
     class DeleteSystemTemplateRequest < Struct.new(
       :id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -320,6 +332,7 @@ module Aws::IoTThingsGraph
     class DependencyRevision < Struct.new(
       :id,
       :revision_number)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -341,6 +354,7 @@ module Aws::IoTThingsGraph
     #
     class DeploySystemInstanceRequest < Struct.new(
       :id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -357,6 +371,7 @@ module Aws::IoTThingsGraph
     class DeploySystemInstanceResponse < Struct.new(
       :summary,
       :greengrass_deployment_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -377,6 +392,7 @@ module Aws::IoTThingsGraph
     #
     class DeprecateFlowTemplateRequest < Struct.new(
       :id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -399,6 +415,7 @@ module Aws::IoTThingsGraph
     #
     class DeprecateSystemTemplateRequest < Struct.new(
       :id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -418,6 +435,7 @@ module Aws::IoTThingsGraph
     #
     class DescribeNamespaceRequest < Struct.new(
       :namespace_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -449,6 +467,7 @@ module Aws::IoTThingsGraph
       :tracking_namespace_name,
       :tracking_namespace_version,
       :namespace_version)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -471,6 +490,7 @@ module Aws::IoTThingsGraph
     class DissociateEntityFromThingRequest < Struct.new(
       :thing_name,
       :entity_type)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -504,6 +524,7 @@ module Aws::IoTThingsGraph
       :type,
       :created_at,
       :definition)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -536,6 +557,7 @@ module Aws::IoTThingsGraph
     class EntityFilter < Struct.new(
       :name,
       :value)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -562,6 +584,7 @@ module Aws::IoTThingsGraph
       :event_type,
       :timestamp,
       :payload)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -598,6 +621,7 @@ module Aws::IoTThingsGraph
       :flow_template_id,
       :created_at,
       :updated_at)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -621,6 +645,7 @@ module Aws::IoTThingsGraph
       :summary,
       :definition,
       :validated_namespace_version)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -646,6 +671,7 @@ module Aws::IoTThingsGraph
     class FlowTemplateFilter < Struct.new(
       :name,
       :value)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -672,6 +698,7 @@ module Aws::IoTThingsGraph
       :arn,
       :revision_number,
       :created_at)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -699,6 +726,7 @@ module Aws::IoTThingsGraph
     class GetEntitiesRequest < Struct.new(
       :ids,
       :namespace_version)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -708,6 +736,7 @@ module Aws::IoTThingsGraph
     #
     class GetEntitiesResponse < Struct.new(
       :descriptions)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -734,6 +763,7 @@ module Aws::IoTThingsGraph
     class GetFlowTemplateRequest < Struct.new(
       :id,
       :revision_number)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -743,6 +773,7 @@ module Aws::IoTThingsGraph
     #
     class GetFlowTemplateResponse < Struct.new(
       :description)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -776,6 +807,7 @@ module Aws::IoTThingsGraph
       :id,
       :next_token,
       :max_results)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -791,6 +823,7 @@ module Aws::IoTThingsGraph
     class GetFlowTemplateRevisionsResponse < Struct.new(
       :summaries,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -824,6 +857,7 @@ module Aws::IoTThingsGraph
       :status,
       :error_code,
       :error_message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -845,6 +879,7 @@ module Aws::IoTThingsGraph
     #
     class GetSystemInstanceRequest < Struct.new(
       :id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -854,6 +889,7 @@ module Aws::IoTThingsGraph
     #
     class GetSystemInstanceResponse < Struct.new(
       :description)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -881,6 +917,7 @@ module Aws::IoTThingsGraph
     class GetSystemTemplateRequest < Struct.new(
       :id,
       :revision_number)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -890,6 +927,7 @@ module Aws::IoTThingsGraph
     #
     class GetSystemTemplateResponse < Struct.new(
       :description)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -923,6 +961,7 @@ module Aws::IoTThingsGraph
       :id,
       :next_token,
       :max_results)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -939,6 +978,7 @@ module Aws::IoTThingsGraph
     class GetSystemTemplateRevisionsResponse < Struct.new(
       :summaries,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -956,6 +996,7 @@ module Aws::IoTThingsGraph
     #
     class GetUploadStatusRequest < Struct.new(
       :upload_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -997,6 +1038,7 @@ module Aws::IoTThingsGraph
       :namespace_version,
       :failure_reason,
       :created_date)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1005,6 +1047,7 @@ module Aws::IoTThingsGraph
     #
     class InternalFailureException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1013,6 +1056,7 @@ module Aws::IoTThingsGraph
     #
     class InvalidRequestException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1021,6 +1065,7 @@ module Aws::IoTThingsGraph
     #
     class LimitExceededException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1050,6 +1095,7 @@ module Aws::IoTThingsGraph
       :flow_execution_id,
       :next_token,
       :max_results)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1066,6 +1112,7 @@ module Aws::IoTThingsGraph
     class ListFlowExecutionMessagesResponse < Struct.new(
       :messages,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1095,6 +1142,7 @@ module Aws::IoTThingsGraph
       :max_results,
       :resource_arn,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1109,6 +1157,7 @@ module Aws::IoTThingsGraph
     class ListTagsForResourceResponse < Struct.new(
       :tags,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1134,6 +1183,7 @@ module Aws::IoTThingsGraph
     class MetricsConfiguration < Struct.new(
       :cloud_metric_enabled,
       :metric_rule_role_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1142,6 +1192,7 @@ module Aws::IoTThingsGraph
     #
     class ResourceAlreadyExistsException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1150,6 +1201,7 @@ module Aws::IoTThingsGraph
     #
     class ResourceInUseException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1158,6 +1210,7 @@ module Aws::IoTThingsGraph
     #
     class ResourceNotFoundException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1212,6 +1265,7 @@ module Aws::IoTThingsGraph
       :next_token,
       :max_results,
       :namespace_version)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1228,6 +1282,7 @@ module Aws::IoTThingsGraph
     class SearchEntitiesResponse < Struct.new(
       :descriptions,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1275,6 +1330,7 @@ module Aws::IoTThingsGraph
       :end_time,
       :next_token,
       :max_results)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1291,6 +1347,7 @@ module Aws::IoTThingsGraph
     class SearchFlowExecutionsResponse < Struct.new(
       :summaries,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1326,6 +1383,7 @@ module Aws::IoTThingsGraph
       :filters,
       :next_token,
       :max_results)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1342,6 +1400,7 @@ module Aws::IoTThingsGraph
     class SearchFlowTemplatesResponse < Struct.new(
       :summaries,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1380,6 +1439,7 @@ module Aws::IoTThingsGraph
       :filters,
       :next_token,
       :max_results)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1396,6 +1456,7 @@ module Aws::IoTThingsGraph
     class SearchSystemInstancesResponse < Struct.new(
       :summaries,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1431,6 +1492,7 @@ module Aws::IoTThingsGraph
       :filters,
       :next_token,
       :max_results)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1447,6 +1509,7 @@ module Aws::IoTThingsGraph
     class SearchSystemTemplatesResponse < Struct.new(
       :summaries,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1487,6 +1550,7 @@ module Aws::IoTThingsGraph
       :next_token,
       :max_results,
       :namespace_version)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1502,6 +1566,7 @@ module Aws::IoTThingsGraph
     class SearchThingsResponse < Struct.new(
       :things,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1551,6 +1616,7 @@ module Aws::IoTThingsGraph
       :validated_namespace_version,
       :validated_dependency_revisions,
       :flow_actions_role_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1580,6 +1646,7 @@ module Aws::IoTThingsGraph
     class SystemInstanceFilter < Struct.new(
       :name,
       :value)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1634,6 +1701,7 @@ module Aws::IoTThingsGraph
       :updated_at,
       :greengrass_group_id,
       :greengrass_group_version_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1657,6 +1725,7 @@ module Aws::IoTThingsGraph
       :summary,
       :definition,
       :validated_namespace_version)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1682,6 +1751,7 @@ module Aws::IoTThingsGraph
     class SystemTemplateFilter < Struct.new(
       :name,
       :value)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1708,6 +1778,7 @@ module Aws::IoTThingsGraph
       :arn,
       :revision_number,
       :created_at)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1735,6 +1806,7 @@ module Aws::IoTThingsGraph
     class Tag < Struct.new(
       :key,
       :value)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1763,6 +1835,7 @@ module Aws::IoTThingsGraph
     class TagResourceRequest < Struct.new(
       :resource_arn,
       :tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1781,6 +1854,7 @@ module Aws::IoTThingsGraph
     class Thing < Struct.new(
       :thing_arn,
       :thing_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1789,6 +1863,7 @@ module Aws::IoTThingsGraph
     #
     class ThrottlingException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1805,6 +1880,7 @@ module Aws::IoTThingsGraph
     #
     class UndeploySystemInstanceRequest < Struct.new(
       :id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1815,6 +1891,7 @@ module Aws::IoTThingsGraph
     #
     class UndeploySystemInstanceResponse < Struct.new(
       :summary)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1849,6 +1926,7 @@ module Aws::IoTThingsGraph
     class UntagResourceRequest < Struct.new(
       :resource_arn,
       :tag_keys)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1891,6 +1969,7 @@ module Aws::IoTThingsGraph
       :id,
       :definition,
       :compatible_namespace_version)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1900,6 +1979,7 @@ module Aws::IoTThingsGraph
     #
     class UpdateFlowTemplateResponse < Struct.new(
       :summary)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1939,6 +2019,7 @@ module Aws::IoTThingsGraph
       :id,
       :definition,
       :compatible_namespace_version)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1948,6 +2029,7 @@ module Aws::IoTThingsGraph
     #
     class UpdateSystemTemplateResponse < Struct.new(
       :summary)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1983,6 +2065,7 @@ module Aws::IoTThingsGraph
       :document,
       :sync_with_public_namespace,
       :deprecate_existing_entities)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1993,6 +2076,7 @@ module Aws::IoTThingsGraph
     #
     class UploadEntityDefinitionsResponse < Struct.new(
       :upload_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 

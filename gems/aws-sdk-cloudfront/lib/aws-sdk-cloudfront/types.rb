@@ -19,6 +19,7 @@ module Aws::CloudFront
     #
     class AccessDenied < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -64,6 +65,7 @@ module Aws::CloudFront
       :enabled,
       :quantity,
       :items)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -114,6 +116,7 @@ module Aws::CloudFront
     class AliasICPRecordal < Struct.new(
       :cname,
       :icp_recordal_status)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -143,6 +146,7 @@ module Aws::CloudFront
     class Aliases < Struct.new(
       :quantity,
       :items)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -207,6 +211,7 @@ module Aws::CloudFront
       :quantity,
       :items,
       :cached_methods)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -219,6 +224,7 @@ module Aws::CloudFront
     #
     class BatchTooLarge < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -231,6 +237,7 @@ module Aws::CloudFront
     #
     class CNAMEAlreadyExists < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -533,6 +540,7 @@ module Aws::CloudFront
       :compress,
       :lambda_function_associations,
       :field_level_encryption_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -613,6 +621,7 @@ module Aws::CloudFront
     class CacheBehaviors < Struct.new(
       :quantity,
       :items)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -654,6 +663,7 @@ module Aws::CloudFront
     class CachedMethods < Struct.new(
       :quantity,
       :items)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -666,6 +676,7 @@ module Aws::CloudFront
     #
     class CannotChangeImmutablePublicKeyFields < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -692,6 +703,7 @@ module Aws::CloudFront
       :id,
       :s3_canonical_user_id,
       :cloud_front_origin_access_identity_config)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -708,6 +720,7 @@ module Aws::CloudFront
     #
     class CloudFrontOriginAccessIdentityAlreadyExists < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -752,6 +765,7 @@ module Aws::CloudFront
     class CloudFrontOriginAccessIdentityConfig < Struct.new(
       :caller_reference,
       :comment)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -764,6 +778,7 @@ module Aws::CloudFront
     #
     class CloudFrontOriginAccessIdentityInUse < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -822,6 +837,7 @@ module Aws::CloudFront
       :is_truncated,
       :quantity,
       :items)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -849,6 +865,7 @@ module Aws::CloudFront
       :id,
       :s3_canonical_user_id,
       :comment)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -884,6 +901,7 @@ module Aws::CloudFront
       :format,
       :profile_id,
       :content_type)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -924,6 +942,7 @@ module Aws::CloudFront
     class ContentTypeProfileConfig < Struct.new(
       :forward_when_content_type_is_unknown,
       :content_type_profiles)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -956,6 +975,7 @@ module Aws::CloudFront
     class ContentTypeProfiles < Struct.new(
       :quantity,
       :items)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1000,6 +1020,7 @@ module Aws::CloudFront
     class CookieNames < Struct.new(
       :quantity,
       :items)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1059,6 +1080,7 @@ module Aws::CloudFront
     class CookiePreference < Struct.new(
       :forward,
       :whitelisted_names)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1091,6 +1113,7 @@ module Aws::CloudFront
     #
     class CreateCloudFrontOriginAccessIdentityRequest < Struct.new(
       :cloud_front_origin_access_identity_config)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1116,6 +1139,7 @@ module Aws::CloudFront
       :cloud_front_origin_access_identity,
       :location,
       :etag)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1347,6 +1371,7 @@ module Aws::CloudFront
     #
     class CreateDistributionRequest < Struct.new(
       :distribution_config)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1372,6 +1397,7 @@ module Aws::CloudFront
       :distribution,
       :location,
       :etag)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1613,6 +1639,7 @@ module Aws::CloudFront
     #
     class CreateDistributionWithTagsRequest < Struct.new(
       :distribution_config_with_tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1638,6 +1665,7 @@ module Aws::CloudFront
       :distribution,
       :location,
       :etag)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1684,6 +1712,7 @@ module Aws::CloudFront
     #
     class CreateFieldLevelEncryptionConfigRequest < Struct.new(
       :field_level_encryption_config)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1708,6 +1737,7 @@ module Aws::CloudFront
       :field_level_encryption,
       :location,
       :etag)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1743,6 +1773,7 @@ module Aws::CloudFront
     #
     class CreateFieldLevelEncryptionProfileRequest < Struct.new(
       :field_level_encryption_profile_config)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1767,6 +1798,7 @@ module Aws::CloudFront
       :field_level_encryption_profile,
       :location,
       :etag)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1799,6 +1831,7 @@ module Aws::CloudFront
     class CreateInvalidationRequest < Struct.new(
       :distribution_id,
       :invalidation_batch)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1818,6 +1851,7 @@ module Aws::CloudFront
     class CreateInvalidationResult < Struct.new(
       :location,
       :invalidation)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1841,6 +1875,7 @@ module Aws::CloudFront
     #
     class CreatePublicKeyRequest < Struct.new(
       :public_key_config)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1865,6 +1900,7 @@ module Aws::CloudFront
       :public_key,
       :location,
       :etag)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1908,6 +1944,7 @@ module Aws::CloudFront
     #
     class CreateStreamingDistributionRequest < Struct.new(
       :streaming_distribution_config)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1933,6 +1970,7 @@ module Aws::CloudFront
       :streaming_distribution,
       :location,
       :etag)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1986,6 +2024,7 @@ module Aws::CloudFront
     #
     class CreateStreamingDistributionWithTagsRequest < Struct.new(
       :streaming_distribution_config_with_tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2011,6 +2050,7 @@ module Aws::CloudFront
       :streaming_distribution,
       :location,
       :etag)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2118,6 +2158,7 @@ module Aws::CloudFront
       :response_page_path,
       :response_code,
       :error_caching_min_ttl)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2169,6 +2210,7 @@ module Aws::CloudFront
     class CustomErrorResponses < Struct.new(
       :quantity,
       :items)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2203,6 +2245,7 @@ module Aws::CloudFront
     class CustomHeaders < Struct.new(
       :quantity,
       :items)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2303,6 +2346,7 @@ module Aws::CloudFront
       :origin_ssl_protocols,
       :origin_read_timeout,
       :origin_keepalive_timeout)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2549,6 +2593,7 @@ module Aws::CloudFront
       :compress,
       :lambda_function_associations,
       :field_level_encryption_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2576,6 +2621,7 @@ module Aws::CloudFront
     class DeleteCloudFrontOriginAccessIdentityRequest < Struct.new(
       :id,
       :if_match)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2645,6 +2691,7 @@ module Aws::CloudFront
     class DeleteDistributionRequest < Struct.new(
       :id,
       :if_match)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2670,6 +2717,7 @@ module Aws::CloudFront
     class DeleteFieldLevelEncryptionConfigRequest < Struct.new(
       :id,
       :if_match)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2695,6 +2743,7 @@ module Aws::CloudFront
     class DeleteFieldLevelEncryptionProfileRequest < Struct.new(
       :id,
       :if_match)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2720,6 +2769,7 @@ module Aws::CloudFront
     class DeletePublicKeyRequest < Struct.new(
       :id,
       :if_match)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2747,6 +2797,7 @@ module Aws::CloudFront
     class DeleteStreamingDistributionRequest < Struct.new(
       :id,
       :if_match)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2827,6 +2878,7 @@ module Aws::CloudFront
       :active_trusted_signers,
       :distribution_config,
       :alias_icp_recordals)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2840,6 +2892,7 @@ module Aws::CloudFront
     #
     class DistributionAlreadyExists < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3314,6 +3367,7 @@ module Aws::CloudFront
       :web_acl_id,
       :http_version,
       :is_ipv6_enabled)
+      SENSITIVE = [:comment]
       include Aws::Structure
     end
 
@@ -3559,6 +3613,7 @@ module Aws::CloudFront
     class DistributionConfigWithTags < Struct.new(
       :distribution_config,
       :tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3604,6 +3659,7 @@ module Aws::CloudFront
       :is_truncated,
       :quantity,
       :items)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3617,6 +3673,7 @@ module Aws::CloudFront
     #
     class DistributionNotDisabled < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3756,6 +3813,7 @@ module Aws::CloudFront
       :http_version,
       :is_ipv6_enabled,
       :alias_icp_recordals)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3794,6 +3852,7 @@ module Aws::CloudFront
     class EncryptionEntities < Struct.new(
       :quantity,
       :items)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3839,6 +3898,7 @@ module Aws::CloudFront
       :public_key_id,
       :provider_id,
       :field_patterns)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3866,6 +3926,7 @@ module Aws::CloudFront
       :id,
       :last_modified_time,
       :field_level_encryption_config)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3932,6 +3993,7 @@ module Aws::CloudFront
       :comment,
       :query_arg_profile_config,
       :content_type_profile_config)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3944,6 +4006,7 @@ module Aws::CloudFront
     #
     class FieldLevelEncryptionConfigAlreadyExists < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3956,6 +4019,7 @@ module Aws::CloudFront
     #
     class FieldLevelEncryptionConfigInUse < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3987,6 +4051,7 @@ module Aws::CloudFront
       :max_items,
       :quantity,
       :items)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4013,6 +4078,7 @@ module Aws::CloudFront
       :id,
       :last_modified_time,
       :field_level_encryption_profile_config)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4025,6 +4091,7 @@ module Aws::CloudFront
     #
     class FieldLevelEncryptionProfileAlreadyExists < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4077,6 +4144,7 @@ module Aws::CloudFront
       :caller_reference,
       :comment,
       :encryption_entities)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4089,6 +4157,7 @@ module Aws::CloudFront
     #
     class FieldLevelEncryptionProfileInUse < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4120,6 +4189,7 @@ module Aws::CloudFront
       :max_items,
       :quantity,
       :items)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4132,6 +4202,7 @@ module Aws::CloudFront
     #
     class FieldLevelEncryptionProfileSizeExceeded < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4168,6 +4239,7 @@ module Aws::CloudFront
       :name,
       :encryption_entities,
       :comment)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4202,6 +4274,7 @@ module Aws::CloudFront
       :comment,
       :query_arg_profile_config,
       :content_type_profile_config)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4229,6 +4302,7 @@ module Aws::CloudFront
     class FieldPatterns < Struct.new(
       :quantity,
       :items)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4329,6 +4403,7 @@ module Aws::CloudFront
       :cookies,
       :headers,
       :query_string_cache_keys)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4387,6 +4462,7 @@ module Aws::CloudFront
       :restriction_type,
       :quantity,
       :items)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4412,6 +4488,7 @@ module Aws::CloudFront
     #
     class GetCloudFrontOriginAccessIdentityConfigRequest < Struct.new(
       :id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4431,6 +4508,7 @@ module Aws::CloudFront
     class GetCloudFrontOriginAccessIdentityConfigResult < Struct.new(
       :cloud_front_origin_access_identity_config,
       :etag)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4451,6 +4529,7 @@ module Aws::CloudFront
     #
     class GetCloudFrontOriginAccessIdentityRequest < Struct.new(
       :id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4470,6 +4549,7 @@ module Aws::CloudFront
     class GetCloudFrontOriginAccessIdentityResult < Struct.new(
       :cloud_front_origin_access_identity,
       :etag)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4491,6 +4571,7 @@ module Aws::CloudFront
     #
     class GetDistributionConfigRequest < Struct.new(
       :id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4510,6 +4591,7 @@ module Aws::CloudFront
     class GetDistributionConfigResult < Struct.new(
       :distribution_config,
       :etag)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4531,6 +4613,7 @@ module Aws::CloudFront
     #
     class GetDistributionRequest < Struct.new(
       :id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4550,6 +4633,7 @@ module Aws::CloudFront
     class GetDistributionResult < Struct.new(
       :distribution,
       :etag)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4569,6 +4653,7 @@ module Aws::CloudFront
     #
     class GetFieldLevelEncryptionConfigRequest < Struct.new(
       :id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4586,6 +4671,7 @@ module Aws::CloudFront
     class GetFieldLevelEncryptionConfigResult < Struct.new(
       :field_level_encryption_config,
       :etag)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4605,6 +4691,7 @@ module Aws::CloudFront
     #
     class GetFieldLevelEncryptionProfileConfigRequest < Struct.new(
       :id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4622,6 +4709,7 @@ module Aws::CloudFront
     class GetFieldLevelEncryptionProfileConfigResult < Struct.new(
       :field_level_encryption_profile_config,
       :etag)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4640,6 +4728,7 @@ module Aws::CloudFront
     #
     class GetFieldLevelEncryptionProfileRequest < Struct.new(
       :id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4657,6 +4746,7 @@ module Aws::CloudFront
     class GetFieldLevelEncryptionProfileResult < Struct.new(
       :field_level_encryption_profile,
       :etag)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4676,6 +4766,7 @@ module Aws::CloudFront
     #
     class GetFieldLevelEncryptionRequest < Struct.new(
       :id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4693,6 +4784,7 @@ module Aws::CloudFront
     class GetFieldLevelEncryptionResult < Struct.new(
       :field_level_encryption,
       :etag)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4720,6 +4812,7 @@ module Aws::CloudFront
     class GetInvalidationRequest < Struct.new(
       :distribution_id,
       :id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4738,6 +4831,7 @@ module Aws::CloudFront
     #
     class GetInvalidationResult < Struct.new(
       :invalidation)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4756,6 +4850,7 @@ module Aws::CloudFront
     #
     class GetPublicKeyConfigRequest < Struct.new(
       :id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4773,6 +4868,7 @@ module Aws::CloudFront
     class GetPublicKeyConfigResult < Struct.new(
       :public_key_config,
       :etag)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4791,6 +4887,7 @@ module Aws::CloudFront
     #
     class GetPublicKeyRequest < Struct.new(
       :id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4808,6 +4905,7 @@ module Aws::CloudFront
     class GetPublicKeyResult < Struct.new(
       :public_key,
       :etag)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4828,6 +4926,7 @@ module Aws::CloudFront
     #
     class GetStreamingDistributionConfigRequest < Struct.new(
       :id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4847,6 +4946,7 @@ module Aws::CloudFront
     class GetStreamingDistributionConfigResult < Struct.new(
       :streaming_distribution_config,
       :etag)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4867,6 +4967,7 @@ module Aws::CloudFront
     #
     class GetStreamingDistributionRequest < Struct.new(
       :id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4886,6 +4987,7 @@ module Aws::CloudFront
     class GetStreamingDistributionResult < Struct.new(
       :streaming_distribution,
       :etag)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4963,6 +5065,7 @@ module Aws::CloudFront
     class Headers < Struct.new(
       :quantity,
       :items)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4976,6 +5079,7 @@ module Aws::CloudFront
     #
     class IllegalFieldLevelEncryptionConfigAssociationWithCacheBehavior < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4988,6 +5092,7 @@ module Aws::CloudFront
     #
     class IllegalUpdate < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5000,6 +5105,7 @@ module Aws::CloudFront
     #
     class InconsistentQuantities < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5012,6 +5118,7 @@ module Aws::CloudFront
     #
     class InvalidArgument < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5025,6 +5132,7 @@ module Aws::CloudFront
     #
     class InvalidDefaultRootObject < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5037,6 +5145,7 @@ module Aws::CloudFront
     #
     class InvalidErrorCode < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5052,6 +5161,7 @@ module Aws::CloudFront
     #
     class InvalidForwardCookies < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5064,6 +5174,7 @@ module Aws::CloudFront
     #
     class InvalidGeoRestrictionParameter < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5076,6 +5187,7 @@ module Aws::CloudFront
     #
     class InvalidHeadersForS3Origin < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5088,6 +5200,7 @@ module Aws::CloudFront
     #
     class InvalidIfMatchVersion < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5100,6 +5213,7 @@ module Aws::CloudFront
     #
     class InvalidLambdaFunctionAssociation < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5112,6 +5226,7 @@ module Aws::CloudFront
     #
     class InvalidLocationCode < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5124,6 +5239,7 @@ module Aws::CloudFront
     #
     class InvalidMinimumProtocolVersion < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5137,6 +5253,7 @@ module Aws::CloudFront
     #
     class InvalidOrigin < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5149,6 +5266,7 @@ module Aws::CloudFront
     #
     class InvalidOriginAccessIdentity < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5161,6 +5279,7 @@ module Aws::CloudFront
     #
     class InvalidOriginKeepaliveTimeout < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5173,6 +5292,7 @@ module Aws::CloudFront
     #
     class InvalidOriginReadTimeout < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5187,6 +5307,7 @@ module Aws::CloudFront
     #
     class InvalidProtocolSettings < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5199,6 +5320,7 @@ module Aws::CloudFront
     #
     class InvalidQueryStringParameters < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5212,6 +5334,7 @@ module Aws::CloudFront
     #
     class InvalidRelativePath < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5226,6 +5349,7 @@ module Aws::CloudFront
     #
     class InvalidRequiredProtocol < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5238,6 +5362,7 @@ module Aws::CloudFront
     #
     class InvalidResponseCode < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5250,6 +5375,7 @@ module Aws::CloudFront
     #
     class InvalidTTLOrder < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5262,6 +5388,7 @@ module Aws::CloudFront
     #
     class InvalidTagging < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5274,6 +5401,7 @@ module Aws::CloudFront
     #
     class InvalidViewerCertificate < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5290,6 +5418,7 @@ module Aws::CloudFront
     #
     class InvalidWebACLId < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5320,6 +5449,7 @@ module Aws::CloudFront
       :status,
       :create_time,
       :invalidation_batch)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5373,6 +5503,7 @@ module Aws::CloudFront
     class InvalidationBatch < Struct.new(
       :paths,
       :caller_reference)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5425,6 +5556,7 @@ module Aws::CloudFront
       :is_truncated,
       :quantity,
       :items)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5448,6 +5580,7 @@ module Aws::CloudFront
       :id,
       :create_time,
       :status)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5486,6 +5619,7 @@ module Aws::CloudFront
     class KeyPairIds < Struct.new(
       :quantity,
       :items)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5547,6 +5681,7 @@ module Aws::CloudFront
       :lambda_function_arn,
       :event_type,
       :include_body)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5592,6 +5727,7 @@ module Aws::CloudFront
     class LambdaFunctionAssociations < Struct.new(
       :quantity,
       :items)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5624,6 +5760,7 @@ module Aws::CloudFront
     class ListCloudFrontOriginAccessIdentitiesRequest < Struct.new(
       :marker,
       :max_items)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5637,6 +5774,7 @@ module Aws::CloudFront
     #
     class ListCloudFrontOriginAccessIdentitiesResult < Struct.new(
       :cloud_front_origin_access_identity_list)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5680,6 +5818,7 @@ module Aws::CloudFront
       :marker,
       :max_items,
       :web_acl_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5694,6 +5833,7 @@ module Aws::CloudFront
     #
     class ListDistributionsByWebACLIdResult < Struct.new(
       :distribution_list)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5725,6 +5865,7 @@ module Aws::CloudFront
     class ListDistributionsRequest < Struct.new(
       :marker,
       :max_items)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5738,6 +5879,7 @@ module Aws::CloudFront
     #
     class ListDistributionsResult < Struct.new(
       :distribution_list)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5768,6 +5910,7 @@ module Aws::CloudFront
     class ListFieldLevelEncryptionConfigsRequest < Struct.new(
       :marker,
       :max_items)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5780,6 +5923,7 @@ module Aws::CloudFront
     #
     class ListFieldLevelEncryptionConfigsResult < Struct.new(
       :field_level_encryption_list)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5809,6 +5953,7 @@ module Aws::CloudFront
     class ListFieldLevelEncryptionProfilesRequest < Struct.new(
       :marker,
       :max_items)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5821,6 +5966,7 @@ module Aws::CloudFront
     #
     class ListFieldLevelEncryptionProfilesResult < Struct.new(
       :field_level_encryption_profile_list)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5861,6 +6007,7 @@ module Aws::CloudFront
       :distribution_id,
       :marker,
       :max_items)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5874,6 +6021,7 @@ module Aws::CloudFront
     #
     class ListInvalidationsResult < Struct.new(
       :invalidation_list)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5903,6 +6051,7 @@ module Aws::CloudFront
     class ListPublicKeysRequest < Struct.new(
       :marker,
       :max_items)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5915,6 +6064,7 @@ module Aws::CloudFront
     #
     class ListPublicKeysResult < Struct.new(
       :public_key_list)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5941,6 +6091,7 @@ module Aws::CloudFront
     class ListStreamingDistributionsRequest < Struct.new(
       :marker,
       :max_items)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5954,6 +6105,7 @@ module Aws::CloudFront
     #
     class ListStreamingDistributionsResult < Struct.new(
       :streaming_distribution_list)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5974,6 +6126,7 @@ module Aws::CloudFront
     #
     class ListTagsForResourceRequest < Struct.new(
       :resource)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5987,6 +6140,7 @@ module Aws::CloudFront
     #
     class ListTagsForResourceResult < Struct.new(
       :tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6043,6 +6197,7 @@ module Aws::CloudFront
       :include_cookies,
       :bucket,
       :prefix)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6056,6 +6211,7 @@ module Aws::CloudFront
     #
     class MissingBody < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6068,6 +6224,7 @@ module Aws::CloudFront
     #
     class NoSuchCloudFrontOriginAccessIdentity < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6080,6 +6237,7 @@ module Aws::CloudFront
     #
     class NoSuchDistribution < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6092,6 +6250,7 @@ module Aws::CloudFront
     #
     class NoSuchFieldLevelEncryptionConfig < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6104,6 +6263,7 @@ module Aws::CloudFront
     #
     class NoSuchFieldLevelEncryptionProfile < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6116,6 +6276,7 @@ module Aws::CloudFront
     #
     class NoSuchInvalidation < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6128,6 +6289,7 @@ module Aws::CloudFront
     #
     class NoSuchOrigin < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6140,6 +6302,7 @@ module Aws::CloudFront
     #
     class NoSuchPublicKey < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6152,6 +6315,7 @@ module Aws::CloudFront
     #
     class NoSuchResource < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6164,6 +6328,7 @@ module Aws::CloudFront
     #
     class NoSuchStreamingDistribution < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6335,6 +6500,7 @@ module Aws::CloudFront
       :custom_origin_config,
       :connection_attempts,
       :connection_timeout)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6370,6 +6536,7 @@ module Aws::CloudFront
     class OriginCustomHeader < Struct.new(
       :header_name,
       :header_value)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6422,6 +6589,7 @@ module Aws::CloudFront
       :id,
       :failover_criteria,
       :members)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6448,6 +6616,7 @@ module Aws::CloudFront
     #
     class OriginGroupFailoverCriteria < Struct.new(
       :status_codes)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6468,6 +6637,7 @@ module Aws::CloudFront
     #
     class OriginGroupMember < Struct.new(
       :origin_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6498,6 +6668,7 @@ module Aws::CloudFront
     class OriginGroupMembers < Struct.new(
       :quantity,
       :items)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6543,6 +6714,7 @@ module Aws::CloudFront
     class OriginGroups < Struct.new(
       :quantity,
       :items)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6573,6 +6745,7 @@ module Aws::CloudFront
     class OriginSslProtocols < Struct.new(
       :quantity,
       :items)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6632,6 +6805,7 @@ module Aws::CloudFront
     class Origins < Struct.new(
       :quantity,
       :items)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6666,6 +6840,7 @@ module Aws::CloudFront
     class Paths < Struct.new(
       :quantity,
       :items)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6679,6 +6854,7 @@ module Aws::CloudFront
     #
     class PreconditionFailed < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6704,6 +6880,7 @@ module Aws::CloudFront
       :id,
       :created_time,
       :public_key_config)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6716,6 +6893,7 @@ module Aws::CloudFront
     #
     class PublicKeyAlreadyExists < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6757,6 +6935,7 @@ module Aws::CloudFront
       :name,
       :encoded_key,
       :comment)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6769,6 +6948,7 @@ module Aws::CloudFront
     #
     class PublicKeyInUse < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6802,6 +6982,7 @@ module Aws::CloudFront
       :max_items,
       :quantity,
       :items)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6835,6 +7016,7 @@ module Aws::CloudFront
       :created_time,
       :encoded_key,
       :comment)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6863,6 +7045,7 @@ module Aws::CloudFront
     class QueryArgProfile < Struct.new(
       :query_arg,
       :profile_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6901,6 +7084,7 @@ module Aws::CloudFront
     class QueryArgProfileConfig < Struct.new(
       :forward_when_query_arg_profile_is_unknown,
       :query_arg_profiles)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6913,6 +7097,7 @@ module Aws::CloudFront
     #
     class QueryArgProfileEmpty < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6946,6 +7131,7 @@ module Aws::CloudFront
     class QueryArgProfiles < Struct.new(
       :quantity,
       :items)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6977,6 +7163,7 @@ module Aws::CloudFront
     class QueryStringCacheKeys < Struct.new(
       :quantity,
       :items)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -7004,6 +7191,7 @@ module Aws::CloudFront
     #
     class Restrictions < Struct.new(
       :geo_restriction)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -7054,6 +7242,7 @@ module Aws::CloudFront
     class S3Origin < Struct.new(
       :domain_name,
       :origin_access_identity)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -7104,6 +7293,7 @@ module Aws::CloudFront
     #
     class S3OriginConfig < Struct.new(
       :origin_access_identity)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -7130,6 +7320,7 @@ module Aws::CloudFront
     class Signer < Struct.new(
       :aws_account_number,
       :key_pair_ids)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -7158,6 +7349,7 @@ module Aws::CloudFront
     class StatusCodes < Struct.new(
       :quantity,
       :items)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -7226,6 +7418,7 @@ module Aws::CloudFront
       :domain_name,
       :active_trusted_signers,
       :streaming_distribution_config)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -7239,6 +7432,7 @@ module Aws::CloudFront
     #
     class StreamingDistributionAlreadyExists < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -7339,6 +7533,7 @@ module Aws::CloudFront
       :trusted_signers,
       :price_class,
       :enabled)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -7396,6 +7591,7 @@ module Aws::CloudFront
     class StreamingDistributionConfigWithTags < Struct.new(
       :streaming_distribution_config,
       :tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -7442,6 +7638,7 @@ module Aws::CloudFront
       :is_truncated,
       :quantity,
       :items)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -7455,6 +7652,7 @@ module Aws::CloudFront
     #
     class StreamingDistributionNotDisabled < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -7547,6 +7745,7 @@ module Aws::CloudFront
       :comment,
       :price_class,
       :enabled)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -7591,6 +7790,7 @@ module Aws::CloudFront
       :enabled,
       :bucket,
       :prefix)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -7625,6 +7825,7 @@ module Aws::CloudFront
     class Tag < Struct.new(
       :key,
       :value)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -7645,6 +7846,7 @@ module Aws::CloudFront
     #
     class TagKeys < Struct.new(
       :items)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -7678,6 +7880,7 @@ module Aws::CloudFront
     class TagResourceRequest < Struct.new(
       :resource,
       :tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -7703,6 +7906,7 @@ module Aws::CloudFront
     #
     class Tags < Struct.new(
       :items)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -7715,6 +7919,7 @@ module Aws::CloudFront
     #
     class TooManyCacheBehaviors < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -7727,6 +7932,7 @@ module Aws::CloudFront
     #
     class TooManyCertificates < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -7740,6 +7946,7 @@ module Aws::CloudFront
     #
     class TooManyCloudFrontOriginAccessIdentities < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -7753,6 +7960,7 @@ module Aws::CloudFront
     #
     class TooManyCookieNamesInWhiteList < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -7765,6 +7973,7 @@ module Aws::CloudFront
     #
     class TooManyDistributionCNAMEs < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -7778,6 +7987,7 @@ module Aws::CloudFront
     #
     class TooManyDistributions < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -7791,6 +8001,7 @@ module Aws::CloudFront
     #
     class TooManyDistributionsAssociatedToFieldLevelEncryptionConfig < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -7805,6 +8016,7 @@ module Aws::CloudFront
     #
     class TooManyDistributionsWithLambdaAssociations < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -7818,6 +8030,7 @@ module Aws::CloudFront
     #
     class TooManyFieldLevelEncryptionConfigs < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -7831,6 +8044,7 @@ module Aws::CloudFront
     #
     class TooManyFieldLevelEncryptionContentTypeProfiles < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -7844,6 +8058,7 @@ module Aws::CloudFront
     #
     class TooManyFieldLevelEncryptionEncryptionEntities < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -7857,6 +8072,7 @@ module Aws::CloudFront
     #
     class TooManyFieldLevelEncryptionFieldPatterns < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -7870,6 +8086,7 @@ module Aws::CloudFront
     #
     class TooManyFieldLevelEncryptionProfiles < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -7883,6 +8100,7 @@ module Aws::CloudFront
     #
     class TooManyFieldLevelEncryptionQueryArgProfiles < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -7895,6 +8113,7 @@ module Aws::CloudFront
     #
     class TooManyHeadersInForwardedValues < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -7908,6 +8127,7 @@ module Aws::CloudFront
     #
     class TooManyInvalidationsInProgress < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -7921,6 +8141,7 @@ module Aws::CloudFront
     #
     class TooManyLambdaFunctionAssociations < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -7933,6 +8154,7 @@ module Aws::CloudFront
     #
     class TooManyOriginCustomHeaders < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -7946,6 +8168,7 @@ module Aws::CloudFront
     #
     class TooManyOriginGroupsPerDistribution < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -7958,6 +8181,7 @@ module Aws::CloudFront
     #
     class TooManyOrigins < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -7971,6 +8195,7 @@ module Aws::CloudFront
     #
     class TooManyPublicKeys < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -7983,6 +8208,7 @@ module Aws::CloudFront
     #
     class TooManyQueryStringParameters < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -7995,6 +8221,7 @@ module Aws::CloudFront
     #
     class TooManyStreamingDistributionCNAMEs < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -8008,6 +8235,7 @@ module Aws::CloudFront
     #
     class TooManyStreamingDistributions < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -8021,6 +8249,7 @@ module Aws::CloudFront
     #
     class TooManyTrustedSigners < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -8033,6 +8262,7 @@ module Aws::CloudFront
     #
     class TrustedSignerDoesNotExist < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -8092,6 +8322,7 @@ module Aws::CloudFront
       :enabled,
       :quantity,
       :items)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -8120,6 +8351,7 @@ module Aws::CloudFront
     class UntagResourceRequest < Struct.new(
       :resource,
       :tag_keys)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -8156,6 +8388,7 @@ module Aws::CloudFront
       :cloud_front_origin_access_identity_config,
       :id,
       :if_match)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -8175,6 +8408,7 @@ module Aws::CloudFront
     class UpdateCloudFrontOriginAccessIdentityResult < Struct.new(
       :cloud_front_origin_access_identity,
       :etag)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -8419,6 +8653,7 @@ module Aws::CloudFront
       :distribution_config,
       :id,
       :if_match)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -8438,6 +8673,7 @@ module Aws::CloudFront
     class UpdateDistributionResult < Struct.new(
       :distribution,
       :etag)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -8497,6 +8733,7 @@ module Aws::CloudFront
       :field_level_encryption_config,
       :id,
       :if_match)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -8514,6 +8751,7 @@ module Aws::CloudFront
     class UpdateFieldLevelEncryptionConfigResult < Struct.new(
       :field_level_encryption,
       :etag)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -8562,6 +8800,7 @@ module Aws::CloudFront
       :field_level_encryption_profile_config,
       :id,
       :if_match)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -8578,6 +8817,7 @@ module Aws::CloudFront
     class UpdateFieldLevelEncryptionProfileResult < Struct.new(
       :field_level_encryption_profile,
       :etag)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -8614,6 +8854,7 @@ module Aws::CloudFront
       :public_key_config,
       :id,
       :if_match)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -8631,6 +8872,7 @@ module Aws::CloudFront
     class UpdatePublicKeyResult < Struct.new(
       :public_key,
       :etag)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -8688,6 +8930,7 @@ module Aws::CloudFront
       :streaming_distribution_config,
       :id,
       :if_match)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -8707,6 +8950,7 @@ module Aws::CloudFront
     class UpdateStreamingDistributionResult < Struct.new(
       :streaming_distribution,
       :etag)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -8919,6 +9163,7 @@ module Aws::CloudFront
       :minimum_protocol_version,
       :certificate,
       :certificate_source)
+      SENSITIVE = []
       include Aws::Structure
     end
 

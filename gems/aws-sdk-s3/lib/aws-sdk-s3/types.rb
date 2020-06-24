@@ -36,6 +36,7 @@ module Aws::S3
     #
     class AbortIncompleteMultipartUpload < Struct.new(
       :days_after_initiation)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -48,6 +49,7 @@ module Aws::S3
     #
     class AbortMultipartUploadOutput < Struct.new(
       :request_charged)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -105,6 +107,7 @@ module Aws::S3
       :key,
       :upload_id,
       :request_payer)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -131,6 +134,7 @@ module Aws::S3
     #
     class AccelerateConfiguration < Struct.new(
       :status)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -172,6 +176,7 @@ module Aws::S3
     class AccessControlPolicy < Struct.new(
       :grants,
       :owner)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -198,6 +203,7 @@ module Aws::S3
     #
     class AccessControlTranslation < Struct.new(
       :owner)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -233,6 +239,7 @@ module Aws::S3
     class AnalyticsAndOperator < Struct.new(
       :prefix,
       :tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -298,6 +305,7 @@ module Aws::S3
       :id,
       :filter,
       :storage_class_analysis)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -323,6 +331,7 @@ module Aws::S3
     #
     class AnalyticsExportDestination < Struct.new(
       :s3_bucket_destination)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -371,6 +380,7 @@ module Aws::S3
       :prefix,
       :tag,
       :and)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -418,6 +428,7 @@ module Aws::S3
       :bucket_account_id,
       :bucket,
       :prefix)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -438,6 +449,7 @@ module Aws::S3
     class Bucket < Struct.new(
       :name,
       :creation_date)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -528,6 +540,7 @@ module Aws::S3
     #
     class BucketLifecycleConfiguration < Struct.new(
       :rules)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -570,6 +583,7 @@ module Aws::S3
     #
     class BucketLoggingStatus < Struct.new(
       :logging_enabled)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -606,6 +620,7 @@ module Aws::S3
     #
     class CORSConfiguration < Struct.new(
       :cors_rules)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -658,6 +673,7 @@ module Aws::S3
       :allowed_origins,
       :expose_headers,
       :max_age_seconds)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -743,6 +759,7 @@ module Aws::S3
       :field_delimiter,
       :quote_character,
       :allow_quoted_record_delimiter)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -798,6 +815,7 @@ module Aws::S3
       :record_delimiter,
       :field_delimiter,
       :quote_character)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -845,6 +863,7 @@ module Aws::S3
       :events,
       :cloud_function,
       :invocation_role)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -862,6 +881,7 @@ module Aws::S3
     #
     class CommonPrefix < Struct.new(
       :prefix)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -929,6 +949,7 @@ module Aws::S3
       :version_id,
       :ssekms_key_id,
       :request_charged)
+      SENSITIVE = [:ssekms_key_id]
       include Aws::Structure
     end
 
@@ -986,6 +1007,7 @@ module Aws::S3
       :multipart_upload,
       :upload_id,
       :request_payer)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1011,6 +1033,7 @@ module Aws::S3
     #
     class CompletedMultipartUpload < Struct.new(
       :parts)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1038,6 +1061,7 @@ module Aws::S3
     class CompletedPart < Struct.new(
       :etag,
       :part_number)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1080,6 +1104,7 @@ module Aws::S3
     class Condition < Struct.new(
       :http_error_code_returned_equals,
       :key_prefix_equals)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1087,6 +1112,7 @@ module Aws::S3
     #
     class ContinuationEvent < Struct.new(
       :event_type)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1156,6 +1182,7 @@ module Aws::S3
       :ssekms_key_id,
       :ssekms_encryption_context,
       :request_charged)
+      SENSITIVE = [:ssekms_key_id, :ssekms_encryption_context]
       include Aws::Structure
     end
 
@@ -1440,6 +1467,7 @@ module Aws::S3
       :object_lock_mode,
       :object_lock_retain_until_date,
       :object_lock_legal_hold_status)
+      SENSITIVE = [:sse_customer_key, :ssekms_key_id, :ssekms_encryption_context, :copy_source_sse_customer_key]
       include Aws::Structure
     end
 
@@ -1460,6 +1488,7 @@ module Aws::S3
     class CopyObjectResult < Struct.new(
       :etag,
       :last_modified)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1478,6 +1507,7 @@ module Aws::S3
     class CopyPartResult < Struct.new(
       :etag,
       :last_modified)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1500,6 +1530,7 @@ module Aws::S3
     #
     class CreateBucketConfiguration < Struct.new(
       :location_constraint)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1513,6 +1544,7 @@ module Aws::S3
     #
     class CreateBucketOutput < Struct.new(
       :location)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1584,6 +1616,7 @@ module Aws::S3
       :grant_write,
       :grant_write_acp,
       :object_lock_enabled_for_bucket)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1686,6 +1719,7 @@ module Aws::S3
       :ssekms_key_id,
       :ssekms_encryption_context,
       :request_charged)
+      SENSITIVE = [:ssekms_key_id, :ssekms_encryption_context]
       include Aws::Structure
     end
 
@@ -1899,6 +1933,7 @@ module Aws::S3
       :object_lock_mode,
       :object_lock_retain_until_date,
       :object_lock_legal_hold_status)
+      SENSITIVE = [:sse_customer_key, :ssekms_key_id, :ssekms_encryption_context]
       include Aws::Structure
     end
 
@@ -1935,6 +1970,7 @@ module Aws::S3
       :mode,
       :days,
       :years)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1967,6 +2003,7 @@ module Aws::S3
     class Delete < Struct.new(
       :objects,
       :quiet)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1992,6 +2029,7 @@ module Aws::S3
     class DeleteBucketAnalyticsConfigurationRequest < Struct.new(
       :bucket,
       :id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2010,6 +2048,7 @@ module Aws::S3
     #
     class DeleteBucketCorsRequest < Struct.new(
       :bucket)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2029,6 +2068,7 @@ module Aws::S3
     #
     class DeleteBucketEncryptionRequest < Struct.new(
       :bucket)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2054,6 +2094,7 @@ module Aws::S3
     class DeleteBucketInventoryConfigurationRequest < Struct.new(
       :bucket,
       :id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2072,6 +2113,7 @@ module Aws::S3
     #
     class DeleteBucketLifecycleRequest < Struct.new(
       :bucket)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2097,6 +2139,7 @@ module Aws::S3
     class DeleteBucketMetricsConfigurationRequest < Struct.new(
       :bucket,
       :id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2115,6 +2158,7 @@ module Aws::S3
     #
     class DeleteBucketPolicyRequest < Struct.new(
       :bucket)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2133,6 +2177,7 @@ module Aws::S3
     #
     class DeleteBucketReplicationRequest < Struct.new(
       :bucket)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2151,6 +2196,7 @@ module Aws::S3
     #
     class DeleteBucketRequest < Struct.new(
       :bucket)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2169,6 +2215,7 @@ module Aws::S3
     #
     class DeleteBucketTaggingRequest < Struct.new(
       :bucket)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2188,6 +2235,7 @@ module Aws::S3
     #
     class DeleteBucketWebsiteRequest < Struct.new(
       :bucket)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2222,6 +2270,7 @@ module Aws::S3
       :version_id,
       :is_latest,
       :last_modified)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2265,6 +2314,7 @@ module Aws::S3
     #
     class DeleteMarkerReplication < Struct.new(
       :status)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2289,6 +2339,7 @@ module Aws::S3
       :delete_marker,
       :version_id,
       :request_charged)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2362,6 +2413,7 @@ module Aws::S3
       :version_id,
       :request_payer,
       :bypass_governance_retention)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2373,6 +2425,7 @@ module Aws::S3
     #
     class DeleteObjectTaggingOutput < Struct.new(
       :version_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2417,6 +2470,7 @@ module Aws::S3
       :bucket,
       :key,
       :version_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2441,6 +2495,7 @@ module Aws::S3
       :deleted,
       :request_charged,
       :errors)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2517,6 +2572,7 @@ module Aws::S3
       :mfa,
       :request_payer,
       :bypass_governance_retention)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2536,6 +2592,7 @@ module Aws::S3
     #
     class DeletePublicAccessBlockRequest < Struct.new(
       :bucket)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2570,6 +2627,7 @@ module Aws::S3
       :version_id,
       :delete_marker,
       :delete_marker_version_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2675,6 +2733,7 @@ module Aws::S3
       :encryption_configuration,
       :replication_time,
       :metrics)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2717,6 +2776,7 @@ module Aws::S3
       :encryption_type,
       :kms_key_id,
       :kms_context)
+      SENSITIVE = [:kms_key_id]
       include Aws::Structure
     end
 
@@ -2747,6 +2807,7 @@ module Aws::S3
     #
     class EncryptionConfiguration < Struct.new(
       :replica_kms_key_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2758,6 +2819,7 @@ module Aws::S3
     #
     class EndEvent < Struct.new(
       :event_type)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3587,6 +3649,7 @@ module Aws::S3
       :version_id,
       :code,
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3607,6 +3670,7 @@ module Aws::S3
     #
     class ErrorDocument < Struct.new(
       :key)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3629,6 +3693,7 @@ module Aws::S3
     #
     class ExistingObjectReplication < Struct.new(
       :status)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3664,6 +3729,7 @@ module Aws::S3
     class FilterRule < Struct.new(
       :name,
       :value)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3675,6 +3741,7 @@ module Aws::S3
     #
     class GetBucketAccelerateConfigurationOutput < Struct.new(
       :status)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3694,6 +3761,7 @@ module Aws::S3
     #
     class GetBucketAccelerateConfigurationRequest < Struct.new(
       :bucket)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3710,6 +3778,7 @@ module Aws::S3
     class GetBucketAclOutput < Struct.new(
       :owner,
       :grants)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3728,6 +3797,7 @@ module Aws::S3
     #
     class GetBucketAclRequest < Struct.new(
       :bucket)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3739,6 +3809,7 @@ module Aws::S3
     #
     class GetBucketAnalyticsConfigurationOutput < Struct.new(
       :analytics_configuration)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3764,6 +3835,7 @@ module Aws::S3
     class GetBucketAnalyticsConfigurationRequest < Struct.new(
       :bucket,
       :id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3776,6 +3848,7 @@ module Aws::S3
     #
     class GetBucketCorsOutput < Struct.new(
       :cors_rules)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3794,6 +3867,7 @@ module Aws::S3
     #
     class GetBucketCorsRequest < Struct.new(
       :bucket)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3805,6 +3879,7 @@ module Aws::S3
     #
     class GetBucketEncryptionOutput < Struct.new(
       :server_side_encryption_configuration)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3824,6 +3899,7 @@ module Aws::S3
     #
     class GetBucketEncryptionRequest < Struct.new(
       :bucket)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3835,6 +3911,7 @@ module Aws::S3
     #
     class GetBucketInventoryConfigurationOutput < Struct.new(
       :inventory_configuration)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3860,6 +3937,7 @@ module Aws::S3
     class GetBucketInventoryConfigurationRequest < Struct.new(
       :bucket,
       :id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3871,6 +3949,7 @@ module Aws::S3
     #
     class GetBucketLifecycleConfigurationOutput < Struct.new(
       :rules)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3889,6 +3968,7 @@ module Aws::S3
     #
     class GetBucketLifecycleConfigurationRequest < Struct.new(
       :bucket)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3900,6 +3980,7 @@ module Aws::S3
     #
     class GetBucketLifecycleOutput < Struct.new(
       :rules)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3918,6 +3999,7 @@ module Aws::S3
     #
     class GetBucketLifecycleRequest < Struct.new(
       :bucket)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3936,6 +4018,7 @@ module Aws::S3
     #
     class GetBucketLocationOutput < Struct.new(
       :location_constraint)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3954,6 +4037,7 @@ module Aws::S3
     #
     class GetBucketLocationRequest < Struct.new(
       :bucket)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3972,6 +4056,7 @@ module Aws::S3
     #
     class GetBucketLoggingOutput < Struct.new(
       :logging_enabled)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3990,6 +4075,7 @@ module Aws::S3
     #
     class GetBucketLoggingRequest < Struct.new(
       :bucket)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4001,6 +4087,7 @@ module Aws::S3
     #
     class GetBucketMetricsConfigurationOutput < Struct.new(
       :metrics_configuration)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4026,6 +4113,7 @@ module Aws::S3
     class GetBucketMetricsConfigurationRequest < Struct.new(
       :bucket,
       :id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4044,6 +4132,7 @@ module Aws::S3
     #
     class GetBucketNotificationConfigurationRequest < Struct.new(
       :bucket)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4055,6 +4144,7 @@ module Aws::S3
     #
     class GetBucketPolicyOutput < Struct.new(
       :policy)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4073,6 +4163,7 @@ module Aws::S3
     #
     class GetBucketPolicyRequest < Struct.new(
       :bucket)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4084,6 +4175,7 @@ module Aws::S3
     #
     class GetBucketPolicyStatusOutput < Struct.new(
       :policy_status)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4103,6 +4195,7 @@ module Aws::S3
     #
     class GetBucketPolicyStatusRequest < Struct.new(
       :bucket)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4115,6 +4208,7 @@ module Aws::S3
     #
     class GetBucketReplicationOutput < Struct.new(
       :replication_configuration)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4133,6 +4227,7 @@ module Aws::S3
     #
     class GetBucketReplicationRequest < Struct.new(
       :bucket)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4144,6 +4239,7 @@ module Aws::S3
     #
     class GetBucketRequestPaymentOutput < Struct.new(
       :payer)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4163,6 +4259,7 @@ module Aws::S3
     #
     class GetBucketRequestPaymentRequest < Struct.new(
       :bucket)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4174,6 +4271,7 @@ module Aws::S3
     #
     class GetBucketTaggingOutput < Struct.new(
       :tag_set)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4192,6 +4290,7 @@ module Aws::S3
     #
     class GetBucketTaggingRequest < Struct.new(
       :bucket)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4211,6 +4310,7 @@ module Aws::S3
     class GetBucketVersioningOutput < Struct.new(
       :status,
       :mfa_delete)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4229,6 +4329,7 @@ module Aws::S3
     #
     class GetBucketVersioningRequest < Struct.new(
       :bucket)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4259,6 +4360,7 @@ module Aws::S3
       :index_document,
       :error_document,
       :routing_rules)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4277,6 +4379,7 @@ module Aws::S3
     #
     class GetBucketWebsiteRequest < Struct.new(
       :bucket)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4299,6 +4402,7 @@ module Aws::S3
       :owner,
       :grants,
       :request_charged)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4357,6 +4461,7 @@ module Aws::S3
       :key,
       :version_id,
       :request_payer)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4368,6 +4473,7 @@ module Aws::S3
     #
     class GetObjectLegalHoldOutput < Struct.new(
       :legal_hold)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4428,6 +4534,7 @@ module Aws::S3
       :key,
       :version_id,
       :request_payer)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4439,6 +4546,7 @@ module Aws::S3
     #
     class GetObjectLockConfigurationOutput < Struct.new(
       :object_lock_configuration)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4457,6 +4565,7 @@ module Aws::S3
     #
     class GetObjectLockConfigurationRequest < Struct.new(
       :bucket)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4652,6 +4761,7 @@ module Aws::S3
       :object_lock_mode,
       :object_lock_retain_until_date,
       :object_lock_legal_hold_status)
+      SENSITIVE = [:ssekms_key_id]
       include Aws::Structure
     end
 
@@ -4824,6 +4934,7 @@ module Aws::S3
       :sse_customer_key_md5,
       :request_payer,
       :part_number)
+      SENSITIVE = [:sse_customer_key]
       include Aws::Structure
     end
 
@@ -4835,6 +4946,7 @@ module Aws::S3
     #
     class GetObjectRetentionOutput < Struct.new(
       :retention)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4895,6 +5007,7 @@ module Aws::S3
       :key,
       :version_id,
       :request_payer)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4912,6 +5025,7 @@ module Aws::S3
     class GetObjectTaggingOutput < Struct.new(
       :version_id,
       :tag_set)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4957,6 +5071,7 @@ module Aws::S3
       :bucket,
       :key,
       :version_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4974,6 +5089,7 @@ module Aws::S3
     class GetObjectTorrentOutput < Struct.new(
       :body,
       :request_charged)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5013,6 +5129,7 @@ module Aws::S3
       :bucket,
       :key,
       :request_payer)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5025,6 +5142,7 @@ module Aws::S3
     #
     class GetPublicAccessBlockOutput < Struct.new(
       :public_access_block_configuration)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5044,6 +5162,7 @@ module Aws::S3
     #
     class GetPublicAccessBlockRequest < Struct.new(
       :bucket)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5064,6 +5183,7 @@ module Aws::S3
     #
     class GlacierJobParameters < Struct.new(
       :tier)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5096,6 +5216,7 @@ module Aws::S3
     class Grant < Struct.new(
       :grantee,
       :permission)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5168,6 +5289,7 @@ module Aws::S3
       :id,
       :type,
       :uri)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5186,6 +5308,7 @@ module Aws::S3
     #
     class HeadBucketRequest < Struct.new(
       :bucket)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5439,6 +5562,7 @@ module Aws::S3
       :object_lock_mode,
       :object_lock_retain_until_date,
       :object_lock_legal_hold_status)
+      SENSITIVE = [:ssekms_key_id]
       include Aws::Structure
     end
 
@@ -5558,6 +5682,7 @@ module Aws::S3
       :sse_customer_key_md5,
       :request_payer,
       :part_number)
+      SENSITIVE = [:sse_customer_key]
       include Aws::Structure
     end
 
@@ -5582,6 +5707,7 @@ module Aws::S3
     #
     class IndexDocument < Struct.new(
       :suffix)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5601,6 +5727,7 @@ module Aws::S3
     class Initiator < Struct.new(
       :id,
       :display_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5651,6 +5778,7 @@ module Aws::S3
       :compression_type,
       :json,
       :parquet)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5739,6 +5867,7 @@ module Aws::S3
       :included_object_versions,
       :optional_fields,
       :schedule)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5772,6 +5901,7 @@ module Aws::S3
     #
     class InventoryDestination < Struct.new(
       :s3_bucket_destination)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5802,6 +5932,7 @@ module Aws::S3
     class InventoryEncryption < Struct.new(
       :sses3,
       :ssekms)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5824,6 +5955,7 @@ module Aws::S3
     #
     class InventoryFilter < Struct.new(
       :prefix)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5884,6 +6016,7 @@ module Aws::S3
       :format,
       :prefix,
       :encryption)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5904,6 +6037,7 @@ module Aws::S3
     #
     class InventorySchedule < Struct.new(
       :frequency)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5924,6 +6058,7 @@ module Aws::S3
     #
     class JSONInput < Struct.new(
       :type)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5945,6 +6080,7 @@ module Aws::S3
     #
     class JSONOutput < Struct.new(
       :record_delimiter)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6008,6 +6144,7 @@ module Aws::S3
       :lambda_function_arn,
       :events,
       :filter)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6054,6 +6191,7 @@ module Aws::S3
     #
     class LifecycleConfiguration < Struct.new(
       :rules)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6091,6 +6229,7 @@ module Aws::S3
       :date,
       :days,
       :expired_object_delete_marker)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6218,6 +6357,7 @@ module Aws::S3
       :noncurrent_version_transitions,
       :noncurrent_version_expiration,
       :abort_incomplete_multipart_upload)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6252,6 +6392,7 @@ module Aws::S3
     class LifecycleRuleAndOperator < Struct.new(
       :prefix,
       :tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6300,6 +6441,7 @@ module Aws::S3
       :prefix,
       :tag,
       :and)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6334,6 +6476,7 @@ module Aws::S3
       :continuation_token,
       :next_continuation_token,
       :analytics_configuration_list)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6360,6 +6503,7 @@ module Aws::S3
     class ListBucketAnalyticsConfigurationsRequest < Struct.new(
       :bucket,
       :continuation_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6392,6 +6536,7 @@ module Aws::S3
       :inventory_configuration_list,
       :is_truncated,
       :next_continuation_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6420,6 +6565,7 @@ module Aws::S3
     class ListBucketInventoryConfigurationsRequest < Struct.new(
       :bucket,
       :continuation_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6454,6 +6600,7 @@ module Aws::S3
       :continuation_token,
       :next_continuation_token,
       :metrics_configuration_list)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6482,6 +6629,7 @@ module Aws::S3
     class ListBucketMetricsConfigurationsRequest < Struct.new(
       :bucket,
       :continuation_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6498,6 +6646,7 @@ module Aws::S3
     class ListBucketsOutput < Struct.new(
       :buckets,
       :owner)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6587,6 +6736,7 @@ module Aws::S3
       :uploads,
       :common_prefixes,
       :encoding_type)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6687,6 +6837,7 @@ module Aws::S3
       :max_uploads,
       :prefix,
       :upload_id_marker)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6782,6 +6933,7 @@ module Aws::S3
       :max_keys,
       :common_prefixes,
       :encoding_type)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6870,6 +7022,7 @@ module Aws::S3
       :max_keys,
       :prefix,
       :version_id_marker)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6955,6 +7108,7 @@ module Aws::S3
       :max_keys,
       :common_prefixes,
       :encoding_type)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -7018,6 +7172,7 @@ module Aws::S3
       :max_keys,
       :prefix,
       :request_payer)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -7136,6 +7291,7 @@ module Aws::S3
       :continuation_token,
       :next_continuation_token,
       :start_after)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -7226,6 +7382,7 @@ module Aws::S3
       :fetch_owner,
       :start_after,
       :request_payer)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -7334,6 +7491,7 @@ module Aws::S3
       :owner,
       :storage_class,
       :request_charged)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -7405,6 +7563,7 @@ module Aws::S3
       :part_number_marker,
       :upload_id,
       :request_payer)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -7463,6 +7622,7 @@ module Aws::S3
       :target_bucket,
       :target_grants,
       :target_prefix)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -7489,6 +7649,7 @@ module Aws::S3
     class MetadataEntry < Struct.new(
       :name,
       :value)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -7520,6 +7681,7 @@ module Aws::S3
     class Metrics < Struct.new(
       :status,
       :event_threshold)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -7554,6 +7716,7 @@ module Aws::S3
     class MetricsAndOperator < Struct.new(
       :prefix,
       :tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -7607,6 +7770,7 @@ module Aws::S3
     class MetricsConfiguration < Struct.new(
       :id,
       :filter)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -7655,6 +7819,7 @@ module Aws::S3
       :prefix,
       :tag,
       :and)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -7694,6 +7859,7 @@ module Aws::S3
       :storage_class,
       :owner,
       :initiator)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -7744,6 +7910,7 @@ module Aws::S3
     #
     class NoncurrentVersionExpiration < Struct.new(
       :noncurrent_days)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -7785,6 +7952,7 @@ module Aws::S3
     class NoncurrentVersionTransition < Struct.new(
       :noncurrent_days,
       :storage_class)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -7870,6 +8038,7 @@ module Aws::S3
       :topic_configurations,
       :queue_configurations,
       :lambda_function_configurations)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -7921,6 +8090,7 @@ module Aws::S3
       :topic_configuration,
       :queue_configuration,
       :cloud_function_configuration)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -7954,6 +8124,7 @@ module Aws::S3
     #
     class NotificationConfigurationFilter < Struct.new(
       :key)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -7994,6 +8165,7 @@ module Aws::S3
       :size,
       :storage_class,
       :owner)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -8026,6 +8198,7 @@ module Aws::S3
     class ObjectIdentifier < Struct.new(
       :key,
       :version_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -8059,6 +8232,7 @@ module Aws::S3
     class ObjectLockConfiguration < Struct.new(
       :object_lock_enabled,
       :rule)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -8079,6 +8253,7 @@ module Aws::S3
     #
     class ObjectLockLegalHold < Struct.new(
       :status)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -8105,6 +8280,7 @@ module Aws::S3
     class ObjectLockRetention < Struct.new(
       :mode,
       :retain_until_date)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -8130,6 +8306,7 @@ module Aws::S3
     #
     class ObjectLockRule < Struct.new(
       :default_retention)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -8186,6 +8363,7 @@ module Aws::S3
       :is_latest,
       :last_modified,
       :owner)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -8243,6 +8421,7 @@ module Aws::S3
     #
     class OutputLocation < Struct.new(
       :s3)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -8277,6 +8456,7 @@ module Aws::S3
     class OutputSerialization < Struct.new(
       :csv,
       :json)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -8303,6 +8483,7 @@ module Aws::S3
     class Owner < Struct.new(
       :display_name,
       :id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -8340,6 +8521,7 @@ module Aws::S3
       :last_modified,
       :etag,
       :size)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -8354,6 +8536,7 @@ module Aws::S3
     #
     class PolicyStatus < Struct.new(
       :is_public)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -8377,6 +8560,7 @@ module Aws::S3
       :bytes_scanned,
       :bytes_processed,
       :bytes_returned)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -8392,6 +8576,7 @@ module Aws::S3
     class ProgressEvent < Struct.new(
       :details,
       :event_type)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -8468,6 +8653,7 @@ module Aws::S3
       :ignore_public_acls,
       :block_public_policy,
       :restrict_public_buckets)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -8494,6 +8680,7 @@ module Aws::S3
     class PutBucketAccelerateConfigurationRequest < Struct.new(
       :bucket,
       :accelerate_configuration)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -8587,6 +8774,7 @@ module Aws::S3
       :grant_read_acp,
       :grant_write,
       :grant_write_acp)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -8649,6 +8837,7 @@ module Aws::S3
       :bucket,
       :id,
       :analytics_configuration)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -8703,6 +8892,7 @@ module Aws::S3
       :bucket,
       :cors_configuration,
       :content_md5)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -8753,6 +8943,7 @@ module Aws::S3
       :bucket,
       :content_md5,
       :server_side_encryption_configuration)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -8810,6 +9001,7 @@ module Aws::S3
       :bucket,
       :id,
       :inventory_configuration)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -8882,6 +9074,7 @@ module Aws::S3
     class PutBucketLifecycleConfigurationRequest < Struct.new(
       :bucket,
       :lifecycle_configuration)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -8937,6 +9130,7 @@ module Aws::S3
       :bucket,
       :content_md5,
       :lifecycle_configuration)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -8984,6 +9178,7 @@ module Aws::S3
       :bucket,
       :bucket_logging_status,
       :content_md5)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -9032,6 +9227,7 @@ module Aws::S3
       :bucket,
       :id,
       :metrics_configuration)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -9110,6 +9306,7 @@ module Aws::S3
     class PutBucketNotificationConfigurationRequest < Struct.new(
       :bucket,
       :notification_configuration)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -9160,6 +9357,7 @@ module Aws::S3
       :bucket,
       :content_md5,
       :notification_configuration)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -9197,6 +9395,7 @@ module Aws::S3
       :content_md5,
       :confirm_remove_self_bucket_access,
       :policy)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -9300,6 +9499,7 @@ module Aws::S3
       :content_md5,
       :replication_configuration,
       :token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -9339,6 +9539,7 @@ module Aws::S3
       :bucket,
       :content_md5,
       :request_payment_configuration)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -9383,6 +9584,7 @@ module Aws::S3
       :bucket,
       :content_md5,
       :tagging)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -9431,6 +9633,7 @@ module Aws::S3
       :content_md5,
       :mfa,
       :versioning_configuration)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -9494,6 +9697,7 @@ module Aws::S3
       :bucket,
       :content_md5,
       :website_configuration)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -9506,6 +9710,7 @@ module Aws::S3
     #
     class PutObjectAclOutput < Struct.new(
       :request_charged)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -9644,6 +9849,7 @@ module Aws::S3
       :key,
       :request_payer,
       :version_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -9656,6 +9862,7 @@ module Aws::S3
     #
     class PutObjectLegalHoldOutput < Struct.new(
       :request_charged)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -9729,6 +9936,7 @@ module Aws::S3
       :request_payer,
       :version_id,
       :content_md5)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -9741,6 +9949,7 @@ module Aws::S3
     #
     class PutObjectLockConfigurationOutput < Struct.new(
       :request_charged)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -9802,6 +10011,7 @@ module Aws::S3
       :request_payer,
       :token,
       :content_md5)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -9872,6 +10082,7 @@ module Aws::S3
       :ssekms_key_id,
       :ssekms_encryption_context,
       :request_charged)
+      SENSITIVE = [:ssekms_key_id, :ssekms_encryption_context]
       include Aws::Structure
     end
 
@@ -10194,6 +10405,7 @@ module Aws::S3
       :object_lock_mode,
       :object_lock_retain_until_date,
       :object_lock_legal_hold_status)
+      SENSITIVE = [:sse_customer_key, :ssekms_key_id, :ssekms_encryption_context]
       include Aws::Structure
     end
 
@@ -10206,6 +10418,7 @@ module Aws::S3
     #
     class PutObjectRetentionOutput < Struct.new(
       :request_charged)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -10288,6 +10501,7 @@ module Aws::S3
       :version_id,
       :bypass_governance_retention,
       :content_md5)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -10299,6 +10513,7 @@ module Aws::S3
     #
     class PutObjectTaggingOutput < Struct.new(
       :version_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -10361,6 +10576,7 @@ module Aws::S3
       :version_id,
       :content_md5,
       :tagging)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -10405,6 +10621,7 @@ module Aws::S3
       :bucket,
       :content_md5,
       :public_access_block_configuration)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -10464,6 +10681,7 @@ module Aws::S3
       :queue_arn,
       :events,
       :filter)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -10509,6 +10727,7 @@ module Aws::S3
       :event,
       :events,
       :queue)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -10523,6 +10742,7 @@ module Aws::S3
     class RecordsEvent < Struct.new(
       :payload,
       :event_type)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -10579,6 +10799,7 @@ module Aws::S3
       :protocol,
       :replace_key_prefix_with,
       :replace_key_with)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -10607,6 +10828,7 @@ module Aws::S3
     class RedirectAllRequestsTo < Struct.new(
       :host_name,
       :protocol)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -10700,6 +10922,7 @@ module Aws::S3
     class ReplicationConfiguration < Struct.new(
       :role,
       :rules)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -10858,6 +11081,7 @@ module Aws::S3
       :existing_object_replication,
       :destination,
       :delete_marker_replication)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -10900,6 +11124,7 @@ module Aws::S3
     class ReplicationRuleAndOperator < Struct.new(
       :prefix,
       :tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -10956,6 +11181,7 @@ module Aws::S3
       :prefix,
       :tag,
       :and)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -10988,6 +11214,7 @@ module Aws::S3
     class ReplicationTime < Struct.new(
       :status,
       :time)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -11011,6 +11238,7 @@ module Aws::S3
     #
     class ReplicationTimeValue < Struct.new(
       :minutes)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -11031,6 +11259,7 @@ module Aws::S3
     #
     class RequestPaymentConfiguration < Struct.new(
       :payer)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -11053,6 +11282,7 @@ module Aws::S3
     #
     class RequestProgress < Struct.new(
       :enabled)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -11071,6 +11301,7 @@ module Aws::S3
     class RestoreObjectOutput < Struct.new(
       :request_charged,
       :restore_output_path)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -11214,6 +11445,7 @@ module Aws::S3
       :version_id,
       :restore_request,
       :request_payer)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -11344,6 +11576,7 @@ module Aws::S3
       :description,
       :select_parameters,
       :output_location)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -11385,6 +11618,7 @@ module Aws::S3
     class RoutingRule < Struct.new(
       :condition,
       :redirect)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -11500,6 +11734,7 @@ module Aws::S3
       :noncurrent_version_transition,
       :noncurrent_version_expiration,
       :abort_incomplete_multipart_upload)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -11526,6 +11761,7 @@ module Aws::S3
     #
     class S3KeyFilter < Struct.new(
       :filter_rules)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -11617,6 +11853,7 @@ module Aws::S3
       :tagging,
       :user_metadata,
       :storage_class)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -11639,6 +11876,7 @@ module Aws::S3
     #
     class SSEKMS < Struct.new(
       :key_id)
+      SENSITIVE = [:key_id]
       include Aws::Structure
     end
 
@@ -11686,6 +11924,7 @@ module Aws::S3
     class ScanRange < Struct.new(
       :start,
       :end)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -11697,6 +11936,7 @@ module Aws::S3
     #
     class SelectObjectContentOutput < Struct.new(
       :payload)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -11855,6 +12095,7 @@ module Aws::S3
       :input_serialization,
       :output_serialization,
       :scan_range)
+      SENSITIVE = [:sse_customer_key]
       include Aws::Structure
     end
 
@@ -11920,6 +12161,7 @@ module Aws::S3
       :expression_type,
       :expression,
       :output_serialization)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -11977,6 +12219,7 @@ module Aws::S3
     class ServerSideEncryptionByDefault < Struct.new(
       :sse_algorithm,
       :kms_master_key_id)
+      SENSITIVE = [:kms_master_key_id]
       include Aws::Structure
     end
 
@@ -12005,6 +12248,7 @@ module Aws::S3
     #
     class ServerSideEncryptionConfiguration < Struct.new(
       :rules)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -12030,6 +12274,7 @@ module Aws::S3
     #
     class ServerSideEncryptionRule < Struct.new(
       :apply_server_side_encryption_by_default)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -12060,6 +12305,7 @@ module Aws::S3
     #
     class SourceSelectionCriteria < Struct.new(
       :sse_kms_encrypted_objects)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -12083,6 +12329,7 @@ module Aws::S3
     #
     class SseKmsEncryptedObjects < Struct.new(
       :status)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -12106,6 +12353,7 @@ module Aws::S3
       :bytes_scanned,
       :bytes_processed,
       :bytes_returned)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -12120,6 +12368,7 @@ module Aws::S3
     class StatsEvent < Struct.new(
       :details,
       :event_type)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -12153,6 +12402,7 @@ module Aws::S3
     #
     class StorageClassAnalysis < Struct.new(
       :data_export)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -12188,6 +12438,7 @@ module Aws::S3
     class StorageClassAnalysisDataExport < Struct.new(
       :output_schema_version,
       :destination)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -12214,6 +12465,7 @@ module Aws::S3
     class Tag < Struct.new(
       :key,
       :value)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -12239,6 +12491,7 @@ module Aws::S3
     #
     class Tagging < Struct.new(
       :tag_set)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -12271,6 +12524,7 @@ module Aws::S3
     class TargetGrant < Struct.new(
       :grantee,
       :permission)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -12336,6 +12590,7 @@ module Aws::S3
       :topic_arn,
       :events,
       :filter)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -12380,6 +12635,7 @@ module Aws::S3
       :events,
       :event,
       :topic)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -12423,6 +12679,7 @@ module Aws::S3
       :date,
       :days,
       :storage_class)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -12474,6 +12731,7 @@ module Aws::S3
       :sse_customer_key_md5,
       :ssekms_key_id,
       :request_charged)
+      SENSITIVE = [:ssekms_key_id]
       include Aws::Structure
     end
 
@@ -12620,6 +12878,7 @@ module Aws::S3
       :copy_source_sse_customer_key,
       :copy_source_sse_customer_key_md5,
       :request_payer)
+      SENSITIVE = [:sse_customer_key, :copy_source_sse_customer_key]
       include Aws::Structure
     end
 
@@ -12665,6 +12924,7 @@ module Aws::S3
       :sse_customer_key_md5,
       :ssekms_key_id,
       :request_charged)
+      SENSITIVE = [:ssekms_key_id]
       include Aws::Structure
     end
 
@@ -12765,6 +13025,7 @@ module Aws::S3
       :sse_customer_key,
       :sse_customer_key_md5,
       :request_payer)
+      SENSITIVE = [:sse_customer_key]
       include Aws::Structure
     end
 
@@ -12800,6 +13061,7 @@ module Aws::S3
     class VersioningConfiguration < Struct.new(
       :mfa_delete,
       :status)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -12863,6 +13125,7 @@ module Aws::S3
       :index_document,
       :redirect_all_requests_to,
       :routing_rules)
+      SENSITIVE = []
       include Aws::Structure
     end
 

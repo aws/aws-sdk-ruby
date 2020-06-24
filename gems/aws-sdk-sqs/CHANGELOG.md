@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.29.0 (2020-06-23)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.28.0 (2020-06-22)
+------------------
+
+* Feature - AWS SQS adds pagination support for ListQueues and ListDeadLetterSourceQueues APIs
+
 1.27.1 (2020-06-11)
 ------------------
 

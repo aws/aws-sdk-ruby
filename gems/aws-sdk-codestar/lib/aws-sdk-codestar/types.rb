@@ -56,6 +56,7 @@ module Aws::CodeStar
       :user_arn,
       :project_role,
       :remote_access_allowed)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -68,6 +69,7 @@ module Aws::CodeStar
     #
     class AssociateTeamMemberResult < Struct.new(
       :client_request_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -119,6 +121,7 @@ module Aws::CodeStar
     class Code < Struct.new(
       :source,
       :destination)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -142,6 +145,7 @@ module Aws::CodeStar
     #
     class CodeCommitCodeDestination < Struct.new(
       :name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -185,6 +189,7 @@ module Aws::CodeStar
     class CodeDestination < Struct.new(
       :code_commit,
       :git_hub)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -211,6 +216,7 @@ module Aws::CodeStar
     #
     class CodeSource < Struct.new(
       :s3)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -314,6 +320,7 @@ module Aws::CodeStar
       :source_code,
       :toolchain,
       :tags)
+      SENSITIVE = [:name, :description]
       include Aws::Structure
     end
 
@@ -341,6 +348,7 @@ module Aws::CodeStar
       :arn,
       :client_request_token,
       :project_template_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -382,6 +390,7 @@ module Aws::CodeStar
       :display_name,
       :email_address,
       :ssh_public_key)
+      SENSITIVE = [:display_name, :email_address]
       include Aws::Structure
     end
 
@@ -423,6 +432,7 @@ module Aws::CodeStar
       :ssh_public_key,
       :created_timestamp,
       :last_modified_timestamp)
+      SENSITIVE = [:display_name, :email_address]
       include Aws::Structure
     end
 
@@ -459,6 +469,7 @@ module Aws::CodeStar
       :id,
       :client_request_token,
       :delete_stack)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -476,6 +487,7 @@ module Aws::CodeStar
     class DeleteProjectResult < Struct.new(
       :stack_id,
       :project_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -495,6 +507,7 @@ module Aws::CodeStar
     #
     class DeleteUserProfileRequest < Struct.new(
       :user_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -507,6 +520,7 @@ module Aws::CodeStar
     #
     class DeleteUserProfileResult < Struct.new(
       :user_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -525,6 +539,7 @@ module Aws::CodeStar
     #
     class DescribeProjectRequest < Struct.new(
       :id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -579,6 +594,7 @@ module Aws::CodeStar
       :stack_id,
       :project_template_id,
       :status)
+      SENSITIVE = [:name, :description]
       include Aws::Structure
     end
 
@@ -597,6 +613,7 @@ module Aws::CodeStar
     #
     class DescribeUserProfileRequest < Struct.new(
       :user_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -649,6 +666,7 @@ module Aws::CodeStar
       :ssh_public_key,
       :created_timestamp,
       :last_modified_timestamp)
+      SENSITIVE = [:display_name, :email_address]
       include Aws::Structure
     end
 
@@ -675,6 +693,7 @@ module Aws::CodeStar
     class DisassociateTeamMemberRequest < Struct.new(
       :project_id,
       :user_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -741,6 +760,7 @@ module Aws::CodeStar
       :private_repository,
       :issues_enabled,
       :token)
+      SENSITIVE = [:token]
       include Aws::Structure
     end
 
@@ -785,6 +805,7 @@ module Aws::CodeStar
     class ListProjectsRequest < Struct.new(
       :next_token,
       :max_results)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -802,6 +823,7 @@ module Aws::CodeStar
     class ListProjectsResult < Struct.new(
       :projects,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -834,6 +856,7 @@ module Aws::CodeStar
       :project_id,
       :next_token,
       :max_results)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -851,6 +874,7 @@ module Aws::CodeStar
     class ListResourcesResult < Struct.new(
       :resources,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -881,6 +905,7 @@ module Aws::CodeStar
       :id,
       :next_token,
       :max_results)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -897,6 +922,7 @@ module Aws::CodeStar
     class ListTagsForProjectResult < Struct.new(
       :tags,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -928,6 +954,7 @@ module Aws::CodeStar
       :project_id,
       :next_token,
       :max_results)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -945,6 +972,7 @@ module Aws::CodeStar
     class ListTeamMembersResult < Struct.new(
       :team_members,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -970,6 +998,7 @@ module Aws::CodeStar
     class ListUserProfilesRequest < Struct.new(
       :next_token,
       :max_results)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -987,6 +1016,7 @@ module Aws::CodeStar
     class ListUserProfilesResult < Struct.new(
       :user_profiles,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1035,6 +1065,7 @@ module Aws::CodeStar
     class ProjectStatus < Struct.new(
       :state,
       :reason)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1053,6 +1084,7 @@ module Aws::CodeStar
     class ProjectSummary < Struct.new(
       :project_id,
       :project_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1066,6 +1098,7 @@ module Aws::CodeStar
     #
     class Resource < Struct.new(
       :id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1095,6 +1128,7 @@ module Aws::CodeStar
     class S3Location < Struct.new(
       :bucket_name,
       :bucket_key)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1121,6 +1155,7 @@ module Aws::CodeStar
     class TagProjectRequest < Struct.new(
       :id,
       :tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1132,6 +1167,7 @@ module Aws::CodeStar
     #
     class TagProjectResult < Struct.new(
       :tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1162,6 +1198,7 @@ module Aws::CodeStar
       :user_arn,
       :project_role,
       :remote_access_allowed)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1219,6 +1256,7 @@ module Aws::CodeStar
       :source,
       :role_arn,
       :stack_parameters)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1245,6 +1283,7 @@ module Aws::CodeStar
     #
     class ToolchainSource < Struct.new(
       :s3)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1269,6 +1308,7 @@ module Aws::CodeStar
     class UntagProjectRequest < Struct.new(
       :id,
       :tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1303,6 +1343,7 @@ module Aws::CodeStar
       :id,
       :name,
       :description)
+      SENSITIVE = [:name, :description]
       include Aws::Structure
     end
 
@@ -1353,6 +1394,7 @@ module Aws::CodeStar
       :user_arn,
       :project_role,
       :remote_access_allowed)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1377,6 +1419,7 @@ module Aws::CodeStar
       :user_arn,
       :project_role,
       :remote_access_allowed)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1419,6 +1462,7 @@ module Aws::CodeStar
       :display_name,
       :email_address,
       :ssh_public_key)
+      SENSITIVE = [:display_name, :email_address]
       include Aws::Structure
     end
 
@@ -1460,6 +1504,7 @@ module Aws::CodeStar
       :ssh_public_key,
       :created_timestamp,
       :last_modified_timestamp)
+      SENSITIVE = [:display_name, :email_address]
       include Aws::Structure
     end
 
@@ -1514,6 +1559,7 @@ module Aws::CodeStar
       :display_name,
       :email_address,
       :ssh_public_key)
+      SENSITIVE = [:display_name, :email_address]
       include Aws::Structure
     end
 

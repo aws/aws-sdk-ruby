@@ -54,6 +54,7 @@ module Aws::SES
     class AddHeaderAction < Struct.new(
       :header_name,
       :header_value)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -69,6 +70,7 @@ module Aws::SES
     #
     class AlreadyExistsException < Struct.new(
       :name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -107,6 +109,7 @@ module Aws::SES
     class Body < Struct.new(
       :text,
       :html)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -178,6 +181,7 @@ module Aws::SES
       :status_code,
       :message,
       :sender)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -249,6 +253,7 @@ module Aws::SES
       :recipient_arn,
       :bounce_type,
       :recipient_dsn_fields)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -314,6 +319,7 @@ module Aws::SES
       :destination,
       :replacement_tags,
       :replacement_template_data)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -389,6 +395,7 @@ module Aws::SES
       :status,
       :error,
       :message_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -403,6 +410,7 @@ module Aws::SES
     #
     class CannotDeleteException < Struct.new(
       :name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -442,6 +450,7 @@ module Aws::SES
     class CloneReceiptRuleSetRequest < Struct.new(
       :rule_set_name,
       :original_rule_set_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -485,6 +494,7 @@ module Aws::SES
     #
     class CloudWatchDestination < Struct.new(
       :dimension_configurations)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -542,6 +552,7 @@ module Aws::SES
       :dimension_name,
       :dimension_value_source,
       :default_dimension_value)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -578,6 +589,7 @@ module Aws::SES
     #
     class ConfigurationSet < Struct.new(
       :name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -592,6 +604,7 @@ module Aws::SES
     #
     class ConfigurationSetAlreadyExistsException < Struct.new(
       :configuration_set_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -605,6 +618,7 @@ module Aws::SES
     #
     class ConfigurationSetDoesNotExistException < Struct.new(
       :configuration_set_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -622,6 +636,7 @@ module Aws::SES
     #
     class ConfigurationSetSendingPausedException < Struct.new(
       :configuration_set_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -653,6 +668,7 @@ module Aws::SES
     class Content < Struct.new(
       :data,
       :charset)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -710,6 +726,7 @@ module Aws::SES
     class CreateConfigurationSetEventDestinationRequest < Struct.new(
       :configuration_set_name,
       :event_destination)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -744,6 +761,7 @@ module Aws::SES
     #
     class CreateConfigurationSetRequest < Struct.new(
       :configuration_set)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -789,6 +807,7 @@ module Aws::SES
     class CreateConfigurationSetTrackingOptionsRequest < Struct.new(
       :configuration_set_name,
       :tracking_options)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -855,6 +874,7 @@ module Aws::SES
       :template_content,
       :success_redirection_url,
       :failure_redirection_url)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -889,6 +909,7 @@ module Aws::SES
     #
     class CreateReceiptFilterRequest < Struct.new(
       :filter)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -980,6 +1001,7 @@ module Aws::SES
       :rule_set_name,
       :after,
       :rule)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1019,6 +1041,7 @@ module Aws::SES
     #
     class CreateReceiptRuleSetRequest < Struct.new(
       :rule_set_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1056,6 +1079,7 @@ module Aws::SES
     #
     class CreateTemplateRequest < Struct.new(
       :template)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1102,6 +1126,7 @@ module Aws::SES
       :template_subject,
       :success_redirection_url,
       :failure_redirection_url)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1117,6 +1142,7 @@ module Aws::SES
     #
     class CustomVerificationEmailTemplateAlreadyExistsException < Struct.new(
       :custom_verification_email_template_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1132,6 +1158,7 @@ module Aws::SES
     #
     class CustomVerificationEmailTemplateDoesNotExistException < Struct.new(
       :custom_verification_email_template_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1167,6 +1194,7 @@ module Aws::SES
     class DeleteConfigurationSetEventDestinationRequest < Struct.new(
       :configuration_set_name,
       :event_destination_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1199,6 +1227,7 @@ module Aws::SES
     #
     class DeleteConfigurationSetRequest < Struct.new(
       :configuration_set_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1227,6 +1256,7 @@ module Aws::SES
     #
     class DeleteConfigurationSetTrackingOptionsRequest < Struct.new(
       :configuration_set_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1255,6 +1285,7 @@ module Aws::SES
     #
     class DeleteCustomVerificationEmailTemplateRequest < Struct.new(
       :template_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1294,6 +1325,7 @@ module Aws::SES
     class DeleteIdentityPolicyRequest < Struct.new(
       :identity,
       :policy_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1322,6 +1354,7 @@ module Aws::SES
     #
     class DeleteIdentityRequest < Struct.new(
       :identity)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1354,6 +1387,7 @@ module Aws::SES
     #
     class DeleteReceiptFilterRequest < Struct.new(
       :filter_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1393,6 +1427,7 @@ module Aws::SES
     class DeleteReceiptRuleRequest < Struct.new(
       :rule_set_name,
       :rule_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1426,6 +1461,7 @@ module Aws::SES
     #
     class DeleteReceiptRuleSetRequest < Struct.new(
       :rule_set_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1457,6 +1493,7 @@ module Aws::SES
     #
     class DeleteTemplateRequest < Struct.new(
       :template_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1482,6 +1519,7 @@ module Aws::SES
     #
     class DeleteVerifiedEmailAddressRequest < Struct.new(
       :email_address)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1507,6 +1545,7 @@ module Aws::SES
     #
     class DeliveryOptions < Struct.new(
       :tls_policy)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1543,6 +1582,7 @@ module Aws::SES
     class DescribeActiveReceiptRuleSetResponse < Struct.new(
       :metadata,
       :rules)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1576,6 +1616,7 @@ module Aws::SES
     class DescribeConfigurationSetRequest < Struct.new(
       :configuration_set_name,
       :configuration_set_attribute_names)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1619,6 +1660,7 @@ module Aws::SES
       :tracking_options,
       :delivery_options,
       :reputation_options)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1651,6 +1693,7 @@ module Aws::SES
     class DescribeReceiptRuleRequest < Struct.new(
       :rule_set_name,
       :rule_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1666,6 +1709,7 @@ module Aws::SES
     #
     class DescribeReceiptRuleResponse < Struct.new(
       :rule)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1692,6 +1736,7 @@ module Aws::SES
     #
     class DescribeReceiptRuleSetRequest < Struct.new(
       :rule_set_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1712,6 +1757,7 @@ module Aws::SES
     class DescribeReceiptRuleSetResponse < Struct.new(
       :metadata,
       :rules)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1760,6 +1806,7 @@ module Aws::SES
       :to_addresses,
       :cc_addresses,
       :bcc_addresses)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1855,6 +1902,7 @@ module Aws::SES
       :kinesis_firehose_destination,
       :cloud_watch_destination,
       :sns_destination)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1874,6 +1922,7 @@ module Aws::SES
     class EventDestinationAlreadyExistsException < Struct.new(
       :configuration_set_name,
       :event_destination_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1892,6 +1941,7 @@ module Aws::SES
     class EventDestinationDoesNotExistException < Struct.new(
       :configuration_set_name,
       :event_destination_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1929,6 +1979,7 @@ module Aws::SES
     class ExtensionField < Struct.new(
       :name,
       :value)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1945,6 +1996,7 @@ module Aws::SES
     #
     class FromEmailAddressNotVerifiedException < Struct.new(
       :from_email_address)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1960,6 +2012,7 @@ module Aws::SES
     #
     class GetAccountSendingEnabledResponse < Struct.new(
       :enabled)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1982,6 +2035,7 @@ module Aws::SES
     #
     class GetCustomVerificationEmailTemplateRequest < Struct.new(
       :template_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2022,6 +2076,7 @@ module Aws::SES
       :template_content,
       :success_redirection_url,
       :failure_redirection_url)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2052,6 +2107,7 @@ module Aws::SES
     #
     class GetIdentityDkimAttributesRequest < Struct.new(
       :identities)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2068,6 +2124,7 @@ module Aws::SES
     #
     class GetIdentityDkimAttributesResponse < Struct.new(
       :dkim_attributes)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2094,6 +2151,7 @@ module Aws::SES
     #
     class GetIdentityMailFromDomainAttributesRequest < Struct.new(
       :identities)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2107,6 +2165,7 @@ module Aws::SES
     #
     class GetIdentityMailFromDomainAttributesResponse < Struct.new(
       :mail_from_domain_attributes)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2136,6 +2195,7 @@ module Aws::SES
     #
     class GetIdentityNotificationAttributesRequest < Struct.new(
       :identities)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2149,6 +2209,7 @@ module Aws::SES
     #
     class GetIdentityNotificationAttributesResponse < Struct.new(
       :notification_attributes)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2190,6 +2251,7 @@ module Aws::SES
     class GetIdentityPoliciesRequest < Struct.new(
       :identity,
       :policy_names)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2203,6 +2265,7 @@ module Aws::SES
     #
     class GetIdentityPoliciesResponse < Struct.new(
       :policies)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2230,6 +2293,7 @@ module Aws::SES
     #
     class GetIdentityVerificationAttributesRequest < Struct.new(
       :identities)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2244,6 +2308,7 @@ module Aws::SES
     #
     class GetIdentityVerificationAttributesResponse < Struct.new(
       :verification_attributes)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2275,6 +2340,7 @@ module Aws::SES
       :max_24_hour_send,
       :max_send_rate,
       :sent_last_24_hours)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2290,6 +2356,7 @@ module Aws::SES
     #
     class GetSendStatisticsResponse < Struct.new(
       :send_data_points)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2308,6 +2375,7 @@ module Aws::SES
     #
     class GetTemplateRequest < Struct.new(
       :template_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2320,6 +2388,7 @@ module Aws::SES
     #
     class GetTemplateResponse < Struct.new(
       :template)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2361,6 +2430,7 @@ module Aws::SES
       :dkim_enabled,
       :dkim_verification_status,
       :dkim_tokens)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2399,6 +2469,7 @@ module Aws::SES
       :mail_from_domain,
       :mail_from_domain_status,
       :behavior_on_mx_failure)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2465,6 +2536,7 @@ module Aws::SES
       :headers_in_bounce_notifications_enabled,
       :headers_in_complaint_notifications_enabled,
       :headers_in_delivery_notifications_enabled)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2485,6 +2557,7 @@ module Aws::SES
     class IdentityVerificationAttributes < Struct.new(
       :verification_status,
       :verification_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2504,6 +2577,7 @@ module Aws::SES
     class InvalidCloudWatchDestinationException < Struct.new(
       :configuration_set_name,
       :event_destination_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2536,6 +2610,7 @@ module Aws::SES
     class InvalidFirehoseDestinationException < Struct.new(
       :configuration_set_name,
       :event_destination_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2556,6 +2631,7 @@ module Aws::SES
     #
     class InvalidLambdaFunctionException < Struct.new(
       :function_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2577,6 +2653,7 @@ module Aws::SES
     #
     class InvalidRenderingParameterException < Struct.new(
       :template_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2597,6 +2674,7 @@ module Aws::SES
     #
     class InvalidS3ConfigurationException < Struct.new(
       :bucket)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2616,6 +2694,7 @@ module Aws::SES
     class InvalidSNSDestinationException < Struct.new(
       :configuration_set_name,
       :event_destination_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2636,6 +2715,7 @@ module Aws::SES
     #
     class InvalidSnsTopicException < Struct.new(
       :topic)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2650,6 +2730,7 @@ module Aws::SES
     #
     class InvalidTemplateException < Struct.new(
       :template_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2702,6 +2783,7 @@ module Aws::SES
     class KinesisFirehoseDestination < Struct.new(
       :iam_role_arn,
       :delivery_stream_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2779,6 +2861,7 @@ module Aws::SES
       :topic_arn,
       :function_arn,
       :invocation_type)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2826,6 +2909,7 @@ module Aws::SES
     class ListConfigurationSetsRequest < Struct.new(
       :next_token,
       :max_items)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2853,6 +2937,7 @@ module Aws::SES
     class ListConfigurationSetsResponse < Struct.new(
       :configuration_sets,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2892,6 +2977,7 @@ module Aws::SES
     class ListCustomVerificationEmailTemplatesRequest < Struct.new(
       :next_token,
       :max_results)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2914,6 +3000,7 @@ module Aws::SES
     class ListCustomVerificationEmailTemplatesResponse < Struct.new(
       :custom_verification_email_templates,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2951,6 +3038,7 @@ module Aws::SES
       :identity_type,
       :next_token,
       :max_items)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2970,6 +3058,7 @@ module Aws::SES
     class ListIdentitiesResponse < Struct.new(
       :identities,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3004,6 +3093,7 @@ module Aws::SES
     #
     class ListIdentityPoliciesRequest < Struct.new(
       :identity)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3018,6 +3108,7 @@ module Aws::SES
     #
     class ListIdentityPoliciesResponse < Struct.new(
       :policy_names)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3048,6 +3139,7 @@ module Aws::SES
     #
     class ListReceiptFiltersResponse < Struct.new(
       :filters)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3076,6 +3168,7 @@ module Aws::SES
     #
     class ListReceiptRuleSetsRequest < Struct.new(
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3099,6 +3192,7 @@ module Aws::SES
     class ListReceiptRuleSetsResponse < Struct.new(
       :rule_sets,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3127,6 +3221,7 @@ module Aws::SES
     class ListTemplatesRequest < Struct.new(
       :next_token,
       :max_items)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3146,6 +3241,7 @@ module Aws::SES
     class ListTemplatesResponse < Struct.new(
       :templates_metadata,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3160,6 +3256,7 @@ module Aws::SES
     #
     class ListVerifiedEmailAddressesResponse < Struct.new(
       :verified_email_addresses)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3212,6 +3309,7 @@ module Aws::SES
     class Message < Struct.new(
       :subject,
       :body)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3269,6 +3367,7 @@ module Aws::SES
       :reporting_mta,
       :arrival_date,
       :extension_fields)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3322,6 +3421,7 @@ module Aws::SES
     class MessageTag < Struct.new(
       :name,
       :value)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3337,6 +3437,7 @@ module Aws::SES
     #
     class MissingRenderingAttributeException < Struct.new(
       :template_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3373,6 +3474,7 @@ module Aws::SES
     class PutConfigurationSetDeliveryOptionsRequest < Struct.new(
       :configuration_set_name,
       :delivery_options)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3435,6 +3537,7 @@ module Aws::SES
       :identity,
       :policy_name,
       :policy)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3484,6 +3587,7 @@ module Aws::SES
     #
     class RawMessage < Struct.new(
       :data)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3583,6 +3687,7 @@ module Aws::SES
       :stop_action,
       :add_header_action,
       :sns_action)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3629,6 +3734,7 @@ module Aws::SES
     class ReceiptFilter < Struct.new(
       :name,
       :ip_filter)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3673,6 +3779,7 @@ module Aws::SES
     class ReceiptIpFilter < Struct.new(
       :policy,
       :cidr)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3789,6 +3896,7 @@ module Aws::SES
       :recipients,
       :actions,
       :scan_enabled)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3825,6 +3933,7 @@ module Aws::SES
     class ReceiptRuleSetMetadata < Struct.new(
       :name,
       :created_timestamp)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3938,6 +4047,7 @@ module Aws::SES
       :diagnostic_code,
       :last_attempt_date,
       :extension_fields)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3971,6 +4081,7 @@ module Aws::SES
     class ReorderReceiptRuleSetRequest < Struct.new(
       :rule_set_name,
       :rule_names)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4022,6 +4133,7 @@ module Aws::SES
       :sending_enabled,
       :reputation_metrics_enabled,
       :last_fresh_start)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4035,6 +4147,7 @@ module Aws::SES
     #
     class RuleDoesNotExistException < Struct.new(
       :name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4048,6 +4161,7 @@ module Aws::SES
     #
     class RuleSetDoesNotExistException < Struct.new(
       :name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4160,6 +4274,7 @@ module Aws::SES
       :bucket_name,
       :object_key_prefix,
       :kms_key_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4220,6 +4335,7 @@ module Aws::SES
     class SNSAction < Struct.new(
       :topic_arn,
       :encoding)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4257,6 +4373,7 @@ module Aws::SES
     #
     class SNSDestination < Struct.new(
       :topic_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4352,6 +4469,7 @@ module Aws::SES
       :message_dsn,
       :bounced_recipient_info_list,
       :bounce_sender_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4365,6 +4483,7 @@ module Aws::SES
     #
     class SendBounceResponse < Struct.new(
       :message_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4557,6 +4676,7 @@ module Aws::SES
       :template_arn,
       :default_template_data,
       :destinations)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4569,6 +4689,7 @@ module Aws::SES
     #
     class SendBulkTemplatedEmailResponse < Struct.new(
       :status)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4604,6 +4725,7 @@ module Aws::SES
       :email_address,
       :template_name,
       :configuration_set_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4619,6 +4741,7 @@ module Aws::SES
     #
     class SendCustomVerificationEmailResponse < Struct.new(
       :message_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4653,6 +4776,7 @@ module Aws::SES
       :bounces,
       :complaints,
       :rejects)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4829,6 +4953,7 @@ module Aws::SES
       :return_path_arn,
       :tags,
       :configuration_set_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4842,6 +4967,7 @@ module Aws::SES
     #
     class SendEmailResponse < Struct.new(
       :message_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5045,6 +5171,7 @@ module Aws::SES
       :return_path_arn,
       :tags,
       :configuration_set_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5059,6 +5186,7 @@ module Aws::SES
     #
     class SendRawEmailResponse < Struct.new(
       :message_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5235,6 +5363,7 @@ module Aws::SES
       :template,
       :template_arn,
       :template_data)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5247,6 +5376,7 @@ module Aws::SES
     #
     class SendTemplatedEmailResponse < Struct.new(
       :message_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5274,6 +5404,7 @@ module Aws::SES
     #
     class SetActiveReceiptRuleSetRequest < Struct.new(
       :rule_set_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5313,6 +5444,7 @@ module Aws::SES
     class SetIdentityDkimEnabledRequest < Struct.new(
       :identity,
       :dkim_enabled)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5360,6 +5492,7 @@ module Aws::SES
     class SetIdentityFeedbackForwardingEnabledRequest < Struct.new(
       :identity,
       :forwarding_enabled)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5414,6 +5547,7 @@ module Aws::SES
       :identity,
       :notification_type,
       :enabled)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5478,6 +5612,7 @@ module Aws::SES
       :identity,
       :mail_from_domain,
       :behavior_on_mx_failure)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5534,6 +5669,7 @@ module Aws::SES
       :identity,
       :notification_type,
       :sns_topic)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5581,6 +5717,7 @@ module Aws::SES
       :rule_set_name,
       :rule_name,
       :after)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5630,6 +5767,7 @@ module Aws::SES
     class StopAction < Struct.new(
       :scope,
       :topic_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5672,6 +5810,7 @@ module Aws::SES
       :subject_part,
       :text_part,
       :html_part)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5685,6 +5824,7 @@ module Aws::SES
     #
     class TemplateDoesNotExistException < Struct.new(
       :template_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5703,6 +5843,7 @@ module Aws::SES
     class TemplateMetadata < Struct.new(
       :name,
       :created_timestamp)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5730,6 +5871,7 @@ module Aws::SES
     class TestRenderTemplateRequest < Struct.new(
       :template_name,
       :template_data)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5743,6 +5885,7 @@ module Aws::SES
     #
     class TestRenderTemplateResponse < Struct.new(
       :rendered_template)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5773,6 +5916,7 @@ module Aws::SES
     #
     class TrackingOptions < Struct.new(
       :custom_redirect_domain)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5788,6 +5932,7 @@ module Aws::SES
     #
     class TrackingOptionsAlreadyExistsException < Struct.new(
       :configuration_set_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5803,6 +5948,7 @@ module Aws::SES
     #
     class TrackingOptionsDoesNotExistException < Struct.new(
       :configuration_set_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5825,6 +5971,7 @@ module Aws::SES
     #
     class UpdateAccountSendingEnabledRequest < Struct.new(
       :enabled)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5880,6 +6027,7 @@ module Aws::SES
     class UpdateConfigurationSetEventDestinationRequest < Struct.new(
       :configuration_set_name,
       :event_destination)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5915,6 +6063,7 @@ module Aws::SES
     class UpdateConfigurationSetReputationMetricsEnabledRequest < Struct.new(
       :configuration_set_name,
       :enabled)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5943,6 +6092,7 @@ module Aws::SES
     class UpdateConfigurationSetSendingEnabledRequest < Struct.new(
       :configuration_set_name,
       :enabled)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5982,6 +6132,7 @@ module Aws::SES
     class UpdateConfigurationSetTrackingOptionsRequest < Struct.new(
       :configuration_set_name,
       :tracking_options)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6050,6 +6201,7 @@ module Aws::SES
       :template_content,
       :success_redirection_url,
       :failure_redirection_url)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6126,6 +6278,7 @@ module Aws::SES
     class UpdateReceiptRuleRequest < Struct.new(
       :rule_set_name,
       :rule)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6156,6 +6309,7 @@ module Aws::SES
     #
     class UpdateTemplateRequest < Struct.new(
       :template)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6186,6 +6340,7 @@ module Aws::SES
     #
     class VerifyDomainDkimRequest < Struct.new(
       :domain)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6217,6 +6372,7 @@ module Aws::SES
     #
     class VerifyDomainDkimResponse < Struct.new(
       :dkim_tokens)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6244,6 +6400,7 @@ module Aws::SES
     #
     class VerifyDomainIdentityRequest < Struct.new(
       :domain)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6267,6 +6424,7 @@ module Aws::SES
     #
     class VerifyDomainIdentityResponse < Struct.new(
       :verification_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6293,6 +6451,7 @@ module Aws::SES
     #
     class VerifyEmailAddressRequest < Struct.new(
       :email_address)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6319,6 +6478,7 @@ module Aws::SES
     #
     class VerifyEmailIdentityRequest < Struct.new(
       :email_address)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6378,6 +6538,7 @@ module Aws::SES
     class WorkmailAction < Struct.new(
       :topic_arn,
       :organization_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 

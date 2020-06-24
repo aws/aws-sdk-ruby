@@ -90,6 +90,7 @@ module Aws::MediaLive
       :sample_rate,
       :spec,
       :vbr_quality)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -154,6 +155,7 @@ module Aws::MediaLive
       :drc_profile,
       :lfe_filter,
       :metadata_control)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -164,6 +166,7 @@ module Aws::MediaLive
     #
     class AccessDenied < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -243,6 +246,7 @@ module Aws::MediaLive
     #
     class ArchiveContainerSettings < Struct.new(
       :m2ts_settings)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -272,6 +276,7 @@ module Aws::MediaLive
     class ArchiveGroupSettings < Struct.new(
       :destination,
       :rollover_interval)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -367,6 +372,7 @@ module Aws::MediaLive
       :container_settings,
       :extension,
       :name_modifier)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -415,6 +421,7 @@ module Aws::MediaLive
     class AudioChannelMapping < Struct.new(
       :input_channel_levels,
       :output_channel)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -503,6 +510,7 @@ module Aws::MediaLive
       :eac_3_settings,
       :mp_2_settings,
       :pass_through_settings)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -662,6 +670,7 @@ module Aws::MediaLive
       :name,
       :remix_settings,
       :stream_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -695,6 +704,7 @@ module Aws::MediaLive
     class AudioLanguageSelection < Struct.new(
       :language_code,
       :language_selection_policy)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -733,6 +743,7 @@ module Aws::MediaLive
       :algorithm,
       :algorithm_control,
       :target_lkfs)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -790,6 +801,7 @@ module Aws::MediaLive
       :audio_only_image,
       :audio_track_type,
       :segment_type)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -810,6 +822,7 @@ module Aws::MediaLive
     #
     class AudioPidSelection < Struct.new(
       :pid)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -853,6 +866,7 @@ module Aws::MediaLive
     class AudioSelector < Struct.new(
       :name,
       :selector_settings)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -896,6 +910,7 @@ module Aws::MediaLive
       :audio_language_selection,
       :audio_pid_selection,
       :audio_track_selection)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -916,6 +931,7 @@ module Aws::MediaLive
     #
     class AudioTrack < Struct.new(
       :track)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -940,6 +956,7 @@ module Aws::MediaLive
     #
     class AudioTrackSelection < Struct.new(
       :tracks)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -968,6 +985,7 @@ module Aws::MediaLive
     class AutomaticInputFailoverSettings < Struct.new(
       :input_preference,
       :secondary_input_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1000,6 +1018,7 @@ module Aws::MediaLive
     class AvailBlanking < Struct.new(
       :avail_blanking_image,
       :state)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1031,6 +1050,7 @@ module Aws::MediaLive
     #
     class AvailConfiguration < Struct.new(
       :avail_settings)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1065,6 +1085,7 @@ module Aws::MediaLive
     class AvailSettings < Struct.new(
       :scte_35_splice_insert,
       :scte_35_time_signal_apos)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1075,6 +1096,7 @@ module Aws::MediaLive
     #
     class BadGatewayException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1085,6 +1107,7 @@ module Aws::MediaLive
     #
     class BadRequestException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1104,6 +1127,20 @@ module Aws::MediaLive
     #               },
     #               hls_timed_metadata_settings: {
     #                 id_3: "__string", # required
+    #               },
+    #               input_prepare_settings: {
+    #                 input_attachment_name_reference: "__string", # required
+    #                 input_clipping_settings: {
+    #                   input_timecode_source: "ZEROBASED", # required, accepts ZEROBASED, EMBEDDED
+    #                   start_timecode: {
+    #                     timecode: "__string",
+    #                   },
+    #                   stop_timecode: {
+    #                     last_frame_clipping_behavior: "EXCLUDE_LAST_FRAME", # accepts EXCLUDE_LAST_FRAME, INCLUDE_LAST_FRAME
+    #                     timecode: "__string",
+    #                   },
+    #                 },
+    #                 url_path: ["__string"],
     #               },
     #               input_switch_settings: {
     #                 input_attachment_name_reference: "__string", # required
@@ -1203,6 +1240,7 @@ module Aws::MediaLive
     #
     class BatchScheduleActionCreateRequest < Struct.new(
       :schedule_actions)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1216,6 +1254,7 @@ module Aws::MediaLive
     #
     class BatchScheduleActionCreateResult < Struct.new(
       :schedule_actions)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1236,6 +1275,7 @@ module Aws::MediaLive
     #
     class BatchScheduleActionDeleteRequest < Struct.new(
       :action_names)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1249,6 +1289,7 @@ module Aws::MediaLive
     #
     class BatchScheduleActionDeleteResult < Struct.new(
       :schedule_actions)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1271,6 +1312,20 @@ module Aws::MediaLive
     #                 },
     #                 hls_timed_metadata_settings: {
     #                   id_3: "__string", # required
+    #                 },
+    #                 input_prepare_settings: {
+    #                   input_attachment_name_reference: "__string", # required
+    #                   input_clipping_settings: {
+    #                     input_timecode_source: "ZEROBASED", # required, accepts ZEROBASED, EMBEDDED
+    #                     start_timecode: {
+    #                       timecode: "__string",
+    #                     },
+    #                     stop_timecode: {
+    #                       last_frame_clipping_behavior: "EXCLUDE_LAST_FRAME", # accepts EXCLUDE_LAST_FRAME, INCLUDE_LAST_FRAME
+    #                       timecode: "__string",
+    #                     },
+    #                   },
+    #                   url_path: ["__string"],
     #                 },
     #                 input_switch_settings: {
     #                   input_attachment_name_reference: "__string", # required
@@ -1383,6 +1438,7 @@ module Aws::MediaLive
       :channel_id,
       :creates,
       :deletes)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1399,6 +1455,7 @@ module Aws::MediaLive
     class BatchUpdateScheduleResponse < Struct.new(
       :creates,
       :deletes)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1417,6 +1474,7 @@ module Aws::MediaLive
     class BatchUpdateScheduleResult < Struct.new(
       :creates,
       :deletes)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1479,6 +1537,7 @@ module Aws::MediaLive
       :network_end_blackout_image,
       :network_id,
       :state)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1650,6 +1709,7 @@ module Aws::MediaLive
       :teletext_grid_control,
       :x_position,
       :y_position)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1767,6 +1827,7 @@ module Aws::MediaLive
       :language_code,
       :language_description,
       :name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1908,6 +1969,7 @@ module Aws::MediaLive
       :teletext_destination_settings,
       :ttml_destination_settings,
       :webvtt_destination_settings)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1944,6 +2006,7 @@ module Aws::MediaLive
       :caption_channel,
       :language_code,
       :language_description)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2002,6 +2065,7 @@ module Aws::MediaLive
       :language_code,
       :name,
       :selector_settings)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2067,6 +2131,7 @@ module Aws::MediaLive
       :scte_20_source_settings,
       :scte_27_source_settings,
       :teletext_source_settings)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2150,6 +2215,7 @@ module Aws::MediaLive
       :role_arn,
       :state,
       :tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2165,6 +2231,7 @@ module Aws::MediaLive
     class ChannelConfigurationValidationError < Struct.new(
       :message,
       :validation_errors)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2176,6 +2243,7 @@ module Aws::MediaLive
     #
     class ChannelEgressEndpoint < Struct.new(
       :source_ip)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2249,6 +2317,7 @@ module Aws::MediaLive
       :role_arn,
       :state,
       :tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2267,6 +2336,7 @@ module Aws::MediaLive
     #
     class ConflictException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2331,6 +2401,7 @@ module Aws::MediaLive
       :reserved,
       :role_arn,
       :tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2558,6 +2629,9 @@ module Aws::MediaLive
     #               name: "__string", # required
     #             },
     #           ],
+    #           feature_activations: {
+    #             input_prepare_schedule_actions: "DISABLED", # accepts DISABLED, ENABLED
+    #           },
     #           global_configuration: {
     #             initial_audio_gain: 1,
     #             input_end_action: "NONE", # accepts NONE, SWITCH_AND_LOOP_INPUTS
@@ -3219,6 +3293,7 @@ module Aws::MediaLive
       :reserved,
       :role_arn,
       :tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3229,6 +3304,7 @@ module Aws::MediaLive
     #
     class CreateChannelResponse < Struct.new(
       :channel)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3239,6 +3315,7 @@ module Aws::MediaLive
     #
     class CreateChannelResultModel < Struct.new(
       :channel)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3311,6 +3388,7 @@ module Aws::MediaLive
       :tags,
       :type,
       :vpc)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3408,6 +3486,7 @@ module Aws::MediaLive
       :tags,
       :type,
       :vpc)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3418,6 +3497,7 @@ module Aws::MediaLive
     #
     class CreateInputResponse < Struct.new(
       :input)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3428,6 +3508,7 @@ module Aws::MediaLive
     #
     class CreateInputResultModel < Struct.new(
       :input)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3456,6 +3537,7 @@ module Aws::MediaLive
     class CreateInputSecurityGroupRequest < Struct.new(
       :tags,
       :whitelist_rules)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3467,6 +3549,7 @@ module Aws::MediaLive
     #
     class CreateInputSecurityGroupResponse < Struct.new(
       :security_group)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3478,6 +3561,7 @@ module Aws::MediaLive
     #
     class CreateInputSecurityGroupResultModel < Struct.new(
       :security_group)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3511,6 +3595,7 @@ module Aws::MediaLive
       :name,
       :request_id,
       :tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3533,6 +3618,7 @@ module Aws::MediaLive
       :multiplex_program_settings,
       :program_name,
       :request_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3582,6 +3668,7 @@ module Aws::MediaLive
       :multiplex_program_settings,
       :program_name,
       :request_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3593,6 +3680,7 @@ module Aws::MediaLive
     #
     class CreateMultiplexProgramResponse < Struct.new(
       :multiplex_program)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3604,6 +3692,7 @@ module Aws::MediaLive
     #
     class CreateMultiplexProgramResultModel < Struct.new(
       :multiplex_program)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3651,6 +3740,7 @@ module Aws::MediaLive
       :name,
       :request_id,
       :tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3662,6 +3752,7 @@ module Aws::MediaLive
     #
     class CreateMultiplexResponse < Struct.new(
       :multiplex)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3673,6 +3764,7 @@ module Aws::MediaLive
     #
     class CreateMultiplexResultModel < Struct.new(
       :multiplex)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3697,6 +3789,7 @@ module Aws::MediaLive
     class CreateTagsRequest < Struct.new(
       :resource_arn,
       :tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3714,6 +3807,7 @@ module Aws::MediaLive
     #
     class DeleteChannelRequest < Struct.new(
       :channel_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3784,6 +3878,7 @@ module Aws::MediaLive
       :role_arn,
       :state,
       :tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3801,6 +3896,7 @@ module Aws::MediaLive
     #
     class DeleteInputRequest < Struct.new(
       :input_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3822,6 +3918,7 @@ module Aws::MediaLive
     #
     class DeleteInputSecurityGroupRequest < Struct.new(
       :input_security_group_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3848,6 +3945,7 @@ module Aws::MediaLive
     class DeleteMultiplexProgramRequest < Struct.new(
       :multiplex_id,
       :program_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3872,6 +3970,7 @@ module Aws::MediaLive
       :multiplex_program_settings,
       :packet_identifiers_map,
       :program_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3889,6 +3988,7 @@ module Aws::MediaLive
     #
     class DeleteMultiplexRequest < Struct.new(
       :multiplex_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3937,6 +4037,7 @@ module Aws::MediaLive
       :program_count,
       :state,
       :tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3954,6 +4055,7 @@ module Aws::MediaLive
     #
     class DeleteReservationRequest < Struct.new(
       :reservation_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4036,6 +4138,7 @@ module Aws::MediaLive
       :state,
       :tags,
       :usage_price)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4053,6 +4156,7 @@ module Aws::MediaLive
     #
     class DeleteScheduleRequest < Struct.new(
       :channel_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4079,6 +4183,7 @@ module Aws::MediaLive
     class DeleteTagsRequest < Struct.new(
       :resource_arn,
       :tag_keys)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4096,6 +4201,7 @@ module Aws::MediaLive
     #
     class DescribeChannelRequest < Struct.new(
       :channel_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4166,6 +4272,7 @@ module Aws::MediaLive
       :role_arn,
       :state,
       :tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4183,6 +4290,7 @@ module Aws::MediaLive
     #
     class DescribeInputDeviceRequest < Struct.new(
       :input_device_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4241,6 +4349,7 @@ module Aws::MediaLive
       :network_settings,
       :serial_number,
       :type)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4258,6 +4367,7 @@ module Aws::MediaLive
     #
     class DescribeInputRequest < Struct.new(
       :input_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4331,6 +4441,7 @@ module Aws::MediaLive
       :state,
       :tags,
       :type)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4348,6 +4459,7 @@ module Aws::MediaLive
     #
     class DescribeInputSecurityGroupRequest < Struct.new(
       :input_security_group_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4378,6 +4490,7 @@ module Aws::MediaLive
       :state,
       :tags,
       :whitelist_rules)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4400,6 +4513,7 @@ module Aws::MediaLive
     class DescribeMultiplexProgramRequest < Struct.new(
       :multiplex_id,
       :program_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4424,6 +4538,7 @@ module Aws::MediaLive
       :multiplex_program_settings,
       :packet_identifiers_map,
       :program_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4441,6 +4556,7 @@ module Aws::MediaLive
     #
     class DescribeMultiplexRequest < Struct.new(
       :multiplex_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4489,6 +4605,7 @@ module Aws::MediaLive
       :program_count,
       :state,
       :tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4506,6 +4623,7 @@ module Aws::MediaLive
     #
     class DescribeOfferingRequest < Struct.new(
       :offering_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4559,6 +4677,7 @@ module Aws::MediaLive
       :region,
       :resource_specification,
       :usage_price)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4576,6 +4695,7 @@ module Aws::MediaLive
     #
     class DescribeReservationRequest < Struct.new(
       :reservation_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4658,6 +4778,7 @@ module Aws::MediaLive
       :state,
       :tags,
       :usage_price)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4685,6 +4806,7 @@ module Aws::MediaLive
       :channel_id,
       :max_results,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4699,6 +4821,7 @@ module Aws::MediaLive
     class DescribeScheduleResponse < Struct.new(
       :next_token,
       :schedule_actions)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4733,6 +4856,7 @@ module Aws::MediaLive
       :network_id,
       :network_name,
       :rep_interval)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4781,6 +4905,7 @@ module Aws::MediaLive
       :rep_interval,
       :service_name,
       :service_provider_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4958,6 +5083,7 @@ module Aws::MediaLive
       :teletext_grid_control,
       :x_position,
       :y_position)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4980,6 +5106,7 @@ module Aws::MediaLive
     #
     class DvbSubSourceSettings < Struct.new(
       :pid)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5001,6 +5128,7 @@ module Aws::MediaLive
     #
     class DvbTdtSettings < Struct.new(
       :rep_interval)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5156,6 +5284,7 @@ module Aws::MediaLive
       :stereo_downmix,
       :surround_ex_mode,
       :surround_mode)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5215,6 +5344,7 @@ module Aws::MediaLive
       :scte_20_detection,
       :source_608_channel_number,
       :source_608_track_number)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5424,6 +5554,9 @@ module Aws::MediaLive
     #             name: "__string", # required
     #           },
     #         ],
+    #         feature_activations: {
+    #           input_prepare_schedule_actions: "DISABLED", # accepts DISABLED, ENABLED
+    #         },
     #         global_configuration: {
     #           initial_audio_gain: 1,
     #           input_end_action: "NONE", # accepts NONE, SWITCH_AND_LOOP_INPUTS
@@ -5948,6 +6081,10 @@ module Aws::MediaLive
     #   Settings for caption decriptions
     #   @return [Array<Types::CaptionDescription>]
     #
+    # @!attribute [rw] feature_activations
+    #   Feature Activations
+    #   @return [Types::FeatureActivations]
+    #
     # @!attribute [rw] global_configuration
     #   Configuration settings that apply to the event as a whole.
     #   @return [Types::GlobalConfiguration]
@@ -5975,11 +6112,37 @@ module Aws::MediaLive
       :avail_configuration,
       :blackout_slate,
       :caption_descriptions,
+      :feature_activations,
       :global_configuration,
       :nielsen_configuration,
       :output_groups,
       :timecode_config,
       :video_descriptions)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Feature Activations
+    #
+    # @note When making an API call, you may pass FeatureActivations
+    #   data as a hash:
+    #
+    #       {
+    #         input_prepare_schedule_actions: "DISABLED", # accepts DISABLED, ENABLED
+    #       }
+    #
+    # @!attribute [rw] input_prepare_schedule_actions
+    #   Enables the Input Prepare feature. You can create Input Prepare
+    #   actions in the schedule only if this feature is enabled. If you
+    #   disable the feature on an existing schedule, make sure that you
+    #   first delete all input prepare actions from the schedule.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/FeatureActivations AWS API Documentation
+    #
+    class FeatureActivations < Struct.new(
+      :input_prepare_schedule_actions)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6020,6 +6183,7 @@ module Aws::MediaLive
       :column_depth,
       :include_fec,
       :row_length)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6044,6 +6208,7 @@ module Aws::MediaLive
     #
     class FixedModeScheduleActionStartSettings < Struct.new(
       :time)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6081,6 +6246,7 @@ module Aws::MediaLive
       :audio_rendition_sets,
       :nielsen_id_3_behavior,
       :timed_metadata_behavior)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6108,6 +6274,7 @@ module Aws::MediaLive
     class FollowModeScheduleActionStartSettings < Struct.new(
       :follow_point,
       :reference_action_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6118,6 +6285,7 @@ module Aws::MediaLive
     #
     class ForbiddenException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6148,6 +6316,7 @@ module Aws::MediaLive
     #
     class FrameCaptureGroupSettings < Struct.new(
       :destination)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6169,6 +6338,7 @@ module Aws::MediaLive
     #
     class FrameCaptureOutputSettings < Struct.new(
       :name_modifier)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6197,6 +6367,7 @@ module Aws::MediaLive
     class FrameCaptureSettings < Struct.new(
       :capture_interval,
       :capture_interval_units)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6207,6 +6378,7 @@ module Aws::MediaLive
     #
     class GatewayTimeoutException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6282,6 +6454,7 @@ module Aws::MediaLive
       :output_locking_mode,
       :output_timing_source,
       :support_low_framerate_inputs)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6317,6 +6490,7 @@ module Aws::MediaLive
       :color_space_passthrough_settings,
       :rec_601_settings,
       :rec_709_settings)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6340,6 +6514,7 @@ module Aws::MediaLive
     #
     class H264FilterSettings < Struct.new(
       :temporal_filter_settings)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6700,6 +6875,7 @@ module Aws::MediaLive
       :syntax,
       :temporal_aq,
       :timecode_insertion)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6744,6 +6920,7 @@ module Aws::MediaLive
       :hdr_10_settings,
       :rec_601_settings,
       :rec_709_settings)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6985,6 +7162,7 @@ module Aws::MediaLive
       :slices,
       :tier,
       :timecode_insertion)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -7015,6 +7193,7 @@ module Aws::MediaLive
     class Hdr10Settings < Struct.new(
       :max_cll,
       :max_fall)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -7076,6 +7255,7 @@ module Aws::MediaLive
       :restart_delay,
       :salt,
       :token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -7117,6 +7297,7 @@ module Aws::MediaLive
       :filecache_duration,
       :num_retries,
       :restart_delay)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -7180,6 +7361,7 @@ module Aws::MediaLive
       :hls_basic_put_settings,
       :hls_media_store_settings,
       :hls_webdav_settings)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -7575,6 +7757,7 @@ module Aws::MediaLive
       :timed_metadata_id_3_period,
       :timestamp_delta_milliseconds,
       :ts_file_mode)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -7599,6 +7782,7 @@ module Aws::MediaLive
     #
     class HlsId3SegmentTaggingScheduleActionSettings < Struct.new(
       :tag)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -7645,6 +7829,7 @@ module Aws::MediaLive
       :buffer_segments,
       :retries,
       :retry_interval)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -7693,6 +7878,7 @@ module Aws::MediaLive
       :media_store_storage_class,
       :num_retries,
       :restart_delay)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -7773,6 +7959,7 @@ module Aws::MediaLive
       :hls_settings,
       :name_modifier,
       :segment_modifier)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -7839,6 +8026,7 @@ module Aws::MediaLive
       :audio_only_hls_settings,
       :fmp_4_hls_settings,
       :standard_hls_settings)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -7860,6 +8048,7 @@ module Aws::MediaLive
     #
     class HlsTimedMetadataScheduleActionSettings < Struct.new(
       :id_3)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -7907,6 +8096,7 @@ module Aws::MediaLive
       :http_transfer_mode,
       :num_retries,
       :restart_delay)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -8006,6 +8196,7 @@ module Aws::MediaLive
       :state,
       :tags,
       :type)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -8125,6 +8316,7 @@ module Aws::MediaLive
       :input_attachment_name,
       :input_id,
       :input_settings)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -8152,6 +8344,7 @@ module Aws::MediaLive
     class InputChannelLevel < Struct.new(
       :gain,
       :input_channel)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -8190,6 +8383,7 @@ module Aws::MediaLive
       :input_timecode_source,
       :start_timecode,
       :stop_timecode)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -8220,6 +8414,7 @@ module Aws::MediaLive
       :port,
       :url,
       :vpc)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -8240,6 +8435,7 @@ module Aws::MediaLive
     #
     class InputDestinationRequest < Struct.new(
       :stream_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -8258,6 +8454,7 @@ module Aws::MediaLive
     class InputDestinationVpc < Struct.new(
       :availability_zone,
       :network_interface_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -8321,6 +8518,7 @@ module Aws::MediaLive
       :network_settings,
       :serial_number,
       :type)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -8352,6 +8550,7 @@ module Aws::MediaLive
     class InputDeviceConfigurableSettings < Struct.new(
       :configured_input,
       :max_bitrate)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -8368,6 +8567,7 @@ module Aws::MediaLive
     class InputDeviceConfigurationValidationError < Struct.new(
       :message,
       :validation_errors)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -8420,6 +8620,7 @@ module Aws::MediaLive
       :max_bitrate,
       :scan_type,
       :width)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -8455,6 +8656,7 @@ module Aws::MediaLive
       :ip_address,
       :ip_scheme,
       :subnet_mask)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -8475,6 +8677,7 @@ module Aws::MediaLive
     #
     class InputDeviceRequest < Struct.new(
       :id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -8495,6 +8698,7 @@ module Aws::MediaLive
     #
     class InputDeviceSettings < Struct.new(
       :id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -8558,6 +8762,7 @@ module Aws::MediaLive
       :network_settings,
       :serial_number,
       :type)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -8597,6 +8802,7 @@ module Aws::MediaLive
       :password_param,
       :uri,
       :username)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -8655,6 +8861,55 @@ module Aws::MediaLive
       :input_loss_image_slate,
       :input_loss_image_type,
       :repeat_frame_msec)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Action to prepare an input for a future immediate input switch.
+    #
+    # @note When making an API call, you may pass InputPrepareScheduleActionSettings
+    #   data as a hash:
+    #
+    #       {
+    #         input_attachment_name_reference: "__string", # required
+    #         input_clipping_settings: {
+    #           input_timecode_source: "ZEROBASED", # required, accepts ZEROBASED, EMBEDDED
+    #           start_timecode: {
+    #             timecode: "__string",
+    #           },
+    #           stop_timecode: {
+    #             last_frame_clipping_behavior: "EXCLUDE_LAST_FRAME", # accepts EXCLUDE_LAST_FRAME, INCLUDE_LAST_FRAME
+    #             timecode: "__string",
+    #           },
+    #         },
+    #         url_path: ["__string"],
+    #       }
+    #
+    # @!attribute [rw] input_attachment_name_reference
+    #   The name of the input attachment that should be prepared by this
+    #   action. If no name is provided, the action will stop the most recent
+    #   prepare (if any) when activated.
+    #   @return [String]
+    #
+    # @!attribute [rw] input_clipping_settings
+    #   Settings to let you create a clip of the file input, in order to set
+    #   up the input to ingest only a portion of the file.
+    #   @return [Types::InputClippingSettings]
+    #
+    # @!attribute [rw] url_path
+    #   The value for the variable portion of the URL for the dynamic input,
+    #   for this instance of the input. Each time you use the same dynamic
+    #   input in an input switch action, you can provide a different value,
+    #   in order to connect the input to a different content source.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/InputPrepareScheduleActionSettings AWS API Documentation
+    #
+    class InputPrepareScheduleActionSettings < Struct.new(
+      :input_attachment_name_reference,
+      :input_clipping_settings,
+      :url_path)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -8693,6 +8948,7 @@ module Aws::MediaLive
       :state,
       :tags,
       :whitelist_rules)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -8711,6 +8967,7 @@ module Aws::MediaLive
     class InputSecurityGroupWhitelistRequest < Struct.new(
       :tags,
       :whitelist_rules)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -8867,6 +9124,7 @@ module Aws::MediaLive
       :smpte_2038_data_preference,
       :source_end_behavior,
       :video_selector)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -8891,6 +9149,7 @@ module Aws::MediaLive
       :password_param,
       :url,
       :username)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -8924,6 +9183,7 @@ module Aws::MediaLive
       :password_param,
       :url,
       :username)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -8954,6 +9214,7 @@ module Aws::MediaLive
       :codec,
       :maximum_bitrate,
       :resolution)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -9001,6 +9262,7 @@ module Aws::MediaLive
       :input_attachment_name_reference,
       :input_clipping_settings,
       :url_path)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -9034,6 +9296,7 @@ module Aws::MediaLive
     class InputVpcRequest < Struct.new(
       :security_group_ids,
       :subnet_ids)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -9047,6 +9310,7 @@ module Aws::MediaLive
     #
     class InputWhitelistRule < Struct.new(
       :cidr)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -9067,6 +9331,7 @@ module Aws::MediaLive
     #
     class InputWhitelistRuleCidr < Struct.new(
       :cidr)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -9077,6 +9342,7 @@ module Aws::MediaLive
     #
     class InternalServerErrorException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -9087,6 +9353,7 @@ module Aws::MediaLive
     #
     class InternalServiceError < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -9097,6 +9364,7 @@ module Aws::MediaLive
     #
     class InvalidRequest < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -9124,6 +9392,7 @@ module Aws::MediaLive
     #
     class KeyProviderSettings < Struct.new(
       :static_key_settings)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -9134,6 +9403,7 @@ module Aws::MediaLive
     #
     class LimitExceeded < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -9156,6 +9426,7 @@ module Aws::MediaLive
     class ListChannelsRequest < Struct.new(
       :max_results,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -9170,6 +9441,7 @@ module Aws::MediaLive
     class ListChannelsResponse < Struct.new(
       :channels,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -9184,6 +9456,7 @@ module Aws::MediaLive
     class ListChannelsResultModel < Struct.new(
       :channels,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -9206,6 +9479,7 @@ module Aws::MediaLive
     class ListInputDevicesRequest < Struct.new(
       :max_results,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -9220,6 +9494,7 @@ module Aws::MediaLive
     class ListInputDevicesResponse < Struct.new(
       :input_devices,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -9238,6 +9513,7 @@ module Aws::MediaLive
     class ListInputDevicesResultModel < Struct.new(
       :input_devices,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -9260,6 +9536,7 @@ module Aws::MediaLive
     class ListInputSecurityGroupsRequest < Struct.new(
       :max_results,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -9274,6 +9551,7 @@ module Aws::MediaLive
     class ListInputSecurityGroupsResponse < Struct.new(
       :input_security_groups,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -9291,6 +9569,7 @@ module Aws::MediaLive
     class ListInputSecurityGroupsResultModel < Struct.new(
       :input_security_groups,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -9313,6 +9592,7 @@ module Aws::MediaLive
     class ListInputsRequest < Struct.new(
       :max_results,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -9327,6 +9607,7 @@ module Aws::MediaLive
     class ListInputsResponse < Struct.new(
       :inputs,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -9341,6 +9622,7 @@ module Aws::MediaLive
     class ListInputsResultModel < Struct.new(
       :inputs,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -9368,6 +9650,7 @@ module Aws::MediaLive
       :max_results,
       :multiplex_id,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -9382,6 +9665,7 @@ module Aws::MediaLive
     class ListMultiplexProgramsResponse < Struct.new(
       :multiplex_programs,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -9398,6 +9682,7 @@ module Aws::MediaLive
     class ListMultiplexProgramsResultModel < Struct.new(
       :multiplex_programs,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -9420,6 +9705,7 @@ module Aws::MediaLive
     class ListMultiplexesRequest < Struct.new(
       :max_results,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -9434,6 +9720,7 @@ module Aws::MediaLive
     class ListMultiplexesResponse < Struct.new(
       :multiplexes,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -9450,6 +9737,7 @@ module Aws::MediaLive
     class ListMultiplexesResultModel < Struct.new(
       :multiplexes,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -9522,6 +9810,7 @@ module Aws::MediaLive
       :resource_type,
       :special_feature,
       :video_quality)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -9536,6 +9825,7 @@ module Aws::MediaLive
     class ListOfferingsResponse < Struct.new(
       :next_token,
       :offerings)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -9554,6 +9844,7 @@ module Aws::MediaLive
     class ListOfferingsResultModel < Struct.new(
       :next_token,
       :offerings)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -9616,6 +9907,7 @@ module Aws::MediaLive
       :resource_type,
       :special_feature,
       :video_quality)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -9630,6 +9922,7 @@ module Aws::MediaLive
     class ListReservationsResponse < Struct.new(
       :next_token,
       :reservations)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -9648,6 +9941,7 @@ module Aws::MediaLive
     class ListReservationsResultModel < Struct.new(
       :next_token,
       :reservations)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -9665,6 +9959,7 @@ module Aws::MediaLive
     #
     class ListTagsForResourceRequest < Struct.new(
       :resource_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -9675,6 +9970,7 @@ module Aws::MediaLive
     #
     class ListTagsForResourceResponse < Struct.new(
       :tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -10086,6 +10382,7 @@ module Aws::MediaLive
       :timed_metadata_pid,
       :transport_stream_id,
       :video_pid)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -10225,6 +10522,7 @@ module Aws::MediaLive
       :timed_metadata_pid,
       :transport_stream_id,
       :video_pid)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -10238,6 +10536,7 @@ module Aws::MediaLive
     #
     class MediaConnectFlow < Struct.new(
       :flow_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -10258,6 +10557,7 @@ module Aws::MediaLive
     #
     class MediaConnectFlowRequest < Struct.new(
       :flow_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -10280,6 +10580,7 @@ module Aws::MediaLive
     #
     class MediaPackageGroupSettings < Struct.new(
       :destination)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -10304,6 +10605,7 @@ module Aws::MediaLive
     #
     class MediaPackageOutputDestinationSettings < Struct.new(
       :channel_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -10345,6 +10647,7 @@ module Aws::MediaLive
       :bitrate,
       :coding_mode,
       :sample_rate)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -10506,6 +10809,7 @@ module Aws::MediaLive
       :stream_manifest_behavior,
       :timestamp_offset,
       :timestamp_offset_mode)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -10535,6 +10839,7 @@ module Aws::MediaLive
     class MsSmoothOutputSettings < Struct.new(
       :h265_packaging_type,
       :name_modifier)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -10593,6 +10898,7 @@ module Aws::MediaLive
       :program_count,
       :state,
       :tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -10609,6 +10915,7 @@ module Aws::MediaLive
     class MultiplexConfigurationValidationError < Struct.new(
       :message,
       :validation_errors)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -10630,6 +10937,7 @@ module Aws::MediaLive
     #
     class MultiplexMediaConnectOutputDestinationSettings < Struct.new(
       :entitlement_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -10643,6 +10951,7 @@ module Aws::MediaLive
     #
     class MultiplexOutputDestination < Struct.new(
       :media_connect_settings)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -10665,6 +10974,7 @@ module Aws::MediaLive
     #
     class MultiplexOutputSettings < Struct.new(
       :destination)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -10693,6 +11003,7 @@ module Aws::MediaLive
       :multiplex_program_settings,
       :packet_identifiers_map,
       :program_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -10725,6 +11036,7 @@ module Aws::MediaLive
     class MultiplexProgramChannelDestinationSettings < Struct.new(
       :multiplex_id,
       :program_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -10785,6 +11097,7 @@ module Aws::MediaLive
       :scte_35_pid,
       :timed_metadata_pid,
       :video_pid)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -10812,6 +11125,7 @@ module Aws::MediaLive
     class MultiplexProgramServiceDescriptor < Struct.new(
       :provider_name,
       :service_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -10861,6 +11175,7 @@ module Aws::MediaLive
       :program_number,
       :service_descriptor,
       :video_settings)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -10877,6 +11192,7 @@ module Aws::MediaLive
     class MultiplexProgramSummary < Struct.new(
       :channel_id,
       :program_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -10915,6 +11231,7 @@ module Aws::MediaLive
       :transport_stream_bitrate,
       :transport_stream_id,
       :transport_stream_reserved_bitrate)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -10928,6 +11245,7 @@ module Aws::MediaLive
     #
     class MultiplexSettingsSummary < Struct.new(
       :transport_stream_bitrate)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -10954,6 +11272,7 @@ module Aws::MediaLive
     class MultiplexStatmuxVideoSettings < Struct.new(
       :maximum_bitrate,
       :minimum_bitrate)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -11005,6 +11324,7 @@ module Aws::MediaLive
       :program_count,
       :state,
       :tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -11036,6 +11356,7 @@ module Aws::MediaLive
     class MultiplexVideoSettings < Struct.new(
       :constant_bitrate,
       :statmux_settings)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -11074,6 +11395,7 @@ module Aws::MediaLive
     class NetworkInputSettings < Struct.new(
       :hls_input_settings,
       :server_validation)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -11100,6 +11422,7 @@ module Aws::MediaLive
     class NielsenConfiguration < Struct.new(
       :distributor_id,
       :nielsen_pcm_to_id_3_tagging)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -11110,6 +11433,7 @@ module Aws::MediaLive
     #
     class NotFoundException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -11177,6 +11501,7 @@ module Aws::MediaLive
       :region,
       :resource_specification,
       :usage_price)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -11429,6 +11754,7 @@ module Aws::MediaLive
       :output_name,
       :output_settings,
       :video_description_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -11482,6 +11808,7 @@ module Aws::MediaLive
       :media_package_settings,
       :multiplex_settings,
       :settings)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -11518,6 +11845,7 @@ module Aws::MediaLive
       :stream_name,
       :url,
       :username)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -11910,6 +12238,7 @@ module Aws::MediaLive
       :name,
       :output_group_settings,
       :outputs)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -12107,6 +12436,7 @@ module Aws::MediaLive
       :multiplex_group_settings,
       :rtmp_group_settings,
       :udp_group_settings)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -12126,6 +12456,7 @@ module Aws::MediaLive
     #
     class OutputLocationRef < Struct.new(
       :destination_ref_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -12385,6 +12716,7 @@ module Aws::MediaLive
       :multiplex_output_settings,
       :rtmp_output_settings,
       :udp_output_settings)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -12416,6 +12748,7 @@ module Aws::MediaLive
     #
     class PauseStateScheduleActionSettings < Struct.new(
       :pipelines)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -12442,6 +12775,7 @@ module Aws::MediaLive
       :active_input_attachment_name,
       :active_input_switch_action_name,
       :pipeline_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -12462,6 +12796,7 @@ module Aws::MediaLive
     #
     class PipelinePauseStateSettings < Struct.new(
       :pipeline_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -12498,6 +12833,7 @@ module Aws::MediaLive
       :request_id,
       :start,
       :tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -12544,6 +12880,7 @@ module Aws::MediaLive
       :request_id,
       :start,
       :tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -12555,6 +12892,7 @@ module Aws::MediaLive
     #
     class PurchaseOfferingResponse < Struct.new(
       :reservation)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -12568,6 +12906,7 @@ module Aws::MediaLive
     #
     class PurchaseOfferingResultModel < Struct.new(
       :reservation)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -12628,6 +12967,7 @@ module Aws::MediaLive
       :channel_mappings,
       :channels_in,
       :channels_out)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -12732,6 +13072,7 @@ module Aws::MediaLive
       :state,
       :tags,
       :usage_price)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -12780,6 +13121,7 @@ module Aws::MediaLive
       :resource_type,
       :special_feature,
       :video_quality)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -12790,6 +13132,7 @@ module Aws::MediaLive
     #
     class ResourceConflict < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -12800,6 +13143,7 @@ module Aws::MediaLive
     #
     class ResourceNotFound < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -12875,6 +13219,7 @@ module Aws::MediaLive
       :caption_data,
       :input_loss_action,
       :restart_delay)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -12920,6 +13265,7 @@ module Aws::MediaLive
       :connection_retry_interval,
       :destination,
       :num_retries)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -12936,6 +13282,20 @@ module Aws::MediaLive
     #           },
     #           hls_timed_metadata_settings: {
     #             id_3: "__string", # required
+    #           },
+    #           input_prepare_settings: {
+    #             input_attachment_name_reference: "__string", # required
+    #             input_clipping_settings: {
+    #               input_timecode_source: "ZEROBASED", # required, accepts ZEROBASED, EMBEDDED
+    #               start_timecode: {
+    #                 timecode: "__string",
+    #               },
+    #               stop_timecode: {
+    #                 last_frame_clipping_behavior: "EXCLUDE_LAST_FRAME", # accepts EXCLUDE_LAST_FRAME, INCLUDE_LAST_FRAME
+    #                 timecode: "__string",
+    #               },
+    #             },
+    #             url_path: ["__string"],
     #           },
     #           input_switch_settings: {
     #             input_attachment_name_reference: "__string", # required
@@ -13048,6 +13408,7 @@ module Aws::MediaLive
       :action_name,
       :schedule_action_settings,
       :schedule_action_start_settings)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -13062,6 +13423,20 @@ module Aws::MediaLive
     #         },
     #         hls_timed_metadata_settings: {
     #           id_3: "__string", # required
+    #         },
+    #         input_prepare_settings: {
+    #           input_attachment_name_reference: "__string", # required
+    #           input_clipping_settings: {
+    #             input_timecode_source: "ZEROBASED", # required, accepts ZEROBASED, EMBEDDED
+    #             start_timecode: {
+    #               timecode: "__string",
+    #             },
+    #             stop_timecode: {
+    #               last_frame_clipping_behavior: "EXCLUDE_LAST_FRAME", # accepts EXCLUDE_LAST_FRAME, INCLUDE_LAST_FRAME
+    #               timecode: "__string",
+    #             },
+    #           },
+    #           url_path: ["__string"],
     #         },
     #         input_switch_settings: {
     #           input_attachment_name_reference: "__string", # required
@@ -13147,6 +13522,10 @@ module Aws::MediaLive
     #   Action to insert HLS metadata
     #   @return [Types::HlsTimedMetadataScheduleActionSettings]
     #
+    # @!attribute [rw] input_prepare_settings
+    #   Action to prepare an input for a future immediate input switch
+    #   @return [Types::InputPrepareScheduleActionSettings]
+    #
     # @!attribute [rw] input_switch_settings
     #   Action to switch the input
     #   @return [Types::InputSwitchScheduleActionSettings]
@@ -13180,6 +13559,7 @@ module Aws::MediaLive
     class ScheduleActionSettings < Struct.new(
       :hls_id_3_segment_tagging_settings,
       :hls_timed_metadata_settings,
+      :input_prepare_settings,
       :input_switch_settings,
       :pause_state_settings,
       :scte_35_return_to_network_settings,
@@ -13187,6 +13567,7 @@ module Aws::MediaLive
       :scte_35_time_signal_settings,
       :static_image_activate_settings,
       :static_image_deactivate_settings)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -13226,6 +13607,7 @@ module Aws::MediaLive
       :fixed_mode_schedule_action_start_settings,
       :follow_mode_schedule_action_start_settings,
       :immediate_mode_schedule_action_start_settings)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -13250,6 +13632,7 @@ module Aws::MediaLive
     class ScheduleDescribeResultModel < Struct.new(
       :next_token,
       :schedule_actions)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -13288,6 +13671,7 @@ module Aws::MediaLive
     class Scte20SourceSettings < Struct.new(
       :convert_608_to_708,
       :source_608_channel_number)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -13323,6 +13707,7 @@ module Aws::MediaLive
     #
     class Scte27SourceSettings < Struct.new(
       :pid)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -13364,6 +13749,7 @@ module Aws::MediaLive
       :device_restrictions,
       :no_regional_blackout_flag,
       :web_delivery_allowed_flag)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -13403,6 +13789,7 @@ module Aws::MediaLive
     #
     class Scte35Descriptor < Struct.new(
       :scte_35_descriptor_settings)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -13440,6 +13827,7 @@ module Aws::MediaLive
     #
     class Scte35DescriptorSettings < Struct.new(
       :segmentation_descriptor_scte_35_descriptor_settings)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -13461,6 +13849,7 @@ module Aws::MediaLive
     #
     class Scte35ReturnToNetworkScheduleActionSettings < Struct.new(
       :splice_event_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -13569,6 +13958,7 @@ module Aws::MediaLive
       :segments_expected,
       :sub_segment_num,
       :sub_segments_expected)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -13605,6 +13995,7 @@ module Aws::MediaLive
       :ad_avail_offset,
       :no_regional_blackout_flag,
       :web_delivery_allowed_flag)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -13638,6 +14029,7 @@ module Aws::MediaLive
     class Scte35SpliceInsertScheduleActionSettings < Struct.new(
       :duration,
       :splice_event_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -13674,6 +14066,7 @@ module Aws::MediaLive
       :ad_avail_offset,
       :no_regional_blackout_flag,
       :web_delivery_allowed_flag)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -13718,6 +14111,7 @@ module Aws::MediaLive
     #
     class Scte35TimeSignalScheduleActionSettings < Struct.new(
       :scte_35_descriptors)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -13772,6 +14166,7 @@ module Aws::MediaLive
     class StandardHlsSettings < Struct.new(
       :audio_rendition_sets,
       :m3u_8_settings)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -13789,6 +14184,7 @@ module Aws::MediaLive
     #
     class StartChannelRequest < Struct.new(
       :channel_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -13859,6 +14255,7 @@ module Aws::MediaLive
       :role_arn,
       :state,
       :tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -13876,6 +14273,7 @@ module Aws::MediaLive
     #
     class StartMultiplexRequest < Struct.new(
       :multiplex_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -13924,6 +14322,7 @@ module Aws::MediaLive
       :program_count,
       :state,
       :tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -13946,6 +14345,7 @@ module Aws::MediaLive
     #
     class StartTimecode < Struct.new(
       :timecode)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -14049,6 +14449,7 @@ module Aws::MediaLive
       :layer,
       :opacity,
       :width)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -14076,6 +14477,7 @@ module Aws::MediaLive
     class StaticImageDeactivateScheduleActionSettings < Struct.new(
       :fade_out,
       :layer)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -14106,6 +14508,7 @@ module Aws::MediaLive
     class StaticKeySettings < Struct.new(
       :key_provider_server,
       :static_key_value)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -14123,6 +14526,7 @@ module Aws::MediaLive
     #
     class StopChannelRequest < Struct.new(
       :channel_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -14193,6 +14597,7 @@ module Aws::MediaLive
       :role_arn,
       :state,
       :tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -14210,6 +14615,7 @@ module Aws::MediaLive
     #
     class StopMultiplexRequest < Struct.new(
       :multiplex_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -14258,6 +14664,7 @@ module Aws::MediaLive
       :program_count,
       :state,
       :tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -14288,6 +14695,7 @@ module Aws::MediaLive
     class StopTimecode < Struct.new(
       :last_frame_clipping_behavior,
       :timecode)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -14298,6 +14706,7 @@ module Aws::MediaLive
     #
     class TagsModel < Struct.new(
       :tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -14329,6 +14738,7 @@ module Aws::MediaLive
     #
     class TeletextSourceSettings < Struct.new(
       :page_number)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -14361,6 +14771,7 @@ module Aws::MediaLive
     class TemporalFilterSettings < Struct.new(
       :post_filter_sharpening,
       :strength)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -14396,6 +14807,7 @@ module Aws::MediaLive
     class TimecodeConfig < Struct.new(
       :source,
       :sync_threshold)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -14406,6 +14818,7 @@ module Aws::MediaLive
     #
     class TooManyRequestsException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -14428,6 +14841,7 @@ module Aws::MediaLive
     #
     class TtmlDestinationSettings < Struct.new(
       :style_control)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -14507,6 +14921,7 @@ module Aws::MediaLive
     #
     class UdpContainerSettings < Struct.new(
       :m2ts_settings)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -14546,6 +14961,7 @@ module Aws::MediaLive
       :input_loss_action,
       :timed_metadata_id_3_frame,
       :timed_metadata_id_3_period)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -14658,6 +15074,7 @@ module Aws::MediaLive
       :container_settings,
       :destination,
       :fec_output_settings)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -14672,6 +15089,7 @@ module Aws::MediaLive
     class UnprocessableEntityException < Struct.new(
       :message,
       :validation_errors)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -14715,6 +15133,7 @@ module Aws::MediaLive
       :log_level,
       :name,
       :role_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -14731,6 +15150,7 @@ module Aws::MediaLive
     class UpdateChannelClass < Struct.new(
       :channel_class,
       :destinations)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -14781,6 +15201,7 @@ module Aws::MediaLive
       :channel_class,
       :channel_id,
       :destinations)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -14791,6 +15212,7 @@ module Aws::MediaLive
     #
     class UpdateChannelClassResponse < Struct.new(
       :channel)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -15018,6 +15440,9 @@ module Aws::MediaLive
     #               name: "__string", # required
     #             },
     #           ],
+    #           feature_activations: {
+    #             input_prepare_schedule_actions: "DISABLED", # accepts DISABLED, ENABLED
+    #           },
     #           global_configuration: {
     #             initial_audio_gain: 1,
     #             input_end_action: "NONE", # accepts NONE, SWITCH_AND_LOOP_INPUTS
@@ -15658,6 +16083,7 @@ module Aws::MediaLive
       :log_level,
       :name,
       :role_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -15668,6 +16094,7 @@ module Aws::MediaLive
     #
     class UpdateChannelResponse < Struct.new(
       :channel)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -15680,6 +16107,7 @@ module Aws::MediaLive
     #
     class UpdateChannelResultModel < Struct.new(
       :channel)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -15728,6 +16156,7 @@ module Aws::MediaLive
       :name,
       :role_arn,
       :sources)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -15746,6 +16175,7 @@ module Aws::MediaLive
     class UpdateInputDevice < Struct.new(
       :hd_device_settings,
       :name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -15777,6 +16207,7 @@ module Aws::MediaLive
       :hd_device_settings,
       :input_device_id,
       :name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -15835,6 +16266,7 @@ module Aws::MediaLive
       :network_settings,
       :serial_number,
       :type)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -15905,6 +16337,7 @@ module Aws::MediaLive
       :name,
       :role_arn,
       :sources)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -15915,6 +16348,7 @@ module Aws::MediaLive
     #
     class UpdateInputResponse < Struct.new(
       :input)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -15925,6 +16359,7 @@ module Aws::MediaLive
     #
     class UpdateInputResultModel < Struct.new(
       :input)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -15958,6 +16393,7 @@ module Aws::MediaLive
       :input_security_group_id,
       :tags,
       :whitelist_rules)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -15969,6 +16405,7 @@ module Aws::MediaLive
     #
     class UpdateInputSecurityGroupResponse < Struct.new(
       :security_group)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -15980,6 +16417,7 @@ module Aws::MediaLive
     #
     class UpdateInputSecurityGroupResultModel < Struct.new(
       :security_group)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -15996,6 +16434,7 @@ module Aws::MediaLive
     class UpdateMultiplex < Struct.new(
       :multiplex_settings,
       :name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -16007,6 +16446,7 @@ module Aws::MediaLive
     #
     class UpdateMultiplexProgram < Struct.new(
       :multiplex_program_settings)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -16049,6 +16489,7 @@ module Aws::MediaLive
       :multiplex_id,
       :multiplex_program_settings,
       :program_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -16060,6 +16501,7 @@ module Aws::MediaLive
     #
     class UpdateMultiplexProgramResponse < Struct.new(
       :multiplex_program)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -16071,6 +16513,7 @@ module Aws::MediaLive
     #
     class UpdateMultiplexProgramResultModel < Struct.new(
       :multiplex_program)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -16104,6 +16547,7 @@ module Aws::MediaLive
       :multiplex_id,
       :multiplex_settings,
       :name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -16115,6 +16559,7 @@ module Aws::MediaLive
     #
     class UpdateMultiplexResponse < Struct.new(
       :multiplex)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -16126,6 +16571,7 @@ module Aws::MediaLive
     #
     class UpdateMultiplexResultModel < Struct.new(
       :multiplex)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -16139,6 +16585,7 @@ module Aws::MediaLive
     #
     class UpdateReservation < Struct.new(
       :name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -16161,6 +16608,7 @@ module Aws::MediaLive
     class UpdateReservationRequest < Struct.new(
       :name,
       :reservation_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -16172,6 +16620,7 @@ module Aws::MediaLive
     #
     class UpdateReservationResponse < Struct.new(
       :reservation)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -16185,6 +16634,7 @@ module Aws::MediaLive
     #
     class UpdateReservationResultModel < Struct.new(
       :reservation)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -16201,6 +16651,7 @@ module Aws::MediaLive
     class ValidationError < Struct.new(
       :element_path,
       :error_message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -16330,6 +16781,7 @@ module Aws::MediaLive
       :frame_capture_settings,
       :h264_settings,
       :h265_settings)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -16510,6 +16962,7 @@ module Aws::MediaLive
       :scaling_behavior,
       :sharpness,
       :width)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -16561,6 +17014,7 @@ module Aws::MediaLive
       :color_space,
       :color_space_usage,
       :selector_settings)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -16581,6 +17035,7 @@ module Aws::MediaLive
     #
     class VideoSelectorPid < Struct.new(
       :pid)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -16603,6 +17058,7 @@ module Aws::MediaLive
     #
     class VideoSelectorProgramId < Struct.new(
       :program_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -16633,6 +17089,7 @@ module Aws::MediaLive
     class VideoSelectorSettings < Struct.new(
       :video_selector_pid,
       :video_selector_program_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 

@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.49.0 (2020-06-23)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.48.0 (2020-06-19)
+------------------
+
+* Feature - AWS Elemental MediaLive now supports Input Prepare schedule actions. This feature improves existing input switching by allowing users to prepare an input prior to switching to it.
+
 1.47.1 (2020-06-11)
 ------------------
 

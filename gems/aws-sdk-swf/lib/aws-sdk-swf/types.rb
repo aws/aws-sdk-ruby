@@ -47,6 +47,7 @@ module Aws::SWF
       :workflow_execution,
       :activity_type,
       :input)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -67,6 +68,7 @@ module Aws::SWF
     class ActivityTaskCancelRequestedEventAttributes < Struct.new(
       :decision_task_completed_event_id,
       :activity_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -102,6 +104,7 @@ module Aws::SWF
       :scheduled_event_id,
       :started_event_id,
       :latest_cancel_requested_event_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -129,6 +132,7 @@ module Aws::SWF
       :result,
       :scheduled_event_id,
       :started_event_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -161,6 +165,7 @@ module Aws::SWF
       :details,
       :scheduled_event_id,
       :started_event_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -245,6 +250,7 @@ module Aws::SWF
       :task_priority,
       :decision_task_completed_event_id,
       :heartbeat_timeout)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -266,6 +272,7 @@ module Aws::SWF
     class ActivityTaskStartedEventAttributes < Struct.new(
       :identity,
       :scheduled_event_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -277,6 +284,7 @@ module Aws::SWF
     #
     class ActivityTaskStatus < Struct.new(
       :cancel_requested)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -310,6 +318,7 @@ module Aws::SWF
       :scheduled_event_id,
       :started_event_id,
       :details)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -344,6 +353,7 @@ module Aws::SWF
     class ActivityType < Struct.new(
       :name,
       :version)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -428,6 +438,7 @@ module Aws::SWF
       :default_task_priority,
       :default_task_schedule_to_start_timeout,
       :default_task_schedule_to_close_timeout)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -455,6 +466,7 @@ module Aws::SWF
     class ActivityTypeDetail < Struct.new(
       :type_info,
       :configuration)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -488,6 +500,7 @@ module Aws::SWF
       :description,
       :creation_date,
       :deprecation_date)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -510,6 +523,7 @@ module Aws::SWF
     class ActivityTypeInfos < Struct.new(
       :type_infos,
       :next_page_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -552,6 +566,7 @@ module Aws::SWF
     #
     class CancelTimerDecisionAttributes < Struct.new(
       :timer_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -588,6 +603,7 @@ module Aws::SWF
       :timer_id,
       :cause,
       :decision_task_completed_event_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -630,6 +646,7 @@ module Aws::SWF
     #
     class CancelWorkflowExecutionDecisionAttributes < Struct.new(
       :details)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -662,6 +679,7 @@ module Aws::SWF
     class CancelWorkflowExecutionFailedEventAttributes < Struct.new(
       :cause,
       :decision_task_completed_event_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -700,6 +718,7 @@ module Aws::SWF
       :details,
       :initiated_event_id,
       :started_event_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -738,6 +757,7 @@ module Aws::SWF
       :result,
       :initiated_event_id,
       :started_event_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -781,6 +801,7 @@ module Aws::SWF
       :details,
       :initiated_event_id,
       :started_event_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -806,6 +827,7 @@ module Aws::SWF
       :workflow_execution,
       :workflow_type,
       :initiated_event_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -839,6 +861,7 @@ module Aws::SWF
       :workflow_type,
       :initiated_event_id,
       :started_event_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -878,6 +901,7 @@ module Aws::SWF
       :timeout_type,
       :initiated_event_id,
       :started_event_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -898,6 +922,7 @@ module Aws::SWF
     #
     class CloseStatusFilter < Struct.new(
       :status)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -941,6 +966,7 @@ module Aws::SWF
     #
     class CompleteWorkflowExecutionDecisionAttributes < Struct.new(
       :result)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -973,6 +999,7 @@ module Aws::SWF
     class CompleteWorkflowExecutionFailedEventAttributes < Struct.new(
       :cause,
       :decision_task_completed_event_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1139,6 +1166,7 @@ module Aws::SWF
       :tag_list,
       :workflow_type_version,
       :lambda_role)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1172,6 +1200,7 @@ module Aws::SWF
     class ContinueAsNewWorkflowExecutionFailedEventAttributes < Struct.new(
       :cause,
       :decision_task_completed_event_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1280,6 +1309,7 @@ module Aws::SWF
       :type_filter,
       :tag_filter,
       :close_status_filter)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1348,6 +1378,7 @@ module Aws::SWF
       :type_filter,
       :tag_filter,
       :execution_filter)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1372,6 +1403,7 @@ module Aws::SWF
     class CountPendingActivityTasksInput < Struct.new(
       :domain,
       :task_list)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1396,6 +1428,7 @@ module Aws::SWF
     class CountPendingDecisionTasksInput < Struct.new(
       :domain,
       :task_list)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1765,6 +1798,7 @@ module Aws::SWF
       :request_cancel_external_workflow_execution_decision_attributes,
       :start_child_workflow_execution_decision_attributes,
       :schedule_lambda_function_decision_attributes)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1820,6 +1854,7 @@ module Aws::SWF
       :events,
       :next_page_token,
       :previous_started_event_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1847,6 +1882,7 @@ module Aws::SWF
       :execution_context,
       :scheduled_event_id,
       :started_event_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1882,6 +1918,7 @@ module Aws::SWF
       :task_list,
       :task_priority,
       :start_to_close_timeout)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1903,6 +1940,7 @@ module Aws::SWF
     class DecisionTaskStartedEventAttributes < Struct.new(
       :identity,
       :scheduled_event_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1931,6 +1969,7 @@ module Aws::SWF
       :timeout_type,
       :scheduled_event_id,
       :started_event_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1954,6 +1993,7 @@ module Aws::SWF
     #
     class DefaultUndefinedFault < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1979,6 +2019,7 @@ module Aws::SWF
     class DeprecateActivityTypeInput < Struct.new(
       :domain,
       :activity_type)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1995,6 +2036,7 @@ module Aws::SWF
     #
     class DeprecateDomainInput < Struct.new(
       :name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2020,6 +2062,7 @@ module Aws::SWF
     class DeprecateWorkflowTypeInput < Struct.new(
       :domain,
       :workflow_type)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2047,6 +2090,7 @@ module Aws::SWF
     class DescribeActivityTypeInput < Struct.new(
       :domain,
       :activity_type)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2063,6 +2107,7 @@ module Aws::SWF
     #
     class DescribeDomainInput < Struct.new(
       :name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2088,6 +2133,7 @@ module Aws::SWF
     class DescribeWorkflowExecutionInput < Struct.new(
       :domain,
       :execution)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2113,6 +2159,7 @@ module Aws::SWF
     class DescribeWorkflowTypeInput < Struct.new(
       :domain,
       :workflow_type)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2127,6 +2174,7 @@ module Aws::SWF
     #
     class DomainAlreadyExistsFault < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2138,6 +2186,7 @@ module Aws::SWF
     #
     class DomainConfiguration < Struct.new(
       :workflow_execution_retention_period_in_days)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2149,6 +2198,7 @@ module Aws::SWF
     #
     class DomainDeprecatedFault < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2167,6 +2217,7 @@ module Aws::SWF
     class DomainDetail < Struct.new(
       :domain_info,
       :configuration)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2201,6 +2252,7 @@ module Aws::SWF
       :status,
       :description,
       :arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2223,6 +2275,7 @@ module Aws::SWF
     class DomainInfos < Struct.new(
       :domain_infos,
       :next_page_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2255,6 +2308,7 @@ module Aws::SWF
     class ExecutionTimeFilter < Struct.new(
       :oldest_date,
       :latest_date)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2277,6 +2331,7 @@ module Aws::SWF
     class ExternalWorkflowExecutionCancelRequestedEventAttributes < Struct.new(
       :workflow_execution,
       :initiated_event_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2297,6 +2352,7 @@ module Aws::SWF
     class ExternalWorkflowExecutionSignaledEventAttributes < Struct.new(
       :workflow_execution,
       :initiated_event_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2345,6 +2401,7 @@ module Aws::SWF
     class FailWorkflowExecutionDecisionAttributes < Struct.new(
       :reason,
       :details)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2377,6 +2434,7 @@ module Aws::SWF
     class FailWorkflowExecutionFailedEventAttributes < Struct.new(
       :cause,
       :decision_task_completed_event_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2432,6 +2490,7 @@ module Aws::SWF
       :next_page_token,
       :maximum_page_size,
       :reverse_order)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2457,6 +2516,7 @@ module Aws::SWF
     class History < Struct.new(
       :events,
       :next_page_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3007,6 +3067,7 @@ module Aws::SWF
       :lambda_function_timed_out_event_attributes,
       :schedule_lambda_function_failed_event_attributes,
       :start_lambda_function_failed_event_attributes)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3034,6 +3095,7 @@ module Aws::SWF
       :scheduled_event_id,
       :started_event_id,
       :result)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3066,6 +3128,7 @@ module Aws::SWF
       :started_event_id,
       :reason,
       :details)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3108,6 +3171,7 @@ module Aws::SWF
       :input,
       :start_to_close_timeout,
       :decision_task_completed_event_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3123,6 +3187,7 @@ module Aws::SWF
     #
     class LambdaFunctionStartedEventAttributes < Struct.new(
       :scheduled_event_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3150,6 +3215,7 @@ module Aws::SWF
       :scheduled_event_id,
       :started_event_id,
       :timeout_type)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3163,6 +3229,7 @@ module Aws::SWF
     #
     class LimitExceededFault < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3222,6 +3289,7 @@ module Aws::SWF
       :next_page_token,
       :maximum_page_size,
       :reverse_order)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3364,6 +3432,7 @@ module Aws::SWF
       :next_page_token,
       :maximum_page_size,
       :reverse_order)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3410,6 +3479,7 @@ module Aws::SWF
       :registration_status,
       :maximum_page_size,
       :reverse_order)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3510,6 +3580,7 @@ module Aws::SWF
       :maximum_page_size,
       :reverse_order,
       :execution_filter)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3526,6 +3597,7 @@ module Aws::SWF
     #
     class ListTagsForResourceInput < Struct.new(
       :resource_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3535,6 +3607,7 @@ module Aws::SWF
     #
     class ListTagsForResourceOutput < Struct.new(
       :tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3594,6 +3667,7 @@ module Aws::SWF
       :next_page_token,
       :maximum_page_size,
       :reverse_order)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3619,6 +3693,7 @@ module Aws::SWF
       :marker_name,
       :details,
       :decision_task_completed_event_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3631,6 +3706,7 @@ module Aws::SWF
     #
     class OperationNotPermittedFault < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3649,6 +3725,7 @@ module Aws::SWF
     class PendingTaskCount < Struct.new(
       :count,
       :truncated)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3687,6 +3764,7 @@ module Aws::SWF
       :domain,
       :task_list,
       :identity)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3766,6 +3844,7 @@ module Aws::SWF
       :next_page_token,
       :maximum_page_size,
       :reverse_order)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3793,6 +3872,7 @@ module Aws::SWF
     class RecordActivityTaskHeartbeatInput < Struct.new(
       :task_token,
       :details)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3841,6 +3921,7 @@ module Aws::SWF
     class RecordMarkerDecisionAttributes < Struct.new(
       :marker_name,
       :details)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3878,6 +3959,7 @@ module Aws::SWF
       :marker_name,
       :cause,
       :decision_task_completed_event_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4008,6 +4090,7 @@ module Aws::SWF
       :default_task_priority,
       :default_task_schedule_to_start_timeout,
       :default_task_schedule_to_close_timeout)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4071,6 +4154,7 @@ module Aws::SWF
       :description,
       :workflow_execution_retention_period_in_days,
       :tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4221,6 +4305,7 @@ module Aws::SWF
       :default_task_priority,
       :default_child_policy,
       :default_lambda_role)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4263,6 +4348,7 @@ module Aws::SWF
     #
     class RequestCancelActivityTaskDecisionAttributes < Struct.new(
       :activity_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4301,6 +4387,7 @@ module Aws::SWF
       :activity_id,
       :cause,
       :decision_task_completed_event_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4357,6 +4444,7 @@ module Aws::SWF
       :workflow_id,
       :run_id,
       :control)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4418,6 +4506,7 @@ module Aws::SWF
       :initiated_event_id,
       :decision_task_completed_event_id,
       :control)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4451,6 +4540,7 @@ module Aws::SWF
       :run_id,
       :decision_task_completed_event_id,
       :control)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4479,6 +4569,7 @@ module Aws::SWF
       :domain,
       :workflow_id,
       :run_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4507,6 +4598,7 @@ module Aws::SWF
     class ResourceTag < Struct.new(
       :key,
       :value)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4534,6 +4626,7 @@ module Aws::SWF
     class RespondActivityTaskCanceledInput < Struct.new(
       :task_token,
       :details)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4562,6 +4655,7 @@ module Aws::SWF
     class RespondActivityTaskCompletedInput < Struct.new(
       :task_token,
       :result)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4595,6 +4689,7 @@ module Aws::SWF
       :task_token,
       :reason,
       :details)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4728,6 +4823,7 @@ module Aws::SWF
       :task_token,
       :decisions,
       :execution_context)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4741,6 +4837,7 @@ module Aws::SWF
     #
     class Run < Struct.new(
       :run_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4928,6 +5025,7 @@ module Aws::SWF
       :schedule_to_start_timeout,
       :start_to_close_timeout,
       :heartbeat_timeout)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4971,6 +5069,7 @@ module Aws::SWF
       :activity_id,
       :cause,
       :decision_task_completed_event_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5020,6 +5119,7 @@ module Aws::SWF
       :control,
       :input,
       :start_to_close_timeout)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5064,6 +5164,7 @@ module Aws::SWF
       :name,
       :cause,
       :decision_task_completed_event_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5134,6 +5235,7 @@ module Aws::SWF
       :signal_name,
       :input,
       :control)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5195,6 +5297,7 @@ module Aws::SWF
       :initiated_event_id,
       :decision_task_completed_event_id,
       :control)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5238,6 +5341,7 @@ module Aws::SWF
       :input,
       :decision_task_completed_event_id,
       :control)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5280,6 +5384,7 @@ module Aws::SWF
       :run_id,
       :signal_name,
       :input)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5485,6 +5590,7 @@ module Aws::SWF
       :child_policy,
       :tag_list,
       :lambda_role)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5549,6 +5655,7 @@ module Aws::SWF
       :initiated_event_id,
       :decision_task_completed_event_id,
       :control)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5655,6 +5762,7 @@ module Aws::SWF
       :task_start_to_close_timeout,
       :tag_list,
       :lambda_role)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5693,6 +5801,7 @@ module Aws::SWF
       :scheduled_event_id,
       :cause,
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5756,6 +5865,7 @@ module Aws::SWF
       :timer_id,
       :control,
       :start_to_fire_timeout)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5793,6 +5903,7 @@ module Aws::SWF
       :timer_id,
       :cause,
       :decision_task_completed_event_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5983,6 +6094,7 @@ module Aws::SWF
       :task_start_to_close_timeout,
       :child_policy,
       :lambda_role)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6006,6 +6118,7 @@ module Aws::SWF
     #
     class TagFilter < Struct.new(
       :tag)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6036,6 +6149,7 @@ module Aws::SWF
     class TagResourceInput < Struct.new(
       :resource_arn,
       :tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6054,6 +6168,7 @@ module Aws::SWF
     #
     class TaskList < Struct.new(
       :name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6122,6 +6237,7 @@ module Aws::SWF
       :reason,
       :details,
       :child_policy)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6148,6 +6264,7 @@ module Aws::SWF
       :timer_id,
       :started_event_id,
       :decision_task_completed_event_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6166,6 +6283,7 @@ module Aws::SWF
     class TimerFiredEventAttributes < Struct.new(
       :timer_id,
       :started_event_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6200,6 +6318,7 @@ module Aws::SWF
       :control,
       :start_to_fire_timeout,
       :decision_task_completed_event_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6210,6 +6329,7 @@ module Aws::SWF
     #
     class TooManyTagsFault < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6224,6 +6344,7 @@ module Aws::SWF
     #
     class TypeAlreadyExistsFault < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6236,6 +6357,7 @@ module Aws::SWF
     #
     class TypeDeprecatedFault < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6261,6 +6383,7 @@ module Aws::SWF
     class UndeprecateActivityTypeInput < Struct.new(
       :domain,
       :activity_type)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6277,6 +6400,7 @@ module Aws::SWF
     #
     class UndeprecateDomainInput < Struct.new(
       :name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6302,6 +6426,7 @@ module Aws::SWF
     class UndeprecateWorkflowTypeInput < Struct.new(
       :domain,
       :workflow_type)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6316,6 +6441,7 @@ module Aws::SWF
     #
     class UnknownResourceFault < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6338,6 +6464,7 @@ module Aws::SWF
     class UntagResourceInput < Struct.new(
       :resource_arn,
       :tag_keys)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6362,6 +6489,7 @@ module Aws::SWF
     class WorkflowExecution < Struct.new(
       :workflow_id,
       :run_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6374,6 +6502,7 @@ module Aws::SWF
     #
     class WorkflowExecutionAlreadyStartedFault < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6404,6 +6533,7 @@ module Aws::SWF
       :external_workflow_execution,
       :external_initiated_event_id,
       :cause)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6424,6 +6554,7 @@ module Aws::SWF
     class WorkflowExecutionCanceledEventAttributes < Struct.new(
       :details,
       :decision_task_completed_event_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6445,6 +6576,7 @@ module Aws::SWF
     class WorkflowExecutionCompletedEventAttributes < Struct.new(
       :result,
       :decision_task_completed_event_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6516,6 +6648,7 @@ module Aws::SWF
       :task_priority,
       :child_policy,
       :lambda_role)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6605,6 +6738,7 @@ module Aws::SWF
       :tag_list,
       :workflow_type,
       :lambda_role)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6624,6 +6758,7 @@ module Aws::SWF
     class WorkflowExecutionCount < Struct.new(
       :count,
       :truncated)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6663,6 +6798,7 @@ module Aws::SWF
       :open_counts,
       :latest_activity_task_timestamp,
       :latest_execution_context)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6688,6 +6824,7 @@ module Aws::SWF
       :reason,
       :details,
       :decision_task_completed_event_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6707,6 +6844,7 @@ module Aws::SWF
     #
     class WorkflowExecutionFilter < Struct.new(
       :workflow_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6782,6 +6920,7 @@ module Aws::SWF
       :parent,
       :tag_list,
       :cancel_requested)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6804,6 +6943,7 @@ module Aws::SWF
     class WorkflowExecutionInfos < Struct.new(
       :execution_infos,
       :next_page_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6838,6 +6978,7 @@ module Aws::SWF
       :open_timers,
       :open_child_workflow_executions,
       :open_lambda_functions)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6873,6 +7014,7 @@ module Aws::SWF
       :input,
       :external_workflow_execution,
       :external_initiated_event_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6971,6 +7113,7 @@ module Aws::SWF
       :parent_workflow_execution,
       :parent_initiated_event_id,
       :lambda_role)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -7013,6 +7156,7 @@ module Aws::SWF
       :details,
       :child_policy,
       :cause)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -7042,6 +7186,7 @@ module Aws::SWF
     class WorkflowExecutionTimedOutEventAttributes < Struct.new(
       :timeout_type,
       :child_policy)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -7076,6 +7221,7 @@ module Aws::SWF
     class WorkflowType < Struct.new(
       :name,
       :version)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -7179,6 +7325,7 @@ module Aws::SWF
       :default_task_priority,
       :default_child_policy,
       :default_lambda_role)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -7207,6 +7354,7 @@ module Aws::SWF
     class WorkflowTypeDetail < Struct.new(
       :type_info,
       :configuration)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -7233,6 +7381,7 @@ module Aws::SWF
     class WorkflowTypeFilter < Struct.new(
       :name,
       :version)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -7265,6 +7414,7 @@ module Aws::SWF
       :description,
       :creation_date,
       :deprecation_date)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -7288,6 +7438,7 @@ module Aws::SWF
     class WorkflowTypeInfos < Struct.new(
       :type_infos,
       :next_page_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 

@@ -25,6 +25,7 @@ module Aws::WorkMailMessageFlow
     #
     class GetRawMessageContentRequest < Struct.new(
       :message_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -36,6 +37,7 @@ module Aws::WorkMailMessageFlow
     #
     class GetRawMessageContentResponse < Struct.new(
       :message_content)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -48,6 +50,7 @@ module Aws::WorkMailMessageFlow
     #
     class ResourceNotFoundException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 

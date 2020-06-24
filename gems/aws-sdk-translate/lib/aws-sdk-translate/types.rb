@@ -33,6 +33,7 @@ module Aws::Translate
     class AppliedTerminology < Struct.new(
       :name,
       :terms)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -51,6 +52,7 @@ module Aws::Translate
     #
     class DeleteTerminologyRequest < Struct.new(
       :name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -71,6 +73,7 @@ module Aws::Translate
     #
     class DescribeTextTranslationJobRequest < Struct.new(
       :job_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -83,6 +86,7 @@ module Aws::Translate
     #
     class DescribeTextTranslationJobResponse < Struct.new(
       :text_translation_job_properties)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -110,6 +114,7 @@ module Aws::Translate
     class DetectedLanguageLowConfidenceException < Struct.new(
       :message,
       :detected_language_code)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -139,6 +144,7 @@ module Aws::Translate
     class EncryptionKey < Struct.new(
       :type,
       :id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -164,6 +170,7 @@ module Aws::Translate
     class GetTerminologyRequest < Struct.new(
       :name,
       :terminology_data_format)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -182,6 +189,7 @@ module Aws::Translate
     class GetTerminologyResponse < Struct.new(
       :terminology_properties,
       :terminology_data_location)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -233,6 +241,7 @@ module Aws::Translate
       :description,
       :terminology_data,
       :encryption_key)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -244,6 +253,7 @@ module Aws::Translate
     #
     class ImportTerminologyResponse < Struct.new(
       :terminology_properties)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -275,6 +285,7 @@ module Aws::Translate
     class InputDataConfig < Struct.new(
       :s3_uri,
       :content_type)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -287,6 +298,7 @@ module Aws::Translate
     #
     class InternalServerException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -300,6 +312,7 @@ module Aws::Translate
     #
     class InvalidFilterException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -313,6 +326,7 @@ module Aws::Translate
     #
     class InvalidParameterValueException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -326,6 +340,7 @@ module Aws::Translate
     #
     class InvalidRequestException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -352,6 +367,7 @@ module Aws::Translate
       :translated_documents_count,
       :documents_with_errors_count,
       :input_documents_count)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -365,6 +381,7 @@ module Aws::Translate
     #
     class LimitExceededException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -392,6 +409,7 @@ module Aws::Translate
     class ListTerminologiesRequest < Struct.new(
       :next_token,
       :max_results)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -410,6 +428,7 @@ module Aws::Translate
     class ListTerminologiesResponse < Struct.new(
       :terminology_properties_list,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -448,6 +467,7 @@ module Aws::Translate
       :filter,
       :next_token,
       :max_results)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -465,6 +485,7 @@ module Aws::Translate
     class ListTextTranslationJobsResponse < Struct.new(
       :text_translation_job_properties_list,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -487,6 +508,7 @@ module Aws::Translate
     #
     class OutputDataConfig < Struct.new(
       :s3_uri)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -501,6 +523,7 @@ module Aws::Translate
     #
     class ResourceNotFoundException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -514,6 +537,7 @@ module Aws::Translate
     #
     class ServiceUnavailableException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -599,6 +623,7 @@ module Aws::Translate
       :target_language_codes,
       :terminology_names,
       :client_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -635,6 +660,7 @@ module Aws::Translate
     class StartTextTranslationJobResponse < Struct.new(
       :job_id,
       :job_status)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -653,6 +679,7 @@ module Aws::Translate
     #
     class StopTextTranslationJobRequest < Struct.new(
       :job_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -670,6 +697,7 @@ module Aws::Translate
     class StopTextTranslationJobResponse < Struct.new(
       :job_id,
       :job_status)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -690,6 +718,7 @@ module Aws::Translate
     class Term < Struct.new(
       :source_text,
       :target_text)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -719,6 +748,7 @@ module Aws::Translate
     class TerminologyData < Struct.new(
       :file,
       :format)
+      SENSITIVE = [:file]
       include Aws::Structure
     end
 
@@ -737,6 +767,7 @@ module Aws::Translate
     class TerminologyDataLocation < Struct.new(
       :repository_type,
       :location)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -800,6 +831,7 @@ module Aws::Translate
       :term_count,
       :created_at,
       :last_updated_at)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -814,6 +846,7 @@ module Aws::Translate
     #
     class TextSizeLimitExceededException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -859,6 +892,7 @@ module Aws::Translate
       :job_status,
       :submitted_before_time,
       :submitted_after_time)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -942,6 +976,7 @@ module Aws::Translate
       :input_data_config,
       :output_data_config,
       :data_access_role_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -955,6 +990,7 @@ module Aws::Translate
     #
     class TooManyRequestsException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1008,6 +1044,7 @@ module Aws::Translate
       :terminology_names,
       :source_language_code,
       :target_language_code)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1035,6 +1072,7 @@ module Aws::Translate
       :source_language_code,
       :target_language_code,
       :applied_terminologies)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1059,6 +1097,7 @@ module Aws::Translate
       :message,
       :source_language_code,
       :target_language_code)
+      SENSITIVE = []
       include Aws::Structure
     end
 

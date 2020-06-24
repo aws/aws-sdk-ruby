@@ -41,6 +41,7 @@ module Aws::GameLift
       :ticket_id,
       :player_ids,
       :acceptance_type)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -114,6 +115,7 @@ module Aws::GameLift
       :routing_strategy,
       :creation_time,
       :last_updated_time)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -161,6 +163,7 @@ module Aws::GameLift
       :n,
       :sl,
       :sdm)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -189,6 +192,7 @@ module Aws::GameLift
       :access_key_id,
       :secret_access_key,
       :session_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -278,6 +282,7 @@ module Aws::GameLift
       :size_on_disk,
       :operating_system,
       :creation_time)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -307,6 +312,7 @@ module Aws::GameLift
     #
     class CertificateConfiguration < Struct.new(
       :certificate_type)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -344,6 +350,7 @@ module Aws::GameLift
       :game_server_group_name,
       :game_server_id,
       :game_server_data)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -355,6 +362,7 @@ module Aws::GameLift
     #
     class ClaimGameServerOutput < Struct.new(
       :game_server)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -369,6 +377,7 @@ module Aws::GameLift
     #
     class ConflictException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -429,6 +438,7 @@ module Aws::GameLift
       :description,
       :routing_strategy,
       :tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -442,6 +452,7 @@ module Aws::GameLift
     #
     class CreateAliasOutput < Struct.new(
       :alias)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -522,6 +533,7 @@ module Aws::GameLift
       :storage_location,
       :operating_system,
       :tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -551,6 +563,7 @@ module Aws::GameLift
       :build,
       :upload_credentials,
       :storage_location)
+      SENSITIVE = [:upload_credentials]
       include Aws::Structure
     end
 
@@ -836,6 +849,7 @@ module Aws::GameLift
       :instance_role_arn,
       :certificate_configuration,
       :tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -849,6 +863,7 @@ module Aws::GameLift
     #
     class CreateFleetOutput < Struct.new(
       :fleet_attributes)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1019,6 +1034,7 @@ module Aws::GameLift
       :game_server_protection_policy,
       :vpc_subnets,
       :tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1034,6 +1050,7 @@ module Aws::GameLift
     #
     class CreateGameServerGroupOutput < Struct.new(
       :game_server_group)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1144,6 +1161,7 @@ module Aws::GameLift
       :game_session_id,
       :idempotency_token,
       :game_session_data)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1157,6 +1175,7 @@ module Aws::GameLift
     #
     class CreateGameSessionOutput < Struct.new(
       :game_session)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1243,6 +1262,7 @@ module Aws::GameLift
       :player_latency_policies,
       :destinations,
       :tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1256,6 +1276,7 @@ module Aws::GameLift
     #
     class CreateGameSessionQueueOutput < Struct.new(
       :game_session_queue)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1429,6 +1450,7 @@ module Aws::GameLift
       :game_session_data,
       :backfill_mode,
       :tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1442,6 +1464,7 @@ module Aws::GameLift
     #
     class CreateMatchmakingConfigurationOutput < Struct.new(
       :configuration)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1495,6 +1518,7 @@ module Aws::GameLift
       :name,
       :rule_set_body,
       :tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1508,6 +1532,7 @@ module Aws::GameLift
     #
     class CreateMatchmakingRuleSetOutput < Struct.new(
       :rule_set)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1542,6 +1567,7 @@ module Aws::GameLift
       :game_session_id,
       :player_id,
       :player_data)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1555,6 +1581,7 @@ module Aws::GameLift
     #
     class CreatePlayerSessionOutput < Struct.new(
       :player_session)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1593,6 +1620,7 @@ module Aws::GameLift
       :game_session_id,
       :player_ids,
       :player_data_map)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1607,6 +1635,7 @@ module Aws::GameLift
     #
     class CreatePlayerSessionsOutput < Struct.new(
       :player_sessions)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1689,6 +1718,7 @@ module Aws::GameLift
       :storage_location,
       :zip_file,
       :tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1706,6 +1736,7 @@ module Aws::GameLift
     #
     class CreateScriptOutput < Struct.new(
       :script)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1743,6 +1774,7 @@ module Aws::GameLift
     class CreateVpcPeeringAuthorizationInput < Struct.new(
       :game_lift_aws_account_id,
       :peer_vpc_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1757,6 +1789,7 @@ module Aws::GameLift
     #
     class CreateVpcPeeringAuthorizationOutput < Struct.new(
       :vpc_peering_authorization)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1802,6 +1835,7 @@ module Aws::GameLift
       :fleet_id,
       :peer_vpc_aws_account_id,
       :peer_vpc_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1827,6 +1861,7 @@ module Aws::GameLift
     #
     class DeleteAliasInput < Struct.new(
       :alias_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1848,6 +1883,7 @@ module Aws::GameLift
     #
     class DeleteBuildInput < Struct.new(
       :build_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1869,6 +1905,7 @@ module Aws::GameLift
     #
     class DeleteFleetInput < Struct.new(
       :fleet_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1905,6 +1942,7 @@ module Aws::GameLift
     class DeleteGameServerGroupInput < Struct.new(
       :game_server_group_name,
       :delete_option)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1917,6 +1955,7 @@ module Aws::GameLift
     #
     class DeleteGameServerGroupOutput < Struct.new(
       :game_server_group)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1939,6 +1978,7 @@ module Aws::GameLift
     #
     class DeleteGameSessionQueueInput < Struct.new(
       :name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1964,6 +2004,7 @@ module Aws::GameLift
     #
     class DeleteMatchmakingConfigurationInput < Struct.new(
       :name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1991,6 +2032,7 @@ module Aws::GameLift
     #
     class DeleteMatchmakingRuleSetInput < Struct.new(
       :name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2025,6 +2067,7 @@ module Aws::GameLift
     class DeleteScalingPolicyInput < Struct.new(
       :name,
       :fleet_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2044,6 +2087,7 @@ module Aws::GameLift
     #
     class DeleteScriptInput < Struct.new(
       :script_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2081,6 +2125,7 @@ module Aws::GameLift
     class DeleteVpcPeeringAuthorizationInput < Struct.new(
       :game_lift_aws_account_id,
       :peer_vpc_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2115,6 +2160,7 @@ module Aws::GameLift
     class DeleteVpcPeeringConnectionInput < Struct.new(
       :fleet_id,
       :vpc_peering_connection_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2145,6 +2191,7 @@ module Aws::GameLift
     class DeregisterGameServerInput < Struct.new(
       :game_server_group_name,
       :game_server_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2166,6 +2213,7 @@ module Aws::GameLift
     #
     class DescribeAliasInput < Struct.new(
       :alias_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2179,6 +2227,7 @@ module Aws::GameLift
     #
     class DescribeAliasOutput < Struct.new(
       :alias)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2200,6 +2249,7 @@ module Aws::GameLift
     #
     class DescribeBuildInput < Struct.new(
       :build_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2213,6 +2263,7 @@ module Aws::GameLift
     #
     class DescribeBuildOutput < Struct.new(
       :build)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2243,6 +2294,7 @@ module Aws::GameLift
     #
     class DescribeEC2InstanceLimitsInput < Struct.new(
       :ec2_instance_type)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2256,6 +2308,7 @@ module Aws::GameLift
     #
     class DescribeEC2InstanceLimitsOutput < Struct.new(
       :ec2_instance_limits)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2299,6 +2352,7 @@ module Aws::GameLift
       :fleet_ids,
       :limit,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2321,6 +2375,7 @@ module Aws::GameLift
     class DescribeFleetAttributesOutput < Struct.new(
       :fleet_attributes,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2361,6 +2416,7 @@ module Aws::GameLift
       :fleet_ids,
       :limit,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2383,6 +2439,7 @@ module Aws::GameLift
     class DescribeFleetCapacityOutput < Struct.new(
       :fleet_capacity,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2438,6 +2495,7 @@ module Aws::GameLift
       :end_time,
       :limit,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2459,6 +2517,7 @@ module Aws::GameLift
     class DescribeFleetEventsOutput < Struct.new(
       :events,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2480,6 +2539,7 @@ module Aws::GameLift
     #
     class DescribeFleetPortSettingsInput < Struct.new(
       :fleet_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2493,6 +2553,7 @@ module Aws::GameLift
     #
     class DescribeFleetPortSettingsOutput < Struct.new(
       :inbound_permissions)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2536,6 +2597,7 @@ module Aws::GameLift
       :fleet_ids,
       :limit,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2557,6 +2619,7 @@ module Aws::GameLift
     class DescribeFleetUtilizationOutput < Struct.new(
       :fleet_utilization,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2576,6 +2639,7 @@ module Aws::GameLift
     #
     class DescribeGameServerGroupInput < Struct.new(
       :game_server_group_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2587,6 +2651,7 @@ module Aws::GameLift
     #
     class DescribeGameServerGroupOutput < Struct.new(
       :game_server_group)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2612,6 +2677,7 @@ module Aws::GameLift
     class DescribeGameServerInput < Struct.new(
       :game_server_group_name,
       :game_server_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2623,6 +2689,7 @@ module Aws::GameLift
     #
     class DescribeGameServerOutput < Struct.new(
       :game_server)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2682,6 +2749,7 @@ module Aws::GameLift
       :status_filter,
       :limit,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2704,6 +2772,7 @@ module Aws::GameLift
     class DescribeGameSessionDetailsOutput < Struct.new(
       :game_session_details,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2724,6 +2793,7 @@ module Aws::GameLift
     #
     class DescribeGameSessionPlacementInput < Struct.new(
       :placement_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2737,6 +2807,7 @@ module Aws::GameLift
     #
     class DescribeGameSessionPlacementOutput < Struct.new(
       :game_session_placement)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2775,6 +2846,7 @@ module Aws::GameLift
       :names,
       :limit,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2796,6 +2868,7 @@ module Aws::GameLift
     class DescribeGameSessionQueuesOutput < Struct.new(
       :game_session_queues,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2855,6 +2928,7 @@ module Aws::GameLift
       :status_filter,
       :limit,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2876,6 +2950,7 @@ module Aws::GameLift
     class DescribeGameSessionsOutput < Struct.new(
       :game_sessions,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2920,6 +2995,7 @@ module Aws::GameLift
       :instance_id,
       :limit,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2941,6 +3017,7 @@ module Aws::GameLift
     class DescribeInstancesOutput < Struct.new(
       :instances,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2988,6 +3065,7 @@ module Aws::GameLift
       :rule_set_name,
       :limit,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3008,6 +3086,7 @@ module Aws::GameLift
     class DescribeMatchmakingConfigurationsOutput < Struct.new(
       :configurations,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3029,6 +3108,7 @@ module Aws::GameLift
     #
     class DescribeMatchmakingInput < Struct.new(
       :ticket_ids)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3043,6 +3123,7 @@ module Aws::GameLift
     #
     class DescribeMatchmakingOutput < Struct.new(
       :ticket_list)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3082,6 +3163,7 @@ module Aws::GameLift
       :names,
       :limit,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3102,6 +3184,7 @@ module Aws::GameLift
     class DescribeMatchmakingRuleSetsOutput < Struct.new(
       :rule_sets,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3174,6 +3257,7 @@ module Aws::GameLift
       :player_session_status_filter,
       :limit,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3195,6 +3279,7 @@ module Aws::GameLift
     class DescribePlayerSessionsOutput < Struct.new(
       :player_sessions,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3216,6 +3301,7 @@ module Aws::GameLift
     #
     class DescribeRuntimeConfigurationInput < Struct.new(
       :fleet_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3230,6 +3316,7 @@ module Aws::GameLift
     #
     class DescribeRuntimeConfigurationOutput < Struct.new(
       :runtime_configuration)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3291,6 +3378,7 @@ module Aws::GameLift
       :status_filter,
       :limit,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3312,6 +3400,7 @@ module Aws::GameLift
     class DescribeScalingPoliciesOutput < Struct.new(
       :scaling_policies,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3331,6 +3420,7 @@ module Aws::GameLift
     #
     class DescribeScriptInput < Struct.new(
       :script_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3342,6 +3432,7 @@ module Aws::GameLift
     #
     class DescribeScriptOutput < Struct.new(
       :script)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3360,6 +3451,7 @@ module Aws::GameLift
     #
     class DescribeVpcPeeringAuthorizationsOutput < Struct.new(
       :vpc_peering_authorizations)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3381,6 +3473,7 @@ module Aws::GameLift
     #
     class DescribeVpcPeeringConnectionsInput < Struct.new(
       :fleet_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3395,6 +3488,7 @@ module Aws::GameLift
     #
     class DescribeVpcPeeringConnectionsOutput < Struct.new(
       :vpc_peering_connections)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3425,6 +3519,7 @@ module Aws::GameLift
     class DesiredPlayerSession < Struct.new(
       :player_id,
       :player_data)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3487,6 +3582,7 @@ module Aws::GameLift
       :active,
       :idle,
       :terminating)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3522,6 +3618,7 @@ module Aws::GameLift
       :ec2_instance_type,
       :current_instances,
       :instance_limit)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3679,6 +3776,7 @@ module Aws::GameLift
       :message,
       :event_time,
       :pre_signed_log_url)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3907,6 +4005,7 @@ module Aws::GameLift
       :stopped_actions,
       :instance_role_arn,
       :certificate_configuration)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3954,6 +4053,7 @@ module Aws::GameLift
       :fleet_id,
       :instance_type,
       :instance_counts)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3968,6 +4068,7 @@ module Aws::GameLift
     #
     class FleetCapacityExceededException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4018,6 +4119,7 @@ module Aws::GameLift
       :active_game_session_count,
       :current_player_session_count,
       :maximum_player_session_count)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4054,6 +4156,7 @@ module Aws::GameLift
     class GameProperty < Struct.new(
       :key,
       :value)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4164,6 +4267,7 @@ module Aws::GameLift
       :registration_time,
       :last_claim_time,
       :last_health_check_time)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4302,6 +4406,7 @@ module Aws::GameLift
       :suspended_actions,
       :creation_time,
       :last_updated_time)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4348,6 +4453,7 @@ module Aws::GameLift
     class GameServerGroupAutoScalingPolicy < Struct.new(
       :estimated_instance_warmup,
       :target_tracking_configuration)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4536,6 +4642,7 @@ module Aws::GameLift
       :creator_id,
       :game_session_data,
       :matchmaker_data)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4599,6 +4706,7 @@ module Aws::GameLift
       :dns_name,
       :port,
       :matched_player_sessions)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4624,6 +4732,7 @@ module Aws::GameLift
     class GameSessionDetail < Struct.new(
       :game_session,
       :protection_policy)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4638,6 +4747,7 @@ module Aws::GameLift
     #
     class GameSessionFullException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4830,6 +4940,7 @@ module Aws::GameLift
       :placed_player_sessions,
       :game_session_data,
       :matchmaker_data)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4911,6 +5022,7 @@ module Aws::GameLift
       :timeout_in_seconds,
       :player_latency_policies,
       :destinations)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4943,6 +5055,7 @@ module Aws::GameLift
     #
     class GameSessionQueueDestination < Struct.new(
       :destination_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4963,6 +5076,7 @@ module Aws::GameLift
     #
     class GetGameSessionLogUrlInput < Struct.new(
       :game_session_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4979,6 +5093,7 @@ module Aws::GameLift
     #
     class GetGameSessionLogUrlOutput < Struct.new(
       :pre_signed_url)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5010,6 +5125,7 @@ module Aws::GameLift
     class GetInstanceAccessInput < Struct.new(
       :fleet_id,
       :instance_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5024,6 +5140,7 @@ module Aws::GameLift
     #
     class GetInstanceAccessOutput < Struct.new(
       :instance_access)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5037,6 +5154,7 @@ module Aws::GameLift
     #
     class IdempotentParameterMismatchException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5119,6 +5237,7 @@ module Aws::GameLift
       :type,
       :status,
       :creation_time)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5154,6 +5273,7 @@ module Aws::GameLift
       :ip_address,
       :operating_system,
       :credentials)
+      SENSITIVE = [:credentials]
       include Aws::Structure
     end
 
@@ -5176,6 +5296,7 @@ module Aws::GameLift
     class InstanceCredentials < Struct.new(
       :user_name,
       :secret)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5218,6 +5339,7 @@ module Aws::GameLift
     class InstanceDefinition < Struct.new(
       :instance_type,
       :weighted_capacity)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5232,6 +5354,7 @@ module Aws::GameLift
     #
     class InternalServiceException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5246,6 +5369,7 @@ module Aws::GameLift
     #
     class InvalidFleetStatusException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5260,6 +5384,7 @@ module Aws::GameLift
     #
     class InvalidGameSessionStatusException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5273,6 +5398,7 @@ module Aws::GameLift
     #
     class InvalidRequestException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5321,6 +5447,7 @@ module Aws::GameLift
       :to_port,
       :ip_range,
       :protocol)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5360,6 +5487,7 @@ module Aws::GameLift
       :launch_template_id,
       :launch_template_name,
       :version)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5373,6 +5501,7 @@ module Aws::GameLift
     #
     class LimitExceededException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5428,6 +5557,7 @@ module Aws::GameLift
       :name,
       :limit,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5448,6 +5578,7 @@ module Aws::GameLift
     class ListAliasesOutput < Struct.new(
       :aliases,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5498,6 +5629,7 @@ module Aws::GameLift
       :status,
       :limit,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5518,6 +5650,7 @@ module Aws::GameLift
     class ListBuildsOutput < Struct.new(
       :builds,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5566,6 +5699,7 @@ module Aws::GameLift
       :script_id,
       :limit,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5589,6 +5723,7 @@ module Aws::GameLift
     class ListFleetsOutput < Struct.new(
       :fleet_ids,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5617,6 +5752,7 @@ module Aws::GameLift
     class ListGameServerGroupsInput < Struct.new(
       :limit,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5635,6 +5771,7 @@ module Aws::GameLift
     class ListGameServerGroupsOutput < Struct.new(
       :game_server_groups,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5678,6 +5815,7 @@ module Aws::GameLift
       :sort_order,
       :limit,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5696,6 +5834,7 @@ module Aws::GameLift
     class ListGameServersOutput < Struct.new(
       :game_servers,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5724,6 +5863,7 @@ module Aws::GameLift
     class ListScriptsInput < Struct.new(
       :limit,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5742,6 +5882,7 @@ module Aws::GameLift
     class ListScriptsOutput < Struct.new(
       :scripts,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5768,6 +5909,7 @@ module Aws::GameLift
     #
     class ListTagsForResourceRequest < Struct.new(
       :resource_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5780,6 +5922,7 @@ module Aws::GameLift
     #
     class ListTagsForResourceResponse < Struct.new(
       :tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5805,6 +5948,7 @@ module Aws::GameLift
     class MatchedPlayerSession < Struct.new(
       :player_id,
       :player_session_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5961,6 +6105,7 @@ module Aws::GameLift
       :game_properties,
       :game_session_data,
       :backfill_mode)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6038,6 +6183,7 @@ module Aws::GameLift
       :rule_set_arn,
       :rule_set_body,
       :creation_time)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6160,6 +6306,7 @@ module Aws::GameLift
       :players,
       :game_session_connection_info,
       :estimated_wait_time)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6173,6 +6320,7 @@ module Aws::GameLift
     #
     class NotFoundException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6187,6 +6335,7 @@ module Aws::GameLift
     #
     class OutOfCapacityException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6223,6 +6372,7 @@ module Aws::GameLift
     class PlacedPlayerSession < Struct.new(
       :player_id,
       :player_session_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6281,6 +6431,7 @@ module Aws::GameLift
       :player_attributes,
       :team,
       :latency_in_ms)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6319,6 +6470,7 @@ module Aws::GameLift
       :player_id,
       :region_identifier,
       :latency_in_milliseconds)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6361,6 +6513,7 @@ module Aws::GameLift
     class PlayerLatencyPolicy < Struct.new(
       :maximum_individual_player_latency_milliseconds,
       :policy_duration_seconds)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6501,6 +6654,7 @@ module Aws::GameLift
       :dns_name,
       :port,
       :player_data)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6645,6 +6799,7 @@ module Aws::GameLift
       :metric_name,
       :policy_type,
       :target_configuration)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6659,6 +6814,7 @@ module Aws::GameLift
     #
     class PutScalingPolicyOutput < Struct.new(
       :name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6740,6 +6896,7 @@ module Aws::GameLift
       :game_server_data,
       :custom_sort_key,
       :tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6751,6 +6908,7 @@ module Aws::GameLift
     #
     class RegisterGameServerOutput < Struct.new(
       :game_server)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6772,6 +6930,7 @@ module Aws::GameLift
     #
     class RequestUploadCredentialsInput < Struct.new(
       :build_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6793,6 +6952,7 @@ module Aws::GameLift
     class RequestUploadCredentialsOutput < Struct.new(
       :upload_credentials,
       :storage_location)
+      SENSITIVE = [:upload_credentials]
       include Aws::Structure
     end
 
@@ -6814,6 +6974,7 @@ module Aws::GameLift
     #
     class ResolveAliasInput < Struct.new(
       :alias_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6837,6 +6998,7 @@ module Aws::GameLift
     class ResolveAliasOutput < Struct.new(
       :fleet_id,
       :fleet_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6876,6 +7038,7 @@ module Aws::GameLift
     class ResourceCreationLimitPolicy < Struct.new(
       :new_game_sessions_per_creator,
       :policy_period_in_minutes)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6901,6 +7064,7 @@ module Aws::GameLift
     class ResumeGameServerGroupInput < Struct.new(
       :game_server_group_name,
       :resume_actions)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6913,6 +7077,7 @@ module Aws::GameLift
     #
     class ResumeGameServerGroupOutput < Struct.new(
       :game_server_group)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6968,6 +7133,7 @@ module Aws::GameLift
       :type,
       :fleet_id,
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -7043,6 +7209,7 @@ module Aws::GameLift
       :server_processes,
       :max_concurrent_game_session_activations,
       :game_session_activation_timeout_seconds)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -7093,6 +7260,7 @@ module Aws::GameLift
       :key,
       :role_arn,
       :object_version)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -7264,6 +7432,7 @@ module Aws::GameLift
       :metric_name,
       :policy_type,
       :target_configuration)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -7334,6 +7503,7 @@ module Aws::GameLift
       :size_on_disk,
       :creation_time,
       :storage_location)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -7452,6 +7622,7 @@ module Aws::GameLift
       :sort_expression,
       :limit,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -7473,6 +7644,7 @@ module Aws::GameLift
     class SearchGameSessionsOutput < Struct.new(
       :game_sessions,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -7524,6 +7696,7 @@ module Aws::GameLift
       :launch_path,
       :parameters,
       :concurrent_executions)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -7549,6 +7722,7 @@ module Aws::GameLift
     class StartFleetActionsInput < Struct.new(
       :fleet_id,
       :actions)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -7654,6 +7828,7 @@ module Aws::GameLift
       :player_latencies,
       :desired_player_sessions,
       :game_session_data)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -7669,6 +7844,7 @@ module Aws::GameLift
     #
     class StartGameSessionPlacementOutput < Struct.new(
       :game_session_placement)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -7746,6 +7922,7 @@ module Aws::GameLift
       :configuration_name,
       :game_session_arn,
       :players)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -7761,6 +7938,7 @@ module Aws::GameLift
     #
     class StartMatchBackfillOutput < Struct.new(
       :matchmaking_ticket)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -7813,6 +7991,7 @@ module Aws::GameLift
       :ticket_id,
       :configuration_name,
       :players)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -7828,6 +8007,7 @@ module Aws::GameLift
     #
     class StartMatchmakingOutput < Struct.new(
       :matchmaking_ticket)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -7853,6 +8033,7 @@ module Aws::GameLift
     class StopFleetActionsInput < Struct.new(
       :fleet_id,
       :actions)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -7877,6 +8058,7 @@ module Aws::GameLift
     #
     class StopGameSessionPlacementInput < Struct.new(
       :placement_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -7891,6 +8073,7 @@ module Aws::GameLift
     #
     class StopGameSessionPlacementOutput < Struct.new(
       :game_session_placement)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -7911,6 +8094,7 @@ module Aws::GameLift
     #
     class StopMatchmakingInput < Struct.new(
       :ticket_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -7940,6 +8124,7 @@ module Aws::GameLift
     class SuspendGameServerGroupInput < Struct.new(
       :game_server_group_name,
       :suspend_actions)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -7953,6 +8138,7 @@ module Aws::GameLift
     #
     class SuspendGameServerGroupOutput < Struct.new(
       :game_server_group)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -8000,6 +8186,7 @@ module Aws::GameLift
     class Tag < Struct.new(
       :key,
       :value)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -8044,6 +8231,7 @@ module Aws::GameLift
     class TagResourceRequest < Struct.new(
       :resource_arn,
       :tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -8062,6 +8250,7 @@ module Aws::GameLift
     #
     class TaggingFailedException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -8112,6 +8301,7 @@ module Aws::GameLift
     #
     class TargetConfiguration < Struct.new(
       :target_value)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -8141,6 +8331,7 @@ module Aws::GameLift
     #
     class TargetTrackingConfiguration < Struct.new(
       :target_value)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -8157,6 +8348,7 @@ module Aws::GameLift
     #
     class TerminalRoutingStrategyException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -8170,6 +8362,7 @@ module Aws::GameLift
     #
     class UnauthorizedException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -8182,6 +8375,7 @@ module Aws::GameLift
     #
     class UnsupportedRegionException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -8216,6 +8410,7 @@ module Aws::GameLift
     class UntagResourceRequest < Struct.new(
       :resource_arn,
       :tag_keys)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -8265,6 +8460,7 @@ module Aws::GameLift
       :name,
       :description,
       :routing_strategy)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -8278,6 +8474,7 @@ module Aws::GameLift
     #
     class UpdateAliasOutput < Struct.new(
       :alias)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -8313,6 +8510,7 @@ module Aws::GameLift
       :build_id,
       :name,
       :version)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -8326,6 +8524,7 @@ module Aws::GameLift
     #
     class UpdateBuildOutput < Struct.new(
       :build)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -8394,6 +8593,7 @@ module Aws::GameLift
       :new_game_session_protection_policy,
       :resource_creation_limit_policy,
       :metric_groups)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -8408,6 +8608,7 @@ module Aws::GameLift
     #
     class UpdateFleetAttributesOutput < Struct.new(
       :fleet_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -8449,6 +8650,7 @@ module Aws::GameLift
       :desired_instances,
       :min_size,
       :max_size)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -8462,6 +8664,7 @@ module Aws::GameLift
     #
     class UpdateFleetCapacityOutput < Struct.new(
       :fleet_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -8509,6 +8712,7 @@ module Aws::GameLift
       :fleet_id,
       :inbound_permission_authorizations,
       :inbound_permission_revocations)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -8522,6 +8726,7 @@ module Aws::GameLift
     #
     class UpdateFleetPortSettingsOutput < Struct.new(
       :fleet_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -8608,6 +8813,7 @@ module Aws::GameLift
       :instance_definitions,
       :game_server_protection_policy,
       :balancing_strategy)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -8620,6 +8826,7 @@ module Aws::GameLift
     #
     class UpdateGameServerGroupOutput < Struct.new(
       :game_server_group)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -8678,6 +8885,7 @@ module Aws::GameLift
       :custom_sort_key,
       :utilization_status,
       :health_check)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -8689,6 +8897,7 @@ module Aws::GameLift
     #
     class UpdateGameServerOutput < Struct.new(
       :game_server)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -8742,6 +8951,7 @@ module Aws::GameLift
       :name,
       :player_session_creation_policy,
       :protection_policy)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -8755,6 +8965,7 @@ module Aws::GameLift
     #
     class UpdateGameSessionOutput < Struct.new(
       :game_session)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -8820,6 +9031,7 @@ module Aws::GameLift
       :timeout_in_seconds,
       :player_latency_policies,
       :destinations)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -8833,6 +9045,7 @@ module Aws::GameLift
     #
     class UpdateGameSessionQueueOutput < Struct.new(
       :game_session_queue)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -8988,6 +9201,7 @@ module Aws::GameLift
       :game_properties,
       :game_session_data,
       :backfill_mode)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -9001,6 +9215,7 @@ module Aws::GameLift
     #
     class UpdateMatchmakingConfigurationOutput < Struct.new(
       :configuration)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -9045,6 +9260,7 @@ module Aws::GameLift
     class UpdateRuntimeConfigurationInput < Struct.new(
       :fleet_id,
       :runtime_configuration)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -9059,6 +9275,7 @@ module Aws::GameLift
     #
     class UpdateRuntimeConfigurationOutput < Struct.new(
       :runtime_configuration)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -9124,6 +9341,7 @@ module Aws::GameLift
       :version,
       :storage_location,
       :zip_file)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -9141,6 +9359,7 @@ module Aws::GameLift
     #
     class UpdateScriptOutput < Struct.new(
       :script)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -9162,6 +9381,7 @@ module Aws::GameLift
     #
     class ValidateMatchmakingRuleSetInput < Struct.new(
       :rule_set_body)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -9175,6 +9395,7 @@ module Aws::GameLift
     #
     class ValidateMatchmakingRuleSetOutput < Struct.new(
       :valid)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -9238,6 +9459,7 @@ module Aws::GameLift
       :peer_vpc_id,
       :creation_time,
       :expiration_time)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -9319,6 +9541,7 @@ module Aws::GameLift
       :status,
       :peer_vpc_id,
       :game_lift_vpc_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -9345,6 +9568,7 @@ module Aws::GameLift
     class VpcPeeringConnectionStatus < Struct.new(
       :code,
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 

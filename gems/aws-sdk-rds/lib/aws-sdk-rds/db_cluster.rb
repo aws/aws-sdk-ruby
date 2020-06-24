@@ -1721,8 +1721,6 @@ module Aws::RDS
     #         values: ["String"], # required
     #       },
     #     ],
-    #     max_records: 1,
-    #     marker: "String",
     #     include_shared: false,
     #     include_public: false,
     #   })
@@ -1779,20 +1777,6 @@ module Aws::RDS
     #   * `snapshot-type` - Accepts types of DB cluster snapshots.
     #
     #   * `engine` - Accepts names of database engines.
-    # @option options [Integer] :max_records
-    #   The maximum number of records to include in the response. If more
-    #   records exist than the specified `MaxRecords` value, a pagination
-    #   token called a marker is included in the response so you can retrieve
-    #   the remaining results.
-    #
-    #   Default: 100
-    #
-    #   Constraints: Minimum 20, maximum 100.
-    # @option options [String] :marker
-    #   An optional pagination token provided by a previous
-    #   `DescribeDBClusterSnapshots` request. If this parameter is specified,
-    #   the response includes only records beyond the marker, up to the value
-    #   specified by `MaxRecords`.
     # @option options [Boolean] :include_shared
     #   A value that indicates whether to include shared manual DB cluster
     #   snapshots from other AWS accounts that this AWS account has been given
@@ -1812,18 +1796,20 @@ module Aws::RDS
     # @return [DBClusterSnapshot::Collection]
     def snapshots(options = {})
       batches = Enumerator.new do |y|
-        batch = []
         options = options.merge(db_cluster_identifier: @id)
         resp = @client.describe_db_cluster_snapshots(options)
-        resp.data.db_cluster_snapshots.each do |d|
-          batch << DBClusterSnapshot.new(
-            cluster_id: @id,
-            snapshot_id: d.db_cluster_snapshot_identifier,
-            data: d,
-            client: @client
-          )
+        resp.each_page do |page|
+          batch = []
+          page.data.db_cluster_snapshots.each do |d|
+            batch << DBClusterSnapshot.new(
+              cluster_id: @id,
+              snapshot_id: d.db_cluster_snapshot_identifier,
+              data: d,
+              client: @client
+            )
+          end
+          y.yield(batch)
         end
-        y.yield(batch)
       end
       DBClusterSnapshot::Collection.new(batches)
     end

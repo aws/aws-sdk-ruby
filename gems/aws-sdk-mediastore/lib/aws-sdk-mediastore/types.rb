@@ -64,6 +64,7 @@ module Aws::MediaStore
       :name,
       :status,
       :access_logging_enabled)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -77,6 +78,7 @@ module Aws::MediaStore
     #
     class ContainerInUseException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -89,6 +91,7 @@ module Aws::MediaStore
     #
     class ContainerNotFoundException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -101,6 +104,7 @@ module Aws::MediaStore
     #
     class CorsPolicyNotFoundException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -171,6 +175,7 @@ module Aws::MediaStore
       :allowed_headers,
       :max_age_seconds,
       :expose_headers)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -214,6 +219,7 @@ module Aws::MediaStore
     class CreateContainerInput < Struct.new(
       :container_name,
       :tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -242,6 +248,7 @@ module Aws::MediaStore
     #
     class CreateContainerOutput < Struct.new(
       :container)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -260,6 +267,7 @@ module Aws::MediaStore
     #
     class DeleteContainerInput < Struct.new(
       :container_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -282,6 +290,7 @@ module Aws::MediaStore
     #
     class DeleteContainerPolicyInput < Struct.new(
       :container_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -304,6 +313,7 @@ module Aws::MediaStore
     #
     class DeleteCorsPolicyInput < Struct.new(
       :container_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -326,6 +336,7 @@ module Aws::MediaStore
     #
     class DeleteLifecyclePolicyInput < Struct.new(
       :container_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -349,6 +360,7 @@ module Aws::MediaStore
     #
     class DeleteMetricPolicyInput < Struct.new(
       :container_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -371,6 +383,7 @@ module Aws::MediaStore
     #
     class DescribeContainerInput < Struct.new(
       :container_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -382,6 +395,7 @@ module Aws::MediaStore
     #
     class DescribeContainerOutput < Struct.new(
       :container)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -400,6 +414,7 @@ module Aws::MediaStore
     #
     class GetContainerPolicyInput < Struct.new(
       :container_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -411,6 +426,7 @@ module Aws::MediaStore
     #
     class GetContainerPolicyOutput < Struct.new(
       :policy)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -429,6 +445,7 @@ module Aws::MediaStore
     #
     class GetCorsPolicyInput < Struct.new(
       :container_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -440,6 +457,7 @@ module Aws::MediaStore
     #
     class GetCorsPolicyOutput < Struct.new(
       :cors_policy)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -459,6 +477,7 @@ module Aws::MediaStore
     #
     class GetLifecyclePolicyInput < Struct.new(
       :container_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -470,6 +489,7 @@ module Aws::MediaStore
     #
     class GetLifecyclePolicyOutput < Struct.new(
       :lifecycle_policy)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -488,6 +508,7 @@ module Aws::MediaStore
     #
     class GetMetricPolicyInput < Struct.new(
       :container_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -499,6 +520,7 @@ module Aws::MediaStore
     #
     class GetMetricPolicyOutput < Struct.new(
       :metric_policy)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -511,6 +533,7 @@ module Aws::MediaStore
     #
     class InternalServerError < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -523,6 +546,7 @@ module Aws::MediaStore
     #
     class LimitExceededException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -551,6 +575,7 @@ module Aws::MediaStore
     class ListContainersInput < Struct.new(
       :next_token,
       :max_results)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -570,6 +595,7 @@ module Aws::MediaStore
     class ListContainersOutput < Struct.new(
       :containers,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -588,6 +614,7 @@ module Aws::MediaStore
     #
     class ListTagsForResourceInput < Struct.new(
       :resource)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -599,6 +626,7 @@ module Aws::MediaStore
     #
     class ListTagsForResourceOutput < Struct.new(
       :tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -650,6 +678,7 @@ module Aws::MediaStore
     class MetricPolicy < Struct.new(
       :container_level_metrics,
       :metric_policy_rules)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -685,6 +714,7 @@ module Aws::MediaStore
     class MetricPolicyRule < Struct.new(
       :object_group,
       :object_group_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -697,6 +727,7 @@ module Aws::MediaStore
     #
     class PolicyNotFoundException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -726,6 +757,7 @@ module Aws::MediaStore
     class PutContainerPolicyInput < Struct.new(
       :container_name,
       :policy)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -763,6 +795,7 @@ module Aws::MediaStore
     class PutCorsPolicyInput < Struct.new(
       :container_name,
       :cors_policy)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -792,6 +825,7 @@ module Aws::MediaStore
     class PutLifecyclePolicyInput < Struct.new(
       :container_name,
       :lifecycle_policy)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -844,6 +878,7 @@ module Aws::MediaStore
     class PutMetricPolicyInput < Struct.new(
       :container_name,
       :metric_policy)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -866,6 +901,7 @@ module Aws::MediaStore
     #
     class StartAccessLoggingInput < Struct.new(
       :container_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -888,6 +924,7 @@ module Aws::MediaStore
     #
     class StopAccessLoggingInput < Struct.new(
       :container_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -932,6 +969,7 @@ module Aws::MediaStore
     class Tag < Struct.new(
       :key,
       :value)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -968,6 +1006,7 @@ module Aws::MediaStore
     class TagResourceInput < Struct.new(
       :resource,
       :tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1000,6 +1039,7 @@ module Aws::MediaStore
     class UntagResourceInput < Struct.new(
       :resource,
       :tag_keys)
+      SENSITIVE = []
       include Aws::Structure
     end
 

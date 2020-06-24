@@ -19,6 +19,7 @@ module Aws::Outposts
     #
     class AccessDeniedException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -65,6 +66,7 @@ module Aws::Outposts
       :site_id,
       :availability_zone,
       :availability_zone_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -76,6 +78,7 @@ module Aws::Outposts
     #
     class CreateOutpostOutput < Struct.new(
       :outpost)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -94,6 +97,7 @@ module Aws::Outposts
     #
     class DeleteOutpostInput < Struct.new(
       :outpost_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -116,6 +120,7 @@ module Aws::Outposts
     #
     class DeleteSiteInput < Struct.new(
       :site_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -138,6 +143,7 @@ module Aws::Outposts
     #
     class GetOutpostInput < Struct.new(
       :outpost_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -168,6 +174,7 @@ module Aws::Outposts
       :outpost_id,
       :next_token,
       :max_results)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -194,6 +201,7 @@ module Aws::Outposts
       :next_token,
       :outpost_id,
       :outpost_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -205,6 +213,7 @@ module Aws::Outposts
     #
     class GetOutpostOutput < Struct.new(
       :outpost)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -218,6 +227,7 @@ module Aws::Outposts
     #
     class InstanceTypeItem < Struct.new(
       :instance_type)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -230,6 +240,7 @@ module Aws::Outposts
     #
     class InternalServerException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -254,6 +265,7 @@ module Aws::Outposts
     class ListOutpostsInput < Struct.new(
       :next_token,
       :max_results)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -270,6 +282,7 @@ module Aws::Outposts
     class ListOutpostsOutput < Struct.new(
       :outposts,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -294,6 +307,7 @@ module Aws::Outposts
     class ListSitesInput < Struct.new(
       :next_token,
       :max_results)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -310,6 +324,7 @@ module Aws::Outposts
     class ListSitesOutput < Struct.new(
       :sites,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -322,6 +337,7 @@ module Aws::Outposts
     #
     class NotFoundException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -379,6 +395,7 @@ module Aws::Outposts
       :life_cycle_status,
       :availability_zone,
       :availability_zone_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -391,6 +408,7 @@ module Aws::Outposts
     #
     class ServiceQuotaExceededException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -419,6 +437,7 @@ module Aws::Outposts
       :account_id,
       :name,
       :description)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -431,6 +450,7 @@ module Aws::Outposts
     #
     class ValidationException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 

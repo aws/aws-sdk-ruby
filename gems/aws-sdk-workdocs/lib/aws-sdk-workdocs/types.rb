@@ -38,6 +38,7 @@ module Aws::WorkDocs
       :authentication_token,
       :document_id,
       :version_id)
+      SENSITIVE = [:authentication_token]
       include Aws::Structure
     end
 
@@ -63,6 +64,7 @@ module Aws::WorkDocs
     class ActivateUserRequest < Struct.new(
       :user_id,
       :authentication_token)
+      SENSITIVE = [:authentication_token]
       include Aws::Structure
     end
 
@@ -74,6 +76,7 @@ module Aws::WorkDocs
     #
     class ActivateUserResponse < Struct.new(
       :user)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -136,6 +139,7 @@ module Aws::WorkDocs
       :resource_metadata,
       :original_parent,
       :comment_metadata)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -182,6 +186,7 @@ module Aws::WorkDocs
       :resource_id,
       :principals,
       :notification_options)
+      SENSITIVE = [:authentication_token]
       include Aws::Structure
     end
 
@@ -193,6 +198,7 @@ module Aws::WorkDocs
     #
     class AddResourcePermissionsResponse < Struct.new(
       :share_results)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -250,6 +256,7 @@ module Aws::WorkDocs
       :status,
       :visibility,
       :recipient_id)
+      SENSITIVE = [:text]
       include Aws::Structure
     end
 
@@ -283,6 +290,7 @@ module Aws::WorkDocs
       :created_timestamp,
       :comment_status,
       :recipient_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -295,6 +303,7 @@ module Aws::WorkDocs
     #
     class ConcurrentModificationException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -308,6 +317,7 @@ module Aws::WorkDocs
     #
     class ConflictingOperationException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -373,6 +383,7 @@ module Aws::WorkDocs
       :text,
       :visibility,
       :notify_collaborators)
+      SENSITIVE = [:authentication_token, :text]
       include Aws::Structure
     end
 
@@ -384,6 +395,7 @@ module Aws::WorkDocs
     #
     class CreateCommentResponse < Struct.new(
       :comment)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -424,6 +436,7 @@ module Aws::WorkDocs
       :resource_id,
       :version_id,
       :custom_metadata)
+      SENSITIVE = [:authentication_token]
       include Aws::Structure
     end
 
@@ -459,6 +472,7 @@ module Aws::WorkDocs
       :authentication_token,
       :name,
       :parent_folder_id)
+      SENSITIVE = [:authentication_token]
       include Aws::Structure
     end
 
@@ -470,6 +484,7 @@ module Aws::WorkDocs
     #
     class CreateFolderResponse < Struct.new(
       :metadata)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -501,6 +516,7 @@ module Aws::WorkDocs
       :resource_id,
       :labels,
       :authentication_token)
+      SENSITIVE = [:authentication_token]
       include Aws::Structure
     end
 
@@ -543,6 +559,7 @@ module Aws::WorkDocs
       :endpoint,
       :protocol,
       :subscription_type)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -554,6 +571,7 @@ module Aws::WorkDocs
     #
     class CreateNotificationSubscriptionResponse < Struct.new(
       :subscription)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -624,6 +642,7 @@ module Aws::WorkDocs
       :time_zone_id,
       :storage_rule,
       :authentication_token)
+      SENSITIVE = [:password, :authentication_token]
       include Aws::Structure
     end
 
@@ -635,6 +654,7 @@ module Aws::WorkDocs
     #
     class CreateUserResponse < Struct.new(
       :user)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -648,6 +668,7 @@ module Aws::WorkDocs
     #
     class CustomMetadataLimitExceededException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -673,6 +694,7 @@ module Aws::WorkDocs
     class DeactivateUserRequest < Struct.new(
       :user_id,
       :authentication_token)
+      SENSITIVE = [:authentication_token]
       include Aws::Structure
     end
 
@@ -716,6 +738,7 @@ module Aws::WorkDocs
       :document_id,
       :version_id,
       :comment_id)
+      SENSITIVE = [:authentication_token]
       include Aws::Structure
     end
 
@@ -761,6 +784,7 @@ module Aws::WorkDocs
       :version_id,
       :keys,
       :delete_all)
+      SENSITIVE = [:authentication_token]
       include Aws::Structure
     end
 
@@ -790,6 +814,7 @@ module Aws::WorkDocs
     class DeleteDocumentRequest < Struct.new(
       :authentication_token,
       :document_id)
+      SENSITIVE = [:authentication_token]
       include Aws::Structure
     end
 
@@ -815,6 +840,7 @@ module Aws::WorkDocs
     class DeleteFolderContentsRequest < Struct.new(
       :authentication_token,
       :folder_id)
+      SENSITIVE = [:authentication_token]
       include Aws::Structure
     end
 
@@ -840,6 +866,7 @@ module Aws::WorkDocs
     class DeleteFolderRequest < Struct.new(
       :authentication_token,
       :folder_id)
+      SENSITIVE = [:authentication_token]
       include Aws::Structure
     end
 
@@ -877,6 +904,7 @@ module Aws::WorkDocs
       :authentication_token,
       :labels,
       :delete_all)
+      SENSITIVE = [:authentication_token]
       include Aws::Structure
     end
 
@@ -905,6 +933,7 @@ module Aws::WorkDocs
     class DeleteNotificationSubscriptionRequest < Struct.new(
       :subscription_id,
       :organization_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -931,6 +960,7 @@ module Aws::WorkDocs
     class DeleteUserRequest < Struct.new(
       :authentication_token,
       :user_id)
+      SENSITIVE = [:authentication_token]
       include Aws::Structure
     end
 
@@ -1015,6 +1045,7 @@ module Aws::WorkDocs
       :include_indirect_activities,
       :limit,
       :marker)
+      SENSITIVE = [:authentication_token]
       include Aws::Structure
     end
 
@@ -1031,6 +1062,7 @@ module Aws::WorkDocs
     class DescribeActivitiesResponse < Struct.new(
       :user_activities,
       :marker)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1075,6 +1107,7 @@ module Aws::WorkDocs
       :version_id,
       :limit,
       :marker)
+      SENSITIVE = [:authentication_token]
       include Aws::Structure
     end
 
@@ -1092,6 +1125,7 @@ module Aws::WorkDocs
     class DescribeCommentsResponse < Struct.new(
       :comments,
       :marker)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1144,6 +1178,7 @@ module Aws::WorkDocs
       :limit,
       :include,
       :fields)
+      SENSITIVE = [:authentication_token]
       include Aws::Structure
     end
 
@@ -1161,6 +1196,7 @@ module Aws::WorkDocs
     class DescribeDocumentVersionsResponse < Struct.new(
       :document_versions,
       :marker)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1224,6 +1260,7 @@ module Aws::WorkDocs
       :marker,
       :type,
       :include)
+      SENSITIVE = [:authentication_token]
       include Aws::Structure
     end
 
@@ -1246,6 +1283,7 @@ module Aws::WorkDocs
       :folders,
       :documents,
       :marker)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1290,6 +1328,7 @@ module Aws::WorkDocs
       :organization_id,
       :marker,
       :limit)
+      SENSITIVE = [:authentication_token, :search_query]
       include Aws::Structure
     end
 
@@ -1307,6 +1346,7 @@ module Aws::WorkDocs
     class DescribeGroupsResponse < Struct.new(
       :groups,
       :marker)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1338,6 +1378,7 @@ module Aws::WorkDocs
       :organization_id,
       :marker,
       :limit)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1355,6 +1396,7 @@ module Aws::WorkDocs
     class DescribeNotificationSubscriptionsResponse < Struct.new(
       :subscriptions,
       :marker)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1399,6 +1441,7 @@ module Aws::WorkDocs
       :principal_id,
       :limit,
       :marker)
+      SENSITIVE = [:authentication_token]
       include Aws::Structure
     end
 
@@ -1416,6 +1459,7 @@ module Aws::WorkDocs
     class DescribeResourcePermissionsResponse < Struct.new(
       :principals,
       :marker)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1447,6 +1491,7 @@ module Aws::WorkDocs
       :authentication_token,
       :limit,
       :marker)
+      SENSITIVE = [:authentication_token]
       include Aws::Structure
     end
 
@@ -1463,6 +1508,7 @@ module Aws::WorkDocs
     class DescribeRootFoldersResponse < Struct.new(
       :folders,
       :marker)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1538,6 +1584,7 @@ module Aws::WorkDocs
       :marker,
       :limit,
       :fields)
+      SENSITIVE = [:authentication_token, :query]
       include Aws::Structure
     end
 
@@ -1560,6 +1607,7 @@ module Aws::WorkDocs
       :users,
       :total_number_of_users,
       :marker)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1573,6 +1621,7 @@ module Aws::WorkDocs
     #
     class DocumentLockedForCommentsException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1621,6 +1670,7 @@ module Aws::WorkDocs
       :latest_version_metadata,
       :resource_state,
       :labels)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1695,6 +1745,7 @@ module Aws::WorkDocs
       :creator_id,
       :thumbnail,
       :source)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1709,6 +1760,7 @@ module Aws::WorkDocs
     #
     class DraftUploadOutOfSyncException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1721,6 +1773,7 @@ module Aws::WorkDocs
     #
     class EntityAlreadyExistsException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1737,6 +1790,7 @@ module Aws::WorkDocs
     class EntityNotExistsException < Struct.new(
       :message,
       :entity_ids)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1751,6 +1805,7 @@ module Aws::WorkDocs
     #
     class FailedDependencyException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1815,6 +1870,7 @@ module Aws::WorkDocs
       :labels,
       :size,
       :latest_version_size)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1833,6 +1889,7 @@ module Aws::WorkDocs
     #
     class GetCurrentUserRequest < Struct.new(
       :authentication_token)
+      SENSITIVE = [:authentication_token]
       include Aws::Structure
     end
 
@@ -1844,6 +1901,7 @@ module Aws::WorkDocs
     #
     class GetCurrentUserResponse < Struct.new(
       :user)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1888,6 +1946,7 @@ module Aws::WorkDocs
       :limit,
       :fields,
       :marker)
+      SENSITIVE = [:authentication_token]
       include Aws::Structure
     end
 
@@ -1899,6 +1958,7 @@ module Aws::WorkDocs
     #
     class GetDocumentPathResponse < Struct.new(
       :path)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1930,6 +1990,7 @@ module Aws::WorkDocs
       :authentication_token,
       :document_id,
       :include_custom_metadata)
+      SENSITIVE = [:authentication_token]
       include Aws::Structure
     end
 
@@ -1946,6 +2007,7 @@ module Aws::WorkDocs
     class GetDocumentResponse < Struct.new(
       :metadata,
       :custom_metadata)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1990,6 +2052,7 @@ module Aws::WorkDocs
       :version_id,
       :fields,
       :include_custom_metadata)
+      SENSITIVE = [:authentication_token]
       include Aws::Structure
     end
 
@@ -2006,6 +2069,7 @@ module Aws::WorkDocs
     class GetDocumentVersionResponse < Struct.new(
       :metadata,
       :custom_metadata)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2050,6 +2114,7 @@ module Aws::WorkDocs
       :limit,
       :fields,
       :marker)
+      SENSITIVE = [:authentication_token]
       include Aws::Structure
     end
 
@@ -2061,6 +2126,7 @@ module Aws::WorkDocs
     #
     class GetFolderPathResponse < Struct.new(
       :path)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2092,6 +2158,7 @@ module Aws::WorkDocs
       :authentication_token,
       :folder_id,
       :include_custom_metadata)
+      SENSITIVE = [:authentication_token]
       include Aws::Structure
     end
 
@@ -2108,6 +2175,7 @@ module Aws::WorkDocs
     class GetFolderResponse < Struct.new(
       :metadata,
       :custom_metadata)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2153,6 +2221,7 @@ module Aws::WorkDocs
       :collection_type,
       :limit,
       :marker)
+      SENSITIVE = [:authentication_token]
       include Aws::Structure
     end
 
@@ -2175,6 +2244,7 @@ module Aws::WorkDocs
       :folders,
       :documents,
       :marker)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2193,6 +2263,7 @@ module Aws::WorkDocs
     class GroupMetadata < Struct.new(
       :id,
       :name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2205,6 +2276,7 @@ module Aws::WorkDocs
     #
     class IllegalUserStateException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2267,6 +2339,7 @@ module Aws::WorkDocs
       :content_type,
       :document_size_in_bytes,
       :parent_folder_id)
+      SENSITIVE = [:authentication_token]
       include Aws::Structure
     end
 
@@ -2283,6 +2356,7 @@ module Aws::WorkDocs
     class InitiateDocumentVersionUploadResponse < Struct.new(
       :metadata,
       :upload_metadata)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2295,6 +2369,7 @@ module Aws::WorkDocs
     #
     class InvalidArgumentException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2308,6 +2383,7 @@ module Aws::WorkDocs
     #
     class InvalidCommentOperationException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2320,6 +2396,7 @@ module Aws::WorkDocs
     #
     class InvalidOperationException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2332,6 +2409,7 @@ module Aws::WorkDocs
     #
     class InvalidPasswordException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2345,6 +2423,7 @@ module Aws::WorkDocs
     #
     class LimitExceededException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2372,6 +2451,7 @@ module Aws::WorkDocs
     class NotificationOptions < Struct.new(
       :send_email,
       :email_message)
+      SENSITIVE = [:email_message]
       include Aws::Structure
     end
 
@@ -2390,6 +2470,7 @@ module Aws::WorkDocs
     class Participants < Struct.new(
       :users,
       :groups)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2408,6 +2489,7 @@ module Aws::WorkDocs
     class PermissionInfo < Struct.new(
       :role,
       :type)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2431,6 +2513,7 @@ module Aws::WorkDocs
       :id,
       :type,
       :roles)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2443,6 +2526,7 @@ module Aws::WorkDocs
     #
     class ProhibitedStateException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2468,6 +2552,7 @@ module Aws::WorkDocs
     class RemoveAllResourcePermissionsRequest < Struct.new(
       :authentication_token,
       :resource_id)
+      SENSITIVE = [:authentication_token]
       include Aws::Structure
     end
 
@@ -2505,6 +2590,7 @@ module Aws::WorkDocs
       :resource_id,
       :principal_id,
       :principal_type)
+      SENSITIVE = [:authentication_token]
       include Aws::Structure
     end
 
@@ -2518,6 +2604,7 @@ module Aws::WorkDocs
     #
     class RequestedEntityTooLargeException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2530,6 +2617,7 @@ module Aws::WorkDocs
     #
     class ResourceAlreadyCheckedOutException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2574,6 +2662,7 @@ module Aws::WorkDocs
       :version_id,
       :owner,
       :parent_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2587,6 +2676,7 @@ module Aws::WorkDocs
     #
     class ResourcePath < Struct.new(
       :components)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2605,6 +2695,7 @@ module Aws::WorkDocs
     class ResourcePathComponent < Struct.new(
       :id,
       :name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2617,6 +2708,7 @@ module Aws::WorkDocs
     #
     class ServiceUnavailableException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2649,6 +2741,7 @@ module Aws::WorkDocs
       :id,
       :type,
       :role)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2687,6 +2780,7 @@ module Aws::WorkDocs
       :status,
       :share_id,
       :status_message)
+      SENSITIVE = [:status_message]
       include Aws::Structure
     end
 
@@ -2699,6 +2793,7 @@ module Aws::WorkDocs
     #
     class StorageLimitExceededException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2711,6 +2806,7 @@ module Aws::WorkDocs
     #
     class StorageLimitWillExceedException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2737,6 +2833,7 @@ module Aws::WorkDocs
     class StorageRuleType < Struct.new(
       :storage_allocated_in_bytes,
       :storage_type)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2760,6 +2857,7 @@ module Aws::WorkDocs
       :subscription_id,
       :end_point,
       :protocol)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2773,6 +2871,7 @@ module Aws::WorkDocs
     #
     class TooManyLabelsException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2786,6 +2885,7 @@ module Aws::WorkDocs
     #
     class TooManySubscriptionsException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2804,6 +2904,7 @@ module Aws::WorkDocs
     #
     class UnauthorizedResourceAccessException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2848,6 +2949,7 @@ module Aws::WorkDocs
       :name,
       :parent_folder_id,
       :resource_state)
+      SENSITIVE = [:authentication_token]
       include Aws::Structure
     end
 
@@ -2885,6 +2987,7 @@ module Aws::WorkDocs
       :document_id,
       :version_id,
       :version_status)
+      SENSITIVE = [:authentication_token]
       include Aws::Structure
     end
 
@@ -2929,6 +3032,7 @@ module Aws::WorkDocs
       :name,
       :parent_folder_id,
       :resource_state)
+      SENSITIVE = [:authentication_token]
       include Aws::Structure
     end
 
@@ -3000,6 +3104,7 @@ module Aws::WorkDocs
       :time_zone_id,
       :locale,
       :grant_poweruser_privileges)
+      SENSITIVE = [:authentication_token]
       include Aws::Structure
     end
 
@@ -3011,6 +3116,7 @@ module Aws::WorkDocs
     #
     class UpdateUserResponse < Struct.new(
       :user)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3029,6 +3135,7 @@ module Aws::WorkDocs
     class UploadMetadata < Struct.new(
       :upload_url,
       :signed_headers)
+      SENSITIVE = [:upload_url]
       include Aws::Structure
     end
 
@@ -3112,6 +3219,7 @@ module Aws::WorkDocs
       :time_zone_id,
       :locale,
       :storage)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3145,6 +3253,7 @@ module Aws::WorkDocs
       :given_name,
       :surname,
       :email_address)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3163,6 +3272,7 @@ module Aws::WorkDocs
     class UserStorageMetadata < Struct.new(
       :storage_utilized_in_bytes,
       :storage_rule)
+      SENSITIVE = []
       include Aws::Structure
     end
 

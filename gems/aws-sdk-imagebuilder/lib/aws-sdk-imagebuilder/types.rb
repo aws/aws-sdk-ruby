@@ -40,6 +40,7 @@ module Aws::Imagebuilder
       :name,
       :description,
       :state)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -84,6 +85,7 @@ module Aws::Imagebuilder
       :description,
       :ami_tags,
       :launch_permission)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -97,6 +99,7 @@ module Aws::Imagebuilder
     #
     class CallRateLimitExceededException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -125,6 +128,7 @@ module Aws::Imagebuilder
     class CancelImageCreationRequest < Struct.new(
       :image_build_version_arn,
       :client_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -147,6 +151,7 @@ module Aws::Imagebuilder
       :request_id,
       :client_token,
       :image_build_version_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -162,6 +167,7 @@ module Aws::Imagebuilder
     #
     class ClientException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -243,6 +249,7 @@ module Aws::Imagebuilder
       :encrypted,
       :date_created,
       :tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -263,6 +270,7 @@ module Aws::Imagebuilder
     #
     class ComponentConfiguration < Struct.new(
       :component_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -329,6 +337,7 @@ module Aws::Imagebuilder
       :change_description,
       :date_created,
       :tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -385,6 +394,7 @@ module Aws::Imagebuilder
       :type,
       :owner,
       :date_created)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -480,6 +490,7 @@ module Aws::Imagebuilder
       :kms_key_id,
       :tags,
       :client_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -502,6 +513,7 @@ module Aws::Imagebuilder
       :request_id,
       :client_token,
       :component_build_version_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -565,6 +577,7 @@ module Aws::Imagebuilder
       :distributions,
       :tags,
       :client_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -587,6 +600,7 @@ module Aws::Imagebuilder
       :request_id,
       :client_token,
       :distribution_configuration_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -683,6 +697,7 @@ module Aws::Imagebuilder
       :status,
       :tags,
       :client_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -705,6 +720,7 @@ module Aws::Imagebuilder
       :request_id,
       :client_token,
       :image_pipeline_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -804,6 +820,7 @@ module Aws::Imagebuilder
       :tags,
       :working_directory,
       :client_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -826,6 +843,7 @@ module Aws::Imagebuilder
       :request_id,
       :client_token,
       :image_recipe_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -895,6 +913,7 @@ module Aws::Imagebuilder
       :enhanced_image_metadata_enabled,
       :tags,
       :client_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -917,6 +936,7 @@ module Aws::Imagebuilder
       :request_id,
       :client_token,
       :image_build_version_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1028,6 +1048,7 @@ module Aws::Imagebuilder
       :resource_tags,
       :tags,
       :client_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1050,6 +1071,7 @@ module Aws::Imagebuilder
       :request_id,
       :client_token,
       :infrastructure_configuration_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1069,6 +1091,7 @@ module Aws::Imagebuilder
     #
     class DeleteComponentRequest < Struct.new(
       :component_build_version_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1086,6 +1109,7 @@ module Aws::Imagebuilder
     class DeleteComponentResponse < Struct.new(
       :request_id,
       :component_build_version_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1105,6 +1129,7 @@ module Aws::Imagebuilder
     #
     class DeleteDistributionConfigurationRequest < Struct.new(
       :distribution_configuration_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1122,6 +1147,7 @@ module Aws::Imagebuilder
     class DeleteDistributionConfigurationResponse < Struct.new(
       :request_id,
       :distribution_configuration_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1140,6 +1166,7 @@ module Aws::Imagebuilder
     #
     class DeleteImagePipelineRequest < Struct.new(
       :image_pipeline_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1157,6 +1184,7 @@ module Aws::Imagebuilder
     class DeleteImagePipelineResponse < Struct.new(
       :request_id,
       :image_pipeline_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1175,6 +1203,7 @@ module Aws::Imagebuilder
     #
     class DeleteImageRecipeRequest < Struct.new(
       :image_recipe_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1191,6 +1220,7 @@ module Aws::Imagebuilder
     class DeleteImageRecipeResponse < Struct.new(
       :request_id,
       :image_recipe_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1209,6 +1239,7 @@ module Aws::Imagebuilder
     #
     class DeleteImageRequest < Struct.new(
       :image_build_version_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1225,6 +1256,7 @@ module Aws::Imagebuilder
     class DeleteImageResponse < Struct.new(
       :request_id,
       :image_build_version_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1244,6 +1276,7 @@ module Aws::Imagebuilder
     #
     class DeleteInfrastructureConfigurationRequest < Struct.new(
       :infrastructure_configuration_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1261,6 +1294,7 @@ module Aws::Imagebuilder
     class DeleteInfrastructureConfigurationResponse < Struct.new(
       :request_id,
       :infrastructure_configuration_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1305,6 +1339,7 @@ module Aws::Imagebuilder
       :region,
       :ami_distribution_configuration,
       :license_configuration_arns)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1353,6 +1388,7 @@ module Aws::Imagebuilder
       :date_created,
       :date_updated,
       :tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1391,6 +1427,7 @@ module Aws::Imagebuilder
       :date_created,
       :date_updated,
       :tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1447,6 +1484,7 @@ module Aws::Imagebuilder
       :snapshot_id,
       :volume_size,
       :volume_type)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1476,6 +1514,7 @@ module Aws::Imagebuilder
     class Filter < Struct.new(
       :name,
       :values)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1488,6 +1527,7 @@ module Aws::Imagebuilder
     #
     class ForbiddenException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1507,6 +1547,7 @@ module Aws::Imagebuilder
     #
     class GetComponentPolicyRequest < Struct.new(
       :component_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1523,6 +1564,7 @@ module Aws::Imagebuilder
     class GetComponentPolicyResponse < Struct.new(
       :request_id,
       :policy)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1542,6 +1584,7 @@ module Aws::Imagebuilder
     #
     class GetComponentRequest < Struct.new(
       :component_build_version_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1558,6 +1601,7 @@ module Aws::Imagebuilder
     class GetComponentResponse < Struct.new(
       :request_id,
       :component)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1577,6 +1621,7 @@ module Aws::Imagebuilder
     #
     class GetDistributionConfigurationRequest < Struct.new(
       :distribution_configuration_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1593,6 +1638,7 @@ module Aws::Imagebuilder
     class GetDistributionConfigurationResponse < Struct.new(
       :request_id,
       :distribution_configuration)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1612,6 +1658,7 @@ module Aws::Imagebuilder
     #
     class GetImagePipelineRequest < Struct.new(
       :image_pipeline_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1628,6 +1675,7 @@ module Aws::Imagebuilder
     class GetImagePipelineResponse < Struct.new(
       :request_id,
       :image_pipeline)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1647,6 +1695,7 @@ module Aws::Imagebuilder
     #
     class GetImagePolicyRequest < Struct.new(
       :image_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1663,6 +1712,7 @@ module Aws::Imagebuilder
     class GetImagePolicyResponse < Struct.new(
       :request_id,
       :policy)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1682,6 +1732,7 @@ module Aws::Imagebuilder
     #
     class GetImageRecipePolicyRequest < Struct.new(
       :image_recipe_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1698,6 +1749,7 @@ module Aws::Imagebuilder
     class GetImageRecipePolicyResponse < Struct.new(
       :request_id,
       :policy)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1717,6 +1769,7 @@ module Aws::Imagebuilder
     #
     class GetImageRecipeRequest < Struct.new(
       :image_recipe_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1733,6 +1786,7 @@ module Aws::Imagebuilder
     class GetImageRecipeResponse < Struct.new(
       :request_id,
       :image_recipe)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1752,6 +1806,7 @@ module Aws::Imagebuilder
     #
     class GetImageRequest < Struct.new(
       :image_build_version_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1768,6 +1823,7 @@ module Aws::Imagebuilder
     class GetImageResponse < Struct.new(
       :request_id,
       :image)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1789,6 +1845,7 @@ module Aws::Imagebuilder
     #
     class GetInfrastructureConfigurationRequest < Struct.new(
       :infrastructure_configuration_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1807,6 +1864,7 @@ module Aws::Imagebuilder
     class GetInfrastructureConfigurationResponse < Struct.new(
       :request_id,
       :infrastructure_configuration)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1821,6 +1879,7 @@ module Aws::Imagebuilder
     #
     class IdempotentParameterMismatchException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1914,6 +1973,7 @@ module Aws::Imagebuilder
       :date_created,
       :output_resources,
       :tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2008,6 +2068,7 @@ module Aws::Imagebuilder
       :date_last_run,
       :date_next_run,
       :tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2077,6 +2138,7 @@ module Aws::Imagebuilder
       :date_created,
       :tags,
       :working_directory)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2120,6 +2182,7 @@ module Aws::Imagebuilder
       :parent_image,
       :date_created,
       :tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2138,6 +2201,7 @@ module Aws::Imagebuilder
     class ImageState < Struct.new(
       :status,
       :reason)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2197,6 +2261,7 @@ module Aws::Imagebuilder
       :date_created,
       :output_resources,
       :tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2223,6 +2288,7 @@ module Aws::Imagebuilder
     class ImageTestsConfiguration < Struct.new(
       :image_tests_enabled,
       :timeout_minutes)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2267,6 +2333,7 @@ module Aws::Imagebuilder
       :os_version,
       :owner,
       :date_created)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2367,6 +2434,7 @@ module Aws::Imagebuilder
       :kms_key_id,
       :tags,
       :client_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2388,6 +2456,7 @@ module Aws::Imagebuilder
       :request_id,
       :client_token,
       :component_build_version_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2473,6 +2542,7 @@ module Aws::Imagebuilder
       :date_updated,
       :resource_tags,
       :tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2516,6 +2586,7 @@ module Aws::Imagebuilder
       :date_updated,
       :resource_tags,
       :tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2563,6 +2634,7 @@ module Aws::Imagebuilder
       :ebs,
       :virtual_name,
       :no_device)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2575,6 +2647,7 @@ module Aws::Imagebuilder
     #
     class InvalidPaginationTokenException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2588,6 +2661,7 @@ module Aws::Imagebuilder
     #
     class InvalidParameterCombinationException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2601,6 +2675,7 @@ module Aws::Imagebuilder
     #
     class InvalidParameterException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2613,6 +2688,7 @@ module Aws::Imagebuilder
     #
     class InvalidParameterValueException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2626,6 +2702,7 @@ module Aws::Imagebuilder
     #
     class InvalidRequestException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2639,6 +2716,7 @@ module Aws::Imagebuilder
     #
     class InvalidVersionNumberException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2672,6 +2750,7 @@ module Aws::Imagebuilder
     class LaunchPermissionConfiguration < Struct.new(
       :user_ids,
       :user_groups)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2704,6 +2783,7 @@ module Aws::Imagebuilder
       :component_version_arn,
       :max_results,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2728,6 +2808,7 @@ module Aws::Imagebuilder
       :request_id,
       :component_summary_list,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2774,6 +2855,7 @@ module Aws::Imagebuilder
       :filters,
       :max_results,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2798,6 +2880,7 @@ module Aws::Imagebuilder
       :request_id,
       :component_version_list,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2834,6 +2917,7 @@ module Aws::Imagebuilder
       :filters,
       :max_results,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2858,6 +2942,7 @@ module Aws::Imagebuilder
       :request_id,
       :distribution_configuration_summary_list,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2901,6 +2986,7 @@ module Aws::Imagebuilder
       :filters,
       :max_results,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2925,6 +3011,7 @@ module Aws::Imagebuilder
       :request_id,
       :image_summary_list,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2968,6 +3055,7 @@ module Aws::Imagebuilder
       :filters,
       :max_results,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2992,6 +3080,7 @@ module Aws::Imagebuilder
       :request_id,
       :image_summary_list,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3028,6 +3117,7 @@ module Aws::Imagebuilder
       :filters,
       :max_results,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3052,6 +3142,7 @@ module Aws::Imagebuilder
       :request_id,
       :image_pipeline_list,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3098,6 +3189,7 @@ module Aws::Imagebuilder
       :filters,
       :max_results,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3122,6 +3214,7 @@ module Aws::Imagebuilder
       :request_id,
       :image_recipe_summary_list,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3168,6 +3261,7 @@ module Aws::Imagebuilder
       :filters,
       :max_results,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3192,6 +3286,7 @@ module Aws::Imagebuilder
       :request_id,
       :image_version_list,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3228,6 +3323,7 @@ module Aws::Imagebuilder
       :filters,
       :max_results,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3252,6 +3348,7 @@ module Aws::Imagebuilder
       :request_id,
       :infrastructure_configuration_summary_list,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3271,6 +3368,7 @@ module Aws::Imagebuilder
     #
     class ListTagsForResourceRequest < Struct.new(
       :resource_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3282,6 +3380,7 @@ module Aws::Imagebuilder
     #
     class ListTagsForResourceResponse < Struct.new(
       :tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3305,6 +3404,7 @@ module Aws::Imagebuilder
     #
     class Logging < Struct.new(
       :s3_logs)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3318,6 +3418,7 @@ module Aws::Imagebuilder
     #
     class OutputResources < Struct.new(
       :amis)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3343,6 +3444,7 @@ module Aws::Imagebuilder
     class PutComponentPolicyRequest < Struct.new(
       :component_arn,
       :policy)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3360,6 +3462,7 @@ module Aws::Imagebuilder
     class PutComponentPolicyResponse < Struct.new(
       :request_id,
       :component_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3385,6 +3488,7 @@ module Aws::Imagebuilder
     class PutImagePolicyRequest < Struct.new(
       :image_arn,
       :policy)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3402,6 +3506,7 @@ module Aws::Imagebuilder
     class PutImagePolicyResponse < Struct.new(
       :request_id,
       :image_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3427,6 +3532,7 @@ module Aws::Imagebuilder
     class PutImageRecipePolicyRequest < Struct.new(
       :image_recipe_arn,
       :policy)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3444,6 +3550,7 @@ module Aws::Imagebuilder
     class PutImageRecipePolicyResponse < Struct.new(
       :request_id,
       :image_recipe_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3456,6 +3563,7 @@ module Aws::Imagebuilder
     #
     class ResourceAlreadyExistsException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3469,6 +3577,7 @@ module Aws::Imagebuilder
     #
     class ResourceDependencyException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3482,6 +3591,7 @@ module Aws::Imagebuilder
     #
     class ResourceInUseException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3495,6 +3605,7 @@ module Aws::Imagebuilder
     #
     class ResourceNotFoundException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3521,6 +3632,7 @@ module Aws::Imagebuilder
     class S3Logs < Struct.new(
       :s3_bucket_name,
       :s3_key_prefix)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3554,6 +3666,7 @@ module Aws::Imagebuilder
     class Schedule < Struct.new(
       :schedule_expression,
       :pipeline_execution_start_condition)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3567,6 +3680,7 @@ module Aws::Imagebuilder
     #
     class ServiceException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3585,6 +3699,7 @@ module Aws::Imagebuilder
     #
     class ServiceQuotaExceededException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3597,6 +3712,7 @@ module Aws::Imagebuilder
     #
     class ServiceUnavailableException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3625,6 +3741,7 @@ module Aws::Imagebuilder
     class StartImagePipelineExecutionRequest < Struct.new(
       :image_pipeline_arn,
       :client_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3647,6 +3764,7 @@ module Aws::Imagebuilder
       :request_id,
       :client_token,
       :image_build_version_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3673,6 +3791,7 @@ module Aws::Imagebuilder
     class TagResourceRequest < Struct.new(
       :resource_arn,
       :tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3702,6 +3821,7 @@ module Aws::Imagebuilder
     class UntagResourceRequest < Struct.new(
       :resource_arn,
       :tag_keys)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3762,6 +3882,7 @@ module Aws::Imagebuilder
       :description,
       :distributions,
       :client_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3784,6 +3905,7 @@ module Aws::Imagebuilder
       :request_id,
       :client_token,
       :distribution_configuration_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3873,6 +3995,7 @@ module Aws::Imagebuilder
       :schedule,
       :status,
       :client_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3895,6 +4018,7 @@ module Aws::Imagebuilder
       :request_id,
       :client_token,
       :image_pipeline_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3999,6 +4123,7 @@ module Aws::Imagebuilder
       :sns_topic_arn,
       :client_token,
       :resource_tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4021,6 +4146,7 @@ module Aws::Imagebuilder
       :request_id,
       :client_token,
       :infrastructure_configuration_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 

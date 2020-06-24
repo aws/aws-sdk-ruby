@@ -3,6 +3,16 @@ Unreleased Changes
 
 * Issue - Reduce memory usage of `IOEncryptor` and `IODecryptor`.
 
+1.70.0 (2020-06-23)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.69.1 (2020-06-22)
+------------------
+
+* Issue - Add support for user provided encryption context to `EncryptionV2::Client`.
+
 1.69.0 (2020-06-18)
 ------------------
 

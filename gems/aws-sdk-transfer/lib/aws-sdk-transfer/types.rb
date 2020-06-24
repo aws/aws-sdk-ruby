@@ -19,6 +19,7 @@ module Aws::Transfer
     #
     class AccessDeniedException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -33,6 +34,7 @@ module Aws::Transfer
     #
     class ConflictException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -216,6 +218,7 @@ module Aws::Transfer
       :logging_role,
       :protocols,
       :tags)
+      SENSITIVE = [:host_key]
       include Aws::Structure
     end
 
@@ -228,6 +231,7 @@ module Aws::Transfer
     #
     class CreateServerResponse < Struct.new(
       :server_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -377,6 +381,7 @@ module Aws::Transfer
       :ssh_public_key_body,
       :tags,
       :user_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -395,6 +400,7 @@ module Aws::Transfer
     class CreateUserResponse < Struct.new(
       :server_id,
       :user_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -414,6 +420,7 @@ module Aws::Transfer
     #
     class DeleteServerRequest < Struct.new(
       :server_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -446,6 +453,7 @@ module Aws::Transfer
       :server_id,
       :ssh_public_key_id,
       :user_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -472,6 +480,7 @@ module Aws::Transfer
     class DeleteUserRequest < Struct.new(
       :server_id,
       :user_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -491,6 +500,7 @@ module Aws::Transfer
     #
     class DescribeServerRequest < Struct.new(
       :server_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -503,6 +513,7 @@ module Aws::Transfer
     #
     class DescribeServerResponse < Struct.new(
       :server)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -531,6 +542,7 @@ module Aws::Transfer
     class DescribeUserRequest < Struct.new(
       :server_id,
       :user_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -549,6 +561,7 @@ module Aws::Transfer
     class DescribeUserResponse < Struct.new(
       :server_id,
       :user)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -669,6 +682,7 @@ module Aws::Transfer
       :state,
       :tags,
       :user_count)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -755,6 +769,7 @@ module Aws::Transfer
       :ssh_public_keys,
       :tags,
       :user_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -818,6 +833,7 @@ module Aws::Transfer
       :subnet_ids,
       :vpc_endpoint_id,
       :vpc_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -845,6 +861,7 @@ module Aws::Transfer
     class HomeDirectoryMapEntry < Struct.new(
       :entry,
       :target)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -875,6 +892,7 @@ module Aws::Transfer
     class IdentityProviderDetails < Struct.new(
       :url,
       :invocation_role)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -907,6 +925,7 @@ module Aws::Transfer
       :server_id,
       :ssh_public_key_body,
       :user_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -934,6 +953,7 @@ module Aws::Transfer
       :server_id,
       :ssh_public_key_id,
       :user_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -947,6 +967,7 @@ module Aws::Transfer
     #
     class InternalServiceError < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -959,6 +980,7 @@ module Aws::Transfer
     #
     class InvalidNextTokenException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -971,6 +993,7 @@ module Aws::Transfer
     #
     class InvalidRequestException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -999,6 +1022,7 @@ module Aws::Transfer
     class ListServersRequest < Struct.new(
       :max_results,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1018,6 +1042,7 @@ module Aws::Transfer
     class ListServersResponse < Struct.new(
       :next_token,
       :servers)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1054,6 +1079,7 @@ module Aws::Transfer
       :arn,
       :max_results,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1080,6 +1106,7 @@ module Aws::Transfer
       :arn,
       :next_token,
       :tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1115,6 +1142,7 @@ module Aws::Transfer
       :max_results,
       :next_token,
       :server_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1141,6 +1169,7 @@ module Aws::Transfer
       :next_token,
       :server_id,
       :users)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1206,6 +1235,7 @@ module Aws::Transfer
       :server_id,
       :state,
       :user_count)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1258,6 +1288,7 @@ module Aws::Transfer
       :role,
       :ssh_public_key_count,
       :user_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1278,6 +1309,7 @@ module Aws::Transfer
       :message,
       :resource,
       :resource_type)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1299,6 +1331,7 @@ module Aws::Transfer
       :message,
       :resource,
       :resource_type)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1312,6 +1345,7 @@ module Aws::Transfer
     #
     class ServiceUnavailableException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1343,6 +1377,7 @@ module Aws::Transfer
       :date_imported,
       :ssh_public_key_body,
       :ssh_public_key_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1362,6 +1397,7 @@ module Aws::Transfer
     #
     class StartServerRequest < Struct.new(
       :server_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1381,6 +1417,7 @@ module Aws::Transfer
     #
     class StopServerRequest < Struct.new(
       :server_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1413,6 +1450,7 @@ module Aws::Transfer
     class Tag < Struct.new(
       :key,
       :value)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1445,6 +1483,7 @@ module Aws::Transfer
     class TagResourceRequest < Struct.new(
       :arn,
       :tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1497,6 +1536,7 @@ module Aws::Transfer
       :source_ip,
       :user_name,
       :user_password)
+      SENSITIVE = [:user_password]
       include Aws::Structure
     end
 
@@ -1523,6 +1563,7 @@ module Aws::Transfer
       :status_code,
       :message,
       :url)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1537,6 +1578,7 @@ module Aws::Transfer
     #
     class ThrottlingException < Struct.new(
       :retry_after_seconds)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1565,6 +1607,7 @@ module Aws::Transfer
     class UntagResourceRequest < Struct.new(
       :arn,
       :tag_keys)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1731,6 +1774,7 @@ module Aws::Transfer
       :logging_role,
       :protocols,
       :server_id)
+      SENSITIVE = [:host_key]
       include Aws::Structure
     end
 
@@ -1743,6 +1787,7 @@ module Aws::Transfer
     #
     class UpdateServerResponse < Struct.new(
       :server_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1874,6 +1919,7 @@ module Aws::Transfer
       :role,
       :server_id,
       :user_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1897,6 +1943,7 @@ module Aws::Transfer
     class UpdateUserResponse < Struct.new(
       :server_id,
       :user_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 

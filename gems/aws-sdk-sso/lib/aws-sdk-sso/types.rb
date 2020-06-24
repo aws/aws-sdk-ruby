@@ -30,6 +30,7 @@ module Aws::SSO
       :account_id,
       :account_name,
       :email_address)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -66,6 +67,7 @@ module Aws::SSO
       :role_name,
       :account_id,
       :access_token)
+      SENSITIVE = [:access_token]
       include Aws::Structure
     end
 
@@ -77,6 +79,7 @@ module Aws::SSO
     #
     class GetRoleCredentialsResponse < Struct.new(
       :role_credentials)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -90,6 +93,7 @@ module Aws::SSO
     #
     class InvalidRequestException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -133,6 +137,7 @@ module Aws::SSO
       :max_results,
       :access_token,
       :account_id)
+      SENSITIVE = [:access_token]
       include Aws::Structure
     end
 
@@ -150,6 +155,7 @@ module Aws::SSO
     class ListAccountRolesResponse < Struct.new(
       :next_token,
       :role_list)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -187,6 +193,7 @@ module Aws::SSO
       :next_token,
       :max_results,
       :access_token)
+      SENSITIVE = [:access_token]
       include Aws::Structure
     end
 
@@ -204,6 +211,7 @@ module Aws::SSO
     class ListAccountsResponse < Struct.new(
       :next_token,
       :account_list)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -228,6 +236,7 @@ module Aws::SSO
     #
     class LogoutRequest < Struct.new(
       :access_token)
+      SENSITIVE = [:access_token]
       include Aws::Structure
     end
 
@@ -240,6 +249,7 @@ module Aws::SSO
     #
     class ResourceNotFoundException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -287,6 +297,7 @@ module Aws::SSO
       :secret_access_key,
       :session_token,
       :expiration)
+      SENSITIVE = [:secret_access_key, :session_token]
       include Aws::Structure
     end
 
@@ -305,6 +316,7 @@ module Aws::SSO
     class RoleInfo < Struct.new(
       :role_name,
       :account_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -318,6 +330,7 @@ module Aws::SSO
     #
     class TooManyRequestsException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -331,6 +344,7 @@ module Aws::SSO
     #
     class UnauthorizedException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 

@@ -22,6 +22,7 @@ module Aws::ApiGatewayManagementApi
     #
     class DeleteConnectionRequest < Struct.new(
       :connection_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -41,6 +42,7 @@ module Aws::ApiGatewayManagementApi
     #
     class GetConnectionRequest < Struct.new(
       :connection_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -57,6 +59,7 @@ module Aws::ApiGatewayManagementApi
       :connected_at,
       :identity,
       :last_active_at)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -76,6 +79,7 @@ module Aws::ApiGatewayManagementApi
     class Identity < Struct.new(
       :source_ip,
       :user_agent)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -86,6 +90,7 @@ module Aws::ApiGatewayManagementApi
     #
     class PayloadTooLargeException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -107,6 +112,7 @@ module Aws::ApiGatewayManagementApi
     class PostToConnectionRequest < Struct.new(
       :data,
       :connection_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 

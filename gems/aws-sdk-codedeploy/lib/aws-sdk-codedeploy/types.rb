@@ -42,6 +42,7 @@ module Aws::CodeDeploy
     class AddTagsToOnPremisesInstancesInput < Struct.new(
       :tags,
       :instance_names)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -63,6 +64,7 @@ module Aws::CodeDeploy
     #
     class Alarm < Struct.new(
       :name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -108,6 +110,7 @@ module Aws::CodeDeploy
       :enabled,
       :ignore_poll_alarm_failure,
       :alarms)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -156,6 +159,7 @@ module Aws::CodeDeploy
     class AppSpecContent < Struct.new(
       :content,
       :sha256)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -209,6 +213,7 @@ module Aws::CodeDeploy
       :linked_to_git_hub,
       :git_hub_account_name,
       :compute_platform)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -257,6 +262,7 @@ module Aws::CodeDeploy
     class AutoRollbackConfiguration < Struct.new(
       :enabled,
       :events)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -275,6 +281,7 @@ module Aws::CodeDeploy
     class AutoScalingGroup < Struct.new(
       :name,
       :hook)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -328,6 +335,7 @@ module Aws::CodeDeploy
     class BatchGetApplicationRevisionsInput < Struct.new(
       :application_name,
       :revisions)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -353,6 +361,7 @@ module Aws::CodeDeploy
       :application_name,
       :error_message,
       :revisions)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -374,6 +383,7 @@ module Aws::CodeDeploy
     #
     class BatchGetApplicationsInput < Struct.new(
       :application_names)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -387,6 +397,7 @@ module Aws::CodeDeploy
     #
     class BatchGetApplicationsOutput < Struct.new(
       :applications_info)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -414,6 +425,7 @@ module Aws::CodeDeploy
     class BatchGetDeploymentGroupsInput < Struct.new(
       :application_name,
       :deployment_group_names)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -433,6 +445,7 @@ module Aws::CodeDeploy
     class BatchGetDeploymentGroupsOutput < Struct.new(
       :deployment_groups_info,
       :error_message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -460,6 +473,7 @@ module Aws::CodeDeploy
     class BatchGetDeploymentInstancesInput < Struct.new(
       :deployment_id,
       :instance_ids)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -479,6 +493,7 @@ module Aws::CodeDeploy
     class BatchGetDeploymentInstancesOutput < Struct.new(
       :instances_summary,
       :error_message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -522,6 +537,7 @@ module Aws::CodeDeploy
     class BatchGetDeploymentTargetsInput < Struct.new(
       :deployment_id,
       :target_ids)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -547,6 +563,7 @@ module Aws::CodeDeploy
     #
     class BatchGetDeploymentTargetsOutput < Struct.new(
       :deployment_targets)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -568,6 +585,7 @@ module Aws::CodeDeploy
     #
     class BatchGetDeploymentsInput < Struct.new(
       :deployment_ids)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -581,6 +599,7 @@ module Aws::CodeDeploy
     #
     class BatchGetDeploymentsOutput < Struct.new(
       :deployments_info)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -603,6 +622,7 @@ module Aws::CodeDeploy
     #
     class BatchGetOnPremisesInstancesInput < Struct.new(
       :instance_names)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -616,6 +636,7 @@ module Aws::CodeDeploy
     #
     class BatchGetOnPremisesInstancesOutput < Struct.new(
       :instance_infos)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -667,6 +688,7 @@ module Aws::CodeDeploy
       :terminate_blue_instances_on_deployment_success,
       :deployment_ready_option,
       :green_fleet_provisioning_option)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -712,6 +734,7 @@ module Aws::CodeDeploy
     class BlueInstanceTerminationOption < Struct.new(
       :action,
       :termination_wait_time_in_minutes)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -768,6 +791,7 @@ module Aws::CodeDeploy
       :status,
       :resource_type,
       :target_version_weight)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -796,6 +820,7 @@ module Aws::CodeDeploy
     class ContinueDeploymentInput < Struct.new(
       :deployment_id,
       :deployment_wait_type)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -837,6 +862,7 @@ module Aws::CodeDeploy
       :application_name,
       :compute_platform,
       :tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -850,6 +876,7 @@ module Aws::CodeDeploy
     #
     class CreateApplicationOutput < Struct.new(
       :application_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -922,6 +949,7 @@ module Aws::CodeDeploy
       :minimum_healthy_hosts,
       :traffic_routing_config,
       :compute_platform)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -935,6 +963,7 @@ module Aws::CodeDeploy
     #
     class CreateDeploymentConfigOutput < Struct.new(
       :deployment_config_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1194,6 +1223,7 @@ module Aws::CodeDeploy
       :ecs_services,
       :on_premises_tag_set,
       :tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1207,6 +1237,7 @@ module Aws::CodeDeploy
     #
     class CreateDeploymentGroupOutput < Struct.new(
       :deployment_group_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1375,6 +1406,7 @@ module Aws::CodeDeploy
       :auto_rollback_configuration,
       :update_outdated_instances_only,
       :file_exists_behavior)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1388,6 +1420,7 @@ module Aws::CodeDeploy
     #
     class CreateDeploymentOutput < Struct.new(
       :deployment_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1409,6 +1442,7 @@ module Aws::CodeDeploy
     #
     class DeleteApplicationInput < Struct.new(
       :application_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1430,6 +1464,7 @@ module Aws::CodeDeploy
     #
     class DeleteDeploymentConfigInput < Struct.new(
       :deployment_config_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1457,6 +1492,7 @@ module Aws::CodeDeploy
     class DeleteDeploymentGroupInput < Struct.new(
       :application_name,
       :deployment_group_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1476,6 +1512,7 @@ module Aws::CodeDeploy
     #
     class DeleteDeploymentGroupOutput < Struct.new(
       :hooks_not_cleaned_up)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1496,6 +1533,7 @@ module Aws::CodeDeploy
     #
     class DeleteGitHubAccountTokenInput < Struct.new(
       :token_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1509,6 +1547,7 @@ module Aws::CodeDeploy
     #
     class DeleteGitHubAccountTokenOutput < Struct.new(
       :token_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1528,6 +1567,7 @@ module Aws::CodeDeploy
     #
     class DeleteResourcesByExternalIdInput < Struct.new(
       :external_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1607,6 +1647,7 @@ module Aws::CodeDeploy
       :create_time,
       :compute_platform,
       :traffic_routing_config)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1778,6 +1819,7 @@ module Aws::CodeDeploy
       :on_premises_tag_set,
       :compute_platform,
       :ecs_services)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2008,6 +2050,7 @@ module Aws::CodeDeploy
       :deployment_status_messages,
       :compute_platform,
       :external_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2068,6 +2111,7 @@ module Aws::CodeDeploy
       :failed,
       :skipped,
       :ready)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2109,6 +2153,7 @@ module Aws::CodeDeploy
     class DeploymentReadyOption < Struct.new(
       :action_on_timeout,
       :wait_time_in_minutes)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2139,6 +2184,7 @@ module Aws::CodeDeploy
     class DeploymentStyle < Struct.new(
       :deployment_type,
       :deployment_option)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2178,6 +2224,7 @@ module Aws::CodeDeploy
       :lambda_target,
       :ecs_target,
       :cloud_formation_target)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2219,6 +2266,7 @@ module Aws::CodeDeploy
     #
     class DeregisterOnPremisesInstanceInput < Struct.new(
       :instance_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2273,6 +2321,7 @@ module Aws::CodeDeploy
       :script_name,
       :message,
       :log_tail)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2311,6 +2360,7 @@ module Aws::CodeDeploy
       :key,
       :value,
       :type)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2341,6 +2391,7 @@ module Aws::CodeDeploy
     #
     class EC2TagSet < Struct.new(
       :ec2_tag_set_list)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2369,6 +2420,7 @@ module Aws::CodeDeploy
     class ECSService < Struct.new(
       :service_name,
       :cluster_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2422,6 +2474,7 @@ module Aws::CodeDeploy
       :lifecycle_events,
       :status,
       :task_sets_info)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2496,6 +2549,7 @@ module Aws::CodeDeploy
       :traffic_weight,
       :target_group,
       :task_set_label)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2523,6 +2577,7 @@ module Aws::CodeDeploy
     #
     class ELBInfo < Struct.new(
       :name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2589,6 +2644,7 @@ module Aws::CodeDeploy
     class ErrorInformation < Struct.new(
       :code,
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2622,6 +2678,7 @@ module Aws::CodeDeploy
       :first_used_time,
       :last_used_time,
       :register_time)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2643,6 +2700,7 @@ module Aws::CodeDeploy
     #
     class GetApplicationInput < Struct.new(
       :application_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2656,6 +2714,7 @@ module Aws::CodeDeploy
     #
     class GetApplicationOutput < Struct.new(
       :application)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2704,6 +2763,7 @@ module Aws::CodeDeploy
     class GetApplicationRevisionInput < Struct.new(
       :application_name,
       :revision)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2728,6 +2788,7 @@ module Aws::CodeDeploy
       :application_name,
       :revision,
       :revision_info)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2749,6 +2810,7 @@ module Aws::CodeDeploy
     #
     class GetDeploymentConfigInput < Struct.new(
       :deployment_config_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2762,6 +2824,7 @@ module Aws::CodeDeploy
     #
     class GetDeploymentConfigOutput < Struct.new(
       :deployment_config_info)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2789,6 +2852,7 @@ module Aws::CodeDeploy
     class GetDeploymentGroupInput < Struct.new(
       :application_name,
       :deployment_group_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2802,6 +2866,7 @@ module Aws::CodeDeploy
     #
     class GetDeploymentGroupOutput < Struct.new(
       :deployment_group_info)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2823,6 +2888,7 @@ module Aws::CodeDeploy
     #
     class GetDeploymentInput < Struct.new(
       :deployment_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2849,6 +2915,7 @@ module Aws::CodeDeploy
     class GetDeploymentInstanceInput < Struct.new(
       :deployment_id,
       :instance_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2862,6 +2929,7 @@ module Aws::CodeDeploy
     #
     class GetDeploymentInstanceOutput < Struct.new(
       :instance_summary)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2875,6 +2943,7 @@ module Aws::CodeDeploy
     #
     class GetDeploymentOutput < Struct.new(
       :deployment_info)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2899,6 +2968,7 @@ module Aws::CodeDeploy
     class GetDeploymentTargetInput < Struct.new(
       :deployment_id,
       :target_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2914,6 +2984,7 @@ module Aws::CodeDeploy
     #
     class GetDeploymentTargetOutput < Struct.new(
       :deployment_target)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2934,6 +3005,7 @@ module Aws::CodeDeploy
     #
     class GetOnPremisesInstanceInput < Struct.new(
       :instance_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2947,6 +3019,7 @@ module Aws::CodeDeploy
     #
     class GetOnPremisesInstanceOutput < Struct.new(
       :instance_info)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2992,6 +3065,7 @@ module Aws::CodeDeploy
     class GitHubLocation < Struct.new(
       :repository,
       :commit_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3020,6 +3094,7 @@ module Aws::CodeDeploy
     #
     class GreenFleetProvisioningOption < Struct.new(
       :action)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3103,6 +3178,7 @@ module Aws::CodeDeploy
       :register_time,
       :deregister_time,
       :tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3184,6 +3260,7 @@ module Aws::CodeDeploy
       :last_updated_at,
       :lifecycle_events,
       :instance_type)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3231,6 +3308,7 @@ module Aws::CodeDeploy
       :last_updated_at,
       :lifecycle_events,
       :instance_label)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3664,6 +3742,7 @@ module Aws::CodeDeploy
       :current_version,
       :target_version,
       :target_version_weight)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3712,6 +3791,7 @@ module Aws::CodeDeploy
       :last_updated_at,
       :lifecycle_events,
       :lambda_function_info)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3743,6 +3823,7 @@ module Aws::CodeDeploy
       :status,
       :end_time,
       :create_time)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3792,6 +3873,7 @@ module Aws::CodeDeploy
       :start_time,
       :end_time,
       :status)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3896,6 +3978,7 @@ module Aws::CodeDeploy
       :s3_key_prefix,
       :deployed,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3916,6 +3999,7 @@ module Aws::CodeDeploy
     class ListApplicationRevisionsOutput < Struct.new(
       :revisions,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3937,6 +4021,7 @@ module Aws::CodeDeploy
     #
     class ListApplicationsInput < Struct.new(
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3957,6 +4042,7 @@ module Aws::CodeDeploy
     class ListApplicationsOutput < Struct.new(
       :applications,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3979,6 +4065,7 @@ module Aws::CodeDeploy
     #
     class ListDeploymentConfigsInput < Struct.new(
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4001,6 +4088,7 @@ module Aws::CodeDeploy
     class ListDeploymentConfigsOutput < Struct.new(
       :deployment_configs_list,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4030,6 +4118,7 @@ module Aws::CodeDeploy
     class ListDeploymentGroupsInput < Struct.new(
       :application_name,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4055,6 +4144,7 @@ module Aws::CodeDeploy
       :application_name,
       :deployment_groups,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4112,6 +4202,7 @@ module Aws::CodeDeploy
       :next_token,
       :instance_status_filter,
       :instance_type_filter)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4132,6 +4223,7 @@ module Aws::CodeDeploy
     class ListDeploymentInstancesOutput < Struct.new(
       :instances_list,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4173,6 +4265,7 @@ module Aws::CodeDeploy
       :deployment_id,
       :next_token,
       :target_filters)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4192,6 +4285,7 @@ module Aws::CodeDeploy
     class ListDeploymentTargetsOutput < Struct.new(
       :target_ids,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4275,6 +4369,7 @@ module Aws::CodeDeploy
       :include_only_statuses,
       :create_time_range,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4295,6 +4390,7 @@ module Aws::CodeDeploy
     class ListDeploymentsOutput < Struct.new(
       :deployments,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4317,6 +4413,7 @@ module Aws::CodeDeploy
     #
     class ListGitHubAccountTokenNamesInput < Struct.new(
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4338,6 +4435,7 @@ module Aws::CodeDeploy
     class ListGitHubAccountTokenNamesOutput < Struct.new(
       :token_name_list,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4385,6 +4483,7 @@ module Aws::CodeDeploy
       :registration_status,
       :tag_filters,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4405,6 +4504,7 @@ module Aws::CodeDeploy
     class ListOnPremisesInstancesOutput < Struct.new(
       :instance_names,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4432,6 +4532,7 @@ module Aws::CodeDeploy
     class ListTagsForResourceInput < Struct.new(
       :resource_arn,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4452,6 +4553,7 @@ module Aws::CodeDeploy
     class ListTagsForResourceOutput < Struct.new(
       :tags,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4520,6 +4622,7 @@ module Aws::CodeDeploy
       :elb_info_list,
       :target_group_info_list,
       :target_group_pair_info_list)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4580,6 +4683,7 @@ module Aws::CodeDeploy
     class MinimumHealthyHosts < Struct.new(
       :value,
       :type)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4617,6 +4721,7 @@ module Aws::CodeDeploy
     #
     class OnPremisesTagSet < Struct.new(
       :on_premises_tag_set_list)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4657,6 +4762,7 @@ module Aws::CodeDeploy
       :deployment_id,
       :lifecycle_event_hook_execution_id,
       :status)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4669,6 +4775,7 @@ module Aws::CodeDeploy
     #
     class PutLifecycleEventHookExecutionStatusOutput < Struct.new(
       :lifecycle_event_hook_execution_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4699,6 +4806,7 @@ module Aws::CodeDeploy
     class RawString < Struct.new(
       :content,
       :sha256)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4754,6 +4862,7 @@ module Aws::CodeDeploy
       :application_name,
       :description,
       :revision)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4787,6 +4896,7 @@ module Aws::CodeDeploy
       :instance_name,
       :iam_session_arn,
       :iam_user_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4819,6 +4929,7 @@ module Aws::CodeDeploy
     class RemoveTagsFromOnPremisesInstancesInput < Struct.new(
       :tags,
       :instance_names)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4856,6 +4967,7 @@ module Aws::CodeDeploy
     class RevisionInfo < Struct.new(
       :revision_location,
       :generic_revision_info)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4932,6 +5044,7 @@ module Aws::CodeDeploy
       :git_hub_location,
       :string,
       :app_spec_content)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4970,6 +5083,7 @@ module Aws::CodeDeploy
       :rollback_deployment_id,
       :rollback_triggering_deployment_id,
       :rollback_message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5032,6 +5146,7 @@ module Aws::CodeDeploy
       :bundle_type,
       :version,
       :e_tag)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5051,6 +5166,7 @@ module Aws::CodeDeploy
     #
     class SkipWaitTimeForInstanceTerminationInput < Struct.new(
       :deployment_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5079,6 +5195,7 @@ module Aws::CodeDeploy
     class StopDeploymentInput < Struct.new(
       :deployment_id,
       :auto_rollback_enabled)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5101,6 +5218,7 @@ module Aws::CodeDeploy
     class StopDeploymentOutput < Struct.new(
       :status,
       :status_message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5127,6 +5245,7 @@ module Aws::CodeDeploy
     class Tag < Struct.new(
       :key,
       :value)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5165,6 +5284,7 @@ module Aws::CodeDeploy
       :key,
       :value,
       :type)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5208,6 +5328,7 @@ module Aws::CodeDeploy
     class TagResourceInput < Struct.new(
       :resource_arn,
       :tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5247,6 +5368,7 @@ module Aws::CodeDeploy
     #
     class TargetGroupInfo < Struct.new(
       :name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5294,6 +5416,7 @@ module Aws::CodeDeploy
       :target_groups,
       :prod_traffic_route,
       :test_traffic_route)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5349,6 +5472,7 @@ module Aws::CodeDeploy
       :tag_filters,
       :auto_scaling_groups,
       :ec2_tag_set)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5386,6 +5510,7 @@ module Aws::CodeDeploy
     class TimeBasedCanary < Struct.new(
       :canary_percentage,
       :canary_interval)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5418,6 +5543,7 @@ module Aws::CodeDeploy
     class TimeBasedLinear < Struct.new(
       :linear_percentage,
       :linear_interval)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5452,6 +5578,7 @@ module Aws::CodeDeploy
     class TimeRange < Struct.new(
       :start,
       :end)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5476,6 +5603,7 @@ module Aws::CodeDeploy
     #
     class TrafficRoute < Struct.new(
       :listener_arns)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5525,6 +5653,7 @@ module Aws::CodeDeploy
       :type,
       :time_based_canary,
       :time_based_linear)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5559,6 +5688,7 @@ module Aws::CodeDeploy
       :trigger_name,
       :trigger_target_arn,
       :trigger_events)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5600,6 +5730,7 @@ module Aws::CodeDeploy
     class UntagResourceInput < Struct.new(
       :resource_arn,
       :tag_keys)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5630,6 +5761,7 @@ module Aws::CodeDeploy
     class UpdateApplicationInput < Struct.new(
       :application_name,
       :new_application_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5869,6 +6001,7 @@ module Aws::CodeDeploy
       :ec2_tag_set,
       :ecs_services,
       :on_premises_tag_set)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5887,6 +6020,7 @@ module Aws::CodeDeploy
     #
     class UpdateDeploymentGroupOutput < Struct.new(
       :hooks_not_cleaned_up)
+      SENSITIVE = []
       include Aws::Structure
     end
 

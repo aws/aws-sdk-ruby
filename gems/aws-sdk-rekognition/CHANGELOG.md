@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.41.0 (2020-06-23)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.40.0 (2020-06-22)
+------------------
+
+* Feature - This update adds the ability to detect black frames, end credits, shots, and color bars in stored videos
+
 1.39.1 (2020-06-11)
 ------------------
 

@@ -20,6 +20,7 @@ module Aws::Glue
     #
     class AccessDeniedException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -95,6 +96,7 @@ module Aws::Glue
       :security_configuration,
       :notification_property,
       :crawler_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -108,6 +110,7 @@ module Aws::Glue
     #
     class AlreadyExistsException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -199,6 +202,7 @@ module Aws::Glue
       :database_name,
       :table_name,
       :partition_input_list)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -211,6 +215,7 @@ module Aws::Glue
     #
     class BatchCreatePartitionResponse < Struct.new(
       :errors)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -236,6 +241,7 @@ module Aws::Glue
     class BatchDeleteConnectionRequest < Struct.new(
       :catalog_id,
       :connection_name_list)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -254,6 +260,7 @@ module Aws::Glue
     class BatchDeleteConnectionResponse < Struct.new(
       :succeeded,
       :errors)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -297,6 +304,7 @@ module Aws::Glue
       :database_name,
       :table_name,
       :partitions_to_delete)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -309,6 +317,7 @@ module Aws::Glue
     #
     class BatchDeletePartitionResponse < Struct.new(
       :errors)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -341,6 +350,7 @@ module Aws::Glue
       :catalog_id,
       :database_name,
       :tables_to_delete)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -353,6 +363,7 @@ module Aws::Glue
     #
     class BatchDeleteTableResponse < Struct.new(
       :errors)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -394,6 +405,7 @@ module Aws::Glue
       :database_name,
       :table_name,
       :version_ids)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -406,6 +418,7 @@ module Aws::Glue
     #
     class BatchDeleteTableVersionResponse < Struct.new(
       :errors)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -425,6 +438,7 @@ module Aws::Glue
     #
     class BatchGetCrawlersRequest < Struct.new(
       :crawler_names)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -441,6 +455,7 @@ module Aws::Glue
     class BatchGetCrawlersResponse < Struct.new(
       :crawlers,
       :crawlers_not_found)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -460,6 +475,7 @@ module Aws::Glue
     #
     class BatchGetDevEndpointsRequest < Struct.new(
       :dev_endpoint_names)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -476,6 +492,7 @@ module Aws::Glue
     class BatchGetDevEndpointsResponse < Struct.new(
       :dev_endpoints,
       :dev_endpoints_not_found)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -495,6 +512,7 @@ module Aws::Glue
     #
     class BatchGetJobsRequest < Struct.new(
       :job_names)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -511,6 +529,7 @@ module Aws::Glue
     class BatchGetJobsResponse < Struct.new(
       :jobs,
       :jobs_not_found)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -552,6 +571,7 @@ module Aws::Glue
       :database_name,
       :table_name,
       :partitions_to_get)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -569,6 +589,7 @@ module Aws::Glue
     class BatchGetPartitionResponse < Struct.new(
       :partitions,
       :unprocessed_keys)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -588,6 +609,7 @@ module Aws::Glue
     #
     class BatchGetTriggersRequest < Struct.new(
       :trigger_names)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -604,6 +626,7 @@ module Aws::Glue
     class BatchGetTriggersResponse < Struct.new(
       :triggers,
       :triggers_not_found)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -630,6 +653,7 @@ module Aws::Glue
     class BatchGetWorkflowsRequest < Struct.new(
       :names,
       :include_graph)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -646,6 +670,7 @@ module Aws::Glue
     class BatchGetWorkflowsResponse < Struct.new(
       :workflows,
       :missing_workflows)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -671,6 +696,7 @@ module Aws::Glue
       :job_name,
       :job_run_id,
       :error_detail)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -696,6 +722,7 @@ module Aws::Glue
     class BatchStopJobRunRequest < Struct.new(
       :job_name,
       :job_run_ids)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -714,6 +741,7 @@ module Aws::Glue
     class BatchStopJobRunResponse < Struct.new(
       :successful_submissions,
       :errors)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -732,6 +760,7 @@ module Aws::Glue
     class BatchStopJobRunSuccessfulSubmission < Struct.new(
       :job_name,
       :job_run_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -756,6 +785,7 @@ module Aws::Glue
     class CancelMLTaskRunRequest < Struct.new(
       :transform_id,
       :task_run_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -777,6 +807,7 @@ module Aws::Glue
       :transform_id,
       :task_run_id,
       :status)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -803,6 +834,7 @@ module Aws::Glue
     class CatalogEntry < Struct.new(
       :database_name,
       :table_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -826,6 +858,7 @@ module Aws::Glue
       :import_completed,
       :import_time,
       :imported_by)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -852,6 +885,7 @@ module Aws::Glue
     class CatalogTarget < Struct.new(
       :database_name,
       :tables)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -890,6 +924,7 @@ module Aws::Glue
       :xml_classifier,
       :json_classifier,
       :csv_classifier)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -917,6 +952,7 @@ module Aws::Glue
     class CloudWatchEncryption < Struct.new(
       :cloud_watch_encryption_mode,
       :kms_key_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -949,6 +985,7 @@ module Aws::Glue
       :source,
       :target,
       :target_parameter)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -993,6 +1030,7 @@ module Aws::Glue
       :node_type,
       :args,
       :line_number)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1025,6 +1063,7 @@ module Aws::Glue
       :name,
       :value,
       :param)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1065,6 +1104,7 @@ module Aws::Glue
       :type,
       :comment,
       :parameters)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1078,6 +1118,7 @@ module Aws::Glue
     #
     class ConcurrentModificationException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1091,6 +1132,7 @@ module Aws::Glue
     #
     class ConcurrentRunsExceededException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1139,6 +1181,7 @@ module Aws::Glue
       :state,
       :crawler_name,
       :crawl_state)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1152,6 +1195,7 @@ module Aws::Glue
     #
     class ConditionCheckFailureException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1191,6 +1235,7 @@ module Aws::Glue
       :num_false_positives,
       :num_true_negatives,
       :num_false_negatives)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1316,6 +1361,7 @@ module Aws::Glue
       :creation_time,
       :last_updated_time,
       :last_updated_by)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1385,6 +1431,7 @@ module Aws::Glue
       :match_criteria,
       :connection_properties,
       :physical_connection_requirements)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1435,6 +1482,7 @@ module Aws::Glue
     class ConnectionPasswordEncryption < Struct.new(
       :return_connection_password_encrypted,
       :aws_kms_key_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1455,6 +1503,7 @@ module Aws::Glue
     #
     class ConnectionsList < Struct.new(
       :connections)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1493,6 +1542,7 @@ module Aws::Glue
       :error_message,
       :log_group,
       :log_stream)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1603,6 +1653,7 @@ module Aws::Glue
       :version,
       :configuration,
       :crawler_security_configuration)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1652,6 +1703,7 @@ module Aws::Glue
       :tables_created,
       :tables_updated,
       :tables_deleted)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1665,6 +1717,7 @@ module Aws::Glue
     #
     class CrawlerNodeDetails < Struct.new(
       :crawls)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1678,6 +1731,7 @@ module Aws::Glue
     #
     class CrawlerNotRunningException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1692,6 +1746,7 @@ module Aws::Glue
     #
     class CrawlerRunningException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1705,6 +1760,7 @@ module Aws::Glue
     #
     class CrawlerStoppingException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1765,6 +1821,7 @@ module Aws::Glue
       :jdbc_targets,
       :dynamo_db_targets,
       :catalog_targets)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1821,6 +1878,7 @@ module Aws::Glue
       :xml_classifier,
       :json_classifier,
       :csv_classifier)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1863,6 +1921,7 @@ module Aws::Glue
     class CreateConnectionRequest < Struct.new(
       :catalog_id,
       :connection_input)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2007,6 +2066,7 @@ module Aws::Glue
       :configuration,
       :crawler_security_configuration,
       :tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2070,6 +2130,7 @@ module Aws::Glue
       :header,
       :disable_value_trimming,
       :allow_single_column)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2110,6 +2171,7 @@ module Aws::Glue
     class CreateDatabaseRequest < Struct.new(
       :catalog_id,
       :database_input)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2293,6 +2355,7 @@ module Aws::Glue
       :security_configuration,
       :tags,
       :arguments)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2417,6 +2480,7 @@ module Aws::Glue
       :security_configuration,
       :created_timestamp,
       :arguments)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2456,6 +2520,7 @@ module Aws::Glue
       :name,
       :grok_pattern,
       :custom_patterns)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2689,6 +2754,7 @@ module Aws::Glue
       :glue_version,
       :number_of_workers,
       :worker_type)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2700,6 +2766,7 @@ module Aws::Glue
     #
     class CreateJobResponse < Struct.new(
       :name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2732,6 +2799,7 @@ module Aws::Glue
     class CreateJsonClassifierRequest < Struct.new(
       :name,
       :json_path)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2926,6 +2994,7 @@ module Aws::Glue
       :timeout,
       :max_retries,
       :tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2937,6 +3006,7 @@ module Aws::Glue
     #
     class CreateMLTransformResponse < Struct.new(
       :transform_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3025,6 +3095,7 @@ module Aws::Glue
       :database_name,
       :table_name,
       :partition_input)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3078,6 +3149,7 @@ module Aws::Glue
       :dag_nodes,
       :dag_edges,
       :language)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3094,6 +3166,7 @@ module Aws::Glue
     class CreateScriptResponse < Struct.new(
       :python_script,
       :scala_code)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3133,6 +3206,7 @@ module Aws::Glue
     class CreateSecurityConfigurationRequest < Struct.new(
       :name,
       :encryption_configuration)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3149,6 +3223,7 @@ module Aws::Glue
     class CreateSecurityConfigurationResponse < Struct.new(
       :name,
       :created_timestamp)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3247,6 +3322,7 @@ module Aws::Glue
       :catalog_id,
       :database_name,
       :table_input)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3360,6 +3436,7 @@ module Aws::Glue
       :description,
       :start_on_creation,
       :tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3371,6 +3448,7 @@ module Aws::Glue
     #
     class CreateTriggerResponse < Struct.new(
       :name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3414,6 +3492,7 @@ module Aws::Glue
       :catalog_id,
       :database_name,
       :function_input)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3460,6 +3539,7 @@ module Aws::Glue
       :description,
       :default_run_properties,
       :tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3471,6 +3551,7 @@ module Aws::Glue
     #
     class CreateWorkflowResponse < Struct.new(
       :name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3508,6 +3589,7 @@ module Aws::Glue
       :classification,
       :name,
       :row_tag)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3569,6 +3651,7 @@ module Aws::Glue
       :header,
       :disable_value_trimming,
       :allow_single_column)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3606,6 +3689,7 @@ module Aws::Glue
     class DataCatalogEncryptionSettings < Struct.new(
       :encryption_at_rest,
       :connection_password_encryption)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3626,6 +3710,7 @@ module Aws::Glue
     #
     class DataLakePrincipal < Struct.new(
       :data_lake_principal_identifier)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3667,6 +3752,7 @@ module Aws::Glue
       :parameters,
       :create_time,
       :create_table_default_permissions)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3725,6 +3811,7 @@ module Aws::Glue
       :location_uri,
       :parameters,
       :create_table_default_permissions)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3743,6 +3830,7 @@ module Aws::Glue
     #
     class DeleteClassifierRequest < Struct.new(
       :name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3772,6 +3860,7 @@ module Aws::Glue
     class DeleteConnectionRequest < Struct.new(
       :catalog_id,
       :connection_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3794,6 +3883,7 @@ module Aws::Glue
     #
     class DeleteCrawlerRequest < Struct.new(
       :name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3824,6 +3914,7 @@ module Aws::Glue
     class DeleteDatabaseRequest < Struct.new(
       :catalog_id,
       :name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3846,6 +3937,7 @@ module Aws::Glue
     #
     class DeleteDevEndpointRequest < Struct.new(
       :endpoint_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3868,6 +3960,7 @@ module Aws::Glue
     #
     class DeleteJobRequest < Struct.new(
       :job_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3879,6 +3972,7 @@ module Aws::Glue
     #
     class DeleteJobResponse < Struct.new(
       :job_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3897,6 +3991,7 @@ module Aws::Glue
     #
     class DeleteMLTransformRequest < Struct.new(
       :transform_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3908,6 +4003,7 @@ module Aws::Glue
     #
     class DeleteMLTransformResponse < Struct.new(
       :transform_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3946,6 +4042,7 @@ module Aws::Glue
       :database_name,
       :table_name,
       :partition_values)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3968,6 +4065,7 @@ module Aws::Glue
     #
     class DeleteResourcePolicyRequest < Struct.new(
       :policy_hash_condition)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3990,6 +4088,7 @@ module Aws::Glue
     #
     class DeleteSecurityConfigurationRequest < Struct.new(
       :name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4027,6 +4126,7 @@ module Aws::Glue
       :catalog_id,
       :database_name,
       :name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4071,6 +4171,7 @@ module Aws::Glue
       :database_name,
       :table_name,
       :version_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4093,6 +4194,7 @@ module Aws::Glue
     #
     class DeleteTriggerRequest < Struct.new(
       :name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4104,6 +4206,7 @@ module Aws::Glue
     #
     class DeleteTriggerResponse < Struct.new(
       :name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4135,6 +4238,7 @@ module Aws::Glue
       :catalog_id,
       :database_name,
       :function_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4157,6 +4261,7 @@ module Aws::Glue
     #
     class DeleteWorkflowRequest < Struct.new(
       :name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4168,6 +4273,7 @@ module Aws::Glue
     #
     class DeleteWorkflowResponse < Struct.new(
       :name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4391,6 +4497,7 @@ module Aws::Glue
       :public_keys,
       :security_configuration,
       :arguments)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4435,6 +4542,7 @@ module Aws::Glue
     class DevEndpointCustomLibraries < Struct.new(
       :extra_python_libs_s3_path,
       :extra_jars_s3_path)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4482,6 +4590,7 @@ module Aws::Glue
       :path,
       :scan_all,
       :scan_rate)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4501,6 +4610,7 @@ module Aws::Glue
     class Edge < Struct.new(
       :source_id,
       :destination_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4527,6 +4637,7 @@ module Aws::Glue
     class EncryptionAtRest < Struct.new(
       :catalog_encryption_mode,
       :sse_aws_kms_key_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4571,6 +4682,7 @@ module Aws::Glue
       :s3_encryption,
       :cloud_watch_encryption,
       :job_bookmarks_encryption)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4584,6 +4696,7 @@ module Aws::Glue
     #
     class EntityNotFoundException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4602,6 +4715,7 @@ module Aws::Glue
     class ErrorDetail < Struct.new(
       :error_code,
       :error_message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4621,6 +4735,7 @@ module Aws::Glue
     class EvaluationMetrics < Struct.new(
       :transform_type,
       :find_matches_metrics)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4643,6 +4758,7 @@ module Aws::Glue
     #
     class ExecutionProperty < Struct.new(
       :max_concurrent_runs)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4657,6 +4773,7 @@ module Aws::Glue
     #
     class ExportLabelsTaskRunProperties < Struct.new(
       :output_s3_path)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4735,6 +4852,7 @@ module Aws::Glue
       :recall,
       :f1,
       :confusion_matrix)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4806,6 +4924,7 @@ module Aws::Glue
       :precision_recall_tradeoff,
       :accuracy_cost_tradeoff,
       :enforce_provided_labels)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4829,6 +4948,7 @@ module Aws::Glue
       :job_id,
       :job_name,
       :job_run_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4848,6 +4968,7 @@ module Aws::Glue
     #
     class GetCatalogImportStatusRequest < Struct.new(
       :catalog_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4859,6 +4980,7 @@ module Aws::Glue
     #
     class GetCatalogImportStatusResponse < Struct.new(
       :import_status)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4877,6 +4999,7 @@ module Aws::Glue
     #
     class GetClassifierRequest < Struct.new(
       :name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4888,6 +5011,7 @@ module Aws::Glue
     #
     class GetClassifierResponse < Struct.new(
       :classifier)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4912,6 +5036,7 @@ module Aws::Glue
     class GetClassifiersRequest < Struct.new(
       :max_results,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4928,6 +5053,7 @@ module Aws::Glue
     class GetClassifiersResponse < Struct.new(
       :classifiers,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4964,6 +5090,7 @@ module Aws::Glue
       :catalog_id,
       :name,
       :hide_password)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4975,6 +5102,7 @@ module Aws::Glue
     #
     class GetConnectionResponse < Struct.new(
       :connection)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5004,6 +5132,7 @@ module Aws::Glue
     class GetConnectionsFilter < Struct.new(
       :match_criteria,
       :connection_type)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5055,6 +5184,7 @@ module Aws::Glue
       :hide_password,
       :next_token,
       :max_results)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5072,6 +5202,7 @@ module Aws::Glue
     class GetConnectionsResponse < Struct.new(
       :connection_list,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5102,6 +5233,7 @@ module Aws::Glue
       :crawler_name_list,
       :max_results,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5119,6 +5251,7 @@ module Aws::Glue
     class GetCrawlerMetricsResponse < Struct.new(
       :crawler_metrics_list,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5137,6 +5270,7 @@ module Aws::Glue
     #
     class GetCrawlerRequest < Struct.new(
       :name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5148,6 +5282,7 @@ module Aws::Glue
     #
     class GetCrawlerResponse < Struct.new(
       :crawler)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5172,6 +5307,7 @@ module Aws::Glue
     class GetCrawlersRequest < Struct.new(
       :max_results,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5189,6 +5325,7 @@ module Aws::Glue
     class GetCrawlersResponse < Struct.new(
       :crawlers,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5208,6 +5345,7 @@ module Aws::Glue
     #
     class GetDataCatalogEncryptionSettingsRequest < Struct.new(
       :catalog_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5219,6 +5357,7 @@ module Aws::Glue
     #
     class GetDataCatalogEncryptionSettingsResponse < Struct.new(
       :data_catalog_encryption_settings)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5245,6 +5384,7 @@ module Aws::Glue
     class GetDatabaseRequest < Struct.new(
       :catalog_id,
       :name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5256,6 +5396,7 @@ module Aws::Glue
     #
     class GetDatabaseResponse < Struct.new(
       :database)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5287,6 +5428,7 @@ module Aws::Glue
       :catalog_id,
       :next_token,
       :max_results)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5304,6 +5446,7 @@ module Aws::Glue
     class GetDatabasesResponse < Struct.new(
       :database_list,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5322,6 +5465,7 @@ module Aws::Glue
     #
     class GetDataflowGraphRequest < Struct.new(
       :python_script)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5338,6 +5482,7 @@ module Aws::Glue
     class GetDataflowGraphResponse < Struct.new(
       :dag_nodes,
       :dag_edges)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5356,6 +5501,7 @@ module Aws::Glue
     #
     class GetDevEndpointRequest < Struct.new(
       :endpoint_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5367,6 +5513,7 @@ module Aws::Glue
     #
     class GetDevEndpointResponse < Struct.new(
       :dev_endpoint)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5391,6 +5538,7 @@ module Aws::Glue
     class GetDevEndpointsRequest < Struct.new(
       :max_results,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5408,6 +5556,7 @@ module Aws::Glue
     class GetDevEndpointsResponse < Struct.new(
       :dev_endpoints,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5432,6 +5581,7 @@ module Aws::Glue
     class GetJobBookmarkRequest < Struct.new(
       :job_name,
       :run_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5443,6 +5593,7 @@ module Aws::Glue
     #
     class GetJobBookmarkResponse < Struct.new(
       :job_bookmark_entry)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5461,6 +5612,7 @@ module Aws::Glue
     #
     class GetJobRequest < Struct.new(
       :job_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5472,6 +5624,7 @@ module Aws::Glue
     #
     class GetJobResponse < Struct.new(
       :job)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5502,6 +5655,7 @@ module Aws::Glue
       :job_name,
       :run_id,
       :predecessors_included)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5513,6 +5667,7 @@ module Aws::Glue
     #
     class GetJobRunResponse < Struct.new(
       :job_run)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5543,6 +5698,7 @@ module Aws::Glue
       :job_name,
       :next_token,
       :max_results)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5560,6 +5716,7 @@ module Aws::Glue
     class GetJobRunsResponse < Struct.new(
       :job_runs,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5584,6 +5741,7 @@ module Aws::Glue
     class GetJobsRequest < Struct.new(
       :next_token,
       :max_results)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5601,6 +5759,7 @@ module Aws::Glue
     class GetJobsResponse < Struct.new(
       :jobs,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5625,6 +5784,7 @@ module Aws::Glue
     class GetMLTaskRunRequest < Struct.new(
       :transform_id,
       :task_run_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5682,6 +5842,7 @@ module Aws::Glue
       :last_modified_on,
       :completed_on,
       :execution_time)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5734,6 +5895,7 @@ module Aws::Glue
       :max_results,
       :filter,
       :sort)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5750,6 +5912,7 @@ module Aws::Glue
     class GetMLTaskRunsResponse < Struct.new(
       :task_runs,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5769,6 +5932,7 @@ module Aws::Glue
     #
     class GetMLTransformRequest < Struct.new(
       :transform_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5905,6 +6069,7 @@ module Aws::Glue
       :number_of_workers,
       :timeout,
       :max_retries)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5959,6 +6124,7 @@ module Aws::Glue
       :max_results,
       :filter,
       :sort)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5975,6 +6141,7 @@ module Aws::Glue
     class GetMLTransformsResponse < Struct.new(
       :transforms,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6035,6 +6202,7 @@ module Aws::Glue
       :source,
       :sinks,
       :location)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6046,6 +6214,7 @@ module Aws::Glue
     #
     class GetMappingResponse < Struct.new(
       :mapping)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6083,6 +6252,7 @@ module Aws::Glue
       :database_name,
       :table_name,
       :partition_values)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6094,6 +6264,7 @@ module Aws::Glue
     #
     class GetPartitionResponse < Struct.new(
       :partition)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6246,6 +6417,7 @@ module Aws::Glue
       :next_token,
       :segment,
       :max_results)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6263,6 +6435,7 @@ module Aws::Glue
     class GetPartitionsResponse < Struct.new(
       :partitions,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6344,6 +6517,7 @@ module Aws::Glue
       :sinks,
       :location,
       :language)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6360,6 +6534,7 @@ module Aws::Glue
     class GetPlanResponse < Struct.new(
       :python_script,
       :scala_code)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6392,6 +6567,7 @@ module Aws::Glue
       :policy_hash,
       :create_time,
       :update_time)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6410,6 +6586,7 @@ module Aws::Glue
     #
     class GetSecurityConfigurationRequest < Struct.new(
       :name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6421,6 +6598,7 @@ module Aws::Glue
     #
     class GetSecurityConfigurationResponse < Struct.new(
       :security_configuration)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6445,6 +6623,7 @@ module Aws::Glue
     class GetSecurityConfigurationsRequest < Struct.new(
       :max_results,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6462,6 +6641,7 @@ module Aws::Glue
     class GetSecurityConfigurationsResponse < Struct.new(
       :security_configurations,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6495,6 +6675,7 @@ module Aws::Glue
       :catalog_id,
       :database_name,
       :name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6506,6 +6687,7 @@ module Aws::Glue
     #
     class GetTableResponse < Struct.new(
       :table)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6547,6 +6729,7 @@ module Aws::Glue
       :database_name,
       :table_name,
       :version_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6558,6 +6741,7 @@ module Aws::Glue
     #
     class GetTableVersionResponse < Struct.new(
       :table_version)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6603,6 +6787,7 @@ module Aws::Glue
       :table_name,
       :next_token,
       :max_results)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6621,6 +6806,7 @@ module Aws::Glue
     class GetTableVersionsResponse < Struct.new(
       :table_versions,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6666,6 +6852,7 @@ module Aws::Glue
       :expression,
       :next_token,
       :max_results)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6683,6 +6870,7 @@ module Aws::Glue
     class GetTablesResponse < Struct.new(
       :table_list,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6702,6 +6890,7 @@ module Aws::Glue
     #
     class GetTagsRequest < Struct.new(
       :resource_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6713,6 +6902,7 @@ module Aws::Glue
     #
     class GetTagsResponse < Struct.new(
       :tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6731,6 +6921,7 @@ module Aws::Glue
     #
     class GetTriggerRequest < Struct.new(
       :name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6742,6 +6933,7 @@ module Aws::Glue
     #
     class GetTriggerResponse < Struct.new(
       :trigger)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6774,6 +6966,7 @@ module Aws::Glue
       :next_token,
       :dependent_job_name,
       :max_results)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6791,6 +6984,7 @@ module Aws::Glue
     class GetTriggersResponse < Struct.new(
       :triggers,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6822,6 +7016,7 @@ module Aws::Glue
       :catalog_id,
       :database_name,
       :function_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6833,6 +7028,7 @@ module Aws::Glue
     #
     class GetUserDefinedFunctionResponse < Struct.new(
       :user_defined_function)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6879,6 +7075,7 @@ module Aws::Glue
       :pattern,
       :next_token,
       :max_results)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6896,6 +7093,7 @@ module Aws::Glue
     class GetUserDefinedFunctionsResponse < Struct.new(
       :user_defined_functions,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6921,6 +7119,7 @@ module Aws::Glue
     class GetWorkflowRequest < Struct.new(
       :name,
       :include_graph)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6932,6 +7131,7 @@ module Aws::Glue
     #
     class GetWorkflowResponse < Struct.new(
       :workflow)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6956,6 +7156,7 @@ module Aws::Glue
     class GetWorkflowRunPropertiesRequest < Struct.new(
       :name,
       :run_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6967,6 +7168,7 @@ module Aws::Glue
     #
     class GetWorkflowRunPropertiesResponse < Struct.new(
       :run_properties)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6997,6 +7199,7 @@ module Aws::Glue
       :name,
       :run_id,
       :include_graph)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -7008,6 +7211,7 @@ module Aws::Glue
     #
     class GetWorkflowRunResponse < Struct.new(
       :run)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -7044,6 +7248,7 @@ module Aws::Glue
       :include_graph,
       :next_token,
       :max_results)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -7061,6 +7266,7 @@ module Aws::Glue
     class GetWorkflowRunsResponse < Struct.new(
       :runs,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -7074,6 +7280,7 @@ module Aws::Glue
     #
     class GlueEncryptionException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -7113,6 +7320,7 @@ module Aws::Glue
       :table_name,
       :catalog_id,
       :connection_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -7168,6 +7376,7 @@ module Aws::Glue
       :version,
       :grok_pattern,
       :custom_patterns)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -7181,6 +7390,7 @@ module Aws::Glue
     #
     class IdempotentParameterMismatchException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -7194,6 +7404,7 @@ module Aws::Glue
     #
     class IllegalWorkflowStateException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -7213,6 +7424,7 @@ module Aws::Glue
     #
     class ImportCatalogToGlueRequest < Struct.new(
       :catalog_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -7236,6 +7448,7 @@ module Aws::Glue
     class ImportLabelsTaskRunProperties < Struct.new(
       :input_s3_path,
       :replace)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -7249,6 +7462,7 @@ module Aws::Glue
     #
     class InternalServiceException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -7262,6 +7476,7 @@ module Aws::Glue
     #
     class InvalidInputException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -7299,6 +7514,7 @@ module Aws::Glue
       :connection_name,
       :path,
       :exclusions)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -7493,6 +7709,7 @@ module Aws::Glue
       :security_configuration,
       :notification_property,
       :glue_version)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -7536,6 +7753,7 @@ module Aws::Glue
       :previous_run_id,
       :run_id,
       :job_bookmark)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -7563,6 +7781,7 @@ module Aws::Glue
     class JobBookmarksEncryption < Struct.new(
       :job_bookmarks_encryption_mode,
       :kms_key_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -7598,6 +7817,7 @@ module Aws::Glue
       :name,
       :script_location,
       :python_version)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -7611,6 +7831,7 @@ module Aws::Glue
     #
     class JobNodeDetails < Struct.new(
       :job_runs)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -7823,6 +8044,7 @@ module Aws::Glue
       :log_group_name,
       :notification_property,
       :glue_version)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -8035,6 +8257,7 @@ module Aws::Glue
       :security_configuration,
       :notification_property,
       :glue_version)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -8074,6 +8297,7 @@ module Aws::Glue
       :last_updated,
       :version,
       :json_path)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -8089,6 +8313,7 @@ module Aws::Glue
     #
     class LabelingSetGenerationTaskRunProperties < Struct.new(
       :output_s3_path)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -8127,6 +8352,7 @@ module Aws::Glue
       :log_stream,
       :message_prefix,
       :start_time)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -8159,6 +8385,7 @@ module Aws::Glue
       :max_results,
       :next_token,
       :tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -8177,6 +8404,7 @@ module Aws::Glue
     class ListCrawlersResponse < Struct.new(
       :crawler_names,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -8209,6 +8437,7 @@ module Aws::Glue
       :next_token,
       :max_results,
       :tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -8227,6 +8456,7 @@ module Aws::Glue
     class ListDevEndpointsResponse < Struct.new(
       :dev_endpoint_names,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -8259,6 +8489,7 @@ module Aws::Glue
       :next_token,
       :max_results,
       :tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -8277,6 +8508,7 @@ module Aws::Glue
     class ListJobsResponse < Struct.new(
       :job_names,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -8341,6 +8573,7 @@ module Aws::Glue
       :filter,
       :sort,
       :tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -8359,6 +8592,7 @@ module Aws::Glue
     class ListMLTransformsResponse < Struct.new(
       :transform_ids,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -8399,6 +8633,7 @@ module Aws::Glue
       :dependent_job_name,
       :max_results,
       :tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -8417,6 +8652,7 @@ module Aws::Glue
     class ListTriggersResponse < Struct.new(
       :trigger_names,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -8441,6 +8677,7 @@ module Aws::Glue
     class ListWorkflowsRequest < Struct.new(
       :next_token,
       :max_results)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -8457,6 +8694,7 @@ module Aws::Glue
     class ListWorkflowsResponse < Struct.new(
       :workflows,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -8507,6 +8745,7 @@ module Aws::Glue
       :jdbc,
       :s3,
       :dynamo_db)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -8697,6 +8936,7 @@ module Aws::Glue
       :number_of_workers,
       :timeout,
       :max_retries)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -8710,6 +8950,7 @@ module Aws::Glue
     #
     class MLTransformNotReadyException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -8760,6 +9001,7 @@ module Aws::Glue
       :target_table,
       :target_path,
       :target_type)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -8773,6 +9015,7 @@ module Aws::Glue
     #
     class NoScheduleException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -8812,6 +9055,7 @@ module Aws::Glue
       :trigger_details,
       :job_details,
       :crawler_details)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -8833,6 +9077,7 @@ module Aws::Glue
     #
     class NotificationProperty < Struct.new(
       :notify_delay_after)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -8846,6 +9091,7 @@ module Aws::Glue
     #
     class OperationTimeoutException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -8873,6 +9119,7 @@ module Aws::Glue
     class Order < Struct.new(
       :column,
       :sort_order)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -8923,6 +9170,7 @@ module Aws::Glue
       :storage_descriptor,
       :parameters,
       :last_analyzed_time)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -8941,6 +9189,7 @@ module Aws::Glue
     class PartitionError < Struct.new(
       :partition_values,
       :error_detail)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -9036,6 +9285,7 @@ module Aws::Glue
       :storage_descriptor,
       :parameters,
       :last_analyzed_time)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -9056,6 +9306,7 @@ module Aws::Glue
     #
     class PartitionValueList < Struct.new(
       :values)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -9091,6 +9342,7 @@ module Aws::Glue
       :subnet_id,
       :security_group_id_list,
       :availability_zone)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -9110,6 +9362,7 @@ module Aws::Glue
     class Predecessor < Struct.new(
       :job_name,
       :run_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -9145,6 +9398,7 @@ module Aws::Glue
     class Predicate < Struct.new(
       :logical,
       :conditions)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -9173,6 +9427,7 @@ module Aws::Glue
     class PrincipalPermissions < Struct.new(
       :principal,
       :permissions)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -9205,6 +9460,7 @@ module Aws::Glue
       :key,
       :value,
       :comparator)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -9239,6 +9495,7 @@ module Aws::Glue
     class PutDataCatalogEncryptionSettingsRequest < Struct.new(
       :catalog_id,
       :data_catalog_encryption_settings)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -9279,6 +9536,7 @@ module Aws::Glue
       :policy_in_json,
       :policy_hash_condition,
       :policy_exists_condition)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -9291,6 +9549,7 @@ module Aws::Glue
     #
     class PutResourcePolicyResponse < Struct.new(
       :policy_hash)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -9324,6 +9583,7 @@ module Aws::Glue
       :name,
       :run_id,
       :run_properties)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -9352,6 +9612,7 @@ module Aws::Glue
     class ResetJobBookmarkRequest < Struct.new(
       :job_name,
       :run_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -9363,6 +9624,7 @@ module Aws::Glue
     #
     class ResetJobBookmarkResponse < Struct.new(
       :job_bookmark_entry)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -9376,6 +9638,7 @@ module Aws::Glue
     #
     class ResourceNumberLimitExceededException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -9402,6 +9665,7 @@ module Aws::Glue
     class ResourceUri < Struct.new(
       :resource_type,
       :uri)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -9430,6 +9694,7 @@ module Aws::Glue
     class S3Encryption < Struct.new(
       :s3_encryption_mode,
       :kms_key_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -9461,6 +9726,7 @@ module Aws::Glue
     class S3Target < Struct.new(
       :path,
       :exclusions)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -9485,6 +9751,7 @@ module Aws::Glue
     class Schedule < Struct.new(
       :schedule_expression,
       :state)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -9498,6 +9765,7 @@ module Aws::Glue
     #
     class SchedulerNotRunningException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -9511,6 +9779,7 @@ module Aws::Glue
     #
     class SchedulerRunningException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -9524,6 +9793,7 @@ module Aws::Glue
     #
     class SchedulerTransitioningException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -9550,6 +9820,7 @@ module Aws::Glue
     class SchemaChangePolicy < Struct.new(
       :update_behavior,
       :delete_behavior)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -9578,6 +9849,7 @@ module Aws::Glue
     class SchemaColumn < Struct.new(
       :name,
       :data_type)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -9642,6 +9914,7 @@ module Aws::Glue
       :search_text,
       :sort_criteria,
       :max_results)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -9660,6 +9933,7 @@ module Aws::Glue
     class SearchTablesResponse < Struct.new(
       :next_token,
       :table_list)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -9684,6 +9958,7 @@ module Aws::Glue
       :name,
       :created_time_stamp,
       :encryption_configuration)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -9713,6 +9988,7 @@ module Aws::Glue
     class Segment < Struct.new(
       :segment_number,
       :total_segments)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -9750,6 +10026,7 @@ module Aws::Glue
       :name,
       :serialization_library,
       :parameters)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -9786,6 +10063,7 @@ module Aws::Glue
       :skewed_column_names,
       :skewed_column_values,
       :skewed_column_value_location_maps)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -9812,6 +10090,7 @@ module Aws::Glue
     class SortCriterion < Struct.new(
       :field_name,
       :sort)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -9830,6 +10109,7 @@ module Aws::Glue
     #
     class StartCrawlerRequest < Struct.new(
       :name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -9852,6 +10132,7 @@ module Aws::Glue
     #
     class StartCrawlerScheduleRequest < Struct.new(
       :crawler_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -9880,6 +10161,7 @@ module Aws::Glue
     class StartExportLabelsTaskRunRequest < Struct.new(
       :transform_id,
       :output_s3_path)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -9891,6 +10173,7 @@ module Aws::Glue
     #
     class StartExportLabelsTaskRunResponse < Struct.new(
       :task_run_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -9922,6 +10205,7 @@ module Aws::Glue
       :transform_id,
       :input_s3_path,
       :replace_all_labels)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -9933,6 +10217,7 @@ module Aws::Glue
     #
     class StartImportLabelsTaskRunResponse < Struct.new(
       :task_run_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -10077,6 +10362,7 @@ module Aws::Glue
       :notification_property,
       :worker_type,
       :number_of_workers)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -10088,6 +10374,7 @@ module Aws::Glue
     #
     class StartJobRunResponse < Struct.new(
       :job_run_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -10106,6 +10393,7 @@ module Aws::Glue
     #
     class StartMLEvaluationTaskRunRequest < Struct.new(
       :transform_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -10117,6 +10405,7 @@ module Aws::Glue
     #
     class StartMLEvaluationTaskRunResponse < Struct.new(
       :task_run_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -10142,6 +10431,7 @@ module Aws::Glue
     class StartMLLabelingSetGenerationTaskRunRequest < Struct.new(
       :transform_id,
       :output_s3_path)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -10153,6 +10443,7 @@ module Aws::Glue
     #
     class StartMLLabelingSetGenerationTaskRunResponse < Struct.new(
       :task_run_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -10171,6 +10462,7 @@ module Aws::Glue
     #
     class StartTriggerRequest < Struct.new(
       :name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -10182,6 +10474,7 @@ module Aws::Glue
     #
     class StartTriggerResponse < Struct.new(
       :name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -10200,6 +10493,7 @@ module Aws::Glue
     #
     class StartWorkflowRunRequest < Struct.new(
       :name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -10211,6 +10505,7 @@ module Aws::Glue
     #
     class StartWorkflowRunResponse < Struct.new(
       :run_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -10229,6 +10524,7 @@ module Aws::Glue
     #
     class StopCrawlerRequest < Struct.new(
       :name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -10251,6 +10547,7 @@ module Aws::Glue
     #
     class StopCrawlerScheduleRequest < Struct.new(
       :crawler_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -10273,6 +10570,7 @@ module Aws::Glue
     #
     class StopTriggerRequest < Struct.new(
       :name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -10284,6 +10582,7 @@ module Aws::Glue
     #
     class StopTriggerResponse < Struct.new(
       :name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -10308,6 +10607,7 @@ module Aws::Glue
     class StopWorkflowRunRequest < Struct.new(
       :name,
       :run_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -10433,6 +10733,7 @@ module Aws::Glue
       :parameters,
       :skewed_info,
       :stored_as_sub_directories)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -10540,6 +10841,7 @@ module Aws::Glue
       :parameters,
       :created_by,
       :is_registered_with_lake_formation)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -10559,6 +10861,7 @@ module Aws::Glue
     class TableError < Struct.new(
       :table_name,
       :error_detail)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -10708,6 +11011,7 @@ module Aws::Glue
       :view_expanded_text,
       :table_type,
       :parameters)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -10728,6 +11032,7 @@ module Aws::Glue
     class TableVersion < Struct.new(
       :table,
       :version_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -10752,6 +11057,7 @@ module Aws::Glue
       :table_name,
       :version_id,
       :error_detail)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -10784,6 +11090,7 @@ module Aws::Glue
     class TagResourceRequest < Struct.new(
       :resource_arn,
       :tags_to_add)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -10849,6 +11156,7 @@ module Aws::Glue
       :last_modified_on,
       :completed_on,
       :execution_time)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -10888,6 +11196,7 @@ module Aws::Glue
       :status,
       :started_before,
       :started_after)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -10921,6 +11230,7 @@ module Aws::Glue
       :export_labels_task_run_properties,
       :labeling_set_generation_task_run_properties,
       :find_matches_task_run_properties)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -10950,6 +11260,7 @@ module Aws::Glue
     class TaskRunSortCriteria < Struct.new(
       :column,
       :sort_direction)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -11039,6 +11350,7 @@ module Aws::Glue
       :last_modified_before,
       :last_modified_after,
       :schema)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -11078,6 +11390,7 @@ module Aws::Glue
     class TransformParameters < Struct.new(
       :transform_type,
       :find_matches_parameters)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -11107,6 +11420,7 @@ module Aws::Glue
     class TransformSortCriteria < Struct.new(
       :column,
       :sort_direction)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -11166,6 +11480,7 @@ module Aws::Glue
       :schedule,
       :actions,
       :predicate)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -11179,6 +11494,7 @@ module Aws::Glue
     #
     class TriggerNodeDetails < Struct.new(
       :trigger)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -11255,6 +11571,7 @@ module Aws::Glue
       :schedule,
       :actions,
       :predicate)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -11280,6 +11597,7 @@ module Aws::Glue
     class UntagResourceRequest < Struct.new(
       :resource_arn,
       :tags_to_remove)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -11340,6 +11658,7 @@ module Aws::Glue
       :xml_classifier,
       :json_classifier,
       :csv_classifier)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -11389,6 +11708,7 @@ module Aws::Glue
       :catalog_id,
       :name,
       :connection_input)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -11519,6 +11839,7 @@ module Aws::Glue
       :schema_change_policy,
       :configuration,
       :crawler_security_configuration)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -11554,6 +11875,7 @@ module Aws::Glue
     class UpdateCrawlerScheduleRequest < Struct.new(
       :crawler_name,
       :schedule)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -11617,6 +11939,7 @@ module Aws::Glue
       :header,
       :disable_value_trimming,
       :allow_single_column)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -11665,6 +11988,7 @@ module Aws::Glue
       :catalog_id,
       :name,
       :database_input)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -11750,6 +12074,7 @@ module Aws::Glue
       :update_etl_libraries,
       :delete_arguments,
       :add_arguments)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -11794,6 +12119,7 @@ module Aws::Glue
       :classification,
       :grok_pattern,
       :custom_patterns)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -11850,6 +12176,7 @@ module Aws::Glue
     class UpdateJobRequest < Struct.new(
       :job_name,
       :job_update)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -11861,6 +12188,7 @@ module Aws::Glue
     #
     class UpdateJobResponse < Struct.new(
       :job_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -11893,6 +12221,7 @@ module Aws::Glue
     class UpdateJsonClassifierRequest < Struct.new(
       :name,
       :json_path)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -12017,6 +12346,7 @@ module Aws::Glue
       :number_of_workers,
       :timeout,
       :max_retries)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -12028,6 +12358,7 @@ module Aws::Glue
     #
     class UpdateMLTransformResponse < Struct.new(
       :transform_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -12122,6 +12453,7 @@ module Aws::Glue
       :table_name,
       :partition_value_list,
       :partition_input)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -12232,6 +12564,7 @@ module Aws::Glue
       :database_name,
       :table_input,
       :skip_archive)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -12290,6 +12623,7 @@ module Aws::Glue
     class UpdateTriggerRequest < Struct.new(
       :name,
       :trigger_update)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -12301,6 +12635,7 @@ module Aws::Glue
     #
     class UpdateTriggerResponse < Struct.new(
       :trigger)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -12351,6 +12686,7 @@ module Aws::Glue
       :database_name,
       :function_name,
       :function_input)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -12388,6 +12724,7 @@ module Aws::Glue
       :name,
       :description,
       :default_run_properties)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -12399,6 +12736,7 @@ module Aws::Glue
     #
     class UpdateWorkflowResponse < Struct.new(
       :name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -12436,6 +12774,7 @@ module Aws::Glue
       :name,
       :classification,
       :row_tag)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -12480,6 +12819,7 @@ module Aws::Glue
       :owner_type,
       :create_time,
       :resource_uris)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -12529,6 +12869,7 @@ module Aws::Glue
       :owner_name,
       :owner_type,
       :resource_uris)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -12542,6 +12883,7 @@ module Aws::Glue
     #
     class ValidationException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -12555,6 +12897,7 @@ module Aws::Glue
     #
     class VersionMismatchException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -12602,6 +12945,7 @@ module Aws::Glue
       :last_modified_on,
       :last_run,
       :graph)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -12624,6 +12968,7 @@ module Aws::Glue
     class WorkflowGraph < Struct.new(
       :nodes,
       :edges)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -12675,6 +13020,7 @@ module Aws::Glue
       :status,
       :statistics,
       :graph)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -12713,6 +13059,7 @@ module Aws::Glue
       :stopped_actions,
       :succeeded_actions,
       :running_actions)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -12756,6 +13103,7 @@ module Aws::Glue
       :last_updated,
       :version,
       :row_tag)
+      SENSITIVE = []
       include Aws::Structure
     end
 

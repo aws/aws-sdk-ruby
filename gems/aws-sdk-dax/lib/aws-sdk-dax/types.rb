@@ -115,6 +115,7 @@ module Aws::DAX
       :iam_role_arn,
       :parameter_group,
       :sse_description)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -298,6 +299,7 @@ module Aws::DAX
       :parameter_group_name,
       :tags,
       :sse_specification)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -309,6 +311,7 @@ module Aws::DAX
     #
     class CreateClusterResponse < Struct.new(
       :cluster)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -334,6 +337,7 @@ module Aws::DAX
     class CreateParameterGroupRequest < Struct.new(
       :parameter_group_name,
       :description)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -345,6 +349,7 @@ module Aws::DAX
     #
     class CreateParameterGroupResponse < Struct.new(
       :parameter_group)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -376,6 +381,7 @@ module Aws::DAX
       :subnet_group_name,
       :description,
       :subnet_ids)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -387,6 +393,7 @@ module Aws::DAX
     #
     class CreateSubnetGroupResponse < Struct.new(
       :subnet_group)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -423,6 +430,7 @@ module Aws::DAX
       :new_replication_factor,
       :availability_zones,
       :node_ids_to_remove)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -435,6 +443,7 @@ module Aws::DAX
     #
     class DecreaseReplicationFactorResponse < Struct.new(
       :cluster)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -453,6 +462,7 @@ module Aws::DAX
     #
     class DeleteClusterRequest < Struct.new(
       :cluster_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -464,6 +474,7 @@ module Aws::DAX
     #
     class DeleteClusterResponse < Struct.new(
       :cluster)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -482,6 +493,7 @@ module Aws::DAX
     #
     class DeleteParameterGroupRequest < Struct.new(
       :parameter_group_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -494,6 +506,7 @@ module Aws::DAX
     #
     class DeleteParameterGroupResponse < Struct.new(
       :deletion_message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -512,6 +525,7 @@ module Aws::DAX
     #
     class DeleteSubnetGroupRequest < Struct.new(
       :subnet_group_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -524,6 +538,7 @@ module Aws::DAX
     #
     class DeleteSubnetGroupResponse < Struct.new(
       :deletion_message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -562,6 +577,7 @@ module Aws::DAX
       :cluster_names,
       :max_results,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -579,6 +595,7 @@ module Aws::DAX
     class DescribeClustersResponse < Struct.new(
       :next_token,
       :clusters)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -611,6 +628,7 @@ module Aws::DAX
     class DescribeDefaultParametersRequest < Struct.new(
       :max_results,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -628,6 +646,7 @@ module Aws::DAX
     class DescribeDefaultParametersResponse < Struct.new(
       :next_token,
       :parameters)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -695,6 +714,7 @@ module Aws::DAX
       :duration,
       :max_results,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -711,6 +731,7 @@ module Aws::DAX
     class DescribeEventsResponse < Struct.new(
       :next_token,
       :events)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -749,6 +770,7 @@ module Aws::DAX
       :parameter_group_names,
       :max_results,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -766,6 +788,7 @@ module Aws::DAX
     class DescribeParameterGroupsResponse < Struct.new(
       :next_token,
       :parameter_groups)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -811,6 +834,7 @@ module Aws::DAX
       :source,
       :max_results,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -828,6 +852,7 @@ module Aws::DAX
     class DescribeParametersResponse < Struct.new(
       :next_token,
       :parameters)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -866,6 +891,7 @@ module Aws::DAX
       :subnet_group_names,
       :max_results,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -883,6 +909,7 @@ module Aws::DAX
     class DescribeSubnetGroupsResponse < Struct.new(
       :next_token,
       :subnet_groups)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -904,6 +931,7 @@ module Aws::DAX
     class Endpoint < Struct.new(
       :address,
       :port)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -936,6 +964,7 @@ module Aws::DAX
       :source_type,
       :message,
       :date)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -969,6 +998,7 @@ module Aws::DAX
       :cluster_name,
       :new_replication_factor,
       :availability_zones)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -980,6 +1010,7 @@ module Aws::DAX
     #
     class IncreaseReplicationFactorResponse < Struct.new(
       :cluster)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1011,6 +1042,7 @@ module Aws::DAX
     #
     class InvalidParameterCombinationException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1029,6 +1061,7 @@ module Aws::DAX
     #
     class InvalidParameterValueException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1067,6 +1100,7 @@ module Aws::DAX
     class ListTagsRequest < Struct.new(
       :resource_name,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1085,6 +1119,7 @@ module Aws::DAX
     class ListTagsResponse < Struct.new(
       :tags,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1128,6 +1163,7 @@ module Aws::DAX
       :availability_zone,
       :node_status,
       :parameter_group_status)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1167,6 +1203,7 @@ module Aws::DAX
     class NodeTypeSpecificValue < Struct.new(
       :node_type,
       :value)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1187,6 +1224,7 @@ module Aws::DAX
     class NotificationConfiguration < Struct.new(
       :topic_arn,
       :topic_status)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1250,6 +1288,7 @@ module Aws::DAX
       :allowed_values,
       :is_modifiable,
       :change_type)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1269,6 +1308,7 @@ module Aws::DAX
     class ParameterGroup < Struct.new(
       :parameter_group_name,
       :description)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1310,6 +1350,7 @@ module Aws::DAX
       :parameter_group_name,
       :parameter_apply_status,
       :node_ids_to_reboot)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1336,6 +1377,7 @@ module Aws::DAX
     class ParameterNameValue < Struct.new(
       :parameter_name,
       :parameter_value)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1360,6 +1402,7 @@ module Aws::DAX
     class RebootNodeRequest < Struct.new(
       :cluster_name,
       :node_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1371,6 +1414,7 @@ module Aws::DAX
     #
     class RebootNodeResponse < Struct.new(
       :cluster)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1393,6 +1437,7 @@ module Aws::DAX
     #
     class SSEDescription < Struct.new(
       :status)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1414,6 +1459,7 @@ module Aws::DAX
     #
     class SSESpecification < Struct.new(
       :enabled)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1432,6 +1478,7 @@ module Aws::DAX
     class SecurityGroupMembership < Struct.new(
       :security_group_identifier,
       :status)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1458,6 +1505,7 @@ module Aws::DAX
     class Subnet < Struct.new(
       :subnet_identifier,
       :subnet_availability_zone)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1491,6 +1539,7 @@ module Aws::DAX
       :description,
       :vpc_id,
       :subnets)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1567,6 +1616,7 @@ module Aws::DAX
     class Tag < Struct.new(
       :key,
       :value)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1608,6 +1658,7 @@ module Aws::DAX
     class TagResourceRequest < Struct.new(
       :resource_name,
       :tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1619,6 +1670,7 @@ module Aws::DAX
     #
     class TagResourceResponse < Struct.new(
       :tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1644,6 +1696,7 @@ module Aws::DAX
     class UntagResourceRequest < Struct.new(
       :resource_name,
       :tag_keys)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1655,6 +1708,7 @@ module Aws::DAX
     #
     class UntagResourceResponse < Struct.new(
       :tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1714,6 +1768,7 @@ module Aws::DAX
       :notification_topic_status,
       :parameter_group_name,
       :security_group_ids)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1725,6 +1780,7 @@ module Aws::DAX
     #
     class UpdateClusterResponse < Struct.new(
       :cluster)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1755,6 +1811,7 @@ module Aws::DAX
     class UpdateParameterGroupRequest < Struct.new(
       :parameter_group_name,
       :parameter_name_values)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1766,6 +1823,7 @@ module Aws::DAX
     #
     class UpdateParameterGroupResponse < Struct.new(
       :parameter_group)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1796,6 +1854,7 @@ module Aws::DAX
       :subnet_group_name,
       :description,
       :subnet_ids)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1807,6 +1866,7 @@ module Aws::DAX
     #
     class UpdateSubnetGroupResponse < Struct.new(
       :subnet_group)
+      SENSITIVE = []
       include Aws::Structure
     end
 

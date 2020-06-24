@@ -38,6 +38,7 @@ module Aws::Route53Resolver
     class AssociateResolverEndpointIpAddressRequest < Struct.new(
       :resolver_endpoint_id,
       :ip_address)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -49,6 +50,7 @@ module Aws::Route53Resolver
     #
     class AssociateResolverEndpointIpAddressResponse < Struct.new(
       :resolver_endpoint)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -81,6 +83,7 @@ module Aws::Route53Resolver
       :resolver_rule_id,
       :name,
       :vpc_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -93,6 +96,7 @@ module Aws::Route53Resolver
     #
     class AssociateResolverRuleResponse < Struct.new(
       :resolver_rule_association)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -168,6 +172,7 @@ module Aws::Route53Resolver
       :direction,
       :ip_addresses,
       :tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -180,6 +185,7 @@ module Aws::Route53Resolver
     #
     class CreateResolverEndpointResponse < Struct.new(
       :resolver_endpoint)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -256,6 +262,7 @@ module Aws::Route53Resolver
       :target_ips,
       :resolver_endpoint_id,
       :tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -268,6 +275,7 @@ module Aws::Route53Resolver
     #
     class CreateResolverRuleResponse < Struct.new(
       :resolver_rule)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -286,6 +294,7 @@ module Aws::Route53Resolver
     #
     class DeleteResolverEndpointRequest < Struct.new(
       :resolver_endpoint_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -298,6 +307,7 @@ module Aws::Route53Resolver
     #
     class DeleteResolverEndpointResponse < Struct.new(
       :resolver_endpoint)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -316,6 +326,7 @@ module Aws::Route53Resolver
     #
     class DeleteResolverRuleRequest < Struct.new(
       :resolver_rule_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -328,6 +339,7 @@ module Aws::Route53Resolver
     #
     class DeleteResolverRuleResponse < Struct.new(
       :resolver_rule)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -357,6 +369,7 @@ module Aws::Route53Resolver
     class DisassociateResolverEndpointIpAddressRequest < Struct.new(
       :resolver_endpoint_id,
       :ip_address)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -368,6 +381,7 @@ module Aws::Route53Resolver
     #
     class DisassociateResolverEndpointIpAddressResponse < Struct.new(
       :resolver_endpoint)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -394,6 +408,7 @@ module Aws::Route53Resolver
     class DisassociateResolverRuleRequest < Struct.new(
       :vpc_id,
       :resolver_rule_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -406,6 +421,7 @@ module Aws::Route53Resolver
     #
     class DisassociateResolverRuleResponse < Struct.new(
       :resolver_rule_association)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -441,6 +457,7 @@ module Aws::Route53Resolver
     class Filter < Struct.new(
       :name,
       :values)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -460,6 +477,7 @@ module Aws::Route53Resolver
     #
     class GetResolverEndpointRequest < Struct.new(
       :resolver_endpoint_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -472,6 +490,7 @@ module Aws::Route53Resolver
     #
     class GetResolverEndpointResponse < Struct.new(
       :resolver_endpoint)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -491,6 +510,7 @@ module Aws::Route53Resolver
     #
     class GetResolverRuleAssociationRequest < Struct.new(
       :resolver_rule_association_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -503,6 +523,7 @@ module Aws::Route53Resolver
     #
     class GetResolverRuleAssociationResponse < Struct.new(
       :resolver_rule_association)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -522,6 +543,7 @@ module Aws::Route53Resolver
     #
     class GetResolverRulePolicyRequest < Struct.new(
       :arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -534,6 +556,7 @@ module Aws::Route53Resolver
     #
     class GetResolverRulePolicyResponse < Struct.new(
       :resolver_rule_policy)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -552,6 +575,7 @@ module Aws::Route53Resolver
     #
     class GetResolverRuleRequest < Struct.new(
       :resolver_rule_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -564,6 +588,7 @@ module Aws::Route53Resolver
     #
     class GetResolverRuleResponse < Struct.new(
       :resolver_rule)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -576,6 +601,7 @@ module Aws::Route53Resolver
     #
     class InternalServiceErrorException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -589,6 +615,7 @@ module Aws::Route53Resolver
     #
     class InvalidNextTokenException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -607,6 +634,7 @@ module Aws::Route53Resolver
     class InvalidParameterException < Struct.new(
       :message,
       :field_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -619,6 +647,7 @@ module Aws::Route53Resolver
     #
     class InvalidPolicyDocument < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -631,6 +660,7 @@ module Aws::Route53Resolver
     #
     class InvalidRequestException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -643,6 +673,7 @@ module Aws::Route53Resolver
     #
     class InvalidTagException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -670,6 +701,7 @@ module Aws::Route53Resolver
     class IpAddressRequest < Struct.new(
       :subnet_id,
       :ip)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -717,6 +749,7 @@ module Aws::Route53Resolver
       :status_message,
       :creation_time,
       :modification_time)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -753,6 +786,7 @@ module Aws::Route53Resolver
       :ip_id,
       :subnet_id,
       :ip)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -771,6 +805,7 @@ module Aws::Route53Resolver
     class LimitExceededException < Struct.new(
       :message,
       :resource_type)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -811,6 +846,7 @@ module Aws::Route53Resolver
       :resolver_endpoint_id,
       :max_results,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -837,6 +873,7 @@ module Aws::Route53Resolver
       :next_token,
       :max_results,
       :ip_addresses)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -887,6 +924,7 @@ module Aws::Route53Resolver
       :max_results,
       :next_token,
       :filters)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -912,6 +950,7 @@ module Aws::Route53Resolver
       :next_token,
       :max_results,
       :resolver_endpoints)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -963,6 +1002,7 @@ module Aws::Route53Resolver
       :max_results,
       :next_token,
       :filters)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -989,6 +1029,7 @@ module Aws::Route53Resolver
       :next_token,
       :max_results,
       :resolver_rule_associations)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1039,6 +1080,7 @@ module Aws::Route53Resolver
       :max_results,
       :next_token,
       :filters)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1064,6 +1106,7 @@ module Aws::Route53Resolver
       :next_token,
       :max_results,
       :resolver_rules)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1102,6 +1145,7 @@ module Aws::Route53Resolver
       :resource_arn,
       :max_results,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1122,6 +1166,7 @@ module Aws::Route53Resolver
     class ListTagsForResourceResponse < Struct.new(
       :tags,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1148,6 +1193,7 @@ module Aws::Route53Resolver
     class PutResolverRulePolicyRequest < Struct.new(
       :arn,
       :resolver_rule_policy)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1161,6 +1207,7 @@ module Aws::Route53Resolver
     #
     class PutResolverRulePolicyResponse < Struct.new(
       :return_value)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1247,6 +1294,7 @@ module Aws::Route53Resolver
       :status_message,
       :creation_time,
       :modification_time)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1334,6 +1382,7 @@ module Aws::Route53Resolver
       :resolver_endpoint_id,
       :owner_id,
       :share_status)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1379,6 +1428,7 @@ module Aws::Route53Resolver
       :vpc_id,
       :status,
       :status_message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1421,6 +1471,7 @@ module Aws::Route53Resolver
       :name,
       :target_ips,
       :resolver_endpoint_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1439,6 +1490,7 @@ module Aws::Route53Resolver
     class ResourceExistsException < Struct.new(
       :message,
       :resource_type)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1457,6 +1509,7 @@ module Aws::Route53Resolver
     class ResourceInUseException < Struct.new(
       :message,
       :resource_type)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1475,6 +1528,7 @@ module Aws::Route53Resolver
     class ResourceNotFoundException < Struct.new(
       :message,
       :resource_type)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1493,6 +1547,7 @@ module Aws::Route53Resolver
     class ResourceUnavailableException < Struct.new(
       :message,
       :resource_type)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1524,6 +1579,7 @@ module Aws::Route53Resolver
     class Tag < Struct.new(
       :key,
       :value)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1567,6 +1623,7 @@ module Aws::Route53Resolver
     class TagResourceRequest < Struct.new(
       :resource_arn,
       :tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1599,6 +1656,7 @@ module Aws::Route53Resolver
     class TargetAddress < Struct.new(
       :ip,
       :port)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1611,6 +1669,7 @@ module Aws::Route53Resolver
     #
     class ThrottlingException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1623,6 +1682,7 @@ module Aws::Route53Resolver
     #
     class UnknownResourceException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1661,6 +1721,7 @@ module Aws::Route53Resolver
     class UntagResourceRequest < Struct.new(
       :resource_arn,
       :tag_keys)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1689,6 +1750,7 @@ module Aws::Route53Resolver
     class UpdateResolverEndpointRequest < Struct.new(
       :resolver_endpoint_id,
       :name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1700,6 +1762,7 @@ module Aws::Route53Resolver
     #
     class UpdateResolverEndpointResponse < Struct.new(
       :resolver_endpoint)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1733,6 +1796,7 @@ module Aws::Route53Resolver
     class UpdateResolverRuleRequest < Struct.new(
       :resolver_rule_id,
       :config)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1744,6 +1808,7 @@ module Aws::Route53Resolver
     #
     class UpdateResolverRuleResponse < Struct.new(
       :resolver_rule)
+      SENSITIVE = []
       include Aws::Structure
     end
 

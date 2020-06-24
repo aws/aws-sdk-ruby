@@ -38,6 +38,7 @@ module Aws::AutoScalingPlans
     class ApplicationSource < Struct.new(
       :cloud_formation_stack_arn,
       :tag_filters)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -51,6 +52,7 @@ module Aws::AutoScalingPlans
     #
     class ConcurrentUpdateException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -146,6 +148,7 @@ module Aws::AutoScalingPlans
       :scaling_plan_name,
       :application_source,
       :scaling_instructions)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -159,6 +162,7 @@ module Aws::AutoScalingPlans
     #
     class CreateScalingPlanResponse < Struct.new(
       :scaling_plan_version)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -239,6 +243,7 @@ module Aws::AutoScalingPlans
       :dimensions,
       :statistic,
       :unit)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -314,6 +319,7 @@ module Aws::AutoScalingPlans
       :dimensions,
       :statistic,
       :unit)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -333,6 +339,7 @@ module Aws::AutoScalingPlans
     class Datapoint < Struct.new(
       :timestamp,
       :value)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -357,6 +364,7 @@ module Aws::AutoScalingPlans
     class DeleteScalingPlanRequest < Struct.new(
       :scaling_plan_name,
       :scaling_plan_version)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -398,6 +406,7 @@ module Aws::AutoScalingPlans
       :scaling_plan_version,
       :max_results,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -415,6 +424,7 @@ module Aws::AutoScalingPlans
     class DescribeScalingPlanResourcesResponse < Struct.new(
       :scaling_plan_resources,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -471,6 +481,7 @@ module Aws::AutoScalingPlans
       :application_sources,
       :max_results,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -488,6 +499,7 @@ module Aws::AutoScalingPlans
     class DescribeScalingPlansResponse < Struct.new(
       :scaling_plans,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -594,6 +606,7 @@ module Aws::AutoScalingPlans
       :forecast_data_type,
       :start_time,
       :end_time)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -605,6 +618,7 @@ module Aws::AutoScalingPlans
     #
     class GetScalingPlanResourceForecastDataResponse < Struct.new(
       :datapoints)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -617,6 +631,7 @@ module Aws::AutoScalingPlans
     #
     class InternalServiceException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -629,6 +644,7 @@ module Aws::AutoScalingPlans
     #
     class InvalidNextTokenException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -642,6 +658,7 @@ module Aws::AutoScalingPlans
     #
     class LimitExceededException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -668,6 +685,7 @@ module Aws::AutoScalingPlans
     class MetricDimension < Struct.new(
       :name,
       :value)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -680,6 +698,7 @@ module Aws::AutoScalingPlans
     #
     class ObjectNotFoundException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -720,6 +739,7 @@ module Aws::AutoScalingPlans
     class PredefinedLoadMetricSpecification < Struct.new(
       :predefined_load_metric_type,
       :resource_label)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -762,6 +782,7 @@ module Aws::AutoScalingPlans
     class PredefinedScalingMetricSpecification < Struct.new(
       :predefined_scaling_metric_type,
       :resource_label)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1056,6 +1077,7 @@ module Aws::AutoScalingPlans
       :predictive_scaling_mode,
       :scaling_policy_update_behavior,
       :disable_dynamic_scaling)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1122,6 +1144,7 @@ module Aws::AutoScalingPlans
       :status_message,
       :status_start_time,
       :creation_time)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1229,6 +1252,7 @@ module Aws::AutoScalingPlans
       :scaling_policies,
       :scaling_status_code,
       :scaling_status_message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1253,6 +1277,7 @@ module Aws::AutoScalingPlans
       :policy_name,
       :policy_type,
       :target_tracking_configuration)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1279,6 +1304,7 @@ module Aws::AutoScalingPlans
     class TagFilter < Struct.new(
       :key,
       :values)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1378,6 +1404,7 @@ module Aws::AutoScalingPlans
       :scale_out_cooldown,
       :scale_in_cooldown,
       :estimated_instance_warmup)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1477,6 +1504,7 @@ module Aws::AutoScalingPlans
       :scaling_plan_version,
       :application_source,
       :scaling_instructions)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1494,6 +1522,7 @@ module Aws::AutoScalingPlans
     #
     class ValidationException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 

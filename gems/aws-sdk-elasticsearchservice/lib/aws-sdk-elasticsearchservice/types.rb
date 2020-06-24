@@ -26,6 +26,7 @@ module Aws::ElasticsearchService
     #
     class AcceptInboundCrossClusterSearchConnectionRequest < Struct.new(
       :cross_cluster_search_connection_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -39,6 +40,7 @@ module Aws::ElasticsearchService
     #
     class AcceptInboundCrossClusterSearchConnectionResponse < Struct.new(
       :cross_cluster_search_connection)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -68,6 +70,7 @@ module Aws::ElasticsearchService
     class AccessPoliciesStatus < Struct.new(
       :options,
       :status)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -98,6 +101,7 @@ module Aws::ElasticsearchService
     class AddTagsRequest < Struct.new(
       :arn,
       :tag_list)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -121,6 +125,7 @@ module Aws::ElasticsearchService
     class AdditionalLimit < Struct.new(
       :limit_name,
       :limit_values)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -153,6 +158,7 @@ module Aws::ElasticsearchService
     class AdvancedOptionsStatus < Struct.new(
       :options,
       :status)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -170,6 +176,7 @@ module Aws::ElasticsearchService
     class AdvancedSecurityOptions < Struct.new(
       :enabled,
       :internal_user_database_enabled)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -208,6 +215,7 @@ module Aws::ElasticsearchService
       :enabled,
       :internal_user_database_enabled,
       :master_user_options)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -227,6 +235,7 @@ module Aws::ElasticsearchService
     class AdvancedSecurityOptionsStatus < Struct.new(
       :options,
       :status)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -252,6 +261,7 @@ module Aws::ElasticsearchService
     class AssociatePackageRequest < Struct.new(
       :package_id,
       :domain_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -263,6 +273,7 @@ module Aws::ElasticsearchService
     #
     class AssociatePackageResponse < Struct.new(
       :domain_package_details)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -274,6 +285,7 @@ module Aws::ElasticsearchService
     #
     class BaseException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -296,6 +308,7 @@ module Aws::ElasticsearchService
     #
     class CancelElasticsearchServiceSoftwareUpdateRequest < Struct.new(
       :domain_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -308,6 +321,7 @@ module Aws::ElasticsearchService
     #
     class CancelElasticsearchServiceSoftwareUpdateResponse < Struct.new(
       :service_software_options)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -351,6 +365,7 @@ module Aws::ElasticsearchService
       :user_pool_id,
       :identity_pool_id,
       :role_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -369,6 +384,7 @@ module Aws::ElasticsearchService
     class CognitoOptionsStatus < Struct.new(
       :options,
       :status)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -386,6 +402,7 @@ module Aws::ElasticsearchService
     class CompatibleVersionsMap < Struct.new(
       :source_version,
       :target_versions)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -571,6 +588,7 @@ module Aws::ElasticsearchService
       :log_publishing_options,
       :domain_endpoint_options,
       :advanced_security_options)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -583,6 +601,7 @@ module Aws::ElasticsearchService
     #
     class CreateElasticsearchDomainResponse < Struct.new(
       :domain_status)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -625,6 +644,7 @@ module Aws::ElasticsearchService
       :source_domain_info,
       :destination_domain_info,
       :connection_alias)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -663,6 +683,7 @@ module Aws::ElasticsearchService
       :connection_alias,
       :connection_status,
       :cross_cluster_search_connection_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -702,6 +723,7 @@ module Aws::ElasticsearchService
       :package_type,
       :package_description,
       :package_source)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -713,6 +735,7 @@ module Aws::ElasticsearchService
     #
     class CreatePackageResponse < Struct.new(
       :package_details)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -734,6 +757,7 @@ module Aws::ElasticsearchService
     #
     class DeleteElasticsearchDomainRequest < Struct.new(
       :domain_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -747,6 +771,7 @@ module Aws::ElasticsearchService
     #
     class DeleteElasticsearchDomainResponse < Struct.new(
       :domain_status)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -767,6 +792,7 @@ module Aws::ElasticsearchService
     #
     class DeleteInboundCrossClusterSearchConnectionRequest < Struct.new(
       :cross_cluster_search_connection_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -780,6 +806,7 @@ module Aws::ElasticsearchService
     #
     class DeleteInboundCrossClusterSearchConnectionResponse < Struct.new(
       :cross_cluster_search_connection)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -800,6 +827,7 @@ module Aws::ElasticsearchService
     #
     class DeleteOutboundCrossClusterSearchConnectionRequest < Struct.new(
       :cross_cluster_search_connection_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -813,6 +841,7 @@ module Aws::ElasticsearchService
     #
     class DeleteOutboundCrossClusterSearchConnectionResponse < Struct.new(
       :cross_cluster_search_connection)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -832,6 +861,7 @@ module Aws::ElasticsearchService
     #
     class DeletePackageRequest < Struct.new(
       :package_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -843,6 +873,7 @@ module Aws::ElasticsearchService
     #
     class DeletePackageResponse < Struct.new(
       :package_details)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -863,6 +894,7 @@ module Aws::ElasticsearchService
     #
     class DescribeElasticsearchDomainConfigRequest < Struct.new(
       :domain_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -876,6 +908,7 @@ module Aws::ElasticsearchService
     #
     class DescribeElasticsearchDomainConfigResponse < Struct.new(
       :domain_config)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -895,6 +928,7 @@ module Aws::ElasticsearchService
     #
     class DescribeElasticsearchDomainRequest < Struct.new(
       :domain_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -907,6 +941,7 @@ module Aws::ElasticsearchService
     #
     class DescribeElasticsearchDomainResponse < Struct.new(
       :domain_status)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -927,6 +962,7 @@ module Aws::ElasticsearchService
     #
     class DescribeElasticsearchDomainsRequest < Struct.new(
       :domain_names)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -940,6 +976,7 @@ module Aws::ElasticsearchService
     #
     class DescribeElasticsearchDomainsResponse < Struct.new(
       :domain_status_list)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -974,6 +1011,7 @@ module Aws::ElasticsearchService
       :domain_name,
       :instance_type,
       :elasticsearch_version)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -990,6 +1028,7 @@ module Aws::ElasticsearchService
     #
     class DescribeElasticsearchInstanceTypeLimitsResponse < Struct.new(
       :limits_by_role)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1034,6 +1073,7 @@ module Aws::ElasticsearchService
       :filters,
       :max_results,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1055,6 +1095,7 @@ module Aws::ElasticsearchService
     class DescribeInboundCrossClusterSearchConnectionsResponse < Struct.new(
       :cross_cluster_search_connections,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1099,6 +1140,7 @@ module Aws::ElasticsearchService
       :filters,
       :max_results,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1120,6 +1162,7 @@ module Aws::ElasticsearchService
     class DescribeOutboundCrossClusterSearchConnectionsResponse < Struct.new(
       :cross_cluster_search_connections,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1144,6 +1187,7 @@ module Aws::ElasticsearchService
     class DescribePackagesFilter < Struct.new(
       :name,
       :value)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1182,6 +1226,7 @@ module Aws::ElasticsearchService
       :filters,
       :max_results,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1197,6 +1242,7 @@ module Aws::ElasticsearchService
     class DescribePackagesResponse < Struct.new(
       :package_details_list,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1232,6 +1278,7 @@ module Aws::ElasticsearchService
       :reserved_elasticsearch_instance_offering_id,
       :max_results,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1249,6 +1296,7 @@ module Aws::ElasticsearchService
     class DescribeReservedElasticsearchInstanceOfferingsResponse < Struct.new(
       :next_token,
       :reserved_elasticsearch_instance_offerings)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1283,6 +1331,7 @@ module Aws::ElasticsearchService
       :reserved_elasticsearch_instance_id,
       :max_results,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1299,6 +1348,7 @@ module Aws::ElasticsearchService
     class DescribeReservedElasticsearchInstancesResponse < Struct.new(
       :next_token,
       :reserved_elasticsearch_instances)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1329,6 +1379,7 @@ module Aws::ElasticsearchService
     class DissociatePackageRequest < Struct.new(
       :package_id,
       :domain_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1340,6 +1391,7 @@ module Aws::ElasticsearchService
     #
     class DissociatePackageResponse < Struct.new(
       :domain_package_details)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1371,6 +1423,7 @@ module Aws::ElasticsearchService
     class DomainEndpointOptions < Struct.new(
       :enforce_https,
       :tls_security_policy)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1389,6 +1442,7 @@ module Aws::ElasticsearchService
     class DomainEndpointOptionsStatus < Struct.new(
       :options,
       :status)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1398,6 +1452,7 @@ module Aws::ElasticsearchService
     #
     class DomainInfo < Struct.new(
       :domain_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1427,6 +1482,7 @@ module Aws::ElasticsearchService
       :owner_id,
       :domain_name,
       :region)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1476,6 +1532,7 @@ module Aws::ElasticsearchService
       :domain_package_status,
       :reference_path,
       :error_details)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1518,6 +1575,7 @@ module Aws::ElasticsearchService
       :volume_type,
       :volume_size,
       :iops)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1535,6 +1593,7 @@ module Aws::ElasticsearchService
     class EBSOptionsStatus < Struct.new(
       :options,
       :status)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1623,6 +1682,7 @@ module Aws::ElasticsearchService
       :warm_enabled,
       :warm_type,
       :warm_count)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1642,6 +1702,7 @@ module Aws::ElasticsearchService
     class ElasticsearchClusterConfigStatus < Struct.new(
       :options,
       :status)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1732,6 +1793,7 @@ module Aws::ElasticsearchService
       :log_publishing_options,
       :domain_endpoint_options,
       :advanced_security_options)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1889,6 +1951,7 @@ module Aws::ElasticsearchService
       :service_software_options,
       :domain_endpoint_options,
       :advanced_security_options)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1908,6 +1971,7 @@ module Aws::ElasticsearchService
     class ElasticsearchVersionStatus < Struct.new(
       :options,
       :status)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1932,6 +1996,7 @@ module Aws::ElasticsearchService
     class EncryptionAtRestOptions < Struct.new(
       :enabled,
       :kms_key_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1951,6 +2016,7 @@ module Aws::ElasticsearchService
     class EncryptionAtRestOptionsStatus < Struct.new(
       :options,
       :status)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1963,6 +2029,7 @@ module Aws::ElasticsearchService
     class ErrorDetails < Struct.new(
       :error_type,
       :error_message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1990,6 +2057,7 @@ module Aws::ElasticsearchService
     class Filter < Struct.new(
       :name,
       :values)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2012,6 +2080,7 @@ module Aws::ElasticsearchService
     #
     class GetCompatibleElasticsearchVersionsRequest < Struct.new(
       :domain_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2025,6 +2094,7 @@ module Aws::ElasticsearchService
     #
     class GetCompatibleElasticsearchVersionsResponse < Struct.new(
       :compatible_elasticsearch_versions)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2060,6 +2130,7 @@ module Aws::ElasticsearchService
       :domain_name,
       :max_results,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2079,6 +2150,7 @@ module Aws::ElasticsearchService
     class GetUpgradeHistoryResponse < Struct.new(
       :upgrade_histories,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2100,6 +2172,7 @@ module Aws::ElasticsearchService
     #
     class GetUpgradeStatusRequest < Struct.new(
       :domain_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2129,6 +2202,7 @@ module Aws::ElasticsearchService
       :upgrade_step,
       :step_status,
       :upgrade_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2159,6 +2233,7 @@ module Aws::ElasticsearchService
       :destination_domain_info,
       :cross_cluster_search_connection_id,
       :connection_status)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2186,6 +2261,7 @@ module Aws::ElasticsearchService
     class InboundCrossClusterSearchConnectionStatus < Struct.new(
       :status_code,
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2205,6 +2281,7 @@ module Aws::ElasticsearchService
     class InstanceCountLimits < Struct.new(
       :minimum_instance_count,
       :maximum_instance_count)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2218,6 +2295,7 @@ module Aws::ElasticsearchService
     #
     class InstanceLimits < Struct.new(
       :instance_count_limits)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2265,6 +2343,7 @@ module Aws::ElasticsearchService
       :storage_types,
       :instance_limits,
       :additional_limits)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2277,6 +2356,7 @@ module Aws::ElasticsearchService
     #
     class ListDomainNamesResponse < Struct.new(
       :domain_names)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2310,6 +2390,7 @@ module Aws::ElasticsearchService
       :package_id,
       :max_results,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2326,6 +2407,7 @@ module Aws::ElasticsearchService
     class ListDomainsForPackageResponse < Struct.new(
       :domain_package_details_list,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2369,6 +2451,7 @@ module Aws::ElasticsearchService
       :domain_name,
       :max_results,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2389,6 +2472,7 @@ module Aws::ElasticsearchService
     class ListElasticsearchInstanceTypesResponse < Struct.new(
       :elasticsearch_instance_types,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2423,6 +2507,7 @@ module Aws::ElasticsearchService
     class ListElasticsearchVersionsRequest < Struct.new(
       :max_results,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2442,6 +2527,7 @@ module Aws::ElasticsearchService
     class ListElasticsearchVersionsResponse < Struct.new(
       :elasticsearch_versions,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2476,6 +2562,7 @@ module Aws::ElasticsearchService
       :domain_name,
       :max_results,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2494,6 +2581,7 @@ module Aws::ElasticsearchService
     class ListPackagesForDomainResponse < Struct.new(
       :domain_package_details_list,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2515,6 +2603,7 @@ module Aws::ElasticsearchService
     #
     class ListTagsRequest < Struct.new(
       :arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2527,6 +2616,7 @@ module Aws::ElasticsearchService
     #
     class ListTagsResponse < Struct.new(
       :tag_list)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2556,6 +2646,7 @@ module Aws::ElasticsearchService
     class LogPublishingOption < Struct.new(
       :cloud_watch_logs_log_group_arn,
       :enabled)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2575,6 +2666,7 @@ module Aws::ElasticsearchService
     class LogPublishingOptionsStatus < Struct.new(
       :options,
       :status)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2607,6 +2699,7 @@ module Aws::ElasticsearchService
       :master_user_arn,
       :master_user_name,
       :master_user_password)
+      SENSITIVE = [:master_user_name, :master_user_password]
       include Aws::Structure
     end
 
@@ -2625,6 +2718,7 @@ module Aws::ElasticsearchService
     #
     class NodeToNodeEncryptionOptions < Struct.new(
       :enabled)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2644,6 +2738,7 @@ module Aws::ElasticsearchService
     class NodeToNodeEncryptionOptionsStatus < Struct.new(
       :options,
       :status)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2675,6 +2770,7 @@ module Aws::ElasticsearchService
       :update_version,
       :state,
       :pending_deletion)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2711,6 +2807,7 @@ module Aws::ElasticsearchService
       :cross_cluster_search_connection_id,
       :connection_alias,
       :connection_status)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2741,6 +2838,7 @@ module Aws::ElasticsearchService
     class OutboundCrossClusterSearchConnectionStatus < Struct.new(
       :status_code,
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2784,6 +2882,7 @@ module Aws::ElasticsearchService
       :package_status,
       :created_at,
       :error_details)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2809,6 +2908,7 @@ module Aws::ElasticsearchService
     class PackageSource < Struct.new(
       :s3_bucket_name,
       :s3_key)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2840,6 +2940,7 @@ module Aws::ElasticsearchService
       :reserved_elasticsearch_instance_offering_id,
       :reservation_name,
       :instance_count)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2857,6 +2958,7 @@ module Aws::ElasticsearchService
     class PurchaseReservedElasticsearchInstanceOfferingResponse < Struct.new(
       :reserved_elasticsearch_instance_id,
       :reservation_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2875,6 +2977,7 @@ module Aws::ElasticsearchService
     class RecurringCharge < Struct.new(
       :recurring_charge_amount,
       :recurring_charge_frequency)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2894,6 +2997,7 @@ module Aws::ElasticsearchService
     #
     class RejectInboundCrossClusterSearchConnectionRequest < Struct.new(
       :cross_cluster_search_connection_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2907,6 +3011,7 @@ module Aws::ElasticsearchService
     #
     class RejectInboundCrossClusterSearchConnectionResponse < Struct.new(
       :cross_cluster_search_connection)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2935,6 +3040,7 @@ module Aws::ElasticsearchService
     class RemoveTagsRequest < Struct.new(
       :arn,
       :tag_keys)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3012,6 +3118,7 @@ module Aws::ElasticsearchService
       :state,
       :payment_option,
       :recurring_charges)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3063,6 +3170,7 @@ module Aws::ElasticsearchService
       :currency_code,
       :payment_option,
       :recurring_charges)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3129,6 +3237,7 @@ module Aws::ElasticsearchService
       :description,
       :automated_update_date,
       :optional_deployment)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3151,6 +3260,7 @@ module Aws::ElasticsearchService
     #
     class SnapshotOptions < Struct.new(
       :automated_snapshot_start_hour)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3168,6 +3278,7 @@ module Aws::ElasticsearchService
     class SnapshotOptionsStatus < Struct.new(
       :options,
       :status)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3190,6 +3301,7 @@ module Aws::ElasticsearchService
     #
     class StartElasticsearchServiceSoftwareUpdateRequest < Struct.new(
       :domain_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3202,6 +3314,7 @@ module Aws::ElasticsearchService
     #
     class StartElasticsearchServiceSoftwareUpdateResponse < Struct.new(
       :service_software_options)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3233,6 +3346,7 @@ module Aws::ElasticsearchService
       :storage_type_name,
       :storage_sub_type_name,
       :storage_type_limits)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3254,6 +3368,7 @@ module Aws::ElasticsearchService
     class StorageTypeLimit < Struct.new(
       :limit_name,
       :limit_values)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3282,6 +3397,7 @@ module Aws::ElasticsearchService
     class Tag < Struct.new(
       :key,
       :value)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3431,6 +3547,7 @@ module Aws::ElasticsearchService
       :log_publishing_options,
       :domain_endpoint_options,
       :advanced_security_options)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3443,6 +3560,7 @@ module Aws::ElasticsearchService
     #
     class UpdateElasticsearchDomainConfigResponse < Struct.new(
       :domain_config)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3480,6 +3598,7 @@ module Aws::ElasticsearchService
       :domain_name,
       :target_version,
       :perform_check_only)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3508,6 +3627,7 @@ module Aws::ElasticsearchService
       :domain_name,
       :target_version,
       :perform_check_only)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3541,6 +3661,7 @@ module Aws::ElasticsearchService
       :start_timestamp,
       :upgrade_status,
       :steps_list)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3577,6 +3698,7 @@ module Aws::ElasticsearchService
       :upgrade_step_status,
       :issues,
       :progress_percent)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3611,6 +3733,7 @@ module Aws::ElasticsearchService
       :subnet_ids,
       :availability_zones,
       :security_group_ids)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3628,6 +3751,7 @@ module Aws::ElasticsearchService
     class VPCDerivedInfoStatus < Struct.new(
       :options,
       :status)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3658,6 +3782,7 @@ module Aws::ElasticsearchService
     class VPCOptions < Struct.new(
       :subnet_ids,
       :security_group_ids)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3684,6 +3809,7 @@ module Aws::ElasticsearchService
     #
     class ZoneAwarenessConfig < Struct.new(
       :availability_zone_count)
+      SENSITIVE = []
       include Aws::Structure
     end
 

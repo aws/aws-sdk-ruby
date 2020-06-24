@@ -19,6 +19,7 @@ module Aws::CodeGuruReviewer
     #
     class AccessDeniedException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -78,6 +79,7 @@ module Aws::CodeGuruReviewer
     class AssociateRepositoryRequest < Struct.new(
       :repository,
       :client_request_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -89,6 +91,7 @@ module Aws::CodeGuruReviewer
     #
     class AssociateRepositoryResponse < Struct.new(
       :repository_association)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -109,6 +112,7 @@ module Aws::CodeGuruReviewer
     #
     class CodeCommitRepository < Struct.new(
       :name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -184,6 +188,7 @@ module Aws::CodeGuruReviewer
       :pull_request_id,
       :source_code_type,
       :metrics)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -249,6 +254,7 @@ module Aws::CodeGuruReviewer
       :type,
       :pull_request_id,
       :metrics_summary)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -267,6 +273,7 @@ module Aws::CodeGuruReviewer
     class CommitDiffSourceCodeType < Struct.new(
       :source_commit,
       :destination_commit)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -281,6 +288,7 @@ module Aws::CodeGuruReviewer
     #
     class ConflictException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -299,6 +307,7 @@ module Aws::CodeGuruReviewer
     #
     class DescribeCodeReviewRequest < Struct.new(
       :code_review_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -310,6 +319,7 @@ module Aws::CodeGuruReviewer
     #
     class DescribeCodeReviewResponse < Struct.new(
       :code_review)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -342,6 +352,7 @@ module Aws::CodeGuruReviewer
       :code_review_arn,
       :recommendation_id,
       :user_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -353,6 +364,7 @@ module Aws::CodeGuruReviewer
     #
     class DescribeRecommendationFeedbackResponse < Struct.new(
       :recommendation_feedback)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -372,6 +384,7 @@ module Aws::CodeGuruReviewer
     #
     class DescribeRepositoryAssociationRequest < Struct.new(
       :association_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -383,6 +396,7 @@ module Aws::CodeGuruReviewer
     #
     class DescribeRepositoryAssociationResponse < Struct.new(
       :repository_association)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -401,6 +415,7 @@ module Aws::CodeGuruReviewer
     #
     class DisassociateRepositoryRequest < Struct.new(
       :association_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -412,6 +427,7 @@ module Aws::CodeGuruReviewer
     #
     class DisassociateRepositoryResponse < Struct.new(
       :repository_association)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -425,6 +441,7 @@ module Aws::CodeGuruReviewer
     #
     class InternalServerException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -482,6 +499,7 @@ module Aws::CodeGuruReviewer
       :type,
       :max_results,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -498,6 +516,7 @@ module Aws::CodeGuruReviewer
     class ListCodeReviewsResponse < Struct.new(
       :code_review_summaries,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -548,6 +567,7 @@ module Aws::CodeGuruReviewer
       :code_review_arn,
       :user_ids,
       :recommendation_ids)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -568,6 +588,7 @@ module Aws::CodeGuruReviewer
     class ListRecommendationFeedbackResponse < Struct.new(
       :recommendation_feedback_summaries,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -599,6 +620,7 @@ module Aws::CodeGuruReviewer
       :next_token,
       :max_results,
       :code_review_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -615,6 +637,7 @@ module Aws::CodeGuruReviewer
     class ListRecommendationsResponse < Struct.new(
       :recommendation_summaries,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -684,6 +707,7 @@ module Aws::CodeGuruReviewer
       :owners,
       :max_results,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -705,6 +729,7 @@ module Aws::CodeGuruReviewer
     class ListRepositoryAssociationsResponse < Struct.new(
       :repository_association_summaries,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -723,6 +748,7 @@ module Aws::CodeGuruReviewer
     class Metrics < Struct.new(
       :metered_lines_of_code_count,
       :findings_count)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -741,6 +767,7 @@ module Aws::CodeGuruReviewer
     class MetricsSummary < Struct.new(
       :metered_lines_of_code_count,
       :findings_count)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -753,6 +780,7 @@ module Aws::CodeGuruReviewer
     #
     class NotFoundException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -785,6 +813,7 @@ module Aws::CodeGuruReviewer
       :code_review_arn,
       :recommendation_id,
       :reactions)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -829,6 +858,7 @@ module Aws::CodeGuruReviewer
       :user_id,
       :created_time_stamp,
       :last_updated_time_stamp)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -854,6 +884,7 @@ module Aws::CodeGuruReviewer
       :recommendation_id,
       :reactions,
       :user_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -892,6 +923,7 @@ module Aws::CodeGuruReviewer
       :start_line,
       :end_line,
       :description)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -924,6 +956,7 @@ module Aws::CodeGuruReviewer
     class Repository < Struct.new(
       :code_commit,
       :bitbucket)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -987,6 +1020,7 @@ module Aws::CodeGuruReviewer
       :state_reason,
       :last_updated_time_stamp,
       :created_time_stamp)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1055,6 +1089,7 @@ module Aws::CodeGuruReviewer
       :owner,
       :provider_type,
       :state)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1067,6 +1102,7 @@ module Aws::CodeGuruReviewer
     #
     class ResourceNotFoundException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1080,6 +1116,7 @@ module Aws::CodeGuruReviewer
     #
     class SourceCodeType < Struct.new(
       :commit_diff)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1114,6 +1151,7 @@ module Aws::CodeGuruReviewer
       :name,
       :connection_arn,
       :owner)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1126,6 +1164,7 @@ module Aws::CodeGuruReviewer
     #
     class ThrottlingException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1138,6 +1177,7 @@ module Aws::CodeGuruReviewer
     #
     class ValidationException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 

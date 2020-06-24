@@ -47,6 +47,6 @@ require_relative 'aws-sdk-devicefarm/customizations'
 # @service
 module Aws::DeviceFarm
 
-  GEM_VERSION = '1.34.1'
+  GEM_VERSION = '1.35.0'
 
 end

@@ -56,6 +56,7 @@ module Aws::ElastiCache
     class AddTagsToResourceMessage < Struct.new(
       :resource_name,
       :tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -84,6 +85,7 @@ module Aws::ElastiCache
     class AllowedNodeTypeModificationsMessage < Struct.new(
       :scale_up_modifications,
       :scale_down_modifications)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -134,6 +136,7 @@ module Aws::ElastiCache
       :cache_security_group_name,
       :ec2_security_group_name,
       :ec2_security_group_owner_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -151,6 +154,7 @@ module Aws::ElastiCache
     #
     class AuthorizeCacheSecurityGroupIngressResult < Struct.new(
       :cache_security_group)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -164,6 +168,7 @@ module Aws::ElastiCache
     #
     class AvailabilityZone < Struct.new(
       :name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -194,6 +199,7 @@ module Aws::ElastiCache
       :replication_group_ids,
       :cache_cluster_ids,
       :service_update_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -224,6 +230,7 @@ module Aws::ElastiCache
       :replication_group_ids,
       :cache_cluster_ids,
       :service_update_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -514,6 +521,7 @@ module Aws::ElastiCache
       :transit_encryption_enabled,
       :at_rest_encryption_enabled,
       :arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -539,6 +547,7 @@ module Aws::ElastiCache
     class CacheClusterMessage < Struct.new(
       :marker,
       :cache_clusters)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -582,6 +591,7 @@ module Aws::ElastiCache
       :cache_parameter_group_family,
       :cache_engine_description,
       :cache_engine_version_description)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -601,6 +611,7 @@ module Aws::ElastiCache
     class CacheEngineVersionMessage < Struct.new(
       :marker,
       :cache_engine_versions)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -723,6 +734,7 @@ module Aws::ElastiCache
       :parameter_group_status,
       :source_cache_node_id,
       :customer_availability_zone)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -789,6 +801,7 @@ module Aws::ElastiCache
       :minimum_engine_version,
       :cache_node_type_specific_values,
       :change_type)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -807,6 +820,7 @@ module Aws::ElastiCache
     class CacheNodeTypeSpecificValue < Struct.new(
       :cache_node_type,
       :value)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -856,6 +870,7 @@ module Aws::ElastiCache
       :node_update_initiated_by,
       :node_update_initiated_date,
       :node_update_status_modified_date)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -894,6 +909,7 @@ module Aws::ElastiCache
       :description,
       :is_global,
       :arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -925,6 +941,7 @@ module Aws::ElastiCache
       :marker,
       :parameters,
       :cache_node_type_specific_parameters)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -942,6 +959,7 @@ module Aws::ElastiCache
     #
     class CacheParameterGroupNameMessage < Struct.new(
       :cache_parameter_group_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -981,6 +999,7 @@ module Aws::ElastiCache
       :cache_parameter_group_name,
       :parameter_apply_status,
       :cache_node_ids_to_reboot)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1000,6 +1019,7 @@ module Aws::ElastiCache
     class CacheParameterGroupsMessage < Struct.new(
       :marker,
       :cache_parameter_groups)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1040,6 +1060,7 @@ module Aws::ElastiCache
       :description,
       :ec2_security_groups,
       :arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1067,6 +1088,7 @@ module Aws::ElastiCache
     class CacheSecurityGroupMembership < Struct.new(
       :cache_security_group_name,
       :status)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1086,6 +1108,7 @@ module Aws::ElastiCache
     class CacheSecurityGroupMessage < Struct.new(
       :marker,
       :cache_security_groups)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1138,6 +1161,7 @@ module Aws::ElastiCache
       :vpc_id,
       :subnets,
       :arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1170,6 +1194,7 @@ module Aws::ElastiCache
     class CacheSubnetGroupMessage < Struct.new(
       :marker,
       :cache_subnet_groups)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1225,6 +1250,7 @@ module Aws::ElastiCache
     class CompleteMigrationMessage < Struct.new(
       :replication_group_id,
       :force)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1237,6 +1263,7 @@ module Aws::ElastiCache
     #
     class CompleteMigrationResponse < Struct.new(
       :replication_group)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1297,6 +1324,7 @@ module Aws::ElastiCache
       :node_group_id,
       :new_replica_count,
       :preferred_availability_zones)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1352,6 +1380,7 @@ module Aws::ElastiCache
       :target_snapshot_name,
       :target_bucket,
       :kms_key_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1364,6 +1393,7 @@ module Aws::ElastiCache
     #
     class CopySnapshotResult < Struct.new(
       :snapshot)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1449,9 +1479,9 @@ module Aws::ElastiCache
     # @!attribute [rw] preferred_availability_zone
     #   The EC2 Availability Zone in which the cluster is created.
     #
-    #   All nodes belonging to this Memcached cluster are placed in the
-    #   preferred Availability Zone. If you want to create your nodes across
-    #   multiple Availability Zones, use `PreferredAvailabilityZones`.
+    #   All nodes belonging to this cluster are placed in the preferred
+    #   Availability Zone. If you want to create your nodes across multiple
+    #   Availability Zones, use `PreferredAvailabilityZones`.
     #
     #   Default: System chosen Availability Zone.
     #   @return [String]
@@ -1781,6 +1811,7 @@ module Aws::ElastiCache
       :snapshot_retention_limit,
       :snapshot_window,
       :auth_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1792,6 +1823,7 @@ module Aws::ElastiCache
     #
     class CreateCacheClusterResult < Struct.new(
       :cache_cluster)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1828,6 +1860,7 @@ module Aws::ElastiCache
       :cache_parameter_group_name,
       :cache_parameter_group_family,
       :description)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1839,6 +1872,7 @@ module Aws::ElastiCache
     #
     class CreateCacheParameterGroupResult < Struct.new(
       :cache_parameter_group)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1871,6 +1905,7 @@ module Aws::ElastiCache
     class CreateCacheSecurityGroupMessage < Struct.new(
       :cache_security_group_name,
       :description)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1888,6 +1923,7 @@ module Aws::ElastiCache
     #
     class CreateCacheSecurityGroupResult < Struct.new(
       :cache_security_group)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1926,6 +1962,7 @@ module Aws::ElastiCache
       :cache_subnet_group_name,
       :cache_subnet_group_description,
       :subnet_ids)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1941,6 +1978,7 @@ module Aws::ElastiCache
     #
     class CreateCacheSubnetGroupResult < Struct.new(
       :cache_subnet_group)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1973,6 +2011,7 @@ module Aws::ElastiCache
       :global_replication_group_id_suffix,
       :global_replication_group_description,
       :primary_replication_group_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1993,6 +2032,7 @@ module Aws::ElastiCache
     #
     class CreateGlobalReplicationGroupResult < Struct.new(
       :global_replication_group)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2084,9 +2124,6 @@ module Aws::ElastiCache
     #   Specifies whether a read-only replica is automatically promoted to
     #   read/write primary if the existing primary fails.
     #
-    #   If `true`, Multi-AZ is enabled for this replication group. If
-    #   `false`, Multi-AZ is disabled for this replication group.
-    #
     #   `AutomaticFailoverEnabled` must be enabled for Redis (cluster mode
     #   enabled) replication groups.
     #
@@ -2103,10 +2140,17 @@ module Aws::ElastiCache
     #   @return [Boolean]
     #
     # @!attribute [rw] multi_az_enabled
+    #   A flag indicating if you have Multi-AZ enabled to enhance fault
+    #   tolerance. For more information, see [Minimizing Downtime:
+    #   Multi-AZ][1].
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/AutoFailover.html
     #   @return [Boolean]
     #
     # @!attribute [rw] num_cache_clusters
-    #   The number of nodes in the cluster.
+    #   The number of clusters this replication group initially has.
     #
     #   This parameter is not used if there is more than one node group
     #   (shard). You should use `ReplicasPerNodeGroup` instead.
@@ -2516,6 +2560,7 @@ module Aws::ElastiCache
       :transit_encryption_enabled,
       :at_rest_encryption_enabled,
       :kms_key_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2528,6 +2573,7 @@ module Aws::ElastiCache
     #
     class CreateReplicationGroupResult < Struct.new(
       :replication_group)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2568,6 +2614,7 @@ module Aws::ElastiCache
       :cache_cluster_id,
       :snapshot_name,
       :kms_key_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2580,6 +2627,7 @@ module Aws::ElastiCache
     #
     class CreateSnapshotResult < Struct.new(
       :snapshot)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2606,6 +2654,7 @@ module Aws::ElastiCache
     class CustomerNodeEndpoint < Struct.new(
       :address,
       :port)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2660,6 +2709,7 @@ module Aws::ElastiCache
       :global_node_groups_to_remove,
       :global_node_groups_to_retain,
       :apply_immediately)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2680,6 +2730,7 @@ module Aws::ElastiCache
     #
     class DecreaseNodeGroupsInGlobalReplicationGroupResult < Struct.new(
       :global_replication_group)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2749,6 +2800,7 @@ module Aws::ElastiCache
       :replica_configuration,
       :replicas_to_remove,
       :apply_immediately)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2761,6 +2813,7 @@ module Aws::ElastiCache
     #
     class DecreaseReplicaCountResult < Struct.new(
       :replication_group)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2790,6 +2843,7 @@ module Aws::ElastiCache
     class DeleteCacheClusterMessage < Struct.new(
       :cache_cluster_id,
       :final_snapshot_identifier)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2801,6 +2855,7 @@ module Aws::ElastiCache
     #
     class DeleteCacheClusterResult < Struct.new(
       :cache_cluster)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2826,6 +2881,7 @@ module Aws::ElastiCache
     #
     class DeleteCacheParameterGroupMessage < Struct.new(
       :cache_parameter_group_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2850,6 +2906,7 @@ module Aws::ElastiCache
     #
     class DeleteCacheSecurityGroupMessage < Struct.new(
       :cache_security_group_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2873,6 +2930,7 @@ module Aws::ElastiCache
     #
     class DeleteCacheSubnetGroupMessage < Struct.new(
       :cache_subnet_group_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2898,6 +2956,7 @@ module Aws::ElastiCache
     class DeleteGlobalReplicationGroupMessage < Struct.new(
       :global_replication_group_id,
       :retain_primary_replication_group)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2918,6 +2977,7 @@ module Aws::ElastiCache
     #
     class DeleteGlobalReplicationGroupResult < Struct.new(
       :global_replication_group)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2956,6 +3016,7 @@ module Aws::ElastiCache
       :replication_group_id,
       :retain_primary_cluster,
       :final_snapshot_identifier)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2968,6 +3029,7 @@ module Aws::ElastiCache
     #
     class DeleteReplicationGroupResult < Struct.new(
       :replication_group)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2988,6 +3050,7 @@ module Aws::ElastiCache
     #
     class DeleteSnapshotMessage < Struct.new(
       :snapshot_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3000,6 +3063,7 @@ module Aws::ElastiCache
     #
     class DeleteSnapshotResult < Struct.new(
       :snapshot)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3060,6 +3124,7 @@ module Aws::ElastiCache
       :marker,
       :show_cache_node_info,
       :show_cache_clusters_not_in_replication_groups)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3135,6 +3200,7 @@ module Aws::ElastiCache
       :max_records,
       :marker,
       :default_only)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3177,6 +3243,7 @@ module Aws::ElastiCache
       :cache_parameter_group_name,
       :max_records,
       :marker)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3227,6 +3294,7 @@ module Aws::ElastiCache
       :source,
       :max_records,
       :marker)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3269,6 +3337,7 @@ module Aws::ElastiCache
       :cache_security_group_name,
       :max_records,
       :marker)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3311,6 +3380,7 @@ module Aws::ElastiCache
       :cache_subnet_group_name,
       :max_records,
       :marker)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3356,6 +3426,7 @@ module Aws::ElastiCache
       :cache_parameter_group_family,
       :max_records,
       :marker)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3368,6 +3439,7 @@ module Aws::ElastiCache
     #
     class DescribeEngineDefaultParametersResult < Struct.new(
       :engine_defaults)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3442,6 +3514,7 @@ module Aws::ElastiCache
       :duration,
       :max_records,
       :marker)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3484,6 +3557,7 @@ module Aws::ElastiCache
       :max_records,
       :marker,
       :show_member_info)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3504,6 +3578,7 @@ module Aws::ElastiCache
     class DescribeGlobalReplicationGroupsResult < Struct.new(
       :marker,
       :global_replication_groups)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3550,6 +3625,7 @@ module Aws::ElastiCache
       :replication_group_id,
       :max_records,
       :marker)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3707,6 +3783,7 @@ module Aws::ElastiCache
       :offering_type,
       :max_records,
       :marker)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3860,6 +3937,7 @@ module Aws::ElastiCache
       :offering_type,
       :max_records,
       :marker)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3899,6 +3977,7 @@ module Aws::ElastiCache
       :service_update_status,
       :max_records,
       :marker)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3921,6 +4000,7 @@ module Aws::ElastiCache
     class DescribeSnapshotsListMessage < Struct.new(
       :marker,
       :snapshots)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3995,6 +4075,7 @@ module Aws::ElastiCache
       :marker,
       :max_records,
       :show_node_group_config)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4075,6 +4156,7 @@ module Aws::ElastiCache
       :show_node_level_update_status,
       :max_records,
       :marker)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4107,6 +4189,7 @@ module Aws::ElastiCache
       :global_replication_group_id,
       :replication_group_id,
       :replication_group_region)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4127,6 +4210,7 @@ module Aws::ElastiCache
     #
     class DisassociateGlobalReplicationGroupResult < Struct.new(
       :global_replication_group)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4151,6 +4235,7 @@ module Aws::ElastiCache
       :status,
       :ec2_security_group_name,
       :ec2_security_group_owner_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4170,6 +4255,7 @@ module Aws::ElastiCache
     class Endpoint < Struct.new(
       :address,
       :port)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4205,6 +4291,7 @@ module Aws::ElastiCache
       :marker,
       :parameters,
       :cache_node_type_specific_parameters)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4238,6 +4325,7 @@ module Aws::ElastiCache
       :source_type,
       :message,
       :date)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4257,6 +4345,7 @@ module Aws::ElastiCache
     class EventsMessage < Struct.new(
       :marker,
       :events)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4287,6 +4376,7 @@ module Aws::ElastiCache
       :global_replication_group_id,
       :primary_region,
       :primary_replication_group_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4307,6 +4397,7 @@ module Aws::ElastiCache
     #
     class FailoverGlobalReplicationGroupResult < Struct.new(
       :global_replication_group)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4326,6 +4417,7 @@ module Aws::ElastiCache
     class GlobalNodeGroup < Struct.new(
       :global_node_group_id,
       :slots)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4426,6 +4518,7 @@ module Aws::ElastiCache
       :transit_encryption_enabled,
       :at_rest_encryption_enabled,
       :arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4452,6 +4545,7 @@ module Aws::ElastiCache
     class GlobalReplicationGroupInfo < Struct.new(
       :global_replication_group_id,
       :global_replication_group_member_role)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4487,6 +4581,7 @@ module Aws::ElastiCache
       :role,
       :automatic_failover,
       :status)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4543,6 +4638,7 @@ module Aws::ElastiCache
       :node_group_count,
       :regional_configurations,
       :apply_immediately)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4563,6 +4659,7 @@ module Aws::ElastiCache
     #
     class IncreaseNodeGroupsInGlobalReplicationGroupResult < Struct.new(
       :global_replication_group)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4614,6 +4711,7 @@ module Aws::ElastiCache
       :new_replica_count,
       :replica_configuration,
       :apply_immediately)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4626,6 +4724,7 @@ module Aws::ElastiCache
     #
     class IncreaseReplicaCountResult < Struct.new(
       :replication_group)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4690,6 +4789,7 @@ module Aws::ElastiCache
     #
     class InvalidParameterCombinationException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4703,6 +4803,7 @@ module Aws::ElastiCache
     #
     class InvalidParameterValueException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4767,6 +4868,7 @@ module Aws::ElastiCache
     class ListAllowedNodeTypeModificationsMessage < Struct.new(
       :cache_cluster_id,
       :replication_group_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4797,6 +4899,7 @@ module Aws::ElastiCache
     #
     class ListTagsForResourceMessage < Struct.new(
       :resource_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5173,6 +5276,7 @@ module Aws::ElastiCache
       :cache_node_type,
       :auth_token,
       :auth_token_update_strategy)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5184,6 +5288,7 @@ module Aws::ElastiCache
     #
     class ModifyCacheClusterResult < Struct.new(
       :cache_cluster)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5218,6 +5323,7 @@ module Aws::ElastiCache
     class ModifyCacheParameterGroupMessage < Struct.new(
       :cache_parameter_group_name,
       :parameter_name_values)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5256,6 +5362,7 @@ module Aws::ElastiCache
       :cache_subnet_group_name,
       :cache_subnet_group_description,
       :subnet_ids)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5271,6 +5378,7 @@ module Aws::ElastiCache
     #
     class ModifyCacheSubnetGroupResult < Struct.new(
       :cache_subnet_group)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5325,6 +5433,7 @@ module Aws::ElastiCache
       :engine_version,
       :global_replication_group_description,
       :automatic_failover_enabled)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5345,6 +5454,7 @@ module Aws::ElastiCache
     #
     class ModifyGlobalReplicationGroupResult < Struct.new(
       :global_replication_group)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5416,6 +5526,13 @@ module Aws::ElastiCache
     #   @return [Boolean]
     #
     # @!attribute [rw] multi_az_enabled
+    #   A flag indicating if you have Multi-AZ enabled to enhance fault
+    #   tolerance. For more information, see [Minimizing Downtime:
+    #   Multi-AZ][1].
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/AutoFailover.html
     #   @return [Boolean]
     #
     # @!attribute [rw] node_group_id
@@ -5613,6 +5730,7 @@ module Aws::ElastiCache
       :cache_node_type,
       :auth_token,
       :auth_token_update_strategy)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5625,6 +5743,7 @@ module Aws::ElastiCache
     #
     class ModifyReplicationGroupResult < Struct.new(
       :replication_group)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5706,6 +5825,7 @@ module Aws::ElastiCache
       :resharding_configuration,
       :node_groups_to_remove,
       :node_groups_to_retain)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5718,6 +5838,7 @@ module Aws::ElastiCache
     #
     class ModifyReplicationGroupShardConfigurationResult < Struct.new(
       :replication_group)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5741,7 +5862,7 @@ module Aws::ElastiCache
     #
     # @!attribute [rw] status
     #   The current state of this replication group - `creating`,
-    #   `available`, etc.
+    #   `available`, `modifying`, `deleting`.
     #   @return [String]
     #
     # @!attribute [rw] primary_endpoint
@@ -5770,6 +5891,7 @@ module Aws::ElastiCache
       :reader_endpoint,
       :slots,
       :node_group_members)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5824,6 +5946,7 @@ module Aws::ElastiCache
       :replica_count,
       :primary_availability_zone,
       :replica_availability_zones)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5862,6 +5985,7 @@ module Aws::ElastiCache
       :read_endpoint,
       :preferred_availability_zone,
       :current_role)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5916,6 +6040,7 @@ module Aws::ElastiCache
       :node_update_initiated_by,
       :node_update_initiated_date,
       :node_update_status_modified_date)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5942,6 +6067,7 @@ module Aws::ElastiCache
     class NodeGroupUpdateStatus < Struct.new(
       :node_group_id,
       :node_group_member_update_status)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6009,6 +6135,7 @@ module Aws::ElastiCache
       :cache_size,
       :cache_node_create_time,
       :snapshot_create_time)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6029,6 +6156,7 @@ module Aws::ElastiCache
     class NotificationConfiguration < Struct.new(
       :topic_arn,
       :topic_status)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6092,6 +6220,7 @@ module Aws::ElastiCache
       :is_modifiable,
       :minimum_engine_version,
       :change_type)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6119,6 +6248,7 @@ module Aws::ElastiCache
     class ParameterNameValue < Struct.new(
       :parameter_name,
       :parameter_value)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6159,6 +6289,7 @@ module Aws::ElastiCache
       :engine_version,
       :cache_node_type,
       :auth_token_status)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6188,6 +6319,7 @@ module Aws::ElastiCache
       :cache_cluster_id,
       :service_update_name,
       :update_action_status)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6234,6 +6366,7 @@ module Aws::ElastiCache
       :reserved_cache_nodes_offering_id,
       :reserved_cache_node_id,
       :cache_node_count)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6246,6 +6379,7 @@ module Aws::ElastiCache
     #
     class PurchaseReservedCacheNodesOfferingResult < Struct.new(
       :reserved_cache_node)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6270,6 +6404,7 @@ module Aws::ElastiCache
     class RebalanceSlotsInGlobalReplicationGroupMessage < Struct.new(
       :global_replication_group_id,
       :apply_immediately)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6290,6 +6425,7 @@ module Aws::ElastiCache
     #
     class RebalanceSlotsInGlobalReplicationGroupResult < Struct.new(
       :global_replication_group)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6319,6 +6455,7 @@ module Aws::ElastiCache
     class RebootCacheClusterMessage < Struct.new(
       :cache_cluster_id,
       :cache_node_ids_to_reboot)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6330,6 +6467,7 @@ module Aws::ElastiCache
     #
     class RebootCacheClusterResult < Struct.new(
       :cache_cluster)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6349,6 +6487,7 @@ module Aws::ElastiCache
     class RecurringCharge < Struct.new(
       :recurring_charge_amount,
       :recurring_charge_frequency)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6387,6 +6526,7 @@ module Aws::ElastiCache
       :replication_group_id,
       :replication_group_region,
       :resharding_configuration)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6424,6 +6564,7 @@ module Aws::ElastiCache
     class RemoveTagsFromResourceMessage < Struct.new(
       :resource_name,
       :tag_keys)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6485,6 +6626,13 @@ module Aws::ElastiCache
     #   @return [String]
     #
     # @!attribute [rw] multi_az
+    #   A flag indicating if you have Multi-AZ enabled to enhance fault
+    #   tolerance. For more information, see [Minimizing Downtime:
+    #   Multi-AZ][1]
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/AutoFailover.html
     #   @return [String]
     #
     # @!attribute [rw] configuration_endpoint
@@ -6600,6 +6748,7 @@ module Aws::ElastiCache
       :at_rest_encryption_enabled,
       :kms_key_id,
       :arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6631,6 +6780,7 @@ module Aws::ElastiCache
     class ReplicationGroupMessage < Struct.new(
       :marker,
       :replication_groups)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6684,6 +6834,7 @@ module Aws::ElastiCache
       :automatic_failover_status,
       :resharding,
       :auth_token_status)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6833,6 +6984,7 @@ module Aws::ElastiCache
       :state,
       :recurring_charges,
       :reservation_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6858,6 +7010,7 @@ module Aws::ElastiCache
     class ReservedCacheNodeMessage < Struct.new(
       :marker,
       :reserved_cache_nodes)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6991,6 +7144,7 @@ module Aws::ElastiCache
       :product_description,
       :offering_type,
       :recurring_charges)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -7011,6 +7165,7 @@ module Aws::ElastiCache
     class ReservedCacheNodesOfferingMessage < Struct.new(
       :marker,
       :reserved_cache_nodes_offerings)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -7061,6 +7216,7 @@ module Aws::ElastiCache
       :cache_parameter_group_name,
       :reset_all_parameters,
       :parameter_name_values)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -7090,6 +7246,7 @@ module Aws::ElastiCache
     class ReshardingConfiguration < Struct.new(
       :node_group_id,
       :preferred_availability_zones)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -7103,6 +7260,7 @@ module Aws::ElastiCache
     #
     class ReshardingStatus < Struct.new(
       :slot_migration)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -7137,6 +7295,7 @@ module Aws::ElastiCache
       :cache_security_group_name,
       :ec2_security_group_name,
       :ec2_security_group_owner_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -7154,6 +7313,7 @@ module Aws::ElastiCache
     #
     class RevokeCacheSecurityGroupIngressResult < Struct.new(
       :cache_security_group)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -7174,6 +7334,7 @@ module Aws::ElastiCache
     class SecurityGroupMembership < Struct.new(
       :security_group_id,
       :status)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -7257,6 +7418,7 @@ module Aws::ElastiCache
       :engine_version,
       :auto_update_after_recommended_apply_by_date,
       :estimated_update_time)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -7282,6 +7444,7 @@ module Aws::ElastiCache
     class ServiceUpdatesMessage < Struct.new(
       :marker,
       :service_updates)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -7295,6 +7458,7 @@ module Aws::ElastiCache
     #
     class SlotMigration < Struct.new(
       :progress_percentage)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -7565,6 +7729,7 @@ module Aws::ElastiCache
       :node_snapshots,
       :kms_key_id,
       :arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -7628,6 +7793,7 @@ module Aws::ElastiCache
     class StartMigrationMessage < Struct.new(
       :replication_group_id,
       :customer_node_endpoint_list)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -7640,6 +7806,7 @@ module Aws::ElastiCache
     #
     class StartMigrationResponse < Struct.new(
       :replication_group)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -7660,6 +7827,7 @@ module Aws::ElastiCache
     class Subnet < Struct.new(
       :subnet_identifier,
       :subnet_availability_zone)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -7694,6 +7862,7 @@ module Aws::ElastiCache
     class Tag < Struct.new(
       :key,
       :value)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -7708,6 +7877,7 @@ module Aws::ElastiCache
     #
     class TagListMessage < Struct.new(
       :tag_list)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -7750,6 +7920,7 @@ module Aws::ElastiCache
     class TestFailoverMessage < Struct.new(
       :replication_group_id,
       :node_group_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -7768,6 +7939,7 @@ module Aws::ElastiCache
     #
     class TestFailoverResult < Struct.new(
       :replication_group)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -7795,6 +7967,7 @@ module Aws::ElastiCache
     class TimeRangeFilter < Struct.new(
       :start_time,
       :end_time)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -7830,6 +8003,7 @@ module Aws::ElastiCache
       :service_update_name,
       :error_type,
       :error_message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -7934,6 +8108,7 @@ module Aws::ElastiCache
       :cache_node_update_status,
       :estimated_update_time,
       :engine)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -7950,6 +8125,7 @@ module Aws::ElastiCache
     class UpdateActionResultsMessage < Struct.new(
       :processed_update_actions,
       :unprocessed_update_actions)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -7969,6 +8145,7 @@ module Aws::ElastiCache
     class UpdateActionsMessage < Struct.new(
       :marker,
       :update_actions)
+      SENSITIVE = []
       include Aws::Structure
     end
 

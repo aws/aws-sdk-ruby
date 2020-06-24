@@ -21,6 +21,7 @@ module Aws::CodeGuruProfiler
     class AgentConfiguration < Struct.new(
       :period_in_seconds,
       :should_profile)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -38,6 +39,7 @@ module Aws::CodeGuruProfiler
     #
     class AgentOrchestrationConfig < Struct.new(
       :profiling_enabled)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -57,6 +59,7 @@ module Aws::CodeGuruProfiler
     class AggregatedProfileTime < Struct.new(
       :period,
       :start)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -81,6 +84,7 @@ module Aws::CodeGuruProfiler
     class ConfigureAgentRequest < Struct.new(
       :fleet_instance_id,
       :profiling_group_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -93,6 +97,7 @@ module Aws::CodeGuruProfiler
     #
     class ConfigureAgentResponse < Struct.new(
       :configuration)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -107,6 +112,7 @@ module Aws::CodeGuruProfiler
     #
     class ConflictException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -148,6 +154,7 @@ module Aws::CodeGuruProfiler
       :agent_orchestration_config,
       :client_token,
       :profiling_group_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -161,6 +168,7 @@ module Aws::CodeGuruProfiler
     #
     class CreateProfilingGroupResponse < Struct.new(
       :profiling_group)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -181,6 +189,7 @@ module Aws::CodeGuruProfiler
     #
     class DeleteProfilingGroupRequest < Struct.new(
       :profiling_group_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -207,6 +216,7 @@ module Aws::CodeGuruProfiler
     #
     class DescribeProfilingGroupRequest < Struct.new(
       :profiling_group_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -220,6 +230,7 @@ module Aws::CodeGuruProfiler
     #
     class DescribeProfilingGroupResponse < Struct.new(
       :profiling_group)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -240,6 +251,7 @@ module Aws::CodeGuruProfiler
     #
     class GetPolicyRequest < Struct.new(
       :profiling_group_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -258,6 +270,7 @@ module Aws::CodeGuruProfiler
     class GetPolicyResponse < Struct.new(
       :policy,
       :revision_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -317,6 +330,7 @@ module Aws::CodeGuruProfiler
       :period,
       :profiling_group_name,
       :start_time)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -341,6 +355,7 @@ module Aws::CodeGuruProfiler
       :content_encoding,
       :content_type,
       :profile)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -354,6 +369,7 @@ module Aws::CodeGuruProfiler
     #
     class InternalServerException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -426,6 +442,7 @@ module Aws::CodeGuruProfiler
       :period,
       :profiling_group_name,
       :start_time)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -449,6 +466,7 @@ module Aws::CodeGuruProfiler
     class ListProfileTimesResponse < Struct.new(
       :next_token,
       :profile_times)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -496,6 +514,7 @@ module Aws::CodeGuruProfiler
       :include_description,
       :max_results,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -523,6 +542,7 @@ module Aws::CodeGuruProfiler
       :next_token,
       :profiling_group_names,
       :profiling_groups)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -559,6 +579,7 @@ module Aws::CodeGuruProfiler
       :content_type,
       :profile_token,
       :profiling_group_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -578,6 +599,7 @@ module Aws::CodeGuruProfiler
     #
     class ProfileTime < Struct.new(
       :start)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -617,6 +639,7 @@ module Aws::CodeGuruProfiler
       :name,
       :profiling_status,
       :updated_at)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -642,6 +665,7 @@ module Aws::CodeGuruProfiler
       :latest_agent_orchestrated_at,
       :latest_agent_profile_reported_at,
       :latest_aggregated_profile)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -684,6 +708,7 @@ module Aws::CodeGuruProfiler
       :principals,
       :profiling_group_name,
       :revision_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -702,6 +727,7 @@ module Aws::CodeGuruProfiler
     class PutPermissionResponse < Struct.new(
       :policy,
       :revision_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -735,6 +761,7 @@ module Aws::CodeGuruProfiler
       :action_group,
       :profiling_group_name,
       :revision_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -753,6 +780,7 @@ module Aws::CodeGuruProfiler
     class RemovePermissionResponse < Struct.new(
       :policy,
       :revision_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -765,6 +793,7 @@ module Aws::CodeGuruProfiler
     #
     class ResourceNotFoundException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -783,6 +812,7 @@ module Aws::CodeGuruProfiler
     #
     class ServiceQuotaExceededException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -795,6 +825,7 @@ module Aws::CodeGuruProfiler
     #
     class ThrottlingException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -822,6 +853,7 @@ module Aws::CodeGuruProfiler
     class UpdateProfilingGroupRequest < Struct.new(
       :agent_orchestration_config,
       :profiling_group_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -835,6 +867,7 @@ module Aws::CodeGuruProfiler
     #
     class UpdateProfilingGroupResponse < Struct.new(
       :profiling_group)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -847,6 +880,7 @@ module Aws::CodeGuruProfiler
     #
     class ValidationException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 

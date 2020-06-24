@@ -30,6 +30,7 @@ module Aws::AppMesh
     #
     class VirtualRouterListener < Struct.new(
       :port_mapping)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -88,6 +89,7 @@ module Aws::AppMesh
       :max_retries,
       :per_retry_timeout,
       :tcp_retry_events)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -99,6 +101,7 @@ module Aws::AppMesh
     #
     class CreateVirtualNodeOutput < Struct.new(
       :virtual_node)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -123,6 +126,7 @@ module Aws::AppMesh
     #
     class Logging < Struct.new(
       :access_log)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -134,6 +138,7 @@ module Aws::AppMesh
     #
     class UpdateVirtualRouterOutput < Struct.new(
       :virtual_router)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -154,6 +159,7 @@ module Aws::AppMesh
     class ListVirtualRoutersOutput < Struct.new(
       :next_token,
       :virtual_routers)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -214,6 +220,7 @@ module Aws::AppMesh
       :resource_owner,
       :uid,
       :version)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -227,6 +234,7 @@ module Aws::AppMesh
     #
     class ResourceInUseException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -238,6 +246,7 @@ module Aws::AppMesh
     #
     class UpdateVirtualNodeOutput < Struct.new(
       :virtual_node)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -258,6 +267,7 @@ module Aws::AppMesh
     class ListRoutesOutput < Struct.new(
       :next_token,
       :routes)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -302,6 +312,7 @@ module Aws::AppMesh
     class VirtualServiceBackend < Struct.new(
       :client_policy,
       :virtual_service_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -315,6 +326,7 @@ module Aws::AppMesh
     #
     class BadRequestException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -384,6 +396,7 @@ module Aws::AppMesh
       :protocol,
       :timeout_millis,
       :unhealthy_threshold)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -408,6 +421,7 @@ module Aws::AppMesh
     #
     class EgressFilter < Struct.new(
       :type)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -442,6 +456,7 @@ module Aws::AppMesh
     #
     class ClientPolicy < Struct.new(
       :tls)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -453,6 +468,7 @@ module Aws::AppMesh
     #
     class DescribeVirtualServiceOutput < Struct.new(
       :virtual_service)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -464,6 +480,7 @@ module Aws::AppMesh
     #
     class DescribeVirtualNodeOutput < Struct.new(
       :virtual_node)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -475,6 +492,7 @@ module Aws::AppMesh
     #
     class CreateRouteOutput < Struct.new(
       :route)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -496,6 +514,7 @@ module Aws::AppMesh
     #
     class DnsServiceDiscovery < Struct.new(
       :hostname)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -539,6 +558,7 @@ module Aws::AppMesh
       :mesh_owner,
       :route_name,
       :virtual_router_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -573,6 +593,7 @@ module Aws::AppMesh
       :spec,
       :status,
       :virtual_node_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -616,6 +637,7 @@ module Aws::AppMesh
     #
     class Backend < Struct.new(
       :virtual_service)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -656,6 +678,7 @@ module Aws::AppMesh
     class ListMeshesInput < Struct.new(
       :limit,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -690,6 +713,7 @@ module Aws::AppMesh
       :spec,
       :status,
       :virtual_router_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -729,6 +753,7 @@ module Aws::AppMesh
       :client_token,
       :mesh_name,
       :spec)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -808,6 +833,7 @@ module Aws::AppMesh
       :spec,
       :tags,
       :virtual_router_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -819,6 +845,7 @@ module Aws::AppMesh
     #
     class DescribeVirtualRouterOutput < Struct.new(
       :virtual_router)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -830,6 +857,7 @@ module Aws::AppMesh
     #
     class CreateMeshOutput < Struct.new(
       :mesh)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -842,6 +870,7 @@ module Aws::AppMesh
     #
     class CreateVirtualRouterOutput < Struct.new(
       :virtual_router)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -855,6 +884,7 @@ module Aws::AppMesh
     #
     class VirtualServiceStatus < Struct.new(
       :status)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -888,6 +918,7 @@ module Aws::AppMesh
     class ListenerTlsCertificate < Struct.new(
       :acm,
       :file)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -916,6 +947,7 @@ module Aws::AppMesh
     #
     class VirtualRouterSpec < Struct.new(
       :listeners)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1091,6 +1123,7 @@ module Aws::AppMesh
       :listeners,
       :logging,
       :service_discovery)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1110,6 +1143,7 @@ module Aws::AppMesh
     class ListMeshesOutput < Struct.new(
       :meshes,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1124,6 +1158,7 @@ module Aws::AppMesh
     #
     class ConflictException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1188,6 +1223,7 @@ module Aws::AppMesh
       :http,
       :http2,
       :tcp)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1221,6 +1257,7 @@ module Aws::AppMesh
     class TlsValidationContextTrust < Struct.new(
       :acm,
       :file)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1247,6 +1284,7 @@ module Aws::AppMesh
     class PortMapping < Struct.new(
       :port,
       :protocol)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1268,6 +1306,7 @@ module Aws::AppMesh
     class ListVirtualServicesOutput < Struct.new(
       :next_token,
       :virtual_services)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1298,6 +1337,7 @@ module Aws::AppMesh
     class WeightedTarget < Struct.new(
       :virtual_node,
       :weight)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1368,6 +1408,7 @@ module Aws::AppMesh
       :route_name,
       :version,
       :virtual_router_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1405,6 +1446,7 @@ module Aws::AppMesh
       :mesh_name,
       :mesh_owner,
       :virtual_node_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1443,6 +1485,7 @@ module Aws::AppMesh
       :spec,
       :status,
       :virtual_router_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1456,6 +1499,7 @@ module Aws::AppMesh
     #
     class InternalServerErrorException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1477,6 +1521,7 @@ module Aws::AppMesh
     #
     class TlsValidationContextAcmTrust < Struct.new(
       :certificate_authority_arns)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1489,6 +1534,7 @@ module Aws::AppMesh
     #
     class ForbiddenException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1538,6 +1584,7 @@ module Aws::AppMesh
       :range,
       :regex,
       :suffix)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1549,6 +1596,7 @@ module Aws::AppMesh
     #
     class DeleteMeshOutput < Struct.new(
       :mesh)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1581,6 +1629,7 @@ module Aws::AppMesh
     class TagResourceInput < Struct.new(
       :resource_arn,
       :tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1611,6 +1660,7 @@ module Aws::AppMesh
     class VirtualServiceProvider < Struct.new(
       :virtual_node,
       :virtual_router)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1661,6 +1711,7 @@ module Aws::AppMesh
       :metadata,
       :method_name,
       :service_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1702,6 +1753,7 @@ module Aws::AppMesh
       :attributes,
       :namespace_name,
       :service_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1713,6 +1765,7 @@ module Aws::AppMesh
     #
     class UpdateVirtualServiceOutput < Struct.new(
       :virtual_service)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1726,6 +1779,7 @@ module Aws::AppMesh
     #
     class MeshStatus < Struct.new(
       :status)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1927,6 +1981,7 @@ module Aws::AppMesh
       :spec,
       :tags,
       :virtual_node_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1940,6 +1995,7 @@ module Aws::AppMesh
     #
     class NotFoundException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2148,6 +2204,7 @@ module Aws::AppMesh
       :http_route,
       :priority,
       :tcp_route)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2160,6 +2217,7 @@ module Aws::AppMesh
     #
     class CreateVirtualServiceOutput < Struct.new(
       :virtual_service)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2190,6 +2248,7 @@ module Aws::AppMesh
     #
     class FileAccessLog < Struct.new(
       :path)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2210,6 +2269,7 @@ module Aws::AppMesh
     #
     class VirtualRouterServiceProvider < Struct.new(
       :virtual_router_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2240,6 +2300,7 @@ module Aws::AppMesh
     class HttpTimeout < Struct.new(
       :idle,
       :per_request)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2277,6 +2338,7 @@ module Aws::AppMesh
       :mesh_name,
       :mesh_owner,
       :virtual_service_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2306,6 +2368,7 @@ module Aws::AppMesh
     #
     class TlsValidationContext < Struct.new(
       :trust)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2317,6 +2380,7 @@ module Aws::AppMesh
     #
     class DeleteVirtualRouterOutput < Struct.new(
       :virtual_router)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2328,6 +2392,7 @@ module Aws::AppMesh
     #
     class DeleteVirtualNodeOutput < Struct.new(
       :virtual_node)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2514,6 +2579,7 @@ module Aws::AppMesh
       :mesh_owner,
       :spec,
       :virtual_node_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2557,6 +2623,7 @@ module Aws::AppMesh
     class ListenerTls < Struct.new(
       :certificate,
       :mode)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2575,6 +2642,7 @@ module Aws::AppMesh
     #
     class DeleteMeshInput < Struct.new(
       :mesh_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2654,6 +2722,7 @@ module Aws::AppMesh
       :spec,
       :tags,
       :virtual_service_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2718,6 +2787,7 @@ module Aws::AppMesh
       :mesh_owner,
       :spec,
       :virtual_router_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2760,6 +2830,7 @@ module Aws::AppMesh
       :limit,
       :next_token,
       :resource_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2772,6 +2843,7 @@ module Aws::AppMesh
     #
     class ServiceUnavailableException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2783,6 +2855,7 @@ module Aws::AppMesh
     #
     class DescribeMeshOutput < Struct.new(
       :mesh)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2820,6 +2893,7 @@ module Aws::AppMesh
       :mesh_name,
       :mesh_owner,
       :virtual_router_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2863,6 +2937,7 @@ module Aws::AppMesh
       :mesh_owner,
       :route_name,
       :virtual_router_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2874,6 +2949,7 @@ module Aws::AppMesh
     #
     class DeleteRouteOutput < Struct.new(
       :route)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2938,6 +3014,7 @@ module Aws::AppMesh
       :mesh_owner,
       :spec,
       :virtual_service_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2949,6 +3026,7 @@ module Aws::AppMesh
     #
     class UpdateRouteOutput < Struct.new(
       :route)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2975,6 +3053,7 @@ module Aws::AppMesh
     #
     class HttpRouteAction < Struct.new(
       :weighted_targets)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3034,6 +3113,7 @@ module Aws::AppMesh
       :mesh_owner,
       :next_token,
       :virtual_router_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3100,6 +3180,7 @@ module Aws::AppMesh
       :resource_owner,
       :version,
       :virtual_service_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3130,6 +3211,7 @@ module Aws::AppMesh
     class GrpcTimeout < Struct.new(
       :idle,
       :per_request)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3143,6 +3225,7 @@ module Aws::AppMesh
     #
     class VirtualNodeStatus < Struct.new(
       :status)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3209,6 +3292,7 @@ module Aws::AppMesh
       :resource_owner,
       :version,
       :virtual_router_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3243,6 +3327,7 @@ module Aws::AppMesh
       :spec,
       :status,
       :virtual_service_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3286,6 +3371,7 @@ module Aws::AppMesh
       :invert,
       :match,
       :name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3351,6 +3437,7 @@ module Aws::AppMesh
       :resource_owner,
       :version,
       :virtual_node_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3405,6 +3492,7 @@ module Aws::AppMesh
       :mesh_name,
       :spec,
       :tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3431,6 +3519,7 @@ module Aws::AppMesh
     #
     class GrpcRouteAction < Struct.new(
       :weighted_targets)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3448,6 +3537,7 @@ module Aws::AppMesh
     #
     class LimitExceededException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3460,6 +3550,7 @@ module Aws::AppMesh
     #
     class UpdateMeshOutput < Struct.new(
       :mesh)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3509,6 +3600,7 @@ module Aws::AppMesh
       :range,
       :regex,
       :suffix)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3546,6 +3638,7 @@ module Aws::AppMesh
       :mesh_name,
       :mesh_owner,
       :virtual_service_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3577,6 +3670,7 @@ module Aws::AppMesh
     class AwsCloudMapInstanceAttribute < Struct.new(
       :key,
       :value)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3605,6 +3699,7 @@ module Aws::AppMesh
     #
     class VirtualServiceSpec < Struct.new(
       :provider)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3634,6 +3729,7 @@ module Aws::AppMesh
     class MatchRange < Struct.new(
       :end,
       :start)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3671,6 +3767,7 @@ module Aws::AppMesh
     class TcpRoute < Struct.new(
       :action,
       :timeout)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3724,6 +3821,7 @@ module Aws::AppMesh
       :mesh_name,
       :mesh_owner,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3777,6 +3875,7 @@ module Aws::AppMesh
       :mesh_name,
       :mesh_owner,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3800,6 +3899,7 @@ module Aws::AppMesh
     #
     class AccessLog < Struct.new(
       :file)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3853,6 +3953,7 @@ module Aws::AppMesh
       :mesh_name,
       :mesh_owner,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3867,6 +3968,7 @@ module Aws::AppMesh
     #
     class TooManyRequestsException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3893,6 +3995,7 @@ module Aws::AppMesh
     class Duration < Struct.new(
       :unit,
       :value)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3904,6 +4007,7 @@ module Aws::AppMesh
     #
     class DescribeRouteOutput < Struct.new(
       :route)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3963,6 +4067,7 @@ module Aws::AppMesh
       :method,
       :prefix,
       :scheme)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3996,6 +4101,7 @@ module Aws::AppMesh
     class TagRef < Struct.new(
       :key,
       :value)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4056,6 +4162,7 @@ module Aws::AppMesh
       :mesh_owner,
       :resource_owner,
       :version)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4085,6 +4192,7 @@ module Aws::AppMesh
       :metadata,
       :spec,
       :status)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4098,6 +4206,7 @@ module Aws::AppMesh
     #
     class VirtualRouterStatus < Struct.new(
       :status)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4124,6 +4233,7 @@ module Aws::AppMesh
     #
     class TcpRouteAction < Struct.new(
       :weighted_targets)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4161,6 +4271,7 @@ module Aws::AppMesh
       :mesh_name,
       :mesh_owner,
       :virtual_node_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4174,6 +4285,7 @@ module Aws::AppMesh
     #
     class RouteStatus < Struct.new(
       :status)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4271,6 +4383,7 @@ module Aws::AppMesh
       :port_mapping,
       :timeout,
       :tls)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4354,6 +4467,7 @@ module Aws::AppMesh
       :match,
       :retry_policy,
       :timeout)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4397,6 +4511,7 @@ module Aws::AppMesh
       :enforce,
       :ports,
       :validation)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4408,6 +4523,7 @@ module Aws::AppMesh
     #
     class DeleteVirtualServiceOutput < Struct.new(
       :virtual_service)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4428,6 +4544,7 @@ module Aws::AppMesh
     #
     class VirtualNodeServiceProvider < Struct.new(
       :virtual_node_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4463,6 +4580,7 @@ module Aws::AppMesh
     #
     class BackendDefaults < Struct.new(
       :client_policy)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4497,6 +4615,7 @@ module Aws::AppMesh
     class ListenerTlsFileCertificate < Struct.new(
       :certificate_chain,
       :private_key)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4549,6 +4668,7 @@ module Aws::AppMesh
       :max_retries,
       :per_retry_timeout,
       :tcp_retry_events)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4586,6 +4706,7 @@ module Aws::AppMesh
       :mesh_name,
       :mesh_owner,
       :virtual_router_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4605,6 +4726,7 @@ module Aws::AppMesh
     #
     class TooManyTagsException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4627,6 +4749,7 @@ module Aws::AppMesh
     #
     class TlsValidationContextFileTrust < Struct.new(
       :certificate_chain)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4669,6 +4792,7 @@ module Aws::AppMesh
       :invert,
       :match,
       :name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4915,6 +5039,7 @@ module Aws::AppMesh
       :spec,
       :tags,
       :virtual_router_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4936,6 +5061,7 @@ module Aws::AppMesh
     #
     class TcpTimeout < Struct.new(
       :idle)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5165,6 +5291,7 @@ module Aws::AppMesh
       :route_name,
       :spec,
       :virtual_router_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5248,6 +5375,7 @@ module Aws::AppMesh
       :match,
       :retry_policy,
       :timeout)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5279,6 +5407,7 @@ module Aws::AppMesh
     class DescribeMeshInput < Struct.new(
       :mesh_name,
       :mesh_owner)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5301,6 +5430,7 @@ module Aws::AppMesh
     #
     class MeshSpec < Struct.new(
       :egress_filter)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5321,6 +5451,7 @@ module Aws::AppMesh
     class ListTagsForResourceOutput < Struct.new(
       :next_token,
       :tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5359,6 +5490,7 @@ module Aws::AppMesh
     class ServiceDiscovery < Struct.new(
       :aws_cloud_map,
       :dns)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5379,6 +5511,7 @@ module Aws::AppMesh
     class ListVirtualNodesOutput < Struct.new(
       :next_token,
       :virtual_nodes)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5403,6 +5536,7 @@ module Aws::AppMesh
     class UntagResourceInput < Struct.new(
       :resource_arn,
       :tag_keys)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5430,6 +5564,7 @@ module Aws::AppMesh
     #
     class ListenerTlsAcmCertificate < Struct.new(
       :certificate_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 

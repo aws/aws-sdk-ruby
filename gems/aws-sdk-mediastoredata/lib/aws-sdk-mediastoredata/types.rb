@@ -19,6 +19,7 @@ module Aws::MediaStoreData
     #
     class ContainerNotFoundException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -39,6 +40,7 @@ module Aws::MediaStoreData
     #
     class DeleteObjectRequest < Struct.new(
       :path)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -63,6 +65,7 @@ module Aws::MediaStoreData
     #
     class DescribeObjectRequest < Struct.new(
       :path)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -103,6 +106,7 @@ module Aws::MediaStoreData
       :content_length,
       :cache_control,
       :last_modified)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -165,6 +169,7 @@ module Aws::MediaStoreData
     class GetObjectRequest < Struct.new(
       :path,
       :range)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -222,6 +227,7 @@ module Aws::MediaStoreData
       :etag,
       :last_modified,
       :status_code)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -234,6 +240,7 @@ module Aws::MediaStoreData
     #
     class InternalServerError < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -272,6 +279,7 @@ module Aws::MediaStoreData
       :last_modified,
       :content_type,
       :content_length)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -319,6 +327,7 @@ module Aws::MediaStoreData
       :path,
       :max_results,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -340,6 +349,7 @@ module Aws::MediaStoreData
     class ListItemsResponse < Struct.new(
       :items,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -352,6 +362,7 @@ module Aws::MediaStoreData
     #
     class ObjectNotFoundException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -449,6 +460,7 @@ module Aws::MediaStoreData
       :cache_control,
       :storage_class,
       :upload_availability)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -471,6 +483,7 @@ module Aws::MediaStoreData
       :content_sha256,
       :etag,
       :storage_class)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -483,6 +496,7 @@ module Aws::MediaStoreData
     #
     class RequestedRangeNotSatisfiableException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 

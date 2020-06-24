@@ -25,6 +25,7 @@ module Aws::TranscribeStreamingService
     class Alternative < Struct.new(
       :transcript,
       :items)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -47,6 +48,7 @@ module Aws::TranscribeStreamingService
     class AudioEvent < Struct.new(
       :audio_chunk,
       :event_type)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -63,6 +65,7 @@ module Aws::TranscribeStreamingService
     class BadRequestException < Struct.new(
       :message,
       :event_type)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -77,6 +80,7 @@ module Aws::TranscribeStreamingService
     class ConflictException < Struct.new(
       :message,
       :event_type)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -91,6 +95,7 @@ module Aws::TranscribeStreamingService
     class InternalFailureException < Struct.new(
       :message,
       :event_type)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -130,6 +135,7 @@ module Aws::TranscribeStreamingService
       :type,
       :content,
       :vocabulary_filter_match)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -147,6 +153,7 @@ module Aws::TranscribeStreamingService
     class LimitExceededException < Struct.new(
       :message,
       :event_type)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -190,6 +197,7 @@ module Aws::TranscribeStreamingService
       :end_time,
       :is_partial,
       :alternatives)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -203,6 +211,7 @@ module Aws::TranscribeStreamingService
     class ServiceUnavailableException < Struct.new(
       :message,
       :event_type)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -277,6 +286,7 @@ module Aws::TranscribeStreamingService
       :audio_stream,
       :vocabulary_filter_name,
       :vocabulary_filter_method)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -330,6 +340,7 @@ module Aws::TranscribeStreamingService
       :transcript_result_stream,
       :vocabulary_filter_name,
       :vocabulary_filter_method)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -344,6 +355,7 @@ module Aws::TranscribeStreamingService
     #
     class Transcript < Struct.new(
       :results)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -360,6 +372,7 @@ module Aws::TranscribeStreamingService
     class TranscriptEvent < Struct.new(
       :transcript,
       :event_type)
+      SENSITIVE = []
       include Aws::Structure
     end
 

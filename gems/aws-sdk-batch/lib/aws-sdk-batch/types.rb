@@ -27,6 +27,7 @@ module Aws::Batch
     #
     class ArrayProperties < Struct.new(
       :size)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -53,6 +54,7 @@ module Aws::Batch
       :status_summary,
       :size,
       :index)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -73,6 +75,7 @@ module Aws::Batch
     class ArrayPropertiesSummary < Struct.new(
       :size,
       :index)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -120,6 +123,7 @@ module Aws::Batch
       :reason,
       :log_stream_name,
       :network_interfaces)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -154,6 +158,7 @@ module Aws::Batch
       :started_at,
       :stopped_at,
       :status_reason)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -181,6 +186,7 @@ module Aws::Batch
     class CancelJobRequest < Struct.new(
       :job_id,
       :reason)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -200,6 +206,7 @@ module Aws::Batch
     #
     class ClientException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -270,6 +277,7 @@ module Aws::Batch
       :status_reason,
       :compute_resources,
       :service_role)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -300,6 +308,7 @@ module Aws::Batch
     class ComputeEnvironmentOrder < Struct.new(
       :order,
       :compute_environment)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -507,6 +516,7 @@ module Aws::Batch
       :bid_percentage,
       :spot_iam_fleet_role,
       :launch_template)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -542,6 +552,7 @@ module Aws::Batch
       :minv_cpus,
       :maxv_cpus,
       :desiredv_cpus)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -676,6 +687,7 @@ module Aws::Batch
       :network_interfaces,
       :resource_requirements,
       :linux_parameters)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -751,6 +763,7 @@ module Aws::Batch
       :instance_type,
       :environment,
       :resource_requirements)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1023,6 +1036,7 @@ module Aws::Batch
       :instance_type,
       :resource_requirements,
       :linux_parameters)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1042,6 +1056,7 @@ module Aws::Batch
     class ContainerSummary < Struct.new(
       :exit_code,
       :reason)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1136,6 +1151,7 @@ module Aws::Batch
       :state,
       :compute_resources,
       :service_role)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1152,6 +1168,7 @@ module Aws::Batch
     class CreateComputeEnvironmentResponse < Struct.new(
       :compute_environment_name,
       :compute_environment_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1204,6 +1221,7 @@ module Aws::Batch
       :state,
       :priority,
       :compute_environment_order)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1220,6 +1238,7 @@ module Aws::Batch
     class CreateJobQueueResponse < Struct.new(
       :job_queue_name,
       :job_queue_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1239,6 +1258,7 @@ module Aws::Batch
     #
     class DeleteComputeEnvironmentRequest < Struct.new(
       :compute_environment)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1262,6 +1282,7 @@ module Aws::Batch
     #
     class DeleteJobQueueRequest < Struct.new(
       :job_queue)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1285,6 +1306,7 @@ module Aws::Batch
     #
     class DeregisterJobDefinitionRequest < Struct.new(
       :job_definition)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1340,6 +1362,7 @@ module Aws::Batch
       :compute_environments,
       :max_results,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1360,6 +1383,7 @@ module Aws::Batch
     class DescribeComputeEnvironmentsResponse < Struct.new(
       :compute_environments,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1422,6 +1446,7 @@ module Aws::Batch
       :job_definition_name,
       :status,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1442,6 +1467,7 @@ module Aws::Batch
     class DescribeJobDefinitionsResponse < Struct.new(
       :job_definitions,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1491,6 +1517,7 @@ module Aws::Batch
       :job_queues,
       :max_results,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1511,6 +1538,7 @@ module Aws::Batch
     class DescribeJobQueuesResponse < Struct.new(
       :job_queues,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1529,6 +1557,7 @@ module Aws::Batch
     #
     class DescribeJobsRequest < Struct.new(
       :jobs)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1540,6 +1569,7 @@ module Aws::Batch
     #
     class DescribeJobsResponse < Struct.new(
       :jobs)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1575,6 +1605,7 @@ module Aws::Batch
       :host_path,
       :container_path,
       :permissions)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1606,6 +1637,7 @@ module Aws::Batch
     #
     class Host < Struct.new(
       :source_path)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1677,6 +1709,7 @@ module Aws::Batch
       :container_properties,
       :timeout,
       :node_properties)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1703,6 +1736,7 @@ module Aws::Batch
     class JobDependency < Struct.new(
       :job_id,
       :type)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1826,6 +1860,7 @@ module Aws::Batch
       :node_properties,
       :array_properties,
       :timeout)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1872,6 +1907,7 @@ module Aws::Batch
       :status_reason,
       :priority,
       :compute_environment_order)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1939,6 +1975,7 @@ module Aws::Batch
       :container,
       :array_properties,
       :node_properties)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1961,6 +1998,7 @@ module Aws::Batch
     #
     class JobTimeout < Struct.new(
       :attempt_duration_seconds)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1989,6 +2027,7 @@ module Aws::Batch
     class KeyValuePair < Struct.new(
       :name,
       :value)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2025,6 +2064,7 @@ module Aws::Batch
       :launch_template_id,
       :launch_template_name,
       :version)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2060,6 +2100,7 @@ module Aws::Batch
     #
     class LinuxParameters < Struct.new(
       :devices)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2130,6 +2171,7 @@ module Aws::Batch
       :job_status,
       :max_results,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2149,6 +2191,7 @@ module Aws::Batch
     class ListJobsResponse < Struct.new(
       :job_summary_list,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2190,6 +2233,7 @@ module Aws::Batch
       :container_path,
       :read_only,
       :source_volume)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2214,6 +2258,7 @@ module Aws::Batch
       :attachment_id,
       :ipv6_address,
       :private_ipv_4_address)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2235,6 +2280,7 @@ module Aws::Batch
     class NodeDetails < Struct.new(
       :node_index,
       :is_main_node)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2296,6 +2342,7 @@ module Aws::Batch
     class NodeOverrides < Struct.new(
       :num_nodes,
       :node_property_overrides)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2389,6 +2436,7 @@ module Aws::Batch
       :num_nodes,
       :main_node,
       :node_range_properties)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2416,6 +2464,7 @@ module Aws::Batch
       :is_main_node,
       :num_nodes,
       :node_index)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2464,6 +2513,7 @@ module Aws::Batch
     class NodePropertyOverride < Struct.new(
       :target_nodes,
       :container_overrides)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2551,6 +2601,7 @@ module Aws::Batch
     class NodeRangeProperty < Struct.new(
       :target_nodes,
       :container)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2757,6 +2808,7 @@ module Aws::Batch
       :node_properties,
       :retry_strategy,
       :timeout)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2778,6 +2830,7 @@ module Aws::Batch
       :job_definition_name,
       :job_definition_arn,
       :revision)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2809,6 +2862,7 @@ module Aws::Batch
     class ResourceRequirement < Struct.new(
       :value,
       :type)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2832,6 +2886,7 @@ module Aws::Batch
     #
     class RetryStrategy < Struct.new(
       :attempts)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2844,6 +2899,7 @@ module Aws::Batch
     #
     class ServerException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3016,6 +3072,7 @@ module Aws::Batch
       :node_overrides,
       :retry_strategy,
       :timeout)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3032,6 +3089,7 @@ module Aws::Batch
     class SubmitJobResponse < Struct.new(
       :job_name,
       :job_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3059,6 +3117,7 @@ module Aws::Batch
     class TerminateJobRequest < Struct.new(
       :job_id,
       :reason)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3095,6 +3154,7 @@ module Aws::Batch
       :hard_limit,
       :name,
       :soft_limit)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3153,6 +3213,7 @@ module Aws::Batch
       :state,
       :compute_resources,
       :service_role)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3169,6 +3230,7 @@ module Aws::Batch
     class UpdateComputeEnvironmentResponse < Struct.new(
       :compute_environment_name,
       :compute_environment_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3218,6 +3280,7 @@ module Aws::Batch
       :state,
       :priority,
       :compute_environment_order)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3234,6 +3297,7 @@ module Aws::Batch
     class UpdateJobQueueResponse < Struct.new(
       :job_queue_name,
       :job_queue_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3270,6 +3334,7 @@ module Aws::Batch
     class Volume < Struct.new(
       :host,
       :name)
+      SENSITIVE = []
       include Aws::Structure
     end
 

@@ -19,6 +19,7 @@ module Aws::WorkSpaces
     #
     class AccessDeniedException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -62,6 +63,7 @@ module Aws::WorkSpaces
       :start_time,
       :error_code,
       :error_message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -86,6 +88,7 @@ module Aws::WorkSpaces
     class AssociateIpGroupsRequest < Struct.new(
       :directory_id,
       :group_ids)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -119,6 +122,7 @@ module Aws::WorkSpaces
     class AuthorizeIpRulesRequest < Struct.new(
       :group_id,
       :user_rules)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -145,6 +149,7 @@ module Aws::WorkSpaces
     #
     class ClientProperties < Struct.new(
       :reconnect_enabled)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -163,6 +168,7 @@ module Aws::WorkSpaces
     class ClientPropertiesResult < Struct.new(
       :resource_id,
       :client_properties)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -176,6 +182,7 @@ module Aws::WorkSpaces
     #
     class ComputeType < Struct.new(
       :name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -223,6 +230,7 @@ module Aws::WorkSpaces
       :source_image_id,
       :source_region,
       :tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -234,6 +242,7 @@ module Aws::WorkSpaces
     #
     class CopyWorkspaceImageResult < Struct.new(
       :image_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -280,6 +289,7 @@ module Aws::WorkSpaces
       :group_desc,
       :user_rules,
       :tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -291,6 +301,7 @@ module Aws::WorkSpaces
     #
     class CreateIpGroupResult < Struct.new(
       :group_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -324,6 +335,7 @@ module Aws::WorkSpaces
     class CreateTagsRequest < Struct.new(
       :resource_id,
       :tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -368,6 +380,7 @@ module Aws::WorkSpaces
     #
     class CreateWorkspacesRequest < Struct.new(
       :workspaces)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -389,6 +402,7 @@ module Aws::WorkSpaces
     class CreateWorkspacesResult < Struct.new(
       :failed_requests,
       :pending_requests)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -455,6 +469,7 @@ module Aws::WorkSpaces
       :custom_security_group_id,
       :user_enabled_as_local_administrator,
       :enable_maintenance_mode)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -473,6 +488,7 @@ module Aws::WorkSpaces
     #
     class DeleteIpGroupRequest < Struct.new(
       :group_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -503,6 +519,7 @@ module Aws::WorkSpaces
     class DeleteTagsRequest < Struct.new(
       :resource_id,
       :tag_keys)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -525,6 +542,7 @@ module Aws::WorkSpaces
     #
     class DeleteWorkspaceImageRequest < Struct.new(
       :image_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -550,6 +568,7 @@ module Aws::WorkSpaces
     #
     class DeregisterWorkspaceDirectoryRequest < Struct.new(
       :directory_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -573,6 +592,7 @@ module Aws::WorkSpaces
     #
     class DescribeAccountModificationsRequest < Struct.new(
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -590,6 +610,7 @@ module Aws::WorkSpaces
     class DescribeAccountModificationsResult < Struct.new(
       :account_modifications,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -618,6 +639,7 @@ module Aws::WorkSpaces
     class DescribeAccountResult < Struct.new(
       :dedicated_tenancy_support,
       :dedicated_tenancy_management_cidr_range)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -636,6 +658,7 @@ module Aws::WorkSpaces
     #
     class DescribeClientPropertiesRequest < Struct.new(
       :resource_ids)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -647,6 +670,7 @@ module Aws::WorkSpaces
     #
     class DescribeClientPropertiesResult < Struct.new(
       :client_properties_list)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -678,6 +702,7 @@ module Aws::WorkSpaces
       :group_ids,
       :next_token,
       :max_results)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -695,6 +720,7 @@ module Aws::WorkSpaces
     class DescribeIpGroupsResult < Struct.new(
       :result,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -715,6 +741,7 @@ module Aws::WorkSpaces
     #
     class DescribeTagsRequest < Struct.new(
       :resource_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -726,6 +753,7 @@ module Aws::WorkSpaces
     #
     class DescribeTagsResult < Struct.new(
       :tag_list)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -762,6 +790,7 @@ module Aws::WorkSpaces
       :bundle_ids,
       :owner,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -780,6 +809,7 @@ module Aws::WorkSpaces
     class DescribeWorkspaceBundlesResult < Struct.new(
       :bundles,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -812,6 +842,7 @@ module Aws::WorkSpaces
       :directory_ids,
       :limit,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -829,6 +860,7 @@ module Aws::WorkSpaces
     class DescribeWorkspaceDirectoriesResult < Struct.new(
       :directories,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -860,6 +892,7 @@ module Aws::WorkSpaces
       :image_ids,
       :next_token,
       :max_results)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -877,6 +910,7 @@ module Aws::WorkSpaces
     class DescribeWorkspaceImagesResult < Struct.new(
       :images,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -895,6 +929,7 @@ module Aws::WorkSpaces
     #
     class DescribeWorkspaceSnapshotsRequest < Struct.new(
       :workspace_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -914,6 +949,7 @@ module Aws::WorkSpaces
     class DescribeWorkspaceSnapshotsResult < Struct.new(
       :rebuild_snapshots,
       :restore_snapshots)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -940,6 +976,7 @@ module Aws::WorkSpaces
     class DescribeWorkspacesConnectionStatusRequest < Struct.new(
       :workspace_ids,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -957,6 +994,7 @@ module Aws::WorkSpaces
     class DescribeWorkspacesConnectionStatusResult < Struct.new(
       :workspaces_connection_status,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1017,6 +1055,7 @@ module Aws::WorkSpaces
       :bundle_id,
       :limit,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1037,6 +1076,7 @@ module Aws::WorkSpaces
     class DescribeWorkspacesResult < Struct.new(
       :workspaces,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1061,6 +1101,7 @@ module Aws::WorkSpaces
     class DisassociateIpGroupsRequest < Struct.new(
       :directory_id,
       :group_ids)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1089,6 +1130,7 @@ module Aws::WorkSpaces
       :workspace_request,
       :error_code,
       :error_message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1116,6 +1158,7 @@ module Aws::WorkSpaces
       :workspace_id,
       :error_code,
       :error_message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1163,6 +1206,7 @@ module Aws::WorkSpaces
       :image_name,
       :image_description,
       :tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1174,6 +1218,7 @@ module Aws::WorkSpaces
     #
     class ImportWorkspaceImageResult < Struct.new(
       :image_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1187,6 +1232,7 @@ module Aws::WorkSpaces
     #
     class InvalidParameterValuesException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1199,6 +1245,7 @@ module Aws::WorkSpaces
     #
     class InvalidResourceStateException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1225,6 +1272,7 @@ module Aws::WorkSpaces
     class IpRuleItem < Struct.new(
       :ip_rule,
       :rule_desc)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1258,6 +1306,7 @@ module Aws::WorkSpaces
       :management_cidr_range_constraint,
       :max_results,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1276,6 +1325,7 @@ module Aws::WorkSpaces
     class ListAvailableManagementCidrRangesResult < Struct.new(
       :management_cidr_ranges,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1301,6 +1351,7 @@ module Aws::WorkSpaces
     class MigrateWorkspaceRequest < Struct.new(
       :source_workspace_id,
       :bundle_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1319,6 +1370,7 @@ module Aws::WorkSpaces
     class MigrateWorkspaceResult < Struct.new(
       :source_workspace_id,
       :target_workspace_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1337,6 +1389,7 @@ module Aws::WorkSpaces
     class ModificationState < Struct.new(
       :resource,
       :state)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1366,6 +1419,7 @@ module Aws::WorkSpaces
     class ModifyAccountRequest < Struct.new(
       :dedicated_tenancy_support,
       :dedicated_tenancy_management_cidr_range)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1396,6 +1450,7 @@ module Aws::WorkSpaces
     class ModifyClientPropertiesRequest < Struct.new(
       :resource_id,
       :client_properties)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1430,6 +1485,7 @@ module Aws::WorkSpaces
     class ModifySelfservicePermissionsRequest < Struct.new(
       :resource_id,
       :selfservice_permissions)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1467,6 +1523,7 @@ module Aws::WorkSpaces
     class ModifyWorkspaceAccessPropertiesRequest < Struct.new(
       :resource_id,
       :workspace_access_properties)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1501,6 +1558,7 @@ module Aws::WorkSpaces
     class ModifyWorkspaceCreationPropertiesRequest < Struct.new(
       :resource_id,
       :workspace_creation_properties)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1535,6 +1593,7 @@ module Aws::WorkSpaces
     class ModifyWorkspacePropertiesRequest < Struct.new(
       :workspace_id,
       :workspace_properties)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1563,6 +1622,7 @@ module Aws::WorkSpaces
     class ModifyWorkspaceStateRequest < Struct.new(
       :workspace_id,
       :workspace_state)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1580,6 +1640,7 @@ module Aws::WorkSpaces
     #
     class OperatingSystem < Struct.new(
       :type)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1593,6 +1654,7 @@ module Aws::WorkSpaces
     #
     class OperationInProgressException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1605,6 +1667,7 @@ module Aws::WorkSpaces
     #
     class OperationNotSupportedException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1625,6 +1688,7 @@ module Aws::WorkSpaces
     #
     class RebootRequest < Struct.new(
       :workspace_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1647,6 +1711,7 @@ module Aws::WorkSpaces
     #
     class RebootWorkspacesRequest < Struct.new(
       :reboot_workspace_requests)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1658,6 +1723,7 @@ module Aws::WorkSpaces
     #
     class RebootWorkspacesResult < Struct.new(
       :failed_requests)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1678,6 +1744,7 @@ module Aws::WorkSpaces
     #
     class RebuildRequest < Struct.new(
       :workspace_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1700,6 +1767,7 @@ module Aws::WorkSpaces
     #
     class RebuildWorkspacesRequest < Struct.new(
       :rebuild_workspace_requests)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1711,6 +1779,7 @@ module Aws::WorkSpaces
     #
     class RebuildWorkspacesResult < Struct.new(
       :failed_requests)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1787,6 +1856,7 @@ module Aws::WorkSpaces
       :enable_self_service,
       :tenancy,
       :tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1803,6 +1873,7 @@ module Aws::WorkSpaces
     #
     class ResourceAlreadyExistsException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1815,6 +1886,7 @@ module Aws::WorkSpaces
     #
     class ResourceAssociatedException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1827,6 +1899,7 @@ module Aws::WorkSpaces
     #
     class ResourceCreationFailedException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1840,6 +1913,7 @@ module Aws::WorkSpaces
     #
     class ResourceLimitExceededException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1858,6 +1932,7 @@ module Aws::WorkSpaces
     class ResourceNotFoundException < Struct.new(
       :message,
       :resource_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1876,6 +1951,7 @@ module Aws::WorkSpaces
     class ResourceUnavailableException < Struct.new(
       :message,
       :resource_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1894,6 +1970,7 @@ module Aws::WorkSpaces
     #
     class RestoreWorkspaceRequest < Struct.new(
       :workspace_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1922,6 +1999,7 @@ module Aws::WorkSpaces
     class RevokeIpRulesRequest < Struct.new(
       :group_id,
       :user_rules)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1939,6 +2017,7 @@ module Aws::WorkSpaces
     #
     class RootStorage < Struct.new(
       :capacity)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1993,6 +2072,7 @@ module Aws::WorkSpaces
       :change_compute_type,
       :switch_running_mode,
       :rebuild_workspace)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2006,6 +2086,7 @@ module Aws::WorkSpaces
     #
     class Snapshot < Struct.new(
       :snapshot_time)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2026,6 +2107,7 @@ module Aws::WorkSpaces
     #
     class StartRequest < Struct.new(
       :workspace_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2048,6 +2130,7 @@ module Aws::WorkSpaces
     #
     class StartWorkspacesRequest < Struct.new(
       :start_workspace_requests)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2059,6 +2142,7 @@ module Aws::WorkSpaces
     #
     class StartWorkspacesResult < Struct.new(
       :failed_requests)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2079,6 +2163,7 @@ module Aws::WorkSpaces
     #
     class StopRequest < Struct.new(
       :workspace_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2101,6 +2186,7 @@ module Aws::WorkSpaces
     #
     class StopWorkspacesRequest < Struct.new(
       :stop_workspace_requests)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2112,6 +2198,7 @@ module Aws::WorkSpaces
     #
     class StopWorkspacesResult < Struct.new(
       :failed_requests)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2138,6 +2225,7 @@ module Aws::WorkSpaces
     class Tag < Struct.new(
       :key,
       :value)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2158,6 +2246,7 @@ module Aws::WorkSpaces
     #
     class TerminateRequest < Struct.new(
       :workspace_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2180,6 +2269,7 @@ module Aws::WorkSpaces
     #
     class TerminateWorkspacesRequest < Struct.new(
       :terminate_workspace_requests)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2191,6 +2281,7 @@ module Aws::WorkSpaces
     #
     class TerminateWorkspacesResult < Struct.new(
       :failed_requests)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2210,6 +2301,7 @@ module Aws::WorkSpaces
     #
     class UnsupportedNetworkConfigurationException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2228,6 +2320,7 @@ module Aws::WorkSpaces
     #
     class UnsupportedWorkspaceConfigurationException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2257,6 +2350,7 @@ module Aws::WorkSpaces
     class UpdateRulesOfIpGroupRequest < Struct.new(
       :group_id,
       :user_rules)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2274,6 +2368,7 @@ module Aws::WorkSpaces
     #
     class UserStorage < Struct.new(
       :capacity)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2361,6 +2456,7 @@ module Aws::WorkSpaces
       :root_volume_encryption_enabled,
       :workspace_properties,
       :modification_states)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2444,6 +2540,7 @@ module Aws::WorkSpaces
       :device_type_android,
       :device_type_chrome_os,
       :device_type_zero_client)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2503,6 +2600,7 @@ module Aws::WorkSpaces
       :user_storage,
       :compute_type,
       :last_updated_time)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2532,6 +2630,7 @@ module Aws::WorkSpaces
       :connection_state,
       :connection_state_check_timestamp,
       :last_known_user_connection_timestamp)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2588,6 +2687,7 @@ module Aws::WorkSpaces
       :custom_security_group_id,
       :user_enabled_as_local_administrator,
       :enable_maintenance_mode)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2690,6 +2790,7 @@ module Aws::WorkSpaces
       :workspace_access_properties,
       :tenancy,
       :selfservice_permissions)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2745,6 +2846,7 @@ module Aws::WorkSpaces
       :required_tenancy,
       :error_code,
       :error_message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2800,6 +2902,7 @@ module Aws::WorkSpaces
       :root_volume_size_gib,
       :user_volume_size_gib,
       :compute_type_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2879,6 +2982,7 @@ module Aws::WorkSpaces
       :root_volume_encryption_enabled,
       :workspace_properties,
       :tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2899,6 +3003,7 @@ module Aws::WorkSpaces
     #
     class WorkspacesDefaultRoleNotFoundException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2927,6 +3032,7 @@ module Aws::WorkSpaces
       :group_name,
       :group_desc,
       :user_rules)
+      SENSITIVE = []
       include Aws::Structure
     end
 

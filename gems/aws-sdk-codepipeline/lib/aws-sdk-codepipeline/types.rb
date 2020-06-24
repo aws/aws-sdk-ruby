@@ -33,6 +33,7 @@ module Aws::CodePipeline
       :access_key_id,
       :secret_access_key,
       :session_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -63,6 +64,7 @@ module Aws::CodePipeline
     class AcknowledgeJobInput < Struct.new(
       :job_id,
       :nonce)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -76,6 +78,7 @@ module Aws::CodePipeline
     #
     class AcknowledgeJobOutput < Struct.new(
       :status)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -112,6 +115,7 @@ module Aws::CodePipeline
       :job_id,
       :nonce,
       :client_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -125,6 +129,7 @@ module Aws::CodePipeline
     #
     class AcknowledgeThirdPartyJobOutput < Struct.new(
       :status)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -138,6 +143,7 @@ module Aws::CodePipeline
     #
     class ActionConfiguration < Struct.new(
       :configuration)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -211,6 +217,7 @@ module Aws::CodePipeline
       :queryable,
       :description,
       :type)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -231,6 +238,7 @@ module Aws::CodePipeline
     class ActionContext < Struct.new(
       :name,
       :action_execution_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -338,6 +346,7 @@ module Aws::CodePipeline
       :role_arn,
       :region,
       :namespace)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -396,6 +405,7 @@ module Aws::CodePipeline
       :external_execution_url,
       :percent_complete,
       :error_details)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -458,6 +468,7 @@ module Aws::CodePipeline
       :status,
       :input,
       :output)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -478,6 +489,7 @@ module Aws::CodePipeline
     #
     class ActionExecutionFilter < Struct.new(
       :pipeline_execution_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -525,6 +537,7 @@ module Aws::CodePipeline
       :region,
       :input_artifacts,
       :namespace)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -552,6 +565,7 @@ module Aws::CodePipeline
       :output_artifacts,
       :execution_result,
       :output_variables)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -577,6 +591,7 @@ module Aws::CodePipeline
       :external_execution_id,
       :external_execution_summary,
       :external_execution_url)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -618,6 +633,7 @@ module Aws::CodePipeline
       :revision_id,
       :revision_change_id,
       :created)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -653,6 +669,7 @@ module Aws::CodePipeline
       :latest_execution,
       :entity_url,
       :revision_url)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -688,6 +705,7 @@ module Aws::CodePipeline
       :action_configuration_properties,
       :input_artifact_details,
       :output_artifact_details)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -737,6 +755,7 @@ module Aws::CodePipeline
       :owner,
       :provider,
       :version)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -792,6 +811,7 @@ module Aws::CodePipeline
       :entity_url_template,
       :execution_url_template,
       :revision_url_template)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -825,6 +845,7 @@ module Aws::CodePipeline
     class ApprovalResult < Struct.new(
       :summary,
       :status)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -850,6 +871,7 @@ module Aws::CodePipeline
       :name,
       :revision,
       :location)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -869,6 +891,7 @@ module Aws::CodePipeline
     class ArtifactDetail < Struct.new(
       :name,
       :s3location)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -895,6 +918,7 @@ module Aws::CodePipeline
     class ArtifactDetails < Struct.new(
       :minimum_count,
       :maximum_count)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -913,6 +937,7 @@ module Aws::CodePipeline
     class ArtifactLocation < Struct.new(
       :type,
       :s3_location)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -960,6 +985,7 @@ module Aws::CodePipeline
       :revision_summary,
       :created,
       :revision_url)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1007,6 +1033,7 @@ module Aws::CodePipeline
       :type,
       :location,
       :encryption_key)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1033,6 +1060,7 @@ module Aws::CodePipeline
     class BlockerDeclaration < Struct.new(
       :name,
       :type)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1045,6 +1073,7 @@ module Aws::CodePipeline
     #
     class ConcurrentModificationException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1155,6 +1184,7 @@ module Aws::CodePipeline
       :input_artifact_details,
       :output_artifact_details,
       :tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1173,6 +1203,7 @@ module Aws::CodePipeline
     class CreateCustomActionTypeOutput < Struct.new(
       :action_type,
       :tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1266,6 +1297,7 @@ module Aws::CodePipeline
     class CreatePipelineInput < Struct.new(
       :pipeline,
       :tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1285,6 +1317,7 @@ module Aws::CodePipeline
     class CreatePipelineOutput < Struct.new(
       :pipeline,
       :tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1324,6 +1357,7 @@ module Aws::CodePipeline
       :change_identifier,
       :created,
       :revision_summary)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1359,6 +1393,7 @@ module Aws::CodePipeline
       :category,
       :provider,
       :version)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1379,6 +1414,7 @@ module Aws::CodePipeline
     #
     class DeletePipelineInput < Struct.new(
       :name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1397,6 +1433,7 @@ module Aws::CodePipeline
     #
     class DeleteWebhookInput < Struct.new(
       :name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1419,6 +1456,7 @@ module Aws::CodePipeline
     #
     class DeregisterWebhookWithThirdPartyInput < Struct.new(
       :webhook_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1468,6 +1506,7 @@ module Aws::CodePipeline
       :stage_name,
       :transition_type,
       :reason)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1484,6 +1523,7 @@ module Aws::CodePipeline
     #
     class DuplicatedStopRequestException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1522,6 +1562,7 @@ module Aws::CodePipeline
       :pipeline_name,
       :stage_name,
       :transition_type)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1558,6 +1599,7 @@ module Aws::CodePipeline
     class EncryptionKey < Struct.new(
       :id,
       :type)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1576,6 +1618,7 @@ module Aws::CodePipeline
     class ErrorDetails < Struct.new(
       :code,
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1611,6 +1654,7 @@ module Aws::CodePipeline
       :summary,
       :external_execution_id,
       :percent_complete)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1633,6 +1677,7 @@ module Aws::CodePipeline
     class ExecutionTrigger < Struct.new(
       :trigger_type,
       :trigger_detail)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1665,6 +1710,7 @@ module Aws::CodePipeline
       :type,
       :message,
       :external_execution_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1685,6 +1731,7 @@ module Aws::CodePipeline
     #
     class GetJobDetailsInput < Struct.new(
       :job_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1703,6 +1750,7 @@ module Aws::CodePipeline
     #
     class GetJobDetailsOutput < Struct.new(
       :job_details)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1731,6 +1779,7 @@ module Aws::CodePipeline
     class GetPipelineExecutionInput < Struct.new(
       :pipeline_name,
       :pipeline_execution_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1744,6 +1793,7 @@ module Aws::CodePipeline
     #
     class GetPipelineExecutionOutput < Struct.new(
       :pipeline_execution)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1772,6 +1822,7 @@ module Aws::CodePipeline
     class GetPipelineInput < Struct.new(
       :name,
       :version)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1792,6 +1843,7 @@ module Aws::CodePipeline
     class GetPipelineOutput < Struct.new(
       :pipeline,
       :metadata)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1812,6 +1864,7 @@ module Aws::CodePipeline
     #
     class GetPipelineStateInput < Struct.new(
       :name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1852,6 +1905,7 @@ module Aws::CodePipeline
       :stage_states,
       :created,
       :updated)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1880,6 +1934,7 @@ module Aws::CodePipeline
     class GetThirdPartyJobDetailsInput < Struct.new(
       :job_id,
       :client_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1894,6 +1949,7 @@ module Aws::CodePipeline
     #
     class GetThirdPartyJobDetailsOutput < Struct.new(
       :job_details)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1922,6 +1978,7 @@ module Aws::CodePipeline
     #
     class InputArtifact < Struct.new(
       :name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1946,6 +2003,7 @@ module Aws::CodePipeline
     #
     class InvalidArnException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2007,6 +2065,7 @@ module Aws::CodePipeline
     #
     class InvalidTagsException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2049,6 +2108,7 @@ module Aws::CodePipeline
       :data,
       :nonce,
       :account_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2108,6 +2168,7 @@ module Aws::CodePipeline
       :artifact_credentials,
       :continuation_token,
       :encryption_key)
+      SENSITIVE = [:artifact_credentials]
       include Aws::Structure
     end
 
@@ -2132,6 +2193,7 @@ module Aws::CodePipeline
       :id,
       :data,
       :account_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2194,6 +2256,7 @@ module Aws::CodePipeline
       :filter,
       :max_results,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2214,6 +2277,7 @@ module Aws::CodePipeline
     class ListActionExecutionsOutput < Struct.new(
       :action_execution_details,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2243,6 +2307,7 @@ module Aws::CodePipeline
     class ListActionTypesInput < Struct.new(
       :action_owner_filter,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2264,6 +2329,7 @@ module Aws::CodePipeline
     class ListActionTypesOutput < Struct.new(
       :action_types,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2303,6 +2369,7 @@ module Aws::CodePipeline
       :pipeline_name,
       :max_results,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2323,6 +2390,7 @@ module Aws::CodePipeline
     class ListPipelineExecutionsOutput < Struct.new(
       :pipeline_execution_summaries,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2345,6 +2413,7 @@ module Aws::CodePipeline
     #
     class ListPipelinesInput < Struct.new(
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2365,6 +2434,7 @@ module Aws::CodePipeline
     class ListPipelinesOutput < Struct.new(
       :pipelines,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2398,6 +2468,7 @@ module Aws::CodePipeline
       :resource_arn,
       :next_token,
       :max_results)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2417,6 +2488,7 @@ module Aws::CodePipeline
     class ListTagsForResourceOutput < Struct.new(
       :tags,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2467,6 +2539,7 @@ module Aws::CodePipeline
       :last_triggered,
       :arn,
       :tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2494,6 +2567,7 @@ module Aws::CodePipeline
     class ListWebhooksInput < Struct.new(
       :next_token,
       :max_results)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2513,6 +2587,7 @@ module Aws::CodePipeline
     class ListWebhooksOutput < Struct.new(
       :webhooks,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2549,6 +2624,7 @@ module Aws::CodePipeline
     #
     class OutputArtifact < Struct.new(
       :name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2561,6 +2637,7 @@ module Aws::CodePipeline
     #
     class OutputVariablesSizeExceededException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2602,6 +2679,7 @@ module Aws::CodePipeline
       :action,
       :pipeline_arn,
       :pipeline_execution_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2726,6 +2804,7 @@ module Aws::CodePipeline
       :artifact_stores,
       :stages,
       :version)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2785,6 +2864,7 @@ module Aws::CodePipeline
       :pipeline_execution_id,
       :status,
       :artifact_revisions)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2805,6 +2885,7 @@ module Aws::CodePipeline
     #
     class PipelineExecutionNotStoppableException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2876,6 +2957,7 @@ module Aws::CodePipeline
       :source_revisions,
       :trigger,
       :stop_trigger)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2900,6 +2982,7 @@ module Aws::CodePipeline
       :pipeline_arn,
       :created,
       :updated)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2941,6 +3024,7 @@ module Aws::CodePipeline
       :version,
       :created,
       :updated)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2991,6 +3075,7 @@ module Aws::CodePipeline
       :action_type_id,
       :max_batch_size,
       :query_param)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3004,6 +3089,7 @@ module Aws::CodePipeline
     #
     class PollForJobsOutput < Struct.new(
       :jobs)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3035,6 +3121,7 @@ module Aws::CodePipeline
     class PollForThirdPartyJobsInput < Struct.new(
       :action_type_id,
       :max_batch_size)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3048,6 +3135,7 @@ module Aws::CodePipeline
     #
     class PollForThirdPartyJobsOutput < Struct.new(
       :jobs)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3092,6 +3180,7 @@ module Aws::CodePipeline
       :stage_name,
       :action_name,
       :action_revision)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3111,6 +3200,7 @@ module Aws::CodePipeline
     class PutActionRevisionOutput < Struct.new(
       :new_revision,
       :pipeline_execution_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3161,6 +3251,7 @@ module Aws::CodePipeline
       :action_name,
       :result,
       :token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3174,6 +3265,7 @@ module Aws::CodePipeline
     #
     class PutApprovalResultOutput < Struct.new(
       :approved_at)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3205,6 +3297,7 @@ module Aws::CodePipeline
     class PutJobFailureResultInput < Struct.new(
       :job_id,
       :failure_details)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3271,6 +3364,7 @@ module Aws::CodePipeline
       :continuation_token,
       :execution_details,
       :output_variables)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3310,6 +3404,7 @@ module Aws::CodePipeline
       :job_id,
       :client_token,
       :failure_details)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3372,6 +3467,7 @@ module Aws::CodePipeline
       :current_revision,
       :continuation_token,
       :execution_details)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3420,6 +3516,7 @@ module Aws::CodePipeline
     class PutWebhookInput < Struct.new(
       :webhook,
       :tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3432,6 +3529,7 @@ module Aws::CodePipeline
     #
     class PutWebhookOutput < Struct.new(
       :webhook)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3451,6 +3549,7 @@ module Aws::CodePipeline
     #
     class RegisterWebhookWithThirdPartyInput < Struct.new(
       :webhook_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3502,6 +3601,7 @@ module Aws::CodePipeline
       :stage_name,
       :pipeline_execution_id,
       :retry_mode)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3515,6 +3615,7 @@ module Aws::CodePipeline
     #
     class RetryStageExecutionOutput < Struct.new(
       :pipeline_execution_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3534,6 +3635,7 @@ module Aws::CodePipeline
     class S3ArtifactLocation < Struct.new(
       :bucket_name,
       :object_key)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3552,6 +3654,7 @@ module Aws::CodePipeline
     class S3Location < Struct.new(
       :bucket,
       :key)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3589,6 +3692,7 @@ module Aws::CodePipeline
       :revision_id,
       :revision_summary,
       :revision_url)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3602,6 +3706,7 @@ module Aws::CodePipeline
     #
     class StageContext < Struct.new(
       :name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3666,6 +3771,7 @@ module Aws::CodePipeline
       :name,
       :blockers,
       :actions)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3685,6 +3791,7 @@ module Aws::CodePipeline
     class StageExecution < Struct.new(
       :pipeline_execution_id,
       :status)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3729,6 +3836,7 @@ module Aws::CodePipeline
       :inbound_transition_state,
       :action_states,
       :latest_execution)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3759,6 +3867,7 @@ module Aws::CodePipeline
     class StartPipelineExecutionInput < Struct.new(
       :name,
       :client_request_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3773,6 +3882,7 @@ module Aws::CodePipeline
     #
     class StartPipelineExecutionOutput < Struct.new(
       :pipeline_execution_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3786,6 +3896,7 @@ module Aws::CodePipeline
     #
     class StopExecutionTrigger < Struct.new(
       :reason)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3830,6 +3941,7 @@ module Aws::CodePipeline
       :pipeline_execution_id,
       :abandon,
       :reason)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3842,6 +3954,7 @@ module Aws::CodePipeline
     #
     class StopPipelineExecutionOutput < Struct.new(
       :pipeline_execution_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3868,6 +3981,7 @@ module Aws::CodePipeline
     class Tag < Struct.new(
       :key,
       :value)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3898,6 +4012,7 @@ module Aws::CodePipeline
     class TagResourceInput < Struct.new(
       :resource_arn,
       :tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3923,6 +4038,7 @@ module Aws::CodePipeline
     class ThirdPartyJob < Struct.new(
       :client_id,
       :job_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3989,6 +4105,7 @@ module Aws::CodePipeline
       :artifact_credentials,
       :continuation_token,
       :encryption_key)
+      SENSITIVE = [:artifact_credentials]
       include Aws::Structure
     end
 
@@ -4015,6 +4132,7 @@ module Aws::CodePipeline
       :id,
       :data,
       :nonce)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4027,6 +4145,7 @@ module Aws::CodePipeline
     #
     class TooManyTagsException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4058,6 +4177,7 @@ module Aws::CodePipeline
       :last_changed_by,
       :last_changed_at,
       :disabled_reason)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4082,6 +4202,7 @@ module Aws::CodePipeline
     class UntagResourceInput < Struct.new(
       :resource_arn,
       :tag_keys)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4167,6 +4288,7 @@ module Aws::CodePipeline
     #
     class UpdatePipelineInput < Struct.new(
       :pipeline)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4180,6 +4302,7 @@ module Aws::CodePipeline
     #
     class UpdatePipelineOutput < Struct.new(
       :pipeline)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4215,6 +4338,7 @@ module Aws::CodePipeline
     class WebhookAuthConfiguration < Struct.new(
       :allowed_ip_range,
       :secret_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4297,6 +4421,7 @@ module Aws::CodePipeline
       :filters,
       :authentication,
       :authentication_configuration)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4346,6 +4471,7 @@ module Aws::CodePipeline
     class WebhookFilterRule < Struct.new(
       :json_path,
       :match_equals)
+      SENSITIVE = []
       include Aws::Structure
     end
 

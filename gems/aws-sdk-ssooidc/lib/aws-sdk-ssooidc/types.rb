@@ -23,6 +23,7 @@ module Aws::SSOOIDC
     class AccessDeniedException < Struct.new(
       :error,
       :error_description)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -40,6 +41,7 @@ module Aws::SSOOIDC
     class AuthorizationPendingException < Struct.new(
       :error,
       :error_description)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -114,6 +116,7 @@ module Aws::SSOOIDC
       :refresh_token,
       :scope,
       :redirect_uri)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -148,6 +151,7 @@ module Aws::SSOOIDC
       :expires_in,
       :refresh_token,
       :id_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -165,6 +169,7 @@ module Aws::SSOOIDC
     class ExpiredTokenException < Struct.new(
       :error,
       :error_description)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -182,6 +187,7 @@ module Aws::SSOOIDC
     class InternalServerException < Struct.new(
       :error,
       :error_description)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -200,6 +206,7 @@ module Aws::SSOOIDC
     class InvalidClientException < Struct.new(
       :error,
       :error_description)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -217,6 +224,7 @@ module Aws::SSOOIDC
     class InvalidClientMetadataException < Struct.new(
       :error,
       :error_description)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -234,6 +242,7 @@ module Aws::SSOOIDC
     class InvalidGrantException < Struct.new(
       :error,
       :error_description)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -251,6 +260,7 @@ module Aws::SSOOIDC
     class InvalidRequestException < Struct.new(
       :error,
       :error_description)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -267,6 +277,7 @@ module Aws::SSOOIDC
     class InvalidScopeException < Struct.new(
       :error,
       :error_description)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -300,6 +311,7 @@ module Aws::SSOOIDC
       :client_name,
       :client_type,
       :scopes)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -340,6 +352,7 @@ module Aws::SSOOIDC
       :client_secret_expires_at,
       :authorization_endpoint,
       :token_endpoint)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -357,6 +370,7 @@ module Aws::SSOOIDC
     class SlowDownException < Struct.new(
       :error,
       :error_description)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -395,6 +409,7 @@ module Aws::SSOOIDC
       :client_id,
       :client_secret,
       :start_url)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -438,6 +453,7 @@ module Aws::SSOOIDC
       :verification_uri_complete,
       :expires_in,
       :interval)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -456,6 +472,7 @@ module Aws::SSOOIDC
     class UnauthorizedClientException < Struct.new(
       :error,
       :error_description)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -473,6 +490,7 @@ module Aws::SSOOIDC
     class UnsupportedGrantTypeException < Struct.new(
       :error,
       :error_description)
+      SENSITIVE = []
       include Aws::Structure
     end
 

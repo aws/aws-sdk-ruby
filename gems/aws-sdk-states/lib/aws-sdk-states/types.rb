@@ -19,6 +19,7 @@ module Aws::States
     #
     class ActivityDoesNotExist < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -37,6 +38,7 @@ module Aws::States
     class ActivityFailedEventDetails < Struct.new(
       :error,
       :cause)
+      SENSITIVE = [:error, :cause]
       include Aws::Structure
     end
 
@@ -50,6 +52,7 @@ module Aws::States
     #
     class ActivityLimitExceeded < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -88,6 +91,7 @@ module Aws::States
       :activity_arn,
       :name,
       :creation_date)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -107,6 +111,7 @@ module Aws::States
     class ActivityScheduleFailedEventDetails < Struct.new(
       :error,
       :cause)
+      SENSITIVE = [:error, :cause]
       include Aws::Structure
     end
 
@@ -136,6 +141,7 @@ module Aws::States
       :input,
       :timeout_in_seconds,
       :heartbeat_in_seconds)
+      SENSITIVE = [:input]
       include Aws::Structure
     end
 
@@ -150,6 +156,7 @@ module Aws::States
     #
     class ActivityStartedEventDetails < Struct.new(
       :worker_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -164,6 +171,7 @@ module Aws::States
     #
     class ActivitySucceededEventDetails < Struct.new(
       :output)
+      SENSITIVE = [:output]
       include Aws::Structure
     end
 
@@ -183,6 +191,7 @@ module Aws::States
     class ActivityTimedOutEventDetails < Struct.new(
       :error,
       :cause)
+      SENSITIVE = [:error, :cause]
       include Aws::Structure
     end
 
@@ -196,6 +205,7 @@ module Aws::States
     #
     class ActivityWorkerLimitExceeded < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -215,6 +225,7 @@ module Aws::States
     #
     class CloudWatchLogsLogGroup < Struct.new(
       :log_group_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -278,6 +289,7 @@ module Aws::States
     class CreateActivityInput < Struct.new(
       :name,
       :tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -294,6 +306,7 @@ module Aws::States
     class CreateActivityOutput < Struct.new(
       :activity_arn,
       :creation_date)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -402,6 +415,7 @@ module Aws::States
       :type,
       :logging_configuration,
       :tags)
+      SENSITIVE = [:definition]
       include Aws::Structure
     end
 
@@ -419,6 +433,7 @@ module Aws::States
     class CreateStateMachineOutput < Struct.new(
       :state_machine_arn,
       :creation_date)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -437,6 +452,7 @@ module Aws::States
     #
     class DeleteActivityInput < Struct.new(
       :activity_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -459,6 +475,7 @@ module Aws::States
     #
     class DeleteStateMachineInput < Struct.new(
       :state_machine_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -481,6 +498,7 @@ module Aws::States
     #
     class DescribeActivityInput < Struct.new(
       :activity_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -517,6 +535,7 @@ module Aws::States
       :activity_arn,
       :name,
       :creation_date)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -535,6 +554,7 @@ module Aws::States
     #
     class DescribeExecutionInput < Struct.new(
       :execution_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -601,6 +621,7 @@ module Aws::States
       :stop_date,
       :input,
       :output)
+      SENSITIVE = [:input, :output]
       include Aws::Structure
     end
 
@@ -620,6 +641,7 @@ module Aws::States
     #
     class DescribeStateMachineForExecutionInput < Struct.new(
       :execution_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -666,6 +688,7 @@ module Aws::States
       :role_arn,
       :update_date,
       :logging_configuration)
+      SENSITIVE = [:definition]
       include Aws::Structure
     end
 
@@ -684,6 +707,7 @@ module Aws::States
     #
     class DescribeStateMachineInput < Struct.new(
       :state_machine_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -753,6 +777,7 @@ module Aws::States
       :type,
       :creation_date,
       :logging_configuration)
+      SENSITIVE = [:definition]
       include Aws::Structure
     end
 
@@ -771,6 +796,7 @@ module Aws::States
     class ExecutionAbortedEventDetails < Struct.new(
       :error,
       :cause)
+      SENSITIVE = [:error, :cause]
       include Aws::Structure
     end
 
@@ -788,6 +814,7 @@ module Aws::States
     #
     class ExecutionAlreadyExists < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -800,6 +827,7 @@ module Aws::States
     #
     class ExecutionDoesNotExist < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -818,6 +846,7 @@ module Aws::States
     class ExecutionFailedEventDetails < Struct.new(
       :error,
       :cause)
+      SENSITIVE = [:error, :cause]
       include Aws::Structure
     end
 
@@ -832,6 +861,7 @@ module Aws::States
     #
     class ExecutionLimitExceeded < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -885,6 +915,7 @@ module Aws::States
       :status,
       :start_date,
       :stop_date)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -904,6 +935,7 @@ module Aws::States
     class ExecutionStartedEventDetails < Struct.new(
       :input,
       :role_arn)
+      SENSITIVE = [:input]
       include Aws::Structure
     end
 
@@ -917,6 +949,7 @@ module Aws::States
     #
     class ExecutionSucceededEventDetails < Struct.new(
       :output)
+      SENSITIVE = [:output]
       include Aws::Structure
     end
 
@@ -936,6 +969,7 @@ module Aws::States
     class ExecutionTimedOutEventDetails < Struct.new(
       :error,
       :cause)
+      SENSITIVE = [:error, :cause]
       include Aws::Structure
     end
 
@@ -963,6 +997,7 @@ module Aws::States
     class GetActivityTaskInput < Struct.new(
       :activity_arn,
       :worker_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -982,6 +1017,7 @@ module Aws::States
     class GetActivityTaskOutput < Struct.new(
       :task_token,
       :input)
+      SENSITIVE = [:input]
       include Aws::Structure
     end
 
@@ -1029,6 +1065,7 @@ module Aws::States
       :max_results,
       :reverse_order,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1050,6 +1087,7 @@ module Aws::States
     class GetExecutionHistoryOutput < Struct.new(
       :events,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1249,6 +1287,7 @@ module Aws::States
       :lambda_function_timed_out_event_details,
       :state_entered_event_details,
       :state_exited_event_details)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1261,6 +1300,7 @@ module Aws::States
     #
     class InvalidArn < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1273,6 +1313,7 @@ module Aws::States
     #
     class InvalidDefinition < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1285,6 +1326,7 @@ module Aws::States
     #
     class InvalidExecutionInput < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1295,6 +1337,7 @@ module Aws::States
     #
     class InvalidLoggingConfiguration < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1307,6 +1350,7 @@ module Aws::States
     #
     class InvalidName < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1319,6 +1363,7 @@ module Aws::States
     #
     class InvalidOutput < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1331,6 +1376,7 @@ module Aws::States
     #
     class InvalidToken < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1350,6 +1396,7 @@ module Aws::States
     class LambdaFunctionFailedEventDetails < Struct.new(
       :error,
       :cause)
+      SENSITIVE = [:error, :cause]
       include Aws::Structure
     end
 
@@ -1369,6 +1416,7 @@ module Aws::States
     class LambdaFunctionScheduleFailedEventDetails < Struct.new(
       :error,
       :cause)
+      SENSITIVE = [:error, :cause]
       include Aws::Structure
     end
 
@@ -1393,6 +1441,7 @@ module Aws::States
       :resource,
       :input,
       :timeout_in_seconds)
+      SENSITIVE = [:input]
       include Aws::Structure
     end
 
@@ -1412,6 +1461,7 @@ module Aws::States
     class LambdaFunctionStartFailedEventDetails < Struct.new(
       :error,
       :cause)
+      SENSITIVE = [:error, :cause]
       include Aws::Structure
     end
 
@@ -1426,6 +1476,7 @@ module Aws::States
     #
     class LambdaFunctionSucceededEventDetails < Struct.new(
       :output)
+      SENSITIVE = [:output]
       include Aws::Structure
     end
 
@@ -1445,6 +1496,7 @@ module Aws::States
     class LambdaFunctionTimedOutEventDetails < Struct.new(
       :error,
       :cause)
+      SENSITIVE = [:error, :cause]
       include Aws::Structure
     end
 
@@ -1480,6 +1532,7 @@ module Aws::States
     class ListActivitiesInput < Struct.new(
       :max_results,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1501,6 +1554,7 @@ module Aws::States
     class ListActivitiesOutput < Struct.new(
       :activities,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1550,6 +1604,7 @@ module Aws::States
       :status_filter,
       :max_results,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1571,6 +1626,7 @@ module Aws::States
     class ListExecutionsOutput < Struct.new(
       :executions,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1606,6 +1662,7 @@ module Aws::States
     class ListStateMachinesInput < Struct.new(
       :max_results,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1626,6 +1683,7 @@ module Aws::States
     class ListStateMachinesOutput < Struct.new(
       :state_machines,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1645,6 +1703,7 @@ module Aws::States
     #
     class ListTagsForResourceInput < Struct.new(
       :resource_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1656,6 +1715,7 @@ module Aws::States
     #
     class ListTagsForResourceOutput < Struct.new(
       :tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1681,6 +1741,7 @@ module Aws::States
     #
     class LogDestination < Struct.new(
       :cloud_watch_logs_log_group)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1723,6 +1784,7 @@ module Aws::States
       :level,
       :include_execution_data,
       :destinations)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1741,6 +1803,7 @@ module Aws::States
     class MapIterationEventDetails < Struct.new(
       :name,
       :index)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1754,6 +1817,7 @@ module Aws::States
     #
     class MapStateStartedEventDetails < Struct.new(
       :length)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1767,6 +1831,7 @@ module Aws::States
     #
     class MissingRequiredParameter < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1784,6 +1849,7 @@ module Aws::States
     class ResourceNotFound < Struct.new(
       :message,
       :resource_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1821,6 +1887,7 @@ module Aws::States
       :task_token,
       :error,
       :cause)
+      SENSITIVE = [:error, :cause]
       include Aws::Structure
     end
 
@@ -1850,6 +1917,7 @@ module Aws::States
     #
     class SendTaskHeartbeatInput < Struct.new(
       :task_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1885,6 +1953,7 @@ module Aws::States
     class SendTaskSuccessInput < Struct.new(
       :task_token,
       :output)
+      SENSITIVE = [:output]
       include Aws::Structure
     end
 
@@ -1949,6 +2018,7 @@ module Aws::States
       :state_machine_arn,
       :name,
       :input)
+      SENSITIVE = [:input]
       include Aws::Structure
     end
 
@@ -1965,6 +2035,7 @@ module Aws::States
     class StartExecutionOutput < Struct.new(
       :execution_arn,
       :start_date)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1983,6 +2054,7 @@ module Aws::States
     class StateEnteredEventDetails < Struct.new(
       :name,
       :input)
+      SENSITIVE = [:input]
       include Aws::Structure
     end
 
@@ -2016,6 +2088,7 @@ module Aws::States
     class StateExitedEventDetails < Struct.new(
       :name,
       :output)
+      SENSITIVE = [:output]
       include Aws::Structure
     end
 
@@ -2029,6 +2102,7 @@ module Aws::States
     #
     class StateMachineAlreadyExists < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2041,6 +2115,7 @@ module Aws::States
     #
     class StateMachineDeleting < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2053,6 +2128,7 @@ module Aws::States
     #
     class StateMachineDoesNotExist < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2066,6 +2142,7 @@ module Aws::States
     #
     class StateMachineLimitExceeded < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2108,6 +2185,7 @@ module Aws::States
       :name,
       :type,
       :creation_date)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2118,6 +2196,7 @@ module Aws::States
     #
     class StateMachineTypeNotSupported < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2148,6 +2227,7 @@ module Aws::States
       :execution_arn,
       :error,
       :cause)
+      SENSITIVE = [:error, :cause]
       include Aws::Structure
     end
 
@@ -2159,6 +2239,7 @@ module Aws::States
     #
     class StopExecutionOutput < Struct.new(
       :stop_date)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2198,6 +2279,7 @@ module Aws::States
     class Tag < Struct.new(
       :key,
       :value)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2231,6 +2313,7 @@ module Aws::States
     class TagResourceInput < Struct.new(
       :resource_arn,
       :tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2245,6 +2328,7 @@ module Aws::States
     #
     class TaskDoesNotExist < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2273,6 +2357,7 @@ module Aws::States
       :resource,
       :error,
       :cause)
+      SENSITIVE = [:error, :cause]
       include Aws::Structure
     end
 
@@ -2306,6 +2391,7 @@ module Aws::States
       :region,
       :parameters,
       :timeout_in_seconds)
+      SENSITIVE = [:parameters]
       include Aws::Structure
     end
 
@@ -2335,6 +2421,7 @@ module Aws::States
       :resource,
       :error,
       :cause)
+      SENSITIVE = [:error, :cause]
       include Aws::Structure
     end
 
@@ -2353,6 +2440,7 @@ module Aws::States
     class TaskStartedEventDetails < Struct.new(
       :resource_type,
       :resource)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2382,6 +2470,7 @@ module Aws::States
       :resource,
       :error,
       :cause)
+      SENSITIVE = [:error, :cause]
       include Aws::Structure
     end
 
@@ -2405,6 +2494,7 @@ module Aws::States
       :resource_type,
       :resource,
       :output)
+      SENSITIVE = [:output]
       include Aws::Structure
     end
 
@@ -2429,6 +2519,7 @@ module Aws::States
       :resource_type,
       :resource,
       :output)
+      SENSITIVE = [:output]
       include Aws::Structure
     end
 
@@ -2439,6 +2530,7 @@ module Aws::States
     #
     class TaskTimedOut < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2468,6 +2560,7 @@ module Aws::States
       :resource,
       :error,
       :cause)
+      SENSITIVE = [:error, :cause]
       include Aws::Structure
     end
 
@@ -2489,6 +2582,7 @@ module Aws::States
     class TooManyTags < Struct.new(
       :message,
       :resource_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2514,6 +2608,7 @@ module Aws::States
     class UntagResourceInput < Struct.new(
       :resource_arn,
       :tag_keys)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2570,6 +2665,7 @@ module Aws::States
       :definition,
       :role_arn,
       :logging_configuration)
+      SENSITIVE = [:definition]
       include Aws::Structure
     end
 
@@ -2581,6 +2677,7 @@ module Aws::States
     #
     class UpdateStateMachineOutput < Struct.new(
       :update_date)
+      SENSITIVE = []
       include Aws::Structure
     end
 

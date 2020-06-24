@@ -28,6 +28,7 @@ module Aws::IoT1ClickDevicesService
     #
     class ClaimDevicesByClaimCodeRequest < Struct.new(
       :claim_code)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -45,6 +46,7 @@ module Aws::IoT1ClickDevicesService
     class ClaimDevicesByClaimCodeResponse < Struct.new(
       :claim_code,
       :total)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -62,6 +64,7 @@ module Aws::IoT1ClickDevicesService
     #
     class DescribeDeviceRequest < Struct.new(
       :device_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -73,6 +76,7 @@ module Aws::IoT1ClickDevicesService
     #
     class DescribeDeviceResponse < Struct.new(
       :device_description)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -95,6 +99,7 @@ module Aws::IoT1ClickDevicesService
       :attributes,
       :device_id,
       :type)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -106,6 +111,7 @@ module Aws::IoT1ClickDevicesService
     #
     class DeviceClaimResponse < Struct.new(
       :state)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -148,6 +154,7 @@ module Aws::IoT1ClickDevicesService
       :remaining_life,
       :type,
       :tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -165,6 +172,7 @@ module Aws::IoT1ClickDevicesService
     class DeviceEvent < Struct.new(
       :device,
       :std_event)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -182,6 +190,7 @@ module Aws::IoT1ClickDevicesService
     class DeviceEventsResponse < Struct.new(
       :events,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -206,6 +215,7 @@ module Aws::IoT1ClickDevicesService
     class DeviceMethod < Struct.new(
       :device_type,
       :method_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -236,6 +246,7 @@ module Aws::IoT1ClickDevicesService
     class FinalizeDeviceClaimRequest < Struct.new(
       :device_id,
       :tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -246,6 +257,7 @@ module Aws::IoT1ClickDevicesService
     #
     class FinalizeDeviceClaimResponse < Struct.new(
       :state)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -262,6 +274,7 @@ module Aws::IoT1ClickDevicesService
     class ForbiddenException < Struct.new(
       :code,
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -279,6 +292,7 @@ module Aws::IoT1ClickDevicesService
     #
     class GetDeviceMethodsRequest < Struct.new(
       :device_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -290,6 +304,7 @@ module Aws::IoT1ClickDevicesService
     #
     class GetDeviceMethodsResponse < Struct.new(
       :device_methods)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -307,6 +322,7 @@ module Aws::IoT1ClickDevicesService
     #
     class InitiateDeviceClaimRequest < Struct.new(
       :device_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -317,6 +333,7 @@ module Aws::IoT1ClickDevicesService
     #
     class InitiateDeviceClaimResponse < Struct.new(
       :state)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -333,6 +350,7 @@ module Aws::IoT1ClickDevicesService
     class InternalFailureException < Struct.new(
       :code,
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -349,6 +367,7 @@ module Aws::IoT1ClickDevicesService
     class InvalidRequestException < Struct.new(
       :code,
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -382,6 +401,7 @@ module Aws::IoT1ClickDevicesService
       :device_id,
       :device_method,
       :device_method_parameters)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -393,6 +413,7 @@ module Aws::IoT1ClickDevicesService
     #
     class InvokeDeviceMethodResponse < Struct.new(
       :device_method_response)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -430,6 +451,7 @@ module Aws::IoT1ClickDevicesService
       :max_results,
       :next_token,
       :to_time_stamp)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -444,6 +466,7 @@ module Aws::IoT1ClickDevicesService
     class ListDeviceEventsResponse < Struct.new(
       :events,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -471,6 +494,7 @@ module Aws::IoT1ClickDevicesService
       :device_type,
       :max_results,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -487,6 +511,7 @@ module Aws::IoT1ClickDevicesService
     class ListDevicesResponse < Struct.new(
       :devices,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -504,6 +529,7 @@ module Aws::IoT1ClickDevicesService
     #
     class ListTagsForResourceRequest < Struct.new(
       :resource_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -514,6 +540,7 @@ module Aws::IoT1ClickDevicesService
     #
     class ListTagsForResourceResponse < Struct.new(
       :tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -530,6 +557,7 @@ module Aws::IoT1ClickDevicesService
     class PreconditionFailedException < Struct.new(
       :code,
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -547,6 +575,7 @@ module Aws::IoT1ClickDevicesService
     class RangeNotSatisfiableException < Struct.new(
       :code,
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -563,6 +592,7 @@ module Aws::IoT1ClickDevicesService
     class ResourceConflictException < Struct.new(
       :code,
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -579,6 +609,7 @@ module Aws::IoT1ClickDevicesService
     class ResourceNotFoundException < Struct.new(
       :code,
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -603,6 +634,7 @@ module Aws::IoT1ClickDevicesService
     class TagResourceRequest < Struct.new(
       :resource_arn,
       :tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -620,6 +652,7 @@ module Aws::IoT1ClickDevicesService
     #
     class UnclaimDeviceRequest < Struct.new(
       :device_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -630,6 +663,7 @@ module Aws::IoT1ClickDevicesService
     #
     class UnclaimDeviceResponse < Struct.new(
       :state)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -652,6 +686,7 @@ module Aws::IoT1ClickDevicesService
     class UntagResourceRequest < Struct.new(
       :resource_arn,
       :tag_keys)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -675,6 +710,7 @@ module Aws::IoT1ClickDevicesService
     class UpdateDeviceStateRequest < Struct.new(
       :device_id,
       :enabled)
+      SENSITIVE = []
       include Aws::Structure
     end
 

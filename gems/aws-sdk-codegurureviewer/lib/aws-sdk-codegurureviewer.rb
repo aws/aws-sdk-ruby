@@ -47,6 +47,6 @@ require_relative 'aws-sdk-codegurureviewer/customizations'
 # @service
 module Aws::CodeGuruReviewer
 
-  GEM_VERSION = '1.7.1'
+  GEM_VERSION = '1.8.0'
 
 end

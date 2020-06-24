@@ -42,6 +42,7 @@ module Aws::MachineLearning
       :tags,
       :resource_id,
       :resource_type)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -58,6 +59,7 @@ module Aws::MachineLearning
     class AddTagsOutput < Struct.new(
       :resource_id,
       :resource_type)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -170,6 +172,7 @@ module Aws::MachineLearning
       :started_at,
       :total_record_count,
       :invalid_record_count)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -224,6 +227,7 @@ module Aws::MachineLearning
       :ml_model_id,
       :batch_prediction_data_source_id,
       :output_uri)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -242,6 +246,7 @@ module Aws::MachineLearning
     #
     class CreateBatchPredictionOutput < Struct.new(
       :batch_prediction_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -355,6 +360,7 @@ module Aws::MachineLearning
       :rds_data,
       :role_arn,
       :compute_statistics)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -376,6 +382,7 @@ module Aws::MachineLearning
     #
     class CreateDataSourceFromRDSOutput < Struct.new(
       :data_source_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -469,6 +476,7 @@ module Aws::MachineLearning
       :data_spec,
       :role_arn,
       :compute_statistics)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -487,6 +495,7 @@ module Aws::MachineLearning
     #
     class CreateDataSourceFromRedshiftOutput < Struct.new(
       :data_source_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -544,6 +553,7 @@ module Aws::MachineLearning
       :data_source_name,
       :data_spec,
       :compute_statistics)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -562,6 +572,7 @@ module Aws::MachineLearning
     #
     class CreateDataSourceFromS3Output < Struct.new(
       :data_source_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -600,6 +611,7 @@ module Aws::MachineLearning
       :evaluation_name,
       :ml_model_id,
       :evaluation_data_source_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -618,6 +630,7 @@ module Aws::MachineLearning
     #
     class CreateEvaluationOutput < Struct.new(
       :evaluation_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -733,6 +746,7 @@ module Aws::MachineLearning
       :training_data_source_id,
       :recipe,
       :recipe_uri)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -751,6 +765,7 @@ module Aws::MachineLearning
     #
     class CreateMLModelOutput < Struct.new(
       :ml_model_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -767,6 +782,7 @@ module Aws::MachineLearning
     #
     class CreateRealtimeEndpointInput < Struct.new(
       :ml_model_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -794,6 +810,7 @@ module Aws::MachineLearning
     class CreateRealtimeEndpointOutput < Struct.new(
       :ml_model_id,
       :realtime_endpoint_info)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -916,6 +933,7 @@ module Aws::MachineLearning
       :compute_time,
       :finished_at,
       :started_at)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -932,6 +950,7 @@ module Aws::MachineLearning
     #
     class DeleteBatchPredictionInput < Struct.new(
       :batch_prediction_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -949,6 +968,7 @@ module Aws::MachineLearning
     #
     class DeleteBatchPredictionOutput < Struct.new(
       :batch_prediction_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -965,6 +985,7 @@ module Aws::MachineLearning
     #
     class DeleteDataSourceInput < Struct.new(
       :data_source_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -978,6 +999,7 @@ module Aws::MachineLearning
     #
     class DeleteDataSourceOutput < Struct.new(
       :data_source_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -995,6 +1017,7 @@ module Aws::MachineLearning
     #
     class DeleteEvaluationInput < Struct.new(
       :evaluation_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1014,6 +1037,7 @@ module Aws::MachineLearning
     #
     class DeleteEvaluationOutput < Struct.new(
       :evaluation_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1030,6 +1054,7 @@ module Aws::MachineLearning
     #
     class DeleteMLModelInput < Struct.new(
       :ml_model_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1046,6 +1071,7 @@ module Aws::MachineLearning
     #
     class DeleteMLModelOutput < Struct.new(
       :ml_model_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1062,6 +1088,7 @@ module Aws::MachineLearning
     #
     class DeleteRealtimeEndpointInput < Struct.new(
       :ml_model_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1083,6 +1110,7 @@ module Aws::MachineLearning
     class DeleteRealtimeEndpointOutput < Struct.new(
       :ml_model_id,
       :realtime_endpoint_info)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1111,6 +1139,7 @@ module Aws::MachineLearning
       :tag_keys,
       :resource_id,
       :resource_type)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1127,6 +1156,7 @@ module Aws::MachineLearning
     class DeleteTagsOutput < Struct.new(
       :resource_id,
       :resource_type)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1251,6 +1281,7 @@ module Aws::MachineLearning
       :sort_order,
       :next_token,
       :limit)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1269,6 +1300,7 @@ module Aws::MachineLearning
     class DescribeBatchPredictionsOutput < Struct.new(
       :results,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1386,6 +1418,7 @@ module Aws::MachineLearning
       :sort_order,
       :next_token,
       :limit)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1404,6 +1437,7 @@ module Aws::MachineLearning
     class DescribeDataSourcesOutput < Struct.new(
       :results,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1525,6 +1559,7 @@ module Aws::MachineLearning
       :sort_order,
       :next_token,
       :limit)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1543,6 +1578,7 @@ module Aws::MachineLearning
     class DescribeEvaluationsOutput < Struct.new(
       :results,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1669,6 +1705,7 @@ module Aws::MachineLearning
       :sort_order,
       :next_token,
       :limit)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1687,6 +1724,7 @@ module Aws::MachineLearning
     class DescribeMLModelsOutput < Struct.new(
       :results,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1709,6 +1747,7 @@ module Aws::MachineLearning
     class DescribeTagsInput < Struct.new(
       :resource_id,
       :resource_type)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1730,6 +1769,7 @@ module Aws::MachineLearning
       :resource_id,
       :resource_type,
       :tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1845,6 +1885,7 @@ module Aws::MachineLearning
       :compute_time,
       :finished_at,
       :started_at)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1861,6 +1902,7 @@ module Aws::MachineLearning
     #
     class GetBatchPredictionInput < Struct.new(
       :batch_prediction_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1985,6 +2027,7 @@ module Aws::MachineLearning
       :started_at,
       :total_record_count,
       :invalid_record_count)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2012,6 +2055,7 @@ module Aws::MachineLearning
     class GetDataSourceInput < Struct.new(
       :data_source_id,
       :verbose)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2156,6 +2200,7 @@ module Aws::MachineLearning
       :finished_at,
       :started_at,
       :data_source_schema)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2174,6 +2219,7 @@ module Aws::MachineLearning
     #
     class GetEvaluationInput < Struct.new(
       :evaluation_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2301,6 +2347,7 @@ module Aws::MachineLearning
       :compute_time,
       :finished_at,
       :started_at)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2327,6 +2374,7 @@ module Aws::MachineLearning
     class GetMLModelInput < Struct.new(
       :ml_model_id,
       :verbose)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2535,6 +2583,7 @@ module Aws::MachineLearning
       :started_at,
       :recipe,
       :schema)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2551,6 +2600,7 @@ module Aws::MachineLearning
     class IdempotentParameterMismatchException < Struct.new(
       :message,
       :code)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2565,6 +2615,7 @@ module Aws::MachineLearning
     class InternalServerException < Struct.new(
       :message,
       :code)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2580,6 +2631,7 @@ module Aws::MachineLearning
     class InvalidInputException < Struct.new(
       :message,
       :code)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2588,6 +2640,7 @@ module Aws::MachineLearning
     #
     class InvalidTagException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2603,6 +2656,7 @@ module Aws::MachineLearning
     class LimitExceededException < Struct.new(
       :message,
       :code)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2779,6 +2833,7 @@ module Aws::MachineLearning
       :compute_time,
       :finished_at,
       :started_at)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2809,6 +2864,7 @@ module Aws::MachineLearning
     #
     class PerformanceMetrics < Struct.new(
       :properties)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2838,6 +2894,7 @@ module Aws::MachineLearning
       :ml_model_id,
       :record,
       :predict_endpoint)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2859,6 +2916,7 @@ module Aws::MachineLearning
     #
     class PredictOutput < Struct.new(
       :prediction)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2898,6 +2956,7 @@ module Aws::MachineLearning
       :predicted_value,
       :predicted_scores,
       :details)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2909,6 +2968,7 @@ module Aws::MachineLearning
     #
     class PredictorNotMountedException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3146,6 +3206,7 @@ module Aws::MachineLearning
       :service_role,
       :subnet_id,
       :security_group_ids)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3170,6 +3231,7 @@ module Aws::MachineLearning
     class RDSDatabase < Struct.new(
       :instance_identifier,
       :database_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3199,6 +3261,7 @@ module Aws::MachineLearning
     class RDSDatabaseCredentials < Struct.new(
       :username,
       :password)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3253,6 +3316,7 @@ module Aws::MachineLearning
       :resource_role,
       :service_role,
       :data_pipeline_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3292,6 +3356,7 @@ module Aws::MachineLearning
       :created_at,
       :endpoint_url,
       :endpoint_status)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3481,6 +3546,7 @@ module Aws::MachineLearning
       :data_rearrangement,
       :data_schema,
       :data_schema_uri)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3506,6 +3572,7 @@ module Aws::MachineLearning
     class RedshiftDatabase < Struct.new(
       :database_name,
       :cluster_identifier)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3546,6 +3613,7 @@ module Aws::MachineLearning
     class RedshiftDatabaseCredentials < Struct.new(
       :username,
       :password)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3577,6 +3645,7 @@ module Aws::MachineLearning
       :redshift_database,
       :database_user_name,
       :select_sql_query)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3591,6 +3660,7 @@ module Aws::MachineLearning
     class ResourceNotFoundException < Struct.new(
       :message,
       :code)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3758,6 +3828,7 @@ module Aws::MachineLearning
       :data_rearrangement,
       :data_schema,
       :data_schema_location_s3)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3786,6 +3857,7 @@ module Aws::MachineLearning
     class Tag < Struct.new(
       :key,
       :value)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3794,6 +3866,7 @@ module Aws::MachineLearning
     #
     class TagLimitExceededException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3816,6 +3889,7 @@ module Aws::MachineLearning
     class UpdateBatchPredictionInput < Struct.new(
       :batch_prediction_id,
       :batch_prediction_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3832,6 +3906,7 @@ module Aws::MachineLearning
     #
     class UpdateBatchPredictionOutput < Struct.new(
       :batch_prediction_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3855,6 +3930,7 @@ module Aws::MachineLearning
     class UpdateDataSourceInput < Struct.new(
       :data_source_id,
       :data_source_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3871,6 +3947,7 @@ module Aws::MachineLearning
     #
     class UpdateDataSourceOutput < Struct.new(
       :data_source_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3894,6 +3971,7 @@ module Aws::MachineLearning
     class UpdateEvaluationInput < Struct.new(
       :evaluation_id,
       :evaluation_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3909,6 +3987,7 @@ module Aws::MachineLearning
     #
     class UpdateEvaluationOutput < Struct.new(
       :evaluation_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3944,6 +4023,7 @@ module Aws::MachineLearning
       :ml_model_id,
       :ml_model_name,
       :score_threshold)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3958,6 +4038,7 @@ module Aws::MachineLearning
     #
     class UpdateMLModelOutput < Struct.new(
       :ml_model_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 

@@ -48,6 +48,6 @@ require_relative 'aws-sdk-elastictranscoder/customizations'
 # @service
 module Aws::ElasticTranscoder
 
-  GEM_VERSION = '1.22.1'
+  GEM_VERSION = '1.23.0'
 
 end

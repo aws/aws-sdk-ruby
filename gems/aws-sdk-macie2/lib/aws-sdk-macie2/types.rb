@@ -31,6 +31,7 @@ module Aws::Macie2
     class AcceptInvitationRequest < Struct.new(
       :invitation_id,
       :master_account)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -52,6 +53,7 @@ module Aws::Macie2
     class AccessControlList < Struct.new(
       :allows_public_read_access,
       :allows_public_write_access)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -65,6 +67,7 @@ module Aws::Macie2
     #
     class AccessDeniedException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -90,6 +93,7 @@ module Aws::Macie2
     class AccountDetail < Struct.new(
       :account_id,
       :email)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -112,6 +116,7 @@ module Aws::Macie2
     #
     class AccountLevelPermissions < Struct.new(
       :block_public_access)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -131,6 +136,7 @@ module Aws::Macie2
     class AdminAccount < Struct.new(
       :account_id,
       :status)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -166,6 +172,7 @@ module Aws::Macie2
       :api_service_name,
       :first_seen,
       :last_seen)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -196,6 +203,7 @@ module Aws::Macie2
       :arn,
       :principal_id,
       :session_context)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -212,6 +220,7 @@ module Aws::Macie2
     class AwsAccount < Struct.new(
       :account_id,
       :principal_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -224,6 +233,7 @@ module Aws::Macie2
     #
     class AwsService < Struct.new(
       :invoked_by)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -256,6 +266,7 @@ module Aws::Macie2
       :description,
       :id,
       :name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -276,6 +287,7 @@ module Aws::Macie2
     #
     class BatchGetCustomDataIdentifiersRequest < Struct.new(
       :ids)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -292,6 +304,7 @@ module Aws::Macie2
     class BatchGetCustomDataIdentifiersResponse < Struct.new(
       :custom_data_identifiers,
       :not_found_identifier_ids)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -324,6 +337,7 @@ module Aws::Macie2
       :block_public_policy,
       :ignore_public_acls,
       :restrict_public_buckets)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -345,6 +359,7 @@ module Aws::Macie2
       :publicly_accessible,
       :publicly_readable,
       :publicly_writable)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -367,6 +382,7 @@ module Aws::Macie2
       :kms_managed,
       :s3_managed,
       :unencrypted)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -388,6 +404,7 @@ module Aws::Macie2
       :external,
       :internal,
       :not_shared)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -438,6 +455,7 @@ module Aws::Macie2
       :lte,
       :neq,
       :prefix)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -472,6 +490,7 @@ module Aws::Macie2
       :access_control_list,
       :block_public_access,
       :bucket_policy)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -550,6 +569,7 @@ module Aws::Macie2
       :size_in_bytes_compressed,
       :tags,
       :versioning)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -571,6 +591,7 @@ module Aws::Macie2
     class BucketPermissionConfiguration < Struct.new(
       :account_level_permissions,
       :bucket_level_permissions)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -588,6 +609,7 @@ module Aws::Macie2
     class BucketPolicy < Struct.new(
       :allows_public_read_access,
       :allows_public_write_access)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -607,6 +629,7 @@ module Aws::Macie2
     class BucketPublicAccess < Struct.new(
       :effective_permission,
       :permission_configuration)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -632,6 +655,7 @@ module Aws::Macie2
     class BucketSortCriteria < Struct.new(
       :attribute_name,
       :order_by)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -660,6 +684,7 @@ module Aws::Macie2
       :job_arn,
       :job_id,
       :result)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -687,6 +712,7 @@ module Aws::Macie2
     #
     class ClassificationExportConfiguration < Struct.new(
       :s3_destination)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -723,6 +749,7 @@ module Aws::Macie2
       :sensitive_data,
       :size_classified,
       :status)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -739,6 +766,7 @@ module Aws::Macie2
     class ClassificationResultStatus < Struct.new(
       :code,
       :reason)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -752,6 +780,7 @@ module Aws::Macie2
     #
     class ConflictException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -890,6 +919,7 @@ module Aws::Macie2
       :sampling_percentage,
       :schedule_frequency,
       :tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -907,6 +937,7 @@ module Aws::Macie2
     class CreateClassificationJobResponse < Struct.new(
       :job_arn,
       :job_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -969,6 +1000,7 @@ module Aws::Macie2
       :name,
       :regex,
       :tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -982,6 +1014,7 @@ module Aws::Macie2
     #
     class CreateCustomDataIdentifierResponse < Struct.new(
       :custom_data_identifier_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1054,6 +1087,7 @@ module Aws::Macie2
       :name,
       :position,
       :tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1071,6 +1105,7 @@ module Aws::Macie2
     class CreateFindingsFilterResponse < Struct.new(
       :arn,
       :id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1100,6 +1135,7 @@ module Aws::Macie2
       :account_ids,
       :disable_email_notification,
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1113,6 +1149,7 @@ module Aws::Macie2
     #
     class CreateInvitationsResponse < Struct.new(
       :unprocessed_accounts)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1147,6 +1184,7 @@ module Aws::Macie2
     class CreateMemberRequest < Struct.new(
       :account,
       :tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1160,6 +1198,7 @@ module Aws::Macie2
     #
     class CreateMemberResponse < Struct.new(
       :arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1180,6 +1219,7 @@ module Aws::Macie2
     #
     class CreateSampleFindingsRequest < Struct.new(
       :finding_types)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1229,6 +1269,7 @@ module Aws::Macie2
       :lt,
       :lte,
       :neq)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1257,6 +1298,7 @@ module Aws::Macie2
       :description,
       :id,
       :name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1276,6 +1318,7 @@ module Aws::Macie2
     class CustomDataIdentifiers < Struct.new(
       :detections,
       :total_count)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1298,6 +1341,7 @@ module Aws::Macie2
       :arn,
       :count,
       :name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1324,6 +1368,7 @@ module Aws::Macie2
     #
     class DeclineInvitationsRequest < Struct.new(
       :account_ids)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1338,6 +1383,7 @@ module Aws::Macie2
     #
     class DeclineInvitationsResponse < Struct.new(
       :unprocessed_accounts)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1355,6 +1401,7 @@ module Aws::Macie2
     class DefaultDetection < Struct.new(
       :count,
       :type)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1372,6 +1419,7 @@ module Aws::Macie2
     #
     class DeleteCustomDataIdentifierRequest < Struct.new(
       :id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1393,6 +1441,7 @@ module Aws::Macie2
     #
     class DeleteFindingsFilterRequest < Struct.new(
       :id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1417,6 +1466,7 @@ module Aws::Macie2
     #
     class DeleteInvitationsRequest < Struct.new(
       :account_ids)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1430,6 +1480,7 @@ module Aws::Macie2
     #
     class DeleteInvitationsResponse < Struct.new(
       :unprocessed_accounts)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1447,6 +1498,7 @@ module Aws::Macie2
     #
     class DeleteMemberRequest < Struct.new(
       :id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1503,6 +1555,7 @@ module Aws::Macie2
       :max_results,
       :next_token,
       :sort_criteria)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1521,6 +1574,7 @@ module Aws::Macie2
     class DescribeBucketsResponse < Struct.new(
       :buckets,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1538,6 +1592,7 @@ module Aws::Macie2
     #
     class DescribeClassificationJobRequest < Struct.new(
       :job_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1622,6 +1677,7 @@ module Aws::Macie2
       :schedule_frequency,
       :statistics,
       :tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1645,6 +1701,7 @@ module Aws::Macie2
     class DescribeOrganizationConfigurationResponse < Struct.new(
       :auto_enable,
       :max_account_limit_reached)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1672,6 +1729,7 @@ module Aws::Macie2
     #
     class DisableOrganizationAdminAccountRequest < Struct.new(
       :admin_account_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1703,6 +1761,7 @@ module Aws::Macie2
     #
     class DisassociateMemberRequest < Struct.new(
       :id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1717,6 +1776,7 @@ module Aws::Macie2
     #
     class DomainDetails < Struct.new(
       :domain_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1761,6 +1821,7 @@ module Aws::Macie2
       :client_token,
       :finding_publishing_frequency,
       :status)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1793,6 +1854,7 @@ module Aws::Macie2
     class EnableOrganizationAdminAccountRequest < Struct.new(
       :admin_account_id,
       :client_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1827,6 +1889,7 @@ module Aws::Macie2
       :arn,
       :principal_id,
       :session_context)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1915,6 +1978,7 @@ module Aws::Macie2
       :title,
       :type,
       :updated_at)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1946,6 +2010,7 @@ module Aws::Macie2
     class FindingAction < Struct.new(
       :action_type,
       :api_call_details)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1967,6 +2032,7 @@ module Aws::Macie2
       :domain_details,
       :ip_address_details,
       :user_identity)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1998,6 +2064,7 @@ module Aws::Macie2
     #
     class FindingCriteria < Struct.new(
       :criterion)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2024,6 +2091,7 @@ module Aws::Macie2
     class FindingStatisticsSortCriteria < Struct.new(
       :attribute_name,
       :order_by)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2051,6 +2119,7 @@ module Aws::Macie2
       :id,
       :name,
       :tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2071,6 +2140,7 @@ module Aws::Macie2
     #
     class GetBucketStatisticsRequest < Struct.new(
       :account_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2124,6 +2194,7 @@ module Aws::Macie2
       :object_count,
       :size_in_bytes,
       :size_in_bytes_compressed)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2147,6 +2218,7 @@ module Aws::Macie2
     #
     class GetClassificationExportConfigurationResponse < Struct.new(
       :configuration)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2164,6 +2236,7 @@ module Aws::Macie2
     #
     class GetCustomDataIdentifierRequest < Struct.new(
       :id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2220,6 +2293,7 @@ module Aws::Macie2
       :name,
       :regex,
       :tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2273,6 +2347,7 @@ module Aws::Macie2
       :group_by,
       :size,
       :sort_criteria)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2286,6 +2361,7 @@ module Aws::Macie2
     #
     class GetFindingStatisticsResponse < Struct.new(
       :counts_by_group)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2303,6 +2379,7 @@ module Aws::Macie2
     #
     class GetFindingsFilterRequest < Struct.new(
       :id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2351,6 +2428,7 @@ module Aws::Macie2
       :name,
       :position,
       :tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2380,6 +2458,7 @@ module Aws::Macie2
     class GetFindingsRequest < Struct.new(
       :finding_ids,
       :sort_criteria)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2393,6 +2472,7 @@ module Aws::Macie2
     #
     class GetFindingsResponse < Struct.new(
       :findings)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2413,6 +2493,7 @@ module Aws::Macie2
     #
     class GetInvitationsCountResponse < Struct.new(
       :invitations_count)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2453,6 +2534,7 @@ module Aws::Macie2
       :service_role,
       :status,
       :updated_at)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2476,6 +2558,7 @@ module Aws::Macie2
     #
     class GetMasterAccountResponse < Struct.new(
       :master)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2493,6 +2576,7 @@ module Aws::Macie2
     #
     class GetMemberRequest < Struct.new(
       :id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2540,6 +2624,7 @@ module Aws::Macie2
       :relationship_status,
       :tags,
       :updated_at)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2586,6 +2671,7 @@ module Aws::Macie2
       :max_results,
       :next_token,
       :sort_by)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2603,6 +2689,7 @@ module Aws::Macie2
     class GetUsageStatisticsResponse < Struct.new(
       :next_token,
       :records)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2622,6 +2709,7 @@ module Aws::Macie2
     #
     class GetUsageTotalsResponse < Struct.new(
       :usage_totals)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2639,6 +2727,7 @@ module Aws::Macie2
     class GroupCount < Struct.new(
       :count,
       :group_key)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2663,6 +2752,7 @@ module Aws::Macie2
       :arn,
       :principal_id,
       :user_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2676,6 +2766,7 @@ module Aws::Macie2
     #
     class InternalServerException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2704,6 +2795,7 @@ module Aws::Macie2
       :invitation_id,
       :invited_at,
       :relationship_status)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2734,6 +2826,7 @@ module Aws::Macie2
       :ip_country,
       :ip_geo_location,
       :ip_owner)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2746,6 +2839,7 @@ module Aws::Macie2
     #
     class IpCity < Struct.new(
       :name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2762,6 +2856,7 @@ module Aws::Macie2
     class IpCountry < Struct.new(
       :code,
       :name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2778,6 +2873,7 @@ module Aws::Macie2
     class IpGeoLocation < Struct.new(
       :lat,
       :lon)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2802,6 +2898,7 @@ module Aws::Macie2
       :asn_org,
       :isp,
       :org)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2838,6 +2935,7 @@ module Aws::Macie2
       :daily_schedule,
       :monthly_schedule,
       :weekly_schedule)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2881,6 +2979,7 @@ module Aws::Macie2
     class JobScopeTerm < Struct.new(
       :simple_scope_term,
       :tag_scope_term)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2919,6 +3018,7 @@ module Aws::Macie2
     #
     class JobScopingBlock < Struct.new(
       :and)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2954,6 +3054,7 @@ module Aws::Macie2
       :job_status,
       :job_type,
       :name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2972,6 +3073,7 @@ module Aws::Macie2
     class KeyValuePair < Struct.new(
       :key,
       :value)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3029,6 +3131,7 @@ module Aws::Macie2
       :max_results,
       :next_token,
       :sort_criteria)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3046,6 +3149,7 @@ module Aws::Macie2
     class ListClassificationJobsResponse < Struct.new(
       :items,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3071,6 +3175,7 @@ module Aws::Macie2
     class ListCustomDataIdentifiersRequest < Struct.new(
       :max_results,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3088,6 +3193,7 @@ module Aws::Macie2
     class ListCustomDataIdentifiersResponse < Struct.new(
       :items,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3110,6 +3216,7 @@ module Aws::Macie2
     class ListFindingsFiltersRequest < Struct.new(
       :max_results,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3126,6 +3233,7 @@ module Aws::Macie2
     class ListFindingsFiltersResponse < Struct.new(
       :findings_filter_list_items,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3179,6 +3287,7 @@ module Aws::Macie2
       :max_results,
       :next_token,
       :sort_criteria)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3196,6 +3305,7 @@ module Aws::Macie2
     class ListFindingsResponse < Struct.new(
       :finding_ids,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3218,6 +3328,7 @@ module Aws::Macie2
     class ListInvitationsRequest < Struct.new(
       :max_results,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3235,6 +3346,7 @@ module Aws::Macie2
     class ListInvitationsResponse < Struct.new(
       :invitations,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3272,6 +3384,7 @@ module Aws::Macie2
     class ListJobsFilterCriteria < Struct.new(
       :excludes,
       :includes)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3305,6 +3418,7 @@ module Aws::Macie2
       :comparator,
       :key,
       :values)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3331,6 +3445,7 @@ module Aws::Macie2
     class ListJobsSortCriteria < Struct.new(
       :attribute_name,
       :order_by)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3358,6 +3473,7 @@ module Aws::Macie2
       :max_results,
       :next_token,
       :only_associated)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3375,6 +3491,7 @@ module Aws::Macie2
     class ListMembersResponse < Struct.new(
       :members,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3397,6 +3514,7 @@ module Aws::Macie2
     class ListOrganizationAdminAccountsRequest < Struct.new(
       :max_results,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3414,6 +3532,7 @@ module Aws::Macie2
     class ListOrganizationAdminAccountsResponse < Struct.new(
       :admin_accounts,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3431,6 +3550,7 @@ module Aws::Macie2
     #
     class ListTagsForResourceRequest < Struct.new(
       :resource_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3448,6 +3568,7 @@ module Aws::Macie2
     #
     class ListTagsForResourceResponse < Struct.new(
       :tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3495,6 +3616,7 @@ module Aws::Macie2
       :relationship_status,
       :tags,
       :updated_at)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3515,6 +3637,7 @@ module Aws::Macie2
     #
     class MonthlySchedule < Struct.new(
       :day_of_month)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3537,6 +3660,7 @@ module Aws::Macie2
       :kms_managed,
       :s3_managed,
       :unencrypted)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3557,6 +3681,7 @@ module Aws::Macie2
     class PolicyDetails < Struct.new(
       :action,
       :actor)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3588,6 +3713,7 @@ module Aws::Macie2
     #
     class PutClassificationExportConfigurationRequest < Struct.new(
       :configuration)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3605,6 +3731,7 @@ module Aws::Macie2
     #
     class PutClassificationExportConfigurationResponse < Struct.new(
       :configuration)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3627,6 +3754,7 @@ module Aws::Macie2
       :replicated,
       :replicated_externally,
       :replication_accounts)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3640,6 +3768,7 @@ module Aws::Macie2
     #
     class ResourceNotFoundException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3658,6 +3787,7 @@ module Aws::Macie2
     class ResourcesAffected < Struct.new(
       :s3_bucket,
       :s3_object)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3700,6 +3830,7 @@ module Aws::Macie2
       :owner,
       :public_access,
       :tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3725,6 +3856,7 @@ module Aws::Macie2
     class S3BucketDefinitionForJob < Struct.new(
       :account_id,
       :buckets)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3741,6 +3873,7 @@ module Aws::Macie2
     class S3BucketOwner < Struct.new(
       :display_name,
       :id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3771,6 +3904,7 @@ module Aws::Macie2
       :bucket_name,
       :key_prefix,
       :kms_key_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3846,6 +3980,7 @@ module Aws::Macie2
     class S3JobDefinition < Struct.new(
       :bucket_definitions,
       :scoping)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3906,6 +4041,7 @@ module Aws::Macie2
       :storage_class,
       :tags,
       :version_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3972,6 +4108,7 @@ module Aws::Macie2
     class Scoping < Struct.new(
       :excludes,
       :includes)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3996,6 +4133,7 @@ module Aws::Macie2
       :category,
       :detections,
       :total_count)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4015,6 +4153,7 @@ module Aws::Macie2
     class ServerSideEncryption < Struct.new(
       :encryption_type,
       :kms_master_key_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4035,6 +4174,7 @@ module Aws::Macie2
       :is_service_limited,
       :unit,
       :value)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4048,6 +4188,7 @@ module Aws::Macie2
     #
     class ServiceQuotaExceededException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4069,6 +4210,7 @@ module Aws::Macie2
     class SessionContext < Struct.new(
       :attributes,
       :session_issuer)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4086,6 +4228,7 @@ module Aws::Macie2
     class SessionContextAttributes < Struct.new(
       :creation_date,
       :mfa_authenticated)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4115,6 +4258,7 @@ module Aws::Macie2
       :principal_id,
       :type,
       :user_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4134,6 +4278,7 @@ module Aws::Macie2
     class Severity < Struct.new(
       :description,
       :score)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4167,6 +4312,7 @@ module Aws::Macie2
       :comparator,
       :key,
       :values)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4192,6 +4338,7 @@ module Aws::Macie2
     class SortCriteria < Struct.new(
       :attribute_name,
       :order_by)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4208,6 +4355,7 @@ module Aws::Macie2
     class Statistics < Struct.new(
       :approximate_number_of_objects_to_process,
       :number_of_runs)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4239,6 +4387,7 @@ module Aws::Macie2
     class TagResourceRequest < Struct.new(
       :resource_arn,
       :tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4288,6 +4437,7 @@ module Aws::Macie2
       :key,
       :tag_values,
       :target)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4313,6 +4463,7 @@ module Aws::Macie2
     class TagValuePair < Struct.new(
       :key,
       :value)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4352,6 +4503,7 @@ module Aws::Macie2
       :maximum_match_distance,
       :regex,
       :sample_text)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4364,6 +4516,7 @@ module Aws::Macie2
     #
     class TestCustomDataIdentifierResponse < Struct.new(
       :match_count)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4377,6 +4530,7 @@ module Aws::Macie2
     #
     class ThrottlingException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4399,6 +4553,7 @@ module Aws::Macie2
       :account_id,
       :error_code,
       :error_message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4421,6 +4576,7 @@ module Aws::Macie2
     class UntagResourceRequest < Struct.new(
       :resource_arn,
       :tag_keys)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4453,6 +4609,7 @@ module Aws::Macie2
     class UpdateClassificationJobRequest < Struct.new(
       :job_id,
       :job_status)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4517,6 +4674,7 @@ module Aws::Macie2
       :id,
       :name,
       :position)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4534,6 +4692,7 @@ module Aws::Macie2
     class UpdateFindingsFilterResponse < Struct.new(
       :arn,
       :id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4564,6 +4723,7 @@ module Aws::Macie2
     class UpdateMacieSessionRequest < Struct.new(
       :finding_publishing_frequency,
       :status)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4593,6 +4753,7 @@ module Aws::Macie2
     class UpdateMemberSessionRequest < Struct.new(
       :id,
       :status)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4617,6 +4778,7 @@ module Aws::Macie2
     #
     class UpdateOrganizationConfigurationRequest < Struct.new(
       :auto_enable)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4651,6 +4813,7 @@ module Aws::Macie2
       :estimated_cost,
       :service_limit,
       :type)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4671,6 +4834,7 @@ module Aws::Macie2
       :account_id,
       :free_trial_start_date,
       :usage)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4698,6 +4862,7 @@ module Aws::Macie2
     class UsageStatisticsFilter < Struct.new(
       :key,
       :values)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4725,6 +4890,7 @@ module Aws::Macie2
     class UsageStatisticsSortBy < Struct.new(
       :key,
       :order_by)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4749,6 +4915,7 @@ module Aws::Macie2
       :currency,
       :estimated_cost,
       :type)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4790,6 +4957,7 @@ module Aws::Macie2
       :iam_user,
       :root,
       :type)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4810,6 +4978,7 @@ module Aws::Macie2
       :account_id,
       :arn,
       :principal_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4823,6 +4992,7 @@ module Aws::Macie2
     #
     class ValidationException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4840,6 +5010,7 @@ module Aws::Macie2
     #
     class WeeklySchedule < Struct.new(
       :day_of_week)
+      SENSITIVE = []
       include Aws::Structure
     end
 

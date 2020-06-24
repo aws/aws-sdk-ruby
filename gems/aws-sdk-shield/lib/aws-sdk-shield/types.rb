@@ -21,6 +21,7 @@ module Aws::Shield
     #
     class AccessDeniedException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -41,6 +42,7 @@ module Aws::Shield
     #
     class AccessDeniedForDependencyException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -59,6 +61,7 @@ module Aws::Shield
     #
     class AssociateDRTLogBucketRequest < Struct.new(
       :log_bucket)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -91,6 +94,7 @@ module Aws::Shield
     #
     class AssociateDRTRoleRequest < Struct.new(
       :role_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -121,6 +125,7 @@ module Aws::Shield
     class AssociateHealthCheckRequest < Struct.new(
       :protection_id,
       :health_check_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -161,6 +166,7 @@ module Aws::Shield
     #
     class AssociateProactiveEngagementDetailsRequest < Struct.new(
       :emergency_contact_list)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -225,6 +231,7 @@ module Aws::Shield
       :attack_counters,
       :attack_properties,
       :mitigations)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -265,6 +272,7 @@ module Aws::Shield
       :top_contributors,
       :unit,
       :total)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -308,6 +316,7 @@ module Aws::Shield
       :start_time,
       :end_time,
       :attack_vectors)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -357,6 +366,7 @@ module Aws::Shield
     #
     class AttackVectorDescription < Struct.new(
       :vector_type)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -379,6 +389,7 @@ module Aws::Shield
     class Contributor < Struct.new(
       :name,
       :value)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -426,6 +437,7 @@ module Aws::Shield
     class CreateProtectionRequest < Struct.new(
       :name,
       :resource_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -438,6 +450,7 @@ module Aws::Shield
     #
     class CreateProtectionResponse < Struct.new(
       :protection_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -466,6 +479,7 @@ module Aws::Shield
     #
     class DeleteProtectionRequest < Struct.new(
       :protection_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -498,6 +512,7 @@ module Aws::Shield
     #
     class DescribeAttackRequest < Struct.new(
       :attack_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -509,6 +524,7 @@ module Aws::Shield
     #
     class DescribeAttackResponse < Struct.new(
       :attack)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -532,6 +548,7 @@ module Aws::Shield
     class DescribeDRTAccessResponse < Struct.new(
       :role_arn,
       :log_bucket_list)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -552,6 +569,7 @@ module Aws::Shield
     #
     class DescribeEmergencyContactSettingsResponse < Struct.new(
       :emergency_contact_list)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -582,6 +600,7 @@ module Aws::Shield
     class DescribeProtectionRequest < Struct.new(
       :protection_id,
       :resource_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -593,6 +612,7 @@ module Aws::Shield
     #
     class DescribeProtectionResponse < Struct.new(
       :protection)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -610,6 +630,7 @@ module Aws::Shield
     #
     class DescribeSubscriptionResponse < Struct.new(
       :subscription)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -638,6 +659,7 @@ module Aws::Shield
     #
     class DisassociateDRTLogBucketRequest < Struct.new(
       :log_bucket)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -678,6 +700,7 @@ module Aws::Shield
     class DisassociateHealthCheckRequest < Struct.new(
       :protection_id,
       :health_check_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -716,6 +739,7 @@ module Aws::Shield
       :email_address,
       :phone_number,
       :contact_notes)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -743,6 +767,7 @@ module Aws::Shield
     #
     class GetSubscriptionStateResponse < Struct.new(
       :subscription_state)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -756,6 +781,7 @@ module Aws::Shield
     #
     class InternalErrorException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -769,6 +795,7 @@ module Aws::Shield
     #
     class InvalidOperationException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -783,6 +810,7 @@ module Aws::Shield
     #
     class InvalidPaginationTokenException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -796,6 +824,7 @@ module Aws::Shield
     #
     class InvalidParameterException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -809,6 +838,7 @@ module Aws::Shield
     #
     class InvalidResourceException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -828,6 +858,7 @@ module Aws::Shield
     class Limit < Struct.new(
       :type,
       :max)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -852,6 +883,7 @@ module Aws::Shield
       :message,
       :type,
       :limit)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -925,6 +957,7 @@ module Aws::Shield
       :end_time,
       :next_token,
       :max_results)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -949,6 +982,7 @@ module Aws::Shield
     class ListAttacksResponse < Struct.new(
       :attack_summaries,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -982,6 +1016,7 @@ module Aws::Shield
     class ListProtectionsRequest < Struct.new(
       :next_token,
       :max_results)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1009,6 +1044,7 @@ module Aws::Shield
     class ListProtectionsResponse < Struct.new(
       :protections,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1024,6 +1060,7 @@ module Aws::Shield
     #
     class LockedSubscriptionException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1037,6 +1074,7 @@ module Aws::Shield
     #
     class Mitigation < Struct.new(
       :mitigation_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1049,6 +1087,7 @@ module Aws::Shield
     #
     class NoAssociatedRoleException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1062,6 +1101,7 @@ module Aws::Shield
     #
     class OptimisticLockException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1093,6 +1133,7 @@ module Aws::Shield
       :name,
       :resource_arn,
       :health_check_ids)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1105,6 +1146,7 @@ module Aws::Shield
     #
     class ResourceAlreadyExistsException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1117,6 +1159,7 @@ module Aws::Shield
     #
     class ResourceNotFoundException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1145,6 +1188,7 @@ module Aws::Shield
       :id,
       :attack_vectors,
       :counters)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1205,6 +1249,7 @@ module Aws::Shield
       :auto_renew,
       :limits,
       :proactive_engagement_status)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1223,6 +1268,7 @@ module Aws::Shield
     class SummarizedAttackVector < Struct.new(
       :vector_type,
       :vector_counters)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1261,6 +1307,7 @@ module Aws::Shield
       :sum,
       :n,
       :unit)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1297,6 +1344,7 @@ module Aws::Shield
     class TimeRange < Struct.new(
       :from_inclusive,
       :to_exclusive)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1327,6 +1375,7 @@ module Aws::Shield
     #
     class UpdateEmergencyContactSettingsRequest < Struct.new(
       :emergency_contact_list)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1354,6 +1403,7 @@ module Aws::Shield
     #
     class UpdateSubscriptionRequest < Struct.new(
       :auto_renew)
+      SENSITIVE = []
       include Aws::Structure
     end
 
