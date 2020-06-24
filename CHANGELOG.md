@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+2.11.535 (2020-06-24)
+------------------
+
 * Feature - Aws::Amplify - Updated the API, and documentation for AWS Amplify.
 
 * Feature - Aws::AutoScaling - Updated the documentation for Auto Scaling.
