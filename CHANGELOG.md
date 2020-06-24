@@ -1,6 +1,24 @@
 Unreleased Changes
 ------------------
 
+* Feature - Aws::Amplify - Updated the API, and documentation for AWS Amplify.
+
+* Feature - Aws::AutoScaling - Updated the documentation for Auto Scaling.
+
+* Feature - Aws::Backup - Updated the API, and documentation for AWS Backup.
+
+* Feature - Aws::CodeCommit - Updated the API, and documentation for AWS CodeCommit.
+
+* Feature - Aws::EMR - Updated the API, and documentation for Amazon Elastic MapReduce.
+
+* Feature - Aws::FSx - Updated the API, and documentation for Amazon FSx.
+
+* Feature - Aws::IAM - Updated the documentation for AWS Identity and Access Management.
+
+* Feature - Aws::Organizations - Updated the API, and documentation for AWS Organizations.
+
+* Feature - Aws::Honeycode - Added support for a new service, Amazon Honeycode.
+
 2.11.534 (2020-06-23)
 ------------------
 

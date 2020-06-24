@@ -394,6 +394,10 @@
     "models": "health/2016-08-04",
     "endpoint": "health"
   },
+  "Honeycode": {
+    "models": "honeycode/2020-03-01",
+    "endpoint": "honeycode"
+  },
   "IAM": {
     "models": "iam/2010-05-08",
     "endpoint": "iam"

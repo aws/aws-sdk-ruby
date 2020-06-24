@@ -122,6 +122,7 @@ module Aws
     GroundStation
     GuardDuty
     Health
+    Honeycode
     IAM
     Imagebuilder
     ImportExport

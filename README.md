@@ -413,11 +413,12 @@ to be backwards compatible.
 | Amazon GameLift                                       | GameLift                        | 2015-10-01  |
 | Amazon Glacier                                        | Glacier                         | 2012-06-01  |
 | Amazon GuardDuty                                      | GuardDuty                       | 2017-11-28  |
+| Amazon Honeycode                                      | Honeycode                       | 2020-03-01  |
 | Amazon Import/Export Snowball                         | Snowball                        | 2016-06-30  |
 | Amazon Inspector                                      | Inspector                       | 2016-02-16  |
 | Amazon Kinesis                                        | Kinesis                         | 2013-12-02  |
-| Amazon Kinesis Analytics                              | KinesisAnalyticsV2              | 2018-05-23  |
 | Amazon Kinesis Analytics                              | KinesisAnalytics                | 2015-08-14  |
+| Amazon Kinesis Analytics                              | KinesisAnalyticsV2              | 2018-05-23  |
 | Amazon Kinesis Firehose                               | Firehose                        | 2015-08-04  |
 | Amazon Kinesis Video Signaling Channels               | KinesisVideoSignalingChannels   | 2019-12-04  |
 | Amazon Kinesis Video Streams                          | KinesisVideo                    | 2017-09-30  |
