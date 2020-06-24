@@ -39,11 +39,14 @@ module Aws
           private
 
           def add_event_listeners(context, target)
-            handler = self
             context.http_response.on_headers(200..299) do
               if context.http_response.body.is_a? Seahorse::Client::BlockIO
                 context.http_response.body = RetryableBlockIO.new(context.http_response.body)
               end
+            end
+
+            context.http_response.on_headers(400..599) do
+              context.http_response.body = StringIO.new # something to write the error to
             end
 
             context.http_response.on_error do |error|
@@ -60,8 +63,9 @@ module Aws
         end
 
         handler(Handler,
-                step: :initialize,
-                operations: [:get_object]
+                step: :sign,
+                operations: [:get_object],
+                priority: 10
         )
       end
     end
