@@ -9,29 +9,7 @@ module Aws
       stub_const('ENV', {})
       allow(Dir).to receive(:home).and_raise(ArgumentError)
     end
-
-    it 'works with open3' do
-      raw_out, process_status = Open3.capture2('echo "Hello"')
-      puts "cap2: #{raw_out}"
-
-      raw_out, process_status = Open3.capture2e('echo "Hello"')
-      puts "cap2e: #{raw_out}"
-
-      raw_out, process_status = Open3.capture2e('echo "Hello"', binmode: true)
-      puts "cap2e, binmode: #{raw_out}"
-
-      raw_out = `echo "Hello"`
-      puts "backticks: #{raw_out}"
-
-      Open3.popen3("echo abc") do |i, o, e, t|
-        i.close
-        puts "popen3: #{o.read} err: #{e.read}"
-        puts "popen3 status: #{t.value}"
-      end
-          
-      expect(raw_out).to eq("Hello\n")
-    end
-
+    
     it 'will read credentials from a process' do
       creds = ProcessCredentials.new('echo \'{"Version":1,"AccessKeyId":"AK_PROC1","SecretAccessKey":"SECRET_AK_PROC1","SessionToken":"TOKEN_PROC1"}\'').credentials
       expect(creds.access_key_id).to eq('AK_PROC1')

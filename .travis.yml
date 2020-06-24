@@ -1,23 +1,17 @@
 language: ruby
 
 before_install:
-  - rvm get latest
-  - rvm use $TRAVIS_RUBY_VERSION --install --binary --fuzzy
   - gem install bundler -v '< 2'
 
-dist: xenial
+dist: bionic
 
 rvm:
-  - 1.9.3
-  - 2.0.0
-  - 2.1
   - 2.2
   - 2.3
   - 2.4
   - 2.5
   - 2.6
   - 2.7
-  - jruby-1.7.27
   - jruby-9.1
   - jruby-9.2
 
@@ -37,21 +31,23 @@ bundler_args: --without docs repl
 
 matrix:
   exclude:
-    - rvm: jruby-1.7.27
-      env: KITCHEN_SINK=1
     - rvm: jruby-9.1
       env: KITCHEN_SINK=1
     - rvm: jruby-9.2
       env: KITCHEN_SINK=1
   include:
+    - rvm: 1.9.3
+      dist: xenial
+    - rvm: 2.0
+      dist: xenial
+    - rvm: 2.1
+      dist: xenial
     - rvm: 2.3
       env: OLD_OJ=1
     - rvm: 2.3
       env: OLD_OX=1
     - rvm: 2.3
       env: NO_H2=1
-  allow_failures:
-    - rvm: jruby-1.7.27
 
 notifications:
   webhooks:
