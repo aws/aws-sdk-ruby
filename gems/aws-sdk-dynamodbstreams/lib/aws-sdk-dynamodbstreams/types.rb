@@ -72,6 +72,7 @@ module Aws::DynamoDBStreams
       :l,
       :null,
       :bool)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -107,6 +108,7 @@ module Aws::DynamoDBStreams
       :stream_arn,
       :limit,
       :exclusive_start_shard_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -123,6 +125,7 @@ module Aws::DynamoDBStreams
     #
     class DescribeStreamOutput < Struct.new(
       :stream_description)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -138,6 +141,7 @@ module Aws::DynamoDBStreams
     #
     class ExpiredIteratorException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -167,6 +171,7 @@ module Aws::DynamoDBStreams
     class GetRecordsInput < Struct.new(
       :shard_iterator,
       :limit)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -188,6 +193,7 @@ module Aws::DynamoDBStreams
     class GetRecordsOutput < Struct.new(
       :records,
       :next_shard_iterator)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -245,6 +251,7 @@ module Aws::DynamoDBStreams
       :shard_id,
       :shard_iterator_type,
       :sequence_number)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -260,6 +267,7 @@ module Aws::DynamoDBStreams
     #
     class GetShardIteratorOutput < Struct.new(
       :shard_iterator)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -279,6 +287,7 @@ module Aws::DynamoDBStreams
     class Identity < Struct.new(
       :principal_id,
       :type)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -293,6 +302,7 @@ module Aws::DynamoDBStreams
     #
     class InternalServerError < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -332,6 +342,7 @@ module Aws::DynamoDBStreams
     class KeySchemaElement < Struct.new(
       :attribute_name,
       :key_type)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -354,6 +365,7 @@ module Aws::DynamoDBStreams
     #
     class LimitExceededException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -389,6 +401,7 @@ module Aws::DynamoDBStreams
       :table_name,
       :limit,
       :exclusive_start_stream_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -419,6 +432,7 @@ module Aws::DynamoDBStreams
     class ListStreamsOutput < Struct.new(
       :streams,
       :last_evaluated_stream_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -488,6 +502,7 @@ module Aws::DynamoDBStreams
       :aws_region,
       :dynamodb,
       :user_identity)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -501,6 +516,7 @@ module Aws::DynamoDBStreams
     #
     class ResourceNotFoundException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -520,6 +536,7 @@ module Aws::DynamoDBStreams
     class SequenceNumberRange < Struct.new(
       :starting_sequence_number,
       :ending_sequence_number)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -543,6 +560,7 @@ module Aws::DynamoDBStreams
       :shard_id,
       :sequence_number_range,
       :parent_shard_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -577,6 +595,7 @@ module Aws::DynamoDBStreams
       :stream_arn,
       :table_name,
       :stream_label)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -674,6 +693,7 @@ module Aws::DynamoDBStreams
       :key_schema,
       :shards,
       :last_evaluated_shard_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -737,6 +757,7 @@ module Aws::DynamoDBStreams
       :sequence_number,
       :size_bytes,
       :stream_view_type)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -764,6 +785,7 @@ module Aws::DynamoDBStreams
     #
     class TrimmedDataAccessException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 

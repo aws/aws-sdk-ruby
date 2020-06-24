@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.44.0 (2020-06-24)
+------------------
+
+* Feature - This release adds support for a new backup policy type for AWS Organizations.
+
+1.43.0 (2020-06-23)
+------------------
+
+* Feature - Added a new error message to support the requirement for a Business License on AWS accounts in China to create an organization.
+
 1.42.1 (2020-06-11)
 ------------------
 

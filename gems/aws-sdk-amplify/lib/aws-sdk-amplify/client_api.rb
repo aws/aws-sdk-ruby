@@ -30,6 +30,9 @@ module Aws::Amplify
     AutoBranchCreationConfig = Shapes::StructureShape.new(name: 'AutoBranchCreationConfig')
     AutoBranchCreationPattern = Shapes::StringShape.new(name: 'AutoBranchCreationPattern')
     AutoBranchCreationPatterns = Shapes::ListShape.new(name: 'AutoBranchCreationPatterns')
+    AutoSubDomainCreationPattern = Shapes::StringShape.new(name: 'AutoSubDomainCreationPattern')
+    AutoSubDomainCreationPatterns = Shapes::ListShape.new(name: 'AutoSubDomainCreationPatterns')
+    AutoSubDomainIAMRole = Shapes::StringShape.new(name: 'AutoSubDomainIAMRole')
     BackendEnvironment = Shapes::StructureShape.new(name: 'BackendEnvironment')
     BackendEnvironmentArn = Shapes::StringShape.new(name: 'BackendEnvironmentArn')
     BackendEnvironments = Shapes::ListShape.new(name: 'BackendEnvironments')
@@ -93,6 +96,7 @@ module Aws::Amplify
     EnableAutoSubDomain = Shapes::BooleanShape.new(name: 'EnableAutoSubDomain')
     EnableBasicAuth = Shapes::BooleanShape.new(name: 'EnableBasicAuth')
     EnableBranchAutoBuild = Shapes::BooleanShape.new(name: 'EnableBranchAutoBuild')
+    EnableBranchAutoDeletion = Shapes::BooleanShape.new(name: 'EnableBranchAutoDeletion')
     EnableNotification = Shapes::BooleanShape.new(name: 'EnableNotification')
     EnablePullRequestPreview = Shapes::BooleanShape.new(name: 'EnablePullRequestPreview')
     EndTime = Shapes::TimestampShape.new(name: 'EndTime')
@@ -229,6 +233,7 @@ module Aws::Amplify
     App.add_member(:environment_variables, Shapes::ShapeRef.new(shape: EnvironmentVariables, required: true, location_name: "environmentVariables"))
     App.add_member(:default_domain, Shapes::ShapeRef.new(shape: DefaultDomain, required: true, location_name: "defaultDomain"))
     App.add_member(:enable_branch_auto_build, Shapes::ShapeRef.new(shape: EnableBranchAutoBuild, required: true, location_name: "enableBranchAutoBuild"))
+    App.add_member(:enable_branch_auto_deletion, Shapes::ShapeRef.new(shape: EnableBranchAutoDeletion, location_name: "enableBranchAutoDeletion"))
     App.add_member(:enable_basic_auth, Shapes::ShapeRef.new(shape: EnableBasicAuth, required: true, location_name: "enableBasicAuth"))
     App.add_member(:basic_auth_credentials, Shapes::ShapeRef.new(shape: BasicAuthCredentials, location_name: "basicAuthCredentials"))
     App.add_member(:custom_rules, Shapes::ShapeRef.new(shape: CustomRules, location_name: "customRules"))
@@ -261,6 +266,8 @@ module Aws::Amplify
     AutoBranchCreationConfig.struct_class = Types::AutoBranchCreationConfig
 
     AutoBranchCreationPatterns.member = Shapes::ShapeRef.new(shape: AutoBranchCreationPattern)
+
+    AutoSubDomainCreationPatterns.member = Shapes::ShapeRef.new(shape: AutoSubDomainCreationPattern)
 
     BackendEnvironment.add_member(:backend_environment_arn, Shapes::ShapeRef.new(shape: BackendEnvironmentArn, required: true, location_name: "backendEnvironmentArn"))
     BackendEnvironment.add_member(:environment_name, Shapes::ShapeRef.new(shape: EnvironmentName, required: true, location_name: "environmentName"))
@@ -314,6 +321,7 @@ module Aws::Amplify
     CreateAppRequest.add_member(:access_token, Shapes::ShapeRef.new(shape: AccessToken, location_name: "accessToken"))
     CreateAppRequest.add_member(:environment_variables, Shapes::ShapeRef.new(shape: EnvironmentVariables, location_name: "environmentVariables"))
     CreateAppRequest.add_member(:enable_branch_auto_build, Shapes::ShapeRef.new(shape: EnableBranchAutoBuild, location_name: "enableBranchAutoBuild"))
+    CreateAppRequest.add_member(:enable_branch_auto_deletion, Shapes::ShapeRef.new(shape: EnableBranchAutoDeletion, location_name: "enableBranchAutoDeletion"))
     CreateAppRequest.add_member(:enable_basic_auth, Shapes::ShapeRef.new(shape: EnableBasicAuth, location_name: "enableBasicAuth"))
     CreateAppRequest.add_member(:basic_auth_credentials, Shapes::ShapeRef.new(shape: BasicAuthCredentials, location_name: "basicAuthCredentials"))
     CreateAppRequest.add_member(:custom_rules, Shapes::ShapeRef.new(shape: CustomRules, location_name: "customRules"))
@@ -372,6 +380,8 @@ module Aws::Amplify
     CreateDomainAssociationRequest.add_member(:domain_name, Shapes::ShapeRef.new(shape: DomainName, required: true, location_name: "domainName"))
     CreateDomainAssociationRequest.add_member(:enable_auto_sub_domain, Shapes::ShapeRef.new(shape: EnableAutoSubDomain, location_name: "enableAutoSubDomain"))
     CreateDomainAssociationRequest.add_member(:sub_domain_settings, Shapes::ShapeRef.new(shape: SubDomainSettings, required: true, location_name: "subDomainSettings"))
+    CreateDomainAssociationRequest.add_member(:auto_sub_domain_creation_patterns, Shapes::ShapeRef.new(shape: AutoSubDomainCreationPatterns, location_name: "autoSubDomainCreationPatterns"))
+    CreateDomainAssociationRequest.add_member(:auto_sub_domain_iam_role, Shapes::ShapeRef.new(shape: AutoSubDomainIAMRole, location_name: "autoSubDomainIAMRole"))
     CreateDomainAssociationRequest.struct_class = Types::CreateDomainAssociationRequest
 
     CreateDomainAssociationResult.add_member(:domain_association, Shapes::ShapeRef.new(shape: DomainAssociation, required: true, location_name: "domainAssociation"))
@@ -442,6 +452,8 @@ module Aws::Amplify
     DomainAssociation.add_member(:domain_association_arn, Shapes::ShapeRef.new(shape: DomainAssociationArn, required: true, location_name: "domainAssociationArn"))
     DomainAssociation.add_member(:domain_name, Shapes::ShapeRef.new(shape: DomainName, required: true, location_name: "domainName"))
     DomainAssociation.add_member(:enable_auto_sub_domain, Shapes::ShapeRef.new(shape: EnableAutoSubDomain, required: true, location_name: "enableAutoSubDomain"))
+    DomainAssociation.add_member(:auto_sub_domain_creation_patterns, Shapes::ShapeRef.new(shape: AutoSubDomainCreationPatterns, location_name: "autoSubDomainCreationPatterns"))
+    DomainAssociation.add_member(:auto_sub_domain_iam_role, Shapes::ShapeRef.new(shape: AutoSubDomainIAMRole, location_name: "autoSubDomainIAMRole"))
     DomainAssociation.add_member(:domain_status, Shapes::ShapeRef.new(shape: DomainStatus, required: true, location_name: "domainStatus"))
     DomainAssociation.add_member(:status_reason, Shapes::ShapeRef.new(shape: StatusReason, required: true, location_name: "statusReason"))
     DomainAssociation.add_member(:certificate_verification_dns_record, Shapes::ShapeRef.new(shape: CertificateVerificationDNSRecord, location_name: "certificateVerificationDNSRecord"))
@@ -559,7 +571,7 @@ module Aws::Amplify
     ListArtifactsResult.struct_class = Types::ListArtifactsResult
 
     ListBackendEnvironmentsRequest.add_member(:app_id, Shapes::ShapeRef.new(shape: AppId, required: true, location: "uri", location_name: "appId"))
-    ListBackendEnvironmentsRequest.add_member(:environment_name, Shapes::ShapeRef.new(shape: EnvironmentName, location_name: "environmentName"))
+    ListBackendEnvironmentsRequest.add_member(:environment_name, Shapes::ShapeRef.new(shape: EnvironmentName, location: "querystring", location_name: "environmentName"))
     ListBackendEnvironmentsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location: "querystring", location_name: "nextToken"))
     ListBackendEnvironmentsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location: "querystring", location_name: "maxResults"))
     ListBackendEnvironmentsRequest.struct_class = Types::ListBackendEnvironmentsRequest
@@ -712,6 +724,7 @@ module Aws::Amplify
     UpdateAppRequest.add_member(:iam_service_role_arn, Shapes::ShapeRef.new(shape: ServiceRoleArn, location_name: "iamServiceRoleArn"))
     UpdateAppRequest.add_member(:environment_variables, Shapes::ShapeRef.new(shape: EnvironmentVariables, location_name: "environmentVariables"))
     UpdateAppRequest.add_member(:enable_branch_auto_build, Shapes::ShapeRef.new(shape: EnableAutoBuild, location_name: "enableBranchAutoBuild"))
+    UpdateAppRequest.add_member(:enable_branch_auto_deletion, Shapes::ShapeRef.new(shape: EnableBranchAutoDeletion, location_name: "enableBranchAutoDeletion"))
     UpdateAppRequest.add_member(:enable_basic_auth, Shapes::ShapeRef.new(shape: EnableBasicAuth, location_name: "enableBasicAuth"))
     UpdateAppRequest.add_member(:basic_auth_credentials, Shapes::ShapeRef.new(shape: BasicAuthCredentials, location_name: "basicAuthCredentials"))
     UpdateAppRequest.add_member(:custom_rules, Shapes::ShapeRef.new(shape: CustomRules, location_name: "customRules"))
@@ -752,6 +765,8 @@ module Aws::Amplify
     UpdateDomainAssociationRequest.add_member(:domain_name, Shapes::ShapeRef.new(shape: DomainName, required: true, location: "uri", location_name: "domainName"))
     UpdateDomainAssociationRequest.add_member(:enable_auto_sub_domain, Shapes::ShapeRef.new(shape: EnableAutoSubDomain, location_name: "enableAutoSubDomain"))
     UpdateDomainAssociationRequest.add_member(:sub_domain_settings, Shapes::ShapeRef.new(shape: SubDomainSettings, required: true, location_name: "subDomainSettings"))
+    UpdateDomainAssociationRequest.add_member(:auto_sub_domain_creation_patterns, Shapes::ShapeRef.new(shape: AutoSubDomainCreationPatterns, location_name: "autoSubDomainCreationPatterns"))
+    UpdateDomainAssociationRequest.add_member(:auto_sub_domain_iam_role, Shapes::ShapeRef.new(shape: AutoSubDomainIAMRole, location_name: "autoSubDomainIAMRole"))
     UpdateDomainAssociationRequest.struct_class = Types::UpdateDomainAssociationRequest
 
     UpdateDomainAssociationResult.add_member(:domain_association, Shapes::ShapeRef.new(shape: DomainAssociation, required: true, location_name: "domainAssociation"))

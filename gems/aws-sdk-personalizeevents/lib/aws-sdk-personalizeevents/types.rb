@@ -69,6 +69,7 @@ module Aws::PersonalizeEvents
       :event_type,
       :properties,
       :sent_at)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -81,6 +82,7 @@ module Aws::PersonalizeEvents
     #
     class InvalidInputException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -129,6 +131,7 @@ module Aws::PersonalizeEvents
       :user_id,
       :session_id,
       :event_list)
+      SENSITIVE = []
       include Aws::Structure
     end
 

@@ -95,6 +95,7 @@ module Aws::IAM
       :entity_path,
       :last_authenticated_time,
       :total_authenticated_entities)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -139,6 +140,7 @@ module Aws::IAM
       :status,
       :secret_access_key,
       :create_date)
+      SENSITIVE = [:secret_access_key]
       include Aws::Structure
     end
 
@@ -203,6 +205,7 @@ module Aws::IAM
       :last_used_date,
       :service_name,
       :region)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -235,6 +238,7 @@ module Aws::IAM
       :access_key_id,
       :status,
       :create_date)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -263,6 +267,7 @@ module Aws::IAM
     class AddClientIDToOpenIDConnectProviderRequest < Struct.new(
       :open_id_connect_provider_arn,
       :client_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -305,6 +310,7 @@ module Aws::IAM
     class AddRoleToInstanceProfileRequest < Struct.new(
       :instance_profile_name,
       :role_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -347,6 +353,7 @@ module Aws::IAM
     class AddUserToGroupRequest < Struct.new(
       :group_name,
       :user_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -388,6 +395,7 @@ module Aws::IAM
     class AttachGroupPolicyRequest < Struct.new(
       :group_name,
       :policy_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -429,6 +437,7 @@ module Aws::IAM
     class AttachRolePolicyRequest < Struct.new(
       :role_name,
       :policy_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -470,6 +479,7 @@ module Aws::IAM
     class AttachUserPolicyRequest < Struct.new(
       :user_name,
       :policy_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -501,6 +511,7 @@ module Aws::IAM
     class AttachedPermissionsBoundary < Struct.new(
       :permissions_boundary_type,
       :permissions_boundary_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -540,6 +551,7 @@ module Aws::IAM
     class AttachedPolicy < Struct.new(
       :policy_name,
       :policy_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -579,6 +591,7 @@ module Aws::IAM
     class ChangePasswordRequest < Struct.new(
       :old_password,
       :new_password)
+      SENSITIVE = [:old_password, :new_password]
       include Aws::Structure
     end
 
@@ -593,6 +606,7 @@ module Aws::IAM
     #
     class ConcurrentModificationException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -636,6 +650,7 @@ module Aws::IAM
       :context_key_name,
       :context_key_values,
       :context_key_type)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -663,6 +678,7 @@ module Aws::IAM
     #
     class CreateAccessKeyRequest < Struct.new(
       :user_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -676,6 +692,7 @@ module Aws::IAM
     #
     class CreateAccessKeyResponse < Struct.new(
       :access_key)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -703,6 +720,7 @@ module Aws::IAM
     #
     class CreateAccountAliasRequest < Struct.new(
       :account_alias)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -749,6 +767,7 @@ module Aws::IAM
     class CreateGroupRequest < Struct.new(
       :path,
       :group_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -762,6 +781,7 @@ module Aws::IAM
     #
     class CreateGroupResponse < Struct.new(
       :group)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -811,6 +831,7 @@ module Aws::IAM
     class CreateInstanceProfileRequest < Struct.new(
       :instance_profile_name,
       :path)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -824,6 +845,7 @@ module Aws::IAM
     #
     class CreateInstanceProfileResponse < Struct.new(
       :instance_profile)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -879,6 +901,7 @@ module Aws::IAM
       :user_name,
       :password,
       :password_reset_required)
+      SENSITIVE = [:password]
       include Aws::Structure
     end
 
@@ -892,6 +915,7 @@ module Aws::IAM
     #
     class CreateLoginProfileResponse < Struct.new(
       :login_profile)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -968,6 +992,7 @@ module Aws::IAM
       :url,
       :client_id_list,
       :thumbprint_list)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -984,6 +1009,7 @@ module Aws::IAM
     #
     class CreateOpenIDConnectProviderResponse < Struct.new(
       :open_id_connect_provider_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1072,6 +1098,7 @@ module Aws::IAM
       :path,
       :policy_document,
       :description)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1085,6 +1112,7 @@ module Aws::IAM
     #
     class CreatePolicyResponse < Struct.new(
       :policy)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1157,6 +1185,7 @@ module Aws::IAM
       :policy_arn,
       :policy_document,
       :set_as_default)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1170,6 +1199,7 @@ module Aws::IAM
     #
     class CreatePolicyVersionResponse < Struct.new(
       :policy_version)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1309,6 +1339,7 @@ module Aws::IAM
       :max_session_duration,
       :permissions_boundary,
       :tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1322,6 +1353,7 @@ module Aws::IAM
     #
     class CreateRoleResponse < Struct.new(
       :role)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1367,6 +1399,7 @@ module Aws::IAM
     class CreateSAMLProviderRequest < Struct.new(
       :saml_metadata_document,
       :name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1381,6 +1414,7 @@ module Aws::IAM
     #
     class CreateSAMLProviderResponse < Struct.new(
       :saml_provider_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1433,6 +1467,7 @@ module Aws::IAM
       :aws_service_name,
       :description,
       :custom_suffix)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1444,6 +1479,7 @@ module Aws::IAM
     #
     class CreateServiceLinkedRoleResponse < Struct.new(
       :role)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1482,6 +1518,7 @@ module Aws::IAM
     class CreateServiceSpecificCredentialRequest < Struct.new(
       :user_name,
       :service_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1498,6 +1535,7 @@ module Aws::IAM
     #
     class CreateServiceSpecificCredentialResponse < Struct.new(
       :service_specific_credential)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1574,6 +1612,7 @@ module Aws::IAM
       :user_name,
       :permissions_boundary,
       :tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1587,6 +1626,7 @@ module Aws::IAM
     #
     class CreateUserResponse < Struct.new(
       :user)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1637,6 +1677,7 @@ module Aws::IAM
     class CreateVirtualMFADeviceRequest < Struct.new(
       :path,
       :virtual_mfa_device_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1650,6 +1691,7 @@ module Aws::IAM
     #
     class CreateVirtualMFADeviceResponse < Struct.new(
       :virtual_mfa_device)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1670,6 +1712,7 @@ module Aws::IAM
     #
     class CredentialReportExpiredException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1683,6 +1726,7 @@ module Aws::IAM
     #
     class CredentialReportNotPresentException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1696,6 +1740,7 @@ module Aws::IAM
     #
     class CredentialReportNotReadyException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1739,6 +1784,7 @@ module Aws::IAM
     class DeactivateMFADeviceRequest < Struct.new(
       :user_name,
       :serial_number)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1781,6 +1827,7 @@ module Aws::IAM
     class DeleteAccessKeyRequest < Struct.new(
       :user_name,
       :access_key_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1808,6 +1855,7 @@ module Aws::IAM
     #
     class DeleteAccountAliasRequest < Struct.new(
       :account_alias)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1822,6 +1870,7 @@ module Aws::IAM
     #
     class DeleteConflictException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1865,6 +1914,7 @@ module Aws::IAM
     class DeleteGroupPolicyRequest < Struct.new(
       :group_name,
       :policy_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1892,6 +1942,7 @@ module Aws::IAM
     #
     class DeleteGroupRequest < Struct.new(
       :group_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1919,6 +1970,7 @@ module Aws::IAM
     #
     class DeleteInstanceProfileRequest < Struct.new(
       :instance_profile_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1946,6 +1998,7 @@ module Aws::IAM
     #
     class DeleteLoginProfileRequest < Struct.new(
       :user_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1967,6 +2020,7 @@ module Aws::IAM
     #
     class DeleteOpenIDConnectProviderRequest < Struct.new(
       :open_id_connect_provider_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1992,6 +2046,7 @@ module Aws::IAM
     #
     class DeletePolicyRequest < Struct.new(
       :policy_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2037,6 +2092,7 @@ module Aws::IAM
     class DeletePolicyVersionRequest < Struct.new(
       :policy_arn,
       :version_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2056,6 +2112,7 @@ module Aws::IAM
     #
     class DeleteRolePermissionsBoundaryRequest < Struct.new(
       :role_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2099,6 +2156,7 @@ module Aws::IAM
     class DeleteRolePolicyRequest < Struct.new(
       :role_name,
       :policy_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2126,6 +2184,7 @@ module Aws::IAM
     #
     class DeleteRoleRequest < Struct.new(
       :role_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2144,6 +2203,7 @@ module Aws::IAM
     #
     class DeleteSAMLProviderRequest < Struct.new(
       :saml_provider_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2185,6 +2245,7 @@ module Aws::IAM
     class DeleteSSHPublicKeyRequest < Struct.new(
       :user_name,
       :ssh_public_key_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2212,6 +2273,7 @@ module Aws::IAM
     #
     class DeleteServerCertificateRequest < Struct.new(
       :server_certificate_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2230,6 +2292,7 @@ module Aws::IAM
     #
     class DeleteServiceLinkedRoleRequest < Struct.new(
       :role_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2243,6 +2306,7 @@ module Aws::IAM
     #
     class DeleteServiceLinkedRoleResponse < Struct.new(
       :deletion_task_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2287,6 +2351,7 @@ module Aws::IAM
     class DeleteServiceSpecificCredentialRequest < Struct.new(
       :user_name,
       :service_specific_credential_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2328,6 +2393,7 @@ module Aws::IAM
     class DeleteSigningCertificateRequest < Struct.new(
       :user_name,
       :certificate_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2347,6 +2413,7 @@ module Aws::IAM
     #
     class DeleteUserPermissionsBoundaryRequest < Struct.new(
       :user_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2390,6 +2457,7 @@ module Aws::IAM
     class DeleteUserPolicyRequest < Struct.new(
       :user_name,
       :policy_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2417,6 +2485,7 @@ module Aws::IAM
     #
     class DeleteUserRequest < Struct.new(
       :user_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2445,6 +2514,7 @@ module Aws::IAM
     #
     class DeleteVirtualMFADeviceRequest < Struct.new(
       :serial_number)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2473,6 +2543,7 @@ module Aws::IAM
     class DeletionTaskFailureReasonType < Struct.new(
       :reason,
       :role_usage_list)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2514,6 +2585,7 @@ module Aws::IAM
     class DetachGroupPolicyRequest < Struct.new(
       :group_name,
       :policy_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2555,6 +2627,7 @@ module Aws::IAM
     class DetachRolePolicyRequest < Struct.new(
       :role_name,
       :policy_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2596,6 +2669,7 @@ module Aws::IAM
     class DetachUserPolicyRequest < Struct.new(
       :user_name,
       :policy_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2609,6 +2683,7 @@ module Aws::IAM
     #
     class DuplicateCertificateException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2622,6 +2697,7 @@ module Aws::IAM
     #
     class DuplicateSSHPublicKeyException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2703,6 +2779,7 @@ module Aws::IAM
       :serial_number,
       :authentication_code_1,
       :authentication_code_2)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2716,6 +2793,7 @@ module Aws::IAM
     #
     class EntityAlreadyExistsException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2750,6 +2828,7 @@ module Aws::IAM
     class EntityDetails < Struct.new(
       :entity_info,
       :last_authenticated)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2798,6 +2877,7 @@ module Aws::IAM
       :type,
       :id,
       :path)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2814,6 +2894,7 @@ module Aws::IAM
     #
     class EntityTemporarilyUnmodifiableException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2836,6 +2917,7 @@ module Aws::IAM
     class ErrorDetails < Struct.new(
       :message,
       :code)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2933,6 +3015,7 @@ module Aws::IAM
       :permissions_boundary_decision_detail,
       :eval_decision_details,
       :resource_specific_results)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2952,6 +3035,7 @@ module Aws::IAM
     class GenerateCredentialReportResponse < Struct.new(
       :state,
       :description)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2987,6 +3071,7 @@ module Aws::IAM
     class GenerateOrganizationsAccessReportRequest < Struct.new(
       :entity_path,
       :organizations_policy_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2999,6 +3084,7 @@ module Aws::IAM
     #
     class GenerateOrganizationsAccessReportResponse < Struct.new(
       :job_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3031,6 +3117,7 @@ module Aws::IAM
     class GenerateServiceLastAccessedDetailsRequest < Struct.new(
       :arn,
       :granularity)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3046,6 +3133,7 @@ module Aws::IAM
     #
     class GenerateServiceLastAccessedDetailsResponse < Struct.new(
       :job_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3072,6 +3160,7 @@ module Aws::IAM
     #
     class GetAccessKeyLastUsedRequest < Struct.new(
       :access_key_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3092,6 +3181,7 @@ module Aws::IAM
     class GetAccessKeyLastUsedResponse < Struct.new(
       :user_name,
       :access_key_last_used)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3140,6 +3230,7 @@ module Aws::IAM
       :filter,
       :max_items,
       :marker)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3187,6 +3278,7 @@ module Aws::IAM
       :policies,
       :is_truncated,
       :marker)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3202,6 +3294,7 @@ module Aws::IAM
     #
     class GetAccountPasswordPolicyResponse < Struct.new(
       :password_policy)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3216,6 +3309,7 @@ module Aws::IAM
     #
     class GetAccountSummaryResponse < Struct.new(
       :summary_map)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3252,6 +3346,7 @@ module Aws::IAM
     #
     class GetContextKeysForCustomPolicyRequest < Struct.new(
       :policy_input_list)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3266,6 +3361,7 @@ module Aws::IAM
     #
     class GetContextKeysForPolicyResponse < Struct.new(
       :context_key_names)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3322,6 +3418,7 @@ module Aws::IAM
     class GetContextKeysForPrincipalPolicyRequest < Struct.new(
       :policy_source_arn,
       :policy_input_list)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3350,6 +3447,7 @@ module Aws::IAM
       :content,
       :report_format,
       :generated_time)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3392,6 +3490,7 @@ module Aws::IAM
     class GetGroupPolicyRequest < Struct.new(
       :group_name,
       :policy_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3420,6 +3519,7 @@ module Aws::IAM
       :group_name,
       :policy_name,
       :policy_document)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3471,6 +3571,7 @@ module Aws::IAM
       :group_name,
       :marker,
       :max_items)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3507,6 +3608,7 @@ module Aws::IAM
       :users,
       :is_truncated,
       :marker)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3534,6 +3636,7 @@ module Aws::IAM
     #
     class GetInstanceProfileRequest < Struct.new(
       :instance_profile_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3547,6 +3650,7 @@ module Aws::IAM
     #
     class GetInstanceProfileResponse < Struct.new(
       :instance_profile)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3574,6 +3678,7 @@ module Aws::IAM
     #
     class GetLoginProfileRequest < Struct.new(
       :user_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3588,6 +3693,7 @@ module Aws::IAM
     #
     class GetLoginProfileResponse < Struct.new(
       :login_profile)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3615,6 +3721,7 @@ module Aws::IAM
     #
     class GetOpenIDConnectProviderRequest < Struct.new(
       :open_id_connect_provider_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3650,6 +3757,7 @@ module Aws::IAM
       :client_id_list,
       :thumbprint_list,
       :create_date)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3702,6 +3810,7 @@ module Aws::IAM
       :max_items,
       :marker,
       :sort_key)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3781,6 +3890,7 @@ module Aws::IAM
       :is_truncated,
       :marker,
       :error_details)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3807,6 +3917,7 @@ module Aws::IAM
     #
     class GetPolicyRequest < Struct.new(
       :policy_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3820,6 +3931,7 @@ module Aws::IAM
     #
     class GetPolicyResponse < Struct.new(
       :policy)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3861,6 +3973,7 @@ module Aws::IAM
     class GetPolicyVersionRequest < Struct.new(
       :policy_arn,
       :version_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3874,6 +3987,7 @@ module Aws::IAM
     #
     class GetPolicyVersionResponse < Struct.new(
       :policy_version)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3916,6 +4030,7 @@ module Aws::IAM
     class GetRolePolicyRequest < Struct.new(
       :role_name,
       :policy_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3944,6 +4059,7 @@ module Aws::IAM
       :role_name,
       :policy_name,
       :policy_document)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3971,6 +4087,7 @@ module Aws::IAM
     #
     class GetRoleRequest < Struct.new(
       :role_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3984,6 +4101,7 @@ module Aws::IAM
     #
     class GetRoleResponse < Struct.new(
       :role)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4010,6 +4128,7 @@ module Aws::IAM
     #
     class GetSAMLProviderRequest < Struct.new(
       :saml_provider_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4034,6 +4153,7 @@ module Aws::IAM
       :saml_metadata_document,
       :create_date,
       :valid_until)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4083,6 +4203,7 @@ module Aws::IAM
       :user_name,
       :ssh_public_key_id,
       :encoding)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4096,6 +4217,7 @@ module Aws::IAM
     #
     class GetSSHPublicKeyResponse < Struct.new(
       :ssh_public_key)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4124,6 +4246,7 @@ module Aws::IAM
     #
     class GetServerCertificateRequest < Struct.new(
       :server_certificate_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4137,6 +4260,7 @@ module Aws::IAM
     #
     class GetServerCertificateResponse < Struct.new(
       :server_certificate)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4183,6 +4307,7 @@ module Aws::IAM
       :job_id,
       :max_items,
       :marker)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4254,6 +4379,7 @@ module Aws::IAM
       :is_truncated,
       :marker,
       :error)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4318,6 +4444,7 @@ module Aws::IAM
       :service_namespace,
       :max_items,
       :marker)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4383,6 +4510,7 @@ module Aws::IAM
       :is_truncated,
       :marker,
       :error)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4403,6 +4531,7 @@ module Aws::IAM
     #
     class GetServiceLinkedRoleDeletionStatusRequest < Struct.new(
       :deletion_task_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4420,6 +4549,7 @@ module Aws::IAM
     class GetServiceLinkedRoleDeletionStatusResponse < Struct.new(
       :status,
       :reason)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4462,6 +4592,7 @@ module Aws::IAM
     class GetUserPolicyRequest < Struct.new(
       :user_name,
       :policy_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4490,6 +4621,7 @@ module Aws::IAM
       :user_name,
       :policy_name,
       :policy_document)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4518,6 +4650,7 @@ module Aws::IAM
     #
     class GetUserRequest < Struct.new(
       :user_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4554,6 +4687,7 @@ module Aws::IAM
     #
     class GetUserResponse < Struct.new(
       :user)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4618,6 +4752,7 @@ module Aws::IAM
       :group_id,
       :arn,
       :create_date)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4689,6 +4824,7 @@ module Aws::IAM
       :create_date,
       :group_policy_list,
       :attached_managed_policies)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4755,6 +4891,7 @@ module Aws::IAM
       :arn,
       :create_date,
       :roles)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4768,6 +4905,7 @@ module Aws::IAM
     #
     class InvalidAuthenticationCodeException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4780,6 +4918,7 @@ module Aws::IAM
     #
     class InvalidCertificateException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4793,6 +4932,7 @@ module Aws::IAM
     #
     class InvalidInputException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4806,6 +4946,7 @@ module Aws::IAM
     #
     class InvalidPublicKeyException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4819,6 +4960,7 @@ module Aws::IAM
     #
     class InvalidUserTypeException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4832,12 +4974,13 @@ module Aws::IAM
     #
     class KeyPairMismatchException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
     # The request was rejected because it attempted to create resources
-    # beyond the current AWS account limits. The error message describes the
-    # limit exceeded.
+    # beyond the current AWS account limitations. The error message
+    # describes the limit exceeded.
     #
     # @!attribute [rw] message
     #   @return [String]
@@ -4846,6 +4989,7 @@ module Aws::IAM
     #
     class LimitExceededException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4897,6 +5041,7 @@ module Aws::IAM
       :user_name,
       :marker,
       :max_items)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4928,6 +5073,7 @@ module Aws::IAM
       :access_key_metadata,
       :is_truncated,
       :marker)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4964,6 +5110,7 @@ module Aws::IAM
     class ListAccountAliasesRequest < Struct.new(
       :marker,
       :max_items)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4996,6 +5143,7 @@ module Aws::IAM
       :account_aliases,
       :is_truncated,
       :marker)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5067,6 +5215,7 @@ module Aws::IAM
       :path_prefix,
       :marker,
       :max_items)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5099,6 +5248,7 @@ module Aws::IAM
       :attached_policies,
       :is_truncated,
       :marker)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5170,6 +5320,7 @@ module Aws::IAM
       :path_prefix,
       :marker,
       :max_items)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5202,6 +5353,7 @@ module Aws::IAM
       :attached_policies,
       :is_truncated,
       :marker)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5273,6 +5425,7 @@ module Aws::IAM
       :path_prefix,
       :marker,
       :max_items)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5305,6 +5458,7 @@ module Aws::IAM
       :attached_policies,
       :is_truncated,
       :marker)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5400,6 +5554,7 @@ module Aws::IAM
       :policy_usage_filter,
       :marker,
       :max_items)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5441,6 +5596,7 @@ module Aws::IAM
       :policy_roles,
       :is_truncated,
       :marker)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5492,6 +5648,7 @@ module Aws::IAM
       :group_name,
       :marker,
       :max_items)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5532,6 +5689,7 @@ module Aws::IAM
       :policy_names,
       :is_truncated,
       :marker)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5583,6 +5741,7 @@ module Aws::IAM
       :user_name,
       :marker,
       :max_items)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5614,6 +5773,7 @@ module Aws::IAM
       :groups,
       :is_truncated,
       :marker)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5671,6 +5831,7 @@ module Aws::IAM
       :path_prefix,
       :marker,
       :max_items)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5702,6 +5863,7 @@ module Aws::IAM
       :groups,
       :is_truncated,
       :marker)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5753,6 +5915,7 @@ module Aws::IAM
       :role_name,
       :marker,
       :max_items)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5785,6 +5948,7 @@ module Aws::IAM
       :instance_profiles,
       :is_truncated,
       :marker)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5842,6 +6006,7 @@ module Aws::IAM
       :path_prefix,
       :marker,
       :max_items)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5873,6 +6038,7 @@ module Aws::IAM
       :instance_profiles,
       :is_truncated,
       :marker)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5924,6 +6090,7 @@ module Aws::IAM
       :user_name,
       :marker,
       :max_items)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5955,6 +6122,7 @@ module Aws::IAM
       :mfa_devices,
       :is_truncated,
       :marker)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5976,6 +6144,7 @@ module Aws::IAM
     #
     class ListOpenIDConnectProvidersResponse < Struct.new(
       :open_id_connect_provider_list)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6012,6 +6181,7 @@ module Aws::IAM
     class ListPoliciesGrantingServiceAccessEntry < Struct.new(
       :service_namespace,
       :policies)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6060,6 +6230,7 @@ module Aws::IAM
       :marker,
       :arn,
       :service_namespaces)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6089,6 +6260,7 @@ module Aws::IAM
       :policies_granting_service_access,
       :is_truncated,
       :marker)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6180,6 +6352,7 @@ module Aws::IAM
       :policy_usage_filter,
       :marker,
       :max_items)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6211,6 +6384,7 @@ module Aws::IAM
       :policies,
       :is_truncated,
       :marker)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6261,6 +6435,7 @@ module Aws::IAM
       :policy_arn,
       :marker,
       :max_items)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6299,6 +6474,7 @@ module Aws::IAM
       :versions,
       :is_truncated,
       :marker)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6350,6 +6526,7 @@ module Aws::IAM
       :role_name,
       :marker,
       :max_items)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6381,6 +6558,7 @@ module Aws::IAM
       :policy_names,
       :is_truncated,
       :marker)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6432,6 +6610,7 @@ module Aws::IAM
       :role_name,
       :marker,
       :max_items)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6463,6 +6642,7 @@ module Aws::IAM
       :tags,
       :is_truncated,
       :marker)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6520,6 +6700,7 @@ module Aws::IAM
       :path_prefix,
       :marker,
       :max_items)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6551,6 +6732,7 @@ module Aws::IAM
       :roles,
       :is_truncated,
       :marker)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6571,6 +6753,7 @@ module Aws::IAM
     #
     class ListSAMLProvidersResponse < Struct.new(
       :saml_provider_list)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6624,6 +6807,7 @@ module Aws::IAM
       :user_name,
       :marker,
       :max_items)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6655,6 +6839,7 @@ module Aws::IAM
       :ssh_public_keys,
       :is_truncated,
       :marker)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6712,6 +6897,7 @@ module Aws::IAM
       :path_prefix,
       :marker,
       :max_items)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6743,6 +6929,7 @@ module Aws::IAM
       :server_certificate_metadata_list,
       :is_truncated,
       :marker)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6781,6 +6968,7 @@ module Aws::IAM
     class ListServiceSpecificCredentialsRequest < Struct.new(
       :user_name,
       :service_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6793,6 +6981,7 @@ module Aws::IAM
     #
     class ListServiceSpecificCredentialsResponse < Struct.new(
       :service_specific_credentials)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6845,6 +7034,7 @@ module Aws::IAM
       :user_name,
       :marker,
       :max_items)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6876,6 +7066,7 @@ module Aws::IAM
       :certificates,
       :is_truncated,
       :marker)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6927,6 +7118,7 @@ module Aws::IAM
       :user_name,
       :marker,
       :max_items)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6958,6 +7150,7 @@ module Aws::IAM
       :policy_names,
       :is_truncated,
       :marker)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -7009,6 +7202,7 @@ module Aws::IAM
       :user_name,
       :marker,
       :max_items)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -7040,6 +7234,7 @@ module Aws::IAM
       :tags,
       :is_truncated,
       :marker)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -7097,6 +7292,7 @@ module Aws::IAM
       :path_prefix,
       :marker,
       :max_items)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -7128,6 +7324,7 @@ module Aws::IAM
       :users,
       :is_truncated,
       :marker)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -7173,6 +7370,7 @@ module Aws::IAM
       :assignment_status,
       :marker,
       :max_items)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -7205,6 +7403,7 @@ module Aws::IAM
       :virtual_mfa_devices,
       :is_truncated,
       :marker)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -7233,6 +7432,7 @@ module Aws::IAM
       :user_name,
       :create_date,
       :password_reset_required)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -7260,6 +7460,7 @@ module Aws::IAM
       :user_name,
       :serial_number,
       :enable_date)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -7273,6 +7474,7 @@ module Aws::IAM
     #
     class MalformedCertificateException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -7286,6 +7488,7 @@ module Aws::IAM
     #
     class MalformedPolicyDocumentException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -7421,6 +7624,7 @@ module Aws::IAM
       :create_date,
       :update_date,
       :policy_version_list)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -7434,6 +7638,7 @@ module Aws::IAM
     #
     class NoSuchEntityException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -7456,6 +7661,7 @@ module Aws::IAM
     #
     class OpenIDConnectProviderListEntry < Struct.new(
       :arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -7472,6 +7678,7 @@ module Aws::IAM
     #
     class OrganizationsDecisionDetail < Struct.new(
       :allowed_by_organizations)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -7540,6 +7747,7 @@ module Aws::IAM
       :max_password_age,
       :password_reuse_prevention,
       :hard_expiry)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -7553,6 +7761,7 @@ module Aws::IAM
     #
     class PasswordPolicyViolationException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -7576,6 +7785,7 @@ module Aws::IAM
     #
     class PermissionsBoundaryDecisionDetail < Struct.new(
       :allowed_by_permissions_boundary)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -7700,6 +7910,7 @@ module Aws::IAM
       :description,
       :create_date,
       :update_date)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -7722,6 +7933,7 @@ module Aws::IAM
     class PolicyDetail < Struct.new(
       :policy_name,
       :policy_document)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -7736,6 +7948,7 @@ module Aws::IAM
     #
     class PolicyEvaluationException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -7804,6 +8017,7 @@ module Aws::IAM
       :policy_arn,
       :entity_type,
       :entity_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -7839,6 +8053,7 @@ module Aws::IAM
     class PolicyGroup < Struct.new(
       :group_name,
       :group_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -7852,6 +8067,7 @@ module Aws::IAM
     #
     class PolicyNotAttachableException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -7887,6 +8103,7 @@ module Aws::IAM
     class PolicyRole < Struct.new(
       :role_name,
       :role_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -7922,6 +8139,7 @@ module Aws::IAM
     class PolicyUser < Struct.new(
       :user_name,
       :user_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -7986,6 +8204,7 @@ module Aws::IAM
       :version_id,
       :is_default_version,
       :create_date)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -8008,6 +8227,7 @@ module Aws::IAM
     class Position < Struct.new(
       :line,
       :column)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -8077,6 +8297,7 @@ module Aws::IAM
       :group_name,
       :policy_name,
       :policy_document)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -8103,6 +8324,7 @@ module Aws::IAM
     class PutRolePermissionsBoundaryRequest < Struct.new(
       :role_name,
       :permissions_boundary)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -8172,6 +8394,7 @@ module Aws::IAM
       :role_name,
       :policy_name,
       :policy_document)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -8198,6 +8421,7 @@ module Aws::IAM
     class PutUserPermissionsBoundaryRequest < Struct.new(
       :user_name,
       :permissions_boundary)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -8267,6 +8491,7 @@ module Aws::IAM
       :user_name,
       :policy_name,
       :policy_document)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -8302,6 +8527,7 @@ module Aws::IAM
     class RemoveClientIDFromOpenIDConnectProviderRequest < Struct.new(
       :open_id_connect_provider_arn,
       :client_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -8344,6 +8570,7 @@ module Aws::IAM
     class RemoveRoleFromInstanceProfileRequest < Struct.new(
       :instance_profile_name,
       :role_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -8386,6 +8613,7 @@ module Aws::IAM
     class RemoveUserFromGroupRequest < Struct.new(
       :group_name,
       :user_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -8399,6 +8627,7 @@ module Aws::IAM
     #
     class ReportGenerationLimitExceededException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -8442,6 +8671,7 @@ module Aws::IAM
     class ResetServiceSpecificCredentialRequest < Struct.new(
       :user_name,
       :service_specific_credential_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -8457,6 +8687,7 @@ module Aws::IAM
     #
     class ResetServiceSpecificCredentialResponse < Struct.new(
       :service_specific_credential)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -8518,6 +8749,7 @@ module Aws::IAM
       :missing_context_values,
       :eval_decision_details,
       :permissions_boundary_decision_detail)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -8576,6 +8808,7 @@ module Aws::IAM
       :serial_number,
       :authentication_code_1,
       :authentication_code_2)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -8689,6 +8922,7 @@ module Aws::IAM
       :permissions_boundary,
       :tags,
       :role_last_used)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -8811,6 +9045,7 @@ module Aws::IAM
       :permissions_boundary,
       :tags,
       :role_last_used)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -8852,6 +9087,7 @@ module Aws::IAM
     class RoleLastUsed < Struct.new(
       :last_used_date,
       :region)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -8874,6 +9110,7 @@ module Aws::IAM
     class RoleUsageType < Struct.new(
       :region,
       :resources)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -8897,6 +9134,7 @@ module Aws::IAM
       :arn,
       :valid_until,
       :create_date)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -8945,6 +9183,7 @@ module Aws::IAM
       :ssh_public_key_body,
       :status,
       :upload_date)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -8984,6 +9223,7 @@ module Aws::IAM
       :ssh_public_key_id,
       :status,
       :upload_date)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -9011,6 +9251,7 @@ module Aws::IAM
       :server_certificate_metadata,
       :certificate_body,
       :certificate_chain)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -9070,6 +9311,7 @@ module Aws::IAM
       :arn,
       :upload_date,
       :expiration)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -9083,6 +9325,7 @@ module Aws::IAM
     #
     class ServiceFailureException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -9189,6 +9432,7 @@ module Aws::IAM
       :last_authenticated_region,
       :total_authenticated_entities,
       :tracked_actions_last_accessed)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -9201,6 +9445,7 @@ module Aws::IAM
     #
     class ServiceNotSupportedException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -9255,6 +9500,7 @@ module Aws::IAM
       :service_specific_credential_id,
       :user_name,
       :status)
+      SENSITIVE = [:service_password]
       include Aws::Structure
     end
 
@@ -9301,6 +9547,7 @@ module Aws::IAM
       :create_date,
       :service_specific_credential_id,
       :service_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -9340,6 +9587,7 @@ module Aws::IAM
     class SetDefaultPolicyVersionRequest < Struct.new(
       :policy_arn,
       :version_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -9370,6 +9618,7 @@ module Aws::IAM
     #
     class SetSecurityTokenServicePreferencesRequest < Struct.new(
       :global_endpoint_token_version)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -9407,6 +9656,7 @@ module Aws::IAM
       :certificate_body,
       :status,
       :upload_date)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -9663,6 +9913,7 @@ module Aws::IAM
       :resource_handling_option,
       :max_items,
       :marker)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -9695,6 +9946,7 @@ module Aws::IAM
       :evaluation_results,
       :is_truncated,
       :marker)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -9972,6 +10224,7 @@ module Aws::IAM
       :resource_handling_option,
       :max_items,
       :marker)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -10005,6 +10258,7 @@ module Aws::IAM
       :source_policy_type,
       :start_position,
       :end_position)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -10051,6 +10305,7 @@ module Aws::IAM
     class Tag < Struct.new(
       :key,
       :value)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -10091,6 +10346,7 @@ module Aws::IAM
     class TagRoleRequest < Struct.new(
       :role_name,
       :tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -10130,6 +10386,7 @@ module Aws::IAM
     class TagUserRequest < Struct.new(
       :user_name,
       :tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -10190,6 +10447,7 @@ module Aws::IAM
       :last_accessed_entity,
       :last_accessed_time,
       :last_accessed_region)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -10205,6 +10463,7 @@ module Aws::IAM
     #
     class UnmodifiableEntityException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -10218,6 +10477,7 @@ module Aws::IAM
     #
     class UnrecognizedPublicKeyEncodingException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -10252,6 +10512,7 @@ module Aws::IAM
     class UntagRoleRequest < Struct.new(
       :role_name,
       :tag_keys)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -10286,6 +10547,7 @@ module Aws::IAM
     class UntagUserRequest < Struct.new(
       :user_name,
       :tag_keys)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -10335,6 +10597,7 @@ module Aws::IAM
       :user_name,
       :access_key_id,
       :status)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -10454,6 +10717,7 @@ module Aws::IAM
       :max_password_age,
       :password_reuse_prevention,
       :hard_expiry)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -10508,6 +10772,7 @@ module Aws::IAM
     class UpdateAssumeRolePolicyRequest < Struct.new(
       :role_name,
       :policy_document)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -10566,6 +10831,7 @@ module Aws::IAM
       :group_name,
       :new_path,
       :new_group_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -10626,6 +10892,7 @@ module Aws::IAM
       :user_name,
       :password,
       :password_reset_required)
+      SENSITIVE = [:password]
       include Aws::Structure
     end
 
@@ -10662,6 +10929,7 @@ module Aws::IAM
     class UpdateOpenIDConnectProviderThumbprintRequest < Struct.new(
       :open_id_connect_provider_arn,
       :thumbprint_list)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -10686,6 +10954,7 @@ module Aws::IAM
     class UpdateRoleDescriptionRequest < Struct.new(
       :role_name,
       :description)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -10697,6 +10966,7 @@ module Aws::IAM
     #
     class UpdateRoleDescriptionResponse < Struct.new(
       :role)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -10746,6 +11016,7 @@ module Aws::IAM
       :role_name,
       :description,
       :max_session_duration)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -10786,6 +11057,7 @@ module Aws::IAM
     class UpdateSAMLProviderRequest < Struct.new(
       :saml_metadata_document,
       :saml_provider_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -10800,6 +11072,7 @@ module Aws::IAM
     #
     class UpdateSAMLProviderResponse < Struct.new(
       :saml_provider_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -10849,6 +11122,7 @@ module Aws::IAM
       :user_name,
       :ssh_public_key_id,
       :status)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -10911,6 +11185,7 @@ module Aws::IAM
       :server_certificate_name,
       :new_path,
       :new_server_certificate_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -10960,6 +11235,7 @@ module Aws::IAM
       :user_name,
       :service_specific_credential_id,
       :status)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -11009,6 +11285,7 @@ module Aws::IAM
       :user_name,
       :certificate_id,
       :status)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -11067,6 +11344,7 @@ module Aws::IAM
       :user_name,
       :new_path,
       :new_user_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -11119,6 +11397,7 @@ module Aws::IAM
     class UploadSSHPublicKeyRequest < Struct.new(
       :user_name,
       :ssh_public_key_body)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -11132,6 +11411,7 @@ module Aws::IAM
     #
     class UploadSSHPublicKeyResponse < Struct.new(
       :ssh_public_key)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -11255,6 +11535,7 @@ module Aws::IAM
       :certificate_body,
       :private_key,
       :certificate_chain)
+      SENSITIVE = [:private_key]
       include Aws::Structure
     end
 
@@ -11269,6 +11550,7 @@ module Aws::IAM
     #
     class UploadServerCertificateResponse < Struct.new(
       :server_certificate_metadata)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -11318,6 +11600,7 @@ module Aws::IAM
     class UploadSigningCertificateRequest < Struct.new(
       :user_name,
       :certificate_body)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -11332,6 +11615,7 @@ module Aws::IAM
     #
     class UploadSigningCertificateResponse < Struct.new(
       :certificate)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -11449,6 +11733,7 @@ module Aws::IAM
       :password_last_used,
       :permissions_boundary,
       :tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -11549,6 +11834,7 @@ module Aws::IAM
       :attached_managed_policies,
       :permissions_boundary,
       :tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -11592,6 +11878,7 @@ module Aws::IAM
       :qr_code_png,
       :user,
       :enable_date)
+      SENSITIVE = [:base_32_string_seed, :qr_code_png]
       include Aws::Structure
     end
 

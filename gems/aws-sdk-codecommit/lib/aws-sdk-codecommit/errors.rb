@@ -119,6 +119,8 @@ module Aws::CodeCommit
   # * {InvalidPullRequestIdException}
   # * {InvalidPullRequestStatusException}
   # * {InvalidPullRequestStatusUpdateException}
+  # * {InvalidReactionUserArnException}
+  # * {InvalidReactionValueException}
   # * {InvalidReferenceNameException}
   # * {InvalidRelativeFileVersionEnumException}
   # * {InvalidReplacementContentException}
@@ -175,6 +177,8 @@ module Aws::CodeCommit
   # * {PullRequestIdRequiredException}
   # * {PullRequestStatusRequiredException}
   # * {PutFileEntryConflictException}
+  # * {ReactionLimitExceededException}
+  # * {ReactionValueRequiredException}
   # * {ReferenceDoesNotExistException}
   # * {ReferenceNameRequiredException}
   # * {ReferenceTypeNotSupportedException}
@@ -1135,6 +1139,26 @@ module Aws::CodeCommit
       end
     end
 
+    class InvalidReactionUserArnException < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::CodeCommit::Types::InvalidReactionUserArnException] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+    end
+
+    class InvalidReactionValueException < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::CodeCommit::Types::InvalidReactionValueException] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+    end
+
     class InvalidReferenceNameException < ServiceError
 
       # @param [Seahorse::Client::RequestContext] context
@@ -1690,6 +1714,26 @@ module Aws::CodeCommit
       # @param [Seahorse::Client::RequestContext] context
       # @param [String] message
       # @param [Aws::CodeCommit::Types::PutFileEntryConflictException] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+    end
+
+    class ReactionLimitExceededException < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::CodeCommit::Types::ReactionLimitExceededException] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+    end
+
+    class ReactionValueRequiredException < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::CodeCommit::Types::ReactionValueRequiredException] data
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end

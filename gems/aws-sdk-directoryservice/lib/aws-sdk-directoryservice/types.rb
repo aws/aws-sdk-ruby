@@ -27,6 +27,7 @@ module Aws::DirectoryService
     #
     class AcceptSharedDirectoryRequest < Struct.new(
       :shared_directory_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -38,6 +39,7 @@ module Aws::DirectoryService
     #
     class AcceptSharedDirectoryResult < Struct.new(
       :shared_directory)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -56,6 +58,7 @@ module Aws::DirectoryService
     class AccessDeniedException < Struct.new(
       :message,
       :request_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -155,6 +158,7 @@ module Aws::DirectoryService
       :directory_id,
       :ip_routes,
       :update_security_group_for_directory_controllers)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -188,6 +192,7 @@ module Aws::DirectoryService
     class AddTagsToResourceRequest < Struct.new(
       :resource_id,
       :tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -218,6 +223,7 @@ module Aws::DirectoryService
     class Attribute < Struct.new(
       :name,
       :value)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -236,6 +242,7 @@ module Aws::DirectoryService
     class AuthenticationFailedException < Struct.new(
       :message,
       :request_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -261,6 +268,7 @@ module Aws::DirectoryService
     class CancelSchemaExtensionRequest < Struct.new(
       :directory_id,
       :schema_extension_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -303,6 +311,7 @@ module Aws::DirectoryService
       :common_name,
       :registered_date_time,
       :expiry_date_time)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -321,6 +330,7 @@ module Aws::DirectoryService
     class CertificateAlreadyExistsException < Struct.new(
       :message,
       :request_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -340,6 +350,7 @@ module Aws::DirectoryService
     class CertificateDoesNotExistException < Struct.new(
       :message,
       :request_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -359,6 +370,7 @@ module Aws::DirectoryService
     class CertificateInUseException < Struct.new(
       :message,
       :request_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -387,6 +399,7 @@ module Aws::DirectoryService
       :common_name,
       :state,
       :expiry_date_time)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -406,6 +419,7 @@ module Aws::DirectoryService
     class CertificateLimitExceededException < Struct.new(
       :message,
       :request_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -424,6 +438,7 @@ module Aws::DirectoryService
     class ClientException < Struct.new(
       :message,
       :request_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -448,6 +463,7 @@ module Aws::DirectoryService
       :computer_id,
       :computer_name,
       :computer_attributes)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -478,6 +494,7 @@ module Aws::DirectoryService
       :remote_domain_name,
       :dns_ip_addrs,
       :replication_scope)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -546,6 +563,7 @@ module Aws::DirectoryService
       :size,
       :connect_settings,
       :tags)
+      SENSITIVE = [:password]
       include Aws::Structure
     end
 
@@ -559,6 +577,7 @@ module Aws::DirectoryService
     #
     class ConnectDirectoryResult < Struct.new(
       :directory_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -589,6 +608,7 @@ module Aws::DirectoryService
     class CreateAliasRequest < Struct.new(
       :directory_id,
       :alias)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -607,6 +627,7 @@ module Aws::DirectoryService
     class CreateAliasResult < Struct.new(
       :directory_id,
       :alias)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -661,6 +682,7 @@ module Aws::DirectoryService
       :password,
       :organizational_unit_distinguished_name,
       :computer_attributes)
+      SENSITIVE = [:password]
       include Aws::Structure
     end
 
@@ -674,6 +696,7 @@ module Aws::DirectoryService
     #
     class CreateComputerResult < Struct.new(
       :computer)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -712,6 +735,7 @@ module Aws::DirectoryService
       :directory_id,
       :remote_domain_name,
       :dns_ip_addrs)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -789,6 +813,7 @@ module Aws::DirectoryService
       :size,
       :vpc_settings,
       :tags)
+      SENSITIVE = [:password]
       include Aws::Structure
     end
 
@@ -802,6 +827,7 @@ module Aws::DirectoryService
     #
     class CreateDirectoryResult < Struct.new(
       :directory_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -828,6 +854,7 @@ module Aws::DirectoryService
     class CreateLogSubscriptionRequest < Struct.new(
       :directory_id,
       :log_group_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -907,6 +934,7 @@ module Aws::DirectoryService
       :vpc_settings,
       :edition,
       :tags)
+      SENSITIVE = [:password]
       include Aws::Structure
     end
 
@@ -920,6 +948,7 @@ module Aws::DirectoryService
     #
     class CreateMicrosoftADResult < Struct.new(
       :directory_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -946,6 +975,7 @@ module Aws::DirectoryService
     class CreateSnapshotRequest < Struct.new(
       :directory_id,
       :name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -959,6 +989,7 @@ module Aws::DirectoryService
     #
     class CreateSnapshotResult < Struct.new(
       :snapshot_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1028,6 +1059,7 @@ module Aws::DirectoryService
       :trust_type,
       :conditional_forwarder_ip_addrs,
       :selective_auth)
+      SENSITIVE = [:trust_password]
       include Aws::Structure
     end
 
@@ -1041,6 +1073,7 @@ module Aws::DirectoryService
     #
     class CreateTrustResult < Struct.new(
       :trust_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1069,6 +1102,7 @@ module Aws::DirectoryService
     class DeleteConditionalForwarderRequest < Struct.new(
       :directory_id,
       :remote_domain_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1095,6 +1129,7 @@ module Aws::DirectoryService
     #
     class DeleteDirectoryRequest < Struct.new(
       :directory_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1108,6 +1143,7 @@ module Aws::DirectoryService
     #
     class DeleteDirectoryResult < Struct.new(
       :directory_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1127,6 +1163,7 @@ module Aws::DirectoryService
     #
     class DeleteLogSubscriptionRequest < Struct.new(
       :directory_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1151,6 +1188,7 @@ module Aws::DirectoryService
     #
     class DeleteSnapshotRequest < Struct.new(
       :snapshot_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1164,6 +1202,7 @@ module Aws::DirectoryService
     #
     class DeleteSnapshotResult < Struct.new(
       :snapshot_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1191,6 +1230,7 @@ module Aws::DirectoryService
     class DeleteTrustRequest < Struct.new(
       :trust_id,
       :delete_associated_conditional_forwarder)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1204,6 +1244,7 @@ module Aws::DirectoryService
     #
     class DeleteTrustResult < Struct.new(
       :trust_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1228,6 +1269,7 @@ module Aws::DirectoryService
     class DeregisterCertificateRequest < Struct.new(
       :directory_id,
       :certificate_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1261,6 +1303,7 @@ module Aws::DirectoryService
     class DeregisterEventTopicRequest < Struct.new(
       :directory_id,
       :topic_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1291,6 +1334,7 @@ module Aws::DirectoryService
     class DescribeCertificateRequest < Struct.new(
       :directory_id,
       :certificate_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1304,6 +1348,7 @@ module Aws::DirectoryService
     #
     class DescribeCertificateResult < Struct.new(
       :certificate)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1333,6 +1378,7 @@ module Aws::DirectoryService
     class DescribeConditionalForwardersRequest < Struct.new(
       :directory_id,
       :remote_domain_names)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1346,6 +1392,7 @@ module Aws::DirectoryService
     #
     class DescribeConditionalForwardersResult < Struct.new(
       :conditional_forwarders)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1386,6 +1433,7 @@ module Aws::DirectoryService
       :directory_ids,
       :next_token,
       :limit)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1411,6 +1459,7 @@ module Aws::DirectoryService
     class DescribeDirectoriesResult < Struct.new(
       :directory_descriptions,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1450,6 +1499,7 @@ module Aws::DirectoryService
       :domain_controller_ids,
       :next_token,
       :limit)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1468,6 +1518,7 @@ module Aws::DirectoryService
     class DescribeDomainControllersResult < Struct.new(
       :domain_controllers,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1501,6 +1552,7 @@ module Aws::DirectoryService
     class DescribeEventTopicsRequest < Struct.new(
       :directory_id,
       :topic_names)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1515,6 +1567,7 @@ module Aws::DirectoryService
     #
     class DescribeEventTopicsResult < Struct.new(
       :event_topics)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1552,6 +1605,7 @@ module Aws::DirectoryService
       :type,
       :next_token,
       :limit)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1571,6 +1625,7 @@ module Aws::DirectoryService
     class DescribeLDAPSSettingsResult < Struct.new(
       :ldaps_settings_info,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1610,6 +1665,7 @@ module Aws::DirectoryService
       :shared_directory_ids,
       :next_token,
       :limit)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1628,6 +1684,7 @@ module Aws::DirectoryService
     class DescribeSharedDirectoriesResult < Struct.new(
       :shared_directories,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1670,6 +1727,7 @@ module Aws::DirectoryService
       :snapshot_ids,
       :next_token,
       :limit)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1694,6 +1752,7 @@ module Aws::DirectoryService
     class DescribeSnapshotsResult < Struct.new(
       :snapshots,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1742,6 +1801,7 @@ module Aws::DirectoryService
       :trust_ids,
       :next_token,
       :limit)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1767,6 +1827,7 @@ module Aws::DirectoryService
     class DescribeTrustsResult < Struct.new(
       :trusts,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1785,6 +1846,7 @@ module Aws::DirectoryService
     class DirectoryAlreadySharedException < Struct.new(
       :message,
       :request_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1834,6 +1896,7 @@ module Aws::DirectoryService
       :subnet_ids,
       :customer_dns_ips,
       :customer_user_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1872,6 +1935,7 @@ module Aws::DirectoryService
       :security_group_id,
       :availability_zones,
       :connect_ips)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2025,6 +2089,7 @@ module Aws::DirectoryService
       :sso_enabled,
       :desired_number_of_domain_controllers,
       :owner_directory_description)
+      SENSITIVE = [:share_notes]
       include Aws::Structure
     end
 
@@ -2043,6 +2108,7 @@ module Aws::DirectoryService
     class DirectoryDoesNotExistException < Struct.new(
       :message,
       :request_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2063,6 +2129,7 @@ module Aws::DirectoryService
     class DirectoryLimitExceededException < Struct.new(
       :message,
       :request_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2119,6 +2186,7 @@ module Aws::DirectoryService
       :connected_directories_limit,
       :connected_directories_current_count,
       :connected_directories_limit_reached)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2137,6 +2205,7 @@ module Aws::DirectoryService
     class DirectoryNotSharedException < Struct.new(
       :message,
       :request_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2155,6 +2224,7 @@ module Aws::DirectoryService
     class DirectoryUnavailableException < Struct.new(
       :message,
       :request_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2185,6 +2255,7 @@ module Aws::DirectoryService
     class DirectoryVpcSettings < Struct.new(
       :vpc_id,
       :subnet_ids)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2213,6 +2284,7 @@ module Aws::DirectoryService
       :subnet_ids,
       :security_group_id,
       :availability_zones)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2238,6 +2310,7 @@ module Aws::DirectoryService
     class DisableLDAPSRequest < Struct.new(
       :directory_id,
       :type)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2262,6 +2335,7 @@ module Aws::DirectoryService
     #
     class DisableRadiusRequest < Struct.new(
       :directory_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2311,6 +2385,7 @@ module Aws::DirectoryService
       :directory_id,
       :user_name,
       :password)
+      SENSITIVE = [:password]
       include Aws::Structure
     end
 
@@ -2377,6 +2452,7 @@ module Aws::DirectoryService
       :status_reason,
       :launch_time,
       :status_last_updated_date_time)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2396,6 +2472,7 @@ module Aws::DirectoryService
     class DomainControllerLimitExceededException < Struct.new(
       :message,
       :request_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2421,6 +2498,7 @@ module Aws::DirectoryService
     class EnableLDAPSRequest < Struct.new(
       :directory_id,
       :type)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2461,6 +2539,7 @@ module Aws::DirectoryService
     class EnableRadiusRequest < Struct.new(
       :directory_id,
       :radius_settings)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2509,6 +2588,7 @@ module Aws::DirectoryService
       :directory_id,
       :user_name,
       :password)
+      SENSITIVE = [:password]
       include Aws::Structure
     end
 
@@ -2533,6 +2613,7 @@ module Aws::DirectoryService
     class EntityAlreadyExistsException < Struct.new(
       :message,
       :request_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2551,6 +2632,7 @@ module Aws::DirectoryService
     class EntityDoesNotExistException < Struct.new(
       :message,
       :request_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2588,6 +2670,7 @@ module Aws::DirectoryService
       :topic_arn,
       :created_date_time,
       :status)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2610,6 +2693,7 @@ module Aws::DirectoryService
     #
     class GetDirectoryLimitsResult < Struct.new(
       :directory_limits)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2630,6 +2714,7 @@ module Aws::DirectoryService
     #
     class GetSnapshotLimitsRequest < Struct.new(
       :directory_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2644,6 +2729,7 @@ module Aws::DirectoryService
     #
     class GetSnapshotLimitsResult < Struct.new(
       :snapshot_limits)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2663,6 +2749,7 @@ module Aws::DirectoryService
     class InsufficientPermissionsException < Struct.new(
       :message,
       :request_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2681,6 +2768,7 @@ module Aws::DirectoryService
     class InvalidCertificateException < Struct.new(
       :message,
       :request_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2700,6 +2788,7 @@ module Aws::DirectoryService
     class InvalidLDAPSStatusException < Struct.new(
       :message,
       :request_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2718,6 +2807,7 @@ module Aws::DirectoryService
     class InvalidNextTokenException < Struct.new(
       :message,
       :request_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2736,6 +2826,7 @@ module Aws::DirectoryService
     class InvalidParameterException < Struct.new(
       :message,
       :request_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2755,6 +2846,7 @@ module Aws::DirectoryService
     class InvalidPasswordException < Struct.new(
       :message,
       :request_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2773,6 +2865,7 @@ module Aws::DirectoryService
     class InvalidTargetException < Struct.new(
       :message,
       :request_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2803,6 +2896,7 @@ module Aws::DirectoryService
     class IpRoute < Struct.new(
       :cidr_ip,
       :description)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2841,6 +2935,7 @@ module Aws::DirectoryService
       :added_date_time,
       :ip_route_status_reason,
       :description)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2860,6 +2955,7 @@ module Aws::DirectoryService
     class IpRouteLimitExceededException < Struct.new(
       :message,
       :request_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2883,6 +2979,7 @@ module Aws::DirectoryService
       :ldaps_status,
       :ldaps_status_reason,
       :last_updated_date_time)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2917,6 +3014,7 @@ module Aws::DirectoryService
       :directory_id,
       :next_token,
       :limit)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2935,6 +3033,7 @@ module Aws::DirectoryService
     class ListCertificatesResult < Struct.new(
       :next_token,
       :certificates_info)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2969,6 +3068,7 @@ module Aws::DirectoryService
       :directory_id,
       :next_token,
       :limit)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2987,6 +3087,7 @@ module Aws::DirectoryService
     class ListIpRoutesResult < Struct.new(
       :ip_routes_info,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3021,6 +3122,7 @@ module Aws::DirectoryService
       :directory_id,
       :next_token,
       :limit)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3038,6 +3140,7 @@ module Aws::DirectoryService
     class ListLogSubscriptionsResult < Struct.new(
       :log_subscriptions,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3070,6 +3173,7 @@ module Aws::DirectoryService
       :directory_id,
       :next_token,
       :limit)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3088,6 +3192,7 @@ module Aws::DirectoryService
     class ListSchemaExtensionsResult < Struct.new(
       :schema_extensions_info,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3119,6 +3224,7 @@ module Aws::DirectoryService
       :resource_id,
       :next_token,
       :limit)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3135,6 +3241,7 @@ module Aws::DirectoryService
     class ListTagsForResourceResult < Struct.new(
       :tags,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3160,6 +3267,7 @@ module Aws::DirectoryService
       :directory_id,
       :log_group_name,
       :subscription_created_date_time)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3179,6 +3287,7 @@ module Aws::DirectoryService
     class NoAvailableCertificateException < Struct.new(
       :message,
       :request_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3197,6 +3306,7 @@ module Aws::DirectoryService
     class OrganizationsException < Struct.new(
       :message,
       :request_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3238,6 +3348,7 @@ module Aws::DirectoryService
       :vpc_settings,
       :radius_settings,
       :radius_status)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3307,6 +3418,7 @@ module Aws::DirectoryService
       :authentication_protocol,
       :display_label,
       :use_same_username)
+      SENSITIVE = [:shared_secret]
       include Aws::Structure
     end
 
@@ -3331,6 +3443,7 @@ module Aws::DirectoryService
     class RegisterCertificateRequest < Struct.new(
       :directory_id,
       :certificate_data)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3342,6 +3455,7 @@ module Aws::DirectoryService
     #
     class RegisterCertificateResult < Struct.new(
       :certificate_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3370,6 +3484,7 @@ module Aws::DirectoryService
     class RegisterEventTopicRequest < Struct.new(
       :directory_id,
       :topic_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3396,6 +3511,7 @@ module Aws::DirectoryService
     #
     class RejectSharedDirectoryRequest < Struct.new(
       :shared_directory_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3408,6 +3524,7 @@ module Aws::DirectoryService
     #
     class RejectSharedDirectoryResult < Struct.new(
       :shared_directory_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3433,6 +3550,7 @@ module Aws::DirectoryService
     class RemoveIpRoutesRequest < Struct.new(
       :directory_id,
       :cidr_ips)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3461,6 +3579,7 @@ module Aws::DirectoryService
     class RemoveTagsFromResourceRequest < Struct.new(
       :resource_id,
       :tag_keys)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3496,6 +3615,7 @@ module Aws::DirectoryService
       :directory_id,
       :user_name,
       :new_password)
+      SENSITIVE = [:new_password]
       include Aws::Structure
     end
 
@@ -3521,6 +3641,7 @@ module Aws::DirectoryService
     #
     class RestoreFromSnapshotRequest < Struct.new(
       :snapshot_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3572,6 +3693,7 @@ module Aws::DirectoryService
       :schema_extension_status_reason,
       :start_date_time,
       :end_date_time)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3590,6 +3712,7 @@ module Aws::DirectoryService
     class ServiceException < Struct.new(
       :message,
       :request_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3637,6 +3760,7 @@ module Aws::DirectoryService
       :share_notes,
       :share_target,
       :share_method)
+      SENSITIVE = [:share_notes]
       include Aws::Structure
     end
 
@@ -3649,6 +3773,7 @@ module Aws::DirectoryService
     #
     class ShareDirectoryResult < Struct.new(
       :shared_directory_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3668,6 +3793,7 @@ module Aws::DirectoryService
     class ShareLimitExceededException < Struct.new(
       :message,
       :request_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3694,6 +3820,7 @@ module Aws::DirectoryService
     class ShareTarget < Struct.new(
       :id,
       :type)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3761,6 +3888,7 @@ module Aws::DirectoryService
       :share_notes,
       :created_date_time,
       :last_updated_date_time)
+      SENSITIVE = [:share_notes]
       include Aws::Structure
     end
 
@@ -3799,6 +3927,7 @@ module Aws::DirectoryService
       :name,
       :status,
       :start_time)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3819,6 +3948,7 @@ module Aws::DirectoryService
     class SnapshotLimitExceededException < Struct.new(
       :message,
       :request_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3842,6 +3972,7 @@ module Aws::DirectoryService
       :manual_snapshots_limit,
       :manual_snapshots_current_count,
       :manual_snapshots_limit_reached)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3883,6 +4014,7 @@ module Aws::DirectoryService
       :create_snapshot_before_schema_extension,
       :ldif_content,
       :description)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3894,6 +4026,7 @@ module Aws::DirectoryService
     #
     class StartSchemaExtensionResult < Struct.new(
       :schema_extension_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3928,6 +4061,7 @@ module Aws::DirectoryService
     class Tag < Struct.new(
       :key,
       :value)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3946,6 +4080,7 @@ module Aws::DirectoryService
     class TagLimitExceededException < Struct.new(
       :message,
       :request_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4012,6 +4147,7 @@ module Aws::DirectoryService
       :state_last_updated_date_time,
       :trust_state_reason,
       :selective_auth)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4041,6 +4177,7 @@ module Aws::DirectoryService
     class UnshareDirectoryRequest < Struct.new(
       :directory_id,
       :unshare_target)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4053,6 +4190,7 @@ module Aws::DirectoryService
     #
     class UnshareDirectoryResult < Struct.new(
       :shared_directory_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4080,6 +4218,7 @@ module Aws::DirectoryService
     class UnshareTarget < Struct.new(
       :id,
       :type)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4098,6 +4237,7 @@ module Aws::DirectoryService
     class UnsupportedOperationException < Struct.new(
       :message,
       :request_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4133,6 +4273,7 @@ module Aws::DirectoryService
       :directory_id,
       :remote_domain_name,
       :dns_ip_addrs)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4164,6 +4305,7 @@ module Aws::DirectoryService
     class UpdateNumberOfDomainControllersRequest < Struct.new(
       :directory_id,
       :desired_number)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4205,6 +4347,7 @@ module Aws::DirectoryService
     class UpdateRadiusRequest < Struct.new(
       :directory_id,
       :radius_settings)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4235,6 +4378,7 @@ module Aws::DirectoryService
     class UpdateTrustRequest < Struct.new(
       :trust_id,
       :selective_auth)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4251,6 +4395,7 @@ module Aws::DirectoryService
     class UpdateTrustResult < Struct.new(
       :request_id,
       :trust_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4269,6 +4414,7 @@ module Aws::DirectoryService
     class UserDoesNotExistException < Struct.new(
       :message,
       :request_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4290,6 +4436,7 @@ module Aws::DirectoryService
     #
     class VerifyTrustRequest < Struct.new(
       :trust_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4303,6 +4450,7 @@ module Aws::DirectoryService
     #
     class VerifyTrustResult < Struct.new(
       :trust_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 

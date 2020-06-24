@@ -19,6 +19,7 @@ module Aws::PinpointSMSVoice
     #
     class AlreadyExistsException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -31,6 +32,7 @@ module Aws::PinpointSMSVoice
     #
     class BadRequestException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -53,6 +55,7 @@ module Aws::PinpointSMSVoice
     #
     class CallInstructionsMessageType < Struct.new(
       :text)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -83,6 +86,7 @@ module Aws::PinpointSMSVoice
     class CloudWatchLogsDestination < Struct.new(
       :iam_role_arn,
       :log_group_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -128,6 +132,7 @@ module Aws::PinpointSMSVoice
       :configuration_set_name,
       :event_destination,
       :event_destination_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -155,6 +160,7 @@ module Aws::PinpointSMSVoice
     #
     class CreateConfigurationSetRequest < Struct.new(
       :configuration_set_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -184,6 +190,7 @@ module Aws::PinpointSMSVoice
     class DeleteConfigurationSetEventDestinationRequest < Struct.new(
       :configuration_set_name,
       :event_destination_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -208,6 +215,7 @@ module Aws::PinpointSMSVoice
     #
     class DeleteConfigurationSetRequest < Struct.new(
       :configuration_set_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -260,6 +268,7 @@ module Aws::PinpointSMSVoice
       :matching_event_types,
       :name,
       :sns_destination)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -319,6 +328,7 @@ module Aws::PinpointSMSVoice
       :kinesis_firehose_destination,
       :matching_event_types,
       :sns_destination)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -336,6 +346,7 @@ module Aws::PinpointSMSVoice
     #
     class GetConfigurationSetEventDestinationsRequest < Struct.new(
       :configuration_set_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -351,6 +362,7 @@ module Aws::PinpointSMSVoice
     #
     class GetConfigurationSetEventDestinationsResponse < Struct.new(
       :event_destinations)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -365,6 +377,7 @@ module Aws::PinpointSMSVoice
     #
     class InternalServiceErrorException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -394,6 +407,7 @@ module Aws::PinpointSMSVoice
     class KinesisFirehoseDestination < Struct.new(
       :delivery_stream_arn,
       :iam_role_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -406,6 +420,7 @@ module Aws::PinpointSMSVoice
     #
     class LimitExceededException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -428,6 +443,7 @@ module Aws::PinpointSMSVoice
     class ListConfigurationSetsRequest < Struct.new(
       :next_token,
       :page_size)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -449,6 +465,7 @@ module Aws::PinpointSMSVoice
     class ListConfigurationSetsResponse < Struct.new(
       :configuration_sets,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -461,6 +478,7 @@ module Aws::PinpointSMSVoice
     #
     class NotFoundException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -496,6 +514,7 @@ module Aws::PinpointSMSVoice
       :language_code,
       :text,
       :voice_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -531,6 +550,7 @@ module Aws::PinpointSMSVoice
       :language_code,
       :text,
       :voice_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -595,6 +615,7 @@ module Aws::PinpointSMSVoice
       :content,
       :destination_phone_number,
       :origination_phone_number)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -609,6 +630,7 @@ module Aws::PinpointSMSVoice
     #
     class SendVoiceMessageResponse < Struct.new(
       :message_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -631,6 +653,7 @@ module Aws::PinpointSMSVoice
     #
     class SnsDestination < Struct.new(
       :topic_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -644,6 +667,7 @@ module Aws::PinpointSMSVoice
     #
     class TooManyRequestsException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -689,6 +713,7 @@ module Aws::PinpointSMSVoice
       :configuration_set_name,
       :event_destination,
       :event_destination_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -740,6 +765,7 @@ module Aws::PinpointSMSVoice
       :call_instructions_message,
       :plain_text_message,
       :ssml_message)
+      SENSITIVE = []
       include Aws::Structure
     end
 

@@ -46,6 +46,7 @@ module Aws::Support
     class AddAttachmentsToSetRequest < Struct.new(
       :attachment_set_id,
       :attachments)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -68,6 +69,7 @@ module Aws::Support
     class AddAttachmentsToSetResponse < Struct.new(
       :attachment_set_id,
       :expiry_time)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -108,6 +110,7 @@ module Aws::Support
       :communication_body,
       :cc_email_addresses,
       :attachment_set_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -122,6 +125,7 @@ module Aws::Support
     #
     class AddCommunicationToCaseResponse < Struct.new(
       :result)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -149,6 +153,7 @@ module Aws::Support
     class Attachment < Struct.new(
       :file_name,
       :data)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -169,6 +174,7 @@ module Aws::Support
     class AttachmentDetails < Struct.new(
       :attachment_id,
       :file_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -182,6 +188,7 @@ module Aws::Support
     #
     class AttachmentIdNotFound < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -197,6 +204,7 @@ module Aws::Support
     #
     class AttachmentLimitExceeded < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -212,6 +220,7 @@ module Aws::Support
     #
     class AttachmentSetExpired < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -225,6 +234,7 @@ module Aws::Support
     #
     class AttachmentSetIdNotFound < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -240,6 +250,7 @@ module Aws::Support
     #
     class AttachmentSetSizeLimitExceeded < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -254,6 +265,7 @@ module Aws::Support
     #
     class CaseCreationLimitExceeded < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -402,6 +414,7 @@ module Aws::Support
       :recent_communications,
       :cc_email_addresses,
       :language)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -415,6 +428,7 @@ module Aws::Support
     #
     class CaseIdNotFound < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -435,6 +449,7 @@ module Aws::Support
     class Category < Struct.new(
       :code,
       :name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -477,6 +492,7 @@ module Aws::Support
       :submitted_by,
       :time_created,
       :attachment_set)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -585,6 +601,7 @@ module Aws::Support
       :language,
       :issue_type,
       :attachment_set_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -601,6 +618,7 @@ module Aws::Support
     #
     class CreateCaseResponse < Struct.new(
       :case_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -616,6 +634,7 @@ module Aws::Support
     #
     class DescribeAttachmentLimitExceeded < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -635,6 +654,7 @@ module Aws::Support
     #
     class DescribeAttachmentRequest < Struct.new(
       :attachment_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -654,6 +674,7 @@ module Aws::Support
     #
     class DescribeAttachmentResponse < Struct.new(
       :attachment)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -732,6 +753,7 @@ module Aws::Support
       :max_results,
       :language,
       :include_communications)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -755,6 +777,7 @@ module Aws::Support
     class DescribeCasesResponse < Struct.new(
       :cases,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -803,6 +826,7 @@ module Aws::Support
       :after_time,
       :next_token,
       :max_results)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -821,6 +845,7 @@ module Aws::Support
     class DescribeCommunicationsResponse < Struct.new(
       :communications,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -848,6 +873,7 @@ module Aws::Support
     class DescribeServicesRequest < Struct.new(
       :service_code_list,
       :language)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -861,6 +887,7 @@ module Aws::Support
     #
     class DescribeServicesResponse < Struct.new(
       :services)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -882,6 +909,7 @@ module Aws::Support
     #
     class DescribeSeverityLevelsRequest < Struct.new(
       :language)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -898,6 +926,7 @@ module Aws::Support
     #
     class DescribeSeverityLevelsResponse < Struct.new(
       :severity_levels)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -921,6 +950,7 @@ module Aws::Support
     #
     class DescribeTrustedAdvisorCheckRefreshStatusesRequest < Struct.new(
       :check_ids)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -935,6 +965,7 @@ module Aws::Support
     #
     class DescribeTrustedAdvisorCheckRefreshStatusesResponse < Struct.new(
       :statuses)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -962,6 +993,7 @@ module Aws::Support
     class DescribeTrustedAdvisorCheckResultRequest < Struct.new(
       :check_id,
       :language)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -976,6 +1008,7 @@ module Aws::Support
     #
     class DescribeTrustedAdvisorCheckResultResponse < Struct.new(
       :result)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -994,6 +1027,7 @@ module Aws::Support
     #
     class DescribeTrustedAdvisorCheckSummariesRequest < Struct.new(
       :check_ids)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1008,6 +1042,7 @@ module Aws::Support
     #
     class DescribeTrustedAdvisorCheckSummariesResponse < Struct.new(
       :summaries)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1029,6 +1064,7 @@ module Aws::Support
     #
     class DescribeTrustedAdvisorChecksRequest < Struct.new(
       :language)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1043,6 +1079,7 @@ module Aws::Support
     #
     class DescribeTrustedAdvisorChecksResponse < Struct.new(
       :checks)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1056,6 +1093,7 @@ module Aws::Support
     #
     class InternalServerError < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1074,6 +1112,7 @@ module Aws::Support
     class RecentCaseCommunications < Struct.new(
       :communications,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1094,6 +1133,7 @@ module Aws::Support
     #
     class RefreshTrustedAdvisorCheckRequest < Struct.new(
       :check_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1108,6 +1148,7 @@ module Aws::Support
     #
     class RefreshTrustedAdvisorCheckResponse < Struct.new(
       :status)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1128,6 +1169,7 @@ module Aws::Support
     #
     class ResolveCaseRequest < Struct.new(
       :case_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1146,6 +1188,7 @@ module Aws::Support
     class ResolveCaseResponse < Struct.new(
       :initial_case_status,
       :final_case_status)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1176,6 +1219,7 @@ module Aws::Support
       :code,
       :name,
       :categories)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1229,6 +1273,7 @@ module Aws::Support
     class SeverityLevel < Struct.new(
       :code,
       :name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1244,6 +1289,7 @@ module Aws::Support
     #
     class TrustedAdvisorCategorySpecificSummary < Struct.new(
       :cost_optimizing)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1283,6 +1329,7 @@ module Aws::Support
       :description,
       :category,
       :metadata)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1321,6 +1368,7 @@ module Aws::Support
       :check_id,
       :status,
       :millis_until_next_refreshable)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1363,6 +1411,7 @@ module Aws::Support
       :resources_summary,
       :category_specific_summary,
       :flagged_resources)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1405,6 +1454,7 @@ module Aws::Support
       :has_flagged_resources,
       :resources_summary,
       :category_specific_summary)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1426,6 +1476,7 @@ module Aws::Support
     class TrustedAdvisorCostOptimizingSummary < Struct.new(
       :estimated_monthly_savings,
       :estimated_percent_monthly_savings)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1467,6 +1518,7 @@ module Aws::Support
       :resource_id,
       :is_suppressed,
       :metadata)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1500,6 +1552,7 @@ module Aws::Support
       :resources_flagged,
       :resources_ignored,
       :resources_suppressed)
+      SENSITIVE = []
       include Aws::Structure
     end
 

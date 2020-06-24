@@ -53,6 +53,7 @@ module Aws::PinpointEmail
       :rbl_name,
       :listing_time,
       :description)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -89,6 +90,7 @@ module Aws::PinpointEmail
     class Body < Struct.new(
       :text,
       :html)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -118,6 +120,7 @@ module Aws::PinpointEmail
     #
     class CloudWatchDestination < Struct.new(
       :dimension_configurations)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -170,6 +173,7 @@ module Aws::PinpointEmail
       :dimension_name,
       :dimension_value_source,
       :default_dimension_value)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -207,6 +211,7 @@ module Aws::PinpointEmail
     class Content < Struct.new(
       :data,
       :charset)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -263,6 +268,7 @@ module Aws::PinpointEmail
       :configuration_set_name,
       :event_destination_name,
       :event_destination)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -341,6 +347,7 @@ module Aws::PinpointEmail
       :reputation_options,
       :sending_options,
       :tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -380,6 +387,7 @@ module Aws::PinpointEmail
     class CreateDedicatedIpPoolRequest < Struct.new(
       :pool_name,
       :tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -466,6 +474,7 @@ module Aws::PinpointEmail
       :from_email_address,
       :content,
       :tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -490,6 +499,7 @@ module Aws::PinpointEmail
     class CreateDeliverabilityTestReportResponse < Struct.new(
       :report_id,
       :deliverability_test_status)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -523,6 +533,7 @@ module Aws::PinpointEmail
     class CreateEmailIdentityRequest < Struct.new(
       :email_identity,
       :tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -561,6 +572,7 @@ module Aws::PinpointEmail
       :identity_type,
       :verified_for_sending_status,
       :dkim_attributes)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -588,6 +600,7 @@ module Aws::PinpointEmail
       :start_date,
       :volume_statistics,
       :domain_isp_placements)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -628,6 +641,7 @@ module Aws::PinpointEmail
       :warmup_status,
       :warmup_percentage,
       :pool_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -655,6 +669,7 @@ module Aws::PinpointEmail
     class DeleteConfigurationSetEventDestinationRequest < Struct.new(
       :configuration_set_name,
       :event_destination_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -682,6 +697,7 @@ module Aws::PinpointEmail
     #
     class DeleteConfigurationSetRequest < Struct.new(
       :configuration_set_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -709,6 +725,7 @@ module Aws::PinpointEmail
     #
     class DeleteDedicatedIpPoolRequest < Struct.new(
       :pool_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -740,6 +757,7 @@ module Aws::PinpointEmail
     #
     class DeleteEmailIdentityRequest < Struct.new(
       :email_identity)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -795,6 +813,7 @@ module Aws::PinpointEmail
       :from_email_address,
       :create_date,
       :deliverability_test_status)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -826,6 +845,7 @@ module Aws::PinpointEmail
     class DeliveryOptions < Struct.new(
       :tls_policy,
       :sending_pool_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -861,6 +881,7 @@ module Aws::PinpointEmail
       :to_addresses,
       :cc_addresses,
       :bcc_addresses)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -913,6 +934,7 @@ module Aws::PinpointEmail
       :signing_enabled,
       :status,
       :tokens)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1016,6 +1038,7 @@ module Aws::PinpointEmail
       :read_delete_rate,
       :projected_volume,
       :esps)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1059,6 +1082,7 @@ module Aws::PinpointEmail
       :domain,
       :subscription_start_date,
       :inbox_placement_tracking_option)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1102,6 +1126,7 @@ module Aws::PinpointEmail
       :spam_raw_count,
       :inbox_percentage,
       :spam_percentage)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1185,6 +1210,7 @@ module Aws::PinpointEmail
       :simple,
       :raw,
       :template)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1249,6 +1275,7 @@ module Aws::PinpointEmail
       :cloud_watch_destination,
       :sns_destination,
       :pinpoint_destination)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1333,6 +1360,7 @@ module Aws::PinpointEmail
       :cloud_watch_destination,
       :sns_destination,
       :pinpoint_destination)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1406,6 +1434,7 @@ module Aws::PinpointEmail
       :dedicated_ip_auto_warmup_enabled,
       :enforcement_status,
       :production_access_enabled)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1429,6 +1458,7 @@ module Aws::PinpointEmail
     #
     class GetBlacklistReportsRequest < Struct.new(
       :blacklist_item_names)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1443,6 +1473,7 @@ module Aws::PinpointEmail
     #
     class GetBlacklistReportsResponse < Struct.new(
       :blacklist_report)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1465,6 +1496,7 @@ module Aws::PinpointEmail
     #
     class GetConfigurationSetEventDestinationsRequest < Struct.new(
       :configuration_set_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1479,6 +1511,7 @@ module Aws::PinpointEmail
     #
     class GetConfigurationSetEventDestinationsResponse < Struct.new(
       :event_destinations)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1500,6 +1533,7 @@ module Aws::PinpointEmail
     #
     class GetConfigurationSetRequest < Struct.new(
       :configuration_set_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1544,6 +1578,7 @@ module Aws::PinpointEmail
       :reputation_options,
       :sending_options,
       :tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1566,6 +1601,7 @@ module Aws::PinpointEmail
     #
     class GetDedicatedIpRequest < Struct.new(
       :ip)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1579,6 +1615,7 @@ module Aws::PinpointEmail
     #
     class GetDedicatedIpResponse < Struct.new(
       :dedicated_ip)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1618,6 +1655,7 @@ module Aws::PinpointEmail
       :pool_name,
       :next_token,
       :page_size)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1641,6 +1679,7 @@ module Aws::PinpointEmail
     class GetDedicatedIpsResponse < Struct.new(
       :dedicated_ips,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1712,6 +1751,7 @@ module Aws::PinpointEmail
       :account_status,
       :active_subscribed_domains,
       :pending_expiration_subscribed_domains)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1733,6 +1773,7 @@ module Aws::PinpointEmail
     #
     class GetDeliverabilityTestReportRequest < Struct.new(
       :report_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1773,6 +1814,7 @@ module Aws::PinpointEmail
       :isp_placements,
       :message,
       :tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1800,6 +1842,7 @@ module Aws::PinpointEmail
     #
     class GetDomainDeliverabilityCampaignRequest < Struct.new(
       :campaign_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1816,6 +1859,7 @@ module Aws::PinpointEmail
     #
     class GetDomainDeliverabilityCampaignResponse < Struct.new(
       :domain_deliverability_campaign)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1851,6 +1895,7 @@ module Aws::PinpointEmail
       :domain,
       :start_date,
       :end_date)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1874,6 +1919,7 @@ module Aws::PinpointEmail
     class GetDomainStatisticsReportResponse < Struct.new(
       :overall_volume,
       :daily_volumes)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1894,6 +1940,7 @@ module Aws::PinpointEmail
     #
     class GetEmailIdentityRequest < Struct.new(
       :email_identity)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1957,6 +2004,7 @@ module Aws::PinpointEmail
       :dkim_attributes,
       :mail_from_attributes,
       :tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1993,6 +2041,7 @@ module Aws::PinpointEmail
       :identity_type,
       :identity_name,
       :sending_enabled)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2025,6 +2074,7 @@ module Aws::PinpointEmail
     class InboxPlacementTrackingOption < Struct.new(
       :global,
       :tracked_isps)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2046,6 +2096,7 @@ module Aws::PinpointEmail
     class IspPlacement < Struct.new(
       :isp_name,
       :placement_statistics)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2077,6 +2128,7 @@ module Aws::PinpointEmail
     class KinesisFirehoseDestination < Struct.new(
       :iam_role_arn,
       :delivery_stream_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2114,6 +2166,7 @@ module Aws::PinpointEmail
     class ListConfigurationSetsRequest < Struct.new(
       :next_token,
       :page_size)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2137,6 +2190,7 @@ module Aws::PinpointEmail
     class ListConfigurationSetsResponse < Struct.new(
       :configuration_sets,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2167,6 +2221,7 @@ module Aws::PinpointEmail
     class ListDedicatedIpPoolsRequest < Struct.new(
       :next_token,
       :page_size)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2189,6 +2244,7 @@ module Aws::PinpointEmail
     class ListDedicatedIpPoolsResponse < Struct.new(
       :dedicated_ip_pools,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2225,6 +2281,7 @@ module Aws::PinpointEmail
     class ListDeliverabilityTestReportsRequest < Struct.new(
       :next_token,
       :page_size)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2250,6 +2307,7 @@ module Aws::PinpointEmail
     class ListDeliverabilityTestReportsResponse < Struct.new(
       :deliverability_test_reports,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2307,6 +2365,7 @@ module Aws::PinpointEmail
       :subscribed_domain,
       :next_token,
       :page_size)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2332,6 +2391,7 @@ module Aws::PinpointEmail
     class ListDomainDeliverabilityCampaignsResponse < Struct.new(
       :domain_deliverability_campaigns,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2368,6 +2428,7 @@ module Aws::PinpointEmail
     class ListEmailIdentitiesRequest < Struct.new(
       :next_token,
       :page_size)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2392,6 +2453,7 @@ module Aws::PinpointEmail
     class ListEmailIdentitiesResponse < Struct.new(
       :email_identities,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2411,6 +2473,7 @@ module Aws::PinpointEmail
     #
     class ListTagsForResourceRequest < Struct.new(
       :resource_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2424,6 +2487,7 @@ module Aws::PinpointEmail
     #
     class ListTagsForResourceResponse < Struct.new(
       :tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2471,6 +2535,7 @@ module Aws::PinpointEmail
       :mail_from_domain,
       :mail_from_domain_status,
       :behavior_on_mx_failure)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2524,6 +2589,7 @@ module Aws::PinpointEmail
     class Message < Struct.new(
       :subject,
       :body)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2569,6 +2635,7 @@ module Aws::PinpointEmail
     class MessageTag < Struct.new(
       :name,
       :value)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2602,6 +2669,7 @@ module Aws::PinpointEmail
       :volume_statistics,
       :read_rate_percent,
       :domain_isp_placements)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2626,6 +2694,7 @@ module Aws::PinpointEmail
     #
     class PinpointDestination < Struct.new(
       :application_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2664,6 +2733,7 @@ module Aws::PinpointEmail
       :missing_percentage,
       :spf_percentage,
       :dkim_percentage)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2688,6 +2758,7 @@ module Aws::PinpointEmail
     #
     class PutAccountDedicatedIpWarmupAttributesRequest < Struct.new(
       :auto_warmup_enabled)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2722,6 +2793,7 @@ module Aws::PinpointEmail
     #
     class PutAccountSendingAttributesRequest < Struct.new(
       :sending_enabled)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2767,6 +2839,7 @@ module Aws::PinpointEmail
       :configuration_set_name,
       :tls_policy,
       :sending_pool_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2804,6 +2877,7 @@ module Aws::PinpointEmail
     class PutConfigurationSetReputationOptionsRequest < Struct.new(
       :configuration_set_name,
       :reputation_metrics_enabled)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2840,6 +2914,7 @@ module Aws::PinpointEmail
     class PutConfigurationSetSendingOptionsRequest < Struct.new(
       :configuration_set_name,
       :sending_enabled)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2875,6 +2950,7 @@ module Aws::PinpointEmail
     class PutConfigurationSetTrackingOptionsRequest < Struct.new(
       :configuration_set_name,
       :custom_redirect_domain)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2911,6 +2987,7 @@ module Aws::PinpointEmail
     class PutDedicatedIpInPoolRequest < Struct.new(
       :ip,
       :destination_pool_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2948,6 +3025,7 @@ module Aws::PinpointEmail
     class PutDedicatedIpWarmupAttributesRequest < Struct.new(
       :ip,
       :warmup_percentage)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3007,6 +3085,7 @@ module Aws::PinpointEmail
     class PutDeliverabilityDashboardOptionRequest < Struct.new(
       :dashboard_enabled,
       :subscribed_domains)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3046,6 +3125,7 @@ module Aws::PinpointEmail
     class PutEmailIdentityDkimAttributesRequest < Struct.new(
       :email_identity,
       :signing_enabled)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3094,6 +3174,7 @@ module Aws::PinpointEmail
     class PutEmailIdentityFeedbackAttributesRequest < Struct.new(
       :email_identity,
       :email_forwarding_enabled)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3152,6 +3233,7 @@ module Aws::PinpointEmail
       :email_identity,
       :mail_from_domain,
       :behavior_on_mx_failure)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3204,6 +3286,7 @@ module Aws::PinpointEmail
     #
     class RawMessage < Struct.new(
       :data)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3236,6 +3319,7 @@ module Aws::PinpointEmail
     class ReputationOptions < Struct.new(
       :reputation_metrics_enabled,
       :last_fresh_start)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3333,6 +3417,7 @@ module Aws::PinpointEmail
       :content,
       :email_tags,
       :configuration_set_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3356,6 +3441,7 @@ module Aws::PinpointEmail
     #
     class SendEmailResponse < Struct.new(
       :message_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3386,6 +3472,7 @@ module Aws::PinpointEmail
       :max_24_hour_send,
       :max_send_rate,
       :sent_last_24_hours)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3408,6 +3495,7 @@ module Aws::PinpointEmail
     #
     class SendingOptions < Struct.new(
       :sending_enabled)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3443,6 +3531,7 @@ module Aws::PinpointEmail
     #
     class SnsDestination < Struct.new(
       :topic_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3503,6 +3592,7 @@ module Aws::PinpointEmail
     class Tag < Struct.new(
       :key,
       :value)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3536,6 +3626,7 @@ module Aws::PinpointEmail
     class TagResourceRequest < Struct.new(
       :resource_arn,
       :tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3567,6 +3658,7 @@ module Aws::PinpointEmail
     class Template < Struct.new(
       :template_arn,
       :template_data)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3601,6 +3693,7 @@ module Aws::PinpointEmail
     #
     class TrackingOptions < Struct.new(
       :custom_redirect_domain)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3633,6 +3726,7 @@ module Aws::PinpointEmail
     class UntagResourceRequest < Struct.new(
       :resource_arn,
       :tag_keys)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3693,6 +3787,7 @@ module Aws::PinpointEmail
       :configuration_set_name,
       :event_destination_name,
       :event_destination)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3732,6 +3827,7 @@ module Aws::PinpointEmail
       :spam_raw_count,
       :projected_inbox,
       :projected_spam)
+      SENSITIVE = []
       include Aws::Structure
     end
 

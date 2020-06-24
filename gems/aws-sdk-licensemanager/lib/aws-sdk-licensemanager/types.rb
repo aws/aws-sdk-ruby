@@ -19,6 +19,7 @@ module Aws::LicenseManager
     #
     class AccessDeniedException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -32,6 +33,7 @@ module Aws::LicenseManager
     #
     class AuthorizationException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -45,6 +47,7 @@ module Aws::LicenseManager
     #
     class AutomatedDiscoveryInformation < Struct.new(
       :last_run_time)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -63,6 +66,7 @@ module Aws::LicenseManager
     class ConsumedLicenseSummary < Struct.new(
       :resource_type,
       :consumed_licenses)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -155,6 +159,7 @@ module Aws::LicenseManager
       :license_rules,
       :tags,
       :product_information_list)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -166,6 +171,7 @@ module Aws::LicenseManager
     #
     class CreateLicenseConfigurationResponse < Struct.new(
       :license_configuration_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -184,6 +190,7 @@ module Aws::LicenseManager
     #
     class DeleteLicenseConfigurationRequest < Struct.new(
       :license_configuration_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -200,6 +207,7 @@ module Aws::LicenseManager
     #
     class FailedDependencyException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -228,6 +236,7 @@ module Aws::LicenseManager
     class Filter < Struct.new(
       :name,
       :values)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -240,6 +249,7 @@ module Aws::LicenseManager
     #
     class FilterLimitExceededException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -258,6 +268,7 @@ module Aws::LicenseManager
     #
     class GetLicenseConfigurationRequest < Struct.new(
       :license_configuration_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -344,6 +355,7 @@ module Aws::LicenseManager
       :tags,
       :product_information_list,
       :automated_discovery_information)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -385,6 +397,7 @@ module Aws::LicenseManager
       :organization_configuration,
       :enable_cross_accounts_discovery,
       :license_manager_resource_share_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -397,6 +410,7 @@ module Aws::LicenseManager
     #
     class InvalidParameterValueException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -413,6 +427,7 @@ module Aws::LicenseManager
     #
     class InvalidResourceStateException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -445,6 +460,7 @@ module Aws::LicenseManager
       :name,
       :condition,
       :value)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -534,6 +550,7 @@ module Aws::LicenseManager
       :managed_resource_summary_list,
       :product_information_list,
       :automated_discovery_information)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -563,6 +580,7 @@ module Aws::LicenseManager
       :resource_type,
       :resource_owner_id,
       :association_time)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -603,6 +621,7 @@ module Aws::LicenseManager
       :resource_owner_id,
       :association_time,
       :consumed_licenses)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -651,6 +670,7 @@ module Aws::LicenseManager
       :resource_owner_id,
       :operation_requested_by,
       :metadata_list)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -671,6 +691,7 @@ module Aws::LicenseManager
     #
     class LicenseSpecification < Struct.new(
       :license_configuration_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -684,6 +705,7 @@ module Aws::LicenseManager
     #
     class LicenseUsageException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -714,6 +736,7 @@ module Aws::LicenseManager
       :license_configuration_arn,
       :max_results,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -730,6 +753,7 @@ module Aws::LicenseManager
     class ListAssociationsForLicenseConfigurationResponse < Struct.new(
       :license_configuration_associations,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -760,6 +784,7 @@ module Aws::LicenseManager
       :license_configuration_arn,
       :max_results,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -776,6 +801,7 @@ module Aws::LicenseManager
     class ListFailuresForLicenseConfigurationOperationsResponse < Struct.new(
       :license_operation_failure_list,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -829,6 +855,7 @@ module Aws::LicenseManager
       :max_results,
       :next_token,
       :filters)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -845,6 +872,7 @@ module Aws::LicenseManager
     class ListLicenseConfigurationsResponse < Struct.new(
       :license_configurations,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -876,6 +904,7 @@ module Aws::LicenseManager
       :resource_arn,
       :max_results,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -892,6 +921,7 @@ module Aws::LicenseManager
     class ListLicenseSpecificationsForResourceResponse < Struct.new(
       :license_specifications,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -946,6 +976,7 @@ module Aws::LicenseManager
       :max_results,
       :next_token,
       :filters)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -962,6 +993,7 @@ module Aws::LicenseManager
     class ListResourceInventoryResponse < Struct.new(
       :resource_inventory_list,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -980,6 +1012,7 @@ module Aws::LicenseManager
     #
     class ListTagsForResourceRequest < Struct.new(
       :resource_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -991,6 +1024,7 @@ module Aws::LicenseManager
     #
     class ListTagsForResourceResponse < Struct.new(
       :tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1043,6 +1077,7 @@ module Aws::LicenseManager
       :max_results,
       :next_token,
       :filters)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1059,6 +1094,7 @@ module Aws::LicenseManager
     class ListUsageForLicenseConfigurationResponse < Struct.new(
       :license_configuration_usage_list,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1077,6 +1113,7 @@ module Aws::LicenseManager
     class ManagedResourceSummary < Struct.new(
       :resource_type,
       :association_count)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1095,6 +1132,7 @@ module Aws::LicenseManager
     class Metadata < Struct.new(
       :name,
       :value)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1115,6 +1153,7 @@ module Aws::LicenseManager
     #
     class OrganizationConfiguration < Struct.new(
       :enable_integration)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1167,6 +1206,7 @@ module Aws::LicenseManager
     class ProductInformation < Struct.new(
       :resource_type,
       :product_information_filter_list)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1199,6 +1239,7 @@ module Aws::LicenseManager
       :product_information_filter_name,
       :product_information_filter_value,
       :product_information_filter_comparator)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1211,6 +1252,7 @@ module Aws::LicenseManager
     #
     class RateLimitExceededException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1249,6 +1291,7 @@ module Aws::LicenseManager
       :platform,
       :platform_version,
       :resource_owning_account_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1261,6 +1304,7 @@ module Aws::LicenseManager
     #
     class ResourceLimitExceededException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1273,6 +1317,7 @@ module Aws::LicenseManager
     #
     class ServerInternalException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1299,6 +1344,7 @@ module Aws::LicenseManager
     class Tag < Struct.new(
       :key,
       :value)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1328,6 +1374,7 @@ module Aws::LicenseManager
     class TagResourceRequest < Struct.new(
       :resource_arn,
       :tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1356,6 +1403,7 @@ module Aws::LicenseManager
     class UntagResourceRequest < Struct.new(
       :resource_arn,
       :tag_keys)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1431,6 +1479,7 @@ module Aws::LicenseManager
       :name,
       :description,
       :product_information_list)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1473,6 +1522,7 @@ module Aws::LicenseManager
       :resource_arn,
       :add_license_specifications,
       :remove_license_specifications)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1518,6 +1568,7 @@ module Aws::LicenseManager
       :sns_topic_arn,
       :organization_configuration,
       :enable_cross_accounts_discovery)
+      SENSITIVE = []
       include Aws::Structure
     end
 

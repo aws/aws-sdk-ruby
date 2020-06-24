@@ -39,10 +39,15 @@ module Aws::Backup
       :arn,
       :type,
       :context)
+      SENSITIVE = []
       include Aws::Structure
     end
 
     # Contains detailed information about a backup job.
+    #
+    # @!attribute [rw] account_id
+    #   The account ID that owns the backup job.
+    #   @return [String]
     #
     # @!attribute [rw] backup_job_id
     #   Uniquely identifies a request to AWS Backup to back up a resource.
@@ -147,6 +152,7 @@ module Aws::Backup
     # @see http://docs.aws.amazon.com/goto/WebAPI/backup-2018-11-15/BackupJob AWS API Documentation
     #
     class BackupJob < Struct.new(
+      :account_id,
       :backup_job_id,
       :backup_vault_name,
       :backup_vault_arn,
@@ -164,6 +170,7 @@ module Aws::Backup
       :start_by,
       :resource_type,
       :bytes_transferred)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -186,6 +193,7 @@ module Aws::Backup
     class BackupPlan < Struct.new(
       :backup_plan_name,
       :rules)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -227,7 +235,7 @@ module Aws::Backup
     #       }
     #
     # @!attribute [rw] backup_plan_name
-    #   The display name of a backup plan.
+    #   The optional display name of a backup plan.
     #   @return [String]
     #
     # @!attribute [rw] rules
@@ -240,6 +248,7 @@ module Aws::Backup
     class BackupPlanInput < Struct.new(
       :backup_plan_name,
       :rules)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -258,6 +267,7 @@ module Aws::Backup
     class BackupPlanTemplatesListMember < Struct.new(
       :backup_plan_template_id,
       :backup_plan_template_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -321,6 +331,7 @@ module Aws::Backup
       :backup_plan_name,
       :creator_request_id,
       :last_execution_date)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -391,6 +402,7 @@ module Aws::Backup
       :recovery_point_tags,
       :rule_id,
       :copy_actions)
+      SENSITIVE = [:recovery_point_tags]
       include Aws::Structure
     end
 
@@ -483,6 +495,7 @@ module Aws::Backup
       :lifecycle,
       :recovery_point_tags,
       :copy_actions)
+      SENSITIVE = [:recovery_point_tags]
       include Aws::Structure
     end
 
@@ -532,6 +545,7 @@ module Aws::Backup
       :iam_role_arn,
       :resources,
       :list_of_tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -578,6 +592,7 @@ module Aws::Backup
       :creation_date,
       :creator_request_id,
       :iam_role_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -628,6 +643,7 @@ module Aws::Backup
       :encryption_key_arn,
       :creator_request_id,
       :number_of_recovery_points)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -658,6 +674,7 @@ module Aws::Backup
     class CalculatedLifecycle < Struct.new(
       :move_to_cold_storage_at,
       :delete_at)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -697,6 +714,7 @@ module Aws::Backup
       :condition_type,
       :condition_key,
       :condition_value)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -737,10 +755,15 @@ module Aws::Backup
     class CopyAction < Struct.new(
       :lifecycle,
       :destination_backup_vault_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
     # Contains detailed information about a copy job.
+    #
+    # @!attribute [rw] account_id
+    #   The account ID that owns the copy job.
+    #   @return [String]
     #
     # @!attribute [rw] copy_job_id
     #   Uniquely identifies a copy job.
@@ -778,14 +801,14 @@ module Aws::Backup
     #
     # @!attribute [rw] creation_date
     #   The date and time a copy job is created, in Unix format and
-    #   Coordinated Universal Time (UTC). The value of CreationDate is
+    #   Coordinated Universal Time (UTC). The value of `CreationDate` is
     #   accurate to milliseconds. For example, the value 1516925490.087
     #   represents Friday, January 26, 2018 12:11:30.087 AM.
     #   @return [Time]
     #
     # @!attribute [rw] completion_date
     #   The date and time a copy job is completed, in Unix format and
-    #   Coordinated Universal Time (UTC). The value of CompletionDate is
+    #   Coordinated Universal Time (UTC). The value of `CompletionDate` is
     #   accurate to milliseconds. For example, the value 1516925490.087
     #   represents Friday, January 26, 2018 12:11:30.087 AM.
     #   @return [Time]
@@ -822,6 +845,7 @@ module Aws::Backup
     # @see http://docs.aws.amazon.com/goto/WebAPI/backup-2018-11-15/CopyJob AWS API Documentation
     #
     class CopyJob < Struct.new(
+      :account_id,
       :copy_job_id,
       :source_backup_vault_arn,
       :source_recovery_point_arn,
@@ -836,6 +860,7 @@ module Aws::Backup
       :iam_role_arn,
       :created_by,
       :resource_type)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -901,6 +926,7 @@ module Aws::Backup
       :backup_plan,
       :backup_plan_tags,
       :creator_request_id)
+      SENSITIVE = [:backup_plan_tags]
       include Aws::Structure
     end
 
@@ -933,6 +959,7 @@ module Aws::Backup
       :backup_plan_arn,
       :creation_date,
       :version_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -978,6 +1005,7 @@ module Aws::Backup
       :backup_plan_id,
       :backup_selection,
       :creator_request_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1003,6 +1031,7 @@ module Aws::Backup
       :selection_id,
       :backup_plan_id,
       :creation_date)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1049,6 +1078,7 @@ module Aws::Backup
       :backup_vault_tags,
       :encryption_key_arn,
       :creator_request_id)
+      SENSITIVE = [:backup_vault_tags]
       include Aws::Structure
     end
 
@@ -1078,6 +1108,7 @@ module Aws::Backup
       :backup_vault_name,
       :backup_vault_arn,
       :creation_date)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1096,6 +1127,7 @@ module Aws::Backup
     #
     class DeleteBackupPlanInput < Struct.new(
       :backup_plan_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1111,7 +1143,7 @@ module Aws::Backup
     #
     # @!attribute [rw] deletion_date
     #   The date and time a backup plan is deleted, in Unix format and
-    #   Coordinated Universal Time (UTC). The value of `CreationDate` is
+    #   Coordinated Universal Time (UTC). The value of `DeletionDate` is
     #   accurate to milliseconds. For example, the value 1516925490.087
     #   represents Friday, January 26, 2018 12:11:30.087 AM.
     #   @return [Time]
@@ -1128,6 +1160,7 @@ module Aws::Backup
       :backup_plan_arn,
       :deletion_date,
       :version_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1153,6 +1186,7 @@ module Aws::Backup
     class DeleteBackupSelectionInput < Struct.new(
       :backup_plan_id,
       :selection_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1174,6 +1208,7 @@ module Aws::Backup
     #
     class DeleteBackupVaultAccessPolicyInput < Struct.new(
       :backup_vault_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1195,6 +1230,7 @@ module Aws::Backup
     #
     class DeleteBackupVaultInput < Struct.new(
       :backup_vault_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1216,6 +1252,7 @@ module Aws::Backup
     #
     class DeleteBackupVaultNotificationsInput < Struct.new(
       :backup_vault_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1245,6 +1282,7 @@ module Aws::Backup
     class DeleteRecoveryPointInput < Struct.new(
       :backup_vault_name,
       :recovery_point_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1270,6 +1308,7 @@ module Aws::Backup
       :message,
       :type,
       :context)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1288,9 +1327,14 @@ module Aws::Backup
     #
     class DescribeBackupJobInput < Struct.new(
       :backup_job_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
+    # @!attribute [rw] account_id
+    #   Returns the account ID that owns the backup job.
+    #   @return [String]
+    #
     # @!attribute [rw] backup_job_id
     #   Uniquely identifies a request to AWS Backup to back up a resource.
     #   @return [String]
@@ -1328,7 +1372,7 @@ module Aws::Backup
     # @!attribute [rw] completion_date
     #   The date and time that a job to create a backup job is completed, in
     #   Unix format and Coordinated Universal Time (UTC). The value of
-    #   `CreationDate` is accurate to milliseconds. For example, the value
+    #   `CompletionDate` is accurate to milliseconds. For example, the value
     #   1516925490.087 represents Friday, January 26, 2018 12:11:30.087 AM.
     #   @return [Time]
     #
@@ -1394,6 +1438,7 @@ module Aws::Backup
     # @see http://docs.aws.amazon.com/goto/WebAPI/backup-2018-11-15/DescribeBackupJobOutput AWS API Documentation
     #
     class DescribeBackupJobOutput < Struct.new(
+      :account_id,
       :backup_job_id,
       :backup_vault_name,
       :backup_vault_arn,
@@ -1411,6 +1456,7 @@ module Aws::Backup
       :bytes_transferred,
       :expected_completion_date,
       :start_by)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1432,6 +1478,7 @@ module Aws::Backup
     #
     class DescribeBackupVaultInput < Struct.new(
       :backup_vault_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1480,6 +1527,7 @@ module Aws::Backup
       :creation_date,
       :creator_request_id,
       :number_of_recovery_points)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1498,6 +1546,7 @@ module Aws::Backup
     #
     class DescribeCopyJobInput < Struct.new(
       :copy_job_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1509,6 +1558,7 @@ module Aws::Backup
     #
     class DescribeCopyJobOutput < Struct.new(
       :copy_job)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1528,6 +1578,7 @@ module Aws::Backup
     #
     class DescribeProtectedResourceInput < Struct.new(
       :resource_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1554,6 +1605,7 @@ module Aws::Backup
       :resource_arn,
       :resource_type,
       :last_backup_time)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1583,6 +1635,7 @@ module Aws::Backup
     class DescribeRecoveryPointInput < Struct.new(
       :backup_vault_name,
       :recovery_point_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1716,6 +1769,7 @@ module Aws::Backup
       :is_encrypted,
       :storage_class,
       :last_restore_time)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1734,6 +1788,7 @@ module Aws::Backup
     #
     class DescribeRegionSettingsOutput < Struct.new(
       :resource_type_opt_in_preference)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1752,9 +1807,14 @@ module Aws::Backup
     #
     class DescribeRestoreJobInput < Struct.new(
       :restore_job_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
+    # @!attribute [rw] account_id
+    #   Returns the account ID that owns the restore job.
+    #   @return [String]
+    #
     # @!attribute [rw] restore_job_id
     #   Uniquely identifies the job that restores a recovery point.
     #   @return [String]
@@ -1785,8 +1845,7 @@ module Aws::Backup
     #   @return [String]
     #
     # @!attribute [rw] status_message
-    #   A detailed message explaining the status of a job to restore a
-    #   recovery point.
+    #   A message showing the status of a job to restore a recovery point.
     #   @return [String]
     #
     # @!attribute [rw] percent_done
@@ -1814,9 +1873,15 @@ module Aws::Backup
     #   depends on the resource type of the backed-up resource.
     #   @return [String]
     #
+    # @!attribute [rw] resource_type
+    #   Returns metadata associated with a restore job listed by resource
+    #   type.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/backup-2018-11-15/DescribeRestoreJobOutput AWS API Documentation
     #
     class DescribeRestoreJobOutput < Struct.new(
+      :account_id,
       :restore_job_id,
       :recovery_point_arn,
       :creation_date,
@@ -1827,7 +1892,9 @@ module Aws::Backup
       :backup_size_in_bytes,
       :iam_role_arn,
       :expected_completion_time_minutes,
-      :created_resource_arn)
+      :created_resource_arn,
+      :resource_type)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1846,6 +1913,7 @@ module Aws::Backup
     #
     class ExportBackupPlanTemplateInput < Struct.new(
       :backup_plan_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1862,6 +1930,7 @@ module Aws::Backup
     #
     class ExportBackupPlanTemplateOutput < Struct.new(
       :backup_plan_template_json)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1880,6 +1949,7 @@ module Aws::Backup
     #
     class GetBackupPlanFromJSONInput < Struct.new(
       :backup_plan_template_json)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1892,6 +1962,7 @@ module Aws::Backup
     #
     class GetBackupPlanFromJSONOutput < Struct.new(
       :backup_plan)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1910,6 +1981,7 @@ module Aws::Backup
     #
     class GetBackupPlanFromTemplateInput < Struct.new(
       :backup_plan_template_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1922,6 +1994,7 @@ module Aws::Backup
     #
     class GetBackupPlanFromTemplateOutput < Struct.new(
       :backup_plan_document)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1947,6 +2020,7 @@ module Aws::Backup
     class GetBackupPlanInput < Struct.new(
       :backup_plan_id,
       :version_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1985,7 +2059,7 @@ module Aws::Backup
     #
     # @!attribute [rw] deletion_date
     #   The date and time that a backup plan is deleted, in Unix format and
-    #   Coordinated Universal Time (UTC). The value of `CreationDate` is
+    #   Coordinated Universal Time (UTC). The value of `DeletionDate` is
     #   accurate to milliseconds. For example, the value 1516925490.087
     #   represents Friday, January 26, 2018 12:11:30.087 AM.
     #   @return [Time]
@@ -2009,6 +2083,7 @@ module Aws::Backup
       :creation_date,
       :deletion_date,
       :last_execution_date)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2034,6 +2109,7 @@ module Aws::Backup
     class GetBackupSelectionInput < Struct.new(
       :backup_plan_id,
       :selection_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2072,6 +2148,7 @@ module Aws::Backup
       :backup_plan_id,
       :creation_date,
       :creator_request_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2093,6 +2170,7 @@ module Aws::Backup
     #
     class GetBackupVaultAccessPolicyInput < Struct.new(
       :backup_vault_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2119,6 +2197,7 @@ module Aws::Backup
       :backup_vault_name,
       :backup_vault_arn,
       :policy)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2140,6 +2219,7 @@ module Aws::Backup
     #
     class GetBackupVaultNotificationsInput < Struct.new(
       :backup_vault_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2174,6 +2254,7 @@ module Aws::Backup
       :backup_vault_arn,
       :sns_topic_arn,
       :backup_vault_events)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2203,6 +2284,7 @@ module Aws::Backup
     class GetRecoveryPointRestoreMetadataInput < Struct.new(
       :backup_vault_name,
       :recovery_point_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2228,27 +2310,31 @@ module Aws::Backup
       :backup_vault_arn,
       :recovery_point_arn,
       :restore_metadata)
+      SENSITIVE = [:restore_metadata]
       include Aws::Structure
     end
 
     # @!attribute [rw] resource_types
     #   Contains a string with the supported AWS resource types:
     #
+    #   * `DynamoDB` for Amazon DynamoDB
+    #
     #   * `EBS` for Amazon Elastic Block Store
     #
-    #   * `Storage Gateway` for AWS Storage Gateway
+    #   * `EC2` for Amazon Elastic Compute Cloud
+    #
+    #   * `EFS` for Amazon Elastic File System
     #
     #   * `RDS` for Amazon Relational Database Service
     #
-    #   * `DDB` for Amazon DynamoDB
-    #
-    #   * `EFS` for Amazon Elastic File System
+    #   * `Storage Gateway` for AWS Storage Gateway
     #   @return [Array<String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/backup-2018-11-15/GetSupportedResourceTypesOutput AWS API Documentation
     #
     class GetSupportedResourceTypesOutput < Struct.new(
       :resource_types)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2274,6 +2360,7 @@ module Aws::Backup
       :message,
       :type,
       :context)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2299,6 +2386,7 @@ module Aws::Backup
       :message,
       :type,
       :context)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2335,6 +2423,7 @@ module Aws::Backup
     class Lifecycle < Struct.new(
       :move_to_cold_storage_after_days,
       :delete_after_days)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2360,6 +2449,7 @@ module Aws::Backup
       :message,
       :type,
       :context)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2375,6 +2465,7 @@ module Aws::Backup
     #         by_created_before: Time.now,
     #         by_created_after: Time.now,
     #         by_resource_type: "ResourceType",
+    #         by_account_id: "AccountId",
     #       }
     #
     # @!attribute [rw] next_token
@@ -2420,11 +2511,18 @@ module Aws::Backup
     #
     #   * `EBS` for Amazon Elastic Block Store
     #
+    #   * `EC2` for Amazon Elastic Compute Cloud
+    #
     #   * `EFS` for Amazon Elastic File System
     #
     #   * `RDS` for Amazon Relational Database Service
     #
     #   * `Storage Gateway` for AWS Storage Gateway
+    #   @return [String]
+    #
+    # @!attribute [rw] by_account_id
+    #   The account ID to list the jobs from. Returns only backup jobs
+    #   associated with the specified account ID.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/backup-2018-11-15/ListBackupJobsInput AWS API Documentation
@@ -2437,7 +2535,9 @@ module Aws::Backup
       :by_backup_vault_name,
       :by_created_before,
       :by_created_after,
-      :by_resource_type)
+      :by_resource_type,
+      :by_account_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2458,6 +2558,7 @@ module Aws::Backup
     class ListBackupJobsOutput < Struct.new(
       :backup_jobs,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2485,6 +2586,7 @@ module Aws::Backup
     class ListBackupPlanTemplatesInput < Struct.new(
       :next_token,
       :max_results)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2505,6 +2607,7 @@ module Aws::Backup
     class ListBackupPlanTemplatesOutput < Struct.new(
       :next_token,
       :backup_plan_templates_list)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2538,6 +2641,7 @@ module Aws::Backup
       :backup_plan_id,
       :next_token,
       :max_results)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2558,6 +2662,7 @@ module Aws::Backup
     class ListBackupPlanVersionsOutput < Struct.new(
       :next_token,
       :backup_plan_versions_list)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2592,6 +2697,7 @@ module Aws::Backup
       :next_token,
       :max_results,
       :include_deleted)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2612,6 +2718,7 @@ module Aws::Backup
     class ListBackupPlansOutput < Struct.new(
       :next_token,
       :backup_plans_list)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2645,6 +2752,7 @@ module Aws::Backup
       :backup_plan_id,
       :next_token,
       :max_results)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2665,6 +2773,7 @@ module Aws::Backup
     class ListBackupSelectionsOutput < Struct.new(
       :next_token,
       :backup_selections_list)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2692,6 +2801,7 @@ module Aws::Backup
     class ListBackupVaultsInput < Struct.new(
       :next_token,
       :max_results)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2714,6 +2824,7 @@ module Aws::Backup
     class ListBackupVaultsOutput < Struct.new(
       :backup_vault_list,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2729,6 +2840,7 @@ module Aws::Backup
     #         by_created_after: Time.now,
     #         by_resource_type: "ResourceType",
     #         by_destination_vault_arn: "string",
+    #         by_account_id: "AccountId",
     #       }
     #
     # @!attribute [rw] next_token
@@ -2762,7 +2874,11 @@ module Aws::Backup
     # @!attribute [rw] by_resource_type
     #   Returns only backup jobs for the specified resources:
     #
+    #   * `DynamoDB` for Amazon DynamoDB
+    #
     #   * `EBS` for Amazon Elastic Block Store
+    #
+    #   * `EC2` for Amazon Elastic Compute Cloud
     #
     #   * `EFS` for Amazon Elastic File System
     #
@@ -2777,6 +2893,11 @@ module Aws::Backup
     #   `arn:aws:backup:us-east-1:123456789012:vault:aBackupVault`.
     #   @return [String]
     #
+    # @!attribute [rw] by_account_id
+    #   The account ID to list the jobs from. Returns only copy jobs
+    #   associated with the specified account ID.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/backup-2018-11-15/ListCopyJobsInput AWS API Documentation
     #
     class ListCopyJobsInput < Struct.new(
@@ -2787,7 +2908,9 @@ module Aws::Backup
       :by_created_before,
       :by_created_after,
       :by_resource_type,
-      :by_destination_vault_arn)
+      :by_destination_vault_arn,
+      :by_account_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2808,6 +2931,7 @@ module Aws::Backup
     class ListCopyJobsOutput < Struct.new(
       :copy_jobs,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2835,6 +2959,7 @@ module Aws::Backup
     class ListProtectedResourcesInput < Struct.new(
       :next_token,
       :max_results)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2856,6 +2981,7 @@ module Aws::Backup
     class ListProtectedResourcesOutput < Struct.new(
       :results,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2926,6 +3052,7 @@ module Aws::Backup
       :by_backup_plan_id,
       :by_created_before,
       :by_created_after)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2946,6 +3073,7 @@ module Aws::Backup
     class ListRecoveryPointsByBackupVaultOutput < Struct.new(
       :next_token,
       :recovery_points)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2980,6 +3108,7 @@ module Aws::Backup
       :resource_arn,
       :next_token,
       :max_results)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3000,6 +3129,7 @@ module Aws::Backup
     class ListRecoveryPointsByResourceOutput < Struct.new(
       :next_token,
       :recovery_points)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3009,6 +3139,10 @@ module Aws::Backup
     #       {
     #         next_token: "string",
     #         max_results: 1,
+    #         by_account_id: "AccountId",
+    #         by_created_before: Time.now,
+    #         by_created_after: Time.now,
+    #         by_status: "PENDING", # accepts PENDING, RUNNING, COMPLETED, ABORTED, FAILED
     #       }
     #
     # @!attribute [rw] next_token
@@ -3022,11 +3156,35 @@ module Aws::Backup
     #   The maximum number of items to be returned.
     #   @return [Integer]
     #
+    # @!attribute [rw] by_account_id
+    #   The account ID to list the jobs from. Returns only restore jobs
+    #   associated with the specified account ID.
+    #   @return [String]
+    #
+    # @!attribute [rw] by_created_before
+    #   Returns only restore jobs that were created before the specified
+    #   date.
+    #   @return [Time]
+    #
+    # @!attribute [rw] by_created_after
+    #   Returns only restore jobs that were created after the specified
+    #   date.
+    #   @return [Time]
+    #
+    # @!attribute [rw] by_status
+    #   Returns only restore jobs associated with the specified job status.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/backup-2018-11-15/ListRestoreJobsInput AWS API Documentation
     #
     class ListRestoreJobsInput < Struct.new(
       :next_token,
-      :max_results)
+      :max_results,
+      :by_account_id,
+      :by_created_before,
+      :by_created_after,
+      :by_status)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3047,6 +3205,7 @@ module Aws::Backup
     class ListRestoreJobsOutput < Struct.new(
       :restore_jobs,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3082,6 +3241,7 @@ module Aws::Backup
       :resource_arn,
       :next_token,
       :max_results)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3102,6 +3262,7 @@ module Aws::Backup
     class ListTagsOutput < Struct.new(
       :next_token,
       :tags)
+      SENSITIVE = [:tags]
       include Aws::Structure
     end
 
@@ -3126,6 +3287,7 @@ module Aws::Backup
       :message,
       :type,
       :context)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3155,6 +3317,7 @@ module Aws::Backup
       :resource_arn,
       :resource_type,
       :last_backup_time)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3182,6 +3345,7 @@ module Aws::Backup
     class PutBackupVaultAccessPolicyInput < Struct.new(
       :backup_vault_name,
       :policy)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3218,6 +3382,7 @@ module Aws::Backup
       :backup_vault_name,
       :sns_topic_arn,
       :backup_vault_events)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3342,6 +3507,7 @@ module Aws::Backup
       :encryption_key_arn,
       :is_encrypted,
       :last_restore_time)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3390,6 +3556,7 @@ module Aws::Backup
       :encryption_key_arn,
       :backup_size_bytes,
       :backup_vault_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3423,6 +3590,7 @@ module Aws::Backup
       :backup_plan_arn,
       :backup_plan_version,
       :backup_rule_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3447,10 +3615,15 @@ module Aws::Backup
       :message,
       :type,
       :context)
+      SENSITIVE = []
       include Aws::Structure
     end
 
     # Contains metadata about a restore job.
+    #
+    # @!attribute [rw] account_id
+    #   The account ID that owns the restore job.
+    #   @return [String]
     #
     # @!attribute [rw] restore_job_id
     #   Uniquely identifies the job that restores a recovery point.
@@ -3509,9 +3682,16 @@ module Aws::Backup
     #   The format of the ARN depends on the resource type.
     #   @return [String]
     #
+    # @!attribute [rw] resource_type
+    #   The resource type of the listed restore jobs; for example, an Amazon
+    #   Elastic Block Store (Amazon EBS) volume or an Amazon Relational
+    #   Database Service (Amazon RDS) database.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/backup-2018-11-15/RestoreJobsListMember AWS API Documentation
     #
     class RestoreJobsListMember < Struct.new(
+      :account_id,
       :restore_job_id,
       :recovery_point_arn,
       :creation_date,
@@ -3522,7 +3702,9 @@ module Aws::Backup
       :backup_size_in_bytes,
       :iam_role_arn,
       :expected_completion_time_minutes,
-      :created_resource_arn)
+      :created_resource_arn,
+      :resource_type)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3547,6 +3729,7 @@ module Aws::Backup
       :message,
       :type,
       :context)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3631,6 +3814,7 @@ module Aws::Backup
       :complete_window_minutes,
       :lifecycle,
       :recovery_point_tags)
+      SENSITIVE = [:recovery_point_tags]
       include Aws::Structure
     end
 
@@ -3656,6 +3840,7 @@ module Aws::Backup
       :backup_job_id,
       :recovery_point_arn,
       :creation_date)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3725,6 +3910,7 @@ module Aws::Backup
       :iam_role_arn,
       :idempotency_token,
       :lifecycle)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3744,6 +3930,7 @@ module Aws::Backup
     class StartCopyJobOutput < Struct.new(
       :copy_job_id,
       :creation_date)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3814,15 +4001,17 @@ module Aws::Backup
     #   Starts a job to restore a recovery point for one of the following
     #   resources:
     #
+    #   * `DynamoDB` for Amazon DynamoDB
+    #
     #   * `EBS` for Amazon Elastic Block Store
     #
-    #   * `Storage Gateway` for AWS Storage Gateway
+    #   * `EC2` for Amazon Elastic Compute Cloud
+    #
+    #   * `EFS` for Amazon Elastic File System
     #
     #   * `RDS` for Amazon Relational Database Service
     #
-    #   * `DDB` for Amazon DynamoDB
-    #
-    #   * `EFS` for Amazon Elastic File System
+    #   * `Storage Gateway` for AWS Storage Gateway
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/backup-2018-11-15/StartRestoreJobInput AWS API Documentation
@@ -3833,6 +4022,7 @@ module Aws::Backup
       :iam_role_arn,
       :idempotency_token,
       :resource_type)
+      SENSITIVE = [:metadata]
       include Aws::Structure
     end
 
@@ -3844,6 +4034,7 @@ module Aws::Backup
     #
     class StartRestoreJobOutput < Struct.new(
       :restore_job_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3862,6 +4053,7 @@ module Aws::Backup
     #
     class StopBackupJobInput < Struct.new(
       :backup_job_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3890,6 +4082,7 @@ module Aws::Backup
     class TagResourceInput < Struct.new(
       :resource_arn,
       :tags)
+      SENSITIVE = [:tags]
       include Aws::Structure
     end
 
@@ -3916,6 +4109,7 @@ module Aws::Backup
     class UntagResourceInput < Struct.new(
       :resource_arn,
       :tag_key_list)
+      SENSITIVE = [:tag_key_list]
       include Aws::Structure
     end
 
@@ -3968,6 +4162,7 @@ module Aws::Backup
     class UpdateBackupPlanInput < Struct.new(
       :backup_plan_id,
       :backup_plan)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4000,6 +4195,7 @@ module Aws::Backup
       :backup_plan_arn,
       :creation_date,
       :version_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4046,6 +4242,7 @@ module Aws::Backup
       :backup_vault_name,
       :recovery_point_arn,
       :lifecycle)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4084,6 +4281,7 @@ module Aws::Backup
       :recovery_point_arn,
       :lifecycle,
       :calculated_lifecycle)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4105,6 +4303,7 @@ module Aws::Backup
     #
     class UpdateRegionSettingsInput < Struct.new(
       :resource_type_opt_in_preference)
+      SENSITIVE = []
       include Aws::Structure
     end
 

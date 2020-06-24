@@ -57,6 +57,7 @@ module Aws::ServiceDiscovery
       :creator_request_id,
       :description,
       :tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -74,6 +75,7 @@ module Aws::ServiceDiscovery
     #
     class CreateHttpNamespaceResponse < Struct.new(
       :operation_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -134,6 +136,7 @@ module Aws::ServiceDiscovery
       :description,
       :vpc,
       :tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -151,6 +154,7 @@ module Aws::ServiceDiscovery
     #
     class CreatePrivateDnsNamespaceResponse < Struct.new(
       :operation_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -201,6 +205,7 @@ module Aws::ServiceDiscovery
       :creator_request_id,
       :description,
       :tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -218,6 +223,7 @@ module Aws::ServiceDiscovery
     #
     class CreatePublicDnsNamespaceResponse < Struct.new(
       :operation_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -348,6 +354,7 @@ module Aws::ServiceDiscovery
       :health_check_config,
       :health_check_custom_config,
       :tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -359,6 +366,7 @@ module Aws::ServiceDiscovery
     #
     class CreateServiceResponse < Struct.new(
       :service)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -372,6 +380,7 @@ module Aws::ServiceDiscovery
     #
     class CustomHealthNotFound < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -390,6 +399,7 @@ module Aws::ServiceDiscovery
     #
     class DeleteNamespaceRequest < Struct.new(
       :id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -407,6 +417,7 @@ module Aws::ServiceDiscovery
     #
     class DeleteNamespaceResponse < Struct.new(
       :operation_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -425,6 +436,7 @@ module Aws::ServiceDiscovery
     #
     class DeleteServiceRequest < Struct.new(
       :id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -458,6 +470,7 @@ module Aws::ServiceDiscovery
     class DeregisterInstanceRequest < Struct.new(
       :service_id,
       :instance_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -474,6 +487,7 @@ module Aws::ServiceDiscovery
     #
     class DeregisterInstanceResponse < Struct.new(
       :operation_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -526,6 +540,7 @@ module Aws::ServiceDiscovery
       :max_results,
       :query_parameters,
       :health_status)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -538,6 +553,7 @@ module Aws::ServiceDiscovery
     #
     class DiscoverInstancesResponse < Struct.new(
       :instances)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -634,6 +650,7 @@ module Aws::ServiceDiscovery
       :namespace_id,
       :routing_policy,
       :dns_records)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -662,6 +679,7 @@ module Aws::ServiceDiscovery
     #
     class DnsConfigChange < Struct.new(
       :dns_records)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -677,6 +695,7 @@ module Aws::ServiceDiscovery
     #
     class DnsProperties < Struct.new(
       :hosted_zone_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -816,6 +835,7 @@ module Aws::ServiceDiscovery
     class DnsRecord < Struct.new(
       :type,
       :ttl)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -833,6 +853,7 @@ module Aws::ServiceDiscovery
     class DuplicateRequest < Struct.new(
       :message,
       :duplicate_operation_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -857,6 +878,7 @@ module Aws::ServiceDiscovery
     class GetInstanceRequest < Struct.new(
       :service_id,
       :instance_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -868,6 +890,7 @@ module Aws::ServiceDiscovery
     #
     class GetInstanceResponse < Struct.new(
       :instance)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -925,6 +948,7 @@ module Aws::ServiceDiscovery
       :instances,
       :max_results,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -946,6 +970,7 @@ module Aws::ServiceDiscovery
     class GetInstancesHealthStatusResponse < Struct.new(
       :status,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -964,6 +989,7 @@ module Aws::ServiceDiscovery
     #
     class GetNamespaceRequest < Struct.new(
       :id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -976,6 +1002,7 @@ module Aws::ServiceDiscovery
     #
     class GetNamespaceResponse < Struct.new(
       :namespace)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -994,6 +1021,7 @@ module Aws::ServiceDiscovery
     #
     class GetOperationRequest < Struct.new(
       :operation_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1005,6 +1033,7 @@ module Aws::ServiceDiscovery
     #
     class GetOperationResponse < Struct.new(
       :operation)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1023,6 +1052,7 @@ module Aws::ServiceDiscovery
     #
     class GetServiceRequest < Struct.new(
       :id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1034,6 +1064,7 @@ module Aws::ServiceDiscovery
     #
     class GetServiceResponse < Struct.new(
       :service)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1178,6 +1209,7 @@ module Aws::ServiceDiscovery
       :type,
       :resource_path,
       :failure_threshold)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1267,6 +1299,7 @@ module Aws::ServiceDiscovery
     #
     class HealthCheckCustomConfig < Struct.new(
       :failure_threshold)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1311,6 +1344,7 @@ module Aws::ServiceDiscovery
       :service_name,
       :health_status,
       :attributes)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1324,6 +1358,7 @@ module Aws::ServiceDiscovery
     #
     class HttpProperties < Struct.new(
       :http_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1464,6 +1499,7 @@ module Aws::ServiceDiscovery
       :id,
       :creator_request_id,
       :attributes)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1477,6 +1513,7 @@ module Aws::ServiceDiscovery
     #
     class InstanceNotFound < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1523,6 +1560,7 @@ module Aws::ServiceDiscovery
     class InstanceSummary < Struct.new(
       :id,
       :attributes)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1537,6 +1575,7 @@ module Aws::ServiceDiscovery
     #
     class InvalidInput < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1575,6 +1614,7 @@ module Aws::ServiceDiscovery
       :service_id,
       :next_token,
       :max_results)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1595,6 +1635,7 @@ module Aws::ServiceDiscovery
     class ListInstancesResponse < Struct.new(
       :instances,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1651,6 +1692,7 @@ module Aws::ServiceDiscovery
       :next_token,
       :max_results,
       :filters)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1679,6 +1721,7 @@ module Aws::ServiceDiscovery
     class ListNamespacesResponse < Struct.new(
       :namespaces,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1735,6 +1778,7 @@ module Aws::ServiceDiscovery
       :next_token,
       :max_results,
       :filters)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1763,6 +1807,7 @@ module Aws::ServiceDiscovery
     class ListOperationsResponse < Struct.new(
       :operations,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1817,6 +1862,7 @@ module Aws::ServiceDiscovery
       :next_token,
       :max_results,
       :filters)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1844,6 +1890,7 @@ module Aws::ServiceDiscovery
     class ListServicesResponse < Struct.new(
       :services,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1863,6 +1910,7 @@ module Aws::ServiceDiscovery
     #
     class ListTagsForResourceRequest < Struct.new(
       :resource_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1874,6 +1922,7 @@ module Aws::ServiceDiscovery
     #
     class ListTagsForResourceResponse < Struct.new(
       :tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1945,6 +1994,7 @@ module Aws::ServiceDiscovery
       :properties,
       :create_date,
       :creator_request_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1967,6 +2017,7 @@ module Aws::ServiceDiscovery
       :message,
       :creator_request_id,
       :namespace_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2015,6 +2066,7 @@ module Aws::ServiceDiscovery
       :name,
       :values,
       :condition)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2027,6 +2079,7 @@ module Aws::ServiceDiscovery
     #
     class NamespaceNotFound < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2047,6 +2100,7 @@ module Aws::ServiceDiscovery
     class NamespaceProperties < Struct.new(
       :dns_properties,
       :http_properties)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2099,6 +2153,7 @@ module Aws::ServiceDiscovery
       :service_count,
       :properties,
       :create_date)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2190,6 +2245,7 @@ module Aws::ServiceDiscovery
       :create_date,
       :update_date,
       :targets)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2267,6 +2323,7 @@ module Aws::ServiceDiscovery
       :name,
       :values,
       :condition)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2279,6 +2336,7 @@ module Aws::ServiceDiscovery
     #
     class OperationNotFound < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2313,6 +2371,7 @@ module Aws::ServiceDiscovery
     class OperationSummary < Struct.new(
       :id,
       :status)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2487,6 +2546,7 @@ module Aws::ServiceDiscovery
       :instance_id,
       :creator_request_id,
       :attributes)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2504,6 +2564,7 @@ module Aws::ServiceDiscovery
     #
     class RegisterInstanceResponse < Struct.new(
       :operation_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2517,6 +2578,7 @@ module Aws::ServiceDiscovery
     #
     class RequestLimitExceeded < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2531,6 +2593,7 @@ module Aws::ServiceDiscovery
     #
     class ResourceInUse < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2544,6 +2607,7 @@ module Aws::ServiceDiscovery
     #
     class ResourceLimitExceeded < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2556,6 +2620,7 @@ module Aws::ServiceDiscovery
     #
     class ResourceNotFoundException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2646,6 +2711,7 @@ module Aws::ServiceDiscovery
       :health_check_custom_config,
       :create_date,
       :creator_request_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2669,6 +2735,7 @@ module Aws::ServiceDiscovery
       :message,
       :creator_request_id,
       :service_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2782,6 +2849,7 @@ module Aws::ServiceDiscovery
       :description,
       :dns_config,
       :health_check_config)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2827,6 +2895,7 @@ module Aws::ServiceDiscovery
       :name,
       :values,
       :condition)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2839,6 +2908,7 @@ module Aws::ServiceDiscovery
     #
     class ServiceNotFound < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3024,6 +3094,7 @@ module Aws::ServiceDiscovery
       :health_check_config,
       :health_check_custom_config,
       :create_date)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3052,6 +3123,7 @@ module Aws::ServiceDiscovery
     class Tag < Struct.new(
       :key,
       :value)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3084,6 +3156,7 @@ module Aws::ServiceDiscovery
     class TagResourceRequest < Struct.new(
       :resource_arn,
       :tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3106,6 +3179,7 @@ module Aws::ServiceDiscovery
     class TooManyTagsException < Struct.new(
       :message,
       :resource_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3131,6 +3205,7 @@ module Aws::ServiceDiscovery
     class UntagResourceRequest < Struct.new(
       :resource_arn,
       :tag_keys)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3167,6 +3242,7 @@ module Aws::ServiceDiscovery
       :service_id,
       :instance_id,
       :status)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3206,6 +3282,7 @@ module Aws::ServiceDiscovery
     class UpdateServiceRequest < Struct.new(
       :id,
       :service)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3223,6 +3300,7 @@ module Aws::ServiceDiscovery
     #
     class UpdateServiceResponse < Struct.new(
       :operation_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 

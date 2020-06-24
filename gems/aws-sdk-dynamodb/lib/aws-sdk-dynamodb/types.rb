@@ -41,6 +41,7 @@ module Aws::DynamoDB
       :archival_date_time,
       :archival_reason,
       :archival_backup_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -74,6 +75,7 @@ module Aws::DynamoDB
     class AttributeDefinition < Struct.new(
       :attribute_name,
       :attribute_type)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -190,6 +192,7 @@ module Aws::DynamoDB
       :l,
       :null,
       :bool)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -312,6 +315,7 @@ module Aws::DynamoDB
     class AttributeValueUpdate < Struct.new(
       :value,
       :action)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -330,6 +334,7 @@ module Aws::DynamoDB
     class AutoScalingPolicyDescription < Struct.new(
       :policy_name,
       :target_tracking_scaling_policy_configuration)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -361,6 +366,7 @@ module Aws::DynamoDB
     class AutoScalingPolicyUpdate < Struct.new(
       :policy_name,
       :target_tracking_scaling_policy_configuration)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -398,6 +404,7 @@ module Aws::DynamoDB
       :auto_scaling_disabled,
       :auto_scaling_role_arn,
       :scaling_policies)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -455,6 +462,7 @@ module Aws::DynamoDB
       :auto_scaling_disabled,
       :auto_scaling_role_arn,
       :scaling_policy_update)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -500,6 +508,7 @@ module Aws::DynamoDB
       :scale_in_cooldown,
       :scale_out_cooldown,
       :target_value)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -556,6 +565,7 @@ module Aws::DynamoDB
       :scale_in_cooldown,
       :scale_out_cooldown,
       :target_value)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -580,6 +590,7 @@ module Aws::DynamoDB
       :backup_details,
       :source_table_details,
       :source_table_feature_details)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -639,6 +650,7 @@ module Aws::DynamoDB
       :backup_type,
       :backup_creation_date_time,
       :backup_expiry_date_time)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -653,6 +665,7 @@ module Aws::DynamoDB
     #
     class BackupInUseException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -665,6 +678,7 @@ module Aws::DynamoDB
     #
     class BackupNotFoundException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -738,6 +752,7 @@ module Aws::DynamoDB
       :backup_status,
       :backup_type,
       :backup_size_bytes)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -880,6 +895,7 @@ module Aws::DynamoDB
     class BatchGetItemInput < Struct.new(
       :request_items,
       :return_consumed_capacity)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -933,6 +949,7 @@ module Aws::DynamoDB
       :responses,
       :unprocessed_keys,
       :consumed_capacity)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1030,6 +1047,7 @@ module Aws::DynamoDB
       :request_items,
       :return_consumed_capacity,
       :return_item_collection_metrics)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1114,6 +1132,7 @@ module Aws::DynamoDB
       :unprocessed_items,
       :item_collection_metrics,
       :consumed_capacity)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1142,6 +1161,7 @@ module Aws::DynamoDB
     class BillingModeSummary < Struct.new(
       :billing_mode,
       :last_update_to_pay_per_request_date_time)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1169,6 +1189,7 @@ module Aws::DynamoDB
       :item,
       :code,
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1195,6 +1216,7 @@ module Aws::DynamoDB
       :read_capacity_units,
       :write_capacity_units,
       :capacity_units)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1421,6 +1443,7 @@ module Aws::DynamoDB
     class Condition < Struct.new(
       :attribute_value_list,
       :comparison_operator)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1484,6 +1507,7 @@ module Aws::DynamoDB
       :expression_attribute_names,
       :expression_attribute_values,
       :return_values_on_condition_check_failure)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1497,6 +1521,7 @@ module Aws::DynamoDB
     #
     class ConditionalCheckFailedException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1552,6 +1577,7 @@ module Aws::DynamoDB
       :table,
       :local_secondary_indexes,
       :global_secondary_indexes)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1573,6 +1599,7 @@ module Aws::DynamoDB
     class ContinuousBackupsDescription < Struct.new(
       :continuous_backups_status,
       :point_in_time_recovery_description)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1585,6 +1612,7 @@ module Aws::DynamoDB
     #
     class ContinuousBackupsUnavailableException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1609,6 +1637,7 @@ module Aws::DynamoDB
       :table_name,
       :index_name,
       :contributor_insights_status)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1633,6 +1662,7 @@ module Aws::DynamoDB
     class CreateBackupInput < Struct.new(
       :table_name,
       :backup_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1644,6 +1674,7 @@ module Aws::DynamoDB
     #
     class CreateBackupOutput < Struct.new(
       :backup_details)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1704,6 +1735,7 @@ module Aws::DynamoDB
       :key_schema,
       :projection,
       :provisioned_throughput)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1732,6 +1764,7 @@ module Aws::DynamoDB
     class CreateGlobalTableInput < Struct.new(
       :global_table_name,
       :replication_group)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1743,6 +1776,7 @@ module Aws::DynamoDB
     #
     class CreateGlobalTableOutput < Struct.new(
       :global_table_description)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1763,6 +1797,7 @@ module Aws::DynamoDB
     #
     class CreateReplicaAction < Struct.new(
       :region_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1815,6 +1850,7 @@ module Aws::DynamoDB
       :kms_master_key_id,
       :provisioned_throughput_override,
       :global_secondary_indexes)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2118,6 +2154,7 @@ module Aws::DynamoDB
       :stream_specification,
       :sse_specification,
       :tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2131,6 +2168,7 @@ module Aws::DynamoDB
     #
     class CreateTableOutput < Struct.new(
       :table_description)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2193,6 +2231,7 @@ module Aws::DynamoDB
       :expression_attribute_names,
       :expression_attribute_values,
       :return_values_on_condition_check_failure)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2211,6 +2250,7 @@ module Aws::DynamoDB
     #
     class DeleteBackupInput < Struct.new(
       :backup_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2222,6 +2262,7 @@ module Aws::DynamoDB
     #
     class DeleteBackupOutput < Struct.new(
       :backup_description)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2243,6 +2284,7 @@ module Aws::DynamoDB
     #
     class DeleteGlobalSecondaryIndexAction < Struct.new(
       :index_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2474,6 +2516,7 @@ module Aws::DynamoDB
       :condition_expression,
       :expression_attribute_names,
       :expression_attribute_values)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2531,6 +2574,7 @@ module Aws::DynamoDB
       :attributes,
       :consumed_capacity,
       :item_collection_metrics)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2551,6 +2595,7 @@ module Aws::DynamoDB
     #
     class DeleteReplicaAction < Struct.new(
       :region_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2571,6 +2616,7 @@ module Aws::DynamoDB
     #
     class DeleteReplicationGroupMemberAction < Struct.new(
       :region_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2596,6 +2642,7 @@ module Aws::DynamoDB
     #
     class DeleteRequest < Struct.new(
       :key)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2616,6 +2663,7 @@ module Aws::DynamoDB
     #
     class DeleteTableInput < Struct.new(
       :table_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2629,6 +2677,7 @@ module Aws::DynamoDB
     #
     class DeleteTableOutput < Struct.new(
       :table_description)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2647,6 +2696,7 @@ module Aws::DynamoDB
     #
     class DescribeBackupInput < Struct.new(
       :backup_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2658,6 +2708,7 @@ module Aws::DynamoDB
     #
     class DescribeBackupOutput < Struct.new(
       :backup_description)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2677,6 +2728,7 @@ module Aws::DynamoDB
     #
     class DescribeContinuousBackupsInput < Struct.new(
       :table_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2689,6 +2741,7 @@ module Aws::DynamoDB
     #
     class DescribeContinuousBackupsOutput < Struct.new(
       :continuous_backups_description)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2713,6 +2766,7 @@ module Aws::DynamoDB
     class DescribeContributorInsightsInput < Struct.new(
       :table_name,
       :index_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2765,6 +2819,7 @@ module Aws::DynamoDB
       :contributor_insights_status,
       :last_update_date_time,
       :failure_exception)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2782,6 +2837,7 @@ module Aws::DynamoDB
     #
     class DescribeEndpointsResponse < Struct.new(
       :endpoints)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2800,6 +2856,7 @@ module Aws::DynamoDB
     #
     class DescribeGlobalTableInput < Struct.new(
       :global_table_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2811,6 +2868,7 @@ module Aws::DynamoDB
     #
     class DescribeGlobalTableOutput < Struct.new(
       :global_table_description)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2829,6 +2887,7 @@ module Aws::DynamoDB
     #
     class DescribeGlobalTableSettingsInput < Struct.new(
       :global_table_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2845,6 +2904,7 @@ module Aws::DynamoDB
     class DescribeGlobalTableSettingsOutput < Struct.new(
       :global_table_name,
       :replica_settings)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2889,6 +2949,7 @@ module Aws::DynamoDB
       :account_max_write_capacity_units,
       :table_max_read_capacity_units,
       :table_max_write_capacity_units)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2909,6 +2970,7 @@ module Aws::DynamoDB
     #
     class DescribeTableInput < Struct.new(
       :table_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2922,6 +2984,7 @@ module Aws::DynamoDB
     #
     class DescribeTableOutput < Struct.new(
       :table)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2940,6 +3003,7 @@ module Aws::DynamoDB
     #
     class DescribeTableReplicaAutoScalingInput < Struct.new(
       :table_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2951,6 +3015,7 @@ module Aws::DynamoDB
     #
     class DescribeTableReplicaAutoScalingOutput < Struct.new(
       :table_auto_scaling_description)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2969,6 +3034,7 @@ module Aws::DynamoDB
     #
     class DescribeTimeToLiveInput < Struct.new(
       :table_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2979,6 +3045,7 @@ module Aws::DynamoDB
     #
     class DescribeTimeToLiveOutput < Struct.new(
       :time_to_live_description)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2997,6 +3064,7 @@ module Aws::DynamoDB
     class Endpoint < Struct.new(
       :address,
       :cache_period_in_minutes)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3274,6 +3342,7 @@ module Aws::DynamoDB
       :exists,
       :comparison_operator,
       :attribute_value_list)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3292,6 +3361,7 @@ module Aws::DynamoDB
     class FailureException < Struct.new(
       :exception_name,
       :exception_description)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3342,6 +3412,7 @@ module Aws::DynamoDB
       :table_name,
       :projection_expression,
       :expression_attribute_names)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3495,6 +3566,7 @@ module Aws::DynamoDB
       :return_consumed_capacity,
       :projection_expression,
       :expression_attribute_names)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3524,6 +3596,7 @@ module Aws::DynamoDB
     class GetItemOutput < Struct.new(
       :item,
       :consumed_capacity)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3602,6 +3675,7 @@ module Aws::DynamoDB
       :key_schema,
       :projection,
       :provisioned_throughput)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3644,6 +3718,7 @@ module Aws::DynamoDB
     class GlobalSecondaryIndexAutoScalingUpdate < Struct.new(
       :index_name,
       :provisioned_write_capacity_auto_scaling_update)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3755,6 +3830,7 @@ module Aws::DynamoDB
       :index_size_bytes,
       :item_count,
       :index_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3805,6 +3881,7 @@ module Aws::DynamoDB
       :key_schema,
       :projection,
       :provisioned_throughput)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3881,6 +3958,7 @@ module Aws::DynamoDB
       :update,
       :create,
       :delete)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3899,6 +3977,7 @@ module Aws::DynamoDB
     class GlobalTable < Struct.new(
       :global_table_name,
       :replication_group)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3911,6 +3990,7 @@ module Aws::DynamoDB
     #
     class GlobalTableAlreadyExistsException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3952,6 +4032,7 @@ module Aws::DynamoDB
       :creation_date_time,
       :global_table_status,
       :global_table_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4002,6 +4083,7 @@ module Aws::DynamoDB
       :index_name,
       :provisioned_write_capacity_units,
       :provisioned_write_capacity_auto_scaling_settings_update)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4014,6 +4096,7 @@ module Aws::DynamoDB
     #
     class GlobalTableNotFoundException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4027,6 +4110,7 @@ module Aws::DynamoDB
     #
     class IdempotentParameterMismatchException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4039,6 +4123,7 @@ module Aws::DynamoDB
     #
     class IndexNotFoundException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4053,6 +4138,7 @@ module Aws::DynamoDB
     #
     class InternalServerError < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4066,6 +4152,7 @@ module Aws::DynamoDB
     #
     class InvalidRestoreTimeException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4096,6 +4183,7 @@ module Aws::DynamoDB
     class ItemCollectionMetrics < Struct.new(
       :item_collection_key,
       :size_estimate_range_gb)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4111,6 +4199,7 @@ module Aws::DynamoDB
     #
     class ItemCollectionSizeLimitExceededException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4125,6 +4214,7 @@ module Aws::DynamoDB
     #
     class ItemResponse < Struct.new(
       :item)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4179,6 +4269,7 @@ module Aws::DynamoDB
     class KeySchemaElement < Struct.new(
       :attribute_name,
       :key_type)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4307,6 +4398,7 @@ module Aws::DynamoDB
       :consistent_read,
       :projection_expression,
       :expression_attribute_names)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4333,6 +4425,7 @@ module Aws::DynamoDB
     #
     class LimitExceededException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4395,6 +4488,7 @@ module Aws::DynamoDB
       :time_range_upper_bound,
       :exclusive_start_backup_arn,
       :backup_type)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4422,6 +4516,7 @@ module Aws::DynamoDB
     class ListBackupsOutput < Struct.new(
       :backup_summaries,
       :last_evaluated_backup_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4452,6 +4547,7 @@ module Aws::DynamoDB
       :table_name,
       :next_token,
       :max_results)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4468,6 +4564,7 @@ module Aws::DynamoDB
     class ListContributorInsightsOutput < Struct.new(
       :contributor_insights_summaries,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4505,6 +4602,7 @@ module Aws::DynamoDB
       :exclusive_start_global_table_name,
       :limit,
       :region_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4521,6 +4619,7 @@ module Aws::DynamoDB
     class ListGlobalTablesOutput < Struct.new(
       :global_tables,
       :last_evaluated_global_table_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4550,6 +4649,7 @@ module Aws::DynamoDB
     class ListTablesInput < Struct.new(
       :exclusive_start_table_name,
       :limit)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4579,6 +4679,7 @@ module Aws::DynamoDB
     class ListTablesOutput < Struct.new(
       :table_names,
       :last_evaluated_table_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4606,6 +4707,7 @@ module Aws::DynamoDB
     class ListTagsOfResourceInput < Struct.new(
       :resource_arn,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4624,6 +4726,7 @@ module Aws::DynamoDB
     class ListTagsOfResourceOutput < Struct.new(
       :tags,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4685,6 +4788,7 @@ module Aws::DynamoDB
       :index_name,
       :key_schema,
       :projection)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4747,6 +4851,7 @@ module Aws::DynamoDB
       :index_size_bytes,
       :item_count,
       :index_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4791,6 +4896,7 @@ module Aws::DynamoDB
       :index_name,
       :key_schema,
       :projection)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4823,6 +4929,7 @@ module Aws::DynamoDB
       :point_in_time_recovery_status,
       :earliest_restorable_date_time,
       :latest_restorable_date_time)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4844,6 +4951,7 @@ module Aws::DynamoDB
     #
     class PointInTimeRecoverySpecification < Struct.new(
       :point_in_time_recovery_enabled)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4856,6 +4964,7 @@ module Aws::DynamoDB
     #
     class PointInTimeRecoveryUnavailableException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4899,6 +5008,7 @@ module Aws::DynamoDB
     class Projection < Struct.new(
       :projection_type,
       :non_key_attributes)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4954,6 +5064,7 @@ module Aws::DynamoDB
     class ProvisionedThroughput < Struct.new(
       :read_capacity_units,
       :write_capacity_units)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5003,6 +5114,7 @@ module Aws::DynamoDB
       :number_of_decreases_today,
       :read_capacity_units,
       :write_capacity_units)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5025,6 +5137,7 @@ module Aws::DynamoDB
     #
     class ProvisionedThroughputExceededException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5047,6 +5160,7 @@ module Aws::DynamoDB
     #
     class ProvisionedThroughputOverride < Struct.new(
       :read_capacity_units)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5113,6 +5227,7 @@ module Aws::DynamoDB
       :expression_attribute_names,
       :expression_attribute_values,
       :return_values_on_condition_check_failure)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5364,6 +5479,7 @@ module Aws::DynamoDB
       :condition_expression,
       :expression_attribute_names,
       :expression_attribute_values)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5421,6 +5537,7 @@ module Aws::DynamoDB
       :attributes,
       :consumed_capacity,
       :item_collection_metrics)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5448,6 +5565,7 @@ module Aws::DynamoDB
     #
     class PutRequest < Struct.new(
       :item)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5897,6 +6015,7 @@ module Aws::DynamoDB
       :key_condition_expression,
       :expression_attribute_names,
       :expression_attribute_values)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5971,6 +6090,7 @@ module Aws::DynamoDB
       :scanned_count,
       :last_evaluated_key,
       :consumed_capacity)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5991,6 +6111,7 @@ module Aws::DynamoDB
     #
     class Replica < Struct.new(
       :region_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6003,6 +6124,7 @@ module Aws::DynamoDB
     #
     class ReplicaAlreadyExistsException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6046,6 +6168,7 @@ module Aws::DynamoDB
       :replica_provisioned_read_capacity_auto_scaling_settings,
       :replica_provisioned_write_capacity_auto_scaling_settings,
       :replica_status)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6114,6 +6237,7 @@ module Aws::DynamoDB
       :region_name,
       :replica_global_secondary_index_updates,
       :replica_provisioned_read_capacity_auto_scaling_update)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6168,6 +6292,7 @@ module Aws::DynamoDB
       :kms_master_key_id,
       :provisioned_throughput_override,
       :global_secondary_indexes)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6197,6 +6322,7 @@ module Aws::DynamoDB
     class ReplicaGlobalSecondaryIndex < Struct.new(
       :index_name,
       :provisioned_throughput_override)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6236,6 +6362,7 @@ module Aws::DynamoDB
       :index_status,
       :provisioned_read_capacity_auto_scaling_settings,
       :provisioned_write_capacity_auto_scaling_settings)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6278,6 +6405,7 @@ module Aws::DynamoDB
     class ReplicaGlobalSecondaryIndexAutoScalingUpdate < Struct.new(
       :index_name,
       :provisioned_read_capacity_auto_scaling_update)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6297,6 +6425,7 @@ module Aws::DynamoDB
     class ReplicaGlobalSecondaryIndexDescription < Struct.new(
       :index_name,
       :provisioned_throughput_override)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6348,6 +6477,7 @@ module Aws::DynamoDB
       :provisioned_read_capacity_auto_scaling_settings,
       :provisioned_write_capacity_units,
       :provisioned_write_capacity_auto_scaling_settings)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6398,6 +6528,7 @@ module Aws::DynamoDB
       :index_name,
       :provisioned_read_capacity_units,
       :provisioned_read_capacity_auto_scaling_settings_update)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6410,6 +6541,7 @@ module Aws::DynamoDB
     #
     class ReplicaNotFoundException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6482,6 +6614,7 @@ module Aws::DynamoDB
       :replica_provisioned_write_capacity_units,
       :replica_provisioned_write_capacity_auto_scaling_settings,
       :replica_global_secondary_index_settings)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6564,6 +6697,7 @@ module Aws::DynamoDB
       :replica_provisioned_read_capacity_units,
       :replica_provisioned_read_capacity_auto_scaling_settings_update,
       :replica_global_secondary_index_settings_update)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6601,6 +6735,7 @@ module Aws::DynamoDB
     class ReplicaUpdate < Struct.new(
       :create,
       :delete)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6674,6 +6809,7 @@ module Aws::DynamoDB
       :create,
       :update,
       :delete)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6692,6 +6828,7 @@ module Aws::DynamoDB
     #
     class RequestLimitExceeded < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6707,6 +6844,7 @@ module Aws::DynamoDB
     #
     class ResourceInUseException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6722,6 +6860,7 @@ module Aws::DynamoDB
     #
     class ResourceNotFoundException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6751,6 +6890,7 @@ module Aws::DynamoDB
       :source_table_arn,
       :restore_date_time,
       :restore_in_progress)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6848,6 +6988,7 @@ module Aws::DynamoDB
       :local_secondary_index_override,
       :provisioned_throughput_override,
       :sse_specification_override)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6859,6 +7000,7 @@ module Aws::DynamoDB
     #
     class RestoreTableFromBackupOutput < Struct.new(
       :table_description)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6977,6 +7119,7 @@ module Aws::DynamoDB
       :local_secondary_index_override,
       :provisioned_throughput_override,
       :sse_specification_override)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6988,6 +7131,7 @@ module Aws::DynamoDB
     #
     class RestoreTableToPointInTimeOutput < Struct.new(
       :table_description)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -7034,6 +7178,7 @@ module Aws::DynamoDB
       :sse_type,
       :kms_master_key_arn,
       :inaccessible_encryption_date_time)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -7080,6 +7225,7 @@ module Aws::DynamoDB
       :enabled,
       :sse_type,
       :kms_master_key_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -7454,6 +7600,7 @@ module Aws::DynamoDB
       :expression_attribute_names,
       :expression_attribute_values,
       :consistent_read)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -7526,6 +7673,7 @@ module Aws::DynamoDB
       :scanned_count,
       :last_evaluated_key,
       :consumed_capacity)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -7589,6 +7737,7 @@ module Aws::DynamoDB
       :provisioned_throughput,
       :item_count,
       :billing_mode)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -7629,6 +7778,7 @@ module Aws::DynamoDB
       :stream_description,
       :time_to_live_description,
       :sse_description)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -7670,6 +7820,7 @@ module Aws::DynamoDB
     class StreamSpecification < Struct.new(
       :stream_enabled,
       :stream_view_type)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -7682,6 +7833,7 @@ module Aws::DynamoDB
     #
     class TableAlreadyExistsException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -7713,6 +7865,7 @@ module Aws::DynamoDB
       :table_name,
       :table_status,
       :replicas)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -8029,6 +8182,7 @@ module Aws::DynamoDB
       :restore_summary,
       :sse_description,
       :archival_summary)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -8042,6 +8196,7 @@ module Aws::DynamoDB
     #
     class TableInUseException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -8055,6 +8210,7 @@ module Aws::DynamoDB
     #
     class TableNotFoundException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -8098,6 +8254,7 @@ module Aws::DynamoDB
     class Tag < Struct.new(
       :key,
       :value)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -8128,6 +8285,7 @@ module Aws::DynamoDB
     class TagResourceInput < Struct.new(
       :resource_arn,
       :tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -8147,6 +8305,7 @@ module Aws::DynamoDB
     class TimeToLiveDescription < Struct.new(
       :time_to_live_status,
       :attribute_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -8176,6 +8335,7 @@ module Aws::DynamoDB
     class TimeToLiveSpecification < Struct.new(
       :enabled,
       :attribute_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -8207,6 +8367,7 @@ module Aws::DynamoDB
     #
     class TransactGetItem < Struct.new(
       :get)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -8247,6 +8408,7 @@ module Aws::DynamoDB
     class TransactGetItemsInput < Struct.new(
       :transact_items,
       :return_consumed_capacity)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -8276,6 +8438,7 @@ module Aws::DynamoDB
     class TransactGetItemsOutput < Struct.new(
       :consumed_capacity,
       :responses)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -8368,6 +8531,7 @@ module Aws::DynamoDB
       :put,
       :delete,
       :update)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -8512,6 +8676,7 @@ module Aws::DynamoDB
       :return_consumed_capacity,
       :return_item_collection_metrics,
       :client_request_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -8533,6 +8698,7 @@ module Aws::DynamoDB
     class TransactWriteItemsOutput < Struct.new(
       :consumed_capacity,
       :item_collection_metrics)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -8702,6 +8868,7 @@ module Aws::DynamoDB
     class TransactionCanceledException < Struct.new(
       :message,
       :cancellation_reasons)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -8715,6 +8882,7 @@ module Aws::DynamoDB
     #
     class TransactionConflictException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -8727,6 +8895,7 @@ module Aws::DynamoDB
     #
     class TransactionInProgressException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -8753,6 +8922,7 @@ module Aws::DynamoDB
     class UntagResourceInput < Struct.new(
       :resource_arn,
       :tag_keys)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -8822,6 +8992,7 @@ module Aws::DynamoDB
       :expression_attribute_names,
       :expression_attribute_values,
       :return_values_on_condition_check_failure)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -8848,6 +9019,7 @@ module Aws::DynamoDB
     class UpdateContinuousBackupsInput < Struct.new(
       :table_name,
       :point_in_time_recovery_specification)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -8860,6 +9032,7 @@ module Aws::DynamoDB
     #
     class UpdateContinuousBackupsOutput < Struct.new(
       :continuous_backups_description)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -8890,6 +9063,7 @@ module Aws::DynamoDB
       :table_name,
       :index_name,
       :contributor_insights_action)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -8911,6 +9085,7 @@ module Aws::DynamoDB
       :table_name,
       :index_name,
       :contributor_insights_status)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -8949,6 +9124,7 @@ module Aws::DynamoDB
     class UpdateGlobalSecondaryIndexAction < Struct.new(
       :index_name,
       :provisioned_throughput)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -8983,6 +9159,7 @@ module Aws::DynamoDB
     class UpdateGlobalTableInput < Struct.new(
       :global_table_name,
       :replica_updates)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -8994,6 +9171,7 @@ module Aws::DynamoDB
     #
     class UpdateGlobalTableOutput < Struct.new(
       :global_table_description)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -9136,6 +9314,7 @@ module Aws::DynamoDB
       :global_table_provisioned_write_capacity_auto_scaling_settings_update,
       :global_table_global_secondary_index_settings_update,
       :replica_settings_update)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -9152,6 +9331,7 @@ module Aws::DynamoDB
     class UpdateGlobalTableSettingsOutput < Struct.new(
       :global_table_name,
       :replica_settings)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -9507,6 +9687,7 @@ module Aws::DynamoDB
       :condition_expression,
       :expression_attribute_names,
       :expression_attribute_values)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -9567,6 +9748,7 @@ module Aws::DynamoDB
       :attributes,
       :consumed_capacity,
       :item_collection_metrics)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -9619,6 +9801,7 @@ module Aws::DynamoDB
       :kms_master_key_id,
       :provisioned_throughput_override,
       :global_secondary_indexes)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -9818,6 +10001,7 @@ module Aws::DynamoDB
       :stream_specification,
       :sse_specification,
       :replica_updates)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -9831,6 +10015,7 @@ module Aws::DynamoDB
     #
     class UpdateTableOutput < Struct.new(
       :table_description)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -9942,6 +10127,7 @@ module Aws::DynamoDB
       :table_name,
       :provisioned_write_capacity_auto_scaling_update,
       :replica_updates)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -9954,6 +10140,7 @@ module Aws::DynamoDB
     #
     class UpdateTableReplicaAutoScalingOutput < Struct.new(
       :table_auto_scaling_description)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -9984,6 +10171,7 @@ module Aws::DynamoDB
     class UpdateTimeToLiveInput < Struct.new(
       :table_name,
       :time_to_live_specification)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -9995,6 +10183,7 @@ module Aws::DynamoDB
     #
     class UpdateTimeToLiveOutput < Struct.new(
       :time_to_live_specification)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -10032,6 +10221,7 @@ module Aws::DynamoDB
     class WriteRequest < Struct.new(
       :put_request,
       :delete_request)
+      SENSITIVE = []
       include Aws::Structure
     end
 

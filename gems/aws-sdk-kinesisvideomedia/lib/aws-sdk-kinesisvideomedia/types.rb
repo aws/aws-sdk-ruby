@@ -20,6 +20,7 @@ module Aws::KinesisVideoMedia
     #
     class ClientLimitExceededException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -33,6 +34,7 @@ module Aws::KinesisVideoMedia
     #
     class ConnectionLimitExceededException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -72,6 +74,7 @@ module Aws::KinesisVideoMedia
       :stream_name,
       :stream_arn,
       :start_selector)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -139,6 +142,7 @@ module Aws::KinesisVideoMedia
     class GetMediaOutput < Struct.new(
       :content_type,
       :payload)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -151,6 +155,7 @@ module Aws::KinesisVideoMedia
     #
     class InvalidArgumentException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -166,6 +171,7 @@ module Aws::KinesisVideoMedia
     #
     class InvalidEndpointException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -179,6 +185,7 @@ module Aws::KinesisVideoMedia
     #
     class NotAuthorizedException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -191,6 +198,7 @@ module Aws::KinesisVideoMedia
     #
     class ResourceNotFoundException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -268,6 +276,7 @@ module Aws::KinesisVideoMedia
       :after_fragment_number,
       :start_timestamp,
       :continuation_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 

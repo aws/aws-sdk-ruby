@@ -21,6 +21,7 @@ module Aws::Lex
     #
     class BadGatewayException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -35,6 +36,7 @@ module Aws::Lex
     #
     class BadRequestException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -56,6 +58,7 @@ module Aws::Lex
     class Button < Struct.new(
       :text,
       :value)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -69,6 +72,7 @@ module Aws::Lex
     #
     class ConflictException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -99,6 +103,7 @@ module Aws::Lex
       :bot_name,
       :bot_alias,
       :user_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -125,6 +130,7 @@ module Aws::Lex
       :bot_alias,
       :user_id,
       :session_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -146,6 +152,7 @@ module Aws::Lex
     #
     class DependencyFailedException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -249,6 +256,7 @@ module Aws::Lex
       :fulfillment_state,
       :message,
       :message_format)
+      SENSITIVE = [:slots, :message]
       include Aws::Structure
     end
 
@@ -283,6 +291,7 @@ module Aws::Lex
       :attachment_link_url,
       :image_url,
       :buttons)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -324,6 +333,7 @@ module Aws::Lex
       :bot_alias,
       :user_id,
       :checkpoint_label_filter)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -358,6 +368,7 @@ module Aws::Lex
       :session_attributes,
       :session_id,
       :dialog_action)
+      SENSITIVE = [:session_attributes]
       include Aws::Structure
     end
 
@@ -463,6 +474,7 @@ module Aws::Lex
       :dialog_action_type,
       :fulfillment_state,
       :slot_to_elicit)
+      SENSITIVE = [:slots]
       include Aws::Structure
     end
 
@@ -475,6 +487,7 @@ module Aws::Lex
     #
     class InternalFailureException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -491,6 +504,7 @@ module Aws::Lex
     class LimitExceededException < Struct.new(
       :retry_after_seconds,
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -503,6 +517,7 @@ module Aws::Lex
     #
     class LoopDetectedException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -515,6 +530,7 @@ module Aws::Lex
     #
     class NotAcceptableException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -528,6 +544,7 @@ module Aws::Lex
     #
     class NotFoundException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -698,6 +715,7 @@ module Aws::Lex
       :content_type,
       :accept,
       :input_stream)
+      SENSITIVE = [:session_attributes, :request_attributes]
       include Aws::Structure
     end
 
@@ -869,6 +887,7 @@ module Aws::Lex
       :input_transcript,
       :audio_stream,
       :session_id)
+      SENSITIVE = [:message]
       include Aws::Structure
     end
 
@@ -961,6 +980,7 @@ module Aws::Lex
       :session_attributes,
       :request_attributes,
       :input_text)
+      SENSITIVE = [:session_attributes, :request_attributes, :input_text]
       include Aws::Structure
     end
 
@@ -1112,6 +1132,7 @@ module Aws::Lex
       :slot_to_elicit,
       :response_card,
       :session_id)
+      SENSITIVE = [:slots, :session_attributes, :message]
       include Aws::Structure
     end
 
@@ -1239,6 +1260,7 @@ module Aws::Lex
       :dialog_action,
       :recent_intent_summary_view,
       :accept)
+      SENSITIVE = [:session_attributes]
       include Aws::Structure
     end
 
@@ -1337,6 +1359,7 @@ module Aws::Lex
       :slot_to_elicit,
       :audio_stream,
       :session_id)
+      SENSITIVE = [:message]
       include Aws::Structure
     end
 
@@ -1349,6 +1372,7 @@ module Aws::Lex
     #
     class RequestTimeoutException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1375,6 +1399,7 @@ module Aws::Lex
       :version,
       :content_type,
       :generic_attachments)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1398,6 +1423,7 @@ module Aws::Lex
     class SentimentResponse < Struct.new(
       :sentiment_label,
       :sentiment_score)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1410,6 +1436,7 @@ module Aws::Lex
     #
     class UnsupportedMediaTypeException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 

@@ -28,6 +28,7 @@ module Aws::CostandUsageReportService
     #
     class DeleteReportDefinitionRequest < Struct.new(
       :report_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -42,6 +43,7 @@ module Aws::CostandUsageReportService
     #
     class DeleteReportDefinitionResponse < Struct.new(
       :response_message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -68,6 +70,7 @@ module Aws::CostandUsageReportService
     class DescribeReportDefinitionsRequest < Struct.new(
       :max_results,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -87,6 +90,7 @@ module Aws::CostandUsageReportService
     class DescribeReportDefinitionsResponse < Struct.new(
       :report_definitions,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -101,6 +105,7 @@ module Aws::CostandUsageReportService
     #
     class DuplicateReportNameException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -115,6 +120,7 @@ module Aws::CostandUsageReportService
     #
     class InternalErrorException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -154,6 +160,7 @@ module Aws::CostandUsageReportService
     class ModifyReportDefinitionRequest < Struct.new(
       :report_name,
       :report_definition)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -191,6 +198,7 @@ module Aws::CostandUsageReportService
     #
     class PutReportDefinitionRequest < Struct.new(
       :report_definition)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -289,6 +297,7 @@ module Aws::CostandUsageReportService
       :additional_artifacts,
       :refresh_closed_reports,
       :report_versioning)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -303,6 +312,7 @@ module Aws::CostandUsageReportService
     #
     class ReportLimitReachedException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -317,6 +327,7 @@ module Aws::CostandUsageReportService
     #
     class ValidationException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 

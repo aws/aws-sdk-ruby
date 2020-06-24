@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.334.0 (2020-06-24)
+------------------
+
+* Feature - Added support for enumerating regions for `Aws::Honeycode`.
+
+1.333.0 (2020-06-23)
+------------------
+
+* Feature - Updated the partitions source data the determines the AWS service regions and endpoints.
+
 1.332.0 (2020-06-19)
 ------------------
 

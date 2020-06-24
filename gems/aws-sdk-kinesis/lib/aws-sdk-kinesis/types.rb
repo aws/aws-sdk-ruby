@@ -35,6 +35,7 @@ module Aws::Kinesis
     class AddTagsToStreamInput < Struct.new(
       :stream_name,
       :tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -70,6 +71,7 @@ module Aws::Kinesis
       :consumer_arn,
       :consumer_status,
       :consumer_creation_timestamp)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -110,6 +112,7 @@ module Aws::Kinesis
       :consumer_status,
       :consumer_creation_timestamp,
       :stream_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -144,6 +147,7 @@ module Aws::Kinesis
     class CreateStreamInput < Struct.new(
       :stream_name,
       :shard_count)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -171,6 +175,7 @@ module Aws::Kinesis
     class DecreaseStreamRetentionPeriodInput < Struct.new(
       :stream_name,
       :retention_period_hours)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -199,6 +204,7 @@ module Aws::Kinesis
     class DeleteStreamInput < Struct.new(
       :stream_name,
       :enforce_consumer_deletion)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -240,6 +246,7 @@ module Aws::Kinesis
       :stream_arn,
       :consumer_name,
       :consumer_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -262,6 +269,7 @@ module Aws::Kinesis
     class DescribeLimitsOutput < Struct.new(
       :shard_limit,
       :open_shard_count)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -299,6 +307,7 @@ module Aws::Kinesis
       :stream_arn,
       :consumer_name,
       :consumer_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -310,6 +319,7 @@ module Aws::Kinesis
     #
     class DescribeStreamConsumerOutput < Struct.new(
       :consumer_description)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -344,6 +354,7 @@ module Aws::Kinesis
       :stream_name,
       :limit,
       :exclusive_start_shard_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -359,6 +370,7 @@ module Aws::Kinesis
     #
     class DescribeStreamOutput < Struct.new(
       :stream_description)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -377,6 +389,7 @@ module Aws::Kinesis
     #
     class DescribeStreamSummaryInput < Struct.new(
       :stream_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -388,6 +401,7 @@ module Aws::Kinesis
     #
     class DescribeStreamSummaryOutput < Struct.new(
       :stream_description_summary)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -442,6 +456,7 @@ module Aws::Kinesis
     class DisableEnhancedMonitoringInput < Struct.new(
       :stream_name,
       :shard_level_metrics)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -495,6 +510,7 @@ module Aws::Kinesis
     class EnableEnhancedMonitoringInput < Struct.new(
       :stream_name,
       :shard_level_metrics)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -535,6 +551,7 @@ module Aws::Kinesis
     #
     class EnhancedMetrics < Struct.new(
       :shard_level_metrics)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -561,6 +578,7 @@ module Aws::Kinesis
       :stream_name,
       :current_shard_level_metrics,
       :desired_shard_level_metrics)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -574,6 +592,7 @@ module Aws::Kinesis
     #
     class ExpiredIteratorException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -586,6 +605,7 @@ module Aws::Kinesis
     #
     class ExpiredNextTokenException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -616,6 +636,7 @@ module Aws::Kinesis
     class GetRecordsInput < Struct.new(
       :shard_iterator,
       :limit)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -644,6 +665,7 @@ module Aws::Kinesis
       :records,
       :next_shard_iterator,
       :millis_behind_latest)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -718,6 +740,7 @@ module Aws::Kinesis
       :shard_iterator_type,
       :starting_sequence_number,
       :timestamp)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -733,6 +756,7 @@ module Aws::Kinesis
     #
     class GetShardIteratorOutput < Struct.new(
       :shard_iterator)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -752,6 +776,7 @@ module Aws::Kinesis
     class HashKeyRange < Struct.new(
       :starting_hash_key,
       :ending_hash_key)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -779,6 +804,7 @@ module Aws::Kinesis
     class IncreaseStreamRetentionPeriodInput < Struct.new(
       :stream_name,
       :retention_period_hours)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -790,6 +816,7 @@ module Aws::Kinesis
     class InternalFailureException < Struct.new(
       :message,
       :event_type)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -804,6 +831,7 @@ module Aws::Kinesis
     #
     class InvalidArgumentException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -819,6 +847,7 @@ module Aws::Kinesis
     class KMSAccessDeniedException < Struct.new(
       :message,
       :event_type)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -834,6 +863,7 @@ module Aws::Kinesis
     class KMSDisabledException < Struct.new(
       :message,
       :event_type)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -855,6 +885,7 @@ module Aws::Kinesis
     class KMSInvalidStateException < Struct.new(
       :message,
       :event_type)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -870,6 +901,7 @@ module Aws::Kinesis
     class KMSNotFoundException < Struct.new(
       :message,
       :event_type)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -884,6 +916,7 @@ module Aws::Kinesis
     class KMSOptInRequired < Struct.new(
       :message,
       :event_type)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -904,6 +937,7 @@ module Aws::Kinesis
     class KMSThrottlingException < Struct.new(
       :message,
       :event_type)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -919,6 +953,7 @@ module Aws::Kinesis
     #
     class LimitExceededException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1007,6 +1042,7 @@ module Aws::Kinesis
       :exclusive_start_shard_id,
       :max_results,
       :stream_creation_timestamp)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1039,6 +1075,7 @@ module Aws::Kinesis
     class ListShardsOutput < Struct.new(
       :shards,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1114,6 +1151,7 @@ module Aws::Kinesis
       :next_token,
       :max_results,
       :stream_creation_timestamp)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1146,6 +1184,7 @@ module Aws::Kinesis
     class ListStreamConsumersOutput < Struct.new(
       :consumers,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1172,6 +1211,7 @@ module Aws::Kinesis
     class ListStreamsInput < Struct.new(
       :limit,
       :exclusive_start_stream_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1191,6 +1231,7 @@ module Aws::Kinesis
     class ListStreamsOutput < Struct.new(
       :stream_names,
       :has_more_streams)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1228,6 +1269,7 @@ module Aws::Kinesis
       :stream_name,
       :exclusive_start_tag_key,
       :limit)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1249,6 +1291,7 @@ module Aws::Kinesis
     class ListTagsForStreamOutput < Struct.new(
       :tags,
       :has_more_tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1282,6 +1325,7 @@ module Aws::Kinesis
       :stream_name,
       :shard_to_merge,
       :adjacent_shard_to_merge)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1304,6 +1348,7 @@ module Aws::Kinesis
     #
     class ProvisionedThroughputExceededException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1365,6 +1410,7 @@ module Aws::Kinesis
       :partition_key,
       :explicit_hash_key,
       :sequence_number_for_ordering)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1397,6 +1443,7 @@ module Aws::Kinesis
       :shard_id,
       :sequence_number,
       :encryption_type)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1429,6 +1476,7 @@ module Aws::Kinesis
     class PutRecordsInput < Struct.new(
       :records,
       :stream_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1463,6 +1511,7 @@ module Aws::Kinesis
       :failed_record_count,
       :records,
       :encryption_type)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1507,6 +1556,7 @@ module Aws::Kinesis
       :data,
       :explicit_hash_key,
       :partition_key)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1545,6 +1595,7 @@ module Aws::Kinesis
       :shard_id,
       :error_code,
       :error_message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1589,6 +1640,7 @@ module Aws::Kinesis
       :data,
       :partition_key,
       :encryption_type)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1621,6 +1673,7 @@ module Aws::Kinesis
     class RegisterStreamConsumerInput < Struct.new(
       :stream_arn,
       :consumer_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1634,6 +1687,7 @@ module Aws::Kinesis
     #
     class RegisterStreamConsumerOutput < Struct.new(
       :consumer)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1661,6 +1715,7 @@ module Aws::Kinesis
     class RemoveTagsFromStreamInput < Struct.new(
       :stream_name,
       :tag_keys)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1676,6 +1731,7 @@ module Aws::Kinesis
     class ResourceInUseException < Struct.new(
       :message,
       :event_type)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1691,6 +1747,7 @@ module Aws::Kinesis
     class ResourceNotFoundException < Struct.new(
       :message,
       :event_type)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1710,6 +1767,7 @@ module Aws::Kinesis
     class SequenceNumberRange < Struct.new(
       :starting_sequence_number,
       :ending_sequence_number)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1744,6 +1802,7 @@ module Aws::Kinesis
       :adjacent_parent_shard_id,
       :hash_key_range,
       :sequence_number_range)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1783,6 +1842,7 @@ module Aws::Kinesis
       :stream_name,
       :shard_to_split,
       :new_starting_hash_key)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1830,6 +1890,7 @@ module Aws::Kinesis
       :stream_name,
       :encryption_type,
       :key_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1857,6 +1918,7 @@ module Aws::Kinesis
       :type,
       :sequence_number,
       :timestamp)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1904,6 +1966,7 @@ module Aws::Kinesis
       :stream_name,
       :encryption_type,
       :key_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2002,6 +2065,7 @@ module Aws::Kinesis
       :enhanced_monitoring,
       :encryption_type,
       :key_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2097,6 +2161,7 @@ module Aws::Kinesis
       :key_id,
       :open_shard_count,
       :consumer_count)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2125,6 +2190,7 @@ module Aws::Kinesis
       :continuation_sequence_number,
       :millis_behind_latest,
       :event_type)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2160,6 +2226,7 @@ module Aws::Kinesis
       :consumer_arn,
       :shard_id,
       :starting_position)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2172,6 +2239,7 @@ module Aws::Kinesis
     #
     class SubscribeToShardOutput < Struct.new(
       :event_stream)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2194,6 +2262,7 @@ module Aws::Kinesis
     class Tag < Struct.new(
       :key,
       :value)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2224,6 +2293,7 @@ module Aws::Kinesis
       :stream_name,
       :target_shard_count,
       :scaling_type)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2245,6 +2315,7 @@ module Aws::Kinesis
       :stream_name,
       :current_shard_count,
       :target_shard_count)
+      SENSITIVE = []
       include Aws::Structure
     end
 

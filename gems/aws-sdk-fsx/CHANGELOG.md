@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.23.0 (2020-06-24)
+------------------
+
+* Feature - This release adds the capability to take highly-durable, incremental backups of your FSx for Lustre persistent file systems. This capability makes it easy to further protect your file system data and to meet business and regulatory compliance requirements.
+
+1.22.0 (2020-06-23)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
 1.21.1 (2020-06-11)
 ------------------
 

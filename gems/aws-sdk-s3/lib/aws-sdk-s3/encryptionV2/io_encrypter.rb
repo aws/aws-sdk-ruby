@@ -52,8 +52,12 @@ module Aws
         def encrypt_to_tempfile(cipher, io)
           encrypted = Tempfile.new(self.object_id.to_s)
           encrypted.binmode
-          while chunk = io.read(ONE_MEGABYTE)
-            encrypted.write(cipher.update(chunk))
+          while chunk = io.read(ONE_MEGABYTE, read_buffer ||= String.new)
+            if cipher.method(:update).arity == 1
+              encrypted.write(cipher.update(chunk))
+            else
+              encrypted.write(cipher.update(chunk, cipher_buffer ||= String.new))
+            end
           end
           encrypted.write(cipher.final)
           encrypted.write(cipher.auth_tag)

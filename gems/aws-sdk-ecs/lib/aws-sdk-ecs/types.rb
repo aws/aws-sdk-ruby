@@ -45,6 +45,7 @@ module Aws::ECS
       :type,
       :status,
       :details)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -71,6 +72,7 @@ module Aws::ECS
     class AttachmentStateChange < Struct.new(
       :attachment_arn,
       :status)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -123,6 +125,7 @@ module Aws::ECS
       :value,
       :target_type,
       :target_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -191,6 +194,7 @@ module Aws::ECS
       :auto_scaling_group_arn,
       :managed_scaling,
       :managed_termination_protection)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -236,6 +240,7 @@ module Aws::ECS
       :subnets,
       :security_groups,
       :assign_public_ip)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -336,6 +341,7 @@ module Aws::ECS
       :update_status,
       :update_status_reason,
       :tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -380,6 +386,7 @@ module Aws::ECS
       :capacity_provider,
       :weight,
       :base)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -395,6 +402,7 @@ module Aws::ECS
     #
     class ClientException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -576,6 +584,7 @@ module Aws::ECS
       :default_capacity_provider_strategy,
       :attachments,
       :attachments_status)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -639,6 +648,7 @@ module Aws::ECS
     class ClusterSetting < Struct.new(
       :name,
       :value)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -737,6 +747,7 @@ module Aws::ECS
       :memory,
       :memory_reservation,
       :gpu_ids)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1813,6 +1824,7 @@ module Aws::ECS
       :system_controls,
       :resource_requirements,
       :firelens_configuration)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1883,6 +1895,7 @@ module Aws::ECS
     class ContainerDependency < Struct.new(
       :container_name,
       :condition)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2065,6 +2078,7 @@ module Aws::ECS
       :registered_at,
       :attachments,
       :tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2162,6 +2176,7 @@ module Aws::ECS
       :memory,
       :memory_reservation,
       :resource_requirements)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2226,6 +2241,7 @@ module Aws::ECS
       :network_bindings,
       :reason,
       :status)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2300,6 +2316,7 @@ module Aws::ECS
       :name,
       :auto_scaling_group_provider,
       :tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2311,6 +2328,7 @@ module Aws::ECS
     #
     class CreateCapacityProviderResponse < Struct.new(
       :capacity_provider)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2441,6 +2459,7 @@ module Aws::ECS
       :settings,
       :capacity_providers,
       :default_capacity_provider_strategy)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2452,6 +2471,7 @@ module Aws::ECS
     #
     class CreateClusterResponse < Struct.new(
       :cluster)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2888,6 +2908,7 @@ module Aws::ECS
       :tags,
       :enable_ecs_managed_tags,
       :propagate_tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2908,6 +2929,7 @@ module Aws::ECS
     #
     class CreateServiceResponse < Struct.new(
       :service)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3114,6 +3136,7 @@ module Aws::ECS
       :scale,
       :client_token,
       :tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3128,6 +3151,7 @@ module Aws::ECS
     #
     class CreateTaskSetResponse < Struct.new(
       :task_set)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3164,6 +3188,7 @@ module Aws::ECS
     class DeleteAccountSettingRequest < Struct.new(
       :name,
       :principal_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3175,6 +3200,7 @@ module Aws::ECS
     #
     class DeleteAccountSettingResponse < Struct.new(
       :setting)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3212,6 +3238,7 @@ module Aws::ECS
     class DeleteAttributesRequest < Struct.new(
       :cluster,
       :attributes)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3224,6 +3251,7 @@ module Aws::ECS
     #
     class DeleteAttributesResponse < Struct.new(
       :attributes)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3243,6 +3271,7 @@ module Aws::ECS
     #
     class DeleteCapacityProviderRequest < Struct.new(
       :capacity_provider)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3254,6 +3283,7 @@ module Aws::ECS
     #
     class DeleteCapacityProviderResponse < Struct.new(
       :capacity_provider)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3273,6 +3303,7 @@ module Aws::ECS
     #
     class DeleteClusterRequest < Struct.new(
       :cluster)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3284,6 +3315,7 @@ module Aws::ECS
     #
     class DeleteClusterResponse < Struct.new(
       :cluster)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3318,6 +3350,7 @@ module Aws::ECS
       :cluster,
       :service,
       :force)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3329,6 +3362,7 @@ module Aws::ECS
     #
     class DeleteServiceResponse < Struct.new(
       :service)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3369,6 +3403,7 @@ module Aws::ECS
       :service,
       :task_set,
       :force)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3383,6 +3418,7 @@ module Aws::ECS
     #
     class DeleteTaskSetResponse < Struct.new(
       :task_set)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3486,6 +3522,7 @@ module Aws::ECS
       :launch_type,
       :platform_version,
       :network_configuration)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3557,6 +3594,7 @@ module Aws::ECS
     class DeploymentConfiguration < Struct.new(
       :maximum_percent,
       :minimum_healthy_percent)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3607,6 +3645,7 @@ module Aws::ECS
     #
     class DeploymentController < Struct.new(
       :type)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3656,6 +3695,7 @@ module Aws::ECS
       :cluster,
       :container_instance,
       :force)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3667,6 +3707,7 @@ module Aws::ECS
     #
     class DeregisterContainerInstanceResponse < Struct.new(
       :container_instance)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3687,6 +3728,7 @@ module Aws::ECS
     #
     class DeregisterTaskDefinitionRequest < Struct.new(
       :task_definition)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3698,6 +3740,7 @@ module Aws::ECS
     #
     class DeregisterTaskDefinitionResponse < Struct.new(
       :task_definition)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3757,6 +3800,7 @@ module Aws::ECS
       :include,
       :max_results,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3782,6 +3826,7 @@ module Aws::ECS
       :capacity_providers,
       :failures,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3838,6 +3883,7 @@ module Aws::ECS
     class DescribeClustersRequest < Struct.new(
       :clusters,
       :include)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3854,6 +3900,7 @@ module Aws::ECS
     class DescribeClustersResponse < Struct.new(
       :clusters,
       :failures)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3893,6 +3940,7 @@ module Aws::ECS
       :cluster,
       :container_instances,
       :include)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3909,6 +3957,7 @@ module Aws::ECS
     class DescribeContainerInstancesResponse < Struct.new(
       :container_instances,
       :failures)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3946,6 +3995,7 @@ module Aws::ECS
       :cluster,
       :services,
       :include)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3962,6 +4012,7 @@ module Aws::ECS
     class DescribeServicesResponse < Struct.new(
       :services,
       :failures)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3991,6 +4042,7 @@ module Aws::ECS
     class DescribeTaskDefinitionRequest < Struct.new(
       :task_definition,
       :include)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4034,6 +4086,7 @@ module Aws::ECS
     class DescribeTaskDefinitionResponse < Struct.new(
       :task_definition,
       :tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4074,6 +4127,7 @@ module Aws::ECS
       :service,
       :task_sets,
       :include)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4090,6 +4144,7 @@ module Aws::ECS
     class DescribeTaskSetsResponse < Struct.new(
       :task_sets,
       :failures)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4126,6 +4181,7 @@ module Aws::ECS
       :cluster,
       :tasks,
       :include)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4142,6 +4198,7 @@ module Aws::ECS
     class DescribeTasksResponse < Struct.new(
       :tasks,
       :failures)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4176,6 +4233,7 @@ module Aws::ECS
       :host_path,
       :container_path,
       :permissions)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4206,6 +4264,7 @@ module Aws::ECS
     class DiscoverPollEndpointRequest < Struct.new(
       :container_instance,
       :cluster)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4222,6 +4281,7 @@ module Aws::ECS
     class DiscoverPollEndpointResponse < Struct.new(
       :endpoint,
       :telemetry_endpoint)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4315,6 +4375,7 @@ module Aws::ECS
       :driver,
       :driver_opts,
       :labels)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4361,6 +4422,7 @@ module Aws::ECS
     class EFSAuthorizationConfig < Struct.new(
       :access_point_id,
       :iam)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4436,6 +4498,7 @@ module Aws::ECS
       :transit_encryption,
       :transit_encryption_port,
       :authorization_config)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4486,6 +4549,7 @@ module Aws::ECS
     class EnvironmentFile < Struct.new(
       :value,
       :type)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4509,6 +4573,7 @@ module Aws::ECS
       :arn,
       :reason,
       :detail)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4557,6 +4622,7 @@ module Aws::ECS
     class FirelensConfiguration < Struct.new(
       :type,
       :options)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4684,6 +4750,7 @@ module Aws::ECS
       :timeout,
       :retries,
       :start_period)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4712,6 +4779,7 @@ module Aws::ECS
     class HostEntry < Struct.new(
       :hostname,
       :ip_address)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4743,6 +4811,7 @@ module Aws::ECS
     #
     class HostVolumeProperties < Struct.new(
       :source_path)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4777,6 +4846,7 @@ module Aws::ECS
     class InferenceAccelerator < Struct.new(
       :device_name,
       :device_type)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4813,6 +4883,7 @@ module Aws::ECS
     class InferenceAcceleratorOverride < Struct.new(
       :device_name,
       :device_type)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4900,6 +4971,7 @@ module Aws::ECS
     class KernelCapabilities < Struct.new(
       :add,
       :drop)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4928,6 +5000,7 @@ module Aws::ECS
     class KeyValuePair < Struct.new(
       :name,
       :value)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5093,6 +5166,7 @@ module Aws::ECS
       :tmpfs,
       :max_swap,
       :swappiness)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5165,6 +5239,7 @@ module Aws::ECS
       :effective_settings,
       :next_token,
       :max_results)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5185,6 +5260,7 @@ module Aws::ECS
     class ListAccountSettingsResponse < Struct.new(
       :settings,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5252,6 +5328,7 @@ module Aws::ECS
       :attribute_value,
       :next_token,
       :max_results)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5272,6 +5349,7 @@ module Aws::ECS
     class ListAttributesResponse < Struct.new(
       :attributes,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5312,6 +5390,7 @@ module Aws::ECS
     class ListClustersRequest < Struct.new(
       :next_token,
       :max_results)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5332,6 +5411,7 @@ module Aws::ECS
     class ListClustersResponse < Struct.new(
       :cluster_arns,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5406,6 +5486,7 @@ module Aws::ECS
       :next_token,
       :max_results,
       :status)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5427,6 +5508,7 @@ module Aws::ECS
     class ListContainerInstancesResponse < Struct.new(
       :container_instance_arns,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5487,6 +5569,7 @@ module Aws::ECS
       :max_results,
       :launch_type,
       :scheduling_strategy)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5507,6 +5590,7 @@ module Aws::ECS
     class ListServicesResponse < Struct.new(
       :service_arns,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5528,6 +5612,7 @@ module Aws::ECS
     #
     class ListTagsForResourceRequest < Struct.new(
       :resource_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5539,6 +5624,7 @@ module Aws::ECS
     #
     class ListTagsForResourceResponse < Struct.new(
       :tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5604,6 +5690,7 @@ module Aws::ECS
       :status,
       :next_token,
       :max_results)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5625,6 +5712,7 @@ module Aws::ECS
     class ListTaskDefinitionFamiliesResponse < Struct.new(
       :families,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5698,6 +5786,7 @@ module Aws::ECS
       :sort,
       :next_token,
       :max_results)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5719,6 +5808,7 @@ module Aws::ECS
     class ListTaskDefinitionsResponse < Struct.new(
       :task_definition_arns,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5825,6 +5915,7 @@ module Aws::ECS
       :service_name,
       :desired_status,
       :launch_type)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5844,6 +5935,7 @@ module Aws::ECS
     class ListTasksResponse < Struct.new(
       :task_arns,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5923,6 +6015,7 @@ module Aws::ECS
       :load_balancer_name,
       :container_name,
       :container_port)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6050,6 +6143,7 @@ module Aws::ECS
       :log_driver,
       :options,
       :secret_options)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6110,6 +6204,7 @@ module Aws::ECS
       :target_capacity,
       :minimum_scaling_step_size,
       :maximum_scaling_step_size)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6156,6 +6251,7 @@ module Aws::ECS
       :source_volume,
       :container_path,
       :read_only)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6199,6 +6295,7 @@ module Aws::ECS
       :container_port,
       :host_port,
       :protocol)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6228,6 +6325,7 @@ module Aws::ECS
     #
     class NetworkConfiguration < Struct.new(
       :awsvpc_configuration)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6252,6 +6350,7 @@ module Aws::ECS
       :attachment_id,
       :private_ipv_4_address,
       :ipv6_address)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6308,6 +6407,7 @@ module Aws::ECS
     class PlacementConstraint < Struct.new(
       :type,
       :expression)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6354,6 +6454,7 @@ module Aws::ECS
     class PlacementStrategy < Struct.new(
       :type,
       :field)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6384,6 +6485,7 @@ module Aws::ECS
     class PlatformDevice < Struct.new(
       :id,
       :type)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6492,6 +6594,7 @@ module Aws::ECS
       :container_port,
       :host_port,
       :protocol)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6574,6 +6677,7 @@ module Aws::ECS
       :type,
       :container_name,
       :properties)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6608,6 +6712,7 @@ module Aws::ECS
     class PutAccountSettingDefaultRequest < Struct.new(
       :name,
       :value)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6619,6 +6724,7 @@ module Aws::ECS
     #
     class PutAccountSettingDefaultResponse < Struct.new(
       :setting)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6664,6 +6770,7 @@ module Aws::ECS
       :name,
       :value,
       :principal_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6675,6 +6782,7 @@ module Aws::ECS
     #
     class PutAccountSettingResponse < Struct.new(
       :setting)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6710,6 +6818,7 @@ module Aws::ECS
     class PutAttributesRequest < Struct.new(
       :cluster,
       :attributes)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6721,6 +6830,7 @@ module Aws::ECS
     #
     class PutAttributesResponse < Struct.new(
       :attributes)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6791,6 +6901,7 @@ module Aws::ECS
       :cluster,
       :capacity_providers,
       :default_capacity_provider_strategy)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6806,6 +6917,7 @@ module Aws::ECS
     #
     class PutClusterCapacityProvidersResponse < Struct.new(
       :cluster)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6940,6 +7052,7 @@ module Aws::ECS
       :attributes,
       :platform_devices,
       :tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6951,6 +7064,7 @@ module Aws::ECS
     #
     class RegisterContainerInstanceResponse < Struct.new(
       :container_instance)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -7494,6 +7608,7 @@ module Aws::ECS
       :ipc_mode,
       :proxy_configuration,
       :inference_accelerators)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -7510,6 +7625,7 @@ module Aws::ECS
     class RegisterTaskDefinitionResponse < Struct.new(
       :task_definition,
       :tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -7539,6 +7655,7 @@ module Aws::ECS
     #
     class RepositoryCredentials < Struct.new(
       :credentials_parameter)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -7595,6 +7712,7 @@ module Aws::ECS
       :long_value,
       :integer_value,
       :string_set_value)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -7653,6 +7771,7 @@ module Aws::ECS
     class ResourceRequirement < Struct.new(
       :value,
       :type)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -7949,6 +8068,7 @@ module Aws::ECS
       :started_by,
       :tags,
       :task_definition)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -7966,6 +8086,7 @@ module Aws::ECS
     class RunTaskResponse < Struct.new(
       :tasks,
       :failures)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -7995,6 +8116,7 @@ module Aws::ECS
     class Scale < Struct.new(
       :value,
       :unit)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -8044,6 +8166,7 @@ module Aws::ECS
     class Secret < Struct.new(
       :name,
       :value_from)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -8056,6 +8179,7 @@ module Aws::ECS
     #
     class ServerException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -8322,6 +8446,7 @@ module Aws::ECS
       :created_by,
       :enable_ecs_managed_tags,
       :propagate_tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -8345,6 +8470,7 @@ module Aws::ECS
       :id,
       :created_at,
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -8422,6 +8548,7 @@ module Aws::ECS
       :port,
       :container_name,
       :container_port)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -8448,6 +8575,7 @@ module Aws::ECS
       :name,
       :value,
       :principal_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -8641,6 +8769,7 @@ module Aws::ECS
       :started_by,
       :tags,
       :task_definition)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -8658,6 +8787,7 @@ module Aws::ECS
     class StartTaskResponse < Struct.new(
       :tasks,
       :failures)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -8694,6 +8824,7 @@ module Aws::ECS
       :cluster,
       :task,
       :reason)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -8705,6 +8836,7 @@ module Aws::ECS
     #
     class StopTaskResponse < Struct.new(
       :task)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -8735,6 +8867,7 @@ module Aws::ECS
     class SubmitAttachmentStateChangesRequest < Struct.new(
       :cluster,
       :attachments)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -8746,6 +8879,7 @@ module Aws::ECS
     #
     class SubmitAttachmentStateChangesResponse < Struct.new(
       :acknowledgment)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -8814,6 +8948,7 @@ module Aws::ECS
       :exit_code,
       :reason,
       :network_bindings)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -8825,6 +8960,7 @@ module Aws::ECS
     #
     class SubmitContainerStateChangeResponse < Struct.new(
       :acknowledgment)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -8914,6 +9050,7 @@ module Aws::ECS
       :pull_started_at,
       :pull_stopped_at,
       :execution_stopped_at)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -8925,6 +9062,7 @@ module Aws::ECS
     #
     class SubmitTaskStateChangeResponse < Struct.new(
       :acknowledgment)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -8977,6 +9115,7 @@ module Aws::ECS
     class SystemControl < Struct.new(
       :namespace,
       :value)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -9033,6 +9172,7 @@ module Aws::ECS
     class Tag < Struct.new(
       :key,
       :value)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -9091,6 +9231,7 @@ module Aws::ECS
     class TagResourceRequest < Struct.new(
       :resource_arn,
       :tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -9411,6 +9552,7 @@ module Aws::ECS
       :task_arn,
       :task_definition_arn,
       :version)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -9745,6 +9887,7 @@ module Aws::ECS
       :pid_mode,
       :ipc_mode,
       :proxy_configuration)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -9789,6 +9932,7 @@ module Aws::ECS
     class TaskDefinitionPlacementConstraint < Struct.new(
       :type,
       :expression)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -9873,6 +10017,7 @@ module Aws::ECS
       :execution_role_arn,
       :memory,
       :task_role_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -10099,6 +10244,7 @@ module Aws::ECS
       :stability_status,
       :stability_status_at,
       :tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -10147,6 +10293,7 @@ module Aws::ECS
       :container_path,
       :size,
       :mount_options)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -10179,6 +10326,7 @@ module Aws::ECS
       :name,
       :soft_limit,
       :hard_limit)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -10212,6 +10360,7 @@ module Aws::ECS
     class UntagResourceRequest < Struct.new(
       :resource_arn,
       :tag_keys)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -10248,6 +10397,7 @@ module Aws::ECS
     class UpdateClusterSettingsRequest < Struct.new(
       :cluster,
       :settings)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -10263,6 +10413,7 @@ module Aws::ECS
     #
     class UpdateClusterSettingsResponse < Struct.new(
       :cluster)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -10291,6 +10442,7 @@ module Aws::ECS
     class UpdateContainerAgentRequest < Struct.new(
       :cluster,
       :container_instance)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -10302,6 +10454,7 @@ module Aws::ECS
     #
     class UpdateContainerAgentResponse < Struct.new(
       :container_instance)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -10340,6 +10493,7 @@ module Aws::ECS
       :cluster,
       :container_instances,
       :status)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -10356,6 +10510,7 @@ module Aws::ECS
     class UpdateContainerInstancesStateResponse < Struct.new(
       :container_instances,
       :failures)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -10400,6 +10555,7 @@ module Aws::ECS
       :cluster,
       :service,
       :primary_task_set)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -10414,6 +10570,7 @@ module Aws::ECS
     #
     class UpdateServicePrimaryTaskSetResponse < Struct.new(
       :task_set)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -10601,6 +10758,7 @@ module Aws::ECS
       :platform_version,
       :force_new_deployment,
       :health_check_grace_period_seconds)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -10612,6 +10770,7 @@ module Aws::ECS
     #
     class UpdateServiceResponse < Struct.new(
       :service)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -10655,6 +10814,7 @@ module Aws::ECS
       :service,
       :task_set,
       :scale)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -10669,6 +10829,7 @@ module Aws::ECS
     #
     class UpdateTaskSetResponse < Struct.new(
       :task_set)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -10707,6 +10868,7 @@ module Aws::ECS
       :agent_version,
       :agent_hash,
       :docker_version)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -10793,6 +10955,7 @@ module Aws::ECS
       :host,
       :docker_volume_configuration,
       :efs_volume_configuration)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -10823,6 +10986,7 @@ module Aws::ECS
     class VolumeFrom < Struct.new(
       :source_container,
       :read_only)
+      SENSITIVE = []
       include Aws::Structure
     end
 

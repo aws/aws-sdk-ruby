@@ -52,6 +52,7 @@ module Aws::PersonalizeRuntime
       :input_list,
       :user_id,
       :context)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -64,6 +65,7 @@ module Aws::PersonalizeRuntime
     #
     class GetPersonalizedRankingResponse < Struct.new(
       :personalized_ranking)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -124,6 +126,7 @@ module Aws::PersonalizeRuntime
       :num_results,
       :context,
       :filter_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -136,6 +139,7 @@ module Aws::PersonalizeRuntime
     #
     class GetRecommendationsResponse < Struct.new(
       :item_list)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -148,6 +152,7 @@ module Aws::PersonalizeRuntime
     #
     class InvalidInputException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -170,6 +175,7 @@ module Aws::PersonalizeRuntime
     class PredictedItem < Struct.new(
       :item_id,
       :score)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -182,6 +188,7 @@ module Aws::PersonalizeRuntime
     #
     class ResourceNotFoundException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 

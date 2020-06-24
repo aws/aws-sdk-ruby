@@ -83,6 +83,7 @@ module Aws::GlobalAccelerator
       :status,
       :created_time,
       :last_modified_time)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -126,6 +127,7 @@ module Aws::GlobalAccelerator
       :flow_logs_enabled,
       :flow_logs_s3_bucket,
       :flow_logs_s3_prefix)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -138,6 +140,7 @@ module Aws::GlobalAccelerator
     #
     class AcceleratorNotDisabledException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -150,6 +153,7 @@ module Aws::GlobalAccelerator
     #
     class AcceleratorNotFoundException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -162,6 +166,7 @@ module Aws::GlobalAccelerator
     #
     class AccessDeniedException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -182,6 +187,7 @@ module Aws::GlobalAccelerator
     #
     class AdvertiseByoipCidrRequest < Struct.new(
       :cidr)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -193,6 +199,7 @@ module Aws::GlobalAccelerator
     #
     class AdvertiseByoipCidrResponse < Struct.new(
       :byoip_cidr)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -207,6 +214,7 @@ module Aws::GlobalAccelerator
     #
     class AssociatedEndpointGroupFoundException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -221,6 +229,7 @@ module Aws::GlobalAccelerator
     #
     class AssociatedListenerFoundException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -296,6 +305,7 @@ module Aws::GlobalAccelerator
       :cidr,
       :state,
       :events)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -320,6 +330,7 @@ module Aws::GlobalAccelerator
     class ByoipCidrEvent < Struct.new(
       :message,
       :timestamp)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -332,6 +343,7 @@ module Aws::GlobalAccelerator
     #
     class ByoipCidrNotFoundException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -366,6 +378,7 @@ module Aws::GlobalAccelerator
     class CidrAuthorizationContext < Struct.new(
       :message,
       :signature)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -450,6 +463,7 @@ module Aws::GlobalAccelerator
       :enabled,
       :idempotency_token,
       :tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -462,6 +476,7 @@ module Aws::GlobalAccelerator
     #
     class CreateAcceleratorResponse < Struct.new(
       :accelerator)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -564,6 +579,7 @@ module Aws::GlobalAccelerator
       :health_check_interval_seconds,
       :threshold_count,
       :idempotency_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -575,6 +591,7 @@ module Aws::GlobalAccelerator
     #
     class CreateEndpointGroupResponse < Struct.new(
       :endpoint_group)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -649,6 +666,7 @@ module Aws::GlobalAccelerator
       :protocol,
       :client_affinity,
       :idempotency_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -660,6 +678,7 @@ module Aws::GlobalAccelerator
     #
     class CreateListenerResponse < Struct.new(
       :listener)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -678,6 +697,7 @@ module Aws::GlobalAccelerator
     #
     class DeleteAcceleratorRequest < Struct.new(
       :accelerator_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -696,6 +716,7 @@ module Aws::GlobalAccelerator
     #
     class DeleteEndpointGroupRequest < Struct.new(
       :endpoint_group_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -714,6 +735,7 @@ module Aws::GlobalAccelerator
     #
     class DeleteListenerRequest < Struct.new(
       :listener_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -733,6 +755,7 @@ module Aws::GlobalAccelerator
     #
     class DeprovisionByoipCidrRequest < Struct.new(
       :cidr)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -744,6 +767,7 @@ module Aws::GlobalAccelerator
     #
     class DeprovisionByoipCidrResponse < Struct.new(
       :byoip_cidr)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -763,6 +787,7 @@ module Aws::GlobalAccelerator
     #
     class DescribeAcceleratorAttributesRequest < Struct.new(
       :accelerator_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -774,6 +799,7 @@ module Aws::GlobalAccelerator
     #
     class DescribeAcceleratorAttributesResponse < Struct.new(
       :accelerator_attributes)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -792,6 +818,7 @@ module Aws::GlobalAccelerator
     #
     class DescribeAcceleratorRequest < Struct.new(
       :accelerator_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -803,6 +830,7 @@ module Aws::GlobalAccelerator
     #
     class DescribeAcceleratorResponse < Struct.new(
       :accelerator)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -821,6 +849,7 @@ module Aws::GlobalAccelerator
     #
     class DescribeEndpointGroupRequest < Struct.new(
       :endpoint_group_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -832,6 +861,7 @@ module Aws::GlobalAccelerator
     #
     class DescribeEndpointGroupResponse < Struct.new(
       :endpoint_group)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -850,6 +880,7 @@ module Aws::GlobalAccelerator
     #
     class DescribeListenerRequest < Struct.new(
       :listener_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -861,6 +892,7 @@ module Aws::GlobalAccelerator
     #
     class DescribeListenerResponse < Struct.new(
       :listener)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -927,6 +959,7 @@ module Aws::GlobalAccelerator
       :endpoint_id,
       :weight,
       :client_ip_preservation_enabled)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1015,6 +1048,7 @@ module Aws::GlobalAccelerator
       :health_state,
       :health_reason,
       :client_ip_preservation_enabled)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1089,6 +1123,7 @@ module Aws::GlobalAccelerator
       :health_check_path,
       :health_check_interval_seconds,
       :threshold_count)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1101,6 +1136,7 @@ module Aws::GlobalAccelerator
     #
     class EndpointGroupAlreadyExistsException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1113,6 +1149,7 @@ module Aws::GlobalAccelerator
     #
     class EndpointGroupNotFoundException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1126,6 +1163,7 @@ module Aws::GlobalAccelerator
     #
     class IncorrectCidrStateException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1138,6 +1176,7 @@ module Aws::GlobalAccelerator
     #
     class InternalServiceErrorException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1150,6 +1189,7 @@ module Aws::GlobalAccelerator
     #
     class InvalidArgumentException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1162,6 +1202,7 @@ module Aws::GlobalAccelerator
     #
     class InvalidNextTokenException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1175,6 +1216,7 @@ module Aws::GlobalAccelerator
     #
     class InvalidPortRangeException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1194,6 +1236,7 @@ module Aws::GlobalAccelerator
     class IpSet < Struct.new(
       :ip_family,
       :ip_addresses)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1207,6 +1250,7 @@ module Aws::GlobalAccelerator
     #
     class LimitExceededException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1233,6 +1277,7 @@ module Aws::GlobalAccelerator
     class ListAcceleratorsRequest < Struct.new(
       :max_results,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1250,6 +1295,7 @@ module Aws::GlobalAccelerator
     class ListAcceleratorsResponse < Struct.new(
       :accelerators,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1276,6 +1322,7 @@ module Aws::GlobalAccelerator
     class ListByoipCidrsRequest < Struct.new(
       :max_results,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1292,6 +1339,7 @@ module Aws::GlobalAccelerator
     class ListByoipCidrsResponse < Struct.new(
       :byoip_cidrs,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1324,6 +1372,7 @@ module Aws::GlobalAccelerator
       :listener_arn,
       :max_results,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1341,6 +1390,7 @@ module Aws::GlobalAccelerator
     class ListEndpointGroupsResponse < Struct.new(
       :endpoint_groups,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1374,6 +1424,7 @@ module Aws::GlobalAccelerator
       :accelerator_arn,
       :max_results,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1391,6 +1442,7 @@ module Aws::GlobalAccelerator
     class ListListenersResponse < Struct.new(
       :listeners,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1410,6 +1462,7 @@ module Aws::GlobalAccelerator
     #
     class ListTagsForResourceRequest < Struct.new(
       :resource_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1421,6 +1474,7 @@ module Aws::GlobalAccelerator
     #
     class ListTagsForResourceResponse < Struct.new(
       :tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1472,6 +1526,7 @@ module Aws::GlobalAccelerator
       :port_ranges,
       :protocol,
       :client_affinity)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1484,6 +1539,7 @@ module Aws::GlobalAccelerator
     #
     class ListenerNotFoundException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1510,6 +1566,7 @@ module Aws::GlobalAccelerator
     class PortRange < Struct.new(
       :from_port,
       :to_port)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1541,6 +1598,7 @@ module Aws::GlobalAccelerator
     class ProvisionByoipCidrRequest < Struct.new(
       :cidr,
       :cidr_authorization_context)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1552,6 +1610,7 @@ module Aws::GlobalAccelerator
     #
     class ProvisionByoipCidrResponse < Struct.new(
       :byoip_cidr)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1578,6 +1637,7 @@ module Aws::GlobalAccelerator
     class Tag < Struct.new(
       :key,
       :value)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1609,6 +1669,7 @@ module Aws::GlobalAccelerator
     class TagResourceRequest < Struct.new(
       :resource_arn,
       :tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1639,6 +1700,7 @@ module Aws::GlobalAccelerator
     class UntagResourceRequest < Struct.new(
       :resource_arn,
       :tag_keys)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1700,6 +1762,7 @@ module Aws::GlobalAccelerator
       :flow_logs_enabled,
       :flow_logs_s3_bucket,
       :flow_logs_s3_prefix)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1711,6 +1774,7 @@ module Aws::GlobalAccelerator
     #
     class UpdateAcceleratorAttributesResponse < Struct.new(
       :accelerator_attributes)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1753,6 +1817,7 @@ module Aws::GlobalAccelerator
       :name,
       :ip_address_type,
       :enabled)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1764,6 +1829,7 @@ module Aws::GlobalAccelerator
     #
     class UpdateAcceleratorResponse < Struct.new(
       :accelerator)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1849,6 +1915,7 @@ module Aws::GlobalAccelerator
       :health_check_path,
       :health_check_interval_seconds,
       :threshold_count)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1860,6 +1927,7 @@ module Aws::GlobalAccelerator
     #
     class UpdateEndpointGroupResponse < Struct.new(
       :endpoint_group)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1925,6 +1993,7 @@ module Aws::GlobalAccelerator
       :port_ranges,
       :protocol,
       :client_affinity)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1936,6 +2005,7 @@ module Aws::GlobalAccelerator
     #
     class UpdateListenerResponse < Struct.new(
       :listener)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1954,6 +2024,7 @@ module Aws::GlobalAccelerator
     #
     class WithdrawByoipCidrRequest < Struct.new(
       :cidr)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1965,6 +2036,7 @@ module Aws::GlobalAccelerator
     #
     class WithdrawByoipCidrResponse < Struct.new(
       :byoip_cidr)
+      SENSITIVE = []
       include Aws::Structure
     end
 

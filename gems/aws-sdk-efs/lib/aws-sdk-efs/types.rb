@@ -28,6 +28,7 @@ module Aws::EFS
       :error_code,
       :message,
       :access_point_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -92,6 +93,7 @@ module Aws::EFS
       :root_directory,
       :owner_id,
       :life_cycle_state)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -109,6 +111,7 @@ module Aws::EFS
     class AccessPointLimitExceeded < Struct.new(
       :error_code,
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -126,6 +129,7 @@ module Aws::EFS
     class AccessPointNotFound < Struct.new(
       :error_code,
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -143,6 +147,7 @@ module Aws::EFS
     class BadRequest < Struct.new(
       :error_code,
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -215,6 +220,7 @@ module Aws::EFS
       :file_system_id,
       :posix_user,
       :root_directory)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -336,6 +342,7 @@ module Aws::EFS
       :throughput_mode,
       :provisioned_throughput_in_mibps,
       :tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -373,6 +380,7 @@ module Aws::EFS
       :subnet_id,
       :ip_address,
       :security_groups)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -404,6 +412,7 @@ module Aws::EFS
     class CreateTagsRequest < Struct.new(
       :file_system_id,
       :tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -448,6 +457,7 @@ module Aws::EFS
       :owner_uid,
       :owner_gid,
       :permissions)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -466,6 +476,7 @@ module Aws::EFS
     #
     class DeleteAccessPointRequest < Struct.new(
       :access_point_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -485,6 +496,7 @@ module Aws::EFS
     #
     class DeleteFileSystemPolicyRequest < Struct.new(
       :file_system_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -503,6 +515,7 @@ module Aws::EFS
     #
     class DeleteFileSystemRequest < Struct.new(
       :file_system_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -521,6 +534,7 @@ module Aws::EFS
     #
     class DeleteMountTargetRequest < Struct.new(
       :mount_target_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -545,6 +559,7 @@ module Aws::EFS
     class DeleteTagsRequest < Struct.new(
       :file_system_id,
       :tag_keys)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -562,6 +577,7 @@ module Aws::EFS
     class DependencyTimeout < Struct.new(
       :error_code,
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -605,6 +621,7 @@ module Aws::EFS
       :next_token,
       :access_point_id,
       :file_system_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -623,6 +640,7 @@ module Aws::EFS
     class DescribeAccessPointsResponse < Struct.new(
       :access_points,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -642,6 +660,7 @@ module Aws::EFS
     #
     class DescribeFileSystemPolicyRequest < Struct.new(
       :file_system_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -686,6 +705,7 @@ module Aws::EFS
       :marker,
       :creation_token,
       :file_system_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -709,6 +729,7 @@ module Aws::EFS
       :marker,
       :file_systems,
       :next_marker)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -728,6 +749,7 @@ module Aws::EFS
     #
     class DescribeLifecycleConfigurationRequest < Struct.new(
       :file_system_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -747,6 +769,7 @@ module Aws::EFS
     #
     class DescribeMountTargetSecurityGroupsRequest < Struct.new(
       :mount_target_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -758,6 +781,7 @@ module Aws::EFS
     #
     class DescribeMountTargetSecurityGroupsResponse < Struct.new(
       :security_groups)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -814,6 +838,7 @@ module Aws::EFS
       :file_system_id,
       :mount_target_id,
       :access_point_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -839,6 +864,7 @@ module Aws::EFS
       :marker,
       :mount_targets,
       :next_marker)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -874,6 +900,7 @@ module Aws::EFS
       :max_items,
       :marker,
       :file_system_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -900,6 +927,7 @@ module Aws::EFS
       :marker,
       :tags,
       :next_marker)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -921,6 +949,7 @@ module Aws::EFS
       :error_code,
       :message,
       :file_system_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1033,6 +1062,7 @@ module Aws::EFS
       :throughput_mode,
       :provisioned_throughput_in_mibps,
       :tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1049,6 +1079,7 @@ module Aws::EFS
     class FileSystemInUse < Struct.new(
       :error_code,
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1066,6 +1097,7 @@ module Aws::EFS
     class FileSystemLimitExceeded < Struct.new(
       :error_code,
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1083,6 +1115,7 @@ module Aws::EFS
     class FileSystemNotFound < Struct.new(
       :error_code,
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1100,6 +1133,7 @@ module Aws::EFS
     class FileSystemPolicyDescription < Struct.new(
       :file_system_id,
       :policy)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1141,6 +1175,7 @@ module Aws::EFS
       :timestamp,
       :value_in_ia,
       :value_in_standard)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1157,6 +1192,7 @@ module Aws::EFS
     class IncorrectFileSystemLifeCycleState < Struct.new(
       :error_code,
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1174,6 +1210,7 @@ module Aws::EFS
     class IncorrectMountTargetState < Struct.new(
       :error_code,
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1195,6 +1232,7 @@ module Aws::EFS
     class InsufficientThroughputCapacity < Struct.new(
       :error_code,
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1211,6 +1249,7 @@ module Aws::EFS
     class InternalServerError < Struct.new(
       :error_code,
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1230,6 +1269,7 @@ module Aws::EFS
     class InvalidPolicyException < Struct.new(
       :error_code,
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1247,6 +1287,7 @@ module Aws::EFS
     class IpAddressInUse < Struct.new(
       :error_code,
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1259,6 +1300,7 @@ module Aws::EFS
     #
     class LifecycleConfigurationDescription < Struct.new(
       :lifecycle_policies)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1283,6 +1325,7 @@ module Aws::EFS
     #
     class LifecyclePolicy < Struct.new(
       :transition_to_ia)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1318,6 +1361,7 @@ module Aws::EFS
       :resource_id,
       :max_results,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1336,6 +1380,7 @@ module Aws::EFS
     class ListTagsForResourceResponse < Struct.new(
       :tags,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1360,6 +1405,7 @@ module Aws::EFS
     class ModifyMountTargetSecurityGroupsRequest < Struct.new(
       :mount_target_id,
       :security_groups)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1377,6 +1423,7 @@ module Aws::EFS
     class MountTargetConflict < Struct.new(
       :error_code,
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1439,6 +1486,7 @@ module Aws::EFS
       :network_interface_id,
       :availability_zone_id,
       :availability_zone_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1456,6 +1504,7 @@ module Aws::EFS
     class MountTargetNotFound < Struct.new(
       :error_code,
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1481,6 +1530,7 @@ module Aws::EFS
     class NetworkInterfaceLimitExceeded < Struct.new(
       :error_code,
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1498,6 +1548,7 @@ module Aws::EFS
     class NoFreeAddressesInSubnet < Struct.new(
       :error_code,
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1515,6 +1566,7 @@ module Aws::EFS
     class PolicyNotFound < Struct.new(
       :error_code,
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1552,6 +1604,7 @@ module Aws::EFS
       :uid,
       :gid,
       :secondary_gids)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1598,6 +1651,7 @@ module Aws::EFS
       :file_system_id,
       :policy,
       :bypass_policy_lockout_safety_check)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1630,6 +1684,7 @@ module Aws::EFS
     class PutLifecycleConfigurationRequest < Struct.new(
       :file_system_id,
       :lifecycle_policies)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1678,6 +1733,7 @@ module Aws::EFS
     class RootDirectory < Struct.new(
       :path,
       :creation_info)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1695,6 +1751,7 @@ module Aws::EFS
     class SecurityGroupLimitExceeded < Struct.new(
       :error_code,
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1712,6 +1769,7 @@ module Aws::EFS
     class SecurityGroupNotFound < Struct.new(
       :error_code,
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1729,6 +1787,7 @@ module Aws::EFS
     class SubnetNotFound < Struct.new(
       :error_code,
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1757,6 +1816,7 @@ module Aws::EFS
     class Tag < Struct.new(
       :key,
       :value)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1786,6 +1846,7 @@ module Aws::EFS
     class TagResourceRequest < Struct.new(
       :resource_id,
       :tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1804,6 +1865,7 @@ module Aws::EFS
     class ThroughputLimitExceeded < Struct.new(
       :error_code,
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1821,6 +1883,7 @@ module Aws::EFS
     class TooManyRequests < Struct.new(
       :error_code,
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1835,6 +1898,7 @@ module Aws::EFS
     class UnsupportedAvailabilityZone < Struct.new(
       :error_code,
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1860,6 +1924,7 @@ module Aws::EFS
     class UntagResourceRequest < Struct.new(
       :resource_id,
       :tag_keys)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1898,6 +1963,7 @@ module Aws::EFS
       :file_system_id,
       :throughput_mode,
       :provisioned_throughput_in_mibps)
+      SENSITIVE = []
       include Aws::Structure
     end
 

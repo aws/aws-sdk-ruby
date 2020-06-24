@@ -27,6 +27,7 @@ module Aws::Comprehend
     class BatchDetectDominantLanguageItemResult < Struct.new(
       :index,
       :languages)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -48,6 +49,7 @@ module Aws::Comprehend
     #
     class BatchDetectDominantLanguageRequest < Struct.new(
       :text_list)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -70,6 +72,7 @@ module Aws::Comprehend
     class BatchDetectDominantLanguageResponse < Struct.new(
       :result_list,
       :error_list)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -90,6 +93,7 @@ module Aws::Comprehend
     class BatchDetectEntitiesItemResult < Struct.new(
       :index,
       :entities)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -118,6 +122,7 @@ module Aws::Comprehend
     class BatchDetectEntitiesRequest < Struct.new(
       :text_list,
       :language_code)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -140,6 +145,7 @@ module Aws::Comprehend
     class BatchDetectEntitiesResponse < Struct.new(
       :result_list,
       :error_list)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -160,6 +166,7 @@ module Aws::Comprehend
     class BatchDetectKeyPhrasesItemResult < Struct.new(
       :index,
       :key_phrases)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -188,6 +195,7 @@ module Aws::Comprehend
     class BatchDetectKeyPhrasesRequest < Struct.new(
       :text_list,
       :language_code)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -210,6 +218,7 @@ module Aws::Comprehend
     class BatchDetectKeyPhrasesResponse < Struct.new(
       :result_list,
       :error_list)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -235,6 +244,7 @@ module Aws::Comprehend
       :index,
       :sentiment,
       :sentiment_score)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -263,6 +273,7 @@ module Aws::Comprehend
     class BatchDetectSentimentRequest < Struct.new(
       :text_list,
       :language_code)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -285,6 +296,7 @@ module Aws::Comprehend
     class BatchDetectSentimentResponse < Struct.new(
       :result_list,
       :error_list)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -305,6 +317,7 @@ module Aws::Comprehend
     class BatchDetectSyntaxItemResult < Struct.new(
       :index,
       :syntax_tokens)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -335,6 +348,7 @@ module Aws::Comprehend
     class BatchDetectSyntaxRequest < Struct.new(
       :text_list,
       :language_code)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -357,6 +371,7 @@ module Aws::Comprehend
     class BatchDetectSyntaxResponse < Struct.new(
       :result_list,
       :error_list)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -382,6 +397,7 @@ module Aws::Comprehend
       :index,
       :error_code,
       :error_message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -395,6 +411,7 @@ module Aws::Comprehend
     #
     class BatchSizeLimitExceededException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -471,6 +488,7 @@ module Aws::Comprehend
       :micro_recall,
       :micro_f1_score,
       :hamming_loss)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -504,6 +522,7 @@ module Aws::Comprehend
       :number_of_trained_documents,
       :number_of_test_documents,
       :evaluation_metrics)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -528,6 +547,7 @@ module Aws::Comprehend
     class ClassifyDocumentRequest < Struct.new(
       :text,
       :endpoint_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -553,6 +573,7 @@ module Aws::Comprehend
     class ClassifyDocumentResponse < Struct.new(
       :classes,
       :labels)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -566,6 +587,7 @@ module Aws::Comprehend
     #
     class ConcurrentModificationException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -686,6 +708,7 @@ module Aws::Comprehend
       :volume_kms_key_id,
       :vpc_config,
       :mode)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -698,6 +721,7 @@ module Aws::Comprehend
     #
     class CreateDocumentClassifierResponse < Struct.new(
       :document_classifier_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -757,6 +781,7 @@ module Aws::Comprehend
       :desired_inference_units,
       :client_request_token,
       :tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -768,6 +793,7 @@ module Aws::Comprehend
     #
     class CreateEndpointResponse < Struct.new(
       :endpoint_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -881,6 +907,7 @@ module Aws::Comprehend
       :language_code,
       :volume_kms_key_id,
       :vpc_config)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -893,6 +920,7 @@ module Aws::Comprehend
     #
     class CreateEntityRecognizerResponse < Struct.new(
       :entity_recognizer_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -912,6 +940,7 @@ module Aws::Comprehend
     #
     class DeleteDocumentClassifierRequest < Struct.new(
       :document_classifier_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -934,6 +963,7 @@ module Aws::Comprehend
     #
     class DeleteEndpointRequest < Struct.new(
       :endpoint_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -957,6 +987,7 @@ module Aws::Comprehend
     #
     class DeleteEntityRecognizerRequest < Struct.new(
       :entity_recognizer_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -980,6 +1011,7 @@ module Aws::Comprehend
     #
     class DescribeDocumentClassificationJobRequest < Struct.new(
       :job_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -992,6 +1024,7 @@ module Aws::Comprehend
     #
     class DescribeDocumentClassificationJobResponse < Struct.new(
       :document_classification_job_properties)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1011,6 +1044,7 @@ module Aws::Comprehend
     #
     class DescribeDocumentClassifierRequest < Struct.new(
       :document_classifier_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1023,6 +1057,7 @@ module Aws::Comprehend
     #
     class DescribeDocumentClassifierResponse < Struct.new(
       :document_classifier_properties)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1042,6 +1077,7 @@ module Aws::Comprehend
     #
     class DescribeDominantLanguageDetectionJobRequest < Struct.new(
       :job_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1054,6 +1090,7 @@ module Aws::Comprehend
     #
     class DescribeDominantLanguageDetectionJobResponse < Struct.new(
       :dominant_language_detection_job_properties)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1072,6 +1109,7 @@ module Aws::Comprehend
     #
     class DescribeEndpointRequest < Struct.new(
       :endpoint_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1083,6 +1121,7 @@ module Aws::Comprehend
     #
     class DescribeEndpointResponse < Struct.new(
       :endpoint_properties)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1102,6 +1141,7 @@ module Aws::Comprehend
     #
     class DescribeEntitiesDetectionJobRequest < Struct.new(
       :job_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1114,6 +1154,7 @@ module Aws::Comprehend
     #
     class DescribeEntitiesDetectionJobResponse < Struct.new(
       :entities_detection_job_properties)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1133,6 +1174,7 @@ module Aws::Comprehend
     #
     class DescribeEntityRecognizerRequest < Struct.new(
       :entity_recognizer_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1144,6 +1186,7 @@ module Aws::Comprehend
     #
     class DescribeEntityRecognizerResponse < Struct.new(
       :entity_recognizer_properties)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1163,6 +1206,7 @@ module Aws::Comprehend
     #
     class DescribeKeyPhrasesDetectionJobRequest < Struct.new(
       :job_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1175,6 +1219,7 @@ module Aws::Comprehend
     #
     class DescribeKeyPhrasesDetectionJobResponse < Struct.new(
       :key_phrases_detection_job_properties)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1194,6 +1239,7 @@ module Aws::Comprehend
     #
     class DescribeSentimentDetectionJobRequest < Struct.new(
       :job_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1206,6 +1252,7 @@ module Aws::Comprehend
     #
     class DescribeSentimentDetectionJobResponse < Struct.new(
       :sentiment_detection_job_properties)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1224,6 +1271,7 @@ module Aws::Comprehend
     #
     class DescribeTopicsDetectionJobRequest < Struct.new(
       :job_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1235,6 +1283,7 @@ module Aws::Comprehend
     #
     class DescribeTopicsDetectionJobResponse < Struct.new(
       :topics_detection_job_properties)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1255,6 +1304,7 @@ module Aws::Comprehend
     #
     class DetectDominantLanguageRequest < Struct.new(
       :text)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1274,6 +1324,7 @@ module Aws::Comprehend
     #
     class DetectDominantLanguageResponse < Struct.new(
       :languages)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1301,6 +1352,7 @@ module Aws::Comprehend
     class DetectEntitiesRequest < Struct.new(
       :text,
       :language_code)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1316,6 +1368,7 @@ module Aws::Comprehend
     #
     class DetectEntitiesResponse < Struct.new(
       :entities)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1343,6 +1396,7 @@ module Aws::Comprehend
     class DetectKeyPhrasesRequest < Struct.new(
       :text,
       :language_code)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1358,6 +1412,7 @@ module Aws::Comprehend
     #
     class DetectKeyPhrasesResponse < Struct.new(
       :key_phrases)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1385,6 +1440,7 @@ module Aws::Comprehend
     class DetectSentimentRequest < Struct.new(
       :text,
       :language_code)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1403,6 +1459,7 @@ module Aws::Comprehend
     class DetectSentimentResponse < Struct.new(
       :sentiment,
       :sentiment_score)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1431,6 +1488,7 @@ module Aws::Comprehend
     class DetectSyntaxRequest < Struct.new(
       :text,
       :language_code)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1446,6 +1504,7 @@ module Aws::Comprehend
     #
     class DetectSyntaxResponse < Struct.new(
       :syntax_tokens)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1465,6 +1524,7 @@ module Aws::Comprehend
     class DocumentClass < Struct.new(
       :name,
       :score)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1512,6 +1572,7 @@ module Aws::Comprehend
       :job_status,
       :submit_time_before,
       :submit_time_after)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1601,6 +1662,7 @@ module Aws::Comprehend
       :data_access_role_arn,
       :volume_kms_key_id,
       :vpc_config)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1641,6 +1703,7 @@ module Aws::Comprehend
       :status,
       :submit_time_before,
       :submit_time_after)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1684,6 +1747,7 @@ module Aws::Comprehend
     class DocumentClassifierInputDataConfig < Struct.new(
       :s3_uri,
       :label_delimiter)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1732,6 +1796,7 @@ module Aws::Comprehend
     class DocumentClassifierOutputDataConfig < Struct.new(
       :s3_uri,
       :kms_key_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1848,6 +1913,7 @@ module Aws::Comprehend
       :volume_kms_key_id,
       :vpc_config,
       :mode)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1868,6 +1934,7 @@ module Aws::Comprehend
     class DocumentLabel < Struct.new(
       :name,
       :score)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1895,6 +1962,7 @@ module Aws::Comprehend
     class DominantLanguage < Struct.new(
       :language_code,
       :score)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1941,6 +2009,7 @@ module Aws::Comprehend
       :job_status,
       :submit_time_before,
       :submit_time_after)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2024,6 +2093,7 @@ module Aws::Comprehend
       :data_access_role_arn,
       :volume_kms_key_id,
       :vpc_config)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2068,6 +2138,7 @@ module Aws::Comprehend
       :status,
       :creation_time_before,
       :creation_time_after)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2122,6 +2193,7 @@ module Aws::Comprehend
       :current_inference_units,
       :creation_time,
       :last_modified_time)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2168,6 +2240,7 @@ module Aws::Comprehend
       :job_status,
       :submit_time_before,
       :submit_time_after)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2261,6 +2334,7 @@ module Aws::Comprehend
       :data_access_role_arn,
       :volume_kms_key_id,
       :vpc_config)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2304,6 +2378,7 @@ module Aws::Comprehend
       :text,
       :begin_offset,
       :end_offset)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2326,6 +2401,7 @@ module Aws::Comprehend
     #
     class EntityRecognizerAnnotations < Struct.new(
       :s3_uri)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2348,6 +2424,7 @@ module Aws::Comprehend
     #
     class EntityRecognizerDocuments < Struct.new(
       :s3_uri)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2370,6 +2447,7 @@ module Aws::Comprehend
     #
     class EntityRecognizerEntityList < Struct.new(
       :s3_uri)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2400,6 +2478,7 @@ module Aws::Comprehend
       :precision,
       :recall,
       :f1_score)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2440,6 +2519,7 @@ module Aws::Comprehend
       :status,
       :submit_time_before,
       :submit_time_after)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2490,6 +2570,7 @@ module Aws::Comprehend
       :documents,
       :annotations,
       :entity_list)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2522,6 +2603,7 @@ module Aws::Comprehend
       :number_of_test_documents,
       :evaluation_metrics,
       :entity_types)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2549,6 +2631,7 @@ module Aws::Comprehend
       :type,
       :evaluation_metrics,
       :number_of_train_mentions)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2640,6 +2723,7 @@ module Aws::Comprehend
       :data_access_role_arn,
       :volume_kms_key_id,
       :vpc_config)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2673,6 +2757,7 @@ module Aws::Comprehend
       :precision,
       :recall,
       :f1_score)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2693,6 +2778,7 @@ module Aws::Comprehend
     #
     class EntityTypesListItem < Struct.new(
       :type)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2735,6 +2821,7 @@ module Aws::Comprehend
     class InputDataConfig < Struct.new(
       :s3_uri,
       :input_format)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2747,6 +2834,7 @@ module Aws::Comprehend
     #
     class InternalServerException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2760,6 +2848,7 @@ module Aws::Comprehend
     #
     class InvalidFilterException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2772,6 +2861,7 @@ module Aws::Comprehend
     #
     class InvalidRequestException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2784,6 +2874,7 @@ module Aws::Comprehend
     #
     class JobNotFoundException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2822,6 +2913,7 @@ module Aws::Comprehend
       :text,
       :begin_offset,
       :end_offset)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2868,6 +2960,7 @@ module Aws::Comprehend
       :job_status,
       :submit_time_before,
       :submit_time_after)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2955,6 +3048,7 @@ module Aws::Comprehend
       :data_access_role_arn,
       :volume_kms_key_id,
       :vpc_config)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2968,6 +3062,7 @@ module Aws::Comprehend
     #
     class KmsKeyValidationException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3006,6 +3101,7 @@ module Aws::Comprehend
       :filter,
       :next_token,
       :max_results)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3022,6 +3118,7 @@ module Aws::Comprehend
     class ListDocumentClassificationJobsResponse < Struct.new(
       :document_classification_job_properties_list,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3059,6 +3156,7 @@ module Aws::Comprehend
       :filter,
       :next_token,
       :max_results)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3075,6 +3173,7 @@ module Aws::Comprehend
     class ListDocumentClassifiersResponse < Struct.new(
       :document_classifier_properties_list,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3113,6 +3212,7 @@ module Aws::Comprehend
       :filter,
       :next_token,
       :max_results)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3129,6 +3229,7 @@ module Aws::Comprehend
     class ListDominantLanguageDetectionJobsResponse < Struct.new(
       :dominant_language_detection_job_properties_list,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3167,6 +3268,7 @@ module Aws::Comprehend
       :filter,
       :next_token,
       :max_results)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3184,6 +3286,7 @@ module Aws::Comprehend
     class ListEndpointsResponse < Struct.new(
       :endpoint_properties_list,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3222,6 +3325,7 @@ module Aws::Comprehend
       :filter,
       :next_token,
       :max_results)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3238,6 +3342,7 @@ module Aws::Comprehend
     class ListEntitiesDetectionJobsResponse < Struct.new(
       :entities_detection_job_properties_list,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3275,6 +3380,7 @@ module Aws::Comprehend
       :filter,
       :next_token,
       :max_results)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3291,6 +3397,7 @@ module Aws::Comprehend
     class ListEntityRecognizersResponse < Struct.new(
       :entity_recognizer_properties_list,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3329,6 +3436,7 @@ module Aws::Comprehend
       :filter,
       :next_token,
       :max_results)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3345,6 +3453,7 @@ module Aws::Comprehend
     class ListKeyPhrasesDetectionJobsResponse < Struct.new(
       :key_phrases_detection_job_properties_list,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3383,6 +3492,7 @@ module Aws::Comprehend
       :filter,
       :next_token,
       :max_results)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3399,6 +3509,7 @@ module Aws::Comprehend
     class ListSentimentDetectionJobsResponse < Struct.new(
       :sentiment_detection_job_properties_list,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3418,6 +3529,7 @@ module Aws::Comprehend
     #
     class ListTagsForResourceRequest < Struct.new(
       :resource_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3439,6 +3551,7 @@ module Aws::Comprehend
     class ListTagsForResourceResponse < Struct.new(
       :resource_arn,
       :tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3477,6 +3590,7 @@ module Aws::Comprehend
       :filter,
       :next_token,
       :max_results)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3493,6 +3607,7 @@ module Aws::Comprehend
     class ListTopicsDetectionJobsResponse < Struct.new(
       :topics_detection_job_properties_list,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3541,6 +3656,7 @@ module Aws::Comprehend
     class OutputDataConfig < Struct.new(
       :s3_uri,
       :kms_key_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3563,6 +3679,7 @@ module Aws::Comprehend
     class PartOfSpeechTag < Struct.new(
       :tag,
       :score)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3576,6 +3693,7 @@ module Aws::Comprehend
     #
     class ResourceInUseException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3590,6 +3708,7 @@ module Aws::Comprehend
     #
     class ResourceLimitExceededException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3603,6 +3722,7 @@ module Aws::Comprehend
     #
     class ResourceNotFoundException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3616,6 +3736,7 @@ module Aws::Comprehend
     #
     class ResourceUnavailableException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3662,6 +3783,7 @@ module Aws::Comprehend
       :job_status,
       :submit_time_before,
       :submit_time_after)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3749,6 +3871,7 @@ module Aws::Comprehend
       :data_access_role_arn,
       :volume_kms_key_id,
       :vpc_config)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3782,6 +3905,7 @@ module Aws::Comprehend
       :negative,
       :neutral,
       :mixed)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3872,6 +3996,7 @@ module Aws::Comprehend
       :client_request_token,
       :volume_kms_key_id,
       :vpc_config)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3903,6 +4028,7 @@ module Aws::Comprehend
     class StartDocumentClassificationJobResponse < Struct.new(
       :job_id,
       :job_status)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3991,6 +4117,7 @@ module Aws::Comprehend
       :client_request_token,
       :volume_kms_key_id,
       :vpc_config)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4019,6 +4146,7 @@ module Aws::Comprehend
     class StartDominantLanguageDetectionJobResponse < Struct.new(
       :job_id,
       :job_status)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4125,6 +4253,7 @@ module Aws::Comprehend
       :client_request_token,
       :volume_kms_key_id,
       :vpc_config)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4158,6 +4287,7 @@ module Aws::Comprehend
     class StartEntitiesDetectionJobResponse < Struct.new(
       :job_id,
       :job_status)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4254,6 +4384,7 @@ module Aws::Comprehend
       :client_request_token,
       :volume_kms_key_id,
       :vpc_config)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4282,6 +4413,7 @@ module Aws::Comprehend
     class StartKeyPhrasesDetectionJobResponse < Struct.new(
       :job_id,
       :job_status)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4378,6 +4510,7 @@ module Aws::Comprehend
       :client_request_token,
       :volume_kms_key_id,
       :vpc_config)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4406,6 +4539,7 @@ module Aws::Comprehend
     class StartSentimentDetectionJobResponse < Struct.new(
       :job_id,
       :job_status)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4503,6 +4637,7 @@ module Aws::Comprehend
       :client_request_token,
       :volume_kms_key_id,
       :vpc_config)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4531,6 +4666,7 @@ module Aws::Comprehend
     class StartTopicsDetectionJobResponse < Struct.new(
       :job_id,
       :job_status)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4549,6 +4685,7 @@ module Aws::Comprehend
     #
     class StopDominantLanguageDetectionJobRequest < Struct.new(
       :job_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4567,6 +4704,7 @@ module Aws::Comprehend
     class StopDominantLanguageDetectionJobResponse < Struct.new(
       :job_id,
       :job_status)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4585,6 +4723,7 @@ module Aws::Comprehend
     #
     class StopEntitiesDetectionJobRequest < Struct.new(
       :job_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4603,6 +4742,7 @@ module Aws::Comprehend
     class StopEntitiesDetectionJobResponse < Struct.new(
       :job_id,
       :job_status)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4621,6 +4761,7 @@ module Aws::Comprehend
     #
     class StopKeyPhrasesDetectionJobRequest < Struct.new(
       :job_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4639,6 +4780,7 @@ module Aws::Comprehend
     class StopKeyPhrasesDetectionJobResponse < Struct.new(
       :job_id,
       :job_status)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4657,6 +4799,7 @@ module Aws::Comprehend
     #
     class StopSentimentDetectionJobRequest < Struct.new(
       :job_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4675,6 +4818,7 @@ module Aws::Comprehend
     class StopSentimentDetectionJobResponse < Struct.new(
       :job_id,
       :job_status)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4694,6 +4838,7 @@ module Aws::Comprehend
     #
     class StopTrainingDocumentClassifierRequest < Struct.new(
       :document_classifier_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4717,6 +4862,7 @@ module Aws::Comprehend
     #
     class StopTrainingEntityRecognizerRequest < Struct.new(
       :entity_recognizer_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4760,6 +4906,7 @@ module Aws::Comprehend
       :begin_offset,
       :end_offset,
       :part_of_speech)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4797,6 +4944,7 @@ module Aws::Comprehend
     class Tag < Struct.new(
       :key,
       :value)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4829,6 +4977,7 @@ module Aws::Comprehend
     class TagResourceRequest < Struct.new(
       :resource_arn,
       :tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4845,6 +4994,7 @@ module Aws::Comprehend
     #
     class TextSizeLimitExceededException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4857,6 +5007,7 @@ module Aws::Comprehend
     #
     class TooManyRequestsException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4870,6 +5021,7 @@ module Aws::Comprehend
     #
     class TooManyTagKeysException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4884,6 +5036,7 @@ module Aws::Comprehend
     #
     class TooManyTagsException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4929,6 +5082,7 @@ module Aws::Comprehend
       :job_status,
       :submit_time_before,
       :submit_time_after)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5018,6 +5172,7 @@ module Aws::Comprehend
       :data_access_role_arn,
       :volume_kms_key_id,
       :vpc_config)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5034,6 +5189,7 @@ module Aws::Comprehend
     #
     class UnsupportedLanguageException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5063,6 +5219,7 @@ module Aws::Comprehend
     class UntagResourceRequest < Struct.new(
       :resource_arn,
       :tag_keys)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5093,6 +5250,7 @@ module Aws::Comprehend
     class UpdateEndpointRequest < Struct.new(
       :endpoint_arn,
       :desired_inference_units)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5148,6 +5306,7 @@ module Aws::Comprehend
     class VpcConfig < Struct.new(
       :security_group_ids,
       :subnets)
+      SENSITIVE = []
       include Aws::Structure
     end
 

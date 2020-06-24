@@ -20,6 +20,7 @@ module Aws::EC2InstanceConnect
     #
     class AuthException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -33,6 +34,7 @@ module Aws::EC2InstanceConnect
     #
     class EC2InstanceNotFoundException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -46,6 +48,7 @@ module Aws::EC2InstanceConnect
     #
     class InvalidArgsException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -84,6 +87,7 @@ module Aws::EC2InstanceConnect
       :instance_os_user,
       :ssh_public_key,
       :availability_zone)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -101,6 +105,7 @@ module Aws::EC2InstanceConnect
     class SendSSHPublicKeyResponse < Struct.new(
       :request_id,
       :success)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -114,6 +119,7 @@ module Aws::EC2InstanceConnect
     #
     class ServiceException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -128,6 +134,7 @@ module Aws::EC2InstanceConnect
     #
     class ThrottlingException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 

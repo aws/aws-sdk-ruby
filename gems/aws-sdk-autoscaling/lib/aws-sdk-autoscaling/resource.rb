@@ -203,8 +203,10 @@ module Aws::AutoScaling
     #   The amount of time, in seconds, after a scaling activity completes
     #   before another scaling activity can start. The default value is `300`.
     #
-    #   For more information, see [Scaling Cooldowns][1] in the *Amazon EC2
-    #   Auto Scaling User Guide*.
+    #   This setting applies when using simple scaling policies, but not when
+    #   using other scaling policies or scheduled scaling. For more
+    #   information, see [Scaling Cooldowns for Amazon EC2 Auto Scaling][1] in
+    #   the *Amazon EC2 Auto Scaling User Guide*.
     #
     #
     #
@@ -260,8 +262,7 @@ module Aws::AutoScaling
     #   For more information, see [Health Check Grace Period][1] in the
     #   *Amazon EC2 Auto Scaling User Guide*.
     #
-    #   Conditional: This parameter is required if you are adding an `ELB`
-    #   health check.
+    #   Required if you are adding an `ELB` health check.
     #
     #
     #

@@ -25,6 +25,7 @@ module Aws::Athena
     #
     class BatchGetNamedQueryInput < Struct.new(
       :named_query_ids)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -41,6 +42,7 @@ module Aws::Athena
     class BatchGetNamedQueryOutput < Struct.new(
       :named_queries,
       :unprocessed_named_query_ids)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -59,6 +61,7 @@ module Aws::Athena
     #
     class BatchGetQueryExecutionInput < Struct.new(
       :query_execution_ids)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -75,6 +78,7 @@ module Aws::Athena
     class BatchGetQueryExecutionOutput < Struct.new(
       :query_executions,
       :unprocessed_query_execution_ids)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -98,6 +102,7 @@ module Aws::Athena
       :name,
       :type,
       :comment)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -158,6 +163,7 @@ module Aws::Athena
       :scale,
       :nullable,
       :case_sensitive)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -238,6 +244,7 @@ module Aws::Athena
       :description,
       :parameters,
       :tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -302,6 +309,7 @@ module Aws::Athena
       :query_string,
       :client_request_token,
       :work_group)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -313,6 +321,7 @@ module Aws::Athena
     #
     class CreateNamedQueryOutput < Struct.new(
       :named_query_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -375,6 +384,7 @@ module Aws::Athena
       :configuration,
       :description,
       :tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -435,6 +445,7 @@ module Aws::Athena
       :description,
       :type,
       :parameters)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -454,6 +465,7 @@ module Aws::Athena
     class DataCatalogSummary < Struct.new(
       :catalog_name,
       :type)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -477,6 +489,7 @@ module Aws::Athena
       :name,
       :description,
       :parameters)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -490,6 +503,7 @@ module Aws::Athena
     #
     class Datum < Struct.new(
       :var_char_value)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -508,6 +522,7 @@ module Aws::Athena
     #
     class DeleteDataCatalogInput < Struct.new(
       :name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -533,6 +548,7 @@ module Aws::Athena
     #
     class DeleteNamedQueryInput < Struct.new(
       :named_query_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -562,6 +578,7 @@ module Aws::Athena
     class DeleteWorkGroupInput < Struct.new(
       :work_group,
       :recursive_delete_option)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -601,6 +618,7 @@ module Aws::Athena
     class EncryptionConfiguration < Struct.new(
       :encryption_option,
       :kms_key)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -619,6 +637,7 @@ module Aws::Athena
     #
     class GetDataCatalogInput < Struct.new(
       :name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -630,6 +649,7 @@ module Aws::Athena
     #
     class GetDataCatalogOutput < Struct.new(
       :data_catalog)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -654,6 +674,7 @@ module Aws::Athena
     class GetDatabaseInput < Struct.new(
       :catalog_name,
       :database_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -665,6 +686,7 @@ module Aws::Athena
     #
     class GetDatabaseOutput < Struct.new(
       :database)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -683,6 +705,7 @@ module Aws::Athena
     #
     class GetNamedQueryInput < Struct.new(
       :named_query_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -694,6 +717,7 @@ module Aws::Athena
     #
     class GetNamedQueryOutput < Struct.new(
       :named_query)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -712,6 +736,7 @@ module Aws::Athena
     #
     class GetQueryExecutionInput < Struct.new(
       :query_execution_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -723,6 +748,7 @@ module Aws::Athena
     #
     class GetQueryExecutionOutput < Struct.new(
       :query_execution)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -756,6 +782,7 @@ module Aws::Athena
       :query_execution_id,
       :next_token,
       :max_results)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -780,6 +807,7 @@ module Aws::Athena
       :update_count,
       :result_set,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -811,6 +839,7 @@ module Aws::Athena
       :catalog_name,
       :database_name,
       :table_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -822,6 +851,7 @@ module Aws::Athena
     #
     class GetTableMetadataOutput < Struct.new(
       :table_metadata)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -840,6 +870,7 @@ module Aws::Athena
     #
     class GetWorkGroupInput < Struct.new(
       :work_group)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -851,6 +882,7 @@ module Aws::Athena
     #
     class GetWorkGroupOutput < Struct.new(
       :work_group)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -864,6 +896,7 @@ module Aws::Athena
     #
     class InternalServerException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -883,6 +916,7 @@ module Aws::Athena
     class InvalidRequestException < Struct.new(
       :athena_error_code,
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -910,6 +944,7 @@ module Aws::Athena
     class ListDataCatalogsInput < Struct.new(
       :next_token,
       :max_results)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -929,6 +964,7 @@ module Aws::Athena
     class ListDataCatalogsOutput < Struct.new(
       :data_catalogs_summary,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -962,6 +998,7 @@ module Aws::Athena
       :catalog_name,
       :next_token,
       :max_results)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -981,6 +1018,7 @@ module Aws::Athena
     class ListDatabasesOutput < Struct.new(
       :database_list,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1016,6 +1054,7 @@ module Aws::Athena
       :next_token,
       :max_results,
       :work_group)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1035,6 +1074,7 @@ module Aws::Athena
     class ListNamedQueriesOutput < Struct.new(
       :named_query_ids,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1070,6 +1110,7 @@ module Aws::Athena
       :next_token,
       :max_results,
       :work_group)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1086,6 +1127,7 @@ module Aws::Athena
     class ListQueryExecutionsOutput < Struct.new(
       :query_execution_ids,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1134,6 +1176,7 @@ module Aws::Athena
       :expression,
       :next_token,
       :max_results)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1153,6 +1196,7 @@ module Aws::Athena
     class ListTableMetadataOutput < Struct.new(
       :table_metadata_list,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1186,6 +1230,7 @@ module Aws::Athena
       :resource_arn,
       :next_token,
       :max_results)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1202,6 +1247,7 @@ module Aws::Athena
     class ListTagsForResourceOutput < Struct.new(
       :tags,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1229,6 +1275,7 @@ module Aws::Athena
     class ListWorkGroupsInput < Struct.new(
       :next_token,
       :max_results)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1249,6 +1296,7 @@ module Aws::Athena
     class ListWorkGroupsOutput < Struct.new(
       :work_groups,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1266,6 +1314,7 @@ module Aws::Athena
     #
     class MetadataException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1305,6 +1354,7 @@ module Aws::Athena
       :query_string,
       :named_query_id,
       :work_group)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1365,6 +1415,7 @@ module Aws::Athena
       :status,
       :statistics,
       :work_group)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1392,6 +1443,7 @@ module Aws::Athena
     class QueryExecutionContext < Struct.new(
       :database,
       :catalog)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1455,6 +1507,7 @@ module Aws::Athena
       :query_queue_time_in_millis,
       :query_planning_time_in_millis,
       :service_processing_time_in_millis)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1496,6 +1549,7 @@ module Aws::Athena
       :state_change_reason,
       :submission_date_time,
       :completion_date_time)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1512,6 +1566,7 @@ module Aws::Athena
     class ResourceNotFoundException < Struct.new(
       :message,
       :resource_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1568,6 +1623,7 @@ module Aws::Athena
     class ResultConfiguration < Struct.new(
       :output_location,
       :encryption_configuration)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1645,6 +1701,7 @@ module Aws::Athena
       :remove_output_location,
       :encryption_configuration,
       :remove_encryption_configuration)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1666,6 +1723,7 @@ module Aws::Athena
     class ResultSet < Struct.new(
       :rows,
       :result_set_metadata)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1681,6 +1739,7 @@ module Aws::Athena
     #
     class ResultSetMetadata < Struct.new(
       :column_info)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1694,6 +1753,7 @@ module Aws::Athena
     #
     class Row < Struct.new(
       :data)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1763,6 +1823,7 @@ module Aws::Athena
       :query_execution_context,
       :result_configuration,
       :work_group)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1774,6 +1835,7 @@ module Aws::Athena
     #
     class StartQueryExecutionOutput < Struct.new(
       :query_execution_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1795,6 +1857,7 @@ module Aws::Athena
     #
     class StopQueryExecutionInput < Struct.new(
       :query_execution_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1842,6 +1905,7 @@ module Aws::Athena
       :columns,
       :partition_keys,
       :parameters)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1889,6 +1953,7 @@ module Aws::Athena
     class Tag < Struct.new(
       :key,
       :value)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1920,6 +1985,7 @@ module Aws::Athena
     class TagResourceInput < Struct.new(
       :resource_arn,
       :tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1942,6 +2008,7 @@ module Aws::Athena
     class TooManyRequestsException < Struct.new(
       :message,
       :reason)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1967,6 +2034,7 @@ module Aws::Athena
       :named_query_id,
       :error_code,
       :error_message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1992,6 +2060,7 @@ module Aws::Athena
       :query_execution_id,
       :error_code,
       :error_message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2017,6 +2086,7 @@ module Aws::Athena
     class UntagResourceInput < Struct.new(
       :resource_arn,
       :tag_keys)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2089,6 +2159,7 @@ module Aws::Athena
       :type,
       :description,
       :parameters)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2145,6 +2216,7 @@ module Aws::Athena
       :description,
       :configuration_updates,
       :state)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2201,6 +2273,7 @@ module Aws::Athena
       :configuration,
       :description,
       :creation_time)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2289,6 +2362,7 @@ module Aws::Athena
       :publish_cloud_watch_metrics_enabled,
       :bytes_scanned_cutoff_per_query,
       :requester_pays_enabled)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2375,6 +2449,7 @@ module Aws::Athena
       :bytes_scanned_cutoff_per_query,
       :remove_bytes_scanned_cutoff_per_query,
       :requester_pays_enabled)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2404,6 +2479,7 @@ module Aws::Athena
       :state,
       :description,
       :creation_time)
+      SENSITIVE = []
       include Aws::Structure
     end
 

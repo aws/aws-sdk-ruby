@@ -32,6 +32,7 @@ module Aws::RAM
     class AcceptResourceShareInvitationRequest < Struct.new(
       :resource_share_invitation_arn,
       :client_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -49,6 +50,7 @@ module Aws::RAM
     class AcceptResourceShareInvitationResponse < Struct.new(
       :resource_share_invitation,
       :client_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -90,6 +92,7 @@ module Aws::RAM
       :permission_arn,
       :replace,
       :client_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -107,6 +110,7 @@ module Aws::RAM
     class AssociateResourceSharePermissionResponse < Struct.new(
       :return_value,
       :client_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -144,6 +148,7 @@ module Aws::RAM
       :resource_arns,
       :principals,
       :client_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -161,6 +166,7 @@ module Aws::RAM
     class AssociateResourceShareResponse < Struct.new(
       :resource_share_associations,
       :client_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -228,6 +234,7 @@ module Aws::RAM
       :allow_external_principals,
       :client_token,
       :permission_arns)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -245,6 +252,7 @@ module Aws::RAM
     class CreateResourceShareResponse < Struct.new(
       :resource_share,
       :client_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -270,6 +278,7 @@ module Aws::RAM
     class DeleteResourceShareRequest < Struct.new(
       :resource_share_arn,
       :client_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -287,6 +296,7 @@ module Aws::RAM
     class DeleteResourceShareResponse < Struct.new(
       :return_value,
       :client_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -318,6 +328,7 @@ module Aws::RAM
       :resource_share_arn,
       :permission_arn,
       :client_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -335,6 +346,7 @@ module Aws::RAM
     class DisassociateResourceSharePermissionResponse < Struct.new(
       :return_value,
       :client_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -372,6 +384,7 @@ module Aws::RAM
       :resource_arns,
       :principals,
       :client_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -389,6 +402,7 @@ module Aws::RAM
     class DisassociateResourceShareResponse < Struct.new(
       :resource_share_associations,
       :client_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -406,6 +420,7 @@ module Aws::RAM
     #
     class EnableSharingWithAwsOrganizationResponse < Struct.new(
       :return_value)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -430,6 +445,7 @@ module Aws::RAM
     class GetPermissionRequest < Struct.new(
       :permission_arn,
       :permission_version)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -441,6 +457,7 @@ module Aws::RAM
     #
     class GetPermissionResponse < Struct.new(
       :permission)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -479,6 +496,7 @@ module Aws::RAM
       :principal,
       :next_token,
       :max_results)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -496,6 +514,7 @@ module Aws::RAM
     class GetResourcePoliciesResponse < Struct.new(
       :policies,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -557,6 +576,7 @@ module Aws::RAM
       :association_status,
       :next_token,
       :max_results)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -574,6 +594,7 @@ module Aws::RAM
     class GetResourceShareAssociationsResponse < Struct.new(
       :resource_share_associations,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -612,6 +633,7 @@ module Aws::RAM
       :resource_share_arns,
       :next_token,
       :max_results)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -629,6 +651,7 @@ module Aws::RAM
     class GetResourceShareInvitationsResponse < Struct.new(
       :resource_share_invitations,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -690,6 +713,7 @@ module Aws::RAM
       :tag_filters,
       :next_token,
       :max_results)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -707,6 +731,7 @@ module Aws::RAM
     class GetResourceSharesResponse < Struct.new(
       :resource_shares,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -721,6 +746,7 @@ module Aws::RAM
     #
     class IdempotentParameterMismatchException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -733,6 +759,7 @@ module Aws::RAM
     #
     class InvalidClientTokenException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -745,6 +772,7 @@ module Aws::RAM
     #
     class InvalidMaxResultsException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -757,6 +785,7 @@ module Aws::RAM
     #
     class InvalidNextTokenException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -769,6 +798,7 @@ module Aws::RAM
     #
     class InvalidParameterException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -781,6 +811,7 @@ module Aws::RAM
     #
     class InvalidResourceTypeException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -793,6 +824,7 @@ module Aws::RAM
     #
     class InvalidStateTransitionException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -825,6 +857,7 @@ module Aws::RAM
       :resource_share_invitation_arn,
       :next_token,
       :max_results)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -842,6 +875,7 @@ module Aws::RAM
     class ListPendingInvitationResourcesResponse < Struct.new(
       :resources,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -876,6 +910,7 @@ module Aws::RAM
       :resource_type,
       :next_token,
       :max_results)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -893,6 +928,7 @@ module Aws::RAM
     class ListPermissionsResponse < Struct.new(
       :permissions,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -957,6 +993,7 @@ module Aws::RAM
       :resource_share_arns,
       :next_token,
       :max_results)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -974,6 +1011,7 @@ module Aws::RAM
     class ListPrincipalsResponse < Struct.new(
       :principals,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1006,6 +1044,7 @@ module Aws::RAM
       :resource_share_arn,
       :next_token,
       :max_results)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1023,6 +1062,7 @@ module Aws::RAM
     class ListResourceSharePermissionsResponse < Struct.new(
       :permissions,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1049,6 +1089,7 @@ module Aws::RAM
     class ListResourceTypesRequest < Struct.new(
       :next_token,
       :max_results)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1066,6 +1107,7 @@ module Aws::RAM
     class ListResourceTypesResponse < Struct.new(
       :resource_types,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1130,6 +1172,7 @@ module Aws::RAM
       :resource_share_arns,
       :next_token,
       :max_results)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1147,6 +1190,7 @@ module Aws::RAM
     class ListResourcesResponse < Struct.new(
       :resources,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1159,6 +1203,7 @@ module Aws::RAM
     #
     class MalformedArnException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1171,6 +1216,7 @@ module Aws::RAM
     #
     class MissingRequiredParameterException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1183,6 +1229,7 @@ module Aws::RAM
     #
     class OperationNotPermittedException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1217,6 +1264,7 @@ module Aws::RAM
       :creation_time,
       :last_updated_time,
       :external)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1235,6 +1283,7 @@ module Aws::RAM
     #
     class PromoteResourceShareCreatedFromPolicyRequest < Struct.new(
       :resource_share_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1246,6 +1295,7 @@ module Aws::RAM
     #
     class PromoteResourceShareCreatedFromPolicyResponse < Struct.new(
       :return_value)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1271,6 +1321,7 @@ module Aws::RAM
     class RejectResourceShareInvitationRequest < Struct.new(
       :resource_share_invitation_arn,
       :client_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1288,6 +1339,7 @@ module Aws::RAM
     class RejectResourceShareInvitationResponse < Struct.new(
       :resource_share_invitation,
       :client_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1337,6 +1389,7 @@ module Aws::RAM
       :status_message,
       :creation_time,
       :last_updated_time)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1349,6 +1402,7 @@ module Aws::RAM
     #
     class ResourceArnNotFoundException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1423,6 +1477,7 @@ module Aws::RAM
       :creation_time,
       :last_updated_time,
       :feature_set)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1479,6 +1534,7 @@ module Aws::RAM
       :creation_time,
       :last_updated_time,
       :external)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1532,6 +1588,7 @@ module Aws::RAM
       :invitation_timestamp,
       :status,
       :resource_share_associations)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1544,6 +1601,7 @@ module Aws::RAM
     #
     class ResourceShareInvitationAlreadyAcceptedException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1556,6 +1614,7 @@ module Aws::RAM
     #
     class ResourceShareInvitationAlreadyRejectedException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1568,6 +1627,7 @@ module Aws::RAM
     #
     class ResourceShareInvitationArnNotFoundException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1580,6 +1640,7 @@ module Aws::RAM
     #
     class ResourceShareInvitationExpiredException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1592,6 +1653,7 @@ module Aws::RAM
     #
     class ResourceShareLimitExceededException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1644,6 +1706,7 @@ module Aws::RAM
       :permission,
       :creation_time,
       :last_updated_time)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1694,6 +1757,7 @@ module Aws::RAM
       :status,
       :creation_time,
       :last_updated_time)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1707,6 +1771,7 @@ module Aws::RAM
     #
     class ServerInternalException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1726,6 +1791,7 @@ module Aws::RAM
     class ServiceNameAndResourceType < Struct.new(
       :resource_type,
       :service_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1738,6 +1804,7 @@ module Aws::RAM
     #
     class ServiceUnavailableException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1764,6 +1831,7 @@ module Aws::RAM
     class Tag < Struct.new(
       :key,
       :value)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1790,6 +1858,7 @@ module Aws::RAM
     class TagFilter < Struct.new(
       :tag_key,
       :tag_values)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1802,6 +1871,7 @@ module Aws::RAM
     #
     class TagLimitExceededException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1814,6 +1884,7 @@ module Aws::RAM
     #
     class TagPolicyViolationException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1843,6 +1914,7 @@ module Aws::RAM
     class TagResourceRequest < Struct.new(
       :resource_share_arn,
       :tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1859,6 +1931,7 @@ module Aws::RAM
     #
     class UnknownResourceException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1883,6 +1956,7 @@ module Aws::RAM
     class UntagResourceRequest < Struct.new(
       :resource_share_arn,
       :tag_keys)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1925,6 +1999,7 @@ module Aws::RAM
       :name,
       :allow_external_principals,
       :client_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1942,6 +2017,7 @@ module Aws::RAM
     class UpdateResourceShareResponse < Struct.new(
       :resource_share,
       :client_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 

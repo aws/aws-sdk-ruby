@@ -114,6 +114,7 @@ Gem::Specification.new do |spec|
   spec.add_dependency('aws-sdk-groundstation', '~> 1')
   spec.add_dependency('aws-sdk-guardduty', '~> 1')
   spec.add_dependency('aws-sdk-health', '~> 1')
+  spec.add_dependency('aws-sdk-honeycode', '~> 1')
   spec.add_dependency('aws-sdk-iam', '~> 1')
   spec.add_dependency('aws-sdk-imagebuilder', '~> 1')
   spec.add_dependency('aws-sdk-importexport', '~> 1')

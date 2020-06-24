@@ -55,6 +55,7 @@ module Aws::MarketplaceEntitlementService
       :customer_identifier,
       :value,
       :expiration_date)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -90,6 +91,7 @@ module Aws::MarketplaceEntitlementService
       :double_value,
       :boolean_value,
       :string_value)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -139,6 +141,7 @@ module Aws::MarketplaceEntitlementService
       :filter,
       :next_token,
       :max_results)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -162,6 +165,7 @@ module Aws::MarketplaceEntitlementService
     class GetEntitlementsResult < Struct.new(
       :entitlements,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -175,6 +179,7 @@ module Aws::MarketplaceEntitlementService
     #
     class InternalServiceErrorException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -187,6 +192,7 @@ module Aws::MarketplaceEntitlementService
     #
     class InvalidParameterException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -199,6 +205,7 @@ module Aws::MarketplaceEntitlementService
     #
     class ThrottlingException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 

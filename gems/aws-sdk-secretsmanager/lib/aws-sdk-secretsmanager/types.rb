@@ -43,6 +43,7 @@ module Aws::SecretsManager
     #
     class CancelRotateSecretRequest < Struct.new(
       :secret_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -69,6 +70,7 @@ module Aws::SecretsManager
       :arn,
       :name,
       :version_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -282,6 +284,7 @@ module Aws::SecretsManager
       :secret_binary,
       :secret_string,
       :tags)
+      SENSITIVE = [:secret_binary, :secret_string]
       include Aws::Structure
     end
 
@@ -314,6 +317,7 @@ module Aws::SecretsManager
       :arn,
       :name,
       :version_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -327,6 +331,7 @@ module Aws::SecretsManager
     #
     class DecryptionFailure < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -363,6 +368,7 @@ module Aws::SecretsManager
     #
     class DeleteResourcePolicyRequest < Struct.new(
       :secret_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -381,6 +387,7 @@ module Aws::SecretsManager
     class DeleteResourcePolicyResponse < Struct.new(
       :arn,
       :name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -447,6 +454,7 @@ module Aws::SecretsManager
       :secret_id,
       :recovery_window_in_days,
       :force_delete_without_recovery)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -471,6 +479,7 @@ module Aws::SecretsManager
       :arn,
       :name,
       :deletion_date)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -507,6 +516,7 @@ module Aws::SecretsManager
     #
     class DescribeSecretRequest < Struct.new(
       :secret_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -615,6 +625,7 @@ module Aws::SecretsManager
       :tags,
       :version_ids_to_stages,
       :owning_service)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -634,6 +645,7 @@ module Aws::SecretsManager
     #
     class EncryptionFailure < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -717,6 +729,7 @@ module Aws::SecretsManager
       :exclude_lowercase,
       :include_space,
       :require_each_included_type)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -728,6 +741,7 @@ module Aws::SecretsManager
     #
     class GetRandomPasswordResponse < Struct.new(
       :random_password)
+      SENSITIVE = [:random_password]
       include Aws::Structure
     end
 
@@ -764,6 +778,7 @@ module Aws::SecretsManager
     #
     class GetResourcePolicyRequest < Struct.new(
       :secret_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -797,6 +812,7 @@ module Aws::SecretsManager
       :arn,
       :name,
       :resource_policy)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -864,6 +880,7 @@ module Aws::SecretsManager
       :secret_id,
       :version_id,
       :version_stage)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -932,6 +949,7 @@ module Aws::SecretsManager
       :secret_string,
       :version_stages,
       :created_date)
+      SENSITIVE = [:secret_binary, :secret_string]
       include Aws::Structure
     end
 
@@ -944,6 +962,7 @@ module Aws::SecretsManager
     #
     class InternalServiceError < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -956,6 +975,7 @@ module Aws::SecretsManager
     #
     class InvalidNextTokenException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -968,6 +988,7 @@ module Aws::SecretsManager
     #
     class InvalidParameterException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -990,6 +1011,7 @@ module Aws::SecretsManager
     #
     class InvalidRequestException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1003,6 +1025,7 @@ module Aws::SecretsManager
     #
     class LimitExceededException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1073,6 +1096,7 @@ module Aws::SecretsManager
       :max_results,
       :next_token,
       :include_deprecated)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1117,6 +1141,7 @@ module Aws::SecretsManager
       :next_token,
       :arn,
       :name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1154,6 +1179,7 @@ module Aws::SecretsManager
     class ListSecretsRequest < Struct.new(
       :max_results,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1177,6 +1203,7 @@ module Aws::SecretsManager
     class ListSecretsResponse < Struct.new(
       :secret_list,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1189,6 +1216,7 @@ module Aws::SecretsManager
     #
     class MalformedPolicyDocumentException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1202,6 +1230,7 @@ module Aws::SecretsManager
     #
     class PreconditionNotMetException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1253,6 +1282,7 @@ module Aws::SecretsManager
     class PutResourcePolicyRequest < Struct.new(
       :secret_id,
       :resource_policy)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1271,6 +1301,7 @@ module Aws::SecretsManager
     class PutResourcePolicyResponse < Struct.new(
       :arn,
       :name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1420,6 +1451,7 @@ module Aws::SecretsManager
       :secret_binary,
       :secret_string,
       :version_stages)
+      SENSITIVE = [:secret_binary, :secret_string]
       include Aws::Structure
     end
 
@@ -1451,6 +1483,7 @@ module Aws::SecretsManager
       :name,
       :version_id,
       :version_stages)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1463,6 +1496,7 @@ module Aws::SecretsManager
     #
     class ResourceExistsException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1475,6 +1509,7 @@ module Aws::SecretsManager
     #
     class ResourceNotFoundException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1511,6 +1546,7 @@ module Aws::SecretsManager
     #
     class RestoreSecretRequest < Struct.new(
       :secret_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1527,6 +1563,7 @@ module Aws::SecretsManager
     class RestoreSecretResponse < Struct.new(
       :arn,
       :name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1609,6 +1646,7 @@ module Aws::SecretsManager
       :client_request_token,
       :rotation_lambda_arn,
       :rotation_rules)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1631,6 +1669,7 @@ module Aws::SecretsManager
       :arn,
       :name,
       :version_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1660,6 +1699,7 @@ module Aws::SecretsManager
     #
     class RotationRulesType < Struct.new(
       :automatically_after_days)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1774,6 +1814,7 @@ module Aws::SecretsManager
       :tags,
       :secret_versions_to_stages,
       :owning_service)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1805,6 +1846,7 @@ module Aws::SecretsManager
       :version_stages,
       :last_accessed_date,
       :created_date)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1831,6 +1873,7 @@ module Aws::SecretsManager
     class Tag < Struct.new(
       :key,
       :value)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1890,6 +1933,7 @@ module Aws::SecretsManager
     class TagResourceRequest < Struct.new(
       :secret_id,
       :tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1943,6 +1987,7 @@ module Aws::SecretsManager
     class UntagResourceRequest < Struct.new(
       :secret_id,
       :tag_keys)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2098,6 +2143,7 @@ module Aws::SecretsManager
       :kms_key_id,
       :secret_binary,
       :secret_string)
+      SENSITIVE = [:secret_binary, :secret_string]
       include Aws::Structure
     end
 
@@ -2130,6 +2176,7 @@ module Aws::SecretsManager
       :arn,
       :name,
       :version_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2196,6 +2243,7 @@ module Aws::SecretsManager
       :version_stage,
       :remove_from_version_id,
       :move_to_version_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2213,6 +2261,7 @@ module Aws::SecretsManager
     class UpdateSecretVersionStageResponse < Struct.new(
       :arn,
       :name)
+      SENSITIVE = []
       include Aws::Structure
     end
 

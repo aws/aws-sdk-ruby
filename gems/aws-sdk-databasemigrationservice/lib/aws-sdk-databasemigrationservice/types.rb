@@ -20,6 +20,7 @@ module Aws::DatabaseMigrationService
     #
     class AccessDeniedFault < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -44,6 +45,7 @@ module Aws::DatabaseMigrationService
       :account_quota_name,
       :used,
       :max)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -79,6 +81,7 @@ module Aws::DatabaseMigrationService
     class AddTagsToResourceMessage < Struct.new(
       :resource_arn,
       :tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -126,6 +129,7 @@ module Aws::DatabaseMigrationService
       :replication_instance_arn,
       :apply_action,
       :opt_in_type)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -138,6 +142,7 @@ module Aws::DatabaseMigrationService
     #
     class ApplyPendingMaintenanceActionResponse < Struct.new(
       :resource_pending_maintenance_actions)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -151,6 +156,7 @@ module Aws::DatabaseMigrationService
     #
     class AvailabilityZone < Struct.new(
       :name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -214,6 +220,7 @@ module Aws::DatabaseMigrationService
       :valid_to_date,
       :signing_algorithm,
       :key_length)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -257,6 +264,7 @@ module Aws::DatabaseMigrationService
       :last_failure_message,
       :endpoint_identifier,
       :replication_instance_identifier)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -604,6 +612,7 @@ module Aws::DatabaseMigrationService
       :elasticsearch_settings,
       :neptune_settings,
       :redshift_settings)
+      SENSITIVE = [:password]
       include Aws::Structure
     end
 
@@ -615,6 +624,7 @@ module Aws::DatabaseMigrationService
     #
     class CreateEndpointResponse < Struct.new(
       :endpoint)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -698,6 +708,7 @@ module Aws::DatabaseMigrationService
       :source_ids,
       :enabled,
       :tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -709,6 +720,7 @@ module Aws::DatabaseMigrationService
     #
     class CreateEventSubscriptionResponse < Struct.new(
       :event_subscription)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -858,6 +870,7 @@ module Aws::DatabaseMigrationService
       :kms_key_id,
       :publicly_accessible,
       :dns_name_servers)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -869,6 +882,7 @@ module Aws::DatabaseMigrationService
     #
     class CreateReplicationInstanceResponse < Struct.new(
       :replication_instance)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -916,6 +930,7 @@ module Aws::DatabaseMigrationService
       :replication_subnet_group_description,
       :subnet_ids,
       :tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -927,6 +942,7 @@ module Aws::DatabaseMigrationService
     #
     class CreateReplicationSubnetGroupResponse < Struct.new(
       :replication_subnet_group)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1083,6 +1099,7 @@ module Aws::DatabaseMigrationService
       :cdc_stop_position,
       :tags,
       :task_data)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1094,6 +1111,7 @@ module Aws::DatabaseMigrationService
     #
     class CreateReplicationTaskResponse < Struct.new(
       :replication_task)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1112,6 +1130,7 @@ module Aws::DatabaseMigrationService
     #
     class DeleteCertificateMessage < Struct.new(
       :certificate_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1123,6 +1142,7 @@ module Aws::DatabaseMigrationService
     #
     class DeleteCertificateResponse < Struct.new(
       :certificate)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1148,6 +1168,7 @@ module Aws::DatabaseMigrationService
     class DeleteConnectionMessage < Struct.new(
       :endpoint_arn,
       :replication_instance_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1159,6 +1180,7 @@ module Aws::DatabaseMigrationService
     #
     class DeleteConnectionResponse < Struct.new(
       :connection)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1178,6 +1200,7 @@ module Aws::DatabaseMigrationService
     #
     class DeleteEndpointMessage < Struct.new(
       :endpoint_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1189,6 +1212,7 @@ module Aws::DatabaseMigrationService
     #
     class DeleteEndpointResponse < Struct.new(
       :endpoint)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1207,6 +1231,7 @@ module Aws::DatabaseMigrationService
     #
     class DeleteEventSubscriptionMessage < Struct.new(
       :subscription_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1218,6 +1243,7 @@ module Aws::DatabaseMigrationService
     #
     class DeleteEventSubscriptionResponse < Struct.new(
       :event_subscription)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1237,6 +1263,7 @@ module Aws::DatabaseMigrationService
     #
     class DeleteReplicationInstanceMessage < Struct.new(
       :replication_instance_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1248,6 +1275,7 @@ module Aws::DatabaseMigrationService
     #
     class DeleteReplicationInstanceResponse < Struct.new(
       :replication_instance)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1266,6 +1294,7 @@ module Aws::DatabaseMigrationService
     #
     class DeleteReplicationSubnetGroupMessage < Struct.new(
       :replication_subnet_group_identifier)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1289,6 +1318,7 @@ module Aws::DatabaseMigrationService
     #
     class DeleteReplicationTaskMessage < Struct.new(
       :replication_task_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1300,6 +1330,7 @@ module Aws::DatabaseMigrationService
     #
     class DeleteReplicationTaskResponse < Struct.new(
       :replication_task)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1334,6 +1365,7 @@ module Aws::DatabaseMigrationService
     class DescribeAccountAttributesResponse < Struct.new(
       :account_quotas,
       :unique_account_identifier)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1377,6 +1409,7 @@ module Aws::DatabaseMigrationService
       :filters,
       :max_records,
       :marker)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1394,6 +1427,7 @@ module Aws::DatabaseMigrationService
     class DescribeCertificatesResponse < Struct.new(
       :marker,
       :certificates)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1440,6 +1474,7 @@ module Aws::DatabaseMigrationService
       :filters,
       :max_records,
       :marker)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1458,6 +1493,7 @@ module Aws::DatabaseMigrationService
     class DescribeConnectionsResponse < Struct.new(
       :marker,
       :connections)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1504,6 +1540,7 @@ module Aws::DatabaseMigrationService
       :filters,
       :max_records,
       :marker)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1522,6 +1559,7 @@ module Aws::DatabaseMigrationService
     class DescribeEndpointTypesResponse < Struct.new(
       :marker,
       :supported_endpoint_types)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1569,6 +1607,7 @@ module Aws::DatabaseMigrationService
       :filters,
       :max_records,
       :marker)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1587,6 +1626,7 @@ module Aws::DatabaseMigrationService
     class DescribeEndpointsResponse < Struct.new(
       :marker,
       :endpoints)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1618,6 +1658,7 @@ module Aws::DatabaseMigrationService
     class DescribeEventCategoriesMessage < Struct.new(
       :source_type,
       :filters)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1629,6 +1670,7 @@ module Aws::DatabaseMigrationService
     #
     class DescribeEventCategoriesResponse < Struct.new(
       :event_category_group_list)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1679,6 +1721,7 @@ module Aws::DatabaseMigrationService
       :filters,
       :max_records,
       :marker)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1697,6 +1740,7 @@ module Aws::DatabaseMigrationService
     class DescribeEventSubscriptionsResponse < Struct.new(
       :marker,
       :event_subscriptions_list)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1779,6 +1823,7 @@ module Aws::DatabaseMigrationService
       :filters,
       :max_records,
       :marker)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1797,6 +1842,7 @@ module Aws::DatabaseMigrationService
     class DescribeEventsResponse < Struct.new(
       :marker,
       :events)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1830,6 +1876,7 @@ module Aws::DatabaseMigrationService
     class DescribeOrderableReplicationInstancesMessage < Struct.new(
       :max_records,
       :marker)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1848,6 +1895,7 @@ module Aws::DatabaseMigrationService
     class DescribeOrderableReplicationInstancesResponse < Struct.new(
       :orderable_replication_instances,
       :marker)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1897,6 +1945,7 @@ module Aws::DatabaseMigrationService
       :filters,
       :marker,
       :max_records)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1915,6 +1964,7 @@ module Aws::DatabaseMigrationService
     class DescribePendingMaintenanceActionsResponse < Struct.new(
       :pending_maintenance_actions,
       :marker)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1934,6 +1984,7 @@ module Aws::DatabaseMigrationService
     #
     class DescribeRefreshSchemasStatusMessage < Struct.new(
       :endpoint_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1945,6 +1996,7 @@ module Aws::DatabaseMigrationService
     #
     class DescribeRefreshSchemasStatusResponse < Struct.new(
       :refresh_schemas_status)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1984,6 +2036,7 @@ module Aws::DatabaseMigrationService
       :replication_instance_arn,
       :max_records,
       :marker)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2009,6 +2062,7 @@ module Aws::DatabaseMigrationService
       :replication_instance_arn,
       :replication_instance_task_logs,
       :marker)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2057,6 +2111,7 @@ module Aws::DatabaseMigrationService
       :filters,
       :max_records,
       :marker)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2075,6 +2130,7 @@ module Aws::DatabaseMigrationService
     class DescribeReplicationInstancesResponse < Struct.new(
       :marker,
       :replication_instances)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2121,6 +2177,7 @@ module Aws::DatabaseMigrationService
       :filters,
       :max_records,
       :marker)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2139,6 +2196,7 @@ module Aws::DatabaseMigrationService
     class DescribeReplicationSubnetGroupsResponse < Struct.new(
       :marker,
       :replication_subnet_groups)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2181,6 +2239,7 @@ module Aws::DatabaseMigrationService
       :replication_task_arn,
       :max_records,
       :marker)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2204,6 +2263,7 @@ module Aws::DatabaseMigrationService
       :marker,
       :bucket_name,
       :replication_task_assessment_results)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2260,6 +2320,7 @@ module Aws::DatabaseMigrationService
       :max_records,
       :marker,
       :without_settings)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2278,6 +2339,7 @@ module Aws::DatabaseMigrationService
     class DescribeReplicationTasksResponse < Struct.new(
       :marker,
       :replication_tasks)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2318,6 +2380,7 @@ module Aws::DatabaseMigrationService
       :endpoint_arn,
       :max_records,
       :marker)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2336,6 +2399,7 @@ module Aws::DatabaseMigrationService
     class DescribeSchemasResponse < Struct.new(
       :marker,
       :schemas)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2391,6 +2455,7 @@ module Aws::DatabaseMigrationService
       :max_records,
       :marker,
       :filters)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2414,6 +2479,7 @@ module Aws::DatabaseMigrationService
       :replication_task_arn,
       :table_statistics,
       :marker)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2440,6 +2506,7 @@ module Aws::DatabaseMigrationService
     class DmsTransferSettings < Struct.new(
       :service_access_role_arn,
       :bucket_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2462,6 +2529,7 @@ module Aws::DatabaseMigrationService
     #
     class DynamoDbSettings < Struct.new(
       :service_access_role_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2503,6 +2571,7 @@ module Aws::DatabaseMigrationService
       :endpoint_uri,
       :full_load_error_percentage,
       :error_retry_duration)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2698,6 +2767,7 @@ module Aws::DatabaseMigrationService
       :elasticsearch_settings,
       :neptune_settings,
       :redshift_settings)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2736,6 +2806,7 @@ module Aws::DatabaseMigrationService
       :message,
       :event_categories,
       :date)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2758,6 +2829,7 @@ module Aws::DatabaseMigrationService
     class EventCategoryGroup < Struct.new(
       :source_type,
       :event_categories)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2826,6 +2898,7 @@ module Aws::DatabaseMigrationService
       :source_ids_list,
       :event_categories_list,
       :enabled)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2854,6 +2927,7 @@ module Aws::DatabaseMigrationService
     class Filter < Struct.new(
       :name,
       :values)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2899,6 +2973,7 @@ module Aws::DatabaseMigrationService
       :certificate_pem,
       :certificate_wallet,
       :tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2910,6 +2985,7 @@ module Aws::DatabaseMigrationService
     #
     class ImportCertificateResponse < Struct.new(
       :certificate)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2922,6 +2998,7 @@ module Aws::DatabaseMigrationService
     #
     class InsufficientResourceCapacityFault < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2934,6 +3011,7 @@ module Aws::DatabaseMigrationService
     #
     class InvalidCertificateFault < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2947,6 +3025,7 @@ module Aws::DatabaseMigrationService
     #
     class InvalidResourceStateFault < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2959,6 +3038,7 @@ module Aws::DatabaseMigrationService
     #
     class InvalidSubnet < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2972,6 +3052,7 @@ module Aws::DatabaseMigrationService
     #
     class KMSAccessDeniedFault < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2984,6 +3065,7 @@ module Aws::DatabaseMigrationService
     #
     class KMSDisabledFault < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2997,6 +3079,7 @@ module Aws::DatabaseMigrationService
     #
     class KMSInvalidStateFault < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3009,6 +3092,7 @@ module Aws::DatabaseMigrationService
     #
     class KMSKeyNotAccessibleFault < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3021,6 +3105,7 @@ module Aws::DatabaseMigrationService
     #
     class KMSNotFoundFault < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3033,6 +3118,7 @@ module Aws::DatabaseMigrationService
     #
     class KMSThrottlingFault < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3067,6 +3153,7 @@ module Aws::DatabaseMigrationService
     class KafkaSettings < Struct.new(
       :broker,
       :topic)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3153,6 +3240,7 @@ module Aws::DatabaseMigrationService
       :partition_include_schema_table,
       :include_table_alter_operations,
       :include_control_details)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3172,6 +3260,7 @@ module Aws::DatabaseMigrationService
     #
     class ListTagsForResourceMessage < Struct.new(
       :resource_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3183,6 +3272,7 @@ module Aws::DatabaseMigrationService
     #
     class ListTagsForResourceResponse < Struct.new(
       :tag_list)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3506,6 +3596,7 @@ module Aws::DatabaseMigrationService
       :elasticsearch_settings,
       :neptune_settings,
       :redshift_settings)
+      SENSITIVE = [:password]
       include Aws::Structure
     end
 
@@ -3517,6 +3608,7 @@ module Aws::DatabaseMigrationService
     #
     class ModifyEndpointResponse < Struct.new(
       :endpoint)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3567,6 +3659,7 @@ module Aws::DatabaseMigrationService
       :source_type,
       :event_categories,
       :enabled)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3578,6 +3671,7 @@ module Aws::DatabaseMigrationService
     #
     class ModifyEventSubscriptionResponse < Struct.new(
       :event_subscription)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3700,6 +3794,7 @@ module Aws::DatabaseMigrationService
       :allow_major_version_upgrade,
       :auto_minor_version_upgrade,
       :replication_instance_identifier)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3711,6 +3806,7 @@ module Aws::DatabaseMigrationService
     #
     class ModifyReplicationInstanceResponse < Struct.new(
       :replication_instance)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3741,6 +3837,7 @@ module Aws::DatabaseMigrationService
       :replication_subnet_group_identifier,
       :replication_subnet_group_description,
       :subnet_ids)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3752,6 +3849,7 @@ module Aws::DatabaseMigrationService
     #
     class ModifyReplicationSubnetGroupResponse < Struct.new(
       :replication_subnet_group)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3875,6 +3973,7 @@ module Aws::DatabaseMigrationService
       :cdc_start_position,
       :cdc_stop_position,
       :task_data)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3886,6 +3985,7 @@ module Aws::DatabaseMigrationService
     #
     class ModifyReplicationTaskResponse < Struct.new(
       :replication_task)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4006,6 +4106,7 @@ module Aws::DatabaseMigrationService
       :docs_to_investigate,
       :auth_source,
       :kms_key_id)
+      SENSITIVE = [:password]
       include Aws::Structure
     end
 
@@ -4083,6 +4184,7 @@ module Aws::DatabaseMigrationService
       :max_file_size,
       :max_retry_count,
       :iam_auth_enabled)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4154,6 +4256,7 @@ module Aws::DatabaseMigrationService
       :included_allocated_storage,
       :availability_zones,
       :release_status)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4207,6 +4310,7 @@ module Aws::DatabaseMigrationService
       :opt_in_status,
       :current_apply_date,
       :description)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4233,6 +4337,7 @@ module Aws::DatabaseMigrationService
     class RebootReplicationInstanceMessage < Struct.new(
       :replication_instance_arn,
       :force_failover)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4244,6 +4349,7 @@ module Aws::DatabaseMigrationService
     #
     class RebootReplicationInstanceResponse < Struct.new(
       :replication_instance)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4465,6 +4571,7 @@ module Aws::DatabaseMigrationService
       :truncate_columns,
       :username,
       :write_buffer_size)
+      SENSITIVE = [:password]
       include Aws::Structure
     end
 
@@ -4490,6 +4597,7 @@ module Aws::DatabaseMigrationService
     class RefreshSchemasMessage < Struct.new(
       :endpoint_arn,
       :replication_instance_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4501,6 +4609,7 @@ module Aws::DatabaseMigrationService
     #
     class RefreshSchemasResponse < Struct.new(
       :refresh_schemas_status)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4536,6 +4645,7 @@ module Aws::DatabaseMigrationService
       :status,
       :last_refresh_date,
       :last_failure_message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4578,6 +4688,7 @@ module Aws::DatabaseMigrationService
       :replication_task_arn,
       :tables_to_reload,
       :reload_option)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4589,6 +4700,7 @@ module Aws::DatabaseMigrationService
     #
     class ReloadTablesResponse < Struct.new(
       :replication_task_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4616,6 +4728,7 @@ module Aws::DatabaseMigrationService
     class RemoveTagsFromResourceMessage < Struct.new(
       :resource_arn,
       :tag_keys)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4775,6 +4888,7 @@ module Aws::DatabaseMigrationService
       :secondary_availability_zone,
       :free_until,
       :dns_name_servers)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4798,6 +4912,7 @@ module Aws::DatabaseMigrationService
       :replication_task_name,
       :replication_task_arn,
       :replication_instance_task_log_size)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4835,6 +4950,7 @@ module Aws::DatabaseMigrationService
       :allocated_storage,
       :multi_az,
       :engine_version)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4869,6 +4985,7 @@ module Aws::DatabaseMigrationService
       :vpc_id,
       :subnet_group_status,
       :subnets)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4882,6 +4999,7 @@ module Aws::DatabaseMigrationService
     #
     class ReplicationSubnetGroupDoesNotCoverEnoughAZs < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5022,6 +5140,7 @@ module Aws::DatabaseMigrationService
       :replication_task_arn,
       :replication_task_stats,
       :task_data)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5066,6 +5185,7 @@ module Aws::DatabaseMigrationService
       :assessment_results_file,
       :assessment_results,
       :s3_object_url)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5138,6 +5258,7 @@ module Aws::DatabaseMigrationService
       :stop_date,
       :full_load_start_date,
       :full_load_finish_date)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5154,6 +5275,7 @@ module Aws::DatabaseMigrationService
     class ResourceAlreadyExistsFault < Struct.new(
       :message,
       :resource_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5166,6 +5288,7 @@ module Aws::DatabaseMigrationService
     #
     class ResourceNotFoundFault < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5191,6 +5314,7 @@ module Aws::DatabaseMigrationService
     class ResourcePendingMaintenanceActions < Struct.new(
       :resource_identifier,
       :pending_maintenance_action_details)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5203,6 +5327,7 @@ module Aws::DatabaseMigrationService
     #
     class ResourceQuotaExceededFault < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5566,6 +5691,7 @@ module Aws::DatabaseMigrationService
       :timestamp_column_name,
       :parquet_timestamp_in_millisecond,
       :cdc_inserts_and_updates)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5578,6 +5704,7 @@ module Aws::DatabaseMigrationService
     #
     class SNSInvalidTopicFault < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5590,6 +5717,7 @@ module Aws::DatabaseMigrationService
     #
     class SNSNoAuthorizationFault < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5608,6 +5736,7 @@ module Aws::DatabaseMigrationService
     #
     class StartReplicationTaskAssessmentMessage < Struct.new(
       :replication_task_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5619,6 +5748,7 @@ module Aws::DatabaseMigrationService
     #
     class StartReplicationTaskAssessmentResponse < Struct.new(
       :replication_task)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5699,6 +5829,7 @@ module Aws::DatabaseMigrationService
       :cdc_start_time,
       :cdc_start_position,
       :cdc_stop_position)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5710,6 +5841,7 @@ module Aws::DatabaseMigrationService
     #
     class StartReplicationTaskResponse < Struct.new(
       :replication_task)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5728,6 +5860,7 @@ module Aws::DatabaseMigrationService
     #
     class StopReplicationTaskMessage < Struct.new(
       :replication_task_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5739,6 +5872,7 @@ module Aws::DatabaseMigrationService
     #
     class StopReplicationTaskResponse < Struct.new(
       :replication_task)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5751,6 +5885,7 @@ module Aws::DatabaseMigrationService
     #
     class StorageQuotaExceededFault < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5776,6 +5911,7 @@ module Aws::DatabaseMigrationService
       :subnet_identifier,
       :subnet_availability_zone,
       :subnet_status)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5788,6 +5924,7 @@ module Aws::DatabaseMigrationService
     #
     class SubnetAlreadyInUse < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5833,6 +5970,7 @@ module Aws::DatabaseMigrationService
       :endpoint_type,
       :replication_instance_engine_minimum_version,
       :engine_display_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5972,6 +6110,7 @@ module Aws::DatabaseMigrationService
       :validation_suspended_records,
       :validation_state,
       :validation_state_details)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5998,6 +6137,7 @@ module Aws::DatabaseMigrationService
     class TableToReload < Struct.new(
       :schema_name,
       :table_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6041,6 +6181,7 @@ module Aws::DatabaseMigrationService
     class Tag < Struct.new(
       :key,
       :value)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6066,6 +6207,7 @@ module Aws::DatabaseMigrationService
     class TestConnectionMessage < Struct.new(
       :replication_instance_arn,
       :endpoint_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6077,6 +6219,7 @@ module Aws::DatabaseMigrationService
     #
     class TestConnectionResponse < Struct.new(
       :connection)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6089,6 +6232,7 @@ module Aws::DatabaseMigrationService
     #
     class UpgradeDependencyFailureFault < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6108,6 +6252,7 @@ module Aws::DatabaseMigrationService
     class VpcSecurityGroupMembership < Struct.new(
       :vpc_security_group_id,
       :status)
+      SENSITIVE = []
       include Aws::Structure
     end
 

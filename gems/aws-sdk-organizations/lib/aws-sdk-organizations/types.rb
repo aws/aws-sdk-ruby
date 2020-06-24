@@ -21,6 +21,7 @@ module Aws::Organizations
     #
     class AWSOrganizationsNotInUseException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -46,6 +47,7 @@ module Aws::Organizations
     #
     class AcceptHandshakeRequest < Struct.new(
       :handshake_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -57,6 +59,7 @@ module Aws::Organizations
     #
     class AcceptHandshakeResponse < Struct.new(
       :handshake)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -76,6 +79,7 @@ module Aws::Organizations
     #
     class AccessDeniedException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -95,6 +99,7 @@ module Aws::Organizations
     class AccessDeniedForDependencyException < Struct.new(
       :message,
       :reason)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -168,6 +173,7 @@ module Aws::Organizations
       :status,
       :joined_method,
       :joined_timestamp)
+      SENSITIVE = [:email, :name]
       include Aws::Structure
     end
 
@@ -181,6 +187,7 @@ module Aws::Organizations
     #
     class AccountAlreadyRegisteredException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -195,6 +202,7 @@ module Aws::Organizations
     #
     class AccountNotFoundException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -208,6 +216,7 @@ module Aws::Organizations
     #
     class AccountNotRegisteredException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -227,6 +236,7 @@ module Aws::Organizations
     #
     class AccountOwnerNotVerifiedException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -240,6 +250,7 @@ module Aws::Organizations
     #
     class AlreadyInOrganizationException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -295,6 +306,7 @@ module Aws::Organizations
     class AttachPolicyRequest < Struct.new(
       :policy_id,
       :target_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -321,6 +333,7 @@ module Aws::Organizations
     #
     class CancelHandshakeRequest < Struct.new(
       :handshake_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -333,6 +346,7 @@ module Aws::Organizations
     #
     class CancelHandshakeResponse < Struct.new(
       :handshake)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -366,6 +380,7 @@ module Aws::Organizations
     class Child < Struct.new(
       :id,
       :type)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -379,6 +394,7 @@ module Aws::Organizations
     #
     class ChildNotFoundException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -392,6 +408,7 @@ module Aws::Organizations
     #
     class ConcurrentModificationException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -400,24 +417,31 @@ module Aws::Organizations
     # (SCP) from an OU or root, inviting or creating too many accounts to
     # the organization, or attaching too many policies to an account, OU, or
     # root. This exception includes a reason that contains additional
-    # information about the violated limit.
+    # information about the violated limit:
     #
-    # Some of the reasons in the following list might not be applicable to
-    # this specific API or operation:
+    # <note markdown="1"> Some of the reasons in the following list might not be applicable to
+    # this specific API or operation.
+    #
+    #  </note>
+    #
+    # * ACCOUNT\_CANNOT\_LEAVE\_ORGANIZAION: You attempted to remove the
+    #   master account from the organization. You can't remove the master
+    #   account. Instead, after you remove all member accounts, delete the
+    #   organization itself.
     #
     # * ACCOUNT\_CANNOT\_LEAVE\_WITHOUT\_EULA: You attempted to remove an
     #   account from the organization that doesn't yet have enough
     #   information to exist as a standalone account. This account requires
     #   you to first agree to the AWS Customer Agreement. Follow the steps
-    #   at [To leave an organization when all required account information
-    #   has not yet been provided][1] in the *AWS Organizations User Guide.*
+    #   at [Removing a member account from your organization][1]in the *AWS
+    #   Organizations User Guide.*
     #
     # * ACCOUNT\_CANNOT\_LEAVE\_WITHOUT\_PHONE\_VERIFICATION: You attempted
     #   to remove an account from the organization that doesn't yet have
     #   enough information to exist as a standalone account. This account
     #   requires you to first complete phone verification. Follow the steps
-    #   at [To leave an organization when all required account information
-    #   has not yet been provided][1] in the *AWS Organizations User Guide.*
+    #   at [Removing a member account from your organization][1] in the *AWS
+    #   Organizations User Guide.*
     #
     # * ACCOUNT\_CREATION\_RATE\_LIMIT\_EXCEEDED: You attempted to exceed
     #   the number of accounts that you can create in one day.
@@ -436,21 +460,36 @@ module Aws::Organizations
     #
     #    </note>
     #
-    #   If you get receive this exception when running a command immediately
-    #   after creating the organization, wait one hour and try again. If
-    #   after an hour it continues to fail with this error, contact [AWS
+    #   If you get this exception when running a command immediately after
+    #   creating the organization, wait one hour and try again. After an
+    #   hour, if the command continues to fail with this error, contact [AWS
     #   Support][2].
     #
-    # * CANNOT\_REGISTER\_MASTER\_AS\_DELEGATED\_ADMINISTRATOR: You can
-    #   designate only a member account as a delegated administrator.
-    #
-    # * CANNOT\_REMOVE\_DELEGATED\_ADMINISTRATOR\_FROM\_ORG: To complete
-    #   this operation, you must first deregister this account as a
+    # * CANNOT\_REGISTER\_MASTER\_AS\_DELEGATED\_ADMINISTRATOR: You
+    #   attempted to register the master account of the organization as a
+    #   delegated administrator for an AWS service integrated with
+    #   Organizations. You can designate only a member account as a
     #   delegated administrator.
     #
-    # * DELEGATED\_ADMINISTRATOR\_EXISTS\_FOR\_THIS\_SERVICE: To complete
-    #   this operation, you must first deregister all delegated
+    # * CANNOT\_REMOVE\_DELEGATED\_ADMINISTRATOR\_FROM\_ORG: You attempted
+    #   to remove an account that is registered as a delegated administrator
+    #   for a service integrated with your organization. To complete this
+    #   operation, you must first deregister this account as a delegated
+    #   administrator.
+    #
+    # * CREATE\_ORGANIZATION\_IN\_BILLING\_MODE\_UNSUPPORTED\_REGION: To
+    #   create an organization in the specified region, you must enable all
+    #   features mode.
+    #
+    # * DELEGATED\_ADMINISTRATOR\_EXISTS\_FOR\_THIS\_SERVICE: You attempted
+    #   to register an AWS account as a delegated administrator for an AWS
+    #   service that already has a delegated administrator. To complete this
+    #   operation, you must first deregister any existing delegated
     #   administrators for this service.
+    #
+    # * EMAIL\_VERIFICATION\_CODE\_EXPIRED: The email verification code is
+    #   only valid for a limited period of time. You must resubmit the
+    #   request and generate a new verfication code.
     #
     # * HANDSHAKE\_RATE\_LIMIT\_EXCEEDED: You attempted to exceed the number
     #   of handshakes that you can send in one day.
@@ -463,8 +502,13 @@ module Aws::Organizations
     #   accounts in an organization must be associated with the same
     #   marketplace.
     #
+    # * MASTER\_ACCOUNT\_MISSING\_BUSINESS\_LICENSE: Applies only to the AWS
+    #   Regions in China. To create an organization, the master must have an
+    #   valid business license. For more information, contact customer
+    #   support.
+    #
     # * MASTER\_ACCOUNT\_MISSING\_CONTACT\_INFO: To complete this operation,
-    #   you must first provide contact a valid address and phone number for
+    #   you must first provide a valid contact address and phone number for
     #   the master account. Then try the operation again.
     #
     # * MASTER\_ACCOUNT\_NOT\_GOVCLOUD\_ENABLED: To complete this operation,
@@ -476,7 +520,7 @@ module Aws::Organizations
     #   organization with this master account, you first must associate a
     #   valid payment instrument, such as a credit card, with the account.
     #   Follow the steps at [To leave an organization when all required
-    #   account information has not yet been provided][1] in the *AWS
+    #   account information has not yet been provided][4] in the *AWS
     #   Organizations User Guide.*
     #
     # * MAX\_DELEGATED\_ADMINISTRATORS\_FOR\_SERVICE\_LIMIT\_EXCEEDED: You
@@ -494,7 +538,7 @@ module Aws::Organizations
     #   operation with this member account, you first must associate a valid
     #   payment instrument, such as a credit card, with the account. Follow
     #   the steps at [To leave an organization when all required account
-    #   information has not yet been provided][1] in the *AWS Organizations
+    #   information has not yet been provided][4] in the *AWS Organizations
     #   User Guide.*
     #
     # * MIN\_POLICY\_TYPE\_ATTACHMENT\_LIMIT\_EXCEEDED: You attempted to
@@ -502,25 +546,33 @@ module Aws::Organizations
     #   fewer than the minimum number of policies of a certain type
     #   required.
     #
-    # * OU\_DEPTH\_LIMIT\_EXCEEDED: You attempted to create an OU tree that
-    #   is too many levels deep.
-    #
     # * ORGANIZATION\_NOT\_IN\_ALL\_FEATURES\_MODE: You attempted to perform
     #   an operation that requires the organization to be configured to
     #   support all features. An organization that supports only
     #   consolidated billing features can't perform this operation.
     #
+    # * OU\_DEPTH\_LIMIT\_EXCEEDED: You attempted to create an OU tree that
+    #   is too many levels deep.
+    #
     # * OU\_NUMBER\_LIMIT\_EXCEEDED: You attempted to exceed the number of
     #   OUs that you can have in an organization.
     #
-    # * POLICY\_NUMBER\_LIMIT\_EXCEEDED. You attempted to exceed the number
+    # * POLICY\_CONTENT\_LIMIT\_EXCEEDED: You attempted to create a policy
+    #   that is larger than the maximum size.
+    #
+    # * POLICY\_NUMBER\_LIMIT\_EXCEEDED: You attempted to exceed the number
     #   of policies that you can have in an organization.
     #
+    # * TAG\_POLICY\_VIOLATION: You attempted to create or update a resource
+    #   with tags that are not compliant with the tag policy requirements
+    #   for this account.
     #
     #
-    # [1]: http://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_accounts_remove.html#leave-without-all-info
+    #
+    # [1]: http://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_accounts_remove.html#orgs_manage_accounts_remove-from-master
     # [2]: https://console.aws.amazon.com/support/home#/
     # [3]: http://docs.aws.amazon.com/govcloud-us/latest/UserGuide/govcloud-organizations.html
+    # [4]: http://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_accounts_remove.html#leave-without-all-info
     #
     # @!attribute [rw] message
     #   @return [String]
@@ -533,6 +585,7 @@ module Aws::Organizations
     class ConstraintViolationException < Struct.new(
       :message,
       :reason)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -614,6 +667,7 @@ module Aws::Organizations
       :account_name,
       :role_name,
       :iam_user_access_to_billing)
+      SENSITIVE = [:email, :account_name]
       include Aws::Structure
     end
 
@@ -637,6 +691,7 @@ module Aws::Organizations
     #
     class CreateAccountResponse < Struct.new(
       :create_account_status)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -729,6 +784,7 @@ module Aws::Organizations
       :account_id,
       :gov_cloud_account_id,
       :failure_reason)
+      SENSITIVE = [:account_name]
       include Aws::Structure
     end
 
@@ -742,6 +798,7 @@ module Aws::Organizations
     #
     class CreateAccountStatusNotFoundException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -826,6 +883,7 @@ module Aws::Organizations
       :account_name,
       :role_name,
       :iam_user_access_to_billing)
+      SENSITIVE = [:email, :account_name]
       include Aws::Structure
     end
 
@@ -839,6 +897,7 @@ module Aws::Organizations
     #
     class CreateGovCloudAccountResponse < Struct.new(
       :create_account_status)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -877,6 +936,7 @@ module Aws::Organizations
     #
     class CreateOrganizationRequest < Struct.new(
       :feature_set)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -889,6 +949,7 @@ module Aws::Organizations
     #
     class CreateOrganizationResponse < Struct.new(
       :organization)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -930,6 +991,7 @@ module Aws::Organizations
     class CreateOrganizationalUnitRequest < Struct.new(
       :parent_id,
       :name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -941,6 +1003,7 @@ module Aws::Organizations
     #
     class CreateOrganizationalUnitResponse < Struct.new(
       :organizational_unit)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -951,21 +1014,13 @@ module Aws::Organizations
     #         content: "PolicyContent", # required
     #         description: "PolicyDescription", # required
     #         name: "PolicyName", # required
-    #         type: "SERVICE_CONTROL_POLICY", # required, accepts SERVICE_CONTROL_POLICY, TAG_POLICY
+    #         type: "SERVICE_CONTROL_POLICY", # required, accepts SERVICE_CONTROL_POLICY, TAG_POLICY, BACKUP_POLICY
     #       }
     #
     # @!attribute [rw] content
-    #   The policy content to add to the new policy. For example, if you
-    #   create a [service control policy][1] (SCP), this string must be JSON
-    #   text that specifies the permissions that admins in attached accounts
-    #   can delegate to their users, groups, and roles. For more information
-    #   about the SCP syntax, see [Service Control Policy Syntax][2] in the
-    #   *AWS Organizations User Guide.*
-    #
-    #
-    #
-    #   [1]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_scp.html
-    #   [2]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_reference_scp-syntax.html
+    #   The policy text content to add to the new policy. The text that you
+    #   supply must adhere to the rules of the policy type you specify in
+    #   the `Type` parameter.
     #   @return [String]
     #
     # @!attribute [rw] description
@@ -984,12 +1039,20 @@ module Aws::Organizations
     #   @return [String]
     #
     # @!attribute [rw] type
-    #   The type of policy to create.
+    #   The type of policy to create. You can specify one of the following
+    #   values:
     #
-    #   <note markdown="1"> In the current release, the only type of policy that you can create
-    #   is a service control policy (SCP).
+    #   * [BACKUP\_POLICY][1]
     #
-    #    </note>
+    #   * [SERVICE\_CONTROL\_POLICY][2]
+    #
+    #   * [TAG\_POLICY][3]
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_backup.html
+    #   [2]: http://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_scp.html
+    #   [3]: http://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_tag-policies.html
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/CreatePolicyRequest AWS API Documentation
@@ -999,6 +1062,7 @@ module Aws::Organizations
       :description,
       :name,
       :type)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1010,6 +1074,7 @@ module Aws::Organizations
     #
     class CreatePolicyResponse < Struct.new(
       :policy)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1037,6 +1102,7 @@ module Aws::Organizations
     #
     class DeclineHandshakeRequest < Struct.new(
       :handshake_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1049,6 +1115,7 @@ module Aws::Organizations
     #
     class DeclineHandshakeResponse < Struct.new(
       :handshake)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1103,6 +1170,7 @@ module Aws::Organizations
       :joined_method,
       :joined_timestamp,
       :delegation_enabled_date)
+      SENSITIVE = [:email, :name]
       include Aws::Structure
     end
 
@@ -1125,6 +1193,7 @@ module Aws::Organizations
     class DelegatedService < Struct.new(
       :service_principal,
       :delegation_enabled_date)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1155,6 +1224,7 @@ module Aws::Organizations
     #
     class DeleteOrganizationalUnitRequest < Struct.new(
       :organizational_unit_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1183,6 +1253,7 @@ module Aws::Organizations
     #
     class DeletePolicyRequest < Struct.new(
       :policy_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1215,6 +1286,7 @@ module Aws::Organizations
     class DeregisterDelegatedAdministratorRequest < Struct.new(
       :account_id,
       :service_principal)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1242,6 +1314,7 @@ module Aws::Organizations
     #
     class DescribeAccountRequest < Struct.new(
       :account_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1253,6 +1326,7 @@ module Aws::Organizations
     #
     class DescribeAccountResponse < Struct.new(
       :account)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1281,6 +1355,7 @@ module Aws::Organizations
     #
     class DescribeCreateAccountStatusRequest < Struct.new(
       :create_account_request_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1293,6 +1368,7 @@ module Aws::Organizations
     #
     class DescribeCreateAccountStatusResponse < Struct.new(
       :create_account_status)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1300,18 +1376,28 @@ module Aws::Organizations
     #   data as a hash:
     #
     #       {
-    #         policy_type: "TAG_POLICY", # required, accepts TAG_POLICY
+    #         policy_type: "TAG_POLICY", # required, accepts TAG_POLICY, BACKUP_POLICY
     #         target_id: "PolicyTargetId",
     #       }
     #
     # @!attribute [rw] policy_type
-    #   The type of policy that you want information about.
+    #   The type of policy that you want information about. You can specify
+    #   one of the following values:
+    #
+    #   * [BACKUP\_POLICY][1]
+    #
+    #   * [TAG\_POLICY][2]
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_backup.html
+    #   [2]: http://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_tag-policies.html
     #   @return [String]
     #
     # @!attribute [rw] target_id
     #   When you're signed in as the master account, specify the ID of the
     #   account that you want details about. Specifying an organization root
-    #   or OU as the target is not supported.
+    #   or organizational unit (OU) as the target is not supported.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/DescribeEffectivePolicyRequest AWS API Documentation
@@ -1319,6 +1405,7 @@ module Aws::Organizations
     class DescribeEffectivePolicyRequest < Struct.new(
       :policy_type,
       :target_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1330,6 +1417,7 @@ module Aws::Organizations
     #
     class DescribeEffectivePolicyResponse < Struct.new(
       :effective_policy)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1358,6 +1446,7 @@ module Aws::Organizations
     #
     class DescribeHandshakeRequest < Struct.new(
       :handshake_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1369,6 +1458,7 @@ module Aws::Organizations
     #
     class DescribeHandshakeResponse < Struct.new(
       :handshake)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1380,6 +1470,7 @@ module Aws::Organizations
     #
     class DescribeOrganizationResponse < Struct.new(
       :organization)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1410,6 +1501,7 @@ module Aws::Organizations
     #
     class DescribeOrganizationalUnitRequest < Struct.new(
       :organizational_unit_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1421,6 +1513,7 @@ module Aws::Organizations
     #
     class DescribeOrganizationalUnitResponse < Struct.new(
       :organizational_unit)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1449,6 +1542,7 @@ module Aws::Organizations
     #
     class DescribePolicyRequest < Struct.new(
       :policy_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1460,6 +1554,7 @@ module Aws::Organizations
     #
     class DescribePolicyResponse < Struct.new(
       :policy)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1473,6 +1568,7 @@ module Aws::Organizations
     #
     class DestinationParentNotFoundException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1527,6 +1623,7 @@ module Aws::Organizations
     class DetachPolicyRequest < Struct.new(
       :policy_id,
       :target_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1547,6 +1644,7 @@ module Aws::Organizations
     #
     class DisableAWSServiceAccessRequest < Struct.new(
       :service_principal)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1555,7 +1653,7 @@ module Aws::Organizations
     #
     #       {
     #         root_id: "RootId", # required
-    #         policy_type: "SERVICE_CONTROL_POLICY", # required, accepts SERVICE_CONTROL_POLICY, TAG_POLICY
+    #         policy_type: "SERVICE_CONTROL_POLICY", # required, accepts SERVICE_CONTROL_POLICY, TAG_POLICY, BACKUP_POLICY
     #       }
     #
     # @!attribute [rw] root_id
@@ -1571,7 +1669,20 @@ module Aws::Organizations
     #   @return [String]
     #
     # @!attribute [rw] policy_type
-    #   The policy type that you want to disable in this root.
+    #   The policy type that you want to disable in this root. You can
+    #   specify one of the following values:
+    #
+    #   * [BACKUP\_POLICY][1]
+    #
+    #   * [SERVICE\_CONTROL\_POLICY][2]
+    #
+    #   * [TAG\_POLICY][3]
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_backup.html
+    #   [2]: http://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_scp.html
+    #   [3]: http://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_tag-policies.html
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/DisablePolicyTypeRequest AWS API Documentation
@@ -1579,6 +1690,7 @@ module Aws::Organizations
     class DisablePolicyTypeRequest < Struct.new(
       :root_id,
       :policy_type)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1591,6 +1703,7 @@ module Aws::Organizations
     #
     class DisablePolicyTypeResponse < Struct.new(
       :root)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1603,6 +1716,7 @@ module Aws::Organizations
     #
     class DuplicateAccountException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1620,6 +1734,7 @@ module Aws::Organizations
     #
     class DuplicateHandshakeException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1632,6 +1747,7 @@ module Aws::Organizations
     #
     class DuplicateOrganizationalUnitException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1644,6 +1760,7 @@ module Aws::Organizations
     #
     class DuplicatePolicyAttachmentException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1656,6 +1773,7 @@ module Aws::Organizations
     #
     class DuplicatePolicyException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1686,6 +1804,7 @@ module Aws::Organizations
       :last_updated_timestamp,
       :target_id,
       :policy_type)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1702,6 +1821,7 @@ module Aws::Organizations
     #
     class EffectivePolicyNotFoundException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1722,6 +1842,7 @@ module Aws::Organizations
     #
     class EnableAWSServiceAccessRequest < Struct.new(
       :service_principal)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1740,6 +1861,7 @@ module Aws::Organizations
     #
     class EnableAllFeaturesResponse < Struct.new(
       :handshake)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1748,7 +1870,7 @@ module Aws::Organizations
     #
     #       {
     #         root_id: "RootId", # required
-    #         policy_type: "SERVICE_CONTROL_POLICY", # required, accepts SERVICE_CONTROL_POLICY, TAG_POLICY
+    #         policy_type: "SERVICE_CONTROL_POLICY", # required, accepts SERVICE_CONTROL_POLICY, TAG_POLICY, BACKUP_POLICY
     #       }
     #
     # @!attribute [rw] root_id
@@ -1764,7 +1886,20 @@ module Aws::Organizations
     #   @return [String]
     #
     # @!attribute [rw] policy_type
-    #   The policy type that you want to enable.
+    #   The policy type that you want to enable. You can specify one of the
+    #   following values:
+    #
+    #   * [BACKUP\_POLICY][1]
+    #
+    #   * [SERVICE\_CONTROL\_POLICY][2]
+    #
+    #   * [TAG\_POLICY][3]
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_backup.html
+    #   [2]: http://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_scp.html
+    #   [3]: http://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_tag-policies.html
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/EnablePolicyTypeRequest AWS API Documentation
@@ -1772,6 +1907,7 @@ module Aws::Organizations
     class EnablePolicyTypeRequest < Struct.new(
       :root_id,
       :policy_type)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1784,6 +1920,7 @@ module Aws::Organizations
     #
     class EnablePolicyTypeResponse < Struct.new(
       :root)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1806,6 +1943,7 @@ module Aws::Organizations
     class EnabledServicePrincipal < Struct.new(
       :service_principal,
       :date_enabled)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1825,6 +1963,7 @@ module Aws::Organizations
     #
     class FinalizingOrganizationException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1944,6 +2083,7 @@ module Aws::Organizations
       :expiration_timestamp,
       :action,
       :resources)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1957,6 +2097,7 @@ module Aws::Organizations
     #
     class HandshakeAlreadyInStateException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2019,6 +2160,7 @@ module Aws::Organizations
     class HandshakeConstraintViolationException < Struct.new(
       :message,
       :reason)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2060,6 +2202,7 @@ module Aws::Organizations
     class HandshakeFilter < Struct.new(
       :action_type,
       :parent_handshake_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2072,6 +2215,7 @@ module Aws::Organizations
     #
     class HandshakeNotFoundException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2105,6 +2249,7 @@ module Aws::Organizations
     class HandshakeParty < Struct.new(
       :id,
       :type)
+      SENSITIVE = [:id]
       include Aws::Structure
     end
 
@@ -2148,6 +2293,7 @@ module Aws::Organizations
       :value,
       :type,
       :resources)
+      SENSITIVE = [:value]
       include Aws::Structure
     end
 
@@ -2162,6 +2308,7 @@ module Aws::Organizations
     #
     class InvalidHandshakeTransitionException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2170,7 +2317,7 @@ module Aws::Organizations
     # reason that contains additional information about the violated limit:
     #
     # <note markdown="1"> Some of the reasons in the following list might not be applicable to
-    # this specific API or operation:
+    # this specific API or operation.
     #
     #  </note>
     #
@@ -2242,6 +2389,7 @@ module Aws::Organizations
     class InvalidInputException < Struct.new(
       :message,
       :reason)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2285,6 +2433,7 @@ module Aws::Organizations
     class InviteAccountToOrganizationRequest < Struct.new(
       :target,
       :notes)
+      SENSITIVE = [:notes]
       include Aws::Structure
     end
 
@@ -2297,6 +2446,7 @@ module Aws::Organizations
     #
     class InviteAccountToOrganizationResponse < Struct.new(
       :handshake)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2334,6 +2484,7 @@ module Aws::Organizations
     class ListAWSServiceAccessForOrganizationRequest < Struct.new(
       :next_token,
       :max_results)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2357,6 +2508,7 @@ module Aws::Organizations
     class ListAWSServiceAccessForOrganizationResponse < Struct.new(
       :enabled_service_principals,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2401,6 +2553,7 @@ module Aws::Organizations
       :parent_id,
       :next_token,
       :max_results)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2421,6 +2574,7 @@ module Aws::Organizations
     class ListAccountsForParentResponse < Struct.new(
       :accounts,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2458,6 +2612,7 @@ module Aws::Organizations
     class ListAccountsRequest < Struct.new(
       :next_token,
       :max_results)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2478,6 +2633,7 @@ module Aws::Organizations
     class ListAccountsResponse < Struct.new(
       :accounts,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2544,6 +2700,7 @@ module Aws::Organizations
       :child_type,
       :next_token,
       :max_results)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2564,6 +2721,7 @@ module Aws::Organizations
     class ListChildrenResponse < Struct.new(
       :children,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2609,6 +2767,7 @@ module Aws::Organizations
       :states,
       :next_token,
       :max_results)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2631,6 +2790,7 @@ module Aws::Organizations
     class ListCreateAccountStatusResponse < Struct.new(
       :create_account_statuses,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2678,6 +2838,7 @@ module Aws::Organizations
       :service_principal,
       :next_token,
       :max_results)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2698,6 +2859,7 @@ module Aws::Organizations
     class ListDelegatedAdministratorsResponse < Struct.new(
       :delegated_administrators,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2742,6 +2904,7 @@ module Aws::Organizations
       :account_id,
       :next_token,
       :max_results)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2762,6 +2925,7 @@ module Aws::Organizations
     class ListDelegatedServicesForAccountResponse < Struct.new(
       :delegated_services,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2815,6 +2979,7 @@ module Aws::Organizations
       :filter,
       :next_token,
       :max_results)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2836,6 +3001,7 @@ module Aws::Organizations
     class ListHandshakesForAccountResponse < Struct.new(
       :handshakes,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2889,6 +3055,7 @@ module Aws::Organizations
       :filter,
       :next_token,
       :max_results)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2910,6 +3077,7 @@ module Aws::Organizations
     class ListHandshakesForOrganizationResponse < Struct.new(
       :handshakes,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2970,6 +3138,7 @@ module Aws::Organizations
       :parent_id,
       :next_token,
       :max_results)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2990,6 +3159,7 @@ module Aws::Organizations
     class ListOrganizationalUnitsForParentResponse < Struct.new(
       :organizational_units,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3049,6 +3219,7 @@ module Aws::Organizations
       :child_id,
       :next_token,
       :max_results)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3069,6 +3240,7 @@ module Aws::Organizations
     class ListParentsResponse < Struct.new(
       :parents,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3077,7 +3249,7 @@ module Aws::Organizations
     #
     #       {
     #         target_id: "PolicyTargetId", # required
-    #         filter: "SERVICE_CONTROL_POLICY", # required, accepts SERVICE_CONTROL_POLICY, TAG_POLICY
+    #         filter: "SERVICE_CONTROL_POLICY", # required, accepts SERVICE_CONTROL_POLICY, TAG_POLICY, BACKUP_POLICY
     #         next_token: "NextToken",
     #         max_results: 1,
     #       }
@@ -3107,6 +3279,19 @@ module Aws::Organizations
     #
     # @!attribute [rw] filter
     #   The type of policy that you want to include in the returned list.
+    #   You must specify one of the following values:
+    #
+    #   * [BACKUP\_POLICY][1]
+    #
+    #   * [SERVICE\_CONTROL\_POLICY][2]
+    #
+    #   * [TAG\_POLICY][3]
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_backup.html
+    #   [2]: http://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_scp.html
+    #   [3]: http://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_tag-policies.html
     #   @return [String]
     #
     # @!attribute [rw] next_token
@@ -3137,6 +3322,7 @@ module Aws::Organizations
       :filter,
       :next_token,
       :max_results)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3157,6 +3343,7 @@ module Aws::Organizations
     class ListPoliciesForTargetResponse < Struct.new(
       :policies,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3164,14 +3351,26 @@ module Aws::Organizations
     #   data as a hash:
     #
     #       {
-    #         filter: "SERVICE_CONTROL_POLICY", # required, accepts SERVICE_CONTROL_POLICY, TAG_POLICY
+    #         filter: "SERVICE_CONTROL_POLICY", # required, accepts SERVICE_CONTROL_POLICY, TAG_POLICY, BACKUP_POLICY
     #         next_token: "NextToken",
     #         max_results: 1,
     #       }
     #
     # @!attribute [rw] filter
     #   Specifies the type of policy that you want to include in the
-    #   response.
+    #   response. You must specify one of the following values:
+    #
+    #   * [BACKUP\_POLICY][1]
+    #
+    #   * [SERVICE\_CONTROL\_POLICY][2]
+    #
+    #   * [TAG\_POLICY][3]
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_backup.html
+    #   [2]: http://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_scp.html
+    #   [3]: http://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_tag-policies.html
     #   @return [String]
     #
     # @!attribute [rw] next_token
@@ -3201,6 +3400,7 @@ module Aws::Organizations
       :filter,
       :next_token,
       :max_results)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3223,6 +3423,7 @@ module Aws::Organizations
     class ListPoliciesResponse < Struct.new(
       :policies,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3260,6 +3461,7 @@ module Aws::Organizations
     class ListRootsRequest < Struct.new(
       :next_token,
       :max_results)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3280,6 +3482,7 @@ module Aws::Organizations
     class ListRootsResponse < Struct.new(
       :roots,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3308,6 +3511,7 @@ module Aws::Organizations
     class ListTagsForResourceRequest < Struct.new(
       :resource_id,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3328,6 +3532,7 @@ module Aws::Organizations
     class ListTagsForResourceResponse < Struct.new(
       :tags,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3380,6 +3585,7 @@ module Aws::Organizations
       :policy_id,
       :next_token,
       :max_results)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3401,6 +3607,7 @@ module Aws::Organizations
     class ListTargetsForPolicyResponse < Struct.new(
       :targets,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3420,6 +3627,7 @@ module Aws::Organizations
     #
     class MalformedPolicyDocumentException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3434,6 +3642,7 @@ module Aws::Organizations
     #
     class MasterCannotLeaveOrganizationException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3505,6 +3714,7 @@ module Aws::Organizations
       :account_id,
       :source_parent_id,
       :destination_parent_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3602,6 +3812,7 @@ module Aws::Organizations
       :master_account_id,
       :master_account_email,
       :available_policy_types)
+      SENSITIVE = [:master_account_email]
       include Aws::Structure
     end
 
@@ -3616,6 +3827,7 @@ module Aws::Organizations
     #
     class OrganizationNotEmptyException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3667,6 +3879,7 @@ module Aws::Organizations
       :id,
       :arn,
       :name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3680,6 +3893,7 @@ module Aws::Organizations
     #
     class OrganizationalUnitNotEmptyException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3693,6 +3907,7 @@ module Aws::Organizations
     #
     class OrganizationalUnitNotFoundException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3728,6 +3943,7 @@ module Aws::Organizations
     class Parent < Struct.new(
       :id,
       :type)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3740,6 +3956,7 @@ module Aws::Organizations
     #
     class ParentNotFoundException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3760,6 +3977,7 @@ module Aws::Organizations
     class Policy < Struct.new(
       :policy_summary,
       :content)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3773,6 +3991,7 @@ module Aws::Organizations
     #
     class PolicyChangesInProgressException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3786,6 +4005,7 @@ module Aws::Organizations
     #
     class PolicyInUseException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3799,6 +4019,7 @@ module Aws::Organizations
     #
     class PolicyNotAttachedException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3811,6 +4032,7 @@ module Aws::Organizations
     #
     class PolicyNotFoundException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3874,6 +4096,7 @@ module Aws::Organizations
       :description,
       :type,
       :aws_managed)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3936,6 +4159,7 @@ module Aws::Organizations
       :arn,
       :name,
       :type)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3948,14 +4172,15 @@ module Aws::Organizations
     #
     class PolicyTypeAlreadyEnabledException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
     # You can't use the specified policy type with the feature set
     # currently enabled for this organization. For example, you can enable
     # SCPs only after you enable all features in the organization. For more
-    # information, see [Enabling and Disabling a Policy Type on a Root][1]
-    # in the *AWS Organizations User Guide.*
+    # information, see [Managing AWS Organizations Policies][1]in the *AWS
+    # Organizations User Guide.*
     #
     #
     #
@@ -3968,6 +4193,7 @@ module Aws::Organizations
     #
     class PolicyTypeNotAvailableForOrganizationException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3988,6 +4214,7 @@ module Aws::Organizations
     #
     class PolicyTypeNotEnabledException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4010,6 +4237,7 @@ module Aws::Organizations
     class PolicyTypeSummary < Struct.new(
       :type,
       :status)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4036,6 +4264,7 @@ module Aws::Organizations
     class RegisterDelegatedAdministratorRequest < Struct.new(
       :account_id,
       :service_principal)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4062,6 +4291,7 @@ module Aws::Organizations
     #
     class RemoveAccountFromOrganizationRequest < Struct.new(
       :account_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4125,6 +4355,7 @@ module Aws::Organizations
       :arn,
       :name,
       :policy_types)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4137,6 +4368,7 @@ module Aws::Organizations
     #
     class RootNotFoundException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4150,6 +4382,7 @@ module Aws::Organizations
     #
     class ServiceException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4163,6 +4396,7 @@ module Aws::Organizations
     #
     class SourceParentNotFoundException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4192,6 +4426,7 @@ module Aws::Organizations
     class Tag < Struct.new(
       :key,
       :value)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4213,9 +4448,9 @@ module Aws::Organizations
     #   @return [String]
     #
     # @!attribute [rw] tags
-    #   The tag to add to the specified resource. Specifying the tag key is
-    #   required. You can set the value of a tag to an empty string, but you
-    #   can't set the value of a tag to null.
+    #   The tag to add to the specified resource. You must specify both a
+    #   tag key and value. You can set the value of a tag to an empty
+    #   string, but you can't set it to null.
     #   @return [Array<Types::Tag>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/TagResourceRequest AWS API Documentation
@@ -4223,6 +4458,7 @@ module Aws::Organizations
     class TagResourceRequest < Struct.new(
       :resource_id,
       :tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4236,15 +4472,17 @@ module Aws::Organizations
     #
     class TargetNotFoundException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
     # You have sent too many requests in too short a period of time. The
-    # limit helps protect against denial-of-service attacks. Try again
+    # quota helps protect against denial-of-service attacks. Try again
     # later.
     #
-    # For information on limits that affect AWS Organizations, see [Limits
-    # of AWS Organizations][1] in the *AWS Organizations User Guide.*
+    # For information about quotas that affect AWS Organizations, see
+    # [Quotas for AWS Organizations][1]in the *AWS Organizations User
+    # Guide.*
     #
     #
     #
@@ -4261,10 +4499,11 @@ module Aws::Organizations
     class TooManyRequestsException < Struct.new(
       :type,
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
-    # This action isn't available in the current Region.
+    # This action isn't available in the current AWS Region.
     #
     # @!attribute [rw] message
     #   @return [String]
@@ -4273,6 +4512,7 @@ module Aws::Organizations
     #
     class UnsupportedAPIEndpointException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4297,6 +4537,7 @@ module Aws::Organizations
     class UntagResourceRequest < Struct.new(
       :resource_id,
       :tag_keys)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4339,6 +4580,7 @@ module Aws::Organizations
     class UpdateOrganizationalUnitRequest < Struct.new(
       :organizational_unit_id,
       :name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4351,6 +4593,7 @@ module Aws::Organizations
     #
     class UpdateOrganizationalUnitResponse < Struct.new(
       :organizational_unit)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4409,6 +4652,7 @@ module Aws::Organizations
       :name,
       :description,
       :content)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4421,6 +4665,7 @@ module Aws::Organizations
     #
     class UpdatePolicyResponse < Struct.new(
       :policy)
+      SENSITIVE = []
       include Aws::Structure
     end
 

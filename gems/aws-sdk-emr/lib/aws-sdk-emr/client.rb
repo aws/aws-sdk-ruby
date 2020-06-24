@@ -383,10 +383,14 @@ module Aws::EMR
     #         },
     #       ],
     #       launch_specifications: {
-    #         spot_specification: { # required
+    #         spot_specification: {
     #           timeout_duration_minutes: 1, # required
     #           timeout_action: "SWITCH_TO_ON_DEMAND", # required, accepts SWITCH_TO_ON_DEMAND, TERMINATE_CLUSTER
     #           block_duration_minutes: 1,
+    #           allocation_strategy: "capacity-optimized", # accepts capacity-optimized
+    #         },
+    #         on_demand_specification: {
+    #           allocation_strategy: "lowest-price", # required, accepts lowest-price
     #         },
     #       },
     #     },
@@ -1288,6 +1292,8 @@ module Aws::EMR
     #   resp.instance_fleets[0].launch_specifications.spot_specification.timeout_duration_minutes #=> Integer
     #   resp.instance_fleets[0].launch_specifications.spot_specification.timeout_action #=> String, one of "SWITCH_TO_ON_DEMAND", "TERMINATE_CLUSTER"
     #   resp.instance_fleets[0].launch_specifications.spot_specification.block_duration_minutes #=> Integer
+    #   resp.instance_fleets[0].launch_specifications.spot_specification.allocation_strategy #=> String, one of "capacity-optimized"
+    #   resp.instance_fleets[0].launch_specifications.on_demand_specification.allocation_strategy #=> String, one of "lowest-price"
     #   resp.marker #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticmapreduce-2009-03-31/ListInstanceFleets AWS API Documentation
@@ -2374,10 +2380,14 @@ module Aws::EMR
     #             },
     #           ],
     #           launch_specifications: {
-    #             spot_specification: { # required
+    #             spot_specification: {
     #               timeout_duration_minutes: 1, # required
     #               timeout_action: "SWITCH_TO_ON_DEMAND", # required, accepts SWITCH_TO_ON_DEMAND, TERMINATE_CLUSTER
     #               block_duration_minutes: 1,
+    #               allocation_strategy: "capacity-optimized", # accepts capacity-optimized
+    #             },
+    #             on_demand_specification: {
+    #               allocation_strategy: "lowest-price", # required, accepts lowest-price
     #             },
     #           },
     #         },
@@ -2636,7 +2646,7 @@ module Aws::EMR
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-emr'
-      context[:gem_version] = '1.31.0'
+      context[:gem_version] = '1.33.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

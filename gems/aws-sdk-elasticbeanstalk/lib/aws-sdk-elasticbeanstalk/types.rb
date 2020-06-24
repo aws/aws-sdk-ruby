@@ -33,6 +33,7 @@ module Aws::ElasticBeanstalk
     class AbortEnvironmentUpdateMessage < Struct.new(
       :environment_id,
       :environment_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -82,6 +83,7 @@ module Aws::ElasticBeanstalk
       :versions,
       :configuration_templates,
       :resource_lifecycle_config)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -95,6 +97,7 @@ module Aws::ElasticBeanstalk
     #
     class ApplicationDescriptionMessage < Struct.new(
       :application)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -108,6 +111,7 @@ module Aws::ElasticBeanstalk
     #
     class ApplicationDescriptionsMessage < Struct.new(
       :applications)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -142,6 +146,7 @@ module Aws::ElasticBeanstalk
       :request_count,
       :status_codes,
       :latency)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -194,6 +199,7 @@ module Aws::ElasticBeanstalk
     class ApplicationResourceLifecycleConfig < Struct.new(
       :service_role,
       :version_lifecycle_config)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -210,6 +216,7 @@ module Aws::ElasticBeanstalk
     class ApplicationResourceLifecycleDescriptionMessage < Struct.new(
       :application_name,
       :resource_lifecycle_config)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -292,6 +299,7 @@ module Aws::ElasticBeanstalk
       :date_created,
       :date_updated,
       :status)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -306,6 +314,7 @@ module Aws::ElasticBeanstalk
     #
     class ApplicationVersionDescriptionMessage < Struct.new(
       :application_version)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -326,6 +335,7 @@ module Aws::ElasticBeanstalk
     class ApplicationVersionDescriptionsMessage < Struct.new(
       :application_versions,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -370,6 +380,7 @@ module Aws::ElasticBeanstalk
     class ApplicationVersionLifecycleConfig < Struct.new(
       :max_count_rule,
       :max_age_rule)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -402,6 +413,7 @@ module Aws::ElasticBeanstalk
       :environment_name,
       :environment_id,
       :action_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -430,6 +442,7 @@ module Aws::ElasticBeanstalk
       :action_description,
       :action_type,
       :status)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -457,6 +470,7 @@ module Aws::ElasticBeanstalk
     class AssociateEnvironmentOperationsRoleMessage < Struct.new(
       :environment_name,
       :operations_role)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -470,6 +484,7 @@ module Aws::ElasticBeanstalk
     #
     class AutoScalingGroup < Struct.new(
       :name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -532,6 +547,7 @@ module Aws::ElasticBeanstalk
       :compute_type,
       :image,
       :timeout_in_minutes)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -545,6 +561,7 @@ module Aws::ElasticBeanstalk
     #
     class Builder < Struct.new(
       :arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -613,6 +630,7 @@ module Aws::ElasticBeanstalk
       :irq,
       :soft_irq,
       :privileged)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -633,6 +651,7 @@ module Aws::ElasticBeanstalk
     #
     class CheckDNSAvailabilityMessage < Struct.new(
       :cname_prefix)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -656,6 +675,7 @@ module Aws::ElasticBeanstalk
     class CheckDNSAvailabilityResultMessage < Struct.new(
       :available,
       :fully_qualified_cname)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -706,6 +726,7 @@ module Aws::ElasticBeanstalk
       :application_name,
       :group_name,
       :version_labels)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -812,6 +833,7 @@ module Aws::ElasticBeanstalk
       :max_value,
       :max_length,
       :regex)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -859,6 +881,7 @@ module Aws::ElasticBeanstalk
       :namespace,
       :option_name,
       :value)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -883,6 +906,7 @@ module Aws::ElasticBeanstalk
       :solution_stack_name,
       :platform_arn,
       :options)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -959,6 +983,7 @@ module Aws::ElasticBeanstalk
       :date_created,
       :date_updated,
       :option_settings)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -973,6 +998,7 @@ module Aws::ElasticBeanstalk
     #
     class ConfigurationSettingsDescriptions < Struct.new(
       :configuration_settings)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -986,6 +1012,7 @@ module Aws::ElasticBeanstalk
     #
     class ConfigurationSettingsValidationMessages < Struct.new(
       :messages)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1048,6 +1075,7 @@ module Aws::ElasticBeanstalk
       :description,
       :resource_lifecycle_config,
       :tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1169,6 +1197,7 @@ module Aws::ElasticBeanstalk
       :auto_create_application,
       :process,
       :tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1308,6 +1337,7 @@ module Aws::ElasticBeanstalk
       :description,
       :option_settings,
       :tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1499,6 +1529,7 @@ module Aws::ElasticBeanstalk
       :option_settings,
       :options_to_remove,
       :operations_role)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1569,6 +1600,7 @@ module Aws::ElasticBeanstalk
       :environment_name,
       :option_settings,
       :tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1585,6 +1617,7 @@ module Aws::ElasticBeanstalk
     class CreatePlatformVersionResult < Struct.new(
       :platform_summary,
       :builder)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1598,6 +1631,7 @@ module Aws::ElasticBeanstalk
     #
     class CreateStorageLocationResultMessage < Struct.new(
       :s3_bucket)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1616,6 +1650,7 @@ module Aws::ElasticBeanstalk
     class CustomAmi < Struct.new(
       :virtualization_type,
       :image_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1643,6 +1678,7 @@ module Aws::ElasticBeanstalk
     class DeleteApplicationMessage < Struct.new(
       :application_name,
       :terminate_env_by_force)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1677,6 +1713,7 @@ module Aws::ElasticBeanstalk
       :application_name,
       :version_label,
       :delete_source_bundle)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1704,6 +1741,7 @@ module Aws::ElasticBeanstalk
     class DeleteConfigurationTemplateMessage < Struct.new(
       :application_name,
       :template_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1730,6 +1768,7 @@ module Aws::ElasticBeanstalk
     class DeleteEnvironmentConfigurationMessage < Struct.new(
       :application_name,
       :environment_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1748,6 +1787,7 @@ module Aws::ElasticBeanstalk
     #
     class DeletePlatformVersionRequest < Struct.new(
       :platform_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1759,6 +1799,7 @@ module Aws::ElasticBeanstalk
     #
     class DeletePlatformVersionResult < Struct.new(
       :platform_summary)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1797,6 +1838,7 @@ module Aws::ElasticBeanstalk
       :deployment_id,
       :status,
       :deployment_time)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1809,6 +1851,7 @@ module Aws::ElasticBeanstalk
     #
     class DescribeAccountAttributesResult < Struct.new(
       :resource_quotas)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1856,6 +1899,7 @@ module Aws::ElasticBeanstalk
       :version_labels,
       :max_records,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1877,6 +1921,7 @@ module Aws::ElasticBeanstalk
     #
     class DescribeApplicationsMessage < Struct.new(
       :application_names)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1940,6 +1985,7 @@ module Aws::ElasticBeanstalk
       :solution_stack_name,
       :platform_arn,
       :options)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1984,6 +2030,7 @@ module Aws::ElasticBeanstalk
       :application_name,
       :template_name,
       :environment_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2022,6 +2069,7 @@ module Aws::ElasticBeanstalk
       :environment_name,
       :environment_id,
       :attribute_names)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2080,6 +2128,7 @@ module Aws::ElasticBeanstalk
       :application_metrics,
       :instances_health,
       :refreshed_at)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2118,6 +2167,7 @@ module Aws::ElasticBeanstalk
       :environment_name,
       :next_token,
       :max_items)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2139,6 +2189,7 @@ module Aws::ElasticBeanstalk
     class DescribeEnvironmentManagedActionHistoryResult < Struct.new(
       :managed_action_history_items,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2172,6 +2223,7 @@ module Aws::ElasticBeanstalk
       :environment_name,
       :environment_id,
       :status)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2185,6 +2237,7 @@ module Aws::ElasticBeanstalk
     #
     class DescribeEnvironmentManagedActionsResult < Struct.new(
       :managed_actions)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2219,6 +2272,7 @@ module Aws::ElasticBeanstalk
     class DescribeEnvironmentResourcesMessage < Struct.new(
       :environment_id,
       :environment_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2301,6 +2355,7 @@ module Aws::ElasticBeanstalk
       :included_deleted_back_to,
       :max_records,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2402,6 +2457,7 @@ module Aws::ElasticBeanstalk
       :end_time,
       :max_records,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2442,6 +2498,7 @@ module Aws::ElasticBeanstalk
       :environment_id,
       :attribute_names,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2470,6 +2527,7 @@ module Aws::ElasticBeanstalk
       :instance_health_list,
       :refreshed_at,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2488,6 +2546,7 @@ module Aws::ElasticBeanstalk
     #
     class DescribePlatformVersionRequest < Struct.new(
       :platform_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2499,6 +2558,7 @@ module Aws::ElasticBeanstalk
     #
     class DescribePlatformVersionResult < Struct.new(
       :platform_description)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2520,6 +2580,7 @@ module Aws::ElasticBeanstalk
     #
     class DisassociateEnvironmentOperationsRoleMessage < Struct.new(
       :environment_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2533,6 +2594,7 @@ module Aws::ElasticBeanstalk
     #
     class ElasticBeanstalkServiceException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2696,6 +2758,7 @@ module Aws::ElasticBeanstalk
       :environment_links,
       :environment_arn,
       :operations_role)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2715,6 +2778,7 @@ module Aws::ElasticBeanstalk
     class EnvironmentDescriptionsMessage < Struct.new(
       :environments,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2747,6 +2811,7 @@ module Aws::ElasticBeanstalk
       :ec2_instance_id,
       :sample_timestamp,
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2772,6 +2837,7 @@ module Aws::ElasticBeanstalk
     class EnvironmentLink < Struct.new(
       :link_name,
       :environment_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2821,6 +2887,7 @@ module Aws::ElasticBeanstalk
       :load_balancers,
       :triggers,
       :queues)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2834,6 +2901,7 @@ module Aws::ElasticBeanstalk
     #
     class EnvironmentResourceDescriptionsMessage < Struct.new(
       :environment_resources)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2848,6 +2916,7 @@ module Aws::ElasticBeanstalk
     #
     class EnvironmentResourcesDescription < Struct.new(
       :load_balancer)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2899,6 +2968,7 @@ module Aws::ElasticBeanstalk
       :name,
       :type,
       :version)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2953,6 +3023,7 @@ module Aws::ElasticBeanstalk
       :platform_arn,
       :request_id,
       :severity)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2973,6 +3044,7 @@ module Aws::ElasticBeanstalk
     class EventDescriptionsMessage < Struct.new(
       :events,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2986,6 +3058,7 @@ module Aws::ElasticBeanstalk
     #
     class Instance < Struct.new(
       :id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3046,6 +3119,7 @@ module Aws::ElasticBeanstalk
       :warning,
       :degraded,
       :severe)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3117,6 +3191,7 @@ module Aws::ElasticBeanstalk
       :p75,
       :p50,
       :p10)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3130,6 +3205,7 @@ module Aws::ElasticBeanstalk
     #
     class LaunchConfiguration < Struct.new(
       :name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3143,6 +3219,7 @@ module Aws::ElasticBeanstalk
     #
     class LaunchTemplate < Struct.new(
       :id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3162,6 +3239,7 @@ module Aws::ElasticBeanstalk
     class ListAvailableSolutionStacksResultMessage < Struct.new(
       :solution_stacks,
       :solution_stack_details)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3239,6 +3317,7 @@ module Aws::ElasticBeanstalk
       :filters,
       :max_records,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3257,6 +3336,7 @@ module Aws::ElasticBeanstalk
     class ListPlatformBranchesResult < Struct.new(
       :platform_branch_summary_list,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3299,6 +3379,7 @@ module Aws::ElasticBeanstalk
       :filters,
       :max_records,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3317,6 +3398,7 @@ module Aws::ElasticBeanstalk
     class ListPlatformVersionsResult < Struct.new(
       :platform_summary_list,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3338,6 +3420,7 @@ module Aws::ElasticBeanstalk
     #
     class ListTagsForResourceMessage < Struct.new(
       :resource_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3356,6 +3439,7 @@ module Aws::ElasticBeanstalk
     class Listener < Struct.new(
       :protocol,
       :port)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3369,6 +3453,7 @@ module Aws::ElasticBeanstalk
     #
     class LoadBalancer < Struct.new(
       :name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3392,6 +3477,7 @@ module Aws::ElasticBeanstalk
       :load_balancer_name,
       :domain,
       :listeners)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3427,6 +3513,7 @@ module Aws::ElasticBeanstalk
       :action_type,
       :status,
       :window_start_time)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3475,6 +3562,7 @@ module Aws::ElasticBeanstalk
       :failure_description,
       :executed_time,
       :finished_time)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3515,6 +3603,7 @@ module Aws::ElasticBeanstalk
       :enabled,
       :max_age_in_days,
       :delete_source_from_s3)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3549,6 +3638,7 @@ module Aws::ElasticBeanstalk
       :enabled,
       :max_count,
       :delete_source_from_s3)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3576,6 +3666,7 @@ module Aws::ElasticBeanstalk
     class OptionRestrictionRegex < Struct.new(
       :pattern,
       :label)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3610,6 +3701,7 @@ module Aws::ElasticBeanstalk
       :resource_name,
       :namespace,
       :option_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3653,6 +3745,7 @@ module Aws::ElasticBeanstalk
       :lifecycle_state,
       :branch_order,
       :supported_tier_list)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3774,6 +3867,7 @@ module Aws::ElasticBeanstalk
       :platform_lifecycle_state,
       :platform_branch_name,
       :platform_branch_lifecycle_state)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3832,6 +3926,7 @@ module Aws::ElasticBeanstalk
       :type,
       :operator,
       :values)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3850,6 +3945,7 @@ module Aws::ElasticBeanstalk
     class PlatformFramework < Struct.new(
       :name,
       :version)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3868,6 +3964,7 @@ module Aws::ElasticBeanstalk
     class PlatformProgrammingLanguage < Struct.new(
       :name,
       :version)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3944,6 +4041,7 @@ module Aws::ElasticBeanstalk
       :platform_version,
       :platform_branch_name,
       :platform_branch_lifecycle_state)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3969,6 +4067,7 @@ module Aws::ElasticBeanstalk
     class Queue < Struct.new(
       :name,
       :url)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4001,6 +4100,7 @@ module Aws::ElasticBeanstalk
     class RebuildEnvironmentMessage < Struct.new(
       :environment_id,
       :environment_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4048,6 +4148,7 @@ module Aws::ElasticBeanstalk
       :environment_id,
       :environment_name,
       :info_type)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4071,6 +4172,7 @@ module Aws::ElasticBeanstalk
     #
     class ResourceQuota < Struct.new(
       :maximum)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4106,6 +4208,7 @@ module Aws::ElasticBeanstalk
       :environment_quota,
       :configuration_template_quota,
       :custom_platform_quota)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4123,6 +4226,7 @@ module Aws::ElasticBeanstalk
     class ResourceTagsDescriptionMessage < Struct.new(
       :resource_arn,
       :resource_tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4162,6 +4266,7 @@ module Aws::ElasticBeanstalk
     class RestartAppServerMessage < Struct.new(
       :environment_id,
       :environment_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4208,6 +4313,7 @@ module Aws::ElasticBeanstalk
       :environment_id,
       :environment_name,
       :info_type)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4222,6 +4328,7 @@ module Aws::ElasticBeanstalk
     #
     class RetrieveEnvironmentInfoResultMessage < Struct.new(
       :environment_info)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4248,6 +4355,7 @@ module Aws::ElasticBeanstalk
     class S3Location < Struct.new(
       :s3_bucket,
       :s3_key)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4314,6 +4422,7 @@ module Aws::ElasticBeanstalk
       :attribute,
       :operator,
       :values)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4385,6 +4494,7 @@ module Aws::ElasticBeanstalk
       :deployment,
       :availability_zone,
       :instance_type)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4403,6 +4513,7 @@ module Aws::ElasticBeanstalk
     class SolutionStackDescription < Struct.new(
       :solution_stack_name,
       :permitted_file_types)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4452,6 +4563,7 @@ module Aws::ElasticBeanstalk
       :source_type,
       :source_repository,
       :source_location)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4485,6 +4597,7 @@ module Aws::ElasticBeanstalk
     class SourceConfiguration < Struct.new(
       :application_name,
       :template_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4523,6 +4636,7 @@ module Aws::ElasticBeanstalk
       :status_3xx,
       :status_4xx,
       :status_5xx)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4581,6 +4695,7 @@ module Aws::ElasticBeanstalk
       :source_environment_name,
       :destination_environment_id,
       :destination_environment_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4604,6 +4719,7 @@ module Aws::ElasticBeanstalk
     class SystemStatus < Struct.new(
       :cpu_utilization,
       :load_average)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4630,6 +4746,7 @@ module Aws::ElasticBeanstalk
     class Tag < Struct.new(
       :key,
       :value)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4696,6 +4813,7 @@ module Aws::ElasticBeanstalk
       :environment_name,
       :terminate_resources,
       :force_terminate)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4758,6 +4876,7 @@ module Aws::ElasticBeanstalk
     #
     class Trigger < Struct.new(
       :name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4788,6 +4907,7 @@ module Aws::ElasticBeanstalk
     class UpdateApplicationMessage < Struct.new(
       :application_name,
       :description)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4826,6 +4946,7 @@ module Aws::ElasticBeanstalk
     class UpdateApplicationResourceLifecycleMessage < Struct.new(
       :application_name,
       :resource_lifecycle_config)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4862,6 +4983,7 @@ module Aws::ElasticBeanstalk
       :application_name,
       :version_label,
       :description)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4933,6 +5055,7 @@ module Aws::ElasticBeanstalk
       :description,
       :option_settings,
       :options_to_remove)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5071,6 +5194,7 @@ module Aws::ElasticBeanstalk
       :platform_arn,
       :option_settings,
       :options_to_remove)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5116,6 +5240,7 @@ module Aws::ElasticBeanstalk
       :resource_arn,
       :tags_to_add,
       :tags_to_remove)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5168,6 +5293,7 @@ module Aws::ElasticBeanstalk
       :template_name,
       :environment_name,
       :option_settings)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5202,6 +5328,7 @@ module Aws::ElasticBeanstalk
       :severity,
       :namespace,
       :option_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 

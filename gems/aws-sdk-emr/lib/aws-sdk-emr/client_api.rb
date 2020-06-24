@@ -182,6 +182,8 @@ module Aws::EMR
     ModifyInstanceGroupsInput = Shapes::StructureShape.new(name: 'ModifyInstanceGroupsInput')
     NewSupportedProductsList = Shapes::ListShape.new(name: 'NewSupportedProductsList')
     NonNegativeDouble = Shapes::FloatShape.new(name: 'NonNegativeDouble')
+    OnDemandProvisioningAllocationStrategy = Shapes::StringShape.new(name: 'OnDemandProvisioningAllocationStrategy')
+    OnDemandProvisioningSpecification = Shapes::StructureShape.new(name: 'OnDemandProvisioningSpecification')
     OptionalArnType = Shapes::StringShape.new(name: 'OptionalArnType')
     PlacementType = Shapes::StructureShape.new(name: 'PlacementType')
     Port = Shapes::IntegerShape.new(name: 'Port')
@@ -217,6 +219,7 @@ module Aws::EMR
     SetVisibleToAllUsersInput = Shapes::StructureShape.new(name: 'SetVisibleToAllUsersInput')
     ShrinkPolicy = Shapes::StructureShape.new(name: 'ShrinkPolicy')
     SimpleScalingPolicyConfiguration = Shapes::StructureShape.new(name: 'SimpleScalingPolicyConfiguration')
+    SpotProvisioningAllocationStrategy = Shapes::StringShape.new(name: 'SpotProvisioningAllocationStrategy')
     SpotProvisioningSpecification = Shapes::StructureShape.new(name: 'SpotProvisioningSpecification')
     SpotProvisioningTimeoutAction = Shapes::StringShape.new(name: 'SpotProvisioningTimeoutAction')
     Statistic = Shapes::StringShape.new(name: 'Statistic')
@@ -587,7 +590,8 @@ module Aws::EMR
     InstanceFleetModifyConfig.add_member(:target_spot_capacity, Shapes::ShapeRef.new(shape: WholeNumber, location_name: "TargetSpotCapacity"))
     InstanceFleetModifyConfig.struct_class = Types::InstanceFleetModifyConfig
 
-    InstanceFleetProvisioningSpecifications.add_member(:spot_specification, Shapes::ShapeRef.new(shape: SpotProvisioningSpecification, required: true, location_name: "SpotSpecification"))
+    InstanceFleetProvisioningSpecifications.add_member(:spot_specification, Shapes::ShapeRef.new(shape: SpotProvisioningSpecification, location_name: "SpotSpecification"))
+    InstanceFleetProvisioningSpecifications.add_member(:on_demand_specification, Shapes::ShapeRef.new(shape: OnDemandProvisioningSpecification, location_name: "OnDemandSpecification"))
     InstanceFleetProvisioningSpecifications.struct_class = Types::InstanceFleetProvisioningSpecifications
 
     InstanceFleetStateChangeReason.add_member(:code, Shapes::ShapeRef.new(shape: InstanceFleetStateChangeReasonCode, location_name: "Code"))
@@ -902,6 +906,9 @@ module Aws::EMR
 
     NewSupportedProductsList.member = Shapes::ShapeRef.new(shape: SupportedProductConfig)
 
+    OnDemandProvisioningSpecification.add_member(:allocation_strategy, Shapes::ShapeRef.new(shape: OnDemandProvisioningAllocationStrategy, required: true, location_name: "AllocationStrategy"))
+    OnDemandProvisioningSpecification.struct_class = Types::OnDemandProvisioningSpecification
+
     PlacementType.add_member(:availability_zone, Shapes::ShapeRef.new(shape: XmlString, location_name: "AvailabilityZone"))
     PlacementType.add_member(:availability_zones, Shapes::ShapeRef.new(shape: XmlStringMaxLen256List, location_name: "AvailabilityZones"))
     PlacementType.struct_class = Types::PlacementType
@@ -1034,6 +1041,7 @@ module Aws::EMR
     SpotProvisioningSpecification.add_member(:timeout_duration_minutes, Shapes::ShapeRef.new(shape: WholeNumber, required: true, location_name: "TimeoutDurationMinutes"))
     SpotProvisioningSpecification.add_member(:timeout_action, Shapes::ShapeRef.new(shape: SpotProvisioningTimeoutAction, required: true, location_name: "TimeoutAction"))
     SpotProvisioningSpecification.add_member(:block_duration_minutes, Shapes::ShapeRef.new(shape: WholeNumber, location_name: "BlockDurationMinutes"))
+    SpotProvisioningSpecification.add_member(:allocation_strategy, Shapes::ShapeRef.new(shape: SpotProvisioningAllocationStrategy, location_name: "AllocationStrategy"))
     SpotProvisioningSpecification.struct_class = Types::SpotProvisioningSpecification
 
     Step.add_member(:id, Shapes::ShapeRef.new(shape: StepId, location_name: "Id"))

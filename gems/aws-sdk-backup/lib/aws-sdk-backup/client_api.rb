@@ -14,6 +14,7 @@ module Aws::Backup
     include Seahorse::Model
 
     ARN = Shapes::StringShape.new(name: 'ARN')
+    AccountId = Shapes::StringShape.new(name: 'AccountId')
     AlreadyExistsException = Shapes::StructureShape.new(name: 'AlreadyExistsException')
     BackupJob = Shapes::StructureShape.new(name: 'BackupJob')
     BackupJobState = Shapes::StringShape.new(name: 'BackupJobState')
@@ -188,6 +189,7 @@ module Aws::Backup
     AlreadyExistsException.add_member(:context, Shapes::ShapeRef.new(shape: string, location_name: "Context"))
     AlreadyExistsException.struct_class = Types::AlreadyExistsException
 
+    BackupJob.add_member(:account_id, Shapes::ShapeRef.new(shape: AccountId, location_name: "AccountId"))
     BackupJob.add_member(:backup_job_id, Shapes::ShapeRef.new(shape: string, location_name: "BackupJobId"))
     BackupJob.add_member(:backup_vault_name, Shapes::ShapeRef.new(shape: BackupVaultName, location_name: "BackupVaultName"))
     BackupJob.add_member(:backup_vault_arn, Shapes::ShapeRef.new(shape: ARN, location_name: "BackupVaultArn"))
@@ -305,6 +307,7 @@ module Aws::Backup
 
     CopyActions.member = Shapes::ShapeRef.new(shape: CopyAction)
 
+    CopyJob.add_member(:account_id, Shapes::ShapeRef.new(shape: AccountId, location_name: "AccountId"))
     CopyJob.add_member(:copy_job_id, Shapes::ShapeRef.new(shape: string, location_name: "CopyJobId"))
     CopyJob.add_member(:source_backup_vault_arn, Shapes::ShapeRef.new(shape: ARN, location_name: "SourceBackupVaultArn"))
     CopyJob.add_member(:source_recovery_point_arn, Shapes::ShapeRef.new(shape: ARN, location_name: "SourceRecoveryPointArn"))
@@ -390,6 +393,7 @@ module Aws::Backup
     DescribeBackupJobInput.add_member(:backup_job_id, Shapes::ShapeRef.new(shape: string, required: true, location: "uri", location_name: "backupJobId"))
     DescribeBackupJobInput.struct_class = Types::DescribeBackupJobInput
 
+    DescribeBackupJobOutput.add_member(:account_id, Shapes::ShapeRef.new(shape: AccountId, location_name: "AccountId"))
     DescribeBackupJobOutput.add_member(:backup_job_id, Shapes::ShapeRef.new(shape: string, location_name: "BackupJobId"))
     DescribeBackupJobOutput.add_member(:backup_vault_name, Shapes::ShapeRef.new(shape: BackupVaultName, location_name: "BackupVaultName"))
     DescribeBackupJobOutput.add_member(:backup_vault_arn, Shapes::ShapeRef.new(shape: ARN, location_name: "BackupVaultArn"))
@@ -465,6 +469,7 @@ module Aws::Backup
     DescribeRestoreJobInput.add_member(:restore_job_id, Shapes::ShapeRef.new(shape: RestoreJobId, required: true, location: "uri", location_name: "restoreJobId"))
     DescribeRestoreJobInput.struct_class = Types::DescribeRestoreJobInput
 
+    DescribeRestoreJobOutput.add_member(:account_id, Shapes::ShapeRef.new(shape: AccountId, location_name: "AccountId"))
     DescribeRestoreJobOutput.add_member(:restore_job_id, Shapes::ShapeRef.new(shape: string, location_name: "RestoreJobId"))
     DescribeRestoreJobOutput.add_member(:recovery_point_arn, Shapes::ShapeRef.new(shape: ARN, location_name: "RecoveryPointArn"))
     DescribeRestoreJobOutput.add_member(:creation_date, Shapes::ShapeRef.new(shape: timestamp, location_name: "CreationDate"))
@@ -476,6 +481,7 @@ module Aws::Backup
     DescribeRestoreJobOutput.add_member(:iam_role_arn, Shapes::ShapeRef.new(shape: IAMRoleArn, location_name: "IamRoleArn"))
     DescribeRestoreJobOutput.add_member(:expected_completion_time_minutes, Shapes::ShapeRef.new(shape: Long, location_name: "ExpectedCompletionTimeMinutes"))
     DescribeRestoreJobOutput.add_member(:created_resource_arn, Shapes::ShapeRef.new(shape: ARN, location_name: "CreatedResourceArn"))
+    DescribeRestoreJobOutput.add_member(:resource_type, Shapes::ShapeRef.new(shape: ResourceType, location_name: "ResourceType"))
     DescribeRestoreJobOutput.struct_class = Types::DescribeRestoreJobOutput
 
     ExportBackupPlanTemplateInput.add_member(:backup_plan_id, Shapes::ShapeRef.new(shape: string, required: true, location: "uri", location_name: "backupPlanId"))
@@ -580,6 +586,7 @@ module Aws::Backup
     ListBackupJobsInput.add_member(:by_created_before, Shapes::ShapeRef.new(shape: timestamp, location: "querystring", location_name: "createdBefore"))
     ListBackupJobsInput.add_member(:by_created_after, Shapes::ShapeRef.new(shape: timestamp, location: "querystring", location_name: "createdAfter"))
     ListBackupJobsInput.add_member(:by_resource_type, Shapes::ShapeRef.new(shape: ResourceType, location: "querystring", location_name: "resourceType"))
+    ListBackupJobsInput.add_member(:by_account_id, Shapes::ShapeRef.new(shape: AccountId, location: "querystring", location_name: "accountId"))
     ListBackupJobsInput.struct_class = Types::ListBackupJobsInput
 
     ListBackupJobsOutput.add_member(:backup_jobs, Shapes::ShapeRef.new(shape: BackupJobsList, location_name: "BackupJobs"))
@@ -637,6 +644,7 @@ module Aws::Backup
     ListCopyJobsInput.add_member(:by_created_after, Shapes::ShapeRef.new(shape: timestamp, location: "querystring", location_name: "createdAfter"))
     ListCopyJobsInput.add_member(:by_resource_type, Shapes::ShapeRef.new(shape: ResourceType, location: "querystring", location_name: "resourceType"))
     ListCopyJobsInput.add_member(:by_destination_vault_arn, Shapes::ShapeRef.new(shape: string, location: "querystring", location_name: "destinationVaultArn"))
+    ListCopyJobsInput.add_member(:by_account_id, Shapes::ShapeRef.new(shape: AccountId, location: "querystring", location_name: "accountId"))
     ListCopyJobsInput.struct_class = Types::ListCopyJobsInput
 
     ListCopyJobsOutput.add_member(:copy_jobs, Shapes::ShapeRef.new(shape: CopyJobsList, location_name: "CopyJobs"))
@@ -678,6 +686,10 @@ module Aws::Backup
 
     ListRestoreJobsInput.add_member(:next_token, Shapes::ShapeRef.new(shape: string, location: "querystring", location_name: "nextToken"))
     ListRestoreJobsInput.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location: "querystring", location_name: "maxResults"))
+    ListRestoreJobsInput.add_member(:by_account_id, Shapes::ShapeRef.new(shape: AccountId, location: "querystring", location_name: "accountId"))
+    ListRestoreJobsInput.add_member(:by_created_before, Shapes::ShapeRef.new(shape: timestamp, location: "querystring", location_name: "createdBefore"))
+    ListRestoreJobsInput.add_member(:by_created_after, Shapes::ShapeRef.new(shape: timestamp, location: "querystring", location_name: "createdAfter"))
+    ListRestoreJobsInput.add_member(:by_status, Shapes::ShapeRef.new(shape: RestoreJobStatus, location: "querystring", location_name: "status"))
     ListRestoreJobsInput.struct_class = Types::ListRestoreJobsInput
 
     ListRestoreJobsOutput.add_member(:restore_jobs, Shapes::ShapeRef.new(shape: RestoreJobsList, location_name: "RestoreJobs"))
@@ -769,6 +781,7 @@ module Aws::Backup
 
     RestoreJobsList.member = Shapes::ShapeRef.new(shape: RestoreJobsListMember)
 
+    RestoreJobsListMember.add_member(:account_id, Shapes::ShapeRef.new(shape: AccountId, location_name: "AccountId"))
     RestoreJobsListMember.add_member(:restore_job_id, Shapes::ShapeRef.new(shape: string, location_name: "RestoreJobId"))
     RestoreJobsListMember.add_member(:recovery_point_arn, Shapes::ShapeRef.new(shape: ARN, location_name: "RecoveryPointArn"))
     RestoreJobsListMember.add_member(:creation_date, Shapes::ShapeRef.new(shape: timestamp, location_name: "CreationDate"))
@@ -780,6 +793,7 @@ module Aws::Backup
     RestoreJobsListMember.add_member(:iam_role_arn, Shapes::ShapeRef.new(shape: IAMRoleArn, location_name: "IamRoleArn"))
     RestoreJobsListMember.add_member(:expected_completion_time_minutes, Shapes::ShapeRef.new(shape: Long, location_name: "ExpectedCompletionTimeMinutes"))
     RestoreJobsListMember.add_member(:created_resource_arn, Shapes::ShapeRef.new(shape: ARN, location_name: "CreatedResourceArn"))
+    RestoreJobsListMember.add_member(:resource_type, Shapes::ShapeRef.new(shape: ResourceType, location_name: "ResourceType"))
     RestoreJobsListMember.struct_class = Types::RestoreJobsListMember
 
     ServiceUnavailableException.add_member(:code, Shapes::ShapeRef.new(shape: string, location_name: "Code"))
@@ -1192,7 +1206,6 @@ module Aws::Backup
         o.input = Shapes::ShapeRef.new(shape: ListBackupJobsInput)
         o.output = Shapes::ShapeRef.new(shape: ListBackupJobsOutput)
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValueException)
-        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
         o[:pager] = Aws::Pager.new(
           limit_key: "max_results",

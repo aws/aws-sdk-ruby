@@ -358,30 +358,33 @@ module Aws::IAM
     end
 
     # Adds the specified IAM role to the specified instance profile. An
-    # instance profile can contain only one role, and this limit cannot be
-    # increased. You can remove the existing role and then add a different
-    # role to an instance profile. You must then wait for the change to
-    # appear across all of AWS because of [eventual consistency][1]. To
-    # force the change, you must [disassociate the instance profile][2] and
-    # then [associate the instance profile][3], or you can stop your
-    # instance and then restart it.
+    # instance profile can contain only one role. (The number and size of
+    # IAM resources in an AWS account are limited. For more information, see
+    # [IAM and STS Quotas][1] in the *IAM User Guide*.) You can remove the
+    # existing role and then add a different role to an instance profile.
+    # You must then wait for the change to appear across all of AWS because
+    # of [eventual consistency][2]. To force the change, you must
+    # [disassociate the instance profile][3] and then [associate the
+    # instance profile][4], or you can stop your instance and then restart
+    # it.
     #
     # <note markdown="1"> The caller of this API must be granted the `PassRole` permission on
     # the IAM role by a permissions policy.
     #
     #  </note>
     #
-    # For more information about roles, go to [Working with Roles][4]. For
+    # For more information about roles, go to [Working with Roles][5]. For
     # more information about instance profiles, go to [About Instance
-    # Profiles][5].
+    # Profiles][6].
     #
     #
     #
-    # [1]: https://en.wikipedia.org/wiki/Eventual_consistency
-    # [2]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_DisassociateIamInstanceProfile.html
-    # [3]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_AssociateIamInstanceProfile.html
-    # [4]: https://docs.aws.amazon.com/IAM/latest/UserGuide/WorkingWithRoles.html
-    # [5]: https://docs.aws.amazon.com/IAM/latest/UserGuide/AboutInstanceProfiles.html
+    # [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_iam-quotas.html
+    # [2]: https://en.wikipedia.org/wiki/Eventual_consistency
+    # [3]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_DisassociateIamInstanceProfile.html
+    # [4]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_AssociateIamInstanceProfile.html
+    # [5]: https://docs.aws.amazon.com/IAM/latest/UserGuide/WorkingWithRoles.html
+    # [6]: https://docs.aws.amazon.com/IAM/latest/UserGuide/AboutInstanceProfiles.html
     #
     # @option params [required, String] :instance_profile_name
     #   The name of the instance profile to update.
@@ -755,8 +758,9 @@ module Aws::IAM
     # credentials. This is true even if the AWS account has no associated
     # users.
     #
-    # For information about limits on the number of keys you can create, see
-    # [Limitations on IAM Entities][1] in the *IAM User Guide*.
+    # The number and size of IAM resources in an AWS account are limited.
+    # For more information, see [IAM and STS Quotas][1] in the *IAM User
+    # Guide*.
     #
     # To ensure the security of your AWS account, the secret access key is
     # accessible only during key and user creation. You must save the key
@@ -766,7 +770,7 @@ module Aws::IAM
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/LimitationsOnEntities.html
+    # [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_iam-quotas.html
     #
     # @option params [String] :user_name
     #   The name of the IAM user that the new key will belong to.
@@ -875,12 +879,13 @@ module Aws::IAM
 
     # Creates a new group.
     #
-    # For information about the number of groups you can create, see
-    # [Limitations on IAM Entities][1] in the *IAM User Guide*.
+    # The number and size of IAM resources in an AWS account are limited.
+    # For more information, see [IAM and STS Quotas][1] in the *IAM User
+    # Guide*.
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/LimitationsOnEntities.html
+    # [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_iam-quotas.html
     #
     # @option params [String] :path
     #   The path to the group. For more information about paths, see [IAM
@@ -960,13 +965,14 @@ module Aws::IAM
     # Creates a new instance profile. For information about instance
     # profiles, go to [About Instance Profiles][1].
     #
-    # For information about the number of instance profiles you can create,
-    # see [Limitations on IAM Entities][2] in the *IAM User Guide*.
+    # The number and size of IAM resources in an AWS account are limited.
+    # For more information, see [IAM and STS Quotas][2] in the *IAM User
+    # Guide*.
     #
     #
     #
     # [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/AboutInstanceProfiles.html
-    # [2]: https://docs.aws.amazon.com/IAM/latest/UserGuide/LimitationsOnEntities.html
+    # [2]: https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_iam-quotas.html
     #
     # @option params [required, String] :instance_profile_name
     #   The name of the instance profile to create.
@@ -1496,14 +1502,14 @@ module Aws::IAM
     end
 
     # Creates a new role for your AWS account. For more information about
-    # roles, go to [IAM Roles][1]. For information about limitations on role
-    # names and the number of roles you can create, go to [Limitations on
-    # IAM Entities][2] in the *IAM User Guide*.
+    # roles, go to [IAM Roles][1]. The number and size of IAM resources in
+    # an AWS account are limited. For more information, see [IAM and STS
+    # Quotas][2] in the *IAM User Guide*.
     #
     #
     #
     # [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/WorkingWithRoles.html
-    # [2]: https://docs.aws.amazon.com/IAM/latest/UserGuide/LimitationsOnEntities.html
+    # [2]: https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_iam-quotas.html
     #
     # @option params [String] :path
     #   The path to the role. For more information about paths, see [IAM
@@ -1916,12 +1922,13 @@ module Aws::IAM
 
     # Creates a new IAM user for your AWS account.
     #
-    # For information about limitations on the number of IAM users you can
-    # create, see [Limitations on IAM Entities][1] in the *IAM User Guide*.
+    # The number and size of IAM resources in an AWS account are limited.
+    # For more information, see [IAM and STS Quotas][1] in the *IAM User
+    # Guide*.
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/LimitationsOnEntities.html
+    # [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_iam-quotas.html
     #
     # @option params [String] :path
     #   The path for the user name. For more information about paths, see [IAM
@@ -2036,8 +2043,9 @@ module Aws::IAM
     # MFA devices, go to [Using a Virtual MFA Device][1] in the *IAM User
     # Guide*.
     #
-    # For information about limits on the number of MFA devices you can
-    # create, see [Limitations on Entities][2] in the *IAM User Guide*.
+    # The number and size of IAM resources in an AWS account are limited.
+    # For more information, see [IAM and STS Quotas][2] in the *IAM User
+    # Guide*.
     #
     # The seed information contained in the QR code and the Base32 string
     # should be treated like any other secret access information. In other
@@ -2048,7 +2056,7 @@ module Aws::IAM
     #
     #
     # [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/Using_VirtualMFA.html
-    # [2]: https://docs.aws.amazon.com/IAM/latest/UserGuide/LimitationsOnEntities.html
+    # [2]: https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_iam-quotas.html
     #
     # @option params [String] :path
     #   The path for the virtual MFA device. For more information about paths,
@@ -4134,12 +4142,13 @@ module Aws::IAM
     # Retrieves information about IAM entity usage and IAM quotas in the AWS
     # account.
     #
-    # For information about limitations on IAM entities, see [Limitations on
-    # IAM Entities][1] in the *IAM User Guide*.
+    # The number and size of IAM resources in an AWS account are limited.
+    # For more information, see [IAM and STS Quotas][1] in the *IAM User
+    # Guide*.
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/LimitationsOnEntities.html
+    # [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_iam-quotas.html
     #
     # @return [Types::GetAccountSummaryResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -11565,7 +11574,7 @@ module Aws::IAM
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-iam'
-      context[:gem_version] = '1.40.1'
+      context[:gem_version] = '1.42.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

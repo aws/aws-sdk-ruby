@@ -26,6 +26,7 @@ module Aws::RoboMaker
     #
     class BatchDescribeSimulationJobRequest < Struct.new(
       :jobs)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -42,6 +43,7 @@ module Aws::RoboMaker
     class BatchDescribeSimulationJobResponse < Struct.new(
       :jobs,
       :unprocessed_jobs)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -80,6 +82,7 @@ module Aws::RoboMaker
     class BatchPolicy < Struct.new(
       :timeout_in_seconds,
       :max_concurrency)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -98,6 +101,7 @@ module Aws::RoboMaker
     #
     class CancelDeploymentJobRequest < Struct.new(
       :job)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -120,6 +124,7 @@ module Aws::RoboMaker
     #
     class CancelSimulationJobBatchRequest < Struct.new(
       :batch)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -142,6 +147,7 @@ module Aws::RoboMaker
     #
     class CancelSimulationJobRequest < Struct.new(
       :job)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -169,6 +175,7 @@ module Aws::RoboMaker
     #
     class Compute < Struct.new(
       :simulation_unit_limit)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -185,6 +192,7 @@ module Aws::RoboMaker
     #
     class ComputeResponse < Struct.new(
       :simulation_unit_limit)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -197,6 +205,7 @@ module Aws::RoboMaker
     #
     class ConcurrentDeploymentException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -269,6 +278,7 @@ module Aws::RoboMaker
       :fleet,
       :deployment_application_configs,
       :tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -383,6 +393,7 @@ module Aws::RoboMaker
       :created_at,
       :deployment_config,
       :tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -410,6 +421,7 @@ module Aws::RoboMaker
     class CreateFleetRequest < Struct.new(
       :name,
       :tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -437,6 +449,7 @@ module Aws::RoboMaker
       :name,
       :created_at,
       :tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -486,6 +499,7 @@ module Aws::RoboMaker
       :sources,
       :robot_software_suite,
       :tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -534,6 +548,7 @@ module Aws::RoboMaker
       :last_updated_at,
       :revision_id,
       :tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -560,6 +575,7 @@ module Aws::RoboMaker
     class CreateRobotApplicationVersionRequest < Struct.new(
       :application,
       :current_revision_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -603,6 +619,7 @@ module Aws::RoboMaker
       :robot_software_suite,
       :last_updated_at,
       :revision_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -642,6 +659,7 @@ module Aws::RoboMaker
       :architecture,
       :greengrass_group_id,
       :tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -680,6 +698,7 @@ module Aws::RoboMaker
       :greengrass_group_id,
       :architecture,
       :tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -747,6 +766,7 @@ module Aws::RoboMaker
       :robot_software_suite,
       :rendering_engine,
       :tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -804,6 +824,7 @@ module Aws::RoboMaker
       :last_updated_at,
       :revision_id,
       :tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -830,6 +851,7 @@ module Aws::RoboMaker
     class CreateSimulationApplicationVersionRequest < Struct.new(
       :application,
       :current_revision_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -882,6 +904,7 @@ module Aws::RoboMaker
       :rendering_engine,
       :last_updated_at,
       :revision_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1057,6 +1080,7 @@ module Aws::RoboMaker
       :tags,
       :vpc_config,
       :compute)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1218,6 +1242,7 @@ module Aws::RoboMaker
       :tags,
       :vpc_config,
       :compute)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1241,6 +1266,7 @@ module Aws::RoboMaker
       :name,
       :s3_bucket,
       :s3_keys)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1273,6 +1299,7 @@ module Aws::RoboMaker
       :name,
       :s3_bucket,
       :s3_keys)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1291,6 +1318,7 @@ module Aws::RoboMaker
     #
     class DeleteFleetRequest < Struct.new(
       :fleet)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1319,6 +1347,7 @@ module Aws::RoboMaker
     class DeleteRobotApplicationRequest < Struct.new(
       :application,
       :application_version)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1341,6 +1370,7 @@ module Aws::RoboMaker
     #
     class DeleteRobotRequest < Struct.new(
       :robot)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1370,6 +1400,7 @@ module Aws::RoboMaker
     class DeleteSimulationApplicationRequest < Struct.new(
       :application,
       :application_version)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1414,6 +1445,7 @@ module Aws::RoboMaker
       :application,
       :application_version,
       :launch_config)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1459,6 +1491,7 @@ module Aws::RoboMaker
       :failure_threshold_percentage,
       :robot_deployment_timeout_in_seconds,
       :download_condition_file)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1508,6 +1541,7 @@ module Aws::RoboMaker
       :failure_reason,
       :failure_code,
       :created_at)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1557,6 +1591,7 @@ module Aws::RoboMaker
       :launch_file,
       :post_launch_file,
       :environment_variables)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1581,6 +1616,7 @@ module Aws::RoboMaker
     class DeregisterRobotRequest < Struct.new(
       :fleet,
       :robot)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1597,6 +1633,7 @@ module Aws::RoboMaker
     class DeregisterRobotResponse < Struct.new(
       :fleet,
       :robot)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1615,6 +1652,7 @@ module Aws::RoboMaker
     #
     class DescribeDeploymentJobRequest < Struct.new(
       :job)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1672,6 +1710,7 @@ module Aws::RoboMaker
       :created_at,
       :robot_deployment_summary,
       :tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1690,6 +1729,7 @@ module Aws::RoboMaker
     #
     class DescribeFleetRequest < Struct.new(
       :fleet)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1737,6 +1777,7 @@ module Aws::RoboMaker
       :last_deployment_job,
       :last_deployment_time,
       :tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1761,6 +1802,7 @@ module Aws::RoboMaker
     class DescribeRobotApplicationRequest < Struct.new(
       :application,
       :application_version)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1809,6 +1851,7 @@ module Aws::RoboMaker
       :revision_id,
       :last_updated_at,
       :tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1827,6 +1870,7 @@ module Aws::RoboMaker
     #
     class DescribeRobotRequest < Struct.new(
       :robot)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1884,6 +1928,7 @@ module Aws::RoboMaker
       :last_deployment_job,
       :last_deployment_time,
       :tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1908,6 +1953,7 @@ module Aws::RoboMaker
     class DescribeSimulationApplicationRequest < Struct.new(
       :application,
       :application_version)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1965,6 +2011,7 @@ module Aws::RoboMaker
       :revision_id,
       :last_updated_at,
       :tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1983,6 +2030,7 @@ module Aws::RoboMaker
     #
     class DescribeSimulationJobBatchRequest < Struct.new(
       :batch)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2105,6 +2153,7 @@ module Aws::RoboMaker
       :pending_requests,
       :created_requests,
       :tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2124,6 +2173,7 @@ module Aws::RoboMaker
     #
     class DescribeSimulationJobRequest < Struct.new(
       :job)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2306,6 +2356,7 @@ module Aws::RoboMaker
       :vpc_config,
       :network_interface,
       :compute)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2335,6 +2386,7 @@ module Aws::RoboMaker
       :failure_reason,
       :failure_code,
       :failed_at)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2361,6 +2413,7 @@ module Aws::RoboMaker
     class Filter < Struct.new(
       :name,
       :values)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2400,6 +2453,7 @@ module Aws::RoboMaker
       :last_deployment_status,
       :last_deployment_job,
       :last_deployment_time)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2414,6 +2468,7 @@ module Aws::RoboMaker
     #
     class IdempotentParameterMismatchException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2426,6 +2481,7 @@ module Aws::RoboMaker
     #
     class InternalServerException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2440,6 +2496,7 @@ module Aws::RoboMaker
     #
     class InvalidParameterException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2498,6 +2555,7 @@ module Aws::RoboMaker
       :environment_variables,
       :port_forwarding_config,
       :stream_ui)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2512,6 +2570,7 @@ module Aws::RoboMaker
     #
     class LimitExceededException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2563,6 +2622,7 @@ module Aws::RoboMaker
       :filters,
       :next_token,
       :max_results)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2583,6 +2643,7 @@ module Aws::RoboMaker
     class ListDeploymentJobsResponse < Struct.new(
       :deployment_jobs,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2637,6 +2698,7 @@ module Aws::RoboMaker
       :next_token,
       :max_results,
       :filters)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2657,6 +2719,7 @@ module Aws::RoboMaker
     class ListFleetsResponse < Struct.new(
       :fleet_details,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2712,6 +2775,7 @@ module Aws::RoboMaker
       :next_token,
       :max_results,
       :filters)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2733,6 +2797,7 @@ module Aws::RoboMaker
     class ListRobotApplicationsResponse < Struct.new(
       :robot_application_summaries,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2783,6 +2848,7 @@ module Aws::RoboMaker
       :next_token,
       :max_results,
       :filters)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2802,6 +2868,7 @@ module Aws::RoboMaker
     class ListRobotsResponse < Struct.new(
       :robots,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2858,6 +2925,7 @@ module Aws::RoboMaker
       :next_token,
       :max_results,
       :filters)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2879,6 +2947,7 @@ module Aws::RoboMaker
     class ListSimulationApplicationsResponse < Struct.new(
       :simulation_application_summaries,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2922,6 +2991,7 @@ module Aws::RoboMaker
       :next_token,
       :max_results,
       :filters)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2942,6 +3012,7 @@ module Aws::RoboMaker
     class ListSimulationJobBatchesResponse < Struct.new(
       :simulation_job_batch_summaries,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3000,6 +3071,7 @@ module Aws::RoboMaker
       :next_token,
       :max_results,
       :filters)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3021,6 +3093,7 @@ module Aws::RoboMaker
     class ListSimulationJobsResponse < Struct.new(
       :simulation_job_summaries,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3039,6 +3112,7 @@ module Aws::RoboMaker
     #
     class ListTagsForResourceRequest < Struct.new(
       :resource_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3050,6 +3124,7 @@ module Aws::RoboMaker
     #
     class ListTagsForResourceResponse < Struct.new(
       :tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3070,6 +3145,7 @@ module Aws::RoboMaker
     #
     class LoggingConfig < Struct.new(
       :record_all_ros_topics)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3093,6 +3169,7 @@ module Aws::RoboMaker
       :network_interface_id,
       :private_ip_address,
       :public_ip_address)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3119,6 +3196,7 @@ module Aws::RoboMaker
     class OutputLocation < Struct.new(
       :s3_bucket,
       :s3_prefix)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3145,6 +3223,7 @@ module Aws::RoboMaker
     #
     class PortForwardingConfig < Struct.new(
       :port_mappings)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3179,6 +3258,7 @@ module Aws::RoboMaker
       :job_port,
       :application_port,
       :enable_on_public_ip)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3235,6 +3315,7 @@ module Aws::RoboMaker
       :percent_done,
       :estimated_time_remaining_seconds,
       :target_resource)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3259,6 +3340,7 @@ module Aws::RoboMaker
     class RegisterRobotRequest < Struct.new(
       :fleet,
       :robot)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3276,6 +3358,7 @@ module Aws::RoboMaker
     class RegisterRobotResponse < Struct.new(
       :fleet,
       :robot)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3302,6 +3385,7 @@ module Aws::RoboMaker
     class RenderingEngine < Struct.new(
       :name,
       :version)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3314,6 +3398,7 @@ module Aws::RoboMaker
     #
     class ResourceAlreadyExistsException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3326,6 +3411,7 @@ module Aws::RoboMaker
     #
     class ResourceNotFoundException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3344,6 +3430,7 @@ module Aws::RoboMaker
     #
     class RestartSimulationJobRequest < Struct.new(
       :job)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3402,6 +3489,7 @@ module Aws::RoboMaker
       :architecture,
       :last_deployment_job,
       :last_deployment_time)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3450,6 +3538,7 @@ module Aws::RoboMaker
       :application,
       :application_version,
       :launch_config)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3484,6 +3573,7 @@ module Aws::RoboMaker
       :version,
       :last_updated_at,
       :robot_software_suite)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3529,6 +3619,7 @@ module Aws::RoboMaker
       :progress_detail,
       :failure_reason,
       :failure_code)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3555,6 +3646,7 @@ module Aws::RoboMaker
     class RobotSoftwareSuite < Struct.new(
       :name,
       :version)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3573,6 +3665,7 @@ module Aws::RoboMaker
     class S3KeyOutput < Struct.new(
       :s3_key,
       :etag)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3605,6 +3698,7 @@ module Aws::RoboMaker
       :bucket,
       :key,
       :etag)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3617,6 +3711,7 @@ module Aws::RoboMaker
     #
     class ServiceUnavailableException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3665,6 +3760,7 @@ module Aws::RoboMaker
       :application,
       :application_version,
       :launch_config)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3704,6 +3800,7 @@ module Aws::RoboMaker
       :last_updated_at,
       :robot_software_suite,
       :simulation_software_suite)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3831,6 +3928,7 @@ module Aws::RoboMaker
       :vpc_config,
       :network_interface,
       :compute)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3925,6 +4023,7 @@ module Aws::RoboMaker
       :failed_request_count,
       :pending_request_count,
       :created_request_count)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4098,6 +4197,7 @@ module Aws::RoboMaker
       :vpc_config,
       :compute,
       :tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4142,6 +4242,7 @@ module Aws::RoboMaker
       :simulation_application_names,
       :robot_application_names,
       :data_source_names)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4168,6 +4269,7 @@ module Aws::RoboMaker
     class SimulationSoftwareSuite < Struct.new(
       :name,
       :version)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4196,6 +4298,7 @@ module Aws::RoboMaker
       :s3_key,
       :etag,
       :architecture)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4228,6 +4331,7 @@ module Aws::RoboMaker
       :s3_bucket,
       :s3_key,
       :architecture)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4352,6 +4456,7 @@ module Aws::RoboMaker
       :batch_policy,
       :create_simulation_job_requests,
       :tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4468,6 +4573,7 @@ module Aws::RoboMaker
       :pending_requests,
       :created_requests,
       :tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4496,6 +4602,7 @@ module Aws::RoboMaker
     class SyncDeploymentJobRequest < Struct.new(
       :client_request_token,
       :fleet)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4604,6 +4711,7 @@ module Aws::RoboMaker
       :failure_reason,
       :failure_code,
       :created_at)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4632,6 +4740,7 @@ module Aws::RoboMaker
     class TagResourceRequest < Struct.new(
       :resource_arn,
       :tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4649,6 +4758,7 @@ module Aws::RoboMaker
     #
     class ThrottlingException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4675,6 +4785,7 @@ module Aws::RoboMaker
     class UntagResourceRequest < Struct.new(
       :resource_arn,
       :tag_keys)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4725,6 +4836,7 @@ module Aws::RoboMaker
       :sources,
       :robot_software_suite,
       :current_revision_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4768,6 +4880,7 @@ module Aws::RoboMaker
       :robot_software_suite,
       :last_updated_at,
       :revision_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4831,6 +4944,7 @@ module Aws::RoboMaker
       :robot_software_suite,
       :rendering_engine,
       :current_revision_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4884,6 +4998,7 @@ module Aws::RoboMaker
       :rendering_engine,
       :last_updated_at,
       :revision_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4919,6 +5034,7 @@ module Aws::RoboMaker
       :subnets,
       :security_groups,
       :assign_public_ip)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4947,6 +5063,7 @@ module Aws::RoboMaker
       :security_groups,
       :vpc_id,
       :assign_public_ip)
+      SENSITIVE = []
       include Aws::Structure
     end
 

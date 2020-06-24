@@ -47,6 +47,6 @@ require_relative 'aws-sdk-guardduty/customizations'
 # @service
 module Aws::GuardDuty
 
-  GEM_VERSION = '1.35.1'
+  GEM_VERSION = '1.36.0'
 
 end

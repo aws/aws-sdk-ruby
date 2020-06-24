@@ -33,6 +33,7 @@ module Aws::FMS
     #
     class AssociateAdminAccountRequest < Struct.new(
       :admin_account)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -63,6 +64,7 @@ module Aws::FMS
       :resource_id,
       :violation_reason,
       :resource_type)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -122,6 +124,7 @@ module Aws::FMS
     class DeletePolicyRequest < Struct.new(
       :policy_id,
       :delete_all_policy_resources)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -161,6 +164,7 @@ module Aws::FMS
       :compliance_status,
       :violator_count,
       :evaluation_limit_exceeded)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -185,6 +189,7 @@ module Aws::FMS
     class GetAdminAccountResponse < Struct.new(
       :admin_account,
       :role_status)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -211,6 +216,7 @@ module Aws::FMS
     class GetComplianceDetailRequest < Struct.new(
       :policy_id,
       :member_account)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -223,6 +229,7 @@ module Aws::FMS
     #
     class GetComplianceDetailResponse < Struct.new(
       :policy_compliance_detail)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -246,6 +253,7 @@ module Aws::FMS
     class GetNotificationChannelResponse < Struct.new(
       :sns_topic_arn,
       :sns_role_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -265,6 +273,7 @@ module Aws::FMS
     #
     class GetPolicyRequest < Struct.new(
       :policy_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -281,6 +290,7 @@ module Aws::FMS
     class GetPolicyResponse < Struct.new(
       :policy,
       :policy_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -346,6 +356,7 @@ module Aws::FMS
       :end_time,
       :next_token,
       :max_results)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -395,6 +406,7 @@ module Aws::FMS
       :service_type,
       :data,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -408,6 +420,7 @@ module Aws::FMS
     #
     class InternalErrorException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -420,6 +433,7 @@ module Aws::FMS
     #
     class InvalidInputException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -435,6 +449,7 @@ module Aws::FMS
     #
     class InvalidOperationException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -447,6 +462,7 @@ module Aws::FMS
     #
     class InvalidTypeException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -466,6 +482,7 @@ module Aws::FMS
     #
     class LimitExceededException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -509,6 +526,7 @@ module Aws::FMS
       :policy_id,
       :next_token,
       :max_results)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -530,6 +548,7 @@ module Aws::FMS
     class ListComplianceStatusResponse < Struct.new(
       :policy_compliance_status_list,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -564,6 +583,7 @@ module Aws::FMS
     class ListMemberAccountsRequest < Struct.new(
       :next_token,
       :max_results)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -584,6 +604,7 @@ module Aws::FMS
     class ListMemberAccountsResponse < Struct.new(
       :member_accounts,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -619,6 +640,7 @@ module Aws::FMS
     class ListPoliciesRequest < Struct.new(
       :next_token,
       :max_results)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -639,6 +661,7 @@ module Aws::FMS
     class ListPoliciesResponse < Struct.new(
       :policy_list,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -659,6 +682,7 @@ module Aws::FMS
     #
     class ListTagsForResourceRequest < Struct.new(
       :resource_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -670,6 +694,7 @@ module Aws::FMS
     #
     class ListTagsForResourceResponse < Struct.new(
       :tag_list)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -837,6 +862,7 @@ module Aws::FMS
       :remediation_enabled,
       :include_map,
       :exclude_map)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -890,6 +916,7 @@ module Aws::FMS
       :evaluation_limit_exceeded,
       :expired_at,
       :issue_info_map)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -940,6 +967,7 @@ module Aws::FMS
       :evaluation_results,
       :last_updated,
       :issue_info_map)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -995,6 +1023,7 @@ module Aws::FMS
       :resource_type,
       :security_service_type,
       :remediation_enabled)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1021,6 +1050,7 @@ module Aws::FMS
     class PutNotificationChannelRequest < Struct.new(
       :sns_topic_arn,
       :sns_role_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1074,6 +1104,7 @@ module Aws::FMS
     class PutPolicyRequest < Struct.new(
       :policy,
       :tag_list)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1090,6 +1121,7 @@ module Aws::FMS
     class PutPolicyResponse < Struct.new(
       :policy,
       :policy_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1102,6 +1134,7 @@ module Aws::FMS
     #
     class ResourceNotFoundException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1140,6 +1173,7 @@ module Aws::FMS
     class ResourceTag < Struct.new(
       :key,
       :value)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1211,6 +1245,7 @@ module Aws::FMS
     class SecurityServicePolicyData < Struct.new(
       :type,
       :managed_service_data)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1246,6 +1281,7 @@ module Aws::FMS
     class Tag < Struct.new(
       :key,
       :value)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1277,6 +1313,7 @@ module Aws::FMS
     class TagResourceRequest < Struct.new(
       :resource_arn,
       :tag_list)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1307,6 +1344,7 @@ module Aws::FMS
     class UntagResourceRequest < Struct.new(
       :resource_arn,
       :tag_keys)
+      SENSITIVE = []
       include Aws::Structure
     end
 

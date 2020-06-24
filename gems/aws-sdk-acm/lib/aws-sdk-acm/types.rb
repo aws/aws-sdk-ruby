@@ -46,6 +46,7 @@ module Aws::ACM
     class AddTagsToCertificateRequest < Struct.new(
       :certificate_arn,
       :tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -247,6 +248,7 @@ module Aws::ACM
       :certificate_authority_arn,
       :renewal_eligibility,
       :options)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -279,6 +281,7 @@ module Aws::ACM
     #
     class CertificateOptions < Struct.new(
       :certificate_transparency_logging_preference)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -308,6 +311,7 @@ module Aws::ACM
     class CertificateSummary < Struct.new(
       :certificate_arn,
       :domain_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -336,6 +340,7 @@ module Aws::ACM
     #
     class DeleteCertificateRequest < Struct.new(
       :certificate_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -364,6 +369,7 @@ module Aws::ACM
     #
     class DescribeCertificateRequest < Struct.new(
       :certificate_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -375,6 +381,7 @@ module Aws::ACM
     #
     class DescribeCertificateResponse < Struct.new(
       :certificate)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -435,6 +442,7 @@ module Aws::ACM
       :validation_status,
       :resource_record,
       :validation_method)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -478,6 +486,7 @@ module Aws::ACM
     class DomainValidationOption < Struct.new(
       :domain_name,
       :validation_domain)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -510,6 +519,7 @@ module Aws::ACM
     class ExportCertificateRequest < Struct.new(
       :certificate_arn,
       :passphrase)
+      SENSITIVE = [:passphrase]
       include Aws::Structure
     end
 
@@ -534,6 +544,7 @@ module Aws::ACM
       :certificate,
       :certificate_chain,
       :private_key)
+      SENSITIVE = [:private_key]
       include Aws::Structure
     end
 
@@ -574,6 +585,7 @@ module Aws::ACM
     class ExtendedKeyUsage < Struct.new(
       :name,
       :oid)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -614,6 +626,7 @@ module Aws::ACM
       :extended_key_usage,
       :key_usage,
       :key_types)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -641,6 +654,7 @@ module Aws::ACM
     #
     class GetCertificateRequest < Struct.new(
       :certificate_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -660,6 +674,7 @@ module Aws::ACM
     class GetCertificateResponse < Struct.new(
       :certificate,
       :certificate_chain)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -715,6 +730,7 @@ module Aws::ACM
       :private_key,
       :certificate_chain,
       :tags)
+      SENSITIVE = [:private_key]
       include Aws::Structure
     end
 
@@ -730,6 +746,7 @@ module Aws::ACM
     #
     class ImportCertificateResponse < Struct.new(
       :certificate_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -742,6 +759,7 @@ module Aws::ACM
     #
     class InvalidArgsException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -755,6 +773,7 @@ module Aws::ACM
     #
     class InvalidArnException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -768,6 +787,7 @@ module Aws::ACM
     #
     class InvalidDomainValidationOptionsException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -780,6 +800,7 @@ module Aws::ACM
     #
     class InvalidParameterException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -792,6 +813,7 @@ module Aws::ACM
     #
     class InvalidStateException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -806,6 +828,7 @@ module Aws::ACM
     #
     class InvalidTagException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -820,6 +843,7 @@ module Aws::ACM
     #
     class KeyUsage < Struct.new(
       :name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -832,6 +856,7 @@ module Aws::ACM
     #
     class LimitExceededException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -880,6 +905,7 @@ module Aws::ACM
       :includes,
       :next_token,
       :max_items)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -898,6 +924,7 @@ module Aws::ACM
     class ListCertificatesResponse < Struct.new(
       :next_token,
       :certificate_summary_list)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -926,6 +953,7 @@ module Aws::ACM
     #
     class ListTagsForCertificateRequest < Struct.new(
       :certificate_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -937,6 +965,7 @@ module Aws::ACM
     #
     class ListTagsForCertificateResponse < Struct.new(
       :tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -976,6 +1005,7 @@ module Aws::ACM
     class RemoveTagsFromCertificateRequest < Struct.new(
       :certificate_arn,
       :tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1004,6 +1034,7 @@ module Aws::ACM
     #
     class RenewCertificateRequest < Struct.new(
       :certificate_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1050,6 +1081,7 @@ module Aws::ACM
       :domain_validation_options,
       :renewal_status_reason,
       :updated_at)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1194,6 +1226,7 @@ module Aws::ACM
       :options,
       :certificate_authority_arn,
       :tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1208,6 +1241,7 @@ module Aws::ACM
     #
     class RequestCertificateResponse < Struct.new(
       :certificate_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1221,6 +1255,7 @@ module Aws::ACM
     #
     class RequestInProgressException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1275,6 +1310,7 @@ module Aws::ACM
       :certificate_arn,
       :domain,
       :validation_domain)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1288,6 +1324,7 @@ module Aws::ACM
     #
     class ResourceInUseException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1301,6 +1338,7 @@ module Aws::ACM
     #
     class ResourceNotFoundException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1328,6 +1366,7 @@ module Aws::ACM
       :name,
       :type,
       :value)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1355,6 +1394,7 @@ module Aws::ACM
     class Tag < Struct.new(
       :key,
       :value)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1368,6 +1408,7 @@ module Aws::ACM
     #
     class TagPolicyException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1381,6 +1422,7 @@ module Aws::ACM
     #
     class TooManyTagsException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1416,6 +1458,7 @@ module Aws::ACM
     class UpdateCertificateOptionsRequest < Struct.new(
       :certificate_arn,
       :options)
+      SENSITIVE = []
       include Aws::Structure
     end
 

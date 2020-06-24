@@ -130,6 +130,7 @@ module Aws::ElasticTranscoder
       :padding_policy,
       :album_art_format,
       :encryption)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -211,6 +212,7 @@ module Aws::ElasticTranscoder
       :bit_depth,
       :bit_order,
       :signed)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -416,6 +418,7 @@ module Aws::ElasticTranscoder
       :channels,
       :audio_packing_mode,
       :codec_options)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -437,6 +440,7 @@ module Aws::ElasticTranscoder
     #
     class CancelJobRequest < Struct.new(
       :id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -523,6 +527,7 @@ module Aws::ElasticTranscoder
       :format,
       :pattern,
       :encryption)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -591,6 +596,7 @@ module Aws::ElasticTranscoder
       :time_offset,
       :label,
       :encryption)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -668,6 +674,7 @@ module Aws::ElasticTranscoder
       :merge_policy,
       :caption_sources,
       :caption_formats)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -690,6 +697,7 @@ module Aws::ElasticTranscoder
     #
     class Clip < Struct.new(
       :time_span)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -970,6 +978,7 @@ module Aws::ElasticTranscoder
       :composition,
       :captions,
       :encryption)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1080,6 +1089,7 @@ module Aws::ElasticTranscoder
       :output_keys,
       :hls_content_protection,
       :play_ready_drm)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1443,6 +1453,7 @@ module Aws::ElasticTranscoder
       :output_key_prefix,
       :playlists,
       :user_metadata)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1455,6 +1466,7 @@ module Aws::ElasticTranscoder
     #
     class CreateJobResponse < Struct.new(
       :job)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1739,6 +1751,7 @@ module Aws::ElasticTranscoder
       :notifications,
       :content_config,
       :thumbnail_config)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1762,6 +1775,7 @@ module Aws::ElasticTranscoder
     class CreatePipelineResponse < Struct.new(
       :pipeline,
       :warnings)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1866,6 +1880,7 @@ module Aws::ElasticTranscoder
       :video,
       :audio,
       :thumbnails)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1887,6 +1902,7 @@ module Aws::ElasticTranscoder
     class CreatePresetResponse < Struct.new(
       :preset,
       :warning)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1905,6 +1921,7 @@ module Aws::ElasticTranscoder
     #
     class DeletePipelineRequest < Struct.new(
       :id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1928,6 +1945,7 @@ module Aws::ElasticTranscoder
     #
     class DeletePresetRequest < Struct.new(
       :id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1975,6 +1993,7 @@ module Aws::ElasticTranscoder
       :frame_rate,
       :file_size,
       :duration_millis)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2068,6 +2087,7 @@ module Aws::ElasticTranscoder
       :key,
       :key_md_5,
       :initialization_vector)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2148,6 +2168,7 @@ module Aws::ElasticTranscoder
       :initialization_vector,
       :license_acquisition_url,
       :key_storage_policy)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2209,6 +2230,7 @@ module Aws::ElasticTranscoder
     class InputCaptions < Struct.new(
       :merge_policy,
       :caption_sources)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2332,6 +2354,7 @@ module Aws::ElasticTranscoder
       :status,
       :user_metadata,
       :timing)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2388,6 +2411,7 @@ module Aws::ElasticTranscoder
     class JobAlbumArt < Struct.new(
       :merge_policy,
       :artwork)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2582,6 +2606,7 @@ module Aws::ElasticTranscoder
       :time_span,
       :input_captions,
       :detected_properties)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2868,6 +2893,7 @@ module Aws::ElasticTranscoder
       :captions,
       :encryption,
       :applied_color_space_conversion)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2918,6 +2944,7 @@ module Aws::ElasticTranscoder
       :preset_watermark_id,
       :input_key,
       :encryption)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2957,6 +2984,7 @@ module Aws::ElasticTranscoder
       :pipeline_id,
       :ascending,
       :page_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2976,6 +3004,7 @@ module Aws::ElasticTranscoder
     class ListJobsByPipelineResponse < Struct.new(
       :jobs,
       :next_page_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3012,6 +3041,7 @@ module Aws::ElasticTranscoder
       :status,
       :ascending,
       :page_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3031,6 +3061,7 @@ module Aws::ElasticTranscoder
     class ListJobsByStatusResponse < Struct.new(
       :jobs,
       :next_page_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3059,6 +3090,7 @@ module Aws::ElasticTranscoder
     class ListPipelinesRequest < Struct.new(
       :ascending,
       :page_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3078,6 +3110,7 @@ module Aws::ElasticTranscoder
     class ListPipelinesResponse < Struct.new(
       :pipelines,
       :next_page_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3106,6 +3139,7 @@ module Aws::ElasticTranscoder
     class ListPresetsRequest < Struct.new(
       :ascending,
       :page_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3125,6 +3159,7 @@ module Aws::ElasticTranscoder
     class ListPresetsResponse < Struct.new(
       :presets,
       :next_page_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3170,6 +3205,7 @@ module Aws::ElasticTranscoder
       :completed,
       :warning,
       :error)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3228,6 +3264,7 @@ module Aws::ElasticTranscoder
       :grantee_type,
       :grantee,
       :access)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3423,6 +3460,7 @@ module Aws::ElasticTranscoder
       :notifications,
       :content_config,
       :thumbnail_config)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3496,6 +3534,7 @@ module Aws::ElasticTranscoder
       :bucket,
       :storage_class,
       :permissions)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3577,6 +3616,7 @@ module Aws::ElasticTranscoder
       :key_id,
       :initialization_vector,
       :license_acquisition_url)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3677,6 +3717,7 @@ module Aws::ElasticTranscoder
       :play_ready_drm,
       :status,
       :status_detail)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3740,6 +3781,7 @@ module Aws::ElasticTranscoder
       :video,
       :thumbnails,
       :type)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3958,6 +4000,7 @@ module Aws::ElasticTranscoder
       :vertical_offset,
       :opacity,
       :target)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3977,6 +4020,7 @@ module Aws::ElasticTranscoder
     #
     class ReadJobRequest < Struct.new(
       :id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3989,6 +4033,7 @@ module Aws::ElasticTranscoder
     #
     class ReadJobResponse < Struct.new(
       :job)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4007,6 +4052,7 @@ module Aws::ElasticTranscoder
     #
     class ReadPipelineRequest < Struct.new(
       :id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4029,6 +4075,7 @@ module Aws::ElasticTranscoder
     class ReadPipelineResponse < Struct.new(
       :pipeline,
       :warnings)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4048,6 +4095,7 @@ module Aws::ElasticTranscoder
     #
     class ReadPresetRequest < Struct.new(
       :id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4060,6 +4108,7 @@ module Aws::ElasticTranscoder
     #
     class ReadPresetResponse < Struct.new(
       :preset)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4111,6 +4160,7 @@ module Aws::ElasticTranscoder
       :input_bucket,
       :output_bucket,
       :topics)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4130,6 +4180,7 @@ module Aws::ElasticTranscoder
     class TestRoleResponse < Struct.new(
       :success,
       :messages)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4255,6 +4306,7 @@ module Aws::ElasticTranscoder
       :max_height,
       :sizing_policy,
       :padding_policy)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4291,6 +4343,7 @@ module Aws::ElasticTranscoder
     class TimeSpan < Struct.new(
       :start_time,
       :duration)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4313,6 +4366,7 @@ module Aws::ElasticTranscoder
       :submit_time_millis,
       :start_time_millis,
       :finish_time_millis)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4368,6 +4422,7 @@ module Aws::ElasticTranscoder
     class UpdatePipelineNotificationsRequest < Struct.new(
       :id,
       :notifications)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4380,6 +4435,7 @@ module Aws::ElasticTranscoder
     #
     class UpdatePipelineNotificationsResponse < Struct.new(
       :pipeline)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4638,6 +4694,7 @@ module Aws::ElasticTranscoder
       :notifications,
       :content_config,
       :thumbnail_config)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4660,6 +4717,7 @@ module Aws::ElasticTranscoder
     class UpdatePipelineResponse < Struct.new(
       :pipeline,
       :warnings)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4688,6 +4746,7 @@ module Aws::ElasticTranscoder
     class UpdatePipelineStatusRequest < Struct.new(
       :id,
       :status)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4701,6 +4760,7 @@ module Aws::ElasticTranscoder
     #
     class UpdatePipelineStatusResponse < Struct.new(
       :pipeline)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5235,6 +5295,7 @@ module Aws::ElasticTranscoder
       :sizing_policy,
       :padding_policy,
       :watermarks)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5261,6 +5322,7 @@ module Aws::ElasticTranscoder
     class Warning < Struct.new(
       :code,
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 

@@ -21,6 +21,7 @@ module Aws::ServiceQuotas
     #
     class AWSServiceAccessNotEnabledException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -33,6 +34,7 @@ module Aws::ServiceQuotas
     #
     class AccessDeniedException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -73,6 +75,7 @@ module Aws::ServiceQuotas
       :service_code,
       :quota_code,
       :aws_region)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -90,6 +93,7 @@ module Aws::ServiceQuotas
     #
     class DependencyAccessDeniedException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -132,6 +136,7 @@ module Aws::ServiceQuotas
     class ErrorReason < Struct.new(
       :error_code,
       :error_message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -156,6 +161,7 @@ module Aws::ServiceQuotas
     class GetAWSDefaultServiceQuotaRequest < Struct.new(
       :service_code,
       :quota_code)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -168,6 +174,7 @@ module Aws::ServiceQuotas
     #
     class GetAWSDefaultServiceQuotaResponse < Struct.new(
       :quota)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -187,6 +194,7 @@ module Aws::ServiceQuotas
     #
     class GetAssociationForServiceQuotaTemplateResponse < Struct.new(
       :service_quota_template_association_status)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -205,6 +213,7 @@ module Aws::ServiceQuotas
     #
     class GetRequestedServiceQuotaChangeRequest < Struct.new(
       :request_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -217,6 +226,7 @@ module Aws::ServiceQuotas
     #
     class GetRequestedServiceQuotaChangeResponse < Struct.new(
       :requested_quota)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -247,6 +257,7 @@ module Aws::ServiceQuotas
       :service_code,
       :quota_code,
       :aws_region)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -258,6 +269,7 @@ module Aws::ServiceQuotas
     #
     class GetServiceQuotaIncreaseRequestFromTemplateResponse < Struct.new(
       :service_quota_increase_request_in_template)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -282,6 +294,7 @@ module Aws::ServiceQuotas
     class GetServiceQuotaRequest < Struct.new(
       :service_code,
       :quota_code)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -294,6 +307,7 @@ module Aws::ServiceQuotas
     #
     class GetServiceQuotaResponse < Struct.new(
       :quota)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -306,6 +320,7 @@ module Aws::ServiceQuotas
     #
     class IllegalArgumentException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -318,6 +333,7 @@ module Aws::ServiceQuotas
     #
     class InvalidPaginationTokenException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -330,6 +346,7 @@ module Aws::ServiceQuotas
     #
     class InvalidResourceStateException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -376,6 +393,7 @@ module Aws::ServiceQuotas
       :service_code,
       :next_token,
       :max_results)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -396,6 +414,7 @@ module Aws::ServiceQuotas
     class ListAWSDefaultServiceQuotasResponse < Struct.new(
       :next_token,
       :quotas)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -449,6 +468,7 @@ module Aws::ServiceQuotas
       :status,
       :next_token,
       :max_results)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -472,6 +492,7 @@ module Aws::ServiceQuotas
     class ListRequestedServiceQuotaChangeHistoryByQuotaResponse < Struct.new(
       :next_token,
       :requested_quotas)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -519,6 +540,7 @@ module Aws::ServiceQuotas
       :status,
       :next_token,
       :max_results)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -542,6 +564,7 @@ module Aws::ServiceQuotas
     class ListRequestedServiceQuotaChangeHistoryResponse < Struct.new(
       :next_token,
       :requested_quotas)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -590,6 +613,7 @@ module Aws::ServiceQuotas
       :aws_region,
       :next_token,
       :max_results)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -614,6 +638,7 @@ module Aws::ServiceQuotas
     class ListServiceQuotaIncreaseRequestsInTemplateResponse < Struct.new(
       :service_quota_increase_request_in_template_list,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -656,6 +681,7 @@ module Aws::ServiceQuotas
       :service_code,
       :next_token,
       :max_results)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -680,6 +706,7 @@ module Aws::ServiceQuotas
     class ListServiceQuotasResponse < Struct.new(
       :next_token,
       :quotas)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -715,6 +742,7 @@ module Aws::ServiceQuotas
     class ListServicesRequest < Struct.new(
       :next_token,
       :max_results)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -738,6 +766,7 @@ module Aws::ServiceQuotas
     class ListServicesResponse < Struct.new(
       :next_token,
       :services)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -776,6 +805,7 @@ module Aws::ServiceQuotas
       :metric_name,
       :metric_dimensions,
       :metric_statistic_recommendation)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -788,6 +818,7 @@ module Aws::ServiceQuotas
     #
     class NoAvailableOrganizationException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -800,6 +831,7 @@ module Aws::ServiceQuotas
     #
     class NoSuchResourceException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -817,6 +849,7 @@ module Aws::ServiceQuotas
     #
     class OrganizationNotInAllFeaturesModeException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -853,6 +886,7 @@ module Aws::ServiceQuotas
       :service_code,
       :aws_region,
       :desired_value)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -865,6 +899,7 @@ module Aws::ServiceQuotas
     #
     class PutServiceQuotaIncreaseRequestIntoTemplateResponse < Struct.new(
       :service_quota_increase_request_in_template)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -879,6 +914,7 @@ module Aws::ServiceQuotas
     #
     class QuotaExceededException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -897,6 +933,7 @@ module Aws::ServiceQuotas
     class QuotaPeriod < Struct.new(
       :period_value,
       :period_unit)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -927,6 +964,7 @@ module Aws::ServiceQuotas
       :service_code,
       :quota_code,
       :desired_value)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -938,6 +976,7 @@ module Aws::ServiceQuotas
     #
     class RequestServiceQuotaIncreaseResponse < Struct.new(
       :requested_quota)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1019,6 +1058,7 @@ module Aws::ServiceQuotas
       :quota_arn,
       :global_quota,
       :unit)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1031,6 +1071,7 @@ module Aws::ServiceQuotas
     #
     class ResourceAlreadyExistsException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1043,6 +1084,7 @@ module Aws::ServiceQuotas
     #
     class ServiceException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1063,6 +1105,7 @@ module Aws::ServiceQuotas
     class ServiceInfo < Struct.new(
       :service_code,
       :service_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1133,6 +1176,7 @@ module Aws::ServiceQuotas
       :usage_metric,
       :period,
       :error_reason)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1185,6 +1229,7 @@ module Aws::ServiceQuotas
       :aws_region,
       :unit,
       :global_quota)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1199,6 +1244,7 @@ module Aws::ServiceQuotas
     #
     class ServiceQuotaTemplateNotInUseException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1212,6 +1258,7 @@ module Aws::ServiceQuotas
     #
     class TemplatesNotAvailableInRegionException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1225,6 +1272,7 @@ module Aws::ServiceQuotas
     #
     class TooManyRequestsException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 

@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.20.0 (2020-06-24)
+------------------
+
+* Feature - This release of AWS Amplify Console introduces support for automatically creating custom subdomains for branches based on user-defined glob patterns, as well as automatically cleaning up Amplify branches when their corresponding git branches are deleted.
+
+1.19.0 (2020-06-23)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
 1.18.1 (2020-06-11)
 ------------------
 

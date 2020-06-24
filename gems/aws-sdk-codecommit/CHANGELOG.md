@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.36.0 (2020-06-24)
+------------------
+
+* Feature - This release introduces support for reactions to CodeCommit comments. Users will be able to select from a pre-defined list of emojis to express their reaction to any comments.
+
+1.35.0 (2020-06-23)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
 1.34.1 (2020-06-11)
 ------------------
 

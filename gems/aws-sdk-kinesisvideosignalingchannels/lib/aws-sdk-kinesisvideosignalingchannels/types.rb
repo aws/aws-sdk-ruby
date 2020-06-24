@@ -20,6 +20,7 @@ module Aws::KinesisVideoSignalingChannels
     #
     class ClientLimitExceededException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -59,6 +60,7 @@ module Aws::KinesisVideoSignalingChannels
       :client_id,
       :service,
       :username)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -70,6 +72,7 @@ module Aws::KinesisVideoSignalingChannels
     #
     class GetIceServerConfigResponse < Struct.new(
       :ice_server_list)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -106,6 +109,7 @@ module Aws::KinesisVideoSignalingChannels
       :username,
       :password,
       :ttl)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -118,6 +122,7 @@ module Aws::KinesisVideoSignalingChannels
     #
     class InvalidArgumentException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -130,6 +135,7 @@ module Aws::KinesisVideoSignalingChannels
     #
     class InvalidClientException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -142,6 +148,7 @@ module Aws::KinesisVideoSignalingChannels
     #
     class NotAuthorizedException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -154,6 +161,7 @@ module Aws::KinesisVideoSignalingChannels
     #
     class ResourceNotFoundException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -185,6 +193,7 @@ module Aws::KinesisVideoSignalingChannels
       :channel_arn,
       :sender_client_id,
       :message_payload)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -196,6 +205,7 @@ module Aws::KinesisVideoSignalingChannels
     #
     class SendAlexaOfferToMasterResponse < Struct.new(
       :answer)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -210,6 +220,7 @@ module Aws::KinesisVideoSignalingChannels
     #
     class SessionExpiredException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 

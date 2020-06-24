@@ -78,6 +78,7 @@ module Aws::CodeCommit
     BranchNameIsTagNameException = Shapes::StructureShape.new(name: 'BranchNameIsTagNameException')
     BranchNameList = Shapes::ListShape.new(name: 'BranchNameList')
     BranchNameRequiredException = Shapes::StructureShape.new(name: 'BranchNameRequiredException')
+    CallerReactions = Shapes::ListShape.new(name: 'CallerReactions')
     CannotDeleteApprovalRuleFromTemplateException = Shapes::StructureShape.new(name: 'CannotDeleteApprovalRuleFromTemplateException')
     CannotModifyApprovalRuleFromTemplateException = Shapes::StructureShape.new(name: 'CannotModifyApprovalRuleFromTemplateException')
     CapitalBoolean = Shapes::BooleanShape.new(name: 'CapitalBoolean')
@@ -120,6 +121,7 @@ module Aws::CodeCommit
     ConflictResolutionStrategyTypeEnum = Shapes::StringShape.new(name: 'ConflictResolutionStrategyTypeEnum')
     Conflicts = Shapes::ListShape.new(name: 'Conflicts')
     Content = Shapes::StringShape.new(name: 'Content')
+    Count = Shapes::IntegerShape.new(name: 'Count')
     CreateApprovalRuleTemplateInput = Shapes::StructureShape.new(name: 'CreateApprovalRuleTemplateInput')
     CreateApprovalRuleTemplateOutput = Shapes::StructureShape.new(name: 'CreateApprovalRuleTemplateOutput')
     CreateBranchInput = Shapes::StructureShape.new(name: 'CreateBranchInput')
@@ -203,6 +205,8 @@ module Aws::CodeCommit
     GetBranchOutput = Shapes::StructureShape.new(name: 'GetBranchOutput')
     GetCommentInput = Shapes::StructureShape.new(name: 'GetCommentInput')
     GetCommentOutput = Shapes::StructureShape.new(name: 'GetCommentOutput')
+    GetCommentReactionsInput = Shapes::StructureShape.new(name: 'GetCommentReactionsInput')
+    GetCommentReactionsOutput = Shapes::StructureShape.new(name: 'GetCommentReactionsOutput')
     GetCommentsForComparedCommitInput = Shapes::StructureShape.new(name: 'GetCommentsForComparedCommitInput')
     GetCommentsForComparedCommitOutput = Shapes::StructureShape.new(name: 'GetCommentsForComparedCommitOutput')
     GetCommentsForPullRequestInput = Shapes::StructureShape.new(name: 'GetCommentsForPullRequestInput')
@@ -270,6 +274,8 @@ module Aws::CodeCommit
     InvalidPullRequestIdException = Shapes::StructureShape.new(name: 'InvalidPullRequestIdException')
     InvalidPullRequestStatusException = Shapes::StructureShape.new(name: 'InvalidPullRequestStatusException')
     InvalidPullRequestStatusUpdateException = Shapes::StructureShape.new(name: 'InvalidPullRequestStatusUpdateException')
+    InvalidReactionUserArnException = Shapes::StructureShape.new(name: 'InvalidReactionUserArnException')
+    InvalidReactionValueException = Shapes::StructureShape.new(name: 'InvalidReactionValueException')
     InvalidReferenceNameException = Shapes::StructureShape.new(name: 'InvalidReferenceNameException')
     InvalidRelativeFileVersionEnumException = Shapes::StructureShape.new(name: 'InvalidRelativeFileVersionEnumException')
     InvalidReplacementContentException = Shapes::StructureShape.new(name: 'InvalidReplacementContentException')
@@ -409,6 +415,7 @@ module Aws::CodeCommit
     PullRequestStatusRequiredException = Shapes::StructureShape.new(name: 'PullRequestStatusRequiredException')
     PullRequestTarget = Shapes::StructureShape.new(name: 'PullRequestTarget')
     PullRequestTargetList = Shapes::ListShape.new(name: 'PullRequestTargetList')
+    PutCommentReactionInput = Shapes::StructureShape.new(name: 'PutCommentReactionInput')
     PutFileEntries = Shapes::ListShape.new(name: 'PutFileEntries')
     PutFileEntry = Shapes::StructureShape.new(name: 'PutFileEntry')
     PutFileEntryConflictException = Shapes::StructureShape.new(name: 'PutFileEntryConflictException')
@@ -416,6 +423,17 @@ module Aws::CodeCommit
     PutFileOutput = Shapes::StructureShape.new(name: 'PutFileOutput')
     PutRepositoryTriggersInput = Shapes::StructureShape.new(name: 'PutRepositoryTriggersInput')
     PutRepositoryTriggersOutput = Shapes::StructureShape.new(name: 'PutRepositoryTriggersOutput')
+    ReactionCountsMap = Shapes::MapShape.new(name: 'ReactionCountsMap')
+    ReactionEmoji = Shapes::StringShape.new(name: 'ReactionEmoji')
+    ReactionForComment = Shapes::StructureShape.new(name: 'ReactionForComment')
+    ReactionLimitExceededException = Shapes::StructureShape.new(name: 'ReactionLimitExceededException')
+    ReactionShortCode = Shapes::StringShape.new(name: 'ReactionShortCode')
+    ReactionUnicode = Shapes::StringShape.new(name: 'ReactionUnicode')
+    ReactionUsersList = Shapes::ListShape.new(name: 'ReactionUsersList')
+    ReactionValue = Shapes::StringShape.new(name: 'ReactionValue')
+    ReactionValueFormats = Shapes::StructureShape.new(name: 'ReactionValueFormats')
+    ReactionValueRequiredException = Shapes::StructureShape.new(name: 'ReactionValueRequiredException')
+    ReactionsForCommentList = Shapes::ListShape.new(name: 'ReactionsForCommentList')
     ReferenceDoesNotExistException = Shapes::StructureShape.new(name: 'ReferenceDoesNotExistException')
     ReferenceName = Shapes::StringShape.new(name: 'ReferenceName')
     ReferenceNameRequiredException = Shapes::StructureShape.new(name: 'ReferenceNameRequiredException')
@@ -698,6 +716,8 @@ module Aws::CodeCommit
 
     BranchNameRequiredException.struct_class = Types::BranchNameRequiredException
 
+    CallerReactions.member = Shapes::ShapeRef.new(shape: ReactionValue)
+
     CannotDeleteApprovalRuleFromTemplateException.struct_class = Types::CannotDeleteApprovalRuleFromTemplateException
 
     CannotModifyApprovalRuleFromTemplateException.struct_class = Types::CannotModifyApprovalRuleFromTemplateException
@@ -712,6 +732,8 @@ module Aws::CodeCommit
     Comment.add_member(:author_arn, Shapes::ShapeRef.new(shape: Arn, location_name: "authorArn"))
     Comment.add_member(:deleted, Shapes::ShapeRef.new(shape: IsCommentDeleted, location_name: "deleted"))
     Comment.add_member(:client_request_token, Shapes::ShapeRef.new(shape: ClientRequestToken, location_name: "clientRequestToken"))
+    Comment.add_member(:caller_reactions, Shapes::ShapeRef.new(shape: CallerReactions, location_name: "callerReactions"))
+    Comment.add_member(:reaction_counts, Shapes::ShapeRef.new(shape: ReactionCountsMap, location_name: "reactionCounts"))
     Comment.struct_class = Types::Comment
 
     CommentContentRequiredException.struct_class = Types::CommentContentRequiredException
@@ -1082,6 +1104,16 @@ module Aws::CodeCommit
     GetCommentOutput.add_member(:comment, Shapes::ShapeRef.new(shape: Comment, location_name: "comment"))
     GetCommentOutput.struct_class = Types::GetCommentOutput
 
+    GetCommentReactionsInput.add_member(:comment_id, Shapes::ShapeRef.new(shape: CommentId, required: true, location_name: "commentId"))
+    GetCommentReactionsInput.add_member(:reaction_user_arn, Shapes::ShapeRef.new(shape: Arn, location_name: "reactionUserArn"))
+    GetCommentReactionsInput.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
+    GetCommentReactionsInput.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location_name: "maxResults"))
+    GetCommentReactionsInput.struct_class = Types::GetCommentReactionsInput
+
+    GetCommentReactionsOutput.add_member(:reactions_for_comment, Shapes::ShapeRef.new(shape: ReactionsForCommentList, required: true, location_name: "reactionsForComment"))
+    GetCommentReactionsOutput.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
+    GetCommentReactionsOutput.struct_class = Types::GetCommentReactionsOutput
+
     GetCommentsForComparedCommitInput.add_member(:repository_name, Shapes::ShapeRef.new(shape: RepositoryName, required: true, location_name: "repositoryName"))
     GetCommentsForComparedCommitInput.add_member(:before_commit_id, Shapes::ShapeRef.new(shape: CommitId, location_name: "beforeCommitId"))
     GetCommentsForComparedCommitInput.add_member(:after_commit_id, Shapes::ShapeRef.new(shape: CommitId, required: true, location_name: "afterCommitId"))
@@ -1305,6 +1337,10 @@ module Aws::CodeCommit
     InvalidPullRequestStatusException.struct_class = Types::InvalidPullRequestStatusException
 
     InvalidPullRequestStatusUpdateException.struct_class = Types::InvalidPullRequestStatusUpdateException
+
+    InvalidReactionUserArnException.struct_class = Types::InvalidReactionUserArnException
+
+    InvalidReactionValueException.struct_class = Types::InvalidReactionValueException
 
     InvalidReferenceNameException.struct_class = Types::InvalidReferenceNameException
 
@@ -1716,6 +1752,10 @@ module Aws::CodeCommit
 
     PullRequestTargetList.member = Shapes::ShapeRef.new(shape: PullRequestTarget)
 
+    PutCommentReactionInput.add_member(:comment_id, Shapes::ShapeRef.new(shape: CommentId, required: true, location_name: "commentId"))
+    PutCommentReactionInput.add_member(:reaction_value, Shapes::ShapeRef.new(shape: ReactionValue, required: true, location_name: "reactionValue"))
+    PutCommentReactionInput.struct_class = Types::PutCommentReactionInput
+
     PutFileEntries.member = Shapes::ShapeRef.new(shape: PutFileEntry)
 
     PutFileEntry.add_member(:file_path, Shapes::ShapeRef.new(shape: Path, required: true, location_name: "filePath"))
@@ -1748,6 +1788,27 @@ module Aws::CodeCommit
 
     PutRepositoryTriggersOutput.add_member(:configuration_id, Shapes::ShapeRef.new(shape: RepositoryTriggersConfigurationId, location_name: "configurationId"))
     PutRepositoryTriggersOutput.struct_class = Types::PutRepositoryTriggersOutput
+
+    ReactionCountsMap.key = Shapes::ShapeRef.new(shape: ReactionValue)
+    ReactionCountsMap.value = Shapes::ShapeRef.new(shape: Count)
+
+    ReactionForComment.add_member(:reaction, Shapes::ShapeRef.new(shape: ReactionValueFormats, location_name: "reaction"))
+    ReactionForComment.add_member(:reaction_users, Shapes::ShapeRef.new(shape: ReactionUsersList, location_name: "reactionUsers"))
+    ReactionForComment.add_member(:reactions_from_deleted_users_count, Shapes::ShapeRef.new(shape: Count, location_name: "reactionsFromDeletedUsersCount"))
+    ReactionForComment.struct_class = Types::ReactionForComment
+
+    ReactionLimitExceededException.struct_class = Types::ReactionLimitExceededException
+
+    ReactionUsersList.member = Shapes::ShapeRef.new(shape: Arn)
+
+    ReactionValueFormats.add_member(:emoji, Shapes::ShapeRef.new(shape: ReactionEmoji, location_name: "emoji"))
+    ReactionValueFormats.add_member(:short_code, Shapes::ShapeRef.new(shape: ReactionShortCode, location_name: "shortCode"))
+    ReactionValueFormats.add_member(:unicode, Shapes::ShapeRef.new(shape: ReactionUnicode, location_name: "unicode"))
+    ReactionValueFormats.struct_class = Types::ReactionValueFormats
+
+    ReactionValueRequiredException.struct_class = Types::ReactionValueRequiredException
+
+    ReactionsForCommentList.member = Shapes::ShapeRef.new(shape: ReactionForComment)
 
     ReferenceDoesNotExistException.struct_class = Types::ReferenceDoesNotExistException
 
@@ -2609,9 +2670,35 @@ module Aws::CodeCommit
         o.input = Shapes::ShapeRef.new(shape: GetCommentInput)
         o.output = Shapes::ShapeRef.new(shape: GetCommentOutput)
         o.errors << Shapes::ShapeRef.new(shape: CommentDoesNotExistException)
+        o.errors << Shapes::ShapeRef.new(shape: CommentDeletedException)
         o.errors << Shapes::ShapeRef.new(shape: CommentIdRequiredException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidCommentIdException)
+        o.errors << Shapes::ShapeRef.new(shape: EncryptionIntegrityChecksFailedException)
+        o.errors << Shapes::ShapeRef.new(shape: EncryptionKeyAccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: EncryptionKeyDisabledException)
+        o.errors << Shapes::ShapeRef.new(shape: EncryptionKeyNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: EncryptionKeyUnavailableException)
+      end)
+
+      api.add_operation(:get_comment_reactions, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetCommentReactions"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: GetCommentReactionsInput)
+        o.output = Shapes::ShapeRef.new(shape: GetCommentReactionsOutput)
+        o.errors << Shapes::ShapeRef.new(shape: CommentDoesNotExistException)
+        o.errors << Shapes::ShapeRef.new(shape: CommentIdRequiredException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidCommentIdException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidReactionUserArnException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidMaxResultsException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidContinuationTokenException)
         o.errors << Shapes::ShapeRef.new(shape: CommentDeletedException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
       end)
 
       api.add_operation(:get_comments_for_compared_commit, Seahorse::Model::Operation.new.tap do |o|
@@ -3353,15 +3440,16 @@ module Aws::CodeCommit
         o.errors << Shapes::ShapeRef.new(shape: InvalidFilePositionException)
         o.errors << Shapes::ShapeRef.new(shape: CommitIdRequiredException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidCommitIdException)
+        o.errors << Shapes::ShapeRef.new(shape: BeforeCommitIdAndAfterCommitIdAreSameException)
         o.errors << Shapes::ShapeRef.new(shape: EncryptionIntegrityChecksFailedException)
         o.errors << Shapes::ShapeRef.new(shape: EncryptionKeyAccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: EncryptionKeyDisabledException)
         o.errors << Shapes::ShapeRef.new(shape: EncryptionKeyNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: EncryptionKeyUnavailableException)
-        o.errors << Shapes::ShapeRef.new(shape: BeforeCommitIdAndAfterCommitIdAreSameException)
         o.errors << Shapes::ShapeRef.new(shape: CommitDoesNotExistException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidPathException)
         o.errors << Shapes::ShapeRef.new(shape: PathDoesNotExistException)
+        o.errors << Shapes::ShapeRef.new(shape: PathRequiredException)
       end)
 
       api.add_operation(:post_comment_for_pull_request, Seahorse::Model::Operation.new.tap do |o|
@@ -3388,6 +3476,7 @@ module Aws::CodeCommit
         o.errors << Shapes::ShapeRef.new(shape: InvalidFilePositionException)
         o.errors << Shapes::ShapeRef.new(shape: CommitIdRequiredException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidCommitIdException)
+        o.errors << Shapes::ShapeRef.new(shape: BeforeCommitIdAndAfterCommitIdAreSameException)
         o.errors << Shapes::ShapeRef.new(shape: EncryptionIntegrityChecksFailedException)
         o.errors << Shapes::ShapeRef.new(shape: EncryptionKeyAccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: EncryptionKeyDisabledException)
@@ -3397,7 +3486,6 @@ module Aws::CodeCommit
         o.errors << Shapes::ShapeRef.new(shape: InvalidPathException)
         o.errors << Shapes::ShapeRef.new(shape: PathDoesNotExistException)
         o.errors << Shapes::ShapeRef.new(shape: PathRequiredException)
-        o.errors << Shapes::ShapeRef.new(shape: BeforeCommitIdAndAfterCommitIdAreSameException)
       end)
 
       api.add_operation(:post_comment_reply, Seahorse::Model::Operation.new.tap do |o|
@@ -3414,6 +3502,21 @@ module Aws::CodeCommit
         o.errors << Shapes::ShapeRef.new(shape: CommentDoesNotExistException)
         o.errors << Shapes::ShapeRef.new(shape: CommentIdRequiredException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidCommentIdException)
+      end)
+
+      api.add_operation(:put_comment_reaction, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "PutCommentReaction"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: PutCommentReactionInput)
+        o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
+        o.errors << Shapes::ShapeRef.new(shape: CommentDoesNotExistException)
+        o.errors << Shapes::ShapeRef.new(shape: CommentIdRequiredException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidCommentIdException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidReactionValueException)
+        o.errors << Shapes::ShapeRef.new(shape: ReactionValueRequiredException)
+        o.errors << Shapes::ShapeRef.new(shape: ReactionLimitExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: CommentDeletedException)
       end)
 
       api.add_operation(:put_file, Seahorse::Model::Operation.new.tap do |o|

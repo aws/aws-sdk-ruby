@@ -33,6 +33,7 @@ module Aws::CodeCommit
     class Approval < Struct.new(
       :user_arn,
       :approval_state)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -83,6 +84,7 @@ module Aws::CodeCommit
       :creation_date,
       :last_modified_user,
       :origin_approval_rule_template)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -119,6 +121,7 @@ module Aws::CodeCommit
       :approval_rule_name,
       :approval_rule_id,
       :approval_rule_content)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -152,6 +155,7 @@ module Aws::CodeCommit
     class ApprovalRuleOverriddenEventMetadata < Struct.new(
       :revision_id,
       :override_status)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -204,6 +208,7 @@ module Aws::CodeCommit
       :last_modified_date,
       :creation_date,
       :last_modified_user)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -261,6 +266,7 @@ module Aws::CodeCommit
     class ApprovalStateChangedEventMetadata < Struct.new(
       :revision_id,
       :approval_status)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -292,6 +298,7 @@ module Aws::CodeCommit
     class AssociateApprovalRuleTemplateWithRepositoryInput < Struct.new(
       :approval_rule_template_name,
       :repository_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -325,6 +332,7 @@ module Aws::CodeCommit
       :repository_name,
       :error_code,
       :error_message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -356,6 +364,7 @@ module Aws::CodeCommit
     class BatchAssociateApprovalRuleTemplateWithRepositoriesInput < Struct.new(
       :approval_rule_template_name,
       :repository_names)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -374,6 +383,7 @@ module Aws::CodeCommit
     class BatchAssociateApprovalRuleTemplateWithRepositoriesOutput < Struct.new(
       :associated_repository_names,
       :errors)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -398,6 +408,7 @@ module Aws::CodeCommit
       :file_path,
       :exception_name,
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -482,6 +493,7 @@ module Aws::CodeCommit
       :conflict_detail_level,
       :conflict_resolution_strategy,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -523,6 +535,7 @@ module Aws::CodeCommit
       :destination_commit_id,
       :source_commit_id,
       :base_commit_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -550,6 +563,7 @@ module Aws::CodeCommit
       :repository_name,
       :error_code,
       :error_message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -581,6 +595,7 @@ module Aws::CodeCommit
     class BatchDisassociateApprovalRuleTemplateFromRepositoriesInput < Struct.new(
       :approval_rule_template_name,
       :repository_names)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -599,6 +614,7 @@ module Aws::CodeCommit
     class BatchDisassociateApprovalRuleTemplateFromRepositoriesOutput < Struct.new(
       :disassociated_repository_names,
       :errors)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -625,6 +641,7 @@ module Aws::CodeCommit
       :commit_id,
       :error_code,
       :error_message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -654,6 +671,7 @@ module Aws::CodeCommit
     class BatchGetCommitsInput < Struct.new(
       :commit_ids,
       :repository_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -674,6 +692,7 @@ module Aws::CodeCommit
     class BatchGetCommitsOutput < Struct.new(
       :commits,
       :errors)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -699,6 +718,7 @@ module Aws::CodeCommit
     #
     class BatchGetRepositoriesInput < Struct.new(
       :repository_names)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -719,6 +739,7 @@ module Aws::CodeCommit
     class BatchGetRepositoriesOutput < Struct.new(
       :repositories,
       :repositories_not_found)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -771,6 +792,7 @@ module Aws::CodeCommit
       :blob_id,
       :path,
       :mode)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -795,10 +817,13 @@ module Aws::CodeCommit
     class BranchInfo < Struct.new(
       :branch_name,
       :commit_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
-    # The specified branch name already exists.
+    # Cannot create the branch with the specified name because the commit
+    # conflicts with an existing branch with the same name. Branch names
+    # must be unique.
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/BranchNameExistsException AWS API Documentation
     #
@@ -884,6 +909,16 @@ module Aws::CodeCommit
     #   request that used that token.
     #   @return [String]
     #
+    # @!attribute [rw] caller_reactions
+    #   The emoji reactions to a comment, if any, submitted by the user
+    #   whose credentials are associated with the call to the API.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] reaction_counts
+    #   A string to integer map that represents the number of individual
+    #   users who have responded to a comment with the specified reactions.
+    #   @return [Hash<String,Integer>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/Comment AWS API Documentation
     #
     class Comment < Struct.new(
@@ -894,7 +929,10 @@ module Aws::CodeCommit
       :last_modified_date,
       :author_arn,
       :deleted,
-      :client_request_token)
+      :client_request_token,
+      :caller_reactions,
+      :reaction_counts)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -986,6 +1024,7 @@ module Aws::CodeCommit
       :after_blob_id,
       :location,
       :comments)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1044,6 +1083,7 @@ module Aws::CodeCommit
       :after_blob_id,
       :location,
       :comments)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1102,6 +1142,7 @@ module Aws::CodeCommit
       :author,
       :committer,
       :additional_data)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1175,6 +1216,7 @@ module Aws::CodeCommit
     class Conflict < Struct.new(
       :conflict_metadata,
       :merge_hunks)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1242,6 +1284,7 @@ module Aws::CodeCommit
       :file_mode_conflict,
       :object_type_conflict,
       :merge_operations)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1292,6 +1335,7 @@ module Aws::CodeCommit
       :replace_contents,
       :delete_files,
       :set_file_modes)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1351,7 +1395,7 @@ module Aws::CodeCommit
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/iam/latest/UserGuide/reference_identifiers.html
+    #   [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_identifiers.html
     #   @return [String]
     #
     # @!attribute [rw] approval_rule_template_description
@@ -1366,6 +1410,7 @@ module Aws::CodeCommit
       :approval_rule_template_name,
       :approval_rule_template_content,
       :approval_rule_template_description)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1377,6 +1422,7 @@ module Aws::CodeCommit
     #
     class CreateApprovalRuleTemplateOutput < Struct.new(
       :approval_rule_template)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1410,6 +1456,7 @@ module Aws::CodeCommit
       :repository_name,
       :branch_name,
       :commit_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1508,6 +1555,7 @@ module Aws::CodeCommit
       :put_files,
       :delete_files,
       :set_file_modes)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1541,6 +1589,7 @@ module Aws::CodeCommit
       :files_added,
       :files_updated,
       :files_deleted)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1602,7 +1651,7 @@ module Aws::CodeCommit
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/iam/latest/UserGuide/reference_identifiers.html
+    #   [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_identifiers.html
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/CreatePullRequestApprovalRuleInput AWS API Documentation
@@ -1611,6 +1660,7 @@ module Aws::CodeCommit
       :pull_request_id,
       :approval_rule_name,
       :approval_rule_content)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1622,6 +1672,7 @@ module Aws::CodeCommit
     #
     class CreatePullRequestApprovalRuleOutput < Struct.new(
       :approval_rule)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1680,6 +1731,7 @@ module Aws::CodeCommit
       :description,
       :targets,
       :client_request_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1691,6 +1743,7 @@ module Aws::CodeCommit
     #
     class CreatePullRequestOutput < Struct.new(
       :pull_request)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1747,6 +1800,7 @@ module Aws::CodeCommit
       :repository_name,
       :repository_description,
       :tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1760,6 +1814,7 @@ module Aws::CodeCommit
     #
     class CreateRepositoryOutput < Struct.new(
       :repository_metadata)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1874,6 +1929,7 @@ module Aws::CodeCommit
       :commit_message,
       :keep_empty_folders,
       :conflict_resolution)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1891,6 +1947,7 @@ module Aws::CodeCommit
     class CreateUnreferencedMergeCommitOutput < Struct.new(
       :commit_id,
       :tree_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1917,6 +1974,7 @@ module Aws::CodeCommit
     #
     class DeleteApprovalRuleTemplateInput < Struct.new(
       :approval_rule_template_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1930,6 +1988,7 @@ module Aws::CodeCommit
     #
     class DeleteApprovalRuleTemplateOutput < Struct.new(
       :approval_rule_template_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1956,6 +2015,7 @@ module Aws::CodeCommit
     class DeleteBranchInput < Struct.new(
       :repository_name,
       :branch_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1970,6 +2030,7 @@ module Aws::CodeCommit
     #
     class DeleteBranchOutput < Struct.new(
       :deleted_branch)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1989,6 +2050,7 @@ module Aws::CodeCommit
     #
     class DeleteCommentContentInput < Struct.new(
       :comment_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2000,6 +2062,7 @@ module Aws::CodeCommit
     #
     class DeleteCommentContentOutput < Struct.new(
       :comment)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2021,6 +2084,7 @@ module Aws::CodeCommit
     #
     class DeleteFileEntry < Struct.new(
       :file_path)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2099,6 +2163,7 @@ module Aws::CodeCommit
       :commit_message,
       :name,
       :email)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2128,6 +2193,7 @@ module Aws::CodeCommit
       :blob_id,
       :tree_id,
       :file_path)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2153,6 +2219,7 @@ module Aws::CodeCommit
     class DeletePullRequestApprovalRuleInput < Struct.new(
       :pull_request_id,
       :approval_rule_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2169,6 +2236,7 @@ module Aws::CodeCommit
     #
     class DeletePullRequestApprovalRuleOutput < Struct.new(
       :approval_rule_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2189,6 +2257,7 @@ module Aws::CodeCommit
     #
     class DeleteRepositoryInput < Struct.new(
       :repository_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2202,6 +2271,7 @@ module Aws::CodeCommit
     #
     class DeleteRepositoryOutput < Struct.new(
       :repository_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2279,6 +2349,7 @@ module Aws::CodeCommit
       :conflict_detail_level,
       :conflict_resolution_strategy,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2318,6 +2389,7 @@ module Aws::CodeCommit
       :destination_commit_id,
       :source_commit_id,
       :base_commit_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2367,6 +2439,7 @@ module Aws::CodeCommit
       :actor_arn,
       :next_token,
       :max_results)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2384,6 +2457,7 @@ module Aws::CodeCommit
     class DescribePullRequestEventsOutput < Struct.new(
       :pull_request_events,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2410,6 +2484,7 @@ module Aws::CodeCommit
       :before_blob,
       :after_blob,
       :change_type)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2445,6 +2520,7 @@ module Aws::CodeCommit
     class DisassociateApprovalRuleTemplateFromRepositoryInput < Struct.new(
       :approval_rule_template_name,
       :repository_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2500,6 +2576,7 @@ module Aws::CodeCommit
     class EvaluatePullRequestApprovalRulesInput < Struct.new(
       :pull_request_id,
       :revision_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2515,6 +2592,7 @@ module Aws::CodeCommit
     #
     class EvaluatePullRequestApprovalRulesOutput < Struct.new(
       :evaluation)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2546,6 +2624,7 @@ module Aws::CodeCommit
       :overridden,
       :approval_rules_satisfied,
       :approval_rules_not_satisfied)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2576,6 +2655,7 @@ module Aws::CodeCommit
       :absolute_path,
       :relative_path,
       :file_mode)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2639,6 +2719,7 @@ module Aws::CodeCommit
       :absolute_path,
       :blob_id,
       :file_mode)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2670,6 +2751,7 @@ module Aws::CodeCommit
       :source,
       :destination,
       :base)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2710,6 +2792,7 @@ module Aws::CodeCommit
       :source,
       :destination,
       :base)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2747,6 +2830,7 @@ module Aws::CodeCommit
       :tree_id,
       :absolute_path,
       :relative_path)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2782,6 +2866,7 @@ module Aws::CodeCommit
     #
     class GetApprovalRuleTemplateInput < Struct.new(
       :approval_rule_template_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2793,6 +2878,7 @@ module Aws::CodeCommit
     #
     class GetApprovalRuleTemplateOutput < Struct.new(
       :approval_rule_template)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2819,6 +2905,7 @@ module Aws::CodeCommit
     class GetBlobInput < Struct.new(
       :repository_name,
       :blob_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2832,6 +2919,7 @@ module Aws::CodeCommit
     #
     class GetBlobOutput < Struct.new(
       :content)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2859,6 +2947,7 @@ module Aws::CodeCommit
     class GetBranchInput < Struct.new(
       :repository_name,
       :branch_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2872,6 +2961,7 @@ module Aws::CodeCommit
     #
     class GetBranchOutput < Struct.new(
       :branch)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2891,6 +2981,7 @@ module Aws::CodeCommit
     #
     class GetCommentInput < Struct.new(
       :comment_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2902,6 +2993,67 @@ module Aws::CodeCommit
     #
     class GetCommentOutput < Struct.new(
       :comment)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass GetCommentReactionsInput
+    #   data as a hash:
+    #
+    #       {
+    #         comment_id: "CommentId", # required
+    #         reaction_user_arn: "Arn",
+    #         next_token: "NextToken",
+    #         max_results: 1,
+    #       }
+    #
+    # @!attribute [rw] comment_id
+    #   The ID of the comment for which you want to get reactions
+    #   information.
+    #   @return [String]
+    #
+    # @!attribute [rw] reaction_user_arn
+    #   Optional. The Amazon Resource Name (ARN) of the user or identity for
+    #   which you want to get reaction information.
+    #   @return [String]
+    #
+    # @!attribute [rw] next_token
+    #   An enumeration token that, when provided in a request, returns the
+    #   next batch of the results.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   A non-zero, non-negative integer used to limit the number of
+    #   returned results. The default is the same as the allowed maximum,
+    #   1,000.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/GetCommentReactionsInput AWS API Documentation
+    #
+    class GetCommentReactionsInput < Struct.new(
+      :comment_id,
+      :reaction_user_arn,
+      :next_token,
+      :max_results)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] reactions_for_comment
+    #   An array of reactions to the specified comment.
+    #   @return [Array<Types::ReactionForComment>]
+    #
+    # @!attribute [rw] next_token
+    #   An enumeration token that can be used in a request to return the
+    #   next batch of the results.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/GetCommentReactionsOutput AWS API Documentation
+    #
+    class GetCommentReactionsOutput < Struct.new(
+      :reactions_for_comment,
+      :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2949,6 +3101,7 @@ module Aws::CodeCommit
       :after_commit_id,
       :next_token,
       :max_results)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2966,6 +3119,7 @@ module Aws::CodeCommit
     class GetCommentsForComparedCommitOutput < Struct.new(
       :comments_for_compared_commit_data,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3020,6 +3174,7 @@ module Aws::CodeCommit
       :after_commit_id,
       :next_token,
       :max_results)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3037,6 +3192,7 @@ module Aws::CodeCommit
     class GetCommentsForPullRequestOutput < Struct.new(
       :comments_for_pull_request_data,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3063,6 +3219,7 @@ module Aws::CodeCommit
     class GetCommitInput < Struct.new(
       :repository_name,
       :commit_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3077,6 +3234,7 @@ module Aws::CodeCommit
     #
     class GetCommitOutput < Struct.new(
       :commit)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3144,6 +3302,7 @@ module Aws::CodeCommit
       :after_path,
       :max_results,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3163,6 +3322,7 @@ module Aws::CodeCommit
     class GetDifferencesOutput < Struct.new(
       :differences,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3198,6 +3358,7 @@ module Aws::CodeCommit
       :repository_name,
       :commit_specifier,
       :file_path)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3244,6 +3405,7 @@ module Aws::CodeCommit
       :file_mode,
       :file_size,
       :file_content)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3281,6 +3443,7 @@ module Aws::CodeCommit
       :repository_name,
       :commit_specifier,
       :folder_path)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3325,6 +3488,7 @@ module Aws::CodeCommit
       :files,
       :symbolic_links,
       :sub_modules)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3377,6 +3541,7 @@ module Aws::CodeCommit
       :destination_commit_specifier,
       :conflict_detail_level,
       :conflict_resolution_strategy)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3407,6 +3572,7 @@ module Aws::CodeCommit
       :destination_commit_id,
       :base_commit_id,
       :merged_commit_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3477,6 +3643,7 @@ module Aws::CodeCommit
       :max_conflict_files,
       :conflict_resolution_strategy,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3518,6 +3685,7 @@ module Aws::CodeCommit
       :base_commit_id,
       :conflict_metadata_list,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3570,6 +3738,7 @@ module Aws::CodeCommit
       :destination_commit_specifier,
       :conflict_detail_level,
       :conflict_resolution_strategy)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3598,6 +3767,7 @@ module Aws::CodeCommit
       :source_commit_id,
       :destination_commit_id,
       :base_commit_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3622,6 +3792,7 @@ module Aws::CodeCommit
     class GetPullRequestApprovalStatesInput < Struct.new(
       :pull_request_id,
       :revision_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3633,6 +3804,7 @@ module Aws::CodeCommit
     #
     class GetPullRequestApprovalStatesOutput < Struct.new(
       :approvals)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3652,6 +3824,7 @@ module Aws::CodeCommit
     #
     class GetPullRequestInput < Struct.new(
       :pull_request_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3663,6 +3836,7 @@ module Aws::CodeCommit
     #
     class GetPullRequestOutput < Struct.new(
       :pull_request)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3689,6 +3863,7 @@ module Aws::CodeCommit
     class GetPullRequestOverrideStateInput < Struct.new(
       :pull_request_id,
       :revision_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3708,6 +3883,7 @@ module Aws::CodeCommit
     class GetPullRequestOverrideStateOutput < Struct.new(
       :overridden,
       :overrider)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3728,6 +3904,7 @@ module Aws::CodeCommit
     #
     class GetRepositoryInput < Struct.new(
       :repository_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3741,6 +3918,7 @@ module Aws::CodeCommit
     #
     class GetRepositoryOutput < Struct.new(
       :repository_metadata)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3761,6 +3939,7 @@ module Aws::CodeCommit
     #
     class GetRepositoryTriggersInput < Struct.new(
       :repository_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3779,6 +3958,7 @@ module Aws::CodeCommit
     class GetRepositoryTriggersOutput < Struct.new(
       :configuration_id,
       :triggers)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4049,6 +4229,23 @@ module Aws::CodeCommit
     #
     class InvalidPullRequestStatusUpdateException < Aws::EmptyStructure; end
 
+    # The Amazon Resource Name (ARN) of the user or identity is not valid.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/InvalidReactionUserArnException AWS API Documentation
+    #
+    class InvalidReactionUserArnException < Aws::EmptyStructure; end
+
+    # The value of the reaction is not valid. For more information, see the
+    # [AWS CodeCommit User Guide][1].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/codecommit/latest/userguide/welcome.html
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/InvalidReactionValueException AWS API Documentation
+    #
+    class InvalidReactionValueException < Aws::EmptyStructure; end
+
     # The specified reference name format is not valid. Reference names must
     # conform to the Git references format (for example, refs/heads/master).
     # For more information, see [Git Internals - Git References][1] or
@@ -4254,6 +4451,7 @@ module Aws::CodeCommit
       :source,
       :destination,
       :base)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4280,6 +4478,7 @@ module Aws::CodeCommit
     class ListApprovalRuleTemplatesInput < Struct.new(
       :next_token,
       :max_results)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4298,6 +4497,7 @@ module Aws::CodeCommit
     class ListApprovalRuleTemplatesOutput < Struct.new(
       :approval_rule_template_names,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4331,6 +4531,7 @@ module Aws::CodeCommit
       :repository_name,
       :next_token,
       :max_results)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4349,6 +4550,7 @@ module Aws::CodeCommit
     class ListAssociatedApprovalRuleTemplatesForRepositoryOutput < Struct.new(
       :approval_rule_template_names,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4375,6 +4577,7 @@ module Aws::CodeCommit
     class ListBranchesInput < Struct.new(
       :repository_name,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4393,6 +4596,7 @@ module Aws::CodeCommit
     class ListBranchesOutput < Struct.new(
       :branches,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4440,6 +4644,7 @@ module Aws::CodeCommit
       :pull_request_status,
       :next_token,
       :max_results)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4457,6 +4662,7 @@ module Aws::CodeCommit
     class ListPullRequestsOutput < Struct.new(
       :pull_request_ids,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4490,6 +4696,7 @@ module Aws::CodeCommit
       :approval_rule_template_name,
       :next_token,
       :max_results)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4508,6 +4715,7 @@ module Aws::CodeCommit
     class ListRepositoriesForApprovalRuleTemplateOutput < Struct.new(
       :repository_names,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4545,6 +4753,7 @@ module Aws::CodeCommit
       :next_token,
       :sort_by,
       :order)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4566,6 +4775,7 @@ module Aws::CodeCommit
     class ListRepositoriesOutput < Struct.new(
       :repositories,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4592,6 +4802,7 @@ module Aws::CodeCommit
     class ListTagsForResourceInput < Struct.new(
       :resource_arn,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4610,6 +4821,7 @@ module Aws::CodeCommit
     class ListTagsForResourceOutput < Struct.new(
       :tags,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4645,6 +4857,7 @@ module Aws::CodeCommit
       :file_path,
       :file_position,
       :relative_file_version)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4761,6 +4974,7 @@ module Aws::CodeCommit
       :source_commit_specifier,
       :destination_commit_specifier,
       :target_branch)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4777,6 +4991,7 @@ module Aws::CodeCommit
     class MergeBranchesByFastForwardOutput < Struct.new(
       :commit_id,
       :tree_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4890,6 +5105,7 @@ module Aws::CodeCommit
       :commit_message,
       :keep_empty_folders,
       :conflict_resolution)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4906,6 +5122,7 @@ module Aws::CodeCommit
     class MergeBranchesBySquashOutput < Struct.new(
       :commit_id,
       :tree_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5019,6 +5236,7 @@ module Aws::CodeCommit
       :commit_message,
       :keep_empty_folders,
       :conflict_resolution)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5035,6 +5253,7 @@ module Aws::CodeCommit
     class MergeBranchesByThreeWayOutput < Struct.new(
       :commit_id,
       :tree_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5071,6 +5290,7 @@ module Aws::CodeCommit
       :source,
       :destination,
       :base)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5096,6 +5316,7 @@ module Aws::CodeCommit
       :start_line,
       :end_line,
       :hunk_content)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5125,6 +5346,7 @@ module Aws::CodeCommit
       :merged_by,
       :merge_commit_id,
       :merge_option)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5145,6 +5367,7 @@ module Aws::CodeCommit
     class MergeOperations < Struct.new(
       :source,
       :destination)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5185,6 +5408,7 @@ module Aws::CodeCommit
       :pull_request_id,
       :repository_name,
       :source_commit_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5196,6 +5420,7 @@ module Aws::CodeCommit
     #
     class MergePullRequestByFastForwardOutput < Struct.new(
       :pull_request)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5305,6 +5530,7 @@ module Aws::CodeCommit
       :email,
       :keep_empty_folders,
       :conflict_resolution)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5316,6 +5542,7 @@ module Aws::CodeCommit
     #
     class MergePullRequestBySquashOutput < Struct.new(
       :pull_request)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5425,6 +5652,7 @@ module Aws::CodeCommit
       :email,
       :keep_empty_folders,
       :conflict_resolution)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5436,6 +5664,7 @@ module Aws::CodeCommit
     #
     class MergePullRequestByThreeWayOutput < Struct.new(
       :pull_request)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5503,6 +5732,7 @@ module Aws::CodeCommit
       :source,
       :destination,
       :base)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5522,6 +5752,7 @@ module Aws::CodeCommit
     class OriginApprovalRuleTemplate < Struct.new(
       :approval_rule_template_id,
       :approval_rule_template_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5565,6 +5796,7 @@ module Aws::CodeCommit
       :pull_request_id,
       :revision_id,
       :override_status)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5671,6 +5903,7 @@ module Aws::CodeCommit
       :location,
       :content,
       :client_request_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5718,6 +5951,7 @@ module Aws::CodeCommit
       :after_blob_id,
       :location,
       :comment)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5791,6 +6025,7 @@ module Aws::CodeCommit
       :location,
       :content,
       :client_request_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5843,6 +6078,7 @@ module Aws::CodeCommit
       :after_blob_id,
       :location,
       :comment)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5882,6 +6118,7 @@ module Aws::CodeCommit
       :in_reply_to,
       :client_request_token,
       :content)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5893,6 +6130,7 @@ module Aws::CodeCommit
     #
     class PostCommentReplyOutput < Struct.new(
       :comment)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5968,6 +6206,7 @@ module Aws::CodeCommit
       :client_request_token,
       :revision_id,
       :approval_rules)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6022,6 +6261,7 @@ module Aws::CodeCommit
       :source_commit_id,
       :destination_commit_id,
       :merge_base)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6101,6 +6341,7 @@ module Aws::CodeCommit
       :approval_rule_event_metadata,
       :approval_state_changed_event_metadata,
       :approval_rule_overridden_event_metadata)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6131,6 +6372,7 @@ module Aws::CodeCommit
       :repository_name,
       :destination_reference,
       :merge_metadata)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6162,6 +6404,7 @@ module Aws::CodeCommit
       :before_commit_id,
       :after_commit_id,
       :merge_base)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6175,6 +6418,7 @@ module Aws::CodeCommit
     #
     class PullRequestStatusChangedEventMetadata < Struct.new(
       :pull_request_status)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6233,6 +6477,39 @@ module Aws::CodeCommit
       :source_commit,
       :merge_base,
       :merge_metadata)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass PutCommentReactionInput
+    #   data as a hash:
+    #
+    #       {
+    #         comment_id: "CommentId", # required
+    #         reaction_value: "ReactionValue", # required
+    #       }
+    #
+    # @!attribute [rw] comment_id
+    #   The ID of the comment to which you want to add or update a reaction.
+    #   @return [String]
+    #
+    # @!attribute [rw] reaction_value
+    #   The emoji reaction you want to add or update. To remove a reaction,
+    #   provide a value of blank or null. You can also provide the value of
+    #   none. For information about emoji reaction values supported in AWS
+    #   CodeCommit, see the [AWS CodeCommit User Guide][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/codecommit/latest/userguide/how-to-commit-comment.html#emoji-reaction-table
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/PutCommentReactionInput AWS API Documentation
+    #
+    class PutCommentReactionInput < Struct.new(
+      :comment_id,
+      :reaction_value)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6278,6 +6555,7 @@ module Aws::CodeCommit
       :file_mode,
       :file_content,
       :source_file)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6370,6 +6648,7 @@ module Aws::CodeCommit
       :commit_message,
       :name,
       :email)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6392,6 +6671,7 @@ module Aws::CodeCommit
       :commit_id,
       :blob_id,
       :tree_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6427,6 +6707,7 @@ module Aws::CodeCommit
     class PutRepositoryTriggersInput < Struct.new(
       :repository_name,
       :triggers)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6440,8 +6721,77 @@ module Aws::CodeCommit
     #
     class PutRepositoryTriggersOutput < Struct.new(
       :configuration_id)
+      SENSITIVE = []
       include Aws::Structure
     end
+
+    # Information about the reaction values provided by users on a comment.
+    #
+    # @!attribute [rw] reaction
+    #   The reaction for a specified comment.
+    #   @return [Types::ReactionValueFormats]
+    #
+    # @!attribute [rw] reaction_users
+    #   The Amazon Resource Names (ARNs) of users who have provided
+    #   reactions to the comment.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] reactions_from_deleted_users_count
+    #   A numerical count of users who reacted with the specified emoji
+    #   whose identities have been subsequently deleted from IAM. While
+    #   these IAM users or roles no longer exist, the reactions might still
+    #   appear in total reaction counts.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/ReactionForComment AWS API Documentation
+    #
+    class ReactionForComment < Struct.new(
+      :reaction,
+      :reaction_users,
+      :reactions_from_deleted_users_count)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The number of reactions has been exceeded. Reactions are limited to
+    # one reaction per user for each individual comment ID.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/ReactionLimitExceededException AWS API Documentation
+    #
+    class ReactionLimitExceededException < Aws::EmptyStructure; end
+
+    # Information about the values for reactions to a comment. AWS
+    # CodeCommit supports a limited set of reactions.
+    #
+    # @!attribute [rw] emoji
+    #   The Emoji Version 1.0 graphic of the reaction. These graphics are
+    #   interpreted slightly differently on different operating systems.
+    #   @return [String]
+    #
+    # @!attribute [rw] short_code
+    #   The emoji short code for the reaction. Short codes are interpreted
+    #   slightly differently on different operating systems.
+    #   @return [String]
+    #
+    # @!attribute [rw] unicode
+    #   The Unicode codepoint for the reaction.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/ReactionValueFormats AWS API Documentation
+    #
+    class ReactionValueFormats < Struct.new(
+      :emoji,
+      :short_code,
+      :unicode)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A reaction value is required.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/ReactionValueRequiredException AWS API Documentation
+    #
+    class ReactionValueRequiredException < Aws::EmptyStructure; end
 
     # The specified reference does not exist. You must provide a full commit
     # ID.
@@ -6500,6 +6850,7 @@ module Aws::CodeCommit
       :replacement_type,
       :content,
       :file_mode)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6584,6 +6935,7 @@ module Aws::CodeCommit
       :clone_url_http,
       :clone_url_ssh,
       :arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6608,6 +6960,7 @@ module Aws::CodeCommit
     class RepositoryNameIdPair < Struct.new(
       :repository_name,
       :repository_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6686,6 +7039,7 @@ module Aws::CodeCommit
       :custom_data,
       :branches,
       :events)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6724,6 +7078,7 @@ module Aws::CodeCommit
     class RepositoryTriggerExecutionFailure < Struct.new(
       :trigger,
       :failure_message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6814,6 +7169,7 @@ module Aws::CodeCommit
     class SetFileModeEntry < Struct.new(
       :file_path,
       :file_mode)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6856,6 +7212,7 @@ module Aws::CodeCommit
     class SourceFileSpecifier < Struct.new(
       :file_path,
       :is_move)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6882,6 +7239,7 @@ module Aws::CodeCommit
       :commit_id,
       :absolute_path,
       :relative_path)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6913,6 +7271,7 @@ module Aws::CodeCommit
       :absolute_path,
       :relative_path,
       :file_mode)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6952,6 +7311,7 @@ module Aws::CodeCommit
     class TagResourceInput < Struct.new(
       :resource_arn,
       :tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6992,6 +7352,7 @@ module Aws::CodeCommit
       :repository_name,
       :source_reference,
       :destination_reference)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -7040,6 +7401,7 @@ module Aws::CodeCommit
     class TestRepositoryTriggersInput < Struct.new(
       :repository_name,
       :triggers)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -7061,6 +7423,7 @@ module Aws::CodeCommit
     class TestRepositoryTriggersOutput < Struct.new(
       :successful_executions,
       :failed_executions)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -7116,6 +7479,7 @@ module Aws::CodeCommit
     class UntagResourceInput < Struct.new(
       :resource_arn,
       :tag_keys)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -7149,6 +7513,7 @@ module Aws::CodeCommit
       :approval_rule_template_name,
       :new_rule_content,
       :existing_rule_content_sha_256)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -7160,6 +7525,7 @@ module Aws::CodeCommit
     #
     class UpdateApprovalRuleTemplateContentOutput < Struct.new(
       :approval_rule_template)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -7185,6 +7551,7 @@ module Aws::CodeCommit
     class UpdateApprovalRuleTemplateDescriptionInput < Struct.new(
       :approval_rule_template_name,
       :approval_rule_template_description)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -7196,6 +7563,7 @@ module Aws::CodeCommit
     #
     class UpdateApprovalRuleTemplateDescriptionOutput < Struct.new(
       :approval_rule_template)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -7220,6 +7588,7 @@ module Aws::CodeCommit
     class UpdateApprovalRuleTemplateNameInput < Struct.new(
       :old_approval_rule_template_name,
       :new_approval_rule_template_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -7231,6 +7600,7 @@ module Aws::CodeCommit
     #
     class UpdateApprovalRuleTemplateNameOutput < Struct.new(
       :approval_rule_template)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -7257,6 +7627,7 @@ module Aws::CodeCommit
     class UpdateCommentInput < Struct.new(
       :comment_id,
       :content)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -7268,6 +7639,7 @@ module Aws::CodeCommit
     #
     class UpdateCommentOutput < Struct.new(
       :comment)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -7294,6 +7666,7 @@ module Aws::CodeCommit
     class UpdateDefaultBranchInput < Struct.new(
       :repository_name,
       :default_branch_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -7357,7 +7730,7 @@ module Aws::CodeCommit
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/iam/latest/UserGuide/reference_identifiers.html
+    #   [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_identifiers.html
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/UpdatePullRequestApprovalRuleContentInput AWS API Documentation
@@ -7367,6 +7740,7 @@ module Aws::CodeCommit
       :approval_rule_name,
       :existing_rule_content_sha_256,
       :new_rule_content)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -7378,6 +7752,7 @@ module Aws::CodeCommit
     #
     class UpdatePullRequestApprovalRuleContentOutput < Struct.new(
       :approval_rule)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -7408,6 +7783,7 @@ module Aws::CodeCommit
       :pull_request_id,
       :revision_id,
       :approval_state)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -7434,6 +7810,7 @@ module Aws::CodeCommit
     class UpdatePullRequestDescriptionInput < Struct.new(
       :pull_request_id,
       :description)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -7445,6 +7822,7 @@ module Aws::CodeCommit
     #
     class UpdatePullRequestDescriptionOutput < Struct.new(
       :pull_request)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -7472,6 +7850,7 @@ module Aws::CodeCommit
     class UpdatePullRequestStatusInput < Struct.new(
       :pull_request_id,
       :pull_request_status)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -7483,6 +7862,7 @@ module Aws::CodeCommit
     #
     class UpdatePullRequestStatusOutput < Struct.new(
       :pull_request)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -7509,6 +7889,7 @@ module Aws::CodeCommit
     class UpdatePullRequestTitleInput < Struct.new(
       :pull_request_id,
       :title)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -7520,6 +7901,7 @@ module Aws::CodeCommit
     #
     class UpdatePullRequestTitleOutput < Struct.new(
       :pull_request)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -7548,6 +7930,7 @@ module Aws::CodeCommit
     class UpdateRepositoryDescriptionInput < Struct.new(
       :repository_name,
       :repository_description)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -7574,6 +7957,7 @@ module Aws::CodeCommit
     class UpdateRepositoryNameInput < Struct.new(
       :old_name,
       :new_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -7599,6 +7983,7 @@ module Aws::CodeCommit
       :name,
       :email,
       :date)
+      SENSITIVE = []
       include Aws::Structure
     end
 

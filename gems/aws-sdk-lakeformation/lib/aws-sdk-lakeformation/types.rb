@@ -20,6 +20,7 @@ module Aws::LakeFormation
     #
     class AlreadyExistsException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -79,6 +80,7 @@ module Aws::LakeFormation
     class BatchGrantPermissionsRequest < Struct.new(
       :catalog_id,
       :entries)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -90,6 +92,7 @@ module Aws::LakeFormation
     #
     class BatchGrantPermissionsResponse < Struct.new(
       :failures)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -109,6 +112,7 @@ module Aws::LakeFormation
     class BatchPermissionsFailureEntry < Struct.new(
       :request_entry,
       :error)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -177,6 +181,7 @@ module Aws::LakeFormation
       :resource,
       :permissions,
       :permissions_with_grant_option)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -236,6 +241,7 @@ module Aws::LakeFormation
     class BatchRevokePermissionsRequest < Struct.new(
       :catalog_id,
       :entries)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -247,6 +253,7 @@ module Aws::LakeFormation
     #
     class BatchRevokePermissionsResponse < Struct.new(
       :failures)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -276,6 +283,7 @@ module Aws::LakeFormation
     #
     class ColumnWildcard < Struct.new(
       :excluded_column_names)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -289,6 +297,7 @@ module Aws::LakeFormation
     #
     class ConcurrentModificationException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -309,6 +318,7 @@ module Aws::LakeFormation
     #
     class DataLakePrincipal < Struct.new(
       :data_lake_principal_identifier)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -361,6 +371,7 @@ module Aws::LakeFormation
       :data_lake_admins,
       :create_database_default_permissions,
       :create_table_default_permissions)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -383,6 +394,7 @@ module Aws::LakeFormation
     #
     class DataLocationResource < Struct.new(
       :resource_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -403,6 +415,7 @@ module Aws::LakeFormation
     #
     class DatabaseResource < Struct.new(
       :name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -422,6 +435,7 @@ module Aws::LakeFormation
     #
     class DeregisterResourceRequest < Struct.new(
       :resource_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -444,6 +458,7 @@ module Aws::LakeFormation
     #
     class DescribeResourceRequest < Struct.new(
       :resource_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -456,6 +471,7 @@ module Aws::LakeFormation
     #
     class DescribeResourceResponse < Struct.new(
       :resource_info)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -469,6 +485,7 @@ module Aws::LakeFormation
     #
     class EntityNotFoundException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -487,6 +504,7 @@ module Aws::LakeFormation
     class ErrorDetail < Struct.new(
       :error_code,
       :error_message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -520,6 +538,7 @@ module Aws::LakeFormation
       :field,
       :comparison_operator,
       :string_value_list)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -541,6 +560,7 @@ module Aws::LakeFormation
     #
     class GetDataLakeSettingsRequest < Struct.new(
       :catalog_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -552,6 +572,7 @@ module Aws::LakeFormation
     #
     class GetDataLakeSettingsResponse < Struct.new(
       :data_lake_settings)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -593,6 +614,7 @@ module Aws::LakeFormation
       :resource_arn,
       :next_token,
       :max_results)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -611,6 +633,7 @@ module Aws::LakeFormation
     class GetEffectivePermissionsForPathResponse < Struct.new(
       :permissions,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -693,6 +716,7 @@ module Aws::LakeFormation
       :resource,
       :permissions,
       :permissions_with_grant_option)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -710,6 +734,7 @@ module Aws::LakeFormation
     #
     class InternalServiceException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -723,6 +748,7 @@ module Aws::LakeFormation
     #
     class InvalidInputException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -802,6 +828,7 @@ module Aws::LakeFormation
       :resource,
       :next_token,
       :max_results)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -820,6 +847,7 @@ module Aws::LakeFormation
     class ListPermissionsResponse < Struct.new(
       :principal_resource_permissions,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -858,6 +886,7 @@ module Aws::LakeFormation
       :filter_condition_list,
       :max_results,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -875,6 +904,7 @@ module Aws::LakeFormation
     class ListResourcesResponse < Struct.new(
       :resource_info_list,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -888,6 +918,7 @@ module Aws::LakeFormation
     #
     class OperationTimeoutException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -916,6 +947,7 @@ module Aws::LakeFormation
     class PrincipalPermissions < Struct.new(
       :principal,
       :permissions)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -945,6 +977,7 @@ module Aws::LakeFormation
       :resource,
       :permissions,
       :permissions_with_grant_option)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -994,6 +1027,7 @@ module Aws::LakeFormation
     class PutDataLakeSettingsRequest < Struct.new(
       :catalog_id,
       :data_lake_settings)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1030,6 +1064,7 @@ module Aws::LakeFormation
       :resource_arn,
       :use_service_linked_role,
       :role_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1104,6 +1139,7 @@ module Aws::LakeFormation
       :table,
       :table_with_columns,
       :data_location)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1128,6 +1164,7 @@ module Aws::LakeFormation
       :resource_arn,
       :role_arn,
       :last_modified)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1203,6 +1240,7 @@ module Aws::LakeFormation
       :resource,
       :permissions,
       :permissions_with_grant_option)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1238,6 +1276,7 @@ module Aws::LakeFormation
     class TableResource < Struct.new(
       :database_name,
       :name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1289,6 +1328,7 @@ module Aws::LakeFormation
       :name,
       :column_names,
       :column_wildcard)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1314,6 +1354,7 @@ module Aws::LakeFormation
     class UpdateResourceRequest < Struct.new(
       :role_arn,
       :resource_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 

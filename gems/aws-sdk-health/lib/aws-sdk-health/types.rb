@@ -62,6 +62,7 @@ module Aws::Health
       :last_updated_time,
       :status_code,
       :tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -76,6 +77,7 @@ module Aws::Health
     #
     class ConcurrentModificationException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -108,6 +110,7 @@ module Aws::Health
     class DateTimeRange < Struct.new(
       :from,
       :to)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -146,6 +149,7 @@ module Aws::Health
       :event_arn,
       :next_token,
       :max_results)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -170,6 +174,7 @@ module Aws::Health
       :affected_accounts,
       :event_scope_code,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -218,6 +223,7 @@ module Aws::Health
       :locale,
       :next_token,
       :max_results)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -246,6 +252,7 @@ module Aws::Health
       :entities,
       :failed_set,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -305,6 +312,7 @@ module Aws::Health
       :locale,
       :next_token,
       :max_results)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -325,6 +333,7 @@ module Aws::Health
     class DescribeAffectedEntitiesResponse < Struct.new(
       :entities,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -345,6 +354,7 @@ module Aws::Health
     #
     class DescribeEntityAggregatesRequest < Struct.new(
       :event_arns)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -357,6 +367,7 @@ module Aws::Health
     #
     class DescribeEntityAggregatesResponse < Struct.new(
       :entity_aggregates)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -431,6 +442,7 @@ module Aws::Health
       :aggregate_field,
       :max_results,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -452,6 +464,7 @@ module Aws::Health
     class DescribeEventAggregatesResponse < Struct.new(
       :event_aggregates,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -483,6 +496,7 @@ module Aws::Health
     class DescribeEventDetailsForOrganizationRequest < Struct.new(
       :organization_event_detail_filters,
       :locale)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -499,6 +513,7 @@ module Aws::Health
     class DescribeEventDetailsForOrganizationResponse < Struct.new(
       :successful_set,
       :failed_set)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -526,6 +541,7 @@ module Aws::Health
     class DescribeEventDetailsRequest < Struct.new(
       :event_arns,
       :locale)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -542,6 +558,7 @@ module Aws::Health
     class DescribeEventDetailsResponse < Struct.new(
       :successful_set,
       :failed_set)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -588,6 +605,7 @@ module Aws::Health
       :locale,
       :next_token,
       :max_results)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -613,6 +631,7 @@ module Aws::Health
     class DescribeEventTypesResponse < Struct.new(
       :event_types,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -676,6 +695,7 @@ module Aws::Health
       :next_token,
       :max_results,
       :locale)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -696,6 +716,7 @@ module Aws::Health
     class DescribeEventsForOrganizationResponse < Struct.new(
       :events,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -771,6 +792,7 @@ module Aws::Health
       :next_token,
       :max_results,
       :locale)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -791,6 +813,7 @@ module Aws::Health
     class DescribeEventsResponse < Struct.new(
       :events,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -805,6 +828,7 @@ module Aws::Health
     #
     class DescribeHealthServiceStatusForOrganizationResponse < Struct.new(
       :health_service_access_status_for_organization)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -828,6 +852,7 @@ module Aws::Health
     class EntityAggregate < Struct.new(
       :event_arn,
       :count)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -892,6 +917,7 @@ module Aws::Health
       :last_updated_times,
       :tags,
       :status_codes)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -962,6 +988,7 @@ module Aws::Health
       :last_updated_time,
       :status_code,
       :event_scope_code)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -994,6 +1021,7 @@ module Aws::Health
     class EventAccountFilter < Struct.new(
       :event_arn,
       :aws_account_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1013,6 +1041,7 @@ module Aws::Health
     class EventAggregate < Struct.new(
       :aggregate_value,
       :count)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1027,6 +1056,7 @@ module Aws::Health
     #
     class EventDescription < Struct.new(
       :latest_description)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1052,6 +1082,7 @@ module Aws::Health
       :event,
       :event_description,
       :event_metadata)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1079,6 +1110,7 @@ module Aws::Health
       :event_arn,
       :error_name,
       :error_message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1197,6 +1229,7 @@ module Aws::Health
       :event_type_categories,
       :tags,
       :event_status_codes)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1227,6 +1260,7 @@ module Aws::Health
       :service,
       :code,
       :category)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1262,6 +1296,7 @@ module Aws::Health
       :event_type_codes,
       :services,
       :event_type_categories)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1274,6 +1309,7 @@ module Aws::Health
     #
     class InvalidPaginationToken < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1310,6 +1346,7 @@ module Aws::Health
       :event_arn,
       :error_name,
       :error_message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1375,6 +1412,7 @@ module Aws::Health
       :end_time,
       :last_updated_time,
       :status_code)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1407,6 +1445,7 @@ module Aws::Health
       :event,
       :event_description,
       :event_metadata)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1441,6 +1480,7 @@ module Aws::Health
       :event_arn,
       :error_name,
       :error_message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1553,6 +1593,7 @@ module Aws::Health
       :entity_values,
       :event_type_categories,
       :event_status_codes)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1565,6 +1606,7 @@ module Aws::Health
     #
     class UnsupportedLocale < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 

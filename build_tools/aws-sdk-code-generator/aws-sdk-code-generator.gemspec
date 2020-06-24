@@ -2,7 +2,7 @@
 
 Gem::Specification.new do |spec|
   spec.name          = 'aws-sdk-code-generator'
-  spec.version       = '0.1.0.pre'
+  spec.version       = '0.2.0.pre'
   spec.summary       = 'AWS SDK for Ruby - Code Generator'
   spec.description   = 'Generates the service code for the AWS SDK for Ruby'
   spec.author        = 'Amazon Web Services'

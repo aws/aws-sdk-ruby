@@ -301,15 +301,15 @@ module Aws::AutoScaling
     #
     #   * autoscaling:EC2\_INSTANCE\_TERMINATING
     #
-    #   Conditional: This parameter is required for new lifecycle hooks, but
-    #   optional when updating existing hooks.
+    #   Required for new lifecycle hooks, but optional when updating existing
+    #   hooks.
     # @option options [String] :role_arn
     #   The ARN of the IAM role that allows the Auto Scaling group to publish
     #   to the specified notification target, for example, an Amazon SNS topic
     #   or an Amazon SQS queue.
     #
-    #   Conditional: This parameter is required for new lifecycle hooks, but
-    #   optional when updating existing hooks.
+    #   Required for new lifecycle hooks, but optional when updating existing
+    #   hooks.
     # @option options [String] :notification_target_arn
     #   The ARN of the notification target that Amazon EC2 Auto Scaling uses
     #   to notify you when an instance is in the transition state for the

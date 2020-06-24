@@ -47,6 +47,6 @@ require_relative 'aws-sdk-elasticinference/customizations'
 # @service
 module Aws::ElasticInference
 
-  GEM_VERSION = '1.6.1'
+  GEM_VERSION = '1.7.0'
 
 end

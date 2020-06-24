@@ -20,6 +20,7 @@ module Aws::Mobile
     #
     class AccountActionRequiredException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -34,6 +35,7 @@ module Aws::Mobile
     #
     class BadRequestException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -72,6 +74,7 @@ module Aws::Mobile
       :description,
       :icon_url,
       :available_platforms)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -114,6 +117,7 @@ module Aws::Mobile
       :region,
       :contents,
       :snapshot_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -127,6 +131,7 @@ module Aws::Mobile
     #
     class CreateProjectResult < Struct.new(
       :details)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -147,6 +152,7 @@ module Aws::Mobile
     #
     class DeleteProjectRequest < Struct.new(
       :project_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -166,6 +172,7 @@ module Aws::Mobile
     class DeleteProjectResult < Struct.new(
       :deleted_resources,
       :orphaned_resources)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -186,6 +193,7 @@ module Aws::Mobile
     #
     class DescribeBundleRequest < Struct.new(
       :bundle_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -199,6 +207,7 @@ module Aws::Mobile
     #
     class DescribeBundleResult < Struct.new(
       :details)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -227,6 +236,7 @@ module Aws::Mobile
     class DescribeProjectRequest < Struct.new(
       :project_id,
       :sync_from_resources)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -240,6 +250,7 @@ module Aws::Mobile
     #
     class DescribeProjectResult < Struct.new(
       :details)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -274,6 +285,7 @@ module Aws::Mobile
       :bundle_id,
       :project_id,
       :platform)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -291,6 +303,7 @@ module Aws::Mobile
     #
     class ExportBundleResult < Struct.new(
       :download_url)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -312,6 +325,7 @@ module Aws::Mobile
     #
     class ExportProjectRequest < Struct.new(
       :project_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -345,6 +359,7 @@ module Aws::Mobile
       :download_url,
       :share_url,
       :snapshot_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -359,6 +374,7 @@ module Aws::Mobile
     #
     class InternalFailureException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -380,6 +396,7 @@ module Aws::Mobile
     class LimitExceededException < Struct.new(
       :retry_after_seconds,
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -408,6 +425,7 @@ module Aws::Mobile
     class ListBundlesRequest < Struct.new(
       :max_results,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -429,6 +447,7 @@ module Aws::Mobile
     class ListBundlesResult < Struct.new(
       :bundle_list,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -457,6 +476,7 @@ module Aws::Mobile
     class ListProjectsRequest < Struct.new(
       :max_results,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -477,6 +497,7 @@ module Aws::Mobile
     class ListProjectsResult < Struct.new(
       :projects,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -490,6 +511,7 @@ module Aws::Mobile
     #
     class NotFoundException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -539,6 +561,7 @@ module Aws::Mobile
       :last_updated_date,
       :console_url,
       :resources)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -557,6 +580,7 @@ module Aws::Mobile
     class ProjectSummary < Struct.new(
       :name,
       :project_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -595,6 +619,7 @@ module Aws::Mobile
       :arn,
       :feature,
       :attributes)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -614,6 +639,7 @@ module Aws::Mobile
     class ServiceUnavailableException < Struct.new(
       :retry_after_seconds,
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -633,6 +659,7 @@ module Aws::Mobile
     class TooManyRequestsException < Struct.new(
       :retry_after_seconds,
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -646,6 +673,7 @@ module Aws::Mobile
     #
     class UnauthorizedException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -674,6 +702,7 @@ module Aws::Mobile
     class UpdateProjectRequest < Struct.new(
       :contents,
       :project_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -687,6 +716,7 @@ module Aws::Mobile
     #
     class UpdateProjectResult < Struct.new(
       :details)
+      SENSITIVE = []
       include Aws::Structure
     end
 

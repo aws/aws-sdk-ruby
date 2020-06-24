@@ -32,6 +32,7 @@ module Aws::Lightsail
       :docs,
       :message,
       :tip)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -57,6 +58,7 @@ module Aws::Lightsail
       :docs,
       :message,
       :tip)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -97,6 +99,7 @@ module Aws::Lightsail
       :status,
       :snapshot_time_of_day,
       :next_snapshot_time_of_day)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -136,6 +139,7 @@ module Aws::Lightsail
     class AddOnRequest < Struct.new(
       :add_on_type,
       :auto_snapshot_add_on_request)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -307,6 +311,7 @@ module Aws::Lightsail
       :contact_protocols,
       :notification_triggers,
       :notification_enabled)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -325,6 +330,7 @@ module Aws::Lightsail
     #
     class AllocateStaticIpRequest < Struct.new(
       :static_ip_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -338,6 +344,7 @@ module Aws::Lightsail
     #
     class AllocateStaticIpResult < Struct.new(
       :operations)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -369,6 +376,7 @@ module Aws::Lightsail
       :disk_name,
       :instance_name,
       :disk_path)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -382,6 +390,7 @@ module Aws::Lightsail
     #
     class AttachDiskResult < Struct.new(
       :operations)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -414,6 +423,7 @@ module Aws::Lightsail
     class AttachInstancesToLoadBalancerRequest < Struct.new(
       :load_balancer_name,
       :instance_names)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -427,6 +437,7 @@ module Aws::Lightsail
     #
     class AttachInstancesToLoadBalancerResult < Struct.new(
       :operations)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -452,6 +463,7 @@ module Aws::Lightsail
     class AttachLoadBalancerTlsCertificateRequest < Struct.new(
       :load_balancer_name,
       :certificate_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -469,6 +481,7 @@ module Aws::Lightsail
     #
     class AttachLoadBalancerTlsCertificateResult < Struct.new(
       :operations)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -493,6 +506,7 @@ module Aws::Lightsail
     class AttachStaticIpRequest < Struct.new(
       :static_ip_name,
       :instance_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -506,6 +520,7 @@ module Aws::Lightsail
     #
     class AttachStaticIpResult < Struct.new(
       :operations)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -525,6 +540,7 @@ module Aws::Lightsail
     class AttachedDisk < Struct.new(
       :path,
       :size_in_gb)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -587,6 +603,7 @@ module Aws::Lightsail
     #
     class AutoSnapshotAddOnRequest < Struct.new(
       :snapshot_time_of_day)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -616,6 +633,7 @@ module Aws::Lightsail
       :created_at,
       :status,
       :from_attached_disks)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -635,6 +653,7 @@ module Aws::Lightsail
     class AvailabilityZone < Struct.new(
       :zone_name,
       :state)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -713,6 +732,7 @@ module Aws::Lightsail
       :product_url,
       :license_url,
       :platform)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -785,6 +805,7 @@ module Aws::Lightsail
       :ram_size_in_gb,
       :transfer_per_month_in_gb,
       :supported_platforms)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -815,6 +836,7 @@ module Aws::Lightsail
     class CloseInstancePublicPortsRequest < Struct.new(
       :port_info,
       :instance_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -828,6 +850,7 @@ module Aws::Lightsail
     #
     class CloseInstancePublicPortsResult < Struct.new(
       :operation)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -886,6 +909,7 @@ module Aws::Lightsail
       :state,
       :source_info,
       :destination_info)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -910,6 +934,7 @@ module Aws::Lightsail
       :resource_type,
       :name,
       :arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -985,6 +1010,7 @@ module Aws::Lightsail
       :location,
       :resource_type,
       :support_code)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1088,6 +1114,7 @@ module Aws::Lightsail
       :use_latest_restorable_auto_snapshot,
       :target_snapshot_name,
       :source_region)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1101,6 +1128,7 @@ module Aws::Lightsail
     #
     class CopySnapshotResult < Struct.new(
       :operations)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1130,6 +1158,7 @@ module Aws::Lightsail
     #
     class CreateCloudFormationStackRequest < Struct.new(
       :instances)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1143,6 +1172,7 @@ module Aws::Lightsail
     #
     class CreateCloudFormationStackResult < Struct.new(
       :operations)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1208,6 +1238,7 @@ module Aws::Lightsail
     class CreateContactMethodRequest < Struct.new(
       :protocol,
       :contact_endpoint)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1221,6 +1252,7 @@ module Aws::Lightsail
     #
     class CreateContactMethodResult < Struct.new(
       :operations)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1367,6 +1399,7 @@ module Aws::Lightsail
       :source_disk_name,
       :restore_date,
       :use_latest_restorable_auto_snapshot)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1380,6 +1413,7 @@ module Aws::Lightsail
     #
     class CreateDiskFromSnapshotResult < Struct.new(
       :operations)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1444,6 +1478,7 @@ module Aws::Lightsail
       :size_in_gb,
       :tags,
       :add_ons)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1457,6 +1492,7 @@ module Aws::Lightsail
     #
     class CreateDiskResult < Struct.new(
       :operations)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1517,6 +1553,7 @@ module Aws::Lightsail
       :disk_snapshot_name,
       :instance_name,
       :tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1530,6 +1567,7 @@ module Aws::Lightsail
     #
     class CreateDiskSnapshotResult < Struct.new(
       :operations)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1565,6 +1603,7 @@ module Aws::Lightsail
     class CreateDomainEntryRequest < Struct.new(
       :domain_name,
       :domain_entry)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1578,6 +1617,7 @@ module Aws::Lightsail
     #
     class CreateDomainEntryResult < Struct.new(
       :operation)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1619,6 +1659,7 @@ module Aws::Lightsail
     class CreateDomainRequest < Struct.new(
       :domain_name,
       :tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1632,6 +1673,7 @@ module Aws::Lightsail
     #
     class CreateDomainResult < Struct.new(
       :operation)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1671,6 +1713,7 @@ module Aws::Lightsail
       :instance_snapshot_name,
       :instance_name,
       :tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1684,6 +1727,7 @@ module Aws::Lightsail
     #
     class CreateInstanceSnapshotResult < Struct.new(
       :operations)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1873,6 +1917,7 @@ module Aws::Lightsail
       :source_instance_name,
       :restore_date,
       :use_latest_restorable_auto_snapshot)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1886,6 +1931,7 @@ module Aws::Lightsail
     #
     class CreateInstancesFromSnapshotResult < Struct.new(
       :operations)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2009,6 +2055,7 @@ module Aws::Lightsail
       :key_pair_name,
       :tags,
       :add_ons)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2022,6 +2069,7 @@ module Aws::Lightsail
     #
     class CreateInstancesResult < Struct.new(
       :operations)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2055,6 +2103,7 @@ module Aws::Lightsail
     class CreateKeyPairRequest < Struct.new(
       :key_pair_name,
       :tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2084,6 +2133,7 @@ module Aws::Lightsail
       :public_key_base_64,
       :private_key_base_64,
       :operation)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2162,6 +2212,7 @@ module Aws::Lightsail
       :certificate_domain_name,
       :certificate_alternative_names,
       :tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2175,6 +2226,7 @@ module Aws::Lightsail
     #
     class CreateLoadBalancerResult < Struct.new(
       :operations)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2241,6 +2293,7 @@ module Aws::Lightsail
       :certificate_domain_name,
       :certificate_alternative_names,
       :tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2254,6 +2307,7 @@ module Aws::Lightsail
     #
     class CreateLoadBalancerTlsCertificateResult < Struct.new(
       :operations)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2372,6 +2426,7 @@ module Aws::Lightsail
       :restore_time,
       :use_latest_restorable_time,
       :tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2385,6 +2440,7 @@ module Aws::Lightsail
     #
     class CreateRelationalDatabaseFromSnapshotResult < Struct.new(
       :operations)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2565,6 +2621,7 @@ module Aws::Lightsail
       :preferred_maintenance_window,
       :publicly_accessible,
       :tags)
+      SENSITIVE = [:master_user_password]
       include Aws::Structure
     end
 
@@ -2578,6 +2635,7 @@ module Aws::Lightsail
     #
     class CreateRelationalDatabaseResult < Struct.new(
       :operations)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2623,6 +2681,7 @@ module Aws::Lightsail
       :relational_database_name,
       :relational_database_snapshot_name,
       :tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2636,6 +2695,7 @@ module Aws::Lightsail
     #
     class CreateRelationalDatabaseSnapshotResult < Struct.new(
       :operations)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2654,6 +2714,7 @@ module Aws::Lightsail
     #
     class DeleteAlarmRequest < Struct.new(
       :alarm_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2667,6 +2728,7 @@ module Aws::Lightsail
     #
     class DeleteAlarmResult < Struct.new(
       :operations)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2694,6 +2756,7 @@ module Aws::Lightsail
     class DeleteAutoSnapshotRequest < Struct.new(
       :resource_name,
       :date)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2707,6 +2770,7 @@ module Aws::Lightsail
     #
     class DeleteAutoSnapshotResult < Struct.new(
       :operations)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2732,6 +2796,7 @@ module Aws::Lightsail
     #
     class DeleteContactMethodRequest < Struct.new(
       :protocol)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2745,6 +2810,7 @@ module Aws::Lightsail
     #
     class DeleteContactMethodResult < Struct.new(
       :operations)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2770,6 +2836,7 @@ module Aws::Lightsail
     class DeleteDiskRequest < Struct.new(
       :disk_name,
       :force_delete_add_ons)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2783,6 +2850,7 @@ module Aws::Lightsail
     #
     class DeleteDiskResult < Struct.new(
       :operations)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2802,6 +2870,7 @@ module Aws::Lightsail
     #
     class DeleteDiskSnapshotRequest < Struct.new(
       :disk_snapshot_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2815,6 +2884,7 @@ module Aws::Lightsail
     #
     class DeleteDiskSnapshotResult < Struct.new(
       :operations)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2849,6 +2919,7 @@ module Aws::Lightsail
     class DeleteDomainEntryRequest < Struct.new(
       :domain_name,
       :domain_entry)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2862,6 +2933,7 @@ module Aws::Lightsail
     #
     class DeleteDomainEntryResult < Struct.new(
       :operation)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2880,6 +2952,7 @@ module Aws::Lightsail
     #
     class DeleteDomainRequest < Struct.new(
       :domain_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2893,6 +2966,7 @@ module Aws::Lightsail
     #
     class DeleteDomainResult < Struct.new(
       :operation)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2918,6 +2992,7 @@ module Aws::Lightsail
     class DeleteInstanceRequest < Struct.new(
       :instance_name,
       :force_delete_add_ons)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2931,6 +3006,7 @@ module Aws::Lightsail
     #
     class DeleteInstanceResult < Struct.new(
       :operations)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2949,6 +3025,7 @@ module Aws::Lightsail
     #
     class DeleteInstanceSnapshotRequest < Struct.new(
       :instance_snapshot_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2962,6 +3039,7 @@ module Aws::Lightsail
     #
     class DeleteInstanceSnapshotResult < Struct.new(
       :operations)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2980,6 +3058,7 @@ module Aws::Lightsail
     #
     class DeleteKeyPairRequest < Struct.new(
       :key_pair_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2993,6 +3072,7 @@ module Aws::Lightsail
     #
     class DeleteKeyPairResult < Struct.new(
       :operation)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3012,6 +3092,7 @@ module Aws::Lightsail
     #
     class DeleteKnownHostKeysRequest < Struct.new(
       :instance_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3025,6 +3106,7 @@ module Aws::Lightsail
     #
     class DeleteKnownHostKeysResult < Struct.new(
       :operations)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3043,6 +3125,7 @@ module Aws::Lightsail
     #
     class DeleteLoadBalancerRequest < Struct.new(
       :load_balancer_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3056,6 +3139,7 @@ module Aws::Lightsail
     #
     class DeleteLoadBalancerResult < Struct.new(
       :operations)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3091,6 +3175,7 @@ module Aws::Lightsail
       :load_balancer_name,
       :certificate_name,
       :force)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3104,6 +3189,7 @@ module Aws::Lightsail
     #
     class DeleteLoadBalancerTlsCertificateResult < Struct.new(
       :operations)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3154,6 +3240,7 @@ module Aws::Lightsail
       :relational_database_name,
       :skip_final_snapshot,
       :final_relational_database_snapshot_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3167,6 +3254,7 @@ module Aws::Lightsail
     #
     class DeleteRelationalDatabaseResult < Struct.new(
       :operations)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3185,6 +3273,7 @@ module Aws::Lightsail
     #
     class DeleteRelationalDatabaseSnapshotRequest < Struct.new(
       :relational_database_snapshot_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3198,6 +3287,7 @@ module Aws::Lightsail
     #
     class DeleteRelationalDatabaseSnapshotResult < Struct.new(
       :operations)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3216,6 +3306,7 @@ module Aws::Lightsail
     class DestinationInfo < Struct.new(
       :id,
       :service)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3235,6 +3326,7 @@ module Aws::Lightsail
     #
     class DetachDiskRequest < Struct.new(
       :disk_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3248,6 +3340,7 @@ module Aws::Lightsail
     #
     class DetachDiskResult < Struct.new(
       :operations)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3273,6 +3366,7 @@ module Aws::Lightsail
     class DetachInstancesFromLoadBalancerRequest < Struct.new(
       :load_balancer_name,
       :instance_names)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3286,6 +3380,7 @@ module Aws::Lightsail
     #
     class DetachInstancesFromLoadBalancerResult < Struct.new(
       :operations)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3304,6 +3399,7 @@ module Aws::Lightsail
     #
     class DetachStaticIpRequest < Struct.new(
       :static_ip_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3317,6 +3413,7 @@ module Aws::Lightsail
     #
     class DetachStaticIpResult < Struct.new(
       :operations)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3341,6 +3438,7 @@ module Aws::Lightsail
     class DisableAddOnRequest < Struct.new(
       :add_on_type,
       :resource_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3354,6 +3452,7 @@ module Aws::Lightsail
     #
     class DisableAddOnResult < Struct.new(
       :operations)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3469,6 +3568,7 @@ module Aws::Lightsail
       :is_attached,
       :attachment_state,
       :gb_in_use)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3498,6 +3598,7 @@ module Aws::Lightsail
       :path,
       :size_in_gb,
       :is_system_disk)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3525,6 +3626,7 @@ module Aws::Lightsail
     class DiskMap < Struct.new(
       :original_disk_path,
       :new_disk_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3623,6 +3725,7 @@ module Aws::Lightsail
       :from_instance_name,
       :from_instance_arn,
       :is_from_auto_snapshot)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3636,6 +3739,7 @@ module Aws::Lightsail
     #
     class DiskSnapshotInfo < Struct.new(
       :size_in_gb)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3696,6 +3800,7 @@ module Aws::Lightsail
       :resource_type,
       :tags,
       :domain_entries)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3779,6 +3884,7 @@ module Aws::Lightsail
       :is_alias,
       :type,
       :options)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3801,6 +3907,7 @@ module Aws::Lightsail
     class DownloadDefaultKeyPairResult < Struct.new(
       :public_key_base_64,
       :private_key_base_64)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3831,6 +3938,7 @@ module Aws::Lightsail
     class EnableAddOnRequest < Struct.new(
       :resource_name,
       :add_on_request)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3844,6 +3952,7 @@ module Aws::Lightsail
     #
     class EnableAddOnResult < Struct.new(
       :operations)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3895,6 +4004,7 @@ module Aws::Lightsail
       :state,
       :source_info,
       :destination_info)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3946,6 +4056,7 @@ module Aws::Lightsail
       :from_resource_arn,
       :instance_snapshot_info,
       :disk_snapshot_info)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3965,6 +4076,7 @@ module Aws::Lightsail
     #
     class ExportSnapshotRequest < Struct.new(
       :source_snapshot_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3978,6 +4090,7 @@ module Aws::Lightsail
     #
     class ExportSnapshotResult < Struct.new(
       :operations)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4001,6 +4114,7 @@ module Aws::Lightsail
     #
     class GetActiveNamesRequest < Struct.new(
       :page_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4024,6 +4138,7 @@ module Aws::Lightsail
     class GetActiveNamesResult < Struct.new(
       :active_names,
       :next_page_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4063,6 +4178,7 @@ module Aws::Lightsail
       :alarm_name,
       :page_token,
       :monitored_resource_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4085,6 +4201,7 @@ module Aws::Lightsail
     class GetAlarmsResult < Struct.new(
       :alarms,
       :next_page_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4104,6 +4221,7 @@ module Aws::Lightsail
     #
     class GetAutoSnapshotsRequest < Struct.new(
       :resource_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4126,6 +4244,7 @@ module Aws::Lightsail
       :resource_name,
       :resource_type,
       :auto_snapshots)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4156,6 +4275,7 @@ module Aws::Lightsail
     class GetBlueprintsRequest < Struct.new(
       :include_inactive,
       :page_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4180,6 +4300,7 @@ module Aws::Lightsail
     class GetBlueprintsResult < Struct.new(
       :blueprints,
       :next_page_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4210,6 +4331,7 @@ module Aws::Lightsail
     class GetBundlesRequest < Struct.new(
       :include_inactive,
       :page_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4234,6 +4356,7 @@ module Aws::Lightsail
     class GetBundlesResult < Struct.new(
       :bundles,
       :next_page_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4257,6 +4380,7 @@ module Aws::Lightsail
     #
     class GetCloudFormationStackRecordsRequest < Struct.new(
       :page_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4280,6 +4404,7 @@ module Aws::Lightsail
     class GetCloudFormationStackRecordsResult < Struct.new(
       :cloud_formation_stack_records,
       :next_page_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4302,6 +4427,7 @@ module Aws::Lightsail
     #
     class GetContactMethodsRequest < Struct.new(
       :protocols)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4313,6 +4439,7 @@ module Aws::Lightsail
     #
     class GetContactMethodsResult < Struct.new(
       :contact_methods)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4331,6 +4458,7 @@ module Aws::Lightsail
     #
     class GetDiskRequest < Struct.new(
       :disk_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4342,6 +4470,7 @@ module Aws::Lightsail
     #
     class GetDiskResult < Struct.new(
       :disk)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4360,6 +4489,7 @@ module Aws::Lightsail
     #
     class GetDiskSnapshotRequest < Struct.new(
       :disk_snapshot_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4371,6 +4501,7 @@ module Aws::Lightsail
     #
     class GetDiskSnapshotResult < Struct.new(
       :disk_snapshot)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4394,6 +4525,7 @@ module Aws::Lightsail
     #
     class GetDiskSnapshotsRequest < Struct.new(
       :page_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4418,6 +4550,7 @@ module Aws::Lightsail
     class GetDiskSnapshotsResult < Struct.new(
       :disk_snapshots,
       :next_page_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4440,6 +4573,7 @@ module Aws::Lightsail
     #
     class GetDisksRequest < Struct.new(
       :page_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4463,6 +4597,7 @@ module Aws::Lightsail
     class GetDisksResult < Struct.new(
       :disks,
       :next_page_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4481,6 +4616,7 @@ module Aws::Lightsail
     #
     class GetDomainRequest < Struct.new(
       :domain_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4493,6 +4629,7 @@ module Aws::Lightsail
     #
     class GetDomainResult < Struct.new(
       :domain)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4516,6 +4653,7 @@ module Aws::Lightsail
     #
     class GetDomainsRequest < Struct.new(
       :page_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4540,6 +4678,7 @@ module Aws::Lightsail
     class GetDomainsResult < Struct.new(
       :domains,
       :next_page_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4563,6 +4702,7 @@ module Aws::Lightsail
     #
     class GetExportSnapshotRecordsRequest < Struct.new(
       :page_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4586,6 +4726,7 @@ module Aws::Lightsail
     class GetExportSnapshotRecordsResult < Struct.new(
       :export_snapshot_records,
       :next_page_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4610,6 +4751,7 @@ module Aws::Lightsail
     class GetInstanceAccessDetailsRequest < Struct.new(
       :instance_name,
       :protocol)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4622,6 +4764,7 @@ module Aws::Lightsail
     #
     class GetInstanceAccessDetailsResult < Struct.new(
       :access_details)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4809,6 +4952,7 @@ module Aws::Lightsail
       :end_time,
       :unit,
       :statistics)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4825,6 +4969,7 @@ module Aws::Lightsail
     class GetInstanceMetricDataResult < Struct.new(
       :metric_name,
       :metric_data)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4843,6 +4988,7 @@ module Aws::Lightsail
     #
     class GetInstancePortStatesRequest < Struct.new(
       :instance_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4855,6 +5001,7 @@ module Aws::Lightsail
     #
     class GetInstancePortStatesResult < Struct.new(
       :port_states)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4873,6 +5020,7 @@ module Aws::Lightsail
     #
     class GetInstanceRequest < Struct.new(
       :instance_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4885,6 +5033,7 @@ module Aws::Lightsail
     #
     class GetInstanceResult < Struct.new(
       :instance)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4903,6 +5052,7 @@ module Aws::Lightsail
     #
     class GetInstanceSnapshotRequest < Struct.new(
       :instance_snapshot_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4915,6 +5065,7 @@ module Aws::Lightsail
     #
     class GetInstanceSnapshotResult < Struct.new(
       :instance_snapshot)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4938,6 +5089,7 @@ module Aws::Lightsail
     #
     class GetInstanceSnapshotsRequest < Struct.new(
       :page_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4962,6 +5114,7 @@ module Aws::Lightsail
     class GetInstanceSnapshotsResult < Struct.new(
       :instance_snapshots,
       :next_page_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4980,6 +5133,7 @@ module Aws::Lightsail
     #
     class GetInstanceStateRequest < Struct.new(
       :instance_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4991,6 +5145,7 @@ module Aws::Lightsail
     #
     class GetInstanceStateResult < Struct.new(
       :state)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5014,6 +5169,7 @@ module Aws::Lightsail
     #
     class GetInstancesRequest < Struct.new(
       :page_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5038,6 +5194,7 @@ module Aws::Lightsail
     class GetInstancesResult < Struct.new(
       :instances,
       :next_page_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5056,6 +5213,7 @@ module Aws::Lightsail
     #
     class GetKeyPairRequest < Struct.new(
       :key_pair_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5068,6 +5226,7 @@ module Aws::Lightsail
     #
     class GetKeyPairResult < Struct.new(
       :key_pair)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5091,6 +5250,7 @@ module Aws::Lightsail
     #
     class GetKeyPairsRequest < Struct.new(
       :page_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5115,6 +5275,7 @@ module Aws::Lightsail
     class GetKeyPairsResult < Struct.new(
       :key_pairs,
       :next_page_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5315,6 +5476,7 @@ module Aws::Lightsail
       :end_time,
       :unit,
       :statistics)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5331,6 +5493,7 @@ module Aws::Lightsail
     class GetLoadBalancerMetricDataResult < Struct.new(
       :metric_name,
       :metric_data)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5349,6 +5512,7 @@ module Aws::Lightsail
     #
     class GetLoadBalancerRequest < Struct.new(
       :load_balancer_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5360,6 +5524,7 @@ module Aws::Lightsail
     #
     class GetLoadBalancerResult < Struct.new(
       :load_balancer)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5379,6 +5544,7 @@ module Aws::Lightsail
     #
     class GetLoadBalancerTlsCertificatesRequest < Struct.new(
       :load_balancer_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5391,6 +5557,7 @@ module Aws::Lightsail
     #
     class GetLoadBalancerTlsCertificatesResult < Struct.new(
       :tls_certificates)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5414,6 +5581,7 @@ module Aws::Lightsail
     #
     class GetLoadBalancersRequest < Struct.new(
       :page_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5437,6 +5605,7 @@ module Aws::Lightsail
     class GetLoadBalancersResult < Struct.new(
       :load_balancers,
       :next_page_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5455,6 +5624,7 @@ module Aws::Lightsail
     #
     class GetOperationRequest < Struct.new(
       :operation_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5468,6 +5638,7 @@ module Aws::Lightsail
     #
     class GetOperationResult < Struct.new(
       :operation)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5497,6 +5668,7 @@ module Aws::Lightsail
     class GetOperationsForResourceRequest < Struct.new(
       :resource_name,
       :page_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5533,6 +5705,7 @@ module Aws::Lightsail
       :operations,
       :next_page_count,
       :next_page_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5556,6 +5729,7 @@ module Aws::Lightsail
     #
     class GetOperationsRequest < Struct.new(
       :page_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5581,6 +5755,7 @@ module Aws::Lightsail
     class GetOperationsResult < Struct.new(
       :operations,
       :next_page_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5609,6 +5784,7 @@ module Aws::Lightsail
     class GetRegionsRequest < Struct.new(
       :include_availability_zones,
       :include_relational_database_availability_zones)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5621,6 +5797,7 @@ module Aws::Lightsail
     #
     class GetRegionsResult < Struct.new(
       :regions)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5644,6 +5821,7 @@ module Aws::Lightsail
     #
     class GetRelationalDatabaseBlueprintsRequest < Struct.new(
       :page_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5668,6 +5846,7 @@ module Aws::Lightsail
     class GetRelationalDatabaseBlueprintsResult < Struct.new(
       :blueprints,
       :next_page_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5691,6 +5870,7 @@ module Aws::Lightsail
     #
     class GetRelationalDatabaseBundlesRequest < Struct.new(
       :page_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5715,6 +5895,7 @@ module Aws::Lightsail
     class GetRelationalDatabaseBundlesResult < Struct.new(
       :bundles,
       :next_page_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5755,6 +5936,7 @@ module Aws::Lightsail
       :relational_database_name,
       :duration_in_minutes,
       :page_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5779,6 +5961,7 @@ module Aws::Lightsail
     class GetRelationalDatabaseEventsResult < Struct.new(
       :relational_database_events,
       :next_page_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5863,6 +6046,7 @@ module Aws::Lightsail
       :end_time,
       :start_from_head,
       :page_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5887,6 +6071,7 @@ module Aws::Lightsail
       :resource_log_events,
       :next_backward_token,
       :next_forward_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5905,6 +6090,7 @@ module Aws::Lightsail
     #
     class GetRelationalDatabaseLogStreamsRequest < Struct.new(
       :relational_database_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5917,6 +6103,7 @@ module Aws::Lightsail
     #
     class GetRelationalDatabaseLogStreamsResult < Struct.new(
       :log_streams)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5949,6 +6136,7 @@ module Aws::Lightsail
     class GetRelationalDatabaseMasterUserPasswordRequest < Struct.new(
       :relational_database_name,
       :password_version)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5966,6 +6154,7 @@ module Aws::Lightsail
     class GetRelationalDatabaseMasterUserPasswordResult < Struct.new(
       :master_user_password,
       :created_at)
+      SENSITIVE = [:master_user_password]
       include Aws::Structure
     end
 
@@ -6119,6 +6308,7 @@ module Aws::Lightsail
       :end_time,
       :unit,
       :statistics)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6135,6 +6325,7 @@ module Aws::Lightsail
     class GetRelationalDatabaseMetricDataResult < Struct.new(
       :metric_name,
       :metric_data)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6164,6 +6355,7 @@ module Aws::Lightsail
     class GetRelationalDatabaseParametersRequest < Struct.new(
       :relational_database_name,
       :page_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6188,6 +6380,7 @@ module Aws::Lightsail
     class GetRelationalDatabaseParametersResult < Struct.new(
       :parameters,
       :next_page_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6206,6 +6399,7 @@ module Aws::Lightsail
     #
     class GetRelationalDatabaseRequest < Struct.new(
       :relational_database_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6217,6 +6411,7 @@ module Aws::Lightsail
     #
     class GetRelationalDatabaseResult < Struct.new(
       :relational_database)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6235,6 +6430,7 @@ module Aws::Lightsail
     #
     class GetRelationalDatabaseSnapshotRequest < Struct.new(
       :relational_database_snapshot_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6246,6 +6442,7 @@ module Aws::Lightsail
     #
     class GetRelationalDatabaseSnapshotResult < Struct.new(
       :relational_database_snapshot)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6269,6 +6466,7 @@ module Aws::Lightsail
     #
     class GetRelationalDatabaseSnapshotsRequest < Struct.new(
       :page_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6293,6 +6491,7 @@ module Aws::Lightsail
     class GetRelationalDatabaseSnapshotsResult < Struct.new(
       :relational_database_snapshots,
       :next_page_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6316,6 +6515,7 @@ module Aws::Lightsail
     #
     class GetRelationalDatabasesRequest < Struct.new(
       :page_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6340,6 +6540,7 @@ module Aws::Lightsail
     class GetRelationalDatabasesResult < Struct.new(
       :relational_databases,
       :next_page_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6358,6 +6559,7 @@ module Aws::Lightsail
     #
     class GetStaticIpRequest < Struct.new(
       :static_ip_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6370,6 +6572,7 @@ module Aws::Lightsail
     #
     class GetStaticIpResult < Struct.new(
       :static_ip)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6393,6 +6596,7 @@ module Aws::Lightsail
     #
     class GetStaticIpsRequest < Struct.new(
       :page_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6417,6 +6621,7 @@ module Aws::Lightsail
     class GetStaticIpsResult < Struct.new(
       :static_ips,
       :next_page_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6487,6 +6692,7 @@ module Aws::Lightsail
       :fingerprint_sha256,
       :not_valid_before,
       :not_valid_after)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6512,6 +6718,7 @@ module Aws::Lightsail
     class ImportKeyPairRequest < Struct.new(
       :key_pair_name,
       :public_key_base_64)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6525,6 +6732,7 @@ module Aws::Lightsail
     #
     class ImportKeyPairResult < Struct.new(
       :operation)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6648,6 +6856,7 @@ module Aws::Lightsail
       :state,
       :username,
       :ssh_key_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6729,6 +6938,7 @@ module Aws::Lightsail
       :instance_name,
       :username,
       :host_keys)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6809,6 +7019,7 @@ module Aws::Lightsail
       :port_info_source,
       :user_data,
       :availability_zone)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6832,6 +7043,7 @@ module Aws::Lightsail
       :cpu_count,
       :disks,
       :ram_size_in_gb)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6914,6 +7126,7 @@ module Aws::Lightsail
       :instance_name,
       :instance_health,
       :instance_health_reason)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6934,6 +7147,7 @@ module Aws::Lightsail
     class InstanceNetworking < Struct.new(
       :monthly_transfer,
       :ports)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -7065,6 +7279,7 @@ module Aws::Lightsail
       :access_direction,
       :cidrs,
       :cidr_list_aliases)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -7180,6 +7395,7 @@ module Aws::Lightsail
       :state,
       :cidrs,
       :cidr_list_aliases)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -7287,6 +7503,7 @@ module Aws::Lightsail
       :from_bundle_id,
       :is_from_auto_snapshot,
       :size_in_gb)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -7313,6 +7530,7 @@ module Aws::Lightsail
       :from_bundle_id,
       :from_blueprint_id,
       :from_disk_info)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -7331,6 +7549,7 @@ module Aws::Lightsail
     class InstanceState < Struct.new(
       :code,
       :name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -7362,6 +7581,7 @@ module Aws::Lightsail
       :docs,
       :message,
       :tip)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -7379,6 +7599,7 @@ module Aws::Lightsail
     #
     class IsVpcPeeredResult < Struct.new(
       :is_peered)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -7439,6 +7660,7 @@ module Aws::Lightsail
       :resource_type,
       :tags,
       :fingerprint)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -7550,6 +7772,7 @@ module Aws::Lightsail
       :instance_health_summary,
       :tls_certificate_summaries,
       :configuration_options)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -7731,6 +7954,7 @@ module Aws::Lightsail
       :signature_algorithm,
       :subject,
       :subject_alternative_names)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -7750,6 +7974,7 @@ module Aws::Lightsail
     class LoadBalancerTlsCertificateDomainValidationOption < Struct.new(
       :domain_name,
       :validation_status)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -7787,6 +8012,7 @@ module Aws::Lightsail
       :value,
       :validation_status,
       :domain_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -7810,6 +8036,7 @@ module Aws::Lightsail
     class LoadBalancerTlsCertificateRenewalSummary < Struct.new(
       :renewal_status,
       :domain_validation_options)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -7829,6 +8056,7 @@ module Aws::Lightsail
     class LoadBalancerTlsCertificateSummary < Struct.new(
       :name,
       :is_attached)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -7847,6 +8075,7 @@ module Aws::Lightsail
     class LogEvent < Struct.new(
       :created_at,
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -7890,6 +8119,7 @@ module Aws::Lightsail
       :sum,
       :timestamp,
       :unit)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -7923,6 +8153,7 @@ module Aws::Lightsail
       :arn,
       :name,
       :resource_type)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -7937,6 +8168,7 @@ module Aws::Lightsail
     #
     class MonthlyTransfer < Struct.new(
       :gb_per_month_allocated)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -7961,6 +8193,7 @@ module Aws::Lightsail
       :docs,
       :message,
       :tip)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -7991,6 +8224,7 @@ module Aws::Lightsail
     class OpenInstancePublicPortsRequest < Struct.new(
       :port_info,
       :instance_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -8004,6 +8238,7 @@ module Aws::Lightsail
     #
     class OpenInstancePublicPortsResult < Struct.new(
       :operation)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -8073,6 +8308,7 @@ module Aws::Lightsail
       :status_changed_at,
       :error_code,
       :error_details)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -8097,6 +8333,7 @@ module Aws::Lightsail
       :docs,
       :message,
       :tip)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -8138,6 +8375,7 @@ module Aws::Lightsail
     class PasswordData < Struct.new(
       :ciphertext,
       :key_pair_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -8157,6 +8395,7 @@ module Aws::Lightsail
     #
     class PeerVpcResult < Struct.new(
       :operation)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -8180,6 +8419,7 @@ module Aws::Lightsail
       :action,
       :description,
       :current_apply_date)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -8204,6 +8444,7 @@ module Aws::Lightsail
       :master_user_password,
       :engine_version,
       :backup_retention_enabled)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -8329,6 +8570,7 @@ module Aws::Lightsail
       :protocol,
       :cidrs,
       :cidr_list_aliases)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -8515,6 +8757,7 @@ module Aws::Lightsail
       :contact_protocols,
       :notification_triggers,
       :notification_enabled)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -8528,6 +8771,7 @@ module Aws::Lightsail
     #
     class PutAlarmResult < Struct.new(
       :operations)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -8561,6 +8805,7 @@ module Aws::Lightsail
     class PutInstancePublicPortsRequest < Struct.new(
       :port_infos,
       :instance_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -8574,6 +8819,7 @@ module Aws::Lightsail
     #
     class PutInstancePublicPortsResult < Struct.new(
       :operation)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -8592,6 +8838,7 @@ module Aws::Lightsail
     #
     class RebootInstanceRequest < Struct.new(
       :instance_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -8605,6 +8852,7 @@ module Aws::Lightsail
     #
     class RebootInstanceResult < Struct.new(
       :operations)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -8623,6 +8871,7 @@ module Aws::Lightsail
     #
     class RebootRelationalDatabaseRequest < Struct.new(
       :relational_database_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -8636,6 +8885,7 @@ module Aws::Lightsail
     #
     class RebootRelationalDatabaseResult < Struct.new(
       :operations)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -8677,6 +8927,7 @@ module Aws::Lightsail
       :name,
       :availability_zones,
       :relational_database_availability_zones)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -8840,6 +9091,7 @@ module Aws::Lightsail
       :master_endpoint,
       :pending_maintenance_actions,
       :ca_certificate_identifier)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -8883,6 +9135,7 @@ module Aws::Lightsail
       :engine_description,
       :engine_version_description,
       :is_engine_default)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -8938,6 +9191,7 @@ module Aws::Lightsail
       :cpu_count,
       :is_encrypted,
       :is_active)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -8956,6 +9210,7 @@ module Aws::Lightsail
     class RelationalDatabaseEndpoint < Struct.new(
       :port,
       :address)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -8984,6 +9239,7 @@ module Aws::Lightsail
       :created_at,
       :message,
       :event_categories)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -9007,6 +9263,7 @@ module Aws::Lightsail
       :cpu_count,
       :disk_size_in_gb,
       :ram_size_in_gb)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -9071,6 +9328,7 @@ module Aws::Lightsail
       :is_modifiable,
       :parameter_name,
       :parameter_value)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -9171,6 +9429,7 @@ module Aws::Lightsail
       :from_relational_database_arn,
       :from_relational_database_bundle_id,
       :from_relational_database_blueprint_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -9189,6 +9448,7 @@ module Aws::Lightsail
     #
     class ReleaseStaticIpRequest < Struct.new(
       :static_ip_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -9202,6 +9462,7 @@ module Aws::Lightsail
     #
     class ReleaseStaticIpResult < Struct.new(
       :operations)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -9221,6 +9482,7 @@ module Aws::Lightsail
     class ResourceLocation < Struct.new(
       :availability_zone,
       :region_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -9239,6 +9501,7 @@ module Aws::Lightsail
     #
     class SendContactMethodVerificationRequest < Struct.new(
       :protocol)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -9252,6 +9515,7 @@ module Aws::Lightsail
     #
     class SendContactMethodVerificationResult < Struct.new(
       :operations)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -9276,6 +9540,7 @@ module Aws::Lightsail
       :docs,
       :message,
       :tip)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -9294,6 +9559,7 @@ module Aws::Lightsail
     #
     class StartInstanceRequest < Struct.new(
       :instance_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -9307,6 +9573,7 @@ module Aws::Lightsail
     #
     class StartInstanceResult < Struct.new(
       :operations)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -9325,6 +9592,7 @@ module Aws::Lightsail
     #
     class StartRelationalDatabaseRequest < Struct.new(
       :relational_database_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -9338,6 +9606,7 @@ module Aws::Lightsail
     #
     class StartRelationalDatabaseResult < Struct.new(
       :operations)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -9397,6 +9666,7 @@ module Aws::Lightsail
       :ip_address,
       :attached_to,
       :is_attached)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -9426,6 +9696,7 @@ module Aws::Lightsail
     class StopInstanceRequest < Struct.new(
       :instance_name,
       :force)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -9439,6 +9710,7 @@ module Aws::Lightsail
     #
     class StopInstanceResult < Struct.new(
       :operations)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -9464,6 +9736,7 @@ module Aws::Lightsail
     class StopRelationalDatabaseRequest < Struct.new(
       :relational_database_name,
       :relational_database_snapshot_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -9477,6 +9750,7 @@ module Aws::Lightsail
     #
     class StopRelationalDatabaseResult < Struct.new(
       :operations)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -9517,6 +9791,7 @@ module Aws::Lightsail
     class Tag < Struct.new(
       :key,
       :value)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -9553,6 +9828,7 @@ module Aws::Lightsail
       :resource_name,
       :resource_arn,
       :tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -9566,6 +9842,7 @@ module Aws::Lightsail
     #
     class TagResourceResult < Struct.new(
       :operations)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -9600,6 +9877,7 @@ module Aws::Lightsail
     class TestAlarmRequest < Struct.new(
       :alarm_name,
       :state)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -9613,6 +9891,7 @@ module Aws::Lightsail
     #
     class TestAlarmResult < Struct.new(
       :operations)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -9638,6 +9917,7 @@ module Aws::Lightsail
       :docs,
       :message,
       :tip)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -9657,6 +9937,7 @@ module Aws::Lightsail
     #
     class UnpeerVpcResult < Struct.new(
       :operation)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -9688,6 +9969,7 @@ module Aws::Lightsail
       :resource_name,
       :resource_arn,
       :tag_keys)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -9701,6 +9983,7 @@ module Aws::Lightsail
     #
     class UntagResourceResult < Struct.new(
       :operations)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -9735,6 +10018,7 @@ module Aws::Lightsail
     class UpdateDomainEntryRequest < Struct.new(
       :domain_name,
       :domain_entry)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -9748,6 +10032,7 @@ module Aws::Lightsail
     #
     class UpdateDomainEntryResult < Struct.new(
       :operations)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -9780,6 +10065,7 @@ module Aws::Lightsail
       :load_balancer_name,
       :attribute_name,
       :attribute_value)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -9793,6 +10079,7 @@ module Aws::Lightsail
     #
     class UpdateLoadBalancerAttributeResult < Struct.new(
       :operations)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -9828,6 +10115,7 @@ module Aws::Lightsail
     class UpdateRelationalDatabaseParametersRequest < Struct.new(
       :relational_database_name,
       :parameters)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -9841,6 +10129,7 @@ module Aws::Lightsail
     #
     class UpdateRelationalDatabaseParametersResult < Struct.new(
       :operations)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -9970,6 +10259,7 @@ module Aws::Lightsail
       :publicly_accessible,
       :apply_immediately,
       :ca_certificate_identifier)
+      SENSITIVE = [:master_user_password]
       include Aws::Structure
     end
 
@@ -9983,6 +10273,7 @@ module Aws::Lightsail
     #
     class UpdateRelationalDatabaseResult < Struct.new(
       :operations)
+      SENSITIVE = []
       include Aws::Structure
     end
 

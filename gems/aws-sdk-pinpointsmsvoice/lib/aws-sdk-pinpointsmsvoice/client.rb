@@ -617,7 +617,7 @@ module Aws::PinpointSMSVoice
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-pinpointsmsvoice'
-      context[:gem_version] = '1.17.1'
+      context[:gem_version] = '1.18.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

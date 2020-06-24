@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.42.0 (2020-06-24)
+------------------
+
+* Feature - Documentation updates for iam
+
+1.41.0 (2020-06-23)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
 1.40.1 (2020-06-11)
 ------------------
 

@@ -21,6 +21,7 @@ module Aws::Pricing
     #
     class AttributeValue < Struct.new(
       :value)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -64,6 +65,7 @@ module Aws::Pricing
       :format_version,
       :next_token,
       :max_results)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -85,6 +87,7 @@ module Aws::Pricing
       :services,
       :format_version,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -97,6 +100,7 @@ module Aws::Pricing
     #
     class ExpiredNextTokenException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -146,6 +150,7 @@ module Aws::Pricing
       :type,
       :field,
       :value)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -186,6 +191,7 @@ module Aws::Pricing
       :attribute_name,
       :next_token,
       :max_results)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -205,6 +211,7 @@ module Aws::Pricing
     class GetAttributeValuesResponse < Struct.new(
       :attribute_values,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -257,6 +264,7 @@ module Aws::Pricing
       :format_version,
       :next_token,
       :max_results)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -280,6 +288,7 @@ module Aws::Pricing
       :format_version,
       :price_list,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -293,6 +302,7 @@ module Aws::Pricing
     #
     class InternalErrorException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -305,6 +315,7 @@ module Aws::Pricing
     #
     class InvalidNextTokenException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -317,6 +328,7 @@ module Aws::Pricing
     #
     class InvalidParameterException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -329,6 +341,7 @@ module Aws::Pricing
     #
     class NotFoundException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -348,6 +361,7 @@ module Aws::Pricing
     class Service < Struct.new(
       :service_code,
       :attribute_names)
+      SENSITIVE = []
       include Aws::Structure
     end
 

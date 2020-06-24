@@ -32,6 +32,7 @@ module Aws::CognitoIdentityProvider
     #
     class AccountRecoverySettingType < Struct.new(
       :recovery_mechanisms)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -68,6 +69,7 @@ module Aws::CognitoIdentityProvider
     class AccountTakeoverActionType < Struct.new(
       :notify,
       :event_action)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -109,6 +111,7 @@ module Aws::CognitoIdentityProvider
       :low_action,
       :medium_action,
       :high_action)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -168,6 +171,7 @@ module Aws::CognitoIdentityProvider
     class AccountTakeoverRiskConfigurationType < Struct.new(
       :notify_configuration,
       :actions)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -211,6 +215,7 @@ module Aws::CognitoIdentityProvider
     class AddCustomAttributesRequest < Struct.new(
       :user_pool_id,
       :custom_attributes)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -248,6 +253,7 @@ module Aws::CognitoIdentityProvider
       :user_pool_id,
       :username,
       :group_name)
+      SENSITIVE = [:username]
       include Aws::Structure
     end
 
@@ -316,6 +322,7 @@ module Aws::CognitoIdentityProvider
       :user_pool_id,
       :username,
       :client_metadata)
+      SENSITIVE = [:username]
       include Aws::Structure
     end
 
@@ -377,6 +384,7 @@ module Aws::CognitoIdentityProvider
       :allow_admin_create_user_only,
       :unused_account_validity_days,
       :invite_message_template)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -565,6 +573,7 @@ module Aws::CognitoIdentityProvider
       :message_action,
       :desired_delivery_mediums,
       :client_metadata)
+      SENSITIVE = [:username, :temporary_password]
       include Aws::Structure
     end
 
@@ -579,6 +588,7 @@ module Aws::CognitoIdentityProvider
     #
     class AdminCreateUserResponse < Struct.new(
       :user)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -617,6 +627,7 @@ module Aws::CognitoIdentityProvider
       :user_pool_id,
       :username,
       :user_attribute_names)
+      SENSITIVE = [:username]
       include Aws::Structure
     end
 
@@ -651,6 +662,7 @@ module Aws::CognitoIdentityProvider
     class AdminDeleteUserRequest < Struct.new(
       :user_pool_id,
       :username)
+      SENSITIVE = [:username]
       include Aws::Structure
     end
 
@@ -679,6 +691,7 @@ module Aws::CognitoIdentityProvider
     class AdminDisableProviderForUserRequest < Struct.new(
       :user_pool_id,
       :user)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -710,6 +723,7 @@ module Aws::CognitoIdentityProvider
     class AdminDisableUserRequest < Struct.new(
       :user_pool_id,
       :username)
+      SENSITIVE = [:username]
       include Aws::Structure
     end
 
@@ -744,6 +758,7 @@ module Aws::CognitoIdentityProvider
     class AdminEnableUserRequest < Struct.new(
       :user_pool_id,
       :username)
+      SENSITIVE = [:username]
       include Aws::Structure
     end
 
@@ -783,6 +798,7 @@ module Aws::CognitoIdentityProvider
       :user_pool_id,
       :username,
       :device_key)
+      SENSITIVE = [:username]
       include Aws::Structure
     end
 
@@ -815,6 +831,7 @@ module Aws::CognitoIdentityProvider
       :device_key,
       :user_pool_id,
       :username)
+      SENSITIVE = [:username]
       include Aws::Structure
     end
 
@@ -828,6 +845,7 @@ module Aws::CognitoIdentityProvider
     #
     class AdminGetDeviceResponse < Struct.new(
       :device)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -855,6 +873,7 @@ module Aws::CognitoIdentityProvider
     class AdminGetUserRequest < Struct.new(
       :user_pool_id,
       :username)
+      SENSITIVE = [:username]
       include Aws::Structure
     end
 
@@ -932,6 +951,7 @@ module Aws::CognitoIdentityProvider
       :mfa_options,
       :preferred_mfa_setting,
       :user_mfa_setting_list)
+      SENSITIVE = [:username]
       include Aws::Structure
     end
 
@@ -1121,6 +1141,7 @@ module Aws::CognitoIdentityProvider
       :client_metadata,
       :analytics_metadata,
       :context_data)
+      SENSITIVE = [:client_id, :auth_parameters]
       include Aws::Structure
     end
 
@@ -1207,6 +1228,7 @@ module Aws::CognitoIdentityProvider
       :session,
       :challenge_parameters,
       :authentication_result)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1283,6 +1305,7 @@ module Aws::CognitoIdentityProvider
       :user_pool_id,
       :destination_user,
       :source_user)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1325,6 +1348,7 @@ module Aws::CognitoIdentityProvider
       :username,
       :limit,
       :pagination_token)
+      SENSITIVE = [:username]
       include Aws::Structure
     end
 
@@ -1343,6 +1367,7 @@ module Aws::CognitoIdentityProvider
     class AdminListDevicesResponse < Struct.new(
       :devices,
       :pagination_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1381,6 +1406,7 @@ module Aws::CognitoIdentityProvider
       :user_pool_id,
       :limit,
       :next_token)
+      SENSITIVE = [:username]
       include Aws::Structure
     end
 
@@ -1399,6 +1425,7 @@ module Aws::CognitoIdentityProvider
     class AdminListGroupsForUserResponse < Struct.new(
       :groups,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1435,6 +1462,7 @@ module Aws::CognitoIdentityProvider
       :username,
       :max_results,
       :next_token)
+      SENSITIVE = [:username]
       include Aws::Structure
     end
 
@@ -1452,6 +1480,7 @@ module Aws::CognitoIdentityProvider
     class AdminListUserAuthEventsResponse < Struct.new(
       :auth_events,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1482,6 +1511,7 @@ module Aws::CognitoIdentityProvider
       :user_pool_id,
       :username,
       :group_name)
+      SENSITIVE = [:username]
       include Aws::Structure
     end
 
@@ -1553,6 +1583,7 @@ module Aws::CognitoIdentityProvider
       :user_pool_id,
       :username,
       :client_metadata)
+      SENSITIVE = [:username]
       include Aws::Structure
     end
 
@@ -1707,6 +1738,7 @@ module Aws::CognitoIdentityProvider
       :analytics_metadata,
       :context_data,
       :client_metadata)
+      SENSITIVE = [:client_id]
       include Aws::Structure
     end
 
@@ -1740,6 +1772,7 @@ module Aws::CognitoIdentityProvider
       :session,
       :challenge_parameters,
       :authentication_result)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1782,6 +1815,7 @@ module Aws::CognitoIdentityProvider
       :software_token_mfa_settings,
       :username,
       :user_pool_id)
+      SENSITIVE = [:username]
       include Aws::Structure
     end
 
@@ -1823,6 +1857,7 @@ module Aws::CognitoIdentityProvider
       :username,
       :password,
       :permanent)
+      SENSITIVE = [:username, :password]
       include Aws::Structure
     end
 
@@ -1867,6 +1902,7 @@ module Aws::CognitoIdentityProvider
       :user_pool_id,
       :username,
       :mfa_options)
+      SENSITIVE = [:username]
       include Aws::Structure
     end
 
@@ -1910,6 +1946,7 @@ module Aws::CognitoIdentityProvider
       :username,
       :event_id,
       :feedback_value)
+      SENSITIVE = [:username]
       include Aws::Structure
     end
 
@@ -1952,6 +1989,7 @@ module Aws::CognitoIdentityProvider
       :username,
       :device_key,
       :device_remembered_status)
+      SENSITIVE = [:username]
       include Aws::Structure
     end
 
@@ -2045,6 +2083,7 @@ module Aws::CognitoIdentityProvider
       :username,
       :user_attributes,
       :client_metadata)
+      SENSITIVE = [:username]
       include Aws::Structure
     end
 
@@ -2078,6 +2117,7 @@ module Aws::CognitoIdentityProvider
     class AdminUserGlobalSignOutRequest < Struct.new(
       :user_pool_id,
       :username)
+      SENSITIVE = [:username]
       include Aws::Structure
     end
 
@@ -2100,6 +2140,7 @@ module Aws::CognitoIdentityProvider
     #
     class AliasExistsException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2147,6 +2188,7 @@ module Aws::CognitoIdentityProvider
       :role_arn,
       :external_id,
       :user_data_shared)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2176,6 +2218,7 @@ module Aws::CognitoIdentityProvider
     #
     class AnalyticsMetadataType < Struct.new(
       :analytics_endpoint_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2202,6 +2245,7 @@ module Aws::CognitoIdentityProvider
     class AssociateSoftwareTokenRequest < Struct.new(
       :access_token,
       :session)
+      SENSITIVE = [:access_token]
       include Aws::Structure
     end
 
@@ -2221,6 +2265,7 @@ module Aws::CognitoIdentityProvider
     class AssociateSoftwareTokenResponse < Struct.new(
       :secret_code,
       :session)
+      SENSITIVE = [:secret_code]
       include Aws::Structure
     end
 
@@ -2247,6 +2292,7 @@ module Aws::CognitoIdentityProvider
     class AttributeType < Struct.new(
       :name,
       :value)
+      SENSITIVE = [:value]
       include Aws::Structure
     end
 
@@ -2298,6 +2344,7 @@ module Aws::CognitoIdentityProvider
       :challenge_responses,
       :event_context_data,
       :event_feedback)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2336,6 +2383,7 @@ module Aws::CognitoIdentityProvider
       :refresh_token,
       :id_token,
       :new_device_metadata)
+      SENSITIVE = [:access_token, :refresh_token, :id_token]
       include Aws::Structure
     end
 
@@ -2354,6 +2402,7 @@ module Aws::CognitoIdentityProvider
     class ChallengeResponseType < Struct.new(
       :challenge_name,
       :challenge_response)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2386,6 +2435,7 @@ module Aws::CognitoIdentityProvider
       :previous_password,
       :proposed_password,
       :access_token)
+      SENSITIVE = [:previous_password, :proposed_password, :access_token]
       include Aws::Structure
     end
 
@@ -2415,6 +2465,7 @@ module Aws::CognitoIdentityProvider
       :destination,
       :delivery_medium,
       :attribute_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2430,6 +2481,7 @@ module Aws::CognitoIdentityProvider
     #
     class CodeDeliveryFailureException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2444,6 +2496,7 @@ module Aws::CognitoIdentityProvider
     #
     class CodeMismatchException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2464,6 +2517,7 @@ module Aws::CognitoIdentityProvider
     #
     class CompromisedCredentialsActionsType < Struct.new(
       :event_action)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2493,6 +2547,7 @@ module Aws::CognitoIdentityProvider
     class CompromisedCredentialsRiskConfigurationType < Struct.new(
       :event_filter,
       :actions)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2507,6 +2562,7 @@ module Aws::CognitoIdentityProvider
     #
     class ConcurrentModificationException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2548,6 +2604,7 @@ module Aws::CognitoIdentityProvider
       :device_key,
       :device_secret_verifier_config,
       :device_name)
+      SENSITIVE = [:access_token]
       include Aws::Structure
     end
 
@@ -2562,6 +2619,7 @@ module Aws::CognitoIdentityProvider
     #
     class ConfirmDeviceResponse < Struct.new(
       :user_confirmation_necessary)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2673,6 +2731,7 @@ module Aws::CognitoIdentityProvider
       :analytics_metadata,
       :user_context_data,
       :client_metadata)
+      SENSITIVE = [:client_id, :secret_hash, :username, :password]
       include Aws::Structure
     end
 
@@ -2795,6 +2854,7 @@ module Aws::CognitoIdentityProvider
       :analytics_metadata,
       :user_context_data,
       :client_metadata)
+      SENSITIVE = [:client_id, :secret_hash, :username]
       include Aws::Structure
     end
 
@@ -2853,6 +2913,7 @@ module Aws::CognitoIdentityProvider
       :server_path,
       :http_headers,
       :encoded_data)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2911,6 +2972,7 @@ module Aws::CognitoIdentityProvider
       :description,
       :role_arn,
       :precedence)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2922,6 +2984,7 @@ module Aws::CognitoIdentityProvider
     #
     class CreateGroupResponse < Struct.new(
       :group)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3028,6 +3091,7 @@ module Aws::CognitoIdentityProvider
       :provider_details,
       :attribute_mapping,
       :idp_identifiers)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3039,6 +3103,7 @@ module Aws::CognitoIdentityProvider
     #
     class CreateIdentityProviderResponse < Struct.new(
       :identity_provider)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3083,6 +3148,7 @@ module Aws::CognitoIdentityProvider
       :identifier,
       :name,
       :scopes)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3094,6 +3160,7 @@ module Aws::CognitoIdentityProvider
     #
     class CreateResourceServerResponse < Struct.new(
       :resource_server)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3128,6 +3195,7 @@ module Aws::CognitoIdentityProvider
       :job_name,
       :user_pool_id,
       :cloud_watch_logs_role_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3142,6 +3210,7 @@ module Aws::CognitoIdentityProvider
     #
     class CreateUserImportJobResponse < Struct.new(
       :user_import_job)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3398,6 +3467,7 @@ module Aws::CognitoIdentityProvider
       :allowed_o_auth_flows_user_pool_client,
       :analytics_configuration,
       :prevent_user_existence_errors)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3411,6 +3481,7 @@ module Aws::CognitoIdentityProvider
     #
     class CreateUserPoolClientResponse < Struct.new(
       :user_pool_client)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3455,6 +3526,7 @@ module Aws::CognitoIdentityProvider
       :domain,
       :user_pool_id,
       :custom_domain_config)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3467,6 +3539,7 @@ module Aws::CognitoIdentityProvider
     #
     class CreateUserPoolDomainResponse < Struct.new(
       :cloud_front_domain)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3728,6 +3801,7 @@ module Aws::CognitoIdentityProvider
       :user_pool_add_ons,
       :username_configuration,
       :account_recovery_setting)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3742,6 +3816,7 @@ module Aws::CognitoIdentityProvider
     #
     class CreateUserPoolResponse < Struct.new(
       :user_pool)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3765,6 +3840,7 @@ module Aws::CognitoIdentityProvider
     #
     class CustomDomainConfigType < Struct.new(
       :certificate_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3789,6 +3865,7 @@ module Aws::CognitoIdentityProvider
     class DeleteGroupRequest < Struct.new(
       :group_name,
       :user_pool_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3813,6 +3890,7 @@ module Aws::CognitoIdentityProvider
     class DeleteIdentityProviderRequest < Struct.new(
       :user_pool_id,
       :provider_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3837,6 +3915,7 @@ module Aws::CognitoIdentityProvider
     class DeleteResourceServerRequest < Struct.new(
       :user_pool_id,
       :identifier)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3867,6 +3946,7 @@ module Aws::CognitoIdentityProvider
     class DeleteUserAttributesRequest < Struct.new(
       :user_attribute_names,
       :access_token)
+      SENSITIVE = [:access_token]
       include Aws::Structure
     end
 
@@ -3900,6 +3980,7 @@ module Aws::CognitoIdentityProvider
     class DeleteUserPoolClientRequest < Struct.new(
       :user_pool_id,
       :client_id)
+      SENSITIVE = [:client_id]
       include Aws::Structure
     end
 
@@ -3924,6 +4005,7 @@ module Aws::CognitoIdentityProvider
     class DeleteUserPoolDomainRequest < Struct.new(
       :domain,
       :user_pool_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3948,6 +4030,7 @@ module Aws::CognitoIdentityProvider
     #
     class DeleteUserPoolRequest < Struct.new(
       :user_pool_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3968,6 +4051,7 @@ module Aws::CognitoIdentityProvider
     #
     class DeleteUserRequest < Struct.new(
       :access_token)
+      SENSITIVE = [:access_token]
       include Aws::Structure
     end
 
@@ -3992,6 +4076,7 @@ module Aws::CognitoIdentityProvider
     class DescribeIdentityProviderRequest < Struct.new(
       :user_pool_id,
       :provider_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4003,6 +4088,7 @@ module Aws::CognitoIdentityProvider
     #
     class DescribeIdentityProviderResponse < Struct.new(
       :identity_provider)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4027,6 +4113,7 @@ module Aws::CognitoIdentityProvider
     class DescribeResourceServerRequest < Struct.new(
       :user_pool_id,
       :identifier)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4038,6 +4125,7 @@ module Aws::CognitoIdentityProvider
     #
     class DescribeResourceServerResponse < Struct.new(
       :resource_server)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4062,6 +4150,7 @@ module Aws::CognitoIdentityProvider
     class DescribeRiskConfigurationRequest < Struct.new(
       :user_pool_id,
       :client_id)
+      SENSITIVE = [:client_id]
       include Aws::Structure
     end
 
@@ -4073,6 +4162,7 @@ module Aws::CognitoIdentityProvider
     #
     class DescribeRiskConfigurationResponse < Struct.new(
       :risk_configuration)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4100,6 +4190,7 @@ module Aws::CognitoIdentityProvider
     class DescribeUserImportJobRequest < Struct.new(
       :user_pool_id,
       :job_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4114,6 +4205,7 @@ module Aws::CognitoIdentityProvider
     #
     class DescribeUserImportJobResponse < Struct.new(
       :user_import_job)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4140,6 +4232,7 @@ module Aws::CognitoIdentityProvider
     class DescribeUserPoolClientRequest < Struct.new(
       :user_pool_id,
       :client_id)
+      SENSITIVE = [:client_id]
       include Aws::Structure
     end
 
@@ -4155,6 +4248,7 @@ module Aws::CognitoIdentityProvider
     #
     class DescribeUserPoolClientResponse < Struct.new(
       :user_pool_client)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4173,6 +4267,7 @@ module Aws::CognitoIdentityProvider
     #
     class DescribeUserPoolDomainRequest < Struct.new(
       :domain)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4184,6 +4279,7 @@ module Aws::CognitoIdentityProvider
     #
     class DescribeUserPoolDomainResponse < Struct.new(
       :domain_description)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4204,6 +4300,7 @@ module Aws::CognitoIdentityProvider
     #
     class DescribeUserPoolRequest < Struct.new(
       :user_pool_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4218,6 +4315,7 @@ module Aws::CognitoIdentityProvider
     #
     class DescribeUserPoolResponse < Struct.new(
       :user_pool)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4245,6 +4343,7 @@ module Aws::CognitoIdentityProvider
     class DeviceConfigurationType < Struct.new(
       :challenge_required_on_new_device,
       :device_only_remembered_on_user_prompt)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4271,6 +4370,7 @@ module Aws::CognitoIdentityProvider
     class DeviceSecretVerifierConfigType < Struct.new(
       :password_verifier,
       :salt)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4304,6 +4404,7 @@ module Aws::CognitoIdentityProvider
       :device_create_date,
       :device_last_modified_date,
       :device_last_authenticated_date)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4353,6 +4454,7 @@ module Aws::CognitoIdentityProvider
       :version,
       :status,
       :custom_domain_config)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4366,6 +4468,7 @@ module Aws::CognitoIdentityProvider
     #
     class DuplicateProviderException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4484,6 +4587,7 @@ module Aws::CognitoIdentityProvider
       :email_sending_account,
       :from,
       :configuration_set)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4498,6 +4602,7 @@ module Aws::CognitoIdentityProvider
     #
     class EnableSoftwareTokenMFAException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4532,6 +4637,7 @@ module Aws::CognitoIdentityProvider
       :timezone,
       :city,
       :country)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4555,6 +4661,7 @@ module Aws::CognitoIdentityProvider
       :feedback_value,
       :provider,
       :feedback_date)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4579,6 +4686,7 @@ module Aws::CognitoIdentityProvider
       :risk_decision,
       :risk_level,
       :compromised_credentials_detected)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4592,6 +4700,7 @@ module Aws::CognitoIdentityProvider
     #
     class ExpiredCodeException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4618,6 +4727,7 @@ module Aws::CognitoIdentityProvider
     class ForgetDeviceRequest < Struct.new(
       :access_token,
       :device_key)
+      SENSITIVE = [:access_token]
       include Aws::Structure
     end
 
@@ -4716,6 +4826,7 @@ module Aws::CognitoIdentityProvider
       :username,
       :analytics_metadata,
       :client_metadata)
+      SENSITIVE = [:client_id, :secret_hash, :username]
       include Aws::Structure
     end
 
@@ -4731,6 +4842,7 @@ module Aws::CognitoIdentityProvider
     #
     class ForgotPasswordResponse < Struct.new(
       :code_delivery_details)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4753,6 +4865,7 @@ module Aws::CognitoIdentityProvider
     #
     class GetCSVHeaderRequest < Struct.new(
       :user_pool_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4773,6 +4886,7 @@ module Aws::CognitoIdentityProvider
     class GetCSVHeaderResponse < Struct.new(
       :user_pool_id,
       :csv_header)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4799,6 +4913,7 @@ module Aws::CognitoIdentityProvider
     class GetDeviceRequest < Struct.new(
       :device_key,
       :access_token)
+      SENSITIVE = [:access_token]
       include Aws::Structure
     end
 
@@ -4812,6 +4927,7 @@ module Aws::CognitoIdentityProvider
     #
     class GetDeviceResponse < Struct.new(
       :device)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4836,6 +4952,7 @@ module Aws::CognitoIdentityProvider
     class GetGroupRequest < Struct.new(
       :group_name,
       :user_pool_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4847,6 +4964,7 @@ module Aws::CognitoIdentityProvider
     #
     class GetGroupResponse < Struct.new(
       :group)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4871,6 +4989,7 @@ module Aws::CognitoIdentityProvider
     class GetIdentityProviderByIdentifierRequest < Struct.new(
       :user_pool_id,
       :idp_identifier)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4882,6 +5001,7 @@ module Aws::CognitoIdentityProvider
     #
     class GetIdentityProviderByIdentifierResponse < Struct.new(
       :identity_provider)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4902,6 +5022,7 @@ module Aws::CognitoIdentityProvider
     #
     class GetSigningCertificateRequest < Struct.new(
       :user_pool_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4915,6 +5036,7 @@ module Aws::CognitoIdentityProvider
     #
     class GetSigningCertificateResponse < Struct.new(
       :certificate)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4939,6 +5061,7 @@ module Aws::CognitoIdentityProvider
     class GetUICustomizationRequest < Struct.new(
       :user_pool_id,
       :client_id)
+      SENSITIVE = [:client_id]
       include Aws::Structure
     end
 
@@ -4950,6 +5073,7 @@ module Aws::CognitoIdentityProvider
     #
     class GetUICustomizationResponse < Struct.new(
       :ui_customization)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5022,6 +5146,7 @@ module Aws::CognitoIdentityProvider
       :access_token,
       :attribute_name,
       :client_metadata)
+      SENSITIVE = [:access_token]
       include Aws::Structure
     end
 
@@ -5037,6 +5162,7 @@ module Aws::CognitoIdentityProvider
     #
     class GetUserAttributeVerificationCodeResponse < Struct.new(
       :code_delivery_details)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5055,6 +5181,7 @@ module Aws::CognitoIdentityProvider
     #
     class GetUserPoolMfaConfigRequest < Struct.new(
       :user_pool_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5083,6 +5210,7 @@ module Aws::CognitoIdentityProvider
       :sms_mfa_configuration,
       :software_token_mfa_configuration,
       :mfa_configuration)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5104,6 +5232,7 @@ module Aws::CognitoIdentityProvider
     #
     class GetUserRequest < Struct.new(
       :access_token)
+      SENSITIVE = [:access_token]
       include Aws::Structure
     end
 
@@ -5147,6 +5276,7 @@ module Aws::CognitoIdentityProvider
       :mfa_options,
       :preferred_mfa_setting,
       :user_mfa_setting_list)
+      SENSITIVE = [:username]
       include Aws::Structure
     end
 
@@ -5167,6 +5297,7 @@ module Aws::CognitoIdentityProvider
     #
     class GlobalSignOutRequest < Struct.new(
       :access_token)
+      SENSITIVE = [:access_token]
       include Aws::Structure
     end
 
@@ -5186,6 +5317,7 @@ module Aws::CognitoIdentityProvider
     #
     class GroupExistsException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5245,6 +5377,7 @@ module Aws::CognitoIdentityProvider
       :precedence,
       :last_modified_date,
       :creation_date)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5271,6 +5404,7 @@ module Aws::CognitoIdentityProvider
     class HttpHeader < Struct.new(
       :header_name,
       :header_value)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5373,6 +5507,7 @@ module Aws::CognitoIdentityProvider
       :idp_identifiers,
       :last_modified_date,
       :creation_date)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5541,6 +5676,7 @@ module Aws::CognitoIdentityProvider
       :client_id,
       :analytics_metadata,
       :user_context_data)
+      SENSITIVE = [:auth_parameters, :client_id]
       include Aws::Structure
     end
 
@@ -5610,6 +5746,7 @@ module Aws::CognitoIdentityProvider
       :session,
       :challenge_parameters,
       :authentication_result)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5625,6 +5762,7 @@ module Aws::CognitoIdentityProvider
     #
     class InternalErrorException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5641,6 +5779,7 @@ module Aws::CognitoIdentityProvider
     #
     class InvalidEmailRoleAccessPolicyException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5656,6 +5795,7 @@ module Aws::CognitoIdentityProvider
     #
     class InvalidLambdaResponseException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5668,6 +5808,7 @@ module Aws::CognitoIdentityProvider
     #
     class InvalidOAuthFlowException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5683,6 +5824,7 @@ module Aws::CognitoIdentityProvider
     #
     class InvalidParameterException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5698,6 +5840,7 @@ module Aws::CognitoIdentityProvider
     #
     class InvalidPasswordException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5713,6 +5856,7 @@ module Aws::CognitoIdentityProvider
     #
     class InvalidSmsRoleAccessPolicyException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5731,6 +5875,7 @@ module Aws::CognitoIdentityProvider
     #
     class InvalidSmsRoleTrustRelationshipException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5744,6 +5889,7 @@ module Aws::CognitoIdentityProvider
     #
     class InvalidUserPoolConfigurationException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5818,6 +5964,7 @@ module Aws::CognitoIdentityProvider
       :verify_auth_challenge_response,
       :pre_token_generation,
       :user_migration)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5833,6 +5980,7 @@ module Aws::CognitoIdentityProvider
     #
     class LimitExceededException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5865,6 +6013,7 @@ module Aws::CognitoIdentityProvider
       :access_token,
       :limit,
       :pagination_token)
+      SENSITIVE = [:access_token]
       include Aws::Structure
     end
 
@@ -5883,6 +6032,7 @@ module Aws::CognitoIdentityProvider
     class ListDevicesResponse < Struct.new(
       :devices,
       :pagination_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5915,6 +6065,7 @@ module Aws::CognitoIdentityProvider
       :user_pool_id,
       :limit,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5933,6 +6084,7 @@ module Aws::CognitoIdentityProvider
     class ListGroupsResponse < Struct.new(
       :groups,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5963,6 +6115,7 @@ module Aws::CognitoIdentityProvider
       :user_pool_id,
       :max_results,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5979,6 +6132,7 @@ module Aws::CognitoIdentityProvider
     class ListIdentityProvidersResponse < Struct.new(
       :providers,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6009,6 +6163,7 @@ module Aws::CognitoIdentityProvider
       :user_pool_id,
       :max_results,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6025,6 +6180,7 @@ module Aws::CognitoIdentityProvider
     class ListResourceServersResponse < Struct.new(
       :resource_servers,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6044,6 +6200,7 @@ module Aws::CognitoIdentityProvider
     #
     class ListTagsForResourceRequest < Struct.new(
       :resource_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6055,6 +6212,7 @@ module Aws::CognitoIdentityProvider
     #
     class ListTagsForResourceResponse < Struct.new(
       :tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6090,6 +6248,7 @@ module Aws::CognitoIdentityProvider
       :user_pool_id,
       :max_results,
       :pagination_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6110,6 +6269,7 @@ module Aws::CognitoIdentityProvider
     class ListUserImportJobsResponse < Struct.new(
       :user_import_jobs,
       :pagination_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6146,6 +6306,7 @@ module Aws::CognitoIdentityProvider
       :user_pool_id,
       :max_results,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6166,6 +6327,7 @@ module Aws::CognitoIdentityProvider
     class ListUserPoolClientsResponse < Struct.new(
       :user_pool_clients,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6195,6 +6357,7 @@ module Aws::CognitoIdentityProvider
     class ListUserPoolsRequest < Struct.new(
       :next_token,
       :max_results)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6215,6 +6378,7 @@ module Aws::CognitoIdentityProvider
     class ListUserPoolsResponse < Struct.new(
       :user_pools,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6253,6 +6417,7 @@ module Aws::CognitoIdentityProvider
       :group_name,
       :limit,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6271,6 +6436,7 @@ module Aws::CognitoIdentityProvider
     class ListUsersInGroupResponse < Struct.new(
       :users,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6370,6 +6536,7 @@ module Aws::CognitoIdentityProvider
       :limit,
       :pagination_token,
       :filter)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6390,6 +6557,7 @@ module Aws::CognitoIdentityProvider
     class ListUsersResponse < Struct.new(
       :users,
       :pagination_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6405,6 +6573,7 @@ module Aws::CognitoIdentityProvider
     #
     class MFAMethodNotFoundException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6442,6 +6611,7 @@ module Aws::CognitoIdentityProvider
     class MFAOptionType < Struct.new(
       :delivery_medium,
       :attribute_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6474,6 +6644,7 @@ module Aws::CognitoIdentityProvider
       :sms_message,
       :email_message,
       :email_subject)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6492,6 +6663,7 @@ module Aws::CognitoIdentityProvider
     class NewDeviceMetadataType < Struct.new(
       :device_key,
       :device_group_key)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6506,6 +6678,7 @@ module Aws::CognitoIdentityProvider
     #
     class NotAuthorizedException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6573,6 +6746,7 @@ module Aws::CognitoIdentityProvider
       :block_email,
       :no_action_email,
       :mfa_email)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6605,6 +6779,7 @@ module Aws::CognitoIdentityProvider
       :subject,
       :html_body,
       :text_body)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6632,6 +6807,7 @@ module Aws::CognitoIdentityProvider
     class NumberAttributeConstraintsType < Struct.new(
       :min_value,
       :max_value)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6697,6 +6873,7 @@ module Aws::CognitoIdentityProvider
       :require_numbers,
       :require_symbols,
       :temporary_password_validity_days)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6710,6 +6887,7 @@ module Aws::CognitoIdentityProvider
     #
     class PasswordResetRequiredException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6723,6 +6901,7 @@ module Aws::CognitoIdentityProvider
     #
     class PreconditionNotMetException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6751,6 +6930,7 @@ module Aws::CognitoIdentityProvider
       :provider_type,
       :last_modified_date,
       :creation_date)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6787,6 +6967,7 @@ module Aws::CognitoIdentityProvider
       :provider_name,
       :provider_attribute_name,
       :provider_attribute_value)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6815,6 +6996,7 @@ module Aws::CognitoIdentityProvider
     class RecoveryOptionType < Struct.new(
       :priority,
       :name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6912,6 +7094,7 @@ module Aws::CognitoIdentityProvider
       :username,
       :analytics_metadata,
       :client_metadata)
+      SENSITIVE = [:client_id, :secret_hash, :username]
       include Aws::Structure
     end
 
@@ -6927,6 +7110,7 @@ module Aws::CognitoIdentityProvider
     #
     class ResendConfirmationCodeResponse < Struct.new(
       :code_delivery_details)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6942,6 +7126,7 @@ module Aws::CognitoIdentityProvider
     #
     class ResourceNotFoundException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6968,6 +7153,7 @@ module Aws::CognitoIdentityProvider
     class ResourceServerScopeType < Struct.new(
       :scope_name,
       :scope_description)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6996,6 +7182,7 @@ module Aws::CognitoIdentityProvider
       :identifier,
       :name,
       :scopes)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -7130,6 +7317,7 @@ module Aws::CognitoIdentityProvider
       :analytics_metadata,
       :user_context_data,
       :client_metadata)
+      SENSITIVE = [:client_id]
       include Aws::Structure
     end
 
@@ -7163,6 +7351,7 @@ module Aws::CognitoIdentityProvider
       :session,
       :challenge_parameters,
       :authentication_result)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -7204,6 +7393,7 @@ module Aws::CognitoIdentityProvider
       :account_takeover_risk_configuration,
       :risk_exception_configuration,
       :last_modified_date)
+      SENSITIVE = [:client_id]
       include Aws::Structure
     end
 
@@ -7233,6 +7423,7 @@ module Aws::CognitoIdentityProvider
     class RiskExceptionConfigurationType < Struct.new(
       :blocked_ip_range_list,
       :skipped_ip_range_list)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -7259,6 +7450,7 @@ module Aws::CognitoIdentityProvider
     class SMSMfaSettingsType < Struct.new(
       :enabled,
       :preferred_mfa)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -7349,6 +7541,7 @@ module Aws::CognitoIdentityProvider
       :required,
       :number_attribute_constraints,
       :string_attribute_constraints)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -7361,6 +7554,7 @@ module Aws::CognitoIdentityProvider
     #
     class ScopeDoesNotExistException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -7453,6 +7647,7 @@ module Aws::CognitoIdentityProvider
       :compromised_credentials_risk_configuration,
       :account_takeover_risk_configuration,
       :risk_exception_configuration)
+      SENSITIVE = [:client_id]
       include Aws::Structure
     end
 
@@ -7464,6 +7659,7 @@ module Aws::CognitoIdentityProvider
     #
     class SetRiskConfigurationResponse < Struct.new(
       :risk_configuration)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -7500,6 +7696,7 @@ module Aws::CognitoIdentityProvider
       :client_id,
       :css,
       :image_file)
+      SENSITIVE = [:client_id]
       include Aws::Structure
     end
 
@@ -7511,6 +7708,7 @@ module Aws::CognitoIdentityProvider
     #
     class SetUICustomizationResponse < Struct.new(
       :ui_customization)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -7547,6 +7745,7 @@ module Aws::CognitoIdentityProvider
       :sms_mfa_settings,
       :software_token_mfa_settings,
       :access_token)
+      SENSITIVE = [:access_token]
       include Aws::Structure
     end
 
@@ -7602,6 +7801,7 @@ module Aws::CognitoIdentityProvider
       :sms_mfa_configuration,
       :software_token_mfa_configuration,
       :mfa_configuration)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -7630,6 +7830,7 @@ module Aws::CognitoIdentityProvider
       :sms_mfa_configuration,
       :software_token_mfa_configuration,
       :mfa_configuration)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -7662,6 +7863,7 @@ module Aws::CognitoIdentityProvider
     class SetUserSettingsRequest < Struct.new(
       :access_token,
       :mfa_options)
+      SENSITIVE = [:access_token]
       include Aws::Structure
     end
 
@@ -7796,6 +7998,7 @@ module Aws::CognitoIdentityProvider
       :analytics_metadata,
       :user_context_data,
       :client_metadata)
+      SENSITIVE = [:client_id, :secret_hash, :username, :password]
       include Aws::Structure
     end
 
@@ -7822,6 +8025,7 @@ module Aws::CognitoIdentityProvider
       :user_confirmed,
       :code_delivery_details,
       :user_sub)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -7862,6 +8066,7 @@ module Aws::CognitoIdentityProvider
     class SmsConfigurationType < Struct.new(
       :sns_caller_arn,
       :external_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -7895,6 +8100,7 @@ module Aws::CognitoIdentityProvider
     class SmsMfaConfigType < Struct.new(
       :sms_authentication_message,
       :sms_configuration)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -7908,6 +8114,7 @@ module Aws::CognitoIdentityProvider
     #
     class SoftwareTokenMFANotFoundException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -7928,6 +8135,7 @@ module Aws::CognitoIdentityProvider
     #
     class SoftwareTokenMfaConfigType < Struct.new(
       :enabled)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -7954,6 +8162,7 @@ module Aws::CognitoIdentityProvider
     class SoftwareTokenMfaSettingsType < Struct.new(
       :enabled,
       :preferred_mfa)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -7981,6 +8190,7 @@ module Aws::CognitoIdentityProvider
     class StartUserImportJobRequest < Struct.new(
       :user_pool_id,
       :job_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -7995,6 +8205,7 @@ module Aws::CognitoIdentityProvider
     #
     class StartUserImportJobResponse < Struct.new(
       :user_import_job)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -8022,6 +8233,7 @@ module Aws::CognitoIdentityProvider
     class StopUserImportJobRequest < Struct.new(
       :user_pool_id,
       :job_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -8036,6 +8248,7 @@ module Aws::CognitoIdentityProvider
     #
     class StopUserImportJobResponse < Struct.new(
       :user_import_job)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -8062,6 +8275,7 @@ module Aws::CognitoIdentityProvider
     class StringAttributeConstraintsType < Struct.new(
       :min_length,
       :max_length)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -8089,6 +8303,7 @@ module Aws::CognitoIdentityProvider
     class TagResourceRequest < Struct.new(
       :resource_arn,
       :tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -8108,6 +8323,7 @@ module Aws::CognitoIdentityProvider
     #
     class TooManyFailedAttemptsException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -8123,6 +8339,7 @@ module Aws::CognitoIdentityProvider
     #
     class TooManyRequestsException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -8167,6 +8384,7 @@ module Aws::CognitoIdentityProvider
       :css_version,
       :last_modified_date,
       :creation_date)
+      SENSITIVE = [:client_id]
       include Aws::Structure
     end
 
@@ -8182,6 +8400,7 @@ module Aws::CognitoIdentityProvider
     #
     class UnexpectedLambdaException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -8195,6 +8414,7 @@ module Aws::CognitoIdentityProvider
     #
     class UnsupportedIdentityProviderException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -8208,6 +8428,7 @@ module Aws::CognitoIdentityProvider
     #
     class UnsupportedUserStateException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -8233,6 +8454,7 @@ module Aws::CognitoIdentityProvider
     class UntagResourceRequest < Struct.new(
       :resource_arn,
       :tag_keys)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -8279,6 +8501,7 @@ module Aws::CognitoIdentityProvider
       :event_id,
       :feedback_token,
       :feedback_value)
+      SENSITIVE = [:username, :feedback_token]
       include Aws::Structure
     end
 
@@ -8315,6 +8538,7 @@ module Aws::CognitoIdentityProvider
       :access_token,
       :device_key,
       :device_remembered_status)
+      SENSITIVE = [:access_token]
       include Aws::Structure
     end
 
@@ -8365,6 +8589,7 @@ module Aws::CognitoIdentityProvider
       :description,
       :role_arn,
       :precedence)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -8376,6 +8601,7 @@ module Aws::CognitoIdentityProvider
     #
     class UpdateGroupResponse < Struct.new(
       :group)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -8423,6 +8649,7 @@ module Aws::CognitoIdentityProvider
       :provider_details,
       :attribute_mapping,
       :idp_identifiers)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -8434,6 +8661,7 @@ module Aws::CognitoIdentityProvider
     #
     class UpdateIdentityProviderResponse < Struct.new(
       :identity_provider)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -8475,6 +8703,7 @@ module Aws::CognitoIdentityProvider
       :identifier,
       :name,
       :scopes)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -8486,6 +8715,7 @@ module Aws::CognitoIdentityProvider
     #
     class UpdateResourceServerResponse < Struct.new(
       :resource_server)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -8563,6 +8793,7 @@ module Aws::CognitoIdentityProvider
       :user_attributes,
       :access_token,
       :client_metadata)
+      SENSITIVE = [:access_token]
       include Aws::Structure
     end
 
@@ -8578,6 +8809,7 @@ module Aws::CognitoIdentityProvider
     #
     class UpdateUserAttributesResponse < Struct.new(
       :code_delivery_details_list)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -8819,6 +9051,7 @@ module Aws::CognitoIdentityProvider
       :allowed_o_auth_flows_user_pool_client,
       :analytics_configuration,
       :prevent_user_existence_errors)
+      SENSITIVE = [:client_id]
       include Aws::Structure
     end
 
@@ -8834,6 +9067,7 @@ module Aws::CognitoIdentityProvider
     #
     class UpdateUserPoolClientResponse < Struct.new(
       :user_pool_client)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -8876,6 +9110,7 @@ module Aws::CognitoIdentityProvider
       :domain,
       :user_pool_id,
       :custom_domain_config)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -8890,6 +9125,7 @@ module Aws::CognitoIdentityProvider
     #
     class UpdateUserPoolDomainResponse < Struct.new(
       :cloud_front_domain)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -9085,6 +9321,7 @@ module Aws::CognitoIdentityProvider
       :admin_create_user_config,
       :user_pool_add_ons,
       :account_recovery_setting)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -9116,6 +9353,7 @@ module Aws::CognitoIdentityProvider
     #
     class UserContextDataType < Struct.new(
       :encoded_data)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -9130,6 +9368,7 @@ module Aws::CognitoIdentityProvider
     #
     class UserImportInProgressException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -9227,6 +9466,7 @@ module Aws::CognitoIdentityProvider
       :skipped_users,
       :failed_users,
       :completion_message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -9242,6 +9482,7 @@ module Aws::CognitoIdentityProvider
     #
     class UserLambdaValidationException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -9255,6 +9496,7 @@ module Aws::CognitoIdentityProvider
     #
     class UserNotConfirmedException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -9268,6 +9510,7 @@ module Aws::CognitoIdentityProvider
     #
     class UserNotFoundException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -9280,6 +9523,7 @@ module Aws::CognitoIdentityProvider
     #
     class UserPoolAddOnNotEnabledException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -9300,6 +9544,7 @@ module Aws::CognitoIdentityProvider
     #
     class UserPoolAddOnsType < Struct.new(
       :advanced_security_mode)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -9324,6 +9569,7 @@ module Aws::CognitoIdentityProvider
       :client_id,
       :user_pool_id,
       :client_name)
+      SENSITIVE = [:client_id]
       include Aws::Structure
     end
 
@@ -9552,6 +9798,7 @@ module Aws::CognitoIdentityProvider
       :allowed_o_auth_flows_user_pool_client,
       :analytics_configuration,
       :prevent_user_existence_errors)
+      SENSITIVE = [:client_id, :client_secret]
       include Aws::Structure
     end
 
@@ -9590,6 +9837,7 @@ module Aws::CognitoIdentityProvider
       :status,
       :last_modified_date,
       :creation_date)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -9617,6 +9865,7 @@ module Aws::CognitoIdentityProvider
     #
     class UserPoolPolicyType < Struct.new(
       :password_policy)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -9630,6 +9879,7 @@ module Aws::CognitoIdentityProvider
     #
     class UserPoolTaggingException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -9830,6 +10080,7 @@ module Aws::CognitoIdentityProvider
       :username_configuration,
       :arn,
       :account_recovery_setting)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -9891,6 +10142,7 @@ module Aws::CognitoIdentityProvider
       :enabled,
       :user_status,
       :mfa_options)
+      SENSITIVE = [:username]
       include Aws::Structure
     end
 
@@ -9926,6 +10178,7 @@ module Aws::CognitoIdentityProvider
     #
     class UsernameConfigurationType < Struct.new(
       :case_sensitive)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -9941,6 +10194,7 @@ module Aws::CognitoIdentityProvider
     #
     class UsernameExistsException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -9993,6 +10247,7 @@ module Aws::CognitoIdentityProvider
       :email_message_by_link,
       :email_subject_by_link,
       :default_email_option)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -10030,6 +10285,7 @@ module Aws::CognitoIdentityProvider
       :session,
       :user_code,
       :friendly_device_name)
+      SENSITIVE = [:access_token]
       include Aws::Structure
     end
 
@@ -10047,6 +10303,7 @@ module Aws::CognitoIdentityProvider
     class VerifySoftwareTokenResponse < Struct.new(
       :status,
       :session)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -10080,6 +10337,7 @@ module Aws::CognitoIdentityProvider
       :access_token,
       :attribute_name,
       :code)
+      SENSITIVE = [:access_token]
       include Aws::Structure
     end
 

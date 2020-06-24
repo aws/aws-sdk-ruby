@@ -47,6 +47,6 @@ require_relative 'aws-sdk-personalizeruntime/customizations'
 # @service
 module Aws::PersonalizeRuntime
 
-  GEM_VERSION = '1.12.1'
+  GEM_VERSION = '1.13.0'
 
 end

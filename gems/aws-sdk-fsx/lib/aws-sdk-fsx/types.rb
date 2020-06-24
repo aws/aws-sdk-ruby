@@ -27,6 +27,7 @@ module Aws::FSx
     class ActiveDirectoryBackupAttributes < Struct.new(
       :domain_name,
       :active_directory_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -50,6 +51,7 @@ module Aws::FSx
       :active_directory_id,
       :type,
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -131,6 +133,7 @@ module Aws::FSx
       :status,
       :target_file_system_values,
       :failure_details)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -144,11 +147,11 @@ module Aws::FSx
     #
     class AdministrativeActionFailureDetails < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
-    # A backup of an Amazon FSx for Windows File Server file system. You can
-    # create a new file system from a backup to protect against data loss.
+    # A backup of an Amazon FSx for file system.
     #
     # @!attribute [rw] backup_id
     #   The ID of the backup.
@@ -212,6 +215,7 @@ module Aws::FSx
       :tags,
       :file_system,
       :directory_information)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -226,6 +230,7 @@ module Aws::FSx
     #
     class BackupFailureDetails < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -240,6 +245,7 @@ module Aws::FSx
     #
     class BackupInProgress < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -253,6 +259,7 @@ module Aws::FSx
     #
     class BackupNotFound < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -272,6 +279,7 @@ module Aws::FSx
     class BackupRestoring < Struct.new(
       :message,
       :file_system_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -285,6 +293,7 @@ module Aws::FSx
     #
     class BadRequest < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -305,6 +314,7 @@ module Aws::FSx
     #
     class CancelDataRepositoryTaskRequest < Struct.new(
       :task_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -336,6 +346,7 @@ module Aws::FSx
     class CancelDataRepositoryTaskResponse < Struct.new(
       :lifecycle,
       :task_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -398,6 +409,7 @@ module Aws::FSx
       :path,
       :format,
       :scope)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -422,10 +434,10 @@ module Aws::FSx
     #   @return [String]
     #
     # @!attribute [rw] client_request_token
-    #   (Optional) A string of up to 64 ASCII characters that Amazon FSx
-    #   uses to ensure idempotent creation. This string is automatically
-    #   filled on your behalf when you use the AWS Command Line Interface
-    #   (AWS CLI) or an AWS SDK.
+    #   A string of up to 64 ASCII characters that Amazon FSx uses to ensure
+    #   idempotent creation. This string is automatically filled on your
+    #   behalf when you use the AWS Command Line Interface (AWS CLI) or an
+    #   AWS SDK.
     #
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.
@@ -433,7 +445,10 @@ module Aws::FSx
     #
     # @!attribute [rw] tags
     #   The tags to apply to the backup at backup creation. The key value of
-    #   the `Name` tag appears in the console as the backup name.
+    #   the `Name` tag appears in the console as the backup name. If you
+    #   have set `CopyTagsToBackups` to true, and you specify one or more
+    #   tags using the `CreateBackup` action, no existing tags on the file
+    #   system are copied from the file system to the backup.
     #   @return [Array<Types::Tag>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/fsx-2018-03-01/CreateBackupRequest AWS API Documentation
@@ -442,6 +457,7 @@ module Aws::FSx
       :file_system_id,
       :client_request_token,
       :tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -455,6 +471,7 @@ module Aws::FSx
     #
     class CreateBackupResponse < Struct.new(
       :backup)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -533,6 +550,7 @@ module Aws::FSx
       :report,
       :client_request_token,
       :tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -544,6 +562,7 @@ module Aws::FSx
     #
     class CreateDataRepositoryTaskResponse < Struct.new(
       :data_repository_task)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -581,6 +600,17 @@ module Aws::FSx
     #           automatic_backup_retention_days: 1,
     #           copy_tags_to_backups: false,
     #         },
+    #         lustre_configuration: {
+    #           weekly_maintenance_start_time: "WeeklyTime",
+    #           import_path: "ArchivePath",
+    #           export_path: "ArchivePath",
+    #           imported_file_chunk_size: 1,
+    #           deployment_type: "SCRATCH_1", # accepts SCRATCH_1, SCRATCH_2, PERSISTENT_1
+    #           per_unit_storage_throughput: 1,
+    #           daily_automatic_backup_start_time: "DailyTime",
+    #           automatic_backup_retention_days: 1,
+    #           copy_tags_to_backups: false,
+    #         },
     #         storage_type: "SSD", # accepts SSD, HDD
     #       }
     #
@@ -590,10 +620,10 @@ module Aws::FSx
     #   @return [String]
     #
     # @!attribute [rw] client_request_token
-    #   (Optional) A string of up to 64 ASCII characters that Amazon FSx
-    #   uses to ensure idempotent creation. This string is automatically
-    #   filled on your behalf when you use the AWS Command Line Interface
-    #   (AWS CLI) or an AWS SDK.
+    #   A string of up to 64 ASCII characters that Amazon FSx uses to ensure
+    #   idempotent creation. This string is automatically filled on your
+    #   behalf when you use the AWS Command Line Interface (AWS CLI) or an
+    #   AWS SDK.
     #
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.
@@ -629,6 +659,10 @@ module Aws::FSx
     #   The configuration for this Microsoft Windows file system.
     #   @return [Types::CreateFileSystemWindowsConfiguration]
     #
+    # @!attribute [rw] lustre_configuration
+    #   The Lustre configuration for the file system being created.
+    #   @return [Types::CreateFileSystemLustreConfiguration]
+    #
     # @!attribute [rw] storage_type
     #   Sets the storage type for the Windows file system you're creating
     #   from a backup. Valid values are `SSD` and `HDD`.
@@ -661,7 +695,9 @@ module Aws::FSx
       :security_group_ids,
       :tags,
       :windows_configuration,
+      :lustre_configuration,
       :storage_type)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -675,6 +711,7 @@ module Aws::FSx
     #
     class CreateFileSystemFromBackupResponse < Struct.new(
       :file_system)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -690,6 +727,9 @@ module Aws::FSx
     #         imported_file_chunk_size: 1,
     #         deployment_type: "SCRATCH_1", # accepts SCRATCH_1, SCRATCH_2, PERSISTENT_1
     #         per_unit_storage_throughput: 1,
+    #         daily_automatic_backup_start_time: "DailyTime",
+    #         automatic_backup_retention_days: 1,
+    #         copy_tags_to_backups: false,
     #       }
     #
     # @!attribute [rw] weekly_maintenance_start_time
@@ -743,10 +783,14 @@ module Aws::FSx
     #   @return [Integer]
     #
     # @!attribute [rw] deployment_type
-    #   (Optional) Choose `SCRATCH_1` and `SCRATCH_2` deployment types when
-    #   you need temporary storage and shorter-term processing of data. The
+    #   Choose `SCRATCH_1` and `SCRATCH_2` deployment types when you need
+    #   temporary storage and shorter-term processing of data. The
     #   `SCRATCH_2` deployment type provides in-transit encryption of data
     #   and higher burst throughput capacity than `SCRATCH_1`.
+    #
+    #   <note markdown="1"> This option can only be set for for PERSISTENT\_1 deployments types.
+    #
+    #    </note>
     #
     #   Choose `PERSISTENT_1` deployment type for longer-term storage and
     #   workloads and encryption of data in transit. To learn more about
@@ -781,6 +825,29 @@ module Aws::FSx
     #   Valid values are 50, 100, 200.
     #   @return [Integer]
     #
+    # @!attribute [rw] daily_automatic_backup_start_time
+    #   A recurring daily time, in the format `HH:MM`. `HH` is the
+    #   zero-padded hour of the day (0-23), and `MM` is the zero-padded
+    #   minute of the hour. For example, `05:00` specifies 5 AM daily.
+    #   @return [String]
+    #
+    # @!attribute [rw] automatic_backup_retention_days
+    #   The number of days to retain automatic backups. Setting this to 0
+    #   disables automatic backups. You can retain automatic backups for a
+    #   maximum of 35 days. The default is 0.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] copy_tags_to_backups
+    #   A boolean flag indicating whether tags for the file system should be
+    #   copied to backups. This value defaults to false. If it's set to
+    #   true, all tags for the file system are copied to all automatic and
+    #   user-initiated backups where the user doesn't specify tags. If this
+    #   value is true, and you specify one or more tags, only the specified
+    #   tags are copied to backups. If you specify one or more tags when
+    #   creating a user-initiated backup, no tags are copied from the file
+    #   system, regardless of this value.
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/fsx-2018-03-01/CreateFileSystemLustreConfiguration AWS API Documentation
     #
     class CreateFileSystemLustreConfiguration < Struct.new(
@@ -789,7 +856,11 @@ module Aws::FSx
       :export_path,
       :imported_file_chunk_size,
       :deployment_type,
-      :per_unit_storage_throughput)
+      :per_unit_storage_throughput,
+      :daily_automatic_backup_start_time,
+      :automatic_backup_retention_days,
+      :copy_tags_to_backups)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -837,14 +908,17 @@ module Aws::FSx
     #           imported_file_chunk_size: 1,
     #           deployment_type: "SCRATCH_1", # accepts SCRATCH_1, SCRATCH_2, PERSISTENT_1
     #           per_unit_storage_throughput: 1,
+    #           daily_automatic_backup_start_time: "DailyTime",
+    #           automatic_backup_retention_days: 1,
+    #           copy_tags_to_backups: false,
     #         },
     #       }
     #
     # @!attribute [rw] client_request_token
-    #   (Optional) A string of up to 64 ASCII characters that Amazon FSx
-    #   uses to ensure idempotent creation. This string is automatically
-    #   filled on your behalf when you use the AWS Command Line Interface
-    #   (AWS CLI) or an AWS SDK.
+    #   A string of up to 64 ASCII characters that Amazon FSx uses to ensure
+    #   idempotent creation. This string is automatically filled on your
+    #   behalf when you use the AWS Command Line Interface (AWS CLI) or an
+    #   AWS SDK.
     #
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.
@@ -955,6 +1029,7 @@ module Aws::FSx
       :kms_key_id,
       :windows_configuration,
       :lustre_configuration)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -968,6 +1043,7 @@ module Aws::FSx
     #
     class CreateFileSystemResponse < Struct.new(
       :file_system)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1088,6 +1164,7 @@ module Aws::FSx
       :daily_automatic_backup_start_time,
       :automatic_backup_retention_days,
       :copy_tags_to_backups)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1125,6 +1202,7 @@ module Aws::FSx
       :import_path,
       :export_path,
       :imported_file_chunk_size)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1250,6 +1328,7 @@ module Aws::FSx
       :failure_details,
       :status,
       :report)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1264,6 +1343,7 @@ module Aws::FSx
     #
     class DataRepositoryTaskEnded < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1279,6 +1359,7 @@ module Aws::FSx
     #
     class DataRepositoryTaskExecuting < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1293,6 +1374,7 @@ module Aws::FSx
     #
     class DataRepositoryTaskFailureDetails < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1332,6 +1414,7 @@ module Aws::FSx
     class DataRepositoryTaskFilter < Struct.new(
       :name,
       :values)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1345,6 +1428,7 @@ module Aws::FSx
     #
     class DataRepositoryTaskNotFound < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1380,6 +1464,7 @@ module Aws::FSx
       :succeeded_count,
       :failed_count,
       :last_updated_time)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1398,9 +1483,9 @@ module Aws::FSx
     #   @return [String]
     #
     # @!attribute [rw] client_request_token
-    #   (Optional) A string of up to 64 ASCII characters that Amazon FSx
-    #   uses to ensure idempotent deletion. This is automatically filled on
-    #   your behalf when using the AWS CLI or SDK.
+    #   A string of up to 64 ASCII characters that Amazon FSx uses to ensure
+    #   idempotent deletion. This is automatically filled on your behalf
+    #   when using the AWS CLI or SDK.
     #
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.
@@ -1411,6 +1496,7 @@ module Aws::FSx
     class DeleteBackupRequest < Struct.new(
       :backup_id,
       :client_request_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1429,6 +1515,67 @@ module Aws::FSx
     class DeleteBackupResponse < Struct.new(
       :backup_id,
       :lifecycle)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The configuration object for the Amazon FSx for Lustre file system
+    # being deleted in the `DeleteFileSystem` operation.
+    #
+    # @note When making an API call, you may pass DeleteFileSystemLustreConfiguration
+    #   data as a hash:
+    #
+    #       {
+    #         skip_final_backup: false,
+    #         final_backup_tags: [
+    #           {
+    #             key: "TagKey",
+    #             value: "TagValue",
+    #           },
+    #         ],
+    #       }
+    #
+    # @!attribute [rw] skip_final_backup
+    #   Set `SkipFinalBackup` to false if you want to take a final backup of
+    #   the file system you are deleting. By default, Amazon FSx will not
+    #   take a final backup on your behalf when the `DeleteFileSystem`
+    #   operation is invoked. (Default = true)
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] final_backup_tags
+    #   Use if `SkipFinalBackup` is set to `false`, and you want to apply an
+    #   array of tags to the final backup. If you have set the file system
+    #   property `CopyTagsToBackups` to true, and you specify one or more
+    #   `FinalBackupTags` when deleting a file system, Amazon FSx will not
+    #   copy any existing file system tags to the backup.
+    #   @return [Array<Types::Tag>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/fsx-2018-03-01/DeleteFileSystemLustreConfiguration AWS API Documentation
+    #
+    class DeleteFileSystemLustreConfiguration < Struct.new(
+      :skip_final_backup,
+      :final_backup_tags)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The response object for the Amazon FSx for Lustre file system being
+    # deleted in the `DeleteFileSystem` operation.
+    #
+    # @!attribute [rw] final_backup_id
+    #   The ID of the final backup for this file system.
+    #   @return [String]
+    #
+    # @!attribute [rw] final_backup_tags
+    #   The set of tags applied to the final backup.
+    #   @return [Array<Types::Tag>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/fsx-2018-03-01/DeleteFileSystemLustreResponse AWS API Documentation
+    #
+    class DeleteFileSystemLustreResponse < Struct.new(
+      :final_backup_id,
+      :final_backup_tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1449,6 +1596,15 @@ module Aws::FSx
     #             },
     #           ],
     #         },
+    #         lustre_configuration: {
+    #           skip_final_backup: false,
+    #           final_backup_tags: [
+    #             {
+    #               key: "TagKey",
+    #               value: "TagValue",
+    #             },
+    #           ],
+    #         },
     #       }
     #
     # @!attribute [rw] file_system_id
@@ -1456,9 +1612,9 @@ module Aws::FSx
     #   @return [String]
     #
     # @!attribute [rw] client_request_token
-    #   (Optional) A string of up to 64 ASCII characters that Amazon FSx
-    #   uses to ensure idempotent deletion. This is automatically filled on
-    #   your behalf when using the AWS CLI or SDK.
+    #   A string of up to 64 ASCII characters that Amazon FSx uses to ensure
+    #   idempotent deletion. This is automatically filled on your behalf
+    #   when using the AWS CLI or SDK.
     #
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.
@@ -1469,12 +1625,19 @@ module Aws::FSx
     #   in the `DeleteFileSystem` operation.
     #   @return [Types::DeleteFileSystemWindowsConfiguration]
     #
+    # @!attribute [rw] lustre_configuration
+    #   The configuration object for the Amazon FSx for Lustre file system
+    #   being deleted in the `DeleteFileSystem` operation.
+    #   @return [Types::DeleteFileSystemLustreConfiguration]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/fsx-2018-03-01/DeleteFileSystemRequest AWS API Documentation
     #
     class DeleteFileSystemRequest < Struct.new(
       :file_system_id,
       :client_request_token,
-      :windows_configuration)
+      :windows_configuration,
+      :lustre_configuration)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1494,12 +1657,19 @@ module Aws::FSx
     #   the `DeleteFileSystem` operation.
     #   @return [Types::DeleteFileSystemWindowsResponse]
     #
+    # @!attribute [rw] lustre_response
+    #   The response object for the Amazon FSx for Lustre file system being
+    #   deleted in the `DeleteFileSystem` operation.
+    #   @return [Types::DeleteFileSystemLustreResponse]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/fsx-2018-03-01/DeleteFileSystemResponse AWS API Documentation
     #
     class DeleteFileSystemResponse < Struct.new(
       :file_system_id,
       :lifecycle,
-      :windows_response)
+      :windows_response,
+      :lustre_response)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1536,6 +1706,7 @@ module Aws::FSx
     class DeleteFileSystemWindowsConfiguration < Struct.new(
       :skip_final_backup,
       :final_backup_tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1555,6 +1726,7 @@ module Aws::FSx
     class DeleteFileSystemWindowsResponse < Struct.new(
       :final_backup_id,
       :final_backup_tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1567,7 +1739,7 @@ module Aws::FSx
     #         backup_ids: ["BackupId"],
     #         filters: [
     #           {
-    #             name: "file-system-id", # accepts file-system-id, backup-type
+    #             name: "file-system-id", # accepts file-system-id, backup-type, file-system-type
     #             values: ["FilterValue"],
     #           },
     #         ],
@@ -1576,28 +1748,27 @@ module Aws::FSx
     #       }
     #
     # @!attribute [rw] backup_ids
-    #   (Optional) IDs of the backups you want to retrieve (String). This
-    #   overrides any filters. If any IDs are not found, BackupNotFound will
-    #   be thrown.
+    #   IDs of the backups you want to retrieve (String). This overrides any
+    #   filters. If any IDs are not found, BackupNotFound will be thrown.
     #   @return [Array<String>]
     #
     # @!attribute [rw] filters
-    #   (Optional) Filters structure. Supported names are file-system-id and
+    #   Filters structure. Supported names are file-system-id and
     #   backup-type.
     #   @return [Array<Types::Filter>]
     #
     # @!attribute [rw] max_results
-    #   (Optional) Maximum number of backups to return in the response
-    #   (integer). This parameter value must be greater than 0. The number
-    #   of items that Amazon FSx returns is the minimum of the `MaxResults`
-    #   parameter specified in the request and the service's internal
-    #   maximum number of items per page.
+    #   Maximum number of backups to return in the response (integer). This
+    #   parameter value must be greater than 0. The number of items that
+    #   Amazon FSx returns is the minimum of the `MaxResults` parameter
+    #   specified in the request and the service's internal maximum number
+    #   of items per page.
     #   @return [Integer]
     #
     # @!attribute [rw] next_token
-    #   (Optional) Opaque pagination token returned from a previous
-    #   `DescribeBackups` operation (String). If a token present, the action
-    #   continues the list from where the returning call left off.
+    #   Opaque pagination token returned from a previous `DescribeBackups`
+    #   operation (String). If a token present, the action continues the
+    #   list from where the returning call left off.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/fsx-2018-03-01/DescribeBackupsRequest AWS API Documentation
@@ -1607,6 +1778,7 @@ module Aws::FSx
       :filters,
       :max_results,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1627,6 +1799,7 @@ module Aws::FSx
     class DescribeBackupsResponse < Struct.new(
       :backups,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1675,6 +1848,7 @@ module Aws::FSx
       :filters,
       :max_results,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1694,6 +1868,7 @@ module Aws::FSx
     class DescribeDataRepositoryTasksResponse < Struct.new(
       :data_repository_tasks,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1709,20 +1884,20 @@ module Aws::FSx
     #       }
     #
     # @!attribute [rw] file_system_ids
-    #   (Optional) IDs of the file systems whose descriptions you want to
-    #   retrieve (String).
+    #   IDs of the file systems whose descriptions you want to retrieve
+    #   (String).
     #   @return [Array<String>]
     #
     # @!attribute [rw] max_results
-    #   (Optional) Maximum number of file systems to return in the response
-    #   (integer). This parameter value must be greater than 0. The number
-    #   of items that Amazon FSx returns is the minimum of the `MaxResults`
-    #   parameter specified in the request and the service's internal
-    #   maximum number of items per page.
+    #   Maximum number of file systems to return in the response (integer).
+    #   This parameter value must be greater than 0. The number of items
+    #   that Amazon FSx returns is the minimum of the `MaxResults` parameter
+    #   specified in the request and the service's internal maximum number
+    #   of items per page.
     #   @return [Integer]
     #
     # @!attribute [rw] next_token
-    #   (Optional) Opaque pagination token returned from a previous
+    #   Opaque pagination token returned from a previous
     #   `DescribeFileSystems` operation (String). If a token present, the
     #   action continues the list from where the returning call left off.
     #   @return [String]
@@ -1733,6 +1908,7 @@ module Aws::FSx
       :file_system_ids,
       :max_results,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1753,6 +1929,7 @@ module Aws::FSx
     class DescribeFileSystemsResponse < Struct.new(
       :file_systems,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1918,6 +2095,7 @@ module Aws::FSx
       :windows_configuration,
       :lustre_configuration,
       :administrative_actions)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1933,6 +2111,7 @@ module Aws::FSx
     #
     class FileSystemFailureDetails < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1946,6 +2125,7 @@ module Aws::FSx
     #
     class FileSystemNotFound < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1957,7 +2137,7 @@ module Aws::FSx
     #   data as a hash:
     #
     #       {
-    #         name: "file-system-id", # accepts file-system-id, backup-type
+    #         name: "file-system-id", # accepts file-system-id, backup-type, file-system-type
     #         values: ["FilterValue"],
     #       }
     #
@@ -1975,6 +2155,7 @@ module Aws::FSx
     class Filter < Struct.new(
       :name,
       :values)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1995,6 +2176,7 @@ module Aws::FSx
     class IncompatibleParameterError < Struct.new(
       :parameter,
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2008,6 +2190,7 @@ module Aws::FSx
     #
     class InternalServerError < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2021,6 +2204,7 @@ module Aws::FSx
     #
     class InvalidExportPath < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2034,6 +2218,7 @@ module Aws::FSx
     #
     class InvalidImportPath < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2076,6 +2261,7 @@ module Aws::FSx
       :message,
       :invalid_subnet_id,
       :invalid_security_group_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2090,6 +2276,7 @@ module Aws::FSx
     #
     class InvalidPerUnitStorageThroughput < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2109,15 +2296,15 @@ module Aws::FSx
     #   @return [String]
     #
     # @!attribute [rw] max_results
-    #   (Optional) Maximum number of tags to return in the response
-    #   (integer). This parameter value must be greater than 0. The number
-    #   of items that Amazon FSx returns is the minimum of the `MaxResults`
-    #   parameter specified in the request and the service's internal
-    #   maximum number of items per page.
+    #   Maximum number of tags to return in the response (integer). This
+    #   parameter value must be greater than 0. The number of items that
+    #   Amazon FSx returns is the minimum of the `MaxResults` parameter
+    #   specified in the request and the service's internal maximum number
+    #   of items per page.
     #   @return [Integer]
     #
     # @!attribute [rw] next_token
-    #   (Optional) Opaque pagination token returned from a previous
+    #   Opaque pagination token returned from a previous
     #   `ListTagsForResource` operation (String). If a token present, the
     #   action continues the list from where the returning call left off.
     #   @return [String]
@@ -2128,6 +2315,7 @@ module Aws::FSx
       :resource_arn,
       :max_results,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2148,6 +2336,7 @@ module Aws::FSx
     class ListTagsForResourceResponse < Struct.new(
       :tags,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2165,7 +2354,23 @@ module Aws::FSx
     #   @return [Types::DataRepositoryConfiguration]
     #
     # @!attribute [rw] deployment_type
-    #   The deployment type of the FSX for Lustre file system.
+    #   The deployment type of the FSX for Lustre file system. *Scratch
+    #   deployment type* is designed for temporary storage and shorter-term
+    #   processing of data.
+    #
+    #   `SCRATCH_1` and `SCRATCH_2` deployment types are best suited for
+    #   when you need temporary storage and shorter-term processing of data.
+    #   The `SCRATCH_2` deployment type provides in-transit encryption of
+    #   data and higher burst throughput capacity than `SCRATCH_1`.
+    #
+    #   The `PERSISTENT_1` deployment type is used for longer-term storage
+    #   and workloads and encryption of data in transit. To learn more about
+    #   deployment types, see [ FSx for Lustre Deployment Options][1].
+    #   (Default = `SCRATCH_1`)
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/fsx/latest/LustreGuide/lustre-deployment-types.html
     #   @return [String]
     #
     # @!attribute [rw] per_unit_storage_throughput
@@ -2184,6 +2389,29 @@ module Aws::FSx
     #   string that is unique within an AWS Region.
     #   @return [String]
     #
+    # @!attribute [rw] daily_automatic_backup_start_time
+    #   A recurring daily time, in the format `HH:MM`. `HH` is the
+    #   zero-padded hour of the day (0-23), and `MM` is the zero-padded
+    #   minute of the hour. For example, `05:00` specifies 5 AM daily.
+    #   @return [String]
+    #
+    # @!attribute [rw] automatic_backup_retention_days
+    #   The number of days to retain automatic backups. Setting this to 0
+    #   disables automatic backups. You can retain automatic backups for a
+    #   maximum of 35 days. The default is 0.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] copy_tags_to_backups
+    #   A boolean flag indicating whether tags on the file system should be
+    #   copied to backups. If it's set to true, all tags on the file system
+    #   are copied to all automatic backups and any user-initiated backups
+    #   where the user doesn't specify any tags. If this value is true, and
+    #   you specify one or more tags, only the specified tags are copied to
+    #   backups. If you specify one or more tags when creating a
+    #   user-initiated backup, no tags are copied from the file system,
+    #   regardless of this value. (Default = false)
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/fsx-2018-03-01/LustreFileSystemConfiguration AWS API Documentation
     #
     class LustreFileSystemConfiguration < Struct.new(
@@ -2191,7 +2419,11 @@ module Aws::FSx
       :data_repository_configuration,
       :deployment_type,
       :per_unit_storage_throughput,
-      :mount_name)
+      :mount_name,
+      :daily_automatic_backup_start_time,
+      :automatic_backup_retention_days,
+      :copy_tags_to_backups)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2205,6 +2437,7 @@ module Aws::FSx
     #
     class MissingFileSystemConfiguration < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2225,6 +2458,7 @@ module Aws::FSx
     class NotServiceResourceError < Struct.new(
       :resource_arn,
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2244,6 +2478,7 @@ module Aws::FSx
     class ResourceDoesNotSupportTagging < Struct.new(
       :resource_arn,
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2263,6 +2498,7 @@ module Aws::FSx
     class ResourceNotFound < Struct.new(
       :resource_arn,
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2302,6 +2538,7 @@ module Aws::FSx
       :file_system_administrators_group,
       :user_name,
       :dns_ips)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2394,6 +2631,7 @@ module Aws::FSx
       :user_name,
       :password,
       :dns_ips)
+      SENSITIVE = [:password]
       include Aws::Structure
     end
 
@@ -2433,6 +2671,7 @@ module Aws::FSx
       :user_name,
       :password,
       :dns_ips)
+      SENSITIVE = [:password]
       include Aws::Structure
     end
 
@@ -2452,6 +2691,7 @@ module Aws::FSx
     class ServiceLimitExceeded < Struct.new(
       :limit,
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2482,6 +2722,7 @@ module Aws::FSx
     class Tag < Struct.new(
       :key,
       :value)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2516,6 +2757,7 @@ module Aws::FSx
     class TagResourceRequest < Struct.new(
       :resource_arn,
       :tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2535,6 +2777,7 @@ module Aws::FSx
     #
     class UnsupportedOperation < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2562,6 +2805,7 @@ module Aws::FSx
     class UntagResourceRequest < Struct.new(
       :resource_arn,
       :tag_keys)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2579,6 +2823,8 @@ module Aws::FSx
     #
     #       {
     #         weekly_maintenance_start_time: "WeeklyTime",
+    #         daily_automatic_backup_start_time: "DailyTime",
+    #         automatic_backup_retention_days: 1,
     #       }
     #
     # @!attribute [rw] weekly_maintenance_start_time
@@ -2587,10 +2833,25 @@ module Aws::FSx
     #   through 7, beginning with Monday and ending with Sunday.
     #   @return [String]
     #
+    # @!attribute [rw] daily_automatic_backup_start_time
+    #   A recurring daily time, in the format `HH:MM`. `HH` is the
+    #   zero-padded hour of the day (0-23), and `MM` is the zero-padded
+    #   minute of the hour. For example, `05:00` specifies 5 AM daily.
+    #   @return [String]
+    #
+    # @!attribute [rw] automatic_backup_retention_days
+    #   The number of days to retain automatic backups. Setting this to 0
+    #   disables automatic backups. You can retain automatic backups for a
+    #   maximum of 35 days. The default is 0.
+    #   @return [Integer]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/fsx-2018-03-01/UpdateFileSystemLustreConfiguration AWS API Documentation
     #
     class UpdateFileSystemLustreConfiguration < Struct.new(
-      :weekly_maintenance_start_time)
+      :weekly_maintenance_start_time,
+      :daily_automatic_backup_start_time,
+      :automatic_backup_retention_days)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2616,6 +2877,8 @@ module Aws::FSx
     #         },
     #         lustre_configuration: {
     #           weekly_maintenance_start_time: "WeeklyTime",
+    #           daily_automatic_backup_start_time: "DailyTime",
+    #           automatic_backup_retention_days: 1,
     #         },
     #       }
     #
@@ -2667,6 +2930,7 @@ module Aws::FSx
       :storage_capacity,
       :windows_configuration,
       :lustre_configuration)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2680,6 +2944,7 @@ module Aws::FSx
     #
     class UpdateFileSystemResponse < Struct.new(
       :file_system)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2752,6 +3017,7 @@ module Aws::FSx
       :automatic_backup_retention_days,
       :throughput_capacity,
       :self_managed_active_directory_configuration)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2889,6 +3155,7 @@ module Aws::FSx
       :daily_automatic_backup_start_time,
       :automatic_backup_retention_days,
       :copy_tags_to_backups)
+      SENSITIVE = []
       include Aws::Structure
     end
 

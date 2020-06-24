@@ -15,6 +15,7 @@ module Aws::ApiGatewayV2
     #
     class AccessDeniedException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -41,6 +42,7 @@ module Aws::ApiGatewayV2
     class AccessLogSettings < Struct.new(
       :destination_arn,
       :format)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -132,6 +134,7 @@ module Aws::ApiGatewayV2
       :tags,
       :version,
       :warnings)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -158,6 +161,7 @@ module Aws::ApiGatewayV2
       :api_mapping_id,
       :api_mapping_key,
       :stage)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -175,6 +179,7 @@ module Aws::ApiGatewayV2
     class ApiMappings < Struct.new(
       :items,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -192,6 +197,7 @@ module Aws::ApiGatewayV2
     class Apis < Struct.new(
       :items,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -283,6 +289,7 @@ module Aws::ApiGatewayV2
       :identity_validation_expression,
       :jwt_configuration,
       :name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -300,6 +307,7 @@ module Aws::ApiGatewayV2
     class Authorizers < Struct.new(
       :items,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -312,6 +320,7 @@ module Aws::ApiGatewayV2
     #
     class BadRequestException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -326,6 +335,7 @@ module Aws::ApiGatewayV2
     #
     class ConflictException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -385,6 +395,7 @@ module Aws::ApiGatewayV2
       :allow_origins,
       :expose_headers,
       :max_age)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -484,6 +495,7 @@ module Aws::ApiGatewayV2
       :tags,
       :target,
       :version)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -505,6 +517,7 @@ module Aws::ApiGatewayV2
       :api_id,
       :api_mapping_key,
       :stage)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -545,6 +558,7 @@ module Aws::ApiGatewayV2
       :api_mapping_key,
       :domain_name,
       :stage)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -576,6 +590,7 @@ module Aws::ApiGatewayV2
       :api_mapping_id,
       :api_mapping_key,
       :stage)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -688,6 +703,7 @@ module Aws::ApiGatewayV2
       :tags,
       :target,
       :version)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -772,6 +788,7 @@ module Aws::ApiGatewayV2
       :tags,
       :version,
       :warnings)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -858,6 +875,7 @@ module Aws::ApiGatewayV2
       :identity_validation_expression,
       :jwt_configuration,
       :name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -942,6 +960,7 @@ module Aws::ApiGatewayV2
       :identity_validation_expression,
       :jwt_configuration,
       :name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1009,6 +1028,7 @@ module Aws::ApiGatewayV2
       :identity_validation_expression,
       :jwt_configuration,
       :name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1026,6 +1046,7 @@ module Aws::ApiGatewayV2
     class CreateDeploymentInput < Struct.new(
       :description,
       :stage_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1053,6 +1074,7 @@ module Aws::ApiGatewayV2
       :api_id,
       :description,
       :stage_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1084,6 +1106,7 @@ module Aws::ApiGatewayV2
       :deployment_status,
       :deployment_status_message,
       :description)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1105,6 +1128,7 @@ module Aws::ApiGatewayV2
       :domain_name,
       :domain_name_configurations,
       :tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1147,6 +1171,7 @@ module Aws::ApiGatewayV2
       :domain_name,
       :domain_name_configurations,
       :tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1176,6 +1201,7 @@ module Aws::ApiGatewayV2
       :domain_name,
       :domain_name_configurations,
       :tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1351,6 +1377,7 @@ module Aws::ApiGatewayV2
       :template_selection_expression,
       :timeout_in_millis,
       :tls_config)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1484,6 +1511,7 @@ module Aws::ApiGatewayV2
       :template_selection_expression,
       :timeout_in_millis,
       :tls_config)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1604,6 +1632,7 @@ module Aws::ApiGatewayV2
       :template_selection_expression,
       :timeout_in_millis,
       :tls_config)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1664,6 +1693,7 @@ module Aws::ApiGatewayV2
       :response_parameters,
       :response_templates,
       :template_selection_expression)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1744,6 +1774,7 @@ module Aws::ApiGatewayV2
       :response_parameters,
       :response_templates,
       :template_selection_expression)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1804,6 +1835,7 @@ module Aws::ApiGatewayV2
       :response_parameters,
       :response_templates,
       :template_selection_expression)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1831,6 +1863,7 @@ module Aws::ApiGatewayV2
       :description,
       :name,
       :schema)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1870,6 +1903,7 @@ module Aws::ApiGatewayV2
       :description,
       :name,
       :schema)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1899,6 +1933,7 @@ module Aws::ApiGatewayV2
       :model_id,
       :name,
       :schema)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1970,6 +2005,7 @@ module Aws::ApiGatewayV2
       :route_key,
       :route_response_selection_expression,
       :target)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2084,6 +2120,7 @@ module Aws::ApiGatewayV2
       :route_key,
       :route_response_selection_expression,
       :target)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2179,6 +2216,7 @@ module Aws::ApiGatewayV2
       :route_key,
       :route_response_selection_expression,
       :target)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2206,6 +2244,7 @@ module Aws::ApiGatewayV2
       :response_models,
       :response_parameters,
       :route_response_key)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2268,6 +2307,7 @@ module Aws::ApiGatewayV2
       :response_parameters,
       :route_id,
       :route_response_key)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2309,6 +2349,7 @@ module Aws::ApiGatewayV2
       :response_parameters,
       :route_response_id,
       :route_response_key)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2370,6 +2411,7 @@ module Aws::ApiGatewayV2
       :stage_name,
       :stage_variables,
       :tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2465,6 +2507,7 @@ module Aws::ApiGatewayV2
       :stage_name,
       :stage_variables,
       :tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2534,6 +2577,7 @@ module Aws::ApiGatewayV2
       :stage_name,
       :stage_variables,
       :tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2560,6 +2604,7 @@ module Aws::ApiGatewayV2
       :security_group_ids,
       :subnet_ids,
       :tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2596,6 +2641,7 @@ module Aws::ApiGatewayV2
       :security_group_ids,
       :subnet_ids,
       :tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2644,6 +2690,7 @@ module Aws::ApiGatewayV2
       :vpc_link_status,
       :vpc_link_status_message,
       :vpc_link_version)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2664,6 +2711,7 @@ module Aws::ApiGatewayV2
     class DeleteAccessLogSettingsRequest < Struct.new(
       :api_id,
       :stage_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2684,6 +2732,7 @@ module Aws::ApiGatewayV2
     class DeleteApiMappingRequest < Struct.new(
       :api_mapping_id,
       :domain_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2699,6 +2748,7 @@ module Aws::ApiGatewayV2
     #
     class DeleteApiRequest < Struct.new(
       :api_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2719,6 +2769,7 @@ module Aws::ApiGatewayV2
     class DeleteAuthorizerRequest < Struct.new(
       :api_id,
       :authorizer_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2734,6 +2785,7 @@ module Aws::ApiGatewayV2
     #
     class DeleteCorsConfigurationRequest < Struct.new(
       :api_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2754,6 +2806,7 @@ module Aws::ApiGatewayV2
     class DeleteDeploymentRequest < Struct.new(
       :api_id,
       :deployment_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2769,6 +2822,7 @@ module Aws::ApiGatewayV2
     #
     class DeleteDomainNameRequest < Struct.new(
       :domain_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2789,6 +2843,7 @@ module Aws::ApiGatewayV2
     class DeleteIntegrationRequest < Struct.new(
       :api_id,
       :integration_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2814,6 +2869,7 @@ module Aws::ApiGatewayV2
       :api_id,
       :integration_id,
       :integration_response_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2834,6 +2890,7 @@ module Aws::ApiGatewayV2
     class DeleteModelRequest < Struct.new(
       :api_id,
       :model_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2854,6 +2911,7 @@ module Aws::ApiGatewayV2
     class DeleteRouteRequest < Struct.new(
       :api_id,
       :route_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2879,6 +2937,7 @@ module Aws::ApiGatewayV2
       :api_id,
       :request_parameter_key,
       :route_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2904,6 +2963,7 @@ module Aws::ApiGatewayV2
       :api_id,
       :route_id,
       :route_response_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2929,6 +2989,7 @@ module Aws::ApiGatewayV2
       :api_id,
       :route_key,
       :stage_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2949,6 +3010,7 @@ module Aws::ApiGatewayV2
     class DeleteStageRequest < Struct.new(
       :api_id,
       :stage_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2964,6 +3026,7 @@ module Aws::ApiGatewayV2
     #
     class DeleteVpcLinkRequest < Struct.new(
       :vpc_link_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3004,6 +3067,7 @@ module Aws::ApiGatewayV2
       :deployment_status,
       :deployment_status_message,
       :description)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3024,6 +3088,7 @@ module Aws::ApiGatewayV2
     class Deployments < Struct.new(
       :items,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3050,6 +3115,7 @@ module Aws::ApiGatewayV2
       :domain_name,
       :domain_name_configurations,
       :tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3125,6 +3191,7 @@ module Aws::ApiGatewayV2
       :endpoint_type,
       :hosted_zone_id,
       :security_policy)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3142,6 +3209,7 @@ module Aws::ApiGatewayV2
     class DomainNames < Struct.new(
       :items,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3182,6 +3250,7 @@ module Aws::ApiGatewayV2
       :output_type,
       :specification,
       :stage_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3193,6 +3262,7 @@ module Aws::ApiGatewayV2
     #
     class ExportApiResponse < Struct.new(
       :body)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3213,6 +3283,7 @@ module Aws::ApiGatewayV2
     class GetApiMappingRequest < Struct.new(
       :api_mapping_id,
       :domain_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3244,6 +3315,7 @@ module Aws::ApiGatewayV2
       :api_mapping_id,
       :api_mapping_key,
       :stage)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3269,6 +3341,7 @@ module Aws::ApiGatewayV2
       :domain_name,
       :max_results,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3283,6 +3356,7 @@ module Aws::ApiGatewayV2
     class GetApiMappingsResponse < Struct.new(
       :items,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3298,6 +3372,7 @@ module Aws::ApiGatewayV2
     #
     class GetApiRequest < Struct.new(
       :api_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3382,6 +3457,7 @@ module Aws::ApiGatewayV2
       :tags,
       :version,
       :warnings)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3402,6 +3478,7 @@ module Aws::ApiGatewayV2
     class GetApisRequest < Struct.new(
       :max_results,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3416,6 +3493,7 @@ module Aws::ApiGatewayV2
     class GetApisResponse < Struct.new(
       :items,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3436,6 +3514,7 @@ module Aws::ApiGatewayV2
     class GetAuthorizerRequest < Struct.new(
       :api_id,
       :authorizer_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3503,6 +3582,7 @@ module Aws::ApiGatewayV2
       :identity_validation_expression,
       :jwt_configuration,
       :name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3528,6 +3608,7 @@ module Aws::ApiGatewayV2
       :api_id,
       :max_results,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3542,6 +3623,7 @@ module Aws::ApiGatewayV2
     class GetAuthorizersResponse < Struct.new(
       :items,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3562,6 +3644,7 @@ module Aws::ApiGatewayV2
     class GetDeploymentRequest < Struct.new(
       :api_id,
       :deployment_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3593,6 +3676,7 @@ module Aws::ApiGatewayV2
       :deployment_status,
       :deployment_status_message,
       :description)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3618,6 +3702,7 @@ module Aws::ApiGatewayV2
       :api_id,
       :max_results,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3632,6 +3717,7 @@ module Aws::ApiGatewayV2
     class GetDeploymentsResponse < Struct.new(
       :items,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3647,6 +3733,7 @@ module Aws::ApiGatewayV2
     #
     class GetDomainNameRequest < Struct.new(
       :domain_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3676,6 +3763,7 @@ module Aws::ApiGatewayV2
       :domain_name,
       :domain_name_configurations,
       :tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3696,6 +3784,7 @@ module Aws::ApiGatewayV2
     class GetDomainNamesRequest < Struct.new(
       :max_results,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3710,6 +3799,7 @@ module Aws::ApiGatewayV2
     class GetDomainNamesResponse < Struct.new(
       :items,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3730,6 +3820,7 @@ module Aws::ApiGatewayV2
     class GetIntegrationRequest < Struct.new(
       :api_id,
       :integration_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3850,6 +3941,7 @@ module Aws::ApiGatewayV2
       :template_selection_expression,
       :timeout_in_millis,
       :tls_config)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3875,6 +3967,7 @@ module Aws::ApiGatewayV2
       :api_id,
       :integration_id,
       :integration_response_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3935,6 +4028,7 @@ module Aws::ApiGatewayV2
       :response_parameters,
       :response_templates,
       :template_selection_expression)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3965,6 +4059,7 @@ module Aws::ApiGatewayV2
       :integration_id,
       :max_results,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3979,6 +4074,7 @@ module Aws::ApiGatewayV2
     class GetIntegrationResponsesResponse < Struct.new(
       :items,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4004,6 +4100,7 @@ module Aws::ApiGatewayV2
       :api_id,
       :max_results,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4018,6 +4115,7 @@ module Aws::ApiGatewayV2
     class GetIntegrationsResponse < Struct.new(
       :items,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4038,6 +4136,7 @@ module Aws::ApiGatewayV2
     class GetModelRequest < Struct.new(
       :api_id,
       :model_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4067,6 +4166,7 @@ module Aws::ApiGatewayV2
       :model_id,
       :name,
       :schema)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4087,6 +4187,7 @@ module Aws::ApiGatewayV2
     class GetModelTemplateRequest < Struct.new(
       :api_id,
       :model_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4095,6 +4196,7 @@ module Aws::ApiGatewayV2
     #
     class GetModelTemplateResponse < Struct.new(
       :value)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4120,6 +4222,7 @@ module Aws::ApiGatewayV2
       :api_id,
       :max_results,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4134,6 +4237,7 @@ module Aws::ApiGatewayV2
     class GetModelsResponse < Struct.new(
       :items,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4154,6 +4258,7 @@ module Aws::ApiGatewayV2
     class GetRouteRequest < Struct.new(
       :api_id,
       :route_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4249,6 +4354,7 @@ module Aws::ApiGatewayV2
       :route_key,
       :route_response_selection_expression,
       :target)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4274,6 +4380,7 @@ module Aws::ApiGatewayV2
       :api_id,
       :route_id,
       :route_response_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4315,6 +4422,7 @@ module Aws::ApiGatewayV2
       :response_parameters,
       :route_response_id,
       :route_response_key)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4345,6 +4453,7 @@ module Aws::ApiGatewayV2
       :max_results,
       :next_token,
       :route_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4359,6 +4468,7 @@ module Aws::ApiGatewayV2
     class GetRouteResponsesResponse < Struct.new(
       :items,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4384,6 +4494,7 @@ module Aws::ApiGatewayV2
       :api_id,
       :max_results,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4398,6 +4509,7 @@ module Aws::ApiGatewayV2
     class GetRoutesResponse < Struct.new(
       :items,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4418,6 +4530,7 @@ module Aws::ApiGatewayV2
     class GetStageRequest < Struct.new(
       :api_id,
       :stage_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4487,6 +4600,7 @@ module Aws::ApiGatewayV2
       :stage_name,
       :stage_variables,
       :tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4512,6 +4626,7 @@ module Aws::ApiGatewayV2
       :api_id,
       :max_results,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4526,6 +4641,7 @@ module Aws::ApiGatewayV2
     class GetStagesResponse < Struct.new(
       :items,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4541,6 +4657,7 @@ module Aws::ApiGatewayV2
     #
     class GetTagsRequest < Struct.new(
       :resource_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4550,6 +4667,7 @@ module Aws::ApiGatewayV2
     #
     class GetTagsResponse < Struct.new(
       :tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4565,6 +4683,7 @@ module Aws::ApiGatewayV2
     #
     class GetVpcLinkRequest < Struct.new(
       :vpc_link_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4613,6 +4732,7 @@ module Aws::ApiGatewayV2
       :vpc_link_status,
       :vpc_link_status_message,
       :vpc_link_version)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4633,6 +4753,7 @@ module Aws::ApiGatewayV2
     class GetVpcLinksRequest < Struct.new(
       :max_results,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4647,6 +4768,7 @@ module Aws::ApiGatewayV2
     class GetVpcLinksResponse < Struct.new(
       :items,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4658,6 +4780,7 @@ module Aws::ApiGatewayV2
     #
     class ImportApiInput < Struct.new(
       :body)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4683,6 +4806,7 @@ module Aws::ApiGatewayV2
       :basepath,
       :body,
       :fail_on_warnings)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4767,6 +4891,7 @@ module Aws::ApiGatewayV2
       :tags,
       :version,
       :warnings)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4966,6 +5091,7 @@ module Aws::ApiGatewayV2
       :template_selection_expression,
       :timeout_in_millis,
       :tls_config)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5029,6 +5155,7 @@ module Aws::ApiGatewayV2
       :response_parameters,
       :response_templates,
       :template_selection_expression)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5046,6 +5173,7 @@ module Aws::ApiGatewayV2
     class IntegrationResponses < Struct.new(
       :items,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5063,6 +5191,7 @@ module Aws::ApiGatewayV2
     class Integrations < Struct.new(
       :items,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5099,6 +5228,7 @@ module Aws::ApiGatewayV2
     class JWTConfiguration < Struct.new(
       :audience,
       :issuer)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5116,6 +5246,7 @@ module Aws::ApiGatewayV2
     class LimitExceededException < Struct.new(
       :limit_type,
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5154,6 +5285,7 @@ module Aws::ApiGatewayV2
       :model_id,
       :name,
       :schema)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5176,6 +5308,7 @@ module Aws::ApiGatewayV2
     class Models < Struct.new(
       :items,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5193,6 +5326,7 @@ module Aws::ApiGatewayV2
     class NotFoundException < Struct.new(
       :message,
       :resource_type)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5212,6 +5346,7 @@ module Aws::ApiGatewayV2
     #
     class ParameterConstraints < Struct.new(
       :required)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5224,6 +5359,7 @@ module Aws::ApiGatewayV2
     #
     class ReimportApiInput < Struct.new(
       :body)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5254,6 +5390,7 @@ module Aws::ApiGatewayV2
       :basepath,
       :body,
       :fail_on_warnings)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5338,6 +5475,7 @@ module Aws::ApiGatewayV2
       :tags,
       :version,
       :warnings)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5429,6 +5567,7 @@ module Aws::ApiGatewayV2
       :route_key,
       :route_response_selection_expression,
       :target)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5461,6 +5600,7 @@ module Aws::ApiGatewayV2
       :response_parameters,
       :route_response_id,
       :route_response_key)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5478,6 +5618,7 @@ module Aws::ApiGatewayV2
     class RouteResponses < Struct.new(
       :items,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5524,6 +5665,7 @@ module Aws::ApiGatewayV2
       :logging_level,
       :throttling_burst_limit,
       :throttling_rate_limit)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5541,6 +5683,7 @@ module Aws::ApiGatewayV2
     class Routes < Struct.new(
       :items,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5626,6 +5769,7 @@ module Aws::ApiGatewayV2
       :stage_name,
       :stage_variables,
       :tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5644,6 +5788,7 @@ module Aws::ApiGatewayV2
     class Stages < Struct.new(
       :items,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5656,6 +5801,7 @@ module Aws::ApiGatewayV2
     #
     class TagResourceInput < Struct.new(
       :tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5679,6 +5825,7 @@ module Aws::ApiGatewayV2
     class TagResourceRequest < Struct.new(
       :resource_arn,
       :tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5692,6 +5839,7 @@ module Aws::ApiGatewayV2
     #
     class Template < Struct.new(
       :value)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5708,6 +5856,7 @@ module Aws::ApiGatewayV2
     #
     class TlsConfig < Struct.new(
       :server_name_to_verify)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5731,6 +5880,7 @@ module Aws::ApiGatewayV2
     #
     class TlsConfigInput < Struct.new(
       :server_name_to_verify)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5746,6 +5896,7 @@ module Aws::ApiGatewayV2
     class TooManyRequestsException < Struct.new(
       :limit_type,
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5766,6 +5917,7 @@ module Aws::ApiGatewayV2
     class UntagResourceRequest < Struct.new(
       :resource_arn,
       :tag_keys)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5848,6 +6000,7 @@ module Aws::ApiGatewayV2
       :route_selection_expression,
       :target,
       :version)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5869,6 +6022,7 @@ module Aws::ApiGatewayV2
       :api_id,
       :api_mapping_key,
       :stage)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5914,6 +6068,7 @@ module Aws::ApiGatewayV2
       :api_mapping_key,
       :domain_name,
       :stage)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5945,6 +6100,7 @@ module Aws::ApiGatewayV2
       :api_mapping_id,
       :api_mapping_key,
       :stage)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6048,6 +6204,7 @@ module Aws::ApiGatewayV2
       :route_selection_expression,
       :target,
       :version)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6132,6 +6289,7 @@ module Aws::ApiGatewayV2
       :tags,
       :version,
       :warnings)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6217,6 +6375,7 @@ module Aws::ApiGatewayV2
       :identity_validation_expression,
       :jwt_configuration,
       :name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6306,6 +6465,7 @@ module Aws::ApiGatewayV2
       :identity_validation_expression,
       :jwt_configuration,
       :name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6373,6 +6533,7 @@ module Aws::ApiGatewayV2
       :identity_validation_expression,
       :jwt_configuration,
       :name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6384,6 +6545,7 @@ module Aws::ApiGatewayV2
     #
     class UpdateDeploymentInput < Struct.new(
       :description)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6410,6 +6572,7 @@ module Aws::ApiGatewayV2
       :api_id,
       :deployment_id,
       :description)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6441,6 +6604,7 @@ module Aws::ApiGatewayV2
       :deployment_status,
       :deployment_status_message,
       :description)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6452,6 +6616,7 @@ module Aws::ApiGatewayV2
     #
     class UpdateDomainNameInput < Struct.new(
       :domain_name_configurations)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6485,6 +6650,7 @@ module Aws::ApiGatewayV2
     class UpdateDomainNameRequest < Struct.new(
       :domain_name,
       :domain_name_configurations)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6514,6 +6680,7 @@ module Aws::ApiGatewayV2
       :domain_name,
       :domain_name_configurations,
       :tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6689,6 +6856,7 @@ module Aws::ApiGatewayV2
       :template_selection_expression,
       :timeout_in_millis,
       :tls_config)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6827,6 +6995,7 @@ module Aws::ApiGatewayV2
       :template_selection_expression,
       :timeout_in_millis,
       :tls_config)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6947,6 +7116,7 @@ module Aws::ApiGatewayV2
       :template_selection_expression,
       :timeout_in_millis,
       :tls_config)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -7008,6 +7178,7 @@ module Aws::ApiGatewayV2
       :response_parameters,
       :response_templates,
       :template_selection_expression)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -7093,6 +7264,7 @@ module Aws::ApiGatewayV2
       :response_parameters,
       :response_templates,
       :template_selection_expression)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -7153,6 +7325,7 @@ module Aws::ApiGatewayV2
       :response_parameters,
       :response_templates,
       :template_selection_expression)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -7181,6 +7354,7 @@ module Aws::ApiGatewayV2
       :description,
       :name,
       :schema)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -7225,6 +7399,7 @@ module Aws::ApiGatewayV2
       :model_id,
       :name,
       :schema)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -7254,6 +7429,7 @@ module Aws::ApiGatewayV2
       :model_id,
       :name,
       :schema)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -7325,6 +7501,7 @@ module Aws::ApiGatewayV2
       :route_key,
       :route_response_selection_expression,
       :target)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -7444,6 +7621,7 @@ module Aws::ApiGatewayV2
       :route_key,
       :route_response_selection_expression,
       :target)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -7539,6 +7717,7 @@ module Aws::ApiGatewayV2
       :route_key,
       :route_response_selection_expression,
       :target)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -7566,6 +7745,7 @@ module Aws::ApiGatewayV2
       :response_models,
       :response_parameters,
       :route_response_key)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -7633,6 +7813,7 @@ module Aws::ApiGatewayV2
       :route_id,
       :route_response_id,
       :route_response_key)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -7674,6 +7855,7 @@ module Aws::ApiGatewayV2
       :response_parameters,
       :route_response_id,
       :route_response_key)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -7724,6 +7906,7 @@ module Aws::ApiGatewayV2
       :description,
       :route_settings,
       :stage_variables)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -7810,6 +7993,7 @@ module Aws::ApiGatewayV2
       :route_settings,
       :stage_name,
       :stage_variables)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -7879,6 +8063,7 @@ module Aws::ApiGatewayV2
       :stage_name,
       :stage_variables,
       :tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -7890,6 +8075,7 @@ module Aws::ApiGatewayV2
     #
     class UpdateVpcLinkInput < Struct.new(
       :name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -7911,6 +8097,7 @@ module Aws::ApiGatewayV2
     class UpdateVpcLinkRequest < Struct.new(
       :name,
       :vpc_link_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -7959,6 +8146,7 @@ module Aws::ApiGatewayV2
       :vpc_link_status,
       :vpc_link_status_message,
       :vpc_link_version)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -8010,6 +8198,7 @@ module Aws::ApiGatewayV2
       :vpc_link_status,
       :vpc_link_status_message,
       :vpc_link_version)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -8027,6 +8216,7 @@ module Aws::ApiGatewayV2
     class VpcLinks < Struct.new(
       :items,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 

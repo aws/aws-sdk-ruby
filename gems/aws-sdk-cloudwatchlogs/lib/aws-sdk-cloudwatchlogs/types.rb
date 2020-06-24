@@ -39,6 +39,7 @@ module Aws::CloudWatchLogs
     class AssociateKmsKeyRequest < Struct.new(
       :log_group_name,
       :kms_key_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -57,6 +58,7 @@ module Aws::CloudWatchLogs
     #
     class CancelExportTaskRequest < Struct.new(
       :task_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -118,6 +120,7 @@ module Aws::CloudWatchLogs
       :to,
       :destination,
       :destination_prefix)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -129,6 +132,7 @@ module Aws::CloudWatchLogs
     #
     class CreateExportTaskResponse < Struct.new(
       :task_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -167,6 +171,7 @@ module Aws::CloudWatchLogs
       :log_group_name,
       :kms_key_id,
       :tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -191,6 +196,7 @@ module Aws::CloudWatchLogs
     class CreateLogStreamRequest < Struct.new(
       :log_group_name,
       :log_stream_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -203,6 +209,7 @@ module Aws::CloudWatchLogs
     #
     class DataAlreadyAcceptedException < Struct.new(
       :expected_sequence_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -221,6 +228,7 @@ module Aws::CloudWatchLogs
     #
     class DeleteDestinationRequest < Struct.new(
       :destination_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -239,6 +247,7 @@ module Aws::CloudWatchLogs
     #
     class DeleteLogGroupRequest < Struct.new(
       :log_group_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -263,6 +272,7 @@ module Aws::CloudWatchLogs
     class DeleteLogStreamRequest < Struct.new(
       :log_group_name,
       :log_stream_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -287,6 +297,7 @@ module Aws::CloudWatchLogs
     class DeleteMetricFilterRequest < Struct.new(
       :log_group_name,
       :filter_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -304,6 +315,7 @@ module Aws::CloudWatchLogs
     #
     class DeleteQueryDefinitionRequest < Struct.new(
       :query_definition_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -314,6 +326,7 @@ module Aws::CloudWatchLogs
     #
     class DeleteQueryDefinitionResponse < Struct.new(
       :success)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -332,6 +345,7 @@ module Aws::CloudWatchLogs
     #
     class DeleteResourcePolicyRequest < Struct.new(
       :policy_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -350,6 +364,7 @@ module Aws::CloudWatchLogs
     #
     class DeleteRetentionPolicyRequest < Struct.new(
       :log_group_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -374,6 +389,7 @@ module Aws::CloudWatchLogs
     class DeleteSubscriptionFilterRequest < Struct.new(
       :log_group_name,
       :filter_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -407,6 +423,7 @@ module Aws::CloudWatchLogs
       :destination_name_prefix,
       :next_token,
       :limit)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -424,6 +441,7 @@ module Aws::CloudWatchLogs
     class DescribeDestinationsResponse < Struct.new(
       :destinations,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -464,6 +482,7 @@ module Aws::CloudWatchLogs
       :status_code,
       :next_token,
       :limit)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -481,6 +500,7 @@ module Aws::CloudWatchLogs
     class DescribeExportTasksResponse < Struct.new(
       :export_tasks,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -513,6 +533,7 @@ module Aws::CloudWatchLogs
       :log_group_name_prefix,
       :next_token,
       :limit)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -530,6 +551,7 @@ module Aws::CloudWatchLogs
     class DescribeLogGroupsResponse < Struct.new(
       :log_groups,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -596,6 +618,7 @@ module Aws::CloudWatchLogs
       :descending,
       :next_token,
       :limit)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -613,6 +636,7 @@ module Aws::CloudWatchLogs
     class DescribeLogStreamsResponse < Struct.new(
       :log_streams,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -667,6 +691,7 @@ module Aws::CloudWatchLogs
       :limit,
       :metric_name,
       :metric_namespace)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -684,6 +709,7 @@ module Aws::CloudWatchLogs
     class DescribeMetricFiltersResponse < Struct.new(
       :metric_filters,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -724,6 +750,7 @@ module Aws::CloudWatchLogs
       :status,
       :max_results,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -741,6 +768,7 @@ module Aws::CloudWatchLogs
     class DescribeQueriesResponse < Struct.new(
       :queries,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -770,6 +798,7 @@ module Aws::CloudWatchLogs
       :query_definition_name_prefix,
       :max_results,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -786,6 +815,7 @@ module Aws::CloudWatchLogs
     class DescribeQueryDefinitionsResponse < Struct.new(
       :query_definitions,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -812,6 +842,7 @@ module Aws::CloudWatchLogs
     class DescribeResourcePoliciesRequest < Struct.new(
       :next_token,
       :limit)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -829,6 +860,7 @@ module Aws::CloudWatchLogs
     class DescribeResourcePoliciesResponse < Struct.new(
       :resource_policies,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -868,6 +900,7 @@ module Aws::CloudWatchLogs
       :filter_name_prefix,
       :next_token,
       :limit)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -885,6 +918,7 @@ module Aws::CloudWatchLogs
     class DescribeSubscriptionFiltersResponse < Struct.new(
       :subscription_filters,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -928,6 +962,7 @@ module Aws::CloudWatchLogs
       :access_policy,
       :arn,
       :creation_time)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -946,6 +981,7 @@ module Aws::CloudWatchLogs
     #
     class DisassociateKmsKeyRequest < Struct.new(
       :log_group_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1004,6 +1040,7 @@ module Aws::CloudWatchLogs
       :destination_prefix,
       :status,
       :execution_info)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1024,6 +1061,7 @@ module Aws::CloudWatchLogs
     class ExportTaskExecutionInfo < Struct.new(
       :creation_time,
       :completion_time)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1042,6 +1080,7 @@ module Aws::CloudWatchLogs
     class ExportTaskStatus < Struct.new(
       :code,
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1141,6 +1180,7 @@ module Aws::CloudWatchLogs
       :next_token,
       :limit,
       :interleaved)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1164,6 +1204,7 @@ module Aws::CloudWatchLogs
       :events,
       :searched_log_streams,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1199,6 +1240,7 @@ module Aws::CloudWatchLogs
       :message,
       :ingestion_time,
       :event_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1269,6 +1311,7 @@ module Aws::CloudWatchLogs
       :next_token,
       :limit,
       :start_from_head)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1295,6 +1338,7 @@ module Aws::CloudWatchLogs
       :events,
       :next_forward_token,
       :next_backward_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1324,6 +1368,7 @@ module Aws::CloudWatchLogs
     class GetLogGroupFieldsRequest < Struct.new(
       :log_group_name,
       :time)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1337,6 +1382,7 @@ module Aws::CloudWatchLogs
     #
     class GetLogGroupFieldsResponse < Struct.new(
       :log_group_fields)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1359,6 +1405,7 @@ module Aws::CloudWatchLogs
     #
     class GetLogRecordRequest < Struct.new(
       :log_record_pointer)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1370,6 +1417,7 @@ module Aws::CloudWatchLogs
     #
     class GetLogRecordResponse < Struct.new(
       :log_record)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1388,6 +1436,7 @@ module Aws::CloudWatchLogs
     #
     class GetQueryResultsRequest < Struct.new(
       :query_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1422,6 +1471,7 @@ module Aws::CloudWatchLogs
       :results,
       :statistics,
       :status)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1450,6 +1500,7 @@ module Aws::CloudWatchLogs
     class InputLogEvent < Struct.new(
       :timestamp,
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1476,6 +1527,7 @@ module Aws::CloudWatchLogs
     #
     class InvalidSequenceTokenException < Struct.new(
       :expected_sequence_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1500,6 +1552,7 @@ module Aws::CloudWatchLogs
     #
     class ListTagsLogGroupRequest < Struct.new(
       :log_group_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1511,6 +1564,7 @@ module Aws::CloudWatchLogs
     #
     class ListTagsLogGroupResponse < Struct.new(
       :tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1558,6 +1612,7 @@ module Aws::CloudWatchLogs
       :arn,
       :stored_bytes,
       :kms_key_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1578,6 +1633,7 @@ module Aws::CloudWatchLogs
     class LogGroupField < Struct.new(
       :name,
       :percent)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1640,6 +1696,7 @@ module Aws::CloudWatchLogs
       :upload_sequence_token,
       :arn,
       :stored_bytes)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1663,6 +1720,7 @@ module Aws::CloudWatchLogs
     #
     class MalformedQueryException < Struct.new(
       :query_compile_error)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1702,6 +1760,7 @@ module Aws::CloudWatchLogs
       :metric_transformations,
       :creation_time,
       :log_group_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1725,6 +1784,7 @@ module Aws::CloudWatchLogs
       :event_number,
       :event_message,
       :extracted_values)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1772,6 +1832,7 @@ module Aws::CloudWatchLogs
       :metric_namespace,
       :metric_value,
       :default_value)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1803,6 +1864,7 @@ module Aws::CloudWatchLogs
       :timestamp,
       :message,
       :ingestion_time)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1828,6 +1890,7 @@ module Aws::CloudWatchLogs
     class PutDestinationPolicyRequest < Struct.new(
       :destination_name,
       :access_policy)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1861,6 +1924,7 @@ module Aws::CloudWatchLogs
       :destination_name,
       :target_arn,
       :role_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1872,6 +1936,7 @@ module Aws::CloudWatchLogs
     #
     class PutDestinationResponse < Struct.new(
       :destination)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1923,6 +1988,7 @@ module Aws::CloudWatchLogs
       :log_stream_name,
       :log_events,
       :sequence_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1939,6 +2005,7 @@ module Aws::CloudWatchLogs
     class PutLogEventsResponse < Struct.new(
       :next_sequence_token,
       :rejected_log_events_info)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1984,6 +2051,7 @@ module Aws::CloudWatchLogs
       :filter_name,
       :filter_pattern,
       :metric_transformations)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2016,6 +2084,7 @@ module Aws::CloudWatchLogs
       :query_definition_id,
       :log_group_names,
       :query_string)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2026,6 +2095,7 @@ module Aws::CloudWatchLogs
     #
     class PutQueryDefinitionResponse < Struct.new(
       :query_definition_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2062,6 +2132,7 @@ module Aws::CloudWatchLogs
     class PutResourcePolicyRequest < Struct.new(
       :policy_name,
       :policy_document)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2073,6 +2144,7 @@ module Aws::CloudWatchLogs
     #
     class PutResourcePolicyResponse < Struct.new(
       :resource_policy)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2099,6 +2171,7 @@ module Aws::CloudWatchLogs
     class PutRetentionPolicyRequest < Struct.new(
       :log_group_name,
       :retention_in_days)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2174,6 +2247,7 @@ module Aws::CloudWatchLogs
       :destination_arn,
       :role_arn,
       :distribution)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2192,6 +2266,7 @@ module Aws::CloudWatchLogs
     class QueryCompileError < Struct.new(
       :location,
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2210,6 +2285,7 @@ module Aws::CloudWatchLogs
     class QueryCompileErrorLocation < Struct.new(
       :start_char_offset,
       :end_char_offset)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2236,6 +2312,7 @@ module Aws::CloudWatchLogs
       :query_string,
       :last_modified,
       :log_group_names)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2271,6 +2348,7 @@ module Aws::CloudWatchLogs
       :status,
       :create_time,
       :log_group_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2297,6 +2375,7 @@ module Aws::CloudWatchLogs
       :records_matched,
       :records_scanned,
       :bytes_scanned)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2320,6 +2399,7 @@ module Aws::CloudWatchLogs
       :too_new_log_event_start_index,
       :too_old_log_event_end_index,
       :expired_log_event_end_index)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2357,6 +2437,7 @@ module Aws::CloudWatchLogs
       :policy_name,
       :policy_document,
       :last_updated_time)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2383,6 +2464,7 @@ module Aws::CloudWatchLogs
     class ResultField < Struct.new(
       :field,
       :value)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2401,6 +2483,7 @@ module Aws::CloudWatchLogs
     class SearchedLogStream < Struct.new(
       :log_stream_name,
       :searched_completely)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2474,6 +2557,7 @@ module Aws::CloudWatchLogs
       :end_time,
       :query_string,
       :limit)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2485,6 +2569,7 @@ module Aws::CloudWatchLogs
     #
     class StartQueryResponse < Struct.new(
       :query_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2504,6 +2589,7 @@ module Aws::CloudWatchLogs
     #
     class StopQueryRequest < Struct.new(
       :query_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2515,6 +2601,7 @@ module Aws::CloudWatchLogs
     #
     class StopQueryResponse < Struct.new(
       :success)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2562,6 +2649,7 @@ module Aws::CloudWatchLogs
       :role_arn,
       :distribution,
       :creation_time)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2588,6 +2676,7 @@ module Aws::CloudWatchLogs
     class TagLogGroupRequest < Struct.new(
       :log_group_name,
       :tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2615,6 +2704,7 @@ module Aws::CloudWatchLogs
     class TestMetricFilterRequest < Struct.new(
       :filter_pattern,
       :log_event_messages)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2626,6 +2716,7 @@ module Aws::CloudWatchLogs
     #
     class TestMetricFilterResponse < Struct.new(
       :matches)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2656,6 +2747,7 @@ module Aws::CloudWatchLogs
     class UntagLogGroupRequest < Struct.new(
       :log_group_name,
       :tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 

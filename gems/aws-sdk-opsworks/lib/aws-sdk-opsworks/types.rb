@@ -25,6 +25,7 @@ module Aws::OpsWorks
     class AgentVersion < Struct.new(
       :version,
       :configuration_manager)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -120,6 +121,7 @@ module Aws::OpsWorks
       :attributes,
       :created_at,
       :environment)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -145,6 +147,7 @@ module Aws::OpsWorks
     class AssignInstanceRequest < Struct.new(
       :instance_id,
       :layer_ids)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -169,6 +172,7 @@ module Aws::OpsWorks
     class AssignVolumeRequest < Struct.new(
       :volume_id,
       :instance_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -193,6 +197,7 @@ module Aws::OpsWorks
     class AssociateElasticIpRequest < Struct.new(
       :elastic_ip,
       :instance_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -218,6 +223,7 @@ module Aws::OpsWorks
     class AttachElasticLoadBalancerRequest < Struct.new(
       :elastic_load_balancer_name,
       :layer_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -307,6 +313,7 @@ module Aws::OpsWorks
       :memory_threshold,
       :load_threshold,
       :alarms)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -366,6 +373,7 @@ module Aws::OpsWorks
       :no_device,
       :virtual_name,
       :ebs)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -392,6 +400,7 @@ module Aws::OpsWorks
     class ChefConfiguration < Struct.new(
       :manage_berkshelf,
       :berkshelf_version)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -785,6 +794,7 @@ module Aws::OpsWorks
       :clone_app_ids,
       :default_root_device_type,
       :agent_version)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -798,6 +808,7 @@ module Aws::OpsWorks
     #
     class CloneStackResult < Struct.new(
       :stack_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -838,6 +849,7 @@ module Aws::OpsWorks
     class CloudWatchLogsConfiguration < Struct.new(
       :enabled,
       :log_streams)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -960,6 +972,7 @@ module Aws::OpsWorks
       :buffer_duration,
       :batch_count,
       :batch_size)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1050,6 +1063,7 @@ module Aws::OpsWorks
       :exit_code,
       :log_url,
       :type)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1185,6 +1199,7 @@ module Aws::OpsWorks
       :ssl_configuration,
       :attributes,
       :environment)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1198,6 +1213,7 @@ module Aws::OpsWorks
     #
     class CreateAppResult < Struct.new(
       :app_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1272,6 +1288,7 @@ module Aws::OpsWorks
       :command,
       :comment,
       :custom_json)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1286,6 +1303,7 @@ module Aws::OpsWorks
     #
     class CreateDeploymentResult < Struct.new(
       :deployment_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1543,6 +1561,7 @@ module Aws::OpsWorks
       :ebs_optimized,
       :agent_version,
       :tenancy)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1556,6 +1575,7 @@ module Aws::OpsWorks
     #
     class CreateInstanceResult < Struct.new(
       :instance_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1774,6 +1794,7 @@ module Aws::OpsWorks
       :install_updates_on_boot,
       :use_ebs_optimized_instances,
       :lifecycle_event_configuration)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1787,6 +1808,7 @@ module Aws::OpsWorks
     #
     class CreateLayerResult < Struct.new(
       :layer_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2171,6 +2193,7 @@ module Aws::OpsWorks
       :default_ssh_key_name,
       :default_root_device_type,
       :agent_version)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2185,6 +2208,7 @@ module Aws::OpsWorks
     #
     class CreateStackResult < Struct.new(
       :stack_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2232,6 +2256,7 @@ module Aws::OpsWorks
       :ssh_username,
       :ssh_public_key,
       :allow_self_management)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2245,6 +2270,7 @@ module Aws::OpsWorks
     #
     class CreateUserProfileResult < Struct.new(
       :iam_user_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2278,6 +2304,7 @@ module Aws::OpsWorks
       :type,
       :arn,
       :database_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2296,6 +2323,7 @@ module Aws::OpsWorks
     #
     class DeleteAppRequest < Struct.new(
       :app_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2326,6 +2354,7 @@ module Aws::OpsWorks
       :instance_id,
       :delete_elastic_ip,
       :delete_volumes)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2344,6 +2373,7 @@ module Aws::OpsWorks
     #
     class DeleteLayerRequest < Struct.new(
       :layer_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2362,6 +2392,7 @@ module Aws::OpsWorks
     #
     class DeleteStackRequest < Struct.new(
       :stack_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2380,6 +2411,7 @@ module Aws::OpsWorks
     #
     class DeleteUserProfileRequest < Struct.new(
       :iam_user_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2466,6 +2498,7 @@ module Aws::OpsWorks
       :status,
       :custom_json,
       :instance_ids)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2555,6 +2588,7 @@ module Aws::OpsWorks
     class DeploymentCommand < Struct.new(
       :name,
       :args)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2573,6 +2607,7 @@ module Aws::OpsWorks
     #
     class DeregisterEcsClusterRequest < Struct.new(
       :ecs_cluster_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2591,6 +2626,7 @@ module Aws::OpsWorks
     #
     class DeregisterElasticIpRequest < Struct.new(
       :elastic_ip)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2609,6 +2645,7 @@ module Aws::OpsWorks
     #
     class DeregisterInstanceRequest < Struct.new(
       :instance_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2627,6 +2664,7 @@ module Aws::OpsWorks
     #
     class DeregisterRdsDbInstanceRequest < Struct.new(
       :rds_db_instance_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2647,6 +2685,7 @@ module Aws::OpsWorks
     #
     class DeregisterVolumeRequest < Struct.new(
       :volume_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2674,6 +2713,7 @@ module Aws::OpsWorks
     class DescribeAgentVersionsRequest < Struct.new(
       :stack_id,
       :configuration_manager)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2689,6 +2729,7 @@ module Aws::OpsWorks
     #
     class DescribeAgentVersionsResult < Struct.new(
       :agent_versions)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2716,6 +2757,7 @@ module Aws::OpsWorks
     class DescribeAppsRequest < Struct.new(
       :stack_id,
       :app_ids)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2729,6 +2771,7 @@ module Aws::OpsWorks
     #
     class DescribeAppsResult < Struct.new(
       :apps)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2765,6 +2808,7 @@ module Aws::OpsWorks
       :deployment_id,
       :instance_id,
       :command_ids)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2779,6 +2823,7 @@ module Aws::OpsWorks
     #
     class DescribeCommandsResult < Struct.new(
       :commands)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2814,6 +2859,7 @@ module Aws::OpsWorks
       :stack_id,
       :app_id,
       :deployment_ids)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2827,6 +2873,7 @@ module Aws::OpsWorks
     #
     class DescribeDeploymentsResult < Struct.new(
       :deployments)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2874,6 +2921,7 @@ module Aws::OpsWorks
       :stack_id,
       :next_token,
       :max_results)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2896,6 +2944,7 @@ module Aws::OpsWorks
     class DescribeEcsClustersResult < Struct.new(
       :ecs_clusters,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2933,6 +2982,7 @@ module Aws::OpsWorks
       :instance_id,
       :stack_id,
       :ips)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2947,6 +2997,7 @@ module Aws::OpsWorks
     #
     class DescribeElasticIpsResult < Struct.new(
       :elastic_ips)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2973,6 +3024,7 @@ module Aws::OpsWorks
     class DescribeElasticLoadBalancersRequest < Struct.new(
       :stack_id,
       :layer_ids)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2987,6 +3039,7 @@ module Aws::OpsWorks
     #
     class DescribeElasticLoadBalancersResult < Struct.new(
       :elastic_load_balancers)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3021,6 +3074,7 @@ module Aws::OpsWorks
       :stack_id,
       :layer_id,
       :instance_ids)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3034,6 +3088,7 @@ module Aws::OpsWorks
     #
     class DescribeInstancesResult < Struct.new(
       :instances)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3060,6 +3115,7 @@ module Aws::OpsWorks
     class DescribeLayersRequest < Struct.new(
       :stack_id,
       :layer_ids)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3073,6 +3129,7 @@ module Aws::OpsWorks
     #
     class DescribeLayersResult < Struct.new(
       :layers)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3091,6 +3148,7 @@ module Aws::OpsWorks
     #
     class DescribeLoadBasedAutoScalingRequest < Struct.new(
       :layer_ids)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3105,6 +3163,7 @@ module Aws::OpsWorks
     #
     class DescribeLoadBasedAutoScalingResult < Struct.new(
       :load_based_auto_scaling_configurations)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3118,6 +3177,7 @@ module Aws::OpsWorks
     #
     class DescribeMyUserProfileResult < Struct.new(
       :user_profile)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3132,6 +3192,7 @@ module Aws::OpsWorks
     #
     class DescribeOperatingSystemsResponse < Struct.new(
       :operating_systems)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3161,6 +3222,7 @@ module Aws::OpsWorks
     class DescribePermissionsRequest < Struct.new(
       :iam_user_arn,
       :stack_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3187,6 +3249,7 @@ module Aws::OpsWorks
     #
     class DescribePermissionsResult < Struct.new(
       :permissions)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3221,6 +3284,7 @@ module Aws::OpsWorks
       :instance_id,
       :stack_id,
       :raid_array_ids)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3234,6 +3298,7 @@ module Aws::OpsWorks
     #
     class DescribeRaidArraysResult < Struct.new(
       :raid_arrays)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3260,6 +3325,7 @@ module Aws::OpsWorks
     class DescribeRdsDbInstancesRequest < Struct.new(
       :stack_id,
       :rds_db_instance_arns)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3273,6 +3339,7 @@ module Aws::OpsWorks
     #
     class DescribeRdsDbInstancesResult < Struct.new(
       :rds_db_instances)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3309,6 +3376,7 @@ module Aws::OpsWorks
       :stack_id,
       :instance_id,
       :service_error_ids)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3323,6 +3391,7 @@ module Aws::OpsWorks
     #
     class DescribeServiceErrorsResult < Struct.new(
       :service_errors)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3341,6 +3410,7 @@ module Aws::OpsWorks
     #
     class DescribeStackProvisioningParametersRequest < Struct.new(
       :stack_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3360,6 +3430,7 @@ module Aws::OpsWorks
     class DescribeStackProvisioningParametersResult < Struct.new(
       :agent_installer_url,
       :parameters)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3378,6 +3449,7 @@ module Aws::OpsWorks
     #
     class DescribeStackSummaryRequest < Struct.new(
       :stack_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3391,6 +3463,7 @@ module Aws::OpsWorks
     #
     class DescribeStackSummaryResult < Struct.new(
       :stack_summary)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3411,6 +3484,7 @@ module Aws::OpsWorks
     #
     class DescribeStacksRequest < Struct.new(
       :stack_ids)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3424,6 +3498,7 @@ module Aws::OpsWorks
     #
     class DescribeStacksResult < Struct.new(
       :stacks)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3442,6 +3517,7 @@ module Aws::OpsWorks
     #
     class DescribeTimeBasedAutoScalingRequest < Struct.new(
       :instance_ids)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3456,6 +3532,7 @@ module Aws::OpsWorks
     #
     class DescribeTimeBasedAutoScalingResult < Struct.new(
       :time_based_auto_scaling_configurations)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3475,6 +3552,7 @@ module Aws::OpsWorks
     #
     class DescribeUserProfilesRequest < Struct.new(
       :iam_user_arns)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3488,6 +3566,7 @@ module Aws::OpsWorks
     #
     class DescribeUserProfilesResult < Struct.new(
       :user_profiles)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3531,6 +3610,7 @@ module Aws::OpsWorks
       :stack_id,
       :raid_array_id,
       :volume_ids)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3544,6 +3624,7 @@ module Aws::OpsWorks
     #
     class DescribeVolumesResult < Struct.new(
       :volumes)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3569,6 +3650,7 @@ module Aws::OpsWorks
     class DetachElasticLoadBalancerRequest < Struct.new(
       :elastic_load_balancer_name,
       :layer_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3587,6 +3669,7 @@ module Aws::OpsWorks
     #
     class DisassociateElasticIpRequest < Struct.new(
       :elastic_ip)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3655,6 +3738,7 @@ module Aws::OpsWorks
       :volume_size,
       :volume_type,
       :delete_on_termination)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3683,6 +3767,7 @@ module Aws::OpsWorks
       :ecs_cluster_name,
       :stack_id,
       :registered_at)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3721,6 +3806,7 @@ module Aws::OpsWorks
       :domain,
       :region,
       :instance_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3775,6 +3861,7 @@ module Aws::OpsWorks
       :availability_zones,
       :subnet_ids,
       :ec2_instance_ids)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3816,6 +3903,7 @@ module Aws::OpsWorks
       :key,
       :value,
       :secure)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3834,6 +3922,7 @@ module Aws::OpsWorks
     #
     class GetHostnameSuggestionRequest < Struct.new(
       :layer_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3852,6 +3941,7 @@ module Aws::OpsWorks
     class GetHostnameSuggestionResult < Struct.new(
       :layer_id,
       :hostname)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3879,6 +3969,7 @@ module Aws::OpsWorks
     class GrantAccessRequest < Struct.new(
       :instance_id,
       :valid_for_in_minutes)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3894,6 +3985,7 @@ module Aws::OpsWorks
     #
     class GrantAccessResult < Struct.new(
       :temporary_credential)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4177,6 +4269,7 @@ module Aws::OpsWorks
       :subnet_id,
       :tenancy,
       :virtualization_type)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4210,6 +4303,7 @@ module Aws::OpsWorks
     class InstanceIdentity < Struct.new(
       :document,
       :signature)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4318,6 +4412,7 @@ module Aws::OpsWorks
       :terminated,
       :terminating,
       :unassigning)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4494,6 +4589,7 @@ module Aws::OpsWorks
       :install_updates_on_boot,
       :use_ebs_optimized_instances,
       :lifecycle_event_configuration)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4518,6 +4614,7 @@ module Aws::OpsWorks
     #
     class LifecycleEventConfiguration < Struct.new(
       :shutdown)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4550,6 +4647,7 @@ module Aws::OpsWorks
       :resource_arn,
       :max_results,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4573,6 +4671,7 @@ module Aws::OpsWorks
     class ListTagsResult < Struct.new(
       :tags,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4605,6 +4704,7 @@ module Aws::OpsWorks
       :enable,
       :up_scaling,
       :down_scaling)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4653,6 +4753,7 @@ module Aws::OpsWorks
       :reported_name,
       :reported_version,
       :supported)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4674,6 +4775,7 @@ module Aws::OpsWorks
     class OperatingSystemConfigurationManager < Struct.new(
       :name,
       :version)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4730,6 +4832,7 @@ module Aws::OpsWorks
       :allow_ssh,
       :allow_sudo,
       :level)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4812,6 +4915,7 @@ module Aws::OpsWorks
       :stack_id,
       :volume_type,
       :iops)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4869,6 +4973,7 @@ module Aws::OpsWorks
       :engine,
       :stack_id,
       :missing_on_rds)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4887,6 +4992,7 @@ module Aws::OpsWorks
     #
     class RebootInstanceRequest < Struct.new(
       :instance_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4948,6 +5054,7 @@ module Aws::OpsWorks
       :deploy,
       :undeploy,
       :shutdown)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4972,6 +5079,7 @@ module Aws::OpsWorks
     class RegisterEcsClusterRequest < Struct.new(
       :ecs_cluster_arn,
       :stack_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4985,6 +5093,7 @@ module Aws::OpsWorks
     #
     class RegisterEcsClusterResult < Struct.new(
       :ecs_cluster_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5009,6 +5118,7 @@ module Aws::OpsWorks
     class RegisterElasticIpRequest < Struct.new(
       :elastic_ip,
       :stack_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5022,6 +5132,7 @@ module Aws::OpsWorks
     #
     class RegisterElasticIpResult < Struct.new(
       :elastic_ip)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5080,6 +5191,7 @@ module Aws::OpsWorks
       :rsa_public_key,
       :rsa_public_key_fingerprint,
       :instance_identity)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5093,6 +5205,7 @@ module Aws::OpsWorks
     #
     class RegisterInstanceResult < Struct.new(
       :instance_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5129,6 +5242,7 @@ module Aws::OpsWorks
       :rds_db_instance_arn,
       :db_user,
       :db_password)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5153,6 +5267,7 @@ module Aws::OpsWorks
     class RegisterVolumeRequest < Struct.new(
       :ec2_volume_id,
       :stack_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5166,6 +5281,7 @@ module Aws::OpsWorks
     #
     class RegisterVolumeResult < Struct.new(
       :volume_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5189,6 +5305,7 @@ module Aws::OpsWorks
       :family,
       :name,
       :version)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5202,6 +5319,7 @@ module Aws::OpsWorks
     #
     class ResourceNotFoundException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5230,6 +5348,7 @@ module Aws::OpsWorks
       :name,
       :ssh_username,
       :ssh_public_key)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5268,6 +5387,7 @@ module Aws::OpsWorks
       :type,
       :message,
       :created_at)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5326,6 +5446,7 @@ module Aws::OpsWorks
       :enable,
       :up_scaling,
       :down_scaling)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5386,6 +5507,7 @@ module Aws::OpsWorks
       :allow_ssh,
       :allow_sudo,
       :level)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5432,6 +5554,7 @@ module Aws::OpsWorks
     class SetTimeBasedAutoScalingRequest < Struct.new(
       :instance_id,
       :auto_scaling_schedule)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5464,6 +5587,7 @@ module Aws::OpsWorks
     class ShutdownEventConfiguration < Struct.new(
       :execution_timeout,
       :delay_until_elb_connections_drained)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5552,6 +5676,7 @@ module Aws::OpsWorks
       :password,
       :ssh_key,
       :revision)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5585,6 +5710,7 @@ module Aws::OpsWorks
       :certificate,
       :private_key,
       :chain)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5756,6 +5882,7 @@ module Aws::OpsWorks
       :created_at,
       :default_root_device_type,
       :agent_version)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5784,6 +5911,7 @@ module Aws::OpsWorks
     class StackConfigurationManager < Struct.new(
       :name,
       :version)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5823,6 +5951,7 @@ module Aws::OpsWorks
       :layers_count,
       :apps_count,
       :instances_count)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5841,6 +5970,7 @@ module Aws::OpsWorks
     #
     class StartInstanceRequest < Struct.new(
       :instance_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5859,6 +5989,7 @@ module Aws::OpsWorks
     #
     class StartStackRequest < Struct.new(
       :stack_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5889,6 +6020,7 @@ module Aws::OpsWorks
     class StopInstanceRequest < Struct.new(
       :instance_id,
       :force)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5907,6 +6039,7 @@ module Aws::OpsWorks
     #
     class StopStackRequest < Struct.new(
       :stack_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5949,6 +6082,7 @@ module Aws::OpsWorks
     class TagResourceRequest < Struct.new(
       :resource_arn,
       :tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5981,6 +6115,7 @@ module Aws::OpsWorks
       :password,
       :valid_for_in_minutes,
       :instance_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5999,6 +6134,7 @@ module Aws::OpsWorks
     class TimeBasedAutoScalingConfiguration < Struct.new(
       :instance_id,
       :auto_scaling_schedule)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6017,6 +6153,7 @@ module Aws::OpsWorks
     #
     class UnassignInstanceRequest < Struct.new(
       :instance_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6035,6 +6172,7 @@ module Aws::OpsWorks
     #
     class UnassignVolumeRequest < Struct.new(
       :volume_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6059,6 +6197,7 @@ module Aws::OpsWorks
     class UntagResourceRequest < Struct.new(
       :resource_arn,
       :tag_keys)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6183,6 +6322,7 @@ module Aws::OpsWorks
       :ssl_configuration,
       :attributes,
       :environment)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6207,6 +6347,7 @@ module Aws::OpsWorks
     class UpdateElasticIpRequest < Struct.new(
       :elastic_ip,
       :name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6379,6 +6520,7 @@ module Aws::OpsWorks
       :install_updates_on_boot,
       :ebs_optimized,
       :agent_version)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6583,6 +6725,7 @@ module Aws::OpsWorks
       :install_updates_on_boot,
       :use_ebs_optimized_instances,
       :lifecycle_event_configuration)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6601,6 +6744,7 @@ module Aws::OpsWorks
     #
     class UpdateMyUserProfileRequest < Struct.new(
       :ssh_public_key)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6631,6 +6775,7 @@ module Aws::OpsWorks
       :rds_db_instance_arn,
       :db_user,
       :db_password)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6942,6 +7087,7 @@ module Aws::OpsWorks
       :default_root_device_type,
       :use_opsworks_security_groups,
       :agent_version)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6989,6 +7135,7 @@ module Aws::OpsWorks
       :ssh_username,
       :ssh_public_key,
       :allow_self_management)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -7019,6 +7166,7 @@ module Aws::OpsWorks
       :volume_id,
       :name,
       :mount_point)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -7058,6 +7206,7 @@ module Aws::OpsWorks
       :ssh_username,
       :ssh_public_key,
       :allow_self_management)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -7071,6 +7220,7 @@ module Aws::OpsWorks
     #
     class ValidationException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -7189,6 +7339,7 @@ module Aws::OpsWorks
       :volume_type,
       :iops,
       :encrypted)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -7275,6 +7426,7 @@ module Aws::OpsWorks
       :volume_type,
       :iops,
       :encrypted)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -7363,6 +7515,7 @@ module Aws::OpsWorks
       :friday,
       :saturday,
       :sunday)
+      SENSITIVE = []
       include Aws::Structure
     end
 

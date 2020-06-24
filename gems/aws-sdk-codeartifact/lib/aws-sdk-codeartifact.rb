@@ -47,6 +47,6 @@ require_relative 'aws-sdk-codeartifact/customizations'
 # @service
 module Aws::CodeArtifact
 
-  GEM_VERSION = '1.0.1'
+  GEM_VERSION = '1.1.0'
 
 end

@@ -18,6 +18,7 @@ module Aws::IoTDataPlane
     #
     class ConflictException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -42,6 +43,7 @@ module Aws::IoTDataPlane
     class DeleteThingShadowRequest < Struct.new(
       :thing_name,
       :shadow_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -53,6 +55,7 @@ module Aws::IoTDataPlane
     #
     class DeleteThingShadowResponse < Struct.new(
       :payload)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -77,6 +80,7 @@ module Aws::IoTDataPlane
     class GetThingShadowRequest < Struct.new(
       :thing_name,
       :shadow_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -88,6 +92,7 @@ module Aws::IoTDataPlane
     #
     class GetThingShadowResponse < Struct.new(
       :payload)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -99,6 +104,7 @@ module Aws::IoTDataPlane
     #
     class InternalFailureException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -110,6 +116,7 @@ module Aws::IoTDataPlane
     #
     class InvalidRequestException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -138,6 +145,7 @@ module Aws::IoTDataPlane
       :thing_name,
       :next_token,
       :page_size)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -158,6 +166,7 @@ module Aws::IoTDataPlane
       :results,
       :next_token,
       :timestamp)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -169,6 +178,7 @@ module Aws::IoTDataPlane
     #
     class MethodNotAllowedException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -199,6 +209,7 @@ module Aws::IoTDataPlane
       :topic,
       :qos,
       :payload)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -210,6 +221,7 @@ module Aws::IoTDataPlane
     #
     class RequestEntityTooLargeException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -221,6 +233,7 @@ module Aws::IoTDataPlane
     #
     class ResourceNotFoundException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -232,6 +245,7 @@ module Aws::IoTDataPlane
     #
     class ServiceUnavailableException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -243,6 +257,7 @@ module Aws::IoTDataPlane
     #
     class ThrottlingException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -254,6 +269,7 @@ module Aws::IoTDataPlane
     #
     class UnauthorizedException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -265,6 +281,7 @@ module Aws::IoTDataPlane
     #
     class UnsupportedDocumentEncodingException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -295,6 +312,7 @@ module Aws::IoTDataPlane
       :thing_name,
       :shadow_name,
       :payload)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -306,6 +324,7 @@ module Aws::IoTDataPlane
     #
     class UpdateThingShadowResponse < Struct.new(
       :payload)
+      SENSITIVE = []
       include Aws::Structure
     end
 

@@ -19,6 +19,7 @@ module Aws::MigrationHub
     #
     class AccessDeniedException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -45,6 +46,7 @@ module Aws::MigrationHub
       :application_id,
       :application_status,
       :last_updated_time)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -87,6 +89,7 @@ module Aws::MigrationHub
       :migration_task_name,
       :created_artifact,
       :dry_run)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -132,6 +135,7 @@ module Aws::MigrationHub
       :migration_task_name,
       :discovered_resource,
       :dry_run)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -162,6 +166,7 @@ module Aws::MigrationHub
     class CreateProgressUpdateStreamRequest < Struct.new(
       :progress_update_stream_name,
       :dry_run)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -194,6 +199,7 @@ module Aws::MigrationHub
     class CreatedArtifact < Struct.new(
       :name,
       :description)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -220,6 +226,7 @@ module Aws::MigrationHub
     class DeleteProgressUpdateStreamRequest < Struct.new(
       :progress_update_stream_name,
       :dry_run)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -243,6 +250,7 @@ module Aws::MigrationHub
     #
     class DescribeApplicationStateRequest < Struct.new(
       :application_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -259,6 +267,7 @@ module Aws::MigrationHub
     class DescribeApplicationStateResult < Struct.new(
       :application_status,
       :last_updated_time)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -284,6 +293,7 @@ module Aws::MigrationHub
     class DescribeMigrationTaskRequest < Struct.new(
       :progress_update_stream,
       :migration_task_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -295,6 +305,7 @@ module Aws::MigrationHub
     #
     class DescribeMigrationTaskResult < Struct.new(
       :migration_task)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -335,6 +346,7 @@ module Aws::MigrationHub
       :migration_task_name,
       :created_artifact_name,
       :dry_run)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -378,6 +390,7 @@ module Aws::MigrationHub
       :migration_task_name,
       :configuration_id,
       :dry_run)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -410,6 +423,7 @@ module Aws::MigrationHub
     class DiscoveredResource < Struct.new(
       :configuration_id,
       :description)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -423,6 +437,7 @@ module Aws::MigrationHub
     #
     class DryRunOperation < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -435,6 +450,7 @@ module Aws::MigrationHub
     #
     class HomeRegionNotSetException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -467,6 +483,7 @@ module Aws::MigrationHub
       :progress_update_stream,
       :migration_task_name,
       :dry_run)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -484,6 +501,7 @@ module Aws::MigrationHub
     #
     class InternalServerError < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -497,6 +515,7 @@ module Aws::MigrationHub
     #
     class InvalidInputException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -530,6 +549,7 @@ module Aws::MigrationHub
       :application_ids,
       :next_token,
       :max_results)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -548,6 +568,7 @@ module Aws::MigrationHub
     class ListApplicationStatesResult < Struct.new(
       :application_state_list,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -587,6 +608,7 @@ module Aws::MigrationHub
       :migration_task_name,
       :next_token,
       :max_results)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -606,6 +628,7 @@ module Aws::MigrationHub
     class ListCreatedArtifactsResult < Struct.new(
       :next_token,
       :created_artifact_list)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -645,6 +668,7 @@ module Aws::MigrationHub
       :migration_task_name,
       :next_token,
       :max_results)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -664,6 +688,7 @@ module Aws::MigrationHub
     class ListDiscoveredResourcesResult < Struct.new(
       :next_token,
       :discovered_resource_list)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -696,6 +721,7 @@ module Aws::MigrationHub
       :next_token,
       :max_results,
       :resource_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -716,6 +742,7 @@ module Aws::MigrationHub
     class ListMigrationTasksResult < Struct.new(
       :next_token,
       :migration_task_summary_list)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -742,6 +769,7 @@ module Aws::MigrationHub
     class ListProgressUpdateStreamsRequest < Struct.new(
       :next_token,
       :max_results)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -761,6 +789,7 @@ module Aws::MigrationHub
     class ListProgressUpdateStreamsResult < Struct.new(
       :progress_update_stream_summary_list,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -797,6 +826,7 @@ module Aws::MigrationHub
       :task,
       :update_date_time,
       :resource_attribute_list)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -839,6 +869,7 @@ module Aws::MigrationHub
       :progress_percent,
       :status_detail,
       :update_date_time)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -877,6 +908,7 @@ module Aws::MigrationHub
       :status,
       :update_date_time,
       :dry_run)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -938,6 +970,7 @@ module Aws::MigrationHub
       :update_date_time,
       :next_update_seconds,
       :dry_run)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -957,6 +990,7 @@ module Aws::MigrationHub
     #
     class PolicyErrorException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -972,6 +1006,7 @@ module Aws::MigrationHub
     #
     class ProgressUpdateStreamSummary < Struct.new(
       :progress_update_stream_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1042,6 +1077,7 @@ module Aws::MigrationHub
       :migration_task_name,
       :resource_attribute_list,
       :dry_run)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1094,6 +1130,7 @@ module Aws::MigrationHub
     class ResourceAttribute < Struct.new(
       :type,
       :value)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1109,6 +1146,7 @@ module Aws::MigrationHub
     #
     class ResourceNotFoundException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1122,6 +1160,7 @@ module Aws::MigrationHub
     #
     class ServiceUnavailableException < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1156,6 +1195,7 @@ module Aws::MigrationHub
       :status,
       :status_detail,
       :progress_percent)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1174,6 +1214,7 @@ module Aws::MigrationHub
     class ThrottlingException < Struct.new(
       :message,
       :retry_after_seconds)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1187,6 +1228,7 @@ module Aws::MigrationHub
     #
     class UnauthorizedOperation < Struct.new(
       :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 

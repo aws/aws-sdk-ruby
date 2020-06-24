@@ -53,6 +53,7 @@ module Aws::SESV2
       :rbl_name,
       :listing_time,
       :description)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -89,6 +90,7 @@ module Aws::SESV2
     class Body < Struct.new(
       :text,
       :html)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -118,6 +120,7 @@ module Aws::SESV2
     #
     class CloudWatchDestination < Struct.new(
       :dimension_configurations)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -169,6 +172,7 @@ module Aws::SESV2
       :dimension_name,
       :dimension_value_source,
       :default_dimension_value)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -206,6 +210,7 @@ module Aws::SESV2
     class Content < Struct.new(
       :data,
       :charset)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -262,6 +267,7 @@ module Aws::SESV2
       :configuration_set_name,
       :event_destination_name,
       :event_destination)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -348,6 +354,7 @@ module Aws::SESV2
       :sending_options,
       :tags,
       :suppression_options)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -387,6 +394,7 @@ module Aws::SESV2
     class CreateDedicatedIpPoolRequest < Struct.new(
       :pool_name,
       :tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -474,6 +482,7 @@ module Aws::SESV2
       :from_email_address,
       :content,
       :tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -498,6 +507,7 @@ module Aws::SESV2
     class CreateDeliverabilityTestReportResponse < Struct.new(
       :report_id,
       :deliverability_test_status)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -550,6 +560,7 @@ module Aws::SESV2
       :email_identity,
       :tags,
       :dkim_signing_attributes)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -583,6 +594,7 @@ module Aws::SESV2
       :identity_type,
       :verified_for_sending_status,
       :dkim_attributes)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -610,6 +622,7 @@ module Aws::SESV2
       :start_date,
       :volume_statistics,
       :domain_isp_placements)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -657,6 +670,7 @@ module Aws::SESV2
       :warmup_status,
       :warmup_percentage,
       :pool_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -684,6 +698,7 @@ module Aws::SESV2
     class DeleteConfigurationSetEventDestinationRequest < Struct.new(
       :configuration_set_name,
       :event_destination_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -711,6 +726,7 @@ module Aws::SESV2
     #
     class DeleteConfigurationSetRequest < Struct.new(
       :configuration_set_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -738,6 +754,7 @@ module Aws::SESV2
     #
     class DeleteDedicatedIpPoolRequest < Struct.new(
       :pool_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -769,6 +786,7 @@ module Aws::SESV2
     #
     class DeleteEmailIdentityRequest < Struct.new(
       :email_identity)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -798,6 +816,7 @@ module Aws::SESV2
     #
     class DeleteSuppressedDestinationRequest < Struct.new(
       :email_address)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -853,6 +872,7 @@ module Aws::SESV2
       :from_email_address,
       :create_date,
       :deliverability_test_status)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -884,6 +904,7 @@ module Aws::SESV2
     class DeliveryOptions < Struct.new(
       :tls_policy,
       :sending_pool_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -919,6 +940,7 @@ module Aws::SESV2
       :to_addresses,
       :cc_addresses,
       :bcc_addresses)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1010,6 +1032,7 @@ module Aws::SESV2
       :status,
       :tokens,
       :signing_attributes_origin)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1041,6 +1064,7 @@ module Aws::SESV2
     class DkimSigningAttributes < Struct.new(
       :domain_signing_selector,
       :domain_signing_private_key)
+      SENSITIVE = [:domain_signing_private_key]
       include Aws::Structure
     end
 
@@ -1141,6 +1165,7 @@ module Aws::SESV2
       :read_delete_rate,
       :projected_volume,
       :esps)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1184,6 +1209,7 @@ module Aws::SESV2
       :domain,
       :subscription_start_date,
       :inbox_placement_tracking_option)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1227,6 +1253,7 @@ module Aws::SESV2
       :spam_raw_count,
       :inbox_percentage,
       :spam_percentage)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1310,6 +1337,7 @@ module Aws::SESV2
       :simple,
       :raw,
       :template)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1381,6 +1409,7 @@ module Aws::SESV2
       :cloud_watch_destination,
       :sns_destination,
       :pinpoint_destination)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1471,6 +1500,7 @@ module Aws::SESV2
       :cloud_watch_destination,
       :sns_destination,
       :pinpoint_destination)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1550,6 +1580,7 @@ module Aws::SESV2
       :send_quota,
       :sending_enabled,
       :suppression_attributes)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1573,6 +1604,7 @@ module Aws::SESV2
     #
     class GetBlacklistReportsRequest < Struct.new(
       :blacklist_item_names)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1587,6 +1619,7 @@ module Aws::SESV2
     #
     class GetBlacklistReportsResponse < Struct.new(
       :blacklist_report)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1609,6 +1642,7 @@ module Aws::SESV2
     #
     class GetConfigurationSetEventDestinationsRequest < Struct.new(
       :configuration_set_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1623,6 +1657,7 @@ module Aws::SESV2
     #
     class GetConfigurationSetEventDestinationsResponse < Struct.new(
       :event_destinations)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1644,6 +1679,7 @@ module Aws::SESV2
     #
     class GetConfigurationSetRequest < Struct.new(
       :configuration_set_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1693,6 +1729,7 @@ module Aws::SESV2
       :sending_options,
       :tags,
       :suppression_options)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1715,6 +1752,7 @@ module Aws::SESV2
     #
     class GetDedicatedIpRequest < Struct.new(
       :ip)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1728,6 +1766,7 @@ module Aws::SESV2
     #
     class GetDedicatedIpResponse < Struct.new(
       :dedicated_ip)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1767,6 +1806,7 @@ module Aws::SESV2
       :pool_name,
       :next_token,
       :page_size)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1790,6 +1830,7 @@ module Aws::SESV2
     class GetDedicatedIpsResponse < Struct.new(
       :dedicated_ips,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1858,6 +1899,7 @@ module Aws::SESV2
       :account_status,
       :active_subscribed_domains,
       :pending_expiration_subscribed_domains)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1879,6 +1921,7 @@ module Aws::SESV2
     #
     class GetDeliverabilityTestReportRequest < Struct.new(
       :report_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1919,6 +1962,7 @@ module Aws::SESV2
       :isp_placements,
       :message,
       :tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1943,6 +1987,7 @@ module Aws::SESV2
     #
     class GetDomainDeliverabilityCampaignRequest < Struct.new(
       :campaign_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1959,6 +2004,7 @@ module Aws::SESV2
     #
     class GetDomainDeliverabilityCampaignResponse < Struct.new(
       :domain_deliverability_campaign)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1994,6 +2040,7 @@ module Aws::SESV2
       :domain,
       :start_date,
       :end_date)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2017,6 +2064,7 @@ module Aws::SESV2
     class GetDomainStatisticsReportResponse < Struct.new(
       :overall_volume,
       :daily_volumes)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2037,6 +2085,7 @@ module Aws::SESV2
     #
     class GetEmailIdentityRequest < Struct.new(
       :email_identity)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2095,6 +2144,7 @@ module Aws::SESV2
       :dkim_attributes,
       :mail_from_attributes,
       :tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2116,6 +2166,7 @@ module Aws::SESV2
     #
     class GetSuppressedDestinationRequest < Struct.new(
       :email_address)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2129,6 +2180,7 @@ module Aws::SESV2
     #
     class GetSuppressedDestinationResponse < Struct.new(
       :suppressed_destination)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2165,6 +2217,7 @@ module Aws::SESV2
       :identity_type,
       :identity_name,
       :sending_enabled)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2196,6 +2249,7 @@ module Aws::SESV2
     class InboxPlacementTrackingOption < Struct.new(
       :global,
       :tracked_isps)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2223,6 +2277,7 @@ module Aws::SESV2
     class IspPlacement < Struct.new(
       :isp_name,
       :placement_statistics)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2254,6 +2309,7 @@ module Aws::SESV2
     class KinesisFirehoseDestination < Struct.new(
       :iam_role_arn,
       :delivery_stream_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2291,6 +2347,7 @@ module Aws::SESV2
     class ListConfigurationSetsRequest < Struct.new(
       :next_token,
       :page_size)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2314,6 +2371,7 @@ module Aws::SESV2
     class ListConfigurationSetsResponse < Struct.new(
       :configuration_sets,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2344,6 +2402,7 @@ module Aws::SESV2
     class ListDedicatedIpPoolsRequest < Struct.new(
       :next_token,
       :page_size)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2366,6 +2425,7 @@ module Aws::SESV2
     class ListDedicatedIpPoolsResponse < Struct.new(
       :dedicated_ip_pools,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2402,6 +2462,7 @@ module Aws::SESV2
     class ListDeliverabilityTestReportsRequest < Struct.new(
       :next_token,
       :page_size)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2427,6 +2488,7 @@ module Aws::SESV2
     class ListDeliverabilityTestReportsResponse < Struct.new(
       :deliverability_test_reports,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2483,6 +2545,7 @@ module Aws::SESV2
       :subscribed_domain,
       :next_token,
       :page_size)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2507,6 +2570,7 @@ module Aws::SESV2
     class ListDomainDeliverabilityCampaignsResponse < Struct.new(
       :domain_deliverability_campaigns,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2543,6 +2607,7 @@ module Aws::SESV2
     class ListEmailIdentitiesRequest < Struct.new(
       :next_token,
       :page_size)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2567,6 +2632,7 @@ module Aws::SESV2
     class ListEmailIdentitiesResponse < Struct.new(
       :email_identities,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2623,6 +2689,7 @@ module Aws::SESV2
       :end_date,
       :next_token,
       :page_size)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2645,6 +2712,7 @@ module Aws::SESV2
     class ListSuppressedDestinationsResponse < Struct.new(
       :suppressed_destination_summaries,
       :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2664,6 +2732,7 @@ module Aws::SESV2
     #
     class ListTagsForResourceRequest < Struct.new(
       :resource_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2677,6 +2746,7 @@ module Aws::SESV2
     #
     class ListTagsForResourceResponse < Struct.new(
       :tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2723,6 +2793,7 @@ module Aws::SESV2
       :mail_from_domain,
       :mail_from_domain_status,
       :behavior_on_mx_failure)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2776,6 +2847,7 @@ module Aws::SESV2
     class Message < Struct.new(
       :subject,
       :body)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2821,6 +2893,7 @@ module Aws::SESV2
     class MessageTag < Struct.new(
       :name,
       :value)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2854,6 +2927,7 @@ module Aws::SESV2
       :volume_statistics,
       :read_rate_percent,
       :domain_isp_placements)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2884,6 +2958,7 @@ module Aws::SESV2
     #
     class PinpointDestination < Struct.new(
       :application_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2922,6 +2997,7 @@ module Aws::SESV2
       :missing_percentage,
       :spf_percentage,
       :dkim_percentage)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2946,6 +3022,7 @@ module Aws::SESV2
     #
     class PutAccountDedicatedIpWarmupAttributesRequest < Struct.new(
       :auto_warmup_enabled)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2980,6 +3057,7 @@ module Aws::SESV2
     #
     class PutAccountSendingAttributesRequest < Struct.new(
       :sending_enabled)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3017,6 +3095,7 @@ module Aws::SESV2
     #
     class PutAccountSuppressionAttributesRequest < Struct.new(
       :suppressed_reasons)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3062,6 +3141,7 @@ module Aws::SESV2
       :configuration_set_name,
       :tls_policy,
       :sending_pool_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3099,6 +3179,7 @@ module Aws::SESV2
     class PutConfigurationSetReputationOptionsRequest < Struct.new(
       :configuration_set_name,
       :reputation_metrics_enabled)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3135,6 +3216,7 @@ module Aws::SESV2
     class PutConfigurationSetSendingOptionsRequest < Struct.new(
       :configuration_set_name,
       :sending_enabled)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3180,6 +3262,7 @@ module Aws::SESV2
     class PutConfigurationSetSuppressionOptionsRequest < Struct.new(
       :configuration_set_name,
       :suppressed_reasons)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3215,6 +3298,7 @@ module Aws::SESV2
     class PutConfigurationSetTrackingOptionsRequest < Struct.new(
       :configuration_set_name,
       :custom_redirect_domain)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3251,6 +3335,7 @@ module Aws::SESV2
     class PutDedicatedIpInPoolRequest < Struct.new(
       :ip,
       :destination_pool_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3288,6 +3373,7 @@ module Aws::SESV2
     class PutDedicatedIpWarmupAttributesRequest < Struct.new(
       :ip,
       :warmup_percentage)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3346,6 +3432,7 @@ module Aws::SESV2
     class PutDeliverabilityDashboardOptionRequest < Struct.new(
       :dashboard_enabled,
       :subscribed_domains)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3384,6 +3471,7 @@ module Aws::SESV2
     class PutEmailIdentityDkimAttributesRequest < Struct.new(
       :email_identity,
       :signing_enabled)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3440,6 +3528,7 @@ module Aws::SESV2
       :email_identity,
       :signing_attributes_origin,
       :signing_attributes)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3510,6 +3599,7 @@ module Aws::SESV2
     class PutEmailIdentityDkimSigningAttributesResponse < Struct.new(
       :dkim_status,
       :dkim_tokens)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3549,6 +3639,7 @@ module Aws::SESV2
     class PutEmailIdentityFeedbackAttributesRequest < Struct.new(
       :email_identity,
       :email_forwarding_enabled)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3607,6 +3698,7 @@ module Aws::SESV2
       :email_identity,
       :mail_from_domain,
       :behavior_on_mx_failure)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3643,6 +3735,7 @@ module Aws::SESV2
     class PutSuppressedDestinationRequest < Struct.new(
       :email_address,
       :reason)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3694,6 +3787,7 @@ module Aws::SESV2
     #
     class RawMessage < Struct.new(
       :data)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3726,6 +3820,7 @@ module Aws::SESV2
     class ReputationOptions < Struct.new(
       :reputation_metrics_enabled,
       :last_fresh_start)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3823,6 +3918,7 @@ module Aws::SESV2
       :content,
       :email_tags,
       :configuration_set_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3845,6 +3941,7 @@ module Aws::SESV2
     #
     class SendEmailResponse < Struct.new(
       :message_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3874,6 +3971,7 @@ module Aws::SESV2
       :max_24_hour_send,
       :max_send_rate,
       :sent_last_24_hours)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3896,6 +3994,7 @@ module Aws::SESV2
     #
     class SendingOptions < Struct.new(
       :sending_enabled)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3931,6 +4030,7 @@ module Aws::SESV2
     #
     class SnsDestination < Struct.new(
       :topic_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3964,6 +4064,7 @@ module Aws::SESV2
       :reason,
       :last_update_time,
       :attributes)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3985,6 +4086,7 @@ module Aws::SESV2
     class SuppressedDestinationAttributes < Struct.new(
       :message_id,
       :feedback_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4010,6 +4112,7 @@ module Aws::SESV2
       :email_address,
       :reason,
       :last_update_time)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4034,6 +4137,7 @@ module Aws::SESV2
     #
     class SuppressionAttributes < Struct.new(
       :suppressed_reasons)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4065,6 +4169,7 @@ module Aws::SESV2
     #
     class SuppressionOptions < Struct.new(
       :suppressed_reasons)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4125,6 +4230,7 @@ module Aws::SESV2
     class Tag < Struct.new(
       :key,
       :value)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4158,6 +4264,7 @@ module Aws::SESV2
     class TagResourceRequest < Struct.new(
       :resource_arn,
       :tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4195,6 +4302,7 @@ module Aws::SESV2
     class Template < Struct.new(
       :template_arn,
       :template_data)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4229,6 +4337,7 @@ module Aws::SESV2
     #
     class TrackingOptions < Struct.new(
       :custom_redirect_domain)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4261,6 +4370,7 @@ module Aws::SESV2
     class UntagResourceRequest < Struct.new(
       :resource_arn,
       :tag_keys)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4321,6 +4431,7 @@ module Aws::SESV2
       :configuration_set_name,
       :event_destination_name,
       :event_destination)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4360,6 +4471,7 @@ module Aws::SESV2
       :spam_raw_count,
       :projected_inbox,
       :projected_spam)
+      SENSITIVE = []
       include Aws::Structure
     end
 
