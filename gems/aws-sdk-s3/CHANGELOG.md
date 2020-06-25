@@ -1,9 +1,15 @@
 Unreleased Changes
 ------------------
 
+1.71.1 (2020-06-25)
+------------------
+
+* Issue - Fix uninitialized constant Aws::S3::Plugins::RetryableBlockIO::Forwardable #2348
+
 1.71.0 (2020-06-25)
 ------------------
 
+* Issue - This version has been yanked. (#2349).
 * Feature - Retry incomplete, streaming responses to `get_object` using the range parameter to avoid re-downloading already processed data (#2326).
 * Issue - Reduce memory usage of `IOEncryptor` and `IODecryptor`.
 
