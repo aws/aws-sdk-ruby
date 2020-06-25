@@ -2,7 +2,7 @@
 
 Gem::Specification.new do |spec|
   spec.name          = 'aws-sdk-code-generator'
-  spec.version       = '0.2.0.pre'
+  spec.version       = '0.2.1.pre'
   spec.summary       = 'AWS SDK for Ruby - Code Generator'
   spec.description   = 'Generates the service code for the AWS SDK for Ruby'
   spec.author        = 'Amazon Web Services'
@@ -10,5 +10,8 @@ Gem::Specification.new do |spec|
   spec.license       = 'Apache-2.0'
   spec.email         = ['trevrowe@amazon.com']
   spec.require_paths = ['lib']
-  spec.files = Dir['lib/**/*.rb']
+  spec.files = Dir['lib/**/*.rb'] + Dir['templates/**/*.mustache']
+
+  spec.add_dependency('kramdown')
+  spec.add_dependency('mustache')
 end
