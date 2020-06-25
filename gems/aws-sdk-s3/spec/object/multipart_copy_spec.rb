@@ -364,7 +364,7 @@ module Aws
           end
 
           it 'aborts the upload on errors', thread_report_on_exception: false do
-            client.stub_responses(:upload_part_copy, 'NoSuchKey')
+            client.stub_responses(:upload_part_copy, Array.new(10, 'NoSuchKey'))
             allow(client).to receive(:create_multipart_upload)
               .with(bucket: 'bucket', key: 'unescaped/key path')
               .and_return(
