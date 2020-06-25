@@ -310,7 +310,7 @@ Then(/^I can streaming download key "([^"]*)"$/) do |key|
   resp = @client.get_object(bucket: @bucket_name, key: key) do |chunk|
     expect(chunk).to eq('hello world')
   end
-  expect(resp.body).to be_a(Seahorse::Client::BlockIO)
+  expect(resp.body).to be_a(Aws::S3::Plugins::RetryableBlockIO)
   expect(resp.context[:response_target]).to be_a(Proc)
 end
 
