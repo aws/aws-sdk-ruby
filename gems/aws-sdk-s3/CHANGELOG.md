@@ -4,7 +4,7 @@ Unreleased Changes
 1.71.1 (2020-06-25)
 ------------------
 
-* Issue - Fix uninitialized constant Aws::S3::Plugins::RetryableBlockIO::Forwardable #2348
+* Issue - Fix uninitialized constant `Aws::S3::Plugins::RetryableBlockIO::Forwardable` (#2348)
 
 1.71.0 (2020-06-25)
 ------------------
