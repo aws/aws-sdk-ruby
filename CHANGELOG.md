@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+2.11.536 (2020-06-25)
+------------------
+
 * Feature - Aws::EC2 - Updated the API, and documentation for Amazon Elastic Compute Cloud.
 
 * Feature - Aws::Glue - Updated the API, and documentation for AWS Glue.
