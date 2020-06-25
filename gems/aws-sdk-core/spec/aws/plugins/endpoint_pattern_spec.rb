@@ -59,7 +59,7 @@ module Aws
         }
       ).const_get(:Client)
 
-      let(:creds) { Aws::Credentials.new('akid', 'secert') }
+      let(:creds) { Aws::Credentials.new('akid', 'secret') }
 
       it 'does nothing when custom endpoint is provided' do
         c = EndpointPatternClient.new(credentials: creds, endpoint: 'https://abc.com', region: 'us-west-2', stub_responses: true)

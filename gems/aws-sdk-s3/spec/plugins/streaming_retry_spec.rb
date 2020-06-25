@@ -6,7 +6,7 @@ module Aws
   module S3
     module Plugins
       describe StreamingRetry do
-        let(:creds) { Aws::Credentials.new('akid', 'secert') }
+        let(:creds) { Aws::Credentials.new('akid', 'secret') }
         let(:client) { S3::Client.new(region: 'us-east-1', credentials: creds, retry_base_delay: 0.001) }
         let(:output) { StringIO.new }
         let(:request) { { key: 'test', bucket: 'test-bucket' } }

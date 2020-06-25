@@ -90,7 +90,7 @@ module Aws
         }
       ).const_get(:Client)
 
-      let(:creds) { Aws::Credentials.new('akid', 'secert') }
+      let(:creds) { Aws::Credentials.new('akid', 'secret') }
       let(:env) {{}}
 
       before do

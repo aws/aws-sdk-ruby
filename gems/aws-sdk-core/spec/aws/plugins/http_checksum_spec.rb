@@ -29,7 +29,7 @@ module Aws
         }
       ).const_get(:Client)
 
-      let(:creds) { Aws::Credentials.new('akid', 'secert') }
+      let(:creds) { Aws::Credentials.new('akid', 'secret') }
 
       let(:client) do
         HttpChecksumClient.new(credentials: creds, stub_responses: true)
