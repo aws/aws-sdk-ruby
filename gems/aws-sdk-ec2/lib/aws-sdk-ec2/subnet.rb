@@ -428,7 +428,7 @@ module Aws::EC2
     #   The ID of the AMI. An AMI ID is required to launch an instance and
     #   must be specified here or in a launch template.
     # @option options [String] :instance_type
-    #   The instance type. For more information, see [Instance Types][1] in
+    #   The instance type. For more information, see [Instance types][1] in
     #   the *Amazon Elastic Compute Cloud User Guide*.
     #
     #   Default: `m1.small`
@@ -541,7 +541,7 @@ module Aws::EC2
     #   Default: Amazon EC2 uses the default security group.
     # @option options [String] :user_data
     #   The user data to make available to the instance. For more information,
-    #   see [Running Commands on Your Linux Instance at Launch][1] (Linux) and
+    #   see [Running commands on your Linux instance at launch][1] (Linux) and
     #   [Adding User Data][2] (Windows). If you are using a command line tool,
     #   base64-encoding is performed for you, and you can load the text from a
     #   file. Otherwise, you must provide base64-encoded text. User data is
@@ -659,7 +659,7 @@ module Aws::EC2
     #   The credit option for CPU usage of the burstable performance instance.
     #   Valid values are `standard` and `unlimited`. To change this attribute
     #   after launch, use [ ModifyInstanceCreditSpecification][1]. For more
-    #   information, see [Burstable Performance Instances][2] in the *Amazon
+    #   information, see [Burstable performance instances][2] in the *Amazon
     #   Elastic Compute Cloud User Guide*.
     #
     #   Default: `standard` (T2 instances) or `unlimited` (T3/T3a instances)
@@ -670,7 +670,7 @@ module Aws::EC2
     #   [2]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/burstable-performance-instances.html
     # @option options [Types::CpuOptionsRequest] :cpu_options
     #   The CPU options for the instance. For more information, see
-    #   [Optimizing CPU Options][1] in the *Amazon Elastic Compute Cloud User
+    #   [Optimizing CPU options][1] in the *Amazon Elastic Compute Cloud User
     #   Guide*.
     #
     #
@@ -684,7 +684,7 @@ module Aws::EC2
     #   platform, Availability Zone).
     # @option options [Types::HibernationOptionsRequest] :hibernation_options
     #   Indicates whether an instance is enabled for hibernation. For more
-    #   information, see [Hibernate Your Instance][1] in the *Amazon Elastic
+    #   information, see [Hibernate your instance][1] in the *Amazon Elastic
     #   Compute Cloud User Guide*.
     #
     #
@@ -694,7 +694,7 @@ module Aws::EC2
     #   The license configurations.
     # @option options [Types::InstanceMetadataOptionsRequest] :metadata_options
     #   The metadata options for the instance. For more information, see
-    #   [Instance Metadata and User Data][1].
+    #   [Instance metadata and user data][1].
     #
     #
     #

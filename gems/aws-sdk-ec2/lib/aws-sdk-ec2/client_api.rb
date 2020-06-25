@@ -7844,6 +7844,7 @@ module Aws::EC2
     PurchaseHostReservationRequest.add_member(:host_id_set, Shapes::ShapeRef.new(shape: RequestHostIdSet, required: true, location_name: "HostIdSet"))
     PurchaseHostReservationRequest.add_member(:limit_price, Shapes::ShapeRef.new(shape: String, location_name: "LimitPrice"))
     PurchaseHostReservationRequest.add_member(:offering_id, Shapes::ShapeRef.new(shape: OfferingId, required: true, location_name: "OfferingId"))
+    PurchaseHostReservationRequest.add_member(:tag_specifications, Shapes::ShapeRef.new(shape: TagSpecificationList, location_name: "TagSpecification"))
     PurchaseHostReservationRequest.struct_class = Types::PurchaseHostReservationRequest
 
     PurchaseHostReservationResult.add_member(:client_token, Shapes::ShapeRef.new(shape: String, location_name: "clientToken"))

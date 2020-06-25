@@ -764,6 +764,72 @@ module Aws::Glue
       include Aws::Structure
     end
 
+    # Defines a binary column statistics data.
+    #
+    # @note When making an API call, you may pass BinaryColumnStatisticsData
+    #   data as a hash:
+    #
+    #       {
+    #         maximum_length: 1, # required
+    #         average_length: 1.0, # required
+    #         number_of_nulls: 1, # required
+    #       }
+    #
+    # @!attribute [rw] maximum_length
+    #   Maximum length of the column.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] average_length
+    #   Average length of the column.
+    #   @return [Float]
+    #
+    # @!attribute [rw] number_of_nulls
+    #   Number of nulls.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/BinaryColumnStatisticsData AWS API Documentation
+    #
+    class BinaryColumnStatisticsData < Struct.new(
+      :maximum_length,
+      :average_length,
+      :number_of_nulls)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Defines a boolean column statistics.
+    #
+    # @note When making an API call, you may pass BooleanColumnStatisticsData
+    #   data as a hash:
+    #
+    #       {
+    #         number_of_trues: 1, # required
+    #         number_of_falses: 1, # required
+    #         number_of_nulls: 1, # required
+    #       }
+    #
+    # @!attribute [rw] number_of_trues
+    #   Number of true value.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] number_of_falses
+    #   Number of false value.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] number_of_nulls
+    #   Number of nulls.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/BooleanColumnStatisticsData AWS API Documentation
+    #
+    class BooleanColumnStatisticsData < Struct.new(
+      :number_of_trues,
+      :number_of_falses,
+      :number_of_nulls)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass CancelMLTaskRunRequest
     #   data as a hash:
     #
@@ -1104,6 +1170,233 @@ module Aws::Glue
       :type,
       :comment,
       :parameters)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Defines a column containing error.
+    #
+    # @!attribute [rw] column_name
+    #   The name of the column.
+    #   @return [String]
+    #
+    # @!attribute [rw] error
+    #   The error message occurred during operation.
+    #   @return [Types::ErrorDetail]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/ColumnError AWS API Documentation
+    #
+    class ColumnError < Struct.new(
+      :column_name,
+      :error)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Defines a column statistics.
+    #
+    # @note When making an API call, you may pass ColumnStatistics
+    #   data as a hash:
+    #
+    #       {
+    #         column_name: "NameString", # required
+    #         column_type: "TypeString", # required
+    #         analyzed_time: Time.now, # required
+    #         statistics_data: { # required
+    #           type: "BOOLEAN", # required, accepts BOOLEAN, DATE, DECIMAL, DOUBLE, LONG, STRING, BINARY
+    #           boolean_column_statistics_data: {
+    #             number_of_trues: 1, # required
+    #             number_of_falses: 1, # required
+    #             number_of_nulls: 1, # required
+    #           },
+    #           date_column_statistics_data: {
+    #             minimum_value: Time.now,
+    #             maximum_value: Time.now,
+    #             number_of_nulls: 1, # required
+    #             number_of_distinct_values: 1, # required
+    #           },
+    #           decimal_column_statistics_data: {
+    #             minimum_value: {
+    #               unscaled_value: "data", # required
+    #               scale: 1, # required
+    #             },
+    #             maximum_value: {
+    #               unscaled_value: "data", # required
+    #               scale: 1, # required
+    #             },
+    #             number_of_nulls: 1, # required
+    #             number_of_distinct_values: 1, # required
+    #           },
+    #           double_column_statistics_data: {
+    #             minimum_value: 1.0,
+    #             maximum_value: 1.0,
+    #             number_of_nulls: 1, # required
+    #             number_of_distinct_values: 1, # required
+    #           },
+    #           long_column_statistics_data: {
+    #             minimum_value: 1,
+    #             maximum_value: 1,
+    #             number_of_nulls: 1, # required
+    #             number_of_distinct_values: 1, # required
+    #           },
+    #           string_column_statistics_data: {
+    #             maximum_length: 1, # required
+    #             average_length: 1.0, # required
+    #             number_of_nulls: 1, # required
+    #             number_of_distinct_values: 1, # required
+    #           },
+    #           binary_column_statistics_data: {
+    #             maximum_length: 1, # required
+    #             average_length: 1.0, # required
+    #             number_of_nulls: 1, # required
+    #           },
+    #         },
+    #       }
+    #
+    # @!attribute [rw] column_name
+    #   The name of the column.
+    #   @return [String]
+    #
+    # @!attribute [rw] column_type
+    #   The type of the column.
+    #   @return [String]
+    #
+    # @!attribute [rw] analyzed_time
+    #   The analyzed time of the column statistics.
+    #   @return [Time]
+    #
+    # @!attribute [rw] statistics_data
+    #   The statistics of the column.
+    #   @return [Types::ColumnStatisticsData]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/ColumnStatistics AWS API Documentation
+    #
+    class ColumnStatistics < Struct.new(
+      :column_name,
+      :column_type,
+      :analyzed_time,
+      :statistics_data)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Defines a column statistics data.
+    #
+    # @note When making an API call, you may pass ColumnStatisticsData
+    #   data as a hash:
+    #
+    #       {
+    #         type: "BOOLEAN", # required, accepts BOOLEAN, DATE, DECIMAL, DOUBLE, LONG, STRING, BINARY
+    #         boolean_column_statistics_data: {
+    #           number_of_trues: 1, # required
+    #           number_of_falses: 1, # required
+    #           number_of_nulls: 1, # required
+    #         },
+    #         date_column_statistics_data: {
+    #           minimum_value: Time.now,
+    #           maximum_value: Time.now,
+    #           number_of_nulls: 1, # required
+    #           number_of_distinct_values: 1, # required
+    #         },
+    #         decimal_column_statistics_data: {
+    #           minimum_value: {
+    #             unscaled_value: "data", # required
+    #             scale: 1, # required
+    #           },
+    #           maximum_value: {
+    #             unscaled_value: "data", # required
+    #             scale: 1, # required
+    #           },
+    #           number_of_nulls: 1, # required
+    #           number_of_distinct_values: 1, # required
+    #         },
+    #         double_column_statistics_data: {
+    #           minimum_value: 1.0,
+    #           maximum_value: 1.0,
+    #           number_of_nulls: 1, # required
+    #           number_of_distinct_values: 1, # required
+    #         },
+    #         long_column_statistics_data: {
+    #           minimum_value: 1,
+    #           maximum_value: 1,
+    #           number_of_nulls: 1, # required
+    #           number_of_distinct_values: 1, # required
+    #         },
+    #         string_column_statistics_data: {
+    #           maximum_length: 1, # required
+    #           average_length: 1.0, # required
+    #           number_of_nulls: 1, # required
+    #           number_of_distinct_values: 1, # required
+    #         },
+    #         binary_column_statistics_data: {
+    #           maximum_length: 1, # required
+    #           average_length: 1.0, # required
+    #           number_of_nulls: 1, # required
+    #         },
+    #       }
+    #
+    # @!attribute [rw] type
+    #   The name of the column.
+    #   @return [String]
+    #
+    # @!attribute [rw] boolean_column_statistics_data
+    #   Boolean Column Statistics Data.
+    #   @return [Types::BooleanColumnStatisticsData]
+    #
+    # @!attribute [rw] date_column_statistics_data
+    #   Date Column Statistics Data.
+    #   @return [Types::DateColumnStatisticsData]
+    #
+    # @!attribute [rw] decimal_column_statistics_data
+    #   Decimal Column Statistics Data.
+    #   @return [Types::DecimalColumnStatisticsData]
+    #
+    # @!attribute [rw] double_column_statistics_data
+    #   Double Column Statistics Data.
+    #   @return [Types::DoubleColumnStatisticsData]
+    #
+    # @!attribute [rw] long_column_statistics_data
+    #   Long Column Statistics Data.
+    #   @return [Types::LongColumnStatisticsData]
+    #
+    # @!attribute [rw] string_column_statistics_data
+    #   String Column Statistics Data.
+    #   @return [Types::StringColumnStatisticsData]
+    #
+    # @!attribute [rw] binary_column_statistics_data
+    #   Binary Column Statistics Data.
+    #   @return [Types::BinaryColumnStatisticsData]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/ColumnStatisticsData AWS API Documentation
+    #
+    class ColumnStatisticsData < Struct.new(
+      :type,
+      :boolean_column_statistics_data,
+      :date_column_statistics_data,
+      :decimal_column_statistics_data,
+      :double_column_statistics_data,
+      :long_column_statistics_data,
+      :string_column_statistics_data,
+      :binary_column_statistics_data)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Defines a column containing error.
+    #
+    # @!attribute [rw] column_statistics
+    #   The ColumnStatistics of the column.
+    #   @return [Types::ColumnStatistics]
+    #
+    # @!attribute [rw] error
+    #   The error message occurred during operation.
+    #   @return [Types::ErrorDetail]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/ColumnStatisticsError AWS API Documentation
+    #
+    class ColumnStatisticsError < Struct.new(
+      :column_statistics,
+      :error)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3815,6 +4108,118 @@ module Aws::Glue
       include Aws::Structure
     end
 
+    # Defines a date column statistics data.
+    #
+    # @note When making an API call, you may pass DateColumnStatisticsData
+    #   data as a hash:
+    #
+    #       {
+    #         minimum_value: Time.now,
+    #         maximum_value: Time.now,
+    #         number_of_nulls: 1, # required
+    #         number_of_distinct_values: 1, # required
+    #       }
+    #
+    # @!attribute [rw] minimum_value
+    #   Minimum value of the column.
+    #   @return [Time]
+    #
+    # @!attribute [rw] maximum_value
+    #   Maximum value of the column.
+    #   @return [Time]
+    #
+    # @!attribute [rw] number_of_nulls
+    #   Number of nulls.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] number_of_distinct_values
+    #   Number of distinct values.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/DateColumnStatisticsData AWS API Documentation
+    #
+    class DateColumnStatisticsData < Struct.new(
+      :minimum_value,
+      :maximum_value,
+      :number_of_nulls,
+      :number_of_distinct_values)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Defines a decimal column statistics data.
+    #
+    # @note When making an API call, you may pass DecimalColumnStatisticsData
+    #   data as a hash:
+    #
+    #       {
+    #         minimum_value: {
+    #           unscaled_value: "data", # required
+    #           scale: 1, # required
+    #         },
+    #         maximum_value: {
+    #           unscaled_value: "data", # required
+    #           scale: 1, # required
+    #         },
+    #         number_of_nulls: 1, # required
+    #         number_of_distinct_values: 1, # required
+    #       }
+    #
+    # @!attribute [rw] minimum_value
+    #   Minimum value of the column.
+    #   @return [Types::DecimalNumber]
+    #
+    # @!attribute [rw] maximum_value
+    #   Maximum value of the column.
+    #   @return [Types::DecimalNumber]
+    #
+    # @!attribute [rw] number_of_nulls
+    #   Number of nulls.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] number_of_distinct_values
+    #   Number of distinct values.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/DecimalColumnStatisticsData AWS API Documentation
+    #
+    class DecimalColumnStatisticsData < Struct.new(
+      :minimum_value,
+      :maximum_value,
+      :number_of_nulls,
+      :number_of_distinct_values)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains a numeric value in decimal format.
+    #
+    # @note When making an API call, you may pass DecimalNumber
+    #   data as a hash:
+    #
+    #       {
+    #         unscaled_value: "data", # required
+    #         scale: 1, # required
+    #       }
+    #
+    # @!attribute [rw] unscaled_value
+    #   The unscaled numeric value.
+    #   @return [String]
+    #
+    # @!attribute [rw] scale
+    #   The scale that determines where the decimal point falls in the
+    #   unscaled value.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/DecimalNumber AWS API Documentation
+    #
+    class DecimalNumber < Struct.new(
+      :unscaled_value,
+      :scale)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass DeleteClassifierRequest
     #   data as a hash:
     #
@@ -3837,6 +4242,96 @@ module Aws::Glue
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/DeleteClassifierResponse AWS API Documentation
     #
     class DeleteClassifierResponse < Aws::EmptyStructure; end
+
+    # @note When making an API call, you may pass DeleteColumnStatisticsForPartitionRequest
+    #   data as a hash:
+    #
+    #       {
+    #         catalog_id: "CatalogIdString",
+    #         database_name: "NameString", # required
+    #         table_name: "NameString", # required
+    #         partition_values: ["ValueString"], # required
+    #         column_name: "NameString", # required
+    #       }
+    #
+    # @!attribute [rw] catalog_id
+    #   The ID of the Data Catalog where the partitions in question reside.
+    #   If none is supplied, the AWS account ID is used by default.
+    #   @return [String]
+    #
+    # @!attribute [rw] database_name
+    #   The name of the catalog database where the partitions reside.
+    #   @return [String]
+    #
+    # @!attribute [rw] table_name
+    #   The name of the partitions' table.
+    #   @return [String]
+    #
+    # @!attribute [rw] partition_values
+    #   A list of partition values identifying the partition.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] column_name
+    #   Name of the column.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/DeleteColumnStatisticsForPartitionRequest AWS API Documentation
+    #
+    class DeleteColumnStatisticsForPartitionRequest < Struct.new(
+      :catalog_id,
+      :database_name,
+      :table_name,
+      :partition_values,
+      :column_name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/DeleteColumnStatisticsForPartitionResponse AWS API Documentation
+    #
+    class DeleteColumnStatisticsForPartitionResponse < Aws::EmptyStructure; end
+
+    # @note When making an API call, you may pass DeleteColumnStatisticsForTableRequest
+    #   data as a hash:
+    #
+    #       {
+    #         catalog_id: "CatalogIdString",
+    #         database_name: "NameString", # required
+    #         table_name: "NameString", # required
+    #         column_name: "NameString", # required
+    #       }
+    #
+    # @!attribute [rw] catalog_id
+    #   The ID of the Data Catalog where the partitions in question reside.
+    #   If none is supplied, the AWS account ID is used by default.
+    #   @return [String]
+    #
+    # @!attribute [rw] database_name
+    #   The name of the catalog database where the partitions reside.
+    #   @return [String]
+    #
+    # @!attribute [rw] table_name
+    #   The name of the partitions' table.
+    #   @return [String]
+    #
+    # @!attribute [rw] column_name
+    #   The name of the column.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/DeleteColumnStatisticsForTableRequest AWS API Documentation
+    #
+    class DeleteColumnStatisticsForTableRequest < Struct.new(
+      :catalog_id,
+      :database_name,
+      :table_name,
+      :column_name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/DeleteColumnStatisticsForTableResponse AWS API Documentation
+    #
+    class DeleteColumnStatisticsForTableResponse < Aws::EmptyStructure; end
 
     # @note When making an API call, you may pass DeleteConnectionRequest
     #   data as a hash:
@@ -4546,6 +5041,45 @@ module Aws::Glue
       include Aws::Structure
     end
 
+    # Defines a double column statistics data.
+    #
+    # @note When making an API call, you may pass DoubleColumnStatisticsData
+    #   data as a hash:
+    #
+    #       {
+    #         minimum_value: 1.0,
+    #         maximum_value: 1.0,
+    #         number_of_nulls: 1, # required
+    #         number_of_distinct_values: 1, # required
+    #       }
+    #
+    # @!attribute [rw] minimum_value
+    #   Minimum value of the column.
+    #   @return [Float]
+    #
+    # @!attribute [rw] maximum_value
+    #   Maximum value of the column.
+    #   @return [Float]
+    #
+    # @!attribute [rw] number_of_nulls
+    #   Number of nulls.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] number_of_distinct_values
+    #   Number of distinct values.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/DoubleColumnStatisticsData AWS API Documentation
+    #
+    class DoubleColumnStatisticsData < Struct.new(
+      :minimum_value,
+      :maximum_value,
+      :number_of_nulls,
+      :number_of_distinct_values)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Specifies an Amazon DynamoDB table to crawl.
     #
     # @note When making an API call, you may pass DynamoDBTarget
@@ -5053,6 +5587,122 @@ module Aws::Glue
     class GetClassifiersResponse < Struct.new(
       :classifiers,
       :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass GetColumnStatisticsForPartitionRequest
+    #   data as a hash:
+    #
+    #       {
+    #         catalog_id: "CatalogIdString",
+    #         database_name: "NameString", # required
+    #         table_name: "NameString", # required
+    #         partition_values: ["ValueString"], # required
+    #         column_names: ["NameString"], # required
+    #       }
+    #
+    # @!attribute [rw] catalog_id
+    #   The ID of the Data Catalog where the partitions in question reside.
+    #   If none is supplied, the AWS account ID is used by default.
+    #   @return [String]
+    #
+    # @!attribute [rw] database_name
+    #   The name of the catalog database where the partitions reside.
+    #   @return [String]
+    #
+    # @!attribute [rw] table_name
+    #   The name of the partitions' table.
+    #   @return [String]
+    #
+    # @!attribute [rw] partition_values
+    #   A list of partition values identifying the partition.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] column_names
+    #   A list of the column names.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/GetColumnStatisticsForPartitionRequest AWS API Documentation
+    #
+    class GetColumnStatisticsForPartitionRequest < Struct.new(
+      :catalog_id,
+      :database_name,
+      :table_name,
+      :partition_values,
+      :column_names)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] column_statistics_list
+    #   List of ColumnStatistics that failed to be retrieved.
+    #   @return [Array<Types::ColumnStatistics>]
+    #
+    # @!attribute [rw] errors
+    #   Error occurred during retrieving column statistics data.
+    #   @return [Array<Types::ColumnError>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/GetColumnStatisticsForPartitionResponse AWS API Documentation
+    #
+    class GetColumnStatisticsForPartitionResponse < Struct.new(
+      :column_statistics_list,
+      :errors)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass GetColumnStatisticsForTableRequest
+    #   data as a hash:
+    #
+    #       {
+    #         catalog_id: "CatalogIdString",
+    #         database_name: "NameString", # required
+    #         table_name: "NameString", # required
+    #         column_names: ["NameString"], # required
+    #       }
+    #
+    # @!attribute [rw] catalog_id
+    #   The ID of the Data Catalog where the partitions in question reside.
+    #   If none is supplied, the AWS account ID is used by default.
+    #   @return [String]
+    #
+    # @!attribute [rw] database_name
+    #   The name of the catalog database where the partitions reside.
+    #   @return [String]
+    #
+    # @!attribute [rw] table_name
+    #   The name of the partitions' table.
+    #   @return [String]
+    #
+    # @!attribute [rw] column_names
+    #   A list of the column names.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/GetColumnStatisticsForTableRequest AWS API Documentation
+    #
+    class GetColumnStatisticsForTableRequest < Struct.new(
+      :catalog_id,
+      :database_name,
+      :table_name,
+      :column_names)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] column_statistics_list
+    #   List of ColumnStatistics that failed to be retrieved.
+    #   @return [Array<Types::ColumnStatistics>]
+    #
+    # @!attribute [rw] errors
+    #   List of ColumnStatistics that failed to be retrieved.
+    #   @return [Array<Types::ColumnError>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/GetColumnStatisticsForTableResponse AWS API Documentation
+    #
+    class GetColumnStatisticsForTableResponse < Struct.new(
+      :column_statistics_list,
+      :errors)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -8749,6 +9399,45 @@ module Aws::Glue
       include Aws::Structure
     end
 
+    # Defines a long column statistics data.
+    #
+    # @note When making an API call, you may pass LongColumnStatisticsData
+    #   data as a hash:
+    #
+    #       {
+    #         minimum_value: 1,
+    #         maximum_value: 1,
+    #         number_of_nulls: 1, # required
+    #         number_of_distinct_values: 1, # required
+    #       }
+    #
+    # @!attribute [rw] minimum_value
+    #   Minimum value of the column.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] maximum_value
+    #   Maximum value of the column.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] number_of_nulls
+    #   Number of nulls.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] number_of_distinct_values
+    #   Number of distinct values.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/LongColumnStatisticsData AWS API Documentation
+    #
+    class LongColumnStatisticsData < Struct.new(
+      :minimum_value,
+      :maximum_value,
+      :number_of_nulls,
+      :number_of_distinct_values)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # A structure for a machine learning transform.
     #
     # @!attribute [rw] transform_id
@@ -10737,6 +11426,45 @@ module Aws::Glue
       include Aws::Structure
     end
 
+    # Defines a string column statistics data.
+    #
+    # @note When making an API call, you may pass StringColumnStatisticsData
+    #   data as a hash:
+    #
+    #       {
+    #         maximum_length: 1, # required
+    #         average_length: 1.0, # required
+    #         number_of_nulls: 1, # required
+    #         number_of_distinct_values: 1, # required
+    #       }
+    #
+    # @!attribute [rw] maximum_length
+    #   Maximum value of the column.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] average_length
+    #   Average value of the column.
+    #   @return [Float]
+    #
+    # @!attribute [rw] number_of_nulls
+    #   Number of nulls.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] number_of_distinct_values
+    #   Number of distinct values.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/StringColumnStatisticsData AWS API Documentation
+    #
+    class StringColumnStatisticsData < Struct.new(
+      :maximum_length,
+      :average_length,
+      :number_of_nulls,
+      :number_of_distinct_values)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Represents a collection of related data organized in columns and rows.
     #
     # @!attribute [rw] name
@@ -11665,6 +12393,222 @@ module Aws::Glue
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/UpdateClassifierResponse AWS API Documentation
     #
     class UpdateClassifierResponse < Aws::EmptyStructure; end
+
+    # @note When making an API call, you may pass UpdateColumnStatisticsForPartitionRequest
+    #   data as a hash:
+    #
+    #       {
+    #         catalog_id: "CatalogIdString",
+    #         database_name: "NameString", # required
+    #         table_name: "NameString", # required
+    #         partition_values: ["ValueString"], # required
+    #         column_statistics_list: [ # required
+    #           {
+    #             column_name: "NameString", # required
+    #             column_type: "TypeString", # required
+    #             analyzed_time: Time.now, # required
+    #             statistics_data: { # required
+    #               type: "BOOLEAN", # required, accepts BOOLEAN, DATE, DECIMAL, DOUBLE, LONG, STRING, BINARY
+    #               boolean_column_statistics_data: {
+    #                 number_of_trues: 1, # required
+    #                 number_of_falses: 1, # required
+    #                 number_of_nulls: 1, # required
+    #               },
+    #               date_column_statistics_data: {
+    #                 minimum_value: Time.now,
+    #                 maximum_value: Time.now,
+    #                 number_of_nulls: 1, # required
+    #                 number_of_distinct_values: 1, # required
+    #               },
+    #               decimal_column_statistics_data: {
+    #                 minimum_value: {
+    #                   unscaled_value: "data", # required
+    #                   scale: 1, # required
+    #                 },
+    #                 maximum_value: {
+    #                   unscaled_value: "data", # required
+    #                   scale: 1, # required
+    #                 },
+    #                 number_of_nulls: 1, # required
+    #                 number_of_distinct_values: 1, # required
+    #               },
+    #               double_column_statistics_data: {
+    #                 minimum_value: 1.0,
+    #                 maximum_value: 1.0,
+    #                 number_of_nulls: 1, # required
+    #                 number_of_distinct_values: 1, # required
+    #               },
+    #               long_column_statistics_data: {
+    #                 minimum_value: 1,
+    #                 maximum_value: 1,
+    #                 number_of_nulls: 1, # required
+    #                 number_of_distinct_values: 1, # required
+    #               },
+    #               string_column_statistics_data: {
+    #                 maximum_length: 1, # required
+    #                 average_length: 1.0, # required
+    #                 number_of_nulls: 1, # required
+    #                 number_of_distinct_values: 1, # required
+    #               },
+    #               binary_column_statistics_data: {
+    #                 maximum_length: 1, # required
+    #                 average_length: 1.0, # required
+    #                 number_of_nulls: 1, # required
+    #               },
+    #             },
+    #           },
+    #         ],
+    #       }
+    #
+    # @!attribute [rw] catalog_id
+    #   The ID of the Data Catalog where the partitions in question reside.
+    #   If none is supplied, the AWS account ID is used by default.
+    #   @return [String]
+    #
+    # @!attribute [rw] database_name
+    #   The name of the catalog database where the partitions reside.
+    #   @return [String]
+    #
+    # @!attribute [rw] table_name
+    #   The name of the partitions' table.
+    #   @return [String]
+    #
+    # @!attribute [rw] partition_values
+    #   A list of partition values identifying the partition.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] column_statistics_list
+    #   A list of the column statistics.
+    #   @return [Array<Types::ColumnStatistics>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/UpdateColumnStatisticsForPartitionRequest AWS API Documentation
+    #
+    class UpdateColumnStatisticsForPartitionRequest < Struct.new(
+      :catalog_id,
+      :database_name,
+      :table_name,
+      :partition_values,
+      :column_statistics_list)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] errors
+    #   Error occurred during updating column statistics data.
+    #   @return [Array<Types::ColumnStatisticsError>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/UpdateColumnStatisticsForPartitionResponse AWS API Documentation
+    #
+    class UpdateColumnStatisticsForPartitionResponse < Struct.new(
+      :errors)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass UpdateColumnStatisticsForTableRequest
+    #   data as a hash:
+    #
+    #       {
+    #         catalog_id: "CatalogIdString",
+    #         database_name: "NameString", # required
+    #         table_name: "NameString", # required
+    #         column_statistics_list: [ # required
+    #           {
+    #             column_name: "NameString", # required
+    #             column_type: "TypeString", # required
+    #             analyzed_time: Time.now, # required
+    #             statistics_data: { # required
+    #               type: "BOOLEAN", # required, accepts BOOLEAN, DATE, DECIMAL, DOUBLE, LONG, STRING, BINARY
+    #               boolean_column_statistics_data: {
+    #                 number_of_trues: 1, # required
+    #                 number_of_falses: 1, # required
+    #                 number_of_nulls: 1, # required
+    #               },
+    #               date_column_statistics_data: {
+    #                 minimum_value: Time.now,
+    #                 maximum_value: Time.now,
+    #                 number_of_nulls: 1, # required
+    #                 number_of_distinct_values: 1, # required
+    #               },
+    #               decimal_column_statistics_data: {
+    #                 minimum_value: {
+    #                   unscaled_value: "data", # required
+    #                   scale: 1, # required
+    #                 },
+    #                 maximum_value: {
+    #                   unscaled_value: "data", # required
+    #                   scale: 1, # required
+    #                 },
+    #                 number_of_nulls: 1, # required
+    #                 number_of_distinct_values: 1, # required
+    #               },
+    #               double_column_statistics_data: {
+    #                 minimum_value: 1.0,
+    #                 maximum_value: 1.0,
+    #                 number_of_nulls: 1, # required
+    #                 number_of_distinct_values: 1, # required
+    #               },
+    #               long_column_statistics_data: {
+    #                 minimum_value: 1,
+    #                 maximum_value: 1,
+    #                 number_of_nulls: 1, # required
+    #                 number_of_distinct_values: 1, # required
+    #               },
+    #               string_column_statistics_data: {
+    #                 maximum_length: 1, # required
+    #                 average_length: 1.0, # required
+    #                 number_of_nulls: 1, # required
+    #                 number_of_distinct_values: 1, # required
+    #               },
+    #               binary_column_statistics_data: {
+    #                 maximum_length: 1, # required
+    #                 average_length: 1.0, # required
+    #                 number_of_nulls: 1, # required
+    #               },
+    #             },
+    #           },
+    #         ],
+    #       }
+    #
+    # @!attribute [rw] catalog_id
+    #   The ID of the Data Catalog where the partitions in question reside.
+    #   If none is supplied, the AWS account ID is used by default.
+    #   @return [String]
+    #
+    # @!attribute [rw] database_name
+    #   The name of the catalog database where the partitions reside.
+    #   @return [String]
+    #
+    # @!attribute [rw] table_name
+    #   The name of the partitions' table.
+    #   @return [String]
+    #
+    # @!attribute [rw] column_statistics_list
+    #   A list of the column statistics.
+    #   @return [Array<Types::ColumnStatistics>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/UpdateColumnStatisticsForTableRequest AWS API Documentation
+    #
+    class UpdateColumnStatisticsForTableRequest < Struct.new(
+      :catalog_id,
+      :database_name,
+      :table_name,
+      :column_statistics_list)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] errors
+    #   List of ColumnStatisticsErrors.
+    #   @return [Array<Types::ColumnStatisticsError>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/UpdateColumnStatisticsForTableResponse AWS API Documentation
+    #
+    class UpdateColumnStatisticsForTableResponse < Struct.new(
+      :errors)
+      SENSITIVE = []
+      include Aws::Structure
+    end
 
     # @note When making an API call, you may pass UpdateConnectionRequest
     #   data as a hash:

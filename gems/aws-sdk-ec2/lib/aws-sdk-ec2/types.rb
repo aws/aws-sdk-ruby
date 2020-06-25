@@ -23438,8 +23438,8 @@ module Aws::EC2
     #
     # @!attribute [rw] delete_on_termination
     #   Indicates whether the EBS volume is deleted on instance termination.
-    #   For more information, see [Preserving Amazon EBS Volumes on Instance
-    #   Termination][1] in the Amazon Elastic Compute Cloud User Guide.
+    #   For more information, see [Preserving Amazon EBS volumes on instance
+    #   termination][1] in the Amazon Elastic Compute Cloud User Guide.
     #
     #
     #
@@ -23452,7 +23452,7 @@ module Aws::EC2
     #   are provisioned for the volume. For `gp2` volumes, this represents
     #   the baseline performance of the volume and the rate at which the
     #   volume accumulates I/O credits for bursting. For more information,
-    #   see [Amazon EBS Volume Types][1] in the *Amazon Elastic Compute
+    #   see [Amazon EBS volume types][1] in the *Amazon Elastic Compute
     #   Cloud User Guide*.
     #
     #   Constraints: Range is 100-16,000 IOPS for `gp2` volumes and 100 to
@@ -23523,8 +23523,8 @@ module Aws::EC2
     #   In no case can you remove encryption from an encrypted volume.
     #
     #   Encrypted volumes can only be attached to instances that support
-    #   Amazon EBS encryption. For more information, see [Supported Instance
-    #   Types][2].
+    #   Amazon EBS encryption. For more information, see [Supported instance
+    #   types][2].
     #
     #   This parameter is not returned by .
     #
@@ -26943,8 +26943,8 @@ module Aws::EC2
 
     # Indicates whether your instance is configured for hibernation. This
     # parameter is valid only if the instance meets the [hibernation
-    # prerequisites][1]. For more information, see [Hibernate Your
-    # Instance][2] in the *Amazon Elastic Compute Cloud User Guide*.
+    # prerequisites][1]. For more information, see [Hibernate your
+    # instance][2] in the *Amazon Elastic Compute Cloud User Guide*.
     #
     #
     #
@@ -26966,8 +26966,8 @@ module Aws::EC2
 
     # Indicates whether your instance is configured for hibernation. This
     # parameter is valid only if the instance meets the [hibernation
-    # prerequisites][1]. For more information, see [Hibernate Your
-    # Instance][2] in the *Amazon Elastic Compute Cloud User Guide*.
+    # prerequisites][1]. For more information, see [Hibernate your
+    # instance][2] in the *Amazon Elastic Compute Cloud User Guide*.
     #
     #
     #
@@ -33785,8 +33785,8 @@ module Aws::EC2
     #
     #   To add instance store volumes to an Amazon EBS-backed instance, you
     #   must add them when you launch the instance. For more information,
-    #   see [Updating the Block Device Mapping when Launching an
-    #   Instance][1] in the *Amazon Elastic Compute Cloud User Guide*.
+    #   see [Updating the block device mapping when launching an
+    #   instance][1] in the *Amazon Elastic Compute Cloud User Guide*.
     #
     #
     #
@@ -33842,7 +33842,7 @@ module Aws::EC2
     #
     # @!attribute [rw] instance_type
     #   Changes the instance type to the specified value. For more
-    #   information, see [Instance Types][1]. If the instance type is not
+    #   information, see [Instance types][1]. If the instance type is not
     #   valid, the error returned is `InvalidInstanceAttributeValue`.
     #
     #
@@ -38044,6 +38044,17 @@ module Aws::EC2
     #         host_id_set: ["DedicatedHostId"], # required
     #         limit_price: "String",
     #         offering_id: "OfferingId", # required
+    #         tag_specifications: [
+    #           {
+    #             resource_type: "client-vpn-endpoint", # accepts client-vpn-endpoint, customer-gateway, dedicated-host, dhcp-options, elastic-ip, elastic-gpu, export-image-task, export-instance-task, fleet, fpga-image, host-reservation, image, import-image-task, import-snapshot-task, instance, internet-gateway, key-pair, launch-template, local-gateway-route-table-vpc-association, natgateway, network-acl, network-interface, placement-group, reserved-instances, route-table, security-group, snapshot, spot-fleet-request, spot-instances-request, subnet, traffic-mirror-filter, traffic-mirror-session, traffic-mirror-target, transit-gateway, transit-gateway-attachment, transit-gateway-multicast-domain, transit-gateway-route-table, volume, vpc, vpc-peering-connection, vpn-connection, vpn-gateway, vpc-flow-log
+    #             tags: [
+    #               {
+    #                 key: "String",
+    #                 value: "String",
+    #               },
+    #             ],
+    #           },
+    #         ],
     #       }
     #
     # @!attribute [rw] client_token
@@ -38081,6 +38092,10 @@ module Aws::EC2
     #   The ID of the offering.
     #   @return [String]
     #
+    # @!attribute [rw] tag_specifications
+    #   The tags to apply to the Dedicated Host Reservation during purchase.
+    #   @return [Array<Types::TagSpecification>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/PurchaseHostReservationRequest AWS API Documentation
     #
     class PurchaseHostReservationRequest < Struct.new(
@@ -38088,7 +38103,8 @@ module Aws::EC2
       :currency_code,
       :host_id_set,
       :limit_price,
-      :offering_id)
+      :offering_id,
+      :tag_specifications)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -42076,7 +42092,7 @@ module Aws::EC2
     #   @return [String]
     #
     # @!attribute [rw] instance_type
-    #   The instance type. For more information, see [Instance Types][1] in
+    #   The instance type. For more information, see [Instance types][1] in
     #   the *Amazon Elastic Compute Cloud User Guide*.
     #
     #   Default: `m1.small`
@@ -42221,8 +42237,8 @@ module Aws::EC2
     #
     # @!attribute [rw] user_data
     #   The user data to make available to the instance. For more
-    #   information, see [Running Commands on Your Linux Instance at
-    #   Launch][1] (Linux) and [Adding User Data][2] (Windows). If you are
+    #   information, see [Running commands on your Linux instance at
+    #   launch][1] (Linux) and [Adding User Data][2] (Windows). If you are
     #   using a command line tool, base64-encoding is performed for you, and
     #   you can load the text from a file. Otherwise, you must provide
     #   base64-encoded text. User data is limited to 16 KB.
@@ -42374,7 +42390,7 @@ module Aws::EC2
     #   instance. Valid values are `standard` and `unlimited`. To change
     #   this attribute after launch, use [
     #   ModifyInstanceCreditSpecification][1]. For more information, see
-    #   [Burstable Performance Instances][2] in the *Amazon Elastic Compute
+    #   [Burstable performance instances][2] in the *Amazon Elastic Compute
     #   Cloud User Guide*.
     #
     #   Default: `standard` (T2 instances) or `unlimited` (T3/T3a instances)
@@ -42387,7 +42403,7 @@ module Aws::EC2
     #
     # @!attribute [rw] cpu_options
     #   The CPU options for the instance. For more information, see
-    #   [Optimizing CPU Options][1] in the *Amazon Elastic Compute Cloud
+    #   [Optimizing CPU options][1] in the *Amazon Elastic Compute Cloud
     #   User Guide*.
     #
     #
@@ -42405,7 +42421,7 @@ module Aws::EC2
     #
     # @!attribute [rw] hibernation_options
     #   Indicates whether an instance is enabled for hibernation. For more
-    #   information, see [Hibernate Your Instance][1] in the *Amazon Elastic
+    #   information, see [Hibernate your instance][1] in the *Amazon Elastic
     #   Compute Cloud User Guide*.
     #
     #
@@ -42419,7 +42435,7 @@ module Aws::EC2
     #
     # @!attribute [rw] metadata_options
     #   The metadata options for the instance. For more information, see
-    #   [Instance Metadata and User Data][1].
+    #   [Instance metadata and user data][1].
     #
     #
     #
@@ -45832,8 +45848,8 @@ module Aws::EC2
     # @!attribute [rw] hibernate
     #   Hibernates the instance if the instance was enabled for hibernation
     #   at launch. If the instance cannot hibernate successfully, a normal
-    #   shutdown occurs. For more information, see [Hibernate Your
-    #   Instance][1] in the *Amazon Elastic Compute Cloud User Guide*.
+    #   shutdown occurs. For more information, see [Hibernate your
+    #   instance][1] in the *Amazon Elastic Compute Cloud User Guide*.
     #
     #   Default: `false`
     #
@@ -46210,14 +46226,15 @@ module Aws::EC2
     #   The type of resource to tag. Currently, the resource types that
     #   support tagging on creation are: `capacity-reservation` \|
     #   `client-vpn-endpoint` \| `dedicated-host` \| `fleet` \| `fpga-image`
-    #   \| `instance` \| `ipv4pool-ec2` \| `ipv6pool-ec2` \| `key-pair` \|
-    #   `launch-template` \| `natgateway` \| `spot-fleet-request` \|
-    #   `placement-group` \| `snapshot` \| `traffic-mirror-filter` \|
-    #   `traffic-mirror-session` \| `traffic-mirror-target` \|
-    #   `transit-gateway` \| `transit-gateway-attachment` \|
-    #   `transit-gateway-route-table` \| `vpc-endpoint` (for interface VPC
-    #   endpoints)\| `vpc-endpoint-service` (for gateway VPC endpoints) \|
-    #   `volume` \| `vpc-flow-log`.
+    #   \| `host-reservation` \| `instance` \| `ipv4pool-ec2` \|
+    #   `ipv6pool-ec2` \| `key-pair` \| `launch-template` \| `natgateway` \|
+    #   `spot-fleet-request` \| `placement-group` \| `snapshot` \|
+    #   `traffic-mirror-filter` \| `traffic-mirror-session` \|
+    #   `traffic-mirror-target` \| `transit-gateway` \|
+    #   `transit-gateway-attachment` \| `transit-gateway-route-table` \|
+    #   `vpc-endpoint` (for interface and gateway endpoints) \|
+    #   `vpc-endpoint-service` (for AWS PrivateLink) \| `volume` \|
+    #   `vpc-flow-log`.
     #
     #   To tag a resource after it has been created, see [CreateTags][1].
     #

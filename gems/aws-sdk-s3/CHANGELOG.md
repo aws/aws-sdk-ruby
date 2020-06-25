@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+1.71.0 (2020-06-25)
+------------------
+
 * Feature - Retry incomplete, streaming responses to `get_object` using the range parameter to avoid re-downloading already processed data (#2326).
 * Issue - Reduce memory usage of `IOEncryptor` and `IODecryptor`.
 

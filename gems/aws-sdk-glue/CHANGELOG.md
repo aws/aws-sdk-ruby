@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.61.0 (2020-06-25)
+------------------
+
+* Feature - This release adds new APIs to support column level statistics in AWS Glue Data Catalog
+
 1.60.0 (2020-06-23)
 ------------------
 

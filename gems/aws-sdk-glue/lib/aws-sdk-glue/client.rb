@@ -2600,6 +2600,80 @@ module Aws::Glue
       req.send_request(options)
     end
 
+    # Delete the partition column statistics of a column.
+    #
+    # @option params [String] :catalog_id
+    #   The ID of the Data Catalog where the partitions in question reside. If
+    #   none is supplied, the AWS account ID is used by default.
+    #
+    # @option params [required, String] :database_name
+    #   The name of the catalog database where the partitions reside.
+    #
+    # @option params [required, String] :table_name
+    #   The name of the partitions' table.
+    #
+    # @option params [required, Array<String>] :partition_values
+    #   A list of partition values identifying the partition.
+    #
+    # @option params [required, String] :column_name
+    #   Name of the column.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_column_statistics_for_partition({
+    #     catalog_id: "CatalogIdString",
+    #     database_name: "NameString", # required
+    #     table_name: "NameString", # required
+    #     partition_values: ["ValueString"], # required
+    #     column_name: "NameString", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/DeleteColumnStatisticsForPartition AWS API Documentation
+    #
+    # @overload delete_column_statistics_for_partition(params = {})
+    # @param [Hash] params ({})
+    def delete_column_statistics_for_partition(params = {}, options = {})
+      req = build_request(:delete_column_statistics_for_partition, params)
+      req.send_request(options)
+    end
+
+    # Retrieves table statistics of columns.
+    #
+    # @option params [String] :catalog_id
+    #   The ID of the Data Catalog where the partitions in question reside. If
+    #   none is supplied, the AWS account ID is used by default.
+    #
+    # @option params [required, String] :database_name
+    #   The name of the catalog database where the partitions reside.
+    #
+    # @option params [required, String] :table_name
+    #   The name of the partitions' table.
+    #
+    # @option params [required, String] :column_name
+    #   The name of the column.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_column_statistics_for_table({
+    #     catalog_id: "CatalogIdString",
+    #     database_name: "NameString", # required
+    #     table_name: "NameString", # required
+    #     column_name: "NameString", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/DeleteColumnStatisticsForTable AWS API Documentation
+    #
+    # @overload delete_column_statistics_for_table(params = {})
+    # @param [Hash] params ({})
+    def delete_column_statistics_for_table(params = {}, options = {})
+      req = build_request(:delete_column_statistics_for_table, params)
+      req.send_request(options)
+    end
+
     # Deletes a connection from the Data Catalog.
     #
     # @option params [String] :catalog_id
@@ -3179,6 +3253,166 @@ module Aws::Glue
     # @param [Hash] params ({})
     def get_classifiers(params = {}, options = {})
       req = build_request(:get_classifiers, params)
+      req.send_request(options)
+    end
+
+    # Retrieves partition statistics of columns.
+    #
+    # @option params [String] :catalog_id
+    #   The ID of the Data Catalog where the partitions in question reside. If
+    #   none is supplied, the AWS account ID is used by default.
+    #
+    # @option params [required, String] :database_name
+    #   The name of the catalog database where the partitions reside.
+    #
+    # @option params [required, String] :table_name
+    #   The name of the partitions' table.
+    #
+    # @option params [required, Array<String>] :partition_values
+    #   A list of partition values identifying the partition.
+    #
+    # @option params [required, Array<String>] :column_names
+    #   A list of the column names.
+    #
+    # @return [Types::GetColumnStatisticsForPartitionResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetColumnStatisticsForPartitionResponse#column_statistics_list #column_statistics_list} => Array&lt;Types::ColumnStatistics&gt;
+    #   * {Types::GetColumnStatisticsForPartitionResponse#errors #errors} => Array&lt;Types::ColumnError&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_column_statistics_for_partition({
+    #     catalog_id: "CatalogIdString",
+    #     database_name: "NameString", # required
+    #     table_name: "NameString", # required
+    #     partition_values: ["ValueString"], # required
+    #     column_names: ["NameString"], # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.column_statistics_list #=> Array
+    #   resp.column_statistics_list[0].column_name #=> String
+    #   resp.column_statistics_list[0].column_type #=> String
+    #   resp.column_statistics_list[0].analyzed_time #=> Time
+    #   resp.column_statistics_list[0].statistics_data.type #=> String, one of "BOOLEAN", "DATE", "DECIMAL", "DOUBLE", "LONG", "STRING", "BINARY"
+    #   resp.column_statistics_list[0].statistics_data.boolean_column_statistics_data.number_of_trues #=> Integer
+    #   resp.column_statistics_list[0].statistics_data.boolean_column_statistics_data.number_of_falses #=> Integer
+    #   resp.column_statistics_list[0].statistics_data.boolean_column_statistics_data.number_of_nulls #=> Integer
+    #   resp.column_statistics_list[0].statistics_data.date_column_statistics_data.minimum_value #=> Time
+    #   resp.column_statistics_list[0].statistics_data.date_column_statistics_data.maximum_value #=> Time
+    #   resp.column_statistics_list[0].statistics_data.date_column_statistics_data.number_of_nulls #=> Integer
+    #   resp.column_statistics_list[0].statistics_data.date_column_statistics_data.number_of_distinct_values #=> Integer
+    #   resp.column_statistics_list[0].statistics_data.decimal_column_statistics_data.minimum_value.unscaled_value #=> String
+    #   resp.column_statistics_list[0].statistics_data.decimal_column_statistics_data.minimum_value.scale #=> Integer
+    #   resp.column_statistics_list[0].statistics_data.decimal_column_statistics_data.maximum_value.unscaled_value #=> String
+    #   resp.column_statistics_list[0].statistics_data.decimal_column_statistics_data.maximum_value.scale #=> Integer
+    #   resp.column_statistics_list[0].statistics_data.decimal_column_statistics_data.number_of_nulls #=> Integer
+    #   resp.column_statistics_list[0].statistics_data.decimal_column_statistics_data.number_of_distinct_values #=> Integer
+    #   resp.column_statistics_list[0].statistics_data.double_column_statistics_data.minimum_value #=> Float
+    #   resp.column_statistics_list[0].statistics_data.double_column_statistics_data.maximum_value #=> Float
+    #   resp.column_statistics_list[0].statistics_data.double_column_statistics_data.number_of_nulls #=> Integer
+    #   resp.column_statistics_list[0].statistics_data.double_column_statistics_data.number_of_distinct_values #=> Integer
+    #   resp.column_statistics_list[0].statistics_data.long_column_statistics_data.minimum_value #=> Integer
+    #   resp.column_statistics_list[0].statistics_data.long_column_statistics_data.maximum_value #=> Integer
+    #   resp.column_statistics_list[0].statistics_data.long_column_statistics_data.number_of_nulls #=> Integer
+    #   resp.column_statistics_list[0].statistics_data.long_column_statistics_data.number_of_distinct_values #=> Integer
+    #   resp.column_statistics_list[0].statistics_data.string_column_statistics_data.maximum_length #=> Integer
+    #   resp.column_statistics_list[0].statistics_data.string_column_statistics_data.average_length #=> Float
+    #   resp.column_statistics_list[0].statistics_data.string_column_statistics_data.number_of_nulls #=> Integer
+    #   resp.column_statistics_list[0].statistics_data.string_column_statistics_data.number_of_distinct_values #=> Integer
+    #   resp.column_statistics_list[0].statistics_data.binary_column_statistics_data.maximum_length #=> Integer
+    #   resp.column_statistics_list[0].statistics_data.binary_column_statistics_data.average_length #=> Float
+    #   resp.column_statistics_list[0].statistics_data.binary_column_statistics_data.number_of_nulls #=> Integer
+    #   resp.errors #=> Array
+    #   resp.errors[0].column_name #=> String
+    #   resp.errors[0].error.error_code #=> String
+    #   resp.errors[0].error.error_message #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/GetColumnStatisticsForPartition AWS API Documentation
+    #
+    # @overload get_column_statistics_for_partition(params = {})
+    # @param [Hash] params ({})
+    def get_column_statistics_for_partition(params = {}, options = {})
+      req = build_request(:get_column_statistics_for_partition, params)
+      req.send_request(options)
+    end
+
+    # Retrieves table statistics of columns.
+    #
+    # @option params [String] :catalog_id
+    #   The ID of the Data Catalog where the partitions in question reside. If
+    #   none is supplied, the AWS account ID is used by default.
+    #
+    # @option params [required, String] :database_name
+    #   The name of the catalog database where the partitions reside.
+    #
+    # @option params [required, String] :table_name
+    #   The name of the partitions' table.
+    #
+    # @option params [required, Array<String>] :column_names
+    #   A list of the column names.
+    #
+    # @return [Types::GetColumnStatisticsForTableResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetColumnStatisticsForTableResponse#column_statistics_list #column_statistics_list} => Array&lt;Types::ColumnStatistics&gt;
+    #   * {Types::GetColumnStatisticsForTableResponse#errors #errors} => Array&lt;Types::ColumnError&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_column_statistics_for_table({
+    #     catalog_id: "CatalogIdString",
+    #     database_name: "NameString", # required
+    #     table_name: "NameString", # required
+    #     column_names: ["NameString"], # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.column_statistics_list #=> Array
+    #   resp.column_statistics_list[0].column_name #=> String
+    #   resp.column_statistics_list[0].column_type #=> String
+    #   resp.column_statistics_list[0].analyzed_time #=> Time
+    #   resp.column_statistics_list[0].statistics_data.type #=> String, one of "BOOLEAN", "DATE", "DECIMAL", "DOUBLE", "LONG", "STRING", "BINARY"
+    #   resp.column_statistics_list[0].statistics_data.boolean_column_statistics_data.number_of_trues #=> Integer
+    #   resp.column_statistics_list[0].statistics_data.boolean_column_statistics_data.number_of_falses #=> Integer
+    #   resp.column_statistics_list[0].statistics_data.boolean_column_statistics_data.number_of_nulls #=> Integer
+    #   resp.column_statistics_list[0].statistics_data.date_column_statistics_data.minimum_value #=> Time
+    #   resp.column_statistics_list[0].statistics_data.date_column_statistics_data.maximum_value #=> Time
+    #   resp.column_statistics_list[0].statistics_data.date_column_statistics_data.number_of_nulls #=> Integer
+    #   resp.column_statistics_list[0].statistics_data.date_column_statistics_data.number_of_distinct_values #=> Integer
+    #   resp.column_statistics_list[0].statistics_data.decimal_column_statistics_data.minimum_value.unscaled_value #=> String
+    #   resp.column_statistics_list[0].statistics_data.decimal_column_statistics_data.minimum_value.scale #=> Integer
+    #   resp.column_statistics_list[0].statistics_data.decimal_column_statistics_data.maximum_value.unscaled_value #=> String
+    #   resp.column_statistics_list[0].statistics_data.decimal_column_statistics_data.maximum_value.scale #=> Integer
+    #   resp.column_statistics_list[0].statistics_data.decimal_column_statistics_data.number_of_nulls #=> Integer
+    #   resp.column_statistics_list[0].statistics_data.decimal_column_statistics_data.number_of_distinct_values #=> Integer
+    #   resp.column_statistics_list[0].statistics_data.double_column_statistics_data.minimum_value #=> Float
+    #   resp.column_statistics_list[0].statistics_data.double_column_statistics_data.maximum_value #=> Float
+    #   resp.column_statistics_list[0].statistics_data.double_column_statistics_data.number_of_nulls #=> Integer
+    #   resp.column_statistics_list[0].statistics_data.double_column_statistics_data.number_of_distinct_values #=> Integer
+    #   resp.column_statistics_list[0].statistics_data.long_column_statistics_data.minimum_value #=> Integer
+    #   resp.column_statistics_list[0].statistics_data.long_column_statistics_data.maximum_value #=> Integer
+    #   resp.column_statistics_list[0].statistics_data.long_column_statistics_data.number_of_nulls #=> Integer
+    #   resp.column_statistics_list[0].statistics_data.long_column_statistics_data.number_of_distinct_values #=> Integer
+    #   resp.column_statistics_list[0].statistics_data.string_column_statistics_data.maximum_length #=> Integer
+    #   resp.column_statistics_list[0].statistics_data.string_column_statistics_data.average_length #=> Float
+    #   resp.column_statistics_list[0].statistics_data.string_column_statistics_data.number_of_nulls #=> Integer
+    #   resp.column_statistics_list[0].statistics_data.string_column_statistics_data.number_of_distinct_values #=> Integer
+    #   resp.column_statistics_list[0].statistics_data.binary_column_statistics_data.maximum_length #=> Integer
+    #   resp.column_statistics_list[0].statistics_data.binary_column_statistics_data.average_length #=> Float
+    #   resp.column_statistics_list[0].statistics_data.binary_column_statistics_data.number_of_nulls #=> Integer
+    #   resp.errors #=> Array
+    #   resp.errors[0].column_name #=> String
+    #   resp.errors[0].error.error_code #=> String
+    #   resp.errors[0].error.error_message #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/GetColumnStatisticsForTable AWS API Documentation
+    #
+    # @overload get_column_statistics_for_table(params = {})
+    # @param [Hash] params ({})
+    def get_column_statistics_for_table(params = {}, options = {})
+      req = build_request(:get_column_statistics_for_table, params)
       req.send_request(options)
     end
 
@@ -7304,6 +7538,270 @@ module Aws::Glue
       req.send_request(options)
     end
 
+    # Creates or updates partition statistics of columns.
+    #
+    # @option params [String] :catalog_id
+    #   The ID of the Data Catalog where the partitions in question reside. If
+    #   none is supplied, the AWS account ID is used by default.
+    #
+    # @option params [required, String] :database_name
+    #   The name of the catalog database where the partitions reside.
+    #
+    # @option params [required, String] :table_name
+    #   The name of the partitions' table.
+    #
+    # @option params [required, Array<String>] :partition_values
+    #   A list of partition values identifying the partition.
+    #
+    # @option params [required, Array<Types::ColumnStatistics>] :column_statistics_list
+    #   A list of the column statistics.
+    #
+    # @return [Types::UpdateColumnStatisticsForPartitionResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::UpdateColumnStatisticsForPartitionResponse#errors #errors} => Array&lt;Types::ColumnStatisticsError&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_column_statistics_for_partition({
+    #     catalog_id: "CatalogIdString",
+    #     database_name: "NameString", # required
+    #     table_name: "NameString", # required
+    #     partition_values: ["ValueString"], # required
+    #     column_statistics_list: [ # required
+    #       {
+    #         column_name: "NameString", # required
+    #         column_type: "TypeString", # required
+    #         analyzed_time: Time.now, # required
+    #         statistics_data: { # required
+    #           type: "BOOLEAN", # required, accepts BOOLEAN, DATE, DECIMAL, DOUBLE, LONG, STRING, BINARY
+    #           boolean_column_statistics_data: {
+    #             number_of_trues: 1, # required
+    #             number_of_falses: 1, # required
+    #             number_of_nulls: 1, # required
+    #           },
+    #           date_column_statistics_data: {
+    #             minimum_value: Time.now,
+    #             maximum_value: Time.now,
+    #             number_of_nulls: 1, # required
+    #             number_of_distinct_values: 1, # required
+    #           },
+    #           decimal_column_statistics_data: {
+    #             minimum_value: {
+    #               unscaled_value: "data", # required
+    #               scale: 1, # required
+    #             },
+    #             maximum_value: {
+    #               unscaled_value: "data", # required
+    #               scale: 1, # required
+    #             },
+    #             number_of_nulls: 1, # required
+    #             number_of_distinct_values: 1, # required
+    #           },
+    #           double_column_statistics_data: {
+    #             minimum_value: 1.0,
+    #             maximum_value: 1.0,
+    #             number_of_nulls: 1, # required
+    #             number_of_distinct_values: 1, # required
+    #           },
+    #           long_column_statistics_data: {
+    #             minimum_value: 1,
+    #             maximum_value: 1,
+    #             number_of_nulls: 1, # required
+    #             number_of_distinct_values: 1, # required
+    #           },
+    #           string_column_statistics_data: {
+    #             maximum_length: 1, # required
+    #             average_length: 1.0, # required
+    #             number_of_nulls: 1, # required
+    #             number_of_distinct_values: 1, # required
+    #           },
+    #           binary_column_statistics_data: {
+    #             maximum_length: 1, # required
+    #             average_length: 1.0, # required
+    #             number_of_nulls: 1, # required
+    #           },
+    #         },
+    #       },
+    #     ],
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.errors #=> Array
+    #   resp.errors[0].column_statistics.column_name #=> String
+    #   resp.errors[0].column_statistics.column_type #=> String
+    #   resp.errors[0].column_statistics.analyzed_time #=> Time
+    #   resp.errors[0].column_statistics.statistics_data.type #=> String, one of "BOOLEAN", "DATE", "DECIMAL", "DOUBLE", "LONG", "STRING", "BINARY"
+    #   resp.errors[0].column_statistics.statistics_data.boolean_column_statistics_data.number_of_trues #=> Integer
+    #   resp.errors[0].column_statistics.statistics_data.boolean_column_statistics_data.number_of_falses #=> Integer
+    #   resp.errors[0].column_statistics.statistics_data.boolean_column_statistics_data.number_of_nulls #=> Integer
+    #   resp.errors[0].column_statistics.statistics_data.date_column_statistics_data.minimum_value #=> Time
+    #   resp.errors[0].column_statistics.statistics_data.date_column_statistics_data.maximum_value #=> Time
+    #   resp.errors[0].column_statistics.statistics_data.date_column_statistics_data.number_of_nulls #=> Integer
+    #   resp.errors[0].column_statistics.statistics_data.date_column_statistics_data.number_of_distinct_values #=> Integer
+    #   resp.errors[0].column_statistics.statistics_data.decimal_column_statistics_data.minimum_value.unscaled_value #=> String
+    #   resp.errors[0].column_statistics.statistics_data.decimal_column_statistics_data.minimum_value.scale #=> Integer
+    #   resp.errors[0].column_statistics.statistics_data.decimal_column_statistics_data.maximum_value.unscaled_value #=> String
+    #   resp.errors[0].column_statistics.statistics_data.decimal_column_statistics_data.maximum_value.scale #=> Integer
+    #   resp.errors[0].column_statistics.statistics_data.decimal_column_statistics_data.number_of_nulls #=> Integer
+    #   resp.errors[0].column_statistics.statistics_data.decimal_column_statistics_data.number_of_distinct_values #=> Integer
+    #   resp.errors[0].column_statistics.statistics_data.double_column_statistics_data.minimum_value #=> Float
+    #   resp.errors[0].column_statistics.statistics_data.double_column_statistics_data.maximum_value #=> Float
+    #   resp.errors[0].column_statistics.statistics_data.double_column_statistics_data.number_of_nulls #=> Integer
+    #   resp.errors[0].column_statistics.statistics_data.double_column_statistics_data.number_of_distinct_values #=> Integer
+    #   resp.errors[0].column_statistics.statistics_data.long_column_statistics_data.minimum_value #=> Integer
+    #   resp.errors[0].column_statistics.statistics_data.long_column_statistics_data.maximum_value #=> Integer
+    #   resp.errors[0].column_statistics.statistics_data.long_column_statistics_data.number_of_nulls #=> Integer
+    #   resp.errors[0].column_statistics.statistics_data.long_column_statistics_data.number_of_distinct_values #=> Integer
+    #   resp.errors[0].column_statistics.statistics_data.string_column_statistics_data.maximum_length #=> Integer
+    #   resp.errors[0].column_statistics.statistics_data.string_column_statistics_data.average_length #=> Float
+    #   resp.errors[0].column_statistics.statistics_data.string_column_statistics_data.number_of_nulls #=> Integer
+    #   resp.errors[0].column_statistics.statistics_data.string_column_statistics_data.number_of_distinct_values #=> Integer
+    #   resp.errors[0].column_statistics.statistics_data.binary_column_statistics_data.maximum_length #=> Integer
+    #   resp.errors[0].column_statistics.statistics_data.binary_column_statistics_data.average_length #=> Float
+    #   resp.errors[0].column_statistics.statistics_data.binary_column_statistics_data.number_of_nulls #=> Integer
+    #   resp.errors[0].error.error_code #=> String
+    #   resp.errors[0].error.error_message #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/UpdateColumnStatisticsForPartition AWS API Documentation
+    #
+    # @overload update_column_statistics_for_partition(params = {})
+    # @param [Hash] params ({})
+    def update_column_statistics_for_partition(params = {}, options = {})
+      req = build_request(:update_column_statistics_for_partition, params)
+      req.send_request(options)
+    end
+
+    # Creates or updates table statistics of columns.
+    #
+    # @option params [String] :catalog_id
+    #   The ID of the Data Catalog where the partitions in question reside. If
+    #   none is supplied, the AWS account ID is used by default.
+    #
+    # @option params [required, String] :database_name
+    #   The name of the catalog database where the partitions reside.
+    #
+    # @option params [required, String] :table_name
+    #   The name of the partitions' table.
+    #
+    # @option params [required, Array<Types::ColumnStatistics>] :column_statistics_list
+    #   A list of the column statistics.
+    #
+    # @return [Types::UpdateColumnStatisticsForTableResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::UpdateColumnStatisticsForTableResponse#errors #errors} => Array&lt;Types::ColumnStatisticsError&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_column_statistics_for_table({
+    #     catalog_id: "CatalogIdString",
+    #     database_name: "NameString", # required
+    #     table_name: "NameString", # required
+    #     column_statistics_list: [ # required
+    #       {
+    #         column_name: "NameString", # required
+    #         column_type: "TypeString", # required
+    #         analyzed_time: Time.now, # required
+    #         statistics_data: { # required
+    #           type: "BOOLEAN", # required, accepts BOOLEAN, DATE, DECIMAL, DOUBLE, LONG, STRING, BINARY
+    #           boolean_column_statistics_data: {
+    #             number_of_trues: 1, # required
+    #             number_of_falses: 1, # required
+    #             number_of_nulls: 1, # required
+    #           },
+    #           date_column_statistics_data: {
+    #             minimum_value: Time.now,
+    #             maximum_value: Time.now,
+    #             number_of_nulls: 1, # required
+    #             number_of_distinct_values: 1, # required
+    #           },
+    #           decimal_column_statistics_data: {
+    #             minimum_value: {
+    #               unscaled_value: "data", # required
+    #               scale: 1, # required
+    #             },
+    #             maximum_value: {
+    #               unscaled_value: "data", # required
+    #               scale: 1, # required
+    #             },
+    #             number_of_nulls: 1, # required
+    #             number_of_distinct_values: 1, # required
+    #           },
+    #           double_column_statistics_data: {
+    #             minimum_value: 1.0,
+    #             maximum_value: 1.0,
+    #             number_of_nulls: 1, # required
+    #             number_of_distinct_values: 1, # required
+    #           },
+    #           long_column_statistics_data: {
+    #             minimum_value: 1,
+    #             maximum_value: 1,
+    #             number_of_nulls: 1, # required
+    #             number_of_distinct_values: 1, # required
+    #           },
+    #           string_column_statistics_data: {
+    #             maximum_length: 1, # required
+    #             average_length: 1.0, # required
+    #             number_of_nulls: 1, # required
+    #             number_of_distinct_values: 1, # required
+    #           },
+    #           binary_column_statistics_data: {
+    #             maximum_length: 1, # required
+    #             average_length: 1.0, # required
+    #             number_of_nulls: 1, # required
+    #           },
+    #         },
+    #       },
+    #     ],
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.errors #=> Array
+    #   resp.errors[0].column_statistics.column_name #=> String
+    #   resp.errors[0].column_statistics.column_type #=> String
+    #   resp.errors[0].column_statistics.analyzed_time #=> Time
+    #   resp.errors[0].column_statistics.statistics_data.type #=> String, one of "BOOLEAN", "DATE", "DECIMAL", "DOUBLE", "LONG", "STRING", "BINARY"
+    #   resp.errors[0].column_statistics.statistics_data.boolean_column_statistics_data.number_of_trues #=> Integer
+    #   resp.errors[0].column_statistics.statistics_data.boolean_column_statistics_data.number_of_falses #=> Integer
+    #   resp.errors[0].column_statistics.statistics_data.boolean_column_statistics_data.number_of_nulls #=> Integer
+    #   resp.errors[0].column_statistics.statistics_data.date_column_statistics_data.minimum_value #=> Time
+    #   resp.errors[0].column_statistics.statistics_data.date_column_statistics_data.maximum_value #=> Time
+    #   resp.errors[0].column_statistics.statistics_data.date_column_statistics_data.number_of_nulls #=> Integer
+    #   resp.errors[0].column_statistics.statistics_data.date_column_statistics_data.number_of_distinct_values #=> Integer
+    #   resp.errors[0].column_statistics.statistics_data.decimal_column_statistics_data.minimum_value.unscaled_value #=> String
+    #   resp.errors[0].column_statistics.statistics_data.decimal_column_statistics_data.minimum_value.scale #=> Integer
+    #   resp.errors[0].column_statistics.statistics_data.decimal_column_statistics_data.maximum_value.unscaled_value #=> String
+    #   resp.errors[0].column_statistics.statistics_data.decimal_column_statistics_data.maximum_value.scale #=> Integer
+    #   resp.errors[0].column_statistics.statistics_data.decimal_column_statistics_data.number_of_nulls #=> Integer
+    #   resp.errors[0].column_statistics.statistics_data.decimal_column_statistics_data.number_of_distinct_values #=> Integer
+    #   resp.errors[0].column_statistics.statistics_data.double_column_statistics_data.minimum_value #=> Float
+    #   resp.errors[0].column_statistics.statistics_data.double_column_statistics_data.maximum_value #=> Float
+    #   resp.errors[0].column_statistics.statistics_data.double_column_statistics_data.number_of_nulls #=> Integer
+    #   resp.errors[0].column_statistics.statistics_data.double_column_statistics_data.number_of_distinct_values #=> Integer
+    #   resp.errors[0].column_statistics.statistics_data.long_column_statistics_data.minimum_value #=> Integer
+    #   resp.errors[0].column_statistics.statistics_data.long_column_statistics_data.maximum_value #=> Integer
+    #   resp.errors[0].column_statistics.statistics_data.long_column_statistics_data.number_of_nulls #=> Integer
+    #   resp.errors[0].column_statistics.statistics_data.long_column_statistics_data.number_of_distinct_values #=> Integer
+    #   resp.errors[0].column_statistics.statistics_data.string_column_statistics_data.maximum_length #=> Integer
+    #   resp.errors[0].column_statistics.statistics_data.string_column_statistics_data.average_length #=> Float
+    #   resp.errors[0].column_statistics.statistics_data.string_column_statistics_data.number_of_nulls #=> Integer
+    #   resp.errors[0].column_statistics.statistics_data.string_column_statistics_data.number_of_distinct_values #=> Integer
+    #   resp.errors[0].column_statistics.statistics_data.binary_column_statistics_data.maximum_length #=> Integer
+    #   resp.errors[0].column_statistics.statistics_data.binary_column_statistics_data.average_length #=> Float
+    #   resp.errors[0].column_statistics.statistics_data.binary_column_statistics_data.number_of_nulls #=> Integer
+    #   resp.errors[0].error.error_code #=> String
+    #   resp.errors[0].error.error_message #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/UpdateColumnStatisticsForTable AWS API Documentation
+    #
+    # @overload update_column_statistics_for_table(params = {})
+    # @param [Hash] params ({})
+    def update_column_statistics_for_table(params = {}, options = {})
+      req = build_request(:update_column_statistics_for_table, params)
+      req.send_request(options)
+    end
+
     # Updates a connection definition in the Data Catalog.
     #
     # @option params [String] :catalog_id
@@ -8169,7 +8667,7 @@ module Aws::Glue
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-glue'
-      context[:gem_version] = '1.60.0'
+      context[:gem_version] = '1.61.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

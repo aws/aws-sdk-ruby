@@ -900,7 +900,7 @@ module Aws::EC2
     #
     #   To add instance store volumes to an Amazon EBS-backed instance, you
     #   must add them when you launch the instance. For more information, see
-    #   [Updating the Block Device Mapping when Launching an Instance][1] in
+    #   [Updating the block device mapping when launching an instance][1] in
     #   the *Amazon Elastic Compute Cloud User Guide*.
     #
     #
@@ -937,7 +937,7 @@ module Aws::EC2
     #   system shutdown).
     # @option options [Types::AttributeValue] :instance_type
     #   Changes the instance type to the specified value. For more
-    #   information, see [Instance Types][1]. If the instance type is not
+    #   information, see [Instance types][1]. If the instance type is not
     #   valid, the error returned is `InvalidInstanceAttributeValue`.
     #
     #
@@ -1216,8 +1216,8 @@ module Aws::EC2
     # @option options [Boolean] :hibernate
     #   Hibernates the instance if the instance was enabled for hibernation at
     #   launch. If the instance cannot hibernate successfully, a normal
-    #   shutdown occurs. For more information, see [Hibernate Your
-    #   Instance][1] in the *Amazon Elastic Compute Cloud User Guide*.
+    #   shutdown occurs. For more information, see [Hibernate your
+    #   instance][1] in the *Amazon Elastic Compute Cloud User Guide*.
     #
     #   Default: `false`
     #
@@ -1757,8 +1757,8 @@ module Aws::EC2
       # @option options [Boolean] :hibernate
       #   Hibernates the instance if the instance was enabled for hibernation at
       #   launch. If the instance cannot hibernate successfully, a normal
-      #   shutdown occurs. For more information, see [Hibernate Your
-      #   Instance][1] in the *Amazon Elastic Compute Cloud User Guide*.
+      #   shutdown occurs. For more information, see [Hibernate your
+      #   instance][1] in the *Amazon Elastic Compute Cloud User Guide*.
       #
       #   Default: `false`
       #

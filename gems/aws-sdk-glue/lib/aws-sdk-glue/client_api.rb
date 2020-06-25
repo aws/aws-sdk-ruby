@@ -51,7 +51,10 @@ module Aws::Glue
     BatchStopJobRunResponse = Shapes::StructureShape.new(name: 'BatchStopJobRunResponse')
     BatchStopJobRunSuccessfulSubmission = Shapes::StructureShape.new(name: 'BatchStopJobRunSuccessfulSubmission')
     BatchStopJobRunSuccessfulSubmissionList = Shapes::ListShape.new(name: 'BatchStopJobRunSuccessfulSubmissionList')
+    BinaryColumnStatisticsData = Shapes::StructureShape.new(name: 'BinaryColumnStatisticsData')
+    Blob = Shapes::BlobShape.new(name: 'Blob')
     Boolean = Shapes::BooleanShape.new(name: 'Boolean')
+    BooleanColumnStatisticsData = Shapes::StructureShape.new(name: 'BooleanColumnStatisticsData')
     BooleanNullable = Shapes::BooleanShape.new(name: 'BooleanNullable')
     BooleanValue = Shapes::BooleanShape.new(name: 'BooleanValue')
     BoundedPartitionValueList = Shapes::ListShape.new(name: 'BoundedPartitionValueList')
@@ -80,8 +83,16 @@ module Aws::Glue
     CodeGenNodeArgs = Shapes::ListShape.new(name: 'CodeGenNodeArgs')
     CodeGenNodeType = Shapes::StringShape.new(name: 'CodeGenNodeType')
     Column = Shapes::StructureShape.new(name: 'Column')
+    ColumnError = Shapes::StructureShape.new(name: 'ColumnError')
+    ColumnErrors = Shapes::ListShape.new(name: 'ColumnErrors')
     ColumnList = Shapes::ListShape.new(name: 'ColumnList')
     ColumnNameString = Shapes::StringShape.new(name: 'ColumnNameString')
+    ColumnStatistics = Shapes::StructureShape.new(name: 'ColumnStatistics')
+    ColumnStatisticsData = Shapes::StructureShape.new(name: 'ColumnStatisticsData')
+    ColumnStatisticsError = Shapes::StructureShape.new(name: 'ColumnStatisticsError')
+    ColumnStatisticsErrors = Shapes::ListShape.new(name: 'ColumnStatisticsErrors')
+    ColumnStatisticsList = Shapes::ListShape.new(name: 'ColumnStatisticsList')
+    ColumnStatisticsType = Shapes::StringShape.new(name: 'ColumnStatisticsType')
     ColumnTypeString = Shapes::StringShape.new(name: 'ColumnTypeString')
     ColumnValueStringList = Shapes::ListShape.new(name: 'ColumnValueStringList')
     ColumnValuesString = Shapes::StringShape.new(name: 'ColumnValuesString')
@@ -166,9 +177,16 @@ module Aws::Glue
     DatabaseInput = Shapes::StructureShape.new(name: 'DatabaseInput')
     DatabaseList = Shapes::ListShape.new(name: 'DatabaseList')
     DatabaseName = Shapes::StringShape.new(name: 'DatabaseName')
+    DateColumnStatisticsData = Shapes::StructureShape.new(name: 'DateColumnStatisticsData')
+    DecimalColumnStatisticsData = Shapes::StructureShape.new(name: 'DecimalColumnStatisticsData')
+    DecimalNumber = Shapes::StructureShape.new(name: 'DecimalNumber')
     DeleteBehavior = Shapes::StringShape.new(name: 'DeleteBehavior')
     DeleteClassifierRequest = Shapes::StructureShape.new(name: 'DeleteClassifierRequest')
     DeleteClassifierResponse = Shapes::StructureShape.new(name: 'DeleteClassifierResponse')
+    DeleteColumnStatisticsForPartitionRequest = Shapes::StructureShape.new(name: 'DeleteColumnStatisticsForPartitionRequest')
+    DeleteColumnStatisticsForPartitionResponse = Shapes::StructureShape.new(name: 'DeleteColumnStatisticsForPartitionResponse')
+    DeleteColumnStatisticsForTableRequest = Shapes::StructureShape.new(name: 'DeleteColumnStatisticsForTableRequest')
+    DeleteColumnStatisticsForTableResponse = Shapes::StructureShape.new(name: 'DeleteColumnStatisticsForTableResponse')
     DeleteConnectionNameList = Shapes::ListShape.new(name: 'DeleteConnectionNameList')
     DeleteConnectionRequest = Shapes::StructureShape.new(name: 'DeleteConnectionRequest')
     DeleteConnectionResponse = Shapes::StructureShape.new(name: 'DeleteConnectionResponse')
@@ -205,6 +223,8 @@ module Aws::Glue
     DevEndpointList = Shapes::ListShape.new(name: 'DevEndpointList')
     DevEndpointNameList = Shapes::ListShape.new(name: 'DevEndpointNameList')
     DevEndpointNames = Shapes::ListShape.new(name: 'DevEndpointNames')
+    Double = Shapes::FloatShape.new(name: 'Double')
+    DoubleColumnStatisticsData = Shapes::StructureShape.new(name: 'DoubleColumnStatisticsData')
     DynamoDBTarget = Shapes::StructureShape.new(name: 'DynamoDBTarget')
     DynamoDBTargetList = Shapes::ListShape.new(name: 'DynamoDBTargetList')
     Edge = Shapes::StructureShape.new(name: 'Edge')
@@ -235,6 +255,11 @@ module Aws::Glue
     GetClassifierResponse = Shapes::StructureShape.new(name: 'GetClassifierResponse')
     GetClassifiersRequest = Shapes::StructureShape.new(name: 'GetClassifiersRequest')
     GetClassifiersResponse = Shapes::StructureShape.new(name: 'GetClassifiersResponse')
+    GetColumnNamesList = Shapes::ListShape.new(name: 'GetColumnNamesList')
+    GetColumnStatisticsForPartitionRequest = Shapes::StructureShape.new(name: 'GetColumnStatisticsForPartitionRequest')
+    GetColumnStatisticsForPartitionResponse = Shapes::StructureShape.new(name: 'GetColumnStatisticsForPartitionResponse')
+    GetColumnStatisticsForTableRequest = Shapes::StructureShape.new(name: 'GetColumnStatisticsForTableRequest')
+    GetColumnStatisticsForTableResponse = Shapes::StructureShape.new(name: 'GetColumnStatisticsForTableResponse')
     GetConnectionRequest = Shapes::StructureShape.new(name: 'GetConnectionRequest')
     GetConnectionResponse = Shapes::StructureShape.new(name: 'GetConnectionResponse')
     GetConnectionsFilter = Shapes::StructureShape.new(name: 'GetConnectionsFilter')
@@ -380,6 +405,8 @@ module Aws::Glue
     LogStream = Shapes::StringShape.new(name: 'LogStream')
     Logical = Shapes::StringShape.new(name: 'Logical')
     LogicalOperator = Shapes::StringShape.new(name: 'LogicalOperator')
+    Long = Shapes::IntegerShape.new(name: 'Long')
+    LongColumnStatisticsData = Shapes::StructureShape.new(name: 'LongColumnStatisticsData')
     MLTransform = Shapes::StructureShape.new(name: 'MLTransform')
     MLTransformNotReadyException = Shapes::StructureShape.new(name: 'MLTransformNotReadyException')
     MapValue = Shapes::MapShape.new(name: 'MapValue')
@@ -399,6 +426,7 @@ module Aws::Glue
     NodeType = Shapes::StringShape.new(name: 'NodeType')
     NonNegativeDouble = Shapes::FloatShape.new(name: 'NonNegativeDouble')
     NonNegativeInteger = Shapes::IntegerShape.new(name: 'NonNegativeInteger')
+    NonNegativeLong = Shapes::IntegerShape.new(name: 'NonNegativeLong')
     NotificationProperty = Shapes::StructureShape.new(name: 'NotificationProperty')
     NotifyDelayAfter = Shapes::IntegerShape.new(name: 'NotifyDelayAfter')
     NullableBoolean = Shapes::BooleanShape.new(name: 'NullableBoolean')
@@ -510,6 +538,7 @@ module Aws::Glue
     StopWorkflowRunRequest = Shapes::StructureShape.new(name: 'StopWorkflowRunRequest')
     StopWorkflowRunResponse = Shapes::StructureShape.new(name: 'StopWorkflowRunResponse')
     StorageDescriptor = Shapes::StructureShape.new(name: 'StorageDescriptor')
+    StringColumnStatisticsData = Shapes::StructureShape.new(name: 'StringColumnStatisticsData')
     StringList = Shapes::ListShape.new(name: 'StringList')
     Table = Shapes::StructureShape.new(name: 'Table')
     TableError = Shapes::StructureShape.new(name: 'TableError')
@@ -557,12 +586,18 @@ module Aws::Glue
     TriggerState = Shapes::StringShape.new(name: 'TriggerState')
     TriggerType = Shapes::StringShape.new(name: 'TriggerType')
     TriggerUpdate = Shapes::StructureShape.new(name: 'TriggerUpdate')
+    TypeString = Shapes::StringShape.new(name: 'TypeString')
     URI = Shapes::StringShape.new(name: 'URI')
     UntagResourceRequest = Shapes::StructureShape.new(name: 'UntagResourceRequest')
     UntagResourceResponse = Shapes::StructureShape.new(name: 'UntagResourceResponse')
     UpdateBehavior = Shapes::StringShape.new(name: 'UpdateBehavior')
     UpdateClassifierRequest = Shapes::StructureShape.new(name: 'UpdateClassifierRequest')
     UpdateClassifierResponse = Shapes::StructureShape.new(name: 'UpdateClassifierResponse')
+    UpdateColumnStatisticsForPartitionRequest = Shapes::StructureShape.new(name: 'UpdateColumnStatisticsForPartitionRequest')
+    UpdateColumnStatisticsForPartitionResponse = Shapes::StructureShape.new(name: 'UpdateColumnStatisticsForPartitionResponse')
+    UpdateColumnStatisticsForTableRequest = Shapes::StructureShape.new(name: 'UpdateColumnStatisticsForTableRequest')
+    UpdateColumnStatisticsForTableResponse = Shapes::StructureShape.new(name: 'UpdateColumnStatisticsForTableResponse')
+    UpdateColumnStatisticsList = Shapes::ListShape.new(name: 'UpdateColumnStatisticsList')
     UpdateConnectionRequest = Shapes::StructureShape.new(name: 'UpdateConnectionRequest')
     UpdateConnectionResponse = Shapes::StructureShape.new(name: 'UpdateConnectionResponse')
     UpdateCrawlerRequest = Shapes::StructureShape.new(name: 'UpdateCrawlerRequest')
@@ -750,6 +785,16 @@ module Aws::Glue
 
     BatchStopJobRunSuccessfulSubmissionList.member = Shapes::ShapeRef.new(shape: BatchStopJobRunSuccessfulSubmission)
 
+    BinaryColumnStatisticsData.add_member(:maximum_length, Shapes::ShapeRef.new(shape: NonNegativeLong, required: true, location_name: "MaximumLength"))
+    BinaryColumnStatisticsData.add_member(:average_length, Shapes::ShapeRef.new(shape: NonNegativeDouble, required: true, location_name: "AverageLength"))
+    BinaryColumnStatisticsData.add_member(:number_of_nulls, Shapes::ShapeRef.new(shape: NonNegativeLong, required: true, location_name: "NumberOfNulls"))
+    BinaryColumnStatisticsData.struct_class = Types::BinaryColumnStatisticsData
+
+    BooleanColumnStatisticsData.add_member(:number_of_trues, Shapes::ShapeRef.new(shape: NonNegativeLong, required: true, location_name: "NumberOfTrues"))
+    BooleanColumnStatisticsData.add_member(:number_of_falses, Shapes::ShapeRef.new(shape: NonNegativeLong, required: true, location_name: "NumberOfFalses"))
+    BooleanColumnStatisticsData.add_member(:number_of_nulls, Shapes::ShapeRef.new(shape: NonNegativeLong, required: true, location_name: "NumberOfNulls"))
+    BooleanColumnStatisticsData.struct_class = Types::BooleanColumnStatisticsData
+
     BoundedPartitionValueList.member = Shapes::ShapeRef.new(shape: ValueString)
 
     CancelMLTaskRunRequest.add_member(:transform_id, Shapes::ShapeRef.new(shape: HashString, required: true, location_name: "TransformId"))
@@ -818,7 +863,37 @@ module Aws::Glue
     Column.add_member(:parameters, Shapes::ShapeRef.new(shape: ParametersMap, location_name: "Parameters"))
     Column.struct_class = Types::Column
 
+    ColumnError.add_member(:column_name, Shapes::ShapeRef.new(shape: NameString, location_name: "ColumnName"))
+    ColumnError.add_member(:error, Shapes::ShapeRef.new(shape: ErrorDetail, location_name: "Error"))
+    ColumnError.struct_class = Types::ColumnError
+
+    ColumnErrors.member = Shapes::ShapeRef.new(shape: ColumnError)
+
     ColumnList.member = Shapes::ShapeRef.new(shape: Column)
+
+    ColumnStatistics.add_member(:column_name, Shapes::ShapeRef.new(shape: NameString, required: true, location_name: "ColumnName"))
+    ColumnStatistics.add_member(:column_type, Shapes::ShapeRef.new(shape: TypeString, required: true, location_name: "ColumnType"))
+    ColumnStatistics.add_member(:analyzed_time, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "AnalyzedTime"))
+    ColumnStatistics.add_member(:statistics_data, Shapes::ShapeRef.new(shape: ColumnStatisticsData, required: true, location_name: "StatisticsData"))
+    ColumnStatistics.struct_class = Types::ColumnStatistics
+
+    ColumnStatisticsData.add_member(:type, Shapes::ShapeRef.new(shape: ColumnStatisticsType, required: true, location_name: "Type"))
+    ColumnStatisticsData.add_member(:boolean_column_statistics_data, Shapes::ShapeRef.new(shape: BooleanColumnStatisticsData, location_name: "BooleanColumnStatisticsData"))
+    ColumnStatisticsData.add_member(:date_column_statistics_data, Shapes::ShapeRef.new(shape: DateColumnStatisticsData, location_name: "DateColumnStatisticsData"))
+    ColumnStatisticsData.add_member(:decimal_column_statistics_data, Shapes::ShapeRef.new(shape: DecimalColumnStatisticsData, location_name: "DecimalColumnStatisticsData"))
+    ColumnStatisticsData.add_member(:double_column_statistics_data, Shapes::ShapeRef.new(shape: DoubleColumnStatisticsData, location_name: "DoubleColumnStatisticsData"))
+    ColumnStatisticsData.add_member(:long_column_statistics_data, Shapes::ShapeRef.new(shape: LongColumnStatisticsData, location_name: "LongColumnStatisticsData"))
+    ColumnStatisticsData.add_member(:string_column_statistics_data, Shapes::ShapeRef.new(shape: StringColumnStatisticsData, location_name: "StringColumnStatisticsData"))
+    ColumnStatisticsData.add_member(:binary_column_statistics_data, Shapes::ShapeRef.new(shape: BinaryColumnStatisticsData, location_name: "BinaryColumnStatisticsData"))
+    ColumnStatisticsData.struct_class = Types::ColumnStatisticsData
+
+    ColumnStatisticsError.add_member(:column_statistics, Shapes::ShapeRef.new(shape: ColumnStatistics, location_name: "ColumnStatistics"))
+    ColumnStatisticsError.add_member(:error, Shapes::ShapeRef.new(shape: ErrorDetail, location_name: "Error"))
+    ColumnStatisticsError.struct_class = Types::ColumnStatisticsError
+
+    ColumnStatisticsErrors.member = Shapes::ShapeRef.new(shape: ColumnStatisticsError)
+
+    ColumnStatisticsList.member = Shapes::ShapeRef.new(shape: ColumnStatistics)
 
     ColumnValueStringList.member = Shapes::ShapeRef.new(shape: ColumnValuesString)
 
@@ -1183,10 +1258,43 @@ module Aws::Glue
 
     DatabaseList.member = Shapes::ShapeRef.new(shape: Database)
 
+    DateColumnStatisticsData.add_member(:minimum_value, Shapes::ShapeRef.new(shape: Timestamp, location_name: "MinimumValue"))
+    DateColumnStatisticsData.add_member(:maximum_value, Shapes::ShapeRef.new(shape: Timestamp, location_name: "MaximumValue"))
+    DateColumnStatisticsData.add_member(:number_of_nulls, Shapes::ShapeRef.new(shape: NonNegativeLong, required: true, location_name: "NumberOfNulls"))
+    DateColumnStatisticsData.add_member(:number_of_distinct_values, Shapes::ShapeRef.new(shape: NonNegativeLong, required: true, location_name: "NumberOfDistinctValues"))
+    DateColumnStatisticsData.struct_class = Types::DateColumnStatisticsData
+
+    DecimalColumnStatisticsData.add_member(:minimum_value, Shapes::ShapeRef.new(shape: DecimalNumber, location_name: "MinimumValue"))
+    DecimalColumnStatisticsData.add_member(:maximum_value, Shapes::ShapeRef.new(shape: DecimalNumber, location_name: "MaximumValue"))
+    DecimalColumnStatisticsData.add_member(:number_of_nulls, Shapes::ShapeRef.new(shape: NonNegativeLong, required: true, location_name: "NumberOfNulls"))
+    DecimalColumnStatisticsData.add_member(:number_of_distinct_values, Shapes::ShapeRef.new(shape: NonNegativeLong, required: true, location_name: "NumberOfDistinctValues"))
+    DecimalColumnStatisticsData.struct_class = Types::DecimalColumnStatisticsData
+
+    DecimalNumber.add_member(:unscaled_value, Shapes::ShapeRef.new(shape: Blob, required: true, location_name: "UnscaledValue"))
+    DecimalNumber.add_member(:scale, Shapes::ShapeRef.new(shape: Integer, required: true, location_name: "Scale"))
+    DecimalNumber.struct_class = Types::DecimalNumber
+
     DeleteClassifierRequest.add_member(:name, Shapes::ShapeRef.new(shape: NameString, required: true, location_name: "Name"))
     DeleteClassifierRequest.struct_class = Types::DeleteClassifierRequest
 
     DeleteClassifierResponse.struct_class = Types::DeleteClassifierResponse
+
+    DeleteColumnStatisticsForPartitionRequest.add_member(:catalog_id, Shapes::ShapeRef.new(shape: CatalogIdString, location_name: "CatalogId"))
+    DeleteColumnStatisticsForPartitionRequest.add_member(:database_name, Shapes::ShapeRef.new(shape: NameString, required: true, location_name: "DatabaseName"))
+    DeleteColumnStatisticsForPartitionRequest.add_member(:table_name, Shapes::ShapeRef.new(shape: NameString, required: true, location_name: "TableName"))
+    DeleteColumnStatisticsForPartitionRequest.add_member(:partition_values, Shapes::ShapeRef.new(shape: ValueStringList, required: true, location_name: "PartitionValues"))
+    DeleteColumnStatisticsForPartitionRequest.add_member(:column_name, Shapes::ShapeRef.new(shape: NameString, required: true, location_name: "ColumnName"))
+    DeleteColumnStatisticsForPartitionRequest.struct_class = Types::DeleteColumnStatisticsForPartitionRequest
+
+    DeleteColumnStatisticsForPartitionResponse.struct_class = Types::DeleteColumnStatisticsForPartitionResponse
+
+    DeleteColumnStatisticsForTableRequest.add_member(:catalog_id, Shapes::ShapeRef.new(shape: CatalogIdString, location_name: "CatalogId"))
+    DeleteColumnStatisticsForTableRequest.add_member(:database_name, Shapes::ShapeRef.new(shape: NameString, required: true, location_name: "DatabaseName"))
+    DeleteColumnStatisticsForTableRequest.add_member(:table_name, Shapes::ShapeRef.new(shape: NameString, required: true, location_name: "TableName"))
+    DeleteColumnStatisticsForTableRequest.add_member(:column_name, Shapes::ShapeRef.new(shape: NameString, required: true, location_name: "ColumnName"))
+    DeleteColumnStatisticsForTableRequest.struct_class = Types::DeleteColumnStatisticsForTableRequest
+
+    DeleteColumnStatisticsForTableResponse.struct_class = Types::DeleteColumnStatisticsForTableResponse
 
     DeleteConnectionNameList.member = Shapes::ShapeRef.new(shape: NameString)
 
@@ -1313,6 +1421,12 @@ module Aws::Glue
 
     DevEndpointNames.member = Shapes::ShapeRef.new(shape: GenericString)
 
+    DoubleColumnStatisticsData.add_member(:minimum_value, Shapes::ShapeRef.new(shape: Double, location_name: "MinimumValue"))
+    DoubleColumnStatisticsData.add_member(:maximum_value, Shapes::ShapeRef.new(shape: Double, location_name: "MaximumValue"))
+    DoubleColumnStatisticsData.add_member(:number_of_nulls, Shapes::ShapeRef.new(shape: NonNegativeLong, required: true, location_name: "NumberOfNulls"))
+    DoubleColumnStatisticsData.add_member(:number_of_distinct_values, Shapes::ShapeRef.new(shape: NonNegativeLong, required: true, location_name: "NumberOfDistinctValues"))
+    DoubleColumnStatisticsData.struct_class = Types::DoubleColumnStatisticsData
+
     DynamoDBTarget.add_member(:path, Shapes::ShapeRef.new(shape: Path, location_name: "Path"))
     DynamoDBTarget.add_member(:scan_all, Shapes::ShapeRef.new(shape: NullableBoolean, location_name: "scanAll"))
     DynamoDBTarget.add_member(:scan_rate, Shapes::ShapeRef.new(shape: NullableDouble, location_name: "scanRate"))
@@ -1395,6 +1509,29 @@ module Aws::Glue
     GetClassifiersResponse.add_member(:classifiers, Shapes::ShapeRef.new(shape: ClassifierList, location_name: "Classifiers"))
     GetClassifiersResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: Token, location_name: "NextToken"))
     GetClassifiersResponse.struct_class = Types::GetClassifiersResponse
+
+    GetColumnNamesList.member = Shapes::ShapeRef.new(shape: NameString)
+
+    GetColumnStatisticsForPartitionRequest.add_member(:catalog_id, Shapes::ShapeRef.new(shape: CatalogIdString, location_name: "CatalogId"))
+    GetColumnStatisticsForPartitionRequest.add_member(:database_name, Shapes::ShapeRef.new(shape: NameString, required: true, location_name: "DatabaseName"))
+    GetColumnStatisticsForPartitionRequest.add_member(:table_name, Shapes::ShapeRef.new(shape: NameString, required: true, location_name: "TableName"))
+    GetColumnStatisticsForPartitionRequest.add_member(:partition_values, Shapes::ShapeRef.new(shape: ValueStringList, required: true, location_name: "PartitionValues"))
+    GetColumnStatisticsForPartitionRequest.add_member(:column_names, Shapes::ShapeRef.new(shape: GetColumnNamesList, required: true, location_name: "ColumnNames"))
+    GetColumnStatisticsForPartitionRequest.struct_class = Types::GetColumnStatisticsForPartitionRequest
+
+    GetColumnStatisticsForPartitionResponse.add_member(:column_statistics_list, Shapes::ShapeRef.new(shape: ColumnStatisticsList, location_name: "ColumnStatisticsList"))
+    GetColumnStatisticsForPartitionResponse.add_member(:errors, Shapes::ShapeRef.new(shape: ColumnErrors, location_name: "Errors"))
+    GetColumnStatisticsForPartitionResponse.struct_class = Types::GetColumnStatisticsForPartitionResponse
+
+    GetColumnStatisticsForTableRequest.add_member(:catalog_id, Shapes::ShapeRef.new(shape: CatalogIdString, location_name: "CatalogId"))
+    GetColumnStatisticsForTableRequest.add_member(:database_name, Shapes::ShapeRef.new(shape: NameString, required: true, location_name: "DatabaseName"))
+    GetColumnStatisticsForTableRequest.add_member(:table_name, Shapes::ShapeRef.new(shape: NameString, required: true, location_name: "TableName"))
+    GetColumnStatisticsForTableRequest.add_member(:column_names, Shapes::ShapeRef.new(shape: GetColumnNamesList, required: true, location_name: "ColumnNames"))
+    GetColumnStatisticsForTableRequest.struct_class = Types::GetColumnStatisticsForTableRequest
+
+    GetColumnStatisticsForTableResponse.add_member(:column_statistics_list, Shapes::ShapeRef.new(shape: ColumnStatisticsList, location_name: "ColumnStatisticsList"))
+    GetColumnStatisticsForTableResponse.add_member(:errors, Shapes::ShapeRef.new(shape: ColumnErrors, location_name: "Errors"))
+    GetColumnStatisticsForTableResponse.struct_class = Types::GetColumnStatisticsForTableResponse
 
     GetConnectionRequest.add_member(:catalog_id, Shapes::ShapeRef.new(shape: CatalogIdString, location_name: "CatalogId"))
     GetConnectionRequest.add_member(:name, Shapes::ShapeRef.new(shape: NameString, required: true, location_name: "Name"))
@@ -1981,6 +2118,12 @@ module Aws::Glue
     LocationMap.key = Shapes::ShapeRef.new(shape: ColumnValuesString)
     LocationMap.value = Shapes::ShapeRef.new(shape: ColumnValuesString)
 
+    LongColumnStatisticsData.add_member(:minimum_value, Shapes::ShapeRef.new(shape: Long, location_name: "MinimumValue"))
+    LongColumnStatisticsData.add_member(:maximum_value, Shapes::ShapeRef.new(shape: Long, location_name: "MaximumValue"))
+    LongColumnStatisticsData.add_member(:number_of_nulls, Shapes::ShapeRef.new(shape: NonNegativeLong, required: true, location_name: "NumberOfNulls"))
+    LongColumnStatisticsData.add_member(:number_of_distinct_values, Shapes::ShapeRef.new(shape: NonNegativeLong, required: true, location_name: "NumberOfDistinctValues"))
+    LongColumnStatisticsData.struct_class = Types::LongColumnStatisticsData
+
     MLTransform.add_member(:transform_id, Shapes::ShapeRef.new(shape: HashString, location_name: "TransformId"))
     MLTransform.add_member(:name, Shapes::ShapeRef.new(shape: NameString, location_name: "Name"))
     MLTransform.add_member(:description, Shapes::ShapeRef.new(shape: DescriptionString, location_name: "Description"))
@@ -2327,6 +2470,12 @@ module Aws::Glue
     StorageDescriptor.add_member(:stored_as_sub_directories, Shapes::ShapeRef.new(shape: Boolean, location_name: "StoredAsSubDirectories"))
     StorageDescriptor.struct_class = Types::StorageDescriptor
 
+    StringColumnStatisticsData.add_member(:maximum_length, Shapes::ShapeRef.new(shape: NonNegativeLong, required: true, location_name: "MaximumLength"))
+    StringColumnStatisticsData.add_member(:average_length, Shapes::ShapeRef.new(shape: NonNegativeDouble, required: true, location_name: "AverageLength"))
+    StringColumnStatisticsData.add_member(:number_of_nulls, Shapes::ShapeRef.new(shape: NonNegativeLong, required: true, location_name: "NumberOfNulls"))
+    StringColumnStatisticsData.add_member(:number_of_distinct_values, Shapes::ShapeRef.new(shape: NonNegativeLong, required: true, location_name: "NumberOfDistinctValues"))
+    StringColumnStatisticsData.struct_class = Types::StringColumnStatisticsData
+
     StringList.member = Shapes::ShapeRef.new(shape: GenericString)
 
     Table.add_member(:name, Shapes::ShapeRef.new(shape: NameString, required: true, location_name: "Name"))
@@ -2486,6 +2635,27 @@ module Aws::Glue
     UpdateClassifierRequest.struct_class = Types::UpdateClassifierRequest
 
     UpdateClassifierResponse.struct_class = Types::UpdateClassifierResponse
+
+    UpdateColumnStatisticsForPartitionRequest.add_member(:catalog_id, Shapes::ShapeRef.new(shape: CatalogIdString, location_name: "CatalogId"))
+    UpdateColumnStatisticsForPartitionRequest.add_member(:database_name, Shapes::ShapeRef.new(shape: NameString, required: true, location_name: "DatabaseName"))
+    UpdateColumnStatisticsForPartitionRequest.add_member(:table_name, Shapes::ShapeRef.new(shape: NameString, required: true, location_name: "TableName"))
+    UpdateColumnStatisticsForPartitionRequest.add_member(:partition_values, Shapes::ShapeRef.new(shape: ValueStringList, required: true, location_name: "PartitionValues"))
+    UpdateColumnStatisticsForPartitionRequest.add_member(:column_statistics_list, Shapes::ShapeRef.new(shape: UpdateColumnStatisticsList, required: true, location_name: "ColumnStatisticsList"))
+    UpdateColumnStatisticsForPartitionRequest.struct_class = Types::UpdateColumnStatisticsForPartitionRequest
+
+    UpdateColumnStatisticsForPartitionResponse.add_member(:errors, Shapes::ShapeRef.new(shape: ColumnStatisticsErrors, location_name: "Errors"))
+    UpdateColumnStatisticsForPartitionResponse.struct_class = Types::UpdateColumnStatisticsForPartitionResponse
+
+    UpdateColumnStatisticsForTableRequest.add_member(:catalog_id, Shapes::ShapeRef.new(shape: CatalogIdString, location_name: "CatalogId"))
+    UpdateColumnStatisticsForTableRequest.add_member(:database_name, Shapes::ShapeRef.new(shape: NameString, required: true, location_name: "DatabaseName"))
+    UpdateColumnStatisticsForTableRequest.add_member(:table_name, Shapes::ShapeRef.new(shape: NameString, required: true, location_name: "TableName"))
+    UpdateColumnStatisticsForTableRequest.add_member(:column_statistics_list, Shapes::ShapeRef.new(shape: UpdateColumnStatisticsList, required: true, location_name: "ColumnStatisticsList"))
+    UpdateColumnStatisticsForTableRequest.struct_class = Types::UpdateColumnStatisticsForTableRequest
+
+    UpdateColumnStatisticsForTableResponse.add_member(:errors, Shapes::ShapeRef.new(shape: ColumnStatisticsErrors, location_name: "Errors"))
+    UpdateColumnStatisticsForTableResponse.struct_class = Types::UpdateColumnStatisticsForTableResponse
+
+    UpdateColumnStatisticsList.member = Shapes::ShapeRef.new(shape: ColumnStatistics)
 
     UpdateConnectionRequest.add_member(:catalog_id, Shapes::ShapeRef.new(shape: CatalogIdString, location_name: "CatalogId"))
     UpdateConnectionRequest.add_member(:name, Shapes::ShapeRef.new(shape: NameString, required: true, location_name: "Name"))
@@ -3070,6 +3240,32 @@ module Aws::Glue
         o.errors << Shapes::ShapeRef.new(shape: OperationTimeoutException)
       end)
 
+      api.add_operation(:delete_column_statistics_for_partition, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DeleteColumnStatisticsForPartition"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DeleteColumnStatisticsForPartitionRequest)
+        o.output = Shapes::ShapeRef.new(shape: DeleteColumnStatisticsForPartitionResponse)
+        o.errors << Shapes::ShapeRef.new(shape: EntityNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidInputException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServiceException)
+        o.errors << Shapes::ShapeRef.new(shape: OperationTimeoutException)
+        o.errors << Shapes::ShapeRef.new(shape: GlueEncryptionException)
+      end)
+
+      api.add_operation(:delete_column_statistics_for_table, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DeleteColumnStatisticsForTable"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DeleteColumnStatisticsForTableRequest)
+        o.output = Shapes::ShapeRef.new(shape: DeleteColumnStatisticsForTableResponse)
+        o.errors << Shapes::ShapeRef.new(shape: EntityNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidInputException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServiceException)
+        o.errors << Shapes::ShapeRef.new(shape: OperationTimeoutException)
+        o.errors << Shapes::ShapeRef.new(shape: GlueEncryptionException)
+      end)
+
       api.add_operation(:delete_connection, Seahorse::Model::Operation.new.tap do |o|
         o.name = "DeleteConnection"
         o.http_method = "POST"
@@ -3269,6 +3465,32 @@ module Aws::Glue
             "next_token" => "next_token"
           }
         )
+      end)
+
+      api.add_operation(:get_column_statistics_for_partition, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetColumnStatisticsForPartition"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: GetColumnStatisticsForPartitionRequest)
+        o.output = Shapes::ShapeRef.new(shape: GetColumnStatisticsForPartitionResponse)
+        o.errors << Shapes::ShapeRef.new(shape: EntityNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidInputException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServiceException)
+        o.errors << Shapes::ShapeRef.new(shape: OperationTimeoutException)
+        o.errors << Shapes::ShapeRef.new(shape: GlueEncryptionException)
+      end)
+
+      api.add_operation(:get_column_statistics_for_table, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetColumnStatisticsForTable"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: GetColumnStatisticsForTableRequest)
+        o.output = Shapes::ShapeRef.new(shape: GetColumnStatisticsForTableResponse)
+        o.errors << Shapes::ShapeRef.new(shape: EntityNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidInputException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServiceException)
+        o.errors << Shapes::ShapeRef.new(shape: OperationTimeoutException)
+        o.errors << Shapes::ShapeRef.new(shape: GlueEncryptionException)
       end)
 
       api.add_operation(:get_connection, Seahorse::Model::Operation.new.tap do |o|
@@ -4230,6 +4452,32 @@ module Aws::Glue
         o.errors << Shapes::ShapeRef.new(shape: VersionMismatchException)
         o.errors << Shapes::ShapeRef.new(shape: EntityNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: OperationTimeoutException)
+      end)
+
+      api.add_operation(:update_column_statistics_for_partition, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "UpdateColumnStatisticsForPartition"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: UpdateColumnStatisticsForPartitionRequest)
+        o.output = Shapes::ShapeRef.new(shape: UpdateColumnStatisticsForPartitionResponse)
+        o.errors << Shapes::ShapeRef.new(shape: EntityNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidInputException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServiceException)
+        o.errors << Shapes::ShapeRef.new(shape: OperationTimeoutException)
+        o.errors << Shapes::ShapeRef.new(shape: GlueEncryptionException)
+      end)
+
+      api.add_operation(:update_column_statistics_for_table, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "UpdateColumnStatisticsForTable"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: UpdateColumnStatisticsForTableRequest)
+        o.output = Shapes::ShapeRef.new(shape: UpdateColumnStatisticsForTableResponse)
+        o.errors << Shapes::ShapeRef.new(shape: EntityNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidInputException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServiceException)
+        o.errors << Shapes::ShapeRef.new(shape: OperationTimeoutException)
+        o.errors << Shapes::ShapeRef.new(shape: GlueEncryptionException)
       end)
 
       api.add_operation(:update_connection, Seahorse::Model::Operation.new.tap do |o|

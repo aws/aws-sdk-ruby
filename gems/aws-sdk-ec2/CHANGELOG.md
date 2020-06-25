@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.171.0 (2020-06-25)
+------------------
+
+* Feature - Added support for tag-on-create for Host Reservations in Dedicated Hosts. You can now specify tags when you create a Host Reservation for a Dedicated Host. For more information about tagging, see AWS Tagging Strategies.
+
 1.170.0 (2020-06-23)
 ------------------
 
