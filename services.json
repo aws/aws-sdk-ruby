@@ -614,7 +614,8 @@
       "Aws::S3::Plugins::SseCpk",
       "Aws::S3::Plugins::UrlEncodedKeys",
       "Aws::S3::Plugins::S3Signer",
-      "Aws::S3::Plugins::BucketNameRestrictions"
+      "Aws::S3::Plugins::BucketNameRestrictions",
+      "Aws::S3::Plugins::StreamingRetry"
     ]
   },
   "S3Control": {
