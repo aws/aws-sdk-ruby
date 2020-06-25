@@ -316,7 +316,7 @@ Then(/^I can streaming download object with key "([^"]*)"$/) do |key|
   resp = @obj.get do |chunk|
     expect(chunk).to eq("hello world")
   end
-  expect(resp.body).to be_a(Seahorse::Client::BlockIO)
+  expect(resp.body).to be_a(Aws::S3::Plugins::RetryableBlockIO)
 end
 
 Given(/^I enabled bucket versioning$/) do
