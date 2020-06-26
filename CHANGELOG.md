@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+* Feature - Aws::CloudFormation - Updated the API, and documentation for AWS CloudFormation.
+
+* Feature - Aws::CognitoIdentityProvider - Updated the API for Amazon Cognito Identity Provider.
+
+* Feature - Aws::DatabaseMigrationService - Updated the documentation for AWS Database Migration Service.
+
+* Feature - Aws::QuickSight - Updated the API, and documentation for Amazon QuickSight.
+
+* Feature - Aws::SageMaker - Updated the API, and documentation for Amazon SageMaker Service.
+
 2.11.536 (2020-06-25)
 ------------------
 
