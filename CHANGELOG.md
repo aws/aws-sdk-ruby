@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+2.11.537 (2020-06-26)
+------------------
+
 * Feature - Aws::CloudFormation - Updated the API, and documentation for AWS CloudFormation.
 
 * Feature - Aws::CognitoIdentityProvider - Updated the API for Amazon Cognito Identity Provider.
