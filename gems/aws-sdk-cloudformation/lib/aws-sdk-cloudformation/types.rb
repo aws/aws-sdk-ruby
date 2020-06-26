@@ -3565,6 +3565,12 @@ module Aws::CloudFormation
     #         stack_set_name: "StackSetName", # required
     #         next_token: "NextToken",
     #         max_results: 1,
+    #         filters: [
+    #           {
+    #             name: "DETAILED_STATUS", # accepts DETAILED_STATUS
+    #             values: "StackInstanceFilterValues",
+    #           },
+    #         ],
     #         stack_instance_account: "Account",
     #         stack_instance_region: "Region",
     #       }
@@ -3590,6 +3596,10 @@ module Aws::CloudFormation
     #   request parameter to get the next set of results.
     #   @return [Integer]
     #
+    # @!attribute [rw] filters
+    #   The status that stack instances are filtered by.
+    #   @return [Array<Types::StackInstanceFilter>]
+    #
     # @!attribute [rw] stack_instance_account
     #   The name of the AWS account that you want to list stack instances
     #   for.
@@ -3605,6 +3615,7 @@ module Aws::CloudFormation
       :stack_set_name,
       :next_token,
       :max_results,
+      :filters,
       :stack_instance_account,
       :stack_instance_region)
       SENSITIVE = []
@@ -4955,7 +4966,13 @@ module Aws::CloudFormation
     #
     # @!attribute [rw] resource_type
     #   The type of resource to import into your stack, such as
-    #   `AWS::S3::Bucket`.
+    #   `AWS::S3::Bucket`. For a list of supported resource types, see
+    #   [Resources that support import operations][1] in the AWS
+    #   CloudFormation User Guide.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/resource-import-supported-resources.html
     #   @return [String]
     #
     # @!attribute [rw] logical_resource_id
@@ -5631,6 +5648,10 @@ module Aws::CloudFormation
     #   * `CURRENT`\: The stack is currently up to date with the stack set.
     #   @return [String]
     #
+    # @!attribute [rw] stack_instance_status
+    #   The detailed status of the stack instance.
+    #   @return [Types::StackInstanceComprehensiveStatus]
+    #
     # @!attribute [rw] status_reason
     #   The explanation for the specific status code that is assigned to
     #   this stack instance.
@@ -5680,10 +5701,76 @@ module Aws::CloudFormation
       :stack_id,
       :parameter_overrides,
       :status,
+      :stack_instance_status,
       :status_reason,
       :organizational_unit_id,
       :drift_status,
       :last_drift_check_timestamp)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The detailed status of the stack instance.
+    #
+    # @!attribute [rw] detailed_status
+    #   * `CANCELLED`\: The operation in the specified account and Region
+    #     has been cancelled. This is either because a user has stopped the
+    #     stack set operation, or because the failure tolerance of the stack
+    #     set operation has been exceeded.
+    #
+    #   * `FAILED`\: The operation in the specified account and Region
+    #     failed. If the stack set operation fails in enough accounts within
+    #     a Region, the failure tolerance for the stack set operation as a
+    #     whole might be exceeded.
+    #
+    #   * `INOPERABLE`\: A `DeleteStackInstances` operation has failed and
+    #     left the stack in an unstable state. Stacks in this state are
+    #     excluded from further `UpdateStackSet` operations. You might need
+    #     to perform a `DeleteStackInstances` operation, with `RetainStacks`
+    #     set to `true`, to delete the stack instance, and then delete the
+    #     stack manually.
+    #
+    #   * `PENDING`\: The operation in the specified account and Region has
+    #     yet to start.
+    #
+    #   * `RUNNING`\: The operation in the specified account and Region is
+    #     currently in progress.
+    #
+    #   * `SUCCEEDED`\: The operation in the specified account and Region
+    #     completed successfully.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/StackInstanceComprehensiveStatus AWS API Documentation
+    #
+    class StackInstanceComprehensiveStatus < Struct.new(
+      :detailed_status)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The status that stack instances are filtered by.
+    #
+    # @note When making an API call, you may pass StackInstanceFilter
+    #   data as a hash:
+    #
+    #       {
+    #         name: "DETAILED_STATUS", # accepts DETAILED_STATUS
+    #         values: "StackInstanceFilterValues",
+    #       }
+    #
+    # @!attribute [rw] name
+    #   The type of filter to apply.
+    #   @return [String]
+    #
+    # @!attribute [rw] values
+    #   The status to filter by.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/StackInstanceFilter AWS API Documentation
+    #
+    class StackInstanceFilter < Struct.new(
+      :name,
+      :values)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -5745,6 +5832,10 @@ module Aws::CloudFormation
     #   instance.
     #   @return [String]
     #
+    # @!attribute [rw] stack_instance_status
+    #   The detailed status of the stack instance.
+    #   @return [Types::StackInstanceComprehensiveStatus]
+    #
     # @!attribute [rw] organizational_unit_id
     #   \[`Service-managed` permissions\] The organization root ID or
     #   organizational unit (OU) IDs that you specified for
@@ -5789,6 +5880,7 @@ module Aws::CloudFormation
       :stack_id,
       :status,
       :status_reason,
+      :stack_instance_status,
       :organizational_unit_id,
       :drift_status,
       :last_drift_check_timestamp)

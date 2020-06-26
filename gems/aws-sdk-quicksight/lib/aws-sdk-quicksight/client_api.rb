@@ -52,6 +52,7 @@ module Aws::QuickSight
     ColumnTagList = Shapes::ListShape.new(name: 'ColumnTagList')
     ConcurrentUpdatingException = Shapes::StructureShape.new(name: 'ConcurrentUpdatingException')
     ConflictException = Shapes::StructureShape.new(name: 'ConflictException')
+    CopySourceArn = Shapes::StringShape.new(name: 'CopySourceArn')
     CreateColumnsOperation = Shapes::StructureShape.new(name: 'CreateColumnsOperation')
     CreateDashboardRequest = Shapes::StructureShape.new(name: 'CreateDashboardRequest')
     CreateDashboardResponse = Shapes::StructureShape.new(name: 'CreateDashboardResponse')
@@ -109,6 +110,7 @@ module Aws::QuickSight
     DataSourceErrorInfoType = Shapes::StringShape.new(name: 'DataSourceErrorInfoType')
     DataSourceList = Shapes::ListShape.new(name: 'DataSourceList')
     DataSourceParameters = Shapes::StructureShape.new(name: 'DataSourceParameters')
+    DataSourceParametersList = Shapes::ListShape.new(name: 'DataSourceParametersList')
     DataSourceType = Shapes::StringShape.new(name: 'DataSourceType')
     Database = Shapes::StringShape.new(name: 'Database')
     DateTimeParameter = Shapes::StructureShape.new(name: 'DateTimeParameter')
@@ -637,6 +639,7 @@ module Aws::QuickSight
 
     CredentialPair.add_member(:username, Shapes::ShapeRef.new(shape: Username, required: true, location_name: "Username"))
     CredentialPair.add_member(:password, Shapes::ShapeRef.new(shape: Password, required: true, location_name: "Password"))
+    CredentialPair.add_member(:alternate_data_source_parameters, Shapes::ShapeRef.new(shape: DataSourceParametersList, location_name: "AlternateDataSourceParameters"))
     CredentialPair.struct_class = Types::CredentialPair
 
     CustomSql.add_member(:data_source_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "DataSourceArn"))
@@ -761,12 +764,14 @@ module Aws::QuickSight
     DataSource.add_member(:created_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "CreatedTime"))
     DataSource.add_member(:last_updated_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "LastUpdatedTime"))
     DataSource.add_member(:data_source_parameters, Shapes::ShapeRef.new(shape: DataSourceParameters, location_name: "DataSourceParameters"))
+    DataSource.add_member(:alternate_data_source_parameters, Shapes::ShapeRef.new(shape: DataSourceParametersList, location_name: "AlternateDataSourceParameters"))
     DataSource.add_member(:vpc_connection_properties, Shapes::ShapeRef.new(shape: VpcConnectionProperties, location_name: "VpcConnectionProperties"))
     DataSource.add_member(:ssl_properties, Shapes::ShapeRef.new(shape: SslProperties, location_name: "SslProperties"))
     DataSource.add_member(:error_info, Shapes::ShapeRef.new(shape: DataSourceErrorInfo, location_name: "ErrorInfo"))
     DataSource.struct_class = Types::DataSource
 
     DataSourceCredentials.add_member(:credential_pair, Shapes::ShapeRef.new(shape: CredentialPair, location_name: "CredentialPair"))
+    DataSourceCredentials.add_member(:copy_source_arn, Shapes::ShapeRef.new(shape: CopySourceArn, location_name: "CopySourceArn"))
     DataSourceCredentials.struct_class = Types::DataSourceCredentials
 
     DataSourceErrorInfo.add_member(:type, Shapes::ShapeRef.new(shape: DataSourceErrorInfoType, location_name: "Type"))
@@ -795,6 +800,8 @@ module Aws::QuickSight
     DataSourceParameters.add_member(:teradata_parameters, Shapes::ShapeRef.new(shape: TeradataParameters, location_name: "TeradataParameters"))
     DataSourceParameters.add_member(:twitter_parameters, Shapes::ShapeRef.new(shape: TwitterParameters, location_name: "TwitterParameters"))
     DataSourceParameters.struct_class = Types::DataSourceParameters
+
+    DataSourceParametersList.member = Shapes::ShapeRef.new(shape: DataSourceParameters)
 
     DateTimeParameter.add_member(:name, Shapes::ShapeRef.new(shape: NonEmptyString, required: true, location_name: "Name"))
     DateTimeParameter.add_member(:values, Shapes::ShapeRef.new(shape: TimestampList, required: true, location_name: "Values"))

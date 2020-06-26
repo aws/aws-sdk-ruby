@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.37.0 (2020-06-26)
+------------------
+
+* Feature - This release contains miscellaneous API documentation updates for AWS DMS in response to several customer reported issues.
+
 1.36.0 (2020-06-23)
 ------------------
 

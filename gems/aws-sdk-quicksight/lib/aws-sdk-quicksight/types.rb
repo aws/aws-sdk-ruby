@@ -415,7 +415,7 @@ module Aws::QuickSight
       include Aws::Structure
     end
 
-    # A tag for a column in a `TagColumnOperation` structure. This is a
+    # A tag for a column in a TagColumnOperation structure. This is a
     # variant type structure. For this structure to be valid, only one of
     # the attributes can be non-null.
     #
@@ -587,9 +587,7 @@ module Aws::QuickSight
     # @!attribute [rw] parameters
     #   A structure that contains the parameters of the dashboard. These are
     #   parameter overrides for a dashboard. A dashboard can have any type
-    #   of parameters, and some parameters might accept multiple values. You
-    #   can use the dashboard permissions structure described following to
-    #   override two string parameters that accept multiple values.
+    #   of parameters, and some parameters might accept multiple values.
     #   @return [Types::Parameters]
     #
     # @!attribute [rw] permissions
@@ -599,15 +597,19 @@ module Aws::QuickSight
     #   @return [Array<Types::ResourcePermission>]
     #
     # @!attribute [rw] source_entity
-    #   The source entity from which the dashboard is created. The source
-    #   entity accepts the Amazon Resource Name (ARN) of the source template
-    #   or analysis and also references the replacement datasets for the
-    #   placeholders set when creating the template. The replacement
-    #   datasets need to follow the same schema as the datasets for which
-    #   placeholders were created when creating the template.
+    #   The entity that you are using as a source when you create the
+    #   dashboard. In `SourceEntity`, you specify the type of object you're
+    #   using as source. You can only create a dashboard from a template, so
+    #   you use a `SourceTemplate` entity. If you need to create a dashboard
+    #   from an analysis, first convert the analysis to a template by using
+    #   the CreateTemplate API operation. For `SourceTemplate`, specify the
+    #   Amazon Resource Name (ARN) of the source template. The
+    #   `SourceTemplate`ARN can contain any AWS Account and any
+    #   QuickSight-supported AWS Region.
     #
-    #   If you are creating a dashboard from a source entity in a different
-    #   AWS account, use the ARN of the source template.
+    #   Use the `DataSetReferences` entity within `SourceTemplate` to list
+    #   the replacement datasets for the placeholders listed in the
+    #   original. The schema in each dataset must match its placeholder.
     #   @return [Types::DashboardSourceEntity]
     #
     # @!attribute [rw] tags
@@ -634,8 +636,7 @@ module Aws::QuickSight
     #     option is `ENABLED` by default.
     #
     #   * `VisibilityState` for `SheetControlsOption` - This visibility
-    #     state can be either `COLLAPSED` or `EXPANDED`. The sheet controls
-    #     pane is collapsed by default when set to true. This option is
+    #     state can be either `COLLAPSED` or `EXPANDED`. This option is
     #     `COLLAPSED` by default.
     #   @return [Types::DashboardPublishOptions]
     #
@@ -1021,7 +1022,96 @@ module Aws::QuickSight
     #           credential_pair: {
     #             username: "Username", # required
     #             password: "Password", # required
+    #             alternate_data_source_parameters: [
+    #               {
+    #                 amazon_elasticsearch_parameters: {
+    #                   domain: "Domain", # required
+    #                 },
+    #                 athena_parameters: {
+    #                   work_group: "WorkGroup",
+    #                 },
+    #                 aurora_parameters: {
+    #                   host: "Host", # required
+    #                   port: 1, # required
+    #                   database: "Database", # required
+    #                 },
+    #                 aurora_postgre_sql_parameters: {
+    #                   host: "Host", # required
+    #                   port: 1, # required
+    #                   database: "Database", # required
+    #                 },
+    #                 aws_iot_analytics_parameters: {
+    #                   data_set_name: "DataSetName", # required
+    #                 },
+    #                 jira_parameters: {
+    #                   site_base_url: "SiteBaseUrl", # required
+    #                 },
+    #                 maria_db_parameters: {
+    #                   host: "Host", # required
+    #                   port: 1, # required
+    #                   database: "Database", # required
+    #                 },
+    #                 my_sql_parameters: {
+    #                   host: "Host", # required
+    #                   port: 1, # required
+    #                   database: "Database", # required
+    #                 },
+    #                 postgre_sql_parameters: {
+    #                   host: "Host", # required
+    #                   port: 1, # required
+    #                   database: "Database", # required
+    #                 },
+    #                 presto_parameters: {
+    #                   host: "Host", # required
+    #                   port: 1, # required
+    #                   catalog: "Catalog", # required
+    #                 },
+    #                 rds_parameters: {
+    #                   instance_id: "InstanceId", # required
+    #                   database: "Database", # required
+    #                 },
+    #                 redshift_parameters: {
+    #                   host: "Host",
+    #                   port: 1,
+    #                   database: "Database", # required
+    #                   cluster_id: "ClusterId",
+    #                 },
+    #                 s3_parameters: {
+    #                   manifest_file_location: { # required
+    #                     bucket: "S3Bucket", # required
+    #                     key: "S3Key", # required
+    #                   },
+    #                 },
+    #                 service_now_parameters: {
+    #                   site_base_url: "SiteBaseUrl", # required
+    #                 },
+    #                 snowflake_parameters: {
+    #                   host: "Host", # required
+    #                   database: "Database", # required
+    #                   warehouse: "Warehouse", # required
+    #                 },
+    #                 spark_parameters: {
+    #                   host: "Host", # required
+    #                   port: 1, # required
+    #                 },
+    #                 sql_server_parameters: {
+    #                   host: "Host", # required
+    #                   port: 1, # required
+    #                   database: "Database", # required
+    #                 },
+    #                 teradata_parameters: {
+    #                   host: "Host", # required
+    #                   port: 1, # required
+    #                   database: "Database", # required
+    #                 },
+    #                 twitter_parameters: {
+    #                   query: "Query", # required
+    #                   max_rows: 1, # required
+    #                 },
+    #               },
+    #             ],
     #           },
+    #           copy_source_arn: "CopySourceArn",
     #         },
     #         permissions: [
     #           {
@@ -1568,10 +1658,19 @@ module Aws::QuickSight
     #   @return [Array<Types::ResourcePermission>]
     #
     # @!attribute [rw] source_entity
-    #   The Amazon Resource Name (ARN) of the source entity from which this
-    #   template is being created. Currently, you can create a template from
-    #   an analysis or another template. If the ARN is for an analysis,
-    #   include its dataset references.
+    #   The entity that you are using as a source when you create the
+    #   template. In `SourceEntity`, you specify the type of object you're
+    #   using as source: `SourceTemplate` for a template or `SourceAnalysis`
+    #   for an analysis. Both of these require an Amazon Resource Name
+    #   (ARN). For `SourceTemplate`, specify the ARN of the source template.
+    #   For `SourceAnalysis`, specify the ARN of the source analysis. The
+    #   `SourceTemplate` ARN can contain any AWS Account and any
+    #   QuickSight-supported AWS Region.
+    #
+    #   Use the `DataSetReferences` entity within `SourceTemplate` or
+    #   `SourceAnalysis` to list the replacement datasets for the
+    #   placeholders listed in the original. The schema in each dataset must
+    #   match its placeholder.
     #   @return [Types::TemplateSourceEntity]
     #
     # @!attribute [rw] tags
@@ -1648,6 +1747,94 @@ module Aws::QuickSight
     #       {
     #         username: "Username", # required
     #         password: "Password", # required
+    #         alternate_data_source_parameters: [
+    #           {
+    #             amazon_elasticsearch_parameters: {
+    #               domain: "Domain", # required
+    #             },
+    #             athena_parameters: {
+    #               work_group: "WorkGroup",
+    #             },
+    #             aurora_parameters: {
+    #               host: "Host", # required
+    #               port: 1, # required
+    #               database: "Database", # required
+    #             },
+    #             aurora_postgre_sql_parameters: {
+    #               host: "Host", # required
+    #               port: 1, # required
+    #               database: "Database", # required
+    #             },
+    #             aws_iot_analytics_parameters: {
+    #               data_set_name: "DataSetName", # required
+    #             },
+    #             jira_parameters: {
+    #               site_base_url: "SiteBaseUrl", # required
+    #             },
+    #             maria_db_parameters: {
+    #               host: "Host", # required
+    #               port: 1, # required
+    #               database: "Database", # required
+    #             },
+    #             my_sql_parameters: {
+    #               host: "Host", # required
+    #               port: 1, # required
+    #               database: "Database", # required
+    #             },
+    #             postgre_sql_parameters: {
+    #               host: "Host", # required
+    #               port: 1, # required
+    #               database: "Database", # required
+    #             },
+    #             presto_parameters: {
+    #               host: "Host", # required
+    #               port: 1, # required
+    #               catalog: "Catalog", # required
+    #             },
+    #             rds_parameters: {
+    #               instance_id: "InstanceId", # required
+    #               database: "Database", # required
+    #             },
+    #             redshift_parameters: {
+    #               host: "Host",
+    #               port: 1,
+    #               database: "Database", # required
+    #               cluster_id: "ClusterId",
+    #             },
+    #             s3_parameters: {
+    #               manifest_file_location: { # required
+    #                 bucket: "S3Bucket", # required
+    #                 key: "S3Key", # required
+    #               },
+    #             },
+    #             service_now_parameters: {
+    #               site_base_url: "SiteBaseUrl", # required
+    #             },
+    #             snowflake_parameters: {
+    #               host: "Host", # required
+    #               database: "Database", # required
+    #               warehouse: "Warehouse", # required
+    #             },
+    #             spark_parameters: {
+    #               host: "Host", # required
+    #               port: 1, # required
+    #             },
+    #             sql_server_parameters: {
+    #               host: "Host", # required
+    #               port: 1, # required
+    #               database: "Database", # required
+    #             },
+    #             teradata_parameters: {
+    #               host: "Host", # required
+    #               port: 1, # required
+    #               database: "Database", # required
+    #             },
+    #             twitter_parameters: {
+    #               query: "Query", # required
+    #               max_rows: 1, # required
+    #             },
+    #           },
+    #         ],
     #       }
     #
     # @!attribute [rw] username
@@ -1658,11 +1845,25 @@ module Aws::QuickSight
     #   Password.
     #   @return [String]
     #
+    # @!attribute [rw] alternate_data_source_parameters
+    #   A set of alternate data source parameters that you want to share for
+    #   these credentials. The credentials are applied in tandem with the
+    #   data source parameters when you copy a data source by using a create
+    #   or update request. The API compares the `DataSourceParameters`
+    #   structure that's in the request with the structures in the
+    #   `AlternateDataSourceParameters` allowlist. If the structures are an
+    #   exact match, the request is allowed to use the new data source with
+    #   the existing credentials. If the `AlternateDataSourceParameters`
+    #   list is null, the `DataSourceParameters` originally used with these
+    #   `Credentials` is automatically allowed.
+    #   @return [Array<Types::DataSourceParameters>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/CredentialPair AWS API Documentation
     #
     class CredentialPair < Struct.new(
       :username,
-      :password)
+      :password,
+      :alternate_data_source_parameters)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1825,18 +2026,18 @@ module Aws::QuickSight
     #       }
     #
     # @!attribute [rw] operator
-    #   The comparison operator that you want to use as a filter. For
+    #   The comparison operator that you want to use as a filter, for
     #   example, `"Operator": "StringEquals"`.
     #   @return [String]
     #
     # @!attribute [rw] name
-    #   The name of the value that you want to use as a filter. For example,
+    #   The name of the value that you want to use as a filter, for example,
     #   `"Name": "QUICKSIGHT_USER"`.
     #   @return [String]
     #
     # @!attribute [rw] value
     #   The value of the named item, in this case `QUICKSIGHT_USER`, that
-    #   you want to use as a filter. For example, `"Value":
+    #   you want to use as a filter, for example, `"Value":
     #   "arn:aws:quicksight:us-east-1:1:user/default/UserName1"`.
     #   @return [String]
     #
@@ -2265,6 +2466,20 @@ module Aws::QuickSight
     #   structure to be valid, only one of the attributes can be non-null.
     #   @return [Types::DataSourceParameters]
     #
+    # @!attribute [rw] alternate_data_source_parameters
+    #   A set of alternate data source parameters that you want to share for
+    #   the credentials stored with this data source. The credentials are
+    #   applied in tandem with the data source parameters when you copy a
+    #   data source by using a create or update request. The API compares
+    #   the `DataSourceParameters` structure that's in the request with the
+    #   structures in the `AlternateDataSourceParameters` allowlist. If the
+    #   structures are an exact match, the request is allowed to use the
+    #   credentials from this existing data source. If the
+    #   `AlternateDataSourceParameters` list is null, the `Credentials`
+    #   originally used with this `DataSourceParameters` are automatically
+    #   allowed.
+    #   @return [Array<Types::DataSourceParameters>]
+    #
     # @!attribute [rw] vpc_connection_properties
     #   The VPC connection information. You need to use this parameter only
     #   when you want QuickSight to use a VPC connection when connecting to
@@ -2292,6 +2507,7 @@ module Aws::QuickSight
       :created_time,
       :last_updated_time,
       :data_source_parameters,
+      :alternate_data_source_parameters,
       :vpc_connection_properties,
       :ssl_properties,
       :error_info)
@@ -2299,7 +2515,8 @@ module Aws::QuickSight
       include Aws::Structure
     end
 
-    # Data source credentials.
+    # Data source credentials. This is a variant type structure. For this
+    # structure to be valid, only one of the attributes can be non-null.
     #
     # @note When making an API call, you may pass DataSourceCredentials
     #   data as a hash:
@@ -2308,17 +2525,114 @@ module Aws::QuickSight
     #         credential_pair: {
     #           username: "Username", # required
     #           password: "Password", # required
+    #           alternate_data_source_parameters: [
+    #             {
+    #               amazon_elasticsearch_parameters: {
+    #                 domain: "Domain", # required
+    #               },
+    #               athena_parameters: {
+    #                 work_group: "WorkGroup",
+    #               },
+    #               aurora_parameters: {
+    #                 host: "Host", # required
+    #                 port: 1, # required
+    #                 database: "Database", # required
+    #               },
+    #               aurora_postgre_sql_parameters: {
+    #                 host: "Host", # required
+    #                 port: 1, # required
+    #                 database: "Database", # required
+    #               },
+    #               aws_iot_analytics_parameters: {
+    #                 data_set_name: "DataSetName", # required
+    #               },
+    #               jira_parameters: {
+    #                 site_base_url: "SiteBaseUrl", # required
+    #               },
+    #               maria_db_parameters: {
+    #                 host: "Host", # required
+    #                 port: 1, # required
+    #                 database: "Database", # required
+    #               },
+    #               my_sql_parameters: {
+    #                 host: "Host", # required
+    #                 port: 1, # required
+    #                 database: "Database", # required
+    #               },
+    #               postgre_sql_parameters: {
+    #                 host: "Host", # required
+    #                 port: 1, # required
+    #                 database: "Database", # required
+    #               },
+    #               presto_parameters: {
+    #                 host: "Host", # required
+    #                 port: 1, # required
+    #                 catalog: "Catalog", # required
+    #               },
+    #               rds_parameters: {
+    #                 instance_id: "InstanceId", # required
+    #                 database: "Database", # required
+    #               },
+    #               redshift_parameters: {
+    #                 host: "Host",
+    #                 port: 1,
+    #                 database: "Database", # required
+    #                 cluster_id: "ClusterId",
+    #               },
+    #               s3_parameters: {
+    #                 manifest_file_location: { # required
+    #                   bucket: "S3Bucket", # required
+    #                   key: "S3Key", # required
+    #                 },
+    #               },
+    #               service_now_parameters: {
+    #                 site_base_url: "SiteBaseUrl", # required
+    #               },
+    #               snowflake_parameters: {
+    #                 host: "Host", # required
+    #                 database: "Database", # required
+    #                 warehouse: "Warehouse", # required
+    #               },
+    #               spark_parameters: {
+    #                 host: "Host", # required
+    #                 port: 1, # required
+    #               },
+    #               sql_server_parameters: {
+    #                 host: "Host", # required
+    #                 port: 1, # required
+    #                 database: "Database", # required
+    #               },
+    #               teradata_parameters: {
+    #                 host: "Host", # required
+    #                 port: 1, # required
+    #                 database: "Database", # required
+    #               },
+    #               twitter_parameters: {
+    #                 query: "Query", # required
+    #                 max_rows: 1, # required
+    #               },
+    #             },
+    #           ],
     #         },
+    #         copy_source_arn: "CopySourceArn",
     #       }
     #
     # @!attribute [rw] credential_pair
-    #   Credential pair.
+    #   Credential pair. For more information, see CredentialPair.
     #   @return [Types::CredentialPair]
+    #
+    # @!attribute [rw] copy_source_arn
+    #   The Amazon Resource Name (ARN) of a data source that has the
+    #   credential pair that you want to use. When `CopySourceArn` is not
+    #   null, the credential pair from the data source in the ARN is used as
+    #   the credentials for the `DataSourceCredentials` structure.
+    #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/DataSourceCredentials AWS API Documentation
     #
     class DataSourceCredentials < Struct.new(
-      :credential_pair)
+      :credential_pair,
+      :copy_source_arn)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2940,10 +3254,10 @@ module Aws::QuickSight
     #   @return [String]
     #
     # @!attribute [rw] alias_name
-    #   The name for the template alias. If you name a specific alias, you
+    #   The name for the template alias. To delete a specific alias, you
     #   delete the version that the alias points to. You can specify the
-    #   latest version of the template by providing the keyword `$LATEST` in
-    #   the `AliasName` parameter.
+    #   alias name, or specify the latest version of the template by
+    #   providing the keyword `$LATEST` in the `AliasName` parameter.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/DeleteTemplateAliasRequest AWS API Documentation
@@ -2969,7 +3283,7 @@ module Aws::QuickSight
     #   @return [String]
     #
     # @!attribute [rw] arn
-    #   The Amazon Resource Name (ARN) of the resource.
+    #   The Amazon Resource Name (ARN) of the template you want to delete.
     #   @return [String]
     #
     # @!attribute [rw] request_id
@@ -4062,10 +4376,10 @@ module Aws::QuickSight
     end
 
     # @!attribute [rw] embed_url
-    #   An URL that you can put into your server-side webpage to embed your
-    #   dashboard. This URL is valid for 5 minutes, and the resulting
-    #   session is valid for 10 hours. The API provides the URL with an
-    #   `auth_code` value that enables a single sign-on session.
+    #   A single-use URL that you can put into your server-side webpage to
+    #   embed your dashboard. This URL is valid for 5 minutes. The API
+    #   provides the URL with an `auth_code` value that enables one (and
+    #   only one) sign-on to a user session that is valid for 10 hours.
     #   @return [String]
     #
     # @!attribute [rw] status
@@ -6223,7 +6537,7 @@ module Aws::QuickSight
     #   @return [String]
     #
     # @!attribute [rw] resource_type
-    #   The AWS request ID for this request.
+    #   The resource type for this request.
     #   @return [String]
     #
     # @!attribute [rw] request_id
@@ -6246,7 +6560,7 @@ module Aws::QuickSight
     #   @return [String]
     #
     # @!attribute [rw] resource_type
-    #   The AWS request ID for this request.
+    #   The resource type for this request.
     #   @return [String]
     #
     # @!attribute [rw] request_id
@@ -6455,7 +6769,7 @@ module Aws::QuickSight
     #
     # @!attribute [rw] filters
     #   The filters to apply to the search. Currently, you can search only
-    #   by user name. For example, `"Filters": [ \{ "Name":
+    #   by user name, for example, `"Filters": [ \{ "Name":
     #   "QUICKSIGHT_USER", "Operator": "StringEquals", "Value":
     #   "arn:aws:quicksight:us-east-1:1:user/default/UserName1" \} ]`
     #   @return [Array<Types::DashboardSearchFilter>]
@@ -7567,16 +7881,25 @@ module Aws::QuickSight
     #   @return [String]
     #
     # @!attribute [rw] source_entity
-    #   The template or analysis from which the dashboard is created. The
-    #   `SouceTemplate` entity accepts the Amazon Resource Name (ARN) of the
-    #   template and also references to replacement datasets for the
-    #   placeholders set when creating the template. The replacement
-    #   datasets need to follow the same schema as the datasets for which
-    #   placeholders were created when creating the template.
+    #   The entity that you are using as a source when you update the
+    #   dashboard. In `SourceEntity`, you specify the type of object you're
+    #   using as source. You can only update a dashboard from a template, so
+    #   you use a `SourceTemplate` entity. If you need to update a dashboard
+    #   from an analysis, first convert the analysis to a template by using
+    #   the CreateTemplate API operation. For `SourceTemplate`, specify the
+    #   Amazon Resource Name (ARN) of the source template. The
+    #   `SourceTemplate` ARN can contain any AWS Account and any
+    #   QuickSight-supported AWS Region.
+    #
+    #   Use the `DataSetReferences` entity within `SourceTemplate` to list
+    #   the replacement datasets for the placeholders listed in the
+    #   original. The schema in each dataset must match its placeholder.
     #   @return [Types::DashboardSourceEntity]
     #
     # @!attribute [rw] parameters
-    #   A structure that contains the parameters of the dashboard.
+    #   A structure that contains the parameters of the dashboard. These are
+    #   parameter overrides for a dashboard. A dashboard can have any type
+    #   of parameters, and some parameters might accept multiple values.
     #   @return [Types::Parameters]
     #
     # @!attribute [rw] version_description
@@ -7598,8 +7921,7 @@ module Aws::QuickSight
     #     option is `ENABLED` by default.
     #
     #   * `VisibilityState` for `SheetControlsOption` - This visibility
-    #     state can be either `COLLAPSED` or `EXPANDED`. The sheet controls
-    #     pane is collapsed by default when set to true. This option is
+    #     state can be either `COLLAPSED` or `EXPANDED`. This option is
     #     `COLLAPSED` by default.
     #   @return [Types::DashboardPublishOptions]
     #
@@ -8112,7 +8434,96 @@ module Aws::QuickSight
     #           credential_pair: {
     #             username: "Username", # required
     #             password: "Password", # required
+    #             alternate_data_source_parameters: [
+    #               {
+    #                 amazon_elasticsearch_parameters: {
+    #                   domain: "Domain", # required
+    #                 },
+    #                 athena_parameters: {
+    #                   work_group: "WorkGroup",
+    #                 },
+    #                 aurora_parameters: {
+    #                   host: "Host", # required
+    #                   port: 1, # required
+    #                   database: "Database", # required
+    #                 },
+    #                 aurora_postgre_sql_parameters: {
+    #                   host: "Host", # required
+    #                   port: 1, # required
+    #                   database: "Database", # required
+    #                 },
+    #                 aws_iot_analytics_parameters: {
+    #                   data_set_name: "DataSetName", # required
+    #                 },
+    #                 jira_parameters: {
+    #                   site_base_url: "SiteBaseUrl", # required
+    #                 },
+    #                 maria_db_parameters: {
+    #                   host: "Host", # required
+    #                   port: 1, # required
+    #                   database: "Database", # required
+    #                 },
+    #                 my_sql_parameters: {
+    #                   host: "Host", # required
+    #                   port: 1, # required
+    #                   database: "Database", # required
+    #                 },
+    #                 postgre_sql_parameters: {
+    #                   host: "Host", # required
+    #                   port: 1, # required
+    #                   database: "Database", # required
+    #                 },
+    #                 presto_parameters: {
+    #                   host: "Host", # required
+    #                   port: 1, # required
+    #                   catalog: "Catalog", # required
+    #                 },
+    #                 rds_parameters: {
+    #                   instance_id: "InstanceId", # required
+    #                   database: "Database", # required
+    #                 },
+    #                 redshift_parameters: {
+    #                   host: "Host",
+    #                   port: 1,
+    #                   database: "Database", # required
+    #                   cluster_id: "ClusterId",
+    #                 },
+    #                 s3_parameters: {
+    #                   manifest_file_location: { # required
+    #                     bucket: "S3Bucket", # required
+    #                     key: "S3Key", # required
+    #                   },
+    #                 },
+    #                 service_now_parameters: {
+    #                   site_base_url: "SiteBaseUrl", # required
+    #                 },
+    #                 snowflake_parameters: {
+    #                   host: "Host", # required
+    #                   database: "Database", # required
+    #                   warehouse: "Warehouse", # required
+    #                 },
+    #                 spark_parameters: {
+    #                   host: "Host", # required
+    #                   port: 1, # required
+    #                 },
+    #                 sql_server_parameters: {
+    #                   host: "Host", # required
+    #                   port: 1, # required
+    #                   database: "Database", # required
+    #                 },
+    #                 teradata_parameters: {
+    #                   host: "Host", # required
+    #                   port: 1, # required
+    #                   database: "Database", # required
+    #                 },
+    #                 twitter_parameters: {
+    #                   query: "Query", # required
+    #                   max_rows: 1, # required
+    #                 },
+    #               },
+    #             ],
     #           },
+    #           copy_source_arn: "CopySourceArn",
     #         },
     #         vpc_connection_properties: {
     #           vpc_connection_arn: "Arn", # required
@@ -8557,9 +8968,19 @@ module Aws::QuickSight
     #   @return [String]
     #
     # @!attribute [rw] source_entity
-    #   The source QuickSight entity from which this template is being
-    #   updated. You can currently update templates from an Analysis or
-    #   another template.
+    #   The entity that you are using as a source when you update the
+    #   template. In `SourceEntity`, you specify the type of object you're
+    #   using as source: `SourceTemplate` for a template or `SourceAnalysis`
+    #   for an analysis. Both of these require an Amazon Resource Name
+    #   (ARN). For `SourceTemplate`, specify the ARN of the source template.
+    #   For `SourceAnalysis`, specify the ARN of the source analysis. The
+    #   `SourceTemplate` ARN can contain any AWS Account and any
+    #   QuickSight-supported AWS Region.
+    #
+    #   Use the `DataSetReferences` entity within `SourceTemplate` or
+    #   `SourceAnalysis` to list the replacement datasets for the
+    #   placeholders listed in the original. The schema in each dataset must
+    #   match its placeholder.
     #   @return [Types::TemplateSourceEntity]
     #
     # @!attribute [rw] version_description

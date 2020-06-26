@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.62.0 (2020-06-26)
+------------------
+
+* Feature - The new 'ModelClientConfig' parameter being added for CreateTransformJob and DescribeTransformJob api actions enable customers to configure model invocation related parameters such as timeout and retry.
+
 1.61.0 (2020-06-23)
 ------------------
 

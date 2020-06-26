@@ -426,6 +426,8 @@ module Aws::SageMaker
     IntegerParameterRange = Shapes::StructureShape.new(name: 'IntegerParameterRange')
     IntegerParameterRangeSpecification = Shapes::StructureShape.new(name: 'IntegerParameterRangeSpecification')
     IntegerParameterRanges = Shapes::ListShape.new(name: 'IntegerParameterRanges')
+    InvocationsMaxRetries = Shapes::IntegerShape.new(name: 'InvocationsMaxRetries')
+    InvocationsTimeoutInSeconds = Shapes::IntegerShape.new(name: 'InvocationsTimeoutInSeconds')
     JobReferenceCode = Shapes::StringShape.new(name: 'JobReferenceCode')
     JobReferenceCodeContains = Shapes::StringShape.new(name: 'JobReferenceCodeContains')
     JoinSource = Shapes::StringShape.new(name: 'JoinSource')
@@ -549,6 +551,7 @@ module Aws::SageMaker
     MetricValue = Shapes::FloatShape.new(name: 'MetricValue')
     ModelArn = Shapes::StringShape.new(name: 'ModelArn')
     ModelArtifacts = Shapes::StructureShape.new(name: 'ModelArtifacts')
+    ModelClientConfig = Shapes::StructureShape.new(name: 'ModelClientConfig')
     ModelName = Shapes::StringShape.new(name: 'ModelName')
     ModelNameContains = Shapes::StringShape.new(name: 'ModelNameContains')
     ModelPackageArn = Shapes::StringShape.new(name: 'ModelPackageArn')
@@ -1444,6 +1447,7 @@ module Aws::SageMaker
     CreateTransformJobRequest.add_member(:transform_job_name, Shapes::ShapeRef.new(shape: TransformJobName, required: true, location_name: "TransformJobName"))
     CreateTransformJobRequest.add_member(:model_name, Shapes::ShapeRef.new(shape: ModelName, required: true, location_name: "ModelName"))
     CreateTransformJobRequest.add_member(:max_concurrent_transforms, Shapes::ShapeRef.new(shape: MaxConcurrentTransforms, location_name: "MaxConcurrentTransforms"))
+    CreateTransformJobRequest.add_member(:model_client_config, Shapes::ShapeRef.new(shape: ModelClientConfig, location_name: "ModelClientConfig"))
     CreateTransformJobRequest.add_member(:max_payload_in_mb, Shapes::ShapeRef.new(shape: MaxPayloadInMB, location_name: "MaxPayloadInMB"))
     CreateTransformJobRequest.add_member(:batch_strategy, Shapes::ShapeRef.new(shape: BatchStrategy, location_name: "BatchStrategy"))
     CreateTransformJobRequest.add_member(:environment, Shapes::ShapeRef.new(shape: TransformEnvironmentMap, location_name: "Environment"))
@@ -2007,6 +2011,7 @@ module Aws::SageMaker
     DescribeTransformJobResponse.add_member(:failure_reason, Shapes::ShapeRef.new(shape: FailureReason, location_name: "FailureReason"))
     DescribeTransformJobResponse.add_member(:model_name, Shapes::ShapeRef.new(shape: ModelName, required: true, location_name: "ModelName"))
     DescribeTransformJobResponse.add_member(:max_concurrent_transforms, Shapes::ShapeRef.new(shape: MaxConcurrentTransforms, location_name: "MaxConcurrentTransforms"))
+    DescribeTransformJobResponse.add_member(:model_client_config, Shapes::ShapeRef.new(shape: ModelClientConfig, location_name: "ModelClientConfig"))
     DescribeTransformJobResponse.add_member(:max_payload_in_mb, Shapes::ShapeRef.new(shape: MaxPayloadInMB, location_name: "MaxPayloadInMB"))
     DescribeTransformJobResponse.add_member(:batch_strategy, Shapes::ShapeRef.new(shape: BatchStrategy, location_name: "BatchStrategy"))
     DescribeTransformJobResponse.add_member(:environment, Shapes::ShapeRef.new(shape: TransformEnvironmentMap, location_name: "Environment"))
@@ -2908,6 +2913,10 @@ module Aws::SageMaker
 
     ModelArtifacts.add_member(:s3_model_artifacts, Shapes::ShapeRef.new(shape: S3Uri, required: true, location_name: "S3ModelArtifacts"))
     ModelArtifacts.struct_class = Types::ModelArtifacts
+
+    ModelClientConfig.add_member(:invocations_timeout_in_seconds, Shapes::ShapeRef.new(shape: InvocationsTimeoutInSeconds, location_name: "InvocationsTimeoutInSeconds"))
+    ModelClientConfig.add_member(:invocations_max_retries, Shapes::ShapeRef.new(shape: InvocationsMaxRetries, location_name: "InvocationsMaxRetries"))
+    ModelClientConfig.struct_class = Types::ModelClientConfig
 
     ModelPackageContainerDefinition.add_member(:container_hostname, Shapes::ShapeRef.new(shape: ContainerHostname, location_name: "ContainerHostname"))
     ModelPackageContainerDefinition.add_member(:image, Shapes::ShapeRef.new(shape: Image, required: true, location_name: "Image"))

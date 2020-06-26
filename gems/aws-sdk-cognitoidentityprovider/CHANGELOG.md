@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.41.0 (2020-06-26)
+------------------
+
+* Feature - Don't require Authorization for InitiateAuth and RespondToAuthChallenge.
+
 1.40.0 (2020-06-23)
 ------------------
 

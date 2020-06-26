@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.40.0 (2020-06-26)
+------------------
+
+* Feature - ListStackInstances and DescribeStackInstance now return a new `StackInstanceStatus` object that contains `DetailedStatus` values: a disambiguation of the more generic `Status` value. ListStackInstances output can now be filtered on `DetailedStatus` using the new `Filters` parameter.
+
 1.39.0 (2020-06-23)
 ------------------
 

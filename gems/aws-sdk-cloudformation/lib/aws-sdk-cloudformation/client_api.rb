@@ -281,6 +281,12 @@ module Aws::CloudFormation
     StackEvents = Shapes::ListShape.new(name: 'StackEvents')
     StackId = Shapes::StringShape.new(name: 'StackId')
     StackInstance = Shapes::StructureShape.new(name: 'StackInstance')
+    StackInstanceComprehensiveStatus = Shapes::StructureShape.new(name: 'StackInstanceComprehensiveStatus')
+    StackInstanceDetailedStatus = Shapes::StringShape.new(name: 'StackInstanceDetailedStatus')
+    StackInstanceFilter = Shapes::StructureShape.new(name: 'StackInstanceFilter')
+    StackInstanceFilterName = Shapes::StringShape.new(name: 'StackInstanceFilterName')
+    StackInstanceFilterValues = Shapes::StringShape.new(name: 'StackInstanceFilterValues')
+    StackInstanceFilters = Shapes::ListShape.new(name: 'StackInstanceFilters')
     StackInstanceNotFoundException = Shapes::StructureShape.new(name: 'StackInstanceNotFoundException')
     StackInstanceStatus = Shapes::StringShape.new(name: 'StackInstanceStatus')
     StackInstanceSummaries = Shapes::ListShape.new(name: 'StackInstanceSummaries')
@@ -803,6 +809,7 @@ module Aws::CloudFormation
     ListStackInstancesInput.add_member(:stack_set_name, Shapes::ShapeRef.new(shape: StackSetName, required: true, location_name: "StackSetName"))
     ListStackInstancesInput.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
     ListStackInstancesInput.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location_name: "MaxResults"))
+    ListStackInstancesInput.add_member(:filters, Shapes::ShapeRef.new(shape: StackInstanceFilters, location_name: "Filters"))
     ListStackInstancesInput.add_member(:stack_instance_account, Shapes::ShapeRef.new(shape: Account, location_name: "StackInstanceAccount"))
     ListStackInstancesInput.add_member(:stack_instance_region, Shapes::ShapeRef.new(shape: Region, location_name: "StackInstanceRegion"))
     ListStackInstancesInput.struct_class = Types::ListStackInstancesInput
@@ -1110,11 +1117,21 @@ module Aws::CloudFormation
     StackInstance.add_member(:stack_id, Shapes::ShapeRef.new(shape: StackId, location_name: "StackId"))
     StackInstance.add_member(:parameter_overrides, Shapes::ShapeRef.new(shape: Parameters, location_name: "ParameterOverrides"))
     StackInstance.add_member(:status, Shapes::ShapeRef.new(shape: StackInstanceStatus, location_name: "Status"))
+    StackInstance.add_member(:stack_instance_status, Shapes::ShapeRef.new(shape: StackInstanceComprehensiveStatus, location_name: "StackInstanceStatus"))
     StackInstance.add_member(:status_reason, Shapes::ShapeRef.new(shape: Reason, location_name: "StatusReason"))
     StackInstance.add_member(:organizational_unit_id, Shapes::ShapeRef.new(shape: OrganizationalUnitId, location_name: "OrganizationalUnitId"))
     StackInstance.add_member(:drift_status, Shapes::ShapeRef.new(shape: StackDriftStatus, location_name: "DriftStatus"))
     StackInstance.add_member(:last_drift_check_timestamp, Shapes::ShapeRef.new(shape: Timestamp, location_name: "LastDriftCheckTimestamp"))
     StackInstance.struct_class = Types::StackInstance
+
+    StackInstanceComprehensiveStatus.add_member(:detailed_status, Shapes::ShapeRef.new(shape: StackInstanceDetailedStatus, location_name: "DetailedStatus"))
+    StackInstanceComprehensiveStatus.struct_class = Types::StackInstanceComprehensiveStatus
+
+    StackInstanceFilter.add_member(:name, Shapes::ShapeRef.new(shape: StackInstanceFilterName, location_name: "Name"))
+    StackInstanceFilter.add_member(:values, Shapes::ShapeRef.new(shape: StackInstanceFilterValues, location_name: "Values"))
+    StackInstanceFilter.struct_class = Types::StackInstanceFilter
+
+    StackInstanceFilters.member = Shapes::ShapeRef.new(shape: StackInstanceFilter)
 
     StackInstanceNotFoundException.struct_class = Types::StackInstanceNotFoundException
 
@@ -1126,6 +1143,7 @@ module Aws::CloudFormation
     StackInstanceSummary.add_member(:stack_id, Shapes::ShapeRef.new(shape: StackId, location_name: "StackId"))
     StackInstanceSummary.add_member(:status, Shapes::ShapeRef.new(shape: StackInstanceStatus, location_name: "Status"))
     StackInstanceSummary.add_member(:status_reason, Shapes::ShapeRef.new(shape: Reason, location_name: "StatusReason"))
+    StackInstanceSummary.add_member(:stack_instance_status, Shapes::ShapeRef.new(shape: StackInstanceComprehensiveStatus, location_name: "StackInstanceStatus"))
     StackInstanceSummary.add_member(:organizational_unit_id, Shapes::ShapeRef.new(shape: OrganizationalUnitId, location_name: "OrganizationalUnitId"))
     StackInstanceSummary.add_member(:drift_status, Shapes::ShapeRef.new(shape: StackDriftStatus, location_name: "DriftStatus"))
     StackInstanceSummary.add_member(:last_drift_check_timestamp, Shapes::ShapeRef.new(shape: Timestamp, location_name: "LastDriftCheckTimestamp"))

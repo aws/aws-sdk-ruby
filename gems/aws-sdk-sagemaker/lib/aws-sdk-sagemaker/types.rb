@@ -4880,6 +4880,10 @@ module Aws::SageMaker
     #         transform_job_name: "TransformJobName", # required
     #         model_name: "ModelName", # required
     #         max_concurrent_transforms: 1,
+    #         model_client_config: {
+    #           invocations_timeout_in_seconds: 1,
+    #           invocations_max_retries: 1,
+    #         },
     #         max_payload_in_mb: 1,
     #         batch_strategy: "MultiRecord", # accepts MultiRecord, SingleRecord
     #         environment: {
@@ -4950,6 +4954,11 @@ module Aws::SageMaker
     #
     #   [1]: https://docs.aws.amazon.com/sagemaker/latest/dg/your-algorithms-batch-code.html#your-algorithms-batch-code-how-containe-serves-requests
     #   @return [Integer]
+    #
+    # @!attribute [rw] model_client_config
+    #   Configures the timeout and maximum number of retries for processing
+    #   a transform job invocation.
+    #   @return [Types::ModelClientConfig]
     #
     # @!attribute [rw] max_payload_in_mb
     #   The maximum allowed size of the payload, in MB. A *payload* is the
@@ -5038,6 +5047,7 @@ module Aws::SageMaker
       :transform_job_name,
       :model_name,
       :max_concurrent_transforms,
+      :model_client_config,
       :max_payload_in_mb,
       :batch_strategy,
       :environment,
@@ -8154,6 +8164,7 @@ module Aws::SageMaker
     #   @return [String]
     #
     # @!attribute [rw] auto_ml_job_arn
+    #   The Amazon Resource Name (ARN) of an AutoML job.
     #   @return [String]
     #
     # @!attribute [rw] model_artifacts
@@ -8492,6 +8503,11 @@ module Aws::SageMaker
     #   can be launched in a transform job. The default value is 1.
     #   @return [Integer]
     #
+    # @!attribute [rw] model_client_config
+    #   The timeout and maximum number of retries for processing a transform
+    #   job invocation.
+    #   @return [Types::ModelClientConfig]
+    #
     # @!attribute [rw] max_payload_in_mb
     #   The maximum payload size, in MB, used in the transform job.
     #   @return [Integer]
@@ -8548,6 +8564,7 @@ module Aws::SageMaker
     #   @return [String]
     #
     # @!attribute [rw] auto_ml_job_arn
+    #   The Amazon Resource Name (ARN) of the AutoML transform job.
     #   @return [String]
     #
     # @!attribute [rw] data_processing
@@ -8578,6 +8595,7 @@ module Aws::SageMaker
       :failure_reason,
       :model_name,
       :max_concurrent_transforms,
+      :model_client_config,
       :max_payload_in_mb,
       :batch_strategy,
       :environment,
@@ -9470,6 +9488,14 @@ module Aws::SageMaker
     #
     #   : The value of `Name` doesn't equal `Value`.
     #
+    #   Exists
+    #
+    #   : The `Name` property exists.
+    #
+    #   NotExists
+    #
+    #   : The `Name` property does not exist.
+    #
     #   GreaterThan
     #
     #   : The value of `Name` is greater than `Value`. Not supported for
@@ -9490,24 +9516,46 @@ module Aws::SageMaker
     #   : The value of `Name` is less than or equal to `Value`. Not
     #     supported for text properties.
     #
-    #   Contains
-    #
-    #   : The value of `Name` contains the string `Value`. A
-    #     `SearchExpression` can include only one `Contains` operator. Only
-    #     supported for text properties.
-    #
-    #   Exists
-    #
-    #   : The `Name` property exists.
-    #
-    #   NotExists
-    #
-    #   : The `Name` property does not exist.
-    #
     #   In
     #
     #   : The value of `Name` is one of the comma delimited strings in
     #     `Value`. Only supported for text properties.
+    #
+    #   Contains
+    #
+    #   : The value of `Name` contains the string `Value`. Only supported
+    #     for text properties.
+    #
+    #     A `SearchExpression` can include the `Contains` operator multiple
+    #     times when the value of `Name` is one of the following:
+    #
+    #     * `Experiment.DisplayName`
+    #
+    #     * `Experiment.ExperimentName`
+    #
+    #     * `Experiment.Tags`
+    #
+    #     * `Trial.DisplayName`
+    #
+    #     * `Trial.TrialName`
+    #
+    #     * `Trial.Tags`
+    #
+    #     * `TrialComponent.DisplayName`
+    #
+    #     * `TrialComponent.TrialComponentName`
+    #
+    #     * `TrialComponent.Tags`
+    #
+    #     * `TrialComponent.InputArtifacts`
+    #
+    #     * `TrialComponent.OutputArtifacts`
+    #
+    #     A `SearchExpression` can include only one `Contains` operator for
+    #     all other values of `Name`. In these cases, if you include
+    #     multiple `Contains` operators in the `SearchExpression`, the
+    #     result is the following error message: "`'CONTAINS' operator
+    #     usage limit of 1 exceeded.`"
     #   @return [String]
     #
     # @!attribute [rw] value
@@ -14907,6 +14955,34 @@ module Aws::SageMaker
       include Aws::Structure
     end
 
+    # Configures the timeout and maximum number of retries for processing a
+    # transform job invocation.
+    #
+    # @note When making an API call, you may pass ModelClientConfig
+    #   data as a hash:
+    #
+    #       {
+    #         invocations_timeout_in_seconds: 1,
+    #         invocations_max_retries: 1,
+    #       }
+    #
+    # @!attribute [rw] invocations_timeout_in_seconds
+    #   The timeout value in seconds for an invocation request.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] invocations_max_retries
+    #   The maximum number of retries when invocation requests are failing.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/ModelClientConfig AWS API Documentation
+    #
+    class ModelClientConfig < Struct.new(
+      :invocations_timeout_in_seconds,
+      :invocations_max_retries)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Describes the Docker container for the model package.
     #
     # @note When making an API call, you may pass ModelPackageContainerDefinition
@@ -17855,8 +17931,7 @@ module Aws::SageMaker
     #
     # * A list of `Filter` objects. Each filter defines a simple Boolean
     #   expression comprised of a resource property name, Boolean operator,
-    #   and value. A `SearchExpression` can include only one `Contains`
-    #   operator.
+    #   and value.
     #
     # * A list of `NestedFilter` objects. Each nested filter defines a list
     #   of Boolean expressions using a list of resource properties. A nested

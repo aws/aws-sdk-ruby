@@ -3443,6 +3443,10 @@ module Aws::SageMaker
     #
     #   [1]: https://docs.aws.amazon.com/sagemaker/latest/dg/your-algorithms-batch-code.html#your-algorithms-batch-code-how-containe-serves-requests
     #
+    # @option params [Types::ModelClientConfig] :model_client_config
+    #   Configures the timeout and maximum number of retries for processing a
+    #   transform job invocation.
+    #
     # @option params [Integer] :max_payload_in_mb
     #   The maximum allowed size of the payload, in MB. A *payload* is the
     #   data portion of a record (without metadata). The value in
@@ -3524,6 +3528,10 @@ module Aws::SageMaker
     #     transform_job_name: "TransformJobName", # required
     #     model_name: "ModelName", # required
     #     max_concurrent_transforms: 1,
+    #     model_client_config: {
+    #       invocations_timeout_in_seconds: 1,
+    #       invocations_max_retries: 1,
+    #     },
     #     max_payload_in_mb: 1,
     #     batch_strategy: "MultiRecord", # accepts MultiRecord, SingleRecord
     #     environment: {
@@ -6153,6 +6161,7 @@ module Aws::SageMaker
     #   * {Types::DescribeTransformJobResponse#failure_reason #failure_reason} => String
     #   * {Types::DescribeTransformJobResponse#model_name #model_name} => String
     #   * {Types::DescribeTransformJobResponse#max_concurrent_transforms #max_concurrent_transforms} => Integer
+    #   * {Types::DescribeTransformJobResponse#model_client_config #model_client_config} => Types::ModelClientConfig
     #   * {Types::DescribeTransformJobResponse#max_payload_in_mb #max_payload_in_mb} => Integer
     #   * {Types::DescribeTransformJobResponse#batch_strategy #batch_strategy} => String
     #   * {Types::DescribeTransformJobResponse#environment #environment} => Hash&lt;String,String&gt;
@@ -6181,6 +6190,8 @@ module Aws::SageMaker
     #   resp.failure_reason #=> String
     #   resp.model_name #=> String
     #   resp.max_concurrent_transforms #=> Integer
+    #   resp.model_client_config.invocations_timeout_in_seconds #=> Integer
+    #   resp.model_client_config.invocations_max_retries #=> Integer
     #   resp.max_payload_in_mb #=> Integer
     #   resp.batch_strategy #=> String, one of "MultiRecord", "SingleRecord"
     #   resp.environment #=> Hash
@@ -10524,7 +10535,7 @@ module Aws::SageMaker
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-sagemaker'
-      context[:gem_version] = '1.61.0'
+      context[:gem_version] = '1.62.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

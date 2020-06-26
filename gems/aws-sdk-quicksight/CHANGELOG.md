@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.24.0 (2020-06-26)
+------------------
+
+* Feature - Added support for cross-region DataSource credentials copying.
+
 1.23.0 (2020-06-23)
 ------------------
 

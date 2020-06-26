@@ -146,7 +146,7 @@ module Aws::DatabaseMigrationService
       include Aws::Structure
     end
 
-    # The name of the Availability Zone for use during database migration.
+    # The name of an Availability Zone for use during database migration.
     #
     # @!attribute [rw] name
     #   The name of the Availability Zone.
@@ -237,7 +237,16 @@ module Aws::DatabaseMigrationService
     #   @return [String]
     #
     # @!attribute [rw] status
-    #   The connection status.
+    #   The connection status. This parameter can return one of the
+    #   following values:
+    #
+    #   * `"successful"`
+    #
+    #   * `"testing"`
+    #
+    #   * `"failed"`
+    #
+    #   * `"deleting"`
     #   @return [String]
     #
     # @!attribute [rw] last_failure_message
@@ -409,8 +418,8 @@ module Aws::DatabaseMigrationService
     #   `EndpointType` value, include `"mysql"`, `"oracle"`, `"postgres"`,
     #   `"mariadb"`, `"aurora"`, `"aurora-postgresql"`, `"redshift"`,
     #   `"s3"`, `"db2"`, `"azuredb"`, `"sybase"`, `"dynamodb"`, `"mongodb"`,
-    #   `"kinesis"`, `"kafka"`, `"elasticsearch"`, `"documentdb"`, and
-    #   `"sqlserver"`.
+    #   `"kinesis"`, `"kafka"`, `"elasticsearch"`, `"documentdb"`,
+    #   `"sqlserver"`, and `"neptune"`.
     #   @return [String]
     #
     # @!attribute [rw] username
@@ -541,7 +550,8 @@ module Aws::DatabaseMigrationService
     #   Settings in JSON format for the target endpoint for Amazon Kinesis
     #   Data Streams. For more information about the available settings, see
     #   [Using Amazon Kinesis Data Streams as a Target for AWS Database
-    #   Migration Service][1] in the *AWS Database Migration User Guide.*
+    #   Migration Service][1] in the *AWS Database Migration Service User
+    #   Guide.*
     #
     #
     #
@@ -552,7 +562,7 @@ module Aws::DatabaseMigrationService
     #   Settings in JSON format for the target Apache Kafka endpoint. For
     #   more information about the available settings, see [Using Apache
     #   Kafka as a Target for AWS Database Migration Service][1] in the *AWS
-    #   Database Migration User Guide.*
+    #   Database Migration Service User Guide.*
     #
     #
     #
@@ -563,7 +573,7 @@ module Aws::DatabaseMigrationService
     #   Settings in JSON format for the target Elasticsearch endpoint. For
     #   more information about the available settings, see [Extra Connection
     #   Attributes When Using Elasticsearch as a Target for AWS DMS][1] in
-    #   the *AWS Database Migration User Guide.*
+    #   the *AWS Database Migration Service User Guide*.
     #
     #
     #
@@ -572,9 +582,9 @@ module Aws::DatabaseMigrationService
     #
     # @!attribute [rw] neptune_settings
     #   Settings in JSON format for the target Amazon Neptune endpoint. For
-    #   more information about the available settings, see
-    #   [https://docs.aws.amazon.com/dms/latest/userguide/CHAP\_Target.Neptune.html#CHAP\_Target.Neptune.EndpointSettings][1]
-    #   in the *AWS Database Migration Service User Guide.*
+    #   more information about the available settings, see [Specifying
+    #   Endpoint Settings for Amazon Neptune as a Target][1] in the *AWS
+    #   Database Migration Service User Guide.*
     #
     #
     #
@@ -755,7 +765,7 @@ module Aws::DatabaseMigrationService
     #
     #   Constraints:
     #
-    #   * Must contain from 1 to 63 alphanumeric characters or hyphens.
+    #   * Must contain 1-63 alphanumeric characters or hyphens.
     #
     #   * First character must be a letter.
     #
@@ -771,11 +781,17 @@ module Aws::DatabaseMigrationService
     #
     # @!attribute [rw] replication_instance_class
     #   The compute and memory capacity of the replication instance as
-    #   specified by the replication instance class.
+    #   defined for the specified replication instance class. For example to
+    #   specify the instance class dms.c4.large, set this parameter to
+    #   `"dms.c4.large"`.
     #
-    #   Valid Values: `dms.t2.micro | dms.t2.small | dms.t2.medium |
-    #   dms.t2.large | dms.c4.large | dms.c4.xlarge | dms.c4.2xlarge |
-    #   dms.c4.4xlarge `
+    #   For more information on the settings and capacities for the
+    #   available replication instance classes, see [ Selecting the right
+    #   AWS DMS replication instance for your migration][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/dms/latest/userguide/CHAP_ReplicationInstance.html#CHAP_ReplicationInstance.InDepth
     #   @return [String]
     #
     # @!attribute [rw] vpc_security_group_ids
@@ -850,7 +866,12 @@ module Aws::DatabaseMigrationService
     #   @return [Boolean]
     #
     # @!attribute [rw] dns_name_servers
-    #   A list of DNS name servers supported for the replication instance.
+    #   A list of custom DNS name servers supported for the replication
+    #   instance to access your on-premise source or target database. This
+    #   list overrides the default name servers supported by the replication
+    #   instance. You can specify a comma-separated list of internet
+    #   addresses for up to four on-premise DNS name servers. For example:
+    #   `"1.1.1.1,2.2.2.2,3.3.3.3,4.4.4.4"`
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/CreateReplicationInstanceMessage AWS API Documentation
@@ -974,7 +995,7 @@ module Aws::DatabaseMigrationService
     #
     #   Constraints:
     #
-    #   * Must contain from 1 to 255 alphanumeric characters or hyphens.
+    #   * Must contain 1-255 alphanumeric characters or hyphens.
     #
     #   * First character must be a letter.
     #
@@ -1003,7 +1024,7 @@ module Aws::DatabaseMigrationService
     # @!attribute [rw] table_mappings
     #   The table mappings for the task, in JSON format. For more
     #   information, see [Using Table Mapping to Specify Task Settings][1]
-    #   in the *AWS Database Migration User Guide.*
+    #   in the *AWS Database Migration Service User Guide.*
     #
     #
     #
@@ -1077,7 +1098,7 @@ module Aws::DatabaseMigrationService
     #   Supplemental information that the task requires to migrate the data
     #   for certain source and target endpoints. For more information, see
     #   [Specifying Supplemental Data for Task Settings][1] in the *AWS
-    #   Database Migration User Guide.*
+    #   Database Migration Service User Guide.*
     #
     #
     #
@@ -2601,8 +2622,8 @@ module Aws::DatabaseMigrationService
     #   EndpointType, include `"mysql"`, `"oracle"`, `"postgres"`,
     #   `"mariadb"`, `"aurora"`, `"aurora-postgresql"`, `"redshift"`,
     #   `"s3"`, `"db2"`, `"azuredb"`, `"sybase"`, `"dynamodb"`, `"mongodb"`,
-    #   `"kinesis"`, `"kafka"`, `"elasticsearch"`, `"documentdb"`, and
-    #   `"sqlserver"`.
+    #   `"kinesis"`, `"kafka"`, `"elasticsearch"`, `"documentdb"`,
+    #   `"sqlserver"`, and `"neptune"`.
     #   @return [String]
     #
     # @!attribute [rw] engine_display_name
@@ -2730,8 +2751,8 @@ module Aws::DatabaseMigrationService
     #   @return [Types::ElasticsearchSettings]
     #
     # @!attribute [rw] neptune_settings
-    #   The settings for the MongoDB source endpoint. For more information,
-    #   see the `NeptuneSettings` structure.
+    #   The settings for the Amazon Neptune target endpoint. For more
+    #   information, see the `NeptuneSettings` structure.
     #   @return [Types::NeptuneSettings]
     #
     # @!attribute [rw] redshift_settings
@@ -2864,7 +2885,7 @@ module Aws::DatabaseMigrationService
     #   @return [String]
     #
     # @!attribute [rw] subscription_creation_time
-    #   The time the RDS event notification subscription was created.
+    #   The time the AWS DMS event notification subscription was created.
     #   @return [String]
     #
     # @!attribute [rw] source_type
@@ -3416,8 +3437,8 @@ module Aws::DatabaseMigrationService
     #   EndpointType, include `"mysql"`, `"oracle"`, `"postgres"`,
     #   `"mariadb"`, `"aurora"`, `"aurora-postgresql"`, `"redshift"`,
     #   `"s3"`, `"db2"`, `"azuredb"`, `"sybase"`, `"dynamodb"`, `"mongodb"`,
-    #   `"kinesis"`, `"kafka"`, `"elasticsearch"`, `"documentdb"`, and
-    #   `"sqlserver"`.
+    #   `"kinesis"`, `"kafka"`, `"elasticsearch"`, `"documentdb"`,
+    #   `"sqlserver"`, and `"neptune"`.
     #   @return [String]
     #
     # @!attribute [rw] username
@@ -3526,7 +3547,8 @@ module Aws::DatabaseMigrationService
     #   Settings in JSON format for the target endpoint for Amazon Kinesis
     #   Data Streams. For more information about the available settings, see
     #   [Using Amazon Kinesis Data Streams as a Target for AWS Database
-    #   Migration Service][1] in the *AWS Database Migration User Guide.*
+    #   Migration Service][1] in the *AWS Database Migration Service User
+    #   Guide.*
     #
     #
     #
@@ -3537,7 +3559,7 @@ module Aws::DatabaseMigrationService
     #   Settings in JSON format for the target Apache Kafka endpoint. For
     #   more information about the available settings, see [Using Apache
     #   Kafka as a Target for AWS Database Migration Service][1] in the *AWS
-    #   Database Migration User Guide.*
+    #   Database Migration Service User Guide.*
     #
     #
     #
@@ -3548,7 +3570,7 @@ module Aws::DatabaseMigrationService
     #   Settings in JSON format for the target Elasticsearch endpoint. For
     #   more information about the available settings, see [Extra Connection
     #   Attributes When Using Elasticsearch as a Target for AWS DMS][1] in
-    #   the *AWS Database Migration User Guide.*
+    #   the *AWS Database Migration Service User Guide.*
     #
     #
     #
@@ -3557,9 +3579,9 @@ module Aws::DatabaseMigrationService
     #
     # @!attribute [rw] neptune_settings
     #   Settings in JSON format for the target Amazon Neptune endpoint. For
-    #   more information about the available settings, see
-    #   [https://docs.aws.amazon.com/dms/latest/userguide/CHAP\_Target.Neptune.html#CHAP\_Target.Neptune.EndpointSettings][1]
-    #   in the *AWS Database Migration Service User Guide.*
+    #   more information about the available settings, see [Specifying
+    #   Endpoint Settings for Amazon Neptune as a Target][1] in the *AWS
+    #   Database Migration Service User Guide.*
     #
     #
     #
@@ -3707,11 +3729,18 @@ module Aws::DatabaseMigrationService
     #   @return [Boolean]
     #
     # @!attribute [rw] replication_instance_class
-    #   The compute and memory capacity of the replication instance.
+    #   The compute and memory capacity of the replication instance as
+    #   defined for the specified replication instance class. For example to
+    #   specify the instance class dms.c4.large, set this parameter to
+    #   `"dms.c4.large"`.
     #
-    #   Valid Values: `dms.t2.micro | dms.t2.small | dms.t2.medium |
-    #   dms.t2.large | dms.c4.large | dms.c4.xlarge | dms.c4.2xlarge |
-    #   dms.c4.4xlarge `
+    #   For more information on the settings and capacities for the
+    #   available replication instance classes, see [ Selecting the right
+    #   AWS DMS replication instance for your migration][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/dms/latest/userguide/CHAP_ReplicationInstance.html#CHAP_ReplicationInstance.InDepth
     #   @return [String]
     #
     # @!attribute [rw] vpc_security_group_ids
@@ -3877,7 +3906,7 @@ module Aws::DatabaseMigrationService
     #
     #   Constraints:
     #
-    #   * Must contain from 1 to 255 alphanumeric characters or hyphens.
+    #   * Must contain 1-255 alphanumeric characters or hyphens.
     #
     #   * First character must be a letter.
     #
@@ -3954,7 +3983,7 @@ module Aws::DatabaseMigrationService
     #   Supplemental information that the task requires to migrate the data
     #   for certain source and target endpoints. For more information, see
     #   [Specifying Supplemental Data for Task Settings][1] in the *AWS
-    #   Database Migration User Guide.*
+    #   Database Migration Service User Guide.*
     #
     #
     #
@@ -4034,52 +4063,47 @@ module Aws::DatabaseMigrationService
     #   The authentication type you use to access the MongoDB source
     #   endpoint.
     #
-    #   Valid values: NO, PASSWORD
-    #
-    #   When NO is selected, user name and password parameters are not used
-    #   and can be empty.
+    #   When when set to `"no"`, user name and password parameters are not
+    #   used and can be empty.
     #   @return [String]
     #
     # @!attribute [rw] auth_mechanism
     #   The authentication mechanism you use to access the MongoDB source
     #   endpoint.
     #
-    #   Valid values: DEFAULT, MONGODB\_CR, SCRAM\_SHA\_1
-    #
-    #   DEFAULT – For MongoDB version 2.x, use MONGODB\_CR. For MongoDB
-    #   version 3.x, use SCRAM\_SHA\_1. This setting isn't used when
-    #   authType=No.
+    #   For the default value, in MongoDB version 2.x, `"default"` is
+    #   `"mongodb_cr"`. For MongoDB version 3.x or later, `"default"` is
+    #   `"scram_sha_1"`. This setting isn't used when `AuthType` is set to
+    #   `"no"`.
     #   @return [String]
     #
     # @!attribute [rw] nesting_level
     #   Specifies either document or table mode.
     #
-    #   Valid values: NONE, ONE
-    #
-    #   Default value is NONE. Specify NONE to use document mode. Specify
-    #   ONE to use table mode.
+    #   Default value is `"none"`. Specify `"none"` to use document mode.
+    #   Specify `"one"` to use table mode.
     #   @return [String]
     #
     # @!attribute [rw] extract_doc_id
     #   Specifies the document ID. Use this setting when `NestingLevel` is
-    #   set to NONE.
+    #   set to `"none"`.
     #
-    #   Default value is false.
+    #   Default value is `"false"`.
     #   @return [String]
     #
     # @!attribute [rw] docs_to_investigate
     #   Indicates the number of documents to preview to determine the
     #   document organization. Use this setting when `NestingLevel` is set
-    #   to ONE.
+    #   to `"one"`.
     #
-    #   Must be a positive value greater than 0. Default value is 1000.
+    #   Must be a positive value greater than `0`. Default value is `1000`.
     #   @return [String]
     #
     # @!attribute [rw] auth_source
-    #   The MongoDB database name. This setting isn't used when
-    #   `authType=NO`.
+    #   The MongoDB database name. This setting isn't used when `AuthType`
+    #   is set to `"no"`.
     #
-    #   The default is admin.
+    #   The default is `"admin"`.
     #   @return [String]
     #
     # @!attribute [rw] kms_key_id
@@ -4126,10 +4150,10 @@ module Aws::DatabaseMigrationService
     #       }
     #
     # @!attribute [rw] service_access_role_arn
-    #   The ARN of the service role you have created for the Neptune target
-    #   endpoint. For more information, see
-    #   [https://docs.aws.amazon.com/dms/latest/userguide/CHAP\_Target.Neptune.html#CHAP\_Target.Neptune.ServiceRole][1]
-    #   in the *AWS Database Migration Service User Guide.*
+    #   The Amazon Resource Name (ARN) of the service role that you created
+    #   for the Neptune target endpoint. For more information, see [Creating
+    #   an IAM Service Role for Accessing Amazon Neptune as a Target][1] in
+    #   the <i>AWS Database Migration Service User Guide. </i>
     #
     #
     #
@@ -4137,15 +4161,15 @@ module Aws::DatabaseMigrationService
     #   @return [String]
     #
     # @!attribute [rw] s3_bucket_name
-    #   The name of the S3 bucket for AWS DMS to temporarily store migrated
-    #   graph data in CSV files before bulk-loading it to the Neptune target
-    #   database. AWS DMS maps the SQL source data to graph data before
-    #   storing it in these CSV files.
+    #   The name of the Amazon S3 bucket where AWS DMS can temporarily store
+    #   migrated graph data in .csv files before bulk-loading it to the
+    #   Neptune target database. AWS DMS maps the SQL source data to graph
+    #   data before storing it in these .csv files.
     #   @return [String]
     #
     # @!attribute [rw] s3_bucket_folder
-    #   A folder path where you where you want AWS DMS to store migrated
-    #   graph data in the S3 bucket specified by `S3BucketName`
+    #   A folder path where you want AWS DMS to store migrated graph data in
+    #   the S3 bucket specified by `S3BucketName`
     #   @return [String]
     #
     # @!attribute [rw] error_retry_duration
@@ -4155,23 +4179,24 @@ module Aws::DatabaseMigrationService
     #   @return [Integer]
     #
     # @!attribute [rw] max_file_size
-    #   The maximum size in KB of migrated graph data stored in a CSV file
-    #   before AWS DMS bulk-loads the data to the Neptune target database.
-    #   The default is 1048576 KB. If successful, AWS DMS clears the bucket,
-    #   ready to store the next batch of migrated graph data.
+    #   The maximum size in kilobytes of migrated graph data stored in a
+    #   .csv file before AWS DMS bulk-loads the data to the Neptune target
+    #   database. The default is 1,048,576 KB. If the bulk load is
+    #   successful, AWS DMS clears the bucket, ready to store the next batch
+    #   of migrated graph data.
     #   @return [Integer]
     #
     # @!attribute [rw] max_retry_count
-    #   The number of times for AWS DMS to retry a bulk-load of migrated
+    #   The number of times for AWS DMS to retry a bulk load of migrated
     #   graph data to the Neptune target database before raising an error.
     #   The default is 5.
     #   @return [Integer]
     #
     # @!attribute [rw] iam_auth_enabled
-    #   If you want IAM authorization enabled for this endpoint, set this
-    #   parameter to `true` and attach the appropriate role policy document
-    #   to your service role specified by `ServiceAccessRoleArn`. The
-    #   default is `false`.
+    #   If you want AWS Identity and Access Management (IAM) authorization
+    #   enabled for this endpoint, set this parameter to `true`. Then attach
+    #   the appropriate IAM policy document to your service role specified
+    #   by `ServiceAccessRoleArn`. The default is `false`.
     #   @return [Boolean]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/NeptuneSettings AWS API Documentation
@@ -4198,11 +4223,18 @@ module Aws::DatabaseMigrationService
     #   @return [String]
     #
     # @!attribute [rw] replication_instance_class
-    #   The compute and memory capacity of the replication instance.
+    #   The compute and memory capacity of the replication instance as
+    #   defined for the specified replication instance class. For example to
+    #   specify the instance class dms.c4.large, set this parameter to
+    #   `"dms.c4.large"`.
     #
-    #   Valid Values: `dms.t2.micro | dms.t2.small | dms.t2.medium |
-    #   dms.t2.large | dms.c4.large | dms.c4.xlarge | dms.c4.2xlarge |
-    #   dms.c4.4xlarge `
+    #   For more information on the settings and capacities for the
+    #   available replication instance classes, see [ Selecting the right
+    #   AWS DMS replication instance for your migration][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/dms/latest/userguide/CHAP_ReplicationInstance.html#CHAP_ReplicationInstance.InDepth
     #   @return [String]
     #
     # @!attribute [rw] storage_type
@@ -4744,7 +4776,7 @@ module Aws::DatabaseMigrationService
     #
     #   Constraints:
     #
-    #   * Must contain from 1 to 63 alphanumeric characters or hyphens.
+    #   * Must contain 1-63 alphanumeric characters or hyphens.
     #
     #   * First character must be a letter.
     #
@@ -4754,15 +4786,47 @@ module Aws::DatabaseMigrationService
     #   @return [String]
     #
     # @!attribute [rw] replication_instance_class
-    #   The compute and memory capacity of the replication instance.
+    #   The compute and memory capacity of the replication instance as
+    #   defined for the specified replication instance class.
     #
-    #   Valid Values: `dms.t2.micro | dms.t2.small | dms.t2.medium |
-    #   dms.t2.large | dms.c4.large | dms.c4.xlarge | dms.c4.2xlarge |
-    #   dms.c4.4xlarge `
+    #   For more information on the settings and capacities for the
+    #   available replication instance classes, see [ Selecting the right
+    #   AWS DMS replication instance for your migration][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/dms/latest/userguide/CHAP_ReplicationInstance.html#CHAP_ReplicationInstance.InDepth
     #   @return [String]
     #
     # @!attribute [rw] replication_instance_status
-    #   The status of the replication instance.
+    #   The status of the replication instance. The possible return values
+    #   include:
+    #
+    #   * `"available"`
+    #
+    #   * `"creating"`
+    #
+    #   * `"deleted"`
+    #
+    #   * `"deleting"`
+    #
+    #   * `"failed"`
+    #
+    #   * `"modifying"`
+    #
+    #   * `"upgrading"`
+    #
+    #   * `"rebooting"`
+    #
+    #   * `"resetting-master-credentials"`
+    #
+    #   * `"storage-full"`
+    #
+    #   * `"incompatible-credentials"`
+    #
+    #   * `"incompatible-network"`
+    #
+    #   * `"maintenance"`
     #   @return [String]
     #
     # @!attribute [rw] allocated_storage
@@ -4859,7 +4923,8 @@ module Aws::DatabaseMigrationService
     #   @return [Time]
     #
     # @!attribute [rw] dns_name_servers
-    #   The DNS name servers for the replication instance.
+    #   The DNS name servers supported for the replication instance to
+    #   access your on-premise source or target database.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/ReplicationInstance AWS API Documentation
@@ -4921,11 +4986,16 @@ module Aws::DatabaseMigrationService
     # `ReplicationInstance` user-defined data type.
     #
     # @!attribute [rw] replication_instance_class
-    #   The compute and memory capacity of the replication instance.
+    #   The compute and memory capacity of the replication instance as
+    #   defined for the specified replication instance class.
     #
-    #   Valid Values: `dms.t2.micro | dms.t2.small | dms.t2.medium |
-    #   dms.t2.large | dms.c4.large | dms.c4.xlarge | dms.c4.2xlarge |
-    #   dms.c4.4xlarge `
+    #   For more information on the settings and capacities for the
+    #   available replication instance classes, see [ Selecting the right
+    #   AWS DMS replication instance for your migration][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/dms/latest/userguide/CHAP_ReplicationInstance.html#CHAP_ReplicationInstance.InDepth
     #   @return [String]
     #
     # @!attribute [rw] allocated_storage
@@ -5011,7 +5081,7 @@ module Aws::DatabaseMigrationService
     #
     #   Constraints:
     #
-    #   * Must contain from 1 to 255 alphanumeric characters or hyphens.
+    #   * Must contain 1-255 alphanumeric characters or hyphens.
     #
     #   * First character must be a letter.
     #
@@ -5054,7 +5124,21 @@ module Aws::DatabaseMigrationService
     #   @return [String]
     #
     # @!attribute [rw] stop_reason
-    #   The reason the replication task was stopped.
+    #   The reason the replication task was stopped. This response parameter
+    #   can return one of the following values:
+    #
+    #   * `"STOP_REASON_FULL_LOAD_COMPLETED"` – Full-load migration
+    #     completed.
+    #
+    #   * `"STOP_REASON_CACHED_CHANGES_APPLIED"` – Change data capture (CDC)
+    #     load completed.
+    #
+    #   * `"STOP_REASON_CACHED_CHANGES_NOT_APPLIED"` – In a full-load and
+    #     CDC migration, the full-load stopped as specified before starting
+    #     the CDC migration.
+    #
+    #   * `"STOP_REASON_SERVER_TIME"` – The migration stopped at the
+    #     specified server time.
     #   @return [String]
     #
     # @!attribute [rw] replication_task_creation_date
@@ -5112,7 +5196,7 @@ module Aws::DatabaseMigrationService
     #   Supplemental information that the task requires to migrate the data
     #   for certain source and target endpoints. For more information, see
     #   [Specifying Supplemental Data for Task Settings][1] in the *AWS
-    #   Database Migration User Guide.*
+    #   Database Migration Service User Guide.*
     #
     #
     #
@@ -5938,8 +6022,8 @@ module Aws::DatabaseMigrationService
     #   EndpointType, include `"mysql"`, `"oracle"`, `"postgres"`,
     #   `"mariadb"`, `"aurora"`, `"aurora-postgresql"`, `"redshift"`,
     #   `"s3"`, `"db2"`, `"azuredb"`, `"sybase"`, `"dynamodb"`, `"mongodb"`,
-    #   `"kinesis"`, `"kafka"`, `"elasticsearch"`, `"documentdb"`, and
-    #   `"sqlserver"`.
+    #   `"kinesis"`, `"kafka"`, `"elasticsearch"`, `"documentdb"`,
+    #   `"sqlserver"`, and `"neptune"`.
     #   @return [String]
     #
     # @!attribute [rw] supports_cdc
@@ -6159,20 +6243,20 @@ module Aws::DatabaseMigrationService
     #       }
     #
     # @!attribute [rw] key
-    #   A key is the required name of the tag. The string value can be from
-    #   1 to 128 Unicode characters in length and can't be prefixed with
-    #   "aws:" or "dms:". The string can only contain only the set of
-    #   Unicode letters, digits, white-space, '\_', '.', '/', '=',
-    #   '+', '-' (Java regex:
+    #   A key is the required name of the tag. The string value can be 1-128
+    #   Unicode characters in length and can't be prefixed with "aws:" or
+    #   "dms:". The string can only contain only the set of Unicode
+    #   letters, digits, white-space, '\_', '.', '/', '=', '+',
+    #   '-' (Java regular expressions:
     #   "^(\[\\\\p\\\{L\\}\\\\p\\\{Z\\}\\\\p\\\{N\\}\_.:/=+\\\\-\]*)$").
     #   @return [String]
     #
     # @!attribute [rw] value
     #   A value is the optional value of the tag. The string value can be
-    #   from 1 to 256 Unicode characters in length and can't be prefixed
-    #   with "aws:" or "dms:". The string can only contain only the set
-    #   of Unicode letters, digits, white-space, '\_', '.', '/',
-    #   '=', '+', '-' (Java regex:
+    #   1-256 Unicode characters in length and can't be prefixed with
+    #   "aws:" or "dms:". The string can only contain only the set of
+    #   Unicode letters, digits, white-space, '\_', '.', '/', '=',
+    #   '+', '-' (Java regular expressions:
     #   "^(\[\\\\p\\\{L\\}\\\\p\\\{Z\\}\\\\p\\\{N\\}\_.:/=+\\\\-\]*)$").
     #   @return [String]
     #
@@ -6236,11 +6320,11 @@ module Aws::DatabaseMigrationService
       include Aws::Structure
     end
 
-    # Describes status of a security group associated with the virtual
-    # private cloud hosting your replication and DB instances.
+    # Describes the status of a security group associated with the virtual
+    # private cloud (VPC) hosting your replication and DB instances.
     #
     # @!attribute [rw] vpc_security_group_id
-    #   The VPC security group Id.
+    #   The VPC security group ID.
     #   @return [String]
     #
     # @!attribute [rw] status

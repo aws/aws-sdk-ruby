@@ -2047,6 +2047,7 @@ module Aws::CloudFormation
     #   resp.stack_instance.parameter_overrides[0].use_previous_value #=> Boolean
     #   resp.stack_instance.parameter_overrides[0].resolved_value #=> String
     #   resp.stack_instance.status #=> String, one of "CURRENT", "OUTDATED", "INOPERABLE"
+    #   resp.stack_instance.stack_instance_status.detailed_status #=> String, one of "PENDING", "RUNNING", "SUCCEEDED", "FAILED", "CANCELLED", "INOPERABLE"
     #   resp.stack_instance.status_reason #=> String
     #   resp.stack_instance.organizational_unit_id #=> String
     #   resp.stack_instance.drift_status #=> String, one of "DRIFTED", "IN_SYNC", "UNKNOWN", "NOT_CHECKED"
@@ -3358,7 +3359,8 @@ module Aws::CloudFormation
 
     # Returns summary information about stack instances that are associated
     # with the specified stack set. You can filter for stack instances that
-    # are associated with a specific AWS account name or Region.
+    # are associated with a specific AWS account name or Region, or that
+    # have a specific status.
     #
     # @option params [required, String] :stack_set_name
     #   The name or unique ID of the stack set that you want to list stack
@@ -3377,6 +3379,9 @@ module Aws::CloudFormation
     #   the number of available results exceeds this maximum, the response
     #   includes a `NextToken` value that you can assign to the `NextToken`
     #   request parameter to get the next set of results.
+    #
+    # @option params [Array<Types::StackInstanceFilter>] :filters
+    #   The status that stack instances are filtered by.
     #
     # @option params [String] :stack_instance_account
     #   The name of the AWS account that you want to list stack instances for.
@@ -3397,6 +3402,12 @@ module Aws::CloudFormation
     #     stack_set_name: "StackSetName", # required
     #     next_token: "NextToken",
     #     max_results: 1,
+    #     filters: [
+    #       {
+    #         name: "DETAILED_STATUS", # accepts DETAILED_STATUS
+    #         values: "StackInstanceFilterValues",
+    #       },
+    #     ],
     #     stack_instance_account: "Account",
     #     stack_instance_region: "Region",
     #   })
@@ -3410,6 +3421,7 @@ module Aws::CloudFormation
     #   resp.summaries[0].stack_id #=> String
     #   resp.summaries[0].status #=> String, one of "CURRENT", "OUTDATED", "INOPERABLE"
     #   resp.summaries[0].status_reason #=> String
+    #   resp.summaries[0].stack_instance_status.detailed_status #=> String, one of "PENDING", "RUNNING", "SUCCEEDED", "FAILED", "CANCELLED", "INOPERABLE"
     #   resp.summaries[0].organizational_unit_id #=> String
     #   resp.summaries[0].drift_status #=> String, one of "DRIFTED", "IN_SYNC", "UNKNOWN", "NOT_CHECKED"
     #   resp.summaries[0].last_drift_check_timestamp #=> Time
@@ -5305,7 +5317,7 @@ module Aws::CloudFormation
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-cloudformation'
-      context[:gem_version] = '1.39.0'
+      context[:gem_version] = '1.40.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

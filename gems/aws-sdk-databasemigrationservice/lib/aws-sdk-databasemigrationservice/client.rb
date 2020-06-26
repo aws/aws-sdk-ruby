@@ -453,8 +453,8 @@ module Aws::DatabaseMigrationService
     #   `EndpointType` value, include `"mysql"`, `"oracle"`, `"postgres"`,
     #   `"mariadb"`, `"aurora"`, `"aurora-postgresql"`, `"redshift"`, `"s3"`,
     #   `"db2"`, `"azuredb"`, `"sybase"`, `"dynamodb"`, `"mongodb"`,
-    #   `"kinesis"`, `"kafka"`, `"elasticsearch"`, `"documentdb"`, and
-    #   `"sqlserver"`.
+    #   `"kinesis"`, `"kafka"`, `"elasticsearch"`, `"documentdb"`,
+    #   `"sqlserver"`, and `"neptune"`.
     #
     # @option params [String] :username
     #   The user name to be used to log in to the endpoint database.
@@ -567,7 +567,8 @@ module Aws::DatabaseMigrationService
     #   Settings in JSON format for the target endpoint for Amazon Kinesis
     #   Data Streams. For more information about the available settings, see
     #   [Using Amazon Kinesis Data Streams as a Target for AWS Database
-    #   Migration Service][1] in the *AWS Database Migration User Guide.*
+    #   Migration Service][1] in the *AWS Database Migration Service User
+    #   Guide.*
     #
     #
     #
@@ -577,7 +578,7 @@ module Aws::DatabaseMigrationService
     #   Settings in JSON format for the target Apache Kafka endpoint. For more
     #   information about the available settings, see [Using Apache Kafka as a
     #   Target for AWS Database Migration Service][1] in the *AWS Database
-    #   Migration User Guide.*
+    #   Migration Service User Guide.*
     #
     #
     #
@@ -587,7 +588,7 @@ module Aws::DatabaseMigrationService
     #   Settings in JSON format for the target Elasticsearch endpoint. For
     #   more information about the available settings, see [Extra Connection
     #   Attributes When Using Elasticsearch as a Target for AWS DMS][1] in the
-    #   *AWS Database Migration User Guide.*
+    #   *AWS Database Migration Service User Guide*.
     #
     #
     #
@@ -595,9 +596,9 @@ module Aws::DatabaseMigrationService
     #
     # @option params [Types::NeptuneSettings] :neptune_settings
     #   Settings in JSON format for the target Amazon Neptune endpoint. For
-    #   more information about the available settings, see
-    #   [https://docs.aws.amazon.com/dms/latest/userguide/CHAP\_Target.Neptune.html#CHAP\_Target.Neptune.EndpointSettings][1]
-    #   in the *AWS Database Migration Service User Guide.*
+    #   more information about the available settings, see [Specifying
+    #   Endpoint Settings for Amazon Neptune as a Target][1] in the *AWS
+    #   Database Migration Service User Guide.*
     #
     #
     #
@@ -1016,7 +1017,7 @@ module Aws::DatabaseMigrationService
     #
     #   Constraints:
     #
-    #   * Must contain from 1 to 63 alphanumeric characters or hyphens.
+    #   * Must contain 1-63 alphanumeric characters or hyphens.
     #
     #   * First character must be a letter.
     #
@@ -1029,12 +1030,18 @@ module Aws::DatabaseMigrationService
     #   replication instance.
     #
     # @option params [required, String] :replication_instance_class
-    #   The compute and memory capacity of the replication instance as
-    #   specified by the replication instance class.
+    #   The compute and memory capacity of the replication instance as defined
+    #   for the specified replication instance class. For example to specify
+    #   the instance class dms.c4.large, set this parameter to
+    #   `"dms.c4.large"`.
     #
-    #   Valid Values: `dms.t2.micro | dms.t2.small | dms.t2.medium |
-    #   dms.t2.large | dms.c4.large | dms.c4.xlarge | dms.c4.2xlarge |
-    #   dms.c4.4xlarge `
+    #   For more information on the settings and capacities for the available
+    #   replication instance classes, see [ Selecting the right AWS DMS
+    #   replication instance for your migration][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/dms/latest/userguide/CHAP_ReplicationInstance.html#CHAP_ReplicationInstance.InDepth
     #
     # @option params [Array<String>] :vpc_security_group_ids
     #   Specifies the VPC security group to be used with the replication
@@ -1098,7 +1105,12 @@ module Aws::DatabaseMigrationService
     #   default value is `true`.
     #
     # @option params [String] :dns_name_servers
-    #   A list of DNS name servers supported for the replication instance.
+    #   A list of custom DNS name servers supported for the replication
+    #   instance to access your on-premise source or target database. This
+    #   list overrides the default name servers supported by the replication
+    #   instance. You can specify a comma-separated list of internet addresses
+    #   for up to four on-premise DNS name servers. For example:
+    #   `"1.1.1.1,2.2.2.2,3.3.3.3,4.4.4.4"`
     #
     # @return [Types::CreateReplicationInstanceResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1350,7 +1362,7 @@ module Aws::DatabaseMigrationService
     #
     #   Constraints:
     #
-    #   * Must contain from 1 to 255 alphanumeric characters or hyphens.
+    #   * Must contain 1-255 alphanumeric characters or hyphens.
     #
     #   * First character must be a letter.
     #
@@ -1374,7 +1386,7 @@ module Aws::DatabaseMigrationService
     # @option params [required, String] :table_mappings
     #   The table mappings for the task, in JSON format. For more information,
     #   see [Using Table Mapping to Specify Task Settings][1] in the *AWS
-    #   Database Migration User Guide.*
+    #   Database Migration Service User Guide.*
     #
     #
     #
@@ -1441,7 +1453,7 @@ module Aws::DatabaseMigrationService
     #   Supplemental information that the task requires to migrate the data
     #   for certain source and target endpoints. For more information, see
     #   [Specifying Supplemental Data for Task Settings][1] in the *AWS
-    #   Database Migration User Guide.*
+    #   Database Migration Service User Guide.*
     #
     #
     #
@@ -3812,8 +3824,8 @@ module Aws::DatabaseMigrationService
     #   EndpointType, include `"mysql"`, `"oracle"`, `"postgres"`,
     #   `"mariadb"`, `"aurora"`, `"aurora-postgresql"`, `"redshift"`, `"s3"`,
     #   `"db2"`, `"azuredb"`, `"sybase"`, `"dynamodb"`, `"mongodb"`,
-    #   `"kinesis"`, `"kafka"`, `"elasticsearch"`, `"documentdb"`, and
-    #   `"sqlserver"`.
+    #   `"kinesis"`, `"kafka"`, `"elasticsearch"`, `"documentdb"`,
+    #   `"sqlserver"`, and `"neptune"`.
     #
     # @option params [String] :username
     #   The user name to be used to login to the endpoint database.
@@ -3907,7 +3919,8 @@ module Aws::DatabaseMigrationService
     #   Settings in JSON format for the target endpoint for Amazon Kinesis
     #   Data Streams. For more information about the available settings, see
     #   [Using Amazon Kinesis Data Streams as a Target for AWS Database
-    #   Migration Service][1] in the *AWS Database Migration User Guide.*
+    #   Migration Service][1] in the *AWS Database Migration Service User
+    #   Guide.*
     #
     #
     #
@@ -3917,7 +3930,7 @@ module Aws::DatabaseMigrationService
     #   Settings in JSON format for the target Apache Kafka endpoint. For more
     #   information about the available settings, see [Using Apache Kafka as a
     #   Target for AWS Database Migration Service][1] in the *AWS Database
-    #   Migration User Guide.*
+    #   Migration Service User Guide.*
     #
     #
     #
@@ -3927,7 +3940,7 @@ module Aws::DatabaseMigrationService
     #   Settings in JSON format for the target Elasticsearch endpoint. For
     #   more information about the available settings, see [Extra Connection
     #   Attributes When Using Elasticsearch as a Target for AWS DMS][1] in the
-    #   *AWS Database Migration User Guide.*
+    #   *AWS Database Migration Service User Guide.*
     #
     #
     #
@@ -3935,9 +3948,9 @@ module Aws::DatabaseMigrationService
     #
     # @option params [Types::NeptuneSettings] :neptune_settings
     #   Settings in JSON format for the target Amazon Neptune endpoint. For
-    #   more information about the available settings, see
-    #   [https://docs.aws.amazon.com/dms/latest/userguide/CHAP\_Target.Neptune.html#CHAP\_Target.Neptune.EndpointSettings][1]
-    #   in the *AWS Database Migration Service User Guide.*
+    #   more information about the available settings, see [Specifying
+    #   Endpoint Settings for Amazon Neptune as a Target][1] in the *AWS
+    #   Database Migration Service User Guide.*
     #
     #
     #
@@ -4286,11 +4299,18 @@ module Aws::DatabaseMigrationService
     #   the next maintenance window.
     #
     # @option params [String] :replication_instance_class
-    #   The compute and memory capacity of the replication instance.
+    #   The compute and memory capacity of the replication instance as defined
+    #   for the specified replication instance class. For example to specify
+    #   the instance class dms.c4.large, set this parameter to
+    #   `"dms.c4.large"`.
     #
-    #   Valid Values: `dms.t2.micro | dms.t2.small | dms.t2.medium |
-    #   dms.t2.large | dms.c4.large | dms.c4.xlarge | dms.c4.2xlarge |
-    #   dms.c4.4xlarge `
+    #   For more information on the settings and capacities for the available
+    #   replication instance classes, see [ Selecting the right AWS DMS
+    #   replication instance for your migration][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/dms/latest/userguide/CHAP_ReplicationInstance.html#CHAP_ReplicationInstance.InDepth
     #
     # @option params [Array<String>] :vpc_security_group_ids
     #   Specifies the VPC security group to be used with the replication
@@ -4575,7 +4595,7 @@ module Aws::DatabaseMigrationService
     #
     #   Constraints:
     #
-    #   * Must contain from 1 to 255 alphanumeric characters or hyphens.
+    #   * Must contain 1-255 alphanumeric characters or hyphens.
     #
     #   * First character must be a letter.
     #
@@ -4644,7 +4664,7 @@ module Aws::DatabaseMigrationService
     #   Supplemental information that the task requires to migrate the data
     #   for certain source and target endpoints. For more information, see
     #   [Specifying Supplemental Data for Task Settings][1] in the *AWS
-    #   Database Migration User Guide.*
+    #   Database Migration Service User Guide.*
     #
     #
     #
@@ -5271,7 +5291,7 @@ module Aws::DatabaseMigrationService
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-databasemigrationservice'
-      context[:gem_version] = '1.36.0'
+      context[:gem_version] = '1.37.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 
