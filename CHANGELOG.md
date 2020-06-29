@@ -1,6 +1,14 @@
 Unreleased Changes
 ------------------
 
+* Feature - Aws::AutoScaling - Updated the documentation for Auto Scaling.
+
+* Feature - Aws::CodeGuruProfiler - Updated the API, and documentation for Amazon CodeGuru Profiler.
+
+* Feature - Aws::CodeStarconnections - Updated the API, and documentation for AWS CodeStar connections.
+
+* Feature - Aws::EC2 - Updated the API, and documentation for Amazon Elastic Compute Cloud.
+
 2.11.537 (2020-06-26)
 ------------------
 
