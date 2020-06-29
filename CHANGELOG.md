@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+2.11.538 (2020-06-29)
+------------------
+
 * Feature - Aws::AutoScaling - Updated the documentation for Auto Scaling.
 
 * Feature - Aws::CodeGuruProfiler - Updated the API, and documentation for Amazon CodeGuru Profiler.
