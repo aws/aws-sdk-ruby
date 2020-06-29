@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.172.0 (2020-06-29)
+------------------
+
+* Feature - Virtual Private Cloud (VPC) customers can now create and manage their own Prefix Lists to simplify VPC configurations.
+
 1.171.0 (2020-06-25)
 ------------------
 

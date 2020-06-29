@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.7.0 (2020-06-29)
+------------------
+
+* Feature - Updated and new APIs in support of hosts for connections to installed provider types. New integration with the GitHub Enterprise Server provider type.
+
 1.6.0 (2020-06-23)
 ------------------
 

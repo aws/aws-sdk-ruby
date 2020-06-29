@@ -225,6 +225,7 @@ module Aws::EC2
     #   route = route_table.create_route({
     #     destination_cidr_block: "String",
     #     destination_ipv_6_cidr_block: "String",
+    #     destination_prefix_list_id: "PrefixListResourceId",
     #     dry_run: false,
     #     egress_only_internet_gateway_id: "EgressOnlyInternetGatewayId",
     #     gateway_id: "RouteGatewayId",
@@ -238,10 +239,14 @@ module Aws::EC2
     # @param [Hash] options ({})
     # @option options [String] :destination_cidr_block
     #   The IPv4 CIDR address block used for the destination match. Routing
-    #   decisions are based on the most specific match.
+    #   decisions are based on the most specific match. We modify the
+    #   specified CIDR block to its canonical form; for example, if you
+    #   specify `100.68.0.18/18`, we modify it to `100.68.0.0/18`.
     # @option options [String] :destination_ipv_6_cidr_block
     #   The IPv6 CIDR block used for the destination match. Routing decisions
     #   are based on the most specific match.
+    # @option options [String] :destination_prefix_list_id
+    #   The ID of a prefix list used for the destination match.
     # @option options [Boolean] :dry_run
     #   Checks whether you have the required permissions for the action,
     #   without actually making the request, and provides an error response.

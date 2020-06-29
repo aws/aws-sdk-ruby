@@ -2522,9 +2522,7 @@ module Aws::AutoScaling
     # @!attribute [rw] snapshot_id
     #   The snapshot ID of the volume to use.
     #
-    #   `SnapshotId` is optional if you specify a volume size. If you
-    #   specify both `SnapshotId` and `VolumeSize`, the volume size must be
-    #   equal or greater than the size of the snapshot.
+    #   You must specify either a `VolumeSize` or a `SnapshotId`.
     #   @return [String]
     #
     # @!attribute [rw] volume_size
@@ -2538,9 +2536,9 @@ module Aws::AutoScaling
     #   Default: If you create a volume from a snapshot and you don't
     #   specify a volume size, the default is the snapshot size.
     #
-    #   <note markdown="1"> At least one of `VolumeSize` or `SnapshotId` is required.
-    #
-    #    </note>
+    #   You must specify either a `VolumeSize` or a `SnapshotId`. If you
+    #   specify both `SnapshotId` and `VolumeSize`, the volume size must be
+    #   equal or greater than the size of the snapshot.
     #   @return [Integer]
     #
     # @!attribute [rw] volume_type
@@ -2802,11 +2800,9 @@ module Aws::AutoScaling
     #   Indicates whether Amazon EC2 Auto Scaling waits for the cooldown
     #   period to complete before executing the policy.
     #
-    #   This parameter is not supported if the policy type is `StepScaling`
-    #   or `TargetTrackingScaling`.
-    #
-    #   For more information, see [Scaling Cooldowns for Amazon EC2 Auto
-    #   Scaling][1] in the *Amazon EC2 Auto Scaling User Guide*.
+    #   Valid only if the policy type is `SimpleScaling`. For more
+    #   information, see [Scaling Cooldowns for Amazon EC2 Auto Scaling][1]
+    #   in the *Amazon EC2 Auto Scaling User Guide*.
     #
     #
     #

@@ -32,6 +32,8 @@ module Aws::EC2
     ActiveInstance = Shapes::StructureShape.new(name: 'ActiveInstance')
     ActiveInstanceSet = Shapes::ListShape.new(name: 'ActiveInstanceSet')
     ActivityStatus = Shapes::StringShape.new(name: 'ActivityStatus')
+    AddPrefixListEntries = Shapes::ListShape.new(name: 'AddPrefixListEntries')
+    AddPrefixListEntry = Shapes::StructureShape.new(name: 'AddPrefixListEntry')
     Address = Shapes::StructureShape.new(name: 'Address')
     AddressList = Shapes::ListShape.new(name: 'AddressList')
     AdvertiseByoipCidrRequest = Shapes::StructureShape.new(name: 'AdvertiseByoipCidrRequest')
@@ -282,6 +284,8 @@ module Aws::EC2
     CreateLocalGatewayRouteResult = Shapes::StructureShape.new(name: 'CreateLocalGatewayRouteResult')
     CreateLocalGatewayRouteTableVpcAssociationRequest = Shapes::StructureShape.new(name: 'CreateLocalGatewayRouteTableVpcAssociationRequest')
     CreateLocalGatewayRouteTableVpcAssociationResult = Shapes::StructureShape.new(name: 'CreateLocalGatewayRouteTableVpcAssociationResult')
+    CreateManagedPrefixListRequest = Shapes::StructureShape.new(name: 'CreateManagedPrefixListRequest')
+    CreateManagedPrefixListResult = Shapes::StructureShape.new(name: 'CreateManagedPrefixListResult')
     CreateNatGatewayRequest = Shapes::StructureShape.new(name: 'CreateNatGatewayRequest')
     CreateNatGatewayResult = Shapes::StructureShape.new(name: 'CreateNatGatewayResult')
     CreateNetworkAclEntryRequest = Shapes::StructureShape.new(name: 'CreateNetworkAclEntryRequest')
@@ -401,6 +405,8 @@ module Aws::EC2
     DeleteLocalGatewayRouteResult = Shapes::StructureShape.new(name: 'DeleteLocalGatewayRouteResult')
     DeleteLocalGatewayRouteTableVpcAssociationRequest = Shapes::StructureShape.new(name: 'DeleteLocalGatewayRouteTableVpcAssociationRequest')
     DeleteLocalGatewayRouteTableVpcAssociationResult = Shapes::StructureShape.new(name: 'DeleteLocalGatewayRouteTableVpcAssociationResult')
+    DeleteManagedPrefixListRequest = Shapes::StructureShape.new(name: 'DeleteManagedPrefixListRequest')
+    DeleteManagedPrefixListResult = Shapes::StructureShape.new(name: 'DeleteManagedPrefixListResult')
     DeleteNatGatewayRequest = Shapes::StructureShape.new(name: 'DeleteNatGatewayRequest')
     DeleteNatGatewayResult = Shapes::StructureShape.new(name: 'DeleteNatGatewayResult')
     DeleteNetworkAclEntryRequest = Shapes::StructureShape.new(name: 'DeleteNetworkAclEntryRequest')
@@ -600,6 +606,8 @@ module Aws::EC2
     DescribeLocalGatewayVirtualInterfacesResult = Shapes::StructureShape.new(name: 'DescribeLocalGatewayVirtualInterfacesResult')
     DescribeLocalGatewaysRequest = Shapes::StructureShape.new(name: 'DescribeLocalGatewaysRequest')
     DescribeLocalGatewaysResult = Shapes::StructureShape.new(name: 'DescribeLocalGatewaysResult')
+    DescribeManagedPrefixListsRequest = Shapes::StructureShape.new(name: 'DescribeManagedPrefixListsRequest')
+    DescribeManagedPrefixListsResult = Shapes::StructureShape.new(name: 'DescribeManagedPrefixListsResult')
     DescribeMovingAddressesMaxResults = Shapes::IntegerShape.new(name: 'DescribeMovingAddressesMaxResults')
     DescribeMovingAddressesRequest = Shapes::StructureShape.new(name: 'DescribeMovingAddressesRequest')
     DescribeMovingAddressesResult = Shapes::StructureShape.new(name: 'DescribeMovingAddressesResult')
@@ -956,6 +964,11 @@ module Aws::EC2
     GetHostReservationPurchasePreviewResult = Shapes::StructureShape.new(name: 'GetHostReservationPurchasePreviewResult')
     GetLaunchTemplateDataRequest = Shapes::StructureShape.new(name: 'GetLaunchTemplateDataRequest')
     GetLaunchTemplateDataResult = Shapes::StructureShape.new(name: 'GetLaunchTemplateDataResult')
+    GetManagedPrefixListAssociationsMaxResults = Shapes::IntegerShape.new(name: 'GetManagedPrefixListAssociationsMaxResults')
+    GetManagedPrefixListAssociationsRequest = Shapes::StructureShape.new(name: 'GetManagedPrefixListAssociationsRequest')
+    GetManagedPrefixListAssociationsResult = Shapes::StructureShape.new(name: 'GetManagedPrefixListAssociationsResult')
+    GetManagedPrefixListEntriesRequest = Shapes::StructureShape.new(name: 'GetManagedPrefixListEntriesRequest')
+    GetManagedPrefixListEntriesResult = Shapes::StructureShape.new(name: 'GetManagedPrefixListEntriesResult')
     GetPasswordDataRequest = Shapes::StructureShape.new(name: 'GetPasswordDataRequest')
     GetPasswordDataResult = Shapes::StructureShape.new(name: 'GetPasswordDataResult')
     GetReservedInstancesExchangeQuoteRequest = Shapes::StructureShape.new(name: 'GetReservedInstancesExchangeQuoteRequest')
@@ -1282,6 +1295,8 @@ module Aws::EC2
     LocationType = Shapes::StringShape.new(name: 'LocationType')
     LogDestinationType = Shapes::StringShape.new(name: 'LogDestinationType')
     Long = Shapes::IntegerShape.new(name: 'Long')
+    ManagedPrefixList = Shapes::StructureShape.new(name: 'ManagedPrefixList')
+    ManagedPrefixListSet = Shapes::ListShape.new(name: 'ManagedPrefixListSet')
     MarketType = Shapes::StringShape.new(name: 'MarketType')
     MaxIpv4AddrPerInterface = Shapes::IntegerShape.new(name: 'MaxIpv4AddrPerInterface')
     MaxIpv6AddrPerInterface = Shapes::IntegerShape.new(name: 'MaxIpv6AddrPerInterface')
@@ -1327,6 +1342,8 @@ module Aws::EC2
     ModifyInstancePlacementResult = Shapes::StructureShape.new(name: 'ModifyInstancePlacementResult')
     ModifyLaunchTemplateRequest = Shapes::StructureShape.new(name: 'ModifyLaunchTemplateRequest')
     ModifyLaunchTemplateResult = Shapes::StructureShape.new(name: 'ModifyLaunchTemplateResult')
+    ModifyManagedPrefixListRequest = Shapes::StructureShape.new(name: 'ModifyManagedPrefixListRequest')
+    ModifyManagedPrefixListResult = Shapes::StructureShape.new(name: 'ModifyManagedPrefixListResult')
     ModifyNetworkInterfaceAttributeRequest = Shapes::StructureShape.new(name: 'ModifyNetworkInterfaceAttributeRequest')
     ModifyReservedInstancesRequest = Shapes::StructureShape.new(name: 'ModifyReservedInstancesRequest')
     ModifyReservedInstancesResult = Shapes::StructureShape.new(name: 'ModifyReservedInstancesResult')
@@ -1479,12 +1496,18 @@ module Aws::EC2
     PoolMaxResults = Shapes::IntegerShape.new(name: 'PoolMaxResults')
     PortRange = Shapes::StructureShape.new(name: 'PortRange')
     PrefixList = Shapes::StructureShape.new(name: 'PrefixList')
+    PrefixListAssociation = Shapes::StructureShape.new(name: 'PrefixListAssociation')
+    PrefixListAssociationSet = Shapes::ListShape.new(name: 'PrefixListAssociationSet')
+    PrefixListEntry = Shapes::StructureShape.new(name: 'PrefixListEntry')
+    PrefixListEntrySet = Shapes::ListShape.new(name: 'PrefixListEntrySet')
     PrefixListId = Shapes::StructureShape.new(name: 'PrefixListId')
     PrefixListIdList = Shapes::ListShape.new(name: 'PrefixListIdList')
     PrefixListIdSet = Shapes::ListShape.new(name: 'PrefixListIdSet')
+    PrefixListMaxResults = Shapes::IntegerShape.new(name: 'PrefixListMaxResults')
     PrefixListResourceId = Shapes::StringShape.new(name: 'PrefixListResourceId')
     PrefixListResourceIdStringList = Shapes::ListShape.new(name: 'PrefixListResourceIdStringList')
     PrefixListSet = Shapes::ListShape.new(name: 'PrefixListSet')
+    PrefixListState = Shapes::StringShape.new(name: 'PrefixListState')
     PriceSchedule = Shapes::StructureShape.new(name: 'PriceSchedule')
     PriceScheduleList = Shapes::ListShape.new(name: 'PriceScheduleList')
     PriceScheduleSpecification = Shapes::StructureShape.new(name: 'PriceScheduleSpecification')
@@ -1558,6 +1581,8 @@ module Aws::EC2
     ReleaseAddressRequest = Shapes::StructureShape.new(name: 'ReleaseAddressRequest')
     ReleaseHostsRequest = Shapes::StructureShape.new(name: 'ReleaseHostsRequest')
     ReleaseHostsResult = Shapes::StructureShape.new(name: 'ReleaseHostsResult')
+    RemovePrefixListEntries = Shapes::ListShape.new(name: 'RemovePrefixListEntries')
+    RemovePrefixListEntry = Shapes::StructureShape.new(name: 'RemovePrefixListEntry')
     ReplaceIamInstanceProfileAssociationRequest = Shapes::StructureShape.new(name: 'ReplaceIamInstanceProfileAssociationRequest')
     ReplaceIamInstanceProfileAssociationResult = Shapes::StructureShape.new(name: 'ReplaceIamInstanceProfileAssociationResult')
     ReplaceNetworkAclAssociationRequest = Shapes::StructureShape.new(name: 'ReplaceNetworkAclAssociationRequest')
@@ -1622,6 +1647,7 @@ module Aws::EC2
     ResetInstanceAttributeRequest = Shapes::StructureShape.new(name: 'ResetInstanceAttributeRequest')
     ResetNetworkInterfaceAttributeRequest = Shapes::StructureShape.new(name: 'ResetNetworkInterfaceAttributeRequest')
     ResetSnapshotAttributeRequest = Shapes::StructureShape.new(name: 'ResetSnapshotAttributeRequest')
+    ResourceArn = Shapes::StringShape.new(name: 'ResourceArn')
     ResourceIdList = Shapes::ListShape.new(name: 'ResourceIdList')
     ResourceList = Shapes::ListShape.new(name: 'ResourceList')
     ResourceType = Shapes::StringShape.new(name: 'ResourceType')
@@ -1632,6 +1658,8 @@ module Aws::EC2
     RestorableByStringList = Shapes::ListShape.new(name: 'RestorableByStringList')
     RestoreAddressToClassicRequest = Shapes::StructureShape.new(name: 'RestoreAddressToClassicRequest')
     RestoreAddressToClassicResult = Shapes::StructureShape.new(name: 'RestoreAddressToClassicResult')
+    RestoreManagedPrefixListVersionRequest = Shapes::StructureShape.new(name: 'RestoreManagedPrefixListVersionRequest')
+    RestoreManagedPrefixListVersionResult = Shapes::StructureShape.new(name: 'RestoreManagedPrefixListVersionResult')
     RevokeClientVpnIngressRequest = Shapes::StructureShape.new(name: 'RevokeClientVpnIngressRequest')
     RevokeClientVpnIngressResult = Shapes::StructureShape.new(name: 'RevokeClientVpnIngressResult')
     RevokeSecurityGroupEgressRequest = Shapes::StructureShape.new(name: 'RevokeSecurityGroupEgressRequest')
@@ -2088,6 +2116,12 @@ module Aws::EC2
     ActiveInstance.struct_class = Types::ActiveInstance
 
     ActiveInstanceSet.member = Shapes::ShapeRef.new(shape: ActiveInstance, location_name: "item")
+
+    AddPrefixListEntries.member = Shapes::ShapeRef.new(shape: AddPrefixListEntry)
+
+    AddPrefixListEntry.add_member(:cidr, Shapes::ShapeRef.new(shape: String, required: true, location_name: "Cidr"))
+    AddPrefixListEntry.add_member(:description, Shapes::ShapeRef.new(shape: String, location_name: "Description"))
+    AddPrefixListEntry.struct_class = Types::AddPrefixListEntry
 
     Address.add_member(:instance_id, Shapes::ShapeRef.new(shape: String, location_name: "instanceId"))
     Address.add_member(:public_ip, Shapes::ShapeRef.new(shape: String, location_name: "publicIp"))
@@ -3038,6 +3072,18 @@ module Aws::EC2
     CreateLocalGatewayRouteTableVpcAssociationResult.add_member(:local_gateway_route_table_vpc_association, Shapes::ShapeRef.new(shape: LocalGatewayRouteTableVpcAssociation, location_name: "localGatewayRouteTableVpcAssociation"))
     CreateLocalGatewayRouteTableVpcAssociationResult.struct_class = Types::CreateLocalGatewayRouteTableVpcAssociationResult
 
+    CreateManagedPrefixListRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "DryRun"))
+    CreateManagedPrefixListRequest.add_member(:prefix_list_name, Shapes::ShapeRef.new(shape: String, required: true, location_name: "PrefixListName"))
+    CreateManagedPrefixListRequest.add_member(:entries, Shapes::ShapeRef.new(shape: AddPrefixListEntries, location_name: "Entry"))
+    CreateManagedPrefixListRequest.add_member(:max_entries, Shapes::ShapeRef.new(shape: Integer, required: true, location_name: "MaxEntries"))
+    CreateManagedPrefixListRequest.add_member(:tag_specifications, Shapes::ShapeRef.new(shape: TagSpecificationList, location_name: "TagSpecification"))
+    CreateManagedPrefixListRequest.add_member(:address_family, Shapes::ShapeRef.new(shape: String, required: true, location_name: "AddressFamily"))
+    CreateManagedPrefixListRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: String, location_name: "ClientToken", metadata: {"idempotencyToken"=>true}))
+    CreateManagedPrefixListRequest.struct_class = Types::CreateManagedPrefixListRequest
+
+    CreateManagedPrefixListResult.add_member(:prefix_list, Shapes::ShapeRef.new(shape: ManagedPrefixList, location_name: "prefixList"))
+    CreateManagedPrefixListResult.struct_class = Types::CreateManagedPrefixListResult
+
     CreateNatGatewayRequest.add_member(:allocation_id, Shapes::ShapeRef.new(shape: AllocationId, required: true, location_name: "AllocationId"))
     CreateNatGatewayRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: String, location_name: "ClientToken", metadata: {"idempotencyToken"=>true}))
     CreateNatGatewayRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "DryRun"))
@@ -3114,6 +3160,7 @@ module Aws::EC2
 
     CreateRouteRequest.add_member(:destination_cidr_block, Shapes::ShapeRef.new(shape: String, location_name: "destinationCidrBlock"))
     CreateRouteRequest.add_member(:destination_ipv_6_cidr_block, Shapes::ShapeRef.new(shape: String, location_name: "destinationIpv6CidrBlock"))
+    CreateRouteRequest.add_member(:destination_prefix_list_id, Shapes::ShapeRef.new(shape: PrefixListResourceId, location_name: "DestinationPrefixListId"))
     CreateRouteRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "dryRun"))
     CreateRouteRequest.add_member(:egress_only_internet_gateway_id, Shapes::ShapeRef.new(shape: EgressOnlyInternetGatewayId, location_name: "egressOnlyInternetGatewayId"))
     CreateRouteRequest.add_member(:gateway_id, Shapes::ShapeRef.new(shape: RouteGatewayId, location_name: "gatewayId"))
@@ -3561,6 +3608,13 @@ module Aws::EC2
     DeleteLocalGatewayRouteTableVpcAssociationResult.add_member(:local_gateway_route_table_vpc_association, Shapes::ShapeRef.new(shape: LocalGatewayRouteTableVpcAssociation, location_name: "localGatewayRouteTableVpcAssociation"))
     DeleteLocalGatewayRouteTableVpcAssociationResult.struct_class = Types::DeleteLocalGatewayRouteTableVpcAssociationResult
 
+    DeleteManagedPrefixListRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "DryRun"))
+    DeleteManagedPrefixListRequest.add_member(:prefix_list_id, Shapes::ShapeRef.new(shape: PrefixListResourceId, required: true, location_name: "PrefixListId"))
+    DeleteManagedPrefixListRequest.struct_class = Types::DeleteManagedPrefixListRequest
+
+    DeleteManagedPrefixListResult.add_member(:prefix_list, Shapes::ShapeRef.new(shape: ManagedPrefixList, location_name: "prefixList"))
+    DeleteManagedPrefixListResult.struct_class = Types::DeleteManagedPrefixListResult
+
     DeleteNatGatewayRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "DryRun"))
     DeleteNatGatewayRequest.add_member(:nat_gateway_id, Shapes::ShapeRef.new(shape: NatGatewayId, required: true, location_name: "NatGatewayId"))
     DeleteNatGatewayRequest.struct_class = Types::DeleteNatGatewayRequest
@@ -3610,6 +3664,7 @@ module Aws::EC2
 
     DeleteRouteRequest.add_member(:destination_cidr_block, Shapes::ShapeRef.new(shape: String, location_name: "destinationCidrBlock"))
     DeleteRouteRequest.add_member(:destination_ipv_6_cidr_block, Shapes::ShapeRef.new(shape: String, location_name: "destinationIpv6CidrBlock"))
+    DeleteRouteRequest.add_member(:destination_prefix_list_id, Shapes::ShapeRef.new(shape: PrefixListResourceId, location_name: "DestinationPrefixListId"))
     DeleteRouteRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "dryRun"))
     DeleteRouteRequest.add_member(:route_table_id, Shapes::ShapeRef.new(shape: RouteTableId, required: true, location_name: "routeTableId"))
     DeleteRouteRequest.struct_class = Types::DeleteRouteRequest
@@ -4399,6 +4454,17 @@ module Aws::EC2
     DescribeLocalGatewaysResult.add_member(:local_gateways, Shapes::ShapeRef.new(shape: LocalGatewaySet, location_name: "localGatewaySet"))
     DescribeLocalGatewaysResult.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "nextToken"))
     DescribeLocalGatewaysResult.struct_class = Types::DescribeLocalGatewaysResult
+
+    DescribeManagedPrefixListsRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "DryRun"))
+    DescribeManagedPrefixListsRequest.add_member(:filters, Shapes::ShapeRef.new(shape: FilterList, location_name: "Filter"))
+    DescribeManagedPrefixListsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: PrefixListMaxResults, location_name: "MaxResults"))
+    DescribeManagedPrefixListsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    DescribeManagedPrefixListsRequest.add_member(:prefix_list_ids, Shapes::ShapeRef.new(shape: ValueStringList, location_name: "PrefixListId"))
+    DescribeManagedPrefixListsRequest.struct_class = Types::DescribeManagedPrefixListsRequest
+
+    DescribeManagedPrefixListsResult.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
+    DescribeManagedPrefixListsResult.add_member(:prefix_lists, Shapes::ShapeRef.new(shape: ManagedPrefixListSet, location_name: "prefixListSet"))
+    DescribeManagedPrefixListsResult.struct_class = Types::DescribeManagedPrefixListsResult
 
     DescribeMovingAddressesRequest.add_member(:filters, Shapes::ShapeRef.new(shape: FilterList, location_name: "filter"))
     DescribeMovingAddressesRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "dryRun"))
@@ -5756,6 +5822,27 @@ module Aws::EC2
     GetLaunchTemplateDataResult.add_member(:launch_template_data, Shapes::ShapeRef.new(shape: ResponseLaunchTemplateData, location_name: "launchTemplateData"))
     GetLaunchTemplateDataResult.struct_class = Types::GetLaunchTemplateDataResult
 
+    GetManagedPrefixListAssociationsRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "DryRun"))
+    GetManagedPrefixListAssociationsRequest.add_member(:prefix_list_id, Shapes::ShapeRef.new(shape: PrefixListResourceId, required: true, location_name: "PrefixListId"))
+    GetManagedPrefixListAssociationsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: GetManagedPrefixListAssociationsMaxResults, location_name: "MaxResults"))
+    GetManagedPrefixListAssociationsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    GetManagedPrefixListAssociationsRequest.struct_class = Types::GetManagedPrefixListAssociationsRequest
+
+    GetManagedPrefixListAssociationsResult.add_member(:prefix_list_associations, Shapes::ShapeRef.new(shape: PrefixListAssociationSet, location_name: "prefixListAssociationSet"))
+    GetManagedPrefixListAssociationsResult.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "nextToken"))
+    GetManagedPrefixListAssociationsResult.struct_class = Types::GetManagedPrefixListAssociationsResult
+
+    GetManagedPrefixListEntriesRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "DryRun"))
+    GetManagedPrefixListEntriesRequest.add_member(:prefix_list_id, Shapes::ShapeRef.new(shape: PrefixListResourceId, required: true, location_name: "PrefixListId"))
+    GetManagedPrefixListEntriesRequest.add_member(:target_version, Shapes::ShapeRef.new(shape: Long, location_name: "TargetVersion"))
+    GetManagedPrefixListEntriesRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: PrefixListMaxResults, location_name: "MaxResults"))
+    GetManagedPrefixListEntriesRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    GetManagedPrefixListEntriesRequest.struct_class = Types::GetManagedPrefixListEntriesRequest
+
+    GetManagedPrefixListEntriesResult.add_member(:entries, Shapes::ShapeRef.new(shape: PrefixListEntrySet, location_name: "entrySet"))
+    GetManagedPrefixListEntriesResult.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
+    GetManagedPrefixListEntriesResult.struct_class = Types::GetManagedPrefixListEntriesResult
+
     GetPasswordDataRequest.add_member(:instance_id, Shapes::ShapeRef.new(shape: InstanceId, required: true, location_name: "InstanceId"))
     GetPasswordDataRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "dryRun"))
     GetPasswordDataRequest.struct_class = Types::GetPasswordDataRequest
@@ -6982,6 +7069,20 @@ module Aws::EC2
 
     LocalGatewayVirtualInterfaceSet.member = Shapes::ShapeRef.new(shape: LocalGatewayVirtualInterface, location_name: "item")
 
+    ManagedPrefixList.add_member(:prefix_list_id, Shapes::ShapeRef.new(shape: PrefixListResourceId, location_name: "prefixListId"))
+    ManagedPrefixList.add_member(:address_family, Shapes::ShapeRef.new(shape: String, location_name: "addressFamily"))
+    ManagedPrefixList.add_member(:state, Shapes::ShapeRef.new(shape: PrefixListState, location_name: "state"))
+    ManagedPrefixList.add_member(:state_message, Shapes::ShapeRef.new(shape: String, location_name: "stateMessage"))
+    ManagedPrefixList.add_member(:prefix_list_arn, Shapes::ShapeRef.new(shape: ResourceArn, location_name: "prefixListArn"))
+    ManagedPrefixList.add_member(:prefix_list_name, Shapes::ShapeRef.new(shape: String, location_name: "prefixListName"))
+    ManagedPrefixList.add_member(:max_entries, Shapes::ShapeRef.new(shape: Integer, location_name: "maxEntries"))
+    ManagedPrefixList.add_member(:version, Shapes::ShapeRef.new(shape: Long, location_name: "version"))
+    ManagedPrefixList.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "tagSet"))
+    ManagedPrefixList.add_member(:owner_id, Shapes::ShapeRef.new(shape: String, location_name: "ownerId"))
+    ManagedPrefixList.struct_class = Types::ManagedPrefixList
+
+    ManagedPrefixListSet.member = Shapes::ShapeRef.new(shape: ManagedPrefixList, location_name: "item")
+
     MemoryInfo.add_member(:size_in_mi_b, Shapes::ShapeRef.new(shape: MemorySize, location_name: "sizeInMiB"))
     MemoryInfo.struct_class = Types::MemoryInfo
 
@@ -7165,6 +7266,17 @@ module Aws::EC2
 
     ModifyLaunchTemplateResult.add_member(:launch_template, Shapes::ShapeRef.new(shape: LaunchTemplate, location_name: "launchTemplate"))
     ModifyLaunchTemplateResult.struct_class = Types::ModifyLaunchTemplateResult
+
+    ModifyManagedPrefixListRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "DryRun"))
+    ModifyManagedPrefixListRequest.add_member(:prefix_list_id, Shapes::ShapeRef.new(shape: PrefixListResourceId, required: true, location_name: "PrefixListId"))
+    ModifyManagedPrefixListRequest.add_member(:current_version, Shapes::ShapeRef.new(shape: Long, location_name: "CurrentVersion"))
+    ModifyManagedPrefixListRequest.add_member(:prefix_list_name, Shapes::ShapeRef.new(shape: String, location_name: "PrefixListName"))
+    ModifyManagedPrefixListRequest.add_member(:add_entries, Shapes::ShapeRef.new(shape: AddPrefixListEntries, location_name: "AddEntry"))
+    ModifyManagedPrefixListRequest.add_member(:remove_entries, Shapes::ShapeRef.new(shape: RemovePrefixListEntries, location_name: "RemoveEntry"))
+    ModifyManagedPrefixListRequest.struct_class = Types::ModifyManagedPrefixListRequest
+
+    ModifyManagedPrefixListResult.add_member(:prefix_list, Shapes::ShapeRef.new(shape: ManagedPrefixList, location_name: "prefixList"))
+    ModifyManagedPrefixListResult.struct_class = Types::ModifyManagedPrefixListResult
 
     ModifyNetworkInterfaceAttributeRequest.add_member(:attachment, Shapes::ShapeRef.new(shape: NetworkInterfaceAttachmentChanges, location_name: "attachment"))
     ModifyNetworkInterfaceAttributeRequest.add_member(:description, Shapes::ShapeRef.new(shape: AttributeValue, location_name: "description"))
@@ -7714,6 +7826,18 @@ module Aws::EC2
     PrefixList.add_member(:prefix_list_name, Shapes::ShapeRef.new(shape: String, location_name: "prefixListName"))
     PrefixList.struct_class = Types::PrefixList
 
+    PrefixListAssociation.add_member(:resource_id, Shapes::ShapeRef.new(shape: String, location_name: "resourceId"))
+    PrefixListAssociation.add_member(:resource_owner, Shapes::ShapeRef.new(shape: String, location_name: "resourceOwner"))
+    PrefixListAssociation.struct_class = Types::PrefixListAssociation
+
+    PrefixListAssociationSet.member = Shapes::ShapeRef.new(shape: PrefixListAssociation, location_name: "item")
+
+    PrefixListEntry.add_member(:cidr, Shapes::ShapeRef.new(shape: String, location_name: "cidr"))
+    PrefixListEntry.add_member(:description, Shapes::ShapeRef.new(shape: String, location_name: "description"))
+    PrefixListEntry.struct_class = Types::PrefixListEntry
+
+    PrefixListEntrySet.member = Shapes::ShapeRef.new(shape: PrefixListEntry, location_name: "item")
+
     PrefixListId.add_member(:description, Shapes::ShapeRef.new(shape: String, location_name: "description"))
     PrefixListId.add_member(:prefix_list_id, Shapes::ShapeRef.new(shape: String, location_name: "prefixListId"))
     PrefixListId.struct_class = Types::PrefixListId
@@ -7992,6 +8116,11 @@ module Aws::EC2
     ReleaseHostsResult.add_member(:unsuccessful, Shapes::ShapeRef.new(shape: UnsuccessfulItemList, location_name: "unsuccessful"))
     ReleaseHostsResult.struct_class = Types::ReleaseHostsResult
 
+    RemovePrefixListEntries.member = Shapes::ShapeRef.new(shape: RemovePrefixListEntry)
+
+    RemovePrefixListEntry.add_member(:cidr, Shapes::ShapeRef.new(shape: String, required: true, location_name: "Cidr"))
+    RemovePrefixListEntry.struct_class = Types::RemovePrefixListEntry
+
     ReplaceIamInstanceProfileAssociationRequest.add_member(:iam_instance_profile, Shapes::ShapeRef.new(shape: IamInstanceProfileSpecification, required: true, location_name: "IamInstanceProfile"))
     ReplaceIamInstanceProfileAssociationRequest.add_member(:association_id, Shapes::ShapeRef.new(shape: IamInstanceProfileAssociationId, required: true, location_name: "AssociationId"))
     ReplaceIamInstanceProfileAssociationRequest.struct_class = Types::ReplaceIamInstanceProfileAssociationRequest
@@ -8021,6 +8150,7 @@ module Aws::EC2
 
     ReplaceRouteRequest.add_member(:destination_cidr_block, Shapes::ShapeRef.new(shape: String, location_name: "destinationCidrBlock"))
     ReplaceRouteRequest.add_member(:destination_ipv_6_cidr_block, Shapes::ShapeRef.new(shape: String, location_name: "destinationIpv6CidrBlock"))
+    ReplaceRouteRequest.add_member(:destination_prefix_list_id, Shapes::ShapeRef.new(shape: PrefixListResourceId, location_name: "DestinationPrefixListId"))
     ReplaceRouteRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "dryRun"))
     ReplaceRouteRequest.add_member(:egress_only_internet_gateway_id, Shapes::ShapeRef.new(shape: EgressOnlyInternetGatewayId, location_name: "egressOnlyInternetGatewayId"))
     ReplaceRouteRequest.add_member(:gateway_id, Shapes::ShapeRef.new(shape: RouteGatewayId, location_name: "gatewayId"))
@@ -8345,6 +8475,15 @@ module Aws::EC2
     RestoreAddressToClassicResult.add_member(:public_ip, Shapes::ShapeRef.new(shape: String, location_name: "publicIp"))
     RestoreAddressToClassicResult.add_member(:status, Shapes::ShapeRef.new(shape: Status, location_name: "status"))
     RestoreAddressToClassicResult.struct_class = Types::RestoreAddressToClassicResult
+
+    RestoreManagedPrefixListVersionRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "DryRun"))
+    RestoreManagedPrefixListVersionRequest.add_member(:prefix_list_id, Shapes::ShapeRef.new(shape: PrefixListResourceId, required: true, location_name: "PrefixListId"))
+    RestoreManagedPrefixListVersionRequest.add_member(:previous_version, Shapes::ShapeRef.new(shape: Long, required: true, location_name: "PreviousVersion"))
+    RestoreManagedPrefixListVersionRequest.add_member(:current_version, Shapes::ShapeRef.new(shape: Long, required: true, location_name: "CurrentVersion"))
+    RestoreManagedPrefixListVersionRequest.struct_class = Types::RestoreManagedPrefixListVersionRequest
+
+    RestoreManagedPrefixListVersionResult.add_member(:prefix_list, Shapes::ShapeRef.new(shape: ManagedPrefixList, location_name: "prefixList"))
+    RestoreManagedPrefixListVersionResult.struct_class = Types::RestoreManagedPrefixListVersionResult
 
     RevokeClientVpnIngressRequest.add_member(:client_vpn_endpoint_id, Shapes::ShapeRef.new(shape: ClientVpnEndpointId, required: true, location_name: "ClientVpnEndpointId"))
     RevokeClientVpnIngressRequest.add_member(:target_network_cidr, Shapes::ShapeRef.new(shape: String, required: true, location_name: "TargetNetworkCidr"))
@@ -10338,6 +10477,14 @@ module Aws::EC2
         o.output = Shapes::ShapeRef.new(shape: CreateLocalGatewayRouteTableVpcAssociationResult)
       end)
 
+      api.add_operation(:create_managed_prefix_list, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "CreateManagedPrefixList"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: CreateManagedPrefixListRequest)
+        o.output = Shapes::ShapeRef.new(shape: CreateManagedPrefixListResult)
+      end)
+
       api.add_operation(:create_nat_gateway, Seahorse::Model::Operation.new.tap do |o|
         o.name = "CreateNatGateway"
         o.http_method = "POST"
@@ -10720,6 +10867,14 @@ module Aws::EC2
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: DeleteLocalGatewayRouteTableVpcAssociationRequest)
         o.output = Shapes::ShapeRef.new(shape: DeleteLocalGatewayRouteTableVpcAssociationResult)
+      end)
+
+      api.add_operation(:delete_managed_prefix_list, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DeleteManagedPrefixList"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DeleteManagedPrefixListRequest)
+        o.output = Shapes::ShapeRef.new(shape: DeleteManagedPrefixListResult)
       end)
 
       api.add_operation(:delete_nat_gateway, Seahorse::Model::Operation.new.tap do |o|
@@ -11688,6 +11843,20 @@ module Aws::EC2
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: DescribeLocalGatewaysRequest)
         o.output = Shapes::ShapeRef.new(shape: DescribeLocalGatewaysResult)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
+      api.add_operation(:describe_managed_prefix_lists, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DescribeManagedPrefixLists"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DescribeManagedPrefixListsRequest)
+        o.output = Shapes::ShapeRef.new(shape: DescribeManagedPrefixListsResult)
         o[:pager] = Aws::Pager.new(
           limit_key: "max_results",
           tokens: {
@@ -12723,6 +12892,34 @@ module Aws::EC2
         o.output = Shapes::ShapeRef.new(shape: GetLaunchTemplateDataResult)
       end)
 
+      api.add_operation(:get_managed_prefix_list_associations, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetManagedPrefixListAssociations"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: GetManagedPrefixListAssociationsRequest)
+        o.output = Shapes::ShapeRef.new(shape: GetManagedPrefixListAssociationsResult)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
+      api.add_operation(:get_managed_prefix_list_entries, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetManagedPrefixListEntries"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: GetManagedPrefixListEntriesRequest)
+        o.output = Shapes::ShapeRef.new(shape: GetManagedPrefixListEntriesResult)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
       api.add_operation(:get_password_data, Seahorse::Model::Operation.new.tap do |o|
         o.name = "GetPasswordData"
         o.http_method = "POST"
@@ -12985,6 +13182,14 @@ module Aws::EC2
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: ModifyLaunchTemplateRequest)
         o.output = Shapes::ShapeRef.new(shape: ModifyLaunchTemplateResult)
+      end)
+
+      api.add_operation(:modify_managed_prefix_list, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ModifyManagedPrefixList"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: ModifyManagedPrefixListRequest)
+        o.output = Shapes::ShapeRef.new(shape: ModifyManagedPrefixListResult)
       end)
 
       api.add_operation(:modify_network_interface_attribute, Seahorse::Model::Operation.new.tap do |o|
@@ -13417,6 +13622,14 @@ module Aws::EC2
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: RestoreAddressToClassicRequest)
         o.output = Shapes::ShapeRef.new(shape: RestoreAddressToClassicResult)
+      end)
+
+      api.add_operation(:restore_managed_prefix_list_version, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "RestoreManagedPrefixListVersion"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: RestoreManagedPrefixListVersionRequest)
+        o.output = Shapes::ShapeRef.new(shape: RestoreManagedPrefixListVersionResult)
       end)
 
       api.add_operation(:revoke_client_vpn_ingress, Seahorse::Model::Operation.new.tap do |o|

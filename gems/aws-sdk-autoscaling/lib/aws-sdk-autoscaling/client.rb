@@ -582,6 +582,20 @@ module Aws::AutoScaling
     #
     #   * {Types::CancelInstanceRefreshAnswer#instance_refresh_id #instance_refresh_id} => String
     #
+    #
+    # @example Example: To cancel an instance refresh
+    #
+    #   # This example cancels an instance refresh operation in progress.
+    #
+    #   resp = client.cancel_instance_refresh({
+    #     auto_scaling_group_name: "my-auto-scaling-group", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     instance_refresh_id: "08b91cf7-8fa6-48af-b6a6-d227f40f1b9b", 
+    #   }
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.cancel_instance_refresh({
@@ -987,10 +1001,31 @@ module Aws::AutoScaling
     #
     #   resp = client.create_auto_scaling_group({
     #     auto_scaling_group_name: "my-auto-scaling-group", 
+    #     launch_template: {
+    #       launch_template_id: "lt-0a20c965061f64abc", 
+    #       version: "$Latest", 
+    #     }, 
+    #     max_instance_lifetime: 2592000, 
+    #     max_size: 3, 
+    #     min_size: 1, 
+    #     vpc_zone_identifier: "subnet-057fa0918fEXAMPLE", 
+    #   })
+    #
+    # @example Example: To create an Auto Scaling group with an attached target group
+    #
+    #   # This example creates an Auto Scaling group and attaches the specified target group.
+    #
+    #   resp = client.create_auto_scaling_group({
+    #     auto_scaling_group_name: "my-auto-scaling-group", 
+    #     health_check_grace_period: 120, 
+    #     health_check_type: "ELB", 
     #     launch_configuration_name: "my-launch-config", 
     #     max_size: 3, 
     #     min_size: 1, 
-    #     vpc_zone_identifier: "subnet-4176792c", 
+    #     target_group_arns: [
+    #       "arn:aws:elasticloadbalancing:us-west-2:123456789012:targetgroup/my-targets/73e2d6bc24d8a067", 
+    #     ], 
+    #     vpc_zone_identifier: "subnet-057fa0918fEXAMPLE, subnet-610acd08EXAMPLE", 
     #   })
     #
     # @example Example: To create an Auto Scaling group with an attached load balancer
@@ -1010,23 +1045,6 @@ module Aws::AutoScaling
     #     ], 
     #     max_size: 3, 
     #     min_size: 1, 
-    #   })
-    #
-    # @example Example: To create an Auto Scaling group with an attached target group
-    #
-    #   # This example creates an Auto Scaling group and attaches the specified target group.
-    #
-    #   resp = client.create_auto_scaling_group({
-    #     auto_scaling_group_name: "my-auto-scaling-group", 
-    #     health_check_grace_period: 120, 
-    #     health_check_type: "ELB", 
-    #     launch_configuration_name: "my-launch-config", 
-    #     max_size: 3, 
-    #     min_size: 1, 
-    #     target_group_arns: [
-    #       "arn:aws:elasticloadbalancing:us-west-2:123456789012:targetgroup/my-targets/73e2d6bc24d8a067", 
-    #     ], 
-    #     vpc_zone_identifier: "subnet-4176792c, subnet-65ea5f08", 
     #   })
     #
     # @example Request syntax with placeholder values
@@ -1689,7 +1707,7 @@ module Aws::AutoScaling
     #
     #   resp = client.delete_policy({
     #     auto_scaling_group_name: "my-auto-scaling-group", 
-    #     policy_name: "ScaleIn", 
+    #     policy_name: "my-step-scale-out-policy", 
     #   })
     #
     # @example Request syntax with placeholder values
@@ -1858,7 +1876,7 @@ module Aws::AutoScaling
     #   * {Types::DescribeAdjustmentTypesAnswer#adjustment_types #adjustment_types} => Array&lt;Types::AdjustmentType&gt;
     #
     #
-    # @example Example: To describe the Auto Scaling adjustment types
+    # @example Example: To describe the Amazon EC2 Auto Scaling adjustment types
     #
     #   # This example describes the available adjustment types.
     #
@@ -2233,6 +2251,38 @@ module Aws::AutoScaling
     #
     #   * {Types::DescribeInstanceRefreshesAnswer#instance_refreshes #instance_refreshes} => Array&lt;Types::InstanceRefresh&gt;
     #   * {Types::DescribeInstanceRefreshesAnswer#next_token #next_token} => String
+    #
+    #
+    # @example Example: To list instance refreshes
+    #
+    #   # This example describes the instance refreshes for the specified Auto Scaling group.
+    #
+    #   resp = client.describe_instance_refreshes({
+    #     auto_scaling_group_name: "my-auto-scaling-group", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     instance_refreshes: [
+    #       {
+    #         auto_scaling_group_name: "my-auto-scaling-group", 
+    #         instance_refresh_id: "08b91cf7-8fa6-48af-b6a6-d227f40f1b9b", 
+    #         instances_to_update: 5, 
+    #         percentage_complete: 0, 
+    #         start_time: Time.parse("2020-06-02T18:11:27Z"), 
+    #         status: "InProgress", 
+    #       }, 
+    #       {
+    #         auto_scaling_group_name: "my-auto-scaling-group", 
+    #         end_time: Time.parse("2020-06-02T16:53:37Z"), 
+    #         instance_refresh_id: "dd7728d0-5bc4-4575-96a3-1b2c52bf8bb1", 
+    #         instances_to_update: 0, 
+    #         percentage_complete: 100, 
+    #         start_time: Time.parse("2020-06-02T16:43:19Z"), 
+    #         status: "Successful", 
+    #       }, 
+    #     ], 
+    #   }
     #
     # @example Request syntax with placeholder values
     #
@@ -2782,7 +2832,7 @@ module Aws::AutoScaling
     # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     #
-    # @example Example: To describe Auto Scaling policies
+    # @example Example: To describe scaling policies
     #
     #   # This example describes the policies for the specified Auto Scaling group.
     #
@@ -3687,7 +3737,8 @@ module Aws::AutoScaling
       req.send_request(options)
     end
 
-    # Executes the specified policy.
+    # Executes the specified policy. This can be useful for testing the
+    # design of your scaling policy.
     #
     # @option params [String] :auto_scaling_group_name
     #   The name of the Auto Scaling group.
@@ -3699,11 +3750,9 @@ module Aws::AutoScaling
     #   Indicates whether Amazon EC2 Auto Scaling waits for the cooldown
     #   period to complete before executing the policy.
     #
-    #   This parameter is not supported if the policy type is `StepScaling` or
-    #   `TargetTrackingScaling`.
-    #
-    #   For more information, see [Scaling Cooldowns for Amazon EC2 Auto
-    #   Scaling][1] in the *Amazon EC2 Auto Scaling User Guide*.
+    #   Valid only if the policy type is `SimpleScaling`. For more
+    #   information, see [Scaling Cooldowns for Amazon EC2 Auto Scaling][1] in
+    #   the *Amazon EC2 Auto Scaling User Guide*.
     #
     #
     #
@@ -3731,14 +3780,15 @@ module Aws::AutoScaling
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
     #
-    # @example Example: To execute an Auto Scaling policy
+    # @example Example: To execute a scaling policy
     #
-    #   # This example executes the specified Auto Scaling policy for the specified Auto Scaling group.
+    #   # This example executes the specified policy.
     #
     #   resp = client.execute_policy({
     #     auto_scaling_group_name: "my-auto-scaling-group", 
-    #     honor_cooldown: true, 
-    #     policy_name: "ScaleIn", 
+    #     breach_threshold: 50.0, 
+    #     metric_value: 59.0, 
+    #     policy_name: "my-step-scale-out-policy", 
     #   })
     #
     # @example Request syntax with placeholder values
@@ -4201,15 +4251,31 @@ module Aws::AutoScaling
     #   # This example adds the specified policy to the specified Auto Scaling group.
     #
     #   resp = client.put_scaling_policy({
-    #     adjustment_type: "ChangeInCapacity", 
     #     auto_scaling_group_name: "my-auto-scaling-group", 
-    #     policy_name: "ScaleIn", 
-    #     scaling_adjustment: -1, 
+    #     policy_name: "alb1000-target-tracking-scaling-policy", 
+    #     policy_type: "TargetTrackingScaling", 
+    #     target_tracking_configuration: {
+    #       predefined_metric_specification: {
+    #         predefined_metric_type: "ALBRequestCountPerTarget", 
+    #         resource_label: "app/EC2Co-EcsEl-1TKLTMITMM0EO/f37c06a68c1748aa/targetgroup/EC2Co-Defau-LDNM7Q3ZH1ZN/6d4ea56ca2d6a18d", 
+    #       }, 
+    #       target_value: 1000.0, 
+    #     }, 
     #   })
     #
     #   resp.to_h outputs the following:
     #   {
-    #     policy_arn: "arn:aws:autoscaling:us-west-2:123456789012:scalingPolicy:2233f3d7-6290-403b-b632-93c553560106:autoScalingGroupName/my-auto-scaling-group:policyName/ScaleIn", 
+    #     alarms: [
+    #       {
+    #         alarm_arn: "arn:aws:cloudwatch:us-west-2:123456789012:alarm:TargetTracking-my-asg-AlarmHigh-fc0e4183-23ac-497e-9992-691c9980c38e", 
+    #         alarm_name: "TargetTracking-my-asg-AlarmHigh-fc0e4183-23ac-497e-9992-691c9980c38e", 
+    #       }, 
+    #       {
+    #         alarm_arn: "arn:aws:cloudwatch:us-west-2:123456789012:alarm:TargetTracking-my-asg-AlarmLow-61a39305-ed0c-47af-bd9e-471a352ee1a2", 
+    #         alarm_name: "TargetTracking-my-asg-AlarmLow-61a39305-ed0c-47af-bd9e-471a352ee1a2", 
+    #       }, 
+    #     ], 
+    #     policy_arn: "arn:aws:autoscaling:us-west-2:123456789012:scalingPolicy:228f02c2-c665-4bfd-aaac-8b04080bea3c:autoScalingGroupName/my-auto-scaling-group:policyName/alb1000-target-tracking-scaling-policy", 
     #   }
     #
     # @example Request syntax with placeholder values
@@ -4752,6 +4818,24 @@ module Aws::AutoScaling
     #
     #   * {Types::StartInstanceRefreshAnswer#instance_refresh_id #instance_refresh_id} => String
     #
+    #
+    # @example Example: To start an instance refresh
+    #
+    #   # This example starts an instance refresh for the specified Auto Scaling group.
+    #
+    #   resp = client.start_instance_refresh({
+    #     auto_scaling_group_name: "my-auto-scaling-group", 
+    #     preferences: {
+    #       instance_warmup: 400, 
+    #       min_healthy_percentage: 50, 
+    #     }, 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     instance_refresh_id: "08b91cf7-8fa6-48af-b6a6-d227f40f1b9b", 
+    #   }
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.start_instance_refresh({
@@ -5235,7 +5319,7 @@ module Aws::AutoScaling
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-autoscaling'
-      context[:gem_version] = '1.41.0'
+      context[:gem_version] = '1.42.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

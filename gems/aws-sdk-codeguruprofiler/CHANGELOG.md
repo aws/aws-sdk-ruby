@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.8.0 (2020-06-29)
+------------------
+
+* Feature - Amazon CodeGuru Profiler is now generally available. The Profiler helps developers to optimize their software, troubleshoot issues in production, and identify their most expensive lines of code. As part of general availability, we are launching: Profiling of AWS Lambda functions, Anomaly detection in CPU profiles, Color My Code on flame graphs, Expanding presence to 10 AWS regions.
+
 1.7.0 (2020-06-23)
 ------------------
 

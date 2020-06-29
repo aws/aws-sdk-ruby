@@ -1344,9 +1344,6 @@ module Aws::EC2
     #   * `attachment.instance-owner-id` - The owner ID of the instance to
     #     which the network interface is attached.
     #
-    #   * `attachment.nat-gateway-id` - The ID of the NAT gateway to which the
-    #     network interface is attached.
-    #
     #   * `attachment.status` - The status of the attachment (`attaching` \|
     #     `attached` \| `detaching` \| `detached`).
     #

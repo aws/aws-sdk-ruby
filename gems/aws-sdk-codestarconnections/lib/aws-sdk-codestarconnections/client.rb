@@ -327,10 +327,9 @@ module Aws::CodeStarconnections
     # connection is in pending status until the third-party connection
     # handshake is completed from the console.
     #
-    # @option params [required, String] :provider_type
+    # @option params [String] :provider_type
     #   The name of the external provider where your third-party code
-    #   repository is configured. Currently, the valid provider type is
-    #   Bitbucket.
+    #   repository is configured. The valid provider type is Bitbucket.
     #
     # @option params [required, String] :connection_name
     #   The name of the connection to be created. The name must be unique in
@@ -338,6 +337,10 @@ module Aws::CodeStarconnections
     #
     # @option params [Array<Types::Tag>] :tags
     #   The key-value pair to use when tagging the resource.
+    #
+    # @option params [String] :host_arn
+    #   The Amazon Resource Name (ARN) of the host associated with the
+    #   connection to be created.
     #
     # @return [Types::CreateConnectionOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -347,7 +350,7 @@ module Aws::CodeStarconnections
     # @example Request syntax with placeholder values
     #
     #   resp = client.create_connection({
-    #     provider_type: "Bitbucket", # required, accepts Bitbucket
+    #     provider_type: "Bitbucket", # accepts Bitbucket, GitHubEnterpriseServer
     #     connection_name: "ConnectionName", # required
     #     tags: [
     #       {
@@ -355,6 +358,7 @@ module Aws::CodeStarconnections
     #         value: "TagValue", # required
     #       },
     #     ],
+    #     host_arn: "HostArn",
     #   })
     #
     # @example Response structure
@@ -370,6 +374,68 @@ module Aws::CodeStarconnections
     # @param [Hash] params ({})
     def create_connection(params = {}, options = {})
       req = build_request(:create_connection, params)
+      req.send_request(options)
+    end
+
+    # Creates a resource that represents the infrastructure where a
+    # third-party provider is installed. The host is used when you create
+    # connections to an installed third-party provider type, such as GitHub
+    # Enterprise Server. You create one host for all connections to that
+    # provider.
+    #
+    # <note markdown="1"> A host created through the CLI or the SDK is in `PENDING` status by
+    # default. You can make its status `AVAILABLE` by setting up the host
+    # in the console.
+    #
+    #  </note>
+    #
+    # @option params [required, String] :name
+    #   The name of the host to be created. The name must be unique in the
+    #   calling AWS account.
+    #
+    # @option params [required, String] :provider_type
+    #   The name of the installed provider to be associated with your
+    #   connection. The host resource represents the infrastructure where your
+    #   provider type is installed. The valid provider type is GitHub
+    #   Enterprise Server.
+    #
+    # @option params [required, String] :provider_endpoint
+    #   The endpoint of the infrastructure to be represented by the host after
+    #   it is created.
+    #
+    # @option params [Types::VpcConfiguration] :vpc_configuration
+    #   The VPC configuration to be provisioned for the host. A VPC must be
+    #   configured and the infrastructure to be represented by the host must
+    #   already be connected to the VPC.
+    #
+    # @return [Types::CreateHostOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateHostOutput#host_arn #host_arn} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_host({
+    #     name: "HostName", # required
+    #     provider_type: "Bitbucket", # required, accepts Bitbucket, GitHubEnterpriseServer
+    #     provider_endpoint: "Url", # required
+    #     vpc_configuration: {
+    #       vpc_id: "VpcId", # required
+    #       subnet_ids: ["SubnetId"], # required
+    #       security_group_ids: ["SecurityGroupId"], # required
+    #       tls_certificate: "TlsCertificate",
+    #     },
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.host_arn #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codestar-connections-2019-12-01/CreateHost AWS API Documentation
+    #
+    # @overload create_host(params = {})
+    # @param [Hash] params ({})
+    def create_host(params = {}, options = {})
+      req = build_request(:create_host, params)
       req.send_request(options)
     end
 
@@ -399,6 +465,34 @@ module Aws::CodeStarconnections
       req.send_request(options)
     end
 
+    # The host to be deleted. Before you delete a host, all connections
+    # associated to the host must be deleted.
+    #
+    # <note markdown="1"> A host cannot be deleted if it is in the VPC\_CONFIG\_INITIALIZING or
+    # VPC\_CONFIG\_DELETING state.
+    #
+    #  </note>
+    #
+    # @option params [required, String] :host_arn
+    #   The Amazon Resource Name (ARN) of the host to be deleted.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_host({
+    #     host_arn: "HostArn", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codestar-connections-2019-12-01/DeleteHost AWS API Documentation
+    #
+    # @overload delete_host(params = {})
+    # @param [Hash] params ({})
+    def delete_host(params = {}, options = {})
+      req = build_request(:delete_host, params)
+      req.send_request(options)
+    end
+
     # Returns the connection ARN and details such as status, owner, and
     # provider type.
     #
@@ -419,9 +513,10 @@ module Aws::CodeStarconnections
     #
     #   resp.connection.connection_name #=> String
     #   resp.connection.connection_arn #=> String
-    #   resp.connection.provider_type #=> String, one of "Bitbucket"
+    #   resp.connection.provider_type #=> String, one of "Bitbucket", "GitHubEnterpriseServer"
     #   resp.connection.owner_account_id #=> String
     #   resp.connection.connection_status #=> String, one of "PENDING", "AVAILABLE", "ERROR"
+    #   resp.connection.host_arn #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codestar-connections-2019-12-01/GetConnection AWS API Documentation
     #
@@ -432,11 +527,57 @@ module Aws::CodeStarconnections
       req.send_request(options)
     end
 
+    # Returns the host ARN and details such as status, provider type,
+    # endpoint, and, if applicable, the VPC configuration.
+    #
+    # @option params [required, String] :host_arn
+    #   The Amazon Resource Name (ARN) of the requested host.
+    #
+    # @return [Types::GetHostOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetHostOutput#name #name} => String
+    #   * {Types::GetHostOutput#status #status} => String
+    #   * {Types::GetHostOutput#provider_type #provider_type} => String
+    #   * {Types::GetHostOutput#provider_endpoint #provider_endpoint} => String
+    #   * {Types::GetHostOutput#vpc_configuration #vpc_configuration} => Types::VpcConfiguration
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_host({
+    #     host_arn: "HostArn", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.name #=> String
+    #   resp.status #=> String
+    #   resp.provider_type #=> String, one of "Bitbucket", "GitHubEnterpriseServer"
+    #   resp.provider_endpoint #=> String
+    #   resp.vpc_configuration.vpc_id #=> String
+    #   resp.vpc_configuration.subnet_ids #=> Array
+    #   resp.vpc_configuration.subnet_ids[0] #=> String
+    #   resp.vpc_configuration.security_group_ids #=> Array
+    #   resp.vpc_configuration.security_group_ids[0] #=> String
+    #   resp.vpc_configuration.tls_certificate #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codestar-connections-2019-12-01/GetHost AWS API Documentation
+    #
+    # @overload get_host(params = {})
+    # @param [Hash] params ({})
+    def get_host(params = {}, options = {})
+      req = build_request(:get_host, params)
+      req.send_request(options)
+    end
+
     # Lists the connections associated with your account.
     #
     # @option params [String] :provider_type_filter
     #   Filters the list of connections to those associated with a specified
     #   provider, such as Bitbucket.
+    #
+    # @option params [String] :host_arn_filter
+    #   Filters the list of connections to those associated with a specified
+    #   host.
     #
     # @option params [Integer] :max_results
     #   The maximum number of results to return in a single call. To retrieve
@@ -457,7 +598,8 @@ module Aws::CodeStarconnections
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_connections({
-    #     provider_type_filter: "Bitbucket", # accepts Bitbucket
+    #     provider_type_filter: "Bitbucket", # accepts Bitbucket, GitHubEnterpriseServer
+    #     host_arn_filter: "HostArn",
     #     max_results: 1,
     #     next_token: "NextToken",
     #   })
@@ -467,9 +609,10 @@ module Aws::CodeStarconnections
     #   resp.connections #=> Array
     #   resp.connections[0].connection_name #=> String
     #   resp.connections[0].connection_arn #=> String
-    #   resp.connections[0].provider_type #=> String, one of "Bitbucket"
+    #   resp.connections[0].provider_type #=> String, one of "Bitbucket", "GitHubEnterpriseServer"
     #   resp.connections[0].owner_account_id #=> String
     #   resp.connections[0].connection_status #=> String, one of "PENDING", "AVAILABLE", "ERROR"
+    #   resp.connections[0].host_arn #=> String
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codestar-connections-2019-12-01/ListConnections AWS API Documentation
@@ -478,6 +621,57 @@ module Aws::CodeStarconnections
     # @param [Hash] params ({})
     def list_connections(params = {}, options = {})
       req = build_request(:list_connections, params)
+      req.send_request(options)
+    end
+
+    # Lists the hosts associated with your account.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of results to return in a single call. To retrieve
+    #   the remaining results, make another call with the returned `nextToken`
+    #   value.
+    #
+    # @option params [String] :next_token
+    #   The token that was returned from the previous `ListHosts` call, which
+    #   can be used to return the next set of hosts in the list.
+    #
+    # @return [Types::ListHostsOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListHostsOutput#hosts #hosts} => Array&lt;Types::Host&gt;
+    #   * {Types::ListHostsOutput#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_hosts({
+    #     max_results: 1,
+    #     next_token: "NextToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.hosts #=> Array
+    #   resp.hosts[0].name #=> String
+    #   resp.hosts[0].host_arn #=> String
+    #   resp.hosts[0].provider_type #=> String, one of "Bitbucket", "GitHubEnterpriseServer"
+    #   resp.hosts[0].provider_endpoint #=> String
+    #   resp.hosts[0].vpc_configuration.vpc_id #=> String
+    #   resp.hosts[0].vpc_configuration.subnet_ids #=> Array
+    #   resp.hosts[0].vpc_configuration.subnet_ids[0] #=> String
+    #   resp.hosts[0].vpc_configuration.security_group_ids #=> Array
+    #   resp.hosts[0].vpc_configuration.security_group_ids[0] #=> String
+    #   resp.hosts[0].vpc_configuration.tls_certificate #=> String
+    #   resp.hosts[0].status #=> String
+    #   resp.hosts[0].status_message #=> String
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codestar-connections-2019-12-01/ListHosts AWS API Documentation
+    #
+    # @overload list_hosts(params = {})
+    # @param [Hash] params ({})
+    def list_hosts(params = {}, options = {})
+      req = build_request(:list_hosts, params)
       req.send_request(options)
     end
 
@@ -585,7 +779,7 @@ module Aws::CodeStarconnections
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-codestarconnections'
-      context[:gem_version] = '1.6.0'
+      context[:gem_version] = '1.7.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

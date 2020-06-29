@@ -921,7 +921,9 @@ module Aws::EC2
     #   The AZ ID or the Local Zone ID of the subnet.
     # @option options [required, String] :cidr_block
     #   The IPv4 network range for the subnet, in CIDR notation. For example,
-    #   `10.0.0.0/24`.
+    #   `10.0.0.0/24`. We modify the specified CIDR block to its canonical
+    #   form; for example, if you specify `100.68.0.18/18`, we modify it to
+    #   `100.68.0.0/18`.
     # @option options [String] :ipv_6_cidr_block
     #   The IPv6 network range for the subnet, in CIDR notation. The subnet
     #   size must use a /64 prefix length.
@@ -1161,7 +1163,9 @@ module Aws::EC2
     # @param [Hash] options ({})
     # @option options [required, String] :cidr_block
     #   The IPv4 network range for the VPC, in CIDR notation. For example,
-    #   `10.0.0.0/16`.
+    #   `10.0.0.0/16`. We modify the specified CIDR block to its canonical
+    #   form; for example, if you specify `100.68.0.18/18`, we modify it to
+    #   `100.68.0.0/18`.
     # @option options [Boolean] :amazon_provided_ipv_6_cidr_block
     #   Requests an Amazon-provided IPv6 CIDR block with a /56 prefix length
     #   for the VPC. You cannot specify the range of IP addresses, or the size
@@ -2422,9 +2426,6 @@ module Aws::EC2
     #   * `attachment.instance-owner-id` - The owner ID of the instance to
     #     which the network interface is attached.
     #
-    #   * `attachment.nat-gateway-id` - The ID of the NAT gateway to which the
-    #     network interface is attached.
-    #
     #   * `attachment.status` - The status of the attachment (`attaching` \|
     #     `attached` \| `detaching` \| `detached`).
     #
@@ -2761,8 +2762,8 @@ module Aws::EC2
     #   * `egress.ip-permission.ipv6-cidr` - An IPv6 CIDR block for an
     #     outbound security group rule.
     #
-    #   * `egress.ip-permission.prefix-list-id` - The ID (prefix) of the AWS
-    #     service to which a security group rule allows outbound access.
+    #   * `egress.ip-permission.prefix-list-id` - The ID of a prefix list to
+    #     which a security group rule allows outbound access.
     #
     #   * `egress.ip-permission.protocol` - The IP protocol for an outbound
     #     security group rule (`tcp` \| `udp` \| `icmp` or a protocol number).
@@ -2792,8 +2793,8 @@ module Aws::EC2
     #   * `ip-permission.ipv6-cidr` - An IPv6 CIDR block for an inbound
     #     security group rule.
     #
-    #   * `ip-permission.prefix-list-id` - The ID (prefix) of the AWS service
-    #     from which a security group rule allows inbound access.
+    #   * `ip-permission.prefix-list-id` - The ID of a prefix list from which
+    #     a security group rule allows inbound access.
     #
     #   * `ip-permission.protocol` - The IP protocol for an inbound security
     #     group rule (`tcp` \| `udp` \| `icmp` or a protocol number).

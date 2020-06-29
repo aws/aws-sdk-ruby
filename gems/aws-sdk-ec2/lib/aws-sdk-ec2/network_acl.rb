@@ -227,7 +227,9 @@ module Aws::EC2
     # @param [Hash] options ({})
     # @option options [String] :cidr_block
     #   The IPv4 network range to allow or deny, in CIDR notation (for example
-    #   `172.16.0.0/24`).
+    #   `172.16.0.0/24`). We modify the specified CIDR block to its canonical
+    #   form; for example, if you specify `100.68.0.18/18`, we modify it to
+    #   `100.68.0.0/18`.
     # @option options [Boolean] :dry_run
     #   Checks whether you have the required permissions for the action,
     #   without actually making the request, and provides an error response.

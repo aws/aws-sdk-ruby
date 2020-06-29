@@ -264,12 +264,15 @@ module Aws::EC2
     #
     #   route.delete({
     #     destination_ipv_6_cidr_block: "String",
+    #     destination_prefix_list_id: "PrefixListResourceId",
     #     dry_run: false,
     #   })
     # @param [Hash] options ({})
     # @option options [String] :destination_ipv_6_cidr_block
     #   The IPv6 CIDR range for the route. The value you specify must match
     #   the CIDR for the route exactly.
+    # @option options [String] :destination_prefix_list_id
+    #   The ID of the prefix list for the route.
     # @option options [Boolean] :dry_run
     #   Checks whether you have the required permissions for the action,
     #   without actually making the request, and provides an error response.
@@ -289,6 +292,7 @@ module Aws::EC2
     #
     #   route.replace({
     #     destination_ipv_6_cidr_block: "String",
+    #     destination_prefix_list_id: "PrefixListResourceId",
     #     dry_run: false,
     #     egress_only_internet_gateway_id: "EgressOnlyInternetGatewayId",
     #     gateway_id: "RouteGatewayId",
@@ -305,6 +309,8 @@ module Aws::EC2
     #   The IPv6 CIDR address block used for the destination match. The value
     #   that you provide must match the CIDR of an existing route in the
     #   table.
+    # @option options [String] :destination_prefix_list_id
+    #   The ID of the prefix list for the route.
     # @option options [Boolean] :dry_run
     #   Checks whether you have the required permissions for the action,
     #   without actually making the request, and provides an error response.

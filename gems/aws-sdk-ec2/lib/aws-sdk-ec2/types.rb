@@ -300,6 +300,35 @@ module Aws::EC2
       include Aws::Structure
     end
 
+    # An entry for a prefix list.
+    #
+    # @note When making an API call, you may pass AddPrefixListEntry
+    #   data as a hash:
+    #
+    #       {
+    #         cidr: "String", # required
+    #         description: "String",
+    #       }
+    #
+    # @!attribute [rw] cidr
+    #   The CIDR block.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   A description for the entry.
+    #
+    #   Constraints: Up to 255 characters in length.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/AddPrefixListEntry AWS API Documentation
+    #
+    class AddPrefixListEntry < Struct.new(
+      :cidr,
+      :description)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Describes an Elastic IP address.
     #
     # @!attribute [rw] instance_id
@@ -6670,6 +6699,107 @@ module Aws::EC2
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass CreateManagedPrefixListRequest
+    #   data as a hash:
+    #
+    #       {
+    #         dry_run: false,
+    #         prefix_list_name: "String", # required
+    #         entries: [
+    #           {
+    #             cidr: "String", # required
+    #             description: "String",
+    #           },
+    #         ],
+    #         max_entries: 1, # required
+    #         tag_specifications: [
+    #           {
+    #             resource_type: "client-vpn-endpoint", # accepts client-vpn-endpoint, customer-gateway, dedicated-host, dhcp-options, elastic-ip, elastic-gpu, export-image-task, export-instance-task, fleet, fpga-image, host-reservation, image, import-image-task, import-snapshot-task, instance, internet-gateway, key-pair, launch-template, local-gateway-route-table-vpc-association, natgateway, network-acl, network-interface, placement-group, reserved-instances, route-table, security-group, snapshot, spot-fleet-request, spot-instances-request, subnet, traffic-mirror-filter, traffic-mirror-session, traffic-mirror-target, transit-gateway, transit-gateway-attachment, transit-gateway-multicast-domain, transit-gateway-route-table, volume, vpc, vpc-peering-connection, vpn-connection, vpn-gateway, vpc-flow-log
+    #             tags: [
+    #               {
+    #                 key: "String",
+    #                 value: "String",
+    #               },
+    #             ],
+    #           },
+    #         ],
+    #         address_family: "String", # required
+    #         client_token: "String",
+    #       }
+    #
+    # @!attribute [rw] dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] prefix_list_name
+    #   A name for the prefix list.
+    #
+    #   Constraints: Up to 255 characters in length. The name cannot start
+    #   with `com.amazonaws`.
+    #   @return [String]
+    #
+    # @!attribute [rw] entries
+    #   One or more entries for the prefix list.
+    #   @return [Array<Types::AddPrefixListEntry>]
+    #
+    # @!attribute [rw] max_entries
+    #   The maximum number of entries for the prefix list.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] tag_specifications
+    #   The tags to apply to the prefix list during creation.
+    #   @return [Array<Types::TagSpecification>]
+    #
+    # @!attribute [rw] address_family
+    #   The IP address type.
+    #
+    #   Valid Values: `IPv4` \| `IPv6`
+    #   @return [String]
+    #
+    # @!attribute [rw] client_token
+    #   Unique, case-sensitive identifier you provide to ensure the
+    #   idempotency of the request. For more information, see [Ensuring
+    #   Idempotency][1].
+    #
+    #   Constraints: Up to 255 UTF-8 characters in length.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CreateManagedPrefixListRequest AWS API Documentation
+    #
+    class CreateManagedPrefixListRequest < Struct.new(
+      :dry_run,
+      :prefix_list_name,
+      :entries,
+      :max_entries,
+      :tag_specifications,
+      :address_family,
+      :client_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] prefix_list
+    #   Information about the prefix list.
+    #   @return [Types::ManagedPrefixList]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CreateManagedPrefixListResult AWS API Documentation
+    #
+    class CreateManagedPrefixListResult < Struct.new(
+      :prefix_list)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass CreateNatGatewayRequest
     #   data as a hash:
     #
@@ -6782,7 +6912,9 @@ module Aws::EC2
     #
     # @!attribute [rw] cidr_block
     #   The IPv4 network range to allow or deny, in CIDR notation (for
-    #   example `172.16.0.0/24`).
+    #   example `172.16.0.0/24`). We modify the specified CIDR block to its
+    #   canonical form; for example, if you specify `100.68.0.18/18`, we
+    #   modify it to `100.68.0.0/18`.
     #   @return [String]
     #
     # @!attribute [rw] dry_run
@@ -7238,6 +7370,7 @@ module Aws::EC2
     #       {
     #         destination_cidr_block: "String",
     #         destination_ipv_6_cidr_block: "String",
+    #         destination_prefix_list_id: "PrefixListResourceId",
     #         dry_run: false,
     #         egress_only_internet_gateway_id: "EgressOnlyInternetGatewayId",
     #         gateway_id: "RouteGatewayId",
@@ -7252,12 +7385,18 @@ module Aws::EC2
     #
     # @!attribute [rw] destination_cidr_block
     #   The IPv4 CIDR address block used for the destination match. Routing
-    #   decisions are based on the most specific match.
+    #   decisions are based on the most specific match. We modify the
+    #   specified CIDR block to its canonical form; for example, if you
+    #   specify `100.68.0.18/18`, we modify it to `100.68.0.0/18`.
     #   @return [String]
     #
     # @!attribute [rw] destination_ipv_6_cidr_block
     #   The IPv6 CIDR block used for the destination match. Routing
     #   decisions are based on the most specific match.
+    #   @return [String]
+    #
+    # @!attribute [rw] destination_prefix_list_id
+    #   The ID of a prefix list used for the destination match.
     #   @return [String]
     #
     # @!attribute [rw] dry_run
@@ -7311,6 +7450,7 @@ module Aws::EC2
     class CreateRouteRequest < Struct.new(
       :destination_cidr_block,
       :destination_ipv_6_cidr_block,
+      :destination_prefix_list_id,
       :dry_run,
       :egress_only_internet_gateway_id,
       :gateway_id,
@@ -7657,7 +7797,9 @@ module Aws::EC2
     #
     # @!attribute [rw] cidr_block
     #   The IPv4 network range for the subnet, in CIDR notation. For
-    #   example, `10.0.0.0/24`.
+    #   example, `10.0.0.0/24`. We modify the specified CIDR block to its
+    #   canonical form; for example, if you specify `100.68.0.18/18`, we
+    #   modify it to `100.68.0.0/18`.
     #   @return [String]
     #
     # @!attribute [rw] ipv_6_cidr_block
@@ -9239,7 +9381,9 @@ module Aws::EC2
     #
     # @!attribute [rw] cidr_block
     #   The IPv4 network range for the VPC, in CIDR notation. For example,
-    #   `10.0.0.0/16`.
+    #   `10.0.0.0/16`. We modify the specified CIDR block to its canonical
+    #   form; for example, if you specify `100.68.0.18/18`, we modify it to
+    #   `100.68.0.0/18`.
     #   @return [String]
     #
     # @!attribute [rw] amazon_provided_ipv_6_cidr_block
@@ -10317,6 +10461,46 @@ module Aws::EC2
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass DeleteManagedPrefixListRequest
+    #   data as a hash:
+    #
+    #       {
+    #         dry_run: false,
+    #         prefix_list_id: "PrefixListResourceId", # required
+    #       }
+    #
+    # @!attribute [rw] dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] prefix_list_id
+    #   The ID of the prefix list.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DeleteManagedPrefixListRequest AWS API Documentation
+    #
+    class DeleteManagedPrefixListRequest < Struct.new(
+      :dry_run,
+      :prefix_list_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] prefix_list
+    #   Information about the prefix list.
+    #   @return [Types::ManagedPrefixList]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DeleteManagedPrefixListResult AWS API Documentation
+    #
+    class DeleteManagedPrefixListResult < Struct.new(
+      :prefix_list)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass DeleteNatGatewayRequest
     #   data as a hash:
     #
@@ -10606,6 +10790,7 @@ module Aws::EC2
     #       {
     #         destination_cidr_block: "String",
     #         destination_ipv_6_cidr_block: "String",
+    #         destination_prefix_list_id: "PrefixListResourceId",
     #         dry_run: false,
     #         route_table_id: "RouteTableId", # required
     #       }
@@ -10618,6 +10803,10 @@ module Aws::EC2
     # @!attribute [rw] destination_ipv_6_cidr_block
     #   The IPv6 CIDR range for the route. The value you specify must match
     #   the CIDR for the route exactly.
+    #   @return [String]
+    #
+    # @!attribute [rw] destination_prefix_list_id
+    #   The ID of the prefix list for the route.
     #   @return [String]
     #
     # @!attribute [rw] dry_run
@@ -10636,6 +10825,7 @@ module Aws::EC2
     class DeleteRouteRequest < Struct.new(
       :destination_cidr_block,
       :destination_ipv_6_cidr_block,
+      :destination_prefix_list_id,
       :dry_run,
       :route_table_id)
       SENSITIVE = []
@@ -16771,6 +16961,83 @@ module Aws::EC2
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass DescribeManagedPrefixListsRequest
+    #   data as a hash:
+    #
+    #       {
+    #         dry_run: false,
+    #         filters: [
+    #           {
+    #             name: "String",
+    #             values: ["String"],
+    #           },
+    #         ],
+    #         max_results: 1,
+    #         next_token: "NextToken",
+    #         prefix_list_ids: ["String"],
+    #       }
+    #
+    # @!attribute [rw] dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] filters
+    #   One or more filters.
+    #
+    #   * `owner-id` - The ID of the prefix list owner.
+    #
+    #   * `prefix-list-id` - The ID of the prefix list.
+    #
+    #   * `prefix-list-name` - The name of the prefix list.
+    #   @return [Array<Types::Filter>]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of results to return with a single call. To
+    #   retrieve the remaining results, make another call with the returned
+    #   `nextToken` value.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   The token for the next page of results.
+    #   @return [String]
+    #
+    # @!attribute [rw] prefix_list_ids
+    #   One or more prefix list IDs.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeManagedPrefixListsRequest AWS API Documentation
+    #
+    class DescribeManagedPrefixListsRequest < Struct.new(
+      :dry_run,
+      :filters,
+      :max_results,
+      :next_token,
+      :prefix_list_ids)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] next_token
+    #   The token to use to retrieve the next page of results. This value is
+    #   `null` when there are no more results to return.
+    #   @return [String]
+    #
+    # @!attribute [rw] prefix_lists
+    #   Information about the prefix lists.
+    #   @return [Array<Types::ManagedPrefixList>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeManagedPrefixListsResult AWS API Documentation
+    #
+    class DescribeManagedPrefixListsResult < Struct.new(
+      :next_token,
+      :prefix_lists)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass DescribeMovingAddressesRequest
     #   data as a hash:
     #
@@ -17282,9 +17549,6 @@ module Aws::EC2
     #
     #   * `attachment.instance-owner-id` - The owner ID of the instance to
     #     which the network interface is attached.
-    #
-    #   * `attachment.nat-gateway-id` - The ID of the NAT gateway to which
-    #     the network interface is attached.
     #
     #   * `attachment.status` - The status of the attachment (`attaching` \|
     #     `attached` \| `detaching` \| `detached`).
@@ -18689,8 +18953,8 @@ module Aws::EC2
     #   * `egress.ip-permission.ipv6-cidr` - An IPv6 CIDR block for an
     #     outbound security group rule.
     #
-    #   * `egress.ip-permission.prefix-list-id` - The ID (prefix) of the AWS
-    #     service to which a security group rule allows outbound access.
+    #   * `egress.ip-permission.prefix-list-id` - The ID of a prefix list to
+    #     which a security group rule allows outbound access.
     #
     #   * `egress.ip-permission.protocol` - The IP protocol for an outbound
     #     security group rule (`tcp` \| `udp` \| `icmp` or a protocol
@@ -18721,8 +18985,8 @@ module Aws::EC2
     #   * `ip-permission.ipv6-cidr` - An IPv6 CIDR block for an inbound
     #     security group rule.
     #
-    #   * `ip-permission.prefix-list-id` - The ID (prefix) of the AWS
-    #     service from which a security group rule allows inbound access.
+    #   * `ip-permission.prefix-list-id` - The ID of a prefix list from
+    #     which a security group rule allows inbound access.
     #
     #   * `ip-permission.protocol` - The IP protocol for an inbound security
     #     group rule (`tcp` \| `udp` \| `icmp` or a protocol number).
@@ -26389,6 +26653,133 @@ module Aws::EC2
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass GetManagedPrefixListAssociationsRequest
+    #   data as a hash:
+    #
+    #       {
+    #         dry_run: false,
+    #         prefix_list_id: "PrefixListResourceId", # required
+    #         max_results: 1,
+    #         next_token: "NextToken",
+    #       }
+    #
+    # @!attribute [rw] dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] prefix_list_id
+    #   The ID of the prefix list.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of results to return with a single call. To
+    #   retrieve the remaining results, make another call with the returned
+    #   `nextToken` value.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   The token for the next page of results.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/GetManagedPrefixListAssociationsRequest AWS API Documentation
+    #
+    class GetManagedPrefixListAssociationsRequest < Struct.new(
+      :dry_run,
+      :prefix_list_id,
+      :max_results,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] prefix_list_associations
+    #   Information about the associations.
+    #   @return [Array<Types::PrefixListAssociation>]
+    #
+    # @!attribute [rw] next_token
+    #   The token to use to retrieve the next page of results. This value is
+    #   `null` when there are no more results to return.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/GetManagedPrefixListAssociationsResult AWS API Documentation
+    #
+    class GetManagedPrefixListAssociationsResult < Struct.new(
+      :prefix_list_associations,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass GetManagedPrefixListEntriesRequest
+    #   data as a hash:
+    #
+    #       {
+    #         dry_run: false,
+    #         prefix_list_id: "PrefixListResourceId", # required
+    #         target_version: 1,
+    #         max_results: 1,
+    #         next_token: "NextToken",
+    #       }
+    #
+    # @!attribute [rw] dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] prefix_list_id
+    #   The ID of the prefix list.
+    #   @return [String]
+    #
+    # @!attribute [rw] target_version
+    #   The version of the prefix list for which to return the entries. The
+    #   default is the current version.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of results to return with a single call. To
+    #   retrieve the remaining results, make another call with the returned
+    #   `nextToken` value.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   The token for the next page of results.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/GetManagedPrefixListEntriesRequest AWS API Documentation
+    #
+    class GetManagedPrefixListEntriesRequest < Struct.new(
+      :dry_run,
+      :prefix_list_id,
+      :target_version,
+      :max_results,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] entries
+    #   Information about the prefix list entries.
+    #   @return [Array<Types::PrefixListEntry>]
+    #
+    # @!attribute [rw] next_token
+    #   The token to use to retrieve the next page of results. This value is
+    #   `null` when there are no more results to return.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/GetManagedPrefixListEntriesResult AWS API Documentation
+    #
+    class GetManagedPrefixListEntriesResult < Struct.new(
+      :entries,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass GetPasswordDataRequest
     #   data as a hash:
     #
@@ -30646,9 +31037,7 @@ module Aws::EC2
     #   @return [Array<Types::Ipv6Range>]
     #
     # @!attribute [rw] prefix_list_ids
-    #   \[VPC only\] The prefix list IDs for an AWS service. With outbound
-    #   rules, this is the AWS service to access through a VPC endpoint from
-    #   instances associated with the security group.
+    #   \[VPC only\] The prefix list IDs.
     #   @return [Array<Types::PrefixListId>]
     #
     # @!attribute [rw] to_port
@@ -32917,6 +33306,65 @@ module Aws::EC2
       include Aws::Structure
     end
 
+    # Describes a managed prefix list.
+    #
+    # @!attribute [rw] prefix_list_id
+    #   The ID of the prefix list.
+    #   @return [String]
+    #
+    # @!attribute [rw] address_family
+    #   The IP address version.
+    #   @return [String]
+    #
+    # @!attribute [rw] state
+    #   The state of the prefix list.
+    #   @return [String]
+    #
+    # @!attribute [rw] state_message
+    #   The state message.
+    #   @return [String]
+    #
+    # @!attribute [rw] prefix_list_arn
+    #   The Amazon Resource Name (ARN) for the prefix list.
+    #   @return [String]
+    #
+    # @!attribute [rw] prefix_list_name
+    #   The name of the prefix list.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_entries
+    #   The maximum number of entries for the prefix list.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] version
+    #   The version of the prefix list.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] tags
+    #   The tags for the prefix list.
+    #   @return [Array<Types::Tag>]
+    #
+    # @!attribute [rw] owner_id
+    #   The ID of the owner of the prefix list.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ManagedPrefixList AWS API Documentation
+    #
+    class ManagedPrefixList < Struct.new(
+      :prefix_list_id,
+      :address_family,
+      :state,
+      :state_message,
+      :prefix_list_arn,
+      :prefix_list_name,
+      :max_entries,
+      :version,
+      :tags,
+      :owner_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Describes the memory for the instance type.
     #
     # @!attribute [rw] size_in_mi_b
@@ -34312,6 +34760,79 @@ module Aws::EC2
     #
     class ModifyLaunchTemplateResult < Struct.new(
       :launch_template)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass ModifyManagedPrefixListRequest
+    #   data as a hash:
+    #
+    #       {
+    #         dry_run: false,
+    #         prefix_list_id: "PrefixListResourceId", # required
+    #         current_version: 1,
+    #         prefix_list_name: "String",
+    #         add_entries: [
+    #           {
+    #             cidr: "String", # required
+    #             description: "String",
+    #           },
+    #         ],
+    #         remove_entries: [
+    #           {
+    #             cidr: "String", # required
+    #           },
+    #         ],
+    #       }
+    #
+    # @!attribute [rw] dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] prefix_list_id
+    #   The ID of the prefix list.
+    #   @return [String]
+    #
+    # @!attribute [rw] current_version
+    #   The current version of the prefix list.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] prefix_list_name
+    #   A name for the prefix list.
+    #   @return [String]
+    #
+    # @!attribute [rw] add_entries
+    #   One or more entries to add to the prefix list.
+    #   @return [Array<Types::AddPrefixListEntry>]
+    #
+    # @!attribute [rw] remove_entries
+    #   One or more entries to remove from the prefix list.
+    #   @return [Array<Types::RemovePrefixListEntry>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ModifyManagedPrefixListRequest AWS API Documentation
+    #
+    class ModifyManagedPrefixListRequest < Struct.new(
+      :dry_run,
+      :prefix_list_id,
+      :current_version,
+      :prefix_list_name,
+      :add_entries,
+      :remove_entries)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] prefix_list
+    #   Information about the prefix list.
+    #   @return [Types::ManagedPrefixList]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ModifyManagedPrefixListResult AWS API Documentation
+    #
+    class ModifyManagedPrefixListResult < Struct.new(
+      :prefix_list)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -37486,6 +38007,44 @@ module Aws::EC2
       include Aws::Structure
     end
 
+    # Describes the resource with which a prefix list is associated.
+    #
+    # @!attribute [rw] resource_id
+    #   The ID of the resource.
+    #   @return [String]
+    #
+    # @!attribute [rw] resource_owner
+    #   The owner of the resource.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/PrefixListAssociation AWS API Documentation
+    #
+    class PrefixListAssociation < Struct.new(
+      :resource_id,
+      :resource_owner)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Describes a prefix list entry.
+    #
+    # @!attribute [rw] cidr
+    #   The CIDR block.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   The description.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/PrefixListEntry AWS API Documentation
+    #
+    class PrefixListEntry < Struct.new(
+      :cidr,
+      :description)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Describes a prefix list ID.
     #
     # @note When making an API call, you may pass PrefixListId
@@ -38977,6 +39536,27 @@ module Aws::EC2
       include Aws::Structure
     end
 
+    # An entry for a prefix list.
+    #
+    # @note When making an API call, you may pass RemovePrefixListEntry
+    #   data as a hash:
+    #
+    #       {
+    #         cidr: "String", # required
+    #       }
+    #
+    # @!attribute [rw] cidr
+    #   The CIDR block.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/RemovePrefixListEntry AWS API Documentation
+    #
+    class RemovePrefixListEntry < Struct.new(
+      :cidr)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass ReplaceIamInstanceProfileAssociationRequest
     #   data as a hash:
     #
@@ -39167,6 +39747,7 @@ module Aws::EC2
     #       {
     #         destination_cidr_block: "String",
     #         destination_ipv_6_cidr_block: "String",
+    #         destination_prefix_list_id: "PrefixListResourceId",
     #         dry_run: false,
     #         egress_only_internet_gateway_id: "EgressOnlyInternetGatewayId",
     #         gateway_id: "RouteGatewayId",
@@ -39190,6 +39771,10 @@ module Aws::EC2
     #   The IPv6 CIDR address block used for the destination match. The
     #   value that you provide must match the CIDR of an existing route in
     #   the table.
+    #   @return [String]
+    #
+    # @!attribute [rw] destination_prefix_list_id
+    #   The ID of the prefix list for the route.
     #   @return [String]
     #
     # @!attribute [rw] dry_run
@@ -39245,6 +39830,7 @@ module Aws::EC2
     class ReplaceRouteRequest < Struct.new(
       :destination_cidr_block,
       :destination_ipv_6_cidr_block,
+      :destination_prefix_list_id,
       :dry_run,
       :egress_only_internet_gateway_id,
       :gateway_id,
@@ -41401,6 +41987,58 @@ module Aws::EC2
     class RestoreAddressToClassicResult < Struct.new(
       :public_ip,
       :status)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass RestoreManagedPrefixListVersionRequest
+    #   data as a hash:
+    #
+    #       {
+    #         dry_run: false,
+    #         prefix_list_id: "PrefixListResourceId", # required
+    #         previous_version: 1, # required
+    #         current_version: 1, # required
+    #       }
+    #
+    # @!attribute [rw] dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] prefix_list_id
+    #   The ID of the prefix list.
+    #   @return [String]
+    #
+    # @!attribute [rw] previous_version
+    #   The version to restore.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] current_version
+    #   The current version number for the prefix list.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/RestoreManagedPrefixListVersionRequest AWS API Documentation
+    #
+    class RestoreManagedPrefixListVersionRequest < Struct.new(
+      :dry_run,
+      :prefix_list_id,
+      :previous_version,
+      :current_version)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] prefix_list
+    #   Information about the prefix list.
+    #   @return [Types::ManagedPrefixList]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/RestoreManagedPrefixListVersionResult AWS API Documentation
+    #
+    class RestoreManagedPrefixListVersionResult < Struct.new(
+      :prefix_list)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -45617,8 +46255,7 @@ module Aws::EC2
     #   @return [Array<String>]
     #
     # @!attribute [rw] prefix_list_ids
-    #   The prefix list IDs for an AWS service. Not applicable for stale
-    #   security group rules.
+    #   The prefix list IDs. Not applicable for stale security group rules.
     #   @return [Array<String>]
     #
     # @!attribute [rw] to_port
@@ -46228,8 +46865,8 @@ module Aws::EC2
     #   `client-vpn-endpoint` \| `dedicated-host` \| `fleet` \| `fpga-image`
     #   \| `host-reservation` \| `instance` \| `ipv4pool-ec2` \|
     #   `ipv6pool-ec2` \| `key-pair` \| `launch-template` \| `natgateway` \|
-    #   `spot-fleet-request` \| `placement-group` \| `snapshot` \|
-    #   `traffic-mirror-filter` \| `traffic-mirror-session` \|
+    #   `spot-fleet-request` \| `placement-group` \| `prefix-list` \|
+    #   `snapshot` \| `traffic-mirror-filter` \| `traffic-mirror-session` \|
     #   `traffic-mirror-target` \| `transit-gateway` \|
     #   `transit-gateway-attachment` \| `transit-gateway-route-table` \|
     #   `vpc-endpoint` (for interface and gateway endpoints) \|

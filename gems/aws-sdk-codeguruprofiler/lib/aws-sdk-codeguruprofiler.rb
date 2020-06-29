@@ -27,7 +27,7 @@ require_relative 'aws-sdk-codeguruprofiler/customizations'
 # structure.
 #
 #     code_guru_profiler = Aws::CodeGuruProfiler::Client.new
-#     resp = code_guru_profiler.configure_agent(params)
+#     resp = code_guru_profiler.add_notification_channels(params)
 #
 # See {Client} for more information.
 #
@@ -47,6 +47,6 @@ require_relative 'aws-sdk-codeguruprofiler/customizations'
 # @service
 module Aws::CodeGuruProfiler
 
-  GEM_VERSION = '1.7.0'
+  GEM_VERSION = '1.8.0'
 
 end

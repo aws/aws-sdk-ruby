@@ -5953,6 +5953,108 @@ module Aws::EC2
       req.send_request(options)
     end
 
+    # Creates a managed prefix list. You can specify one or more entries for
+    # the prefix list. Each entry consists of a CIDR block and an optional
+    # description.
+    #
+    # You must specify the maximum number of entries for the prefix list.
+    # The maximum number of entries cannot be changed later.
+    #
+    # @option params [Boolean] :dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #
+    # @option params [required, String] :prefix_list_name
+    #   A name for the prefix list.
+    #
+    #   Constraints: Up to 255 characters in length. The name cannot start
+    #   with `com.amazonaws`.
+    #
+    # @option params [Array<Types::AddPrefixListEntry>] :entries
+    #   One or more entries for the prefix list.
+    #
+    # @option params [required, Integer] :max_entries
+    #   The maximum number of entries for the prefix list.
+    #
+    # @option params [Array<Types::TagSpecification>] :tag_specifications
+    #   The tags to apply to the prefix list during creation.
+    #
+    # @option params [required, String] :address_family
+    #   The IP address type.
+    #
+    #   Valid Values: `IPv4` \| `IPv6`
+    #
+    # @option params [String] :client_token
+    #   Unique, case-sensitive identifier you provide to ensure the
+    #   idempotency of the request. For more information, see [Ensuring
+    #   Idempotency][1].
+    #
+    #   Constraints: Up to 255 UTF-8 characters in length.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.**
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html
+    #
+    # @return [Types::CreateManagedPrefixListResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateManagedPrefixListResult#prefix_list #prefix_list} => Types::ManagedPrefixList
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_managed_prefix_list({
+    #     dry_run: false,
+    #     prefix_list_name: "String", # required
+    #     entries: [
+    #       {
+    #         cidr: "String", # required
+    #         description: "String",
+    #       },
+    #     ],
+    #     max_entries: 1, # required
+    #     tag_specifications: [
+    #       {
+    #         resource_type: "client-vpn-endpoint", # accepts client-vpn-endpoint, customer-gateway, dedicated-host, dhcp-options, elastic-ip, elastic-gpu, export-image-task, export-instance-task, fleet, fpga-image, host-reservation, image, import-image-task, import-snapshot-task, instance, internet-gateway, key-pair, launch-template, local-gateway-route-table-vpc-association, natgateway, network-acl, network-interface, placement-group, reserved-instances, route-table, security-group, snapshot, spot-fleet-request, spot-instances-request, subnet, traffic-mirror-filter, traffic-mirror-session, traffic-mirror-target, transit-gateway, transit-gateway-attachment, transit-gateway-multicast-domain, transit-gateway-route-table, volume, vpc, vpc-peering-connection, vpn-connection, vpn-gateway, vpc-flow-log
+    #         tags: [
+    #           {
+    #             key: "String",
+    #             value: "String",
+    #           },
+    #         ],
+    #       },
+    #     ],
+    #     address_family: "String", # required
+    #     client_token: "String",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.prefix_list.prefix_list_id #=> String
+    #   resp.prefix_list.address_family #=> String
+    #   resp.prefix_list.state #=> String, one of "create-in-progress", "create-complete", "create-failed", "modify-in-progress", "modify-complete", "modify-failed", "restore-in-progress", "restore-complete", "restore-failed", "delete-in-progress", "delete-complete", "delete-failed"
+    #   resp.prefix_list.state_message #=> String
+    #   resp.prefix_list.prefix_list_arn #=> String
+    #   resp.prefix_list.prefix_list_name #=> String
+    #   resp.prefix_list.max_entries #=> Integer
+    #   resp.prefix_list.version #=> Integer
+    #   resp.prefix_list.tags #=> Array
+    #   resp.prefix_list.tags[0].key #=> String
+    #   resp.prefix_list.tags[0].value #=> String
+    #   resp.prefix_list.owner_id #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CreateManagedPrefixList AWS API Documentation
+    #
+    # @overload create_managed_prefix_list(params = {})
+    # @param [Hash] params ({})
+    def create_managed_prefix_list(params = {}, options = {})
+      req = build_request(:create_managed_prefix_list, params)
+      req.send_request(options)
+    end
+
     # Creates a NAT gateway in the specified public subnet. This action
     # creates a network interface in the specified subnet with a private IP
     # address from the IP address range of the subnet. Internet-bound
@@ -6210,7 +6312,9 @@ module Aws::EC2
     #
     # @option params [String] :cidr_block
     #   The IPv4 network range to allow or deny, in CIDR notation (for example
-    #   `172.16.0.0/24`).
+    #   `172.16.0.0/24`). We modify the specified CIDR block to its canonical
+    #   form; for example, if you specify `100.68.0.18/18`, we modify it to
+    #   `100.68.0.0/18`.
     #
     # @option params [Boolean] :dry_run
     #   Checks whether you have the required permissions for the action,
@@ -6799,11 +6903,16 @@ module Aws::EC2
     #
     # @option params [String] :destination_cidr_block
     #   The IPv4 CIDR address block used for the destination match. Routing
-    #   decisions are based on the most specific match.
+    #   decisions are based on the most specific match. We modify the
+    #   specified CIDR block to its canonical form; for example, if you
+    #   specify `100.68.0.18/18`, we modify it to `100.68.0.0/18`.
     #
     # @option params [String] :destination_ipv_6_cidr_block
     #   The IPv6 CIDR block used for the destination match. Routing decisions
     #   are based on the most specific match.
+    #
+    # @option params [String] :destination_prefix_list_id
+    #   The ID of a prefix list used for the destination match.
     #
     # @option params [Boolean] :dry_run
     #   Checks whether you have the required permissions for the action,
@@ -6862,6 +6971,7 @@ module Aws::EC2
     #   resp = client.create_route({
     #     destination_cidr_block: "String",
     #     destination_ipv_6_cidr_block: "String",
+    #     destination_prefix_list_id: "PrefixListResourceId",
     #     dry_run: false,
     #     egress_only_internet_gateway_id: "EgressOnlyInternetGatewayId",
     #     gateway_id: "RouteGatewayId",
@@ -7385,16 +7495,13 @@ module Aws::EC2
       req.send_request(options)
     end
 
-    # Creates a subnet in an existing VPC.
+    # Creates a subnet in a specified VPC.
     #
-    # When you create each subnet, you provide the VPC ID and IPv4 CIDR
-    # block for the subnet. After you create a subnet, you can't change its
-    # CIDR block. The size of the subnet's IPv4 CIDR block can be the same
-    # as a VPC's IPv4 CIDR block, or a subset of a VPC's IPv4 CIDR block.
-    # If you create more than one subnet in a VPC, the subnets' CIDR blocks
-    # must not overlap. The smallest IPv4 subnet (and VPC) you can create
-    # uses a /28 netmask (16 IPv4 addresses), and the largest uses a /16
-    # netmask (65,536 IPv4 addresses).
+    # You must specify an IPv4 CIDR block for the subnet. After you create a
+    # subnet, you can't change its CIDR block. The allowed block size is
+    # between a /16 netmask (65,536 IP addresses) and /28 netmask (16 IP
+    # addresses). The CIDR block must not overlap with the CIDR block of an
+    # existing subnet in the VPC.
     #
     # If you've associated an IPv6 CIDR block with your VPC, you can create
     # a subnet with an IPv6 CIDR block that uses a /64 prefix length.
@@ -7405,12 +7512,10 @@ module Aws::EC2
     # If you add more than one subnet to a VPC, they're set up in a star
     # topology with a logical router in the middle.
     #
-    # If you launch an instance in a VPC using an Amazon EBS-backed AMI, the
-    # IP address doesn't change if you stop and restart the instance
-    # (unlike a similar instance launched outside a VPC, which gets a new IP
-    # address when restarted). It's therefore possible to have a subnet
-    # with no running instances (they're all stopped), but no remaining IP
-    # addresses available.
+    # When you stop an instance in a subnet, it retains its private IPv4
+    # address. It's therefore possible to have a subnet with no running
+    # instances (they're all stopped), but no remaining IP addresses
+    # available.
     #
     # For more information about subnets, see [Your VPC and Subnets][1] in
     # the *Amazon Virtual Private Cloud User Guide*.
@@ -7443,7 +7548,9 @@ module Aws::EC2
     #
     # @option params [required, String] :cidr_block
     #   The IPv4 network range for the subnet, in CIDR notation. For example,
-    #   `10.0.0.0/24`.
+    #   `10.0.0.0/24`. We modify the specified CIDR block to its canonical
+    #   form; for example, if you specify `100.68.0.18/18`, we modify it to
+    #   `100.68.0.0/18`.
     #
     # @option params [String] :ipv_6_cidr_block
     #   The IPv6 network range for the subnet, in CIDR notation. The subnet
@@ -8807,7 +8914,9 @@ module Aws::EC2
     #
     # @option params [required, String] :cidr_block
     #   The IPv4 network range for the VPC, in CIDR notation. For example,
-    #   `10.0.0.0/16`.
+    #   `10.0.0.0/16`. We modify the specified CIDR block to its canonical
+    #   form; for example, if you specify `100.68.0.18/18`, we modify it to
+    #   `100.68.0.0/18`.
     #
     # @option params [Boolean] :amazon_provided_ipv_6_cidr_block
     #   Requests an Amazon-provided IPv6 CIDR block with a /56 prefix length
@@ -10302,6 +10411,53 @@ module Aws::EC2
       req.send_request(options)
     end
 
+    # Deletes the specified managed prefix list. You must first remove all
+    # references to the prefix list in your resources.
+    #
+    # @option params [Boolean] :dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #
+    # @option params [required, String] :prefix_list_id
+    #   The ID of the prefix list.
+    #
+    # @return [Types::DeleteManagedPrefixListResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DeleteManagedPrefixListResult#prefix_list #prefix_list} => Types::ManagedPrefixList
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_managed_prefix_list({
+    #     dry_run: false,
+    #     prefix_list_id: "PrefixListResourceId", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.prefix_list.prefix_list_id #=> String
+    #   resp.prefix_list.address_family #=> String
+    #   resp.prefix_list.state #=> String, one of "create-in-progress", "create-complete", "create-failed", "modify-in-progress", "modify-complete", "modify-failed", "restore-in-progress", "restore-complete", "restore-failed", "delete-in-progress", "delete-complete", "delete-failed"
+    #   resp.prefix_list.state_message #=> String
+    #   resp.prefix_list.prefix_list_arn #=> String
+    #   resp.prefix_list.prefix_list_name #=> String
+    #   resp.prefix_list.max_entries #=> Integer
+    #   resp.prefix_list.version #=> Integer
+    #   resp.prefix_list.tags #=> Array
+    #   resp.prefix_list.tags[0].key #=> String
+    #   resp.prefix_list.tags[0].value #=> String
+    #   resp.prefix_list.owner_id #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DeleteManagedPrefixList AWS API Documentation
+    #
+    # @overload delete_managed_prefix_list(params = {})
+    # @param [Hash] params ({})
+    def delete_managed_prefix_list(params = {}, options = {})
+      req = build_request(:delete_managed_prefix_list, params)
+      req.send_request(options)
+    end
+
     # Deletes the specified NAT gateway. Deleting a NAT gateway
     # disassociates its Elastic IP address, but does not release the address
     # from your account. Deleting a NAT gateway does not delete any NAT
@@ -10625,6 +10781,9 @@ module Aws::EC2
     #   The IPv6 CIDR range for the route. The value you specify must match
     #   the CIDR for the route exactly.
     #
+    # @option params [String] :destination_prefix_list_id
+    #   The ID of the prefix list for the route.
+    #
     # @option params [Boolean] :dry_run
     #   Checks whether you have the required permissions for the action,
     #   without actually making the request, and provides an error response.
@@ -10651,6 +10810,7 @@ module Aws::EC2
     #   resp = client.delete_route({
     #     destination_cidr_block: "String",
     #     destination_ipv_6_cidr_block: "String",
+    #     destination_prefix_list_id: "PrefixListResourceId",
     #     dry_run: false,
     #     route_table_id: "RouteTableId", # required
     #   })
@@ -18121,6 +18281,85 @@ module Aws::EC2
       req.send_request(options)
     end
 
+    # Describes your managed prefix lists and any AWS-managed prefix lists.
+    #
+    # To view the entries for your prefix list, use
+    # GetManagedPrefixListEntries.
+    #
+    # @option params [Boolean] :dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #
+    # @option params [Array<Types::Filter>] :filters
+    #   One or more filters.
+    #
+    #   * `owner-id` - The ID of the prefix list owner.
+    #
+    #   * `prefix-list-id` - The ID of the prefix list.
+    #
+    #   * `prefix-list-name` - The name of the prefix list.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of results to return with a single call. To
+    #   retrieve the remaining results, make another call with the returned
+    #   `nextToken` value.
+    #
+    # @option params [String] :next_token
+    #   The token for the next page of results.
+    #
+    # @option params [Array<String>] :prefix_list_ids
+    #   One or more prefix list IDs.
+    #
+    # @return [Types::DescribeManagedPrefixListsResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeManagedPrefixListsResult#next_token #next_token} => String
+    #   * {Types::DescribeManagedPrefixListsResult#prefix_lists #prefix_lists} => Array&lt;Types::ManagedPrefixList&gt;
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_managed_prefix_lists({
+    #     dry_run: false,
+    #     filters: [
+    #       {
+    #         name: "String",
+    #         values: ["String"],
+    #       },
+    #     ],
+    #     max_results: 1,
+    #     next_token: "NextToken",
+    #     prefix_list_ids: ["String"],
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.next_token #=> String
+    #   resp.prefix_lists #=> Array
+    #   resp.prefix_lists[0].prefix_list_id #=> String
+    #   resp.prefix_lists[0].address_family #=> String
+    #   resp.prefix_lists[0].state #=> String, one of "create-in-progress", "create-complete", "create-failed", "modify-in-progress", "modify-complete", "modify-failed", "restore-in-progress", "restore-complete", "restore-failed", "delete-in-progress", "delete-complete", "delete-failed"
+    #   resp.prefix_lists[0].state_message #=> String
+    #   resp.prefix_lists[0].prefix_list_arn #=> String
+    #   resp.prefix_lists[0].prefix_list_name #=> String
+    #   resp.prefix_lists[0].max_entries #=> Integer
+    #   resp.prefix_lists[0].version #=> Integer
+    #   resp.prefix_lists[0].tags #=> Array
+    #   resp.prefix_lists[0].tags[0].key #=> String
+    #   resp.prefix_lists[0].tags[0].value #=> String
+    #   resp.prefix_lists[0].owner_id #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeManagedPrefixLists AWS API Documentation
+    #
+    # @overload describe_managed_prefix_lists(params = {})
+    # @param [Hash] params ({})
+    def describe_managed_prefix_lists(params = {}, options = {})
+      req = build_request(:describe_managed_prefix_lists, params)
+      req.send_request(options)
+    end
+
     # Describes your Elastic IP addresses that are being moved to the
     # EC2-VPC platform, or that are being restored to the EC2-Classic
     # platform. This request does not return information about any other
@@ -18794,9 +19033,6 @@ module Aws::EC2
     #   * `attachment.instance-owner-id` - The owner ID of the instance to
     #     which the network interface is attached.
     #
-    #   * `attachment.nat-gateway-id` - The ID of the NAT gateway to which the
-    #     network interface is attached.
-    #
     #   * `attachment.status` - The status of the attachment (`attaching` \|
     #     `attached` \| `detaching` \| `detached`).
     #
@@ -19114,11 +19350,9 @@ module Aws::EC2
 
     # Describes available AWS services in a prefix list format, which
     # includes the prefix list name and prefix list ID of the service and
-    # the IP address range for the service. A prefix list ID is required for
-    # creating an outbound security group rule that allows traffic from a
-    # VPC to access an AWS service through a gateway VPC endpoint.
-    # Currently, the services that support this action are Amazon S3 and
-    # Amazon DynamoDB.
+    # the IP address range for the service.
+    #
+    # We recommend that you use DescribeManagedPrefixLists instead.
     #
     # @option params [Boolean] :dry_run
     #   Checks whether you have the required permissions for the action,
@@ -20627,8 +20861,8 @@ module Aws::EC2
     #   * `egress.ip-permission.ipv6-cidr` - An IPv6 CIDR block for an
     #     outbound security group rule.
     #
-    #   * `egress.ip-permission.prefix-list-id` - The ID (prefix) of the AWS
-    #     service to which a security group rule allows outbound access.
+    #   * `egress.ip-permission.prefix-list-id` - The ID of a prefix list to
+    #     which a security group rule allows outbound access.
     #
     #   * `egress.ip-permission.protocol` - The IP protocol for an outbound
     #     security group rule (`tcp` \| `udp` \| `icmp` or a protocol number).
@@ -20658,8 +20892,8 @@ module Aws::EC2
     #   * `ip-permission.ipv6-cidr` - An IPv6 CIDR block for an inbound
     #     security group rule.
     #
-    #   * `ip-permission.prefix-list-id` - The ID (prefix) of the AWS service
-    #     from which a security group rule allows inbound access.
+    #   * `ip-permission.prefix-list-id` - The ID of a prefix list from which
+    #     a security group rule allows inbound access.
     #
     #   * `ip-permission.protocol` - The IP protocol for an inbound security
     #     group rule (`tcp` \| `udp` \| `icmp` or a protocol number).
@@ -27482,6 +27716,115 @@ module Aws::EC2
       req.send_request(options)
     end
 
+    # Gets information about the resources that are associated with the
+    # specified managed prefix list.
+    #
+    # @option params [Boolean] :dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #
+    # @option params [required, String] :prefix_list_id
+    #   The ID of the prefix list.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of results to return with a single call. To
+    #   retrieve the remaining results, make another call with the returned
+    #   `nextToken` value.
+    #
+    # @option params [String] :next_token
+    #   The token for the next page of results.
+    #
+    # @return [Types::GetManagedPrefixListAssociationsResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetManagedPrefixListAssociationsResult#prefix_list_associations #prefix_list_associations} => Array&lt;Types::PrefixListAssociation&gt;
+    #   * {Types::GetManagedPrefixListAssociationsResult#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_managed_prefix_list_associations({
+    #     dry_run: false,
+    #     prefix_list_id: "PrefixListResourceId", # required
+    #     max_results: 1,
+    #     next_token: "NextToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.prefix_list_associations #=> Array
+    #   resp.prefix_list_associations[0].resource_id #=> String
+    #   resp.prefix_list_associations[0].resource_owner #=> String
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/GetManagedPrefixListAssociations AWS API Documentation
+    #
+    # @overload get_managed_prefix_list_associations(params = {})
+    # @param [Hash] params ({})
+    def get_managed_prefix_list_associations(params = {}, options = {})
+      req = build_request(:get_managed_prefix_list_associations, params)
+      req.send_request(options)
+    end
+
+    # Gets information about the entries for a specified managed prefix
+    # list.
+    #
+    # @option params [Boolean] :dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #
+    # @option params [required, String] :prefix_list_id
+    #   The ID of the prefix list.
+    #
+    # @option params [Integer] :target_version
+    #   The version of the prefix list for which to return the entries. The
+    #   default is the current version.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of results to return with a single call. To
+    #   retrieve the remaining results, make another call with the returned
+    #   `nextToken` value.
+    #
+    # @option params [String] :next_token
+    #   The token for the next page of results.
+    #
+    # @return [Types::GetManagedPrefixListEntriesResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetManagedPrefixListEntriesResult#entries #entries} => Array&lt;Types::PrefixListEntry&gt;
+    #   * {Types::GetManagedPrefixListEntriesResult#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_managed_prefix_list_entries({
+    #     dry_run: false,
+    #     prefix_list_id: "PrefixListResourceId", # required
+    #     target_version: 1,
+    #     max_results: 1,
+    #     next_token: "NextToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.entries #=> Array
+    #   resp.entries[0].cidr #=> String
+    #   resp.entries[0].description #=> String
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/GetManagedPrefixListEntries AWS API Documentation
+    #
+    # @overload get_managed_prefix_list_entries(params = {})
+    # @param [Hash] params ({})
+    def get_managed_prefix_list_entries(params = {}, options = {})
+      req = build_request(:get_managed_prefix_list_entries, params)
+      req.send_request(options)
+    end
+
     # Retrieves the encrypted administrator password for a running Windows
     # instance.
     #
@@ -30153,6 +30496,84 @@ module Aws::EC2
     # @param [Hash] params ({})
     def modify_launch_template(params = {}, options = {})
       req = build_request(:modify_launch_template, params)
+      req.send_request(options)
+    end
+
+    # Modifies the specified managed prefix list.
+    #
+    # Adding or removing entries in a prefix list creates a new version of
+    # the prefix list. Changing the name of the prefix list does not affect
+    # the version.
+    #
+    # If you specify a current version number that does not match the true
+    # current version number, the request fails.
+    #
+    # @option params [Boolean] :dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #
+    # @option params [required, String] :prefix_list_id
+    #   The ID of the prefix list.
+    #
+    # @option params [Integer] :current_version
+    #   The current version of the prefix list.
+    #
+    # @option params [String] :prefix_list_name
+    #   A name for the prefix list.
+    #
+    # @option params [Array<Types::AddPrefixListEntry>] :add_entries
+    #   One or more entries to add to the prefix list.
+    #
+    # @option params [Array<Types::RemovePrefixListEntry>] :remove_entries
+    #   One or more entries to remove from the prefix list.
+    #
+    # @return [Types::ModifyManagedPrefixListResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ModifyManagedPrefixListResult#prefix_list #prefix_list} => Types::ManagedPrefixList
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.modify_managed_prefix_list({
+    #     dry_run: false,
+    #     prefix_list_id: "PrefixListResourceId", # required
+    #     current_version: 1,
+    #     prefix_list_name: "String",
+    #     add_entries: [
+    #       {
+    #         cidr: "String", # required
+    #         description: "String",
+    #       },
+    #     ],
+    #     remove_entries: [
+    #       {
+    #         cidr: "String", # required
+    #       },
+    #     ],
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.prefix_list.prefix_list_id #=> String
+    #   resp.prefix_list.address_family #=> String
+    #   resp.prefix_list.state #=> String, one of "create-in-progress", "create-complete", "create-failed", "modify-in-progress", "modify-complete", "modify-failed", "restore-in-progress", "restore-complete", "restore-failed", "delete-in-progress", "delete-complete", "delete-failed"
+    #   resp.prefix_list.state_message #=> String
+    #   resp.prefix_list.prefix_list_arn #=> String
+    #   resp.prefix_list.prefix_list_name #=> String
+    #   resp.prefix_list.max_entries #=> Integer
+    #   resp.prefix_list.version #=> Integer
+    #   resp.prefix_list.tags #=> Array
+    #   resp.prefix_list.tags[0].key #=> String
+    #   resp.prefix_list.tags[0].value #=> String
+    #   resp.prefix_list.owner_id #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ModifyManagedPrefixList AWS API Documentation
+    #
+    # @overload modify_managed_prefix_list(params = {})
+    # @param [Hash] params ({})
+    def modify_managed_prefix_list(params = {}, options = {})
+      req = build_request(:modify_managed_prefix_list, params)
       req.send_request(options)
     end
 
@@ -33442,6 +33863,9 @@ module Aws::EC2
     #   that you provide must match the CIDR of an existing route in the
     #   table.
     #
+    # @option params [String] :destination_prefix_list_id
+    #   The ID of the prefix list for the route.
+    #
     # @option params [Boolean] :dry_run
     #   Checks whether you have the required permissions for the action,
     #   without actually making the request, and provides an error response.
@@ -33498,6 +33922,7 @@ module Aws::EC2
     #   resp = client.replace_route({
     #     destination_cidr_block: "String",
     #     destination_ipv_6_cidr_block: "String",
+    #     destination_prefix_list_id: "PrefixListResourceId",
     #     dry_run: false,
     #     egress_only_internet_gateway_id: "EgressOnlyInternetGatewayId",
     #     gateway_id: "RouteGatewayId",
@@ -34765,6 +35190,61 @@ module Aws::EC2
     # @param [Hash] params ({})
     def restore_address_to_classic(params = {}, options = {})
       req = build_request(:restore_address_to_classic, params)
+      req.send_request(options)
+    end
+
+    # Restores the entries from a previous version of a managed prefix list
+    # to a new version of the prefix list.
+    #
+    # @option params [Boolean] :dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #
+    # @option params [required, String] :prefix_list_id
+    #   The ID of the prefix list.
+    #
+    # @option params [required, Integer] :previous_version
+    #   The version to restore.
+    #
+    # @option params [required, Integer] :current_version
+    #   The current version number for the prefix list.
+    #
+    # @return [Types::RestoreManagedPrefixListVersionResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::RestoreManagedPrefixListVersionResult#prefix_list #prefix_list} => Types::ManagedPrefixList
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.restore_managed_prefix_list_version({
+    #     dry_run: false,
+    #     prefix_list_id: "PrefixListResourceId", # required
+    #     previous_version: 1, # required
+    #     current_version: 1, # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.prefix_list.prefix_list_id #=> String
+    #   resp.prefix_list.address_family #=> String
+    #   resp.prefix_list.state #=> String, one of "create-in-progress", "create-complete", "create-failed", "modify-in-progress", "modify-complete", "modify-failed", "restore-in-progress", "restore-complete", "restore-failed", "delete-in-progress", "delete-complete", "delete-failed"
+    #   resp.prefix_list.state_message #=> String
+    #   resp.prefix_list.prefix_list_arn #=> String
+    #   resp.prefix_list.prefix_list_name #=> String
+    #   resp.prefix_list.max_entries #=> Integer
+    #   resp.prefix_list.version #=> Integer
+    #   resp.prefix_list.tags #=> Array
+    #   resp.prefix_list.tags[0].key #=> String
+    #   resp.prefix_list.tags[0].value #=> String
+    #   resp.prefix_list.owner_id #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/RestoreManagedPrefixListVersion AWS API Documentation
+    #
+    # @overload restore_managed_prefix_list_version(params = {})
+    # @param [Hash] params ({})
+    def restore_managed_prefix_list_version(params = {}, options = {})
+      req = build_request(:restore_managed_prefix_list_version, params)
       req.send_request(options)
     end
 
@@ -37137,7 +37617,7 @@ module Aws::EC2
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-ec2'
-      context[:gem_version] = '1.171.0'
+      context[:gem_version] = '1.172.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 
