@@ -273,6 +273,7 @@ module Aws::CodeGuruReviewer
 
     Repository.add_member(:code_commit, Shapes::ShapeRef.new(shape: CodeCommitRepository, location_name: "CodeCommit"))
     Repository.add_member(:bitbucket, Shapes::ShapeRef.new(shape: ThirdPartySourceRepository, location_name: "Bitbucket"))
+    Repository.add_member(:git_hub_enterprise_server, Shapes::ShapeRef.new(shape: ThirdPartySourceRepository, location_name: "GitHubEnterpriseServer"))
     Repository.struct_class = Types::Repository
 
     RepositoryAssociation.add_member(:association_id, Shapes::ShapeRef.new(shape: AssociationId, location_name: "AssociationId"))

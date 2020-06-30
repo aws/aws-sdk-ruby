@@ -1263,6 +1263,20 @@ module Aws::ECR
       include Aws::Structure
     end
 
+    # The specified image digest does not match the digest that Amazon ECR
+    # calculated for the image.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ecr-2015-09-21/ImageDigestDoesNotMatchException AWS API Documentation
+    #
+    class ImageDigestDoesNotMatchException < Struct.new(
+      :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # An object representing an Amazon ECR image failure.
     #
     # @!attribute [rw] image_id
@@ -2008,6 +2022,7 @@ module Aws::ECR
     #         image_manifest: "ImageManifest", # required
     #         image_manifest_media_type: "MediaType",
     #         image_tag: "ImageTag",
+    #         image_digest: "ImageDigest",
     #       }
     #
     # @!attribute [rw] registry_id
@@ -2036,6 +2051,10 @@ module Aws::ECR
     #   formats.
     #   @return [String]
     #
+    # @!attribute [rw] image_digest
+    #   The image digest of the image manifest corresponding to the image.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ecr-2015-09-21/PutImageRequest AWS API Documentation
     #
     class PutImageRequest < Struct.new(
@@ -2043,7 +2062,8 @@ module Aws::ECR
       :repository_name,
       :image_manifest,
       :image_manifest_media_type,
-      :image_tag)
+      :image_tag,
+      :image_digest)
       SENSITIVE = []
       include Aws::Structure
     end

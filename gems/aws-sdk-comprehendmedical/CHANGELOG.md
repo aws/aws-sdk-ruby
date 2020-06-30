@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.20.0 (2020-06-30)
+------------------
+
+* Feature - This release adds the relationships between MedicalCondition and Anatomy in DetectEntitiesV2 API.
+
 1.19.0 (2020-06-23)
 ------------------
 

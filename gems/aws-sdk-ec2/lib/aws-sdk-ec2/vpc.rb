@@ -345,6 +345,17 @@ module Aws::EC2
     #
     #   networkacl = vpc.create_network_acl({
     #     dry_run: false,
+    #     tag_specifications: [
+    #       {
+    #         resource_type: "client-vpn-endpoint", # accepts client-vpn-endpoint, customer-gateway, dedicated-host, dhcp-options, elastic-ip, elastic-gpu, export-image-task, export-instance-task, fleet, fpga-image, host-reservation, image, import-image-task, import-snapshot-task, instance, internet-gateway, key-pair, launch-template, local-gateway-route-table-vpc-association, natgateway, network-acl, network-interface, placement-group, reserved-instances, route-table, security-group, snapshot, spot-fleet-request, spot-instances-request, subnet, traffic-mirror-filter, traffic-mirror-session, traffic-mirror-target, transit-gateway, transit-gateway-attachment, transit-gateway-multicast-domain, transit-gateway-route-table, volume, vpc, vpc-peering-connection, vpn-connection, vpn-gateway, vpc-flow-log
+    #         tags: [
+    #           {
+    #             key: "String",
+    #             value: "String",
+    #           },
+    #         ],
+    #       },
+    #     ],
     #   })
     # @param [Hash] options ({})
     # @option options [Boolean] :dry_run
@@ -352,6 +363,8 @@ module Aws::EC2
     #   without actually making the request, and provides an error response.
     #   If you have the required permissions, the error response is
     #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    # @option options [Array<Types::TagSpecification>] :tag_specifications
+    #   The tags to assign to the network ACL.
     # @return [NetworkAcl]
     def create_network_acl(options = {})
       options = options.merge(vpc_id: @id)
@@ -390,6 +403,17 @@ module Aws::EC2
     #   securitygroup = vpc.create_security_group({
     #     description: "String", # required
     #     group_name: "String", # required
+    #     tag_specifications: [
+    #       {
+    #         resource_type: "client-vpn-endpoint", # accepts client-vpn-endpoint, customer-gateway, dedicated-host, dhcp-options, elastic-ip, elastic-gpu, export-image-task, export-instance-task, fleet, fpga-image, host-reservation, image, import-image-task, import-snapshot-task, instance, internet-gateway, key-pair, launch-template, local-gateway-route-table-vpc-association, natgateway, network-acl, network-interface, placement-group, reserved-instances, route-table, security-group, snapshot, spot-fleet-request, spot-instances-request, subnet, traffic-mirror-filter, traffic-mirror-session, traffic-mirror-target, transit-gateway, transit-gateway-attachment, transit-gateway-multicast-domain, transit-gateway-route-table, volume, vpc, vpc-peering-connection, vpn-connection, vpn-gateway, vpc-flow-log
+    #         tags: [
+    #           {
+    #             key: "String",
+    #             value: "String",
+    #           },
+    #         ],
+    #       },
+    #     ],
     #     dry_run: false,
     #   })
     # @param [Hash] options ({})
@@ -411,6 +435,8 @@ module Aws::EC2
     #
     #   Constraints for EC2-VPC: a-z, A-Z, 0-9, spaces, and
     #   .\_-:/()#,@\[\]+=&amp;;\\\{\\}!$*
+    # @option options [Array<Types::TagSpecification>] :tag_specifications
+    #   The tags to assign to the security group.
     # @option options [Boolean] :dry_run
     #   Checks whether you have the required permissions for the action,
     #   without actually making the request, and provides an error response.
@@ -429,6 +455,17 @@ module Aws::EC2
     # @example Request syntax with placeholder values
     #
     #   subnet = vpc.create_subnet({
+    #     tag_specifications: [
+    #       {
+    #         resource_type: "client-vpn-endpoint", # accepts client-vpn-endpoint, customer-gateway, dedicated-host, dhcp-options, elastic-ip, elastic-gpu, export-image-task, export-instance-task, fleet, fpga-image, host-reservation, image, import-image-task, import-snapshot-task, instance, internet-gateway, key-pair, launch-template, local-gateway-route-table-vpc-association, natgateway, network-acl, network-interface, placement-group, reserved-instances, route-table, security-group, snapshot, spot-fleet-request, spot-instances-request, subnet, traffic-mirror-filter, traffic-mirror-session, traffic-mirror-target, transit-gateway, transit-gateway-attachment, transit-gateway-multicast-domain, transit-gateway-route-table, volume, vpc, vpc-peering-connection, vpn-connection, vpn-gateway, vpc-flow-log
+    #         tags: [
+    #           {
+    #             key: "String",
+    #             value: "String",
+    #           },
+    #         ],
+    #       },
+    #     ],
     #     availability_zone: "String",
     #     availability_zone_id: "String",
     #     cidr_block: "String", # required
@@ -437,6 +474,8 @@ module Aws::EC2
     #     dry_run: false,
     #   })
     # @param [Hash] options ({})
+    # @option options [Array<Types::TagSpecification>] :tag_specifications
+    #   The tags to assign to the subnet.
     # @option options [String] :availability_zone
     #   The Availability Zone or Local Zone for the subnet.
     #

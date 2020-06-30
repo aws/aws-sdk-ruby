@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.173.0 (2020-06-30)
+------------------
+
+* Feature - Added support for tag-on-create for CreateVpc, CreateEgressOnlyInternetGateway, CreateSecurityGroup, CreateSubnet, CreateNetworkInterface, CreateNetworkAcl, CreateDhcpOptions and CreateInternetGateway. You can now specify tags when creating any of these resources. For more information about tagging, see AWS Tagging Strategies.
+
 1.172.0 (2020-06-29)
 ------------------
 

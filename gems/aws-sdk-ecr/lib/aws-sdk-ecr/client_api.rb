@@ -74,6 +74,7 @@ module Aws::ECR
     ImageDetail = Shapes::StructureShape.new(name: 'ImageDetail')
     ImageDetailList = Shapes::ListShape.new(name: 'ImageDetailList')
     ImageDigest = Shapes::StringShape.new(name: 'ImageDigest')
+    ImageDigestDoesNotMatchException = Shapes::StructureShape.new(name: 'ImageDigestDoesNotMatchException')
     ImageFailure = Shapes::StructureShape.new(name: 'ImageFailure')
     ImageFailureCode = Shapes::StringShape.new(name: 'ImageFailureCode')
     ImageFailureList = Shapes::ListShape.new(name: 'ImageFailureList')
@@ -403,6 +404,9 @@ module Aws::ECR
 
     ImageDetailList.member = Shapes::ShapeRef.new(shape: ImageDetail)
 
+    ImageDigestDoesNotMatchException.add_member(:message, Shapes::ShapeRef.new(shape: ExceptionMessage, location_name: "message"))
+    ImageDigestDoesNotMatchException.struct_class = Types::ImageDigestDoesNotMatchException
+
     ImageFailure.add_member(:image_id, Shapes::ShapeRef.new(shape: ImageIdentifier, location_name: "imageId"))
     ImageFailure.add_member(:failure_code, Shapes::ShapeRef.new(shape: ImageFailureCode, location_name: "failureCode"))
     ImageFailure.add_member(:failure_reason, Shapes::ShapeRef.new(shape: ImageFailureReason, location_name: "failureReason"))
@@ -563,6 +567,7 @@ module Aws::ECR
     PutImageRequest.add_member(:image_manifest, Shapes::ShapeRef.new(shape: ImageManifest, required: true, location_name: "imageManifest"))
     PutImageRequest.add_member(:image_manifest_media_type, Shapes::ShapeRef.new(shape: MediaType, location_name: "imageManifestMediaType"))
     PutImageRequest.add_member(:image_tag, Shapes::ShapeRef.new(shape: ImageTag, location_name: "imageTag"))
+    PutImageRequest.add_member(:image_digest, Shapes::ShapeRef.new(shape: ImageDigest, location_name: "imageDigest"))
     PutImageRequest.struct_class = Types::PutImageRequest
 
     PutImageResponse.add_member(:image, Shapes::ShapeRef.new(shape: Image, location_name: "image"))
@@ -999,6 +1004,7 @@ module Aws::ECR
         o.errors << Shapes::ShapeRef.new(shape: ReferencedImagesNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
         o.errors << Shapes::ShapeRef.new(shape: ImageTagAlreadyExistsException)
+        o.errors << Shapes::ShapeRef.new(shape: ImageDigestDoesNotMatchException)
       end)
 
       api.add_operation(:put_image_scanning_configuration, Seahorse::Model::Operation.new.tap do |o|

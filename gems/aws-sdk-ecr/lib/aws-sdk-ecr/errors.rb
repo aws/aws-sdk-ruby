@@ -29,6 +29,7 @@ module Aws::ECR
   # ## Error Classes
   # * {EmptyUploadException}
   # * {ImageAlreadyExistsException}
+  # * {ImageDigestDoesNotMatchException}
   # * {ImageNotFoundException}
   # * {ImageTagAlreadyExistsException}
   # * {InvalidLayerException}
@@ -80,6 +81,21 @@ module Aws::ECR
       # @param [Seahorse::Client::RequestContext] context
       # @param [String] message
       # @param [Aws::ECR::Types::ImageAlreadyExistsException] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+
+      # @return [String]
+      def message
+        @message || @data[:message]
+      end
+    end
+
+    class ImageDigestDoesNotMatchException < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::ECR::Types::ImageDigestDoesNotMatchException] data
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end

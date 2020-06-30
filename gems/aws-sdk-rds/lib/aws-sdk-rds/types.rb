@@ -738,11 +738,6 @@ module Aws::RDS
       include Aws::Structure
     end
 
-    # <note markdown="1"> This is prerelease documentation for the RDS Database Proxy feature in
-    # preview release. It is subject to change.
-    #
-    #  </note>
-    #
     # Specifies the settings that control the size and behavior of the
     # connection pool associated with a `DBProxyTargetGroup`.
     #
@@ -811,8 +806,6 @@ module Aws::RDS
     #   the separator. You can also include multiple variables in a single
     #   `SET` statement, such as `SET x=1, y=2`.
     #
-    #   `InitQuery` is not currently supported for PostgreSQL.
-    #
     #   Default: no initialization query
     #   @return [String]
     #
@@ -828,11 +821,6 @@ module Aws::RDS
       include Aws::Structure
     end
 
-    # <note markdown="1"> This is prerelease documentation for the RDS Database Proxy feature in
-    # preview release. It is subject to change.
-    #
-    #  </note>
-    #
     # Displays the settings that control the size and behavior of the
     # connection pool associated with a `DBProxyTarget`.
     #
@@ -877,8 +865,6 @@ module Aws::RDS
     #   multiple statements, use semicolons as the separator. You can also
     #   include multiple variables in a single `SET` statement, such as `SET
     #   x=1, y=2`.
-    #
-    #   `InitQuery` is not currently supported for PostgreSQL.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/ConnectionPoolConfigurationInfo AWS API Documentation
@@ -6840,11 +6826,6 @@ module Aws::RDS
       include Aws::Structure
     end
 
-    # <note markdown="1"> This is prerelease documentation for the RDS Database Proxy feature in
-    # preview release. It is subject to change.
-    #
-    #  </note>
-    #
     # The data structure representing a proxy managed by the RDS Proxy.
     #
     # This data type is used as a response element in the
@@ -6972,11 +6953,6 @@ module Aws::RDS
     #
     class DBProxyQuotaExceededFault < Aws::EmptyStructure; end
 
-    # <note markdown="1"> This is prerelease documentation for the RDS Database Proxy feature in
-    # preview release. It is subject to change.
-    #
-    #  </note>
-    #
     # Contains the details for an RDS Proxy target. It represents an RDS DB
     # instance or Aurora DB cluster that the proxy can connect to. One or
     # more targets are associated with an RDS Proxy target group.
@@ -7040,11 +7016,6 @@ module Aws::RDS
     #
     class DBProxyTargetAlreadyRegisteredFault < Aws::EmptyStructure; end
 
-    # <note markdown="1"> This is prerelease documentation for the RDS Database Proxy feature in
-    # preview release. It is subject to change.
-    #
-    #  </note>
-    #
     # Represents a set of RDS DB instances, Aurora DB clusters, or both that
     # a proxy can connect to. Currently, each target group is associated
     # with exactly one RDS DB instance or Aurora DB cluster.
@@ -19609,11 +19580,6 @@ module Aws::RDS
       include Aws::Structure
     end
 
-    # <note markdown="1"> This is prerelease documentation for the RDS Database Proxy feature in
-    # preview release. It is subject to change.
-    #
-    #  </note>
-    #
     # Information about the connection health of an RDS Proxy target.
     #
     # @!attribute [rw] state
@@ -19698,11 +19664,6 @@ module Aws::RDS
       include Aws::Structure
     end
 
-    # <note markdown="1"> This is prerelease documentation for the RDS Database Proxy feature in
-    # preview release. It is subject to change.
-    #
-    #  </note>
-    #
     # Specifies the details of authentication used by a proxy to log in as a
     # specific database user.
     #
@@ -19754,11 +19715,6 @@ module Aws::RDS
       include Aws::Structure
     end
 
-    # <note markdown="1"> This is prerelease documentation for the RDS Database Proxy feature in
-    # preview release. It is subject to change.
-    #
-    #  </note>
-    #
     # Returns the details of authentication used by a proxy to log in as a
     # specific database user.
     #

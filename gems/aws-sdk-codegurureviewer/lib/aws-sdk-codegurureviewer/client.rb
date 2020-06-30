@@ -312,14 +312,36 @@ module Aws::CodeGuruReviewer
 
     # @!group API Operations
 
-    # Associates an AWS CodeCommit repository with Amazon CodeGuru Reviewer.
-    # When you associate an AWS CodeCommit repository with Amazon CodeGuru
-    # Reviewer, Amazon CodeGuru Reviewer will provide recommendations for
-    # each pull request raised within the repository. You can view
-    # recommendations in the AWS CodeCommit repository.
+    # Use to associate an AWS CodeCommit repository or a repostory managed
+    # by AWS CodeStar Connections with Amazon CodeGuru Reviewer. When you
+    # associate a repository, CodeGuru Reviewer reviews source code changes
+    # in the repository's pull requests and provides automatic
+    # recommendations. You can view recommendations using the CodeGuru
+    # Reviewer console. For more information, see [Recommendations in Amazon
+    # CodeGuru Reviewer][1] in the *Amazon CodeGuru Reviewer User Guide.*
     #
-    # You can associate a GitHub repository using the Amazon CodeGuru
-    # Reviewer console.
+    # If you associate a CodeCommit repository, it must be in the same AWS
+    # Region and AWS account where its CodeGuru Reviewer code reviews are
+    # configured.
+    #
+    # Bitbucket and GitHub Enterprise Server repositories are managed by AWS
+    # CodeStar Connections to connect to CodeGuru Reviewer. For more
+    # information, see [Connect to a repository source provider][2] in the
+    # *Amazon CodeGuru Reviewer User Guide.*
+    #
+    # <note markdown="1"> You cannot use the CodeGuru Reviewer SDK or the AWS CLI to associate a
+    # GitHub repository with Amazon CodeGuru Reviewer. To associate a GitHub
+    # repository, use the console. For more information, see [Getting
+    # started with CodeGuru Reviewer][3] in the *CodeGuru Reviewer User
+    # Guide.*
+    #
+    #  </note>
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/codeguru/latest/reviewer-ug/recommendations.html
+    # [2]: https://docs.aws.amazon.com/codeguru/latest/reviewer-ug/reviewer-ug/step-one.html#select-repository-source-provider
+    # [3]: https://docs.aws.amazon.com/codeguru/latest/reviewer-ug/getting-started-with-guru.html
     #
     # @option params [required, Types::Repository] :repository
     #   The repository to associate.
@@ -367,6 +389,11 @@ module Aws::CodeGuruReviewer
     #         connection_arn: "ConnectionArn", # required
     #         owner: "Owner", # required
     #       },
+    #       git_hub_enterprise_server: {
+    #         name: "Name", # required
+    #         connection_arn: "ConnectionArn", # required
+    #         owner: "Owner", # required
+    #       },
     #     },
     #     client_request_token: "ClientRequestToken",
     #   })
@@ -378,7 +405,7 @@ module Aws::CodeGuruReviewer
     #   resp.repository_association.connection_arn #=> String
     #   resp.repository_association.name #=> String
     #   resp.repository_association.owner #=> String
-    #   resp.repository_association.provider_type #=> String, one of "CodeCommit", "GitHub", "Bitbucket"
+    #   resp.repository_association.provider_type #=> String, one of "CodeCommit", "GitHub", "Bitbucket", "GitHubEnterpriseServer"
     #   resp.repository_association.state #=> String, one of "Associated", "Associating", "Failed", "Disassociating"
     #   resp.repository_association.state_reason #=> String
     #   resp.repository_association.last_updated_time_stamp #=> Time
@@ -393,11 +420,15 @@ module Aws::CodeGuruReviewer
       req.send_request(options)
     end
 
-    # Returns the metadaata associated with the code review along with its
+    # Returns the metadata associated with the code review along with its
     # status.
     #
     # @option params [required, String] :code_review_arn
-    #   The Amazon Resource Name (ARN) of the code review to describe.
+    #   The Amazon Resource Name (ARN) of the [ `CodeReview` ][1] object.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/codeguru/latest/reviewer-api/API_CodeReview.html
     #
     # @return [Types::DescribeCodeReviewResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -415,7 +446,7 @@ module Aws::CodeGuruReviewer
     #   resp.code_review.code_review_arn #=> String
     #   resp.code_review.repository_name #=> String
     #   resp.code_review.owner #=> String
-    #   resp.code_review.provider_type #=> String, one of "CodeCommit", "GitHub", "Bitbucket"
+    #   resp.code_review.provider_type #=> String, one of "CodeCommit", "GitHub", "Bitbucket", "GitHubEnterpriseServer"
     #   resp.code_review.state #=> String, one of "Completed", "Pending", "Failed", "Deleting"
     #   resp.code_review.state_reason #=> String
     #   resp.code_review.created_time_stamp #=> Time
@@ -440,7 +471,11 @@ module Aws::CodeGuruReviewer
     # recommendation.
     #
     # @option params [required, String] :code_review_arn
-    #   The Amazon Resource Name (ARN) that identifies the code review.
+    #   The Amazon Resource Name (ARN) of the [ `CodeReview` ][1] object.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/codeguru/latest/reviewer-api/API_CodeReview.html
     #
     # @option params [required, String] :recommendation_id
     #   The recommendation ID that can be used to track the provided
@@ -449,6 +484,15 @@ module Aws::CodeGuruReviewer
     # @option params [String] :user_id
     #   Optional parameter to describe the feedback for a given user. If this
     #   is not supplied, it defaults to the user making the request.
+    #
+    #   The `UserId` is an IAM principal that can be specified as an AWS
+    #   account ID or an Amazon Resource Name (ARN). For more information, see
+    #   [ Specifying a Principal][1] in the *AWS Identity and Access
+    #   Management User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_elements_principal.html#Principal_specifying
     #
     # @return [Types::DescribeRecommendationFeedbackResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -481,11 +525,20 @@ module Aws::CodeGuruReviewer
       req.send_request(options)
     end
 
-    # Describes a repository association.
+    # Returns a [ `RepositoryAssociation` ][1] object that contains
+    # information about the requested repository association.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/codeguru/latest/reviewer-api/API_RepositoryAssociation.html
     #
     # @option params [required, String] :association_arn
-    #   The Amazon Resource Name (ARN) identifying the association. You can
-    #   retrieve this ARN by calling `ListRepositories`.
+    #   The Amazon Resource Name (ARN) of the [ `RepositoryAssociation` ][1]
+    #   object. You can retrieve this ARN by calling `ListRepositories`.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/codeguru/latest/reviewer-api/API_RepositoryAssociation.html
     #
     # @return [Types::DescribeRepositoryAssociationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -504,7 +557,7 @@ module Aws::CodeGuruReviewer
     #   resp.repository_association.connection_arn #=> String
     #   resp.repository_association.name #=> String
     #   resp.repository_association.owner #=> String
-    #   resp.repository_association.provider_type #=> String, one of "CodeCommit", "GitHub", "Bitbucket"
+    #   resp.repository_association.provider_type #=> String, one of "CodeCommit", "GitHub", "Bitbucket", "GitHubEnterpriseServer"
     #   resp.repository_association.state #=> String, one of "Associated", "Associating", "Failed", "Disassociating"
     #   resp.repository_association.state_reason #=> String
     #   resp.repository_association.last_updated_time_stamp #=> Time
@@ -523,7 +576,12 @@ module Aws::CodeGuruReviewer
     # repository.
     #
     # @option params [required, String] :association_arn
-    #   The Amazon Resource Name (ARN) identifying the association.
+    #   The Amazon Resource Name (ARN) of the [ `RepositoryAssociation` ][1]
+    #   object.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/codeguru/latest/reviewer-api/API_RepositoryAssociation.html
     #
     # @return [Types::DisassociateRepositoryResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -542,7 +600,7 @@ module Aws::CodeGuruReviewer
     #   resp.repository_association.connection_arn #=> String
     #   resp.repository_association.name #=> String
     #   resp.repository_association.owner #=> String
-    #   resp.repository_association.provider_type #=> String, one of "CodeCommit", "GitHub", "Bitbucket"
+    #   resp.repository_association.provider_type #=> String, one of "CodeCommit", "GitHub", "Bitbucket", "GitHubEnterpriseServer"
     #   resp.repository_association.state #=> String, one of "Associated", "Associating", "Failed", "Disassociating"
     #   resp.repository_association.state_reason #=> String
     #   resp.repository_association.last_updated_time_stamp #=> Time
@@ -562,13 +620,23 @@ module Aws::CodeGuruReviewer
     #
     # @option params [Array<String>] :provider_types
     #   List of provider types for filtering that needs to be applied before
-    #   displaying the result. For example, "providerTypes=\[GitHub\]" will
-    #   list code reviews from GitHub.
+    #   displaying the result. For example, `providerTypes=[GitHub]` lists
+    #   code reviews from GitHub.
     #
     # @option params [Array<String>] :states
     #   List of states for filtering that needs to be applied before
-    #   displaying the result. For example, "states=\[Pending\]" will list
-    #   code reviews in the Pending state.
+    #   displaying the result. For example, `states=[Pending]` lists code
+    #   reviews in the Pending state.
+    #
+    #   The valid code review states are:
+    #
+    #   * `Completed`\: The code review is complete.
+    #
+    #   * `Pending`\: The code review started and has not completed or failed.
+    #
+    #   * `Failed`\: The code review failed.
+    #
+    #   * `Deleting`\: The code review is being deleted.
     #
     # @option params [Array<String>] :repository_names
     #   List of repository names for filtering that needs to be applied before
@@ -597,7 +665,7 @@ module Aws::CodeGuruReviewer
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_code_reviews({
-    #     provider_types: ["CodeCommit"], # accepts CodeCommit, GitHub, Bitbucket
+    #     provider_types: ["CodeCommit"], # accepts CodeCommit, GitHub, Bitbucket, GitHubEnterpriseServer
     #     states: ["Completed"], # accepts Completed, Pending, Failed, Deleting
     #     repository_names: ["Name"],
     #     type: "PullRequest", # required, accepts PullRequest
@@ -612,7 +680,7 @@ module Aws::CodeGuruReviewer
     #   resp.code_review_summaries[0].code_review_arn #=> String
     #   resp.code_review_summaries[0].repository_name #=> String
     #   resp.code_review_summaries[0].owner #=> String
-    #   resp.code_review_summaries[0].provider_type #=> String, one of "CodeCommit", "GitHub", "Bitbucket"
+    #   resp.code_review_summaries[0].provider_type #=> String, one of "CodeCommit", "GitHub", "Bitbucket", "GitHubEnterpriseServer"
     #   resp.code_review_summaries[0].state #=> String, one of "Completed", "Pending", "Failed", "Deleting"
     #   resp.code_review_summaries[0].created_time_stamp #=> Time
     #   resp.code_review_summaries[0].last_updated_time_stamp #=> Time
@@ -631,33 +699,46 @@ module Aws::CodeGuruReviewer
       req.send_request(options)
     end
 
-    # Lists the customer feedback for a CodeGuru Reviewer recommendation for
-    # all users. This API will be used from the console to extract the
-    # previously given feedback by the user to pre-populate the feedback
-    # emojis for all recommendations.
+    # Returns a list of [ `RecommendationFeedbackSummary` ][1] objects that
+    # contain customer recommendation feedback for all CodeGuru Reviewer
+    # users.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/codeguru/latest/reviewer-api/API_RecommendationFeedbackSummary.html
     #
     # @option params [String] :next_token
-    #   If nextToken is returned, there are more results available. The value
-    #   of nextToken is a unique pagination token for each page. Make the call
-    #   again using the returned token to retrieve the next page. Keep all
-    #   other arguments unchanged.
+    #   If `nextToken` is returned, there are more results available. The
+    #   value of nextToken is a unique pagination token for each page. Make
+    #   the call again using the returned token to retrieve the next page.
+    #   Keep all other arguments unchanged.
     #
     # @option params [Integer] :max_results
     #   The maximum number of results that are returned per call. The default
     #   is 100.
     #
     # @option params [required, String] :code_review_arn
-    #   The Amazon Resource Name (ARN) that identifies the code review.
+    #   The Amazon Resource Name (ARN) of the [ `CodeReview` ][1] object.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/codeguru/latest/reviewer-api/API_CodeReview.html
     #
     # @option params [Array<String>] :user_ids
-    #   Filter on userIds that need to be applied before displaying the
-    #   result. This can be used to query all the recommendation feedback for
-    #   a code review from a given user.
+    #   An AWS user's account ID or Amazon Resource Name (ARN). Use this ID
+    #   to query the recommendation feedback for a code review from that user.
+    #
+    #   The `UserId` is an IAM principal that can be specified as an AWS
+    #   account ID or an Amazon Resource Name (ARN). For more information, see
+    #   [ Specifying a Principal][1] in the *AWS Identity and Access
+    #   Management User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_elements_principal.html#Principal_specifying
     #
     # @option params [Array<String>] :recommendation_ids
-    #   Filter on recommendationIds that need to be applied before displaying
-    #   the result. This can be used to query all the recommendation feedback
-    #   for a given recommendation.
+    #   Used to query the recommendation feedback for a given recommendation.
     #
     # @return [Types::ListRecommendationFeedbackResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -704,7 +785,11 @@ module Aws::CodeGuruReviewer
     #   is 100.
     #
     # @option params [required, String] :code_review_arn
-    #   The Amazon Resource Name (ARN) of the code review to describe.
+    #   The Amazon Resource Name (ARN) of the [ `CodeReview` ][1] object.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/codeguru/latest/reviewer-api/API_CodeReview.html
     #
     # @return [Types::ListRecommendationsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -740,24 +825,57 @@ module Aws::CodeGuruReviewer
       req.send_request(options)
     end
 
-    # Lists repository associations. You can optionally filter on one or
-    # more of the following recommendation properties: provider types,
-    # states, names, and owners.
+    # Returns a list of [ `RepositoryAssociationSummary` ][1] objects that
+    # contain summary information about a repository association. You can
+    # filter the returned list by [ `ProviderType` ][2], [ `Name` ][3], [
+    # `State` ][4], and [ `Owner` ][5].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/codeguru/latest/reviewer-api/API_RepositoryAssociationSummary.html
+    # [2]: https://docs.aws.amazon.com/codeguru/latest/reviewer-api/API_RepositoryAssociationSummary.html#reviewer-Type-RepositoryAssociationSummary-ProviderType
+    # [3]: https://docs.aws.amazon.com/codeguru/latest/reviewer-api/API_RepositoryAssociationSummary.html#reviewer-Type-RepositoryAssociationSummary-Name
+    # [4]: https://docs.aws.amazon.com/codeguru/latest/reviewer-api/API_RepositoryAssociationSummary.html#reviewer-Type-RepositoryAssociationSummary-State
+    # [5]: https://docs.aws.amazon.com/codeguru/latest/reviewer-api/API_RepositoryAssociationSummary.html#reviewer-Type-RepositoryAssociationSummary-Owner
     #
     # @option params [Array<String>] :provider_types
     #   List of provider types to use as a filter.
     #
     # @option params [Array<String>] :states
-    #   List of states to use as a filter.
+    #   List of repository association states to use as a filter.
+    #
+    #   The valid repository association states are:
+    #
+    #   * **Associated**\: The repository association is complete.
+    #
+    #   * **Associating**\: CodeGuru Reviewer is:
+    #
+    #     * Setting up pull request notifications. This is required for pull
+    #       requests to trigger a CodeGuru Reviewer review.
+    #
+    #       <note markdown="1"> If your repository `ProviderType` is `GitHub` or `Bitbucket`,
+    #       CodeGuru Reviewer creates webhooks in your repository to trigger
+    #       CodeGuru Reviewer reviews. If you delete these webhooks, reviews
+    #       of code in your repository cannot be triggered.
+    #
+    #        </note>
+    #
+    #     * Setting up source code access. This is required for CodeGuru
+    #       Reviewer to securely clone code in your repository.
+    #
+    #   * **Failed**\: The repository failed to associate or disassociate.
+    #
+    #   * **Disassociating**\: CodeGuru Reviewer is removing the repository's
+    #     pull request notifications and source code access.
     #
     # @option params [Array<String>] :names
     #   List of repository names to use as a filter.
     #
     # @option params [Array<String>] :owners
-    #   List of owners to use as a filter. For GitHub, this is name of the
-    #   GitHub account that was used to associate the repository. For AWS
-    #   CodeCommit, it is the name of the CodeCommit account that was used to
-    #   associate the repository.
+    #   List of owners to use as a filter. For AWS CodeCommit, it is the name
+    #   of the CodeCommit account that was used to associate the repository.
+    #   For other repository source providers, such as Bitbucket, this is name
+    #   of the account that was used to associate the repository.
     #
     # @option params [Integer] :max_results
     #   The maximum number of repository association results returned by
@@ -766,8 +884,8 @@ module Aws::CodeGuruReviewer
     #   results in a single page with a `nextToken` response element. The
     #   remaining results of the initial request can be seen by sending
     #   another `ListRepositoryAssociations` request with the returned
-    #   `nextToken` value. This value can be between 1 and 25. If this
-    #   parameter is not used, `ListRepositoryAssociations` returns up to 25
+    #   `nextToken` value. This value can be between 1 and 100. If this
+    #   parameter is not used, `ListRepositoryAssociations` returns up to 100
     #   results and a `nextToken` value if applicable.
     #
     # @option params [String] :next_token
@@ -792,7 +910,7 @@ module Aws::CodeGuruReviewer
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_repository_associations({
-    #     provider_types: ["CodeCommit"], # accepts CodeCommit, GitHub, Bitbucket
+    #     provider_types: ["CodeCommit"], # accepts CodeCommit, GitHub, Bitbucket, GitHubEnterpriseServer
     #     states: ["Associated"], # accepts Associated, Associating, Failed, Disassociating
     #     names: ["Name"],
     #     owners: ["Owner"],
@@ -809,7 +927,7 @@ module Aws::CodeGuruReviewer
     #   resp.repository_association_summaries[0].association_id #=> String
     #   resp.repository_association_summaries[0].name #=> String
     #   resp.repository_association_summaries[0].owner #=> String
-    #   resp.repository_association_summaries[0].provider_type #=> String, one of "CodeCommit", "GitHub", "Bitbucket"
+    #   resp.repository_association_summaries[0].provider_type #=> String, one of "CodeCommit", "GitHub", "Bitbucket", "GitHubEnterpriseServer"
     #   resp.repository_association_summaries[0].state #=> String, one of "Associated", "Associating", "Failed", "Disassociating"
     #   resp.next_token #=> String
     #
@@ -822,12 +940,16 @@ module Aws::CodeGuruReviewer
       req.send_request(options)
     end
 
-    # Stores customer feedback for a CodeGuru-Reviewer recommendation. When
+    # Stores customer feedback for a CodeGuru Reviewer recommendation. When
     # this API is called again with different reactions the previous
     # feedback is overwritten.
     #
     # @option params [required, String] :code_review_arn
-    #   The Amazon Resource Name (ARN) that identifies the code review.
+    #   The Amazon Resource Name (ARN) of the [ `CodeReview` ][1] object.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/codeguru/latest/reviewer-api/API_CodeReview.html
     #
     # @option params [required, String] :recommendation_id
     #   The recommendation ID that can be used to track the provided
@@ -869,7 +991,7 @@ module Aws::CodeGuruReviewer
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-codegurureviewer'
-      context[:gem_version] = '1.8.0'
+      context[:gem_version] = '1.9.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

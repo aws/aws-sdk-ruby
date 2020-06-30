@@ -4504,11 +4504,6 @@ module Aws::RDS
       req.send_request(options)
     end
 
-    # <note markdown="1"> This is prerelease documentation for the RDS Database Proxy feature in
-    # preview release. It is subject to change.
-    #
-    #  </note>
-    #
     # Creates a new DB proxy.
     #
     # @option params [required, String] :db_proxy_name
@@ -6000,11 +5995,6 @@ module Aws::RDS
       req.send_request(options)
     end
 
-    # <note markdown="1"> This is prerelease documentation for the RDS Database Proxy feature in
-    # preview release. It is subject to change.
-    #
-    #  </note>
-    #
     # Deletes an existing proxy.
     #
     # @option params [required, String] :db_proxy_name
@@ -6410,11 +6400,6 @@ module Aws::RDS
       req.send_request(options)
     end
 
-    # <note markdown="1"> This is prerelease documentation for the RDS Database Proxy feature in
-    # preview release. It is subject to change.
-    #
-    #  </note>
-    #
     # Remove the association between one or more `DBProxyTarget` data
     # structures and a `DBProxyTargetGroup`.
     #
@@ -8299,11 +8284,6 @@ module Aws::RDS
       req.send_request(options)
     end
 
-    # <note markdown="1"> This is prerelease documentation for the RDS Database Proxy feature in
-    # preview release. It is subject to change.
-    #
-    #  </note>
-    #
     # Returns information about DB proxies.
     #
     # @option params [String] :db_proxy_name
@@ -8383,11 +8363,6 @@ module Aws::RDS
       req.send_request(options)
     end
 
-    # <note markdown="1"> This is prerelease documentation for the RDS Database Proxy feature in
-    # preview release. It is subject to change.
-    #
-    #  </note>
-    #
     # Returns information about DB proxy target groups, represented by
     # `DBProxyTargetGroup` data structures.
     #
@@ -8464,11 +8439,6 @@ module Aws::RDS
       req.send_request(options)
     end
 
-    # <note markdown="1"> This is prerelease documentation for the RDS Database Proxy feature in
-    # preview release. It is subject to change.
-    #
-    #  </note>
-    #
     # Returns information about `DBProxyTarget` objects. This API supports
     # pagination.
     #
@@ -12899,11 +12869,6 @@ module Aws::RDS
       req.send_request(options)
     end
 
-    # <note markdown="1"> This is prerelease documentation for the RDS Database Proxy feature in
-    # preview release. It is subject to change.
-    #
-    #  </note>
-    #
     # Changes the settings for an existing DB proxy.
     #
     # @option params [required, String] :db_proxy_name
@@ -13002,11 +12967,6 @@ module Aws::RDS
       req.send_request(options)
     end
 
-    # <note markdown="1"> This is prerelease documentation for the RDS Database Proxy feature in
-    # preview release. It is subject to change.
-    #
-    #  </note>
-    #
     # Modifies the properties of a `DBProxyTargetGroup`.
     #
     # @option params [required, String] :target_group_name
@@ -14271,11 +14231,6 @@ module Aws::RDS
       req.send_request(options)
     end
 
-    # <note markdown="1"> This is prerelease documentation for the RDS Database Proxy feature in
-    # preview release. It is subject to change.
-    #
-    #  </note>
-    #
     # Associate one or more `DBProxyTarget` data structures with a
     # `DBProxyTargetGroup`.
     #
@@ -18562,7 +18517,7 @@ module Aws::RDS
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-rds'
-      context[:gem_version] = '1.89.0'
+      context[:gem_version] = '1.90.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

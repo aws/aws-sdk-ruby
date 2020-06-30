@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.9.0 (2020-06-30)
+------------------
+
+* Feature - Release GitHub Enterprise Server source provider integration
+
 1.8.0 (2020-06-23)
 ------------------
 

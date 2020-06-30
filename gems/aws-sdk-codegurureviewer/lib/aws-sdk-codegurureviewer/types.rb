@@ -36,6 +36,11 @@ module Aws::CodeGuruReviewer
     #             connection_arn: "ConnectionArn", # required
     #             owner: "Owner", # required
     #           },
+    #           git_hub_enterprise_server: {
+    #             name: "Name", # required
+    #             connection_arn: "ConnectionArn", # required
+    #             owner: "Owner", # required
+    #           },
     #         },
     #         client_request_token: "ClientRequestToken",
     #       }
@@ -95,7 +100,9 @@ module Aws::CodeGuruReviewer
       include Aws::Structure
     end
 
-    # Information about an AWS CodeCommit repository.
+    # Information about an AWS CodeCommit repository. The CodeCommit
+    # repository must be in the same AWS Region and AWS account where its
+    # CodeGuru Reviewer code reviews are configured.
     #
     # @note When making an API call, you may pass CodeCommitRepository
     #   data as a hash:
@@ -105,7 +112,12 @@ module Aws::CodeGuruReviewer
     #       }
     #
     # @!attribute [rw] name
-    #   The name of the AWS CodeCommit repository.
+    #   The name of the AWS CodeCommit repository. For more information, see
+    #   [repositoryName][1] in the *AWS CodeCommit API Reference*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/codecommit/latest/APIReference/API_GetRepository.html#CodeCommit-GetRepository-request-repositoryName
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codeguru-reviewer-2019-09-19/CodeCommitRepository AWS API Documentation
@@ -123,7 +135,11 @@ module Aws::CodeGuruReviewer
     #   @return [String]
     #
     # @!attribute [rw] code_review_arn
-    #   The Amazon Resource Name (ARN) of the code review to describe.
+    #   The Amazon Resource Name (ARN) of the [ `CodeReview` ][1] object.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/codeguru/latest/reviewer-api/API_CodeReview.html
     #   @return [String]
     #
     # @!attribute [rw] repository_name
@@ -131,15 +147,28 @@ module Aws::CodeGuruReviewer
     #   @return [String]
     #
     # @!attribute [rw] owner
-    #   The owner of the repository.
+    #   The owner of the repository. For an AWS CodeCommit repository, this
+    #   is the AWS account ID of the account that owns the repository. For a
+    #   GitHub or Bitbucket repository, this is the username for the account
+    #   that owns the repository.
     #   @return [String]
     #
     # @!attribute [rw] provider_type
-    #   The provider type of the repository association.
+    #   The type of repository that contains the reviewed code (for example,
+    #   GitHub or Bitbucket).
     #   @return [String]
     #
     # @!attribute [rw] state
-    #   The state of the code review.
+    #   The valid code review states are:
+    #
+    #   * `Completed`\: The code review is complete.
+    #
+    #   * `Pending`\: The code review started and has not completed or
+    #     failed.
+    #
+    #   * `Failed`\: The code review failed.
+    #
+    #   * `Deleting`\: The code review is being deleted.
     #   @return [String]
     #
     # @!attribute [rw] state_reason
@@ -199,7 +228,11 @@ module Aws::CodeGuruReviewer
     #   @return [String]
     #
     # @!attribute [rw] code_review_arn
-    #   The Amazon Resource Name (ARN) of the code review to describe.
+    #   The Amazon Resource Name (ARN) of the [ `CodeReview` ][1] object.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/codeguru/latest/reviewer-api/API_CodeReview.html
     #   @return [String]
     #
     # @!attribute [rw] repository_name
@@ -207,7 +240,10 @@ module Aws::CodeGuruReviewer
     #   @return [String]
     #
     # @!attribute [rw] owner
-    #   The owner of the repository.
+    #   The owner of the repository. For an AWS CodeCommit repository, this
+    #   is the AWS account ID of the account that owns the repository. For a
+    #   GitHub or Bitbucket repository, this is the username for the account
+    #   that owns the repository.
     #   @return [String]
     #
     # @!attribute [rw] provider_type
@@ -216,6 +252,17 @@ module Aws::CodeGuruReviewer
     #
     # @!attribute [rw] state
     #   The state of the code review.
+    #
+    #   The valid code review states are:
+    #
+    #   * `Completed`\: The code review is complete.
+    #
+    #   * `Pending`\: The code review started and has not completed or
+    #     failed.
+    #
+    #   * `Failed`\: The code review failed.
+    #
+    #   * `Deleting`\: The code review is being deleted.
     #   @return [String]
     #
     # @!attribute [rw] created_time_stamp
@@ -261,11 +308,11 @@ module Aws::CodeGuruReviewer
     # The commit diff for the pull request.
     #
     # @!attribute [rw] source_commit
-    #   Source Commit SHA.
+    #   The SHA of the source commit.
     #   @return [String]
     #
     # @!attribute [rw] destination_commit
-    #   Destination Commit SHA
+    #   The SHA of the destination commit.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codeguru-reviewer-2019-09-19/CommitDiffSourceCodeType AWS API Documentation
@@ -300,7 +347,11 @@ module Aws::CodeGuruReviewer
     #       }
     #
     # @!attribute [rw] code_review_arn
-    #   The Amazon Resource Name (ARN) of the code review to describe.
+    #   The Amazon Resource Name (ARN) of the [ `CodeReview` ][1] object.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/codeguru/latest/reviewer-api/API_CodeReview.html
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codeguru-reviewer-2019-09-19/DescribeCodeReviewRequest AWS API Documentation
@@ -333,7 +384,11 @@ module Aws::CodeGuruReviewer
     #       }
     #
     # @!attribute [rw] code_review_arn
-    #   The Amazon Resource Name (ARN) that identifies the code review.
+    #   The Amazon Resource Name (ARN) of the [ `CodeReview` ][1] object.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/codeguru/latest/reviewer-api/API_CodeReview.html
     #   @return [String]
     #
     # @!attribute [rw] recommendation_id
@@ -344,6 +399,15 @@ module Aws::CodeGuruReviewer
     # @!attribute [rw] user_id
     #   Optional parameter to describe the feedback for a given user. If
     #   this is not supplied, it defaults to the user making the request.
+    #
+    #   The `UserId` is an IAM principal that can be specified as an AWS
+    #   account ID or an Amazon Resource Name (ARN). For more information,
+    #   see [ Specifying a Principal][1] in the *AWS Identity and Access
+    #   Management User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_elements_principal.html#Principal_specifying
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codeguru-reviewer-2019-09-19/DescribeRecommendationFeedbackRequest AWS API Documentation
@@ -376,8 +440,12 @@ module Aws::CodeGuruReviewer
     #       }
     #
     # @!attribute [rw] association_arn
-    #   The Amazon Resource Name (ARN) identifying the association. You can
-    #   retrieve this ARN by calling `ListRepositories`.
+    #   The Amazon Resource Name (ARN) of the [ `RepositoryAssociation` ][1]
+    #   object. You can retrieve this ARN by calling `ListRepositories`.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/codeguru/latest/reviewer-api/API_RepositoryAssociation.html
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codeguru-reviewer-2019-09-19/DescribeRepositoryAssociationRequest AWS API Documentation
@@ -408,7 +476,12 @@ module Aws::CodeGuruReviewer
     #       }
     #
     # @!attribute [rw] association_arn
-    #   The Amazon Resource Name (ARN) identifying the association.
+    #   The Amazon Resource Name (ARN) of the [ `RepositoryAssociation` ][1]
+    #   object.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/codeguru/latest/reviewer-api/API_RepositoryAssociation.html
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codeguru-reviewer-2019-09-19/DisassociateRepositoryRequest AWS API Documentation
@@ -449,7 +522,7 @@ module Aws::CodeGuruReviewer
     #   data as a hash:
     #
     #       {
-    #         provider_types: ["CodeCommit"], # accepts CodeCommit, GitHub, Bitbucket
+    #         provider_types: ["CodeCommit"], # accepts CodeCommit, GitHub, Bitbucket, GitHubEnterpriseServer
     #         states: ["Completed"], # accepts Completed, Pending, Failed, Deleting
     #         repository_names: ["Name"],
     #         type: "PullRequest", # required, accepts PullRequest
@@ -459,14 +532,25 @@ module Aws::CodeGuruReviewer
     #
     # @!attribute [rw] provider_types
     #   List of provider types for filtering that needs to be applied before
-    #   displaying the result. For example, "providerTypes=\[GitHub\]"
-    #   will list code reviews from GitHub.
+    #   displaying the result. For example, `providerTypes=[GitHub]` lists
+    #   code reviews from GitHub.
     #   @return [Array<String>]
     #
     # @!attribute [rw] states
     #   List of states for filtering that needs to be applied before
-    #   displaying the result. For example, "states=\[Pending\]" will list
-    #   code reviews in the Pending state.
+    #   displaying the result. For example, `states=[Pending]` lists code
+    #   reviews in the Pending state.
+    #
+    #   The valid code review states are:
+    #
+    #   * `Completed`\: The code review is complete.
+    #
+    #   * `Pending`\: The code review started and has not completed or
+    #     failed.
+    #
+    #   * `Failed`\: The code review failed.
+    #
+    #   * `Deleting`\: The code review is being deleted.
     #   @return [Array<String>]
     #
     # @!attribute [rw] repository_names
@@ -532,7 +616,7 @@ module Aws::CodeGuruReviewer
     #       }
     #
     # @!attribute [rw] next_token
-    #   If nextToken is returned, there are more results available. The
+    #   If `nextToken` is returned, there are more results available. The
     #   value of nextToken is a unique pagination token for each page. Make
     #   the call again using the returned token to retrieve the next page.
     #   Keep all other arguments unchanged.
@@ -544,19 +628,31 @@ module Aws::CodeGuruReviewer
     #   @return [Integer]
     #
     # @!attribute [rw] code_review_arn
-    #   The Amazon Resource Name (ARN) that identifies the code review.
+    #   The Amazon Resource Name (ARN) of the [ `CodeReview` ][1] object.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/codeguru/latest/reviewer-api/API_CodeReview.html
     #   @return [String]
     #
     # @!attribute [rw] user_ids
-    #   Filter on userIds that need to be applied before displaying the
-    #   result. This can be used to query all the recommendation feedback
-    #   for a code review from a given user.
+    #   An AWS user's account ID or Amazon Resource Name (ARN). Use this ID
+    #   to query the recommendation feedback for a code review from that
+    #   user.
+    #
+    #   The `UserId` is an IAM principal that can be specified as an AWS
+    #   account ID or an Amazon Resource Name (ARN). For more information,
+    #   see [ Specifying a Principal][1] in the *AWS Identity and Access
+    #   Management User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_elements_principal.html#Principal_specifying
     #   @return [Array<String>]
     #
     # @!attribute [rw] recommendation_ids
-    #   Filter on recommendationIds that need to be applied before
-    #   displaying the result. This can be used to query all the
-    #   recommendation feedback for a given recommendation.
+    #   Used to query the recommendation feedback for a given
+    #   recommendation.
     #   @return [Array<String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codeguru-reviewer-2019-09-19/ListRecommendationFeedbackRequest AWS API Documentation
@@ -572,7 +668,7 @@ module Aws::CodeGuruReviewer
     end
 
     # @!attribute [rw] recommendation_feedback_summaries
-    #   Recommendation feedback summaries corresponding to the code reivew
+    #   Recommendation feedback summaries corresponding to the code review
     #   ARN.
     #   @return [Array<Types::RecommendationFeedbackSummary>]
     #
@@ -611,7 +707,11 @@ module Aws::CodeGuruReviewer
     #   @return [Integer]
     #
     # @!attribute [rw] code_review_arn
-    #   The Amazon Resource Name (ARN) of the code review to describe.
+    #   The Amazon Resource Name (ARN) of the [ `CodeReview` ][1] object.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/codeguru/latest/reviewer-api/API_CodeReview.html
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codeguru-reviewer-2019-09-19/ListRecommendationsRequest AWS API Documentation
@@ -645,7 +745,7 @@ module Aws::CodeGuruReviewer
     #   data as a hash:
     #
     #       {
-    #         provider_types: ["CodeCommit"], # accepts CodeCommit, GitHub, Bitbucket
+    #         provider_types: ["CodeCommit"], # accepts CodeCommit, GitHub, Bitbucket, GitHubEnterpriseServer
     #         states: ["Associated"], # accepts Associated, Associating, Failed, Disassociating
     #         names: ["Name"],
     #         owners: ["Owner"],
@@ -658,7 +758,31 @@ module Aws::CodeGuruReviewer
     #   @return [Array<String>]
     #
     # @!attribute [rw] states
-    #   List of states to use as a filter.
+    #   List of repository association states to use as a filter.
+    #
+    #   The valid repository association states are:
+    #
+    #   * **Associated**\: The repository association is complete.
+    #
+    #   * **Associating**\: CodeGuru Reviewer is:
+    #
+    #     * Setting up pull request notifications. This is required for pull
+    #       requests to trigger a CodeGuru Reviewer review.
+    #
+    #       <note markdown="1"> If your repository `ProviderType` is `GitHub` or `Bitbucket`,
+    #       CodeGuru Reviewer creates webhooks in your repository to trigger
+    #       CodeGuru Reviewer reviews. If you delete these webhooks, reviews
+    #       of code in your repository cannot be triggered.
+    #
+    #        </note>
+    #
+    #     * Setting up source code access. This is required for CodeGuru
+    #       Reviewer to securely clone code in your repository.
+    #
+    #   * **Failed**\: The repository failed to associate or disassociate.
+    #
+    #   * **Disassociating**\: CodeGuru Reviewer is removing the
+    #     repository's pull request notifications and source code access.
     #   @return [Array<String>]
     #
     # @!attribute [rw] names
@@ -666,10 +790,11 @@ module Aws::CodeGuruReviewer
     #   @return [Array<String>]
     #
     # @!attribute [rw] owners
-    #   List of owners to use as a filter. For GitHub, this is name of the
-    #   GitHub account that was used to associate the repository. For AWS
-    #   CodeCommit, it is the name of the CodeCommit account that was used
-    #   to associate the repository.
+    #   List of owners to use as a filter. For AWS CodeCommit, it is the
+    #   name of the CodeCommit account that was used to associate the
+    #   repository. For other repository source providers, such as
+    #   Bitbucket, this is name of the account that was used to associate
+    #   the repository.
     #   @return [Array<String>]
     #
     # @!attribute [rw] max_results
@@ -679,9 +804,9 @@ module Aws::CodeGuruReviewer
     #   `maxResults` results in a single page with a `nextToken` response
     #   element. The remaining results of the initial request can be seen by
     #   sending another `ListRepositoryAssociations` request with the
-    #   returned `nextToken` value. This value can be between 1 and 25. If
+    #   returned `nextToken` value. This value can be between 1 and 100. If
     #   this parameter is not used, `ListRepositoryAssociations` returns up
-    #   to 25 results and a `nextToken` value if applicable.
+    #   to 100 results and a `nextToken` value if applicable.
     #   @return [Integer]
     #
     # @!attribute [rw] next_token
@@ -736,7 +861,18 @@ module Aws::CodeGuruReviewer
     # Information about the statistics from the code review.
     #
     # @!attribute [rw] metered_lines_of_code_count
-    #   Lines of code metered in the code review.
+    #   Lines of code metered in the code review. For the initial code
+    #   review pull request and all subsequent revisions, this includes all
+    #   lines of code in the files added to the pull request. In subsequent
+    #   revisions, for files that already existed in the pull request, this
+    #   includes only the changed lines of code. In both cases, this does
+    #   not include non-code lines such as comments and import statements.
+    #   For example, if you submit a pull request containing 5 files, each
+    #   with 500 lines of code, and in a subsequent revision you added a new
+    #   file with 200 lines of code, and also modified a total of 25 lines
+    #   across the initial 5 files, `MeteredLinesOfCodeCount` includes the
+    #   first 5 files (5 * 500 = 2,500 lines), the new file (200 lines) and
+    #   the 25 changed lines of code for a total of 2,725 lines of code.
     #   @return [Integer]
     #
     # @!attribute [rw] findings_count
@@ -755,7 +891,18 @@ module Aws::CodeGuruReviewer
     # Information about metrics summaries.
     #
     # @!attribute [rw] metered_lines_of_code_count
-    #   Lines of code metered in the code review.
+    #   Lines of code metered in the code review. For the initial code
+    #   review pull request and all subsequent revisions, this includes all
+    #   lines of code in the files added to the pull request. In subsequent
+    #   revisions, for files that already existed in the pull request, this
+    #   includes only the changed lines of code. In both cases, this does
+    #   not include non-code lines such as comments and import statements.
+    #   For example, if you submit a pull request containing 5 files, each
+    #   with 500 lines of code, and in a subsequent revision you added a new
+    #   file with 200 lines of code, and also modified a total of 25 lines
+    #   across the initial 5 files, `MeteredLinesOfCodeCount` includes the
+    #   first 5 files (5 * 500 = 2,500 lines), the new file (200 lines) and
+    #   the 25 changed lines of code for a total of 2,725 lines of code.
     #   @return [Integer]
     #
     # @!attribute [rw] findings_count
@@ -794,7 +941,11 @@ module Aws::CodeGuruReviewer
     #       }
     #
     # @!attribute [rw] code_review_arn
-    #   The Amazon Resource Name (ARN) that identifies the code review.
+    #   The Amazon Resource Name (ARN) of the [ `CodeReview` ][1] object.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/codeguru/latest/reviewer-api/API_CodeReview.html
     #   @return [String]
     #
     # @!attribute [rw] recommendation_id
@@ -824,7 +975,11 @@ module Aws::CodeGuruReviewer
     # Information about the recommendation feedback.
     #
     # @!attribute [rw] code_review_arn
-    #   The Amazon Resource Name (ARN) that identifies the code review.
+    #   The Amazon Resource Name (ARN) of the [ `CodeReview` ][1] object.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/codeguru/latest/reviewer-api/API_CodeReview.html
     #   @return [String]
     #
     # @!attribute [rw] recommendation_id
@@ -838,7 +993,16 @@ module Aws::CodeGuruReviewer
     #   @return [Array<String>]
     #
     # @!attribute [rw] user_id
-    #   The user principal that made the API call.
+    #   The ID of the user that made the API call.
+    #
+    #   The `UserId` is an IAM principal that can be specified as an AWS
+    #   account ID or an Amazon Resource Name (ARN). For more information,
+    #   see [ Specifying a Principal][1] in the *AWS Identity and Access
+    #   Management User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_elements_principal.html#Principal_specifying
     #   @return [String]
     #
     # @!attribute [rw] created_time_stamp
@@ -875,7 +1039,16 @@ module Aws::CodeGuruReviewer
     #   @return [Array<String>]
     #
     # @!attribute [rw] user_id
-    #   The identifier for the user that gave the feedback.
+    #   The ID of the user that gave the feedback.
+    #
+    #   The `UserId` is an IAM principal that can be specified as an AWS
+    #   account ID or an Amazon Resource Name (ARN). For more information,
+    #   see [ Specifying a Principal][1] in the *AWS Identity and Access
+    #   Management User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_elements_principal.html#Principal_specifying
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codeguru-reviewer-2019-09-19/RecommendationFeedbackSummary AWS API Documentation
@@ -907,7 +1080,7 @@ module Aws::CodeGuruReviewer
     # @!attribute [rw] end_line
     #   Last line where the recommendation is applicable in the source
     #   commit or source branch. For a single line comment the start line
-    #   and end line values will be the same.
+    #   and end line values are the same.
     #   @return [Integer]
     #
     # @!attribute [rw] description
@@ -927,7 +1100,10 @@ module Aws::CodeGuruReviewer
       include Aws::Structure
     end
 
-    # Information about a repository.
+    # Information about an associated AWS CodeCommit repository or an
+    # associated repository that is managed by AWS CodeStar Connections (for
+    # example, Bitbucket). This `Repository` object is not used if your
+    # source code is in an associated GitHub repository.
     #
     # @note When making an API call, you may pass Repository
     #   data as a hash:
@@ -941,6 +1117,11 @@ module Aws::CodeGuruReviewer
     #           connection_arn: "ConnectionArn", # required
     #           owner: "Owner", # required
     #         },
+    #         git_hub_enterprise_server: {
+    #           name: "Name", # required
+    #           connection_arn: "ConnectionArn", # required
+    #           owner: "Owner", # required
+    #         },
     #       }
     #
     # @!attribute [rw] code_commit
@@ -948,19 +1129,30 @@ module Aws::CodeGuruReviewer
     #   @return [Types::CodeCommitRepository]
     #
     # @!attribute [rw] bitbucket
-    #   Information about a Bitbucket Cloud repository.
+    #   Information about a Bitbucket repository.
+    #   @return [Types::ThirdPartySourceRepository]
+    #
+    # @!attribute [rw] git_hub_enterprise_server
+    #   Information about a GitHub Enterprise Server repository.
     #   @return [Types::ThirdPartySourceRepository]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codeguru-reviewer-2019-09-19/Repository AWS API Documentation
     #
     class Repository < Struct.new(
       :code_commit,
-      :bitbucket)
+      :bitbucket,
+      :git_hub_enterprise_server)
       SENSITIVE = []
       include Aws::Structure
     end
 
-    # Information about a repository association.
+    # Information about a repository association. The [
+    # `DescribeRepositoryAssociation` ][1] operation returns a
+    # `RepositoryAssociation` object.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/codeguru/latest/reviewer-api/API_DescribeRepositoryAssociation.html
     #
     # @!attribute [rw] association_id
     #   The ID of the repository association.
@@ -972,8 +1164,15 @@ module Aws::CodeGuruReviewer
     #   @return [String]
     #
     # @!attribute [rw] connection_arn
-    #   The Amazon Resource Name (ARN) identifying the repository
-    #   connection.
+    #   The Amazon Resource Name (ARN) of an AWS CodeStar Connections
+    #   connection. Its format is
+    #   `arn:aws:codestar-connections:region-id:aws-account_id:connection/connection-id`.
+    #   For more information, see [Connection][1] in the *AWS CodeStar
+    #   Connections API Reference*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/codestar-connections/latest/APIReference/API_Connection.html
     #   @return [String]
     #
     # @!attribute [rw] name
@@ -981,7 +1180,10 @@ module Aws::CodeGuruReviewer
     #   @return [String]
     #
     # @!attribute [rw] owner
-    #   The owner of the repository.
+    #   The owner of the repository. For an AWS CodeCommit repository, this
+    #   is the AWS account ID of the account that owns the repository. For a
+    #   GitHub or Bitbucket repository, this is the username for the account
+    #   that owns the repository.
     #   @return [String]
     #
     # @!attribute [rw] provider_type
@@ -990,6 +1192,30 @@ module Aws::CodeGuruReviewer
     #
     # @!attribute [rw] state
     #   The state of the repository association.
+    #
+    #   The valid repository association states are:
+    #
+    #   * **Associated**\: The repository association is complete.
+    #
+    #   * **Associating**\: CodeGuru Reviewer is:
+    #
+    #     * Setting up pull request notifications. This is required for pull
+    #       requests to trigger a CodeGuru Reviewer review.
+    #
+    #       <note markdown="1"> If your repository `ProviderType` is `GitHub` or `Bitbucket`,
+    #       CodeGuru Reviewer creates webhooks in your repository to trigger
+    #       CodeGuru Reviewer reviews. If you delete these webhooks, reviews
+    #       of code in your repository cannot be triggered.
+    #
+    #        </note>
+    #
+    #     * Setting up source code access. This is required for CodeGuru
+    #       Reviewer to securely clone code in your repository.
+    #
+    #   * **Failed**\: The repository failed to associate or disassociate.
+    #
+    #   * **Disassociating**\: CodeGuru Reviewer is removing the
+    #     repository's pull request notifications and source code access.
     #   @return [String]
     #
     # @!attribute [rw] state_reason
@@ -1024,16 +1250,33 @@ module Aws::CodeGuruReviewer
       include Aws::Structure
     end
 
-    # Information about a repository association.
+    # Summary information about a repository association. The [
+    # `ListRepositoryAssociations` ][1] operation returns a list of
+    # `RepositoryAssociationSummary` objects.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/codeguru/latest/reviewer-api/API_ListRepositoryAssociations.html
     #
     # @!attribute [rw] association_arn
-    #   The Amazon Resource Name (ARN) identifying the repository
-    #   association.
+    #   The Amazon Resource Name (ARN) of the [ `RepositoryAssociation` ][1]
+    #   object.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/codeguru/latest/reviewer-api/API_RepositoryAssociation.html
     #   @return [String]
     #
     # @!attribute [rw] connection_arn
-    #   The Amazon Resource Name (ARN) identifying the repository
-    #   connection.
+    #   The Amazon Resource Name (ARN) of an AWS CodeStar Connections
+    #   connection. Its format is
+    #   `arn:aws:codestar-connections:region-id:aws-account_id:connection/connection-id`.
+    #   For more information, see [Connection][1] in the *AWS CodeStar
+    #   Connections API Reference*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/codestar-connections/latest/APIReference/API_Connection.html
     #   @return [String]
     #
     # @!attribute [rw] last_updated_time_stamp
@@ -1050,7 +1293,10 @@ module Aws::CodeGuruReviewer
     #   @return [String]
     #
     # @!attribute [rw] owner
-    #   The owner of the repository association.
+    #   The owner of the repository. For an AWS CodeCommit repository, this
+    #   is the AWS account ID of the account that owns the repository. For a
+    #   GitHub or Bitbucket repository, this is the username for the account
+    #   that owns the repository.
     #   @return [String]
     #
     # @!attribute [rw] provider_type
@@ -1060,22 +1306,29 @@ module Aws::CodeGuruReviewer
     # @!attribute [rw] state
     #   The state of the repository association.
     #
-    #   Associated
+    #   The valid repository association states are:
     #
-    #   : Amazon CodeGuru Reviewer is associated with the repository.
+    #   * **Associated**\: The repository association is complete.
     #
-    #   Associating
+    #   * **Associating**\: CodeGuru Reviewer is:
     #
-    #   : The association is in progress.
+    #     * Setting up pull request notifications. This is required for pull
+    #       requests to trigger a CodeGuru Reviewer review.
     #
-    #   Failed
+    #       <note markdown="1"> If your repository `ProviderType` is `GitHub` or `Bitbucket`,
+    #       CodeGuru Reviewer creates webhooks in your repository to trigger
+    #       CodeGuru Reviewer reviews. If you delete these webhooks, reviews
+    #       of code in your repository cannot be triggered.
     #
-    #   : The association failed.
+    #        </note>
     #
-    #   Disassociating
+    #     * Setting up source code access. This is required for CodeGuru
+    #       Reviewer to securely clone code in your repository.
     #
-    #   : Amazon CodeGuru Reviewer is in the process of disassociating with
-    #     the repository.
+    #   * **Failed**\: The repository failed to associate or disassociate.
+    #
+    #   * **Disassociating**\: CodeGuru Reviewer is removing the
+    #     repository's pull request notifications and source code access.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codeguru-reviewer-2019-09-19/RepositoryAssociationSummary AWS API Documentation
@@ -1120,8 +1373,8 @@ module Aws::CodeGuruReviewer
       include Aws::Structure
     end
 
-    # Information about a third party source repository connected through
-    # CodeStar Connections.
+    # Information about a third-party source repository connected to
+    # CodeGuru Reviewer.
     #
     # @note When making an API call, you may pass ThirdPartySourceRepository
     #   data as a hash:
@@ -1137,12 +1390,21 @@ module Aws::CodeGuruReviewer
     #   @return [String]
     #
     # @!attribute [rw] connection_arn
-    #   The Amazon Resource Name (ARN) identifying the repository
-    #   connection.
+    #   The Amazon Resource Name (ARN) of an AWS CodeStar Connections
+    #   connection. Its format is
+    #   `arn:aws:codestar-connections:region-id:aws-account_id:connection/connection-id`.
+    #   For more information, see [Connection][1] in the *AWS CodeStar
+    #   Connections API Reference*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/codestar-connections/latest/APIReference/API_Connection.html
     #   @return [String]
     #
     # @!attribute [rw] owner
-    #   The username of the owner of the repository.
+    #   The owner of the repository. For a GitHub, GitHub Enterprise, or
+    #   Bitbucket repository, this is the username for the account that owns
+    #   the repository.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codeguru-reviewer-2019-09-19/ThirdPartySourceRepository AWS API Documentation

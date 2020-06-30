@@ -5226,12 +5226,27 @@ module Aws::EC2
     #             values: ["String"],
     #           },
     #         ],
+    #         tag_specifications: [
+    #           {
+    #             resource_type: "client-vpn-endpoint", # accepts client-vpn-endpoint, customer-gateway, dedicated-host, dhcp-options, elastic-ip, elastic-gpu, export-image-task, export-instance-task, fleet, fpga-image, host-reservation, image, import-image-task, import-snapshot-task, instance, internet-gateway, key-pair, launch-template, local-gateway-route-table-vpc-association, natgateway, network-acl, network-interface, placement-group, reserved-instances, route-table, security-group, snapshot, spot-fleet-request, spot-instances-request, subnet, traffic-mirror-filter, traffic-mirror-session, traffic-mirror-target, transit-gateway, transit-gateway-attachment, transit-gateway-multicast-domain, transit-gateway-route-table, volume, vpc, vpc-peering-connection, vpn-connection, vpn-gateway, vpc-flow-log
+    #             tags: [
+    #               {
+    #                 key: "String",
+    #                 value: "String",
+    #               },
+    #             ],
+    #           },
+    #         ],
     #         dry_run: false,
     #       }
     #
     # @!attribute [rw] dhcp_configurations
     #   A DHCP configuration option.
     #   @return [Array<Types::NewDhcpConfiguration>]
+    #
+    # @!attribute [rw] tag_specifications
+    #   The tags to assign to the DHCP option.
+    #   @return [Array<Types::TagSpecification>]
     #
     # @!attribute [rw] dry_run
     #   Checks whether you have the required permissions for the action,
@@ -5244,6 +5259,7 @@ module Aws::EC2
     #
     class CreateDhcpOptionsRequest < Struct.new(
       :dhcp_configurations,
+      :tag_specifications,
       :dry_run)
       SENSITIVE = []
       include Aws::Structure
@@ -5268,6 +5284,17 @@ module Aws::EC2
     #         client_token: "String",
     #         dry_run: false,
     #         vpc_id: "VpcId", # required
+    #         tag_specifications: [
+    #           {
+    #             resource_type: "client-vpn-endpoint", # accepts client-vpn-endpoint, customer-gateway, dedicated-host, dhcp-options, elastic-ip, elastic-gpu, export-image-task, export-instance-task, fleet, fpga-image, host-reservation, image, import-image-task, import-snapshot-task, instance, internet-gateway, key-pair, launch-template, local-gateway-route-table-vpc-association, natgateway, network-acl, network-interface, placement-group, reserved-instances, route-table, security-group, snapshot, spot-fleet-request, spot-instances-request, subnet, traffic-mirror-filter, traffic-mirror-session, traffic-mirror-target, transit-gateway, transit-gateway-attachment, transit-gateway-multicast-domain, transit-gateway-route-table, volume, vpc, vpc-peering-connection, vpn-connection, vpn-gateway, vpc-flow-log
+    #             tags: [
+    #               {
+    #                 key: "String",
+    #                 value: "String",
+    #               },
+    #             ],
+    #           },
+    #         ],
     #       }
     #
     # @!attribute [rw] client_token
@@ -5292,12 +5319,17 @@ module Aws::EC2
     #   gateway.
     #   @return [String]
     #
+    # @!attribute [rw] tag_specifications
+    #   The tags to assign to the egress-only internet gateway.
+    #   @return [Array<Types::TagSpecification>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CreateEgressOnlyInternetGatewayRequest AWS API Documentation
     #
     class CreateEgressOnlyInternetGatewayRequest < Struct.new(
       :client_token,
       :dry_run,
-      :vpc_id)
+      :vpc_id,
+      :tag_specifications)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -6069,8 +6101,23 @@ module Aws::EC2
     #   data as a hash:
     #
     #       {
+    #         tag_specifications: [
+    #           {
+    #             resource_type: "client-vpn-endpoint", # accepts client-vpn-endpoint, customer-gateway, dedicated-host, dhcp-options, elastic-ip, elastic-gpu, export-image-task, export-instance-task, fleet, fpga-image, host-reservation, image, import-image-task, import-snapshot-task, instance, internet-gateway, key-pair, launch-template, local-gateway-route-table-vpc-association, natgateway, network-acl, network-interface, placement-group, reserved-instances, route-table, security-group, snapshot, spot-fleet-request, spot-instances-request, subnet, traffic-mirror-filter, traffic-mirror-session, traffic-mirror-target, transit-gateway, transit-gateway-attachment, transit-gateway-multicast-domain, transit-gateway-route-table, volume, vpc, vpc-peering-connection, vpn-connection, vpn-gateway, vpc-flow-log
+    #             tags: [
+    #               {
+    #                 key: "String",
+    #                 value: "String",
+    #               },
+    #             ],
+    #           },
+    #         ],
     #         dry_run: false,
     #       }
+    #
+    # @!attribute [rw] tag_specifications
+    #   The tags to assign to the internet gateway.
+    #   @return [Array<Types::TagSpecification>]
     #
     # @!attribute [rw] dry_run
     #   Checks whether you have the required permissions for the action,
@@ -6082,6 +6129,7 @@ module Aws::EC2
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CreateInternetGatewayRequest AWS API Documentation
     #
     class CreateInternetGatewayRequest < Struct.new(
+      :tag_specifications,
       :dry_run)
       SENSITIVE = []
       include Aws::Structure
@@ -6996,6 +7044,17 @@ module Aws::EC2
     #       {
     #         dry_run: false,
     #         vpc_id: "VpcId", # required
+    #         tag_specifications: [
+    #           {
+    #             resource_type: "client-vpn-endpoint", # accepts client-vpn-endpoint, customer-gateway, dedicated-host, dhcp-options, elastic-ip, elastic-gpu, export-image-task, export-instance-task, fleet, fpga-image, host-reservation, image, import-image-task, import-snapshot-task, instance, internet-gateway, key-pair, launch-template, local-gateway-route-table-vpc-association, natgateway, network-acl, network-interface, placement-group, reserved-instances, route-table, security-group, snapshot, spot-fleet-request, spot-instances-request, subnet, traffic-mirror-filter, traffic-mirror-session, traffic-mirror-target, transit-gateway, transit-gateway-attachment, transit-gateway-multicast-domain, transit-gateway-route-table, volume, vpc, vpc-peering-connection, vpn-connection, vpn-gateway, vpc-flow-log
+    #             tags: [
+    #               {
+    #                 key: "String",
+    #                 value: "String",
+    #               },
+    #             ],
+    #           },
+    #         ],
     #       }
     #
     # @!attribute [rw] dry_run
@@ -7009,11 +7068,16 @@ module Aws::EC2
     #   The ID of the VPC.
     #   @return [String]
     #
+    # @!attribute [rw] tag_specifications
+    #   The tags to assign to the network ACL.
+    #   @return [Array<Types::TagSpecification>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CreateNetworkAclRequest AWS API Documentation
     #
     class CreateNetworkAclRequest < Struct.new(
       :dry_run,
-      :vpc_id)
+      :vpc_id,
+      :tag_specifications)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -7117,6 +7181,17 @@ module Aws::EC2
     #         secondary_private_ip_address_count: 1,
     #         interface_type: "efa", # accepts efa
     #         subnet_id: "SubnetId", # required
+    #         tag_specifications: [
+    #           {
+    #             resource_type: "client-vpn-endpoint", # accepts client-vpn-endpoint, customer-gateway, dedicated-host, dhcp-options, elastic-ip, elastic-gpu, export-image-task, export-instance-task, fleet, fpga-image, host-reservation, image, import-image-task, import-snapshot-task, instance, internet-gateway, key-pair, launch-template, local-gateway-route-table-vpc-association, natgateway, network-acl, network-interface, placement-group, reserved-instances, route-table, security-group, snapshot, spot-fleet-request, spot-instances-request, subnet, traffic-mirror-filter, traffic-mirror-session, traffic-mirror-target, transit-gateway, transit-gateway-attachment, transit-gateway-multicast-domain, transit-gateway-route-table, volume, vpc, vpc-peering-connection, vpn-connection, vpn-gateway, vpc-flow-log
+    #             tags: [
+    #               {
+    #                 key: "String",
+    #                 value: "String",
+    #               },
+    #             ],
+    #           },
+    #         ],
     #       }
     #
     # @!attribute [rw] description
@@ -7192,6 +7267,10 @@ module Aws::EC2
     #   The ID of the subnet to associate with the network interface.
     #   @return [String]
     #
+    # @!attribute [rw] tag_specifications
+    #   The tags to apply to the new network interface.
+    #   @return [Array<Types::TagSpecification>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CreateNetworkInterfaceRequest AWS API Documentation
     #
     class CreateNetworkInterfaceRequest < Struct.new(
@@ -7204,7 +7283,8 @@ module Aws::EC2
       :private_ip_addresses,
       :secondary_private_ip_address_count,
       :interface_type,
-      :subnet_id)
+      :subnet_id,
+      :tag_specifications)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -7525,6 +7605,17 @@ module Aws::EC2
     #         description: "String", # required
     #         group_name: "String", # required
     #         vpc_id: "VpcId",
+    #         tag_specifications: [
+    #           {
+    #             resource_type: "client-vpn-endpoint", # accepts client-vpn-endpoint, customer-gateway, dedicated-host, dhcp-options, elastic-ip, elastic-gpu, export-image-task, export-instance-task, fleet, fpga-image, host-reservation, image, import-image-task, import-snapshot-task, instance, internet-gateway, key-pair, launch-template, local-gateway-route-table-vpc-association, natgateway, network-acl, network-interface, placement-group, reserved-instances, route-table, security-group, snapshot, spot-fleet-request, spot-instances-request, subnet, traffic-mirror-filter, traffic-mirror-session, traffic-mirror-target, transit-gateway, transit-gateway-attachment, transit-gateway-multicast-domain, transit-gateway-route-table, volume, vpc, vpc-peering-connection, vpn-connection, vpn-gateway, vpc-flow-log
+    #             tags: [
+    #               {
+    #                 key: "String",
+    #                 value: "String",
+    #               },
+    #             ],
+    #           },
+    #         ],
     #         dry_run: false,
     #       }
     #
@@ -7555,6 +7646,10 @@ module Aws::EC2
     #   \[EC2-VPC\] The ID of the VPC. Required for EC2-VPC.
     #   @return [String]
     #
+    # @!attribute [rw] tag_specifications
+    #   The tags to assign to the security group.
+    #   @return [Array<Types::TagSpecification>]
+    #
     # @!attribute [rw] dry_run
     #   Checks whether you have the required permissions for the action,
     #   without actually making the request, and provides an error response.
@@ -7568,6 +7663,7 @@ module Aws::EC2
       :description,
       :group_name,
       :vpc_id,
+      :tag_specifications,
       :dry_run)
       SENSITIVE = []
       include Aws::Structure
@@ -7577,10 +7673,15 @@ module Aws::EC2
     #   The ID of the security group.
     #   @return [String]
     #
+    # @!attribute [rw] tags
+    #   The tags assigned to the security group.
+    #   @return [Array<Types::Tag>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CreateSecurityGroupResult AWS API Documentation
     #
     class CreateSecurityGroupResult < Struct.new(
-      :group_id)
+      :group_id,
+      :tags)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -7762,6 +7863,17 @@ module Aws::EC2
     #   data as a hash:
     #
     #       {
+    #         tag_specifications: [
+    #           {
+    #             resource_type: "client-vpn-endpoint", # accepts client-vpn-endpoint, customer-gateway, dedicated-host, dhcp-options, elastic-ip, elastic-gpu, export-image-task, export-instance-task, fleet, fpga-image, host-reservation, image, import-image-task, import-snapshot-task, instance, internet-gateway, key-pair, launch-template, local-gateway-route-table-vpc-association, natgateway, network-acl, network-interface, placement-group, reserved-instances, route-table, security-group, snapshot, spot-fleet-request, spot-instances-request, subnet, traffic-mirror-filter, traffic-mirror-session, traffic-mirror-target, transit-gateway, transit-gateway-attachment, transit-gateway-multicast-domain, transit-gateway-route-table, volume, vpc, vpc-peering-connection, vpn-connection, vpn-gateway, vpc-flow-log
+    #             tags: [
+    #               {
+    #                 key: "String",
+    #                 value: "String",
+    #               },
+    #             ],
+    #           },
+    #         ],
     #         availability_zone: "String",
     #         availability_zone_id: "String",
     #         cidr_block: "String", # required
@@ -7770,6 +7882,10 @@ module Aws::EC2
     #         vpc_id: "VpcId", # required
     #         dry_run: false,
     #       }
+    #
+    # @!attribute [rw] tag_specifications
+    #   The tags to assign to the subnet.
+    #   @return [Array<Types::TagSpecification>]
     #
     # @!attribute [rw] availability_zone
     #   The Availability Zone or Local Zone for the subnet.
@@ -7827,6 +7943,7 @@ module Aws::EC2
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CreateSubnetRequest AWS API Documentation
     #
     class CreateSubnetRequest < Struct.new(
+      :tag_specifications,
       :availability_zone,
       :availability_zone_id,
       :cidr_block,
@@ -9377,6 +9494,17 @@ module Aws::EC2
     #         dry_run: false,
     #         instance_tenancy: "default", # accepts default, dedicated, host
     #         ipv_6_cidr_block_network_border_group: "String",
+    #         tag_specifications: [
+    #           {
+    #             resource_type: "client-vpn-endpoint", # accepts client-vpn-endpoint, customer-gateway, dedicated-host, dhcp-options, elastic-ip, elastic-gpu, export-image-task, export-instance-task, fleet, fpga-image, host-reservation, image, import-image-task, import-snapshot-task, instance, internet-gateway, key-pair, launch-template, local-gateway-route-table-vpc-association, natgateway, network-acl, network-interface, placement-group, reserved-instances, route-table, security-group, snapshot, spot-fleet-request, spot-instances-request, subnet, traffic-mirror-filter, traffic-mirror-session, traffic-mirror-target, transit-gateway, transit-gateway-attachment, transit-gateway-multicast-domain, transit-gateway-route-table, volume, vpc, vpc-peering-connection, vpn-connection, vpn-gateway, vpc-flow-log
+    #             tags: [
+    #               {
+    #                 key: "String",
+    #                 value: "String",
+    #               },
+    #             ],
+    #           },
+    #         ],
     #       }
     #
     # @!attribute [rw] cidr_block
@@ -9434,6 +9562,10 @@ module Aws::EC2
     #   parameter.
     #   @return [String]
     #
+    # @!attribute [rw] tag_specifications
+    #   The tags to assign to the VPC.
+    #   @return [Array<Types::TagSpecification>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CreateVpcRequest AWS API Documentation
     #
     class CreateVpcRequest < Struct.new(
@@ -9443,7 +9575,8 @@ module Aws::EC2
       :ipv_6_cidr_block,
       :dry_run,
       :instance_tenancy,
-      :ipv_6_cidr_block_network_border_group)
+      :ipv_6_cidr_block_network_border_group,
+      :tag_specifications)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -46862,15 +46995,19 @@ module Aws::EC2
     # @!attribute [rw] resource_type
     #   The type of resource to tag. Currently, the resource types that
     #   support tagging on creation are: `capacity-reservation` \|
-    #   `client-vpn-endpoint` \| `dedicated-host` \| `fleet` \| `fpga-image`
-    #   \| `host-reservation` \| `instance` \| `ipv4pool-ec2` \|
-    #   `ipv6pool-ec2` \| `key-pair` \| `launch-template` \| `natgateway` \|
-    #   `spot-fleet-request` \| `placement-group` \| `prefix-list` \|
-    #   `snapshot` \| `traffic-mirror-filter` \| `traffic-mirror-session` \|
+    #   `client-vpn-endpoint` \| `dedicated-host` \| `dhcp-options` \|
+    #   `export-image-task` \| `export-instance-task` \| `fleet` \|
+    #   `fpga-image` \| `host-reservation` \| `import-image-task` \|
+    #   `import-snapshot-task` \| `instance` \| `internet-gateway` \|
+    #   `ipv4pool-ec2` \| `ipv6pool-ec2` \| `key-pair` \| `launch-template`
+    #   \| `placement-group` \| `prefix-list` \| `launch-template` \|
+    #   `natgateway` \| `network-acl` \| `security-group` \|
+    #   `spot-fleet-request` \| `snapshot` \| `subnet` \|
+    #   `traffic-mirror-filter` \| `traffic-mirror-session` \|
     #   `traffic-mirror-target` \| `transit-gateway` \|
     #   `transit-gateway-attachment` \| `transit-gateway-route-table` \|
-    #   `vpc-endpoint` (for interface and gateway endpoints) \|
-    #   `vpc-endpoint-service` (for AWS PrivateLink) \| `volume` \|
+    #   `volume` \|`vpc` \| `vpc-endpoint` (for interface and gateway
+    #   endpoints) \| `vpc-endpoint-service` (for AWS PrivateLink) \|
     #   `vpc-flow-log`.
     #
     #   To tag a resource after it has been created, see [CreateTags][1].

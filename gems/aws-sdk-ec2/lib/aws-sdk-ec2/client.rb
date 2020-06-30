@@ -4213,7 +4213,7 @@ module Aws::EC2
     #   specify `ec2.internal`. If you're using AmazonProvidedDNS in
     #   another Region, specify `region.compute.internal` (for example,
     #   `ap-northeast-1.compute.internal`). Otherwise, specify a domain name
-    #   (for example, `MyCompany.com`). This value is used to complete
+    #   (for example, `ExampleCompany.com`). This value is used to complete
     #   unqualified DNS hostnames. **Important**\: Some Linux operating
     #   systems accept multiple domain names separated by spaces. However,
     #   Windows and other Linux operating systems treat the value as a
@@ -4247,6 +4247,9 @@ module Aws::EC2
     #
     # @option params [required, Array<Types::NewDhcpConfiguration>] :dhcp_configurations
     #   A DHCP configuration option.
+    #
+    # @option params [Array<Types::TagSpecification>] :tag_specifications
+    #   The tags to assign to the DHCP option.
     #
     # @option params [Boolean] :dry_run
     #   Checks whether you have the required permissions for the action,
@@ -4304,6 +4307,17 @@ module Aws::EC2
     #         values: ["String"],
     #       },
     #     ],
+    #     tag_specifications: [
+    #       {
+    #         resource_type: "client-vpn-endpoint", # accepts client-vpn-endpoint, customer-gateway, dedicated-host, dhcp-options, elastic-ip, elastic-gpu, export-image-task, export-instance-task, fleet, fpga-image, host-reservation, image, import-image-task, import-snapshot-task, instance, internet-gateway, key-pair, launch-template, local-gateway-route-table-vpc-association, natgateway, network-acl, network-interface, placement-group, reserved-instances, route-table, security-group, snapshot, spot-fleet-request, spot-instances-request, subnet, traffic-mirror-filter, traffic-mirror-session, traffic-mirror-target, transit-gateway, transit-gateway-attachment, transit-gateway-multicast-domain, transit-gateway-route-table, volume, vpc, vpc-peering-connection, vpn-connection, vpn-gateway, vpc-flow-log
+    #         tags: [
+    #           {
+    #             key: "String",
+    #             value: "String",
+    #           },
+    #         ],
+    #       },
+    #     ],
     #     dry_run: false,
     #   })
     #
@@ -4353,6 +4367,9 @@ module Aws::EC2
     #   The ID of the VPC for which to create the egress-only internet
     #   gateway.
     #
+    # @option params [Array<Types::TagSpecification>] :tag_specifications
+    #   The tags to assign to the egress-only internet gateway.
+    #
     # @return [Types::CreateEgressOnlyInternetGatewayResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateEgressOnlyInternetGatewayResult#client_token #client_token} => String
@@ -4364,6 +4381,17 @@ module Aws::EC2
     #     client_token: "String",
     #     dry_run: false,
     #     vpc_id: "VpcId", # required
+    #     tag_specifications: [
+    #       {
+    #         resource_type: "client-vpn-endpoint", # accepts client-vpn-endpoint, customer-gateway, dedicated-host, dhcp-options, elastic-ip, elastic-gpu, export-image-task, export-instance-task, fleet, fpga-image, host-reservation, image, import-image-task, import-snapshot-task, instance, internet-gateway, key-pair, launch-template, local-gateway-route-table-vpc-association, natgateway, network-acl, network-interface, placement-group, reserved-instances, route-table, security-group, snapshot, spot-fleet-request, spot-instances-request, subnet, traffic-mirror-filter, traffic-mirror-session, traffic-mirror-target, transit-gateway, transit-gateway-attachment, transit-gateway-multicast-domain, transit-gateway-route-table, volume, vpc, vpc-peering-connection, vpn-connection, vpn-gateway, vpc-flow-log
+    #         tags: [
+    #           {
+    #             key: "String",
+    #             value: "String",
+    #           },
+    #         ],
+    #       },
+    #     ],
     #   })
     #
     # @example Response structure
@@ -5090,6 +5118,9 @@ module Aws::EC2
     #
     # [1]: https://docs.aws.amazon.com/vpc/latest/userguide/
     #
+    # @option params [Array<Types::TagSpecification>] :tag_specifications
+    #   The tags to assign to the internet gateway.
+    #
     # @option params [Boolean] :dry_run
     #   Checks whether you have the required permissions for the action,
     #   without actually making the request, and provides an error response.
@@ -5122,6 +5153,17 @@ module Aws::EC2
     # @example Request syntax with placeholder values
     #
     #   resp = client.create_internet_gateway({
+    #     tag_specifications: [
+    #       {
+    #         resource_type: "client-vpn-endpoint", # accepts client-vpn-endpoint, customer-gateway, dedicated-host, dhcp-options, elastic-ip, elastic-gpu, export-image-task, export-instance-task, fleet, fpga-image, host-reservation, image, import-image-task, import-snapshot-task, instance, internet-gateway, key-pair, launch-template, local-gateway-route-table-vpc-association, natgateway, network-acl, network-interface, placement-group, reserved-instances, route-table, security-group, snapshot, spot-fleet-request, spot-instances-request, subnet, traffic-mirror-filter, traffic-mirror-session, traffic-mirror-target, transit-gateway, transit-gateway-attachment, transit-gateway-multicast-domain, transit-gateway-route-table, volume, vpc, vpc-peering-connection, vpn-connection, vpn-gateway, vpc-flow-log
+    #         tags: [
+    #           {
+    #             key: "String",
+    #             value: "String",
+    #           },
+    #         ],
+    #       },
+    #     ],
     #     dry_run: false,
     #   })
     #
@@ -6204,6 +6246,9 @@ module Aws::EC2
     # @option params [required, String] :vpc_id
     #   The ID of the VPC.
     #
+    # @option params [Array<Types::TagSpecification>] :tag_specifications
+    #   The tags to assign to the network ACL.
+    #
     # @return [Types::CreateNetworkAclResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateNetworkAclResult#network_acl #network_acl} => Types::NetworkAcl
@@ -6251,6 +6296,17 @@ module Aws::EC2
     #   resp = client.create_network_acl({
     #     dry_run: false,
     #     vpc_id: "VpcId", # required
+    #     tag_specifications: [
+    #       {
+    #         resource_type: "client-vpn-endpoint", # accepts client-vpn-endpoint, customer-gateway, dedicated-host, dhcp-options, elastic-ip, elastic-gpu, export-image-task, export-instance-task, fleet, fpga-image, host-reservation, image, import-image-task, import-snapshot-task, instance, internet-gateway, key-pair, launch-template, local-gateway-route-table-vpc-association, natgateway, network-acl, network-interface, placement-group, reserved-instances, route-table, security-group, snapshot, spot-fleet-request, spot-instances-request, subnet, traffic-mirror-filter, traffic-mirror-session, traffic-mirror-target, transit-gateway, transit-gateway-attachment, transit-gateway-multicast-domain, transit-gateway-route-table, volume, vpc, vpc-peering-connection, vpn-connection, vpn-gateway, vpc-flow-log
+    #         tags: [
+    #           {
+    #             key: "String",
+    #             value: "String",
+    #           },
+    #         ],
+    #       },
+    #     ],
     #   })
     #
     # @example Response structure
@@ -6484,6 +6540,9 @@ module Aws::EC2
     # @option params [required, String] :subnet_id
     #   The ID of the subnet to associate with the network interface.
     #
+    # @option params [Array<Types::TagSpecification>] :tag_specifications
+    #   The tags to apply to the new network interface.
+    #
     # @return [Types::CreateNetworkInterfaceResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateNetworkInterfaceResult#network_interface #network_interface} => Types::NetworkInterface
@@ -6555,6 +6614,17 @@ module Aws::EC2
     #     secondary_private_ip_address_count: 1,
     #     interface_type: "efa", # accepts efa
     #     subnet_id: "SubnetId", # required
+    #     tag_specifications: [
+    #       {
+    #         resource_type: "client-vpn-endpoint", # accepts client-vpn-endpoint, customer-gateway, dedicated-host, dhcp-options, elastic-ip, elastic-gpu, export-image-task, export-instance-task, fleet, fpga-image, host-reservation, image, import-image-task, import-snapshot-task, instance, internet-gateway, key-pair, launch-template, local-gateway-route-table-vpc-association, natgateway, network-acl, network-interface, placement-group, reserved-instances, route-table, security-group, snapshot, spot-fleet-request, spot-instances-request, subnet, traffic-mirror-filter, traffic-mirror-session, traffic-mirror-target, transit-gateway, transit-gateway-attachment, transit-gateway-multicast-domain, transit-gateway-route-table, volume, vpc, vpc-peering-connection, vpn-connection, vpn-gateway, vpc-flow-log
+    #         tags: [
+    #           {
+    #             key: "String",
+    #             value: "String",
+    #           },
+    #         ],
+    #       },
+    #     ],
     #   })
     #
     # @example Response structure
@@ -7157,6 +7227,9 @@ module Aws::EC2
     # @option params [String] :vpc_id
     #   \[EC2-VPC\] The ID of the VPC. Required for EC2-VPC.
     #
+    # @option params [Array<Types::TagSpecification>] :tag_specifications
+    #   The tags to assign to the security group.
+    #
     # @option params [Boolean] :dry_run
     #   Checks whether you have the required permissions for the action,
     #   without actually making the request, and provides an error response.
@@ -7166,6 +7239,7 @@ module Aws::EC2
     # @return [Types::CreateSecurityGroupResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateSecurityGroupResult#group_id #group_id} => String
+    #   * {Types::CreateSecurityGroupResult#tags #tags} => Array&lt;Types::Tag&gt;
     #
     #
     # @example Example: To create a security group for a VPC
@@ -7189,12 +7263,26 @@ module Aws::EC2
     #     description: "String", # required
     #     group_name: "String", # required
     #     vpc_id: "VpcId",
+    #     tag_specifications: [
+    #       {
+    #         resource_type: "client-vpn-endpoint", # accepts client-vpn-endpoint, customer-gateway, dedicated-host, dhcp-options, elastic-ip, elastic-gpu, export-image-task, export-instance-task, fleet, fpga-image, host-reservation, image, import-image-task, import-snapshot-task, instance, internet-gateway, key-pair, launch-template, local-gateway-route-table-vpc-association, natgateway, network-acl, network-interface, placement-group, reserved-instances, route-table, security-group, snapshot, spot-fleet-request, spot-instances-request, subnet, traffic-mirror-filter, traffic-mirror-session, traffic-mirror-target, transit-gateway, transit-gateway-attachment, transit-gateway-multicast-domain, transit-gateway-route-table, volume, vpc, vpc-peering-connection, vpn-connection, vpn-gateway, vpc-flow-log
+    #         tags: [
+    #           {
+    #             key: "String",
+    #             value: "String",
+    #           },
+    #         ],
+    #       },
+    #     ],
     #     dry_run: false,
     #   })
     #
     # @example Response structure
     #
     #   resp.group_id #=> String
+    #   resp.tags #=> Array
+    #   resp.tags[0].key #=> String
+    #   resp.tags[0].value #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CreateSecurityGroup AWS API Documentation
     #
@@ -7524,6 +7612,9 @@ module Aws::EC2
     #
     # [1]: https://docs.aws.amazon.com/vpc/latest/userguide/VPC_Subnets.html
     #
+    # @option params [Array<Types::TagSpecification>] :tag_specifications
+    #   The tags to assign to the subnet.
+    #
     # @option params [String] :availability_zone
     #   The Availability Zone or Local Zone for the subnet.
     #
@@ -7600,6 +7691,17 @@ module Aws::EC2
     # @example Request syntax with placeholder values
     #
     #   resp = client.create_subnet({
+    #     tag_specifications: [
+    #       {
+    #         resource_type: "client-vpn-endpoint", # accepts client-vpn-endpoint, customer-gateway, dedicated-host, dhcp-options, elastic-ip, elastic-gpu, export-image-task, export-instance-task, fleet, fpga-image, host-reservation, image, import-image-task, import-snapshot-task, instance, internet-gateway, key-pair, launch-template, local-gateway-route-table-vpc-association, natgateway, network-acl, network-interface, placement-group, reserved-instances, route-table, security-group, snapshot, spot-fleet-request, spot-instances-request, subnet, traffic-mirror-filter, traffic-mirror-session, traffic-mirror-target, transit-gateway, transit-gateway-attachment, transit-gateway-multicast-domain, transit-gateway-route-table, volume, vpc, vpc-peering-connection, vpn-connection, vpn-gateway, vpc-flow-log
+    #         tags: [
+    #           {
+    #             key: "String",
+    #             value: "String",
+    #           },
+    #         ],
+    #       },
+    #     ],
     #     availability_zone: "String",
     #     availability_zone_id: "String",
     #     cidr_block: "String", # required
@@ -8959,6 +9061,9 @@ module Aws::EC2
     #   You must set `AmazonProvidedIpv6CidrBlock` to `true` to use this
     #   parameter.
     #
+    # @option params [Array<Types::TagSpecification>] :tag_specifications
+    #   The tags to assign to the VPC.
+    #
     # @return [Types::CreateVpcResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateVpcResult#vpc #vpc} => Types::Vpc
@@ -8993,6 +9098,17 @@ module Aws::EC2
     #     dry_run: false,
     #     instance_tenancy: "default", # accepts default, dedicated, host
     #     ipv_6_cidr_block_network_border_group: "String",
+    #     tag_specifications: [
+    #       {
+    #         resource_type: "client-vpn-endpoint", # accepts client-vpn-endpoint, customer-gateway, dedicated-host, dhcp-options, elastic-ip, elastic-gpu, export-image-task, export-instance-task, fleet, fpga-image, host-reservation, image, import-image-task, import-snapshot-task, instance, internet-gateway, key-pair, launch-template, local-gateway-route-table-vpc-association, natgateway, network-acl, network-interface, placement-group, reserved-instances, route-table, security-group, snapshot, spot-fleet-request, spot-instances-request, subnet, traffic-mirror-filter, traffic-mirror-session, traffic-mirror-target, transit-gateway, transit-gateway-attachment, transit-gateway-multicast-domain, transit-gateway-route-table, volume, vpc, vpc-peering-connection, vpn-connection, vpn-gateway, vpc-flow-log
+    #         tags: [
+    #           {
+    #             key: "String",
+    #             value: "String",
+    #           },
+    #         ],
+    #       },
+    #     ],
     #   })
     #
     # @example Response structure
@@ -37617,7 +37733,7 @@ module Aws::EC2
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-ec2'
-      context[:gem_version] = '1.172.0'
+      context[:gem_version] = '1.173.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

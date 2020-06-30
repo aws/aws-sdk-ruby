@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.90.0 (2020-06-30)
+------------------
+
+* Feature - Documentation updates for rds
+
 1.89.0 (2020-06-23)
 ------------------
 

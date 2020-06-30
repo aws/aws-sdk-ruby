@@ -1692,6 +1692,9 @@ module Aws::ECR
     #   The tag to associate with the image. This parameter is required for
     #   images that use the Docker Image Manifest V2 Schema 2 or OCI formats.
     #
+    # @option params [String] :image_digest
+    #   The image digest of the image manifest corresponding to the image.
+    #
     # @return [Types::PutImageResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::PutImageResponse#image #image} => Types::Image
@@ -1704,6 +1707,7 @@ module Aws::ECR
     #     image_manifest: "ImageManifest", # required
     #     image_manifest_media_type: "MediaType",
     #     image_tag: "ImageTag",
+    #     image_digest: "ImageDigest",
     #   })
     #
     # @example Response structure
@@ -2183,7 +2187,7 @@ module Aws::ECR
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-ecr'
-      context[:gem_version] = '1.32.0'
+      context[:gem_version] = '1.33.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 
