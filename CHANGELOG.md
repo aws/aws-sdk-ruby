@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+* Feature - Aws::CodeGuruReviewer - Updated the API, and documentation for Amazon CodeGuru Reviewer.
+
+* Feature - Aws::ComprehendMedical - Updated the API for AWS Comprehend Medical.
+
+* Feature - Aws::EC2 - Updated the API, and documentation for Amazon Elastic Compute Cloud.
+
+* Feature - Aws::ECR - Updated the API, and documentation for Amazon EC2 Container Registry.
+
+* Feature - Aws::RDS - Updated the documentation for Amazon Relational Database Service.
+
 2.11.538 (2020-06-29)
 ------------------
 
