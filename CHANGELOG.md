@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+2.11.539 (2020-06-30)
+------------------
+
 * Feature - Aws::CodeGuruReviewer - Updated the API, and documentation for Amazon CodeGuru Reviewer.
 
 * Feature - Aws::ComprehendMedical - Updated the API for AWS Comprehend Medical.
