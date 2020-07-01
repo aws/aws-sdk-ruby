@@ -1,6 +1,18 @@
 Unreleased Changes
 ------------------
 
+* Feature - Aws::AppSync - Updated the API, and documentation for AWS AppSync.
+
+* Feature - Aws::Chime - Updated the API, and documentation for Amazon Chime.
+
+* Feature - Aws::CodeBuild - Updated the API, and documentation for AWS CodeBuild.
+
+* Feature - Aws::Imagebuilder - Updated the API, and documentation for EC2 Image Builder.
+
+* Feature - Aws::RDS - Updated the API for Amazon Relational Database Service.
+
+* Feature - Aws::SecurityHub - Updated the API, and documentation for AWS SecurityHub.
+
 2.11.539 (2020-06-30)
 ------------------
 
