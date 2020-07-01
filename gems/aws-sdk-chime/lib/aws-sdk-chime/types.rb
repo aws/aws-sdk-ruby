@@ -193,7 +193,7 @@ module Aws::Chime
     #
     #       {
     #         voice_connector_group_id: "NonEmptyString", # required
-    #         e164_phone_numbers: ["E164PhoneNumber"],
+    #         e164_phone_numbers: ["E164PhoneNumber"], # required
     #         force_associate: false,
     #       }
     #
@@ -241,7 +241,7 @@ module Aws::Chime
     #
     #       {
     #         voice_connector_id: "NonEmptyString", # required
-    #         e164_phone_numbers: ["E164PhoneNumber"],
+    #         e164_phone_numbers: ["E164PhoneNumber"], # required
     #         force_associate: false,
     #       }
     #
@@ -1539,6 +1539,43 @@ module Aws::Chime
       include Aws::Structure
     end
 
+    # The Dialed Number Identification Service (DNIS) emergency calling
+    # configuration details associated with an Amazon Chime Voice
+    # Connector's emergency calling configuration.
+    #
+    # @note When making an API call, you may pass DNISEmergencyCallingConfiguration
+    #   data as a hash:
+    #
+    #       {
+    #         emergency_phone_number: "E164PhoneNumber", # required
+    #         test_phone_number: "E164PhoneNumber",
+    #         calling_country: "Alpha2CountryCode", # required
+    #       }
+    #
+    # @!attribute [rw] emergency_phone_number
+    #   The DNIS phone number to route emergency calls to, in E.164 format.
+    #   @return [String]
+    #
+    # @!attribute [rw] test_phone_number
+    #   The DNIS phone number to route test emergency calls to, in E.164
+    #   format.
+    #   @return [String]
+    #
+    # @!attribute [rw] calling_country
+    #   The country from which emergency calls are allowed, in ISO 3166-1
+    #   alpha-2 format.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/DNISEmergencyCallingConfiguration AWS API Documentation
+    #
+    class DNISEmergencyCallingConfiguration < Struct.new(
+      :emergency_phone_number,
+      :test_phone_number,
+      :calling_country)
+      SENSITIVE = [:emergency_phone_number, :test_phone_number]
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass DeleteAccountRequest
     #   data as a hash:
     #
@@ -1731,6 +1768,25 @@ module Aws::Chime
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass DeleteVoiceConnectorEmergencyCallingConfigurationRequest
+    #   data as a hash:
+    #
+    #       {
+    #         voice_connector_id: "NonEmptyString", # required
+    #       }
+    #
+    # @!attribute [rw] voice_connector_id
+    #   The Amazon Chime Voice Connector ID.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/DeleteVoiceConnectorEmergencyCallingConfigurationRequest AWS API Documentation
+    #
+    class DeleteVoiceConnectorEmergencyCallingConfigurationRequest < Struct.new(
+      :voice_connector_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass DeleteVoiceConnectorGroupRequest
     #   data as a hash:
     #
@@ -1831,7 +1887,7 @@ module Aws::Chime
     #
     #       {
     #         voice_connector_id: "NonEmptyString", # required
-    #         usernames: ["SensitiveString"],
+    #         usernames: ["SensitiveString"], # required
     #       }
     #
     # @!attribute [rw] voice_connector_id
@@ -1905,7 +1961,7 @@ module Aws::Chime
     #
     #       {
     #         voice_connector_group_id: "NonEmptyString", # required
-    #         e164_phone_numbers: ["E164PhoneNumber"],
+    #         e164_phone_numbers: ["E164PhoneNumber"], # required
     #       }
     #
     # @!attribute [rw] voice_connector_group_id
@@ -1944,7 +2000,7 @@ module Aws::Chime
     #
     #       {
     #         voice_connector_id: "NonEmptyString", # required
-    #         e164_phone_numbers: ["E164PhoneNumber"],
+    #         e164_phone_numbers: ["E164PhoneNumber"], # required
     #       }
     #
     # @!attribute [rw] voice_connector_id
@@ -2006,6 +2062,35 @@ module Aws::Chime
     # @see http://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/DisassociateSigninDelegateGroupsFromAccountResponse AWS API Documentation
     #
     class DisassociateSigninDelegateGroupsFromAccountResponse < Aws::EmptyStructure; end
+
+    # The emergency calling configuration details associated with an Amazon
+    # Chime Voice Connector.
+    #
+    # @note When making an API call, you may pass EmergencyCallingConfiguration
+    #   data as a hash:
+    #
+    #       {
+    #         dnis: [
+    #           {
+    #             emergency_phone_number: "E164PhoneNumber", # required
+    #             test_phone_number: "E164PhoneNumber",
+    #             calling_country: "Alpha2CountryCode", # required
+    #           },
+    #         ],
+    #       }
+    #
+    # @!attribute [rw] dnis
+    #   The Dialed Number Identification Service (DNIS) emergency calling
+    #   configuration details.
+    #   @return [Array<Types::DNISEmergencyCallingConfiguration>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/EmergencyCallingConfiguration AWS API Documentation
+    #
+    class EmergencyCallingConfiguration < Struct.new(
+      :dnis)
+      SENSITIVE = []
+      include Aws::Structure
+    end
 
     # The configuration that allows a bot to receive outgoing events. Can be
     # either an HTTPS endpoint or a Lambda function ARN.
@@ -2560,6 +2645,37 @@ module Aws::Chime
     #
     class GetUserSettingsResponse < Struct.new(
       :user_settings)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass GetVoiceConnectorEmergencyCallingConfigurationRequest
+    #   data as a hash:
+    #
+    #       {
+    #         voice_connector_id: "NonEmptyString", # required
+    #       }
+    #
+    # @!attribute [rw] voice_connector_id
+    #   The Amazon Chime Voice Connector ID.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/GetVoiceConnectorEmergencyCallingConfigurationRequest AWS API Documentation
+    #
+    class GetVoiceConnectorEmergencyCallingConfigurationRequest < Struct.new(
+      :voice_connector_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] emergency_calling_configuration
+    #   The emergency calling configuration details.
+    #   @return [Types::EmergencyCallingConfiguration]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/GetVoiceConnectorEmergencyCallingConfigurationResponse AWS API Documentation
+    #
+    class GetVoiceConnectorEmergencyCallingConfigurationResponse < Struct.new(
+      :emergency_calling_configuration)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4428,6 +4544,51 @@ module Aws::Chime
     class PutRetentionSettingsResponse < Struct.new(
       :retention_settings,
       :initiate_deletion_timestamp)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass PutVoiceConnectorEmergencyCallingConfigurationRequest
+    #   data as a hash:
+    #
+    #       {
+    #         voice_connector_id: "NonEmptyString", # required
+    #         emergency_calling_configuration: { # required
+    #           dnis: [
+    #             {
+    #               emergency_phone_number: "E164PhoneNumber", # required
+    #               test_phone_number: "E164PhoneNumber",
+    #               calling_country: "Alpha2CountryCode", # required
+    #             },
+    #           ],
+    #         },
+    #       }
+    #
+    # @!attribute [rw] voice_connector_id
+    #   The Amazon Chime Voice Connector ID.
+    #   @return [String]
+    #
+    # @!attribute [rw] emergency_calling_configuration
+    #   The emergency calling configuration details.
+    #   @return [Types::EmergencyCallingConfiguration]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/PutVoiceConnectorEmergencyCallingConfigurationRequest AWS API Documentation
+    #
+    class PutVoiceConnectorEmergencyCallingConfigurationRequest < Struct.new(
+      :voice_connector_id,
+      :emergency_calling_configuration)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] emergency_calling_configuration
+    #   The emergency calling configuration details.
+    #   @return [Types::EmergencyCallingConfiguration]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/PutVoiceConnectorEmergencyCallingConfigurationResponse AWS API Documentation
+    #
+    class PutVoiceConnectorEmergencyCallingConfigurationResponse < Struct.new(
+      :emergency_calling_configuration)
       SENSITIVE = []
       include Aws::Structure
     end

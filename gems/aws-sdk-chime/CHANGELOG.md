@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.32.0 (2020-07-01)
+------------------
+
+* Feature - This release supports third party emergency call routing configuration for Amazon Chime Voice Connectors.
+
 1.31.0 (2020-06-23)
 ------------------
 

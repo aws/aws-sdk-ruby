@@ -55,6 +55,7 @@ module Aws::Imagebuilder
     #         ami_tags: {
     #           "TagKey" => "TagValue",
     #         },
+    #         kms_key_id: "NonEmptyString",
     #         launch_permission: {
     #           user_ids: ["NonEmptyString"],
     #           user_groups: ["NonEmptyString"],
@@ -73,6 +74,10 @@ module Aws::Imagebuilder
     #   The tags to apply to AMIs distributed to this Region.
     #   @return [Hash<String,String>]
     #
+    # @!attribute [rw] kms_key_id
+    #   The KMS key identifier used to encrypt the distributed image.
+    #   @return [String]
+    #
     # @!attribute [rw] launch_permission
     #   Launch permissions can be used to configure which AWS accounts can
     #   use the AMI to launch instances.
@@ -84,6 +89,7 @@ module Aws::Imagebuilder
       :name,
       :description,
       :ami_tags,
+      :kms_key_id,
       :launch_permission)
       SENSITIVE = []
       include Aws::Structure
@@ -532,6 +538,7 @@ module Aws::Imagebuilder
     #               ami_tags: {
     #                 "TagKey" => "TagValue",
     #               },
+    #               kms_key_id: "NonEmptyString",
     #               launch_permission: {
     #                 user_ids: ["NonEmptyString"],
     #                 user_groups: ["NonEmptyString"],
@@ -1311,6 +1318,7 @@ module Aws::Imagebuilder
     #           ami_tags: {
     #             "TagKey" => "TagValue",
     #           },
+    #           kms_key_id: "NonEmptyString",
     #           launch_permission: {
     #             user_ids: ["NonEmptyString"],
     #             user_groups: ["NonEmptyString"],
@@ -2723,7 +2731,9 @@ module Aws::Imagebuilder
     # Describes the configuration for a launch permission. The launch
     # permission modification request is sent to the [EC2
     # ModifyImageAttribute][1] API on behalf of the user for each Region
-    # they have selected to distribute the AMI.
+    # they have selected to distribute the AMI. To make an AMI public, set
+    # the launch permission authorized accounts to `all`. See the examples
+    # for making an AMI public at [EC2 ModifyImageAttribute][1].
     #
     #
     #
@@ -3844,6 +3854,7 @@ module Aws::Imagebuilder
     #               ami_tags: {
     #                 "TagKey" => "TagValue",
     #               },
+    #               kms_key_id: "NonEmptyString",
     #               launch_permission: {
     #                 user_ids: ["NonEmptyString"],
     #                 user_groups: ["NonEmptyString"],

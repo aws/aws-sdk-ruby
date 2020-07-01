@@ -339,7 +339,30 @@ module Aws::AppSync
     #     are cached.
     #
     # @option params [required, String] :type
-    #   The cache instance type.
+    #   The cache instance type. Valid values are
+    #
+    #   * `SMALL`
+    #
+    #   * `MEDIUM`
+    #
+    #   * `LARGE`
+    #
+    #   * `XLARGE`
+    #
+    #   * `LARGE_2X`
+    #
+    #   * `LARGE_4X`
+    #
+    #   * `LARGE_8X` (not available in all regions)
+    #
+    #   * `LARGE_12X`
+    #
+    #   Historically, instance types were identified by an EC2-style value. As
+    #   of July 2020, this is deprecated, and the generic identifiers above
+    #   should be used.
+    #
+    #   The following legacy instance types are avaible, but their use is
+    #   discouraged:
     #
     #   * **T2\_SMALL**\: A t2.small instance type.
     #
@@ -367,7 +390,7 @@ module Aws::AppSync
     #     transit_encryption_enabled: false,
     #     at_rest_encryption_enabled: false,
     #     api_caching_behavior: "FULL_REQUEST_CACHING", # required, accepts FULL_REQUEST_CACHING, PER_RESOLVER_CACHING
-    #     type: "T2_SMALL", # required, accepts T2_SMALL, T2_MEDIUM, R4_LARGE, R4_XLARGE, R4_2XLARGE, R4_4XLARGE, R4_8XLARGE
+    #     type: "T2_SMALL", # required, accepts T2_SMALL, T2_MEDIUM, R4_LARGE, R4_XLARGE, R4_2XLARGE, R4_4XLARGE, R4_8XLARGE, SMALL, MEDIUM, LARGE, XLARGE, LARGE_2X, LARGE_4X, LARGE_8X, LARGE_12X
     #   })
     #
     # @example Response structure
@@ -376,7 +399,7 @@ module Aws::AppSync
     #   resp.api_cache.api_caching_behavior #=> String, one of "FULL_REQUEST_CACHING", "PER_RESOLVER_CACHING"
     #   resp.api_cache.transit_encryption_enabled #=> Boolean
     #   resp.api_cache.at_rest_encryption_enabled #=> Boolean
-    #   resp.api_cache.type #=> String, one of "T2_SMALL", "T2_MEDIUM", "R4_LARGE", "R4_XLARGE", "R4_2XLARGE", "R4_4XLARGE", "R4_8XLARGE"
+    #   resp.api_cache.type #=> String, one of "T2_SMALL", "T2_MEDIUM", "R4_LARGE", "R4_XLARGE", "R4_2XLARGE", "R4_4XLARGE", "R4_8XLARGE", "SMALL", "MEDIUM", "LARGE", "XLARGE", "LARGE_2X", "LARGE_4X", "LARGE_8X", "LARGE_12X"
     #   resp.api_cache.status #=> String, one of "AVAILABLE", "CREATING", "DELETING", "MODIFYING", "FAILED"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appsync-2017-07-25/CreateApiCache AWS API Documentation
@@ -1107,7 +1130,7 @@ module Aws::AppSync
     #   resp.api_cache.api_caching_behavior #=> String, one of "FULL_REQUEST_CACHING", "PER_RESOLVER_CACHING"
     #   resp.api_cache.transit_encryption_enabled #=> Boolean
     #   resp.api_cache.at_rest_encryption_enabled #=> Boolean
-    #   resp.api_cache.type #=> String, one of "T2_SMALL", "T2_MEDIUM", "R4_LARGE", "R4_XLARGE", "R4_2XLARGE", "R4_4XLARGE", "R4_8XLARGE"
+    #   resp.api_cache.type #=> String, one of "T2_SMALL", "T2_MEDIUM", "R4_LARGE", "R4_XLARGE", "R4_2XLARGE", "R4_4XLARGE", "R4_8XLARGE", "SMALL", "MEDIUM", "LARGE", "XLARGE", "LARGE_2X", "LARGE_4X", "LARGE_8X", "LARGE_12X"
     #   resp.api_cache.status #=> String, one of "AVAILABLE", "CREATING", "DELETING", "MODIFYING", "FAILED"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appsync-2017-07-25/GetApiCache AWS API Documentation
@@ -1959,7 +1982,30 @@ module Aws::AppSync
     #     are cached.
     #
     # @option params [required, String] :type
-    #   The cache instance type.
+    #   The cache instance type. Valid values are
+    #
+    #   * `SMALL`
+    #
+    #   * `MEDIUM`
+    #
+    #   * `LARGE`
+    #
+    #   * `XLARGE`
+    #
+    #   * `LARGE_2X`
+    #
+    #   * `LARGE_4X`
+    #
+    #   * `LARGE_8X` (not available in all regions)
+    #
+    #   * `LARGE_12X`
+    #
+    #   Historically, instance types were identified by an EC2-style value. As
+    #   of July 2020, this is deprecated, and the generic identifiers above
+    #   should be used.
+    #
+    #   The following legacy instance types are avaible, but their use is
+    #   discouraged:
     #
     #   * **T2\_SMALL**\: A t2.small instance type.
     #
@@ -1985,7 +2031,7 @@ module Aws::AppSync
     #     api_id: "String", # required
     #     ttl: 1, # required
     #     api_caching_behavior: "FULL_REQUEST_CACHING", # required, accepts FULL_REQUEST_CACHING, PER_RESOLVER_CACHING
-    #     type: "T2_SMALL", # required, accepts T2_SMALL, T2_MEDIUM, R4_LARGE, R4_XLARGE, R4_2XLARGE, R4_4XLARGE, R4_8XLARGE
+    #     type: "T2_SMALL", # required, accepts T2_SMALL, T2_MEDIUM, R4_LARGE, R4_XLARGE, R4_2XLARGE, R4_4XLARGE, R4_8XLARGE, SMALL, MEDIUM, LARGE, XLARGE, LARGE_2X, LARGE_4X, LARGE_8X, LARGE_12X
     #   })
     #
     # @example Response structure
@@ -1994,7 +2040,7 @@ module Aws::AppSync
     #   resp.api_cache.api_caching_behavior #=> String, one of "FULL_REQUEST_CACHING", "PER_RESOLVER_CACHING"
     #   resp.api_cache.transit_encryption_enabled #=> Boolean
     #   resp.api_cache.at_rest_encryption_enabled #=> Boolean
-    #   resp.api_cache.type #=> String, one of "T2_SMALL", "T2_MEDIUM", "R4_LARGE", "R4_XLARGE", "R4_2XLARGE", "R4_4XLARGE", "R4_8XLARGE"
+    #   resp.api_cache.type #=> String, one of "T2_SMALL", "T2_MEDIUM", "R4_LARGE", "R4_XLARGE", "R4_2XLARGE", "R4_4XLARGE", "R4_8XLARGE", "SMALL", "MEDIUM", "LARGE", "XLARGE", "LARGE_2X", "LARGE_4X", "LARGE_8X", "LARGE_12X"
     #   resp.api_cache.status #=> String, one of "AVAILABLE", "CREATING", "DELETING", "MODIFYING", "FAILED"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appsync-2017-07-25/UpdateApiCache AWS API Documentation
@@ -2506,7 +2552,7 @@ module Aws::AppSync
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-appsync'
-      context[:gem_version] = '1.28.0'
+      context[:gem_version] = '1.29.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

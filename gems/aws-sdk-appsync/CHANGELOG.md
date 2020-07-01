@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.29.0 (2020-07-01)
+------------------
+
+* Feature - AWS AppSync supports new 12xlarge instance for server-side API caching
+
 1.28.0 (2020-06-23)
 ------------------
 

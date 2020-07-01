@@ -94,7 +94,30 @@ module Aws::AppSync
     #   @return [Boolean]
     #
     # @!attribute [rw] type
-    #   The cache instance type.
+    #   The cache instance type. Valid values are
+    #
+    #   * `SMALL`
+    #
+    #   * `MEDIUM`
+    #
+    #   * `LARGE`
+    #
+    #   * `XLARGE`
+    #
+    #   * `LARGE_2X`
+    #
+    #   * `LARGE_4X`
+    #
+    #   * `LARGE_8X` (not available in all regions)
+    #
+    #   * `LARGE_12X`
+    #
+    #   Historically, instance types were identified by an EC2-style value.
+    #   As of July 2020, this is deprecated, and the generic identifiers
+    #   above should be used.
+    #
+    #   The following legacy instance types are avaible, but their use is
+    #   discouraged:
     #
     #   * **T2\_SMALL**\: A t2.small instance type.
     #
@@ -409,7 +432,7 @@ module Aws::AppSync
     #         transit_encryption_enabled: false,
     #         at_rest_encryption_enabled: false,
     #         api_caching_behavior: "FULL_REQUEST_CACHING", # required, accepts FULL_REQUEST_CACHING, PER_RESOLVER_CACHING
-    #         type: "T2_SMALL", # required, accepts T2_SMALL, T2_MEDIUM, R4_LARGE, R4_XLARGE, R4_2XLARGE, R4_4XLARGE, R4_8XLARGE
+    #         type: "T2_SMALL", # required, accepts T2_SMALL, T2_MEDIUM, R4_LARGE, R4_XLARGE, R4_2XLARGE, R4_4XLARGE, R4_8XLARGE, SMALL, MEDIUM, LARGE, XLARGE, LARGE_2X, LARGE_4X, LARGE_8X, LARGE_12X
     #       }
     #
     # @!attribute [rw] api_id
@@ -442,7 +465,30 @@ module Aws::AppSync
     #   @return [String]
     #
     # @!attribute [rw] type
-    #   The cache instance type.
+    #   The cache instance type. Valid values are
+    #
+    #   * `SMALL`
+    #
+    #   * `MEDIUM`
+    #
+    #   * `LARGE`
+    #
+    #   * `XLARGE`
+    #
+    #   * `LARGE_2X`
+    #
+    #   * `LARGE_4X`
+    #
+    #   * `LARGE_8X` (not available in all regions)
+    #
+    #   * `LARGE_12X`
+    #
+    #   Historically, instance types were identified by an EC2-style value.
+    #   As of July 2020, this is deprecated, and the generic identifiers
+    #   above should be used.
+    #
+    #   The following legacy instance types are avaible, but their use is
+    #   discouraged:
     #
     #   * **T2\_SMALL**\: A t2.small instance type.
     #
@@ -2511,7 +2557,7 @@ module Aws::AppSync
     #   @return [String]
     #
     # @!attribute [rw] db_cluster_identifier
-    #   Amazon RDS cluster identifier.
+    #   Amazon RDS cluster ARN.
     #   @return [String]
     #
     # @!attribute [rw] database_name
@@ -2854,7 +2900,7 @@ module Aws::AppSync
     #         api_id: "String", # required
     #         ttl: 1, # required
     #         api_caching_behavior: "FULL_REQUEST_CACHING", # required, accepts FULL_REQUEST_CACHING, PER_RESOLVER_CACHING
-    #         type: "T2_SMALL", # required, accepts T2_SMALL, T2_MEDIUM, R4_LARGE, R4_XLARGE, R4_2XLARGE, R4_4XLARGE, R4_8XLARGE
+    #         type: "T2_SMALL", # required, accepts T2_SMALL, T2_MEDIUM, R4_LARGE, R4_XLARGE, R4_2XLARGE, R4_4XLARGE, R4_8XLARGE, SMALL, MEDIUM, LARGE, XLARGE, LARGE_2X, LARGE_4X, LARGE_8X, LARGE_12X
     #       }
     #
     # @!attribute [rw] api_id
@@ -2877,7 +2923,30 @@ module Aws::AppSync
     #   @return [String]
     #
     # @!attribute [rw] type
-    #   The cache instance type.
+    #   The cache instance type. Valid values are
+    #
+    #   * `SMALL`
+    #
+    #   * `MEDIUM`
+    #
+    #   * `LARGE`
+    #
+    #   * `XLARGE`
+    #
+    #   * `LARGE_2X`
+    #
+    #   * `LARGE_4X`
+    #
+    #   * `LARGE_8X` (not available in all regions)
+    #
+    #   * `LARGE_12X`
+    #
+    #   Historically, instance types were identified by an EC2-style value.
+    #   As of July 2020, this is deprecated, and the generic identifiers
+    #   above should be used.
+    #
+    #   The following legacy instance types are avaible, but their use is
+    #   discouraged:
     #
     #   * **T2\_SMALL**\: A t2.small instance type.
     #

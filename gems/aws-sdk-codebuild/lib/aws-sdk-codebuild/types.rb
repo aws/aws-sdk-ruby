@@ -608,6 +608,72 @@ module Aws::CodeBuild
       include Aws::Structure
     end
 
+    # Contains information that defines how the AWS CodeBuild build project
+    # reports the build status to the source provider.
+    #
+    # @note When making an API call, you may pass BuildStatusConfig
+    #   data as a hash:
+    #
+    #       {
+    #         context: "String",
+    #         target_url: "String",
+    #       }
+    #
+    # @!attribute [rw] context
+    #   Specifies the context of the build status CodeBuild sends to the
+    #   source provider. The usage of this parameter depends on the source
+    #   provider.
+    #
+    #   Bitbucket
+    #
+    #   : This parameter is used for the `name` parameter in the Bitbucket
+    #     commit status. For more information, see [build][1] in the
+    #     Bitbucket API documentation.
+    #
+    #   GitHub/GitHub Enterprise Server
+    #
+    #   : This parameter is used for the `context` parameter in the GitHub
+    #     commit status. For more information, see [Create a commit
+    #     status][2] in the GitHub developer guide.
+    #
+    #
+    #
+    #   [1]: https://developer.atlassian.com/bitbucket/api/2/reference/resource/repositories/%7Bworkspace%7D/%7Brepo_slug%7D/commit/%7Bnode%7D/statuses/build
+    #   [2]: https://developer.github.com/v3/repos/statuses/#create-a-commit-status
+    #   @return [String]
+    #
+    # @!attribute [rw] target_url
+    #   Specifies the target url of the build status CodeBuild sends to the
+    #   source provider. The usage of this parameter depends on the source
+    #   provider.
+    #
+    #   Bitbucket
+    #
+    #   : This parameter is used for the `url` parameter in the Bitbucket
+    #     commit status. For more information, see [build][1] in the
+    #     Bitbucket API documentation.
+    #
+    #   GitHub/GitHub Enterprise Server
+    #
+    #   : This parameter is used for the `target_url` parameter in the
+    #     GitHub commit status. For more information, see [Create a commit
+    #     status][2] in the GitHub developer guide.
+    #
+    #
+    #
+    #   [1]: https://developer.atlassian.com/bitbucket/api/2/reference/resource/repositories/%7Bworkspace%7D/%7Brepo_slug%7D/commit/%7Bnode%7D/statuses/build
+    #   [2]: https://developer.github.com/v3/repos/statuses/#create-a-commit-status
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codebuild-2016-10-06/BuildStatusConfig AWS API Documentation
+    #
+    class BuildStatusConfig < Struct.new(
+      :context,
+      :target_url)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Information about Amazon CloudWatch Logs for a build project.
     #
     # @note When making an API call, you may pass CloudWatchLogsConfig
@@ -677,6 +743,10 @@ module Aws::CodeBuild
     #             resource: "String",
     #           },
     #           report_build_status: false,
+    #           build_status_config: {
+    #             context: "String",
+    #             target_url: "String",
+    #           },
     #           insecure_ssl: false,
     #           source_identifier: "String",
     #         },
@@ -694,6 +764,10 @@ module Aws::CodeBuild
     #               resource: "String",
     #             },
     #             report_build_status: false,
+    #             build_status_config: {
+    #               context: "String",
+    #               target_url: "String",
+    #             },
     #             insecure_ssl: false,
     #             source_identifier: "String",
     #           },
@@ -3117,6 +3191,10 @@ module Aws::CodeBuild
     #           resource: "String",
     #         },
     #         report_build_status: false,
+    #         build_status_config: {
+    #           context: "String",
+    #           target_url: "String",
+    #         },
     #         insecure_ssl: false,
     #         source_identifier: "String",
     #       }
@@ -3132,10 +3210,11 @@ module Aws::CodeBuild
     #   * `CODEPIPELINE`\: The source code settings are specified in the
     #     source action of a pipeline in AWS CodePipeline.
     #
-    #   * `GITHUB`\: The source code is in a GitHub repository.
+    #   * `GITHUB`\: The source code is in a GitHub or GitHub Enterprise
+    #     Cloud repository.
     #
     #   * `GITHUB_ENTERPRISE`\: The source code is in a GitHub Enterprise
-    #     repository.
+    #     Server repository.
     #
     #   * `NO_SOURCE`\: The project does not have input source code.
     #
@@ -3244,6 +3323,13 @@ module Aws::CodeBuild
     #    </note>
     #   @return [Boolean]
     #
+    # @!attribute [rw] build_status_config
+    #   Contains information that defines how the build project reports the
+    #   build status to the source provider. This option is only used when
+    #   the source provider is `GITHUB`, `GITHUB_ENTERPRISE`, or
+    #   `BITBUCKET`.
+    #   @return [Types::BuildStatusConfig]
+    #
     # @!attribute [rw] insecure_ssl
     #   Enable this flag to ignore SSL warnings while connecting to the
     #   project source code.
@@ -3263,6 +3349,7 @@ module Aws::CodeBuild
       :buildspec,
       :auth,
       :report_build_status,
+      :build_status_config,
       :insecure_ssl,
       :source_identifier)
       SENSITIVE = []
@@ -3791,6 +3878,10 @@ module Aws::CodeBuild
     #               resource: "String",
     #             },
     #             report_build_status: false,
+    #             build_status_config: {
+    #               context: "String",
+    #               target_url: "String",
+    #             },
     #             insecure_ssl: false,
     #             source_identifier: "String",
     #           },
@@ -3846,6 +3937,10 @@ module Aws::CodeBuild
     #         buildspec_override: "String",
     #         insecure_ssl_override: false,
     #         report_build_status_override: false,
+    #         build_status_config_override: {
+    #           context: "String",
+    #           target_url: "String",
+    #         },
     #         environment_type_override: "WINDOWS_CONTAINER", # accepts WINDOWS_CONTAINER, LINUX_CONTAINER, LINUX_GPU_CONTAINER, ARM_CONTAINER
     #         image_override: "NonEmptyString",
     #         compute_type_override: "BUILD_GENERAL1_SMALL", # accepts BUILD_GENERAL1_SMALL, BUILD_GENERAL1_MEDIUM, BUILD_GENERAL1_LARGE, BUILD_GENERAL1_2XLARGE
@@ -4009,6 +4104,13 @@ module Aws::CodeBuild
     #    </note>
     #   @return [Boolean]
     #
+    # @!attribute [rw] build_status_config_override
+    #   Contains information that defines how the build project reports the
+    #   build status to the source provider. This option is only used when
+    #   the source provider is `GITHUB`, `GITHUB_ENTERPRISE`, or
+    #   `BITBUCKET`.
+    #   @return [Types::BuildStatusConfig]
+    #
     # @!attribute [rw] environment_type_override
     #   A container type for this build that overrides the one specified in
     #   the build project.
@@ -4072,7 +4174,7 @@ module Aws::CodeBuild
     # @!attribute [rw] idempotency_token
     #   A unique, case sensitive identifier you provide to ensure the
     #   idempotency of the StartBuild request. The token is included in the
-    #   StartBuild request and is valid for 12 hours. If you repeat the
+    #   StartBuild request and is valid for 5 minutes. If you repeat the
     #   StartBuild request with the same token, but change a parameter, AWS
     #   CodeBuild returns a parameter mismatch error.
     #   @return [String]
@@ -4120,6 +4222,7 @@ module Aws::CodeBuild
       :buildspec_override,
       :insecure_ssl_override,
       :report_build_status_override,
+      :build_status_config_override,
       :environment_type_override,
       :image_override,
       :compute_type_override,
@@ -4337,6 +4440,10 @@ module Aws::CodeBuild
     #             resource: "String",
     #           },
     #           report_build_status: false,
+    #           build_status_config: {
+    #             context: "String",
+    #             target_url: "String",
+    #           },
     #           insecure_ssl: false,
     #           source_identifier: "String",
     #         },
@@ -4354,6 +4461,10 @@ module Aws::CodeBuild
     #               resource: "String",
     #             },
     #             report_build_status: false,
+    #             build_status_config: {
+    #               context: "String",
+    #               target_url: "String",
+    #             },
     #             insecure_ssl: false,
     #             source_identifier: "String",
     #           },
@@ -4871,9 +4982,9 @@ module Aws::CodeBuild
     #       }
     #
     # @!attribute [rw] type
-    #   The type of webhook filter. There are five webhook filter types:
-    #   `EVENT`, `ACTOR_ACCOUNT_ID`, `HEAD_REF`, `BASE_REF`, and
-    #   `FILE_PATH`.
+    #   The type of webhook filter. There are six webhook filter types:
+    #   `EVENT`, `ACTOR_ACCOUNT_ID`, `HEAD_REF`, `BASE_REF`, `FILE_PATH`,
+    #   and `COMMIT_MESSAGE`.
     #
     #   EVENT
     #
@@ -4920,7 +5031,20 @@ module Aws::CodeBuild
     #   : A webhook triggers a build when the path of a changed file matches
     #     the regular expression `pattern`.
     #
-    #     <note markdown="1"> Works with GitHub and GitHub Enterprise push events only.
+    #     <note markdown="1"> Works with GitHub and Bitbucket events push and pull requests
+    #     events. Also works with GitHub Enterprise push events, but does
+    #     not work with GitHub Enterprise pull request events.
+    #
+    #      </note>
+    #
+    #   COMMIT\_MESSAGE
+    #
+    #   : A webhook triggers a build when the head commit message matches
+    #     the regular expression `pattern`.
+    #
+    #     <note markdown="1"> Works with GitHub and Bitbucket events push and pull requests
+    #     events. Also works with GitHub Enterprise push events, but does
+    #     not work with GitHub Enterprise pull request events.
     #
     #      </note>
     #   @return [String]

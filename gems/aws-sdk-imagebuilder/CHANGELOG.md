@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.11.0 (2020-07-01)
+------------------
+
+* Feature - EC2 Image Builder adds support for encrypted AMI distribution.
+
 1.10.0 (2020-06-23)
 ------------------
 

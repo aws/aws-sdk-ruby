@@ -527,6 +527,10 @@ module Aws::SecurityHub
     #         network: {
     #           direction: "IN", # accepts IN, OUT
     #           protocol: "NonEmptyString",
+    #           open_port_range: {
+    #             begin: 1,
+    #             end: 1,
+    #           },
     #           source_ip_v4: "NonEmptyString",
     #           source_ip_v6: "NonEmptyString",
     #           source_port: 1,
@@ -537,6 +541,54 @@ module Aws::SecurityHub
     #           destination_port: 1,
     #           destination_domain: "NonEmptyString",
     #         },
+    #         network_path: [
+    #           {
+    #             component_id: "NonEmptyString",
+    #             component_type: "NonEmptyString",
+    #             egress: {
+    #               protocol: "NonEmptyString",
+    #               destination: {
+    #                 address: ["NonEmptyString"],
+    #                 port_ranges: [
+    #                   {
+    #                     begin: 1,
+    #                     end: 1,
+    #                   },
+    #                 ],
+    #               },
+    #               source: {
+    #                 address: ["NonEmptyString"],
+    #                 port_ranges: [
+    #                   {
+    #                     begin: 1,
+    #                     end: 1,
+    #                   },
+    #                 ],
+    #               },
+    #             },
+    #             ingress: {
+    #               protocol: "NonEmptyString",
+    #               destination: {
+    #                 address: ["NonEmptyString"],
+    #                 port_ranges: [
+    #                   {
+    #                     begin: 1,
+    #                     end: 1,
+    #                   },
+    #                 ],
+    #               },
+    #               source: {
+    #                 address: ["NonEmptyString"],
+    #                 port_ranges: [
+    #                   {
+    #                     begin: 1,
+    #                     end: 1,
+    #                   },
+    #                 ],
+    #               },
+    #             },
+    #           },
+    #         ],
     #         process: {
     #           name: "NonEmptyString",
     #           path: "NonEmptyString",
@@ -565,6 +617,13 @@ module Aws::SecurityHub
     #               "NonEmptyString" => "NonEmptyString",
     #             },
     #             details: {
+    #               aws_auto_scaling_auto_scaling_group: {
+    #                 launch_configuration_name: "NonEmptyString",
+    #                 load_balancer_names: ["NonEmptyString"],
+    #                 health_check_type: "NonEmptyString",
+    #                 health_check_grace_period: 1,
+    #                 created_time: "NonEmptyString",
+    #               },
     #               aws_code_build_project: {
     #                 encryption_key: "NonEmptyString",
     #                 environment: {
@@ -711,6 +770,40 @@ module Aws::SecurityHub
     #                     ],
     #                   },
     #                 ],
+    #               },
+    #               aws_ec2_volume: {
+    #                 create_time: "NonEmptyString",
+    #                 encrypted: false,
+    #                 size: 1,
+    #                 snapshot_id: "NonEmptyString",
+    #                 status: "NonEmptyString",
+    #                 kms_key_id: "NonEmptyString",
+    #                 attachments: [
+    #                   {
+    #                     attach_time: "NonEmptyString",
+    #                     delete_on_termination: false,
+    #                     instance_id: "NonEmptyString",
+    #                     status: "NonEmptyString",
+    #                   },
+    #                 ],
+    #               },
+    #               aws_ec2_vpc: {
+    #                 cidr_block_association_set: [
+    #                   {
+    #                     association_id: "NonEmptyString",
+    #                     cidr_block: "NonEmptyString",
+    #                     cidr_block_state: "NonEmptyString",
+    #                   },
+    #                 ],
+    #                 ipv_6_cidr_block_association_set: [
+    #                   {
+    #                     association_id: "NonEmptyString",
+    #                     ipv_6_cidr_block: "NonEmptyString",
+    #                     cidr_block_state: "NonEmptyString",
+    #                   },
+    #                 ],
+    #                 dhcp_options_id: "NonEmptyString",
+    #                 state: "NonEmptyString",
     #               },
     #               aws_elbv_2_load_balancer: {
     #                 availability_zones: [
@@ -972,6 +1065,36 @@ module Aws::SecurityHub
     #           updated_by: "NonEmptyString", # required
     #           updated_at: "NonEmptyString", # required
     #         },
+    #         vulnerabilities: [
+    #           {
+    #             id: "NonEmptyString", # required
+    #             vulnerable_packages: [
+    #               {
+    #                 name: "NonEmptyString",
+    #                 version: "NonEmptyString",
+    #                 epoch: "NonEmptyString",
+    #                 release: "NonEmptyString",
+    #                 architecture: "NonEmptyString",
+    #               },
+    #             ],
+    #             cvss: [
+    #               {
+    #                 version: "NonEmptyString",
+    #                 base_score: 1.0,
+    #                 base_vector: "NonEmptyString",
+    #               },
+    #             ],
+    #             related_vulnerabilities: ["NonEmptyString"],
+    #             vendor: {
+    #               name: "NonEmptyString", # required
+    #               url: "NonEmptyString",
+    #               vendor_severity: "NonEmptyString",
+    #               vendor_created_at: "NonEmptyString",
+    #               vendor_updated_at: "NonEmptyString",
+    #             },
+    #             reference_urls: ["NonEmptyString"],
+    #           },
+    #         ],
     #       },
     #     ],
     #   })
@@ -3120,6 +3243,8 @@ module Aws::SecurityHub
     #   resp.findings[0].malware[0].state #=> String, one of "OBSERVED", "REMOVAL_FAILED", "REMOVED"
     #   resp.findings[0].network.direction #=> String, one of "IN", "OUT"
     #   resp.findings[0].network.protocol #=> String
+    #   resp.findings[0].network.open_port_range.begin #=> Integer
+    #   resp.findings[0].network.open_port_range.end #=> Integer
     #   resp.findings[0].network.source_ip_v4 #=> String
     #   resp.findings[0].network.source_ip_v6 #=> String
     #   resp.findings[0].network.source_port #=> Integer
@@ -3129,6 +3254,31 @@ module Aws::SecurityHub
     #   resp.findings[0].network.destination_ip_v6 #=> String
     #   resp.findings[0].network.destination_port #=> Integer
     #   resp.findings[0].network.destination_domain #=> String
+    #   resp.findings[0].network_path #=> Array
+    #   resp.findings[0].network_path[0].component_id #=> String
+    #   resp.findings[0].network_path[0].component_type #=> String
+    #   resp.findings[0].network_path[0].egress.protocol #=> String
+    #   resp.findings[0].network_path[0].egress.destination.address #=> Array
+    #   resp.findings[0].network_path[0].egress.destination.address[0] #=> String
+    #   resp.findings[0].network_path[0].egress.destination.port_ranges #=> Array
+    #   resp.findings[0].network_path[0].egress.destination.port_ranges[0].begin #=> Integer
+    #   resp.findings[0].network_path[0].egress.destination.port_ranges[0].end #=> Integer
+    #   resp.findings[0].network_path[0].egress.source.address #=> Array
+    #   resp.findings[0].network_path[0].egress.source.address[0] #=> String
+    #   resp.findings[0].network_path[0].egress.source.port_ranges #=> Array
+    #   resp.findings[0].network_path[0].egress.source.port_ranges[0].begin #=> Integer
+    #   resp.findings[0].network_path[0].egress.source.port_ranges[0].end #=> Integer
+    #   resp.findings[0].network_path[0].ingress.protocol #=> String
+    #   resp.findings[0].network_path[0].ingress.destination.address #=> Array
+    #   resp.findings[0].network_path[0].ingress.destination.address[0] #=> String
+    #   resp.findings[0].network_path[0].ingress.destination.port_ranges #=> Array
+    #   resp.findings[0].network_path[0].ingress.destination.port_ranges[0].begin #=> Integer
+    #   resp.findings[0].network_path[0].ingress.destination.port_ranges[0].end #=> Integer
+    #   resp.findings[0].network_path[0].ingress.source.address #=> Array
+    #   resp.findings[0].network_path[0].ingress.source.address[0] #=> String
+    #   resp.findings[0].network_path[0].ingress.source.port_ranges #=> Array
+    #   resp.findings[0].network_path[0].ingress.source.port_ranges[0].begin #=> Integer
+    #   resp.findings[0].network_path[0].ingress.source.port_ranges[0].end #=> Integer
     #   resp.findings[0].process.name #=> String
     #   resp.findings[0].process.path #=> String
     #   resp.findings[0].process.pid #=> Integer
@@ -3149,6 +3299,12 @@ module Aws::SecurityHub
     #   resp.findings[0].resources[0].region #=> String
     #   resp.findings[0].resources[0].tags #=> Hash
     #   resp.findings[0].resources[0].tags["NonEmptyString"] #=> String
+    #   resp.findings[0].resources[0].details.aws_auto_scaling_auto_scaling_group.launch_configuration_name #=> String
+    #   resp.findings[0].resources[0].details.aws_auto_scaling_auto_scaling_group.load_balancer_names #=> Array
+    #   resp.findings[0].resources[0].details.aws_auto_scaling_auto_scaling_group.load_balancer_names[0] #=> String
+    #   resp.findings[0].resources[0].details.aws_auto_scaling_auto_scaling_group.health_check_type #=> String
+    #   resp.findings[0].resources[0].details.aws_auto_scaling_auto_scaling_group.health_check_grace_period #=> Integer
+    #   resp.findings[0].resources[0].details.aws_auto_scaling_auto_scaling_group.created_time #=> String
     #   resp.findings[0].resources[0].details.aws_code_build_project.encryption_key #=> String
     #   resp.findings[0].resources[0].details.aws_code_build_project.environment.certificate #=> String
     #   resp.findings[0].resources[0].details.aws_code_build_project.environment.image_pull_credentials_type #=> String
@@ -3240,6 +3396,27 @@ module Aws::SecurityHub
     #   resp.findings[0].resources[0].details.aws_ec2_security_group.ip_permissions_egress[0].ipv_6_ranges[0].cidr_ipv_6 #=> String
     #   resp.findings[0].resources[0].details.aws_ec2_security_group.ip_permissions_egress[0].prefix_list_ids #=> Array
     #   resp.findings[0].resources[0].details.aws_ec2_security_group.ip_permissions_egress[0].prefix_list_ids[0].prefix_list_id #=> String
+    #   resp.findings[0].resources[0].details.aws_ec2_volume.create_time #=> String
+    #   resp.findings[0].resources[0].details.aws_ec2_volume.encrypted #=> Boolean
+    #   resp.findings[0].resources[0].details.aws_ec2_volume.size #=> Integer
+    #   resp.findings[0].resources[0].details.aws_ec2_volume.snapshot_id #=> String
+    #   resp.findings[0].resources[0].details.aws_ec2_volume.status #=> String
+    #   resp.findings[0].resources[0].details.aws_ec2_volume.kms_key_id #=> String
+    #   resp.findings[0].resources[0].details.aws_ec2_volume.attachments #=> Array
+    #   resp.findings[0].resources[0].details.aws_ec2_volume.attachments[0].attach_time #=> String
+    #   resp.findings[0].resources[0].details.aws_ec2_volume.attachments[0].delete_on_termination #=> Boolean
+    #   resp.findings[0].resources[0].details.aws_ec2_volume.attachments[0].instance_id #=> String
+    #   resp.findings[0].resources[0].details.aws_ec2_volume.attachments[0].status #=> String
+    #   resp.findings[0].resources[0].details.aws_ec2_vpc.cidr_block_association_set #=> Array
+    #   resp.findings[0].resources[0].details.aws_ec2_vpc.cidr_block_association_set[0].association_id #=> String
+    #   resp.findings[0].resources[0].details.aws_ec2_vpc.cidr_block_association_set[0].cidr_block #=> String
+    #   resp.findings[0].resources[0].details.aws_ec2_vpc.cidr_block_association_set[0].cidr_block_state #=> String
+    #   resp.findings[0].resources[0].details.aws_ec2_vpc.ipv_6_cidr_block_association_set #=> Array
+    #   resp.findings[0].resources[0].details.aws_ec2_vpc.ipv_6_cidr_block_association_set[0].association_id #=> String
+    #   resp.findings[0].resources[0].details.aws_ec2_vpc.ipv_6_cidr_block_association_set[0].ipv_6_cidr_block #=> String
+    #   resp.findings[0].resources[0].details.aws_ec2_vpc.ipv_6_cidr_block_association_set[0].cidr_block_state #=> String
+    #   resp.findings[0].resources[0].details.aws_ec2_vpc.dhcp_options_id #=> String
+    #   resp.findings[0].resources[0].details.aws_ec2_vpc.state #=> String
     #   resp.findings[0].resources[0].details.aws_elbv_2_load_balancer.availability_zones #=> Array
     #   resp.findings[0].resources[0].details.aws_elbv_2_load_balancer.availability_zones[0].zone_name #=> String
     #   resp.findings[0].resources[0].details.aws_elbv_2_load_balancer.availability_zones[0].subnet_id #=> String
@@ -3406,6 +3583,27 @@ module Aws::SecurityHub
     #   resp.findings[0].note.text #=> String
     #   resp.findings[0].note.updated_by #=> String
     #   resp.findings[0].note.updated_at #=> String
+    #   resp.findings[0].vulnerabilities #=> Array
+    #   resp.findings[0].vulnerabilities[0].id #=> String
+    #   resp.findings[0].vulnerabilities[0].vulnerable_packages #=> Array
+    #   resp.findings[0].vulnerabilities[0].vulnerable_packages[0].name #=> String
+    #   resp.findings[0].vulnerabilities[0].vulnerable_packages[0].version #=> String
+    #   resp.findings[0].vulnerabilities[0].vulnerable_packages[0].epoch #=> String
+    #   resp.findings[0].vulnerabilities[0].vulnerable_packages[0].release #=> String
+    #   resp.findings[0].vulnerabilities[0].vulnerable_packages[0].architecture #=> String
+    #   resp.findings[0].vulnerabilities[0].cvss #=> Array
+    #   resp.findings[0].vulnerabilities[0].cvss[0].version #=> String
+    #   resp.findings[0].vulnerabilities[0].cvss[0].base_score #=> Float
+    #   resp.findings[0].vulnerabilities[0].cvss[0].base_vector #=> String
+    #   resp.findings[0].vulnerabilities[0].related_vulnerabilities #=> Array
+    #   resp.findings[0].vulnerabilities[0].related_vulnerabilities[0] #=> String
+    #   resp.findings[0].vulnerabilities[0].vendor.name #=> String
+    #   resp.findings[0].vulnerabilities[0].vendor.url #=> String
+    #   resp.findings[0].vulnerabilities[0].vendor.vendor_severity #=> String
+    #   resp.findings[0].vulnerabilities[0].vendor.vendor_created_at #=> String
+    #   resp.findings[0].vulnerabilities[0].vendor.vendor_updated_at #=> String
+    #   resp.findings[0].vulnerabilities[0].reference_urls #=> Array
+    #   resp.findings[0].vulnerabilities[0].reference_urls[0] #=> String
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/GetFindings AWS API Documentation
@@ -5362,7 +5560,7 @@ module Aws::SecurityHub
     #
     # @option params [String] :disabled_reason
     #   A description of the reason why you are disabling a security standard
-    #   control.
+    #   control. If you are disabling a control, then this is required.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -5396,7 +5594,7 @@ module Aws::SecurityHub
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-securityhub'
-      context[:gem_version] = '1.28.0'
+      context[:gem_version] = '1.29.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

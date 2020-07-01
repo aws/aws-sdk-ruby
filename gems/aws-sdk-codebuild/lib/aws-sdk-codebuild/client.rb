@@ -654,6 +654,8 @@ module Aws::CodeBuild
     #   resp.builds[0].source.auth.type #=> String, one of "OAUTH"
     #   resp.builds[0].source.auth.resource #=> String
     #   resp.builds[0].source.report_build_status #=> Boolean
+    #   resp.builds[0].source.build_status_config.context #=> String
+    #   resp.builds[0].source.build_status_config.target_url #=> String
     #   resp.builds[0].source.insecure_ssl #=> Boolean
     #   resp.builds[0].source.source_identifier #=> String
     #   resp.builds[0].secondary_sources #=> Array
@@ -665,6 +667,8 @@ module Aws::CodeBuild
     #   resp.builds[0].secondary_sources[0].auth.type #=> String, one of "OAUTH"
     #   resp.builds[0].secondary_sources[0].auth.resource #=> String
     #   resp.builds[0].secondary_sources[0].report_build_status #=> Boolean
+    #   resp.builds[0].secondary_sources[0].build_status_config.context #=> String
+    #   resp.builds[0].secondary_sources[0].build_status_config.target_url #=> String
     #   resp.builds[0].secondary_sources[0].insecure_ssl #=> Boolean
     #   resp.builds[0].secondary_sources[0].source_identifier #=> String
     #   resp.builds[0].secondary_source_versions #=> Array
@@ -779,6 +783,8 @@ module Aws::CodeBuild
     #   resp.projects[0].source.auth.type #=> String, one of "OAUTH"
     #   resp.projects[0].source.auth.resource #=> String
     #   resp.projects[0].source.report_build_status #=> Boolean
+    #   resp.projects[0].source.build_status_config.context #=> String
+    #   resp.projects[0].source.build_status_config.target_url #=> String
     #   resp.projects[0].source.insecure_ssl #=> Boolean
     #   resp.projects[0].source.source_identifier #=> String
     #   resp.projects[0].secondary_sources #=> Array
@@ -790,6 +796,8 @@ module Aws::CodeBuild
     #   resp.projects[0].secondary_sources[0].auth.type #=> String, one of "OAUTH"
     #   resp.projects[0].secondary_sources[0].auth.resource #=> String
     #   resp.projects[0].secondary_sources[0].report_build_status #=> Boolean
+    #   resp.projects[0].secondary_sources[0].build_status_config.context #=> String
+    #   resp.projects[0].secondary_sources[0].build_status_config.target_url #=> String
     #   resp.projects[0].secondary_sources[0].insecure_ssl #=> Boolean
     #   resp.projects[0].secondary_sources[0].source_identifier #=> String
     #   resp.projects[0].source_version #=> String
@@ -1114,6 +1122,10 @@ module Aws::CodeBuild
     #         resource: "String",
     #       },
     #       report_build_status: false,
+    #       build_status_config: {
+    #         context: "String",
+    #         target_url: "String",
+    #       },
     #       insecure_ssl: false,
     #       source_identifier: "String",
     #     },
@@ -1131,6 +1143,10 @@ module Aws::CodeBuild
     #           resource: "String",
     #         },
     #         report_build_status: false,
+    #         build_status_config: {
+    #           context: "String",
+    #           target_url: "String",
+    #         },
     #         insecure_ssl: false,
     #         source_identifier: "String",
     #       },
@@ -1242,6 +1258,8 @@ module Aws::CodeBuild
     #   resp.project.source.auth.type #=> String, one of "OAUTH"
     #   resp.project.source.auth.resource #=> String
     #   resp.project.source.report_build_status #=> Boolean
+    #   resp.project.source.build_status_config.context #=> String
+    #   resp.project.source.build_status_config.target_url #=> String
     #   resp.project.source.insecure_ssl #=> Boolean
     #   resp.project.source.source_identifier #=> String
     #   resp.project.secondary_sources #=> Array
@@ -1253,6 +1271,8 @@ module Aws::CodeBuild
     #   resp.project.secondary_sources[0].auth.type #=> String, one of "OAUTH"
     #   resp.project.secondary_sources[0].auth.resource #=> String
     #   resp.project.secondary_sources[0].report_build_status #=> Boolean
+    #   resp.project.secondary_sources[0].build_status_config.context #=> String
+    #   resp.project.secondary_sources[0].build_status_config.target_url #=> String
     #   resp.project.secondary_sources[0].insecure_ssl #=> Boolean
     #   resp.project.secondary_sources[0].source_identifier #=> String
     #   resp.project.source_version #=> String
@@ -2500,6 +2520,11 @@ module Aws::CodeBuild
     #
     #    </note>
     #
+    # @option params [Types::BuildStatusConfig] :build_status_config_override
+    #   Contains information that defines how the build project reports the
+    #   build status to the source provider. This option is only used when the
+    #   source provider is `GITHUB`, `GITHUB_ENTERPRISE`, or `BITBUCKET`.
+    #
     # @option params [String] :environment_type_override
     #   A container type for this build that overrides the one specified in
     #   the build project.
@@ -2552,7 +2577,7 @@ module Aws::CodeBuild
     # @option params [String] :idempotency_token
     #   A unique, case sensitive identifier you provide to ensure the
     #   idempotency of the StartBuild request. The token is included in the
-    #   StartBuild request and is valid for 12 hours. If you repeat the
+    #   StartBuild request and is valid for 5 minutes. If you repeat the
     #   StartBuild request with the same token, but change a parameter, AWS
     #   CodeBuild returns a parameter mismatch error.
     #
@@ -2600,6 +2625,10 @@ module Aws::CodeBuild
     #           resource: "String",
     #         },
     #         report_build_status: false,
+    #         build_status_config: {
+    #           context: "String",
+    #           target_url: "String",
+    #         },
     #         insecure_ssl: false,
     #         source_identifier: "String",
     #       },
@@ -2655,6 +2684,10 @@ module Aws::CodeBuild
     #     buildspec_override: "String",
     #     insecure_ssl_override: false,
     #     report_build_status_override: false,
+    #     build_status_config_override: {
+    #       context: "String",
+    #       target_url: "String",
+    #     },
     #     environment_type_override: "WINDOWS_CONTAINER", # accepts WINDOWS_CONTAINER, LINUX_CONTAINER, LINUX_GPU_CONTAINER, ARM_CONTAINER
     #     image_override: "NonEmptyString",
     #     compute_type_override: "BUILD_GENERAL1_SMALL", # accepts BUILD_GENERAL1_SMALL, BUILD_GENERAL1_MEDIUM, BUILD_GENERAL1_LARGE, BUILD_GENERAL1_2XLARGE
@@ -2718,6 +2751,8 @@ module Aws::CodeBuild
     #   resp.build.source.auth.type #=> String, one of "OAUTH"
     #   resp.build.source.auth.resource #=> String
     #   resp.build.source.report_build_status #=> Boolean
+    #   resp.build.source.build_status_config.context #=> String
+    #   resp.build.source.build_status_config.target_url #=> String
     #   resp.build.source.insecure_ssl #=> Boolean
     #   resp.build.source.source_identifier #=> String
     #   resp.build.secondary_sources #=> Array
@@ -2729,6 +2764,8 @@ module Aws::CodeBuild
     #   resp.build.secondary_sources[0].auth.type #=> String, one of "OAUTH"
     #   resp.build.secondary_sources[0].auth.resource #=> String
     #   resp.build.secondary_sources[0].report_build_status #=> Boolean
+    #   resp.build.secondary_sources[0].build_status_config.context #=> String
+    #   resp.build.secondary_sources[0].build_status_config.target_url #=> String
     #   resp.build.secondary_sources[0].insecure_ssl #=> Boolean
     #   resp.build.secondary_sources[0].source_identifier #=> String
     #   resp.build.secondary_source_versions #=> Array
@@ -2853,6 +2890,8 @@ module Aws::CodeBuild
     #   resp.build.source.auth.type #=> String, one of "OAUTH"
     #   resp.build.source.auth.resource #=> String
     #   resp.build.source.report_build_status #=> Boolean
+    #   resp.build.source.build_status_config.context #=> String
+    #   resp.build.source.build_status_config.target_url #=> String
     #   resp.build.source.insecure_ssl #=> Boolean
     #   resp.build.source.source_identifier #=> String
     #   resp.build.secondary_sources #=> Array
@@ -2864,6 +2903,8 @@ module Aws::CodeBuild
     #   resp.build.secondary_sources[0].auth.type #=> String, one of "OAUTH"
     #   resp.build.secondary_sources[0].auth.resource #=> String
     #   resp.build.secondary_sources[0].report_build_status #=> Boolean
+    #   resp.build.secondary_sources[0].build_status_config.context #=> String
+    #   resp.build.secondary_sources[0].build_status_config.target_url #=> String
     #   resp.build.secondary_sources[0].insecure_ssl #=> Boolean
     #   resp.build.secondary_sources[0].source_identifier #=> String
     #   resp.build.secondary_source_versions #=> Array
@@ -3087,6 +3128,10 @@ module Aws::CodeBuild
     #         resource: "String",
     #       },
     #       report_build_status: false,
+    #       build_status_config: {
+    #         context: "String",
+    #         target_url: "String",
+    #       },
     #       insecure_ssl: false,
     #       source_identifier: "String",
     #     },
@@ -3104,6 +3149,10 @@ module Aws::CodeBuild
     #           resource: "String",
     #         },
     #         report_build_status: false,
+    #         build_status_config: {
+    #           context: "String",
+    #           target_url: "String",
+    #         },
     #         insecure_ssl: false,
     #         source_identifier: "String",
     #       },
@@ -3215,6 +3264,8 @@ module Aws::CodeBuild
     #   resp.project.source.auth.type #=> String, one of "OAUTH"
     #   resp.project.source.auth.resource #=> String
     #   resp.project.source.report_build_status #=> Boolean
+    #   resp.project.source.build_status_config.context #=> String
+    #   resp.project.source.build_status_config.target_url #=> String
     #   resp.project.source.insecure_ssl #=> Boolean
     #   resp.project.source.source_identifier #=> String
     #   resp.project.secondary_sources #=> Array
@@ -3226,6 +3277,8 @@ module Aws::CodeBuild
     #   resp.project.secondary_sources[0].auth.type #=> String, one of "OAUTH"
     #   resp.project.secondary_sources[0].auth.resource #=> String
     #   resp.project.secondary_sources[0].report_build_status #=> Boolean
+    #   resp.project.secondary_sources[0].build_status_config.context #=> String
+    #   resp.project.secondary_sources[0].build_status_config.target_url #=> String
     #   resp.project.secondary_sources[0].insecure_ssl #=> Boolean
     #   resp.project.secondary_sources[0].source_identifier #=> String
     #   resp.project.source_version #=> String
@@ -3472,7 +3525,7 @@ module Aws::CodeBuild
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-codebuild'
-      context[:gem_version] = '1.54.0'
+      context[:gem_version] = '1.55.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -483,6 +483,7 @@ module Aws::Imagebuilder
     #           ami_tags: {
     #             "TagKey" => "TagValue",
     #           },
+    #           kms_key_id: "NonEmptyString",
     #           launch_permission: {
     #             user_ids: ["NonEmptyString"],
     #             user_groups: ["NonEmptyString"],
@@ -1166,6 +1167,7 @@ module Aws::Imagebuilder
     #   resp.distribution_configuration.distributions[0].ami_distribution_configuration.description #=> String
     #   resp.distribution_configuration.distributions[0].ami_distribution_configuration.ami_tags #=> Hash
     #   resp.distribution_configuration.distributions[0].ami_distribution_configuration.ami_tags["TagKey"] #=> String
+    #   resp.distribution_configuration.distributions[0].ami_distribution_configuration.kms_key_id #=> String
     #   resp.distribution_configuration.distributions[0].ami_distribution_configuration.launch_permission.user_ids #=> Array
     #   resp.distribution_configuration.distributions[0].ami_distribution_configuration.launch_permission.user_ids[0] #=> String
     #   resp.distribution_configuration.distributions[0].ami_distribution_configuration.launch_permission.user_groups #=> Array
@@ -1269,6 +1271,7 @@ module Aws::Imagebuilder
     #   resp.image.distribution_configuration.distributions[0].ami_distribution_configuration.description #=> String
     #   resp.image.distribution_configuration.distributions[0].ami_distribution_configuration.ami_tags #=> Hash
     #   resp.image.distribution_configuration.distributions[0].ami_distribution_configuration.ami_tags["TagKey"] #=> String
+    #   resp.image.distribution_configuration.distributions[0].ami_distribution_configuration.kms_key_id #=> String
     #   resp.image.distribution_configuration.distributions[0].ami_distribution_configuration.launch_permission.user_ids #=> Array
     #   resp.image.distribution_configuration.distributions[0].ami_distribution_configuration.launch_permission.user_ids[0] #=> String
     #   resp.image.distribution_configuration.distributions[0].ami_distribution_configuration.launch_permission.user_groups #=> Array
@@ -2477,6 +2480,7 @@ module Aws::Imagebuilder
     #           ami_tags: {
     #             "TagKey" => "TagValue",
     #           },
+    #           kms_key_id: "NonEmptyString",
     #           launch_permission: {
     #             user_ids: ["NonEmptyString"],
     #             user_groups: ["NonEmptyString"],
@@ -2699,7 +2703,7 @@ module Aws::Imagebuilder
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-imagebuilder'
-      context[:gem_version] = '1.10.0'
+      context[:gem_version] = '1.11.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

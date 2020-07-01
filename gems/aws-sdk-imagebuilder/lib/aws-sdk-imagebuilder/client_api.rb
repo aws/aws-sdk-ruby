@@ -222,6 +222,7 @@ module Aws::Imagebuilder
     AmiDistributionConfiguration.add_member(:name, Shapes::ShapeRef.new(shape: AmiNameString, location_name: "name"))
     AmiDistributionConfiguration.add_member(:description, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "description"))
     AmiDistributionConfiguration.add_member(:ami_tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "amiTags"))
+    AmiDistributionConfiguration.add_member(:kms_key_id, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "kmsKeyId"))
     AmiDistributionConfiguration.add_member(:launch_permission, Shapes::ShapeRef.new(shape: LaunchPermissionConfiguration, location_name: "launchPermission"))
     AmiDistributionConfiguration.struct_class = Types::AmiDistributionConfiguration
 

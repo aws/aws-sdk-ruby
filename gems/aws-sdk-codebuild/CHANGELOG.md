@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.55.0 (2020-07-01)
+------------------
+
+* Feature - Support build status config in project source
+
 1.54.0 (2020-06-23)
 ------------------
 

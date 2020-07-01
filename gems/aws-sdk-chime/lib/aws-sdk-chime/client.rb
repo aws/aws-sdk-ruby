@@ -348,7 +348,7 @@ module Aws::Chime
     # @option params [required, String] :voice_connector_id
     #   The Amazon Chime Voice Connector ID.
     #
-    # @option params [Array<String>] :e164_phone_numbers
+    # @option params [required, Array<String>] :e164_phone_numbers
     #   List of phone numbers, in E.164 format.
     #
     # @option params [Boolean] :force_associate
@@ -365,7 +365,7 @@ module Aws::Chime
     #
     #   resp = client.associate_phone_numbers_with_voice_connector({
     #     voice_connector_id: "NonEmptyString", # required
-    #     e164_phone_numbers: ["E164PhoneNumber"],
+    #     e164_phone_numbers: ["E164PhoneNumber"], # required
     #     force_associate: false,
     #   })
     #
@@ -391,7 +391,7 @@ module Aws::Chime
     # @option params [required, String] :voice_connector_group_id
     #   The Amazon Chime Voice Connector group ID.
     #
-    # @option params [Array<String>] :e164_phone_numbers
+    # @option params [required, Array<String>] :e164_phone_numbers
     #   List of phone numbers, in E.164 format.
     #
     # @option params [Boolean] :force_associate
@@ -408,7 +408,7 @@ module Aws::Chime
     #
     #   resp = client.associate_phone_numbers_with_voice_connector_group({
     #     voice_connector_group_id: "NonEmptyString", # required
-    #     e164_phone_numbers: ["E164PhoneNumber"],
+    #     e164_phone_numbers: ["E164PhoneNumber"], # required
     #     force_associate: false,
     #   })
     #
@@ -1757,6 +1757,29 @@ module Aws::Chime
       req.send_request(options)
     end
 
+    # Deletes the emergency calling configuration details from the specified
+    # Amazon Chime Voice Connector.
+    #
+    # @option params [required, String] :voice_connector_id
+    #   The Amazon Chime Voice Connector ID.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_voice_connector_emergency_calling_configuration({
+    #     voice_connector_id: "NonEmptyString", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/DeleteVoiceConnectorEmergencyCallingConfiguration AWS API Documentation
+    #
+    # @overload delete_voice_connector_emergency_calling_configuration(params = {})
+    # @param [Hash] params ({})
+    def delete_voice_connector_emergency_calling_configuration(params = {}, options = {})
+      req = build_request(:delete_voice_connector_emergency_calling_configuration, params)
+      req.send_request(options)
+    end
+
     # Deletes the specified Amazon Chime Voice Connector group. Any
     # `VoiceConnectorItems` and phone numbers associated with the group must
     # be removed before it can be deleted.
@@ -1783,6 +1806,12 @@ module Aws::Chime
 
     # Deletes the origination settings for the specified Amazon Chime Voice
     # Connector.
+    #
+    # <note markdown="1"> If emergency calling is configured for the Amazon Chime Voice
+    # Connector, it must be deleted prior to deleting the origination
+    # settings.
+    #
+    #  </note>
     #
     # @option params [required, String] :voice_connector_id
     #   The Amazon Chime Voice Connector ID.
@@ -1853,6 +1882,12 @@ module Aws::Chime
     # Deletes the termination settings for the specified Amazon Chime Voice
     # Connector.
     #
+    # <note markdown="1"> If emergency calling is configured for the Amazon Chime Voice
+    # Connector, it must be deleted prior to deleting the termination
+    # settings.
+    #
+    #  </note>
+    #
     # @option params [required, String] :voice_connector_id
     #   The Amazon Chime Voice Connector ID.
     #
@@ -1879,7 +1914,7 @@ module Aws::Chime
     # @option params [required, String] :voice_connector_id
     #   The Amazon Chime Voice Connector ID.
     #
-    # @option params [Array<String>] :usernames
+    # @option params [required, Array<String>] :usernames
     #   The RFC2617 compliant username associated with the SIP credentials, in
     #   US-ASCII format.
     #
@@ -1889,7 +1924,7 @@ module Aws::Chime
     #
     #   resp = client.delete_voice_connector_termination_credentials({
     #     voice_connector_id: "NonEmptyString", # required
-    #     usernames: ["SensitiveString"],
+    #     usernames: ["SensitiveString"], # required
     #   })
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/DeleteVoiceConnectorTerminationCredentials AWS API Documentation
@@ -1934,7 +1969,7 @@ module Aws::Chime
     # @option params [required, String] :voice_connector_id
     #   The Amazon Chime Voice Connector ID.
     #
-    # @option params [Array<String>] :e164_phone_numbers
+    # @option params [required, Array<String>] :e164_phone_numbers
     #   List of phone numbers, in E.164 format.
     #
     # @return [Types::DisassociatePhoneNumbersFromVoiceConnectorResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
@@ -1945,7 +1980,7 @@ module Aws::Chime
     #
     #   resp = client.disassociate_phone_numbers_from_voice_connector({
     #     voice_connector_id: "NonEmptyString", # required
-    #     e164_phone_numbers: ["E164PhoneNumber"],
+    #     e164_phone_numbers: ["E164PhoneNumber"], # required
     #   })
     #
     # @example Response structure
@@ -1970,7 +2005,7 @@ module Aws::Chime
     # @option params [required, String] :voice_connector_group_id
     #   The Amazon Chime Voice Connector group ID.
     #
-    # @option params [Array<String>] :e164_phone_numbers
+    # @option params [required, Array<String>] :e164_phone_numbers
     #   List of phone numbers, in E.164 format.
     #
     # @return [Types::DisassociatePhoneNumbersFromVoiceConnectorGroupResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
@@ -1981,7 +2016,7 @@ module Aws::Chime
     #
     #   resp = client.disassociate_phone_numbers_from_voice_connector_group({
     #     voice_connector_group_id: "NonEmptyString", # required
-    #     e164_phone_numbers: ["E164PhoneNumber"],
+    #     e164_phone_numbers: ["E164PhoneNumber"], # required
     #   })
     #
     # @example Response structure
@@ -2631,6 +2666,38 @@ module Aws::Chime
     # @param [Hash] params ({})
     def get_voice_connector(params = {}, options = {})
       req = build_request(:get_voice_connector, params)
+      req.send_request(options)
+    end
+
+    # Gets the emergency calling configuration details for the specified
+    # Amazon Chime Voice Connector.
+    #
+    # @option params [required, String] :voice_connector_id
+    #   The Amazon Chime Voice Connector ID.
+    #
+    # @return [Types::GetVoiceConnectorEmergencyCallingConfigurationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetVoiceConnectorEmergencyCallingConfigurationResponse#emergency_calling_configuration #emergency_calling_configuration} => Types::EmergencyCallingConfiguration
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_voice_connector_emergency_calling_configuration({
+    #     voice_connector_id: "NonEmptyString", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.emergency_calling_configuration.dnis #=> Array
+    #   resp.emergency_calling_configuration.dnis[0].emergency_phone_number #=> String
+    #   resp.emergency_calling_configuration.dnis[0].test_phone_number #=> String
+    #   resp.emergency_calling_configuration.dnis[0].calling_country #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/GetVoiceConnectorEmergencyCallingConfiguration AWS API Documentation
+    #
+    # @overload get_voice_connector_emergency_calling_configuration(params = {})
+    # @param [Hash] params ({})
+    def get_voice_connector_emergency_calling_configuration(params = {}, options = {})
+      req = build_request(:get_voice_connector_emergency_calling_configuration, params)
       req.send_request(options)
     end
 
@@ -3812,6 +3879,53 @@ module Aws::Chime
       req.send_request(options)
     end
 
+    # Puts emergency calling configuration details to the specified Amazon
+    # Chime Voice Connector, such as emergency phone numbers and calling
+    # countries. Origination and termination settings must be enabled for
+    # the Amazon Chime Voice Connector before emergency calling can be
+    # configured.
+    #
+    # @option params [required, String] :voice_connector_id
+    #   The Amazon Chime Voice Connector ID.
+    #
+    # @option params [required, Types::EmergencyCallingConfiguration] :emergency_calling_configuration
+    #   The emergency calling configuration details.
+    #
+    # @return [Types::PutVoiceConnectorEmergencyCallingConfigurationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::PutVoiceConnectorEmergencyCallingConfigurationResponse#emergency_calling_configuration #emergency_calling_configuration} => Types::EmergencyCallingConfiguration
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.put_voice_connector_emergency_calling_configuration({
+    #     voice_connector_id: "NonEmptyString", # required
+    #     emergency_calling_configuration: { # required
+    #       dnis: [
+    #         {
+    #           emergency_phone_number: "E164PhoneNumber", # required
+    #           test_phone_number: "E164PhoneNumber",
+    #           calling_country: "Alpha2CountryCode", # required
+    #         },
+    #       ],
+    #     },
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.emergency_calling_configuration.dnis #=> Array
+    #   resp.emergency_calling_configuration.dnis[0].emergency_phone_number #=> String
+    #   resp.emergency_calling_configuration.dnis[0].test_phone_number #=> String
+    #   resp.emergency_calling_configuration.dnis[0].calling_country #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/PutVoiceConnectorEmergencyCallingConfiguration AWS API Documentation
+    #
+    # @overload put_voice_connector_emergency_calling_configuration(params = {})
+    # @param [Hash] params ({})
+    def put_voice_connector_emergency_calling_configuration(params = {}, options = {})
+      req = build_request(:put_voice_connector_emergency_calling_configuration, params)
+      req.send_request(options)
+    end
+
     # Adds a logging configuration for the specified Amazon Chime Voice
     # Connector. The logging configuration specifies whether SIP message
     # logs are enabled for sending to Amazon CloudWatch Logs.
@@ -3850,6 +3964,12 @@ module Aws::Chime
 
     # Adds origination settings for the specified Amazon Chime Voice
     # Connector.
+    #
+    # <note markdown="1"> If emergency calling is configured for the Amazon Chime Voice
+    # Connector, it must be deleted prior to turning off origination
+    # settings.
+    #
+    #  </note>
     #
     # @option params [required, String] :voice_connector_id
     #   The Amazon Chime Voice Connector ID.
@@ -3996,6 +4116,12 @@ module Aws::Chime
 
     # Adds termination settings for the specified Amazon Chime Voice
     # Connector.
+    #
+    # <note markdown="1"> If emergency calling is configured for the Amazon Chime Voice
+    # Connector, it must be deleted prior to turning off termination
+    # settings.
+    #
+    #  </note>
     #
     # @option params [required, String] :voice_connector_id
     #   The Amazon Chime Voice Connector ID.
@@ -5101,7 +5227,7 @@ module Aws::Chime
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-chime'
-      context[:gem_version] = '1.31.0'
+      context[:gem_version] = '1.32.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

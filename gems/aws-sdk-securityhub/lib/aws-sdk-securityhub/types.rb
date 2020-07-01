@@ -137,6 +137,53 @@ module Aws::SecurityHub
       include Aws::Structure
     end
 
+    # Provides details about an auto scaling group.
+    #
+    # @note When making an API call, you may pass AwsAutoScalingAutoScalingGroupDetails
+    #   data as a hash:
+    #
+    #       {
+    #         launch_configuration_name: "NonEmptyString",
+    #         load_balancer_names: ["NonEmptyString"],
+    #         health_check_type: "NonEmptyString",
+    #         health_check_grace_period: 1,
+    #         created_time: "NonEmptyString",
+    #       }
+    #
+    # @!attribute [rw] launch_configuration_name
+    #   The name of the launch configuration.
+    #   @return [String]
+    #
+    # @!attribute [rw] load_balancer_names
+    #   The list of load balancers associated with the group.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] health_check_type
+    #   The service to use for the health checks.
+    #   @return [String]
+    #
+    # @!attribute [rw] health_check_grace_period
+    #   The amount of time, in seconds, that Amazon EC2 Auto Scaling waits
+    #   before it checks the health status of an EC2 instance that has come
+    #   into service.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] created_time
+    #   The datetime when the auto scaling group was created.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/AwsAutoScalingAutoScalingGroupDetails AWS API Documentation
+    #
+    class AwsAutoScalingAutoScalingGroupDetails < Struct.new(
+      :launch_configuration_name,
+      :load_balancer_names,
+      :health_check_type,
+      :health_check_grace_period,
+      :created_time)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # A distribution configuration.
     #
     # @note When making an API call, you may pass AwsCloudFrontDistributionDetails
@@ -1168,6 +1215,165 @@ module Aws::SecurityHub
       :user_id,
       :vpc_id,
       :vpc_peering_connection_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # An attachment to an AWS EC2 volume.
+    #
+    # @note When making an API call, you may pass AwsEc2VolumeAttachment
+    #   data as a hash:
+    #
+    #       {
+    #         attach_time: "NonEmptyString",
+    #         delete_on_termination: false,
+    #         instance_id: "NonEmptyString",
+    #         status: "NonEmptyString",
+    #       }
+    #
+    # @!attribute [rw] attach_time
+    #   The datetime when the attachment initiated.
+    #   @return [String]
+    #
+    # @!attribute [rw] delete_on_termination
+    #   Whether the EBS volume is deleted when the EC2 instance is
+    #   terminated.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] instance_id
+    #   The identifier of the EC2 instance.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The attachment state of the volume.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/AwsEc2VolumeAttachment AWS API Documentation
+    #
+    class AwsEc2VolumeAttachment < Struct.new(
+      :attach_time,
+      :delete_on_termination,
+      :instance_id,
+      :status)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Details about an EC2 volume.
+    #
+    # @note When making an API call, you may pass AwsEc2VolumeDetails
+    #   data as a hash:
+    #
+    #       {
+    #         create_time: "NonEmptyString",
+    #         encrypted: false,
+    #         size: 1,
+    #         snapshot_id: "NonEmptyString",
+    #         status: "NonEmptyString",
+    #         kms_key_id: "NonEmptyString",
+    #         attachments: [
+    #           {
+    #             attach_time: "NonEmptyString",
+    #             delete_on_termination: false,
+    #             instance_id: "NonEmptyString",
+    #             status: "NonEmptyString",
+    #           },
+    #         ],
+    #       }
+    #
+    # @!attribute [rw] create_time
+    #   The datetime when the volume was created.
+    #   @return [String]
+    #
+    # @!attribute [rw] encrypted
+    #   Whether the volume is encrypted.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] size
+    #   The size of the volume, in GiBs.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] snapshot_id
+    #   The snapshot from which the volume was created.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The volume state.
+    #   @return [String]
+    #
+    # @!attribute [rw] kms_key_id
+    #   The ARN of the AWS Key Management Service (AWS KMS) customer master
+    #   key (CMK) that was used to protect the volume encryption key for the
+    #   volume.
+    #   @return [String]
+    #
+    # @!attribute [rw] attachments
+    #   The volume attachments.
+    #   @return [Array<Types::AwsEc2VolumeAttachment>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/AwsEc2VolumeDetails AWS API Documentation
+    #
+    class AwsEc2VolumeDetails < Struct.new(
+      :create_time,
+      :encrypted,
+      :size,
+      :snapshot_id,
+      :status,
+      :kms_key_id,
+      :attachments)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Details about an EC2 VPC.
+    #
+    # @note When making an API call, you may pass AwsEc2VpcDetails
+    #   data as a hash:
+    #
+    #       {
+    #         cidr_block_association_set: [
+    #           {
+    #             association_id: "NonEmptyString",
+    #             cidr_block: "NonEmptyString",
+    #             cidr_block_state: "NonEmptyString",
+    #           },
+    #         ],
+    #         ipv_6_cidr_block_association_set: [
+    #           {
+    #             association_id: "NonEmptyString",
+    #             ipv_6_cidr_block: "NonEmptyString",
+    #             cidr_block_state: "NonEmptyString",
+    #           },
+    #         ],
+    #         dhcp_options_id: "NonEmptyString",
+    #         state: "NonEmptyString",
+    #       }
+    #
+    # @!attribute [rw] cidr_block_association_set
+    #   Information about the IPv4 CIDR blocks associated with the VPC.
+    #   @return [Array<Types::CidrBlockAssociation>]
+    #
+    # @!attribute [rw] ipv_6_cidr_block_association_set
+    #   Information about the IPv6 CIDR blocks associated with the VPC.
+    #   @return [Array<Types::Ipv6CidrBlockAssociation>]
+    #
+    # @!attribute [rw] dhcp_options_id
+    #   The identifier of the set of Dynamic Host Configuration Protocol
+    #   (DHCP) options that are associated with the VPC. If the default
+    #   options are associated with the VPC, then this is default.
+    #   @return [String]
+    #
+    # @!attribute [rw] state
+    #   The current state of the VPC.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/AwsEc2VpcDetails AWS API Documentation
+    #
+    class AwsEc2VpcDetails < Struct.new(
+      :cidr_block_association_set,
+      :ipv_6_cidr_block_association_set,
+      :dhcp_options_id,
+      :state)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2597,6 +2803,10 @@ module Aws::SecurityHub
     #         network: {
     #           direction: "IN", # accepts IN, OUT
     #           protocol: "NonEmptyString",
+    #           open_port_range: {
+    #             begin: 1,
+    #             end: 1,
+    #           },
     #           source_ip_v4: "NonEmptyString",
     #           source_ip_v6: "NonEmptyString",
     #           source_port: 1,
@@ -2607,6 +2817,54 @@ module Aws::SecurityHub
     #           destination_port: 1,
     #           destination_domain: "NonEmptyString",
     #         },
+    #         network_path: [
+    #           {
+    #             component_id: "NonEmptyString",
+    #             component_type: "NonEmptyString",
+    #             egress: {
+    #               protocol: "NonEmptyString",
+    #               destination: {
+    #                 address: ["NonEmptyString"],
+    #                 port_ranges: [
+    #                   {
+    #                     begin: 1,
+    #                     end: 1,
+    #                   },
+    #                 ],
+    #               },
+    #               source: {
+    #                 address: ["NonEmptyString"],
+    #                 port_ranges: [
+    #                   {
+    #                     begin: 1,
+    #                     end: 1,
+    #                   },
+    #                 ],
+    #               },
+    #             },
+    #             ingress: {
+    #               protocol: "NonEmptyString",
+    #               destination: {
+    #                 address: ["NonEmptyString"],
+    #                 port_ranges: [
+    #                   {
+    #                     begin: 1,
+    #                     end: 1,
+    #                   },
+    #                 ],
+    #               },
+    #               source: {
+    #                 address: ["NonEmptyString"],
+    #                 port_ranges: [
+    #                   {
+    #                     begin: 1,
+    #                     end: 1,
+    #                   },
+    #                 ],
+    #               },
+    #             },
+    #           },
+    #         ],
     #         process: {
     #           name: "NonEmptyString",
     #           path: "NonEmptyString",
@@ -2635,6 +2893,13 @@ module Aws::SecurityHub
     #               "NonEmptyString" => "NonEmptyString",
     #             },
     #             details: {
+    #               aws_auto_scaling_auto_scaling_group: {
+    #                 launch_configuration_name: "NonEmptyString",
+    #                 load_balancer_names: ["NonEmptyString"],
+    #                 health_check_type: "NonEmptyString",
+    #                 health_check_grace_period: 1,
+    #                 created_time: "NonEmptyString",
+    #               },
     #               aws_code_build_project: {
     #                 encryption_key: "NonEmptyString",
     #                 environment: {
@@ -2781,6 +3046,40 @@ module Aws::SecurityHub
     #                     ],
     #                   },
     #                 ],
+    #               },
+    #               aws_ec2_volume: {
+    #                 create_time: "NonEmptyString",
+    #                 encrypted: false,
+    #                 size: 1,
+    #                 snapshot_id: "NonEmptyString",
+    #                 status: "NonEmptyString",
+    #                 kms_key_id: "NonEmptyString",
+    #                 attachments: [
+    #                   {
+    #                     attach_time: "NonEmptyString",
+    #                     delete_on_termination: false,
+    #                     instance_id: "NonEmptyString",
+    #                     status: "NonEmptyString",
+    #                   },
+    #                 ],
+    #               },
+    #               aws_ec2_vpc: {
+    #                 cidr_block_association_set: [
+    #                   {
+    #                     association_id: "NonEmptyString",
+    #                     cidr_block: "NonEmptyString",
+    #                     cidr_block_state: "NonEmptyString",
+    #                   },
+    #                 ],
+    #                 ipv_6_cidr_block_association_set: [
+    #                   {
+    #                     association_id: "NonEmptyString",
+    #                     ipv_6_cidr_block: "NonEmptyString",
+    #                     cidr_block_state: "NonEmptyString",
+    #                   },
+    #                 ],
+    #                 dhcp_options_id: "NonEmptyString",
+    #                 state: "NonEmptyString",
     #               },
     #               aws_elbv_2_load_balancer: {
     #                 availability_zones: [
@@ -3042,6 +3341,36 @@ module Aws::SecurityHub
     #           updated_by: "NonEmptyString", # required
     #           updated_at: "NonEmptyString", # required
     #         },
+    #         vulnerabilities: [
+    #           {
+    #             id: "NonEmptyString", # required
+    #             vulnerable_packages: [
+    #               {
+    #                 name: "NonEmptyString",
+    #                 version: "NonEmptyString",
+    #                 epoch: "NonEmptyString",
+    #                 release: "NonEmptyString",
+    #                 architecture: "NonEmptyString",
+    #               },
+    #             ],
+    #             cvss: [
+    #               {
+    #                 version: "NonEmptyString",
+    #                 base_score: 1.0,
+    #                 base_vector: "NonEmptyString",
+    #               },
+    #             ],
+    #             related_vulnerabilities: ["NonEmptyString"],
+    #             vendor: {
+    #               name: "NonEmptyString", # required
+    #               url: "NonEmptyString",
+    #               vendor_severity: "NonEmptyString",
+    #               vendor_created_at: "NonEmptyString",
+    #               vendor_updated_at: "NonEmptyString",
+    #             },
+    #             reference_urls: ["NonEmptyString"],
+    #           },
+    #         ],
     #       }
     #
     # @!attribute [rw] schema_version
@@ -3168,6 +3497,12 @@ module Aws::SecurityHub
     #   The details of network-related information about a finding.
     #   @return [Types::Network]
     #
+    # @!attribute [rw] network_path
+    #   Provides information about a network path that is relevant to a
+    #   finding. Each entry under `NetworkPath` represents a component of
+    #   that path.
+    #   @return [Array<Types::NetworkPathComponent>]
+    #
     # @!attribute [rw] process
     #   The details of process-related information about a finding.
     #   @return [Types::ProcessDetails]
@@ -3213,6 +3548,10 @@ module Aws::SecurityHub
     #   A user-defined note added to a finding.
     #   @return [Types::Note]
     #
+    # @!attribute [rw] vulnerabilities
+    #   Provides a list of vulnerabilities associated with the findings.
+    #   @return [Array<Types::Vulnerability>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/AwsSecurityFinding AWS API Documentation
     #
     class AwsSecurityFinding < Struct.new(
@@ -3237,6 +3576,7 @@ module Aws::SecurityHub
       :user_defined_fields,
       :malware,
       :network,
+      :network_path,
       :process,
       :threat_intel_indicators,
       :resources,
@@ -3246,7 +3586,8 @@ module Aws::SecurityHub
       :workflow,
       :record_state,
       :related_findings,
-      :note)
+      :note,
+      :vulnerabilities)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4709,6 +5050,10 @@ module Aws::SecurityHub
     #             network: {
     #               direction: "IN", # accepts IN, OUT
     #               protocol: "NonEmptyString",
+    #               open_port_range: {
+    #                 begin: 1,
+    #                 end: 1,
+    #               },
     #               source_ip_v4: "NonEmptyString",
     #               source_ip_v6: "NonEmptyString",
     #               source_port: 1,
@@ -4719,6 +5064,54 @@ module Aws::SecurityHub
     #               destination_port: 1,
     #               destination_domain: "NonEmptyString",
     #             },
+    #             network_path: [
+    #               {
+    #                 component_id: "NonEmptyString",
+    #                 component_type: "NonEmptyString",
+    #                 egress: {
+    #                   protocol: "NonEmptyString",
+    #                   destination: {
+    #                     address: ["NonEmptyString"],
+    #                     port_ranges: [
+    #                       {
+    #                         begin: 1,
+    #                         end: 1,
+    #                       },
+    #                     ],
+    #                   },
+    #                   source: {
+    #                     address: ["NonEmptyString"],
+    #                     port_ranges: [
+    #                       {
+    #                         begin: 1,
+    #                         end: 1,
+    #                       },
+    #                     ],
+    #                   },
+    #                 },
+    #                 ingress: {
+    #                   protocol: "NonEmptyString",
+    #                   destination: {
+    #                     address: ["NonEmptyString"],
+    #                     port_ranges: [
+    #                       {
+    #                         begin: 1,
+    #                         end: 1,
+    #                       },
+    #                     ],
+    #                   },
+    #                   source: {
+    #                     address: ["NonEmptyString"],
+    #                     port_ranges: [
+    #                       {
+    #                         begin: 1,
+    #                         end: 1,
+    #                       },
+    #                     ],
+    #                   },
+    #                 },
+    #               },
+    #             ],
     #             process: {
     #               name: "NonEmptyString",
     #               path: "NonEmptyString",
@@ -4747,6 +5140,13 @@ module Aws::SecurityHub
     #                   "NonEmptyString" => "NonEmptyString",
     #                 },
     #                 details: {
+    #                   aws_auto_scaling_auto_scaling_group: {
+    #                     launch_configuration_name: "NonEmptyString",
+    #                     load_balancer_names: ["NonEmptyString"],
+    #                     health_check_type: "NonEmptyString",
+    #                     health_check_grace_period: 1,
+    #                     created_time: "NonEmptyString",
+    #                   },
     #                   aws_code_build_project: {
     #                     encryption_key: "NonEmptyString",
     #                     environment: {
@@ -4893,6 +5293,40 @@ module Aws::SecurityHub
     #                         ],
     #                       },
     #                     ],
+    #                   },
+    #                   aws_ec2_volume: {
+    #                     create_time: "NonEmptyString",
+    #                     encrypted: false,
+    #                     size: 1,
+    #                     snapshot_id: "NonEmptyString",
+    #                     status: "NonEmptyString",
+    #                     kms_key_id: "NonEmptyString",
+    #                     attachments: [
+    #                       {
+    #                         attach_time: "NonEmptyString",
+    #                         delete_on_termination: false,
+    #                         instance_id: "NonEmptyString",
+    #                         status: "NonEmptyString",
+    #                       },
+    #                     ],
+    #                   },
+    #                   aws_ec2_vpc: {
+    #                     cidr_block_association_set: [
+    #                       {
+    #                         association_id: "NonEmptyString",
+    #                         cidr_block: "NonEmptyString",
+    #                         cidr_block_state: "NonEmptyString",
+    #                       },
+    #                     ],
+    #                     ipv_6_cidr_block_association_set: [
+    #                       {
+    #                         association_id: "NonEmptyString",
+    #                         ipv_6_cidr_block: "NonEmptyString",
+    #                         cidr_block_state: "NonEmptyString",
+    #                       },
+    #                     ],
+    #                     dhcp_options_id: "NonEmptyString",
+    #                     state: "NonEmptyString",
     #                   },
     #                   aws_elbv_2_load_balancer: {
     #                     availability_zones: [
@@ -5154,6 +5588,36 @@ module Aws::SecurityHub
     #               updated_by: "NonEmptyString", # required
     #               updated_at: "NonEmptyString", # required
     #             },
+    #             vulnerabilities: [
+    #               {
+    #                 id: "NonEmptyString", # required
+    #                 vulnerable_packages: [
+    #                   {
+    #                     name: "NonEmptyString",
+    #                     version: "NonEmptyString",
+    #                     epoch: "NonEmptyString",
+    #                     release: "NonEmptyString",
+    #                     architecture: "NonEmptyString",
+    #                   },
+    #                 ],
+    #                 cvss: [
+    #                   {
+    #                     version: "NonEmptyString",
+    #                     base_score: 1.0,
+    #                     base_vector: "NonEmptyString",
+    #                   },
+    #                 ],
+    #                 related_vulnerabilities: ["NonEmptyString"],
+    #                 vendor: {
+    #                   name: "NonEmptyString", # required
+    #                   url: "NonEmptyString",
+    #                   vendor_severity: "NonEmptyString",
+    #                   vendor_created_at: "NonEmptyString",
+    #                   vendor_updated_at: "NonEmptyString",
+    #                 },
+    #                 reference_urls: ["NonEmptyString"],
+    #               },
+    #             ],
     #           },
     #         ],
     #       }
@@ -5373,6 +5837,39 @@ module Aws::SecurityHub
       :finding_identifier,
       :error_code,
       :error_message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # An IPv4 CIDR block association.
+    #
+    # @note When making an API call, you may pass CidrBlockAssociation
+    #   data as a hash:
+    #
+    #       {
+    #         association_id: "NonEmptyString",
+    #         cidr_block: "NonEmptyString",
+    #         cidr_block_state: "NonEmptyString",
+    #       }
+    #
+    # @!attribute [rw] association_id
+    #   The association ID for the IPv4 CIDR block.
+    #   @return [String]
+    #
+    # @!attribute [rw] cidr_block
+    #   The IPv4 CIDR block.
+    #   @return [String]
+    #
+    # @!attribute [rw] cidr_block_state
+    #   Information about the state of the IPv4 CIDR block.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/CidrBlockAssociation AWS API Documentation
+    #
+    class CidrBlockAssociation < Struct.new(
+      :association_id,
+      :cidr_block,
+      :cidr_block_state)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -6161,6 +6658,39 @@ module Aws::SecurityHub
     #
     class CreateMembersResponse < Struct.new(
       :unprocessed_accounts)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # CVSS scores from the advisory related to the vulnerability.
+    #
+    # @note When making an API call, you may pass Cvss
+    #   data as a hash:
+    #
+    #       {
+    #         version: "NonEmptyString",
+    #         base_score: 1.0,
+    #         base_vector: "NonEmptyString",
+    #       }
+    #
+    # @!attribute [rw] version
+    #   The version of CVSS for the CVSS score.
+    #   @return [String]
+    #
+    # @!attribute [rw] base_score
+    #   The base CVSS score.
+    #   @return [Float]
+    #
+    # @!attribute [rw] base_vector
+    #   The base scoring vector for the CVSS score.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/Cvss AWS API Documentation
+    #
+    class Cvss < Struct.new(
+      :version,
+      :base_score,
+      :base_vector)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -7852,6 +8382,39 @@ module Aws::SecurityHub
       include Aws::Structure
     end
 
+    # An IPV6 CIDR block association.
+    #
+    # @note When making an API call, you may pass Ipv6CidrBlockAssociation
+    #   data as a hash:
+    #
+    #       {
+    #         association_id: "NonEmptyString",
+    #         ipv_6_cidr_block: "NonEmptyString",
+    #         cidr_block_state: "NonEmptyString",
+    #       }
+    #
+    # @!attribute [rw] association_id
+    #   The association ID for the IPv6 CIDR block.
+    #   @return [String]
+    #
+    # @!attribute [rw] ipv_6_cidr_block
+    #   The IPv6 CIDR block.
+    #   @return [String]
+    #
+    # @!attribute [rw] cidr_block_state
+    #   Information about the state of the CIDR block.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/Ipv6CidrBlockAssociation AWS API Documentation
+    #
+    class Ipv6CidrBlockAssociation < Struct.new(
+      :association_id,
+      :ipv_6_cidr_block,
+      :cidr_block_state)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # A keyword filter for querying findings.
     #
     # @note When making an API call, you may pass KeywordFilter
@@ -8239,6 +8802,10 @@ module Aws::SecurityHub
     #       {
     #         direction: "IN", # accepts IN, OUT
     #         protocol: "NonEmptyString",
+    #         open_port_range: {
+    #           begin: 1,
+    #           end: 1,
+    #         },
     #         source_ip_v4: "NonEmptyString",
     #         source_ip_v6: "NonEmptyString",
     #         source_port: 1,
@@ -8257,6 +8824,10 @@ module Aws::SecurityHub
     # @!attribute [rw] protocol
     #   The protocol of network-related information about a finding.
     #   @return [String]
+    #
+    # @!attribute [rw] open_port_range
+    #   The range of open ports that is present on the network.
+    #   @return [Types::PortRange]
     #
     # @!attribute [rw] source_ip_v4
     #   The source IPv4 address of network-related information about a
@@ -8305,6 +8876,7 @@ module Aws::SecurityHub
     class Network < Struct.new(
       :direction,
       :protocol,
+      :open_port_range,
       :source_ip_v4,
       :source_ip_v6,
       :source_port,
@@ -8314,6 +8886,170 @@ module Aws::SecurityHub
       :destination_ip_v6,
       :destination_port,
       :destination_domain)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Details about a network path component that occurs before or after the
+    # current component.
+    #
+    # @note When making an API call, you may pass NetworkHeader
+    #   data as a hash:
+    #
+    #       {
+    #         protocol: "NonEmptyString",
+    #         destination: {
+    #           address: ["NonEmptyString"],
+    #           port_ranges: [
+    #             {
+    #               begin: 1,
+    #               end: 1,
+    #             },
+    #           ],
+    #         },
+    #         source: {
+    #           address: ["NonEmptyString"],
+    #           port_ranges: [
+    #             {
+    #               begin: 1,
+    #               end: 1,
+    #             },
+    #           ],
+    #         },
+    #       }
+    #
+    # @!attribute [rw] protocol
+    #   The protocol used for the component.
+    #   @return [String]
+    #
+    # @!attribute [rw] destination
+    #   Information about the destination of the component.
+    #   @return [Types::NetworkPathComponentDetails]
+    #
+    # @!attribute [rw] source
+    #   Information about the origin of the component.
+    #   @return [Types::NetworkPathComponentDetails]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/NetworkHeader AWS API Documentation
+    #
+    class NetworkHeader < Struct.new(
+      :protocol,
+      :destination,
+      :source)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Information about a network path component.
+    #
+    # @note When making an API call, you may pass NetworkPathComponent
+    #   data as a hash:
+    #
+    #       {
+    #         component_id: "NonEmptyString",
+    #         component_type: "NonEmptyString",
+    #         egress: {
+    #           protocol: "NonEmptyString",
+    #           destination: {
+    #             address: ["NonEmptyString"],
+    #             port_ranges: [
+    #               {
+    #                 begin: 1,
+    #                 end: 1,
+    #               },
+    #             ],
+    #           },
+    #           source: {
+    #             address: ["NonEmptyString"],
+    #             port_ranges: [
+    #               {
+    #                 begin: 1,
+    #                 end: 1,
+    #               },
+    #             ],
+    #           },
+    #         },
+    #         ingress: {
+    #           protocol: "NonEmptyString",
+    #           destination: {
+    #             address: ["NonEmptyString"],
+    #             port_ranges: [
+    #               {
+    #                 begin: 1,
+    #                 end: 1,
+    #               },
+    #             ],
+    #           },
+    #           source: {
+    #             address: ["NonEmptyString"],
+    #             port_ranges: [
+    #               {
+    #                 begin: 1,
+    #                 end: 1,
+    #               },
+    #             ],
+    #           },
+    #         },
+    #       }
+    #
+    # @!attribute [rw] component_id
+    #   The identifier of a component in the network path.
+    #   @return [String]
+    #
+    # @!attribute [rw] component_type
+    #   The type of component.
+    #   @return [String]
+    #
+    # @!attribute [rw] egress
+    #   Information about the component that comes after the current
+    #   component in the network path.
+    #   @return [Types::NetworkHeader]
+    #
+    # @!attribute [rw] ingress
+    #   Information about the component that comes before the current node
+    #   in the network path.
+    #   @return [Types::NetworkHeader]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/NetworkPathComponent AWS API Documentation
+    #
+    class NetworkPathComponent < Struct.new(
+      :component_id,
+      :component_type,
+      :egress,
+      :ingress)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Information about the destination of the next component in the network
+    # path.
+    #
+    # @note When making an API call, you may pass NetworkPathComponentDetails
+    #   data as a hash:
+    #
+    #       {
+    #         address: ["NonEmptyString"],
+    #         port_ranges: [
+    #           {
+    #             begin: 1,
+    #             end: 1,
+    #           },
+    #         ],
+    #       }
+    #
+    # @!attribute [rw] address
+    #   The IP addresses of the destination.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] port_ranges
+    #   A list of port ranges for the destination.
+    #   @return [Array<Types::PortRange>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/NetworkPathComponentDetails AWS API Documentation
+    #
+    class NetworkPathComponentDetails < Struct.new(
+      :address,
+      :port_ranges)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -8410,6 +9146,33 @@ module Aws::SecurityHub
       :gte,
       :lte,
       :eq)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A range of ports.
+    #
+    # @note When making an API call, you may pass PortRange
+    #   data as a hash:
+    #
+    #       {
+    #         begin: 1,
+    #         end: 1,
+    #       }
+    #
+    # @!attribute [rw] begin
+    #   The first port in the port range.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] end
+    #   The last port in the port range.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/PortRange AWS API Documentation
+    #
+    class PortRange < Struct.new(
+      :begin,
+      :end)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -8623,6 +9386,13 @@ module Aws::SecurityHub
     #           "NonEmptyString" => "NonEmptyString",
     #         },
     #         details: {
+    #           aws_auto_scaling_auto_scaling_group: {
+    #             launch_configuration_name: "NonEmptyString",
+    #             load_balancer_names: ["NonEmptyString"],
+    #             health_check_type: "NonEmptyString",
+    #             health_check_grace_period: 1,
+    #             created_time: "NonEmptyString",
+    #           },
     #           aws_code_build_project: {
     #             encryption_key: "NonEmptyString",
     #             environment: {
@@ -8769,6 +9539,40 @@ module Aws::SecurityHub
     #                 ],
     #               },
     #             ],
+    #           },
+    #           aws_ec2_volume: {
+    #             create_time: "NonEmptyString",
+    #             encrypted: false,
+    #             size: 1,
+    #             snapshot_id: "NonEmptyString",
+    #             status: "NonEmptyString",
+    #             kms_key_id: "NonEmptyString",
+    #             attachments: [
+    #               {
+    #                 attach_time: "NonEmptyString",
+    #                 delete_on_termination: false,
+    #                 instance_id: "NonEmptyString",
+    #                 status: "NonEmptyString",
+    #               },
+    #             ],
+    #           },
+    #           aws_ec2_vpc: {
+    #             cidr_block_association_set: [
+    #               {
+    #                 association_id: "NonEmptyString",
+    #                 cidr_block: "NonEmptyString",
+    #                 cidr_block_state: "NonEmptyString",
+    #               },
+    #             ],
+    #             ipv_6_cidr_block_association_set: [
+    #               {
+    #                 association_id: "NonEmptyString",
+    #                 ipv_6_cidr_block: "NonEmptyString",
+    #                 cidr_block_state: "NonEmptyString",
+    #               },
+    #             ],
+    #             dhcp_options_id: "NonEmptyString",
+    #             state: "NonEmptyString",
     #           },
     #           aws_elbv_2_load_balancer: {
     #             availability_zones: [
@@ -9083,6 +9887,13 @@ module Aws::SecurityHub
     #   data as a hash:
     #
     #       {
+    #         aws_auto_scaling_auto_scaling_group: {
+    #           launch_configuration_name: "NonEmptyString",
+    #           load_balancer_names: ["NonEmptyString"],
+    #           health_check_type: "NonEmptyString",
+    #           health_check_grace_period: 1,
+    #           created_time: "NonEmptyString",
+    #         },
     #         aws_code_build_project: {
     #           encryption_key: "NonEmptyString",
     #           environment: {
@@ -9229,6 +10040,40 @@ module Aws::SecurityHub
     #               ],
     #             },
     #           ],
+    #         },
+    #         aws_ec2_volume: {
+    #           create_time: "NonEmptyString",
+    #           encrypted: false,
+    #           size: 1,
+    #           snapshot_id: "NonEmptyString",
+    #           status: "NonEmptyString",
+    #           kms_key_id: "NonEmptyString",
+    #           attachments: [
+    #             {
+    #               attach_time: "NonEmptyString",
+    #               delete_on_termination: false,
+    #               instance_id: "NonEmptyString",
+    #               status: "NonEmptyString",
+    #             },
+    #           ],
+    #         },
+    #         aws_ec2_vpc: {
+    #           cidr_block_association_set: [
+    #             {
+    #               association_id: "NonEmptyString",
+    #               cidr_block: "NonEmptyString",
+    #               cidr_block_state: "NonEmptyString",
+    #             },
+    #           ],
+    #           ipv_6_cidr_block_association_set: [
+    #             {
+    #               association_id: "NonEmptyString",
+    #               ipv_6_cidr_block: "NonEmptyString",
+    #               cidr_block_state: "NonEmptyString",
+    #             },
+    #           ],
+    #           dhcp_options_id: "NonEmptyString",
+    #           state: "NonEmptyString",
     #         },
     #         aws_elbv_2_load_balancer: {
     #           availability_zones: [
@@ -9462,6 +10307,10 @@ module Aws::SecurityHub
     #         },
     #       }
     #
+    # @!attribute [rw] aws_auto_scaling_auto_scaling_group
+    #   Details for an autoscaling group.
+    #   @return [Types::AwsAutoScalingAutoScalingGroupDetails]
+    #
     # @!attribute [rw] aws_code_build_project
     #   Details for an AWS CodeBuild project.
     #   @return [Types::AwsCodeBuildProjectDetails]
@@ -9481,6 +10330,14 @@ module Aws::SecurityHub
     # @!attribute [rw] aws_ec2_security_group
     #   Details for an EC2 security group.
     #   @return [Types::AwsEc2SecurityGroupDetails]
+    #
+    # @!attribute [rw] aws_ec2_volume
+    #   Details for an EC2 volume.
+    #   @return [Types::AwsEc2VolumeDetails]
+    #
+    # @!attribute [rw] aws_ec2_vpc
+    #   Details for an EC2 VPC.
+    #   @return [Types::AwsEc2VpcDetails]
     #
     # @!attribute [rw] aws_elbv_2_load_balancer
     #   Details about a load balancer.
@@ -9555,11 +10412,14 @@ module Aws::SecurityHub
     # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/ResourceDetails AWS API Documentation
     #
     class ResourceDetails < Struct.new(
+      :aws_auto_scaling_auto_scaling_group,
       :aws_code_build_project,
       :aws_cloud_front_distribution,
       :aws_ec2_instance,
       :aws_ec2_network_interface,
       :aws_ec2_security_group,
+      :aws_ec2_volume,
+      :aws_ec2_vpc,
       :aws_elbv_2_load_balancer,
       :aws_elasticsearch_domain,
       :aws_s3_bucket,
@@ -9742,6 +10602,51 @@ module Aws::SecurityHub
       :normalized,
       :product,
       :label)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Information about a software package.
+    #
+    # @note When making an API call, you may pass SoftwarePackage
+    #   data as a hash:
+    #
+    #       {
+    #         name: "NonEmptyString",
+    #         version: "NonEmptyString",
+    #         epoch: "NonEmptyString",
+    #         release: "NonEmptyString",
+    #         architecture: "NonEmptyString",
+    #       }
+    #
+    # @!attribute [rw] name
+    #   The name of the software package.
+    #   @return [String]
+    #
+    # @!attribute [rw] version
+    #   The version of the software package.
+    #   @return [String]
+    #
+    # @!attribute [rw] epoch
+    #   The epoch of the software package.
+    #   @return [String]
+    #
+    # @!attribute [rw] release
+    #   The release of the software package.
+    #   @return [String]
+    #
+    # @!attribute [rw] architecture
+    #   The architecture used for the software package.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/SoftwarePackage AWS API Documentation
+    #
+    class SoftwarePackage < Struct.new(
+      :name,
+      :version,
+      :epoch,
+      :release,
+      :architecture)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -11354,7 +12259,8 @@ module Aws::SecurityHub
     #
     # @!attribute [rw] disabled_reason
     #   A description of the reason why you are disabling a security
-    #   standard control.
+    #   standard control. If you are disabling a control, then this is
+    #   required.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/UpdateStandardsControlRequest AWS API Documentation
@@ -11370,6 +12276,124 @@ module Aws::SecurityHub
     # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/UpdateStandardsControlResponse AWS API Documentation
     #
     class UpdateStandardsControlResponse < Aws::EmptyStructure; end
+
+    # A vulnerability associated with a finding.
+    #
+    # @note When making an API call, you may pass Vulnerability
+    #   data as a hash:
+    #
+    #       {
+    #         id: "NonEmptyString", # required
+    #         vulnerable_packages: [
+    #           {
+    #             name: "NonEmptyString",
+    #             version: "NonEmptyString",
+    #             epoch: "NonEmptyString",
+    #             release: "NonEmptyString",
+    #             architecture: "NonEmptyString",
+    #           },
+    #         ],
+    #         cvss: [
+    #           {
+    #             version: "NonEmptyString",
+    #             base_score: 1.0,
+    #             base_vector: "NonEmptyString",
+    #           },
+    #         ],
+    #         related_vulnerabilities: ["NonEmptyString"],
+    #         vendor: {
+    #           name: "NonEmptyString", # required
+    #           url: "NonEmptyString",
+    #           vendor_severity: "NonEmptyString",
+    #           vendor_created_at: "NonEmptyString",
+    #           vendor_updated_at: "NonEmptyString",
+    #         },
+    #         reference_urls: ["NonEmptyString"],
+    #       }
+    #
+    # @!attribute [rw] id
+    #   The identifier of the vulnerability.
+    #   @return [String]
+    #
+    # @!attribute [rw] vulnerable_packages
+    #   List of software packages that have the vulnerability.
+    #   @return [Array<Types::SoftwarePackage>]
+    #
+    # @!attribute [rw] cvss
+    #   CVSS scores from the advisory related to the vulnerability.
+    #   @return [Array<Types::Cvss>]
+    #
+    # @!attribute [rw] related_vulnerabilities
+    #   List of vulnerabilities that are related to this vulnerability.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] vendor
+    #   Information about the vendor that generates the vulnerability
+    #   report.
+    #   @return [Types::VulnerabilityVendor]
+    #
+    # @!attribute [rw] reference_urls
+    #   A list of URLs that provide additional information about the
+    #   vulnerability.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/Vulnerability AWS API Documentation
+    #
+    class Vulnerability < Struct.new(
+      :id,
+      :vulnerable_packages,
+      :cvss,
+      :related_vulnerabilities,
+      :vendor,
+      :reference_urls)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A vendor that generates a vulnerability report.
+    #
+    # @note When making an API call, you may pass VulnerabilityVendor
+    #   data as a hash:
+    #
+    #       {
+    #         name: "NonEmptyString", # required
+    #         url: "NonEmptyString",
+    #         vendor_severity: "NonEmptyString",
+    #         vendor_created_at: "NonEmptyString",
+    #         vendor_updated_at: "NonEmptyString",
+    #       }
+    #
+    # @!attribute [rw] name
+    #   The name of the vendor.
+    #   @return [String]
+    #
+    # @!attribute [rw] url
+    #   The URL of the vulnerability advisory.
+    #   @return [String]
+    #
+    # @!attribute [rw] vendor_severity
+    #   The severity that the vendor assigned to the vulnerability.
+    #   @return [String]
+    #
+    # @!attribute [rw] vendor_created_at
+    #   The datetime when the vulnerability advisory was created.
+    #   @return [String]
+    #
+    # @!attribute [rw] vendor_updated_at
+    #   The datetime when the vulnerability advisory was last updated.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/VulnerabilityVendor AWS API Documentation
+    #
+    class VulnerabilityVendor < Struct.new(
+      :name,
+      :url,
+      :vendor_severity,
+      :vendor_created_at,
+      :vendor_updated_at)
+      SENSITIVE = []
+      include Aws::Structure
+    end
 
     # Details about the action that CloudFront or AWS WAF takes when a web
     # request matches the conditions in the rule.

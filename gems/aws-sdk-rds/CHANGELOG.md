@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.91.0 (2020-07-01)
+------------------
+
+* Feature - This release adds the exceptions KMSKeyNotAccessibleFault and InvalidDBClusterStateFault to the Amazon RDS ModifyDBInstance API.
+
 1.90.0 (2020-06-30)
 ------------------
 

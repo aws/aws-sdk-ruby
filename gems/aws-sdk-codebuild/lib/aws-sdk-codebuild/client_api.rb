@@ -38,6 +38,7 @@ module Aws::CodeBuild
     BuildPhaseType = Shapes::StringShape.new(name: 'BuildPhaseType')
     BuildPhases = Shapes::ListShape.new(name: 'BuildPhases')
     BuildReportArns = Shapes::ListShape.new(name: 'BuildReportArns')
+    BuildStatusConfig = Shapes::StructureShape.new(name: 'BuildStatusConfig')
     Builds = Shapes::ListShape.new(name: 'Builds')
     BuildsNotDeleted = Shapes::ListShape.new(name: 'BuildsNotDeleted')
     CacheMode = Shapes::StringShape.new(name: 'CacheMode')
@@ -300,6 +301,10 @@ module Aws::CodeBuild
     BuildPhases.member = Shapes::ShapeRef.new(shape: BuildPhase)
 
     BuildReportArns.member = Shapes::ShapeRef.new(shape: String)
+
+    BuildStatusConfig.add_member(:context, Shapes::ShapeRef.new(shape: String, location_name: "context"))
+    BuildStatusConfig.add_member(:target_url, Shapes::ShapeRef.new(shape: String, location_name: "targetUrl"))
+    BuildStatusConfig.struct_class = Types::BuildStatusConfig
 
     Builds.member = Shapes::ShapeRef.new(shape: Build)
 
@@ -650,6 +655,7 @@ module Aws::CodeBuild
     ProjectSource.add_member(:buildspec, Shapes::ShapeRef.new(shape: String, location_name: "buildspec"))
     ProjectSource.add_member(:auth, Shapes::ShapeRef.new(shape: SourceAuth, location_name: "auth"))
     ProjectSource.add_member(:report_build_status, Shapes::ShapeRef.new(shape: WrapperBoolean, location_name: "reportBuildStatus"))
+    ProjectSource.add_member(:build_status_config, Shapes::ShapeRef.new(shape: BuildStatusConfig, location_name: "buildStatusConfig"))
     ProjectSource.add_member(:insecure_ssl, Shapes::ShapeRef.new(shape: WrapperBoolean, location_name: "insecureSsl"))
     ProjectSource.add_member(:source_identifier, Shapes::ShapeRef.new(shape: String, location_name: "sourceIdentifier"))
     ProjectSource.struct_class = Types::ProjectSource
@@ -757,6 +763,7 @@ module Aws::CodeBuild
     StartBuildInput.add_member(:buildspec_override, Shapes::ShapeRef.new(shape: String, location_name: "buildspecOverride"))
     StartBuildInput.add_member(:insecure_ssl_override, Shapes::ShapeRef.new(shape: WrapperBoolean, location_name: "insecureSslOverride"))
     StartBuildInput.add_member(:report_build_status_override, Shapes::ShapeRef.new(shape: WrapperBoolean, location_name: "reportBuildStatusOverride"))
+    StartBuildInput.add_member(:build_status_config_override, Shapes::ShapeRef.new(shape: BuildStatusConfig, location_name: "buildStatusConfigOverride"))
     StartBuildInput.add_member(:environment_type_override, Shapes::ShapeRef.new(shape: EnvironmentType, location_name: "environmentTypeOverride"))
     StartBuildInput.add_member(:image_override, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "imageOverride"))
     StartBuildInput.add_member(:compute_type_override, Shapes::ShapeRef.new(shape: ComputeType, location_name: "computeTypeOverride"))
