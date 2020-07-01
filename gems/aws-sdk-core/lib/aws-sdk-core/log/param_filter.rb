@@ -6,9 +6,9 @@ require 'set'
 module Aws
   module Log
     class ParamFilter
-      # DEPRECATED - this must exist for backwards compatibility. Sensitive
+      # DEPRECATED - This must exist for backwards compatibility. Sensitive
       # members are now computed for each request/response type. This can be
-      # removed in a new major version.
+      # removed in a new major version. This list is no longer updated.
       #
       # A managed list of sensitive parameters that should be filtered from
       # logs. This is updated automatically as part of each release. See the

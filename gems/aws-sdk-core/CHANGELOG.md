@@ -9,7 +9,7 @@ Unreleased Changes
 3.102.1 (2020-06-25)
 ------------------
 
-* Issue - Set the response_target on the context when deleting it from the paramers.
+* Issue - Set the `response_target` on the context when deleting it from the parameters.
 
 3.102.0 (2020-06-24)
 ------------------
