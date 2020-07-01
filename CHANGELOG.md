@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+2.11.540 (2020-07-01)
+------------------
+
 * Feature - Aws::AppSync - Updated the API, and documentation for AWS AppSync.
 
 * Feature - Aws::Chime - Updated the API, and documentation for Amazon Chime.
