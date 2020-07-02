@@ -15,6 +15,7 @@ module AwsSdkCodeGenerator
           # This will only be called if this is defined
           smoke_json = service.smoke_tests
           @client_region = smoke_json["defaultRegion"]
+          @client_endpoint = smoke_json["defaultEndpoint"]
           @smoke_tests = smoke_json["testCases"].map do |test|
             h = {
               operation: underscore(test["operationName"]),
@@ -37,7 +38,7 @@ module AwsSdkCodeGenerator
           end
         end
 
-        attr_reader :service, :client_region, :smoke_tests
+        attr_reader :service, :client_region, :client_endpoint, :smoke_tests
 
         # @return [String|nil]
         def generated_src_warning
