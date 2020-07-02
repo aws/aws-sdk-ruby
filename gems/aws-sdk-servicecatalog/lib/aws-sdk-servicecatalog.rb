@@ -47,6 +47,6 @@ require_relative 'aws-sdk-servicecatalog/customizations'
 # @service
 module Aws::ServiceCatalog
 
-  GEM_VERSION = '1.42.0'
+  GEM_VERSION = '1.43.0'
 
 end

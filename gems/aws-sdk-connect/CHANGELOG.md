@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.28.0 (2020-07-02)
+------------------
+
+* Feature - Documentation updates for Amazon Connect.
+
 1.27.0 (2020-06-23)
 ------------------
 

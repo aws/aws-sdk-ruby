@@ -8,7 +8,7 @@
 Feature: Smoke tests for IoTDataPlane
 
 Background:
-  Given I create a client with endpoint 'https://data.iot.us-west-2.amazonaws.com'
+  Given I create a client in region 'us-west-2'
 
   @iotdataplane @smoke
   Scenario: Call Aws::Aws::IoTDataPlane::Client#get_thing_shadow and expect it to fail

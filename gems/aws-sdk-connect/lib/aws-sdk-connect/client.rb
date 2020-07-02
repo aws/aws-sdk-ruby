@@ -314,6 +314,14 @@ module Aws::Connect
 
     # Creates a user account for the specified Amazon Connect instance.
     #
+    # For information about how to create user accounts using the Amazon
+    # Connect console, see [Add Users][1] in the *Amazon Connect
+    # Administrator Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/connect/latest/adminguide/user-management.html
+    #
     # @option params [required, String] :username
     #   The user name for the account. For instances not using SAML for
     #   identity management, the user name can include up to 20 characters. If
@@ -405,6 +413,14 @@ module Aws::Connect
     end
 
     # Deletes a user account from the specified Amazon Connect instance.
+    #
+    # For information about what happens to a user's data when their
+    # account is deleted, see [Delete Users from Your Amazon Connect
+    # Instance][1] in the *Amazon Connect Administrator Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/connect/latest/adminguide/delete-users.html
     #
     # @option params [required, String] :instance_id
     #   The identifier of the Amazon Connect instance.
@@ -610,12 +626,12 @@ module Aws::Connect
     # Gets the real-time metric data from the specified Amazon Connect
     # instance.
     #
-    # For more information, see [Real-time Metrics Reports][1] in the
-    # *Amazon Connect Administrator Guide*.
+    # For a description of each metric, see [Real-time Metrics
+    # Definitions][1] in the *Amazon Connect Administrator Guide*.
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/connect/latest/adminguide/real-time-metrics-reports.html
+    # [1]: https://docs.aws.amazon.com/connect/latest/adminguide/real-time-metrics-definitions.html
     #
     # @option params [required, String] :instance_id
     #   The identifier of the Amazon Connect instance.
@@ -638,59 +654,111 @@ module Aws::Connect
     #
     # @option params [required, Array<Types::CurrentMetric>] :current_metrics
     #   The metrics to retrieve. Specify the name and unit for each metric.
-    #   The following metrics are available:
+    #   The following metrics are available. For a description of all the
+    #   metrics, see [Real-time Metrics Definitions][1] in the *Amazon Connect
+    #   Administrator Guide*.
     #
     #   AGENTS\_AFTER\_CONTACT\_WORK
     #
     #   : Unit: COUNT
     #
+    #     Name in real-time metrics report: [ACW][2]
+    #
     #   AGENTS\_AVAILABLE
     #
     #   : Unit: COUNT
+    #
+    #     Name in real-time metrics report: [Available][3]
     #
     #   AGENTS\_ERROR
     #
     #   : Unit: COUNT
     #
+    #     Name in real-time metrics report: [Error][4]
+    #
     #   AGENTS\_NON\_PRODUCTIVE
     #
     #   : Unit: COUNT
+    #
+    #     Name in real-time metrics report: [NPT (Non-Productive Time)][5]
     #
     #   AGENTS\_ON\_CALL
     #
     #   : Unit: COUNT
     #
+    #     Name in real-time metrics report: [On contact][6]
+    #
     #   AGENTS\_ON\_CONTACT
     #
     #   : Unit: COUNT
+    #
+    #     Name in real-time metrics report: [On contact][6]
     #
     #   AGENTS\_ONLINE
     #
     #   : Unit: COUNT
     #
+    #     Name in real-time metrics report: [Online][7]
+    #
     #   AGENTS\_STAFFED
     #
     #   : Unit: COUNT
+    #
+    #     Name in real-time metrics report: [Staffed][8]
     #
     #   CONTACTS\_IN\_QUEUE
     #
     #   : Unit: COUNT
     #
+    #     Name in real-time metrics report: [In queue][9]
+    #
     #   CONTACTS\_SCHEDULED
     #
     #   : Unit: COUNT
+    #
+    #     Name in real-time metrics report: [Scheduled][10]
     #
     #   OLDEST\_CONTACT\_AGE
     #
     #   : Unit: SECONDS
     #
+    #     When you use groupings, Unit says SECONDS but the Value is returned
+    #     in MILLISECONDS. For example, if you get a response like this:
+    #
+    #     `\{ "Metric": \{ "Name": "OLDEST_CONTACT_AGE", "Unit": "SECONDS" \},
+    #     "Value": 24113.0 `\\}
+    #
+    #     The actual OLDEST\_CONTACT\_AGE is 24 seconds.
+    #
+    #     Name in real-time metrics report: [Oldest][11]
+    #
     #   SLOTS\_ACTIVE
     #
     #   : Unit: COUNT
     #
+    #     Name in real-time metrics report: [Active][12]
+    #
     #   SLOTS\_AVAILABLE
     #
     #   : Unit: COUNT
+    #
+    #     Name in real-time metrics report: [Availability][13]
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/connect/latest/adminguide/real-time-metrics-definitions.html
+    #   [2]: https://docs.aws.amazon.com/connect/latest/adminguide/real-time-metrics-definitions.html#aftercallwork-real-time
+    #   [3]: https://docs.aws.amazon.com/connect/latest/adminguide/real-time-metrics-definitions.html#available-real-time
+    #   [4]: https://docs.aws.amazon.com/connect/latest/adminguide/real-time-metrics-definitions.html#error-real-time
+    #   [5]: https://docs.aws.amazon.com/connect/latest/adminguide/real-time-metrics-definitions.html#non-productive-time-real-time
+    #   [6]: https://docs.aws.amazon.com/connect/latest/adminguide/real-time-metrics-definitions.html#on-call-real-time
+    #   [7]: https://docs.aws.amazon.com/connect/latest/adminguide/real-time-metrics-definitions.html#online-real-time
+    #   [8]: https://docs.aws.amazon.com/connect/latest/adminguide/real-time-metrics-definitions.html#staffed-real-time
+    #   [9]: https://docs.aws.amazon.com/connect/latest/adminguide/real-time-metrics-definitions.html#in-queue-real-time
+    #   [10]: https://docs.aws.amazon.com/connect/latest/adminguide/real-time-metrics-definitions.html#scheduled-real-time
+    #   [11]: https://docs.aws.amazon.com/connect/latest/adminguide/real-time-metrics-definitions.html#oldest-real-time
+    #   [12]: https://docs.aws.amazon.com/connect/latest/adminguide/real-time-metrics-definitions.html#active-real-time
+    #   [13]: https://docs.aws.amazon.com/connect/latest/adminguide/real-time-metrics-definitions.html#availability-real-time
     #
     # @option params [String] :next_token
     #   The token for the next set of results. Use the value returned in the
@@ -787,12 +855,12 @@ module Aws::Connect
     # Gets historical metric data from the specified Amazon Connect
     # instance.
     #
-    # For more information, see [Historical Metrics Reports][1] in the
-    # *Amazon Connect Administrator Guide*.
+    # For a description of each historical metric, see [Historical Metrics
+    # Definitions][1] in the *Amazon Connect Administrator Guide*.
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/connect/latest/adminguide/historical-metrics.html
+    # [1]: https://docs.aws.amazon.com/connect/latest/adminguide/historical-metrics-definitions.html
     #
     # @option params [required, String] :instance_id
     #   The identifier of the Amazon Connect instance.
@@ -835,7 +903,9 @@ module Aws::Connect
     #
     # @option params [required, Array<Types::HistoricalMetric>] :historical_metrics
     #   The metrics to retrieve. Specify the name, unit, and statistic for
-    #   each metric. The following historical metrics are available:
+    #   each metric. The following historical metrics are available. For a
+    #   description of each metric, see [Historical Metrics Definitions][1] in
+    #   the *Amazon Connect Administrator Guide*.
     #
     #   ABANDON\_TIME
     #
@@ -991,6 +1061,10 @@ module Aws::Connect
     #     following service level thresholds: 15, 20, 25, 30, 45, 60, 90, 120,
     #     180, 240, 300, 600
     #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/connect/latest/adminguide/historical-metrics-definitions.html
+    #
     # @option params [String] :next_token
     #   The token for the next set of results. Use the value returned in the
     #   previous response in the next request to retrieve the next set of
@@ -1059,6 +1133,13 @@ module Aws::Connect
     # Provides information about the contact flows for the specified Amazon
     # Connect instance.
     #
+    # For more information about contact flows, see [Contact Flows][1] in
+    # the *Amazon Connect Administrator Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/connect/latest/adminguide/concepts-contact-flows.html
+    #
     # @option params [required, String] :instance_id
     #   The identifier of the Amazon Connect instance.
     #
@@ -1110,6 +1191,13 @@ module Aws::Connect
     # Provides information about the hours of operation for the specified
     # Amazon Connect instance.
     #
+    # For more information about hours of operation, see [Set the Hours of
+    # Operation for a Queue][1] in the *Amazon Connect Administrator Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/connect/latest/adminguide/set-hours-operation.html
+    #
     # @option params [required, String] :instance_id
     #   The identifier of the Amazon Connect instance.
     #
@@ -1155,6 +1243,14 @@ module Aws::Connect
 
     # Provides information about the phone numbers for the specified Amazon
     # Connect instance.
+    #
+    # For more information about phone numbers, see [Set Up Phone Numbers
+    # for Your Contact Center][1] in the *Amazon Connect Administrator
+    # Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/connect/latest/adminguide/contact-center-phone-number.html
     #
     # @option params [required, String] :instance_id
     #   The identifier of the Amazon Connect instance.
@@ -1212,6 +1308,13 @@ module Aws::Connect
     # Provides information about the queues for the specified Amazon Connect
     # instance.
     #
+    # For more information about queues, see [Queues: Standard and Agent][1]
+    # in the *Amazon Connect Administrator Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/connect/latest/adminguide/concepts-queues-standard-and-agent.html
+    #
     # @option params [required, String] :instance_id
     #   The identifier of the Amazon Connect instance.
     #
@@ -1263,6 +1366,15 @@ module Aws::Connect
     # Provides summary information about the routing profiles for the
     # specified Amazon Connect instance.
     #
+    # For more information about routing profiles, see [Routing Profiles][1]
+    # and [Create a Routing Profile][2] in the *Amazon Connect Administrator
+    # Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/connect/latest/adminguide/concepts-routing.html
+    # [2]: https://docs.aws.amazon.com/connect/latest/adminguide/routing-profiles.html
+    #
     # @option params [required, String] :instance_id
     #   The identifier of the Amazon Connect instance.
     #
@@ -1309,6 +1421,13 @@ module Aws::Connect
     # Provides summary information about the security profiles for the
     # specified Amazon Connect instance.
     #
+    # For more information about security profiles, see [Security
+    # Profiles][1] in the *Amazon Connect Administrator Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/connect/latest/adminguide/connect-security-profiles.html
+    #
     # @option params [required, String] :instance_id
     #   The identifier of the Amazon Connect instance.
     #
@@ -1354,6 +1473,13 @@ module Aws::Connect
 
     # Lists the tags for the specified resource.
     #
+    # For sample policies that use tags, see [Amazon Connect Identity-Based
+    # Policy Examples][1] in the *Amazon Connect Administrator Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/connect/latest/adminguide/security_iam_id-based-policy-examples.html
+    #
     # @option params [required, String] :resource_arn
     #   The Amazon Resource Name (ARN) of the resource.
     #
@@ -1383,6 +1509,13 @@ module Aws::Connect
 
     # Provides summary information about the hierarchy groups for the
     # specified Amazon Connect instance.
+    #
+    # For more information about agent hierarchies, see [Set Up Agent
+    # Hierarchies][1] in the *Amazon Connect Administrator Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/connect/latest/adminguide/agent-hierarchy.html
     #
     # @option params [required, String] :instance_id
     #   The identifier of the Amazon Connect instance.
@@ -1484,15 +1617,35 @@ module Aws::Connect
     # [CreateParticipantConnection][1] with WEBSOCKET and
     # CONNECTION\_CREDENTIALS.
     #
+    # A 429 error occurs in two situations:
+    #
+    # * API rate limit is exceeded. API TPS throttling returns a
+    #   `TooManyRequests` exception from the API Gateway.
+    #
+    # * The [quota for concurrent active chats][2] is exceeded. Active chat
+    #   throttling returns a `LimitExceededException`.
+    #
+    # For more information about how chat works, see [Chat][3] in the
+    # *Amazon Connect Administrator Guide*.
+    #
     #
     #
     # [1]: https://docs.aws.amazon.com/connect-participant/latest/APIReference/API_CreateParticipantConnection.html
+    # [2]: https://docs.aws.amazon.com/connect/latest/adminguide/amazon-connect-service-limits.html
+    # [3]: https://docs.aws.amazon.com/connect/latest/adminguide/chat.html
     #
     # @option params [required, String] :instance_id
     #   The identifier of the Amazon Connect instance.
     #
     # @option params [required, String] :contact_flow_id
-    #   The identifier of the contact flow for the chat.
+    #   The identifier of the contact flow for the outbound call. To see the
+    #   ContactFlowId in the Amazon Connect console user interface, on the
+    #   navigation menu go to **Routing**, **Contact Flows**. Choose the
+    #   contact flow. On the contact flow page, under the name of the contact
+    #   flow, choose **Show additional flow information**. The ContactFlowId
+    #   is the last part of the ARN, shown here in bold:
+    #
+    #   arn:aws:connect:us-west-2:xxxxxxxxxxxx:instance/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx/contact-flow/**846ec553-a005-41c0-8341-xxxxxxxxxxxx**
     #
     # @option params [Hash<String,String>] :attributes
     #   A custom key-value pair using an attribute map. The attributes are
@@ -1555,16 +1708,41 @@ module Aws::Connect
       req.send_request(options)
     end
 
-    # Initiates a contact flow to place an outbound call to a customer.
+    # This API places an outbound call to a contact, and then initiates the
+    # contact flow. It performs the actions in the contact flow that's
+    # specified (in `ContactFlowId`).
+    #
+    # Agents are not involved in initiating the outbound API (that is,
+    # dialing the contact). If the contact flow places an outbound call to a
+    # contact, and then puts the contact in queue, that's when the call is
+    # routed to the agent, like any other inbound case.
     #
     # There is a 60 second dialing timeout for this operation. If the call
     # is not connected after 60 seconds, it fails.
+    #
+    # <note markdown="1"> UK numbers with a 447 prefix are not allowed by default. Before you
+    # can dial these UK mobile numbers, you must submit a service quota
+    # increase request. For more information, see [Amazon Connect Service
+    # Quotas][1] in the *Amazon Connect Administrator Guide*.
+    #
+    #  </note>
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/connect/latest/adminguide/amazon-connect-service-limits.html
     #
     # @option params [required, String] :destination_phone_number
     #   The phone number of the customer, in E.164 format.
     #
     # @option params [required, String] :contact_flow_id
-    #   The identifier of the contact flow for the outbound call.
+    #   The identifier of the contact flow for the outbound call. To see the
+    #   ContactFlowId in the Amazon Connect console user interface, on the
+    #   navigation menu go to **Routing**, **Contact Flows**. Choose the
+    #   contact flow. On the contact flow page, under the name of the contact
+    #   flow, choose **Show additional flow information**. The ContactFlowId
+    #   is the last part of the ARN, shown here in bold:
+    #
+    #   arn:aws:connect:us-west-2:xxxxxxxxxxxx:instance/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx/contact-flow/**846ec553-a005-41c0-8341-xxxxxxxxxxxx**
     #
     # @option params [required, String] :instance_id
     #   The identifier of the Amazon Connect instance.
@@ -1658,6 +1836,13 @@ module Aws::Connect
     # Adds the specified tags to the specified resource.
     #
     # The supported resource type is users.
+    #
+    # For sample policies that use tags, see [Amazon Connect Identity-Based
+    # Policy Examples][1] in the *Amazon Connect Administrator Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/connect/latest/adminguide/security_iam_id-based-policy-examples.html
     #
     # @option params [required, String] :resource_arn
     #   The Amazon Resource Name (ARN) of the resource.
@@ -1804,6 +1989,19 @@ module Aws::Connect
 
     # Updates the identity information for the specified user.
     #
+    # Someone with the ability to invoke `UpdateUserIndentityInfo` can
+    # change the login credentials of other users by changing their email
+    # address. This poses a security risk to your organization. They can
+    # change the email address of a user to the attacker's email address,
+    # and then reset the password through email. We strongly recommend
+    # limiting who has the ability to invoke `UpdateUserIndentityInfo`. For
+    # more information, see [Best Practices for Security Profiles][1] in the
+    # *Amazon Connect Administrator Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/connect/latest/adminguide/security-profile-best-practices.html
+    #
     # @option params [required, Types::UserIdentityInfo] :identity_info
     #   The identity information for the user.
     #
@@ -1944,7 +2142,7 @@ module Aws::Connect
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-connect'
-      context[:gem_version] = '1.27.0'
+      context[:gem_version] = '1.28.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

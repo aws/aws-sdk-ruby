@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.40.0 (2020-07-02)
+------------------
+
+* Feature - Documentation updates for elasticache
+
 1.39.0 (2020-06-23)
 ------------------
 

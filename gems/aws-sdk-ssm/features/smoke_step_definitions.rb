@@ -12,6 +12,10 @@ Given(/I create a client in region '(.*?)'/) do |region|
   @regional_client = Aws::SSM::Client.new(region: region)
 end
 
+Given(/I create a client with endpoint '(.*?)'/) do |endpoint|
+  @regional_client = Aws::SSM::Client.new(endpoint: endpoint)
+end
+
 When(/I call the operation '(.*?)' with params:/) do |operation, params|
   opts = JSON.parse(params, symbolize_names: true)
   begin

@@ -1715,12 +1715,10 @@ module Aws::ElastiCache
     #
     # When a Redis (cluster mode disabled) replication group has been
     # successfully created, you can add one or more read replicas to it, up
-    # to a total of 5 read replicas. You cannot alter a Redis (cluster mode
-    # enabled) replication group after it has been created. However, if you
-    # need to increase or decrease the number of node groups (console:
-    # shards), you can avail yourself of ElastiCache for Redis' enhanced
-    # backup and restore. For more information, see [Restoring From a Backup
-    # with Cluster Resizing][1] in the *ElastiCache User Guide*.
+    # to a total of 5 read replicas. If you need to increase or decrease the
+    # number of node groups (console: shards), you can avail yourself of
+    # ElastiCache for Redis' scaling. For more information, see [Scaling
+    # ElastiCache for Redis Clusters][1] in the *ElastiCache User Guide*.
     #
     # <note markdown="1"> This operation is valid for Redis only.
     #
@@ -1728,7 +1726,7 @@ module Aws::ElastiCache
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/backups-restoring.html
+    # [1]: https://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/Scaling.html
     #
     # @option params [required, String] :replication_group_id
     #   The replication group identifier. This parameter is stored as a
@@ -1764,15 +1762,6 @@ module Aws::ElastiCache
     #   enabled) replication groups.
     #
     #   Default: false
-    #
-    #   Amazon ElastiCache for Redis does not support Multi-AZ with automatic
-    #   failover on:
-    #
-    #   * Redis versions earlier than 2.8.6.
-    #
-    #   * Redis (cluster mode disabled): T1 node types.
-    #
-    #   * Redis (cluster mode enabled): T1 node types.
     #
     # @option params [Boolean] :multi_az_enabled
     #   A flag indicating if you have Multi-AZ enabled to enhance fault
@@ -2634,9 +2623,9 @@ module Aws::ElastiCache
     #
     #   * Redis (cluster mode disabled)
     #
-    #     * If Multi-AZ with Automatic Failover is enabled: 1
+    #     * If Multi-AZ is enabled: 1
     #
-    #     * If Multi-AZ with Automatic Failover is not enabled: 0
+    #     * If Multi-AZ is not enabled: 0
     #
     #   * Redis (cluster mode enabled): 0 (though you will not be able to
     #     failover to a replica if your primary node fails)
@@ -7796,15 +7785,6 @@ module Aws::ElastiCache
     #
     #   Valid values: `true` \| `false`
     #
-    #   Amazon ElastiCache for Redis does not support Multi-AZ with automatic
-    #   failover on:
-    #
-    #   * Redis versions earlier than 2.8.6.
-    #
-    #   * Redis (cluster mode disabled): T1 node types.
-    #
-    #   * Redis (cluster mode enabled): T1 node types.
-    #
     # @option params [Boolean] :multi_az_enabled
     #   A flag indicating if you have Multi-AZ enabled to enhance fault
     #   tolerance. For more information, see [Minimizing Downtime:
@@ -8848,8 +8828,7 @@ module Aws::ElastiCache
     #
     #   * [DescribeEvents][2] in the ElastiCache API Reference
     #
-    # Also see, [Testing Multi-AZ with Automatic Failover][3] in the
-    # *ElastiCache User Guide*.
+    # Also see, [Testing Multi-AZ ][3] in the *ElastiCache User Guide*.
     #
     #
     #
@@ -8944,7 +8923,7 @@ module Aws::ElastiCache
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-elasticache'
-      context[:gem_version] = '1.39.0'
+      context[:gem_version] = '1.40.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -229,7 +229,13 @@ module Aws::Connect
       include Aws::Structure
     end
 
-    # Contains information about a real-time metric.
+    # Contains information about a real-time metric. For a description of
+    # each metric, see [Real-time Metrics Definitions][1] in the *Amazon
+    # Connect Administrator Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/connect/latest/adminguide/real-time-metrics-definitions.html
     #
     # @note When making an API call, you may pass CurrentMetric
     #   data as a hash:
@@ -580,59 +586,112 @@ module Aws::Connect
     #
     # @!attribute [rw] current_metrics
     #   The metrics to retrieve. Specify the name and unit for each metric.
-    #   The following metrics are available:
+    #   The following metrics are available. For a description of all the
+    #   metrics, see [Real-time Metrics Definitions][1] in the *Amazon
+    #   Connect Administrator Guide*.
     #
     #   AGENTS\_AFTER\_CONTACT\_WORK
     #
     #   : Unit: COUNT
     #
+    #     Name in real-time metrics report: [ACW][2]
+    #
     #   AGENTS\_AVAILABLE
     #
     #   : Unit: COUNT
+    #
+    #     Name in real-time metrics report: [Available][3]
     #
     #   AGENTS\_ERROR
     #
     #   : Unit: COUNT
     #
+    #     Name in real-time metrics report: [Error][4]
+    #
     #   AGENTS\_NON\_PRODUCTIVE
     #
     #   : Unit: COUNT
+    #
+    #     Name in real-time metrics report: [NPT (Non-Productive Time)][5]
     #
     #   AGENTS\_ON\_CALL
     #
     #   : Unit: COUNT
     #
+    #     Name in real-time metrics report: [On contact][6]
+    #
     #   AGENTS\_ON\_CONTACT
     #
     #   : Unit: COUNT
+    #
+    #     Name in real-time metrics report: [On contact][6]
     #
     #   AGENTS\_ONLINE
     #
     #   : Unit: COUNT
     #
+    #     Name in real-time metrics report: [Online][7]
+    #
     #   AGENTS\_STAFFED
     #
     #   : Unit: COUNT
+    #
+    #     Name in real-time metrics report: [Staffed][8]
     #
     #   CONTACTS\_IN\_QUEUE
     #
     #   : Unit: COUNT
     #
+    #     Name in real-time metrics report: [In queue][9]
+    #
     #   CONTACTS\_SCHEDULED
     #
     #   : Unit: COUNT
+    #
+    #     Name in real-time metrics report: [Scheduled][10]
     #
     #   OLDEST\_CONTACT\_AGE
     #
     #   : Unit: SECONDS
     #
+    #     When you use groupings, Unit says SECONDS but the Value is
+    #     returned in MILLISECONDS. For example, if you get a response like
+    #     this:
+    #
+    #     `\{ "Metric": \{ "Name": "OLDEST_CONTACT_AGE", "Unit": "SECONDS"
+    #     \}, "Value": 24113.0 `\\}
+    #
+    #     The actual OLDEST\_CONTACT\_AGE is 24 seconds.
+    #
+    #     Name in real-time metrics report: [Oldest][11]
+    #
     #   SLOTS\_ACTIVE
     #
     #   : Unit: COUNT
     #
+    #     Name in real-time metrics report: [Active][12]
+    #
     #   SLOTS\_AVAILABLE
     #
     #   : Unit: COUNT
+    #
+    #     Name in real-time metrics report: [Availability][13]
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/connect/latest/adminguide/real-time-metrics-definitions.html
+    #   [2]: https://docs.aws.amazon.com/connect/latest/adminguide/real-time-metrics-definitions.html#aftercallwork-real-time
+    #   [3]: https://docs.aws.amazon.com/connect/latest/adminguide/real-time-metrics-definitions.html#available-real-time
+    #   [4]: https://docs.aws.amazon.com/connect/latest/adminguide/real-time-metrics-definitions.html#error-real-time
+    #   [5]: https://docs.aws.amazon.com/connect/latest/adminguide/real-time-metrics-definitions.html#non-productive-time-real-time
+    #   [6]: https://docs.aws.amazon.com/connect/latest/adminguide/real-time-metrics-definitions.html#on-call-real-time
+    #   [7]: https://docs.aws.amazon.com/connect/latest/adminguide/real-time-metrics-definitions.html#online-real-time
+    #   [8]: https://docs.aws.amazon.com/connect/latest/adminguide/real-time-metrics-definitions.html#staffed-real-time
+    #   [9]: https://docs.aws.amazon.com/connect/latest/adminguide/real-time-metrics-definitions.html#in-queue-real-time
+    #   [10]: https://docs.aws.amazon.com/connect/latest/adminguide/real-time-metrics-definitions.html#scheduled-real-time
+    #   [11]: https://docs.aws.amazon.com/connect/latest/adminguide/real-time-metrics-definitions.html#oldest-real-time
+    #   [12]: https://docs.aws.amazon.com/connect/latest/adminguide/real-time-metrics-definitions.html#active-real-time
+    #   [13]: https://docs.aws.amazon.com/connect/latest/adminguide/real-time-metrics-definitions.html#availability-real-time
     #   @return [Array<Types::CurrentMetric>]
     #
     # @!attribute [rw] next_token
@@ -795,7 +854,9 @@ module Aws::Connect
     #
     # @!attribute [rw] historical_metrics
     #   The metrics to retrieve. Specify the name, unit, and statistic for
-    #   each metric. The following historical metrics are available:
+    #   each metric. The following historical metrics are available. For a
+    #   description of each metric, see [Historical Metrics Definitions][1]
+    #   in the *Amazon Connect Administrator Guide*.
     #
     #   ABANDON\_TIME
     #
@@ -950,6 +1011,10 @@ module Aws::Connect
     #     Threshold: Only "Less than" comparisons are supported, with the
     #     following service level thresholds: 15, 20, 25, 30, 45, 60, 90,
     #     120, 180, 240, 300, 600
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/connect/latest/adminguide/historical-metrics-definitions.html
     #   @return [Array<Types::HistoricalMetric>]
     #
     # @!attribute [rw] next_token
@@ -1151,7 +1216,13 @@ module Aws::Connect
       include Aws::Structure
     end
 
-    # Contains information about a historical metric.
+    # Contains information about a historical metric. For a description of
+    # each metric, see [Historical Metrics Definitions][1] in the *Amazon
+    # Connect Administrator Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/connect/latest/adminguide/historical-metrics-definitions.html
     #
     # @note When making an API call, you may pass HistoricalMetric
     #   data as a hash:
@@ -1980,7 +2051,14 @@ module Aws::Connect
     #   @return [String]
     #
     # @!attribute [rw] contact_flow_id
-    #   The identifier of the contact flow for the chat.
+    #   The identifier of the contact flow for the outbound call. To see the
+    #   ContactFlowId in the Amazon Connect console user interface, on the
+    #   navigation menu go to **Routing**, **Contact Flows**. Choose the
+    #   contact flow. On the contact flow page, under the name of the
+    #   contact flow, choose **Show additional flow information**. The
+    #   ContactFlowId is the last part of the ARN, shown here in bold:
+    #
+    #   arn:aws:connect:us-west-2:xxxxxxxxxxxx:instance/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx/contact-flow/**846ec553-a005-41c0-8341-xxxxxxxxxxxx**
     #   @return [String]
     #
     # @!attribute [rw] attributes
@@ -2071,7 +2149,14 @@ module Aws::Connect
     #   @return [String]
     #
     # @!attribute [rw] contact_flow_id
-    #   The identifier of the contact flow for the outbound call.
+    #   The identifier of the contact flow for the outbound call. To see the
+    #   ContactFlowId in the Amazon Connect console user interface, on the
+    #   navigation menu go to **Routing**, **Contact Flows**. Choose the
+    #   contact flow. On the contact flow page, under the name of the
+    #   contact flow, choose **Show additional flow information**. The
+    #   ContactFlowId is the last part of the ARN, shown here in bold:
+    #
+    #   arn:aws:connect:us-west-2:xxxxxxxxxxxx:instance/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx/contact-flow/**846ec553-a005-41c0-8341-xxxxxxxxxxxx**
     #   @return [String]
     #
     # @!attribute [rw] instance_id

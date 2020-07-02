@@ -1301,9 +1301,9 @@ module Aws::ElastiCache
     #
     #   * Redis (cluster mode disabled)
     #
-    #     * If Multi-AZ with Automatic Failover is enabled: 1
+    #     * If Multi-AZ: 1
     #
-    #     * If Multi-AZ with Automatic Failover is not enable: 0
+    #     * If Multi-AZ: 0
     #
     #   * Redis (cluster mode enabled): 0 (though you will not be able to
     #     failover to a replica if your primary node fails)
@@ -2128,15 +2128,6 @@ module Aws::ElastiCache
     #   enabled) replication groups.
     #
     #   Default: false
-    #
-    #   Amazon ElastiCache for Redis does not support Multi-AZ with
-    #   automatic failover on:
-    #
-    #   * Redis versions earlier than 2.8.6.
-    #
-    #   * Redis (cluster mode disabled): T1 node types.
-    #
-    #   * Redis (cluster mode enabled): T1 node types.
     #   @return [Boolean]
     #
     # @!attribute [rw] multi_az_enabled
@@ -2767,9 +2758,9 @@ module Aws::ElastiCache
     #
     #   * Redis (cluster mode disabled)
     #
-    #     * If Multi-AZ with Automatic Failover is enabled: 1
+    #     * If Multi-AZ is enabled: 1
     #
-    #     * If Multi-AZ with Automatic Failover is not enabled: 0
+    #     * If Multi-AZ is not enabled: 0
     #
     #   * Redis (cluster mode enabled): 0 (though you will not be able to
     #     failover to a replica if your primary node fails)
@@ -5514,15 +5505,6 @@ module Aws::ElastiCache
     #   read/write primary if the existing primary encounters a failure.
     #
     #   Valid values: `true` \| `false`
-    #
-    #   Amazon ElastiCache for Redis does not support Multi-AZ with
-    #   automatic failover on:
-    #
-    #   * Redis versions earlier than 2.8.6.
-    #
-    #   * Redis (cluster mode disabled): T1 node types.
-    #
-    #   * Redis (cluster mode enabled): T1 node types.
     #   @return [Boolean]
     #
     # @!attribute [rw] multi_az_enabled
@@ -6612,17 +6594,8 @@ module Aws::ElastiCache
     #   @return [String]
     #
     # @!attribute [rw] automatic_failover
-    #   Indicates the status of Multi-AZ with automatic failover for this
-    #   Redis replication group.
-    #
-    #   Amazon ElastiCache for Redis does not support Multi-AZ with
-    #   automatic failover on:
-    #
-    #   * Redis versions earlier than 2.8.6.
-    #
-    #   * Redis (cluster mode disabled): T1 node types.
-    #
-    #   * Redis (cluster mode enabled): T1 node types.
+    #   Indicates the status of automatic failover for this Redis
+    #   replication group.
     #   @return [String]
     #
     # @!attribute [rw] multi_az
@@ -6806,17 +6779,8 @@ module Aws::ElastiCache
     #   @return [String]
     #
     # @!attribute [rw] automatic_failover_status
-    #   Indicates the status of Multi-AZ with automatic failover for this
-    #   Redis replication group.
-    #
-    #   Amazon ElastiCache for Redis does not support Multi-AZ with
-    #   automatic failover on:
-    #
-    #   * Redis versions earlier than 2.8.6.
-    #
-    #   * Redis (cluster mode disabled): T1 node types.
-    #
-    #   * Redis (cluster mode enabled): T1 node types.
+    #   Indicates the status of automatic failover for this Redis
+    #   replication group.
     #   @return [String]
     #
     # @!attribute [rw] resharding
@@ -7675,17 +7639,8 @@ module Aws::ElastiCache
     #   @return [Integer]
     #
     # @!attribute [rw] automatic_failover
-    #   Indicates the status of Multi-AZ with automatic failover for the
-    #   source Redis replication group.
-    #
-    #   Amazon ElastiCache for Redis does not support Multi-AZ with
-    #   automatic failover on:
-    #
-    #   * Redis versions earlier than 2.8.6.
-    #
-    #   * Redis (cluster mode disabled): T1 node types.
-    #
-    #   * Redis (cluster mode enabled): T1 node types.
+    #   Indicates the status of automatic failover for the source Redis
+    #   replication group.
     #   @return [String]
     #
     # @!attribute [rw] node_snapshots
