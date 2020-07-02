@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+2.11.541 (2020-07-02)
+------------------
+
 * Feature - Aws::Connect - Updated the documentation for Amazon Connect Service.
 
 * Feature - Aws::ElastiCache - Updated the documentation for Amazon ElastiCache.
