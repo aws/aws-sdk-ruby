@@ -1,6 +1,12 @@
 Unreleased Changes
 ------------------
 
+* Feature - Aws::IoTSiteWise - Updated the API for AWS IoT SiteWise.
+
+* Feature - Aws::QuickSight - Updated the API, and documentation for Amazon QuickSight.
+
+* Feature - Aws::RDS - Updated the API, and documentation for Amazon Relational Database Service.
+
 2.11.541 (2020-07-02)
 ------------------
 
