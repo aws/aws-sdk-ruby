@@ -2826,8 +2826,8 @@ module Aws::IoTSiteWise
     #         asset_id: "ID",
     #         property_id: "ID",
     #         property_alias: "AssetPropertyAlias",
-    #         start_date: Time.now, # required
-    #         end_date: Time.now, # required
+    #         start_date: Time.now,
+    #         end_date: Time.now,
     #         qualities: ["GOOD"], # accepts GOOD, BAD, UNCERTAIN
     #         time_ordering: "ASCENDING", # accepts ASCENDING, DESCENDING
     #         next_token: "NextToken",

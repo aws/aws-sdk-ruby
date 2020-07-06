@@ -375,8 +375,8 @@ module Aws::QuickSight
     #   The display name of the dashboard.
     #
     # @option params [Types::Parameters] :parameters
-    #   A structure that contains the parameters of the dashboard. These are
-    #   parameter overrides for a dashboard. A dashboard can have any type of
+    #   The parameters for the creation of the dashboard, which you want to
+    #   use to override the default settings. A dashboard can have any type of
     #   parameters, and some parameters might accept multiple values.
     #
     # @option params [Array<Types::ResourcePermission>] :permissions
@@ -423,6 +423,12 @@ module Aws::QuickSight
     #   * `VisibilityState` for `SheetControlsOption` - This visibility state
     #     can be either `COLLAPSED` or `EXPANDED`. This option is `COLLAPSED`
     #     by default.
+    #
+    # @option params [String] :theme_arn
+    #   The Amazon Resource Name (ARN) of the theme that is being used for
+    #   this dashboard. If you add a value for this field, it overrides the
+    #   value that is used in the source entity. The theme ARN must exist in
+    #   the same AWS account where you create the dashboard.
     #
     # @return [Types::CreateDashboardResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -500,6 +506,7 @@ module Aws::QuickSight
     #         visibility_state: "EXPANDED", # accepts EXPANDED, COLLAPSED
     #       },
     #     },
+    #     theme_arn: "Arn",
     #   })
     #
     # @example Response structure
@@ -1384,6 +1391,186 @@ module Aws::QuickSight
       req.send_request(options)
     end
 
+    # Creates a theme.
+    #
+    # A *theme* is set of configuration options for color and layout. Themes
+    # apply to analyses and dashboards. For more information, see [Using
+    # Themes in Amazon QuickSight][1] in the *Amazon QuickSight User Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/quicksight/latest/user/themes-in-quicksight.html
+    #
+    # @option params [required, String] :aws_account_id
+    #   The ID of the AWS account where you want to store the new theme.
+    #
+    # @option params [required, String] :theme_id
+    #   An ID for the theme that you want to create. The theme ID is unique
+    #   per AWS Region in each AWS account.
+    #
+    # @option params [required, String] :name
+    #   A display name for the theme.
+    #
+    # @option params [required, String] :base_theme_id
+    #   The ID of the theme that a custom theme will inherit from. All themes
+    #   inherit from one of the starting themes defined by Amazon QuickSight.
+    #   For a list of the starting themes, use `ListThemes` or choose
+    #   **Themes** from within a QuickSight analysis.
+    #
+    # @option params [String] :version_description
+    #   A description of the first version of the theme that you're creating.
+    #   Every time `UpdateTheme` is called, a new version is created. Each
+    #   version of the theme has a description of the version in the
+    #   `VersionDescription` field.
+    #
+    # @option params [required, Types::ThemeConfiguration] :configuration
+    #   The theme configuration, which contains the theme display properties.
+    #
+    # @option params [Array<Types::ResourcePermission>] :permissions
+    #   A valid grouping of resource permissions to apply to the new theme.
+    #
+    # @option params [Array<Types::Tag>] :tags
+    #   A map of the key-value pairs for the resource tag or tags that you
+    #   want to add to the resource.
+    #
+    # @return [Types::CreateThemeResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateThemeResponse#arn #arn} => String
+    #   * {Types::CreateThemeResponse#version_arn #version_arn} => String
+    #   * {Types::CreateThemeResponse#theme_id #theme_id} => String
+    #   * {Types::CreateThemeResponse#creation_status #creation_status} => String
+    #   * {Types::CreateThemeResponse#status #status} => Integer
+    #   * {Types::CreateThemeResponse#request_id #request_id} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_theme({
+    #     aws_account_id: "AwsAccountId", # required
+    #     theme_id: "RestrictiveResourceId", # required
+    #     name: "ThemeName", # required
+    #     base_theme_id: "RestrictiveResourceId", # required
+    #     version_description: "VersionDescription",
+    #     configuration: { # required
+    #       data_color_palette: {
+    #         colors: ["HexColor"],
+    #         min_max_gradient: ["HexColor"],
+    #         empty_fill_color: "HexColor",
+    #       },
+    #       ui_color_palette: {
+    #         primary_foreground: "HexColor",
+    #         primary_background: "HexColor",
+    #         secondary_foreground: "HexColor",
+    #         secondary_background: "HexColor",
+    #         accent: "HexColor",
+    #         accent_foreground: "HexColor",
+    #         danger: "HexColor",
+    #         danger_foreground: "HexColor",
+    #         warning: "HexColor",
+    #         warning_foreground: "HexColor",
+    #         success: "HexColor",
+    #         success_foreground: "HexColor",
+    #         dimension: "HexColor",
+    #         dimension_foreground: "HexColor",
+    #         measure: "HexColor",
+    #         measure_foreground: "HexColor",
+    #       },
+    #       sheet: {
+    #         tile: {
+    #           border: {
+    #             show: false,
+    #           },
+    #         },
+    #         tile_layout: {
+    #           gutter: {
+    #             show: false,
+    #           },
+    #           margin: {
+    #             show: false,
+    #           },
+    #         },
+    #       },
+    #     },
+    #     permissions: [
+    #       {
+    #         principal: "Principal", # required
+    #         actions: ["String"], # required
+    #       },
+    #     ],
+    #     tags: [
+    #       {
+    #         key: "TagKey", # required
+    #         value: "TagValue", # required
+    #       },
+    #     ],
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.arn #=> String
+    #   resp.version_arn #=> String
+    #   resp.theme_id #=> String
+    #   resp.creation_status #=> String, one of "CREATION_IN_PROGRESS", "CREATION_SUCCESSFUL", "CREATION_FAILED", "UPDATE_IN_PROGRESS", "UPDATE_SUCCESSFUL", "UPDATE_FAILED"
+    #   resp.status #=> Integer
+    #   resp.request_id #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/CreateTheme AWS API Documentation
+    #
+    # @overload create_theme(params = {})
+    # @param [Hash] params ({})
+    def create_theme(params = {}, options = {})
+      req = build_request(:create_theme, params)
+      req.send_request(options)
+    end
+
+    # Creates a theme alias for a theme.
+    #
+    # @option params [required, String] :aws_account_id
+    #   The ID of the AWS account that contains the theme for the new theme
+    #   alias.
+    #
+    # @option params [required, String] :theme_id
+    #   An ID for the theme alias.
+    #
+    # @option params [required, String] :alias_name
+    #   The name that you want to give to the theme alias that you are
+    #   creating. The alias name can't begin with a `$`. Alias names that
+    #   start with `$` are reserved by Amazon QuickSight.
+    #
+    # @option params [required, Integer] :theme_version_number
+    #   The version number of the theme.
+    #
+    # @return [Types::CreateThemeAliasResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateThemeAliasResponse#theme_alias #theme_alias} => Types::ThemeAlias
+    #   * {Types::CreateThemeAliasResponse#status #status} => Integer
+    #   * {Types::CreateThemeAliasResponse#request_id #request_id} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_theme_alias({
+    #     aws_account_id: "AwsAccountId", # required
+    #     theme_id: "RestrictiveResourceId", # required
+    #     alias_name: "AliasName", # required
+    #     theme_version_number: 1, # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.theme_alias.arn #=> String
+    #   resp.theme_alias.alias_name #=> String
+    #   resp.theme_alias.theme_version_number #=> Integer
+    #   resp.status #=> Integer
+    #   resp.request_id #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/CreateThemeAlias AWS API Documentation
+    #
+    # @overload create_theme_alias(params = {})
+    # @param [Hash] params ({})
+    def create_theme_alias(params = {}, options = {})
+      req = build_request(:create_theme_alias, params)
+      req.send_request(options)
+    end
+
     # Deletes a dashboard.
     #
     # @option params [required, String] :aws_account_id
@@ -1724,6 +1911,98 @@ module Aws::QuickSight
     # @param [Hash] params ({})
     def delete_template_alias(params = {}, options = {})
       req = build_request(:delete_template_alias, params)
+      req.send_request(options)
+    end
+
+    # Deletes a theme.
+    #
+    # @option params [required, String] :aws_account_id
+    #   The ID of the AWS account that contains the theme that you're
+    #   deleting.
+    #
+    # @option params [required, String] :theme_id
+    #   An ID for the theme that you want to delete.
+    #
+    # @option params [Integer] :version_number
+    #   The version of the theme that you want to delete.
+    #
+    #   **Note:** If you don't provide a version number, you're using this
+    #   call to `DeleteTheme` to delete all versions of the theme.
+    #
+    # @return [Types::DeleteThemeResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DeleteThemeResponse#arn #arn} => String
+    #   * {Types::DeleteThemeResponse#request_id #request_id} => String
+    #   * {Types::DeleteThemeResponse#status #status} => Integer
+    #   * {Types::DeleteThemeResponse#theme_id #theme_id} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_theme({
+    #     aws_account_id: "AwsAccountId", # required
+    #     theme_id: "RestrictiveResourceId", # required
+    #     version_number: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.arn #=> String
+    #   resp.request_id #=> String
+    #   resp.status #=> Integer
+    #   resp.theme_id #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/DeleteTheme AWS API Documentation
+    #
+    # @overload delete_theme(params = {})
+    # @param [Hash] params ({})
+    def delete_theme(params = {}, options = {})
+      req = build_request(:delete_theme, params)
+      req.send_request(options)
+    end
+
+    # Deletes the version of the theme that the specified theme alias points
+    # to. If you provide a specific alias, you delete the version of the
+    # theme that the alias points to.
+    #
+    # @option params [required, String] :aws_account_id
+    #   The ID of the AWS account that contains the theme alias to delete.
+    #
+    # @option params [required, String] :theme_id
+    #   The ID for the theme that the specified alias is for.
+    #
+    # @option params [required, String] :alias_name
+    #   The unique name for the theme alias to delete.
+    #
+    # @return [Types::DeleteThemeAliasResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DeleteThemeAliasResponse#alias_name #alias_name} => String
+    #   * {Types::DeleteThemeAliasResponse#arn #arn} => String
+    #   * {Types::DeleteThemeAliasResponse#request_id #request_id} => String
+    #   * {Types::DeleteThemeAliasResponse#status #status} => Integer
+    #   * {Types::DeleteThemeAliasResponse#theme_id #theme_id} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_theme_alias({
+    #     aws_account_id: "AwsAccountId", # required
+    #     theme_id: "RestrictiveResourceId", # required
+    #     alias_name: "AliasName", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.alias_name #=> String
+    #   resp.arn #=> String
+    #   resp.request_id #=> String
+    #   resp.status #=> Integer
+    #   resp.theme_id #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/DeleteThemeAlias AWS API Documentation
+    #
+    # @overload delete_theme_alias(params = {})
+    # @param [Hash] params ({})
+    def delete_theme_alias(params = {}, options = {})
+      req = build_request(:delete_theme_alias, params)
       req.send_request(options)
     end
 
@@ -2412,6 +2691,7 @@ module Aws::QuickSight
     #
     #   * {Types::DescribeTemplateResponse#template #template} => Types::Template
     #   * {Types::DescribeTemplateResponse#status #status} => Integer
+    #   * {Types::DescribeTemplateResponse#request_id #request_id} => String
     #
     # @example Request syntax with placeholder values
     #
@@ -2448,6 +2728,7 @@ module Aws::QuickSight
     #   resp.template.last_updated_time #=> Time
     #   resp.template.created_time #=> Time
     #   resp.status #=> Integer
+    #   resp.request_id #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/DescribeTemplate AWS API Documentation
     #
@@ -2546,6 +2827,182 @@ module Aws::QuickSight
     # @param [Hash] params ({})
     def describe_template_permissions(params = {}, options = {})
       req = build_request(:describe_template_permissions, params)
+      req.send_request(options)
+    end
+
+    # Describes a theme.
+    #
+    # @option params [required, String] :aws_account_id
+    #   The ID of the AWS account that contains the theme that you're
+    #   describing.
+    #
+    # @option params [required, String] :theme_id
+    #   The ID for the theme.
+    #
+    # @option params [Integer] :version_number
+    #   The version number for the version to describe. If a `VersionNumber`
+    #   parameter value isn't provided, the latest version of the theme is
+    #   described.
+    #
+    # @option params [String] :alias_name
+    #   The alias of the theme that you want to describe. If you name a
+    #   specific alias, you describe the version that the alias points to. You
+    #   can specify the latest version of the theme by providing the keyword
+    #   `$LATEST` in the `AliasName` parameter. The keyword `$PUBLISHED`
+    #   doesn't apply to themes.
+    #
+    # @return [Types::DescribeThemeResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeThemeResponse#theme #theme} => Types::Theme
+    #   * {Types::DescribeThemeResponse#status #status} => Integer
+    #   * {Types::DescribeThemeResponse#request_id #request_id} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_theme({
+    #     aws_account_id: "AwsAndAccountId", # required
+    #     theme_id: "RestrictiveResourceId", # required
+    #     version_number: 1,
+    #     alias_name: "AliasName",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.theme.arn #=> String
+    #   resp.theme.name #=> String
+    #   resp.theme.theme_id #=> String
+    #   resp.theme.version.version_number #=> Integer
+    #   resp.theme.version.arn #=> String
+    #   resp.theme.version.description #=> String
+    #   resp.theme.version.base_theme_id #=> String
+    #   resp.theme.version.created_time #=> Time
+    #   resp.theme.version.configuration.data_color_palette.colors #=> Array
+    #   resp.theme.version.configuration.data_color_palette.colors[0] #=> String
+    #   resp.theme.version.configuration.data_color_palette.min_max_gradient #=> Array
+    #   resp.theme.version.configuration.data_color_palette.min_max_gradient[0] #=> String
+    #   resp.theme.version.configuration.data_color_palette.empty_fill_color #=> String
+    #   resp.theme.version.configuration.ui_color_palette.primary_foreground #=> String
+    #   resp.theme.version.configuration.ui_color_palette.primary_background #=> String
+    #   resp.theme.version.configuration.ui_color_palette.secondary_foreground #=> String
+    #   resp.theme.version.configuration.ui_color_palette.secondary_background #=> String
+    #   resp.theme.version.configuration.ui_color_palette.accent #=> String
+    #   resp.theme.version.configuration.ui_color_palette.accent_foreground #=> String
+    #   resp.theme.version.configuration.ui_color_palette.danger #=> String
+    #   resp.theme.version.configuration.ui_color_palette.danger_foreground #=> String
+    #   resp.theme.version.configuration.ui_color_palette.warning #=> String
+    #   resp.theme.version.configuration.ui_color_palette.warning_foreground #=> String
+    #   resp.theme.version.configuration.ui_color_palette.success #=> String
+    #   resp.theme.version.configuration.ui_color_palette.success_foreground #=> String
+    #   resp.theme.version.configuration.ui_color_palette.dimension #=> String
+    #   resp.theme.version.configuration.ui_color_palette.dimension_foreground #=> String
+    #   resp.theme.version.configuration.ui_color_palette.measure #=> String
+    #   resp.theme.version.configuration.ui_color_palette.measure_foreground #=> String
+    #   resp.theme.version.configuration.sheet.tile.border.show #=> Boolean
+    #   resp.theme.version.configuration.sheet.tile_layout.gutter.show #=> Boolean
+    #   resp.theme.version.configuration.sheet.tile_layout.margin.show #=> Boolean
+    #   resp.theme.version.errors #=> Array
+    #   resp.theme.version.errors[0].type #=> String, one of "INTERNAL_FAILURE"
+    #   resp.theme.version.errors[0].message #=> String
+    #   resp.theme.version.status #=> String, one of "CREATION_IN_PROGRESS", "CREATION_SUCCESSFUL", "CREATION_FAILED", "UPDATE_IN_PROGRESS", "UPDATE_SUCCESSFUL", "UPDATE_FAILED"
+    #   resp.theme.created_time #=> Time
+    #   resp.theme.last_updated_time #=> Time
+    #   resp.theme.type #=> String, one of "QUICKSIGHT", "CUSTOM", "ALL"
+    #   resp.status #=> Integer
+    #   resp.request_id #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/DescribeTheme AWS API Documentation
+    #
+    # @overload describe_theme(params = {})
+    # @param [Hash] params ({})
+    def describe_theme(params = {}, options = {})
+      req = build_request(:describe_theme, params)
+      req.send_request(options)
+    end
+
+    # Describes the alias for a theme.
+    #
+    # @option params [required, String] :aws_account_id
+    #   The ID of the AWS account that contains the theme alias that you're
+    #   describing.
+    #
+    # @option params [required, String] :theme_id
+    #   The ID for the theme.
+    #
+    # @option params [required, String] :alias_name
+    #   The name of the theme alias that you want to describe.
+    #
+    # @return [Types::DescribeThemeAliasResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeThemeAliasResponse#theme_alias #theme_alias} => Types::ThemeAlias
+    #   * {Types::DescribeThemeAliasResponse#status #status} => Integer
+    #   * {Types::DescribeThemeAliasResponse#request_id #request_id} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_theme_alias({
+    #     aws_account_id: "AwsAccountId", # required
+    #     theme_id: "RestrictiveResourceId", # required
+    #     alias_name: "AliasName", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.theme_alias.arn #=> String
+    #   resp.theme_alias.alias_name #=> String
+    #   resp.theme_alias.theme_version_number #=> Integer
+    #   resp.status #=> Integer
+    #   resp.request_id #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/DescribeThemeAlias AWS API Documentation
+    #
+    # @overload describe_theme_alias(params = {})
+    # @param [Hash] params ({})
+    def describe_theme_alias(params = {}, options = {})
+      req = build_request(:describe_theme_alias, params)
+      req.send_request(options)
+    end
+
+    # Describes the read and write permissions for a theme.
+    #
+    # @option params [required, String] :aws_account_id
+    #   The ID of the AWS account that contains the theme that you're
+    #   describing.
+    #
+    # @option params [required, String] :theme_id
+    #   The ID for the theme that you want to describe permissions for.
+    #
+    # @return [Types::DescribeThemePermissionsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeThemePermissionsResponse#theme_id #theme_id} => String
+    #   * {Types::DescribeThemePermissionsResponse#theme_arn #theme_arn} => String
+    #   * {Types::DescribeThemePermissionsResponse#permissions #permissions} => Array&lt;Types::ResourcePermission&gt;
+    #   * {Types::DescribeThemePermissionsResponse#request_id #request_id} => String
+    #   * {Types::DescribeThemePermissionsResponse#status #status} => Integer
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_theme_permissions({
+    #     aws_account_id: "AwsAccountId", # required
+    #     theme_id: "RestrictiveResourceId", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.theme_id #=> String
+    #   resp.theme_arn #=> String
+    #   resp.permissions #=> Array
+    #   resp.permissions[0].principal #=> String
+    #   resp.permissions[0].actions #=> Array
+    #   resp.permissions[0].actions[0] #=> String
+    #   resp.request_id #=> String
+    #   resp.status #=> Integer
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/DescribeThemePermissions AWS API Documentation
+    #
+    # @overload describe_theme_permissions(params = {})
+    # @param [Hash] params ({})
+    def describe_theme_permissions(params = {}, options = {})
+      req = build_request(:describe_theme_permissions, params)
       req.send_request(options)
     end
 
@@ -3476,6 +3933,173 @@ module Aws::QuickSight
       req.send_request(options)
     end
 
+    # Lists all the aliases of a theme.
+    #
+    # @option params [required, String] :aws_account_id
+    #   The ID of the AWS account that contains the theme aliases that you're
+    #   listing.
+    #
+    # @option params [required, String] :theme_id
+    #   The ID for the theme.
+    #
+    # @option params [String] :next_token
+    #   The token for the next set of results, or null if there are no more
+    #   results.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of results to be returned per request.
+    #
+    # @return [Types::ListThemeAliasesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListThemeAliasesResponse#theme_alias_list #theme_alias_list} => Array&lt;Types::ThemeAlias&gt;
+    #   * {Types::ListThemeAliasesResponse#status #status} => Integer
+    #   * {Types::ListThemeAliasesResponse#request_id #request_id} => String
+    #   * {Types::ListThemeAliasesResponse#next_token #next_token} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_theme_aliases({
+    #     aws_account_id: "AwsAccountId", # required
+    #     theme_id: "RestrictiveResourceId", # required
+    #     next_token: "String",
+    #     max_results: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.theme_alias_list #=> Array
+    #   resp.theme_alias_list[0].arn #=> String
+    #   resp.theme_alias_list[0].alias_name #=> String
+    #   resp.theme_alias_list[0].theme_version_number #=> Integer
+    #   resp.status #=> Integer
+    #   resp.request_id #=> String
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/ListThemeAliases AWS API Documentation
+    #
+    # @overload list_theme_aliases(params = {})
+    # @param [Hash] params ({})
+    def list_theme_aliases(params = {}, options = {})
+      req = build_request(:list_theme_aliases, params)
+      req.send_request(options)
+    end
+
+    # Lists all the versions of the themes in the current AWS account.
+    #
+    # @option params [required, String] :aws_account_id
+    #   The ID of the AWS account that contains the themes that you're
+    #   listing.
+    #
+    # @option params [required, String] :theme_id
+    #   The ID for the theme.
+    #
+    # @option params [String] :next_token
+    #   The token for the next set of results, or null if there are no more
+    #   results.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of results to be returned per request.
+    #
+    # @return [Types::ListThemeVersionsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListThemeVersionsResponse#theme_version_summary_list #theme_version_summary_list} => Array&lt;Types::ThemeVersionSummary&gt;
+    #   * {Types::ListThemeVersionsResponse#next_token #next_token} => String
+    #   * {Types::ListThemeVersionsResponse#status #status} => Integer
+    #   * {Types::ListThemeVersionsResponse#request_id #request_id} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_theme_versions({
+    #     aws_account_id: "AwsAccountId", # required
+    #     theme_id: "RestrictiveResourceId", # required
+    #     next_token: "String",
+    #     max_results: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.theme_version_summary_list #=> Array
+    #   resp.theme_version_summary_list[0].version_number #=> Integer
+    #   resp.theme_version_summary_list[0].arn #=> String
+    #   resp.theme_version_summary_list[0].description #=> String
+    #   resp.theme_version_summary_list[0].created_time #=> Time
+    #   resp.theme_version_summary_list[0].status #=> String, one of "CREATION_IN_PROGRESS", "CREATION_SUCCESSFUL", "CREATION_FAILED", "UPDATE_IN_PROGRESS", "UPDATE_SUCCESSFUL", "UPDATE_FAILED"
+    #   resp.next_token #=> String
+    #   resp.status #=> Integer
+    #   resp.request_id #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/ListThemeVersions AWS API Documentation
+    #
+    # @overload list_theme_versions(params = {})
+    # @param [Hash] params ({})
+    def list_theme_versions(params = {}, options = {})
+      req = build_request(:list_theme_versions, params)
+      req.send_request(options)
+    end
+
+    # Lists all the themes in the current AWS account.
+    #
+    # @option params [required, String] :aws_account_id
+    #   The ID of the AWS account that contains the themes that you're
+    #   listing.
+    #
+    # @option params [String] :next_token
+    #   The token for the next set of results, or null if there are no more
+    #   results.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of results to be returned per request.
+    #
+    # @option params [String] :type
+    #   The type of themes that you want to list. Valid options include the
+    #   following:
+    #
+    #   * `ALL (default)`- Display all existing themes.
+    #
+    #   * `CUSTOM` - Display only the themes created by people using Amazon
+    #     QuickSight.
+    #
+    #   * `QUICKSIGHT` - Display only the starting themes defined by
+    #     QuickSight.
+    #
+    # @return [Types::ListThemesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListThemesResponse#theme_summary_list #theme_summary_list} => Array&lt;Types::ThemeSummary&gt;
+    #   * {Types::ListThemesResponse#next_token #next_token} => String
+    #   * {Types::ListThemesResponse#status #status} => Integer
+    #   * {Types::ListThemesResponse#request_id #request_id} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_themes({
+    #     aws_account_id: "AwsAccountId", # required
+    #     next_token: "String",
+    #     max_results: 1,
+    #     type: "QUICKSIGHT", # accepts QUICKSIGHT, CUSTOM, ALL
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.theme_summary_list #=> Array
+    #   resp.theme_summary_list[0].arn #=> String
+    #   resp.theme_summary_list[0].name #=> String
+    #   resp.theme_summary_list[0].theme_id #=> String
+    #   resp.theme_summary_list[0].latest_version_number #=> Integer
+    #   resp.theme_summary_list[0].created_time #=> Time
+    #   resp.theme_summary_list[0].last_updated_time #=> Time
+    #   resp.next_token #=> String
+    #   resp.status #=> Integer
+    #   resp.request_id #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/ListThemes AWS API Documentation
+    #
+    # @overload list_themes(params = {})
+    # @param [Hash] params ({})
+    def list_themes(params = {}, options = {})
+      req = build_request(:list_themes, params)
+      req.send_request(options)
+    end
+
     # Lists the Amazon QuickSight groups that an Amazon QuickSight user is a
     # member of.
     #
@@ -3907,6 +4531,12 @@ module Aws::QuickSight
     #     can be either `COLLAPSED` or `EXPANDED`. This option is `COLLAPSED`
     #     by default.
     #
+    # @option params [String] :theme_arn
+    #   The Amazon Resource Name (ARN) of the theme that is being used for
+    #   this dashboard. If you add a value for this field, it overrides the
+    #   value that was originally associated with the entity. The theme ARN
+    #   must exist in the same AWS account where you create the dashboard.
+    #
     # @return [Types::UpdateDashboardResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::UpdateDashboardResponse#arn #arn} => String
@@ -3971,6 +4601,7 @@ module Aws::QuickSight
     #         visibility_state: "EXPANDED", # accepts EXPANDED, COLLAPSED
     #       },
     #     },
+    #     theme_arn: "Arn",
     #   })
     #
     # @example Response structure
@@ -4958,6 +5589,259 @@ module Aws::QuickSight
       req.send_request(options)
     end
 
+    # Updates a theme.
+    #
+    # @option params [required, String] :aws_account_id
+    #   The ID of the AWS account that contains the theme that you're
+    #   updating.
+    #
+    # @option params [required, String] :theme_id
+    #   The ID for the theme.
+    #
+    # @option params [String] :name
+    #   The name for the theme.
+    #
+    # @option params [required, String] :base_theme_id
+    #   The theme ID, defined by Amazon QuickSight, that a custom theme
+    #   inherits from. All themes initially inherit from a default QuickSight
+    #   theme.
+    #
+    # @option params [String] :version_description
+    #   A description of the theme version that you're updating Every time
+    #   that you call `UpdateTheme`, you create a new version of the theme.
+    #   Each version of the theme maintains a description of the version in
+    #   `VersionDescription`.
+    #
+    # @option params [Types::ThemeConfiguration] :configuration
+    #   The theme configuration, which contains the theme display properties.
+    #
+    # @return [Types::UpdateThemeResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::UpdateThemeResponse#theme_id #theme_id} => String
+    #   * {Types::UpdateThemeResponse#arn #arn} => String
+    #   * {Types::UpdateThemeResponse#version_arn #version_arn} => String
+    #   * {Types::UpdateThemeResponse#creation_status #creation_status} => String
+    #   * {Types::UpdateThemeResponse#status #status} => Integer
+    #   * {Types::UpdateThemeResponse#request_id #request_id} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_theme({
+    #     aws_account_id: "AwsAccountId", # required
+    #     theme_id: "RestrictiveResourceId", # required
+    #     name: "ThemeName",
+    #     base_theme_id: "RestrictiveResourceId", # required
+    #     version_description: "VersionDescription",
+    #     configuration: {
+    #       data_color_palette: {
+    #         colors: ["HexColor"],
+    #         min_max_gradient: ["HexColor"],
+    #         empty_fill_color: "HexColor",
+    #       },
+    #       ui_color_palette: {
+    #         primary_foreground: "HexColor",
+    #         primary_background: "HexColor",
+    #         secondary_foreground: "HexColor",
+    #         secondary_background: "HexColor",
+    #         accent: "HexColor",
+    #         accent_foreground: "HexColor",
+    #         danger: "HexColor",
+    #         danger_foreground: "HexColor",
+    #         warning: "HexColor",
+    #         warning_foreground: "HexColor",
+    #         success: "HexColor",
+    #         success_foreground: "HexColor",
+    #         dimension: "HexColor",
+    #         dimension_foreground: "HexColor",
+    #         measure: "HexColor",
+    #         measure_foreground: "HexColor",
+    #       },
+    #       sheet: {
+    #         tile: {
+    #           border: {
+    #             show: false,
+    #           },
+    #         },
+    #         tile_layout: {
+    #           gutter: {
+    #             show: false,
+    #           },
+    #           margin: {
+    #             show: false,
+    #           },
+    #         },
+    #       },
+    #     },
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.theme_id #=> String
+    #   resp.arn #=> String
+    #   resp.version_arn #=> String
+    #   resp.creation_status #=> String, one of "CREATION_IN_PROGRESS", "CREATION_SUCCESSFUL", "CREATION_FAILED", "UPDATE_IN_PROGRESS", "UPDATE_SUCCESSFUL", "UPDATE_FAILED"
+    #   resp.status #=> Integer
+    #   resp.request_id #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/UpdateTheme AWS API Documentation
+    #
+    # @overload update_theme(params = {})
+    # @param [Hash] params ({})
+    def update_theme(params = {}, options = {})
+      req = build_request(:update_theme, params)
+      req.send_request(options)
+    end
+
+    # Updates an alias of a theme.
+    #
+    # @option params [required, String] :aws_account_id
+    #   The ID of the AWS account that contains the theme alias that you're
+    #   updating.
+    #
+    # @option params [required, String] :theme_id
+    #   The ID for the theme.
+    #
+    # @option params [required, String] :alias_name
+    #   The name of the theme alias that you want to update.
+    #
+    # @option params [required, Integer] :theme_version_number
+    #   The version number of the theme that the alias should reference.
+    #
+    # @return [Types::UpdateThemeAliasResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::UpdateThemeAliasResponse#theme_alias #theme_alias} => Types::ThemeAlias
+    #   * {Types::UpdateThemeAliasResponse#status #status} => Integer
+    #   * {Types::UpdateThemeAliasResponse#request_id #request_id} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_theme_alias({
+    #     aws_account_id: "AwsAccountId", # required
+    #     theme_id: "RestrictiveResourceId", # required
+    #     alias_name: "AliasName", # required
+    #     theme_version_number: 1, # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.theme_alias.arn #=> String
+    #   resp.theme_alias.alias_name #=> String
+    #   resp.theme_alias.theme_version_number #=> Integer
+    #   resp.status #=> Integer
+    #   resp.request_id #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/UpdateThemeAlias AWS API Documentation
+    #
+    # @overload update_theme_alias(params = {})
+    # @param [Hash] params ({})
+    def update_theme_alias(params = {}, options = {})
+      req = build_request(:update_theme_alias, params)
+      req.send_request(options)
+    end
+
+    # Updates the resource permissions for a theme. Permissions apply to the
+    # action to grant or revoke permissions on, for example
+    # `"quicksight:DescribeTheme"`.
+    #
+    # Theme permissions apply in groupings. Valid groupings include the
+    # following for the three levels of permissions, which are user, owner,
+    # or no permissions:
+    #
+    # * User
+    #
+    #   * `"quicksight:DescribeTheme"`
+    #
+    #   * `"quicksight:DescribeThemeAlias"`
+    #
+    #   * `"quicksight:ListThemeAliases"`
+    #
+    #   * `"quicksight:ListThemeVersions"`
+    #
+    # * Owner
+    #
+    #   * `"quicksight:DescribeTheme"`
+    #
+    #   * `"quicksight:DescribeThemeAlias"`
+    #
+    #   * `"quicksight:ListThemeAliases"`
+    #
+    #   * `"quicksight:ListThemeVersions"`
+    #
+    #   * `"quicksight:DeleteTheme"`
+    #
+    #   * `"quicksight:UpdateTheme"`
+    #
+    #   * `"quicksight:CreateThemeAlias"`
+    #
+    #   * `"quicksight:DeleteThemeAlias"`
+    #
+    #   * `"quicksight:UpdateThemeAlias"`
+    #
+    #   * `"quicksight:UpdateThemePermissions"`
+    #
+    #   * `"quicksight:DescribeThemePermissions"`
+    #
+    # * To specify no permissions, omit the permissions list.
+    #
+    # @option params [required, String] :aws_account_id
+    #   The ID of the AWS account that contains the theme.
+    #
+    # @option params [required, String] :theme_id
+    #   The ID for the theme.
+    #
+    # @option params [Array<Types::ResourcePermission>] :grant_permissions
+    #   A list of resource permissions to be granted for the theme.
+    #
+    # @option params [Array<Types::ResourcePermission>] :revoke_permissions
+    #   A list of resource permissions to be revoked from the theme.
+    #
+    # @return [Types::UpdateThemePermissionsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::UpdateThemePermissionsResponse#theme_id #theme_id} => String
+    #   * {Types::UpdateThemePermissionsResponse#theme_arn #theme_arn} => String
+    #   * {Types::UpdateThemePermissionsResponse#permissions #permissions} => Array&lt;Types::ResourcePermission&gt;
+    #   * {Types::UpdateThemePermissionsResponse#request_id #request_id} => String
+    #   * {Types::UpdateThemePermissionsResponse#status #status} => Integer
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_theme_permissions({
+    #     aws_account_id: "AwsAccountId", # required
+    #     theme_id: "RestrictiveResourceId", # required
+    #     grant_permissions: [
+    #       {
+    #         principal: "Principal", # required
+    #         actions: ["String"], # required
+    #       },
+    #     ],
+    #     revoke_permissions: [
+    #       {
+    #         principal: "Principal", # required
+    #         actions: ["String"], # required
+    #       },
+    #     ],
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.theme_id #=> String
+    #   resp.theme_arn #=> String
+    #   resp.permissions #=> Array
+    #   resp.permissions[0].principal #=> String
+    #   resp.permissions[0].actions #=> Array
+    #   resp.permissions[0].actions[0] #=> String
+    #   resp.request_id #=> String
+    #   resp.status #=> Integer
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/UpdateThemePermissions AWS API Documentation
+    #
+    # @overload update_theme_permissions(params = {})
+    # @param [Hash] params ({})
+    def update_theme_permissions(params = {}, options = {})
+      req = build_request(:update_theme_permissions, params)
+      req.send_request(options)
+    end
+
     # Updates an Amazon QuickSight user.
     #
     # @option params [required, String] :user_name
@@ -5035,7 +5919,7 @@ module Aws::QuickSight
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-quicksight'
-      context[:gem_version] = '1.24.0'
+      context[:gem_version] = '1.25.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

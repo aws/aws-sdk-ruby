@@ -201,6 +201,27 @@ module Aws::QuickSight
       include Aws::Structure
     end
 
+    # The display options for tile borders for visuals.
+    #
+    # @note When making an API call, you may pass BorderStyle
+    #   data as a hash:
+    #
+    #       {
+    #         show: false,
+    #       }
+    #
+    # @!attribute [rw] show
+    #   The option to enable display of borders for visuals.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/BorderStyle AWS API Documentation
+    #
+    class BorderStyle < Struct.new(
+      :show)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # A calculated column for a dataset.
     #
     # @note When making an API call, you may pass CalculatedColumn
@@ -570,6 +591,7 @@ module Aws::QuickSight
     #             visibility_state: "EXPANDED", # accepts EXPANDED, COLLAPSED
     #           },
     #         },
+    #         theme_arn: "Arn",
     #       }
     #
     # @!attribute [rw] aws_account_id
@@ -585,8 +607,8 @@ module Aws::QuickSight
     #   @return [String]
     #
     # @!attribute [rw] parameters
-    #   A structure that contains the parameters of the dashboard. These are
-    #   parameter overrides for a dashboard. A dashboard can have any type
+    #   The parameters for the creation of the dashboard, which you want to
+    #   use to override the default settings. A dashboard can have any type
     #   of parameters, and some parameters might accept multiple values.
     #   @return [Types::Parameters]
     #
@@ -640,6 +662,13 @@ module Aws::QuickSight
     #     `COLLAPSED` by default.
     #   @return [Types::DashboardPublishOptions]
     #
+    # @!attribute [rw] theme_arn
+    #   The Amazon Resource Name (ARN) of the theme that is being used for
+    #   this dashboard. If you add a value for this field, it overrides the
+    #   value that is used in the source entity. The theme ARN must exist in
+    #   the same AWS account where you create the dashboard.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/CreateDashboardRequest AWS API Documentation
     #
     class CreateDashboardRequest < Struct.new(
@@ -651,13 +680,14 @@ module Aws::QuickSight
       :source_entity,
       :tags,
       :version_description,
-      :dashboard_publish_options)
+      :dashboard_publish_options,
+      :theme_arn)
       SENSITIVE = []
       include Aws::Structure
     end
 
     # @!attribute [rw] arn
-    #   The Amazon Resource Name (ARN) of the dashboard.
+    #   The ARN of the dashboard.
     #   @return [String]
     #
     # @!attribute [rw] version_arn
@@ -1738,6 +1768,224 @@ module Aws::QuickSight
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass CreateThemeAliasRequest
+    #   data as a hash:
+    #
+    #       {
+    #         aws_account_id: "AwsAccountId", # required
+    #         theme_id: "RestrictiveResourceId", # required
+    #         alias_name: "AliasName", # required
+    #         theme_version_number: 1, # required
+    #       }
+    #
+    # @!attribute [rw] aws_account_id
+    #   The ID of the AWS account that contains the theme for the new theme
+    #   alias.
+    #   @return [String]
+    #
+    # @!attribute [rw] theme_id
+    #   An ID for the theme alias.
+    #   @return [String]
+    #
+    # @!attribute [rw] alias_name
+    #   The name that you want to give to the theme alias that you are
+    #   creating. The alias name can't begin with a `$`. Alias names that
+    #   start with `$` are reserved by Amazon QuickSight.
+    #   @return [String]
+    #
+    # @!attribute [rw] theme_version_number
+    #   The version number of the theme.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/CreateThemeAliasRequest AWS API Documentation
+    #
+    class CreateThemeAliasRequest < Struct.new(
+      :aws_account_id,
+      :theme_id,
+      :alias_name,
+      :theme_version_number)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] theme_alias
+    #   Information about the theme alias.
+    #   @return [Types::ThemeAlias]
+    #
+    # @!attribute [rw] status
+    #   The HTTP status of the request.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] request_id
+    #   The AWS request ID for this operation.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/CreateThemeAliasResponse AWS API Documentation
+    #
+    class CreateThemeAliasResponse < Struct.new(
+      :theme_alias,
+      :status,
+      :request_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass CreateThemeRequest
+    #   data as a hash:
+    #
+    #       {
+    #         aws_account_id: "AwsAccountId", # required
+    #         theme_id: "RestrictiveResourceId", # required
+    #         name: "ThemeName", # required
+    #         base_theme_id: "RestrictiveResourceId", # required
+    #         version_description: "VersionDescription",
+    #         configuration: { # required
+    #           data_color_palette: {
+    #             colors: ["HexColor"],
+    #             min_max_gradient: ["HexColor"],
+    #             empty_fill_color: "HexColor",
+    #           },
+    #           ui_color_palette: {
+    #             primary_foreground: "HexColor",
+    #             primary_background: "HexColor",
+    #             secondary_foreground: "HexColor",
+    #             secondary_background: "HexColor",
+    #             accent: "HexColor",
+    #             accent_foreground: "HexColor",
+    #             danger: "HexColor",
+    #             danger_foreground: "HexColor",
+    #             warning: "HexColor",
+    #             warning_foreground: "HexColor",
+    #             success: "HexColor",
+    #             success_foreground: "HexColor",
+    #             dimension: "HexColor",
+    #             dimension_foreground: "HexColor",
+    #             measure: "HexColor",
+    #             measure_foreground: "HexColor",
+    #           },
+    #           sheet: {
+    #             tile: {
+    #               border: {
+    #                 show: false,
+    #               },
+    #             },
+    #             tile_layout: {
+    #               gutter: {
+    #                 show: false,
+    #               },
+    #               margin: {
+    #                 show: false,
+    #               },
+    #             },
+    #           },
+    #         },
+    #         permissions: [
+    #           {
+    #             principal: "Principal", # required
+    #             actions: ["String"], # required
+    #           },
+    #         ],
+    #         tags: [
+    #           {
+    #             key: "TagKey", # required
+    #             value: "TagValue", # required
+    #           },
+    #         ],
+    #       }
+    #
+    # @!attribute [rw] aws_account_id
+    #   The ID of the AWS account where you want to store the new theme.
+    #   @return [String]
+    #
+    # @!attribute [rw] theme_id
+    #   An ID for the theme that you want to create. The theme ID is unique
+    #   per AWS Region in each AWS account.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   A display name for the theme.
+    #   @return [String]
+    #
+    # @!attribute [rw] base_theme_id
+    #   The ID of the theme that a custom theme will inherit from. All
+    #   themes inherit from one of the starting themes defined by Amazon
+    #   QuickSight. For a list of the starting themes, use `ListThemes` or
+    #   choose **Themes** from within a QuickSight analysis.
+    #   @return [String]
+    #
+    # @!attribute [rw] version_description
+    #   A description of the first version of the theme that you're
+    #   creating. Every time `UpdateTheme` is called, a new version is
+    #   created. Each version of the theme has a description of the version
+    #   in the `VersionDescription` field.
+    #   @return [String]
+    #
+    # @!attribute [rw] configuration
+    #   The theme configuration, which contains the theme display
+    #   properties.
+    #   @return [Types::ThemeConfiguration]
+    #
+    # @!attribute [rw] permissions
+    #   A valid grouping of resource permissions to apply to the new theme.
+    #   @return [Array<Types::ResourcePermission>]
+    #
+    # @!attribute [rw] tags
+    #   A map of the key-value pairs for the resource tag or tags that you
+    #   want to add to the resource.
+    #   @return [Array<Types::Tag>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/CreateThemeRequest AWS API Documentation
+    #
+    class CreateThemeRequest < Struct.new(
+      :aws_account_id,
+      :theme_id,
+      :name,
+      :base_theme_id,
+      :version_description,
+      :configuration,
+      :permissions,
+      :tags)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] arn
+    #   The Amazon Resource Name (ARN) for the theme.
+    #   @return [String]
+    #
+    # @!attribute [rw] version_arn
+    #   The Amazon Resource Name (ARN) for the new theme.
+    #   @return [String]
+    #
+    # @!attribute [rw] theme_id
+    #   The ID of the theme.
+    #   @return [String]
+    #
+    # @!attribute [rw] creation_status
+    #   The theme creation status.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The HTTP status of the request.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] request_id
+    #   The AWS request ID for this operation.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/CreateThemeResponse AWS API Documentation
+    #
+    class CreateThemeResponse < Struct.new(
+      :arn,
+      :version_arn,
+      :theme_id,
+      :creation_status,
+      :status,
+      :request_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The combination of user name and password that are used as
     # credentials.
     #
@@ -2241,6 +2489,43 @@ module Aws::QuickSight
       :status,
       :source_entity_arn,
       :description)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The theme colors that are used for data colors in charts. The colors
+    # description is a hexidecimal color code that consists of six
+    # alphanumerical characters, prefixed with `#`, for example #37BFF5.
+    #
+    # @note When making an API call, you may pass DataColorPalette
+    #   data as a hash:
+    #
+    #       {
+    #         colors: ["HexColor"],
+    #         min_max_gradient: ["HexColor"],
+    #         empty_fill_color: "HexColor",
+    #       }
+    #
+    # @!attribute [rw] colors
+    #   The hexadecimal codes for the colors.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] min_max_gradient
+    #   The minimum and maximum hexadecimal codes that describe a color
+    #   gradient.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] empty_fill_color
+    #   The hexadecimal code of a color that applies to charts where a lack
+    #   of data is highlighted.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/DataColorPalette AWS API Documentation
+    #
+    class DataColorPalette < Struct.new(
+      :colors,
+      :min_max_gradient,
+      :empty_fill_color)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3363,6 +3648,132 @@ module Aws::QuickSight
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass DeleteThemeAliasRequest
+    #   data as a hash:
+    #
+    #       {
+    #         aws_account_id: "AwsAccountId", # required
+    #         theme_id: "RestrictiveResourceId", # required
+    #         alias_name: "AliasName", # required
+    #       }
+    #
+    # @!attribute [rw] aws_account_id
+    #   The ID of the AWS account that contains the theme alias to delete.
+    #   @return [String]
+    #
+    # @!attribute [rw] theme_id
+    #   The ID for the theme that the specified alias is for.
+    #   @return [String]
+    #
+    # @!attribute [rw] alias_name
+    #   The unique name for the theme alias to delete.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/DeleteThemeAliasRequest AWS API Documentation
+    #
+    class DeleteThemeAliasRequest < Struct.new(
+      :aws_account_id,
+      :theme_id,
+      :alias_name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] alias_name
+    #   The name for the theme alias.
+    #   @return [String]
+    #
+    # @!attribute [rw] arn
+    #   The Amazon Resource Name (ARN) of the theme resource using the
+    #   deleted alias.
+    #   @return [String]
+    #
+    # @!attribute [rw] request_id
+    #   The AWS request ID for this operation.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The HTTP status of the request.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] theme_id
+    #   An ID for the theme associated with the deletion.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/DeleteThemeAliasResponse AWS API Documentation
+    #
+    class DeleteThemeAliasResponse < Struct.new(
+      :alias_name,
+      :arn,
+      :request_id,
+      :status,
+      :theme_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass DeleteThemeRequest
+    #   data as a hash:
+    #
+    #       {
+    #         aws_account_id: "AwsAccountId", # required
+    #         theme_id: "RestrictiveResourceId", # required
+    #         version_number: 1,
+    #       }
+    #
+    # @!attribute [rw] aws_account_id
+    #   The ID of the AWS account that contains the theme that you're
+    #   deleting.
+    #   @return [String]
+    #
+    # @!attribute [rw] theme_id
+    #   An ID for the theme that you want to delete.
+    #   @return [String]
+    #
+    # @!attribute [rw] version_number
+    #   The version of the theme that you want to delete.
+    #
+    #   **Note:** If you don't provide a version number, you're using this
+    #   call to `DeleteTheme` to delete all versions of the theme.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/DeleteThemeRequest AWS API Documentation
+    #
+    class DeleteThemeRequest < Struct.new(
+      :aws_account_id,
+      :theme_id,
+      :version_number)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] arn
+    #   The Amazon Resource Name (ARN) of the resource.
+    #   @return [String]
+    #
+    # @!attribute [rw] request_id
+    #   The AWS request ID for this operation.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The HTTP status of the request.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] theme_id
+    #   An ID for the theme.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/DeleteThemeResponse AWS API Documentation
+    #
+    class DeleteThemeResponse < Struct.new(
+      :arn,
+      :request_id,
+      :status,
+      :theme_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass DeleteUserByPrincipalIdRequest
     #   data as a hash:
     #
@@ -4126,11 +4537,193 @@ module Aws::QuickSight
     #   The HTTP status of the request.
     #   @return [Integer]
     #
+    # @!attribute [rw] request_id
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/DescribeTemplateResponse AWS API Documentation
     #
     class DescribeTemplateResponse < Struct.new(
       :template,
+      :status,
+      :request_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass DescribeThemeAliasRequest
+    #   data as a hash:
+    #
+    #       {
+    #         aws_account_id: "AwsAccountId", # required
+    #         theme_id: "RestrictiveResourceId", # required
+    #         alias_name: "AliasName", # required
+    #       }
+    #
+    # @!attribute [rw] aws_account_id
+    #   The ID of the AWS account that contains the theme alias that you're
+    #   describing.
+    #   @return [String]
+    #
+    # @!attribute [rw] theme_id
+    #   The ID for the theme.
+    #   @return [String]
+    #
+    # @!attribute [rw] alias_name
+    #   The name of the theme alias that you want to describe.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/DescribeThemeAliasRequest AWS API Documentation
+    #
+    class DescribeThemeAliasRequest < Struct.new(
+      :aws_account_id,
+      :theme_id,
+      :alias_name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] theme_alias
+    #   Information about the theme alias.
+    #   @return [Types::ThemeAlias]
+    #
+    # @!attribute [rw] status
+    #   The HTTP status of the request.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] request_id
+    #   The AWS request ID for this operation.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/DescribeThemeAliasResponse AWS API Documentation
+    #
+    class DescribeThemeAliasResponse < Struct.new(
+      :theme_alias,
+      :status,
+      :request_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass DescribeThemePermissionsRequest
+    #   data as a hash:
+    #
+    #       {
+    #         aws_account_id: "AwsAccountId", # required
+    #         theme_id: "RestrictiveResourceId", # required
+    #       }
+    #
+    # @!attribute [rw] aws_account_id
+    #   The ID of the AWS account that contains the theme that you're
+    #   describing.
+    #   @return [String]
+    #
+    # @!attribute [rw] theme_id
+    #   The ID for the theme that you want to describe permissions for.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/DescribeThemePermissionsRequest AWS API Documentation
+    #
+    class DescribeThemePermissionsRequest < Struct.new(
+      :aws_account_id,
+      :theme_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] theme_id
+    #   The ID for the theme.
+    #   @return [String]
+    #
+    # @!attribute [rw] theme_arn
+    #   The Amazon Resource Name (ARN) of the theme.
+    #   @return [String]
+    #
+    # @!attribute [rw] permissions
+    #   A list of resource permissions set on the theme.
+    #   @return [Array<Types::ResourcePermission>]
+    #
+    # @!attribute [rw] request_id
+    #   The AWS request ID for this operation.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The HTTP status of the request.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/DescribeThemePermissionsResponse AWS API Documentation
+    #
+    class DescribeThemePermissionsResponse < Struct.new(
+      :theme_id,
+      :theme_arn,
+      :permissions,
+      :request_id,
       :status)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass DescribeThemeRequest
+    #   data as a hash:
+    #
+    #       {
+    #         aws_account_id: "AwsAndAccountId", # required
+    #         theme_id: "RestrictiveResourceId", # required
+    #         version_number: 1,
+    #         alias_name: "AliasName",
+    #       }
+    #
+    # @!attribute [rw] aws_account_id
+    #   The ID of the AWS account that contains the theme that you're
+    #   describing.
+    #   @return [String]
+    #
+    # @!attribute [rw] theme_id
+    #   The ID for the theme.
+    #   @return [String]
+    #
+    # @!attribute [rw] version_number
+    #   The version number for the version to describe. If a `VersionNumber`
+    #   parameter value isn't provided, the latest version of the theme is
+    #   described.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] alias_name
+    #   The alias of the theme that you want to describe. If you name a
+    #   specific alias, you describe the version that the alias points to.
+    #   You can specify the latest version of the theme by providing the
+    #   keyword `$LATEST` in the `AliasName` parameter. The keyword
+    #   `$PUBLISHED` doesn't apply to themes.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/DescribeThemeRequest AWS API Documentation
+    #
+    class DescribeThemeRequest < Struct.new(
+      :aws_account_id,
+      :theme_id,
+      :version_number,
+      :alias_name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] theme
+    #   The information about the theme that you are describing.
+    #   @return [Types::Theme]
+    #
+    # @!attribute [rw] status
+    #   The HTTP status of the request.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] request_id
+    #   The AWS request ID for this operation.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/DescribeThemeResponse AWS API Documentation
+    #
+    class DescribeThemeResponse < Struct.new(
+      :theme,
+      :status,
+      :request_id)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4452,7 +5045,29 @@ module Aws::QuickSight
       include Aws::Structure
     end
 
-    # An IAM policy assignment.
+    # The display options for gutter spacing between tiles on a sheet.
+    #
+    # @note When making an API call, you may pass GutterStyle
+    #   data as a hash:
+    #
+    #       {
+    #         show: false,
+    #       }
+    #
+    # @!attribute [rw] show
+    #   This Boolean value controls whether to display a gutter space
+    #   between sheet tiles.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/GutterStyle AWS API Documentation
+    #
+    class GutterStyle < Struct.new(
+      :show)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # An AWS Identity and Access Management (IAM) policy assignment.
     #
     # @!attribute [rw] aws_account_id
     #   The AWS account ID.
@@ -5623,6 +6238,217 @@ module Aws::QuickSight
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass ListThemeAliasesRequest
+    #   data as a hash:
+    #
+    #       {
+    #         aws_account_id: "AwsAccountId", # required
+    #         theme_id: "RestrictiveResourceId", # required
+    #         next_token: "String",
+    #         max_results: 1,
+    #       }
+    #
+    # @!attribute [rw] aws_account_id
+    #   The ID of the AWS account that contains the theme aliases that
+    #   you're listing.
+    #   @return [String]
+    #
+    # @!attribute [rw] theme_id
+    #   The ID for the theme.
+    #   @return [String]
+    #
+    # @!attribute [rw] next_token
+    #   The token for the next set of results, or null if there are no more
+    #   results.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of results to be returned per request.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/ListThemeAliasesRequest AWS API Documentation
+    #
+    class ListThemeAliasesRequest < Struct.new(
+      :aws_account_id,
+      :theme_id,
+      :next_token,
+      :max_results)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] theme_alias_list
+    #   A structure containing the list of the theme's aliases.
+    #   @return [Array<Types::ThemeAlias>]
+    #
+    # @!attribute [rw] status
+    #   The HTTP status of the request.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] request_id
+    #   The AWS request ID for this operation.
+    #   @return [String]
+    #
+    # @!attribute [rw] next_token
+    #   The token for the next set of results, or null if there are no more
+    #   results.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/ListThemeAliasesResponse AWS API Documentation
+    #
+    class ListThemeAliasesResponse < Struct.new(
+      :theme_alias_list,
+      :status,
+      :request_id,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass ListThemeVersionsRequest
+    #   data as a hash:
+    #
+    #       {
+    #         aws_account_id: "AwsAccountId", # required
+    #         theme_id: "RestrictiveResourceId", # required
+    #         next_token: "String",
+    #         max_results: 1,
+    #       }
+    #
+    # @!attribute [rw] aws_account_id
+    #   The ID of the AWS account that contains the themes that you're
+    #   listing.
+    #   @return [String]
+    #
+    # @!attribute [rw] theme_id
+    #   The ID for the theme.
+    #   @return [String]
+    #
+    # @!attribute [rw] next_token
+    #   The token for the next set of results, or null if there are no more
+    #   results.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of results to be returned per request.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/ListThemeVersionsRequest AWS API Documentation
+    #
+    class ListThemeVersionsRequest < Struct.new(
+      :aws_account_id,
+      :theme_id,
+      :next_token,
+      :max_results)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] theme_version_summary_list
+    #   A structure containing a list of all the versions of the specified
+    #   theme.
+    #   @return [Array<Types::ThemeVersionSummary>]
+    #
+    # @!attribute [rw] next_token
+    #   The token for the next set of results, or null if there are no more
+    #   results.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The HTTP status of the request.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] request_id
+    #   The AWS request ID for this operation.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/ListThemeVersionsResponse AWS API Documentation
+    #
+    class ListThemeVersionsResponse < Struct.new(
+      :theme_version_summary_list,
+      :next_token,
+      :status,
+      :request_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass ListThemesRequest
+    #   data as a hash:
+    #
+    #       {
+    #         aws_account_id: "AwsAccountId", # required
+    #         next_token: "String",
+    #         max_results: 1,
+    #         type: "QUICKSIGHT", # accepts QUICKSIGHT, CUSTOM, ALL
+    #       }
+    #
+    # @!attribute [rw] aws_account_id
+    #   The ID of the AWS account that contains the themes that you're
+    #   listing.
+    #   @return [String]
+    #
+    # @!attribute [rw] next_token
+    #   The token for the next set of results, or null if there are no more
+    #   results.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of results to be returned per request.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] type
+    #   The type of themes that you want to list. Valid options include the
+    #   following:
+    #
+    #   * `ALL (default)`- Display all existing themes.
+    #
+    #   * `CUSTOM` - Display only the themes created by people using Amazon
+    #     QuickSight.
+    #
+    #   * `QUICKSIGHT` - Display only the starting themes defined by
+    #     QuickSight.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/ListThemesRequest AWS API Documentation
+    #
+    class ListThemesRequest < Struct.new(
+      :aws_account_id,
+      :next_token,
+      :max_results,
+      :type)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] theme_summary_list
+    #   Information about the themes in the list.
+    #   @return [Array<Types::ThemeSummary>]
+    #
+    # @!attribute [rw] next_token
+    #   The token for the next set of results, or null if there are no more
+    #   results.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The HTTP status of the request.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] request_id
+    #   The AWS request ID for this operation.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/ListThemesResponse AWS API Documentation
+    #
+    class ListThemesResponse < Struct.new(
+      :theme_summary_list,
+      :next_token,
+      :status,
+      :request_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass ListUserGroupsRequest
     #   data as a hash:
     #
@@ -5898,6 +6724,27 @@ module Aws::QuickSight
     class ManifestFileLocation < Struct.new(
       :bucket,
       :key)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The display options for margins around the outside edge of sheets.
+    #
+    # @note When making an API call, you may pass MarginStyle
+    #   data as a hash:
+    #
+    #       {
+    #         show: false,
+    #       }
+    #
+    # @!attribute [rw] show
+    #   This Boolean value controls whether to display sheet margins.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/MarginStyle AWS API Documentation
+    #
+    class MarginStyle < Struct.new(
+      :show)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -6588,10 +7435,15 @@ module Aws::QuickSight
     #       }
     #
     # @!attribute [rw] principal
-    #   The Amazon Resource Name (ARN) of an Amazon QuickSight user or
-    #   group, or an IAM ARN. If you are using cross-account resource
-    #   sharing, this is the IAM ARN of an account root. Otherwise, it is
-    #   the ARN of a QuickSight user or group. .
+    #   The Amazon Resource Name (ARN) of the principal. This can be one of
+    #   the following:
+    #
+    #   * The ARN of an Amazon QuickSight user, group, or namespace. (This
+    #     is most common.)
+    #
+    #   * The ARN of an AWS account root: This is an IAM ARN rather than a
+    #     QuickSight ARN. Use this option only to share resources
+    #     (templates) across AWS accounts. (This is less common.)
     #   @return [String]
     #
     # @!attribute [rw] actions
@@ -6880,6 +7732,44 @@ module Aws::QuickSight
     #
     class SheetControlsOption < Struct.new(
       :visibility_state)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The theme display options for sheets.
+    #
+    # @note When making an API call, you may pass SheetStyle
+    #   data as a hash:
+    #
+    #       {
+    #         tile: {
+    #           border: {
+    #             show: false,
+    #           },
+    #         },
+    #         tile_layout: {
+    #           gutter: {
+    #             show: false,
+    #           },
+    #           margin: {
+    #             show: false,
+    #           },
+    #         },
+    #       }
+    #
+    # @!attribute [rw] tile
+    #   The display options for tiles.
+    #   @return [Types::TileStyle]
+    #
+    # @!attribute [rw] tile_layout
+    #   The layout options for tiles.
+    #   @return [Types::TileLayoutStyle]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/SheetStyle AWS API Documentation
+    #
+    class SheetStyle < Struct.new(
+      :tile,
+      :tile_layout)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -7478,6 +8368,288 @@ module Aws::QuickSight
       include Aws::Structure
     end
 
+    # @!attribute [rw] arn
+    #   The Amazon Resource Name (ARN) of the theme.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The name that the user gives to the theme.
+    #   @return [String]
+    #
+    # @!attribute [rw] theme_id
+    #   The identifier that the user gives to the theme.
+    #   @return [String]
+    #
+    # @!attribute [rw] version
+    #   A version of a theme.
+    #   @return [Types::ThemeVersion]
+    #
+    # @!attribute [rw] created_time
+    #   The date and time that the theme was created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] last_updated_time
+    #   The date and time that the theme was last updated.
+    #   @return [Time]
+    #
+    # @!attribute [rw] type
+    #   The type of theme, based on how it was created. Valid values
+    #   include: `QUICKSIGHT` and `CUSTOM`.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/Theme AWS API Documentation
+    #
+    class Theme < Struct.new(
+      :arn,
+      :name,
+      :theme_id,
+      :version,
+      :created_time,
+      :last_updated_time,
+      :type)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # An alias for a theme.
+    #
+    # @!attribute [rw] arn
+    #   The Amazon Resource Name (ARN) of the theme alias.
+    #   @return [String]
+    #
+    # @!attribute [rw] alias_name
+    #   The display name of the theme alias.
+    #   @return [String]
+    #
+    # @!attribute [rw] theme_version_number
+    #   The version number of the theme alias.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/ThemeAlias AWS API Documentation
+    #
+    class ThemeAlias < Struct.new(
+      :arn,
+      :alias_name,
+      :theme_version_number)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The theme configuration. This configuration contains all of the
+    # display properties for a theme.
+    #
+    # @note When making an API call, you may pass ThemeConfiguration
+    #   data as a hash:
+    #
+    #       {
+    #         data_color_palette: {
+    #           colors: ["HexColor"],
+    #           min_max_gradient: ["HexColor"],
+    #           empty_fill_color: "HexColor",
+    #         },
+    #         ui_color_palette: {
+    #           primary_foreground: "HexColor",
+    #           primary_background: "HexColor",
+    #           secondary_foreground: "HexColor",
+    #           secondary_background: "HexColor",
+    #           accent: "HexColor",
+    #           accent_foreground: "HexColor",
+    #           danger: "HexColor",
+    #           danger_foreground: "HexColor",
+    #           warning: "HexColor",
+    #           warning_foreground: "HexColor",
+    #           success: "HexColor",
+    #           success_foreground: "HexColor",
+    #           dimension: "HexColor",
+    #           dimension_foreground: "HexColor",
+    #           measure: "HexColor",
+    #           measure_foreground: "HexColor",
+    #         },
+    #         sheet: {
+    #           tile: {
+    #             border: {
+    #               show: false,
+    #             },
+    #           },
+    #           tile_layout: {
+    #             gutter: {
+    #               show: false,
+    #             },
+    #             margin: {
+    #               show: false,
+    #             },
+    #           },
+    #         },
+    #       }
+    #
+    # @!attribute [rw] data_color_palette
+    #   Color properties that apply to chart data colors.
+    #   @return [Types::DataColorPalette]
+    #
+    # @!attribute [rw] ui_color_palette
+    #   Color properties that apply to the UI and to charts, excluding the
+    #   colors that apply to data.
+    #   @return [Types::UIColorPalette]
+    #
+    # @!attribute [rw] sheet
+    #   Display options related to sheets.
+    #   @return [Types::SheetStyle]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/ThemeConfiguration AWS API Documentation
+    #
+    class ThemeConfiguration < Struct.new(
+      :data_color_palette,
+      :ui_color_palette,
+      :sheet)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Theme error.
+    #
+    # @!attribute [rw] type
+    #   The type of error.
+    #   @return [String]
+    #
+    # @!attribute [rw] message
+    #   The error message.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/ThemeError AWS API Documentation
+    #
+    class ThemeError < Struct.new(
+      :type,
+      :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The theme summary.
+    #
+    # @!attribute [rw] arn
+    #   The Amazon Resource Name (ARN) of the resource.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   the display name for the theme.
+    #   @return [String]
+    #
+    # @!attribute [rw] theme_id
+    #   The ID of the theme. This ID is unique per AWS Region for each AWS
+    #   account.
+    #   @return [String]
+    #
+    # @!attribute [rw] latest_version_number
+    #   The latest version number for the theme.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] created_time
+    #   The date and time that this theme was created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] last_updated_time
+    #   The last date and time that this theme was updated.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/ThemeSummary AWS API Documentation
+    #
+    class ThemeSummary < Struct.new(
+      :arn,
+      :name,
+      :theme_id,
+      :latest_version_number,
+      :created_time,
+      :last_updated_time)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A version of a theme.
+    #
+    # @!attribute [rw] version_number
+    #   The version number of the theme.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] arn
+    #   The Amazon Resource Name (ARN) of the resource.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   The description of the theme.
+    #   @return [String]
+    #
+    # @!attribute [rw] base_theme_id
+    #   The Amazon QuickSight-defined ID of the theme that a custom theme
+    #   inherits from. All themes initially inherit from a default
+    #   QuickSight theme.
+    #   @return [String]
+    #
+    # @!attribute [rw] created_time
+    #   The date and time that this theme version was created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] configuration
+    #   The theme configuration, which contains all the theme display
+    #   properties.
+    #   @return [Types::ThemeConfiguration]
+    #
+    # @!attribute [rw] errors
+    #   Errors associated with the theme.
+    #   @return [Array<Types::ThemeError>]
+    #
+    # @!attribute [rw] status
+    #   The status of the theme version.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/ThemeVersion AWS API Documentation
+    #
+    class ThemeVersion < Struct.new(
+      :version_number,
+      :arn,
+      :description,
+      :base_theme_id,
+      :created_time,
+      :configuration,
+      :errors,
+      :status)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The theme version.
+    #
+    # @!attribute [rw] version_number
+    #   The version number of the theme version.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] arn
+    #   The Amazon Resource Name (ARN) of the theme version.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   The description of the theme version.
+    #   @return [String]
+    #
+    # @!attribute [rw] created_time
+    #   The date and time that this theme version was created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] status
+    #   The status of the theme version.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/ThemeVersionSummary AWS API Documentation
+    #
+    class ThemeVersionSummary < Struct.new(
+      :version_number,
+      :arn,
+      :description,
+      :created_time,
+      :status)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Access is throttled.
     #
     # @!attribute [rw] message
@@ -7492,6 +8664,60 @@ module Aws::QuickSight
     class ThrottlingException < Struct.new(
       :message,
       :request_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The display options for the layout of tiles on a sheet.
+    #
+    # @note When making an API call, you may pass TileLayoutStyle
+    #   data as a hash:
+    #
+    #       {
+    #         gutter: {
+    #           show: false,
+    #         },
+    #         margin: {
+    #           show: false,
+    #         },
+    #       }
+    #
+    # @!attribute [rw] gutter
+    #   The gutter settings that apply between tiles.
+    #   @return [Types::GutterStyle]
+    #
+    # @!attribute [rw] margin
+    #   The margin settings that apply around the outside edge of sheets.
+    #   @return [Types::MarginStyle]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/TileLayoutStyle AWS API Documentation
+    #
+    class TileLayoutStyle < Struct.new(
+      :gutter,
+      :margin)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Display options related to tiles on a sheet.
+    #
+    # @note When making an API call, you may pass TileStyle
+    #   data as a hash:
+    #
+    #       {
+    #         border: {
+    #           show: false,
+    #         },
+    #       }
+    #
+    # @!attribute [rw] border
+    #   The border around a tile.
+    #   @return [Types::BorderStyle]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/TileStyle AWS API Documentation
+    #
+    class TileStyle < Struct.new(
+      :border)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -7600,6 +8826,139 @@ module Aws::QuickSight
     class TwitterParameters < Struct.new(
       :query,
       :max_rows)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The theme colors that apply to UI and to charts, excluding data
+    # colors. The colors description is a hexidecimal color code that
+    # consists of six alphanumerical characters, prefixed with `#`, for
+    # example #37BFF5. For more information, see [Using Themes in Amazon
+    # QuickSight][1] in the *Amazon QuickSight User Guide.*
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/quicksight/latest/user/themes-in-quicksight.html
+    #
+    # @note When making an API call, you may pass UIColorPalette
+    #   data as a hash:
+    #
+    #       {
+    #         primary_foreground: "HexColor",
+    #         primary_background: "HexColor",
+    #         secondary_foreground: "HexColor",
+    #         secondary_background: "HexColor",
+    #         accent: "HexColor",
+    #         accent_foreground: "HexColor",
+    #         danger: "HexColor",
+    #         danger_foreground: "HexColor",
+    #         warning: "HexColor",
+    #         warning_foreground: "HexColor",
+    #         success: "HexColor",
+    #         success_foreground: "HexColor",
+    #         dimension: "HexColor",
+    #         dimension_foreground: "HexColor",
+    #         measure: "HexColor",
+    #         measure_foreground: "HexColor",
+    #       }
+    #
+    # @!attribute [rw] primary_foreground
+    #   The color of text and other foreground elements that appear over the
+    #   primary background regions, such as grid lines, borders, table
+    #   banding, icons, and so on.
+    #   @return [String]
+    #
+    # @!attribute [rw] primary_background
+    #   The background color that applies to visuals and other high emphasis
+    #   UI.
+    #   @return [String]
+    #
+    # @!attribute [rw] secondary_foreground
+    #   The foreground color that applies to any sheet title, sheet control
+    #   text, or UI that appears over the secondary background.
+    #   @return [String]
+    #
+    # @!attribute [rw] secondary_background
+    #   The background color that applies to the sheet background and sheet
+    #   controls.
+    #   @return [String]
+    #
+    # @!attribute [rw] accent
+    #   This color is that applies to selected states and buttons.
+    #   @return [String]
+    #
+    # @!attribute [rw] accent_foreground
+    #   The foreground color that applies to any text or other elements that
+    #   appear over the accent color.
+    #   @return [String]
+    #
+    # @!attribute [rw] danger
+    #   The color that applies to error messages.
+    #   @return [String]
+    #
+    # @!attribute [rw] danger_foreground
+    #   The foreground color that applies to any text or other elements that
+    #   appear over the error color.
+    #   @return [String]
+    #
+    # @!attribute [rw] warning
+    #   This color that applies to warning and informational messages.
+    #   @return [String]
+    #
+    # @!attribute [rw] warning_foreground
+    #   The foreground color that applies to any text or other elements that
+    #   appear over the warning color.
+    #   @return [String]
+    #
+    # @!attribute [rw] success
+    #   The color that applies to success messages, for example the check
+    #   mark for a successful download.
+    #   @return [String]
+    #
+    # @!attribute [rw] success_foreground
+    #   The foreground color that applies to any text or other elements that
+    #   appear over the success color.
+    #   @return [String]
+    #
+    # @!attribute [rw] dimension
+    #   The color that applies to the names of fields that are identified as
+    #   dimensions.
+    #   @return [String]
+    #
+    # @!attribute [rw] dimension_foreground
+    #   The foreground color that applies to any text or other elements that
+    #   appear over the dimension color.
+    #   @return [String]
+    #
+    # @!attribute [rw] measure
+    #   The color that applies to the names of fields that are identified as
+    #   measures.
+    #   @return [String]
+    #
+    # @!attribute [rw] measure_foreground
+    #   The foreground color that applies to any text or other elements that
+    #   appear over the measure color.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/UIColorPalette AWS API Documentation
+    #
+    class UIColorPalette < Struct.new(
+      :primary_foreground,
+      :primary_background,
+      :secondary_foreground,
+      :secondary_background,
+      :accent,
+      :accent_foreground,
+      :danger,
+      :danger_foreground,
+      :warning,
+      :warning_foreground,
+      :success,
+      :success_foreground,
+      :dimension,
+      :dimension_foreground,
+      :measure,
+      :measure_foreground)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -7865,6 +9224,7 @@ module Aws::QuickSight
     #             visibility_state: "EXPANDED", # accepts EXPANDED, COLLAPSED
     #           },
     #         },
+    #         theme_arn: "Arn",
     #       }
     #
     # @!attribute [rw] aws_account_id
@@ -7925,6 +9285,13 @@ module Aws::QuickSight
     #     `COLLAPSED` by default.
     #   @return [Types::DashboardPublishOptions]
     #
+    # @!attribute [rw] theme_arn
+    #   The Amazon Resource Name (ARN) of the theme that is being used for
+    #   this dashboard. If you add a value for this field, it overrides the
+    #   value that was originally associated with the entity. The theme ARN
+    #   must exist in the same AWS account where you create the dashboard.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/UpdateDashboardRequest AWS API Documentation
     #
     class UpdateDashboardRequest < Struct.new(
@@ -7934,7 +9301,8 @@ module Aws::QuickSight
       :source_entity,
       :parameters,
       :version_description,
-      :dashboard_publish_options)
+      :dashboard_publish_options,
+      :theme_arn)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -9035,6 +10403,277 @@ module Aws::QuickSight
     #
     class UpdateTemplateResponse < Struct.new(
       :template_id,
+      :arn,
+      :version_arn,
+      :creation_status,
+      :status,
+      :request_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass UpdateThemeAliasRequest
+    #   data as a hash:
+    #
+    #       {
+    #         aws_account_id: "AwsAccountId", # required
+    #         theme_id: "RestrictiveResourceId", # required
+    #         alias_name: "AliasName", # required
+    #         theme_version_number: 1, # required
+    #       }
+    #
+    # @!attribute [rw] aws_account_id
+    #   The ID of the AWS account that contains the theme alias that you're
+    #   updating.
+    #   @return [String]
+    #
+    # @!attribute [rw] theme_id
+    #   The ID for the theme.
+    #   @return [String]
+    #
+    # @!attribute [rw] alias_name
+    #   The name of the theme alias that you want to update.
+    #   @return [String]
+    #
+    # @!attribute [rw] theme_version_number
+    #   The version number of the theme that the alias should reference.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/UpdateThemeAliasRequest AWS API Documentation
+    #
+    class UpdateThemeAliasRequest < Struct.new(
+      :aws_account_id,
+      :theme_id,
+      :alias_name,
+      :theme_version_number)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] theme_alias
+    #   Information about the theme alias.
+    #   @return [Types::ThemeAlias]
+    #
+    # @!attribute [rw] status
+    #   The HTTP status of the request.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] request_id
+    #   The AWS request ID for this operation.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/UpdateThemeAliasResponse AWS API Documentation
+    #
+    class UpdateThemeAliasResponse < Struct.new(
+      :theme_alias,
+      :status,
+      :request_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass UpdateThemePermissionsRequest
+    #   data as a hash:
+    #
+    #       {
+    #         aws_account_id: "AwsAccountId", # required
+    #         theme_id: "RestrictiveResourceId", # required
+    #         grant_permissions: [
+    #           {
+    #             principal: "Principal", # required
+    #             actions: ["String"], # required
+    #           },
+    #         ],
+    #         revoke_permissions: [
+    #           {
+    #             principal: "Principal", # required
+    #             actions: ["String"], # required
+    #           },
+    #         ],
+    #       }
+    #
+    # @!attribute [rw] aws_account_id
+    #   The ID of the AWS account that contains the theme.
+    #   @return [String]
+    #
+    # @!attribute [rw] theme_id
+    #   The ID for the theme.
+    #   @return [String]
+    #
+    # @!attribute [rw] grant_permissions
+    #   A list of resource permissions to be granted for the theme.
+    #   @return [Array<Types::ResourcePermission>]
+    #
+    # @!attribute [rw] revoke_permissions
+    #   A list of resource permissions to be revoked from the theme.
+    #   @return [Array<Types::ResourcePermission>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/UpdateThemePermissionsRequest AWS API Documentation
+    #
+    class UpdateThemePermissionsRequest < Struct.new(
+      :aws_account_id,
+      :theme_id,
+      :grant_permissions,
+      :revoke_permissions)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] theme_id
+    #   The ID for the theme.
+    #   @return [String]
+    #
+    # @!attribute [rw] theme_arn
+    #   The Amazon Resource Name (ARN) of the theme.
+    #   @return [String]
+    #
+    # @!attribute [rw] permissions
+    #   The resulting list of resource permissions for the theme.
+    #   @return [Array<Types::ResourcePermission>]
+    #
+    # @!attribute [rw] request_id
+    #   The AWS request ID for this operation.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The HTTP status of the request.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/UpdateThemePermissionsResponse AWS API Documentation
+    #
+    class UpdateThemePermissionsResponse < Struct.new(
+      :theme_id,
+      :theme_arn,
+      :permissions,
+      :request_id,
+      :status)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass UpdateThemeRequest
+    #   data as a hash:
+    #
+    #       {
+    #         aws_account_id: "AwsAccountId", # required
+    #         theme_id: "RestrictiveResourceId", # required
+    #         name: "ThemeName",
+    #         base_theme_id: "RestrictiveResourceId", # required
+    #         version_description: "VersionDescription",
+    #         configuration: {
+    #           data_color_palette: {
+    #             colors: ["HexColor"],
+    #             min_max_gradient: ["HexColor"],
+    #             empty_fill_color: "HexColor",
+    #           },
+    #           ui_color_palette: {
+    #             primary_foreground: "HexColor",
+    #             primary_background: "HexColor",
+    #             secondary_foreground: "HexColor",
+    #             secondary_background: "HexColor",
+    #             accent: "HexColor",
+    #             accent_foreground: "HexColor",
+    #             danger: "HexColor",
+    #             danger_foreground: "HexColor",
+    #             warning: "HexColor",
+    #             warning_foreground: "HexColor",
+    #             success: "HexColor",
+    #             success_foreground: "HexColor",
+    #             dimension: "HexColor",
+    #             dimension_foreground: "HexColor",
+    #             measure: "HexColor",
+    #             measure_foreground: "HexColor",
+    #           },
+    #           sheet: {
+    #             tile: {
+    #               border: {
+    #                 show: false,
+    #               },
+    #             },
+    #             tile_layout: {
+    #               gutter: {
+    #                 show: false,
+    #               },
+    #               margin: {
+    #                 show: false,
+    #               },
+    #             },
+    #           },
+    #         },
+    #       }
+    #
+    # @!attribute [rw] aws_account_id
+    #   The ID of the AWS account that contains the theme that you're
+    #   updating.
+    #   @return [String]
+    #
+    # @!attribute [rw] theme_id
+    #   The ID for the theme.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The name for the theme.
+    #   @return [String]
+    #
+    # @!attribute [rw] base_theme_id
+    #   The theme ID, defined by Amazon QuickSight, that a custom theme
+    #   inherits from. All themes initially inherit from a default
+    #   QuickSight theme.
+    #   @return [String]
+    #
+    # @!attribute [rw] version_description
+    #   A description of the theme version that you're updating Every time
+    #   that you call `UpdateTheme`, you create a new version of the theme.
+    #   Each version of the theme maintains a description of the version in
+    #   `VersionDescription`.
+    #   @return [String]
+    #
+    # @!attribute [rw] configuration
+    #   The theme configuration, which contains the theme display
+    #   properties.
+    #   @return [Types::ThemeConfiguration]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/UpdateThemeRequest AWS API Documentation
+    #
+    class UpdateThemeRequest < Struct.new(
+      :aws_account_id,
+      :theme_id,
+      :name,
+      :base_theme_id,
+      :version_description,
+      :configuration)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] theme_id
+    #   The ID for the theme.
+    #   @return [String]
+    #
+    # @!attribute [rw] arn
+    #   The Amazon Resource Name (ARN) for the theme.
+    #   @return [String]
+    #
+    # @!attribute [rw] version_arn
+    #   The Amazon Resource Name (ARN) for the new version of the theme.
+    #   @return [String]
+    #
+    # @!attribute [rw] creation_status
+    #   The creation status of the theme.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The HTTP status of the request.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] request_id
+    #   The AWS request ID for this operation.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/UpdateThemeResponse AWS API Documentation
+    #
+    class UpdateThemeResponse < Struct.new(
+      :theme_id,
       :arn,
       :version_arn,
       :creation_status,

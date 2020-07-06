@@ -3679,6 +3679,7 @@ module Aws::RDS
     #   resp.db_instance.db_subnet_group.subnets #=> Array
     #   resp.db_instance.db_subnet_group.subnets[0].subnet_identifier #=> String
     #   resp.db_instance.db_subnet_group.subnets[0].subnet_availability_zone.name #=> String
+    #   resp.db_instance.db_subnet_group.subnets[0].subnet_outpost.arn #=> String
     #   resp.db_instance.db_subnet_group.subnets[0].subnet_status #=> String
     #   resp.db_instance.db_subnet_group.db_subnet_group_arn #=> String
     #   resp.db_instance.preferred_maintenance_window #=> String
@@ -4162,7 +4163,7 @@ module Aws::RDS
     # @option params [String] :domain
     #   The Active Directory directory ID to create the DB instance in.
     #
-    #   For Oracle DB instances, Amazon RDS can use Kerberos Authentication to
+    #   For Oracle DB instances, Amazon RDS can use Kerberos authentication to
     #   authenticate users that connect to the DB instance. For more
     #   information, see [ Using Kerberos Authentication with Amazon RDS for
     #   Oracle][1] in the *Amazon RDS User Guide*.
@@ -4295,6 +4296,7 @@ module Aws::RDS
     #   resp.db_instance.db_subnet_group.subnets #=> Array
     #   resp.db_instance.db_subnet_group.subnets[0].subnet_identifier #=> String
     #   resp.db_instance.db_subnet_group.subnets[0].subnet_availability_zone.name #=> String
+    #   resp.db_instance.db_subnet_group.subnets[0].subnet_outpost.arn #=> String
     #   resp.db_instance.db_subnet_group.subnets[0].subnet_status #=> String
     #   resp.db_instance.db_subnet_group.db_subnet_group_arn #=> String
     #   resp.db_instance.preferred_maintenance_window #=> String
@@ -4887,6 +4889,7 @@ module Aws::RDS
     #   resp.db_subnet_group.subnets #=> Array
     #   resp.db_subnet_group.subnets[0].subnet_identifier #=> String
     #   resp.db_subnet_group.subnets[0].subnet_availability_zone.name #=> String
+    #   resp.db_subnet_group.subnets[0].subnet_outpost.arn #=> String
     #   resp.db_subnet_group.subnets[0].subnet_status #=> String
     #   resp.db_subnet_group.db_subnet_group_arn #=> String
     #
@@ -5809,6 +5812,7 @@ module Aws::RDS
     #   resp.db_instance.db_subnet_group.subnets #=> Array
     #   resp.db_instance.db_subnet_group.subnets[0].subnet_identifier #=> String
     #   resp.db_instance.db_subnet_group.subnets[0].subnet_availability_zone.name #=> String
+    #   resp.db_instance.db_subnet_group.subnets[0].subnet_outpost.arn #=> String
     #   resp.db_instance.db_subnet_group.subnets[0].subnet_status #=> String
     #   resp.db_instance.db_subnet_group.db_subnet_group_arn #=> String
     #   resp.db_instance.preferred_maintenance_window #=> String
@@ -7903,6 +7907,7 @@ module Aws::RDS
     #   resp.db_instances[0].db_subnet_group.subnets #=> Array
     #   resp.db_instances[0].db_subnet_group.subnets[0].subnet_identifier #=> String
     #   resp.db_instances[0].db_subnet_group.subnets[0].subnet_availability_zone.name #=> String
+    #   resp.db_instances[0].db_subnet_group.subnets[0].subnet_outpost.arn #=> String
     #   resp.db_instances[0].db_subnet_group.subnets[0].subnet_status #=> String
     #   resp.db_instances[0].db_subnet_group.db_subnet_group_arn #=> String
     #   resp.db_instances[0].preferred_maintenance_window #=> String
@@ -8945,6 +8950,7 @@ module Aws::RDS
     #   resp.db_subnet_groups[0].subnets #=> Array
     #   resp.db_subnet_groups[0].subnets[0].subnet_identifier #=> String
     #   resp.db_subnet_groups[0].subnets[0].subnet_availability_zone.name #=> String
+    #   resp.db_subnet_groups[0].subnets[0].subnet_outpost.arn #=> String
     #   resp.db_subnet_groups[0].subnets[0].subnet_status #=> String
     #   resp.db_subnet_groups[0].db_subnet_group_arn #=> String
     #
@@ -10057,6 +10063,7 @@ module Aws::RDS
     #   resp.orderable_db_instance_options[0].supported_engine_modes[0] #=> String
     #   resp.orderable_db_instance_options[0].supports_storage_autoscaling #=> Boolean
     #   resp.orderable_db_instance_options[0].supports_kerberos_authentication #=> Boolean
+    #   resp.orderable_db_instance_options[0].outpost_capable #=> Boolean
     #   resp.marker #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DescribeOrderableDBInstanceOptions AWS API Documentation
@@ -12325,7 +12332,7 @@ module Aws::RDS
     #   Amazon RDS DB Instance Running Microsoft SQL Server][1] in the *Amazon
     #   RDS User Guide*.
     #
-    #   For Oracle DB instances, Amazon RDS can use Kerberos Authentication to
+    #   For Oracle DB instances, Amazon RDS can use Kerberos authentication to
     #   authenticate users that connect to the DB instance. For more
     #   information, see [ Using Kerberos Authentication with Amazon RDS for
     #   Oracle][2] in the *Amazon RDS User Guide*.
@@ -12666,6 +12673,7 @@ module Aws::RDS
     #   resp.db_instance.db_subnet_group.subnets #=> Array
     #   resp.db_instance.db_subnet_group.subnets[0].subnet_identifier #=> String
     #   resp.db_instance.db_subnet_group.subnets[0].subnet_availability_zone.name #=> String
+    #   resp.db_instance.db_subnet_group.subnets[0].subnet_outpost.arn #=> String
     #   resp.db_instance.db_subnet_group.subnets[0].subnet_status #=> String
     #   resp.db_instance.db_subnet_group.db_subnet_group_arn #=> String
     #   resp.db_instance.preferred_maintenance_window #=> String
@@ -13301,6 +13309,7 @@ module Aws::RDS
     #   resp.db_subnet_group.subnets #=> Array
     #   resp.db_subnet_group.subnets[0].subnet_identifier #=> String
     #   resp.db_subnet_group.subnets[0].subnet_availability_zone.name #=> String
+    #   resp.db_subnet_group.subnets[0].subnet_outpost.arn #=> String
     #   resp.db_subnet_group.subnets[0].subnet_status #=> String
     #   resp.db_subnet_group.db_subnet_group_arn #=> String
     #
@@ -13747,6 +13756,7 @@ module Aws::RDS
     #   resp.db_instance.db_subnet_group.subnets #=> Array
     #   resp.db_instance.db_subnet_group.subnets[0].subnet_identifier #=> String
     #   resp.db_instance.db_subnet_group.subnets[0].subnet_availability_zone.name #=> String
+    #   resp.db_instance.db_subnet_group.subnets[0].subnet_outpost.arn #=> String
     #   resp.db_instance.db_subnet_group.subnets[0].subnet_status #=> String
     #   resp.db_instance.db_subnet_group.db_subnet_group_arn #=> String
     #   resp.db_instance.preferred_maintenance_window #=> String
@@ -14138,6 +14148,7 @@ module Aws::RDS
     #   resp.db_instance.db_subnet_group.subnets #=> Array
     #   resp.db_instance.db_subnet_group.subnets[0].subnet_identifier #=> String
     #   resp.db_instance.db_subnet_group.subnets[0].subnet_availability_zone.name #=> String
+    #   resp.db_instance.db_subnet_group.subnets[0].subnet_outpost.arn #=> String
     #   resp.db_instance.db_subnet_group.subnets[0].subnet_status #=> String
     #   resp.db_instance.db_subnet_group.db_subnet_group_arn #=> String
     #   resp.db_instance.preferred_maintenance_window #=> String
@@ -16159,7 +16170,7 @@ module Aws::RDS
     #   Amazon RDS DB Instance Running Microsoft SQL Server][1] in the *Amazon
     #   RDS User Guide*.
     #
-    #   For Oracle DB instances, Amazon RDS can use Kerberos Authentication to
+    #   For Oracle DB instances, Amazon RDS can use Kerberos authentication to
     #   authenticate users that connect to the DB instance. For more
     #   information, see [ Using Kerberos Authentication with Amazon RDS for
     #   Oracle][2] in the *Amazon RDS User Guide*.
@@ -16410,6 +16421,7 @@ module Aws::RDS
     #   resp.db_instance.db_subnet_group.subnets #=> Array
     #   resp.db_instance.db_subnet_group.subnets[0].subnet_identifier #=> String
     #   resp.db_instance.db_subnet_group.subnets[0].subnet_availability_zone.name #=> String
+    #   resp.db_instance.db_subnet_group.subnets[0].subnet_outpost.arn #=> String
     #   resp.db_instance.db_subnet_group.subnets[0].subnet_status #=> String
     #   resp.db_instance.db_subnet_group.db_subnet_group_arn #=> String
     #   resp.db_instance.preferred_maintenance_window #=> String
@@ -16967,6 +16979,7 @@ module Aws::RDS
     #   resp.db_instance.db_subnet_group.subnets #=> Array
     #   resp.db_instance.db_subnet_group.subnets[0].subnet_identifier #=> String
     #   resp.db_instance.db_subnet_group.subnets[0].subnet_availability_zone.name #=> String
+    #   resp.db_instance.db_subnet_group.subnets[0].subnet_outpost.arn #=> String
     #   resp.db_instance.db_subnet_group.subnets[0].subnet_status #=> String
     #   resp.db_instance.db_subnet_group.db_subnet_group_arn #=> String
     #   resp.db_instance.preferred_maintenance_window #=> String
@@ -17300,7 +17313,7 @@ module Aws::RDS
     #   Amazon RDS DB Instance Running Microsoft SQL Server][1] in the *Amazon
     #   RDS User Guide*.
     #
-    #   For Oracle DB instances, Amazon RDS can use Kerberos Authentication to
+    #   For Oracle DB instances, Amazon RDS can use Kerberos authentication to
     #   authenticate users that connect to the DB instance. For more
     #   information, see [ Using Kerberos Authentication with Amazon RDS for
     #   Oracle][2] in the *Amazon RDS User Guide*.
@@ -17553,6 +17566,7 @@ module Aws::RDS
     #   resp.db_instance.db_subnet_group.subnets #=> Array
     #   resp.db_instance.db_subnet_group.subnets[0].subnet_identifier #=> String
     #   resp.db_instance.db_subnet_group.subnets[0].subnet_availability_zone.name #=> String
+    #   resp.db_instance.db_subnet_group.subnets[0].subnet_outpost.arn #=> String
     #   resp.db_instance.db_subnet_group.subnets[0].subnet_status #=> String
     #   resp.db_instance.db_subnet_group.db_subnet_group_arn #=> String
     #   resp.db_instance.preferred_maintenance_window #=> String
@@ -17976,6 +17990,7 @@ module Aws::RDS
     #   resp.db_instance.db_subnet_group.subnets #=> Array
     #   resp.db_instance.db_subnet_group.subnets[0].subnet_identifier #=> String
     #   resp.db_instance.db_subnet_group.subnets[0].subnet_availability_zone.name #=> String
+    #   resp.db_instance.db_subnet_group.subnets[0].subnet_outpost.arn #=> String
     #   resp.db_instance.db_subnet_group.subnets[0].subnet_status #=> String
     #   resp.db_instance.db_subnet_group.db_subnet_group_arn #=> String
     #   resp.db_instance.preferred_maintenance_window #=> String
@@ -18411,6 +18426,7 @@ module Aws::RDS
     #   resp.db_instance.db_subnet_group.subnets #=> Array
     #   resp.db_instance.db_subnet_group.subnets[0].subnet_identifier #=> String
     #   resp.db_instance.db_subnet_group.subnets[0].subnet_availability_zone.name #=> String
+    #   resp.db_instance.db_subnet_group.subnets[0].subnet_outpost.arn #=> String
     #   resp.db_instance.db_subnet_group.subnets[0].subnet_status #=> String
     #   resp.db_instance.db_subnet_group.db_subnet_group_arn #=> String
     #   resp.db_instance.preferred_maintenance_window #=> String
@@ -18517,7 +18533,7 @@ module Aws::RDS
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-rds'
-      context[:gem_version] = '1.92.0'
+      context[:gem_version] = '1.93.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

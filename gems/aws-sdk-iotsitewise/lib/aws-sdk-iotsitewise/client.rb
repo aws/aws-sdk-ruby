@@ -2051,11 +2051,11 @@ module Aws::IoTSiteWise
     #
     #   [1]: https://docs.aws.amazon.com/iot-sitewise/latest/userguide/connect-data-streams.html
     #
-    # @option params [required, Time,DateTime,Date,Integer,String] :start_date
+    # @option params [Time,DateTime,Date,Integer,String] :start_date
     #   The exclusive start of the range from which to query historical data,
     #   expressed in seconds in Unix epoch time.
     #
-    # @option params [required, Time,DateTime,Date,Integer,String] :end_date
+    # @option params [Time,DateTime,Date,Integer,String] :end_date
     #   The inclusive end of the range from which to query historical data,
     #   expressed in seconds in Unix epoch time.
     #
@@ -2084,8 +2084,8 @@ module Aws::IoTSiteWise
     #     asset_id: "ID",
     #     property_id: "ID",
     #     property_alias: "AssetPropertyAlias",
-    #     start_date: Time.now, # required
-    #     end_date: Time.now, # required
+    #     start_date: Time.now,
+    #     end_date: Time.now,
     #     qualities: ["GOOD"], # accepts GOOD, BAD, UNCERTAIN
     #     time_ordering: "ASCENDING", # accepts ASCENDING, DESCENDING
     #     next_token: "NextToken",
@@ -3264,7 +3264,7 @@ module Aws::IoTSiteWise
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-iotsitewise'
-      context[:gem_version] = '1.6.0'
+      context[:gem_version] = '1.7.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

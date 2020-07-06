@@ -3841,7 +3841,7 @@ module Aws::RDS
     # @!attribute [rw] domain
     #   The Active Directory directory ID to create the DB instance in.
     #
-    #   For Oracle DB instances, Amazon RDS can use Kerberos Authentication
+    #   For Oracle DB instances, Amazon RDS can use Kerberos authentication
     #   to authenticate users that connect to the DB instance. For more
     #   information, see [ Using Kerberos Authentication with Amazon RDS for
     #   Oracle][1] in the *Amazon RDS User Guide*.
@@ -13482,7 +13482,7 @@ module Aws::RDS
     #   with an Amazon RDS DB Instance Running Microsoft SQL Server][1] in
     #   the *Amazon RDS User Guide*.
     #
-    #   For Oracle DB instances, Amazon RDS can use Kerberos Authentication
+    #   For Oracle DB instances, Amazon RDS can use Kerberos authentication
     #   to authenticate users that connect to the DB instance. For more
     #   information, see [ Using Kerberos Authentication with Amazon RDS for
     #   Oracle][2] in the *Amazon RDS User Guide*.
@@ -15060,6 +15060,17 @@ module Aws::RDS
     #   Whether a DB instance supports Kerberos Authentication.
     #   @return [Boolean]
     #
+    # @!attribute [rw] outpost_capable
+    #   Whether a DB instance supports RDS on Outposts.
+    #
+    #   For more information about RDS on Outposts, see [Amazon RDS on AWS
+    #   Outposts][1] in the *Amazon RDS User Guide.*
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/rds-on-outposts.html
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/OrderableDBInstanceOption AWS API Documentation
     #
     class OrderableDBInstanceOption < Struct.new(
@@ -15087,7 +15098,8 @@ module Aws::RDS
       :available_processor_features,
       :supported_engine_modes,
       :supports_storage_autoscaling,
-      :supports_kerberos_authentication)
+      :supports_kerberos_authentication,
+      :outpost_capable)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -15112,6 +15124,27 @@ module Aws::RDS
     class OrderableDBInstanceOptionsMessage < Struct.new(
       :orderable_db_instance_options,
       :marker)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A data type that represents an Outpost.
+    #
+    # For more information about RDS on Outposts, see [Amazon RDS on AWS
+    # Outposts][1] in the *Amazon RDS User Guide.*
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/rds-on-outposts.html
+    #
+    # @!attribute [rw] arn
+    #   The Amazon Resource Name (ARN) of the Outpost.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/Outpost AWS API Documentation
+    #
+    class Outpost < Struct.new(
+      :arn)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -17679,7 +17712,7 @@ module Aws::RDS
     #   with an Amazon RDS DB Instance Running Microsoft SQL Server][1] in
     #   the *Amazon RDS User Guide*.
     #
-    #   For Oracle DB instances, Amazon RDS can use Kerberos Authentication
+    #   For Oracle DB instances, Amazon RDS can use Kerberos authentication
     #   to authenticate users that connect to the DB instance. For more
     #   information, see [ Using Kerberos Authentication with Amazon RDS for
     #   Oracle][2] in the *Amazon RDS User Guide*.
@@ -18640,7 +18673,7 @@ module Aws::RDS
     #   with an Amazon RDS DB Instance Running Microsoft SQL Server][1] in
     #   the *Amazon RDS User Guide*.
     #
-    #   For Oracle DB instances, Amazon RDS can use Kerberos Authentication
+    #   For Oracle DB instances, Amazon RDS can use Kerberos authentication
     #   to authenticate users that connect to the DB instance. For more
     #   information, see [ Using Kerberos Authentication with Amazon RDS for
     #   Oracle][2] in the *Amazon RDS User Guide*.
@@ -19478,11 +19511,11 @@ module Aws::RDS
     #
     class StorageTypeNotSupportedFault < Aws::EmptyStructure; end
 
-    # This data type is used as a response element in the
-    # `DescribeDBSubnetGroups` action.
+    # This data type is used as a response element for the
+    # `DescribeDBSubnetGroups` operation.
     #
     # @!attribute [rw] subnet_identifier
-    #   Specifies the identifier of the subnet.
+    #   The identifier of the subnet.
     #   @return [String]
     #
     # @!attribute [rw] subnet_availability_zone
@@ -19492,8 +19525,20 @@ module Aws::RDS
     #   `OrderableDBInstanceOption` data type.
     #   @return [Types::AvailabilityZone]
     #
+    # @!attribute [rw] subnet_outpost
+    #   If the subnet is associated with an Outpost, this value specifies
+    #   the Outpost.
+    #
+    #   For more information about RDS on Outposts, see [Amazon RDS on AWS
+    #   Outposts][1] in the *Amazon RDS User Guide.*
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/rds-on-outposts.html
+    #   @return [Types::Outpost]
+    #
     # @!attribute [rw] subnet_status
-    #   Specifies the status of the subnet.
+    #   The status of the subnet.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/Subnet AWS API Documentation
@@ -19501,6 +19546,7 @@ module Aws::RDS
     class Subnet < Struct.new(
       :subnet_identifier,
       :subnet_availability_zone,
+      :subnet_outpost,
       :subnet_status)
       SENSITIVE = []
       include Aws::Structure

@@ -768,7 +768,7 @@ module Aws::RDS
     #   Amazon RDS DB Instance Running Microsoft SQL Server][1] in the *Amazon
     #   RDS User Guide*.
     #
-    #   For Oracle DB instances, Amazon RDS can use Kerberos Authentication to
+    #   For Oracle DB instances, Amazon RDS can use Kerberos authentication to
     #   authenticate users that connect to the DB instance. For more
     #   information, see [ Using Kerberos Authentication with Amazon RDS for
     #   Oracle][2] in the *Amazon RDS User Guide*.

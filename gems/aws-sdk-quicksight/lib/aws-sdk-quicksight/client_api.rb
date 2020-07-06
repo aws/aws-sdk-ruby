@@ -26,8 +26,10 @@ module Aws::QuickSight
     AuroraParameters = Shapes::StructureShape.new(name: 'AuroraParameters')
     AuroraPostgreSqlParameters = Shapes::StructureShape.new(name: 'AuroraPostgreSqlParameters')
     AwsAccountId = Shapes::StringShape.new(name: 'AwsAccountId')
+    AwsAndAccountId = Shapes::StringShape.new(name: 'AwsAndAccountId')
     AwsIotAnalyticsParameters = Shapes::StructureShape.new(name: 'AwsIotAnalyticsParameters')
     Boolean = Shapes::BooleanShape.new(name: 'Boolean')
+    BorderStyle = Shapes::StructureShape.new(name: 'BorderStyle')
     CalculatedColumn = Shapes::StructureShape.new(name: 'CalculatedColumn')
     CalculatedColumnList = Shapes::ListShape.new(name: 'CalculatedColumnList')
     CancelIngestionRequest = Shapes::StructureShape.new(name: 'CancelIngestionRequest')
@@ -35,6 +37,7 @@ module Aws::QuickSight
     CastColumnTypeOperation = Shapes::StructureShape.new(name: 'CastColumnTypeOperation')
     Catalog = Shapes::StringShape.new(name: 'Catalog')
     ClusterId = Shapes::StringShape.new(name: 'ClusterId')
+    ColorList = Shapes::ListShape.new(name: 'ColorList')
     ColumnDataType = Shapes::StringShape.new(name: 'ColumnDataType')
     ColumnGroup = Shapes::StructureShape.new(name: 'ColumnGroup')
     ColumnGroupColumnSchema = Shapes::StructureShape.new(name: 'ColumnGroupColumnSchema')
@@ -72,6 +75,10 @@ module Aws::QuickSight
     CreateTemplateAliasResponse = Shapes::StructureShape.new(name: 'CreateTemplateAliasResponse')
     CreateTemplateRequest = Shapes::StructureShape.new(name: 'CreateTemplateRequest')
     CreateTemplateResponse = Shapes::StructureShape.new(name: 'CreateTemplateResponse')
+    CreateThemeAliasRequest = Shapes::StructureShape.new(name: 'CreateThemeAliasRequest')
+    CreateThemeAliasResponse = Shapes::StructureShape.new(name: 'CreateThemeAliasResponse')
+    CreateThemeRequest = Shapes::StructureShape.new(name: 'CreateThemeRequest')
+    CreateThemeResponse = Shapes::StructureShape.new(name: 'CreateThemeResponse')
     CredentialPair = Shapes::StructureShape.new(name: 'CredentialPair')
     CustomSql = Shapes::StructureShape.new(name: 'CustomSql')
     CustomSqlName = Shapes::StringShape.new(name: 'CustomSqlName')
@@ -93,6 +100,7 @@ module Aws::QuickSight
     DashboardVersion = Shapes::StructureShape.new(name: 'DashboardVersion')
     DashboardVersionSummary = Shapes::StructureShape.new(name: 'DashboardVersionSummary')
     DashboardVersionSummaryList = Shapes::ListShape.new(name: 'DashboardVersionSummaryList')
+    DataColorPalette = Shapes::StructureShape.new(name: 'DataColorPalette')
     DataSet = Shapes::StructureShape.new(name: 'DataSet')
     DataSetArnsList = Shapes::ListShape.new(name: 'DataSetArnsList')
     DataSetConfiguration = Shapes::StructureShape.new(name: 'DataSetConfiguration')
@@ -133,6 +141,10 @@ module Aws::QuickSight
     DeleteTemplateAliasResponse = Shapes::StructureShape.new(name: 'DeleteTemplateAliasResponse')
     DeleteTemplateRequest = Shapes::StructureShape.new(name: 'DeleteTemplateRequest')
     DeleteTemplateResponse = Shapes::StructureShape.new(name: 'DeleteTemplateResponse')
+    DeleteThemeAliasRequest = Shapes::StructureShape.new(name: 'DeleteThemeAliasRequest')
+    DeleteThemeAliasResponse = Shapes::StructureShape.new(name: 'DeleteThemeAliasResponse')
+    DeleteThemeRequest = Shapes::StructureShape.new(name: 'DeleteThemeRequest')
+    DeleteThemeResponse = Shapes::StructureShape.new(name: 'DeleteThemeResponse')
     DeleteUserByPrincipalIdRequest = Shapes::StructureShape.new(name: 'DeleteUserByPrincipalIdRequest')
     DeleteUserByPrincipalIdResponse = Shapes::StructureShape.new(name: 'DeleteUserByPrincipalIdResponse')
     DeleteUserRequest = Shapes::StructureShape.new(name: 'DeleteUserRequest')
@@ -162,6 +174,12 @@ module Aws::QuickSight
     DescribeTemplatePermissionsResponse = Shapes::StructureShape.new(name: 'DescribeTemplatePermissionsResponse')
     DescribeTemplateRequest = Shapes::StructureShape.new(name: 'DescribeTemplateRequest')
     DescribeTemplateResponse = Shapes::StructureShape.new(name: 'DescribeTemplateResponse')
+    DescribeThemeAliasRequest = Shapes::StructureShape.new(name: 'DescribeThemeAliasRequest')
+    DescribeThemeAliasResponse = Shapes::StructureShape.new(name: 'DescribeThemeAliasResponse')
+    DescribeThemePermissionsRequest = Shapes::StructureShape.new(name: 'DescribeThemePermissionsRequest')
+    DescribeThemePermissionsResponse = Shapes::StructureShape.new(name: 'DescribeThemePermissionsResponse')
+    DescribeThemeRequest = Shapes::StructureShape.new(name: 'DescribeThemeRequest')
+    DescribeThemeResponse = Shapes::StructureShape.new(name: 'DescribeThemeResponse')
     DescribeUserRequest = Shapes::StructureShape.new(name: 'DescribeUserRequest')
     DescribeUserResponse = Shapes::StructureShape.new(name: 'DescribeUserResponse')
     Domain = Shapes::StringShape.new(name: 'Domain')
@@ -188,6 +206,8 @@ module Aws::QuickSight
     GroupMemberList = Shapes::ListShape.new(name: 'GroupMemberList')
     GroupMemberName = Shapes::StringShape.new(name: 'GroupMemberName')
     GroupName = Shapes::StringShape.new(name: 'GroupName')
+    GutterStyle = Shapes::StructureShape.new(name: 'GutterStyle')
+    HexColor = Shapes::StringShape.new(name: 'HexColor')
     Host = Shapes::StringShape.new(name: 'Host')
     IAMPolicyAssignment = Shapes::StructureShape.new(name: 'IAMPolicyAssignment')
     IAMPolicyAssignmentName = Shapes::StringShape.new(name: 'IAMPolicyAssignmentName')
@@ -245,6 +265,12 @@ module Aws::QuickSight
     ListTemplateVersionsResponse = Shapes::StructureShape.new(name: 'ListTemplateVersionsResponse')
     ListTemplatesRequest = Shapes::StructureShape.new(name: 'ListTemplatesRequest')
     ListTemplatesResponse = Shapes::StructureShape.new(name: 'ListTemplatesResponse')
+    ListThemeAliasesRequest = Shapes::StructureShape.new(name: 'ListThemeAliasesRequest')
+    ListThemeAliasesResponse = Shapes::StructureShape.new(name: 'ListThemeAliasesResponse')
+    ListThemeVersionsRequest = Shapes::StructureShape.new(name: 'ListThemeVersionsRequest')
+    ListThemeVersionsResponse = Shapes::StructureShape.new(name: 'ListThemeVersionsResponse')
+    ListThemesRequest = Shapes::StructureShape.new(name: 'ListThemesRequest')
+    ListThemesResponse = Shapes::StructureShape.new(name: 'ListThemesResponse')
     ListUserGroupsRequest = Shapes::StructureShape.new(name: 'ListUserGroupsRequest')
     ListUserGroupsResponse = Shapes::StructureShape.new(name: 'ListUserGroupsResponse')
     ListUsersRequest = Shapes::StructureShape.new(name: 'ListUsersRequest')
@@ -257,6 +283,7 @@ module Aws::QuickSight
     Long = Shapes::IntegerShape.new(name: 'Long')
     LongList = Shapes::ListShape.new(name: 'LongList')
     ManifestFileLocation = Shapes::StructureShape.new(name: 'ManifestFileLocation')
+    MarginStyle = Shapes::StructureShape.new(name: 'MarginStyle')
     MariaDbParameters = Shapes::StructureShape.new(name: 'MariaDbParameters')
     MaxResults = Shapes::IntegerShape.new(name: 'MaxResults')
     MySqlParameters = Shapes::StructureShape.new(name: 'MySqlParameters')
@@ -313,6 +340,7 @@ module Aws::QuickSight
     SessionLifetimeInMinutes = Shapes::IntegerShape.new(name: 'SessionLifetimeInMinutes')
     SessionLifetimeInMinutesInvalidException = Shapes::StructureShape.new(name: 'SessionLifetimeInMinutesInvalidException')
     SheetControlsOption = Shapes::StructureShape.new(name: 'SheetControlsOption')
+    SheetStyle = Shapes::StructureShape.new(name: 'SheetStyle')
     SiteBaseUrl = Shapes::StringShape.new(name: 'SiteBaseUrl')
     SnowflakeParameters = Shapes::StructureShape.new(name: 'SnowflakeParameters')
     SparkParameters = Shapes::StructureShape.new(name: 'SparkParameters')
@@ -349,13 +377,30 @@ module Aws::QuickSight
     TemplateVersionSummaryList = Shapes::ListShape.new(name: 'TemplateVersionSummaryList')
     TeradataParameters = Shapes::StructureShape.new(name: 'TeradataParameters')
     TextQualifier = Shapes::StringShape.new(name: 'TextQualifier')
+    Theme = Shapes::StructureShape.new(name: 'Theme')
+    ThemeAlias = Shapes::StructureShape.new(name: 'ThemeAlias')
+    ThemeAliasList = Shapes::ListShape.new(name: 'ThemeAliasList')
+    ThemeConfiguration = Shapes::StructureShape.new(name: 'ThemeConfiguration')
+    ThemeError = Shapes::StructureShape.new(name: 'ThemeError')
+    ThemeErrorList = Shapes::ListShape.new(name: 'ThemeErrorList')
+    ThemeErrorType = Shapes::StringShape.new(name: 'ThemeErrorType')
+    ThemeName = Shapes::StringShape.new(name: 'ThemeName')
+    ThemeSummary = Shapes::StructureShape.new(name: 'ThemeSummary')
+    ThemeSummaryList = Shapes::ListShape.new(name: 'ThemeSummaryList')
+    ThemeType = Shapes::StringShape.new(name: 'ThemeType')
+    ThemeVersion = Shapes::StructureShape.new(name: 'ThemeVersion')
+    ThemeVersionSummary = Shapes::StructureShape.new(name: 'ThemeVersionSummary')
+    ThemeVersionSummaryList = Shapes::ListShape.new(name: 'ThemeVersionSummaryList')
     ThrottlingException = Shapes::StructureShape.new(name: 'ThrottlingException')
+    TileLayoutStyle = Shapes::StructureShape.new(name: 'TileLayoutStyle')
+    TileStyle = Shapes::StructureShape.new(name: 'TileStyle')
     Timestamp = Shapes::TimestampShape.new(name: 'Timestamp')
     TimestampList = Shapes::ListShape.new(name: 'TimestampList')
     TransformOperation = Shapes::StructureShape.new(name: 'TransformOperation')
     TransformOperationList = Shapes::ListShape.new(name: 'TransformOperationList')
     TwitterParameters = Shapes::StructureShape.new(name: 'TwitterParameters')
     TypeCastFormat = Shapes::StringShape.new(name: 'TypeCastFormat')
+    UIColorPalette = Shapes::StructureShape.new(name: 'UIColorPalette')
     UnsupportedUserEditionException = Shapes::StructureShape.new(name: 'UnsupportedUserEditionException')
     UntagResourceRequest = Shapes::StructureShape.new(name: 'UntagResourceRequest')
     UntagResourceResponse = Shapes::StructureShape.new(name: 'UntagResourceResponse')
@@ -384,6 +429,12 @@ module Aws::QuickSight
     UpdateTemplatePermissionsResponse = Shapes::StructureShape.new(name: 'UpdateTemplatePermissionsResponse')
     UpdateTemplateRequest = Shapes::StructureShape.new(name: 'UpdateTemplateRequest')
     UpdateTemplateResponse = Shapes::StructureShape.new(name: 'UpdateTemplateResponse')
+    UpdateThemeAliasRequest = Shapes::StructureShape.new(name: 'UpdateThemeAliasRequest')
+    UpdateThemeAliasResponse = Shapes::StructureShape.new(name: 'UpdateThemeAliasResponse')
+    UpdateThemePermissionsRequest = Shapes::StructureShape.new(name: 'UpdateThemePermissionsRequest')
+    UpdateThemePermissionsResponse = Shapes::StructureShape.new(name: 'UpdateThemePermissionsResponse')
+    UpdateThemeRequest = Shapes::StructureShape.new(name: 'UpdateThemeRequest')
+    UpdateThemeResponse = Shapes::StructureShape.new(name: 'UpdateThemeResponse')
     UpdateUserRequest = Shapes::StructureShape.new(name: 'UpdateUserRequest')
     UpdateUserResponse = Shapes::StructureShape.new(name: 'UpdateUserResponse')
     UploadSettings = Shapes::StructureShape.new(name: 'UploadSettings')
@@ -436,6 +487,9 @@ module Aws::QuickSight
     AwsIotAnalyticsParameters.add_member(:data_set_name, Shapes::ShapeRef.new(shape: DataSetName, required: true, location_name: "DataSetName"))
     AwsIotAnalyticsParameters.struct_class = Types::AwsIotAnalyticsParameters
 
+    BorderStyle.add_member(:show, Shapes::ShapeRef.new(shape: boolean, location_name: "Show", metadata: {"box"=>true}))
+    BorderStyle.struct_class = Types::BorderStyle
+
     CalculatedColumn.add_member(:column_name, Shapes::ShapeRef.new(shape: ColumnName, required: true, location_name: "ColumnName"))
     CalculatedColumn.add_member(:column_id, Shapes::ShapeRef.new(shape: ColumnId, required: true, location_name: "ColumnId"))
     CalculatedColumn.add_member(:expression, Shapes::ShapeRef.new(shape: Expression, required: true, location_name: "Expression"))
@@ -458,6 +512,8 @@ module Aws::QuickSight
     CastColumnTypeOperation.add_member(:new_column_type, Shapes::ShapeRef.new(shape: ColumnDataType, required: true, location_name: "NewColumnType"))
     CastColumnTypeOperation.add_member(:format, Shapes::ShapeRef.new(shape: TypeCastFormat, location_name: "Format"))
     CastColumnTypeOperation.struct_class = Types::CastColumnTypeOperation
+
+    ColorList.member = Shapes::ShapeRef.new(shape: HexColor)
 
     ColumnGroup.add_member(:geo_spatial_column_group, Shapes::ShapeRef.new(shape: GeoSpatialColumnGroup, location_name: "GeoSpatialColumnGroup"))
     ColumnGroup.struct_class = Types::ColumnGroup
@@ -509,6 +565,7 @@ module Aws::QuickSight
     CreateDashboardRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
     CreateDashboardRequest.add_member(:version_description, Shapes::ShapeRef.new(shape: VersionDescription, location_name: "VersionDescription"))
     CreateDashboardRequest.add_member(:dashboard_publish_options, Shapes::ShapeRef.new(shape: DashboardPublishOptions, location_name: "DashboardPublishOptions"))
+    CreateDashboardRequest.add_member(:theme_arn, Shapes::ShapeRef.new(shape: Arn, location_name: "ThemeArn"))
     CreateDashboardRequest.struct_class = Types::CreateDashboardRequest
 
     CreateDashboardResponse.add_member(:arn, Shapes::ShapeRef.new(shape: Arn, location_name: "Arn"))
@@ -637,6 +694,35 @@ module Aws::QuickSight
     CreateTemplateResponse.add_member(:request_id, Shapes::ShapeRef.new(shape: String, location_name: "RequestId"))
     CreateTemplateResponse.struct_class = Types::CreateTemplateResponse
 
+    CreateThemeAliasRequest.add_member(:aws_account_id, Shapes::ShapeRef.new(shape: AwsAccountId, required: true, location: "uri", location_name: "AwsAccountId"))
+    CreateThemeAliasRequest.add_member(:theme_id, Shapes::ShapeRef.new(shape: RestrictiveResourceId, required: true, location: "uri", location_name: "ThemeId"))
+    CreateThemeAliasRequest.add_member(:alias_name, Shapes::ShapeRef.new(shape: AliasName, required: true, location: "uri", location_name: "AliasName"))
+    CreateThemeAliasRequest.add_member(:theme_version_number, Shapes::ShapeRef.new(shape: VersionNumber, required: true, location_name: "ThemeVersionNumber"))
+    CreateThemeAliasRequest.struct_class = Types::CreateThemeAliasRequest
+
+    CreateThemeAliasResponse.add_member(:theme_alias, Shapes::ShapeRef.new(shape: ThemeAlias, location_name: "ThemeAlias"))
+    CreateThemeAliasResponse.add_member(:status, Shapes::ShapeRef.new(shape: StatusCode, location: "statusCode", location_name: "Status"))
+    CreateThemeAliasResponse.add_member(:request_id, Shapes::ShapeRef.new(shape: String, location_name: "RequestId"))
+    CreateThemeAliasResponse.struct_class = Types::CreateThemeAliasResponse
+
+    CreateThemeRequest.add_member(:aws_account_id, Shapes::ShapeRef.new(shape: AwsAccountId, required: true, location: "uri", location_name: "AwsAccountId"))
+    CreateThemeRequest.add_member(:theme_id, Shapes::ShapeRef.new(shape: RestrictiveResourceId, required: true, location: "uri", location_name: "ThemeId"))
+    CreateThemeRequest.add_member(:name, Shapes::ShapeRef.new(shape: ThemeName, required: true, location_name: "Name"))
+    CreateThemeRequest.add_member(:base_theme_id, Shapes::ShapeRef.new(shape: RestrictiveResourceId, required: true, location_name: "BaseThemeId"))
+    CreateThemeRequest.add_member(:version_description, Shapes::ShapeRef.new(shape: VersionDescription, location_name: "VersionDescription"))
+    CreateThemeRequest.add_member(:configuration, Shapes::ShapeRef.new(shape: ThemeConfiguration, required: true, location_name: "Configuration"))
+    CreateThemeRequest.add_member(:permissions, Shapes::ShapeRef.new(shape: ResourcePermissionList, location_name: "Permissions"))
+    CreateThemeRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
+    CreateThemeRequest.struct_class = Types::CreateThemeRequest
+
+    CreateThemeResponse.add_member(:arn, Shapes::ShapeRef.new(shape: Arn, location_name: "Arn"))
+    CreateThemeResponse.add_member(:version_arn, Shapes::ShapeRef.new(shape: Arn, location_name: "VersionArn"))
+    CreateThemeResponse.add_member(:theme_id, Shapes::ShapeRef.new(shape: RestrictiveResourceId, location_name: "ThemeId"))
+    CreateThemeResponse.add_member(:creation_status, Shapes::ShapeRef.new(shape: ResourceStatus, location_name: "CreationStatus"))
+    CreateThemeResponse.add_member(:status, Shapes::ShapeRef.new(shape: StatusCode, location: "statusCode", location_name: "Status"))
+    CreateThemeResponse.add_member(:request_id, Shapes::ShapeRef.new(shape: String, location_name: "RequestId"))
+    CreateThemeResponse.struct_class = Types::CreateThemeResponse
+
     CredentialPair.add_member(:username, Shapes::ShapeRef.new(shape: Username, required: true, location_name: "Username"))
     CredentialPair.add_member(:password, Shapes::ShapeRef.new(shape: Password, required: true, location_name: "Password"))
     CredentialPair.add_member(:alternate_data_source_parameters, Shapes::ShapeRef.new(shape: DataSourceParametersList, location_name: "AlternateDataSourceParameters"))
@@ -712,6 +798,11 @@ module Aws::QuickSight
     DashboardVersionSummary.struct_class = Types::DashboardVersionSummary
 
     DashboardVersionSummaryList.member = Shapes::ShapeRef.new(shape: DashboardVersionSummary)
+
+    DataColorPalette.add_member(:colors, Shapes::ShapeRef.new(shape: ColorList, location_name: "Colors"))
+    DataColorPalette.add_member(:min_max_gradient, Shapes::ShapeRef.new(shape: ColorList, location_name: "MinMaxGradient"))
+    DataColorPalette.add_member(:empty_fill_color, Shapes::ShapeRef.new(shape: HexColor, location_name: "EmptyFillColor"))
+    DataColorPalette.struct_class = Types::DataColorPalette
 
     DataSet.add_member(:arn, Shapes::ShapeRef.new(shape: Arn, location_name: "Arn"))
     DataSet.add_member(:data_set_id, Shapes::ShapeRef.new(shape: ResourceId, location_name: "DataSetId"))
@@ -898,6 +989,29 @@ module Aws::QuickSight
     DeleteTemplateResponse.add_member(:status, Shapes::ShapeRef.new(shape: StatusCode, location: "statusCode", location_name: "Status"))
     DeleteTemplateResponse.struct_class = Types::DeleteTemplateResponse
 
+    DeleteThemeAliasRequest.add_member(:aws_account_id, Shapes::ShapeRef.new(shape: AwsAccountId, required: true, location: "uri", location_name: "AwsAccountId"))
+    DeleteThemeAliasRequest.add_member(:theme_id, Shapes::ShapeRef.new(shape: RestrictiveResourceId, required: true, location: "uri", location_name: "ThemeId"))
+    DeleteThemeAliasRequest.add_member(:alias_name, Shapes::ShapeRef.new(shape: AliasName, required: true, location: "uri", location_name: "AliasName"))
+    DeleteThemeAliasRequest.struct_class = Types::DeleteThemeAliasRequest
+
+    DeleteThemeAliasResponse.add_member(:alias_name, Shapes::ShapeRef.new(shape: AliasName, location_name: "AliasName"))
+    DeleteThemeAliasResponse.add_member(:arn, Shapes::ShapeRef.new(shape: Arn, location_name: "Arn"))
+    DeleteThemeAliasResponse.add_member(:request_id, Shapes::ShapeRef.new(shape: String, location_name: "RequestId"))
+    DeleteThemeAliasResponse.add_member(:status, Shapes::ShapeRef.new(shape: StatusCode, location: "statusCode", location_name: "Status"))
+    DeleteThemeAliasResponse.add_member(:theme_id, Shapes::ShapeRef.new(shape: RestrictiveResourceId, location_name: "ThemeId"))
+    DeleteThemeAliasResponse.struct_class = Types::DeleteThemeAliasResponse
+
+    DeleteThemeRequest.add_member(:aws_account_id, Shapes::ShapeRef.new(shape: AwsAccountId, required: true, location: "uri", location_name: "AwsAccountId"))
+    DeleteThemeRequest.add_member(:theme_id, Shapes::ShapeRef.new(shape: RestrictiveResourceId, required: true, location: "uri", location_name: "ThemeId"))
+    DeleteThemeRequest.add_member(:version_number, Shapes::ShapeRef.new(shape: VersionNumber, location: "querystring", location_name: "version-number"))
+    DeleteThemeRequest.struct_class = Types::DeleteThemeRequest
+
+    DeleteThemeResponse.add_member(:arn, Shapes::ShapeRef.new(shape: Arn, location_name: "Arn"))
+    DeleteThemeResponse.add_member(:request_id, Shapes::ShapeRef.new(shape: String, location_name: "RequestId"))
+    DeleteThemeResponse.add_member(:status, Shapes::ShapeRef.new(shape: StatusCode, location: "statusCode", location_name: "Status"))
+    DeleteThemeResponse.add_member(:theme_id, Shapes::ShapeRef.new(shape: RestrictiveResourceId, location_name: "ThemeId"))
+    DeleteThemeResponse.struct_class = Types::DeleteThemeResponse
+
     DeleteUserByPrincipalIdRequest.add_member(:principal_id, Shapes::ShapeRef.new(shape: String, required: true, location: "uri", location_name: "PrincipalId"))
     DeleteUserByPrincipalIdRequest.add_member(:aws_account_id, Shapes::ShapeRef.new(shape: AwsAccountId, required: true, location: "uri", location_name: "AwsAccountId"))
     DeleteUserByPrincipalIdRequest.add_member(:namespace, Shapes::ShapeRef.new(shape: Namespace, required: true, location: "uri", location_name: "Namespace"))
@@ -1037,7 +1151,40 @@ module Aws::QuickSight
 
     DescribeTemplateResponse.add_member(:template, Shapes::ShapeRef.new(shape: Template, location_name: "Template"))
     DescribeTemplateResponse.add_member(:status, Shapes::ShapeRef.new(shape: StatusCode, location: "statusCode", location_name: "Status"))
+    DescribeTemplateResponse.add_member(:request_id, Shapes::ShapeRef.new(shape: String, location_name: "RequestId"))
     DescribeTemplateResponse.struct_class = Types::DescribeTemplateResponse
+
+    DescribeThemeAliasRequest.add_member(:aws_account_id, Shapes::ShapeRef.new(shape: AwsAccountId, required: true, location: "uri", location_name: "AwsAccountId"))
+    DescribeThemeAliasRequest.add_member(:theme_id, Shapes::ShapeRef.new(shape: RestrictiveResourceId, required: true, location: "uri", location_name: "ThemeId"))
+    DescribeThemeAliasRequest.add_member(:alias_name, Shapes::ShapeRef.new(shape: AliasName, required: true, location: "uri", location_name: "AliasName"))
+    DescribeThemeAliasRequest.struct_class = Types::DescribeThemeAliasRequest
+
+    DescribeThemeAliasResponse.add_member(:theme_alias, Shapes::ShapeRef.new(shape: ThemeAlias, location_name: "ThemeAlias"))
+    DescribeThemeAliasResponse.add_member(:status, Shapes::ShapeRef.new(shape: StatusCode, location: "statusCode", location_name: "Status"))
+    DescribeThemeAliasResponse.add_member(:request_id, Shapes::ShapeRef.new(shape: String, location_name: "RequestId"))
+    DescribeThemeAliasResponse.struct_class = Types::DescribeThemeAliasResponse
+
+    DescribeThemePermissionsRequest.add_member(:aws_account_id, Shapes::ShapeRef.new(shape: AwsAccountId, required: true, location: "uri", location_name: "AwsAccountId"))
+    DescribeThemePermissionsRequest.add_member(:theme_id, Shapes::ShapeRef.new(shape: RestrictiveResourceId, required: true, location: "uri", location_name: "ThemeId"))
+    DescribeThemePermissionsRequest.struct_class = Types::DescribeThemePermissionsRequest
+
+    DescribeThemePermissionsResponse.add_member(:theme_id, Shapes::ShapeRef.new(shape: RestrictiveResourceId, location_name: "ThemeId"))
+    DescribeThemePermissionsResponse.add_member(:theme_arn, Shapes::ShapeRef.new(shape: Arn, location_name: "ThemeArn"))
+    DescribeThemePermissionsResponse.add_member(:permissions, Shapes::ShapeRef.new(shape: ResourcePermissionList, location_name: "Permissions"))
+    DescribeThemePermissionsResponse.add_member(:request_id, Shapes::ShapeRef.new(shape: String, location_name: "RequestId"))
+    DescribeThemePermissionsResponse.add_member(:status, Shapes::ShapeRef.new(shape: StatusCode, location: "statusCode", location_name: "Status"))
+    DescribeThemePermissionsResponse.struct_class = Types::DescribeThemePermissionsResponse
+
+    DescribeThemeRequest.add_member(:aws_account_id, Shapes::ShapeRef.new(shape: AwsAndAccountId, required: true, location: "uri", location_name: "AwsAccountId"))
+    DescribeThemeRequest.add_member(:theme_id, Shapes::ShapeRef.new(shape: RestrictiveResourceId, required: true, location: "uri", location_name: "ThemeId"))
+    DescribeThemeRequest.add_member(:version_number, Shapes::ShapeRef.new(shape: VersionNumber, location: "querystring", location_name: "version-number"))
+    DescribeThemeRequest.add_member(:alias_name, Shapes::ShapeRef.new(shape: AliasName, location: "querystring", location_name: "alias-name"))
+    DescribeThemeRequest.struct_class = Types::DescribeThemeRequest
+
+    DescribeThemeResponse.add_member(:theme, Shapes::ShapeRef.new(shape: Theme, location_name: "Theme"))
+    DescribeThemeResponse.add_member(:status, Shapes::ShapeRef.new(shape: StatusCode, location: "statusCode", location_name: "Status"))
+    DescribeThemeResponse.add_member(:request_id, Shapes::ShapeRef.new(shape: String, location_name: "RequestId"))
+    DescribeThemeResponse.struct_class = Types::DescribeThemeResponse
 
     DescribeUserRequest.add_member(:user_name, Shapes::ShapeRef.new(shape: UserName, required: true, location: "uri", location_name: "UserName"))
     DescribeUserRequest.add_member(:aws_account_id, Shapes::ShapeRef.new(shape: AwsAccountId, required: true, location: "uri", location_name: "AwsAccountId"))
@@ -1097,6 +1244,9 @@ module Aws::QuickSight
     GroupMember.struct_class = Types::GroupMember
 
     GroupMemberList.member = Shapes::ShapeRef.new(shape: GroupMember)
+
+    GutterStyle.add_member(:show, Shapes::ShapeRef.new(shape: boolean, location_name: "Show", metadata: {"box"=>true}))
+    GutterStyle.struct_class = Types::GutterStyle
 
     IAMPolicyAssignment.add_member(:aws_account_id, Shapes::ShapeRef.new(shape: AwsAccountId, location_name: "AwsAccountId"))
     IAMPolicyAssignment.add_member(:assignment_id, Shapes::ShapeRef.new(shape: String, location_name: "AssignmentId"))
@@ -1325,6 +1475,42 @@ module Aws::QuickSight
     ListTemplatesResponse.add_member(:request_id, Shapes::ShapeRef.new(shape: String, location_name: "RequestId"))
     ListTemplatesResponse.struct_class = Types::ListTemplatesResponse
 
+    ListThemeAliasesRequest.add_member(:aws_account_id, Shapes::ShapeRef.new(shape: AwsAccountId, required: true, location: "uri", location_name: "AwsAccountId"))
+    ListThemeAliasesRequest.add_member(:theme_id, Shapes::ShapeRef.new(shape: RestrictiveResourceId, required: true, location: "uri", location_name: "ThemeId"))
+    ListThemeAliasesRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location: "querystring", location_name: "next-token"))
+    ListThemeAliasesRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location: "querystring", location_name: "max-result", metadata: {"box"=>true}))
+    ListThemeAliasesRequest.struct_class = Types::ListThemeAliasesRequest
+
+    ListThemeAliasesResponse.add_member(:theme_alias_list, Shapes::ShapeRef.new(shape: ThemeAliasList, location_name: "ThemeAliasList"))
+    ListThemeAliasesResponse.add_member(:status, Shapes::ShapeRef.new(shape: StatusCode, location: "statusCode", location_name: "Status"))
+    ListThemeAliasesResponse.add_member(:request_id, Shapes::ShapeRef.new(shape: String, location_name: "RequestId"))
+    ListThemeAliasesResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "NextToken"))
+    ListThemeAliasesResponse.struct_class = Types::ListThemeAliasesResponse
+
+    ListThemeVersionsRequest.add_member(:aws_account_id, Shapes::ShapeRef.new(shape: AwsAccountId, required: true, location: "uri", location_name: "AwsAccountId"))
+    ListThemeVersionsRequest.add_member(:theme_id, Shapes::ShapeRef.new(shape: RestrictiveResourceId, required: true, location: "uri", location_name: "ThemeId"))
+    ListThemeVersionsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location: "querystring", location_name: "next-token"))
+    ListThemeVersionsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location: "querystring", location_name: "max-results", metadata: {"box"=>true}))
+    ListThemeVersionsRequest.struct_class = Types::ListThemeVersionsRequest
+
+    ListThemeVersionsResponse.add_member(:theme_version_summary_list, Shapes::ShapeRef.new(shape: ThemeVersionSummaryList, location_name: "ThemeVersionSummaryList"))
+    ListThemeVersionsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "NextToken"))
+    ListThemeVersionsResponse.add_member(:status, Shapes::ShapeRef.new(shape: StatusCode, location: "statusCode", location_name: "Status"))
+    ListThemeVersionsResponse.add_member(:request_id, Shapes::ShapeRef.new(shape: String, location_name: "RequestId"))
+    ListThemeVersionsResponse.struct_class = Types::ListThemeVersionsResponse
+
+    ListThemesRequest.add_member(:aws_account_id, Shapes::ShapeRef.new(shape: AwsAccountId, required: true, location: "uri", location_name: "AwsAccountId"))
+    ListThemesRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location: "querystring", location_name: "next-token"))
+    ListThemesRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location: "querystring", location_name: "max-results", metadata: {"box"=>true}))
+    ListThemesRequest.add_member(:type, Shapes::ShapeRef.new(shape: ThemeType, location: "querystring", location_name: "type"))
+    ListThemesRequest.struct_class = Types::ListThemesRequest
+
+    ListThemesResponse.add_member(:theme_summary_list, Shapes::ShapeRef.new(shape: ThemeSummaryList, location_name: "ThemeSummaryList"))
+    ListThemesResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "NextToken"))
+    ListThemesResponse.add_member(:status, Shapes::ShapeRef.new(shape: StatusCode, location: "statusCode", location_name: "Status"))
+    ListThemesResponse.add_member(:request_id, Shapes::ShapeRef.new(shape: String, location_name: "RequestId"))
+    ListThemesResponse.struct_class = Types::ListThemesResponse
+
     ListUserGroupsRequest.add_member(:user_name, Shapes::ShapeRef.new(shape: UserName, required: true, location: "uri", location_name: "UserName"))
     ListUserGroupsRequest.add_member(:aws_account_id, Shapes::ShapeRef.new(shape: AwsAccountId, required: true, location: "uri", location_name: "AwsAccountId"))
     ListUserGroupsRequest.add_member(:namespace, Shapes::ShapeRef.new(shape: Namespace, required: true, location: "uri", location_name: "Namespace"))
@@ -1367,6 +1553,9 @@ module Aws::QuickSight
     ManifestFileLocation.add_member(:bucket, Shapes::ShapeRef.new(shape: S3Bucket, required: true, location_name: "Bucket"))
     ManifestFileLocation.add_member(:key, Shapes::ShapeRef.new(shape: S3Key, required: true, location_name: "Key"))
     ManifestFileLocation.struct_class = Types::ManifestFileLocation
+
+    MarginStyle.add_member(:show, Shapes::ShapeRef.new(shape: boolean, location_name: "Show", metadata: {"box"=>true}))
+    MarginStyle.struct_class = Types::MarginStyle
 
     MariaDbParameters.add_member(:host, Shapes::ShapeRef.new(shape: Host, required: true, location_name: "Host"))
     MariaDbParameters.add_member(:port, Shapes::ShapeRef.new(shape: Port, required: true, location_name: "Port"))
@@ -1520,6 +1709,10 @@ module Aws::QuickSight
     SheetControlsOption.add_member(:visibility_state, Shapes::ShapeRef.new(shape: DashboardUIState, location_name: "VisibilityState"))
     SheetControlsOption.struct_class = Types::SheetControlsOption
 
+    SheetStyle.add_member(:tile, Shapes::ShapeRef.new(shape: TileStyle, location_name: "Tile"))
+    SheetStyle.add_member(:tile_layout, Shapes::ShapeRef.new(shape: TileLayoutStyle, location_name: "TileLayout"))
+    SheetStyle.struct_class = Types::SheetStyle
+
     SnowflakeParameters.add_member(:host, Shapes::ShapeRef.new(shape: Host, required: true, location_name: "Host"))
     SnowflakeParameters.add_member(:database, Shapes::ShapeRef.new(shape: Database, required: true, location_name: "Database"))
     SnowflakeParameters.add_member(:warehouse, Shapes::ShapeRef.new(shape: Warehouse, required: true, location_name: "Warehouse"))
@@ -1630,9 +1823,72 @@ module Aws::QuickSight
     TeradataParameters.add_member(:database, Shapes::ShapeRef.new(shape: Database, required: true, location_name: "Database"))
     TeradataParameters.struct_class = Types::TeradataParameters
 
+    Theme.add_member(:arn, Shapes::ShapeRef.new(shape: Arn, location_name: "Arn"))
+    Theme.add_member(:name, Shapes::ShapeRef.new(shape: ThemeName, location_name: "Name"))
+    Theme.add_member(:theme_id, Shapes::ShapeRef.new(shape: RestrictiveResourceId, location_name: "ThemeId"))
+    Theme.add_member(:version, Shapes::ShapeRef.new(shape: ThemeVersion, location_name: "Version"))
+    Theme.add_member(:created_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "CreatedTime"))
+    Theme.add_member(:last_updated_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "LastUpdatedTime"))
+    Theme.add_member(:type, Shapes::ShapeRef.new(shape: ThemeType, location_name: "Type"))
+    Theme.struct_class = Types::Theme
+
+    ThemeAlias.add_member(:arn, Shapes::ShapeRef.new(shape: Arn, location_name: "Arn"))
+    ThemeAlias.add_member(:alias_name, Shapes::ShapeRef.new(shape: AliasName, location_name: "AliasName"))
+    ThemeAlias.add_member(:theme_version_number, Shapes::ShapeRef.new(shape: VersionNumber, location_name: "ThemeVersionNumber"))
+    ThemeAlias.struct_class = Types::ThemeAlias
+
+    ThemeAliasList.member = Shapes::ShapeRef.new(shape: ThemeAlias)
+
+    ThemeConfiguration.add_member(:data_color_palette, Shapes::ShapeRef.new(shape: DataColorPalette, location_name: "DataColorPalette"))
+    ThemeConfiguration.add_member(:ui_color_palette, Shapes::ShapeRef.new(shape: UIColorPalette, location_name: "UIColorPalette"))
+    ThemeConfiguration.add_member(:sheet, Shapes::ShapeRef.new(shape: SheetStyle, location_name: "Sheet"))
+    ThemeConfiguration.struct_class = Types::ThemeConfiguration
+
+    ThemeError.add_member(:type, Shapes::ShapeRef.new(shape: ThemeErrorType, location_name: "Type"))
+    ThemeError.add_member(:message, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "Message"))
+    ThemeError.struct_class = Types::ThemeError
+
+    ThemeErrorList.member = Shapes::ShapeRef.new(shape: ThemeError)
+
+    ThemeSummary.add_member(:arn, Shapes::ShapeRef.new(shape: Arn, location_name: "Arn"))
+    ThemeSummary.add_member(:name, Shapes::ShapeRef.new(shape: ThemeName, location_name: "Name"))
+    ThemeSummary.add_member(:theme_id, Shapes::ShapeRef.new(shape: RestrictiveResourceId, location_name: "ThemeId"))
+    ThemeSummary.add_member(:latest_version_number, Shapes::ShapeRef.new(shape: VersionNumber, location_name: "LatestVersionNumber"))
+    ThemeSummary.add_member(:created_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "CreatedTime"))
+    ThemeSummary.add_member(:last_updated_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "LastUpdatedTime"))
+    ThemeSummary.struct_class = Types::ThemeSummary
+
+    ThemeSummaryList.member = Shapes::ShapeRef.new(shape: ThemeSummary)
+
+    ThemeVersion.add_member(:version_number, Shapes::ShapeRef.new(shape: VersionNumber, location_name: "VersionNumber"))
+    ThemeVersion.add_member(:arn, Shapes::ShapeRef.new(shape: Arn, location_name: "Arn"))
+    ThemeVersion.add_member(:description, Shapes::ShapeRef.new(shape: VersionDescription, location_name: "Description"))
+    ThemeVersion.add_member(:base_theme_id, Shapes::ShapeRef.new(shape: RestrictiveResourceId, location_name: "BaseThemeId"))
+    ThemeVersion.add_member(:created_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "CreatedTime"))
+    ThemeVersion.add_member(:configuration, Shapes::ShapeRef.new(shape: ThemeConfiguration, location_name: "Configuration"))
+    ThemeVersion.add_member(:errors, Shapes::ShapeRef.new(shape: ThemeErrorList, location_name: "Errors"))
+    ThemeVersion.add_member(:status, Shapes::ShapeRef.new(shape: ResourceStatus, location_name: "Status"))
+    ThemeVersion.struct_class = Types::ThemeVersion
+
+    ThemeVersionSummary.add_member(:version_number, Shapes::ShapeRef.new(shape: VersionNumber, location_name: "VersionNumber"))
+    ThemeVersionSummary.add_member(:arn, Shapes::ShapeRef.new(shape: Arn, location_name: "Arn"))
+    ThemeVersionSummary.add_member(:description, Shapes::ShapeRef.new(shape: VersionDescription, location_name: "Description"))
+    ThemeVersionSummary.add_member(:created_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "CreatedTime"))
+    ThemeVersionSummary.add_member(:status, Shapes::ShapeRef.new(shape: ResourceStatus, location_name: "Status"))
+    ThemeVersionSummary.struct_class = Types::ThemeVersionSummary
+
+    ThemeVersionSummaryList.member = Shapes::ShapeRef.new(shape: ThemeVersionSummary)
+
     ThrottlingException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "Message"))
     ThrottlingException.add_member(:request_id, Shapes::ShapeRef.new(shape: String, location_name: "RequestId"))
     ThrottlingException.struct_class = Types::ThrottlingException
+
+    TileLayoutStyle.add_member(:gutter, Shapes::ShapeRef.new(shape: GutterStyle, location_name: "Gutter"))
+    TileLayoutStyle.add_member(:margin, Shapes::ShapeRef.new(shape: MarginStyle, location_name: "Margin"))
+    TileLayoutStyle.struct_class = Types::TileLayoutStyle
+
+    TileStyle.add_member(:border, Shapes::ShapeRef.new(shape: BorderStyle, location_name: "Border"))
+    TileStyle.struct_class = Types::TileStyle
 
     TimestampList.member = Shapes::ShapeRef.new(shape: Timestamp)
 
@@ -1649,6 +1905,24 @@ module Aws::QuickSight
     TwitterParameters.add_member(:query, Shapes::ShapeRef.new(shape: Query, required: true, location_name: "Query"))
     TwitterParameters.add_member(:max_rows, Shapes::ShapeRef.new(shape: PositiveInteger, required: true, location_name: "MaxRows"))
     TwitterParameters.struct_class = Types::TwitterParameters
+
+    UIColorPalette.add_member(:primary_foreground, Shapes::ShapeRef.new(shape: HexColor, location_name: "PrimaryForeground"))
+    UIColorPalette.add_member(:primary_background, Shapes::ShapeRef.new(shape: HexColor, location_name: "PrimaryBackground"))
+    UIColorPalette.add_member(:secondary_foreground, Shapes::ShapeRef.new(shape: HexColor, location_name: "SecondaryForeground"))
+    UIColorPalette.add_member(:secondary_background, Shapes::ShapeRef.new(shape: HexColor, location_name: "SecondaryBackground"))
+    UIColorPalette.add_member(:accent, Shapes::ShapeRef.new(shape: HexColor, location_name: "Accent"))
+    UIColorPalette.add_member(:accent_foreground, Shapes::ShapeRef.new(shape: HexColor, location_name: "AccentForeground"))
+    UIColorPalette.add_member(:danger, Shapes::ShapeRef.new(shape: HexColor, location_name: "Danger"))
+    UIColorPalette.add_member(:danger_foreground, Shapes::ShapeRef.new(shape: HexColor, location_name: "DangerForeground"))
+    UIColorPalette.add_member(:warning, Shapes::ShapeRef.new(shape: HexColor, location_name: "Warning"))
+    UIColorPalette.add_member(:warning_foreground, Shapes::ShapeRef.new(shape: HexColor, location_name: "WarningForeground"))
+    UIColorPalette.add_member(:success, Shapes::ShapeRef.new(shape: HexColor, location_name: "Success"))
+    UIColorPalette.add_member(:success_foreground, Shapes::ShapeRef.new(shape: HexColor, location_name: "SuccessForeground"))
+    UIColorPalette.add_member(:dimension, Shapes::ShapeRef.new(shape: HexColor, location_name: "Dimension"))
+    UIColorPalette.add_member(:dimension_foreground, Shapes::ShapeRef.new(shape: HexColor, location_name: "DimensionForeground"))
+    UIColorPalette.add_member(:measure, Shapes::ShapeRef.new(shape: HexColor, location_name: "Measure"))
+    UIColorPalette.add_member(:measure_foreground, Shapes::ShapeRef.new(shape: HexColor, location_name: "MeasureForeground"))
+    UIColorPalette.struct_class = Types::UIColorPalette
 
     UnsupportedUserEditionException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "Message"))
     UnsupportedUserEditionException.add_member(:request_id, Shapes::ShapeRef.new(shape: String, location_name: "RequestId"))
@@ -1693,6 +1967,7 @@ module Aws::QuickSight
     UpdateDashboardRequest.add_member(:parameters, Shapes::ShapeRef.new(shape: Parameters, location_name: "Parameters"))
     UpdateDashboardRequest.add_member(:version_description, Shapes::ShapeRef.new(shape: VersionDescription, location_name: "VersionDescription"))
     UpdateDashboardRequest.add_member(:dashboard_publish_options, Shapes::ShapeRef.new(shape: DashboardPublishOptions, location_name: "DashboardPublishOptions"))
+    UpdateDashboardRequest.add_member(:theme_arn, Shapes::ShapeRef.new(shape: Arn, location_name: "ThemeArn"))
     UpdateDashboardRequest.struct_class = Types::UpdateDashboardRequest
 
     UpdateDashboardResponse.add_member(:arn, Shapes::ShapeRef.new(shape: Arn, location_name: "Arn"))
@@ -1829,6 +2104,46 @@ module Aws::QuickSight
     UpdateTemplateResponse.add_member(:status, Shapes::ShapeRef.new(shape: StatusCode, location: "statusCode", location_name: "Status"))
     UpdateTemplateResponse.add_member(:request_id, Shapes::ShapeRef.new(shape: String, location_name: "RequestId"))
     UpdateTemplateResponse.struct_class = Types::UpdateTemplateResponse
+
+    UpdateThemeAliasRequest.add_member(:aws_account_id, Shapes::ShapeRef.new(shape: AwsAccountId, required: true, location: "uri", location_name: "AwsAccountId"))
+    UpdateThemeAliasRequest.add_member(:theme_id, Shapes::ShapeRef.new(shape: RestrictiveResourceId, required: true, location: "uri", location_name: "ThemeId"))
+    UpdateThemeAliasRequest.add_member(:alias_name, Shapes::ShapeRef.new(shape: AliasName, required: true, location: "uri", location_name: "AliasName"))
+    UpdateThemeAliasRequest.add_member(:theme_version_number, Shapes::ShapeRef.new(shape: VersionNumber, required: true, location_name: "ThemeVersionNumber"))
+    UpdateThemeAliasRequest.struct_class = Types::UpdateThemeAliasRequest
+
+    UpdateThemeAliasResponse.add_member(:theme_alias, Shapes::ShapeRef.new(shape: ThemeAlias, location_name: "ThemeAlias"))
+    UpdateThemeAliasResponse.add_member(:status, Shapes::ShapeRef.new(shape: StatusCode, location: "statusCode", location_name: "Status"))
+    UpdateThemeAliasResponse.add_member(:request_id, Shapes::ShapeRef.new(shape: String, location_name: "RequestId"))
+    UpdateThemeAliasResponse.struct_class = Types::UpdateThemeAliasResponse
+
+    UpdateThemePermissionsRequest.add_member(:aws_account_id, Shapes::ShapeRef.new(shape: AwsAccountId, required: true, location: "uri", location_name: "AwsAccountId"))
+    UpdateThemePermissionsRequest.add_member(:theme_id, Shapes::ShapeRef.new(shape: RestrictiveResourceId, required: true, location: "uri", location_name: "ThemeId"))
+    UpdateThemePermissionsRequest.add_member(:grant_permissions, Shapes::ShapeRef.new(shape: UpdateResourcePermissionList, location_name: "GrantPermissions"))
+    UpdateThemePermissionsRequest.add_member(:revoke_permissions, Shapes::ShapeRef.new(shape: UpdateResourcePermissionList, location_name: "RevokePermissions"))
+    UpdateThemePermissionsRequest.struct_class = Types::UpdateThemePermissionsRequest
+
+    UpdateThemePermissionsResponse.add_member(:theme_id, Shapes::ShapeRef.new(shape: RestrictiveResourceId, location_name: "ThemeId"))
+    UpdateThemePermissionsResponse.add_member(:theme_arn, Shapes::ShapeRef.new(shape: Arn, location_name: "ThemeArn"))
+    UpdateThemePermissionsResponse.add_member(:permissions, Shapes::ShapeRef.new(shape: ResourcePermissionList, location_name: "Permissions"))
+    UpdateThemePermissionsResponse.add_member(:request_id, Shapes::ShapeRef.new(shape: String, location_name: "RequestId"))
+    UpdateThemePermissionsResponse.add_member(:status, Shapes::ShapeRef.new(shape: StatusCode, location: "statusCode", location_name: "Status"))
+    UpdateThemePermissionsResponse.struct_class = Types::UpdateThemePermissionsResponse
+
+    UpdateThemeRequest.add_member(:aws_account_id, Shapes::ShapeRef.new(shape: AwsAccountId, required: true, location: "uri", location_name: "AwsAccountId"))
+    UpdateThemeRequest.add_member(:theme_id, Shapes::ShapeRef.new(shape: RestrictiveResourceId, required: true, location: "uri", location_name: "ThemeId"))
+    UpdateThemeRequest.add_member(:name, Shapes::ShapeRef.new(shape: ThemeName, location_name: "Name"))
+    UpdateThemeRequest.add_member(:base_theme_id, Shapes::ShapeRef.new(shape: RestrictiveResourceId, required: true, location_name: "BaseThemeId"))
+    UpdateThemeRequest.add_member(:version_description, Shapes::ShapeRef.new(shape: VersionDescription, location_name: "VersionDescription"))
+    UpdateThemeRequest.add_member(:configuration, Shapes::ShapeRef.new(shape: ThemeConfiguration, location_name: "Configuration"))
+    UpdateThemeRequest.struct_class = Types::UpdateThemeRequest
+
+    UpdateThemeResponse.add_member(:theme_id, Shapes::ShapeRef.new(shape: RestrictiveResourceId, location_name: "ThemeId"))
+    UpdateThemeResponse.add_member(:arn, Shapes::ShapeRef.new(shape: Arn, location_name: "Arn"))
+    UpdateThemeResponse.add_member(:version_arn, Shapes::ShapeRef.new(shape: Arn, location_name: "VersionArn"))
+    UpdateThemeResponse.add_member(:creation_status, Shapes::ShapeRef.new(shape: ResourceStatus, location_name: "CreationStatus"))
+    UpdateThemeResponse.add_member(:status, Shapes::ShapeRef.new(shape: StatusCode, location: "statusCode", location_name: "Status"))
+    UpdateThemeResponse.add_member(:request_id, Shapes::ShapeRef.new(shape: String, location_name: "RequestId"))
+    UpdateThemeResponse.struct_class = Types::UpdateThemeResponse
 
     UpdateUserRequest.add_member(:user_name, Shapes::ShapeRef.new(shape: UserName, required: true, location: "uri", location_name: "UserName"))
     UpdateUserRequest.add_member(:aws_account_id, Shapes::ShapeRef.new(shape: AwsAccountId, required: true, location: "uri", location_name: "AwsAccountId"))
@@ -2017,6 +2332,7 @@ module Aws::QuickSight
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
         o.errors << Shapes::ShapeRef.new(shape: UnsupportedUserEditionException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
         o.errors << Shapes::ShapeRef.new(shape: InternalFailureException)
       end)
 
@@ -2031,6 +2347,39 @@ module Aws::QuickSight
         o.errors << Shapes::ShapeRef.new(shape: ConflictException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceExistsException)
         o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: UnsupportedUserEditionException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalFailureException)
+      end)
+
+      api.add_operation(:create_theme, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "CreateTheme"
+        o.http_method = "POST"
+        o.http_request_uri = "/accounts/{AwsAccountId}/themes/{ThemeId}"
+        o.input = Shapes::ShapeRef.new(shape: CreateThemeRequest)
+        o.output = Shapes::ShapeRef.new(shape: CreateThemeResponse)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValueException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceExistsException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: UnsupportedUserEditionException)
+        o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalFailureException)
+      end)
+
+      api.add_operation(:create_theme_alias, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "CreateThemeAlias"
+        o.http_method = "POST"
+        o.http_request_uri = "/accounts/{AwsAccountId}/themes/{ThemeId}/aliases/{AliasName}"
+        o.input = Shapes::ShapeRef.new(shape: CreateThemeAliasRequest)
+        o.output = Shapes::ShapeRef.new(shape: CreateThemeAliasResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValueException)
+        o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceExistsException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: UnsupportedUserEditionException)
         o.errors << Shapes::ShapeRef.new(shape: InternalFailureException)
       end)
@@ -2143,6 +2492,36 @@ module Aws::QuickSight
         o.output = Shapes::ShapeRef.new(shape: DeleteTemplateAliasResponse)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: UnsupportedUserEditionException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalFailureException)
+      end)
+
+      api.add_operation(:delete_theme, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DeleteTheme"
+        o.http_method = "DELETE"
+        o.http_request_uri = "/accounts/{AwsAccountId}/themes/{ThemeId}"
+        o.input = Shapes::ShapeRef.new(shape: DeleteThemeRequest)
+        o.output = Shapes::ShapeRef.new(shape: DeleteThemeResponse)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValueException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: UnsupportedUserEditionException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalFailureException)
+      end)
+
+      api.add_operation(:delete_theme_alias, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DeleteThemeAlias"
+        o.http_method = "DELETE"
+        o.http_request_uri = "/accounts/{AwsAccountId}/themes/{ThemeId}/aliases/{AliasName}"
+        o.input = Shapes::ShapeRef.new(shape: DeleteThemeAliasRequest)
+        o.output = Shapes::ShapeRef.new(shape: DeleteThemeAliasResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValueException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: UnsupportedUserEditionException)
         o.errors << Shapes::ShapeRef.new(shape: InternalFailureException)
       end)
@@ -2335,6 +2714,49 @@ module Aws::QuickSight
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValueException)
         o.errors << Shapes::ShapeRef.new(shape: ConflictException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: UnsupportedUserEditionException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalFailureException)
+      end)
+
+      api.add_operation(:describe_theme, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DescribeTheme"
+        o.http_method = "GET"
+        o.http_request_uri = "/accounts/{AwsAccountId}/themes/{ThemeId}"
+        o.input = Shapes::ShapeRef.new(shape: DescribeThemeRequest)
+        o.output = Shapes::ShapeRef.new(shape: DescribeThemeResponse)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValueException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceExistsException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: UnsupportedUserEditionException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalFailureException)
+      end)
+
+      api.add_operation(:describe_theme_alias, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DescribeThemeAlias"
+        o.http_method = "GET"
+        o.http_request_uri = "/accounts/{AwsAccountId}/themes/{ThemeId}/aliases/{AliasName}"
+        o.input = Shapes::ShapeRef.new(shape: DescribeThemeAliasRequest)
+        o.output = Shapes::ShapeRef.new(shape: DescribeThemeAliasResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValueException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: UnsupportedUserEditionException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalFailureException)
+      end)
+
+      api.add_operation(:describe_theme_permissions, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DescribeThemePermissions"
+        o.http_method = "GET"
+        o.http_request_uri = "/accounts/{AwsAccountId}/themes/{ThemeId}/permissions"
+        o.input = Shapes::ShapeRef.new(shape: DescribeThemePermissionsRequest)
+        o.output = Shapes::ShapeRef.new(shape: DescribeThemePermissionsResponse)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValueException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: UnsupportedUserEditionException)
         o.errors << Shapes::ShapeRef.new(shape: InternalFailureException)
       end)
@@ -2549,6 +2971,7 @@ module Aws::QuickSight
         o.http_request_uri = "/accounts/{AwsAccountId}/templates/{TemplateId}/aliases"
         o.input = Shapes::ShapeRef.new(shape: ListTemplateAliasesRequest)
         o.output = Shapes::ShapeRef.new(shape: ListTemplateAliasesResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidNextTokenException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: UnsupportedUserEditionException)
@@ -2599,6 +3022,51 @@ module Aws::QuickSight
             "next_token" => "next_token"
           }
         )
+      end)
+
+      api.add_operation(:list_theme_aliases, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListThemeAliases"
+        o.http_method = "GET"
+        o.http_request_uri = "/accounts/{AwsAccountId}/themes/{ThemeId}/aliases"
+        o.input = Shapes::ShapeRef.new(shape: ListThemeAliasesRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListThemeAliasesResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidNextTokenException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValueException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: UnsupportedUserEditionException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalFailureException)
+      end)
+
+      api.add_operation(:list_theme_versions, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListThemeVersions"
+        o.http_method = "GET"
+        o.http_request_uri = "/accounts/{AwsAccountId}/themes/{ThemeId}/versions"
+        o.input = Shapes::ShapeRef.new(shape: ListThemeVersionsRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListThemeVersionsResponse)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidNextTokenException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValueException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: UnsupportedUserEditionException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalFailureException)
+      end)
+
+      api.add_operation(:list_themes, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListThemes"
+        o.http_method = "GET"
+        o.http_request_uri = "/accounts/{AwsAccountId}/themes"
+        o.input = Shapes::ShapeRef.new(shape: ListThemesRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListThemesResponse)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValueException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidNextTokenException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: UnsupportedUserEditionException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalFailureException)
       end)
 
       api.add_operation(:list_user_groups, Seahorse::Model::Operation.new.tap do |o|
@@ -2851,6 +3319,7 @@ module Aws::QuickSight
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: ConflictException)
         o.errors << Shapes::ShapeRef.new(shape: UnsupportedUserEditionException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
         o.errors << Shapes::ShapeRef.new(shape: InternalFailureException)
       end)
 
@@ -2864,6 +3333,51 @@ module Aws::QuickSight
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValueException)
         o.errors << Shapes::ShapeRef.new(shape: ConflictException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: UnsupportedUserEditionException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalFailureException)
+      end)
+
+      api.add_operation(:update_theme, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "UpdateTheme"
+        o.http_method = "PUT"
+        o.http_request_uri = "/accounts/{AwsAccountId}/themes/{ThemeId}"
+        o.input = Shapes::ShapeRef.new(shape: UpdateThemeRequest)
+        o.output = Shapes::ShapeRef.new(shape: UpdateThemeResponse)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValueException)
+        o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceExistsException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: UnsupportedUserEditionException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalFailureException)
+      end)
+
+      api.add_operation(:update_theme_alias, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "UpdateThemeAlias"
+        o.http_method = "PUT"
+        o.http_request_uri = "/accounts/{AwsAccountId}/themes/{ThemeId}/aliases/{AliasName}"
+        o.input = Shapes::ShapeRef.new(shape: UpdateThemeAliasRequest)
+        o.output = Shapes::ShapeRef.new(shape: UpdateThemeAliasResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValueException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceExistsException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: UnsupportedUserEditionException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalFailureException)
+      end)
+
+      api.add_operation(:update_theme_permissions, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "UpdateThemePermissions"
+        o.http_method = "PUT"
+        o.http_request_uri = "/accounts/{AwsAccountId}/themes/{ThemeId}/permissions"
+        o.input = Shapes::ShapeRef.new(shape: UpdateThemePermissionsRequest)
+        o.output = Shapes::ShapeRef.new(shape: UpdateThemePermissionsResponse)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValueException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: UnsupportedUserEditionException)
         o.errors << Shapes::ShapeRef.new(shape: InternalFailureException)
       end)

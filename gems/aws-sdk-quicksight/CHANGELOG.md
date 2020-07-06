@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.25.0 (2020-07-06)
+------------------
+
+* Feature - Add Theme APIs and update Dashboard APIs to support theme overrides.
+
 1.24.0 (2020-06-26)
 ------------------
 

@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.93.0 (2020-07-06)
+------------------
+
+* Feature - Adds support for Amazon RDS on AWS Outposts.
+
 1.92.0 (2020-07-02)
 ------------------
 

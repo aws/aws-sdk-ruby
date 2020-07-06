@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.7.0 (2020-07-06)
+------------------
+
+* Feature - This release supports optional start date and end date parameters for the GetAssetPropertyValueHistory API.
+
 1.6.0 (2020-06-23)
 ------------------
 
