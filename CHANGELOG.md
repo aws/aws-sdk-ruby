@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+2.11.542 (2020-07-06)
+------------------
+
 * Feature - Aws::IoTSiteWise - Updated the API for AWS IoT SiteWise.
 
 * Feature - Aws::QuickSight - Updated the API, and documentation for Amazon QuickSight.
