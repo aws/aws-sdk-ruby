@@ -24,6 +24,7 @@ each bucket. [Go here for more information](http://docs.aws.amazon.com/AmazonS3/
             :create_bucket, :list_buckets, :delete_bucket
           ]
           # Need 2 handlers so that the context can be set for other plugins
+          # and to remove :use_accelerate_endpoint from the params.
           handlers.add(
             OptionHandler, step: :initialize, operations: operations
           )
