@@ -18,7 +18,7 @@ def whitelist
     's3' => {
       'location_constraint.rb' => 14,
       'bucket.rb' => 147,
-      'presigned_post.rb' => 618,
+      'presigned_post.rb' => 622,
       'iad_regional_endpoint.rb' => 'SKIP_FILE'
     },
     's3control' => {
