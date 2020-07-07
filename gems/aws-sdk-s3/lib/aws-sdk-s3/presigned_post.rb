@@ -612,7 +612,11 @@ module Aws
         url = Aws::Partitions::EndpointProvider.resolve(@bucket_region, 's3')
         url = URI.parse(url)
         if Plugins::BucketDns.dns_compatible?(@bucket_name, _ssl = true)
-          url.host = "#{@bucket_name}.#{url.host}"
+          if @accelerate
+            url.host = "#{@bucket_name}.s3-accelerate.amazonaws.com"
+          else
+            url.host = "#{@bucket_name}.#{url.host}"
+          end
         else
           url.path = "/#{@bucket_name}"
         end
@@ -620,7 +624,6 @@ module Aws
           # keep legacy behavior by default
           url.host = Plugins::IADRegionalEndpoint.legacy_host(url.host)
         end
-        url.host = "#{@bucket_name}.s3-accelerate.amazonaws.com" if @accelerate
         url.to_s
       end
 
