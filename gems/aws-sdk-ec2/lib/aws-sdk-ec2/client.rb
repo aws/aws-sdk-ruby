@@ -12668,13 +12668,13 @@ module Aws::EC2
     #     Local Zones, use the name of the group associated with the Local
     #     Zone (for example, `us-west-2-lax-1`).
     #
-    #   * `message` - The Availability Zone or Local Zone message.
+    #   * `message` - The Zone message.
     #
     #   * `opt-in-status` - The opt in status (`opted-in`, and `not-opted-in`
     #     \| `opt-in-not-required`).
     #
-    #   * `region-name` - The name of the Region for the Availability Zone or
-    #     Local Zone (for example, `us-east-1`).
+    #   * `region-name` - The name of the Region for the Zone (for example,
+    #     `us-east-1`).
     #
     #   * `state` - The state of the Availability Zone or Local Zone
     #     (`available` \| `information` \| `impaired` \| `unavailable`).
@@ -12687,10 +12687,10 @@ module Aws::EC2
     #     `us-west-2-lax-1a`).
     #
     # @option params [Array<String>] :zone_names
-    #   The names of the Availability Zones and Local Zones.
+    #   The names of the Zones.
     #
     # @option params [Array<String>] :zone_ids
-    #   The IDs of the Availability Zones and Local Zones.
+    #   The IDs of the Zones.
     #
     # @option params [Boolean] :all_availability_zones
     #   Include all Availability Zones and Local Zones regardless of your opt
@@ -12779,6 +12779,9 @@ module Aws::EC2
     #   resp.availability_zones[0].zone_id #=> String
     #   resp.availability_zones[0].group_name #=> String
     #   resp.availability_zones[0].network_border_group #=> String
+    #   resp.availability_zones[0].zone_type #=> String
+    #   resp.availability_zones[0].parent_zone_name #=> String
+    #   resp.availability_zones[0].parent_zone_id #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeAvailabilityZones AWS API Documentation
     #
@@ -29084,12 +29087,11 @@ module Aws::EC2
 
     # Enables or disables an Availability Zone group for your account.
     #
-    # Use [describe-availability-zones][1] to view the value for
-    # `GroupName`.
+    # Use [ DescribeAvailabilityZones][1] to view the value for `GroupName`.
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/AWSEC2ApiDocReef/build/server-root/AWSEC2/latest/APIReference/API_DescribeAvailabilityZones.html
+    # [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_DescribeAvailabilityZones.html
     #
     # @option params [required, String] :group_name
     #   The name of the Availability Zone Group.
@@ -37733,7 +37735,7 @@ module Aws::EC2
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-ec2'
-      context[:gem_version] = '1.174.0'
+      context[:gem_version] = '1.175.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

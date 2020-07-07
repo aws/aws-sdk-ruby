@@ -888,6 +888,7 @@ module Aws::Glue
     #   resp.partitions[0].parameters #=> Hash
     #   resp.partitions[0].parameters["KeyString"] #=> String
     #   resp.partitions[0].last_analyzed_time #=> Time
+    #   resp.partitions[0].catalog_id #=> String
     #   resp.unprocessed_keys #=> Array
     #   resp.unprocessed_keys[0].values #=> Array
     #   resp.unprocessed_keys[0].values[0] #=> String
@@ -1475,6 +1476,10 @@ module Aws::Glue
     #           permissions: ["ALL"], # accepts ALL, SELECT, ALTER, DROP, DELETE, INSERT, CREATE_DATABASE, CREATE_TABLE, DATA_LOCATION_ACCESS
     #         },
     #       ],
+    #       target_database: {
+    #         catalog_id: "CatalogIdString",
+    #         database_name: "NameString",
+    #       },
     #     },
     #   })
     #
@@ -2374,6 +2379,11 @@ module Aws::Glue
     #       parameters: {
     #         "KeyString" => "ParametersMapValue",
     #       },
+    #       target_table: {
+    #         catalog_id: "CatalogIdString",
+    #         database_name: "NameString",
+    #         name: "NameString",
+    #       },
     #     },
     #   })
     #
@@ -2893,12 +2903,17 @@ module Aws::Glue
     # @option params [String] :policy_hash_condition
     #   The hash value returned when this policy was set.
     #
+    # @option params [String] :resource_arn
+    #   The ARN of the AWS Glue resource for the resource policy to be
+    #   deleted.
+    #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
     # @example Request syntax with placeholder values
     #
     #   resp = client.delete_resource_policy({
     #     policy_hash_condition: "HashString",
+    #     resource_arn: "GlueResourceArn",
     #   })
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/DeleteResourcePolicy AWS API Documentation
@@ -3800,6 +3815,9 @@ module Aws::Glue
     #   resp.database.create_table_default_permissions[0].principal.data_lake_principal_identifier #=> String
     #   resp.database.create_table_default_permissions[0].permissions #=> Array
     #   resp.database.create_table_default_permissions[0].permissions[0] #=> String, one of "ALL", "SELECT", "ALTER", "DROP", "DELETE", "INSERT", "CREATE_DATABASE", "CREATE_TABLE", "DATA_LOCATION_ACCESS"
+    #   resp.database.target_database.catalog_id #=> String
+    #   resp.database.target_database.database_name #=> String
+    #   resp.database.catalog_id #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/GetDatabase AWS API Documentation
     #
@@ -3822,6 +3840,16 @@ module Aws::Glue
     # @option params [Integer] :max_results
     #   The maximum number of databases to return in one response.
     #
+    # @option params [String] :resource_share_type
+    #   Allows you to specify that you want to list the databases shared with
+    #   your account. The allowable values are `FOREIGN` or `ALL`.
+    #
+    #   * If set to `FOREIGN`, will list the databases shared with your
+    #     account.
+    #
+    #   * If set to `ALL`, will list the databases shared with your account,
+    #     as well as the databases in yor local account.
+    #
     # @return [Types::GetDatabasesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::GetDatabasesResponse#database_list #database_list} => Array&lt;Types::Database&gt;
@@ -3835,6 +3863,7 @@ module Aws::Glue
     #     catalog_id: "CatalogIdString",
     #     next_token: "Token",
     #     max_results: 1,
+    #     resource_share_type: "FOREIGN", # accepts FOREIGN, ALL
     #   })
     #
     # @example Response structure
@@ -3850,6 +3879,9 @@ module Aws::Glue
     #   resp.database_list[0].create_table_default_permissions[0].principal.data_lake_principal_identifier #=> String
     #   resp.database_list[0].create_table_default_permissions[0].permissions #=> Array
     #   resp.database_list[0].create_table_default_permissions[0].permissions[0] #=> String, one of "ALL", "SELECT", "ALTER", "DROP", "DELETE", "INSERT", "CREATE_DATABASE", "CREATE_TABLE", "DATA_LOCATION_ACCESS"
+    #   resp.database_list[0].target_database.catalog_id #=> String
+    #   resp.database_list[0].target_database.database_name #=> String
+    #   resp.database_list[0].catalog_id #=> String
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/GetDatabases AWS API Documentation
@@ -4782,6 +4814,7 @@ module Aws::Glue
     #   resp.partition.parameters #=> Hash
     #   resp.partition.parameters["KeyString"] #=> String
     #   resp.partition.last_analyzed_time #=> Time
+    #   resp.partition.catalog_id #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/GetPartition AWS API Documentation
     #
@@ -4970,6 +5003,7 @@ module Aws::Glue
     #   resp.partitions[0].parameters #=> Hash
     #   resp.partitions[0].parameters["KeyString"] #=> String
     #   resp.partitions[0].last_analyzed_time #=> Time
+    #   resp.partitions[0].catalog_id #=> String
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/GetPartitions AWS API Documentation
@@ -5066,7 +5100,55 @@ module Aws::Glue
       req.send_request(options)
     end
 
+    # Retrieves the security configurations for the resource policies set on
+    # individual resources, and also the account-level policy.
+    #
+    # @option params [String] :next_token
+    #   A continuation token, if this is a continuation request.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum size of a list to return.
+    #
+    # @return [Types::GetResourcePoliciesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetResourcePoliciesResponse#get_resource_policies_response_list #get_resource_policies_response_list} => Array&lt;Types::GluePolicy&gt;
+    #   * {Types::GetResourcePoliciesResponse#next_token #next_token} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_resource_policies({
+    #     next_token: "Token",
+    #     max_results: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.get_resource_policies_response_list #=> Array
+    #   resp.get_resource_policies_response_list[0].policy_in_json #=> String
+    #   resp.get_resource_policies_response_list[0].policy_hash #=> String
+    #   resp.get_resource_policies_response_list[0].create_time #=> Time
+    #   resp.get_resource_policies_response_list[0].update_time #=> Time
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/GetResourcePolicies AWS API Documentation
+    #
+    # @overload get_resource_policies(params = {})
+    # @param [Hash] params ({})
+    def get_resource_policies(params = {}, options = {})
+      req = build_request(:get_resource_policies, params)
+      req.send_request(options)
+    end
+
     # Retrieves a specified resource policy.
+    #
+    # @option params [String] :resource_arn
+    #   The ARN of the AWS Glue resource for the resource policy to be
+    #   retrieved. For more information about AWS Glue resource ARNs, see the
+    #   [AWS Glue ARN string pattern][1]
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/glue/latest/dg/aws-glue-api-common.html#aws-glue-api-regex-aws-glue-arn-id
     #
     # @return [Types::GetResourcePolicyResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -5074,6 +5156,12 @@ module Aws::Glue
     #   * {Types::GetResourcePolicyResponse#policy_hash #policy_hash} => String
     #   * {Types::GetResourcePolicyResponse#create_time #create_time} => Time
     #   * {Types::GetResourcePolicyResponse#update_time #update_time} => Time
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_resource_policy({
+    #     resource_arn: "GlueResourceArn",
+    #   })
     #
     # @example Response structure
     #
@@ -5252,6 +5340,10 @@ module Aws::Glue
     #   resp.table.parameters["KeyString"] #=> String
     #   resp.table.created_by #=> String
     #   resp.table.is_registered_with_lake_formation #=> Boolean
+    #   resp.table.target_table.catalog_id #=> String
+    #   resp.table.target_table.database_name #=> String
+    #   resp.table.target_table.name #=> String
+    #   resp.table.catalog_id #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/GetTable AWS API Documentation
     #
@@ -5346,6 +5438,10 @@ module Aws::Glue
     #   resp.table_version.table.parameters["KeyString"] #=> String
     #   resp.table_version.table.created_by #=> String
     #   resp.table_version.table.is_registered_with_lake_formation #=> Boolean
+    #   resp.table_version.table.target_table.catalog_id #=> String
+    #   resp.table_version.table.target_table.database_name #=> String
+    #   resp.table_version.table.target_table.name #=> String
+    #   resp.table_version.table.catalog_id #=> String
     #   resp.table_version.version_id #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/GetTableVersion AWS API Documentation
@@ -5449,6 +5545,10 @@ module Aws::Glue
     #   resp.table_versions[0].table.parameters["KeyString"] #=> String
     #   resp.table_versions[0].table.created_by #=> String
     #   resp.table_versions[0].table.is_registered_with_lake_formation #=> Boolean
+    #   resp.table_versions[0].table.target_table.catalog_id #=> String
+    #   resp.table_versions[0].table.target_table.database_name #=> String
+    #   resp.table_versions[0].table.target_table.name #=> String
+    #   resp.table_versions[0].table.catalog_id #=> String
     #   resp.table_versions[0].version_id #=> String
     #   resp.next_token #=> String
     #
@@ -5553,6 +5653,10 @@ module Aws::Glue
     #   resp.table_list[0].parameters["KeyString"] #=> String
     #   resp.table_list[0].created_by #=> String
     #   resp.table_list[0].is_registered_with_lake_formation #=> Boolean
+    #   resp.table_list[0].target_table.catalog_id #=> String
+    #   resp.table_list[0].target_table.database_name #=> String
+    #   resp.table_list[0].target_table.name #=> String
+    #   resp.table_list[0].catalog_id #=> String
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/GetTables AWS API Documentation
@@ -5742,6 +5846,7 @@ module Aws::Glue
     #   resp.user_defined_function.resource_uris #=> Array
     #   resp.user_defined_function.resource_uris[0].resource_type #=> String, one of "JAR", "FILE", "ARCHIVE"
     #   resp.user_defined_function.resource_uris[0].uri #=> String
+    #   resp.user_defined_function.catalog_id #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/GetUserDefinedFunction AWS API Documentation
     #
@@ -5802,6 +5907,7 @@ module Aws::Glue
     #   resp.user_defined_functions[0].resource_uris #=> Array
     #   resp.user_defined_functions[0].resource_uris[0].resource_type #=> String, one of "JAR", "FILE", "ARCHIVE"
     #   resp.user_defined_functions[0].resource_uris[0].uri #=> String
+    #   resp.user_defined_functions[0].catalog_id #=> String
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/GetUserDefinedFunctions AWS API Documentation
@@ -6636,6 +6742,15 @@ module Aws::Glue
     # @option params [required, String] :policy_in_json
     #   Contains the policy document to set, in JSON format.
     #
+    # @option params [String] :resource_arn
+    #   The ARN of the AWS Glue resource for the resource policy to be set.
+    #   For more information about AWS Glue resource ARNs, see the [AWS Glue
+    #   ARN string pattern][1]
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/glue/latest/dg/aws-glue-api-common.html#aws-glue-api-regex-aws-glue-arn-id
+    #
     # @option params [String] :policy_hash_condition
     #   The hash value returned when the previous policy was set using
     #   `PutResourcePolicy`. Its purpose is to prevent concurrent
@@ -6648,6 +6763,17 @@ module Aws::Glue
     #   null value is used, the call will not depend on the existence of a
     #   policy.
     #
+    # @option params [String] :enable_hybrid
+    #   Allows you to specify if you want to use both resource-level and
+    #   account/catalog-level resource policies. A resource-level policy is a
+    #   policy attached to an individual resource such as a database or a
+    #   table.
+    #
+    #   The default value of `NO` indicates that resource-level policies
+    #   cannot co-exist with an account-level policy. A value of `YES` means
+    #   the use of both resource-level and account/catalog-level resource
+    #   policies is allowed.
+    #
     # @return [Types::PutResourcePolicyResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::PutResourcePolicyResponse#policy_hash #policy_hash} => String
@@ -6656,8 +6782,10 @@ module Aws::Glue
     #
     #   resp = client.put_resource_policy({
     #     policy_in_json: "PolicyJsonString", # required
+    #     resource_arn: "GlueResourceArn",
     #     policy_hash_condition: "HashString",
     #     policy_exists_condition: "MUST_EXIST", # accepts MUST_EXIST, NOT_EXIST, NONE
+    #     enable_hybrid: "TRUE", # accepts TRUE, FALSE
     #   })
     #
     # @example Response structure
@@ -6782,6 +6910,16 @@ module Aws::Glue
     # @option params [Integer] :max_results
     #   The maximum number of tables to return in a single response.
     #
+    # @option params [String] :resource_share_type
+    #   Allows you to specify that you want to search the tables shared with
+    #   your account. The allowable values are `FOREIGN` or `ALL`.
+    #
+    #   * If set to `FOREIGN`, will search the tables shared with your
+    #     account.
+    #
+    #   * If set to `ALL`, will search the tables shared with your account, as
+    #     well as the tables in yor local account.
+    #
     # @return [Types::SearchTablesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::SearchTablesResponse#next_token #next_token} => String
@@ -6809,6 +6947,7 @@ module Aws::Glue
     #       },
     #     ],
     #     max_results: 1,
+    #     resource_share_type: "FOREIGN", # accepts FOREIGN, ALL
     #   })
     #
     # @example Response structure
@@ -6866,6 +7005,10 @@ module Aws::Glue
     #   resp.table_list[0].parameters["KeyString"] #=> String
     #   resp.table_list[0].created_by #=> String
     #   resp.table_list[0].is_registered_with_lake_formation #=> Boolean
+    #   resp.table_list[0].target_table.catalog_id #=> String
+    #   resp.table_list[0].target_table.database_name #=> String
+    #   resp.table_list[0].target_table.name #=> String
+    #   resp.table_list[0].catalog_id #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/SearchTables AWS API Documentation
     #
@@ -8026,6 +8169,10 @@ module Aws::Glue
     #           permissions: ["ALL"], # accepts ALL, SELECT, ALTER, DROP, DELETE, INSERT, CREATE_DATABASE, CREATE_TABLE, DATA_LOCATION_ACCESS
     #         },
     #       ],
+    #       target_database: {
+    #         catalog_id: "CatalogIdString",
+    #         database_name: "NameString",
+    #       },
     #     },
     #   })
     #
@@ -8471,6 +8618,11 @@ module Aws::Glue
     #       parameters: {
     #         "KeyString" => "ParametersMapValue",
     #       },
+    #       target_table: {
+    #         catalog_id: "CatalogIdString",
+    #         database_name: "NameString",
+    #         name: "NameString",
+    #       },
     #     },
     #     skip_archive: false,
     #   })
@@ -8667,7 +8819,7 @@ module Aws::Glue
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-glue'
-      context[:gem_version] = '1.62.0'
+      context[:gem_version] = '1.63.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

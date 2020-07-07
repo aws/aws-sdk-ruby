@@ -23,6 +23,8 @@ module Aws::EFS
     AvailabilityZoneId = Shapes::StringShape.new(name: 'AvailabilityZoneId')
     AvailabilityZoneName = Shapes::StringShape.new(name: 'AvailabilityZoneName')
     AwsAccountId = Shapes::StringShape.new(name: 'AwsAccountId')
+    BackupPolicy = Shapes::StructureShape.new(name: 'BackupPolicy')
+    BackupPolicyDescription = Shapes::StructureShape.new(name: 'BackupPolicyDescription')
     BadRequest = Shapes::StructureShape.new(name: 'BadRequest')
     BypassPolicyLockoutSafetyCheck = Shapes::BooleanShape.new(name: 'BypassPolicyLockoutSafetyCheck')
     ClientToken = Shapes::StringShape.new(name: 'ClientToken')
@@ -40,6 +42,7 @@ module Aws::EFS
     DependencyTimeout = Shapes::StructureShape.new(name: 'DependencyTimeout')
     DescribeAccessPointsRequest = Shapes::StructureShape.new(name: 'DescribeAccessPointsRequest')
     DescribeAccessPointsResponse = Shapes::StructureShape.new(name: 'DescribeAccessPointsResponse')
+    DescribeBackupPolicyRequest = Shapes::StructureShape.new(name: 'DescribeBackupPolicyRequest')
     DescribeFileSystemPolicyRequest = Shapes::StructureShape.new(name: 'DescribeFileSystemPolicyRequest')
     DescribeFileSystemsRequest = Shapes::StructureShape.new(name: 'DescribeFileSystemsRequest')
     DescribeFileSystemsResponse = Shapes::StructureShape.new(name: 'DescribeFileSystemsResponse')
@@ -54,6 +57,7 @@ module Aws::EFS
     ErrorCode = Shapes::StringShape.new(name: 'ErrorCode')
     ErrorMessage = Shapes::StringShape.new(name: 'ErrorMessage')
     FileSystemAlreadyExists = Shapes::StructureShape.new(name: 'FileSystemAlreadyExists')
+    FileSystemArn = Shapes::StringShape.new(name: 'FileSystemArn')
     FileSystemDescription = Shapes::StructureShape.new(name: 'FileSystemDescription')
     FileSystemDescriptions = Shapes::ListShape.new(name: 'FileSystemDescriptions')
     FileSystemId = Shapes::StringShape.new(name: 'FileSystemId')
@@ -102,6 +106,7 @@ module Aws::EFS
     PolicyNotFound = Shapes::StructureShape.new(name: 'PolicyNotFound')
     PosixUser = Shapes::StructureShape.new(name: 'PosixUser')
     ProvisionedThroughputInMibps = Shapes::FloatShape.new(name: 'ProvisionedThroughputInMibps')
+    PutBackupPolicyRequest = Shapes::StructureShape.new(name: 'PutBackupPolicyRequest')
     PutFileSystemPolicyRequest = Shapes::StructureShape.new(name: 'PutFileSystemPolicyRequest')
     PutLifecycleConfigurationRequest = Shapes::StructureShape.new(name: 'PutLifecycleConfigurationRequest')
     ResourceId = Shapes::StringShape.new(name: 'ResourceId')
@@ -111,6 +116,7 @@ module Aws::EFS
     SecurityGroupLimitExceeded = Shapes::StructureShape.new(name: 'SecurityGroupLimitExceeded')
     SecurityGroupNotFound = Shapes::StructureShape.new(name: 'SecurityGroupNotFound')
     SecurityGroups = Shapes::ListShape.new(name: 'SecurityGroups')
+    Status = Shapes::StringShape.new(name: 'Status')
     SubnetId = Shapes::StringShape.new(name: 'SubnetId')
     SubnetNotFound = Shapes::StructureShape.new(name: 'SubnetNotFound')
     Tag = Shapes::StructureShape.new(name: 'Tag')
@@ -129,6 +135,8 @@ module Aws::EFS
     UnsupportedAvailabilityZone = Shapes::StructureShape.new(name: 'UnsupportedAvailabilityZone')
     UntagResourceRequest = Shapes::StructureShape.new(name: 'UntagResourceRequest')
     UpdateFileSystemRequest = Shapes::StructureShape.new(name: 'UpdateFileSystemRequest')
+    ValidationException = Shapes::StructureShape.new(name: 'ValidationException')
+    VpcId = Shapes::StringShape.new(name: 'VpcId')
 
     AccessPointAlreadyExists.add_member(:error_code, Shapes::ShapeRef.new(shape: ErrorCode, required: true, location_name: "ErrorCode"))
     AccessPointAlreadyExists.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
@@ -156,6 +164,12 @@ module Aws::EFS
     AccessPointNotFound.add_member(:error_code, Shapes::ShapeRef.new(shape: ErrorCode, required: true, location_name: "ErrorCode"))
     AccessPointNotFound.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
     AccessPointNotFound.struct_class = Types::AccessPointNotFound
+
+    BackupPolicy.add_member(:status, Shapes::ShapeRef.new(shape: Status, required: true, location_name: "Status"))
+    BackupPolicy.struct_class = Types::BackupPolicy
+
+    BackupPolicyDescription.add_member(:backup_policy, Shapes::ShapeRef.new(shape: BackupPolicy, location_name: "BackupPolicy"))
+    BackupPolicyDescription.struct_class = Types::BackupPolicyDescription
 
     BadRequest.add_member(:error_code, Shapes::ShapeRef.new(shape: ErrorCode, required: true, location_name: "ErrorCode"))
     BadRequest.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
@@ -222,6 +236,9 @@ module Aws::EFS
     DescribeAccessPointsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: Token, location_name: "NextToken"))
     DescribeAccessPointsResponse.struct_class = Types::DescribeAccessPointsResponse
 
+    DescribeBackupPolicyRequest.add_member(:file_system_id, Shapes::ShapeRef.new(shape: FileSystemId, required: true, location: "uri", location_name: "FileSystemId"))
+    DescribeBackupPolicyRequest.struct_class = Types::DescribeBackupPolicyRequest
+
     DescribeFileSystemPolicyRequest.add_member(:file_system_id, Shapes::ShapeRef.new(shape: FileSystemId, required: true, location: "uri", location_name: "FileSystemId"))
     DescribeFileSystemPolicyRequest.struct_class = Types::DescribeFileSystemPolicyRequest
 
@@ -275,6 +292,7 @@ module Aws::EFS
     FileSystemDescription.add_member(:owner_id, Shapes::ShapeRef.new(shape: AwsAccountId, required: true, location_name: "OwnerId"))
     FileSystemDescription.add_member(:creation_token, Shapes::ShapeRef.new(shape: CreationToken, required: true, location_name: "CreationToken"))
     FileSystemDescription.add_member(:file_system_id, Shapes::ShapeRef.new(shape: FileSystemId, required: true, location_name: "FileSystemId"))
+    FileSystemDescription.add_member(:file_system_arn, Shapes::ShapeRef.new(shape: FileSystemArn, location_name: "FileSystemArn"))
     FileSystemDescription.add_member(:creation_time, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "CreationTime"))
     FileSystemDescription.add_member(:life_cycle_state, Shapes::ShapeRef.new(shape: LifeCycleState, required: true, location_name: "LifeCycleState"))
     FileSystemDescription.add_member(:name, Shapes::ShapeRef.new(shape: TagValue, location_name: "Name"))
@@ -370,6 +388,7 @@ module Aws::EFS
     MountTargetDescription.add_member(:network_interface_id, Shapes::ShapeRef.new(shape: NetworkInterfaceId, location_name: "NetworkInterfaceId"))
     MountTargetDescription.add_member(:availability_zone_id, Shapes::ShapeRef.new(shape: AvailabilityZoneId, location_name: "AvailabilityZoneId"))
     MountTargetDescription.add_member(:availability_zone_name, Shapes::ShapeRef.new(shape: AvailabilityZoneName, location_name: "AvailabilityZoneName"))
+    MountTargetDescription.add_member(:vpc_id, Shapes::ShapeRef.new(shape: VpcId, location_name: "VpcId"))
     MountTargetDescription.struct_class = Types::MountTargetDescription
 
     MountTargetDescriptions.member = Shapes::ShapeRef.new(shape: MountTargetDescription)
@@ -394,6 +413,10 @@ module Aws::EFS
     PosixUser.add_member(:gid, Shapes::ShapeRef.new(shape: Gid, required: true, location_name: "Gid"))
     PosixUser.add_member(:secondary_gids, Shapes::ShapeRef.new(shape: SecondaryGids, location_name: "SecondaryGids"))
     PosixUser.struct_class = Types::PosixUser
+
+    PutBackupPolicyRequest.add_member(:file_system_id, Shapes::ShapeRef.new(shape: FileSystemId, required: true, location: "uri", location_name: "FileSystemId"))
+    PutBackupPolicyRequest.add_member(:backup_policy, Shapes::ShapeRef.new(shape: BackupPolicy, required: true, location_name: "BackupPolicy"))
+    PutBackupPolicyRequest.struct_class = Types::PutBackupPolicyRequest
 
     PutFileSystemPolicyRequest.add_member(:file_system_id, Shapes::ShapeRef.new(shape: FileSystemId, required: true, location: "uri", location_name: "FileSystemId"))
     PutFileSystemPolicyRequest.add_member(:policy, Shapes::ShapeRef.new(shape: Policy, required: true, location_name: "Policy"))
@@ -457,6 +480,10 @@ module Aws::EFS
     UpdateFileSystemRequest.add_member(:provisioned_throughput_in_mibps, Shapes::ShapeRef.new(shape: ProvisionedThroughputInMibps, location_name: "ProvisionedThroughputInMibps"))
     UpdateFileSystemRequest.struct_class = Types::UpdateFileSystemRequest
 
+    ValidationException.add_member(:error_code, Shapes::ShapeRef.new(shape: ErrorCode, required: true, location_name: "ErrorCode"))
+    ValidationException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
+    ValidationException.struct_class = Types::ValidationException
+
 
     # @api private
     API = Seahorse::Model::Api.new.tap do |api|
@@ -482,6 +509,7 @@ module Aws::EFS
         o.output = Shapes::ShapeRef.new(shape: AccessPointDescription)
         o.errors << Shapes::ShapeRef.new(shape: BadRequest)
         o.errors << Shapes::ShapeRef.new(shape: AccessPointAlreadyExists)
+        o.errors << Shapes::ShapeRef.new(shape: IncorrectFileSystemLifeCycleState)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerError)
         o.errors << Shapes::ShapeRef.new(shape: FileSystemNotFound)
         o.errors << Shapes::ShapeRef.new(shape: AccessPointLimitExceeded)
@@ -609,6 +637,19 @@ module Aws::EFS
         )
       end)
 
+      api.add_operation(:describe_backup_policy, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DescribeBackupPolicy"
+        o.http_method = "GET"
+        o.http_request_uri = "/2015-02-01/file-systems/{FileSystemId}/backup-policy"
+        o.input = Shapes::ShapeRef.new(shape: DescribeBackupPolicyRequest)
+        o.output = Shapes::ShapeRef.new(shape: BackupPolicyDescription)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequest)
+        o.errors << Shapes::ShapeRef.new(shape: FileSystemNotFound)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerError)
+        o.errors << Shapes::ShapeRef.new(shape: PolicyNotFound)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+      end)
+
       api.add_operation(:describe_file_system_policy, Seahorse::Model::Operation.new.tap do |o|
         o.name = "DescribeFileSystemPolicy"
         o.http_method = "GET"
@@ -721,6 +762,19 @@ module Aws::EFS
         o.errors << Shapes::ShapeRef.new(shape: IncorrectMountTargetState)
         o.errors << Shapes::ShapeRef.new(shape: SecurityGroupLimitExceeded)
         o.errors << Shapes::ShapeRef.new(shape: SecurityGroupNotFound)
+      end)
+
+      api.add_operation(:put_backup_policy, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "PutBackupPolicy"
+        o.http_method = "PUT"
+        o.http_request_uri = "/2015-02-01/file-systems/{FileSystemId}/backup-policy"
+        o.input = Shapes::ShapeRef.new(shape: PutBackupPolicyRequest)
+        o.output = Shapes::ShapeRef.new(shape: BackupPolicyDescription)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequest)
+        o.errors << Shapes::ShapeRef.new(shape: FileSystemNotFound)
+        o.errors << Shapes::ShapeRef.new(shape: IncorrectFileSystemLifeCycleState)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerError)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
       end)
 
       api.add_operation(:put_file_system_policy, Seahorse::Model::Operation.new.tap do |o|

@@ -1125,8 +1125,7 @@ module Aws::CloudFront
     #
     # @!attribute [rw] location
     #   The fully qualified URI of the new origin access identity just
-    #   created. For example:
-    #   `https://cloudfront.amazonaws.com/2010-11-01/origin-access-identity/cloudfront/E74FTE3AJFJ256A`.
+    #   created.
     #   @return [String]
     #
     # @!attribute [rw] etag
@@ -1346,7 +1345,7 @@ module Aws::CloudFront
     #             iam_certificate_id: "string",
     #             acm_certificate_arn: "string",
     #             ssl_support_method: "sni-only", # accepts sni-only, vip
-    #             minimum_protocol_version: "SSLv3", # accepts SSLv3, TLSv1, TLSv1_2016, TLSv1.1_2016, TLSv1.2_2018
+    #             minimum_protocol_version: "SSLv3", # accepts SSLv3, TLSv1, TLSv1_2016, TLSv1.1_2016, TLSv1.2_2018, TLSv1.2_2019
     #             certificate: "string",
     #             certificate_source: "cloudfront", # accepts cloudfront, iam, acm
     #           },
@@ -1383,8 +1382,7 @@ module Aws::CloudFront
     #
     # @!attribute [rw] location
     #   The fully qualified URI of the new distribution resource just
-    #   created. For example:
-    #   `https://cloudfront.amazonaws.com/2010-11-01/distribution/EDFDVBD632BHDS5`.
+    #   created.
     #   @return [String]
     #
     # @!attribute [rw] etag
@@ -1605,7 +1603,7 @@ module Aws::CloudFront
     #               iam_certificate_id: "string",
     #               acm_certificate_arn: "string",
     #               ssl_support_method: "sni-only", # accepts sni-only, vip
-    #               minimum_protocol_version: "SSLv3", # accepts SSLv3, TLSv1, TLSv1_2016, TLSv1.1_2016, TLSv1.2_2018
+    #               minimum_protocol_version: "SSLv3", # accepts SSLv3, TLSv1, TLSv1_2016, TLSv1.1_2016, TLSv1.2_2018, TLSv1.2_2019
     #               certificate: "string",
     #               certificate_source: "cloudfront", # accepts cloudfront, iam, acm
     #             },
@@ -1651,8 +1649,7 @@ module Aws::CloudFront
     #
     # @!attribute [rw] location
     #   The fully qualified URI of the new distribution resource just
-    #   created. For example:
-    #   `https://cloudfront.amazonaws.com/2010-11-01/distribution/EDFDVBD632BHDS5`.
+    #   created.
     #   @return [String]
     #
     # @!attribute [rw] etag
@@ -1722,8 +1719,7 @@ module Aws::CloudFront
     #
     # @!attribute [rw] location
     #   The fully qualified URI of the new configuration resource just
-    #   created. For example:
-    #   `https://cloudfront.amazonaws.com/2010-11-01/field-level-encryption-config/EDFDVBD632BHDS5`.
+    #   created.
     #   @return [String]
     #
     # @!attribute [rw] etag
@@ -1783,8 +1779,6 @@ module Aws::CloudFront
     #
     # @!attribute [rw] location
     #   The fully qualified URI of the new profile resource just created.
-    #   For example:
-    #   `https://cloudfront.amazonaws.com/2010-11-01/field-level-encryption-profile/EDFDVBD632BHDS5`.
     #   @return [String]
     #
     # @!attribute [rw] etag
@@ -1885,8 +1879,6 @@ module Aws::CloudFront
     #
     # @!attribute [rw] location
     #   The fully qualified URI of the new public key resource just created.
-    #   For example:
-    #   `https://cloudfront.amazonaws.com/2010-11-01/cloudfront-public-key/EDFDVBD632BHDS5`.
     #   @return [String]
     #
     # @!attribute [rw] etag
@@ -1956,8 +1948,7 @@ module Aws::CloudFront
     #
     # @!attribute [rw] location
     #   The fully qualified URI of the new streaming distribution resource
-    #   just created. For example:
-    #   `https://cloudfront.amazonaws.com/2010-11-01/streaming-distribution/EGTXBD79H29TRA8`.
+    #   just created.
     #   @return [String]
     #
     # @!attribute [rw] etag
@@ -2036,8 +2027,7 @@ module Aws::CloudFront
     #
     # @!attribute [rw] location
     #   The fully qualified URI of the new streaming distribution resource
-    #   just created. For example:`
-    #   https://cloudfront.amazonaws.com/2010-11-01/streaming-distribution/EGTXBD79H29TRA8`.
+    #   just created.
     #   @return [String]
     #
     # @!attribute [rw] etag
@@ -3098,7 +3088,7 @@ module Aws::CloudFront
     #           iam_certificate_id: "string",
     #           acm_certificate_arn: "string",
     #           ssl_support_method: "sni-only", # accepts sni-only, vip
-    #           minimum_protocol_version: "SSLv3", # accepts SSLv3, TLSv1, TLSv1_2016, TLSv1.1_2016, TLSv1.2_2018
+    #           minimum_protocol_version: "SSLv3", # accepts SSLv3, TLSv1, TLSv1_2016, TLSv1.1_2016, TLSv1.2_2018, TLSv1.2_2019
     #           certificate: "string",
     #           certificate_source: "cloudfront", # accepts cloudfront, iam, acm
     #         },
@@ -3575,7 +3565,7 @@ module Aws::CloudFront
     #             iam_certificate_id: "string",
     #             acm_certificate_arn: "string",
     #             ssl_support_method: "sni-only", # accepts sni-only, vip
-    #             minimum_protocol_version: "SSLv3", # accepts SSLv3, TLSv1, TLSv1_2016, TLSv1.1_2016, TLSv1.2_2018
+    #             minimum_protocol_version: "SSLv3", # accepts SSLv3, TLSv1, TLSv1_2016, TLSv1.1_2016, TLSv1.2_2018, TLSv1.2_2019
     #             certificate: "string",
     #             certificate_source: "cloudfront", # accepts cloudfront, iam, acm
     #           },
@@ -8615,7 +8605,7 @@ module Aws::CloudFront
     #             iam_certificate_id: "string",
     #             acm_certificate_arn: "string",
     #             ssl_support_method: "sni-only", # accepts sni-only, vip
-    #             minimum_protocol_version: "SSLv3", # accepts SSLv3, TLSv1, TLSv1_2016, TLSv1.1_2016, TLSv1.2_2018
+    #             minimum_protocol_version: "SSLv3", # accepts SSLv3, TLSv1, TLSv1_2016, TLSv1.1_2016, TLSv1.2_2018, TLSv1.2_2019
     #             certificate: "string",
     #             certificate_source: "cloudfront", # accepts cloudfront, iam, acm
     #           },
@@ -8973,7 +8963,7 @@ module Aws::CloudFront
     #
     #   * To accept HTTPS connections from only viewers that support SNI,
     #     set `SSLSupportMethod` to `sni-only`. This is recommended. Most
-    #     browsers and clients released after 2010 support SNI.
+    #     browsers and clients support SNI.
     #
     #   * To accept HTTPS connections from all viewers, including those that
     #     don’t support SNI, set `SSLSupportMethod` to `vip`. This is not
@@ -9021,7 +9011,7 @@ module Aws::CloudFront
     #         iam_certificate_id: "string",
     #         acm_certificate_arn: "string",
     #         ssl_support_method: "sni-only", # accepts sni-only, vip
-    #         minimum_protocol_version: "SSLv3", # accepts SSLv3, TLSv1, TLSv1_2016, TLSv1.1_2016, TLSv1.2_2018
+    #         minimum_protocol_version: "SSLv3", # accepts SSLv3, TLSv1, TLSv1_2016, TLSv1.1_2016, TLSv1.2_2018, TLSv1.2_2019
     #         certificate: "string",
     #         certificate_source: "cloudfront", # accepts cloudfront, iam, acm
     #       }
@@ -9078,8 +9068,7 @@ module Aws::CloudFront
     #
     #   * `sni-only` – The distribution accepts HTTPS connections from only
     #     viewers that support [server name indication (SNI)][1]. This is
-    #     recommended. Most browsers and clients released after 2010 support
-    #     SNI.
+    #     recommended. Most browsers and clients support SNI.
     #
     #   * `vip` – The distribution accepts HTTPS connections from all
     #     viewers including those that don’t support SNI. This is not
@@ -9114,9 +9103,6 @@ module Aws::CloudFront
     #   Policy**.
     #
     #    </note>
-    #
-    #   We recommend that you specify `TLSv1.2_2018` unless your viewers are
-    #   using browsers or devices that don’t support TLSv1.2.
     #
     #   When you’re using SNI only (you set `SSLSupportMethod` to
     #   `sni-only`), you must specify `TLSv1` or higher.

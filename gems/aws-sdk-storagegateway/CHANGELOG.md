@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.45.0 (2020-07-07)
+------------------
+
+* Feature - Adding support for file-system driven directory refresh, Case Sensitivity toggle for SMB File Shares, and S3 Prefixes and custom File Share names
+
 1.44.0 (2020-06-23)
 ------------------
 

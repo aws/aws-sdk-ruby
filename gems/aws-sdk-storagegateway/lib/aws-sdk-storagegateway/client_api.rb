@@ -40,12 +40,15 @@ module Aws::StorageGateway
     BandwidthType = Shapes::StringShape.new(name: 'BandwidthType')
     BandwidthUploadRateLimit = Shapes::IntegerShape.new(name: 'BandwidthUploadRateLimit')
     Boolean = Shapes::BooleanShape.new(name: 'Boolean')
+    CacheAttributes = Shapes::StructureShape.new(name: 'CacheAttributes')
+    CacheStaleTimeoutInSeconds = Shapes::IntegerShape.new(name: 'CacheStaleTimeoutInSeconds')
     CachediSCSIVolume = Shapes::StructureShape.new(name: 'CachediSCSIVolume')
     CachediSCSIVolumes = Shapes::ListShape.new(name: 'CachediSCSIVolumes')
     CancelArchivalInput = Shapes::StructureShape.new(name: 'CancelArchivalInput')
     CancelArchivalOutput = Shapes::StructureShape.new(name: 'CancelArchivalOutput')
     CancelRetrievalInput = Shapes::StructureShape.new(name: 'CancelRetrievalInput')
     CancelRetrievalOutput = Shapes::StructureShape.new(name: 'CancelRetrievalOutput')
+    CaseSensitivity = Shapes::StringShape.new(name: 'CaseSensitivity')
     ChapCredentials = Shapes::ListShape.new(name: 'ChapCredentials')
     ChapInfo = Shapes::StructureShape.new(name: 'ChapInfo')
     ChapSecret = Shapes::StringShape.new(name: 'ChapSecret')
@@ -152,6 +155,7 @@ module Aws::StorageGateway
     FileShareId = Shapes::StringShape.new(name: 'FileShareId')
     FileShareInfo = Shapes::StructureShape.new(name: 'FileShareInfo')
     FileShareInfoList = Shapes::ListShape.new(name: 'FileShareInfoList')
+    FileShareName = Shapes::StringShape.new(name: 'FileShareName')
     FileShareStatus = Shapes::StringShape.new(name: 'FileShareStatus')
     FileShareType = Shapes::StringShape.new(name: 'FileShareType')
     FileShareUser = Shapes::StringShape.new(name: 'FileShareUser')
@@ -407,6 +411,9 @@ module Aws::StorageGateway
 
     AutomaticTapeCreationRules.member = Shapes::ShapeRef.new(shape: AutomaticTapeCreationRule)
 
+    CacheAttributes.add_member(:cache_stale_timeout_in_seconds, Shapes::ShapeRef.new(shape: CacheStaleTimeoutInSeconds, location_name: "CacheStaleTimeoutInSeconds"))
+    CacheAttributes.struct_class = Types::CacheAttributes
+
     CachediSCSIVolume.add_member(:volume_arn, Shapes::ShapeRef.new(shape: VolumeARN, location_name: "VolumeARN"))
     CachediSCSIVolume.add_member(:volume_id, Shapes::ShapeRef.new(shape: VolumeId, location_name: "VolumeId"))
     CachediSCSIVolume.add_member(:volume_type, Shapes::ShapeRef.new(shape: VolumeType, location_name: "VolumeType"))
@@ -477,6 +484,8 @@ module Aws::StorageGateway
     CreateNFSFileShareInput.add_member(:guess_mime_type_enabled, Shapes::ShapeRef.new(shape: Boolean, location_name: "GuessMIMETypeEnabled"))
     CreateNFSFileShareInput.add_member(:requester_pays, Shapes::ShapeRef.new(shape: Boolean, location_name: "RequesterPays"))
     CreateNFSFileShareInput.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "Tags"))
+    CreateNFSFileShareInput.add_member(:file_share_name, Shapes::ShapeRef.new(shape: FileShareName, location_name: "FileShareName"))
+    CreateNFSFileShareInput.add_member(:cache_attributes, Shapes::ShapeRef.new(shape: CacheAttributes, location_name: "CacheAttributes"))
     CreateNFSFileShareInput.struct_class = Types::CreateNFSFileShareInput
 
     CreateNFSFileShareOutput.add_member(:file_share_arn, Shapes::ShapeRef.new(shape: FileShareARN, location_name: "FileShareARN"))
@@ -499,7 +508,10 @@ module Aws::StorageGateway
     CreateSMBFileShareInput.add_member(:invalid_user_list, Shapes::ShapeRef.new(shape: FileShareUserList, location_name: "InvalidUserList"))
     CreateSMBFileShareInput.add_member(:audit_destination_arn, Shapes::ShapeRef.new(shape: AuditDestinationARN, location_name: "AuditDestinationARN"))
     CreateSMBFileShareInput.add_member(:authentication, Shapes::ShapeRef.new(shape: Authentication, location_name: "Authentication"))
+    CreateSMBFileShareInput.add_member(:case_sensitivity, Shapes::ShapeRef.new(shape: CaseSensitivity, location_name: "CaseSensitivity"))
     CreateSMBFileShareInput.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "Tags"))
+    CreateSMBFileShareInput.add_member(:file_share_name, Shapes::ShapeRef.new(shape: FileShareName, location_name: "FileShareName"))
+    CreateSMBFileShareInput.add_member(:cache_attributes, Shapes::ShapeRef.new(shape: CacheAttributes, location_name: "CacheAttributes"))
     CreateSMBFileShareInput.struct_class = Types::CreateSMBFileShareInput
 
     CreateSMBFileShareOutput.add_member(:file_share_arn, Shapes::ShapeRef.new(shape: FileShareARN, location_name: "FileShareARN"))
@@ -981,6 +993,8 @@ module Aws::StorageGateway
     NFSFileShareInfo.add_member(:guess_mime_type_enabled, Shapes::ShapeRef.new(shape: Boolean, location_name: "GuessMIMETypeEnabled"))
     NFSFileShareInfo.add_member(:requester_pays, Shapes::ShapeRef.new(shape: Boolean, location_name: "RequesterPays"))
     NFSFileShareInfo.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "Tags"))
+    NFSFileShareInfo.add_member(:file_share_name, Shapes::ShapeRef.new(shape: FileShareName, location_name: "FileShareName"))
+    NFSFileShareInfo.add_member(:cache_attributes, Shapes::ShapeRef.new(shape: CacheAttributes, location_name: "CacheAttributes"))
     NFSFileShareInfo.struct_class = Types::NFSFileShareInfo
 
     NFSFileShareInfoList.member = Shapes::ShapeRef.new(shape: NFSFileShareInfo)
@@ -1053,7 +1067,10 @@ module Aws::StorageGateway
     SMBFileShareInfo.add_member(:invalid_user_list, Shapes::ShapeRef.new(shape: FileShareUserList, location_name: "InvalidUserList"))
     SMBFileShareInfo.add_member(:audit_destination_arn, Shapes::ShapeRef.new(shape: AuditDestinationARN, location_name: "AuditDestinationARN"))
     SMBFileShareInfo.add_member(:authentication, Shapes::ShapeRef.new(shape: Authentication, location_name: "Authentication"))
+    SMBFileShareInfo.add_member(:case_sensitivity, Shapes::ShapeRef.new(shape: CaseSensitivity, location_name: "CaseSensitivity"))
     SMBFileShareInfo.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "Tags"))
+    SMBFileShareInfo.add_member(:file_share_name, Shapes::ShapeRef.new(shape: FileShareName, location_name: "FileShareName"))
+    SMBFileShareInfo.add_member(:cache_attributes, Shapes::ShapeRef.new(shape: CacheAttributes, location_name: "CacheAttributes"))
     SMBFileShareInfo.struct_class = Types::SMBFileShareInfo
 
     SMBFileShareInfoList.member = Shapes::ShapeRef.new(shape: SMBFileShareInfo)
@@ -1235,6 +1252,8 @@ module Aws::StorageGateway
     UpdateNFSFileShareInput.add_member(:read_only, Shapes::ShapeRef.new(shape: Boolean, location_name: "ReadOnly"))
     UpdateNFSFileShareInput.add_member(:guess_mime_type_enabled, Shapes::ShapeRef.new(shape: Boolean, location_name: "GuessMIMETypeEnabled"))
     UpdateNFSFileShareInput.add_member(:requester_pays, Shapes::ShapeRef.new(shape: Boolean, location_name: "RequesterPays"))
+    UpdateNFSFileShareInput.add_member(:file_share_name, Shapes::ShapeRef.new(shape: FileShareName, location_name: "FileShareName"))
+    UpdateNFSFileShareInput.add_member(:cache_attributes, Shapes::ShapeRef.new(shape: CacheAttributes, location_name: "CacheAttributes"))
     UpdateNFSFileShareInput.struct_class = Types::UpdateNFSFileShareInput
 
     UpdateNFSFileShareOutput.add_member(:file_share_arn, Shapes::ShapeRef.new(shape: FileShareARN, location_name: "FileShareARN"))
@@ -1253,6 +1272,9 @@ module Aws::StorageGateway
     UpdateSMBFileShareInput.add_member(:valid_user_list, Shapes::ShapeRef.new(shape: FileShareUserList, location_name: "ValidUserList"))
     UpdateSMBFileShareInput.add_member(:invalid_user_list, Shapes::ShapeRef.new(shape: FileShareUserList, location_name: "InvalidUserList"))
     UpdateSMBFileShareInput.add_member(:audit_destination_arn, Shapes::ShapeRef.new(shape: AuditDestinationARN, location_name: "AuditDestinationARN"))
+    UpdateSMBFileShareInput.add_member(:case_sensitivity, Shapes::ShapeRef.new(shape: CaseSensitivity, location_name: "CaseSensitivity"))
+    UpdateSMBFileShareInput.add_member(:file_share_name, Shapes::ShapeRef.new(shape: FileShareName, location_name: "FileShareName"))
+    UpdateSMBFileShareInput.add_member(:cache_attributes, Shapes::ShapeRef.new(shape: CacheAttributes, location_name: "CacheAttributes"))
     UpdateSMBFileShareInput.struct_class = Types::UpdateSMBFileShareInput
 
     UpdateSMBFileShareOutput.add_member(:file_share_arn, Shapes::ShapeRef.new(shape: FileShareARN, location_name: "FileShareARN"))

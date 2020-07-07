@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.63.0 (2020-07-07)
+------------------
+
+* Feature - AWS Glue Data Catalog supports cross account sharing of tables through AWS Lake Formation
+
 1.62.0 (2020-07-02)
 ------------------
 

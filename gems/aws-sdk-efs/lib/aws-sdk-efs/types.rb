@@ -133,6 +133,53 @@ module Aws::EFS
       include Aws::Structure
     end
 
+    # The backup policy for the file system, showing the curent status. If
+    # `ENABLED`, the file system is being backed up.
+    #
+    # @note When making an API call, you may pass BackupPolicy
+    #   data as a hash:
+    #
+    #       {
+    #         status: "ENABLED", # required, accepts ENABLED, ENABLING, DISABLED, DISABLING
+    #       }
+    #
+    # @!attribute [rw] status
+    #   Describes the status of the file system's backup policy.
+    #
+    #   * <i> <code>ENABLED</code> - EFS is automatically backing up the
+    #     file system.</i>
+    #
+    #   * <i> <code>ENABLING</code> - EFS is turning on automatic backups
+    #     for the file system.</i>
+    #
+    #   * <i> <code>DISABLED</code> - automatic back ups are turned off for
+    #     the file system.</i>
+    #
+    #   * <i> <code>DISABLED</code> - EFS is turning off automatic backups
+    #     for the file system.</i>
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticfilesystem-2015-02-01/BackupPolicy AWS API Documentation
+    #
+    class BackupPolicy < Struct.new(
+      :status)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] backup_policy
+    #   Describes the file system's backup policy, indicating whether
+    #   automatic backups are turned on or off..
+    #   @return [Types::BackupPolicy]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticfilesystem-2015-02-01/BackupPolicyDescription AWS API Documentation
+    #
+    class BackupPolicyDescription < Struct.new(
+      :backup_policy)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Returned if the request is malformed or contains an error such as an
     # invalid parameter value or a missing required parameter.
     #
@@ -644,6 +691,25 @@ module Aws::EFS
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass DescribeBackupPolicyRequest
+    #   data as a hash:
+    #
+    #       {
+    #         file_system_id: "FileSystemId", # required
+    #       }
+    #
+    # @!attribute [rw] file_system_id
+    #   Specifies which EFS file system to retrieve the `BackupPolicy` for.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticfilesystem-2015-02-01/DescribeBackupPolicyRequest AWS API Documentation
+    #
+    class DescribeBackupPolicyRequest < Struct.new(
+      :file_system_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass DescribeFileSystemPolicyRequest
     #   data as a hash:
     #
@@ -969,6 +1035,14 @@ module Aws::EFS
     #   The ID of the file system, assigned by Amazon EFS.
     #   @return [String]
     #
+    # @!attribute [rw] file_system_arn
+    #   The Amazon Resource Name (ARN) for the EFS file system, in the
+    #   format
+    #   `arn:aws:elasticfilesystem:region:account-id:file-system/file-system-id
+    #   `. Example with sample data:
+    #   `arn:aws:elasticfilesystem:us-west-2:1111333322228888:file-system/fs-01234567`
+    #   @return [String]
+    #
     # @!attribute [rw] creation_time
     #   The time that the file system was created, in seconds (since
     #   1970-01-01T00:00:00Z).
@@ -1051,6 +1125,7 @@ module Aws::EFS
       :owner_id,
       :creation_token,
       :file_system_id,
+      :file_system_arn,
       :creation_time,
       :life_cycle_state,
       :name,
@@ -1474,6 +1549,11 @@ module Aws::EFS
     #   account.
     #   @return [String]
     #
+    # @!attribute [rw] vpc_id
+    #   The Virtual Private Cloud (VPC) ID that the mount target is
+    #   configured in.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticfilesystem-2015-02-01/MountTargetDescription AWS API Documentation
     #
     class MountTargetDescription < Struct.new(
@@ -1485,7 +1565,8 @@ module Aws::EFS
       :ip_address,
       :network_interface_id,
       :availability_zone_id,
-      :availability_zone_name)
+      :availability_zone_name,
+      :vpc_id)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1604,6 +1685,33 @@ module Aws::EFS
       :uid,
       :gid,
       :secondary_gids)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass PutBackupPolicyRequest
+    #   data as a hash:
+    #
+    #       {
+    #         file_system_id: "FileSystemId", # required
+    #         backup_policy: { # required
+    #           status: "ENABLED", # required, accepts ENABLED, ENABLING, DISABLED, DISABLING
+    #         },
+    #       }
+    #
+    # @!attribute [rw] file_system_id
+    #   Specifies which EFS file system to update the backup policy for.
+    #   @return [String]
+    #
+    # @!attribute [rw] backup_policy
+    #   The backup policy included in the `PutBackupPolicy` request.
+    #   @return [Types::BackupPolicy]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticfilesystem-2015-02-01/PutBackupPolicyRequest AWS API Documentation
+    #
+    class PutBackupPolicyRequest < Struct.new(
+      :file_system_id,
+      :backup_policy)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1963,6 +2071,24 @@ module Aws::EFS
       :file_system_id,
       :throughput_mode,
       :provisioned_throughput_in_mibps)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Returned if the AWS Backup service is not available in the region that
+    # the request was made.
+    #
+    # @!attribute [rw] error_code
+    #   @return [String]
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticfilesystem-2015-02-01/ValidationException AWS API Documentation
+    #
+    class ValidationException < Struct.new(
+      :error_code,
+      :message)
       SENSITIVE = []
       include Aws::Structure
     end

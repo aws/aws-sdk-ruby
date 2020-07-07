@@ -39,26 +39,32 @@ module Aws::LakeFormation
     #               catalog: {
     #               },
     #               database: {
+    #                 catalog_id: "CatalogIdString",
     #                 name: "NameString", # required
     #               },
     #               table: {
+    #                 catalog_id: "CatalogIdString",
     #                 database_name: "NameString", # required
-    #                 name: "NameString", # required
+    #                 name: "NameString",
+    #                 table_wildcard: {
+    #                 },
     #               },
     #               table_with_columns: {
-    #                 database_name: "NameString",
-    #                 name: "NameString",
+    #                 catalog_id: "CatalogIdString",
+    #                 database_name: "NameString", # required
+    #                 name: "NameString", # required
     #                 column_names: ["NameString"],
     #                 column_wildcard: {
     #                   excluded_column_names: ["NameString"],
     #                 },
     #               },
     #               data_location: {
+    #                 catalog_id: "CatalogIdString",
     #                 resource_arn: "ResourceArnString", # required
     #               },
     #             },
-    #             permissions: ["ALL"], # accepts ALL, SELECT, ALTER, DROP, DELETE, INSERT, CREATE_DATABASE, CREATE_TABLE, DATA_LOCATION_ACCESS
-    #             permissions_with_grant_option: ["ALL"], # accepts ALL, SELECT, ALTER, DROP, DELETE, INSERT, CREATE_DATABASE, CREATE_TABLE, DATA_LOCATION_ACCESS
+    #             permissions: ["ALL"], # accepts ALL, SELECT, ALTER, DROP, DELETE, INSERT, DESCRIBE, CREATE_DATABASE, CREATE_TABLE, DATA_LOCATION_ACCESS
+    #             permissions_with_grant_option: ["ALL"], # accepts ALL, SELECT, ALTER, DROP, DELETE, INSERT, DESCRIBE, CREATE_DATABASE, CREATE_TABLE, DATA_LOCATION_ACCESS
     #           },
     #         ],
     #       }
@@ -131,26 +137,32 @@ module Aws::LakeFormation
     #           catalog: {
     #           },
     #           database: {
+    #             catalog_id: "CatalogIdString",
     #             name: "NameString", # required
     #           },
     #           table: {
+    #             catalog_id: "CatalogIdString",
     #             database_name: "NameString", # required
-    #             name: "NameString", # required
+    #             name: "NameString",
+    #             table_wildcard: {
+    #             },
     #           },
     #           table_with_columns: {
-    #             database_name: "NameString",
-    #             name: "NameString",
+    #             catalog_id: "CatalogIdString",
+    #             database_name: "NameString", # required
+    #             name: "NameString", # required
     #             column_names: ["NameString"],
     #             column_wildcard: {
     #               excluded_column_names: ["NameString"],
     #             },
     #           },
     #           data_location: {
+    #             catalog_id: "CatalogIdString",
     #             resource_arn: "ResourceArnString", # required
     #           },
     #         },
-    #         permissions: ["ALL"], # accepts ALL, SELECT, ALTER, DROP, DELETE, INSERT, CREATE_DATABASE, CREATE_TABLE, DATA_LOCATION_ACCESS
-    #         permissions_with_grant_option: ["ALL"], # accepts ALL, SELECT, ALTER, DROP, DELETE, INSERT, CREATE_DATABASE, CREATE_TABLE, DATA_LOCATION_ACCESS
+    #         permissions: ["ALL"], # accepts ALL, SELECT, ALTER, DROP, DELETE, INSERT, DESCRIBE, CREATE_DATABASE, CREATE_TABLE, DATA_LOCATION_ACCESS
+    #         permissions_with_grant_option: ["ALL"], # accepts ALL, SELECT, ALTER, DROP, DELETE, INSERT, DESCRIBE, CREATE_DATABASE, CREATE_TABLE, DATA_LOCATION_ACCESS
     #       }
     #
     # @!attribute [rw] id
@@ -200,26 +212,32 @@ module Aws::LakeFormation
     #               catalog: {
     #               },
     #               database: {
+    #                 catalog_id: "CatalogIdString",
     #                 name: "NameString", # required
     #               },
     #               table: {
+    #                 catalog_id: "CatalogIdString",
     #                 database_name: "NameString", # required
-    #                 name: "NameString", # required
+    #                 name: "NameString",
+    #                 table_wildcard: {
+    #                 },
     #               },
     #               table_with_columns: {
-    #                 database_name: "NameString",
-    #                 name: "NameString",
+    #                 catalog_id: "CatalogIdString",
+    #                 database_name: "NameString", # required
+    #                 name: "NameString", # required
     #                 column_names: ["NameString"],
     #                 column_wildcard: {
     #                   excluded_column_names: ["NameString"],
     #                 },
     #               },
     #               data_location: {
+    #                 catalog_id: "CatalogIdString",
     #                 resource_arn: "ResourceArnString", # required
     #               },
     #             },
-    #             permissions: ["ALL"], # accepts ALL, SELECT, ALTER, DROP, DELETE, INSERT, CREATE_DATABASE, CREATE_TABLE, DATA_LOCATION_ACCESS
-    #             permissions_with_grant_option: ["ALL"], # accepts ALL, SELECT, ALTER, DROP, DELETE, INSERT, CREATE_DATABASE, CREATE_TABLE, DATA_LOCATION_ACCESS
+    #             permissions: ["ALL"], # accepts ALL, SELECT, ALTER, DROP, DELETE, INSERT, DESCRIBE, CREATE_DATABASE, CREATE_TABLE, DATA_LOCATION_ACCESS
+    #             permissions_with_grant_option: ["ALL"], # accepts ALL, SELECT, ALTER, DROP, DELETE, INSERT, DESCRIBE, CREATE_DATABASE, CREATE_TABLE, DATA_LOCATION_ACCESS
     #           },
     #         ],
     #       }
@@ -301,7 +319,8 @@ module Aws::LakeFormation
       include Aws::Structure
     end
 
-    # The AWS Lake Formation principal.
+    # The AWS Lake Formation principal. Supported principals are IAM users
+    # or IAM roles.
     #
     # @note When making an API call, you may pass DataLakePrincipal
     #   data as a hash:
@@ -322,7 +341,10 @@ module Aws::LakeFormation
       include Aws::Structure
     end
 
-    # The AWS Lake Formation principal.
+    # A structure representing a list of AWS Lake Formation principals
+    # designated as data lake administrators and lists of principal
+    # permission entries for default create database and default create
+    # table permissions.
     #
     # @note When making an API call, you may pass DataLakeSettings
     #   data as a hash:
@@ -338,7 +360,7 @@ module Aws::LakeFormation
     #             principal: {
     #               data_lake_principal_identifier: "DataLakePrincipalString",
     #             },
-    #             permissions: ["ALL"], # accepts ALL, SELECT, ALTER, DROP, DELETE, INSERT, CREATE_DATABASE, CREATE_TABLE, DATA_LOCATION_ACCESS
+    #             permissions: ["ALL"], # accepts ALL, SELECT, ALTER, DROP, DELETE, INSERT, DESCRIBE, CREATE_DATABASE, CREATE_TABLE, DATA_LOCATION_ACCESS
     #           },
     #         ],
     #         create_table_default_permissions: [
@@ -346,31 +368,43 @@ module Aws::LakeFormation
     #             principal: {
     #               data_lake_principal_identifier: "DataLakePrincipalString",
     #             },
-    #             permissions: ["ALL"], # accepts ALL, SELECT, ALTER, DROP, DELETE, INSERT, CREATE_DATABASE, CREATE_TABLE, DATA_LOCATION_ACCESS
+    #             permissions: ["ALL"], # accepts ALL, SELECT, ALTER, DROP, DELETE, INSERT, DESCRIBE, CREATE_DATABASE, CREATE_TABLE, DATA_LOCATION_ACCESS
     #           },
     #         ],
+    #         trusted_resource_owners: ["CatalogIdString"],
     #       }
     #
     # @!attribute [rw] data_lake_admins
-    #   A list of AWS Lake Formation principals.
+    #   A list of AWS Lake Formation principals. Supported principals are
+    #   IAM users or IAM roles.
     #   @return [Array<Types::DataLakePrincipal>]
     #
     # @!attribute [rw] create_database_default_permissions
-    #   A list of up to three principal permissions entries for default
-    #   create database permissions.
+    #   A structure representing a list of up to three principal permissions
+    #   entries for default create database permissions.
     #   @return [Array<Types::PrincipalPermissions>]
     #
     # @!attribute [rw] create_table_default_permissions
-    #   A list of up to three principal permissions entries for default
-    #   create table permissions.
+    #   A structure representing a list of up to three principal permissions
+    #   entries for default create table permissions.
     #   @return [Array<Types::PrincipalPermissions>]
+    #
+    # @!attribute [rw] trusted_resource_owners
+    #   A list of the resource-owning account IDs that the caller's account
+    #   can use to share their user access details (user ARNs). The user
+    #   ARNs can be logged in the resource owner's AWS CloudTrail log.
+    #
+    #   You may want to specify this property when you are in a high-trust
+    #   boundary, such as the same team or company.
+    #   @return [Array<String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lakeformation-2017-03-31/DataLakeSettings AWS API Documentation
     #
     class DataLakeSettings < Struct.new(
       :data_lake_admins,
       :create_database_default_permissions,
-      :create_table_default_permissions)
+      :create_table_default_permissions,
+      :trusted_resource_owners)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -382,8 +416,15 @@ module Aws::LakeFormation
     #   data as a hash:
     #
     #       {
+    #         catalog_id: "CatalogIdString",
     #         resource_arn: "ResourceArnString", # required
     #       }
+    #
+    # @!attribute [rw] catalog_id
+    #   The identifier for the Data Catalog where the location is registered
+    #   with AWS Lake Formation. By default, it is the account ID of the
+    #   caller.
+    #   @return [String]
     #
     # @!attribute [rw] resource_arn
     #   The Amazon Resource Name (ARN) that uniquely identifies the data
@@ -393,6 +434,7 @@ module Aws::LakeFormation
     # @see http://docs.aws.amazon.com/goto/WebAPI/lakeformation-2017-03-31/DataLocationResource AWS API Documentation
     #
     class DataLocationResource < Struct.new(
+      :catalog_id,
       :resource_arn)
       SENSITIVE = []
       include Aws::Structure
@@ -404,8 +446,14 @@ module Aws::LakeFormation
     #   data as a hash:
     #
     #       {
+    #         catalog_id: "CatalogIdString",
     #         name: "NameString", # required
     #       }
+    #
+    # @!attribute [rw] catalog_id
+    #   The identifier for the Data Catalog. By default, it is the account
+    #   ID of the caller.
+    #   @return [String]
     #
     # @!attribute [rw] name
     #   The name of the database resource. Unique to the Data Catalog.
@@ -414,6 +462,7 @@ module Aws::LakeFormation
     # @see http://docs.aws.amazon.com/goto/WebAPI/lakeformation-2017-03-31/DatabaseResource AWS API Documentation
     #
     class DatabaseResource < Struct.new(
+      :catalog_id,
       :name)
       SENSITIVE = []
       include Aws::Structure
@@ -565,7 +614,8 @@ module Aws::LakeFormation
     end
 
     # @!attribute [rw] data_lake_settings
-    #   A list of AWS Lake Formation principals.
+    #   A structure representing a list of AWS Lake Formation principals
+    #   designated as data lake administrators.
     #   @return [Types::DataLakeSettings]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lakeformation-2017-03-31/GetDataLakeSettingsResponse AWS API Documentation
@@ -649,26 +699,32 @@ module Aws::LakeFormation
     #           catalog: {
     #           },
     #           database: {
+    #             catalog_id: "CatalogIdString",
     #             name: "NameString", # required
     #           },
     #           table: {
+    #             catalog_id: "CatalogIdString",
     #             database_name: "NameString", # required
-    #             name: "NameString", # required
+    #             name: "NameString",
+    #             table_wildcard: {
+    #             },
     #           },
     #           table_with_columns: {
-    #             database_name: "NameString",
-    #             name: "NameString",
+    #             catalog_id: "CatalogIdString",
+    #             database_name: "NameString", # required
+    #             name: "NameString", # required
     #             column_names: ["NameString"],
     #             column_wildcard: {
     #               excluded_column_names: ["NameString"],
     #             },
     #           },
     #           data_location: {
+    #             catalog_id: "CatalogIdString",
     #             resource_arn: "ResourceArnString", # required
     #           },
     #         },
-    #         permissions: ["ALL"], # required, accepts ALL, SELECT, ALTER, DROP, DELETE, INSERT, CREATE_DATABASE, CREATE_TABLE, DATA_LOCATION_ACCESS
-    #         permissions_with_grant_option: ["ALL"], # accepts ALL, SELECT, ALTER, DROP, DELETE, INSERT, CREATE_DATABASE, CREATE_TABLE, DATA_LOCATION_ACCESS
+    #         permissions: ["ALL"], # required, accepts ALL, SELECT, ALTER, DROP, DELETE, INSERT, DESCRIBE, CREATE_DATABASE, CREATE_TABLE, DATA_LOCATION_ACCESS
+    #         permissions_with_grant_option: ["ALL"], # accepts ALL, SELECT, ALTER, DROP, DELETE, INSERT, DESCRIBE, CREATE_DATABASE, CREATE_TABLE, DATA_LOCATION_ACCESS
     #       }
     #
     # @!attribute [rw] catalog_id
@@ -765,21 +821,27 @@ module Aws::LakeFormation
     #           catalog: {
     #           },
     #           database: {
+    #             catalog_id: "CatalogIdString",
     #             name: "NameString", # required
     #           },
     #           table: {
+    #             catalog_id: "CatalogIdString",
     #             database_name: "NameString", # required
-    #             name: "NameString", # required
+    #             name: "NameString",
+    #             table_wildcard: {
+    #             },
     #           },
     #           table_with_columns: {
-    #             database_name: "NameString",
-    #             name: "NameString",
+    #             catalog_id: "CatalogIdString",
+    #             database_name: "NameString", # required
+    #             name: "NameString", # required
     #             column_names: ["NameString"],
     #             column_wildcard: {
     #               excluded_column_names: ["NameString"],
     #             },
     #           },
     #           data_location: {
+    #             catalog_id: "CatalogIdString",
     #             resource_arn: "ResourceArnString", # required
     #           },
     #         },
@@ -931,7 +993,7 @@ module Aws::LakeFormation
     #         principal: {
     #           data_lake_principal_identifier: "DataLakePrincipalString",
     #         },
-    #         permissions: ["ALL"], # accepts ALL, SELECT, ALTER, DROP, DELETE, INSERT, CREATE_DATABASE, CREATE_TABLE, DATA_LOCATION_ACCESS
+    #         permissions: ["ALL"], # accepts ALL, SELECT, ALTER, DROP, DELETE, INSERT, DESCRIBE, CREATE_DATABASE, CREATE_TABLE, DATA_LOCATION_ACCESS
     #       }
     #
     # @!attribute [rw] principal
@@ -997,7 +1059,7 @@ module Aws::LakeFormation
     #               principal: {
     #                 data_lake_principal_identifier: "DataLakePrincipalString",
     #               },
-    #               permissions: ["ALL"], # accepts ALL, SELECT, ALTER, DROP, DELETE, INSERT, CREATE_DATABASE, CREATE_TABLE, DATA_LOCATION_ACCESS
+    #               permissions: ["ALL"], # accepts ALL, SELECT, ALTER, DROP, DELETE, INSERT, DESCRIBE, CREATE_DATABASE, CREATE_TABLE, DATA_LOCATION_ACCESS
     #             },
     #           ],
     #           create_table_default_permissions: [
@@ -1005,9 +1067,10 @@ module Aws::LakeFormation
     #               principal: {
     #                 data_lake_principal_identifier: "DataLakePrincipalString",
     #               },
-    #               permissions: ["ALL"], # accepts ALL, SELECT, ALTER, DROP, DELETE, INSERT, CREATE_DATABASE, CREATE_TABLE, DATA_LOCATION_ACCESS
+    #               permissions: ["ALL"], # accepts ALL, SELECT, ALTER, DROP, DELETE, INSERT, DESCRIBE, CREATE_DATABASE, CREATE_TABLE, DATA_LOCATION_ACCESS
     #             },
     #           ],
+    #           trusted_resource_owners: ["CatalogIdString"],
     #         },
     #       }
     #
@@ -1019,7 +1082,8 @@ module Aws::LakeFormation
     #   @return [String]
     #
     # @!attribute [rw] data_lake_settings
-    #   A list of AWS Lake Formation principals.
+    #   A structure representing a list of AWS Lake Formation principals
+    #   designated as data lake administrators.
     #   @return [Types::DataLakeSettings]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lakeformation-2017-03-31/PutDataLakeSettingsRequest AWS API Documentation
@@ -1050,12 +1114,21 @@ module Aws::LakeFormation
     #   @return [String]
     #
     # @!attribute [rw] use_service_linked_role
-    #   Designates a trusted caller, an IAM principal, by registering this
-    #   caller with the Data Catalog.
+    #   Designates an AWS Identity and Access Management (IAM)
+    #   service-linked role by registering this role with the Data Catalog.
+    #   A service-linked role is a unique type of IAM role that is linked
+    #   directly to Lake Formation.
+    #
+    #   For more information, see [Using Service-Linked Roles for Lake
+    #   Formation][1].
+    #
+    #
+    #
+    #   [1]: https://docs-aws.amazon.com/lake-formation/latest/dg/service-linked-roles.html
     #   @return [Boolean]
     #
     # @!attribute [rw] role_arn
-    #   The identifier for the role.
+    #   The identifier for the role that registers the resource.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lakeformation-2017-03-31/RegisterResourceRequest AWS API Documentation
@@ -1081,21 +1154,27 @@ module Aws::LakeFormation
     #         catalog: {
     #         },
     #         database: {
+    #           catalog_id: "CatalogIdString",
     #           name: "NameString", # required
     #         },
     #         table: {
+    #           catalog_id: "CatalogIdString",
     #           database_name: "NameString", # required
-    #           name: "NameString", # required
+    #           name: "NameString",
+    #           table_wildcard: {
+    #           },
     #         },
     #         table_with_columns: {
-    #           database_name: "NameString",
-    #           name: "NameString",
+    #           catalog_id: "CatalogIdString",
+    #           database_name: "NameString", # required
+    #           name: "NameString", # required
     #           column_names: ["NameString"],
     #           column_wildcard: {
     #             excluded_column_names: ["NameString"],
     #           },
     #         },
     #         data_location: {
+    #           catalog_id: "CatalogIdString",
     #           resource_arn: "ResourceArnString", # required
     #         },
     #       }
@@ -1180,26 +1259,32 @@ module Aws::LakeFormation
     #           catalog: {
     #           },
     #           database: {
+    #             catalog_id: "CatalogIdString",
     #             name: "NameString", # required
     #           },
     #           table: {
+    #             catalog_id: "CatalogIdString",
     #             database_name: "NameString", # required
-    #             name: "NameString", # required
+    #             name: "NameString",
+    #             table_wildcard: {
+    #             },
     #           },
     #           table_with_columns: {
-    #             database_name: "NameString",
-    #             name: "NameString",
+    #             catalog_id: "CatalogIdString",
+    #             database_name: "NameString", # required
+    #             name: "NameString", # required
     #             column_names: ["NameString"],
     #             column_wildcard: {
     #               excluded_column_names: ["NameString"],
     #             },
     #           },
     #           data_location: {
+    #             catalog_id: "CatalogIdString",
     #             resource_arn: "ResourceArnString", # required
     #           },
     #         },
-    #         permissions: ["ALL"], # required, accepts ALL, SELECT, ALTER, DROP, DELETE, INSERT, CREATE_DATABASE, CREATE_TABLE, DATA_LOCATION_ACCESS
-    #         permissions_with_grant_option: ["ALL"], # accepts ALL, SELECT, ALTER, DROP, DELETE, INSERT, CREATE_DATABASE, CREATE_TABLE, DATA_LOCATION_ACCESS
+    #         permissions: ["ALL"], # required, accepts ALL, SELECT, ALTER, DROP, DELETE, INSERT, DESCRIBE, CREATE_DATABASE, CREATE_TABLE, DATA_LOCATION_ACCESS
+    #         permissions_with_grant_option: ["ALL"], # accepts ALL, SELECT, ALTER, DROP, DELETE, INSERT, DESCRIBE, CREATE_DATABASE, CREATE_TABLE, DATA_LOCATION_ACCESS
     #       }
     #
     # @!attribute [rw] catalog_id
@@ -1224,7 +1309,7 @@ module Aws::LakeFormation
     #
     #
     #
-    #   [1]: https://docs-aws.amazon.com/michigan/latest/dg/security-data-access.html
+    #   [1]: https://docs-aws.amazon.com/lake-formation/latest/dg/security-data-access.html
     #   @return [Array<String>]
     #
     # @!attribute [rw] permissions_with_grant_option
@@ -1256,9 +1341,17 @@ module Aws::LakeFormation
     #   data as a hash:
     #
     #       {
+    #         catalog_id: "CatalogIdString",
     #         database_name: "NameString", # required
-    #         name: "NameString", # required
+    #         name: "NameString",
+    #         table_wildcard: {
+    #         },
     #       }
+    #
+    # @!attribute [rw] catalog_id
+    #   The identifier for the Data Catalog. By default, it is the account
+    #   ID of the caller.
+    #   @return [String]
     #
     # @!attribute [rw] database_name
     #   The name of the database for the table. Unique to a Data Catalog. A
@@ -1271,14 +1364,31 @@ module Aws::LakeFormation
     #   The name of the table.
     #   @return [String]
     #
+    # @!attribute [rw] table_wildcard
+    #   A wildcard object representing every table under a database.
+    #
+    #   At least one of `TableResource$Name` or
+    #   `TableResource$TableWildcard` is required.
+    #   @return [Types::TableWildcard]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lakeformation-2017-03-31/TableResource AWS API Documentation
     #
     class TableResource < Struct.new(
+      :catalog_id,
       :database_name,
-      :name)
+      :name,
+      :table_wildcard)
       SENSITIVE = []
       include Aws::Structure
     end
+
+    # A wildcard object representing every table under a database.
+    #
+    # @api private
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lakeformation-2017-03-31/TableWildcard AWS API Documentation
+    #
+    class TableWildcard < Aws::EmptyStructure; end
 
     # A structure for a table with columns object. This object is only used
     # when granting a SELECT permission.
@@ -1290,13 +1400,19 @@ module Aws::LakeFormation
     #   data as a hash:
     #
     #       {
-    #         database_name: "NameString",
-    #         name: "NameString",
+    #         catalog_id: "CatalogIdString",
+    #         database_name: "NameString", # required
+    #         name: "NameString", # required
     #         column_names: ["NameString"],
     #         column_wildcard: {
     #           excluded_column_names: ["NameString"],
     #         },
     #       }
+    #
+    # @!attribute [rw] catalog_id
+    #   The identifier for the Data Catalog. By default, it is the account
+    #   ID of the caller.
+    #   @return [String]
     #
     # @!attribute [rw] database_name
     #   The name of the database for the table with columns resource. Unique
@@ -1324,6 +1440,7 @@ module Aws::LakeFormation
     # @see http://docs.aws.amazon.com/goto/WebAPI/lakeformation-2017-03-31/TableWithColumnsResource AWS API Documentation
     #
     class TableWithColumnsResource < Struct.new(
+      :catalog_id,
       :database_name,
       :name,
       :column_names,

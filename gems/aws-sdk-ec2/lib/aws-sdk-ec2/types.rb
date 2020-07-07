@@ -2130,10 +2130,10 @@ module Aws::EC2
       include Aws::Structure
     end
 
-    # Describes an Availability Zone or Local Zone.
+    # Describes a Zone.
     #
     # @!attribute [rw] state
-    #   The state of the Availability Zone or Local Zone.
+    #   The state of the Zone.
     #   @return [String]
     #
     # @!attribute [rw] opt_in_status
@@ -2145,7 +2145,7 @@ module Aws::EC2
     #   @return [String]
     #
     # @!attribute [rw] messages
-    #   Any messages about the Availability Zone or Local Zone.
+    #   Any messages about the Zone.
     #   @return [Array<Types::AvailabilityZoneMessage>]
     #
     # @!attribute [rw] region_name
@@ -2153,11 +2153,11 @@ module Aws::EC2
     #   @return [String]
     #
     # @!attribute [rw] zone_name
-    #   The name of the Availability Zone or Local Zone.
+    #   The name of the Zone.
     #   @return [String]
     #
     # @!attribute [rw] zone_id
-    #   The ID of the Availability Zone or Local Zone.
+    #   The ID of the Zone.
     #   @return [String]
     #
     # @!attribute [rw] group_name
@@ -2172,6 +2172,21 @@ module Aws::EC2
     #   The name of the location from which the address is advertised.
     #   @return [String]
     #
+    # @!attribute [rw] zone_type
+    #   The type of zone. The valid values are `availability-zone` and
+    #   `local-zone`.
+    #   @return [String]
+    #
+    # @!attribute [rw] parent_zone_name
+    #   The name of the zone that handles some of the Local Zone control
+    #   plane operations, such as API calls.
+    #   @return [String]
+    #
+    # @!attribute [rw] parent_zone_id
+    #   The ID of the zone that handles some of the Local Zone control plane
+    #   operations, such as API calls.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/AvailabilityZone AWS API Documentation
     #
     class AvailabilityZone < Struct.new(
@@ -2182,15 +2197,18 @@ module Aws::EC2
       :zone_name,
       :zone_id,
       :group_name,
-      :network_border_group)
+      :network_border_group,
+      :zone_type,
+      :parent_zone_name,
+      :parent_zone_id)
       SENSITIVE = []
       include Aws::Structure
     end
 
-    # Describes a message about an Availability Zone or Local Zone.
+    # Describes a message about a Zone.
     #
     # @!attribute [rw] message
-    #   The message about the Availability Zone or Local Zone.
+    #   The message about the Zone.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/AvailabilityZoneMessage AWS API Documentation
@@ -12322,13 +12340,13 @@ module Aws::EC2
     #     Local Zones, use the name of the group associated with the Local
     #     Zone (for example, `us-west-2-lax-1`).
     #
-    #   * `message` - The Availability Zone or Local Zone message.
+    #   * `message` - The Zone message.
     #
     #   * `opt-in-status` - The opt in status (`opted-in`, and
     #     `not-opted-in` \| `opt-in-not-required`).
     #
-    #   * `region-name` - The name of the Region for the Availability Zone
-    #     or Local Zone (for example, `us-east-1`).
+    #   * `region-name` - The name of the Region for the Zone (for example,
+    #     `us-east-1`).
     #
     #   * `state` - The state of the Availability Zone or Local Zone
     #     (`available` \| `information` \| `impaired` \| `unavailable`).
@@ -12342,11 +12360,11 @@ module Aws::EC2
     #   @return [Array<Types::Filter>]
     #
     # @!attribute [rw] zone_names
-    #   The names of the Availability Zones and Local Zones.
+    #   The names of the Zones.
     #   @return [Array<String>]
     #
     # @!attribute [rw] zone_ids
-    #   The IDs of the Availability Zones and Local Zones.
+    #   The IDs of the Zones.
     #   @return [Array<String>]
     #
     # @!attribute [rw] all_availability_zones
@@ -12377,7 +12395,7 @@ module Aws::EC2
     end
 
     # @!attribute [rw] availability_zones
-    #   Information about the Availability Zones and Local Zones.
+    #   Information about the Zones.
     #   @return [Array<Types::AvailabilityZone>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeAvailabilityZonesResult AWS API Documentation

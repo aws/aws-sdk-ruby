@@ -1157,7 +1157,8 @@ module Aws::StorageGateway
     #   file gateway assumes when it accesses the underlying storage.
     #
     # @option params [required, String] :location_arn
-    #   The ARN of the backed storage used for storing file data.
+    #   The ARN of the backend storage used for storing file data. A prefix
+    #   name can be added to the S3 bucket name. It must end with a "/".
     #
     # @option params [String] :default_storage_class
     #   The default storage class for objects put into an Amazon S3 bucket by
@@ -1226,6 +1227,17 @@ module Aws::StorageGateway
     #
     #    </note>
     #
+    # @option params [String] :file_share_name
+    #   The name of the file share. Optional.
+    #
+    #   <note markdown="1"> `FileShareName` must be set if an S3 prefix name is set in
+    #   `LocationARN`.
+    #
+    #    </note>
+    #
+    # @option params [Types::CacheAttributes] :cache_attributes
+    #   Refresh cache information.
+    #
     # @return [Types::CreateNFSFileShareOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateNFSFileShareOutput#file_share_arn #file_share_arn} => String
@@ -1258,6 +1270,10 @@ module Aws::StorageGateway
     #         value: "TagValue", # required
     #       },
     #     ],
+    #     file_share_name: "FileShareName",
+    #     cache_attributes: {
+    #       cache_stale_timeout_in_seconds: 1,
+    #     },
     #   })
     #
     # @example Response structure
@@ -1319,7 +1335,8 @@ module Aws::StorageGateway
     #   file gateway assumes when it accesses the underlying storage.
     #
     # @option params [required, String] :location_arn
-    #   The ARN of the backed storage used for storing file data.
+    #   The ARN of the backend storage used for storing file data. A prefix
+    #   name can be added to the S3 bucket name. It must end with a "/".
     #
     # @option params [String] :default_storage_class
     #   The default storage class for objects put into an Amazon S3 bucket by
@@ -1378,24 +1395,27 @@ module Aws::StorageGateway
     #   [1]: https://docs.aws.amazon.com/storagegateway/latest/userguide/smb-acl.html
     #
     # @option params [Array<String>] :admin_user_list
-    #   A list of users in the Active Directory that will be granted
+    #   A list of users or groups in the Active Directory that will be granted
     #   administrator privileges on the file share. These users can do all
-    #   file operations as the super-user.
+    #   file operations as the super-user. Acceptable formats include:
+    #   `DOMAIN\User1`, `user1`, `@group1`, and `@DOMAIN\group1`.
     #
     #   Use this option very carefully, because any user in this list can do
     #   anything they like on the file share, regardless of file permissions.
     #
     # @option params [Array<String>] :valid_user_list
     #   A list of users or groups in the Active Directory that are allowed to
-    #   access the file share. A group must be prefixed with the @ character.
-    #   For example, `@group1`. Can only be set if Authentication is set to
-    #   `ActiveDirectory`.
+    #   access the file []() share. A group must be prefixed with the @
+    #   character. Acceptable formats include: `DOMAIN\User1`, `user1`,
+    #   `@group1`, and `@DOMAIN\group1`. Can only be set if Authentication is
+    #   set to `ActiveDirectory`.
     #
     # @option params [Array<String>] :invalid_user_list
     #   A list of users or groups in the Active Directory that are not allowed
     #   to access the file share. A group must be prefixed with the @
-    #   character. For example, `@group1`. Can only be set if Authentication
-    #   is set to `ActiveDirectory`.
+    #   character. Acceptable formats include: `DOMAIN\User1`, `user1`,
+    #   `@group1`, and `@DOMAIN\group1`. Can only be set if Authentication is
+    #   set to `ActiveDirectory`.
     #
     # @option params [String] :audit_destination_arn
     #   The Amazon Resource Name (ARN) of the storage used for the audit logs.
@@ -1405,6 +1425,12 @@ module Aws::StorageGateway
     #   default is `ActiveDirectory`.
     #
     #   Valid Values: `ActiveDirectory` \| `GuestAccess`
+    #
+    # @option params [String] :case_sensitivity
+    #   The case of an object name in an Amazon S3 bucket. For
+    #   `ClientSpecified`, the client determines the case sensitivity. For
+    #   `CaseSensitive`, the gateway determines the case sensitivity. The
+    #   default value is `ClientSpecified`.
     #
     # @option params [Array<Types::Tag>] :tags
     #   A list of up to 50 tags that can be assigned to the NFS file share.
@@ -1416,6 +1442,17 @@ module Aws::StorageGateway
     #   and the maximum length for a tag's value is 256.
     #
     #    </note>
+    #
+    # @option params [String] :file_share_name
+    #   The name of the file share. Optional.
+    #
+    #   <note markdown="1"> `FileShareName` must be set if an S3 prefix name is set in
+    #   `LocationARN`.
+    #
+    #    </note>
+    #
+    # @option params [Types::CacheAttributes] :cache_attributes
+    #   Refresh cache information.
     #
     # @return [Types::CreateSMBFileShareOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1441,12 +1478,17 @@ module Aws::StorageGateway
     #     invalid_user_list: ["FileShareUser"],
     #     audit_destination_arn: "AuditDestinationARN",
     #     authentication: "Authentication",
+    #     case_sensitivity: "ClientSpecified", # accepts ClientSpecified, CaseSensitive
     #     tags: [
     #       {
     #         key: "TagKey", # required
     #         value: "TagValue", # required
     #       },
     #     ],
+    #     file_share_name: "FileShareName",
+    #     cache_attributes: {
+    #       cache_stale_timeout_in_seconds: 1,
+    #     },
     #   })
     #
     # @example Response structure
@@ -3040,6 +3082,8 @@ module Aws::StorageGateway
     #   resp.nfs_file_share_info_list[0].tags #=> Array
     #   resp.nfs_file_share_info_list[0].tags[0].key #=> String
     #   resp.nfs_file_share_info_list[0].tags[0].value #=> String
+    #   resp.nfs_file_share_info_list[0].file_share_name #=> String
+    #   resp.nfs_file_share_info_list[0].cache_attributes.cache_stale_timeout_in_seconds #=> Integer
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/DescribeNFSFileShares AWS API Documentation
     #
@@ -3094,9 +3138,12 @@ module Aws::StorageGateway
     #   resp.smb_file_share_info_list[0].invalid_user_list[0] #=> String
     #   resp.smb_file_share_info_list[0].audit_destination_arn #=> String
     #   resp.smb_file_share_info_list[0].authentication #=> String
+    #   resp.smb_file_share_info_list[0].case_sensitivity #=> String, one of "ClientSpecified", "CaseSensitive"
     #   resp.smb_file_share_info_list[0].tags #=> Array
     #   resp.smb_file_share_info_list[0].tags[0].key #=> String
     #   resp.smb_file_share_info_list[0].tags[0].value #=> String
+    #   resp.smb_file_share_info_list[0].file_share_name #=> String
+    #   resp.smb_file_share_info_list[0].cache_attributes.cache_stale_timeout_in_seconds #=> Integer
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/DescribeSMBFileShares AWS API Documentation
     #
@@ -4663,7 +4710,7 @@ module Aws::StorageGateway
     end
 
     # Refreshes the cache for the specified file share. This operation finds
-    # objects in the Amazon S3 bucket that were added, removed or replaced
+    # objects in the Amazon S3 bucket that were added, removed, or replaced
     # since the gateway last listed the bucket's contents and cached the
     # results. This operation is only supported in the file gateway type.
     # You can subscribe to be notified through an Amazon CloudWatch event
@@ -5750,6 +5797,17 @@ module Aws::StorageGateway
     #
     #   Valid Values: `true` \| `false`
     #
+    # @option params [String] :file_share_name
+    #   The name of the file share. Optional.
+    #
+    #   <note markdown="1"> `FileShareName` must be set if an S3 prefix name is set in
+    #   `LocationARN`.
+    #
+    #    </note>
+    #
+    # @option params [Types::CacheAttributes] :cache_attributes
+    #   Refresh cache information.
+    #
     # @return [Types::UpdateNFSFileShareOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::UpdateNFSFileShareOutput#file_share_arn #file_share_arn} => String
@@ -5773,6 +5831,10 @@ module Aws::StorageGateway
     #     read_only: false,
     #     guess_mime_type_enabled: false,
     #     requester_pays: false,
+    #     file_share_name: "FileShareName",
+    #     cache_attributes: {
+    #       cache_stale_timeout_in_seconds: 1,
+    #     },
     #   })
     #
     # @example Response structure
@@ -5884,25 +5946,45 @@ module Aws::StorageGateway
     #   [1]: https://docs.aws.amazon.com/storagegateway/latest/userguide/smb-acl.html
     #
     # @option params [Array<String>] :admin_user_list
-    #   A list of users in the Active Directory that have administrator rights
-    #   to the file share. A group must be prefixed with the @ character. For
-    #   example, `@group1`. Can only be set if Authentication is set to
-    #   `ActiveDirectory`.
+    #   A list of users or groups in the Active Directory that have
+    #   administrator rights to the file share. A group must be prefixed with
+    #   the @ character. Acceptable formats include: `DOMAIN\User1`, `user1`,
+    #   `@group1`, and `@DOMAIN\group1`. Can only be set if Authentication is
+    #   set to `ActiveDirectory`.
     #
     # @option params [Array<String>] :valid_user_list
     #   A list of users or groups in the Active Directory that are allowed to
     #   access the file share. A group must be prefixed with the @ character.
-    #   For example, `@group1`. Can only be set if Authentication is set to
+    #   Acceptable formats include: `DOMAIN\User1`, `user1`, `@group1`, and
+    #   `@DOMAIN\group1`. Can only be set if Authentication is set to
     #   `ActiveDirectory`.
     #
     # @option params [Array<String>] :invalid_user_list
     #   A list of users or groups in the Active Directory that are not allowed
     #   to access the file share. A group must be prefixed with the @
-    #   character. For example `@group1`. Can only be set if Authentication is
+    #   character. Acceptable formats include: `DOMAIN\User1`, `user1`,
+    #   `@group1`, and `@DOMAIN\group1`. Can only be set if Authentication is
     #   set to `ActiveDirectory`.
     #
     # @option params [String] :audit_destination_arn
     #   The Amazon Resource Name (ARN) of the storage used for the audit logs.
+    #
+    # @option params [String] :case_sensitivity
+    #   The case of an object name in an Amazon S3 bucket. For
+    #   `ClientSpecified`, the client determines the case sensitivity. For
+    #   `CaseSensitive`, the gateway determines the case sensitivity. The
+    #   default value is `ClientSpecified`.
+    #
+    # @option params [String] :file_share_name
+    #   The name of the file share. Optional.
+    #
+    #   <note markdown="1"> `FileShareName` must be set if an S3 prefix name is set in
+    #   `LocationARN`.
+    #
+    #    </note>
+    #
+    # @option params [Types::CacheAttributes] :cache_attributes
+    #   Refresh cache information.
     #
     # @return [Types::UpdateSMBFileShareOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -5924,6 +6006,11 @@ module Aws::StorageGateway
     #     valid_user_list: ["FileShareUser"],
     #     invalid_user_list: ["FileShareUser"],
     #     audit_destination_arn: "AuditDestinationARN",
+    #     case_sensitivity: "ClientSpecified", # accepts ClientSpecified, CaseSensitive
+    #     file_share_name: "FileShareName",
+    #     cache_attributes: {
+    #       cache_stale_timeout_in_seconds: 1,
+    #     },
     #   })
     #
     # @example Response structure
@@ -6152,7 +6239,7 @@ module Aws::StorageGateway
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-storagegateway'
-      context[:gem_version] = '1.44.0'
+      context[:gem_version] = '1.45.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

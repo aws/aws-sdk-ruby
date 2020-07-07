@@ -572,6 +572,33 @@ module Aws::StorageGateway
       include Aws::Structure
     end
 
+    # Lists refresh cache information.
+    #
+    # @note When making an API call, you may pass CacheAttributes
+    #   data as a hash:
+    #
+    #       {
+    #         cache_stale_timeout_in_seconds: 1,
+    #       }
+    #
+    # @!attribute [rw] cache_stale_timeout_in_seconds
+    #   Refreshes a file share's cache by using Time To Live (TTL). TTL is
+    #   the length of time since the last refresh after which access to the
+    #   directory would cause the file gateway to first refresh that
+    #   directory's contents from the Amazon S3 bucket. The TTL duration is
+    #   in seconds.
+    #
+    #   Valid Values: 300 to 2,592,000 seconds (5 minutes to 30 days)
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/CacheAttributes AWS API Documentation
+    #
+    class CacheAttributes < Struct.new(
+      :cache_stale_timeout_in_seconds)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Describes an iSCSI cached volume.
     #
     # @!attribute [rw] volume_arn
@@ -979,6 +1006,10 @@ module Aws::StorageGateway
     #             value: "TagValue", # required
     #           },
     #         ],
+    #         file_share_name: "FileShareName",
+    #         cache_attributes: {
+    #           cache_stale_timeout_in_seconds: 1,
+    #         },
     #       }
     #
     # @!attribute [rw] client_token
@@ -1015,7 +1046,8 @@ module Aws::StorageGateway
     #   @return [String]
     #
     # @!attribute [rw] location_arn
-    #   The ARN of the backed storage used for storing file data.
+    #   The ARN of the backend storage used for storing file data. A prefix
+    #   name can be added to the S3 bucket name. It must end with a "/".
     #   @return [String]
     #
     # @!attribute [rw] default_storage_class
@@ -1095,6 +1127,19 @@ module Aws::StorageGateway
     #    </note>
     #   @return [Array<Types::Tag>]
     #
+    # @!attribute [rw] file_share_name
+    #   The name of the file share. Optional.
+    #
+    #   <note markdown="1"> `FileShareName` must be set if an S3 prefix name is set in
+    #   `LocationARN`.
+    #
+    #    </note>
+    #   @return [String]
+    #
+    # @!attribute [rw] cache_attributes
+    #   Refresh cache information.
+    #   @return [Types::CacheAttributes]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/CreateNFSFileShareInput AWS API Documentation
     #
     class CreateNFSFileShareInput < Struct.new(
@@ -1112,7 +1157,9 @@ module Aws::StorageGateway
       :read_only,
       :guess_mime_type_enabled,
       :requester_pays,
-      :tags)
+      :tags,
+      :file_share_name,
+      :cache_attributes)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1154,12 +1201,17 @@ module Aws::StorageGateway
     #         invalid_user_list: ["FileShareUser"],
     #         audit_destination_arn: "AuditDestinationARN",
     #         authentication: "Authentication",
+    #         case_sensitivity: "ClientSpecified", # accepts ClientSpecified, CaseSensitive
     #         tags: [
     #           {
     #             key: "TagKey", # required
     #             value: "TagValue", # required
     #           },
     #         ],
+    #         file_share_name: "FileShareName",
+    #         cache_attributes: {
+    #           cache_stale_timeout_in_seconds: 1,
+    #         },
     #       }
     #
     # @!attribute [rw] client_token
@@ -1192,7 +1244,8 @@ module Aws::StorageGateway
     #   @return [String]
     #
     # @!attribute [rw] location_arn
-    #   The ARN of the backed storage used for storing file data.
+    #   The ARN of the backend storage used for storing file data. A prefix
+    #   name can be added to the S3 bucket name. It must end with a "/".
     #   @return [String]
     #
     # @!attribute [rw] default_storage_class
@@ -1260,9 +1313,10 @@ module Aws::StorageGateway
     #   @return [Boolean]
     #
     # @!attribute [rw] admin_user_list
-    #   A list of users in the Active Directory that will be granted
-    #   administrator privileges on the file share. These users can do all
-    #   file operations as the super-user.
+    #   A list of users or groups in the Active Directory that will be
+    #   granted administrator privileges on the file share. These users can
+    #   do all file operations as the super-user. Acceptable formats
+    #   include: `DOMAIN\User1`, `user1`, `@group1`, and `@DOMAIN\group1`.
     #
     #   Use this option very carefully, because any user in this list can do
     #   anything they like on the file share, regardless of file
@@ -1271,16 +1325,18 @@ module Aws::StorageGateway
     #
     # @!attribute [rw] valid_user_list
     #   A list of users or groups in the Active Directory that are allowed
-    #   to access the file share. A group must be prefixed with the @
-    #   character. For example, `@group1`. Can only be set if Authentication
+    #   to access the file []() share. A group must be prefixed with the @
+    #   character. Acceptable formats include: `DOMAIN\User1`, `user1`,
+    #   `@group1`, and `@DOMAIN\group1`. Can only be set if Authentication
     #   is set to `ActiveDirectory`.
     #   @return [Array<String>]
     #
     # @!attribute [rw] invalid_user_list
     #   A list of users or groups in the Active Directory that are not
     #   allowed to access the file share. A group must be prefixed with the
-    #   @ character. For example, `@group1`. Can only be set if
-    #   Authentication is set to `ActiveDirectory`.
+    #   @ character. Acceptable formats include: `DOMAIN\User1`, `user1`,
+    #   `@group1`, and `@DOMAIN\group1`. Can only be set if Authentication
+    #   is set to `ActiveDirectory`.
     #   @return [Array<String>]
     #
     # @!attribute [rw] audit_destination_arn
@@ -1295,6 +1351,13 @@ module Aws::StorageGateway
     #   Valid Values: `ActiveDirectory` \| `GuestAccess`
     #   @return [String]
     #
+    # @!attribute [rw] case_sensitivity
+    #   The case of an object name in an Amazon S3 bucket. For
+    #   `ClientSpecified`, the client determines the case sensitivity. For
+    #   `CaseSensitive`, the gateway determines the case sensitivity. The
+    #   default value is `ClientSpecified`.
+    #   @return [String]
+    #
     # @!attribute [rw] tags
     #   A list of up to 50 tags that can be assigned to the NFS file share.
     #   Each tag is a key-value pair.
@@ -1306,6 +1369,19 @@ module Aws::StorageGateway
     #
     #    </note>
     #   @return [Array<Types::Tag>]
+    #
+    # @!attribute [rw] file_share_name
+    #   The name of the file share. Optional.
+    #
+    #   <note markdown="1"> `FileShareName` must be set if an S3 prefix name is set in
+    #   `LocationARN`.
+    #
+    #    </note>
+    #   @return [String]
+    #
+    # @!attribute [rw] cache_attributes
+    #   Refresh cache information.
+    #   @return [Types::CacheAttributes]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/CreateSMBFileShareInput AWS API Documentation
     #
@@ -1327,7 +1403,10 @@ module Aws::StorageGateway
       :invalid_user_list,
       :audit_destination_arn,
       :authentication,
-      :tags)
+      :case_sensitivity,
+      :tags,
+      :file_share_name,
+      :cache_attributes)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4477,7 +4556,8 @@ module Aws::StorageGateway
     #   @return [String]
     #
     # @!attribute [rw] location_arn
-    #   The ARN of the backend storage used for storing file data.
+    #   The ARN of the backend storage used for storing file data. A prefix
+    #   name can be added to the S3 bucket name. It must end with a "/".
     #   @return [String]
     #
     # @!attribute [rw] default_storage_class
@@ -4550,6 +4630,19 @@ module Aws::StorageGateway
     #   the `ListTagsForResource` API operation.
     #   @return [Array<Types::Tag>]
     #
+    # @!attribute [rw] file_share_name
+    #   The name of the file share. Optional.
+    #
+    #   <note markdown="1"> `FileShareName` must be set if an S3 prefix name is set in
+    #   `LocationARN`.
+    #
+    #    </note>
+    #   @return [String]
+    #
+    # @!attribute [rw] cache_attributes
+    #   Refresh cache information.
+    #   @return [Types::CacheAttributes]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/NFSFileShareInfo AWS API Documentation
     #
     class NFSFileShareInfo < Struct.new(
@@ -4570,7 +4663,9 @@ module Aws::StorageGateway
       :read_only,
       :guess_mime_type_enabled,
       :requester_pays,
-      :tags)
+      :tags,
+      :file_share_name,
+      :cache_attributes)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4928,7 +5023,8 @@ module Aws::StorageGateway
     #   @return [String]
     #
     # @!attribute [rw] location_arn
-    #   The ARN of the backend storage used for storing file data.
+    #   The ARN of the backend storage used for storing file data. A prefix
+    #   name can be added to the S3 bucket name. It must end with a "/".
     #   @return [String]
     #
     # @!attribute [rw] default_storage_class
@@ -4997,22 +5093,25 @@ module Aws::StorageGateway
     # @!attribute [rw] admin_user_list
     #   A list of users or groups in the Active Directory that have
     #   administrator rights to the file share. A group must be prefixed
-    #   with the @ character. For example `@group1`. Can only be set if
+    #   with the @ character. Acceptable formats include: `DOMAIN\User1`,
+    #   `user1`, `@group1`, and `@DOMAIN\group1`. Can only be set if
     #   Authentication is set to `ActiveDirectory`.
     #   @return [Array<String>]
     #
     # @!attribute [rw] valid_user_list
     #   A list of users or groups in the Active Directory that are allowed
     #   to access the file share. A group must be prefixed with the @
-    #   character. For example, `@group1`. Can only be set if Authentication
+    #   character. Acceptable formats include: `DOMAIN\User1`, `user1`,
+    #   `@group1`, and `@DOMAIN\group1`. Can only be set if Authentication
     #   is set to `ActiveDirectory`.
     #   @return [Array<String>]
     #
     # @!attribute [rw] invalid_user_list
     #   A list of users or groups in the Active Directory that are not
     #   allowed to access the file share. A group must be prefixed with the
-    #   @ character. For example `@group1`. Can only be set if
-    #   Authentication is set to `ActiveDirectory`.
+    #   @ character. Acceptable formats include: `DOMAIN\User1`, `user1`,
+    #   `@group1`, and `@DOMAIN\group1`. Can only be set if Authentication
+    #   is set to `ActiveDirectory`.
     #   @return [Array<String>]
     #
     # @!attribute [rw] audit_destination_arn
@@ -5027,12 +5126,32 @@ module Aws::StorageGateway
     #   Valid Values: `ActiveDirectory` \| `GuestAccess`
     #   @return [String]
     #
+    # @!attribute [rw] case_sensitivity
+    #   The case of an object name in an Amazon S3 bucket. For
+    #   `ClientSpecified`, the client determines the case sensitivity. For
+    #   `CaseSensitive`, the gateway determines the case sensitivity. The
+    #   default value is `ClientSpecified`.
+    #   @return [String]
+    #
     # @!attribute [rw] tags
     #   A list of up to 50 tags assigned to the SMB file share, sorted
     #   alphabetically by key name. Each tag is a key-value pair. For a
     #   gateway with more than 10 tags assigned, you can view all tags using
     #   the `ListTagsForResource` API operation.
     #   @return [Array<Types::Tag>]
+    #
+    # @!attribute [rw] file_share_name
+    #   The name of the file share. Optional.
+    #
+    #   <note markdown="1"> `FileShareName` must be set if an S3 prefix name is set in
+    #   `LocationARN`.
+    #
+    #    </note>
+    #   @return [String]
+    #
+    # @!attribute [rw] cache_attributes
+    #   Refresh cache information.
+    #   @return [Types::CacheAttributes]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/SMBFileShareInfo AWS API Documentation
     #
@@ -5057,7 +5176,10 @@ module Aws::StorageGateway
       :invalid_user_list,
       :audit_destination_arn,
       :authentication,
-      :tags)
+      :case_sensitivity,
+      :tags,
+      :file_share_name,
+      :cache_attributes)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -6098,6 +6220,10 @@ module Aws::StorageGateway
     #         read_only: false,
     #         guess_mime_type_enabled: false,
     #         requester_pays: false,
+    #         file_share_name: "FileShareName",
+    #         cache_attributes: {
+    #           cache_stale_timeout_in_seconds: 1,
+    #         },
     #       }
     #
     # @!attribute [rw] file_share_arn
@@ -6187,6 +6313,19 @@ module Aws::StorageGateway
     #   Valid Values: `true` \| `false`
     #   @return [Boolean]
     #
+    # @!attribute [rw] file_share_name
+    #   The name of the file share. Optional.
+    #
+    #   <note markdown="1"> `FileShareName` must be set if an S3 prefix name is set in
+    #   `LocationARN`.
+    #
+    #    </note>
+    #   @return [String]
+    #
+    # @!attribute [rw] cache_attributes
+    #   Refresh cache information.
+    #   @return [Types::CacheAttributes]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/UpdateNFSFileShareInput AWS API Documentation
     #
     class UpdateNFSFileShareInput < Struct.new(
@@ -6200,7 +6339,9 @@ module Aws::StorageGateway
       :squash,
       :read_only,
       :guess_mime_type_enabled,
-      :requester_pays)
+      :requester_pays,
+      :file_share_name,
+      :cache_attributes)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -6238,6 +6379,11 @@ module Aws::StorageGateway
     #         valid_user_list: ["FileShareUser"],
     #         invalid_user_list: ["FileShareUser"],
     #         audit_destination_arn: "AuditDestinationARN",
+    #         case_sensitivity: "ClientSpecified", # accepts ClientSpecified, CaseSensitive
+    #         file_share_name: "FileShareName",
+    #         cache_attributes: {
+    #           cache_stale_timeout_in_seconds: 1,
+    #         },
     #       }
     #
     # @!attribute [rw] file_share_arn
@@ -6324,30 +6470,53 @@ module Aws::StorageGateway
     #   @return [Boolean]
     #
     # @!attribute [rw] admin_user_list
-    #   A list of users in the Active Directory that have administrator
-    #   rights to the file share. A group must be prefixed with the @
-    #   character. For example, `@group1`. Can only be set if Authentication
-    #   is set to `ActiveDirectory`.
+    #   A list of users or groups in the Active Directory that have
+    #   administrator rights to the file share. A group must be prefixed
+    #   with the @ character. Acceptable formats include: `DOMAIN\User1`,
+    #   `user1`, `@group1`, and `@DOMAIN\group1`. Can only be set if
+    #   Authentication is set to `ActiveDirectory`.
     #   @return [Array<String>]
     #
     # @!attribute [rw] valid_user_list
     #   A list of users or groups in the Active Directory that are allowed
     #   to access the file share. A group must be prefixed with the @
-    #   character. For example, `@group1`. Can only be set if Authentication
+    #   character. Acceptable formats include: `DOMAIN\User1`, `user1`,
+    #   `@group1`, and `@DOMAIN\group1`. Can only be set if Authentication
     #   is set to `ActiveDirectory`.
     #   @return [Array<String>]
     #
     # @!attribute [rw] invalid_user_list
     #   A list of users or groups in the Active Directory that are not
     #   allowed to access the file share. A group must be prefixed with the
-    #   @ character. For example `@group1`. Can only be set if
-    #   Authentication is set to `ActiveDirectory`.
+    #   @ character. Acceptable formats include: `DOMAIN\User1`, `user1`,
+    #   `@group1`, and `@DOMAIN\group1`. Can only be set if Authentication
+    #   is set to `ActiveDirectory`.
     #   @return [Array<String>]
     #
     # @!attribute [rw] audit_destination_arn
     #   The Amazon Resource Name (ARN) of the storage used for the audit
     #   logs.
     #   @return [String]
+    #
+    # @!attribute [rw] case_sensitivity
+    #   The case of an object name in an Amazon S3 bucket. For
+    #   `ClientSpecified`, the client determines the case sensitivity. For
+    #   `CaseSensitive`, the gateway determines the case sensitivity. The
+    #   default value is `ClientSpecified`.
+    #   @return [String]
+    #
+    # @!attribute [rw] file_share_name
+    #   The name of the file share. Optional.
+    #
+    #   <note markdown="1"> `FileShareName` must be set if an S3 prefix name is set in
+    #   `LocationARN`.
+    #
+    #    </note>
+    #   @return [String]
+    #
+    # @!attribute [rw] cache_attributes
+    #   Refresh cache information.
+    #   @return [Types::CacheAttributes]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/UpdateSMBFileShareInput AWS API Documentation
     #
@@ -6364,7 +6533,10 @@ module Aws::StorageGateway
       :admin_user_list,
       :valid_user_list,
       :invalid_user_list,
-      :audit_destination_arn)
+      :audit_destination_arn,
+      :case_sensitivity,
+      :file_share_name,
+      :cache_attributes)
       SENSITIVE = []
       include Aws::Structure
     end

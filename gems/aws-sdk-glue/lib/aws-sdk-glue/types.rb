@@ -1543,8 +1543,7 @@ module Aws::Glue
     #   @return [String]
     #
     # @!attribute [rw] connection_type
-    #   The type of the connection. Currently, only JDBC is supported; SFTP
-    #   is not supported.
+    #   The type of the connection. Currently, SFTP is not supported.
     #   @return [String]
     #
     # @!attribute [rw] match_criteria
@@ -2447,6 +2446,10 @@ module Aws::Glue
     #               permissions: ["ALL"], # accepts ALL, SELECT, ALTER, DROP, DELETE, INSERT, CREATE_DATABASE, CREATE_TABLE, DATA_LOCATION_ACCESS
     #             },
     #           ],
+    #           target_database: {
+    #             catalog_id: "CatalogIdString",
+    #             database_name: "NameString",
+    #           },
     #         },
     #       }
     #
@@ -3591,6 +3594,11 @@ module Aws::Glue
     #           parameters: {
     #             "KeyString" => "ParametersMapValue",
     #           },
+    #           target_table: {
+    #             catalog_id: "CatalogIdString",
+    #             database_name: "NameString",
+    #             name: "NameString",
+    #           },
     #         },
     #       }
     #
@@ -4036,6 +4044,15 @@ module Aws::Glue
     #   Creates a set of default permissions on the table for principals.
     #   @return [Array<Types::PrincipalPermissions>]
     #
+    # @!attribute [rw] target_database
+    #   A `DatabaseIdentifier` structure that describes a target database
+    #   for resource linking.
+    #   @return [Types::DatabaseIdentifier]
+    #
+    # @!attribute [rw] catalog_id
+    #   The ID of the Data Catalog in which the database resides.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/Database AWS API Documentation
     #
     class Database < Struct.new(
@@ -4044,7 +4061,36 @@ module Aws::Glue
       :location_uri,
       :parameters,
       :create_time,
-      :create_table_default_permissions)
+      :create_table_default_permissions,
+      :target_database,
+      :catalog_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A structure that describes a target database for resource linking.
+    #
+    # @note When making an API call, you may pass DatabaseIdentifier
+    #   data as a hash:
+    #
+    #       {
+    #         catalog_id: "CatalogIdString",
+    #         database_name: "NameString",
+    #       }
+    #
+    # @!attribute [rw] catalog_id
+    #   The ID of the Data Catalog in which the database resides.
+    #   @return [String]
+    #
+    # @!attribute [rw] database_name
+    #   The name of the catalog database.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/DatabaseIdentifier AWS API Documentation
+    #
+    class DatabaseIdentifier < Struct.new(
+      :catalog_id,
+      :database_name)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4069,6 +4115,10 @@ module Aws::Glue
     #             permissions: ["ALL"], # accepts ALL, SELECT, ALTER, DROP, DELETE, INSERT, CREATE_DATABASE, CREATE_TABLE, DATA_LOCATION_ACCESS
     #           },
     #         ],
+    #         target_database: {
+    #           catalog_id: "CatalogIdString",
+    #           database_name: "NameString",
+    #         },
     #       }
     #
     # @!attribute [rw] name
@@ -4096,6 +4146,11 @@ module Aws::Glue
     #   Creates a set of default permissions on the table for principals.
     #   @return [Array<Types::PrincipalPermissions>]
     #
+    # @!attribute [rw] target_database
+    #   A `DatabaseIdentifier` structure that describes a target database
+    #   for resource linking.
+    #   @return [Types::DatabaseIdentifier]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/DatabaseInput AWS API Documentation
     #
     class DatabaseInput < Struct.new(
@@ -4103,7 +4158,8 @@ module Aws::Glue
       :description,
       :location_uri,
       :parameters,
-      :create_table_default_permissions)
+      :create_table_default_permissions,
+      :target_database)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4550,16 +4606,23 @@ module Aws::Glue
     #
     #       {
     #         policy_hash_condition: "HashString",
+    #         resource_arn: "GlueResourceArn",
     #       }
     #
     # @!attribute [rw] policy_hash_condition
     #   The hash value returned when this policy was set.
     #   @return [String]
     #
+    # @!attribute [rw] resource_arn
+    #   The ARN of the AWS Glue resource for the resource policy to be
+    #   deleted.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/DeleteResourcePolicyRequest AWS API Documentation
     #
     class DeleteResourcePolicyRequest < Struct.new(
-      :policy_hash_condition)
+      :policy_hash_condition,
+      :resource_arn)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -5773,8 +5836,7 @@ module Aws::Glue
     #   @return [Array<String>]
     #
     # @!attribute [rw] connection_type
-    #   The type of connections to return. Currently, only JDBC is
-    #   supported; SFTP is not supported.
+    #   The type of connections to return. Currently, SFTP is not supported.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/GetConnectionsFilter AWS API Documentation
@@ -6057,6 +6119,7 @@ module Aws::Glue
     #         catalog_id: "CatalogIdString",
     #         next_token: "Token",
     #         max_results: 1,
+    #         resource_share_type: "FOREIGN", # accepts FOREIGN, ALL
     #       }
     #
     # @!attribute [rw] catalog_id
@@ -6072,12 +6135,24 @@ module Aws::Glue
     #   The maximum number of databases to return in one response.
     #   @return [Integer]
     #
+    # @!attribute [rw] resource_share_type
+    #   Allows you to specify that you want to list the databases shared
+    #   with your account. The allowable values are `FOREIGN` or `ALL`.
+    #
+    #   * If set to `FOREIGN`, will list the databases shared with your
+    #     account.
+    #
+    #   * If set to `ALL`, will list the databases shared with your account,
+    #     as well as the databases in yor local account.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/GetDatabasesRequest AWS API Documentation
     #
     class GetDatabasesRequest < Struct.new(
       :catalog_id,
       :next_token,
-      :max_results)
+      :max_results,
+      :resource_share_type)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -7188,11 +7263,74 @@ module Aws::Glue
       include Aws::Structure
     end
 
-    # @api private
+    # @note When making an API call, you may pass GetResourcePoliciesRequest
+    #   data as a hash:
+    #
+    #       {
+    #         next_token: "Token",
+    #         max_results: 1,
+    #       }
+    #
+    # @!attribute [rw] next_token
+    #   A continuation token, if this is a continuation request.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum size of a list to return.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/GetResourcePoliciesRequest AWS API Documentation
+    #
+    class GetResourcePoliciesRequest < Struct.new(
+      :next_token,
+      :max_results)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] get_resource_policies_response_list
+    #   A list of the individual resource policies and the account-level
+    #   resource policy.
+    #   @return [Array<Types::GluePolicy>]
+    #
+    # @!attribute [rw] next_token
+    #   A continuation token, if the returned list does not contain the last
+    #   resource policy available.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/GetResourcePoliciesResponse AWS API Documentation
+    #
+    class GetResourcePoliciesResponse < Struct.new(
+      :get_resource_policies_response_list,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass GetResourcePolicyRequest
+    #   data as a hash:
+    #
+    #       {
+    #         resource_arn: "GlueResourceArn",
+    #       }
+    #
+    # @!attribute [rw] resource_arn
+    #   The ARN of the AWS Glue resource for the resource policy to be
+    #   retrieved. For more information about AWS Glue resource ARNs, see
+    #   the [AWS Glue ARN string pattern][1]
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/glue/latest/dg/aws-glue-api-common.html#aws-glue-api-regex-aws-glue-arn-id
+    #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/GetResourcePolicyRequest AWS API Documentation
     #
-    class GetResourcePolicyRequest < Aws::EmptyStructure; end
+    class GetResourcePolicyRequest < Struct.new(
+      :resource_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
 
     # @!attribute [rw] policy_in_json
     #   Contains the requested policy document, in JSON format.
@@ -7930,6 +8068,35 @@ module Aws::Glue
     #
     class GlueEncryptionException < Struct.new(
       :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A structure for returning a resource policy.
+    #
+    # @!attribute [rw] policy_in_json
+    #   Contains the requested policy document, in JSON format.
+    #   @return [String]
+    #
+    # @!attribute [rw] policy_hash
+    #   Contains the hash value associated with this policy.
+    #   @return [String]
+    #
+    # @!attribute [rw] create_time
+    #   The date and time at which the policy was created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] update_time
+    #   The date and time at which the policy was last updated.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/GluePolicy AWS API Documentation
+    #
+    class GluePolicy < Struct.new(
+      :policy_in_json,
+      :policy_hash,
+      :create_time,
+      :update_time)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -9848,6 +10015,10 @@ module Aws::Glue
     #   partition.
     #   @return [Time]
     #
+    # @!attribute [rw] catalog_id
+    #   The ID of the Data Catalog in which the partition resides.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/Partition AWS API Documentation
     #
     class Partition < Struct.new(
@@ -9858,7 +10029,8 @@ module Aws::Glue
       :last_access_time,
       :storage_descriptor,
       :parameters,
-      :last_analyzed_time)
+      :last_analyzed_time,
+      :catalog_id)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -10197,12 +10369,24 @@ module Aws::Glue
     #
     #       {
     #         policy_in_json: "PolicyJsonString", # required
+    #         resource_arn: "GlueResourceArn",
     #         policy_hash_condition: "HashString",
     #         policy_exists_condition: "MUST_EXIST", # accepts MUST_EXIST, NOT_EXIST, NONE
+    #         enable_hybrid: "TRUE", # accepts TRUE, FALSE
     #       }
     #
     # @!attribute [rw] policy_in_json
     #   Contains the policy document to set, in JSON format.
+    #   @return [String]
+    #
+    # @!attribute [rw] resource_arn
+    #   The ARN of the AWS Glue resource for the resource policy to be set.
+    #   For more information about AWS Glue resource ARNs, see the [AWS Glue
+    #   ARN string pattern][1]
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/glue/latest/dg/aws-glue-api-common.html#aws-glue-api-regex-aws-glue-arn-id
     #   @return [String]
     #
     # @!attribute [rw] policy_hash_condition
@@ -10219,12 +10403,26 @@ module Aws::Glue
     #   policy.
     #   @return [String]
     #
+    # @!attribute [rw] enable_hybrid
+    #   Allows you to specify if you want to use both resource-level and
+    #   account/catalog-level resource policies. A resource-level policy is
+    #   a policy attached to an individual resource such as a database or a
+    #   table.
+    #
+    #   The default value of `NO` indicates that resource-level policies
+    #   cannot co-exist with an account-level policy. A value of `YES` means
+    #   the use of both resource-level and account/catalog-level resource
+    #   policies is allowed.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/PutResourcePolicyRequest AWS API Documentation
     #
     class PutResourcePolicyRequest < Struct.new(
       :policy_in_json,
+      :resource_arn,
       :policy_hash_condition,
-      :policy_exists_condition)
+      :policy_exists_condition,
+      :enable_hybrid)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -10563,6 +10761,7 @@ module Aws::Glue
     #           },
     #         ],
     #         max_results: 1,
+    #         resource_share_type: "FOREIGN", # accepts FOREIGN, ALL
     #       }
     #
     # @!attribute [rw] catalog_id
@@ -10594,6 +10793,17 @@ module Aws::Glue
     #   The maximum number of tables to return in a single response.
     #   @return [Integer]
     #
+    # @!attribute [rw] resource_share_type
+    #   Allows you to specify that you want to search the tables shared with
+    #   your account. The allowable values are `FOREIGN` or `ALL`.
+    #
+    #   * If set to `FOREIGN`, will search the tables shared with your
+    #     account.
+    #
+    #   * If set to `ALL`, will search the tables shared with your account,
+    #     as well as the tables in yor local account.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/SearchTablesRequest AWS API Documentation
     #
     class SearchTablesRequest < Struct.new(
@@ -10602,7 +10812,8 @@ module Aws::Glue
       :filters,
       :search_text,
       :sort_criteria,
-      :max_results)
+      :max_results,
+      :resource_share_type)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -11549,6 +11760,15 @@ module Aws::Glue
     #   Formation.
     #   @return [Boolean]
     #
+    # @!attribute [rw] target_table
+    #   A `TableIdentifier` structure that describes a target table for
+    #   resource linking.
+    #   @return [Types::TableIdentifier]
+    #
+    # @!attribute [rw] catalog_id
+    #   The ID of the Data Catalog in which the table resides.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/Table AWS API Documentation
     #
     class Table < Struct.new(
@@ -11568,7 +11788,9 @@ module Aws::Glue
       :table_type,
       :parameters,
       :created_by,
-      :is_registered_with_lake_formation)
+      :is_registered_with_lake_formation,
+      :target_table,
+      :catalog_id)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -11589,6 +11811,39 @@ module Aws::Glue
     class TableError < Struct.new(
       :table_name,
       :error_detail)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A structure that describes a target table for resource linking.
+    #
+    # @note When making an API call, you may pass TableIdentifier
+    #   data as a hash:
+    #
+    #       {
+    #         catalog_id: "CatalogIdString",
+    #         database_name: "NameString",
+    #         name: "NameString",
+    #       }
+    #
+    # @!attribute [rw] catalog_id
+    #   The ID of the Data Catalog in which the table resides.
+    #   @return [String]
+    #
+    # @!attribute [rw] database_name
+    #   The name of the catalog database that contains the target table.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The name of the target table.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/TableIdentifier AWS API Documentation
+    #
+    class TableIdentifier < Struct.new(
+      :catalog_id,
+      :database_name,
+      :name)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -11663,6 +11918,11 @@ module Aws::Glue
     #         parameters: {
     #           "KeyString" => "ParametersMapValue",
     #         },
+    #         target_table: {
+    #           catalog_id: "CatalogIdString",
+    #           database_name: "NameString",
+    #           name: "NameString",
+    #         },
     #       }
     #
     # @!attribute [rw] name
@@ -11724,6 +11984,11 @@ module Aws::Glue
     #   These key-value pairs define properties associated with the table.
     #   @return [Hash<String,String>]
     #
+    # @!attribute [rw] target_table
+    #   A `TableIdentifier` structure that describes a target table for
+    #   resource linking.
+    #   @return [Types::TableIdentifier]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/TableInput AWS API Documentation
     #
     class TableInput < Struct.new(
@@ -11738,7 +12003,8 @@ module Aws::Glue
       :view_original_text,
       :view_expanded_text,
       :table_type,
-      :parameters)
+      :parameters,
+      :target_table)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -12908,6 +13174,10 @@ module Aws::Glue
     #               permissions: ["ALL"], # accepts ALL, SELECT, ALTER, DROP, DELETE, INSERT, CREATE_DATABASE, CREATE_TABLE, DATA_LOCATION_ACCESS
     #             },
     #           ],
+    #           target_database: {
+    #             catalog_id: "CatalogIdString",
+    #             database_name: "NameString",
+    #           },
     #         },
     #       }
     #
@@ -13476,6 +13746,11 @@ module Aws::Glue
     #           parameters: {
     #             "KeyString" => "ParametersMapValue",
     #           },
+    #           target_table: {
+    #             catalog_id: "CatalogIdString",
+    #             database_name: "NameString",
+    #             name: "NameString",
+    #           },
     #         },
     #         skip_archive: false,
     #       }
@@ -13730,7 +14005,7 @@ module Aws::Glue
     #   @return [String]
     #
     # @!attribute [rw] database_name
-    #   The name of the database where the function resides.
+    #   The name of the catalog database that contains the function.
     #   @return [String]
     #
     # @!attribute [rw] class_name
@@ -13753,6 +14028,10 @@ module Aws::Glue
     #   The resource URIs for the function.
     #   @return [Array<Types::ResourceUri>]
     #
+    # @!attribute [rw] catalog_id
+    #   The ID of the Data Catalog in which the function resides.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/UserDefinedFunction AWS API Documentation
     #
     class UserDefinedFunction < Struct.new(
@@ -13762,7 +14041,8 @@ module Aws::Glue
       :owner_name,
       :owner_type,
       :create_time,
-      :resource_uris)
+      :resource_uris,
+      :catalog_id)
       SENSITIVE = []
       include Aws::Structure
     end

@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.175.0 (2020-07-07)
+------------------
+
+* Feature - DescribeAvailabilityZones now returns additional data about Availability Zones and Local Zones.
+
 1.174.0 (2020-07-02)
 ------------------
 

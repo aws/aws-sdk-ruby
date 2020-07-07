@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.34.0 (2020-07-07)
+------------------
+
+* Feature - Amazon CloudFront adds support for a new security policy, TLSv1.2_2019.
+
 1.33.0 (2020-07-02)
 ------------------
 

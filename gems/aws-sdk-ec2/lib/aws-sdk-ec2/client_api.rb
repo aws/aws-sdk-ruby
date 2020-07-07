@@ -2410,6 +2410,9 @@ module Aws::EC2
     AvailabilityZone.add_member(:zone_id, Shapes::ShapeRef.new(shape: String, location_name: "zoneId"))
     AvailabilityZone.add_member(:group_name, Shapes::ShapeRef.new(shape: String, location_name: "groupName"))
     AvailabilityZone.add_member(:network_border_group, Shapes::ShapeRef.new(shape: String, location_name: "networkBorderGroup"))
+    AvailabilityZone.add_member(:zone_type, Shapes::ShapeRef.new(shape: String, location_name: "zoneType"))
+    AvailabilityZone.add_member(:parent_zone_name, Shapes::ShapeRef.new(shape: String, location_name: "parentZoneName"))
+    AvailabilityZone.add_member(:parent_zone_id, Shapes::ShapeRef.new(shape: String, location_name: "parentZoneId"))
     AvailabilityZone.struct_class = Types::AvailabilityZone
 
     AvailabilityZoneList.member = Shapes::ShapeRef.new(shape: AvailabilityZone, location_name: "item")

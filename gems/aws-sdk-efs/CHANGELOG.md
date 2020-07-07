@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.33.0 (2020-07-07)
+------------------
+
+* Feature - This release adds support for automatic backups of Amazon EFS file systems to further simplify backup management.
+
 1.32.0 (2020-07-02)
 ------------------
 

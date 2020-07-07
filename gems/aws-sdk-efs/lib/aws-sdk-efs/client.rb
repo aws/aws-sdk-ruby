@@ -573,6 +573,7 @@ module Aws::EFS
     #   * {Types::FileSystemDescription#owner_id #owner_id} => String
     #   * {Types::FileSystemDescription#creation_token #creation_token} => String
     #   * {Types::FileSystemDescription#file_system_id #file_system_id} => String
+    #   * {Types::FileSystemDescription#file_system_arn #file_system_arn} => String
     #   * {Types::FileSystemDescription#creation_time #creation_time} => Time
     #   * {Types::FileSystemDescription#life_cycle_state #life_cycle_state} => String
     #   * {Types::FileSystemDescription#name #name} => String
@@ -643,6 +644,7 @@ module Aws::EFS
     #   resp.owner_id #=> String
     #   resp.creation_token #=> String
     #   resp.file_system_id #=> String
+    #   resp.file_system_arn #=> String
     #   resp.creation_time #=> Time
     #   resp.life_cycle_state #=> String, one of "creating", "available", "updating", "deleting", "deleted"
     #   resp.name #=> String
@@ -808,6 +810,7 @@ module Aws::EFS
     #   * {Types::MountTargetDescription#network_interface_id #network_interface_id} => String
     #   * {Types::MountTargetDescription#availability_zone_id #availability_zone_id} => String
     #   * {Types::MountTargetDescription#availability_zone_name #availability_zone_name} => String
+    #   * {Types::MountTargetDescription#vpc_id #vpc_id} => String
     #
     #
     # @example Example: To create a new mount target
@@ -850,6 +853,7 @@ module Aws::EFS
     #   resp.network_interface_id #=> String
     #   resp.availability_zone_id #=> String
     #   resp.availability_zone_name #=> String
+    #   resp.vpc_id #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticfilesystem-2015-02-01/CreateMountTarget AWS API Documentation
     #
@@ -1212,6 +1216,34 @@ module Aws::EFS
       req.send_request(options)
     end
 
+    # Returns the backup policy for the specified EFS file system.
+    #
+    # @option params [required, String] :file_system_id
+    #   Specifies which EFS file system to retrieve the `BackupPolicy` for.
+    #
+    # @return [Types::BackupPolicyDescription] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::BackupPolicyDescription#backup_policy #backup_policy} => Types::BackupPolicy
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_backup_policy({
+    #     file_system_id: "FileSystemId", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.backup_policy.status #=> String, one of "ENABLED", "ENABLING", "DISABLED", "DISABLING"
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticfilesystem-2015-02-01/DescribeBackupPolicy AWS API Documentation
+    #
+    # @overload describe_backup_policy(params = {})
+    # @param [Hash] params ({})
+    def describe_backup_policy(params = {}, options = {})
+      req = build_request(:describe_backup_policy, params)
+      req.send_request(options)
+    end
+
     # Returns the `FileSystemPolicy` for the specified EFS file system.
     #
     # This operation requires permissions for the
@@ -1350,6 +1382,7 @@ module Aws::EFS
     #   resp.file_systems[0].owner_id #=> String
     #   resp.file_systems[0].creation_token #=> String
     #   resp.file_systems[0].file_system_id #=> String
+    #   resp.file_systems[0].file_system_arn #=> String
     #   resp.file_systems[0].creation_time #=> Time
     #   resp.file_systems[0].life_cycle_state #=> String, one of "creating", "available", "updating", "deleting", "deleted"
     #   resp.file_systems[0].name #=> String
@@ -1466,7 +1499,7 @@ module Aws::EFS
     #   resp.to_h outputs the following:
     #   {
     #     security_groups: [
-    #       "sg-fghi4567", 
+    #       "sg-4567abcd", 
     #     ], 
     #   }
     #
@@ -1581,6 +1614,7 @@ module Aws::EFS
     #   resp.mount_targets[0].network_interface_id #=> String
     #   resp.mount_targets[0].availability_zone_id #=> String
     #   resp.mount_targets[0].availability_zone_name #=> String
+    #   resp.mount_targets[0].vpc_id #=> String
     #   resp.next_marker #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticfilesystem-2015-02-01/DescribeMountTargets AWS API Documentation
@@ -1767,6 +1801,41 @@ module Aws::EFS
     # @param [Hash] params ({})
     def modify_mount_target_security_groups(params = {}, options = {})
       req = build_request(:modify_mount_target_security_groups, params)
+      req.send_request(options)
+    end
+
+    # Updates the file system's backup policy. Use this action to start or
+    # stop automatic backups of the file system.
+    #
+    # @option params [required, String] :file_system_id
+    #   Specifies which EFS file system to update the backup policy for.
+    #
+    # @option params [required, Types::BackupPolicy] :backup_policy
+    #   The backup policy included in the `PutBackupPolicy` request.
+    #
+    # @return [Types::BackupPolicyDescription] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::BackupPolicyDescription#backup_policy #backup_policy} => Types::BackupPolicy
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.put_backup_policy({
+    #     file_system_id: "FileSystemId", # required
+    #     backup_policy: { # required
+    #       status: "ENABLED", # required, accepts ENABLED, ENABLING, DISABLED, DISABLING
+    #     },
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.backup_policy.status #=> String, one of "ENABLED", "ENABLING", "DISABLED", "DISABLING"
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticfilesystem-2015-02-01/PutBackupPolicy AWS API Documentation
+    #
+    # @overload put_backup_policy(params = {})
+    # @param [Hash] params ({})
+    def put_backup_policy(params = {}, options = {})
+      req = build_request(:put_backup_policy, params)
       req.send_request(options)
     end
 
@@ -2021,6 +2090,7 @@ module Aws::EFS
     #   * {Types::FileSystemDescription#owner_id #owner_id} => String
     #   * {Types::FileSystemDescription#creation_token #creation_token} => String
     #   * {Types::FileSystemDescription#file_system_id #file_system_id} => String
+    #   * {Types::FileSystemDescription#file_system_arn #file_system_arn} => String
     #   * {Types::FileSystemDescription#creation_time #creation_time} => Time
     #   * {Types::FileSystemDescription#life_cycle_state #life_cycle_state} => String
     #   * {Types::FileSystemDescription#name #name} => String
@@ -2046,6 +2116,7 @@ module Aws::EFS
     #   resp.owner_id #=> String
     #   resp.creation_token #=> String
     #   resp.file_system_id #=> String
+    #   resp.file_system_arn #=> String
     #   resp.creation_time #=> Time
     #   resp.life_cycle_state #=> String, one of "creating", "available", "updating", "deleting", "deleted"
     #   resp.name #=> String
@@ -2085,7 +2156,7 @@ module Aws::EFS
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-efs'
-      context[:gem_version] = '1.32.0'
+      context[:gem_version] = '1.33.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

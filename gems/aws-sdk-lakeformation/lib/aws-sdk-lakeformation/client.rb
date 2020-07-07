@@ -352,26 +352,32 @@ module Aws::LakeFormation
     #           catalog: {
     #           },
     #           database: {
+    #             catalog_id: "CatalogIdString",
     #             name: "NameString", # required
     #           },
     #           table: {
+    #             catalog_id: "CatalogIdString",
     #             database_name: "NameString", # required
-    #             name: "NameString", # required
+    #             name: "NameString",
+    #             table_wildcard: {
+    #             },
     #           },
     #           table_with_columns: {
-    #             database_name: "NameString",
-    #             name: "NameString",
+    #             catalog_id: "CatalogIdString",
+    #             database_name: "NameString", # required
+    #             name: "NameString", # required
     #             column_names: ["NameString"],
     #             column_wildcard: {
     #               excluded_column_names: ["NameString"],
     #             },
     #           },
     #           data_location: {
+    #             catalog_id: "CatalogIdString",
     #             resource_arn: "ResourceArnString", # required
     #           },
     #         },
-    #         permissions: ["ALL"], # accepts ALL, SELECT, ALTER, DROP, DELETE, INSERT, CREATE_DATABASE, CREATE_TABLE, DATA_LOCATION_ACCESS
-    #         permissions_with_grant_option: ["ALL"], # accepts ALL, SELECT, ALTER, DROP, DELETE, INSERT, CREATE_DATABASE, CREATE_TABLE, DATA_LOCATION_ACCESS
+    #         permissions: ["ALL"], # accepts ALL, SELECT, ALTER, DROP, DELETE, INSERT, DESCRIBE, CREATE_DATABASE, CREATE_TABLE, DATA_LOCATION_ACCESS
+    #         permissions_with_grant_option: ["ALL"], # accepts ALL, SELECT, ALTER, DROP, DELETE, INSERT, DESCRIBE, CREATE_DATABASE, CREATE_TABLE, DATA_LOCATION_ACCESS
     #       },
     #     ],
     #   })
@@ -381,20 +387,24 @@ module Aws::LakeFormation
     #   resp.failures #=> Array
     #   resp.failures[0].request_entry.id #=> String
     #   resp.failures[0].request_entry.principal.data_lake_principal_identifier #=> String
+    #   resp.failures[0].request_entry.resource.database.catalog_id #=> String
     #   resp.failures[0].request_entry.resource.database.name #=> String
+    #   resp.failures[0].request_entry.resource.table.catalog_id #=> String
     #   resp.failures[0].request_entry.resource.table.database_name #=> String
     #   resp.failures[0].request_entry.resource.table.name #=> String
+    #   resp.failures[0].request_entry.resource.table_with_columns.catalog_id #=> String
     #   resp.failures[0].request_entry.resource.table_with_columns.database_name #=> String
     #   resp.failures[0].request_entry.resource.table_with_columns.name #=> String
     #   resp.failures[0].request_entry.resource.table_with_columns.column_names #=> Array
     #   resp.failures[0].request_entry.resource.table_with_columns.column_names[0] #=> String
     #   resp.failures[0].request_entry.resource.table_with_columns.column_wildcard.excluded_column_names #=> Array
     #   resp.failures[0].request_entry.resource.table_with_columns.column_wildcard.excluded_column_names[0] #=> String
+    #   resp.failures[0].request_entry.resource.data_location.catalog_id #=> String
     #   resp.failures[0].request_entry.resource.data_location.resource_arn #=> String
     #   resp.failures[0].request_entry.permissions #=> Array
-    #   resp.failures[0].request_entry.permissions[0] #=> String, one of "ALL", "SELECT", "ALTER", "DROP", "DELETE", "INSERT", "CREATE_DATABASE", "CREATE_TABLE", "DATA_LOCATION_ACCESS"
+    #   resp.failures[0].request_entry.permissions[0] #=> String, one of "ALL", "SELECT", "ALTER", "DROP", "DELETE", "INSERT", "DESCRIBE", "CREATE_DATABASE", "CREATE_TABLE", "DATA_LOCATION_ACCESS"
     #   resp.failures[0].request_entry.permissions_with_grant_option #=> Array
-    #   resp.failures[0].request_entry.permissions_with_grant_option[0] #=> String, one of "ALL", "SELECT", "ALTER", "DROP", "DELETE", "INSERT", "CREATE_DATABASE", "CREATE_TABLE", "DATA_LOCATION_ACCESS"
+    #   resp.failures[0].request_entry.permissions_with_grant_option[0] #=> String, one of "ALL", "SELECT", "ALTER", "DROP", "DELETE", "INSERT", "DESCRIBE", "CREATE_DATABASE", "CREATE_TABLE", "DATA_LOCATION_ACCESS"
     #   resp.failures[0].error.error_code #=> String
     #   resp.failures[0].error.error_message #=> String
     #
@@ -437,26 +447,32 @@ module Aws::LakeFormation
     #           catalog: {
     #           },
     #           database: {
+    #             catalog_id: "CatalogIdString",
     #             name: "NameString", # required
     #           },
     #           table: {
+    #             catalog_id: "CatalogIdString",
     #             database_name: "NameString", # required
-    #             name: "NameString", # required
+    #             name: "NameString",
+    #             table_wildcard: {
+    #             },
     #           },
     #           table_with_columns: {
-    #             database_name: "NameString",
-    #             name: "NameString",
+    #             catalog_id: "CatalogIdString",
+    #             database_name: "NameString", # required
+    #             name: "NameString", # required
     #             column_names: ["NameString"],
     #             column_wildcard: {
     #               excluded_column_names: ["NameString"],
     #             },
     #           },
     #           data_location: {
+    #             catalog_id: "CatalogIdString",
     #             resource_arn: "ResourceArnString", # required
     #           },
     #         },
-    #         permissions: ["ALL"], # accepts ALL, SELECT, ALTER, DROP, DELETE, INSERT, CREATE_DATABASE, CREATE_TABLE, DATA_LOCATION_ACCESS
-    #         permissions_with_grant_option: ["ALL"], # accepts ALL, SELECT, ALTER, DROP, DELETE, INSERT, CREATE_DATABASE, CREATE_TABLE, DATA_LOCATION_ACCESS
+    #         permissions: ["ALL"], # accepts ALL, SELECT, ALTER, DROP, DELETE, INSERT, DESCRIBE, CREATE_DATABASE, CREATE_TABLE, DATA_LOCATION_ACCESS
+    #         permissions_with_grant_option: ["ALL"], # accepts ALL, SELECT, ALTER, DROP, DELETE, INSERT, DESCRIBE, CREATE_DATABASE, CREATE_TABLE, DATA_LOCATION_ACCESS
     #       },
     #     ],
     #   })
@@ -466,20 +482,24 @@ module Aws::LakeFormation
     #   resp.failures #=> Array
     #   resp.failures[0].request_entry.id #=> String
     #   resp.failures[0].request_entry.principal.data_lake_principal_identifier #=> String
+    #   resp.failures[0].request_entry.resource.database.catalog_id #=> String
     #   resp.failures[0].request_entry.resource.database.name #=> String
+    #   resp.failures[0].request_entry.resource.table.catalog_id #=> String
     #   resp.failures[0].request_entry.resource.table.database_name #=> String
     #   resp.failures[0].request_entry.resource.table.name #=> String
+    #   resp.failures[0].request_entry.resource.table_with_columns.catalog_id #=> String
     #   resp.failures[0].request_entry.resource.table_with_columns.database_name #=> String
     #   resp.failures[0].request_entry.resource.table_with_columns.name #=> String
     #   resp.failures[0].request_entry.resource.table_with_columns.column_names #=> Array
     #   resp.failures[0].request_entry.resource.table_with_columns.column_names[0] #=> String
     #   resp.failures[0].request_entry.resource.table_with_columns.column_wildcard.excluded_column_names #=> Array
     #   resp.failures[0].request_entry.resource.table_with_columns.column_wildcard.excluded_column_names[0] #=> String
+    #   resp.failures[0].request_entry.resource.data_location.catalog_id #=> String
     #   resp.failures[0].request_entry.resource.data_location.resource_arn #=> String
     #   resp.failures[0].request_entry.permissions #=> Array
-    #   resp.failures[0].request_entry.permissions[0] #=> String, one of "ALL", "SELECT", "ALTER", "DROP", "DELETE", "INSERT", "CREATE_DATABASE", "CREATE_TABLE", "DATA_LOCATION_ACCESS"
+    #   resp.failures[0].request_entry.permissions[0] #=> String, one of "ALL", "SELECT", "ALTER", "DROP", "DELETE", "INSERT", "DESCRIBE", "CREATE_DATABASE", "CREATE_TABLE", "DATA_LOCATION_ACCESS"
     #   resp.failures[0].request_entry.permissions_with_grant_option #=> Array
-    #   resp.failures[0].request_entry.permissions_with_grant_option[0] #=> String, one of "ALL", "SELECT", "ALTER", "DROP", "DELETE", "INSERT", "CREATE_DATABASE", "CREATE_TABLE", "DATA_LOCATION_ACCESS"
+    #   resp.failures[0].request_entry.permissions_with_grant_option[0] #=> String, one of "ALL", "SELECT", "ALTER", "DROP", "DELETE", "INSERT", "DESCRIBE", "CREATE_DATABASE", "CREATE_TABLE", "DATA_LOCATION_ACCESS"
     #   resp.failures[0].error.error_code #=> String
     #   resp.failures[0].error.error_message #=> String
     #
@@ -549,7 +569,8 @@ module Aws::LakeFormation
       req.send_request(options)
     end
 
-    # The AWS Lake Formation principal.
+    # Retrieves the list of the data lake administrators of a Lake
+    # Formation-managed data lake.
     #
     # @option params [String] :catalog_id
     #   The identifier for the Data Catalog. By default, the account ID. The
@@ -574,11 +595,13 @@ module Aws::LakeFormation
     #   resp.data_lake_settings.create_database_default_permissions #=> Array
     #   resp.data_lake_settings.create_database_default_permissions[0].principal.data_lake_principal_identifier #=> String
     #   resp.data_lake_settings.create_database_default_permissions[0].permissions #=> Array
-    #   resp.data_lake_settings.create_database_default_permissions[0].permissions[0] #=> String, one of "ALL", "SELECT", "ALTER", "DROP", "DELETE", "INSERT", "CREATE_DATABASE", "CREATE_TABLE", "DATA_LOCATION_ACCESS"
+    #   resp.data_lake_settings.create_database_default_permissions[0].permissions[0] #=> String, one of "ALL", "SELECT", "ALTER", "DROP", "DELETE", "INSERT", "DESCRIBE", "CREATE_DATABASE", "CREATE_TABLE", "DATA_LOCATION_ACCESS"
     #   resp.data_lake_settings.create_table_default_permissions #=> Array
     #   resp.data_lake_settings.create_table_default_permissions[0].principal.data_lake_principal_identifier #=> String
     #   resp.data_lake_settings.create_table_default_permissions[0].permissions #=> Array
-    #   resp.data_lake_settings.create_table_default_permissions[0].permissions[0] #=> String, one of "ALL", "SELECT", "ALTER", "DROP", "DELETE", "INSERT", "CREATE_DATABASE", "CREATE_TABLE", "DATA_LOCATION_ACCESS"
+    #   resp.data_lake_settings.create_table_default_permissions[0].permissions[0] #=> String, one of "ALL", "SELECT", "ALTER", "DROP", "DELETE", "INSERT", "DESCRIBE", "CREATE_DATABASE", "CREATE_TABLE", "DATA_LOCATION_ACCESS"
+    #   resp.data_lake_settings.trusted_resource_owners #=> Array
+    #   resp.data_lake_settings.trusted_resource_owners[0] #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lakeformation-2017-03-31/GetDataLakeSettings AWS API Documentation
     #
@@ -589,8 +612,10 @@ module Aws::LakeFormation
       req.send_request(options)
     end
 
-    # Returns the permissions for a specified table or database resource
-    # located at a path in Amazon S3.
+    # Returns the Lake Formation permissions for a specified table or
+    # database resource located at a path in Amazon S3.
+    # `GetEffectivePermissionsForPath` will not return databases and tables
+    # if the catalog is encrypted.
     #
     # @option params [String] :catalog_id
     #   The identifier for the Data Catalog. By default, the account ID. The
@@ -629,20 +654,24 @@ module Aws::LakeFormation
     #
     #   resp.permissions #=> Array
     #   resp.permissions[0].principal.data_lake_principal_identifier #=> String
+    #   resp.permissions[0].resource.database.catalog_id #=> String
     #   resp.permissions[0].resource.database.name #=> String
+    #   resp.permissions[0].resource.table.catalog_id #=> String
     #   resp.permissions[0].resource.table.database_name #=> String
     #   resp.permissions[0].resource.table.name #=> String
+    #   resp.permissions[0].resource.table_with_columns.catalog_id #=> String
     #   resp.permissions[0].resource.table_with_columns.database_name #=> String
     #   resp.permissions[0].resource.table_with_columns.name #=> String
     #   resp.permissions[0].resource.table_with_columns.column_names #=> Array
     #   resp.permissions[0].resource.table_with_columns.column_names[0] #=> String
     #   resp.permissions[0].resource.table_with_columns.column_wildcard.excluded_column_names #=> Array
     #   resp.permissions[0].resource.table_with_columns.column_wildcard.excluded_column_names[0] #=> String
+    #   resp.permissions[0].resource.data_location.catalog_id #=> String
     #   resp.permissions[0].resource.data_location.resource_arn #=> String
     #   resp.permissions[0].permissions #=> Array
-    #   resp.permissions[0].permissions[0] #=> String, one of "ALL", "SELECT", "ALTER", "DROP", "DELETE", "INSERT", "CREATE_DATABASE", "CREATE_TABLE", "DATA_LOCATION_ACCESS"
+    #   resp.permissions[0].permissions[0] #=> String, one of "ALL", "SELECT", "ALTER", "DROP", "DELETE", "INSERT", "DESCRIBE", "CREATE_DATABASE", "CREATE_TABLE", "DATA_LOCATION_ACCESS"
     #   resp.permissions[0].permissions_with_grant_option #=> Array
-    #   resp.permissions[0].permissions_with_grant_option[0] #=> String, one of "ALL", "SELECT", "ALTER", "DROP", "DELETE", "INSERT", "CREATE_DATABASE", "CREATE_TABLE", "DATA_LOCATION_ACCESS"
+    #   resp.permissions[0].permissions_with_grant_option[0] #=> String, one of "ALL", "SELECT", "ALTER", "DROP", "DELETE", "INSERT", "DESCRIBE", "CREATE_DATABASE", "CREATE_TABLE", "DATA_LOCATION_ACCESS"
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lakeformation-2017-03-31/GetEffectivePermissionsForPath AWS API Documentation
@@ -663,7 +692,7 @@ module Aws::LakeFormation
     #
     #
     #
-    # [1]: https://docs-aws.amazon.com/michigan/latest/dg/security-data-access.html
+    # [1]: https://docs-aws.amazon.com/lake-formation/latest/dg/security-data-access.html
     #
     # @option params [String] :catalog_id
     #   The identifier for the Data Catalog. By default, the account ID. The
@@ -709,26 +738,32 @@ module Aws::LakeFormation
     #       catalog: {
     #       },
     #       database: {
+    #         catalog_id: "CatalogIdString",
     #         name: "NameString", # required
     #       },
     #       table: {
+    #         catalog_id: "CatalogIdString",
     #         database_name: "NameString", # required
-    #         name: "NameString", # required
+    #         name: "NameString",
+    #         table_wildcard: {
+    #         },
     #       },
     #       table_with_columns: {
-    #         database_name: "NameString",
-    #         name: "NameString",
+    #         catalog_id: "CatalogIdString",
+    #         database_name: "NameString", # required
+    #         name: "NameString", # required
     #         column_names: ["NameString"],
     #         column_wildcard: {
     #           excluded_column_names: ["NameString"],
     #         },
     #       },
     #       data_location: {
+    #         catalog_id: "CatalogIdString",
     #         resource_arn: "ResourceArnString", # required
     #       },
     #     },
-    #     permissions: ["ALL"], # required, accepts ALL, SELECT, ALTER, DROP, DELETE, INSERT, CREATE_DATABASE, CREATE_TABLE, DATA_LOCATION_ACCESS
-    #     permissions_with_grant_option: ["ALL"], # accepts ALL, SELECT, ALTER, DROP, DELETE, INSERT, CREATE_DATABASE, CREATE_TABLE, DATA_LOCATION_ACCESS
+    #     permissions: ["ALL"], # required, accepts ALL, SELECT, ALTER, DROP, DELETE, INSERT, DESCRIBE, CREATE_DATABASE, CREATE_TABLE, DATA_LOCATION_ACCESS
+    #     permissions_with_grant_option: ["ALL"], # accepts ALL, SELECT, ALTER, DROP, DELETE, INSERT, DESCRIBE, CREATE_DATABASE, CREATE_TABLE, DATA_LOCATION_ACCESS
     #   })
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lakeformation-2017-03-31/GrantPermissions AWS API Documentation
@@ -753,7 +788,7 @@ module Aws::LakeFormation
     #
     #
     #
-    # [1]: https://docs-aws.amazon.com/michigan/latest/dg/security-data-access.html
+    # [1]: https://docs-aws.amazon.com/lake-formation/latest/dg/security-data-access.html
     #
     # @option params [String] :catalog_id
     #   The identifier for the Data Catalog. By default, the account ID. The
@@ -800,21 +835,27 @@ module Aws::LakeFormation
     #       catalog: {
     #       },
     #       database: {
+    #         catalog_id: "CatalogIdString",
     #         name: "NameString", # required
     #       },
     #       table: {
+    #         catalog_id: "CatalogIdString",
     #         database_name: "NameString", # required
-    #         name: "NameString", # required
+    #         name: "NameString",
+    #         table_wildcard: {
+    #         },
     #       },
     #       table_with_columns: {
-    #         database_name: "NameString",
-    #         name: "NameString",
+    #         catalog_id: "CatalogIdString",
+    #         database_name: "NameString", # required
+    #         name: "NameString", # required
     #         column_names: ["NameString"],
     #         column_wildcard: {
     #           excluded_column_names: ["NameString"],
     #         },
     #       },
     #       data_location: {
+    #         catalog_id: "CatalogIdString",
     #         resource_arn: "ResourceArnString", # required
     #       },
     #     },
@@ -826,20 +867,24 @@ module Aws::LakeFormation
     #
     #   resp.principal_resource_permissions #=> Array
     #   resp.principal_resource_permissions[0].principal.data_lake_principal_identifier #=> String
+    #   resp.principal_resource_permissions[0].resource.database.catalog_id #=> String
     #   resp.principal_resource_permissions[0].resource.database.name #=> String
+    #   resp.principal_resource_permissions[0].resource.table.catalog_id #=> String
     #   resp.principal_resource_permissions[0].resource.table.database_name #=> String
     #   resp.principal_resource_permissions[0].resource.table.name #=> String
+    #   resp.principal_resource_permissions[0].resource.table_with_columns.catalog_id #=> String
     #   resp.principal_resource_permissions[0].resource.table_with_columns.database_name #=> String
     #   resp.principal_resource_permissions[0].resource.table_with_columns.name #=> String
     #   resp.principal_resource_permissions[0].resource.table_with_columns.column_names #=> Array
     #   resp.principal_resource_permissions[0].resource.table_with_columns.column_names[0] #=> String
     #   resp.principal_resource_permissions[0].resource.table_with_columns.column_wildcard.excluded_column_names #=> Array
     #   resp.principal_resource_permissions[0].resource.table_with_columns.column_wildcard.excluded_column_names[0] #=> String
+    #   resp.principal_resource_permissions[0].resource.data_location.catalog_id #=> String
     #   resp.principal_resource_permissions[0].resource.data_location.resource_arn #=> String
     #   resp.principal_resource_permissions[0].permissions #=> Array
-    #   resp.principal_resource_permissions[0].permissions[0] #=> String, one of "ALL", "SELECT", "ALTER", "DROP", "DELETE", "INSERT", "CREATE_DATABASE", "CREATE_TABLE", "DATA_LOCATION_ACCESS"
+    #   resp.principal_resource_permissions[0].permissions[0] #=> String, one of "ALL", "SELECT", "ALTER", "DROP", "DELETE", "INSERT", "DESCRIBE", "CREATE_DATABASE", "CREATE_TABLE", "DATA_LOCATION_ACCESS"
     #   resp.principal_resource_permissions[0].permissions_with_grant_option #=> Array
-    #   resp.principal_resource_permissions[0].permissions_with_grant_option[0] #=> String, one of "ALL", "SELECT", "ALTER", "DROP", "DELETE", "INSERT", "CREATE_DATABASE", "CREATE_TABLE", "DATA_LOCATION_ACCESS"
+    #   resp.principal_resource_permissions[0].permissions_with_grant_option[0] #=> String, one of "ALL", "SELECT", "ALTER", "DROP", "DELETE", "INSERT", "DESCRIBE", "CREATE_DATABASE", "CREATE_TABLE", "DATA_LOCATION_ACCESS"
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lakeformation-2017-03-31/ListPermissions AWS API Documentation
@@ -902,7 +947,17 @@ module Aws::LakeFormation
       req.send_request(options)
     end
 
-    # The AWS Lake Formation principal.
+    # Sets the list of data lake administrators who have admin privileges on
+    # all resources managed by Lake Formation. For more information on admin
+    # privileges, see [Granting Lake Formation Permissions][1].
+    #
+    # This API replaces the current list of data lake admins with the new
+    # list being passed. To add an admin, fetch the current list and add the
+    # new admin to that list and pass that list in this API.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/lake-formation/latest/dg/lake-formation-permissions.html
     #
     # @option params [String] :catalog_id
     #   The identifier for the Data Catalog. By default, the account ID. The
@@ -911,7 +966,8 @@ module Aws::LakeFormation
     #   manage your AWS Lake Formation environment.
     #
     # @option params [required, Types::DataLakeSettings] :data_lake_settings
-    #   A list of AWS Lake Formation principals.
+    #   A structure representing a list of AWS Lake Formation principals
+    #   designated as data lake administrators.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -930,7 +986,7 @@ module Aws::LakeFormation
     #           principal: {
     #             data_lake_principal_identifier: "DataLakePrincipalString",
     #           },
-    #           permissions: ["ALL"], # accepts ALL, SELECT, ALTER, DROP, DELETE, INSERT, CREATE_DATABASE, CREATE_TABLE, DATA_LOCATION_ACCESS
+    #           permissions: ["ALL"], # accepts ALL, SELECT, ALTER, DROP, DELETE, INSERT, DESCRIBE, CREATE_DATABASE, CREATE_TABLE, DATA_LOCATION_ACCESS
     #         },
     #       ],
     #       create_table_default_permissions: [
@@ -938,9 +994,10 @@ module Aws::LakeFormation
     #           principal: {
     #             data_lake_principal_identifier: "DataLakePrincipalString",
     #           },
-    #           permissions: ["ALL"], # accepts ALL, SELECT, ALTER, DROP, DELETE, INSERT, CREATE_DATABASE, CREATE_TABLE, DATA_LOCATION_ACCESS
+    #           permissions: ["ALL"], # accepts ALL, SELECT, ALTER, DROP, DELETE, INSERT, DESCRIBE, CREATE_DATABASE, CREATE_TABLE, DATA_LOCATION_ACCESS
     #         },
     #       ],
+    #       trusted_resource_owners: ["CatalogIdString"],
     #     },
     #   })
     #
@@ -964,16 +1021,36 @@ module Aws::LakeFormation
     # attaches it to the service-linked role. When you register subsequent
     # paths, Lake Formation adds the path to the existing policy.
     #
+    # The following request registers a new location and gives AWS Lake
+    # Formation permission to use the service-linked role to access that
+    # location.
+    #
+    # `ResourceArn = arn:aws:s3:::my-bucket UseServiceLinkedRole = true`
+    #
+    # If `UseServiceLinkedRole` is not set to true, you must provide or set
+    # the `RoleArn`\:
+    #
+    # `arn:aws:iam::12345:role/my-data-access-role`
+    #
     # @option params [required, String] :resource_arn
     #   The Amazon Resource Name (ARN) of the resource that you want to
     #   register.
     #
     # @option params [Boolean] :use_service_linked_role
-    #   Designates a trusted caller, an IAM principal, by registering this
-    #   caller with the Data Catalog.
+    #   Designates an AWS Identity and Access Management (IAM) service-linked
+    #   role by registering this role with the Data Catalog. A service-linked
+    #   role is a unique type of IAM role that is linked directly to Lake
+    #   Formation.
+    #
+    #   For more information, see [Using Service-Linked Roles for Lake
+    #   Formation][1].
+    #
+    #
+    #
+    #   [1]: https://docs-aws.amazon.com/lake-formation/latest/dg/service-linked-roles.html
     #
     # @option params [String] :role_arn
-    #   The identifier for the role.
+    #   The identifier for the role that registers the resource.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -1017,7 +1094,7 @@ module Aws::LakeFormation
     #
     #
     #
-    #   [1]: https://docs-aws.amazon.com/michigan/latest/dg/security-data-access.html
+    #   [1]: https://docs-aws.amazon.com/lake-formation/latest/dg/security-data-access.html
     #
     # @option params [Array<String>] :permissions_with_grant_option
     #   Indicates a list of permissions for which to revoke the grant option
@@ -1036,26 +1113,32 @@ module Aws::LakeFormation
     #       catalog: {
     #       },
     #       database: {
+    #         catalog_id: "CatalogIdString",
     #         name: "NameString", # required
     #       },
     #       table: {
+    #         catalog_id: "CatalogIdString",
     #         database_name: "NameString", # required
-    #         name: "NameString", # required
+    #         name: "NameString",
+    #         table_wildcard: {
+    #         },
     #       },
     #       table_with_columns: {
-    #         database_name: "NameString",
-    #         name: "NameString",
+    #         catalog_id: "CatalogIdString",
+    #         database_name: "NameString", # required
+    #         name: "NameString", # required
     #         column_names: ["NameString"],
     #         column_wildcard: {
     #           excluded_column_names: ["NameString"],
     #         },
     #       },
     #       data_location: {
+    #         catalog_id: "CatalogIdString",
     #         resource_arn: "ResourceArnString", # required
     #       },
     #     },
-    #     permissions: ["ALL"], # required, accepts ALL, SELECT, ALTER, DROP, DELETE, INSERT, CREATE_DATABASE, CREATE_TABLE, DATA_LOCATION_ACCESS
-    #     permissions_with_grant_option: ["ALL"], # accepts ALL, SELECT, ALTER, DROP, DELETE, INSERT, CREATE_DATABASE, CREATE_TABLE, DATA_LOCATION_ACCESS
+    #     permissions: ["ALL"], # required, accepts ALL, SELECT, ALTER, DROP, DELETE, INSERT, DESCRIBE, CREATE_DATABASE, CREATE_TABLE, DATA_LOCATION_ACCESS
+    #     permissions_with_grant_option: ["ALL"], # accepts ALL, SELECT, ALTER, DROP, DELETE, INSERT, DESCRIBE, CREATE_DATABASE, CREATE_TABLE, DATA_LOCATION_ACCESS
     #   })
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lakeformation-2017-03-31/RevokePermissions AWS API Documentation
@@ -1108,7 +1191,7 @@ module Aws::LakeFormation
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-lakeformation'
-      context[:gem_version] = '1.6.0'
+      context[:gem_version] = '1.7.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

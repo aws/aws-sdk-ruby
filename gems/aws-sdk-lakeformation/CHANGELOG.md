@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.7.0 (2020-07-07)
+------------------
+
+* Feature - AWS Lake Formation supports sharing tables with other AWS accounts and organizations
+
 1.6.0 (2020-06-23)
 ------------------
 

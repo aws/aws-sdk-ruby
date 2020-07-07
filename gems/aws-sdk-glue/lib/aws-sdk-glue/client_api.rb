@@ -174,6 +174,7 @@ module Aws::Glue
     DataLakePrincipal = Shapes::StructureShape.new(name: 'DataLakePrincipal')
     DataLakePrincipalString = Shapes::StringShape.new(name: 'DataLakePrincipalString')
     Database = Shapes::StructureShape.new(name: 'Database')
+    DatabaseIdentifier = Shapes::StructureShape.new(name: 'DatabaseIdentifier')
     DatabaseInput = Shapes::StructureShape.new(name: 'DatabaseInput')
     DatabaseList = Shapes::ListShape.new(name: 'DatabaseList')
     DatabaseName = Shapes::StringShape.new(name: 'DatabaseName')
@@ -229,6 +230,7 @@ module Aws::Glue
     DynamoDBTargetList = Shapes::ListShape.new(name: 'DynamoDBTargetList')
     Edge = Shapes::StructureShape.new(name: 'Edge')
     EdgeList = Shapes::ListShape.new(name: 'EdgeList')
+    EnableHybridValues = Shapes::StringShape.new(name: 'EnableHybridValues')
     EncryptionAtRest = Shapes::StructureShape.new(name: 'EncryptionAtRest')
     EncryptionConfiguration = Shapes::StructureShape.new(name: 'EncryptionConfiguration')
     EntityNotFoundException = Shapes::StructureShape.new(name: 'EntityNotFoundException')
@@ -309,6 +311,9 @@ module Aws::Glue
     GetPartitionsResponse = Shapes::StructureShape.new(name: 'GetPartitionsResponse')
     GetPlanRequest = Shapes::StructureShape.new(name: 'GetPlanRequest')
     GetPlanResponse = Shapes::StructureShape.new(name: 'GetPlanResponse')
+    GetResourcePoliciesRequest = Shapes::StructureShape.new(name: 'GetResourcePoliciesRequest')
+    GetResourcePoliciesResponse = Shapes::StructureShape.new(name: 'GetResourcePoliciesResponse')
+    GetResourcePoliciesResponseList = Shapes::ListShape.new(name: 'GetResourcePoliciesResponseList')
     GetResourcePolicyRequest = Shapes::StructureShape.new(name: 'GetResourcePolicyRequest')
     GetResourcePolicyResponse = Shapes::StructureShape.new(name: 'GetResourcePolicyResponse')
     GetSecurityConfigurationRequest = Shapes::StructureShape.new(name: 'GetSecurityConfigurationRequest')
@@ -343,6 +348,7 @@ module Aws::Glue
     GetWorkflowRunsRequest = Shapes::StructureShape.new(name: 'GetWorkflowRunsRequest')
     GetWorkflowRunsResponse = Shapes::StructureShape.new(name: 'GetWorkflowRunsResponse')
     GlueEncryptionException = Shapes::StructureShape.new(name: 'GlueEncryptionException')
+    GluePolicy = Shapes::StructureShape.new(name: 'GluePolicy')
     GlueResourceArn = Shapes::StringShape.new(name: 'GlueResourceArn')
     GlueTable = Shapes::StructureShape.new(name: 'GlueTable')
     GlueTables = Shapes::ListShape.new(name: 'GlueTables')
@@ -475,6 +481,7 @@ module Aws::Glue
     ResetJobBookmarkRequest = Shapes::StructureShape.new(name: 'ResetJobBookmarkRequest')
     ResetJobBookmarkResponse = Shapes::StructureShape.new(name: 'ResetJobBookmarkResponse')
     ResourceNumberLimitExceededException = Shapes::StructureShape.new(name: 'ResourceNumberLimitExceededException')
+    ResourceShareType = Shapes::StringShape.new(name: 'ResourceShareType')
     ResourceType = Shapes::StringShape.new(name: 'ResourceType')
     ResourceUri = Shapes::StructureShape.new(name: 'ResourceUri')
     ResourceUriList = Shapes::ListShape.new(name: 'ResourceUriList')
@@ -543,6 +550,7 @@ module Aws::Glue
     Table = Shapes::StructureShape.new(name: 'Table')
     TableError = Shapes::StructureShape.new(name: 'TableError')
     TableErrors = Shapes::ListShape.new(name: 'TableErrors')
+    TableIdentifier = Shapes::StructureShape.new(name: 'TableIdentifier')
     TableInput = Shapes::StructureShape.new(name: 'TableInput')
     TableList = Shapes::ListShape.new(name: 'TableList')
     TableName = Shapes::StringShape.new(name: 'TableName')
@@ -1247,13 +1255,20 @@ module Aws::Glue
     Database.add_member(:parameters, Shapes::ShapeRef.new(shape: ParametersMap, location_name: "Parameters"))
     Database.add_member(:create_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "CreateTime"))
     Database.add_member(:create_table_default_permissions, Shapes::ShapeRef.new(shape: PrincipalPermissionsList, location_name: "CreateTableDefaultPermissions"))
+    Database.add_member(:target_database, Shapes::ShapeRef.new(shape: DatabaseIdentifier, location_name: "TargetDatabase"))
+    Database.add_member(:catalog_id, Shapes::ShapeRef.new(shape: CatalogIdString, location_name: "CatalogId"))
     Database.struct_class = Types::Database
+
+    DatabaseIdentifier.add_member(:catalog_id, Shapes::ShapeRef.new(shape: CatalogIdString, location_name: "CatalogId"))
+    DatabaseIdentifier.add_member(:database_name, Shapes::ShapeRef.new(shape: NameString, location_name: "DatabaseName"))
+    DatabaseIdentifier.struct_class = Types::DatabaseIdentifier
 
     DatabaseInput.add_member(:name, Shapes::ShapeRef.new(shape: NameString, required: true, location_name: "Name"))
     DatabaseInput.add_member(:description, Shapes::ShapeRef.new(shape: DescriptionString, location_name: "Description"))
     DatabaseInput.add_member(:location_uri, Shapes::ShapeRef.new(shape: URI, location_name: "LocationUri"))
     DatabaseInput.add_member(:parameters, Shapes::ShapeRef.new(shape: ParametersMap, location_name: "Parameters"))
     DatabaseInput.add_member(:create_table_default_permissions, Shapes::ShapeRef.new(shape: PrincipalPermissionsList, location_name: "CreateTableDefaultPermissions"))
+    DatabaseInput.add_member(:target_database, Shapes::ShapeRef.new(shape: DatabaseIdentifier, location_name: "TargetDatabase"))
     DatabaseInput.struct_class = Types::DatabaseInput
 
     DatabaseList.member = Shapes::ShapeRef.new(shape: Database)
@@ -1341,6 +1356,7 @@ module Aws::Glue
     DeletePartitionResponse.struct_class = Types::DeletePartitionResponse
 
     DeleteResourcePolicyRequest.add_member(:policy_hash_condition, Shapes::ShapeRef.new(shape: HashString, location_name: "PolicyHashCondition"))
+    DeleteResourcePolicyRequest.add_member(:resource_arn, Shapes::ShapeRef.new(shape: GlueResourceArn, location_name: "ResourceArn"))
     DeleteResourcePolicyRequest.struct_class = Types::DeleteResourcePolicyRequest
 
     DeleteResourcePolicyResponse.struct_class = Types::DeleteResourcePolicyResponse
@@ -1595,6 +1611,7 @@ module Aws::Glue
     GetDatabasesRequest.add_member(:catalog_id, Shapes::ShapeRef.new(shape: CatalogIdString, location_name: "CatalogId"))
     GetDatabasesRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: Token, location_name: "NextToken"))
     GetDatabasesRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: PageSize, location_name: "MaxResults"))
+    GetDatabasesRequest.add_member(:resource_share_type, Shapes::ShapeRef.new(shape: ResourceShareType, location_name: "ResourceShareType"))
     GetDatabasesRequest.struct_class = Types::GetDatabasesRequest
 
     GetDatabasesResponse.add_member(:database_list, Shapes::ShapeRef.new(shape: DatabaseList, required: true, location_name: "DatabaseList"))
@@ -1761,6 +1778,17 @@ module Aws::Glue
     GetPlanResponse.add_member(:scala_code, Shapes::ShapeRef.new(shape: ScalaCode, location_name: "ScalaCode"))
     GetPlanResponse.struct_class = Types::GetPlanResponse
 
+    GetResourcePoliciesRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: Token, location_name: "NextToken"))
+    GetResourcePoliciesRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: PageSize, location_name: "MaxResults"))
+    GetResourcePoliciesRequest.struct_class = Types::GetResourcePoliciesRequest
+
+    GetResourcePoliciesResponse.add_member(:get_resource_policies_response_list, Shapes::ShapeRef.new(shape: GetResourcePoliciesResponseList, location_name: "GetResourcePoliciesResponseList"))
+    GetResourcePoliciesResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: Token, location_name: "NextToken"))
+    GetResourcePoliciesResponse.struct_class = Types::GetResourcePoliciesResponse
+
+    GetResourcePoliciesResponseList.member = Shapes::ShapeRef.new(shape: GluePolicy)
+
+    GetResourcePolicyRequest.add_member(:resource_arn, Shapes::ShapeRef.new(shape: GlueResourceArn, location_name: "ResourceArn"))
     GetResourcePolicyRequest.struct_class = Types::GetResourcePolicyRequest
 
     GetResourcePolicyResponse.add_member(:policy_in_json, Shapes::ShapeRef.new(shape: PolicyJsonString, location_name: "PolicyInJson"))
@@ -1898,6 +1926,12 @@ module Aws::Glue
 
     GlueEncryptionException.add_member(:message, Shapes::ShapeRef.new(shape: MessageString, location_name: "Message"))
     GlueEncryptionException.struct_class = Types::GlueEncryptionException
+
+    GluePolicy.add_member(:policy_in_json, Shapes::ShapeRef.new(shape: PolicyJsonString, location_name: "PolicyInJson"))
+    GluePolicy.add_member(:policy_hash, Shapes::ShapeRef.new(shape: HashString, location_name: "PolicyHash"))
+    GluePolicy.add_member(:create_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "CreateTime"))
+    GluePolicy.add_member(:update_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "UpdateTime"))
+    GluePolicy.struct_class = Types::GluePolicy
 
     GlueTable.add_member(:database_name, Shapes::ShapeRef.new(shape: NameString, required: true, location_name: "DatabaseName"))
     GlueTable.add_member(:table_name, Shapes::ShapeRef.new(shape: NameString, required: true, location_name: "TableName"))
@@ -2202,6 +2236,7 @@ module Aws::Glue
     Partition.add_member(:storage_descriptor, Shapes::ShapeRef.new(shape: StorageDescriptor, location_name: "StorageDescriptor"))
     Partition.add_member(:parameters, Shapes::ShapeRef.new(shape: ParametersMap, location_name: "Parameters"))
     Partition.add_member(:last_analyzed_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "LastAnalyzedTime"))
+    Partition.add_member(:catalog_id, Shapes::ShapeRef.new(shape: CatalogIdString, location_name: "CatalogId"))
     Partition.struct_class = Types::Partition
 
     PartitionError.add_member(:partition_values, Shapes::ShapeRef.new(shape: ValueStringList, location_name: "PartitionValues"))
@@ -2263,8 +2298,10 @@ module Aws::Glue
     PutDataCatalogEncryptionSettingsResponse.struct_class = Types::PutDataCatalogEncryptionSettingsResponse
 
     PutResourcePolicyRequest.add_member(:policy_in_json, Shapes::ShapeRef.new(shape: PolicyJsonString, required: true, location_name: "PolicyInJson"))
+    PutResourcePolicyRequest.add_member(:resource_arn, Shapes::ShapeRef.new(shape: GlueResourceArn, location_name: "ResourceArn"))
     PutResourcePolicyRequest.add_member(:policy_hash_condition, Shapes::ShapeRef.new(shape: HashString, location_name: "PolicyHashCondition"))
     PutResourcePolicyRequest.add_member(:policy_exists_condition, Shapes::ShapeRef.new(shape: ExistCondition, location_name: "PolicyExistsCondition"))
+    PutResourcePolicyRequest.add_member(:enable_hybrid, Shapes::ShapeRef.new(shape: EnableHybridValues, location_name: "EnableHybrid"))
     PutResourcePolicyRequest.struct_class = Types::PutResourcePolicyRequest
 
     PutResourcePolicyResponse.add_member(:policy_hash, Shapes::ShapeRef.new(shape: HashString, location_name: "PolicyHash"))
@@ -2334,6 +2371,7 @@ module Aws::Glue
     SearchTablesRequest.add_member(:search_text, Shapes::ShapeRef.new(shape: ValueString, location_name: "SearchText"))
     SearchTablesRequest.add_member(:sort_criteria, Shapes::ShapeRef.new(shape: SortCriteria, location_name: "SortCriteria"))
     SearchTablesRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: PageSize, location_name: "MaxResults"))
+    SearchTablesRequest.add_member(:resource_share_type, Shapes::ShapeRef.new(shape: ResourceShareType, location_name: "ResourceShareType"))
     SearchTablesRequest.struct_class = Types::SearchTablesRequest
 
     SearchTablesResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: Token, location_name: "NextToken"))
@@ -2495,6 +2533,8 @@ module Aws::Glue
     Table.add_member(:parameters, Shapes::ShapeRef.new(shape: ParametersMap, location_name: "Parameters"))
     Table.add_member(:created_by, Shapes::ShapeRef.new(shape: NameString, location_name: "CreatedBy"))
     Table.add_member(:is_registered_with_lake_formation, Shapes::ShapeRef.new(shape: Boolean, location_name: "IsRegisteredWithLakeFormation"))
+    Table.add_member(:target_table, Shapes::ShapeRef.new(shape: TableIdentifier, location_name: "TargetTable"))
+    Table.add_member(:catalog_id, Shapes::ShapeRef.new(shape: CatalogIdString, location_name: "CatalogId"))
     Table.struct_class = Types::Table
 
     TableError.add_member(:table_name, Shapes::ShapeRef.new(shape: NameString, location_name: "TableName"))
@@ -2502,6 +2542,11 @@ module Aws::Glue
     TableError.struct_class = Types::TableError
 
     TableErrors.member = Shapes::ShapeRef.new(shape: TableError)
+
+    TableIdentifier.add_member(:catalog_id, Shapes::ShapeRef.new(shape: CatalogIdString, location_name: "CatalogId"))
+    TableIdentifier.add_member(:database_name, Shapes::ShapeRef.new(shape: NameString, location_name: "DatabaseName"))
+    TableIdentifier.add_member(:name, Shapes::ShapeRef.new(shape: NameString, location_name: "Name"))
+    TableIdentifier.struct_class = Types::TableIdentifier
 
     TableInput.add_member(:name, Shapes::ShapeRef.new(shape: NameString, required: true, location_name: "Name"))
     TableInput.add_member(:description, Shapes::ShapeRef.new(shape: DescriptionString, location_name: "Description"))
@@ -2515,6 +2560,7 @@ module Aws::Glue
     TableInput.add_member(:view_expanded_text, Shapes::ShapeRef.new(shape: ViewTextString, location_name: "ViewExpandedText"))
     TableInput.add_member(:table_type, Shapes::ShapeRef.new(shape: TableTypeString, location_name: "TableType"))
     TableInput.add_member(:parameters, Shapes::ShapeRef.new(shape: ParametersMap, location_name: "Parameters"))
+    TableInput.add_member(:target_table, Shapes::ShapeRef.new(shape: TableIdentifier, location_name: "TargetTable"))
     TableInput.struct_class = Types::TableInput
 
     TableList.member = Shapes::ShapeRef.new(shape: Table)
@@ -2798,6 +2844,7 @@ module Aws::Glue
     UserDefinedFunction.add_member(:owner_type, Shapes::ShapeRef.new(shape: PrincipalType, location_name: "OwnerType"))
     UserDefinedFunction.add_member(:create_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "CreateTime"))
     UserDefinedFunction.add_member(:resource_uris, Shapes::ShapeRef.new(shape: ResourceUriList, location_name: "ResourceUris"))
+    UserDefinedFunction.add_member(:catalog_id, Shapes::ShapeRef.new(shape: CatalogIdString, location_name: "CatalogId"))
     UserDefinedFunction.struct_class = Types::UserDefinedFunction
 
     UserDefinedFunctionInput.add_member(:function_name, Shapes::ShapeRef.new(shape: NameString, location_name: "FunctionName"))
@@ -3832,6 +3879,18 @@ module Aws::Glue
         o.errors << Shapes::ShapeRef.new(shape: InvalidInputException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServiceException)
         o.errors << Shapes::ShapeRef.new(shape: OperationTimeoutException)
+      end)
+
+      api.add_operation(:get_resource_policies, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetResourcePolicies"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: GetResourcePoliciesRequest)
+        o.output = Shapes::ShapeRef.new(shape: GetResourcePoliciesResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServiceException)
+        o.errors << Shapes::ShapeRef.new(shape: OperationTimeoutException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidInputException)
+        o.errors << Shapes::ShapeRef.new(shape: GlueEncryptionException)
       end)
 
       api.add_operation(:get_resource_policy, Seahorse::Model::Operation.new.tap do |o|

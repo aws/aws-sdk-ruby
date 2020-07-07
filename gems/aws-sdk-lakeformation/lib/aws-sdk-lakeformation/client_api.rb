@@ -84,8 +84,10 @@ module Aws::LakeFormation
     StringValue = Shapes::StringShape.new(name: 'StringValue')
     StringValueList = Shapes::ListShape.new(name: 'StringValueList')
     TableResource = Shapes::StructureShape.new(name: 'TableResource')
+    TableWildcard = Shapes::StructureShape.new(name: 'TableWildcard')
     TableWithColumnsResource = Shapes::StructureShape.new(name: 'TableWithColumnsResource')
     Token = Shapes::StringShape.new(name: 'Token')
+    TrustedResourceOwners = Shapes::ListShape.new(name: 'TrustedResourceOwners')
     UpdateResourceRequest = Shapes::StructureShape.new(name: 'UpdateResourceRequest')
     UpdateResourceResponse = Shapes::StructureShape.new(name: 'UpdateResourceResponse')
 
@@ -139,11 +141,14 @@ module Aws::LakeFormation
     DataLakeSettings.add_member(:data_lake_admins, Shapes::ShapeRef.new(shape: DataLakePrincipalList, location_name: "DataLakeAdmins"))
     DataLakeSettings.add_member(:create_database_default_permissions, Shapes::ShapeRef.new(shape: PrincipalPermissionsList, location_name: "CreateDatabaseDefaultPermissions"))
     DataLakeSettings.add_member(:create_table_default_permissions, Shapes::ShapeRef.new(shape: PrincipalPermissionsList, location_name: "CreateTableDefaultPermissions"))
+    DataLakeSettings.add_member(:trusted_resource_owners, Shapes::ShapeRef.new(shape: TrustedResourceOwners, location_name: "TrustedResourceOwners"))
     DataLakeSettings.struct_class = Types::DataLakeSettings
 
+    DataLocationResource.add_member(:catalog_id, Shapes::ShapeRef.new(shape: CatalogIdString, location_name: "CatalogId"))
     DataLocationResource.add_member(:resource_arn, Shapes::ShapeRef.new(shape: ResourceArnString, required: true, location_name: "ResourceArn"))
     DataLocationResource.struct_class = Types::DataLocationResource
 
+    DatabaseResource.add_member(:catalog_id, Shapes::ShapeRef.new(shape: CatalogIdString, location_name: "CatalogId"))
     DatabaseResource.add_member(:name, Shapes::ShapeRef.new(shape: NameString, required: true, location_name: "Name"))
     DatabaseResource.struct_class = Types::DatabaseResource
 
@@ -281,15 +286,22 @@ module Aws::LakeFormation
 
     StringValueList.member = Shapes::ShapeRef.new(shape: StringValue)
 
+    TableResource.add_member(:catalog_id, Shapes::ShapeRef.new(shape: CatalogIdString, location_name: "CatalogId"))
     TableResource.add_member(:database_name, Shapes::ShapeRef.new(shape: NameString, required: true, location_name: "DatabaseName"))
-    TableResource.add_member(:name, Shapes::ShapeRef.new(shape: NameString, required: true, location_name: "Name"))
+    TableResource.add_member(:name, Shapes::ShapeRef.new(shape: NameString, location_name: "Name"))
+    TableResource.add_member(:table_wildcard, Shapes::ShapeRef.new(shape: TableWildcard, location_name: "TableWildcard"))
     TableResource.struct_class = Types::TableResource
 
-    TableWithColumnsResource.add_member(:database_name, Shapes::ShapeRef.new(shape: NameString, location_name: "DatabaseName"))
-    TableWithColumnsResource.add_member(:name, Shapes::ShapeRef.new(shape: NameString, location_name: "Name"))
+    TableWildcard.struct_class = Types::TableWildcard
+
+    TableWithColumnsResource.add_member(:catalog_id, Shapes::ShapeRef.new(shape: CatalogIdString, location_name: "CatalogId"))
+    TableWithColumnsResource.add_member(:database_name, Shapes::ShapeRef.new(shape: NameString, required: true, location_name: "DatabaseName"))
+    TableWithColumnsResource.add_member(:name, Shapes::ShapeRef.new(shape: NameString, required: true, location_name: "Name"))
     TableWithColumnsResource.add_member(:column_names, Shapes::ShapeRef.new(shape: ColumnNames, location_name: "ColumnNames"))
     TableWithColumnsResource.add_member(:column_wildcard, Shapes::ShapeRef.new(shape: ColumnWildcard, location_name: "ColumnWildcard"))
     TableWithColumnsResource.struct_class = Types::TableWithColumnsResource
+
+    TrustedResourceOwners.member = Shapes::ShapeRef.new(shape: CatalogIdString)
 
     UpdateResourceRequest.add_member(:role_arn, Shapes::ShapeRef.new(shape: IAMRoleArn, required: true, location_name: "RoleArn"))
     UpdateResourceRequest.add_member(:resource_arn, Shapes::ShapeRef.new(shape: ResourceArnString, required: true, location_name: "ResourceArn"))
