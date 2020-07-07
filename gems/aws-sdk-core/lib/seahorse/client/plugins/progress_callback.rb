@@ -35,20 +35,6 @@ module Seahorse
 A callback for upload progress [TODO: add more description].
         DOCS
 
-        class Handler < Client::Handler
-
-          def call(context)
-
-            progress_callback = Proc.new { |a, b| puts "PROGRESS: #{a} / #{b}" }
-            context.http_request.body = ProgressTrackingBody.new(context.http_request.body, progress_callback)
-
-
-            @handler.call(context)
-          end
-
-
-        end
-
         # @api private
         class OptionHandler < Client::Handler
           def call(context)
