@@ -7,7 +7,7 @@ require_relative '../spec_helper'
 module Seahorse
   module Client
     module Plugins
-      describe ChunkSentCallback do
+      describe RequestCallback do
 
         let(:client_class) do
           ApiHelper.sample_service.const_get(:Client)

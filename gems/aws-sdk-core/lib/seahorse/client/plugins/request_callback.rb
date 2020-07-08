@@ -30,7 +30,7 @@ module Seahorse
       end
 
       # @api private
-      class ChunkSentCallback < Plugin
+      class RequestCallback < Plugin
 
         option(:on_chunk_sent,
                default: nil,
@@ -55,7 +55,7 @@ bytes in the body.
         end
 
         # @api private
-        class ProgressCallbackHandler < Client::Handler
+        class ReadCallbackHandler < Client::Handler
           def call(context)
             if (callback = context[:on_chunk_sent])
               context.http_request.body = ReadCallbackIO.new(context.http_request.body, callback)
@@ -80,7 +80,7 @@ bytes in the body.
         # This handler needs to go late in the call stack
         # other plugins including Sigv4 and content_md5 read the request body
         # and rewind it
-        handler(ProgressCallbackHandler, step: :sign, priority: 0)
+        handler(ReadCallbackHandler, step: :sign, priority: 0)
       end
     end
   end
