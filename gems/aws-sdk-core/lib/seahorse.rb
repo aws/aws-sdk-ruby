@@ -50,7 +50,7 @@ require_relative 'seahorse/client/plugins/net_http'
 require_relative 'seahorse/client/plugins/h2'
 require_relative 'seahorse/client/plugins/raise_response_errors'
 require_relative 'seahorse/client/plugins/response_target'
-require_relative 'seahorse/client/plugins/progress_callback'
+require_relative 'seahorse/client/plugins/chunk_sent_callback'
 
 # model
 

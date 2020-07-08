@@ -7,24 +7,24 @@ require_relative '../spec_helper'
 module Seahorse
   module Client
     module Plugins
-      describe ProgressCallback do
+      describe ChunkSentCallback do
 
         let(:client_class) do
           ApiHelper.sample_service.const_get(:Client)
         end
 
-        let(:callback) { Proc.new {|read, total| @call_count += 1} }
-        let(:client) { client_class.new(progress_callback: callback, region: 'us-west-1', endpoint: 'http://foo.com') }
+        let(:callback) { Proc.new {|chunk, read, total| @call_count += 1} }
+        let(:client) { client_class.new(on_chunk_sent: callback, region: 'us-west-1', endpoint: 'http://foo.com') }
 
         before { @call_count = 0 }
 
         it 'adds a #progress_callback option to config' do
-          expect(client.config.progress_callback).to eq(callback)
+          expect(client.config.on_chunk_sent).to eq(callback)
         end
 
         it 'defaults progress_callback to nil' do
           client = client_class.new(stub_responses: true)
-          expect(client.config.progress_callback).to eq(nil)
+          expect(client.config.on_chunk_sent).to eq(nil)
         end
 
         it 'is called once on success' do
@@ -44,6 +44,18 @@ module Seahorse
 
           client.example_operation
           expect(@call_count).to eq(2)
+        end
+
+        it 'it can be used as a parameter on the operation' do
+
+          client = client_class.new(region: 'us-west-1', endpoint: 'http://foo.com')
+          expect(client.config.on_chunk_sent).to eq(nil)
+
+          stub_request(:post, 'http://foo.com')
+            .to_return(status: 200)
+
+          client.example_operation(on_chunk_sent: callback)
+          expect(@call_count).to eq(1)
         end
       end
     end

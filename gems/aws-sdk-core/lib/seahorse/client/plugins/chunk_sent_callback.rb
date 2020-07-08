@@ -7,13 +7,14 @@ module Seahorse
   module Client
     module Plugins
 
-      class ProgressTrackingBody
+      # @api private
+      class ReadCallbackIO
         extend Forwardable
         def_delegators :@io, :size
 
-        def initialize(io, progress_callback = nil)
+        def initialize(io, on_read = nil)
           @io = io
-          @progress_callback = progress_callback if progress_callback.is_a? Proc
+          @on_read = on_read if on_read.is_a? Proc
           @bytes_read = 0
         end
 
@@ -23,39 +24,32 @@ module Seahorse
           ret = @io.read(*args)
           @bytes_read += ret.bytesize if ret && ret.respond_to?(:bytesize)
           total_size = @io.respond_to?(:size) ? @io.size : nil
-          @progress_callback.call(@bytes_read, total_size) if @progress_callback
+          @on_read.call(ret, @bytes_read, total_size) if @on_read
           ret
         end
       end
 
       # @api private
-      class ProgressCallback < Plugin
+      class ChunkSentCallback < Plugin
 
-        option(:progress_callback,
+        option(:on_chunk_sent,
                default: nil,
                doc_type: 'Proc',
-               docstring: <<-DOCS) do |cfg|
+               docstring: <<-DOCS)
 When a Proc object is provided, it will be used as callback when each chunk 
-of the request body is sent. It will be called with two arguments: the number
-of bytes read from the body, and the total number of bytes in the body.
+of the request body is sent. It will be called with three arguments: the chunk,
+the number, of bytes read from the body, and the total number of 
+bytes in the body.
           DOCS
-          resolve_progress_callback(cfg)
-        end
-
-        def self.resolve_progress_callback(cfg)
-          puts "Resolve called!"
-          value = cfg.progress_callback
-          value
-        end
 
         # @api private
         class OptionHandler < Client::Handler
           def call(context)
             if context.params.is_a?(Hash)
-              progress_callback = context.params.delete(:progress_callback)
+              on_chunk_sent = context.params.delete(:on_chunk_sent)
             end
-            progress_callback = context.config.progress_callback if progress_callback.nil?
-            context[:progress_callback] = progress_callback if progress_callback
+            on_chunk_sent = context.config.on_chunk_sent if on_chunk_sent.nil?
+            context[:on_chunk_sent] = on_chunk_sent if on_chunk_sent
             @handler.call(context)
           end
         end
@@ -63,8 +57,8 @@ of bytes read from the body, and the total number of bytes in the body.
         # @api private
         class ProgressCallbackHandler < Client::Handler
           def call(context)
-            if (callback = context[:progress_callback])
-              context.http_request.body = ProgressTrackingBody.new(context.http_request.body, callback)
+            if (callback = context[:on_chunk_sent])
+              context.http_request.body = ReadCallbackIO.new(context.http_request.body, callback)
               add_event_listeners(context)
             end
             @handler.call(context)
@@ -75,7 +69,7 @@ of bytes read from the body, and the total number of bytes in the body.
             # unwrap the request body as soon as we start receiving a response
             context.http_response.on_headers do
               body = context.http_request.body
-              if body.is_a? ProgressTrackingBody
+              if body.is_a? ReadCallbackIO
                 context.http_request.body = body.io
               end
             end
