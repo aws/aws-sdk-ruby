@@ -185,35 +185,58 @@ module Aws
       #   the post will expire. Defaults to one hour from creation of the
       #   presigned post. May not exceed one week from creation time.
       # @option options [String] :key See {PresignedPost#key}.
-      # @option options [String] :key_starts_with See {PresignedPost#key_starts_with}.
+      # @option options [String] :key_starts_with
+      #   See {PresignedPost#key_starts_with}.
       # @option options [String] :acl See {PresignedPost#acl}.
-      # @option options [String] :acl_starts_with See {PresignedPost#acl_starts_with}.
-      # @option options [String] :cache_control See {PresignedPost#cache_control}.
-      # @option options [String] :cache_control_starts_with See {PresignedPost#cache_control_starts_with}.
+      # @option options [String] :acl_starts_with
+      #   See {PresignedPost#acl_starts_with}.
+      # @option options [String] :cache_control
+      #   See {PresignedPost#cache_control}.
+      # @option options [String] :cache_control_starts_with
+      #   See {PresignedPost#cache_control_starts_with}.
       # @option options [String] :content_type See {PresignedPost#content_type}.
-      # @option options [String] :content_type_starts_with See {PresignedPost#content_type_starts_with}.
-      # @option options [String] :content_disposition See {PresignedPost#content_disposition}.
-      # @option options [String] :content_disposition_starts_with See {PresignedPost#content_disposition_starts_with}.
-      # @option options [String] :content_encoding See {PresignedPost#content_encoding}.
-      # @option options [String] :content_encoding_starts_with See {PresignedPost#content_encoding_starts_with}.
+      # @option options [String] :content_type_starts_with
+      #   See {PresignedPost#content_type_starts_with}.
+      # @option options [String] :content_disposition
+      #   See {PresignedPost#content_disposition}.
+      # @option options [String] :content_disposition_starts_with
+      #   See {PresignedPost#content_disposition_starts_with}.
+      # @option options [String] :content_encoding
+      #   See {PresignedPost#content_encoding}.
+      # @option options [String] :content_encoding_starts_with
+      #   See {PresignedPost#content_encoding_starts_with}.
       # @option options [String] :expires See {PresignedPost#expires}.
-      # @option options [String] :expires_starts_with See {PresignedPost#expires_starts_with}.
-      # @option options [Range<Integer>] :content_length_range See {PresignedPost#content_length_range}.
-      # @option options [String] :success_action_redirect See {PresignedPost#success_action_redirect}.
-      # @option options [String] :success_action_redirect_starts_with See {PresignedPost#success_action_redirect_starts_with}.
-      # @option options [String] :success_action_status See {PresignedPost#success_action_status}.
-      # @option options [String] :storage_class See {PresignedPost#storage_class}.
-      # @option options [String] :website_redirect_location See {PresignedPost#website_redirect_location}.
-      # @option options [Hash<String,String>] :metadata See {PresignedPost#metadata}.
-      # @option options [Hash<String,String>] :metadata_starts_with See {PresignedPost#metadata_starts_with}.
-      # @option options [String] :server_side_encryption See {PresignedPost#server_side_encryption}.
-      # @option options [String] :server_side_encryption_aws_kms_key_id See {PresignedPost#server_side_encryption_aws_kms_key_id}.
-      # @option options [String] :server_side_encryption_customer_algorithm See {PresignedPost#server_side_encryption_customer_algorithm}.
-      # @option options [String] :server_side_encryption_customer_key See {PresignedPost#server_side_encryption_customer_key}.
+      # @option options [String] :expires_starts_with
+      #   See {PresignedPost#expires_starts_with}.
+      # @option options [Range<Integer>] :content_length_range
+      #   See {PresignedPost#content_length_range}.
+      # @option options [String] :success_action_redirect
+      #   See {PresignedPost#success_action_redirect}.
+      # @option options [String] :success_action_redirect_starts_with
+      #   See {PresignedPost#success_action_redirect_starts_with}.
+      # @option options [String] :success_action_status
+      #   See {PresignedPost#success_action_status}.
+      # @option options [String] :storage_class
+      #   See {PresignedPost#storage_class}.
+      # @option options [String] :website_redirect_location
+      #   See {PresignedPost#website_redirect_location}.
+      # @option options [Hash<String,String>] :metadata
+      #   See {PresignedPost#metadata}.
+      # @option options [Hash<String,String>] :metadata_starts_with
+      #   See {PresignedPost#metadata_starts_with}.
+      # @option options [String] :server_side_encryption
+      #   See {PresignedPost#server_side_encryption}.
+      # @option options [String] :server_side_encryption_aws_kms_key_id
+      #   See {PresignedPost#server_side_encryption_aws_kms_key_id}.
+      # @option options [String] :server_side_encryption_customer_algorithm
+      #   See {PresignedPost#server_side_encryption_customer_algorithm}.
+      # @option options [String] :server_side_encryption_customer_key
+      #   See {PresignedPost#server_side_encryption_customer_key}.
       def initialize(credentials, bucket_region, bucket_name, options = {})
         @credentials = credentials.credentials
         @bucket_region = bucket_region
         @bucket_name = bucket_name
+        @accelerate = !!options.delete(:use_accelerate_endpoint)
         @url = options.delete(:url) || bucket_url
         @fields = {}
         @key_set = false
@@ -272,7 +295,7 @@ module Aws
 
       # @!group Fields
 
-      # The key to use for the uploaded object. Use can use `${filename}`
+      # The key to use for the uploaded object. You can use `${filename}`
       # as a variable in the key. This will be replaced with the name
       # of the file as provided by the user.
       #
@@ -507,7 +530,10 @@ module Aws
       #   (KMS) master encryption key to use for the object.
       #   @param [String] value
       #   @return [self]
-      define_field(:server_side_encryption_aws_kms_key_id, 'x-amz-server-side-encryption-aws-kms-key-id')
+      define_field(
+        :server_side_encryption_aws_kms_key_id,
+        'x-amz-server-side-encryption-aws-kms-key-id'
+      )
 
       # @!endgroup
 
@@ -520,7 +546,10 @@ module Aws
       #   @param [String] value
       #   @see #server_side_encryption_customer_key
       #   @return [self]
-      define_field(:server_side_encryption_customer_algorithm, 'x-amz-server-side-encryption-customer-algorithm')
+      define_field(
+        :server_side_encryption_customer_algorithm,
+        'x-amz-server-side-encryption-customer-algorithm'
+      )
 
       # Specifies the customer-provided encryption key for Amazon S3 to use
       # in encrypting data. This value is used to store the object and then
@@ -582,10 +611,14 @@ module Aws
       def bucket_url
         url = Aws::Partitions::EndpointProvider.resolve(@bucket_region, 's3')
         url = URI.parse(url)
-        if Plugins::BucketDns.dns_compatible?(@bucket_name, true)
-          url.host = @bucket_name + '.' + url.host
+        if Plugins::BucketDns.dns_compatible?(@bucket_name, _ssl = true)
+          if @accelerate
+            url.host = "#{@bucket_name}.s3-accelerate.amazonaws.com"
+          else
+            url.host = "#{@bucket_name}.#{url.host}"
+          end
         else
-          url.path = '/' + @bucket_name
+          url.path = "/#{@bucket_name}"
         end
         if @bucket_region == 'us-east-1'
           # keep legacy behavior by default

@@ -54,6 +54,15 @@ module Aws
             'https://bucket-name.s3.eu-central-1.amazonaws.com'
           )
         end
+
+        it 'can use an accelerated endpoint' do
+          post = PresignedPost.new(
+            creds, 'us-east-1', 'bucket-name', use_accelerate_endpoint: true
+          )
+          expect(post.url).to eq(
+            'https://bucket-name.s3-accelerate.amazonaws.com'
+          )
+        end
       end
 
       describe 'key' do

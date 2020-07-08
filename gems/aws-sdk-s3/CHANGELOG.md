@@ -1,6 +1,8 @@
 Unreleased Changes
 ------------------
 
+* Feature - Allow the `use_accelerate_endpoint` option to be used with `Aws::S3::PresignedPost`. (#2103)
+
 1.73.0 (2020-07-02)
 ------------------
 
@@ -36,7 +38,7 @@ Unreleased Changes
 1.69.0 (2020-06-18)
 ------------------
 
-* Feature - Add a new version of the S3 Client Side Encryption Client: `EncryptionV2::Client` which supports more modern encryption algorithms. 
+* Feature - Add a new version of the S3 Client Side Encryption Client: `EncryptionV2::Client` which supports more modern encryption algorithms.
 
 1.68.1 (2020-06-11)
 ------------------
