@@ -1,6 +1,8 @@
 Unreleased Changes
 ------------------
 
+* Feature - Added the ProgressCallback plugin which allows clients and methods to set `progress_callback` which will be called as each chunk of the request body is sent.
+
 3.103.0 (2020-07-01)
 ------------------
 

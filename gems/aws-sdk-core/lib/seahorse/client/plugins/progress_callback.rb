@@ -17,10 +17,13 @@ module Seahorse
           @bytes_read = 0
         end
 
+        attr_reader :io
+
         def read(*args)
           ret = @io.read(*args)
-          @bytes_read += ret.bytesize if ret
-          @progress_callback.call(@bytes_read, @io.size) if @progress_callback
+          @bytes_read += ret.bytesize if ret && ret.respond_to?(:bytesize)
+          total_size = @io.respond_to?(:size) ? @io.size : nil
+          @progress_callback.call(@bytes_read, total_size) if @progress_callback
           ret
         end
       end
@@ -31,9 +34,19 @@ module Seahorse
         option(:progress_callback,
                default: nil,
                doc_type: 'Proc',
-               docstring: <<-DOCS)
-A callback for upload progress [TODO: add more description].
-        DOCS
+               docstring: <<-DOCS) do |cfg|
+When a Proc object is provided, it will be used as callback when each chunk 
+of the request body is sent. It will be called with two arguments: the number
+of bytes read from the body, and the total number of bytes in the body.
+          DOCS
+          resolve_progress_callback(cfg)
+        end
+
+        def self.resolve_progress_callback(cfg)
+          puts "Resolve called!"
+          value = cfg.progress_callback
+          value
+        end
 
         # @api private
         class OptionHandler < Client::Handler
@@ -52,8 +65,20 @@ A callback for upload progress [TODO: add more description].
           def call(context)
             if (callback = context[:progress_callback])
               context.http_request.body = ProgressTrackingBody.new(context.http_request.body, callback)
+              add_event_listeners(context)
             end
             @handler.call(context)
+          end
+
+          def add_event_listeners(context)
+
+            # unwrap the request body as soon as we start receiving a response
+            context.http_response.on_headers do
+              body = context.http_request.body
+              if body.is_a? ProgressTrackingBody
+                context.http_request.body = body.io
+              end
+            end
           end
         end
 
