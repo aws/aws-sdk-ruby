@@ -1668,17 +1668,18 @@ module Aws::CostExplorer
       req.send_request(options)
     end
 
-    # Creates recommendations that helps you save cost by identifying idle
+    # Creates recommendations that help you save cost by identifying idle
     # and underutilized Amazon EC2 instances.
     #
     # Recommendations are generated to either downsize or terminate
     # instances, along with providing savings detail and metrics. For
     # details on calculation and function, see [Optimizing Your Cost with
-    # Rightsizing Recommendations][1].
+    # Rightsizing Recommendations][1] in the *AWS Billing and Cost
+    # Management User Guide*.
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/ce-what-is.html
+    # [1]: https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/ce-rightsizing.html
     #
     # @option params [Types::Expression] :filter
     #   Use `Expression` to filter by cost or by usage. There are two
@@ -1732,7 +1733,7 @@ module Aws::CostExplorer
     #   instance families or across different instance families. You can also
     #   choose to view your estimated savings associated with recommendations
     #   with consideration of existing Savings Plans or RI benefits, or
-    #   niether.
+    #   neither.
     #
     # @option params [required, String] :service
     #   The specific service that you want recommendations for. The only valid
@@ -1807,6 +1808,7 @@ module Aws::CostExplorer
     #   resp.rightsizing_recommendations #=> Array
     #   resp.rightsizing_recommendations[0].account_id #=> String
     #   resp.rightsizing_recommendations[0].current_instance.resource_id #=> String
+    #   resp.rightsizing_recommendations[0].current_instance.instance_name #=> String
     #   resp.rightsizing_recommendations[0].current_instance.tags #=> Array
     #   resp.rightsizing_recommendations[0].current_instance.tags[0].key #=> String
     #   resp.rightsizing_recommendations[0].current_instance.tags[0].values #=> Array
@@ -2018,7 +2020,7 @@ module Aws::CostExplorer
     #   The Savings Plans recommendation type requested.
     #
     # @option params [required, String] :term_in_years
-    #   The savings plan recommendation term used to generated these
+    #   The savings plan recommendation term used to generate these
     #   recommendations.
     #
     # @option params [required, String] :payment_option
@@ -2725,7 +2727,7 @@ module Aws::CostExplorer
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-costexplorer'
-      context[:gem_version] = '1.44.0'
+      context[:gem_version] = '1.45.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.176.0 (2020-07-08)
+------------------
+
+* Feature - EC2 Spot now enables customers to tag their Spot Instances Requests on creation.
+
 1.175.0 (2020-07-07)
 ------------------
 

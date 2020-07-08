@@ -285,6 +285,7 @@ module Aws::CostExplorer
     CreateCostCategoryDefinitionResponse.struct_class = Types::CreateCostCategoryDefinitionResponse
 
     CurrentInstance.add_member(:resource_id, Shapes::ShapeRef.new(shape: GenericString, location_name: "ResourceId"))
+    CurrentInstance.add_member(:instance_name, Shapes::ShapeRef.new(shape: GenericString, location_name: "InstanceName"))
     CurrentInstance.add_member(:tags, Shapes::ShapeRef.new(shape: TagValuesList, location_name: "Tags"))
     CurrentInstance.add_member(:resource_details, Shapes::ShapeRef.new(shape: ResourceDetails, location_name: "ResourceDetails"))
     CurrentInstance.add_member(:resource_utilization, Shapes::ShapeRef.new(shape: ResourceUtilization, location_name: "ResourceUtilization"))

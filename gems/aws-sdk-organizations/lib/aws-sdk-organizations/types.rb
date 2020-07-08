@@ -1014,7 +1014,7 @@ module Aws::Organizations
     #         content: "PolicyContent", # required
     #         description: "PolicyDescription", # required
     #         name: "PolicyName", # required
-    #         type: "SERVICE_CONTROL_POLICY", # required, accepts SERVICE_CONTROL_POLICY, TAG_POLICY, BACKUP_POLICY
+    #         type: "SERVICE_CONTROL_POLICY", # required, accepts SERVICE_CONTROL_POLICY, TAG_POLICY, BACKUP_POLICY, AISERVICES_OPT_OUT_POLICY
     #       }
     #
     # @!attribute [rw] content
@@ -1042,17 +1042,20 @@ module Aws::Organizations
     #   The type of policy to create. You can specify one of the following
     #   values:
     #
-    #   * [BACKUP\_POLICY][1]
+    #   * [AISERVICES\_OPT\_OUT\_POLICY][1]
     #
-    #   * [SERVICE\_CONTROL\_POLICY][2]
+    #   * [BACKUP\_POLICY][2]
     #
-    #   * [TAG\_POLICY][3]
+    #   * [SERVICE\_CONTROL\_POLICY][3]
+    #
+    #   * [TAG\_POLICY][4]
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_backup.html
-    #   [2]: http://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_scp.html
-    #   [3]: http://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_tag-policies.html
+    #   [1]: http://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_ai-opt-out.html
+    #   [2]: http://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_backup.html
+    #   [3]: http://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_scp.html
+    #   [4]: http://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_tag-policies.html
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/CreatePolicyRequest AWS API Documentation
@@ -1376,7 +1379,7 @@ module Aws::Organizations
     #   data as a hash:
     #
     #       {
-    #         policy_type: "TAG_POLICY", # required, accepts TAG_POLICY, BACKUP_POLICY
+    #         policy_type: "TAG_POLICY", # required, accepts TAG_POLICY, BACKUP_POLICY, AISERVICES_OPT_OUT_POLICY
     #         target_id: "PolicyTargetId",
     #       }
     #
@@ -1384,14 +1387,17 @@ module Aws::Organizations
     #   The type of policy that you want information about. You can specify
     #   one of the following values:
     #
-    #   * [BACKUP\_POLICY][1]
+    #   * [AISERVICES\_OPT\_OUT\_POLICY][1]
     #
-    #   * [TAG\_POLICY][2]
+    #   * [BACKUP\_POLICY][2]
+    #
+    #   * [TAG\_POLICY][3]
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_backup.html
-    #   [2]: http://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_tag-policies.html
+    #   [1]: http://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_ai-opt-out.html
+    #   [2]: http://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_backup.html
+    #   [3]: http://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_tag-policies.html
     #   @return [String]
     #
     # @!attribute [rw] target_id
@@ -1464,6 +1470,12 @@ module Aws::Organizations
 
     # @!attribute [rw] organization
     #   A structure that contains information about the organization.
+    #
+    #   The `AvailablePolicyTypes` part of the response is deprecated, and
+    #   you shouldn't use it in your apps. It doesn't include any policy
+    #   type supported by Organizations other than SCPs. To determine which
+    #   policy types are enabled in your organization, use the ` ListRoots `
+    #   operation.
     #   @return [Types::Organization]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/DescribeOrganizationResponse AWS API Documentation
@@ -1653,7 +1665,7 @@ module Aws::Organizations
     #
     #       {
     #         root_id: "RootId", # required
-    #         policy_type: "SERVICE_CONTROL_POLICY", # required, accepts SERVICE_CONTROL_POLICY, TAG_POLICY, BACKUP_POLICY
+    #         policy_type: "SERVICE_CONTROL_POLICY", # required, accepts SERVICE_CONTROL_POLICY, TAG_POLICY, BACKUP_POLICY, AISERVICES_OPT_OUT_POLICY
     #       }
     #
     # @!attribute [rw] root_id
@@ -1672,17 +1684,20 @@ module Aws::Organizations
     #   The policy type that you want to disable in this root. You can
     #   specify one of the following values:
     #
-    #   * [BACKUP\_POLICY][1]
+    #   * [AISERVICES\_OPT\_OUT\_POLICY][1]
     #
-    #   * [SERVICE\_CONTROL\_POLICY][2]
+    #   * [BACKUP\_POLICY][2]
     #
-    #   * [TAG\_POLICY][3]
+    #   * [SERVICE\_CONTROL\_POLICY][3]
+    #
+    #   * [TAG\_POLICY][4]
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_backup.html
-    #   [2]: http://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_scp.html
-    #   [3]: http://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_tag-policies.html
+    #   [1]: http://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_ai-opt-out.html
+    #   [2]: http://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_backup.html
+    #   [3]: http://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_scp.html
+    #   [4]: http://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_tag-policies.html
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/DisablePolicyTypeRequest AWS API Documentation
@@ -1870,7 +1885,7 @@ module Aws::Organizations
     #
     #       {
     #         root_id: "RootId", # required
-    #         policy_type: "SERVICE_CONTROL_POLICY", # required, accepts SERVICE_CONTROL_POLICY, TAG_POLICY, BACKUP_POLICY
+    #         policy_type: "SERVICE_CONTROL_POLICY", # required, accepts SERVICE_CONTROL_POLICY, TAG_POLICY, BACKUP_POLICY, AISERVICES_OPT_OUT_POLICY
     #       }
     #
     # @!attribute [rw] root_id
@@ -1889,17 +1904,20 @@ module Aws::Organizations
     #   The policy type that you want to enable. You can specify one of the
     #   following values:
     #
-    #   * [BACKUP\_POLICY][1]
+    #   * [AISERVICES\_OPT\_OUT\_POLICY][1]
     #
-    #   * [SERVICE\_CONTROL\_POLICY][2]
+    #   * [BACKUP\_POLICY][2]
     #
-    #   * [TAG\_POLICY][3]
+    #   * [SERVICE\_CONTROL\_POLICY][3]
+    #
+    #   * [TAG\_POLICY][4]
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_backup.html
-    #   [2]: http://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_scp.html
-    #   [3]: http://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_tag-policies.html
+    #   [1]: http://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_ai-opt-out.html
+    #   [2]: http://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_backup.html
+    #   [3]: http://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_scp.html
+    #   [4]: http://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_tag-policies.html
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/EnablePolicyTypeRequest AWS API Documentation
@@ -3249,7 +3267,7 @@ module Aws::Organizations
     #
     #       {
     #         target_id: "PolicyTargetId", # required
-    #         filter: "SERVICE_CONTROL_POLICY", # required, accepts SERVICE_CONTROL_POLICY, TAG_POLICY, BACKUP_POLICY
+    #         filter: "SERVICE_CONTROL_POLICY", # required, accepts SERVICE_CONTROL_POLICY, TAG_POLICY, BACKUP_POLICY, AISERVICES_OPT_OUT_POLICY
     #         next_token: "NextToken",
     #         max_results: 1,
     #       }
@@ -3281,17 +3299,20 @@ module Aws::Organizations
     #   The type of policy that you want to include in the returned list.
     #   You must specify one of the following values:
     #
-    #   * [BACKUP\_POLICY][1]
+    #   * [AISERVICES\_OPT\_OUT\_POLICY][1]
     #
-    #   * [SERVICE\_CONTROL\_POLICY][2]
+    #   * [BACKUP\_POLICY][2]
     #
-    #   * [TAG\_POLICY][3]
+    #   * [SERVICE\_CONTROL\_POLICY][3]
+    #
+    #   * [TAG\_POLICY][4]
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_backup.html
-    #   [2]: http://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_scp.html
-    #   [3]: http://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_tag-policies.html
+    #   [1]: http://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_ai-opt-out.html
+    #   [2]: http://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_backup.html
+    #   [3]: http://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_scp.html
+    #   [4]: http://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_tag-policies.html
     #   @return [String]
     #
     # @!attribute [rw] next_token
@@ -3351,7 +3372,7 @@ module Aws::Organizations
     #   data as a hash:
     #
     #       {
-    #         filter: "SERVICE_CONTROL_POLICY", # required, accepts SERVICE_CONTROL_POLICY, TAG_POLICY, BACKUP_POLICY
+    #         filter: "SERVICE_CONTROL_POLICY", # required, accepts SERVICE_CONTROL_POLICY, TAG_POLICY, BACKUP_POLICY, AISERVICES_OPT_OUT_POLICY
     #         next_token: "NextToken",
     #         max_results: 1,
     #       }
@@ -3360,17 +3381,20 @@ module Aws::Organizations
     #   Specifies the type of policy that you want to include in the
     #   response. You must specify one of the following values:
     #
-    #   * [BACKUP\_POLICY][1]
+    #   * [AISERVICES\_OPT\_OUT\_POLICY][1]
     #
-    #   * [SERVICE\_CONTROL\_POLICY][2]
+    #   * [BACKUP\_POLICY][2]
     #
-    #   * [TAG\_POLICY][3]
+    #   * [SERVICE\_CONTROL\_POLICY][3]
+    #
+    #   * [TAG\_POLICY][4]
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_backup.html
-    #   [2]: http://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_scp.html
-    #   [3]: http://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_tag-policies.html
+    #   [1]: http://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_ai-opt-out.html
+    #   [2]: http://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_backup.html
+    #   [3]: http://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_scp.html
+    #   [4]: http://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_tag-policies.html
     #   @return [String]
     #
     # @!attribute [rw] next_token
@@ -3790,16 +3814,11 @@ module Aws::Organizations
     #   @return [String]
     #
     # @!attribute [rw] available_policy_types
-    #   A list of policy types that are enabled for this organization. For
-    #   example, if your organization has all features enabled, then service
-    #   control policies (SCPs) are included in the list.
+    #   Do not use. This field is deprecated and doesn't provide complete
+    #   information about the policies in your organization.
     #
-    #   <note markdown="1"> Even if a policy type is shown as available in the organization, you
-    #   can separately enable and disable them at the root level by using
-    #   EnablePolicyType and DisablePolicyType. Use ListRoots to see the
-    #   status of a policy type in that root.
-    #
-    #    </note>
+    #   To determine the policies that are enabled and available for use in
+    #   your organization, use the ListRoots operation instead.
     #   @return [Array<Types::PolicyTypeSummary>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/Organization AWS API Documentation

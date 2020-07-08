@@ -7514,7 +7514,7 @@ module Aws::EC2
 
     # Creates a data feed for Spot Instances, enabling you to view Spot
     # Instance usage logs. You can create one data feed per AWS account. For
-    # more information, see [Spot Instance Data Feed][1] in the *Amazon EC2
+    # more information, see [Spot Instance data feed][1] in the *Amazon EC2
     # User Guide for Linux Instances*.
     #
     #
@@ -21525,7 +21525,7 @@ module Aws::EC2
     end
 
     # Describes the data feed for Spot Instances. For more information, see
-    # [Spot Instance Data Feed][1] in the *Amazon EC2 User Guide for Linux
+    # [Spot Instance data feed][1] in the *Amazon EC2 User Guide for Linux
     # Instances*.
     #
     #
@@ -22108,7 +22108,7 @@ module Aws::EC2
     #   * `state` - The state of the Spot Instance request (`open` \| `active`
     #     \| `closed` \| `cancelled` \| `failed`). Spot request status
     #     information can help you track your Amazon EC2 Spot Instance
-    #     requests. For more information, see [Spot Request Status][1] in the
+    #     requests. For more information, see [Spot request status][1] in the
     #     *Amazon EC2 User Guide for Linux Instances*.
     #
     #   * `status-code` - The short code describing the most recent evaluation
@@ -22322,7 +22322,7 @@ module Aws::EC2
     end
 
     # Describes the Spot price history. For more information, see [Spot
-    # Instance Pricing History][1] in the *Amazon EC2 User Guide for Linux
+    # Instance pricing history][1] in the *Amazon EC2 User Guide for Linux
     # Instances*.
     #
     # When you specify a start and end time, this operation returns the
@@ -34296,7 +34296,7 @@ module Aws::EC2
     # request because only the `spot-fleet-request` and `instance` resource
     # types are supported.
     #
-    # For more information, see [Spot Fleet Requests][1] in the *Amazon EC2
+    # For more information, see [Spot Fleet requests][1] in the *Amazon EC2
     # User Guide for Linux Instances*.
     #
     #
@@ -34641,7 +34641,7 @@ module Aws::EC2
 
     # Creates a Spot Instance request.
     #
-    # For more information, see [Spot Instance Requests][1] in the *Amazon
+    # For more information, see [Spot Instance requests][1] in the *Amazon
     # EC2 User Guide for Linux Instances*.
     #
     #
@@ -34740,6 +34740,16 @@ module Aws::EC2
     #   canceled, or this date is reached. If the request is persistent, it
     #   remains active until it is canceled or this date is reached. The
     #   default end date is 7 days from the current date.
+    #
+    # @option params [Array<Types::TagSpecification>] :tag_specifications
+    #   The key-value pair for tagging the Spot Instance request on creation.
+    #   The value for `ResourceType` must be `spot-instances-request`,
+    #   otherwise the Spot Instance request fails. To tag the Spot Instance
+    #   request after it has been created, see [CreateTags][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_CreateTags.html
     #
     # @option params [String] :instance_interruption_behavior
     #   The behavior when a Spot Instance is interrupted. The default is
@@ -34880,6 +34890,17 @@ module Aws::EC2
     #     type: "one-time", # accepts one-time, persistent
     #     valid_from: Time.now,
     #     valid_until: Time.now,
+    #     tag_specifications: [
+    #       {
+    #         resource_type: "client-vpn-endpoint", # accepts client-vpn-endpoint, customer-gateway, dedicated-host, dhcp-options, elastic-ip, elastic-gpu, export-image-task, export-instance-task, fleet, fpga-image, host-reservation, image, import-image-task, import-snapshot-task, instance, internet-gateway, key-pair, launch-template, local-gateway-route-table-vpc-association, natgateway, network-acl, network-interface, placement-group, reserved-instances, route-table, security-group, snapshot, spot-fleet-request, spot-instances-request, subnet, traffic-mirror-filter, traffic-mirror-session, traffic-mirror-target, transit-gateway, transit-gateway-attachment, transit-gateway-multicast-domain, transit-gateway-route-table, volume, vpc, vpc-peering-connection, vpn-connection, vpn-gateway, vpc-flow-log
+    #         tags: [
+    #           {
+    #             key: "String",
+    #             value: "String",
+    #           },
+    #         ],
+    #       },
+    #     ],
     #     instance_interruption_behavior: "hibernate", # accepts hibernate, stop, terminate
     #   })
     #
@@ -37735,7 +37756,7 @@ module Aws::EC2
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-ec2'
-      context[:gem_version] = '1.175.0'
+      context[:gem_version] = '1.176.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -335,7 +335,7 @@ module Aws::S3
     #   @option options [Boolean] :use_accelerate_endpoint (false)
     #     When set to `true`, accelerated bucket endpoints will be used
     #     for all object operations. You must first enable accelerate for
-    #     each bucket.  [Go here for more information](http://docs.aws.amazon.com/AmazonS3/latest/dev/transfer-acceleration.html).
+    #     each bucket. [Go here for more information](http://docs.aws.amazon.com/AmazonS3/latest/dev/transfer-acceleration.html).
     #
     #   @option options [Boolean] :use_dualstack_endpoint (false)
     #     When set to `true`, IPv6-compatible bucket endpoints will be used
@@ -11672,7 +11672,7 @@ module Aws::S3
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-s3'
-      context[:gem_version] = '1.73.0'
+      context[:gem_version] = '1.74.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

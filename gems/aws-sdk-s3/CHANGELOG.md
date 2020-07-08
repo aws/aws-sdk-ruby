@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.74.0 (2020-07-08)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
 * Feature - Allow the `use_accelerate_endpoint` option to be used with `Aws::S3::PresignedPost`. (#2103)
 
 1.73.0 (2020-07-02)

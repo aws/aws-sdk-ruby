@@ -3190,6 +3190,9 @@ module Aws::EC2
     #   * `none` - The instance avoids running in a Capacity Reservation
     #     even if one is available. The instance runs as an On-Demand
     #     Instance.
+    #
+    #   When `CapacityReservationPreference` is not specified, it defaults
+    #   to `open`.
     #   @return [String]
     #
     # @!attribute [rw] capacity_reservation_target
@@ -19813,8 +19816,8 @@ module Aws::EC2
     #   * `state` - The state of the Spot Instance request (`open` \|
     #     `active` \| `closed` \| `cancelled` \| `failed`). Spot request
     #     status information can help you track your Amazon EC2 Spot
-    #     Instance requests. For more information, see [Spot Request
-    #     Status][1] in the *Amazon EC2 User Guide for Linux Instances*.
+    #     Instance requests. For more information, see [Spot request
+    #     status][1] in the *Amazon EC2 User Guide for Linux Instances*.
     #
     #   * `status-code` - The short code describing the most recent
     #     evaluation of your Spot Instance request.
@@ -40842,6 +40845,17 @@ module Aws::EC2
     #         type: "one-time", # accepts one-time, persistent
     #         valid_from: Time.now,
     #         valid_until: Time.now,
+    #         tag_specifications: [
+    #           {
+    #             resource_type: "client-vpn-endpoint", # accepts client-vpn-endpoint, customer-gateway, dedicated-host, dhcp-options, elastic-ip, elastic-gpu, export-image-task, export-instance-task, fleet, fpga-image, host-reservation, image, import-image-task, import-snapshot-task, instance, internet-gateway, key-pair, launch-template, local-gateway-route-table-vpc-association, natgateway, network-acl, network-interface, placement-group, reserved-instances, route-table, security-group, snapshot, spot-fleet-request, spot-instances-request, subnet, traffic-mirror-filter, traffic-mirror-session, traffic-mirror-target, transit-gateway, transit-gateway-attachment, transit-gateway-multicast-domain, transit-gateway-route-table, volume, vpc, vpc-peering-connection, vpn-connection, vpn-gateway, vpc-flow-log
+    #             tags: [
+    #               {
+    #                 key: "String",
+    #                 value: "String",
+    #               },
+    #             ],
+    #           },
+    #         ],
     #         instance_interruption_behavior: "hibernate", # accepts hibernate, stop, terminate
     #       }
     #
@@ -40951,6 +40965,18 @@ module Aws::EC2
     #   default end date is 7 days from the current date.
     #   @return [Time]
     #
+    # @!attribute [rw] tag_specifications
+    #   The key-value pair for tagging the Spot Instance request on
+    #   creation. The value for `ResourceType` must be
+    #   `spot-instances-request`, otherwise the Spot Instance request fails.
+    #   To tag the Spot Instance request after it has been created, see
+    #   [CreateTags][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_CreateTags.html
+    #   @return [Array<Types::TagSpecification>]
+    #
     # @!attribute [rw] instance_interruption_behavior
     #   The behavior when a Spot Instance is interrupted. The default is
     #   `terminate`.
@@ -40970,6 +40996,7 @@ module Aws::EC2
       :type,
       :valid_from,
       :valid_until,
+      :tag_specifications,
       :instance_interruption_behavior)
       SENSITIVE = []
       include Aws::Structure
@@ -45712,7 +45739,7 @@ module Aws::EC2
     #   The Amazon Resource Name (ARN) of an AWS Identity and Access
     #   Management (IAM) role that grants the Spot Fleet the permission to
     #   request, launch, terminate, and tag instances on your behalf. For
-    #   more information, see [Spot Fleet Prerequisites][1] in the *Amazon
+    #   more information, see [Spot Fleet prerequisites][1] in the *Amazon
     #   EC2 User Guide for Linux Instances*. Spot Fleet can terminate Spot
     #   Instances on your behalf when you cancel its Spot Fleet request
     #   using [CancelSpotFleetRequests][2] or when the Spot Fleet request
@@ -45989,7 +46016,7 @@ module Aws::EC2
     # @!attribute [rw] state
     #   The state of the Spot Instance request. Spot status information
     #   helps track your Spot Instance requests. For more information, see
-    #   [Spot Status][1] in the *Amazon EC2 User Guide for Linux Instances*.
+    #   [Spot status][1] in the *Amazon EC2 User Guide for Linux Instances*.
     #
     #
     #
@@ -46076,8 +46103,8 @@ module Aws::EC2
     # Describes the status of a Spot Instance request.
     #
     # @!attribute [rw] code
-    #   The status code. For a list of status codes, see [Spot Status
-    #   Codes][1] in the *Amazon EC2 User Guide for Linux Instances*.
+    #   The status code. For a list of status codes, see [Spot status
+    #   codes][1] in the *Amazon EC2 User Guide for Linux Instances*.
     #
     #
     #

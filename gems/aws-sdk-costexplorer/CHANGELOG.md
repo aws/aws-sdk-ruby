@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.45.0 (2020-07-08)
+------------------
+
+* Feature - Customers can now see Instance Name alongside each rightsizing recommendation.
+
 1.44.0 (2020-06-23)
 ------------------
 

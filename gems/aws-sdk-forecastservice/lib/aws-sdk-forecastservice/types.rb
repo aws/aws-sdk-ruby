@@ -119,6 +119,12 @@ module Aws::ForecastService
     #         dataset_group_name: "Name", # required
     #         domain: "RETAIL", # required, accepts RETAIL, CUSTOM, INVENTORY_PLANNING, EC2_CAPACITY, WORK_FORCE, WEB_TRAFFIC, METRICS
     #         dataset_arns: ["Arn"],
+    #         tags: [
+    #           {
+    #             key: "TagKey", # required
+    #             value: "TagValue", # required
+    #           },
+    #         ],
     #       }
     #
     # @!attribute [rw] dataset_group_name
@@ -143,12 +149,46 @@ module Aws::ForecastService
     #   want to include in the dataset group.
     #   @return [Array<String>]
     #
+    # @!attribute [rw] tags
+    #   The optional metadata that you apply to the dataset group to help
+    #   you categorize and organize them. Each tag consists of a key and an
+    #   optional value, both of which you define.
+    #
+    #   The following basic restrictions apply to tags:
+    #
+    #   * Maximum number of tags per resource - 50.
+    #
+    #   * For each resource, each tag key must be unique, and each tag key
+    #     can have only one value.
+    #
+    #   * Maximum key length - 128 Unicode characters in UTF-8.
+    #
+    #   * Maximum value length - 256 Unicode characters in UTF-8.
+    #
+    #   * If your tagging schema is used across multiple services and
+    #     resources, remember that other services may have restrictions on
+    #     allowed characters. Generally allowed characters are: letters,
+    #     numbers, and spaces representable in UTF-8, and the following
+    #     characters: + - = . \_ : / @.
+    #
+    #   * Tag keys and values are case sensitive.
+    #
+    #   * Do not use `aws:`, `AWS:`, or any upper or lowercase combination
+    #     of such as a prefix for keys as it is reserved for AWS use. You
+    #     cannot edit or delete tag keys with this prefix. Values can have
+    #     this prefix. If a tag value has `aws` as its prefix but the key
+    #     does not, then Forecast considers it to be a user tag and will
+    #     count against the limit of 50 tags. Tags with only the key prefix
+    #     of `aws` do not count against your tags per resource limit.
+    #   @return [Array<Types::Tag>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/forecast-2018-06-26/CreateDatasetGroupRequest AWS API Documentation
     #
     class CreateDatasetGroupRequest < Struct.new(
       :dataset_group_name,
       :domain,
-      :dataset_arns)
+      :dataset_arns,
+      :tags)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -179,6 +219,12 @@ module Aws::ForecastService
     #           },
     #         },
     #         timestamp_format: "TimestampFormat",
+    #         tags: [
+    #           {
+    #             key: "TagKey", # required
+    #             value: "TagValue", # required
+    #           },
+    #         ],
     #       }
     #
     # @!attribute [rw] dataset_import_job_name
@@ -224,13 +270,47 @@ module Aws::ForecastService
     #   to be "yyyy-MM-dd HH:mm:ss".
     #   @return [String]
     #
+    # @!attribute [rw] tags
+    #   The optional metadata that you apply to the dataset import job to
+    #   help you categorize and organize them. Each tag consists of a key
+    #   and an optional value, both of which you define.
+    #
+    #   The following basic restrictions apply to tags:
+    #
+    #   * Maximum number of tags per resource - 50.
+    #
+    #   * For each resource, each tag key must be unique, and each tag key
+    #     can have only one value.
+    #
+    #   * Maximum key length - 128 Unicode characters in UTF-8.
+    #
+    #   * Maximum value length - 256 Unicode characters in UTF-8.
+    #
+    #   * If your tagging schema is used across multiple services and
+    #     resources, remember that other services may have restrictions on
+    #     allowed characters. Generally allowed characters are: letters,
+    #     numbers, and spaces representable in UTF-8, and the following
+    #     characters: + - = . \_ : / @.
+    #
+    #   * Tag keys and values are case sensitive.
+    #
+    #   * Do not use `aws:`, `AWS:`, or any upper or lowercase combination
+    #     of such as a prefix for keys as it is reserved for AWS use. You
+    #     cannot edit or delete tag keys with this prefix. Values can have
+    #     this prefix. If a tag value has `aws` as its prefix but the key
+    #     does not, then Forecast considers it to be a user tag and will
+    #     count against the limit of 50 tags. Tags with only the key prefix
+    #     of `aws` do not count against your tags per resource limit.
+    #   @return [Array<Types::Tag>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/forecast-2018-06-26/CreateDatasetImportJobRequest AWS API Documentation
     #
     class CreateDatasetImportJobRequest < Struct.new(
       :dataset_import_job_name,
       :dataset_arn,
       :data_source,
-      :timestamp_format)
+      :timestamp_format,
+      :tags)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -267,6 +347,12 @@ module Aws::ForecastService
     #           role_arn: "Arn", # required
     #           kms_key_arn: "KMSKeyArn", # required
     #         },
+    #         tags: [
+    #           {
+    #             key: "TagKey", # required
+    #             value: "TagValue", # required
+    #           },
+    #         ],
     #       }
     #
     # @!attribute [rw] dataset_name
@@ -314,6 +400,39 @@ module Aws::ForecastService
     #   access the key.
     #   @return [Types::EncryptionConfig]
     #
+    # @!attribute [rw] tags
+    #   The optional metadata that you apply to the dataset to help you
+    #   categorize and organize them. Each tag consists of a key and an
+    #   optional value, both of which you define.
+    #
+    #   The following basic restrictions apply to tags:
+    #
+    #   * Maximum number of tags per resource - 50.
+    #
+    #   * For each resource, each tag key must be unique, and each tag key
+    #     can have only one value.
+    #
+    #   * Maximum key length - 128 Unicode characters in UTF-8.
+    #
+    #   * Maximum value length - 256 Unicode characters in UTF-8.
+    #
+    #   * If your tagging schema is used across multiple services and
+    #     resources, remember that other services may have restrictions on
+    #     allowed characters. Generally allowed characters are: letters,
+    #     numbers, and spaces representable in UTF-8, and the following
+    #     characters: + - = . \_ : / @.
+    #
+    #   * Tag keys and values are case sensitive.
+    #
+    #   * Do not use `aws:`, `AWS:`, or any upper or lowercase combination
+    #     of such as a prefix for keys as it is reserved for AWS use. You
+    #     cannot edit or delete tag keys with this prefix. Values can have
+    #     this prefix. If a tag value has `aws` as its prefix but the key
+    #     does not, then Forecast considers it to be a user tag and will
+    #     count against the limit of 50 tags. Tags with only the key prefix
+    #     of `aws` do not count against your tags per resource limit.
+    #   @return [Array<Types::Tag>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/forecast-2018-06-26/CreateDatasetRequest AWS API Documentation
     #
     class CreateDatasetRequest < Struct.new(
@@ -322,7 +441,8 @@ module Aws::ForecastService
       :dataset_type,
       :data_frequency,
       :schema,
-      :encryption_config)
+      :encryption_config,
+      :tags)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -352,6 +472,12 @@ module Aws::ForecastService
     #             kms_key_arn: "KMSKeyArn",
     #           },
     #         },
+    #         tags: [
+    #           {
+    #             key: "TagKey", # required
+    #             value: "TagValue", # required
+    #           },
+    #         ],
     #       }
     #
     # @!attribute [rw] forecast_export_job_name
@@ -374,12 +500,46 @@ module Aws::ForecastService
     #   Forecast permission to access the key.
     #   @return [Types::DataDestination]
     #
+    # @!attribute [rw] tags
+    #   The optional metadata that you apply to the forecast export job to
+    #   help you categorize and organize them. Each tag consists of a key
+    #   and an optional value, both of which you define.
+    #
+    #   The following basic restrictions apply to tags:
+    #
+    #   * Maximum number of tags per resource - 50.
+    #
+    #   * For each resource, each tag key must be unique, and each tag key
+    #     can have only one value.
+    #
+    #   * Maximum key length - 128 Unicode characters in UTF-8.
+    #
+    #   * Maximum value length - 256 Unicode characters in UTF-8.
+    #
+    #   * If your tagging schema is used across multiple services and
+    #     resources, remember that other services may have restrictions on
+    #     allowed characters. Generally allowed characters are: letters,
+    #     numbers, and spaces representable in UTF-8, and the following
+    #     characters: + - = . \_ : / @.
+    #
+    #   * Tag keys and values are case sensitive.
+    #
+    #   * Do not use `aws:`, `AWS:`, or any upper or lowercase combination
+    #     of such as a prefix for keys as it is reserved for AWS use. You
+    #     cannot edit or delete tag keys with this prefix. Values can have
+    #     this prefix. If a tag value has `aws` as its prefix but the key
+    #     does not, then Forecast considers it to be a user tag and will
+    #     count against the limit of 50 tags. Tags with only the key prefix
+    #     of `aws` do not count against your tags per resource limit.
+    #   @return [Array<Types::Tag>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/forecast-2018-06-26/CreateForecastExportJobRequest AWS API Documentation
     #
     class CreateForecastExportJobRequest < Struct.new(
       :forecast_export_job_name,
       :forecast_arn,
-      :destination)
+      :destination,
+      :tags)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -403,6 +563,12 @@ module Aws::ForecastService
     #         forecast_name: "Name", # required
     #         predictor_arn: "Arn", # required
     #         forecast_types: ["ForecastType"],
+    #         tags: [
+    #           {
+    #             key: "TagKey", # required
+    #             value: "TagValue", # required
+    #           },
+    #         ],
     #       }
     #
     # @!attribute [rw] forecast_name
@@ -415,20 +581,54 @@ module Aws::ForecastService
     #   @return [String]
     #
     # @!attribute [rw] forecast_types
-    #   The quantiles at which probabilistic forecasts are generated. You
-    #   can specify up to 5 quantiles per forecast. Accepted values include
-    #   `0.01 to 0.99` (increments of .01 only) and `mean`. The mean
-    #   forecast is different from the median (0.50) when the distribution
-    #   is not symmetric (e.g. Beta, Negative Binomial). The default value
-    #   is `["0.1", "0.5", "0.9"]`.
+    #   The quantiles at which probabilistic forecasts are generated. **You
+    #   can currently specify up to 5 quantiles per forecast**. Accepted
+    #   values include `0.01 to 0.99` (increments of .01 only) and `mean`.
+    #   The mean forecast is different from the median (0.50) when the
+    #   distribution is not symmetric (for example, Beta and Negative
+    #   Binomial). The default value is `["0.1", "0.5", "0.9"]`.
     #   @return [Array<String>]
+    #
+    # @!attribute [rw] tags
+    #   The optional metadata that you apply to the forecast to help you
+    #   categorize and organize them. Each tag consists of a key and an
+    #   optional value, both of which you define.
+    #
+    #   The following basic restrictions apply to tags:
+    #
+    #   * Maximum number of tags per resource - 50.
+    #
+    #   * For each resource, each tag key must be unique, and each tag key
+    #     can have only one value.
+    #
+    #   * Maximum key length - 128 Unicode characters in UTF-8.
+    #
+    #   * Maximum value length - 256 Unicode characters in UTF-8.
+    #
+    #   * If your tagging schema is used across multiple services and
+    #     resources, remember that other services may have restrictions on
+    #     allowed characters. Generally allowed characters are: letters,
+    #     numbers, and spaces representable in UTF-8, and the following
+    #     characters: + - = . \_ : / @.
+    #
+    #   * Tag keys and values are case sensitive.
+    #
+    #   * Do not use `aws:`, `AWS:`, or any upper or lowercase combination
+    #     of such as a prefix for keys as it is reserved for AWS use. You
+    #     cannot edit or delete tag keys with this prefix. Values can have
+    #     this prefix. If a tag value has `aws` as its prefix but the key
+    #     does not, then Forecast considers it to be a user tag and will
+    #     count against the limit of 50 tags. Tags with only the key prefix
+    #     of `aws` do not count against your tags per resource limit.
+    #   @return [Array<Types::Tag>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/forecast-2018-06-26/CreateForecastRequest AWS API Documentation
     #
     class CreateForecastRequest < Struct.new(
       :forecast_name,
       :predictor_arn,
-      :forecast_types)
+      :forecast_types,
+      :tags)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -517,6 +717,12 @@ module Aws::ForecastService
     #           role_arn: "Arn", # required
     #           kms_key_arn: "KMSKeyArn", # required
     #         },
+    #         tags: [
+    #           {
+    #             key: "TagKey", # required
+    #             value: "TagValue", # required
+    #           },
+    #         ],
     #       }
     #
     # @!attribute [rw] predictor_name
@@ -632,6 +838,39 @@ module Aws::ForecastService
     #   access the key.
     #   @return [Types::EncryptionConfig]
     #
+    # @!attribute [rw] tags
+    #   The optional metadata that you apply to the predictor to help you
+    #   categorize and organize them. Each tag consists of a key and an
+    #   optional value, both of which you define.
+    #
+    #   The following basic restrictions apply to tags:
+    #
+    #   * Maximum number of tags per resource - 50.
+    #
+    #   * For each resource, each tag key must be unique, and each tag key
+    #     can have only one value.
+    #
+    #   * Maximum key length - 128 Unicode characters in UTF-8.
+    #
+    #   * Maximum value length - 256 Unicode characters in UTF-8.
+    #
+    #   * If your tagging schema is used across multiple services and
+    #     resources, remember that other services may have restrictions on
+    #     allowed characters. Generally allowed characters are: letters,
+    #     numbers, and spaces representable in UTF-8, and the following
+    #     characters: + - = . \_ : / @.
+    #
+    #   * Tag keys and values are case sensitive.
+    #
+    #   * Do not use `aws:`, `AWS:`, or any upper or lowercase combination
+    #     of such as a prefix for keys as it is reserved for AWS use. You
+    #     cannot edit or delete tag keys with this prefix. Values can have
+    #     this prefix. If a tag value has `aws` as its prefix but the key
+    #     does not, then Forecast considers it to be a user tag and will
+    #     count against the limit of 50 tags. Tags with only the key prefix
+    #     of `aws` do not count against your tags per resource limit.
+    #   @return [Array<Types::Tag>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/forecast-2018-06-26/CreatePredictorRequest AWS API Documentation
     #
     class CreatePredictorRequest < Struct.new(
@@ -645,7 +884,8 @@ module Aws::ForecastService
       :hpo_config,
       :input_data_config,
       :featurization_config,
-      :encryption_config)
+      :encryption_config,
+      :tags)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1394,7 +1634,7 @@ module Aws::ForecastService
     #   @return [String]
     #
     # @!attribute [rw] forecast_types
-    #   The quantiles at which proababilistic forecasts were generated.
+    #   The quantiles at which probabilistic forecasts were generated.
     #   @return [Array<String>]
     #
     # @!attribute [rw] predictor_arn
@@ -1743,10 +1983,11 @@ module Aws::ForecastService
     #
     # @!attribute [rw] attribute_name
     #   The name of the schema attribute that specifies the data field to be
-    #   featurized. Only the `target` field of the `TARGET_TIME_SERIES`
-    #   dataset type is supported. For example, for the `RETAIL` domain, the
-    #   target is `demand`, and for the `CUSTOM` domain, the target is
-    #   `target_value`.
+    #   featurized. Amazon Forecast supports the target field of the
+    #   `TARGET_TIME_SERIES` and the `RELATED_TIME_SERIES` datasets. For
+    #   example, for the `RETAIL` domain, the target is `demand`, and for
+    #   the `CUSTOM` domain, the target is `target_value`. For more
+    #   information, see howitworks-missing-values.
     #   @return [String]
     #
     # @!attribute [rw] featurization_pipeline
@@ -1772,8 +2013,8 @@ module Aws::ForecastService
     # specify an array of transformations, one for each field that you want
     # to featurize. You then include the `FeaturizationConfig` object in
     # your `CreatePredictor` request. Amazon Forecast applies the
-    # featurization to the `TARGET_TIME_SERIES` dataset before model
-    # training.
+    # featurization to the `TARGET_TIME_SERIES` and `RELATED_TIME_SERIES`
+    # datasets before model training.
     #
     # You can create multiple featurization configurations. For example, you
     # might call the `CreatePredictor` operation twice by specifying
@@ -1833,7 +2074,7 @@ module Aws::ForecastService
     #
     # @!attribute [rw] featurizations
     #   An array of featurization (transformation) information for the
-    #   fields of a dataset. Only a single featurization is supported.
+    #   fields of a dataset.
     #   @return [Array<Types::Featurization>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/forecast-2018-06-26/FeaturizationConfig AWS API Documentation
@@ -1848,9 +2089,7 @@ module Aws::ForecastService
 
     # Provides information about the method that featurizes (transforms) a
     # dataset field. The method is part of the `FeaturizationPipeline` of
-    # the Featurization object. If you don't specify
-    # `FeaturizationMethodParameters`, Amazon Forecast uses default
-    # parameters.
+    # the Featurization object.
     #
     # The following is an example of how you specify a `FeaturizationMethod`
     # object.
@@ -1859,8 +2098,8 @@ module Aws::ForecastService
     #
     # `"FeaturizationMethodName": "filling",`
     #
-    # `"FeaturizationMethodParameters": \{"aggregation": "avg", "backfill":
-    # "nan"\}`
+    # `"FeaturizationMethodParameters": \{"aggregation": "sum",
+    # "middlefill": "zero", "backfill": "zero"\}`
     #
     # `\}`
     #
@@ -1880,17 +2119,33 @@ module Aws::ForecastService
     #   @return [String]
     #
     # @!attribute [rw] featurization_method_parameters
-    #   The method parameters (key-value pairs). Specify these parameters to
-    #   override the default values. The following list shows the parameters
-    #   and their valid values. Bold signifies the default value.
+    #   The method parameters (key-value pairs), which are a map of override
+    #   parameters. Specify these parameters to override the default values.
+    #   Related Time Series attributes do not accept aggregation parameters.
+    #
+    #   The following list shows the parameters and their valid values for
+    #   the "filling" featurization method for a **Target Time Series**
+    #   dataset. Bold signifies the default value.
     #
     #   * `aggregation`\: **sum**, `avg`, `first`, `min`, `max`
     #
     #   * `frontfill`\: **none**
     #
-    #   * `middlefill`\: **zero**, `nan` (not a number)
+    #   * `middlefill`\: **zero**, `nan` (not a number), `value`, `median`,
+    #     `mean`, `min`, `max`
     #
-    #   * `backfill`\: **zero**, `nan`
+    #   * `backfill`\: **zero**, `nan`, `value`, `median`, `mean`, `min`,
+    #     `max`
+    #
+    #   The following list shows the parameters and their valid values for a
+    #   **Related Time Series** featurization method (there are no
+    #   defaults):
+    #
+    #   * `middlefill`\: `zero`, `value`, `median`, `mean`, `min`, `max`
+    #
+    #   * `backfill`\: `zero`, `value`, `median`, `mean`, `min`, `max`
+    #
+    #   * `futurefill`\: `zero`, `value`, `median`, `mean`, `min`, `max`
     #   @return [Hash<String,String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/forecast-2018-06-26/FeaturizationMethod AWS API Documentation
@@ -2709,6 +2964,40 @@ module Aws::ForecastService
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass ListTagsForResourceRequest
+    #   data as a hash:
+    #
+    #       {
+    #         resource_arn: "Arn", # required
+    #       }
+    #
+    # @!attribute [rw] resource_arn
+    #   The Amazon Resource Name (ARN) that identifies the resource for
+    #   which to list the tags. Currently, the supported resources are
+    #   Forecast dataset groups, datasets, dataset import jobs, predictors,
+    #   forecasts, and forecast export jobs.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/forecast-2018-06-26/ListTagsForResourceRequest AWS API Documentation
+    #
+    class ListTagsForResourceRequest < Struct.new(
+      :resource_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] tags
+    #   The tags for the resource.
+    #   @return [Array<Types::Tag>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/forecast-2018-06-26/ListTagsForResourceResponse AWS API Documentation
+    #
+    class ListTagsForResourceResponse < Struct.new(
+      :tags)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Provides metrics that are used to evaluate the performance of a
     # predictor. This object is part of the WindowSummary object.
     #
@@ -3097,6 +3386,35 @@ module Aws::ForecastService
     # as the calendar. For the holiday calendar data, see the [Jollyday][1]
     # web site.
     #
+    # India and Korea's holidays are not included in the Jollyday library,
+    # but both are supported by Amazon Forecast. Their holidays are:
+    #
+    # **"IN" - INDIA**
+    #
+    # * `JANUARY 26 - REPUBLIC DAY`
+    #
+    # * `AUGUST 15 - INDEPENDENCE DAY`
+    #
+    # * `OCTOBER 2 GANDHI'S BIRTHDAY`
+    #
+    # **"KR" - KOREA**
+    #
+    # * `JANUARY 1 - NEW YEAR`
+    #
+    # * `MARCH 1 - INDEPENDENCE MOVEMENT DAY`
+    #
+    # * `MAY 5 - CHILDREN'S DAY`
+    #
+    # * `JUNE 6 - MEMORIAL DAY`
+    #
+    # * `AUGUST 15 - LIBERATION DAY`
+    #
+    # * `OCTOBER 3 - NATIONAL FOUNDATION DAY`
+    #
+    # * `OCTOBER 9 - HANGEUL DAY`
+    #
+    # * `DECEMBER 25 - CHRISTMAS DAY`
+    #
     #
     #
     # [1]: http://jollyday.sourceforge.net/data.html
@@ -3116,15 +3434,69 @@ module Aws::ForecastService
     # @!attribute [rw] value
     #   One of the following 2 letter country codes:
     #
+    #   * "AR" - ARGENTINA
+    #
+    #   * "AT" - AUSTRIA
+    #
     #   * "AU" - AUSTRALIA
+    #
+    #   * "BE" - BELGIUM
+    #
+    #   * "BR" - BRAZIL
+    #
+    #   * "CA" - CANADA
+    #
+    #   * "CN" - CHINA
+    #
+    #   * "CZ" - CZECH REPUBLIC
+    #
+    #   * "DK" - DENMARK
+    #
+    #   * "EC" - ECUADOR
+    #
+    #   * "FI" - FINLAND
+    #
+    #   * "FR" - FRANCE
     #
     #   * "DE" - GERMANY
     #
+    #   * "HU" - HUNGARY
+    #
+    #   * "IE" - IRELAND
+    #
+    #   * "IN" - INDIA
+    #
+    #   * "IT" - ITALY
+    #
     #   * "JP" - JAPAN
     #
-    #   * "US" - UNITED\_STATES
+    #   * "KR" - KOREA
     #
-    #   * "UK" - UNITED\_KINGDOM
+    #   * "LU" - LUXEMBOURG
+    #
+    #   * "MX" - MEXICO
+    #
+    #   * "NL" - NETHERLANDS
+    #
+    #   * "NO" - NORWAY
+    #
+    #   * "PL" - POLAND
+    #
+    #   * "PT" - PORTUGAL
+    #
+    #   * "RU" - RUSSIA
+    #
+    #   * "ZA" - SOUTH AFRICA
+    #
+    #   * "ES" - SPAIN
+    #
+    #   * "SE" - SWEDEN
+    #
+    #   * "CH" - SWITZERLAND
+    #
+    #   * "US" - UNITED STATES
+    #
+    #   * "UK" - UNITED KINGDOM
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/forecast-2018-06-26/SupplementaryFeature AWS API Documentation
@@ -3135,6 +3507,130 @@ module Aws::ForecastService
       SENSITIVE = []
       include Aws::Structure
     end
+
+    # The optional metadata that you apply to a resource to help you
+    # categorize and organize them. Each tag consists of a key and an
+    # optional value, both of which you define.
+    #
+    # The following basic restrictions apply to tags:
+    #
+    # * Maximum number of tags per resource - 50.
+    #
+    # * For each resource, each tag key must be unique, and each tag key can
+    #   have only one value.
+    #
+    # * Maximum key length - 128 Unicode characters in UTF-8.
+    #
+    # * Maximum value length - 256 Unicode characters in UTF-8.
+    #
+    # * If your tagging schema is used across multiple services and
+    #   resources, remember that other services may have restrictions on
+    #   allowed characters. Generally allowed characters are: letters,
+    #   numbers, and spaces representable in UTF-8, and the following
+    #   characters: + - = . \_ : / @.
+    #
+    # * Tag keys and values are case sensitive.
+    #
+    # * Do not use `aws:`, `AWS:`, or any upper or lowercase combination of
+    #   such as a prefix for keys as it is reserved for AWS use. You cannot
+    #   edit or delete tag keys with this prefix. Values can have this
+    #   prefix. If a tag value has `aws` as its prefix but the key does not,
+    #   then Forecast considers it to be a user tag and will count against
+    #   the limit of 50 tags. Tags with only the key prefix of `aws` do not
+    #   count against your tags per resource limit.
+    #
+    # @note When making an API call, you may pass Tag
+    #   data as a hash:
+    #
+    #       {
+    #         key: "TagKey", # required
+    #         value: "TagValue", # required
+    #       }
+    #
+    # @!attribute [rw] key
+    #   One part of a key-value pair that makes up a tag. A `key` is a
+    #   general label that acts like a category for more specific tag
+    #   values.
+    #   @return [String]
+    #
+    # @!attribute [rw] value
+    #   The optional part of a key-value pair that makes up a tag. A `value`
+    #   acts as a descriptor within a tag category (key).
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/forecast-2018-06-26/Tag AWS API Documentation
+    #
+    class Tag < Struct.new(
+      :key,
+      :value)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass TagResourceRequest
+    #   data as a hash:
+    #
+    #       {
+    #         resource_arn: "Arn", # required
+    #         tags: [ # required
+    #           {
+    #             key: "TagKey", # required
+    #             value: "TagValue", # required
+    #           },
+    #         ],
+    #       }
+    #
+    # @!attribute [rw] resource_arn
+    #   The Amazon Resource Name (ARN) that identifies the resource for
+    #   which to list the tags. Currently, the supported resources are
+    #   Forecast dataset groups, datasets, dataset import jobs, predictors,
+    #   forecasts, and forecast export jobs.
+    #   @return [String]
+    #
+    # @!attribute [rw] tags
+    #   The tags to add to the resource. A tag is an array of key-value
+    #   pairs.
+    #
+    #   The following basic restrictions apply to tags:
+    #
+    #   * Maximum number of tags per resource - 50.
+    #
+    #   * For each resource, each tag key must be unique, and each tag key
+    #     can have only one value.
+    #
+    #   * Maximum key length - 128 Unicode characters in UTF-8.
+    #
+    #   * Maximum value length - 256 Unicode characters in UTF-8.
+    #
+    #   * If your tagging schema is used across multiple services and
+    #     resources, remember that other services may have restrictions on
+    #     allowed characters. Generally allowed characters are: letters,
+    #     numbers, and spaces representable in UTF-8, and the following
+    #     characters: + - = . \_ : / @.
+    #
+    #   * Tag keys and values are case sensitive.
+    #
+    #   * Do not use `aws:`, `AWS:`, or any upper or lowercase combination
+    #     of such as a prefix for keys as it is reserved for AWS use. You
+    #     cannot edit or delete tag keys with this prefix. Values can have
+    #     this prefix. If a tag value has `aws` as its prefix but the key
+    #     does not, then Forecast considers it to be a user tag and will
+    #     count against the limit of 50 tags. Tags with only the key prefix
+    #     of `aws` do not count against your tags per resource limit.
+    #   @return [Array<Types::Tag>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/forecast-2018-06-26/TagResourceRequest AWS API Documentation
+    #
+    class TagResourceRequest < Struct.new(
+      :resource_arn,
+      :tags)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/forecast-2018-06-26/TagResourceResponse AWS API Documentation
+    #
+    class TagResourceResponse < Aws::EmptyStructure; end
 
     # The status, start time, and end time of a backtest, as well as a
     # failure reason if applicable.
@@ -3171,6 +3667,38 @@ module Aws::ForecastService
       SENSITIVE = []
       include Aws::Structure
     end
+
+    # @note When making an API call, you may pass UntagResourceRequest
+    #   data as a hash:
+    #
+    #       {
+    #         resource_arn: "Arn", # required
+    #         tag_keys: ["TagKey"], # required
+    #       }
+    #
+    # @!attribute [rw] resource_arn
+    #   The Amazon Resource Name (ARN) that identifies the resource for
+    #   which to list the tags. Currently, the supported resources are
+    #   Forecast dataset groups, datasets, dataset import jobs, predictors,
+    #   forecasts, and forecast exports.
+    #   @return [String]
+    #
+    # @!attribute [rw] tag_keys
+    #   The keys of the tags to be removed.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/forecast-2018-06-26/UntagResourceRequest AWS API Documentation
+    #
+    class UntagResourceRequest < Struct.new(
+      :resource_arn,
+      :tag_keys)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/forecast-2018-06-26/UntagResourceResponse AWS API Documentation
+    #
+    class UntagResourceResponse < Aws::EmptyStructure; end
 
     # @note When making an API call, you may pass UpdateDatasetGroupRequest
     #   data as a hash:

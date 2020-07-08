@@ -437,6 +437,11 @@ module Aws::CostExplorer
     #   Resource ID of the current instance.
     #   @return [String]
     #
+    # @!attribute [rw] instance_name
+    #   The name you've given an instance. This field will show as blank if
+    #   you haven't given the instance a name.
+    #   @return [String]
+    #
     # @!attribute [rw] tags
     #   Cost allocation resource tags applied to the instance.
     #   @return [Array<Types::TagValues>]
@@ -482,6 +487,7 @@ module Aws::CostExplorer
     #
     class CurrentInstance < Struct.new(
       :resource_id,
+      :instance_name,
       :tags,
       :resource_details,
       :resource_utilization,
@@ -2382,7 +2388,7 @@ module Aws::CostExplorer
     #   instance families or across different instance families. You can
     #   also choose to view your estimated savings associated with
     #   recommendations with consideration of existing Savings Plans or RI
-    #   benefits, or niether.
+    #   benefits, or neither.
     #   @return [Types::RightsizingRecommendationConfiguration]
     #
     # @!attribute [rw] service
@@ -2434,7 +2440,7 @@ module Aws::CostExplorer
     #   instance families or across different instance families. You can
     #   also choose to view your estimated savings associated with
     #   recommendations with consideration of existing Savings Plans or RI
-    #   benefits, or niether.
+    #   benefits, or neither.
     #   @return [Types::RightsizingRecommendationConfiguration]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ce-2017-10-25/GetRightsizingRecommendationResponse AWS API Documentation
@@ -2638,7 +2644,7 @@ module Aws::CostExplorer
     #   @return [String]
     #
     # @!attribute [rw] term_in_years
-    #   The savings plan recommendation term used to generated these
+    #   The savings plan recommendation term used to generate these
     #   recommendations.
     #   @return [String]
     #
@@ -3916,7 +3922,7 @@ module Aws::CostExplorer
     # instance families or across different instance families. You can also
     # choose to view your estimated savings associated with recommendations
     # with consideration of existing Savings Plans or RI benefits, or
-    # niether.
+    # neither.
     #
     # @note When making an API call, you may pass RightsizingRecommendationConfiguration
     #   data as a hash:
@@ -3953,8 +3959,7 @@ module Aws::CostExplorer
     #   @return [String]
     #
     # @!attribute [rw] generation_timestamp
-    #   The time stamp for when Amazon Web Services made this
-    #   recommendation.
+    #   The timestamp for when Amazon Web Services made this recommendation.
     #   @return [String]
     #
     # @!attribute [rw] lookback_period_in_days
@@ -3990,7 +3995,7 @@ module Aws::CostExplorer
     #
     # @!attribute [rw] savings_percentage
     #   Savings percentage based on the recommended modifications, relative
-    #   to the total On Demand costs associated with these instances.
+    #   to the total On-Demand costs associated with these instances.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ce-2017-10-25/RightsizingRecommendationSummary AWS API Documentation
