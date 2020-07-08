@@ -1,6 +1,14 @@
 Unreleased Changes
 ------------------
 
+* Feature - Aws::CostExplorer - Updated the API, and documentation for AWS Cost Explorer Service.
+
+* Feature - Aws::EC2 - Updated the API, and documentation for Amazon Elastic Compute Cloud.
+
+* Feature - Aws::ForecastService - Updated the API, and documentation for Amazon Forecast Service.
+
+* Feature - Aws::Organizations - Updated the API, and documentation for AWS Organizations.
+
 2.11.543 (2020-07-07)
 ------------------
 
