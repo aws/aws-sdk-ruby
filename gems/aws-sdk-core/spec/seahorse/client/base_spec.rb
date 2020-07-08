@@ -274,6 +274,7 @@ module Seahorse
             Plugins::NetHttp,
             Plugins::RaiseResponseErrors,
             Plugins::ResponseTarget,
+            Plugins::ProgressCallback
           ])
         end
 

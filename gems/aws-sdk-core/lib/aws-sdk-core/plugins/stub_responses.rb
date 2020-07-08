@@ -40,6 +40,9 @@ requests are made, and retries are disabled.
           client.handlers.remove(ClientMetricsPlugin::Handler)
           client.handlers.remove(ClientMetricsSendPlugin::LatencyHandler)
           client.handlers.remove(ClientMetricsSendPlugin::AttemptHandler)
+          client.handlers.remove(Seahorse::Client::Plugins::ProgressCallback::OptionHandler)
+          client.handlers.remove(Seahorse::Client::Plugins::ProgressCallback::ProgressCallbackHandler)
+
         end
       end
 

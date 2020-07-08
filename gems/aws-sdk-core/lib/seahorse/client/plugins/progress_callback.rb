@@ -38,9 +38,11 @@ A callback for upload progress [TODO: add more description].
         # @api private
         class OptionHandler < Client::Handler
           def call(context)
-            progress_callback = context.params.delete(:progress_callback)
+            if context.params.is_a?(Hash)
+              progress_callback = context.params.delete(:progress_callback)
+            end
             progress_callback = context.config.progress_callback if progress_callback.nil?
-            context[:progress_callback] = progress_callback
+            context[:progress_callback] = progress_callback if progress_callback
             @handler.call(context)
           end
         end
@@ -56,6 +58,9 @@ A callback for upload progress [TODO: add more description].
         end
 
         handler(OptionHandler, step: :initialize)
+        # This handler needs to go late in the call stack
+        # other plugins including Sigv4 and content_md5 read the request body
+        # and rewind it
         handler(ProgressCallbackHandler, step: :sign, priority: 0)
       end
     end
