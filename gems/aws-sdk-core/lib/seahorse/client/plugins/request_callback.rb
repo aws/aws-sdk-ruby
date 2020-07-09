@@ -59,14 +59,16 @@ bytes in the body.
         class ReadCallbackHandler < Client::Handler
           def call(context)
             if (callback = context[:on_chunk_sent])
-              context.http_request.body = ReadCallbackIO.new(context.http_request.body, callback)
+              context.http_request.body = ReadCallbackIO.new(
+                context.http_request.body,
+                callback
+              )
               add_event_listeners(context)
             end
             @handler.call(context)
           end
 
           def add_event_listeners(context)
-
             # unwrap the request body as soon as we start receiving a response
             context.http_response.on_headers do
               body = context.http_request.body
