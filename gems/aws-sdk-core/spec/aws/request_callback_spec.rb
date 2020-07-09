@@ -8,13 +8,17 @@ module Seahorse
   module Client
     module Plugins
       describe RequestCallback do
-
         let(:client_class) do
           ApiHelper.sample_service.const_get(:Client)
         end
 
         let(:callback) { Proc.new {|chunk, read, total| @call_count += 1} }
-        let(:client) { client_class.new(on_chunk_sent: callback, region: 'us-west-1', endpoint: 'http://foo.com') }
+        let(:client) do
+          client_class.new(
+            on_chunk_sent: callback,
+            region: 'us-west-1',
+            endpoint: 'http://foo.com')
+        end
 
         before { @call_count = 0 }
 
@@ -47,7 +51,6 @@ module Seahorse
         end
 
         it 'it can be used as a parameter on the operation' do
-
           client = client_class.new(region: 'us-west-1', endpoint: 'http://foo.com')
           expect(client.config.on_chunk_sent).to eq(nil)
 

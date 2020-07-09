@@ -32,13 +32,14 @@ module Seahorse
       # @api private
       class RequestCallback < Plugin
 
-        option(:on_chunk_sent,
-               default: nil,
-               doc_type: 'Proc',
-               docstring: <<-DOCS)
+        option(
+          :on_chunk_sent,
+           default: nil,
+           doc_type: 'Proc',
+           docstring: <<-DOCS)
 When a Proc object is provided, it will be used as callback when each chunk 
-of the request body is sent. It will be called with three arguments: the chunk,
-the number, of bytes read from the body, and the total number of 
+of the request body is sent. It provides three arguments: the chunk,
+the number of bytes read from the body, and the total number of 
 bytes in the body.
           DOCS
 
@@ -76,8 +77,11 @@ bytes in the body.
           end
         end
 
+        # OptionHandler is needed to remove :on_chunk_sent
+        # from the params before build
         handler(OptionHandler, step: :initialize)
-        # This handler needs to go late in the call stack
+
+        # ReadCallbackHandlerneeds to go late in the call stack
         # other plugins including Sigv4 and content_md5 read the request body
         # and rewind it
         handler(ReadCallbackHandler, step: :sign, priority: 0)
