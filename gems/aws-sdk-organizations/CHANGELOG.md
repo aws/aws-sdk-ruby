@@ -4,7 +4,7 @@ Unreleased Changes
 1.45.0 (2020-07-08)
 ------------------
 
-* Feature - AI services opt out policies enable you to control what AI service data is collected and stored for the accounts in your organization. By default, AWS artificial intelligence (AI) services collect and store data as part of operating and supporting the continuous improvement life cycle for each service. You can use these policies to opt out of this process for all of your AWS accounts to ensure that your data is not persisted within AWS AI service data stores or used for service improvements.
+* Feature - We have launched a self-service option to make it easier for customers to manage the use of their content by AI services. Certain AI services (Amazon CodeGuru Profiler, Amazon Comprehend, Amazon Lex, Amazon Polly, Amazon Rekognition, Amazon Textract, Amazon Transcribe, and Amazon Translate), may use content to improve the service. Customers have been able to opt out of this use by contacting AWS Support, and now they can opt out on a self-service basis by setting an Organizations policy for all or an individual AI service as listed above. Please refer to the technical documentation for more details.
 
 1.44.0 (2020-06-24)
 ------------------
