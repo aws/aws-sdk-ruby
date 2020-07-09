@@ -20,7 +20,7 @@ This should only be disabled for local testing.
         class Handler < Seahorse::Client::Handler
 
           def call(context)
-            compute_key_md5(context)
+            compute_key_md5(context) if context.params.is_a?(Hash)
             @handler.call(context)
           end
 

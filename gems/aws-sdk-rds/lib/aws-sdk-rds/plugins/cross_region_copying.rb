@@ -19,7 +19,7 @@ module Aws
 
           def call(context)
             params = context.params
-            if params[:source_region] && !params[:pre_signed_url]
+            if params.is_a?(Hash) && params[:source_region] && !params[:pre_signed_url]
               params[:pre_signed_url] = presigned_url(context, params)
               params[:destination_region] = context.config.region
             end
