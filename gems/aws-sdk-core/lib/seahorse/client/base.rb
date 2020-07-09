@@ -14,6 +14,7 @@ module Seahorse
         Plugins::NetHttp,
         Plugins::RaiseResponseErrors,
         Plugins::ResponseTarget,
+        Plugins::RequestCallback
       ])
 
       # @api private
