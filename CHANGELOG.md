@@ -1,6 +1,30 @@
 Unreleased Changes
 ------------------
 
+* Feature - Aws::AlexaForBusiness - Updated the API, and documentation for Alexa For Business.
+
+* Feature - Aws::Amplify - Updated the documentation for AWS Amplify.
+
+* Feature - Aws::AppMesh - Updated the API, and documentation for AWS App Mesh.
+
+* Feature - Aws::CloudHSMV2 - Updated the documentation for AWS CloudHSM V2.
+
+* Feature - Aws::Comprehend - Updated the API, and documentation for Amazon Comprehend.
+
+* Feature - Aws::EBS - Updated the API, and documentation for Amazon Elastic Block Store.
+
+* Feature - Aws::EventBridge - Updated the API, and documentation for Amazon EventBridge.
+
+* Feature - Aws::CloudWatchEvents - Updated the API, and documentation for Amazon CloudWatch Events.
+
+* Feature - Aws::SageMaker - Updated the API, and documentation for Amazon SageMaker Service.
+
+* Feature - Aws::SecretsManager - Updated the API, and documentation for AWS Secrets Manager.
+
+* Feature - Aws::SNS - Updated the documentation for Amazon Simple Notification Service.
+
+* Feature - Aws::WAFV2 - Updated the API, and documentation for AWS WAFV2.
+
 2.11.544 (2020-07-08)
 ------------------
 
