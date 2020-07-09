@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+2.11.545 (2020-07-09)
+------------------
+
 * Feature - Aws::AlexaForBusiness - Updated the API, and documentation for Alexa For Business.
 
 * Feature - Aws::Amplify - Updated the documentation for AWS Amplify.
