@@ -59,7 +59,7 @@ module Aws::SNS
     #
     # * `TopicArn` – The topic's ARN.
     #
-    # * `EffectiveDeliveryPolicy` – Yhe JSON serialization of the effective
+    # * `EffectiveDeliveryPolicy` – The JSON serialization of the effective
     #   delivery policy, taking system defaults into account.
     #
     # The following attribute applies only to [server-side-encryption][1]\:
@@ -332,12 +332,26 @@ module Aws::SNS
     #
     #   The following attribute applies only to [server-side-encryption][1]\:
     #
-    #   * `KmsMasterKeyId` - The ID of an AWS-managed customer master key
+    #   * `KmsMasterKeyId` – The ID of an AWS-managed customer master key
     #     (CMK) for Amazon SNS or a custom CMK. For more information, see [Key
     #     Terms][2]. For more examples, see [KeyId][3] in the *AWS Key
     #     Management Service API Reference*.
     #
     #   ^
+    #
+    #   The following attribute applies only to FIFO topics:
+    #
+    #   * `ContentBasedDeduplication` – Enables content-based deduplication.
+    #     Amazon SNS uses a SHA-256 hash to generate the
+    #     `MessageDeduplicationId` using the body of the message (but not the
+    #     attributes of the message).
+    #
+    #   * When `ContentBasedDeduplication` is in effect, messages with
+    #     identical content sent within the deduplication interval are treated
+    #     as duplicates and only one copy of the message is delivered.
+    #
+    #   * If the queue has `ContentBasedDeduplication` set, your
+    #     `MessageDeduplicationId` overrides the generated one.
     #
     #
     #
@@ -388,11 +402,11 @@ module Aws::SNS
     #   The endpoint that you want to receive notifications. Endpoints vary by
     #   protocol:
     #
-    #   * For the `http` protocol, the endpoint is an URL beginning with
-    #     `http://`
+    #   * For the `http` protocol, the (public) endpoint is a URL beginning
+    #     with `http://`
     #
-    #   * For the `https` protocol, the endpoint is a URL beginning with
-    #     `https://`
+    #   * For the `https` protocol, the (public) endpoint is a URL beginning
+    #     with `https://`
     #
     #   * For the `email` protocol, the endpoint is an email address
     #
@@ -437,16 +451,17 @@ module Aws::SNS
     #   Sets whether the response from the `Subscribe` request includes the
     #   subscription ARN, even if the subscription is not yet confirmed.
     #
-    #   * If you have the subscription ARN returned, the response includes the
-    #     ARN in all cases, even if the subscription is not yet confirmed.
+    #   * If you set this parameter to `true`, the response includes the ARN
+    #     in all cases, even if the subscription is not yet confirmed. In
+    #     addition to the ARN for confirmed subscriptions, the response also
+    #     includes the `pending subscription` ARN value for subscriptions that
+    #     aren't yet confirmed. A subscription becomes confirmed when the
+    #     subscriber calls the `ConfirmSubscription` action with a
+    #     confirmation token.
     #
-    #   * If you don't have the subscription ARN returned, in addition to the
-    #     ARN for confirmed subscriptions, the response also includes the
-    #     `pending subscription` ARN value for subscriptions that aren't yet
-    #     confirmed. A subscription becomes confirmed when the subscriber
-    #     calls the `ConfirmSubscription` action with a confirmation token.
+    #   ^
     #
-    #   If you set this parameter to `true`, .
+    #
     #
     #   The default value is `false`.
     # @return [Subscription]

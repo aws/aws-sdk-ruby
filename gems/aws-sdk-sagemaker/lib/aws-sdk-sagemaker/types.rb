@@ -475,7 +475,8 @@ module Aws::SageMaker
       include Aws::Structure
     end
 
-    # Configures how labels are consolidated across human workers.
+    # Configures how labels are consolidated across human workers and
+    # processes output data.
     #
     # @note When making an API call, you may pass AnnotationConsolidationConfig
     #   data as a hash:
@@ -486,11 +487,12 @@ module Aws::SageMaker
     #
     # @!attribute [rw] annotation_consolidation_lambda_arn
     #   The Amazon Resource Name (ARN) of a Lambda function implements the
-    #   logic for annotation consolidation.
+    #   logic for [annotation consolidation][1] and to process output data.
     #
-    #   For the built-in bounding box, image classification, semantic
-    #   segmentation, and text classification task types, Amazon SageMaker
-    #   Ground Truth provides the following Lambda functions:
+    #   This parameter is required for all labeling jobs. For [built-in task
+    #   types][2], use one of the following Amazon SageMaker Ground Truth
+    #   Lambda function ARNs for `AnnotationConsolidationLambdaArn`. For
+    #   custom labeling workflows, see [Post-annotation Lambda][3].
     #
     #   **Bounding box** - Finds the most similar boxes from different
     #   workers based on the Jaccard index of the boxes.
@@ -686,34 +688,128 @@ module Aws::SageMaker
     #
     #     `arn:aws:lambda:ca-central-1:918755190332:function:ACS-NamedEntityRecognition`
     #
-    #   **Bounding box verification** - Uses a variant of the Expectation
-    #   Maximization approach to estimate the true class of verification
-    #   judgement for bounding box labels based on annotations from
-    #   individual workers.
+    #   **3D point cloud object detection** - Use this task type when you
+    #   want workers to classify objects in a 3D point cloud by drawing 3D
+    #   cuboids around objects. For example, you can use this task type to
+    #   ask workers to identify different types of objects in a point cloud,
+    #   such as cars, bikes, and pedestrians.
     #
-    #   * `arn:aws:lambda:us-east-1:432418664414:function:ACS-VerificationBoundingBox`
+    #   * `arn:aws:lambda:us-east-1:432418664414:function:ACS-3DPointCloudObjectDetection`
     #
-    #     `arn:aws:lambda:us-east-2:266458841044:function:ACS-VerificationBoundingBox`
+    #     `arn:aws:lambda:us-east-2:266458841044:function:ACS-3DPointCloudObjectDetection`
     #
-    #     `arn:aws:lambda:us-west-2:081040173940:function:ACS-VerificationBoundingBox`
+    #     `arn:aws:lambda:us-west-2:081040173940:function:ACS-3DPointCloudObjectDetection`
     #
-    #     `arn:aws:lambda:eu-west-1:568282634449:function:ACS-VerificationBoundingBox`
+    #     `arn:aws:lambda:eu-west-1:568282634449:function:ACS-3DPointCloudObjectDetection`
     #
-    #     `arn:aws:lambda:ap-northeast-1:477331159723:function:ACS-VerificationBoundingBox`
+    #     `arn:aws:lambda:ap-northeast-1:477331159723:function:ACS-3DPointCloudObjectDetection`
     #
-    #     `arn:aws:lambda:ap-southeast-2:454466003867:function:ACS-VerificationBoundingBox`
+    #     `arn:aws:lambda:ap-southeast-2:454466003867:function:ACS-3DPointCloudObjectDetection`
     #
-    #     `arn:aws:lambda:ap-south-1:565803892007:function:ACS-VerificationBoundingBox`
+    #     `arn:aws:lambda:ap-south-1:565803892007:function:ACS-3DPointCloudObjectDetection`
     #
-    #     `arn:aws:lambda:eu-central-1:203001061592:function:ACS-VerificationBoundingBox`
+    #     `arn:aws:lambda:eu-central-1:203001061592:function:ACS-3DPointCloudObjectDetection`
     #
-    #     `arn:aws:lambda:ap-northeast-2:845288260483:function:ACS-VerificationBoundingBox`
+    #     `arn:aws:lambda:ap-northeast-2:845288260483:function:ACS-3DPointCloudObjectDetection`
     #
-    #     `arn:aws:lambda:eu-west-2:487402164563:function:ACS-VerificationBoundingBox`
+    #     `arn:aws:lambda:eu-west-2:487402164563:function:ACS-3DPointCloudObjectDetection`
     #
-    #     `arn:aws:lambda:ap-southeast-1:377565633583:function:ACS-VerificationBoundingBox`
+    #     `arn:aws:lambda:ap-southeast-1:377565633583:function:ACS-3DPointCloudObjectDetection`
     #
-    #     `arn:aws:lambda:ca-central-1:918755190332:function:ACS-VerificationBoundingBox`
+    #     `arn:aws:lambda:ca-central-1:918755190332:function:ACS-3DPointCloudObjectDetection`
+    #
+    #   **3D point cloud object tracking** - Use this task type when you
+    #   want workers to draw 3D cuboids around objects that appear in a
+    #   sequence of 3D point cloud frames. For example, you can use this
+    #   task type to ask workers to track the movement of vehicles across
+    #   multiple point cloud frames.
+    #
+    #   * `arn:aws:lambda:us-east-1:432418664414:function:ACS-3DPointCloudObjectTracking`
+    #
+    #     `arn:aws:lambda:us-east-2:266458841044:function:ACS-3DPointCloudObjectTracking`
+    #
+    #     `arn:aws:lambda:us-west-2:081040173940:function:ACS-3DPointCloudObjectTracking`
+    #
+    #     `arn:aws:lambda:eu-west-1:568282634449:function:ACS-3DPointCloudObjectTracking`
+    #
+    #     `arn:aws:lambda:ap-northeast-1:477331159723:function:ACS-3DPointCloudObjectTracking`
+    #
+    #     `arn:aws:lambda:ap-southeast-2:454466003867:function:ACS-3DPointCloudObjectTracking`
+    #
+    #     `arn:aws:lambda:ap-south-1:565803892007:function:ACS-3DPointCloudObjectTracking`
+    #
+    #     `arn:aws:lambda:eu-central-1:203001061592:function:ACS-3DPointCloudObjectTracking`
+    #
+    #     `arn:aws:lambda:ap-northeast-2:845288260483:function:ACS-3DPointCloudObjectTracking`
+    #
+    #     `arn:aws:lambda:eu-west-2:487402164563:function:ACS-3DPointCloudObjectTracking`
+    #
+    #     `arn:aws:lambda:ap-southeast-1:377565633583:function:ACS-3DPointCloudObjectTracking`
+    #
+    #     `arn:aws:lambda:ca-central-1:918755190332:function:ACS-3DPointCloudObjectTracking`
+    #
+    #   **3D point cloud semantic segmentation** - Use this task type when
+    #   you want workers to create a point-level semantic segmentation masks
+    #   by painting objects in a 3D point cloud using different colors where
+    #   each color is assigned to one of the classes you specify.
+    #
+    #   * `arn:aws:lambda:us-east-1:432418664414:function:ACS-3DPointCloudSemanticSegmentation`
+    #
+    #     `arn:aws:lambda:us-east-2:266458841044:function:ACS-3DPointCloudSemanticSegmentation`
+    #
+    #     `arn:aws:lambda:us-west-2:081040173940:function:ACS-3DPointCloudSemanticSegmentation`
+    #
+    #     `arn:aws:lambda:eu-west-1:568282634449:function:ACS-3DPointCloudSemanticSegmentation`
+    #
+    #     `arn:aws:lambda:ap-northeast-1:477331159723:function:ACS-3DPointCloudSemanticSegmentation`
+    #
+    #     `arn:aws:lambda:ap-southeast-2:454466003867:function:ACS-3DPointCloudSemanticSegmentation`
+    #
+    #     `arn:aws:lambda:ap-south-1:565803892007:function:ACS-3DPointCloudSemanticSegmentation`
+    #
+    #     `arn:aws:lambda:eu-central-1:203001061592:function:ACS-3DPointCloudSemanticSegmentation`
+    #
+    #     `arn:aws:lambda:ap-northeast-2:845288260483:function:ACS-3DPointCloudSemanticSegmentation`
+    #
+    #     `arn:aws:lambda:eu-west-2:487402164563:function:ACS-3DPointCloudSemanticSegmentation`
+    #
+    #     `arn:aws:lambda:ap-southeast-1:377565633583:function:ACS-3DPointCloudSemanticSegmentation`
+    #
+    #     `arn:aws:lambda:ca-central-1:918755190332:function:ACS-3DPointCloudSemanticSegmentation`
+    #
+    #   **Use the following ARNs for Label Verification and Adjustment
+    #   Jobs**
+    #
+    #   Use label verification and adjustment jobs to review and adjust
+    #   labels. To learn more, see [Verify and Adjust Labels ][4].
+    #
+    #   **Semantic segmentation adjustment** - Treats each pixel in an image
+    #   as a multi-class classification and treats pixel adjusted
+    #   annotations from workers as "votes" for the correct label.
+    #
+    #   * `arn:aws:lambda:us-east-1:432418664414:function:ACS-AdjustmentSemanticSegmentation`
+    #
+    #     `arn:aws:lambda:us-east-2:266458841044:function:ACS-AdjustmentSemanticSegmentation`
+    #
+    #     `arn:aws:lambda:us-west-2:081040173940:function:ACS-AdjustmentSemanticSegmentation`
+    #
+    #     `arn:aws:lambda:eu-west-1:568282634449:function:ACS-AdjustmentSemanticSegmentation`
+    #
+    #     `arn:aws:lambda:ap-northeast-1:477331159723:function:ACS-AdjustmentSemanticSegmentation`
+    #
+    #     `arn:aws:lambda:ap-southeast-2:454466003867:function:ACS-AdjustmentSemanticSegmentation`
+    #
+    #     `arn:aws:lambda:ap-south-1:565803892007:function:ACS-AdjustmentSemanticSegmentation`
+    #
+    #     `arn:aws:lambda:eu-central-1:203001061592:function:ACS-AdjustmentSemanticSegmentation`
+    #
+    #     `arn:aws:lambda:ap-northeast-2:845288260483:function:ACS-AdjustmentSemanticSegmentation`
+    #
+    #     `arn:aws:lambda:eu-west-2:487402164563:function:ACS-AdjustmentSemanticSegmentation`
+    #
+    #     `arn:aws:lambda:ap-southeast-1:377565633583:function:ACS-AdjustmentSemanticSegmentation`
+    #
+    #     `arn:aws:lambda:ca-central-1:918755190332:function:ACS-AdjustmentSemanticSegmentation`
     #
     #   **Semantic segmentation verification** - Uses a variant of the
     #   Expectation Maximization approach to estimate the true class of
@@ -744,6 +840,35 @@ module Aws::SageMaker
     #
     #     `arn:aws:lambda:ca-central-1:918755190332:function:ACS-VerificationSemanticSegmentation`
     #
+    #   **Bounding box verification** - Uses a variant of the Expectation
+    #   Maximization approach to estimate the true class of verification
+    #   judgement for bounding box labels based on annotations from
+    #   individual workers.
+    #
+    #   * `arn:aws:lambda:us-east-1:432418664414:function:ACS-VerificationBoundingBox`
+    #
+    #     `arn:aws:lambda:us-east-2:266458841044:function:ACS-VerificationBoundingBox`
+    #
+    #     `arn:aws:lambda:us-west-2:081040173940:function:ACS-VerificationBoundingBox`
+    #
+    #     `arn:aws:lambda:eu-west-1:568282634449:function:ACS-VerificationBoundingBox`
+    #
+    #     `arn:aws:lambda:ap-northeast-1:477331159723:function:ACS-VerificationBoundingBox`
+    #
+    #     `arn:aws:lambda:ap-southeast-2:454466003867:function:ACS-VerificationBoundingBox`
+    #
+    #     `arn:aws:lambda:ap-south-1:565803892007:function:ACS-VerificationBoundingBox`
+    #
+    #     `arn:aws:lambda:eu-central-1:203001061592:function:ACS-VerificationBoundingBox`
+    #
+    #     `arn:aws:lambda:ap-northeast-2:845288260483:function:ACS-VerificationBoundingBox`
+    #
+    #     `arn:aws:lambda:eu-west-2:487402164563:function:ACS-VerificationBoundingBox`
+    #
+    #     `arn:aws:lambda:ap-southeast-1:377565633583:function:ACS-VerificationBoundingBox`
+    #
+    #     `arn:aws:lambda:ca-central-1:918755190332:function:ACS-VerificationBoundingBox`
+    #
     #   **Bounding box adjustment** - Finds the most similar boxes from
     #   different workers based on the Jaccard index of the adjusted
     #   annotations.
@@ -772,39 +897,96 @@ module Aws::SageMaker
     #
     #     `arn:aws:lambda:ca-central-1:918755190332:function:ACS-AdjustmentBoundingBox`
     #
-    #   **Semantic segmentation adjustment** - Treats each pixel in an image
-    #   as a multi-class classification and treats pixel adjusted
-    #   annotations from workers as "votes" for the correct label.
+    #   **3D point cloud object detection adjustment** - Use this task type
+    #   when you want workers to adjust 3D cuboids around objects in a 3D
+    #   point cloud.
     #
-    #   * `arn:aws:lambda:us-east-1:432418664414:function:ACS-AdjustmentSemanticSegmentation`
+    #   * `arn:aws:lambda:us-east-1:432418664414:function:ACS-Adjustment3DPointCloudObjectDetection`
     #
-    #     `arn:aws:lambda:us-east-2:266458841044:function:ACS-AdjustmentSemanticSegmentation`
+    #     `arn:aws:lambda:us-east-2:266458841044:function:ACS-Adjustment3DPointCloudObjectDetection`
     #
-    #     `arn:aws:lambda:us-west-2:081040173940:function:ACS-AdjustmentSemanticSegmentation`
+    #     `arn:aws:lambda:us-west-2:081040173940:function:ACS-Adjustment3DPointCloudObjectDetection`
     #
-    #     `arn:aws:lambda:eu-west-1:568282634449:function:ACS-AdjustmentSemanticSegmentation`
+    #     `arn:aws:lambda:eu-west-1:568282634449:function:ACS-Adjustment3DPointCloudObjectDetection`
     #
-    #     `arn:aws:lambda:ap-northeast-1:477331159723:function:ACS-AdjustmentSemanticSegmentation`
+    #     `arn:aws:lambda:ap-northeast-1:477331159723:function:ACS-Adjustment3DPointCloudObjectDetection`
     #
-    #     `arn:aws:lambda:ap-southeast-2:454466003867:function:ACS-AdjustmentSemanticSegmentation`
+    #     `arn:aws:lambda:ap-southeast-2:454466003867:function:ACS-Adjustment3DPointCloudObjectDetection`
     #
-    #     `arn:aws:lambda:ap-south-1:565803892007:function:ACS-AdjustmentSemanticSegmentation`
+    #     `arn:aws:lambda:ap-south-1:565803892007:function:ACS-Adjustment3DPointCloudObjectDetection`
     #
-    #     `arn:aws:lambda:eu-central-1:203001061592:function:ACS-AdjustmentSemanticSegmentation`
+    #     `arn:aws:lambda:eu-central-1:203001061592:function:ACS-Adjustment3DPointCloudObjectDetection`
     #
-    #     `arn:aws:lambda:ap-northeast-2:845288260483:function:ACS-AdjustmentSemanticSegmentation`
+    #     `arn:aws:lambda:ap-northeast-2:845288260483:function:ACS-Adjustment3DPointCloudObjectDetection`
     #
-    #     `arn:aws:lambda:eu-west-2:487402164563:function:ACS-AdjustmentSemanticSegmentation`
+    #     `arn:aws:lambda:eu-west-2:487402164563:function:ACS-Adjustment3DPointCloudObjectDetection`
     #
-    #     `arn:aws:lambda:ap-southeast-1:377565633583:function:ACS-AdjustmentSemanticSegmentation`
+    #     `arn:aws:lambda:ap-southeast-1:377565633583:function:ACS-Adjustment3DPointCloudObjectDetection`
     #
-    #     `arn:aws:lambda:ca-central-1:918755190332:function:ACS-AdjustmentSemanticSegmentation`
+    #     `arn:aws:lambda:ca-central-1:918755190332:function:ACS-Adjustment3DPointCloudObjectDetection`
     #
-    #   For more information, see [Annotation Consolidation][1].
+    #   **3D point cloud object tracking adjustment** - Use this task type
+    #   when you want workers to adjust 3D cuboids around objects that
+    #   appear in a sequence of 3D point cloud frames.
+    #
+    #   * `arn:aws:lambda:us-east-1:432418664414:function:ACS-Adjustment3DPointCloudObjectTracking`
+    #
+    #     `arn:aws:lambda:us-east-2:266458841044:function:ACS-Adjustment3DPointCloudObjectTracking`
+    #
+    #     `arn:aws:lambda:us-west-2:081040173940:function:ACS-Adjustment3DPointCloudObjectTracking`
+    #
+    #     `arn:aws:lambda:eu-west-1:568282634449:function:ACS-Adjustment3DPointCloudObjectTracking`
+    #
+    #     `arn:aws:lambda:ap-northeast-1:477331159723:function:ACS-Adjustment3DPointCloudObjectTracking`
+    #
+    #     `arn:aws:lambda:ap-southeast-2:454466003867:function:ACS-Adjustment3DPointCloudObjectTracking`
+    #
+    #     `arn:aws:lambda:ap-south-1:565803892007:function:ACS-Adjustment3DPointCloudObjectTracking`
+    #
+    #     `arn:aws:lambda:eu-central-1:203001061592:function:ACS-Adjustment3DPointCloudObjectTracking`
+    #
+    #     `arn:aws:lambda:ap-northeast-2:845288260483:function:ACS-Adjustment3DPointCloudObjectTracking`
+    #
+    #     `arn:aws:lambda:eu-west-2:487402164563:function:ACS-Adjustment3DPointCloudObjectTracking`
+    #
+    #     `arn:aws:lambda:ap-southeast-1:377565633583:function:ACS-Adjustment3DPointCloudObjectTracking`
+    #
+    #     `arn:aws:lambda:ca-central-1:918755190332:function:ACS-Adjustment3DPointCloudObjectTracking`
+    #
+    #   **3D point cloud semantic segmentation adjustment** - Use this task
+    #   type when you want workers to adjust a point-level semantic
+    #   segmentation masks using a paint tool.
+    #
+    #   * `arn:aws:lambda:us-east-1:432418664414:function:ACS-Adjustment3DPointCloudSemanticSegmentation`
+    #
+    #     `arn:aws:lambda:us-east-2:266458841044:function:ACS-Adjustment3DPointCloudSemanticSegmentation`
+    #
+    #     `arn:aws:lambda:us-west-2:081040173940:function:ACS-Adjustment3DPointCloudSemanticSegmentation`
+    #
+    #     `arn:aws:lambda:eu-west-1:568282634449:function:ACS-Adjustment3DPointCloudSemanticSegmentation`
+    #
+    #     `arn:aws:lambda:ap-northeast-1:477331159723:function:ACS-Adjustment3DPointCloudSemanticSegmentation`
+    #
+    #     `arn:aws:lambda:ap-southeast-2:454466003867:function:ACS-Adjustment3DPointCloudSemanticSegmentation`
+    #
+    #     `arn:aws:lambda:ap-south-1:565803892007:function:ACS-Adjustment3DPointCloudSemanticSegmentation`
+    #
+    #     `arn:aws:lambda:eu-central-1:203001061592:function:ACS-Adjustment3DPointCloudSemanticSegmentation`
+    #
+    #     `arn:aws:lambda:ap-northeast-2:845288260483:function:ACS-Adjustment3DPointCloudSemanticSegmentation`
+    #
+    #     `arn:aws:lambda:eu-west-2:487402164563:function:ACS-Adjustment3DPointCloudSemanticSegmentation`
+    #
+    #     `arn:aws:lambda:ap-southeast-1:377565633583:function:ACS-Adjustment3DPointCloudSemanticSegmentation`
+    #
+    #     `arn:aws:lambda:ca-central-1:918755190332:function:ACS-Adjustment3DPointCloudSemanticSegmentation`
     #
     #
     #
     #   [1]: https://docs.aws.amazon.com/sagemaker/latest/dg/sms-annotation-consolidation.html
+    #   [2]: https://docs.aws.amazon.com/sagemaker/latest/dg/sms-task-types.html
+    #   [3]: https://docs.aws.amazon.com/sagemaker/latest/dg/sms-custom-templates-step3.html#sms-custom-templates-step3-postlambda
+    #   [4]: https://docs.aws.amazon.com/sagemaker/latest/dg/sms-verification-data.html
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/AnnotationConsolidationConfig AWS API Documentation
@@ -3577,7 +3759,13 @@ module Aws::SageMaker
     #   The S3 URL of the file that defines the categories used to label the
     #   data objects.
     #
-    #   The file is a JSON structure in the following format:
+    #   For 3D point cloud task types, see [Create a Labeling Category
+    #   Configuration File for 3D Point Cloud Labeling Jobs][1].
+    #
+    #   For all other [built-in task types][2] and [custom tasks][3], your
+    #   label category configuration file must be a JSON file in the
+    #   following format. Identify the labels you want to use by replacing
+    #   `label_1`, `label_2`,`...`,`label_n` with your label categories.
     #
     #   `\{`
     #
@@ -3587,13 +3775,13 @@ module Aws::SageMaker
     #
     #   ` \{`
     #
-    #   ` "label": "label 1"`
+    #   ` "label": "label_1"`
     #
     #   ` \},`
     #
     #   ` \{`
     #
-    #   ` "label": "label 2"`
+    #   ` "label": "label_2"`
     #
     #   ` \},`
     #
@@ -3601,13 +3789,19 @@ module Aws::SageMaker
     #
     #   ` \{`
     #
-    #   ` "label": "label n"`
+    #   ` "label": "label_n"`
     #
     #   ` \}`
     #
     #   ` ]`
     #
     #   `\}`
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/sagemaker/latest/dg/sms-point-cloud-label-category-config.html
+    #   [2]: https://docs.aws.amazon.com/sagemaker/latest/dg/sms-task-types.html
+    #   [3]: https://docs.aws.amazon.com/sagemaker/latest/dg/sms-custom-templates.html
     #   @return [String]
     #
     # @!attribute [rw] stopping_conditions
@@ -5977,6 +6171,30 @@ module Aws::SageMaker
     #
     class DeleteFlowDefinitionResponse < Aws::EmptyStructure; end
 
+    # @note When making an API call, you may pass DeleteHumanTaskUiRequest
+    #   data as a hash:
+    #
+    #       {
+    #         human_task_ui_name: "HumanTaskUiName", # required
+    #       }
+    #
+    # @!attribute [rw] human_task_ui_name
+    #   The name of the human task user interface (work task template) you
+    #   want to delete.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/DeleteHumanTaskUiRequest AWS API Documentation
+    #
+    class DeleteHumanTaskUiRequest < Struct.new(
+      :human_task_ui_name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/DeleteHumanTaskUiResponse AWS API Documentation
+    #
+    class DeleteHumanTaskUiResponse < Aws::EmptyStructure; end
+
     # @note When making an API call, you may pass DeleteModelInput
     #   data as a hash:
     #
@@ -7127,6 +7345,7 @@ module Aws::SageMaker
     #   @return [String]
     #
     # @!attribute [rw] failure_reason
+    #   The reason your flow definition failed.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/DescribeFlowDefinitionResponse AWS API Documentation
@@ -7154,8 +7373,8 @@ module Aws::SageMaker
     #       }
     #
     # @!attribute [rw] human_task_ui_name
-    #   The name of the human task user interface you want information
-    #   about.
+    #   The name of the human task user interface (worker task template) you
+    #   want information about.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/DescribeHumanTaskUiRequest AWS API Documentation
@@ -7167,11 +7386,17 @@ module Aws::SageMaker
     end
 
     # @!attribute [rw] human_task_ui_arn
-    #   The Amazon Resource Name (ARN) of the human task user interface.
+    #   The Amazon Resource Name (ARN) of the human task user interface
+    #   (worker task template).
     #   @return [String]
     #
     # @!attribute [rw] human_task_ui_name
-    #   The name of the human task user interface.
+    #   The name of the human task user interface (worker task template).
+    #   @return [String]
+    #
+    # @!attribute [rw] human_task_ui_status
+    #   The status of the human task user interface (worker task template).
+    #   Valid values are listed below.
     #   @return [String]
     #
     # @!attribute [rw] creation_time
@@ -7187,6 +7412,7 @@ module Aws::SageMaker
     class DescribeHumanTaskUiResponse < Struct.new(
       :human_task_ui_arn,
       :human_task_ui_name,
+      :human_task_ui_status,
       :creation_time,
       :ui_template)
       SENSITIVE = []
@@ -7201,7 +7427,7 @@ module Aws::SageMaker
     #       }
     #
     # @!attribute [rw] hyper_parameter_tuning_job_name
-    #   The name of the tuning job to describe.
+    #   The name of the tuning job.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/DescribeHyperParameterTuningJobRequest AWS API Documentation
@@ -10213,9 +10439,10 @@ module Aws::SageMaker
     #   before a data object is sent to a human worker. Use this function to
     #   provide input to a custom labeling job.
     #
-    #   For the built-in bounding box, image classification, semantic
-    #   segmentation, and text classification task types, Amazon SageMaker
-    #   Ground Truth provides the following Lambda functions:
+    #   For [built-in task types][1], use one of the following Amazon
+    #   SageMaker Ground Truth Lambda function ARNs for
+    #   `PreHumanTaskLambdaArn`. For custom labeling workflows, see
+    #   [Pre-annotation Lambda][2].
     #
     #   **Bounding box** - Finds the most similar boxes from different
     #   workers based on the Jaccard index of the boxes.
@@ -10411,34 +10638,134 @@ module Aws::SageMaker
     #
     #   * `arn:aws:lambda:ap-southeast-2:454466003867:function:PRE-NamedEntityRecognition`
     #
+    #   **3D Point Cloud Modalities**
+    #
+    #   Use the following pre-annotation lambdas for 3D point cloud labeling
+    #   modality tasks. See [3D Point Cloud Task types ][3] to learn more.
+    #
+    #   **3D Point Cloud Object Detection** - Use this task type when you
+    #   want workers to classify objects in a 3D point cloud by drawing 3D
+    #   cuboids around objects. For example, you can use this task type to
+    #   ask workers to identify different types of objects in a point cloud,
+    #   such as cars, bikes, and pedestrians.
+    #
+    #   * `arn:aws:lambda:us-east-1:432418664414:function:PRE-3DPointCloudObjectDetection`
+    #
+    #   * `arn:aws:lambda:us-east-2:266458841044:function:PRE-3DPointCloudObjectDetection`
+    #
+    #   * `arn:aws:lambda:us-west-2:081040173940:function:PRE-3DPointCloudObjectDetection`
+    #
+    #   * `arn:aws:lambda:eu-west-1:568282634449:function:PRE-3DPointCloudObjectDetection`
+    #
+    #   * `arn:aws:lambda:ap-northeast-1:477331159723:function:PRE-3DPointCloudObjectDetection`
+    #
+    #   * `arn:aws:lambda:ap-southeast-2:454466003867:function:PRE-3DPointCloudObjectDetection`
+    #
+    #   * `arn:aws:lambda:ap-south-1:565803892007:function:PRE-3DPointCloudObjectDetection`
+    #
+    #   * `arn:aws:lambda:eu-central-1:203001061592:function:PRE-3DPointCloudObjectDetection`
+    #
+    #   * `arn:aws:lambda:ap-northeast-2:845288260483:function:PRE-3DPointCloudObjectDetection`
+    #
+    #   * `arn:aws:lambda:eu-west-2:487402164563:function:PRE-3DPointCloudObjectDetection`
+    #
+    #   * `arn:aws:lambda:ap-southeast-1:377565633583:function:PRE-3DPointCloudObjectDetection`
+    #
+    #   * `arn:aws:lambda:ca-central-1:918755190332:function:PRE-3DPointCloudObjectDetection`
+    #
+    #   **3D Point Cloud Object Tracking** - Use this task type when you
+    #   want workers to draw 3D cuboids around objects that appear in a
+    #   sequence of 3D point cloud frames. For example, you can use this
+    #   task type to ask workers to track the movement of vehicles across
+    #   multiple point cloud frames.
+    #
+    #   * `arn:aws:lambda:us-east-1:432418664414:function:PRE-3DPointCloudObjectTracking`
+    #
+    #   * `arn:aws:lambda:us-east-2:266458841044:function:PRE-3DPointCloudObjectTracking`
+    #
+    #   * `arn:aws:lambda:us-west-2:081040173940:function:PRE-3DPointCloudObjectTracking`
+    #
+    #   * `arn:aws:lambda:eu-west-1:568282634449:function:PRE-3DPointCloudObjectTracking`
+    #
+    #   * `arn:aws:lambda:ap-northeast-1:477331159723:function:PRE-3DPointCloudObjectTracking`
+    #
+    #   * `arn:aws:lambda:ap-southeast-2:454466003867:function:PRE-3DPointCloudObjectTracking`
+    #
+    #   * `arn:aws:lambda:ap-south-1:565803892007:function:PRE-3DPointCloudObjectTracking`
+    #
+    #   * `arn:aws:lambda:eu-central-1:203001061592:function:PRE-3DPointCloudObjectTracking`
+    #
+    #   * `arn:aws:lambda:ap-northeast-2:845288260483:function:PRE-3DPointCloudObjectTracking`
+    #
+    #   * `arn:aws:lambda:eu-west-2:487402164563:function:PRE-3DPointCloudObjectTracking`
+    #
+    #   * `arn:aws:lambda:ap-southeast-1:377565633583:function:PRE-3DPointCloudObjectTracking`
+    #
+    #   * `arn:aws:lambda:ca-central-1:918755190332:function:PRE-3DPointCloudObjectTracking`
+    #
+    #   **3D Point Cloud Semantic Segmentation** - Use this task type when
+    #   you want workers to create a point-level semantic segmentation masks
+    #   by painting objects in a 3D point cloud using different colors where
+    #   each color is assigned to one of the classes you specify.
+    #
+    #   * `arn:aws:lambda:us-east-1:432418664414:function:PRE-3DPointCloudSemanticSegmentation`
+    #
+    #   * `arn:aws:lambda:us-east-2:266458841044:function:PRE-3DPointCloudSemanticSegmentation`
+    #
+    #   * `arn:aws:lambda:us-west-2:081040173940:function:PRE-3DPointCloudSemanticSegmentation`
+    #
+    #   * `arn:aws:lambda:eu-west-1:568282634449:function:PRE-3DPointCloudSemanticSegmentation`
+    #
+    #   * `arn:aws:lambda:ap-northeast-1:477331159723:function:PRE-3DPointCloudSemanticSegmentation`
+    #
+    #   * `arn:aws:lambda:ap-southeast-2:454466003867:function:PRE-3DPointCloudSemanticSegmentation`
+    #
+    #   * `arn:aws:lambda:ap-south-1:565803892007:function:PRE-3DPointCloudSemanticSegmentation`
+    #
+    #   * `arn:aws:lambda:eu-central-1:203001061592:function:PRE-3DPointCloudSemanticSegmentation`
+    #
+    #   * `arn:aws:lambda:ap-northeast-2:845288260483:function:PRE-3DPointCloudSemanticSegmentation`
+    #
+    #   * `arn:aws:lambda:eu-west-2:487402164563:function:PRE-3DPointCloudSemanticSegmentation`
+    #
+    #   * `arn:aws:lambda:ap-southeast-1:377565633583:function:PRE-3DPointCloudSemanticSegmentation`
+    #
+    #   * `arn:aws:lambda:ca-central-1:918755190332:function:PRE-3DPointCloudSemanticSegmentation`
+    #
+    #   **Use the following ARNs for Label Verification and Adjustment
+    #   Jobs**
+    #
+    #   Use label verification and adjustment jobs to review and adjust
+    #   labels. To learn more, see [Verify and Adjust Labels ][4].
+    #
     #   **Bounding box verification** - Uses a variant of the Expectation
     #   Maximization approach to estimate the true class of verification
     #   judgement for bounding box labels based on annotations from
     #   individual workers.
     #
-    #   * `arn:aws:lambda:us-east-1:432418664414:function:PRE-VerificationBoundingBox`
+    #   * `arn:aws:lambda:us-east-1:432418664414:function:PRE-Adjustment3DPointCloudObjectTracking`
     #
-    #   * `arn:aws:lambda:us-east-2:266458841044:function:PRE-VerificationBoundingBox`
+    #   * `arn:aws:lambda:us-east-2:266458841044:function:PRE-Adjustment3DPointCloudObjectTracking`
     #
-    #   * `arn:aws:lambda:us-west-2:081040173940:function:PRE-VerificationBoundingBox`
+    #   * `arn:aws:lambda:us-west-2:081040173940:function:PRE-Adjustment3DPointCloudObjectTracking`
     #
-    #   * `arn:aws:lambda:ca-central-1:918755190332:function:PRE-VerificationBoundingBox`
+    #   * `arn:aws:lambda:eu-west-1:568282634449:function:PRE-Adjustment3DPointCloudObjectTracking`
     #
-    #   * `arn:aws:lambda:eu-west-1:568282634449:function:PRE-VerificationBoundingBox`
+    #   * `arn:aws:lambda:ap-northeast-1:477331159723:function:PRE-Adjustment3DPointCloudObjectTracking`
     #
-    #   * `arn:aws:lambda:eu-west-2:487402164563:function:PRE-VerificationBoundingBox`
+    #   * `arn:aws:lambda:ap-southeast-2:454466003867:function:PRE-Adjustment3DPointCloudObjectTracking`
     #
-    #   * `arn:aws:lambda:eu-central-1:203001061592:function:PRE-VerificationBoundingBox`
+    #   * `arn:aws:lambda:ap-south-1:565803892007:function:PRE-Adjustment3DPointCloudObjectTracking`
     #
-    #   * `arn:aws:lambda:ap-northeast-1:477331159723:function:PRE-VerificationBoundingBox`
+    #   * `arn:aws:lambda:eu-central-1:203001061592:function:PRE-Adjustment3DPointCloudObjectTracking`
     #
-    #   * `arn:aws:lambda:ap-northeast-2:845288260483:function:PRE-VerificationBoundingBox`
+    #   * `arn:aws:lambda:ap-northeast-2:845288260483:function:PRE-Adjustment3DPointCloudObjectTracking`
     #
-    #   * `arn:aws:lambda:ap-south-1:565803892007:function:PRE-VerificationBoundingBox`
+    #   * `arn:aws:lambda:eu-west-2:487402164563:function:PRE-Adjustment3DPointCloudObjectTracking`
     #
-    #   * `arn:aws:lambda:ap-southeast-1:377565633583:function:PRE-VerificationBoundingBox`
+    #   * `arn:aws:lambda:ap-southeast-1:377565633583:function:PRE-Adjustment3DPointCloudObjectTracking`
     #
-    #   * `arn:aws:lambda:ap-southeast-2:454466003867:function:PRE-VerificationBoundingBox`
+    #   * `arn:aws:lambda:ca-central-1:918755190332:function:PRE-Adjustment3DPointCloudObjectTracking`
     #
     #   **Bounding box adjustment** - Finds the most similar boxes from
     #   different workers based on the Jaccard index of the adjusted
@@ -10524,6 +10851,94 @@ module Aws::SageMaker
     #   * `arn:aws:lambda:ap-southeast-1:377565633583:function:PRE-AdjustmentSemanticSegmentation`
     #
     #   * `arn:aws:lambda:ap-southeast-2:454466003867:function:PRE-AdjustmentSemanticSegmentation`
+    #
+    #   **3D point cloud object detection adjustment** - Adjust 3D cuboids
+    #   in a point cloud frame.
+    #
+    #   * `arn:aws:lambda:us-east-1:432418664414:function:PRE-Adjustment3DPointCloudObjectDetection`
+    #
+    #   * `arn:aws:lambda:us-east-2:266458841044:function:PRE-Adjustment3DPointCloudObjectDetection`
+    #
+    #   * `arn:aws:lambda:us-west-2:081040173940:function:PRE-Adjustment3DPointCloudObjectDetection`
+    #
+    #   * `arn:aws:lambda:eu-west-1:568282634449:function:PRE-Adjustment3DPointCloudObjectDetection`
+    #
+    #   * `arn:aws:lambda:ap-northeast-1:477331159723:function:PRE-Adjustment3DPointCloudObjectDetection`
+    #
+    #   * `arn:aws:lambda:ap-southeast-2:454466003867:function:PRE-Adjustment3DPointCloudObjectDetection`
+    #
+    #   * `arn:aws:lambda:ap-south-1:565803892007:function:PRE-Adjustment3DPointCloudObjectDetection`
+    #
+    #   * `arn:aws:lambda:eu-central-1:203001061592:function:PRE-Adjustment3DPointCloudObjectDetection`
+    #
+    #   * `arn:aws:lambda:ap-northeast-2:845288260483:function:PRE-Adjustment3DPointCloudObjectDetection`
+    #
+    #   * `arn:aws:lambda:eu-west-2:487402164563:function:PRE-Adjustment3DPointCloudObjectDetection`
+    #
+    #   * `arn:aws:lambda:ap-southeast-1:377565633583:function:PRE-Adjustment3DPointCloudObjectDetection`
+    #
+    #   * `arn:aws:lambda:ca-central-1:918755190332:function:PRE-Adjustment3DPointCloudObjectDetection`
+    #
+    #   **3D point cloud object tracking adjustment** - Adjust 3D cuboids
+    #   across a sequence of point cloud frames.
+    #
+    #   * `arn:aws:lambda:us-east-1:432418664414:function:PRE-Adjustment3DPointCloudObjectTracking`
+    #
+    #   * `arn:aws:lambda:us-east-2:266458841044:function:PRE-Adjustment3DPointCloudObjectTracking`
+    #
+    #   * `arn:aws:lambda:us-west-2:081040173940:function:PRE-Adjustment3DPointCloudObjectTracking`
+    #
+    #   * `arn:aws:lambda:eu-west-1:568282634449:function:PRE-Adjustment3DPointCloudObjectTracking`
+    #
+    #   * `arn:aws:lambda:ap-northeast-1:477331159723:function:PRE-Adjustment3DPointCloudObjectTracking`
+    #
+    #   * `arn:aws:lambda:ap-southeast-2:454466003867:function:PRE-Adjustment3DPointCloudObjectTracking`
+    #
+    #   * `arn:aws:lambda:ap-south-1:565803892007:function:PRE-Adjustment3DPointCloudObjectTracking`
+    #
+    #   * `arn:aws:lambda:eu-central-1:203001061592:function:PRE-Adjustment3DPointCloudObjectTracking`
+    #
+    #   * `arn:aws:lambda:ap-northeast-2:845288260483:function:PRE-Adjustment3DPointCloudObjectTracking`
+    #
+    #   * `arn:aws:lambda:eu-west-2:487402164563:function:PRE-Adjustment3DPointCloudObjectTracking`
+    #
+    #   * `arn:aws:lambda:ap-southeast-1:377565633583:function:PRE-Adjustment3DPointCloudObjectTracking`
+    #
+    #   * `arn:aws:lambda:ca-central-1:918755190332:function:PRE-Adjustment3DPointCloudObjectTracking`
+    #
+    #   **3D point cloud semantic segmentation adjustment** - Adjust
+    #   semantic segmentation masks in a 3D point cloud.
+    #
+    #   * `arn:aws:lambda:us-east-1:432418664414:function:PRE-Adjustment3DPointCloudSemanticSegmentation`
+    #
+    #   * `arn:aws:lambda:us-east-2:266458841044:function:PRE-Adjustment3DPointCloudSemanticSegmentation`
+    #
+    #   * `arn:aws:lambda:us-west-2:081040173940:function:PRE-Adjustment3DPointCloudSemanticSegmentation`
+    #
+    #   * `arn:aws:lambda:eu-west-1:568282634449:function:PRE-Adjustment3DPointCloudSemanticSegmentation`
+    #
+    #   * `arn:aws:lambda:ap-northeast-1:477331159723:function:PRE-Adjustment3DPointCloudSemanticSegmentation`
+    #
+    #   * `arn:aws:lambda:ap-southeast-2:454466003867:function:PRE-Adjustment3DPointCloudSemanticSegmentation`
+    #
+    #   * `arn:aws:lambda:ap-south-1:565803892007:function:PRE-Adjustment3DPointCloudSemanticSegmentation`
+    #
+    #   * `arn:aws:lambda:eu-central-1:203001061592:function:PRE-Adjustment3DPointCloudSemanticSegmentation`
+    #
+    #   * `arn:aws:lambda:ap-northeast-2:845288260483:function:PRE-Adjustment3DPointCloudSemanticSegmentation`
+    #
+    #   * `arn:aws:lambda:eu-west-2:487402164563:function:PRE-Adjustment3DPointCloudSemanticSegmentation`
+    #
+    #   * `arn:aws:lambda:ap-southeast-1:377565633583:function:PRE-Adjustment3DPointCloudSemanticSegmentation`
+    #
+    #   * `arn:aws:lambda:ca-central-1:918755190332:function:PRE-Adjustment3DPointCloudSemanticSegmentation`
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/sagemaker/latest/dg/sms-task-types.html
+    #   [2]: https://docs.aws.amazon.com/sagemaker/latest/dg/sms-custom-templates-step3.html#sms-custom-templates-step3-prelambda
+    #   [3]: https://docs.aws.amazon.com/sagemaker/latest/dg/sms-point-cloud-task-types.html
+    #   [4]: https://docs.aws.amazon.com/sagemaker/latest/dg/sms-verification-data.html
     #   @return [String]
     #
     # @!attribute [rw] task_keywords
@@ -17422,6 +17837,9 @@ module Aws::SageMaker
     #   The `HumanTaskUiArn` of the worker UI that you want to render. Do
     #   not provide a `HumanTaskUiArn` if you use the `UiTemplate`
     #   parameter.
+    #
+    #   See a list of available Human Ui Amazon Resource Names (ARNs) in
+    #   UiConfig.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/RenderUiTemplateRequest AWS API Documentation
@@ -17782,29 +18200,34 @@ module Aws::SageMaker
     #   either a key name prefix or a manifest. For example:
     #
     #   * A key name prefix might look like this:
-    #     `s3://bucketname/exampleprefix`.
+    #     `s3://bucketname/exampleprefix`
     #
     #   * A manifest might look like this:
     #     `s3://bucketname/example.manifest`
     #
-    #     The manifest is an S3 object which is a JSON file with the
-    #     following format:
+    #     A manifest is an S3 object which is a JSON file consisting of an
+    #     array of elements. The first element is a prefix which is followed
+    #     by one or more suffixes. SageMaker appends the suffix elements to
+    #     the prefix to get a full set of `S3Uri`. Note that the prefix must
+    #     be a valid non-empty `S3Uri` that precludes users from specifying
+    #     a manifest whose individual `S3Uri` is sourced from different S3
+    #     buckets.
     #
-    #     The preceding JSON matches the following `s3Uris`\:
+    #     The following code example shows a valid manifest format:
     #
     #     `[ \{"prefix": "s3://customer_bucket/some/prefix/"\},`
     #
-    #     `"relative/path/to/custdata-1",`
+    #     ` "relative/path/to/custdata-1",`
     #
-    #     `"relative/path/custdata-2",`
+    #     ` "relative/path/custdata-2",`
     #
-    #     `...`
+    #     ` ...`
     #
-    #     `"relative/path/custdata-N"`
+    #     ` "relative/path/custdata-N"`
     #
     #     `]`
     #
-    #     The preceding JSON matches the following `s3Uris`\:
+    #     This JSON is equivalent to the following `S3Uri` list:
     #
     #     `s3://customer_bucket/some/prefix/relative/path/to/custdata-1`
     #
@@ -17814,8 +18237,8 @@ module Aws::SageMaker
     #
     #     `s3://customer_bucket/some/prefix/relative/path/custdata-N`
     #
-    #     The complete set of `s3uris` in this manifest is the input data
-    #     for the channel for this datasource. The object that each `s3uris`
+    #     The complete set of `S3Uri` in this manifest is the input data for
+    #     the channel for this data source. The object that each `S3Uri`
     #     points to must be readable by the IAM role that Amazon SageMaker
     #     uses to perform tasks on your behalf.
     #   @return [String]
@@ -18432,10 +18855,10 @@ module Aws::SageMaker
     #       }
     #
     # @!attribute [rw] cidrs
-    #   A list of one to four [Classless Inter-Domain Routing][1] (CIDR)
+    #   A list of one to ten [Classless Inter-Domain Routing][1] (CIDR)
     #   values.
     #
-    #   Maximum: Four CIDR values
+    #   Maximum: Ten CIDR values
     #
     #   <note markdown="1"> The following Length Constraints apply to individual CIDR values in
     #   the CIDR value list.
@@ -18742,6 +19165,7 @@ module Aws::SageMaker
     #   @return [String]
     #
     # @!attribute [rw] listing_id
+    #   Marketplace product listing ID.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/SubscribedWorkteam AWS API Documentation
@@ -20562,8 +20986,34 @@ module Aws::SageMaker
     #
     # @!attribute [rw] human_task_ui_arn
     #   The ARN of the worker task template used to render the worker UI and
-    #   tools for labeling job tasks. Do not use this parameter if you use
-    #   UiTemplateS3Uri.
+    #   tools for labeling job tasks.
+    #
+    #   Use this parameter when you are creating a labeling job for 3D point
+    #   cloud labeling modalities. Use your labeling job task type to select
+    #   one of the following ARN's and use it with this parameter when you
+    #   create a labeling job. Replace `aws-region` with the AWS region you
+    #   are creating your labeling job in.
+    #
+    #   Use this `HumanTaskUiArn` for 3D point cloud object detection and 3D
+    #   point cloud object detection adjustment labeling jobs.
+    #
+    #   * `arn:aws:sagemaker:aws-region:394669845002:human-task-ui/PointCloudObjectDetection`
+    #
+    #   ^
+    #
+    #   Use this `HumanTaskUiArn` for 3D point cloud object tracking and 3D
+    #   point cloud object tracking adjustment labeling jobs.
+    #
+    #   * `arn:aws:sagemaker:aws-region:394669845002:human-task-ui/PointCloudObjectTracking`
+    #
+    #   ^
+    #
+    #   Use this `HumanTaskUiArn` for 3D point cloud semantic segmentation
+    #   and 3D point cloud semantic segmentation adjustment labeling jobs.
+    #
+    #   * `arn:aws:sagemaker:aws-region:394669845002:human-task-ui/PointCloudSemanticSegmentation`
+    #
+    #   ^
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/UiConfig AWS API Documentation
@@ -21432,10 +21882,10 @@ module Aws::SageMaker
     #   @return [String]
     #
     # @!attribute [rw] source_ip_config
-    #   A list of one to four worker IP address ranges ([CIDRs][1]) that can
+    #   A list of one to ten worker IP address ranges ([CIDRs][1]) that can
     #   be used to access tasks assigned to this workforce.
     #
-    #   Maximum: Four CIDR values
+    #   Maximum: Ten CIDR values
     #
     #
     #
@@ -21775,7 +22225,7 @@ module Aws::SageMaker
     #   @return [Time]
     #
     # @!attribute [rw] source_ip_config
-    #   A list of one to four IP address ranges ([CIDRs][1]) to be added to
+    #   A list of one to ten IP address ranges ([CIDRs][1]) to be added to
     #   the workforce allow list.
     #
     #

@@ -1210,6 +1210,12 @@ module Aws::CloudWatchEvents
     #   resp.targets[0].batch_parameters.array_properties.size #=> Integer
     #   resp.targets[0].batch_parameters.retry_strategy.attempts #=> Integer
     #   resp.targets[0].sqs_parameters.message_group_id #=> String
+    #   resp.targets[0].http_parameters.path_parameter_values #=> Array
+    #   resp.targets[0].http_parameters.path_parameter_values[0] #=> String
+    #   resp.targets[0].http_parameters.header_parameters #=> Hash
+    #   resp.targets[0].http_parameters.header_parameters["HeaderKey"] #=> String
+    #   resp.targets[0].http_parameters.query_string_parameters #=> Hash
+    #   resp.targets[0].http_parameters.query_string_parameters["QueryStringKey"] #=> String
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/events-2015-10-07/ListTargetsByRule AWS API Documentation
@@ -1309,9 +1315,9 @@ module Aws::CloudWatchEvents
     end
 
     # Running `PutPermission` permits the specified AWS account or AWS
-    # organization to put events to the specified *event bus*. CloudWatch
-    # Events rules in your account are triggered by these events arriving to
-    # an event bus in your account.
+    # organization to put events to the specified *event bus*. Amazon
+    # EventBridge (CloudWatch Events) rules in your account are triggered by
+    # these events arriving to an event bus in your account.
     #
     # For another account to send events to your account, that external
     # account must have an EventBridge rule with your account's event bus
@@ -1574,6 +1580,8 @@ module Aws::CloudWatchEvents
     #
     # * The default event bus of another AWS account
     #
+    # * Amazon API Gateway REST APIs
+    #
     # Creating rules with built-in targets is supported only in the AWS
     # Management Console. The built-in targets are `EC2 CreateSnapshot API
     # call`, `EC2 RebootInstances API call`, `EC2 StopInstances API call`,
@@ -1586,13 +1594,13 @@ module Aws::CloudWatchEvents
     # you can use the `RunCommandParameters` field.
     #
     # To be able to make API calls against the resources that you own,
-    # Amazon CloudWatch Events needs the appropriate permissions. For AWS
-    # Lambda and Amazon SNS resources, EventBridge relies on resource-based
-    # policies. For EC2 instances, Kinesis data streams, and AWS Step
-    # Functions state machines, EventBridge relies on IAM roles that you
-    # specify in the `RoleARN` argument in `PutTargets`. For more
-    # information, see [Authentication and Access Control][1] in the *Amazon
-    # EventBridge User Guide*.
+    # Amazon EventBridge (CloudWatch Events) needs the appropriate
+    # permissions. For AWS Lambda and Amazon SNS resources, EventBridge
+    # relies on resource-based policies. For EC2 instances, Kinesis data
+    # streams, AWS Step Functions state machines and API Gateway REST APIs,
+    # EventBridge relies on IAM roles that you specify in the `RoleARN`
+    # argument in `PutTargets`. For more information, see [Authentication
+    # and Access Control][1] in the *Amazon EventBridge User Guide*.
     #
     # If another AWS account is in the same region and has granted you
     # permission (using `PutPermission`), you can send events to that
@@ -1602,8 +1610,8 @@ module Aws::CloudWatchEvents
     # `PutTargets`. If your account sends events to another account, your
     # account is charged for each sent event. Each event sent to another
     # account is charged as a custom event. The account receiving the event
-    # is not charged. For more information, see [Amazon CloudWatch
-    # Pricing][2].
+    # is not charged. For more information, see [Amazon EventBridge
+    # (CloudWatch Events) Pricing][2].
     #
     # <note markdown="1"> `Input`, `InputPath`, and `InputTransformer` are not available with
     # `PutTarget` if the target is an event bus of a different AWS account.
@@ -1656,7 +1664,7 @@ module Aws::CloudWatchEvents
     #
     #
     # [1]: https://docs.aws.amazon.com/eventbridge/latest/userguide/auth-and-access-control-eventbridge.html
-    # [2]: https://aws.amazon.com/cloudwatch/pricing/
+    # [2]: https://aws.amazon.com/eventbridge/pricing/
     # [3]: https://docs.aws.amazon.com/eventbridge/latest/userguide/eventbridge-cross-account-event-delivery.html
     #
     # @option params [required, String] :rule
@@ -1729,6 +1737,15 @@ module Aws::CloudWatchEvents
     #         },
     #         sqs_parameters: {
     #           message_group_id: "MessageGroupId",
+    #         },
+    #         http_parameters: {
+    #           path_parameter_values: ["PathParameter"],
+    #           header_parameters: {
+    #             "HeaderKey" => "HeaderValue",
+    #           },
+    #           query_string_parameters: {
+    #             "QueryStringKey" => "QueryStringValue",
+    #           },
     #         },
     #       },
     #     ],
@@ -1932,7 +1949,8 @@ module Aws::CloudWatchEvents
     end
 
     # Removes one or more tags from the specified EventBridge resource. In
-    # CloudWatch Events, rules and event buses can be tagged.
+    # Amazon EventBridge (CloudWatch Events, rules and event buses can be
+    # tagged.
     #
     # @option params [required, String] :resource_arn
     #   The ARN of the EventBridge resource from which you are removing tags.
@@ -1971,7 +1989,7 @@ module Aws::CloudWatchEvents
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-cloudwatchevents'
-      context[:gem_version] = '1.32.0'
+      context[:gem_version] = '1.33.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

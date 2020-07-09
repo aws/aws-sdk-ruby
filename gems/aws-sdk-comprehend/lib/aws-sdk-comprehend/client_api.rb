@@ -49,6 +49,8 @@ module Aws::Comprehend
     CreateEndpointResponse = Shapes::StructureShape.new(name: 'CreateEndpointResponse')
     CreateEntityRecognizerRequest = Shapes::StructureShape.new(name: 'CreateEntityRecognizerRequest')
     CreateEntityRecognizerResponse = Shapes::StructureShape.new(name: 'CreateEntityRecognizerResponse')
+    CustomerInputString = Shapes::StringShape.new(name: 'CustomerInputString')
+    CustomerInputStringList = Shapes::ListShape.new(name: 'CustomerInputStringList')
     DeleteDocumentClassifierRequest = Shapes::StructureShape.new(name: 'DeleteDocumentClassifierRequest')
     DeleteDocumentClassifierResponse = Shapes::StructureShape.new(name: 'DeleteDocumentClassifierResponse')
     DeleteEndpointRequest = Shapes::StructureShape.new(name: 'DeleteEndpointRequest')
@@ -112,6 +114,7 @@ module Aws::Comprehend
     EntityRecognizerAnnotations = Shapes::StructureShape.new(name: 'EntityRecognizerAnnotations')
     EntityRecognizerArn = Shapes::StringShape.new(name: 'EntityRecognizerArn')
     EntityRecognizerDocuments = Shapes::StructureShape.new(name: 'EntityRecognizerDocuments')
+    EntityRecognizerEndpointArn = Shapes::StringShape.new(name: 'EntityRecognizerEndpointArn')
     EntityRecognizerEntityList = Shapes::StructureShape.new(name: 'EntityRecognizerEntityList')
     EntityRecognizerEvaluationMetrics = Shapes::StructureShape.new(name: 'EntityRecognizerEvaluationMetrics')
     EntityRecognizerFilter = Shapes::StructureShape.new(name: 'EntityRecognizerFilter')
@@ -221,7 +224,6 @@ module Aws::Comprehend
     StopTrainingEntityRecognizerRequest = Shapes::StructureShape.new(name: 'StopTrainingEntityRecognizerRequest')
     StopTrainingEntityRecognizerResponse = Shapes::StructureShape.new(name: 'StopTrainingEntityRecognizerResponse')
     String = Shapes::StringShape.new(name: 'String')
-    StringList = Shapes::ListShape.new(name: 'StringList')
     SubnetId = Shapes::StringShape.new(name: 'SubnetId')
     Subnets = Shapes::ListShape.new(name: 'Subnets')
     SyntaxLanguageCode = Shapes::StringShape.new(name: 'SyntaxLanguageCode')
@@ -252,7 +254,7 @@ module Aws::Comprehend
     BatchDetectDominantLanguageItemResult.add_member(:languages, Shapes::ShapeRef.new(shape: ListOfDominantLanguages, location_name: "Languages"))
     BatchDetectDominantLanguageItemResult.struct_class = Types::BatchDetectDominantLanguageItemResult
 
-    BatchDetectDominantLanguageRequest.add_member(:text_list, Shapes::ShapeRef.new(shape: StringList, required: true, location_name: "TextList"))
+    BatchDetectDominantLanguageRequest.add_member(:text_list, Shapes::ShapeRef.new(shape: CustomerInputStringList, required: true, location_name: "TextList"))
     BatchDetectDominantLanguageRequest.struct_class = Types::BatchDetectDominantLanguageRequest
 
     BatchDetectDominantLanguageResponse.add_member(:result_list, Shapes::ShapeRef.new(shape: ListOfDetectDominantLanguageResult, required: true, location_name: "ResultList"))
@@ -263,7 +265,7 @@ module Aws::Comprehend
     BatchDetectEntitiesItemResult.add_member(:entities, Shapes::ShapeRef.new(shape: ListOfEntities, location_name: "Entities"))
     BatchDetectEntitiesItemResult.struct_class = Types::BatchDetectEntitiesItemResult
 
-    BatchDetectEntitiesRequest.add_member(:text_list, Shapes::ShapeRef.new(shape: StringList, required: true, location_name: "TextList"))
+    BatchDetectEntitiesRequest.add_member(:text_list, Shapes::ShapeRef.new(shape: CustomerInputStringList, required: true, location_name: "TextList"))
     BatchDetectEntitiesRequest.add_member(:language_code, Shapes::ShapeRef.new(shape: LanguageCode, required: true, location_name: "LanguageCode"))
     BatchDetectEntitiesRequest.struct_class = Types::BatchDetectEntitiesRequest
 
@@ -275,7 +277,7 @@ module Aws::Comprehend
     BatchDetectKeyPhrasesItemResult.add_member(:key_phrases, Shapes::ShapeRef.new(shape: ListOfKeyPhrases, location_name: "KeyPhrases"))
     BatchDetectKeyPhrasesItemResult.struct_class = Types::BatchDetectKeyPhrasesItemResult
 
-    BatchDetectKeyPhrasesRequest.add_member(:text_list, Shapes::ShapeRef.new(shape: StringList, required: true, location_name: "TextList"))
+    BatchDetectKeyPhrasesRequest.add_member(:text_list, Shapes::ShapeRef.new(shape: CustomerInputStringList, required: true, location_name: "TextList"))
     BatchDetectKeyPhrasesRequest.add_member(:language_code, Shapes::ShapeRef.new(shape: LanguageCode, required: true, location_name: "LanguageCode"))
     BatchDetectKeyPhrasesRequest.struct_class = Types::BatchDetectKeyPhrasesRequest
 
@@ -288,7 +290,7 @@ module Aws::Comprehend
     BatchDetectSentimentItemResult.add_member(:sentiment_score, Shapes::ShapeRef.new(shape: SentimentScore, location_name: "SentimentScore"))
     BatchDetectSentimentItemResult.struct_class = Types::BatchDetectSentimentItemResult
 
-    BatchDetectSentimentRequest.add_member(:text_list, Shapes::ShapeRef.new(shape: StringList, required: true, location_name: "TextList"))
+    BatchDetectSentimentRequest.add_member(:text_list, Shapes::ShapeRef.new(shape: CustomerInputStringList, required: true, location_name: "TextList"))
     BatchDetectSentimentRequest.add_member(:language_code, Shapes::ShapeRef.new(shape: LanguageCode, required: true, location_name: "LanguageCode"))
     BatchDetectSentimentRequest.struct_class = Types::BatchDetectSentimentRequest
 
@@ -300,7 +302,7 @@ module Aws::Comprehend
     BatchDetectSyntaxItemResult.add_member(:syntax_tokens, Shapes::ShapeRef.new(shape: ListOfSyntaxTokens, location_name: "SyntaxTokens"))
     BatchDetectSyntaxItemResult.struct_class = Types::BatchDetectSyntaxItemResult
 
-    BatchDetectSyntaxRequest.add_member(:text_list, Shapes::ShapeRef.new(shape: StringList, required: true, location_name: "TextList"))
+    BatchDetectSyntaxRequest.add_member(:text_list, Shapes::ShapeRef.new(shape: CustomerInputStringList, required: true, location_name: "TextList"))
     BatchDetectSyntaxRequest.add_member(:language_code, Shapes::ShapeRef.new(shape: SyntaxLanguageCode, required: true, location_name: "LanguageCode"))
     BatchDetectSyntaxRequest.struct_class = Types::BatchDetectSyntaxRequest
 
@@ -334,7 +336,7 @@ module Aws::Comprehend
     ClassifierMetadata.add_member(:evaluation_metrics, Shapes::ShapeRef.new(shape: ClassifierEvaluationMetrics, location_name: "EvaluationMetrics"))
     ClassifierMetadata.struct_class = Types::ClassifierMetadata
 
-    ClassifyDocumentRequest.add_member(:text, Shapes::ShapeRef.new(shape: String, required: true, location_name: "Text"))
+    ClassifyDocumentRequest.add_member(:text, Shapes::ShapeRef.new(shape: CustomerInputString, required: true, location_name: "Text"))
     ClassifyDocumentRequest.add_member(:endpoint_arn, Shapes::ShapeRef.new(shape: DocumentClassifierEndpointArn, required: true, location_name: "EndpointArn"))
     ClassifyDocumentRequest.struct_class = Types::ClassifyDocumentRequest
 
@@ -382,6 +384,8 @@ module Aws::Comprehend
 
     CreateEntityRecognizerResponse.add_member(:entity_recognizer_arn, Shapes::ShapeRef.new(shape: EntityRecognizerArn, location_name: "EntityRecognizerArn"))
     CreateEntityRecognizerResponse.struct_class = Types::CreateEntityRecognizerResponse
+
+    CustomerInputStringList.member = Shapes::ShapeRef.new(shape: CustomerInputString)
 
     DeleteDocumentClassifierRequest.add_member(:document_classifier_arn, Shapes::ShapeRef.new(shape: DocumentClassifierArn, required: true, location_name: "DocumentClassifierArn"))
     DeleteDocumentClassifierRequest.struct_class = Types::DeleteDocumentClassifierRequest
@@ -452,27 +456,28 @@ module Aws::Comprehend
     DescribeTopicsDetectionJobResponse.add_member(:topics_detection_job_properties, Shapes::ShapeRef.new(shape: TopicsDetectionJobProperties, location_name: "TopicsDetectionJobProperties"))
     DescribeTopicsDetectionJobResponse.struct_class = Types::DescribeTopicsDetectionJobResponse
 
-    DetectDominantLanguageRequest.add_member(:text, Shapes::ShapeRef.new(shape: String, required: true, location_name: "Text"))
+    DetectDominantLanguageRequest.add_member(:text, Shapes::ShapeRef.new(shape: CustomerInputString, required: true, location_name: "Text"))
     DetectDominantLanguageRequest.struct_class = Types::DetectDominantLanguageRequest
 
     DetectDominantLanguageResponse.add_member(:languages, Shapes::ShapeRef.new(shape: ListOfDominantLanguages, location_name: "Languages"))
     DetectDominantLanguageResponse.struct_class = Types::DetectDominantLanguageResponse
 
-    DetectEntitiesRequest.add_member(:text, Shapes::ShapeRef.new(shape: String, required: true, location_name: "Text"))
-    DetectEntitiesRequest.add_member(:language_code, Shapes::ShapeRef.new(shape: LanguageCode, required: true, location_name: "LanguageCode"))
+    DetectEntitiesRequest.add_member(:text, Shapes::ShapeRef.new(shape: CustomerInputString, required: true, location_name: "Text"))
+    DetectEntitiesRequest.add_member(:language_code, Shapes::ShapeRef.new(shape: LanguageCode, location_name: "LanguageCode"))
+    DetectEntitiesRequest.add_member(:endpoint_arn, Shapes::ShapeRef.new(shape: EntityRecognizerEndpointArn, location_name: "EndpointArn"))
     DetectEntitiesRequest.struct_class = Types::DetectEntitiesRequest
 
     DetectEntitiesResponse.add_member(:entities, Shapes::ShapeRef.new(shape: ListOfEntities, location_name: "Entities"))
     DetectEntitiesResponse.struct_class = Types::DetectEntitiesResponse
 
-    DetectKeyPhrasesRequest.add_member(:text, Shapes::ShapeRef.new(shape: String, required: true, location_name: "Text"))
+    DetectKeyPhrasesRequest.add_member(:text, Shapes::ShapeRef.new(shape: CustomerInputString, required: true, location_name: "Text"))
     DetectKeyPhrasesRequest.add_member(:language_code, Shapes::ShapeRef.new(shape: LanguageCode, required: true, location_name: "LanguageCode"))
     DetectKeyPhrasesRequest.struct_class = Types::DetectKeyPhrasesRequest
 
     DetectKeyPhrasesResponse.add_member(:key_phrases, Shapes::ShapeRef.new(shape: ListOfKeyPhrases, location_name: "KeyPhrases"))
     DetectKeyPhrasesResponse.struct_class = Types::DetectKeyPhrasesResponse
 
-    DetectSentimentRequest.add_member(:text, Shapes::ShapeRef.new(shape: String, required: true, location_name: "Text"))
+    DetectSentimentRequest.add_member(:text, Shapes::ShapeRef.new(shape: CustomerInputString, required: true, location_name: "Text"))
     DetectSentimentRequest.add_member(:language_code, Shapes::ShapeRef.new(shape: LanguageCode, required: true, location_name: "LanguageCode"))
     DetectSentimentRequest.struct_class = Types::DetectSentimentRequest
 
@@ -480,7 +485,7 @@ module Aws::Comprehend
     DetectSentimentResponse.add_member(:sentiment_score, Shapes::ShapeRef.new(shape: SentimentScore, location_name: "SentimentScore"))
     DetectSentimentResponse.struct_class = Types::DetectSentimentResponse
 
-    DetectSyntaxRequest.add_member(:text, Shapes::ShapeRef.new(shape: String, required: true, location_name: "Text"))
+    DetectSyntaxRequest.add_member(:text, Shapes::ShapeRef.new(shape: CustomerInputString, required: true, location_name: "Text"))
     DetectSyntaxRequest.add_member(:language_code, Shapes::ShapeRef.new(shape: SyntaxLanguageCode, required: true, location_name: "LanguageCode"))
     DetectSyntaxRequest.struct_class = Types::DetectSyntaxRequest
 
@@ -1016,8 +1021,6 @@ module Aws::Comprehend
 
     StopTrainingEntityRecognizerResponse.struct_class = Types::StopTrainingEntityRecognizerResponse
 
-    StringList.member = Shapes::ShapeRef.new(shape: String)
-
     Subnets.member = Shapes::ShapeRef.new(shape: SubnetId)
 
     SyntaxToken.add_member(:token_id, Shapes::ShapeRef.new(shape: Integer, location_name: "TokenId"))
@@ -1404,6 +1407,7 @@ module Aws::Comprehend
         o.input = Shapes::ShapeRef.new(shape: DetectEntitiesRequest)
         o.output = Shapes::ShapeRef.new(shape: DetectEntitiesResponse)
         o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceUnavailableException)
         o.errors << Shapes::ShapeRef.new(shape: TextSizeLimitExceededException)
         o.errors << Shapes::ShapeRef.new(shape: UnsupportedLanguageException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)

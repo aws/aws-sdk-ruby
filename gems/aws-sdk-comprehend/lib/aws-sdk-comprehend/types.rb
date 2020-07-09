@@ -35,7 +35,7 @@ module Aws::Comprehend
     #   data as a hash:
     #
     #       {
-    #         text_list: ["String"], # required
+    #         text_list: ["CustomerInputString"], # required
     #       }
     #
     # @!attribute [rw] text_list
@@ -49,7 +49,7 @@ module Aws::Comprehend
     #
     class BatchDetectDominantLanguageRequest < Struct.new(
       :text_list)
-      SENSITIVE = []
+      SENSITIVE = [:text_list]
       include Aws::Structure
     end
 
@@ -101,7 +101,7 @@ module Aws::Comprehend
     #   data as a hash:
     #
     #       {
-    #         text_list: ["String"], # required
+    #         text_list: ["CustomerInputString"], # required
     #         language_code: "en", # required, accepts en, es, fr, de, it, pt, ar, hi, ja, ko, zh, zh-TW
     #       }
     #
@@ -122,7 +122,7 @@ module Aws::Comprehend
     class BatchDetectEntitiesRequest < Struct.new(
       :text_list,
       :language_code)
-      SENSITIVE = []
+      SENSITIVE = [:text_list]
       include Aws::Structure
     end
 
@@ -174,7 +174,7 @@ module Aws::Comprehend
     #   data as a hash:
     #
     #       {
-    #         text_list: ["String"], # required
+    #         text_list: ["CustomerInputString"], # required
     #         language_code: "en", # required, accepts en, es, fr, de, it, pt, ar, hi, ja, ko, zh, zh-TW
     #       }
     #
@@ -195,7 +195,7 @@ module Aws::Comprehend
     class BatchDetectKeyPhrasesRequest < Struct.new(
       :text_list,
       :language_code)
-      SENSITIVE = []
+      SENSITIVE = [:text_list]
       include Aws::Structure
     end
 
@@ -252,7 +252,7 @@ module Aws::Comprehend
     #   data as a hash:
     #
     #       {
-    #         text_list: ["String"], # required
+    #         text_list: ["CustomerInputString"], # required
     #         language_code: "en", # required, accepts en, es, fr, de, it, pt, ar, hi, ja, ko, zh, zh-TW
     #       }
     #
@@ -273,7 +273,7 @@ module Aws::Comprehend
     class BatchDetectSentimentRequest < Struct.new(
       :text_list,
       :language_code)
-      SENSITIVE = []
+      SENSITIVE = [:text_list]
       include Aws::Structure
     end
 
@@ -325,7 +325,7 @@ module Aws::Comprehend
     #   data as a hash:
     #
     #       {
-    #         text_list: ["String"], # required
+    #         text_list: ["CustomerInputString"], # required
     #         language_code: "en", # required, accepts en, es, fr, de, it, pt
     #       }
     #
@@ -348,7 +348,7 @@ module Aws::Comprehend
     class BatchDetectSyntaxRequest < Struct.new(
       :text_list,
       :language_code)
-      SENSITIVE = []
+      SENSITIVE = [:text_list]
       include Aws::Structure
     end
 
@@ -507,7 +507,7 @@ module Aws::Comprehend
     # @!attribute [rw] number_of_test_documents
     #   The number of documents in the input data that were used to test the
     #   classifier. Typically this is 10 to 20 percent of the input
-    #   documents.
+    #   documents, up to 10,000 documents.
     #   @return [Integer]
     #
     # @!attribute [rw] evaluation_metrics
@@ -530,7 +530,7 @@ module Aws::Comprehend
     #   data as a hash:
     #
     #       {
-    #         text: "String", # required
+    #         text: "CustomerInputString", # required
     #         endpoint_arn: "DocumentClassifierEndpointArn", # required
     #       }
     #
@@ -547,7 +547,7 @@ module Aws::Comprehend
     class ClassifyDocumentRequest < Struct.new(
       :text,
       :endpoint_arn)
-      SENSITIVE = []
+      SENSITIVE = [:text]
       include Aws::Structure
     end
 
@@ -1291,7 +1291,7 @@ module Aws::Comprehend
     #   data as a hash:
     #
     #       {
-    #         text: "String", # required
+    #         text: "CustomerInputString", # required
     #       }
     #
     # @!attribute [rw] text
@@ -1304,7 +1304,7 @@ module Aws::Comprehend
     #
     class DetectDominantLanguageRequest < Struct.new(
       :text)
-      SENSITIVE = []
+      SENSITIVE = [:text]
       include Aws::Structure
     end
 
@@ -1332,8 +1332,9 @@ module Aws::Comprehend
     #   data as a hash:
     #
     #       {
-    #         text: "String", # required
-    #         language_code: "en", # required, accepts en, es, fr, de, it, pt, ar, hi, ja, ko, zh, zh-TW
+    #         text: "CustomerInputString", # required
+    #         language_code: "en", # accepts en, es, fr, de, it, pt, ar, hi, ja, ko, zh, zh-TW
+    #         endpoint_arn: "EntityRecognizerEndpointArn",
     #       }
     #
     # @!attribute [rw] text
@@ -1345,14 +1346,31 @@ module Aws::Comprehend
     #   The language of the input documents. You can specify any of the
     #   primary languages supported by Amazon Comprehend. All documents must
     #   be in the same language.
+    #
+    #   If your request includes the endpoint for a custom entity
+    #   recognition model, Amazon Comprehend uses the language of your
+    #   custom model, and it ignores any language code that you specify
+    #   here.
+    #   @return [String]
+    #
+    # @!attribute [rw] endpoint_arn
+    #   The Amazon Resource Name of an endpoint that is associated with a
+    #   custom entity recognition model. Provide an endpoint if you want to
+    #   detect entities by using your own custom model instead of the
+    #   default model that is used by Amazon Comprehend.
+    #
+    #   If you specify an endpoint, Amazon Comprehend uses the language of
+    #   your custom model, and it ignores any language code that you provide
+    #   in your request.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/comprehend-2017-11-27/DetectEntitiesRequest AWS API Documentation
     #
     class DetectEntitiesRequest < Struct.new(
       :text,
-      :language_code)
-      SENSITIVE = []
+      :language_code,
+      :endpoint_arn)
+      SENSITIVE = [:text]
       include Aws::Structure
     end
 
@@ -1360,8 +1378,12 @@ module Aws::Comprehend
     #   A collection of entities identified in the input text. For each
     #   entity, the response provides the entity text, entity type, where
     #   the entity text begins and ends, and the level of confidence that
-    #   Amazon Comprehend has in the detection. For a list of entity types,
-    #   see how-entities.
+    #   Amazon Comprehend has in the detection.
+    #
+    #   If your request uses a custom entity recognition model, Amazon
+    #   Comprehend detects the entities that the model is trained to
+    #   recognize. Otherwise, it detects the default entity types. For a
+    #   list of default entity types, see how-entities.
     #   @return [Array<Types::Entity>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/comprehend-2017-11-27/DetectEntitiesResponse AWS API Documentation
@@ -1376,7 +1398,7 @@ module Aws::Comprehend
     #   data as a hash:
     #
     #       {
-    #         text: "String", # required
+    #         text: "CustomerInputString", # required
     #         language_code: "en", # required, accepts en, es, fr, de, it, pt, ar, hi, ja, ko, zh, zh-TW
     #       }
     #
@@ -1396,7 +1418,7 @@ module Aws::Comprehend
     class DetectKeyPhrasesRequest < Struct.new(
       :text,
       :language_code)
-      SENSITIVE = []
+      SENSITIVE = [:text]
       include Aws::Structure
     end
 
@@ -1420,7 +1442,7 @@ module Aws::Comprehend
     #   data as a hash:
     #
     #       {
-    #         text: "String", # required
+    #         text: "CustomerInputString", # required
     #         language_code: "en", # required, accepts en, es, fr, de, it, pt, ar, hi, ja, ko, zh, zh-TW
     #       }
     #
@@ -1440,7 +1462,7 @@ module Aws::Comprehend
     class DetectSentimentRequest < Struct.new(
       :text,
       :language_code)
-      SENSITIVE = []
+      SENSITIVE = [:text]
       include Aws::Structure
     end
 
@@ -1467,7 +1489,7 @@ module Aws::Comprehend
     #   data as a hash:
     #
     #       {
-    #         text: "String", # required
+    #         text: "CustomerInputString", # required
     #         language_code: "en", # required, accepts en, es, fr, de, it, pt
     #       }
     #
@@ -1488,7 +1510,7 @@ module Aws::Comprehend
     class DetectSyntaxRequest < Struct.new(
       :text,
       :language_code)
-      SENSITIVE = []
+      SENSITIVE = [:text]
       include Aws::Structure
     end
 
@@ -1553,14 +1575,14 @@ module Aws::Comprehend
     #
     # @!attribute [rw] submit_time_before
     #   Filters the list of jobs based on the time that the job was
-    #   submitted for processing. Returns only jobs submitted after the
+    #   submitted for processing. Returns only jobs submitted before the
     #   specified time. Jobs are returned in ascending order, oldest to
     #   newest.
     #   @return [Time]
     #
     # @!attribute [rw] submit_time_after
     #   Filters the list of jobs based on the time that the job was
-    #   submitted for processing. Returns only jobs submitted before the
+    #   submitted for processing. Returns only jobs submitted after the
     #   specified time. Jobs are returned in descending order, newest to
     #   oldest.
     #   @return [Time]
@@ -1913,7 +1935,7 @@ module Aws::Comprehend
       :volume_kms_key_id,
       :vpc_config,
       :mode)
-      SENSITIVE = []
+      SENSITIVE = [:classifier_metadata]
       include Aws::Structure
     end
 
@@ -2723,7 +2745,7 @@ module Aws::Comprehend
       :data_access_role_arn,
       :volume_kms_key_id,
       :vpc_config)
-      SENSITIVE = []
+      SENSITIVE = [:recognizer_metadata]
       include Aws::Structure
     end
 
@@ -3683,8 +3705,8 @@ module Aws::Comprehend
       include Aws::Structure
     end
 
-    # The specified name is already in use. Use a different name and try
-    # your request again.
+    # The specified resource name is already in use. Use a different name
+    # and try your request again.
     #
     # @!attribute [rw] message
     #   @return [String]
@@ -3697,9 +3719,8 @@ module Aws::Comprehend
       include Aws::Structure
     end
 
-    # The maximum number of recognizers per account has been exceeded.
-    # Review the recognizers, perform cleanup, and then try your request
-    # again.
+    # The maximum number of resources per account has been exceeded. Review
+    # the resources, and then try your request again.
     #
     # @!attribute [rw] message
     #   @return [String]
@@ -3726,8 +3747,8 @@ module Aws::Comprehend
       include Aws::Structure
     end
 
-    # The specified resource is not available. Check to see if the resource
-    # is in the `TRAINED` state and try your request again.
+    # The specified resource is not available. Check the resource and try
+    # your request again.
     #
     # @!attribute [rw] message
     #   @return [String]

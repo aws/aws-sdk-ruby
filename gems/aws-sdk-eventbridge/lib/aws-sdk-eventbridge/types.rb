@@ -866,6 +866,47 @@ module Aws::EventBridge
       include Aws::Structure
     end
 
+    # These are custom parameter to be used when the target is an API
+    # Gateway REST APIs.
+    #
+    # @note When making an API call, you may pass HttpParameters
+    #   data as a hash:
+    #
+    #       {
+    #         path_parameter_values: ["PathParameter"],
+    #         header_parameters: {
+    #           "HeaderKey" => "HeaderValue",
+    #         },
+    #         query_string_parameters: {
+    #           "QueryStringKey" => "QueryStringValue",
+    #         },
+    #       }
+    #
+    # @!attribute [rw] path_parameter_values
+    #   The path parameter values to be used to populate API Gateway REST
+    #   API path wildcards ("*").
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] header_parameters
+    #   The headers that need to be sent as part of request invoking the API
+    #   Gateway REST API.
+    #   @return [Hash<String,String>]
+    #
+    # @!attribute [rw] query_string_parameters
+    #   The query string keys/values that need to be sent as part of request
+    #   invoking the API Gateway REST API.
+    #   @return [Hash<String,String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/eventbridge-2015-10-07/HttpParameters AWS API Documentation
+    #
+    class HttpParameters < Struct.new(
+      :path_parameter_values,
+      :header_parameters,
+      :query_string_parameters)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Contains the parameters needed for you to provide custom input to a
     # target based on one or more pieces of data extracted from the event.
     #
@@ -1454,6 +1495,12 @@ module Aws::EventBridge
       include Aws::Structure
     end
 
+    # The operation you are attempting is not available in this region.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/eventbridge-2015-10-07/OperationDisabledException AWS API Documentation
+    #
+    class OperationDisabledException < Aws::EmptyStructure; end
+
     # A partner event source is created by an SaaS partner. If a customer
     # creates a partner event bus that matches this event source, that AWS
     # account can receive events from the partner's applications or
@@ -1991,6 +2038,15 @@ module Aws::EventBridge
     #             sqs_parameters: {
     #               message_group_id: "MessageGroupId",
     #             },
+    #             http_parameters: {
+    #               path_parameter_values: ["PathParameter"],
+    #               header_parameters: {
+    #                 "HeaderKey" => "HeaderValue",
+    #               },
+    #               query_string_parameters: {
+    #                 "QueryStringKey" => "QueryStringValue",
+    #               },
+    #             },
     #           },
     #         ],
     #       }
@@ -2459,6 +2515,15 @@ module Aws::EventBridge
     #         sqs_parameters: {
     #           message_group_id: "MessageGroupId",
     #         },
+    #         http_parameters: {
+    #           path_parameter_values: ["PathParameter"],
+    #           header_parameters: {
+    #             "HeaderKey" => "HeaderValue",
+    #           },
+    #           query_string_parameters: {
+    #             "QueryStringKey" => "QueryStringValue",
+    #           },
+    #         },
     #       }
     #
     # @!attribute [rw] id
@@ -2543,6 +2608,15 @@ module Aws::EventBridge
     #   content-based deduplication enabled.
     #   @return [Types::SqsParameters]
     #
+    # @!attribute [rw] http_parameters
+    #   Contains the HTTP parameters to use when the target is a API Gateway
+    #   REST endpoint.
+    #
+    #   If you specify an API Gateway REST API as a target, you can use this
+    #   parameter to specify headers, path parameter, query string
+    #   keys/values as part of your target invoking request.
+    #   @return [Types::HttpParameters]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/eventbridge-2015-10-07/Target AWS API Documentation
     #
     class Target < Struct.new(
@@ -2556,7 +2630,8 @@ module Aws::EventBridge
       :run_command_parameters,
       :ecs_parameters,
       :batch_parameters,
-      :sqs_parameters)
+      :sqs_parameters,
+      :http_parameters)
       SENSITIVE = []
       include Aws::Structure
     end

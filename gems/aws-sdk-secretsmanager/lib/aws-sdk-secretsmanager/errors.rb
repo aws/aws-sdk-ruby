@@ -36,6 +36,7 @@ module Aws::SecretsManager
   # * {LimitExceededException}
   # * {MalformedPolicyDocumentException}
   # * {PreconditionNotMetException}
+  # * {PublicPolicyException}
   # * {ResourceExistsException}
   # * {ResourceNotFoundException}
   #
@@ -170,6 +171,21 @@ module Aws::SecretsManager
       # @param [Seahorse::Client::RequestContext] context
       # @param [String] message
       # @param [Aws::SecretsManager::Types::PreconditionNotMetException] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+
+      # @return [String]
+      def message
+        @message || @data[:message]
+      end
+    end
+
+    class PublicPolicyException < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::SecretsManager::Types::PublicPolicyException] data
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end

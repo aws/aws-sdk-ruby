@@ -331,6 +331,10 @@ module Aws::CloudHSMV2
     #   The ID of the backup that will be copied to the destination region.
     #
     # @option params [Array<Types::Tag>] :tag_list
+    #   Tags to apply to the destination backup during creation. If you
+    #   specify tags, only these tags will be applied to the destination
+    #   backup. If you do not specify tags, the service copies tags from the
+    #   source backup to the destination backup.
     #
     # @return [Types::CopyBackupToRegionResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -386,6 +390,7 @@ module Aws::CloudHSMV2
     #   cluster. To find the backup ID, use DescribeBackups.
     #
     # @option params [Array<Types::Tag>] :tag_list
+    #   Tags to apply to the CloudHSM cluster during creation.
     #
     # @return [Types::CreateClusterResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1035,7 +1040,7 @@ module Aws::CloudHSMV2
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-cloudhsmv2'
-      context[:gem_version] = '1.26.0'
+      context[:gem_version] = '1.27.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

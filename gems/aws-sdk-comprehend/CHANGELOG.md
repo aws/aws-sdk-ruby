@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.35.0 (2020-07-09)
+------------------
+
+* Feature - AWS Comprehend now supports Real-time Analysis with Custom Entity Recognition.
+
 1.34.0 (2020-06-23)
 ------------------
 

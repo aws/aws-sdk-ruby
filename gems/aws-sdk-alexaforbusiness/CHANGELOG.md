@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.40.0 (2020-07-09)
+------------------
+
+* Feature - Added support for registering an AVS device directly to a room using RegisterAVSDevice with a room ARN
+
 1.39.0 (2020-06-23)
 ------------------
 

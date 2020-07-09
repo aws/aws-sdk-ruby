@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.11.0 (2020-07-09)
+------------------
+
+* Feature - Amazon EventBridge adds support for API Gateway as a target.
+
 1.10.0 (2020-07-02)
 ------------------
 

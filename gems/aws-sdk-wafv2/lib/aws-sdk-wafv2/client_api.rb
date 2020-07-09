@@ -66,11 +66,15 @@ module Aws::WAFV2
     ErrorReason = Shapes::StringShape.new(name: 'ErrorReason')
     ExcludedRule = Shapes::StructureShape.new(name: 'ExcludedRule')
     ExcludedRules = Shapes::ListShape.new(name: 'ExcludedRules')
+    FallbackBehavior = Shapes::StringShape.new(name: 'FallbackBehavior')
     FieldToMatch = Shapes::StructureShape.new(name: 'FieldToMatch')
     FieldToMatchData = Shapes::StringShape.new(name: 'FieldToMatchData')
     FirewallManagerRuleGroup = Shapes::StructureShape.new(name: 'FirewallManagerRuleGroup')
     FirewallManagerRuleGroups = Shapes::ListShape.new(name: 'FirewallManagerRuleGroups')
     FirewallManagerStatement = Shapes::StructureShape.new(name: 'FirewallManagerStatement')
+    ForwardedIPConfig = Shapes::StructureShape.new(name: 'ForwardedIPConfig')
+    ForwardedIPHeaderName = Shapes::StringShape.new(name: 'ForwardedIPHeaderName')
+    ForwardedIPPosition = Shapes::StringShape.new(name: 'ForwardedIPPosition')
     GeoMatchStatement = Shapes::StructureShape.new(name: 'GeoMatchStatement')
     GetIPSetRequest = Shapes::StructureShape.new(name: 'GetIPSetRequest')
     GetIPSetResponse = Shapes::StructureShape.new(name: 'GetIPSetResponse')
@@ -101,6 +105,7 @@ module Aws::WAFV2
     IPAddressVersion = Shapes::StringShape.new(name: 'IPAddressVersion')
     IPAddresses = Shapes::ListShape.new(name: 'IPAddresses')
     IPSet = Shapes::StructureShape.new(name: 'IPSet')
+    IPSetForwardedIPConfig = Shapes::StructureShape.new(name: 'IPSetForwardedIPConfig')
     IPSetReferenceStatement = Shapes::StructureShape.new(name: 'IPSetReferenceStatement')
     IPSetSummaries = Shapes::ListShape.new(name: 'IPSetSummaries')
     IPSetSummary = Shapes::StructureShape.new(name: 'IPSetSummary')
@@ -405,7 +410,12 @@ module Aws::WAFV2
     FirewallManagerStatement.add_member(:rule_group_reference_statement, Shapes::ShapeRef.new(shape: RuleGroupReferenceStatement, location_name: "RuleGroupReferenceStatement"))
     FirewallManagerStatement.struct_class = Types::FirewallManagerStatement
 
+    ForwardedIPConfig.add_member(:header_name, Shapes::ShapeRef.new(shape: ForwardedIPHeaderName, required: true, location_name: "HeaderName"))
+    ForwardedIPConfig.add_member(:fallback_behavior, Shapes::ShapeRef.new(shape: FallbackBehavior, required: true, location_name: "FallbackBehavior"))
+    ForwardedIPConfig.struct_class = Types::ForwardedIPConfig
+
     GeoMatchStatement.add_member(:country_codes, Shapes::ShapeRef.new(shape: CountryCodes, location_name: "CountryCodes"))
+    GeoMatchStatement.add_member(:forwarded_ip_config, Shapes::ShapeRef.new(shape: ForwardedIPConfig, location_name: "ForwardedIPConfig"))
     GeoMatchStatement.struct_class = Types::GeoMatchStatement
 
     GetIPSetRequest.add_member(:name, Shapes::ShapeRef.new(shape: EntityName, required: true, location_name: "Name"))
@@ -508,7 +518,13 @@ module Aws::WAFV2
     IPSet.add_member(:addresses, Shapes::ShapeRef.new(shape: IPAddresses, required: true, location_name: "Addresses"))
     IPSet.struct_class = Types::IPSet
 
+    IPSetForwardedIPConfig.add_member(:header_name, Shapes::ShapeRef.new(shape: ForwardedIPHeaderName, required: true, location_name: "HeaderName"))
+    IPSetForwardedIPConfig.add_member(:fallback_behavior, Shapes::ShapeRef.new(shape: FallbackBehavior, required: true, location_name: "FallbackBehavior"))
+    IPSetForwardedIPConfig.add_member(:position, Shapes::ShapeRef.new(shape: ForwardedIPPosition, required: true, location_name: "Position"))
+    IPSetForwardedIPConfig.struct_class = Types::IPSetForwardedIPConfig
+
     IPSetReferenceStatement.add_member(:arn, Shapes::ShapeRef.new(shape: ResourceArn, required: true, location_name: "ARN"))
+    IPSetReferenceStatement.add_member(:ip_set_forwarded_ip_config, Shapes::ShapeRef.new(shape: IPSetForwardedIPConfig, location_name: "IPSetForwardedIPConfig"))
     IPSetReferenceStatement.struct_class = Types::IPSetReferenceStatement
 
     IPSetSummaries.member = Shapes::ShapeRef.new(shape: IPSetSummary)
@@ -642,6 +658,7 @@ module Aws::WAFV2
     RateBasedStatement.add_member(:limit, Shapes::ShapeRef.new(shape: RateLimit, required: true, location_name: "Limit"))
     RateBasedStatement.add_member(:aggregate_key_type, Shapes::ShapeRef.new(shape: RateBasedStatementAggregateKeyType, required: true, location_name: "AggregateKeyType"))
     RateBasedStatement.add_member(:scope_down_statement, Shapes::ShapeRef.new(shape: Statement, location_name: "ScopeDownStatement"))
+    RateBasedStatement.add_member(:forwarded_ip_config, Shapes::ShapeRef.new(shape: ForwardedIPConfig, location_name: "ForwardedIPConfig"))
     RateBasedStatement.struct_class = Types::RateBasedStatement
 
     RateBasedStatementManagedKeysIPSet.add_member(:ip_address_version, Shapes::ShapeRef.new(shape: IPAddressVersion, location_name: "IPAddressVersion"))
@@ -1380,6 +1397,7 @@ module Aws::WAFV2
         o.errors << Shapes::ShapeRef.new(shape: WAFServiceLinkedRoleErrorException)
         o.errors << Shapes::ShapeRef.new(shape: WAFInvalidParameterException)
         o.errors << Shapes::ShapeRef.new(shape: WAFInvalidOperationException)
+        o.errors << Shapes::ShapeRef.new(shape: WAFLimitsExceededException)
       end)
 
       api.add_operation(:put_permission_policy, Seahorse::Model::Operation.new.tap do |o|

@@ -652,11 +652,10 @@ module Aws::SageMaker
     end
 
     # Creates a running App for the specified UserProfile. Supported Apps
-    # are JupyterServer, KernelGateway, and TensorBoard. This operation is
-    # automatically invoked by Amazon SageMaker Studio upon access to the
-    # associated Domain, and when new kernel configurations are selected by
-    # the user. A user may have multiple Apps active simultaneously.
-    # UserProfiles are limited to 5 concurrently running Apps at a time.
+    # are JupyterServer and KernelGateway. This operation is automatically
+    # invoked by Amazon SageMaker Studio upon access to the associated
+    # Domain, and when new kernel configurations are selected by the user. A
+    # user may have multiple Apps active simultaneously.
     #
     # @option params [required, String] :domain_id
     #   The domain ID.
@@ -1992,7 +1991,13 @@ module Aws::SageMaker
     #   The S3 URL of the file that defines the categories used to label the
     #   data objects.
     #
-    #   The file is a JSON structure in the following format:
+    #   For 3D point cloud task types, see [Create a Labeling Category
+    #   Configuration File for 3D Point Cloud Labeling Jobs][1].
+    #
+    #   For all other [built-in task types][2] and [custom tasks][3], your
+    #   label category configuration file must be a JSON file in the following
+    #   format. Identify the labels you want to use by replacing `label_1`,
+    #   `label_2`,`...`,`label_n` with your label categories.
     #
     #   `\{`
     #
@@ -2002,13 +2007,13 @@ module Aws::SageMaker
     #
     #   ` \{`
     #
-    #   ` "label": "label 1"`
+    #   ` "label": "label_1"`
     #
     #   ` \},`
     #
     #   ` \{`
     #
-    #   ` "label": "label 2"`
+    #   ` "label": "label_2"`
     #
     #   ` \},`
     #
@@ -2016,13 +2021,19 @@ module Aws::SageMaker
     #
     #   ` \{`
     #
-    #   ` "label": "label n"`
+    #   ` "label": "label_n"`
     #
     #   ` \}`
     #
     #   ` ]`
     #
     #   `\}`
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/sagemaker/latest/dg/sms-point-cloud-label-category-config.html
+    #   [2]: https://docs.aws.amazon.com/sagemaker/latest/dg/sms-task-types.html
+    #   [3]: https://docs.aws.amazon.com/sagemaker/latest/dg/sms-custom-templates.html
     #
     # @option params [Types::LabelingJobStoppingConditions] :stopping_conditions
     #   A set of conditions for stopping the labeling job. If any of the
@@ -4168,6 +4179,33 @@ module Aws::SageMaker
       req.send_request(options)
     end
 
+    # Use this operation to delete a worker task template (`HumanTaskUi`).
+    #
+    # To see a list of human task user interfaces (work task templates) in
+    # your account, use . When you delete a worker task template, it no
+    # longer appears when you call `ListHumanTaskUis`.
+    #
+    # @option params [required, String] :human_task_ui_name
+    #   The name of the human task user interface (work task template) you
+    #   want to delete.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_human_task_ui({
+    #     human_task_ui_name: "HumanTaskUiName", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/DeleteHumanTaskUi AWS API Documentation
+    #
+    # @overload delete_human_task_ui(params = {})
+    # @param [Hash] params ({})
+    def delete_human_task_ui(params = {}, options = {})
+      req = build_request(:delete_human_task_ui, params)
+      req.send_request(options)
+    end
+
     # Deletes a model. The `DeleteModel` API deletes only the model entry
     # that was created in Amazon SageMaker when you called the CreateModel
     # API. It does not delete model artifacts, inference code, or the IAM
@@ -5143,15 +5181,18 @@ module Aws::SageMaker
       req.send_request(options)
     end
 
-    # Returns information about the requested human task user interface.
+    # Returns information about the requested human task user interface
+    # (worker task template).
     #
     # @option params [required, String] :human_task_ui_name
-    #   The name of the human task user interface you want information about.
+    #   The name of the human task user interface (worker task template) you
+    #   want information about.
     #
     # @return [Types::DescribeHumanTaskUiResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::DescribeHumanTaskUiResponse#human_task_ui_arn #human_task_ui_arn} => String
     #   * {Types::DescribeHumanTaskUiResponse#human_task_ui_name #human_task_ui_name} => String
+    #   * {Types::DescribeHumanTaskUiResponse#human_task_ui_status #human_task_ui_status} => String
     #   * {Types::DescribeHumanTaskUiResponse#creation_time #creation_time} => Time
     #   * {Types::DescribeHumanTaskUiResponse#ui_template #ui_template} => Types::UiTemplateInfo
     #
@@ -5165,6 +5206,7 @@ module Aws::SageMaker
     #
     #   resp.human_task_ui_arn #=> String
     #   resp.human_task_ui_name #=> String
+    #   resp.human_task_ui_status #=> String, one of "Active", "Deleting"
     #   resp.creation_time #=> Time
     #   resp.ui_template.url #=> String
     #   resp.ui_template.content_sha_256 #=> String
@@ -5181,7 +5223,7 @@ module Aws::SageMaker
     # Gets a description of a hyperparameter tuning job.
     #
     # @option params [required, String] :hyper_parameter_tuning_job_name
-    #   The name of the tuning job to describe.
+    #   The name of the tuning job.
     #
     # @return [Types::DescribeHyperParameterTuningJobResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -8917,6 +8959,9 @@ module Aws::SageMaker
     #   The `HumanTaskUiArn` of the worker UI that you want to render. Do not
     #   provide a `HumanTaskUiArn` if you use the `UiTemplate` parameter.
     #
+    #   See a list of available Human Ui Amazon Resource Names (ARNs) in
+    #   UiConfig.
+    #
     # @return [Types::RenderUiTemplateResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::RenderUiTemplateResponse#rendered_content #rendered_content} => String
@@ -10397,7 +10442,7 @@ module Aws::SageMaker
 
     # Restricts access to tasks assigned to workers in the specified
     # workforce to those within specific ranges of IP addresses. You specify
-    # allowed IP addresses by creating a list of up to four [CIDRs][1].
+    # allowed IP addresses by creating a list of up to ten [CIDRs][1].
     #
     # By default, a workforce isn't restricted to specific IP addresses. If
     # you specify a range of IP addresses, workers who attempt to access
@@ -10418,10 +10463,10 @@ module Aws::SageMaker
     #   created and cannot be modified.
     #
     # @option params [Types::SourceIpConfig] :source_ip_config
-    #   A list of one to four worker IP address ranges ([CIDRs][1]) that can
-    #   be used to access tasks assigned to this workforce.
+    #   A list of one to ten worker IP address ranges ([CIDRs][1]) that can be
+    #   used to access tasks assigned to this workforce.
     #
-    #   Maximum: Four CIDR values
+    #   Maximum: Ten CIDR values
     #
     #
     #
@@ -10535,7 +10580,7 @@ module Aws::SageMaker
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-sagemaker'
-      context[:gem_version] = '1.62.0'
+      context[:gem_version] = '1.63.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

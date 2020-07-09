@@ -18,9 +18,9 @@ module Aws::SecretsManager
     #       }
     #
     # @!attribute [rw] secret_id
-    #   Specifies the secret for which you want to cancel a rotation
-    #   request. You can specify either the Amazon Resource Name (ARN) or
-    #   the friendly name of the secret.
+    #   Specifies the secret to cancel a rotation request. You can specify
+    #   either the Amazon Resource Name (ARN) or the friendly name of the
+    #   secret.
     #
     #   <note markdown="1"> If you specify an ARN, we generally recommend that you specify a
     #   complete ARN. You can specify a partial ARN too—for example, if you
@@ -33,8 +33,14 @@ module Aws::SecretsManager
     #   partial ARN, then those characters cause Secrets Manager to assume
     #   that you’re specifying a complete ARN. This confusion can cause
     #   unexpected results. To avoid this situation, we recommend that you
-    #   don’t create secret names that end with a hyphen followed by six
+    #   don’t create secret names ending with a hyphen followed by six
     #   characters.
+    #
+    #    If you specify an incomplete ARN without the random suffix, and
+    #   instead provide the 'friendly name', you *must* not include the
+    #   random suffix. If you do include the random suffix added by Secrets
+    #   Manager, you receive either a *ResourceNotFoundException* or an
+    #   *AccessDeniedException* error, depending on your permissions.
     #
     #    </note>
     #   @return [String]
@@ -56,9 +62,9 @@ module Aws::SecretsManager
     #   @return [String]
     #
     # @!attribute [rw] version_id
-    #   The unique identifier of the version of the secret that was created
-    #   during the rotation. This version might not be complete, and should
-    #   be evaluated for possible deletion. At the very least, you should
+    #   The unique identifier of the version of the secret created during
+    #   the rotation. This version might not be complete, and should be
+    #   evaluated for possible deletion. At the very least, you should
     #   remove the `VersionStage` value `AWSPENDING` to enable this version
     #   to be deleted. Failing to clean up a cancelled rotation can block
     #   you from successfully starting future rotations.
@@ -98,11 +104,11 @@ module Aws::SecretsManager
     #   The secret name must be ASCII letters, digits, or the following
     #   characters : /\_+=.@-
     #
-    #   <note markdown="1"> Don't end your secret name with a hyphen followed by six
+    #   <note markdown="1"> Do not end your secret name with a hyphen followed by six
     #   characters. If you do so, you risk confusion and unexpected results
-    #   when searching for a secret by partial ARN. This is because Secrets
-    #   Manager automatically adds a hyphen and six random characters at the
-    #   end of the ARN.
+    #   when searching for a secret by partial ARN. Secrets Manager
+    #   automatically adds a hyphen and six random characters at the end of
+    #   the ARN.
     #
     #    </note>
     #   @return [String]
@@ -118,7 +124,7 @@ module Aws::SecretsManager
     #   in the request. If you don't use the SDK and instead generate a raw
     #   HTTP request to the Secrets Manager service endpoint, then you must
     #   generate a `ClientRequestToken` yourself for the new version and
-    #   include that value in the request.
+    #   include the value in the request.
     #
     #    </note>
     #
@@ -131,10 +137,9 @@ module Aws::SecretsManager
     #   * If the `ClientRequestToken` value isn't already associated with a
     #     version of the secret then a new version of the secret is created.
     #
-    #   * If a version with this value already exists and that version's
+    #   * If a version with this value already exists and the version
     #     `SecretString` and `SecretBinary` values are the same as those in
-    #     the request, then the request is ignored (the operation is
-    #     idempotent).
+    #     the request, then the request is ignored.
     #
     #   * If a version with this value already exists and that version's
     #     `SecretString` and `SecretBinary` values are different from those
@@ -172,9 +177,9 @@ module Aws::SecretsManager
     #   first time it needs to encrypt a version's `SecretString` or
     #   `SecretBinary` fields.
     #
-    #   You can use the account's default CMK to encrypt and decrypt only
-    #   if you call this operation using credentials from the same account
-    #   that owns the secret. If the secret is in a different account, then
+    #   You can use the account default CMK to encrypt and decrypt only if
+    #   you call this operation using credentials from the same account that
+    #   owns the secret. If the secret resides in a different account, then
     #   you must create a custom CMK and specify the ARN in this field.
     #   @return [String]
     #
@@ -211,7 +216,7 @@ module Aws::SecretsManager
     #   environments, see [Using JSON for Parameters][1] in the *AWS CLI
     #   User Guide*. For example:
     #
-    #   `[\{"username":"bob"\},\{"password":"abc123xyz456"\}]`
+    #   `\{"username":"bob","password":"abc123xyz456"\}`
     #
     #   If your command-line tool or SDK requires quotation marks around the
     #   parameter, you should use single quotes to avoid confusion with the
@@ -259,15 +264,15 @@ module Aws::SecretsManager
     #   * Tag keys and values are case sensitive.
     #
     #   * Do not use the `aws:` prefix in your tag names or values because
-    #     it is reserved for AWS use. You can't edit or delete tag names or
-    #     values with this prefix. Tags with this prefix do not count
+    #     AWS reserves it for AWS use. You can't edit or delete tag names
+    #     or values with this prefix. Tags with this prefix do not count
     #     against your tags per secret limit.
     #
-    #   * If your tagging schema will be used across multiple services and
-    #     resources, remember that other services might have restrictions on
-    #     allowed characters. Generally allowed characters are: letters,
-    #     spaces, and numbers representable in UTF-8, plus the following
-    #     special characters: + - = . \_ : / @.
+    #   * If you use your tagging schema across multiple services and
+    #     resources, remember other services might have restrictions on
+    #     allowed characters. Generally allowed characters: letters, spaces,
+    #     and numbers representable in UTF-8, plus the following special
+    #     characters: + - = . \_ : / @.
     #
     #
     #
@@ -307,8 +312,8 @@ module Aws::SecretsManager
     #   @return [String]
     #
     # @!attribute [rw] version_id
-    #   The unique identifier that's associated with the version of the
-    #   secret you just created.
+    #   The unique identifier associated with the version of the secret you
+    #   just created.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/secretsmanager-2017-10-17/CreateSecretResponse AWS API Documentation
@@ -358,8 +363,14 @@ module Aws::SecretsManager
     #   partial ARN, then those characters cause Secrets Manager to assume
     #   that you’re specifying a complete ARN. This confusion can cause
     #   unexpected results. To avoid this situation, we recommend that you
-    #   don’t create secret names that end with a hyphen followed by six
+    #   don’t create secret names ending with a hyphen followed by six
     #   characters.
+    #
+    #    If you specify an incomplete ARN without the random suffix, and
+    #   instead provide the 'friendly name', you *must* not include the
+    #   random suffix. If you do include the random suffix added by Secrets
+    #   Manager, you receive either a *ResourceNotFoundException* or an
+    #   *AccessDeniedException* error, depending on your permissions.
     #
     #    </note>
     #   @return [String]
@@ -415,8 +426,14 @@ module Aws::SecretsManager
     #   partial ARN, then those characters cause Secrets Manager to assume
     #   that you’re specifying a complete ARN. This confusion can cause
     #   unexpected results. To avoid this situation, we recommend that you
-    #   don’t create secret names that end with a hyphen followed by six
+    #   don’t create secret names ending with a hyphen followed by six
     #   characters.
+    #
+    #    If you specify an incomplete ARN without the random suffix, and
+    #   instead provide the 'friendly name', you *must* not include the
+    #   random suffix. If you do include the random suffix added by Secrets
+    #   Manager, you receive either a *ResourceNotFoundException* or an
+    #   *AccessDeniedException* error, depending on your permissions.
     #
     #    </note>
     #   @return [String]
@@ -506,8 +523,14 @@ module Aws::SecretsManager
     #   partial ARN, then those characters cause Secrets Manager to assume
     #   that you’re specifying a complete ARN. This confusion can cause
     #   unexpected results. To avoid this situation, we recommend that you
-    #   don’t create secret names that end with a hyphen followed by six
+    #   don’t create secret names ending with a hyphen followed by six
     #   characters.
+    #
+    #    If you specify an incomplete ARN without the random suffix, and
+    #   instead provide the 'friendly name', you *must* not include the
+    #   random suffix. If you do include the random suffix added by Secrets
+    #   Manager, you receive either a *ResourceNotFoundException* or an
+    #   *AccessDeniedException* error, depending on your permissions.
     #
     #    </note>
     #   @return [String]
@@ -608,6 +631,10 @@ module Aws::SecretsManager
     #   Returns the name of the service that created this secret.
     #   @return [String]
     #
+    # @!attribute [rw] created_date
+    #   The date that the secret was created.
+    #   @return [Time]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/secretsmanager-2017-10-17/DescribeSecretResponse AWS API Documentation
     #
     class DescribeSecretResponse < Struct.new(
@@ -624,7 +651,8 @@ module Aws::SecretsManager
       :deleted_date,
       :tags,
       :version_ids_to_stages,
-      :owning_service)
+      :owning_service,
+      :created_date)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -645,6 +673,33 @@ module Aws::SecretsManager
     #
     class EncryptionFailure < Struct.new(
       :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Allows you to filter your list of secrets.
+    #
+    # @note When making an API call, you may pass Filter
+    #   data as a hash:
+    #
+    #       {
+    #         key: "description", # accepts description, name, tag-key, tag-value, all
+    #         values: ["FilterValueStringType"],
+    #       }
+    #
+    # @!attribute [rw] key
+    #   Filters your list of secrets by a specific key.
+    #   @return [String]
+    #
+    # @!attribute [rw] values
+    #   Filters your list of secrets by a specific value.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/secretsmanager-2017-10-17/Filter AWS API Documentation
+    #
+    class Filter < Struct.new(
+      :key,
+      :values)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -768,8 +823,14 @@ module Aws::SecretsManager
     #   partial ARN, then those characters cause Secrets Manager to assume
     #   that you’re specifying a complete ARN. This confusion can cause
     #   unexpected results. To avoid this situation, we recommend that you
-    #   don’t create secret names that end with a hyphen followed by six
+    #   don’t create secret names ending with a hyphen followed by six
     #   characters.
+    #
+    #    If you specify an incomplete ARN without the random suffix, and
+    #   instead provide the 'friendly name', you *must* not include the
+    #   random suffix. If you do include the random suffix added by Secrets
+    #   Manager, you receive either a *ResourceNotFoundException* or an
+    #   *AccessDeniedException* error, depending on your permissions.
     #
     #    </note>
     #   @return [String]
@@ -841,8 +902,14 @@ module Aws::SecretsManager
     #   partial ARN, then those characters cause Secrets Manager to assume
     #   that you’re specifying a complete ARN. This confusion can cause
     #   unexpected results. To avoid this situation, we recommend that you
-    #   don’t create secret names that end with a hyphen followed by six
+    #   don’t create secret names ending with a hyphen followed by six
     #   characters.
+    #
+    #    If you specify an incomplete ARN without the random suffix, and
+    #   instead provide the 'friendly name', you *must* not include the
+    #   random suffix. If you do include the random suffix added by Secrets
+    #   Manager, you receive either a *ResourceNotFoundException* or an
+    #   *AccessDeniedException* error, depending on your permissions.
     #
     #    </note>
     #   @return [String]
@@ -1055,15 +1122,21 @@ module Aws::SecretsManager
     #   partial ARN, then those characters cause Secrets Manager to assume
     #   that you’re specifying a complete ARN. This confusion can cause
     #   unexpected results. To avoid this situation, we recommend that you
-    #   don’t create secret names that end with a hyphen followed by six
+    #   don’t create secret names ending with a hyphen followed by six
     #   characters.
+    #
+    #    If you specify an incomplete ARN without the random suffix, and
+    #   instead provide the 'friendly name', you *must* not include the
+    #   random suffix. If you do include the random suffix added by Secrets
+    #   Manager, you receive either a *ResourceNotFoundException* or an
+    #   *AccessDeniedException* error, depending on your permissions.
     #
     #    </note>
     #   @return [String]
     #
     # @!attribute [rw] max_results
-    #   (Optional) Limits the number of results that you want to include in
-    #   the response. If you don't include this parameter, it defaults to a
+    #   (Optional) Limits the number of results you want to include in the
+    #   response. If you don't include this parameter, it defaults to a
     #   value that's specific to the operation. If additional items exist
     #   beyond the maximum you specify, the `NextToken` response element is
     #   present and has a value (isn't null). Include that value as the
@@ -1076,10 +1149,10 @@ module Aws::SecretsManager
     #
     # @!attribute [rw] next_token
     #   (Optional) Use this parameter in a request if you receive a
-    #   `NextToken` response in a previous request that indicates that
-    #   there's more output available. In a subsequent call, set it to the
-    #   value of the previous call's `NextToken` response to indicate where
-    #   the output should continue from.
+    #   `NextToken` response in a previous request indicating there's more
+    #   output available. In a subsequent call, set it to the value of the
+    #   previous call `NextToken` response to indicate where the output
+    #   should continue from.
     #   @return [String]
     #
     # @!attribute [rw] include_deprecated
@@ -1107,10 +1180,10 @@ module Aws::SecretsManager
     #
     # @!attribute [rw] next_token
     #   If present in the response, this value indicates that there's more
-    #   output available than what's included in the current response. This
-    #   can occur even when the response includes no values at all, such as
-    #   when you ask for a filtered view of a very long list. Use this value
-    #   in the `NextToken` request parameter in a subsequent call to the
+    #   output available than included in the current response. This can
+    #   occur even when the response includes no values at all, such as when
+    #   you ask for a filtered view of a very long list. Use this value in
+    #   the `NextToken` request parameter in a subsequent call to the
     #   operation to continue processing and get the next part of the
     #   output. You should repeat this until the `NextToken` response
     #   element comes back empty (as `null`).
@@ -1151,11 +1224,18 @@ module Aws::SecretsManager
     #       {
     #         max_results: 1,
     #         next_token: "NextTokenType",
+    #         filters: [
+    #           {
+    #             key: "description", # accepts description, name, tag-key, tag-value, all
+    #             values: ["FilterValueStringType"],
+    #           },
+    #         ],
+    #         sort_order: "asc", # accepts asc, desc
     #       }
     #
     # @!attribute [rw] max_results
-    #   (Optional) Limits the number of results that you want to include in
-    #   the response. If you don't include this parameter, it defaults to a
+    #   (Optional) Limits the number of results you want to include in the
+    #   response. If you don't include this parameter, it defaults to a
     #   value that's specific to the operation. If additional items exist
     #   beyond the maximum you specify, the `NextToken` response element is
     #   present and has a value (isn't null). Include that value as the
@@ -1168,17 +1248,27 @@ module Aws::SecretsManager
     #
     # @!attribute [rw] next_token
     #   (Optional) Use this parameter in a request if you receive a
-    #   `NextToken` response in a previous request that indicates that
-    #   there's more output available. In a subsequent call, set it to the
-    #   value of the previous call's `NextToken` response to indicate where
-    #   the output should continue from.
+    #   `NextToken` response in a previous request indicating there's more
+    #   output available. In a subsequent call, set it to the value of the
+    #   previous call `NextToken` response to indicate where the output
+    #   should continue from.
+    #   @return [String]
+    #
+    # @!attribute [rw] filters
+    #   Lists the secret request filters.
+    #   @return [Array<Types::Filter>]
+    #
+    # @!attribute [rw] sort_order
+    #   Lists secrets in the requested order.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/secretsmanager-2017-10-17/ListSecretsRequest AWS API Documentation
     #
     class ListSecretsRequest < Struct.new(
       :max_results,
-      :next_token)
+      :next_token,
+      :filters,
+      :sort_order)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1189,10 +1279,10 @@ module Aws::SecretsManager
     #
     # @!attribute [rw] next_token
     #   If present in the response, this value indicates that there's more
-    #   output available than what's included in the current response. This
-    #   can occur even when the response includes no values at all, such as
-    #   when you ask for a filtered view of a very long list. Use this value
-    #   in the `NextToken` request parameter in a subsequent call to the
+    #   output available than included in the current response. This can
+    #   occur even when the response includes no values at all, such as when
+    #   you ask for a filtered view of a very long list. Use this value in
+    #   the `NextToken` request parameter in a subsequent call to the
     #   operation to continue processing and get the next part of the
     #   output. You should repeat this until the `NextToken` response
     #   element comes back empty (as `null`).
@@ -1234,12 +1324,26 @@ module Aws::SecretsManager
       include Aws::Structure
     end
 
+    # The resource policy did not prevent broad access to the secret.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/secretsmanager-2017-10-17/PublicPolicyException AWS API Documentation
+    #
+    class PublicPolicyException < Struct.new(
+      :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass PutResourcePolicyRequest
     #   data as a hash:
     #
     #       {
     #         secret_id: "SecretIdType", # required
     #         resource_policy: "NonEmptyResourcePolicyType", # required
+    #         block_public_policy: false,
     #       }
     #
     # @!attribute [rw] secret_id
@@ -1258,8 +1362,14 @@ module Aws::SecretsManager
     #   partial ARN, then those characters cause Secrets Manager to assume
     #   that you’re specifying a complete ARN. This confusion can cause
     #   unexpected results. To avoid this situation, we recommend that you
-    #   don’t create secret names that end with a hyphen followed by six
+    #   don’t create secret names ending with a hyphen followed by six
     #   characters.
+    #
+    #    If you specify an incomplete ARN without the random suffix, and
+    #   instead provide the 'friendly name', you *must* not include the
+    #   random suffix. If you do include the random suffix added by Secrets
+    #   Manager, you receive either a *ResourceNotFoundException* or an
+    #   *AccessDeniedException* error, depending on your permissions.
     #
     #    </note>
     #   @return [String]
@@ -1277,23 +1387,28 @@ module Aws::SecretsManager
     #   [1]: http://docs.aws.amazon.com/cli/latest/userguide/cli-using-param.html#cli-using-param-json
     #   @return [String]
     #
+    # @!attribute [rw] block_public_policy
+    #   Makes an optional API call to Zelkova to validate the Resource
+    #   Policy to prevent broad access to your secret.
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/secretsmanager-2017-10-17/PutResourcePolicyRequest AWS API Documentation
     #
     class PutResourcePolicyRequest < Struct.new(
       :secret_id,
-      :resource_policy)
+      :resource_policy,
+      :block_public_policy)
       SENSITIVE = []
       include Aws::Structure
     end
 
     # @!attribute [rw] arn
-    #   The ARN of the secret that the resource-based policy was retrieved
-    #   for.
+    #   The ARN of the secret retrieved by the resource-based policy.
     #   @return [String]
     #
     # @!attribute [rw] name
-    #   The friendly name of the secret that the resource-based policy was
-    #   retrieved for.
+    #   The friendly name of the secret that the retrieved by the
+    #   resource-based policy.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/secretsmanager-2017-10-17/PutResourcePolicyResponse AWS API Documentation
@@ -1332,8 +1447,14 @@ module Aws::SecretsManager
     #   partial ARN, then those characters cause Secrets Manager to assume
     #   that you’re specifying a complete ARN. This confusion can cause
     #   unexpected results. To avoid this situation, we recommend that you
-    #   don’t create secret names that end with a hyphen followed by six
+    #   don’t create secret names ending with a hyphen followed by six
     #   characters.
+    #
+    #    If you specify an incomplete ARN without the random suffix, and
+    #   instead provide the 'friendly name', you *must* not include the
+    #   random suffix. If you do include the random suffix added by Secrets
+    #   Manager, you receive either a *ResourceNotFoundException* or an
+    #   *AccessDeniedException* error, depending on your permissions.
     #
     #    </note>
     #   @return [String]
@@ -1366,7 +1487,7 @@ module Aws::SecretsManager
     #     the request then the request is ignored (the operation is
     #     idempotent).
     #
-    #   * If a version with this value already exists and that version's
+    #   * If a version with this value already exists and the version of the
     #     `SecretString` and `SecretBinary` values are different from those
     #     in the request then the request fails because you cannot modify an
     #     existing secret version. You can only create new versions to store
@@ -1536,8 +1657,14 @@ module Aws::SecretsManager
     #   partial ARN, then those characters cause Secrets Manager to assume
     #   that you’re specifying a complete ARN. This confusion can cause
     #   unexpected results. To avoid this situation, we recommend that you
-    #   don’t create secret names that end with a hyphen followed by six
+    #   don’t create secret names ending with a hyphen followed by six
     #   characters.
+    #
+    #    If you specify an incomplete ARN without the random suffix, and
+    #   instead provide the 'friendly name', you *must* not include the
+    #   random suffix. If you do include the random suffix added by Secrets
+    #   Manager, you receive either a *ResourceNotFoundException* or an
+    #   *AccessDeniedException* error, depending on your permissions.
     #
     #    </note>
     #   @return [String]
@@ -1594,8 +1721,14 @@ module Aws::SecretsManager
     #   partial ARN, then those characters cause Secrets Manager to assume
     #   that you’re specifying a complete ARN. This confusion can cause
     #   unexpected results. To avoid this situation, we recommend that you
-    #   don’t create secret names that end with a hyphen followed by six
+    #   don’t create secret names ending with a hyphen followed by six
     #   characters.
+    #
+    #    If you specify an incomplete ARN without the random suffix, and
+    #   instead provide the 'friendly name', you *must* not include the
+    #   random suffix. If you do include the random suffix added by Secrets
+    #   Manager, you receive either a *ResourceNotFoundException* or an
+    #   *AccessDeniedException* error, depending on your permissions.
     #
     #    </note>
     #   @return [String]
@@ -1612,10 +1745,10 @@ module Aws::SecretsManager
     #   generate a `ClientRequestToken` yourself for new versions and
     #   include that value in the request.
     #
-    #   You only need to specify your own value if you are implementing your
-    #   own retry logic and want to ensure that a given secret is not
-    #   created twice. We recommend that you generate a [UUID-type][1] value
-    #   to ensure uniqueness within the specified secret.
+    #   You only need to specify your own value if you implement your own
+    #   retry logic and want to ensure that a given secret is not created
+    #   twice. We recommend that you generate a [UUID-type][1] value to
+    #   ensure uniqueness within the specified secret.
     #
     #   Secrets Manager uses this value to prevent the accidental creation
     #   of duplicate versions if there are failures and retries during the
@@ -1730,11 +1863,11 @@ module Aws::SecretsManager
     #   @return [String]
     #
     # @!attribute [rw] kms_key_id
-    #   The ARN or alias of the AWS KMS customer master key (CMK) that's
-    #   used to encrypt the `SecretString` and `SecretBinary` fields in each
-    #   version of the secret. If you don't provide a key, then Secrets
-    #   Manager defaults to encrypting the secret fields with the default
-    #   KMS CMK (the one named `awssecretsmanager`) for this account.
+    #   The ARN or alias of the AWS KMS customer master key (CMK) used to
+    #   encrypt the `SecretString` and `SecretBinary` fields in each version
+    #   of the secret. If you don't provide a key, then Secrets Manager
+    #   defaults to encrypting the secret fields with the default KMS CMK,
+    #   the key named `awssecretsmanager`, for this account.
     #   @return [String]
     #
     # @!attribute [rw] rotation_enabled
@@ -1743,9 +1876,9 @@ module Aws::SecretsManager
     #   @return [Boolean]
     #
     # @!attribute [rw] rotation_lambda_arn
-    #   The ARN of an AWS Lambda function that's invoked by Secrets Manager
-    #   to rotate and expire the secret either automatically per the
-    #   schedule or manually by a call to RotateSecret.
+    #   The ARN of an AWS Lambda function invoked by Secrets Manager to
+    #   rotate and expire the secret either automatically per the schedule
+    #   or manually by a call to RotateSecret.
     #   @return [String]
     #
     # @!attribute [rw] rotation_rules
@@ -1768,21 +1901,21 @@ module Aws::SecretsManager
     #   @return [Time]
     #
     # @!attribute [rw] deleted_date
-    #   The date and time on which this secret was deleted. Not present on
-    #   active secrets. The secret can be recovered until the number of days
-    #   in the recovery window has passed, as specified in the
+    #   The date and time the deletion of the secret occurred. Not present
+    #   on active secrets. The secret can be recovered until the number of
+    #   days in the recovery window has passed, as specified in the
     #   `RecoveryWindowInDays` parameter of the DeleteSecret operation.
     #   @return [Time]
     #
     # @!attribute [rw] tags
-    #   The list of user-defined tags that are associated with the secret.
-    #   To add tags to a secret, use TagResource. To remove tags, use
+    #   The list of user-defined tags associated with the secret. To add
+    #   tags to a secret, use TagResource. To remove tags, use
     #   UntagResource.
     #   @return [Array<Types::Tag>]
     #
     # @!attribute [rw] secret_versions_to_stages
     #   A list of all of the currently assigned `SecretVersionStage` staging
-    #   labels and the `SecretVersionId` that each is attached to. Staging
+    #   labels and the `SecretVersionId` attached to each one. Staging
     #   labels are used to keep track of the different versions during the
     #   rotation process.
     #
@@ -1796,6 +1929,10 @@ module Aws::SecretsManager
     # @!attribute [rw] owning_service
     #   Returns the name of the service that created the secret.
     #   @return [String]
+    #
+    # @!attribute [rw] created_date
+    #   The date and time when a secret was created.
+    #   @return [Time]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/secretsmanager-2017-10-17/SecretListEntry AWS API Documentation
     #
@@ -1813,7 +1950,8 @@ module Aws::SecretsManager
       :deleted_date,
       :tags,
       :secret_versions_to_stages,
-      :owning_service)
+      :owning_service,
+      :created_date)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1865,7 +2003,7 @@ module Aws::SecretsManager
     #   @return [String]
     #
     # @!attribute [rw] value
-    #   The string value that's associated with the key of the tag.
+    #   The string value associated with the key of the tag.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/secretsmanager-2017-10-17/Tag AWS API Documentation
@@ -1906,8 +2044,14 @@ module Aws::SecretsManager
     #   partial ARN, then those characters cause Secrets Manager to assume
     #   that you’re specifying a complete ARN. This confusion can cause
     #   unexpected results. To avoid this situation, we recommend that you
-    #   don’t create secret names that end with a hyphen followed by six
+    #   don’t create secret names ending with a hyphen followed by six
     #   characters.
+    #
+    #    If you specify an incomplete ARN without the random suffix, and
+    #   instead provide the 'friendly name', you *must* not include the
+    #   random suffix. If you do include the random suffix added by Secrets
+    #   Manager, you receive either a *ResourceNotFoundException* or an
+    #   *AccessDeniedException* error, depending on your permissions.
     #
     #    </note>
     #   @return [String]
@@ -1961,8 +2105,14 @@ module Aws::SecretsManager
     #   partial ARN, then those characters cause Secrets Manager to assume
     #   that you’re specifying a complete ARN. This confusion can cause
     #   unexpected results. To avoid this situation, we recommend that you
-    #   don’t create secret names that end with a hyphen followed by six
+    #   don’t create secret names ending with a hyphen followed by six
     #   characters.
+    #
+    #    If you specify an incomplete ARN without the random suffix, and
+    #   instead provide the 'friendly name', you *must* not include the
+    #   random suffix. If you do include the random suffix added by Secrets
+    #   Manager, you receive either a *ResourceNotFoundException* or an
+    #   *AccessDeniedException* error, depending on your permissions.
     #
     #    </note>
     #   @return [String]
@@ -2019,8 +2169,14 @@ module Aws::SecretsManager
     #   partial ARN, then those characters cause Secrets Manager to assume
     #   that you’re specifying a complete ARN. This confusion can cause
     #   unexpected results. To avoid this situation, we recommend that you
-    #   don’t create secret names that end with a hyphen followed by six
+    #   don’t create secret names ending with a hyphen followed by six
     #   characters.
+    #
+    #    If you specify an incomplete ARN without the random suffix, and
+    #   instead provide the 'friendly name', you *must* not include the
+    #   random suffix. If you do include the random suffix added by Secrets
+    #   Manager, you receive either a *ResourceNotFoundException* or an
+    #   *AccessDeniedException* error, depending on your permissions.
     #
     #    </note>
     #   @return [String]
@@ -2191,9 +2347,9 @@ module Aws::SecretsManager
     #       }
     #
     # @!attribute [rw] secret_id
-    #   Specifies the secret with the version whose list of staging labels
-    #   you want to modify. You can specify either the Amazon Resource Name
-    #   (ARN) or the friendly name of the secret.
+    #   Specifies the secret with the version with the list of staging
+    #   labels you want to modify. You can specify either the Amazon
+    #   Resource Name (ARN) or the friendly name of the secret.
     #
     #   <note markdown="1"> If you specify an ARN, we generally recommend that you specify a
     #   complete ARN. You can specify a partial ARN too—for example, if you
@@ -2206,8 +2362,14 @@ module Aws::SecretsManager
     #   partial ARN, then those characters cause Secrets Manager to assume
     #   that you’re specifying a complete ARN. This confusion can cause
     #   unexpected results. To avoid this situation, we recommend that you
-    #   don’t create secret names that end with a hyphen followed by six
+    #   don’t create secret names ending with a hyphen followed by six
     #   characters.
+    #
+    #    If you specify an incomplete ARN without the random suffix, and
+    #   instead provide the 'friendly name', you *must* not include the
+    #   random suffix. If you do include the random suffix added by Secrets
+    #   Manager, you receive either a *ResourceNotFoundException* or an
+    #   *AccessDeniedException* error, depending on your permissions.
     #
     #    </note>
     #   @return [String]
@@ -2228,7 +2390,7 @@ module Aws::SecretsManager
     #
     # @!attribute [rw] move_to_version_id
     #   (Optional) The secret version ID that you want to add the staging
-    #   label to. If you want to remove a label from a version, then do not
+    #   label. If you want to remove a label from a version, then do not
     #   specify this parameter.
     #
     #   If the staging label is already attached to a different version of
@@ -2248,12 +2410,11 @@ module Aws::SecretsManager
     end
 
     # @!attribute [rw] arn
-    #   The ARN of the secret with the staging label that was modified.
+    #   The ARN of the secret with the modified staging label.
     #   @return [String]
     #
     # @!attribute [rw] name
-    #   The friendly name of the secret with the staging label that was
-    #   modified.
+    #   The friendly name of the secret with the modified staging label.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/secretsmanager-2017-10-17/UpdateSecretVersionStageResponse AWS API Documentation
@@ -2261,6 +2422,94 @@ module Aws::SecretsManager
     class UpdateSecretVersionStageResponse < Struct.new(
       :arn,
       :name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass ValidateResourcePolicyRequest
+    #   data as a hash:
+    #
+    #       {
+    #         secret_id: "SecretIdType",
+    #         resource_policy: "NonEmptyResourcePolicyType", # required
+    #       }
+    #
+    # @!attribute [rw] secret_id
+    #   The identifier for the secret that you want to validate a resource
+    #   policy. You can specify either the Amazon Resource Name (ARN) or the
+    #   friendly name of the secret.
+    #
+    #   <note markdown="1"> If you specify an ARN, we generally recommend that you specify a
+    #   complete ARN. You can specify a partial ARN too—for example, if you
+    #   don’t include the final hyphen and six random characters that
+    #   Secrets Manager adds at the end of the ARN when you created the
+    #   secret. A partial ARN match can work as long as it uniquely matches
+    #   only one secret. However, if your secret has a name that ends in a
+    #   hyphen followed by six characters (before Secrets Manager adds the
+    #   hyphen and six characters to the ARN) and you try to use that as a
+    #   partial ARN, then those characters cause Secrets Manager to assume
+    #   that you’re specifying a complete ARN. This confusion can cause
+    #   unexpected results. To avoid this situation, we recommend that you
+    #   don’t create secret names ending with a hyphen followed by six
+    #   characters.
+    #
+    #    If you specify an incomplete ARN without the random suffix, and
+    #   instead provide the 'friendly name', you *must* not include the
+    #   random suffix. If you do include the random suffix added by Secrets
+    #   Manager, you receive either a *ResourceNotFoundException* or an
+    #   *AccessDeniedException* error, depending on your permissions.
+    #
+    #    </note>
+    #   @return [String]
+    #
+    # @!attribute [rw] resource_policy
+    #   Identifies the Resource Policy attached to the secret.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/secretsmanager-2017-10-17/ValidateResourcePolicyRequest AWS API Documentation
+    #
+    class ValidateResourcePolicyRequest < Struct.new(
+      :secret_id,
+      :resource_policy)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] policy_validation_passed
+    #   Returns a message stating that your Reource Policy passed
+    #   validation.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] validation_errors
+    #   Returns an error message if your policy doesn't pass validatation.
+    #   @return [Array<Types::ValidationErrorsEntry>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/secretsmanager-2017-10-17/ValidateResourcePolicyResponse AWS API Documentation
+    #
+    class ValidateResourcePolicyResponse < Struct.new(
+      :policy_validation_passed,
+      :validation_errors)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Displays errors that occurred during validation of the resource
+    # policy.
+    #
+    # @!attribute [rw] check_name
+    #   Checks the name of the policy.
+    #   @return [String]
+    #
+    # @!attribute [rw] error_message
+    #   Displays error messages if validation encounters problems during
+    #   validation of the resource policy.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/secretsmanager-2017-10-17/ValidationErrorsEntry AWS API Documentation
+    #
+    class ValidationErrorsEntry < Struct.new(
+      :check_name,
+      :error_message)
       SENSITIVE = []
       include Aws::Structure
     end

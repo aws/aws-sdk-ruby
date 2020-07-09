@@ -38,6 +38,11 @@ module Aws::SecretsManager
     ExcludeNumbersType = Shapes::BooleanShape.new(name: 'ExcludeNumbersType')
     ExcludePunctuationType = Shapes::BooleanShape.new(name: 'ExcludePunctuationType')
     ExcludeUppercaseType = Shapes::BooleanShape.new(name: 'ExcludeUppercaseType')
+    Filter = Shapes::StructureShape.new(name: 'Filter')
+    FilterNameStringType = Shapes::StringShape.new(name: 'FilterNameStringType')
+    FilterValueStringType = Shapes::StringShape.new(name: 'FilterValueStringType')
+    FilterValuesStringList = Shapes::ListShape.new(name: 'FilterValuesStringList')
+    FiltersListType = Shapes::ListShape.new(name: 'FiltersListType')
     GetRandomPasswordRequest = Shapes::StructureShape.new(name: 'GetRandomPasswordRequest')
     GetRandomPasswordResponse = Shapes::StructureShape.new(name: 'GetRandomPasswordResponse')
     GetResourcePolicyRequest = Shapes::StructureShape.new(name: 'GetResourcePolicyRequest')
@@ -66,6 +71,7 @@ module Aws::SecretsManager
     OwningServiceType = Shapes::StringShape.new(name: 'OwningServiceType')
     PasswordLengthType = Shapes::IntegerShape.new(name: 'PasswordLengthType')
     PreconditionNotMetException = Shapes::StructureShape.new(name: 'PreconditionNotMetException')
+    PublicPolicyException = Shapes::StructureShape.new(name: 'PublicPolicyException')
     PutResourcePolicyRequest = Shapes::StructureShape.new(name: 'PutResourcePolicyRequest')
     PutResourcePolicyResponse = Shapes::StructureShape.new(name: 'PutResourcePolicyResponse')
     PutSecretValueRequest = Shapes::StructureShape.new(name: 'PutSecretValueRequest')
@@ -95,17 +101,23 @@ module Aws::SecretsManager
     SecretVersionsListEntry = Shapes::StructureShape.new(name: 'SecretVersionsListEntry')
     SecretVersionsListType = Shapes::ListShape.new(name: 'SecretVersionsListType')
     SecretVersionsToStagesMapType = Shapes::MapShape.new(name: 'SecretVersionsToStagesMapType')
+    SortOrderType = Shapes::StringShape.new(name: 'SortOrderType')
     Tag = Shapes::StructureShape.new(name: 'Tag')
     TagKeyListType = Shapes::ListShape.new(name: 'TagKeyListType')
     TagKeyType = Shapes::StringShape.new(name: 'TagKeyType')
     TagListType = Shapes::ListShape.new(name: 'TagListType')
     TagResourceRequest = Shapes::StructureShape.new(name: 'TagResourceRequest')
     TagValueType = Shapes::StringShape.new(name: 'TagValueType')
+    TimestampType = Shapes::TimestampShape.new(name: 'TimestampType')
     UntagResourceRequest = Shapes::StructureShape.new(name: 'UntagResourceRequest')
     UpdateSecretRequest = Shapes::StructureShape.new(name: 'UpdateSecretRequest')
     UpdateSecretResponse = Shapes::StructureShape.new(name: 'UpdateSecretResponse')
     UpdateSecretVersionStageRequest = Shapes::StructureShape.new(name: 'UpdateSecretVersionStageRequest')
     UpdateSecretVersionStageResponse = Shapes::StructureShape.new(name: 'UpdateSecretVersionStageResponse')
+    ValidateResourcePolicyRequest = Shapes::StructureShape.new(name: 'ValidateResourcePolicyRequest')
+    ValidateResourcePolicyResponse = Shapes::StructureShape.new(name: 'ValidateResourcePolicyResponse')
+    ValidationErrorsEntry = Shapes::StructureShape.new(name: 'ValidationErrorsEntry')
+    ValidationErrorsType = Shapes::ListShape.new(name: 'ValidationErrorsType')
 
     CancelRotateSecretRequest.add_member(:secret_id, Shapes::ShapeRef.new(shape: SecretIdType, required: true, location_name: "SecretId"))
     CancelRotateSecretRequest.struct_class = Types::CancelRotateSecretRequest
@@ -166,10 +178,19 @@ module Aws::SecretsManager
     DescribeSecretResponse.add_member(:tags, Shapes::ShapeRef.new(shape: TagListType, location_name: "Tags"))
     DescribeSecretResponse.add_member(:version_ids_to_stages, Shapes::ShapeRef.new(shape: SecretVersionsToStagesMapType, location_name: "VersionIdsToStages"))
     DescribeSecretResponse.add_member(:owning_service, Shapes::ShapeRef.new(shape: OwningServiceType, location_name: "OwningService"))
+    DescribeSecretResponse.add_member(:created_date, Shapes::ShapeRef.new(shape: TimestampType, location_name: "CreatedDate", metadata: {"box"=>true}))
     DescribeSecretResponse.struct_class = Types::DescribeSecretResponse
 
     EncryptionFailure.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
     EncryptionFailure.struct_class = Types::EncryptionFailure
+
+    Filter.add_member(:key, Shapes::ShapeRef.new(shape: FilterNameStringType, location_name: "Key"))
+    Filter.add_member(:values, Shapes::ShapeRef.new(shape: FilterValuesStringList, location_name: "Values"))
+    Filter.struct_class = Types::Filter
+
+    FilterValuesStringList.member = Shapes::ShapeRef.new(shape: FilterValueStringType)
+
+    FiltersListType.member = Shapes::ShapeRef.new(shape: Filter)
 
     GetRandomPasswordRequest.add_member(:password_length, Shapes::ShapeRef.new(shape: PasswordLengthType, location_name: "PasswordLength", metadata: {"box"=>true}))
     GetRandomPasswordRequest.add_member(:exclude_characters, Shapes::ShapeRef.new(shape: ExcludeCharactersType, location_name: "ExcludeCharacters"))
@@ -235,6 +256,8 @@ module Aws::SecretsManager
 
     ListSecretsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResultsType, location_name: "MaxResults", metadata: {"box"=>true}))
     ListSecretsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextTokenType, location_name: "NextToken"))
+    ListSecretsRequest.add_member(:filters, Shapes::ShapeRef.new(shape: FiltersListType, location_name: "Filters"))
+    ListSecretsRequest.add_member(:sort_order, Shapes::ShapeRef.new(shape: SortOrderType, location_name: "SortOrder"))
     ListSecretsRequest.struct_class = Types::ListSecretsRequest
 
     ListSecretsResponse.add_member(:secret_list, Shapes::ShapeRef.new(shape: SecretListType, location_name: "SecretList"))
@@ -247,8 +270,12 @@ module Aws::SecretsManager
     PreconditionNotMetException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
     PreconditionNotMetException.struct_class = Types::PreconditionNotMetException
 
+    PublicPolicyException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
+    PublicPolicyException.struct_class = Types::PublicPolicyException
+
     PutResourcePolicyRequest.add_member(:secret_id, Shapes::ShapeRef.new(shape: SecretIdType, required: true, location_name: "SecretId"))
     PutResourcePolicyRequest.add_member(:resource_policy, Shapes::ShapeRef.new(shape: NonEmptyResourcePolicyType, required: true, location_name: "ResourcePolicy"))
+    PutResourcePolicyRequest.add_member(:block_public_policy, Shapes::ShapeRef.new(shape: BooleanType, location_name: "BlockPublicPolicy", metadata: {"box"=>true}))
     PutResourcePolicyRequest.struct_class = Types::PutResourcePolicyRequest
 
     PutResourcePolicyResponse.add_member(:arn, Shapes::ShapeRef.new(shape: SecretARNType, location_name: "ARN"))
@@ -309,6 +336,7 @@ module Aws::SecretsManager
     SecretListEntry.add_member(:tags, Shapes::ShapeRef.new(shape: TagListType, location_name: "Tags"))
     SecretListEntry.add_member(:secret_versions_to_stages, Shapes::ShapeRef.new(shape: SecretVersionsToStagesMapType, location_name: "SecretVersionsToStages"))
     SecretListEntry.add_member(:owning_service, Shapes::ShapeRef.new(shape: OwningServiceType, location_name: "OwningService"))
+    SecretListEntry.add_member(:created_date, Shapes::ShapeRef.new(shape: TimestampType, location_name: "CreatedDate", metadata: {"box"=>true}))
     SecretListEntry.struct_class = Types::SecretListEntry
 
     SecretListType.member = Shapes::ShapeRef.new(shape: SecretListEntry)
@@ -364,6 +392,20 @@ module Aws::SecretsManager
     UpdateSecretVersionStageResponse.add_member(:arn, Shapes::ShapeRef.new(shape: SecretARNType, location_name: "ARN"))
     UpdateSecretVersionStageResponse.add_member(:name, Shapes::ShapeRef.new(shape: SecretNameType, location_name: "Name"))
     UpdateSecretVersionStageResponse.struct_class = Types::UpdateSecretVersionStageResponse
+
+    ValidateResourcePolicyRequest.add_member(:secret_id, Shapes::ShapeRef.new(shape: SecretIdType, location_name: "SecretId"))
+    ValidateResourcePolicyRequest.add_member(:resource_policy, Shapes::ShapeRef.new(shape: NonEmptyResourcePolicyType, required: true, location_name: "ResourcePolicy"))
+    ValidateResourcePolicyRequest.struct_class = Types::ValidateResourcePolicyRequest
+
+    ValidateResourcePolicyResponse.add_member(:policy_validation_passed, Shapes::ShapeRef.new(shape: BooleanType, location_name: "PolicyValidationPassed"))
+    ValidateResourcePolicyResponse.add_member(:validation_errors, Shapes::ShapeRef.new(shape: ValidationErrorsType, location_name: "ValidationErrors"))
+    ValidateResourcePolicyResponse.struct_class = Types::ValidateResourcePolicyResponse
+
+    ValidationErrorsEntry.add_member(:check_name, Shapes::ShapeRef.new(shape: NameType, location_name: "CheckName"))
+    ValidationErrorsEntry.add_member(:error_message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "ErrorMessage"))
+    ValidationErrorsEntry.struct_class = Types::ValidationErrorsEntry
+
+    ValidationErrorsType.member = Shapes::ShapeRef.new(shape: ValidationErrorsEntry)
 
 
     # @api private
@@ -526,6 +568,7 @@ module Aws::SecretsManager
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServiceError)
         o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: PublicPolicyException)
       end)
 
       api.add_operation(:put_secret_value, Seahorse::Model::Operation.new.tap do |o|
@@ -619,6 +662,19 @@ module Aws::SecretsManager
         o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
         o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServiceError)
+      end)
+
+      api.add_operation(:validate_resource_policy, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ValidateResourcePolicy"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: ValidateResourcePolicyRequest)
+        o.output = Shapes::ShapeRef.new(shape: ValidateResourcePolicyResponse)
+        o.errors << Shapes::ShapeRef.new(shape: MalformedPolicyDocumentException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServiceError)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
       end)
     end
 

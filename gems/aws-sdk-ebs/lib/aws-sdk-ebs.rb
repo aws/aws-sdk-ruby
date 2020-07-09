@@ -27,7 +27,7 @@ require_relative 'aws-sdk-ebs/customizations'
 # structure.
 #
 #     ebs = Aws::EBS::Client.new
-#     resp = ebs.get_snapshot_block(params)
+#     resp = ebs.complete_snapshot(params)
 #
 # See {Client} for more information.
 #
@@ -47,6 +47,6 @@ require_relative 'aws-sdk-ebs/customizations'
 # @service
 module Aws::EBS
 
-  GEM_VERSION = '1.6.0'
+  GEM_VERSION = '1.7.0'
 
 end

@@ -207,7 +207,7 @@ module Aws::SNS
     # @!attribute [rw] platform
     #   The following platforms are supported: ADM (Amazon Device
     #   Messaging), APNS (Apple Push Notification Service), APNS\_SANDBOX,
-    #   and FCM (Firebase Cloud Messaging).
+    #   and GCM (Firebase Cloud Messaging).
     #   @return [String]
     #
     # @!attribute [rw] attributes
@@ -266,8 +266,8 @@ module Aws::SNS
     #   a device. The specific name for Token will vary, depending on which
     #   notification service is being used. For example, when using APNS as
     #   the notification service, you need the device token. Alternatively,
-    #   when using FCM or ADM, the device token equivalent is called the
-    #   registration ID.
+    #   when using GCM (Firebase Cloud Messaging) or ADM, the device token
+    #   equivalent is called the registration ID.
     #   @return [String]
     #
     # @!attribute [rw] custom_user_data
@@ -319,6 +319,9 @@ module Aws::SNS
     #   Constraints: Topic names must be made up of only uppercase and
     #   lowercase ASCII letters, numbers, underscores, and hyphens, and must
     #   be between 1 and 256 characters long.
+    #
+    #   For a FIFO (first-in-first-out) topic, the name must end with the
+    #   `.fifo` suffix.
     #   @return [String]
     #
     # @!attribute [rw] attributes
@@ -333,6 +336,8 @@ module Aws::SNS
     #   * `DisplayName` – The display name to use for a topic with SMS
     #     subscriptions.
     #
+    #   * `FifoTopic` – Set to true to create a FIFO topic.
+    #
     #   * `Policy` – The policy that defines who can access your topic. By
     #     default, only the topic owner can publish or subscribe to the
     #     topic.
@@ -340,12 +345,27 @@ module Aws::SNS
     #   The following attribute applies only to
     #   [server-side-encryption][1]\:
     #
-    #   * `KmsMasterKeyId` - The ID of an AWS-managed customer master key
+    #   * `KmsMasterKeyId` – The ID of an AWS-managed customer master key
     #     (CMK) for Amazon SNS or a custom CMK. For more information, see
     #     [Key Terms][2]. For more examples, see [KeyId][3] in the *AWS Key
     #     Management Service API Reference*.
     #
     #   ^
+    #
+    #   The following attribute applies only to FIFO topics:
+    #
+    #   * `ContentBasedDeduplication` – Enables content-based deduplication.
+    #     Amazon SNS uses a SHA-256 hash to generate the
+    #     `MessageDeduplicationId` using the body of the message (but not
+    #     the attributes of the message).
+    #
+    #   * When `ContentBasedDeduplication` is in effect, messages with
+    #     identical content sent within the deduplication interval are
+    #     treated as duplicates and only one copy of the message is
+    #     delivered.
+    #
+    #   * If the queue has `ContentBasedDeduplication` set, your
+    #     `MessageDeduplicationId` overrides the generated one.
     #
     #
     #
@@ -680,7 +700,8 @@ module Aws::SNS
     #     delivery policy and account system defaults.
     #
     #   * `FilterPolicy` – The filter policy JSON that is assigned to the
-    #     subscription.
+    #     subscription. For more information, see [Amazon SNS Message
+    #     Filtering][1] in the *Amazon SNS Developer Guide*.
     #
     #   * `Owner` – The AWS account ID of the subscription's owner.
     #
@@ -704,6 +725,10 @@ module Aws::SNS
     #
     #   * `TopicArn` – The topic ARN that the subscription is associated
     #     with.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/sns/latest/dg/sns-message-filtering.html
     #   @return [Hash<String,String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sns-2010-03-31/GetSubscriptionAttributesResponse AWS API Documentation
@@ -763,7 +788,7 @@ module Aws::SNS
     #
     #   * `TopicArn` – The topic's ARN.
     #
-    #   * `EffectiveDeliveryPolicy` – Yhe JSON serialization of the
+    #   * `EffectiveDeliveryPolicy` – The JSON serialization of the
     #     effective delivery policy, taking system defaults into account.
     #
     #   The following attribute applies only to
@@ -1641,26 +1666,28 @@ module Aws::SNS
     #   include the following:
     #
     #   * `PlatformCredential` – The credential received from the
-    #     notification service. For APNS/APNS\_SANDBOX, PlatformCredential
-    #     is private key. For FCM, PlatformCredential is "API key". For
-    #     ADM, PlatformCredential is "client secret".
+    #     notification service. For `APNS` and `APNS_SANDBOX`,
+    #     `PlatformCredential` is `private key`. For `GCM` (Firebase Cloud
+    #     Messaging), `PlatformCredential` is `API key`. For `ADM`,
+    #     `PlatformCredential` is `client secret`.
     #
     #   * `PlatformPrincipal` – The principal received from the notification
-    #     service. For APNS/APNS\_SANDBOX, PlatformPrincipal is SSL
-    #     certificate. For FCM, PlatformPrincipal is not applicable. For
-    #     ADM, PlatformPrincipal is "client id".
+    #     service. For `APNS` and `APNS_SANDBOX`, `PlatformPrincipal` is
+    #     `SSL certificate`. For `GCM` (Firebase Cloud Messaging), there is
+    #     no `PlatformPrincipal`. For `ADM`, `PlatformPrincipal` is `client
+    #     id`.
     #
-    #   * `EventEndpointCreated` – Topic ARN to which EndpointCreated event
-    #     notifications should be sent.
+    #   * `EventEndpointCreated` – Topic ARN to which `EndpointCreated`
+    #     event notifications are sent.
     #
-    #   * `EventEndpointDeleted` – Topic ARN to which EndpointDeleted event
-    #     notifications should be sent.
+    #   * `EventEndpointDeleted` – Topic ARN to which `EndpointDeleted`
+    #     event notifications are sent.
     #
-    #   * `EventEndpointUpdated` – Topic ARN to which EndpointUpdate event
-    #     notifications should be sent.
+    #   * `EventEndpointUpdated` – Topic ARN to which `EndpointUpdate` event
+    #     notifications are sent.
     #
-    #   * `EventDeliveryFailure` – Topic ARN to which DeliveryFailure event
-    #     notifications should be sent upon Direct Publish delivery failure
+    #   * `EventDeliveryFailure` – Topic ARN to which `DeliveryFailure`
+    #     event notifications are sent upon Direct Publish delivery failure
     #     (permanent) to one of the application's endpoints.
     #
     #   * `SuccessFeedbackRoleArn` – IAM role ARN used to give Amazon SNS
@@ -1884,12 +1911,27 @@ module Aws::SNS
     #   The following attribute applies only to
     #   [server-side-encryption][1]\:
     #
-    #   * `KmsMasterKeyId` - The ID of an AWS-managed customer master key
+    #   * `KmsMasterKeyId` – The ID of an AWS-managed customer master key
     #     (CMK) for Amazon SNS or a custom CMK. For more information, see
     #     [Key Terms][2]. For more examples, see [KeyId][3] in the *AWS Key
     #     Management Service API Reference*.
     #
     #   ^
+    #
+    #   The following attribute applies only to FIFO topics:
+    #
+    #   * `ContentBasedDeduplication` – Enables content-based deduplication.
+    #     Amazon SNS uses a SHA-256 hash to generate the
+    #     `MessageDeduplicationId` using the body of the message (but not
+    #     the attributes of the message).
+    #
+    #   * When `ContentBasedDeduplication` is in effect, messages with
+    #     identical content sent within the deduplication interval are
+    #     treated as duplicates and only one copy of the message is
+    #     delivered.
+    #
+    #   * If the queue has `ContentBasedDeduplication` set, your
+    #     `MessageDeduplicationId` overrides the generated one.
     #
     #
     #
@@ -1971,11 +2013,11 @@ module Aws::SNS
     #   The endpoint that you want to receive notifications. Endpoints vary
     #   by protocol:
     #
-    #   * For the `http` protocol, the endpoint is an URL beginning with
-    #     `http://`
+    #   * For the `http` protocol, the (public) endpoint is a URL beginning
+    #     with `http://`
     #
-    #   * For the `https` protocol, the endpoint is a URL beginning with
-    #     `https://`
+    #   * For the `https` protocol, the (public) endpoint is a URL beginning
+    #     with `https://`
     #
     #   * For the `email` protocol, the endpoint is an email address
     #
@@ -2026,18 +2068,17 @@ module Aws::SNS
     #   Sets whether the response from the `Subscribe` request includes the
     #   subscription ARN, even if the subscription is not yet confirmed.
     #
-    #   * If you have the subscription ARN returned, the response includes
-    #     the ARN in all cases, even if the subscription is not yet
-    #     confirmed.
-    #
-    #   * If you don't have the subscription ARN returned, in addition to
-    #     the ARN for confirmed subscriptions, the response also includes
-    #     the `pending subscription` ARN value for subscriptions that
-    #     aren't yet confirmed. A subscription becomes confirmed when the
-    #     subscriber calls the `ConfirmSubscription` action with a
+    #   * If you set this parameter to `true`, the response includes the ARN
+    #     in all cases, even if the subscription is not yet confirmed. In
+    #     addition to the ARN for confirmed subscriptions, the response also
+    #     includes the `pending subscription` ARN value for subscriptions
+    #     that aren't yet confirmed. A subscription becomes confirmed when
+    #     the subscriber calls the `ConfirmSubscription` action with a
     #     confirmation token.
     #
-    #   If you set this parameter to `true`, .
+    #   ^
+    #
+    #
     #
     #   The default value is `false`.
     #   @return [Boolean]

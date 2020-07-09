@@ -33,6 +33,7 @@ module Aws::EventBridge
   # * {InvalidStateException}
   # * {LimitExceededException}
   # * {ManagedRuleException}
+  # * {OperationDisabledException}
   # * {PolicyLengthExceededException}
   # * {ResourceAlreadyExistsException}
   # * {ResourceNotFoundException}
@@ -98,6 +99,16 @@ module Aws::EventBridge
       # @param [Seahorse::Client::RequestContext] context
       # @param [String] message
       # @param [Aws::EventBridge::Types::ManagedRuleException] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+    end
+
+    class OperationDisabledException < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::EventBridge::Types::OperationDisabledException] data
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end

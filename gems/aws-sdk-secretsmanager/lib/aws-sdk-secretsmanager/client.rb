@@ -323,20 +323,20 @@ module Aws::SecretsManager
     # @!group API Operations
 
     # Disables automatic scheduled rotation and cancels the rotation of a
-    # secret if one is currently in progress.
+    # secret if currently in progress.
     #
     # To re-enable scheduled rotation, call RotateSecret with
     # `AutomaticallyRotateAfterDays` set to a value greater than 0. This
-    # will immediately rotate your secret and then enable the automatic
+    # immediately rotates your secret and then enables the automatic
     # schedule.
     #
-    # <note markdown="1"> If you cancel a rotation that is in progress, it can leave the
-    # `VersionStage` labels in an unexpected state. Depending on what step
-    # of the rotation was in progress, you might need to remove the staging
-    # label `AWSPENDING` from the partially created version, specified by
-    # the `VersionId` response value. You should also evaluate the partially
+    # <note markdown="1"> If you cancel a rotation while in progress, it can leave the
+    # `VersionStage` labels in an unexpected state. Depending on the step of
+    # the rotation in progress, you might need to remove the staging label
+    # `AWSPENDING` from the partially created version, specified by the
+    # `VersionId` response value. You should also evaluate the partially
     # rotated new version to see if it should be deleted, which you can do
-    # by removing all staging labels from the new version's `VersionStage`
+    # by removing all staging labels from the new version `VersionStage`
     # field.
     #
     #  </note>
@@ -344,12 +344,12 @@ module Aws::SecretsManager
     # To successfully start a rotation, the staging label `AWSPENDING` must
     # be in one of the following states:
     #
-    # * Not be attached to any version at all
+    # * Not attached to any version at all
     #
     # * Attached to the same version as the staging label `AWSCURRENT`
     #
-    # If the staging label `AWSPENDING` is attached to a different version
-    # than the version with `AWSCURRENT` then the attempt to rotate fails.
+    # If the staging label `AWSPENDING` attached to a different version than
+    # the version with `AWSCURRENT` then the attempt to rotate fails.
     #
     # **Minimum permissions**
     #
@@ -373,9 +373,9 @@ module Aws::SecretsManager
     #   ListSecretVersionIds.
     #
     # @option params [required, String] :secret_id
-    #   Specifies the secret for which you want to cancel a rotation request.
-    #   You can specify either the Amazon Resource Name (ARN) or the friendly
-    #   name of the secret.
+    #   Specifies the secret to cancel a rotation request. You can specify
+    #   either the Amazon Resource Name (ARN) or the friendly name of the
+    #   secret.
     #
     #   <note markdown="1"> If you specify an ARN, we generally recommend that you specify a
     #   complete ARN. You can specify a partial ARN too—for example, if you
@@ -388,7 +388,13 @@ module Aws::SecretsManager
     #   then those characters cause Secrets Manager to assume that you’re
     #   specifying a complete ARN. This confusion can cause unexpected
     #   results. To avoid this situation, we recommend that you don’t create
-    #   secret names that end with a hyphen followed by six characters.
+    #   secret names ending with a hyphen followed by six characters.
+    #
+    #    If you specify an incomplete ARN without the random suffix, and
+    #   instead provide the 'friendly name', you *must* not include the
+    #   random suffix. If you do include the random suffix added by Secrets
+    #   Manager, you receive either a *ResourceNotFoundException* or an
+    #   *AccessDeniedException* error, depending on your permissions.
     #
     #    </note>
     #
@@ -447,7 +453,7 @@ module Aws::SecretsManager
     # version is in the rotation cycle. The `SecretVersionsToStages` field
     # of the secret contains the mapping of staging labels to the active
     # versions of the secret. Versions without a staging label are
-    # considered deprecated and are not included in the list.
+    # considered deprecated and not included in the list.
     #
     # You provide the secret data to be encrypted by putting text in either
     # the `SecretString` parameter or binary data in the `SecretBinary`
@@ -456,29 +462,29 @@ module Aws::SecretsManager
     # version and automatically attaches the staging label `AWSCURRENT` to
     # the new version.
     #
-    # <note markdown="1"> * If you call an operation that needs to encrypt or decrypt the
-    #   `SecretString` or `SecretBinary` for a secret in the same account as
-    #   the calling user and that secret doesn't specify a AWS KMS
-    #   encryption key, Secrets Manager uses the account's default AWS
-    #   managed customer master key (CMK) with the alias
-    #   `aws/secretsmanager`. If this key doesn't already exist in your
-    #   account then Secrets Manager creates it for you automatically. All
-    #   users and roles in the same AWS account automatically have access to
-    #   use the default CMK. Note that if an Secrets Manager API call
-    #   results in AWS having to create the account's AWS-managed CMK, it
-    #   can result in a one-time significant delay in returning the result.
+    # <note markdown="1"> * If you call an operation to encrypt or decrypt the `SecretString` or
+    #   `SecretBinary` for a secret in the same account as the calling user
+    #   and that secret doesn't specify a AWS KMS encryption key, Secrets
+    #   Manager uses the account's default AWS managed customer master key
+    #   (CMK) with the alias `aws/secretsmanager`. If this key doesn't
+    #   already exist in your account then Secrets Manager creates it for
+    #   you automatically. All users and roles in the same AWS account
+    #   automatically have access to use the default CMK. Note that if an
+    #   Secrets Manager API call results in AWS creating the account's
+    #   AWS-managed CMK, it can result in a one-time significant delay in
+    #   returning the result.
     #
-    # * If the secret is in a different AWS account from the credentials
-    #   calling an API that requires encryption or decryption of the secret
-    #   value then you must create and use a custom AWS KMS CMK because you
-    #   can't access the default CMK for the account using credentials from
-    #   a different AWS account. Store the ARN of the CMK in the secret when
-    #   you create the secret or when you update it by including it in the
-    #   `KMSKeyId`. If you call an API that must encrypt or decrypt
-    #   `SecretString` or `SecretBinary` using credentials from a different
-    #   account then the AWS KMS key policy must grant cross-account access
-    #   to that other account's user or role for both the
-    #   kms:GenerateDataKey and kms:Decrypt operations.
+    # * If the secret resides in a different AWS account from the
+    #   credentials calling an API that requires encryption or decryption of
+    #   the secret value then you must create and use a custom AWS KMS CMK
+    #   because you can't access the default CMK for the account using
+    #   credentials from a different AWS account. Store the ARN of the CMK
+    #   in the secret when you create the secret or when you update it by
+    #   including it in the `KMSKeyId`. If you call an API that must encrypt
+    #   or decrypt `SecretString` or `SecretBinary` using credentials from a
+    #   different account then the AWS KMS key policy must grant
+    #   cross-account access to that other account's user or role for both
+    #   the kms:GenerateDataKey and kms:Decrypt operations.
     #
     #  </note>
     #
@@ -492,11 +498,11 @@ module Aws::SecretsManager
     #
     # * kms:GenerateDataKey - needed only if you use a customer-managed AWS
     #   KMS key to encrypt the secret. You do not need this permission to
-    #   use the account's default AWS managed CMK for Secrets Manager.
+    #   use the account default AWS managed CMK for Secrets Manager.
     #
     # * kms:Decrypt - needed only if you use a customer-managed AWS KMS key
     #   to encrypt the secret. You do not need this permission to use the
-    #   account's default AWS managed CMK for Secrets Manager.
+    #   account default AWS managed CMK for Secrets Manager.
     #
     # * secretsmanager:TagResource - needed only if you include the `Tags`
     #   parameter.
@@ -526,11 +532,10 @@ module Aws::SecretsManager
     #   The secret name must be ASCII letters, digits, or the following
     #   characters : /\_+=.@-
     #
-    #   <note markdown="1"> Don't end your secret name with a hyphen followed by six characters.
+    #   <note markdown="1"> Do not end your secret name with a hyphen followed by six characters.
     #   If you do so, you risk confusion and unexpected results when searching
-    #   for a secret by partial ARN. This is because Secrets Manager
-    #   automatically adds a hyphen and six random characters at the end of
-    #   the ARN.
+    #   for a secret by partial ARN. Secrets Manager automatically adds a
+    #   hyphen and six random characters at the end of the ARN.
     #
     #    </note>
     #
@@ -545,7 +550,7 @@ module Aws::SecretsManager
     #   the request. If you don't use the SDK and instead generate a raw HTTP
     #   request to the Secrets Manager service endpoint, then you must
     #   generate a `ClientRequestToken` yourself for the new version and
-    #   include that value in the request.
+    #   include the value in the request.
     #
     #    </note>
     #
@@ -558,10 +563,9 @@ module Aws::SecretsManager
     #   * If the `ClientRequestToken` value isn't already associated with a
     #     version of the secret then a new version of the secret is created.
     #
-    #   * If a version with this value already exists and that version's
+    #   * If a version with this value already exists and the version
     #     `SecretString` and `SecretBinary` values are the same as those in
-    #     the request, then the request is ignored (the operation is
-    #     idempotent).
+    #     the request, then the request is ignored.
     #
     #   * If a version with this value already exists and that version's
     #     `SecretString` and `SecretBinary` values are different from those in
@@ -597,9 +601,9 @@ module Aws::SecretsManager
     #   time it needs to encrypt a version's `SecretString` or `SecretBinary`
     #   fields.
     #
-    #   You can use the account's default CMK to encrypt and decrypt only if
-    #   you call this operation using credentials from the same account that
-    #   owns the secret. If the secret is in a different account, then you
+    #   You can use the account default CMK to encrypt and decrypt only if you
+    #   call this operation using credentials from the same account that owns
+    #   the secret. If the secret resides in a different account, then you
     #   must create a custom CMK and specify the ARN in this field.
     #
     # @option params [String, IO] :secret_binary
@@ -634,7 +638,7 @@ module Aws::SecretsManager
     #   environments, see [Using JSON for Parameters][1] in the *AWS CLI User
     #   Guide*. For example:
     #
-    #   `[\{"username":"bob"\},\{"password":"abc123xyz456"\}]`
+    #   `\{"username":"bob","password":"abc123xyz456"\}`
     #
     #   If your command-line tool or SDK requires quotation marks around the
     #   parameter, you should use single quotes to avoid confusion with the
@@ -680,16 +684,16 @@ module Aws::SecretsManager
     #
     #   * Tag keys and values are case sensitive.
     #
-    #   * Do not use the `aws:` prefix in your tag names or values because it
-    #     is reserved for AWS use. You can't edit or delete tag names or
+    #   * Do not use the `aws:` prefix in your tag names or values because AWS
+    #     reserves it for AWS use. You can't edit or delete tag names or
     #     values with this prefix. Tags with this prefix do not count against
     #     your tags per secret limit.
     #
-    #   * If your tagging schema will be used across multiple services and
-    #     resources, remember that other services might have restrictions on
-    #     allowed characters. Generally allowed characters are: letters,
-    #     spaces, and numbers representable in UTF-8, plus the following
-    #     special characters: + - = . \_ : / @.
+    #   * If you use your tagging schema across multiple services and
+    #     resources, remember other services might have restrictions on
+    #     allowed characters. Generally allowed characters: letters, spaces,
+    #     and numbers representable in UTF-8, plus the following special
+    #     characters: + - = . \_ : / @.
     #
     #
     #
@@ -753,8 +757,7 @@ module Aws::SecretsManager
       req.send_request(options)
     end
 
-    # Deletes the resource-based permission policy that's attached to the
-    # secret.
+    # Deletes the resource-based permission policy attached to the secret.
     #
     # **Minimum permissions**
     #
@@ -789,7 +792,13 @@ module Aws::SecretsManager
     #   then those characters cause Secrets Manager to assume that you’re
     #   specifying a complete ARN. This confusion can cause unexpected
     #   results. To avoid this situation, we recommend that you don’t create
-    #   secret names that end with a hyphen followed by six characters.
+    #   secret names ending with a hyphen followed by six characters.
+    #
+    #    If you specify an incomplete ARN without the random suffix, and
+    #   instead provide the 'friendly name', you *must* not include the
+    #   random suffix. If you do include the random suffix added by Secrets
+    #   Manager, you receive either a *ResourceNotFoundException* or an
+    #   *AccessDeniedException* error, depending on your permissions.
     #
     #    </note>
     #
@@ -892,7 +901,13 @@ module Aws::SecretsManager
     #   then those characters cause Secrets Manager to assume that you’re
     #   specifying a complete ARN. This confusion can cause unexpected
     #   results. To avoid this situation, we recommend that you don’t create
-    #   secret names that end with a hyphen followed by six characters.
+    #   secret names ending with a hyphen followed by six characters.
+    #
+    #    If you specify an incomplete ARN without the random suffix, and
+    #   instead provide the 'friendly name', you *must* not include the
+    #   random suffix. If you do include the random suffix added by Secrets
+    #   Manager, you receive either a *ResourceNotFoundException* or an
+    #   *AccessDeniedException* error, depending on your permissions.
     #
     #    </note>
     #
@@ -970,8 +985,8 @@ module Aws::SecretsManager
     end
 
     # Retrieves the details of a secret. It does not include the encrypted
-    # fields. Only those fields that are populated with a value are returned
-    # in the response.
+    # fields. Secrets Manager only returns fields populated with a value in
+    # the response.
     #
     # **Minimum permissions**
     #
@@ -1008,7 +1023,13 @@ module Aws::SecretsManager
     #   then those characters cause Secrets Manager to assume that you’re
     #   specifying a complete ARN. This confusion can cause unexpected
     #   results. To avoid this situation, we recommend that you don’t create
-    #   secret names that end with a hyphen followed by six characters.
+    #   secret names ending with a hyphen followed by six characters.
+    #
+    #    If you specify an incomplete ARN without the random suffix, and
+    #   instead provide the 'friendly name', you *must* not include the
+    #   random suffix. If you do include the random suffix added by Secrets
+    #   Manager, you receive either a *ResourceNotFoundException* or an
+    #   *AccessDeniedException* error, depending on your permissions.
     #
     #    </note>
     #
@@ -1028,6 +1049,7 @@ module Aws::SecretsManager
     #   * {Types::DescribeSecretResponse#tags #tags} => Array&lt;Types::Tag&gt;
     #   * {Types::DescribeSecretResponse#version_ids_to_stages #version_ids_to_stages} => Hash&lt;String,Array&lt;String&gt;&gt;
     #   * {Types::DescribeSecretResponse#owning_service #owning_service} => String
+    #   * {Types::DescribeSecretResponse#created_date #created_date} => Time
     #
     #
     # @example Example: To retrieve the details of a secret
@@ -1098,6 +1120,7 @@ module Aws::SecretsManager
     #   resp.version_ids_to_stages["SecretVersionIdType"] #=> Array
     #   resp.version_ids_to_stages["SecretVersionIdType"][0] #=> String
     #   resp.owning_service #=> String
+    #   resp.created_date #=> Time
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/secretsmanager-2017-10-17/DescribeSecret AWS API Documentation
     #
@@ -1216,11 +1239,10 @@ module Aws::SecretsManager
       req.send_request(options)
     end
 
-    # Retrieves the JSON text of the resource-based policy document that's
-    # attached to the specified secret. The JSON request string input and
-    # response output are shown formatted with white space and line breaks
-    # for better readability. Submit your input as a single line JSON
-    # string.
+    # Retrieves the JSON text of the resource-based policy document attached
+    # to the specified secret. The JSON request string input and response
+    # output displays formatted code with white space and line breaks for
+    # better readability. Submit your input as a single line JSON string.
     #
     # **Minimum permissions**
     #
@@ -1234,8 +1256,8 @@ module Aws::SecretsManager
     #
     # * To attach a resource policy to a secret, use PutResourcePolicy.
     #
-    # * To delete the resource-based policy that's attached to a secret,
-    #   use DeleteResourcePolicy.
+    # * To delete the resource-based policy attached to a secret, use
+    #   DeleteResourcePolicy.
     #
     # * To list all of the currently available secrets, use ListSecrets.
     #
@@ -1255,7 +1277,13 @@ module Aws::SecretsManager
     #   then those characters cause Secrets Manager to assume that you’re
     #   specifying a complete ARN. This confusion can cause unexpected
     #   results. To avoid this situation, we recommend that you don’t create
-    #   secret names that end with a hyphen followed by six characters.
+    #   secret names ending with a hyphen followed by six characters.
+    #
+    #    If you specify an incomplete ARN without the random suffix, and
+    #   instead provide the 'friendly name', you *must* not include the
+    #   random suffix. If you do include the random suffix added by Secrets
+    #   Manager, you receive either a *ResourceNotFoundException* or an
+    #   *AccessDeniedException* error, depending on your permissions.
     #
     #    </note>
     #
@@ -1340,7 +1368,13 @@ module Aws::SecretsManager
     #   then those characters cause Secrets Manager to assume that you’re
     #   specifying a complete ARN. This confusion can cause unexpected
     #   results. To avoid this situation, we recommend that you don’t create
-    #   secret names that end with a hyphen followed by six characters.
+    #   secret names ending with a hyphen followed by six characters.
+    #
+    #    If you specify an incomplete ARN without the random suffix, and
+    #   instead provide the 'friendly name', you *must* not include the
+    #   random suffix. If you do include the random suffix added by Secrets
+    #   Manager, you receive either a *ResourceNotFoundException* or an
+    #   *AccessDeniedException* error, depending on your permissions.
     #
     #    </note>
     #
@@ -1437,8 +1471,8 @@ module Aws::SecretsManager
     #
     # <note markdown="1"> Always check the `NextToken` response parameter when calling any of
     # the `List*` operations. These operations can occasionally return an
-    # empty or shorter than expected list of results even when there are
-    # more results available. When this happens, the `NextToken` response
+    # empty or shorter than expected list of results even when there more
+    # results become available. When this happens, the `NextToken` response
     # parameter contains a value to pass to the next call to the same API to
     # request the next part of the list.
     #
@@ -1474,28 +1508,34 @@ module Aws::SecretsManager
     #   then those characters cause Secrets Manager to assume that you’re
     #   specifying a complete ARN. This confusion can cause unexpected
     #   results. To avoid this situation, we recommend that you don’t create
-    #   secret names that end with a hyphen followed by six characters.
+    #   secret names ending with a hyphen followed by six characters.
+    #
+    #    If you specify an incomplete ARN without the random suffix, and
+    #   instead provide the 'friendly name', you *must* not include the
+    #   random suffix. If you do include the random suffix added by Secrets
+    #   Manager, you receive either a *ResourceNotFoundException* or an
+    #   *AccessDeniedException* error, depending on your permissions.
     #
     #    </note>
     #
     # @option params [Integer] :max_results
-    #   (Optional) Limits the number of results that you want to include in
-    #   the response. If you don't include this parameter, it defaults to a
-    #   value that's specific to the operation. If additional items exist
-    #   beyond the maximum you specify, the `NextToken` response element is
-    #   present and has a value (isn't null). Include that value as the
-    #   `NextToken` request parameter in the next call to the operation to get
-    #   the next part of the results. Note that Secrets Manager might return
-    #   fewer results than the maximum even when there are more results
-    #   available. You should check `NextToken` after every operation to
-    #   ensure that you receive all of the results.
+    #   (Optional) Limits the number of results you want to include in the
+    #   response. If you don't include this parameter, it defaults to a value
+    #   that's specific to the operation. If additional items exist beyond
+    #   the maximum you specify, the `NextToken` response element is present
+    #   and has a value (isn't null). Include that value as the `NextToken`
+    #   request parameter in the next call to the operation to get the next
+    #   part of the results. Note that Secrets Manager might return fewer
+    #   results than the maximum even when there are more results available.
+    #   You should check `NextToken` after every operation to ensure that you
+    #   receive all of the results.
     #
     # @option params [String] :next_token
     #   (Optional) Use this parameter in a request if you receive a
-    #   `NextToken` response in a previous request that indicates that
-    #   there's more output available. In a subsequent call, set it to the
-    #   value of the previous call's `NextToken` response to indicate where
-    #   the output should continue from.
+    #   `NextToken` response in a previous request indicating there's more
+    #   output available. In a subsequent call, set it to the value of the
+    #   previous call `NextToken` response to indicate where the output should
+    #   continue from.
     #
     # @option params [Boolean] :include_deprecated
     #   (Optional) Specifies that you want the results to include versions
@@ -1587,8 +1627,8 @@ module Aws::SecretsManager
     #
     # <note markdown="1"> Always check the `NextToken` response parameter when calling any of
     # the `List*` operations. These operations can occasionally return an
-    # empty or shorter than expected list of results even when there are
-    # more results available. When this happens, the `NextToken` response
+    # empty or shorter than expected list of results even when there more
+    # results become available. When this happens, the `NextToken` response
     # parameter contains a value to pass to the next call to the same API to
     # request the next part of the list.
     #
@@ -1609,23 +1649,29 @@ module Aws::SecretsManager
     # ^
     #
     # @option params [Integer] :max_results
-    #   (Optional) Limits the number of results that you want to include in
-    #   the response. If you don't include this parameter, it defaults to a
-    #   value that's specific to the operation. If additional items exist
-    #   beyond the maximum you specify, the `NextToken` response element is
-    #   present and has a value (isn't null). Include that value as the
-    #   `NextToken` request parameter in the next call to the operation to get
-    #   the next part of the results. Note that Secrets Manager might return
-    #   fewer results than the maximum even when there are more results
-    #   available. You should check `NextToken` after every operation to
-    #   ensure that you receive all of the results.
+    #   (Optional) Limits the number of results you want to include in the
+    #   response. If you don't include this parameter, it defaults to a value
+    #   that's specific to the operation. If additional items exist beyond
+    #   the maximum you specify, the `NextToken` response element is present
+    #   and has a value (isn't null). Include that value as the `NextToken`
+    #   request parameter in the next call to the operation to get the next
+    #   part of the results. Note that Secrets Manager might return fewer
+    #   results than the maximum even when there are more results available.
+    #   You should check `NextToken` after every operation to ensure that you
+    #   receive all of the results.
     #
     # @option params [String] :next_token
     #   (Optional) Use this parameter in a request if you receive a
-    #   `NextToken` response in a previous request that indicates that
-    #   there's more output available. In a subsequent call, set it to the
-    #   value of the previous call's `NextToken` response to indicate where
-    #   the output should continue from.
+    #   `NextToken` response in a previous request indicating there's more
+    #   output available. In a subsequent call, set it to the value of the
+    #   previous call `NextToken` response to indicate where the output should
+    #   continue from.
+    #
+    # @option params [Array<Types::Filter>] :filters
+    #   Lists the secret request filters.
+    #
+    # @option params [String] :sort_order
+    #   Lists secrets in the requested order.
     #
     # @return [Types::ListSecretsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1675,6 +1721,13 @@ module Aws::SecretsManager
     #   resp = client.list_secrets({
     #     max_results: 1,
     #     next_token: "NextTokenType",
+    #     filters: [
+    #       {
+    #         key: "description", # accepts description, name, tag-key, tag-value, all
+    #         values: ["FilterValueStringType"],
+    #       },
+    #     ],
+    #     sort_order: "asc", # accepts asc, desc
     #   })
     #
     # @example Response structure
@@ -1698,6 +1751,7 @@ module Aws::SecretsManager
     #   resp.secret_list[0].secret_versions_to_stages["SecretVersionIdType"] #=> Array
     #   resp.secret_list[0].secret_versions_to_stages["SecretVersionIdType"][0] #=> String
     #   resp.secret_list[0].owning_service #=> String
+    #   resp.secret_list[0].created_date #=> Time
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/secretsmanager-2017-10-17/ListSecrets AWS API Documentation
@@ -1731,7 +1785,7 @@ module Aws::SecretsManager
     #
     # **Related operations**
     #
-    # * To retrieve the resource policy that's attached to a secret, use
+    # * To retrieve the resource policy attached to a secret, use
     #   GetResourcePolicy.
     #
     # * To delete the resource-based policy that's attached to a secret,
@@ -1759,7 +1813,13 @@ module Aws::SecretsManager
     #   then those characters cause Secrets Manager to assume that you’re
     #   specifying a complete ARN. This confusion can cause unexpected
     #   results. To avoid this situation, we recommend that you don’t create
-    #   secret names that end with a hyphen followed by six characters.
+    #   secret names ending with a hyphen followed by six characters.
+    #
+    #    If you specify an incomplete ARN without the random suffix, and
+    #   instead provide the 'friendly name', you *must* not include the
+    #   random suffix. If you do include the random suffix added by Secrets
+    #   Manager, you receive either a *ResourceNotFoundException* or an
+    #   *AccessDeniedException* error, depending on your permissions.
     #
     #    </note>
     #
@@ -1774,6 +1834,10 @@ module Aws::SecretsManager
     #
     #
     #   [1]: http://docs.aws.amazon.com/cli/latest/userguide/cli-using-param.html#cli-using-param-json
+    #
+    # @option params [Boolean] :block_public_policy
+    #   Makes an optional API call to Zelkova to validate the Resource Policy
+    #   to prevent broad access to your secret.
     #
     # @return [Types::PutResourcePolicyResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1801,6 +1865,7 @@ module Aws::SecretsManager
     #   resp = client.put_resource_policy({
     #     secret_id: "SecretIdType", # required
     #     resource_policy: "NonEmptyResourcePolicyType", # required
+    #     block_public_policy: false,
     #   })
     #
     # @example Response structure
@@ -1850,29 +1915,29 @@ module Aws::SecretsManager
     #   operation fails because you cannot modify an existing version; you
     #   can only create new ones.
     #
-    # <note markdown="1"> * If you call an operation that needs to encrypt or decrypt the
-    #   `SecretString` or `SecretBinary` for a secret in the same account as
-    #   the calling user and that secret doesn't specify a AWS KMS
-    #   encryption key, Secrets Manager uses the account's default AWS
-    #   managed customer master key (CMK) with the alias
-    #   `aws/secretsmanager`. If this key doesn't already exist in your
-    #   account then Secrets Manager creates it for you automatically. All
-    #   users and roles in the same AWS account automatically have access to
-    #   use the default CMK. Note that if an Secrets Manager API call
-    #   results in AWS having to create the account's AWS-managed CMK, it
-    #   can result in a one-time significant delay in returning the result.
+    # <note markdown="1"> * If you call an operation to encrypt or decrypt the `SecretString` or
+    #   `SecretBinary` for a secret in the same account as the calling user
+    #   and that secret doesn't specify a AWS KMS encryption key, Secrets
+    #   Manager uses the account's default AWS managed customer master key
+    #   (CMK) with the alias `aws/secretsmanager`. If this key doesn't
+    #   already exist in your account then Secrets Manager creates it for
+    #   you automatically. All users and roles in the same AWS account
+    #   automatically have access to use the default CMK. Note that if an
+    #   Secrets Manager API call results in AWS creating the account's
+    #   AWS-managed CMK, it can result in a one-time significant delay in
+    #   returning the result.
     #
-    # * If the secret is in a different AWS account from the credentials
-    #   calling an API that requires encryption or decryption of the secret
-    #   value then you must create and use a custom AWS KMS CMK because you
-    #   can't access the default CMK for the account using credentials from
-    #   a different AWS account. Store the ARN of the CMK in the secret when
-    #   you create the secret or when you update it by including it in the
-    #   `KMSKeyId`. If you call an API that must encrypt or decrypt
-    #   `SecretString` or `SecretBinary` using credentials from a different
-    #   account then the AWS KMS key policy must grant cross-account access
-    #   to that other account's user or role for both the
-    #   kms:GenerateDataKey and kms:Decrypt operations.
+    # * If the secret resides in a different AWS account from the
+    #   credentials calling an API that requires encryption or decryption of
+    #   the secret value then you must create and use a custom AWS KMS CMK
+    #   because you can't access the default CMK for the account using
+    #   credentials from a different AWS account. Store the ARN of the CMK
+    #   in the secret when you create the secret or when you update it by
+    #   including it in the `KMSKeyId`. If you call an API that must encrypt
+    #   or decrypt `SecretString` or `SecretBinary` using credentials from a
+    #   different account then the AWS KMS key policy must grant
+    #   cross-account access to that other account's user or role for both
+    #   the kms:GenerateDataKey and kms:Decrypt operations.
     #
     #  </note>
     #
@@ -1913,7 +1978,13 @@ module Aws::SecretsManager
     #   then those characters cause Secrets Manager to assume that you’re
     #   specifying a complete ARN. This confusion can cause unexpected
     #   results. To avoid this situation, we recommend that you don’t create
-    #   secret names that end with a hyphen followed by six characters.
+    #   secret names ending with a hyphen followed by six characters.
+    #
+    #    If you specify an incomplete ARN without the random suffix, and
+    #   instead provide the 'friendly name', you *must* not include the
+    #   random suffix. If you do include the random suffix added by Secrets
+    #   Manager, you receive either a *ResourceNotFoundException* or an
+    #   *AccessDeniedException* error, depending on your permissions.
     #
     #    </note>
     #
@@ -1944,7 +2015,7 @@ module Aws::SecretsManager
     #     `SecretString` or `SecretBinary` values are the same as those in the
     #     request then the request is ignored (the operation is idempotent).
     #
-    #   * If a version with this value already exists and that version's
+    #   * If a version with this value already exists and the version of the
     #     `SecretString` and `SecretBinary` values are different from those in
     #     the request then the request fails because you cannot modify an
     #     existing secret version. You can only create new versions to store
@@ -2106,7 +2177,13 @@ module Aws::SecretsManager
     #   then those characters cause Secrets Manager to assume that you’re
     #   specifying a complete ARN. This confusion can cause unexpected
     #   results. To avoid this situation, we recommend that you don’t create
-    #   secret names that end with a hyphen followed by six characters.
+    #   secret names ending with a hyphen followed by six characters.
+    #
+    #    If you specify an incomplete ARN without the random suffix, and
+    #   instead provide the 'friendly name', you *must* not include the
+    #   random suffix. If you do include the random suffix added by Secrets
+    #   Manager, you receive either a *ResourceNotFoundException* or an
+    #   *AccessDeniedException* error, depending on your permissions.
     #
     #    </note>
     #
@@ -2169,8 +2246,8 @@ module Aws::SecretsManager
     # for your protected service, see [Rotating Secrets in AWS Secrets
     # Manager][1] in the *AWS Secrets Manager User Guide*.
     #
-    # Secrets Manager schedules the next rotation when the previous one is
-    # complete. Secrets Manager schedules the date by adding the rotation
+    # Secrets Manager schedules the next rotation when the previous one
+    # completes. Secrets Manager schedules the date by adding the rotation
     # interval (number of days) to the actual date of the last rotation. The
     # service chooses the hour within that 24-hour date window randomly. The
     # minute is also chosen somewhat randomly, but weighted towards the top
@@ -2186,9 +2263,9 @@ module Aws::SecretsManager
     # * The `AWSPENDING` staging label is not attached to any version of the
     #   secret.
     #
-    # If instead the `AWSPENDING` staging label is present but is not
-    # attached to the same version as `AWSCURRENT` then any later invocation
-    # of `RotateSecret` assumes that a previous rotation request is still in
+    # If the `AWSPENDING` staging label is present but not attached to the
+    # same version as `AWSCURRENT` then any later invocation of
+    # `RotateSecret` assumes that a previous rotation request is still in
     # progress and returns an error.
     #
     # **Minimum permissions**
@@ -2230,7 +2307,13 @@ module Aws::SecretsManager
     #   then those characters cause Secrets Manager to assume that you’re
     #   specifying a complete ARN. This confusion can cause unexpected
     #   results. To avoid this situation, we recommend that you don’t create
-    #   secret names that end with a hyphen followed by six characters.
+    #   secret names ending with a hyphen followed by six characters.
+    #
+    #    If you specify an incomplete ARN without the random suffix, and
+    #   instead provide the 'friendly name', you *must* not include the
+    #   random suffix. If you do include the random suffix added by Secrets
+    #   Manager, you receive either a *ResourceNotFoundException* or an
+    #   *AccessDeniedException* error, depending on your permissions.
     #
     #    </note>
     #
@@ -2246,8 +2329,8 @@ module Aws::SecretsManager
     #   generate a `ClientRequestToken` yourself for new versions and include
     #   that value in the request.
     #
-    #   You only need to specify your own value if you are implementing your
-    #   own retry logic and want to ensure that a given secret is not created
+    #   You only need to specify your own value if you implement your own
+    #   retry logic and want to ensure that a given secret is not created
     #   twice. We recommend that you generate a [UUID-type][1] value to ensure
     #   uniqueness within the specified secret.
     #
@@ -2318,16 +2401,16 @@ module Aws::SecretsManager
     #
     # * Tag keys and values are case sensitive.
     #
-    # * Do not use the `aws:` prefix in your tag names or values because it
-    #   is reserved for AWS use. You can't edit or delete tag names or
+    # * Do not use the `aws:` prefix in your tag names or values because AWS
+    #   reserves it for AWS use. You can't edit or delete tag names or
     #   values with this prefix. Tags with this prefix do not count against
     #   your tags per secret limit.
     #
-    # * If your tagging schema will be used across multiple services and
-    #   resources, remember that other services might have restrictions on
-    #   allowed characters. Generally allowed characters are: letters,
-    #   spaces, and numbers representable in UTF-8, plus the following
-    #   special characters: + - = . \_ : / @.
+    # * If you use your tagging schema across multiple services and
+    #   resources, remember other services might have restrictions on
+    #   allowed characters. Generally allowed characters: letters, spaces,
+    #   and numbers representable in UTF-8, plus the following special
+    #   characters: + - = . \_ : / @.
     #
     # If you use tags as part of your security strategy, then adding or
     # removing a tag can change permissions. If successfully completing this
@@ -2365,7 +2448,13 @@ module Aws::SecretsManager
     #   then those characters cause Secrets Manager to assume that you’re
     #   specifying a complete ARN. This confusion can cause unexpected
     #   results. To avoid this situation, we recommend that you don’t create
-    #   secret names that end with a hyphen followed by six characters.
+    #   secret names ending with a hyphen followed by six characters.
+    #
+    #    If you specify an incomplete ARN without the random suffix, and
+    #   instead provide the 'friendly name', you *must* not include the
+    #   random suffix. If you do include the random suffix added by Secrets
+    #   Manager, you receive either a *ResourceNotFoundException* or an
+    #   *AccessDeniedException* error, depending on your permissions.
     #
     #    </note>
     #
@@ -2467,7 +2556,13 @@ module Aws::SecretsManager
     #   then those characters cause Secrets Manager to assume that you’re
     #   specifying a complete ARN. This confusion can cause unexpected
     #   results. To avoid this situation, we recommend that you don’t create
-    #   secret names that end with a hyphen followed by six characters.
+    #   secret names ending with a hyphen followed by six characters.
+    #
+    #    If you specify an incomplete ARN without the random suffix, and
+    #   instead provide the 'friendly name', you *must* not include the
+    #   random suffix. If you do include the random suffix added by Secrets
+    #   Manager, you receive either a *ResourceNotFoundException* or an
+    #   *AccessDeniedException* error, depending on your permissions.
     #
     #    </note>
     #
@@ -2539,29 +2634,29 @@ module Aws::SecretsManager
     #   secret version, Secrets Manager automatically attaches the staging
     #   label `AWSCURRENT` to the new version.
     #
-    # <note markdown="1"> * If you call an operation that needs to encrypt or decrypt the
-    #   `SecretString` or `SecretBinary` for a secret in the same account as
-    #   the calling user and that secret doesn't specify a AWS KMS
-    #   encryption key, Secrets Manager uses the account's default AWS
-    #   managed customer master key (CMK) with the alias
-    #   `aws/secretsmanager`. If this key doesn't already exist in your
-    #   account then Secrets Manager creates it for you automatically. All
-    #   users and roles in the same AWS account automatically have access to
-    #   use the default CMK. Note that if an Secrets Manager API call
-    #   results in AWS having to create the account's AWS-managed CMK, it
-    #   can result in a one-time significant delay in returning the result.
+    # <note markdown="1"> * If you call an operation to encrypt or decrypt the `SecretString` or
+    #   `SecretBinary` for a secret in the same account as the calling user
+    #   and that secret doesn't specify a AWS KMS encryption key, Secrets
+    #   Manager uses the account's default AWS managed customer master key
+    #   (CMK) with the alias `aws/secretsmanager`. If this key doesn't
+    #   already exist in your account then Secrets Manager creates it for
+    #   you automatically. All users and roles in the same AWS account
+    #   automatically have access to use the default CMK. Note that if an
+    #   Secrets Manager API call results in AWS creating the account's
+    #   AWS-managed CMK, it can result in a one-time significant delay in
+    #   returning the result.
     #
-    # * If the secret is in a different AWS account from the credentials
-    #   calling an API that requires encryption or decryption of the secret
-    #   value then you must create and use a custom AWS KMS CMK because you
-    #   can't access the default CMK for the account using credentials from
-    #   a different AWS account. Store the ARN of the CMK in the secret when
-    #   you create the secret or when you update it by including it in the
-    #   `KMSKeyId`. If you call an API that must encrypt or decrypt
-    #   `SecretString` or `SecretBinary` using credentials from a different
-    #   account then the AWS KMS key policy must grant cross-account access
-    #   to that other account's user or role for both the
-    #   kms:GenerateDataKey and kms:Decrypt operations.
+    # * If the secret resides in a different AWS account from the
+    #   credentials calling an API that requires encryption or decryption of
+    #   the secret value then you must create and use a custom AWS KMS CMK
+    #   because you can't access the default CMK for the account using
+    #   credentials from a different AWS account. Store the ARN of the CMK
+    #   in the secret when you create the secret or when you update it by
+    #   including it in the `KMSKeyId`. If you call an API that must encrypt
+    #   or decrypt `SecretString` or `SecretBinary` using credentials from a
+    #   different account then the AWS KMS key policy must grant
+    #   cross-account access to that other account's user or role for both
+    #   the kms:GenerateDataKey and kms:Decrypt operations.
     #
     #  </note>
     #
@@ -2606,7 +2701,13 @@ module Aws::SecretsManager
     #   then those characters cause Secrets Manager to assume that you’re
     #   specifying a complete ARN. This confusion can cause unexpected
     #   results. To avoid this situation, we recommend that you don’t create
-    #   secret names that end with a hyphen followed by six characters.
+    #   secret names ending with a hyphen followed by six characters.
+    #
+    #    If you specify an incomplete ARN without the random suffix, and
+    #   instead provide the 'friendly name', you *must* not include the
+    #   random suffix. If you do include the random suffix added by Secrets
+    #   Manager, you receive either a *ResourceNotFoundException* or an
+    #   *AccessDeniedException* error, depending on your permissions.
     #
     #    </note>
     #
@@ -2843,9 +2944,9 @@ module Aws::SecretsManager
     # [1]: https://docs.aws.amazon.com/secretsmanager/latest/userguide/terms-concepts.html#term_staging-label
     #
     # @option params [required, String] :secret_id
-    #   Specifies the secret with the version whose list of staging labels you
-    #   want to modify. You can specify either the Amazon Resource Name (ARN)
-    #   or the friendly name of the secret.
+    #   Specifies the secret with the version with the list of staging labels
+    #   you want to modify. You can specify either the Amazon Resource Name
+    #   (ARN) or the friendly name of the secret.
     #
     #   <note markdown="1"> If you specify an ARN, we generally recommend that you specify a
     #   complete ARN. You can specify a partial ARN too—for example, if you
@@ -2858,7 +2959,13 @@ module Aws::SecretsManager
     #   then those characters cause Secrets Manager to assume that you’re
     #   specifying a complete ARN. This confusion can cause unexpected
     #   results. To avoid this situation, we recommend that you don’t create
-    #   secret names that end with a hyphen followed by six characters.
+    #   secret names ending with a hyphen followed by six characters.
+    #
+    #    If you specify an incomplete ARN without the random suffix, and
+    #   instead provide the 'friendly name', you *must* not include the
+    #   random suffix. If you do include the random suffix added by Secrets
+    #   Manager, you receive either a *ResourceNotFoundException* or an
+    #   *AccessDeniedException* error, depending on your permissions.
     #
     #    </note>
     #
@@ -2876,7 +2983,7 @@ module Aws::SecretsManager
     #
     # @option params [String] :move_to_version_id
     #   (Optional) The secret version ID that you want to add the staging
-    #   label to. If you want to remove a label from a version, then do not
+    #   label. If you want to remove a label from a version, then do not
     #   specify this parameter.
     #
     #   If the staging label is already attached to a different version of the
@@ -2966,6 +3073,86 @@ module Aws::SecretsManager
       req.send_request(options)
     end
 
+    # Validates the JSON text of the resource-based policy document attached
+    # to the specified secret. The JSON request string input and response
+    # output displays formatted code with white space and line breaks for
+    # better readability. Submit your input as a single line JSON string. A
+    # resource-based policy is optional.
+    #
+    # @option params [String] :secret_id
+    #   The identifier for the secret that you want to validate a resource
+    #   policy. You can specify either the Amazon Resource Name (ARN) or the
+    #   friendly name of the secret.
+    #
+    #   <note markdown="1"> If you specify an ARN, we generally recommend that you specify a
+    #   complete ARN. You can specify a partial ARN too—for example, if you
+    #   don’t include the final hyphen and six random characters that Secrets
+    #   Manager adds at the end of the ARN when you created the secret. A
+    #   partial ARN match can work as long as it uniquely matches only one
+    #   secret. However, if your secret has a name that ends in a hyphen
+    #   followed by six characters (before Secrets Manager adds the hyphen and
+    #   six characters to the ARN) and you try to use that as a partial ARN,
+    #   then those characters cause Secrets Manager to assume that you’re
+    #   specifying a complete ARN. This confusion can cause unexpected
+    #   results. To avoid this situation, we recommend that you don’t create
+    #   secret names ending with a hyphen followed by six characters.
+    #
+    #    If you specify an incomplete ARN without the random suffix, and
+    #   instead provide the 'friendly name', you *must* not include the
+    #   random suffix. If you do include the random suffix added by Secrets
+    #   Manager, you receive either a *ResourceNotFoundException* or an
+    #   *AccessDeniedException* error, depending on your permissions.
+    #
+    #    </note>
+    #
+    # @option params [required, String] :resource_policy
+    #   Identifies the Resource Policy attached to the secret.
+    #
+    # @return [Types::ValidateResourcePolicyResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ValidateResourcePolicyResponse#policy_validation_passed #policy_validation_passed} => Boolean
+    #   * {Types::ValidateResourcePolicyResponse#validation_errors #validation_errors} => Array&lt;Types::ValidationErrorsEntry&gt;
+    #
+    #
+    # @example Example: To validate a resource-based policy to a secret
+    #
+    #   # The following example shows how to validate a resource-based policy to a secret.
+    #
+    #   resp = client.validate_resource_policy({
+    #     resource_policy: "{\n\"Version\":\"2012-10-17\",\n\"Statement\":[{\n\"Effect\":\"Allow\",\n\"Principal\":{\n\"AWS\":\"arn:aws:iam::123456789012:root\"\n},\n\"Action\":\"secretsmanager:GetSecretValue\",\n\"Resource\":\"*\"\n}]\n}", 
+    #     secret_id: "MyTestDatabaseSecret", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     policy_validation_passed: true, 
+    #     validation_errors: [
+    #     ], 
+    #   }
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.validate_resource_policy({
+    #     secret_id: "SecretIdType",
+    #     resource_policy: "NonEmptyResourcePolicyType", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.policy_validation_passed #=> Boolean
+    #   resp.validation_errors #=> Array
+    #   resp.validation_errors[0].check_name #=> String
+    #   resp.validation_errors[0].error_message #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/secretsmanager-2017-10-17/ValidateResourcePolicy AWS API Documentation
+    #
+    # @overload validate_resource_policy(params = {})
+    # @param [Hash] params ({})
+    def validate_resource_policy(params = {}, options = {})
+      req = build_request(:validate_resource_policy, params)
+      req.send_request(options)
+    end
+
     # @!endgroup
 
     # @param params ({})
@@ -2979,7 +3166,7 @@ module Aws::SecretsManager
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-secretsmanager'
-      context[:gem_version] = '1.39.0'
+      context[:gem_version] = '1.40.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

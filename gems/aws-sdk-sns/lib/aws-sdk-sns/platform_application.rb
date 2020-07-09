@@ -105,8 +105,8 @@ module Aws::SNS
     #   device. The specific name for Token will vary, depending on which
     #   notification service is being used. For example, when using APNS as
     #   the notification service, you need the device token. Alternatively,
-    #   when using FCM or ADM, the device token equivalent is called the
-    #   registration ID.
+    #   when using GCM (Firebase Cloud Messaging) or ADM, the device token
+    #   equivalent is called the registration ID.
     # @option options [String] :custom_user_data
     #   Arbitrary user data to associate with the endpoint. Amazon SNS does
     #   not use this data. The data must be in UTF-8 format and less than 2KB.
@@ -150,26 +150,27 @@ module Aws::SNS
     #   include the following:
     #
     #   * `PlatformCredential` – The credential received from the notification
-    #     service. For APNS/APNS\_SANDBOX, PlatformCredential is private key.
-    #     For FCM, PlatformCredential is "API key". For ADM,
-    #     PlatformCredential is "client secret".
+    #     service. For `APNS` and `APNS_SANDBOX`, `PlatformCredential` is
+    #     `private key`. For `GCM` (Firebase Cloud Messaging),
+    #     `PlatformCredential` is `API key`. For `ADM`, `PlatformCredential`
+    #     is `client secret`.
     #
     #   * `PlatformPrincipal` – The principal received from the notification
-    #     service. For APNS/APNS\_SANDBOX, PlatformPrincipal is SSL
-    #     certificate. For FCM, PlatformPrincipal is not applicable. For ADM,
-    #     PlatformPrincipal is "client id".
+    #     service. For `APNS` and `APNS_SANDBOX`, `PlatformPrincipal` is `SSL
+    #     certificate`. For `GCM` (Firebase Cloud Messaging), there is no
+    #     `PlatformPrincipal`. For `ADM`, `PlatformPrincipal` is `client id`.
     #
-    #   * `EventEndpointCreated` – Topic ARN to which EndpointCreated event
-    #     notifications should be sent.
+    #   * `EventEndpointCreated` – Topic ARN to which `EndpointCreated` event
+    #     notifications are sent.
     #
-    #   * `EventEndpointDeleted` – Topic ARN to which EndpointDeleted event
-    #     notifications should be sent.
+    #   * `EventEndpointDeleted` – Topic ARN to which `EndpointDeleted` event
+    #     notifications are sent.
     #
-    #   * `EventEndpointUpdated` – Topic ARN to which EndpointUpdate event
-    #     notifications should be sent.
+    #   * `EventEndpointUpdated` – Topic ARN to which `EndpointUpdate` event
+    #     notifications are sent.
     #
-    #   * `EventDeliveryFailure` – Topic ARN to which DeliveryFailure event
-    #     notifications should be sent upon Direct Publish delivery failure
+    #   * `EventDeliveryFailure` – Topic ARN to which `DeliveryFailure` event
+    #     notifications are sent upon Direct Publish delivery failure
     #     (permanent) to one of the application's endpoints.
     #
     #   * `SuccessFeedbackRoleArn` – IAM role ARN used to give Amazon SNS

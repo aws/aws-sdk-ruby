@@ -33,6 +33,7 @@ module Aws::CloudWatchEvents
   # * {InvalidStateException}
   # * {LimitExceededException}
   # * {ManagedRuleException}
+  # * {OperationDisabledException}
   # * {PolicyLengthExceededException}
   # * {ResourceAlreadyExistsException}
   # * {ResourceNotFoundException}
@@ -98,6 +99,16 @@ module Aws::CloudWatchEvents
       # @param [Seahorse::Client::RequestContext] context
       # @param [String] message
       # @param [Aws::CloudWatchEvents::Types::ManagedRuleException] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+    end
+
+    class OperationDisabledException < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::CloudWatchEvents::Types::OperationDisabledException] data
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end

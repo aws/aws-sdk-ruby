@@ -312,6 +312,145 @@ module Aws::AppMesh
 
     # @!group API Operations
 
+    # Creates a gateway route.
+    #
+    # A gateway route is attached to a virtual gateway and routes traffic to
+    # an existing virtual service. If a route matches a request, it can
+    # distribute traffic to a target virtual service.
+    #
+    # For more information about gateway routes, see [Gateway routes][1].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/app-mesh/latest/userguide/gateway-routes.html
+    #
+    # @option params [String] :client_token
+    #   Unique, case-sensitive identifier that you provide to ensure the
+    #   idempotency of the request. Up to 36 letters, numbers, hyphens, and
+    #   underscores are allowed.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.**
+    #
+    # @option params [required, String] :gateway_route_name
+    #   The name to use for the gateway route.
+    #
+    # @option params [required, String] :mesh_name
+    #   The name of the service mesh to create the gateway route in.
+    #
+    # @option params [String] :mesh_owner
+    #   The AWS IAM account ID of the service mesh owner. If the account ID is
+    #   not your own, then the account that you specify must share the mesh
+    #   with your account before you can create the resource in the service
+    #   mesh. For more information about mesh sharing, see [Working with
+    #   shared meshes][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/app-mesh/latest/userguide/sharing.html
+    #
+    # @option params [required, Types::GatewayRouteSpec] :spec
+    #   The gateway route specification to apply.
+    #
+    # @option params [Array<Types::TagRef>] :tags
+    #   Optional metadata that you can apply to the gateway route to assist
+    #   with categorization and organization. Each tag consists of a key and
+    #   an optional value, both of which you define. Tag keys can have a
+    #   maximum character length of 128 characters, and tag values can have a
+    #   maximum length of 256 characters.
+    #
+    # @option params [required, String] :virtual_gateway_name
+    #   The name of the virtual gateway to associate the gateway route with.
+    #   If the virtual gateway is in a shared mesh, then you must be the owner
+    #   of the virtual gateway resource.
+    #
+    # @return [Types::CreateGatewayRouteOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateGatewayRouteOutput#gateway_route #gateway_route} => Types::GatewayRouteData
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_gateway_route({
+    #     client_token: "String",
+    #     gateway_route_name: "ResourceName", # required
+    #     mesh_name: "ResourceName", # required
+    #     mesh_owner: "AccountId",
+    #     spec: { # required
+    #       grpc_route: {
+    #         action: { # required
+    #           target: { # required
+    #             virtual_service: { # required
+    #               virtual_service_name: "ResourceName", # required
+    #             },
+    #           },
+    #         },
+    #         match: { # required
+    #           service_name: "ServiceName",
+    #         },
+    #       },
+    #       http2_route: {
+    #         action: { # required
+    #           target: { # required
+    #             virtual_service: { # required
+    #               virtual_service_name: "ResourceName", # required
+    #             },
+    #           },
+    #         },
+    #         match: { # required
+    #           prefix: "String", # required
+    #         },
+    #       },
+    #       http_route: {
+    #         action: { # required
+    #           target: { # required
+    #             virtual_service: { # required
+    #               virtual_service_name: "ResourceName", # required
+    #             },
+    #           },
+    #         },
+    #         match: { # required
+    #           prefix: "String", # required
+    #         },
+    #       },
+    #     },
+    #     tags: [
+    #       {
+    #         key: "TagKey", # required
+    #         value: "TagValue",
+    #       },
+    #     ],
+    #     virtual_gateway_name: "ResourceName", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.gateway_route.gateway_route_name #=> String
+    #   resp.gateway_route.mesh_name #=> String
+    #   resp.gateway_route.metadata.arn #=> String
+    #   resp.gateway_route.metadata.created_at #=> Time
+    #   resp.gateway_route.metadata.last_updated_at #=> Time
+    #   resp.gateway_route.metadata.mesh_owner #=> String
+    #   resp.gateway_route.metadata.resource_owner #=> String
+    #   resp.gateway_route.metadata.uid #=> String
+    #   resp.gateway_route.metadata.version #=> Integer
+    #   resp.gateway_route.spec.grpc_route.action.target.virtual_service.virtual_service_name #=> String
+    #   resp.gateway_route.spec.grpc_route.match.service_name #=> String
+    #   resp.gateway_route.spec.http2_route.action.target.virtual_service.virtual_service_name #=> String
+    #   resp.gateway_route.spec.http2_route.match.prefix #=> String
+    #   resp.gateway_route.spec.http_route.action.target.virtual_service.virtual_service_name #=> String
+    #   resp.gateway_route.spec.http_route.match.prefix #=> String
+    #   resp.gateway_route.status.status #=> String, one of "ACTIVE", "DELETED", "INACTIVE"
+    #   resp.gateway_route.virtual_gateway_name #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appmesh-2019-01-25/CreateGatewayRoute AWS API Documentation
+    #
+    # @overload create_gateway_route(params = {})
+    # @param [Hash] params ({})
+    def create_gateway_route(params = {}, options = {})
+      req = build_request(:create_gateway_route, params)
+      req.send_request(options)
+    end
+
     # Creates a service mesh.
     #
     # A service mesh is a logical boundary for network traffic between
@@ -736,6 +875,175 @@ module Aws::AppMesh
     # @param [Hash] params ({})
     def create_route(params = {}, options = {})
       req = build_request(:create_route, params)
+      req.send_request(options)
+    end
+
+    # Creates a virtual gateway.
+    #
+    # A virtual gateway allows resources outside your mesh to communicate to
+    # resources that are inside your mesh. The virtual gateway represents an
+    # Envoy proxy running in an Amazon ECS task, in a Kubernetes service, or
+    # on an Amazon EC2 instance. Unlike a virtual node, which represents an
+    # Envoy running with an application, a virtual gateway represents Envoy
+    # deployed by itself.
+    #
+    # For more information about virtual gateways, see [Virtual
+    # gateways][1].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/app-mesh/latest/userguide/virtual_gateways.html
+    #
+    # @option params [String] :client_token
+    #   Unique, case-sensitive identifier that you provide to ensure the
+    #   idempotency of the request. Up to 36 letters, numbers, hyphens, and
+    #   underscores are allowed.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.**
+    #
+    # @option params [required, String] :mesh_name
+    #   The name of the service mesh to create the virtual gateway in.
+    #
+    # @option params [String] :mesh_owner
+    #   The AWS IAM account ID of the service mesh owner. If the account ID is
+    #   not your own, then the account that you specify must share the mesh
+    #   with your account before you can create the resource in the service
+    #   mesh. For more information about mesh sharing, see [Working with
+    #   shared meshes][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/app-mesh/latest/userguide/sharing.html
+    #
+    # @option params [required, Types::VirtualGatewaySpec] :spec
+    #   The virtual gateway specification to apply.
+    #
+    # @option params [Array<Types::TagRef>] :tags
+    #   Optional metadata that you can apply to the virtual gateway to assist
+    #   with categorization and organization. Each tag consists of a key and
+    #   an optional value, both of which you define. Tag keys can have a
+    #   maximum character length of 128 characters, and tag values can have a
+    #   maximum length of 256 characters.
+    #
+    # @option params [required, String] :virtual_gateway_name
+    #   The name to use for the virtual gateway.
+    #
+    # @return [Types::CreateVirtualGatewayOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateVirtualGatewayOutput#virtual_gateway #virtual_gateway} => Types::VirtualGatewayData
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_virtual_gateway({
+    #     client_token: "String",
+    #     mesh_name: "ResourceName", # required
+    #     mesh_owner: "AccountId",
+    #     spec: { # required
+    #       backend_defaults: {
+    #         client_policy: {
+    #           tls: {
+    #             enforce: false,
+    #             ports: [1],
+    #             validation: { # required
+    #               trust: { # required
+    #                 acm: {
+    #                   certificate_authority_arns: ["Arn"], # required
+    #                 },
+    #                 file: {
+    #                   certificate_chain: "FilePath", # required
+    #                 },
+    #               },
+    #             },
+    #           },
+    #         },
+    #       },
+    #       listeners: [ # required
+    #         {
+    #           health_check: {
+    #             healthy_threshold: 1, # required
+    #             interval_millis: 1, # required
+    #             path: "String",
+    #             port: 1,
+    #             protocol: "grpc", # required, accepts grpc, http, http2
+    #             timeout_millis: 1, # required
+    #             unhealthy_threshold: 1, # required
+    #           },
+    #           port_mapping: { # required
+    #             port: 1, # required
+    #             protocol: "grpc", # required, accepts grpc, http, http2
+    #           },
+    #           tls: {
+    #             certificate: { # required
+    #               acm: {
+    #                 certificate_arn: "Arn", # required
+    #               },
+    #               file: {
+    #                 certificate_chain: "FilePath", # required
+    #                 private_key: "FilePath", # required
+    #               },
+    #             },
+    #             mode: "DISABLED", # required, accepts DISABLED, PERMISSIVE, STRICT
+    #           },
+    #         },
+    #       ],
+    #       logging: {
+    #         access_log: {
+    #           file: {
+    #             path: "FilePath", # required
+    #           },
+    #         },
+    #       },
+    #     },
+    #     tags: [
+    #       {
+    #         key: "TagKey", # required
+    #         value: "TagValue",
+    #       },
+    #     ],
+    #     virtual_gateway_name: "ResourceName", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.virtual_gateway.mesh_name #=> String
+    #   resp.virtual_gateway.metadata.arn #=> String
+    #   resp.virtual_gateway.metadata.created_at #=> Time
+    #   resp.virtual_gateway.metadata.last_updated_at #=> Time
+    #   resp.virtual_gateway.metadata.mesh_owner #=> String
+    #   resp.virtual_gateway.metadata.resource_owner #=> String
+    #   resp.virtual_gateway.metadata.uid #=> String
+    #   resp.virtual_gateway.metadata.version #=> Integer
+    #   resp.virtual_gateway.spec.backend_defaults.client_policy.tls.enforce #=> Boolean
+    #   resp.virtual_gateway.spec.backend_defaults.client_policy.tls.ports #=> Array
+    #   resp.virtual_gateway.spec.backend_defaults.client_policy.tls.ports[0] #=> Integer
+    #   resp.virtual_gateway.spec.backend_defaults.client_policy.tls.validation.trust.acm.certificate_authority_arns #=> Array
+    #   resp.virtual_gateway.spec.backend_defaults.client_policy.tls.validation.trust.acm.certificate_authority_arns[0] #=> String
+    #   resp.virtual_gateway.spec.backend_defaults.client_policy.tls.validation.trust.file.certificate_chain #=> String
+    #   resp.virtual_gateway.spec.listeners #=> Array
+    #   resp.virtual_gateway.spec.listeners[0].health_check.healthy_threshold #=> Integer
+    #   resp.virtual_gateway.spec.listeners[0].health_check.interval_millis #=> Integer
+    #   resp.virtual_gateway.spec.listeners[0].health_check.path #=> String
+    #   resp.virtual_gateway.spec.listeners[0].health_check.port #=> Integer
+    #   resp.virtual_gateway.spec.listeners[0].health_check.protocol #=> String, one of "grpc", "http", "http2"
+    #   resp.virtual_gateway.spec.listeners[0].health_check.timeout_millis #=> Integer
+    #   resp.virtual_gateway.spec.listeners[0].health_check.unhealthy_threshold #=> Integer
+    #   resp.virtual_gateway.spec.listeners[0].port_mapping.port #=> Integer
+    #   resp.virtual_gateway.spec.listeners[0].port_mapping.protocol #=> String, one of "grpc", "http", "http2"
+    #   resp.virtual_gateway.spec.listeners[0].tls.certificate.acm.certificate_arn #=> String
+    #   resp.virtual_gateway.spec.listeners[0].tls.certificate.file.certificate_chain #=> String
+    #   resp.virtual_gateway.spec.listeners[0].tls.certificate.file.private_key #=> String
+    #   resp.virtual_gateway.spec.listeners[0].tls.mode #=> String, one of "DISABLED", "PERMISSIVE", "STRICT"
+    #   resp.virtual_gateway.spec.logging.access_log.file.path #=> String
+    #   resp.virtual_gateway.status.status #=> String, one of "ACTIVE", "DELETED", "INACTIVE"
+    #   resp.virtual_gateway.virtual_gateway_name #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appmesh-2019-01-25/CreateVirtualGateway AWS API Documentation
+    #
+    # @overload create_virtual_gateway(params = {})
+    # @param [Hash] params ({})
+    def create_virtual_gateway(params = {}, options = {})
+      req = build_request(:create_virtual_gateway, params)
       req.send_request(options)
     end
 
@@ -1239,6 +1547,69 @@ module Aws::AppMesh
       req.send_request(options)
     end
 
+    # Deletes an existing gateway route.
+    #
+    # @option params [required, String] :gateway_route_name
+    #   The name of the gateway route to delete.
+    #
+    # @option params [required, String] :mesh_name
+    #   The name of the service mesh to delete the gateway route from.
+    #
+    # @option params [String] :mesh_owner
+    #   The AWS IAM account ID of the service mesh owner. If the account ID is
+    #   not your own, then it's the ID of the account that shared the mesh
+    #   with your account. For more information about mesh sharing, see
+    #   [Working with shared meshes][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/app-mesh/latest/userguide/sharing.html
+    #
+    # @option params [required, String] :virtual_gateway_name
+    #   The name of the virtual gateway to delete the route from.
+    #
+    # @return [Types::DeleteGatewayRouteOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DeleteGatewayRouteOutput#gateway_route #gateway_route} => Types::GatewayRouteData
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_gateway_route({
+    #     gateway_route_name: "ResourceName", # required
+    #     mesh_name: "ResourceName", # required
+    #     mesh_owner: "AccountId",
+    #     virtual_gateway_name: "ResourceName", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.gateway_route.gateway_route_name #=> String
+    #   resp.gateway_route.mesh_name #=> String
+    #   resp.gateway_route.metadata.arn #=> String
+    #   resp.gateway_route.metadata.created_at #=> Time
+    #   resp.gateway_route.metadata.last_updated_at #=> Time
+    #   resp.gateway_route.metadata.mesh_owner #=> String
+    #   resp.gateway_route.metadata.resource_owner #=> String
+    #   resp.gateway_route.metadata.uid #=> String
+    #   resp.gateway_route.metadata.version #=> Integer
+    #   resp.gateway_route.spec.grpc_route.action.target.virtual_service.virtual_service_name #=> String
+    #   resp.gateway_route.spec.grpc_route.match.service_name #=> String
+    #   resp.gateway_route.spec.http2_route.action.target.virtual_service.virtual_service_name #=> String
+    #   resp.gateway_route.spec.http2_route.match.prefix #=> String
+    #   resp.gateway_route.spec.http_route.action.target.virtual_service.virtual_service_name #=> String
+    #   resp.gateway_route.spec.http_route.match.prefix #=> String
+    #   resp.gateway_route.status.status #=> String, one of "ACTIVE", "DELETED", "INACTIVE"
+    #   resp.gateway_route.virtual_gateway_name #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appmesh-2019-01-25/DeleteGatewayRoute AWS API Documentation
+    #
+    # @overload delete_gateway_route(params = {})
+    # @param [Hash] params ({})
+    def delete_gateway_route(params = {}, options = {})
+      req = build_request(:delete_gateway_route, params)
+      req.send_request(options)
+    end
+
     # Deletes an existing service mesh.
     #
     # You must delete all resources (virtual services, routes, virtual
@@ -1419,6 +1790,80 @@ module Aws::AppMesh
     # @param [Hash] params ({})
     def delete_route(params = {}, options = {})
       req = build_request(:delete_route, params)
+      req.send_request(options)
+    end
+
+    # Deletes an existing virtual gateway. You cannot delete a virtual
+    # gateway if any gateway routes are associated to it.
+    #
+    # @option params [required, String] :mesh_name
+    #   The name of the service mesh to delete the virtual gateway from.
+    #
+    # @option params [String] :mesh_owner
+    #   The AWS IAM account ID of the service mesh owner. If the account ID is
+    #   not your own, then it's the ID of the account that shared the mesh
+    #   with your account. For more information about mesh sharing, see
+    #   [Working with shared meshes][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/app-mesh/latest/userguide/sharing.html
+    #
+    # @option params [required, String] :virtual_gateway_name
+    #   The name of the virtual gateway to delete.
+    #
+    # @return [Types::DeleteVirtualGatewayOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DeleteVirtualGatewayOutput#virtual_gateway #virtual_gateway} => Types::VirtualGatewayData
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_virtual_gateway({
+    #     mesh_name: "ResourceName", # required
+    #     mesh_owner: "AccountId",
+    #     virtual_gateway_name: "ResourceName", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.virtual_gateway.mesh_name #=> String
+    #   resp.virtual_gateway.metadata.arn #=> String
+    #   resp.virtual_gateway.metadata.created_at #=> Time
+    #   resp.virtual_gateway.metadata.last_updated_at #=> Time
+    #   resp.virtual_gateway.metadata.mesh_owner #=> String
+    #   resp.virtual_gateway.metadata.resource_owner #=> String
+    #   resp.virtual_gateway.metadata.uid #=> String
+    #   resp.virtual_gateway.metadata.version #=> Integer
+    #   resp.virtual_gateway.spec.backend_defaults.client_policy.tls.enforce #=> Boolean
+    #   resp.virtual_gateway.spec.backend_defaults.client_policy.tls.ports #=> Array
+    #   resp.virtual_gateway.spec.backend_defaults.client_policy.tls.ports[0] #=> Integer
+    #   resp.virtual_gateway.spec.backend_defaults.client_policy.tls.validation.trust.acm.certificate_authority_arns #=> Array
+    #   resp.virtual_gateway.spec.backend_defaults.client_policy.tls.validation.trust.acm.certificate_authority_arns[0] #=> String
+    #   resp.virtual_gateway.spec.backend_defaults.client_policy.tls.validation.trust.file.certificate_chain #=> String
+    #   resp.virtual_gateway.spec.listeners #=> Array
+    #   resp.virtual_gateway.spec.listeners[0].health_check.healthy_threshold #=> Integer
+    #   resp.virtual_gateway.spec.listeners[0].health_check.interval_millis #=> Integer
+    #   resp.virtual_gateway.spec.listeners[0].health_check.path #=> String
+    #   resp.virtual_gateway.spec.listeners[0].health_check.port #=> Integer
+    #   resp.virtual_gateway.spec.listeners[0].health_check.protocol #=> String, one of "grpc", "http", "http2"
+    #   resp.virtual_gateway.spec.listeners[0].health_check.timeout_millis #=> Integer
+    #   resp.virtual_gateway.spec.listeners[0].health_check.unhealthy_threshold #=> Integer
+    #   resp.virtual_gateway.spec.listeners[0].port_mapping.port #=> Integer
+    #   resp.virtual_gateway.spec.listeners[0].port_mapping.protocol #=> String, one of "grpc", "http", "http2"
+    #   resp.virtual_gateway.spec.listeners[0].tls.certificate.acm.certificate_arn #=> String
+    #   resp.virtual_gateway.spec.listeners[0].tls.certificate.file.certificate_chain #=> String
+    #   resp.virtual_gateway.spec.listeners[0].tls.certificate.file.private_key #=> String
+    #   resp.virtual_gateway.spec.listeners[0].tls.mode #=> String, one of "DISABLED", "PERMISSIVE", "STRICT"
+    #   resp.virtual_gateway.spec.logging.access_log.file.path #=> String
+    #   resp.virtual_gateway.status.status #=> String, one of "ACTIVE", "DELETED", "INACTIVE"
+    #   resp.virtual_gateway.virtual_gateway_name #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appmesh-2019-01-25/DeleteVirtualGateway AWS API Documentation
+    #
+    # @overload delete_virtual_gateway(params = {})
+    # @param [Hash] params ({})
+    def delete_virtual_gateway(params = {}, options = {})
+      req = build_request(:delete_virtual_gateway, params)
       req.send_request(options)
     end
 
@@ -1638,6 +2083,70 @@ module Aws::AppMesh
       req.send_request(options)
     end
 
+    # Describes an existing gateway route.
+    #
+    # @option params [required, String] :gateway_route_name
+    #   The name of the gateway route to describe.
+    #
+    # @option params [required, String] :mesh_name
+    #   The name of the service mesh that the gateway route resides in.
+    #
+    # @option params [String] :mesh_owner
+    #   The AWS IAM account ID of the service mesh owner. If the account ID is
+    #   not your own, then it's the ID of the account that shared the mesh
+    #   with your account. For more information about mesh sharing, see
+    #   [Working with shared meshes][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/app-mesh/latest/userguide/sharing.html
+    #
+    # @option params [required, String] :virtual_gateway_name
+    #   The name of the virtual gateway that the gateway route is associated
+    #   with.
+    #
+    # @return [Types::DescribeGatewayRouteOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeGatewayRouteOutput#gateway_route #gateway_route} => Types::GatewayRouteData
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_gateway_route({
+    #     gateway_route_name: "ResourceName", # required
+    #     mesh_name: "ResourceName", # required
+    #     mesh_owner: "AccountId",
+    #     virtual_gateway_name: "ResourceName", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.gateway_route.gateway_route_name #=> String
+    #   resp.gateway_route.mesh_name #=> String
+    #   resp.gateway_route.metadata.arn #=> String
+    #   resp.gateway_route.metadata.created_at #=> Time
+    #   resp.gateway_route.metadata.last_updated_at #=> Time
+    #   resp.gateway_route.metadata.mesh_owner #=> String
+    #   resp.gateway_route.metadata.resource_owner #=> String
+    #   resp.gateway_route.metadata.uid #=> String
+    #   resp.gateway_route.metadata.version #=> Integer
+    #   resp.gateway_route.spec.grpc_route.action.target.virtual_service.virtual_service_name #=> String
+    #   resp.gateway_route.spec.grpc_route.match.service_name #=> String
+    #   resp.gateway_route.spec.http2_route.action.target.virtual_service.virtual_service_name #=> String
+    #   resp.gateway_route.spec.http2_route.match.prefix #=> String
+    #   resp.gateway_route.spec.http_route.action.target.virtual_service.virtual_service_name #=> String
+    #   resp.gateway_route.spec.http_route.match.prefix #=> String
+    #   resp.gateway_route.status.status #=> String, one of "ACTIVE", "DELETED", "INACTIVE"
+    #   resp.gateway_route.virtual_gateway_name #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appmesh-2019-01-25/DescribeGatewayRoute AWS API Documentation
+    #
+    # @overload describe_gateway_route(params = {})
+    # @param [Hash] params ({})
+    def describe_gateway_route(params = {}, options = {})
+      req = build_request(:describe_gateway_route, params)
+      req.send_request(options)
+    end
+
     # Describes an existing service mesh.
     #
     # @option params [required, String] :mesh_name
@@ -1825,6 +2334,79 @@ module Aws::AppMesh
     # @param [Hash] params ({})
     def describe_route(params = {}, options = {})
       req = build_request(:describe_route, params)
+      req.send_request(options)
+    end
+
+    # Describes an existing virtual gateway.
+    #
+    # @option params [required, String] :mesh_name
+    #   The name of the service mesh that the gateway route resides in.
+    #
+    # @option params [String] :mesh_owner
+    #   The AWS IAM account ID of the service mesh owner. If the account ID is
+    #   not your own, then it's the ID of the account that shared the mesh
+    #   with your account. For more information about mesh sharing, see
+    #   [Working with shared meshes][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/app-mesh/latest/userguide/sharing.html
+    #
+    # @option params [required, String] :virtual_gateway_name
+    #   The name of the virtual gateway to describe.
+    #
+    # @return [Types::DescribeVirtualGatewayOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeVirtualGatewayOutput#virtual_gateway #virtual_gateway} => Types::VirtualGatewayData
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_virtual_gateway({
+    #     mesh_name: "ResourceName", # required
+    #     mesh_owner: "AccountId",
+    #     virtual_gateway_name: "ResourceName", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.virtual_gateway.mesh_name #=> String
+    #   resp.virtual_gateway.metadata.arn #=> String
+    #   resp.virtual_gateway.metadata.created_at #=> Time
+    #   resp.virtual_gateway.metadata.last_updated_at #=> Time
+    #   resp.virtual_gateway.metadata.mesh_owner #=> String
+    #   resp.virtual_gateway.metadata.resource_owner #=> String
+    #   resp.virtual_gateway.metadata.uid #=> String
+    #   resp.virtual_gateway.metadata.version #=> Integer
+    #   resp.virtual_gateway.spec.backend_defaults.client_policy.tls.enforce #=> Boolean
+    #   resp.virtual_gateway.spec.backend_defaults.client_policy.tls.ports #=> Array
+    #   resp.virtual_gateway.spec.backend_defaults.client_policy.tls.ports[0] #=> Integer
+    #   resp.virtual_gateway.spec.backend_defaults.client_policy.tls.validation.trust.acm.certificate_authority_arns #=> Array
+    #   resp.virtual_gateway.spec.backend_defaults.client_policy.tls.validation.trust.acm.certificate_authority_arns[0] #=> String
+    #   resp.virtual_gateway.spec.backend_defaults.client_policy.tls.validation.trust.file.certificate_chain #=> String
+    #   resp.virtual_gateway.spec.listeners #=> Array
+    #   resp.virtual_gateway.spec.listeners[0].health_check.healthy_threshold #=> Integer
+    #   resp.virtual_gateway.spec.listeners[0].health_check.interval_millis #=> Integer
+    #   resp.virtual_gateway.spec.listeners[0].health_check.path #=> String
+    #   resp.virtual_gateway.spec.listeners[0].health_check.port #=> Integer
+    #   resp.virtual_gateway.spec.listeners[0].health_check.protocol #=> String, one of "grpc", "http", "http2"
+    #   resp.virtual_gateway.spec.listeners[0].health_check.timeout_millis #=> Integer
+    #   resp.virtual_gateway.spec.listeners[0].health_check.unhealthy_threshold #=> Integer
+    #   resp.virtual_gateway.spec.listeners[0].port_mapping.port #=> Integer
+    #   resp.virtual_gateway.spec.listeners[0].port_mapping.protocol #=> String, one of "grpc", "http", "http2"
+    #   resp.virtual_gateway.spec.listeners[0].tls.certificate.acm.certificate_arn #=> String
+    #   resp.virtual_gateway.spec.listeners[0].tls.certificate.file.certificate_chain #=> String
+    #   resp.virtual_gateway.spec.listeners[0].tls.certificate.file.private_key #=> String
+    #   resp.virtual_gateway.spec.listeners[0].tls.mode #=> String, one of "DISABLED", "PERMISSIVE", "STRICT"
+    #   resp.virtual_gateway.spec.logging.access_log.file.path #=> String
+    #   resp.virtual_gateway.status.status #=> String, one of "ACTIVE", "DELETED", "INACTIVE"
+    #   resp.virtual_gateway.virtual_gateway_name #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appmesh-2019-01-25/DescribeVirtualGateway AWS API Documentation
+    #
+    # @overload describe_virtual_gateway(params = {})
+    # @param [Hash] params ({})
+    def describe_virtual_gateway(params = {}, options = {})
+      req = build_request(:describe_virtual_gateway, params)
       req.send_request(options)
     end
 
@@ -2038,6 +2620,81 @@ module Aws::AppMesh
       req.send_request(options)
     end
 
+    # Returns a list of existing gateway routes that are associated to a
+    # virtual gateway.
+    #
+    # @option params [Integer] :limit
+    #   The maximum number of results returned by `ListGatewayRoutes` in
+    #   paginated output. When you use this parameter, `ListGatewayRoutes`
+    #   returns only `limit` results in a single page along with a `nextToken`
+    #   response element. You can see the remaining results of the initial
+    #   request by sending another `ListGatewayRoutes` request with the
+    #   returned `nextToken` value. This value can be between 1 and 100. If
+    #   you don't use this parameter, `ListGatewayRoutes` returns up to 100
+    #   results and a `nextToken` value if applicable.
+    #
+    # @option params [required, String] :mesh_name
+    #   The name of the service mesh to list gateway routes in.
+    #
+    # @option params [String] :mesh_owner
+    #   The AWS IAM account ID of the service mesh owner. If the account ID is
+    #   not your own, then it's the ID of the account that shared the mesh
+    #   with your account. For more information about mesh sharing, see
+    #   [Working with shared meshes][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/app-mesh/latest/userguide/sharing.html
+    #
+    # @option params [String] :next_token
+    #   The `nextToken` value returned from a previous paginated
+    #   `ListGatewayRoutes` request where `limit` was used and the results
+    #   exceeded the value of that parameter. Pagination continues from the
+    #   end of the previous results that returned the `nextToken` value.
+    #
+    # @option params [required, String] :virtual_gateway_name
+    #   The name of the virtual gateway to list gateway routes in.
+    #
+    # @return [Types::ListGatewayRoutesOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListGatewayRoutesOutput#gateway_routes #gateway_routes} => Array&lt;Types::GatewayRouteRef&gt;
+    #   * {Types::ListGatewayRoutesOutput#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_gateway_routes({
+    #     limit: 1,
+    #     mesh_name: "ResourceName", # required
+    #     mesh_owner: "AccountId",
+    #     next_token: "String",
+    #     virtual_gateway_name: "ResourceName", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.gateway_routes #=> Array
+    #   resp.gateway_routes[0].arn #=> String
+    #   resp.gateway_routes[0].created_at #=> Time
+    #   resp.gateway_routes[0].gateway_route_name #=> String
+    #   resp.gateway_routes[0].last_updated_at #=> Time
+    #   resp.gateway_routes[0].mesh_name #=> String
+    #   resp.gateway_routes[0].mesh_owner #=> String
+    #   resp.gateway_routes[0].resource_owner #=> String
+    #   resp.gateway_routes[0].version #=> Integer
+    #   resp.gateway_routes[0].virtual_gateway_name #=> String
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appmesh-2019-01-25/ListGatewayRoutes AWS API Documentation
+    #
+    # @overload list_gateway_routes(params = {})
+    # @param [Hash] params ({})
+    def list_gateway_routes(params = {}, options = {})
+      req = build_request(:list_gateway_routes, params)
+      req.send_request(options)
+    end
+
     # Returns a list of existing service meshes.
     #
     # @option params [Integer] :limit
@@ -2221,6 +2878,75 @@ module Aws::AppMesh
     # @param [Hash] params ({})
     def list_tags_for_resource(params = {}, options = {})
       req = build_request(:list_tags_for_resource, params)
+      req.send_request(options)
+    end
+
+    # Returns a list of existing virtual gateways in a service mesh.
+    #
+    # @option params [Integer] :limit
+    #   The maximum number of results returned by `ListVirtualGateways` in
+    #   paginated output. When you use this parameter, `ListVirtualGateways`
+    #   returns only `limit` results in a single page along with a `nextToken`
+    #   response element. You can see the remaining results of the initial
+    #   request by sending another `ListVirtualGateways` request with the
+    #   returned `nextToken` value. This value can be between 1 and 100. If
+    #   you don't use this parameter, `ListVirtualGateways` returns up to 100
+    #   results and a `nextToken` value if applicable.
+    #
+    # @option params [required, String] :mesh_name
+    #   The name of the service mesh to list virtual gateways in.
+    #
+    # @option params [String] :mesh_owner
+    #   The AWS IAM account ID of the service mesh owner. If the account ID is
+    #   not your own, then it's the ID of the account that shared the mesh
+    #   with your account. For more information about mesh sharing, see
+    #   [Working with shared meshes][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/app-mesh/latest/userguide/sharing.html
+    #
+    # @option params [String] :next_token
+    #   The `nextToken` value returned from a previous paginated
+    #   `ListVirtualGateways` request where `limit` was used and the results
+    #   exceeded the value of that parameter. Pagination continues from the
+    #   end of the previous results that returned the `nextToken` value.
+    #
+    # @return [Types::ListVirtualGatewaysOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListVirtualGatewaysOutput#next_token #next_token} => String
+    #   * {Types::ListVirtualGatewaysOutput#virtual_gateways #virtual_gateways} => Array&lt;Types::VirtualGatewayRef&gt;
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_virtual_gateways({
+    #     limit: 1,
+    #     mesh_name: "ResourceName", # required
+    #     mesh_owner: "AccountId",
+    #     next_token: "String",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.next_token #=> String
+    #   resp.virtual_gateways #=> Array
+    #   resp.virtual_gateways[0].arn #=> String
+    #   resp.virtual_gateways[0].created_at #=> Time
+    #   resp.virtual_gateways[0].last_updated_at #=> Time
+    #   resp.virtual_gateways[0].mesh_name #=> String
+    #   resp.virtual_gateways[0].mesh_owner #=> String
+    #   resp.virtual_gateways[0].resource_owner #=> String
+    #   resp.virtual_gateways[0].version #=> Integer
+    #   resp.virtual_gateways[0].virtual_gateway_name #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appmesh-2019-01-25/ListVirtualGateways AWS API Documentation
+    #
+    # @overload list_virtual_gateways(params = {})
+    # @param [Hash] params ({})
+    def list_virtual_gateways(params = {}, options = {})
+      req = build_request(:list_virtual_gateways, params)
       req.send_request(options)
     end
 
@@ -2490,6 +3216,122 @@ module Aws::AppMesh
     # @param [Hash] params ({})
     def untag_resource(params = {}, options = {})
       req = build_request(:untag_resource, params)
+      req.send_request(options)
+    end
+
+    # Updates an existing gateway route that is associated to a specified
+    # virtual gateway in a service mesh.
+    #
+    # @option params [String] :client_token
+    #   Unique, case-sensitive identifier that you provide to ensure the
+    #   idempotency of the request. Up to 36 letters, numbers, hyphens, and
+    #   underscores are allowed.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.**
+    #
+    # @option params [required, String] :gateway_route_name
+    #   The name of the gateway route to update.
+    #
+    # @option params [required, String] :mesh_name
+    #   The name of the service mesh that the gateway route resides in.
+    #
+    # @option params [String] :mesh_owner
+    #   The AWS IAM account ID of the service mesh owner. If the account ID is
+    #   not your own, then it's the ID of the account that shared the mesh
+    #   with your account. For more information about mesh sharing, see
+    #   [Working with shared meshes][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/app-mesh/latest/userguide/sharing.html
+    #
+    # @option params [required, Types::GatewayRouteSpec] :spec
+    #   The new gateway route specification to apply. This overwrites the
+    #   existing data.
+    #
+    # @option params [required, String] :virtual_gateway_name
+    #   The name of the virtual gateway that the gateway route is associated
+    #   with.
+    #
+    # @return [Types::UpdateGatewayRouteOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::UpdateGatewayRouteOutput#gateway_route #gateway_route} => Types::GatewayRouteData
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_gateway_route({
+    #     client_token: "String",
+    #     gateway_route_name: "ResourceName", # required
+    #     mesh_name: "ResourceName", # required
+    #     mesh_owner: "AccountId",
+    #     spec: { # required
+    #       grpc_route: {
+    #         action: { # required
+    #           target: { # required
+    #             virtual_service: { # required
+    #               virtual_service_name: "ResourceName", # required
+    #             },
+    #           },
+    #         },
+    #         match: { # required
+    #           service_name: "ServiceName",
+    #         },
+    #       },
+    #       http2_route: {
+    #         action: { # required
+    #           target: { # required
+    #             virtual_service: { # required
+    #               virtual_service_name: "ResourceName", # required
+    #             },
+    #           },
+    #         },
+    #         match: { # required
+    #           prefix: "String", # required
+    #         },
+    #       },
+    #       http_route: {
+    #         action: { # required
+    #           target: { # required
+    #             virtual_service: { # required
+    #               virtual_service_name: "ResourceName", # required
+    #             },
+    #           },
+    #         },
+    #         match: { # required
+    #           prefix: "String", # required
+    #         },
+    #       },
+    #     },
+    #     virtual_gateway_name: "ResourceName", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.gateway_route.gateway_route_name #=> String
+    #   resp.gateway_route.mesh_name #=> String
+    #   resp.gateway_route.metadata.arn #=> String
+    #   resp.gateway_route.metadata.created_at #=> Time
+    #   resp.gateway_route.metadata.last_updated_at #=> Time
+    #   resp.gateway_route.metadata.mesh_owner #=> String
+    #   resp.gateway_route.metadata.resource_owner #=> String
+    #   resp.gateway_route.metadata.uid #=> String
+    #   resp.gateway_route.metadata.version #=> Integer
+    #   resp.gateway_route.spec.grpc_route.action.target.virtual_service.virtual_service_name #=> String
+    #   resp.gateway_route.spec.grpc_route.match.service_name #=> String
+    #   resp.gateway_route.spec.http2_route.action.target.virtual_service.virtual_service_name #=> String
+    #   resp.gateway_route.spec.http2_route.match.prefix #=> String
+    #   resp.gateway_route.spec.http_route.action.target.virtual_service.virtual_service_name #=> String
+    #   resp.gateway_route.spec.http_route.match.prefix #=> String
+    #   resp.gateway_route.status.status #=> String, one of "ACTIVE", "DELETED", "INACTIVE"
+    #   resp.gateway_route.virtual_gateway_name #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appmesh-2019-01-25/UpdateGatewayRoute AWS API Documentation
+    #
+    # @overload update_gateway_route(params = {})
+    # @param [Hash] params ({})
+    def update_gateway_route(params = {}, options = {})
+      req = build_request(:update_gateway_route, params)
       req.send_request(options)
     end
 
@@ -2869,6 +3711,148 @@ module Aws::AppMesh
     # @param [Hash] params ({})
     def update_route(params = {}, options = {})
       req = build_request(:update_route, params)
+      req.send_request(options)
+    end
+
+    # Updates an existing virtual gateway in a specified service mesh.
+    #
+    # @option params [String] :client_token
+    #   Unique, case-sensitive identifier that you provide to ensure the
+    #   idempotency of the request. Up to 36 letters, numbers, hyphens, and
+    #   underscores are allowed.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.**
+    #
+    # @option params [required, String] :mesh_name
+    #   The name of the service mesh that the virtual gateway resides in.
+    #
+    # @option params [String] :mesh_owner
+    #   The AWS IAM account ID of the service mesh owner. If the account ID is
+    #   not your own, then it's the ID of the account that shared the mesh
+    #   with your account. For more information about mesh sharing, see
+    #   [Working with shared meshes][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/app-mesh/latest/userguide/sharing.html
+    #
+    # @option params [required, Types::VirtualGatewaySpec] :spec
+    #   The new virtual gateway specification to apply. This overwrites the
+    #   existing data.
+    #
+    # @option params [required, String] :virtual_gateway_name
+    #   The name of the virtual gateway to update.
+    #
+    # @return [Types::UpdateVirtualGatewayOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::UpdateVirtualGatewayOutput#virtual_gateway #virtual_gateway} => Types::VirtualGatewayData
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_virtual_gateway({
+    #     client_token: "String",
+    #     mesh_name: "ResourceName", # required
+    #     mesh_owner: "AccountId",
+    #     spec: { # required
+    #       backend_defaults: {
+    #         client_policy: {
+    #           tls: {
+    #             enforce: false,
+    #             ports: [1],
+    #             validation: { # required
+    #               trust: { # required
+    #                 acm: {
+    #                   certificate_authority_arns: ["Arn"], # required
+    #                 },
+    #                 file: {
+    #                   certificate_chain: "FilePath", # required
+    #                 },
+    #               },
+    #             },
+    #           },
+    #         },
+    #       },
+    #       listeners: [ # required
+    #         {
+    #           health_check: {
+    #             healthy_threshold: 1, # required
+    #             interval_millis: 1, # required
+    #             path: "String",
+    #             port: 1,
+    #             protocol: "grpc", # required, accepts grpc, http, http2
+    #             timeout_millis: 1, # required
+    #             unhealthy_threshold: 1, # required
+    #           },
+    #           port_mapping: { # required
+    #             port: 1, # required
+    #             protocol: "grpc", # required, accepts grpc, http, http2
+    #           },
+    #           tls: {
+    #             certificate: { # required
+    #               acm: {
+    #                 certificate_arn: "Arn", # required
+    #               },
+    #               file: {
+    #                 certificate_chain: "FilePath", # required
+    #                 private_key: "FilePath", # required
+    #               },
+    #             },
+    #             mode: "DISABLED", # required, accepts DISABLED, PERMISSIVE, STRICT
+    #           },
+    #         },
+    #       ],
+    #       logging: {
+    #         access_log: {
+    #           file: {
+    #             path: "FilePath", # required
+    #           },
+    #         },
+    #       },
+    #     },
+    #     virtual_gateway_name: "ResourceName", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.virtual_gateway.mesh_name #=> String
+    #   resp.virtual_gateway.metadata.arn #=> String
+    #   resp.virtual_gateway.metadata.created_at #=> Time
+    #   resp.virtual_gateway.metadata.last_updated_at #=> Time
+    #   resp.virtual_gateway.metadata.mesh_owner #=> String
+    #   resp.virtual_gateway.metadata.resource_owner #=> String
+    #   resp.virtual_gateway.metadata.uid #=> String
+    #   resp.virtual_gateway.metadata.version #=> Integer
+    #   resp.virtual_gateway.spec.backend_defaults.client_policy.tls.enforce #=> Boolean
+    #   resp.virtual_gateway.spec.backend_defaults.client_policy.tls.ports #=> Array
+    #   resp.virtual_gateway.spec.backend_defaults.client_policy.tls.ports[0] #=> Integer
+    #   resp.virtual_gateway.spec.backend_defaults.client_policy.tls.validation.trust.acm.certificate_authority_arns #=> Array
+    #   resp.virtual_gateway.spec.backend_defaults.client_policy.tls.validation.trust.acm.certificate_authority_arns[0] #=> String
+    #   resp.virtual_gateway.spec.backend_defaults.client_policy.tls.validation.trust.file.certificate_chain #=> String
+    #   resp.virtual_gateway.spec.listeners #=> Array
+    #   resp.virtual_gateway.spec.listeners[0].health_check.healthy_threshold #=> Integer
+    #   resp.virtual_gateway.spec.listeners[0].health_check.interval_millis #=> Integer
+    #   resp.virtual_gateway.spec.listeners[0].health_check.path #=> String
+    #   resp.virtual_gateway.spec.listeners[0].health_check.port #=> Integer
+    #   resp.virtual_gateway.spec.listeners[0].health_check.protocol #=> String, one of "grpc", "http", "http2"
+    #   resp.virtual_gateway.spec.listeners[0].health_check.timeout_millis #=> Integer
+    #   resp.virtual_gateway.spec.listeners[0].health_check.unhealthy_threshold #=> Integer
+    #   resp.virtual_gateway.spec.listeners[0].port_mapping.port #=> Integer
+    #   resp.virtual_gateway.spec.listeners[0].port_mapping.protocol #=> String, one of "grpc", "http", "http2"
+    #   resp.virtual_gateway.spec.listeners[0].tls.certificate.acm.certificate_arn #=> String
+    #   resp.virtual_gateway.spec.listeners[0].tls.certificate.file.certificate_chain #=> String
+    #   resp.virtual_gateway.spec.listeners[0].tls.certificate.file.private_key #=> String
+    #   resp.virtual_gateway.spec.listeners[0].tls.mode #=> String, one of "DISABLED", "PERMISSIVE", "STRICT"
+    #   resp.virtual_gateway.spec.logging.access_log.file.path #=> String
+    #   resp.virtual_gateway.status.status #=> String, one of "ACTIVE", "DELETED", "INACTIVE"
+    #   resp.virtual_gateway.virtual_gateway_name #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appmesh-2019-01-25/UpdateVirtualGateway AWS API Documentation
+    #
+    # @overload update_virtual_gateway(params = {})
+    # @param [Hash] params ({})
+    def update_virtual_gateway(params = {}, options = {})
+      req = build_request(:update_virtual_gateway, params)
       req.send_request(options)
     end
 
@@ -3286,7 +4270,7 @@ module Aws::AppMesh
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-appmesh'
-      context[:gem_version] = '1.27.0'
+      context[:gem_version] = '1.28.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -4183,8 +4183,9 @@ module Aws::AlexaForBusiness
     #         client_id: "ClientId", # required
     #         user_code: "UserCode", # required
     #         product_id: "ProductId", # required
-    #         device_serial_number: "DeviceSerialNumberForAVS", # required
+    #         device_serial_number: "DeviceSerialNumberForAVS",
     #         amazon_id: "AmazonId", # required
+    #         room_arn: "Arn",
     #       }
     #
     # @!attribute [rw] client_id
@@ -4213,6 +4214,10 @@ module Aws::AlexaForBusiness
     #   OEM creates a new product on Amazon's Developer Console.
     #   @return [String]
     #
+    # @!attribute [rw] room_arn
+    #   The ARN of the room with which to associate your AVS device.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/RegisterAVSDeviceRequest AWS API Documentation
     #
     class RegisterAVSDeviceRequest < Struct.new(
@@ -4220,7 +4225,8 @@ module Aws::AlexaForBusiness
       :user_code,
       :product_id,
       :device_serial_number,
-      :amazon_id)
+      :amazon_id,
+      :room_arn)
       SENSITIVE = []
       include Aws::Structure
     end

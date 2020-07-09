@@ -38,7 +38,7 @@ module Aws::CloudHSMV2
     #   @return [Time]
     #
     # @!attribute [rw] source_region
-    #   The AWS region that contains the source backup from which the new
+    #   The AWS Region that contains the source backup from which the new
     #   backup was copied.
     #   @return [String]
     #
@@ -49,7 +49,7 @@ module Aws::CloudHSMV2
     #
     # @!attribute [rw] source_cluster
     #   The identifier (ID) of the cluster containing the source backup from
-    #   which the new backup was copied. .
+    #   which the new backup was copied.
     #   @return [String]
     #
     # @!attribute [rw] delete_timestamp
@@ -57,6 +57,7 @@ module Aws::CloudHSMV2
     #   @return [Time]
     #
     # @!attribute [rw] tag_list
+    #   The list of tags for the backup.
     #   @return [Array<Types::Tag>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cloudhsmv2-2017-04-28/Backup AWS API Documentation
@@ -182,6 +183,9 @@ module Aws::CloudHSMV2
       include Aws::Structure
     end
 
+    # The request was rejected because of a tagging failure. Verify the tag
+    # conditions in all applicable policies, and then retry the request.
+    #
     # @!attribute [rw] message
     #   @return [String]
     #
@@ -253,6 +257,7 @@ module Aws::CloudHSMV2
     #   @return [Types::Certificates]
     #
     # @!attribute [rw] tag_list
+    #   The list of tags for the cluster.
     #   @return [Array<Types::Tag>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cloudhsmv2-2017-04-28/Cluster AWS API Documentation
@@ -300,6 +305,10 @@ module Aws::CloudHSMV2
     #   @return [String]
     #
     # @!attribute [rw] tag_list
+    #   Tags to apply to the destination backup during creation. If you
+    #   specify tags, only these tags will be applied to the destination
+    #   backup. If you do not specify tags, the service copies tags from the
+    #   source backup to the destination backup.
     #   @return [Array<Types::Tag>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cloudhsmv2-2017-04-28/CopyBackupToRegionRequest AWS API Documentation
@@ -368,6 +377,7 @@ module Aws::CloudHSMV2
     #   @return [String]
     #
     # @!attribute [rw] tag_list
+    #   Tags to apply to the CloudHSM cluster during creation.
     #   @return [Array<Types::Tag>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cloudhsmv2-2017-04-28/CreateClusterRequest AWS API Documentation

@@ -67,7 +67,7 @@ module Aws::Amplify
     #   @return [Boolean]
     #
     # @!attribute [rw] enable_branch_auto_deletion
-    #   Automatically disconnects a branch in the Amplify Console when you
+    #   Automatically disconnect a branch in the Amplify Console when you
     #   delete a branch from your Git repository.
     #   @return [Boolean]
     #

@@ -344,7 +344,7 @@ module Aws::Comprehend
     # @example Request syntax with placeholder values
     #
     #   resp = client.batch_detect_dominant_language({
-    #     text_list: ["String"], # required
+    #     text_list: ["CustomerInputString"], # required
     #   })
     #
     # @example Response structure
@@ -390,7 +390,7 @@ module Aws::Comprehend
     # @example Request syntax with placeholder values
     #
     #   resp = client.batch_detect_entities({
-    #     text_list: ["String"], # required
+    #     text_list: ["CustomerInputString"], # required
     #     language_code: "en", # required, accepts en, es, fr, de, it, pt, ar, hi, ja, ko, zh, zh-TW
     #   })
     #
@@ -438,7 +438,7 @@ module Aws::Comprehend
     # @example Request syntax with placeholder values
     #
     #   resp = client.batch_detect_key_phrases({
-    #     text_list: ["String"], # required
+    #     text_list: ["CustomerInputString"], # required
     #     language_code: "en", # required, accepts en, es, fr, de, it, pt, ar, hi, ja, ko, zh, zh-TW
     #   })
     #
@@ -487,7 +487,7 @@ module Aws::Comprehend
     # @example Request syntax with placeholder values
     #
     #   resp = client.batch_detect_sentiment({
-    #     text_list: ["String"], # required
+    #     text_list: ["CustomerInputString"], # required
     #     language_code: "en", # required, accepts en, es, fr, de, it, pt, ar, hi, ja, ko, zh, zh-TW
     #   })
     #
@@ -537,7 +537,7 @@ module Aws::Comprehend
     # @example Request syntax with placeholder values
     #
     #   resp = client.batch_detect_syntax({
-    #     text_list: ["String"], # required
+    #     text_list: ["CustomerInputString"], # required
     #     language_code: "en", # required, accepts en, es, fr, de, it, pt
     #   })
     #
@@ -584,7 +584,7 @@ module Aws::Comprehend
     # @example Request syntax with placeholder values
     #
     #   resp = client.classify_document({
-    #     text: "String", # required
+    #     text: "CustomerInputString", # required
     #     endpoint_arn: "DocumentClassifierEndpointArn", # required
     #   })
     #
@@ -607,7 +607,7 @@ module Aws::Comprehend
     end
 
     # Creates a new document classifier that you can use to categorize
-    # documents. To create a classifier you provide a set of training
+    # documents. To create a classifier, you provide a set of training
     # documents that labeled with the categories that you want to use. After
     # the classifier is trained you can use it to categorize a set of
     # labeled documents into the categories. For more information, see
@@ -1427,7 +1427,7 @@ module Aws::Comprehend
     # @example Request syntax with placeholder values
     #
     #   resp = client.detect_dominant_language({
-    #     text: "String", # required
+    #     text: "CustomerInputString", # required
     #   })
     #
     # @example Response structure
@@ -1452,10 +1452,24 @@ module Aws::Comprehend
     #   A UTF-8 text string. Each string must contain fewer that 5,000 bytes
     #   of UTF-8 encoded characters.
     #
-    # @option params [required, String] :language_code
+    # @option params [String] :language_code
     #   The language of the input documents. You can specify any of the
     #   primary languages supported by Amazon Comprehend. All documents must
     #   be in the same language.
+    #
+    #   If your request includes the endpoint for a custom entity recognition
+    #   model, Amazon Comprehend uses the language of your custom model, and
+    #   it ignores any language code that you specify here.
+    #
+    # @option params [String] :endpoint_arn
+    #   The Amazon Resource Name of an endpoint that is associated with a
+    #   custom entity recognition model. Provide an endpoint if you want to
+    #   detect entities by using your own custom model instead of the default
+    #   model that is used by Amazon Comprehend.
+    #
+    #   If you specify an endpoint, Amazon Comprehend uses the language of
+    #   your custom model, and it ignores any language code that you provide
+    #   in your request.
     #
     # @return [Types::DetectEntitiesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1464,8 +1478,9 @@ module Aws::Comprehend
     # @example Request syntax with placeholder values
     #
     #   resp = client.detect_entities({
-    #     text: "String", # required
-    #     language_code: "en", # required, accepts en, es, fr, de, it, pt, ar, hi, ja, ko, zh, zh-TW
+    #     text: "CustomerInputString", # required
+    #     language_code: "en", # accepts en, es, fr, de, it, pt, ar, hi, ja, ko, zh, zh-TW
+    #     endpoint_arn: "EntityRecognizerEndpointArn",
     #   })
     #
     # @example Response structure
@@ -1504,7 +1519,7 @@ module Aws::Comprehend
     # @example Request syntax with placeholder values
     #
     #   resp = client.detect_key_phrases({
-    #     text: "String", # required
+    #     text: "CustomerInputString", # required
     #     language_code: "en", # required, accepts en, es, fr, de, it, pt, ar, hi, ja, ko, zh, zh-TW
     #   })
     #
@@ -1545,7 +1560,7 @@ module Aws::Comprehend
     # @example Request syntax with placeholder values
     #
     #   resp = client.detect_sentiment({
-    #     text: "String", # required
+    #     text: "CustomerInputString", # required
     #     language_code: "en", # required, accepts en, es, fr, de, it, pt, ar, hi, ja, ko, zh, zh-TW
     #   })
     #
@@ -1586,7 +1601,7 @@ module Aws::Comprehend
     # @example Request syntax with placeholder values
     #
     #   resp = client.detect_syntax({
-    #     text: "String", # required
+    #     text: "CustomerInputString", # required
     #     language_code: "en", # required, accepts en, es, fr, de, it, pt
     #   })
     #
@@ -3158,7 +3173,7 @@ module Aws::Comprehend
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-comprehend'
-      context[:gem_version] = '1.34.0'
+      context[:gem_version] = '1.35.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

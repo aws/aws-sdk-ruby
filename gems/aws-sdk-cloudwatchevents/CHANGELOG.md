@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.33.0 (2020-07-09)
+------------------
+
+* Feature - Amazon CloudWatch Events/EventBridge adds support for API Gateway as a target.
+
 1.32.0 (2020-07-02)
 ------------------
 

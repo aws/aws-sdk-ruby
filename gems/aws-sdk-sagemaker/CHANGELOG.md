@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.63.0 (2020-07-09)
+------------------
+
+* Feature - This release adds the DeleteHumanTaskUi API to Amazon Augmented AI
+
 1.62.0 (2020-06-26)
 ------------------
 

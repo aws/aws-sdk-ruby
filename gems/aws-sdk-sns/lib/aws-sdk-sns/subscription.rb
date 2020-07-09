@@ -48,7 +48,8 @@ module Aws::SNS
     #   and account system defaults.
     #
     # * `FilterPolicy` – The filter policy JSON that is assigned to the
-    #   subscription.
+    #   subscription. For more information, see [Amazon SNS Message
+    #   Filtering][1] in the *Amazon SNS Developer Guide*.
     #
     # * `Owner` – The AWS account ID of the subscription's owner.
     #
@@ -70,6 +71,10 @@ module Aws::SNS
     # * `SubscriptionArn` – The subscription's ARN.
     #
     # * `TopicArn` – The topic ARN that the subscription is associated with.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/sns/latest/dg/sns-message-filtering.html
     # @return [Hash<String,String>]
     def attributes
       data[:attributes]

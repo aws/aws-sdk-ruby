@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.21.0 (2020-07-09)
+------------------
+
+* Feature - Documentation update to the introduction text to specify that this is the Amplify Console API.
+
 1.20.0 (2020-06-24)
 ------------------
 

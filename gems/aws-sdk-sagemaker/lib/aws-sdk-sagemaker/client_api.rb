@@ -226,6 +226,8 @@ module Aws::SageMaker
     DeleteExperimentResponse = Shapes::StructureShape.new(name: 'DeleteExperimentResponse')
     DeleteFlowDefinitionRequest = Shapes::StructureShape.new(name: 'DeleteFlowDefinitionRequest')
     DeleteFlowDefinitionResponse = Shapes::StructureShape.new(name: 'DeleteFlowDefinitionResponse')
+    DeleteHumanTaskUiRequest = Shapes::StructureShape.new(name: 'DeleteHumanTaskUiRequest')
+    DeleteHumanTaskUiResponse = Shapes::StructureShape.new(name: 'DeleteHumanTaskUiResponse')
     DeleteModelInput = Shapes::StructureShape.new(name: 'DeleteModelInput')
     DeleteModelPackageInput = Shapes::StructureShape.new(name: 'DeleteModelPackageInput')
     DeleteMonitoringScheduleRequest = Shapes::StructureShape.new(name: 'DeleteMonitoringScheduleRequest')
@@ -390,6 +392,7 @@ module Aws::SageMaker
     HumanTaskConfig = Shapes::StructureShape.new(name: 'HumanTaskConfig')
     HumanTaskUiArn = Shapes::StringShape.new(name: 'HumanTaskUiArn')
     HumanTaskUiName = Shapes::StringShape.new(name: 'HumanTaskUiName')
+    HumanTaskUiStatus = Shapes::StringShape.new(name: 'HumanTaskUiStatus')
     HumanTaskUiSummaries = Shapes::ListShape.new(name: 'HumanTaskUiSummaries')
     HumanTaskUiSummary = Shapes::StructureShape.new(name: 'HumanTaskUiSummary')
     HyperParameterAlgorithmSpecification = Shapes::StructureShape.new(name: 'HyperParameterAlgorithmSpecification')
@@ -1591,6 +1594,11 @@ module Aws::SageMaker
 
     DeleteFlowDefinitionResponse.struct_class = Types::DeleteFlowDefinitionResponse
 
+    DeleteHumanTaskUiRequest.add_member(:human_task_ui_name, Shapes::ShapeRef.new(shape: HumanTaskUiName, required: true, location_name: "HumanTaskUiName"))
+    DeleteHumanTaskUiRequest.struct_class = Types::DeleteHumanTaskUiRequest
+
+    DeleteHumanTaskUiResponse.struct_class = Types::DeleteHumanTaskUiResponse
+
     DeleteModelInput.add_member(:model_name, Shapes::ShapeRef.new(shape: ModelName, required: true, location_name: "ModelName"))
     DeleteModelInput.struct_class = Types::DeleteModelInput
 
@@ -1806,6 +1814,7 @@ module Aws::SageMaker
 
     DescribeHumanTaskUiResponse.add_member(:human_task_ui_arn, Shapes::ShapeRef.new(shape: HumanTaskUiArn, required: true, location_name: "HumanTaskUiArn"))
     DescribeHumanTaskUiResponse.add_member(:human_task_ui_name, Shapes::ShapeRef.new(shape: HumanTaskUiName, required: true, location_name: "HumanTaskUiName"))
+    DescribeHumanTaskUiResponse.add_member(:human_task_ui_status, Shapes::ShapeRef.new(shape: HumanTaskUiStatus, location_name: "HumanTaskUiStatus"))
     DescribeHumanTaskUiResponse.add_member(:creation_time, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "CreationTime"))
     DescribeHumanTaskUiResponse.add_member(:ui_template, Shapes::ShapeRef.new(shape: UiTemplateInfo, required: true, location_name: "UiTemplate"))
     DescribeHumanTaskUiResponse.struct_class = Types::DescribeHumanTaskUiResponse
@@ -4221,6 +4230,15 @@ module Aws::SageMaker
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: DeleteFlowDefinitionRequest)
         o.output = Shapes::ShapeRef.new(shape: DeleteFlowDefinitionResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFound)
+      end)
+
+      api.add_operation(:delete_human_task_ui, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DeleteHumanTaskUi"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DeleteHumanTaskUiRequest)
+        o.output = Shapes::ShapeRef.new(shape: DeleteHumanTaskUiResponse)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFound)
       end)
 

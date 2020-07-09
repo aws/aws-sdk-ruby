@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.28.0 (2020-07-09)
+------------------
+
+* Feature - This release adds support for SMS origination number as an attribute in the MessageAttributes parameter for the SNS Publish API.
+
 1.27.0 (2020-07-02)
 ------------------
 

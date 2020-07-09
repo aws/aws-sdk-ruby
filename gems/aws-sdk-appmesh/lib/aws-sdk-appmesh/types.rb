@@ -163,6 +163,243 @@ module Aws::AppMesh
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass CreateVirtualGatewayInput
+    #   data as a hash:
+    #
+    #       {
+    #         client_token: "String",
+    #         mesh_name: "ResourceName", # required
+    #         mesh_owner: "AccountId",
+    #         spec: { # required
+    #           backend_defaults: {
+    #             client_policy: {
+    #               tls: {
+    #                 enforce: false,
+    #                 ports: [1],
+    #                 validation: { # required
+    #                   trust: { # required
+    #                     acm: {
+    #                       certificate_authority_arns: ["Arn"], # required
+    #                     },
+    #                     file: {
+    #                       certificate_chain: "FilePath", # required
+    #                     },
+    #                   },
+    #                 },
+    #               },
+    #             },
+    #           },
+    #           listeners: [ # required
+    #             {
+    #               health_check: {
+    #                 healthy_threshold: 1, # required
+    #                 interval_millis: 1, # required
+    #                 path: "String",
+    #                 port: 1,
+    #                 protocol: "grpc", # required, accepts grpc, http, http2
+    #                 timeout_millis: 1, # required
+    #                 unhealthy_threshold: 1, # required
+    #               },
+    #               port_mapping: { # required
+    #                 port: 1, # required
+    #                 protocol: "grpc", # required, accepts grpc, http, http2
+    #               },
+    #               tls: {
+    #                 certificate: { # required
+    #                   acm: {
+    #                     certificate_arn: "Arn", # required
+    #                   },
+    #                   file: {
+    #                     certificate_chain: "FilePath", # required
+    #                     private_key: "FilePath", # required
+    #                   },
+    #                 },
+    #                 mode: "DISABLED", # required, accepts DISABLED, PERMISSIVE, STRICT
+    #               },
+    #             },
+    #           ],
+    #           logging: {
+    #             access_log: {
+    #               file: {
+    #                 path: "FilePath", # required
+    #               },
+    #             },
+    #           },
+    #         },
+    #         tags: [
+    #           {
+    #             key: "TagKey", # required
+    #             value: "TagValue",
+    #           },
+    #         ],
+    #         virtual_gateway_name: "ResourceName", # required
+    #       }
+    #
+    # @!attribute [rw] client_token
+    #   Unique, case-sensitive identifier that you provide to ensure the
+    #   idempotency of the request. Up to 36 letters, numbers, hyphens, and
+    #   underscores are allowed.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.
+    #   @return [String]
+    #
+    # @!attribute [rw] mesh_name
+    #   The name of the service mesh to create the virtual gateway in.
+    #   @return [String]
+    #
+    # @!attribute [rw] mesh_owner
+    #   The AWS IAM account ID of the service mesh owner. If the account ID
+    #   is not your own, then the account that you specify must share the
+    #   mesh with your account before you can create the resource in the
+    #   service mesh. For more information about mesh sharing, see [Working
+    #   with shared meshes][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/app-mesh/latest/userguide/sharing.html
+    #   @return [String]
+    #
+    # @!attribute [rw] spec
+    #   The virtual gateway specification to apply.
+    #   @return [Types::VirtualGatewaySpec]
+    #
+    # @!attribute [rw] tags
+    #   Optional metadata that you can apply to the virtual gateway to
+    #   assist with categorization and organization. Each tag consists of a
+    #   key and an optional value, both of which you define. Tag keys can
+    #   have a maximum character length of 128 characters, and tag values
+    #   can have a maximum length of 256 characters.
+    #   @return [Array<Types::TagRef>]
+    #
+    # @!attribute [rw] virtual_gateway_name
+    #   The name to use for the virtual gateway.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appmesh-2019-01-25/CreateVirtualGatewayInput AWS API Documentation
+    #
+    class CreateVirtualGatewayInput < Struct.new(
+      :client_token,
+      :mesh_name,
+      :mesh_owner,
+      :spec,
+      :tags,
+      :virtual_gateway_name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass UpdateVirtualGatewayInput
+    #   data as a hash:
+    #
+    #       {
+    #         client_token: "String",
+    #         mesh_name: "ResourceName", # required
+    #         mesh_owner: "AccountId",
+    #         spec: { # required
+    #           backend_defaults: {
+    #             client_policy: {
+    #               tls: {
+    #                 enforce: false,
+    #                 ports: [1],
+    #                 validation: { # required
+    #                   trust: { # required
+    #                     acm: {
+    #                       certificate_authority_arns: ["Arn"], # required
+    #                     },
+    #                     file: {
+    #                       certificate_chain: "FilePath", # required
+    #                     },
+    #                   },
+    #                 },
+    #               },
+    #             },
+    #           },
+    #           listeners: [ # required
+    #             {
+    #               health_check: {
+    #                 healthy_threshold: 1, # required
+    #                 interval_millis: 1, # required
+    #                 path: "String",
+    #                 port: 1,
+    #                 protocol: "grpc", # required, accepts grpc, http, http2
+    #                 timeout_millis: 1, # required
+    #                 unhealthy_threshold: 1, # required
+    #               },
+    #               port_mapping: { # required
+    #                 port: 1, # required
+    #                 protocol: "grpc", # required, accepts grpc, http, http2
+    #               },
+    #               tls: {
+    #                 certificate: { # required
+    #                   acm: {
+    #                     certificate_arn: "Arn", # required
+    #                   },
+    #                   file: {
+    #                     certificate_chain: "FilePath", # required
+    #                     private_key: "FilePath", # required
+    #                   },
+    #                 },
+    #                 mode: "DISABLED", # required, accepts DISABLED, PERMISSIVE, STRICT
+    #               },
+    #             },
+    #           ],
+    #           logging: {
+    #             access_log: {
+    #               file: {
+    #                 path: "FilePath", # required
+    #               },
+    #             },
+    #           },
+    #         },
+    #         virtual_gateway_name: "ResourceName", # required
+    #       }
+    #
+    # @!attribute [rw] client_token
+    #   Unique, case-sensitive identifier that you provide to ensure the
+    #   idempotency of the request. Up to 36 letters, numbers, hyphens, and
+    #   underscores are allowed.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.
+    #   @return [String]
+    #
+    # @!attribute [rw] mesh_name
+    #   The name of the service mesh that the virtual gateway resides in.
+    #   @return [String]
+    #
+    # @!attribute [rw] mesh_owner
+    #   The AWS IAM account ID of the service mesh owner. If the account ID
+    #   is not your own, then it's the ID of the account that shared the
+    #   mesh with your account. For more information about mesh sharing, see
+    #   [Working with shared meshes][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/app-mesh/latest/userguide/sharing.html
+    #   @return [String]
+    #
+    # @!attribute [rw] spec
+    #   The new virtual gateway specification to apply. This overwrites the
+    #   existing data.
+    #   @return [Types::VirtualGatewaySpec]
+    #
+    # @!attribute [rw] virtual_gateway_name
+    #   The name of the virtual gateway to update.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appmesh-2019-01-25/UpdateVirtualGatewayInput AWS API Documentation
+    #
+    class UpdateVirtualGatewayInput < Struct.new(
+      :client_token,
+      :mesh_name,
+      :mesh_owner,
+      :spec,
+      :virtual_gateway_name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # An object that represents metadata for a resource.
     #
     # @!attribute [rw] arn
@@ -330,6 +567,33 @@ module Aws::AppMesh
       include Aws::Structure
     end
 
+    # An object that represents the criteria for determining a request
+    # match.
+    #
+    # @note When making an API call, you may pass HttpGatewayRouteMatch
+    #   data as a hash:
+    #
+    #       {
+    #         prefix: "String", # required
+    #       }
+    #
+    # @!attribute [rw] prefix
+    #   Specifies the path to match requests with. This parameter must
+    #   always start with `/`, which by itself matches all requests to the
+    #   virtual service name. You can also match for path-based routing of
+    #   requests. For example, if your virtual service name is
+    #   `my-service.local` and you want the route to match requests to
+    #   `my-service.local/metrics`, your prefix should be `/metrics`.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appmesh-2019-01-25/HttpGatewayRouteMatch AWS API Documentation
+    #
+    class HttpGatewayRouteMatch < Struct.new(
+      :prefix)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # An object that represents the health check policy for a virtual
     # node's listener.
     #
@@ -460,6 +724,118 @@ module Aws::AppMesh
       include Aws::Structure
     end
 
+    # An object that represents the specification of a service mesh
+    # resource.
+    #
+    # @note When making an API call, you may pass VirtualGatewaySpec
+    #   data as a hash:
+    #
+    #       {
+    #         backend_defaults: {
+    #           client_policy: {
+    #             tls: {
+    #               enforce: false,
+    #               ports: [1],
+    #               validation: { # required
+    #                 trust: { # required
+    #                   acm: {
+    #                     certificate_authority_arns: ["Arn"], # required
+    #                   },
+    #                   file: {
+    #                     certificate_chain: "FilePath", # required
+    #                   },
+    #                 },
+    #               },
+    #             },
+    #           },
+    #         },
+    #         listeners: [ # required
+    #           {
+    #             health_check: {
+    #               healthy_threshold: 1, # required
+    #               interval_millis: 1, # required
+    #               path: "String",
+    #               port: 1,
+    #               protocol: "grpc", # required, accepts grpc, http, http2
+    #               timeout_millis: 1, # required
+    #               unhealthy_threshold: 1, # required
+    #             },
+    #             port_mapping: { # required
+    #               port: 1, # required
+    #               protocol: "grpc", # required, accepts grpc, http, http2
+    #             },
+    #             tls: {
+    #               certificate: { # required
+    #                 acm: {
+    #                   certificate_arn: "Arn", # required
+    #                 },
+    #                 file: {
+    #                   certificate_chain: "FilePath", # required
+    #                   private_key: "FilePath", # required
+    #                 },
+    #               },
+    #               mode: "DISABLED", # required, accepts DISABLED, PERMISSIVE, STRICT
+    #             },
+    #           },
+    #         ],
+    #         logging: {
+    #           access_log: {
+    #             file: {
+    #               path: "FilePath", # required
+    #             },
+    #           },
+    #         },
+    #       }
+    #
+    # @!attribute [rw] backend_defaults
+    #   A reference to an object that represents the defaults for backends.
+    #   @return [Types::VirtualGatewayBackendDefaults]
+    #
+    # @!attribute [rw] listeners
+    #   The listeners that the mesh endpoint is expected to receive inbound
+    #   traffic from. You can specify one listener.
+    #   @return [Array<Types::VirtualGatewayListener>]
+    #
+    # @!attribute [rw] logging
+    #   An object that represents logging information.
+    #   @return [Types::VirtualGatewayLogging]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appmesh-2019-01-25/VirtualGatewaySpec AWS API Documentation
+    #
+    class VirtualGatewaySpec < Struct.new(
+      :backend_defaults,
+      :listeners,
+      :logging)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # An object that represents an access log file.
+    #
+    # @note When making an API call, you may pass VirtualGatewayFileAccessLog
+    #   data as a hash:
+    #
+    #       {
+    #         path: "FilePath", # required
+    #       }
+    #
+    # @!attribute [rw] path
+    #   The file path to write access logs to. You can use `/dev/stdout` to
+    #   send access logs to standard out and configure your Envoy container
+    #   to use a log driver, such as `awslogs`, to export the access logs to
+    #   a log storage service such as Amazon CloudWatch Logs. You can also
+    #   specify a path in the Envoy container's file system to write the
+    #   files to disk.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appmesh-2019-01-25/VirtualGatewayFileAccessLog AWS API Documentation
+    #
+    class VirtualGatewayFileAccessLog < Struct.new(
+      :path)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] virtual_service
     #   The full description of your virtual service.
     #   @return [Types::VirtualServiceData]
@@ -468,6 +844,122 @@ module Aws::AppMesh
     #
     class DescribeVirtualServiceOutput < Struct.new(
       :virtual_service)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass CreateGatewayRouteInput
+    #   data as a hash:
+    #
+    #       {
+    #         client_token: "String",
+    #         gateway_route_name: "ResourceName", # required
+    #         mesh_name: "ResourceName", # required
+    #         mesh_owner: "AccountId",
+    #         spec: { # required
+    #           grpc_route: {
+    #             action: { # required
+    #               target: { # required
+    #                 virtual_service: { # required
+    #                   virtual_service_name: "ResourceName", # required
+    #                 },
+    #               },
+    #             },
+    #             match: { # required
+    #               service_name: "ServiceName",
+    #             },
+    #           },
+    #           http2_route: {
+    #             action: { # required
+    #               target: { # required
+    #                 virtual_service: { # required
+    #                   virtual_service_name: "ResourceName", # required
+    #                 },
+    #               },
+    #             },
+    #             match: { # required
+    #               prefix: "String", # required
+    #             },
+    #           },
+    #           http_route: {
+    #             action: { # required
+    #               target: { # required
+    #                 virtual_service: { # required
+    #                   virtual_service_name: "ResourceName", # required
+    #                 },
+    #               },
+    #             },
+    #             match: { # required
+    #               prefix: "String", # required
+    #             },
+    #           },
+    #         },
+    #         tags: [
+    #           {
+    #             key: "TagKey", # required
+    #             value: "TagValue",
+    #           },
+    #         ],
+    #         virtual_gateway_name: "ResourceName", # required
+    #       }
+    #
+    # @!attribute [rw] client_token
+    #   Unique, case-sensitive identifier that you provide to ensure the
+    #   idempotency of the request. Up to 36 letters, numbers, hyphens, and
+    #   underscores are allowed.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.
+    #   @return [String]
+    #
+    # @!attribute [rw] gateway_route_name
+    #   The name to use for the gateway route.
+    #   @return [String]
+    #
+    # @!attribute [rw] mesh_name
+    #   The name of the service mesh to create the gateway route in.
+    #   @return [String]
+    #
+    # @!attribute [rw] mesh_owner
+    #   The AWS IAM account ID of the service mesh owner. If the account ID
+    #   is not your own, then the account that you specify must share the
+    #   mesh with your account before you can create the resource in the
+    #   service mesh. For more information about mesh sharing, see [Working
+    #   with shared meshes][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/app-mesh/latest/userguide/sharing.html
+    #   @return [String]
+    #
+    # @!attribute [rw] spec
+    #   The gateway route specification to apply.
+    #   @return [Types::GatewayRouteSpec]
+    #
+    # @!attribute [rw] tags
+    #   Optional metadata that you can apply to the gateway route to assist
+    #   with categorization and organization. Each tag consists of a key and
+    #   an optional value, both of which you define. Tag keys can have a
+    #   maximum character length of 128 characters, and tag values can have
+    #   a maximum length of 256 characters.
+    #   @return [Array<Types::TagRef>]
+    #
+    # @!attribute [rw] virtual_gateway_name
+    #   The name of the virtual gateway to associate the gateway route with.
+    #   If the virtual gateway is in a shared mesh, then you must be the
+    #   owner of the virtual gateway resource.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appmesh-2019-01-25/CreateGatewayRouteInput AWS API Documentation
+    #
+    class CreateGatewayRouteInput < Struct.new(
+      :client_token,
+      :gateway_route_name,
+      :mesh_name,
+      :mesh_owner,
+      :spec,
+      :tags,
+      :virtual_gateway_name)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -484,6 +976,41 @@ module Aws::AppMesh
       include Aws::Structure
     end
 
+    # An object that represents a virtual gateway returned by a describe
+    # operation.
+    #
+    # @!attribute [rw] mesh_name
+    #   The name of the service mesh that the virtual gateway resides in.
+    #   @return [String]
+    #
+    # @!attribute [rw] metadata
+    #   An object that represents metadata for a resource.
+    #   @return [Types::ResourceMetadata]
+    #
+    # @!attribute [rw] spec
+    #   The specifications of the virtual gateway.
+    #   @return [Types::VirtualGatewaySpec]
+    #
+    # @!attribute [rw] status
+    #   The current status of the virtual gateway.
+    #   @return [Types::VirtualGatewayStatus]
+    #
+    # @!attribute [rw] virtual_gateway_name
+    #   The name of the virtual gateway.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appmesh-2019-01-25/VirtualGatewayData AWS API Documentation
+    #
+    class VirtualGatewayData < Struct.new(
+      :mesh_name,
+      :metadata,
+      :spec,
+      :status,
+      :virtual_gateway_name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] route
     #   The full description of your mesh following the create call.
     #   @return [Types::RouteData]
@@ -492,6 +1019,62 @@ module Aws::AppMesh
     #
     class CreateRouteOutput < Struct.new(
       :route)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # An object that represents a listener for a virtual gateway.
+    #
+    # @note When making an API call, you may pass VirtualGatewayListener
+    #   data as a hash:
+    #
+    #       {
+    #         health_check: {
+    #           healthy_threshold: 1, # required
+    #           interval_millis: 1, # required
+    #           path: "String",
+    #           port: 1,
+    #           protocol: "grpc", # required, accepts grpc, http, http2
+    #           timeout_millis: 1, # required
+    #           unhealthy_threshold: 1, # required
+    #         },
+    #         port_mapping: { # required
+    #           port: 1, # required
+    #           protocol: "grpc", # required, accepts grpc, http, http2
+    #         },
+    #         tls: {
+    #           certificate: { # required
+    #             acm: {
+    #               certificate_arn: "Arn", # required
+    #             },
+    #             file: {
+    #               certificate_chain: "FilePath", # required
+    #               private_key: "FilePath", # required
+    #             },
+    #           },
+    #           mode: "DISABLED", # required, accepts DISABLED, PERMISSIVE, STRICT
+    #         },
+    #       }
+    #
+    # @!attribute [rw] health_check
+    #   The health check information for the listener.
+    #   @return [Types::VirtualGatewayHealthCheckPolicy]
+    #
+    # @!attribute [rw] port_mapping
+    #   The port mapping information for the listener.
+    #   @return [Types::VirtualGatewayPortMapping]
+    #
+    # @!attribute [rw] tls
+    #   A reference to an object that represents the Transport Layer
+    #   Security (TLS) properties for the listener.
+    #   @return [Types::VirtualGatewayListenerTls]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appmesh-2019-01-25/VirtualGatewayListener AWS API Documentation
+    #
+    class VirtualGatewayListener < Struct.new(
+      :health_check,
+      :port_mapping,
+      :tls)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -514,6 +1097,45 @@ module Aws::AppMesh
     #
     class DnsServiceDiscovery < Struct.new(
       :hostname)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # An object that represents a port mapping.
+    #
+    # @note When making an API call, you may pass VirtualGatewayPortMapping
+    #   data as a hash:
+    #
+    #       {
+    #         port: 1, # required
+    #         protocol: "grpc", # required, accepts grpc, http, http2
+    #       }
+    #
+    # @!attribute [rw] port
+    #   The port used for the port mapping. Specify one protocol.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] protocol
+    #   The protocol used for the port mapping.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appmesh-2019-01-25/VirtualGatewayPortMapping AWS API Documentation
+    #
+    class VirtualGatewayPortMapping < Struct.new(
+      :port,
+      :protocol)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] virtual_gateway
+    #   The virtual gateway that was deleted.
+    #   @return [Types::VirtualGatewayData]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appmesh-2019-01-25/DeleteVirtualGatewayOutput AWS API Documentation
+    #
+    class DeleteVirtualGatewayOutput < Struct.new(
+      :virtual_gateway)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -601,6 +1223,50 @@ module Aws::AppMesh
     #
     class UntagResourceOutput < Aws::EmptyStructure; end
 
+    # An object that represents the Transport Layer Security (TLS)
+    # properties for a listener.
+    #
+    # @note When making an API call, you may pass VirtualGatewayListenerTls
+    #   data as a hash:
+    #
+    #       {
+    #         certificate: { # required
+    #           acm: {
+    #             certificate_arn: "Arn", # required
+    #           },
+    #           file: {
+    #             certificate_chain: "FilePath", # required
+    #             private_key: "FilePath", # required
+    #           },
+    #         },
+    #         mode: "DISABLED", # required, accepts DISABLED, PERMISSIVE, STRICT
+    #       }
+    #
+    # @!attribute [rw] certificate
+    #   An object that represents a Transport Layer Security (TLS)
+    #   certificate.
+    #   @return [Types::VirtualGatewayListenerTlsCertificate]
+    #
+    # @!attribute [rw] mode
+    #   Specify one of the following modes.
+    #
+    #   * ****STRICT – Listener only accepts connections with TLS enabled.
+    #
+    #   * ****PERMISSIVE – Listener accepts connections with or without TLS
+    #     enabled.
+    #
+    #   * ****DISABLED – Listener only accepts connections without TLS.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appmesh-2019-01-25/VirtualGatewayListenerTls AWS API Documentation
+    #
+    class VirtualGatewayListenerTls < Struct.new(
+      :certificate,
+      :mode)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # An object that represents the backends that a virtual node is expected
     # to send outbound traffic to.
     #
@@ -682,6 +1348,101 @@ module Aws::AppMesh
       include Aws::Structure
     end
 
+    # An object that represents a local file certificate. The certificate
+    # must meet specific requirements and you must have proxy authorization
+    # enabled. For more information, see [Transport Layer Security
+    # (TLS)][1].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/app-mesh/latest/userguide/tls.html#virtual-node-tls-prerequisites
+    #
+    # @note When making an API call, you may pass VirtualGatewayListenerTlsFileCertificate
+    #   data as a hash:
+    #
+    #       {
+    #         certificate_chain: "FilePath", # required
+    #         private_key: "FilePath", # required
+    #       }
+    #
+    # @!attribute [rw] certificate_chain
+    #   The certificate chain for the certificate.
+    #   @return [String]
+    #
+    # @!attribute [rw] private_key
+    #   The private key for a certificate stored on the file system of the
+    #   mesh endpoint that the proxy is running on.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appmesh-2019-01-25/VirtualGatewayListenerTlsFileCertificate AWS API Documentation
+    #
+    class VirtualGatewayListenerTlsFileCertificate < Struct.new(
+      :certificate_chain,
+      :private_key)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass ListGatewayRoutesInput
+    #   data as a hash:
+    #
+    #       {
+    #         limit: 1,
+    #         mesh_name: "ResourceName", # required
+    #         mesh_owner: "AccountId",
+    #         next_token: "String",
+    #         virtual_gateway_name: "ResourceName", # required
+    #       }
+    #
+    # @!attribute [rw] limit
+    #   The maximum number of results returned by `ListGatewayRoutes` in
+    #   paginated output. When you use this parameter, `ListGatewayRoutes`
+    #   returns only `limit` results in a single page along with a
+    #   `nextToken` response element. You can see the remaining results of
+    #   the initial request by sending another `ListGatewayRoutes` request
+    #   with the returned `nextToken` value. This value can be between 1 and
+    #   100. If you don't use this parameter, `ListGatewayRoutes` returns
+    #   up to 100 results and a `nextToken` value if applicable.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] mesh_name
+    #   The name of the service mesh to list gateway routes in.
+    #   @return [String]
+    #
+    # @!attribute [rw] mesh_owner
+    #   The AWS IAM account ID of the service mesh owner. If the account ID
+    #   is not your own, then it's the ID of the account that shared the
+    #   mesh with your account. For more information about mesh sharing, see
+    #   [Working with shared meshes][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/app-mesh/latest/userguide/sharing.html
+    #   @return [String]
+    #
+    # @!attribute [rw] next_token
+    #   The `nextToken` value returned from a previous paginated
+    #   `ListGatewayRoutes` request where `limit` was used and the results
+    #   exceeded the value of that parameter. Pagination continues from the
+    #   end of the previous results that returned the `nextToken` value.
+    #   @return [String]
+    #
+    # @!attribute [rw] virtual_gateway_name
+    #   The name of the virtual gateway to list gateway routes in.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appmesh-2019-01-25/ListGatewayRoutesInput AWS API Documentation
+    #
+    class ListGatewayRoutesInput < Struct.new(
+      :limit,
+      :mesh_name,
+      :mesh_owner,
+      :next_token,
+      :virtual_gateway_name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # An object that represents a virtual router returned by a describe
     # operation.
     #
@@ -753,6 +1514,76 @@ module Aws::AppMesh
       :client_token,
       :mesh_name,
       :spec)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # An object that represents the health check policy for a virtual
+    # gateway's listener.
+    #
+    # @note When making an API call, you may pass VirtualGatewayHealthCheckPolicy
+    #   data as a hash:
+    #
+    #       {
+    #         healthy_threshold: 1, # required
+    #         interval_millis: 1, # required
+    #         path: "String",
+    #         port: 1,
+    #         protocol: "grpc", # required, accepts grpc, http, http2
+    #         timeout_millis: 1, # required
+    #         unhealthy_threshold: 1, # required
+    #       }
+    #
+    # @!attribute [rw] healthy_threshold
+    #   The number of consecutive successful health checks that must occur
+    #   before declaring the listener healthy.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] interval_millis
+    #   The time period in milliseconds between each health check execution.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] path
+    #   The destination path for the health check request. This value is
+    #   only used if the specified protocol is HTTP or HTTP/2. For any other
+    #   protocol, this value is ignored.
+    #   @return [String]
+    #
+    # @!attribute [rw] port
+    #   The destination port for the health check request. This port must
+    #   match the port defined in the PortMapping for the listener.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] protocol
+    #   The protocol for the health check request. If you specify `grpc`,
+    #   then your service must conform to the [GRPC Health Checking
+    #   Protocol][1].
+    #
+    #
+    #
+    #   [1]: https://github.com/grpc/grpc/blob/master/doc/health-checking.md
+    #   @return [String]
+    #
+    # @!attribute [rw] timeout_millis
+    #   The amount of time to wait when receiving a response from the health
+    #   check, in milliseconds.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] unhealthy_threshold
+    #   The number of consecutive failed health checks that must occur
+    #   before declaring a virtual gateway unhealthy.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appmesh-2019-01-25/VirtualGatewayHealthCheckPolicy AWS API Documentation
+    #
+    class VirtualGatewayHealthCheckPolicy < Struct.new(
+      :healthy_threshold,
+      :interval_millis,
+      :path,
+      :port,
+      :protocol,
+      :timeout_millis,
+      :unhealthy_threshold)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -891,6 +1722,40 @@ module Aws::AppMesh
     # An object that represents a listener's Transport Layer Security (TLS)
     # certificate.
     #
+    # @note When making an API call, you may pass VirtualGatewayListenerTlsCertificate
+    #   data as a hash:
+    #
+    #       {
+    #         acm: {
+    #           certificate_arn: "Arn", # required
+    #         },
+    #         file: {
+    #           certificate_chain: "FilePath", # required
+    #           private_key: "FilePath", # required
+    #         },
+    #       }
+    #
+    # @!attribute [rw] acm
+    #   A reference to an object that represents an AWS Certicate Manager
+    #   (ACM) certificate.
+    #   @return [Types::VirtualGatewayListenerTlsAcmCertificate]
+    #
+    # @!attribute [rw] file
+    #   A reference to an object that represents a local file certificate.
+    #   @return [Types::VirtualGatewayListenerTlsFileCertificate]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appmesh-2019-01-25/VirtualGatewayListenerTlsCertificate AWS API Documentation
+    #
+    class VirtualGatewayListenerTlsCertificate < Struct.new(
+      :acm,
+      :file)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # An object that represents a listener's Transport Layer Security (TLS)
+    # certificate.
+    #
     # @note When making an API call, you may pass ListenerTlsCertificate
     #   data as a hash:
     #
@@ -947,6 +1812,28 @@ module Aws::AppMesh
     #
     class VirtualRouterSpec < Struct.new(
       :listeners)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # An object that represents the virtual service that traffic is routed
+    # to.
+    #
+    # @note When making an API call, you may pass GatewayRouteVirtualService
+    #   data as a hash:
+    #
+    #       {
+    #         virtual_service_name: "ResourceName", # required
+    #       }
+    #
+    # @!attribute [rw] virtual_service_name
+    #   The name of the virtual service that traffic is routed to.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appmesh-2019-01-25/GatewayRouteVirtualService AWS API Documentation
+    #
+    class GatewayRouteVirtualService < Struct.new(
+      :virtual_service_name)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1147,6 +2034,75 @@ module Aws::AppMesh
       include Aws::Structure
     end
 
+    # An object that represents a gateway route specification. Specify one
+    # gateway route type.
+    #
+    # @note When making an API call, you may pass GatewayRouteSpec
+    #   data as a hash:
+    #
+    #       {
+    #         grpc_route: {
+    #           action: { # required
+    #             target: { # required
+    #               virtual_service: { # required
+    #                 virtual_service_name: "ResourceName", # required
+    #               },
+    #             },
+    #           },
+    #           match: { # required
+    #             service_name: "ServiceName",
+    #           },
+    #         },
+    #         http2_route: {
+    #           action: { # required
+    #             target: { # required
+    #               virtual_service: { # required
+    #                 virtual_service_name: "ResourceName", # required
+    #               },
+    #             },
+    #           },
+    #           match: { # required
+    #             prefix: "String", # required
+    #           },
+    #         },
+    #         http_route: {
+    #           action: { # required
+    #             target: { # required
+    #               virtual_service: { # required
+    #                 virtual_service_name: "ResourceName", # required
+    #               },
+    #             },
+    #           },
+    #           match: { # required
+    #             prefix: "String", # required
+    #           },
+    #         },
+    #       }
+    #
+    # @!attribute [rw] grpc_route
+    #   An object that represents the specification of a gRPC gateway route.
+    #   @return [Types::GrpcGatewayRoute]
+    #
+    # @!attribute [rw] http2_route
+    #   An object that represents the specification of an HTTP/2 gateway
+    #   route.
+    #   @return [Types::HttpGatewayRoute]
+    #
+    # @!attribute [rw] http_route
+    #   An object that represents the specification of an HTTP gateway
+    #   route.
+    #   @return [Types::HttpGatewayRoute]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appmesh-2019-01-25/GatewayRouteSpec AWS API Documentation
+    #
+    class GatewayRouteSpec < Struct.new(
+      :grpc_route,
+      :http2_route,
+      :http_route)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The request contains a client token that was used for a previous
     # update resource call with different specifications. Try the request
     # again with a new client token.
@@ -1162,6 +2118,44 @@ module Aws::AppMesh
       include Aws::Structure
     end
 
+    # An object that represents the default properties for a backend.
+    #
+    # @note When making an API call, you may pass VirtualGatewayBackendDefaults
+    #   data as a hash:
+    #
+    #       {
+    #         client_policy: {
+    #           tls: {
+    #             enforce: false,
+    #             ports: [1],
+    #             validation: { # required
+    #               trust: { # required
+    #                 acm: {
+    #                   certificate_authority_arns: ["Arn"], # required
+    #                 },
+    #                 file: {
+    #                   certificate_chain: "FilePath", # required
+    #                 },
+    #               },
+    #             },
+    #           },
+    #         },
+    #       }
+    #
+    # @!attribute [rw] client_policy
+    #   A reference to an object that represents a client policy.
+    #   @return [Types::VirtualGatewayClientPolicy]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appmesh-2019-01-25/VirtualGatewayBackendDefaults AWS API Documentation
+    #
+    class VirtualGatewayBackendDefaults < Struct.new(
+      :client_policy)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # An object that represents timeouts for different protocols.
+    #
     # @note When making an API call, you may pass ListenerTimeout
     #   data as a hash:
     #
@@ -1205,15 +2199,19 @@ module Aws::AppMesh
     #       }
     #
     # @!attribute [rw] grpc
+    #   An object that represents types of timeouts.
     #   @return [Types::GrpcTimeout]
     #
     # @!attribute [rw] http
+    #   An object that represents types of timeouts.
     #   @return [Types::HttpTimeout]
     #
     # @!attribute [rw] http2
+    #   An object that represents types of timeouts.
     #   @return [Types::HttpTimeout]
     #
     # @!attribute [rw] tcp
+    #   An object that represents types of timeouts.
     #   @return [Types::TcpTimeout]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appmesh-2019-01-25/ListenerTimeout AWS API Documentation
@@ -1223,6 +2221,51 @@ module Aws::AppMesh
       :http,
       :http2,
       :tcp)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass DescribeGatewayRouteInput
+    #   data as a hash:
+    #
+    #       {
+    #         gateway_route_name: "ResourceName", # required
+    #         mesh_name: "ResourceName", # required
+    #         mesh_owner: "AccountId",
+    #         virtual_gateway_name: "ResourceName", # required
+    #       }
+    #
+    # @!attribute [rw] gateway_route_name
+    #   The name of the gateway route to describe.
+    #   @return [String]
+    #
+    # @!attribute [rw] mesh_name
+    #   The name of the service mesh that the gateway route resides in.
+    #   @return [String]
+    #
+    # @!attribute [rw] mesh_owner
+    #   The AWS IAM account ID of the service mesh owner. If the account ID
+    #   is not your own, then it's the ID of the account that shared the
+    #   mesh with your account. For more information about mesh sharing, see
+    #   [Working with shared meshes][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/app-mesh/latest/userguide/sharing.html
+    #   @return [String]
+    #
+    # @!attribute [rw] virtual_gateway_name
+    #   The name of the virtual gateway that the gateway route is associated
+    #   with.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appmesh-2019-01-25/DescribeGatewayRouteInput AWS API Documentation
+    #
+    class DescribeGatewayRouteInput < Struct.new(
+      :gateway_route_name,
+      :mesh_name,
+      :mesh_owner,
+      :virtual_gateway_name)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1337,6 +2380,83 @@ module Aws::AppMesh
     class WeightedTarget < Struct.new(
       :virtual_node,
       :weight)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # An object that represents a gRPC gateway route.
+    #
+    # @note When making an API call, you may pass GrpcGatewayRoute
+    #   data as a hash:
+    #
+    #       {
+    #         action: { # required
+    #           target: { # required
+    #             virtual_service: { # required
+    #               virtual_service_name: "ResourceName", # required
+    #             },
+    #           },
+    #         },
+    #         match: { # required
+    #           service_name: "ServiceName",
+    #         },
+    #       }
+    #
+    # @!attribute [rw] action
+    #   An object that represents the action to take if a match is
+    #   determined.
+    #   @return [Types::GrpcGatewayRouteAction]
+    #
+    # @!attribute [rw] match
+    #   An object that represents the criteria for determining a request
+    #   match.
+    #   @return [Types::GrpcGatewayRouteMatch]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appmesh-2019-01-25/GrpcGatewayRoute AWS API Documentation
+    #
+    class GrpcGatewayRoute < Struct.new(
+      :action,
+      :match)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # An object that represents a gateway route returned by a describe
+    # operation.
+    #
+    # @!attribute [rw] gateway_route_name
+    #   The name of the gateway route.
+    #   @return [String]
+    #
+    # @!attribute [rw] mesh_name
+    #   The name of the service mesh that the resource resides in.
+    #   @return [String]
+    #
+    # @!attribute [rw] metadata
+    #   An object that represents metadata for a resource.
+    #   @return [Types::ResourceMetadata]
+    #
+    # @!attribute [rw] spec
+    #   The specifications of the gateway route.
+    #   @return [Types::GatewayRouteSpec]
+    #
+    # @!attribute [rw] status
+    #   The status of the gateway route.
+    #   @return [Types::GatewayRouteStatus]
+    #
+    # @!attribute [rw] virtual_gateway_name
+    #   The virtual gateway that the gateway route is associated with.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appmesh-2019-01-25/GatewayRouteData AWS API Documentation
+    #
+    class GatewayRouteData < Struct.new(
+      :gateway_route_name,
+      :mesh_name,
+      :metadata,
+      :spec,
+      :status,
+      :virtual_gateway_name)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1600,6 +2720,78 @@ module Aws::AppMesh
       include Aws::Structure
     end
 
+    # An object that represents a Transport Layer Security (TLS) client
+    # policy.
+    #
+    # @note When making an API call, you may pass VirtualGatewayClientPolicyTls
+    #   data as a hash:
+    #
+    #       {
+    #         enforce: false,
+    #         ports: [1],
+    #         validation: { # required
+    #           trust: { # required
+    #             acm: {
+    #               certificate_authority_arns: ["Arn"], # required
+    #             },
+    #             file: {
+    #               certificate_chain: "FilePath", # required
+    #             },
+    #           },
+    #         },
+    #       }
+    #
+    # @!attribute [rw] enforce
+    #   Whether the policy is enforced. The default is `True`, if a value
+    #   isn't specified.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] ports
+    #   One or more ports that the policy is enforced for.
+    #   @return [Array<Integer>]
+    #
+    # @!attribute [rw] validation
+    #   A reference to an object that represents a TLS validation context.
+    #   @return [Types::VirtualGatewayTlsValidationContext]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appmesh-2019-01-25/VirtualGatewayClientPolicyTls AWS API Documentation
+    #
+    class VirtualGatewayClientPolicyTls < Struct.new(
+      :enforce,
+      :ports,
+      :validation)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # An object that represents the status of the mesh resource.
+    #
+    # @!attribute [rw] status
+    #   The current status.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appmesh-2019-01-25/VirtualGatewayStatus AWS API Documentation
+    #
+    class VirtualGatewayStatus < Struct.new(
+      :status)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # An object that represents the current status of a gateway route.
+    #
+    # @!attribute [rw] status
+    #   The current status for the gateway route.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appmesh-2019-01-25/GatewayRouteStatus AWS API Documentation
+    #
+    class GatewayRouteStatus < Struct.new(
+      :status)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass TagResourceInput
     #   data as a hash:
     #
@@ -1629,6 +2821,71 @@ module Aws::AppMesh
     class TagResourceInput < Struct.new(
       :resource_arn,
       :tags)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] virtual_gateway
+    #   The full description of your virtual gateway following the create
+    #   call.
+    #   @return [Types::VirtualGatewayData]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appmesh-2019-01-25/CreateVirtualGatewayOutput AWS API Documentation
+    #
+    class CreateVirtualGatewayOutput < Struct.new(
+      :virtual_gateway)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] next_token
+    #   The `nextToken` value to include in a future `ListVirtualGateways`
+    #   request. When the results of a `ListVirtualGateways` request exceed
+    #   `limit`, you can use this value to retrieve the next page of
+    #   results. This value is `null` when there are no more results to
+    #   return.
+    #   @return [String]
+    #
+    # @!attribute [rw] virtual_gateways
+    #   The list of existing virtual gateways for the specified service
+    #   mesh.
+    #   @return [Array<Types::VirtualGatewayRef>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appmesh-2019-01-25/ListVirtualGatewaysOutput AWS API Documentation
+    #
+    class ListVirtualGatewaysOutput < Struct.new(
+      :next_token,
+      :virtual_gateways)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # An object that represents a Transport Layer Security (TLS) validation
+    # context.
+    #
+    # @note When making an API call, you may pass VirtualGatewayTlsValidationContext
+    #   data as a hash:
+    #
+    #       {
+    #         trust: { # required
+    #           acm: {
+    #             certificate_authority_arns: ["Arn"], # required
+    #           },
+    #           file: {
+    #             certificate_chain: "FilePath", # required
+    #           },
+    #         },
+    #       }
+    #
+    # @!attribute [rw] trust
+    #   A reference to an object that represents a TLS validation context
+    #   trust.
+    #   @return [Types::VirtualGatewayTlsValidationContextTrust]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appmesh-2019-01-25/VirtualGatewayTlsValidationContext AWS API Documentation
+    #
+    class VirtualGatewayTlsValidationContext < Struct.new(
+      :trust)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2208,6 +3465,128 @@ module Aws::AppMesh
       include Aws::Structure
     end
 
+    # An object that represents a gateway route returned by a list
+    # operation.
+    #
+    # @!attribute [rw] arn
+    #   The full Amazon Resource Name (ARN) for the gateway route.
+    #   @return [String]
+    #
+    # @!attribute [rw] created_at
+    #   The Unix epoch timestamp in seconds for when the resource was
+    #   created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] gateway_route_name
+    #   The name of the gateway route.
+    #   @return [String]
+    #
+    # @!attribute [rw] last_updated_at
+    #   The Unix epoch timestamp in seconds for when the resource was last
+    #   updated.
+    #   @return [Time]
+    #
+    # @!attribute [rw] mesh_name
+    #   The name of the service mesh that the resource resides in.
+    #   @return [String]
+    #
+    # @!attribute [rw] mesh_owner
+    #   The AWS IAM account ID of the service mesh owner. If the account ID
+    #   is not your own, then it's the ID of the account that shared the
+    #   mesh with your account. For more information about mesh sharing, see
+    #   [Working with shared meshes][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/app-mesh/latest/userguide/sharing.html
+    #   @return [String]
+    #
+    # @!attribute [rw] resource_owner
+    #   The AWS IAM account ID of the resource owner. If the account ID is
+    #   not your own, then it's the ID of the mesh owner or of another
+    #   account that the mesh is shared with. For more information about
+    #   mesh sharing, see [Working with shared meshes][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/app-mesh/latest/userguide/sharing.html
+    #   @return [String]
+    #
+    # @!attribute [rw] version
+    #   The version of the resource. Resources are created at version 1, and
+    #   this version is incremented each time that they're updated.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] virtual_gateway_name
+    #   The virtual gateway that the gateway route is associated with.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appmesh-2019-01-25/GatewayRouteRef AWS API Documentation
+    #
+    class GatewayRouteRef < Struct.new(
+      :arn,
+      :created_at,
+      :gateway_route_name,
+      :last_updated_at,
+      :mesh_name,
+      :mesh_owner,
+      :resource_owner,
+      :version,
+      :virtual_gateway_name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # An object that represents an AWS Certicate Manager (ACM) certificate.
+    #
+    # @note When making an API call, you may pass VirtualGatewayListenerTlsAcmCertificate
+    #   data as a hash:
+    #
+    #       {
+    #         certificate_arn: "Arn", # required
+    #       }
+    #
+    # @!attribute [rw] certificate_arn
+    #   The Amazon Resource Name (ARN) for the certificate. The certificate
+    #   must meet specific requirements and you must have proxy
+    #   authorization enabled. For more information, see [Transport Layer
+    #   Security (TLS)][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/app-mesh/latest/userguide/tls.html#virtual-node-tls-prerequisites
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appmesh-2019-01-25/VirtualGatewayListenerTlsAcmCertificate AWS API Documentation
+    #
+    class VirtualGatewayListenerTlsAcmCertificate < Struct.new(
+      :certificate_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] gateway_routes
+    #   The list of existing gateway routes for the specified service mesh
+    #   and virtual gateway.
+    #   @return [Array<Types::GatewayRouteRef>]
+    #
+    # @!attribute [rw] next_token
+    #   The `nextToken` value to include in a future `ListGatewayRoutes`
+    #   request. When the results of a `ListGatewayRoutes` request exceed
+    #   `limit`, you can use this value to retrieve the next page of
+    #   results. This value is `null` when there are no more results to
+    #   return.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appmesh-2019-01-25/ListGatewayRoutesOutput AWS API Documentation
+    #
+    class ListGatewayRoutesOutput < Struct.new(
+      :gateway_routes,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] virtual_service
     #   The full description of your virtual service following the create
     #   call.
@@ -2273,6 +3652,8 @@ module Aws::AppMesh
       include Aws::Structure
     end
 
+    # An object that represents types of timeouts.
+    #
     # @note When making an API call, you may pass HttpTimeout
     #   data as a hash:
     #
@@ -2380,6 +3761,70 @@ module Aws::AppMesh
     #
     class DeleteVirtualRouterOutput < Struct.new(
       :virtual_router)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass DescribeVirtualGatewayInput
+    #   data as a hash:
+    #
+    #       {
+    #         mesh_name: "ResourceName", # required
+    #         mesh_owner: "AccountId",
+    #         virtual_gateway_name: "ResourceName", # required
+    #       }
+    #
+    # @!attribute [rw] mesh_name
+    #   The name of the service mesh that the gateway route resides in.
+    #   @return [String]
+    #
+    # @!attribute [rw] mesh_owner
+    #   The AWS IAM account ID of the service mesh owner. If the account ID
+    #   is not your own, then it's the ID of the account that shared the
+    #   mesh with your account. For more information about mesh sharing, see
+    #   [Working with shared meshes][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/app-mesh/latest/userguide/sharing.html
+    #   @return [String]
+    #
+    # @!attribute [rw] virtual_gateway_name
+    #   The name of the virtual gateway to describe.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appmesh-2019-01-25/DescribeVirtualGatewayInput AWS API Documentation
+    #
+    class DescribeVirtualGatewayInput < Struct.new(
+      :mesh_name,
+      :mesh_owner,
+      :virtual_gateway_name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # An object that represents the action to take if a match is determined.
+    #
+    # @note When making an API call, you may pass GrpcGatewayRouteAction
+    #   data as a hash:
+    #
+    #       {
+    #         target: { # required
+    #           virtual_service: { # required
+    #             virtual_service_name: "ResourceName", # required
+    #           },
+    #         },
+    #       }
+    #
+    # @!attribute [rw] target
+    #   An object that represents the target that traffic is routed to when
+    #   a request matches the gateway route.
+    #   @return [Types::GatewayRouteTarget]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appmesh-2019-01-25/GrpcGatewayRouteAction AWS API Documentation
+    #
+    class GrpcGatewayRouteAction < Struct.new(
+      :target)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2791,6 +4236,55 @@ module Aws::AppMesh
       include Aws::Structure
     end
 
+    # An object that represents the action to take if a match is determined.
+    #
+    # @note When making an API call, you may pass HttpGatewayRouteAction
+    #   data as a hash:
+    #
+    #       {
+    #         target: { # required
+    #           virtual_service: { # required
+    #             virtual_service_name: "ResourceName", # required
+    #           },
+    #         },
+    #       }
+    #
+    # @!attribute [rw] target
+    #   An object that represents the target that traffic is routed to when
+    #   a request matches the gateway route.
+    #   @return [Types::GatewayRouteTarget]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appmesh-2019-01-25/HttpGatewayRouteAction AWS API Documentation
+    #
+    class HttpGatewayRouteAction < Struct.new(
+      :target)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # An object that represents the criteria for determining a request
+    # match.
+    #
+    # @note When making an API call, you may pass GrpcGatewayRouteMatch
+    #   data as a hash:
+    #
+    #       {
+    #         service_name: "ServiceName",
+    #       }
+    #
+    # @!attribute [rw] service_name
+    #   The fully qualified domain name for the service to match from the
+    #   request.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appmesh-2019-01-25/GrpcGatewayRouteMatch AWS API Documentation
+    #
+    class GrpcGatewayRouteMatch < Struct.new(
+      :service_name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass ListTagsForResourceInput
     #   data as a hash:
     #
@@ -2897,6 +4391,18 @@ module Aws::AppMesh
       include Aws::Structure
     end
 
+    # @!attribute [rw] gateway_route
+    #   A full description of the gateway route that was updated.
+    #   @return [Types::GatewayRouteData]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appmesh-2019-01-25/UpdateGatewayRouteOutput AWS API Documentation
+    #
+    class UpdateGatewayRouteOutput < Struct.new(
+      :gateway_route)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass DescribeRouteInput
     #   data as a hash:
     #
@@ -2949,6 +4455,18 @@ module Aws::AppMesh
     #
     class DeleteRouteOutput < Struct.new(
       :route)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] gateway_route
+    #   The gateway route that was deleted.
+    #   @return [Types::GatewayRouteData]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appmesh-2019-01-25/DeleteGatewayRouteOutput AWS API Documentation
+    #
+    class DeleteGatewayRouteOutput < Struct.new(
+      :gateway_route)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3184,6 +4702,8 @@ module Aws::AppMesh
       include Aws::Structure
     end
 
+    # An object that represents types of timeouts.
+    #
     # @note When making an API call, you may pass GrpcTimeout
     #   data as a hash:
     #
@@ -3199,11 +4719,19 @@ module Aws::AppMesh
     #       }
     #
     # @!attribute [rw] idle
-    #   An object that represents a duration of time.
+    #   An object that represents an idle timeout. An idle timeout bounds
+    #   the amount of time that a connection may be idle. The default value
+    #   is none.
     #   @return [Types::Duration]
     #
     # @!attribute [rw] per_request
-    #   An object that represents a duration of time.
+    #   An object that represents a per request timeout. The default value
+    #   is 15 seconds. If you set a higher timeout, then make sure that the
+    #   higher value is set for each App Mesh resource in a conversation.
+    #   For example, if a virtual node backend uses a virtual router
+    #   provider to route to another virtual node, then the timeout should
+    #   be greater than 15 seconds for the source and destination virtual
+    #   node and the route.
     #   @return [Types::Duration]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appmesh-2019-01-25/GrpcTimeout AWS API Documentation
@@ -3523,6 +5051,29 @@ module Aws::AppMesh
       include Aws::Structure
     end
 
+    # An object that represents a Transport Layer Security (TLS) validation
+    # context trust for a local file.
+    #
+    # @note When making an API call, you may pass VirtualGatewayTlsValidationContextFileTrust
+    #   data as a hash:
+    #
+    #       {
+    #         certificate_chain: "FilePath", # required
+    #       }
+    #
+    # @!attribute [rw] certificate_chain
+    #   The certificate trust chain for a certificate stored on the file
+    #   system of the virtual node that the proxy is running on.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appmesh-2019-01-25/VirtualGatewayTlsValidationContextFileTrust AWS API Documentation
+    #
+    class VirtualGatewayTlsValidationContextFileTrust < Struct.new(
+      :certificate_chain)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # You have exceeded a service limit for your account. For more
     # information, see [Service Limits][1] in the *AWS App Mesh User Guide*.
     #
@@ -3703,6 +5254,51 @@ module Aws::AppMesh
       include Aws::Structure
     end
 
+    # An object that represents a TLS validation context trust for an AWS
+    # Certicate Manager (ACM) certificate.
+    #
+    # @note When making an API call, you may pass VirtualGatewayTlsValidationContextAcmTrust
+    #   data as a hash:
+    #
+    #       {
+    #         certificate_authority_arns: ["Arn"], # required
+    #       }
+    #
+    # @!attribute [rw] certificate_authority_arns
+    #   One or more ACM Amazon Resource Name (ARN)s.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appmesh-2019-01-25/VirtualGatewayTlsValidationContextAcmTrust AWS API Documentation
+    #
+    class VirtualGatewayTlsValidationContextAcmTrust < Struct.new(
+      :certificate_authority_arns)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The access log configuration for a virtual gateway.
+    #
+    # @note When making an API call, you may pass VirtualGatewayAccessLog
+    #   data as a hash:
+    #
+    #       {
+    #         file: {
+    #           path: "FilePath", # required
+    #         },
+    #       }
+    #
+    # @!attribute [rw] file
+    #   The file object to send virtual gateway access logs to.
+    #   @return [Types::VirtualGatewayFileAccessLog]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appmesh-2019-01-25/VirtualGatewayAccessLog AWS API Documentation
+    #
+    class VirtualGatewayAccessLog < Struct.new(
+      :file)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # An object that represents the range of values to match on. The first
     # character of the range is included in the range, though the last
     # character is not. For example, if the range specified were 1-100, only
@@ -3760,6 +5356,7 @@ module Aws::AppMesh
     #   @return [Types::TcpRouteAction]
     #
     # @!attribute [rw] timeout
+    #   An object that represents types of timeouts.
     #   @return [Types::TcpTimeout]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appmesh-2019-01-25/TcpRoute AWS API Documentation
@@ -3767,6 +5364,18 @@ module Aws::AppMesh
     class TcpRoute < Struct.new(
       :action,
       :timeout)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] virtual_gateway
+    #   A full description of the virtual gateway that was updated.
+    #   @return [Types::VirtualGatewayData]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appmesh-2019-01-25/UpdateVirtualGatewayOutput AWS API Documentation
+    #
+    class UpdateVirtualGatewayOutput < Struct.new(
+      :virtual_gateway)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3957,6 +5566,41 @@ module Aws::AppMesh
       include Aws::Structure
     end
 
+    # An object that represents a client policy.
+    #
+    # @note When making an API call, you may pass VirtualGatewayClientPolicy
+    #   data as a hash:
+    #
+    #       {
+    #         tls: {
+    #           enforce: false,
+    #           ports: [1],
+    #           validation: { # required
+    #             trust: { # required
+    #               acm: {
+    #                 certificate_authority_arns: ["Arn"], # required
+    #               },
+    #               file: {
+    #                 certificate_chain: "FilePath", # required
+    #               },
+    #             },
+    #           },
+    #         },
+    #       }
+    #
+    # @!attribute [rw] tls
+    #   A reference to an object that represents a Transport Layer Security
+    #   (TLS) client policy.
+    #   @return [Types::VirtualGatewayClientPolicyTls]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appmesh-2019-01-25/VirtualGatewayClientPolicy AWS API Documentation
+    #
+    class VirtualGatewayClientPolicy < Struct.new(
+      :tls)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The maximum request rate permitted by the App Mesh APIs has been
     # exceeded for your account. For best results, use an increasing or
     # variable sleep interval between requests.
@@ -3968,6 +5612,54 @@ module Aws::AppMesh
     #
     class TooManyRequestsException < Struct.new(
       :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # An object that represents logging information.
+    #
+    # @note When making an API call, you may pass VirtualGatewayLogging
+    #   data as a hash:
+    #
+    #       {
+    #         access_log: {
+    #           file: {
+    #             path: "FilePath", # required
+    #           },
+    #         },
+    #       }
+    #
+    # @!attribute [rw] access_log
+    #   The access log configuration.
+    #   @return [Types::VirtualGatewayAccessLog]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appmesh-2019-01-25/VirtualGatewayLogging AWS API Documentation
+    #
+    class VirtualGatewayLogging < Struct.new(
+      :access_log)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # An object that represents a gateway route target.
+    #
+    # @note When making an API call, you may pass GatewayRouteTarget
+    #   data as a hash:
+    #
+    #       {
+    #         virtual_service: { # required
+    #           virtual_service_name: "ResourceName", # required
+    #         },
+    #       }
+    #
+    # @!attribute [rw] virtual_service
+    #   An object that represents a virtual service gateway route target.
+    #   @return [Types::GatewayRouteVirtualService]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appmesh-2019-01-25/GatewayRouteTarget AWS API Documentation
+    #
+    class GatewayRouteTarget < Struct.new(
+      :virtual_service)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4196,6 +5888,19 @@ module Aws::AppMesh
       include Aws::Structure
     end
 
+    # @!attribute [rw] gateway_route
+    #   The full description of your gateway route following the create
+    #   call.
+    #   @return [Types::GatewayRouteData]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appmesh-2019-01-25/CreateGatewayRouteOutput AWS API Documentation
+    #
+    class CreateGatewayRouteOutput < Struct.new(
+      :gateway_route)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # An object that represents the status of a virtual router.
     #
     # @!attribute [rw] status
@@ -4233,6 +5938,44 @@ module Aws::AppMesh
     #
     class TcpRouteAction < Struct.new(
       :weighted_targets)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass DeleteVirtualGatewayInput
+    #   data as a hash:
+    #
+    #       {
+    #         mesh_name: "ResourceName", # required
+    #         mesh_owner: "AccountId",
+    #         virtual_gateway_name: "ResourceName", # required
+    #       }
+    #
+    # @!attribute [rw] mesh_name
+    #   The name of the service mesh to delete the virtual gateway from.
+    #   @return [String]
+    #
+    # @!attribute [rw] mesh_owner
+    #   The AWS IAM account ID of the service mesh owner. If the account ID
+    #   is not your own, then it's the ID of the account that shared the
+    #   mesh with your account. For more information about mesh sharing, see
+    #   [Working with shared meshes][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/app-mesh/latest/userguide/sharing.html
+    #   @return [String]
+    #
+    # @!attribute [rw] virtual_gateway_name
+    #   The name of the virtual gateway to delete.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appmesh-2019-01-25/DeleteVirtualGatewayInput AWS API Documentation
+    #
+    class DeleteVirtualGatewayInput < Struct.new(
+      :mesh_name,
+      :mesh_owner,
+      :virtual_gateway_name)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4369,6 +6112,7 @@ module Aws::AppMesh
     #   @return [Types::PortMapping]
     #
     # @!attribute [rw] timeout
+    #   An object that represents timeouts for different protocols.
     #   @return [Types::ListenerTimeout]
     #
     # @!attribute [rw] tls
@@ -4458,6 +6202,7 @@ module Aws::AppMesh
     #   @return [Types::GrpcRetryPolicy]
     #
     # @!attribute [rw] timeout
+    #   An object that represents types of timeouts.
     #   @return [Types::GrpcTimeout]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appmesh-2019-01-25/GrpcRoute AWS API Documentation
@@ -4515,6 +6260,40 @@ module Aws::AppMesh
       include Aws::Structure
     end
 
+    # An object that represents a Transport Layer Security (TLS) validation
+    # context trust.
+    #
+    # @note When making an API call, you may pass VirtualGatewayTlsValidationContextTrust
+    #   data as a hash:
+    #
+    #       {
+    #         acm: {
+    #           certificate_authority_arns: ["Arn"], # required
+    #         },
+    #         file: {
+    #           certificate_chain: "FilePath", # required
+    #         },
+    #       }
+    #
+    # @!attribute [rw] acm
+    #   A reference to an object that represents a TLS validation context
+    #   trust for an AWS Certicate Manager (ACM) certificate.
+    #   @return [Types::VirtualGatewayTlsValidationContextAcmTrust]
+    #
+    # @!attribute [rw] file
+    #   An object that represents a TLS validation context trust for a local
+    #   file.
+    #   @return [Types::VirtualGatewayTlsValidationContextFileTrust]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appmesh-2019-01-25/VirtualGatewayTlsValidationContextTrust AWS API Documentation
+    #
+    class VirtualGatewayTlsValidationContextTrust < Struct.new(
+      :acm,
+      :file)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] virtual_service
     #   The virtual service that was deleted.
     #   @return [Types::VirtualServiceData]
@@ -4544,6 +6323,43 @@ module Aws::AppMesh
     #
     class VirtualNodeServiceProvider < Struct.new(
       :virtual_node_name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # An object that represents an HTTP gateway route.
+    #
+    # @note When making an API call, you may pass HttpGatewayRoute
+    #   data as a hash:
+    #
+    #       {
+    #         action: { # required
+    #           target: { # required
+    #             virtual_service: { # required
+    #               virtual_service_name: "ResourceName", # required
+    #             },
+    #           },
+    #         },
+    #         match: { # required
+    #           prefix: "String", # required
+    #         },
+    #       }
+    #
+    # @!attribute [rw] action
+    #   An object that represents the action to take if a match is
+    #   determined.
+    #   @return [Types::HttpGatewayRouteAction]
+    #
+    # @!attribute [rw] match
+    #   An object that represents the criteria for determining a request
+    #   match.
+    #   @return [Types::HttpGatewayRouteMatch]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appmesh-2019-01-25/HttpGatewayRoute AWS API Documentation
+    #
+    class HttpGatewayRoute < Struct.new(
+      :action,
+      :match)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4726,6 +6542,160 @@ module Aws::AppMesh
     #
     class TooManyTagsException < Struct.new(
       :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass UpdateGatewayRouteInput
+    #   data as a hash:
+    #
+    #       {
+    #         client_token: "String",
+    #         gateway_route_name: "ResourceName", # required
+    #         mesh_name: "ResourceName", # required
+    #         mesh_owner: "AccountId",
+    #         spec: { # required
+    #           grpc_route: {
+    #             action: { # required
+    #               target: { # required
+    #                 virtual_service: { # required
+    #                   virtual_service_name: "ResourceName", # required
+    #                 },
+    #               },
+    #             },
+    #             match: { # required
+    #               service_name: "ServiceName",
+    #             },
+    #           },
+    #           http2_route: {
+    #             action: { # required
+    #               target: { # required
+    #                 virtual_service: { # required
+    #                   virtual_service_name: "ResourceName", # required
+    #                 },
+    #               },
+    #             },
+    #             match: { # required
+    #               prefix: "String", # required
+    #             },
+    #           },
+    #           http_route: {
+    #             action: { # required
+    #               target: { # required
+    #                 virtual_service: { # required
+    #                   virtual_service_name: "ResourceName", # required
+    #                 },
+    #               },
+    #             },
+    #             match: { # required
+    #               prefix: "String", # required
+    #             },
+    #           },
+    #         },
+    #         virtual_gateway_name: "ResourceName", # required
+    #       }
+    #
+    # @!attribute [rw] client_token
+    #   Unique, case-sensitive identifier that you provide to ensure the
+    #   idempotency of the request. Up to 36 letters, numbers, hyphens, and
+    #   underscores are allowed.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.
+    #   @return [String]
+    #
+    # @!attribute [rw] gateway_route_name
+    #   The name of the gateway route to update.
+    #   @return [String]
+    #
+    # @!attribute [rw] mesh_name
+    #   The name of the service mesh that the gateway route resides in.
+    #   @return [String]
+    #
+    # @!attribute [rw] mesh_owner
+    #   The AWS IAM account ID of the service mesh owner. If the account ID
+    #   is not your own, then it's the ID of the account that shared the
+    #   mesh with your account. For more information about mesh sharing, see
+    #   [Working with shared meshes][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/app-mesh/latest/userguide/sharing.html
+    #   @return [String]
+    #
+    # @!attribute [rw] spec
+    #   The new gateway route specification to apply. This overwrites the
+    #   existing data.
+    #   @return [Types::GatewayRouteSpec]
+    #
+    # @!attribute [rw] virtual_gateway_name
+    #   The name of the virtual gateway that the gateway route is associated
+    #   with.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appmesh-2019-01-25/UpdateGatewayRouteInput AWS API Documentation
+    #
+    class UpdateGatewayRouteInput < Struct.new(
+      :client_token,
+      :gateway_route_name,
+      :mesh_name,
+      :mesh_owner,
+      :spec,
+      :virtual_gateway_name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass ListVirtualGatewaysInput
+    #   data as a hash:
+    #
+    #       {
+    #         limit: 1,
+    #         mesh_name: "ResourceName", # required
+    #         mesh_owner: "AccountId",
+    #         next_token: "String",
+    #       }
+    #
+    # @!attribute [rw] limit
+    #   The maximum number of results returned by `ListVirtualGateways` in
+    #   paginated output. When you use this parameter, `ListVirtualGateways`
+    #   returns only `limit` results in a single page along with a
+    #   `nextToken` response element. You can see the remaining results of
+    #   the initial request by sending another `ListVirtualGateways` request
+    #   with the returned `nextToken` value. This value can be between 1 and
+    #   100. If you don't use this parameter, `ListVirtualGateways` returns
+    #   up to 100 results and a `nextToken` value if applicable.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] mesh_name
+    #   The name of the service mesh to list virtual gateways in.
+    #   @return [String]
+    #
+    # @!attribute [rw] mesh_owner
+    #   The AWS IAM account ID of the service mesh owner. If the account ID
+    #   is not your own, then it's the ID of the account that shared the
+    #   mesh with your account. For more information about mesh sharing, see
+    #   [Working with shared meshes][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/app-mesh/latest/userguide/sharing.html
+    #   @return [String]
+    #
+    # @!attribute [rw] next_token
+    #   The `nextToken` value returned from a previous paginated
+    #   `ListVirtualGateways` request where `limit` was used and the results
+    #   exceeded the value of that parameter. Pagination continues from the
+    #   end of the previous results that returned the `nextToken` value.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appmesh-2019-01-25/ListVirtualGatewaysInput AWS API Documentation
+    #
+    class ListVirtualGatewaysInput < Struct.new(
+      :limit,
+      :mesh_name,
+      :mesh_owner,
+      :next_token)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -5043,6 +7013,8 @@ module Aws::AppMesh
       include Aws::Structure
     end
 
+    # An object that represents types of timeouts.
+    #
     # @note When making an API call, you may pass TcpTimeout
     #   data as a hash:
     #
@@ -5061,6 +7033,50 @@ module Aws::AppMesh
     #
     class TcpTimeout < Struct.new(
       :idle)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass DeleteGatewayRouteInput
+    #   data as a hash:
+    #
+    #       {
+    #         gateway_route_name: "ResourceName", # required
+    #         mesh_name: "ResourceName", # required
+    #         mesh_owner: "AccountId",
+    #         virtual_gateway_name: "ResourceName", # required
+    #       }
+    #
+    # @!attribute [rw] gateway_route_name
+    #   The name of the gateway route to delete.
+    #   @return [String]
+    #
+    # @!attribute [rw] mesh_name
+    #   The name of the service mesh to delete the gateway route from.
+    #   @return [String]
+    #
+    # @!attribute [rw] mesh_owner
+    #   The AWS IAM account ID of the service mesh owner. If the account ID
+    #   is not your own, then it's the ID of the account that shared the
+    #   mesh with your account. For more information about mesh sharing, see
+    #   [Working with shared meshes][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/app-mesh/latest/userguide/sharing.html
+    #   @return [String]
+    #
+    # @!attribute [rw] virtual_gateway_name
+    #   The name of the virtual gateway to delete the route from.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appmesh-2019-01-25/DeleteGatewayRouteInput AWS API Documentation
+    #
+    class DeleteGatewayRouteInput < Struct.new(
+      :gateway_route_name,
+      :mesh_name,
+      :mesh_owner,
+      :virtual_gateway_name)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -5366,6 +7382,7 @@ module Aws::AppMesh
     #   @return [Types::HttpRetryPolicy]
     #
     # @!attribute [rw] timeout
+    #   An object that represents types of timeouts.
     #   @return [Types::HttpTimeout]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appmesh-2019-01-25/HttpRoute AWS API Documentation
@@ -5411,6 +7428,73 @@ module Aws::AppMesh
       include Aws::Structure
     end
 
+    # An object that represents a virtual gateway returned by a list
+    # operation.
+    #
+    # @!attribute [rw] arn
+    #   The full Amazon Resource Name (ARN) for the resource.
+    #   @return [String]
+    #
+    # @!attribute [rw] created_at
+    #   The Unix epoch timestamp in seconds for when the resource was
+    #   created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] last_updated_at
+    #   The Unix epoch timestamp in seconds for when the resource was last
+    #   updated.
+    #   @return [Time]
+    #
+    # @!attribute [rw] mesh_name
+    #   The name of the service mesh that the resource resides in.
+    #   @return [String]
+    #
+    # @!attribute [rw] mesh_owner
+    #   The AWS IAM account ID of the service mesh owner. If the account ID
+    #   is not your own, then it's the ID of the account that shared the
+    #   mesh with your account. For more information about mesh sharing, see
+    #   [Working with shared meshes][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/app-mesh/latest/userguide/sharing.html
+    #   @return [String]
+    #
+    # @!attribute [rw] resource_owner
+    #   The AWS IAM account ID of the resource owner. If the account ID is
+    #   not your own, then it's the ID of the mesh owner or of another
+    #   account that the mesh is shared with. For more information about
+    #   mesh sharing, see [Working with shared meshes][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/app-mesh/latest/userguide/sharing.html
+    #   @return [String]
+    #
+    # @!attribute [rw] version
+    #   The version of the resource. Resources are created at version 1, and
+    #   this version is incremented each time that they're updated.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] virtual_gateway_name
+    #   The name of the resource.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appmesh-2019-01-25/VirtualGatewayRef AWS API Documentation
+    #
+    class VirtualGatewayRef < Struct.new(
+      :arn,
+      :created_at,
+      :last_updated_at,
+      :mesh_name,
+      :mesh_owner,
+      :resource_owner,
+      :version,
+      :virtual_gateway_name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # An object that represents the specification of a service mesh.
     #
     # @note When making an API call, you may pass MeshSpec
@@ -5430,6 +7514,30 @@ module Aws::AppMesh
     #
     class MeshSpec < Struct.new(
       :egress_filter)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] virtual_gateway
+    #   The full description of your virtual gateway.
+    #   @return [Types::VirtualGatewayData]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appmesh-2019-01-25/DescribeVirtualGatewayOutput AWS API Documentation
+    #
+    class DescribeVirtualGatewayOutput < Struct.new(
+      :virtual_gateway)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] gateway_route
+    #   The full description of your gateway route.
+    #   @return [Types::GatewayRouteData]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appmesh-2019-01-25/DescribeGatewayRouteOutput AWS API Documentation
+    #
+    class DescribeGatewayRouteOutput < Struct.new(
+      :gateway_route)
       SENSITIVE = []
       include Aws::Structure
     end

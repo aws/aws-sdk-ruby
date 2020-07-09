@@ -1249,8 +1249,9 @@ module Aws::AlexaForBusiness
     RegisterAVSDeviceRequest.add_member(:client_id, Shapes::ShapeRef.new(shape: ClientId, required: true, location_name: "ClientId"))
     RegisterAVSDeviceRequest.add_member(:user_code, Shapes::ShapeRef.new(shape: UserCode, required: true, location_name: "UserCode"))
     RegisterAVSDeviceRequest.add_member(:product_id, Shapes::ShapeRef.new(shape: ProductId, required: true, location_name: "ProductId"))
-    RegisterAVSDeviceRequest.add_member(:device_serial_number, Shapes::ShapeRef.new(shape: DeviceSerialNumberForAVS, required: true, location_name: "DeviceSerialNumber"))
+    RegisterAVSDeviceRequest.add_member(:device_serial_number, Shapes::ShapeRef.new(shape: DeviceSerialNumberForAVS, location_name: "DeviceSerialNumber"))
     RegisterAVSDeviceRequest.add_member(:amazon_id, Shapes::ShapeRef.new(shape: AmazonId, required: true, location_name: "AmazonId"))
+    RegisterAVSDeviceRequest.add_member(:room_arn, Shapes::ShapeRef.new(shape: Arn, location_name: "RoomArn"))
     RegisterAVSDeviceRequest.struct_class = Types::RegisterAVSDeviceRequest
 
     RegisterAVSDeviceResponse.add_member(:device_arn, Shapes::ShapeRef.new(shape: Arn, location_name: "DeviceArn"))
@@ -2364,6 +2365,7 @@ module Aws::AlexaForBusiness
         o.output = Shapes::ShapeRef.new(shape: RegisterAVSDeviceResponse)
         o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
         o.errors << Shapes::ShapeRef.new(shape: ConcurrentModificationException)
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidDeviceException)
       end)
 

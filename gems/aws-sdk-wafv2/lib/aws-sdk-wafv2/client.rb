@@ -543,6 +543,10 @@ module Aws::WAFV2
     #           },
     #           geo_match_statement: {
     #             country_codes: ["AF"], # accepts AF, AX, AL, DZ, AS, AD, AO, AI, AQ, AG, AR, AM, AW, AU, AT, AZ, BS, BH, BD, BB, BY, BE, BZ, BJ, BM, BT, BO, BQ, BA, BW, BV, BR, IO, BN, BG, BF, BI, KH, CM, CA, CV, KY, CF, TD, CL, CN, CX, CC, CO, KM, CG, CD, CK, CR, CI, HR, CU, CW, CY, CZ, DK, DJ, DM, DO, EC, EG, SV, GQ, ER, EE, ET, FK, FO, FJ, FI, FR, GF, PF, TF, GA, GM, GE, DE, GH, GI, GR, GL, GD, GP, GU, GT, GG, GN, GW, GY, HT, HM, VA, HN, HK, HU, IS, IN, ID, IR, IQ, IE, IM, IL, IT, JM, JP, JE, JO, KZ, KE, KI, KP, KR, KW, KG, LA, LV, LB, LS, LR, LY, LI, LT, LU, MO, MK, MG, MW, MY, MV, ML, MT, MH, MQ, MR, MU, YT, MX, FM, MD, MC, MN, ME, MS, MA, MZ, MM, NA, NR, NP, NL, NC, NZ, NI, NE, NG, NU, NF, MP, NO, OM, PK, PW, PS, PA, PG, PY, PE, PH, PN, PL, PT, PR, QA, RE, RO, RU, RW, BL, SH, KN, LC, MF, PM, VC, WS, SM, ST, SA, SN, RS, SC, SL, SG, SX, SK, SI, SB, SO, ZA, GS, SS, ES, LK, SD, SR, SJ, SZ, SE, CH, SY, TW, TJ, TZ, TH, TL, TG, TK, TO, TT, TN, TR, TM, TC, TV, UG, UA, AE, GB, US, UM, UY, UZ, VU, VE, VN, VG, VI, WF, EH, YE, ZM, ZW
+    #             forwarded_ip_config: {
+    #               header_name: "ForwardedIPHeaderName", # required
+    #               fallback_behavior: "MATCH", # required, accepts MATCH, NO_MATCH
+    #             },
     #           },
     #           rule_group_reference_statement: {
     #             arn: "ResourceArn", # required
@@ -554,6 +558,11 @@ module Aws::WAFV2
     #           },
     #           ip_set_reference_statement: {
     #             arn: "ResourceArn", # required
+    #             ip_set_forwarded_ip_config: {
+    #               header_name: "ForwardedIPHeaderName", # required
+    #               fallback_behavior: "MATCH", # required, accepts MATCH, NO_MATCH
+    #               position: "FIRST", # required, accepts FIRST, LAST, ANY
+    #             },
     #           },
     #           regex_pattern_set_reference_statement: {
     #             arn: "ResourceArn", # required
@@ -584,9 +593,13 @@ module Aws::WAFV2
     #           },
     #           rate_based_statement: {
     #             limit: 1, # required
-    #             aggregate_key_type: "IP", # required, accepts IP
+    #             aggregate_key_type: "IP", # required, accepts IP, FORWARDED_IP
     #             scope_down_statement: {
     #               # recursive Statement
+    #             },
+    #             forwarded_ip_config: {
+    #               header_name: "ForwardedIPHeaderName", # required
+    #               fallback_behavior: "MATCH", # required, accepts MATCH, NO_MATCH
     #             },
     #           },
     #           and_statement: {
@@ -1045,6 +1058,10 @@ module Aws::WAFV2
     #           },
     #           geo_match_statement: {
     #             country_codes: ["AF"], # accepts AF, AX, AL, DZ, AS, AD, AO, AI, AQ, AG, AR, AM, AW, AU, AT, AZ, BS, BH, BD, BB, BY, BE, BZ, BJ, BM, BT, BO, BQ, BA, BW, BV, BR, IO, BN, BG, BF, BI, KH, CM, CA, CV, KY, CF, TD, CL, CN, CX, CC, CO, KM, CG, CD, CK, CR, CI, HR, CU, CW, CY, CZ, DK, DJ, DM, DO, EC, EG, SV, GQ, ER, EE, ET, FK, FO, FJ, FI, FR, GF, PF, TF, GA, GM, GE, DE, GH, GI, GR, GL, GD, GP, GU, GT, GG, GN, GW, GY, HT, HM, VA, HN, HK, HU, IS, IN, ID, IR, IQ, IE, IM, IL, IT, JM, JP, JE, JO, KZ, KE, KI, KP, KR, KW, KG, LA, LV, LB, LS, LR, LY, LI, LT, LU, MO, MK, MG, MW, MY, MV, ML, MT, MH, MQ, MR, MU, YT, MX, FM, MD, MC, MN, ME, MS, MA, MZ, MM, NA, NR, NP, NL, NC, NZ, NI, NE, NG, NU, NF, MP, NO, OM, PK, PW, PS, PA, PG, PY, PE, PH, PN, PL, PT, PR, QA, RE, RO, RU, RW, BL, SH, KN, LC, MF, PM, VC, WS, SM, ST, SA, SN, RS, SC, SL, SG, SX, SK, SI, SB, SO, ZA, GS, SS, ES, LK, SD, SR, SJ, SZ, SE, CH, SY, TW, TJ, TZ, TH, TL, TG, TK, TO, TT, TN, TR, TM, TC, TV, UG, UA, AE, GB, US, UM, UY, UZ, VU, VE, VN, VG, VI, WF, EH, YE, ZM, ZW
+    #             forwarded_ip_config: {
+    #               header_name: "ForwardedIPHeaderName", # required
+    #               fallback_behavior: "MATCH", # required, accepts MATCH, NO_MATCH
+    #             },
     #           },
     #           rule_group_reference_statement: {
     #             arn: "ResourceArn", # required
@@ -1056,6 +1073,11 @@ module Aws::WAFV2
     #           },
     #           ip_set_reference_statement: {
     #             arn: "ResourceArn", # required
+    #             ip_set_forwarded_ip_config: {
+    #               header_name: "ForwardedIPHeaderName", # required
+    #               fallback_behavior: "MATCH", # required, accepts MATCH, NO_MATCH
+    #               position: "FIRST", # required, accepts FIRST, LAST, ANY
+    #             },
     #           },
     #           regex_pattern_set_reference_statement: {
     #             arn: "ResourceArn", # required
@@ -1086,9 +1108,13 @@ module Aws::WAFV2
     #           },
     #           rate_based_statement: {
     #             limit: 1, # required
-    #             aggregate_key_type: "IP", # required, accepts IP
+    #             aggregate_key_type: "IP", # required, accepts IP, FORWARDED_IP
     #             scope_down_statement: {
     #               # recursive Statement
+    #             },
+    #             forwarded_ip_config: {
+    #               header_name: "ForwardedIPHeaderName", # required
+    #               fallback_behavior: "MATCH", # required, accepts MATCH, NO_MATCH
     #             },
     #           },
     #           and_statement: {
@@ -1363,6 +1389,10 @@ module Aws::WAFV2
     #           },
     #           geo_match_statement: {
     #             country_codes: ["AF"], # accepts AF, AX, AL, DZ, AS, AD, AO, AI, AQ, AG, AR, AM, AW, AU, AT, AZ, BS, BH, BD, BB, BY, BE, BZ, BJ, BM, BT, BO, BQ, BA, BW, BV, BR, IO, BN, BG, BF, BI, KH, CM, CA, CV, KY, CF, TD, CL, CN, CX, CC, CO, KM, CG, CD, CK, CR, CI, HR, CU, CW, CY, CZ, DK, DJ, DM, DO, EC, EG, SV, GQ, ER, EE, ET, FK, FO, FJ, FI, FR, GF, PF, TF, GA, GM, GE, DE, GH, GI, GR, GL, GD, GP, GU, GT, GG, GN, GW, GY, HT, HM, VA, HN, HK, HU, IS, IN, ID, IR, IQ, IE, IM, IL, IT, JM, JP, JE, JO, KZ, KE, KI, KP, KR, KW, KG, LA, LV, LB, LS, LR, LY, LI, LT, LU, MO, MK, MG, MW, MY, MV, ML, MT, MH, MQ, MR, MU, YT, MX, FM, MD, MC, MN, ME, MS, MA, MZ, MM, NA, NR, NP, NL, NC, NZ, NI, NE, NG, NU, NF, MP, NO, OM, PK, PW, PS, PA, PG, PY, PE, PH, PN, PL, PT, PR, QA, RE, RO, RU, RW, BL, SH, KN, LC, MF, PM, VC, WS, SM, ST, SA, SN, RS, SC, SL, SG, SX, SK, SI, SB, SO, ZA, GS, SS, ES, LK, SD, SR, SJ, SZ, SE, CH, SY, TW, TJ, TZ, TH, TL, TG, TK, TO, TT, TN, TR, TM, TC, TV, UG, UA, AE, GB, US, UM, UY, UZ, VU, VE, VN, VG, VI, WF, EH, YE, ZM, ZW
+    #             forwarded_ip_config: {
+    #               header_name: "ForwardedIPHeaderName", # required
+    #               fallback_behavior: "MATCH", # required, accepts MATCH, NO_MATCH
+    #             },
     #           },
     #           rule_group_reference_statement: {
     #             arn: "ResourceArn", # required
@@ -1374,6 +1404,11 @@ module Aws::WAFV2
     #           },
     #           ip_set_reference_statement: {
     #             arn: "ResourceArn", # required
+    #             ip_set_forwarded_ip_config: {
+    #               header_name: "ForwardedIPHeaderName", # required
+    #               fallback_behavior: "MATCH", # required, accepts MATCH, NO_MATCH
+    #               position: "FIRST", # required, accepts FIRST, LAST, ANY
+    #             },
     #           },
     #           regex_pattern_set_reference_statement: {
     #             arn: "ResourceArn", # required
@@ -1404,9 +1439,13 @@ module Aws::WAFV2
     #           },
     #           rate_based_statement: {
     #             limit: 1, # required
-    #             aggregate_key_type: "IP", # required, accepts IP
+    #             aggregate_key_type: "IP", # required, accepts IP, FORWARDED_IP
     #             scope_down_statement: {
     #               # recursive Statement
+    #             },
+    #             forwarded_ip_config: {
+    #               header_name: "ForwardedIPHeaderName", # required
+    #               fallback_behavior: "MATCH", # required, accepts MATCH, NO_MATCH
     #             },
     #           },
     #           and_statement: {
@@ -2338,10 +2377,15 @@ module Aws::WAFV2
     #   resp.rule_group.rules[0].statement.size_constraint_statement.text_transformations[0].type #=> String, one of "NONE", "COMPRESS_WHITE_SPACE", "HTML_ENTITY_DECODE", "LOWERCASE", "CMD_LINE", "URL_DECODE"
     #   resp.rule_group.rules[0].statement.geo_match_statement.country_codes #=> Array
     #   resp.rule_group.rules[0].statement.geo_match_statement.country_codes[0] #=> String, one of "AF", "AX", "AL", "DZ", "AS", "AD", "AO", "AI", "AQ", "AG", "AR", "AM", "AW", "AU", "AT", "AZ", "BS", "BH", "BD", "BB", "BY", "BE", "BZ", "BJ", "BM", "BT", "BO", "BQ", "BA", "BW", "BV", "BR", "IO", "BN", "BG", "BF", "BI", "KH", "CM", "CA", "CV", "KY", "CF", "TD", "CL", "CN", "CX", "CC", "CO", "KM", "CG", "CD", "CK", "CR", "CI", "HR", "CU", "CW", "CY", "CZ", "DK", "DJ", "DM", "DO", "EC", "EG", "SV", "GQ", "ER", "EE", "ET", "FK", "FO", "FJ", "FI", "FR", "GF", "PF", "TF", "GA", "GM", "GE", "DE", "GH", "GI", "GR", "GL", "GD", "GP", "GU", "GT", "GG", "GN", "GW", "GY", "HT", "HM", "VA", "HN", "HK", "HU", "IS", "IN", "ID", "IR", "IQ", "IE", "IM", "IL", "IT", "JM", "JP", "JE", "JO", "KZ", "KE", "KI", "KP", "KR", "KW", "KG", "LA", "LV", "LB", "LS", "LR", "LY", "LI", "LT", "LU", "MO", "MK", "MG", "MW", "MY", "MV", "ML", "MT", "MH", "MQ", "MR", "MU", "YT", "MX", "FM", "MD", "MC", "MN", "ME", "MS", "MA", "MZ", "MM", "NA", "NR", "NP", "NL", "NC", "NZ", "NI", "NE", "NG", "NU", "NF", "MP", "NO", "OM", "PK", "PW", "PS", "PA", "PG", "PY", "PE", "PH", "PN", "PL", "PT", "PR", "QA", "RE", "RO", "RU", "RW", "BL", "SH", "KN", "LC", "MF", "PM", "VC", "WS", "SM", "ST", "SA", "SN", "RS", "SC", "SL", "SG", "SX", "SK", "SI", "SB", "SO", "ZA", "GS", "SS", "ES", "LK", "SD", "SR", "SJ", "SZ", "SE", "CH", "SY", "TW", "TJ", "TZ", "TH", "TL", "TG", "TK", "TO", "TT", "TN", "TR", "TM", "TC", "TV", "UG", "UA", "AE", "GB", "US", "UM", "UY", "UZ", "VU", "VE", "VN", "VG", "VI", "WF", "EH", "YE", "ZM", "ZW"
+    #   resp.rule_group.rules[0].statement.geo_match_statement.forwarded_ip_config.header_name #=> String
+    #   resp.rule_group.rules[0].statement.geo_match_statement.forwarded_ip_config.fallback_behavior #=> String, one of "MATCH", "NO_MATCH"
     #   resp.rule_group.rules[0].statement.rule_group_reference_statement.arn #=> String
     #   resp.rule_group.rules[0].statement.rule_group_reference_statement.excluded_rules #=> Array
     #   resp.rule_group.rules[0].statement.rule_group_reference_statement.excluded_rules[0].name #=> String
     #   resp.rule_group.rules[0].statement.ip_set_reference_statement.arn #=> String
+    #   resp.rule_group.rules[0].statement.ip_set_reference_statement.ip_set_forwarded_ip_config.header_name #=> String
+    #   resp.rule_group.rules[0].statement.ip_set_reference_statement.ip_set_forwarded_ip_config.fallback_behavior #=> String, one of "MATCH", "NO_MATCH"
+    #   resp.rule_group.rules[0].statement.ip_set_reference_statement.ip_set_forwarded_ip_config.position #=> String, one of "FIRST", "LAST", "ANY"
     #   resp.rule_group.rules[0].statement.regex_pattern_set_reference_statement.arn #=> String
     #   resp.rule_group.rules[0].statement.regex_pattern_set_reference_statement.field_to_match.single_header.name #=> String
     #   resp.rule_group.rules[0].statement.regex_pattern_set_reference_statement.field_to_match.single_query_argument.name #=> String
@@ -2349,8 +2393,10 @@ module Aws::WAFV2
     #   resp.rule_group.rules[0].statement.regex_pattern_set_reference_statement.text_transformations[0].priority #=> Integer
     #   resp.rule_group.rules[0].statement.regex_pattern_set_reference_statement.text_transformations[0].type #=> String, one of "NONE", "COMPRESS_WHITE_SPACE", "HTML_ENTITY_DECODE", "LOWERCASE", "CMD_LINE", "URL_DECODE"
     #   resp.rule_group.rules[0].statement.rate_based_statement.limit #=> Integer
-    #   resp.rule_group.rules[0].statement.rate_based_statement.aggregate_key_type #=> String, one of "IP"
+    #   resp.rule_group.rules[0].statement.rate_based_statement.aggregate_key_type #=> String, one of "IP", "FORWARDED_IP"
     #   resp.rule_group.rules[0].statement.rate_based_statement.scope_down_statement #=> Types::Statement
+    #   resp.rule_group.rules[0].statement.rate_based_statement.forwarded_ip_config.header_name #=> String
+    #   resp.rule_group.rules[0].statement.rate_based_statement.forwarded_ip_config.fallback_behavior #=> String, one of "MATCH", "NO_MATCH"
     #   resp.rule_group.rules[0].statement.and_statement.statements #=> Array
     #   resp.rule_group.rules[0].statement.and_statement.statements[0] #=> Types::Statement
     #   resp.rule_group.rules[0].statement.or_statement.statements #=> Array
@@ -2425,7 +2471,8 @@ module Aws::WAFV2
     # @option params [required, Types::TimeWindow] :time_window
     #   The start date and time and the end date and time of the range for
     #   which you want `GetSampledRequests` to return a sample of requests.
-    #   Specify the date and time in the following format:
+    #   You must specify the times in Coordinated Universal Time (UTC) format.
+    #   UTC format includes the special designator, `Z`. For example,
     #   `"2016-09-27T14:50Z"`. You can specify any time range in the previous
     #   three hours.
     #
@@ -2566,10 +2613,15 @@ module Aws::WAFV2
     #   resp.web_acl.rules[0].statement.size_constraint_statement.text_transformations[0].type #=> String, one of "NONE", "COMPRESS_WHITE_SPACE", "HTML_ENTITY_DECODE", "LOWERCASE", "CMD_LINE", "URL_DECODE"
     #   resp.web_acl.rules[0].statement.geo_match_statement.country_codes #=> Array
     #   resp.web_acl.rules[0].statement.geo_match_statement.country_codes[0] #=> String, one of "AF", "AX", "AL", "DZ", "AS", "AD", "AO", "AI", "AQ", "AG", "AR", "AM", "AW", "AU", "AT", "AZ", "BS", "BH", "BD", "BB", "BY", "BE", "BZ", "BJ", "BM", "BT", "BO", "BQ", "BA", "BW", "BV", "BR", "IO", "BN", "BG", "BF", "BI", "KH", "CM", "CA", "CV", "KY", "CF", "TD", "CL", "CN", "CX", "CC", "CO", "KM", "CG", "CD", "CK", "CR", "CI", "HR", "CU", "CW", "CY", "CZ", "DK", "DJ", "DM", "DO", "EC", "EG", "SV", "GQ", "ER", "EE", "ET", "FK", "FO", "FJ", "FI", "FR", "GF", "PF", "TF", "GA", "GM", "GE", "DE", "GH", "GI", "GR", "GL", "GD", "GP", "GU", "GT", "GG", "GN", "GW", "GY", "HT", "HM", "VA", "HN", "HK", "HU", "IS", "IN", "ID", "IR", "IQ", "IE", "IM", "IL", "IT", "JM", "JP", "JE", "JO", "KZ", "KE", "KI", "KP", "KR", "KW", "KG", "LA", "LV", "LB", "LS", "LR", "LY", "LI", "LT", "LU", "MO", "MK", "MG", "MW", "MY", "MV", "ML", "MT", "MH", "MQ", "MR", "MU", "YT", "MX", "FM", "MD", "MC", "MN", "ME", "MS", "MA", "MZ", "MM", "NA", "NR", "NP", "NL", "NC", "NZ", "NI", "NE", "NG", "NU", "NF", "MP", "NO", "OM", "PK", "PW", "PS", "PA", "PG", "PY", "PE", "PH", "PN", "PL", "PT", "PR", "QA", "RE", "RO", "RU", "RW", "BL", "SH", "KN", "LC", "MF", "PM", "VC", "WS", "SM", "ST", "SA", "SN", "RS", "SC", "SL", "SG", "SX", "SK", "SI", "SB", "SO", "ZA", "GS", "SS", "ES", "LK", "SD", "SR", "SJ", "SZ", "SE", "CH", "SY", "TW", "TJ", "TZ", "TH", "TL", "TG", "TK", "TO", "TT", "TN", "TR", "TM", "TC", "TV", "UG", "UA", "AE", "GB", "US", "UM", "UY", "UZ", "VU", "VE", "VN", "VG", "VI", "WF", "EH", "YE", "ZM", "ZW"
+    #   resp.web_acl.rules[0].statement.geo_match_statement.forwarded_ip_config.header_name #=> String
+    #   resp.web_acl.rules[0].statement.geo_match_statement.forwarded_ip_config.fallback_behavior #=> String, one of "MATCH", "NO_MATCH"
     #   resp.web_acl.rules[0].statement.rule_group_reference_statement.arn #=> String
     #   resp.web_acl.rules[0].statement.rule_group_reference_statement.excluded_rules #=> Array
     #   resp.web_acl.rules[0].statement.rule_group_reference_statement.excluded_rules[0].name #=> String
     #   resp.web_acl.rules[0].statement.ip_set_reference_statement.arn #=> String
+    #   resp.web_acl.rules[0].statement.ip_set_reference_statement.ip_set_forwarded_ip_config.header_name #=> String
+    #   resp.web_acl.rules[0].statement.ip_set_reference_statement.ip_set_forwarded_ip_config.fallback_behavior #=> String, one of "MATCH", "NO_MATCH"
+    #   resp.web_acl.rules[0].statement.ip_set_reference_statement.ip_set_forwarded_ip_config.position #=> String, one of "FIRST", "LAST", "ANY"
     #   resp.web_acl.rules[0].statement.regex_pattern_set_reference_statement.arn #=> String
     #   resp.web_acl.rules[0].statement.regex_pattern_set_reference_statement.field_to_match.single_header.name #=> String
     #   resp.web_acl.rules[0].statement.regex_pattern_set_reference_statement.field_to_match.single_query_argument.name #=> String
@@ -2577,8 +2629,10 @@ module Aws::WAFV2
     #   resp.web_acl.rules[0].statement.regex_pattern_set_reference_statement.text_transformations[0].priority #=> Integer
     #   resp.web_acl.rules[0].statement.regex_pattern_set_reference_statement.text_transformations[0].type #=> String, one of "NONE", "COMPRESS_WHITE_SPACE", "HTML_ENTITY_DECODE", "LOWERCASE", "CMD_LINE", "URL_DECODE"
     #   resp.web_acl.rules[0].statement.rate_based_statement.limit #=> Integer
-    #   resp.web_acl.rules[0].statement.rate_based_statement.aggregate_key_type #=> String, one of "IP"
+    #   resp.web_acl.rules[0].statement.rate_based_statement.aggregate_key_type #=> String, one of "IP", "FORWARDED_IP"
     #   resp.web_acl.rules[0].statement.rate_based_statement.scope_down_statement #=> Types::Statement
+    #   resp.web_acl.rules[0].statement.rate_based_statement.forwarded_ip_config.header_name #=> String
+    #   resp.web_acl.rules[0].statement.rate_based_statement.forwarded_ip_config.fallback_behavior #=> String, one of "MATCH", "NO_MATCH"
     #   resp.web_acl.rules[0].statement.and_statement.statements #=> Array
     #   resp.web_acl.rules[0].statement.and_statement.statements[0] #=> Types::Statement
     #   resp.web_acl.rules[0].statement.or_statement.statements #=> Array
@@ -2694,10 +2748,15 @@ module Aws::WAFV2
     #   resp.web_acl.rules[0].statement.size_constraint_statement.text_transformations[0].type #=> String, one of "NONE", "COMPRESS_WHITE_SPACE", "HTML_ENTITY_DECODE", "LOWERCASE", "CMD_LINE", "URL_DECODE"
     #   resp.web_acl.rules[0].statement.geo_match_statement.country_codes #=> Array
     #   resp.web_acl.rules[0].statement.geo_match_statement.country_codes[0] #=> String, one of "AF", "AX", "AL", "DZ", "AS", "AD", "AO", "AI", "AQ", "AG", "AR", "AM", "AW", "AU", "AT", "AZ", "BS", "BH", "BD", "BB", "BY", "BE", "BZ", "BJ", "BM", "BT", "BO", "BQ", "BA", "BW", "BV", "BR", "IO", "BN", "BG", "BF", "BI", "KH", "CM", "CA", "CV", "KY", "CF", "TD", "CL", "CN", "CX", "CC", "CO", "KM", "CG", "CD", "CK", "CR", "CI", "HR", "CU", "CW", "CY", "CZ", "DK", "DJ", "DM", "DO", "EC", "EG", "SV", "GQ", "ER", "EE", "ET", "FK", "FO", "FJ", "FI", "FR", "GF", "PF", "TF", "GA", "GM", "GE", "DE", "GH", "GI", "GR", "GL", "GD", "GP", "GU", "GT", "GG", "GN", "GW", "GY", "HT", "HM", "VA", "HN", "HK", "HU", "IS", "IN", "ID", "IR", "IQ", "IE", "IM", "IL", "IT", "JM", "JP", "JE", "JO", "KZ", "KE", "KI", "KP", "KR", "KW", "KG", "LA", "LV", "LB", "LS", "LR", "LY", "LI", "LT", "LU", "MO", "MK", "MG", "MW", "MY", "MV", "ML", "MT", "MH", "MQ", "MR", "MU", "YT", "MX", "FM", "MD", "MC", "MN", "ME", "MS", "MA", "MZ", "MM", "NA", "NR", "NP", "NL", "NC", "NZ", "NI", "NE", "NG", "NU", "NF", "MP", "NO", "OM", "PK", "PW", "PS", "PA", "PG", "PY", "PE", "PH", "PN", "PL", "PT", "PR", "QA", "RE", "RO", "RU", "RW", "BL", "SH", "KN", "LC", "MF", "PM", "VC", "WS", "SM", "ST", "SA", "SN", "RS", "SC", "SL", "SG", "SX", "SK", "SI", "SB", "SO", "ZA", "GS", "SS", "ES", "LK", "SD", "SR", "SJ", "SZ", "SE", "CH", "SY", "TW", "TJ", "TZ", "TH", "TL", "TG", "TK", "TO", "TT", "TN", "TR", "TM", "TC", "TV", "UG", "UA", "AE", "GB", "US", "UM", "UY", "UZ", "VU", "VE", "VN", "VG", "VI", "WF", "EH", "YE", "ZM", "ZW"
+    #   resp.web_acl.rules[0].statement.geo_match_statement.forwarded_ip_config.header_name #=> String
+    #   resp.web_acl.rules[0].statement.geo_match_statement.forwarded_ip_config.fallback_behavior #=> String, one of "MATCH", "NO_MATCH"
     #   resp.web_acl.rules[0].statement.rule_group_reference_statement.arn #=> String
     #   resp.web_acl.rules[0].statement.rule_group_reference_statement.excluded_rules #=> Array
     #   resp.web_acl.rules[0].statement.rule_group_reference_statement.excluded_rules[0].name #=> String
     #   resp.web_acl.rules[0].statement.ip_set_reference_statement.arn #=> String
+    #   resp.web_acl.rules[0].statement.ip_set_reference_statement.ip_set_forwarded_ip_config.header_name #=> String
+    #   resp.web_acl.rules[0].statement.ip_set_reference_statement.ip_set_forwarded_ip_config.fallback_behavior #=> String, one of "MATCH", "NO_MATCH"
+    #   resp.web_acl.rules[0].statement.ip_set_reference_statement.ip_set_forwarded_ip_config.position #=> String, one of "FIRST", "LAST", "ANY"
     #   resp.web_acl.rules[0].statement.regex_pattern_set_reference_statement.arn #=> String
     #   resp.web_acl.rules[0].statement.regex_pattern_set_reference_statement.field_to_match.single_header.name #=> String
     #   resp.web_acl.rules[0].statement.regex_pattern_set_reference_statement.field_to_match.single_query_argument.name #=> String
@@ -2705,8 +2764,10 @@ module Aws::WAFV2
     #   resp.web_acl.rules[0].statement.regex_pattern_set_reference_statement.text_transformations[0].priority #=> Integer
     #   resp.web_acl.rules[0].statement.regex_pattern_set_reference_statement.text_transformations[0].type #=> String, one of "NONE", "COMPRESS_WHITE_SPACE", "HTML_ENTITY_DECODE", "LOWERCASE", "CMD_LINE", "URL_DECODE"
     #   resp.web_acl.rules[0].statement.rate_based_statement.limit #=> Integer
-    #   resp.web_acl.rules[0].statement.rate_based_statement.aggregate_key_type #=> String, one of "IP"
+    #   resp.web_acl.rules[0].statement.rate_based_statement.aggregate_key_type #=> String, one of "IP", "FORWARDED_IP"
     #   resp.web_acl.rules[0].statement.rate_based_statement.scope_down_statement #=> Types::Statement
+    #   resp.web_acl.rules[0].statement.rate_based_statement.forwarded_ip_config.header_name #=> String
+    #   resp.web_acl.rules[0].statement.rate_based_statement.forwarded_ip_config.fallback_behavior #=> String, one of "MATCH", "NO_MATCH"
     #   resp.web_acl.rules[0].statement.and_statement.statements #=> Array
     #   resp.web_acl.rules[0].statement.and_statement.statements[0] #=> Types::Statement
     #   resp.web_acl.rules[0].statement.or_statement.statements #=> Array
@@ -3175,7 +3236,16 @@ module Aws::WAFV2
     #
     #  </note>
     #
-    # Retrieves the TagInfoForResource for the specified resource.
+    # Retrieves the TagInfoForResource for the specified resource. Tags are
+    # key:value pairs that you can use to categorize and manage your
+    # resources, for purposes like billing. For example, you might set the
+    # tag key to "customer" and the value to the customer name or ID. You
+    # can specify one or more tags to add to each AWS resource, up to 50
+    # tags for a resource.
+    #
+    # You can tag the AWS resources that you manage through AWS WAF: web
+    # ACLs, rule groups, IP sets, and regex pattern sets. You can't manage
+    # or view tags through the AWS WAF console.
     #
     #
     #
@@ -3317,6 +3387,9 @@ module Aws::WAFV2
     #     Create the data firehose with a PUT source and in the Region that
     #     you are operating. If you are capturing logs for Amazon
     #     CloudFront, always create the firehose in US East (N. Virginia).
+    #
+    #     Give the data firehose a name that starts with the prefix
+    #     `aws-waf-logs-`. For example, `aws-waf-logs-us-east-2-analytics`.
     #
     #     <note markdown="1"> Do not create the data firehose using a `Kinesis stream` as your
     #     source.
@@ -3460,10 +3533,15 @@ module Aws::WAFV2
     #  </note>
     #
     # Associates tags with the specified AWS resource. Tags are key:value
-    # pairs that you can associate with AWS resources. For example, the tag
-    # key might be "customer" and the tag value might be "companyA." You
-    # can specify one or more tags to add to each container. You can add up
-    # to 50 tags to each AWS resource.
+    # pairs that you can use to categorize and manage your resources, for
+    # purposes like billing. For example, you might set the tag key to
+    # "customer" and the value to the customer name or ID. You can specify
+    # one or more tags to add to each AWS resource, up to 50 tags for a
+    # resource.
+    #
+    # You can tag the AWS resources that you manage through AWS WAF: web
+    # ACLs, rule groups, IP sets, and regex pattern sets. You can't manage
+    # or view tags through the AWS WAF console.
     #
     #
     #
@@ -3923,6 +4001,10 @@ module Aws::WAFV2
     #           },
     #           geo_match_statement: {
     #             country_codes: ["AF"], # accepts AF, AX, AL, DZ, AS, AD, AO, AI, AQ, AG, AR, AM, AW, AU, AT, AZ, BS, BH, BD, BB, BY, BE, BZ, BJ, BM, BT, BO, BQ, BA, BW, BV, BR, IO, BN, BG, BF, BI, KH, CM, CA, CV, KY, CF, TD, CL, CN, CX, CC, CO, KM, CG, CD, CK, CR, CI, HR, CU, CW, CY, CZ, DK, DJ, DM, DO, EC, EG, SV, GQ, ER, EE, ET, FK, FO, FJ, FI, FR, GF, PF, TF, GA, GM, GE, DE, GH, GI, GR, GL, GD, GP, GU, GT, GG, GN, GW, GY, HT, HM, VA, HN, HK, HU, IS, IN, ID, IR, IQ, IE, IM, IL, IT, JM, JP, JE, JO, KZ, KE, KI, KP, KR, KW, KG, LA, LV, LB, LS, LR, LY, LI, LT, LU, MO, MK, MG, MW, MY, MV, ML, MT, MH, MQ, MR, MU, YT, MX, FM, MD, MC, MN, ME, MS, MA, MZ, MM, NA, NR, NP, NL, NC, NZ, NI, NE, NG, NU, NF, MP, NO, OM, PK, PW, PS, PA, PG, PY, PE, PH, PN, PL, PT, PR, QA, RE, RO, RU, RW, BL, SH, KN, LC, MF, PM, VC, WS, SM, ST, SA, SN, RS, SC, SL, SG, SX, SK, SI, SB, SO, ZA, GS, SS, ES, LK, SD, SR, SJ, SZ, SE, CH, SY, TW, TJ, TZ, TH, TL, TG, TK, TO, TT, TN, TR, TM, TC, TV, UG, UA, AE, GB, US, UM, UY, UZ, VU, VE, VN, VG, VI, WF, EH, YE, ZM, ZW
+    #             forwarded_ip_config: {
+    #               header_name: "ForwardedIPHeaderName", # required
+    #               fallback_behavior: "MATCH", # required, accepts MATCH, NO_MATCH
+    #             },
     #           },
     #           rule_group_reference_statement: {
     #             arn: "ResourceArn", # required
@@ -3934,6 +4016,11 @@ module Aws::WAFV2
     #           },
     #           ip_set_reference_statement: {
     #             arn: "ResourceArn", # required
+    #             ip_set_forwarded_ip_config: {
+    #               header_name: "ForwardedIPHeaderName", # required
+    #               fallback_behavior: "MATCH", # required, accepts MATCH, NO_MATCH
+    #               position: "FIRST", # required, accepts FIRST, LAST, ANY
+    #             },
     #           },
     #           regex_pattern_set_reference_statement: {
     #             arn: "ResourceArn", # required
@@ -3964,9 +4051,13 @@ module Aws::WAFV2
     #           },
     #           rate_based_statement: {
     #             limit: 1, # required
-    #             aggregate_key_type: "IP", # required, accepts IP
+    #             aggregate_key_type: "IP", # required, accepts IP, FORWARDED_IP
     #             scope_down_statement: {
     #               # recursive Statement
+    #             },
+    #             forwarded_ip_config: {
+    #               header_name: "ForwardedIPHeaderName", # required
+    #               fallback_behavior: "MATCH", # required, accepts MATCH, NO_MATCH
     #             },
     #           },
     #           and_statement: {
@@ -4245,6 +4336,10 @@ module Aws::WAFV2
     #           },
     #           geo_match_statement: {
     #             country_codes: ["AF"], # accepts AF, AX, AL, DZ, AS, AD, AO, AI, AQ, AG, AR, AM, AW, AU, AT, AZ, BS, BH, BD, BB, BY, BE, BZ, BJ, BM, BT, BO, BQ, BA, BW, BV, BR, IO, BN, BG, BF, BI, KH, CM, CA, CV, KY, CF, TD, CL, CN, CX, CC, CO, KM, CG, CD, CK, CR, CI, HR, CU, CW, CY, CZ, DK, DJ, DM, DO, EC, EG, SV, GQ, ER, EE, ET, FK, FO, FJ, FI, FR, GF, PF, TF, GA, GM, GE, DE, GH, GI, GR, GL, GD, GP, GU, GT, GG, GN, GW, GY, HT, HM, VA, HN, HK, HU, IS, IN, ID, IR, IQ, IE, IM, IL, IT, JM, JP, JE, JO, KZ, KE, KI, KP, KR, KW, KG, LA, LV, LB, LS, LR, LY, LI, LT, LU, MO, MK, MG, MW, MY, MV, ML, MT, MH, MQ, MR, MU, YT, MX, FM, MD, MC, MN, ME, MS, MA, MZ, MM, NA, NR, NP, NL, NC, NZ, NI, NE, NG, NU, NF, MP, NO, OM, PK, PW, PS, PA, PG, PY, PE, PH, PN, PL, PT, PR, QA, RE, RO, RU, RW, BL, SH, KN, LC, MF, PM, VC, WS, SM, ST, SA, SN, RS, SC, SL, SG, SX, SK, SI, SB, SO, ZA, GS, SS, ES, LK, SD, SR, SJ, SZ, SE, CH, SY, TW, TJ, TZ, TH, TL, TG, TK, TO, TT, TN, TR, TM, TC, TV, UG, UA, AE, GB, US, UM, UY, UZ, VU, VE, VN, VG, VI, WF, EH, YE, ZM, ZW
+    #             forwarded_ip_config: {
+    #               header_name: "ForwardedIPHeaderName", # required
+    #               fallback_behavior: "MATCH", # required, accepts MATCH, NO_MATCH
+    #             },
     #           },
     #           rule_group_reference_statement: {
     #             arn: "ResourceArn", # required
@@ -4256,6 +4351,11 @@ module Aws::WAFV2
     #           },
     #           ip_set_reference_statement: {
     #             arn: "ResourceArn", # required
+    #             ip_set_forwarded_ip_config: {
+    #               header_name: "ForwardedIPHeaderName", # required
+    #               fallback_behavior: "MATCH", # required, accepts MATCH, NO_MATCH
+    #               position: "FIRST", # required, accepts FIRST, LAST, ANY
+    #             },
     #           },
     #           regex_pattern_set_reference_statement: {
     #             arn: "ResourceArn", # required
@@ -4286,9 +4386,13 @@ module Aws::WAFV2
     #           },
     #           rate_based_statement: {
     #             limit: 1, # required
-    #             aggregate_key_type: "IP", # required, accepts IP
+    #             aggregate_key_type: "IP", # required, accepts IP, FORWARDED_IP
     #             scope_down_statement: {
     #               # recursive Statement
+    #             },
+    #             forwarded_ip_config: {
+    #               header_name: "ForwardedIPHeaderName", # required
+    #               fallback_behavior: "MATCH", # required, accepts MATCH, NO_MATCH
     #             },
     #           },
     #           and_statement: {
@@ -4375,7 +4479,7 @@ module Aws::WAFV2
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-wafv2'
-      context[:gem_version] = '1.8.0'
+      context[:gem_version] = '1.9.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

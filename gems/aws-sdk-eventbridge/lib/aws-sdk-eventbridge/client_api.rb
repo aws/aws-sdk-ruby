@@ -59,6 +59,10 @@ module Aws::EventBridge
     EventSourceNamePrefix = Shapes::StringShape.new(name: 'EventSourceNamePrefix')
     EventSourceState = Shapes::StringShape.new(name: 'EventSourceState')
     EventTime = Shapes::TimestampShape.new(name: 'EventTime')
+    HeaderKey = Shapes::StringShape.new(name: 'HeaderKey')
+    HeaderParametersMap = Shapes::MapShape.new(name: 'HeaderParametersMap')
+    HeaderValue = Shapes::StringShape.new(name: 'HeaderValue')
+    HttpParameters = Shapes::StructureShape.new(name: 'HttpParameters')
     InputTransformer = Shapes::StructureShape.new(name: 'InputTransformer')
     InputTransformerPathKey = Shapes::StringShape.new(name: 'InputTransformerPathKey')
     Integer = Shapes::IntegerShape.new(name: 'Integer')
@@ -92,11 +96,14 @@ module Aws::EventBridge
     NetworkConfiguration = Shapes::StructureShape.new(name: 'NetworkConfiguration')
     NextToken = Shapes::StringShape.new(name: 'NextToken')
     NonPartnerEventBusName = Shapes::StringShape.new(name: 'NonPartnerEventBusName')
+    OperationDisabledException = Shapes::StructureShape.new(name: 'OperationDisabledException')
     PartnerEventSource = Shapes::StructureShape.new(name: 'PartnerEventSource')
     PartnerEventSourceAccount = Shapes::StructureShape.new(name: 'PartnerEventSourceAccount')
     PartnerEventSourceAccountList = Shapes::ListShape.new(name: 'PartnerEventSourceAccountList')
     PartnerEventSourceList = Shapes::ListShape.new(name: 'PartnerEventSourceList')
     PartnerEventSourceNamePrefix = Shapes::StringShape.new(name: 'PartnerEventSourceNamePrefix')
+    PathParameter = Shapes::StringShape.new(name: 'PathParameter')
+    PathParameterList = Shapes::ListShape.new(name: 'PathParameterList')
     PolicyLengthExceededException = Shapes::StructureShape.new(name: 'PolicyLengthExceededException')
     Principal = Shapes::StringShape.new(name: 'Principal')
     PutEventsRequest = Shapes::StructureShape.new(name: 'PutEventsRequest')
@@ -118,6 +125,9 @@ module Aws::EventBridge
     PutTargetsResponse = Shapes::StructureShape.new(name: 'PutTargetsResponse')
     PutTargetsResultEntry = Shapes::StructureShape.new(name: 'PutTargetsResultEntry')
     PutTargetsResultEntryList = Shapes::ListShape.new(name: 'PutTargetsResultEntryList')
+    QueryStringKey = Shapes::StringShape.new(name: 'QueryStringKey')
+    QueryStringParametersMap = Shapes::MapShape.new(name: 'QueryStringParametersMap')
+    QueryStringValue = Shapes::StringShape.new(name: 'QueryStringValue')
     RemovePermissionRequest = Shapes::StructureShape.new(name: 'RemovePermissionRequest')
     RemoveTargetsRequest = Shapes::StructureShape.new(name: 'RemoveTargetsRequest')
     RemoveTargetsResponse = Shapes::StructureShape.new(name: 'RemoveTargetsResponse')
@@ -300,6 +310,14 @@ module Aws::EventBridge
 
     EventSourceList.member = Shapes::ShapeRef.new(shape: EventSource)
 
+    HeaderParametersMap.key = Shapes::ShapeRef.new(shape: HeaderKey)
+    HeaderParametersMap.value = Shapes::ShapeRef.new(shape: HeaderValue)
+
+    HttpParameters.add_member(:path_parameter_values, Shapes::ShapeRef.new(shape: PathParameterList, location_name: "PathParameterValues"))
+    HttpParameters.add_member(:header_parameters, Shapes::ShapeRef.new(shape: HeaderParametersMap, location_name: "HeaderParameters"))
+    HttpParameters.add_member(:query_string_parameters, Shapes::ShapeRef.new(shape: QueryStringParametersMap, location_name: "QueryStringParameters"))
+    HttpParameters.struct_class = Types::HttpParameters
+
     InputTransformer.add_member(:input_paths_map, Shapes::ShapeRef.new(shape: TransformerPaths, location_name: "InputPathsMap"))
     InputTransformer.add_member(:input_template, Shapes::ShapeRef.new(shape: TransformerInput, required: true, location_name: "InputTemplate"))
     InputTransformer.struct_class = Types::InputTransformer
@@ -392,6 +410,8 @@ module Aws::EventBridge
     NetworkConfiguration.add_member(:awsvpc_configuration, Shapes::ShapeRef.new(shape: AwsVpcConfiguration, location_name: "awsvpcConfiguration"))
     NetworkConfiguration.struct_class = Types::NetworkConfiguration
 
+    OperationDisabledException.struct_class = Types::OperationDisabledException
+
     PartnerEventSource.add_member(:arn, Shapes::ShapeRef.new(shape: String, location_name: "Arn"))
     PartnerEventSource.add_member(:name, Shapes::ShapeRef.new(shape: String, location_name: "Name"))
     PartnerEventSource.struct_class = Types::PartnerEventSource
@@ -405,6 +425,8 @@ module Aws::EventBridge
     PartnerEventSourceAccountList.member = Shapes::ShapeRef.new(shape: PartnerEventSourceAccount)
 
     PartnerEventSourceList.member = Shapes::ShapeRef.new(shape: PartnerEventSource)
+
+    PathParameterList.member = Shapes::ShapeRef.new(shape: PathParameter)
 
     PolicyLengthExceededException.struct_class = Types::PolicyLengthExceededException
 
@@ -491,6 +513,9 @@ module Aws::EventBridge
 
     PutTargetsResultEntryList.member = Shapes::ShapeRef.new(shape: PutTargetsResultEntry)
 
+    QueryStringParametersMap.key = Shapes::ShapeRef.new(shape: QueryStringKey)
+    QueryStringParametersMap.value = Shapes::ShapeRef.new(shape: QueryStringValue)
+
     RemovePermissionRequest.add_member(:statement_id, Shapes::ShapeRef.new(shape: StatementId, required: true, location_name: "StatementId"))
     RemovePermissionRequest.add_member(:event_bus_name, Shapes::ShapeRef.new(shape: NonPartnerEventBusName, location_name: "EventBusName"))
     RemovePermissionRequest.struct_class = Types::RemovePermissionRequest
@@ -572,6 +597,7 @@ module Aws::EventBridge
     Target.add_member(:ecs_parameters, Shapes::ShapeRef.new(shape: EcsParameters, location_name: "EcsParameters"))
     Target.add_member(:batch_parameters, Shapes::ShapeRef.new(shape: BatchParameters, location_name: "BatchParameters"))
     Target.add_member(:sqs_parameters, Shapes::ShapeRef.new(shape: SqsParameters, location_name: "SqsParameters"))
+    Target.add_member(:http_parameters, Shapes::ShapeRef.new(shape: HttpParameters, location_name: "HttpParameters"))
     Target.struct_class = Types::Target
 
     TargetIdList.member = Shapes::ShapeRef.new(shape: TargetId)
@@ -622,6 +648,7 @@ module Aws::EventBridge
         o.errors << Shapes::ShapeRef.new(shape: ConcurrentModificationException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidStateException)
         o.errors << Shapes::ShapeRef.new(shape: InternalException)
+        o.errors << Shapes::ShapeRef.new(shape: OperationDisabledException)
       end)
 
       api.add_operation(:create_event_bus, Seahorse::Model::Operation.new.tap do |o|
@@ -636,6 +663,7 @@ module Aws::EventBridge
         o.errors << Shapes::ShapeRef.new(shape: InternalException)
         o.errors << Shapes::ShapeRef.new(shape: ConcurrentModificationException)
         o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: OperationDisabledException)
       end)
 
       api.add_operation(:create_partner_event_source, Seahorse::Model::Operation.new.tap do |o|
@@ -648,6 +676,7 @@ module Aws::EventBridge
         o.errors << Shapes::ShapeRef.new(shape: InternalException)
         o.errors << Shapes::ShapeRef.new(shape: ConcurrentModificationException)
         o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: OperationDisabledException)
       end)
 
       api.add_operation(:deactivate_event_source, Seahorse::Model::Operation.new.tap do |o|
@@ -660,6 +689,7 @@ module Aws::EventBridge
         o.errors << Shapes::ShapeRef.new(shape: ConcurrentModificationException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidStateException)
         o.errors << Shapes::ShapeRef.new(shape: InternalException)
+        o.errors << Shapes::ShapeRef.new(shape: OperationDisabledException)
       end)
 
       api.add_operation(:delete_event_bus, Seahorse::Model::Operation.new.tap do |o|
@@ -680,6 +710,7 @@ module Aws::EventBridge
         o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
         o.errors << Shapes::ShapeRef.new(shape: InternalException)
         o.errors << Shapes::ShapeRef.new(shape: ConcurrentModificationException)
+        o.errors << Shapes::ShapeRef.new(shape: OperationDisabledException)
       end)
 
       api.add_operation(:delete_rule, Seahorse::Model::Operation.new.tap do |o|
@@ -712,6 +743,7 @@ module Aws::EventBridge
         o.output = Shapes::ShapeRef.new(shape: DescribeEventSourceResponse)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: InternalException)
+        o.errors << Shapes::ShapeRef.new(shape: OperationDisabledException)
       end)
 
       api.add_operation(:describe_partner_event_source, Seahorse::Model::Operation.new.tap do |o|
@@ -722,6 +754,7 @@ module Aws::EventBridge
         o.output = Shapes::ShapeRef.new(shape: DescribePartnerEventSourceResponse)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: InternalException)
+        o.errors << Shapes::ShapeRef.new(shape: OperationDisabledException)
       end)
 
       api.add_operation(:describe_rule, Seahorse::Model::Operation.new.tap do |o|
@@ -774,6 +807,7 @@ module Aws::EventBridge
         o.input = Shapes::ShapeRef.new(shape: ListEventSourcesRequest)
         o.output = Shapes::ShapeRef.new(shape: ListEventSourcesResponse)
         o.errors << Shapes::ShapeRef.new(shape: InternalException)
+        o.errors << Shapes::ShapeRef.new(shape: OperationDisabledException)
       end)
 
       api.add_operation(:list_partner_event_source_accounts, Seahorse::Model::Operation.new.tap do |o|
@@ -784,6 +818,7 @@ module Aws::EventBridge
         o.output = Shapes::ShapeRef.new(shape: ListPartnerEventSourceAccountsResponse)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: InternalException)
+        o.errors << Shapes::ShapeRef.new(shape: OperationDisabledException)
       end)
 
       api.add_operation(:list_partner_event_sources, Seahorse::Model::Operation.new.tap do |o|
@@ -793,6 +828,7 @@ module Aws::EventBridge
         o.input = Shapes::ShapeRef.new(shape: ListPartnerEventSourcesRequest)
         o.output = Shapes::ShapeRef.new(shape: ListPartnerEventSourcesResponse)
         o.errors << Shapes::ShapeRef.new(shape: InternalException)
+        o.errors << Shapes::ShapeRef.new(shape: OperationDisabledException)
       end)
 
       api.add_operation(:list_rule_names_by_target, Seahorse::Model::Operation.new.tap do |o|
@@ -851,6 +887,7 @@ module Aws::EventBridge
         o.input = Shapes::ShapeRef.new(shape: PutPartnerEventsRequest)
         o.output = Shapes::ShapeRef.new(shape: PutPartnerEventsResponse)
         o.errors << Shapes::ShapeRef.new(shape: InternalException)
+        o.errors << Shapes::ShapeRef.new(shape: OperationDisabledException)
       end)
 
       api.add_operation(:put_permission, Seahorse::Model::Operation.new.tap do |o|

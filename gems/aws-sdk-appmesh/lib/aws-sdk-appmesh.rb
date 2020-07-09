@@ -27,7 +27,7 @@ require_relative 'aws-sdk-appmesh/customizations'
 # structure.
 #
 #     app_mesh = Aws::AppMesh::Client.new
-#     resp = app_mesh.create_mesh(params)
+#     resp = app_mesh.create_gateway_route(params)
 #
 # See {Client} for more information.
 #
@@ -47,6 +47,6 @@ require_relative 'aws-sdk-appmesh/customizations'
 # @service
 module Aws::AppMesh
 
-  GEM_VERSION = '1.27.0'
+  GEM_VERSION = '1.28.0'
 
 end

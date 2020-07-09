@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.27.0 (2020-07-09)
+------------------
+
+* Feature - Documentation updates for cloudhsmv2
+
 1.26.0 (2020-07-02)
 ------------------
 
