@@ -22,7 +22,9 @@ for all operations.
         # @api private
         class OptionHandler < Seahorse::Client::Handler
           def call(context)
-            dualstack = context.params.delete(:use_dualstack_endpoint)
+            if context.params.is_a?(Hash)
+              dualstack = context.params.delete(:use_dualstack_endpoint)
+            end
             dualstack = context.config.use_dualstack_endpoint if dualstack.nil?
             context[:use_dualstack_endpoint] = dualstack
             @handler.call(context)

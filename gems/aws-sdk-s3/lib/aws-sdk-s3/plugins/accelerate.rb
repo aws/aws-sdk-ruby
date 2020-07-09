@@ -37,7 +37,9 @@ each bucket. [Go here for more information](http://docs.aws.amazon.com/AmazonS3/
         class OptionHandler < Seahorse::Client::Handler
           def call(context)
             # Support client configuration and per-operation configuration
-            accelerate = context.params.delete(:use_accelerate_endpoint)
+            if context.params.is_a?(Hash)
+              accelerate = context.params.delete(:use_accelerate_endpoint)
+            end
             if accelerate.nil?
               accelerate = context.config.use_accelerate_endpoint
             end
