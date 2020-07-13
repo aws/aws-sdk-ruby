@@ -71,7 +71,7 @@ module Seahorse
 
         let(:handler) do
           Proc.new do
-            context.http_response.signal_headers(200, {})
+            context.http_response.signal_headers(200, {'content-length' => '15'})
             context.http_response.signal_data('part1')
             context.http_response.signal_data('part2')
             context.http_response.signal_data('part3')
@@ -161,6 +161,13 @@ module Seahorse
             body = response.context.http_response.body
             expect(body.read).to eq('')
             expect(body).not_to respond_to(:truncate)
+          end
+
+          it 'passes the headers to the #send_request block' do
+            headers = nil
+            request.send_request { |_chunk, header| headers = header }
+            expect(headers).to be_an_instance_of(Seahorse::Client::Http::Headers)
+            expect(headers['content-length']).to eq('15')
           end
 
           describe '2xx responses, not 200' do
