@@ -34,7 +34,7 @@ module Seahorse
               # an existing ManagedFile or BlockIO and those
               # should be reused.
               if context.http_response.body.is_a? StringIO
-                context.http_response.body = handler.send(:io, target)
+                context.http_response.body = io(target, context.http_response.headers)
               end
             end
 
@@ -62,9 +62,9 @@ module Seahorse
             end
           end
 
-          def io(target)
+          def io(target, headers)
             case target
-            when Proc then BlockIO.new(&target)
+            when Proc then BlockIO.new(headers, &target)
             when String, Pathname then ManagedFile.new(target, 'w+b')
             else target
             end

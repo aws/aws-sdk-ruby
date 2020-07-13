@@ -73,7 +73,7 @@ module Seahorse
 
         # Completes the http response.
         #
-        # @example Completing the response in a singal call
+        # @example Completing the response in a single call
         #
         #     http_response.signal_done(
         #       status_code: 200,

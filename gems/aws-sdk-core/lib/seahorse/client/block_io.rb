@@ -4,7 +4,8 @@ module Seahorse
   module Client
     class BlockIO
 
-      def initialize(&block)
+      def initialize(headers = nil, &block)
+        @headers = headers
         @block = block
         @size = 0
       end
@@ -12,7 +13,7 @@ module Seahorse
       # @param [String] chunk
       # @return [Integer]
       def write(chunk)
-        @block.call(chunk)
+        @block.call(chunk, @headers)
       ensure
         chunk.bytesize.tap { |chunk_size| @size += chunk_size }
       end
