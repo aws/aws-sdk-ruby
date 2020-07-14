@@ -312,6 +312,8 @@ module Aws
       #   multipart uploads. This option is not used if the file is smaller than
       #   `:multipart_threshold`.
       #
+      # @option options [Proc] :progress_callback - TBD
+      #
       # @raise [MultipartUploadError] If an object is being uploaded in
       #   parts, and the upload can not be completed, then the upload is
       #   aborted and this error is raised.  The raised error has a `#errors`

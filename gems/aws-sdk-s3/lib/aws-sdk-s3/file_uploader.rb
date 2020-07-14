@@ -29,7 +29,9 @@ module Aws
       # @param [String, Pathname, File, Tempfile] source The file to upload.
       # @option options [required, String] :bucket The bucket to upload to.
       # @option options [required, String] :key The key for the object.
+      # @option options [Proc] :progress_callback TBD
       # @return [void]
+
       def upload(source, options = {})
         if File.size(source) >= multipart_threshold
           MultipartFileUploader.new(@options).upload(source, options)
@@ -49,9 +51,17 @@ module Aws
       end
 
       def put_object(source, options)
+        if options.include? :progress_callback
+          options[:on_chunk_sent] =
+            single_part_progress(options.delete(:progress_callback))
+        end
         open_file(source) do |file|
           @client.put_object(options.merge(body: file))
         end
+      end
+
+      def single_part_progress(progress_callback)
+        Proc.new { |_chunk, bytes_read, total_size| progress_callback.call(bytes_read, total_size) }
       end
 
     end
