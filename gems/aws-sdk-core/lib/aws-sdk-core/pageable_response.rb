@@ -1,14 +1,16 @@
 # frozen_string_literal: true
 
 module Aws
-
   # Decorates a {Seahorse::Client::Response} with paging convenience methods.
   # Some AWS calls provide paged responses to limit the amount of data returned
-  # with each response.  To optimize for latency, some APIs may return an
-  # inconsistent number of responses per page.  You should rely on the values of
-  # the `next_page?` method or using enumerable methods such as `each`
-  # rather than the number of items returned to iterate through results.
-  # See below for examples.
+  # with each response. To optimize for latency, some APIs may return an
+  # inconsistent number of responses per page. You should rely on the values of
+  # the `next_page?` method or using enumerable methods such as `each` rather
+  # than the number of items returned to iterate through results. See below for
+  # examples.
+  #
+  # @note Methods such as `to_json` will enumerate all of the responses before
+  #   returning the full response as JSON.
   #
   # # Paged Responses Are Enumerable
   # The simplest way to handle paged response data is to use the built-in
