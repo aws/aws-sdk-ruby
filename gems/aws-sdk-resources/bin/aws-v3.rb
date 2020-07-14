@@ -180,7 +180,6 @@ def run_with_pry
   rescue LoadError
     raise PryNotAvailable
   end
-  Pry.config.prompt = [proc { "Aws> " }, proc { "Aws| " }]
   Aws.pry
 end
 
