@@ -61,7 +61,7 @@ module Aws
       end
 
       def single_part_progress(progress_callback)
-        Proc.new { |_chunk, bytes_read, total_size| progress_callback.call(bytes_read, total_size) }
+        Proc.new { |_chunk, bytes_read, total_size| progress_callback.call([bytes_read], [total_size]) }
       end
 
     end

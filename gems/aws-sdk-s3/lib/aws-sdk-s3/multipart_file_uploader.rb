@@ -133,7 +133,6 @@ module Aws
         threads = []
         upload_part_options = {}
         if options.include? :progress_callback
-          puts "progress_callback is set"
           progress = MultipartProgress.new(pending, options[:progress_callback])
         end
         @thread_count.times do
@@ -208,8 +207,8 @@ module Aws
         end
 
         def call(part_number, bytes_read)
-          @bytes_sent[part_number] = bytes_read
-          puts "Calling the orogress thing with: #{@bytes_sent} / #{@total_size}"
+          # part numbers start at 1
+          @bytes_sent[part_number - 1] = bytes_read
           @progress_callback.call(@bytes_sent, @total_sizes)
         end
 
