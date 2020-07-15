@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+3.76.0 (2020-07-15)
+------------------
+
+* Feature - Added a dependency on the new `aws-sdk-ivs` gem.
+
 3.75.0 (2020-06-24)
 ------------------
 

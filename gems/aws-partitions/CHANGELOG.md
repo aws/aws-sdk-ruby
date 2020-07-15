@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.342.0 (2020-07-15)
+------------------
+
+* Feature - Added support for enumerating regions for `Aws::IVS`.
+
 1.341.0 (2020-07-09)
 ------------------
 

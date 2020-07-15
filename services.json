@@ -333,6 +333,9 @@
   "IAM": {
     "models": "iam/2010-05-08"
   },
+  "IVS": {
+    "models": "ivs/2020-07-14"
+  },
   "Imagebuilder": {
     "models": "imagebuilder/2019-12-02"
   },

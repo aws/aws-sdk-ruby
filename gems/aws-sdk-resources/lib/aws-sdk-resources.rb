@@ -106,6 +106,7 @@ module Aws
   autoload :Health, 'aws-sdk-health'
   autoload :Honeycode, 'aws-sdk-honeycode'
   autoload :IAM, 'aws-sdk-iam'
+  autoload :IVS, 'aws-sdk-ivs'
   autoload :Imagebuilder, 'aws-sdk-imagebuilder'
   autoload :ImportExport, 'aws-sdk-importexport'
   autoload :Inspector, 'aws-sdk-inspector'

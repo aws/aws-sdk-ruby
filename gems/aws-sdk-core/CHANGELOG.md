@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+3.104.0 (2020-07-15)
+------------------
+
 * Feature - Add headers to the `ResponseTarget` callback.  A block passed as the response target on a streaming method will be called with the `chunk` and `headers`.
 * Feature - Added the `RequestCallback` plugin which allows clients and methods to set `on_chunk_sent` to a `Proc` which will be called as each chunk of the request body is sent.
 
