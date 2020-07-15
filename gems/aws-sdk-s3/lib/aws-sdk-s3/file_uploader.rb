@@ -51,9 +51,8 @@ module Aws
       end
 
       def put_object(source, options)
-        if options.include? :progress_callback
-          options[:on_chunk_sent] =
-            single_part_progress(options.delete(:progress_callback))
+        if (callback = options.delete(:progress_callback))
+          options[:on_chunk_sent] = single_part_progress(callback)
         end
         open_file(source) do |file|
           @client.put_object(options.merge(body: file))
@@ -61,9 +60,10 @@ module Aws
       end
 
       def single_part_progress(progress_callback)
-        Proc.new { |_chunk, bytes_read, total_size| progress_callback.call([bytes_read], [total_size]) }
+        proc do |_chunk, bytes_read, total_size|
+          progress_callback.call([bytes_read], [total_size])
+        end
       end
-
     end
   end
 end

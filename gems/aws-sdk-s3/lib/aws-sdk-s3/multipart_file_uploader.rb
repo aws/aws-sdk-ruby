@@ -67,7 +67,6 @@ module Aws
       end
 
       def upload_parts(upload_id, source, options)
-        puts "options: #{options}"
         pending = PartList.new(compute_parts(upload_id, source, options))
         completed = PartList.new
         errors = upload_in_threads(pending, completed, options)
@@ -131,18 +130,20 @@ module Aws
 
       def upload_in_threads(pending, completed, options)
         threads = []
-        upload_part_options = {}
-        if options.include? :progress_callback
-          progress = MultipartProgress.new(pending, options[:progress_callback])
+        if (callback = options[:progress_callback])
+          progress = MultipartProgress.new(pending, callback)
         end
         @thread_count.times do
           thread = Thread.new do
             begin
               while part = pending.shift
                 if progress
-                  upload_part_options[:on_chunk_sent] = Proc.new { |_chunk, bytes, _total| progress.call(part[:part_number], bytes) }
+                  part[:on_chunk_sent] =
+                    proc do |_chunk, bytes, _total|
+                      progress.call(part[:part_number], bytes)
+                    end
                 end
-                resp = @client.upload_part(part.merge(upload_part_options))
+                resp = @client.upload_part(part)
                 part[:body].close
                 completed.push(etag: resp.etag, part_number: part[:part_number])
               end
@@ -191,6 +192,14 @@ module Aws
           @mutex.synchronize { @parts.clear }
         end
 
+        def size
+          @mutex.synchronize { @parts.size }
+        end
+
+        def part_sizes
+          @mutex.synchronize { @parts.map { |p| p[:body].size } }
+        end
+
         def to_a
           @mutex.synchronize { @parts.dup }
         end
@@ -200,9 +209,8 @@ module Aws
       # @api private
       class MultipartProgress
         def initialize(parts, progress_callback)
-          parts = parts.to_a
           @bytes_sent = Array.new(parts.size, 0)
-          @total_sizes = parts.map { |p| p[:body].size }
+          @total_sizes = parts.part_sizes
           @progress_callback = progress_callback
         end
 
@@ -211,7 +219,6 @@ module Aws
           @bytes_sent[part_number - 1] = bytes_read
           @progress_callback.call(@bytes_sent, @total_sizes)
         end
-
       end
     end
   end
