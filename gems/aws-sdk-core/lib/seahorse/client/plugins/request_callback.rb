@@ -21,11 +21,23 @@ module Seahorse
         attr_reader :io
 
         def read(*args)
-          ret = @io.read(*args)
-          @bytes_read += ret.bytesize if ret && ret.respond_to?(:bytesize)
+          @io.read(*args).tap do |chunk|
+            handle_chunk(chunk)
+          end
+        end
+
+        def readpartial(*args)
+          @io.readpartial(*args).tap do |chunk|
+            handle_chunk(chunk)
+          end
+        end
+
+        private
+
+        def handle_chunk(chunk)
+          @bytes_read += chunk.bytesize if chunk && chunk.respond_to?(:bytesize)
           total_size = @io.respond_to?(:size) ? @io.size : nil
-          @on_read.call(ret, @bytes_read, total_size) if @on_read
-          ret
+          @on_read.call(chunk, @bytes_read, total_size) if @on_read
         end
       end
 
