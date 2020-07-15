@@ -124,6 +124,7 @@ module Aws
     Health
     Honeycode
     IAM
+    IVS
     Imagebuilder
     ImportExport
     Inspector

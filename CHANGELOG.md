@@ -1,6 +1,8 @@
 Unreleased Changes
 ------------------
 
+* Feature - Aws::IVS - Added support for a new service, Amazon Interactive Video Service.
+
 2.11.545 (2020-07-09)
 ------------------
 

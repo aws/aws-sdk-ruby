@@ -416,6 +416,7 @@ to be backwards compatible.
 | Amazon Honeycode                                      | Honeycode                       | 2020-03-01  |
 | Amazon Import/Export Snowball                         | Snowball                        | 2016-06-30  |
 | Amazon Inspector                                      | Inspector                       | 2016-02-16  |
+| Amazon Interactive Video Service                      | IVS                             | 2020-07-14  |
 | Amazon Kinesis                                        | Kinesis                         | 2013-12-02  |
 | Amazon Kinesis Analytics                              | KinesisAnalytics                | 2015-08-14  |
 | Amazon Kinesis Analytics                              | KinesisAnalyticsV2              | 2018-05-23  |
@@ -451,8 +452,8 @@ to be backwards compatible.
 | Amazon Route 53 Resolver                              | Route53Resolver                 | 2018-04-01  |
 | Amazon SageMaker Runtime                              | SageMakerRuntime                | 2017-05-13  |
 | Amazon SageMaker Service                              | SageMaker                       | 2017-07-24  |
-| Amazon Simple Email Service                           | SESV2                           | 2019-09-27  |
 | Amazon Simple Email Service                           | SES                             | 2010-12-01  |
+| Amazon Simple Email Service                           | SESV2                           | 2019-09-27  |
 | Amazon Simple Notification Service                    | SNS                             | 2010-03-31  |
 | Amazon Simple Queue Service                           | SQS                             | 2012-11-05  |
 | Amazon Simple Storage Service                         | S3                              | 2006-03-01  |
@@ -474,8 +475,8 @@ to be backwards compatible.
 | Auto Scaling                                          | AutoScaling                     | 2011-01-01  |
 | CodeArtifact                                          | CodeArtifact                    | 2018-09-22  |
 | EC2 Image Builder                                     | Imagebuilder                    | 2019-12-02  |
-| Elastic Load Balancing                                | ElasticLoadBalancingV2          | 2015-12-01  |
 | Elastic Load Balancing                                | ElasticLoadBalancing            | 2012-06-01  |
+| Elastic Load Balancing                                | ElasticLoadBalancingV2          | 2015-12-01  |
 | Firewall Management Service                           | FMS                             | 2018-01-01  |
 | Managed Streaming for Kafka                           | Kafka                           | 2018-11-14  |
 | Schemas                                               | Schemas                         | 2019-12-02  |
