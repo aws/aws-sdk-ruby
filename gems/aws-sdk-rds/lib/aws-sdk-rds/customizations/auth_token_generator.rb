@@ -5,7 +5,10 @@ require 'aws-sigv4'
 module Aws
   module RDS
     # A utility class that generates an auth token that supports database
-    # logins.
+    # logins. IAM credentials are used for authentication instead of the
+    # database password.
+    #
+    # @see https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/UsingWithRDS.IAMDBAuth.html
     class AuthTokenGenerator
       # @option options [required, Credentials] :credentials An object that
       #   responds to `#credentials` returning another object that responds to
