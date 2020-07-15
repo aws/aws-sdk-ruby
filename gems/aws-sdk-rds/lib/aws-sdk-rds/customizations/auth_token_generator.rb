@@ -4,30 +4,17 @@ require 'aws-sigv4'
 
 module Aws
   module RDS
-
-    # The utility class helps generate an auth token that supports database login
-    # It provides a method:
-    #
-    # * {#auth_token} - Computes a login token which is similar to
-    #   a presigned url
+    # A utility class that generates an auth token that supports database
+    # logins.
     class AuthTokenGenerator
-
-      # @option options [required, Credentials] :credentials
-      # You need provide an object that responds to `#credentials`
-      # returning another object that responds to `#access_key_id`, `#secret_access_key`,
-      # and `#session_token`.
-      #
-      # For example, you could provide an instance of following classes:
-      # * `Aws::Credentials`
-      # * `Aws::SharedCredentials`
-      # * `Aws::InstanceProfileCredentials`
-      # * `Aws::AssumeRoleCredentials`
-      # * `Aws::ECSCredentials`
+      # @option options [required, Credentials] :credentials An object that
+      #   responds to `#credentials` returning another object that responds to
+      #   `#access_key_id`, `#secret_access_key`, and `#session_token`.
       def initialize(options = {})
         @credentials = options.fetch(:credentials)
       end
 
-      # To create a auth login token, following parameters are required:
+      # Creates an auth login token.
       #
       # @param [Hash] params The parameters for auth token creation.
       # @option params [required, String] :region Region where the database
@@ -35,7 +22,7 @@ module Aws
       # @option params [required, String] :endpoint Hostname of the database
       #   with a port number.
       #   For example: my-instance.us-west-2.rds.amazonaws.com:3306
-      # @option params [required, String] :user_name Username to login as
+      # @option params [required, String] :user_name Username to login as.
       #
       # @return [String]
       def auth_token(params)
@@ -52,17 +39,16 @@ module Aws
           region: region,
           credentials_provider: @credentials
         )
-        url = "https://" + endpoint + "/?#{param_list.to_s}"
+
         presigned_url = signer.presign_url(
           http_method: 'GET',
-          url: url,
+          url: "https://#{endpoint}/?#{param_list}",
           body: '',
           expires_in: 900
         ).to_s
         # Remove extra scheme for token
         presigned_url[8..-1]
       end
-
     end
   end
 end
