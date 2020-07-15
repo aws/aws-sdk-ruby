@@ -16,18 +16,23 @@ module Seahorse
           @io = io
           @on_read = on_read if on_read.is_a? Proc
           @bytes_read = 0
+
+          # Some IO objects support readpartial - IO.copy_stream used by the
+          # request will call readpartial if available, so define a wrapper
+          # for it if the underlying IO supports it.
+          if @io.respond_to?(:readpartial)
+            def self.readpartial(*args)
+              @io.readpartial(*args).tap do |chunk|
+                handle_chunk(chunk)
+              end
+            end
+          end
         end
 
         attr_reader :io
 
         def read(*args)
           @io.read(*args).tap do |chunk|
-            handle_chunk(chunk)
-          end
-        end
-
-        def readpartial(*args)
-          @io.readpartial(*args).tap do |chunk|
             handle_chunk(chunk)
           end
         end
