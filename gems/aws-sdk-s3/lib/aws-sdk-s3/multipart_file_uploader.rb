@@ -70,7 +70,7 @@ module Aws
         puts "options: #{options}"
         pending = PartList.new(compute_parts(upload_id, source, options))
         completed = PartList.new
-        errors = upload_in_threads(pending, completed, source, options)
+        errors = upload_in_threads(pending, completed, options)
         if errors.empty?
           completed.to_a.sort_by { |part| part[:part_number] }
         else
@@ -129,18 +129,20 @@ module Aws
         end
       end
 
-      def upload_in_threads(pending, completed, source, options)
+      def upload_in_threads(pending, completed, options)
         threads = []
         upload_part_options = {}
         if options.include? :progress_callback
           puts "progress_callback is set"
-          progress = MultipartProgress.new(File.size(source), options[:progress_callback])
-          upload_part_options[:on_chunk_sent] = Proc.new { |_chunk, bytes, _total| puts "GOT #{bytes}"; progress.call(bytes) }
+          progress = MultipartProgress.new(pending, options[:progress_callback])
         end
         @thread_count.times do
           thread = Thread.new do
             begin
               while part = pending.shift
+                if progress
+                  upload_part_options[:on_chunk_sent] = Proc.new { |_chunk, bytes, _total| progress.call(part[:part_number], bytes) }
+                end
                 resp = @client.upload_part(part.merge(upload_part_options))
                 part[:body].close
                 completed.push(etag: resp.etag, part_number: part[:part_number])
@@ -198,18 +200,17 @@ module Aws
 
       # @api private
       class MultipartProgress
-        def initialize(total_size, progress_callback)
-          @total_size = total_size
-          puts "Creating a multipart progress object with: #{progress_callback}"
+        def initialize(parts, progress_callback)
+          parts = parts.to_a
+          @bytes_sent = Array.new(parts.size, 0)
+          @total_sizes = parts.map { |p| p[:body].size }
           @progress_callback = progress_callback
-          @bytes_sent = 0
-          @mutex = Mutex.new
         end
 
-        def call(bytes_read)
-          @mutex.synchronize { @bytes_sent += bytes_read }
+        def call(part_number, bytes_read)
+          @bytes_sent[part_number] = bytes_read
           puts "Calling the orogress thing with: #{@bytes_sent} / #{@total_size}"
-          @progress_callback.call(@bytes_sent, @total_size)
+          @progress_callback.call(@bytes_sent, @total_sizes)
         end
 
       end
