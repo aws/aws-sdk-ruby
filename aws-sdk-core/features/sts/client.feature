@@ -2,9 +2,10 @@
 @sts @client
 Feature: AWS STS
 
-  Scenario: Making a basic request
-    When I call the "GetSessionToken" API
-    Then the response should contain a "Credentials" member
+# Cannot call GetSessionToken w/ Session credentials
+#  Scenario: Making a basic request
+#    When I call the "GetSessionToken" API
+#    Then the response should contain a "Credentials" member
 
   Scenario: Error handling
     When I attempt to call the "GetFederationToken" API with:
