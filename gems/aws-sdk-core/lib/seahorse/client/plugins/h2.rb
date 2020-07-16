@@ -34,7 +34,7 @@ verifying peer certificates. If you do not pass `:ssl_ca_directory` or `:ssl_ca_
 the system default will be used if available.
         DOCS
           ENV['AWS_CA_BUNDLE'] ||
-            Aws.shared_config.ca_bundle(profile: cfg.profile)
+            Aws.shared_config.ca_bundle(profile: cfg.profile) if cfg.respond_to?(:profile)
         end
 
         option(:ssl_ca_directory, default: nil, doc_type: String, docstring: <<-DOCS)
