@@ -9,7 +9,7 @@ module Seahorse
 
         let(:config) do
           Configuration.new.tap do |config|
-            config.add_option(:profile, '')
+            config.add_option(:profile, nil)
             NetHttp.new.add_options(config)
           end.build!
         end

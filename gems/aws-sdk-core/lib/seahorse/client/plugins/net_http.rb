@@ -23,7 +23,7 @@ module Seahorse
 
         option(:ssl_ca_bundle, doc_type: String, docstring: '') do |cfg|
           ENV['AWS_CA_BUNDLE'] ||
-            Aws.shared_config.ca_bundle(profile: cfg.profile)
+            Aws.shared_config.ca_bundle(profile: cfg.profile) if cfg.respond_to?(:profile)
         end
 
         option(:ssl_ca_directory, default: nil, doc_type: String, docstring: '')
