@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+2.11.547 (2020-07-17)
+------------------
+
 * Feature - Aws::ApplicationAutoScaling - Updated the documentation for Application Auto Scaling.
 
 * Feature - Aws::AppSync - Updated the documentation for AWS AppSync.
