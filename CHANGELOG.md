@@ -1,6 +1,18 @@
 Unreleased Changes
 ------------------
 
+* Feature - Aws::ApplicationAutoScaling - Updated the documentation for Application Auto Scaling.
+
+* Feature - Aws::AppSync - Updated the documentation for AWS AppSync.
+
+* Feature - Aws::Connect - Updated the API, and documentation for Amazon Connect Service.
+
+* Feature - Aws::EC2 - Updated the API, and documentation for Amazon Elastic Compute Cloud.
+
+* Feature - Aws::ElasticBeanstalk - Updated the API, and waiters for AWS Elastic Beanstalk.
+
+* Feature - Aws::Macie2 - Updated the API, and documentation for Amazon Macie 2.
+
 2.11.546 (2020-07-15)
 ------------------
 
