@@ -48,7 +48,7 @@ module Aws
           private
 
           def populate_checksum_headers(context)
-            compute_checksums(context.http_request.body) do |hash, tree_hash|
+            compute_checksums(context) do |hash, tree_hash|
               context.http_request.headers[HASH] = hash
               context.http_request.headers[TREE_HASH] = tree_hash.digest
               context[:tree_hash] = tree_hash
@@ -59,14 +59,14 @@ module Aws
           # by Glacier for operations where you upload a file.  The other
           # checksum is required by signature version 4.  We compute both
           # here so the sigv4 signer does not need to re-read the body.
-          def compute_checksums(body, &block)
-
+          def compute_checksums(context, &block)
+            body = context.http_request.body
             tree_hash = TreeHash.new
             digest = OpenSSL::Digest.new('sha256')
 
             # if the body is empty/EOF, then we should compute the
             # digests of the empty string
-            unless body_set?(body)
+            unless body && context.http_request.body_size > 0
               tree_hash.update('')
               digest.update('')
             end
@@ -81,20 +81,6 @@ module Aws
             body.rewind
 
             yield(digest.to_s, tree_hash)
-          end
-
-          def body_set?(body)
-            body && body_size(body) > 0
-          end
-
-          def body_size(body)
-            if body.respond_to?(:size)
-              body.size
-            elsif body.respond_to?(:stat) && (stat = body.stat).respond_to?(:size)
-              stat.size
-            else
-              raise ArgumentError, 'Request body must respond to either :size or :stat'
-            end
           end
         end
 
