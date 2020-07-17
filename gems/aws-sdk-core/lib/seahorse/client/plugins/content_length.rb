@@ -10,7 +10,7 @@ module Seahorse
 
           def call(context)
             begin
-              if (length = context.http_request.body_size)
+              if (length = context.http_request.body_size) && context.http_request.headers['Transfer-Encoding'] != 'chunked'
                 context.http_request.headers['Content-Length'] = length
               end
             rescue ArgumentError
