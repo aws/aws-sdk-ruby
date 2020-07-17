@@ -142,6 +142,8 @@ module Aws::Connect
     QueueTypes = Shapes::ListShape.new(name: 'QueueTypes')
     Queues = Shapes::ListShape.new(name: 'Queues')
     ResourceNotFoundException = Shapes::StructureShape.new(name: 'ResourceNotFoundException')
+    ResumeContactRecordingRequest = Shapes::StructureShape.new(name: 'ResumeContactRecordingRequest')
+    ResumeContactRecordingResponse = Shapes::StructureShape.new(name: 'ResumeContactRecordingResponse')
     RoutingProfileId = Shapes::StringShape.new(name: 'RoutingProfileId')
     RoutingProfileName = Shapes::StringShape.new(name: 'RoutingProfileName')
     RoutingProfileSummary = Shapes::StructureShape.new(name: 'RoutingProfileSummary')
@@ -154,11 +156,17 @@ module Aws::Connect
     SecurityToken = Shapes::StringShape.new(name: 'SecurityToken')
     StartChatContactRequest = Shapes::StructureShape.new(name: 'StartChatContactRequest')
     StartChatContactResponse = Shapes::StructureShape.new(name: 'StartChatContactResponse')
+    StartContactRecordingRequest = Shapes::StructureShape.new(name: 'StartContactRecordingRequest')
+    StartContactRecordingResponse = Shapes::StructureShape.new(name: 'StartContactRecordingResponse')
     StartOutboundVoiceContactRequest = Shapes::StructureShape.new(name: 'StartOutboundVoiceContactRequest')
     StartOutboundVoiceContactResponse = Shapes::StructureShape.new(name: 'StartOutboundVoiceContactResponse')
     Statistic = Shapes::StringShape.new(name: 'Statistic')
+    StopContactRecordingRequest = Shapes::StructureShape.new(name: 'StopContactRecordingRequest')
+    StopContactRecordingResponse = Shapes::StructureShape.new(name: 'StopContactRecordingResponse')
     StopContactRequest = Shapes::StructureShape.new(name: 'StopContactRequest')
     StopContactResponse = Shapes::StructureShape.new(name: 'StopContactResponse')
+    SuspendContactRecordingRequest = Shapes::StructureShape.new(name: 'SuspendContactRecordingRequest')
+    SuspendContactRecordingResponse = Shapes::StructureShape.new(name: 'SuspendContactRecordingResponse')
     TagKey = Shapes::StringShape.new(name: 'TagKey')
     TagKeyList = Shapes::ListShape.new(name: 'TagKeyList')
     TagMap = Shapes::MapShape.new(name: 'TagMap')
@@ -184,6 +192,8 @@ module Aws::Connect
     UserSummary = Shapes::StructureShape.new(name: 'UserSummary')
     UserSummaryList = Shapes::ListShape.new(name: 'UserSummaryList')
     Value = Shapes::FloatShape.new(name: 'Value')
+    VoiceRecordingConfiguration = Shapes::StructureShape.new(name: 'VoiceRecordingConfiguration')
+    VoiceRecordingTrack = Shapes::StringShape.new(name: 'VoiceRecordingTrack')
     timestamp = Shapes::TimestampShape.new(name: 'timestamp')
 
     Attributes.key = Shapes::ShapeRef.new(shape: AttributeName)
@@ -520,6 +530,13 @@ module Aws::Connect
     ResourceNotFoundException.add_member(:message, Shapes::ShapeRef.new(shape: Message, location_name: "Message"))
     ResourceNotFoundException.struct_class = Types::ResourceNotFoundException
 
+    ResumeContactRecordingRequest.add_member(:instance_id, Shapes::ShapeRef.new(shape: InstanceId, required: true, location_name: "InstanceId"))
+    ResumeContactRecordingRequest.add_member(:contact_id, Shapes::ShapeRef.new(shape: ContactId, required: true, location_name: "ContactId"))
+    ResumeContactRecordingRequest.add_member(:initial_contact_id, Shapes::ShapeRef.new(shape: ContactId, required: true, location_name: "InitialContactId"))
+    ResumeContactRecordingRequest.struct_class = Types::ResumeContactRecordingRequest
+
+    ResumeContactRecordingResponse.struct_class = Types::ResumeContactRecordingResponse
+
     RoutingProfileSummary.add_member(:id, Shapes::ShapeRef.new(shape: RoutingProfileId, location_name: "Id"))
     RoutingProfileSummary.add_member(:arn, Shapes::ShapeRef.new(shape: ARN, location_name: "Arn"))
     RoutingProfileSummary.add_member(:name, Shapes::ShapeRef.new(shape: RoutingProfileName, location_name: "Name"))
@@ -549,6 +566,14 @@ module Aws::Connect
     StartChatContactResponse.add_member(:participant_token, Shapes::ShapeRef.new(shape: ParticipantToken, location_name: "ParticipantToken"))
     StartChatContactResponse.struct_class = Types::StartChatContactResponse
 
+    StartContactRecordingRequest.add_member(:instance_id, Shapes::ShapeRef.new(shape: InstanceId, required: true, location_name: "InstanceId"))
+    StartContactRecordingRequest.add_member(:contact_id, Shapes::ShapeRef.new(shape: ContactId, required: true, location_name: "ContactId"))
+    StartContactRecordingRequest.add_member(:initial_contact_id, Shapes::ShapeRef.new(shape: ContactId, required: true, location_name: "InitialContactId"))
+    StartContactRecordingRequest.add_member(:voice_recording_configuration, Shapes::ShapeRef.new(shape: VoiceRecordingConfiguration, required: true, location_name: "VoiceRecordingConfiguration"))
+    StartContactRecordingRequest.struct_class = Types::StartContactRecordingRequest
+
+    StartContactRecordingResponse.struct_class = Types::StartContactRecordingResponse
+
     StartOutboundVoiceContactRequest.add_member(:destination_phone_number, Shapes::ShapeRef.new(shape: PhoneNumber, required: true, location_name: "DestinationPhoneNumber"))
     StartOutboundVoiceContactRequest.add_member(:contact_flow_id, Shapes::ShapeRef.new(shape: ContactFlowId, required: true, location_name: "ContactFlowId"))
     StartOutboundVoiceContactRequest.add_member(:instance_id, Shapes::ShapeRef.new(shape: InstanceId, required: true, location_name: "InstanceId"))
@@ -561,11 +586,25 @@ module Aws::Connect
     StartOutboundVoiceContactResponse.add_member(:contact_id, Shapes::ShapeRef.new(shape: ContactId, location_name: "ContactId"))
     StartOutboundVoiceContactResponse.struct_class = Types::StartOutboundVoiceContactResponse
 
+    StopContactRecordingRequest.add_member(:instance_id, Shapes::ShapeRef.new(shape: InstanceId, required: true, location_name: "InstanceId"))
+    StopContactRecordingRequest.add_member(:contact_id, Shapes::ShapeRef.new(shape: ContactId, required: true, location_name: "ContactId"))
+    StopContactRecordingRequest.add_member(:initial_contact_id, Shapes::ShapeRef.new(shape: ContactId, required: true, location_name: "InitialContactId"))
+    StopContactRecordingRequest.struct_class = Types::StopContactRecordingRequest
+
+    StopContactRecordingResponse.struct_class = Types::StopContactRecordingResponse
+
     StopContactRequest.add_member(:contact_id, Shapes::ShapeRef.new(shape: ContactId, required: true, location_name: "ContactId"))
     StopContactRequest.add_member(:instance_id, Shapes::ShapeRef.new(shape: InstanceId, required: true, location_name: "InstanceId"))
     StopContactRequest.struct_class = Types::StopContactRequest
 
     StopContactResponse.struct_class = Types::StopContactResponse
+
+    SuspendContactRecordingRequest.add_member(:instance_id, Shapes::ShapeRef.new(shape: InstanceId, required: true, location_name: "InstanceId"))
+    SuspendContactRecordingRequest.add_member(:contact_id, Shapes::ShapeRef.new(shape: ContactId, required: true, location_name: "ContactId"))
+    SuspendContactRecordingRequest.add_member(:initial_contact_id, Shapes::ShapeRef.new(shape: ContactId, required: true, location_name: "InitialContactId"))
+    SuspendContactRecordingRequest.struct_class = Types::SuspendContactRecordingRequest
+
+    SuspendContactRecordingResponse.struct_class = Types::SuspendContactRecordingResponse
 
     TagKeyList.member = Shapes::ShapeRef.new(shape: TagKey)
 
@@ -651,6 +690,9 @@ module Aws::Connect
     UserSummary.struct_class = Types::UserSummary
 
     UserSummaryList.member = Shapes::ShapeRef.new(shape: UserSummary)
+
+    VoiceRecordingConfiguration.add_member(:voice_recording_track, Shapes::ShapeRef.new(shape: VoiceRecordingTrack, location_name: "VoiceRecordingTrack"))
+    VoiceRecordingConfiguration.struct_class = Types::VoiceRecordingConfiguration
 
 
     # @api private
@@ -966,6 +1008,17 @@ module Aws::Connect
         )
       end)
 
+      api.add_operation(:resume_contact_recording, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ResumeContactRecording"
+        o.http_method = "POST"
+        o.http_request_uri = "/contact/resume-recording"
+        o.input = Shapes::ShapeRef.new(shape: ResumeContactRecordingRequest)
+        o.output = Shapes::ShapeRef.new(shape: ResumeContactRecordingResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServiceException)
+      end)
+
       api.add_operation(:start_chat_contact, Seahorse::Model::Operation.new.tap do |o|
         o.name = "StartChatContact"
         o.http_method = "PUT"
@@ -977,6 +1030,18 @@ module Aws::Connect
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServiceException)
         o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
+      end)
+
+      api.add_operation(:start_contact_recording, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "StartContactRecording"
+        o.http_method = "POST"
+        o.http_request_uri = "/contact/start-recording"
+        o.input = Shapes::ShapeRef.new(shape: StartContactRecordingRequest)
+        o.output = Shapes::ShapeRef.new(shape: StartContactRecordingResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServiceException)
       end)
 
       api.add_operation(:start_outbound_voice_contact, Seahorse::Model::Operation.new.tap do |o|
@@ -1003,6 +1068,28 @@ module Aws::Connect
         o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
         o.errors << Shapes::ShapeRef.new(shape: ContactNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServiceException)
+      end)
+
+      api.add_operation(:stop_contact_recording, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "StopContactRecording"
+        o.http_method = "POST"
+        o.http_request_uri = "/contact/stop-recording"
+        o.input = Shapes::ShapeRef.new(shape: StopContactRecordingRequest)
+        o.output = Shapes::ShapeRef.new(shape: StopContactRecordingResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServiceException)
+      end)
+
+      api.add_operation(:suspend_contact_recording, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "SuspendContactRecording"
+        o.http_method = "POST"
+        o.http_request_uri = "/contact/suspend-recording"
+        o.input = Shapes::ShapeRef.new(shape: SuspendContactRecordingRequest)
+        o.output = Shapes::ShapeRef.new(shape: SuspendContactRecordingResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServiceException)
       end)

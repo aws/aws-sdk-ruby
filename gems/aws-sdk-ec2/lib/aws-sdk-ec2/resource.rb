@@ -1730,12 +1730,13 @@ module Aws::EC2
     #
     #   * `name` - The name of the AMI (provided during image creation).
     #
-    #   * `owner-alias` - String value from an Amazon-maintained list
-    #     (`amazon` \| `aws-marketplace` \| `microsoft`) of snapshot owners.
-    #     Not to be confused with the user-configured AWS account alias, which
-    #     is set from the IAM console.
+    #   * `owner-alias` - The owner alias, from an Amazon-maintained list
+    #     (`amazon` \| `aws-marketplace`). This is not the user-configured AWS
+    #     account alias set using the IAM console. We recommend that you use
+    #     the related parameter instead of this filter.
     #
-    #   * `owner-id` - The AWS account ID of the image owner.
+    #   * `owner-id` - The AWS account ID of the owner. We recommend that you
+    #     use the related parameter instead of this filter.
     #
     #   * `platform` - The platform. To only list Windows-based AMIs, use
     #     `windows`.
@@ -1780,11 +1781,10 @@ module Aws::EC2
     #
     #   Default: Describes all images available to you.
     # @option options [Array<String>] :owners
-    #   Filters the images by the owner. Specify an AWS account ID, `self`
-    #   (owner is the sender of the request), or an AWS owner alias (valid
-    #   values are `amazon` \| `aws-marketplace` \| `microsoft`). Omitting
-    #   this option returns all images for which you have launch permissions,
-    #   regardless of ownership.
+    #   Scopes the results to images with the specified owners. You can
+    #   specify a combination of AWS account IDs, `self`, `amazon`, and
+    #   `aws-marketplace`. If you omit this parameter, the results include all
+    #   images for which you have launch permissions, regardless of ownership.
     # @option options [Boolean] :dry_run
     #   Checks whether you have the required permissions for the action,
     #   without actually making the request, and provides an error response.
@@ -2776,8 +2776,6 @@ module Aws::EC2
     #   * `tag-key` - The key of a tag assigned to the resource. Use this
     #     filter to find all resources assigned a tag with a specific key,
     #     regardless of the tag value.
-    #
-    #   * `transit-gateway-id` - The ID of a transit gateway.
     #
     #   * `vpc-id` - The ID of the VPC for the route table.
     # @option options [Boolean] :dry_run

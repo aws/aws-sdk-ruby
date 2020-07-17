@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.177.0 (2020-07-17)
+------------------
+
+* Feature - Documentation updates for EC2
+
 1.176.0 (2020-07-08)
 ------------------
 

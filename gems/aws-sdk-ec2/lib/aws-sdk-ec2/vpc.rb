@@ -1700,8 +1700,6 @@ module Aws::EC2
     #     filter to find all resources assigned a tag with a specific key,
     #     regardless of the tag value.
     #
-    #   * `transit-gateway-id` - The ID of a transit gateway.
-    #
     #   * `vpc-id` - The ID of the VPC for the route table.
     # @option options [Boolean] :dry_run
     #   Checks whether you have the required permissions for the action,

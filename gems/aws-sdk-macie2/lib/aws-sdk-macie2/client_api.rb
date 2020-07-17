@@ -677,6 +677,7 @@ module Aws::Macie2
     FindingStatisticsSortCriteria.add_member(:order_by, Shapes::ShapeRef.new(shape: OrderBy, location_name: "orderBy"))
     FindingStatisticsSortCriteria.struct_class = Types::FindingStatisticsSortCriteria
 
+    FindingsFilterListItem.add_member(:action, Shapes::ShapeRef.new(shape: FindingsFilterAction, location_name: "action"))
     FindingsFilterListItem.add_member(:arn, Shapes::ShapeRef.new(shape: __string, location_name: "arn"))
     FindingsFilterListItem.add_member(:id, Shapes::ShapeRef.new(shape: __string, location_name: "id"))
     FindingsFilterListItem.add_member(:name, Shapes::ShapeRef.new(shape: __string, location_name: "name"))
@@ -1471,6 +1472,12 @@ module Aws::Macie2
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
       end)
 
       api.add_operation(:describe_classification_job, Seahorse::Model::Operation.new.tap do |o|
@@ -1756,6 +1763,12 @@ module Aws::Macie2
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
       end)
 
       api.add_operation(:get_usage_totals, Seahorse::Model::Operation.new.tap do |o|
@@ -1786,6 +1799,12 @@ module Aws::Macie2
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
       end)
 
       api.add_operation(:list_custom_data_identifiers, Seahorse::Model::Operation.new.tap do |o|
@@ -1801,6 +1820,12 @@ module Aws::Macie2
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
       end)
 
       api.add_operation(:list_findings, Seahorse::Model::Operation.new.tap do |o|
@@ -1816,6 +1841,12 @@ module Aws::Macie2
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
       end)
 
       api.add_operation(:list_findings_filters, Seahorse::Model::Operation.new.tap do |o|
@@ -1831,6 +1862,12 @@ module Aws::Macie2
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
       end)
 
       api.add_operation(:list_invitations, Seahorse::Model::Operation.new.tap do |o|
@@ -1846,6 +1883,12 @@ module Aws::Macie2
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
       end)
 
       api.add_operation(:list_members, Seahorse::Model::Operation.new.tap do |o|
@@ -1861,6 +1904,12 @@ module Aws::Macie2
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
       end)
 
       api.add_operation(:list_organization_admin_accounts, Seahorse::Model::Operation.new.tap do |o|
@@ -1876,6 +1925,12 @@ module Aws::Macie2
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
       end)
 
       api.add_operation(:list_tags_for_resource, Seahorse::Model::Operation.new.tap do |o|

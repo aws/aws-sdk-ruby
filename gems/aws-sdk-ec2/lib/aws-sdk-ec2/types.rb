@@ -453,7 +453,7 @@ module Aws::EC2
     #
     #       {
     #         domain: "vpc", # accepts vpc, standard
-    #         address: "String",
+    #         address: "PublicIpAddress",
     #         public_ipv_4_pool: "String",
     #         network_border_group: "String",
     #         customer_owned_ipv_4_pool: "String",
@@ -461,10 +461,11 @@ module Aws::EC2
     #       }
     #
     # @!attribute [rw] domain
-    #   Set to `vpc` to allocate the address for use with instances in a
-    #   VPC.
+    #   Indicates whether the Elastic IP address is for use with instances
+    #   in a VPC or instances in EC2-Classic.
     #
-    #   Default: The address is for use with instances in EC2-Classic.
+    #   Default: If the Region supports EC2-Classic, the default is
+    #   `standard`. Otherwise, the default is `vpc`.
     #   @return [String]
     #
     # @!attribute [rw] address
@@ -548,8 +549,8 @@ module Aws::EC2
     #   @return [String]
     #
     # @!attribute [rw] domain
-    #   Indicates whether this Elastic IP address is for use with instances
-    #   in EC2-Classic (`standard`) or instances in a VPC (`vpc`).
+    #   Indicates whether the Elastic IP address is for use with instances
+    #   in a VPC (`vpc`) or instances in EC2-Classic (`standard`).
     #   @return [String]
     #
     # @!attribute [rw] customer_owned_ip
@@ -1806,13 +1807,15 @@ module Aws::EC2
     #
     # @!attribute [rw] access_group_id
     #   The ID of the group to grant access to, for example, the Active
-    #   Directory group or identity provider (IdP) group.
+    #   Directory group or identity provider (IdP) group. Required if
+    #   `AuthorizeAllGroups` is `false` or not specified.
     #   @return [String]
     #
     # @!attribute [rw] authorize_all_groups
-    #   Indicates whether to grant access to all clients. Use `true` to
+    #   Indicates whether to grant access to all clients. Specify `true` to
     #   grant all clients who successfully establish a VPN connection access
-    #   to the network.
+    #   to the network. Must be set to `true` if `AccessGroupId` is not
+    #   specified.
     #   @return [Boolean]
     #
     # @!attribute [rw] description
@@ -4074,7 +4077,8 @@ module Aws::EC2
     #   @return [Boolean]
     #
     # @!attribute [rw] cloudwatch_log_group
-    #   The name of the CloudWatch Logs log group.
+    #   The name of the CloudWatch Logs log group. Required if connection
+    #   logging is enabled.
     #   @return [String]
     #
     # @!attribute [rw] cloudwatch_log_stream
@@ -4218,7 +4222,7 @@ module Aws::EC2
     #
     #       {
     #         dry_run: false,
-    #         source_fpga_image_id: "FpgaImageId", # required
+    #         source_fpga_image_id: "String", # required
     #         description: "String",
     #         name: "String",
     #         source_region: "String", # required
@@ -9823,11 +9827,12 @@ module Aws::EC2
       include Aws::Structure
     end
 
-    # Describes the credit option for CPU usage of a T2 or T3 instance.
+    # Describes the credit option for CPU usage of a T2, T3, or T3a
+    # instance.
     #
     # @!attribute [rw] cpu_credits
-    #   The credit option for CPU usage of a T2 or T3 instance. Valid values
-    #   are `standard` and `unlimited`.
+    #   The credit option for CPU usage of a T2, T3, or T3a instance. Valid
+    #   values are `standard` and `unlimited`.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CreditSpecification AWS API Documentation
@@ -9838,7 +9843,7 @@ module Aws::EC2
       include Aws::Structure
     end
 
-    # The credit option for CPU usage of a T2 or T3 instance.
+    # The credit option for CPU usage of a T2, T3, or T3a instance.
     #
     # @note When making an API call, you may pass CreditSpecificationRequest
     #   data as a hash:
@@ -9848,8 +9853,8 @@ module Aws::EC2
     #       }
     #
     # @!attribute [rw] cpu_credits
-    #   The credit option for CPU usage of a T2 or T3 instance. Valid values
-    #   are `standard` and `unlimited`.
+    #   The credit option for CPU usage of a T2, T3, or T3a instance. Valid
+    #   values are `standard` and `unlimited`.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CreditSpecificationRequest AWS API Documentation
@@ -11619,7 +11624,7 @@ module Aws::EC2
     #
     #       {
     #         dry_run: false,
-    #         connection_notification_ids: ["String"], # required
+    #         connection_notification_ids: ["ConnectionNotificationId"], # required
     #       }
     #
     # @!attribute [rw] dry_run
@@ -12348,6 +12353,9 @@ module Aws::EC2
     #   * `opt-in-status` - The opt in status (`opted-in`, and
     #     `not-opted-in` \| `opt-in-not-required`).
     #
+    #   * The ID of the zone that handles some of the Local Zone control
+    #     plane operations, such as API calls.
+    #
     #   * `region-name` - The name of the Region for the Zone (for example,
     #     `us-east-1`).
     #
@@ -12357,9 +12365,13 @@ module Aws::EC2
     #   * `zone-id` - The ID of the Availability Zone (for example,
     #     `use1-az1`) or the Local Zone (for example, use `usw2-lax1-az1`).
     #
+    #   * `zone-type` - The type of zone, for example, `local-zone`.
+    #
     #   * `zone-name` - The name of the Availability Zone (for example,
     #     `us-east-1a`) or the Local Zone (for example, use
     #     `us-west-2-lax-1a`).
+    #
+    #   * `zone-type` - The type of zone, for example, `local-zone`.
     #   @return [Array<Types::Filter>]
     #
     # @!attribute [rw] zone_names
@@ -15040,12 +15052,13 @@ module Aws::EC2
     #
     #   * `name` - The name of the AMI (provided during image creation).
     #
-    #   * `owner-alias` - String value from an Amazon-maintained list
-    #     (`amazon` \| `aws-marketplace` \| `microsoft`) of snapshot owners.
-    #     Not to be confused with the user-configured AWS account alias,
-    #     which is set from the IAM console.
+    #   * `owner-alias` - The owner alias, from an Amazon-maintained list
+    #     (`amazon` \| `aws-marketplace`). This is not the user-configured
+    #     AWS account alias set using the IAM console. We recommend that you
+    #     use the related parameter instead of this filter.
     #
-    #   * `owner-id` - The AWS account ID of the image owner.
+    #   * `owner-id` - The AWS account ID of the owner. We recommend that
+    #     you use the related parameter instead of this filter.
     #
     #   * `platform` - The platform. To only list Windows-based AMIs, use
     #     `windows`.
@@ -15094,11 +15107,11 @@ module Aws::EC2
     #   @return [Array<String>]
     #
     # @!attribute [rw] owners
-    #   Filters the images by the owner. Specify an AWS account ID, `self`
-    #   (owner is the sender of the request), or an AWS owner alias (valid
-    #   values are `amazon` \| `aws-marketplace` \| `microsoft`). Omitting
-    #   this option returns all images for which you have launch
-    #   permissions, regardless of ownership.
+    #   Scopes the results to images with the specified owners. You can
+    #   specify a combination of AWS account IDs, `self`, `amazon`, and
+    #   `aws-marketplace`. If you omit this parameter, the results include
+    #   all images for which you have launch permissions, regardless of
+    #   ownership.
     #   @return [Array<String>]
     #
     # @!attribute [rw] dry_run
@@ -16454,17 +16467,34 @@ module Aws::EC2
     #   @return [Boolean]
     #
     # @!attribute [rw] launch_template_id
-    #   The ID of the launch template. You must specify either the launch
-    #   template ID or launch template name in the request.
+    #   The ID of the launch template. To describe one or more versions of a
+    #   specified launch template, you must specify either the launch
+    #   template ID or the launch template name in the request. To describe
+    #   all the latest or default launch template versions in your account,
+    #   you must omit this parameter.
     #   @return [String]
     #
     # @!attribute [rw] launch_template_name
-    #   The name of the launch template. You must specify either the launch
-    #   template ID or launch template name in the request.
+    #   The name of the launch template. To describe one or more versions of
+    #   a specified launch template, you must specify either the launch
+    #   template ID or the launch template name in the request. To describe
+    #   all the latest or default launch template versions in your account,
+    #   you must omit this parameter.
     #   @return [String]
     #
     # @!attribute [rw] versions
-    #   One or more versions of the launch template.
+    #   One or more versions of the launch template. Valid values depend on
+    #   whether you are describing a specified launch template (by ID or
+    #   name) or all launch templates in your account.
+    #
+    #   To describe one or more versions of a specified launch template,
+    #   valid values are `$Latest`, `$Default`, and numbers.
+    #
+    #   To describe all launch templates in your account that are defined as
+    #   the latest version, the valid value is `$Latest`. To describe all
+    #   launch templates in your account that are defined as the default
+    #   version, the valid value is `$Default`. You can specify `$Latest`
+    #   and `$Default` in the same call. You cannot specify numbers.
     #   @return [Array<String>]
     #
     # @!attribute [rw] min_version
@@ -18754,8 +18784,6 @@ module Aws::EC2
     #   * `tag-key` - The key of a tag assigned to the resource. Use this
     #     filter to find all resources assigned a tag with a specific key,
     #     regardless of the tag value.
-    #
-    #   * `transit-gateway-id` - The ID of a transit gateway.
     #
     #   * `vpc-id` - The ID of the VPC for the route table.
     #   @return [Array<Types::Filter>]
@@ -40485,8 +40513,8 @@ module Aws::EC2
     #   @return [Types::LaunchTemplateInstanceMarketOptionsRequest]
     #
     # @!attribute [rw] credit_specification
-    #   The credit option for CPU usage of the instance. Valid for T2 or T3
-    #   instances only.
+    #   The credit option for CPU usage of the instance. Valid for T2, T3,
+    #   or T3a instances only.
     #   @return [Types::CreditSpecificationRequest]
     #
     # @!attribute [rw] cpu_options
@@ -47045,9 +47073,9 @@ module Aws::EC2
     #   `fpga-image` \| `host-reservation` \| `import-image-task` \|
     #   `import-snapshot-task` \| `instance` \| `internet-gateway` \|
     #   `ipv4pool-ec2` \| `ipv6pool-ec2` \| `key-pair` \| `launch-template`
-    #   \| `placement-group` \| `prefix-list` \| `launch-template` \|
-    #   `natgateway` \| `network-acl` \| `security-group` \|
-    #   `spot-fleet-request` \| `snapshot` \| `subnet` \|
+    #   \| `placement-group` \| `prefix-list` \| `natgateway` \|
+    #   `network-acl` \| `security-group` \| `spot-fleet-request` \|
+    #   `spot-instances-request` \| `snapshot` \| `subnet` \|
     #   `traffic-mirror-filter` \| `traffic-mirror-session` \|
     #   `traffic-mirror-target` \| `transit-gateway` \|
     #   `transit-gateway-attachment` \| `transit-gateway-route-table` \|
@@ -48343,30 +48371,31 @@ module Aws::EC2
     # @!attribute [rw] amazon_side_asn
     #   A private Autonomous System Number (ASN) for the Amazon side of a
     #   BGP session. The range is 64512 to 65534 for 16-bit ASNs and
-    #   4200000000 to 4294967294 for 32-bit ASNs.
+    #   4200000000 to 4294967294 for 32-bit ASNs. The default is `64512`.
     #   @return [Integer]
     #
     # @!attribute [rw] auto_accept_shared_attachments
-    #   Enable or disable automatic acceptance of attachment requests. The
-    #   default is `disable`.
+    #   Enable or disable automatic acceptance of attachment requests.
+    #   Disabled by default.
     #   @return [String]
     #
     # @!attribute [rw] default_route_table_association
     #   Enable or disable automatic association with the default association
-    #   route table. The default is `enable`.
+    #   route table. Enabled by default.
     #   @return [String]
     #
     # @!attribute [rw] default_route_table_propagation
     #   Enable or disable automatic propagation of routes to the default
-    #   propagation route table. The default is `enable`.
+    #   propagation route table. Enabled by default.
     #   @return [String]
     #
     # @!attribute [rw] vpn_ecmp_support
-    #   Enable or disable Equal Cost Multipath Protocol support.
+    #   Enable or disable Equal Cost Multipath Protocol support. Enabled by
+    #   default.
     #   @return [String]
     #
     # @!attribute [rw] dns_support
-    #   Enable or disable DNS support.
+    #   Enable or disable DNS support. Enabled by default.
     #   @return [String]
     #
     # @!attribute [rw] multicast_support

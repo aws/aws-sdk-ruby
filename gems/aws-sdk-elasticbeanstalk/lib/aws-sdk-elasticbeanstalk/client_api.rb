@@ -1440,6 +1440,12 @@ module Aws::ElasticBeanstalk
         o.input = Shapes::ShapeRef.new(shape: DescribeEnvironmentManagedActionHistoryRequest)
         o.output = Shapes::ShapeRef.new(shape: DescribeEnvironmentManagedActionHistoryResult)
         o.errors << Shapes::ShapeRef.new(shape: ElasticBeanstalkServiceException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_items",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
       end)
 
       api.add_operation(:describe_environment_managed_actions, Seahorse::Model::Operation.new.tap do |o|
@@ -1541,6 +1547,12 @@ module Aws::ElasticBeanstalk
         o.output = Shapes::ShapeRef.new(shape: ListPlatformVersionsResult)
         o.errors << Shapes::ShapeRef.new(shape: InsufficientPrivilegesException)
         o.errors << Shapes::ShapeRef.new(shape: ElasticBeanstalkServiceException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_records",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
       end)
 
       api.add_operation(:list_tags_for_resource, Seahorse::Model::Operation.new.tap do |o|

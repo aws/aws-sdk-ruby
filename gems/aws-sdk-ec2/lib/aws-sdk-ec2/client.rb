@@ -665,9 +665,11 @@ module Aws::EC2
     # [2]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/elastic-ip-addresses-eip.html
     #
     # @option params [String] :domain
-    #   Set to `vpc` to allocate the address for use with instances in a VPC.
+    #   Indicates whether the Elastic IP address is for use with instances in
+    #   a VPC or instances in EC2-Classic.
     #
-    #   Default: The address is for use with instances in EC2-Classic.
+    #   Default: If the Region supports EC2-Classic, the default is
+    #   `standard`. Otherwise, the default is `vpc`.
     #
     # @option params [String] :address
     #   \[EC2-VPC\] The Elastic IP address to recover or an IPv4 address from
@@ -755,7 +757,7 @@ module Aws::EC2
     #
     #   resp = client.allocate_address({
     #     domain: "vpc", # accepts vpc, standard
-    #     address: "String",
+    #     address: "PublicIpAddress",
     #     public_ipv_4_pool: "String",
     #     network_border_group: "String",
     #     customer_owned_ipv_4_pool: "String",
@@ -2081,12 +2083,14 @@ module Aws::EC2
     #
     # @option params [String] :access_group_id
     #   The ID of the group to grant access to, for example, the Active
-    #   Directory group or identity provider (IdP) group.
+    #   Directory group or identity provider (IdP) group. Required if
+    #   `AuthorizeAllGroups` is `false` or not specified.
     #
     # @option params [Boolean] :authorize_all_groups
-    #   Indicates whether to grant access to all clients. Use `true` to grant
-    #   all clients who successfully establish a VPN connection access to the
-    #   network.
+    #   Indicates whether to grant access to all clients. Specify `true` to
+    #   grant all clients who successfully establish a VPN connection access
+    #   to the network. Must be set to `true` if `AccessGroupId` is not
+    #   specified.
     #
     # @option params [String] :description
     #   A brief description of the authorization rule.
@@ -3136,7 +3140,7 @@ module Aws::EC2
     #
     #   resp = client.copy_fpga_image({
     #     dry_run: false,
-    #     source_fpga_image_id: "FpgaImageId", # required
+    #     source_fpga_image_id: "String", # required
     #     description: "String",
     #     name: "String",
     #     source_region: "String", # required
@@ -11781,7 +11785,7 @@ module Aws::EC2
     #
     #   resp = client.delete_vpc_endpoint_connection_notifications({
     #     dry_run: false,
-    #     connection_notification_ids: ["String"], # required
+    #     connection_notification_ids: ["ConnectionNotificationId"], # required
     #   })
     #
     # @example Response structure
@@ -12673,6 +12677,9 @@ module Aws::EC2
     #   * `opt-in-status` - The opt in status (`opted-in`, and `not-opted-in`
     #     \| `opt-in-not-required`).
     #
+    #   * The ID of the zone that handles some of the Local Zone control plane
+    #     operations, such as API calls.
+    #
     #   * `region-name` - The name of the Region for the Zone (for example,
     #     `us-east-1`).
     #
@@ -12682,9 +12689,13 @@ module Aws::EC2
     #   * `zone-id` - The ID of the Availability Zone (for example,
     #     `use1-az1`) or the Local Zone (for example, use `usw2-lax1-az1`).
     #
+    #   * `zone-type` - The type of zone, for example, `local-zone`.
+    #
     #   * `zone-name` - The name of the Availability Zone (for example,
     #     `us-east-1a`) or the Local Zone (for example, use
     #     `us-west-2-lax-1a`).
+    #
+    #   * `zone-type` - The type of zone, for example, `local-zone`.
     #
     # @option params [Array<String>] :zone_names
     #   The names of the Zones.
@@ -15587,12 +15598,13 @@ module Aws::EC2
     #
     #   * `name` - The name of the AMI (provided during image creation).
     #
-    #   * `owner-alias` - String value from an Amazon-maintained list
-    #     (`amazon` \| `aws-marketplace` \| `microsoft`) of snapshot owners.
-    #     Not to be confused with the user-configured AWS account alias, which
-    #     is set from the IAM console.
+    #   * `owner-alias` - The owner alias, from an Amazon-maintained list
+    #     (`amazon` \| `aws-marketplace`). This is not the user-configured AWS
+    #     account alias set using the IAM console. We recommend that you use
+    #     the related parameter instead of this filter.
     #
-    #   * `owner-id` - The AWS account ID of the image owner.
+    #   * `owner-id` - The AWS account ID of the owner. We recommend that you
+    #     use the related parameter instead of this filter.
     #
     #   * `platform` - The platform. To only list Windows-based AMIs, use
     #     `windows`.
@@ -15639,11 +15651,10 @@ module Aws::EC2
     #   Default: Describes all images available to you.
     #
     # @option params [Array<String>] :owners
-    #   Filters the images by the owner. Specify an AWS account ID, `self`
-    #   (owner is the sender of the request), or an AWS owner alias (valid
-    #   values are `amazon` \| `aws-marketplace` \| `microsoft`). Omitting
-    #   this option returns all images for which you have launch permissions,
-    #   regardless of ownership.
+    #   Scopes the results to images with the specified owners. You can
+    #   specify a combination of AWS account IDs, `self`, `amazon`, and
+    #   `aws-marketplace`. If you omit this parameter, the results include all
+    #   images for which you have launch permissions, regardless of ownership.
     #
     # @option params [Boolean] :dry_run
     #   Checks whether you have the required permissions for the action,
@@ -17590,6 +17601,8 @@ module Aws::EC2
 
     # Describes one or more versions of a specified launch template. You can
     # describe all versions, individual versions, or a range of versions.
+    # You can also describe all the latest versions or all the default
+    # versions of all the launch templates in your account.
     #
     # @option params [Boolean] :dry_run
     #   Checks whether you have the required permissions for the action,
@@ -17598,15 +17611,32 @@ module Aws::EC2
     #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
     #
     # @option params [String] :launch_template_id
-    #   The ID of the launch template. You must specify either the launch
-    #   template ID or launch template name in the request.
+    #   The ID of the launch template. To describe one or more versions of a
+    #   specified launch template, you must specify either the launch template
+    #   ID or the launch template name in the request. To describe all the
+    #   latest or default launch template versions in your account, you must
+    #   omit this parameter.
     #
     # @option params [String] :launch_template_name
-    #   The name of the launch template. You must specify either the launch
-    #   template ID or launch template name in the request.
+    #   The name of the launch template. To describe one or more versions of a
+    #   specified launch template, you must specify either the launch template
+    #   ID or the launch template name in the request. To describe all the
+    #   latest or default launch template versions in your account, you must
+    #   omit this parameter.
     #
     # @option params [Array<String>] :versions
-    #   One or more versions of the launch template.
+    #   One or more versions of the launch template. Valid values depend on
+    #   whether you are describing a specified launch template (by ID or name)
+    #   or all launch templates in your account.
+    #
+    #   To describe one or more versions of a specified launch template, valid
+    #   values are `$Latest`, `$Default`, and numbers.
+    #
+    #   To describe all launch templates in your account that are defined as
+    #   the latest version, the valid value is `$Latest`. To describe all
+    #   launch templates in your account that are defined as the default
+    #   version, the valid value is `$Default`. You can specify `$Latest` and
+    #   `$Default` in the same call. You cannot specify numbers.
     #
     # @option params [String] :min_version
     #   The version number after which to describe launch template versions.
@@ -20444,8 +20474,6 @@ module Aws::EC2
     #   * `tag-key` - The key of a tag assigned to the resource. Use this
     #     filter to find all resources assigned a tag with a specific key,
     #     regardless of the tag value.
-    #
-    #   * `transit-gateway-id` - The ID of a transit gateway.
     #
     #   * `vpc-id` - The ID of the VPC for the route table.
     #
@@ -27660,6 +27688,13 @@ module Aws::EC2
     # Retrieves the configuration data of the specified instance. You can
     # use this data to create a launch template.
     #
+    # This action calls on other describe actions to get instance
+    # information. Depending on your instance configuration, you may need to
+    # allow the following actions in your IAM policy:
+    # DescribeSpotInstanceRequests, DescribeInstanceCreditSpecifications,
+    # DescribeVolumes, DescribeInstanceAttribute, and DescribeElasticGpus.
+    # Or, you can allow `describe*` depending on your instance requirements.
+    #
     # @option params [Boolean] :dry_run
     #   Checks whether you have the required permissions for the action,
     #   without actually making the request, and provides an error response.
@@ -33090,7 +33125,7 @@ module Aws::EC2
 
     # Registers an AMI. When you're creating an AMI, this is the final step
     # you must complete before you can launch an instance from the AMI. For
-    # more information about creating AMIs, see [Creating Your Own AMIs][1]
+    # more information about creating AMIs, see [Creating your own AMIs][1]
     # in the *Amazon Elastic Compute Cloud User Guide*.
     #
     # <note markdown="1"> For Amazon EBS-backed instances, CreateImage creates and registers the
@@ -33102,11 +33137,11 @@ module Aws::EC2
     # You can also use `RegisterImage` to create an Amazon EBS-backed Linux
     # AMI from a snapshot of a root device volume. You specify the snapshot
     # using the block device mapping. For more information, see [Launching a
-    # Linux Instance from a Backup][2] in the *Amazon Elastic Compute Cloud
+    # Linux instance from a backup][2] in the *Amazon Elastic Compute Cloud
     # User Guide*.
     #
-    # You can't register an image where a secondary (non-root) snapshot has
-    # AWS Marketplace product codes.
+    # If any snapshots have AWS Marketplace product codes, they are copied
+    # to the new AMI.
     #
     # Windows and some Linux distributions, such as Red Hat Enterprise Linux
     # (RHEL) and SUSE Linux Enterprise Server (SLES), use the EC2 billing
@@ -33128,7 +33163,7 @@ module Aws::EC2
     # you purchase a Reserved Instance without the matching billing product
     # code, the Reserved Instance will not be applied to the On-Demand
     # Instance. For information about how to obtain the platform details and
-    # billing information of an AMI, see [Obtaining Billing Information][3]
+    # billing information of an AMI, see [Obtaining billing information][3]
     # in the *Amazon Elastic Compute Cloud User Guide*.
     #
     # If needed, you can deregister an AMI at any time. Any modifications
@@ -37756,7 +37791,7 @@ module Aws::EC2
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-ec2'
-      context[:gem_version] = '1.176.0'
+      context[:gem_version] = '1.177.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 
