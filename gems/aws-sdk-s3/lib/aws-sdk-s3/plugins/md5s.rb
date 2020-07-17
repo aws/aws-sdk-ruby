@@ -23,13 +23,27 @@ module Aws
 
           def call(context)
             body = context.http_request.body
-            if body.size > 0
+            if body_set?(body)
               context.http_request.headers['Content-Md5'] ||= md5(body)
             end
             @handler.call(context)
           end
 
           private
+
+          def body_set?(body)
+            body && body_size(body) > 0
+          end
+
+          def body_size(body)
+            if body.respond_to?(:size)
+              body.size
+            elsif body.respond_to?(:stat) && (stat = body.stat).respond_to?(:size)
+              stat.size
+            else
+              raise ArgumentError, 'Request body must respond to either :size or :stat'
+            end
+          end
 
           # @param [File, Tempfile, IO#read, String] value
           # @return [String<MD5>]

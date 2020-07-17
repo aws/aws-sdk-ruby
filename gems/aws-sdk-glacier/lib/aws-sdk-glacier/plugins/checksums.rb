@@ -66,7 +66,7 @@ module Aws
 
             # if the body is empty/EOF, then we should compute the
             # digests of the empty string
-            if body.size == 0
+            unless body_set?(body)
               tree_hash.update('')
               digest.update('')
             end
@@ -81,7 +81,20 @@ module Aws
             body.rewind
 
             yield(digest.to_s, tree_hash)
+          end
 
+          def body_set?(body)
+            body && body_size(body) > 0
+          end
+
+          def body_size(body)
+            if body.respond_to?(:size)
+              body.size
+            elsif body.respond_to?(:stat) && (stat = body.stat).respond_to?(:size)
+              stat.size
+            else
+              raise ArgumentError, 'Request body must respond to either :size or :stat'
+            end
           end
         end
 
