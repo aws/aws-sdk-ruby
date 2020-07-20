@@ -320,7 +320,7 @@ module Aws::Mobile
     # @option params [String] :region
     #   Default region where project resources should be created.
     #
-    # @option params [String, IO like object supporting read, rewind, and size] :contents
+    # @option params [String, StringIO, File] :contents
     #   ZIP or YAML file which contains configuration settings to be used when
     #   creating the project. This may be the contents of the file downloaded
     #   from the URL provided in an export project operation.
@@ -652,7 +652,7 @@ module Aws::Mobile
 
     # Update an existing project.
     #
-    # @option params [String, IO like object supporting read, rewind, and size] :contents
+    # @option params [String, StringIO, File] :contents
     #   ZIP or YAML file which contains project configuration to be updated.
     #   This should be the contents of the file downloaded from the URL
     #   provided in an export project operation.

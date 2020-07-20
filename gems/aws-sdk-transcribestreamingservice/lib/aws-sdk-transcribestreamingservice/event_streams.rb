@@ -15,7 +15,7 @@ module Aws::TranscribeStreamingService
         @event_emitter = Aws::EventEmitter.new
       end
 
-      # @option params [String, IO like object supporting read, rewind, and size] :audio_chunk
+      # @option params [String, StringIO, File] :audio_chunk
       #   An audio blob that contains the next part of the audio that you want
       #   to transcribe.
       #

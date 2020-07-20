@@ -353,7 +353,7 @@ module Aws::SageMakerRuntime
     #
     #   [1]: https://docs.aws.amazon.com/sagemaker/latest/dg/API_CreateEndpoint.html
     #
-    # @option params [required, String, IO like object supporting read, rewind, and size] :body
+    # @option params [required, String, StringIO, File] :body
     #   Provides input data, in the format specified in the `ContentType`
     #   request header. Amazon SageMaker passes all of the data in the body to
     #   the model.

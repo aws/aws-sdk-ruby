@@ -3852,7 +3852,7 @@ module Aws::LexModelBuildingService
 
     # Starts a job to import a resource to Amazon Lex.
     #
-    # @option params [required, String, IO like object supporting read, rewind, and size] :payload
+    # @option params [required, String, StringIO, File] :payload
     #   A zip archive in binary format. The archive should contain one file, a
     #   JSON file containing the resource to import. The resource should match
     #   the type specified in the `resourceType` field.

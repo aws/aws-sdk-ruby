@@ -312,7 +312,7 @@ module Aws::Glacier
     #   The optional description of the archive you are uploading.
     # @option options [String] :checksum
     #   The SHA256 tree hash of the data being uploaded.
-    # @option options [String, IO like object supporting read, rewind, and size] :body
+    # @option options [String, IO] :body
     #   The data to upload.
     # @return [Archive]
     def upload_archive(options = {})

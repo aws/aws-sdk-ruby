@@ -556,7 +556,7 @@ module Aws::EBS
     #   logical volume, multiply the block index with the block size (Block
     #   index * 512 bytes).
     #
-    # @option params [required, String, IO like object supporting read, rewind, and size] :block_data
+    # @option params [required, String, IO] :block_data
     #   The data to write to the block.
     #
     #   The block data is not signed as part of the Signature Version 4
