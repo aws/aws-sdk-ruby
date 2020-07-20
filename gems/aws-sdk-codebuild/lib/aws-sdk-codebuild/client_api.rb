@@ -52,6 +52,7 @@ module Aws::CodeBuild
     CreateWebhookInput = Shapes::StructureShape.new(name: 'CreateWebhookInput')
     CreateWebhookOutput = Shapes::StructureShape.new(name: 'CreateWebhookOutput')
     CredentialProviderType = Shapes::StringShape.new(name: 'CredentialProviderType')
+    DebugSession = Shapes::StructureShape.new(name: 'DebugSession')
     DeleteProjectInput = Shapes::StructureShape.new(name: 'DeleteProjectInput')
     DeleteProjectOutput = Shapes::StructureShape.new(name: 'DeleteProjectOutput')
     DeleteReportGroupInput = Shapes::StructureShape.new(name: 'DeleteReportGroupInput')
@@ -272,6 +273,7 @@ module Aws::CodeBuild
     Build.add_member(:exported_environment_variables, Shapes::ShapeRef.new(shape: ExportedEnvironmentVariables, location_name: "exportedEnvironmentVariables"))
     Build.add_member(:report_arns, Shapes::ShapeRef.new(shape: BuildReportArns, location_name: "reportArns"))
     Build.add_member(:file_system_locations, Shapes::ShapeRef.new(shape: ProjectFileSystemLocations, location_name: "fileSystemLocations"))
+    Build.add_member(:debug_session, Shapes::ShapeRef.new(shape: DebugSession, location_name: "debugSession"))
     Build.struct_class = Types::Build
 
     BuildArtifacts.add_member(:location, Shapes::ShapeRef.new(shape: String, location_name: "location"))
@@ -355,6 +357,10 @@ module Aws::CodeBuild
 
     CreateWebhookOutput.add_member(:webhook, Shapes::ShapeRef.new(shape: Webhook, location_name: "webhook"))
     CreateWebhookOutput.struct_class = Types::CreateWebhookOutput
+
+    DebugSession.add_member(:session_enabled, Shapes::ShapeRef.new(shape: WrapperBoolean, location_name: "sessionEnabled"))
+    DebugSession.add_member(:session_target, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "sessionTarget"))
+    DebugSession.struct_class = Types::DebugSession
 
     DeleteProjectInput.add_member(:name, Shapes::ShapeRef.new(shape: NonEmptyString, required: true, location_name: "name"))
     DeleteProjectInput.struct_class = Types::DeleteProjectInput
@@ -778,6 +784,7 @@ module Aws::CodeBuild
     StartBuildInput.add_member(:logs_config_override, Shapes::ShapeRef.new(shape: LogsConfig, location_name: "logsConfigOverride"))
     StartBuildInput.add_member(:registry_credential_override, Shapes::ShapeRef.new(shape: RegistryCredential, location_name: "registryCredentialOverride"))
     StartBuildInput.add_member(:image_pull_credentials_type_override, Shapes::ShapeRef.new(shape: ImagePullCredentialsType, location_name: "imagePullCredentialsTypeOverride"))
+    StartBuildInput.add_member(:debug_session_enabled, Shapes::ShapeRef.new(shape: WrapperBoolean, location_name: "debugSessionEnabled"))
     StartBuildInput.struct_class = Types::StartBuildInput
 
     StartBuildOutput.add_member(:build, Shapes::ShapeRef.new(shape: Build, location_name: "build"))

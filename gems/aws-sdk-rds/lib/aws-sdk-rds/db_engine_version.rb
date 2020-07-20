@@ -141,6 +141,20 @@ module Aws::RDS
       data[:status]
     end
 
+    # A value that indicates whether you can use Aurora parallel query with
+    # a specific DB engine version.
+    # @return [Boolean]
+    def supports_parallel_query
+      data[:supports_parallel_query]
+    end
+
+    # A value that indicates whether you can use Aurora global databases
+    # with a specific DB engine version.
+    # @return [Boolean]
+    def supports_global_databases
+      data[:supports_global_databases]
+    end
+
     # @!endgroup
 
     # @return [Client]

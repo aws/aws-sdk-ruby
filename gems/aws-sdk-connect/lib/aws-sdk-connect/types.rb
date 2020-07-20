@@ -586,112 +586,65 @@ module Aws::Connect
     #
     # @!attribute [rw] current_metrics
     #   The metrics to retrieve. Specify the name and unit for each metric.
-    #   The following metrics are available. For a description of all the
-    #   metrics, see [Real-time Metrics Definitions][1] in the *Amazon
+    #   The following metrics are available. For a description of each
+    #   metric, see [Real-time Metrics Definitions][1] in the *Amazon
     #   Connect Administrator Guide*.
     #
     #   AGENTS\_AFTER\_CONTACT\_WORK
     #
     #   : Unit: COUNT
     #
-    #     Name in real-time metrics report: [ACW][2]
-    #
     #   AGENTS\_AVAILABLE
     #
     #   : Unit: COUNT
-    #
-    #     Name in real-time metrics report: [Available][3]
     #
     #   AGENTS\_ERROR
     #
     #   : Unit: COUNT
     #
-    #     Name in real-time metrics report: [Error][4]
-    #
     #   AGENTS\_NON\_PRODUCTIVE
     #
     #   : Unit: COUNT
-    #
-    #     Name in real-time metrics report: [NPT (Non-Productive Time)][5]
     #
     #   AGENTS\_ON\_CALL
     #
     #   : Unit: COUNT
     #
-    #     Name in real-time metrics report: [On contact][6]
-    #
     #   AGENTS\_ON\_CONTACT
     #
     #   : Unit: COUNT
-    #
-    #     Name in real-time metrics report: [On contact][6]
     #
     #   AGENTS\_ONLINE
     #
     #   : Unit: COUNT
     #
-    #     Name in real-time metrics report: [Online][7]
-    #
     #   AGENTS\_STAFFED
     #
     #   : Unit: COUNT
-    #
-    #     Name in real-time metrics report: [Staffed][8]
     #
     #   CONTACTS\_IN\_QUEUE
     #
     #   : Unit: COUNT
     #
-    #     Name in real-time metrics report: [In queue][9]
-    #
     #   CONTACTS\_SCHEDULED
     #
     #   : Unit: COUNT
-    #
-    #     Name in real-time metrics report: [Scheduled][10]
     #
     #   OLDEST\_CONTACT\_AGE
     #
     #   : Unit: SECONDS
     #
-    #     When you use groupings, Unit says SECONDS but the Value is
-    #     returned in MILLISECONDS. For example, if you get a response like
-    #     this:
-    #
-    #     `\{ "Metric": \{ "Name": "OLDEST_CONTACT_AGE", "Unit": "SECONDS"
-    #     \}, "Value": 24113.0 `\\}
-    #
-    #     The actual OLDEST\_CONTACT\_AGE is 24 seconds.
-    #
-    #     Name in real-time metrics report: [Oldest][11]
-    #
     #   SLOTS\_ACTIVE
     #
     #   : Unit: COUNT
-    #
-    #     Name in real-time metrics report: [Active][12]
     #
     #   SLOTS\_AVAILABLE
     #
     #   : Unit: COUNT
     #
-    #     Name in real-time metrics report: [Availability][13]
-    #
     #
     #
     #   [1]: https://docs.aws.amazon.com/connect/latest/adminguide/real-time-metrics-definitions.html
-    #   [2]: https://docs.aws.amazon.com/connect/latest/adminguide/real-time-metrics-definitions.html#aftercallwork-real-time
-    #   [3]: https://docs.aws.amazon.com/connect/latest/adminguide/real-time-metrics-definitions.html#available-real-time
-    #   [4]: https://docs.aws.amazon.com/connect/latest/adminguide/real-time-metrics-definitions.html#error-real-time
-    #   [5]: https://docs.aws.amazon.com/connect/latest/adminguide/real-time-metrics-definitions.html#non-productive-time-real-time
-    #   [6]: https://docs.aws.amazon.com/connect/latest/adminguide/real-time-metrics-definitions.html#on-call-real-time
-    #   [7]: https://docs.aws.amazon.com/connect/latest/adminguide/real-time-metrics-definitions.html#online-real-time
-    #   [8]: https://docs.aws.amazon.com/connect/latest/adminguide/real-time-metrics-definitions.html#staffed-real-time
-    #   [9]: https://docs.aws.amazon.com/connect/latest/adminguide/real-time-metrics-definitions.html#in-queue-real-time
-    #   [10]: https://docs.aws.amazon.com/connect/latest/adminguide/real-time-metrics-definitions.html#scheduled-real-time
-    #   [11]: https://docs.aws.amazon.com/connect/latest/adminguide/real-time-metrics-definitions.html#oldest-real-time
-    #   [12]: https://docs.aws.amazon.com/connect/latest/adminguide/real-time-metrics-definitions.html#active-real-time
-    #   [13]: https://docs.aws.amazon.com/connect/latest/adminguide/real-time-metrics-definitions.html#availability-real-time
     #   @return [Array<Types::CurrentMetric>]
     #
     # @!attribute [rw] next_token
@@ -1979,6 +1932,42 @@ module Aws::Connect
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass ResumeContactRecordingRequest
+    #   data as a hash:
+    #
+    #       {
+    #         instance_id: "InstanceId", # required
+    #         contact_id: "ContactId", # required
+    #         initial_contact_id: "ContactId", # required
+    #       }
+    #
+    # @!attribute [rw] instance_id
+    #   The identifier of the Amazon Connect instance.
+    #   @return [String]
+    #
+    # @!attribute [rw] contact_id
+    #   The identifier of the contact.
+    #   @return [String]
+    #
+    # @!attribute [rw] initial_contact_id
+    #   The identifier of the contact. This is the identifier of the contact
+    #   associated with the first interaction with the contact center.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/ResumeContactRecordingRequest AWS API Documentation
+    #
+    class ResumeContactRecordingRequest < Struct.new(
+      :instance_id,
+      :contact_id,
+      :initial_contact_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/ResumeContactRecordingResponse AWS API Documentation
+    #
+    class ResumeContactRecordingResponse < Aws::EmptyStructure; end
+
     # Contains summary information about a routing profile.
     #
     # @!attribute [rw] id
@@ -2051,14 +2040,7 @@ module Aws::Connect
     #   @return [String]
     #
     # @!attribute [rw] contact_flow_id
-    #   The identifier of the contact flow for the outbound call. To see the
-    #   ContactFlowId in the Amazon Connect console user interface, on the
-    #   navigation menu go to **Routing**, **Contact Flows**. Choose the
-    #   contact flow. On the contact flow page, under the name of the
-    #   contact flow, choose **Show additional flow information**. The
-    #   ContactFlowId is the last part of the ARN, shown here in bold:
-    #
-    #   arn:aws:connect:us-west-2:xxxxxxxxxxxx:instance/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx/contact-flow/**846ec553-a005-41c0-8341-xxxxxxxxxxxx**
+    #   The identifier of the contact flow for the chat.
     #   @return [String]
     #
     # @!attribute [rw] attributes
@@ -2129,6 +2111,50 @@ module Aws::Connect
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass StartContactRecordingRequest
+    #   data as a hash:
+    #
+    #       {
+    #         instance_id: "InstanceId", # required
+    #         contact_id: "ContactId", # required
+    #         initial_contact_id: "ContactId", # required
+    #         voice_recording_configuration: { # required
+    #           voice_recording_track: "FROM_AGENT", # accepts FROM_AGENT, TO_AGENT, ALL
+    #         },
+    #       }
+    #
+    # @!attribute [rw] instance_id
+    #   The identifier of the Amazon Connect instance.
+    #   @return [String]
+    #
+    # @!attribute [rw] contact_id
+    #   The identifier of the contact.
+    #   @return [String]
+    #
+    # @!attribute [rw] initial_contact_id
+    #   The identifier of the contact. This is the identifier of the contact
+    #   associated with the first interaction with the contact center.
+    #   @return [String]
+    #
+    # @!attribute [rw] voice_recording_configuration
+    #   Who is being recorded.
+    #   @return [Types::VoiceRecordingConfiguration]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/StartContactRecordingRequest AWS API Documentation
+    #
+    class StartContactRecordingRequest < Struct.new(
+      :instance_id,
+      :contact_id,
+      :initial_contact_id,
+      :voice_recording_configuration)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/StartContactRecordingResponse AWS API Documentation
+    #
+    class StartContactRecordingResponse < Aws::EmptyStructure; end
+
     # @note When making an API call, you may pass StartOutboundVoiceContactRequest
     #   data as a hash:
     #
@@ -2149,14 +2175,7 @@ module Aws::Connect
     #   @return [String]
     #
     # @!attribute [rw] contact_flow_id
-    #   The identifier of the contact flow for the outbound call. To see the
-    #   ContactFlowId in the Amazon Connect console user interface, on the
-    #   navigation menu go to **Routing**, **Contact Flows**. Choose the
-    #   contact flow. On the contact flow page, under the name of the
-    #   contact flow, choose **Show additional flow information**. The
-    #   ContactFlowId is the last part of the ARN, shown here in bold:
-    #
-    #   arn:aws:connect:us-west-2:xxxxxxxxxxxx:instance/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx/contact-flow/**846ec553-a005-41c0-8341-xxxxxxxxxxxx**
+    #   The identifier of the contact flow for the outbound call.
     #   @return [String]
     #
     # @!attribute [rw] instance_id
@@ -2223,6 +2242,42 @@ module Aws::Connect
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass StopContactRecordingRequest
+    #   data as a hash:
+    #
+    #       {
+    #         instance_id: "InstanceId", # required
+    #         contact_id: "ContactId", # required
+    #         initial_contact_id: "ContactId", # required
+    #       }
+    #
+    # @!attribute [rw] instance_id
+    #   The identifier of the Amazon Connect instance.
+    #   @return [String]
+    #
+    # @!attribute [rw] contact_id
+    #   The identifier of the contact.
+    #   @return [String]
+    #
+    # @!attribute [rw] initial_contact_id
+    #   The identifier of the contact. This is the identifier of the contact
+    #   associated with the first interaction with the contact center.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/StopContactRecordingRequest AWS API Documentation
+    #
+    class StopContactRecordingRequest < Struct.new(
+      :instance_id,
+      :contact_id,
+      :initial_contact_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/StopContactRecordingResponse AWS API Documentation
+    #
+    class StopContactRecordingResponse < Aws::EmptyStructure; end
+
     # @note When making an API call, you may pass StopContactRequest
     #   data as a hash:
     #
@@ -2251,6 +2306,42 @@ module Aws::Connect
     # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/StopContactResponse AWS API Documentation
     #
     class StopContactResponse < Aws::EmptyStructure; end
+
+    # @note When making an API call, you may pass SuspendContactRecordingRequest
+    #   data as a hash:
+    #
+    #       {
+    #         instance_id: "InstanceId", # required
+    #         contact_id: "ContactId", # required
+    #         initial_contact_id: "ContactId", # required
+    #       }
+    #
+    # @!attribute [rw] instance_id
+    #   The identifier of the Amazon Connect instance.
+    #   @return [String]
+    #
+    # @!attribute [rw] contact_id
+    #   The identifier of the contact.
+    #   @return [String]
+    #
+    # @!attribute [rw] initial_contact_id
+    #   The identifier of the contact. This is the identifier of the contact
+    #   associated with the first interaction with the contact center.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/SuspendContactRecordingRequest AWS API Documentation
+    #
+    class SuspendContactRecordingRequest < Struct.new(
+      :instance_id,
+      :contact_id,
+      :initial_contact_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/SuspendContactRecordingResponse AWS API Documentation
+    #
+    class SuspendContactRecordingResponse < Aws::EmptyStructure; end
 
     # @note When making an API call, you may pass TagResourceRequest
     #   data as a hash:
@@ -2724,6 +2815,27 @@ module Aws::Connect
       :id,
       :arn,
       :username)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains information about the recording configuration settings.
+    #
+    # @note When making an API call, you may pass VoiceRecordingConfiguration
+    #   data as a hash:
+    #
+    #       {
+    #         voice_recording_track: "FROM_AGENT", # accepts FROM_AGENT, TO_AGENT, ALL
+    #       }
+    #
+    # @!attribute [rw] voice_recording_track
+    #   Identifies which track is being recorded.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/VoiceRecordingConfiguration AWS API Documentation
+    #
+    class VoiceRecordingConfiguration < Struct.new(
+      :voice_recording_track)
       SENSITIVE = []
       include Aws::Structure
     end

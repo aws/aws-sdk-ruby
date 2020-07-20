@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.6.0 (2020-07-17)
+------------------
+
+* Feature - This release of the Amazon Macie API includes miscellaneous updates and improvements to the documentation.
+
 1.5.0 (2020-06-23)
 ------------------
 

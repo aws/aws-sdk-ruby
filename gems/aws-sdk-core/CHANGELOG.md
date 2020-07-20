@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+3.104.1 (2020-07-20)
+------------------
+
+* Issue - Duplicate params to ensure user provided params are not modified.  Fixes #2366
+
 3.104.0 (2020-07-15)
 ------------------
 

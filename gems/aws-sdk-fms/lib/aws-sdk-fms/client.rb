@@ -360,6 +360,30 @@ module Aws::FMS
       req.send_request(options)
     end
 
+    # Permanently deletes an AWS Firewall Manager applications list.
+    #
+    # @option params [required, String] :list_id
+    #   The ID of the applications list that you want to delete. You can
+    #   retrieve this ID from `PutAppsList`, `ListAppsLists`, and
+    #   `GetAppsList`.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_apps_list({
+    #     list_id: "ListId", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/fms-2018-01-01/DeleteAppsList AWS API Documentation
+    #
+    # @overload delete_apps_list(params = {})
+    # @param [Hash] params ({})
+    def delete_apps_list(params = {}, options = {})
+      req = build_request(:delete_apps_list, params)
+      req.send_request(options)
+    end
+
     # Deletes an AWS Firewall Manager association with the IAM role and the
     # Amazon Simple Notification Service (SNS) topic that is used to record
     # AWS Firewall Manager SNS logs.
@@ -378,8 +402,8 @@ module Aws::FMS
     # Permanently deletes an AWS Firewall Manager policy.
     #
     # @option params [required, String] :policy_id
-    #   The ID of the policy that you want to delete. `PolicyId` is returned
-    #   by `PutPolicy` and by `ListPolicies`.
+    #   The ID of the policy that you want to delete. You can retrieve this ID
+    #   from `PutPolicy` and `ListPolicies`.
     #
     # @option params [Boolean] :delete_all_policy_resources
     #   If `True`, the request performs cleanup according to the policy type.
@@ -429,6 +453,30 @@ module Aws::FMS
       req.send_request(options)
     end
 
+    # Permanently deletes an AWS Firewall Manager protocols list.
+    #
+    # @option params [required, String] :list_id
+    #   The ID of the protocols list that you want to delete. You can retrieve
+    #   this ID from `PutProtocolsList`, `ListProtocolsLists`, and
+    #   `GetProtocolsLost`.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_protocols_list({
+    #     list_id: "ListId", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/fms-2018-01-01/DeleteProtocolsList AWS API Documentation
+    #
+    # @overload delete_protocols_list(params = {})
+    # @param [Hash] params ({})
+    def delete_protocols_list(params = {}, options = {})
+      req = build_request(:delete_protocols_list, params)
+      req.send_request(options)
+    end
+
     # Disassociates the account that has been set as the AWS Firewall
     # Manager administrator account. To set a different account as the
     # administrator account, you must submit an `AssociateAdminAccount`
@@ -464,6 +512,56 @@ module Aws::FMS
     # @param [Hash] params ({})
     def get_admin_account(params = {}, options = {})
       req = build_request(:get_admin_account, params)
+      req.send_request(options)
+    end
+
+    # Returns information about the specified AWS Firewall Manager
+    # applications list.
+    #
+    # @option params [required, String] :list_id
+    #   The ID of the AWS Firewall Manager applications list that you want the
+    #   details for.
+    #
+    # @option params [Boolean] :default_list
+    #   Specifies whether the list to retrieve is a default list owned by AWS
+    #   Firewall Manager.
+    #
+    # @return [Types::GetAppsListResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetAppsListResponse#apps_list #apps_list} => Types::AppsListData
+    #   * {Types::GetAppsListResponse#apps_list_arn #apps_list_arn} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_apps_list({
+    #     list_id: "ListId", # required
+    #     default_list: false,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.apps_list.list_id #=> String
+    #   resp.apps_list.list_name #=> String
+    #   resp.apps_list.list_update_token #=> String
+    #   resp.apps_list.create_time #=> Time
+    #   resp.apps_list.last_update_time #=> Time
+    #   resp.apps_list.apps_list #=> Array
+    #   resp.apps_list.apps_list[0].app_name #=> String
+    #   resp.apps_list.apps_list[0].protocol #=> String
+    #   resp.apps_list.apps_list[0].port #=> Integer
+    #   resp.apps_list.previous_apps_list #=> Hash
+    #   resp.apps_list.previous_apps_list["PreviousListVersion"] #=> Array
+    #   resp.apps_list.previous_apps_list["PreviousListVersion"][0].app_name #=> String
+    #   resp.apps_list.previous_apps_list["PreviousListVersion"][0].protocol #=> String
+    #   resp.apps_list.previous_apps_list["PreviousListVersion"][0].port #=> Integer
+    #   resp.apps_list_arn #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/fms-2018-01-01/GetAppsList AWS API Documentation
+    #
+    # @overload get_apps_list(params = {})
+    # @param [Hash] params ({})
+    def get_apps_list(params = {}, options = {})
+      req = build_request(:get_apps_list, params)
       req.send_request(options)
     end
 
@@ -661,9 +759,193 @@ module Aws::FMS
       req.send_request(options)
     end
 
-    # Returns an array of `PolicyComplianceStatus` objects in the response.
-    # Use `PolicyComplianceStatus` to get a summary of which member accounts
-    # are protected by the specified policy.
+    # Returns information about the specified AWS Firewall Manager protocols
+    # list.
+    #
+    # @option params [required, String] :list_id
+    #   The ID of the AWS Firewall Manager protocols list that you want the
+    #   details for.
+    #
+    # @option params [Boolean] :default_list
+    #   Specifies whether the list to retrieve is a default list owned by AWS
+    #   Firewall Manager.
+    #
+    # @return [Types::GetProtocolsListResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetProtocolsListResponse#protocols_list #protocols_list} => Types::ProtocolsListData
+    #   * {Types::GetProtocolsListResponse#protocols_list_arn #protocols_list_arn} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_protocols_list({
+    #     list_id: "ListId", # required
+    #     default_list: false,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.protocols_list.list_id #=> String
+    #   resp.protocols_list.list_name #=> String
+    #   resp.protocols_list.list_update_token #=> String
+    #   resp.protocols_list.create_time #=> Time
+    #   resp.protocols_list.last_update_time #=> Time
+    #   resp.protocols_list.protocols_list #=> Array
+    #   resp.protocols_list.protocols_list[0] #=> String
+    #   resp.protocols_list.previous_protocols_list #=> Hash
+    #   resp.protocols_list.previous_protocols_list["PreviousListVersion"] #=> Array
+    #   resp.protocols_list.previous_protocols_list["PreviousListVersion"][0] #=> String
+    #   resp.protocols_list_arn #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/fms-2018-01-01/GetProtocolsList AWS API Documentation
+    #
+    # @overload get_protocols_list(params = {})
+    # @param [Hash] params ({})
+    def get_protocols_list(params = {}, options = {})
+      req = build_request(:get_protocols_list, params)
+      req.send_request(options)
+    end
+
+    # Retrieves violations for a resource based on the specified AWS
+    # Firewall Manager policy and AWS account.
+    #
+    # @option params [required, String] :policy_id
+    #   The ID of the AWS Firewall Manager policy that you want the details
+    #   for. This currently only supports security group content audit
+    #   policies.
+    #
+    # @option params [required, String] :member_account
+    #   The AWS account ID that you want the details for.
+    #
+    # @option params [required, String] :resource_id
+    #   The ID of the resource that has violations.
+    #
+    # @option params [required, String] :resource_type
+    #   The resource type. This is in the format shown in the [AWS Resource
+    #   Types Reference][1]. Supported resource types are:
+    #   `AWS::EC2::Instance`, `AWS::EC2::NetworkInterface`, or
+    #   `AWS::EC2::SecurityGroup`.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-template-resource-type-ref.html
+    #
+    # @return [Types::GetViolationDetailsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetViolationDetailsResponse#violation_detail #violation_detail} => Types::ViolationDetail
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_violation_details({
+    #     policy_id: "PolicyId", # required
+    #     member_account: "AWSAccountId", # required
+    #     resource_id: "ResourceId", # required
+    #     resource_type: "ResourceType", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.violation_detail.policy_id #=> String
+    #   resp.violation_detail.member_account #=> String
+    #   resp.violation_detail.resource_id #=> String
+    #   resp.violation_detail.resource_type #=> String
+    #   resp.violation_detail.resource_violations #=> Array
+    #   resp.violation_detail.resource_violations[0].aws_vpc_security_group_violation.violation_target #=> String
+    #   resp.violation_detail.resource_violations[0].aws_vpc_security_group_violation.violation_target_description #=> String
+    #   resp.violation_detail.resource_violations[0].aws_vpc_security_group_violation.partial_matches #=> Array
+    #   resp.violation_detail.resource_violations[0].aws_vpc_security_group_violation.partial_matches[0].reference #=> String
+    #   resp.violation_detail.resource_violations[0].aws_vpc_security_group_violation.partial_matches[0].target_violation_reasons #=> Array
+    #   resp.violation_detail.resource_violations[0].aws_vpc_security_group_violation.partial_matches[0].target_violation_reasons[0] #=> String
+    #   resp.violation_detail.resource_violations[0].aws_vpc_security_group_violation.possible_security_group_remediation_actions #=> Array
+    #   resp.violation_detail.resource_violations[0].aws_vpc_security_group_violation.possible_security_group_remediation_actions[0].remediation_action_type #=> String, one of "REMOVE", "MODIFY"
+    #   resp.violation_detail.resource_violations[0].aws_vpc_security_group_violation.possible_security_group_remediation_actions[0].description #=> String
+    #   resp.violation_detail.resource_violations[0].aws_vpc_security_group_violation.possible_security_group_remediation_actions[0].remediation_result.ipv4_range #=> String
+    #   resp.violation_detail.resource_violations[0].aws_vpc_security_group_violation.possible_security_group_remediation_actions[0].remediation_result.ipv6_range #=> String
+    #   resp.violation_detail.resource_violations[0].aws_vpc_security_group_violation.possible_security_group_remediation_actions[0].remediation_result.prefix_list_id #=> String
+    #   resp.violation_detail.resource_violations[0].aws_vpc_security_group_violation.possible_security_group_remediation_actions[0].remediation_result.protocol #=> String
+    #   resp.violation_detail.resource_violations[0].aws_vpc_security_group_violation.possible_security_group_remediation_actions[0].remediation_result.from_port #=> Integer
+    #   resp.violation_detail.resource_violations[0].aws_vpc_security_group_violation.possible_security_group_remediation_actions[0].remediation_result.to_port #=> Integer
+    #   resp.violation_detail.resource_violations[0].aws_vpc_security_group_violation.possible_security_group_remediation_actions[0].is_default_action #=> Boolean
+    #   resp.violation_detail.resource_violations[0].aws_ec2_network_interface_violation.violation_target #=> String
+    #   resp.violation_detail.resource_violations[0].aws_ec2_network_interface_violation.violating_security_groups #=> Array
+    #   resp.violation_detail.resource_violations[0].aws_ec2_network_interface_violation.violating_security_groups[0] #=> String
+    #   resp.violation_detail.resource_violations[0].aws_ec2_instance_violation.violation_target #=> String
+    #   resp.violation_detail.resource_violations[0].aws_ec2_instance_violation.aws_ec2_network_interface_violations #=> Array
+    #   resp.violation_detail.resource_violations[0].aws_ec2_instance_violation.aws_ec2_network_interface_violations[0].violation_target #=> String
+    #   resp.violation_detail.resource_violations[0].aws_ec2_instance_violation.aws_ec2_network_interface_violations[0].violating_security_groups #=> Array
+    #   resp.violation_detail.resource_violations[0].aws_ec2_instance_violation.aws_ec2_network_interface_violations[0].violating_security_groups[0] #=> String
+    #   resp.violation_detail.resource_tags #=> Array
+    #   resp.violation_detail.resource_tags[0].key #=> String
+    #   resp.violation_detail.resource_tags[0].value #=> String
+    #   resp.violation_detail.resource_description #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/fms-2018-01-01/GetViolationDetails AWS API Documentation
+    #
+    # @overload get_violation_details(params = {})
+    # @param [Hash] params ({})
+    def get_violation_details(params = {}, options = {})
+      req = build_request(:get_violation_details, params)
+      req.send_request(options)
+    end
+
+    # Returns an array of `AppsListDataSummary` objects.
+    #
+    # @option params [Boolean] :default_lists
+    #   Specifies whether the lists to retrieve are default lists owned by AWS
+    #   Firewall Manager.
+    #
+    # @option params [String] :next_token
+    #   If you specify a value for `MaxResults` in your list request, and you
+    #   have more objects than the maximum, AWS Firewall Manager returns this
+    #   token in the response. For all but the first request, you provide the
+    #   token returned by the prior request in the request parameters, to
+    #   retrieve the next batch of objects.
+    #
+    # @option params [required, Integer] :max_results
+    #   The maximum number of objects that you want AWS Firewall Manager to
+    #   return for this request. If more objects are available, in the
+    #   response, AWS Firewall Manager provides a `NextToken` value that you
+    #   can use in a subsequent call to get the next batch of objects.
+    #
+    #   If you don't specify this, AWS Firewall Manager returns all available
+    #   objects.
+    #
+    # @return [Types::ListAppsListsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListAppsListsResponse#apps_lists #apps_lists} => Array&lt;Types::AppsListDataSummary&gt;
+    #   * {Types::ListAppsListsResponse#next_token #next_token} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_apps_lists({
+    #     default_lists: false,
+    #     next_token: "PaginationToken",
+    #     max_results: 1, # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.apps_lists #=> Array
+    #   resp.apps_lists[0].list_arn #=> String
+    #   resp.apps_lists[0].list_id #=> String
+    #   resp.apps_lists[0].list_name #=> String
+    #   resp.apps_lists[0].apps_list #=> Array
+    #   resp.apps_lists[0].apps_list[0].app_name #=> String
+    #   resp.apps_lists[0].apps_list[0].protocol #=> String
+    #   resp.apps_lists[0].apps_list[0].port #=> Integer
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/fms-2018-01-01/ListAppsLists AWS API Documentation
+    #
+    # @overload list_apps_lists(params = {})
+    # @param [Hash] params ({})
+    def list_apps_lists(params = {}, options = {})
+      req = build_request(:list_apps_lists, params)
+      req.send_request(options)
+    end
+
+    # Returns an array of `PolicyComplianceStatus` objects. Use
+    # `PolicyComplianceStatus` to get a summary of which member accounts are
+    # protected by the specified policy.
     #
     # @option params [required, String] :policy_id
     #   The ID of the AWS Firewall Manager policy that you want the details
@@ -777,7 +1059,7 @@ module Aws::FMS
       req.send_request(options)
     end
 
-    # Returns an array of `PolicySummary` objects in the response.
+    # Returns an array of `PolicySummary` objects.
     #
     # @option params [String] :next_token
     #   If you specify a value for `MaxResults` and you have more
@@ -829,12 +1111,66 @@ module Aws::FMS
       req.send_request(options)
     end
 
+    # Returns an array of `ProtocolsListDataSummary` objects.
+    #
+    # @option params [Boolean] :default_lists
+    #   Specifies whether the lists to retrieve are default lists owned by AWS
+    #   Firewall Manager.
+    #
+    # @option params [String] :next_token
+    #   If you specify a value for `MaxResults` in your list request, and you
+    #   have more objects than the maximum, AWS Firewall Manager returns this
+    #   token in the response. For all but the first request, you provide the
+    #   token returned by the prior request in the request parameters, to
+    #   retrieve the next batch of objects.
+    #
+    # @option params [required, Integer] :max_results
+    #   The maximum number of objects that you want AWS Firewall Manager to
+    #   return for this request. If more objects are available, in the
+    #   response, AWS Firewall Manager provides a `NextToken` value that you
+    #   can use in a subsequent call to get the next batch of objects.
+    #
+    #   If you don't specify this, AWS Firewall Manager returns all available
+    #   objects.
+    #
+    # @return [Types::ListProtocolsListsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListProtocolsListsResponse#protocols_lists #protocols_lists} => Array&lt;Types::ProtocolsListDataSummary&gt;
+    #   * {Types::ListProtocolsListsResponse#next_token #next_token} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_protocols_lists({
+    #     default_lists: false,
+    #     next_token: "PaginationToken",
+    #     max_results: 1, # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.protocols_lists #=> Array
+    #   resp.protocols_lists[0].list_arn #=> String
+    #   resp.protocols_lists[0].list_id #=> String
+    #   resp.protocols_lists[0].list_name #=> String
+    #   resp.protocols_lists[0].protocols_list #=> Array
+    #   resp.protocols_lists[0].protocols_list[0] #=> String
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/fms-2018-01-01/ListProtocolsLists AWS API Documentation
+    #
+    # @overload list_protocols_lists(params = {})
+    # @param [Hash] params ({})
+    def list_protocols_lists(params = {}, options = {})
+      req = build_request(:list_protocols_lists, params)
+      req.send_request(options)
+    end
+
     # Retrieves the list of tags for the specified AWS resource.
     #
     # @option params [required, String] :resource_arn
     #   The Amazon Resource Name (ARN) of the resource to return tags for. The
-    #   Firewall Manager policy is the only AWS resource that supports
-    #   tagging, so this ARN is a policy ARN..
+    #   AWS Firewall Manager resources that support tagging are policies,
+    #   applications lists, and protocols lists.
     #
     # @return [Types::ListTagsForResourceResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -858,6 +1194,81 @@ module Aws::FMS
     # @param [Hash] params ({})
     def list_tags_for_resource(params = {}, options = {})
       req = build_request(:list_tags_for_resource, params)
+      req.send_request(options)
+    end
+
+    # Creates an AWS Firewall Manager applications list.
+    #
+    # @option params [required, Types::AppsListData] :apps_list
+    #   The details of the AWS Firewall Manager applications list to be
+    #   created.
+    #
+    # @option params [Array<Types::Tag>] :tag_list
+    #   The tags associated with the resource.
+    #
+    # @return [Types::PutAppsListResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::PutAppsListResponse#apps_list #apps_list} => Types::AppsListData
+    #   * {Types::PutAppsListResponse#apps_list_arn #apps_list_arn} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.put_apps_list({
+    #     apps_list: { # required
+    #       list_id: "ListId",
+    #       list_name: "ResourceName", # required
+    #       list_update_token: "UpdateToken",
+    #       create_time: Time.now,
+    #       last_update_time: Time.now,
+    #       apps_list: [ # required
+    #         {
+    #           app_name: "ResourceName", # required
+    #           protocol: "Protocol", # required
+    #           port: 1, # required
+    #         },
+    #       ],
+    #       previous_apps_list: {
+    #         "PreviousListVersion" => [
+    #           {
+    #             app_name: "ResourceName", # required
+    #             protocol: "Protocol", # required
+    #             port: 1, # required
+    #           },
+    #         ],
+    #       },
+    #     },
+    #     tag_list: [
+    #       {
+    #         key: "TagKey", # required
+    #         value: "TagValue", # required
+    #       },
+    #     ],
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.apps_list.list_id #=> String
+    #   resp.apps_list.list_name #=> String
+    #   resp.apps_list.list_update_token #=> String
+    #   resp.apps_list.create_time #=> Time
+    #   resp.apps_list.last_update_time #=> Time
+    #   resp.apps_list.apps_list #=> Array
+    #   resp.apps_list.apps_list[0].app_name #=> String
+    #   resp.apps_list.apps_list[0].protocol #=> String
+    #   resp.apps_list.apps_list[0].port #=> Integer
+    #   resp.apps_list.previous_apps_list #=> Hash
+    #   resp.apps_list.previous_apps_list["PreviousListVersion"] #=> Array
+    #   resp.apps_list.previous_apps_list["PreviousListVersion"][0].app_name #=> String
+    #   resp.apps_list.previous_apps_list["PreviousListVersion"][0].protocol #=> String
+    #   resp.apps_list.previous_apps_list["PreviousListVersion"][0].port #=> Integer
+    #   resp.apps_list_arn #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/fms-2018-01-01/PutAppsList AWS API Documentation
+    #
+    # @overload put_apps_list(params = {})
+    # @param [Hash] params ({})
+    def put_apps_list(params = {}, options = {})
+      req = build_request(:put_apps_list, params)
       req.send_request(options)
     end
 
@@ -997,12 +1408,70 @@ module Aws::FMS
       req.send_request(options)
     end
 
+    # Creates an AWS Firewall Manager protocols list.
+    #
+    # @option params [required, Types::ProtocolsListData] :protocols_list
+    #   The details of the AWS Firewall Manager protocols list to be created.
+    #
+    # @option params [Array<Types::Tag>] :tag_list
+    #   The tags associated with the resource.
+    #
+    # @return [Types::PutProtocolsListResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::PutProtocolsListResponse#protocols_list #protocols_list} => Types::ProtocolsListData
+    #   * {Types::PutProtocolsListResponse#protocols_list_arn #protocols_list_arn} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.put_protocols_list({
+    #     protocols_list: { # required
+    #       list_id: "ListId",
+    #       list_name: "ResourceName", # required
+    #       list_update_token: "UpdateToken",
+    #       create_time: Time.now,
+    #       last_update_time: Time.now,
+    #       protocols_list: ["Protocol"], # required
+    #       previous_protocols_list: {
+    #         "PreviousListVersion" => ["Protocol"],
+    #       },
+    #     },
+    #     tag_list: [
+    #       {
+    #         key: "TagKey", # required
+    #         value: "TagValue", # required
+    #       },
+    #     ],
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.protocols_list.list_id #=> String
+    #   resp.protocols_list.list_name #=> String
+    #   resp.protocols_list.list_update_token #=> String
+    #   resp.protocols_list.create_time #=> Time
+    #   resp.protocols_list.last_update_time #=> Time
+    #   resp.protocols_list.protocols_list #=> Array
+    #   resp.protocols_list.protocols_list[0] #=> String
+    #   resp.protocols_list.previous_protocols_list #=> Hash
+    #   resp.protocols_list.previous_protocols_list["PreviousListVersion"] #=> Array
+    #   resp.protocols_list.previous_protocols_list["PreviousListVersion"][0] #=> String
+    #   resp.protocols_list_arn #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/fms-2018-01-01/PutProtocolsList AWS API Documentation
+    #
+    # @overload put_protocols_list(params = {})
+    # @param [Hash] params ({})
+    def put_protocols_list(params = {}, options = {})
+      req = build_request(:put_protocols_list, params)
+      req.send_request(options)
+    end
+
     # Adds one or more tags to an AWS resource.
     #
     # @option params [required, String] :resource_arn
-    #   The Amazon Resource Name (ARN) of the resource. The Firewall Manager
-    #   policy is the only AWS resource that supports tagging, so this ARN is
-    #   a policy ARN.
+    #   The Amazon Resource Name (ARN) of the resource to return tags for. The
+    #   AWS Firewall Manager resources that support tagging are policies,
+    #   applications lists, and protocols lists.
     #
     # @option params [required, Array<Types::Tag>] :tag_list
     #   The tags to add to the resource.
@@ -1033,9 +1502,9 @@ module Aws::FMS
     # Removes one or more tags from an AWS resource.
     #
     # @option params [required, String] :resource_arn
-    #   The Amazon Resource Name (ARN) of the resource. The Firewall Manager
-    #   policy is the only AWS resource that supports tagging, so this ARN is
-    #   a policy ARN.
+    #   The Amazon Resource Name (ARN) of the resource to return tags for. The
+    #   AWS Firewall Manager resources that support tagging are policies,
+    #   applications lists, and protocols lists.
     #
     # @option params [required, Array<String>] :tag_keys
     #   The keys of the tags to remove from the resource.
@@ -1071,7 +1540,7 @@ module Aws::FMS
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-fms'
-      context[:gem_version] = '1.28.0'
+      context[:gem_version] = '1.29.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

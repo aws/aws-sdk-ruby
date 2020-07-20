@@ -5886,6 +5886,16 @@ module Aws::RDS
     #   `deprecated`.
     #   @return [String]
     #
+    # @!attribute [rw] supports_parallel_query
+    #   A value that indicates whether you can use Aurora parallel query
+    #   with a specific DB engine version.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] supports_global_databases
+    #   A value that indicates whether you can use Aurora global databases
+    #   with a specific DB engine version.
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DBEngineVersion AWS API Documentation
     #
     class DBEngineVersion < Struct.new(
@@ -5903,7 +5913,9 @@ module Aws::RDS
       :supports_read_replica,
       :supported_engine_modes,
       :supported_feature_names,
-      :status)
+      :status,
+      :supports_parallel_query,
+      :supports_global_databases)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -15071,6 +15083,11 @@ module Aws::RDS
     #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/rds-on-outposts.html
     #   @return [Boolean]
     #
+    # @!attribute [rw] supports_global_databases
+    #   A value that indicates whether you can use Aurora global databases
+    #   with a specific combination of other DB engine attributes.
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/OrderableDBInstanceOption AWS API Documentation
     #
     class OrderableDBInstanceOption < Struct.new(
@@ -15099,7 +15116,8 @@ module Aws::RDS
       :supported_engine_modes,
       :supports_storage_autoscaling,
       :supports_kerberos_authentication,
-      :outpost_capable)
+      :outpost_capable,
+      :supports_global_databases)
       SENSITIVE = []
       include Aws::Structure
     end
