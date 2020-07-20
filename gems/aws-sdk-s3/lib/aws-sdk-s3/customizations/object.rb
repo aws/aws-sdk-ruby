@@ -312,7 +312,9 @@ module Aws
       #   multipart uploads. This option is not used if the file is smaller than
       #   `:multipart_threshold`.
       #
-      # @option options [Proc] :progress_callback - TBD
+      # @option options [Proc] :progress_callback
+      #   A Proc that will be called when each chunk of the upload is sent.
+      #   It will be invoked with [bytes_read], [total_sizes]
       #
       # @raise [MultipartUploadError] If an object is being uploaded in
       #   parts, and the upload can not be completed, then the upload is

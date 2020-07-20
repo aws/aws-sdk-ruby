@@ -39,7 +39,9 @@ module Aws
       # @param [String, Pathname, File, Tempfile] source The file to upload.
       # @option options [required, String] :bucket The bucket to upload to.
       # @option options [required, String] :key The key for the object.
-      # @option options [Proc] :progress_callback TBD
+      # @option options [Proc] :progress_callback
+      #   A Proc that will be called when each chunk of the upload is sent.
+      #   It will be invoked with [bytes_read], [total_sizes]
       # @return [void]
       def upload(source, options = {})
         if File.size(source) < MIN_PART_SIZE
