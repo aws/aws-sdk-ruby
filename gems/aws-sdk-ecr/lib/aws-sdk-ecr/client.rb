@@ -2137,7 +2137,7 @@ module Aws::ECR
     #   The position of the last byte of the layer part within the overall
     #   image layer.
     #
-    # @option params [required, String, IO like object supporting read, rewind and size] :layer_part_blob
+    # @option params [required, String, IO like object supporting read, rewind, and size] :layer_part_blob
     #   The base64-encoded layer part payload.
     #
     # @return [Types::UploadLayerPartResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:

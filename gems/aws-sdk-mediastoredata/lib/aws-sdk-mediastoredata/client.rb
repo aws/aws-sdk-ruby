@@ -526,7 +526,7 @@ module Aws::MediaStoreData
     # 25 MB for standard upload availability and 10 MB for streaming upload
     # availability.
     #
-    # @option params [required, String, IO like object supporting read, rewind and size] :body
+    # @option params [required, String, IO like object supporting read, rewind, and size] :body
     #   The bytes to be stored.
     #
     # @option params [required, String] :path

@@ -302,7 +302,7 @@ module Aws::S3
     #     request_payer: "requester", # accepts requester
     #   })
     # @param [Hash] options ({})
-    # @option options [String, IO like object supporting read, rewind and size] :body
+    # @option options [String, IO like object supporting read, rewind, and size] :body
     #   Object data.
     # @option options [Integer] :content_length
     #   Size of the body in bytes. This parameter is useful when the size of

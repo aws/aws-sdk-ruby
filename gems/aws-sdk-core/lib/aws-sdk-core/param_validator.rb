@@ -145,12 +145,19 @@ module Aws
       when BlobShape
         unless value.is_a?(String)
           if streaming_input?(ref)
-            unless io_like?(value, _size=false)
-              errors << expected_got(context, "a String or IO like object that supports read and rewind", value)
+            unless io_like?(value, _require_size = false)
+              errors << expected_got(
+                context,
+                "a String or IO like object that supports read and rewind",
+                value
+              )
             end
-          elsif !io_like?(value, _size=true)
-            puts "Not streaming input"
-            errors << expected_got(context, "a String or IO like object that supports read, rewind and size", value)
+          elsif !io_like?(value, _require_size = true)
+            errors << expected_got(
+              context,
+              "a String or IO like object that supports read, rewind, and size",
+              value
+            )
           end
         end
       else
@@ -174,9 +181,9 @@ module Aws
       end
     end
 
-    def io_like?(value, size = true)
+    def io_like?(value, require_size = true)
       value.respond_to?(:read) && value.respond_to?(:rewind) &&
-        (!size || value.respond_to?(:size))
+        (!require_size || value.respond_to?(:size))
     end
 
     def streaming_input?(ref)

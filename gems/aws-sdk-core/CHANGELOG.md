@@ -1,6 +1,8 @@
 Unreleased Changes
 ------------------
 
+* Issue - Validate IO like objects support read,rewind and size unless streaming. Fixes #2364
+
 3.104.1 (2020-07-20)
 ------------------
 

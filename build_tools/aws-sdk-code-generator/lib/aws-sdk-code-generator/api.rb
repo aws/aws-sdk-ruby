@@ -52,7 +52,7 @@ module AwsSdkCodeGenerator
         _, shape = resolve(shape_ref, api)
         case shape['type']
         when 'byte' then 'Integer<byte>'
-        when 'blob' then 'String, IO like object supporting read, rewind and size'
+        when 'blob' then 'String, IO like object supporting read, rewind, and size'
         when 'boolean' then 'Boolean'
         when 'character' then 'String<character>'
         when 'double' then 'Float'

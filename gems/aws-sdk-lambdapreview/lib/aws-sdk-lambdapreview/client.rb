@@ -607,7 +607,7 @@ module Aws::LambdaPreview
     # @option params [required, String] :function_name
     #   The Lambda function name.
     #
-    # @option params [required, String, IO like object supporting read, rewind and size] :invoke_args
+    # @option params [required, String, IO like object supporting read, rewind, and size] :invoke_args
     #   JSON that you want to provide to your Lambda function as input.
     #
     # @return [Types::InvokeAsyncResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
@@ -884,7 +884,7 @@ module Aws::LambdaPreview
     #   ListFunctions API. Function names are used to specify functions to
     #   other AWS Lambda APIs, such as InvokeAsync.
     #
-    # @option params [required, String, IO like object supporting read, rewind and size] :function_zip
+    # @option params [required, String, IO like object supporting read, rewind, and size] :function_zip
     #   A .zip file containing your packaged source code. For more information
     #   about creating a .zip file, go to [AWS LambdaL How it Works][1] in the
     #   AWS Lambda Developer Guide.

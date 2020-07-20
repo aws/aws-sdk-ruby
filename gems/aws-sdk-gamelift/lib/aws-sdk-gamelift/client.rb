@@ -2213,7 +2213,7 @@ module Aws::GameLift
     #   the zip file; if you have S3 object versioning turned on, you can use
     #   the `ObjectVersion` parameter to specify an earlier version.
     #
-    # @option params [String, IO like object supporting read, rewind and size] :zip_file
+    # @option params [String, IO like object supporting read, rewind, and size] :zip_file
     #   A data object containing your Realtime scripts and dependencies as a
     #   zip file. The zip file can have one or multiple files. Maximum size of
     #   a zip file is 5 MB.
@@ -8841,7 +8841,7 @@ module Aws::GameLift
     #   the zip file; if you have S3 object versioning turned on, you can use
     #   the `ObjectVersion` parameter to specify an earlier version.
     #
-    # @option params [String, IO like object supporting read, rewind and size] :zip_file
+    # @option params [String, IO like object supporting read, rewind, and size] :zip_file
     #   A data object containing your Realtime scripts and dependencies as a
     #   zip file. The zip file can have one or multiple files. Maximum size of
     #   a zip file is 5 MB.

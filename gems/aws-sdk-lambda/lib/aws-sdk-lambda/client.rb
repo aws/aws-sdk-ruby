@@ -2682,7 +2682,7 @@ module Aws::Lambda
     #   Up to 3583 bytes of base64-encoded data about the invoking client to
     #   pass to the function in the context object.
     #
-    # @option params [String, IO like object supporting read, rewind and size] :payload
+    # @option params [String, IO like object supporting read, rewind, and size] :payload
     #   The JSON that you want to provide to your Lambda function as input.
     #
     # @option params [String] :qualifier
@@ -2778,7 +2778,7 @@ module Aws::Lambda
     #   The length constraint applies only to the full ARN. If you specify
     #   only the function name, it is limited to 64 characters in length.
     #
-    # @option params [required, String, IO like object supporting read, rewind and size] :invoke_args
+    # @option params [required, String, IO like object supporting read, rewind, and size] :invoke_args
     #   The JSON that you want to provide to your Lambda function as input.
     #
     # @return [Types::InvokeAsyncResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
@@ -4855,7 +4855,7 @@ module Aws::Lambda
     #   The length constraint applies only to the full ARN. If you specify
     #   only the function name, it is limited to 64 characters in length.
     #
-    # @option params [String, IO like object supporting read, rewind and size] :zip_file
+    # @option params [String, IO like object supporting read, rewind, and size] :zip_file
     #   The base64-encoded contents of the deployment package. AWS SDK and AWS
     #   CLI clients handle the encoding for you.
     #

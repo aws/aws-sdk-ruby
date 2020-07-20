@@ -733,7 +733,7 @@ module Aws::S3
     #
     #
     #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/dev/acl-overview.html#CannedACL
-    # @option options [String, IO like object supporting read, rewind and size] :body
+    # @option options [String, IO like object supporting read, rewind, and size] :body
     #   Object data.
     # @option options [String] :cache_control
     #   Can be used to specify caching behavior along the request/reply chain.

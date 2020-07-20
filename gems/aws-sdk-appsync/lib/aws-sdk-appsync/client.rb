@@ -1859,7 +1859,7 @@ module Aws::AppSync
     # @option params [required, String] :api_id
     #   The API ID.
     #
-    # @option params [required, String, IO like object supporting read, rewind and size] :definition
+    # @option params [required, String, IO like object supporting read, rewind, and size] :definition
     #   The schema definition, in GraphQL schema language format.
     #
     # @return [Types::StartSchemaCreationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
