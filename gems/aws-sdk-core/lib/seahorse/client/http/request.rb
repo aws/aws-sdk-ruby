@@ -55,18 +55,6 @@ module Seahorse
           contents
         end
 
-        # @return [Integer] - Returns the body size
-        # raises ArgumentError if body does not support size
-        def body_size
-          if @body.respond_to?(:size)
-            @body.size
-          elsif @body.respond_to?(:stat) && (stat = @body.stat).respond_to?(:size)
-            stat.size
-          else
-            raise ArgumentError, 'Request body must respond to either :size or :stat'
-          end
-        end
-
         # @param [#read, #size, #rewind] io
         def body=(io)
           @body = case io

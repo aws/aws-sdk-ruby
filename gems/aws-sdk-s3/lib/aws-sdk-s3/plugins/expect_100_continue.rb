@@ -15,11 +15,12 @@ module Aws
         class Handler < Seahorse::Client::Handler
 
           def call(context)
-            if context.http_request.body && context.http_request.body_size > 0
+            if context.http_request.body && context.http_request.body.size > 0
               context.http_request.headers['expect'] = '100-continue'
             end
             @handler.call(context)
           end
+
         end
       end
     end

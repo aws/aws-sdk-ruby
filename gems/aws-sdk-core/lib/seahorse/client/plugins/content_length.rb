@@ -9,18 +9,18 @@ module Seahorse
         class Handler < Client::Handler
 
           def call(context)
-            begin
-              if (length = context.http_request.body_size) && context.http_request.headers['Transfer-Encoding'] != 'chunked'
-                context.http_request.headers['Content-Length'] = length
-              end
-            rescue ArgumentError
-              # if the body does not support size, skip setting content-length
+            # If it's an IO object and not a File / String / String IO
+            if context.http_request.body.respond_to?(:size)
+              length = context.http_request.body.size
+              context.http_request.headers['Content-Length'] = length
             end
             @handler.call(context)
           end
+
         end
 
         handler(Handler, step: :sign, priority: 0)
+
       end
     end
   end
