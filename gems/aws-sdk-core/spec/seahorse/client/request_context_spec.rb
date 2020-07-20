@@ -26,8 +26,8 @@ module Seahorse
         end
 
         it 'can be set in the constructor' do
-          params = Object.new
-          expect(RequestContext.new(params: params).params).to be(params)
+          params = {p1: 'p1'}
+          expect(RequestContext.new(params: params).params).to eq(params)
         end
 
       end
