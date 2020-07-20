@@ -19,7 +19,7 @@ module Seahorse
         @operation = options[:operation]
         @authorizer = options[:authorizer]
         @client = options[:client]
-        @params = options[:params].dup || {}
+        @params = options[:params] ? options[:params].dup : {}
         @config = options[:config]
         @http_request = options[:http_request] || Http::Request.new
         @http_response = options[:http_response] || Http::Response.new
