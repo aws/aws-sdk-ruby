@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.94.0 (2020-07-20)
+------------------
+
+* Feature - Add a new SupportsParallelQuery output field to DescribeDBEngineVersions. This field shows whether the engine version supports parallelquery. Add a new SupportsGlobalDatabases output field to DescribeDBEngineVersions and DescribeOrderableDBInstanceOptions. This field shows whether global database is supported by engine version or the combination of engine version and instance class.
+
 1.93.0 (2020-07-06)
 ------------------
 

@@ -26,6 +26,20 @@ module Aws::CloudFront
     CacheBehavior = Shapes::StructureShape.new(name: 'CacheBehavior')
     CacheBehaviorList = Shapes::ListShape.new(name: 'CacheBehaviorList')
     CacheBehaviors = Shapes::StructureShape.new(name: 'CacheBehaviors')
+    CachePolicy = Shapes::StructureShape.new(name: 'CachePolicy')
+    CachePolicyAlreadyExists = Shapes::StructureShape.new(name: 'CachePolicyAlreadyExists')
+    CachePolicyConfig = Shapes::StructureShape.new(name: 'CachePolicyConfig')
+    CachePolicyCookieBehavior = Shapes::StringShape.new(name: 'CachePolicyCookieBehavior')
+    CachePolicyCookiesConfig = Shapes::StructureShape.new(name: 'CachePolicyCookiesConfig')
+    CachePolicyHeaderBehavior = Shapes::StringShape.new(name: 'CachePolicyHeaderBehavior')
+    CachePolicyHeadersConfig = Shapes::StructureShape.new(name: 'CachePolicyHeadersConfig')
+    CachePolicyInUse = Shapes::StructureShape.new(name: 'CachePolicyInUse')
+    CachePolicyList = Shapes::StructureShape.new(name: 'CachePolicyList')
+    CachePolicyQueryStringBehavior = Shapes::StringShape.new(name: 'CachePolicyQueryStringBehavior')
+    CachePolicyQueryStringsConfig = Shapes::StructureShape.new(name: 'CachePolicyQueryStringsConfig')
+    CachePolicySummary = Shapes::StructureShape.new(name: 'CachePolicySummary')
+    CachePolicySummaryList = Shapes::ListShape.new(name: 'CachePolicySummaryList')
+    CachePolicyType = Shapes::StringShape.new(name: 'CachePolicyType')
     CachedMethods = Shapes::StructureShape.new(name: 'CachedMethods')
     CannotChangeImmutablePublicKeyFields = Shapes::StructureShape.new(name: 'CannotChangeImmutablePublicKeyFields')
     CertificateSource = Shapes::StringShape.new(name: 'CertificateSource')
@@ -44,6 +58,8 @@ module Aws::CloudFront
     CookieNameList = Shapes::ListShape.new(name: 'CookieNameList')
     CookieNames = Shapes::StructureShape.new(name: 'CookieNames')
     CookiePreference = Shapes::StructureShape.new(name: 'CookiePreference')
+    CreateCachePolicyRequest = Shapes::StructureShape.new(name: 'CreateCachePolicyRequest')
+    CreateCachePolicyResult = Shapes::StructureShape.new(name: 'CreateCachePolicyResult')
     CreateCloudFrontOriginAccessIdentityRequest = Shapes::StructureShape.new(name: 'CreateCloudFrontOriginAccessIdentityRequest')
     CreateCloudFrontOriginAccessIdentityResult = Shapes::StructureShape.new(name: 'CreateCloudFrontOriginAccessIdentityResult')
     CreateDistributionRequest = Shapes::StructureShape.new(name: 'CreateDistributionRequest')
@@ -56,6 +72,8 @@ module Aws::CloudFront
     CreateFieldLevelEncryptionProfileResult = Shapes::StructureShape.new(name: 'CreateFieldLevelEncryptionProfileResult')
     CreateInvalidationRequest = Shapes::StructureShape.new(name: 'CreateInvalidationRequest')
     CreateInvalidationResult = Shapes::StructureShape.new(name: 'CreateInvalidationResult')
+    CreateOriginRequestPolicyRequest = Shapes::StructureShape.new(name: 'CreateOriginRequestPolicyRequest')
+    CreateOriginRequestPolicyResult = Shapes::StructureShape.new(name: 'CreateOriginRequestPolicyResult')
     CreatePublicKeyRequest = Shapes::StructureShape.new(name: 'CreatePublicKeyRequest')
     CreatePublicKeyResult = Shapes::StructureShape.new(name: 'CreatePublicKeyResult')
     CreateStreamingDistributionRequest = Shapes::StructureShape.new(name: 'CreateStreamingDistributionRequest')
@@ -68,16 +86,20 @@ module Aws::CloudFront
     CustomHeaders = Shapes::StructureShape.new(name: 'CustomHeaders')
     CustomOriginConfig = Shapes::StructureShape.new(name: 'CustomOriginConfig')
     DefaultCacheBehavior = Shapes::StructureShape.new(name: 'DefaultCacheBehavior')
+    DeleteCachePolicyRequest = Shapes::StructureShape.new(name: 'DeleteCachePolicyRequest')
     DeleteCloudFrontOriginAccessIdentityRequest = Shapes::StructureShape.new(name: 'DeleteCloudFrontOriginAccessIdentityRequest')
     DeleteDistributionRequest = Shapes::StructureShape.new(name: 'DeleteDistributionRequest')
     DeleteFieldLevelEncryptionConfigRequest = Shapes::StructureShape.new(name: 'DeleteFieldLevelEncryptionConfigRequest')
     DeleteFieldLevelEncryptionProfileRequest = Shapes::StructureShape.new(name: 'DeleteFieldLevelEncryptionProfileRequest')
+    DeleteOriginRequestPolicyRequest = Shapes::StructureShape.new(name: 'DeleteOriginRequestPolicyRequest')
     DeletePublicKeyRequest = Shapes::StructureShape.new(name: 'DeletePublicKeyRequest')
     DeleteStreamingDistributionRequest = Shapes::StructureShape.new(name: 'DeleteStreamingDistributionRequest')
     Distribution = Shapes::StructureShape.new(name: 'Distribution')
     DistributionAlreadyExists = Shapes::StructureShape.new(name: 'DistributionAlreadyExists')
     DistributionConfig = Shapes::StructureShape.new(name: 'DistributionConfig')
     DistributionConfigWithTags = Shapes::StructureShape.new(name: 'DistributionConfigWithTags')
+    DistributionIdList = Shapes::StructureShape.new(name: 'DistributionIdList')
+    DistributionIdListSummary = Shapes::ListShape.new(name: 'DistributionIdListSummary')
     DistributionList = Shapes::StructureShape.new(name: 'DistributionList')
     DistributionNotDisabled = Shapes::StructureShape.new(name: 'DistributionNotDisabled')
     DistributionSummary = Shapes::StructureShape.new(name: 'DistributionSummary')
@@ -107,6 +129,10 @@ module Aws::CloudFront
     ForwardedValues = Shapes::StructureShape.new(name: 'ForwardedValues')
     GeoRestriction = Shapes::StructureShape.new(name: 'GeoRestriction')
     GeoRestrictionType = Shapes::StringShape.new(name: 'GeoRestrictionType')
+    GetCachePolicyConfigRequest = Shapes::StructureShape.new(name: 'GetCachePolicyConfigRequest')
+    GetCachePolicyConfigResult = Shapes::StructureShape.new(name: 'GetCachePolicyConfigResult')
+    GetCachePolicyRequest = Shapes::StructureShape.new(name: 'GetCachePolicyRequest')
+    GetCachePolicyResult = Shapes::StructureShape.new(name: 'GetCachePolicyResult')
     GetCloudFrontOriginAccessIdentityConfigRequest = Shapes::StructureShape.new(name: 'GetCloudFrontOriginAccessIdentityConfigRequest')
     GetCloudFrontOriginAccessIdentityConfigResult = Shapes::StructureShape.new(name: 'GetCloudFrontOriginAccessIdentityConfigResult')
     GetCloudFrontOriginAccessIdentityRequest = Shapes::StructureShape.new(name: 'GetCloudFrontOriginAccessIdentityRequest')
@@ -125,6 +151,10 @@ module Aws::CloudFront
     GetFieldLevelEncryptionResult = Shapes::StructureShape.new(name: 'GetFieldLevelEncryptionResult')
     GetInvalidationRequest = Shapes::StructureShape.new(name: 'GetInvalidationRequest')
     GetInvalidationResult = Shapes::StructureShape.new(name: 'GetInvalidationResult')
+    GetOriginRequestPolicyConfigRequest = Shapes::StructureShape.new(name: 'GetOriginRequestPolicyConfigRequest')
+    GetOriginRequestPolicyConfigResult = Shapes::StructureShape.new(name: 'GetOriginRequestPolicyConfigResult')
+    GetOriginRequestPolicyRequest = Shapes::StructureShape.new(name: 'GetOriginRequestPolicyRequest')
+    GetOriginRequestPolicyResult = Shapes::StructureShape.new(name: 'GetOriginRequestPolicyResult')
     GetPublicKeyConfigRequest = Shapes::StructureShape.new(name: 'GetPublicKeyConfigRequest')
     GetPublicKeyConfigResult = Shapes::StructureShape.new(name: 'GetPublicKeyConfigResult')
     GetPublicKeyRequest = Shapes::StructureShape.new(name: 'GetPublicKeyRequest')
@@ -137,6 +167,7 @@ module Aws::CloudFront
     Headers = Shapes::StructureShape.new(name: 'Headers')
     HttpVersion = Shapes::StringShape.new(name: 'HttpVersion')
     ICPRecordalStatus = Shapes::StringShape.new(name: 'ICPRecordalStatus')
+    IllegalDelete = Shapes::StructureShape.new(name: 'IllegalDelete')
     IllegalFieldLevelEncryptionConfigAssociationWithCacheBehavior = Shapes::StructureShape.new(name: 'IllegalFieldLevelEncryptionConfigAssociationWithCacheBehavior')
     IllegalUpdate = Shapes::StructureShape.new(name: 'IllegalUpdate')
     InconsistentQuantities = Shapes::StructureShape.new(name: 'InconsistentQuantities')
@@ -175,8 +206,14 @@ module Aws::CloudFront
     LambdaFunctionAssociation = Shapes::StructureShape.new(name: 'LambdaFunctionAssociation')
     LambdaFunctionAssociationList = Shapes::ListShape.new(name: 'LambdaFunctionAssociationList')
     LambdaFunctionAssociations = Shapes::StructureShape.new(name: 'LambdaFunctionAssociations')
+    ListCachePoliciesRequest = Shapes::StructureShape.new(name: 'ListCachePoliciesRequest')
+    ListCachePoliciesResult = Shapes::StructureShape.new(name: 'ListCachePoliciesResult')
     ListCloudFrontOriginAccessIdentitiesRequest = Shapes::StructureShape.new(name: 'ListCloudFrontOriginAccessIdentitiesRequest')
     ListCloudFrontOriginAccessIdentitiesResult = Shapes::StructureShape.new(name: 'ListCloudFrontOriginAccessIdentitiesResult')
+    ListDistributionsByCachePolicyIdRequest = Shapes::StructureShape.new(name: 'ListDistributionsByCachePolicyIdRequest')
+    ListDistributionsByCachePolicyIdResult = Shapes::StructureShape.new(name: 'ListDistributionsByCachePolicyIdResult')
+    ListDistributionsByOriginRequestPolicyIdRequest = Shapes::StructureShape.new(name: 'ListDistributionsByOriginRequestPolicyIdRequest')
+    ListDistributionsByOriginRequestPolicyIdResult = Shapes::StructureShape.new(name: 'ListDistributionsByOriginRequestPolicyIdResult')
     ListDistributionsByWebACLIdRequest = Shapes::StructureShape.new(name: 'ListDistributionsByWebACLIdRequest')
     ListDistributionsByWebACLIdResult = Shapes::StructureShape.new(name: 'ListDistributionsByWebACLIdResult')
     ListDistributionsRequest = Shapes::StructureShape.new(name: 'ListDistributionsRequest')
@@ -187,6 +224,8 @@ module Aws::CloudFront
     ListFieldLevelEncryptionProfilesResult = Shapes::StructureShape.new(name: 'ListFieldLevelEncryptionProfilesResult')
     ListInvalidationsRequest = Shapes::StructureShape.new(name: 'ListInvalidationsRequest')
     ListInvalidationsResult = Shapes::StructureShape.new(name: 'ListInvalidationsResult')
+    ListOriginRequestPoliciesRequest = Shapes::StructureShape.new(name: 'ListOriginRequestPoliciesRequest')
+    ListOriginRequestPoliciesResult = Shapes::StructureShape.new(name: 'ListOriginRequestPoliciesResult')
     ListPublicKeysRequest = Shapes::StructureShape.new(name: 'ListPublicKeysRequest')
     ListPublicKeysResult = Shapes::StructureShape.new(name: 'ListPublicKeysResult')
     ListStreamingDistributionsRequest = Shapes::StructureShape.new(name: 'ListStreamingDistributionsRequest')
@@ -199,12 +238,14 @@ module Aws::CloudFront
     MethodsList = Shapes::ListShape.new(name: 'MethodsList')
     MinimumProtocolVersion = Shapes::StringShape.new(name: 'MinimumProtocolVersion')
     MissingBody = Shapes::StructureShape.new(name: 'MissingBody')
+    NoSuchCachePolicy = Shapes::StructureShape.new(name: 'NoSuchCachePolicy')
     NoSuchCloudFrontOriginAccessIdentity = Shapes::StructureShape.new(name: 'NoSuchCloudFrontOriginAccessIdentity')
     NoSuchDistribution = Shapes::StructureShape.new(name: 'NoSuchDistribution')
     NoSuchFieldLevelEncryptionConfig = Shapes::StructureShape.new(name: 'NoSuchFieldLevelEncryptionConfig')
     NoSuchFieldLevelEncryptionProfile = Shapes::StructureShape.new(name: 'NoSuchFieldLevelEncryptionProfile')
     NoSuchInvalidation = Shapes::StructureShape.new(name: 'NoSuchInvalidation')
     NoSuchOrigin = Shapes::StructureShape.new(name: 'NoSuchOrigin')
+    NoSuchOriginRequestPolicy = Shapes::StructureShape.new(name: 'NoSuchOriginRequestPolicy')
     NoSuchPublicKey = Shapes::StructureShape.new(name: 'NoSuchPublicKey')
     NoSuchResource = Shapes::StructureShape.new(name: 'NoSuchResource')
     NoSuchStreamingDistribution = Shapes::StructureShape.new(name: 'NoSuchStreamingDistribution')
@@ -220,8 +261,23 @@ module Aws::CloudFront
     OriginGroups = Shapes::StructureShape.new(name: 'OriginGroups')
     OriginList = Shapes::ListShape.new(name: 'OriginList')
     OriginProtocolPolicy = Shapes::StringShape.new(name: 'OriginProtocolPolicy')
+    OriginRequestPolicy = Shapes::StructureShape.new(name: 'OriginRequestPolicy')
+    OriginRequestPolicyAlreadyExists = Shapes::StructureShape.new(name: 'OriginRequestPolicyAlreadyExists')
+    OriginRequestPolicyConfig = Shapes::StructureShape.new(name: 'OriginRequestPolicyConfig')
+    OriginRequestPolicyCookieBehavior = Shapes::StringShape.new(name: 'OriginRequestPolicyCookieBehavior')
+    OriginRequestPolicyCookiesConfig = Shapes::StructureShape.new(name: 'OriginRequestPolicyCookiesConfig')
+    OriginRequestPolicyHeaderBehavior = Shapes::StringShape.new(name: 'OriginRequestPolicyHeaderBehavior')
+    OriginRequestPolicyHeadersConfig = Shapes::StructureShape.new(name: 'OriginRequestPolicyHeadersConfig')
+    OriginRequestPolicyInUse = Shapes::StructureShape.new(name: 'OriginRequestPolicyInUse')
+    OriginRequestPolicyList = Shapes::StructureShape.new(name: 'OriginRequestPolicyList')
+    OriginRequestPolicyQueryStringBehavior = Shapes::StringShape.new(name: 'OriginRequestPolicyQueryStringBehavior')
+    OriginRequestPolicyQueryStringsConfig = Shapes::StructureShape.new(name: 'OriginRequestPolicyQueryStringsConfig')
+    OriginRequestPolicySummary = Shapes::StructureShape.new(name: 'OriginRequestPolicySummary')
+    OriginRequestPolicySummaryList = Shapes::ListShape.new(name: 'OriginRequestPolicySummaryList')
+    OriginRequestPolicyType = Shapes::StringShape.new(name: 'OriginRequestPolicyType')
     OriginSslProtocols = Shapes::StructureShape.new(name: 'OriginSslProtocols')
     Origins = Shapes::StructureShape.new(name: 'Origins')
+    ParametersInCacheKeyAndForwardedToOrigin = Shapes::StructureShape.new(name: 'ParametersInCacheKeyAndForwardedToOrigin')
     PathList = Shapes::ListShape.new(name: 'PathList')
     Paths = Shapes::StructureShape.new(name: 'Paths')
     PreconditionFailed = Shapes::StructureShape.new(name: 'PreconditionFailed')
@@ -240,6 +296,8 @@ module Aws::CloudFront
     QueryArgProfiles = Shapes::StructureShape.new(name: 'QueryArgProfiles')
     QueryStringCacheKeys = Shapes::StructureShape.new(name: 'QueryStringCacheKeys')
     QueryStringCacheKeysList = Shapes::ListShape.new(name: 'QueryStringCacheKeysList')
+    QueryStringNames = Shapes::StructureShape.new(name: 'QueryStringNames')
+    QueryStringNamesList = Shapes::ListShape.new(name: 'QueryStringNamesList')
     ResourceARN = Shapes::StringShape.new(name: 'ResourceARN')
     Restrictions = Shapes::StructureShape.new(name: 'Restrictions')
     S3Origin = Shapes::StructureShape.new(name: 'S3Origin')
@@ -269,33 +327,46 @@ module Aws::CloudFront
     TagValue = Shapes::StringShape.new(name: 'TagValue')
     Tags = Shapes::StructureShape.new(name: 'Tags')
     TooManyCacheBehaviors = Shapes::StructureShape.new(name: 'TooManyCacheBehaviors')
+    TooManyCachePolicies = Shapes::StructureShape.new(name: 'TooManyCachePolicies')
     TooManyCertificates = Shapes::StructureShape.new(name: 'TooManyCertificates')
     TooManyCloudFrontOriginAccessIdentities = Shapes::StructureShape.new(name: 'TooManyCloudFrontOriginAccessIdentities')
     TooManyCookieNamesInWhiteList = Shapes::StructureShape.new(name: 'TooManyCookieNamesInWhiteList')
+    TooManyCookiesInCachePolicy = Shapes::StructureShape.new(name: 'TooManyCookiesInCachePolicy')
+    TooManyCookiesInOriginRequestPolicy = Shapes::StructureShape.new(name: 'TooManyCookiesInOriginRequestPolicy')
     TooManyDistributionCNAMEs = Shapes::StructureShape.new(name: 'TooManyDistributionCNAMEs')
     TooManyDistributions = Shapes::StructureShape.new(name: 'TooManyDistributions')
+    TooManyDistributionsAssociatedToCachePolicy = Shapes::StructureShape.new(name: 'TooManyDistributionsAssociatedToCachePolicy')
     TooManyDistributionsAssociatedToFieldLevelEncryptionConfig = Shapes::StructureShape.new(name: 'TooManyDistributionsAssociatedToFieldLevelEncryptionConfig')
+    TooManyDistributionsAssociatedToOriginRequestPolicy = Shapes::StructureShape.new(name: 'TooManyDistributionsAssociatedToOriginRequestPolicy')
     TooManyDistributionsWithLambdaAssociations = Shapes::StructureShape.new(name: 'TooManyDistributionsWithLambdaAssociations')
+    TooManyDistributionsWithSingleFunctionARN = Shapes::StructureShape.new(name: 'TooManyDistributionsWithSingleFunctionARN')
     TooManyFieldLevelEncryptionConfigs = Shapes::StructureShape.new(name: 'TooManyFieldLevelEncryptionConfigs')
     TooManyFieldLevelEncryptionContentTypeProfiles = Shapes::StructureShape.new(name: 'TooManyFieldLevelEncryptionContentTypeProfiles')
     TooManyFieldLevelEncryptionEncryptionEntities = Shapes::StructureShape.new(name: 'TooManyFieldLevelEncryptionEncryptionEntities')
     TooManyFieldLevelEncryptionFieldPatterns = Shapes::StructureShape.new(name: 'TooManyFieldLevelEncryptionFieldPatterns')
     TooManyFieldLevelEncryptionProfiles = Shapes::StructureShape.new(name: 'TooManyFieldLevelEncryptionProfiles')
     TooManyFieldLevelEncryptionQueryArgProfiles = Shapes::StructureShape.new(name: 'TooManyFieldLevelEncryptionQueryArgProfiles')
+    TooManyHeadersInCachePolicy = Shapes::StructureShape.new(name: 'TooManyHeadersInCachePolicy')
     TooManyHeadersInForwardedValues = Shapes::StructureShape.new(name: 'TooManyHeadersInForwardedValues')
+    TooManyHeadersInOriginRequestPolicy = Shapes::StructureShape.new(name: 'TooManyHeadersInOriginRequestPolicy')
     TooManyInvalidationsInProgress = Shapes::StructureShape.new(name: 'TooManyInvalidationsInProgress')
     TooManyLambdaFunctionAssociations = Shapes::StructureShape.new(name: 'TooManyLambdaFunctionAssociations')
     TooManyOriginCustomHeaders = Shapes::StructureShape.new(name: 'TooManyOriginCustomHeaders')
     TooManyOriginGroupsPerDistribution = Shapes::StructureShape.new(name: 'TooManyOriginGroupsPerDistribution')
+    TooManyOriginRequestPolicies = Shapes::StructureShape.new(name: 'TooManyOriginRequestPolicies')
     TooManyOrigins = Shapes::StructureShape.new(name: 'TooManyOrigins')
     TooManyPublicKeys = Shapes::StructureShape.new(name: 'TooManyPublicKeys')
     TooManyQueryStringParameters = Shapes::StructureShape.new(name: 'TooManyQueryStringParameters')
+    TooManyQueryStringsInCachePolicy = Shapes::StructureShape.new(name: 'TooManyQueryStringsInCachePolicy')
+    TooManyQueryStringsInOriginRequestPolicy = Shapes::StructureShape.new(name: 'TooManyQueryStringsInOriginRequestPolicy')
     TooManyStreamingDistributionCNAMEs = Shapes::StructureShape.new(name: 'TooManyStreamingDistributionCNAMEs')
     TooManyStreamingDistributions = Shapes::StructureShape.new(name: 'TooManyStreamingDistributions')
     TooManyTrustedSigners = Shapes::StructureShape.new(name: 'TooManyTrustedSigners')
     TrustedSignerDoesNotExist = Shapes::StructureShape.new(name: 'TrustedSignerDoesNotExist')
     TrustedSigners = Shapes::StructureShape.new(name: 'TrustedSigners')
     UntagResourceRequest = Shapes::StructureShape.new(name: 'UntagResourceRequest')
+    UpdateCachePolicyRequest = Shapes::StructureShape.new(name: 'UpdateCachePolicyRequest')
+    UpdateCachePolicyResult = Shapes::StructureShape.new(name: 'UpdateCachePolicyResult')
     UpdateCloudFrontOriginAccessIdentityRequest = Shapes::StructureShape.new(name: 'UpdateCloudFrontOriginAccessIdentityRequest')
     UpdateCloudFrontOriginAccessIdentityResult = Shapes::StructureShape.new(name: 'UpdateCloudFrontOriginAccessIdentityResult')
     UpdateDistributionRequest = Shapes::StructureShape.new(name: 'UpdateDistributionRequest')
@@ -304,6 +375,8 @@ module Aws::CloudFront
     UpdateFieldLevelEncryptionConfigResult = Shapes::StructureShape.new(name: 'UpdateFieldLevelEncryptionConfigResult')
     UpdateFieldLevelEncryptionProfileRequest = Shapes::StructureShape.new(name: 'UpdateFieldLevelEncryptionProfileRequest')
     UpdateFieldLevelEncryptionProfileResult = Shapes::StructureShape.new(name: 'UpdateFieldLevelEncryptionProfileResult')
+    UpdateOriginRequestPolicyRequest = Shapes::StructureShape.new(name: 'UpdateOriginRequestPolicyRequest')
+    UpdateOriginRequestPolicyResult = Shapes::StructureShape.new(name: 'UpdateOriginRequestPolicyResult')
     UpdatePublicKeyRequest = Shapes::StructureShape.new(name: 'UpdatePublicKeyRequest')
     UpdatePublicKeyResult = Shapes::StructureShape.new(name: 'UpdatePublicKeyResult')
     UpdateStreamingDistributionRequest = Shapes::StructureShape.new(name: 'UpdateStreamingDistributionRequest')
@@ -351,17 +424,19 @@ module Aws::CloudFront
 
     CacheBehavior.add_member(:path_pattern, Shapes::ShapeRef.new(shape: string, required: true, location_name: "PathPattern"))
     CacheBehavior.add_member(:target_origin_id, Shapes::ShapeRef.new(shape: string, required: true, location_name: "TargetOriginId"))
-    CacheBehavior.add_member(:forwarded_values, Shapes::ShapeRef.new(shape: ForwardedValues, required: true, location_name: "ForwardedValues"))
     CacheBehavior.add_member(:trusted_signers, Shapes::ShapeRef.new(shape: TrustedSigners, required: true, location_name: "TrustedSigners"))
     CacheBehavior.add_member(:viewer_protocol_policy, Shapes::ShapeRef.new(shape: ViewerProtocolPolicy, required: true, location_name: "ViewerProtocolPolicy"))
-    CacheBehavior.add_member(:min_ttl, Shapes::ShapeRef.new(shape: long, required: true, location_name: "MinTTL"))
     CacheBehavior.add_member(:allowed_methods, Shapes::ShapeRef.new(shape: AllowedMethods, location_name: "AllowedMethods"))
     CacheBehavior.add_member(:smooth_streaming, Shapes::ShapeRef.new(shape: boolean, location_name: "SmoothStreaming"))
-    CacheBehavior.add_member(:default_ttl, Shapes::ShapeRef.new(shape: long, location_name: "DefaultTTL"))
-    CacheBehavior.add_member(:max_ttl, Shapes::ShapeRef.new(shape: long, location_name: "MaxTTL"))
     CacheBehavior.add_member(:compress, Shapes::ShapeRef.new(shape: boolean, location_name: "Compress"))
     CacheBehavior.add_member(:lambda_function_associations, Shapes::ShapeRef.new(shape: LambdaFunctionAssociations, location_name: "LambdaFunctionAssociations"))
     CacheBehavior.add_member(:field_level_encryption_id, Shapes::ShapeRef.new(shape: string, location_name: "FieldLevelEncryptionId"))
+    CacheBehavior.add_member(:cache_policy_id, Shapes::ShapeRef.new(shape: string, location_name: "CachePolicyId"))
+    CacheBehavior.add_member(:origin_request_policy_id, Shapes::ShapeRef.new(shape: string, location_name: "OriginRequestPolicyId"))
+    CacheBehavior.add_member(:forwarded_values, Shapes::ShapeRef.new(shape: ForwardedValues, deprecated: true, location_name: "ForwardedValues"))
+    CacheBehavior.add_member(:min_ttl, Shapes::ShapeRef.new(shape: long, deprecated: true, location_name: "MinTTL"))
+    CacheBehavior.add_member(:default_ttl, Shapes::ShapeRef.new(shape: long, deprecated: true, location_name: "DefaultTTL"))
+    CacheBehavior.add_member(:max_ttl, Shapes::ShapeRef.new(shape: long, deprecated: true, location_name: "MaxTTL"))
     CacheBehavior.struct_class = Types::CacheBehavior
 
     CacheBehaviorList.member = Shapes::ShapeRef.new(shape: CacheBehavior, location_name: "CacheBehavior")
@@ -369,6 +444,49 @@ module Aws::CloudFront
     CacheBehaviors.add_member(:quantity, Shapes::ShapeRef.new(shape: integer, required: true, location_name: "Quantity"))
     CacheBehaviors.add_member(:items, Shapes::ShapeRef.new(shape: CacheBehaviorList, location_name: "Items"))
     CacheBehaviors.struct_class = Types::CacheBehaviors
+
+    CachePolicy.add_member(:id, Shapes::ShapeRef.new(shape: string, required: true, location_name: "Id"))
+    CachePolicy.add_member(:last_modified_time, Shapes::ShapeRef.new(shape: timestamp, required: true, location_name: "LastModifiedTime"))
+    CachePolicy.add_member(:cache_policy_config, Shapes::ShapeRef.new(shape: CachePolicyConfig, required: true, location_name: "CachePolicyConfig"))
+    CachePolicy.struct_class = Types::CachePolicy
+
+    CachePolicyAlreadyExists.add_member(:message, Shapes::ShapeRef.new(shape: string, location_name: "Message"))
+    CachePolicyAlreadyExists.struct_class = Types::CachePolicyAlreadyExists
+
+    CachePolicyConfig.add_member(:comment, Shapes::ShapeRef.new(shape: string, location_name: "Comment"))
+    CachePolicyConfig.add_member(:name, Shapes::ShapeRef.new(shape: string, required: true, location_name: "Name"))
+    CachePolicyConfig.add_member(:default_ttl, Shapes::ShapeRef.new(shape: long, location_name: "DefaultTTL"))
+    CachePolicyConfig.add_member(:max_ttl, Shapes::ShapeRef.new(shape: long, location_name: "MaxTTL"))
+    CachePolicyConfig.add_member(:min_ttl, Shapes::ShapeRef.new(shape: long, required: true, location_name: "MinTTL"))
+    CachePolicyConfig.add_member(:parameters_in_cache_key_and_forwarded_to_origin, Shapes::ShapeRef.new(shape: ParametersInCacheKeyAndForwardedToOrigin, location_name: "ParametersInCacheKeyAndForwardedToOrigin"))
+    CachePolicyConfig.struct_class = Types::CachePolicyConfig
+
+    CachePolicyCookiesConfig.add_member(:cookie_behavior, Shapes::ShapeRef.new(shape: CachePolicyCookieBehavior, required: true, location_name: "CookieBehavior"))
+    CachePolicyCookiesConfig.add_member(:cookies, Shapes::ShapeRef.new(shape: CookieNames, location_name: "Cookies"))
+    CachePolicyCookiesConfig.struct_class = Types::CachePolicyCookiesConfig
+
+    CachePolicyHeadersConfig.add_member(:header_behavior, Shapes::ShapeRef.new(shape: CachePolicyHeaderBehavior, required: true, location_name: "HeaderBehavior"))
+    CachePolicyHeadersConfig.add_member(:headers, Shapes::ShapeRef.new(shape: Headers, location_name: "Headers"))
+    CachePolicyHeadersConfig.struct_class = Types::CachePolicyHeadersConfig
+
+    CachePolicyInUse.add_member(:message, Shapes::ShapeRef.new(shape: string, location_name: "Message"))
+    CachePolicyInUse.struct_class = Types::CachePolicyInUse
+
+    CachePolicyList.add_member(:next_marker, Shapes::ShapeRef.new(shape: string, location_name: "NextMarker"))
+    CachePolicyList.add_member(:max_items, Shapes::ShapeRef.new(shape: integer, required: true, location_name: "MaxItems"))
+    CachePolicyList.add_member(:quantity, Shapes::ShapeRef.new(shape: integer, required: true, location_name: "Quantity"))
+    CachePolicyList.add_member(:items, Shapes::ShapeRef.new(shape: CachePolicySummaryList, location_name: "Items"))
+    CachePolicyList.struct_class = Types::CachePolicyList
+
+    CachePolicyQueryStringsConfig.add_member(:query_string_behavior, Shapes::ShapeRef.new(shape: CachePolicyQueryStringBehavior, required: true, location_name: "QueryStringBehavior"))
+    CachePolicyQueryStringsConfig.add_member(:query_strings, Shapes::ShapeRef.new(shape: QueryStringNames, location_name: "QueryStrings"))
+    CachePolicyQueryStringsConfig.struct_class = Types::CachePolicyQueryStringsConfig
+
+    CachePolicySummary.add_member(:type, Shapes::ShapeRef.new(shape: CachePolicyType, required: true, location_name: "Type"))
+    CachePolicySummary.add_member(:cache_policy, Shapes::ShapeRef.new(shape: CachePolicy, required: true, location_name: "CachePolicy"))
+    CachePolicySummary.struct_class = Types::CachePolicySummary
+
+    CachePolicySummaryList.member = Shapes::ShapeRef.new(shape: CachePolicySummary, location_name: "CachePolicySummary")
 
     CachedMethods.add_member(:quantity, Shapes::ShapeRef.new(shape: integer, required: true, location_name: "Quantity"))
     CachedMethods.add_member(:items, Shapes::ShapeRef.new(shape: MethodsList, required: true, location_name: "Items"))
@@ -432,7 +550,19 @@ module Aws::CloudFront
     CookiePreference.add_member(:whitelisted_names, Shapes::ShapeRef.new(shape: CookieNames, location_name: "WhitelistedNames"))
     CookiePreference.struct_class = Types::CookiePreference
 
-    CreateCloudFrontOriginAccessIdentityRequest.add_member(:cloud_front_origin_access_identity_config, Shapes::ShapeRef.new(shape: CloudFrontOriginAccessIdentityConfig, required: true, location_name: "CloudFrontOriginAccessIdentityConfig", metadata: {"xmlNamespace"=>{"uri"=>"http://cloudfront.amazonaws.com/doc/2019-03-26/"}}))
+    CreateCachePolicyRequest.add_member(:cache_policy_config, Shapes::ShapeRef.new(shape: CachePolicyConfig, required: true, location_name: "CachePolicyConfig", metadata: {"xmlNamespace"=>{"uri"=>"http://cloudfront.amazonaws.com/doc/2020-05-31/"}}))
+    CreateCachePolicyRequest.struct_class = Types::CreateCachePolicyRequest
+    CreateCachePolicyRequest[:payload] = :cache_policy_config
+    CreateCachePolicyRequest[:payload_member] = CreateCachePolicyRequest.member(:cache_policy_config)
+
+    CreateCachePolicyResult.add_member(:cache_policy, Shapes::ShapeRef.new(shape: CachePolicy, location_name: "CachePolicy"))
+    CreateCachePolicyResult.add_member(:location, Shapes::ShapeRef.new(shape: string, location: "header", location_name: "Location"))
+    CreateCachePolicyResult.add_member(:etag, Shapes::ShapeRef.new(shape: string, location: "header", location_name: "ETag"))
+    CreateCachePolicyResult.struct_class = Types::CreateCachePolicyResult
+    CreateCachePolicyResult[:payload] = :cache_policy
+    CreateCachePolicyResult[:payload_member] = CreateCachePolicyResult.member(:cache_policy)
+
+    CreateCloudFrontOriginAccessIdentityRequest.add_member(:cloud_front_origin_access_identity_config, Shapes::ShapeRef.new(shape: CloudFrontOriginAccessIdentityConfig, required: true, location_name: "CloudFrontOriginAccessIdentityConfig", metadata: {"xmlNamespace"=>{"uri"=>"http://cloudfront.amazonaws.com/doc/2020-05-31/"}}))
     CreateCloudFrontOriginAccessIdentityRequest.struct_class = Types::CreateCloudFrontOriginAccessIdentityRequest
     CreateCloudFrontOriginAccessIdentityRequest[:payload] = :cloud_front_origin_access_identity_config
     CreateCloudFrontOriginAccessIdentityRequest[:payload_member] = CreateCloudFrontOriginAccessIdentityRequest.member(:cloud_front_origin_access_identity_config)
@@ -444,7 +574,7 @@ module Aws::CloudFront
     CreateCloudFrontOriginAccessIdentityResult[:payload] = :cloud_front_origin_access_identity
     CreateCloudFrontOriginAccessIdentityResult[:payload_member] = CreateCloudFrontOriginAccessIdentityResult.member(:cloud_front_origin_access_identity)
 
-    CreateDistributionRequest.add_member(:distribution_config, Shapes::ShapeRef.new(shape: DistributionConfig, required: true, location_name: "DistributionConfig", metadata: {"xmlNamespace"=>{"uri"=>"http://cloudfront.amazonaws.com/doc/2019-03-26/"}}))
+    CreateDistributionRequest.add_member(:distribution_config, Shapes::ShapeRef.new(shape: DistributionConfig, required: true, location_name: "DistributionConfig", metadata: {"xmlNamespace"=>{"uri"=>"http://cloudfront.amazonaws.com/doc/2020-05-31/"}}))
     CreateDistributionRequest.struct_class = Types::CreateDistributionRequest
     CreateDistributionRequest[:payload] = :distribution_config
     CreateDistributionRequest[:payload_member] = CreateDistributionRequest.member(:distribution_config)
@@ -456,7 +586,7 @@ module Aws::CloudFront
     CreateDistributionResult[:payload] = :distribution
     CreateDistributionResult[:payload_member] = CreateDistributionResult.member(:distribution)
 
-    CreateDistributionWithTagsRequest.add_member(:distribution_config_with_tags, Shapes::ShapeRef.new(shape: DistributionConfigWithTags, required: true, location_name: "DistributionConfigWithTags", metadata: {"xmlNamespace"=>{"uri"=>"http://cloudfront.amazonaws.com/doc/2019-03-26/"}}))
+    CreateDistributionWithTagsRequest.add_member(:distribution_config_with_tags, Shapes::ShapeRef.new(shape: DistributionConfigWithTags, required: true, location_name: "DistributionConfigWithTags", metadata: {"xmlNamespace"=>{"uri"=>"http://cloudfront.amazonaws.com/doc/2020-05-31/"}}))
     CreateDistributionWithTagsRequest.struct_class = Types::CreateDistributionWithTagsRequest
     CreateDistributionWithTagsRequest[:payload] = :distribution_config_with_tags
     CreateDistributionWithTagsRequest[:payload_member] = CreateDistributionWithTagsRequest.member(:distribution_config_with_tags)
@@ -468,7 +598,7 @@ module Aws::CloudFront
     CreateDistributionWithTagsResult[:payload] = :distribution
     CreateDistributionWithTagsResult[:payload_member] = CreateDistributionWithTagsResult.member(:distribution)
 
-    CreateFieldLevelEncryptionConfigRequest.add_member(:field_level_encryption_config, Shapes::ShapeRef.new(shape: FieldLevelEncryptionConfig, required: true, location_name: "FieldLevelEncryptionConfig", metadata: {"xmlNamespace"=>{"uri"=>"http://cloudfront.amazonaws.com/doc/2019-03-26/"}}))
+    CreateFieldLevelEncryptionConfigRequest.add_member(:field_level_encryption_config, Shapes::ShapeRef.new(shape: FieldLevelEncryptionConfig, required: true, location_name: "FieldLevelEncryptionConfig", metadata: {"xmlNamespace"=>{"uri"=>"http://cloudfront.amazonaws.com/doc/2020-05-31/"}}))
     CreateFieldLevelEncryptionConfigRequest.struct_class = Types::CreateFieldLevelEncryptionConfigRequest
     CreateFieldLevelEncryptionConfigRequest[:payload] = :field_level_encryption_config
     CreateFieldLevelEncryptionConfigRequest[:payload_member] = CreateFieldLevelEncryptionConfigRequest.member(:field_level_encryption_config)
@@ -480,7 +610,7 @@ module Aws::CloudFront
     CreateFieldLevelEncryptionConfigResult[:payload] = :field_level_encryption
     CreateFieldLevelEncryptionConfigResult[:payload_member] = CreateFieldLevelEncryptionConfigResult.member(:field_level_encryption)
 
-    CreateFieldLevelEncryptionProfileRequest.add_member(:field_level_encryption_profile_config, Shapes::ShapeRef.new(shape: FieldLevelEncryptionProfileConfig, required: true, location_name: "FieldLevelEncryptionProfileConfig", metadata: {"xmlNamespace"=>{"uri"=>"http://cloudfront.amazonaws.com/doc/2019-03-26/"}}))
+    CreateFieldLevelEncryptionProfileRequest.add_member(:field_level_encryption_profile_config, Shapes::ShapeRef.new(shape: FieldLevelEncryptionProfileConfig, required: true, location_name: "FieldLevelEncryptionProfileConfig", metadata: {"xmlNamespace"=>{"uri"=>"http://cloudfront.amazonaws.com/doc/2020-05-31/"}}))
     CreateFieldLevelEncryptionProfileRequest.struct_class = Types::CreateFieldLevelEncryptionProfileRequest
     CreateFieldLevelEncryptionProfileRequest[:payload] = :field_level_encryption_profile_config
     CreateFieldLevelEncryptionProfileRequest[:payload_member] = CreateFieldLevelEncryptionProfileRequest.member(:field_level_encryption_profile_config)
@@ -493,7 +623,7 @@ module Aws::CloudFront
     CreateFieldLevelEncryptionProfileResult[:payload_member] = CreateFieldLevelEncryptionProfileResult.member(:field_level_encryption_profile)
 
     CreateInvalidationRequest.add_member(:distribution_id, Shapes::ShapeRef.new(shape: string, required: true, location: "uri", location_name: "DistributionId"))
-    CreateInvalidationRequest.add_member(:invalidation_batch, Shapes::ShapeRef.new(shape: InvalidationBatch, required: true, location_name: "InvalidationBatch", metadata: {"xmlNamespace"=>{"uri"=>"http://cloudfront.amazonaws.com/doc/2019-03-26/"}}))
+    CreateInvalidationRequest.add_member(:invalidation_batch, Shapes::ShapeRef.new(shape: InvalidationBatch, required: true, location_name: "InvalidationBatch", metadata: {"xmlNamespace"=>{"uri"=>"http://cloudfront.amazonaws.com/doc/2020-05-31/"}}))
     CreateInvalidationRequest.struct_class = Types::CreateInvalidationRequest
     CreateInvalidationRequest[:payload] = :invalidation_batch
     CreateInvalidationRequest[:payload_member] = CreateInvalidationRequest.member(:invalidation_batch)
@@ -504,7 +634,19 @@ module Aws::CloudFront
     CreateInvalidationResult[:payload] = :invalidation
     CreateInvalidationResult[:payload_member] = CreateInvalidationResult.member(:invalidation)
 
-    CreatePublicKeyRequest.add_member(:public_key_config, Shapes::ShapeRef.new(shape: PublicKeyConfig, required: true, location_name: "PublicKeyConfig", metadata: {"xmlNamespace"=>{"uri"=>"http://cloudfront.amazonaws.com/doc/2019-03-26/"}}))
+    CreateOriginRequestPolicyRequest.add_member(:origin_request_policy_config, Shapes::ShapeRef.new(shape: OriginRequestPolicyConfig, required: true, location_name: "OriginRequestPolicyConfig", metadata: {"xmlNamespace"=>{"uri"=>"http://cloudfront.amazonaws.com/doc/2020-05-31/"}}))
+    CreateOriginRequestPolicyRequest.struct_class = Types::CreateOriginRequestPolicyRequest
+    CreateOriginRequestPolicyRequest[:payload] = :origin_request_policy_config
+    CreateOriginRequestPolicyRequest[:payload_member] = CreateOriginRequestPolicyRequest.member(:origin_request_policy_config)
+
+    CreateOriginRequestPolicyResult.add_member(:origin_request_policy, Shapes::ShapeRef.new(shape: OriginRequestPolicy, location_name: "OriginRequestPolicy"))
+    CreateOriginRequestPolicyResult.add_member(:location, Shapes::ShapeRef.new(shape: string, location: "header", location_name: "Location"))
+    CreateOriginRequestPolicyResult.add_member(:etag, Shapes::ShapeRef.new(shape: string, location: "header", location_name: "ETag"))
+    CreateOriginRequestPolicyResult.struct_class = Types::CreateOriginRequestPolicyResult
+    CreateOriginRequestPolicyResult[:payload] = :origin_request_policy
+    CreateOriginRequestPolicyResult[:payload_member] = CreateOriginRequestPolicyResult.member(:origin_request_policy)
+
+    CreatePublicKeyRequest.add_member(:public_key_config, Shapes::ShapeRef.new(shape: PublicKeyConfig, required: true, location_name: "PublicKeyConfig", metadata: {"xmlNamespace"=>{"uri"=>"http://cloudfront.amazonaws.com/doc/2020-05-31/"}}))
     CreatePublicKeyRequest.struct_class = Types::CreatePublicKeyRequest
     CreatePublicKeyRequest[:payload] = :public_key_config
     CreatePublicKeyRequest[:payload_member] = CreatePublicKeyRequest.member(:public_key_config)
@@ -516,7 +658,7 @@ module Aws::CloudFront
     CreatePublicKeyResult[:payload] = :public_key
     CreatePublicKeyResult[:payload_member] = CreatePublicKeyResult.member(:public_key)
 
-    CreateStreamingDistributionRequest.add_member(:streaming_distribution_config, Shapes::ShapeRef.new(shape: StreamingDistributionConfig, required: true, location_name: "StreamingDistributionConfig", metadata: {"xmlNamespace"=>{"uri"=>"http://cloudfront.amazonaws.com/doc/2019-03-26/"}}))
+    CreateStreamingDistributionRequest.add_member(:streaming_distribution_config, Shapes::ShapeRef.new(shape: StreamingDistributionConfig, required: true, location_name: "StreamingDistributionConfig", metadata: {"xmlNamespace"=>{"uri"=>"http://cloudfront.amazonaws.com/doc/2020-05-31/"}}))
     CreateStreamingDistributionRequest.struct_class = Types::CreateStreamingDistributionRequest
     CreateStreamingDistributionRequest[:payload] = :streaming_distribution_config
     CreateStreamingDistributionRequest[:payload_member] = CreateStreamingDistributionRequest.member(:streaming_distribution_config)
@@ -528,7 +670,7 @@ module Aws::CloudFront
     CreateStreamingDistributionResult[:payload] = :streaming_distribution
     CreateStreamingDistributionResult[:payload_member] = CreateStreamingDistributionResult.member(:streaming_distribution)
 
-    CreateStreamingDistributionWithTagsRequest.add_member(:streaming_distribution_config_with_tags, Shapes::ShapeRef.new(shape: StreamingDistributionConfigWithTags, required: true, location_name: "StreamingDistributionConfigWithTags", metadata: {"xmlNamespace"=>{"uri"=>"http://cloudfront.amazonaws.com/doc/2019-03-26/"}}))
+    CreateStreamingDistributionWithTagsRequest.add_member(:streaming_distribution_config_with_tags, Shapes::ShapeRef.new(shape: StreamingDistributionConfigWithTags, required: true, location_name: "StreamingDistributionConfigWithTags", metadata: {"xmlNamespace"=>{"uri"=>"http://cloudfront.amazonaws.com/doc/2020-05-31/"}}))
     CreateStreamingDistributionWithTagsRequest.struct_class = Types::CreateStreamingDistributionWithTagsRequest
     CreateStreamingDistributionWithTagsRequest[:payload] = :streaming_distribution_config_with_tags
     CreateStreamingDistributionWithTagsRequest[:payload_member] = CreateStreamingDistributionWithTagsRequest.member(:streaming_distribution_config_with_tags)
@@ -565,18 +707,24 @@ module Aws::CloudFront
     CustomOriginConfig.struct_class = Types::CustomOriginConfig
 
     DefaultCacheBehavior.add_member(:target_origin_id, Shapes::ShapeRef.new(shape: string, required: true, location_name: "TargetOriginId"))
-    DefaultCacheBehavior.add_member(:forwarded_values, Shapes::ShapeRef.new(shape: ForwardedValues, required: true, location_name: "ForwardedValues"))
     DefaultCacheBehavior.add_member(:trusted_signers, Shapes::ShapeRef.new(shape: TrustedSigners, required: true, location_name: "TrustedSigners"))
     DefaultCacheBehavior.add_member(:viewer_protocol_policy, Shapes::ShapeRef.new(shape: ViewerProtocolPolicy, required: true, location_name: "ViewerProtocolPolicy"))
-    DefaultCacheBehavior.add_member(:min_ttl, Shapes::ShapeRef.new(shape: long, required: true, location_name: "MinTTL"))
     DefaultCacheBehavior.add_member(:allowed_methods, Shapes::ShapeRef.new(shape: AllowedMethods, location_name: "AllowedMethods"))
     DefaultCacheBehavior.add_member(:smooth_streaming, Shapes::ShapeRef.new(shape: boolean, location_name: "SmoothStreaming"))
-    DefaultCacheBehavior.add_member(:default_ttl, Shapes::ShapeRef.new(shape: long, location_name: "DefaultTTL"))
-    DefaultCacheBehavior.add_member(:max_ttl, Shapes::ShapeRef.new(shape: long, location_name: "MaxTTL"))
     DefaultCacheBehavior.add_member(:compress, Shapes::ShapeRef.new(shape: boolean, location_name: "Compress"))
     DefaultCacheBehavior.add_member(:lambda_function_associations, Shapes::ShapeRef.new(shape: LambdaFunctionAssociations, location_name: "LambdaFunctionAssociations"))
     DefaultCacheBehavior.add_member(:field_level_encryption_id, Shapes::ShapeRef.new(shape: string, location_name: "FieldLevelEncryptionId"))
+    DefaultCacheBehavior.add_member(:cache_policy_id, Shapes::ShapeRef.new(shape: string, location_name: "CachePolicyId"))
+    DefaultCacheBehavior.add_member(:origin_request_policy_id, Shapes::ShapeRef.new(shape: string, location_name: "OriginRequestPolicyId"))
+    DefaultCacheBehavior.add_member(:forwarded_values, Shapes::ShapeRef.new(shape: ForwardedValues, deprecated: true, location_name: "ForwardedValues"))
+    DefaultCacheBehavior.add_member(:min_ttl, Shapes::ShapeRef.new(shape: long, deprecated: true, location_name: "MinTTL"))
+    DefaultCacheBehavior.add_member(:default_ttl, Shapes::ShapeRef.new(shape: long, deprecated: true, location_name: "DefaultTTL"))
+    DefaultCacheBehavior.add_member(:max_ttl, Shapes::ShapeRef.new(shape: long, deprecated: true, location_name: "MaxTTL"))
     DefaultCacheBehavior.struct_class = Types::DefaultCacheBehavior
+
+    DeleteCachePolicyRequest.add_member(:id, Shapes::ShapeRef.new(shape: string, required: true, location: "uri", location_name: "Id"))
+    DeleteCachePolicyRequest.add_member(:if_match, Shapes::ShapeRef.new(shape: string, location: "header", location_name: "If-Match"))
+    DeleteCachePolicyRequest.struct_class = Types::DeleteCachePolicyRequest
 
     DeleteCloudFrontOriginAccessIdentityRequest.add_member(:id, Shapes::ShapeRef.new(shape: string, required: true, location: "uri", location_name: "Id"))
     DeleteCloudFrontOriginAccessIdentityRequest.add_member(:if_match, Shapes::ShapeRef.new(shape: string, location: "header", location_name: "If-Match"))
@@ -593,6 +741,10 @@ module Aws::CloudFront
     DeleteFieldLevelEncryptionProfileRequest.add_member(:id, Shapes::ShapeRef.new(shape: string, required: true, location: "uri", location_name: "Id"))
     DeleteFieldLevelEncryptionProfileRequest.add_member(:if_match, Shapes::ShapeRef.new(shape: string, location: "header", location_name: "If-Match"))
     DeleteFieldLevelEncryptionProfileRequest.struct_class = Types::DeleteFieldLevelEncryptionProfileRequest
+
+    DeleteOriginRequestPolicyRequest.add_member(:id, Shapes::ShapeRef.new(shape: string, required: true, location: "uri", location_name: "Id"))
+    DeleteOriginRequestPolicyRequest.add_member(:if_match, Shapes::ShapeRef.new(shape: string, location: "header", location_name: "If-Match"))
+    DeleteOriginRequestPolicyRequest.struct_class = Types::DeleteOriginRequestPolicyRequest
 
     DeletePublicKeyRequest.add_member(:id, Shapes::ShapeRef.new(shape: string, required: true, location: "uri", location_name: "Id"))
     DeletePublicKeyRequest.add_member(:if_match, Shapes::ShapeRef.new(shape: string, location: "header", location_name: "If-Match"))
@@ -638,6 +790,16 @@ module Aws::CloudFront
     DistributionConfigWithTags.add_member(:distribution_config, Shapes::ShapeRef.new(shape: DistributionConfig, required: true, location_name: "DistributionConfig"))
     DistributionConfigWithTags.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, required: true, location_name: "Tags"))
     DistributionConfigWithTags.struct_class = Types::DistributionConfigWithTags
+
+    DistributionIdList.add_member(:marker, Shapes::ShapeRef.new(shape: string, required: true, location_name: "Marker"))
+    DistributionIdList.add_member(:next_marker, Shapes::ShapeRef.new(shape: string, location_name: "NextMarker"))
+    DistributionIdList.add_member(:max_items, Shapes::ShapeRef.new(shape: integer, required: true, location_name: "MaxItems"))
+    DistributionIdList.add_member(:is_truncated, Shapes::ShapeRef.new(shape: boolean, required: true, location_name: "IsTruncated"))
+    DistributionIdList.add_member(:quantity, Shapes::ShapeRef.new(shape: integer, required: true, location_name: "Quantity"))
+    DistributionIdList.add_member(:items, Shapes::ShapeRef.new(shape: DistributionIdListSummary, location_name: "Items"))
+    DistributionIdList.struct_class = Types::DistributionIdList
+
+    DistributionIdListSummary.member = Shapes::ShapeRef.new(shape: string, location_name: "DistributionId")
 
     DistributionList.add_member(:marker, Shapes::ShapeRef.new(shape: string, required: true, location_name: "Marker"))
     DistributionList.add_member(:next_marker, Shapes::ShapeRef.new(shape: string, location_name: "NextMarker"))
@@ -769,6 +931,24 @@ module Aws::CloudFront
     GeoRestriction.add_member(:items, Shapes::ShapeRef.new(shape: LocationList, location_name: "Items"))
     GeoRestriction.struct_class = Types::GeoRestriction
 
+    GetCachePolicyConfigRequest.add_member(:id, Shapes::ShapeRef.new(shape: string, required: true, location: "uri", location_name: "Id"))
+    GetCachePolicyConfigRequest.struct_class = Types::GetCachePolicyConfigRequest
+
+    GetCachePolicyConfigResult.add_member(:cache_policy_config, Shapes::ShapeRef.new(shape: CachePolicyConfig, location_name: "CachePolicyConfig"))
+    GetCachePolicyConfigResult.add_member(:etag, Shapes::ShapeRef.new(shape: string, location: "header", location_name: "ETag"))
+    GetCachePolicyConfigResult.struct_class = Types::GetCachePolicyConfigResult
+    GetCachePolicyConfigResult[:payload] = :cache_policy_config
+    GetCachePolicyConfigResult[:payload_member] = GetCachePolicyConfigResult.member(:cache_policy_config)
+
+    GetCachePolicyRequest.add_member(:id, Shapes::ShapeRef.new(shape: string, required: true, location: "uri", location_name: "Id"))
+    GetCachePolicyRequest.struct_class = Types::GetCachePolicyRequest
+
+    GetCachePolicyResult.add_member(:cache_policy, Shapes::ShapeRef.new(shape: CachePolicy, location_name: "CachePolicy"))
+    GetCachePolicyResult.add_member(:etag, Shapes::ShapeRef.new(shape: string, location: "header", location_name: "ETag"))
+    GetCachePolicyResult.struct_class = Types::GetCachePolicyResult
+    GetCachePolicyResult[:payload] = :cache_policy
+    GetCachePolicyResult[:payload_member] = GetCachePolicyResult.member(:cache_policy)
+
     GetCloudFrontOriginAccessIdentityConfigRequest.add_member(:id, Shapes::ShapeRef.new(shape: string, required: true, location: "uri", location_name: "Id"))
     GetCloudFrontOriginAccessIdentityConfigRequest.struct_class = Types::GetCloudFrontOriginAccessIdentityConfigRequest
 
@@ -850,6 +1030,24 @@ module Aws::CloudFront
     GetInvalidationResult[:payload] = :invalidation
     GetInvalidationResult[:payload_member] = GetInvalidationResult.member(:invalidation)
 
+    GetOriginRequestPolicyConfigRequest.add_member(:id, Shapes::ShapeRef.new(shape: string, required: true, location: "uri", location_name: "Id"))
+    GetOriginRequestPolicyConfigRequest.struct_class = Types::GetOriginRequestPolicyConfigRequest
+
+    GetOriginRequestPolicyConfigResult.add_member(:origin_request_policy_config, Shapes::ShapeRef.new(shape: OriginRequestPolicyConfig, location_name: "OriginRequestPolicyConfig"))
+    GetOriginRequestPolicyConfigResult.add_member(:etag, Shapes::ShapeRef.new(shape: string, location: "header", location_name: "ETag"))
+    GetOriginRequestPolicyConfigResult.struct_class = Types::GetOriginRequestPolicyConfigResult
+    GetOriginRequestPolicyConfigResult[:payload] = :origin_request_policy_config
+    GetOriginRequestPolicyConfigResult[:payload_member] = GetOriginRequestPolicyConfigResult.member(:origin_request_policy_config)
+
+    GetOriginRequestPolicyRequest.add_member(:id, Shapes::ShapeRef.new(shape: string, required: true, location: "uri", location_name: "Id"))
+    GetOriginRequestPolicyRequest.struct_class = Types::GetOriginRequestPolicyRequest
+
+    GetOriginRequestPolicyResult.add_member(:origin_request_policy, Shapes::ShapeRef.new(shape: OriginRequestPolicy, location_name: "OriginRequestPolicy"))
+    GetOriginRequestPolicyResult.add_member(:etag, Shapes::ShapeRef.new(shape: string, location: "header", location_name: "ETag"))
+    GetOriginRequestPolicyResult.struct_class = Types::GetOriginRequestPolicyResult
+    GetOriginRequestPolicyResult[:payload] = :origin_request_policy
+    GetOriginRequestPolicyResult[:payload_member] = GetOriginRequestPolicyResult.member(:origin_request_policy)
+
     GetPublicKeyConfigRequest.add_member(:id, Shapes::ShapeRef.new(shape: string, required: true, location: "uri", location_name: "Id"))
     GetPublicKeyConfigRequest.struct_class = Types::GetPublicKeyConfigRequest
 
@@ -891,6 +1089,9 @@ module Aws::CloudFront
     Headers.add_member(:quantity, Shapes::ShapeRef.new(shape: integer, required: true, location_name: "Quantity"))
     Headers.add_member(:items, Shapes::ShapeRef.new(shape: HeaderList, location_name: "Items"))
     Headers.struct_class = Types::Headers
+
+    IllegalDelete.add_member(:message, Shapes::ShapeRef.new(shape: string, location_name: "Message"))
+    IllegalDelete.struct_class = Types::IllegalDelete
 
     IllegalFieldLevelEncryptionConfigAssociationWithCacheBehavior.add_member(:message, Shapes::ShapeRef.new(shape: string, location_name: "Message"))
     IllegalFieldLevelEncryptionConfigAssociationWithCacheBehavior.struct_class = Types::IllegalFieldLevelEncryptionConfigAssociationWithCacheBehavior
@@ -1012,6 +1213,16 @@ module Aws::CloudFront
     LambdaFunctionAssociations.add_member(:items, Shapes::ShapeRef.new(shape: LambdaFunctionAssociationList, location_name: "Items"))
     LambdaFunctionAssociations.struct_class = Types::LambdaFunctionAssociations
 
+    ListCachePoliciesRequest.add_member(:type, Shapes::ShapeRef.new(shape: CachePolicyType, location: "querystring", location_name: "Type"))
+    ListCachePoliciesRequest.add_member(:marker, Shapes::ShapeRef.new(shape: string, location: "querystring", location_name: "Marker"))
+    ListCachePoliciesRequest.add_member(:max_items, Shapes::ShapeRef.new(shape: integer, location: "querystring", location_name: "MaxItems"))
+    ListCachePoliciesRequest.struct_class = Types::ListCachePoliciesRequest
+
+    ListCachePoliciesResult.add_member(:cache_policy_list, Shapes::ShapeRef.new(shape: CachePolicyList, location_name: "CachePolicyList"))
+    ListCachePoliciesResult.struct_class = Types::ListCachePoliciesResult
+    ListCachePoliciesResult[:payload] = :cache_policy_list
+    ListCachePoliciesResult[:payload_member] = ListCachePoliciesResult.member(:cache_policy_list)
+
     ListCloudFrontOriginAccessIdentitiesRequest.add_member(:marker, Shapes::ShapeRef.new(shape: string, location: "querystring", location_name: "Marker"))
     ListCloudFrontOriginAccessIdentitiesRequest.add_member(:max_items, Shapes::ShapeRef.new(shape: integer, location: "querystring", location_name: "MaxItems"))
     ListCloudFrontOriginAccessIdentitiesRequest.struct_class = Types::ListCloudFrontOriginAccessIdentitiesRequest
@@ -1020,6 +1231,26 @@ module Aws::CloudFront
     ListCloudFrontOriginAccessIdentitiesResult.struct_class = Types::ListCloudFrontOriginAccessIdentitiesResult
     ListCloudFrontOriginAccessIdentitiesResult[:payload] = :cloud_front_origin_access_identity_list
     ListCloudFrontOriginAccessIdentitiesResult[:payload_member] = ListCloudFrontOriginAccessIdentitiesResult.member(:cloud_front_origin_access_identity_list)
+
+    ListDistributionsByCachePolicyIdRequest.add_member(:marker, Shapes::ShapeRef.new(shape: string, location: "querystring", location_name: "Marker"))
+    ListDistributionsByCachePolicyIdRequest.add_member(:max_items, Shapes::ShapeRef.new(shape: integer, location: "querystring", location_name: "MaxItems"))
+    ListDistributionsByCachePolicyIdRequest.add_member(:cache_policy_id, Shapes::ShapeRef.new(shape: string, required: true, location: "uri", location_name: "CachePolicyId"))
+    ListDistributionsByCachePolicyIdRequest.struct_class = Types::ListDistributionsByCachePolicyIdRequest
+
+    ListDistributionsByCachePolicyIdResult.add_member(:distribution_id_list, Shapes::ShapeRef.new(shape: DistributionIdList, location_name: "DistributionIdList"))
+    ListDistributionsByCachePolicyIdResult.struct_class = Types::ListDistributionsByCachePolicyIdResult
+    ListDistributionsByCachePolicyIdResult[:payload] = :distribution_id_list
+    ListDistributionsByCachePolicyIdResult[:payload_member] = ListDistributionsByCachePolicyIdResult.member(:distribution_id_list)
+
+    ListDistributionsByOriginRequestPolicyIdRequest.add_member(:marker, Shapes::ShapeRef.new(shape: string, location: "querystring", location_name: "Marker"))
+    ListDistributionsByOriginRequestPolicyIdRequest.add_member(:max_items, Shapes::ShapeRef.new(shape: integer, location: "querystring", location_name: "MaxItems"))
+    ListDistributionsByOriginRequestPolicyIdRequest.add_member(:origin_request_policy_id, Shapes::ShapeRef.new(shape: string, required: true, location: "uri", location_name: "OriginRequestPolicyId"))
+    ListDistributionsByOriginRequestPolicyIdRequest.struct_class = Types::ListDistributionsByOriginRequestPolicyIdRequest
+
+    ListDistributionsByOriginRequestPolicyIdResult.add_member(:distribution_id_list, Shapes::ShapeRef.new(shape: DistributionIdList, location_name: "DistributionIdList"))
+    ListDistributionsByOriginRequestPolicyIdResult.struct_class = Types::ListDistributionsByOriginRequestPolicyIdResult
+    ListDistributionsByOriginRequestPolicyIdResult[:payload] = :distribution_id_list
+    ListDistributionsByOriginRequestPolicyIdResult[:payload_member] = ListDistributionsByOriginRequestPolicyIdResult.member(:distribution_id_list)
 
     ListDistributionsByWebACLIdRequest.add_member(:marker, Shapes::ShapeRef.new(shape: string, location: "querystring", location_name: "Marker"))
     ListDistributionsByWebACLIdRequest.add_member(:max_items, Shapes::ShapeRef.new(shape: integer, location: "querystring", location_name: "MaxItems"))
@@ -1068,6 +1299,16 @@ module Aws::CloudFront
     ListInvalidationsResult[:payload] = :invalidation_list
     ListInvalidationsResult[:payload_member] = ListInvalidationsResult.member(:invalidation_list)
 
+    ListOriginRequestPoliciesRequest.add_member(:type, Shapes::ShapeRef.new(shape: OriginRequestPolicyType, location: "querystring", location_name: "Type"))
+    ListOriginRequestPoliciesRequest.add_member(:marker, Shapes::ShapeRef.new(shape: string, location: "querystring", location_name: "Marker"))
+    ListOriginRequestPoliciesRequest.add_member(:max_items, Shapes::ShapeRef.new(shape: integer, location: "querystring", location_name: "MaxItems"))
+    ListOriginRequestPoliciesRequest.struct_class = Types::ListOriginRequestPoliciesRequest
+
+    ListOriginRequestPoliciesResult.add_member(:origin_request_policy_list, Shapes::ShapeRef.new(shape: OriginRequestPolicyList, location_name: "OriginRequestPolicyList"))
+    ListOriginRequestPoliciesResult.struct_class = Types::ListOriginRequestPoliciesResult
+    ListOriginRequestPoliciesResult[:payload] = :origin_request_policy_list
+    ListOriginRequestPoliciesResult[:payload_member] = ListOriginRequestPoliciesResult.member(:origin_request_policy_list)
+
     ListPublicKeysRequest.add_member(:marker, Shapes::ShapeRef.new(shape: string, location: "querystring", location_name: "Marker"))
     ListPublicKeysRequest.add_member(:max_items, Shapes::ShapeRef.new(shape: integer, location: "querystring", location_name: "MaxItems"))
     ListPublicKeysRequest.struct_class = Types::ListPublicKeysRequest
@@ -1107,6 +1348,9 @@ module Aws::CloudFront
     MissingBody.add_member(:message, Shapes::ShapeRef.new(shape: string, location_name: "Message"))
     MissingBody.struct_class = Types::MissingBody
 
+    NoSuchCachePolicy.add_member(:message, Shapes::ShapeRef.new(shape: string, location_name: "Message"))
+    NoSuchCachePolicy.struct_class = Types::NoSuchCachePolicy
+
     NoSuchCloudFrontOriginAccessIdentity.add_member(:message, Shapes::ShapeRef.new(shape: string, location_name: "Message"))
     NoSuchCloudFrontOriginAccessIdentity.struct_class = Types::NoSuchCloudFrontOriginAccessIdentity
 
@@ -1124,6 +1368,9 @@ module Aws::CloudFront
 
     NoSuchOrigin.add_member(:message, Shapes::ShapeRef.new(shape: string, location_name: "Message"))
     NoSuchOrigin.struct_class = Types::NoSuchOrigin
+
+    NoSuchOriginRequestPolicy.add_member(:message, Shapes::ShapeRef.new(shape: string, location_name: "Message"))
+    NoSuchOriginRequestPolicy.struct_class = Types::NoSuchOriginRequestPolicy
 
     NoSuchPublicKey.add_member(:message, Shapes::ShapeRef.new(shape: string, location_name: "Message"))
     NoSuchPublicKey.struct_class = Types::NoSuchPublicKey
@@ -1175,6 +1422,48 @@ module Aws::CloudFront
 
     OriginList.member = Shapes::ShapeRef.new(shape: Origin, location_name: "Origin")
 
+    OriginRequestPolicy.add_member(:id, Shapes::ShapeRef.new(shape: string, required: true, location_name: "Id"))
+    OriginRequestPolicy.add_member(:last_modified_time, Shapes::ShapeRef.new(shape: timestamp, required: true, location_name: "LastModifiedTime"))
+    OriginRequestPolicy.add_member(:origin_request_policy_config, Shapes::ShapeRef.new(shape: OriginRequestPolicyConfig, required: true, location_name: "OriginRequestPolicyConfig"))
+    OriginRequestPolicy.struct_class = Types::OriginRequestPolicy
+
+    OriginRequestPolicyAlreadyExists.add_member(:message, Shapes::ShapeRef.new(shape: string, location_name: "Message"))
+    OriginRequestPolicyAlreadyExists.struct_class = Types::OriginRequestPolicyAlreadyExists
+
+    OriginRequestPolicyConfig.add_member(:comment, Shapes::ShapeRef.new(shape: string, location_name: "Comment"))
+    OriginRequestPolicyConfig.add_member(:name, Shapes::ShapeRef.new(shape: string, required: true, location_name: "Name"))
+    OriginRequestPolicyConfig.add_member(:headers_config, Shapes::ShapeRef.new(shape: OriginRequestPolicyHeadersConfig, required: true, location_name: "HeadersConfig"))
+    OriginRequestPolicyConfig.add_member(:cookies_config, Shapes::ShapeRef.new(shape: OriginRequestPolicyCookiesConfig, required: true, location_name: "CookiesConfig"))
+    OriginRequestPolicyConfig.add_member(:query_strings_config, Shapes::ShapeRef.new(shape: OriginRequestPolicyQueryStringsConfig, required: true, location_name: "QueryStringsConfig"))
+    OriginRequestPolicyConfig.struct_class = Types::OriginRequestPolicyConfig
+
+    OriginRequestPolicyCookiesConfig.add_member(:cookie_behavior, Shapes::ShapeRef.new(shape: OriginRequestPolicyCookieBehavior, required: true, location_name: "CookieBehavior"))
+    OriginRequestPolicyCookiesConfig.add_member(:cookies, Shapes::ShapeRef.new(shape: CookieNames, location_name: "Cookies"))
+    OriginRequestPolicyCookiesConfig.struct_class = Types::OriginRequestPolicyCookiesConfig
+
+    OriginRequestPolicyHeadersConfig.add_member(:header_behavior, Shapes::ShapeRef.new(shape: OriginRequestPolicyHeaderBehavior, required: true, location_name: "HeaderBehavior"))
+    OriginRequestPolicyHeadersConfig.add_member(:headers, Shapes::ShapeRef.new(shape: Headers, location_name: "Headers"))
+    OriginRequestPolicyHeadersConfig.struct_class = Types::OriginRequestPolicyHeadersConfig
+
+    OriginRequestPolicyInUse.add_member(:message, Shapes::ShapeRef.new(shape: string, location_name: "Message"))
+    OriginRequestPolicyInUse.struct_class = Types::OriginRequestPolicyInUse
+
+    OriginRequestPolicyList.add_member(:next_marker, Shapes::ShapeRef.new(shape: string, location_name: "NextMarker"))
+    OriginRequestPolicyList.add_member(:max_items, Shapes::ShapeRef.new(shape: integer, required: true, location_name: "MaxItems"))
+    OriginRequestPolicyList.add_member(:quantity, Shapes::ShapeRef.new(shape: integer, required: true, location_name: "Quantity"))
+    OriginRequestPolicyList.add_member(:items, Shapes::ShapeRef.new(shape: OriginRequestPolicySummaryList, location_name: "Items"))
+    OriginRequestPolicyList.struct_class = Types::OriginRequestPolicyList
+
+    OriginRequestPolicyQueryStringsConfig.add_member(:query_string_behavior, Shapes::ShapeRef.new(shape: OriginRequestPolicyQueryStringBehavior, required: true, location_name: "QueryStringBehavior"))
+    OriginRequestPolicyQueryStringsConfig.add_member(:query_strings, Shapes::ShapeRef.new(shape: QueryStringNames, location_name: "QueryStrings"))
+    OriginRequestPolicyQueryStringsConfig.struct_class = Types::OriginRequestPolicyQueryStringsConfig
+
+    OriginRequestPolicySummary.add_member(:type, Shapes::ShapeRef.new(shape: OriginRequestPolicyType, required: true, location_name: "Type"))
+    OriginRequestPolicySummary.add_member(:origin_request_policy, Shapes::ShapeRef.new(shape: OriginRequestPolicy, required: true, location_name: "OriginRequestPolicy"))
+    OriginRequestPolicySummary.struct_class = Types::OriginRequestPolicySummary
+
+    OriginRequestPolicySummaryList.member = Shapes::ShapeRef.new(shape: OriginRequestPolicySummary, location_name: "OriginRequestPolicySummary")
+
     OriginSslProtocols.add_member(:quantity, Shapes::ShapeRef.new(shape: integer, required: true, location_name: "Quantity"))
     OriginSslProtocols.add_member(:items, Shapes::ShapeRef.new(shape: SslProtocolsList, required: true, location_name: "Items"))
     OriginSslProtocols.struct_class = Types::OriginSslProtocols
@@ -1182,6 +1471,12 @@ module Aws::CloudFront
     Origins.add_member(:quantity, Shapes::ShapeRef.new(shape: integer, required: true, location_name: "Quantity"))
     Origins.add_member(:items, Shapes::ShapeRef.new(shape: OriginList, required: true, location_name: "Items"))
     Origins.struct_class = Types::Origins
+
+    ParametersInCacheKeyAndForwardedToOrigin.add_member(:enable_accept_encoding_gzip, Shapes::ShapeRef.new(shape: boolean, required: true, location_name: "EnableAcceptEncodingGzip"))
+    ParametersInCacheKeyAndForwardedToOrigin.add_member(:headers_config, Shapes::ShapeRef.new(shape: CachePolicyHeadersConfig, required: true, location_name: "HeadersConfig"))
+    ParametersInCacheKeyAndForwardedToOrigin.add_member(:cookies_config, Shapes::ShapeRef.new(shape: CachePolicyCookiesConfig, required: true, location_name: "CookiesConfig"))
+    ParametersInCacheKeyAndForwardedToOrigin.add_member(:query_strings_config, Shapes::ShapeRef.new(shape: CachePolicyQueryStringsConfig, required: true, location_name: "QueryStringsConfig"))
+    ParametersInCacheKeyAndForwardedToOrigin.struct_class = Types::ParametersInCacheKeyAndForwardedToOrigin
 
     PathList.member = Shapes::ShapeRef.new(shape: string, location_name: "Path")
 
@@ -1246,6 +1541,12 @@ module Aws::CloudFront
     QueryStringCacheKeys.struct_class = Types::QueryStringCacheKeys
 
     QueryStringCacheKeysList.member = Shapes::ShapeRef.new(shape: string, location_name: "Name")
+
+    QueryStringNames.add_member(:quantity, Shapes::ShapeRef.new(shape: integer, required: true, location_name: "Quantity"))
+    QueryStringNames.add_member(:items, Shapes::ShapeRef.new(shape: QueryStringNamesList, location_name: "Items"))
+    QueryStringNames.struct_class = Types::QueryStringNames
+
+    QueryStringNamesList.member = Shapes::ShapeRef.new(shape: string, location_name: "Name")
 
     Restrictions.add_member(:geo_restriction, Shapes::ShapeRef.new(shape: GeoRestriction, required: true, location_name: "GeoRestriction"))
     Restrictions.struct_class = Types::Restrictions
@@ -1340,7 +1641,7 @@ module Aws::CloudFront
     TagList.member = Shapes::ShapeRef.new(shape: Tag, location_name: "Tag")
 
     TagResourceRequest.add_member(:resource, Shapes::ShapeRef.new(shape: ResourceARN, required: true, location: "querystring", location_name: "Resource"))
-    TagResourceRequest.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, required: true, location_name: "Tags", metadata: {"xmlNamespace"=>{"uri"=>"http://cloudfront.amazonaws.com/doc/2019-03-26/"}}))
+    TagResourceRequest.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, required: true, location_name: "Tags", metadata: {"xmlNamespace"=>{"uri"=>"http://cloudfront.amazonaws.com/doc/2020-05-31/"}}))
     TagResourceRequest.struct_class = Types::TagResourceRequest
     TagResourceRequest[:payload] = :tags
     TagResourceRequest[:payload_member] = TagResourceRequest.member(:tags)
@@ -1351,6 +1652,9 @@ module Aws::CloudFront
     TooManyCacheBehaviors.add_member(:message, Shapes::ShapeRef.new(shape: string, location_name: "Message"))
     TooManyCacheBehaviors.struct_class = Types::TooManyCacheBehaviors
 
+    TooManyCachePolicies.add_member(:message, Shapes::ShapeRef.new(shape: string, location_name: "Message"))
+    TooManyCachePolicies.struct_class = Types::TooManyCachePolicies
+
     TooManyCertificates.add_member(:message, Shapes::ShapeRef.new(shape: string, location_name: "Message"))
     TooManyCertificates.struct_class = Types::TooManyCertificates
 
@@ -1360,17 +1664,32 @@ module Aws::CloudFront
     TooManyCookieNamesInWhiteList.add_member(:message, Shapes::ShapeRef.new(shape: string, location_name: "Message"))
     TooManyCookieNamesInWhiteList.struct_class = Types::TooManyCookieNamesInWhiteList
 
+    TooManyCookiesInCachePolicy.add_member(:message, Shapes::ShapeRef.new(shape: string, location_name: "Message"))
+    TooManyCookiesInCachePolicy.struct_class = Types::TooManyCookiesInCachePolicy
+
+    TooManyCookiesInOriginRequestPolicy.add_member(:message, Shapes::ShapeRef.new(shape: string, location_name: "Message"))
+    TooManyCookiesInOriginRequestPolicy.struct_class = Types::TooManyCookiesInOriginRequestPolicy
+
     TooManyDistributionCNAMEs.add_member(:message, Shapes::ShapeRef.new(shape: string, location_name: "Message"))
     TooManyDistributionCNAMEs.struct_class = Types::TooManyDistributionCNAMEs
 
     TooManyDistributions.add_member(:message, Shapes::ShapeRef.new(shape: string, location_name: "Message"))
     TooManyDistributions.struct_class = Types::TooManyDistributions
 
+    TooManyDistributionsAssociatedToCachePolicy.add_member(:message, Shapes::ShapeRef.new(shape: string, location_name: "Message"))
+    TooManyDistributionsAssociatedToCachePolicy.struct_class = Types::TooManyDistributionsAssociatedToCachePolicy
+
     TooManyDistributionsAssociatedToFieldLevelEncryptionConfig.add_member(:message, Shapes::ShapeRef.new(shape: string, location_name: "Message"))
     TooManyDistributionsAssociatedToFieldLevelEncryptionConfig.struct_class = Types::TooManyDistributionsAssociatedToFieldLevelEncryptionConfig
 
+    TooManyDistributionsAssociatedToOriginRequestPolicy.add_member(:message, Shapes::ShapeRef.new(shape: string, location_name: "Message"))
+    TooManyDistributionsAssociatedToOriginRequestPolicy.struct_class = Types::TooManyDistributionsAssociatedToOriginRequestPolicy
+
     TooManyDistributionsWithLambdaAssociations.add_member(:message, Shapes::ShapeRef.new(shape: string, location_name: "Message"))
     TooManyDistributionsWithLambdaAssociations.struct_class = Types::TooManyDistributionsWithLambdaAssociations
+
+    TooManyDistributionsWithSingleFunctionARN.add_member(:message, Shapes::ShapeRef.new(shape: string, location_name: "Message"))
+    TooManyDistributionsWithSingleFunctionARN.struct_class = Types::TooManyDistributionsWithSingleFunctionARN
 
     TooManyFieldLevelEncryptionConfigs.add_member(:message, Shapes::ShapeRef.new(shape: string, location_name: "Message"))
     TooManyFieldLevelEncryptionConfigs.struct_class = Types::TooManyFieldLevelEncryptionConfigs
@@ -1390,8 +1709,14 @@ module Aws::CloudFront
     TooManyFieldLevelEncryptionQueryArgProfiles.add_member(:message, Shapes::ShapeRef.new(shape: string, location_name: "Message"))
     TooManyFieldLevelEncryptionQueryArgProfiles.struct_class = Types::TooManyFieldLevelEncryptionQueryArgProfiles
 
+    TooManyHeadersInCachePolicy.add_member(:message, Shapes::ShapeRef.new(shape: string, location_name: "Message"))
+    TooManyHeadersInCachePolicy.struct_class = Types::TooManyHeadersInCachePolicy
+
     TooManyHeadersInForwardedValues.add_member(:message, Shapes::ShapeRef.new(shape: string, location_name: "Message"))
     TooManyHeadersInForwardedValues.struct_class = Types::TooManyHeadersInForwardedValues
+
+    TooManyHeadersInOriginRequestPolicy.add_member(:message, Shapes::ShapeRef.new(shape: string, location_name: "Message"))
+    TooManyHeadersInOriginRequestPolicy.struct_class = Types::TooManyHeadersInOriginRequestPolicy
 
     TooManyInvalidationsInProgress.add_member(:message, Shapes::ShapeRef.new(shape: string, location_name: "Message"))
     TooManyInvalidationsInProgress.struct_class = Types::TooManyInvalidationsInProgress
@@ -1405,6 +1730,9 @@ module Aws::CloudFront
     TooManyOriginGroupsPerDistribution.add_member(:message, Shapes::ShapeRef.new(shape: string, location_name: "Message"))
     TooManyOriginGroupsPerDistribution.struct_class = Types::TooManyOriginGroupsPerDistribution
 
+    TooManyOriginRequestPolicies.add_member(:message, Shapes::ShapeRef.new(shape: string, location_name: "Message"))
+    TooManyOriginRequestPolicies.struct_class = Types::TooManyOriginRequestPolicies
+
     TooManyOrigins.add_member(:message, Shapes::ShapeRef.new(shape: string, location_name: "Message"))
     TooManyOrigins.struct_class = Types::TooManyOrigins
 
@@ -1413,6 +1741,12 @@ module Aws::CloudFront
 
     TooManyQueryStringParameters.add_member(:message, Shapes::ShapeRef.new(shape: string, location_name: "Message"))
     TooManyQueryStringParameters.struct_class = Types::TooManyQueryStringParameters
+
+    TooManyQueryStringsInCachePolicy.add_member(:message, Shapes::ShapeRef.new(shape: string, location_name: "Message"))
+    TooManyQueryStringsInCachePolicy.struct_class = Types::TooManyQueryStringsInCachePolicy
+
+    TooManyQueryStringsInOriginRequestPolicy.add_member(:message, Shapes::ShapeRef.new(shape: string, location_name: "Message"))
+    TooManyQueryStringsInOriginRequestPolicy.struct_class = Types::TooManyQueryStringsInOriginRequestPolicy
 
     TooManyStreamingDistributionCNAMEs.add_member(:message, Shapes::ShapeRef.new(shape: string, location_name: "Message"))
     TooManyStreamingDistributionCNAMEs.struct_class = Types::TooManyStreamingDistributionCNAMEs
@@ -1432,12 +1766,25 @@ module Aws::CloudFront
     TrustedSigners.struct_class = Types::TrustedSigners
 
     UntagResourceRequest.add_member(:resource, Shapes::ShapeRef.new(shape: ResourceARN, required: true, location: "querystring", location_name: "Resource"))
-    UntagResourceRequest.add_member(:tag_keys, Shapes::ShapeRef.new(shape: TagKeys, required: true, location_name: "TagKeys", metadata: {"xmlNamespace"=>{"uri"=>"http://cloudfront.amazonaws.com/doc/2019-03-26/"}}))
+    UntagResourceRequest.add_member(:tag_keys, Shapes::ShapeRef.new(shape: TagKeys, required: true, location_name: "TagKeys", metadata: {"xmlNamespace"=>{"uri"=>"http://cloudfront.amazonaws.com/doc/2020-05-31/"}}))
     UntagResourceRequest.struct_class = Types::UntagResourceRequest
     UntagResourceRequest[:payload] = :tag_keys
     UntagResourceRequest[:payload_member] = UntagResourceRequest.member(:tag_keys)
 
-    UpdateCloudFrontOriginAccessIdentityRequest.add_member(:cloud_front_origin_access_identity_config, Shapes::ShapeRef.new(shape: CloudFrontOriginAccessIdentityConfig, required: true, location_name: "CloudFrontOriginAccessIdentityConfig", metadata: {"xmlNamespace"=>{"uri"=>"http://cloudfront.amazonaws.com/doc/2019-03-26/"}}))
+    UpdateCachePolicyRequest.add_member(:cache_policy_config, Shapes::ShapeRef.new(shape: CachePolicyConfig, required: true, location_name: "CachePolicyConfig", metadata: {"xmlNamespace"=>{"uri"=>"http://cloudfront.amazonaws.com/doc/2020-05-31/"}}))
+    UpdateCachePolicyRequest.add_member(:id, Shapes::ShapeRef.new(shape: string, required: true, location: "uri", location_name: "Id"))
+    UpdateCachePolicyRequest.add_member(:if_match, Shapes::ShapeRef.new(shape: string, location: "header", location_name: "If-Match"))
+    UpdateCachePolicyRequest.struct_class = Types::UpdateCachePolicyRequest
+    UpdateCachePolicyRequest[:payload] = :cache_policy_config
+    UpdateCachePolicyRequest[:payload_member] = UpdateCachePolicyRequest.member(:cache_policy_config)
+
+    UpdateCachePolicyResult.add_member(:cache_policy, Shapes::ShapeRef.new(shape: CachePolicy, location_name: "CachePolicy"))
+    UpdateCachePolicyResult.add_member(:etag, Shapes::ShapeRef.new(shape: string, location: "header", location_name: "ETag"))
+    UpdateCachePolicyResult.struct_class = Types::UpdateCachePolicyResult
+    UpdateCachePolicyResult[:payload] = :cache_policy
+    UpdateCachePolicyResult[:payload_member] = UpdateCachePolicyResult.member(:cache_policy)
+
+    UpdateCloudFrontOriginAccessIdentityRequest.add_member(:cloud_front_origin_access_identity_config, Shapes::ShapeRef.new(shape: CloudFrontOriginAccessIdentityConfig, required: true, location_name: "CloudFrontOriginAccessIdentityConfig", metadata: {"xmlNamespace"=>{"uri"=>"http://cloudfront.amazonaws.com/doc/2020-05-31/"}}))
     UpdateCloudFrontOriginAccessIdentityRequest.add_member(:id, Shapes::ShapeRef.new(shape: string, required: true, location: "uri", location_name: "Id"))
     UpdateCloudFrontOriginAccessIdentityRequest.add_member(:if_match, Shapes::ShapeRef.new(shape: string, location: "header", location_name: "If-Match"))
     UpdateCloudFrontOriginAccessIdentityRequest.struct_class = Types::UpdateCloudFrontOriginAccessIdentityRequest
@@ -1450,7 +1797,7 @@ module Aws::CloudFront
     UpdateCloudFrontOriginAccessIdentityResult[:payload] = :cloud_front_origin_access_identity
     UpdateCloudFrontOriginAccessIdentityResult[:payload_member] = UpdateCloudFrontOriginAccessIdentityResult.member(:cloud_front_origin_access_identity)
 
-    UpdateDistributionRequest.add_member(:distribution_config, Shapes::ShapeRef.new(shape: DistributionConfig, required: true, location_name: "DistributionConfig", metadata: {"xmlNamespace"=>{"uri"=>"http://cloudfront.amazonaws.com/doc/2019-03-26/"}}))
+    UpdateDistributionRequest.add_member(:distribution_config, Shapes::ShapeRef.new(shape: DistributionConfig, required: true, location_name: "DistributionConfig", metadata: {"xmlNamespace"=>{"uri"=>"http://cloudfront.amazonaws.com/doc/2020-05-31/"}}))
     UpdateDistributionRequest.add_member(:id, Shapes::ShapeRef.new(shape: string, required: true, location: "uri", location_name: "Id"))
     UpdateDistributionRequest.add_member(:if_match, Shapes::ShapeRef.new(shape: string, location: "header", location_name: "If-Match"))
     UpdateDistributionRequest.struct_class = Types::UpdateDistributionRequest
@@ -1463,7 +1810,7 @@ module Aws::CloudFront
     UpdateDistributionResult[:payload] = :distribution
     UpdateDistributionResult[:payload_member] = UpdateDistributionResult.member(:distribution)
 
-    UpdateFieldLevelEncryptionConfigRequest.add_member(:field_level_encryption_config, Shapes::ShapeRef.new(shape: FieldLevelEncryptionConfig, required: true, location_name: "FieldLevelEncryptionConfig", metadata: {"xmlNamespace"=>{"uri"=>"http://cloudfront.amazonaws.com/doc/2019-03-26/"}}))
+    UpdateFieldLevelEncryptionConfigRequest.add_member(:field_level_encryption_config, Shapes::ShapeRef.new(shape: FieldLevelEncryptionConfig, required: true, location_name: "FieldLevelEncryptionConfig", metadata: {"xmlNamespace"=>{"uri"=>"http://cloudfront.amazonaws.com/doc/2020-05-31/"}}))
     UpdateFieldLevelEncryptionConfigRequest.add_member(:id, Shapes::ShapeRef.new(shape: string, required: true, location: "uri", location_name: "Id"))
     UpdateFieldLevelEncryptionConfigRequest.add_member(:if_match, Shapes::ShapeRef.new(shape: string, location: "header", location_name: "If-Match"))
     UpdateFieldLevelEncryptionConfigRequest.struct_class = Types::UpdateFieldLevelEncryptionConfigRequest
@@ -1476,7 +1823,7 @@ module Aws::CloudFront
     UpdateFieldLevelEncryptionConfigResult[:payload] = :field_level_encryption
     UpdateFieldLevelEncryptionConfigResult[:payload_member] = UpdateFieldLevelEncryptionConfigResult.member(:field_level_encryption)
 
-    UpdateFieldLevelEncryptionProfileRequest.add_member(:field_level_encryption_profile_config, Shapes::ShapeRef.new(shape: FieldLevelEncryptionProfileConfig, required: true, location_name: "FieldLevelEncryptionProfileConfig", metadata: {"xmlNamespace"=>{"uri"=>"http://cloudfront.amazonaws.com/doc/2019-03-26/"}}))
+    UpdateFieldLevelEncryptionProfileRequest.add_member(:field_level_encryption_profile_config, Shapes::ShapeRef.new(shape: FieldLevelEncryptionProfileConfig, required: true, location_name: "FieldLevelEncryptionProfileConfig", metadata: {"xmlNamespace"=>{"uri"=>"http://cloudfront.amazonaws.com/doc/2020-05-31/"}}))
     UpdateFieldLevelEncryptionProfileRequest.add_member(:id, Shapes::ShapeRef.new(shape: string, required: true, location: "uri", location_name: "Id"))
     UpdateFieldLevelEncryptionProfileRequest.add_member(:if_match, Shapes::ShapeRef.new(shape: string, location: "header", location_name: "If-Match"))
     UpdateFieldLevelEncryptionProfileRequest.struct_class = Types::UpdateFieldLevelEncryptionProfileRequest
@@ -1489,7 +1836,20 @@ module Aws::CloudFront
     UpdateFieldLevelEncryptionProfileResult[:payload] = :field_level_encryption_profile
     UpdateFieldLevelEncryptionProfileResult[:payload_member] = UpdateFieldLevelEncryptionProfileResult.member(:field_level_encryption_profile)
 
-    UpdatePublicKeyRequest.add_member(:public_key_config, Shapes::ShapeRef.new(shape: PublicKeyConfig, required: true, location_name: "PublicKeyConfig", metadata: {"xmlNamespace"=>{"uri"=>"http://cloudfront.amazonaws.com/doc/2019-03-26/"}}))
+    UpdateOriginRequestPolicyRequest.add_member(:origin_request_policy_config, Shapes::ShapeRef.new(shape: OriginRequestPolicyConfig, required: true, location_name: "OriginRequestPolicyConfig", metadata: {"xmlNamespace"=>{"uri"=>"http://cloudfront.amazonaws.com/doc/2020-05-31/"}}))
+    UpdateOriginRequestPolicyRequest.add_member(:id, Shapes::ShapeRef.new(shape: string, required: true, location: "uri", location_name: "Id"))
+    UpdateOriginRequestPolicyRequest.add_member(:if_match, Shapes::ShapeRef.new(shape: string, location: "header", location_name: "If-Match"))
+    UpdateOriginRequestPolicyRequest.struct_class = Types::UpdateOriginRequestPolicyRequest
+    UpdateOriginRequestPolicyRequest[:payload] = :origin_request_policy_config
+    UpdateOriginRequestPolicyRequest[:payload_member] = UpdateOriginRequestPolicyRequest.member(:origin_request_policy_config)
+
+    UpdateOriginRequestPolicyResult.add_member(:origin_request_policy, Shapes::ShapeRef.new(shape: OriginRequestPolicy, location_name: "OriginRequestPolicy"))
+    UpdateOriginRequestPolicyResult.add_member(:etag, Shapes::ShapeRef.new(shape: string, location: "header", location_name: "ETag"))
+    UpdateOriginRequestPolicyResult.struct_class = Types::UpdateOriginRequestPolicyResult
+    UpdateOriginRequestPolicyResult[:payload] = :origin_request_policy
+    UpdateOriginRequestPolicyResult[:payload_member] = UpdateOriginRequestPolicyResult.member(:origin_request_policy)
+
+    UpdatePublicKeyRequest.add_member(:public_key_config, Shapes::ShapeRef.new(shape: PublicKeyConfig, required: true, location_name: "PublicKeyConfig", metadata: {"xmlNamespace"=>{"uri"=>"http://cloudfront.amazonaws.com/doc/2020-05-31/"}}))
     UpdatePublicKeyRequest.add_member(:id, Shapes::ShapeRef.new(shape: string, required: true, location: "uri", location_name: "Id"))
     UpdatePublicKeyRequest.add_member(:if_match, Shapes::ShapeRef.new(shape: string, location: "header", location_name: "If-Match"))
     UpdatePublicKeyRequest.struct_class = Types::UpdatePublicKeyRequest
@@ -1502,7 +1862,7 @@ module Aws::CloudFront
     UpdatePublicKeyResult[:payload] = :public_key
     UpdatePublicKeyResult[:payload_member] = UpdatePublicKeyResult.member(:public_key)
 
-    UpdateStreamingDistributionRequest.add_member(:streaming_distribution_config, Shapes::ShapeRef.new(shape: StreamingDistributionConfig, required: true, location_name: "StreamingDistributionConfig", metadata: {"xmlNamespace"=>{"uri"=>"http://cloudfront.amazonaws.com/doc/2019-03-26/"}}))
+    UpdateStreamingDistributionRequest.add_member(:streaming_distribution_config, Shapes::ShapeRef.new(shape: StreamingDistributionConfig, required: true, location_name: "StreamingDistributionConfig", metadata: {"xmlNamespace"=>{"uri"=>"http://cloudfront.amazonaws.com/doc/2020-05-31/"}}))
     UpdateStreamingDistributionRequest.add_member(:id, Shapes::ShapeRef.new(shape: string, required: true, location: "uri", location_name: "Id"))
     UpdateStreamingDistributionRequest.add_member(:if_match, Shapes::ShapeRef.new(shape: string, location: "header", location_name: "If-Match"))
     UpdateStreamingDistributionRequest.struct_class = Types::UpdateStreamingDistributionRequest
@@ -1528,10 +1888,10 @@ module Aws::CloudFront
     # @api private
     API = Seahorse::Model::Api.new.tap do |api|
 
-      api.version = "2019-03-26"
+      api.version = "2020-05-31"
 
       api.metadata = {
-        "apiVersion" => "2019-03-26",
+        "apiVersion" => "2020-05-31",
         "endpointPrefix" => "cloudfront",
         "globalEndpoint" => "cloudfront.amazonaws.com",
         "protocol" => "rest-xml",
@@ -1539,13 +1899,29 @@ module Aws::CloudFront
         "serviceFullName" => "Amazon CloudFront",
         "serviceId" => "CloudFront",
         "signatureVersion" => "v4",
-        "uid" => "cloudfront-2019-03-26",
+        "uid" => "cloudfront-2020-05-31",
       }
 
-      api.add_operation(:create_cloud_front_origin_access_identity, Seahorse::Model::Operation.new.tap do |o|
-        o.name = "CreateCloudFrontOriginAccessIdentity2019_03_26"
+      api.add_operation(:create_cache_policy, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "CreateCachePolicy2020_05_31"
         o.http_method = "POST"
-        o.http_request_uri = "/2019-03-26/origin-access-identity/cloudfront"
+        o.http_request_uri = "/2020-05-31/cache-policy"
+        o.input = Shapes::ShapeRef.new(shape: CreateCachePolicyRequest)
+        o.output = Shapes::ShapeRef.new(shape: CreateCachePolicyResult)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDenied)
+        o.errors << Shapes::ShapeRef.new(shape: InconsistentQuantities)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidArgument)
+        o.errors << Shapes::ShapeRef.new(shape: CachePolicyAlreadyExists)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyCachePolicies)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyHeadersInCachePolicy)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyCookiesInCachePolicy)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyQueryStringsInCachePolicy)
+      end)
+
+      api.add_operation(:create_cloud_front_origin_access_identity, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "CreateCloudFrontOriginAccessIdentity2020_05_31"
+        o.http_method = "POST"
+        o.http_request_uri = "/2020-05-31/origin-access-identity/cloudfront"
         o.input = Shapes::ShapeRef.new(shape: CreateCloudFrontOriginAccessIdentityRequest)
         o.output = Shapes::ShapeRef.new(shape: CreateCloudFrontOriginAccessIdentityResult)
         o.errors << Shapes::ShapeRef.new(shape: CloudFrontOriginAccessIdentityAlreadyExists)
@@ -1556,9 +1932,9 @@ module Aws::CloudFront
       end)
 
       api.add_operation(:create_distribution, Seahorse::Model::Operation.new.tap do |o|
-        o.name = "CreateDistribution2019_03_26"
+        o.name = "CreateDistribution2020_05_31"
         o.http_method = "POST"
-        o.http_request_uri = "/2019-03-26/distribution"
+        o.http_request_uri = "/2020-05-31/distribution"
         o.input = Shapes::ShapeRef.new(shape: CreateDistributionRequest)
         o.output = Shapes::ShapeRef.new(shape: CreateDistributionResult)
         o.errors << Shapes::ShapeRef.new(shape: CNAMEAlreadyExists)
@@ -1598,6 +1974,7 @@ module Aws::CloudFront
         o.errors << Shapes::ShapeRef.new(shape: TooManyQueryStringParameters)
         o.errors << Shapes::ShapeRef.new(shape: InvalidQueryStringParameters)
         o.errors << Shapes::ShapeRef.new(shape: TooManyDistributionsWithLambdaAssociations)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyDistributionsWithSingleFunctionARN)
         o.errors << Shapes::ShapeRef.new(shape: TooManyLambdaFunctionAssociations)
         o.errors << Shapes::ShapeRef.new(shape: InvalidLambdaFunctionAssociation)
         o.errors << Shapes::ShapeRef.new(shape: InvalidOriginReadTimeout)
@@ -1605,12 +1982,16 @@ module Aws::CloudFront
         o.errors << Shapes::ShapeRef.new(shape: NoSuchFieldLevelEncryptionConfig)
         o.errors << Shapes::ShapeRef.new(shape: IllegalFieldLevelEncryptionConfigAssociationWithCacheBehavior)
         o.errors << Shapes::ShapeRef.new(shape: TooManyDistributionsAssociatedToFieldLevelEncryptionConfig)
+        o.errors << Shapes::ShapeRef.new(shape: NoSuchCachePolicy)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyDistributionsAssociatedToCachePolicy)
+        o.errors << Shapes::ShapeRef.new(shape: NoSuchOriginRequestPolicy)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyDistributionsAssociatedToOriginRequestPolicy)
       end)
 
       api.add_operation(:create_distribution_with_tags, Seahorse::Model::Operation.new.tap do |o|
-        o.name = "CreateDistributionWithTags2019_03_26"
+        o.name = "CreateDistributionWithTags2020_05_31"
         o.http_method = "POST"
-        o.http_request_uri = "/2019-03-26/distribution?WithTags"
+        o.http_request_uri = "/2020-05-31/distribution?WithTags"
         o.input = Shapes::ShapeRef.new(shape: CreateDistributionWithTagsRequest)
         o.output = Shapes::ShapeRef.new(shape: CreateDistributionWithTagsResult)
         o.errors << Shapes::ShapeRef.new(shape: CNAMEAlreadyExists)
@@ -1651,6 +2032,7 @@ module Aws::CloudFront
         o.errors << Shapes::ShapeRef.new(shape: TooManyQueryStringParameters)
         o.errors << Shapes::ShapeRef.new(shape: InvalidQueryStringParameters)
         o.errors << Shapes::ShapeRef.new(shape: TooManyDistributionsWithLambdaAssociations)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyDistributionsWithSingleFunctionARN)
         o.errors << Shapes::ShapeRef.new(shape: TooManyLambdaFunctionAssociations)
         o.errors << Shapes::ShapeRef.new(shape: InvalidLambdaFunctionAssociation)
         o.errors << Shapes::ShapeRef.new(shape: InvalidOriginReadTimeout)
@@ -1658,12 +2040,16 @@ module Aws::CloudFront
         o.errors << Shapes::ShapeRef.new(shape: NoSuchFieldLevelEncryptionConfig)
         o.errors << Shapes::ShapeRef.new(shape: IllegalFieldLevelEncryptionConfigAssociationWithCacheBehavior)
         o.errors << Shapes::ShapeRef.new(shape: TooManyDistributionsAssociatedToFieldLevelEncryptionConfig)
+        o.errors << Shapes::ShapeRef.new(shape: NoSuchCachePolicy)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyDistributionsAssociatedToCachePolicy)
+        o.errors << Shapes::ShapeRef.new(shape: NoSuchOriginRequestPolicy)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyDistributionsAssociatedToOriginRequestPolicy)
       end)
 
       api.add_operation(:create_field_level_encryption_config, Seahorse::Model::Operation.new.tap do |o|
-        o.name = "CreateFieldLevelEncryptionConfig2019_03_26"
+        o.name = "CreateFieldLevelEncryptionConfig2020_05_31"
         o.http_method = "POST"
-        o.http_request_uri = "/2019-03-26/field-level-encryption"
+        o.http_request_uri = "/2020-05-31/field-level-encryption"
         o.input = Shapes::ShapeRef.new(shape: CreateFieldLevelEncryptionConfigRequest)
         o.output = Shapes::ShapeRef.new(shape: CreateFieldLevelEncryptionConfigResult)
         o.errors << Shapes::ShapeRef.new(shape: InconsistentQuantities)
@@ -1677,9 +2063,9 @@ module Aws::CloudFront
       end)
 
       api.add_operation(:create_field_level_encryption_profile, Seahorse::Model::Operation.new.tap do |o|
-        o.name = "CreateFieldLevelEncryptionProfile2019_03_26"
+        o.name = "CreateFieldLevelEncryptionProfile2020_05_31"
         o.http_method = "POST"
-        o.http_request_uri = "/2019-03-26/field-level-encryption-profile"
+        o.http_request_uri = "/2020-05-31/field-level-encryption-profile"
         o.input = Shapes::ShapeRef.new(shape: CreateFieldLevelEncryptionProfileRequest)
         o.output = Shapes::ShapeRef.new(shape: CreateFieldLevelEncryptionProfileResult)
         o.errors << Shapes::ShapeRef.new(shape: InconsistentQuantities)
@@ -1693,9 +2079,9 @@ module Aws::CloudFront
       end)
 
       api.add_operation(:create_invalidation, Seahorse::Model::Operation.new.tap do |o|
-        o.name = "CreateInvalidation2019_03_26"
+        o.name = "CreateInvalidation2020_05_31"
         o.http_method = "POST"
-        o.http_request_uri = "/2019-03-26/distribution/{DistributionId}/invalidation"
+        o.http_request_uri = "/2020-05-31/distribution/{DistributionId}/invalidation"
         o.input = Shapes::ShapeRef.new(shape: CreateInvalidationRequest)
         o.output = Shapes::ShapeRef.new(shape: CreateInvalidationResult)
         o.errors << Shapes::ShapeRef.new(shape: AccessDenied)
@@ -1707,10 +2093,26 @@ module Aws::CloudFront
         o.errors << Shapes::ShapeRef.new(shape: InconsistentQuantities)
       end)
 
-      api.add_operation(:create_public_key, Seahorse::Model::Operation.new.tap do |o|
-        o.name = "CreatePublicKey2019_03_26"
+      api.add_operation(:create_origin_request_policy, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "CreateOriginRequestPolicy2020_05_31"
         o.http_method = "POST"
-        o.http_request_uri = "/2019-03-26/public-key"
+        o.http_request_uri = "/2020-05-31/origin-request-policy"
+        o.input = Shapes::ShapeRef.new(shape: CreateOriginRequestPolicyRequest)
+        o.output = Shapes::ShapeRef.new(shape: CreateOriginRequestPolicyResult)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDenied)
+        o.errors << Shapes::ShapeRef.new(shape: InconsistentQuantities)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidArgument)
+        o.errors << Shapes::ShapeRef.new(shape: OriginRequestPolicyAlreadyExists)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyOriginRequestPolicies)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyHeadersInOriginRequestPolicy)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyCookiesInOriginRequestPolicy)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyQueryStringsInOriginRequestPolicy)
+      end)
+
+      api.add_operation(:create_public_key, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "CreatePublicKey2020_05_31"
+        o.http_method = "POST"
+        o.http_request_uri = "/2020-05-31/public-key"
         o.input = Shapes::ShapeRef.new(shape: CreatePublicKeyRequest)
         o.output = Shapes::ShapeRef.new(shape: CreatePublicKeyResult)
         o.errors << Shapes::ShapeRef.new(shape: PublicKeyAlreadyExists)
@@ -1719,9 +2121,9 @@ module Aws::CloudFront
       end)
 
       api.add_operation(:create_streaming_distribution, Seahorse::Model::Operation.new.tap do |o|
-        o.name = "CreateStreamingDistribution2019_03_26"
+        o.name = "CreateStreamingDistribution2020_05_31"
         o.http_method = "POST"
-        o.http_request_uri = "/2019-03-26/streaming-distribution"
+        o.http_request_uri = "/2020-05-31/streaming-distribution"
         o.input = Shapes::ShapeRef.new(shape: CreateStreamingDistributionRequest)
         o.output = Shapes::ShapeRef.new(shape: CreateStreamingDistributionResult)
         o.errors << Shapes::ShapeRef.new(shape: CNAMEAlreadyExists)
@@ -1739,9 +2141,9 @@ module Aws::CloudFront
       end)
 
       api.add_operation(:create_streaming_distribution_with_tags, Seahorse::Model::Operation.new.tap do |o|
-        o.name = "CreateStreamingDistributionWithTags2019_03_26"
+        o.name = "CreateStreamingDistributionWithTags2020_05_31"
         o.http_method = "POST"
-        o.http_request_uri = "/2019-03-26/streaming-distribution?WithTags"
+        o.http_request_uri = "/2020-05-31/streaming-distribution?WithTags"
         o.input = Shapes::ShapeRef.new(shape: CreateStreamingDistributionWithTagsRequest)
         o.output = Shapes::ShapeRef.new(shape: CreateStreamingDistributionWithTagsResult)
         o.errors << Shapes::ShapeRef.new(shape: CNAMEAlreadyExists)
@@ -1759,10 +2161,24 @@ module Aws::CloudFront
         o.errors << Shapes::ShapeRef.new(shape: InvalidTagging)
       end)
 
-      api.add_operation(:delete_cloud_front_origin_access_identity, Seahorse::Model::Operation.new.tap do |o|
-        o.name = "DeleteCloudFrontOriginAccessIdentity2019_03_26"
+      api.add_operation(:delete_cache_policy, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DeleteCachePolicy2020_05_31"
         o.http_method = "DELETE"
-        o.http_request_uri = "/2019-03-26/origin-access-identity/cloudfront/{Id}"
+        o.http_request_uri = "/2020-05-31/cache-policy/{Id}"
+        o.input = Shapes::ShapeRef.new(shape: DeleteCachePolicyRequest)
+        o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
+        o.errors << Shapes::ShapeRef.new(shape: AccessDenied)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidIfMatchVersion)
+        o.errors << Shapes::ShapeRef.new(shape: NoSuchCachePolicy)
+        o.errors << Shapes::ShapeRef.new(shape: PreconditionFailed)
+        o.errors << Shapes::ShapeRef.new(shape: IllegalDelete)
+        o.errors << Shapes::ShapeRef.new(shape: CachePolicyInUse)
+      end)
+
+      api.add_operation(:delete_cloud_front_origin_access_identity, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DeleteCloudFrontOriginAccessIdentity2020_05_31"
+        o.http_method = "DELETE"
+        o.http_request_uri = "/2020-05-31/origin-access-identity/cloudfront/{Id}"
         o.input = Shapes::ShapeRef.new(shape: DeleteCloudFrontOriginAccessIdentityRequest)
         o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
         o.errors << Shapes::ShapeRef.new(shape: AccessDenied)
@@ -1773,9 +2189,9 @@ module Aws::CloudFront
       end)
 
       api.add_operation(:delete_distribution, Seahorse::Model::Operation.new.tap do |o|
-        o.name = "DeleteDistribution2019_03_26"
+        o.name = "DeleteDistribution2020_05_31"
         o.http_method = "DELETE"
-        o.http_request_uri = "/2019-03-26/distribution/{Id}"
+        o.http_request_uri = "/2020-05-31/distribution/{Id}"
         o.input = Shapes::ShapeRef.new(shape: DeleteDistributionRequest)
         o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
         o.errors << Shapes::ShapeRef.new(shape: AccessDenied)
@@ -1786,9 +2202,9 @@ module Aws::CloudFront
       end)
 
       api.add_operation(:delete_field_level_encryption_config, Seahorse::Model::Operation.new.tap do |o|
-        o.name = "DeleteFieldLevelEncryptionConfig2019_03_26"
+        o.name = "DeleteFieldLevelEncryptionConfig2020_05_31"
         o.http_method = "DELETE"
-        o.http_request_uri = "/2019-03-26/field-level-encryption/{Id}"
+        o.http_request_uri = "/2020-05-31/field-level-encryption/{Id}"
         o.input = Shapes::ShapeRef.new(shape: DeleteFieldLevelEncryptionConfigRequest)
         o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
         o.errors << Shapes::ShapeRef.new(shape: AccessDenied)
@@ -1799,9 +2215,9 @@ module Aws::CloudFront
       end)
 
       api.add_operation(:delete_field_level_encryption_profile, Seahorse::Model::Operation.new.tap do |o|
-        o.name = "DeleteFieldLevelEncryptionProfile2019_03_26"
+        o.name = "DeleteFieldLevelEncryptionProfile2020_05_31"
         o.http_method = "DELETE"
-        o.http_request_uri = "/2019-03-26/field-level-encryption-profile/{Id}"
+        o.http_request_uri = "/2020-05-31/field-level-encryption-profile/{Id}"
         o.input = Shapes::ShapeRef.new(shape: DeleteFieldLevelEncryptionProfileRequest)
         o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
         o.errors << Shapes::ShapeRef.new(shape: AccessDenied)
@@ -1811,10 +2227,24 @@ module Aws::CloudFront
         o.errors << Shapes::ShapeRef.new(shape: FieldLevelEncryptionProfileInUse)
       end)
 
-      api.add_operation(:delete_public_key, Seahorse::Model::Operation.new.tap do |o|
-        o.name = "DeletePublicKey2019_03_26"
+      api.add_operation(:delete_origin_request_policy, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DeleteOriginRequestPolicy2020_05_31"
         o.http_method = "DELETE"
-        o.http_request_uri = "/2019-03-26/public-key/{Id}"
+        o.http_request_uri = "/2020-05-31/origin-request-policy/{Id}"
+        o.input = Shapes::ShapeRef.new(shape: DeleteOriginRequestPolicyRequest)
+        o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
+        o.errors << Shapes::ShapeRef.new(shape: AccessDenied)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidIfMatchVersion)
+        o.errors << Shapes::ShapeRef.new(shape: NoSuchOriginRequestPolicy)
+        o.errors << Shapes::ShapeRef.new(shape: PreconditionFailed)
+        o.errors << Shapes::ShapeRef.new(shape: IllegalDelete)
+        o.errors << Shapes::ShapeRef.new(shape: OriginRequestPolicyInUse)
+      end)
+
+      api.add_operation(:delete_public_key, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DeletePublicKey2020_05_31"
+        o.http_method = "DELETE"
+        o.http_request_uri = "/2020-05-31/public-key/{Id}"
         o.input = Shapes::ShapeRef.new(shape: DeletePublicKeyRequest)
         o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
         o.errors << Shapes::ShapeRef.new(shape: AccessDenied)
@@ -1825,9 +2255,9 @@ module Aws::CloudFront
       end)
 
       api.add_operation(:delete_streaming_distribution, Seahorse::Model::Operation.new.tap do |o|
-        o.name = "DeleteStreamingDistribution2019_03_26"
+        o.name = "DeleteStreamingDistribution2020_05_31"
         o.http_method = "DELETE"
-        o.http_request_uri = "/2019-03-26/streaming-distribution/{Id}"
+        o.http_request_uri = "/2020-05-31/streaming-distribution/{Id}"
         o.input = Shapes::ShapeRef.new(shape: DeleteStreamingDistributionRequest)
         o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
         o.errors << Shapes::ShapeRef.new(shape: AccessDenied)
@@ -1837,10 +2267,30 @@ module Aws::CloudFront
         o.errors << Shapes::ShapeRef.new(shape: PreconditionFailed)
       end)
 
-      api.add_operation(:get_cloud_front_origin_access_identity, Seahorse::Model::Operation.new.tap do |o|
-        o.name = "GetCloudFrontOriginAccessIdentity2019_03_26"
+      api.add_operation(:get_cache_policy, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetCachePolicy2020_05_31"
         o.http_method = "GET"
-        o.http_request_uri = "/2019-03-26/origin-access-identity/cloudfront/{Id}"
+        o.http_request_uri = "/2020-05-31/cache-policy/{Id}"
+        o.input = Shapes::ShapeRef.new(shape: GetCachePolicyRequest)
+        o.output = Shapes::ShapeRef.new(shape: GetCachePolicyResult)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDenied)
+        o.errors << Shapes::ShapeRef.new(shape: NoSuchCachePolicy)
+      end)
+
+      api.add_operation(:get_cache_policy_config, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetCachePolicyConfig2020_05_31"
+        o.http_method = "GET"
+        o.http_request_uri = "/2020-05-31/cache-policy/{Id}/config"
+        o.input = Shapes::ShapeRef.new(shape: GetCachePolicyConfigRequest)
+        o.output = Shapes::ShapeRef.new(shape: GetCachePolicyConfigResult)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDenied)
+        o.errors << Shapes::ShapeRef.new(shape: NoSuchCachePolicy)
+      end)
+
+      api.add_operation(:get_cloud_front_origin_access_identity, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetCloudFrontOriginAccessIdentity2020_05_31"
+        o.http_method = "GET"
+        o.http_request_uri = "/2020-05-31/origin-access-identity/cloudfront/{Id}"
         o.input = Shapes::ShapeRef.new(shape: GetCloudFrontOriginAccessIdentityRequest)
         o.output = Shapes::ShapeRef.new(shape: GetCloudFrontOriginAccessIdentityResult)
         o.errors << Shapes::ShapeRef.new(shape: NoSuchCloudFrontOriginAccessIdentity)
@@ -1848,9 +2298,9 @@ module Aws::CloudFront
       end)
 
       api.add_operation(:get_cloud_front_origin_access_identity_config, Seahorse::Model::Operation.new.tap do |o|
-        o.name = "GetCloudFrontOriginAccessIdentityConfig2019_03_26"
+        o.name = "GetCloudFrontOriginAccessIdentityConfig2020_05_31"
         o.http_method = "GET"
-        o.http_request_uri = "/2019-03-26/origin-access-identity/cloudfront/{Id}/config"
+        o.http_request_uri = "/2020-05-31/origin-access-identity/cloudfront/{Id}/config"
         o.input = Shapes::ShapeRef.new(shape: GetCloudFrontOriginAccessIdentityConfigRequest)
         o.output = Shapes::ShapeRef.new(shape: GetCloudFrontOriginAccessIdentityConfigResult)
         o.errors << Shapes::ShapeRef.new(shape: NoSuchCloudFrontOriginAccessIdentity)
@@ -1858,9 +2308,9 @@ module Aws::CloudFront
       end)
 
       api.add_operation(:get_distribution, Seahorse::Model::Operation.new.tap do |o|
-        o.name = "GetDistribution2019_03_26"
+        o.name = "GetDistribution2020_05_31"
         o.http_method = "GET"
-        o.http_request_uri = "/2019-03-26/distribution/{Id}"
+        o.http_request_uri = "/2020-05-31/distribution/{Id}"
         o.input = Shapes::ShapeRef.new(shape: GetDistributionRequest)
         o.output = Shapes::ShapeRef.new(shape: GetDistributionResult)
         o.errors << Shapes::ShapeRef.new(shape: NoSuchDistribution)
@@ -1868,9 +2318,9 @@ module Aws::CloudFront
       end)
 
       api.add_operation(:get_distribution_config, Seahorse::Model::Operation.new.tap do |o|
-        o.name = "GetDistributionConfig2019_03_26"
+        o.name = "GetDistributionConfig2020_05_31"
         o.http_method = "GET"
-        o.http_request_uri = "/2019-03-26/distribution/{Id}/config"
+        o.http_request_uri = "/2020-05-31/distribution/{Id}/config"
         o.input = Shapes::ShapeRef.new(shape: GetDistributionConfigRequest)
         o.output = Shapes::ShapeRef.new(shape: GetDistributionConfigResult)
         o.errors << Shapes::ShapeRef.new(shape: NoSuchDistribution)
@@ -1878,9 +2328,9 @@ module Aws::CloudFront
       end)
 
       api.add_operation(:get_field_level_encryption, Seahorse::Model::Operation.new.tap do |o|
-        o.name = "GetFieldLevelEncryption2019_03_26"
+        o.name = "GetFieldLevelEncryption2020_05_31"
         o.http_method = "GET"
-        o.http_request_uri = "/2019-03-26/field-level-encryption/{Id}"
+        o.http_request_uri = "/2020-05-31/field-level-encryption/{Id}"
         o.input = Shapes::ShapeRef.new(shape: GetFieldLevelEncryptionRequest)
         o.output = Shapes::ShapeRef.new(shape: GetFieldLevelEncryptionResult)
         o.errors << Shapes::ShapeRef.new(shape: AccessDenied)
@@ -1888,9 +2338,9 @@ module Aws::CloudFront
       end)
 
       api.add_operation(:get_field_level_encryption_config, Seahorse::Model::Operation.new.tap do |o|
-        o.name = "GetFieldLevelEncryptionConfig2019_03_26"
+        o.name = "GetFieldLevelEncryptionConfig2020_05_31"
         o.http_method = "GET"
-        o.http_request_uri = "/2019-03-26/field-level-encryption/{Id}/config"
+        o.http_request_uri = "/2020-05-31/field-level-encryption/{Id}/config"
         o.input = Shapes::ShapeRef.new(shape: GetFieldLevelEncryptionConfigRequest)
         o.output = Shapes::ShapeRef.new(shape: GetFieldLevelEncryptionConfigResult)
         o.errors << Shapes::ShapeRef.new(shape: AccessDenied)
@@ -1898,9 +2348,9 @@ module Aws::CloudFront
       end)
 
       api.add_operation(:get_field_level_encryption_profile, Seahorse::Model::Operation.new.tap do |o|
-        o.name = "GetFieldLevelEncryptionProfile2019_03_26"
+        o.name = "GetFieldLevelEncryptionProfile2020_05_31"
         o.http_method = "GET"
-        o.http_request_uri = "/2019-03-26/field-level-encryption-profile/{Id}"
+        o.http_request_uri = "/2020-05-31/field-level-encryption-profile/{Id}"
         o.input = Shapes::ShapeRef.new(shape: GetFieldLevelEncryptionProfileRequest)
         o.output = Shapes::ShapeRef.new(shape: GetFieldLevelEncryptionProfileResult)
         o.errors << Shapes::ShapeRef.new(shape: AccessDenied)
@@ -1908,9 +2358,9 @@ module Aws::CloudFront
       end)
 
       api.add_operation(:get_field_level_encryption_profile_config, Seahorse::Model::Operation.new.tap do |o|
-        o.name = "GetFieldLevelEncryptionProfileConfig2019_03_26"
+        o.name = "GetFieldLevelEncryptionProfileConfig2020_05_31"
         o.http_method = "GET"
-        o.http_request_uri = "/2019-03-26/field-level-encryption-profile/{Id}/config"
+        o.http_request_uri = "/2020-05-31/field-level-encryption-profile/{Id}/config"
         o.input = Shapes::ShapeRef.new(shape: GetFieldLevelEncryptionProfileConfigRequest)
         o.output = Shapes::ShapeRef.new(shape: GetFieldLevelEncryptionProfileConfigResult)
         o.errors << Shapes::ShapeRef.new(shape: AccessDenied)
@@ -1918,9 +2368,9 @@ module Aws::CloudFront
       end)
 
       api.add_operation(:get_invalidation, Seahorse::Model::Operation.new.tap do |o|
-        o.name = "GetInvalidation2019_03_26"
+        o.name = "GetInvalidation2020_05_31"
         o.http_method = "GET"
-        o.http_request_uri = "/2019-03-26/distribution/{DistributionId}/invalidation/{Id}"
+        o.http_request_uri = "/2020-05-31/distribution/{DistributionId}/invalidation/{Id}"
         o.input = Shapes::ShapeRef.new(shape: GetInvalidationRequest)
         o.output = Shapes::ShapeRef.new(shape: GetInvalidationResult)
         o.errors << Shapes::ShapeRef.new(shape: NoSuchInvalidation)
@@ -1928,10 +2378,30 @@ module Aws::CloudFront
         o.errors << Shapes::ShapeRef.new(shape: AccessDenied)
       end)
 
-      api.add_operation(:get_public_key, Seahorse::Model::Operation.new.tap do |o|
-        o.name = "GetPublicKey2019_03_26"
+      api.add_operation(:get_origin_request_policy, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetOriginRequestPolicy2020_05_31"
         o.http_method = "GET"
-        o.http_request_uri = "/2019-03-26/public-key/{Id}"
+        o.http_request_uri = "/2020-05-31/origin-request-policy/{Id}"
+        o.input = Shapes::ShapeRef.new(shape: GetOriginRequestPolicyRequest)
+        o.output = Shapes::ShapeRef.new(shape: GetOriginRequestPolicyResult)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDenied)
+        o.errors << Shapes::ShapeRef.new(shape: NoSuchOriginRequestPolicy)
+      end)
+
+      api.add_operation(:get_origin_request_policy_config, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetOriginRequestPolicyConfig2020_05_31"
+        o.http_method = "GET"
+        o.http_request_uri = "/2020-05-31/origin-request-policy/{Id}/config"
+        o.input = Shapes::ShapeRef.new(shape: GetOriginRequestPolicyConfigRequest)
+        o.output = Shapes::ShapeRef.new(shape: GetOriginRequestPolicyConfigResult)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDenied)
+        o.errors << Shapes::ShapeRef.new(shape: NoSuchOriginRequestPolicy)
+      end)
+
+      api.add_operation(:get_public_key, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetPublicKey2020_05_31"
+        o.http_method = "GET"
+        o.http_request_uri = "/2020-05-31/public-key/{Id}"
         o.input = Shapes::ShapeRef.new(shape: GetPublicKeyRequest)
         o.output = Shapes::ShapeRef.new(shape: GetPublicKeyResult)
         o.errors << Shapes::ShapeRef.new(shape: AccessDenied)
@@ -1939,9 +2409,9 @@ module Aws::CloudFront
       end)
 
       api.add_operation(:get_public_key_config, Seahorse::Model::Operation.new.tap do |o|
-        o.name = "GetPublicKeyConfig2019_03_26"
+        o.name = "GetPublicKeyConfig2020_05_31"
         o.http_method = "GET"
-        o.http_request_uri = "/2019-03-26/public-key/{Id}/config"
+        o.http_request_uri = "/2020-05-31/public-key/{Id}/config"
         o.input = Shapes::ShapeRef.new(shape: GetPublicKeyConfigRequest)
         o.output = Shapes::ShapeRef.new(shape: GetPublicKeyConfigResult)
         o.errors << Shapes::ShapeRef.new(shape: AccessDenied)
@@ -1949,9 +2419,9 @@ module Aws::CloudFront
       end)
 
       api.add_operation(:get_streaming_distribution, Seahorse::Model::Operation.new.tap do |o|
-        o.name = "GetStreamingDistribution2019_03_26"
+        o.name = "GetStreamingDistribution2020_05_31"
         o.http_method = "GET"
-        o.http_request_uri = "/2019-03-26/streaming-distribution/{Id}"
+        o.http_request_uri = "/2020-05-31/streaming-distribution/{Id}"
         o.input = Shapes::ShapeRef.new(shape: GetStreamingDistributionRequest)
         o.output = Shapes::ShapeRef.new(shape: GetStreamingDistributionResult)
         o.errors << Shapes::ShapeRef.new(shape: NoSuchStreamingDistribution)
@@ -1959,19 +2429,30 @@ module Aws::CloudFront
       end)
 
       api.add_operation(:get_streaming_distribution_config, Seahorse::Model::Operation.new.tap do |o|
-        o.name = "GetStreamingDistributionConfig2019_03_26"
+        o.name = "GetStreamingDistributionConfig2020_05_31"
         o.http_method = "GET"
-        o.http_request_uri = "/2019-03-26/streaming-distribution/{Id}/config"
+        o.http_request_uri = "/2020-05-31/streaming-distribution/{Id}/config"
         o.input = Shapes::ShapeRef.new(shape: GetStreamingDistributionConfigRequest)
         o.output = Shapes::ShapeRef.new(shape: GetStreamingDistributionConfigResult)
         o.errors << Shapes::ShapeRef.new(shape: NoSuchStreamingDistribution)
         o.errors << Shapes::ShapeRef.new(shape: AccessDenied)
       end)
 
-      api.add_operation(:list_cloud_front_origin_access_identities, Seahorse::Model::Operation.new.tap do |o|
-        o.name = "ListCloudFrontOriginAccessIdentities2019_03_26"
+      api.add_operation(:list_cache_policies, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListCachePolicies2020_05_31"
         o.http_method = "GET"
-        o.http_request_uri = "/2019-03-26/origin-access-identity/cloudfront"
+        o.http_request_uri = "/2020-05-31/cache-policy"
+        o.input = Shapes::ShapeRef.new(shape: ListCachePoliciesRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListCachePoliciesResult)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDenied)
+        o.errors << Shapes::ShapeRef.new(shape: NoSuchCachePolicy)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidArgument)
+      end)
+
+      api.add_operation(:list_cloud_front_origin_access_identities, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListCloudFrontOriginAccessIdentities2020_05_31"
+        o.http_method = "GET"
+        o.http_request_uri = "/2020-05-31/origin-access-identity/cloudfront"
         o.input = Shapes::ShapeRef.new(shape: ListCloudFrontOriginAccessIdentitiesRequest)
         o.output = Shapes::ShapeRef.new(shape: ListCloudFrontOriginAccessIdentitiesResult)
         o.errors << Shapes::ShapeRef.new(shape: InvalidArgument)
@@ -1985,9 +2466,9 @@ module Aws::CloudFront
       end)
 
       api.add_operation(:list_distributions, Seahorse::Model::Operation.new.tap do |o|
-        o.name = "ListDistributions2019_03_26"
+        o.name = "ListDistributions2020_05_31"
         o.http_method = "GET"
-        o.http_request_uri = "/2019-03-26/distribution"
+        o.http_request_uri = "/2020-05-31/distribution"
         o.input = Shapes::ShapeRef.new(shape: ListDistributionsRequest)
         o.output = Shapes::ShapeRef.new(shape: ListDistributionsResult)
         o.errors << Shapes::ShapeRef.new(shape: InvalidArgument)
@@ -2000,10 +2481,32 @@ module Aws::CloudFront
         )
       end)
 
-      api.add_operation(:list_distributions_by_web_acl_id, Seahorse::Model::Operation.new.tap do |o|
-        o.name = "ListDistributionsByWebACLId2019_03_26"
+      api.add_operation(:list_distributions_by_cache_policy_id, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListDistributionsByCachePolicyId2020_05_31"
         o.http_method = "GET"
-        o.http_request_uri = "/2019-03-26/distributionsByWebACLId/{WebACLId}"
+        o.http_request_uri = "/2020-05-31/distributionsByCachePolicyId/{CachePolicyId}"
+        o.input = Shapes::ShapeRef.new(shape: ListDistributionsByCachePolicyIdRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListDistributionsByCachePolicyIdResult)
+        o.errors << Shapes::ShapeRef.new(shape: NoSuchCachePolicy)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidArgument)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDenied)
+      end)
+
+      api.add_operation(:list_distributions_by_origin_request_policy_id, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListDistributionsByOriginRequestPolicyId2020_05_31"
+        o.http_method = "GET"
+        o.http_request_uri = "/2020-05-31/distributionsByOriginRequestPolicyId/{OriginRequestPolicyId}"
+        o.input = Shapes::ShapeRef.new(shape: ListDistributionsByOriginRequestPolicyIdRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListDistributionsByOriginRequestPolicyIdResult)
+        o.errors << Shapes::ShapeRef.new(shape: NoSuchOriginRequestPolicy)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidArgument)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDenied)
+      end)
+
+      api.add_operation(:list_distributions_by_web_acl_id, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListDistributionsByWebACLId2020_05_31"
+        o.http_method = "GET"
+        o.http_request_uri = "/2020-05-31/distributionsByWebACLId/{WebACLId}"
         o.input = Shapes::ShapeRef.new(shape: ListDistributionsByWebACLIdRequest)
         o.output = Shapes::ShapeRef.new(shape: ListDistributionsByWebACLIdResult)
         o.errors << Shapes::ShapeRef.new(shape: InvalidArgument)
@@ -2011,27 +2514,27 @@ module Aws::CloudFront
       end)
 
       api.add_operation(:list_field_level_encryption_configs, Seahorse::Model::Operation.new.tap do |o|
-        o.name = "ListFieldLevelEncryptionConfigs2019_03_26"
+        o.name = "ListFieldLevelEncryptionConfigs2020_05_31"
         o.http_method = "GET"
-        o.http_request_uri = "/2019-03-26/field-level-encryption"
+        o.http_request_uri = "/2020-05-31/field-level-encryption"
         o.input = Shapes::ShapeRef.new(shape: ListFieldLevelEncryptionConfigsRequest)
         o.output = Shapes::ShapeRef.new(shape: ListFieldLevelEncryptionConfigsResult)
         o.errors << Shapes::ShapeRef.new(shape: InvalidArgument)
       end)
 
       api.add_operation(:list_field_level_encryption_profiles, Seahorse::Model::Operation.new.tap do |o|
-        o.name = "ListFieldLevelEncryptionProfiles2019_03_26"
+        o.name = "ListFieldLevelEncryptionProfiles2020_05_31"
         o.http_method = "GET"
-        o.http_request_uri = "/2019-03-26/field-level-encryption-profile"
+        o.http_request_uri = "/2020-05-31/field-level-encryption-profile"
         o.input = Shapes::ShapeRef.new(shape: ListFieldLevelEncryptionProfilesRequest)
         o.output = Shapes::ShapeRef.new(shape: ListFieldLevelEncryptionProfilesResult)
         o.errors << Shapes::ShapeRef.new(shape: InvalidArgument)
       end)
 
       api.add_operation(:list_invalidations, Seahorse::Model::Operation.new.tap do |o|
-        o.name = "ListInvalidations2019_03_26"
+        o.name = "ListInvalidations2020_05_31"
         o.http_method = "GET"
-        o.http_request_uri = "/2019-03-26/distribution/{DistributionId}/invalidation"
+        o.http_request_uri = "/2020-05-31/distribution/{DistributionId}/invalidation"
         o.input = Shapes::ShapeRef.new(shape: ListInvalidationsRequest)
         o.output = Shapes::ShapeRef.new(shape: ListInvalidationsResult)
         o.errors << Shapes::ShapeRef.new(shape: InvalidArgument)
@@ -2046,19 +2549,30 @@ module Aws::CloudFront
         )
       end)
 
-      api.add_operation(:list_public_keys, Seahorse::Model::Operation.new.tap do |o|
-        o.name = "ListPublicKeys2019_03_26"
+      api.add_operation(:list_origin_request_policies, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListOriginRequestPolicies2020_05_31"
         o.http_method = "GET"
-        o.http_request_uri = "/2019-03-26/public-key"
+        o.http_request_uri = "/2020-05-31/origin-request-policy"
+        o.input = Shapes::ShapeRef.new(shape: ListOriginRequestPoliciesRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListOriginRequestPoliciesResult)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDenied)
+        o.errors << Shapes::ShapeRef.new(shape: NoSuchOriginRequestPolicy)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidArgument)
+      end)
+
+      api.add_operation(:list_public_keys, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListPublicKeys2020_05_31"
+        o.http_method = "GET"
+        o.http_request_uri = "/2020-05-31/public-key"
         o.input = Shapes::ShapeRef.new(shape: ListPublicKeysRequest)
         o.output = Shapes::ShapeRef.new(shape: ListPublicKeysResult)
         o.errors << Shapes::ShapeRef.new(shape: InvalidArgument)
       end)
 
       api.add_operation(:list_streaming_distributions, Seahorse::Model::Operation.new.tap do |o|
-        o.name = "ListStreamingDistributions2019_03_26"
+        o.name = "ListStreamingDistributions2020_05_31"
         o.http_method = "GET"
-        o.http_request_uri = "/2019-03-26/streaming-distribution"
+        o.http_request_uri = "/2020-05-31/streaming-distribution"
         o.input = Shapes::ShapeRef.new(shape: ListStreamingDistributionsRequest)
         o.output = Shapes::ShapeRef.new(shape: ListStreamingDistributionsResult)
         o.errors << Shapes::ShapeRef.new(shape: InvalidArgument)
@@ -2072,9 +2586,9 @@ module Aws::CloudFront
       end)
 
       api.add_operation(:list_tags_for_resource, Seahorse::Model::Operation.new.tap do |o|
-        o.name = "ListTagsForResource2019_03_26"
+        o.name = "ListTagsForResource2020_05_31"
         o.http_method = "GET"
-        o.http_request_uri = "/2019-03-26/tagging"
+        o.http_request_uri = "/2020-05-31/tagging"
         o.input = Shapes::ShapeRef.new(shape: ListTagsForResourceRequest)
         o.output = Shapes::ShapeRef.new(shape: ListTagsForResourceResult)
         o.errors << Shapes::ShapeRef.new(shape: AccessDenied)
@@ -2084,9 +2598,9 @@ module Aws::CloudFront
       end)
 
       api.add_operation(:tag_resource, Seahorse::Model::Operation.new.tap do |o|
-        o.name = "TagResource2019_03_26"
+        o.name = "TagResource2020_05_31"
         o.http_method = "POST"
-        o.http_request_uri = "/2019-03-26/tagging?Operation=Tag"
+        o.http_request_uri = "/2020-05-31/tagging?Operation=Tag"
         o.input = Shapes::ShapeRef.new(shape: TagResourceRequest)
         o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
         o.errors << Shapes::ShapeRef.new(shape: AccessDenied)
@@ -2096,9 +2610,9 @@ module Aws::CloudFront
       end)
 
       api.add_operation(:untag_resource, Seahorse::Model::Operation.new.tap do |o|
-        o.name = "UntagResource2019_03_26"
+        o.name = "UntagResource2020_05_31"
         o.http_method = "POST"
-        o.http_request_uri = "/2019-03-26/tagging?Operation=Untag"
+        o.http_request_uri = "/2020-05-31/tagging?Operation=Untag"
         o.input = Shapes::ShapeRef.new(shape: UntagResourceRequest)
         o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
         o.errors << Shapes::ShapeRef.new(shape: AccessDenied)
@@ -2107,10 +2621,29 @@ module Aws::CloudFront
         o.errors << Shapes::ShapeRef.new(shape: NoSuchResource)
       end)
 
-      api.add_operation(:update_cloud_front_origin_access_identity, Seahorse::Model::Operation.new.tap do |o|
-        o.name = "UpdateCloudFrontOriginAccessIdentity2019_03_26"
+      api.add_operation(:update_cache_policy, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "UpdateCachePolicy2020_05_31"
         o.http_method = "PUT"
-        o.http_request_uri = "/2019-03-26/origin-access-identity/cloudfront/{Id}/config"
+        o.http_request_uri = "/2020-05-31/cache-policy/{Id}"
+        o.input = Shapes::ShapeRef.new(shape: UpdateCachePolicyRequest)
+        o.output = Shapes::ShapeRef.new(shape: UpdateCachePolicyResult)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDenied)
+        o.errors << Shapes::ShapeRef.new(shape: IllegalUpdate)
+        o.errors << Shapes::ShapeRef.new(shape: InconsistentQuantities)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidArgument)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidIfMatchVersion)
+        o.errors << Shapes::ShapeRef.new(shape: NoSuchCachePolicy)
+        o.errors << Shapes::ShapeRef.new(shape: PreconditionFailed)
+        o.errors << Shapes::ShapeRef.new(shape: CachePolicyAlreadyExists)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyHeadersInCachePolicy)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyCookiesInCachePolicy)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyQueryStringsInCachePolicy)
+      end)
+
+      api.add_operation(:update_cloud_front_origin_access_identity, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "UpdateCloudFrontOriginAccessIdentity2020_05_31"
+        o.http_method = "PUT"
+        o.http_request_uri = "/2020-05-31/origin-access-identity/cloudfront/{Id}/config"
         o.input = Shapes::ShapeRef.new(shape: UpdateCloudFrontOriginAccessIdentityRequest)
         o.output = Shapes::ShapeRef.new(shape: UpdateCloudFrontOriginAccessIdentityResult)
         o.errors << Shapes::ShapeRef.new(shape: AccessDenied)
@@ -2124,9 +2657,9 @@ module Aws::CloudFront
       end)
 
       api.add_operation(:update_distribution, Seahorse::Model::Operation.new.tap do |o|
-        o.name = "UpdateDistribution2019_03_26"
+        o.name = "UpdateDistribution2020_05_31"
         o.http_method = "PUT"
-        o.http_request_uri = "/2019-03-26/distribution/{Id}/config"
+        o.http_request_uri = "/2020-05-31/distribution/{Id}/config"
         o.input = Shapes::ShapeRef.new(shape: UpdateDistributionRequest)
         o.output = Shapes::ShapeRef.new(shape: UpdateDistributionResult)
         o.errors << Shapes::ShapeRef.new(shape: AccessDenied)
@@ -2166,6 +2699,7 @@ module Aws::CloudFront
         o.errors << Shapes::ShapeRef.new(shape: TooManyQueryStringParameters)
         o.errors << Shapes::ShapeRef.new(shape: InvalidQueryStringParameters)
         o.errors << Shapes::ShapeRef.new(shape: TooManyDistributionsWithLambdaAssociations)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyDistributionsWithSingleFunctionARN)
         o.errors << Shapes::ShapeRef.new(shape: TooManyLambdaFunctionAssociations)
         o.errors << Shapes::ShapeRef.new(shape: InvalidLambdaFunctionAssociation)
         o.errors << Shapes::ShapeRef.new(shape: InvalidOriginReadTimeout)
@@ -2173,12 +2707,16 @@ module Aws::CloudFront
         o.errors << Shapes::ShapeRef.new(shape: NoSuchFieldLevelEncryptionConfig)
         o.errors << Shapes::ShapeRef.new(shape: IllegalFieldLevelEncryptionConfigAssociationWithCacheBehavior)
         o.errors << Shapes::ShapeRef.new(shape: TooManyDistributionsAssociatedToFieldLevelEncryptionConfig)
+        o.errors << Shapes::ShapeRef.new(shape: NoSuchCachePolicy)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyDistributionsAssociatedToCachePolicy)
+        o.errors << Shapes::ShapeRef.new(shape: NoSuchOriginRequestPolicy)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyDistributionsAssociatedToOriginRequestPolicy)
       end)
 
       api.add_operation(:update_field_level_encryption_config, Seahorse::Model::Operation.new.tap do |o|
-        o.name = "UpdateFieldLevelEncryptionConfig2019_03_26"
+        o.name = "UpdateFieldLevelEncryptionConfig2020_05_31"
         o.http_method = "PUT"
-        o.http_request_uri = "/2019-03-26/field-level-encryption/{Id}/config"
+        o.http_request_uri = "/2020-05-31/field-level-encryption/{Id}/config"
         o.input = Shapes::ShapeRef.new(shape: UpdateFieldLevelEncryptionConfigRequest)
         o.output = Shapes::ShapeRef.new(shape: UpdateFieldLevelEncryptionConfigResult)
         o.errors << Shapes::ShapeRef.new(shape: AccessDenied)
@@ -2195,9 +2733,9 @@ module Aws::CloudFront
       end)
 
       api.add_operation(:update_field_level_encryption_profile, Seahorse::Model::Operation.new.tap do |o|
-        o.name = "UpdateFieldLevelEncryptionProfile2019_03_26"
+        o.name = "UpdateFieldLevelEncryptionProfile2020_05_31"
         o.http_method = "PUT"
-        o.http_request_uri = "/2019-03-26/field-level-encryption-profile/{Id}/config"
+        o.http_request_uri = "/2020-05-31/field-level-encryption-profile/{Id}/config"
         o.input = Shapes::ShapeRef.new(shape: UpdateFieldLevelEncryptionProfileRequest)
         o.output = Shapes::ShapeRef.new(shape: UpdateFieldLevelEncryptionProfileResult)
         o.errors << Shapes::ShapeRef.new(shape: AccessDenied)
@@ -2214,10 +2752,29 @@ module Aws::CloudFront
         o.errors << Shapes::ShapeRef.new(shape: TooManyFieldLevelEncryptionFieldPatterns)
       end)
 
-      api.add_operation(:update_public_key, Seahorse::Model::Operation.new.tap do |o|
-        o.name = "UpdatePublicKey2019_03_26"
+      api.add_operation(:update_origin_request_policy, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "UpdateOriginRequestPolicy2020_05_31"
         o.http_method = "PUT"
-        o.http_request_uri = "/2019-03-26/public-key/{Id}/config"
+        o.http_request_uri = "/2020-05-31/origin-request-policy/{Id}"
+        o.input = Shapes::ShapeRef.new(shape: UpdateOriginRequestPolicyRequest)
+        o.output = Shapes::ShapeRef.new(shape: UpdateOriginRequestPolicyResult)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDenied)
+        o.errors << Shapes::ShapeRef.new(shape: IllegalUpdate)
+        o.errors << Shapes::ShapeRef.new(shape: InconsistentQuantities)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidArgument)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidIfMatchVersion)
+        o.errors << Shapes::ShapeRef.new(shape: NoSuchOriginRequestPolicy)
+        o.errors << Shapes::ShapeRef.new(shape: PreconditionFailed)
+        o.errors << Shapes::ShapeRef.new(shape: OriginRequestPolicyAlreadyExists)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyHeadersInOriginRequestPolicy)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyCookiesInOriginRequestPolicy)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyQueryStringsInOriginRequestPolicy)
+      end)
+
+      api.add_operation(:update_public_key, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "UpdatePublicKey2020_05_31"
+        o.http_method = "PUT"
+        o.http_request_uri = "/2020-05-31/public-key/{Id}/config"
         o.input = Shapes::ShapeRef.new(shape: UpdatePublicKeyRequest)
         o.output = Shapes::ShapeRef.new(shape: UpdatePublicKeyResult)
         o.errors << Shapes::ShapeRef.new(shape: AccessDenied)
@@ -2230,9 +2787,9 @@ module Aws::CloudFront
       end)
 
       api.add_operation(:update_streaming_distribution, Seahorse::Model::Operation.new.tap do |o|
-        o.name = "UpdateStreamingDistribution2019_03_26"
+        o.name = "UpdateStreamingDistribution2020_05_31"
         o.http_method = "PUT"
-        o.http_request_uri = "/2019-03-26/streaming-distribution/{Id}/config"
+        o.http_request_uri = "/2020-05-31/streaming-distribution/{Id}/config"
         o.input = Shapes::ShapeRef.new(shape: UpdateStreamingDistributionRequest)
         o.output = Shapes::ShapeRef.new(shape: UpdateStreamingDistributionResult)
         o.errors << Shapes::ShapeRef.new(shape: AccessDenied)

@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.57.0 (2020-07-20)
+------------------
+
+* Feature - AWS CodeBuild adds support for Session Manager and Windows 2019 Environment type
+
 1.56.0 (2020-07-02)
 ------------------
 

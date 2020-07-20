@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.11.0 (2020-07-20)
+------------------
+
+* Feature - Adds optional MTU property to DataflowEndpoint and adds contact source and destination details to DescribeContact response.
+
 1.10.0 (2020-06-23)
 ------------------
 

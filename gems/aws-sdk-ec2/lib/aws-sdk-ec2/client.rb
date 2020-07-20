@@ -7090,6 +7090,9 @@ module Aws::EC2
     # @option params [required, String] :vpc_id
     #   The ID of the VPC.
     #
+    # @option params [Array<Types::TagSpecification>] :tag_specifications
+    #   The tags to assign to the route table.
+    #
     # @return [Types::CreateRouteTableResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateRouteTableResult#route_table #route_table} => Types::RouteTable
@@ -7129,6 +7132,17 @@ module Aws::EC2
     #   resp = client.create_route_table({
     #     dry_run: false,
     #     vpc_id: "VpcId", # required
+    #     tag_specifications: [
+    #       {
+    #         resource_type: "client-vpn-endpoint", # accepts client-vpn-endpoint, customer-gateway, dedicated-host, dhcp-options, elastic-ip, elastic-gpu, export-image-task, export-instance-task, fleet, fpga-image, host-reservation, image, import-image-task, import-snapshot-task, instance, internet-gateway, key-pair, launch-template, local-gateway-route-table-vpc-association, natgateway, network-acl, network-interface, placement-group, reserved-instances, route-table, security-group, snapshot, spot-fleet-request, spot-instances-request, subnet, traffic-mirror-filter, traffic-mirror-session, traffic-mirror-target, transit-gateway, transit-gateway-attachment, transit-gateway-multicast-domain, transit-gateway-route-table, volume, vpc, vpc-peering-connection, vpn-connection, vpn-gateway, vpc-flow-log
+    #         tags: [
+    #           {
+    #             key: "String",
+    #             value: "String",
+    #           },
+    #         ],
+    #       },
+    #     ],
     #   })
     #
     # @example Response structure
@@ -9543,6 +9557,9 @@ module Aws::EC2
     #
     #   Default: The Region in which you make the request.
     #
+    # @option params [Array<Types::TagSpecification>] :tag_specifications
+    #   The tags to assign to the peering connection.
+    #
     # @return [Types::CreateVpcPeeringConnectionResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateVpcPeeringConnectionResult#vpc_peering_connection #vpc_peering_connection} => Types::VpcPeeringConnection
@@ -9555,6 +9572,17 @@ module Aws::EC2
     #     peer_vpc_id: "String",
     #     vpc_id: "VpcId",
     #     peer_region: "String",
+    #     tag_specifications: [
+    #       {
+    #         resource_type: "client-vpn-endpoint", # accepts client-vpn-endpoint, customer-gateway, dedicated-host, dhcp-options, elastic-ip, elastic-gpu, export-image-task, export-instance-task, fleet, fpga-image, host-reservation, image, import-image-task, import-snapshot-task, instance, internet-gateway, key-pair, launch-template, local-gateway-route-table-vpc-association, natgateway, network-acl, network-interface, placement-group, reserved-instances, route-table, security-group, snapshot, spot-fleet-request, spot-instances-request, subnet, traffic-mirror-filter, traffic-mirror-session, traffic-mirror-target, transit-gateway, transit-gateway-attachment, transit-gateway-multicast-domain, transit-gateway-route-table, volume, vpc, vpc-peering-connection, vpn-connection, vpn-gateway, vpc-flow-log
+    #         tags: [
+    #           {
+    #             key: "String",
+    #             value: "String",
+    #           },
+    #         ],
+    #       },
+    #     ],
     #   })
     #
     # @example Response structure
@@ -13661,6 +13689,7 @@ module Aws::EC2
     #   resp.coip_pools[0].tags #=> Array
     #   resp.coip_pools[0].tags[0].key #=> String
     #   resp.coip_pools[0].tags[0].value #=> String
+    #   resp.coip_pools[0].pool_arn #=> String
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeCoipPools AWS API Documentation
@@ -37791,7 +37820,7 @@ module Aws::EC2
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-ec2'
-      context[:gem_version] = '1.177.0'
+      context[:gem_version] = '1.178.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

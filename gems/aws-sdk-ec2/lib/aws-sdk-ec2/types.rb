@@ -3995,13 +3995,18 @@ module Aws::EC2
     #   The tags.
     #   @return [Array<Types::Tag>]
     #
+    # @!attribute [rw] pool_arn
+    #   The ARN of the address pool.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CoipPool AWS API Documentation
     #
     class CoipPool < Struct.new(
       :pool_id,
       :pool_cidrs,
       :local_gateway_route_table_id,
-      :tags)
+      :tags,
+      :pool_arn)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -7589,6 +7594,17 @@ module Aws::EC2
     #       {
     #         dry_run: false,
     #         vpc_id: "VpcId", # required
+    #         tag_specifications: [
+    #           {
+    #             resource_type: "client-vpn-endpoint", # accepts client-vpn-endpoint, customer-gateway, dedicated-host, dhcp-options, elastic-ip, elastic-gpu, export-image-task, export-instance-task, fleet, fpga-image, host-reservation, image, import-image-task, import-snapshot-task, instance, internet-gateway, key-pair, launch-template, local-gateway-route-table-vpc-association, natgateway, network-acl, network-interface, placement-group, reserved-instances, route-table, security-group, snapshot, spot-fleet-request, spot-instances-request, subnet, traffic-mirror-filter, traffic-mirror-session, traffic-mirror-target, transit-gateway, transit-gateway-attachment, transit-gateway-multicast-domain, transit-gateway-route-table, volume, vpc, vpc-peering-connection, vpn-connection, vpn-gateway, vpc-flow-log
+    #             tags: [
+    #               {
+    #                 key: "String",
+    #                 value: "String",
+    #               },
+    #             ],
+    #           },
+    #         ],
     #       }
     #
     # @!attribute [rw] dry_run
@@ -7602,11 +7618,16 @@ module Aws::EC2
     #   The ID of the VPC.
     #   @return [String]
     #
+    # @!attribute [rw] tag_specifications
+    #   The tags to assign to the route table.
+    #   @return [Array<Types::TagSpecification>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CreateRouteTableRequest AWS API Documentation
     #
     class CreateRouteTableRequest < Struct.new(
       :dry_run,
-      :vpc_id)
+      :vpc_id,
+      :tag_specifications)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -9452,6 +9473,17 @@ module Aws::EC2
     #         peer_vpc_id: "String",
     #         vpc_id: "VpcId",
     #         peer_region: "String",
+    #         tag_specifications: [
+    #           {
+    #             resource_type: "client-vpn-endpoint", # accepts client-vpn-endpoint, customer-gateway, dedicated-host, dhcp-options, elastic-ip, elastic-gpu, export-image-task, export-instance-task, fleet, fpga-image, host-reservation, image, import-image-task, import-snapshot-task, instance, internet-gateway, key-pair, launch-template, local-gateway-route-table-vpc-association, natgateway, network-acl, network-interface, placement-group, reserved-instances, route-table, security-group, snapshot, spot-fleet-request, spot-instances-request, subnet, traffic-mirror-filter, traffic-mirror-session, traffic-mirror-target, transit-gateway, transit-gateway-attachment, transit-gateway-multicast-domain, transit-gateway-route-table, volume, vpc, vpc-peering-connection, vpn-connection, vpn-gateway, vpc-flow-log
+    #             tags: [
+    #               {
+    #                 key: "String",
+    #                 value: "String",
+    #               },
+    #             ],
+    #           },
+    #         ],
     #       }
     #
     # @!attribute [rw] dry_run
@@ -9484,6 +9516,10 @@ module Aws::EC2
     #   Default: The Region in which you make the request.
     #   @return [String]
     #
+    # @!attribute [rw] tag_specifications
+    #   The tags to assign to the peering connection.
+    #   @return [Array<Types::TagSpecification>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CreateVpcPeeringConnectionRequest AWS API Documentation
     #
     class CreateVpcPeeringConnectionRequest < Struct.new(
@@ -9491,7 +9527,8 @@ module Aws::EC2
       :peer_owner_id,
       :peer_vpc_id,
       :vpc_id,
-      :peer_region)
+      :peer_region,
+      :tag_specifications)
       SENSITIVE = []
       include Aws::Structure
     end

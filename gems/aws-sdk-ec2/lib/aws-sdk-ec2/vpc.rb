@@ -380,6 +380,17 @@ module Aws::EC2
     #
     #   routetable = vpc.create_route_table({
     #     dry_run: false,
+    #     tag_specifications: [
+    #       {
+    #         resource_type: "client-vpn-endpoint", # accepts client-vpn-endpoint, customer-gateway, dedicated-host, dhcp-options, elastic-ip, elastic-gpu, export-image-task, export-instance-task, fleet, fpga-image, host-reservation, image, import-image-task, import-snapshot-task, instance, internet-gateway, key-pair, launch-template, local-gateway-route-table-vpc-association, natgateway, network-acl, network-interface, placement-group, reserved-instances, route-table, security-group, snapshot, spot-fleet-request, spot-instances-request, subnet, traffic-mirror-filter, traffic-mirror-session, traffic-mirror-target, transit-gateway, transit-gateway-attachment, transit-gateway-multicast-domain, transit-gateway-route-table, volume, vpc, vpc-peering-connection, vpn-connection, vpn-gateway, vpc-flow-log
+    #         tags: [
+    #           {
+    #             key: "String",
+    #             value: "String",
+    #           },
+    #         ],
+    #       },
+    #     ],
     #   })
     # @param [Hash] options ({})
     # @option options [Boolean] :dry_run
@@ -387,6 +398,8 @@ module Aws::EC2
     #   without actually making the request, and provides an error response.
     #   If you have the required permissions, the error response is
     #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    # @option options [Array<Types::TagSpecification>] :tag_specifications
+    #   The tags to assign to the route table.
     # @return [RouteTable]
     def create_route_table(options = {})
       options = options.merge(vpc_id: @id)
@@ -764,6 +777,17 @@ module Aws::EC2
     #     peer_owner_id: "String",
     #     peer_vpc_id: "String",
     #     peer_region: "String",
+    #     tag_specifications: [
+    #       {
+    #         resource_type: "client-vpn-endpoint", # accepts client-vpn-endpoint, customer-gateway, dedicated-host, dhcp-options, elastic-ip, elastic-gpu, export-image-task, export-instance-task, fleet, fpga-image, host-reservation, image, import-image-task, import-snapshot-task, instance, internet-gateway, key-pair, launch-template, local-gateway-route-table-vpc-association, natgateway, network-acl, network-interface, placement-group, reserved-instances, route-table, security-group, snapshot, spot-fleet-request, spot-instances-request, subnet, traffic-mirror-filter, traffic-mirror-session, traffic-mirror-target, transit-gateway, transit-gateway-attachment, transit-gateway-multicast-domain, transit-gateway-route-table, volume, vpc, vpc-peering-connection, vpn-connection, vpn-gateway, vpc-flow-log
+    #         tags: [
+    #           {
+    #             key: "String",
+    #             value: "String",
+    #           },
+    #         ],
+    #       },
+    #     ],
     #   })
     # @param [Hash] options ({})
     # @option options [Boolean] :dry_run
@@ -783,6 +807,8 @@ module Aws::EC2
     #   in a Region other than the Region in which you make the request.
     #
     #   Default: The Region in which you make the request.
+    # @option options [Array<Types::TagSpecification>] :tag_specifications
+    #   The tags to assign to the peering connection.
     # @return [VpcPeeringConnection]
     def request_vpc_peering_connection(options = {})
       options = options.merge(vpc_id: @id)

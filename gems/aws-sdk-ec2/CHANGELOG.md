@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.178.0 (2020-07-20)
+------------------
+
+* Feature - Added support for tag-on-create for CreateVpcPeeringConnection and CreateRouteTable. You can now specify tags when creating any of these resources. For more information about tagging, see AWS Tagging Strategies. Add poolArn to the response of DescribeCoipPools.
+
 1.177.0 (2020-07-17)
 ------------------
 
