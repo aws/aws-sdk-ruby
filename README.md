@@ -372,7 +372,7 @@ to be backwards compatible.
 | Amazon Augmented AI Runtime                           | AugmentedAIRuntime              | 2019-11-07  |
 | Amazon Chime                                          | Chime                           | 2018-05-01  |
 | Amazon CloudDirectory                                 | CloudDirectory                  | 2017-01-11  |
-| Amazon CloudFront                                     | CloudFront                      | 2019-03-26  |
+| Amazon CloudFront                                     | CloudFront                      | 2020-05-31  |
 | Amazon CloudHSM                                       | CloudHSM                        | 2014-05-30  |
 | Amazon CloudSearch                                    | CloudSearch                     | 2013-01-01  |
 | Amazon CloudSearch Domain                             | CloudSearchDomain               | 2013-01-01  |

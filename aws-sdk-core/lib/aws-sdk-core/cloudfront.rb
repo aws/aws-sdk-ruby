@@ -1,9 +1,9 @@
 Aws.add_service(:CloudFront, {
-  api: "#{Aws::API_DIR}/cloudfront/2019-03-26/api-2.json",
-  docs: "#{Aws::API_DIR}/cloudfront/2019-03-26/docs-2.json",
-  examples: "#{Aws::API_DIR}/cloudfront/2019-03-26/examples-1.json",
-  paginators: "#{Aws::API_DIR}/cloudfront/2019-03-26/paginators-1.json",
-  waiters: "#{Aws::API_DIR}/cloudfront/2019-03-26/waiters-2.json",
+  api: "#{Aws::API_DIR}/cloudfront/2020-05-31/api-2.json",
+  docs: "#{Aws::API_DIR}/cloudfront/2020-05-31/docs-2.json",
+  examples: "#{Aws::API_DIR}/cloudfront/2020-05-31/examples-1.json",
+  paginators: "#{Aws::API_DIR}/cloudfront/2020-05-31/paginators-1.json",
+  waiters: "#{Aws::API_DIR}/cloudfront/2020-05-31/waiters-2.json",
 })
 
 module Aws

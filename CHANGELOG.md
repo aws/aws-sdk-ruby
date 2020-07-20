@@ -1,6 +1,20 @@
 Unreleased Changes
 ------------------
 
+* Feature - Aws::CodeBuild - Updated the API, and documentation for AWS CodeBuild.
+
+* Feature - Aws::EC2 - Updated the API, and documentation for Amazon Elastic Compute Cloud.
+
+* Feature - Aws::FMS - Updated the API, and documentation for Firewall Management Service.
+
+* Feature - Aws::FraudDetector - Updated the API, and documentation for Amazon Fraud Detector.
+
+* Feature - Aws::GroundStation - Updated the API, and documentation for AWS Ground Station.
+
+* Feature - Aws::RDS - Updated the API, and documentation for Amazon Relational Database Service.
+
+* Feature - Aws::CloudFront - Added support for the new 2020-05-31 API version of Amazon CloudFront.
+
 2.11.547 (2020-07-17)
 ------------------
 
