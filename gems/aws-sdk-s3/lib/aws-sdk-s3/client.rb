@@ -9164,7 +9164,7 @@ module Aws::S3
     #
     #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/dev/acl-overview.html#CannedACL
     #
-    # @option params [String, IO] :body
+    # @option params [String, IO like object supporting read, rewind and size] :body
     #   Object data.
     #
     # @option params [required, String] :bucket
@@ -11240,7 +11240,7 @@ module Aws::S3
     # [2]: https://docs.aws.amazon.com/AmazonS3/latest/dev/mpuAndPermissions.html
     # [3]: https://docs.aws.amazon.com/AmazonS3/latest/dev/UsingServerSideEncryption.html
     #
-    # @option params [String, IO] :body
+    # @option params [String, IO like object supporting read, rewind and size] :body
     #   Object data.
     #
     # @option params [required, String] :bucket

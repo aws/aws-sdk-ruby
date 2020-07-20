@@ -1622,7 +1622,7 @@ module Aws::Kinesis
     # @option params [required, String] :stream_name
     #   The name of the stream to put the data record into.
     #
-    # @option params [required, String, IO] :data
+    # @option params [required, String, IO like object supporting read, rewind and size] :data
     #   The data blob to put into the record, which is base64-encoded when the
     #   blob is serialized. When the data blob (the payload before
     #   base64-encoding) is added to the partition key size, the total size

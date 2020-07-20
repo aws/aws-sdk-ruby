@@ -1316,7 +1316,7 @@ module Aws::KMS
     # [3]: https://docs.aws.amazon.com/AmazonS3/latest/dev/UsingClientSideEncryption.html
     # [4]: https://docs.aws.amazon.com/kms/latest/developerguide/key-state.html
     #
-    # @option params [required, String, IO] :ciphertext_blob
+    # @option params [required, String, IO like object supporting read, rewind and size] :ciphertext_blob
     #   Ciphertext to be decrypted. The blob includes metadata.
     #
     # @option params [Hash<String,String>] :encryption_context
@@ -2259,7 +2259,7 @@ module Aws::KMS
     #   To get the key ID and key ARN for a CMK, use ListKeys or DescribeKey.
     #   To get the alias name and alias ARN, use ListAliases.
     #
-    # @option params [required, String, IO] :plaintext
+    # @option params [required, String, IO like object supporting read, rewind and size] :plaintext
     #   Data to be encrypted.
     #
     # @option params [Hash<String,String>] :encryption_context
@@ -3491,12 +3491,12 @@ module Aws::KMS
     #
     #   To get the key ID and key ARN for a CMK, use ListKeys or DescribeKey.
     #
-    # @option params [required, String, IO] :import_token
+    # @option params [required, String, IO like object supporting read, rewind and size] :import_token
     #   The import token that you received in the response to a previous
     #   GetParametersForImport request. It must be from the same response that
     #   contained the public key that you used to encrypt the key material.
     #
-    # @option params [required, String, IO] :encrypted_key_material
+    # @option params [required, String, IO like object supporting read, rewind and size] :encrypted_key_material
     #   The encrypted key material to import. The key material must be
     #   encrypted with the public wrapping key that GetParametersForImport
     #   returned, using the wrapping algorithm that you specified in the same
@@ -4402,7 +4402,7 @@ module Aws::KMS
     # [6]: https://docs.aws.amazon.com/kms/latest/developerguide/key-policies.html
     # [7]: https://docs.aws.amazon.com/kms/latest/developerguide/key-state.html
     #
-    # @option params [required, String, IO] :ciphertext_blob
+    # @option params [required, String, IO like object supporting read, rewind and size] :ciphertext_blob
     #   Ciphertext of the data to reencrypt.
     #
     # @option params [Hash<String,String>] :source_encryption_context
@@ -4886,7 +4886,7 @@ module Aws::KMS
     #   To get the key ID and key ARN for a CMK, use ListKeys or DescribeKey.
     #   To get the alias name and alias ARN, use ListAliases.
     #
-    # @option params [required, String, IO] :message
+    # @option params [required, String, IO like object supporting read, rewind and size] :message
     #   Specifies the message or message digest to sign. Messages can be
     #   0-4096 bytes. To sign a larger message, provide the message digest.
     #
@@ -5399,7 +5399,7 @@ module Aws::KMS
     #   To get the key ID and key ARN for a CMK, use ListKeys or DescribeKey.
     #   To get the alias name and alias ARN, use ListAliases.
     #
-    # @option params [required, String, IO] :message
+    # @option params [required, String, IO like object supporting read, rewind and size] :message
     #   Specifies the message that was signed. You can submit a raw message of
     #   up to 4096 bytes, or a hash digest of the message. If you submit a
     #   digest, use the `MessageType` parameter with a value of `DIGEST`.
@@ -5417,7 +5417,7 @@ module Aws::KMS
     #   is a message digest. If you use the `DIGEST` value with a raw message,
     #   the security of the verification operation can be compromised.
     #
-    # @option params [required, String, IO] :signature
+    # @option params [required, String, IO like object supporting read, rewind and size] :signature
     #   The signature that the `Sign` operation generated.
     #
     # @option params [required, String] :signing_algorithm

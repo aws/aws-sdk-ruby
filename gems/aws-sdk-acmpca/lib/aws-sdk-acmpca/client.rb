@@ -938,12 +938,12 @@ module Aws::ACMPCA
     #   `arn:aws:acm-pca:region:account:certificate-authority/12345678-1234-1234-1234-123456789012
     #   `
     #
-    # @option params [required, String, IO] :certificate
+    # @option params [required, String, IO like object supporting read, rewind and size] :certificate
     #   The PEM-encoded certificate for a private CA. This may be a
     #   self-signed certificate in the case of a root CA, or it may be signed
     #   by another CA that you control.
     #
-    # @option params [String, IO] :certificate_chain
+    # @option params [String, IO like object supporting read, rewind and size] :certificate_chain
     #   A PEM-encoded file that contains all of your certificates, other than
     #   the certificate you're importing, chaining up to your root CA. Your
     #   ACM Private CA-hosted or on-premises root certificate is the last in
@@ -989,7 +989,7 @@ module Aws::ACMPCA
     #   `arn:aws:acm-pca:region:account:certificate-authority/12345678-1234-1234-1234-123456789012
     #   `
     #
-    # @option params [required, String, IO] :csr
+    # @option params [required, String, IO like object supporting read, rewind and size] :csr
     #   The certificate signing request (CSR) for the certificate you want to
     #   issue. You can use the following OpenSSL command to create the CSR and
     #   a 2048 bit RSA private key.

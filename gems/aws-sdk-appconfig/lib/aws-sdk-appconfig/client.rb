@@ -652,7 +652,7 @@ module Aws::AppConfig
     # @option params [String] :description
     #   A description of the configuration.
     #
-    # @option params [required, String, IO] :content
+    # @option params [required, String, IO like object supporting read, rewind and size] :content
     #   The content of the configuration or the configuration data.
     #
     # @option params [required, String] :content_type

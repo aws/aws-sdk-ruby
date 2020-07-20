@@ -4071,7 +4071,7 @@ module Aws::CodeCommit
     #   The name of the branch where you want to add or update the file. If
     #   this is an empty repository, this branch is created.
     #
-    # @option params [required, String, IO] :file_content
+    # @option params [required, String, IO like object supporting read, rewind and size] :file_content
     #   The content of the file, in binary object format.
     #
     # @option params [required, String] :file_path

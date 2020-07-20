@@ -615,7 +615,7 @@ module Aws::Lex
     #
     #     * audio/* (defaults to mpeg)
     #
-    # @option params [required, String, IO] :input_stream
+    # @option params [required, String, IO like object supporting read, rewind and size] :input_stream
     #   User input in PCM or Opus audio format or text format as described in
     #   the `Content-Type` HTTP header.
     #
