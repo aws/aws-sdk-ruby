@@ -323,6 +323,7 @@ module Aws
             'Health' => 'health',
             'Honeycode' => 'honeycode',
             'IAM' => 'iam',
+            'IVS' => 'ivs',
             'Imagebuilder' => 'imagebuilder',
             'ImportExport' => 'importexport',
             'Inspector' => 'inspector',

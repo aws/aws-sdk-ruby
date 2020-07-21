@@ -405,6 +405,10 @@ module Aws::CodeBuild
     #   of a file system created using Amazon Elastic File System.
     #   @return [Array<Types::ProjectFileSystemLocation>]
     #
+    # @!attribute [rw] debug_session
+    #   Contains information about the debug session for this build.
+    #   @return [Types::DebugSession]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codebuild-2016-10-06/Build AWS API Documentation
     #
     class Build < Struct.new(
@@ -437,7 +441,8 @@ module Aws::CodeBuild
       :encryption_key,
       :exported_environment_variables,
       :report_arns,
-      :file_system_locations)
+      :file_system_locations,
+      :debug_session)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -809,7 +814,7 @@ module Aws::CodeBuild
     #           modes: ["LOCAL_DOCKER_LAYER_CACHE"], # accepts LOCAL_DOCKER_LAYER_CACHE, LOCAL_SOURCE_CACHE, LOCAL_CUSTOM_CACHE
     #         },
     #         environment: { # required
-    #           type: "WINDOWS_CONTAINER", # required, accepts WINDOWS_CONTAINER, LINUX_CONTAINER, LINUX_GPU_CONTAINER, ARM_CONTAINER
+    #           type: "WINDOWS_CONTAINER", # required, accepts WINDOWS_CONTAINER, LINUX_CONTAINER, LINUX_GPU_CONTAINER, ARM_CONTAINER, WINDOWS_SERVER_2019_CONTAINER
     #           image: "NonEmptyString", # required
     #           compute_type: "BUILD_GENERAL1_SMALL", # required, accepts BUILD_GENERAL1_SMALL, BUILD_GENERAL1_MEDIUM, BUILD_GENERAL1_LARGE, BUILD_GENERAL1_2XLARGE
     #           environment_variables: [
@@ -1170,6 +1175,32 @@ module Aws::CodeBuild
     #
     class CreateWebhookOutput < Struct.new(
       :webhook)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains information about the debug session for a build. For more
+    # information, see [Viewing a running build in Session Manager][1].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/codebuild/latest/userguide/session-manager.html
+    #
+    # @!attribute [rw] session_enabled
+    #   Specifies if session debugging is enabled for this build.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] session_target
+    #   Contains the identifier of the Session Manager session used for the
+    #   build. To work with the paused build, you open this session to
+    #   examine, control, and resume the build.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codebuild-2016-10-06/DebugSession AWS API Documentation
+    #
+    class DebugSession < Struct.new(
+      :session_enabled,
+      :session_target)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2046,7 +2077,7 @@ module Aws::CodeBuild
     #   @return [String]
     #
     # @!attribute [rw] reports
-    #   The list of returned report group ARNs.
+    #   The list of report ARNs.
     #   @return [Array<String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codebuild-2016-10-06/ListReportsForReportGroupOutput AWS API Documentation
@@ -2935,7 +2966,7 @@ module Aws::CodeBuild
     #   data as a hash:
     #
     #       {
-    #         type: "WINDOWS_CONTAINER", # required, accepts WINDOWS_CONTAINER, LINUX_CONTAINER, LINUX_GPU_CONTAINER, ARM_CONTAINER
+    #         type: "WINDOWS_CONTAINER", # required, accepts WINDOWS_CONTAINER, LINUX_CONTAINER, LINUX_GPU_CONTAINER, ARM_CONTAINER, WINDOWS_SERVER_2019_CONTAINER
     #         image: "NonEmptyString", # required
     #         compute_type: "BUILD_GENERAL1_SMALL", # required, accepts BUILD_GENERAL1_SMALL, BUILD_GENERAL1_MEDIUM, BUILD_GENERAL1_LARGE, BUILD_GENERAL1_2XLARGE
     #         environment_variables: [
@@ -3941,7 +3972,7 @@ module Aws::CodeBuild
     #           context: "String",
     #           target_url: "String",
     #         },
-    #         environment_type_override: "WINDOWS_CONTAINER", # accepts WINDOWS_CONTAINER, LINUX_CONTAINER, LINUX_GPU_CONTAINER, ARM_CONTAINER
+    #         environment_type_override: "WINDOWS_CONTAINER", # accepts WINDOWS_CONTAINER, LINUX_CONTAINER, LINUX_GPU_CONTAINER, ARM_CONTAINER, WINDOWS_SERVER_2019_CONTAINER
     #         image_override: "NonEmptyString",
     #         compute_type_override: "BUILD_GENERAL1_SMALL", # accepts BUILD_GENERAL1_SMALL, BUILD_GENERAL1_MEDIUM, BUILD_GENERAL1_LARGE, BUILD_GENERAL1_2XLARGE
     #         certificate_override: "String",
@@ -3973,6 +4004,7 @@ module Aws::CodeBuild
     #           credential_provider: "SECRETS_MANAGER", # required, accepts SECRETS_MANAGER
     #         },
     #         image_pull_credentials_type_override: "CODEBUILD", # accepts CODEBUILD, SERVICE_ROLE
+    #         debug_session_enabled: false,
     #       }
     #
     # @!attribute [rw] project_name
@@ -4204,6 +4236,15 @@ module Aws::CodeBuild
     #   image, you must use CODEBUILD credentials.
     #   @return [String]
     #
+    # @!attribute [rw] debug_session_enabled
+    #   Specifies if session debugging is enabled for this build. For more
+    #   information, see [Viewing a running build in Session Manager][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/codebuild/latest/userguide/session-manager.html
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codebuild-2016-10-06/StartBuildInput AWS API Documentation
     #
     class StartBuildInput < Struct.new(
@@ -4236,7 +4277,8 @@ module Aws::CodeBuild
       :idempotency_token,
       :logs_config_override,
       :registry_credential_override,
-      :image_pull_credentials_type_override)
+      :image_pull_credentials_type_override,
+      :debug_session_enabled)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4506,7 +4548,7 @@ module Aws::CodeBuild
     #           modes: ["LOCAL_DOCKER_LAYER_CACHE"], # accepts LOCAL_DOCKER_LAYER_CACHE, LOCAL_SOURCE_CACHE, LOCAL_CUSTOM_CACHE
     #         },
     #         environment: {
-    #           type: "WINDOWS_CONTAINER", # required, accepts WINDOWS_CONTAINER, LINUX_CONTAINER, LINUX_GPU_CONTAINER, ARM_CONTAINER
+    #           type: "WINDOWS_CONTAINER", # required, accepts WINDOWS_CONTAINER, LINUX_CONTAINER, LINUX_GPU_CONTAINER, ARM_CONTAINER, WINDOWS_SERVER_2019_CONTAINER
     #           image: "NonEmptyString", # required
     #           compute_type: "BUILD_GENERAL1_SMALL", # required, accepts BUILD_GENERAL1_SMALL, BUILD_GENERAL1_MEDIUM, BUILD_GENERAL1_LARGE, BUILD_GENERAL1_2XLARGE
     #           environment_variables: [

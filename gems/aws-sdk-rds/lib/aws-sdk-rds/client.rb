@@ -7652,6 +7652,8 @@ module Aws::RDS
     #   resp.db_engine_versions[0].supported_feature_names #=> Array
     #   resp.db_engine_versions[0].supported_feature_names[0] #=> String
     #   resp.db_engine_versions[0].status #=> String
+    #   resp.db_engine_versions[0].supports_parallel_query #=> Boolean
+    #   resp.db_engine_versions[0].supports_global_databases #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DescribeDBEngineVersions AWS API Documentation
     #
@@ -10064,6 +10066,7 @@ module Aws::RDS
     #   resp.orderable_db_instance_options[0].supports_storage_autoscaling #=> Boolean
     #   resp.orderable_db_instance_options[0].supports_kerberos_authentication #=> Boolean
     #   resp.orderable_db_instance_options[0].outpost_capable #=> Boolean
+    #   resp.orderable_db_instance_options[0].supports_global_databases #=> Boolean
     #   resp.marker #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DescribeOrderableDBInstanceOptions AWS API Documentation
@@ -18533,7 +18536,7 @@ module Aws::RDS
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-rds'
-      context[:gem_version] = '1.93.0'
+      context[:gem_version] = '1.94.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

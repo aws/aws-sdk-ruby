@@ -3941,7 +3941,7 @@
       "type":"structure",
       "members":{
         "Domain":{"shape":"DomainType"},
-        "Address":{"shape":"String"},
+        "Address":{"shape":"PublicIpAddress"},
         "PublicIpv4Pool":{"shape":"String"},
         "NetworkBorderGroup":{"shape":"String"},
         "CustomerOwnedIpv4Pool":{"shape":"String"},
@@ -6102,6 +6102,10 @@
         "Tags":{
           "shape":"TagList",
           "locationName":"tagSet"
+        },
+        "PoolArn":{
+          "shape":"ResourceArn",
+          "locationName":"poolArn"
         }
       }
     },
@@ -6203,6 +6207,13 @@
       }
     },
     "ConnectionNotificationId":{"type":"string"},
+    "ConnectionNotificationIdsList":{
+      "type":"list",
+      "member":{
+        "shape":"ConnectionNotificationId",
+        "locationName":"item"
+      }
+    },
     "ConnectionNotificationSet":{
       "type":"list",
       "member":{
@@ -6283,7 +6294,7 @@
       ],
       "members":{
         "DryRun":{"shape":"Boolean"},
-        "SourceFpgaImageId":{"shape":"FpgaImageId"},
+        "SourceFpgaImageId":{"shape":"String"},
         "Description":{"shape":"String"},
         "Name":{"shape":"String"},
         "SourceRegion":{"shape":"String"},
@@ -7403,6 +7414,10 @@
         "VpcId":{
           "shape":"VpcId",
           "locationName":"vpcId"
+        },
+        "TagSpecifications":{
+          "shape":"TagSpecificationList",
+          "locationName":"TagSpecification"
         }
       }
     },
@@ -8029,7 +8044,11 @@
           "shape":"VpcId",
           "locationName":"vpcId"
         },
-        "PeerRegion":{"shape":"String"}
+        "PeerRegion":{"shape":"String"},
+        "TagSpecifications":{
+          "shape":"TagSpecificationList",
+          "locationName":"TagSpecification"
+        }
       }
     },
     "CreateVpcPeeringConnectionResult":{
@@ -9083,7 +9102,7 @@
       "members":{
         "DryRun":{"shape":"Boolean"},
         "ConnectionNotificationIds":{
-          "shape":"ValueStringList",
+          "shape":"ConnectionNotificationIdsList",
           "locationName":"ConnectionNotificationId"
         }
       }
@@ -17573,7 +17592,7 @@
     "InstanceIdSet":{
       "type":"list",
       "member":{
-        "shape":"String",
+        "shape":"InstanceId",
         "locationName":"item"
       }
     },
@@ -22913,6 +22932,7 @@
         }
       }
     },
+    "PublicIpAddress":{"type":"string"},
     "PublicIpStringList":{
       "type":"list",
       "member":{

@@ -757,7 +757,7 @@ module Aws::Macie2
       req.send_request(options)
     end
 
-    # Deletes a custom data identifier.
+    # Soft deletes a custom data identifier.
     #
     # @option params [required, String] :id
     #
@@ -871,6 +871,8 @@ module Aws::Macie2
     #
     #   * {Types::DescribeBucketsResponse#buckets #buckets} => Array&lt;Types::BucketMetadata&gt;
     #   * {Types::DescribeBucketsResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     # @example Request syntax with placeholder values
     #
@@ -1319,8 +1321,8 @@ module Aws::Macie2
     # @option params [Integer] :size
     #
     # @option params [Types::FindingStatisticsSortCriteria] :sort_criteria
-    #   Specifies criteria for sorting the results of a query for information
-    #   about findings.
+    #   Specifies criteria for sorting the results of a query that retrieves
+    #   aggregated statistical data about findings.
     #
     # @return [Types::GetFindingStatisticsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1631,7 +1633,7 @@ module Aws::Macie2
     #   resp.master.account_id #=> String
     #   resp.master.invitation_id #=> String
     #   resp.master.invited_at #=> Time
-    #   resp.master.relationship_status #=> String, one of "Enabled", "Paused", "Invited", "Created", "Removed", "Resigned", "EmailVerificationInProgress", "EmailVerificationFailed"
+    #   resp.master.relationship_status #=> String, one of "Enabled", "Paused", "Invited", "Created", "Removed", "Resigned", "EmailVerificationInProgress", "EmailVerificationFailed", "RegionDisabled", "AccountSuspended"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/macie2-2020-01-01/GetMasterAccount AWS API Documentation
     #
@@ -1671,7 +1673,7 @@ module Aws::Macie2
     #   resp.email #=> String
     #   resp.invited_at #=> Time
     #   resp.master_account_id #=> String
-    #   resp.relationship_status #=> String, one of "Enabled", "Paused", "Invited", "Created", "Removed", "Resigned", "EmailVerificationInProgress", "EmailVerificationFailed"
+    #   resp.relationship_status #=> String, one of "Enabled", "Paused", "Invited", "Created", "Removed", "Resigned", "EmailVerificationInProgress", "EmailVerificationFailed", "RegionDisabled", "AccountSuspended"
     #   resp.tags #=> Hash
     #   resp.tags["__string"] #=> String
     #   resp.updated_at #=> Time
@@ -1702,6 +1704,8 @@ module Aws::Macie2
     #
     #   * {Types::GetUsageStatisticsResponse#next_token #next_token} => String
     #   * {Types::GetUsageStatisticsResponse#records #records} => Array&lt;Types::UsageRecord&gt;
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     # @example Request syntax with placeholder values
     #
@@ -1765,8 +1769,8 @@ module Aws::Macie2
       req.send_request(options)
     end
 
-    # Retrieves information about the status and settings for one or more
-    # classification jobs.
+    # Retrieves a subset of information about one or more classification
+    # jobs.
     #
     # @option params [Types::ListJobsFilterCriteria] :filter_criteria
     #   Specifies criteria for filtering the results of a request for
@@ -1784,6 +1788,8 @@ module Aws::Macie2
     #
     #   * {Types::ListClassificationJobsResponse#items #items} => Array&lt;Types::JobSummary&gt;
     #   * {Types::ListClassificationJobsResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     # @example Request syntax with placeholder values
     #
@@ -1847,6 +1853,8 @@ module Aws::Macie2
     #   * {Types::ListCustomDataIdentifiersResponse#items #items} => Array&lt;Types::CustomDataIdentifierSummary&gt;
     #   * {Types::ListCustomDataIdentifiersResponse#next_token #next_token} => String
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_custom_data_identifiers({
@@ -1891,6 +1899,8 @@ module Aws::Macie2
     #
     #   * {Types::ListFindingsResponse#finding_ids #finding_ids} => Array&lt;String&gt;
     #   * {Types::ListFindingsResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     # @example Request syntax with placeholder values
     #
@@ -1942,6 +1952,8 @@ module Aws::Macie2
     #   * {Types::ListFindingsFiltersResponse#findings_filter_list_items #findings_filter_list_items} => Array&lt;Types::FindingsFilterListItem&gt;
     #   * {Types::ListFindingsFiltersResponse#next_token #next_token} => String
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_findings_filters({
@@ -1952,6 +1964,7 @@ module Aws::Macie2
     # @example Response structure
     #
     #   resp.findings_filter_list_items #=> Array
+    #   resp.findings_filter_list_items[0].action #=> String, one of "ARCHIVE", "NOOP"
     #   resp.findings_filter_list_items[0].arn #=> String
     #   resp.findings_filter_list_items[0].id #=> String
     #   resp.findings_filter_list_items[0].name #=> String
@@ -1980,6 +1993,8 @@ module Aws::Macie2
     #   * {Types::ListInvitationsResponse#invitations #invitations} => Array&lt;Types::Invitation&gt;
     #   * {Types::ListInvitationsResponse#next_token #next_token} => String
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_invitations({
@@ -1993,7 +2008,7 @@ module Aws::Macie2
     #   resp.invitations[0].account_id #=> String
     #   resp.invitations[0].invitation_id #=> String
     #   resp.invitations[0].invited_at #=> Time
-    #   resp.invitations[0].relationship_status #=> String, one of "Enabled", "Paused", "Invited", "Created", "Removed", "Resigned", "EmailVerificationInProgress", "EmailVerificationFailed"
+    #   resp.invitations[0].relationship_status #=> String, one of "Enabled", "Paused", "Invited", "Created", "Removed", "Resigned", "EmailVerificationInProgress", "EmailVerificationFailed", "RegionDisabled", "AccountSuspended"
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/macie2-2020-01-01/ListInvitations AWS API Documentation
@@ -2019,6 +2034,8 @@ module Aws::Macie2
     #   * {Types::ListMembersResponse#members #members} => Array&lt;Types::Member&gt;
     #   * {Types::ListMembersResponse#next_token #next_token} => String
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_members({
@@ -2035,7 +2052,7 @@ module Aws::Macie2
     #   resp.members[0].email #=> String
     #   resp.members[0].invited_at #=> Time
     #   resp.members[0].master_account_id #=> String
-    #   resp.members[0].relationship_status #=> String, one of "Enabled", "Paused", "Invited", "Created", "Removed", "Resigned", "EmailVerificationInProgress", "EmailVerificationFailed"
+    #   resp.members[0].relationship_status #=> String, one of "Enabled", "Paused", "Invited", "Created", "Removed", "Resigned", "EmailVerificationInProgress", "EmailVerificationFailed", "RegionDisabled", "AccountSuspended"
     #   resp.members[0].tags #=> Hash
     #   resp.members[0].tags["__string"] #=> String
     #   resp.members[0].updated_at #=> Time
@@ -2061,6 +2078,8 @@ module Aws::Macie2
     #
     #   * {Types::ListOrganizationAdminAccountsResponse#admin_accounts #admin_accounts} => Array&lt;Types::AdminAccount&gt;
     #   * {Types::ListOrganizationAdminAccountsResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     # @example Request syntax with placeholder values
     #
@@ -2254,7 +2273,7 @@ module Aws::Macie2
     # @option params [required, String] :job_id
     #
     # @option params [required, String] :job_status
-    #   The current status of a classification job. Valid values are:
+    #   The current status of a classification job. Possible values are:
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -2424,7 +2443,7 @@ module Aws::Macie2
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-macie2'
-      context[:gem_version] = '1.5.0'
+      context[:gem_version] = '1.6.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

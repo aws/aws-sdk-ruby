@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.35.0 (2020-07-17)
+------------------
+
+* Feature - Add waiters for `EnvironmentExists`, `EnvironmentUpdated`, and `EnvironmentTerminated`. Add paginators for `DescribeEnvironmentManagedActionHistory` and `ListPlatformVersions`.
+
 1.34.0 (2020-07-02)
 ------------------
 

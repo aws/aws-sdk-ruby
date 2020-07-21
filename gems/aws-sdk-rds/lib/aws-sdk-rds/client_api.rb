@@ -1226,6 +1226,8 @@ module Aws::RDS
     DBEngineVersion.add_member(:supported_engine_modes, Shapes::ShapeRef.new(shape: EngineModeList, location_name: "SupportedEngineModes"))
     DBEngineVersion.add_member(:supported_feature_names, Shapes::ShapeRef.new(shape: FeatureNameList, location_name: "SupportedFeatureNames"))
     DBEngineVersion.add_member(:status, Shapes::ShapeRef.new(shape: String, location_name: "Status"))
+    DBEngineVersion.add_member(:supports_parallel_query, Shapes::ShapeRef.new(shape: Boolean, location_name: "SupportsParallelQuery"))
+    DBEngineVersion.add_member(:supports_global_databases, Shapes::ShapeRef.new(shape: Boolean, location_name: "SupportsGlobalDatabases"))
     DBEngineVersion.struct_class = Types::DBEngineVersion
 
     DBEngineVersionList.member = Shapes::ShapeRef.new(shape: DBEngineVersion, location_name: "DBEngineVersion")
@@ -2552,6 +2554,7 @@ module Aws::RDS
     OrderableDBInstanceOption.add_member(:supports_storage_autoscaling, Shapes::ShapeRef.new(shape: BooleanOptional, location_name: "SupportsStorageAutoscaling"))
     OrderableDBInstanceOption.add_member(:supports_kerberos_authentication, Shapes::ShapeRef.new(shape: BooleanOptional, location_name: "SupportsKerberosAuthentication"))
     OrderableDBInstanceOption.add_member(:outpost_capable, Shapes::ShapeRef.new(shape: Boolean, location_name: "OutpostCapable"))
+    OrderableDBInstanceOption.add_member(:supports_global_databases, Shapes::ShapeRef.new(shape: Boolean, location_name: "SupportsGlobalDatabases"))
     OrderableDBInstanceOption.struct_class = Types::OrderableDBInstanceOption
 
     OrderableDBInstanceOptionsList.member = Shapes::ShapeRef.new(shape: OrderableDBInstanceOption, location_name: "OrderableDBInstanceOption")

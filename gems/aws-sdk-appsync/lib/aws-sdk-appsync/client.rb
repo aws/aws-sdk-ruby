@@ -339,30 +339,7 @@ module Aws::AppSync
     #     are cached.
     #
     # @option params [required, String] :type
-    #   The cache instance type. Valid values are
-    #
-    #   * `SMALL`
-    #
-    #   * `MEDIUM`
-    #
-    #   * `LARGE`
-    #
-    #   * `XLARGE`
-    #
-    #   * `LARGE_2X`
-    #
-    #   * `LARGE_4X`
-    #
-    #   * `LARGE_8X` (not available in all regions)
-    #
-    #   * `LARGE_12X`
-    #
-    #   Historically, instance types were identified by an EC2-style value. As
-    #   of July 2020, this is deprecated, and the generic identifiers above
-    #   should be used.
-    #
-    #   The following legacy instance types are avaible, but their use is
-    #   discouraged:
+    #   The cache instance type.
     #
     #   * **T2\_SMALL**\: A t2.small instance type.
     #
@@ -1982,30 +1959,7 @@ module Aws::AppSync
     #     are cached.
     #
     # @option params [required, String] :type
-    #   The cache instance type. Valid values are
-    #
-    #   * `SMALL`
-    #
-    #   * `MEDIUM`
-    #
-    #   * `LARGE`
-    #
-    #   * `XLARGE`
-    #
-    #   * `LARGE_2X`
-    #
-    #   * `LARGE_4X`
-    #
-    #   * `LARGE_8X` (not available in all regions)
-    #
-    #   * `LARGE_12X`
-    #
-    #   Historically, instance types were identified by an EC2-style value. As
-    #   of July 2020, this is deprecated, and the generic identifiers above
-    #   should be used.
-    #
-    #   The following legacy instance types are avaible, but their use is
-    #   discouraged:
+    #   The cache instance type.
     #
     #   * **T2\_SMALL**\: A t2.small instance type.
     #
@@ -2552,7 +2506,7 @@ module Aws::AppSync
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-appsync'
-      context[:gem_version] = '1.29.0'
+      context[:gem_version] = '1.30.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

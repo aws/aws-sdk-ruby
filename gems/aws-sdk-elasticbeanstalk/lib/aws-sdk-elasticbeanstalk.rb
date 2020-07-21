@@ -14,6 +14,7 @@ require_relative 'aws-sdk-elasticbeanstalk/types'
 require_relative 'aws-sdk-elasticbeanstalk/client_api'
 require_relative 'aws-sdk-elasticbeanstalk/client'
 require_relative 'aws-sdk-elasticbeanstalk/errors'
+require_relative 'aws-sdk-elasticbeanstalk/waiters'
 require_relative 'aws-sdk-elasticbeanstalk/resource'
 require_relative 'aws-sdk-elasticbeanstalk/customizations'
 
@@ -47,6 +48,6 @@ require_relative 'aws-sdk-elasticbeanstalk/customizations'
 # @service
 module Aws::ElasticBeanstalk
 
-  GEM_VERSION = '1.34.0'
+  GEM_VERSION = '1.35.0'
 
 end

@@ -1410,7 +1410,9 @@ module Aws::ApplicationAutoScaling
     #   `ALBRequestCountPerTarget` and there is a target group attached to
     #   the Spot Fleet request or ECS service.
     #
-    #   The format is
+    #   Elastic Load Balancing sends data about your load balancers to
+    #   Amazon CloudWatch. CloudWatch collects the data and specifies the
+    #   format to use to access the data. The format is
     #   app/&lt;load-balancer-name&gt;/&lt;load-balancer-id&gt;/targetgroup/&lt;target-group-name&gt;/&lt;target-group-id&gt;,
     #   where:
     #
@@ -1419,6 +1421,15 @@ module Aws::ApplicationAutoScaling
     #
     #   * targetgroup/&lt;target-group-name&gt;/&lt;target-group-id&gt; is
     #     the final portion of the target group ARN.
+    #
+    #   To find the ARN for an Application Load Balancer, use the
+    #   [DescribeLoadBalancers][1] API operation. To find the ARN for the
+    #   target group, use the [DescribeTargetGroups][2] API operation.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/elasticloadbalancing/latest/APIReference/API_DescribeLoadBalancers.html
+    #   [2]: https://docs.aws.amazon.com/elasticloadbalancing/latest/APIReference/API_DescribeTargetGroups.html
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/application-autoscaling-2016-02-06/PredefinedMetricSpecification AWS API Documentation
@@ -2007,8 +2018,10 @@ module Aws::ApplicationAutoScaling
     #   changing demand.
     #
     #   This parameter is required if you are registering a scalable target.
-    #   For Lambda provisioned concurrency, the minimum value allowed is 0.
-    #   For all other resources, the minimum value allowed is 1.
+    #   For certain resources, the minimum value allowed is 0. This includes
+    #   Lambda provisioned concurrency, Spot Fleet, ECS services, Aurora DB
+    #   clusters, EMR clusters, and custom resources. For all other
+    #   resources, the minimum value allowed is 1.
     #   @return [Integer]
     #
     # @!attribute [rw] max_capacity

@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.343.0 (2020-07-17)
+------------------
+
+* Feature - Updated the partitions source data the determines the AWS service regions and endpoints.
+
+1.342.0 (2020-07-15)
+------------------
+
+* Feature - Added support for enumerating regions for `Aws::IVS`.
+
 1.341.0 (2020-07-09)
 ------------------
 

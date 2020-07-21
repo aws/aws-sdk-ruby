@@ -224,6 +224,7 @@ module Aws::EC2
     ConnectionLogResponseOptions = Shapes::StructureShape.new(name: 'ConnectionLogResponseOptions')
     ConnectionNotification = Shapes::StructureShape.new(name: 'ConnectionNotification')
     ConnectionNotificationId = Shapes::StringShape.new(name: 'ConnectionNotificationId')
+    ConnectionNotificationIdsList = Shapes::ListShape.new(name: 'ConnectionNotificationIdsList')
     ConnectionNotificationSet = Shapes::ListShape.new(name: 'ConnectionNotificationSet')
     ConnectionNotificationState = Shapes::StringShape.new(name: 'ConnectionNotificationState')
     ConnectionNotificationType = Shapes::StringShape.new(name: 'ConnectionNotificationType')
@@ -1534,6 +1535,7 @@ module Aws::EC2
     ProvisionByoipCidrRequest = Shapes::StructureShape.new(name: 'ProvisionByoipCidrRequest')
     ProvisionByoipCidrResult = Shapes::StructureShape.new(name: 'ProvisionByoipCidrResult')
     ProvisionedBandwidth = Shapes::StructureShape.new(name: 'ProvisionedBandwidth')
+    PublicIpAddress = Shapes::StringShape.new(name: 'PublicIpAddress')
     PublicIpStringList = Shapes::ListShape.new(name: 'PublicIpStringList')
     PublicIpv4Pool = Shapes::StructureShape.new(name: 'PublicIpv4Pool')
     PublicIpv4PoolIdStringList = Shapes::ListShape.new(name: 'PublicIpv4PoolIdStringList')
@@ -2148,7 +2150,7 @@ module Aws::EC2
     AdvertiseByoipCidrResult.struct_class = Types::AdvertiseByoipCidrResult
 
     AllocateAddressRequest.add_member(:domain, Shapes::ShapeRef.new(shape: DomainType, location_name: "Domain"))
-    AllocateAddressRequest.add_member(:address, Shapes::ShapeRef.new(shape: String, location_name: "Address"))
+    AllocateAddressRequest.add_member(:address, Shapes::ShapeRef.new(shape: PublicIpAddress, location_name: "Address"))
     AllocateAddressRequest.add_member(:public_ipv_4_pool, Shapes::ShapeRef.new(shape: String, location_name: "PublicIpv4Pool"))
     AllocateAddressRequest.add_member(:network_border_group, Shapes::ShapeRef.new(shape: String, location_name: "NetworkBorderGroup"))
     AllocateAddressRequest.add_member(:customer_owned_ipv_4_pool, Shapes::ShapeRef.new(shape: String, location_name: "CustomerOwnedIpv4Pool"))
@@ -2744,6 +2746,7 @@ module Aws::EC2
     CoipPool.add_member(:pool_cidrs, Shapes::ShapeRef.new(shape: ValueStringList, location_name: "poolCidrSet"))
     CoipPool.add_member(:local_gateway_route_table_id, Shapes::ShapeRef.new(shape: LocalGatewayRoutetableId, location_name: "localGatewayRouteTableId"))
     CoipPool.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "tagSet"))
+    CoipPool.add_member(:pool_arn, Shapes::ShapeRef.new(shape: ResourceArn, location_name: "poolArn"))
     CoipPool.struct_class = Types::CoipPool
 
     CoipPoolIdSet.member = Shapes::ShapeRef.new(shape: CoipPoolId, location_name: "item")
@@ -2778,6 +2781,8 @@ module Aws::EC2
     ConnectionNotification.add_member(:connection_notification_state, Shapes::ShapeRef.new(shape: ConnectionNotificationState, location_name: "connectionNotificationState"))
     ConnectionNotification.struct_class = Types::ConnectionNotification
 
+    ConnectionNotificationIdsList.member = Shapes::ShapeRef.new(shape: ConnectionNotificationId, location_name: "item")
+
     ConnectionNotificationSet.member = Shapes::ShapeRef.new(shape: ConnectionNotification, location_name: "item")
 
     ConversionIdStringList.member = Shapes::ShapeRef.new(shape: ConversionTaskId, location_name: "item")
@@ -2792,7 +2797,7 @@ module Aws::EC2
     ConversionTask.struct_class = Types::ConversionTask
 
     CopyFpgaImageRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "DryRun"))
-    CopyFpgaImageRequest.add_member(:source_fpga_image_id, Shapes::ShapeRef.new(shape: FpgaImageId, required: true, location_name: "SourceFpgaImageId"))
+    CopyFpgaImageRequest.add_member(:source_fpga_image_id, Shapes::ShapeRef.new(shape: String, required: true, location_name: "SourceFpgaImageId"))
     CopyFpgaImageRequest.add_member(:description, Shapes::ShapeRef.new(shape: String, location_name: "Description"))
     CopyFpgaImageRequest.add_member(:name, Shapes::ShapeRef.new(shape: String, location_name: "Name"))
     CopyFpgaImageRequest.add_member(:source_region, Shapes::ShapeRef.new(shape: String, required: true, location_name: "SourceRegion"))
@@ -3186,6 +3191,7 @@ module Aws::EC2
 
     CreateRouteTableRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "dryRun"))
     CreateRouteTableRequest.add_member(:vpc_id, Shapes::ShapeRef.new(shape: VpcId, required: true, location_name: "vpcId"))
+    CreateRouteTableRequest.add_member(:tag_specifications, Shapes::ShapeRef.new(shape: TagSpecificationList, location_name: "TagSpecification"))
     CreateRouteTableRequest.struct_class = Types::CreateRouteTableRequest
 
     CreateRouteTableResult.add_member(:route_table, Shapes::ShapeRef.new(shape: RouteTable, location_name: "routeTable"))
@@ -3430,6 +3436,7 @@ module Aws::EC2
     CreateVpcPeeringConnectionRequest.add_member(:peer_vpc_id, Shapes::ShapeRef.new(shape: String, location_name: "peerVpcId"))
     CreateVpcPeeringConnectionRequest.add_member(:vpc_id, Shapes::ShapeRef.new(shape: VpcId, location_name: "vpcId"))
     CreateVpcPeeringConnectionRequest.add_member(:peer_region, Shapes::ShapeRef.new(shape: String, location_name: "PeerRegion"))
+    CreateVpcPeeringConnectionRequest.add_member(:tag_specifications, Shapes::ShapeRef.new(shape: TagSpecificationList, location_name: "TagSpecification"))
     CreateVpcPeeringConnectionRequest.struct_class = Types::CreateVpcPeeringConnectionRequest
 
     CreateVpcPeeringConnectionResult.add_member(:vpc_peering_connection, Shapes::ShapeRef.new(shape: VpcPeeringConnection, location_name: "vpcPeeringConnection"))
@@ -3782,7 +3789,7 @@ module Aws::EC2
     DeleteVolumeRequest.struct_class = Types::DeleteVolumeRequest
 
     DeleteVpcEndpointConnectionNotificationsRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "DryRun"))
-    DeleteVpcEndpointConnectionNotificationsRequest.add_member(:connection_notification_ids, Shapes::ShapeRef.new(shape: ValueStringList, required: true, location_name: "ConnectionNotificationId"))
+    DeleteVpcEndpointConnectionNotificationsRequest.add_member(:connection_notification_ids, Shapes::ShapeRef.new(shape: ConnectionNotificationIdsList, required: true, location_name: "ConnectionNotificationId"))
     DeleteVpcEndpointConnectionNotificationsRequest.struct_class = Types::DeleteVpcEndpointConnectionNotificationsRequest
 
     DeleteVpcEndpointConnectionNotificationsResult.add_member(:unsuccessful, Shapes::ShapeRef.new(shape: UnsuccessfulItemSet, location_name: "unsuccessful"))
@@ -6418,7 +6425,7 @@ module Aws::EC2
     InstanceFamilyCreditSpecification.add_member(:cpu_credits, Shapes::ShapeRef.new(shape: String, location_name: "cpuCredits"))
     InstanceFamilyCreditSpecification.struct_class = Types::InstanceFamilyCreditSpecification
 
-    InstanceIdSet.member = Shapes::ShapeRef.new(shape: String, location_name: "item")
+    InstanceIdSet.member = Shapes::ShapeRef.new(shape: InstanceId, location_name: "item")
 
     InstanceIdStringList.member = Shapes::ShapeRef.new(shape: InstanceId, location_name: "InstanceId")
 

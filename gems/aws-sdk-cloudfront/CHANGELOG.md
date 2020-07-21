@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.35.0 (2020-07-20)
+------------------
+
+* Feature - CloudFront adds support for cache policies and origin request policies. With these new policies, you can now more granularly control the query string, header, and cookie values that are included in the cache key and in requests that CloudFront sends to your origin.
+
 1.34.0 (2020-07-07)
 ------------------
 
