@@ -153,7 +153,6 @@ module Aws
             object.upload_file(seventeen_meg_file, content_type: 'text/plain', progress_callback: callback)
           end
 
-
           it 'raises an error if the multipart threshold is too small' do
             error_msg = 'unable to multipart upload files smaller than 5MB'
             expect do
