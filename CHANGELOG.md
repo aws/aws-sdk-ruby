@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+2.11.549 (2020-07-21)
+------------------
+
 * Feature - Aws::CodeGuruProfiler - Updated the API, and documentation for Amazon CodeGuru Profiler.
 
 2.11.548 (2020-07-20)
