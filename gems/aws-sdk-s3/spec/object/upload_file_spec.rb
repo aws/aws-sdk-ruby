@@ -73,11 +73,9 @@ module Aws
             expect(client).to receive(:put_object).with(
               bucket: 'bucket',
               key: 'key',
-              body: ten_meg_file,
-              on_chunk_sent: anything
+              body: ten_meg_file
             )
-            callback = proc {|x, y| puts 'CALLBACK!' }
-            object.upload_file(ten_meg_file, progress_callback: callback)
+            object.upload_file(ten_meg_file)
           end
 
           it 'reports progress for small objects' do
