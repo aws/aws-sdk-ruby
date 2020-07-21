@@ -1468,7 +1468,7 @@ module Aws::CodeBuild
     #
     #    </note>
     #
-    # @option params [Array<Array>] :filter_groups
+    # @option params [Array<Array<Types::WebhookFilter>>] :filter_groups
     #   An array of arrays of `WebhookFilter` objects used to determine which
     #   webhooks are triggered. At least one `WebhookFilter` in the array must
     #   specify `EVENT` as its `type`.
@@ -3479,7 +3479,7 @@ module Aws::CodeBuild
     #   repository's secret token should be updated. If you use Bitbucket for
     #   your repository, `rotateSecret` is ignored.
     #
-    # @option params [Array<Array>] :filter_groups
+    # @option params [Array<Array<Types::WebhookFilter>>] :filter_groups
     #   An array of arrays of `WebhookFilter` objects used to determine if a
     #   webhook event can trigger a build. A filter group must contain at
     #   least one `EVENT` `WebhookFilter`.

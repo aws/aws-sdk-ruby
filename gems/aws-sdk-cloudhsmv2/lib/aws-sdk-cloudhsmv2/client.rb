@@ -666,7 +666,7 @@ module Aws::CloudHSMV2
     #   are more backups than the number you specify, the response contains a
     #   `NextToken` value.
     #
-    # @option params [Hash<String,Array>] :filters
+    # @option params [Hash<String,Array<String>>] :filters
     #   One or more filters to limit the items returned in the response.
     #
     #   Use the `backupIds` filter to return only the specified backups.
@@ -739,7 +739,7 @@ module Aws::CloudHSMV2
     # When you receive a response with no `NextToken` (or an empty or null
     # value), that means there are no more clusters to get.
     #
-    # @option params [Hash<String,Array>] :filters
+    # @option params [Hash<String,Array<String>>] :filters
     #   One or more filters to limit the items returned in the response.
     #
     #   Use the `clusterIds` filter to return only the specified clusters.

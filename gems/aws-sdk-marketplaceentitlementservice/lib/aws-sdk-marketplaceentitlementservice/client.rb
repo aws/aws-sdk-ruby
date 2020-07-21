@@ -331,7 +331,7 @@ module Aws::MarketplaceEntitlementService
     #   Marketplace. The product code will be provided by AWS Marketplace when
     #   the product listing is created.
     #
-    # @option params [Hash<String,Array>] :filter
+    # @option params [Hash<String,Array<String>>] :filter
     #   Filter is used to return entitlements for a specific customer or for a
     #   specific dimension. Filters are described as keys mapped to a lists of
     #   values. Filtered requests are *unioned* for each value in the value

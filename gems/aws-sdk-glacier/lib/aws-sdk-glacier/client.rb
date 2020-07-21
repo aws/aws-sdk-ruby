@@ -3171,7 +3171,7 @@ module Aws::Glacier
     # @option params [String] :checksum
     #   The SHA256 tree hash of the data being uploaded.
     #
-    # @option params [String, IO] :body
+    # @option params [String, StringIO, File] :body
     #   The data to upload.
     #
     # @return [Types::ArchiveCreationOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
@@ -3302,7 +3302,7 @@ module Aws::Glacier
     #   follows RFC 2616. An example header is Content-Range:bytes
     #   0-4194303/*.
     #
-    # @option params [String, IO] :body
+    # @option params [String, StringIO, File] :body
     #   The data to upload.
     #
     # @return [Types::UploadMultipartPartOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:

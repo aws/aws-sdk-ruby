@@ -635,7 +635,7 @@ module Aws::SSM
     #
     #    </note>
     #
-    # @option params [Hash<String,Array>] :parameters
+    # @option params [Hash<String,Array<String>>] :parameters
     #   The parameters for the runtime configuration of the document.
     #
     # @option params [Array<Types::Target>] :targets
@@ -7656,7 +7656,7 @@ module Aws::SSM
     # @option params [required, String] :signal_type
     #   The type of signal to send to an Automation execution.
     #
-    # @option params [Hash<String,Array>] :payload
+    # @option params [Hash<String,Array<String>>] :payload
     #   The data sent with the signal. The data schema depends on the type of
     #   signal used in the request.
     #
@@ -7761,7 +7761,7 @@ module Aws::SSM
     #   User-specified information about the command, such as a brief
     #   description of what the command should do.
     #
-    # @option params [Hash<String,Array>] :parameters
+    # @option params [Hash<String,Array<String>>] :parameters
     #   The required and optional parameters specified in the document being
     #   run.
     #
@@ -7931,7 +7931,7 @@ module Aws::SSM
     # @option params [String] :document_version
     #   The version of the Automation document to use for this execution.
     #
-    # @option params [Hash<String,Array>] :parameters
+    # @option params [Hash<String,Array<String>>] :parameters
     #   A key-value map of execution parameters, which match the declared
     #   parameters in the Automation document.
     #
@@ -7951,7 +7951,7 @@ module Aws::SSM
     #   A key-value mapping to target resources. Required if you specify
     #   TargetParameterName.
     #
-    # @option params [Array<Hash>] :target_maps
+    # @option params [Array<Hash<String,Array<String>>>] :target_maps
     #   A key-value mapping of document parameters to target resources. Both
     #   Targets and TargetMaps cannot be specified together.
     #
@@ -8092,7 +8092,7 @@ module Aws::SSM
     #   attempting to start a session. If no document name is provided, a
     #   shell to the instance is launched by default.
     #
-    # @option params [Hash<String,Array>] :parameters
+    # @option params [Hash<String,Array<String>>] :parameters
     #   Reserved for future use.
     #
     # @return [Types::StartSessionResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
@@ -8201,7 +8201,7 @@ module Aws::SSM
     # @option params [required, String] :association_id
     #   The ID of the association you want to update.
     #
-    # @option params [Hash<String,Array>] :parameters
+    # @option params [Hash<String,Array<String>>] :parameters
     #   The parameters you want to update for the association. If you create a
     #   parameter using Parameter Store, you can reference the parameter using
     #   \\\{\\\{ssm:parameter-name\\}\\}
