@@ -293,7 +293,7 @@ module Aws::Glacier
     #   assemble the archive in the proper sequence. The format of this header
     #   follows RFC 2616. An example header is Content-Range:bytes
     #   0-4194303/*.
-    # @option options [String, IO] :body
+    # @option options [String, StringIO, File] :body
     #   The data to upload.
     # @return [Types::UploadMultipartPartOutput]
     def upload_part(options = {})

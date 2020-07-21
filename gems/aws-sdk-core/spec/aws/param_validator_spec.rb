@@ -186,7 +186,7 @@ module Aws
         validate(blob: double('d', :read => 'abc', :size => 3, :rewind => 0))
         validate({ blob: 'abc' })
         validate({ blob: 123 },
-          [/expected params\[:blob\] to be a String or IO object, got value 123 \(class: (Fixnum|Integer)\) instead./])
+          [/expected params\[:blob\] to be a String or IO like object that supports read, rewind, and size, got value 123 \(class: (Fixnum|Integer)\) instead./])
       end
 
     end

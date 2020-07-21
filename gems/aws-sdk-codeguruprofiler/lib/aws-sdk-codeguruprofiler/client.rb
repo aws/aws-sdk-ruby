@@ -1270,7 +1270,7 @@ module Aws::CodeGuruProfiler
     #
     # [1]: https://docs.aws.amazon.com/codeguru/latest/profiler-api/API_GetProfile.html
     #
-    # @option params [required, String, IO] :agent_profile
+    # @option params [required, String, StringIO, File] :agent_profile
     #   The submitted profiling data.
     #
     # @option params [required, String] :content_type

@@ -440,7 +440,7 @@ module Aws::IoTDataPlane
     # @option params [Integer] :qos
     #   The Quality of Service (QoS) level.
     #
-    # @option params [String, IO] :payload
+    # @option params [String, StringIO, File] :payload
     #   The state information, in JSON format.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
@@ -475,7 +475,7 @@ module Aws::IoTDataPlane
     # @option params [String] :shadow_name
     #   The name of the shadow.
     #
-    # @option params [required, String, IO] :payload
+    # @option params [required, String, StringIO, File] :payload
     #   The state information, in JSON format.
     #
     # @return [Types::UpdateThingShadowResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:

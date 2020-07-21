@@ -3696,7 +3696,7 @@ module Aws::DatabaseMigrationService
     # @option params [String] :certificate_pem
     #   The contents of a `.pem` file, which contains an X.509 certificate.
     #
-    # @option params [String, IO] :certificate_wallet
+    # @option params [String, StringIO, File] :certificate_wallet
     #   The location of an imported Oracle Wallet certificate for use with
     #   SSL.
     #

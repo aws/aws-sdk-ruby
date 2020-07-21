@@ -5508,7 +5508,7 @@ module Aws::CognitoIdentityProvider
     # @option params [String] :css
     #   The CSS values in the UI customization.
     #
-    # @option params [String, IO] :image_file
+    # @option params [String, StringIO, File] :image_file
     #   The uploaded logo image for the UI customization.
     #
     # @return [Types::SetUICustomizationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:

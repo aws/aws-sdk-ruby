@@ -363,7 +363,7 @@ module Aws::ApiGatewayManagementApi
 
     # Sends the provided data to the specified connection.
     #
-    # @option params [required, String, IO] :data
+    # @option params [required, String, StringIO, File] :data
     #   The data to be sent to the client specified by its connection id.
     #
     # @option params [required, String] :connection_id

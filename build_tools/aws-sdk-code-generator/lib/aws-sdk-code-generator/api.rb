@@ -47,12 +47,17 @@ module AwsSdkCodeGenerator
         end
       end
 
-      def ruby_input_type(shape_ref, api, options = {})
+      def ruby_input_type(shape_ref, api, operation = nil, options = {})
         nested = options.fetch(:nested, false)
         _, shape = resolve(shape_ref, api)
         case shape['type']
         when 'byte' then 'Integer<byte>'
-        when 'blob' then 'String, IO'
+        when 'blob'
+          if streaming_input?(shape, operation)
+            'String, IO'
+          else
+            'String, StringIO, File'
+          end
         when 'boolean' then 'Boolean'
         when 'character' then 'String<character>'
         when 'double' then 'Float'
@@ -62,14 +67,14 @@ module AwsSdkCodeGenerator
           if nested
             "Array"
           else
-            "Array<#{ruby_input_type(shape['member'], api, nested: true)}>"
+            "Array<#{ruby_input_type(shape['member'], api, operation, nested: true)}>"
           end
         when 'long' then 'Integer'
         when 'map'
           if nested
             "Hash"
           else
-            "Hash<String,#{ruby_input_type(shape['value'], api, nested: true)}>"
+            "Hash<String,#{ruby_input_type(shape['value'], api, operation, nested: true)}>"
           end
         when 'string' then 'String'
         when 'structure' then "Types::#{shape_ref['shape']}"
@@ -113,6 +118,12 @@ module AwsSdkCodeGenerator
         ref['eventstream'] || shape['eventstream']
       end
 
+      # @return [Boolean]
+      def streaming_input?(shape, operation)
+        shape['streaming'] && operation &&
+          operation['authtype'] == "v4-unsigned-body"
+      end
+
       def plural?(resource)
         plural = false
         (resource['identifiers'] || []).each do |i|
@@ -124,7 +135,6 @@ module AwsSdkCodeGenerator
         plural = true if resource['data'] && resource['data'].include?('[]')
         plural
       end
-
     end
   end
 end

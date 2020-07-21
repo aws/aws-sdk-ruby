@@ -1511,7 +1511,7 @@ module Aws::IoTAnalytics
     #   only short-running Lambda functions (those with a timeout of less than
     #   30 seconds or less) can be used.
     #
-    # @option params [required, Array<String, IO>] :payloads
+    # @option params [required, Array<String, StringIO, File>] :payloads
     #   The sample message payloads on which the pipeline activity is run.
     #
     # @return [Types::RunPipelineActivityResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:

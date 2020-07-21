@@ -541,7 +541,7 @@ module Aws::ACM
     #
     #   `arn:aws:acm:region:account:certificate/12345678-1234-1234-1234-123456789012`
     #
-    # @option params [required, String, IO] :passphrase
+    # @option params [required, String, StringIO, File] :passphrase
     #   Passphrase to associate with the encrypted exported private key. If
     #   you want to later decrypt the private key, you must have the
     #   passphrase. You can use the following OpenSSL command to decrypt a
@@ -699,13 +699,13 @@ module Aws::ACM
     #
     #   [1]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
     #
-    # @option params [required, String, IO] :certificate
+    # @option params [required, String, StringIO, File] :certificate
     #   The certificate to import.
     #
-    # @option params [required, String, IO] :private_key
+    # @option params [required, String, StringIO, File] :private_key
     #   The private key that matches the public key in the certificate.
     #
-    # @option params [String, IO] :certificate_chain
+    # @option params [String, StringIO, File] :certificate_chain
     #   The PEM encoded certificate chain.
     #
     # @option params [Array<Types::Tag>] :tags

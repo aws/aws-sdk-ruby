@@ -606,7 +606,7 @@ module Aws::SecretsManager
     #   the secret. If the secret resides in a different account, then you
     #   must create a custom CMK and specify the ARN in this field.
     #
-    # @option params [String, IO] :secret_binary
+    # @option params [String, StringIO, File] :secret_binary
     #   (Optional) Specifies binary data that you want to encrypt and store in
     #   the new version of the secret. To use this parameter in the
     #   command-line tools, we recommend that you store your binary data in a
@@ -2030,7 +2030,7 @@ module Aws::SecretsManager
     #
     #   [1]: https://wikipedia.org/wiki/Universally_unique_identifier
     #
-    # @option params [String, IO] :secret_binary
+    # @option params [String, StringIO, File] :secret_binary
     #   (Optional) Specifies binary data that you want to encrypt and store in
     #   the new version of the secret. To use this parameter in the
     #   command-line tools, we recommend that you store your binary data in a
@@ -2771,7 +2771,7 @@ module Aws::SecretsManager
     #   field. The user making the call must have permissions to both the
     #   secret and the CMK in their respective accounts.
     #
-    # @option params [String, IO] :secret_binary
+    # @option params [String, StringIO, File] :secret_binary
     #   (Optional) Specifies updated binary data that you want to encrypt and
     #   store in the new version of the secret. To use this parameter in the
     #   command-line tools, we recommend that you store your binary data in a

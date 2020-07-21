@@ -143,8 +143,22 @@ module Aws
           errors << expected_got(context, "true or false", value)
         end
       when BlobShape
-        unless value.is_a?(String) || io_like?(value)
-          errors << expected_got(context, "a String or IO object", value)
+        unless value.is_a?(String)
+          if streaming_input?(ref)
+            unless io_like?(value, _require_size = false)
+              errors << expected_got(
+                context,
+                "a String or IO like object that supports read and rewind",
+                value
+              )
+            end
+          elsif !io_like?(value, _require_size = true)
+            errors << expected_got(
+              context,
+              "a String or IO like object that supports read, rewind, and size",
+              value
+            )
+          end
         end
       else
         raise "unhandled shape type: #{ref.shape.class.name}"
@@ -167,8 +181,13 @@ module Aws
       end
     end
 
-    def io_like?(value)
-      value.respond_to?(:read) && value.respond_to?(:rewind)
+    def io_like?(value, require_size = true)
+      value.respond_to?(:read) && value.respond_to?(:rewind) &&
+        (!require_size || value.respond_to?(:size))
+    end
+
+    def streaming_input?(ref)
+      (ref["streaming"] || ref.shape["streaming"])
     end
 
     def error_messages(errors)

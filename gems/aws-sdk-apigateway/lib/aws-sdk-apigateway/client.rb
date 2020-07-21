@@ -4519,7 +4519,7 @@ module Aws::APIGateway
 
     # Import API keys from an external source, such as a CSV-formatted file.
     #
-    # @option params [required, String, IO] :body
+    # @option params [required, String, StringIO, File] :body
     #   The payload of the POST request to import API keys. For the payload
     #   format, see [API Key File Format][1].
     #
@@ -4575,7 +4575,7 @@ module Aws::APIGateway
     #   importation (`true`) or not (`false`) when a warning is encountered.
     #   The default value is `false`.
     #
-    # @option params [required, String, IO] :body
+    # @option params [required, String, StringIO, File] :body
     #   \[Required\] Raw byte array representing the to-be-imported
     #   documentation parts. To import from an OpenAPI file, this is a JSON
     #   object.
@@ -4643,7 +4643,7 @@ module Aws::APIGateway
     #
     #       aws apigateway import-rest-api --parameters endpointConfigurationTypes=REGIONAL --body 'file:///path/to/imported-api-body.json'
     #
-    # @option params [required, String, IO] :body
+    # @option params [required, String, StringIO, File] :body
     #   \[Required\] The POST request body containing external API
     #   definitions. Currently, only OpenAPI definition JSON/YAML files are
     #   supported. The maximum size of the API definition file is 6MB.
@@ -5335,7 +5335,7 @@ module Aws::APIGateway
     #   command of `aws apigateway import-rest-api --parameters
     #   ignore=documentation --body 'file:///path/to/imported-api-body.json'`.
     #
-    # @option params [required, String, IO] :body
+    # @option params [required, String, StringIO, File] :body
     #   \[Required\] The PUT request body containing external API definitions.
     #   Currently, only OpenAPI definition JSON/YAML files are supported. The
     #   maximum size of the API definition file is 6MB.

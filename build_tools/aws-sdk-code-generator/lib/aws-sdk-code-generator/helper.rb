@@ -41,64 +41,6 @@ module AwsSdkCodeGenerator
       end
     end
 
-    # @option options [Boolean] :nested (false)
-    def ruby_input_type(shape_ref, options = {})
-      nested = options.fetch(:nested, false)
-      shape = @api['shapes'][shape_ref['shape']]
-      case shape['type']
-      when 'byte' then 'Integer<byte>'
-      when 'blob' then 'String, IO'
-      when 'boolean' then 'Boolean'
-      when 'character' then 'String<character>'
-      when 'double' then 'Float'
-      when 'float' then 'Float'
-      when 'integer' then 'Integer'
-      when 'list'
-        if nested
-          "Array"
-        else
-          "Array<#{ruby_input_type(shape['member'], nested:true)}>"
-        end
-      when 'long' then 'Integer'
-      when 'map'
-        if nested
-          "Hash"
-        else
-          "Hash<String,#{ruby_input_type(shape['value'], nested:true)}>"
-        end
-      when 'string' then 'String'
-      when 'structure' then "Types::#{shape_ref['shape']}"
-      when 'timestamp' then 'Time,DateTime,Date,Integer,String'
-      else
-        raise "unhandled type #{shape.type}.inspect"
-      end
-    end
-
-    def ruby_type(shape_ref)
-      shape = @api['shapes'][shape_ref['shape']]
-      case shape['type']
-      when 'blob' then streaming?(shape_ref, shape) ? 'IO' : 'String'
-      when 'boolean' then 'Boolean'
-      when 'byte' then 'Integer<byte>'
-      when 'character' then 'String<character>'
-      when 'double' then 'Float'
-      when 'float' then 'Float'
-      when 'integer' then 'Integer'
-      when 'list' then "Array<#{ruby_type(shape['member'])}>"
-      when 'long' then 'Integer'
-      when 'map' then "Hash<String,#{ruby_type(shape['value'])}>"
-      when 'string' then 'String'
-      when 'structure' then "Types::#{shape_ref['shape']}"
-      when 'timestamp' then 'Time'
-      else
-        raise "unhandled type #{shape['type'].inspect}"
-      end
-    end
-
-    def streaming?(ref, shape)
-      ref['streaming'] || shape['streaming']
-    end
-
     # @option options [Integer] :line_width (70)
     def documentation(ref_or_shape, options = {})
       line_width = options.fetch(:line_width, 70)

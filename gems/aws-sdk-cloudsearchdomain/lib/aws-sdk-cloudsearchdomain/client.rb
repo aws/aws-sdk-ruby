@@ -821,7 +821,7 @@ module Aws::CloudSearchDomain
     # [1]: http://docs.aws.amazon.com/cloudsearch/latest/developerguide/preparing-data.html
     # [2]: http://docs.aws.amazon.com/cloudsearch/latest/developerguide/uploading-data.html
     #
-    # @option params [required, String, IO] :documents
+    # @option params [required, String, StringIO, File] :documents
     #   A batch of documents formatted in JSON or HTML.
     #
     # @option params [required, String] :content_type

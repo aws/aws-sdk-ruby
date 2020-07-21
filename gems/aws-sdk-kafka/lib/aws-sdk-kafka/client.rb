@@ -450,7 +450,7 @@ module Aws::Kafka
     #   The name of the configuration. Configuration names are strings that
     #   match the regex "^\[0-9A-Za-z-\]+$".
     #
-    # @option params [required, String, IO] :server_properties
+    # @option params [required, String, StringIO, File] :server_properties
     #
     # @return [Types::CreateConfigurationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #

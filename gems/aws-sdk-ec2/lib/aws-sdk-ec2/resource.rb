@@ -1415,7 +1415,7 @@ module Aws::EC2
     #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
     # @option options [required, String] :key_name
     #   A unique name for the key pair.
-    # @option options [required, String, IO] :public_key_material
+    # @option options [required, String, StringIO, File] :public_key_material
     #   The public key. For API calls, the text must be base64-encoded. For
     #   command line tools, base64 encoding is performed for you.
     # @option options [Array<Types::TagSpecification>] :tag_specifications
