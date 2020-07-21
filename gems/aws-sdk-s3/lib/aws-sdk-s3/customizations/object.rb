@@ -296,6 +296,14 @@ module Aws
       #       etag = response.etag
       #     end
       #
+      # You can provide a callback to monitor progress of the upload:
+      #
+      #     # bytes and totals are each an array with 1 entry per part
+      #     progress = Proc.new do |bytes, totals|
+      #       puts bytes.map.with_index { |b, i| "Part #{i+1}: #{b} / #{totals[i]}"}.join(' ') + "Total: #{100.0 * bytes.sum / totals.sum }%" }
+      #     end
+      #     obj.upload_file('/path/to/file')
+      #
       # @param [String, Pathname, File, Tempfile] source A file on the local
       #   file system that will be uploaded as this object. This can either be
       #   a String or Pathname to the file, an open File object, or an open
@@ -312,6 +320,10 @@ module Aws
       #   multipart uploads. This option is not used if the file is smaller than
       #   `:multipart_threshold`.
       #
+      # @option options [Proc] :progress_callback
+      #   A Proc that will be called when each chunk of the upload is sent.
+      #   It will be invoked with [bytes_read], [total_sizes]
+      #
       # @raise [MultipartUploadError] If an object is being uploaded in
       #   parts, and the upload can not be completed, then the upload is
       #   aborted and this error is raised.  The raised error has a `#errors`
@@ -320,7 +332,6 @@ module Aws
       #
       # @return [Boolean] Returns `true` when the object is uploaded
       #   without any errors.
-      #
       def upload_file(source, options = {})
         uploading_options = options.dup
         uploader = FileUploader.new(
