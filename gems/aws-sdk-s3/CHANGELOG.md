@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+1.75.0 (2020-07-21)
+------------------
+
 * Feature - Add progress_callback to `Object#upload` to support reporting of upload progress. (#648)
 
 1.74.0 (2020-07-08)

@@ -537,6 +537,9 @@ module Aws::CodeGuruProfiler
     #         client_token: "ClientToken", # required
     #         compute_platform: "AWSLambda", # accepts AWSLambda, Default
     #         profiling_group_name: "ProfilingGroupName", # required
+    #         tags: {
+    #           "String" => "String",
+    #         },
     #       }
     #
     # @!attribute [rw] agent_orchestration_config
@@ -565,13 +568,18 @@ module Aws::CodeGuruProfiler
     #   The name of the profiling group to create.
     #   @return [String]
     #
+    # @!attribute [rw] tags
+    #   A list of tags to add to the created profiling group.
+    #   @return [Hash<String,String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codeguruprofiler-2019-07-18/CreateProfilingGroupRequest AWS API Documentation
     #
     class CreateProfilingGroupRequest < Struct.new(
       :agent_orchestration_config,
       :client_token,
       :compute_platform,
-      :profiling_group_name)
+      :profiling_group_name,
+      :tags)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1446,6 +1454,39 @@ module Aws::CodeGuruProfiler
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass ListTagsForResourceRequest
+    #   data as a hash:
+    #
+    #       {
+    #         resource_arn: "ProfilingGroupArn", # required
+    #       }
+    #
+    # @!attribute [rw] resource_arn
+    #   The Amazon Resource Name (ARN) of the resource that contains the
+    #   tags to return.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codeguruprofiler-2019-07-18/ListTagsForResourceRequest AWS API Documentation
+    #
+    class ListTagsForResourceRequest < Struct.new(
+      :resource_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] tags
+    #   The list of tags assigned to the specified resource. This is the
+    #   list of tags returned in the response.
+    #   @return [Hash<String,String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codeguruprofiler-2019-07-18/ListTagsForResourceResponse AWS API Documentation
+    #
+    class ListTagsForResourceResponse < Struct.new(
+      :tags)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The part of a profile that contains a recommendation found during
     # analysis.
     #
@@ -1689,6 +1730,10 @@ module Aws::CodeGuruProfiler
     #   [1]: https://docs.aws.amazon.com/codeguru/latest/profiler-api/API_ProfilingStatus.html
     #   @return [Types::ProfilingStatus]
     #
+    # @!attribute [rw] tags
+    #   A list of the tags that belong to this profiling group.
+    #   @return [Hash<String,String>]
+    #
     # @!attribute [rw] updated_at
     #   The date and time when the profiling group was last updated. Specify
     #   using the ISO 8601 format. For example, 2020-06-01T13:15:02.001Z
@@ -1704,6 +1749,7 @@ module Aws::CodeGuruProfiler
       :created_at,
       :name,
       :profiling_status,
+      :tags,
       :updated_at)
       SENSITIVE = []
       include Aws::Structure
@@ -2050,6 +2096,38 @@ module Aws::CodeGuruProfiler
     #
     class SubmitFeedbackResponse < Aws::EmptyStructure; end
 
+    # @note When making an API call, you may pass TagResourceRequest
+    #   data as a hash:
+    #
+    #       {
+    #         resource_arn: "ProfilingGroupArn", # required
+    #         tags: { # required
+    #           "String" => "String",
+    #         },
+    #       }
+    #
+    # @!attribute [rw] resource_arn
+    #   The Amazon Resource Name (ARN) of the resource that the tags are
+    #   added to.
+    #   @return [String]
+    #
+    # @!attribute [rw] tags
+    #   The list of tags that are added to the specified resource.
+    #   @return [Hash<String,String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codeguruprofiler-2019-07-18/TagResourceRequest AWS API Documentation
+    #
+    class TagResourceRequest < Struct.new(
+      :resource_arn,
+      :tags)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codeguruprofiler-2019-07-18/TagResourceResponse AWS API Documentation
+    #
+    class TagResourceResponse < Aws::EmptyStructure; end
+
     # The request was denied due to request throttling.
     #
     # @!attribute [rw] message
@@ -2080,6 +2158,37 @@ module Aws::CodeGuruProfiler
       SENSITIVE = []
       include Aws::Structure
     end
+
+    # @note When making an API call, you may pass UntagResourceRequest
+    #   data as a hash:
+    #
+    #       {
+    #         resource_arn: "ProfilingGroupArn", # required
+    #         tag_keys: ["String"], # required
+    #       }
+    #
+    # @!attribute [rw] resource_arn
+    #   The Amazon Resource Name (ARN) of the resource that contains the
+    #   tags to remove.
+    #   @return [String]
+    #
+    # @!attribute [rw] tag_keys
+    #   A list of tag keys. Existing tags of resources with keys in this
+    #   list are removed from the specified resource.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codeguruprofiler-2019-07-18/UntagResourceRequest AWS API Documentation
+    #
+    class UntagResourceRequest < Struct.new(
+      :resource_arn,
+      :tag_keys)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codeguruprofiler-2019-07-18/UntagResourceResponse AWS API Documentation
+    #
+    class UntagResourceResponse < Aws::EmptyStructure; end
 
     # The structure representing the updateProfilingGroupRequest.
     #

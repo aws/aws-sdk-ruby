@@ -550,6 +550,9 @@ module Aws::CodeGuruProfiler
     # @option params [required, String] :profiling_group_name
     #   The name of the profiling group to create.
     #
+    # @option params [Hash<String,String>] :tags
+    #   A list of tags to add to the created profiling group.
+    #
     # @return [Types::CreateProfilingGroupResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateProfilingGroupResponse#profiling_group #profiling_group} => Types::ProfilingGroupDescription
@@ -563,6 +566,9 @@ module Aws::CodeGuruProfiler
     #     client_token: "ClientToken", # required
     #     compute_platform: "AWSLambda", # accepts AWSLambda, Default
     #     profiling_group_name: "ProfilingGroupName", # required
+    #     tags: {
+    #       "String" => "String",
+    #     },
     #   })
     #
     # @example Response structure
@@ -576,6 +582,8 @@ module Aws::CodeGuruProfiler
     #   resp.profiling_group.profiling_status.latest_agent_profile_reported_at #=> Time
     #   resp.profiling_group.profiling_status.latest_aggregated_profile.period #=> String, one of "P1D", "PT1H", "PT5M"
     #   resp.profiling_group.profiling_status.latest_aggregated_profile.start #=> Time
+    #   resp.profiling_group.tags #=> Hash
+    #   resp.profiling_group.tags["String"] #=> String
     #   resp.profiling_group.updated_at #=> Time
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codeguruprofiler-2019-07-18/CreateProfilingGroup AWS API Documentation
@@ -640,6 +648,8 @@ module Aws::CodeGuruProfiler
     #   resp.profiling_group.profiling_status.latest_agent_profile_reported_at #=> Time
     #   resp.profiling_group.profiling_status.latest_aggregated_profile.period #=> String, one of "P1D", "PT1H", "PT5M"
     #   resp.profiling_group.profiling_status.latest_aggregated_profile.start #=> Time
+    #   resp.profiling_group.tags #=> Hash
+    #   resp.profiling_group.tags["String"] #=> String
     #   resp.profiling_group.updated_at #=> Time
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codeguruprofiler-2019-07-18/DescribeProfilingGroup AWS API Documentation
@@ -1209,6 +1219,8 @@ module Aws::CodeGuruProfiler
     #   resp.profiling_groups[0].profiling_status.latest_agent_profile_reported_at #=> Time
     #   resp.profiling_groups[0].profiling_status.latest_aggregated_profile.period #=> String, one of "P1D", "PT1H", "PT5M"
     #   resp.profiling_groups[0].profiling_status.latest_aggregated_profile.start #=> Time
+    #   resp.profiling_groups[0].tags #=> Hash
+    #   resp.profiling_groups[0].tags["String"] #=> String
     #   resp.profiling_groups[0].updated_at #=> Time
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codeguruprofiler-2019-07-18/ListProfilingGroups AWS API Documentation
@@ -1217,6 +1229,36 @@ module Aws::CodeGuruProfiler
     # @param [Hash] params ({})
     def list_profiling_groups(params = {}, options = {})
       req = build_request(:list_profiling_groups, params)
+      req.send_request(options)
+    end
+
+    # Returns a list of the tags that are assigned to a specified resource.
+    #
+    # @option params [required, String] :resource_arn
+    #   The Amazon Resource Name (ARN) of the resource that contains the tags
+    #   to return.
+    #
+    # @return [Types::ListTagsForResourceResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListTagsForResourceResponse#tags #tags} => Hash&lt;String,String&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_tags_for_resource({
+    #     resource_arn: "ProfilingGroupArn", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.tags #=> Hash
+    #   resp.tags["String"] #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codeguruprofiler-2019-07-18/ListTagsForResource AWS API Documentation
+    #
+    # @overload list_tags_for_resource(params = {})
+    # @param [Hash] params ({})
+    def list_tags_for_resource(params = {}, options = {})
+      req = build_request(:list_tags_for_resource, params)
       req.send_request(options)
     end
 
@@ -1460,6 +1502,63 @@ module Aws::CodeGuruProfiler
       req.send_request(options)
     end
 
+    # Use to assign one or more tags to a resource.
+    #
+    # @option params [required, String] :resource_arn
+    #   The Amazon Resource Name (ARN) of the resource that the tags are added
+    #   to.
+    #
+    # @option params [required, Hash<String,String>] :tags
+    #   The list of tags that are added to the specified resource.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.tag_resource({
+    #     resource_arn: "ProfilingGroupArn", # required
+    #     tags: { # required
+    #       "String" => "String",
+    #     },
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codeguruprofiler-2019-07-18/TagResource AWS API Documentation
+    #
+    # @overload tag_resource(params = {})
+    # @param [Hash] params ({})
+    def tag_resource(params = {}, options = {})
+      req = build_request(:tag_resource, params)
+      req.send_request(options)
+    end
+
+    # Use to remove one or more tags from a resource.
+    #
+    # @option params [required, String] :resource_arn
+    #   The Amazon Resource Name (ARN) of the resource that contains the tags
+    #   to remove.
+    #
+    # @option params [required, Array<String>] :tag_keys
+    #   A list of tag keys. Existing tags of resources with keys in this list
+    #   are removed from the specified resource.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.untag_resource({
+    #     resource_arn: "ProfilingGroupArn", # required
+    #     tag_keys: ["String"], # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codeguruprofiler-2019-07-18/UntagResource AWS API Documentation
+    #
+    # @overload untag_resource(params = {})
+    # @param [Hash] params ({})
+    def untag_resource(params = {}, options = {})
+      req = build_request(:untag_resource, params)
+      req.send_request(options)
+    end
+
     # Updates a profiling group.
     #
     # @option params [required, Types::AgentOrchestrationConfig] :agent_orchestration_config
@@ -1493,6 +1592,8 @@ module Aws::CodeGuruProfiler
     #   resp.profiling_group.profiling_status.latest_agent_profile_reported_at #=> Time
     #   resp.profiling_group.profiling_status.latest_aggregated_profile.period #=> String, one of "P1D", "PT1H", "PT5M"
     #   resp.profiling_group.profiling_status.latest_aggregated_profile.start #=> Time
+    #   resp.profiling_group.tags #=> Hash
+    #   resp.profiling_group.tags["String"] #=> String
     #   resp.profiling_group.updated_at #=> Time
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codeguruprofiler-2019-07-18/UpdateProfilingGroup AWS API Documentation
@@ -1517,7 +1618,7 @@ module Aws::CodeGuruProfiler
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-codeguruprofiler'
-      context[:gem_version] = '1.8.0'
+      context[:gem_version] = '1.9.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 
