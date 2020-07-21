@@ -708,7 +708,7 @@ module Aws::DynamoDB
     #
     # [1]: https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/ErrorHandling.html#Programming.Errors.BatchOperations
     #
-    # @option params [required, Hash<String,Array<Types::WriteRequest>>] :request_items
+    # @option params [required, Hash<String,Array>] :request_items
     #   A map of one or more table names and, for each table, a list of
     #   operations to be performed (`DeleteRequest` or `PutRequest`). Each
     #   element in the map consists of the following:

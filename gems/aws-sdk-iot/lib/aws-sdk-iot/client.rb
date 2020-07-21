@@ -8409,7 +8409,7 @@ module Aws::IoT
     #   applied. You can apply them to a type of audit check, to all findings
     #   from an audit, or to a speecific set of findings.
     #
-    # @option params [required, Hash<String,Array<String>>] :audit_check_to_actions_mapping
+    # @option params [required, Hash<String,Array>] :audit_check_to_actions_mapping
     #   For an audit check, specifies which mitigation actions to apply. Those
     #   actions must be defined in your AWS account.
     #

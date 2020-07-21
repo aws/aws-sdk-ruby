@@ -1123,7 +1123,7 @@ module Aws::QuickSight
     #   The ARN for the IAM policy to apply to the QuickSight users and groups
     #   specified in this assignment.
     #
-    # @option params [Hash<String,Array<String>>] :identities
+    # @option params [Hash<String,Array>] :identities
     #   The QuickSight users, groups, or both that you want to assign the
     #   policy to.
     #
@@ -5345,7 +5345,7 @@ module Aws::QuickSight
     #   The ARN for the IAM policy to apply to the QuickSight users and groups
     #   specified in this assignment.
     #
-    # @option params [Hash<String,Array<String>>] :identities
+    # @option params [Hash<String,Array>] :identities
     #   The QuickSight users, groups, or both that you want to assign the
     #   policy to.
     #

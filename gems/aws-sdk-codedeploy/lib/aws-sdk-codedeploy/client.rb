@@ -2511,7 +2511,7 @@ module Aws::CodeDeploy
     #   call. It can be used to return the next set of deployment targets in
     #   the list.
     #
-    # @option params [Hash<String,Array<String>>] :target_filters
+    # @option params [Hash<String,Array>] :target_filters
     #   A key used to filter the returned targets. The two valid values are:
     #
     #   * `TargetStatus` - A `TargetStatus` filter string can be `Failed`,

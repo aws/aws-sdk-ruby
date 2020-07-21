@@ -1645,7 +1645,7 @@ module Aws::Lightsail
     # @option params [required, Array<String>] :instance_names
     #   The names for your new instances.
     #
-    # @option params [Hash<String,Array<Types::DiskMap>>] :attached_disk_mapping
+    # @option params [Hash<String,Array>] :attached_disk_mapping
     #   An object containing information about one or more disk mappings.
     #
     # @option params [required, String] :availability_zone

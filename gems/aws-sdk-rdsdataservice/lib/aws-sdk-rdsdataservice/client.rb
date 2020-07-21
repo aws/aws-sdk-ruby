@@ -326,7 +326,7 @@ module Aws::RDSDataService
     # @option params [String] :database
     #   The name of the database.
     #
-    # @option params [Array<Array<Types::SqlParameter>>] :parameter_sets
+    # @option params [Array<Array>] :parameter_sets
     #   The parameter set for the batch operation.
     #
     #   The SQL statement is executed as many times as the number of parameter

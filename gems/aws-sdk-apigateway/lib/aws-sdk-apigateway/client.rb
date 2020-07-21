@@ -316,7 +316,7 @@ module Aws::APIGateway
 
     # Create an ApiKey resource.
     #
-    # <div class="seeAlso" markdown="1">
+    # <div class="seeAlso">
     # [AWS CLI][1]
     # </div>
     #
@@ -411,7 +411,7 @@ module Aws::APIGateway
 
     # Adds a new Authorizer resource to an existing RestApi resource.
     #
-    # <div class="seeAlso" markdown="1">
+    # <div class="seeAlso">
     # [AWS CLI][1]
     # </div>
     #
@@ -1541,7 +1541,7 @@ module Aws::APIGateway
 
     # Deletes an existing Authorizer resource.
     #
-    # <div class="seeAlso" markdown="1">
+    # <div class="seeAlso">
     # [AWS CLI][1]
     # </div>
     #
@@ -2300,7 +2300,7 @@ module Aws::APIGateway
 
     # Describe an existing Authorizer resource.
     #
-    # <div class="seeAlso" markdown="1">
+    # <div class="seeAlso">
     # [AWS CLI][1]
     # </div>
     #
@@ -2357,7 +2357,7 @@ module Aws::APIGateway
 
     # Describe an existing Authorizers resource.
     #
-    # <div class="seeAlso" markdown="1">
+    # <div class="seeAlso">
     # [AWS CLI][1]
     # </div>
     #
@@ -5426,7 +5426,7 @@ module Aws::APIGateway
     # Simulate the execution of an Authorizer in your RestApi with headers,
     # parameters, and an incoming request body.
     #
-    # <div class="seeAlso" markdown="1">
+    # <div class="seeAlso">
     # [Use Lambda Function as Authorizer][1] [Use Cognito User Pool as
     # Authorizer][2]
     # </div>
@@ -5448,7 +5448,7 @@ module Aws::APIGateway
     #   invocation request. This is where the incoming authorization token, or
     #   identity source, should be specified.
     #
-    # @option params [Hash<String,Array<String>>] :multi_value_headers
+    # @option params [Hash<String,Array>] :multi_value_headers
     #   \[Optional\] The headers as a map from string to list of values to
     #   simulate an incoming invocation request. This is where the incoming
     #   authorization token, or identity source, may be specified.
@@ -5543,7 +5543,7 @@ module Aws::APIGateway
     # @option params [Hash<String,String>] :headers
     #   A key-value map of headers to simulate an incoming invocation request.
     #
-    # @option params [Hash<String,Array<String>>] :multi_value_headers
+    # @option params [Hash<String,Array>] :multi_value_headers
     #   The headers as a map from string to list of values to simulate an
     #   incoming invocation request.
     #
@@ -5730,7 +5730,7 @@ module Aws::APIGateway
 
     # Updates an existing Authorizer resource.
     #
-    # <div class="seeAlso" markdown="1">
+    # <div class="seeAlso">
     # [AWS CLI][1]
     # </div>
     #

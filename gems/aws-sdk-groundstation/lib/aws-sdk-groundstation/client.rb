@@ -514,7 +514,7 @@ module Aws::GroundStation
     #   Amount of time prior to contact start you’d like to receive a
     #   CloudWatch event indicating an upcoming pass.
     #
-    # @option params [required, Array<Array<String>>] :dataflow_edges
+    # @option params [required, Array<Array>] :dataflow_edges
     #   A list of lists of ARNs. Each list of ARNs is an edge, with a *from*
     #   `Config` and a *to* `Config`.
     #
@@ -1515,7 +1515,7 @@ module Aws::GroundStation
     #   Amount of time after a contact ends that you’d like to receive a
     #   CloudWatch event indicating the pass has finished.
     #
-    # @option params [Array<Array<String>>] :dataflow_edges
+    # @option params [Array<Array>] :dataflow_edges
     #   A list of lists of ARNs. Each list of ARNs is an edge, with a *from*
     #   `Config` and a *to* `Config`.
     #

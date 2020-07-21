@@ -10,7 +10,6 @@ else
 end
 
 gem 'jmespath'
-gem 'byebug' # TODO: REMOVE ME!!!!
 
 if RUBY_VERSION >= '2.1' && !ENV['NO_H2']
   # http 2 requires ruby version >= 2.1

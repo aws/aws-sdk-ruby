@@ -187,7 +187,7 @@ module Aws::DynamoDB
     #     return_item_collection_metrics: "SIZE", # accepts SIZE, NONE
     #   })
     # @param [Hash] options ({})
-    # @option options [required, Hash<String,Array<Types::WriteRequest>>] :request_items
+    # @option options [required, Hash<String,Array>] :request_items
     #   A map of one or more table names and, for each table, a list of
     #   operations to be performed (`DeleteRequest` or `PutRequest`). Each
     #   element in the map consists of the following:

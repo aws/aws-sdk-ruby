@@ -54,7 +54,6 @@ module AwsSdkCodeGenerator
         when 'byte' then 'Integer<byte>'
         when 'blob'
           if streaming_input?(shape, operation)
-            puts "STREAMING!: #{operation['name']}"
             'String, IO'
           else
             'String, StringIO, File'
