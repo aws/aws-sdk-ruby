@@ -91,9 +91,9 @@ module Seahorse
         end
 
         it 'populates the request context params' do
-          params = { p1: 'p1' }
+          params = double('params')
           request = client.build_request('operation_name', params)
-          expect(request.context.params).to eq(params)
+          expect(request.context.params).to be(params)
         end
 
         it 'defaults params to an empty hash' do
