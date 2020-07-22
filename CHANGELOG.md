@@ -1,6 +1,10 @@
 Unreleased Changes
 ------------------
 
+* Feature - Aws::MediaLive - Updated the API, and documentation for AWS Elemental MediaLive.
+
+* Feature - Aws::QuickSight - Updated the API, and documentation for Amazon QuickSight.
+
 2.11.549 (2020-07-21)
 ------------------
 
