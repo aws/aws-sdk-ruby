@@ -343,7 +343,7 @@ module Aws::MediaLive
     #               id_3: "__string", # required
     #             },
     #             input_prepare_settings: {
-    #               input_attachment_name_reference: "__string", # required
+    #               input_attachment_name_reference: "__string",
     #               input_clipping_settings: {
     #                 input_timecode_source: "ZEROBASED", # required, accepts ZEROBASED, EMBEDDED
     #                 start_timecode: {
@@ -694,7 +694,7 @@ module Aws::MediaLive
     #             pass_through_settings: {
     #             },
     #           },
-    #           language_code: "__stringMin3Max3",
+    #           language_code: "__stringMin1Max35",
     #           language_code_control: "FOLLOW_INPUT", # accepts FOLLOW_INPUT, USE_CONFIGURED
     #           name: "__string", # required
     #           remix_settings: {
@@ -3889,6 +3889,45 @@ module Aws::MediaLive
       req.send_request(options)
     end
 
+    # Get the latest thumbnail data for the input device.
+    #
+    # @option params [required, String] :input_device_id
+    #
+    # @option params [required, String] :accept
+    #   Accept Header
+    #
+    # @return [Types::DescribeInputDeviceThumbnailResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeInputDeviceThumbnailResponse#body #body} => IO
+    #   * {Types::DescribeInputDeviceThumbnailResponse#content_type #content_type} => String
+    #   * {Types::DescribeInputDeviceThumbnailResponse#content_length #content_length} => Integer
+    #   * {Types::DescribeInputDeviceThumbnailResponse#etag #etag} => String
+    #   * {Types::DescribeInputDeviceThumbnailResponse#last_modified #last_modified} => Time
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_input_device_thumbnail({
+    #     input_device_id: "__string", # required
+    #     accept: "image/jpeg", # required, accepts image/jpeg
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.body #=> IO
+    #   resp.content_type #=> String, one of "image/jpeg"
+    #   resp.content_length #=> Integer
+    #   resp.etag #=> String
+    #   resp.last_modified #=> Time
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/DescribeInputDeviceThumbnail AWS API Documentation
+    #
+    # @overload describe_input_device_thumbnail(params = {})
+    # @param [Hash] params ({})
+    def describe_input_device_thumbnail(params = {}, options = {}, &block)
+      req = build_request(:describe_input_device_thumbnail, params)
+      req.send_request(options, &block)
+    end
+
     # Produces a summary of an Input Security Group
     #
     # @option params [required, String] :input_security_group_id
@@ -6249,7 +6288,7 @@ module Aws::MediaLive
     #             pass_through_settings: {
     #             },
     #           },
-    #           language_code: "__stringMin3Max3",
+    #           language_code: "__stringMin1Max35",
     #           language_code_control: "FOLLOW_INPUT", # accepts FOLLOW_INPUT, USE_CONFIGURED
     #           name: "__string", # required
     #           remix_settings: {
@@ -8543,7 +8582,7 @@ module Aws::MediaLive
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-medialive'
-      context[:gem_version] = '1.49.0'
+      context[:gem_version] = '1.50.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

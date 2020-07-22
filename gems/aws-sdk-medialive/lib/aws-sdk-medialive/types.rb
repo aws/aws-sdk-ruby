@@ -579,7 +579,7 @@ module Aws::MediaLive
     #           pass_through_settings: {
     #           },
     #         },
-    #         language_code: "__stringMin3Max3",
+    #         language_code: "__stringMin1Max35",
     #         language_code_control: "FOLLOW_INPUT", # accepts FOLLOW_INPUT, USE_CONFIGURED
     #         name: "__string", # required
     #         remix_settings: {
@@ -628,9 +628,9 @@ module Aws::MediaLive
     #   @return [Types::AudioCodecSettings]
     #
     # @!attribute [rw] language_code
-    #   Indicates the language of the audio output track. Only used if
-    #   languageControlMode is useConfigured, or there is no ISO 639
-    #   language code specified in the input.
+    #   RFC 5646 language code representing the language of the audio output
+    #   track. Only used if languageControlMode is useConfigured, or there
+    #   is no ISO 639 language code specified in the input.
     #   @return [String]
     #
     # @!attribute [rw] language_code_control
@@ -1129,7 +1129,7 @@ module Aws::MediaLive
     #                 id_3: "__string", # required
     #               },
     #               input_prepare_settings: {
-    #                 input_attachment_name_reference: "__string", # required
+    #                 input_attachment_name_reference: "__string",
     #                 input_clipping_settings: {
     #                   input_timecode_source: "ZEROBASED", # required, accepts ZEROBASED, EMBEDDED
     #                   start_timecode: {
@@ -1314,7 +1314,7 @@ module Aws::MediaLive
     #                   id_3: "__string", # required
     #                 },
     #                 input_prepare_settings: {
-    #                   input_attachment_name_reference: "__string", # required
+    #                   input_attachment_name_reference: "__string",
     #                   input_clipping_settings: {
     #                     input_timecode_source: "ZEROBASED", # required, accepts ZEROBASED, EMBEDDED
     #                     start_timecode: {
@@ -2494,7 +2494,7 @@ module Aws::MediaLive
     #                 pass_through_settings: {
     #                 },
     #               },
-    #               language_code: "__stringMin3Max3",
+    #               language_code: "__stringMin1Max35",
     #               language_code_control: "FOLLOW_INPUT", # accepts FOLLOW_INPUT, USE_CONFIGURED
     #               name: "__string", # required
     #               remix_settings: {
@@ -4353,6 +4353,57 @@ module Aws::MediaLive
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass DescribeInputDeviceThumbnailRequest
+    #   data as a hash:
+    #
+    #       {
+    #         input_device_id: "__string", # required
+    #         accept: "image/jpeg", # required, accepts image/jpeg
+    #       }
+    #
+    # @!attribute [rw] input_device_id
+    #   @return [String]
+    #
+    # @!attribute [rw] accept
+    #   Accept Header
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/DescribeInputDeviceThumbnailRequest AWS API Documentation
+    #
+    class DescribeInputDeviceThumbnailRequest < Struct.new(
+      :input_device_id,
+      :accept)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] body
+    #   @return [IO]
+    #
+    # @!attribute [rw] content_type
+    #   @return [String]
+    #
+    # @!attribute [rw] content_length
+    #   @return [Integer]
+    #
+    # @!attribute [rw] etag
+    #   @return [String]
+    #
+    # @!attribute [rw] last_modified
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/DescribeInputDeviceThumbnailResponse AWS API Documentation
+    #
+    class DescribeInputDeviceThumbnailResponse < Struct.new(
+      :body,
+      :content_type,
+      :content_length,
+      :etag,
+      :last_modified)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass DescribeInputRequest
     #   data as a hash:
     #
@@ -5419,7 +5470,7 @@ module Aws::MediaLive
     #               pass_through_settings: {
     #               },
     #             },
-    #             language_code: "__stringMin3Max3",
+    #             language_code: "__stringMin1Max35",
     #             language_code_control: "FOLLOW_INPUT", # accepts FOLLOW_INPUT, USE_CONFIGURED
     #             name: "__string", # required
     #             remix_settings: {
@@ -7100,7 +7151,10 @@ module Aws::MediaLive
     #   Recommended if you or your viewers pay for bandwidth. CBR: Quality
     #   varies, depending on the video complexity. Recommended only if you
     #   distribute your assets to devices that cannot handle variable
-    #   bitrates.
+    #   bitrates. Multiplex: This rate control mode is only supported (and
+    #   is required) when the video is being delivered to a MediaLive
+    #   Multiplex in which case the rate control configuration is controlled
+    #   by the properties within the Multiplex Program.
     #   @return [String]
     #
     # @!attribute [rw] scan_type
@@ -8871,7 +8925,7 @@ module Aws::MediaLive
     #   data as a hash:
     #
     #       {
-    #         input_attachment_name_reference: "__string", # required
+    #         input_attachment_name_reference: "__string",
     #         input_clipping_settings: {
     #           input_timecode_source: "ZEROBASED", # required, accepts ZEROBASED, EMBEDDED
     #           start_timecode: {
@@ -13284,7 +13338,7 @@ module Aws::MediaLive
     #             id_3: "__string", # required
     #           },
     #           input_prepare_settings: {
-    #             input_attachment_name_reference: "__string", # required
+    #             input_attachment_name_reference: "__string",
     #             input_clipping_settings: {
     #               input_timecode_source: "ZEROBASED", # required, accepts ZEROBASED, EMBEDDED
     #               start_timecode: {
@@ -13425,7 +13479,7 @@ module Aws::MediaLive
     #           id_3: "__string", # required
     #         },
     #         input_prepare_settings: {
-    #           input_attachment_name_reference: "__string", # required
+    #           input_attachment_name_reference: "__string",
     #           input_clipping_settings: {
     #             input_timecode_source: "ZEROBASED", # required, accepts ZEROBASED, EMBEDDED
     #             start_timecode: {
@@ -15305,7 +15359,7 @@ module Aws::MediaLive
     #                 pass_through_settings: {
     #                 },
     #               },
-    #               language_code: "__stringMin3Max3",
+    #               language_code: "__stringMin1Max35",
     #               language_code_control: "FOLLOW_INPUT", # accepts FOLLOW_INPUT, USE_CONFIGURED
     #               name: "__string", # required
     #               remix_settings: {

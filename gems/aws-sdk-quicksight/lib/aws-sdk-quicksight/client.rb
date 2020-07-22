@@ -354,6 +354,58 @@ module Aws::QuickSight
       req.send_request(options)
     end
 
+    # Creates a customization for the Amazon QuickSight subscription
+    # associated with your AWS account.
+    #
+    # @option params [required, String] :aws_account_id
+    #   The ID for the AWS account that you want to customize QuickSight for.
+    #
+    # @option params [String] :namespace
+    #   The namespace associated with the customization that you're creating.
+    #
+    # @option params [required, Types::AccountCustomization] :account_customization
+    #   The customizations you're adding to the QuickSight subscription for
+    #   the AWS account. For example, you could add a default theme by setting
+    #   `AccountCustomization` to the midnight theme
+    #   (`DefaultTheme="arn:aws:quicksight::aws:theme/MIDNIGHT"`) or to a
+    #   custom theme
+    #   (`DefaultTheme="arn:aws:quicksight:us-west-2:111122223333:theme/bdb844d0-0fe9-4d9d-b520-0fe602d93639"`).
+    #
+    # @return [Types::CreateAccountCustomizationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateAccountCustomizationResponse#aws_account_id #aws_account_id} => String
+    #   * {Types::CreateAccountCustomizationResponse#namespace #namespace} => String
+    #   * {Types::CreateAccountCustomizationResponse#account_customization #account_customization} => Types::AccountCustomization
+    #   * {Types::CreateAccountCustomizationResponse#request_id #request_id} => String
+    #   * {Types::CreateAccountCustomizationResponse#status #status} => Integer
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_account_customization({
+    #     aws_account_id: "AwsAccountId", # required
+    #     namespace: "Namespace",
+    #     account_customization: { # required
+    #       default_theme: "Arn",
+    #     },
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.aws_account_id #=> String
+    #   resp.namespace #=> String
+    #   resp.account_customization.default_theme #=> String
+    #   resp.request_id #=> String
+    #   resp.status #=> Integer
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/CreateAccountCustomization AWS API Documentation
+    #
+    # @overload create_account_customization(params = {})
+    # @param [Hash] params ({})
+    def create_account_customization(params = {}, options = {})
+      req = build_request(:create_account_customization, params)
+      req.send_request(options)
+    end
+
     # Creates a dashboard from a template. To first create a template, see
     # the CreateTemplate API operation.
     #
@@ -689,6 +741,7 @@ module Aws::QuickSight
     #       },
     #     ],
     #     row_level_permission_data_set: {
+    #       namespace: "Namespace",
     #       arn: "Arn", # required
     #       permission_policy: "GRANT_ACCESS", # required, accepts GRANT_ACCESS, DENY_ACCESS
     #     },
@@ -1228,6 +1281,76 @@ module Aws::QuickSight
       req.send_request(options)
     end
 
+    # (Enterprise edition only) Creates a new namespace for you to use with
+    # Amazon QuickSight.
+    #
+    # A namespace allows you to isolate the QuickSight users and groups that
+    # are registered for that namespace. Users that access the namespace can
+    # share assets only with other users or groups in the same namespace.
+    # They can't see users and groups in other namespaces. You can create a
+    # namespace after your AWS account is subscribed to QuickSight. The
+    # namespace must be unique within the AWS account. By default, there is
+    # a limit of 100 namespaces per AWS account. To increase your limit,
+    # create a ticket with AWS Support.
+    #
+    # @option params [required, String] :aws_account_id
+    #   The ID for the AWS account that you want to create the QuickSight
+    #   namespace in.
+    #
+    # @option params [required, String] :namespace
+    #   The name that you want to use to describe the new namespace.
+    #
+    # @option params [required, String] :identity_store
+    #   Specifies the type of your user identity directory. Currently, this
+    #   supports users with an identity type of `QUICKSIGHT`.
+    #
+    # @option params [Array<Types::Tag>] :tags
+    #   The tags that you want to associate with the namespace that you're
+    #   creating.
+    #
+    # @return [Types::CreateNamespaceResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateNamespaceResponse#arn #arn} => String
+    #   * {Types::CreateNamespaceResponse#name #name} => String
+    #   * {Types::CreateNamespaceResponse#capacity_region #capacity_region} => String
+    #   * {Types::CreateNamespaceResponse#creation_status #creation_status} => String
+    #   * {Types::CreateNamespaceResponse#identity_store #identity_store} => String
+    #   * {Types::CreateNamespaceResponse#request_id #request_id} => String
+    #   * {Types::CreateNamespaceResponse#status #status} => Integer
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_namespace({
+    #     aws_account_id: "AwsAccountId", # required
+    #     namespace: "Namespace", # required
+    #     identity_store: "QUICKSIGHT", # required, accepts QUICKSIGHT
+    #     tags: [
+    #       {
+    #         key: "TagKey", # required
+    #         value: "TagValue", # required
+    #       },
+    #     ],
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.arn #=> String
+    #   resp.name #=> String
+    #   resp.capacity_region #=> String
+    #   resp.creation_status #=> String, one of "CREATED", "CREATING", "DELETING", "RETRYABLE_FAILURE", "NON_RETRYABLE_FAILURE"
+    #   resp.identity_store #=> String, one of "QUICKSIGHT"
+    #   resp.request_id #=> String
+    #   resp.status #=> Integer
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/CreateNamespace AWS API Documentation
+    #
+    # @overload create_namespace(params = {})
+    # @param [Hash] params ({})
+    def create_namespace(params = {}, options = {})
+      req = build_request(:create_namespace, params)
+      req.send_request(options)
+    end
+
     # Creates a template from an existing QuickSight analysis or template.
     # You can use the resulting template to create a dashboard.
     #
@@ -1571,6 +1694,42 @@ module Aws::QuickSight
       req.send_request(options)
     end
 
+    # Deletes customizations for the QuickSight subscription on your AWS
+    # account.
+    #
+    # @option params [required, String] :aws_account_id
+    #   The ID for the AWS account that you want to delete QuickSight
+    #   customizations from.
+    #
+    # @option params [String] :namespace
+    #   The namespace associated with the customization that you're deleting.
+    #
+    # @return [Types::DeleteAccountCustomizationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DeleteAccountCustomizationResponse#request_id #request_id} => String
+    #   * {Types::DeleteAccountCustomizationResponse#status #status} => Integer
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_account_customization({
+    #     aws_account_id: "AwsAccountId", # required
+    #     namespace: "Namespace",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.request_id #=> String
+    #   resp.status #=> Integer
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/DeleteAccountCustomization AWS API Documentation
+    #
+    # @overload delete_account_customization(params = {})
+    # @param [Hash] params ({})
+    def delete_account_customization(params = {}, options = {})
+      req = build_request(:delete_account_customization, params)
+      req.send_request(options)
+    end
+
     # Deletes a dashboard.
     #
     # @option params [required, String] :aws_account_id
@@ -1817,6 +1976,44 @@ module Aws::QuickSight
     # @param [Hash] params ({})
     def delete_iam_policy_assignment(params = {}, options = {})
       req = build_request(:delete_iam_policy_assignment, params)
+      req.send_request(options)
+    end
+
+    # Deletes a namespace and the users and groups that are associated with
+    # the namespace. This is an asynchronous process. Assets including
+    # dashboards, analyses, datasets and data sources are not deleted. To
+    # delete these assets, you use the APIs for the relevant asset.
+    #
+    # @option params [required, String] :aws_account_id
+    #   The ID for the AWS account that you want to delete the QuickSight
+    #   namespace from.
+    #
+    # @option params [required, String] :namespace
+    #   The namespace that you want to delete.
+    #
+    # @return [Types::DeleteNamespaceResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DeleteNamespaceResponse#request_id #request_id} => String
+    #   * {Types::DeleteNamespaceResponse#status #status} => Integer
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_namespace({
+    #     aws_account_id: "AwsAccountId", # required
+    #     namespace: "Namespace", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.request_id #=> String
+    #   resp.status #=> Integer
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/DeleteNamespace AWS API Documentation
+    #
+    # @overload delete_namespace(params = {})
+    # @param [Hash] params ({})
+    def delete_namespace(params = {}, options = {})
+      req = build_request(:delete_namespace, params)
       req.send_request(options)
     end
 
@@ -2087,6 +2284,91 @@ module Aws::QuickSight
       req.send_request(options)
     end
 
+    # Describes the customizations associated with your AWS account.
+    #
+    # @option params [required, String] :aws_account_id
+    #   The ID for the AWS account that you want to describe QuickSight
+    #   customizations for.
+    #
+    # @option params [String] :namespace
+    #   The namespace associated with the customization that you're
+    #   describing.
+    #
+    # @option params [Boolean] :resolved
+    #   The status of the creation of the customization. This is an
+    #   asynchronous process. A status of `CREATED` means that your
+    #   customization is ready to use.
+    #
+    # @return [Types::DescribeAccountCustomizationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeAccountCustomizationResponse#aws_account_id #aws_account_id} => String
+    #   * {Types::DescribeAccountCustomizationResponse#namespace #namespace} => String
+    #   * {Types::DescribeAccountCustomizationResponse#account_customization #account_customization} => Types::AccountCustomization
+    #   * {Types::DescribeAccountCustomizationResponse#request_id #request_id} => String
+    #   * {Types::DescribeAccountCustomizationResponse#status #status} => Integer
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_account_customization({
+    #     aws_account_id: "AwsAccountId", # required
+    #     namespace: "Namespace",
+    #     resolved: false,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.aws_account_id #=> String
+    #   resp.namespace #=> String
+    #   resp.account_customization.default_theme #=> String
+    #   resp.request_id #=> String
+    #   resp.status #=> Integer
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/DescribeAccountCustomization AWS API Documentation
+    #
+    # @overload describe_account_customization(params = {})
+    # @param [Hash] params ({})
+    def describe_account_customization(params = {}, options = {})
+      req = build_request(:describe_account_customization, params)
+      req.send_request(options)
+    end
+
+    # Describes the settings that were used when your QuickSight
+    # subscription was first created in this AWS Account.
+    #
+    # @option params [required, String] :aws_account_id
+    #   The ID for the AWS account that contains the QuickSight namespaces
+    #   that you want to list.
+    #
+    # @return [Types::DescribeAccountSettingsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeAccountSettingsResponse#account_settings #account_settings} => Types::AccountSettings
+    #   * {Types::DescribeAccountSettingsResponse#request_id #request_id} => String
+    #   * {Types::DescribeAccountSettingsResponse#status #status} => Integer
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_account_settings({
+    #     aws_account_id: "AwsAccountId", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.account_settings.account_name #=> String
+    #   resp.account_settings.edition #=> String, one of "STANDARD", "ENTERPRISE"
+    #   resp.account_settings.default_namespace #=> String
+    #   resp.account_settings.notification_email #=> String
+    #   resp.request_id #=> String
+    #   resp.status #=> Integer
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/DescribeAccountSettings AWS API Documentation
+    #
+    # @overload describe_account_settings(params = {})
+    # @param [Hash] params ({})
+    def describe_account_settings(params = {}, options = {})
+      req = build_request(:describe_account_settings, params)
+      req.send_request(options)
+    end
+
     # Provides a summary for a dashboard.
     #
     # @option params [required, String] :aws_account_id
@@ -2277,6 +2559,7 @@ module Aws::QuickSight
     #   resp.data_set.column_groups[0].geo_spatial_column_group.country_code #=> String, one of "US"
     #   resp.data_set.column_groups[0].geo_spatial_column_group.columns #=> Array
     #   resp.data_set.column_groups[0].geo_spatial_column_group.columns[0] #=> String
+    #   resp.data_set.row_level_permission_data_set.namespace #=> String
     #   resp.data_set.row_level_permission_data_set.arn #=> String
     #   resp.data_set.row_level_permission_data_set.permission_policy #=> String, one of "GRANT_ACCESS", "DENY_ACCESS"
     #   resp.request_id #=> String
@@ -2666,6 +2949,49 @@ module Aws::QuickSight
       req.send_request(options)
     end
 
+    # Describes the current namespace.
+    #
+    # @option params [required, String] :aws_account_id
+    #   The ID for the AWS account that contains the QuickSight namespace that
+    #   you want to describe.
+    #
+    # @option params [required, String] :namespace
+    #   The namespace that you want to describe.
+    #
+    # @return [Types::DescribeNamespaceResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeNamespaceResponse#namespace #namespace} => Types::NamespaceInfoV2
+    #   * {Types::DescribeNamespaceResponse#request_id #request_id} => String
+    #   * {Types::DescribeNamespaceResponse#status #status} => Integer
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_namespace({
+    #     aws_account_id: "AwsAccountId", # required
+    #     namespace: "Namespace", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.namespace.name #=> String
+    #   resp.namespace.arn #=> String
+    #   resp.namespace.capacity_region #=> String
+    #   resp.namespace.creation_status #=> String, one of "CREATED", "CREATING", "DELETING", "RETRYABLE_FAILURE", "NON_RETRYABLE_FAILURE"
+    #   resp.namespace.identity_store #=> String, one of "QUICKSIGHT"
+    #   resp.namespace.namespace_error.type #=> String, one of "PERMISSION_DENIED", "INTERNAL_SERVICE_ERROR"
+    #   resp.namespace.namespace_error.message #=> String
+    #   resp.request_id #=> String
+    #   resp.status #=> Integer
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/DescribeNamespace AWS API Documentation
+    #
+    # @overload describe_namespace(params = {})
+    # @param [Hash] params ({})
+    def describe_namespace(params = {}, options = {})
+      req = build_request(:describe_namespace, params)
+      req.send_request(options)
+    end
+
     # Describes a template's metadata.
     #
     # @option params [required, String] :aws_account_id
@@ -3041,6 +3367,7 @@ module Aws::QuickSight
     #   resp.user.identity_type #=> String, one of "IAM", "QUICKSIGHT"
     #   resp.user.active #=> Boolean
     #   resp.user.principal_id #=> String
+    #   resp.user.custom_permissions_name #=> String
     #   resp.request_id #=> String
     #   resp.status #=> Integer
     #
@@ -3144,6 +3471,64 @@ module Aws::QuickSight
     # @param [Hash] params ({})
     def get_dashboard_embed_url(params = {}, options = {})
       req = build_request(:get_dashboard_embed_url, params)
+      req.send_request(options)
+    end
+
+    # Generates a session URL and authorization code that you can embed in
+    # your web server code.
+    #
+    # @option params [required, String] :aws_account_id
+    #   The ID for the AWS account that contains the QuickSight session that
+    #   you're embedding.
+    #
+    # @option params [String] :entry_point
+    #   The entry point for the embedded session.
+    #
+    # @option params [Integer] :session_lifetime_in_minutes
+    #   How many minutes the session is valid. The session lifetime must be
+    #   15-600 minutes.
+    #
+    # @option params [String] :user_arn
+    #   The Amazon QuickSight user's Amazon Resource Name (ARN), for use with
+    #   `QUICKSIGHT` identity type. You can use this for any Amazon QuickSight
+    #   users in your account (readers, authors, or admins) authenticated as
+    #   one of the following:
+    #
+    #   * Active Directory (AD) users or group members
+    #
+    #   * Invited nonfederated users
+    #
+    #   * IAM users and IAM role-based sessions authenticated through
+    #     Federated Single Sign-On using SAML, OpenID Connect, or IAM
+    #     federation.
+    #
+    # @return [Types::GetSessionEmbedUrlResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetSessionEmbedUrlResponse#embed_url #embed_url} => String
+    #   * {Types::GetSessionEmbedUrlResponse#status #status} => Integer
+    #   * {Types::GetSessionEmbedUrlResponse#request_id #request_id} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_session_embed_url({
+    #     aws_account_id: "AwsAccountId", # required
+    #     entry_point: "EntryPoint",
+    #     session_lifetime_in_minutes: 1,
+    #     user_arn: "Arn",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.embed_url #=> String
+    #   resp.status #=> Integer
+    #   resp.request_id #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/GetSessionEmbedUrl AWS API Documentation
+    #
+    # @overload get_session_embed_url(params = {})
+    # @param [Hash] params ({})
+    def get_session_embed_url(params = {}, options = {})
+      req = build_request(:get_session_embed_url, params)
       req.send_request(options)
     end
 
@@ -3299,6 +3684,7 @@ module Aws::QuickSight
     #   resp.data_set_summaries[0].created_time #=> Time
     #   resp.data_set_summaries[0].last_updated_time #=> Time
     #   resp.data_set_summaries[0].import_mode #=> String, one of "SPICE", "DIRECT_QUERY"
+    #   resp.data_set_summaries[0].row_level_permission_data_set.namespace #=> String
     #   resp.data_set_summaries[0].row_level_permission_data_set.arn #=> String
     #   resp.data_set_summaries[0].row_level_permission_data_set.permission_policy #=> String, one of "GRANT_ACCESS", "DENY_ACCESS"
     #   resp.next_token #=> String
@@ -3734,6 +4120,58 @@ module Aws::QuickSight
     # @param [Hash] params ({})
     def list_ingestions(params = {}, options = {})
       req = build_request(:list_ingestions, params)
+      req.send_request(options)
+    end
+
+    # Lists the namespaces for the specified AWS account.
+    #
+    # @option params [required, String] :aws_account_id
+    #   The ID for the AWS account that contains the QuickSight namespaces
+    #   that you want to list.
+    #
+    # @option params [String] :next_token
+    #   A pagination token that can be used in a subsequent request.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of results to return.
+    #
+    # @return [Types::ListNamespacesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListNamespacesResponse#namespaces #namespaces} => Array&lt;Types::NamespaceInfoV2&gt;
+    #   * {Types::ListNamespacesResponse#next_token #next_token} => String
+    #   * {Types::ListNamespacesResponse#request_id #request_id} => String
+    #   * {Types::ListNamespacesResponse#status #status} => Integer
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_namespaces({
+    #     aws_account_id: "AwsAccountId", # required
+    #     next_token: "String",
+    #     max_results: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.namespaces #=> Array
+    #   resp.namespaces[0].name #=> String
+    #   resp.namespaces[0].arn #=> String
+    #   resp.namespaces[0].capacity_region #=> String
+    #   resp.namespaces[0].creation_status #=> String, one of "CREATED", "CREATING", "DELETING", "RETRYABLE_FAILURE", "NON_RETRYABLE_FAILURE"
+    #   resp.namespaces[0].identity_store #=> String, one of "QUICKSIGHT"
+    #   resp.namespaces[0].namespace_error.type #=> String, one of "PERMISSION_DENIED", "INTERNAL_SERVICE_ERROR"
+    #   resp.namespaces[0].namespace_error.message #=> String
+    #   resp.next_token #=> String
+    #   resp.request_id #=> String
+    #   resp.status #=> Integer
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/ListNamespaces AWS API Documentation
+    #
+    # @overload list_namespaces(params = {})
+    # @param [Hash] params ({})
+    def list_namespaces(params = {}, options = {})
+      req = build_request(:list_namespaces, params)
       req.send_request(options)
     end
 
@@ -4199,6 +4637,7 @@ module Aws::QuickSight
     #   resp.user_list[0].identity_type #=> String, one of "IAM", "QUICKSIGHT"
     #   resp.user_list[0].active #=> Boolean
     #   resp.user_list[0].principal_id #=> String
+    #   resp.user_list[0].custom_permissions_name #=> String
     #   resp.next_token #=> String
     #   resp.request_id #=> String
     #   resp.status #=> Integer
@@ -4272,6 +4711,30 @@ module Aws::QuickSight
     #   The Amazon QuickSight user name that you want to create for the user
     #   you are registering.
     #
+    # @option params [String] :custom_permissions_name
+    #   (Enterprise edition only) The name of the custom permissions profile
+    #   that you want to assign to this user. Currently, custom permissions
+    #   profile names are assigned to permissions profiles in the QuickSight
+    #   console. You use this API to assign the named set of permissions to a
+    #   QuickSight user.
+    #
+    #   Customizing permissions in the QuickSight UI allows you to control a
+    #   user's access to the following operations:
+    #
+    #   *
+    #   *
+    #   *
+    #   *
+    #
+    #   QuickSight custom permissions are applied through IAM policies.
+    #   Therefore, they override the permissions typically granted by
+    #   assigning QuickSight users to one of the default security cohorts
+    #   (admin, author, reader) in QuickSight.
+    #
+    #   This feature is available only to QuickSight Enterprise edition
+    #   subscriptions that use SAML 2.0-Based Federation for Single Sign-On
+    #   (SSO).
+    #
     # @return [Types::RegisterUserResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::RegisterUserResponse#user #user} => Types::User
@@ -4290,6 +4753,7 @@ module Aws::QuickSight
     #     aws_account_id: "AwsAccountId", # required
     #     namespace: "Namespace", # required
     #     user_name: "UserName",
+    #     custom_permissions_name: "RoleName",
     #   })
     #
     # @example Response structure
@@ -4301,6 +4765,7 @@ module Aws::QuickSight
     #   resp.user.identity_type #=> String, one of "IAM", "QUICKSIGHT"
     #   resp.user.active #=> Boolean
     #   resp.user.principal_id #=> String
+    #   resp.user.custom_permissions_name #=> String
     #   resp.user_invitation_url #=> String
     #   resp.request_id #=> String
     #   resp.status #=> Integer
@@ -4475,6 +4940,97 @@ module Aws::QuickSight
     # @param [Hash] params ({})
     def untag_resource(params = {}, options = {})
       req = build_request(:untag_resource, params)
+      req.send_request(options)
+    end
+
+    # Updates customizations associated with the QuickSight subscription on
+    # your AWS account.
+    #
+    # @option params [required, String] :aws_account_id
+    #   The ID for the AWS account that you want to update QuickSight
+    #   customizations for.
+    #
+    # @option params [String] :namespace
+    #   The namespace associated with the customization that you're updating.
+    #
+    # @option params [required, Types::AccountCustomization] :account_customization
+    #   The customizations you want to update in QuickSight.
+    #
+    # @return [Types::UpdateAccountCustomizationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::UpdateAccountCustomizationResponse#aws_account_id #aws_account_id} => String
+    #   * {Types::UpdateAccountCustomizationResponse#namespace #namespace} => String
+    #   * {Types::UpdateAccountCustomizationResponse#account_customization #account_customization} => Types::AccountCustomization
+    #   * {Types::UpdateAccountCustomizationResponse#request_id #request_id} => String
+    #   * {Types::UpdateAccountCustomizationResponse#status #status} => Integer
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_account_customization({
+    #     aws_account_id: "AwsAccountId", # required
+    #     namespace: "Namespace",
+    #     account_customization: { # required
+    #       default_theme: "Arn",
+    #     },
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.aws_account_id #=> String
+    #   resp.namespace #=> String
+    #   resp.account_customization.default_theme #=> String
+    #   resp.request_id #=> String
+    #   resp.status #=> Integer
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/UpdateAccountCustomization AWS API Documentation
+    #
+    # @overload update_account_customization(params = {})
+    # @param [Hash] params ({})
+    def update_account_customization(params = {}, options = {})
+      req = build_request(:update_account_customization, params)
+      req.send_request(options)
+    end
+
+    # Updates the settings for the Amazon QuickSight subscription in your
+    # AWS Account.
+    #
+    # @option params [required, String] :aws_account_id
+    #   The ID for the AWS account that contains the QuickSight namespaces
+    #   that you want to list.
+    #
+    # @option params [required, String] :default_namespace
+    #   The default namespace for this AWS Account. Currently, the default is
+    #   `default`. IAM users who register for the first time with QuickSight
+    #   provide an email that becomes associated with the default namespace.
+    #
+    # @option params [String] :notification_email
+    #   Email address used to send notifications regarding administration of
+    #   QuickSight.
+    #
+    # @return [Types::UpdateAccountSettingsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::UpdateAccountSettingsResponse#request_id #request_id} => String
+    #   * {Types::UpdateAccountSettingsResponse#status #status} => Integer
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_account_settings({
+    #     aws_account_id: "AwsAccountId", # required
+    #     default_namespace: "Namespace", # required
+    #     notification_email: "String",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.request_id #=> String
+    #   resp.status #=> Integer
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/UpdateAccountSettings AWS API Documentation
+    #
+    # @overload update_account_settings(params = {})
+    # @param [Hash] params ({})
+    def update_account_settings(params = {}, options = {})
+      req = build_request(:update_account_settings, params)
       req.send_request(options)
     end
 
@@ -4875,6 +5431,7 @@ module Aws::QuickSight
     #       },
     #     ],
     #     row_level_permission_data_set: {
+    #       namespace: "Namespace",
     #       arn: "Arn", # required
     #       permission_policy: "GRANT_ACCESS", # required, accepts GRANT_ACCESS, DENY_ACCESS
     #     },
@@ -5869,6 +6426,19 @@ module Aws::QuickSight
     #   * `ADMIN`\: A user who is an author, who can also manage Amazon
     #     QuickSight settings.
     #
+    # @option params [String] :custom_permissions_name
+    #   The name of the custom permissions profile that you want to assign to
+    #   this user. Currently, custom permissions profile names are assigned to
+    #   permissions profiles in the QuickSight console. You use this API to
+    #   assign the named set of permissions to a QuickSight user.
+    #
+    # @option params [Boolean] :unapply_custom_permissions
+    #   A flag that you use to indicate that you want to remove all custom
+    #   permissions from this user. Using this parameter resets the user to
+    #   the state it was in before a custom permissions profile was applied.
+    #   This parameter defaults to NULL and it doesn't accept any other
+    #   value.
+    #
     # @return [Types::UpdateUserResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::UpdateUserResponse#user #user} => Types::User
@@ -5883,6 +6453,8 @@ module Aws::QuickSight
     #     namespace: "Namespace", # required
     #     email: "String", # required
     #     role: "ADMIN", # required, accepts ADMIN, AUTHOR, READER, RESTRICTED_AUTHOR, RESTRICTED_READER
+    #     custom_permissions_name: "RoleName",
+    #     unapply_custom_permissions: false,
     #   })
     #
     # @example Response structure
@@ -5894,6 +6466,7 @@ module Aws::QuickSight
     #   resp.user.identity_type #=> String, one of "IAM", "QUICKSIGHT"
     #   resp.user.active #=> Boolean
     #   resp.user.principal_id #=> String
+    #   resp.user.custom_permissions_name #=> String
     #   resp.request_id #=> String
     #   resp.status #=> Integer
     #
@@ -5919,7 +6492,7 @@ module Aws::QuickSight
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-quicksight'
-      context[:gem_version] = '1.25.0'
+      context[:gem_version] = '1.26.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

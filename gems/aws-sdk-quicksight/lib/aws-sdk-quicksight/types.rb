@@ -32,6 +32,57 @@ module Aws::QuickSight
       include Aws::Structure
     end
 
+    # The customizations associated with your AWS account for QuickSight.
+    #
+    # @note When making an API call, you may pass AccountCustomization
+    #   data as a hash:
+    #
+    #       {
+    #         default_theme: "Arn",
+    #       }
+    #
+    # @!attribute [rw] default_theme
+    #   The default theme for this QuickSight subscription.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/AccountCustomization AWS API Documentation
+    #
+    class AccountCustomization < Struct.new(
+      :default_theme)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The QuickSight settings associated with your AWS account.
+    #
+    # @!attribute [rw] account_name
+    #   The name associated with the QuickSight subscription in your AWS
+    #   account.
+    #   @return [String]
+    #
+    # @!attribute [rw] edition
+    #   The edition of QuickSight that you're currently subscribed to.
+    #   @return [String]
+    #
+    # @!attribute [rw] default_namespace
+    #   The default QuickSight namespace for your AWS account.
+    #   @return [String]
+    #
+    # @!attribute [rw] notification_email
+    #   The main notification email for your QuickSight subscription.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/AccountSettings AWS API Documentation
+    #
+    class AccountSettings < Struct.new(
+      :account_name,
+      :edition,
+      :default_namespace,
+      :notification_email)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The active AWS Identity and Access Management (IAM) policy assignment.
     #
     # @!attribute [rw] assignment_name
@@ -495,6 +546,80 @@ module Aws::QuickSight
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass CreateAccountCustomizationRequest
+    #   data as a hash:
+    #
+    #       {
+    #         aws_account_id: "AwsAccountId", # required
+    #         namespace: "Namespace",
+    #         account_customization: { # required
+    #           default_theme: "Arn",
+    #         },
+    #       }
+    #
+    # @!attribute [rw] aws_account_id
+    #   The ID for the AWS account that you want to customize QuickSight
+    #   for.
+    #   @return [String]
+    #
+    # @!attribute [rw] namespace
+    #   The namespace associated with the customization that you're
+    #   creating.
+    #   @return [String]
+    #
+    # @!attribute [rw] account_customization
+    #   The customizations you're adding to the QuickSight subscription for
+    #   the AWS account. For example, you could add a default theme by
+    #   setting `AccountCustomization` to the midnight theme
+    #   (`DefaultTheme="arn:aws:quicksight::aws:theme/MIDNIGHT"`) or to a
+    #   custom theme
+    #   (`DefaultTheme="arn:aws:quicksight:us-west-2:111122223333:theme/bdb844d0-0fe9-4d9d-b520-0fe602d93639"`).
+    #   @return [Types::AccountCustomization]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/CreateAccountCustomizationRequest AWS API Documentation
+    #
+    class CreateAccountCustomizationRequest < Struct.new(
+      :aws_account_id,
+      :namespace,
+      :account_customization)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] aws_account_id
+    #   The ID for the AWS account that you want to customize QuickSight
+    #   for.
+    #   @return [String]
+    #
+    # @!attribute [rw] namespace
+    #   The namespace associated with the customization you're creating.
+    #   @return [String]
+    #
+    # @!attribute [rw] account_customization
+    #   The customizations you're adding to the QuickSight subscription for
+    #   the AWS account.
+    #   @return [Types::AccountCustomization]
+    #
+    # @!attribute [rw] request_id
+    #   The AWS request ID for this operation.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The HTTP status of the request.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/CreateAccountCustomizationResponse AWS API Documentation
+    #
+    class CreateAccountCustomizationResponse < Struct.new(
+      :aws_account_id,
+      :namespace,
+      :account_customization,
+      :request_id,
+      :status)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # A transform operation that creates calculated columns. Columns created
     # in one such operation form a lexical closure.
     #
@@ -840,6 +965,7 @@ module Aws::QuickSight
     #           },
     #         ],
     #         row_level_permission_data_set: {
+    #           namespace: "Namespace",
     #           arn: "Arn", # required
     #           permission_policy: "GRANT_ACCESS", # required, accepts GRANT_ACCESS, DENY_ACCESS
     #         },
@@ -1564,6 +1690,100 @@ module Aws::QuickSight
       :arn,
       :ingestion_id,
       :ingestion_status,
+      :request_id,
+      :status)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass CreateNamespaceRequest
+    #   data as a hash:
+    #
+    #       {
+    #         aws_account_id: "AwsAccountId", # required
+    #         namespace: "Namespace", # required
+    #         identity_store: "QUICKSIGHT", # required, accepts QUICKSIGHT
+    #         tags: [
+    #           {
+    #             key: "TagKey", # required
+    #             value: "TagValue", # required
+    #           },
+    #         ],
+    #       }
+    #
+    # @!attribute [rw] aws_account_id
+    #   The ID for the AWS account that you want to create the QuickSight
+    #   namespace in.
+    #   @return [String]
+    #
+    # @!attribute [rw] namespace
+    #   The name that you want to use to describe the new namespace.
+    #   @return [String]
+    #
+    # @!attribute [rw] identity_store
+    #   Specifies the type of your user identity directory. Currently, this
+    #   supports users with an identity type of `QUICKSIGHT`.
+    #   @return [String]
+    #
+    # @!attribute [rw] tags
+    #   The tags that you want to associate with the namespace that you're
+    #   creating.
+    #   @return [Array<Types::Tag>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/CreateNamespaceRequest AWS API Documentation
+    #
+    class CreateNamespaceRequest < Struct.new(
+      :aws_account_id,
+      :namespace,
+      :identity_store,
+      :tags)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] arn
+    #   The ARN of the QuickSight namespace you created.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The name of the new namespace that you created.
+    #   @return [String]
+    #
+    # @!attribute [rw] capacity_region
+    #   The AWS Region that you want to use for the free SPICE capacity for
+    #   the new namespace. This is set to the region that you run
+    #   CreateNamespace in.
+    #   @return [String]
+    #
+    # @!attribute [rw] creation_status
+    #   The status of the creation of the namespace. This is an asynchronous
+    #   process. A status of `CREATED` means that your namespace is ready to
+    #   use. If an error occurs, it indicates if the process is `retryable`
+    #   or `non-retryable`. In the case of a non-retryable error, refer to
+    #   the error message for follow-up actions.
+    #   @return [String]
+    #
+    # @!attribute [rw] identity_store
+    #   Specifies the type of your user identity directory. Currently, this
+    #   supports users with an identity type of `QUICKSIGHT`.
+    #   @return [String]
+    #
+    # @!attribute [rw] request_id
+    #   The AWS request ID for this operation.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The HTTP status of the request.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/CreateNamespaceResponse AWS API Documentation
+    #
+    class CreateNamespaceResponse < Struct.new(
+      :arn,
+      :name,
+      :capacity_region,
+      :creation_status,
+      :identity_store,
       :request_id,
       :status)
       SENSITIVE = []
@@ -3191,6 +3411,50 @@ module Aws::QuickSight
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass DeleteAccountCustomizationRequest
+    #   data as a hash:
+    #
+    #       {
+    #         aws_account_id: "AwsAccountId", # required
+    #         namespace: "Namespace",
+    #       }
+    #
+    # @!attribute [rw] aws_account_id
+    #   The ID for the AWS account that you want to delete QuickSight
+    #   customizations from.
+    #   @return [String]
+    #
+    # @!attribute [rw] namespace
+    #   The namespace associated with the customization that you're
+    #   deleting.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/DeleteAccountCustomizationRequest AWS API Documentation
+    #
+    class DeleteAccountCustomizationRequest < Struct.new(
+      :aws_account_id,
+      :namespace)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] request_id
+    #   The AWS request ID for this operation.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The HTTP status of the request.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/DeleteAccountCustomizationResponse AWS API Documentation
+    #
+    class DeleteAccountCustomizationResponse < Struct.new(
+      :request_id,
+      :status)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass DeleteDashboardRequest
     #   data as a hash:
     #
@@ -3515,6 +3779,49 @@ module Aws::QuickSight
     #
     class DeleteIAMPolicyAssignmentResponse < Struct.new(
       :assignment_name,
+      :request_id,
+      :status)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass DeleteNamespaceRequest
+    #   data as a hash:
+    #
+    #       {
+    #         aws_account_id: "AwsAccountId", # required
+    #         namespace: "Namespace", # required
+    #       }
+    #
+    # @!attribute [rw] aws_account_id
+    #   The ID for the AWS account that you want to delete the QuickSight
+    #   namespace from.
+    #   @return [String]
+    #
+    # @!attribute [rw] namespace
+    #   The namespace that you want to delete.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/DeleteNamespaceRequest AWS API Documentation
+    #
+    class DeleteNamespaceRequest < Struct.new(
+      :aws_account_id,
+      :namespace)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] request_id
+    #   The AWS request ID for this operation.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The HTTP status of the request.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/DeleteNamespaceResponse AWS API Documentation
+    #
+    class DeleteNamespaceResponse < Struct.new(
       :request_id,
       :status)
       SENSITIVE = []
@@ -3868,6 +4175,123 @@ module Aws::QuickSight
     # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/DeleteUserResponse AWS API Documentation
     #
     class DeleteUserResponse < Struct.new(
+      :request_id,
+      :status)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass DescribeAccountCustomizationRequest
+    #   data as a hash:
+    #
+    #       {
+    #         aws_account_id: "AwsAccountId", # required
+    #         namespace: "Namespace",
+    #         resolved: false,
+    #       }
+    #
+    # @!attribute [rw] aws_account_id
+    #   The ID for the AWS account that you want to describe QuickSight
+    #   customizations for.
+    #   @return [String]
+    #
+    # @!attribute [rw] namespace
+    #   The namespace associated with the customization that you're
+    #   describing.
+    #   @return [String]
+    #
+    # @!attribute [rw] resolved
+    #   The status of the creation of the customization. This is an
+    #   asynchronous process. A status of `CREATED` means that your
+    #   customization is ready to use.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/DescribeAccountCustomizationRequest AWS API Documentation
+    #
+    class DescribeAccountCustomizationRequest < Struct.new(
+      :aws_account_id,
+      :namespace,
+      :resolved)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] aws_account_id
+    #   The ID for the AWS account that you want to describe QuickSight
+    #   customizations for.
+    #   @return [String]
+    #
+    # @!attribute [rw] namespace
+    #   The namespace associated with the customization that you're
+    #   describing.
+    #   @return [String]
+    #
+    # @!attribute [rw] account_customization
+    #   The customizations associated with QuickSight.
+    #   @return [Types::AccountCustomization]
+    #
+    # @!attribute [rw] request_id
+    #   The AWS request ID for this operation.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The HTTP status of the request.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/DescribeAccountCustomizationResponse AWS API Documentation
+    #
+    class DescribeAccountCustomizationResponse < Struct.new(
+      :aws_account_id,
+      :namespace,
+      :account_customization,
+      :request_id,
+      :status)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass DescribeAccountSettingsRequest
+    #   data as a hash:
+    #
+    #       {
+    #         aws_account_id: "AwsAccountId", # required
+    #       }
+    #
+    # @!attribute [rw] aws_account_id
+    #   The ID for the AWS account that contains the QuickSight namespaces
+    #   that you want to list.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/DescribeAccountSettingsRequest AWS API Documentation
+    #
+    class DescribeAccountSettingsRequest < Struct.new(
+      :aws_account_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] account_settings
+    #   The settings associated with the QuickSight subscription associated
+    #   with this AWS account. This information includes the edition of
+    #   Amazon QuickSight that you subscribed to (Standard or Enterprise)
+    #   and the notification email for the QuickSight subscription. The
+    #   QuickSight console, the QuickSight subscription is sometimes
+    #   referred to as a QuickSight "account" even though it is
+    #   technically not an account, but a subscription in your AWS account.
+    #   @return [Types::AccountSettings]
+    #
+    # @!attribute [rw] request_id
+    #   The AWS request ID for this operation.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The HTTP status of the request.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/DescribeAccountSettingsResponse AWS API Documentation
+    #
+    class DescribeAccountSettingsResponse < Struct.new(
+      :account_settings,
       :request_id,
       :status)
       SENSITIVE = []
@@ -4369,6 +4793,59 @@ module Aws::QuickSight
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass DescribeNamespaceRequest
+    #   data as a hash:
+    #
+    #       {
+    #         aws_account_id: "AwsAccountId", # required
+    #         namespace: "Namespace", # required
+    #       }
+    #
+    # @!attribute [rw] aws_account_id
+    #   The ID for the AWS account that contains the QuickSight namespace
+    #   that you want to describe.
+    #   @return [String]
+    #
+    # @!attribute [rw] namespace
+    #   The namespace that you want to describe.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/DescribeNamespaceRequest AWS API Documentation
+    #
+    class DescribeNamespaceRequest < Struct.new(
+      :aws_account_id,
+      :namespace)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] namespace
+    #   The information about the namespace that you're describing. The
+    #   response includes the namespace ARN, name, AWS Region, creation
+    #   status, and identity store. `DescribeNamespace` also works for
+    #   namespaces that are in the process of being created. For incomplete
+    #   namespaces, this API lists the namespace error types and messages
+    #   associated with the creation process.
+    #   @return [Types::NamespaceInfoV2]
+    #
+    # @!attribute [rw] request_id
+    #   The AWS request ID for this operation.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The HTTP status of the request.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/DescribeNamespaceResponse AWS API Documentation
+    #
+    class DescribeNamespaceResponse < Struct.new(
+      :namespace,
+      :request_id,
+      :status)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass DescribeTemplateAliasRequest
     #   data as a hash:
     #
@@ -4538,6 +5015,7 @@ module Aws::QuickSight
     #   @return [Integer]
     #
     # @!attribute [rw] request_id
+    #   The AWS request ID for this operation.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/DescribeTemplateResponse AWS API Documentation
@@ -4986,6 +5464,81 @@ module Aws::QuickSight
     # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/GetDashboardEmbedUrlResponse AWS API Documentation
     #
     class GetDashboardEmbedUrlResponse < Struct.new(
+      :embed_url,
+      :status,
+      :request_id)
+      SENSITIVE = [:embed_url]
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass GetSessionEmbedUrlRequest
+    #   data as a hash:
+    #
+    #       {
+    #         aws_account_id: "AwsAccountId", # required
+    #         entry_point: "EntryPoint",
+    #         session_lifetime_in_minutes: 1,
+    #         user_arn: "Arn",
+    #       }
+    #
+    # @!attribute [rw] aws_account_id
+    #   The ID for the AWS account that contains the QuickSight session that
+    #   you're embedding.
+    #   @return [String]
+    #
+    # @!attribute [rw] entry_point
+    #   The entry point for the embedded session.
+    #   @return [String]
+    #
+    # @!attribute [rw] session_lifetime_in_minutes
+    #   How many minutes the session is valid. The session lifetime must be
+    #   15-600 minutes.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] user_arn
+    #   The Amazon QuickSight user's Amazon Resource Name (ARN), for use
+    #   with `QUICKSIGHT` identity type. You can use this for any Amazon
+    #   QuickSight users in your account (readers, authors, or admins)
+    #   authenticated as one of the following:
+    #
+    #   * Active Directory (AD) users or group members
+    #
+    #   * Invited nonfederated users
+    #
+    #   * IAM users and IAM role-based sessions authenticated through
+    #     Federated Single Sign-On using SAML, OpenID Connect, or IAM
+    #     federation.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/GetSessionEmbedUrlRequest AWS API Documentation
+    #
+    class GetSessionEmbedUrlRequest < Struct.new(
+      :aws_account_id,
+      :entry_point,
+      :session_lifetime_in_minutes,
+      :user_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] embed_url
+    #   A single-use URL that you can put into your server-side web page to
+    #   embed your QuickSight session. This URL is valid for 5 minutes. The
+    #   API provides the URL with an `auth_code` value that enables one (and
+    #   only one) sign-on to a user session that is valid for 10 hours.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The HTTP status of the request.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] request_id
+    #   The AWS request ID for this operation.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/GetSessionEmbedUrlResponse AWS API Documentation
+    #
+    class GetSessionEmbedUrlResponse < Struct.new(
       :embed_url,
       :status,
       :request_id)
@@ -5999,6 +6552,67 @@ module Aws::QuickSight
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass ListNamespacesRequest
+    #   data as a hash:
+    #
+    #       {
+    #         aws_account_id: "AwsAccountId", # required
+    #         next_token: "String",
+    #         max_results: 1,
+    #       }
+    #
+    # @!attribute [rw] aws_account_id
+    #   The ID for the AWS account that contains the QuickSight namespaces
+    #   that you want to list.
+    #   @return [String]
+    #
+    # @!attribute [rw] next_token
+    #   A pagination token that can be used in a subsequent request.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of results to return.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/ListNamespacesRequest AWS API Documentation
+    #
+    class ListNamespacesRequest < Struct.new(
+      :aws_account_id,
+      :next_token,
+      :max_results)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] namespaces
+    #   The information about the namespaces in this AWS account. The
+    #   response includes the namespace ARN, name, AWS Region, notification
+    #   email address, creation status, and identity store.
+    #   @return [Array<Types::NamespaceInfoV2>]
+    #
+    # @!attribute [rw] next_token
+    #   A pagination token that can be used in a subsequent request.
+    #   @return [String]
+    #
+    # @!attribute [rw] request_id
+    #   The AWS request ID for this operation.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The HTTP status of the request.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/ListNamespacesResponse AWS API Documentation
+    #
+    class ListNamespacesResponse < Struct.new(
+      :namespaces,
+      :next_token,
+      :request_id,
+      :status)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass ListTagsForResourceRequest
     #   data as a hash:
     #
@@ -6815,6 +7429,65 @@ module Aws::QuickSight
       include Aws::Structure
     end
 
+    # Errors that occur during namespace creation.
+    #
+    # @!attribute [rw] type
+    #   The error type.
+    #   @return [String]
+    #
+    # @!attribute [rw] message
+    #   The message for the error.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/NamespaceError AWS API Documentation
+    #
+    class NamespaceError < Struct.new(
+      :type,
+      :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The error type.
+    #
+    # @!attribute [rw] name
+    #   The name of the error.
+    #   @return [String]
+    #
+    # @!attribute [rw] arn
+    #   The namespace ARN.
+    #   @return [String]
+    #
+    # @!attribute [rw] capacity_region
+    #   The namespace AWS Region.
+    #   @return [String]
+    #
+    # @!attribute [rw] creation_status
+    #   The creation status of a namespace that is not yet completely
+    #   created.
+    #   @return [String]
+    #
+    # @!attribute [rw] identity_store
+    #   The identity store used for the namespace.
+    #   @return [String]
+    #
+    # @!attribute [rw] namespace_error
+    #   An error that occured when the namespace was created.
+    #   @return [Types::NamespaceError]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/NamespaceInfoV2 AWS API Documentation
+    #
+    class NamespaceInfoV2 < Struct.new(
+      :name,
+      :arn,
+      :capacity_region,
+      :creation_status,
+      :identity_store,
+      :namespace_error)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Output column.
     #
     # @!attribute [rw] name
@@ -7192,6 +7865,7 @@ module Aws::QuickSight
     #         aws_account_id: "AwsAccountId", # required
     #         namespace: "Namespace", # required
     #         user_name: "UserName",
+    #         custom_permissions_name: "RoleName",
     #       }
     #
     # @!attribute [rw] identity_type
@@ -7262,6 +7936,31 @@ module Aws::QuickSight
     #   you are registering.
     #   @return [String]
     #
+    # @!attribute [rw] custom_permissions_name
+    #   (Enterprise edition only) The name of the custom permissions profile
+    #   that you want to assign to this user. Currently, custom permissions
+    #   profile names are assigned to permissions profiles in the QuickSight
+    #   console. You use this API to assign the named set of permissions to
+    #   a QuickSight user.
+    #
+    #   Customizing permissions in the QuickSight UI allows you to control a
+    #   user's access to the following operations:
+    #
+    #   *
+    #   *
+    #   *
+    #   *
+    #
+    #   QuickSight custom permissions are applied through IAM policies.
+    #   Therefore, they override the permissions typically granted by
+    #   assigning QuickSight users to one of the default security cohorts
+    #   (admin, author, reader) in QuickSight.
+    #
+    #   This feature is available only to QuickSight Enterprise edition
+    #   subscriptions that use SAML 2.0-Based Federation for Single Sign-On
+    #   (SSO).
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/RegisterUserRequest AWS API Documentation
     #
     class RegisterUserRequest < Struct.new(
@@ -7272,7 +7971,8 @@ module Aws::QuickSight
       :session_name,
       :aws_account_id,
       :namespace,
-      :user_name)
+      :user_name,
+      :custom_permissions_name)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -7508,9 +8208,14 @@ module Aws::QuickSight
     #   data as a hash:
     #
     #       {
+    #         namespace: "Namespace",
     #         arn: "Arn", # required
     #         permission_policy: "GRANT_ACCESS", # required, accepts GRANT_ACCESS, DENY_ACCESS
     #       }
+    #
+    # @!attribute [rw] namespace
+    #   The namespace associated with the row-level permissions dataset.
+    #   @return [String]
     #
     # @!attribute [rw] arn
     #   The Amazon Resource Name (ARN) of the permission dataset.
@@ -7523,6 +8228,7 @@ module Aws::QuickSight
     # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/RowLevelPermissionDataSet AWS API Documentation
     #
     class RowLevelPermissionDataSet < Struct.new(
+      :namespace,
       :arn,
       :permission_policy)
       SENSITIVE = []
@@ -9029,6 +9735,128 @@ module Aws::QuickSight
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass UpdateAccountCustomizationRequest
+    #   data as a hash:
+    #
+    #       {
+    #         aws_account_id: "AwsAccountId", # required
+    #         namespace: "Namespace",
+    #         account_customization: { # required
+    #           default_theme: "Arn",
+    #         },
+    #       }
+    #
+    # @!attribute [rw] aws_account_id
+    #   The ID for the AWS account that you want to update QuickSight
+    #   customizations for.
+    #   @return [String]
+    #
+    # @!attribute [rw] namespace
+    #   The namespace associated with the customization that you're
+    #   updating.
+    #   @return [String]
+    #
+    # @!attribute [rw] account_customization
+    #   The customizations you want to update in QuickSight.
+    #   @return [Types::AccountCustomization]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/UpdateAccountCustomizationRequest AWS API Documentation
+    #
+    class UpdateAccountCustomizationRequest < Struct.new(
+      :aws_account_id,
+      :namespace,
+      :account_customization)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] aws_account_id
+    #   The ID for the AWS account that you want to update QuickSight
+    #   customizations for.
+    #   @return [String]
+    #
+    # @!attribute [rw] namespace
+    #   The namespace associated with the customization that you're
+    #   updating.
+    #   @return [String]
+    #
+    # @!attribute [rw] account_customization
+    #   The customizations associated with your QuickSight subscription.
+    #   @return [Types::AccountCustomization]
+    #
+    # @!attribute [rw] request_id
+    #   The AWS request ID for this operation.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The HTTP status of the request.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/UpdateAccountCustomizationResponse AWS API Documentation
+    #
+    class UpdateAccountCustomizationResponse < Struct.new(
+      :aws_account_id,
+      :namespace,
+      :account_customization,
+      :request_id,
+      :status)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass UpdateAccountSettingsRequest
+    #   data as a hash:
+    #
+    #       {
+    #         aws_account_id: "AwsAccountId", # required
+    #         default_namespace: "Namespace", # required
+    #         notification_email: "String",
+    #       }
+    #
+    # @!attribute [rw] aws_account_id
+    #   The ID for the AWS account that contains the QuickSight namespaces
+    #   that you want to list.
+    #   @return [String]
+    #
+    # @!attribute [rw] default_namespace
+    #   The default namespace for this AWS Account. Currently, the default
+    #   is `default`. IAM users who register for the first time with
+    #   QuickSight provide an email that becomes associated with the default
+    #   namespace.
+    #   @return [String]
+    #
+    # @!attribute [rw] notification_email
+    #   Email address used to send notifications regarding administration of
+    #   QuickSight.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/UpdateAccountSettingsRequest AWS API Documentation
+    #
+    class UpdateAccountSettingsRequest < Struct.new(
+      :aws_account_id,
+      :default_namespace,
+      :notification_email)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] request_id
+    #   The AWS request ID for this operation.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The HTTP status of the request.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/UpdateAccountSettingsResponse AWS API Documentation
+    #
+    class UpdateAccountSettingsResponse < Struct.new(
+      :request_id,
+      :status)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass UpdateDashboardPermissionsRequest
     #   data as a hash:
     #
@@ -9530,6 +10358,7 @@ module Aws::QuickSight
     #           },
     #         ],
     #         row_level_permission_data_set: {
+    #           namespace: "Namespace",
     #           arn: "Arn", # required
     #           permission_policy: "GRANT_ACCESS", # required, accepts GRANT_ACCESS, DENY_ACCESS
     #         },
@@ -10692,6 +11521,8 @@ module Aws::QuickSight
     #         namespace: "Namespace", # required
     #         email: "String", # required
     #         role: "ADMIN", # required, accepts ADMIN, AUTHOR, READER, RESTRICTED_AUTHOR, RESTRICTED_READER
+    #         custom_permissions_name: "RoleName",
+    #         unapply_custom_permissions: false,
     #       }
     #
     # @!attribute [rw] user_name
@@ -10725,6 +11556,22 @@ module Aws::QuickSight
     #     QuickSight settings.
     #   @return [String]
     #
+    # @!attribute [rw] custom_permissions_name
+    #   The name of the custom permissions profile that you want to assign
+    #   to this user. Currently, custom permissions profile names are
+    #   assigned to permissions profiles in the QuickSight console. You use
+    #   this API to assign the named set of permissions to a QuickSight
+    #   user.
+    #   @return [String]
+    #
+    # @!attribute [rw] unapply_custom_permissions
+    #   A flag that you use to indicate that you want to remove all custom
+    #   permissions from this user. Using this parameter resets the user to
+    #   the state it was in before a custom permissions profile was applied.
+    #   This parameter defaults to NULL and it doesn't accept any other
+    #   value.
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/UpdateUserRequest AWS API Documentation
     #
     class UpdateUserRequest < Struct.new(
@@ -10732,7 +11579,9 @@ module Aws::QuickSight
       :aws_account_id,
       :namespace,
       :email,
-      :role)
+      :role,
+      :custom_permissions_name,
+      :unapply_custom_permissions)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -10853,6 +11702,10 @@ module Aws::QuickSight
     #   The principal ID of the user.
     #   @return [String]
     #
+    # @!attribute [rw] custom_permissions_name
+    #   The custom permissions profile associated with this user.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/User AWS API Documentation
     #
     class User < Struct.new(
@@ -10862,7 +11715,8 @@ module Aws::QuickSight
       :role,
       :identity_type,
       :active,
-      :principal_id)
+      :principal_id,
+      :custom_permissions_name)
       SENSITIVE = []
       include Aws::Structure
     end
