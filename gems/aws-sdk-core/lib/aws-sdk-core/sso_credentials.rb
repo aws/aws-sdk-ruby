@@ -43,6 +43,7 @@ module Aws
       @sso_region = options.delete(:sso_region)
       @sso_role_name = options.delete(:sso_role_name)
       @sso_account_id = options.delete(:sso_account_id)
+      @expiratin_callback = options.delete(:sso_exp_callback) # TODO: Add support for this!
 
       # validate we can read the token file
       read_cached_token
