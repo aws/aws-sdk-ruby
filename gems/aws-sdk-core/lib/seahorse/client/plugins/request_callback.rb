@@ -63,7 +63,7 @@ bytes in the body.
         # @api private
         class OptionHandler < Client::Handler
           def call(context)
-            if context.params.is_a?(Hash)
+            if context.params.is_a?(Hash) && context.params[:on_chunk_sent]
               on_chunk_sent = context.params.delete(:on_chunk_sent)
             end
             on_chunk_sent = context.config.on_chunk_sent if on_chunk_sent.nil?
