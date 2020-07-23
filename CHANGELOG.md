@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+2.11.551 (2020-07-23)
+------------------
+
 * Feature - Aws::ConfigService - Updated the API, and documentation for AWS Config.
 
 * Feature - Aws::DirectConnect - Updated the documentation for AWS Direct Connect.
