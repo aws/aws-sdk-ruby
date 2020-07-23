@@ -478,8 +478,8 @@ module Aws::FSx
     #     client_request_token: "ClientRequestToken",
     #     tags: [
     #       {
-    #         key: "TagKey",
-    #         value: "TagValue",
+    #         key: "TagKey", # required
+    #         value: "TagValue", # required
     #       },
     #     ],
     #   })
@@ -535,9 +535,12 @@ module Aws::FSx
     #   resp.backup.file_system.windows_configuration.automatic_backup_retention_days #=> Integer
     #   resp.backup.file_system.windows_configuration.copy_tags_to_backups #=> Boolean
     #   resp.backup.file_system.lustre_configuration.weekly_maintenance_start_time #=> String
+    #   resp.backup.file_system.lustre_configuration.data_repository_configuration.lifecycle #=> String, one of "CREATING", "AVAILABLE", "MISCONFIGURED", "UPDATING", "DELETING"
     #   resp.backup.file_system.lustre_configuration.data_repository_configuration.import_path #=> String
     #   resp.backup.file_system.lustre_configuration.data_repository_configuration.export_path #=> String
     #   resp.backup.file_system.lustre_configuration.data_repository_configuration.imported_file_chunk_size #=> Integer
+    #   resp.backup.file_system.lustre_configuration.data_repository_configuration.auto_import_policy #=> String, one of "NONE", "NEW", "NEW_CHANGED"
+    #   resp.backup.file_system.lustre_configuration.data_repository_configuration.failure_details.message #=> String
     #   resp.backup.file_system.lustre_configuration.deployment_type #=> String, one of "SCRATCH_1", "SCRATCH_2", "PERSISTENT_1"
     #   resp.backup.file_system.lustre_configuration.per_unit_storage_throughput #=> Integer
     #   resp.backup.file_system.lustre_configuration.mount_name #=> String
@@ -637,8 +640,8 @@ module Aws::FSx
     #     client_request_token: "ClientRequestToken",
     #     tags: [
     #       {
-    #         key: "TagKey",
-    #         value: "TagValue",
+    #         key: "TagKey", # required
+    #         value: "TagValue", # required
     #       },
     #     ],
     #   })
@@ -877,8 +880,8 @@ module Aws::FSx
     #     security_group_ids: ["SecurityGroupId"],
     #     tags: [
     #       {
-    #         key: "TagKey",
-    #         value: "TagValue",
+    #         key: "TagKey", # required
+    #         value: "TagValue", # required
     #       },
     #     ],
     #     kms_key_id: "KmsKeyId",
@@ -906,6 +909,7 @@ module Aws::FSx
     #       export_path: "ArchivePath",
     #       imported_file_chunk_size: 1,
     #       deployment_type: "SCRATCH_1", # accepts SCRATCH_1, SCRATCH_2, PERSISTENT_1
+    #       auto_import_policy: "NONE", # accepts NONE, NEW, NEW_CHANGED
     #       per_unit_storage_throughput: 1,
     #       daily_automatic_backup_start_time: "DailyTime",
     #       automatic_backup_retention_days: 1,
@@ -953,9 +957,12 @@ module Aws::FSx
     #   resp.file_system.windows_configuration.automatic_backup_retention_days #=> Integer
     #   resp.file_system.windows_configuration.copy_tags_to_backups #=> Boolean
     #   resp.file_system.lustre_configuration.weekly_maintenance_start_time #=> String
+    #   resp.file_system.lustre_configuration.data_repository_configuration.lifecycle #=> String, one of "CREATING", "AVAILABLE", "MISCONFIGURED", "UPDATING", "DELETING"
     #   resp.file_system.lustre_configuration.data_repository_configuration.import_path #=> String
     #   resp.file_system.lustre_configuration.data_repository_configuration.export_path #=> String
     #   resp.file_system.lustre_configuration.data_repository_configuration.imported_file_chunk_size #=> Integer
+    #   resp.file_system.lustre_configuration.data_repository_configuration.auto_import_policy #=> String, one of "NONE", "NEW", "NEW_CHANGED"
+    #   resp.file_system.lustre_configuration.data_repository_configuration.failure_details.message #=> String
     #   resp.file_system.lustre_configuration.deployment_type #=> String, one of "SCRATCH_1", "SCRATCH_2", "PERSISTENT_1"
     #   resp.file_system.lustre_configuration.per_unit_storage_throughput #=> Integer
     #   resp.file_system.lustre_configuration.mount_name #=> String
@@ -1148,8 +1155,8 @@ module Aws::FSx
     #     security_group_ids: ["SecurityGroupId"],
     #     tags: [
     #       {
-    #         key: "TagKey",
-    #         value: "TagValue",
+    #         key: "TagKey", # required
+    #         value: "TagValue", # required
     #       },
     #     ],
     #     windows_configuration: {
@@ -1176,6 +1183,7 @@ module Aws::FSx
     #       export_path: "ArchivePath",
     #       imported_file_chunk_size: 1,
     #       deployment_type: "SCRATCH_1", # accepts SCRATCH_1, SCRATCH_2, PERSISTENT_1
+    #       auto_import_policy: "NONE", # accepts NONE, NEW, NEW_CHANGED
     #       per_unit_storage_throughput: 1,
     #       daily_automatic_backup_start_time: "DailyTime",
     #       automatic_backup_retention_days: 1,
@@ -1224,9 +1232,12 @@ module Aws::FSx
     #   resp.file_system.windows_configuration.automatic_backup_retention_days #=> Integer
     #   resp.file_system.windows_configuration.copy_tags_to_backups #=> Boolean
     #   resp.file_system.lustre_configuration.weekly_maintenance_start_time #=> String
+    #   resp.file_system.lustre_configuration.data_repository_configuration.lifecycle #=> String, one of "CREATING", "AVAILABLE", "MISCONFIGURED", "UPDATING", "DELETING"
     #   resp.file_system.lustre_configuration.data_repository_configuration.import_path #=> String
     #   resp.file_system.lustre_configuration.data_repository_configuration.export_path #=> String
     #   resp.file_system.lustre_configuration.data_repository_configuration.imported_file_chunk_size #=> Integer
+    #   resp.file_system.lustre_configuration.data_repository_configuration.auto_import_policy #=> String, one of "NONE", "NEW", "NEW_CHANGED"
+    #   resp.file_system.lustre_configuration.data_repository_configuration.failure_details.message #=> String
     #   resp.file_system.lustre_configuration.deployment_type #=> String, one of "SCRATCH_1", "SCRATCH_2", "PERSISTENT_1"
     #   resp.file_system.lustre_configuration.per_unit_storage_throughput #=> Integer
     #   resp.file_system.lustre_configuration.mount_name #=> String
@@ -1386,8 +1397,8 @@ module Aws::FSx
     #       skip_final_backup: false,
     #       final_backup_tags: [
     #         {
-    #           key: "TagKey",
-    #           value: "TagValue",
+    #           key: "TagKey", # required
+    #           value: "TagValue", # required
     #         },
     #       ],
     #     },
@@ -1395,8 +1406,8 @@ module Aws::FSx
     #       skip_final_backup: false,
     #       final_backup_tags: [
     #         {
-    #           key: "TagKey",
-    #           value: "TagValue",
+    #           key: "TagKey", # required
+    #           value: "TagValue", # required
     #         },
     #       ],
     #     },
@@ -1581,9 +1592,12 @@ module Aws::FSx
     #   resp.backups[0].file_system.windows_configuration.automatic_backup_retention_days #=> Integer
     #   resp.backups[0].file_system.windows_configuration.copy_tags_to_backups #=> Boolean
     #   resp.backups[0].file_system.lustre_configuration.weekly_maintenance_start_time #=> String
+    #   resp.backups[0].file_system.lustre_configuration.data_repository_configuration.lifecycle #=> String, one of "CREATING", "AVAILABLE", "MISCONFIGURED", "UPDATING", "DELETING"
     #   resp.backups[0].file_system.lustre_configuration.data_repository_configuration.import_path #=> String
     #   resp.backups[0].file_system.lustre_configuration.data_repository_configuration.export_path #=> String
     #   resp.backups[0].file_system.lustre_configuration.data_repository_configuration.imported_file_chunk_size #=> Integer
+    #   resp.backups[0].file_system.lustre_configuration.data_repository_configuration.auto_import_policy #=> String, one of "NONE", "NEW", "NEW_CHANGED"
+    #   resp.backups[0].file_system.lustre_configuration.data_repository_configuration.failure_details.message #=> String
     #   resp.backups[0].file_system.lustre_configuration.deployment_type #=> String, one of "SCRATCH_1", "SCRATCH_2", "PERSISTENT_1"
     #   resp.backups[0].file_system.lustre_configuration.per_unit_storage_throughput #=> Integer
     #   resp.backups[0].file_system.lustre_configuration.mount_name #=> String
@@ -1844,9 +1858,12 @@ module Aws::FSx
     #   resp.file_systems[0].windows_configuration.automatic_backup_retention_days #=> Integer
     #   resp.file_systems[0].windows_configuration.copy_tags_to_backups #=> Boolean
     #   resp.file_systems[0].lustre_configuration.weekly_maintenance_start_time #=> String
+    #   resp.file_systems[0].lustre_configuration.data_repository_configuration.lifecycle #=> String, one of "CREATING", "AVAILABLE", "MISCONFIGURED", "UPDATING", "DELETING"
     #   resp.file_systems[0].lustre_configuration.data_repository_configuration.import_path #=> String
     #   resp.file_systems[0].lustre_configuration.data_repository_configuration.export_path #=> String
     #   resp.file_systems[0].lustre_configuration.data_repository_configuration.imported_file_chunk_size #=> Integer
+    #   resp.file_systems[0].lustre_configuration.data_repository_configuration.auto_import_policy #=> String, one of "NONE", "NEW", "NEW_CHANGED"
+    #   resp.file_systems[0].lustre_configuration.data_repository_configuration.failure_details.message #=> String
     #   resp.file_systems[0].lustre_configuration.deployment_type #=> String, one of "SCRATCH_1", "SCRATCH_2", "PERSISTENT_1"
     #   resp.file_systems[0].lustre_configuration.per_unit_storage_throughput #=> Integer
     #   resp.file_systems[0].lustre_configuration.mount_name #=> String
@@ -1991,8 +2008,8 @@ module Aws::FSx
     #     resource_arn: "ResourceARN", # required
     #     tags: [ # required
     #       {
-    #         key: "TagKey",
-    #         value: "TagValue",
+    #         key: "TagKey", # required
+    #         value: "TagValue", # required
     #       },
     #     ],
     #   })
@@ -2167,6 +2184,7 @@ module Aws::FSx
     #       weekly_maintenance_start_time: "WeeklyTime",
     #       daily_automatic_backup_start_time: "DailyTime",
     #       automatic_backup_retention_days: 1,
+    #       auto_import_policy: "NONE", # accepts NONE, NEW, NEW_CHANGED
     #     },
     #   })
     #
@@ -2210,9 +2228,12 @@ module Aws::FSx
     #   resp.file_system.windows_configuration.automatic_backup_retention_days #=> Integer
     #   resp.file_system.windows_configuration.copy_tags_to_backups #=> Boolean
     #   resp.file_system.lustre_configuration.weekly_maintenance_start_time #=> String
+    #   resp.file_system.lustre_configuration.data_repository_configuration.lifecycle #=> String, one of "CREATING", "AVAILABLE", "MISCONFIGURED", "UPDATING", "DELETING"
     #   resp.file_system.lustre_configuration.data_repository_configuration.import_path #=> String
     #   resp.file_system.lustre_configuration.data_repository_configuration.export_path #=> String
     #   resp.file_system.lustre_configuration.data_repository_configuration.imported_file_chunk_size #=> Integer
+    #   resp.file_system.lustre_configuration.data_repository_configuration.auto_import_policy #=> String, one of "NONE", "NEW", "NEW_CHANGED"
+    #   resp.file_system.lustre_configuration.data_repository_configuration.failure_details.message #=> String
     #   resp.file_system.lustre_configuration.deployment_type #=> String, one of "SCRATCH_1", "SCRATCH_2", "PERSISTENT_1"
     #   resp.file_system.lustre_configuration.per_unit_storage_throughput #=> Integer
     #   resp.file_system.lustre_configuration.mount_name #=> String
@@ -2249,7 +2270,7 @@ module Aws::FSx
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-fsx'
-      context[:gem_version] = '1.23.0'
+      context[:gem_version] = '1.24.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

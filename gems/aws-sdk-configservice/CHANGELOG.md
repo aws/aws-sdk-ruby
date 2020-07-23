@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.49.0 (2020-07-23)
+------------------
+
+* Feature - Adding service linked configuration aggregation support along with new enums for config resource coverage
+
 1.48.0 (2020-07-02)
 ------------------
 

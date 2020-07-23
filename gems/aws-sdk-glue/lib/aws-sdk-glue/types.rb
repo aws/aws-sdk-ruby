@@ -1620,6 +1620,17 @@ module Aws::Glue
     #     port pairs that are the addresses of the Apache Kafka brokers in a
     #     Kafka cluster to which a Kafka client will connect to and
     #     bootstrap itself.
+    #
+    #   * `KAFKA_SSL_ENABLED` - Whether to enable or disable SSL on an
+    #     Apache Kafka connection. Default value is "true".
+    #
+    #   * `KAFKA_CUSTOM_CERT` - The Amazon S3 URL for the private CA cert
+    #     file (.pem format). The default is an empty string.
+    #
+    #   * `KAFKA_SKIP_CUSTOM_CERT_VALIDATION` - Whether to skip the
+    #     validation of the CA cert file or not. AWS Glue validates for
+    #     three algorithms: SHA256withRSA, SHA384withRSA and SHA512withRSA.
+    #     Default value is "false".
     #   @return [Hash<String,String>]
     #
     # @!attribute [rw] physical_connection_requirements
@@ -10765,7 +10776,7 @@ module Aws::Glue
     #       }
     #
     # @!attribute [rw] catalog_id
-    #   A unique identifier, consisting of ` account_id/datalake`.
+    #   A unique identifier, consisting of ` account_id `.
     #   @return [String]
     #
     # @!attribute [rw] next_token
@@ -10775,6 +10786,17 @@ module Aws::Glue
     # @!attribute [rw] filters
     #   A list of key-value pairs, and a comparator used to filter the
     #   search results. Returns all entities matching the predicate.
+    #
+    #   The `Comparator` member of the `PropertyPredicate` struct is used
+    #   only for time fields, and can be omitted for other field types.
+    #   Also, when comparing string values, such as when `Key=Name`, a fuzzy
+    #   match algorithm is used. The `Key` field (for example, the value of
+    #   the `Name` field) is split on certain punctuation characters, for
+    #   example, -, :, #, etc. into tokens. Then each token is exact-match
+    #   compared with the `Value` member of `PropertyPredicate`. For
+    #   example, if `Key=Name` and `Value=link`, tables named
+    #   `customer-link` and `xx-link-yy` are returned, but `xxlinkyy` is not
+    #   returned.
     #   @return [Array<Types::PropertyPredicate>]
     #
     # @!attribute [rw] search_text
@@ -13652,11 +13674,15 @@ module Aws::Glue
     #   @return [String]
     #
     # @!attribute [rw] partition_value_list
-    #   A list of the values defining the partition.
+    #   List of partition key values that define the partition to update.
     #   @return [Array<String>]
     #
     # @!attribute [rw] partition_input
     #   The new partition object to update the partition to.
+    #
+    #   The `Values` property can't be changed. If you want to change the
+    #   partition key values for a partition, delete and recreate the
+    #   partition.
     #   @return [Types::PartitionInput]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/UpdatePartitionRequest AWS API Documentation

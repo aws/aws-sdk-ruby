@@ -5103,6 +5103,11 @@ module Aws::Glue
     # Retrieves the security configurations for the resource policies set on
     # individual resources, and also the account-level policy.
     #
+    # This operation also returns the Data Catalog resource policy. However,
+    # if you enabled metadata encryption in Data Catalog settings, and you
+    # do not have permission on the AWS KMS key, the operation can't return
+    # the Data Catalog resource policy.
+    #
     # @option params [String] :next_token
     #   A continuation token, if this is a continuation request.
     #
@@ -6888,7 +6893,7 @@ module Aws::Glue
     # search.
     #
     # @option params [String] :catalog_id
-    #   A unique identifier, consisting of ` account_id/datalake`.
+    #   A unique identifier, consisting of ` account_id `.
     #
     # @option params [String] :next_token
     #   A continuation token, included if this is a continuation call.
@@ -6896,6 +6901,16 @@ module Aws::Glue
     # @option params [Array<Types::PropertyPredicate>] :filters
     #   A list of key-value pairs, and a comparator used to filter the search
     #   results. Returns all entities matching the predicate.
+    #
+    #   The `Comparator` member of the `PropertyPredicate` struct is used only
+    #   for time fields, and can be omitted for other field types. Also, when
+    #   comparing string values, such as when `Key=Name`, a fuzzy match
+    #   algorithm is used. The `Key` field (for example, the value of the
+    #   `Name` field) is split on certain punctuation characters, for example,
+    #   -, :, #, etc. into tokens. Then each token is exact-match compared
+    #   with the `Value` member of `PropertyPredicate`. For example, if
+    #   `Key=Name` and `Value=link`, tables named `customer-link` and
+    #   `xx-link-yy` are returned, but `xxlinkyy` is not returned.
     #
     # @option params [String] :search_text
     #   A string used for a text search.
@@ -8452,10 +8467,14 @@ module Aws::Glue
     #   The name of the table in which the partition to be updated is located.
     #
     # @option params [required, Array<String>] :partition_value_list
-    #   A list of the values defining the partition.
+    #   List of partition key values that define the partition to update.
     #
     # @option params [required, Types::PartitionInput] :partition_input
     #   The new partition object to update the partition to.
+    #
+    #   The `Values` property can't be changed. If you want to change the
+    #   partition key values for a partition, delete and recreate the
+    #   partition.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -8819,7 +8838,7 @@ module Aws::Glue
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-glue'
-      context[:gem_version] = '1.63.0'
+      context[:gem_version] = '1.64.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

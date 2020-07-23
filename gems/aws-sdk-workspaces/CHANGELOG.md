@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.41.0 (2020-07-23)
+------------------
+
+* Feature - Added UpdateWorkspaceImagePermission API to share Amazon WorkSpaces images across AWS accounts.
+
 1.40.0 (2020-07-02)
 ------------------
 

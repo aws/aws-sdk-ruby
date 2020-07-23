@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+3.104.3 (2020-07-23)
+------------------
+
 * Issue - Revert duplication of params.  Ensure code that relied on internal modification of parameters is not broken.
 
 3.104.2 (2020-07-22)

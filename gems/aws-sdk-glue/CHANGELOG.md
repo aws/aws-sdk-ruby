@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.64.0 (2020-07-23)
+------------------
+
+* Feature - Added new ConnectionProperties: "KAFKA_SSL_ENABLED" (to toggle SSL connections) and "KAFKA_CUSTOM_CERT" (import CA certificate file)
+
 1.63.0 (2020-07-07)
 ------------------
 
