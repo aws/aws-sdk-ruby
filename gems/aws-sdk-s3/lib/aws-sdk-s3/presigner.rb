@@ -41,7 +41,7 @@ module Aws
       #  signer = Aws::S3::Presigner.new
       #  url = signer.presigned_url(:get_object, bucket: "bucket", key: "key")
       #
-      # @param [Symbol] :method Symbolized method name of the operation you want
+      # @param [Symbol] method Symbolized method name of the operation you want
       #   to presign.
       #
       # @option params [Integer] :expires_in (900) The number of seconds
@@ -89,7 +89,7 @@ module Aws
       #    :get_object, bucket: "bucket", key: "key"
       #  )
       #
-      # @param [Symbol] :method Symbolized method name of the operation you want
+      # @param [Symbol] method Symbolized method name of the operation you want
       #   to presign.
       #
       # @option params [Integer] :expires_in (900) The number of seconds
