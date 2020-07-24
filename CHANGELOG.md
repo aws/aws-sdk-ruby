@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+2.11.552 (2020-07-24)
+------------------
+
 * Feature - Aws::FraudDetector - Updated the API, and documentation for Amazon Fraud Detector.
 
 * Feature - Aws::FSx - Updated the documentation for Amazon FSx.
