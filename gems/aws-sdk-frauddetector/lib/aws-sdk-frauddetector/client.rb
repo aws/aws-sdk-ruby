@@ -694,7 +694,7 @@ module Aws::FraudDetector
     #   The description.
     #
     # @option params [String] :variable_type
-    #   The variable type.
+    #   The variable type. For more information see [Variable types][1].
     #
     #   Valid Values: `AUTH_CODE | AVS | BILLING_ADDRESS_L1 |
     #   BILLING_ADDRESS_L2 | BILLING_CITY | BILLING_COUNTRY | BILLING_NAME |
@@ -705,6 +705,10 @@ module Aws::FraudDetector
     #   SHIPPING_ADDRESS_L2 | SHIPPING_CITY | SHIPPING_COUNTRY | SHIPPING_NAME
     #   | SHIPPING_PHONE | SHIPPING_STATE | SHIPPING_ZIP | USERAGENT |
     #   SHIPPING_ZIP | USERAGENT`
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/frauddetector/latest/ug/create-a-variable.html#variable-types
     #
     # @option params [Array<Types::Tag>] :tags
     #   A collection of key and value pairs.
@@ -1172,7 +1176,7 @@ module Aws::FraudDetector
     #
     #   resp = client.get_event_prediction({
     #     detector_id: "string", # required
-    #     detector_version_id: "string",
+    #     detector_version_id: "wholeNumberVersionString",
     #     event_id: "string", # required
     #     event_type_name: "string", # required
     #     entities: [ # required
@@ -1311,8 +1315,7 @@ module Aws::FraudDetector
     #   resp.external_models[0].model_endpoint #=> String
     #   resp.external_models[0].event_type_name #=> String
     #   resp.external_models[0].model_source #=> String, one of "SAGEMAKER"
-    #   resp.external_models[0].role.arn #=> String
-    #   resp.external_models[0].role.name #=> String
+    #   resp.external_models[0].invoke_model_endpoint_role_arn #=> String
     #   resp.external_models[0].input_configuration.format #=> String, one of "TEXT_CSV", "APPLICATION_JSON"
     #   resp.external_models[0].input_configuration.use_event_variables #=> Boolean
     #   resp.external_models[0].input_configuration.json_input_template #=> String
@@ -1573,74 +1576,6 @@ module Aws::FraudDetector
     # @param [Hash] params ({})
     def get_outcomes(params = {}, options = {})
       req = build_request(:get_outcomes, params)
-      req.send_request(options)
-    end
-
-    # Evaluates an event against a detector version. If a version ID is not
-    # provided, the detector’s (`ACTIVE`) version is used.
-    #
-    # @option params [required, String] :detector_id
-    #   The detector ID.
-    #
-    # @option params [String] :detector_version_id
-    #   The detector version ID.
-    #
-    # @option params [required, String] :event_id
-    #   The unique ID used to identify the event.
-    #
-    # @option params [Hash<String,String>] :event_attributes
-    #   Names of variables you defined in Amazon Fraud Detector to represent
-    #   event data elements and their corresponding values for the event you
-    #   are sending for evaluation.
-    #
-    # @option params [Hash<String,Types::ModelEndpointDataBlob>] :external_model_endpoint_data_blobs
-    #   The Amazon SageMaker model endpoint input data blobs.
-    #
-    # @return [Types::GetPredictionResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
-    #
-    #   * {Types::GetPredictionResult#outcomes #outcomes} => Array&lt;String&gt;
-    #   * {Types::GetPredictionResult#model_scores #model_scores} => Array&lt;Types::ModelScores&gt;
-    #   * {Types::GetPredictionResult#rule_results #rule_results} => Array&lt;Types::RuleResult&gt;
-    #
-    # @example Request syntax with placeholder values
-    #
-    #   resp = client.get_prediction({
-    #     detector_id: "string", # required
-    #     detector_version_id: "string",
-    #     event_id: "string", # required
-    #     event_attributes: {
-    #       "attributeKey" => "attributeValue",
-    #     },
-    #     external_model_endpoint_data_blobs: {
-    #       "string" => {
-    #         byte_buffer: "data",
-    #         content_type: "contentType",
-    #       },
-    #     },
-    #   })
-    #
-    # @example Response structure
-    #
-    #   resp.outcomes #=> Array
-    #   resp.outcomes[0] #=> String
-    #   resp.model_scores #=> Array
-    #   resp.model_scores[0].model_version.model_id #=> String
-    #   resp.model_scores[0].model_version.model_type #=> String, one of "ONLINE_FRAUD_INSIGHTS"
-    #   resp.model_scores[0].model_version.model_version_number #=> String
-    #   resp.model_scores[0].model_version.arn #=> String
-    #   resp.model_scores[0].scores #=> Hash
-    #   resp.model_scores[0].scores["string"] #=> Float
-    #   resp.rule_results #=> Array
-    #   resp.rule_results[0].rule_id #=> String
-    #   resp.rule_results[0].outcomes #=> Array
-    #   resp.rule_results[0].outcomes[0] #=> String
-    #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/frauddetector-2019-11-15/GetPrediction AWS API Documentation
-    #
-    # @overload get_prediction(params = {})
-    # @param [Hash] params ({})
-    def get_prediction(params = {}, options = {})
-      req = build_request(:get_prediction, params)
       req.send_request(options)
     end
 
@@ -1957,7 +1892,7 @@ module Aws::FraudDetector
     # @option params [required, String] :model_source
     #   The source of the model.
     #
-    # @option params [required, Types::Role] :role
+    # @option params [required, String] :invoke_model_endpoint_role_arn
     #   The IAM role used to invoke the model endpoint.
     #
     # @option params [required, Types::ModelInputConfiguration] :input_configuration
@@ -1980,10 +1915,7 @@ module Aws::FraudDetector
     #     model_endpoint: "sageMakerEndpointIdentifier", # required
     #     event_type_name: "identifier",
     #     model_source: "SAGEMAKER", # required, accepts SAGEMAKER
-    #     role: { # required
-    #       arn: "string", # required
-    #       name: "string", # required
-    #     },
+    #     invoke_model_endpoint_role_arn: "string", # required
     #     input_configuration: { # required
     #       format: "TEXT_CSV", # accepts TEXT_CSV, APPLICATION_JSON
     #       use_event_variables: false, # required
@@ -2428,7 +2360,7 @@ module Aws::FraudDetector
     #     model_id: "identifier", # required
     #     model_type: "ONLINE_FRAUD_INSIGHTS", # required, accepts ONLINE_FRAUD_INSIGHTS
     #     model_version_number: "floatVersionString", # required
-    #     status: "TRAINING_IN_PROGRESS", # required, accepts TRAINING_IN_PROGRESS, TRAINING_COMPLETE, ACTIVATE_REQUESTED, ACTIVATE_IN_PROGRESS, ACTIVE, INACTIVATE_IN_PROGRESS, INACTIVE, DELETE_REQUESTED, DELETE_IN_PROGRESS, ERROR
+    #     status: "ACTIVE", # required, accepts ACTIVE, INACTIVE
     #   })
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/frauddetector-2019-11-15/UpdateModelVersionStatus AWS API Documentation
@@ -2542,7 +2474,11 @@ module Aws::FraudDetector
     #   The new description.
     #
     # @option params [String] :variable_type
-    #   The variable type.
+    #   The variable type. For more information see [Variable types][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/frauddetector/latest/ug/create-a-variable.html#variable-types
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -2577,7 +2513,7 @@ module Aws::FraudDetector
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-frauddetector'
-      context[:gem_version] = '1.7.0'
+      context[:gem_version] = '1.8.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

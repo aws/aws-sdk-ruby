@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.25.0 (2020-07-24)
+------------------
+
+* Feature - Documentation update for FSx for Lustre
+
 1.24.0 (2020-07-23)
 ------------------
 

@@ -191,6 +191,7 @@ module Aws::CloudWatch
     PutMetricAlarmInput = Shapes::StructureShape.new(name: 'PutMetricAlarmInput')
     PutMetricDataInput = Shapes::StructureShape.new(name: 'PutMetricDataInput')
     Range = Shapes::StructureShape.new(name: 'Range')
+    RecentlyActive = Shapes::StringShape.new(name: 'RecentlyActive')
     ResourceId = Shapes::StringShape.new(name: 'ResourceId')
     ResourceList = Shapes::ListShape.new(name: 'ResourceList')
     ResourceName = Shapes::StringShape.new(name: 'ResourceName')
@@ -567,6 +568,7 @@ module Aws::CloudWatch
     ListMetricsInput.add_member(:metric_name, Shapes::ShapeRef.new(shape: MetricName, location_name: "MetricName"))
     ListMetricsInput.add_member(:dimensions, Shapes::ShapeRef.new(shape: DimensionFilters, location_name: "Dimensions"))
     ListMetricsInput.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    ListMetricsInput.add_member(:recently_active, Shapes::ShapeRef.new(shape: RecentlyActive, location_name: "RecentlyActive"))
     ListMetricsInput.struct_class = Types::ListMetricsInput
 
     ListMetricsOutput.add_member(:metrics, Shapes::ShapeRef.new(shape: Metrics, location_name: "Metrics"))

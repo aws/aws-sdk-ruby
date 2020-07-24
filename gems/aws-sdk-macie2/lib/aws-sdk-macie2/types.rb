@@ -515,9 +515,9 @@ module Aws::Macie2
     #   @return [Integer]
     #
     # @!attribute [rw] object_count_by_encryption_type
-    #   The total number of objects that are in the bucket, grouped by
-    #   server-side encryption type. This includes a grouping that reports
-    #   the total number of objects that aren't encrypted.
+    #   Provides information about the number of objects that are in an S3
+    #   bucket and use certain types of server-side encryption, use
+    #   client-side encryption, or aren't encrypted.
     #   @return [Types::ObjectCountByEncryptionType]
     #
     # @!attribute [rw] public_access
@@ -2660,14 +2660,15 @@ module Aws::Macie2
     #       {
     #         filter_by: [
     #           {
-    #             key: "accountId", # accepts accountId
+    #             comparator: "GT", # accepts GT, GTE, LT, LTE, EQ, NE, CONTAINS
+    #             key: "accountId", # accepts accountId, serviceLimit, freeTrialStartDate, total
     #             values: ["__string"],
     #           },
     #         ],
     #         max_results: 1,
     #         next_token: "__string",
     #         sort_by: {
-    #           key: "accountId", # accepts accountId, total
+    #           key: "accountId", # accepts accountId, total, serviceLimitValue, freeTrialStartDate
     #           order_by: "ASC", # accepts ASC, DESC
     #         },
     #       }
@@ -3678,9 +3679,9 @@ module Aws::Macie2
       include Aws::Structure
     end
 
-    # The total number of objects that are in the bucket, grouped by
-    # server-side encryption type. This includes a grouping that reports the
-    # total number of objects that aren't encrypted.
+    # Provides information about the number of objects that are in an S3
+    # bucket and use certain types of server-side encryption, use
+    # client-side encryption, or aren't encrypted.
     #
     # @!attribute [rw] customer_managed
     #   @return [Integer]
@@ -4897,20 +4898,26 @@ module Aws::Macie2
       include Aws::Structure
     end
 
-    # Specifies criteria for filtering the results of a query for account
+    # Specifies a condition for filtering the results of a query for account
     # quotas and usage data.
     #
     # @note When making an API call, you may pass UsageStatisticsFilter
     #   data as a hash:
     #
     #       {
-    #         key: "accountId", # accepts accountId
+    #         comparator: "GT", # accepts GT, GTE, LT, LTE, EQ, NE, CONTAINS
+    #         key: "accountId", # accepts accountId, serviceLimit, freeTrialStartDate, total
     #         values: ["__string"],
     #       }
     #
+    # @!attribute [rw] comparator
+    #   The operator to use in a condition that filters the results of a
+    #   query for account quotas and usage data. Valid values are:
+    #   @return [String]
+    #
     # @!attribute [rw] key
-    #   The field to use to filter the results of a query for account quotas
-    #   and usage data:
+    #   The field to use in a condition that filters the results of a query
+    #   for account quotas and usage data. Valid values are:
     #   @return [String]
     #
     # @!attribute [rw] values
@@ -4919,6 +4926,7 @@ module Aws::Macie2
     # @see http://docs.aws.amazon.com/goto/WebAPI/macie2-2020-01-01/UsageStatisticsFilter AWS API Documentation
     #
     class UsageStatisticsFilter < Struct.new(
+      :comparator,
       :key,
       :values)
       SENSITIVE = []
@@ -4932,7 +4940,7 @@ module Aws::Macie2
     #   data as a hash:
     #
     #       {
-    #         key: "accountId", # accepts accountId, total
+    #         key: "accountId", # accepts accountId, total, serviceLimitValue, freeTrialStartDate
     #         order_by: "ASC", # accepts ASC, DESC
     #       }
     #

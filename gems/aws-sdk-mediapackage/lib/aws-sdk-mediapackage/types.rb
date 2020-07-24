@@ -222,7 +222,7 @@ module Aws::MediaPackage
     #         },
     #         hls_manifests: [
     #           {
-    #             ad_markers: "NONE", # accepts NONE, SCTE35_ENHANCED, PASSTHROUGH
+    #             ad_markers: "NONE", # accepts NONE, SCTE35_ENHANCED, PASSTHROUGH, DATERANGE
     #             ad_triggers: ["SPLICE_INSERT"], # accepts SPLICE_INSERT, BREAK, PROVIDER_ADVERTISEMENT, DISTRIBUTOR_ADVERTISEMENT, PROVIDER_PLACEMENT_OPPORTUNITY, DISTRIBUTOR_PLACEMENT_OPPORTUNITY, PROVIDER_OVERLAY_PLACEMENT_OPPORTUNITY, DISTRIBUTOR_OVERLAY_PLACEMENT_OPPORTUNITY
     #             ads_on_delivery_restrictions: "NONE", # accepts NONE, RESTRICTED, UNRESTRICTED, BOTH
     #             id: "__string", # required
@@ -447,7 +447,7 @@ module Aws::MediaPackage
     #           },
     #           hls_manifests: [
     #             {
-    #               ad_markers: "NONE", # accepts NONE, SCTE35_ENHANCED, PASSTHROUGH
+    #               ad_markers: "NONE", # accepts NONE, SCTE35_ENHANCED, PASSTHROUGH, DATERANGE
     #               ad_triggers: ["SPLICE_INSERT"], # accepts SPLICE_INSERT, BREAK, PROVIDER_ADVERTISEMENT, DISTRIBUTOR_ADVERTISEMENT, PROVIDER_PLACEMENT_OPPORTUNITY, DISTRIBUTOR_PLACEMENT_OPPORTUNITY, PROVIDER_OVERLAY_PLACEMENT_OPPORTUNITY, DISTRIBUTOR_OVERLAY_PLACEMENT_OPPORTUNITY
     #               ads_on_delivery_restrictions: "NONE", # accepts NONE, RESTRICTED, UNRESTRICTED, BOTH
     #               id: "__string", # required
@@ -496,7 +496,7 @@ module Aws::MediaPackage
     #         },
     #         description: "__string",
     #         hls_package: {
-    #           ad_markers: "NONE", # accepts NONE, SCTE35_ENHANCED, PASSTHROUGH
+    #           ad_markers: "NONE", # accepts NONE, SCTE35_ENHANCED, PASSTHROUGH, DATERANGE
     #           ad_triggers: ["SPLICE_INSERT"], # accepts SPLICE_INSERT, BREAK, PROVIDER_ADVERTISEMENT, DISTRIBUTOR_ADVERTISEMENT, PROVIDER_PLACEMENT_OPPORTUNITY, DISTRIBUTOR_PLACEMENT_OPPORTUNITY, PROVIDER_OVERLAY_PLACEMENT_OPPORTUNITY, DISTRIBUTOR_OVERLAY_PLACEMENT_OPPORTUNITY
     #           ads_on_delivery_restrictions: "NONE", # accepts NONE, RESTRICTED, UNRESTRICTED, BOTH
     #           encryption: {
@@ -1332,7 +1332,10 @@ module Aws::MediaPackage
     #   SCTE-35 ad markers (comments) taken directly from the input HTTP
     #   Live Streaming (HLS) manifest. "SCTE35\_ENHANCED" generates ad
     #   markers and blackout tags based on SCTE-35 messages in the input
-    #   source.
+    #   source. "DATERANGE" inserts EXT-X-DATERANGE tags to signal ad and
+    #   program transition events in HLS and CMAF manifests. For this
+    #   option, you must set a programDateTimeIntervalSeconds value that is
+    #   greater than 0.
     #   @return [String]
     #
     # @!attribute [rw] id
@@ -1397,7 +1400,7 @@ module Aws::MediaPackage
     #   data as a hash:
     #
     #       {
-    #         ad_markers: "NONE", # accepts NONE, SCTE35_ENHANCED, PASSTHROUGH
+    #         ad_markers: "NONE", # accepts NONE, SCTE35_ENHANCED, PASSTHROUGH, DATERANGE
     #         ad_triggers: ["SPLICE_INSERT"], # accepts SPLICE_INSERT, BREAK, PROVIDER_ADVERTISEMENT, DISTRIBUTOR_ADVERTISEMENT, PROVIDER_PLACEMENT_OPPORTUNITY, DISTRIBUTOR_PLACEMENT_OPPORTUNITY, PROVIDER_OVERLAY_PLACEMENT_OPPORTUNITY, DISTRIBUTOR_OVERLAY_PLACEMENT_OPPORTUNITY
     #         ads_on_delivery_restrictions: "NONE", # accepts NONE, RESTRICTED, UNRESTRICTED, BOTH
     #         id: "__string", # required
@@ -1415,7 +1418,10 @@ module Aws::MediaPackage
     #   SCTE-35 ad markers (comments) taken directly from the input HTTP
     #   Live Streaming (HLS) manifest. "SCTE35\_ENHANCED" generates ad
     #   markers and blackout tags based on SCTE-35 messages in the input
-    #   source.
+    #   source. "DATERANGE" inserts EXT-X-DATERANGE tags to signal ad and
+    #   program transition events in HLS and CMAF manifests. For this
+    #   option, you must set a programDateTimeIntervalSeconds value that is
+    #   greater than 0.
     #   @return [String]
     #
     # @!attribute [rw] ad_triggers
@@ -1497,7 +1503,7 @@ module Aws::MediaPackage
     #   data as a hash:
     #
     #       {
-    #         ad_markers: "NONE", # accepts NONE, SCTE35_ENHANCED, PASSTHROUGH
+    #         ad_markers: "NONE", # accepts NONE, SCTE35_ENHANCED, PASSTHROUGH, DATERANGE
     #         ad_triggers: ["SPLICE_INSERT"], # accepts SPLICE_INSERT, BREAK, PROVIDER_ADVERTISEMENT, DISTRIBUTOR_ADVERTISEMENT, PROVIDER_PLACEMENT_OPPORTUNITY, DISTRIBUTOR_PLACEMENT_OPPORTUNITY, PROVIDER_OVERLAY_PLACEMENT_OPPORTUNITY, DISTRIBUTOR_OVERLAY_PLACEMENT_OPPORTUNITY
     #         ads_on_delivery_restrictions: "NONE", # accepts NONE, RESTRICTED, UNRESTRICTED, BOTH
     #         encryption: {
@@ -1533,7 +1539,10 @@ module Aws::MediaPackage
     #   SCTE-35 ad markers (comments) taken directly from the input HTTP
     #   Live Streaming (HLS) manifest. "SCTE35\_ENHANCED" generates ad
     #   markers and blackout tags based on SCTE-35 messages in the input
-    #   source.
+    #   source. "DATERANGE" inserts EXT-X-DATERANGE tags to signal ad and
+    #   program transition events in HLS and CMAF manifests. For this
+    #   option, you must set a programDateTimeIntervalSeconds value that is
+    #   greater than 0.
     #   @return [String]
     #
     # @!attribute [rw] ad_triggers
@@ -2574,7 +2583,7 @@ module Aws::MediaPackage
     #           },
     #           hls_manifests: [
     #             {
-    #               ad_markers: "NONE", # accepts NONE, SCTE35_ENHANCED, PASSTHROUGH
+    #               ad_markers: "NONE", # accepts NONE, SCTE35_ENHANCED, PASSTHROUGH, DATERANGE
     #               ad_triggers: ["SPLICE_INSERT"], # accepts SPLICE_INSERT, BREAK, PROVIDER_ADVERTISEMENT, DISTRIBUTOR_ADVERTISEMENT, PROVIDER_PLACEMENT_OPPORTUNITY, DISTRIBUTOR_PLACEMENT_OPPORTUNITY, PROVIDER_OVERLAY_PLACEMENT_OPPORTUNITY, DISTRIBUTOR_OVERLAY_PLACEMENT_OPPORTUNITY
     #               ads_on_delivery_restrictions: "NONE", # accepts NONE, RESTRICTED, UNRESTRICTED, BOTH
     #               id: "__string", # required
@@ -2623,7 +2632,7 @@ module Aws::MediaPackage
     #         },
     #         description: "__string",
     #         hls_package: {
-    #           ad_markers: "NONE", # accepts NONE, SCTE35_ENHANCED, PASSTHROUGH
+    #           ad_markers: "NONE", # accepts NONE, SCTE35_ENHANCED, PASSTHROUGH, DATERANGE
     #           ad_triggers: ["SPLICE_INSERT"], # accepts SPLICE_INSERT, BREAK, PROVIDER_ADVERTISEMENT, DISTRIBUTOR_ADVERTISEMENT, PROVIDER_PLACEMENT_OPPORTUNITY, DISTRIBUTOR_PLACEMENT_OPPORTUNITY, PROVIDER_OVERLAY_PLACEMENT_OPPORTUNITY, DISTRIBUTOR_OVERLAY_PLACEMENT_OPPORTUNITY
     #           ads_on_delivery_restrictions: "NONE", # accepts NONE, RESTRICTED, UNRESTRICTED, BOTH
     #           encryption: {

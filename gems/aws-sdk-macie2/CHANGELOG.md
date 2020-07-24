@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.7.0 (2020-07-24)
+------------------
+
+* Feature - This release of the Amazon Macie API introduces additional criteria for sorting and filtering query results for account quotas and usage statistics.
+
 1.6.0 (2020-07-17)
 ------------------
 

@@ -1712,14 +1712,15 @@ module Aws::Macie2
     #   resp = client.get_usage_statistics({
     #     filter_by: [
     #       {
-    #         key: "accountId", # accepts accountId
+    #         comparator: "GT", # accepts GT, GTE, LT, LTE, EQ, NE, CONTAINS
+    #         key: "accountId", # accepts accountId, serviceLimit, freeTrialStartDate, total
     #         values: ["__string"],
     #       },
     #     ],
     #     max_results: 1,
     #     next_token: "__string",
     #     sort_by: {
-    #       key: "accountId", # accepts accountId, total
+    #       key: "accountId", # accepts accountId, total, serviceLimitValue, freeTrialStartDate
     #       order_by: "ASC", # accepts ASC, DESC
     #     },
     #   })
@@ -2443,7 +2444,7 @@ module Aws::Macie2
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-macie2'
-      context[:gem_version] = '1.6.0'
+      context[:gem_version] = '1.7.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

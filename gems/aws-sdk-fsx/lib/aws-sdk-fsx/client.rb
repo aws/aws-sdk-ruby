@@ -373,8 +373,11 @@ module Aws::FSx
     #
     # * is *not* linked to an Amazon S3 data respository.
     #
-    # For more information, see
-    # [https://docs.aws.amazon.com/fsx/latest/LustreGuide/lustre-backups.html][1].
+    # For more information about backing up Amazon FSx for Lustre file
+    # systems, see [Working with FSx for Lustre backups][1].
+    #
+    # For more information about backing up Amazon FSx for Lustre file
+    # systems, see [Working with FSx for Windows backups][2].
     #
     # If a backup with the specified client request token exists, and the
     # parameters match, this operation returns the description of the
@@ -402,7 +405,8 @@ module Aws::FSx
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/fsx/latest/LustreGuide/lustre-backups.html
+    # [1]: https://docs.aws.amazon.com/fsx/latest/LustreGuide/using-backups-fsx.html
+    # [2]: https://docs.aws.amazon.com/fsx/latest/WindowsGuide/using-backups.html
     #
     # @option params [required, String] :file_system_id
     #   The ID of the file system to back up.
@@ -2063,9 +2067,11 @@ module Aws::FSx
     end
 
     # Use this operation to update the configuration of an existing Amazon
-    # FSx file system. For an Amazon FSx for Lustre file system, you can
-    # update only the WeeklyMaintenanceStartTime. For an Amazon for Windows
-    # File Server file system, you can update the following properties:
+    # FSx file system. You can update multiple properties in a single
+    # request.
+    #
+    # For Amazon FSx for Windows File Server file systems, you can update
+    # the following properties:
     #
     # * AutomaticBackupRetentionDays
     #
@@ -2079,7 +2085,16 @@ module Aws::FSx
     #
     # * WeeklyMaintenanceStartTime
     #
-    # You can update multiple properties in a single request.
+    # For Amazon FSx for Lustre file systems, you can update the following
+    # properties:
+    #
+    # * AutoImportPolicy
+    #
+    # * AutomaticBackupRetentionDays
+    #
+    # * DailyAutomaticBackupStartTime
+    #
+    # * WeeklyMaintenanceStartTime
     #
     # @option params [required, String] :file_system_id
     #   Identifies the file system that you are updating.
@@ -2270,7 +2285,7 @@ module Aws::FSx
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-fsx'
-      context[:gem_version] = '1.24.0'
+      context[:gem_version] = '1.25.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

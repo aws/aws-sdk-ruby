@@ -290,10 +290,10 @@ module Aws::CloudWatch
     #   The unit for a given metric. If you omit `Unit`, all data that was
     #   collected with any unit is returned, along with the corresponding
     #   units that were specified when the data was reported to CloudWatch. If
-    #   you specify a unit, the operation returns only data data that was
-    #   collected with that unit specified. If you specify a unit that does
-    #   not match the data collected, the results of the operation are null.
-    #   CloudWatch does not perform unit conversions.
+    #   you specify a unit, the operation returns only data that was collected
+    #   with that unit specified. If you specify a unit that does not match
+    #   the data collected, the results of the operation are null. CloudWatch
+    #   does not perform unit conversions.
     # @return [Types::GetMetricStatisticsOutput]
     def get_statistics(options = {})
       options = options.merge(
@@ -363,8 +363,7 @@ module Aws::CloudWatch
     #   })
     # @param [Hash] options ({})
     # @option options [required, String] :alarm_name
-    #   The name for the alarm. This name must be unique within your AWS
-    #   account.
+    #   The name for the alarm. This name must be unique within the Region.
     # @option options [String] :alarm_description
     #   The description for the alarm.
     # @option options [Boolean] :actions_enabled
@@ -454,8 +453,8 @@ module Aws::CloudWatch
     #   resolution, the alarm still attempts to gather data at the period rate
     #   that you specify. In this case, it does not receive data for the
     #   attempts that do not correspond to a one-minute data resolution, and
-    #   the alarm may often lapse into INSUFFICENT\_DATA status. Specifying 10
-    #   or 30 also sets this alarm as a high-resolution alarm, which has a
+    #   the alarm might often lapse into INSUFFICENT\_DATA status. Specifying
+    #   10 or 30 also sets this alarm as a high-resolution alarm, which has a
     #   higher charge than other alarms. For more information about pricing,
     #   see [Amazon CloudWatch Pricing][1].
     #
@@ -476,12 +475,12 @@ module Aws::CloudWatch
     #
     #   If you don't specify `Unit`, CloudWatch retrieves all unit types that
     #   have been published for the metric and attempts to evaluate the alarm.
-    #   Usually metrics are published with only one unit, so the alarm will
-    #   work as intended.
+    #   Usually, metrics are published with only one unit, so the alarm works
+    #   as intended.
     #
     #   However, if the metric is published with multiple types of units and
-    #   you don't specify a unit, the alarm's behavior is not defined and
-    #   will behave un-predictably.
+    #   you don't specify a unit, the alarm's behavior is not defined and it
+    #   behaves predictably.
     #
     #   We recommend omitting `Unit` so that you don't inadvertently specify
     #   an incorrect unit that is not published for this metric. Doing so
@@ -571,7 +570,7 @@ module Aws::CloudWatch
     #   associate as many as 50 tags with an alarm.
     #
     #   Tags can help you organize and categorize your resources. You can also
-    #   use them to scope user permissions, by granting a user permission to
+    #   use them to scope user permissions by granting a user permission to
     #   access or change only resources with certain tag values.
     # @option options [String] :threshold_metric_id
     #   If this is an alarm based on an anomaly detection model, make this
