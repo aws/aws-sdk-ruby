@@ -1,6 +1,24 @@
 Unreleased Changes
 ------------------
 
+* Feature - Aws::FraudDetector - Updated the API, and documentation for Amazon Fraud Detector.
+
+* Feature - Aws::FSx - Updated the documentation for Amazon FSx.
+
+* Feature - Aws::Kendra - Updated the API, and documentation for AWSKendraFrontendService.
+
+* Feature - Aws::Macie2 - Updated the API, and documentation for Amazon Macie 2.
+
+* Feature - Aws::MediaConnect - Updated the API, and documentation for AWS MediaConnect.
+
+* Feature - Aws::MediaPackage - Updated the API, and documentation for AWS Elemental MediaPackage.
+
+* Feature - Aws::CloudWatch - Updated the API, and documentation for Amazon CloudWatch.
+
+* Feature - Aws::MQ - Updated the API, and documentation for AmazonMQ.
+
+* Feature - Aws::SageMaker - Updated the API, and documentation for Amazon SageMaker Service.
+
 2.11.551 (2020-07-23)
 ------------------
 
