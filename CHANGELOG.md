@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+2.11.553 (2020-07-27)
+------------------
+
 * Feature - Aws::DataSync - Updated the API, and documentation for AWS DataSync.
 
 * Feature - Aws::DatabaseMigrationService - Updated the API, and documentation for AWS Database Migration Service.
