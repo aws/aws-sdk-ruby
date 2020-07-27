@@ -438,6 +438,51 @@ module Aws::DatabaseMigrationService
       req.send_request(options)
     end
 
+    # Cancels a single premigration assessment run.
+    #
+    # This operation prevents any individual assessments from running if
+    # they haven't started running. It also attempts to cancel any
+    # individual assessments that are currently running.
+    #
+    # @option params [required, String] :replication_task_assessment_run_arn
+    #   Amazon Resource Name (ARN) of the premigration assessment run to be
+    #   canceled.
+    #
+    # @return [Types::CancelReplicationTaskAssessmentRunResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CancelReplicationTaskAssessmentRunResponse#replication_task_assessment_run #replication_task_assessment_run} => Types::ReplicationTaskAssessmentRun
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.cancel_replication_task_assessment_run({
+    #     replication_task_assessment_run_arn: "String", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.replication_task_assessment_run.replication_task_assessment_run_arn #=> String
+    #   resp.replication_task_assessment_run.replication_task_arn #=> String
+    #   resp.replication_task_assessment_run.status #=> String
+    #   resp.replication_task_assessment_run.replication_task_assessment_run_creation_date #=> Time
+    #   resp.replication_task_assessment_run.assessment_progress.individual_assessment_count #=> Integer
+    #   resp.replication_task_assessment_run.assessment_progress.individual_assessment_completed_count #=> Integer
+    #   resp.replication_task_assessment_run.last_failure_message #=> String
+    #   resp.replication_task_assessment_run.service_access_role_arn #=> String
+    #   resp.replication_task_assessment_run.result_location_bucket #=> String
+    #   resp.replication_task_assessment_run.result_location_folder #=> String
+    #   resp.replication_task_assessment_run.result_encryption_mode #=> String
+    #   resp.replication_task_assessment_run.result_kms_key_arn #=> String
+    #   resp.replication_task_assessment_run.assessment_run_name #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/CancelReplicationTaskAssessmentRun AWS API Documentation
+    #
+    # @overload cancel_replication_task_assessment_run(params = {})
+    # @param [Hash] params ({})
+    def cancel_replication_task_assessment_run(params = {}, options = {})
+      req = build_request(:cancel_replication_task_assessment_run, params)
+      req.send_request(options)
+    end
+
     # Creates an endpoint using the provided settings.
     #
     # @option params [required, String] :endpoint_identifier
@@ -607,6 +652,78 @@ module Aws::DatabaseMigrationService
     # @option params [Types::RedshiftSettings] :redshift_settings
     #   Provides information that defines an Amazon Redshift endpoint.
     #
+    # @option params [Types::PostgreSQLSettings] :postgre_sql_settings
+    #   Settings in JSON format for the source and target PostgreSQL endpoint.
+    #   For information about other available settings, see [Extra connection
+    #   attributes when using PostgreSQL as a source for AWS DMS][1] and [
+    #   Extra connection attributes when using PostgreSQL as a target for AWS
+    #   DMS][2] in the *AWS Database Migration Service User Guide.*
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Source.PostgreSQL.ConnectionAttrib
+    #   [2]: https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Target.PostgreSQL.ConnectionAttrib
+    #
+    # @option params [Types::MySQLSettings] :my_sql_settings
+    #   Settings in JSON format for the source and target MySQL endpoint. For
+    #   information about other available settings, see [Extra connection
+    #   attributes when using MySQL as a source for AWS DMS][1] and [Extra
+    #   connection attributes when using a MySQL-compatible database as a
+    #   target for AWS DMS][2] in the *AWS Database Migration Service User
+    #   Guide.*
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Source.MySQL.ConnectionAttrib
+    #   [2]: https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Target.MySQL.ConnectionAttrib
+    #
+    # @option params [Types::OracleSettings] :oracle_settings
+    #   Settings in JSON format for the source and target Oracle endpoint. For
+    #   information about other available settings, see [Extra connection
+    #   attributes when using Oracle as a source for AWS DMS][1] and [ Extra
+    #   connection attributes when using Oracle as a target for AWS DMS][2] in
+    #   the *AWS Database Migration Service User Guide.*
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Source.Oracle.ConnectionAttrib
+    #   [2]: https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Target.Oracle.ConnectionAttrib
+    #
+    # @option params [Types::SybaseSettings] :sybase_settings
+    #   Settings in JSON format for the source and target SAP ASE endpoint.
+    #   For information about other available settings, see [Extra connection
+    #   attributes when using SAP ASE as a source for AWS DMS][1] and [Extra
+    #   connection attributes when using SAP ASE as a target for AWS DMS][2]
+    #   in the *AWS Database Migration Service User Guide.*
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Source.SAP.ConnectionAttrib
+    #   [2]: https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Target.SAP.ConnectionAttrib
+    #
+    # @option params [Types::MicrosoftSQLServerSettings] :microsoft_sql_server_settings
+    #   Settings in JSON format for the source and target Microsoft SQL Server
+    #   endpoint. For information about other available settings, see [Extra
+    #   connection attributes when using SQL Server as a source for AWS
+    #   DMS][1] and [ Extra connection attributes when using SQL Server as a
+    #   target for AWS DMS][2] in the *AWS Database Migration Service User
+    #   Guide.*
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Source.SQLServer.ConnectionAttrib
+    #   [2]: https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Target.SQLServer.ConnectionAttrib
+    #
+    # @option params [Types::IBMDb2Settings] :ibm_db_2_settings
+    #   Settings in JSON format for the source IBM Db2 LUW endpoint. For
+    #   information about other available settings, see [Extra connection
+    #   attributes when using Db2 LUW as a source for AWS DMS][1] in the *AWS
+    #   Database Migration Service User Guide.*
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Source.DB2.ConnectionAttrib
+    #
     # @return [Types::CreateEndpointResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateEndpointResponse#endpoint #endpoint} => Types::Endpoint
@@ -732,6 +849,12 @@ module Aws::DatabaseMigrationService
     #     kafka_settings: {
     #       broker: "String",
     #       topic: "String",
+    #       message_format: "json", # accepts json, json-unformatted
+    #       include_transaction_details: false,
+    #       include_partition_value: false,
+    #       partition_include_schema_table: false,
+    #       include_table_alter_operations: false,
+    #       include_control_details: false,
     #     },
     #     elasticsearch_settings: {
     #       service_access_role_arn: "String", # required
@@ -774,6 +897,53 @@ module Aws::DatabaseMigrationService
     #       truncate_columns: false,
     #       username: "String",
     #       write_buffer_size: 1,
+    #     },
+    #     postgre_sql_settings: {
+    #       database_name: "String",
+    #       password: "SecretString",
+    #       port: 1,
+    #       server_name: "String",
+    #       username: "String",
+    #     },
+    #     my_sql_settings: {
+    #       database_name: "String",
+    #       password: "SecretString",
+    #       port: 1,
+    #       server_name: "String",
+    #       username: "String",
+    #     },
+    #     oracle_settings: {
+    #       asm_password: "SecretString",
+    #       asm_server: "String",
+    #       asm_user: "String",
+    #       database_name: "String",
+    #       password: "SecretString",
+    #       port: 1,
+    #       security_db_encryption: "SecretString",
+    #       security_db_encryption_name: "String",
+    #       server_name: "String",
+    #       username: "String",
+    #     },
+    #     sybase_settings: {
+    #       database_name: "String",
+    #       password: "SecretString",
+    #       port: 1,
+    #       server_name: "String",
+    #       username: "String",
+    #     },
+    #     microsoft_sql_server_settings: {
+    #       port: 1,
+    #       database_name: "String",
+    #       password: "SecretString",
+    #       server_name: "String",
+    #       username: "String",
+    #     },
+    #     ibm_db_2_settings: {
+    #       database_name: "String",
+    #       password: "SecretString",
+    #       port: 1,
+    #       server_name: "String",
+    #       username: "String",
     #     },
     #   })
     #
@@ -842,6 +1012,12 @@ module Aws::DatabaseMigrationService
     #   resp.endpoint.kinesis_settings.include_control_details #=> Boolean
     #   resp.endpoint.kafka_settings.broker #=> String
     #   resp.endpoint.kafka_settings.topic #=> String
+    #   resp.endpoint.kafka_settings.message_format #=> String, one of "json", "json-unformatted"
+    #   resp.endpoint.kafka_settings.include_transaction_details #=> Boolean
+    #   resp.endpoint.kafka_settings.include_partition_value #=> Boolean
+    #   resp.endpoint.kafka_settings.partition_include_schema_table #=> Boolean
+    #   resp.endpoint.kafka_settings.include_table_alter_operations #=> Boolean
+    #   resp.endpoint.kafka_settings.include_control_details #=> Boolean
     #   resp.endpoint.elasticsearch_settings.service_access_role_arn #=> String
     #   resp.endpoint.elasticsearch_settings.endpoint_uri #=> String
     #   resp.endpoint.elasticsearch_settings.full_load_error_percentage #=> Integer
@@ -878,6 +1054,41 @@ module Aws::DatabaseMigrationService
     #   resp.endpoint.redshift_settings.truncate_columns #=> Boolean
     #   resp.endpoint.redshift_settings.username #=> String
     #   resp.endpoint.redshift_settings.write_buffer_size #=> Integer
+    #   resp.endpoint.postgre_sql_settings.database_name #=> String
+    #   resp.endpoint.postgre_sql_settings.password #=> String
+    #   resp.endpoint.postgre_sql_settings.port #=> Integer
+    #   resp.endpoint.postgre_sql_settings.server_name #=> String
+    #   resp.endpoint.postgre_sql_settings.username #=> String
+    #   resp.endpoint.my_sql_settings.database_name #=> String
+    #   resp.endpoint.my_sql_settings.password #=> String
+    #   resp.endpoint.my_sql_settings.port #=> Integer
+    #   resp.endpoint.my_sql_settings.server_name #=> String
+    #   resp.endpoint.my_sql_settings.username #=> String
+    #   resp.endpoint.oracle_settings.asm_password #=> String
+    #   resp.endpoint.oracle_settings.asm_server #=> String
+    #   resp.endpoint.oracle_settings.asm_user #=> String
+    #   resp.endpoint.oracle_settings.database_name #=> String
+    #   resp.endpoint.oracle_settings.password #=> String
+    #   resp.endpoint.oracle_settings.port #=> Integer
+    #   resp.endpoint.oracle_settings.security_db_encryption #=> String
+    #   resp.endpoint.oracle_settings.security_db_encryption_name #=> String
+    #   resp.endpoint.oracle_settings.server_name #=> String
+    #   resp.endpoint.oracle_settings.username #=> String
+    #   resp.endpoint.sybase_settings.database_name #=> String
+    #   resp.endpoint.sybase_settings.password #=> String
+    #   resp.endpoint.sybase_settings.port #=> Integer
+    #   resp.endpoint.sybase_settings.server_name #=> String
+    #   resp.endpoint.sybase_settings.username #=> String
+    #   resp.endpoint.microsoft_sql_server_settings.port #=> Integer
+    #   resp.endpoint.microsoft_sql_server_settings.database_name #=> String
+    #   resp.endpoint.microsoft_sql_server_settings.password #=> String
+    #   resp.endpoint.microsoft_sql_server_settings.server_name #=> String
+    #   resp.endpoint.microsoft_sql_server_settings.username #=> String
+    #   resp.endpoint.ibm_db_2_settings.database_name #=> String
+    #   resp.endpoint.ibm_db_2_settings.password #=> String
+    #   resp.endpoint.ibm_db_2_settings.port #=> Integer
+    #   resp.endpoint.ibm_db_2_settings.server_name #=> String
+    #   resp.endpoint.ibm_db_2_settings.username #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/CreateEndpoint AWS API Documentation
     #
@@ -1780,6 +1991,12 @@ module Aws::DatabaseMigrationService
     #   resp.endpoint.kinesis_settings.include_control_details #=> Boolean
     #   resp.endpoint.kafka_settings.broker #=> String
     #   resp.endpoint.kafka_settings.topic #=> String
+    #   resp.endpoint.kafka_settings.message_format #=> String, one of "json", "json-unformatted"
+    #   resp.endpoint.kafka_settings.include_transaction_details #=> Boolean
+    #   resp.endpoint.kafka_settings.include_partition_value #=> Boolean
+    #   resp.endpoint.kafka_settings.partition_include_schema_table #=> Boolean
+    #   resp.endpoint.kafka_settings.include_table_alter_operations #=> Boolean
+    #   resp.endpoint.kafka_settings.include_control_details #=> Boolean
     #   resp.endpoint.elasticsearch_settings.service_access_role_arn #=> String
     #   resp.endpoint.elasticsearch_settings.endpoint_uri #=> String
     #   resp.endpoint.elasticsearch_settings.full_load_error_percentage #=> Integer
@@ -1816,6 +2033,41 @@ module Aws::DatabaseMigrationService
     #   resp.endpoint.redshift_settings.truncate_columns #=> Boolean
     #   resp.endpoint.redshift_settings.username #=> String
     #   resp.endpoint.redshift_settings.write_buffer_size #=> Integer
+    #   resp.endpoint.postgre_sql_settings.database_name #=> String
+    #   resp.endpoint.postgre_sql_settings.password #=> String
+    #   resp.endpoint.postgre_sql_settings.port #=> Integer
+    #   resp.endpoint.postgre_sql_settings.server_name #=> String
+    #   resp.endpoint.postgre_sql_settings.username #=> String
+    #   resp.endpoint.my_sql_settings.database_name #=> String
+    #   resp.endpoint.my_sql_settings.password #=> String
+    #   resp.endpoint.my_sql_settings.port #=> Integer
+    #   resp.endpoint.my_sql_settings.server_name #=> String
+    #   resp.endpoint.my_sql_settings.username #=> String
+    #   resp.endpoint.oracle_settings.asm_password #=> String
+    #   resp.endpoint.oracle_settings.asm_server #=> String
+    #   resp.endpoint.oracle_settings.asm_user #=> String
+    #   resp.endpoint.oracle_settings.database_name #=> String
+    #   resp.endpoint.oracle_settings.password #=> String
+    #   resp.endpoint.oracle_settings.port #=> Integer
+    #   resp.endpoint.oracle_settings.security_db_encryption #=> String
+    #   resp.endpoint.oracle_settings.security_db_encryption_name #=> String
+    #   resp.endpoint.oracle_settings.server_name #=> String
+    #   resp.endpoint.oracle_settings.username #=> String
+    #   resp.endpoint.sybase_settings.database_name #=> String
+    #   resp.endpoint.sybase_settings.password #=> String
+    #   resp.endpoint.sybase_settings.port #=> Integer
+    #   resp.endpoint.sybase_settings.server_name #=> String
+    #   resp.endpoint.sybase_settings.username #=> String
+    #   resp.endpoint.microsoft_sql_server_settings.port #=> Integer
+    #   resp.endpoint.microsoft_sql_server_settings.database_name #=> String
+    #   resp.endpoint.microsoft_sql_server_settings.password #=> String
+    #   resp.endpoint.microsoft_sql_server_settings.server_name #=> String
+    #   resp.endpoint.microsoft_sql_server_settings.username #=> String
+    #   resp.endpoint.ibm_db_2_settings.database_name #=> String
+    #   resp.endpoint.ibm_db_2_settings.password #=> String
+    #   resp.endpoint.ibm_db_2_settings.port #=> Integer
+    #   resp.endpoint.ibm_db_2_settings.server_name #=> String
+    #   resp.endpoint.ibm_db_2_settings.username #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/DeleteEndpoint AWS API Documentation
     #
@@ -2113,6 +2365,52 @@ module Aws::DatabaseMigrationService
       req.send_request(options)
     end
 
+    # Deletes the record of a single premigration assessment run.
+    #
+    # This operation removes all metadata that AWS DMS maintains about this
+    # assessment run. However, the operation leaves untouched all
+    # information about this assessment run that is stored in your Amazon S3
+    # bucket.
+    #
+    # @option params [required, String] :replication_task_assessment_run_arn
+    #   Amazon Resource Name (ARN) of the premigration assessment run to be
+    #   deleted.
+    #
+    # @return [Types::DeleteReplicationTaskAssessmentRunResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DeleteReplicationTaskAssessmentRunResponse#replication_task_assessment_run #replication_task_assessment_run} => Types::ReplicationTaskAssessmentRun
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_replication_task_assessment_run({
+    #     replication_task_assessment_run_arn: "String", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.replication_task_assessment_run.replication_task_assessment_run_arn #=> String
+    #   resp.replication_task_assessment_run.replication_task_arn #=> String
+    #   resp.replication_task_assessment_run.status #=> String
+    #   resp.replication_task_assessment_run.replication_task_assessment_run_creation_date #=> Time
+    #   resp.replication_task_assessment_run.assessment_progress.individual_assessment_count #=> Integer
+    #   resp.replication_task_assessment_run.assessment_progress.individual_assessment_completed_count #=> Integer
+    #   resp.replication_task_assessment_run.last_failure_message #=> String
+    #   resp.replication_task_assessment_run.service_access_role_arn #=> String
+    #   resp.replication_task_assessment_run.result_location_bucket #=> String
+    #   resp.replication_task_assessment_run.result_location_folder #=> String
+    #   resp.replication_task_assessment_run.result_encryption_mode #=> String
+    #   resp.replication_task_assessment_run.result_kms_key_arn #=> String
+    #   resp.replication_task_assessment_run.assessment_run_name #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/DeleteReplicationTaskAssessmentRun AWS API Documentation
+    #
+    # @overload delete_replication_task_assessment_run(params = {})
+    # @param [Hash] params ({})
+    def delete_replication_task_assessment_run(params = {}, options = {})
+      req = build_request(:delete_replication_task_assessment_run, params)
+      req.send_request(options)
+    end
+
     # Lists all of the AWS DMS attributes for a customer account. These
     # attributes include AWS DMS quotas for the account and a unique account
     # identifier in a particular DMS region. DMS quotas include a list of
@@ -2177,10 +2475,98 @@ module Aws::DatabaseMigrationService
       req.send_request(options)
     end
 
+    # Provides a list of individual assessments that you can specify for a
+    # new premigration assessment run, given one or more parameters.
+    #
+    # If you specify an existing migration task, this operation provides the
+    # default individual assessments you can specify for that task.
+    # Otherwise, the specified parameters model elements of a possible
+    # migration task on which to base a premigration assessment run.
+    #
+    # To use these migration task modeling parameters, you must specify an
+    # existing replication instance, a source database engine, a target
+    # database engine, and a migration type. This combination of parameters
+    # potentially limits the default individual assessments available for an
+    # assessment run created for a corresponding migration task.
+    #
+    # If you specify no parameters, this operation provides a list of all
+    # possible individual assessments that you can specify for an assessment
+    # run. If you specify any one of the task modeling parameters, you must
+    # specify all of them or the operation cannot provide a list of
+    # individual assessments. The only parameter that you can specify alone
+    # is for an existing migration task. The specified task definition then
+    # determines the default list of individual assessments that you can
+    # specify in an assessment run for the task.
+    #
+    # @option params [String] :replication_task_arn
+    #   Amazon Resource Name (ARN) of a migration task on which you want to
+    #   base the default list of individual assessments.
+    #
+    # @option params [String] :replication_instance_arn
+    #   ARN of a replication instance on which you want to base the default
+    #   list of individual assessments.
+    #
+    # @option params [String] :source_engine_name
+    #   Name of a database engine that the specified replication instance
+    #   supports as a source.
+    #
+    # @option params [String] :target_engine_name
+    #   Name of a database engine that the specified replication instance
+    #   supports as a target.
+    #
+    # @option params [String] :migration_type
+    #   Name of the migration type that each provided individual assessment
+    #   must support.
+    #
+    # @option params [Integer] :max_records
+    #   Maximum number of records to include in the response. If more records
+    #   exist than the specified `MaxRecords` value, a pagination token called
+    #   a marker is included in the response so that the remaining results can
+    #   be retrieved.
+    #
+    # @option params [String] :marker
+    #   Optional pagination token provided by a previous request. If this
+    #   parameter is specified, the response includes only records beyond the
+    #   marker, up to the value specified by `MaxRecords`.
+    #
+    # @return [Types::DescribeApplicableIndividualAssessmentsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeApplicableIndividualAssessmentsResponse#individual_assessment_names #individual_assessment_names} => Array&lt;String&gt;
+    #   * {Types::DescribeApplicableIndividualAssessmentsResponse#marker #marker} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_applicable_individual_assessments({
+    #     replication_task_arn: "String",
+    #     replication_instance_arn: "String",
+    #     source_engine_name: "String",
+    #     target_engine_name: "String",
+    #     migration_type: "full-load", # accepts full-load, cdc, full-load-and-cdc
+    #     max_records: 1,
+    #     marker: "String",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.individual_assessment_names #=> Array
+    #   resp.individual_assessment_names[0] #=> String
+    #   resp.marker #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/DescribeApplicableIndividualAssessments AWS API Documentation
+    #
+    # @overload describe_applicable_individual_assessments(params = {})
+    # @param [Hash] params ({})
+    def describe_applicable_individual_assessments(params = {}, options = {})
+      req = build_request(:describe_applicable_individual_assessments, params)
+      req.send_request(options)
+    end
+
     # Provides a description of the certificate.
     #
     # @option params [Array<Types::Filter>] :filters
-    #   Filters applied to the certificate described in the form of key-value
+    #   Filters applied to the certificates described in the form of key-value
     #   pairs.
     #
     # @option params [Integer] :max_records
@@ -2372,7 +2758,7 @@ module Aws::DatabaseMigrationService
     # Returns information about the type of endpoints available.
     #
     # @option params [Array<Types::Filter>] :filters
-    #   Filters applied to the describe action.
+    #   Filters applied to the endpoint types.
     #
     #   Valid filter names: engine-name \| endpoint-type
     #
@@ -2460,7 +2846,7 @@ module Aws::DatabaseMigrationService
     # current region.
     #
     # @option params [Array<Types::Filter>] :filters
-    #   Filters applied to the describe action.
+    #   Filters applied to the endpoints.
     #
     #   Valid filter names: endpoint-arn \| endpoint-type \| endpoint-id \|
     #   engine-name
@@ -2593,6 +2979,12 @@ module Aws::DatabaseMigrationService
     #   resp.endpoints[0].kinesis_settings.include_control_details #=> Boolean
     #   resp.endpoints[0].kafka_settings.broker #=> String
     #   resp.endpoints[0].kafka_settings.topic #=> String
+    #   resp.endpoints[0].kafka_settings.message_format #=> String, one of "json", "json-unformatted"
+    #   resp.endpoints[0].kafka_settings.include_transaction_details #=> Boolean
+    #   resp.endpoints[0].kafka_settings.include_partition_value #=> Boolean
+    #   resp.endpoints[0].kafka_settings.partition_include_schema_table #=> Boolean
+    #   resp.endpoints[0].kafka_settings.include_table_alter_operations #=> Boolean
+    #   resp.endpoints[0].kafka_settings.include_control_details #=> Boolean
     #   resp.endpoints[0].elasticsearch_settings.service_access_role_arn #=> String
     #   resp.endpoints[0].elasticsearch_settings.endpoint_uri #=> String
     #   resp.endpoints[0].elasticsearch_settings.full_load_error_percentage #=> Integer
@@ -2629,6 +3021,41 @@ module Aws::DatabaseMigrationService
     #   resp.endpoints[0].redshift_settings.truncate_columns #=> Boolean
     #   resp.endpoints[0].redshift_settings.username #=> String
     #   resp.endpoints[0].redshift_settings.write_buffer_size #=> Integer
+    #   resp.endpoints[0].postgre_sql_settings.database_name #=> String
+    #   resp.endpoints[0].postgre_sql_settings.password #=> String
+    #   resp.endpoints[0].postgre_sql_settings.port #=> Integer
+    #   resp.endpoints[0].postgre_sql_settings.server_name #=> String
+    #   resp.endpoints[0].postgre_sql_settings.username #=> String
+    #   resp.endpoints[0].my_sql_settings.database_name #=> String
+    #   resp.endpoints[0].my_sql_settings.password #=> String
+    #   resp.endpoints[0].my_sql_settings.port #=> Integer
+    #   resp.endpoints[0].my_sql_settings.server_name #=> String
+    #   resp.endpoints[0].my_sql_settings.username #=> String
+    #   resp.endpoints[0].oracle_settings.asm_password #=> String
+    #   resp.endpoints[0].oracle_settings.asm_server #=> String
+    #   resp.endpoints[0].oracle_settings.asm_user #=> String
+    #   resp.endpoints[0].oracle_settings.database_name #=> String
+    #   resp.endpoints[0].oracle_settings.password #=> String
+    #   resp.endpoints[0].oracle_settings.port #=> Integer
+    #   resp.endpoints[0].oracle_settings.security_db_encryption #=> String
+    #   resp.endpoints[0].oracle_settings.security_db_encryption_name #=> String
+    #   resp.endpoints[0].oracle_settings.server_name #=> String
+    #   resp.endpoints[0].oracle_settings.username #=> String
+    #   resp.endpoints[0].sybase_settings.database_name #=> String
+    #   resp.endpoints[0].sybase_settings.password #=> String
+    #   resp.endpoints[0].sybase_settings.port #=> Integer
+    #   resp.endpoints[0].sybase_settings.server_name #=> String
+    #   resp.endpoints[0].sybase_settings.username #=> String
+    #   resp.endpoints[0].microsoft_sql_server_settings.port #=> Integer
+    #   resp.endpoints[0].microsoft_sql_server_settings.database_name #=> String
+    #   resp.endpoints[0].microsoft_sql_server_settings.password #=> String
+    #   resp.endpoints[0].microsoft_sql_server_settings.server_name #=> String
+    #   resp.endpoints[0].microsoft_sql_server_settings.username #=> String
+    #   resp.endpoints[0].ibm_db_2_settings.database_name #=> String
+    #   resp.endpoints[0].ibm_db_2_settings.password #=> String
+    #   resp.endpoints[0].ibm_db_2_settings.port #=> Integer
+    #   resp.endpoints[0].ibm_db_2_settings.server_name #=> String
+    #   resp.endpoints[0].ibm_db_2_settings.username #=> String
     #
     #
     # The following waiters are defined for this operation (see {Client#wait_until} for detailed usage):
@@ -2659,7 +3086,7 @@ module Aws::DatabaseMigrationService
     #   Valid values: replication-instance \| replication-task
     #
     # @option params [Array<Types::Filter>] :filters
-    #   Filters applied to the action.
+    #   Filters applied to the event categories.
     #
     # @return [Types::DescribeEventCategoriesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -2705,7 +3132,7 @@ module Aws::DatabaseMigrationService
     #   The name of the AWS DMS event subscription to be described.
     #
     # @option params [Array<Types::Filter>] :filters
-    #   Filters applied to the action.
+    #   Filters applied to event subscriptions.
     #
     # @option params [Integer] :max_records
     #   The maximum number of records to include in the response. If more
@@ -2798,7 +3225,7 @@ module Aws::DatabaseMigrationService
     #   A list of event categories for the source type that you've chosen.
     #
     # @option params [Array<Types::Filter>] :filters
-    #   Filters applied to the action.
+    #   Filters applied to events.
     #
     # @option params [Integer] :max_records
     #   The maximum number of records to include in the response. If more
@@ -3105,7 +3532,7 @@ module Aws::DatabaseMigrationService
     # the current region.
     #
     # @option params [Array<Types::Filter>] :filters
-    #   Filters applied to the describe action.
+    #   Filters applied to replication instances.
     #
     #   Valid filter names: replication-instance-arn \|
     #   replication-instance-id \| replication-instance-class \|
@@ -3232,7 +3659,7 @@ module Aws::DatabaseMigrationService
     # Returns information about the replication subnet groups.
     #
     # @option params [Array<Types::Filter>] :filters
-    #   Filters applied to the describe action.
+    #   Filters applied to replication subnet groups.
     #
     #   Valid filter names: replication-subnet-group-id
     #
@@ -3381,11 +3808,152 @@ module Aws::DatabaseMigrationService
       req.send_request(options)
     end
 
+    # Returns a paginated list of premigration assessment runs based on
+    # filter settings.
+    #
+    # These filter settings can specify a combination of premigration
+    # assessment runs, migration tasks, replication instances, and
+    # assessment run status values.
+    #
+    # <note markdown="1"> This operation doesn't return information about individual
+    # assessments. For this information, see the
+    # `DescribeReplicationTaskIndividualAssessments` operation.
+    #
+    #  </note>
+    #
+    # @option params [Array<Types::Filter>] :filters
+    #   Filters applied to the premigration assessment runs described in the
+    #   form of key-value pairs.
+    #
+    #   Valid filter names: `replication-task-assessment-run-arn`,
+    #   `replication-task-arn`, `replication-instance-arn`, `status`
+    #
+    # @option params [Integer] :max_records
+    #   The maximum number of records to include in the response. If more
+    #   records exist than the specified `MaxRecords` value, a pagination
+    #   token called a marker is included in the response so that the
+    #   remaining results can be retrieved.
+    #
+    # @option params [String] :marker
+    #   An optional pagination token provided by a previous request. If this
+    #   parameter is specified, the response includes only records beyond the
+    #   marker, up to the value specified by `MaxRecords`.
+    #
+    # @return [Types::DescribeReplicationTaskAssessmentRunsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeReplicationTaskAssessmentRunsResponse#marker #marker} => String
+    #   * {Types::DescribeReplicationTaskAssessmentRunsResponse#replication_task_assessment_runs #replication_task_assessment_runs} => Array&lt;Types::ReplicationTaskAssessmentRun&gt;
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_replication_task_assessment_runs({
+    #     filters: [
+    #       {
+    #         name: "String", # required
+    #         values: ["String"], # required
+    #       },
+    #     ],
+    #     max_records: 1,
+    #     marker: "String",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.marker #=> String
+    #   resp.replication_task_assessment_runs #=> Array
+    #   resp.replication_task_assessment_runs[0].replication_task_assessment_run_arn #=> String
+    #   resp.replication_task_assessment_runs[0].replication_task_arn #=> String
+    #   resp.replication_task_assessment_runs[0].status #=> String
+    #   resp.replication_task_assessment_runs[0].replication_task_assessment_run_creation_date #=> Time
+    #   resp.replication_task_assessment_runs[0].assessment_progress.individual_assessment_count #=> Integer
+    #   resp.replication_task_assessment_runs[0].assessment_progress.individual_assessment_completed_count #=> Integer
+    #   resp.replication_task_assessment_runs[0].last_failure_message #=> String
+    #   resp.replication_task_assessment_runs[0].service_access_role_arn #=> String
+    #   resp.replication_task_assessment_runs[0].result_location_bucket #=> String
+    #   resp.replication_task_assessment_runs[0].result_location_folder #=> String
+    #   resp.replication_task_assessment_runs[0].result_encryption_mode #=> String
+    #   resp.replication_task_assessment_runs[0].result_kms_key_arn #=> String
+    #   resp.replication_task_assessment_runs[0].assessment_run_name #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/DescribeReplicationTaskAssessmentRuns AWS API Documentation
+    #
+    # @overload describe_replication_task_assessment_runs(params = {})
+    # @param [Hash] params ({})
+    def describe_replication_task_assessment_runs(params = {}, options = {})
+      req = build_request(:describe_replication_task_assessment_runs, params)
+      req.send_request(options)
+    end
+
+    # Returns a paginated list of individual assessments based on filter
+    # settings.
+    #
+    # These filter settings can specify a combination of premigration
+    # assessment runs, migration tasks, and assessment status values.
+    #
+    # @option params [Array<Types::Filter>] :filters
+    #   Filters applied to the individual assessments described in the form of
+    #   key-value pairs.
+    #
+    #   Valid filter names: `replication-task-assessment-run-arn`,
+    #   `replication-task-arn`, `status`
+    #
+    # @option params [Integer] :max_records
+    #   The maximum number of records to include in the response. If more
+    #   records exist than the specified `MaxRecords` value, a pagination
+    #   token called a marker is included in the response so that the
+    #   remaining results can be retrieved.
+    #
+    # @option params [String] :marker
+    #   An optional pagination token provided by a previous request. If this
+    #   parameter is specified, the response includes only records beyond the
+    #   marker, up to the value specified by `MaxRecords`.
+    #
+    # @return [Types::DescribeReplicationTaskIndividualAssessmentsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeReplicationTaskIndividualAssessmentsResponse#marker #marker} => String
+    #   * {Types::DescribeReplicationTaskIndividualAssessmentsResponse#replication_task_individual_assessments #replication_task_individual_assessments} => Array&lt;Types::ReplicationTaskIndividualAssessment&gt;
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_replication_task_individual_assessments({
+    #     filters: [
+    #       {
+    #         name: "String", # required
+    #         values: ["String"], # required
+    #       },
+    #     ],
+    #     max_records: 1,
+    #     marker: "String",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.marker #=> String
+    #   resp.replication_task_individual_assessments #=> Array
+    #   resp.replication_task_individual_assessments[0].replication_task_individual_assessment_arn #=> String
+    #   resp.replication_task_individual_assessments[0].replication_task_assessment_run_arn #=> String
+    #   resp.replication_task_individual_assessments[0].individual_assessment_name #=> String
+    #   resp.replication_task_individual_assessments[0].status #=> String
+    #   resp.replication_task_individual_assessments[0].replication_task_individual_assessment_start_date #=> Time
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/DescribeReplicationTaskIndividualAssessments AWS API Documentation
+    #
+    # @overload describe_replication_task_individual_assessments(params = {})
+    # @param [Hash] params ({})
+    def describe_replication_task_individual_assessments(params = {}, options = {})
+      req = build_request(:describe_replication_task_individual_assessments, params)
+      req.send_request(options)
+    end
+
     # Returns information about replication tasks for your account in the
     # current region.
     #
     # @option params [Array<Types::Filter>] :filters
-    #   Filters applied to the describe action.
+    #   Filters applied to replication tasks.
     #
     #   Valid filter names: replication-task-arn \| replication-task-id \|
     #   migration-type \| endpoint-arn \| replication-instance-arn
@@ -3602,7 +4170,7 @@ module Aws::DatabaseMigrationService
     #   marker, up to the value specified by `MaxRecords`.
     #
     # @option params [Array<Types::Filter>] :filters
-    #   Filters applied to the describe table statistics action.
+    #   Filters applied to table statistics.
     #
     #   Valid filter names: schema-name \| table-name \| table-state
     #
@@ -3959,6 +4527,78 @@ module Aws::DatabaseMigrationService
     # @option params [Types::RedshiftSettings] :redshift_settings
     #   Provides information that defines an Amazon Redshift endpoint.
     #
+    # @option params [Types::PostgreSQLSettings] :postgre_sql_settings
+    #   Settings in JSON format for the source and target PostgreSQL endpoint.
+    #   For information about other available settings, see [Extra connection
+    #   attributes when using PostgreSQL as a source for AWS DMS][1] and [
+    #   Extra connection attributes when using PostgreSQL as a target for AWS
+    #   DMS][2] in the *AWS Database Migration Service User Guide.*
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Source.PostgreSQL.ConnectionAttrib
+    #   [2]: https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Target.PostgreSQL.ConnectionAttrib
+    #
+    # @option params [Types::MySQLSettings] :my_sql_settings
+    #   Settings in JSON format for the source and target MySQL endpoint. For
+    #   information about other available settings, see [Extra connection
+    #   attributes when using MySQL as a source for AWS DMS][1] and [Extra
+    #   connection attributes when using a MySQL-compatible database as a
+    #   target for AWS DMS][2] in the *AWS Database Migration Service User
+    #   Guide.*
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Source.MySQL.ConnectionAttrib
+    #   [2]: https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Target.MySQL.ConnectionAttrib
+    #
+    # @option params [Types::OracleSettings] :oracle_settings
+    #   Settings in JSON format for the source and target Oracle endpoint. For
+    #   information about other available settings, see [Extra connection
+    #   attributes when using Oracle as a source for AWS DMS][1] and [ Extra
+    #   connection attributes when using Oracle as a target for AWS DMS][2] in
+    #   the *AWS Database Migration Service User Guide.*
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Source.Oracle.ConnectionAttrib
+    #   [2]: https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Target.Oracle.ConnectionAttrib
+    #
+    # @option params [Types::SybaseSettings] :sybase_settings
+    #   Settings in JSON format for the source and target SAP ASE endpoint.
+    #   For information about other available settings, see [Extra connection
+    #   attributes when using SAP ASE as a source for AWS DMS][1] and [Extra
+    #   connection attributes when using SAP ASE as a target for AWS DMS][2]
+    #   in the *AWS Database Migration Service User Guide.*
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Source.SAP.ConnectionAttrib
+    #   [2]: https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Target.SAP.ConnectionAttrib
+    #
+    # @option params [Types::MicrosoftSQLServerSettings] :microsoft_sql_server_settings
+    #   Settings in JSON format for the source and target Microsoft SQL Server
+    #   endpoint. For information about other available settings, see [Extra
+    #   connection attributes when using SQL Server as a source for AWS
+    #   DMS][1] and [ Extra connection attributes when using SQL Server as a
+    #   target for AWS DMS][2] in the *AWS Database Migration Service User
+    #   Guide.*
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Source.SQLServer.ConnectionAttrib
+    #   [2]: https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Target.SQLServer.ConnectionAttrib
+    #
+    # @option params [Types::IBMDb2Settings] :ibm_db_2_settings
+    #   Settings in JSON format for the source IBM Db2 LUW endpoint. For
+    #   information about other available settings, see [Extra connection
+    #   attributes when using Db2 LUW as a source for AWS DMS][1] in the *AWS
+    #   Database Migration Service User Guide.*
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Source.DB2.ConnectionAttrib
+    #
     # @return [Types::ModifyEndpointResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::ModifyEndpointResponse#endpoint #endpoint} => Types::Endpoint
@@ -4063,6 +4703,12 @@ module Aws::DatabaseMigrationService
     #     kafka_settings: {
     #       broker: "String",
     #       topic: "String",
+    #       message_format: "json", # accepts json, json-unformatted
+    #       include_transaction_details: false,
+    #       include_partition_value: false,
+    #       partition_include_schema_table: false,
+    #       include_table_alter_operations: false,
+    #       include_control_details: false,
     #     },
     #     elasticsearch_settings: {
     #       service_access_role_arn: "String", # required
@@ -4105,6 +4751,53 @@ module Aws::DatabaseMigrationService
     #       truncate_columns: false,
     #       username: "String",
     #       write_buffer_size: 1,
+    #     },
+    #     postgre_sql_settings: {
+    #       database_name: "String",
+    #       password: "SecretString",
+    #       port: 1,
+    #       server_name: "String",
+    #       username: "String",
+    #     },
+    #     my_sql_settings: {
+    #       database_name: "String",
+    #       password: "SecretString",
+    #       port: 1,
+    #       server_name: "String",
+    #       username: "String",
+    #     },
+    #     oracle_settings: {
+    #       asm_password: "SecretString",
+    #       asm_server: "String",
+    #       asm_user: "String",
+    #       database_name: "String",
+    #       password: "SecretString",
+    #       port: 1,
+    #       security_db_encryption: "SecretString",
+    #       security_db_encryption_name: "String",
+    #       server_name: "String",
+    #       username: "String",
+    #     },
+    #     sybase_settings: {
+    #       database_name: "String",
+    #       password: "SecretString",
+    #       port: 1,
+    #       server_name: "String",
+    #       username: "String",
+    #     },
+    #     microsoft_sql_server_settings: {
+    #       port: 1,
+    #       database_name: "String",
+    #       password: "SecretString",
+    #       server_name: "String",
+    #       username: "String",
+    #     },
+    #     ibm_db_2_settings: {
+    #       database_name: "String",
+    #       password: "SecretString",
+    #       port: 1,
+    #       server_name: "String",
+    #       username: "String",
     #     },
     #   })
     #
@@ -4173,6 +4866,12 @@ module Aws::DatabaseMigrationService
     #   resp.endpoint.kinesis_settings.include_control_details #=> Boolean
     #   resp.endpoint.kafka_settings.broker #=> String
     #   resp.endpoint.kafka_settings.topic #=> String
+    #   resp.endpoint.kafka_settings.message_format #=> String, one of "json", "json-unformatted"
+    #   resp.endpoint.kafka_settings.include_transaction_details #=> Boolean
+    #   resp.endpoint.kafka_settings.include_partition_value #=> Boolean
+    #   resp.endpoint.kafka_settings.partition_include_schema_table #=> Boolean
+    #   resp.endpoint.kafka_settings.include_table_alter_operations #=> Boolean
+    #   resp.endpoint.kafka_settings.include_control_details #=> Boolean
     #   resp.endpoint.elasticsearch_settings.service_access_role_arn #=> String
     #   resp.endpoint.elasticsearch_settings.endpoint_uri #=> String
     #   resp.endpoint.elasticsearch_settings.full_load_error_percentage #=> Integer
@@ -4209,6 +4908,41 @@ module Aws::DatabaseMigrationService
     #   resp.endpoint.redshift_settings.truncate_columns #=> Boolean
     #   resp.endpoint.redshift_settings.username #=> String
     #   resp.endpoint.redshift_settings.write_buffer_size #=> Integer
+    #   resp.endpoint.postgre_sql_settings.database_name #=> String
+    #   resp.endpoint.postgre_sql_settings.password #=> String
+    #   resp.endpoint.postgre_sql_settings.port #=> Integer
+    #   resp.endpoint.postgre_sql_settings.server_name #=> String
+    #   resp.endpoint.postgre_sql_settings.username #=> String
+    #   resp.endpoint.my_sql_settings.database_name #=> String
+    #   resp.endpoint.my_sql_settings.password #=> String
+    #   resp.endpoint.my_sql_settings.port #=> Integer
+    #   resp.endpoint.my_sql_settings.server_name #=> String
+    #   resp.endpoint.my_sql_settings.username #=> String
+    #   resp.endpoint.oracle_settings.asm_password #=> String
+    #   resp.endpoint.oracle_settings.asm_server #=> String
+    #   resp.endpoint.oracle_settings.asm_user #=> String
+    #   resp.endpoint.oracle_settings.database_name #=> String
+    #   resp.endpoint.oracle_settings.password #=> String
+    #   resp.endpoint.oracle_settings.port #=> Integer
+    #   resp.endpoint.oracle_settings.security_db_encryption #=> String
+    #   resp.endpoint.oracle_settings.security_db_encryption_name #=> String
+    #   resp.endpoint.oracle_settings.server_name #=> String
+    #   resp.endpoint.oracle_settings.username #=> String
+    #   resp.endpoint.sybase_settings.database_name #=> String
+    #   resp.endpoint.sybase_settings.password #=> String
+    #   resp.endpoint.sybase_settings.port #=> Integer
+    #   resp.endpoint.sybase_settings.server_name #=> String
+    #   resp.endpoint.sybase_settings.username #=> String
+    #   resp.endpoint.microsoft_sql_server_settings.port #=> Integer
+    #   resp.endpoint.microsoft_sql_server_settings.database_name #=> String
+    #   resp.endpoint.microsoft_sql_server_settings.password #=> String
+    #   resp.endpoint.microsoft_sql_server_settings.server_name #=> String
+    #   resp.endpoint.microsoft_sql_server_settings.username #=> String
+    #   resp.endpoint.ibm_db_2_settings.database_name #=> String
+    #   resp.endpoint.ibm_db_2_settings.password #=> String
+    #   resp.endpoint.ibm_db_2_settings.port #=> Integer
+    #   resp.endpoint.ibm_db_2_settings.server_name #=> String
+    #   resp.endpoint.ibm_db_2_settings.username #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/ModifyEndpoint AWS API Documentation
     #
@@ -4884,8 +5618,8 @@ module Aws::DatabaseMigrationService
     #     replication_task_arn: "String", # required
     #     tables_to_reload: [ # required
     #       {
-    #         schema_name: "String",
-    #         table_name: "String",
+    #         schema_name: "String", # required
+    #         table_name: "String", # required
     #       },
     #     ],
     #     reload_option: "data-reload", # accepts data-reload, validate-only
@@ -5143,6 +5877,126 @@ module Aws::DatabaseMigrationService
       req.send_request(options)
     end
 
+    # Starts a new premigration assessment run for one or more individual
+    # assessments of a migration task.
+    #
+    # The assessments that you can specify depend on the source and target
+    # database engine and the migration type defined for the given task. To
+    # run this operation, your migration task must already be created. After
+    # you run this operation, you can review the status of each individual
+    # assessment. You can also run the migration task manually after the
+    # assessment run and its individual assessments complete.
+    #
+    # @option params [required, String] :replication_task_arn
+    #   Amazon Resource Name (ARN) of the migration task associated with the
+    #   premigration assessment run that you want to start.
+    #
+    # @option params [required, String] :service_access_role_arn
+    #   ARN of a service role needed to start the assessment run.
+    #
+    # @option params [required, String] :result_location_bucket
+    #   Amazon S3 bucket where you want AWS DMS to store the results of this
+    #   assessment run.
+    #
+    # @option params [String] :result_location_folder
+    #   Folder within an Amazon S3 bucket where you want AWS DMS to store the
+    #   results of this assessment run.
+    #
+    # @option params [String] :result_encryption_mode
+    #   Encryption mode that you can specify to encrypt the results of this
+    #   assessment run. If you don't specify this request parameter, AWS DMS
+    #   stores the assessment run results without encryption. You can specify
+    #   one of the options following:
+    #
+    #   * `"SSE_S3"` – The server-side encryption provided as a default by
+    #     Amazon S3.
+    #
+    #   * `"SSE_KMS"` – AWS Key Management Service (AWS KMS) encryption. This
+    #     encryption can use either a custom KMS encryption key that you
+    #     specify or the default KMS encryption key that DMS provides.
+    #
+    # @option params [String] :result_kms_key_arn
+    #   ARN of a custom KMS encryption key that you specify when you set
+    #   `ResultEncryptionMode` to `"SSE_KMS`".
+    #
+    # @option params [required, String] :assessment_run_name
+    #   Unique name to identify the assessment run.
+    #
+    # @option params [Array<String>] :include_only
+    #   Space-separated list of names for specific individual assessments that
+    #   you want to include. These names come from the default list of
+    #   individual assessments that AWS DMS supports for the associated
+    #   migration task. This task is specified by `ReplicationTaskArn`.
+    #
+    #   <note markdown="1"> You can't set a value for `IncludeOnly` if you also set a value for
+    #   `Exclude` in the API operation.
+    #
+    #    To identify the names of the default individual assessments that AWS
+    #   DMS supports for the associated migration task, run the
+    #   `DescribeApplicableIndividualAssessments` operation using its own
+    #   `ReplicationTaskArn` request parameter.
+    #
+    #    </note>
+    #
+    # @option params [Array<String>] :exclude
+    #   Space-separated list of names for specific individual assessments that
+    #   you want to exclude. These names come from the default list of
+    #   individual assessments that AWS DMS supports for the associated
+    #   migration task. This task is specified by `ReplicationTaskArn`.
+    #
+    #   <note markdown="1"> You can't set a value for `Exclude` if you also set a value for
+    #   `IncludeOnly` in the API operation.
+    #
+    #    To identify the names of the default individual assessments that AWS
+    #   DMS supports for the associated migration task, run the
+    #   `DescribeApplicableIndividualAssessments` operation using its own
+    #   `ReplicationTaskArn` request parameter.
+    #
+    #    </note>
+    #
+    # @return [Types::StartReplicationTaskAssessmentRunResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::StartReplicationTaskAssessmentRunResponse#replication_task_assessment_run #replication_task_assessment_run} => Types::ReplicationTaskAssessmentRun
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.start_replication_task_assessment_run({
+    #     replication_task_arn: "String", # required
+    #     service_access_role_arn: "String", # required
+    #     result_location_bucket: "String", # required
+    #     result_location_folder: "String",
+    #     result_encryption_mode: "String",
+    #     result_kms_key_arn: "String",
+    #     assessment_run_name: "String", # required
+    #     include_only: ["String"],
+    #     exclude: ["String"],
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.replication_task_assessment_run.replication_task_assessment_run_arn #=> String
+    #   resp.replication_task_assessment_run.replication_task_arn #=> String
+    #   resp.replication_task_assessment_run.status #=> String
+    #   resp.replication_task_assessment_run.replication_task_assessment_run_creation_date #=> Time
+    #   resp.replication_task_assessment_run.assessment_progress.individual_assessment_count #=> Integer
+    #   resp.replication_task_assessment_run.assessment_progress.individual_assessment_completed_count #=> Integer
+    #   resp.replication_task_assessment_run.last_failure_message #=> String
+    #   resp.replication_task_assessment_run.service_access_role_arn #=> String
+    #   resp.replication_task_assessment_run.result_location_bucket #=> String
+    #   resp.replication_task_assessment_run.result_location_folder #=> String
+    #   resp.replication_task_assessment_run.result_encryption_mode #=> String
+    #   resp.replication_task_assessment_run.result_kms_key_arn #=> String
+    #   resp.replication_task_assessment_run.assessment_run_name #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/StartReplicationTaskAssessmentRun AWS API Documentation
+    #
+    # @overload start_replication_task_assessment_run(params = {})
+    # @param [Hash] params ({})
+    def start_replication_task_assessment_run(params = {}, options = {})
+      req = build_request(:start_replication_task_assessment_run, params)
+      req.send_request(options)
+    end
+
     # Stops the replication task.
     #
     # @option params [required, String] :replication_task_arn
@@ -5291,7 +6145,7 @@ module Aws::DatabaseMigrationService
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-databasemigrationservice'
-      context[:gem_version] = '1.38.0'
+      context[:gem_version] = '1.39.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

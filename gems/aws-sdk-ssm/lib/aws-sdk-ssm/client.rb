@@ -4091,6 +4091,22 @@ module Aws::SSM
     #   One or more filters. Use a filter to return a more specific list of
     #   results.
     #
+    #   For `DescribePatchGroups`,valid filter keys include the following:
+    #
+    #   * `NAME_PREFIX`\: The name of the patch group. Wildcards (*) are
+    #     accepted.
+    #
+    #   * `OPERATING_SYSTEM`\: The supported operating system type to return
+    #     results for. For valid operating system values, see
+    #     GetDefaultPatchBaselineRequest$OperatingSystem in
+    #     CreatePatchBaseline.
+    #
+    #     Examples:
+    #
+    #     * `--filters Key=NAME_PREFIX,Values=MyPatchGroup*`
+    #
+    #     * `--filters Key=OPERATING_SYSTEM,Values=AMAZON_LINUX_2`
+    #
     # @option params [String] :next_token
     #   The token for the next set of items to return. (You received this
     #   token from a previous call.)
@@ -4475,6 +4491,9 @@ module Aws::SSM
     #   (Optional) The name of the plugin for which you want detailed results.
     #   If the document contains only one plugin, the name can be omitted and
     #   the details will be returned.
+    #
+    #   Plugin names are also referred to as step names in Systems Manager
+    #   documents.
     #
     # @return [Types::GetCommandInvocationResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -6037,6 +6056,12 @@ module Aws::SSM
     #
     # @option params [String] :instance_id
     #   (Optional) Lists commands issued against this instance ID.
+    #
+    #   <note markdown="1"> You can't specify an instance ID in the same command that you specify
+    #   `Status` = `Pending`. This is because the command has not reached the
+    #   instance yet.
+    #
+    #    </note>
     #
     # @option params [Integer] :max_results
     #   (Optional) The maximum number of items to return for this call. The
@@ -7699,23 +7724,37 @@ module Aws::SSM
     # Runs commands on one or more managed instances.
     #
     # @option params [Array<String>] :instance_ids
-    #   The instance IDs where the command should run. You can specify a
-    #   maximum of 50 IDs. If you prefer not to list individual instance IDs,
-    #   you can instead send commands to a fleet of instances using the
-    #   Targets parameter, which accepts EC2 tags. For more information about
-    #   how to use targets, see [Using targets and rate controls to send
-    #   commands to a fleet][1] in the *AWS Systems Manager User Guide*.
+    #   The IDs of the instances where the command should run. Specifying
+    #   instance IDs is most useful when you are targeting a limited number of
+    #   instances, though you can specify up to 50 IDs.
+    #
+    #   To target a larger number of instances, or if you prefer not to list
+    #   individual instance IDs, we recommend using the `Targets` option
+    #   instead. Using `Targets`, which accepts tag key-value pairs to
+    #   identify the instances to send commands to, you can a send command to
+    #   tens, hundreds, or thousands of instances at once.
+    #
+    #   For more information about how to use targets, see [Using targets and
+    #   rate controls to send commands to a fleet][1] in the *AWS Systems
+    #   Manager User Guide*.
     #
     #
     #
     #   [1]: https://docs.aws.amazon.com/systems-manager/latest/userguide/send-commands-multiple.html
     #
     # @option params [Array<Types::Target>] :targets
-    #   (Optional) An array of search criteria that targets instances using a
-    #   Key,Value combination that you specify. Targets is required if you
-    #   don't provide one or more instance IDs in the call. For more
-    #   information about how to use targets, see [Sending commands to a
-    #   fleet][1] in the *AWS Systems Manager User Guide*.
+    #   An array of search criteria that targets instances using a `Key,Value`
+    #   combination that you specify. Specifying targets is most useful when
+    #   you want to send a command to a large number of instances at once.
+    #   Using `Targets`, which accepts tag key-value pairs to identify
+    #   instances, you can send a command to tens, hundreds, or thousands of
+    #   instances at once.
+    #
+    #   To send a command to a smaller number of instances, you can use the
+    #   `InstanceIds` option instead.
+    #
+    #   For more information about how to use targets, see [Sending commands
+    #   to a fleet][1] in the *AWS Systems Manager User Guide*.
     #
     #
     #
@@ -9579,7 +9618,7 @@ module Aws::SSM
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-ssm'
-      context[:gem_version] = '1.84.0'
+      context[:gem_version] = '1.85.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

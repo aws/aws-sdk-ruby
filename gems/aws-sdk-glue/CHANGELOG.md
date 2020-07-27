@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.65.0 (2020-07-27)
+------------------
+
+* Feature - Add ability to manually resume workflows in AWS Glue providing customers further control over the orchestration of ETL workloads.
+
 1.64.0 (2020-07-23)
 ------------------
 

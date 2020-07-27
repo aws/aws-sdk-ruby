@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.179.0 (2020-07-27)
+------------------
+
+* Feature - m6gd, c6gd, r6gd instances are powered by AWS Graviton2 processors and support local NVMe instance storage
+
 1.178.0 (2020-07-20)
 ------------------
 

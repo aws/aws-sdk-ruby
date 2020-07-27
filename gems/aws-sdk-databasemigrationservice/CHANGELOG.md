@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.39.0 (2020-07-27)
+------------------
+
+* Feature - Basic endpoint settings for relational databases, Preflight validation API.
+
 1.38.0 (2020-07-02)
 ------------------
 

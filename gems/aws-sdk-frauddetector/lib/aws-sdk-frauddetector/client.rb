@@ -473,7 +473,7 @@ module Aws::FraudDetector
     #     ],
     #     model_versions: [
     #       {
-    #         model_id: "identifier", # required
+    #         model_id: "modelIdentifier", # required
     #         model_type: "ONLINE_FRAUD_INSIGHTS", # required, accepts ONLINE_FRAUD_INSIGHTS
     #         model_version_number: "nonEmptyString", # required
     #         arn: "fraudDetectorArn",
@@ -525,7 +525,7 @@ module Aws::FraudDetector
     # @example Request syntax with placeholder values
     #
     #   resp = client.create_model({
-    #     model_id: "identifier", # required
+    #     model_id: "modelIdentifier", # required
     #     model_type: "ONLINE_FRAUD_INSIGHTS", # required, accepts ONLINE_FRAUD_INSIGHTS
     #     description: "description",
     #     event_type_name: "string", # required
@@ -578,7 +578,7 @@ module Aws::FraudDetector
     # @example Request syntax with placeholder values
     #
     #   resp = client.create_model_version({
-    #     model_id: "identifier", # required
+    #     model_id: "modelIdentifier", # required
     #     model_type: "ONLINE_FRAUD_INSIGHTS", # required, accepts ONLINE_FRAUD_INSIGHTS
     #     training_data_source: "EXTERNAL_EVENTS", # required, accepts EXTERNAL_EVENTS
     #     training_data_schema: { # required
@@ -920,7 +920,7 @@ module Aws::FraudDetector
     # @example Request syntax with placeholder values
     #
     #   resp = client.describe_model_versions({
-    #     model_id: "identifier",
+    #     model_id: "modelIdentifier",
     #     model_version_number: "floatVersionString",
     #     model_type: "ONLINE_FRAUD_INSIGHTS", # accepts ONLINE_FRAUD_INSIGHTS
     #     next_token: "string",
@@ -1181,8 +1181,8 @@ module Aws::FraudDetector
     #     event_type_name: "string", # required
     #     entities: [ # required
     #       {
-    #         entity_type: "string",
-    #         entity_id: "identifier",
+    #         entity_type: "string", # required
+    #         entity_id: "identifier", # required
     #       },
     #     ],
     #     event_timestamp: "string", # required
@@ -1313,9 +1313,9 @@ module Aws::FraudDetector
     #
     #   resp.external_models #=> Array
     #   resp.external_models[0].model_endpoint #=> String
-    #   resp.external_models[0].event_type_name #=> String
     #   resp.external_models[0].model_source #=> String, one of "SAGEMAKER"
     #   resp.external_models[0].invoke_model_endpoint_role_arn #=> String
+    #   resp.external_models[0].input_configuration.event_type_name #=> String
     #   resp.external_models[0].input_configuration.format #=> String, one of "TEXT_CSV", "APPLICATION_JSON"
     #   resp.external_models[0].input_configuration.use_event_variables #=> Boolean
     #   resp.external_models[0].input_configuration.json_input_template #=> String
@@ -1437,7 +1437,7 @@ module Aws::FraudDetector
     # @example Request syntax with placeholder values
     #
     #   resp = client.get_model_version({
-    #     model_id: "identifier", # required
+    #     model_id: "modelIdentifier", # required
     #     model_type: "ONLINE_FRAUD_INSIGHTS", # required, accepts ONLINE_FRAUD_INSIGHTS
     #     model_version_number: "floatVersionString", # required
     #   })
@@ -1502,7 +1502,7 @@ module Aws::FraudDetector
     # @example Request syntax with placeholder values
     #
     #   resp = client.get_models({
-    #     model_id: "identifier",
+    #     model_id: "modelIdentifier",
     #     model_type: "ONLINE_FRAUD_INSIGHTS", # accepts ONLINE_FRAUD_INSIGHTS
     #     next_token: "string",
     #     max_results: 1,
@@ -1886,9 +1886,6 @@ module Aws::FraudDetector
     # @option params [required, String] :model_endpoint
     #   The model endpoints name.
     #
-    # @option params [String] :event_type_name
-    #   The event type name.
-    #
     # @option params [required, String] :model_source
     #   The source of the model.
     #
@@ -1913,10 +1910,10 @@ module Aws::FraudDetector
     #
     #   resp = client.put_external_model({
     #     model_endpoint: "sageMakerEndpointIdentifier", # required
-    #     event_type_name: "identifier",
     #     model_source: "SAGEMAKER", # required, accepts SAGEMAKER
     #     invoke_model_endpoint_role_arn: "string", # required
     #     input_configuration: { # required
+    #       event_type_name: "identifier",
     #       format: "TEXT_CSV", # accepts TEXT_CSV, APPLICATION_JSON
     #       use_event_variables: false, # required
     #       json_input_template: "string",
@@ -2157,7 +2154,7 @@ module Aws::FraudDetector
     #     description: "description",
     #     model_versions: [
     #       {
-    #         model_id: "identifier", # required
+    #         model_id: "modelIdentifier", # required
     #         model_type: "ONLINE_FRAUD_INSIGHTS", # required, accepts ONLINE_FRAUD_INSIGHTS
     #         model_version_number: "nonEmptyString", # required
     #         arn: "fraudDetectorArn",
@@ -2255,7 +2252,7 @@ module Aws::FraudDetector
     # @example Request syntax with placeholder values
     #
     #   resp = client.update_model({
-    #     model_id: "identifier", # required
+    #     model_id: "modelIdentifier", # required
     #     model_type: "ONLINE_FRAUD_INSIGHTS", # required, accepts ONLINE_FRAUD_INSIGHTS
     #     description: "description",
     #   })
@@ -2301,7 +2298,7 @@ module Aws::FraudDetector
     # @example Request syntax with placeholder values
     #
     #   resp = client.update_model_version({
-    #     model_id: "identifier", # required
+    #     model_id: "modelIdentifier", # required
     #     model_type: "ONLINE_FRAUD_INSIGHTS", # required, accepts ONLINE_FRAUD_INSIGHTS
     #     major_version_number: "wholeNumberVersionString", # required
     #     external_events_detail: {
@@ -2357,7 +2354,7 @@ module Aws::FraudDetector
     # @example Request syntax with placeholder values
     #
     #   resp = client.update_model_version_status({
-    #     model_id: "identifier", # required
+    #     model_id: "modelIdentifier", # required
     #     model_type: "ONLINE_FRAUD_INSIGHTS", # required, accepts ONLINE_FRAUD_INSIGHTS
     #     model_version_number: "floatVersionString", # required
     #     status: "ACTIVE", # required, accepts ACTIVE, INACTIVE
@@ -2513,7 +2510,7 @@ module Aws::FraudDetector
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-frauddetector'
-      context[:gem_version] = '1.8.0'
+      context[:gem_version] = '1.9.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

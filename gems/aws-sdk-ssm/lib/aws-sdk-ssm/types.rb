@@ -1643,6 +1643,11 @@ module Aws::SSM
 
     # Describes a command filter.
     #
+    # <note markdown="1"> An instance ID can't be specified when a command status is `Pending`
+    # because the command hasn't run on the instance yet.
+    #
+    #  </note>
+    #
     # @note When making an API call, you may pass CommandFilter
     #   data as a hash:
     #
@@ -6029,6 +6034,22 @@ module Aws::SSM
     # @!attribute [rw] filters
     #   One or more filters. Use a filter to return a more specific list of
     #   results.
+    #
+    #   For `DescribePatchGroups`,valid filter keys include the following:
+    #
+    #   * `NAME_PREFIX`\: The name of the patch group. Wildcards (*) are
+    #     accepted.
+    #
+    #   * `OPERATING_SYSTEM`\: The supported operating system type to return
+    #     results for. For valid operating system values, see
+    #     GetDefaultPatchBaselineRequest$OperatingSystem in
+    #     CreatePatchBaseline.
+    #
+    #     Examples:
+    #
+    #     * `--filters Key=NAME_PREFIX,Values=MyPatchGroup*`
+    #
+    #     * `--filters Key=OPERATING_SYSTEM,Values=AMAZON_LINUX_2`
     #   @return [Array<Types::PatchOrchestratorFilter>]
     #
     # @!attribute [rw] next_token
@@ -6974,6 +6995,9 @@ module Aws::SSM
     #   (Optional) The name of the plugin for which you want detailed
     #   results. If the document contains only one plugin, the name can be
     #   omitted and the details will be returned.
+    #
+    #   Plugin names are also referred to as step names in Systems Manager
+    #   documents.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/GetCommandInvocationRequest AWS API Documentation
@@ -8927,8 +8951,17 @@ module Aws::SSM
     #
     # @!attribute [rw] iam_role
     #   The Amazon Identity and Access Management (IAM) role assigned to the
-    #   on-premises Systems Manager managed instances. This call does not
-    #   return the IAM role for EC2 instances.
+    #   on-premises Systems Manager managed instance. This call does not
+    #   return the IAM role for EC2 instances. To retrieve the IAM role for
+    #   an EC2 instance, use the Amazon EC2 `DescribeInstances` action. For
+    #   information, see [DescribeInstances][1] in the *Amazon EC2 API
+    #   Reference* or [describe-instances][2] in the *AWS CLI Command
+    #   Reference*.
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_DescribeInstances.html
+    #   [2]: http://docs.aws.amazon.com/cli/latest/reference/ec2/describe-instances.html
     #   @return [String]
     #
     # @!attribute [rw] registration_date
@@ -8942,7 +8975,25 @@ module Aws::SSM
     #   @return [String]
     #
     # @!attribute [rw] name
-    #   The name of the managed instance.
+    #   The name assigned to an on-premises server or virtual machine (VM)
+    #   when it is activated as a Systems Manager managed instance. The name
+    #   is specified as the `DefaultInstanceName` property using the
+    #   CreateActivation command. It is applied to the managed instance by
+    #   specifying the Activation Code and Activation ID when you install
+    #   SSM Agent on the instance, as explained in [Install SSM Agent for a
+    #   hybrid environment (Linux)][1] and [Install SSM Agent for a hybrid
+    #   environment (Windows)][2]. To retrieve the Name tag of an EC2
+    #   instance, use the Amazon EC2 `DescribeInstances` action. For
+    #   information, see [DescribeInstances][3] in the *Amazon EC2 API
+    #   Reference* or [describe-instances][4] in the *AWS CLI Command
+    #   Reference*.
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/systems-manager/latest/userguide/sysman-install-managed-linux.html
+    #   [2]: http://docs.aws.amazon.com/systems-manager/latest/userguide/sysman-install-managed-win.html
+    #   [3]: http://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_DescribeInstances.html
+    #   [4]: http://docs.aws.amazon.com/cli/latest/reference/ec2/describe-instances.html
     #   @return [String]
     #
     # @!attribute [rw] ip_address
@@ -10636,6 +10687,12 @@ module Aws::SSM
     #
     # @!attribute [rw] instance_id
     #   (Optional) Lists commands issued against this instance ID.
+    #
+    #   <note markdown="1"> You can't specify an instance ID in the same command that you
+    #   specify `Status` = `Pending`. This is because the command has not
+    #   reached the instance yet.
+    #
+    #    </note>
     #   @return [String]
     #
     # @!attribute [rw] max_results
@@ -15458,13 +15515,19 @@ module Aws::SSM
     #       }
     #
     # @!attribute [rw] instance_ids
-    #   The instance IDs where the command should run. You can specify a
-    #   maximum of 50 IDs. If you prefer not to list individual instance
-    #   IDs, you can instead send commands to a fleet of instances using the
-    #   Targets parameter, which accepts EC2 tags. For more information
-    #   about how to use targets, see [Using targets and rate controls to
-    #   send commands to a fleet][1] in the *AWS Systems Manager User
-    #   Guide*.
+    #   The IDs of the instances where the command should run. Specifying
+    #   instance IDs is most useful when you are targeting a limited number
+    #   of instances, though you can specify up to 50 IDs.
+    #
+    #   To target a larger number of instances, or if you prefer not to list
+    #   individual instance IDs, we recommend using the `Targets` option
+    #   instead. Using `Targets`, which accepts tag key-value pairs to
+    #   identify the instances to send commands to, you can a send command
+    #   to tens, hundreds, or thousands of instances at once.
+    #
+    #   For more information about how to use targets, see [Using targets
+    #   and rate controls to send commands to a fleet][1] in the *AWS
+    #   Systems Manager User Guide*.
     #
     #
     #
@@ -15472,11 +15535,18 @@ module Aws::SSM
     #   @return [Array<String>]
     #
     # @!attribute [rw] targets
-    #   (Optional) An array of search criteria that targets instances using
-    #   a Key,Value combination that you specify. Targets is required if you
-    #   don't provide one or more instance IDs in the call. For more
-    #   information about how to use targets, see [Sending commands to a
-    #   fleet][1] in the *AWS Systems Manager User Guide*.
+    #   An array of search criteria that targets instances using a
+    #   `Key,Value` combination that you specify. Specifying targets is most
+    #   useful when you want to send a command to a large number of
+    #   instances at once. Using `Targets`, which accepts tag key-value
+    #   pairs to identify instances, you can send a command to tens,
+    #   hundreds, or thousands of instances at once.
+    #
+    #   To send a command to a smaller number of instances, you can use the
+    #   `InstanceIds` option instead.
+    #
+    #   For more information about how to use targets, see [Sending commands
+    #   to a fleet][1] in the *AWS Systems Manager User Guide*.
     #
     #
     #
@@ -16413,12 +16483,15 @@ module Aws::SSM
     #
     # * `Key=tag-key,Values=my-tag-key-1,my-tag-key-2 `
     #
-    # * (Maintenance window targets only)
+    # * **Run Command and Maintenance window targets only**\:
     #   `Key=resource-groups:Name,Values=resource-group-name `
     #
-    # * (Maintenance window targets only)
+    # * **Maintenance window targets only**\:
     #   `Key=resource-groups:ResourceTypeFilters,Values=resource-type-1,resource-type-2
     #   `
+    #
+    # * **Automation targets only**\:
+    #   `Key=ResourceGroup;Values=resource-group-name `
     #
     # For example:
     #
@@ -16428,28 +16501,32 @@ module Aws::SSM
     #
     # * `Key=tag-key,Values=Name,Instance-Type,CostCenter`
     #
-    # * (Maintenance window targets only)
+    # * **Run Command and Maintenance window targets only**\:
     #   `Key=resource-groups:Name,Values=ProductionResourceGroup`
     #
     #   This example demonstrates how to target all resources in the
     #   resource group **ProductionResourceGroup** in your maintenance
     #   window.
     #
-    # * (Maintenance window targets only)
+    # * **Maintenance window targets only**\:
     #   `Key=resource-groups:ResourceTypeFilters,Values=AWS::EC2::INSTANCE,AWS::EC2::VPC
     #   `
     #
     #   This example demonstrates how to target only EC2 instances and VPCs
     #   in your maintenance window.
     #
-    # * (State Manager association targets only) `Key=InstanceIds,Values=* `
+    # * **Automation targets only**\:
+    #   `Key=ResourceGroup,Values=MyResourceGroup`
+    #
+    # * **State Manager association targets only**\:
+    #   `Key=InstanceIds,Values=* `
     #
     #   This example demonstrates how to target all managed instances in the
     #   AWS Region where the association was created.
     #
-    # For information about how to send commands that target instances using
-    # `Key,Value` parameters, see [Targeting multiple instances][1] in the
-    # *AWS Systems Manager User Guide*.
+    # For more information about how to send commands that target instances
+    # using `Key,Value` parameters, see [Targeting multiple instances][1] in
+    # the *AWS Systems Manager User Guide*.
     #
     #
     #
