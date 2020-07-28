@@ -176,6 +176,9 @@ module Aws::MediaLive
     Eac3StereoDownmix = Shapes::StringShape.new(name: 'Eac3StereoDownmix')
     Eac3SurroundExMode = Shapes::StringShape.new(name: 'Eac3SurroundExMode')
     Eac3SurroundMode = Shapes::StringShape.new(name: 'Eac3SurroundMode')
+    EbuTtDDestinationSettings = Shapes::StructureShape.new(name: 'EbuTtDDestinationSettings')
+    EbuTtDDestinationStyleControl = Shapes::StringShape.new(name: 'EbuTtDDestinationStyleControl')
+    EbuTtDFillLineGapControl = Shapes::StringShape.new(name: 'EbuTtDFillLineGapControl')
     EmbeddedConvert608To708 = Shapes::StringShape.new(name: 'EmbeddedConvert608To708')
     EmbeddedDestinationSettings = Shapes::StructureShape.new(name: 'EmbeddedDestinationSettings')
     EmbeddedPlusScte20DestinationSettings = Shapes::StructureShape.new(name: 'EmbeddedPlusScte20DestinationSettings')
@@ -233,6 +236,7 @@ module Aws::MediaLive
     H265AlternativeTransferFunction = Shapes::StringShape.new(name: 'H265AlternativeTransferFunction')
     H265ColorMetadata = Shapes::StringShape.new(name: 'H265ColorMetadata')
     H265ColorSpaceSettings = Shapes::StructureShape.new(name: 'H265ColorSpaceSettings')
+    H265FilterSettings = Shapes::StructureShape.new(name: 'H265FilterSettings')
     H265FlickerAq = Shapes::StringShape.new(name: 'H265FlickerAq')
     H265GopSizeUnits = Shapes::StringShape.new(name: 'H265GopSizeUnits')
     H265Level = Shapes::StringShape.new(name: 'H265Level')
@@ -872,6 +876,7 @@ module Aws::MediaLive
     CaptionDestinationSettings.add_member(:arib_destination_settings, Shapes::ShapeRef.new(shape: AribDestinationSettings, location_name: "aribDestinationSettings"))
     CaptionDestinationSettings.add_member(:burn_in_destination_settings, Shapes::ShapeRef.new(shape: BurnInDestinationSettings, location_name: "burnInDestinationSettings"))
     CaptionDestinationSettings.add_member(:dvb_sub_destination_settings, Shapes::ShapeRef.new(shape: DvbSubDestinationSettings, location_name: "dvbSubDestinationSettings"))
+    CaptionDestinationSettings.add_member(:ebu_tt_d_destination_settings, Shapes::ShapeRef.new(shape: EbuTtDDestinationSettings, location_name: "ebuTtDDestinationSettings"))
     CaptionDestinationSettings.add_member(:embedded_destination_settings, Shapes::ShapeRef.new(shape: EmbeddedDestinationSettings, location_name: "embeddedDestinationSettings"))
     CaptionDestinationSettings.add_member(:embedded_plus_scte_20_destination_settings, Shapes::ShapeRef.new(shape: EmbeddedPlusScte20DestinationSettings, location_name: "embeddedPlusScte20DestinationSettings"))
     CaptionDestinationSettings.add_member(:rtmp_caption_info_destination_settings, Shapes::ShapeRef.new(shape: RtmpCaptionInfoDestinationSettings, location_name: "rtmpCaptionInfoDestinationSettings"))
@@ -1357,6 +1362,11 @@ module Aws::MediaLive
     Eac3Settings.add_member(:surround_mode, Shapes::ShapeRef.new(shape: Eac3SurroundMode, location_name: "surroundMode"))
     Eac3Settings.struct_class = Types::Eac3Settings
 
+    EbuTtDDestinationSettings.add_member(:fill_line_gap, Shapes::ShapeRef.new(shape: EbuTtDFillLineGapControl, location_name: "fillLineGap"))
+    EbuTtDDestinationSettings.add_member(:font_family, Shapes::ShapeRef.new(shape: __string, location_name: "fontFamily"))
+    EbuTtDDestinationSettings.add_member(:style_control, Shapes::ShapeRef.new(shape: EbuTtDDestinationStyleControl, location_name: "styleControl"))
+    EbuTtDDestinationSettings.struct_class = Types::EbuTtDDestinationSettings
+
     EmbeddedDestinationSettings.struct_class = Types::EmbeddedDestinationSettings
 
     EmbeddedPlusScte20DestinationSettings.struct_class = Types::EmbeddedPlusScte20DestinationSettings
@@ -1483,6 +1493,9 @@ module Aws::MediaLive
     H265ColorSpaceSettings.add_member(:rec_709_settings, Shapes::ShapeRef.new(shape: Rec709Settings, location_name: "rec709Settings"))
     H265ColorSpaceSettings.struct_class = Types::H265ColorSpaceSettings
 
+    H265FilterSettings.add_member(:temporal_filter_settings, Shapes::ShapeRef.new(shape: TemporalFilterSettings, location_name: "temporalFilterSettings"))
+    H265FilterSettings.struct_class = Types::H265FilterSettings
+
     H265Settings.add_member(:adaptive_quantization, Shapes::ShapeRef.new(shape: H265AdaptiveQuantization, location_name: "adaptiveQuantization"))
     H265Settings.add_member(:afd_signaling, Shapes::ShapeRef.new(shape: AfdSignaling, location_name: "afdSignaling"))
     H265Settings.add_member(:alternative_transfer_function, Shapes::ShapeRef.new(shape: H265AlternativeTransferFunction, location_name: "alternativeTransferFunction"))
@@ -1490,6 +1503,7 @@ module Aws::MediaLive
     H265Settings.add_member(:buf_size, Shapes::ShapeRef.new(shape: __integerMin100000Max80000000, location_name: "bufSize"))
     H265Settings.add_member(:color_metadata, Shapes::ShapeRef.new(shape: H265ColorMetadata, location_name: "colorMetadata"))
     H265Settings.add_member(:color_space_settings, Shapes::ShapeRef.new(shape: H265ColorSpaceSettings, location_name: "colorSpaceSettings"))
+    H265Settings.add_member(:filter_settings, Shapes::ShapeRef.new(shape: H265FilterSettings, location_name: "filterSettings"))
     H265Settings.add_member(:fixed_afd, Shapes::ShapeRef.new(shape: FixedAfd, location_name: "fixedAfd"))
     H265Settings.add_member(:flicker_aq, Shapes::ShapeRef.new(shape: H265FlickerAq, location_name: "flickerAq"))
     H265Settings.add_member(:framerate_denominator, Shapes::ShapeRef.new(shape: __integerMin1Max3003, required: true, location_name: "framerateDenominator"))

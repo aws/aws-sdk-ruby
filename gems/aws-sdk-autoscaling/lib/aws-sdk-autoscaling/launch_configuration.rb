@@ -260,6 +260,18 @@ module Aws::AutoScaling
       data[:placement_tenancy]
     end
 
+    # The metadata options for the instances. For more information, see
+    # [Instance Metadata and User Data][1] in the *Amazon EC2 User Guide for
+    # Linux Instances*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-instance-metadata.html
+    # @return [Types::InstanceMetadataOptions]
+    def metadata_options
+      data[:metadata_options]
+    end
+
     # @!endgroup
 
     # @return [Client]

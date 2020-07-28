@@ -2191,6 +2191,7 @@ module Aws::SecurityHub
     #
     #   * {Types::DescribeHubResponse#hub_arn #hub_arn} => String
     #   * {Types::DescribeHubResponse#subscribed_at #subscribed_at} => String
+    #   * {Types::DescribeHubResponse#auto_enable_controls #auto_enable_controls} => Boolean
     #
     # @example Request syntax with placeholder values
     #
@@ -2202,6 +2203,7 @@ module Aws::SecurityHub
     #
     #   resp.hub_arn #=> String
     #   resp.subscribed_at #=> String
+    #   resp.auto_enable_controls #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/DescribeHub AWS API Documentation
     #
@@ -2617,6 +2619,10 @@ module Aws::SecurityHub
     # @option params [Types::AwsSecurityFindingFilters] :filters
     #   The finding attributes used to define a condition to filter the
     #   returned findings.
+    #
+    #   Note that in the available filter fields, `WorkflowState` is
+    #   deprecated. To search for a finding based on its workflow status, use
+    #   `WorkflowStatus`.
     #
     # @option params [Array<Types::SortCriterion>] :sort_criteria
     #   The finding attributes used to sort the list of returned findings.
@@ -5549,6 +5555,33 @@ module Aws::SecurityHub
       req.send_request(options)
     end
 
+    # Updates configuration options for Security Hub.
+    #
+    # @option params [Boolean] :auto_enable_controls
+    #   Whether to automatically enable new controls when they are added to
+    #   standards that are enabled.
+    #
+    #   By default, this is set to `true`, and new controls are enabled
+    #   automatically. To not automatically enable new controls, set this to
+    #   `false`.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_security_hub_configuration({
+    #     auto_enable_controls: false,
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/UpdateSecurityHubConfiguration AWS API Documentation
+    #
+    # @overload update_security_hub_configuration(params = {})
+    # @param [Hash] params ({})
+    def update_security_hub_configuration(params = {}, options = {})
+      req = build_request(:update_security_hub_configuration, params)
+      req.send_request(options)
+    end
+
     # Used to control whether an individual security standard control is
     # enabled or disabled.
     #
@@ -5594,7 +5627,7 @@ module Aws::SecurityHub
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-securityhub'
-      context[:gem_version] = '1.29.0'
+      context[:gem_version] = '1.30.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

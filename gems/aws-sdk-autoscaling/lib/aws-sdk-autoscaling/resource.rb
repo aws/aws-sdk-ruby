@@ -185,8 +185,8 @@ module Aws::AutoScaling
     #   <note markdown="1"> With a mixed instances policy that uses instance weighting, Amazon EC2
     #   Auto Scaling may need to go above `MaxSize` to meet your capacity
     #   requirements. In this event, Amazon EC2 Auto Scaling will never go
-    #   above `MaxSize` by more than your maximum instance weight (weights
-    #   that define how many capacity units each instance contributes to the
+    #   above `MaxSize` by more than your largest instance weight (weights
+    #   that define how many units each instance contributes to the desired
     #   capacity of the group).
     #
     #    </note>
@@ -403,6 +403,11 @@ module Aws::AutoScaling
     #     ebs_optimized: false,
     #     associate_public_ip_address: false,
     #     placement_tenancy: "XmlStringMaxLen64",
+    #     metadata_options: {
+    #       http_tokens: "optional", # accepts optional, required
+    #       http_put_response_hop_limit: 1,
+    #       http_endpoint: "disabled", # accepts disabled, enabled
+    #     },
     #   })
     # @param [Hash] options ({})
     # @option options [required, String] :launch_configuration_name
@@ -619,6 +624,14 @@ module Aws::AutoScaling
     #
     #
     #   [1]: https://docs.aws.amazon.com/autoscaling/ec2/userguide/asg-in-vpc.html#as-vpc-tenancy
+    # @option options [Types::InstanceMetadataOptions] :metadata_options
+    #   The metadata options for the instances. For more information, see
+    #   [Instance Metadata and User Data][1] in the *Amazon EC2 User Guide for
+    #   Linux Instances*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-instance-metadata.html
     # @return [LaunchConfiguration]
     def create_launch_configuration(options = {})
       @client.create_launch_configuration(options)

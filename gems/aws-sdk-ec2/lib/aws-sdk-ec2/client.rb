@@ -3994,6 +3994,9 @@ module Aws::EC2
     #   The type of VPN connection that this customer gateway supports
     #   (`ipsec.1`).
     #
+    # @option params [Array<Types::TagSpecification>] :tag_specifications
+    #   The tags to apply to the customer gateway.
+    #
     # @option params [String] :device_name
     #   A name for the customer gateway device.
     #
@@ -4038,6 +4041,17 @@ module Aws::EC2
     #     public_ip: "String",
     #     certificate_arn: "String",
     #     type: "ipsec.1", # required, accepts ipsec.1
+    #     tag_specifications: [
+    #       {
+    #         resource_type: "client-vpn-endpoint", # accepts client-vpn-endpoint, customer-gateway, dedicated-host, dhcp-options, elastic-ip, elastic-gpu, export-image-task, export-instance-task, fleet, fpga-image, host-reservation, image, import-image-task, import-snapshot-task, instance, internet-gateway, key-pair, launch-template, local-gateway-route-table-vpc-association, natgateway, network-acl, network-interface, placement-group, reserved-instances, route-table, security-group, snapshot, spot-fleet-request, spot-instances-request, subnet, traffic-mirror-filter, traffic-mirror-session, traffic-mirror-target, transit-gateway, transit-gateway-attachment, transit-gateway-multicast-domain, transit-gateway-route-table, volume, vpc, vpc-peering-connection, vpn-connection, vpn-gateway, vpc-flow-log
+    #         tags: [
+    #           {
+    #             key: "String",
+    #             value: "String",
+    #           },
+    #         ],
+    #       },
+    #     ],
     #     device_name: "String",
     #     dry_run: false,
     #   })
@@ -9674,6 +9688,9 @@ module Aws::EC2
     # @option params [Types::VpnConnectionOptionsSpecification] :options
     #   The options for the VPN connection.
     #
+    # @option params [Array<Types::TagSpecification>] :tag_specifications
+    #   The tags to apply to the VPN connection.
+    #
     # @return [Types::CreateVpnConnectionResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateVpnConnectionResult#vpn_connection #vpn_connection} => Types::VpnConnection
@@ -9737,6 +9754,17 @@ module Aws::EC2
     #         },
     #       ],
     #     },
+    #     tag_specifications: [
+    #       {
+    #         resource_type: "client-vpn-endpoint", # accepts client-vpn-endpoint, customer-gateway, dedicated-host, dhcp-options, elastic-ip, elastic-gpu, export-image-task, export-instance-task, fleet, fpga-image, host-reservation, image, import-image-task, import-snapshot-task, instance, internet-gateway, key-pair, launch-template, local-gateway-route-table-vpc-association, natgateway, network-acl, network-interface, placement-group, reserved-instances, route-table, security-group, snapshot, spot-fleet-request, spot-instances-request, subnet, traffic-mirror-filter, traffic-mirror-session, traffic-mirror-target, transit-gateway, transit-gateway-attachment, transit-gateway-multicast-domain, transit-gateway-route-table, volume, vpc, vpc-peering-connection, vpn-connection, vpn-gateway, vpc-flow-log
+    #         tags: [
+    #           {
+    #             key: "String",
+    #             value: "String",
+    #           },
+    #         ],
+    #       },
+    #     ],
     #   })
     #
     # @example Response structure
@@ -9853,6 +9881,9 @@ module Aws::EC2
     # @option params [required, String] :type
     #   The type of VPN connection this virtual private gateway supports.
     #
+    # @option params [Array<Types::TagSpecification>] :tag_specifications
+    #   The tags to apply to the virtual private gateway.
+    #
     # @option params [Integer] :amazon_side_asn
     #   A private Autonomous System Number (ASN) for the Amazon side of a BGP
     #   session. If you're using a 16-bit ASN, it must be in the 64512 to
@@ -9876,6 +9907,17 @@ module Aws::EC2
     #   resp = client.create_vpn_gateway({
     #     availability_zone: "String",
     #     type: "ipsec.1", # required, accepts ipsec.1
+    #     tag_specifications: [
+    #       {
+    #         resource_type: "client-vpn-endpoint", # accepts client-vpn-endpoint, customer-gateway, dedicated-host, dhcp-options, elastic-ip, elastic-gpu, export-image-task, export-instance-task, fleet, fpga-image, host-reservation, image, import-image-task, import-snapshot-task, instance, internet-gateway, key-pair, launch-template, local-gateway-route-table-vpc-association, natgateway, network-acl, network-interface, placement-group, reserved-instances, route-table, security-group, snapshot, spot-fleet-request, spot-instances-request, subnet, traffic-mirror-filter, traffic-mirror-session, traffic-mirror-target, transit-gateway, transit-gateway-attachment, transit-gateway-multicast-domain, transit-gateway-route-table, volume, vpc, vpc-peering-connection, vpn-connection, vpn-gateway, vpc-flow-log
+    #         tags: [
+    #           {
+    #             key: "String",
+    #             value: "String",
+    #           },
+    #         ],
+    #       },
+    #     ],
     #     amazon_side_asn: 1,
     #     dry_run: false,
     #   })
@@ -37820,7 +37862,7 @@ module Aws::EC2
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-ec2'
-      context[:gem_version] = '1.179.0'
+      context[:gem_version] = '1.180.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

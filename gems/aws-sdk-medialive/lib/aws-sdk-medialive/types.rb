@@ -1769,6 +1769,11 @@ module Aws::MediaLive
     #             x_position: 1,
     #             y_position: 1,
     #           },
+    #           ebu_tt_d_destination_settings: {
+    #             fill_line_gap: "DISABLED", # accepts DISABLED, ENABLED
+    #             font_family: "__string",
+    #             style_control: "EXCLUDE", # accepts EXCLUDE, INCLUDE
+    #           },
     #           embedded_destination_settings: {
     #           },
     #           embedded_plus_scte_20_destination_settings: {
@@ -1885,6 +1890,11 @@ module Aws::MediaLive
     #           x_position: 1,
     #           y_position: 1,
     #         },
+    #         ebu_tt_d_destination_settings: {
+    #           fill_line_gap: "DISABLED", # accepts DISABLED, ENABLED
+    #           font_family: "__string",
+    #           style_control: "EXCLUDE", # accepts EXCLUDE, INCLUDE
+    #         },
     #         embedded_destination_settings: {
     #         },
     #         embedded_plus_scte_20_destination_settings: {
@@ -1917,6 +1927,10 @@ module Aws::MediaLive
     # @!attribute [rw] dvb_sub_destination_settings
     #   Dvb Sub Destination Settings
     #   @return [Types::DvbSubDestinationSettings]
+    #
+    # @!attribute [rw] ebu_tt_d_destination_settings
+    #   Ebu Tt DDestination Settings
+    #   @return [Types::EbuTtDDestinationSettings]
     #
     # @!attribute [rw] embedded_destination_settings
     #   Embedded Destination Settings
@@ -1960,6 +1974,7 @@ module Aws::MediaLive
       :arib_destination_settings,
       :burn_in_destination_settings,
       :dvb_sub_destination_settings,
+      :ebu_tt_d_destination_settings,
       :embedded_destination_settings,
       :embedded_plus_scte_20_destination_settings,
       :rtmp_caption_info_destination_settings,
@@ -2604,6 +2619,11 @@ module Aws::MediaLive
     #                   x_position: 1,
     #                   y_position: 1,
     #                 },
+    #                 ebu_tt_d_destination_settings: {
+    #                   fill_line_gap: "DISABLED", # accepts DISABLED, ENABLED
+    #                   font_family: "__string",
+    #                   style_control: "EXCLUDE", # accepts EXCLUDE, INCLUDE
+    #                 },
     #                 embedded_destination_settings: {
     #                 },
     #                 embedded_plus_scte_20_destination_settings: {
@@ -2745,7 +2765,7 @@ module Aws::MediaLive
     #                   manifest_duration_format: "FLOATING_POINT", # accepts FLOATING_POINT, INTEGER
     #                   min_segment_length: 1,
     #                   mode: "LIVE", # accepts LIVE, VOD
-    #                   output_selection: "MANIFESTS_AND_SEGMENTS", # accepts MANIFESTS_AND_SEGMENTS, SEGMENTS_ONLY
+    #                   output_selection: "MANIFESTS_AND_SEGMENTS", # accepts MANIFESTS_AND_SEGMENTS, SEGMENTS_ONLY, VARIANT_MANIFESTS_AND_SEGMENTS
     #                   program_date_time: "EXCLUDE", # accepts EXCLUDE, INCLUDE
     #                   program_date_time_period: 1,
     #                   redundant_manifest: "DISABLED", # accepts DISABLED, ENABLED
@@ -3104,6 +3124,12 @@ module Aws::MediaLive
     #                     rec_709_settings: {
     #                     },
     #                   },
+    #                   filter_settings: {
+    #                     temporal_filter_settings: {
+    #                       post_filter_sharpening: "AUTO", # accepts AUTO, DISABLED, ENABLED
+    #                       strength: "AUTO", # accepts AUTO, STRENGTH_1, STRENGTH_2, STRENGTH_3, STRENGTH_4, STRENGTH_5, STRENGTH_6, STRENGTH_7, STRENGTH_8, STRENGTH_9, STRENGTH_10, STRENGTH_11, STRENGTH_12, STRENGTH_13, STRENGTH_14, STRENGTH_15, STRENGTH_16
+    #                     },
+    #                   },
     #                   fixed_afd: "AFD_0000", # accepts AFD_0000, AFD_0010, AFD_0011, AFD_0100, AFD_1000, AFD_1001, AFD_1010, AFD_1011, AFD_1101, AFD_1110, AFD_1111
     #                   flicker_aq: "DISABLED", # accepts DISABLED, ENABLED
     #                   framerate_denominator: 1, # required
@@ -3120,7 +3146,7 @@ module Aws::MediaLive
     #                   profile: "MAIN", # accepts MAIN, MAIN_10BIT
     #                   qvbr_quality_level: 1,
     #                   rate_control_mode: "CBR", # accepts CBR, MULTIPLEX, QVBR
-    #                   scan_type: "PROGRESSIVE", # accepts PROGRESSIVE
+    #                   scan_type: "INTERLACED", # accepts INTERLACED, PROGRESSIVE
     #                   scene_change_detect: "DISABLED", # accepts DISABLED, ENABLED
     #                   slices: 1,
     #                   tier: "HIGH", # accepts HIGH, MAIN
@@ -5339,6 +5365,62 @@ module Aws::MediaLive
       include Aws::Structure
     end
 
+    # Ebu Tt DDestination Settings
+    #
+    # @note When making an API call, you may pass EbuTtDDestinationSettings
+    #   data as a hash:
+    #
+    #       {
+    #         fill_line_gap: "DISABLED", # accepts DISABLED, ENABLED
+    #         font_family: "__string",
+    #         style_control: "EXCLUDE", # accepts EXCLUDE, INCLUDE
+    #       }
+    #
+    # @!attribute [rw] fill_line_gap
+    #   Specifies how to handle the gap between the lines (in multi-line
+    #   captions). - enabled: Fill with the captions background color (as
+    #   specified in the input captions). - disabled: Leave the gap
+    #   unfilled.
+    #   @return [String]
+    #
+    # @!attribute [rw] font_family
+    #   Specifies the font family to include in the font data attached to
+    #   the EBU-TT captions. Valid only if styleControl is set to include.
+    #   If you leave this field empty, the font family is set to
+    #   "monospaced". (If styleControl is set to exclude, the font family
+    #   is always set to "monospaced".) You specify only the font family.
+    #   All other style information (color, bold, position and so on) is
+    #   copied from the input captions. The size is always set to 100% to
+    #   allow the downstream player to choose the size. - Enter a list of
+    #   font families, as a comma-separated list of font names, in order of
+    #   preference. The name can be a font family (such as “Arial”), or a
+    #   generic font family (such as “serif”), or “default” (to let the
+    #   downstream player choose the font). - Leave blank to set the family
+    #   to “monospace”.
+    #   @return [String]
+    #
+    # @!attribute [rw] style_control
+    #   Specifies the style information (font color, font position, and so
+    #   on) to include in the font data that is attached to the EBU-TT
+    #   captions. - include: Take the style information (font color, font
+    #   position, and so on) from the source captions and include that
+    #   information in the font data attached to the EBU-TT captions. This
+    #   option is valid only if the source captions are Embedded or
+    #   Teletext. - exclude: In the font data attached to the EBU-TT
+    #   captions, set the font family to "monospaced". Do not include any
+    #   other style information.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/EbuTtDDestinationSettings AWS API Documentation
+    #
+    class EbuTtDDestinationSettings < Struct.new(
+      :fill_line_gap,
+      :font_family,
+      :style_control)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Embedded Destination Settings
     #
     # @api private
@@ -5580,6 +5662,11 @@ module Aws::MediaLive
     #                 x_position: 1,
     #                 y_position: 1,
     #               },
+    #               ebu_tt_d_destination_settings: {
+    #                 fill_line_gap: "DISABLED", # accepts DISABLED, ENABLED
+    #                 font_family: "__string",
+    #                 style_control: "EXCLUDE", # accepts EXCLUDE, INCLUDE
+    #               },
     #               embedded_destination_settings: {
     #               },
     #               embedded_plus_scte_20_destination_settings: {
@@ -5721,7 +5808,7 @@ module Aws::MediaLive
     #                 manifest_duration_format: "FLOATING_POINT", # accepts FLOATING_POINT, INTEGER
     #                 min_segment_length: 1,
     #                 mode: "LIVE", # accepts LIVE, VOD
-    #                 output_selection: "MANIFESTS_AND_SEGMENTS", # accepts MANIFESTS_AND_SEGMENTS, SEGMENTS_ONLY
+    #                 output_selection: "MANIFESTS_AND_SEGMENTS", # accepts MANIFESTS_AND_SEGMENTS, SEGMENTS_ONLY, VARIANT_MANIFESTS_AND_SEGMENTS
     #                 program_date_time: "EXCLUDE", # accepts EXCLUDE, INCLUDE
     #                 program_date_time_period: 1,
     #                 redundant_manifest: "DISABLED", # accepts DISABLED, ENABLED
@@ -6080,6 +6167,12 @@ module Aws::MediaLive
     #                   rec_709_settings: {
     #                   },
     #                 },
+    #                 filter_settings: {
+    #                   temporal_filter_settings: {
+    #                     post_filter_sharpening: "AUTO", # accepts AUTO, DISABLED, ENABLED
+    #                     strength: "AUTO", # accepts AUTO, STRENGTH_1, STRENGTH_2, STRENGTH_3, STRENGTH_4, STRENGTH_5, STRENGTH_6, STRENGTH_7, STRENGTH_8, STRENGTH_9, STRENGTH_10, STRENGTH_11, STRENGTH_12, STRENGTH_13, STRENGTH_14, STRENGTH_15, STRENGTH_16
+    #                   },
+    #                 },
     #                 fixed_afd: "AFD_0000", # accepts AFD_0000, AFD_0010, AFD_0011, AFD_0100, AFD_1000, AFD_1001, AFD_1010, AFD_1011, AFD_1101, AFD_1110, AFD_1111
     #                 flicker_aq: "DISABLED", # accepts DISABLED, ENABLED
     #                 framerate_denominator: 1, # required
@@ -6096,7 +6189,7 @@ module Aws::MediaLive
     #                 profile: "MAIN", # accepts MAIN, MAIN_10BIT
     #                 qvbr_quality_level: 1,
     #                 rate_control_mode: "CBR", # accepts CBR, MULTIPLEX, QVBR
-    #                 scan_type: "PROGRESSIVE", # accepts PROGRESSIVE
+    #                 scan_type: "INTERLACED", # accepts INTERLACED, PROGRESSIVE
     #                 scene_change_detect: "DISABLED", # accepts DISABLED, ENABLED
     #                 slices: 1,
     #                 tier: "HIGH", # accepts HIGH, MAIN
@@ -6975,6 +7068,30 @@ module Aws::MediaLive
       include Aws::Structure
     end
 
+    # H265 Filter Settings
+    #
+    # @note When making an API call, you may pass H265FilterSettings
+    #   data as a hash:
+    #
+    #       {
+    #         temporal_filter_settings: {
+    #           post_filter_sharpening: "AUTO", # accepts AUTO, DISABLED, ENABLED
+    #           strength: "AUTO", # accepts AUTO, STRENGTH_1, STRENGTH_2, STRENGTH_3, STRENGTH_4, STRENGTH_5, STRENGTH_6, STRENGTH_7, STRENGTH_8, STRENGTH_9, STRENGTH_10, STRENGTH_11, STRENGTH_12, STRENGTH_13, STRENGTH_14, STRENGTH_15, STRENGTH_16
+    #         },
+    #       }
+    #
+    # @!attribute [rw] temporal_filter_settings
+    #   Temporal Filter Settings
+    #   @return [Types::TemporalFilterSettings]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/H265FilterSettings AWS API Documentation
+    #
+    class H265FilterSettings < Struct.new(
+      :temporal_filter_settings)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # H265 Settings
     #
     # @note When making an API call, you may pass H265Settings
@@ -6999,6 +7116,12 @@ module Aws::MediaLive
     #           rec_709_settings: {
     #           },
     #         },
+    #         filter_settings: {
+    #           temporal_filter_settings: {
+    #             post_filter_sharpening: "AUTO", # accepts AUTO, DISABLED, ENABLED
+    #             strength: "AUTO", # accepts AUTO, STRENGTH_1, STRENGTH_2, STRENGTH_3, STRENGTH_4, STRENGTH_5, STRENGTH_6, STRENGTH_7, STRENGTH_8, STRENGTH_9, STRENGTH_10, STRENGTH_11, STRENGTH_12, STRENGTH_13, STRENGTH_14, STRENGTH_15, STRENGTH_16
+    #           },
+    #         },
     #         fixed_afd: "AFD_0000", # accepts AFD_0000, AFD_0010, AFD_0011, AFD_0100, AFD_1000, AFD_1001, AFD_1010, AFD_1011, AFD_1101, AFD_1110, AFD_1111
     #         flicker_aq: "DISABLED", # accepts DISABLED, ENABLED
     #         framerate_denominator: 1, # required
@@ -7015,7 +7138,7 @@ module Aws::MediaLive
     #         profile: "MAIN", # accepts MAIN, MAIN_10BIT
     #         qvbr_quality_level: 1,
     #         rate_control_mode: "CBR", # accepts CBR, MULTIPLEX, QVBR
-    #         scan_type: "PROGRESSIVE", # accepts PROGRESSIVE
+    #         scan_type: "INTERLACED", # accepts INTERLACED, PROGRESSIVE
     #         scene_change_detect: "DISABLED", # accepts DISABLED, ENABLED
     #         slices: 1,
     #         tier: "HIGH", # accepts HIGH, MAIN
@@ -7059,6 +7182,10 @@ module Aws::MediaLive
     # @!attribute [rw] color_space_settings
     #   Color Space settings
     #   @return [Types::H265ColorSpaceSettings]
+    #
+    # @!attribute [rw] filter_settings
+    #   Optional filters that you can apply to an encode.
+    #   @return [Types::H265FilterSettings]
     #
     # @!attribute [rw] fixed_afd
     #   Four bit AFD value to write on all frames of video in the output
@@ -7195,6 +7322,7 @@ module Aws::MediaLive
       :buf_size,
       :color_metadata,
       :color_space_settings,
+      :filter_settings,
       :fixed_afd,
       :flicker_aq,
       :framerate_denominator,
@@ -7500,7 +7628,7 @@ module Aws::MediaLive
     #         manifest_duration_format: "FLOATING_POINT", # accepts FLOATING_POINT, INTEGER
     #         min_segment_length: 1,
     #         mode: "LIVE", # accepts LIVE, VOD
-    #         output_selection: "MANIFESTS_AND_SEGMENTS", # accepts MANIFESTS_AND_SEGMENTS, SEGMENTS_ONLY
+    #         output_selection: "MANIFESTS_AND_SEGMENTS", # accepts MANIFESTS_AND_SEGMENTS, SEGMENTS_ONLY, VARIANT_MANIFESTS_AND_SEGMENTS
     #         program_date_time: "EXCLUDE", # accepts EXCLUDE, INCLUDE
     #         program_date_time_period: 1,
     #         redundant_manifest: "DISABLED", # accepts DISABLED, ENABLED
@@ -11999,7 +12127,7 @@ module Aws::MediaLive
     #             manifest_duration_format: "FLOATING_POINT", # accepts FLOATING_POINT, INTEGER
     #             min_segment_length: 1,
     #             mode: "LIVE", # accepts LIVE, VOD
-    #             output_selection: "MANIFESTS_AND_SEGMENTS", # accepts MANIFESTS_AND_SEGMENTS, SEGMENTS_ONLY
+    #             output_selection: "MANIFESTS_AND_SEGMENTS", # accepts MANIFESTS_AND_SEGMENTS, SEGMENTS_ONLY, VARIANT_MANIFESTS_AND_SEGMENTS
     #             program_date_time: "EXCLUDE", # accepts EXCLUDE, INCLUDE
     #             program_date_time_period: 1,
     #             redundant_manifest: "DISABLED", # accepts DISABLED, ENABLED
@@ -12389,7 +12517,7 @@ module Aws::MediaLive
     #           manifest_duration_format: "FLOATING_POINT", # accepts FLOATING_POINT, INTEGER
     #           min_segment_length: 1,
     #           mode: "LIVE", # accepts LIVE, VOD
-    #           output_selection: "MANIFESTS_AND_SEGMENTS", # accepts MANIFESTS_AND_SEGMENTS, SEGMENTS_ONLY
+    #           output_selection: "MANIFESTS_AND_SEGMENTS", # accepts MANIFESTS_AND_SEGMENTS, SEGMENTS_ONLY, VARIANT_MANIFESTS_AND_SEGMENTS
     #           program_date_time: "EXCLUDE", # accepts EXCLUDE, INCLUDE
     #           program_date_time_period: 1,
     #           redundant_manifest: "DISABLED", # accepts DISABLED, ENABLED
@@ -15469,6 +15597,11 @@ module Aws::MediaLive
     #                   x_position: 1,
     #                   y_position: 1,
     #                 },
+    #                 ebu_tt_d_destination_settings: {
+    #                   fill_line_gap: "DISABLED", # accepts DISABLED, ENABLED
+    #                   font_family: "__string",
+    #                   style_control: "EXCLUDE", # accepts EXCLUDE, INCLUDE
+    #                 },
     #                 embedded_destination_settings: {
     #                 },
     #                 embedded_plus_scte_20_destination_settings: {
@@ -15610,7 +15743,7 @@ module Aws::MediaLive
     #                   manifest_duration_format: "FLOATING_POINT", # accepts FLOATING_POINT, INTEGER
     #                   min_segment_length: 1,
     #                   mode: "LIVE", # accepts LIVE, VOD
-    #                   output_selection: "MANIFESTS_AND_SEGMENTS", # accepts MANIFESTS_AND_SEGMENTS, SEGMENTS_ONLY
+    #                   output_selection: "MANIFESTS_AND_SEGMENTS", # accepts MANIFESTS_AND_SEGMENTS, SEGMENTS_ONLY, VARIANT_MANIFESTS_AND_SEGMENTS
     #                   program_date_time: "EXCLUDE", # accepts EXCLUDE, INCLUDE
     #                   program_date_time_period: 1,
     #                   redundant_manifest: "DISABLED", # accepts DISABLED, ENABLED
@@ -15969,6 +16102,12 @@ module Aws::MediaLive
     #                     rec_709_settings: {
     #                     },
     #                   },
+    #                   filter_settings: {
+    #                     temporal_filter_settings: {
+    #                       post_filter_sharpening: "AUTO", # accepts AUTO, DISABLED, ENABLED
+    #                       strength: "AUTO", # accepts AUTO, STRENGTH_1, STRENGTH_2, STRENGTH_3, STRENGTH_4, STRENGTH_5, STRENGTH_6, STRENGTH_7, STRENGTH_8, STRENGTH_9, STRENGTH_10, STRENGTH_11, STRENGTH_12, STRENGTH_13, STRENGTH_14, STRENGTH_15, STRENGTH_16
+    #                     },
+    #                   },
     #                   fixed_afd: "AFD_0000", # accepts AFD_0000, AFD_0010, AFD_0011, AFD_0100, AFD_1000, AFD_1001, AFD_1010, AFD_1011, AFD_1101, AFD_1110, AFD_1111
     #                   flicker_aq: "DISABLED", # accepts DISABLED, ENABLED
     #                   framerate_denominator: 1, # required
@@ -15985,7 +16124,7 @@ module Aws::MediaLive
     #                   profile: "MAIN", # accepts MAIN, MAIN_10BIT
     #                   qvbr_quality_level: 1,
     #                   rate_control_mode: "CBR", # accepts CBR, MULTIPLEX, QVBR
-    #                   scan_type: "PROGRESSIVE", # accepts PROGRESSIVE
+    #                   scan_type: "INTERLACED", # accepts INTERLACED, PROGRESSIVE
     #                   scene_change_detect: "DISABLED", # accepts DISABLED, ENABLED
     #                   slices: 1,
     #                   tier: "HIGH", # accepts HIGH, MAIN
@@ -16793,6 +16932,12 @@ module Aws::MediaLive
     #             rec_709_settings: {
     #             },
     #           },
+    #           filter_settings: {
+    #             temporal_filter_settings: {
+    #               post_filter_sharpening: "AUTO", # accepts AUTO, DISABLED, ENABLED
+    #               strength: "AUTO", # accepts AUTO, STRENGTH_1, STRENGTH_2, STRENGTH_3, STRENGTH_4, STRENGTH_5, STRENGTH_6, STRENGTH_7, STRENGTH_8, STRENGTH_9, STRENGTH_10, STRENGTH_11, STRENGTH_12, STRENGTH_13, STRENGTH_14, STRENGTH_15, STRENGTH_16
+    #             },
+    #           },
     #           fixed_afd: "AFD_0000", # accepts AFD_0000, AFD_0010, AFD_0011, AFD_0100, AFD_1000, AFD_1001, AFD_1010, AFD_1011, AFD_1101, AFD_1110, AFD_1111
     #           flicker_aq: "DISABLED", # accepts DISABLED, ENABLED
     #           framerate_denominator: 1, # required
@@ -16809,7 +16954,7 @@ module Aws::MediaLive
     #           profile: "MAIN", # accepts MAIN, MAIN_10BIT
     #           qvbr_quality_level: 1,
     #           rate_control_mode: "CBR", # accepts CBR, MULTIPLEX, QVBR
-    #           scan_type: "PROGRESSIVE", # accepts PROGRESSIVE
+    #           scan_type: "INTERLACED", # accepts INTERLACED, PROGRESSIVE
     #           scene_change_detect: "DISABLED", # accepts DISABLED, ENABLED
     #           slices: 1,
     #           tier: "HIGH", # accepts HIGH, MAIN
@@ -16924,6 +17069,12 @@ module Aws::MediaLive
     #               rec_709_settings: {
     #               },
     #             },
+    #             filter_settings: {
+    #               temporal_filter_settings: {
+    #                 post_filter_sharpening: "AUTO", # accepts AUTO, DISABLED, ENABLED
+    #                 strength: "AUTO", # accepts AUTO, STRENGTH_1, STRENGTH_2, STRENGTH_3, STRENGTH_4, STRENGTH_5, STRENGTH_6, STRENGTH_7, STRENGTH_8, STRENGTH_9, STRENGTH_10, STRENGTH_11, STRENGTH_12, STRENGTH_13, STRENGTH_14, STRENGTH_15, STRENGTH_16
+    #               },
+    #             },
     #             fixed_afd: "AFD_0000", # accepts AFD_0000, AFD_0010, AFD_0011, AFD_0100, AFD_1000, AFD_1001, AFD_1010, AFD_1011, AFD_1101, AFD_1110, AFD_1111
     #             flicker_aq: "DISABLED", # accepts DISABLED, ENABLED
     #             framerate_denominator: 1, # required
@@ -16940,7 +17091,7 @@ module Aws::MediaLive
     #             profile: "MAIN", # accepts MAIN, MAIN_10BIT
     #             qvbr_quality_level: 1,
     #             rate_control_mode: "CBR", # accepts CBR, MULTIPLEX, QVBR
-    #             scan_type: "PROGRESSIVE", # accepts PROGRESSIVE
+    #             scan_type: "INTERLACED", # accepts INTERLACED, PROGRESSIVE
     #             scene_change_detect: "DISABLED", # accepts DISABLED, ENABLED
     #             slices: 1,
     #             tier: "HIGH", # accepts HIGH, MAIN
