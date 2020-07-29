@@ -1,6 +1,18 @@
 Unreleased Changes
 ------------------
 
+* Feature - Aws::EC2 - Updated the API, and documentation for Amazon Elastic Compute Cloud.
+
+* Feature - Aws::ECR - Updated the API, and documentation for Amazon EC2 Container Registry.
+
+* Feature - Aws::Firehose - Updated the API, and documentation for Amazon Kinesis Firehose.
+
+* Feature - Aws::GuardDuty - Updated the API, and documentation for Amazon GuardDuty.
+
+* Feature - Aws::ResourceGroups - Updated the API, and documentation for AWS Resource Groups.
+
+* Feature - Aws::ServiceDiscovery - Updated the documentation for AWS Cloud Map.
+
 2.11.554 (2020-07-28)
 ------------------
 
