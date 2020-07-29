@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.180.0 (2020-07-28)
+------------------
+
+* Feature - Introduces support for tag-on-create capability for the following APIs: CreateVpnConnection, CreateVpnGateway, and CreateCustomerGateway. A user can now add tags while creating these resources. For further detail, please see AWS Tagging Strategies.
+
+1.179.0 (2020-07-27)
+------------------
+
+* Feature - m6gd, c6gd, r6gd instances are powered by AWS Graviton2 processors and support local NVMe instance storage
+
 1.178.0 (2020-07-20)
 ------------------
 

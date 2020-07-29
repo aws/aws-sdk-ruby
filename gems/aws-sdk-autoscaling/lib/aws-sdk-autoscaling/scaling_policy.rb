@@ -68,7 +68,7 @@ module Aws::AutoScaling
       data[:policy_type]
     end
 
-    # Specifies how the scaling adjustment is interpreted (either an
+    # Specifies how the scaling adjustment is interpreted (for example, an
     # absolute number or a percentage). The valid values are
     # `ChangeInCapacity`, `ExactCapacity`, and `PercentChangeInCapacity`.
     # @return [String]

@@ -4501,6 +4501,9 @@ module Aws::SecurityHub
     #
     # @!attribute [rw] workflow_state
     #   The workflow state of a finding.
+    #
+    #   Note that this field is deprecated. To search for a finding based on
+    #   its workflow status, use `WorkflowStatus`.
     #   @return [Array<Types::StringFilter>]
     #
     # @!attribute [rw] workflow_status
@@ -7002,11 +7005,21 @@ module Aws::SecurityHub
     #   The date and time when Security Hub was enabled in the account.
     #   @return [String]
     #
+    # @!attribute [rw] auto_enable_controls
+    #   Whether to automatically enable new controls when they are added to
+    #   standards that are enabled.
+    #
+    #   If set to `true`, then new controls for enabled standards are
+    #   enabled automatically. If set to `false`, then new controls are not
+    #   enabled.
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/DescribeHubResponse AWS API Documentation
     #
     class DescribeHubResponse < Struct.new(
       :hub_arn,
-      :subscribed_at)
+      :subscribed_at,
+      :auto_enable_controls)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -7924,6 +7937,10 @@ module Aws::SecurityHub
     # @!attribute [rw] filters
     #   The finding attributes used to define a condition to filter the
     #   returned findings.
+    #
+    #   Note that in the available filter fields, `WorkflowState` is
+    #   deprecated. To search for a finding based on its workflow status,
+    #   use `WorkflowStatus`.
     #   @return [Types::AwsSecurityFindingFilters]
     #
     # @!attribute [rw] sort_criteria
@@ -10478,6 +10495,16 @@ module Aws::SecurityHub
 
     # The severity of the finding.
     #
+    # The finding provider can provide the initial severity, but cannot
+    # update it after that. The severity can only be updated by a master
+    # account. It cannot be updated by a member account.
+    #
+    # The finding must have either `Label` or `Normalized` populated. If
+    # only one of these attributes is populated, then Security Hub
+    # automatically populates the other one. If neither attribute is
+    # populated, then the finding is invalid. `Label` is the preferred
+    # attribute.
+    #
     # @note When making an API call, you may pass Severity
     #   data as a hash:
     #
@@ -10510,14 +10537,9 @@ module Aws::SecurityHub
     #
     #   * `CRITICAL` - The issue must be remediated immediately to avoid it
     #     escalating.
-    #   @return [String]
     #
-    # @!attribute [rw] normalized
-    #   Deprecated. This attribute is being deprecated. Instead of providing
-    #   `Normalized`, provide `Label`.
-    #
-    #   If you provide `Normalized` and do not provide `Label`, `Label` is
-    #   set automatically as follows.
+    #   If you provide `Normalized` and do not provide `Label`, then `Label`
+    #   is set automatically as follows.
     #
     #   * 0 - `INFORMATIONAL`
     #
@@ -10528,6 +10550,25 @@ module Aws::SecurityHub
     #   * 70–89 - `HIGH`
     #
     #   * 90–100 - `CRITICAL`
+    #   @return [String]
+    #
+    # @!attribute [rw] normalized
+    #   Deprecated. The normalized severity of a finding. This attribute is
+    #   being deprecated. Instead of providing `Normalized`, provide
+    #   `Label`.
+    #
+    #   If you provide `Label` and do not provide `Normalized`, then
+    #   `Normalized` is set automatically as follows.
+    #
+    #   * `INFORMATIONAL` - 0
+    #
+    #   * `LOW` - 1
+    #
+    #   * `MEDIUM` - 40
+    #
+    #   * `HIGH` - 70
+    #
+    #   * `CRITICAL` - 90
     #   @return [Integer]
     #
     # @!attribute [rw] original
@@ -12239,6 +12280,34 @@ module Aws::SecurityHub
     # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/UpdateInsightResponse AWS API Documentation
     #
     class UpdateInsightResponse < Aws::EmptyStructure; end
+
+    # @note When making an API call, you may pass UpdateSecurityHubConfigurationRequest
+    #   data as a hash:
+    #
+    #       {
+    #         auto_enable_controls: false,
+    #       }
+    #
+    # @!attribute [rw] auto_enable_controls
+    #   Whether to automatically enable new controls when they are added to
+    #   standards that are enabled.
+    #
+    #   By default, this is set to `true`, and new controls are enabled
+    #   automatically. To not automatically enable new controls, set this to
+    #   `false`.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/UpdateSecurityHubConfigurationRequest AWS API Documentation
+    #
+    class UpdateSecurityHubConfigurationRequest < Struct.new(
+      :auto_enable_controls)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/UpdateSecurityHubConfigurationResponse AWS API Documentation
+    #
+    class UpdateSecurityHubConfigurationResponse < Aws::EmptyStructure; end
 
     # @note When making an API call, you may pass UpdateStandardsControlRequest
     #   data as a hash:

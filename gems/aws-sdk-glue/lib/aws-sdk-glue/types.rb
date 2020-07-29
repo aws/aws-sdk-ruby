@@ -1452,10 +1452,8 @@ module Aws::Glue
     #   @return [String]
     #
     # @!attribute [rw] state
-    #   The condition state. Currently, the only job states that a trigger
-    #   can listen for are `SUCCEEDED`, `STOPPED`, `FAILED`, and `TIMEOUT`.
-    #   The only crawler states that a trigger can listen for are
-    #   `SUCCEEDED`, `FAILED`, and `CANCELLED`.
+    #   The condition state. Currently, the values supported are
+    #   `SUCCEEDED`, `STOPPED`, `TIMEOUT`, and `FAILED`.
     #   @return [String]
     #
     # @!attribute [rw] crawler_name
@@ -2970,8 +2968,9 @@ module Aws::Glue
     #     0.0625 or 1 DPU. The default is 0.0625 DPU.
     #
     #   * When you specify an Apache Spark ETL job
-    #     (`JobCommand.Name`="glueetl"), you can allocate from 2 to 100
-    #     DPUs. The default is 10 DPUs. This job type cannot have a
+    #     (`JobCommand.Name`="glueetl") or Apache Spark streaming ETL job
+    #     (`JobCommand.Name`="gluestreaming"), you can allocate from 2 to
+    #     100 DPUs. The default is 10 DPUs. This job type cannot have a
     #     fractional DPU allocation.
     #
     #
@@ -5203,7 +5202,7 @@ module Aws::Glue
     end
 
     # An edge represents a directed connection between two AWS Glue
-    # components which are part of the workflow the edge belongs to.
+    # components that are part of the workflow the edge belongs to.
     #
     # @!attribute [rw] source_id
     #   The unique of the node within the workflow where the edge starts.
@@ -8448,15 +8447,17 @@ module Aws::Glue
     #   `NumberOfWorkers`.
     #
     #   The value that can be allocated for `MaxCapacity` depends on whether
-    #   you are running a Python shell job or an Apache Spark ETL job:
+    #   you are running a Python shell job, an Apache Spark ETL job, or an
+    #   Apache Spark streaming ETL job:
     #
     #   * When you specify a Python shell job
     #     (`JobCommand.Name`="pythonshell"), you can allocate either
     #     0.0625 or 1 DPU. The default is 0.0625 DPU.
     #
     #   * When you specify an Apache Spark ETL job
-    #     (`JobCommand.Name`="glueetl"), you can allocate from 2 to 100
-    #     DPUs. The default is 10 DPUs. This job type cannot have a
+    #     (`JobCommand.Name`="glueetl") or Apache Spark streaming ETL job
+    #     (`JobCommand.Name`="gluestreaming"), you can allocate from 2 to
+    #     100 DPUs. The default is 10 DPUs. This job type cannot have a
     #     fractional DPU allocation.
     #
     #
@@ -8626,7 +8627,8 @@ module Aws::Glue
     #
     # @!attribute [rw] name
     #   The name of the job command. For an Apache Spark ETL job, this must
-    #   be `glueetl`. For a Python shell job, it must be `pythonshell`.
+    #   be `glueetl`. For a Python shell job, it must be `pythonshell`. For
+    #   an Apache Spark streaming ETL job, this must be `gluestreaming`.
     #   @return [String]
     #
     # @!attribute [rw] script_location
@@ -8699,13 +8701,7 @@ module Aws::Glue
     #   @return [Time]
     #
     # @!attribute [rw] job_run_state
-    #   The current state of the job run. For more information about the
-    #   statuses of jobs that have terminated abnormally, see [AWS Glue Job
-    #   Run Statuses][1].
-    #
-    #
-    #
-    #   [1]: https://docs.aws.amazon.com/glue/latest/dg/job-run-statuses.html
+    #   The current state of the job run.
     #   @return [String]
     #
     # @!attribute [rw] arguments
@@ -9009,8 +9005,9 @@ module Aws::Glue
     #     0.0625 or 1 DPU. The default is 0.0625 DPU.
     #
     #   * When you specify an Apache Spark ETL job
-    #     (`JobCommand.Name`="glueetl"), you can allocate from 2 to 100
-    #     DPUs. The default is 10 DPUs. This job type cannot have a
+    #     (`JobCommand.Name`="glueetl") or Apache Spark streaming ETL job
+    #     (`JobCommand.Name`="gluestreaming"), you can allocate from 2 to
+    #     100 DPUs. The default is 10 DPUs. This job type cannot have a
     #     fractional DPU allocation.
     #
     #
@@ -9886,8 +9883,8 @@ module Aws::Glue
       include Aws::Structure
     end
 
-    # A node represents an AWS Glue component like Trigger, Job etc. which
-    # is part of a workflow.
+    # A node represents an AWS Glue component such as a trigger, or job,
+    # etc., that is part of a workflow.
     #
     # @!attribute [rw] type
     #   The type of AWS Glue component represented by the node.
@@ -10563,6 +10560,57 @@ module Aws::Glue
     class ResourceUri < Struct.new(
       :resource_type,
       :uri)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass ResumeWorkflowRunRequest
+    #   data as a hash:
+    #
+    #       {
+    #         name: "NameString", # required
+    #         run_id: "IdString", # required
+    #         node_ids: ["NameString"], # required
+    #       }
+    #
+    # @!attribute [rw] name
+    #   The name of the workflow to resume.
+    #   @return [String]
+    #
+    # @!attribute [rw] run_id
+    #   The ID of the workflow run to resume.
+    #   @return [String]
+    #
+    # @!attribute [rw] node_ids
+    #   A list of the node IDs for the nodes you want to restart. The nodes
+    #   that are to be restarted must have an execution attempt in the
+    #   original run.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/ResumeWorkflowRunRequest AWS API Documentation
+    #
+    class ResumeWorkflowRunRequest < Struct.new(
+      :name,
+      :run_id,
+      :node_ids)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] run_id
+    #   The new ID assigned to the resumed workflow run. Each resume of a
+    #   workflow run will have a new run ID.
+    #   @return [String]
+    #
+    # @!attribute [rw] node_ids
+    #   A list of the node IDs for the nodes that were actually restarted.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/ResumeWorkflowRunResponse AWS API Documentation
+    #
+    class ResumeWorkflowRunResponse < Struct.new(
+      :run_id,
+      :node_ids)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -14226,11 +14274,15 @@ module Aws::Glue
     # information.
     #
     # @!attribute [rw] name
-    #   Name of the workflow which was executed.
+    #   Name of the workflow that was executed.
     #   @return [String]
     #
     # @!attribute [rw] workflow_run_id
     #   The ID of this workflow run.
+    #   @return [String]
+    #
+    # @!attribute [rw] previous_run_id
+    #   The ID of the previous workflow run.
     #   @return [String]
     #
     # @!attribute [rw] workflow_run_properties
@@ -14264,6 +14316,7 @@ module Aws::Glue
     class WorkflowRun < Struct.new(
       :name,
       :workflow_run_id,
+      :previous_run_id,
       :workflow_run_properties,
       :started_on,
       :completed_on,
@@ -14281,19 +14334,19 @@ module Aws::Glue
     #   @return [Integer]
     #
     # @!attribute [rw] timeout_actions
-    #   Total number of Actions which timed out.
+    #   Total number of Actions that timed out.
     #   @return [Integer]
     #
     # @!attribute [rw] failed_actions
-    #   Total number of Actions which have failed.
+    #   Total number of Actions that have failed.
     #   @return [Integer]
     #
     # @!attribute [rw] stopped_actions
-    #   Total number of Actions which have stopped.
+    #   Total number of Actions that have stopped.
     #   @return [Integer]
     #
     # @!attribute [rw] succeeded_actions
-    #   Total number of Actions which have succeeded.
+    #   Total number of Actions that have succeeded.
     #   @return [Integer]
     #
     # @!attribute [rw] running_actions

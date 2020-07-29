@@ -160,6 +160,39 @@ module Aws::DatabaseMigrationService
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass CancelReplicationTaskAssessmentRunMessage
+    #   data as a hash:
+    #
+    #       {
+    #         replication_task_assessment_run_arn: "String", # required
+    #       }
+    #
+    # @!attribute [rw] replication_task_assessment_run_arn
+    #   Amazon Resource Name (ARN) of the premigration assessment run to be
+    #   canceled.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/CancelReplicationTaskAssessmentRunMessage AWS API Documentation
+    #
+    class CancelReplicationTaskAssessmentRunMessage < Struct.new(
+      :replication_task_assessment_run_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] replication_task_assessment_run
+    #   The `ReplicationTaskAssessmentRun` object for the canceled
+    #   assessment run.
+    #   @return [Types::ReplicationTaskAssessmentRun]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/CancelReplicationTaskAssessmentRunResponse AWS API Documentation
+    #
+    class CancelReplicationTaskAssessmentRunResponse < Struct.new(
+      :replication_task_assessment_run)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The SSL certificate that can be used to encrypt connections between
     # the endpoints and the replication instance.
     #
@@ -358,6 +391,12 @@ module Aws::DatabaseMigrationService
     #         kafka_settings: {
     #           broker: "String",
     #           topic: "String",
+    #           message_format: "json", # accepts json, json-unformatted
+    #           include_transaction_details: false,
+    #           include_partition_value: false,
+    #           partition_include_schema_table: false,
+    #           include_table_alter_operations: false,
+    #           include_control_details: false,
     #         },
     #         elasticsearch_settings: {
     #           service_access_role_arn: "String", # required
@@ -400,6 +439,53 @@ module Aws::DatabaseMigrationService
     #           truncate_columns: false,
     #           username: "String",
     #           write_buffer_size: 1,
+    #         },
+    #         postgre_sql_settings: {
+    #           database_name: "String",
+    #           password: "SecretString",
+    #           port: 1,
+    #           server_name: "String",
+    #           username: "String",
+    #         },
+    #         my_sql_settings: {
+    #           database_name: "String",
+    #           password: "SecretString",
+    #           port: 1,
+    #           server_name: "String",
+    #           username: "String",
+    #         },
+    #         oracle_settings: {
+    #           asm_password: "SecretString",
+    #           asm_server: "String",
+    #           asm_user: "String",
+    #           database_name: "String",
+    #           password: "SecretString",
+    #           port: 1,
+    #           security_db_encryption: "SecretString",
+    #           security_db_encryption_name: "String",
+    #           server_name: "String",
+    #           username: "String",
+    #         },
+    #         sybase_settings: {
+    #           database_name: "String",
+    #           password: "SecretString",
+    #           port: 1,
+    #           server_name: "String",
+    #           username: "String",
+    #         },
+    #         microsoft_sql_server_settings: {
+    #           port: 1,
+    #           database_name: "String",
+    #           password: "SecretString",
+    #           server_name: "String",
+    #           username: "String",
+    #         },
+    #         ibm_db_2_settings: {
+    #           database_name: "String",
+    #           password: "SecretString",
+    #           port: 1,
+    #           server_name: "String",
+    #           username: "String",
     #         },
     #       }
     #
@@ -595,6 +681,85 @@ module Aws::DatabaseMigrationService
     #   Provides information that defines an Amazon Redshift endpoint.
     #   @return [Types::RedshiftSettings]
     #
+    # @!attribute [rw] postgre_sql_settings
+    #   Settings in JSON format for the source and target PostgreSQL
+    #   endpoint. For information about other available settings, see [Extra
+    #   connection attributes when using PostgreSQL as a source for AWS
+    #   DMS][1] and [ Extra connection attributes when using PostgreSQL as a
+    #   target for AWS DMS][2] in the *AWS Database Migration Service User
+    #   Guide.*
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Source.PostgreSQL.ConnectionAttrib
+    #   [2]: https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Target.PostgreSQL.ConnectionAttrib
+    #   @return [Types::PostgreSQLSettings]
+    #
+    # @!attribute [rw] my_sql_settings
+    #   Settings in JSON format for the source and target MySQL endpoint.
+    #   For information about other available settings, see [Extra
+    #   connection attributes when using MySQL as a source for AWS DMS][1]
+    #   and [Extra connection attributes when using a MySQL-compatible
+    #   database as a target for AWS DMS][2] in the *AWS Database Migration
+    #   Service User Guide.*
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Source.MySQL.ConnectionAttrib
+    #   [2]: https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Target.MySQL.ConnectionAttrib
+    #   @return [Types::MySQLSettings]
+    #
+    # @!attribute [rw] oracle_settings
+    #   Settings in JSON format for the source and target Oracle endpoint.
+    #   For information about other available settings, see [Extra
+    #   connection attributes when using Oracle as a source for AWS DMS][1]
+    #   and [ Extra connection attributes when using Oracle as a target for
+    #   AWS DMS][2] in the *AWS Database Migration Service User Guide.*
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Source.Oracle.ConnectionAttrib
+    #   [2]: https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Target.Oracle.ConnectionAttrib
+    #   @return [Types::OracleSettings]
+    #
+    # @!attribute [rw] sybase_settings
+    #   Settings in JSON format for the source and target SAP ASE endpoint.
+    #   For information about other available settings, see [Extra
+    #   connection attributes when using SAP ASE as a source for AWS DMS][1]
+    #   and [Extra connection attributes when using SAP ASE as a target for
+    #   AWS DMS][2] in the *AWS Database Migration Service User Guide.*
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Source.SAP.ConnectionAttrib
+    #   [2]: https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Target.SAP.ConnectionAttrib
+    #   @return [Types::SybaseSettings]
+    #
+    # @!attribute [rw] microsoft_sql_server_settings
+    #   Settings in JSON format for the source and target Microsoft SQL
+    #   Server endpoint. For information about other available settings, see
+    #   [Extra connection attributes when using SQL Server as a source for
+    #   AWS DMS][1] and [ Extra connection attributes when using SQL Server
+    #   as a target for AWS DMS][2] in the *AWS Database Migration Service
+    #   User Guide.*
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Source.SQLServer.ConnectionAttrib
+    #   [2]: https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Target.SQLServer.ConnectionAttrib
+    #   @return [Types::MicrosoftSQLServerSettings]
+    #
+    # @!attribute [rw] ibm_db_2_settings
+    #   Settings in JSON format for the source IBM Db2 LUW endpoint. For
+    #   information about other available settings, see [Extra connection
+    #   attributes when using Db2 LUW as a source for AWS DMS][1] in the
+    #   *AWS Database Migration Service User Guide.*
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Source.DB2.ConnectionAttrib
+    #   @return [Types::IBMDb2Settings]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/CreateEndpointMessage AWS API Documentation
     #
     class CreateEndpointMessage < Struct.new(
@@ -621,7 +786,13 @@ module Aws::DatabaseMigrationService
       :kafka_settings,
       :elasticsearch_settings,
       :neptune_settings,
-      :redshift_settings)
+      :redshift_settings,
+      :postgre_sql_settings,
+      :my_sql_settings,
+      :oracle_settings,
+      :sybase_settings,
+      :microsoft_sql_server_settings,
+      :ibm_db_2_settings)
       SENSITIVE = [:password]
       include Aws::Structure
     end
@@ -1323,6 +1494,39 @@ module Aws::DatabaseMigrationService
     #
     class DeleteReplicationSubnetGroupResponse < Aws::EmptyStructure; end
 
+    # @note When making an API call, you may pass DeleteReplicationTaskAssessmentRunMessage
+    #   data as a hash:
+    #
+    #       {
+    #         replication_task_assessment_run_arn: "String", # required
+    #       }
+    #
+    # @!attribute [rw] replication_task_assessment_run_arn
+    #   Amazon Resource Name (ARN) of the premigration assessment run to be
+    #   deleted.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/DeleteReplicationTaskAssessmentRunMessage AWS API Documentation
+    #
+    class DeleteReplicationTaskAssessmentRunMessage < Struct.new(
+      :replication_task_assessment_run_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] replication_task_assessment_run
+    #   The `ReplicationTaskAssessmentRun` object for the deleted assessment
+    #   run.
+    #   @return [Types::ReplicationTaskAssessmentRun]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/DeleteReplicationTaskAssessmentRunResponse AWS API Documentation
+    #
+    class DeleteReplicationTaskAssessmentRunResponse < Struct.new(
+      :replication_task_assessment_run)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass DeleteReplicationTaskMessage
     #   data as a hash:
     #
@@ -1390,6 +1594,100 @@ module Aws::DatabaseMigrationService
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass DescribeApplicableIndividualAssessmentsMessage
+    #   data as a hash:
+    #
+    #       {
+    #         replication_task_arn: "String",
+    #         replication_instance_arn: "String",
+    #         source_engine_name: "String",
+    #         target_engine_name: "String",
+    #         migration_type: "full-load", # accepts full-load, cdc, full-load-and-cdc
+    #         max_records: 1,
+    #         marker: "String",
+    #       }
+    #
+    # @!attribute [rw] replication_task_arn
+    #   Amazon Resource Name (ARN) of a migration task on which you want to
+    #   base the default list of individual assessments.
+    #   @return [String]
+    #
+    # @!attribute [rw] replication_instance_arn
+    #   ARN of a replication instance on which you want to base the default
+    #   list of individual assessments.
+    #   @return [String]
+    #
+    # @!attribute [rw] source_engine_name
+    #   Name of a database engine that the specified replication instance
+    #   supports as a source.
+    #   @return [String]
+    #
+    # @!attribute [rw] target_engine_name
+    #   Name of a database engine that the specified replication instance
+    #   supports as a target.
+    #   @return [String]
+    #
+    # @!attribute [rw] migration_type
+    #   Name of the migration type that each provided individual assessment
+    #   must support.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_records
+    #   Maximum number of records to include in the response. If more
+    #   records exist than the specified `MaxRecords` value, a pagination
+    #   token called a marker is included in the response so that the
+    #   remaining results can be retrieved.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] marker
+    #   Optional pagination token provided by a previous request. If this
+    #   parameter is specified, the response includes only records beyond
+    #   the marker, up to the value specified by `MaxRecords`.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/DescribeApplicableIndividualAssessmentsMessage AWS API Documentation
+    #
+    class DescribeApplicableIndividualAssessmentsMessage < Struct.new(
+      :replication_task_arn,
+      :replication_instance_arn,
+      :source_engine_name,
+      :target_engine_name,
+      :migration_type,
+      :max_records,
+      :marker)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] individual_assessment_names
+    #   List of names for the individual assessments supported by the
+    #   premigration assessment run that you start based on the specified
+    #   request parameters. For more information on the available individual
+    #   assessments, including compatibility with different migration task
+    #   configurations, see [Working with premigration assessment runs][1]
+    #   in the *AWS Database Migration Service User Guide.*
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Tasks.AssessmentReport.html
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] marker
+    #   Pagination token returned for you to pass to a subsequent request.
+    #   If you pass this token as the `Marker` value in a subsequent
+    #   request, the response includes only records beyond the marker, up to
+    #   the value specified in the request by `MaxRecords`.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/DescribeApplicableIndividualAssessmentsResponse AWS API Documentation
+    #
+    class DescribeApplicableIndividualAssessmentsResponse < Struct.new(
+      :individual_assessment_names,
+      :marker)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass DescribeCertificatesMessage
     #   data as a hash:
     #
@@ -1405,7 +1703,7 @@ module Aws::DatabaseMigrationService
     #       }
     #
     # @!attribute [rw] filters
-    #   Filters applied to the certificate described in the form of
+    #   Filters applied to the certificates described in the form of
     #   key-value pairs.
     #   @return [Array<Types::Filter>]
     #
@@ -1533,7 +1831,7 @@ module Aws::DatabaseMigrationService
     #       }
     #
     # @!attribute [rw] filters
-    #   Filters applied to the describe action.
+    #   Filters applied to the endpoint types.
     #
     #   Valid filter names: engine-name \| endpoint-type
     #   @return [Array<Types::Filter>]
@@ -1599,7 +1897,7 @@ module Aws::DatabaseMigrationService
     #       }
     #
     # @!attribute [rw] filters
-    #   Filters applied to the describe action.
+    #   Filters applied to the endpoints.
     #
     #   Valid filter names: endpoint-arn \| endpoint-type \| endpoint-id \|
     #   engine-name
@@ -1671,7 +1969,7 @@ module Aws::DatabaseMigrationService
     #   @return [String]
     #
     # @!attribute [rw] filters
-    #   Filters applied to the action.
+    #   Filters applied to the event categories.
     #   @return [Array<Types::Filter>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/DescribeEventCategoriesMessage AWS API Documentation
@@ -1715,7 +2013,7 @@ module Aws::DatabaseMigrationService
     #   @return [String]
     #
     # @!attribute [rw] filters
-    #   Filters applied to the action.
+    #   Filters applied to event subscriptions.
     #   @return [Array<Types::Filter>]
     #
     # @!attribute [rw] max_records
@@ -1812,7 +2110,7 @@ module Aws::DatabaseMigrationService
     #   @return [Array<String>]
     #
     # @!attribute [rw] filters
-    #   Filters applied to the action.
+    #   Filters applied to events.
     #   @return [Array<Types::Filter>]
     #
     # @!attribute [rw] max_records
@@ -2102,7 +2400,7 @@ module Aws::DatabaseMigrationService
     #       }
     #
     # @!attribute [rw] filters
-    #   Filters applied to the describe action.
+    #   Filters applied to replication instances.
     #
     #   Valid filter names: replication-instance-arn \|
     #   replication-instance-id \| replication-instance-class \|
@@ -2170,7 +2468,7 @@ module Aws::DatabaseMigrationService
     #       }
     #
     # @!attribute [rw] filters
-    #   Filters applied to the describe action.
+    #   Filters applied to replication subnet groups.
     #
     #   Valid filter names: replication-subnet-group-id
     #   @return [Array<Types::Filter>]
@@ -2288,6 +2586,136 @@ module Aws::DatabaseMigrationService
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass DescribeReplicationTaskAssessmentRunsMessage
+    #   data as a hash:
+    #
+    #       {
+    #         filters: [
+    #           {
+    #             name: "String", # required
+    #             values: ["String"], # required
+    #           },
+    #         ],
+    #         max_records: 1,
+    #         marker: "String",
+    #       }
+    #
+    # @!attribute [rw] filters
+    #   Filters applied to the premigration assessment runs described in the
+    #   form of key-value pairs.
+    #
+    #   Valid filter names: `replication-task-assessment-run-arn`,
+    #   `replication-task-arn`, `replication-instance-arn`, `status`
+    #   @return [Array<Types::Filter>]
+    #
+    # @!attribute [rw] max_records
+    #   The maximum number of records to include in the response. If more
+    #   records exist than the specified `MaxRecords` value, a pagination
+    #   token called a marker is included in the response so that the
+    #   remaining results can be retrieved.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] marker
+    #   An optional pagination token provided by a previous request. If this
+    #   parameter is specified, the response includes only records beyond
+    #   the marker, up to the value specified by `MaxRecords`.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/DescribeReplicationTaskAssessmentRunsMessage AWS API Documentation
+    #
+    class DescribeReplicationTaskAssessmentRunsMessage < Struct.new(
+      :filters,
+      :max_records,
+      :marker)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] marker
+    #   A pagination token returned for you to pass to a subsequent request.
+    #   If you pass this token as the `Marker` value in a subsequent
+    #   request, the response includes only records beyond the marker, up to
+    #   the value specified in the request by `MaxRecords`.
+    #   @return [String]
+    #
+    # @!attribute [rw] replication_task_assessment_runs
+    #   One or more premigration assessment runs as specified by `Filters`.
+    #   @return [Array<Types::ReplicationTaskAssessmentRun>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/DescribeReplicationTaskAssessmentRunsResponse AWS API Documentation
+    #
+    class DescribeReplicationTaskAssessmentRunsResponse < Struct.new(
+      :marker,
+      :replication_task_assessment_runs)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass DescribeReplicationTaskIndividualAssessmentsMessage
+    #   data as a hash:
+    #
+    #       {
+    #         filters: [
+    #           {
+    #             name: "String", # required
+    #             values: ["String"], # required
+    #           },
+    #         ],
+    #         max_records: 1,
+    #         marker: "String",
+    #       }
+    #
+    # @!attribute [rw] filters
+    #   Filters applied to the individual assessments described in the form
+    #   of key-value pairs.
+    #
+    #   Valid filter names: `replication-task-assessment-run-arn`,
+    #   `replication-task-arn`, `status`
+    #   @return [Array<Types::Filter>]
+    #
+    # @!attribute [rw] max_records
+    #   The maximum number of records to include in the response. If more
+    #   records exist than the specified `MaxRecords` value, a pagination
+    #   token called a marker is included in the response so that the
+    #   remaining results can be retrieved.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] marker
+    #   An optional pagination token provided by a previous request. If this
+    #   parameter is specified, the response includes only records beyond
+    #   the marker, up to the value specified by `MaxRecords`.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/DescribeReplicationTaskIndividualAssessmentsMessage AWS API Documentation
+    #
+    class DescribeReplicationTaskIndividualAssessmentsMessage < Struct.new(
+      :filters,
+      :max_records,
+      :marker)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] marker
+    #   A pagination token returned for you to pass to a subsequent request.
+    #   If you pass this token as the `Marker` value in a subsequent
+    #   request, the response includes only records beyond the marker, up to
+    #   the value specified in the request by `MaxRecords`.
+    #   @return [String]
+    #
+    # @!attribute [rw] replication_task_individual_assessments
+    #   One or more individual assessments as specified by `Filters`.
+    #   @return [Array<Types::ReplicationTaskIndividualAssessment>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/DescribeReplicationTaskIndividualAssessmentsResponse AWS API Documentation
+    #
+    class DescribeReplicationTaskIndividualAssessmentsResponse < Struct.new(
+      :marker,
+      :replication_task_individual_assessments)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass DescribeReplicationTasksMessage
     #   data as a hash:
     #
@@ -2304,7 +2732,7 @@ module Aws::DatabaseMigrationService
     #       }
     #
     # @!attribute [rw] filters
-    #   Filters applied to the describe action.
+    #   Filters applied to replication tasks.
     #
     #   Valid filter names: replication-task-arn \| replication-task-id \|
     #   migration-type \| endpoint-arn \| replication-instance-arn
@@ -2461,7 +2889,7 @@ module Aws::DatabaseMigrationService
     #   @return [String]
     #
     # @!attribute [rw] filters
-    #   Filters applied to the describe table statistics action.
+    #   Filters applied to table statistics.
     #
     #   Valid filter names: schema-name \| table-name \| table-state
     #
@@ -2698,7 +3126,7 @@ module Aws::DatabaseMigrationService
     #   @return [String]
     #
     # @!attribute [rw] dynamo_db_settings
-    #   The settings for the target DynamoDB database. For more information,
+    #   The settings for the DynamoDB target endpoint. For more information,
     #   see the `DynamoDBSettings` structure.
     #   @return [Types::DynamoDbSettings]
     #
@@ -2759,6 +3187,37 @@ module Aws::DatabaseMigrationService
     #   Settings for the Amazon Redshift endpoint.
     #   @return [Types::RedshiftSettings]
     #
+    # @!attribute [rw] postgre_sql_settings
+    #   The settings for the PostgreSQL source and target endpoint. For more
+    #   information, see the `PostgreSQLSettings` structure.
+    #   @return [Types::PostgreSQLSettings]
+    #
+    # @!attribute [rw] my_sql_settings
+    #   The settings for the MySQL source and target endpoint. For more
+    #   information, see the `MySQLSettings` structure.
+    #   @return [Types::MySQLSettings]
+    #
+    # @!attribute [rw] oracle_settings
+    #   The settings for the Oracle source and target endpoint. For more
+    #   information, see the `OracleSettings` structure.
+    #   @return [Types::OracleSettings]
+    #
+    # @!attribute [rw] sybase_settings
+    #   The settings for the SAP ASE source and target endpoint. For more
+    #   information, see the `SybaseSettings` structure.
+    #   @return [Types::SybaseSettings]
+    #
+    # @!attribute [rw] microsoft_sql_server_settings
+    #   The settings for the Microsoft SQL Server source and target
+    #   endpoint. For more information, see the `MicrosoftSQLServerSettings`
+    #   structure.
+    #   @return [Types::MicrosoftSQLServerSettings]
+    #
+    # @!attribute [rw] ibm_db_2_settings
+    #   The settings for the IBM Db2 LUW source endpoint. For more
+    #   information, see the `IBMDb2Settings` structure.
+    #   @return [Types::IBMDb2Settings]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/Endpoint AWS API Documentation
     #
     class Endpoint < Struct.new(
@@ -2787,7 +3246,13 @@ module Aws::DatabaseMigrationService
       :kafka_settings,
       :elasticsearch_settings,
       :neptune_settings,
-      :redshift_settings)
+      :redshift_settings,
+      :postgre_sql_settings,
+      :my_sql_settings,
+      :oracle_settings,
+      :sybase_settings,
+      :microsoft_sql_server_settings,
+      :ibm_db_2_settings)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2923,9 +3388,9 @@ module Aws::DatabaseMigrationService
       include Aws::Structure
     end
 
-    # Identifies the name and value of a source filter object used to limit
-    # the number and type of records transferred from your source to your
-    # target.
+    # Identifies the name and value of a filter object. This filter is used
+    # to limit the number and type of AWS DMS objects that are returned for
+    # a particular `Describe*` or similar operation.
     #
     # @note When making an API call, you may pass Filter
     #   data as a hash:
@@ -2936,11 +3401,13 @@ module Aws::DatabaseMigrationService
     #       }
     #
     # @!attribute [rw] name
-    #   The name of the filter.
+    #   The name of the filter as specified for a `Describe*` or similar
+    #   operation.
     #   @return [String]
     #
     # @!attribute [rw] values
-    #   The filter value.
+    #   The filter value, which can specify one or more values used to
+    #   narrow the returned results.
     #   @return [Array<String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/Filter AWS API Documentation
@@ -2949,6 +3416,51 @@ module Aws::DatabaseMigrationService
       :name,
       :values)
       SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Provides information that defines an IBM Db2 LUW endpoint.
+    #
+    # @note When making an API call, you may pass IBMDb2Settings
+    #   data as a hash:
+    #
+    #       {
+    #         database_name: "String",
+    #         password: "SecretString",
+    #         port: 1,
+    #         server_name: "String",
+    #         username: "String",
+    #       }
+    #
+    # @!attribute [rw] database_name
+    #   Database name for the endpoint.
+    #   @return [String]
+    #
+    # @!attribute [rw] password
+    #   Endpoint connection password.
+    #   @return [String]
+    #
+    # @!attribute [rw] port
+    #   Endpoint TCP port.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] server_name
+    #   Fully qualified domain name of the endpoint.
+    #   @return [String]
+    #
+    # @!attribute [rw] username
+    #   Endpoint connection user name.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/IBMDb2Settings AWS API Documentation
+    #
+    class IBMDb2Settings < Struct.new(
+      :database_name,
+      :password,
+      :port,
+      :server_name,
+      :username)
+      SENSITIVE = [:password]
       include Aws::Structure
     end
 
@@ -3090,6 +3602,20 @@ module Aws::DatabaseMigrationService
       include Aws::Structure
     end
 
+    # An AWS Key Management Service (AWS KMS) error is preventing access to
+    # AWS KMS.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/KMSFault AWS API Documentation
+    #
+    class KMSFault < Struct.new(
+      :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The state of the specified AWS KMS resource isn't valid for this
     # request.
     #
@@ -3154,6 +3680,12 @@ module Aws::DatabaseMigrationService
     #       {
     #         broker: "String",
     #         topic: "String",
+    #         message_format: "json", # accepts json, json-unformatted
+    #         include_transaction_details: false,
+    #         include_partition_value: false,
+    #         partition_include_schema_table: false,
+    #         include_table_alter_operations: false,
+    #         include_control_details: false,
     #       }
     #
     # @!attribute [rw] broker
@@ -3169,11 +3701,59 @@ module Aws::DatabaseMigrationService
     #   topic.
     #   @return [String]
     #
+    # @!attribute [rw] message_format
+    #   The output format for the records created on the endpoint. The
+    #   message format is `JSON` (default) or `JSON_UNFORMATTED` (a single
+    #   line with no tab).
+    #   @return [String]
+    #
+    # @!attribute [rw] include_transaction_details
+    #   Provides detailed transaction information from the source database.
+    #   This information includes a commit timestamp, a log position, and
+    #   values for `transaction_id`, previous `transaction_id`, and
+    #   `transaction_record_id` (the record offset within a transaction).
+    #   The default is `False`.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] include_partition_value
+    #   Shows the partition value within the Kafka message output, unless
+    #   the partition type is `schema-table-type`. The default is `False`.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] partition_include_schema_table
+    #   Prefixes schema and table names to partition values, when the
+    #   partition type is `primary-key-type`. Doing this increases data
+    #   distribution among Kafka partitions. For example, suppose that a
+    #   SysBench schema has thousands of tables and each table has only
+    #   limited range for a primary key. In this case, the same primary key
+    #   is sent from thousands of tables to the same partition, which causes
+    #   throttling. The default is `False`.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] include_table_alter_operations
+    #   Includes any data definition language (DDL) operations that change
+    #   the table in the control data, such as `rename-table`, `drop-table`,
+    #   `add-column`, `drop-column`, and `rename-column`. The default is
+    #   `False`.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] include_control_details
+    #   Shows detailed control information for table definition, column
+    #   definition, and table and column changes in the Kafka message
+    #   output. The default is `False`.
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/KafkaSettings AWS API Documentation
     #
     class KafkaSettings < Struct.new(
       :broker,
-      :topic)
+      :topic,
+      :message_format,
+      :include_transaction_details,
+      :include_partition_value,
+      :partition_include_schema_table,
+      :include_table_alter_operations,
+      :include_control_details)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3297,6 +3877,51 @@ module Aws::DatabaseMigrationService
       include Aws::Structure
     end
 
+    # Provides information that defines a Microsoft SQL Server endpoint.
+    #
+    # @note When making an API call, you may pass MicrosoftSQLServerSettings
+    #   data as a hash:
+    #
+    #       {
+    #         port: 1,
+    #         database_name: "String",
+    #         password: "SecretString",
+    #         server_name: "String",
+    #         username: "String",
+    #       }
+    #
+    # @!attribute [rw] port
+    #   Endpoint TCP port.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] database_name
+    #   Database name for the endpoint.
+    #   @return [String]
+    #
+    # @!attribute [rw] password
+    #   Endpoint connection password.
+    #   @return [String]
+    #
+    # @!attribute [rw] server_name
+    #   Fully qualified domain name of the endpoint.
+    #   @return [String]
+    #
+    # @!attribute [rw] username
+    #   Endpoint connection user name.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/MicrosoftSQLServerSettings AWS API Documentation
+    #
+    class MicrosoftSQLServerSettings < Struct.new(
+      :port,
+      :database_name,
+      :password,
+      :server_name,
+      :username)
+      SENSITIVE = [:password]
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass ModifyEndpointMessage
     #   data as a hash:
     #
@@ -3372,6 +3997,12 @@ module Aws::DatabaseMigrationService
     #         kafka_settings: {
     #           broker: "String",
     #           topic: "String",
+    #           message_format: "json", # accepts json, json-unformatted
+    #           include_transaction_details: false,
+    #           include_partition_value: false,
+    #           partition_include_schema_table: false,
+    #           include_table_alter_operations: false,
+    #           include_control_details: false,
     #         },
     #         elasticsearch_settings: {
     #           service_access_role_arn: "String", # required
@@ -3414,6 +4045,53 @@ module Aws::DatabaseMigrationService
     #           truncate_columns: false,
     #           username: "String",
     #           write_buffer_size: 1,
+    #         },
+    #         postgre_sql_settings: {
+    #           database_name: "String",
+    #           password: "SecretString",
+    #           port: 1,
+    #           server_name: "String",
+    #           username: "String",
+    #         },
+    #         my_sql_settings: {
+    #           database_name: "String",
+    #           password: "SecretString",
+    #           port: 1,
+    #           server_name: "String",
+    #           username: "String",
+    #         },
+    #         oracle_settings: {
+    #           asm_password: "SecretString",
+    #           asm_server: "String",
+    #           asm_user: "String",
+    #           database_name: "String",
+    #           password: "SecretString",
+    #           port: 1,
+    #           security_db_encryption: "SecretString",
+    #           security_db_encryption_name: "String",
+    #           server_name: "String",
+    #           username: "String",
+    #         },
+    #         sybase_settings: {
+    #           database_name: "String",
+    #           password: "SecretString",
+    #           port: 1,
+    #           server_name: "String",
+    #           username: "String",
+    #         },
+    #         microsoft_sql_server_settings: {
+    #           port: 1,
+    #           database_name: "String",
+    #           password: "SecretString",
+    #           server_name: "String",
+    #           username: "String",
+    #         },
+    #         ibm_db_2_settings: {
+    #           database_name: "String",
+    #           password: "SecretString",
+    #           port: 1,
+    #           server_name: "String",
+    #           username: "String",
     #         },
     #       }
     #
@@ -3592,6 +4270,85 @@ module Aws::DatabaseMigrationService
     #   Provides information that defines an Amazon Redshift endpoint.
     #   @return [Types::RedshiftSettings]
     #
+    # @!attribute [rw] postgre_sql_settings
+    #   Settings in JSON format for the source and target PostgreSQL
+    #   endpoint. For information about other available settings, see [Extra
+    #   connection attributes when using PostgreSQL as a source for AWS
+    #   DMS][1] and [ Extra connection attributes when using PostgreSQL as a
+    #   target for AWS DMS][2] in the *AWS Database Migration Service User
+    #   Guide.*
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Source.PostgreSQL.ConnectionAttrib
+    #   [2]: https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Target.PostgreSQL.ConnectionAttrib
+    #   @return [Types::PostgreSQLSettings]
+    #
+    # @!attribute [rw] my_sql_settings
+    #   Settings in JSON format for the source and target MySQL endpoint.
+    #   For information about other available settings, see [Extra
+    #   connection attributes when using MySQL as a source for AWS DMS][1]
+    #   and [Extra connection attributes when using a MySQL-compatible
+    #   database as a target for AWS DMS][2] in the *AWS Database Migration
+    #   Service User Guide.*
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Source.MySQL.ConnectionAttrib
+    #   [2]: https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Target.MySQL.ConnectionAttrib
+    #   @return [Types::MySQLSettings]
+    #
+    # @!attribute [rw] oracle_settings
+    #   Settings in JSON format for the source and target Oracle endpoint.
+    #   For information about other available settings, see [Extra
+    #   connection attributes when using Oracle as a source for AWS DMS][1]
+    #   and [ Extra connection attributes when using Oracle as a target for
+    #   AWS DMS][2] in the *AWS Database Migration Service User Guide.*
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Source.Oracle.ConnectionAttrib
+    #   [2]: https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Target.Oracle.ConnectionAttrib
+    #   @return [Types::OracleSettings]
+    #
+    # @!attribute [rw] sybase_settings
+    #   Settings in JSON format for the source and target SAP ASE endpoint.
+    #   For information about other available settings, see [Extra
+    #   connection attributes when using SAP ASE as a source for AWS DMS][1]
+    #   and [Extra connection attributes when using SAP ASE as a target for
+    #   AWS DMS][2] in the *AWS Database Migration Service User Guide.*
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Source.SAP.ConnectionAttrib
+    #   [2]: https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Target.SAP.ConnectionAttrib
+    #   @return [Types::SybaseSettings]
+    #
+    # @!attribute [rw] microsoft_sql_server_settings
+    #   Settings in JSON format for the source and target Microsoft SQL
+    #   Server endpoint. For information about other available settings, see
+    #   [Extra connection attributes when using SQL Server as a source for
+    #   AWS DMS][1] and [ Extra connection attributes when using SQL Server
+    #   as a target for AWS DMS][2] in the *AWS Database Migration Service
+    #   User Guide.*
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Source.SQLServer.ConnectionAttrib
+    #   [2]: https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Target.SQLServer.ConnectionAttrib
+    #   @return [Types::MicrosoftSQLServerSettings]
+    #
+    # @!attribute [rw] ibm_db_2_settings
+    #   Settings in JSON format for the source IBM Db2 LUW endpoint. For
+    #   information about other available settings, see [Extra connection
+    #   attributes when using Db2 LUW as a source for AWS DMS][1] in the
+    #   *AWS Database Migration Service User Guide.*
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Source.DB2.ConnectionAttrib
+    #   @return [Types::IBMDb2Settings]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/ModifyEndpointMessage AWS API Documentation
     #
     class ModifyEndpointMessage < Struct.new(
@@ -3617,7 +4374,13 @@ module Aws::DatabaseMigrationService
       :kafka_settings,
       :elasticsearch_settings,
       :neptune_settings,
-      :redshift_settings)
+      :redshift_settings,
+      :postgre_sql_settings,
+      :my_sql_settings,
+      :oracle_settings,
+      :sybase_settings,
+      :microsoft_sql_server_settings,
+      :ibm_db_2_settings)
       SENSITIVE = [:password]
       include Aws::Structure
     end
@@ -4134,6 +4897,51 @@ module Aws::DatabaseMigrationService
       include Aws::Structure
     end
 
+    # Provides information that defines a MySQL endpoint.
+    #
+    # @note When making an API call, you may pass MySQLSettings
+    #   data as a hash:
+    #
+    #       {
+    #         database_name: "String",
+    #         password: "SecretString",
+    #         port: 1,
+    #         server_name: "String",
+    #         username: "String",
+    #       }
+    #
+    # @!attribute [rw] database_name
+    #   Database name for the endpoint.
+    #   @return [String]
+    #
+    # @!attribute [rw] password
+    #   Endpoint connection password.
+    #   @return [String]
+    #
+    # @!attribute [rw] port
+    #   Endpoint TCP port.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] server_name
+    #   Fully qualified domain name of the endpoint.
+    #   @return [String]
+    #
+    # @!attribute [rw] username
+    #   Endpoint connection user name.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/MySQLSettings AWS API Documentation
+    #
+    class MySQLSettings < Struct.new(
+      :database_name,
+      :password,
+      :port,
+      :server_name,
+      :username)
+      SENSITIVE = [:password]
+      include Aws::Structure
+    end
+
     # Provides information that defines an Amazon Neptune endpoint.
     #
     # @note When making an API call, you may pass NeptuneSettings
@@ -4210,6 +5018,133 @@ module Aws::DatabaseMigrationService
       :max_retry_count,
       :iam_auth_enabled)
       SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Provides information that defines an Oracle endpoint.
+    #
+    # @note When making an API call, you may pass OracleSettings
+    #   data as a hash:
+    #
+    #       {
+    #         asm_password: "SecretString",
+    #         asm_server: "String",
+    #         asm_user: "String",
+    #         database_name: "String",
+    #         password: "SecretString",
+    #         port: 1,
+    #         security_db_encryption: "SecretString",
+    #         security_db_encryption_name: "String",
+    #         server_name: "String",
+    #         username: "String",
+    #       }
+    #
+    # @!attribute [rw] asm_password
+    #   For an Oracle source endpoint, your Oracle Automatic Storage
+    #   Management (ASM) password. You can set this value from the `
+    #   asm_user_password ` value. You set this value as part of the
+    #   comma-separated value that you set to the `Password` request
+    #   parameter when you create the endpoint to access transaction logs
+    #   using Binary Reader. For more information, see [Configuration for
+    #   change data capture (CDC) on an Oracle source database][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Source.Oracle.html#dms/latest/userguide/CHAP_Source.Oracle.html#CHAP_Source.Oracle.CDC.Configuration
+    #   @return [String]
+    #
+    # @!attribute [rw] asm_server
+    #   For an Oracle source endpoint, your ASM server address. You can set
+    #   this value from the `asm_server` value. You set `asm_server` as part
+    #   of the extra connection attribute string to access an Oracle server
+    #   with Binary Reader that uses ASM. For more information, see
+    #   [Configuration for change data capture (CDC) on an Oracle source
+    #   database][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Source.Oracle.html#dms/latest/userguide/CHAP_Source.Oracle.html#CHAP_Source.Oracle.CDC.Configuration
+    #   @return [String]
+    #
+    # @!attribute [rw] asm_user
+    #   For an Oracle source endpoint, your ASM user name. You can set this
+    #   value from the `asm_user` value. You set `asm_user` as part of the
+    #   extra connection attribute string to access an Oracle server with
+    #   Binary Reader that uses ASM. For more information, see
+    #   [Configuration for change data capture (CDC) on an Oracle source
+    #   database][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Source.Oracle.html#dms/latest/userguide/CHAP_Source.Oracle.html#CHAP_Source.Oracle.CDC.Configuration
+    #   @return [String]
+    #
+    # @!attribute [rw] database_name
+    #   Database name for the endpoint.
+    #   @return [String]
+    #
+    # @!attribute [rw] password
+    #   Endpoint connection password.
+    #   @return [String]
+    #
+    # @!attribute [rw] port
+    #   Endpoint TCP port.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] security_db_encryption
+    #   For an Oracle source endpoint, the transparent data encryption (TDE)
+    #   password required by AWM DMS to access Oracle redo logs encrypted by
+    #   TDE using Binary Reader. It is also the ` TDE_Password ` part of the
+    #   comma-separated value you set to the `Password` request parameter
+    #   when you create the endpoint. The `SecurityDbEncryptian` setting is
+    #   related to this `SecurityDbEncryptionName` setting. For more
+    #   information, see [ Supported encryption methods for using Oracle as
+    #   a source for AWS DMS][1] in the *AWS Database Migration Service User
+    #   Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Source.Oracle.html#CHAP_Source.Oracle.Encryption
+    #   @return [String]
+    #
+    # @!attribute [rw] security_db_encryption_name
+    #   For an Oracle source endpoint, the name of a key used for the
+    #   transparent data encryption (TDE) of the columns and tablespaces in
+    #   an Oracle source database that is encrypted using TDE. The key value
+    #   is the value of the `SecurityDbEncryption` setting. For more
+    #   information on setting the key name value of
+    #   `SecurityDbEncryptionName`, see the information and example for
+    #   setting the `securityDbEncryptionName` extra connection attribute in
+    #   [ Supported encryption methods for using Oracle as a source for AWS
+    #   DMS][1] in the *AWS Database Migration Service User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Source.Oracle.html#CHAP_Source.Oracle.Encryption
+    #   @return [String]
+    #
+    # @!attribute [rw] server_name
+    #   Fully qualified domain name of the endpoint.
+    #   @return [String]
+    #
+    # @!attribute [rw] username
+    #   Endpoint connection user name.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/OracleSettings AWS API Documentation
+    #
+    class OracleSettings < Struct.new(
+      :asm_password,
+      :asm_server,
+      :asm_user,
+      :database_name,
+      :password,
+      :port,
+      :security_db_encryption,
+      :security_db_encryption_name,
+      :server_name,
+      :username)
+      SENSITIVE = [:asm_password, :password, :security_db_encryption]
       include Aws::Structure
     end
 
@@ -4343,6 +5278,51 @@ module Aws::DatabaseMigrationService
       :current_apply_date,
       :description)
       SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Provides information that defines a PostgreSQL endpoint.
+    #
+    # @note When making an API call, you may pass PostgreSQLSettings
+    #   data as a hash:
+    #
+    #       {
+    #         database_name: "String",
+    #         password: "SecretString",
+    #         port: 1,
+    #         server_name: "String",
+    #         username: "String",
+    #       }
+    #
+    # @!attribute [rw] database_name
+    #   Database name for the endpoint.
+    #   @return [String]
+    #
+    # @!attribute [rw] password
+    #   Endpoint connection password.
+    #   @return [String]
+    #
+    # @!attribute [rw] port
+    #   Endpoint TCP port.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] server_name
+    #   Fully qualified domain name of the endpoint.
+    #   @return [String]
+    #
+    # @!attribute [rw] username
+    #   Endpoint connection user name.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/PostgreSQLSettings AWS API Documentation
+    #
+    class PostgreSQLSettings < Struct.new(
+      :database_name,
+      :password,
+      :port,
+      :server_name,
+      :username)
+      SENSITIVE = [:password]
       include Aws::Structure
     end
 
@@ -4688,8 +5668,8 @@ module Aws::DatabaseMigrationService
     #         replication_task_arn: "String", # required
     #         tables_to_reload: [ # required
     #           {
-    #             schema_name: "String",
-    #             table_name: "String",
+    #             schema_name: "String", # required
+    #             table_name: "String", # required
     #           },
     #         ],
     #         reload_option: "data-reload", # accepts data-reload, validate-only
@@ -5273,6 +6253,189 @@ module Aws::DatabaseMigrationService
       include Aws::Structure
     end
 
+    # Provides information that describes a premigration assessment run that
+    # you have started using the `StartReplicationTaskAssessmentRun`
+    # operation.
+    #
+    # Some of the information appears based on other operations that can
+    # return the `ReplicationTaskAssessmentRun` object.
+    #
+    # @!attribute [rw] replication_task_assessment_run_arn
+    #   Amazon Resource Name (ARN) of this assessment run.
+    #   @return [String]
+    #
+    # @!attribute [rw] replication_task_arn
+    #   ARN of the migration task associated with this premigration
+    #   assessment run.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   Assessment run status.
+    #
+    #   This status can have one of the following values:
+    #
+    #   * `"cancelling"` – The assessment run was canceled by the
+    #     `CancelReplicationTaskAssessmentRun` operation.
+    #
+    #   * `"deleting"` – The assessment run was deleted by the
+    #     `DeleteReplicationTaskAssessmentRun` operation.
+    #
+    #   * `"failed"` – At least one individual assessment completed with a
+    #     `failed` status.
+    #
+    #   * `"error-provisioning"` – An internal error occurred while
+    #     resources were provisioned (during `provisioning` status).
+    #
+    #   * `"error-executing"` – An internal error occurred while individual
+    #     assessments ran (during `running` status).
+    #
+    #   * `"invalid state"` – The assessment run is in an unknown state.
+    #
+    #   * `"passed"` – All individual assessments have completed, and none
+    #     has a `failed` status.
+    #
+    #   * `"provisioning"` – Resources required to run individual
+    #     assessments are being provisioned.
+    #
+    #   * `"running"` – Individual assessments are being run.
+    #
+    #   * `"starting"` – The assessment run is starting, but resources are
+    #     not yet being provisioned for individual assessments.
+    #   @return [String]
+    #
+    # @!attribute [rw] replication_task_assessment_run_creation_date
+    #   Date on which the assessment run was created using the
+    #   `StartReplicationTaskAssessmentRun` operation.
+    #   @return [Time]
+    #
+    # @!attribute [rw] assessment_progress
+    #   Indication of the completion progress for the individual assessments
+    #   specified to run.
+    #   @return [Types::ReplicationTaskAssessmentRunProgress]
+    #
+    # @!attribute [rw] last_failure_message
+    #   Last message generated by an individual assessment failure.
+    #   @return [String]
+    #
+    # @!attribute [rw] service_access_role_arn
+    #   ARN of the service role used to start the assessment run using the
+    #   `StartReplicationTaskAssessmentRun` operation.
+    #   @return [String]
+    #
+    # @!attribute [rw] result_location_bucket
+    #   Amazon S3 bucket where AWS DMS stores the results of this assessment
+    #   run.
+    #   @return [String]
+    #
+    # @!attribute [rw] result_location_folder
+    #   Folder in an Amazon S3 bucket where AWS DMS stores the results of
+    #   this assessment run.
+    #   @return [String]
+    #
+    # @!attribute [rw] result_encryption_mode
+    #   Encryption mode used to encrypt the assessment run results.
+    #   @return [String]
+    #
+    # @!attribute [rw] result_kms_key_arn
+    #   ARN of the AWS KMS encryption key used to encrypt the assessment run
+    #   results.
+    #   @return [String]
+    #
+    # @!attribute [rw] assessment_run_name
+    #   Unique name of the assessment run.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/ReplicationTaskAssessmentRun AWS API Documentation
+    #
+    class ReplicationTaskAssessmentRun < Struct.new(
+      :replication_task_assessment_run_arn,
+      :replication_task_arn,
+      :status,
+      :replication_task_assessment_run_creation_date,
+      :assessment_progress,
+      :last_failure_message,
+      :service_access_role_arn,
+      :result_location_bucket,
+      :result_location_folder,
+      :result_encryption_mode,
+      :result_kms_key_arn,
+      :assessment_run_name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The progress values reported by the `AssessmentProgress` response
+    # element.
+    #
+    # @!attribute [rw] individual_assessment_count
+    #   The number of individual assessments that are specified to run.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] individual_assessment_completed_count
+    #   The number of individual assessments that have completed,
+    #   successfully or not.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/ReplicationTaskAssessmentRunProgress AWS API Documentation
+    #
+    class ReplicationTaskAssessmentRunProgress < Struct.new(
+      :individual_assessment_count,
+      :individual_assessment_completed_count)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Provides information that describes an individual assessment from a
+    # premigration assessment run.
+    #
+    # @!attribute [rw] replication_task_individual_assessment_arn
+    #   Amazon Resource Name (ARN) of this individual assessment.
+    #   @return [String]
+    #
+    # @!attribute [rw] replication_task_assessment_run_arn
+    #   ARN of the premigration assessment run that is created to run this
+    #   individual assessment.
+    #   @return [String]
+    #
+    # @!attribute [rw] individual_assessment_name
+    #   Name of this individual assessment.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   Individual assessment status.
+    #
+    #   This status can have one of the following values:
+    #
+    #   * `"cancelled"`
+    #
+    #   * `"error"`
+    #
+    #   * `"failed"`
+    #
+    #   * `"passed"`
+    #
+    #   * `"pending"`
+    #
+    #   * `"running"`
+    #   @return [String]
+    #
+    # @!attribute [rw] replication_task_individual_assessment_start_date
+    #   Date when this individual assessment was started as part of running
+    #   the `StartReplicationTaskAssessmentRun` operation.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/ReplicationTaskIndividualAssessment AWS API Documentation
+    #
+    class ReplicationTaskIndividualAssessment < Struct.new(
+      :replication_task_individual_assessment_arn,
+      :replication_task_assessment_run_arn,
+      :individual_assessment_name,
+      :status,
+      :replication_task_individual_assessment_start_date)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # In response to a request by the `DescribeReplicationTasks` operation,
     # this object provides a collection of statistics about a replication
     # task.
@@ -5410,6 +6573,33 @@ module Aws::DatabaseMigrationService
     # @see http://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/ResourceQuotaExceededFault AWS API Documentation
     #
     class ResourceQuotaExceededFault < Struct.new(
+      :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Insufficient privileges are preventing access to an Amazon S3 object.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/S3AccessDeniedFault AWS API Documentation
+    #
+    class S3AccessDeniedFault < Struct.new(
+      :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A specified Amazon S3 bucket, bucket folder, or other object can't be
+    # found.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/S3ResourceNotFoundFault AWS API Documentation
+    #
+    class S3ResourceNotFoundFault < Struct.new(
       :message)
       SENSITIVE = []
       include Aws::Structure
@@ -5836,6 +7026,125 @@ module Aws::DatabaseMigrationService
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass StartReplicationTaskAssessmentRunMessage
+    #   data as a hash:
+    #
+    #       {
+    #         replication_task_arn: "String", # required
+    #         service_access_role_arn: "String", # required
+    #         result_location_bucket: "String", # required
+    #         result_location_folder: "String",
+    #         result_encryption_mode: "String",
+    #         result_kms_key_arn: "String",
+    #         assessment_run_name: "String", # required
+    #         include_only: ["String"],
+    #         exclude: ["String"],
+    #       }
+    #
+    # @!attribute [rw] replication_task_arn
+    #   Amazon Resource Name (ARN) of the migration task associated with the
+    #   premigration assessment run that you want to start.
+    #   @return [String]
+    #
+    # @!attribute [rw] service_access_role_arn
+    #   ARN of a service role needed to start the assessment run.
+    #   @return [String]
+    #
+    # @!attribute [rw] result_location_bucket
+    #   Amazon S3 bucket where you want AWS DMS to store the results of this
+    #   assessment run.
+    #   @return [String]
+    #
+    # @!attribute [rw] result_location_folder
+    #   Folder within an Amazon S3 bucket where you want AWS DMS to store
+    #   the results of this assessment run.
+    #   @return [String]
+    #
+    # @!attribute [rw] result_encryption_mode
+    #   Encryption mode that you can specify to encrypt the results of this
+    #   assessment run. If you don't specify this request parameter, AWS
+    #   DMS stores the assessment run results without encryption. You can
+    #   specify one of the options following:
+    #
+    #   * `"SSE_S3"` – The server-side encryption provided as a default by
+    #     Amazon S3.
+    #
+    #   * `"SSE_KMS"` – AWS Key Management Service (AWS KMS) encryption.
+    #     This encryption can use either a custom KMS encryption key that
+    #     you specify or the default KMS encryption key that DMS provides.
+    #   @return [String]
+    #
+    # @!attribute [rw] result_kms_key_arn
+    #   ARN of a custom KMS encryption key that you specify when you set
+    #   `ResultEncryptionMode` to `"SSE_KMS`".
+    #   @return [String]
+    #
+    # @!attribute [rw] assessment_run_name
+    #   Unique name to identify the assessment run.
+    #   @return [String]
+    #
+    # @!attribute [rw] include_only
+    #   Space-separated list of names for specific individual assessments
+    #   that you want to include. These names come from the default list of
+    #   individual assessments that AWS DMS supports for the associated
+    #   migration task. This task is specified by `ReplicationTaskArn`.
+    #
+    #   <note markdown="1"> You can't set a value for `IncludeOnly` if you also set a value for
+    #   `Exclude` in the API operation.
+    #
+    #    To identify the names of the default individual assessments that AWS
+    #   DMS supports for the associated migration task, run the
+    #   `DescribeApplicableIndividualAssessments` operation using its own
+    #   `ReplicationTaskArn` request parameter.
+    #
+    #    </note>
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] exclude
+    #   Space-separated list of names for specific individual assessments
+    #   that you want to exclude. These names come from the default list of
+    #   individual assessments that AWS DMS supports for the associated
+    #   migration task. This task is specified by `ReplicationTaskArn`.
+    #
+    #   <note markdown="1"> You can't set a value for `Exclude` if you also set a value for
+    #   `IncludeOnly` in the API operation.
+    #
+    #    To identify the names of the default individual assessments that AWS
+    #   DMS supports for the associated migration task, run the
+    #   `DescribeApplicableIndividualAssessments` operation using its own
+    #   `ReplicationTaskArn` request parameter.
+    #
+    #    </note>
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/StartReplicationTaskAssessmentRunMessage AWS API Documentation
+    #
+    class StartReplicationTaskAssessmentRunMessage < Struct.new(
+      :replication_task_arn,
+      :service_access_role_arn,
+      :result_location_bucket,
+      :result_location_folder,
+      :result_encryption_mode,
+      :result_kms_key_arn,
+      :assessment_run_name,
+      :include_only,
+      :exclude)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] replication_task_assessment_run
+    #   The premigration assessment run that was started.
+    #   @return [Types::ReplicationTaskAssessmentRun]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/StartReplicationTaskAssessmentRunResponse AWS API Documentation
+    #
+    class StartReplicationTaskAssessmentRunResponse < Struct.new(
+      :replication_task_assessment_run)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass StartReplicationTaskMessage
     #   data as a hash:
     #
@@ -6058,6 +7367,51 @@ module Aws::DatabaseMigrationService
       include Aws::Structure
     end
 
+    # Provides information that defines a SAP ASE endpoint.
+    #
+    # @note When making an API call, you may pass SybaseSettings
+    #   data as a hash:
+    #
+    #       {
+    #         database_name: "String",
+    #         password: "SecretString",
+    #         port: 1,
+    #         server_name: "String",
+    #         username: "String",
+    #       }
+    #
+    # @!attribute [rw] database_name
+    #   Database name for the endpoint.
+    #   @return [String]
+    #
+    # @!attribute [rw] password
+    #   Endpoint connection password.
+    #   @return [String]
+    #
+    # @!attribute [rw] port
+    #   Endpoint TCP port.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] server_name
+    #   Fully qualified domain name of the endpoint.
+    #   @return [String]
+    #
+    # @!attribute [rw] username
+    #   Endpoint connection user name.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/SybaseSettings AWS API Documentation
+    #
+    class SybaseSettings < Struct.new(
+      :database_name,
+      :password,
+      :port,
+      :server_name,
+      :username)
+      SENSITIVE = [:password]
+      include Aws::Structure
+    end
+
     # Provides a collection of table statistics in response to a request by
     # the `DescribeTableStatistics` operation.
     #
@@ -6204,8 +7558,8 @@ module Aws::DatabaseMigrationService
     #   data as a hash:
     #
     #       {
-    #         schema_name: "String",
-    #         table_name: "String",
+    #         schema_name: "String", # required
+    #         table_name: "String", # required
     #       }
     #
     # @!attribute [rw] schema_name

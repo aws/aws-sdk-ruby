@@ -58,6 +58,7 @@ module Aws::IVS
     MaxStreamResults = Shapes::IntegerShape.new(name: 'MaxStreamResults')
     MaxTagResults = Shapes::IntegerShape.new(name: 'MaxTagResults')
     PaginationToken = Shapes::StringShape.new(name: 'PaginationToken')
+    PendingVerification = Shapes::StructureShape.new(name: 'PendingVerification')
     PlaybackURL = Shapes::StringShape.new(name: 'PlaybackURL')
     PutMetadataRequest = Shapes::StructureShape.new(name: 'PutMetadataRequest')
     ResourceArn = Shapes::StringShape.new(name: 'ResourceArn')
@@ -227,6 +228,9 @@ module Aws::IVS
     ListTagsForResourceResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "nextToken"))
     ListTagsForResourceResponse.struct_class = Types::ListTagsForResourceResponse
 
+    PendingVerification.add_member(:exception_message, Shapes::ShapeRef.new(shape: errorMessage, location_name: "exceptionMessage"))
+    PendingVerification.struct_class = Types::PendingVerification
+
     PutMetadataRequest.add_member(:channel_arn, Shapes::ShapeRef.new(shape: ChannelArn, required: true, location_name: "channelArn"))
     PutMetadataRequest.add_member(:metadata, Shapes::ShapeRef.new(shape: StreamMetadata, required: true, location_name: "metadata"))
     PutMetadataRequest.struct_class = Types::PutMetadataRequest
@@ -354,6 +358,7 @@ module Aws::IVS
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: PendingVerification)
       end)
 
       api.add_operation(:create_stream_key, Seahorse::Model::Operation.new.tap do |o|
@@ -366,6 +371,7 @@ module Aws::IVS
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: PendingVerification)
       end)
 
       api.add_operation(:delete_channel, Seahorse::Model::Operation.new.tap do |o|
@@ -378,6 +384,7 @@ module Aws::IVS
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: PendingVerification)
       end)
 
       api.add_operation(:delete_stream_key, Seahorse::Model::Operation.new.tap do |o|
@@ -389,6 +396,7 @@ module Aws::IVS
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: PendingVerification)
       end)
 
       api.add_operation(:get_channel, Seahorse::Model::Operation.new.tap do |o|
@@ -548,6 +556,7 @@ module Aws::IVS
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: PendingVerification)
       end)
     end
 

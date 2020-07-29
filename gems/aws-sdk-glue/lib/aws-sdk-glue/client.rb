@@ -997,6 +997,7 @@ module Aws::Glue
     #   resp.workflows[0].last_modified_on #=> Time
     #   resp.workflows[0].last_run.name #=> String
     #   resp.workflows[0].last_run.workflow_run_id #=> String
+    #   resp.workflows[0].last_run.previous_run_id #=> String
     #   resp.workflows[0].last_run.workflow_run_properties #=> Hash
     #   resp.workflows[0].last_run.workflow_run_properties["IdString"] #=> String
     #   resp.workflows[0].last_run.started_on #=> Time
@@ -1777,9 +1778,10 @@ module Aws::Glue
     #     or 1 DPU. The default is 0.0625 DPU.
     #
     #   * When you specify an Apache Spark ETL job
-    #     (`JobCommand.Name`="glueetl"), you can allocate from 2 to 100
-    #     DPUs. The default is 10 DPUs. This job type cannot have a fractional
-    #     DPU allocation.
+    #     (`JobCommand.Name`="glueetl") or Apache Spark streaming ETL job
+    #     (`JobCommand.Name`="gluestreaming"), you can allocate from 2 to
+    #     100 DPUs. The default is 10 DPUs. This job type cannot have a
+    #     fractional DPU allocation.
     #
     #
     #
@@ -5954,6 +5956,7 @@ module Aws::Glue
     #   resp.workflow.last_modified_on #=> Time
     #   resp.workflow.last_run.name #=> String
     #   resp.workflow.last_run.workflow_run_id #=> String
+    #   resp.workflow.last_run.previous_run_id #=> String
     #   resp.workflow.last_run.workflow_run_properties #=> Hash
     #   resp.workflow.last_run.workflow_run_properties["IdString"] #=> String
     #   resp.workflow.last_run.started_on #=> Time
@@ -6126,6 +6129,7 @@ module Aws::Glue
     #
     #   resp.run.name #=> String
     #   resp.run.workflow_run_id #=> String
+    #   resp.run.previous_run_id #=> String
     #   resp.run.workflow_run_properties #=> Hash
     #   resp.run.workflow_run_properties["IdString"] #=> String
     #   resp.run.started_on #=> Time
@@ -6277,6 +6281,7 @@ module Aws::Glue
     #   resp.runs #=> Array
     #   resp.runs[0].name #=> String
     #   resp.runs[0].workflow_run_id #=> String
+    #   resp.runs[0].previous_run_id #=> String
     #   resp.runs[0].workflow_run_properties #=> Hash
     #   resp.runs[0].workflow_run_properties["IdString"] #=> String
     #   resp.runs[0].started_on #=> Time
@@ -6876,6 +6881,48 @@ module Aws::Glue
     # @param [Hash] params ({})
     def reset_job_bookmark(params = {}, options = {})
       req = build_request(:reset_job_bookmark, params)
+      req.send_request(options)
+    end
+
+    # Restarts any completed nodes in a workflow run and resumes the run
+    # execution.
+    #
+    # @option params [required, String] :name
+    #   The name of the workflow to resume.
+    #
+    # @option params [required, String] :run_id
+    #   The ID of the workflow run to resume.
+    #
+    # @option params [required, Array<String>] :node_ids
+    #   A list of the node IDs for the nodes you want to restart. The nodes
+    #   that are to be restarted must have an execution attempt in the
+    #   original run.
+    #
+    # @return [Types::ResumeWorkflowRunResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ResumeWorkflowRunResponse#run_id #run_id} => String
+    #   * {Types::ResumeWorkflowRunResponse#node_ids #node_ids} => Array&lt;String&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.resume_workflow_run({
+    #     name: "NameString", # required
+    #     run_id: "IdString", # required
+    #     node_ids: ["NameString"], # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.run_id #=> String
+    #   resp.node_ids #=> Array
+    #   resp.node_ids[0] #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/ResumeWorkflowRun AWS API Documentation
+    #
+    # @overload resume_workflow_run(params = {})
+    # @param [Hash] params ({})
+    def resume_workflow_run(params = {}, options = {})
+      req = build_request(:resume_workflow_run, params)
       req.send_request(options)
     end
 
@@ -8838,7 +8885,7 @@ module Aws::Glue
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-glue'
-      context[:gem_version] = '1.64.0'
+      context[:gem_version] = '1.65.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -131,11 +131,20 @@ module Aws::IVS
     #
     # @!attribute [rw] type
     #   Channel type, which determines the allowable resolution and bitrate.
-    #   STANDARD: The stream is transcoded; resolution (width, in landscape
-    #   orientation) can be up to 1080p or the input source resolution,
-    #   whichever is lower; and bitrate can be up to 8.5 Mbps. BASIC: The
-    #   stream is transfixed; resolution can be up to 480p; and bitrate can
-    #   be up to 1.5 Mbps. Default STANDARD.
+    #   *If you exceed the allowable resolution or bitrate, the stream
+    #   probably will disconnect immediately.* Valid values:
+    #
+    #   * `STANDARD`\: Multiple qualities are generated from the original
+    #     input, to automatically give viewers the best experience for their
+    #     devices and network conditions. Vertical resolution can be up to
+    #     1080 and bitrate can be up to 8.5 Mbps.
+    #
+    #   * `BASIC`\: Amazon IVS delivers the original input to viewers. The
+    #     viewer’s video-quality choice is limited to the original input.
+    #     Vertical resolution can be up to 480 and bitrate can be up to 1.5
+    #     Mbps.
+    #
+    #   Default: `STANDARD`.
     #   @return [String]
     #
     # @!attribute [rw] ingest_endpoint
@@ -240,11 +249,20 @@ module Aws::IVS
     #
     # @!attribute [rw] type
     #   Channel type, which determines the allowable resolution and bitrate.
-    #   `STANDARD`\: The stream is transcoded; resolution (width, in
-    #   landscape orientation) can be up to 1080p or the input source
-    #   resolution, whichever is lower; and bitrate can be up to 8.5 Mbps.
-    #   `BASIC`\: The stream is transfixed; resolution can be up to 480p;
-    #   and bitrate can be up to 1.5 Mbps. Default: `STANDARD`.
+    #   *If you exceed the allowable resolution or bitrate, the stream
+    #   probably will disconnect immediately.* Valid values:
+    #
+    #   * `STANDARD`\: Multiple qualities are generated from the original
+    #     input, to automatically give viewers the best experience for their
+    #     devices and network conditions. Vertical resolution can be up to
+    #     1080 and bitrate can be up to 8.5 Mbps.
+    #
+    #   * `BASIC`\: Amazon IVS delivers the original input to viewers. The
+    #     viewer’s video-quality choice is limited to the original input.
+    #     Vertical resolution can be up to 480 and bitrate can be up to 1.5
+    #     Mbps.
+    #
+    #   Default: `STANDARD`.
     #   @return [String]
     #
     # @!attribute [rw] tags
@@ -307,7 +325,7 @@ module Aws::IVS
     end
 
     # @!attribute [rw] stream_key
-    #   Stream key used to authenticate an RTMP stream for ingestion.
+    #   Stream key used to authenticate an RTMPS stream for ingestion.
     #   @return [Types::StreamKey]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ivs-2020-07-14/CreateStreamKeyResponse AWS API Documentation
@@ -655,6 +673,18 @@ module Aws::IVS
       include Aws::Structure
     end
 
+    # @!attribute [rw] exception_message
+    #   Your account is pending verification.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ivs-2020-07-14/PendingVerification AWS API Documentation
+    #
+    class PendingVerification < Struct.new(
+      :exception_message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass PutMetadataRequest
     #   data as a hash:
     #
@@ -963,11 +993,20 @@ module Aws::IVS
     #
     # @!attribute [rw] type
     #   Channel type, which determines the allowable resolution and bitrate.
-    #   `STANDARD`\: The stream is transcoded; resolution (width, in
-    #   landscape orientation) can be up to 1080p or the input source
-    #   resolution, whichever is lower; and bitrate can be up to 8.5 Mbps.
-    #   `BASIC`\: The stream is transfixed; resolution can be up to 480p;
-    #   and bitrate can be up to 1.5 Mbps. Default `STANDARD`.
+    #   *If you exceed the allowable resolution or bitrate, the stream
+    #   probably will disconnect immediately.* Valid values:
+    #
+    #   * `STANDARD`\: Multiple qualities are generated from the original
+    #     input, to automatically give viewers the best experience for their
+    #     devices and network conditions. Vertical resolution can be up to
+    #     1080 and bitrate can be up to 8.5 Mbps.
+    #
+    #   * `BASIC`\: Amazon IVS delivers the original input to viewers. The
+    #     viewer’s video-quality choice is limited to the original input.
+    #     Vertical resolution can be up to 480 and bitrate can be up to 1.5
+    #     Mbps.
+    #
+    #   Default: `STANDARD`.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ivs-2020-07-14/UpdateChannelRequest AWS API Documentation

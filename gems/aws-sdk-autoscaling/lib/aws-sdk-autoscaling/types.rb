@@ -950,9 +950,9 @@ module Aws::AutoScaling
     #   <note markdown="1"> With a mixed instances policy that uses instance weighting, Amazon
     #   EC2 Auto Scaling may need to go above `MaxSize` to meet your
     #   capacity requirements. In this event, Amazon EC2 Auto Scaling will
-    #   never go above `MaxSize` by more than your maximum instance weight
-    #   (weights that define how many capacity units each instance
-    #   contributes to the capacity of the group).
+    #   never go above `MaxSize` by more than your largest instance weight
+    #   (weights that define how many units each instance contributes to the
+    #   desired capacity of the group).
     #
     #    </note>
     #   @return [Integer]
@@ -1223,6 +1223,11 @@ module Aws::AutoScaling
     #         ebs_optimized: false,
     #         associate_public_ip_address: false,
     #         placement_tenancy: "XmlStringMaxLen64",
+    #         metadata_options: {
+    #           http_tokens: "optional", # accepts optional, required
+    #           http_put_response_hop_limit: 1,
+    #           http_endpoint: "disabled", # accepts disabled, enabled
+    #         },
     #       }
     #
     # @!attribute [rw] launch_configuration_name
@@ -1478,6 +1483,16 @@ module Aws::AutoScaling
     #   [1]: https://docs.aws.amazon.com/autoscaling/ec2/userguide/asg-in-vpc.html#as-vpc-tenancy
     #   @return [String]
     #
+    # @!attribute [rw] metadata_options
+    #   The metadata options for the instances. For more information, see
+    #   [Instance Metadata and User Data][1] in the *Amazon EC2 User Guide
+    #   for Linux Instances*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-instance-metadata.html
+    #   @return [Types::InstanceMetadataOptions]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/CreateLaunchConfigurationType AWS API Documentation
     #
     class CreateLaunchConfigurationType < Struct.new(
@@ -1498,7 +1513,8 @@ module Aws::AutoScaling
       :iam_instance_profile,
       :ebs_optimized,
       :associate_public_ip_address,
-      :placement_tenancy)
+      :placement_tenancy,
+      :metadata_options)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3002,6 +3018,72 @@ module Aws::AutoScaling
       include Aws::Structure
     end
 
+    # The metadata options for the instances. For more information, see
+    # [Instance Metadata and User Data][1] in the *Amazon EC2 User Guide for
+    # Linux Instances*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-instance-metadata.html
+    #
+    # @note When making an API call, you may pass InstanceMetadataOptions
+    #   data as a hash:
+    #
+    #       {
+    #         http_tokens: "optional", # accepts optional, required
+    #         http_put_response_hop_limit: 1,
+    #         http_endpoint: "disabled", # accepts disabled, enabled
+    #       }
+    #
+    # @!attribute [rw] http_tokens
+    #   The state of token usage for your instance metadata requests. If the
+    #   parameter is not specified in the request, the default state is
+    #   `optional`.
+    #
+    #   If the state is `optional`, you can choose to retrieve instance
+    #   metadata with or without a signed token header on your request. If
+    #   you retrieve the IAM role credentials without a token, the version
+    #   1.0 role credentials are returned. If you retrieve the IAM role
+    #   credentials using a valid signed token, the version 2.0 role
+    #   credentials are returned.
+    #
+    #   If the state is `required`, you must send a signed token header with
+    #   any instance metadata retrieval requests. In this state, retrieving
+    #   the IAM role credentials always returns the version 2.0 credentials;
+    #   the version 1.0 credentials are not available.
+    #   @return [String]
+    #
+    # @!attribute [rw] http_put_response_hop_limit
+    #   The desired HTTP PUT response hop limit for instance metadata
+    #   requests. The larger the number, the further instance metadata
+    #   requests can travel.
+    #
+    #   Default: 1
+    #
+    #   Possible values: Integers from 1 to 64
+    #   @return [Integer]
+    #
+    # @!attribute [rw] http_endpoint
+    #   This parameter enables or disables the HTTP metadata endpoint on
+    #   your instances. If the parameter is not specified, the default state
+    #   is `enabled`.
+    #
+    #   <note markdown="1"> If you specify a value of `disabled`, you will not be able to access
+    #   your instance metadata.
+    #
+    #    </note>
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/InstanceMetadataOptions AWS API Documentation
+    #
+    class InstanceMetadataOptions < Struct.new(
+      :http_tokens,
+      :http_put_response_hop_limit,
+      :http_endpoint)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Describes whether detailed monitoring is enabled for the Auto Scaling
     # instances.
     #
@@ -3453,6 +3535,16 @@ module Aws::AutoScaling
     #   [1]: https://docs.aws.amazon.com/autoscaling/ec2/userguide/asg-in-vpc.html#as-vpc-tenancy
     #   @return [String]
     #
+    # @!attribute [rw] metadata_options
+    #   The metadata options for the instances. For more information, see
+    #   [Instance Metadata and User Data][1] in the *Amazon EC2 User Guide
+    #   for Linux Instances*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-instance-metadata.html
+    #   @return [Types::InstanceMetadataOptions]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/LaunchConfiguration AWS API Documentation
     #
     class LaunchConfiguration < Struct.new(
@@ -3474,7 +3566,8 @@ module Aws::AutoScaling
       :created_time,
       :ebs_optimized,
       :associate_public_ip_address,
-      :placement_tenancy)
+      :placement_tenancy,
+      :metadata_options)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4051,6 +4144,16 @@ module Aws::AutoScaling
     #   * `GroupTerminatingInstances`
     #
     #   * `GroupTotalInstances`
+    #
+    #   * `GroupInServiceCapacity`
+    #
+    #   * `GroupPendingCapacity`
+    #
+    #   * `GroupStandbyCapacity`
+    #
+    #   * `GroupTerminatingCapacity`
+    #
+    #   * `GroupTotalCapacity`
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/MetricCollectionType AWS API Documentation
@@ -4559,7 +4662,7 @@ module Aws::AutoScaling
     #   @return [String]
     #
     # @!attribute [rw] adjustment_type
-    #   Specifies how the scaling adjustment is interpreted (either an
+    #   Specifies how the scaling adjustment is interpreted (for example, an
     #   absolute number or a percentage). The valid values are
     #   `ChangeInCapacity`, `ExactCapacity`, and `PercentChangeInCapacity`.
     #
@@ -4956,7 +5059,7 @@ module Aws::AutoScaling
     #   @return [String]
     #
     # @!attribute [rw] adjustment_type
-    #   Specifies how the scaling adjustment is interpreted (either an
+    #   Specifies how the scaling adjustment is interpreted (for example, an
     #   absolute number or a percentage). The valid values are
     #   `ChangeInCapacity`, `ExactCapacity`, and `PercentChangeInCapacity`.
     #   @return [String]
@@ -5842,9 +5945,9 @@ module Aws::AutoScaling
     #   <note markdown="1"> With a mixed instances policy that uses instance weighting, Amazon
     #   EC2 Auto Scaling may need to go above `MaxSize` to meet your
     #   capacity requirements. In this event, Amazon EC2 Auto Scaling will
-    #   never go above `MaxSize` by more than your maximum instance weight
-    #   (weights that define how many capacity units each instance
-    #   contributes to the capacity of the group).
+    #   never go above `MaxSize` by more than your largest instance weight
+    #   (weights that define how many units each instance contributes to the
+    #   desired capacity of the group).
     #
     #    </note>
     #   @return [Integer]
