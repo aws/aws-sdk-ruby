@@ -4,7 +4,6 @@ before_install:
   - gem install bundler -v '< 2'
 
 dist: xenial
-group: edge
 
 rvm:
   - 1.9.3
