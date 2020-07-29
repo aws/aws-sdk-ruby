@@ -3526,8 +3526,6 @@ module Aws::EC2
     #   idempotency of the request. For more information, see [How to Ensure
     #   Idempotency][1].
     #
-    #   Constraint: Maximum 64 ASCII characters.
-    #
     #
     #
     #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html
@@ -5504,6 +5502,7 @@ module Aws::EC2
     #         capacity_reservation_preference: "open", # accepts open, none
     #         capacity_reservation_target: {
     #           capacity_reservation_id: "CapacityReservationId",
+    #           capacity_reservation_resource_group_arn: "String",
     #         },
     #       },
     #       license_specifications: [
@@ -5783,6 +5782,7 @@ module Aws::EC2
     #         capacity_reservation_preference: "open", # accepts open, none
     #         capacity_reservation_target: {
     #           capacity_reservation_id: "CapacityReservationId",
+    #           capacity_reservation_resource_group_arn: "String",
     #         },
     #       },
     #       license_specifications: [
@@ -5884,6 +5884,7 @@ module Aws::EC2
     #   resp.launch_template_version.launch_template_data.cpu_options.threads_per_core #=> Integer
     #   resp.launch_template_version.launch_template_data.capacity_reservation_specification.capacity_reservation_preference #=> String, one of "open", "none"
     #   resp.launch_template_version.launch_template_data.capacity_reservation_specification.capacity_reservation_target.capacity_reservation_id #=> String
+    #   resp.launch_template_version.launch_template_data.capacity_reservation_specification.capacity_reservation_target.capacity_reservation_resource_group_arn #=> String
     #   resp.launch_template_version.launch_template_data.license_specifications #=> Array
     #   resp.launch_template_version.launch_template_data.license_specifications[0].license_configuration_arn #=> String
     #   resp.launch_template_version.launch_template_data.hibernation_options.configured #=> Boolean
@@ -13029,12 +13030,14 @@ module Aws::EC2
     #   The ID of the Capacity Reservation.
     #
     # @option params [String] :next_token
-    #   The token to retrieve the next page of results.
+    #   The token to use to retrieve the next page of results.
     #
     # @option params [Integer] :max_results
     #   The maximum number of results to return for the request in a single
     #   page. The remaining results can be seen by sending another request
-    #   with the returned nextToken value.
+    #   with the returned `nextToken` value. This value can be between 5 and
+    #   500. If `maxResults` is given a larger value than 500, you receive an
+    #   error.
     #
     # @option params [Array<Types::Filter>] :filters
     #   One or more filters.
@@ -17339,6 +17342,7 @@ module Aws::EC2
     #   resp.reservations[0].instances[0].capacity_reservation_id #=> String
     #   resp.reservations[0].instances[0].capacity_reservation_specification.capacity_reservation_preference #=> String, one of "open", "none"
     #   resp.reservations[0].instances[0].capacity_reservation_specification.capacity_reservation_target.capacity_reservation_id #=> String
+    #   resp.reservations[0].instances[0].capacity_reservation_specification.capacity_reservation_target.capacity_reservation_resource_group_arn #=> String
     #   resp.reservations[0].instances[0].hibernation_options.configured #=> Boolean
     #   resp.reservations[0].instances[0].licenses #=> Array
     #   resp.reservations[0].instances[0].licenses[0].license_configuration_arn #=> String
@@ -17916,6 +17920,7 @@ module Aws::EC2
     #   resp.launch_template_versions[0].launch_template_data.cpu_options.threads_per_core #=> Integer
     #   resp.launch_template_versions[0].launch_template_data.capacity_reservation_specification.capacity_reservation_preference #=> String, one of "open", "none"
     #   resp.launch_template_versions[0].launch_template_data.capacity_reservation_specification.capacity_reservation_target.capacity_reservation_id #=> String
+    #   resp.launch_template_versions[0].launch_template_data.capacity_reservation_specification.capacity_reservation_target.capacity_reservation_resource_group_arn #=> String
     #   resp.launch_template_versions[0].launch_template_data.license_specifications #=> Array
     #   resp.launch_template_versions[0].launch_template_data.license_specifications[0].license_configuration_arn #=> String
     #   resp.launch_template_versions[0].launch_template_data.hibernation_options.configured #=> Boolean
@@ -27315,12 +27320,14 @@ module Aws::EC2
     #   The ID of the Capacity Reservation.
     #
     # @option params [String] :next_token
-    #   The token to retrieve the next page of results.
+    #   The token to use to retrieve the next page of results.
     #
     # @option params [Integer] :max_results
     #   The maximum number of results to return for the request in a single
     #   page. The remaining results can be seen by sending another request
-    #   with the returned nextToken value.
+    #   with the returned `nextToken` value. This value can be between 5 and
+    #   500. If `maxResults` is given a larger value than 500, you receive an
+    #   error.
     #
     #   Valid range: Minimum value of 1. Maximum value of 1000.
     #
@@ -27703,6 +27710,60 @@ module Aws::EC2
       req.send_request(options)
     end
 
+    # Lists the resource groups to which a Capacity Reservation has been
+    # added.
+    #
+    # @option params [required, String] :capacity_reservation_id
+    #   The ID of the Capacity Reservation.
+    #
+    # @option params [String] :next_token
+    #   The token to use to retrieve the next page of results.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of results to return for the request in a single
+    #   page. The remaining results can be seen by sending another request
+    #   with the returned `nextToken` value. This value can be between 5 and
+    #   500. If `maxResults` is given a larger value than 500, you receive an
+    #   error.
+    #
+    # @option params [Boolean] :dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #
+    # @return [Types::GetGroupsForCapacityReservationResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetGroupsForCapacityReservationResult#next_token #next_token} => String
+    #   * {Types::GetGroupsForCapacityReservationResult#capacity_reservation_groups #capacity_reservation_groups} => Array&lt;Types::CapacityReservationGroup&gt;
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_groups_for_capacity_reservation({
+    #     capacity_reservation_id: "CapacityReservationId", # required
+    #     next_token: "String",
+    #     max_results: 1,
+    #     dry_run: false,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.next_token #=> String
+    #   resp.capacity_reservation_groups #=> Array
+    #   resp.capacity_reservation_groups[0].group_arn #=> String
+    #   resp.capacity_reservation_groups[0].owner_id #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/GetGroupsForCapacityReservation AWS API Documentation
+    #
+    # @overload get_groups_for_capacity_reservation(params = {})
+    # @param [Hash] params ({})
+    def get_groups_for_capacity_reservation(params = {}, options = {})
+      req = build_request(:get_groups_for_capacity_reservation, params)
+      req.send_request(options)
+    end
+
     # Preview a reservation purchase with configurations that match those of
     # your Dedicated Host. You must have active Dedicated Hosts in your
     # account before you purchase a reservation.
@@ -27924,6 +27985,7 @@ module Aws::EC2
     #   resp.launch_template_data.cpu_options.threads_per_core #=> Integer
     #   resp.launch_template_data.capacity_reservation_specification.capacity_reservation_preference #=> String, one of "open", "none"
     #   resp.launch_template_data.capacity_reservation_specification.capacity_reservation_target.capacity_reservation_id #=> String
+    #   resp.launch_template_data.capacity_reservation_specification.capacity_reservation_target.capacity_reservation_resource_group_arn #=> String
     #   resp.launch_template_data.license_specifications #=> Array
     #   resp.launch_template_data.license_specifications[0].license_configuration_arn #=> String
     #   resp.launch_template_data.hibernation_options.configured #=> Boolean
@@ -30327,6 +30389,7 @@ module Aws::EC2
     #       capacity_reservation_preference: "open", # accepts open, none
     #       capacity_reservation_target: {
     #         capacity_reservation_id: "CapacityReservationId",
+    #         capacity_reservation_resource_group_arn: "String",
     #       },
     #     },
     #     dry_run: false,
@@ -36362,6 +36425,7 @@ module Aws::EC2
     #       capacity_reservation_preference: "open", # accepts open, none
     #       capacity_reservation_target: {
     #         capacity_reservation_id: "CapacityReservationId",
+    #         capacity_reservation_resource_group_arn: "String",
     #       },
     #     },
     #     hibernation_options: {
@@ -36491,6 +36555,7 @@ module Aws::EC2
     #   resp.instances[0].capacity_reservation_id #=> String
     #   resp.instances[0].capacity_reservation_specification.capacity_reservation_preference #=> String, one of "open", "none"
     #   resp.instances[0].capacity_reservation_specification.capacity_reservation_target.capacity_reservation_id #=> String
+    #   resp.instances[0].capacity_reservation_specification.capacity_reservation_target.capacity_reservation_resource_group_arn #=> String
     #   resp.instances[0].hibernation_options.configured #=> Boolean
     #   resp.instances[0].licenses #=> Array
     #   resp.instances[0].licenses[0].license_configuration_arn #=> String
@@ -37862,7 +37927,7 @@ module Aws::EC2
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-ec2'
-      context[:gem_version] = '1.180.0'
+      context[:gem_version] = '1.181.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

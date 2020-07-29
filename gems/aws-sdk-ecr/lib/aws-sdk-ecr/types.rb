@@ -322,6 +322,10 @@ module Aws::ECR
     #         image_scanning_configuration: {
     #           scan_on_push: false,
     #         },
+    #         encryption_configuration: {
+    #           encryption_type: "AES256", # required, accepts AES256, KMS
+    #           kms_key: "KmsKey",
+    #         },
     #       }
     #
     # @!attribute [rw] repository_name
@@ -348,10 +352,15 @@ module Aws::ECR
     #   @return [String]
     #
     # @!attribute [rw] image_scanning_configuration
-    #   The image scanning configuration for the repository. This setting
-    #   determines whether images are scanned for known vulnerabilities
-    #   after being pushed to the repository.
+    #   The image scanning configuration for the repository. This determines
+    #   whether images are scanned for known vulnerabilities after being
+    #   pushed to the repository.
     #   @return [Types::ImageScanningConfiguration]
+    #
+    # @!attribute [rw] encryption_configuration
+    #   The encryption configuration for the repository. This determines how
+    #   the contents of your repository are encrypted at rest.
+    #   @return [Types::EncryptionConfiguration]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ecr-2015-09-21/CreateRepositoryRequest AWS API Documentation
     #
@@ -359,7 +368,8 @@ module Aws::ECR
       :repository_name,
       :tags,
       :image_tag_mutability,
-      :image_scanning_configuration)
+      :image_scanning_configuration,
+      :encryption_configuration)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -836,6 +846,75 @@ module Aws::ECR
     #
     class EmptyUploadException < Struct.new(
       :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The encryption configuration for the repository. This determines how
+    # the contents of your repository are encrypted at rest.
+    #
+    # By default, when no encryption configuration is set or the `AES256`
+    # encryption type is used, Amazon ECR uses server-side encryption with
+    # Amazon S3-managed encryption keys which encrypts your data at rest
+    # using an AES-256 encryption algorithm. This does not require any
+    # action on your part.
+    #
+    # For more control over the encryption of the contents of your
+    # repository, you can use server-side encryption with customer master
+    # keys (CMKs) stored in AWS Key Management Service (AWS KMS) to encrypt
+    # your images. For more information, see [Amazon ECR encryption at
+    # rest][1] in the *Amazon Elastic Container Registry User Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AmazonECR/latest/userguide/encryption-at-rest.html
+    #
+    # @note When making an API call, you may pass EncryptionConfiguration
+    #   data as a hash:
+    #
+    #       {
+    #         encryption_type: "AES256", # required, accepts AES256, KMS
+    #         kms_key: "KmsKey",
+    #       }
+    #
+    # @!attribute [rw] encryption_type
+    #   The encryption type to use.
+    #
+    #   If you use the `KMS` encryption type, the contents of the repository
+    #   will be encrypted using server-side encryption with customer master
+    #   keys (CMKs) stored in AWS KMS. When you use AWS KMS to encrypt your
+    #   data, you can either use the default AWS managed CMK for Amazon ECR,
+    #   or specify your own CMK, which you already created. For more
+    #   information, see [Protecting Data Using Server-Side Encryption with
+    #   CMKs Stored in AWS Key Management Service (SSE-KMS)][1] in the
+    #   *Amazon Simple Storage Service Console Developer Guide.*.
+    #
+    #   If you use the `AES256` encryption type, Amazon ECR uses server-side
+    #   encryption with Amazon S3-managed encryption keys which encrypts the
+    #   images in the repository using an AES-256 encryption algorithm. For
+    #   more information, see [Protecting Data Using Server-Side Encryption
+    #   with Amazon S3-Managed Encryption Keys (SSE-S3)][2] in the *Amazon
+    #   Simple Storage Service Console Developer Guide.*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/dev/UsingKMSEncryption.html
+    #   [2]: https://docs.aws.amazon.com/AmazonS3/latest/dev/UsingServerSideEncryption.html
+    #   @return [String]
+    #
+    # @!attribute [rw] kms_key
+    #   If you use the `KMS` encryption type, specify the CMK to use for
+    #   encryption. The alias, key ID, or full ARN of the CMK can be
+    #   specified. The key must exist in the same Region as the repository.
+    #   If no key is specified, the default AWS managed CMK for Amazon ECR
+    #   will be used.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ecr-2015-09-21/EncryptionConfiguration AWS API Documentation
+    #
+    class EncryptionConfiguration < Struct.new(
+      :encryption_type,
+      :kms_key)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1615,6 +1694,24 @@ module Aws::ECR
       include Aws::Structure
     end
 
+    # The operation failed due to a KMS exception.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @!attribute [rw] kms_error
+    #   The error code returned by AWS KMS.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ecr-2015-09-21/KmsException AWS API Documentation
+    #
+    class KmsException < Struct.new(
+      :message,
+      :kms_error)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # An object representing an Amazon ECR image layer.
     #
     # @!attribute [rw] layer_digest
@@ -1763,8 +1860,8 @@ module Aws::ECR
       include Aws::Structure
     end
 
-    # The previous lifecycle policy preview request has not completed.
-    # Please try again later.
+    # The previous lifecycle policy preview request has not completed. Wait
+    # and try again.
     #
     # @!attribute [rw] message
     #   @return [String]
@@ -2047,8 +2144,8 @@ module Aws::ECR
     #
     # @!attribute [rw] image_tag
     #   The tag to associate with the image. This parameter is required for
-    #   images that use the Docker Image Manifest V2 Schema 2 or OCI
-    #   formats.
+    #   images that use the Docker Image Manifest V2 Schema 2 or Open
+    #   Container Initiative (OCI) formats.
     #   @return [String]
     #
     # @!attribute [rw] image_digest
@@ -2288,8 +2385,8 @@ module Aws::ECR
     #   @return [String]
     #
     # @!attribute [rw] repository_uri
-    #   The URI for the repository. You can use this URI for Docker `push`
-    #   or `pull` operations.
+    #   The URI for the repository. You can use this URI for container image
+    #   `push` and `pull` operations.
     #   @return [String]
     #
     # @!attribute [rw] created_at
@@ -2305,6 +2402,11 @@ module Aws::ECR
     #   The image scanning configuration for a repository.
     #   @return [Types::ImageScanningConfiguration]
     #
+    # @!attribute [rw] encryption_configuration
+    #   The encryption configuration for the repository. This determines how
+    #   the contents of your repository are encrypted at rest.
+    #   @return [Types::EncryptionConfiguration]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ecr-2015-09-21/Repository AWS API Documentation
     #
     class Repository < Struct.new(
@@ -2314,7 +2416,8 @@ module Aws::ECR
       :repository_uri,
       :created_at,
       :image_tag_mutability,
-      :image_scanning_configuration)
+      :image_scanning_configuration,
+      :encryption_configuration)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2814,7 +2917,7 @@ module Aws::ECR
       include Aws::Structure
     end
 
-    # The upload could not be found, or the specified upload id is not valid
+    # The upload could not be found, or the specified upload ID is not valid
     # for this repository.
     #
     # @!attribute [rw] message

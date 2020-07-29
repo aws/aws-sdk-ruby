@@ -3066,6 +3066,26 @@ module Aws::EC2
       include Aws::Structure
     end
 
+    # Describes a resource group to which a Capacity Reservation has been
+    # added.
+    #
+    # @!attribute [rw] group_arn
+    #   The ARN of the resource group.
+    #   @return [String]
+    #
+    # @!attribute [rw] owner_id
+    #   The ID of the AWS account that owns the resource group.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CapacityReservationGroup AWS API Documentation
+    #
+    class CapacityReservationGroup < Struct.new(
+      :group_arn,
+      :owner_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Describes the strategy for using unused Capacity Reservations for
     # fulfilling On-Demand capacity.
     #
@@ -3170,7 +3190,8 @@ module Aws::EC2
     # instance to run as an On-Demand Instance or to run in any `open`
     # Capacity Reservation that has matching attributes (instance type,
     # platform, Availability Zone). Use the `CapacityReservationTarget`
-    # parameter to explicitly target a specific Capacity Reservation.
+    # parameter to explicitly target a specific Capacity Reservation or a
+    # Capacity Reservation group.
     #
     # @note When making an API call, you may pass CapacityReservationSpecification
     #   data as a hash:
@@ -3179,6 +3200,7 @@ module Aws::EC2
     #         capacity_reservation_preference: "open", # accepts open, none
     #         capacity_reservation_target: {
     #           capacity_reservation_id: "CapacityReservationId",
+    #           capacity_reservation_resource_group_arn: "String",
     #         },
     #       }
     #
@@ -3193,13 +3215,11 @@ module Aws::EC2
     #   * `none` - The instance avoids running in a Capacity Reservation
     #     even if one is available. The instance runs as an On-Demand
     #     Instance.
-    #
-    #   When `CapacityReservationPreference` is not specified, it defaults
-    #   to `open`.
     #   @return [String]
     #
     # @!attribute [rw] capacity_reservation_target
-    #   Information about the target Capacity Reservation.
+    #   Information about the target Capacity Reservation or Capacity
+    #   Reservation group.
     #   @return [Types::CapacityReservationTarget]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CapacityReservationSpecification AWS API Documentation
@@ -3217,7 +3237,8 @@ module Aws::EC2
     # if it is configured in run in any `open` Capacity Reservation that has
     # matching attributes (instance type, platform, Availability Zone). The
     # action returns the `capacityReservationTarget` response element if the
-    # instance explicily targets a specific Capacity Reservation.
+    # instance explicily targets a specific Capacity Reservation or Capacity
+    # Reservation group.
     #
     # @!attribute [rw] capacity_reservation_preference
     #   Describes the instance's Capacity Reservation preferences. Possible
@@ -3232,7 +3253,8 @@ module Aws::EC2
     #   @return [String]
     #
     # @!attribute [rw] capacity_reservation_target
-    #   Information about the targeted Capacity Reservation.
+    #   Information about the targeted Capacity Reservation or Capacity
+    #   Reservation group.
     #   @return [Types::CapacityReservationTargetResponse]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CapacityReservationSpecificationResponse AWS API Documentation
@@ -3244,37 +3266,49 @@ module Aws::EC2
       include Aws::Structure
     end
 
-    # Describes a target Capacity Reservation.
+    # Describes a target Capacity Reservation or Capacity Reservation group.
     #
     # @note When making an API call, you may pass CapacityReservationTarget
     #   data as a hash:
     #
     #       {
     #         capacity_reservation_id: "CapacityReservationId",
+    #         capacity_reservation_resource_group_arn: "String",
     #       }
     #
     # @!attribute [rw] capacity_reservation_id
-    #   The ID of the Capacity Reservation.
+    #   The ID of the Capacity Reservation in which to run the instance.
+    #   @return [String]
+    #
+    # @!attribute [rw] capacity_reservation_resource_group_arn
+    #   The ARN of the Capacity Reservation resource group in which to run
+    #   the instance.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CapacityReservationTarget AWS API Documentation
     #
     class CapacityReservationTarget < Struct.new(
-      :capacity_reservation_id)
+      :capacity_reservation_id,
+      :capacity_reservation_resource_group_arn)
       SENSITIVE = []
       include Aws::Structure
     end
 
-    # Describes a target Capacity Reservation.
+    # Describes a target Capacity Reservation or Capacity Reservation group.
     #
     # @!attribute [rw] capacity_reservation_id
-    #   The ID of the Capacity Reservation.
+    #   The ID of the targeted Capacity Reservation.
+    #   @return [String]
+    #
+    # @!attribute [rw] capacity_reservation_resource_group_arn
+    #   The ARN of the targeted Capacity Reservation group.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CapacityReservationTargetResponse AWS API Documentation
     #
     class CapacityReservationTargetResponse < Struct.new(
-      :capacity_reservation_id)
+      :capacity_reservation_id,
+      :capacity_reservation_resource_group_arn)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4652,8 +4686,6 @@ module Aws::EC2
     #   Unique, case-sensitive identifier that you provide to ensure the
     #   idempotency of the request. For more information, see [How to Ensure
     #   Idempotency][1].
-    #
-    #   Constraint: Maximum 64 ASCII characters.
     #
     #
     #
@@ -6361,6 +6393,7 @@ module Aws::EC2
     #             capacity_reservation_preference: "open", # accepts open, none
     #             capacity_reservation_target: {
     #               capacity_reservation_id: "CapacityReservationId",
+    #               capacity_reservation_resource_group_arn: "String",
     #             },
     #           },
     #           license_specifications: [
@@ -6581,6 +6614,7 @@ module Aws::EC2
     #             capacity_reservation_preference: "open", # accepts open, none
     #             capacity_reservation_target: {
     #               capacity_reservation_id: "CapacityReservationId",
+    #               capacity_reservation_resource_group_arn: "String",
     #             },
     #           },
     #           license_specifications: [
@@ -12658,13 +12692,15 @@ module Aws::EC2
     #   @return [Array<String>]
     #
     # @!attribute [rw] next_token
-    #   The token to retrieve the next page of results.
+    #   The token to use to retrieve the next page of results.
     #   @return [String]
     #
     # @!attribute [rw] max_results
     #   The maximum number of results to return for the request in a single
     #   page. The remaining results can be seen by sending another request
-    #   with the returned nextToken value.
+    #   with the returned `nextToken` value. This value can be between 5 and
+    #   500. If `maxResults` is given a larger value than 500, you receive
+    #   an error.
     #   @return [Integer]
     #
     # @!attribute [rw] filters
@@ -26416,13 +26452,15 @@ module Aws::EC2
     #   @return [String]
     #
     # @!attribute [rw] next_token
-    #   The token to retrieve the next page of results.
+    #   The token to use to retrieve the next page of results.
     #   @return [String]
     #
     # @!attribute [rw] max_results
     #   The maximum number of results to return for the request in a single
     #   page. The remaining results can be seen by sending another request
-    #   with the returned nextToken value.
+    #   with the returned `nextToken` value. This value can be between 5 and
+    #   500. If `maxResults` is given a larger value than 500, you receive
+    #   an error.
     #
     #   Valid range: Minimum value of 1. Maximum value of 1000.
     #   @return [Integer]
@@ -26820,6 +26858,69 @@ module Aws::EC2
     #
     class GetEbsEncryptionByDefaultResult < Struct.new(
       :ebs_encryption_by_default)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass GetGroupsForCapacityReservationRequest
+    #   data as a hash:
+    #
+    #       {
+    #         capacity_reservation_id: "CapacityReservationId", # required
+    #         next_token: "String",
+    #         max_results: 1,
+    #         dry_run: false,
+    #       }
+    #
+    # @!attribute [rw] capacity_reservation_id
+    #   The ID of the Capacity Reservation.
+    #   @return [String]
+    #
+    # @!attribute [rw] next_token
+    #   The token to use to retrieve the next page of results.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of results to return for the request in a single
+    #   page. The remaining results can be seen by sending another request
+    #   with the returned `nextToken` value. This value can be between 5 and
+    #   500. If `maxResults` is given a larger value than 500, you receive
+    #   an error.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/GetGroupsForCapacityReservationRequest AWS API Documentation
+    #
+    class GetGroupsForCapacityReservationRequest < Struct.new(
+      :capacity_reservation_id,
+      :next_token,
+      :max_results,
+      :dry_run)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] next_token
+    #   The token to use to retrieve the next page of results. This value is
+    #   `null` when there are no more results to return.
+    #   @return [String]
+    #
+    # @!attribute [rw] capacity_reservation_groups
+    #   Information about the resource groups to which the Capacity
+    #   Reservation has been added.
+    #   @return [Array<Types::CapacityReservationGroup>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/GetGroupsForCapacityReservationResult AWS API Documentation
+    #
+    class GetGroupsForCapacityReservationResult < Struct.new(
+      :next_token,
+      :capacity_reservation_groups)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -31860,7 +31961,8 @@ module Aws::EC2
     # run in On-Demand capacity or to run in any `open` Capacity Reservation
     # that has matching attributes (instance type, platform, Availability
     # Zone). Use the `CapacityReservationTarget` parameter to explicitly
-    # target a specific Capacity Reservation.
+    # target a specific Capacity Reservation or a Capacity Reservation
+    # group.
     #
     # @note When making an API call, you may pass LaunchTemplateCapacityReservationSpecificationRequest
     #   data as a hash:
@@ -31869,6 +31971,7 @@ module Aws::EC2
     #         capacity_reservation_preference: "open", # accepts open, none
     #         capacity_reservation_target: {
     #           capacity_reservation_id: "CapacityReservationId",
+    #           capacity_reservation_resource_group_arn: "String",
     #         },
     #       }
     #
@@ -31885,7 +31988,8 @@ module Aws::EC2
     #   @return [String]
     #
     # @!attribute [rw] capacity_reservation_target
-    #   Information about the target Capacity Reservation.
+    #   Information about the target Capacity Reservation or Capacity
+    #   Reservation group.
     #   @return [Types::CapacityReservationTarget]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/LaunchTemplateCapacityReservationSpecificationRequest AWS API Documentation
@@ -31912,7 +32016,8 @@ module Aws::EC2
     #   @return [String]
     #
     # @!attribute [rw] capacity_reservation_target
-    #   Information about the target Capacity Reservation.
+    #   Information about the target Capacity Reservation or Capacity
+    #   Reservation group.
     #   @return [Types::CapacityReservationTargetResponse]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/LaunchTemplateCapacityReservationSpecificationResponse AWS API Documentation
@@ -34641,6 +34746,7 @@ module Aws::EC2
     #           capacity_reservation_preference: "open", # accepts open, none
     #           capacity_reservation_target: {
     #             capacity_reservation_id: "CapacityReservationId",
+    #             capacity_reservation_resource_group_arn: "String",
     #           },
     #         },
     #         dry_run: false,
@@ -40425,6 +40531,7 @@ module Aws::EC2
     #           capacity_reservation_preference: "open", # accepts open, none
     #           capacity_reservation_target: {
     #             capacity_reservation_id: "CapacityReservationId",
+    #             capacity_reservation_resource_group_arn: "String",
     #           },
     #         },
     #         license_specifications: [
@@ -42994,6 +43101,7 @@ module Aws::EC2
     #           capacity_reservation_preference: "open", # accepts open, none
     #           capacity_reservation_target: {
     #             capacity_reservation_id: "CapacityReservationId",
+    #             capacity_reservation_resource_group_arn: "String",
     #           },
     #         },
     #         hibernation_options: {

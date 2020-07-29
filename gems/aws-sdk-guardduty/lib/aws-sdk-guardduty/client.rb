@@ -395,6 +395,10 @@ module Aws::GuardDuty
     #   An enum value that specifies how frequently updated findings are
     #   exported.
     #
+    # @option params [Types::DataSourceConfigurations] :data_sources
+    #   An object that describes which data sources will be enabled for the
+    #   detector.
+    #
     # @option params [Hash<String,String>] :tags
     #   The tags to be added to a new detector resource.
     #
@@ -408,6 +412,11 @@ module Aws::GuardDuty
     #     enable: false, # required
     #     client_token: "ClientToken",
     #     finding_publishing_frequency: "FIFTEEN_MINUTES", # accepts FIFTEEN_MINUTES, ONE_HOUR, SIX_HOURS
+    #     data_sources: {
+    #       s3_logs: {
+    #         enable: false, # required
+    #       },
+    #     },
     #     tags: {
     #       "TagKey" => "TagValue",
     #     },
@@ -641,8 +650,7 @@ module Aws::GuardDuty
     #   The format of the file that contains the IPSet.
     #
     # @option params [required, String] :location
-    #   The URI of the file that contains the IPSet. For example:
-    #   https://s3.us-west-2.amazonaws.com/my-bucket/my-object-key.
+    #   The URI of the file that contains the IPSet.
     #
     # @option params [required, Boolean] :activate
     #   A Boolean value that indicates whether GuardDuty is to start using the
@@ -827,8 +835,7 @@ module Aws::GuardDuty
     #   The format of the file that contains the ThreatIntelSet.
     #
     # @option params [required, String] :location
-    #   The URI of the file that contains the ThreatIntelSet. For example:
-    #   https://s3.us-west-2.amazonaws.com/my-bucket/my-object-key.
+    #   The URI of the file that contains the ThreatIntelSet.
     #
     # @option params [required, Boolean] :activate
     #   A Boolean value that indicates whether GuardDuty is to start using the
@@ -1116,6 +1123,7 @@ module Aws::GuardDuty
     #
     #   * {Types::DescribeOrganizationConfigurationResponse#auto_enable #auto_enable} => Boolean
     #   * {Types::DescribeOrganizationConfigurationResponse#member_account_limit_reached #member_account_limit_reached} => Boolean
+    #   * {Types::DescribeOrganizationConfigurationResponse#data_sources #data_sources} => Types::OrganizationDataSourceConfigurationsResult
     #
     # @example Request syntax with placeholder values
     #
@@ -1127,6 +1135,7 @@ module Aws::GuardDuty
     #
     #   resp.auto_enable #=> Boolean
     #   resp.member_account_limit_reached #=> Boolean
+    #   resp.data_sources.s3_logs.auto_enable #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/DescribeOrganizationConfiguration AWS API Documentation
     #
@@ -1300,6 +1309,7 @@ module Aws::GuardDuty
     #   * {Types::GetDetectorResponse#service_role #service_role} => String
     #   * {Types::GetDetectorResponse#status #status} => String
     #   * {Types::GetDetectorResponse#updated_at #updated_at} => String
+    #   * {Types::GetDetectorResponse#data_sources #data_sources} => Types::DataSourceConfigurationsResult
     #   * {Types::GetDetectorResponse#tags #tags} => Hash&lt;String,String&gt;
     #
     # @example Request syntax with placeholder values
@@ -1315,6 +1325,10 @@ module Aws::GuardDuty
     #   resp.service_role #=> String
     #   resp.status #=> String, one of "ENABLED", "DISABLED"
     #   resp.updated_at #=> String
+    #   resp.data_sources.cloud_trail.status #=> String, one of "ENABLED", "DISABLED"
+    #   resp.data_sources.dns_logs.status #=> String, one of "ENABLED", "DISABLED"
+    #   resp.data_sources.flow_logs.status #=> String, one of "ENABLED", "DISABLED"
+    #   resp.data_sources.s3_logs.status #=> String, one of "ENABLED", "DISABLED"
     #   resp.tags #=> Hash
     #   resp.tags["TagKey"] #=> String
     #
@@ -1712,6 +1726,48 @@ module Aws::GuardDuty
       req.send_request(options)
     end
 
+    # Describes which data sources are enabled for the member account's
+    # detector.
+    #
+    # @option params [required, String] :detector_id
+    #   The detector ID for the master account.
+    #
+    # @option params [required, Array<String>] :account_ids
+    #   The account ID of the member account.
+    #
+    # @return [Types::GetMemberDetectorsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetMemberDetectorsResponse#member_data_source_configurations #member_data_source_configurations} => Array&lt;Types::MemberDataSourceConfiguration&gt;
+    #   * {Types::GetMemberDetectorsResponse#unprocessed_accounts #unprocessed_accounts} => Array&lt;Types::UnprocessedAccount&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_member_detectors({
+    #     detector_id: "DetectorId", # required
+    #     account_ids: ["AccountId"], # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.member_data_source_configurations #=> Array
+    #   resp.member_data_source_configurations[0].account_id #=> String
+    #   resp.member_data_source_configurations[0].data_sources.cloud_trail.status #=> String, one of "ENABLED", "DISABLED"
+    #   resp.member_data_source_configurations[0].data_sources.dns_logs.status #=> String, one of "ENABLED", "DISABLED"
+    #   resp.member_data_source_configurations[0].data_sources.flow_logs.status #=> String, one of "ENABLED", "DISABLED"
+    #   resp.member_data_source_configurations[0].data_sources.s3_logs.status #=> String, one of "ENABLED", "DISABLED"
+    #   resp.unprocessed_accounts #=> Array
+    #   resp.unprocessed_accounts[0].account_id #=> String
+    #   resp.unprocessed_accounts[0].result #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/GetMemberDetectors AWS API Documentation
+    #
+    # @overload get_member_detectors(params = {})
+    # @param [Hash] params ({})
+    def get_member_detectors(params = {}, options = {})
+      req = build_request(:get_member_detectors, params)
+      req.send_request(options)
+    end
+
     # Retrieves GuardDuty member accounts (to the current GuardDuty master
     # account) specified by the account IDs.
     #
@@ -1976,6 +2032,8 @@ module Aws::GuardDuty
     #
     #   * resource.instanceDetails.instanceId
     #
+    #   * resource.instanceDetails.outpostArn
+    #
     #   * resource.instanceDetails.networkInterfaces.ipv6Addresses
     #
     #   * resource.instanceDetails.networkInterfaces.privateIpAddresses.privateIpAddress
@@ -2025,6 +2083,8 @@ module Aws::GuardDuty
     #   * service.action.networkConnectionAction.localPortDetails.port
     #
     #   * service.action.networkConnectionAction.protocol
+    #
+    #   * service.action.networkConnectionAction.localIpDetails.ipAddressV4
     #
     #   * service.action.networkConnectionAction.remoteIpDetails.city.cityName
     #
@@ -2220,8 +2280,8 @@ module Aws::GuardDuty
       req.send_request(options)
     end
 
-    # Lists details about all member accounts for the current GuardDuty
-    # master account.
+    # Lists details about associated member accounts for the current
+    # GuardDuty master account.
     #
     # @option params [required, String] :detector_id
     #   The unique ID of the detector the member is associated with.
@@ -2239,9 +2299,11 @@ module Aws::GuardDuty
     #   data.
     #
     # @option params [String] :only_associated
-    #   Specifies whether to only return associated members or to return all
-    #   members (including members who haven't been invited yet or have been
-    #   disassociated).
+    #   Specifies what member accounts the response includes based on their
+    #   relationship status with the master account. The default value is
+    #   "true". If set to "false" the response includes all existing
+    #   member accounts (including members who haven't been invited yet or
+    #   have been disassociated).
     #
     # @return [Types::ListMembersResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -2620,6 +2682,9 @@ module Aws::GuardDuty
     #   An enum value that specifies how frequently findings are exported,
     #   such as to CloudWatch Events.
     #
+    # @option params [Types::DataSourceConfigurations] :data_sources
+    #   An object that describes which data sources will be updated.
+    #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
     # @example Request syntax with placeholder values
@@ -2628,6 +2693,11 @@ module Aws::GuardDuty
     #     detector_id: "DetectorId", # required
     #     enable: false,
     #     finding_publishing_frequency: "FIFTEEN_MINUTES", # accepts FIFTEEN_MINUTES, ONE_HOUR, SIX_HOURS
+    #     data_sources: {
+    #       s3_logs: {
+    #         enable: false, # required
+    #       },
+    #     },
     #   })
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/UpdateDetector AWS API Documentation
@@ -2757,8 +2827,7 @@ module Aws::GuardDuty
     #   The unique ID that specifies the IPSet that you want to update.
     #
     # @option params [String] :location
-    #   The updated URI of the file that contains the IPSet. For example:
-    #   https://s3.us-west-2.amazonaws.com/my-bucket/my-object-key.
+    #   The updated URI of the file that contains the IPSet.
     #
     # @option params [Boolean] :activate
     #   The updated Boolean value that specifies whether the IPSet is active
@@ -2785,6 +2854,48 @@ module Aws::GuardDuty
       req.send_request(options)
     end
 
+    # Contains information on member accounts to be updated.
+    #
+    # @option params [required, String] :detector_id
+    #   The detector ID of the master account.
+    #
+    # @option params [required, Array<String>] :account_ids
+    #   A list of member account IDs to be updated.
+    #
+    # @option params [Types::DataSourceConfigurations] :data_sources
+    #   An object describes which data sources will be updated.
+    #
+    # @return [Types::UpdateMemberDetectorsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::UpdateMemberDetectorsResponse#unprocessed_accounts #unprocessed_accounts} => Array&lt;Types::UnprocessedAccount&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_member_detectors({
+    #     detector_id: "DetectorId", # required
+    #     account_ids: ["AccountId"], # required
+    #     data_sources: {
+    #       s3_logs: {
+    #         enable: false, # required
+    #       },
+    #     },
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.unprocessed_accounts #=> Array
+    #   resp.unprocessed_accounts[0].account_id #=> String
+    #   resp.unprocessed_accounts[0].result #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/UpdateMemberDetectors AWS API Documentation
+    #
+    # @overload update_member_detectors(params = {})
+    # @param [Hash] params ({})
+    def update_member_detectors(params = {}, options = {})
+      req = build_request(:update_member_detectors, params)
+      req.send_request(options)
+    end
+
     # Updates the delegated administrator account with the values provided.
     #
     # @option params [required, String] :detector_id
@@ -2794,6 +2905,9 @@ module Aws::GuardDuty
     #   Indicates whether to automatically enable member accounts in the
     #   organization.
     #
+    # @option params [Types::OrganizationDataSourceConfigurations] :data_sources
+    #   An object describes which data sources will be updated.
+    #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
     # @example Request syntax with placeholder values
@@ -2801,6 +2915,11 @@ module Aws::GuardDuty
     #   resp = client.update_organization_configuration({
     #     detector_id: "DetectorId", # required
     #     auto_enable: false, # required
+    #     data_sources: {
+    #       s3_logs: {
+    #         auto_enable: false, # required
+    #       },
+    #     },
     #   })
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/UpdateOrganizationConfiguration AWS API Documentation
@@ -2863,8 +2982,7 @@ module Aws::GuardDuty
     #   update.
     #
     # @option params [String] :location
-    #   The updated URI of the file that contains the ThreateIntelSet. For
-    #   example: https://s3.us-west-2.amazonaws.com/my-bucket/my-object-key.
+    #   The updated URI of the file that contains the ThreateIntelSet.
     #
     # @option params [Boolean] :activate
     #   The updated Boolean value that specifies whether the ThreateIntelSet
@@ -2904,7 +3022,7 @@ module Aws::GuardDuty
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-guardduty'
-      context[:gem_version] = '1.36.0'
+      context[:gem_version] = '1.37.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

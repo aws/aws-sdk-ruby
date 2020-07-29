@@ -161,6 +161,8 @@ module Aws::EC2
     CancelledSpotInstanceRequest = Shapes::StructureShape.new(name: 'CancelledSpotInstanceRequest')
     CancelledSpotInstanceRequestList = Shapes::ListShape.new(name: 'CancelledSpotInstanceRequestList')
     CapacityReservation = Shapes::StructureShape.new(name: 'CapacityReservation')
+    CapacityReservationGroup = Shapes::StructureShape.new(name: 'CapacityReservationGroup')
+    CapacityReservationGroupSet = Shapes::ListShape.new(name: 'CapacityReservationGroupSet')
     CapacityReservationId = Shapes::StringShape.new(name: 'CapacityReservationId')
     CapacityReservationIdSet = Shapes::ListShape.new(name: 'CapacityReservationIdSet')
     CapacityReservationInstancePlatform = Shapes::StringShape.new(name: 'CapacityReservationInstancePlatform')
@@ -961,6 +963,9 @@ module Aws::EC2
     GetEbsDefaultKmsKeyIdResult = Shapes::StructureShape.new(name: 'GetEbsDefaultKmsKeyIdResult')
     GetEbsEncryptionByDefaultRequest = Shapes::StructureShape.new(name: 'GetEbsEncryptionByDefaultRequest')
     GetEbsEncryptionByDefaultResult = Shapes::StructureShape.new(name: 'GetEbsEncryptionByDefaultResult')
+    GetGroupsForCapacityReservationRequest = Shapes::StructureShape.new(name: 'GetGroupsForCapacityReservationRequest')
+    GetGroupsForCapacityReservationRequestMaxResults = Shapes::IntegerShape.new(name: 'GetGroupsForCapacityReservationRequestMaxResults')
+    GetGroupsForCapacityReservationResult = Shapes::StructureShape.new(name: 'GetGroupsForCapacityReservationResult')
     GetHostReservationPurchasePreviewRequest = Shapes::StructureShape.new(name: 'GetHostReservationPurchasePreviewRequest')
     GetHostReservationPurchasePreviewResult = Shapes::StructureShape.new(name: 'GetHostReservationPurchasePreviewResult')
     GetLaunchTemplateDataRequest = Shapes::StructureShape.new(name: 'GetLaunchTemplateDataRequest')
@@ -2578,6 +2583,12 @@ module Aws::EC2
     CapacityReservation.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "tagSet"))
     CapacityReservation.struct_class = Types::CapacityReservation
 
+    CapacityReservationGroup.add_member(:group_arn, Shapes::ShapeRef.new(shape: String, location_name: "groupArn"))
+    CapacityReservationGroup.add_member(:owner_id, Shapes::ShapeRef.new(shape: String, location_name: "ownerId"))
+    CapacityReservationGroup.struct_class = Types::CapacityReservationGroup
+
+    CapacityReservationGroupSet.member = Shapes::ShapeRef.new(shape: CapacityReservationGroup, location_name: "item")
+
     CapacityReservationIdSet.member = Shapes::ShapeRef.new(shape: CapacityReservationId, location_name: "item")
 
     CapacityReservationOptions.add_member(:usage_strategy, Shapes::ShapeRef.new(shape: FleetCapacityReservationUsageStrategy, location_name: "usageStrategy"))
@@ -2597,9 +2608,11 @@ module Aws::EC2
     CapacityReservationSpecificationResponse.struct_class = Types::CapacityReservationSpecificationResponse
 
     CapacityReservationTarget.add_member(:capacity_reservation_id, Shapes::ShapeRef.new(shape: CapacityReservationId, location_name: "CapacityReservationId"))
+    CapacityReservationTarget.add_member(:capacity_reservation_resource_group_arn, Shapes::ShapeRef.new(shape: String, location_name: "CapacityReservationResourceGroupArn"))
     CapacityReservationTarget.struct_class = Types::CapacityReservationTarget
 
     CapacityReservationTargetResponse.add_member(:capacity_reservation_id, Shapes::ShapeRef.new(shape: String, location_name: "capacityReservationId"))
+    CapacityReservationTargetResponse.add_member(:capacity_reservation_resource_group_arn, Shapes::ShapeRef.new(shape: String, location_name: "capacityReservationResourceGroupArn"))
     CapacityReservationTargetResponse.struct_class = Types::CapacityReservationTargetResponse
 
     CertificateAuthentication.add_member(:client_root_certificate_chain, Shapes::ShapeRef.new(shape: String, location_name: "clientRootCertificateChain"))
@@ -5826,6 +5839,16 @@ module Aws::EC2
 
     GetEbsEncryptionByDefaultResult.add_member(:ebs_encryption_by_default, Shapes::ShapeRef.new(shape: Boolean, location_name: "ebsEncryptionByDefault"))
     GetEbsEncryptionByDefaultResult.struct_class = Types::GetEbsEncryptionByDefaultResult
+
+    GetGroupsForCapacityReservationRequest.add_member(:capacity_reservation_id, Shapes::ShapeRef.new(shape: CapacityReservationId, required: true, location_name: "CapacityReservationId"))
+    GetGroupsForCapacityReservationRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "NextToken"))
+    GetGroupsForCapacityReservationRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: GetGroupsForCapacityReservationRequestMaxResults, location_name: "MaxResults"))
+    GetGroupsForCapacityReservationRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "DryRun"))
+    GetGroupsForCapacityReservationRequest.struct_class = Types::GetGroupsForCapacityReservationRequest
+
+    GetGroupsForCapacityReservationResult.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "nextToken"))
+    GetGroupsForCapacityReservationResult.add_member(:capacity_reservation_groups, Shapes::ShapeRef.new(shape: CapacityReservationGroupSet, location_name: "capacityReservationGroupSet"))
+    GetGroupsForCapacityReservationResult.struct_class = Types::GetGroupsForCapacityReservationResult
 
     GetHostReservationPurchasePreviewRequest.add_member(:host_id_set, Shapes::ShapeRef.new(shape: RequestHostIdSet, required: true, location_name: "HostIdSet"))
     GetHostReservationPurchasePreviewRequest.add_member(:offering_id, Shapes::ShapeRef.new(shape: OfferingId, required: true, location_name: "OfferingId"))
@@ -12897,6 +12920,20 @@ module Aws::EC2
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: GetEbsEncryptionByDefaultRequest)
         o.output = Shapes::ShapeRef.new(shape: GetEbsEncryptionByDefaultResult)
+      end)
+
+      api.add_operation(:get_groups_for_capacity_reservation, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetGroupsForCapacityReservation"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: GetGroupsForCapacityReservationRequest)
+        o.output = Shapes::ShapeRef.new(shape: GetGroupsForCapacityReservationResult)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
       end)
 
       api.add_operation(:get_host_reservation_purchase_preview, Seahorse::Model::Operation.new.tap do |o|

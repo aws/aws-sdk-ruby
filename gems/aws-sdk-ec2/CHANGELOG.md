@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.181.0 (2020-07-29)
+------------------
+
+* Feature - Adding support to target EC2 On-Demand Capacity Reservations within an AWS Resource Group to launch EC2 instances.
+
 1.180.0 (2020-07-28)
 ------------------
 

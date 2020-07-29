@@ -405,6 +405,7 @@ module Aws::EC2
     #       capacity_reservation_preference: "open", # accepts open, none
     #       capacity_reservation_target: {
     #         capacity_reservation_id: "CapacityReservationId",
+    #         capacity_reservation_resource_group_arn: "String",
     #       },
     #     },
     #     hibernation_options: {

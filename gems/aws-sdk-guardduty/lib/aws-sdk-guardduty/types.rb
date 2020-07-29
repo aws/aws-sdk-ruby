@@ -379,6 +379,22 @@ module Aws::GuardDuty
       include Aws::Structure
     end
 
+    # Contains information on the status of CloudTrail as a data source for
+    # the detector.
+    #
+    # @!attribute [rw] status
+    #   Describes whether CloudTrail is enabled as a data source for the
+    #   detector.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/CloudTrailConfigurationResult AWS API Documentation
+    #
+    class CloudTrailConfigurationResult < Struct.new(
+      :status)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Contains information about the condition.
     #
     # @note When making an API call, you may pass Condition
@@ -505,6 +521,11 @@ module Aws::GuardDuty
     #         enable: false, # required
     #         client_token: "ClientToken",
     #         finding_publishing_frequency: "FIFTEEN_MINUTES", # accepts FIFTEEN_MINUTES, ONE_HOUR, SIX_HOURS
+    #         data_sources: {
+    #           s3_logs: {
+    #             enable: false, # required
+    #           },
+    #         },
     #         tags: {
     #           "TagKey" => "TagValue",
     #         },
@@ -527,6 +548,11 @@ module Aws::GuardDuty
     #   exported.
     #   @return [String]
     #
+    # @!attribute [rw] data_sources
+    #   An object that describes which data sources will be enabled for the
+    #   detector.
+    #   @return [Types::DataSourceConfigurations]
+    #
     # @!attribute [rw] tags
     #   The tags to be added to a new detector resource.
     #   @return [Hash<String,String>]
@@ -537,6 +563,7 @@ module Aws::GuardDuty
       :enable,
       :client_token,
       :finding_publishing_frequency,
+      :data_sources,
       :tags)
       SENSITIVE = []
       include Aws::Structure
@@ -797,8 +824,7 @@ module Aws::GuardDuty
     #   @return [String]
     #
     # @!attribute [rw] location
-    #   The URI of the file that contains the IPSet. For example:
-    #   https://s3.us-west-2.amazonaws.com/my-bucket/my-object-key.
+    #   The URI of the file that contains the IPSet.
     #   @return [String]
     #
     # @!attribute [rw] activate
@@ -1006,8 +1032,7 @@ module Aws::GuardDuty
     #   @return [String]
     #
     # @!attribute [rw] location
-    #   The URI of the file that contains the ThreatIntelSet. For example:
-    #   https://s3.us-west-2.amazonaws.com/my-bucket/my-object-key.
+    #   The URI of the file that contains the ThreatIntelSet.
     #   @return [String]
     #
     # @!attribute [rw] activate
@@ -1048,6 +1073,76 @@ module Aws::GuardDuty
     #
     class CreateThreatIntelSetResponse < Struct.new(
       :threat_intel_set_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains information on the status of DNS logs as a data source.
+    #
+    # @!attribute [rw] status
+    #   Denotes whether DNS logs is enabled as a data source.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/DNSLogsConfigurationResult AWS API Documentation
+    #
+    class DNSLogsConfigurationResult < Struct.new(
+      :status)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains information about which data sources are enabled.
+    #
+    # @note When making an API call, you may pass DataSourceConfigurations
+    #   data as a hash:
+    #
+    #       {
+    #         s3_logs: {
+    #           enable: false, # required
+    #         },
+    #       }
+    #
+    # @!attribute [rw] s3_logs
+    #   Describes whether S3 data event logs are enabled as a data source.
+    #   @return [Types::S3LogsConfiguration]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/DataSourceConfigurations AWS API Documentation
+    #
+    class DataSourceConfigurations < Struct.new(
+      :s3_logs)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains information on the status of data sources for the detector.
+    #
+    # @!attribute [rw] cloud_trail
+    #   An object that contains information on the status of CloudTrail as a
+    #   data source.
+    #   @return [Types::CloudTrailConfigurationResult]
+    #
+    # @!attribute [rw] dns_logs
+    #   An object that contains information on the status of DNS logs as a
+    #   data source.
+    #   @return [Types::DNSLogsConfigurationResult]
+    #
+    # @!attribute [rw] flow_logs
+    #   An object that contains information on the status of VPC flow logs
+    #   as a data source.
+    #   @return [Types::FlowLogsConfigurationResult]
+    #
+    # @!attribute [rw] s3_logs
+    #   An object that contains information on the status of S3 Data event
+    #   logs as a data source.
+    #   @return [Types::S3LogsConfigurationResult]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/DataSourceConfigurationsResult AWS API Documentation
+    #
+    class DataSourceConfigurationsResult < Struct.new(
+      :cloud_trail,
+      :dns_logs,
+      :flow_logs,
+      :s3_logs)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1354,11 +1449,17 @@ module Aws::GuardDuty
     #   already associated with the delegated administrator master account.
     #   @return [Boolean]
     #
+    # @!attribute [rw] data_sources
+    #   An object that describes which data sources are enabled
+    #   automatically for member accounts.
+    #   @return [Types::OrganizationDataSourceConfigurationsResult]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/DescribeOrganizationConfigurationResponse AWS API Documentation
     #
     class DescribeOrganizationConfigurationResponse < Struct.new(
       :auto_enable,
-      :member_account_limit_reached)
+      :member_account_limit_reached,
+      :data_sources)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1771,6 +1872,20 @@ module Aws::GuardDuty
       include Aws::Structure
     end
 
+    # Contains information on the status of VPC flow logs as a data source.
+    #
+    # @!attribute [rw] status
+    #   Denotes whether VPC flow logs is enabled as a data source.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/FlowLogsConfigurationResult AWS API Documentation
+    #
+    class FlowLogsConfigurationResult < Struct.new(
+      :status)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Contains information about the location of the remote IP address.
     #
     # @!attribute [rw] lat
@@ -1829,6 +1944,11 @@ module Aws::GuardDuty
     #   The last-updated timestamp for the detector.
     #   @return [String]
     #
+    # @!attribute [rw] data_sources
+    #   An object that describes which data sources are enabled for the
+    #   detector.
+    #   @return [Types::DataSourceConfigurationsResult]
+    #
     # @!attribute [rw] tags
     #   The tags of the detector resource.
     #   @return [Hash<String,String>]
@@ -1841,6 +1961,7 @@ module Aws::GuardDuty
       :service_role,
       :status,
       :updated_at,
+      :data_sources,
       :tags)
       SENSITIVE = []
       include Aws::Structure
@@ -2054,8 +2175,7 @@ module Aws::GuardDuty
     #   @return [String]
     #
     # @!attribute [rw] location
-    #   The URI of the file that contains the IPSet. For example:
-    #   https://s3.us-west-2.amazonaws.com/my-bucket/my-object-key.
+    #   The URI of the file that contains the IPSet.
     #   @return [String]
     #
     # @!attribute [rw] status
@@ -2123,6 +2243,50 @@ module Aws::GuardDuty
     #
     class GetMasterAccountResponse < Struct.new(
       :master)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass GetMemberDetectorsRequest
+    #   data as a hash:
+    #
+    #       {
+    #         detector_id: "DetectorId", # required
+    #         account_ids: ["AccountId"], # required
+    #       }
+    #
+    # @!attribute [rw] detector_id
+    #   The detector ID for the master account.
+    #   @return [String]
+    #
+    # @!attribute [rw] account_ids
+    #   The account ID of the member account.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/GetMemberDetectorsRequest AWS API Documentation
+    #
+    class GetMemberDetectorsRequest < Struct.new(
+      :detector_id,
+      :account_ids)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] member_data_source_configurations
+    #   An object that describes which data sources are enabled for a member
+    #   account.
+    #   @return [Array<Types::MemberDataSourceConfiguration>]
+    #
+    # @!attribute [rw] unprocessed_accounts
+    #   A list of member account IDs that were unable to be processed along
+    #   with an explanation for why they were not processed.
+    #   @return [Array<Types::UnprocessedAccount>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/GetMemberDetectorsResponse AWS API Documentation
+    #
+    class GetMemberDetectorsResponse < Struct.new(
+      :member_data_source_configurations,
+      :unprocessed_accounts)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2209,8 +2373,7 @@ module Aws::GuardDuty
     #   @return [String]
     #
     # @!attribute [rw] location
-    #   The URI of the file that contains the ThreatIntelSet. For example:
-    #   https://s3.us-west-2.amazonaws.com/my-bucket/my-object-key.
+    #   The URI of the file that contains the ThreatIntelSet.
     #   @return [String]
     #
     # @!attribute [rw] status
@@ -2600,6 +2763,8 @@ module Aws::GuardDuty
     #
     #   * resource.instanceDetails.instanceId
     #
+    #   * resource.instanceDetails.outpostArn
+    #
     #   * resource.instanceDetails.networkInterfaces.ipv6Addresses
     #
     #   * resource.instanceDetails.networkInterfaces.privateIpAddresses.privateIpAddress
@@ -2649,6 +2814,8 @@ module Aws::GuardDuty
     #   * service.action.networkConnectionAction.localPortDetails.port
     #
     #   * service.action.networkConnectionAction.protocol
+    #
+    #   * service.action.networkConnectionAction.localIpDetails.ipAddressV4
     #
     #   * service.action.networkConnectionAction.remoteIpDetails.city.cityName
     #
@@ -2863,9 +3030,11 @@ module Aws::GuardDuty
     #   @return [String]
     #
     # @!attribute [rw] only_associated
-    #   Specifies whether to only return associated members or to return all
-    #   members (including members who haven't been invited yet or have
-    #   been disassociated).
+    #   Specifies what member accounts the response includes based on their
+    #   relationship status with the master account. The default value is
+    #   "true". If set to "false" the response includes all existing
+    #   member accounts (including members who haven't been invited yet or
+    #   have been disassociated).
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/ListMembersRequest AWS API Documentation
@@ -3196,6 +3365,26 @@ module Aws::GuardDuty
       include Aws::Structure
     end
 
+    # Contains information on which data sources are enabled for a member
+    # account.
+    #
+    # @!attribute [rw] account_id
+    #   The account ID for the member account.
+    #   @return [String]
+    #
+    # @!attribute [rw] data_sources
+    #   Contains information on the status of data sources for the account.
+    #   @return [Types::DataSourceConfigurationsResult]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/MemberDataSourceConfiguration AWS API Documentation
+    #
+    class MemberDataSourceConfiguration < Struct.new(
+      :account_id,
+      :data_sources)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Contains information about the NETWORK\_CONNECTION action described in
     # the finding.
     #
@@ -3329,6 +3518,86 @@ module Aws::GuardDuty
       :asn_org,
       :isp,
       :org)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # An object that contains information on which data sources will be
+    # configured to be automatically enabled for new members within the
+    # organization.
+    #
+    # @note When making an API call, you may pass OrganizationDataSourceConfigurations
+    #   data as a hash:
+    #
+    #       {
+    #         s3_logs: {
+    #           auto_enable: false, # required
+    #         },
+    #       }
+    #
+    # @!attribute [rw] s3_logs
+    #   Describes whether S3 data event logs are enabled for new members of
+    #   the organization.
+    #   @return [Types::OrganizationS3LogsConfiguration]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/OrganizationDataSourceConfigurations AWS API Documentation
+    #
+    class OrganizationDataSourceConfigurations < Struct.new(
+      :s3_logs)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # An object that contains information on which data sources are
+    # automatically enabled for new members within the organization.
+    #
+    # @!attribute [rw] s3_logs
+    #   Describes whether S3 data event logs are enabled as a data source.
+    #   @return [Types::OrganizationS3LogsConfigurationResult]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/OrganizationDataSourceConfigurationsResult AWS API Documentation
+    #
+    class OrganizationDataSourceConfigurationsResult < Struct.new(
+      :s3_logs)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Describes whether S3 data event logs will be automatically enabled for
+    # new members of the organization.
+    #
+    # @note When making an API call, you may pass OrganizationS3LogsConfiguration
+    #   data as a hash:
+    #
+    #       {
+    #         auto_enable: false, # required
+    #       }
+    #
+    # @!attribute [rw] auto_enable
+    #   A value that contains information on whether S3 data event logs will
+    #   be enabled automatically as a data source for the organization.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/OrganizationS3LogsConfiguration AWS API Documentation
+    #
+    class OrganizationS3LogsConfiguration < Struct.new(
+      :auto_enable)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The current configuration of S3 data event logs as a data source for
+    # the organization.
+    #
+    # @!attribute [rw] auto_enable
+    #   A value that describes whether S3 data event logs are automatically
+    #   enabled for new members of the organization.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/OrganizationS3LogsConfigurationResult AWS API Documentation
+    #
+    class OrganizationS3LogsConfigurationResult < Struct.new(
+      :auto_enable)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3565,6 +3834,8 @@ module Aws::GuardDuty
       include Aws::Structure
     end
 
+    # Contains information on the S3 bucket.
+    #
     # @!attribute [rw] arn
     #   The Amazon Resource Name (ARN) of the S3 bucket.
     #   @return [String]
@@ -3608,6 +3879,42 @@ module Aws::GuardDuty
       :tags,
       :default_server_side_encryption,
       :public_access)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Describes whether S3 data event logs will be enabled as a data source.
+    #
+    # @note When making an API call, you may pass S3LogsConfiguration
+    #   data as a hash:
+    #
+    #       {
+    #         enable: false, # required
+    #       }
+    #
+    # @!attribute [rw] enable
+    #   The status of S3 data event logs as a data source.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/S3LogsConfiguration AWS API Documentation
+    #
+    class S3LogsConfiguration < Struct.new(
+      :enable)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Describes whether S3 data event logs will be enabled as a data source.
+    #
+    # @!attribute [rw] status
+    #   A value that describes whether S3 data event logs are automatically
+    #   enabled for new members of the organization.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/S3LogsConfigurationResult AWS API Documentation
+    #
+    class S3LogsConfigurationResult < Struct.new(
+      :status)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3957,6 +4264,11 @@ module Aws::GuardDuty
     #         detector_id: "DetectorId", # required
     #         enable: false,
     #         finding_publishing_frequency: "FIFTEEN_MINUTES", # accepts FIFTEEN_MINUTES, ONE_HOUR, SIX_HOURS
+    #         data_sources: {
+    #           s3_logs: {
+    #             enable: false, # required
+    #           },
+    #         },
     #       }
     #
     # @!attribute [rw] detector_id
@@ -3972,12 +4284,17 @@ module Aws::GuardDuty
     #   such as to CloudWatch Events.
     #   @return [String]
     #
+    # @!attribute [rw] data_sources
+    #   An object that describes which data sources will be updated.
+    #   @return [Types::DataSourceConfigurations]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/UpdateDetectorRequest AWS API Documentation
     #
     class UpdateDetectorRequest < Struct.new(
       :detector_id,
       :enable,
-      :finding_publishing_frequency)
+      :finding_publishing_frequency,
+      :data_sources)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4137,8 +4454,7 @@ module Aws::GuardDuty
     #   @return [String]
     #
     # @!attribute [rw] location
-    #   The updated URI of the file that contains the IPSet. For example:
-    #   https://s3.us-west-2.amazonaws.com/my-bucket/my-object-key.
+    #   The updated URI of the file that contains the IPSet.
     #   @return [String]
     #
     # @!attribute [rw] activate
@@ -4162,12 +4478,65 @@ module Aws::GuardDuty
     #
     class UpdateIPSetResponse < Aws::EmptyStructure; end
 
+    # @note When making an API call, you may pass UpdateMemberDetectorsRequest
+    #   data as a hash:
+    #
+    #       {
+    #         detector_id: "DetectorId", # required
+    #         account_ids: ["AccountId"], # required
+    #         data_sources: {
+    #           s3_logs: {
+    #             enable: false, # required
+    #           },
+    #         },
+    #       }
+    #
+    # @!attribute [rw] detector_id
+    #   The detector ID of the master account.
+    #   @return [String]
+    #
+    # @!attribute [rw] account_ids
+    #   A list of member account IDs to be updated.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] data_sources
+    #   An object describes which data sources will be updated.
+    #   @return [Types::DataSourceConfigurations]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/UpdateMemberDetectorsRequest AWS API Documentation
+    #
+    class UpdateMemberDetectorsRequest < Struct.new(
+      :detector_id,
+      :account_ids,
+      :data_sources)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] unprocessed_accounts
+    #   A list of member account IDs that were unable to be processed along
+    #   with an explanation for why they were not processed.
+    #   @return [Array<Types::UnprocessedAccount>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/UpdateMemberDetectorsResponse AWS API Documentation
+    #
+    class UpdateMemberDetectorsResponse < Struct.new(
+      :unprocessed_accounts)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass UpdateOrganizationConfigurationRequest
     #   data as a hash:
     #
     #       {
     #         detector_id: "DetectorId", # required
     #         auto_enable: false, # required
+    #         data_sources: {
+    #           s3_logs: {
+    #             auto_enable: false, # required
+    #           },
+    #         },
     #       }
     #
     # @!attribute [rw] detector_id
@@ -4179,11 +4548,16 @@ module Aws::GuardDuty
     #   organization.
     #   @return [Boolean]
     #
+    # @!attribute [rw] data_sources
+    #   An object describes which data sources will be updated.
+    #   @return [Types::OrganizationDataSourceConfigurations]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/UpdateOrganizationConfigurationRequest AWS API Documentation
     #
     class UpdateOrganizationConfigurationRequest < Struct.new(
       :detector_id,
-      :auto_enable)
+      :auto_enable,
+      :data_sources)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4259,8 +4633,7 @@ module Aws::GuardDuty
     #   @return [String]
     #
     # @!attribute [rw] location
-    #   The updated URI of the file that contains the ThreateIntelSet. For
-    #   example: https://s3.us-west-2.amazonaws.com/my-bucket/my-object-key.
+    #   The updated URI of the file that contains the ThreateIntelSet.
     #   @return [String]
     #
     # @!attribute [rw] activate

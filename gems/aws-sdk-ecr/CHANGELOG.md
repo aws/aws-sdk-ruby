@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.35.0 (2020-07-29)
+------------------
+
+* Feature - This release adds support for encrypting the contents of your Amazon ECR repository with customer master keys (CMKs) stored in AWS Key Management Service.
+
 1.34.0 (2020-07-02)
 ------------------
 
