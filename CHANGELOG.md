@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+2.11.555 (2020-07-29)
+------------------
+
 * Feature - Aws::EC2 - Updated the API, and documentation for Amazon Elastic Compute Cloud.
 
 * Feature - Aws::ECR - Updated the API, and documentation for Amazon EC2 Container Registry.
