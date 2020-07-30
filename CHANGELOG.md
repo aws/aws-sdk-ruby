@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+2.11.556 (2020-07-30)
+------------------
+
 * Feature - Aws::CloudFront - Updated the documentation for Amazon CloudFront.
 
 * Feature - Aws::CodeBuild - Updated the API, and documentation for AWS CodeBuild.
