@@ -56,8 +56,10 @@ module Aws::GuardDuty
     CreateThreatIntelSetResponse = Shapes::StructureShape.new(name: 'CreateThreatIntelSetResponse')
     Criterion = Shapes::MapShape.new(name: 'Criterion')
     DNSLogsConfigurationResult = Shapes::StructureShape.new(name: 'DNSLogsConfigurationResult')
+    DataSource = Shapes::StringShape.new(name: 'DataSource')
     DataSourceConfigurations = Shapes::StructureShape.new(name: 'DataSourceConfigurations')
     DataSourceConfigurationsResult = Shapes::StructureShape.new(name: 'DataSourceConfigurationsResult')
+    DataSourceList = Shapes::ListShape.new(name: 'DataSourceList')
     DataSourceStatus = Shapes::StringShape.new(name: 'DataSourceStatus')
     DeclineInvitationsRequest = Shapes::StructureShape.new(name: 'DeclineInvitationsRequest')
     DeclineInvitationsResponse = Shapes::StructureShape.new(name: 'DeclineInvitationsResponse')
@@ -141,6 +143,8 @@ module Aws::GuardDuty
     GetMembersResponse = Shapes::StructureShape.new(name: 'GetMembersResponse')
     GetThreatIntelSetRequest = Shapes::StructureShape.new(name: 'GetThreatIntelSetRequest')
     GetThreatIntelSetResponse = Shapes::StructureShape.new(name: 'GetThreatIntelSetResponse')
+    GetUsageStatisticsRequest = Shapes::StructureShape.new(name: 'GetUsageStatisticsRequest')
+    GetUsageStatisticsResponse = Shapes::StructureShape.new(name: 'GetUsageStatisticsResponse')
     GuardDutyArn = Shapes::StringShape.new(name: 'GuardDutyArn')
     IamInstanceProfile = Shapes::StructureShape.new(name: 'IamInstanceProfile')
     InstanceDetails = Shapes::StructureShape.new(name: 'InstanceDetails')
@@ -210,6 +214,7 @@ module Aws::GuardDuty
     RemoteIpDetails = Shapes::StructureShape.new(name: 'RemoteIpDetails')
     RemotePortDetails = Shapes::StructureShape.new(name: 'RemotePortDetails')
     Resource = Shapes::StructureShape.new(name: 'Resource')
+    ResourceList = Shapes::ListShape.new(name: 'ResourceList')
     S3BucketDetail = Shapes::StructureShape.new(name: 'S3BucketDetail')
     S3BucketDetails = Shapes::ListShape.new(name: 'S3BucketDetails')
     S3LogsConfiguration = Shapes::StructureShape.new(name: 'S3LogsConfiguration')
@@ -238,6 +243,7 @@ module Aws::GuardDuty
     ThreatIntelligenceDetails = Shapes::ListShape.new(name: 'ThreatIntelligenceDetails')
     ThreatNames = Shapes::ListShape.new(name: 'ThreatNames')
     Timestamp = Shapes::TimestampShape.new(name: 'Timestamp')
+    Total = Shapes::StructureShape.new(name: 'Total')
     UnarchiveFindingsRequest = Shapes::StructureShape.new(name: 'UnarchiveFindingsRequest')
     UnarchiveFindingsResponse = Shapes::StructureShape.new(name: 'UnarchiveFindingsResponse')
     UnprocessedAccount = Shapes::StructureShape.new(name: 'UnprocessedAccount')
@@ -260,6 +266,15 @@ module Aws::GuardDuty
     UpdatePublishingDestinationResponse = Shapes::StructureShape.new(name: 'UpdatePublishingDestinationResponse')
     UpdateThreatIntelSetRequest = Shapes::StructureShape.new(name: 'UpdateThreatIntelSetRequest')
     UpdateThreatIntelSetResponse = Shapes::StructureShape.new(name: 'UpdateThreatIntelSetResponse')
+    UsageAccountResult = Shapes::StructureShape.new(name: 'UsageAccountResult')
+    UsageAccountResultList = Shapes::ListShape.new(name: 'UsageAccountResultList')
+    UsageCriteria = Shapes::StructureShape.new(name: 'UsageCriteria')
+    UsageDataSourceResult = Shapes::StructureShape.new(name: 'UsageDataSourceResult')
+    UsageDataSourceResultList = Shapes::ListShape.new(name: 'UsageDataSourceResultList')
+    UsageResourceResult = Shapes::StructureShape.new(name: 'UsageResourceResult')
+    UsageResourceResultList = Shapes::ListShape.new(name: 'UsageResourceResultList')
+    UsageStatisticType = Shapes::StringShape.new(name: 'UsageStatisticType')
+    UsageStatistics = Shapes::StructureShape.new(name: 'UsageStatistics')
 
     AcceptInvitationRequest.add_member(:detector_id, Shapes::ShapeRef.new(shape: DetectorId, required: true, location: "uri", location_name: "detectorId"))
     AcceptInvitationRequest.add_member(:master_id, Shapes::ShapeRef.new(shape: String, required: true, location_name: "masterId"))
@@ -444,6 +459,8 @@ module Aws::GuardDuty
     DataSourceConfigurationsResult.add_member(:flow_logs, Shapes::ShapeRef.new(shape: FlowLogsConfigurationResult, required: true, location_name: "flowLogs"))
     DataSourceConfigurationsResult.add_member(:s3_logs, Shapes::ShapeRef.new(shape: S3LogsConfigurationResult, required: true, location_name: "s3Logs"))
     DataSourceConfigurationsResult.struct_class = Types::DataSourceConfigurationsResult
+
+    DataSourceList.member = Shapes::ShapeRef.new(shape: DataSource)
 
     DeclineInvitationsRequest.add_member(:account_ids, Shapes::ShapeRef.new(shape: AccountIds, required: true, location_name: "accountIds"))
     DeclineInvitationsRequest.struct_class = Types::DeclineInvitationsRequest
@@ -692,6 +709,18 @@ module Aws::GuardDuty
     GetThreatIntelSetResponse.add_member(:status, Shapes::ShapeRef.new(shape: ThreatIntelSetStatus, required: true, location_name: "status"))
     GetThreatIntelSetResponse.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "tags"))
     GetThreatIntelSetResponse.struct_class = Types::GetThreatIntelSetResponse
+
+    GetUsageStatisticsRequest.add_member(:detector_id, Shapes::ShapeRef.new(shape: DetectorId, required: true, location: "uri", location_name: "detectorId"))
+    GetUsageStatisticsRequest.add_member(:usage_statistic_type, Shapes::ShapeRef.new(shape: UsageStatisticType, required: true, location_name: "usageStatisticsType"))
+    GetUsageStatisticsRequest.add_member(:usage_criteria, Shapes::ShapeRef.new(shape: UsageCriteria, required: true, location_name: "usageCriteria"))
+    GetUsageStatisticsRequest.add_member(:unit, Shapes::ShapeRef.new(shape: String, location_name: "unit"))
+    GetUsageStatisticsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location_name: "maxResults"))
+    GetUsageStatisticsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "nextToken"))
+    GetUsageStatisticsRequest.struct_class = Types::GetUsageStatisticsRequest
+
+    GetUsageStatisticsResponse.add_member(:usage_statistics, Shapes::ShapeRef.new(shape: UsageStatistics, location_name: "usageStatistics"))
+    GetUsageStatisticsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "nextToken"))
+    GetUsageStatisticsResponse.struct_class = Types::GetUsageStatisticsResponse
 
     IamInstanceProfile.add_member(:arn, Shapes::ShapeRef.new(shape: String, location_name: "arn"))
     IamInstanceProfile.add_member(:id, Shapes::ShapeRef.new(shape: String, location_name: "id"))
@@ -950,6 +979,8 @@ module Aws::GuardDuty
     Resource.add_member(:resource_type, Shapes::ShapeRef.new(shape: String, location_name: "resourceType"))
     Resource.struct_class = Types::Resource
 
+    ResourceList.member = Shapes::ShapeRef.new(shape: String)
+
     S3BucketDetail.add_member(:arn, Shapes::ShapeRef.new(shape: String, location_name: "arn"))
     S3BucketDetail.add_member(:name, Shapes::ShapeRef.new(shape: String, location_name: "name"))
     S3BucketDetail.add_member(:type, Shapes::ShapeRef.new(shape: String, location_name: "type"))
@@ -1030,6 +1061,10 @@ module Aws::GuardDuty
     ThreatIntelligenceDetails.member = Shapes::ShapeRef.new(shape: ThreatIntelligenceDetail)
 
     ThreatNames.member = Shapes::ShapeRef.new(shape: String)
+
+    Total.add_member(:amount, Shapes::ShapeRef.new(shape: String, location_name: "amount"))
+    Total.add_member(:unit, Shapes::ShapeRef.new(shape: String, location_name: "unit"))
+    Total.struct_class = Types::Total
 
     UnarchiveFindingsRequest.add_member(:detector_id, Shapes::ShapeRef.new(shape: DetectorId, required: true, location: "uri", location_name: "detectorId"))
     UnarchiveFindingsRequest.add_member(:finding_ids, Shapes::ShapeRef.new(shape: FindingIds, required: true, location_name: "findingIds"))
@@ -1115,6 +1150,35 @@ module Aws::GuardDuty
     UpdateThreatIntelSetRequest.struct_class = Types::UpdateThreatIntelSetRequest
 
     UpdateThreatIntelSetResponse.struct_class = Types::UpdateThreatIntelSetResponse
+
+    UsageAccountResult.add_member(:account_id, Shapes::ShapeRef.new(shape: AccountId, location_name: "accountId"))
+    UsageAccountResult.add_member(:total, Shapes::ShapeRef.new(shape: Total, location_name: "total"))
+    UsageAccountResult.struct_class = Types::UsageAccountResult
+
+    UsageAccountResultList.member = Shapes::ShapeRef.new(shape: UsageAccountResult)
+
+    UsageCriteria.add_member(:account_ids, Shapes::ShapeRef.new(shape: AccountIds, location_name: "accountIds"))
+    UsageCriteria.add_member(:data_sources, Shapes::ShapeRef.new(shape: DataSourceList, required: true, location_name: "dataSources"))
+    UsageCriteria.add_member(:resources, Shapes::ShapeRef.new(shape: ResourceList, location_name: "resources"))
+    UsageCriteria.struct_class = Types::UsageCriteria
+
+    UsageDataSourceResult.add_member(:data_source, Shapes::ShapeRef.new(shape: DataSource, location_name: "dataSource"))
+    UsageDataSourceResult.add_member(:total, Shapes::ShapeRef.new(shape: Total, location_name: "total"))
+    UsageDataSourceResult.struct_class = Types::UsageDataSourceResult
+
+    UsageDataSourceResultList.member = Shapes::ShapeRef.new(shape: UsageDataSourceResult)
+
+    UsageResourceResult.add_member(:resource, Shapes::ShapeRef.new(shape: String, location_name: "resource"))
+    UsageResourceResult.add_member(:total, Shapes::ShapeRef.new(shape: Total, location_name: "total"))
+    UsageResourceResult.struct_class = Types::UsageResourceResult
+
+    UsageResourceResultList.member = Shapes::ShapeRef.new(shape: UsageResourceResult)
+
+    UsageStatistics.add_member(:sum_by_account, Shapes::ShapeRef.new(shape: UsageAccountResultList, location_name: "sumByAccount"))
+    UsageStatistics.add_member(:sum_by_data_source, Shapes::ShapeRef.new(shape: UsageDataSourceResultList, location_name: "sumByDataSource"))
+    UsageStatistics.add_member(:sum_by_resource, Shapes::ShapeRef.new(shape: UsageResourceResultList, location_name: "sumByResource"))
+    UsageStatistics.add_member(:top_resources, Shapes::ShapeRef.new(shape: UsageResourceResultList, location_name: "topResources"))
+    UsageStatistics.struct_class = Types::UsageStatistics
 
 
     # @api private
@@ -1462,6 +1526,22 @@ module Aws::GuardDuty
         o.output = Shapes::ShapeRef.new(shape: GetThreatIntelSetResponse)
         o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerErrorException)
+      end)
+
+      api.add_operation(:get_usage_statistics, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetUsageStatistics"
+        o.http_method = "POST"
+        o.http_request_uri = "/detector/{detectorId}/usage/statistics"
+        o.input = Shapes::ShapeRef.new(shape: GetUsageStatisticsRequest)
+        o.output = Shapes::ShapeRef.new(shape: GetUsageStatisticsResponse)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerErrorException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
       end)
 
       api.add_operation(:invite_members, Seahorse::Model::Operation.new.tap do |o|

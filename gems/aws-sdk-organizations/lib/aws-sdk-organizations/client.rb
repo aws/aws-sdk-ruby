@@ -1625,6 +1625,11 @@ module Aws::Organizations
     # Removes the specified member AWS account as a delegated administrator
     # for the specified AWS service.
     #
+    # Deregistering a delegated administrator can have unintended impacts on
+    # the functionality of the enabled AWS service. See the documentation
+    # for the enabled service before you deregister a delegated
+    # administrator so that you understand any potential impacts.
+    #
     # You can run this action only for AWS services that support this
     # feature. For a current list of services that support it, see the
     # column *Supports Delegated Administrator* in the table at [AWS
@@ -5132,7 +5137,7 @@ module Aws::Organizations
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-organizations'
-      context[:gem_version] = '1.45.0'
+      context[:gem_version] = '1.46.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

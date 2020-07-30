@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.36.0 (2020-07-30)
+------------------
+
+* Feature - Documentation updates for CloudFront
+
 1.35.0 (2020-07-20)
 ------------------
 

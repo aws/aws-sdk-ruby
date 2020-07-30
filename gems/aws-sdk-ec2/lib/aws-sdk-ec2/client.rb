@@ -3636,7 +3636,7 @@ module Aws::EC2
     #   resp = client.create_capacity_reservation({
     #     client_token: "String",
     #     instance_type: "String", # required
-    #     instance_platform: "Linux/UNIX", # required, accepts Linux/UNIX, Red Hat Enterprise Linux, SUSE Linux, Windows, Windows with SQL Server, Windows with SQL Server Enterprise, Windows with SQL Server Standard, Windows with SQL Server Web, Linux with SQL Server Standard, Linux with SQL Server Web, Linux with SQL Server Enterprise
+    #     instance_platform: "Linux/UNIX", # required, accepts Linux/UNIX, Red Hat Enterprise Linux, SUSE Linux, Windows, Windows with SQL Server, Windows with SQL Server Enterprise, Windows with SQL Server Standard, Windows with SQL Server Web, Linux with SQL Server Standard, Linux with SQL Server Web, Linux with SQL Server Enterprise, Windows BYOL
     #     availability_zone: "String",
     #     availability_zone_id: "String",
     #     tenancy: "default", # accepts default, dedicated
@@ -3667,7 +3667,7 @@ module Aws::EC2
     #   resp.capacity_reservation.capacity_reservation_arn #=> String
     #   resp.capacity_reservation.availability_zone_id #=> String
     #   resp.capacity_reservation.instance_type #=> String
-    #   resp.capacity_reservation.instance_platform #=> String, one of "Linux/UNIX", "Red Hat Enterprise Linux", "SUSE Linux", "Windows", "Windows with SQL Server", "Windows with SQL Server Enterprise", "Windows with SQL Server Standard", "Windows with SQL Server Web", "Linux with SQL Server Standard", "Linux with SQL Server Web", "Linux with SQL Server Enterprise"
+    #   resp.capacity_reservation.instance_platform #=> String, one of "Linux/UNIX", "Red Hat Enterprise Linux", "SUSE Linux", "Windows", "Windows with SQL Server", "Windows with SQL Server Enterprise", "Windows with SQL Server Standard", "Windows with SQL Server Web", "Linux with SQL Server Standard", "Linux with SQL Server Web", "Linux with SQL Server Enterprise", "Windows BYOL"
     #   resp.capacity_reservation.availability_zone #=> String
     #   resp.capacity_reservation.tenancy #=> String, one of "default", "dedicated"
     #   resp.capacity_reservation.total_instance_count #=> Integer
@@ -13155,7 +13155,7 @@ module Aws::EC2
     #   resp.capacity_reservations[0].capacity_reservation_arn #=> String
     #   resp.capacity_reservations[0].availability_zone_id #=> String
     #   resp.capacity_reservations[0].instance_type #=> String
-    #   resp.capacity_reservations[0].instance_platform #=> String, one of "Linux/UNIX", "Red Hat Enterprise Linux", "SUSE Linux", "Windows", "Windows with SQL Server", "Windows with SQL Server Enterprise", "Windows with SQL Server Standard", "Windows with SQL Server Web", "Linux with SQL Server Standard", "Linux with SQL Server Web", "Linux with SQL Server Enterprise"
+    #   resp.capacity_reservations[0].instance_platform #=> String, one of "Linux/UNIX", "Red Hat Enterprise Linux", "SUSE Linux", "Windows", "Windows with SQL Server", "Windows with SQL Server Enterprise", "Windows with SQL Server Standard", "Windows with SQL Server Web", "Linux with SQL Server Standard", "Linux with SQL Server Web", "Linux with SQL Server Enterprise", "Windows BYOL"
     #   resp.capacity_reservations[0].availability_zone #=> String
     #   resp.capacity_reservations[0].tenancy #=> String, one of "default", "dedicated"
     #   resp.capacity_reservations[0].total_instance_count #=> Integer
@@ -37927,7 +37927,7 @@ module Aws::EC2
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-ec2'
-      context[:gem_version] = '1.181.0'
+      context[:gem_version] = '1.182.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

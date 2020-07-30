@@ -380,7 +380,8 @@ module Aws::GuardDuty
     # Creates a single Amazon GuardDuty detector. A detector is a resource
     # that represents the GuardDuty service. To start using GuardDuty, you
     # must create a detector in each Region where you enable the service.
-    # You can have only one detector per account per Region.
+    # You can have only one detector per account per Region. All data
+    # sources are enabled in a new detector by default.
     #
     # @option params [required, Boolean] :enable
     #   A Boolean value that specifies whether the detector is to be enabled.
@@ -650,7 +651,8 @@ module Aws::GuardDuty
     #   The format of the file that contains the IPSet.
     #
     # @option params [required, String] :location
-    #   The URI of the file that contains the IPSet.
+    #   The URI of the file that contains the IPSet. For example:
+    #   https://s3.us-west-2.amazonaws.com/my-bucket/my-object-key.
     #
     # @option params [required, Boolean] :activate
     #   A Boolean value that indicates whether GuardDuty is to start using the
@@ -697,8 +699,22 @@ module Aws::GuardDuty
     end
 
     # Creates member accounts of the current AWS account by specifying a
-    # list of AWS account IDs. The current AWS account can then invite these
-    # members to manage GuardDuty in their accounts.
+    # list of AWS account IDs. This step is a prerequisite for managing the
+    # associated member accounts either by invitation or through an
+    # organization.
+    #
+    # When using `Create Members` as an organizations delegated
+    # administrator this action will enable GuardDuty in the added member
+    # accounts, with the exception of the organization master account, which
+    # must enable GuardDuty prior to being added as a member.
+    #
+    # If you are adding accounts by invitation use this action after
+    # GuardDuty has been enabled in potential member accounts and before
+    # using [ `Invite Members` ][1].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/guardduty/latest/APIReference/API_InviteMembers.html
     #
     # @option params [required, String] :detector_id
     #   The unique ID of the detector of the GuardDuty account that you want
@@ -835,7 +851,8 @@ module Aws::GuardDuty
     #   The format of the file that contains the ThreatIntelSet.
     #
     # @option params [required, String] :location
-    #   The URI of the file that contains the ThreatIntelSet.
+    #   The URI of the file that contains the ThreatIntelSet. For example:
+    #   https://s3.us-west-2.amazonaws.com/my-bucket/my-object-key.
     #
     # @option params [required, Boolean] :activate
     #   A Boolean value that indicates whether GuardDuty is to start using the
@@ -1857,6 +1874,92 @@ module Aws::GuardDuty
       req.send_request(options)
     end
 
+    # Lists Amazon GuardDuty usage statistics over the last 30 days for the
+    # specified detector ID. For newly enabled detectors or data sources the
+    # cost returned will include only the usage so far under 30 days, this
+    # may differ from the cost metrics in the console, which projects usage
+    # over 30 days to provide a monthly cost estimate. For more information
+    # see [Understanding How Usage Costs are Calculated][1].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/guardduty/latest/ug/monitoring_costs.html#usage-calculations
+    #
+    # @option params [required, String] :detector_id
+    #   The ID of the detector that specifies the GuardDuty service whose
+    #   usage statistics you want to retrieve.
+    #
+    # @option params [required, String] :usage_statistic_type
+    #   The type of usage statistics to retrieve.
+    #
+    # @option params [required, Types::UsageCriteria] :usage_criteria
+    #   Represents the criteria used for querying usage.
+    #
+    # @option params [String] :unit
+    #   The currency unit you would like to view your usage statistics in.
+    #   Current valid values are USD.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of results to return in the response.
+    #
+    # @option params [String] :next_token
+    #   A token to use for paginating results that are returned in the
+    #   response. Set the value of this parameter to null for the first
+    #   request to a list action. For subsequent calls, use the NextToken
+    #   value returned from the previous request to continue listing results
+    #   after the first page.
+    #
+    # @return [Types::GetUsageStatisticsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetUsageStatisticsResponse#usage_statistics #usage_statistics} => Types::UsageStatistics
+    #   * {Types::GetUsageStatisticsResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_usage_statistics({
+    #     detector_id: "DetectorId", # required
+    #     usage_statistic_type: "SUM_BY_ACCOUNT", # required, accepts SUM_BY_ACCOUNT, SUM_BY_DATA_SOURCE, SUM_BY_RESOURCE, TOP_RESOURCES
+    #     usage_criteria: { # required
+    #       account_ids: ["AccountId"],
+    #       data_sources: ["FLOW_LOGS"], # required, accepts FLOW_LOGS, CLOUD_TRAIL, DNS_LOGS, S3_LOGS
+    #       resources: ["String"],
+    #     },
+    #     unit: "String",
+    #     max_results: 1,
+    #     next_token: "String",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.usage_statistics.sum_by_account #=> Array
+    #   resp.usage_statistics.sum_by_account[0].account_id #=> String
+    #   resp.usage_statistics.sum_by_account[0].total.amount #=> String
+    #   resp.usage_statistics.sum_by_account[0].total.unit #=> String
+    #   resp.usage_statistics.sum_by_data_source #=> Array
+    #   resp.usage_statistics.sum_by_data_source[0].data_source #=> String, one of "FLOW_LOGS", "CLOUD_TRAIL", "DNS_LOGS", "S3_LOGS"
+    #   resp.usage_statistics.sum_by_data_source[0].total.amount #=> String
+    #   resp.usage_statistics.sum_by_data_source[0].total.unit #=> String
+    #   resp.usage_statistics.sum_by_resource #=> Array
+    #   resp.usage_statistics.sum_by_resource[0].resource #=> String
+    #   resp.usage_statistics.sum_by_resource[0].total.amount #=> String
+    #   resp.usage_statistics.sum_by_resource[0].total.unit #=> String
+    #   resp.usage_statistics.top_resources #=> Array
+    #   resp.usage_statistics.top_resources[0].resource #=> String
+    #   resp.usage_statistics.top_resources[0].total.amount #=> String
+    #   resp.usage_statistics.top_resources[0].total.unit #=> String
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/GetUsageStatistics AWS API Documentation
+    #
+    # @overload get_usage_statistics(params = {})
+    # @param [Hash] params ({})
+    def get_usage_statistics(params = {}, options = {})
+      req = build_request(:get_usage_statistics, params)
+      req.send_request(options)
+    end
+
     # Invites other AWS accounts (created as members of the current AWS
     # account by CreateMembers) to enable GuardDuty, and allow the current
     # AWS account to view and manage these accounts' GuardDuty findings on
@@ -1872,12 +1975,12 @@ module Aws::GuardDuty
     #
     # @option params [Boolean] :disable_email_notification
     #   A Boolean value that specifies whether you want to disable email
-    #   notification to the accounts that you’re inviting to GuardDuty as
+    #   notification to the accounts that you are inviting to GuardDuty as
     #   members.
     #
     # @option params [String] :message
     #   The invitation message that you want to send to the accounts that
-    #   you’re inviting to GuardDuty as members.
+    #   you're inviting to GuardDuty as members.
     #
     # @return [Types::InviteMembersResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -2032,8 +2135,6 @@ module Aws::GuardDuty
     #
     #   * resource.instanceDetails.instanceId
     #
-    #   * resource.instanceDetails.outpostArn
-    #
     #   * resource.instanceDetails.networkInterfaces.ipv6Addresses
     #
     #   * resource.instanceDetails.networkInterfaces.privateIpAddresses.privateIpAddress
@@ -2083,8 +2184,6 @@ module Aws::GuardDuty
     #   * service.action.networkConnectionAction.localPortDetails.port
     #
     #   * service.action.networkConnectionAction.protocol
-    #
-    #   * service.action.networkConnectionAction.localIpDetails.ipAddressV4
     #
     #   * service.action.networkConnectionAction.remoteIpDetails.city.cityName
     #
@@ -2280,8 +2379,8 @@ module Aws::GuardDuty
       req.send_request(options)
     end
 
-    # Lists details about associated member accounts for the current
-    # GuardDuty master account.
+    # Lists details about all member accounts for the current GuardDuty
+    # master account.
     #
     # @option params [required, String] :detector_id
     #   The unique ID of the detector the member is associated with.
@@ -2299,11 +2398,9 @@ module Aws::GuardDuty
     #   data.
     #
     # @option params [String] :only_associated
-    #   Specifies what member accounts the response includes based on their
-    #   relationship status with the master account. The default value is
-    #   "true". If set to "false" the response includes all existing
-    #   member accounts (including members who haven't been invited yet or
-    #   have been disassociated).
+    #   Specifies whether to only return associated members or to return all
+    #   members (including members who haven't been invited yet or have been
+    #   disassociated).
     #
     # @return [Types::ListMembersResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -2827,7 +2924,8 @@ module Aws::GuardDuty
     #   The unique ID that specifies the IPSet that you want to update.
     #
     # @option params [String] :location
-    #   The updated URI of the file that contains the IPSet.
+    #   The updated URI of the file that contains the IPSet. For example:
+    #   https://s3.us-west-2.amazonaws.com/my-bucket/my-object-key.
     #
     # @option params [Boolean] :activate
     #   The updated Boolean value that specifies whether the IPSet is active
@@ -2982,7 +3080,8 @@ module Aws::GuardDuty
     #   update.
     #
     # @option params [String] :location
-    #   The updated URI of the file that contains the ThreateIntelSet.
+    #   The updated URI of the file that contains the ThreateIntelSet. For
+    #   example: https://s3.us-west-2.amazonaws.com/my-bucket/my-object-key.
     #
     # @option params [Boolean] :activate
     #   The updated Boolean value that specifies whether the ThreateIntelSet
@@ -3022,7 +3121,7 @@ module Aws::GuardDuty
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-guardduty'
-      context[:gem_version] = '1.37.0'
+      context[:gem_version] = '1.38.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

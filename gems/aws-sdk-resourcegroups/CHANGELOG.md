@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.28.0 (2020-07-30)
+------------------
+
+* Feature - Improved documentation for Resource Groups API operations.
+
 1.27.0 (2020-07-29)
 ------------------
 

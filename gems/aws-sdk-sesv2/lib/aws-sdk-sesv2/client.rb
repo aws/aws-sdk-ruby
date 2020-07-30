@@ -449,6 +449,67 @@ module Aws::SESV2
       req.send_request(options)
     end
 
+    # Creates a new custom verification email template.
+    #
+    # For more information about custom verification email templates, see
+    # [Using Custom Verification Email Templates][1] in the *Amazon SES
+    # Developer Guide*.
+    #
+    # You can execute this operation no more than once per second.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/ses/latest/DeveloperGuide/send-email-verify-address-custom.html
+    #
+    # @option params [required, String] :template_name
+    #   The name of the custom verification email template.
+    #
+    # @option params [required, String] :from_email_address
+    #   The email address that the custom verification email is sent from.
+    #
+    # @option params [required, String] :template_subject
+    #   The subject line of the custom verification email.
+    #
+    # @option params [required, String] :template_content
+    #   The content of the custom verification email. The total size of the
+    #   email must be less than 10 MB. The message body may contain HTML, with
+    #   some limitations. For more information, see [Custom Verification Email
+    #   Frequently Asked Questions][1] in the *Amazon SES Developer Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/ses/latest/DeveloperGuide/send-email-verify-address-custom.html#custom-verification-emails-faq
+    #
+    # @option params [required, String] :success_redirection_url
+    #   The URL that the recipient of the verification email is sent to if his
+    #   or her address is successfully verified.
+    #
+    # @option params [required, String] :failure_redirection_url
+    #   The URL that the recipient of the verification email is sent to if his
+    #   or her address is not successfully verified.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_custom_verification_email_template({
+    #     template_name: "EmailTemplateName", # required
+    #     from_email_address: "EmailAddress", # required
+    #     template_subject: "EmailTemplateSubject", # required
+    #     template_content: "TemplateContent", # required
+    #     success_redirection_url: "SuccessRedirectionURL", # required
+    #     failure_redirection_url: "FailureRedirectionURL", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sesv2-2019-09-27/CreateCustomVerificationEmailTemplate AWS API Documentation
+    #
+    # @overload create_custom_verification_email_template(params = {})
+    # @param [Hash] params ({})
+    def create_custom_verification_email_template(params = {}, options = {})
+      req = build_request(:create_custom_verification_email_template, params)
+      req.send_request(options)
+    end
+
     # Create a new pool of dedicated IP addresses. A pool can include one or
     # more dedicated IP addresses that are associated with your AWS account.
     # You can associate a pool with a configuration set. When you send an
@@ -542,8 +603,9 @@ module Aws::SESV2
     #         data: "data", # required
     #       },
     #       template: {
-    #         template_arn: "TemplateArn",
-    #         template_data: "TemplateData",
+    #         template_name: "EmailTemplateName",
+    #         template_arn: "AmazonResourceName",
+    #         template_data: "EmailTemplateData",
     #       },
     #     },
     #     tags: [
@@ -660,6 +722,102 @@ module Aws::SESV2
       req.send_request(options)
     end
 
+    # Creates the specified sending authorization policy for the given
+    # identity (an email address or a domain).
+    #
+    # <note markdown="1"> This API is for the identity owner only. If you have not verified the
+    # identity, this API will return an error.
+    #
+    #  </note>
+    #
+    # Sending authorization is a feature that enables an identity owner to
+    # authorize other senders to use its identities. For information about
+    # using sending authorization, see the [Amazon SES Developer Guide][1].
+    #
+    # You can execute this operation no more than once per second.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/ses/latest/DeveloperGuide/sending-authorization.html
+    #
+    # @option params [required, String] :email_identity
+    #   The email identity for which you want to create a policy.
+    #
+    # @option params [required, String] :policy_name
+    #   The name of the policy.
+    #
+    #   The policy name cannot exceed 64 characters and can only include
+    #   alphanumeric characters, dashes, and underscores.
+    #
+    # @option params [required, String] :policy
+    #   The text of the policy in JSON format. The policy cannot exceed 4 KB.
+    #
+    #   For information about the syntax of sending authorization policies,
+    #   see the [Amazon SES Developer Guide][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/ses/latest/DeveloperGuide/sending-authorization-policies.html
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_email_identity_policy({
+    #     email_identity: "Identity", # required
+    #     policy_name: "PolicyName", # required
+    #     policy: "Policy", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sesv2-2019-09-27/CreateEmailIdentityPolicy AWS API Documentation
+    #
+    # @overload create_email_identity_policy(params = {})
+    # @param [Hash] params ({})
+    def create_email_identity_policy(params = {}, options = {})
+      req = build_request(:create_email_identity_policy, params)
+      req.send_request(options)
+    end
+
+    # Creates an email template. Email templates enable you to send
+    # personalized email to one or more destinations in a single API
+    # operation. For more information, see the [Amazon SES Developer
+    # Guide][1].
+    #
+    # You can execute this operation no more than once per second.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/ses/latest/DeveloperGuide/send-personalized-email-api.html
+    #
+    # @option params [required, String] :template_name
+    #   The name of the template you want to create.
+    #
+    # @option params [required, Types::EmailTemplateContent] :template_content
+    #   The content of the email template, composed of a subject line, an HTML
+    #   part, and a text-only part.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_email_template({
+    #     template_name: "EmailTemplateName", # required
+    #     template_content: { # required
+    #       subject: "EmailTemplateSubject",
+    #       text: "EmailTemplateText",
+    #       html: "EmailTemplateHtml",
+    #     },
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sesv2-2019-09-27/CreateEmailTemplate AWS API Documentation
+    #
+    # @overload create_email_template(params = {})
+    # @param [Hash] params ({})
+    def create_email_template(params = {}, options = {})
+      req = build_request(:create_email_template, params)
+      req.send_request(options)
+    end
+
     # Delete an existing configuration set.
     #
     # *Configuration sets* are groups of rules that you can apply to the
@@ -722,6 +880,39 @@ module Aws::SESV2
       req.send_request(options)
     end
 
+    # Deletes an existing custom verification email template.
+    #
+    # For more information about custom verification email templates, see
+    # [Using Custom Verification Email Templates][1] in the *Amazon SES
+    # Developer Guide*.
+    #
+    # You can execute this operation no more than once per second.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/es/latest/DeveloperGuide/send-email-verify-address-custom.html
+    #
+    # @option params [required, String] :template_name
+    #   The name of the custom verification email template that you want to
+    #   delete.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_custom_verification_email_template({
+    #     template_name: "EmailTemplateName", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sesv2-2019-09-27/DeleteCustomVerificationEmailTemplate AWS API Documentation
+    #
+    # @overload delete_custom_verification_email_template(params = {})
+    # @param [Hash] params ({})
+    def delete_custom_verification_email_template(params = {}, options = {})
+      req = build_request(:delete_custom_verification_email_template, params)
+      req.send_request(options)
+    end
+
     # Delete a dedicated IP pool.
     #
     # @option params [required, String] :pool_name
@@ -768,6 +959,76 @@ module Aws::SESV2
       req.send_request(options)
     end
 
+    # Deletes the specified sending authorization policy for the given
+    # identity (an email address or a domain). This API returns successfully
+    # even if a policy with the specified name does not exist.
+    #
+    # <note markdown="1"> This API is for the identity owner only. If you have not verified the
+    # identity, this API will return an error.
+    #
+    #  </note>
+    #
+    # Sending authorization is a feature that enables an identity owner to
+    # authorize other senders to use its identities. For information about
+    # using sending authorization, see the [Amazon SES Developer Guide][1].
+    #
+    # You can execute this operation no more than once per second.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/ses/latest/DeveloperGuide/sending-authorization.html
+    #
+    # @option params [required, String] :email_identity
+    #   The email identity for which you want to delete a policy.
+    #
+    # @option params [required, String] :policy_name
+    #   The name of the policy.
+    #
+    #   The policy name cannot exceed 64 characters and can only include
+    #   alphanumeric characters, dashes, and underscores.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_email_identity_policy({
+    #     email_identity: "Identity", # required
+    #     policy_name: "PolicyName", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sesv2-2019-09-27/DeleteEmailIdentityPolicy AWS API Documentation
+    #
+    # @overload delete_email_identity_policy(params = {})
+    # @param [Hash] params ({})
+    def delete_email_identity_policy(params = {}, options = {})
+      req = build_request(:delete_email_identity_policy, params)
+      req.send_request(options)
+    end
+
+    # Deletes an email template.
+    #
+    # You can execute this operation no more than once per second.
+    #
+    # @option params [required, String] :template_name
+    #   The name of the template to be deleted.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_email_template({
+    #     template_name: "EmailTemplateName", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sesv2-2019-09-27/DeleteEmailTemplate AWS API Documentation
+    #
+    # @overload delete_email_template(params = {})
+    # @param [Hash] params ({})
+    def delete_email_template(params = {}, options = {})
+      req = build_request(:delete_email_template, params)
+      req.send_request(options)
+    end
+
     # Removes an email address from the suppression list for your account.
     #
     # @option params [required, String] :email_address
@@ -802,6 +1063,7 @@ module Aws::SESV2
     #   * {Types::GetAccountResponse#send_quota #send_quota} => Types::SendQuota
     #   * {Types::GetAccountResponse#sending_enabled #sending_enabled} => Boolean
     #   * {Types::GetAccountResponse#suppression_attributes #suppression_attributes} => Types::SuppressionAttributes
+    #   * {Types::GetAccountResponse#details #details} => Types::AccountDetails
     #
     # @example Response structure
     #
@@ -814,6 +1076,14 @@ module Aws::SESV2
     #   resp.sending_enabled #=> Boolean
     #   resp.suppression_attributes.suppressed_reasons #=> Array
     #   resp.suppression_attributes.suppressed_reasons[0] #=> String, one of "BOUNCE", "COMPLAINT"
+    #   resp.details.mail_type #=> String, one of "MARKETING", "TRANSACTIONAL"
+    #   resp.details.website_url #=> String
+    #   resp.details.contact_language #=> String, one of "EN", "JA"
+    #   resp.details.use_case_description #=> String
+    #   resp.details.additional_contact_email_addresses #=> Array
+    #   resp.details.additional_contact_email_addresses[0] #=> String
+    #   resp.details.review_details.status #=> String, one of "PENDING", "FAILED", "GRANTED", "DENIED"
+    #   resp.details.review_details.case_id #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sesv2-2019-09-27/GetAccount AWS API Documentation
     #
@@ -958,6 +1228,56 @@ module Aws::SESV2
     # @param [Hash] params ({})
     def get_configuration_set_event_destinations(params = {}, options = {})
       req = build_request(:get_configuration_set_event_destinations, params)
+      req.send_request(options)
+    end
+
+    # Returns the custom email verification template for the template name
+    # you specify.
+    #
+    # For more information about custom verification email templates, see
+    # [Using Custom Verification Email Templates][1] in the *Amazon SES
+    # Developer Guide*.
+    #
+    # You can execute this operation no more than once per second.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/ses/latest/DeveloperGuide/send-email-verify-address-custom.html
+    #
+    # @option params [required, String] :template_name
+    #   The name of the custom verification email template that you want to
+    #   retrieve.
+    #
+    # @return [Types::GetCustomVerificationEmailTemplateResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetCustomVerificationEmailTemplateResponse#template_name #template_name} => String
+    #   * {Types::GetCustomVerificationEmailTemplateResponse#from_email_address #from_email_address} => String
+    #   * {Types::GetCustomVerificationEmailTemplateResponse#template_subject #template_subject} => String
+    #   * {Types::GetCustomVerificationEmailTemplateResponse#template_content #template_content} => String
+    #   * {Types::GetCustomVerificationEmailTemplateResponse#success_redirection_url #success_redirection_url} => String
+    #   * {Types::GetCustomVerificationEmailTemplateResponse#failure_redirection_url #failure_redirection_url} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_custom_verification_email_template({
+    #     template_name: "EmailTemplateName", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.template_name #=> String
+    #   resp.from_email_address #=> String
+    #   resp.template_subject #=> String
+    #   resp.template_content #=> String
+    #   resp.success_redirection_url #=> String
+    #   resp.failure_redirection_url #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sesv2-2019-09-27/GetCustomVerificationEmailTemplate AWS API Documentation
+    #
+    # @overload get_custom_verification_email_template(params = {})
+    # @param [Hash] params ({})
+    def get_custom_verification_email_template(params = {}, options = {})
+      req = build_request(:get_custom_verification_email_template, params)
       req.send_request(options)
     end
 
@@ -1260,8 +1580,8 @@ module Aws::SESV2
     end
 
     # Provides information about a specific identity, including the
-    # identity's verification status, its DKIM authentication status, and
-    # its custom Mail-From settings.
+    # identity's verification status, sending authorization policies, its
+    # DKIM authentication status, and its custom Mail-From settings.
     #
     # @option params [required, String] :email_identity
     #   The email identity that you want to retrieve details for.
@@ -1273,6 +1593,7 @@ module Aws::SESV2
     #   * {Types::GetEmailIdentityResponse#verified_for_sending_status #verified_for_sending_status} => Boolean
     #   * {Types::GetEmailIdentityResponse#dkim_attributes #dkim_attributes} => Types::DkimAttributes
     #   * {Types::GetEmailIdentityResponse#mail_from_attributes #mail_from_attributes} => Types::MailFromAttributes
+    #   * {Types::GetEmailIdentityResponse#policies #policies} => Hash&lt;String,String&gt;
     #   * {Types::GetEmailIdentityResponse#tags #tags} => Array&lt;Types::Tag&gt;
     #
     # @example Request syntax with placeholder values
@@ -1294,6 +1615,8 @@ module Aws::SESV2
     #   resp.mail_from_attributes.mail_from_domain #=> String
     #   resp.mail_from_attributes.mail_from_domain_status #=> String, one of "PENDING", "SUCCESS", "FAILED", "TEMPORARY_FAILURE"
     #   resp.mail_from_attributes.behavior_on_mx_failure #=> String, one of "USE_DEFAULT_VALUE", "REJECT_MESSAGE"
+    #   resp.policies #=> Hash
+    #   resp.policies["PolicyName"] #=> String
     #   resp.tags #=> Array
     #   resp.tags[0].key #=> String
     #   resp.tags[0].value #=> String
@@ -1304,6 +1627,88 @@ module Aws::SESV2
     # @param [Hash] params ({})
     def get_email_identity(params = {}, options = {})
       req = build_request(:get_email_identity, params)
+      req.send_request(options)
+    end
+
+    # Returns the requested sending authorization policies for the given
+    # identity (an email address or a domain). The policies are returned as
+    # a map of policy names to policy contents. You can retrieve a maximum
+    # of 20 policies at a time.
+    #
+    # <note markdown="1"> This API is for the identity owner only. If you have not verified the
+    # identity, this API will return an error.
+    #
+    #  </note>
+    #
+    # Sending authorization is a feature that enables an identity owner to
+    # authorize other senders to use its identities. For information about
+    # using sending authorization, see the [Amazon SES Developer Guide][1].
+    #
+    # You can execute this operation no more than once per second.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/ses/latest/DeveloperGuide/sending-authorization.html
+    #
+    # @option params [required, String] :email_identity
+    #   The email identity that you want to retrieve policies for.
+    #
+    # @return [Types::GetEmailIdentityPoliciesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetEmailIdentityPoliciesResponse#policies #policies} => Hash&lt;String,String&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_email_identity_policies({
+    #     email_identity: "Identity", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.policies #=> Hash
+    #   resp.policies["PolicyName"] #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sesv2-2019-09-27/GetEmailIdentityPolicies AWS API Documentation
+    #
+    # @overload get_email_identity_policies(params = {})
+    # @param [Hash] params ({})
+    def get_email_identity_policies(params = {}, options = {})
+      req = build_request(:get_email_identity_policies, params)
+      req.send_request(options)
+    end
+
+    # Displays the template object (which includes the subject line, HTML
+    # part and text part) for the template you specify.
+    #
+    # You can execute this operation no more than once per second.
+    #
+    # @option params [required, String] :template_name
+    #   The name of the template you want to retrieve.
+    #
+    # @return [Types::GetEmailTemplateResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetEmailTemplateResponse#template_name #template_name} => String
+    #   * {Types::GetEmailTemplateResponse#template_content #template_content} => Types::EmailTemplateContent
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_email_template({
+    #     template_name: "EmailTemplateName", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.template_name #=> String
+    #   resp.template_content.subject #=> String
+    #   resp.template_content.text #=> String
+    #   resp.template_content.html #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sesv2-2019-09-27/GetEmailTemplate AWS API Documentation
+    #
+    # @overload get_email_template(params = {})
+    # @param [Hash] params ({})
+    def get_email_template(params = {}, options = {})
+      req = build_request(:get_email_template, params)
       req.send_request(options)
     end
 
@@ -1385,6 +1790,67 @@ module Aws::SESV2
     # @param [Hash] params ({})
     def list_configuration_sets(params = {}, options = {})
       req = build_request(:list_configuration_sets, params)
+      req.send_request(options)
+    end
+
+    # Lists the existing custom verification email templates for your
+    # account in the current AWS Region.
+    #
+    # For more information about custom verification email templates, see
+    # [Using Custom Verification Email Templates][1] in the *Amazon SES
+    # Developer Guide*.
+    #
+    # You can execute this operation no more than once per second.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/ses/latest/DeveloperGuide/send-email-verify-address-custom.html
+    #
+    # @option params [String] :next_token
+    #   A token returned from a previous call to
+    #   `ListCustomVerificationEmailTemplates` to indicate the position in the
+    #   list of custom verification email templates.
+    #
+    # @option params [Integer] :page_size
+    #   The number of results to show in a single call to
+    #   `ListCustomVerificationEmailTemplates`. If the number of results is
+    #   larger than the number you specified in this parameter, then the
+    #   response includes a `NextToken` element, which you can use to obtain
+    #   additional results.
+    #
+    #   The value you specify has to be at least 1, and can be no more than
+    #   50.
+    #
+    # @return [Types::ListCustomVerificationEmailTemplatesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListCustomVerificationEmailTemplatesResponse#custom_verification_email_templates #custom_verification_email_templates} => Array&lt;Types::CustomVerificationEmailTemplateMetadata&gt;
+    #   * {Types::ListCustomVerificationEmailTemplatesResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_custom_verification_email_templates({
+    #     next_token: "NextToken",
+    #     page_size: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.custom_verification_email_templates #=> Array
+    #   resp.custom_verification_email_templates[0].template_name #=> String
+    #   resp.custom_verification_email_templates[0].from_email_address #=> String
+    #   resp.custom_verification_email_templates[0].template_subject #=> String
+    #   resp.custom_verification_email_templates[0].success_redirection_url #=> String
+    #   resp.custom_verification_email_templates[0].failure_redirection_url #=> String
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sesv2-2019-09-27/ListCustomVerificationEmailTemplates AWS API Documentation
+    #
+    # @overload list_custom_verification_email_templates(params = {})
+    # @param [Hash] params ({})
+    def list_custom_verification_email_templates(params = {}, options = {})
+      req = build_request(:list_custom_verification_email_templates, params)
       req.send_request(options)
     end
 
@@ -1610,6 +2076,54 @@ module Aws::SESV2
       req.send_request(options)
     end
 
+    # Lists the email templates present in your Amazon SES account in the
+    # current AWS Region.
+    #
+    # You can execute this operation no more than once per second.
+    #
+    # @option params [String] :next_token
+    #   A token returned from a previous call to `ListEmailTemplates` to
+    #   indicate the position in the list of email templates.
+    #
+    # @option params [Integer] :page_size
+    #   The number of results to show in a single call to
+    #   `ListEmailTemplates`. If the number of results is larger than the
+    #   number you specified in this parameter, then the response includes a
+    #   `NextToken` element, which you can use to obtain additional results.
+    #
+    #   The value you specify has to be at least 1, and can be no more than
+    #   10.
+    #
+    # @return [Types::ListEmailTemplatesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListEmailTemplatesResponse#templates_metadata #templates_metadata} => Array&lt;Types::EmailTemplateMetadata&gt;
+    #   * {Types::ListEmailTemplatesResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_email_templates({
+    #     next_token: "NextToken",
+    #     page_size: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.templates_metadata #=> Array
+    #   resp.templates_metadata[0].template_name #=> String
+    #   resp.templates_metadata[0].created_timestamp #=> Time
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sesv2-2019-09-27/ListEmailTemplates AWS API Documentation
+    #
+    # @overload list_email_templates(params = {})
+    # @param [Hash] params ({})
+    def list_email_templates(params = {}, options = {})
+      req = build_request(:list_email_templates, params)
+      req.send_request(options)
+    end
+
     # Retrieves a list of email addresses that are on the suppression list
     # for your account.
     #
@@ -1729,6 +2243,62 @@ module Aws::SESV2
     # @param [Hash] params ({})
     def put_account_dedicated_ip_warmup_attributes(params = {}, options = {})
       req = build_request(:put_account_dedicated_ip_warmup_attributes, params)
+      req.send_request(options)
+    end
+
+    # Update your Amazon SES account details.
+    #
+    # @option params [required, String] :mail_type
+    #   The type of email your account will send.
+    #
+    # @option params [required, String] :website_url
+    #   The URL of your website. This information helps us better understand
+    #   the type of content that you plan to send.
+    #
+    # @option params [String] :contact_language
+    #   The language you would prefer to be contacted with.
+    #
+    # @option params [required, String] :use_case_description
+    #   A description of the types of email that you plan to send.
+    #
+    # @option params [Array<String>] :additional_contact_email_addresses
+    #   Additional email addresses that you would like to be notified
+    #   regarding Amazon SES matters.
+    #
+    # @option params [Boolean] :production_access_enabled
+    #   Indicates whether or not your account should have production access in
+    #   the current AWS Region.
+    #
+    #   If the value is `false`, then your account is in the *sandbox*. When
+    #   your account is in the sandbox, you can only send email to verified
+    #   identities. Additionally, the maximum number of emails you can send in
+    #   a 24-hour period (your sending quota) is 200, and the maximum number
+    #   of emails you can send per second (your maximum sending rate) is 1.
+    #
+    #   If the value is `true`, then your account has production access. When
+    #   your account has production access, you can send email to any address.
+    #   The sending quota and maximum sending rate for your account vary based
+    #   on your specific use case.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.put_account_details({
+    #     mail_type: "MARKETING", # required, accepts MARKETING, TRANSACTIONAL
+    #     website_url: "WebsiteURL", # required
+    #     contact_language: "EN", # accepts EN, JA
+    #     use_case_description: "UseCaseDescription", # required
+    #     additional_contact_email_addresses: ["AdditionalContactEmailAddress"],
+    #     production_access_enabled: false,
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sesv2-2019-09-27/PutAccountDetails AWS API Documentation
+    #
+    # @overload put_account_details(params = {})
+    # @param [Hash] params ({})
+    def put_account_details(params = {}, options = {})
+      req = build_request(:put_account_details, params)
       req.send_request(options)
     end
 
@@ -2294,6 +2864,193 @@ module Aws::SESV2
       req.send_request(options)
     end
 
+    # Composes an email message to multiple destinations.
+    #
+    # @option params [String] :from_email_address
+    #   The email address that you want to use as the "From" address for the
+    #   email. The address that you specify has to be verified.
+    #
+    # @option params [String] :from_email_address_identity_arn
+    #   This parameter is used only for sending authorization. It is the ARN
+    #   of the identity that is associated with the sending authorization
+    #   policy that permits you to use the email address specified in the
+    #   `FromEmailAddress` parameter.
+    #
+    #   For example, if the owner of example.com (which has ARN
+    #   arn:aws:ses:us-east-1:123456789012:identity/example.com) attaches a
+    #   policy to it that authorizes you to use sender@example.com, then you
+    #   would specify the `FromEmailAddressIdentityArn` to be
+    #   arn:aws:ses:us-east-1:123456789012:identity/example.com, and the
+    #   `FromEmailAddress` to be sender@example.com.
+    #
+    #   For more information about sending authorization, see the [Amazon SES
+    #   Developer Guide][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/ses/latest/DeveloperGuide/sending-authorization.html
+    #
+    # @option params [Array<String>] :reply_to_addresses
+    #   The "Reply-to" email addresses for the message. When the recipient
+    #   replies to the message, each Reply-to address receives the reply.
+    #
+    # @option params [String] :feedback_forwarding_email_address
+    #   The address that you want bounce and complaint notifications to be
+    #   sent to.
+    #
+    # @option params [String] :feedback_forwarding_email_address_identity_arn
+    #   This parameter is used only for sending authorization. It is the ARN
+    #   of the identity that is associated with the sending authorization
+    #   policy that permits you to use the email address specified in the
+    #   `FeedbackForwardingEmailAddress` parameter.
+    #
+    #   For example, if the owner of example.com (which has ARN
+    #   arn:aws:ses:us-east-1:123456789012:identity/example.com) attaches a
+    #   policy to it that authorizes you to use feedback@example.com, then you
+    #   would specify the `FeedbackForwardingEmailAddressIdentityArn` to be
+    #   arn:aws:ses:us-east-1:123456789012:identity/example.com, and the
+    #   `FeedbackForwardingEmailAddress` to be feedback@example.com.
+    #
+    #   For more information about sending authorization, see the [Amazon SES
+    #   Developer Guide][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/ses/latest/DeveloperGuide/sending-authorization.html
+    #
+    # @option params [Array<Types::MessageTag>] :default_email_tags
+    #   A list of tags, in the form of name/value pairs, to apply to an email
+    #   that you send using the `SendEmail` operation. Tags correspond to
+    #   characteristics of the email that you define, so that you can publish
+    #   email sending events.
+    #
+    # @option params [required, Types::BulkEmailContent] :default_content
+    #   An object that contains the body of the message. You can specify a
+    #   template message.
+    #
+    # @option params [required, Array<Types::BulkEmailEntry>] :bulk_email_entries
+    #   The list of bulk email entry objects.
+    #
+    # @option params [String] :configuration_set_name
+    #   The name of the configuration set that you want to use when sending
+    #   the email.
+    #
+    # @return [Types::SendBulkEmailResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::SendBulkEmailResponse#bulk_email_entry_results #bulk_email_entry_results} => Array&lt;Types::BulkEmailEntryResult&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.send_bulk_email({
+    #     from_email_address: "EmailAddress",
+    #     from_email_address_identity_arn: "AmazonResourceName",
+    #     reply_to_addresses: ["EmailAddress"],
+    #     feedback_forwarding_email_address: "EmailAddress",
+    #     feedback_forwarding_email_address_identity_arn: "AmazonResourceName",
+    #     default_email_tags: [
+    #       {
+    #         name: "MessageTagName", # required
+    #         value: "MessageTagValue", # required
+    #       },
+    #     ],
+    #     default_content: { # required
+    #       template: {
+    #         template_name: "EmailTemplateName",
+    #         template_arn: "AmazonResourceName",
+    #         template_data: "EmailTemplateData",
+    #       },
+    #     },
+    #     bulk_email_entries: [ # required
+    #       {
+    #         destination: { # required
+    #           to_addresses: ["EmailAddress"],
+    #           cc_addresses: ["EmailAddress"],
+    #           bcc_addresses: ["EmailAddress"],
+    #         },
+    #         replacement_tags: [
+    #           {
+    #             name: "MessageTagName", # required
+    #             value: "MessageTagValue", # required
+    #           },
+    #         ],
+    #         replacement_email_content: {
+    #           replacement_template: {
+    #             replacement_template_data: "EmailTemplateData",
+    #           },
+    #         },
+    #       },
+    #     ],
+    #     configuration_set_name: "ConfigurationSetName",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.bulk_email_entry_results #=> Array
+    #   resp.bulk_email_entry_results[0].status #=> String, one of "SUCCESS", "MESSAGE_REJECTED", "MAIL_FROM_DOMAIN_NOT_VERIFIED", "CONFIGURATION_SET_NOT_FOUND", "TEMPLATE_NOT_FOUND", "ACCOUNT_SUSPENDED", "ACCOUNT_THROTTLED", "ACCOUNT_DAILY_QUOTA_EXCEEDED", "INVALID_SENDING_POOL_NAME", "ACCOUNT_SENDING_PAUSED", "CONFIGURATION_SET_SENDING_PAUSED", "INVALID_PARAMETER", "TRANSIENT_FAILURE", "FAILED"
+    #   resp.bulk_email_entry_results[0].error #=> String
+    #   resp.bulk_email_entry_results[0].message_id #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sesv2-2019-09-27/SendBulkEmail AWS API Documentation
+    #
+    # @overload send_bulk_email(params = {})
+    # @param [Hash] params ({})
+    def send_bulk_email(params = {}, options = {})
+      req = build_request(:send_bulk_email, params)
+      req.send_request(options)
+    end
+
+    # Adds an email address to the list of identities for your Amazon SES
+    # account in the current AWS Region and attempts to verify it. As a
+    # result of executing this operation, a customized verification email is
+    # sent to the specified address.
+    #
+    # To use this operation, you must first create a custom verification
+    # email template. For more information about creating and using custom
+    # verification email templates, see [Using Custom Verification Email
+    # Templates][1] in the *Amazon SES Developer Guide*.
+    #
+    # You can execute this operation no more than once per second.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/ses/latest/DeveloperGuide/send-email-verify-address-custom.html
+    #
+    # @option params [required, String] :email_address
+    #   The email address to verify.
+    #
+    # @option params [required, String] :template_name
+    #   The name of the custom verification email template to use when sending
+    #   the verification email.
+    #
+    # @option params [String] :configuration_set_name
+    #   Name of a configuration set to use when sending the verification
+    #   email.
+    #
+    # @return [Types::SendCustomVerificationEmailResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::SendCustomVerificationEmailResponse#message_id #message_id} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.send_custom_verification_email({
+    #     email_address: "EmailAddress", # required
+    #     template_name: "EmailTemplateName", # required
+    #     configuration_set_name: "ConfigurationSetName",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.message_id #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sesv2-2019-09-27/SendCustomVerificationEmail AWS API Documentation
+    #
+    # @overload send_custom_verification_email(params = {})
+    # @param [Hash] params ({})
+    def send_custom_verification_email(params = {}, options = {})
+      req = build_request(:send_custom_verification_email, params)
+      req.send_request(options)
+    end
+
     # Sends an email message. You can use the Amazon SES API v2 to send two
     # types of messages:
     #
@@ -2307,11 +3064,39 @@ module Aws::SESV2
     #   messages that contain attachments. The message that you specify has
     #   to be a valid MIME message.
     #
+    # * **Templated** – A message that contains personalization tags. When
+    #   you send this type of email, Amazon SES API v2 automatically
+    #   replaces the tags with values that you specify.
+    #
     # @option params [String] :from_email_address
     #   The email address that you want to use as the "From" address for the
     #   email. The address that you specify has to be verified.
     #
-    # @option params [required, Types::Destination] :destination
+    # @option params [String] :from_email_address_identity_arn
+    #   This parameter is used only for sending authorization. It is the ARN
+    #   of the identity that is associated with the sending authorization
+    #   policy that permits you to use the email address specified in the
+    #   `FromEmailAddress` parameter.
+    #
+    #   For example, if the owner of example.com (which has ARN
+    #   arn:aws:ses:us-east-1:123456789012:identity/example.com) attaches a
+    #   policy to it that authorizes you to use sender@example.com, then you
+    #   would specify the `FromEmailAddressIdentityArn` to be
+    #   arn:aws:ses:us-east-1:123456789012:identity/example.com, and the
+    #   `FromEmailAddress` to be sender@example.com.
+    #
+    #   For more information about sending authorization, see the [Amazon SES
+    #   Developer Guide][1].
+    #
+    #   For Raw emails, the `FromEmailAddressIdentityArn` value overrides the
+    #   X-SES-SOURCE-ARN and X-SES-FROM-ARN headers specified in raw email
+    #   message content.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/ses/latest/DeveloperGuide/sending-authorization.html
+    #
+    # @option params [Types::Destination] :destination
     #   An object that contains the recipients of the email message.
     #
     # @option params [Array<String>] :reply_to_addresses
@@ -2322,9 +3107,29 @@ module Aws::SESV2
     #   The address that you want bounce and complaint notifications to be
     #   sent to.
     #
+    # @option params [String] :feedback_forwarding_email_address_identity_arn
+    #   This parameter is used only for sending authorization. It is the ARN
+    #   of the identity that is associated with the sending authorization
+    #   policy that permits you to use the email address specified in the
+    #   `FeedbackForwardingEmailAddress` parameter.
+    #
+    #   For example, if the owner of example.com (which has ARN
+    #   arn:aws:ses:us-east-1:123456789012:identity/example.com) attaches a
+    #   policy to it that authorizes you to use feedback@example.com, then you
+    #   would specify the `FeedbackForwardingEmailAddressIdentityArn` to be
+    #   arn:aws:ses:us-east-1:123456789012:identity/example.com, and the
+    #   `FeedbackForwardingEmailAddress` to be feedback@example.com.
+    #
+    #   For more information about sending authorization, see the [Amazon SES
+    #   Developer Guide][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/ses/latest/DeveloperGuide/sending-authorization.html
+    #
     # @option params [required, Types::EmailContent] :content
     #   An object that contains the body of the message. You can send either a
-    #   Simple message or a Raw message.
+    #   Simple message Raw message or a template Message.
     #
     # @option params [Array<Types::MessageTag>] :email_tags
     #   A list of tags, in the form of name/value pairs, to apply to an email
@@ -2344,13 +3149,15 @@ module Aws::SESV2
     #
     #   resp = client.send_email({
     #     from_email_address: "EmailAddress",
-    #     destination: { # required
+    #     from_email_address_identity_arn: "AmazonResourceName",
+    #     destination: {
     #       to_addresses: ["EmailAddress"],
     #       cc_addresses: ["EmailAddress"],
     #       bcc_addresses: ["EmailAddress"],
     #     },
     #     reply_to_addresses: ["EmailAddress"],
     #     feedback_forwarding_email_address: "EmailAddress",
+    #     feedback_forwarding_email_address_identity_arn: "AmazonResourceName",
     #     content: { # required
     #       simple: {
     #         subject: { # required
@@ -2372,8 +3179,9 @@ module Aws::SESV2
     #         data: "data", # required
     #       },
     #       template: {
-    #         template_arn: "TemplateArn",
-    #         template_data: "TemplateData",
+    #         template_name: "EmailTemplateName",
+    #         template_arn: "AmazonResourceName",
+    #         template_data: "EmailTemplateData",
     #       },
     #     },
     #     email_tags: [
@@ -2439,6 +3247,43 @@ module Aws::SESV2
     # @param [Hash] params ({})
     def tag_resource(params = {}, options = {})
       req = build_request(:tag_resource, params)
+      req.send_request(options)
+    end
+
+    # Creates a preview of the MIME content of an email when provided with a
+    # template and a set of replacement data.
+    #
+    # You can execute this operation no more than once per second.
+    #
+    # @option params [required, String] :template_name
+    #   The name of the template that you want to render.
+    #
+    # @option params [required, String] :template_data
+    #   A list of replacement values to apply to the template. This parameter
+    #   is a JSON object, typically consisting of key-value pairs in which the
+    #   keys correspond to replacement tags in the email template.
+    #
+    # @return [Types::TestRenderEmailTemplateResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::TestRenderEmailTemplateResponse#rendered_template #rendered_template} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.test_render_email_template({
+    #     template_name: "EmailTemplateName", # required
+    #     template_data: "EmailTemplateData", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.rendered_template #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sesv2-2019-09-27/TestRenderEmailTemplate AWS API Documentation
+    #
+    # @overload test_render_email_template(params = {})
+    # @param [Hash] params ({})
+    def test_render_email_template(params = {}, options = {})
+      req = build_request(:test_render_email_template, params)
       req.send_request(options)
     end
 
@@ -2537,6 +3382,165 @@ module Aws::SESV2
       req.send_request(options)
     end
 
+    # Updates an existing custom verification email template.
+    #
+    # For more information about custom verification email templates, see
+    # [Using Custom Verification Email Templates][1] in the *Amazon SES
+    # Developer Guide*.
+    #
+    # You can execute this operation no more than once per second.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/ses/latest/DeveloperGuide/send-email-verify-address-custom.html
+    #
+    # @option params [required, String] :template_name
+    #   The name of the custom verification email template that you want to
+    #   update.
+    #
+    # @option params [required, String] :from_email_address
+    #   The email address that the custom verification email is sent from.
+    #
+    # @option params [required, String] :template_subject
+    #   The subject line of the custom verification email.
+    #
+    # @option params [required, String] :template_content
+    #   The content of the custom verification email. The total size of the
+    #   email must be less than 10 MB. The message body may contain HTML, with
+    #   some limitations. For more information, see [Custom Verification Email
+    #   Frequently Asked Questions][1] in the *Amazon SES Developer Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/ses/latest/DeveloperGuide/send-email-verify-address-custom.html#custom-verification-emails-faq
+    #
+    # @option params [required, String] :success_redirection_url
+    #   The URL that the recipient of the verification email is sent to if his
+    #   or her address is successfully verified.
+    #
+    # @option params [required, String] :failure_redirection_url
+    #   The URL that the recipient of the verification email is sent to if his
+    #   or her address is not successfully verified.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_custom_verification_email_template({
+    #     template_name: "EmailTemplateName", # required
+    #     from_email_address: "EmailAddress", # required
+    #     template_subject: "EmailTemplateSubject", # required
+    #     template_content: "TemplateContent", # required
+    #     success_redirection_url: "SuccessRedirectionURL", # required
+    #     failure_redirection_url: "FailureRedirectionURL", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sesv2-2019-09-27/UpdateCustomVerificationEmailTemplate AWS API Documentation
+    #
+    # @overload update_custom_verification_email_template(params = {})
+    # @param [Hash] params ({})
+    def update_custom_verification_email_template(params = {}, options = {})
+      req = build_request(:update_custom_verification_email_template, params)
+      req.send_request(options)
+    end
+
+    # Updates the specified sending authorization policy for the given
+    # identity (an email address or a domain). This API returns successfully
+    # even if a policy with the specified name does not exist.
+    #
+    # <note markdown="1"> This API is for the identity owner only. If you have not verified the
+    # identity, this API will return an error.
+    #
+    #  </note>
+    #
+    # Sending authorization is a feature that enables an identity owner to
+    # authorize other senders to use its identities. For information about
+    # using sending authorization, see the [Amazon SES Developer Guide][1].
+    #
+    # You can execute this operation no more than once per second.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/ses/latest/DeveloperGuide/sending-authorization.html
+    #
+    # @option params [required, String] :email_identity
+    #   The email identity for which you want to update policy.
+    #
+    # @option params [required, String] :policy_name
+    #   The name of the policy.
+    #
+    #   The policy name cannot exceed 64 characters and can only include
+    #   alphanumeric characters, dashes, and underscores.
+    #
+    # @option params [required, String] :policy
+    #   The text of the policy in JSON format. The policy cannot exceed 4 KB.
+    #
+    #   For information about the syntax of sending authorization policies,
+    #   see the [Amazon SES Developer Guide][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/ses/latest/DeveloperGuide/sending-authorization-policies.html
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_email_identity_policy({
+    #     email_identity: "Identity", # required
+    #     policy_name: "PolicyName", # required
+    #     policy: "Policy", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sesv2-2019-09-27/UpdateEmailIdentityPolicy AWS API Documentation
+    #
+    # @overload update_email_identity_policy(params = {})
+    # @param [Hash] params ({})
+    def update_email_identity_policy(params = {}, options = {})
+      req = build_request(:update_email_identity_policy, params)
+      req.send_request(options)
+    end
+
+    # Updates an email template. Email templates enable you to send
+    # personalized email to one or more destinations in a single API
+    # operation. For more information, see the [Amazon SES Developer
+    # Guide][1].
+    #
+    # You can execute this operation no more than once per second.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/ses/latest/DeveloperGuide/send-personalized-email-api.html
+    #
+    # @option params [required, String] :template_name
+    #   The name of the template you want to update.
+    #
+    # @option params [required, Types::EmailTemplateContent] :template_content
+    #   The content of the email template, composed of a subject line, an HTML
+    #   part, and a text-only part.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_email_template({
+    #     template_name: "EmailTemplateName", # required
+    #     template_content: { # required
+    #       subject: "EmailTemplateSubject",
+    #       text: "EmailTemplateText",
+    #       html: "EmailTemplateHtml",
+    #     },
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sesv2-2019-09-27/UpdateEmailTemplate AWS API Documentation
+    #
+    # @overload update_email_template(params = {})
+    # @param [Hash] params ({})
+    def update_email_template(params = {}, options = {})
+      req = build_request(:update_email_template, params)
+      req.send_request(options)
+    end
+
     # @!endgroup
 
     # @param params ({})
@@ -2550,7 +3554,7 @@ module Aws::SESV2
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-sesv2'
-      context[:gem_version] = '1.8.0'
+      context[:gem_version] = '1.9.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

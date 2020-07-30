@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.182.0 (2020-07-30)
+------------------
+
+* Feature - EC2 On-Demand Capacity Reservations now adds support to bring your own licenses (BYOL) of Windows operating system to launch EC2 instances.
+
 1.181.0 (2020-07-29)
 ------------------
 

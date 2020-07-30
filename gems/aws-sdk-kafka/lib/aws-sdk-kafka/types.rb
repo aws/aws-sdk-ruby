@@ -2446,6 +2446,51 @@ module Aws::Kafka
       include Aws::Structure
     end
 
+    # Request body for RebootBrokerNode action.
+    #
+    # @note When making an API call, you may pass RebootBrokerRequest
+    #   data as a hash:
+    #
+    #       {
+    #         broker_ids: ["__string"], # required
+    #         cluster_arn: "__string", # required
+    #       }
+    #
+    # @!attribute [rw] broker_ids
+    #   The list of broker ids to be rebooted.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] cluster_arn
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kafka-2018-11-14/RebootBrokerRequest AWS API Documentation
+    #
+    class RebootBrokerRequest < Struct.new(
+      :broker_ids,
+      :cluster_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Response body for RebootBrokers action.
+    #
+    # @!attribute [rw] cluster_arn
+    #   The Amazon Resource Name (ARN) of the cluster.
+    #   @return [String]
+    #
+    # @!attribute [rw] cluster_operation_arn
+    #   The Amazon Resource Name (ARN) of the cluster operation.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kafka-2018-11-14/RebootBrokerResponse AWS API Documentation
+    #
+    class RebootBrokerResponse < Struct.new(
+      :cluster_arn,
+      :cluster_operation_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The details of the Amazon S3 destination for broker logs.
     #
     # @note When making an API call, you may pass S3

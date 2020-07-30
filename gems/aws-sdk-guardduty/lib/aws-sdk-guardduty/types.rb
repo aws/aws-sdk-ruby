@@ -824,7 +824,8 @@ module Aws::GuardDuty
     #   @return [String]
     #
     # @!attribute [rw] location
-    #   The URI of the file that contains the IPSet.
+    #   The URI of the file that contains the IPSet. For example:
+    #   https://s3.us-west-2.amazonaws.com/my-bucket/my-object-key.
     #   @return [String]
     #
     # @!attribute [rw] activate
@@ -1032,7 +1033,8 @@ module Aws::GuardDuty
     #   @return [String]
     #
     # @!attribute [rw] location
-    #   The URI of the file that contains the ThreatIntelSet.
+    #   The URI of the file that contains the ThreatIntelSet. For example:
+    #   https://s3.us-west-2.amazonaws.com/my-bucket/my-object-key.
     #   @return [String]
     #
     # @!attribute [rw] activate
@@ -2175,7 +2177,8 @@ module Aws::GuardDuty
     #   @return [String]
     #
     # @!attribute [rw] location
-    #   The URI of the file that contains the IPSet.
+    #   The URI of the file that contains the IPSet. For example:
+    #   https://s3.us-west-2.amazonaws.com/my-bucket/my-object-key.
     #   @return [String]
     #
     # @!attribute [rw] status
@@ -2373,7 +2376,8 @@ module Aws::GuardDuty
     #   @return [String]
     #
     # @!attribute [rw] location
-    #   The URI of the file that contains the ThreatIntelSet.
+    #   The URI of the file that contains the ThreatIntelSet. For example:
+    #   https://s3.us-west-2.amazonaws.com/my-bucket/my-object-key.
     #   @return [String]
     #
     # @!attribute [rw] status
@@ -2392,6 +2396,84 @@ module Aws::GuardDuty
       :location,
       :status,
       :tags)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass GetUsageStatisticsRequest
+    #   data as a hash:
+    #
+    #       {
+    #         detector_id: "DetectorId", # required
+    #         usage_statistic_type: "SUM_BY_ACCOUNT", # required, accepts SUM_BY_ACCOUNT, SUM_BY_DATA_SOURCE, SUM_BY_RESOURCE, TOP_RESOURCES
+    #         usage_criteria: { # required
+    #           account_ids: ["AccountId"],
+    #           data_sources: ["FLOW_LOGS"], # required, accepts FLOW_LOGS, CLOUD_TRAIL, DNS_LOGS, S3_LOGS
+    #           resources: ["String"],
+    #         },
+    #         unit: "String",
+    #         max_results: 1,
+    #         next_token: "String",
+    #       }
+    #
+    # @!attribute [rw] detector_id
+    #   The ID of the detector that specifies the GuardDuty service whose
+    #   usage statistics you want to retrieve.
+    #   @return [String]
+    #
+    # @!attribute [rw] usage_statistic_type
+    #   The type of usage statistics to retrieve.
+    #   @return [String]
+    #
+    # @!attribute [rw] usage_criteria
+    #   Represents the criteria used for querying usage.
+    #   @return [Types::UsageCriteria]
+    #
+    # @!attribute [rw] unit
+    #   The currency unit you would like to view your usage statistics in.
+    #   Current valid values are USD.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of results to return in the response.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   A token to use for paginating results that are returned in the
+    #   response. Set the value of this parameter to null for the first
+    #   request to a list action. For subsequent calls, use the NextToken
+    #   value returned from the previous request to continue listing results
+    #   after the first page.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/GetUsageStatisticsRequest AWS API Documentation
+    #
+    class GetUsageStatisticsRequest < Struct.new(
+      :detector_id,
+      :usage_statistic_type,
+      :usage_criteria,
+      :unit,
+      :max_results,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] usage_statistics
+    #   The usage statistics object. If a UsageStatisticType was provided,
+    #   the objects representing other types will be null.
+    #   @return [Types::UsageStatistics]
+    #
+    # @!attribute [rw] next_token
+    #   The pagination parameter to be used on the next list operation to
+    #   retrieve more items.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/GetUsageStatisticsResponse AWS API Documentation
+    #
+    class GetUsageStatisticsResponse < Struct.new(
+      :usage_statistics,
+      :next_token)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2562,13 +2644,13 @@ module Aws::GuardDuty
     #
     # @!attribute [rw] disable_email_notification
     #   A Boolean value that specifies whether you want to disable email
-    #   notification to the accounts that you’re inviting to GuardDuty as
+    #   notification to the accounts that you are inviting to GuardDuty as
     #   members.
     #   @return [Boolean]
     #
     # @!attribute [rw] message
     #   The invitation message that you want to send to the accounts that
-    #   you’re inviting to GuardDuty as members.
+    #   you're inviting to GuardDuty as members.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/InviteMembersRequest AWS API Documentation
@@ -2763,8 +2845,6 @@ module Aws::GuardDuty
     #
     #   * resource.instanceDetails.instanceId
     #
-    #   * resource.instanceDetails.outpostArn
-    #
     #   * resource.instanceDetails.networkInterfaces.ipv6Addresses
     #
     #   * resource.instanceDetails.networkInterfaces.privateIpAddresses.privateIpAddress
@@ -2814,8 +2894,6 @@ module Aws::GuardDuty
     #   * service.action.networkConnectionAction.localPortDetails.port
     #
     #   * service.action.networkConnectionAction.protocol
-    #
-    #   * service.action.networkConnectionAction.localIpDetails.ipAddressV4
     #
     #   * service.action.networkConnectionAction.remoteIpDetails.city.cityName
     #
@@ -3030,11 +3108,9 @@ module Aws::GuardDuty
     #   @return [String]
     #
     # @!attribute [rw] only_associated
-    #   Specifies what member accounts the response includes based on their
-    #   relationship status with the master account. The default value is
-    #   "true". If set to "false" the response includes all existing
-    #   member accounts (including members who haven't been invited yet or
-    #   have been disassociated).
+    #   Specifies whether to only return associated members or to return all
+    #   members (including members who haven't been invited yet or have
+    #   been disassociated).
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/ListMembersRequest AWS API Documentation
@@ -4180,6 +4256,26 @@ module Aws::GuardDuty
       include Aws::Structure
     end
 
+    # Contains the total usage with the corresponding currency unit for that
+    # value.
+    #
+    # @!attribute [rw] amount
+    #   The total usage.
+    #   @return [String]
+    #
+    # @!attribute [rw] unit
+    #   The currency unit that the amount is given in.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/Total AWS API Documentation
+    #
+    class Total < Struct.new(
+      :amount,
+      :unit)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass UnarchiveFindingsRequest
     #   data as a hash:
     #
@@ -4454,7 +4550,8 @@ module Aws::GuardDuty
     #   @return [String]
     #
     # @!attribute [rw] location
-    #   The updated URI of the file that contains the IPSet.
+    #   The updated URI of the file that contains the IPSet. For example:
+    #   https://s3.us-west-2.amazonaws.com/my-bucket/my-object-key.
     #   @return [String]
     #
     # @!attribute [rw] activate
@@ -4633,7 +4730,8 @@ module Aws::GuardDuty
     #   @return [String]
     #
     # @!attribute [rw] location
-    #   The updated URI of the file that contains the ThreateIntelSet.
+    #   The updated URI of the file that contains the ThreateIntelSet. For
+    #   example: https://s3.us-west-2.amazonaws.com/my-bucket/my-object-key.
     #   @return [String]
     #
     # @!attribute [rw] activate
@@ -4656,6 +4754,129 @@ module Aws::GuardDuty
     # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/UpdateThreatIntelSetResponse AWS API Documentation
     #
     class UpdateThreatIntelSetResponse < Aws::EmptyStructure; end
+
+    # Contains information on the total of usage based on account IDs.
+    #
+    # @!attribute [rw] account_id
+    #   The Account ID that generated usage.
+    #   @return [String]
+    #
+    # @!attribute [rw] total
+    #   Represents the total of usage for the Account ID.
+    #   @return [Types::Total]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/UsageAccountResult AWS API Documentation
+    #
+    class UsageAccountResult < Struct.new(
+      :account_id,
+      :total)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains information about the criteria used to query usage
+    # statistics.
+    #
+    # @note When making an API call, you may pass UsageCriteria
+    #   data as a hash:
+    #
+    #       {
+    #         account_ids: ["AccountId"],
+    #         data_sources: ["FLOW_LOGS"], # required, accepts FLOW_LOGS, CLOUD_TRAIL, DNS_LOGS, S3_LOGS
+    #         resources: ["String"],
+    #       }
+    #
+    # @!attribute [rw] account_ids
+    #   The account IDs to aggregate usage statistics from.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] data_sources
+    #   The data sources to aggregate usage statistics from.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] resources
+    #   The resources to aggregate usage statistics from. Only accepts exact
+    #   resource names.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/UsageCriteria AWS API Documentation
+    #
+    class UsageCriteria < Struct.new(
+      :account_ids,
+      :data_sources,
+      :resources)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains information on the result of usage based on data source type.
+    #
+    # @!attribute [rw] data_source
+    #   The data source type that generated usage.
+    #   @return [String]
+    #
+    # @!attribute [rw] total
+    #   Represents the total of usage for the specified data source.
+    #   @return [Types::Total]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/UsageDataSourceResult AWS API Documentation
+    #
+    class UsageDataSourceResult < Struct.new(
+      :data_source,
+      :total)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains information on the sum of usage based on an AWS resource.
+    #
+    # @!attribute [rw] resource
+    #   The AWS resource that generated usage.
+    #   @return [String]
+    #
+    # @!attribute [rw] total
+    #   Represents the sum total of usage for the specified resource type.
+    #   @return [Types::Total]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/UsageResourceResult AWS API Documentation
+    #
+    class UsageResourceResult < Struct.new(
+      :resource,
+      :total)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains the result of GuardDuty usage. If a UsageStatisticType is
+    # provided the result for other types will be null.
+    #
+    # @!attribute [rw] sum_by_account
+    #   The usage statistic sum organized by account ID.
+    #   @return [Array<Types::UsageAccountResult>]
+    #
+    # @!attribute [rw] sum_by_data_source
+    #   The usage statistic sum organized by on data source.
+    #   @return [Array<Types::UsageDataSourceResult>]
+    #
+    # @!attribute [rw] sum_by_resource
+    #   The usage statistic sum organized by resource.
+    #   @return [Array<Types::UsageResourceResult>]
+    #
+    # @!attribute [rw] top_resources
+    #   Lists the top 50 resources that have generated the most GuardDuty
+    #   usage, in order from most to least expensive.
+    #   @return [Array<Types::UsageResourceResult>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/UsageStatistics AWS API Documentation
+    #
+    class UsageStatistics < Struct.new(
+      :sum_by_account,
+      :sum_by_data_source,
+      :sum_by_resource,
+      :top_resources)
+      SENSITIVE = []
+      include Aws::Structure
+    end
 
   end
 end

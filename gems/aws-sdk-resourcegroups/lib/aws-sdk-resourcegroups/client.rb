@@ -642,8 +642,8 @@ module Aws::ResourceGroups
       req.send_request(options)
     end
 
-    # Returns a list of ARNs of resources that are members of a specified
-    # resource group.
+    # Returns a list of ARNs of the resources that are members of a
+    # specified resource group.
     #
     # @option params [String] :group_name
     #   Don't use this parameter. Use `Group` instead.
@@ -821,7 +821,7 @@ module Aws::ResourceGroups
       req.send_request(options)
     end
 
-    # Returns a list of AWS resource identifiers that matches a specified
+    # Returns a list of AWS resource identifiers that matches tne specified
     # query. The query uses the same format as a resource query in a
     # CreateGroup or UpdateGroupQuery operation.
     #
@@ -1103,7 +1103,7 @@ module Aws::ResourceGroups
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-resourcegroups'
-      context[:gem_version] = '1.27.0'
+      context[:gem_version] = '1.28.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 
