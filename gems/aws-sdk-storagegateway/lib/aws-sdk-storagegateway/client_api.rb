@@ -91,6 +91,7 @@ module Aws::StorageGateway
     DeleteTapeOutput = Shapes::StructureShape.new(name: 'DeleteTapeOutput')
     DeleteVolumeInput = Shapes::StructureShape.new(name: 'DeleteVolumeInput')
     DeleteVolumeOutput = Shapes::StructureShape.new(name: 'DeleteVolumeOutput')
+    DeprecationDate = Shapes::StringShape.new(name: 'DeprecationDate')
     DescribeAvailabilityMonitorTestInput = Shapes::StructureShape.new(name: 'DescribeAvailabilityMonitorTestInput')
     DescribeAvailabilityMonitorTestOutput = Shapes::StructureShape.new(name: 'DescribeAvailabilityMonitorTestOutput')
     DescribeBandwidthRateLimitInput = Shapes::StructureShape.new(name: 'DescribeBandwidthRateLimitInput')
@@ -254,6 +255,7 @@ module Aws::StorageGateway
     ShutdownGatewayOutput = Shapes::StructureShape.new(name: 'ShutdownGatewayOutput')
     SnapshotDescription = Shapes::StringShape.new(name: 'SnapshotDescription')
     SnapshotId = Shapes::StringShape.new(name: 'SnapshotId')
+    SoftwareUpdatesEndDate = Shapes::StringShape.new(name: 'SoftwareUpdatesEndDate')
     Squash = Shapes::StringShape.new(name: 'Squash')
     StartAvailabilityMonitorTestInput = Shapes::StructureShape.new(name: 'StartAvailabilityMonitorTestInput')
     StartAvailabilityMonitorTestOutput = Shapes::StructureShape.new(name: 'StartAvailabilityMonitorTestOutput')
@@ -696,6 +698,8 @@ module Aws::StorageGateway
     DescribeGatewayInformationOutput.add_member(:cloud_watch_log_group_arn, Shapes::ShapeRef.new(shape: CloudWatchLogGroupARN, location_name: "CloudWatchLogGroupARN"))
     DescribeGatewayInformationOutput.add_member(:host_environment, Shapes::ShapeRef.new(shape: HostEnvironment, location_name: "HostEnvironment"))
     DescribeGatewayInformationOutput.add_member(:endpoint_type, Shapes::ShapeRef.new(shape: EndpointType, location_name: "EndpointType"))
+    DescribeGatewayInformationOutput.add_member(:software_updates_end_date, Shapes::ShapeRef.new(shape: SoftwareUpdatesEndDate, location_name: "SoftwareUpdatesEndDate"))
+    DescribeGatewayInformationOutput.add_member(:deprecation_date, Shapes::ShapeRef.new(shape: DeprecationDate, location_name: "DeprecationDate"))
     DescribeGatewayInformationOutput.struct_class = Types::DescribeGatewayInformationOutput
 
     DescribeMaintenanceStartTimeInput.add_member(:gateway_arn, Shapes::ShapeRef.new(shape: GatewayARN, required: true, location_name: "GatewayARN"))

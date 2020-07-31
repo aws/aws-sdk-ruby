@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.33.0 (2020-07-31)
+------------------
+
+* Feature - This release increases the CreateMeetingWithAttendee max attendee limit to 10.
+
 1.32.0 (2020-07-01)
 ------------------
 

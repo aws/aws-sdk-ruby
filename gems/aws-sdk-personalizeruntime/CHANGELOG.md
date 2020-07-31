@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.14.0 (2020-07-31)
+------------------
+
+* Feature - Adds support to use filters with Personalized Ranking recipe
+
 1.13.0 (2020-06-23)
 ------------------
 

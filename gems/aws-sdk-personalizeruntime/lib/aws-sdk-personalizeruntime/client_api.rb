@@ -39,6 +39,7 @@ module Aws::PersonalizeRuntime
     GetPersonalizedRankingRequest.add_member(:input_list, Shapes::ShapeRef.new(shape: InputList, required: true, location_name: "inputList"))
     GetPersonalizedRankingRequest.add_member(:user_id, Shapes::ShapeRef.new(shape: UserID, required: true, location_name: "userId"))
     GetPersonalizedRankingRequest.add_member(:context, Shapes::ShapeRef.new(shape: Context, location_name: "context"))
+    GetPersonalizedRankingRequest.add_member(:filter_arn, Shapes::ShapeRef.new(shape: Arn, location_name: "filterArn"))
     GetPersonalizedRankingRequest.struct_class = Types::GetPersonalizedRankingRequest
 
     GetPersonalizedRankingResponse.add_member(:personalized_ranking, Shapes::ShapeRef.new(shape: ItemList, location_name: "personalizedRanking"))

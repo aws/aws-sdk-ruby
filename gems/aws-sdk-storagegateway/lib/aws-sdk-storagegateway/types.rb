@@ -2718,6 +2718,16 @@ module Aws::StorageGateway
     #   Valid Values: `STANDARD` \| `FIPS`
     #   @return [String]
     #
+    # @!attribute [rw] software_updates_end_date
+    #   Date after which this gateway will not receive software updates for
+    #   new features.
+    #   @return [String]
+    #
+    # @!attribute [rw] deprecation_date
+    #   Date after which this gateway will not receive software updates for
+    #   new features and bug fixes.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/DescribeGatewayInformationOutput AWS API Documentation
     #
     class DescribeGatewayInformationOutput < Struct.new(
@@ -2736,7 +2746,9 @@ module Aws::StorageGateway
       :vpc_endpoint,
       :cloud_watch_log_group_arn,
       :host_environment,
-      :endpoint_type)
+      :endpoint_type,
+      :software_updates_end_date,
+      :deprecation_date)
       SENSITIVE = []
       include Aws::Structure
     end

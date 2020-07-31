@@ -4016,6 +4016,7 @@ module Aws::WAFV2
     #             },
     #           },
     #         ],
+    #         managed_by_firewall_manager: false,
     #       }
     #
     # @!attribute [rw] resource_arn
@@ -4030,16 +4031,28 @@ module Aws::WAFV2
     #
     # @!attribute [rw] redacted_fields
     #   The parts of the request that you want to keep out of the logs. For
-    #   example, if you redact the cookie field, the cookie field in the
+    #   example, if you redact the `HEADER` field, the `HEADER` field in the
     #   firehose will be `xxx`.
+    #
+    #   <note markdown="1"> You must use one of the following values: `URI`, `QUERY_STRING`,
+    #   `HEADER`, or `METHOD`.
+    #
+    #    </note>
     #   @return [Array<Types::FieldToMatch>]
+    #
+    # @!attribute [rw] managed_by_firewall_manager
+    #   Indicates whether the logging configuration was created by AWS
+    #   Firewall Manager, as part of an AWS WAF policy configuration. If
+    #   true, only Firewall Manager can modify or delete the configuration.
+    #   @return [Boolean]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/wafv2-2019-07-29/LoggingConfiguration AWS API Documentation
     #
     class LoggingConfiguration < Struct.new(
       :resource_arn,
       :log_destination_configs,
-      :redacted_fields)
+      :redacted_fields,
+      :managed_by_firewall_manager)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4727,6 +4740,7 @@ module Aws::WAFV2
     #               },
     #             },
     #           ],
+    #           managed_by_firewall_manager: false,
     #         },
     #       }
     #
@@ -6039,7 +6053,7 @@ module Aws::WAFV2
     #   groups, the format for this name is `<vendor name>#<managed rule
     #   group name>#<rule name>`. For your own rule groups, the format for
     #   this name is `<rule group name>#<rule name>`. If the rule is not in
-    #   a rule group, the format is `<rule name>`.
+    #   a rule group, this field is absent.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/wafv2-2019-07-29/SampledHTTPRequest AWS API Documentation
@@ -8707,8 +8721,7 @@ module Aws::WAFV2
     #   characters: A-Z, a-z, 0-9, - (hyphen), and \_ (underscore). The name
     #   can be from one to 128 characters long. It can't contain whitespace
     #   or metric names reserved for AWS WAF, for example "All" and
-    #   "Default\_Action." You can't change a `MetricName` after you
-    #   create a `VisibilityConfig`.
+    #   "Default\_Action."
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/wafv2-2019-07-29/VisibilityConfig AWS API Documentation

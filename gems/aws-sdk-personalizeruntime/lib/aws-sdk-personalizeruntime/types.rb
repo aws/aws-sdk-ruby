@@ -20,6 +20,7 @@ module Aws::PersonalizeRuntime
     #         context: {
     #           "AttributeName" => "AttributeValue",
     #         },
+    #         filter_arn: "Arn",
     #       }
     #
     # @!attribute [rw] campaign_arn
@@ -28,8 +29,8 @@ module Aws::PersonalizeRuntime
     #   @return [String]
     #
     # @!attribute [rw] input_list
-    #   A list of items (itemId's) to rank. If an item was not included in
-    #   the training dataset, the item is appended to the end of the
+    #   A list of items (by `itemId`) to rank. If an item was not included
+    #   in the training dataset, the item is appended to the end of the
     #   reranked list. The maximum is 500.
     #   @return [Array<String>]
     #
@@ -45,13 +46,19 @@ module Aws::PersonalizeRuntime
     #   user's current location or device type.
     #   @return [Hash<String,String>]
     #
+    # @!attribute [rw] filter_arn
+    #   The Amazon Resource Name (ARN) of a filter you created to include or
+    #   exclude items from recommendations for a given user.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/personalize-runtime-2018-05-22/GetPersonalizedRankingRequest AWS API Documentation
     #
     class GetPersonalizedRankingRequest < Struct.new(
       :campaign_arn,
       :input_list,
       :user_id,
-      :context)
+      :context,
+      :filter_arn)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -114,7 +121,13 @@ module Aws::PersonalizeRuntime
     #
     # @!attribute [rw] filter_arn
     #   The ARN of the filter to apply to the returned recommendations. For
-    #   more information, see Using Filters with Amazon Personalize.
+    #   more information, see [Using Filters with Amazon Personalize][1].
+    #
+    #   When using this parameter, be sure the filter resource is `ACTIVE`.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/personalize/latest/dg/filters.html
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/personalize-runtime-2018-05-22/GetRecommendationsRequest AWS API Documentation

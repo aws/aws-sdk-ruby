@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.10.0 (2020-07-31)
+------------------
+
+* Feature - Add ManagedByFirewallManager flag to the logging configuration, which indicates whether AWS Firewall Manager controls the configuration.
+
 1.9.0 (2020-07-09)
 ------------------
 
