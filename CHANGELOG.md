@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+2.11.557 (2020-07-31)
+------------------
+
 * Feature - Aws::Chime - Updated the API for Amazon Chime.
 
 * Feature - Aws::PersonalizeRuntime - Updated the API, and documentation for Amazon Personalize Runtime.
