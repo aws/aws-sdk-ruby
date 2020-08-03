@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+2.11.558 (2020-08-03)
+------------------
+
 * Feature - Aws::SSM - Updated the API, and waiters for Amazon Simple Systems Manager (SSM).
 
 2.11.557 (2020-07-31)
