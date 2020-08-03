@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.86.0 (2020-08-03)
+------------------
+
+* Feature - Adds a waiter for CommandExecuted and paginators for various other APIs.
+
 1.85.0 (2020-07-27)
 ------------------
 
