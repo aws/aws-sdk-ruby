@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+2.11.559 (2020-08-04)
+------------------
+
 * Feature - Aws::Health - Updated the documentation for AWS Health APIs and Notifications.
 
 2.11.558 (2020-08-03)
