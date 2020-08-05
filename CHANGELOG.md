@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+* Feature - Aws::AppSync - Updated the API, and documentation for AWS AppSync.
+
+* Feature - Aws::FSx - Updated the documentation for Amazon FSx.
+
+* Feature - Aws::ResourceGroupsTaggingAPI - Updated the documentation for AWS Resource Groups Tagging API.
+
+* Feature - Aws::SNS - Updated the documentation for Amazon Simple Notification Service.
+
+* Feature - Aws::TranscribeService - Updated the API, and documentation for Amazon Transcribe Service.
+
 2.11.559 (2020-08-04)
 ------------------
 
