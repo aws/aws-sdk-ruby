@@ -371,7 +371,7 @@ module Aws::FSx
     #
     # * a Persistent deployment type
     #
-    # * is *not* linked to an Amazon S3 data respository.
+    # * is *not* linked to a data respository.
     #
     # For more information about backing up Amazon FSx for Lustre file
     # systems, see [Working with FSx for Lustre backups][1].
@@ -412,20 +412,20 @@ module Aws::FSx
     #   The ID of the file system to back up.
     #
     # @option params [String] :client_request_token
-    #   A string of up to 64 ASCII characters that Amazon FSx uses to ensure
-    #   idempotent creation. This string is automatically filled on your
-    #   behalf when you use the AWS Command Line Interface (AWS CLI) or an AWS
-    #   SDK.
+    #   (Optional) A string of up to 64 ASCII characters that Amazon FSx uses
+    #   to ensure idempotent creation. This string is automatically filled on
+    #   your behalf when you use the AWS Command Line Interface (AWS CLI) or
+    #   an AWS SDK.
     #
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.**
     #
     # @option params [Array<Types::Tag>] :tags
-    #   The tags to apply to the backup at backup creation. The key value of
-    #   the `Name` tag appears in the console as the backup name. If you have
-    #   set `CopyTagsToBackups` to true, and you specify one or more tags
-    #   using the `CreateBackup` action, no existing tags on the file system
-    #   are copied from the file system to the backup.
+    #   (Optional) The tags to apply to the backup at backup creation. The key
+    #   value of the `Name` tag appears in the console as the backup name. If
+    #   you have set `CopyTagsToBackups` to true, and you specify one or more
+    #   tags using the `CreateBackup` action, no existing file system tags are
+    #   copied from the file system to the backup.
     #
     # @return [Types::CreateBackupResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -737,10 +737,10 @@ module Aws::FSx
     #   For Lustre file systems:
     #
     #   * For `SCRATCH_2` and `PERSISTENT_1` deployment types, valid values
-    #     are 1.2, 2.4, and increments of 2.4 TiB.
+    #     are 1200 GiB, 2400 GiB, and increments of 2400 GiB.
     #
-    #   * For `SCRATCH_1` deployment type, valid values are 1.2, 2.4, and
-    #     increments of 3.6 TiB.
+    #   * For `SCRATCH_1` deployment type, valid values are 1200 GiB, 2400
+    #     GiB, and increments of 3600 GiB.
     #
     #   For Windows file systems:
     #
@@ -2285,7 +2285,7 @@ module Aws::FSx
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-fsx'
-      context[:gem_version] = '1.25.0'
+      context[:gem_version] = '1.26.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

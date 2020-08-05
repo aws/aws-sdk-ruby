@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.31.0 (2020-08-05)
+------------------
+
+* Feature - AWS AppSync releases support for Direct Lambda Resolvers.
+
 1.30.0 (2020-07-17)
 ------------------
 

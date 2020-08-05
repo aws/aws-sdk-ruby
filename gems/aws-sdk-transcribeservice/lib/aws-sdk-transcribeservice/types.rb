@@ -11,9 +11,9 @@ module Aws::TranscribeService
   module Types
 
     # Your request didn't pass one or more validation tests. For example,
-    # if the transcription you're trying to delete doesn't exist or if it
-    # is in a non-terminal state (for example, it's "in progress"). See
-    # the exception `Message` field for more information.
+    # if the entity that you're trying to delete doesn't exist or if it is
+    # in a non-terminal state (for example, it's "in progress"). See the
+    # exception `Message` field for more information.
     #
     # @!attribute [rw] message
     #   @return [String]
@@ -26,7 +26,7 @@ module Aws::TranscribeService
       include Aws::Structure
     end
 
-    # The resource name already exists.
+    # There is already a resource with that name.
     #
     # @!attribute [rw] message
     #   @return [String]
@@ -74,45 +74,134 @@ module Aws::TranscribeService
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass CreateLanguageModelRequest
+    #   data as a hash:
+    #
+    #       {
+    #         language_code: "en-US", # required, accepts en-US
+    #         base_model_name: "NarrowBand", # required, accepts NarrowBand, WideBand
+    #         model_name: "ModelName", # required
+    #         input_data_config: { # required
+    #           s3_uri: "Uri", # required
+    #           tuning_data_s3_uri: "Uri",
+    #           data_access_role_arn: "DataAccessRoleArn", # required
+    #         },
+    #       }
+    #
+    # @!attribute [rw] language_code
+    #   The language of the input text you're using to train your custom
+    #   language model.
+    #   @return [String]
+    #
+    # @!attribute [rw] base_model_name
+    #   The Amazon Transcribe standard language model, or base model used to
+    #   create your custom language model.
+    #
+    #   If you want to use your custom language model to transcribe audio
+    #   with a sample rate of 16 kHz or greater, choose `Wideband`.
+    #
+    #   If you want to use your custom language model to transcribe audio
+    #   with a sample rate that is less than 16 kHz, choose `Narrowband`.
+    #   @return [String]
+    #
+    # @!attribute [rw] model_name
+    #   The name you choose for your custom language model when you create
+    #   it.
+    #   @return [String]
+    #
+    # @!attribute [rw] input_data_config
+    #   Contains the data access role and the Amazon S3 prefixes to read the
+    #   required input files to create a custom language model.
+    #   @return [Types::InputDataConfig]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/transcribe-2017-10-26/CreateLanguageModelRequest AWS API Documentation
+    #
+    class CreateLanguageModelRequest < Struct.new(
+      :language_code,
+      :base_model_name,
+      :model_name,
+      :input_data_config)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] language_code
+    #   The language code of the text you've used to create a custom
+    #   language model.
+    #   @return [String]
+    #
+    # @!attribute [rw] base_model_name
+    #   The Amazon Transcribe standard language model, or base model you've
+    #   used to create a custom language model.
+    #   @return [String]
+    #
+    # @!attribute [rw] model_name
+    #   The name you've chosen for your custom language model.
+    #   @return [String]
+    #
+    # @!attribute [rw] input_data_config
+    #   The data access role and Amazon S3 prefixes you've chosen to create
+    #   your custom language model.
+    #   @return [Types::InputDataConfig]
+    #
+    # @!attribute [rw] model_status
+    #   The status of the custom language model. When the status is
+    #   `COMPLETED` the model is ready to use.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/transcribe-2017-10-26/CreateLanguageModelResponse AWS API Documentation
+    #
+    class CreateLanguageModelResponse < Struct.new(
+      :language_code,
+      :base_model_name,
+      :model_name,
+      :input_data_config,
+      :model_status)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass CreateMedicalVocabularyRequest
     #   data as a hash:
     #
     #       {
     #         vocabulary_name: "VocabularyName", # required
-    #         language_code: "en-US", # required, accepts en-US, es-US, en-AU, fr-CA, en-GB, de-DE, pt-BR, fr-FR, it-IT, ko-KR, es-ES, en-IN, hi-IN, ar-SA, ru-RU, zh-CN, nl-NL, id-ID, ta-IN, fa-IR, en-IE, en-AB, en-WL, pt-PT, te-IN, tr-TR, de-CH, he-IL, ms-MY, ja-JP, ar-AE
+    #         language_code: "af-ZA", # required, accepts af-ZA, ar-AE, ar-SA, cy-GB, da-DK, de-CH, de-DE, en-AB, en-AU, en-GB, en-IE, en-IN, en-US, en-WL, es-ES, es-US, fa-IR, fr-CA, fr-FR, ga-IE, gd-GB, he-IL, hi-IN, id-ID, it-IT, ja-JP, ko-KR, ms-MY, nl-NL, pt-BR, pt-PT, ru-RU, ta-IN, te-IN, tr-TR, zh-CN
     #         vocabulary_file_uri: "Uri", # required
     #       }
     #
     # @!attribute [rw] vocabulary_name
     #   The name of the custom vocabulary. This case-sensitive name must be
     #   unique within an AWS account. If you try to create a vocabulary with
-    #   the same name as a previous vocabulary you will receive a
+    #   the same name as a previous vocabulary, you get a
     #   `ConflictException` error.
     #   @return [String]
     #
     # @!attribute [rw] language_code
-    #   The language code used for the entries within your custom
-    #   vocabulary. The language code of your custom vocabulary must match
-    #   the language code of your transcription job. US English (en-US) is
-    #   the only language code available for Amazon Transcribe Medical.
+    #   The language code for the language used for the entries in your
+    #   custom vocabulary. The language code of your custom vocabulary must
+    #   match the language code of your transcription job. US English
+    #   (en-US) is the only language code available for Amazon Transcribe
+    #   Medical.
     #   @return [String]
     #
     # @!attribute [rw] vocabulary_file_uri
-    #   The Amazon S3 location of the text file you use to define your
-    #   custom vocabulary. The URI must be in the same AWS region as the API
-    #   endpoint you're calling. Enter information about your
+    #   The location in Amazon S3 of the text file you use to define your
+    #   custom vocabulary. The URI must be in the same AWS Region as the
+    #   resource that you're calling. Enter information about your
     #   `VocabularyFileUri` in the following format:
     #
     #   `
     #   https://s3.<aws-region>.amazonaws.com/<bucket-name>/<keyprefix>/<objectkey>
     #   `
     #
-    #   This is an example of a vocabulary file uri location in Amazon S3:
+    #   The following is an example URI for a vocabulary file that is stored
+    #   in Amazon S3:
     #
     #   `https://s3.us-east-1.amazonaws.com/AWSDOC-EXAMPLE-BUCKET/vocab.txt`
     #
-    #   For more information about S3 object names, see [Object Keys][1] in
-    #   the *Amazon S3 Developer Guide*.
+    #   For more information about Amazon S3 object names, see [Object
+    #   Keys][1] in the *Amazon S3 Developer Guide*.
     #
     #   For more information about custom vocabularies, see [Medical Custom
     #   Vocabularies][2].
@@ -135,23 +224,23 @@ module Aws::TranscribeService
 
     # @!attribute [rw] vocabulary_name
     #   The name of the vocabulary. The name must be unique within an AWS
-    #   account. It is also case-sensitive.
+    #   account and is case sensitive.
     #   @return [String]
     #
     # @!attribute [rw] language_code
-    #   The language code you chose to describe the entries in your custom
-    #   vocabulary. US English (en-US) is the only valid language code for
-    #   Amazon Transcribe Medical.
+    #   The language code for the entries in your custom vocabulary. US
+    #   English (en-US) is the only valid language code for Amazon
+    #   Transcribe Medical.
     #   @return [String]
     #
     # @!attribute [rw] vocabulary_state
     #   The processing state of your custom vocabulary in Amazon Transcribe
-    #   Medical. If the state is `READY` you can use the vocabulary in a
+    #   Medical. If the state is `READY`, you can use the vocabulary in a
     #   `StartMedicalTranscriptionJob` request.
     #   @return [String]
     #
     # @!attribute [rw] last_modified_time
-    #   The date and time you created the vocabulary.
+    #   The date and time that you created the vocabulary.
     #   @return [Time]
     #
     # @!attribute [rw] failure_reason
@@ -176,16 +265,16 @@ module Aws::TranscribeService
     #
     #       {
     #         vocabulary_filter_name: "VocabularyFilterName", # required
-    #         language_code: "en-US", # required, accepts en-US, es-US, en-AU, fr-CA, en-GB, de-DE, pt-BR, fr-FR, it-IT, ko-KR, es-ES, en-IN, hi-IN, ar-SA, ru-RU, zh-CN, nl-NL, id-ID, ta-IN, fa-IR, en-IE, en-AB, en-WL, pt-PT, te-IN, tr-TR, de-CH, he-IL, ms-MY, ja-JP, ar-AE
+    #         language_code: "af-ZA", # required, accepts af-ZA, ar-AE, ar-SA, cy-GB, da-DK, de-CH, de-DE, en-AB, en-AU, en-GB, en-IE, en-IN, en-US, en-WL, es-ES, es-US, fa-IR, fr-CA, fr-FR, ga-IE, gd-GB, he-IL, hi-IN, id-ID, it-IT, ja-JP, ko-KR, ms-MY, nl-NL, pt-BR, pt-PT, ru-RU, ta-IN, te-IN, tr-TR, zh-CN
     #         words: ["Word"],
     #         vocabulary_filter_file_uri: "Uri",
     #       }
     #
     # @!attribute [rw] vocabulary_filter_name
     #   The vocabulary filter name. The name must be unique within the
-    #   account that contains it.If you try to create a vocabulary filter
-    #   with the same name as a previous vocabulary filter you will receive
-    #   a `ConflictException` error.
+    #   account that contains it. If you try to create a vocabulary filter
+    #   with the same name as another vocabulary filter, you get a
+    #   `ConflictException` error.
     #   @return [String]
     #
     # @!attribute [rw] language_code
@@ -262,14 +351,14 @@ module Aws::TranscribeService
     #
     #       {
     #         vocabulary_name: "VocabularyName", # required
-    #         language_code: "en-US", # required, accepts en-US, es-US, en-AU, fr-CA, en-GB, de-DE, pt-BR, fr-FR, it-IT, ko-KR, es-ES, en-IN, hi-IN, ar-SA, ru-RU, zh-CN, nl-NL, id-ID, ta-IN, fa-IR, en-IE, en-AB, en-WL, pt-PT, te-IN, tr-TR, de-CH, he-IL, ms-MY, ja-JP, ar-AE
+    #         language_code: "af-ZA", # required, accepts af-ZA, ar-AE, ar-SA, cy-GB, da-DK, de-CH, de-DE, en-AB, en-AU, en-GB, en-IE, en-IN, en-US, en-WL, es-ES, es-US, fa-IR, fr-CA, fr-FR, ga-IE, gd-GB, he-IL, hi-IN, id-ID, it-IT, ja-JP, ko-KR, ms-MY, nl-NL, pt-BR, pt-PT, ru-RU, ta-IN, te-IN, tr-TR, zh-CN
     #         phrases: ["Phrase"],
     #         vocabulary_file_uri: "Uri",
     #       }
     #
     # @!attribute [rw] vocabulary_name
     #   The name of the vocabulary. The name must be unique within an AWS
-    #   account. The name is case-sensitive. If you try to create a
+    #   account. The name is case sensitive. If you try to create a
     #   vocabulary with the same name as a previous vocabulary you will
     #   receive a `ConflictException` error.
     #   @return [String]
@@ -345,6 +434,25 @@ module Aws::TranscribeService
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass DeleteLanguageModelRequest
+    #   data as a hash:
+    #
+    #       {
+    #         model_name: "ModelName", # required
+    #       }
+    #
+    # @!attribute [rw] model_name
+    #   The name of the model you're choosing to delete.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/transcribe-2017-10-26/DeleteLanguageModelRequest AWS API Documentation
+    #
+    class DeleteLanguageModelRequest < Struct.new(
+      :model_name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass DeleteMedicalTranscriptionJobRequest
     #   data as a hash:
     #
@@ -373,7 +481,7 @@ module Aws::TranscribeService
     #       }
     #
     # @!attribute [rw] vocabulary_name
-    #   The name of the vocabulary you are choosing to delete.
+    #   The name of the vocabulary that you want to delete.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/transcribe-2017-10-26/DeleteMedicalVocabularyRequest AWS API Documentation
@@ -441,6 +549,39 @@ module Aws::TranscribeService
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass DescribeLanguageModelRequest
+    #   data as a hash:
+    #
+    #       {
+    #         model_name: "ModelName", # required
+    #       }
+    #
+    # @!attribute [rw] model_name
+    #   The name of the custom language model you submit to get more
+    #   information.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/transcribe-2017-10-26/DescribeLanguageModelRequest AWS API Documentation
+    #
+    class DescribeLanguageModelRequest < Struct.new(
+      :model_name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] language_model
+    #   The name of the custom language model you requested more information
+    #   about.
+    #   @return [Types::LanguageModel]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/transcribe-2017-10-26/DescribeLanguageModelResponse AWS API Documentation
+    #
+    class DescribeLanguageModelResponse < Struct.new(
+      :language_model)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass GetMedicalTranscriptionJobRequest
     #   data as a hash:
     #
@@ -481,8 +622,8 @@ module Aws::TranscribeService
     #       }
     #
     # @!attribute [rw] vocabulary_name
-    #   The name of the vocabulary you are trying to get information about.
-    #   The value you enter for this request is case-sensitive.
+    #   The name of the vocabulary that you want information about. The
+    #   value is case sensitive.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/transcribe-2017-10-26/GetMedicalVocabularyRequest AWS API Documentation
@@ -494,20 +635,22 @@ module Aws::TranscribeService
     end
 
     # @!attribute [rw] vocabulary_name
-    #   The valid name that Amazon Transcribe Medical returns.
+    #   The name of the vocabulary returned by Amazon Transcribe Medical.
     #   @return [String]
     #
     # @!attribute [rw] language_code
-    #   The valid language code returned for your vocabulary entries.
+    #   The valid language code for your vocabulary entries.
     #   @return [String]
     #
     # @!attribute [rw] vocabulary_state
-    #   The processing state of the vocabulary.
+    #   The processing state of the vocabulary. If the `VocabularyState` is
+    #   `READY` then you can use it in the `StartMedicalTranscriptionJob`
+    #   operation.
     #   @return [String]
     #
     # @!attribute [rw] last_modified_time
-    #   The date and time the vocabulary was last modified with a text file
-    #   different from what was previously used.
+    #   The date and time that the vocabulary was last modified with a text
+    #   file different from the one that was previously used.
     #   @return [Time]
     #
     # @!attribute [rw] failure_reason
@@ -516,8 +659,8 @@ module Aws::TranscribeService
     #   @return [String]
     #
     # @!attribute [rw] download_uri
-    #   The Amazon S3 location where the vocabulary is stored. Use this URI
-    #   to get the contents of the vocabulary. You can download your
+    #   The location in Amazon S3 where the vocabulary is stored. Use this
+    #   URI to get the contents of the vocabulary. You can download your
     #   vocabulary from the URI for a limited time.
     #   @return [String]
     #
@@ -622,7 +765,7 @@ module Aws::TranscribeService
     #
     # @!attribute [rw] vocabulary_name
     #   The name of the vocabulary to return information about. The name is
-    #   case-sensitive.
+    #   case sensitive.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/transcribe-2017-10-26/GetVocabularyRequest AWS API Documentation
@@ -669,6 +812,44 @@ module Aws::TranscribeService
       :last_modified_time,
       :failure_reason,
       :download_uri)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The object that contains the Amazon S3 object location and access role
+    # required to train and tune your custom language model.
+    #
+    # @note When making an API call, you may pass InputDataConfig
+    #   data as a hash:
+    #
+    #       {
+    #         s3_uri: "Uri", # required
+    #         tuning_data_s3_uri: "Uri",
+    #         data_access_role_arn: "DataAccessRoleArn", # required
+    #       }
+    #
+    # @!attribute [rw] s3_uri
+    #   The Amazon S3 prefix you specify to access the plain text files that
+    #   you use to train your custom language model.
+    #   @return [String]
+    #
+    # @!attribute [rw] tuning_data_s3_uri
+    #   The Amazon S3 prefix you specify to access the plain text files that
+    #   you use to tune your custom language model.
+    #   @return [String]
+    #
+    # @!attribute [rw] data_access_role_arn
+    #   The Amazon Resource Name (ARN) that uniquely identifies the
+    #   permissions you've given Amazon Transcribe to access your Amazon S3
+    #   buckets containing your media files or text data.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/transcribe-2017-10-26/InputDataConfig AWS API Documentation
+    #
+    class InputDataConfig < Struct.new(
+      :s3_uri,
+      :tuning_data_s3_uri,
+      :data_access_role_arn)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -730,6 +911,65 @@ module Aws::TranscribeService
       include Aws::Structure
     end
 
+    # The structure used to describe a custom language model.
+    #
+    # @!attribute [rw] model_name
+    #   The name of the custom language model.
+    #   @return [String]
+    #
+    # @!attribute [rw] create_time
+    #   The time the custom language model was created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] last_modified_time
+    #   The most recent time the custom language model was modified.
+    #   @return [Time]
+    #
+    # @!attribute [rw] language_code
+    #   The language code you used to create your custom language model.
+    #   @return [String]
+    #
+    # @!attribute [rw] base_model_name
+    #   The Amazon Transcribe standard language model, or base model used to
+    #   create the custom language model.
+    #   @return [String]
+    #
+    # @!attribute [rw] model_status
+    #   The creation status of a custom language model. When the status is
+    #   `COMPLETED` the model is ready for use.
+    #   @return [String]
+    #
+    # @!attribute [rw] upgrade_availability
+    #   Whether the base model used for the custom language model is up to
+    #   date. If this field is `true` then you are running the most
+    #   up-to-date version of the base model in your custom language model.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] failure_reason
+    #   The reason why the custom language model couldn't be created.
+    #   @return [String]
+    #
+    # @!attribute [rw] input_data_config
+    #   The data access role and Amazon S3 prefixes for the input files used
+    #   to train the custom language model.
+    #   @return [Types::InputDataConfig]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/transcribe-2017-10-26/LanguageModel AWS API Documentation
+    #
+    class LanguageModel < Struct.new(
+      :model_name,
+      :create_time,
+      :last_modified_time,
+      :language_code,
+      :base_model_name,
+      :model_status,
+      :upgrade_availability,
+      :failure_reason,
+      :input_data_config)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Either you have sent too many requests or your input file is too long.
     # Wait before you resend your request, or use a smaller file and resend
     # the request.
@@ -741,6 +981,72 @@ module Aws::TranscribeService
     #
     class LimitExceededException < Struct.new(
       :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass ListLanguageModelsRequest
+    #   data as a hash:
+    #
+    #       {
+    #         status_equals: "IN_PROGRESS", # accepts IN_PROGRESS, FAILED, COMPLETED
+    #         name_contains: "ModelName",
+    #         next_token: "NextToken",
+    #         max_results: 1,
+    #       }
+    #
+    # @!attribute [rw] status_equals
+    #   When specified, returns only custom language models with the
+    #   specified status. Language models are ordered by creation date, with
+    #   the newest models first. If you don't specify a status, Amazon
+    #   Transcribe returns all custom language models ordered by date.
+    #   @return [String]
+    #
+    # @!attribute [rw] name_contains
+    #   When specified, the custom language model names returned contain the
+    #   substring you've specified.
+    #   @return [String]
+    #
+    # @!attribute [rw] next_token
+    #   When included, fetches the next set of jobs if the result of the
+    #   previous request was truncated.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of language models to return in the response. If
+    #   there are fewer results in the list, the response contains only the
+    #   actual results.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/transcribe-2017-10-26/ListLanguageModelsRequest AWS API Documentation
+    #
+    class ListLanguageModelsRequest < Struct.new(
+      :status_equals,
+      :name_contains,
+      :next_token,
+      :max_results)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] next_token
+    #   The operation returns a page of jobs at a time. The maximum size of
+    #   the list is set by the MaxResults parameter. If there are more
+    #   language models in the list than the page size, Amazon Transcribe
+    #   returns the `NextPage` token. Include the token in the next request
+    #   to the operation to return the next page of language models.
+    #   @return [String]
+    #
+    # @!attribute [rw] models
+    #   A list of objects containing information about custom language
+    #   models.
+    #   @return [Array<Types::LanguageModel>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/transcribe-2017-10-26/ListLanguageModelsResponse AWS API Documentation
+    #
+    class ListLanguageModelsResponse < Struct.new(
+      :next_token,
+      :models)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -832,7 +1138,7 @@ module Aws::TranscribeService
     # @!attribute [rw] next_token
     #   If the result of your previous request to `ListMedicalVocabularies`
     #   was truncated, include the `NextToken` to fetch the next set of
-    #   jobs.
+    #   vocabularies.
     #   @return [String]
     #
     # @!attribute [rw] max_results
@@ -840,15 +1146,15 @@ module Aws::TranscribeService
     #   @return [Integer]
     #
     # @!attribute [rw] state_equals
-    #   When specified, only returns vocabularies with the `VocabularyState`
-    #   equal to the specified vocabulary state.
+    #   When specified, returns only vocabularies with the `VocabularyState`
+    #   equal to the specified vocabulary state. Use this field to see which
+    #   vocabularies are ready for your medical transcription jobs.
     #   @return [String]
     #
     # @!attribute [rw] name_contains
-    #   Returns vocabularies in the list whose name contains the specified
-    #   string. The search is case-insensitive, `ListMedicalVocabularies`
-    #   returns both "vocabularyname" and "VocabularyName" in the
-    #   response list.
+    #   Returns vocabularies whose names contain the specified string. The
+    #   search is not case sensitive. `ListMedicalVocabularies` returns both
+    #   "`vocabularyname`" and "`VocabularyName`".
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/transcribe-2017-10-26/ListMedicalVocabulariesRequest AWS API Documentation
@@ -868,16 +1174,17 @@ module Aws::TranscribeService
     #
     # @!attribute [rw] next_token
     #   The `ListMedicalVocabularies` operation returns a page of
-    #   vocabularies at a time. The maximum size of the page is set by the
-    #   `MaxResults` parameter. If there are more jobs in the list than the
-    #   page size, Amazon Transcribe Medical returns the `NextPage` token.
-    #   Include the token in the next request to the
-    #   `ListMedicalVocabularies` operation to return the next page of jobs.
+    #   vocabularies at a time. You set the maximum number of vocabularies
+    #   to return on a page with the `MaxResults` parameter. If there are
+    #   more jobs in the list will fit on a page, Amazon Transcribe Medical
+    #   returns the `NextPage` token. To return the next page of
+    #   vocabularies, include the token in the next request to the
+    #   `ListMedicalVocabularies` operation .
     #   @return [String]
     #
     # @!attribute [rw] vocabularies
-    #   A list of objects that describe the vocabularies that match the
-    #   search criteria in the request.
+    #   A list of objects that describe the vocabularies that match your
+    #   search criteria.
     #   @return [Array<Types::VocabularyInfo>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/transcribe-2017-10-26/ListMedicalVocabulariesResponse AWS API Documentation
@@ -991,8 +1298,8 @@ module Aws::TranscribeService
     # @!attribute [rw] name_contains
     #   When specified, the vocabularies returned in the list are limited to
     #   vocabularies whose name contains the specified string. The search is
-    #   case-insensitive, `ListVocabularies` returns both "vocabularyname"
-    #   and "VocabularyName" in the response list.
+    #   not case sensitive, `ListVocabularies` returns both
+    #   "vocabularyname" and "VocabularyName" in the response list.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/transcribe-2017-10-26/ListVocabulariesRequest AWS API Documentation
@@ -1012,11 +1319,11 @@ module Aws::TranscribeService
     #
     # @!attribute [rw] next_token
     #   The `ListVocabularies` operation returns a page of vocabularies at a
-    #   time. The maximum size of the page is set by the `MaxResults`
-    #   parameter. If there are more jobs in the list than the page size,
-    #   Amazon Transcribe returns the `NextPage` token. Include the token in
-    #   the next request to the `ListVocabularies` operation to return in
-    #   the next page of jobs.
+    #   time. The maximum size of the page is set in the `MaxResults`
+    #   parameter. If there are more jobs in the list than will fit on the
+    #   page, Amazon Transcribe returns the `NextPage` token. To return in
+    #   the next page of jobs, include the token in the next request to the
+    #   `ListVocabularies` operation.
     #   @return [String]
     #
     # @!attribute [rw] vocabularies
@@ -1145,7 +1452,7 @@ module Aws::TranscribeService
       include Aws::Structure
     end
 
-    # The data structure that containts the information for a medical
+    # The data structure that contains the information for a medical
     # transcription job.
     #
     # @!attribute [rw] medical_transcription_job_name
@@ -1227,8 +1534,8 @@ module Aws::TranscribeService
     #
     #   * `Invalid file size: file size too large`- The size of your audio
     #     file is larger than what Amazon Transcribe Medical can process.
-    #     For more information, see [Guidlines and Quotas][1] in the *Amazon
-    #     Transcribe Medical Guide*
+    #     For more information, see [Guidelines and Quotas][1] in the
+    #     *Amazon Transcribe Medical Guide*
     #
     #   * `Invalid number of channels: number of channels too large`- Your
     #     audio contains more channels than Amazon Transcribe Medical is
@@ -1366,7 +1673,7 @@ module Aws::TranscribeService
     #
     # @!attribute [rw] show_speaker_labels
     #   Determines whether the transcription job uses speaker recognition to
-    #   identify different speakers in the input audio. Speaker recongition
+    #   identify different speakers in the input audio. Speaker recognition
     #   labels individual speakers in the audio file. If you set the
     #   `ShowSpeakerLabels` field to true, you must also set the maximum
     #   number of speaker labels in the `MaxSpeakerLabels` field.
@@ -1427,6 +1734,28 @@ module Aws::TranscribeService
       :show_alternatives,
       :max_alternatives,
       :vocabulary_name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The object used to call your custom language model to your
+    # transcription job.
+    #
+    # @note When making an API call, you may pass ModelSettings
+    #   data as a hash:
+    #
+    #       {
+    #         language_model_name: "ModelName",
+    #       }
+    #
+    # @!attribute [rw] language_model_name
+    #   The name of your custom language model.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/transcribe-2017-10-26/ModelSettings AWS API Documentation
+    #
+    class ModelSettings < Struct.new(
+      :language_model_name)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1547,7 +1876,7 @@ module Aws::TranscribeService
     #
     #       {
     #         medical_transcription_job_name: "TranscriptionJobName", # required
-    #         language_code: "en-US", # required, accepts en-US, es-US, en-AU, fr-CA, en-GB, de-DE, pt-BR, fr-FR, it-IT, ko-KR, es-ES, en-IN, hi-IN, ar-SA, ru-RU, zh-CN, nl-NL, id-ID, ta-IN, fa-IR, en-IE, en-AB, en-WL, pt-PT, te-IN, tr-TR, de-CH, he-IL, ms-MY, ja-JP, ar-AE
+    #         language_code: "af-ZA", # required, accepts af-ZA, ar-AE, ar-SA, cy-GB, da-DK, de-CH, de-DE, en-AB, en-AU, en-GB, en-IE, en-IN, en-US, en-WL, es-ES, es-US, fa-IR, fr-CA, fr-FR, ga-IE, gd-GB, he-IL, hi-IN, id-ID, it-IT, ja-JP, ko-KR, ms-MY, nl-NL, pt-BR, pt-PT, ru-RU, ta-IN, te-IN, tr-TR, zh-CN
     #         media_sample_rate_hertz: 1,
     #         media_format: "mp3", # accepts mp3, mp4, wav, flac
     #         media: { # required
@@ -1569,10 +1898,10 @@ module Aws::TranscribeService
     #
     # @!attribute [rw] medical_transcription_job_name
     #   The name of the medical transcription job. You can't use the
-    #   strings "." or ".." by themselves as the job name. The name must
-    #   also be unique within an AWS account. If you try to create a medical
-    #   transcription job with the same name as a previous medical
-    #   transcription job you will receive a `ConflictException` error.
+    #   strings "`.`" or "`..`" by themselves as the job name. The name
+    #   must also be unique within an AWS account. If you try to create a
+    #   medical transcription job with the same name as a previous medical
+    #   transcription job, you get a `ConflictException` error.
     #   @return [String]
     #
     # @!attribute [rw] language_code
@@ -1704,7 +2033,7 @@ module Aws::TranscribeService
     #
     #       {
     #         transcription_job_name: "TranscriptionJobName", # required
-    #         language_code: "en-US", # required, accepts en-US, es-US, en-AU, fr-CA, en-GB, de-DE, pt-BR, fr-FR, it-IT, ko-KR, es-ES, en-IN, hi-IN, ar-SA, ru-RU, zh-CN, nl-NL, id-ID, ta-IN, fa-IR, en-IE, en-AB, en-WL, pt-PT, te-IN, tr-TR, de-CH, he-IL, ms-MY, ja-JP, ar-AE
+    #         language_code: "af-ZA", # required, accepts af-ZA, ar-AE, ar-SA, cy-GB, da-DK, de-CH, de-DE, en-AB, en-AU, en-GB, en-IE, en-IN, en-US, en-WL, es-ES, es-US, fa-IR, fr-CA, fr-FR, ga-IE, gd-GB, he-IL, hi-IN, id-ID, it-IT, ja-JP, ko-KR, ms-MY, nl-NL, pt-BR, pt-PT, ru-RU, ta-IN, te-IN, tr-TR, zh-CN
     #         media_sample_rate_hertz: 1,
     #         media_format: "mp3", # accepts mp3, mp4, wav, flac
     #         media: { # required
@@ -1722,6 +2051,9 @@ module Aws::TranscribeService
     #           vocabulary_filter_name: "VocabularyFilterName",
     #           vocabulary_filter_method: "remove", # accepts remove, mask
     #         },
+    #         model_settings: {
+    #           language_model_name: "ModelName",
+    #         },
     #         job_execution_settings: {
     #           allow_deferred_execution: false,
     #           data_access_role_arn: "DataAccessRoleArn",
@@ -1733,10 +2065,10 @@ module Aws::TranscribeService
     #       }
     #
     # @!attribute [rw] transcription_job_name
-    #   The name of the job. Note that you can't use the strings "." or
-    #   ".." by themselves as the job name. The name must also be unique
-    #   within an AWS account. If you try to create a transcription job with
-    #   the same name as a previous transcription job you will receive a
+    #   The name of the job. You can't use the strings "`.`" or "`..`"
+    #   by themselves as the job name. The name must also be unique within
+    #   an AWS account. If you try to create a transcription job with the
+    #   same name as a previous transcription job, you get a
     #   `ConflictException` error.
     #   @return [String]
     #
@@ -1831,6 +2163,11 @@ module Aws::TranscribeService
     #   transcription job.
     #   @return [Types::Settings]
     #
+    # @!attribute [rw] model_settings
+    #   Choose the custom language model you use for your transcription job
+    #   in this parameter.
+    #   @return [Types::ModelSettings]
+    #
     # @!attribute [rw] job_execution_settings
     #   Provides information about how a transcription job is executed. Use
     #   this field to indicate that the job can be queued for deferred
@@ -1854,6 +2191,7 @@ module Aws::TranscribeService
       :output_bucket_name,
       :output_encryption_kms_key_id,
       :settings,
+      :model_settings,
       :job_execution_settings,
       :content_redaction)
       SENSITIVE = []
@@ -1875,7 +2213,7 @@ module Aws::TranscribeService
     # Identifies the location of a transcription.
     #
     # @!attribute [rw] transcript_file_uri
-    #   The S3 object location of the the transcript.
+    #   The S3 object location of the transcript.
     #
     #   Use this URI to access the transcript. If you specified an S3 bucket
     #   in the `OutputBucketName` field when you created the job, this is
@@ -1887,7 +2225,7 @@ module Aws::TranscribeService
     # @!attribute [rw] redacted_transcript_file_uri
     #   The S3 object location of the redacted transcript.
     #
-    #   Use this URI to access the redacated transcript. If you specified an
+    #   Use this URI to access the redacted transcript. If you specified an
     #   S3 bucket in the `OutputBucketName` field when you created the job,
     #   this is the URI of that bucket. If you chose to store the transcript
     #   in Amazon Transcribe, this is a shareable URL that provides secure
@@ -1996,6 +2334,10 @@ module Aws::TranscribeService
     #   when processing the transcription job.
     #   @return [Types::Settings]
     #
+    # @!attribute [rw] model_settings
+    #   An object containing the details of your custom language model.
+    #   @return [Types::ModelSettings]
+    #
     # @!attribute [rw] job_execution_settings
     #   Provides information about how a transcription job is executed.
     #   @return [Types::JobExecutionSettings]
@@ -2020,6 +2362,7 @@ module Aws::TranscribeService
       :completion_time,
       :failure_reason,
       :settings,
+      :model_settings,
       :job_execution_settings,
       :content_redaction)
       SENSITIVE = []
@@ -2075,6 +2418,11 @@ module Aws::TranscribeService
     #   The content redaction settings of the transcription job.
     #   @return [Types::ContentRedaction]
     #
+    # @!attribute [rw] model_settings
+    #   The object used to call your custom language model to your
+    #   transcription job.
+    #   @return [Types::ModelSettings]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/transcribe-2017-10-26/TranscriptionJobSummary AWS API Documentation
     #
     class TranscriptionJobSummary < Struct.new(
@@ -2086,7 +2434,8 @@ module Aws::TranscribeService
       :transcription_job_status,
       :failure_reason,
       :output_location_type,
-      :content_redaction)
+      :content_redaction,
+      :model_settings)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2096,27 +2445,27 @@ module Aws::TranscribeService
     #
     #       {
     #         vocabulary_name: "VocabularyName", # required
-    #         language_code: "en-US", # required, accepts en-US, es-US, en-AU, fr-CA, en-GB, de-DE, pt-BR, fr-FR, it-IT, ko-KR, es-ES, en-IN, hi-IN, ar-SA, ru-RU, zh-CN, nl-NL, id-ID, ta-IN, fa-IR, en-IE, en-AB, en-WL, pt-PT, te-IN, tr-TR, de-CH, he-IL, ms-MY, ja-JP, ar-AE
+    #         language_code: "af-ZA", # required, accepts af-ZA, ar-AE, ar-SA, cy-GB, da-DK, de-CH, de-DE, en-AB, en-AU, en-GB, en-IE, en-IN, en-US, en-WL, es-ES, es-US, fa-IR, fr-CA, fr-FR, ga-IE, gd-GB, he-IL, hi-IN, id-ID, it-IT, ja-JP, ko-KR, ms-MY, nl-NL, pt-BR, pt-PT, ru-RU, ta-IN, te-IN, tr-TR, zh-CN
     #         vocabulary_file_uri: "Uri",
     #       }
     #
     # @!attribute [rw] vocabulary_name
-    #   The name of the vocabulary to update. The name is case-sensitive. If
-    #   you try to update a vocabulary with the same name as a previous
-    #   vocabulary you will receive a `ConflictException` error.
+    #   The name of the vocabulary to update. The name is case sensitive. If
+    #   you try to update a vocabulary with the same name as a vocabulary
+    #   you've already made, you get a `ConflictException` error.
     #   @return [String]
     #
     # @!attribute [rw] language_code
-    #   The language code of the entries in the updated vocabulary. US
-    #   English (en-US) is the only valid language code in Amazon Transcribe
-    #   Medical.
+    #   The language code of the language used for the entries in the
+    #   updated vocabulary. US English (en-US) is the only valid language
+    #   code in Amazon Transcribe Medical.
     #   @return [String]
     #
     # @!attribute [rw] vocabulary_file_uri
-    #   The Amazon S3 location of the text file containing the definition of
-    #   the custom vocabulary. The URI must be in the same AWS region as the
-    #   API endpoint you are calling. You can see the fields you need to
-    #   enter for you Amazon S3 location in the example URI here:
+    #   The location in Amazon S3 of the text file that contains the you use
+    #   for your custom vocabulary. The URI must be in the same AWS Region
+    #   as the resource that you are calling. The following is the format
+    #   for a URI:
     #
     #   `
     #   https://s3.<aws-region>.amazonaws.com/<bucket-name>/<keyprefix>/<objectkey>
@@ -2126,8 +2475,8 @@ module Aws::TranscribeService
     #
     #   `https://s3.us-east-1.amazonaws.com/AWSDOC-EXAMPLE-BUCKET/vocab.txt`
     #
-    #   For more information about S3 object names, see [Object Keys][1] in
-    #   the *Amazon S3 Developer Guide*.
+    #   For more information about Amazon S3 object names, see [Object
+    #   Keys][1] in the *Amazon S3 Developer Guide*.
     #
     #   For more information about custom vocabularies in Amazon Transcribe
     #   Medical, see [Medical Custom Vocabularies][2].
@@ -2153,18 +2502,18 @@ module Aws::TranscribeService
     #   @return [String]
     #
     # @!attribute [rw] language_code
-    #   The language code for the text file used to update the custom
-    #   vocabulary. US English (en-US) is the only language supported in
-    #   Amazon Transcribe Medical.
+    #   The language code for the language of the text file used to update
+    #   the custom vocabulary. US English (en-US) is the only language
+    #   supported in Amazon Transcribe Medical.
     #   @return [String]
     #
     # @!attribute [rw] last_modified_time
-    #   The date and time the vocabulary was updated.
+    #   The date and time that the vocabulary was updated.
     #   @return [Time]
     #
     # @!attribute [rw] vocabulary_state
     #   The processing state of the update to the vocabulary. When the
-    #   `VocabularyState` field is `READY` the vocabulary is ready to be
+    #   `VocabularyState` field is `READY`, the vocabulary is ready to be
     #   used in a `StartMedicalTranscriptionJob` request.
     #   @return [String]
     #
@@ -2190,8 +2539,8 @@ module Aws::TranscribeService
     #
     # @!attribute [rw] vocabulary_filter_name
     #   The name of the vocabulary filter to update. If you try to update a
-    #   vocabulary filter with the same name as a previous vocabulary filter
-    #   you will receive a `ConflictException` error.
+    #   vocabulary filter with the same name as another vocabulary filter,
+    #   you get a `ConflictException` error.
     #   @return [String]
     #
     # @!attribute [rw] words
@@ -2261,13 +2610,13 @@ module Aws::TranscribeService
     #
     #       {
     #         vocabulary_name: "VocabularyName", # required
-    #         language_code: "en-US", # required, accepts en-US, es-US, en-AU, fr-CA, en-GB, de-DE, pt-BR, fr-FR, it-IT, ko-KR, es-ES, en-IN, hi-IN, ar-SA, ru-RU, zh-CN, nl-NL, id-ID, ta-IN, fa-IR, en-IE, en-AB, en-WL, pt-PT, te-IN, tr-TR, de-CH, he-IL, ms-MY, ja-JP, ar-AE
+    #         language_code: "af-ZA", # required, accepts af-ZA, ar-AE, ar-SA, cy-GB, da-DK, de-CH, de-DE, en-AB, en-AU, en-GB, en-IE, en-IN, en-US, en-WL, es-ES, es-US, fa-IR, fr-CA, fr-FR, ga-IE, gd-GB, he-IL, hi-IN, id-ID, it-IT, ja-JP, ko-KR, ms-MY, nl-NL, pt-BR, pt-PT, ru-RU, ta-IN, te-IN, tr-TR, zh-CN
     #         phrases: ["Phrase"],
     #         vocabulary_file_uri: "Uri",
     #       }
     #
     # @!attribute [rw] vocabulary_name
-    #   The name of the vocabulary to update. The name is case-sensitive. If
+    #   The name of the vocabulary to update. The name is case sensitive. If
     #   you try to update a vocabulary with the same name as a previous
     #   vocabulary you will receive a `ConflictException` error.
     #   @return [String]

@@ -14,9 +14,13 @@ module Aws::TranscribeService
     include Seahorse::Model
 
     BadRequestException = Shapes::StructureShape.new(name: 'BadRequestException')
+    BaseModelName = Shapes::StringShape.new(name: 'BaseModelName')
     Boolean = Shapes::BooleanShape.new(name: 'Boolean')
+    CLMLanguageCode = Shapes::StringShape.new(name: 'CLMLanguageCode')
     ConflictException = Shapes::StructureShape.new(name: 'ConflictException')
     ContentRedaction = Shapes::StructureShape.new(name: 'ContentRedaction')
+    CreateLanguageModelRequest = Shapes::StructureShape.new(name: 'CreateLanguageModelRequest')
+    CreateLanguageModelResponse = Shapes::StructureShape.new(name: 'CreateLanguageModelResponse')
     CreateMedicalVocabularyRequest = Shapes::StructureShape.new(name: 'CreateMedicalVocabularyRequest')
     CreateMedicalVocabularyResponse = Shapes::StructureShape.new(name: 'CreateMedicalVocabularyResponse')
     CreateVocabularyFilterRequest = Shapes::StructureShape.new(name: 'CreateVocabularyFilterRequest')
@@ -25,11 +29,14 @@ module Aws::TranscribeService
     CreateVocabularyResponse = Shapes::StructureShape.new(name: 'CreateVocabularyResponse')
     DataAccessRoleArn = Shapes::StringShape.new(name: 'DataAccessRoleArn')
     DateTime = Shapes::TimestampShape.new(name: 'DateTime')
+    DeleteLanguageModelRequest = Shapes::StructureShape.new(name: 'DeleteLanguageModelRequest')
     DeleteMedicalTranscriptionJobRequest = Shapes::StructureShape.new(name: 'DeleteMedicalTranscriptionJobRequest')
     DeleteMedicalVocabularyRequest = Shapes::StructureShape.new(name: 'DeleteMedicalVocabularyRequest')
     DeleteTranscriptionJobRequest = Shapes::StructureShape.new(name: 'DeleteTranscriptionJobRequest')
     DeleteVocabularyFilterRequest = Shapes::StructureShape.new(name: 'DeleteVocabularyFilterRequest')
     DeleteVocabularyRequest = Shapes::StructureShape.new(name: 'DeleteVocabularyRequest')
+    DescribeLanguageModelRequest = Shapes::StructureShape.new(name: 'DescribeLanguageModelRequest')
+    DescribeLanguageModelResponse = Shapes::StructureShape.new(name: 'DescribeLanguageModelResponse')
     FailureReason = Shapes::StringShape.new(name: 'FailureReason')
     GetMedicalTranscriptionJobRequest = Shapes::StructureShape.new(name: 'GetMedicalTranscriptionJobRequest')
     GetMedicalTranscriptionJobResponse = Shapes::StructureShape.new(name: 'GetMedicalTranscriptionJobResponse')
@@ -41,11 +48,15 @@ module Aws::TranscribeService
     GetVocabularyFilterResponse = Shapes::StructureShape.new(name: 'GetVocabularyFilterResponse')
     GetVocabularyRequest = Shapes::StructureShape.new(name: 'GetVocabularyRequest')
     GetVocabularyResponse = Shapes::StructureShape.new(name: 'GetVocabularyResponse')
+    InputDataConfig = Shapes::StructureShape.new(name: 'InputDataConfig')
     InternalFailureException = Shapes::StructureShape.new(name: 'InternalFailureException')
     JobExecutionSettings = Shapes::StructureShape.new(name: 'JobExecutionSettings')
     KMSKeyId = Shapes::StringShape.new(name: 'KMSKeyId')
     LanguageCode = Shapes::StringShape.new(name: 'LanguageCode')
+    LanguageModel = Shapes::StructureShape.new(name: 'LanguageModel')
     LimitExceededException = Shapes::StructureShape.new(name: 'LimitExceededException')
+    ListLanguageModelsRequest = Shapes::StructureShape.new(name: 'ListLanguageModelsRequest')
+    ListLanguageModelsResponse = Shapes::StructureShape.new(name: 'ListLanguageModelsResponse')
     ListMedicalTranscriptionJobsRequest = Shapes::StructureShape.new(name: 'ListMedicalTranscriptionJobsRequest')
     ListMedicalTranscriptionJobsResponse = Shapes::StructureShape.new(name: 'ListMedicalTranscriptionJobsResponse')
     ListMedicalVocabulariesRequest = Shapes::StructureShape.new(name: 'ListMedicalVocabulariesRequest')
@@ -67,6 +78,10 @@ module Aws::TranscribeService
     MedicalTranscriptionJobSummaries = Shapes::ListShape.new(name: 'MedicalTranscriptionJobSummaries')
     MedicalTranscriptionJobSummary = Shapes::StructureShape.new(name: 'MedicalTranscriptionJobSummary')
     MedicalTranscriptionSetting = Shapes::StructureShape.new(name: 'MedicalTranscriptionSetting')
+    ModelName = Shapes::StringShape.new(name: 'ModelName')
+    ModelSettings = Shapes::StructureShape.new(name: 'ModelSettings')
+    ModelStatus = Shapes::StringShape.new(name: 'ModelStatus')
+    Models = Shapes::ListShape.new(name: 'Models')
     NextToken = Shapes::StringShape.new(name: 'NextToken')
     NotFoundException = Shapes::StructureShape.new(name: 'NotFoundException')
     OutputBucketName = Shapes::StringShape.new(name: 'OutputBucketName')
@@ -117,6 +132,19 @@ module Aws::TranscribeService
     ContentRedaction.add_member(:redaction_output, Shapes::ShapeRef.new(shape: RedactionOutput, required: true, location_name: "RedactionOutput"))
     ContentRedaction.struct_class = Types::ContentRedaction
 
+    CreateLanguageModelRequest.add_member(:language_code, Shapes::ShapeRef.new(shape: CLMLanguageCode, required: true, location_name: "LanguageCode"))
+    CreateLanguageModelRequest.add_member(:base_model_name, Shapes::ShapeRef.new(shape: BaseModelName, required: true, location_name: "BaseModelName"))
+    CreateLanguageModelRequest.add_member(:model_name, Shapes::ShapeRef.new(shape: ModelName, required: true, location_name: "ModelName"))
+    CreateLanguageModelRequest.add_member(:input_data_config, Shapes::ShapeRef.new(shape: InputDataConfig, required: true, location_name: "InputDataConfig"))
+    CreateLanguageModelRequest.struct_class = Types::CreateLanguageModelRequest
+
+    CreateLanguageModelResponse.add_member(:language_code, Shapes::ShapeRef.new(shape: CLMLanguageCode, location_name: "LanguageCode"))
+    CreateLanguageModelResponse.add_member(:base_model_name, Shapes::ShapeRef.new(shape: BaseModelName, location_name: "BaseModelName"))
+    CreateLanguageModelResponse.add_member(:model_name, Shapes::ShapeRef.new(shape: ModelName, location_name: "ModelName"))
+    CreateLanguageModelResponse.add_member(:input_data_config, Shapes::ShapeRef.new(shape: InputDataConfig, location_name: "InputDataConfig"))
+    CreateLanguageModelResponse.add_member(:model_status, Shapes::ShapeRef.new(shape: ModelStatus, location_name: "ModelStatus"))
+    CreateLanguageModelResponse.struct_class = Types::CreateLanguageModelResponse
+
     CreateMedicalVocabularyRequest.add_member(:vocabulary_name, Shapes::ShapeRef.new(shape: VocabularyName, required: true, location_name: "VocabularyName"))
     CreateMedicalVocabularyRequest.add_member(:language_code, Shapes::ShapeRef.new(shape: LanguageCode, required: true, location_name: "LanguageCode"))
     CreateMedicalVocabularyRequest.add_member(:vocabulary_file_uri, Shapes::ShapeRef.new(shape: Uri, required: true, location_name: "VocabularyFileUri"))
@@ -153,6 +181,9 @@ module Aws::TranscribeService
     CreateVocabularyResponse.add_member(:failure_reason, Shapes::ShapeRef.new(shape: FailureReason, location_name: "FailureReason"))
     CreateVocabularyResponse.struct_class = Types::CreateVocabularyResponse
 
+    DeleteLanguageModelRequest.add_member(:model_name, Shapes::ShapeRef.new(shape: ModelName, required: true, location_name: "ModelName"))
+    DeleteLanguageModelRequest.struct_class = Types::DeleteLanguageModelRequest
+
     DeleteMedicalTranscriptionJobRequest.add_member(:medical_transcription_job_name, Shapes::ShapeRef.new(shape: TranscriptionJobName, required: true, location_name: "MedicalTranscriptionJobName"))
     DeleteMedicalTranscriptionJobRequest.struct_class = Types::DeleteMedicalTranscriptionJobRequest
 
@@ -167,6 +198,12 @@ module Aws::TranscribeService
 
     DeleteVocabularyRequest.add_member(:vocabulary_name, Shapes::ShapeRef.new(shape: VocabularyName, required: true, location_name: "VocabularyName"))
     DeleteVocabularyRequest.struct_class = Types::DeleteVocabularyRequest
+
+    DescribeLanguageModelRequest.add_member(:model_name, Shapes::ShapeRef.new(shape: ModelName, required: true, location_name: "ModelName"))
+    DescribeLanguageModelRequest.struct_class = Types::DescribeLanguageModelRequest
+
+    DescribeLanguageModelResponse.add_member(:language_model, Shapes::ShapeRef.new(shape: LanguageModel, location_name: "LanguageModel"))
+    DescribeLanguageModelResponse.struct_class = Types::DescribeLanguageModelResponse
 
     GetMedicalTranscriptionJobRequest.add_member(:medical_transcription_job_name, Shapes::ShapeRef.new(shape: TranscriptionJobName, required: true, location_name: "MedicalTranscriptionJobName"))
     GetMedicalTranscriptionJobRequest.struct_class = Types::GetMedicalTranscriptionJobRequest
@@ -211,6 +248,11 @@ module Aws::TranscribeService
     GetVocabularyResponse.add_member(:download_uri, Shapes::ShapeRef.new(shape: Uri, location_name: "DownloadUri"))
     GetVocabularyResponse.struct_class = Types::GetVocabularyResponse
 
+    InputDataConfig.add_member(:s3_uri, Shapes::ShapeRef.new(shape: Uri, required: true, location_name: "S3Uri"))
+    InputDataConfig.add_member(:tuning_data_s3_uri, Shapes::ShapeRef.new(shape: Uri, location_name: "TuningDataS3Uri"))
+    InputDataConfig.add_member(:data_access_role_arn, Shapes::ShapeRef.new(shape: DataAccessRoleArn, required: true, location_name: "DataAccessRoleArn"))
+    InputDataConfig.struct_class = Types::InputDataConfig
+
     InternalFailureException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "Message"))
     InternalFailureException.struct_class = Types::InternalFailureException
 
@@ -218,8 +260,29 @@ module Aws::TranscribeService
     JobExecutionSettings.add_member(:data_access_role_arn, Shapes::ShapeRef.new(shape: DataAccessRoleArn, location_name: "DataAccessRoleArn"))
     JobExecutionSettings.struct_class = Types::JobExecutionSettings
 
+    LanguageModel.add_member(:model_name, Shapes::ShapeRef.new(shape: ModelName, location_name: "ModelName"))
+    LanguageModel.add_member(:create_time, Shapes::ShapeRef.new(shape: DateTime, location_name: "CreateTime"))
+    LanguageModel.add_member(:last_modified_time, Shapes::ShapeRef.new(shape: DateTime, location_name: "LastModifiedTime"))
+    LanguageModel.add_member(:language_code, Shapes::ShapeRef.new(shape: CLMLanguageCode, location_name: "LanguageCode"))
+    LanguageModel.add_member(:base_model_name, Shapes::ShapeRef.new(shape: BaseModelName, location_name: "BaseModelName"))
+    LanguageModel.add_member(:model_status, Shapes::ShapeRef.new(shape: ModelStatus, location_name: "ModelStatus"))
+    LanguageModel.add_member(:upgrade_availability, Shapes::ShapeRef.new(shape: Boolean, location_name: "UpgradeAvailability"))
+    LanguageModel.add_member(:failure_reason, Shapes::ShapeRef.new(shape: FailureReason, location_name: "FailureReason"))
+    LanguageModel.add_member(:input_data_config, Shapes::ShapeRef.new(shape: InputDataConfig, location_name: "InputDataConfig"))
+    LanguageModel.struct_class = Types::LanguageModel
+
     LimitExceededException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "Message"))
     LimitExceededException.struct_class = Types::LimitExceededException
+
+    ListLanguageModelsRequest.add_member(:status_equals, Shapes::ShapeRef.new(shape: ModelStatus, location_name: "StatusEquals"))
+    ListLanguageModelsRequest.add_member(:name_contains, Shapes::ShapeRef.new(shape: ModelName, location_name: "NameContains"))
+    ListLanguageModelsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    ListLanguageModelsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location_name: "MaxResults"))
+    ListLanguageModelsRequest.struct_class = Types::ListLanguageModelsRequest
+
+    ListLanguageModelsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    ListLanguageModelsResponse.add_member(:models, Shapes::ShapeRef.new(shape: Models, location_name: "Models"))
+    ListLanguageModelsResponse.struct_class = Types::ListLanguageModelsResponse
 
     ListMedicalTranscriptionJobsRequest.add_member(:status, Shapes::ShapeRef.new(shape: TranscriptionJobStatus, location_name: "Status"))
     ListMedicalTranscriptionJobsRequest.add_member(:job_name_contains, Shapes::ShapeRef.new(shape: TranscriptionJobName, location_name: "JobNameContains"))
@@ -318,6 +381,11 @@ module Aws::TranscribeService
     MedicalTranscriptionSetting.add_member(:vocabulary_name, Shapes::ShapeRef.new(shape: VocabularyName, location_name: "VocabularyName"))
     MedicalTranscriptionSetting.struct_class = Types::MedicalTranscriptionSetting
 
+    ModelSettings.add_member(:language_model_name, Shapes::ShapeRef.new(shape: ModelName, location_name: "LanguageModelName"))
+    ModelSettings.struct_class = Types::ModelSettings
+
+    Models.member = Shapes::ShapeRef.new(shape: LanguageModel)
+
     NotFoundException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "Message"))
     NotFoundException.struct_class = Types::NotFoundException
 
@@ -356,6 +424,7 @@ module Aws::TranscribeService
     StartTranscriptionJobRequest.add_member(:output_bucket_name, Shapes::ShapeRef.new(shape: OutputBucketName, location_name: "OutputBucketName"))
     StartTranscriptionJobRequest.add_member(:output_encryption_kms_key_id, Shapes::ShapeRef.new(shape: KMSKeyId, location_name: "OutputEncryptionKMSKeyId"))
     StartTranscriptionJobRequest.add_member(:settings, Shapes::ShapeRef.new(shape: Settings, location_name: "Settings"))
+    StartTranscriptionJobRequest.add_member(:model_settings, Shapes::ShapeRef.new(shape: ModelSettings, location_name: "ModelSettings"))
     StartTranscriptionJobRequest.add_member(:job_execution_settings, Shapes::ShapeRef.new(shape: JobExecutionSettings, location_name: "JobExecutionSettings"))
     StartTranscriptionJobRequest.add_member(:content_redaction, Shapes::ShapeRef.new(shape: ContentRedaction, location_name: "ContentRedaction"))
     StartTranscriptionJobRequest.struct_class = Types::StartTranscriptionJobRequest
@@ -379,6 +448,7 @@ module Aws::TranscribeService
     TranscriptionJob.add_member(:completion_time, Shapes::ShapeRef.new(shape: DateTime, location_name: "CompletionTime"))
     TranscriptionJob.add_member(:failure_reason, Shapes::ShapeRef.new(shape: FailureReason, location_name: "FailureReason"))
     TranscriptionJob.add_member(:settings, Shapes::ShapeRef.new(shape: Settings, location_name: "Settings"))
+    TranscriptionJob.add_member(:model_settings, Shapes::ShapeRef.new(shape: ModelSettings, location_name: "ModelSettings"))
     TranscriptionJob.add_member(:job_execution_settings, Shapes::ShapeRef.new(shape: JobExecutionSettings, location_name: "JobExecutionSettings"))
     TranscriptionJob.add_member(:content_redaction, Shapes::ShapeRef.new(shape: ContentRedaction, location_name: "ContentRedaction"))
     TranscriptionJob.struct_class = Types::TranscriptionJob
@@ -394,6 +464,7 @@ module Aws::TranscribeService
     TranscriptionJobSummary.add_member(:failure_reason, Shapes::ShapeRef.new(shape: FailureReason, location_name: "FailureReason"))
     TranscriptionJobSummary.add_member(:output_location_type, Shapes::ShapeRef.new(shape: OutputLocationType, location_name: "OutputLocationType"))
     TranscriptionJobSummary.add_member(:content_redaction, Shapes::ShapeRef.new(shape: ContentRedaction, location_name: "ContentRedaction"))
+    TranscriptionJobSummary.add_member(:model_settings, Shapes::ShapeRef.new(shape: ModelSettings, location_name: "ModelSettings"))
     TranscriptionJobSummary.struct_class = Types::TranscriptionJobSummary
 
     UpdateMedicalVocabularyRequest.add_member(:vocabulary_name, Shapes::ShapeRef.new(shape: VocabularyName, required: true, location_name: "VocabularyName"))
@@ -465,6 +536,18 @@ module Aws::TranscribeService
         "uid" => "transcribe-2017-10-26",
       }
 
+      api.add_operation(:create_language_model, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "CreateLanguageModel"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: CreateLanguageModelRequest)
+        o.output = Shapes::ShapeRef.new(shape: CreateLanguageModelResponse)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalFailureException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+      end)
+
       api.add_operation(:create_medical_vocabulary, Seahorse::Model::Operation.new.tap do |o|
         o.name = "CreateMedicalVocabulary"
         o.http_method = "POST"
@@ -499,6 +582,17 @@ module Aws::TranscribeService
         o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
         o.errors << Shapes::ShapeRef.new(shape: InternalFailureException)
         o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+      end)
+
+      api.add_operation(:delete_language_model, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DeleteLanguageModel"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DeleteLanguageModelRequest)
+        o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalFailureException)
       end)
 
       api.add_operation(:delete_medical_transcription_job, Seahorse::Model::Operation.new.tap do |o|
@@ -559,6 +653,18 @@ module Aws::TranscribeService
         o.errors << Shapes::ShapeRef.new(shape: InternalFailureException)
       end)
 
+      api.add_operation(:describe_language_model, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DescribeLanguageModel"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DescribeLanguageModelRequest)
+        o.output = Shapes::ShapeRef.new(shape: DescribeLanguageModelResponse)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalFailureException)
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+      end)
+
       api.add_operation(:get_medical_transcription_job, Seahorse::Model::Operation.new.tap do |o|
         o.name = "GetMedicalTranscriptionJob"
         o.http_method = "POST"
@@ -617,6 +723,23 @@ module Aws::TranscribeService
         o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
         o.errors << Shapes::ShapeRef.new(shape: InternalFailureException)
         o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+      end)
+
+      api.add_operation(:list_language_models, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListLanguageModels"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: ListLanguageModelsRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListLanguageModelsResponse)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalFailureException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
       end)
 
       api.add_operation(:list_medical_transcription_jobs, Seahorse::Model::Operation.new.tap do |o|

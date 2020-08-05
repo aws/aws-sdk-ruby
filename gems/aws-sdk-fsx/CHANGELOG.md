@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.26.0 (2020-08-05)
+------------------
+
+* Feature - Documentation updates for StorageCapacity input value format.
+
 1.25.0 (2020-07-24)
 ------------------
 

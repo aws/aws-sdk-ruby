@@ -576,11 +576,10 @@ module Aws::SNS
     end
 
     # Creates a topic to which notifications can be published. Users can
-    # create at most 100,000 standard topics (at most 1,000 FIFO topics).
-    # For more information, see [https://aws.amazon.com/sns][1]. This action
-    # is idempotent, so if the requester already owns a topic with the
-    # specified name, that topic's ARN is returned without creating a new
-    # topic.
+    # create at most 100,000 topics. For more information, see
+    # [https://aws.amazon.com/sns][1]. This action is idempotent, so if the
+    # requester already owns a topic with the specified name, that topic's
+    # ARN is returned without creating a new topic.
     #
     #
     #
@@ -592,9 +591,6 @@ module Aws::SNS
     #   Constraints: Topic names must be made up of only uppercase and
     #   lowercase ASCII letters, numbers, underscores, and hyphens, and must
     #   be between 1 and 256 characters long.
-    #
-    #   For a FIFO (first-in-first-out) topic, the name must end with the
-    #   `.fifo` suffix.
     #
     # @option params [Hash<String,String>] :attributes
     #   A map of attributes with their corresponding values.
@@ -608,33 +604,17 @@ module Aws::SNS
     #   * `DisplayName` – The display name to use for a topic with SMS
     #     subscriptions.
     #
-    #   * `FifoTopic` – Set to true to create a FIFO topic.
-    #
     #   * `Policy` – The policy that defines who can access your topic. By
     #     default, only the topic owner can publish or subscribe to the topic.
     #
     #   The following attribute applies only to [server-side-encryption][1]\:
     #
-    #   * `KmsMasterKeyId` – The ID of an AWS-managed customer master key
+    #   * `KmsMasterKeyId` - The ID of an AWS-managed customer master key
     #     (CMK) for Amazon SNS or a custom CMK. For more information, see [Key
     #     Terms][2]. For more examples, see [KeyId][3] in the *AWS Key
     #     Management Service API Reference*.
     #
     #   ^
-    #
-    #   The following attribute applies only to FIFO topics:
-    #
-    #   * `ContentBasedDeduplication` – Enables content-based deduplication.
-    #     Amazon SNS uses a SHA-256 hash to generate the
-    #     `MessageDeduplicationId` using the body of the message (but not the
-    #     attributes of the message).
-    #
-    #   * When `ContentBasedDeduplication` is in effect, messages with
-    #     identical content sent within the deduplication interval are treated
-    #     as duplicates and only one copy of the message is delivered.
-    #
-    #   * If the queue has `ContentBasedDeduplication` set, your
-    #     `MessageDeduplicationId` overrides the generated one.
     #
     #
     #
@@ -1781,26 +1761,12 @@ module Aws::SNS
     #
     #   The following attribute applies only to [server-side-encryption][1]\:
     #
-    #   * `KmsMasterKeyId` – The ID of an AWS-managed customer master key
+    #   * `KmsMasterKeyId` - The ID of an AWS-managed customer master key
     #     (CMK) for Amazon SNS or a custom CMK. For more information, see [Key
     #     Terms][2]. For more examples, see [KeyId][3] in the *AWS Key
     #     Management Service API Reference*.
     #
     #   ^
-    #
-    #   The following attribute applies only to FIFO topics:
-    #
-    #   * `ContentBasedDeduplication` – Enables content-based deduplication.
-    #     Amazon SNS uses a SHA-256 hash to generate the
-    #     `MessageDeduplicationId` using the body of the message (but not the
-    #     attributes of the message).
-    #
-    #   * When `ContentBasedDeduplication` is in effect, messages with
-    #     identical content sent within the deduplication interval are treated
-    #     as duplicates and only one copy of the message is delivered.
-    #
-    #   * If the queue has `ContentBasedDeduplication` set, your
-    #     `MessageDeduplicationId` overrides the generated one.
     #
     #
     #
@@ -2090,7 +2056,7 @@ module Aws::SNS
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-sns'
-      context[:gem_version] = '1.28.0'
+      context[:gem_version] = '1.29.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

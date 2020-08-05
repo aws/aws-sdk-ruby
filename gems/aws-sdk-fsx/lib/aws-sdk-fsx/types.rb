@@ -434,21 +434,21 @@ module Aws::FSx
     #   @return [String]
     #
     # @!attribute [rw] client_request_token
-    #   A string of up to 64 ASCII characters that Amazon FSx uses to ensure
-    #   idempotent creation. This string is automatically filled on your
-    #   behalf when you use the AWS Command Line Interface (AWS CLI) or an
-    #   AWS SDK.
+    #   (Optional) A string of up to 64 ASCII characters that Amazon FSx
+    #   uses to ensure idempotent creation. This string is automatically
+    #   filled on your behalf when you use the AWS Command Line Interface
+    #   (AWS CLI) or an AWS SDK.
     #
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.
     #   @return [String]
     #
     # @!attribute [rw] tags
-    #   The tags to apply to the backup at backup creation. The key value of
-    #   the `Name` tag appears in the console as the backup name. If you
-    #   have set `CopyTagsToBackups` to true, and you specify one or more
-    #   tags using the `CreateBackup` action, no existing tags on the file
-    #   system are copied from the file system to the backup.
+    #   (Optional) The tags to apply to the backup at backup creation. The
+    #   key value of the `Name` tag appears in the console as the backup
+    #   name. If you have set `CopyTagsToBackups` to true, and you specify
+    #   one or more tags using the `CreateBackup` action, no existing file
+    #   system tags are copied from the file system to the backup.
     #   @return [Array<Types::Tag>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/fsx-2018-03-01/CreateBackupRequest AWS API Documentation
@@ -735,9 +735,10 @@ module Aws::FSx
     #       }
     #
     # @!attribute [rw] weekly_maintenance_start_time
-    #   The preferred start time to perform weekly maintenance, formatted
-    #   d:HH:MM in the UTC time zone, where d is the weekday number, from 1
-    #   through 7, beginning with Monday and ending with Sunday.
+    #   (Optional) The preferred start time to perform weekly maintenance,
+    #   formatted d:HH:MM in the UTC time zone, where d is the weekday
+    #   number, from 1 through 7, beginning with Monday and ending with
+    #   Sunday.
     #   @return [String]
     #
     # @!attribute [rw] import_path
@@ -811,27 +812,25 @@ module Aws::FSx
     #   @return [String]
     #
     # @!attribute [rw] auto_import_policy
-    #   (Optional) Use this property to configure the AutoImport feature on
-    #   the file system's linked Amazon S3 data repository. You use
-    #   AutoImport to update the contents of your FSx for Lustre file system
-    #   automatically with changes that occur in the linked S3 data
-    #   repository. `AutoImportPolicy` can have the following values:
+    #   (Optional) When you create your file system, your existing S3
+    #   objects appear as file and directory listings. Use this property to
+    #   choose how Amazon FSx keeps your file and directory listings up to
+    #   date as you add or modify objects in your linked S3 bucket.
+    #   `AutoImportPolicy` can have the following values:
     #
-    #   * `NONE` - (Default) AutoImport is off. Changes in the linked data
-    #     repository are not reflected on the FSx file system.
+    #   * `NONE` - (Default) AutoImport is off. Amazon FSx only updates file
+    #     and directory listings from the linked S3 bucket when the file
+    #     system is created. FSx does not update file and directory listings
+    #     for any new or changed objects after choosing this option.
     #
-    #   * `NEW` - AutoImport is on. New files in the linked data repository
-    #     that do not currently exist in the FSx file system are
-    #     automatically imported. Updates to existing FSx files are not
-    #     imported to the FSx file system. Files deleted from the linked
-    #     data repository are not deleted from the FSx file system.
+    #   * `NEW` - AutoImport is on. Amazon FSx automatically imports
+    #     directory listings of any new objects added to the linked S3
+    #     bucket that do not currently exist in the FSx file system.
     #
-    #   * `NEW_CHANGED` - AutoImport is on. New files in the linked S3 data
-    #     repository that do not currently exist in the FSx file system are
-    #     automatically imported. Changes to existing FSx files in the
-    #     linked repository are also automatically imported to the FSx file
-    #     system. Files deleted from the linked data repository are not
-    #     deleted from the FSx file system.
+    #   * `NEW_CHANGED` - AutoImport is on. Amazon FSx automatically imports
+    #     file and directory listings of any new objects added to the S3
+    #     bucket and any existing objects that are changed in the S3 bucket
+    #     after you choose this option.
     #
     #   For more information, see [Automatically import updates from your S3
     #   bucket][1].
@@ -867,14 +866,16 @@ module Aws::FSx
     #   @return [Integer]
     #
     # @!attribute [rw] copy_tags_to_backups
-    #   A boolean flag indicating whether tags for the file system should be
-    #   copied to backups. This value defaults to false. If it's set to
-    #   true, all tags for the file system are copied to all automatic and
-    #   user-initiated backups where the user doesn't specify tags. If this
-    #   value is true, and you specify one or more tags, only the specified
-    #   tags are copied to backups. If you specify one or more tags when
-    #   creating a user-initiated backup, no tags are copied from the file
-    #   system, regardless of this value.
+    #   (Optional) Not available to use with file systems that are linked to
+    #   a data repository. A boolean flag indicating whether tags for the
+    #   file system should be copied to backups. The default value is false.
+    #   If it's set to true, all file system tags are copied to all
+    #   automatic and user-initiated backups when the user doesn't specify
+    #   any backup-specific tags. If this value is true, and you specify one
+    #   or more backup tags, only the specified tags are copied to backups.
+    #   If you specify one or more tags when creating a user-initiated
+    #   backup, no tags are copied from the file system, regardless of this
+    #   value.
     #
     #   For more information, see [Working with backups][1].
     #
@@ -972,10 +973,10 @@ module Aws::FSx
     #   For Lustre file systems:
     #
     #   * For `SCRATCH_2` and `PERSISTENT_1` deployment types, valid values
-    #     are 1.2, 2.4, and increments of 2.4 TiB.
+    #     are 1200 GiB, 2400 GiB, and increments of 2400 GiB.
     #
-    #   * For `SCRATCH_1` deployment type, valid values are 1.2, 2.4, and
-    #     increments of 3.6 TiB.
+    #   * For `SCRATCH_1` deployment type, valid values are 1200 GiB, 2400
+    #     GiB, and increments of 3600 GiB.
     #
     #   For Windows file systems:
     #
@@ -1259,26 +1260,24 @@ module Aws::FSx
     #
     # @!attribute [rw] auto_import_policy
     #   Describes the file system's linked S3 data repository's
-    #   `AutoImportPolicy`. The AutoImportPolicy configures how your FSx for
-    #   Lustre file system automatically updates its contents with changes
-    #   that occur in the linked S3 data repository. `AutoImportPolicy` can
-    #   have the following values:
+    #   `AutoImportPolicy`. The AutoImportPolicy configures how Amazon FSx
+    #   keeps your file and directory listings up to date as you add or
+    #   modify objects in your linked S3 bucket. `AutoImportPolicy` can have
+    #   the following values:
     #
-    #   * `NONE` - (Default) AutoImport is off. Changes in the linked data
-    #     repository are not reflected on the FSx file system.
+    #   * `NONE` - (Default) AutoImport is off. Amazon FSx only updates file
+    #     and directory listings from the linked S3 bucket when the file
+    #     system is created. FSx does not update file and directory listings
+    #     for any new or changed objects after choosing this option.
     #
-    #   * `NEW` - AutoImport is on. New files in the linked data repository
-    #     that do not currently exist in the FSx file system are
-    #     automatically imported. Updates to existing FSx files are not
-    #     imported to the FSx file system. Files deleted from the linked
-    #     data repository are not deleted from the FSx file system.
+    #   * `NEW` - AutoImport is on. Amazon FSx automatically imports
+    #     directory listings of any new objects added to the linked S3
+    #     bucket that do not currently exist in the FSx file system.
     #
-    #   * `NEW_CHANGED` - AutoImport is on. New files in the linked S3 data
-    #     repository that do not currently exist in the FSx file system are
-    #     automatically imported. Changes to existing FSx files in the
-    #     linked repository are also automatically imported to the FSx file
-    #     system. Files deleted from the linked data repository are not
-    #     deleted from the FSx file system.
+    #   * `NEW_CHANGED` - AutoImport is on. Amazon FSx automatically imports
+    #     file and directory listings of any new objects added to the S3
+    #     bucket and any existing objects that are changed in the S3 bucket
+    #     after you choose this option.
     #
     #   For more information, see [Automatically import updates from your S3
     #   bucket][1].
@@ -2944,9 +2943,9 @@ module Aws::FSx
     #       }
     #
     # @!attribute [rw] weekly_maintenance_start_time
-    #   The preferred start time to perform weekly maintenance, formatted
-    #   d:HH:MM in the UTC time zone. d is the weekday number, from 1
-    #   through 7, beginning with Monday and ending with Sunday.
+    #   (Optional) The preferred start time to perform weekly maintenance,
+    #   formatted d:HH:MM in the UTC time zone. d is the weekday number,
+    #   from 1 through 7, beginning with Monday and ending with Sunday.
     #   @return [String]
     #
     # @!attribute [rw] daily_automatic_backup_start_time
@@ -2962,27 +2961,25 @@ module Aws::FSx
     #   @return [Integer]
     #
     # @!attribute [rw] auto_import_policy
-    #   (Optional) Use this property to configure the AutoImport feature on
-    #   the file system's linked Amazon S3 data repository. You use
-    #   AutoImport to update the contents of your FSx for Lustre file system
-    #   automatically with changes that occur in the linked S3 data
-    #   repository. `AutoImportPolicy` can have the following values:
+    #   (Optional) When you create your file system, your existing S3
+    #   objects appear as file and directory listings. Use this property to
+    #   choose how Amazon FSx keeps your file and directory listing up to
+    #   date as you add or modify objects in your linked S3 bucket.
+    #   `AutoImportPolicy` can have the following values:
     #
-    #   * `NONE` - (Default) AutoImport is off. Changes in the linked data
-    #     repository are not reflected on the FSx file system.
+    #   * `NONE` - (Default) AutoImport is off. Amazon FSx only updates file
+    #     and directory listings from the linked S3 bucket when the file
+    #     system is created. FSx does not update the file and directory
+    #     listing for any new or changed objects after choosing this option.
     #
-    #   * `NEW` - AutoImport is on. New files in the linked data repository
-    #     that do not currently exist in the FSx file system are
-    #     automatically imported. Updates to existing FSx files are not
-    #     imported to the FSx file system. Files deleted from the linked
-    #     data repository are not deleted from the FSx file system.
+    #   * `NEW` - AutoImport is on. Amazon FSx automatically imports
+    #     directory listings of any new objects added to the linked S3
+    #     bucket that do not currently exist in the FSx file system.
     #
-    #   * `NEW_CHANGED` - AutoImport is on. New files in the linked S3 data
-    #     repository that do not currently exist in the FSx file system are
-    #     automatically imported. Changes to existing FSx files in the
-    #     linked repository are also automatically imported to the FSx file
-    #     system. Files deleted from the linked data repository are not
-    #     deleted from the FSx file system.
+    #   * `NEW_CHANGED` - AutoImport is on. Amazon FSx automatically imports
+    #     file and directory listings of any new objects added to the S3
+    #     bucket and any existing objects that are changed in the S3 bucket
+    #     after you choose this option.
     #
     #   For more information, see [Automatically import updates from your S3
     #   bucket][1].

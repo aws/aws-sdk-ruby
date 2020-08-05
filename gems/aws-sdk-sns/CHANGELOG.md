@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.29.0 (2020-08-05)
+------------------
+
+* Feature - Documentation updates for SNS.
+
 1.28.0 (2020-07-09)
 ------------------
 
