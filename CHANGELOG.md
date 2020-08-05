@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+2.11.560 (2020-08-05)
+------------------
+
 * Feature - Aws::AppSync - Updated the API, and documentation for AWS AppSync.
 
 * Feature - Aws::FSx - Updated the documentation for Amazon FSx.
