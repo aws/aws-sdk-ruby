@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+2.11.561 (2020-08-06)
+------------------
+
 * Feature - Aws::EC2 - Updated the API, and documentation for Amazon Elastic Compute Cloud.
 
 * Feature - Aws::LexModelBuildingService - Updated the API, and documentation for Amazon Lex Model Building Service.
