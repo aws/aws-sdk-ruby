@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.10.0 (2020-08-06)
+------------------
+
+* Feature - Adds support implicit and explicit impression input
+
 1.9.0 (2020-06-23)
 ------------------
 

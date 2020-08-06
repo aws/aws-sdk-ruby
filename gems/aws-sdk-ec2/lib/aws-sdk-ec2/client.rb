@@ -659,6 +659,10 @@ module Aws::EC2
     # For more information, see [Elastic IP Addresses][2] in the *Amazon
     # Elastic Compute Cloud User Guide*.
     #
+    # You can allocate a carrier IP address which is a public IP address
+    # from a telecommunication carrier, to a network interface which resides
+    # in a subnet in a Wavelength Zone (for example an EC2 instance).
+    #
     #
     #
     # [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-byoip.html
@@ -682,12 +686,10 @@ module Aws::EC2
     #   instead.
     #
     # @option params [String] :network_border_group
-    #   The location from which the IP address is advertised. Use this
-    #   parameter to limit the address to this location.
-    #
-    #   A network border group is a unique set of Availability Zones or Local
-    #   Zones from where AWS advertises IP addresses and limits the addresses
-    #   to the group. IP addresses cannot move between network border groups.
+    #   A unique set of Availability Zones, Local Zones, or Wavelength Zones
+    #   from which AWS advertises IP addresses. Use this parameter to limit
+    #   the IP address to this location. IP addresses cannot move between
+    #   network border groups.
     #
     #   Use [DescribeAvailabilityZones][1] to view the network border groups.
     #
@@ -723,6 +725,7 @@ module Aws::EC2
     #   * {Types::AllocateAddressResult#domain #domain} => String
     #   * {Types::AllocateAddressResult#customer_owned_ip #customer_owned_ip} => String
     #   * {Types::AllocateAddressResult#customer_owned_ipv_4_pool #customer_owned_ipv_4_pool} => String
+    #   * {Types::AllocateAddressResult#carrier_ip #carrier_ip} => String
     #
     #
     # @example Example: To allocate an Elastic IP address for EC2-VPC
@@ -773,6 +776,7 @@ module Aws::EC2
     #   resp.domain #=> String, one of "vpc", "standard"
     #   resp.customer_owned_ip #=> String
     #   resp.customer_owned_ipv_4_pool #=> String
+    #   resp.carrier_ip #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/AllocateAddress AWS API Documentation
     #
@@ -1099,7 +1103,8 @@ module Aws::EC2
       req.send_request(options)
     end
 
-    # Associates an Elastic IP address with an instance or a network
+    # Associates an Elastic IP address, or carrier IP address (for instances
+    # that are in subnets in Wavelength Zones) with an instance or a network
     # interface. Before you can use an Elastic IP address, you must allocate
     # it to your account.
     #
@@ -1122,6 +1127,9 @@ module Aws::EC2
     # allow reassociation. You cannot associate an Elastic IP address with
     # an instance or network interface that has an existing Elastic IP
     # address.
+    #
+    # \[Subnets in Wavelength Zones\] You can associate an IP address from
+    # the telecommunication carrier to the instance or network interface.
     #
     # You cannot associate an Elastic IP address with an interface in a
     # different network border group.
@@ -1694,7 +1702,7 @@ module Aws::EC2
     #
     # @option params [String] :ipv_6_cidr_block_network_border_group
     #   The name of the location from which we advertise the IPV6 CIDR block.
-    #   Use this parameter to limit the CiDR block to this location.
+    #   Use this parameter to limit the CIDR block to this location.
     #
     #   You must set `AmazonProvidedIpv6CidrBlock` to `true` to use this
     #   parameter.
@@ -3692,6 +3700,80 @@ module Aws::EC2
       req.send_request(options)
     end
 
+    # Creates a carrier gateway. For more information about carrier
+    # gateways, see [Carrier gateways][1] in the *AWS Wavelength Developer
+    # Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/wavelength/latest/developerguide/how-wavelengths-work.html#wavelength-carrier-gateway
+    #
+    # @option params [required, String] :vpc_id
+    #   The ID of the VPC to associate with the carrier gateway.
+    #
+    # @option params [Array<Types::TagSpecification>] :tag_specifications
+    #   The tags to associate with the carrier gateway.
+    #
+    # @option params [Boolean] :dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #
+    # @option params [String] :client_token
+    #   Unique, case-sensitive identifier that you provide to ensure the
+    #   idempotency of the request. For more information, see [How to Ensure
+    #   Idempotency][1].
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.**
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Run_Instance_Idempotency.html
+    #
+    # @return [Types::CreateCarrierGatewayResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateCarrierGatewayResult#carrier_gateway #carrier_gateway} => Types::CarrierGateway
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_carrier_gateway({
+    #     vpc_id: "VpcId", # required
+    #     tag_specifications: [
+    #       {
+    #         resource_type: "client-vpn-endpoint", # accepts client-vpn-endpoint, customer-gateway, dedicated-host, dhcp-options, elastic-ip, elastic-gpu, export-image-task, export-instance-task, fleet, fpga-image, host-reservation, image, import-image-task, import-snapshot-task, instance, internet-gateway, key-pair, launch-template, local-gateway-route-table-vpc-association, natgateway, network-acl, network-interface, placement-group, reserved-instances, route-table, security-group, snapshot, spot-fleet-request, spot-instances-request, subnet, traffic-mirror-filter, traffic-mirror-session, traffic-mirror-target, transit-gateway, transit-gateway-attachment, transit-gateway-multicast-domain, transit-gateway-route-table, volume, vpc, vpc-peering-connection, vpn-connection, vpn-gateway, vpc-flow-log
+    #         tags: [
+    #           {
+    #             key: "String",
+    #             value: "String",
+    #           },
+    #         ],
+    #       },
+    #     ],
+    #     dry_run: false,
+    #     client_token: "String",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.carrier_gateway.carrier_gateway_id #=> String
+    #   resp.carrier_gateway.vpc_id #=> String
+    #   resp.carrier_gateway.state #=> String, one of "pending", "available", "deleting", "deleted"
+    #   resp.carrier_gateway.owner_id #=> String
+    #   resp.carrier_gateway.tags #=> Array
+    #   resp.carrier_gateway.tags[0].key #=> String
+    #   resp.carrier_gateway.tags[0].value #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CreateCarrierGateway AWS API Documentation
+    #
+    # @overload create_carrier_gateway(params = {})
+    # @param [Hash] params ({})
+    def create_carrier_gateway(params = {}, options = {})
+      req = build_request(:create_carrier_gateway, params)
+      req.send_request(options)
+    end
+
     # Creates a Client VPN endpoint. A Client VPN endpoint is the resource
     # you create and configure to enable and manage client VPN sessions. It
     # is the destination endpoint at which all client VPN sessions are
@@ -5413,6 +5495,7 @@ module Aws::EC2
     #       ],
     #       network_interfaces: [
     #         {
+    #           associate_carrier_ip_address: false,
     #           associate_public_ip_address: false,
     #           delete_on_termination: false,
     #           description: "String",
@@ -5693,6 +5776,7 @@ module Aws::EC2
     #       ],
     #       network_interfaces: [
     #         {
+    #           associate_carrier_ip_address: false,
     #           associate_public_ip_address: false,
     #           delete_on_termination: false,
     #           description: "String",
@@ -5826,6 +5910,7 @@ module Aws::EC2
     #   resp.launch_template_version.launch_template_data.block_device_mappings[0].ebs.volume_type #=> String, one of "standard", "io1", "gp2", "sc1", "st1"
     #   resp.launch_template_version.launch_template_data.block_device_mappings[0].no_device #=> String
     #   resp.launch_template_version.launch_template_data.network_interfaces #=> Array
+    #   resp.launch_template_version.launch_template_data.network_interfaces[0].associate_carrier_ip_address #=> Boolean
     #   resp.launch_template_version.launch_template_data.network_interfaces[0].associate_public_ip_address #=> Boolean
     #   resp.launch_template_version.launch_template_data.network_interfaces[0].delete_on_termination #=> Boolean
     #   resp.launch_template_version.launch_template_data.network_interfaces[0].description #=> String
@@ -6653,6 +6738,7 @@ module Aws::EC2
     #   resp.network_interface.association.ip_owner_id #=> String
     #   resp.network_interface.association.public_dns_name #=> String
     #   resp.network_interface.association.public_ip #=> String
+    #   resp.network_interface.association.carrier_ip #=> String
     #   resp.network_interface.attachment.attach_time #=> Time
     #   resp.network_interface.attachment.attachment_id #=> String
     #   resp.network_interface.attachment.delete_on_termination #=> Boolean
@@ -6680,6 +6766,7 @@ module Aws::EC2
     #   resp.network_interface.private_ip_addresses[0].association.ip_owner_id #=> String
     #   resp.network_interface.private_ip_addresses[0].association.public_dns_name #=> String
     #   resp.network_interface.private_ip_addresses[0].association.public_ip #=> String
+    #   resp.network_interface.private_ip_addresses[0].association.carrier_ip #=> String
     #   resp.network_interface.private_ip_addresses[0].primary #=> Boolean
     #   resp.network_interface.private_ip_addresses[0].private_dns_name #=> String
     #   resp.network_interface.private_ip_addresses[0].private_ip_address #=> String
@@ -7030,6 +7117,12 @@ module Aws::EC2
     # @option params [String] :local_gateway_id
     #   The ID of the local gateway.
     #
+    # @option params [String] :carrier_gateway_id
+    #   The ID of the carrier gateway.
+    #
+    #   You can only use this option when the VPC contains a subnet which is
+    #   associated with a Wavelength Zone.
+    #
     # @option params [String] :network_interface_id
     #   The ID of a network interface.
     #
@@ -7068,6 +7161,7 @@ module Aws::EC2
     #     nat_gateway_id: "NatGatewayId",
     #     transit_gateway_id: "TransitGatewayId",
     #     local_gateway_id: "LocalGatewayId",
+    #     carrier_gateway_id: "CarrierGatewayId",
     #     network_interface_id: "NetworkInterfaceId",
     #     route_table_id: "RouteTableId", # required
     #     vpc_peering_connection_id: "VpcPeeringConnectionId",
@@ -7184,6 +7278,7 @@ module Aws::EC2
     #   resp.route_table.routes[0].nat_gateway_id #=> String
     #   resp.route_table.routes[0].transit_gateway_id #=> String
     #   resp.route_table.routes[0].local_gateway_id #=> String
+    #   resp.route_table.routes[0].carrier_gateway_id #=> String
     #   resp.route_table.routes[0].network_interface_id #=> String
     #   resp.route_table.routes[0].origin #=> String, one of "CreateRouteTable", "CreateRoute", "EnableVgwRoutePropagation"
     #   resp.route_table.routes[0].state #=> String, one of "active", "blackhole"
@@ -9946,6 +10041,55 @@ module Aws::EC2
       req.send_request(options)
     end
 
+    # Deletes a carrier gateway.
+    #
+    # If you do not delete the route that contains the carrier gateway as
+    # the Target, the route is a blackhole route. For information about how
+    # to delete a route, see [DeleteRoute][1].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_DeleteRoute.html
+    #
+    # @option params [required, String] :carrier_gateway_id
+    #   The ID of the carrier gateway.
+    #
+    # @option params [Boolean] :dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #
+    # @return [Types::DeleteCarrierGatewayResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DeleteCarrierGatewayResult#carrier_gateway #carrier_gateway} => Types::CarrierGateway
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_carrier_gateway({
+    #     carrier_gateway_id: "CarrierGatewayId", # required
+    #     dry_run: false,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.carrier_gateway.carrier_gateway_id #=> String
+    #   resp.carrier_gateway.vpc_id #=> String
+    #   resp.carrier_gateway.state #=> String, one of "pending", "available", "deleting", "deleted"
+    #   resp.carrier_gateway.owner_id #=> String
+    #   resp.carrier_gateway.tags #=> Array
+    #   resp.carrier_gateway.tags[0].key #=> String
+    #   resp.carrier_gateway.tags[0].value #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DeleteCarrierGateway AWS API Documentation
+    #
+    # @overload delete_carrier_gateway(params = {})
+    # @param [Hash] params ({})
+    def delete_carrier_gateway(params = {}, options = {})
+      req = build_request(:delete_carrier_gateway, params)
+      req.send_request(options)
+    end
+
     # Deletes the specified Client VPN endpoint. You must disassociate all
     # target networks before you can delete a Client VPN endpoint.
     #
@@ -12500,8 +12644,8 @@ module Aws::EC2
     #   * `instance-id` - The ID of the instance the address is associated
     #     with, if any.
     #
-    #   * `network-border-group` - The location from where the IP address is
-    #     advertised.
+    #   * `network-border-group` - A unique set of Availability Zones, Local
+    #     Zones, or Wavelength Zones from where AWS advertises IP addresses.
     #
     #   * `network-interface-id` - \[EC2-VPC\] The ID of the network interface
     #     that the address is associated with, if any.
@@ -12511,7 +12655,7 @@ module Aws::EC2
     #   * `private-ip-address` - \[EC2-VPC\] The private IP address associated
     #     with the Elastic IP address.
     #
-    #   * `public-ip` - The Elastic IP address.
+    #   * `public-ip` - The Elastic IP address, or the carrier IP address.
     #
     #   * `tag`\:&lt;key&gt; - The key/value combination of a tag assigned to
     #     the resource. Use the tag key in the filter name and the tag value
@@ -12659,6 +12803,7 @@ module Aws::EC2
     #   resp.addresses[0].network_border_group #=> String
     #   resp.addresses[0].customer_owned_ip #=> String
     #   resp.addresses[0].customer_owned_ipv_4_pool #=> String
+    #   resp.addresses[0].carrier_ip #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeAddresses AWS API Documentation
     #
@@ -12723,14 +12868,14 @@ module Aws::EC2
       req.send_request(options)
     end
 
-    # Describes the Availability Zones and Local Zones that are available to
-    # you. If there is an event impacting an Availability Zone or Local
-    # Zone, you can use this request to view the state and any provided
-    # messages for that Availability Zone or Local Zone.
+    # Describes the Availability Zones, Local Zones, and Wavelength Zones
+    # that are available to you. If there is an event impacting a zone, you
+    # can use this request to view the state and any provided messages for
+    # that zone.
     #
-    # For more information about Availability Zones and Local Zones, see
-    # [Regions and Availability Zones][1] in the *Amazon Elastic Compute
-    # Cloud User Guide*.
+    # For more information about Availability Zones, Local Zones, and
+    # Wavelength Zones, see [Regions, Zones and Outposts][1] in the *Amazon
+    # Elastic Compute Cloud User Guide*.
     #
     #
     #
@@ -12741,42 +12886,52 @@ module Aws::EC2
     #
     #   * `group-name` - For Availability Zones, use the Region name. For
     #     Local Zones, use the name of the group associated with the Local
-    #     Zone (for example, `us-west-2-lax-1`).
+    #     Zone (for example, `us-west-2-lax-1`) For Wavelength Zones, use the
+    #     name of the group associated with the Wavelength Zone (for example,
+    #     `us-east-1-wl1-bos-wlz-1`).
     #
     #   * `message` - The Zone message.
     #
-    #   * `opt-in-status` - The opt in status (`opted-in`, and `not-opted-in`
+    #   * `opt-in-status` - The opt-in status (`opted-in`, and `not-opted-in`
     #     \| `opt-in-not-required`).
     #
-    #   * The ID of the zone that handles some of the Local Zone control plane
-    #     operations, such as API calls.
+    #   * `parent-zoneID` - The ID of the zone that handles some of the Local
+    #     Zone and Wavelength Zone control plane operations, such as API
+    #     calls.
+    #
+    #   * `parent-zoneName` - The ID of the zone that handles some of the
+    #     Local Zone and Wavelength Zone control plane operations, such as API
+    #     calls.
     #
     #   * `region-name` - The name of the Region for the Zone (for example,
     #     `us-east-1`).
     #
-    #   * `state` - The state of the Availability Zone or Local Zone
-    #     (`available` \| `information` \| `impaired` \| `unavailable`).
+    #   * `state` - The state of the Availability Zone, the Local Zone, or the
+    #     Wavelength Zone (`available` \| `information` \| `impaired` \|
+    #     `unavailable`).
     #
     #   * `zone-id` - The ID of the Availability Zone (for example,
-    #     `use1-az1`) or the Local Zone (for example, use `usw2-lax1-az1`).
+    #     `use1-az1`), the Local Zone (for example, `usw2-lax1-az1`), or the
+    #     Wavelength Zone (for example, `us-east-1-wl1-bos-wlz-1`).
     #
     #   * `zone-type` - The type of zone, for example, `local-zone`.
     #
     #   * `zone-name` - The name of the Availability Zone (for example,
-    #     `us-east-1a`) or the Local Zone (for example, use
-    #     `us-west-2-lax-1a`).
+    #     `us-east-1a`), the Local Zone (for example, `us-west-2-lax-1a`), or
+    #     the Wavelength Zone (for example, `us-east-1-wl1-bos-wlz-1`).
     #
     #   * `zone-type` - The type of zone, for example, `local-zone`.
     #
     # @option params [Array<String>] :zone_names
-    #   The names of the Zones.
+    #   The names of the Availability Zones, Local Zones, and Wavelength
+    #   Zones.
     #
     # @option params [Array<String>] :zone_ids
-    #   The IDs of the Zones.
+    #   The IDs of the Availability Zones, Local Zones, and Wavelength Zones.
     #
     # @option params [Boolean] :all_availability_zones
-    #   Include all Availability Zones and Local Zones regardless of your opt
-    #   in status.
+    #   Include all Availability Zones, Local Zones, and Wavelength Zones
+    #   regardless of your opt-in status.
     #
     #   If you do not use this parameter, the results include only the zones
     #   for the Regions where you have chosen the option to opt in.
@@ -13177,6 +13332,90 @@ module Aws::EC2
     # @param [Hash] params ({})
     def describe_capacity_reservations(params = {}, options = {})
       req = build_request(:describe_capacity_reservations, params)
+      req.send_request(options)
+    end
+
+    # Describes one or more of your carrier gateways.
+    #
+    # @option params [Array<String>] :carrier_gateway_ids
+    #   One or more carrier gateway IDs.
+    #
+    # @option params [Array<Types::Filter>] :filters
+    #   One or more filters.
+    #
+    #   * `carrier-gateway-id` - The ID of the carrier gateway.
+    #
+    #   * `state` - The state of the carrier gateway (`pending` \| `failed` \|
+    #     `available` \| `deleting` \| `deleted`).
+    #
+    #   * `owner-id` - The AWS account ID of the owner of the carrier gateway.
+    #
+    #   * `tag`\:&lt;key&gt; - The key/value combination of a tag assigned to
+    #     the resource. Use the tag key in the filter name and the tag value
+    #     as the filter value. For example, to find all resources that have a
+    #     tag with the key `Owner` and the value `TeamA`, specify `tag:Owner`
+    #     for the filter name and `TeamA` for the filter value.
+    #
+    #   * `tag-key` - The key of a tag assigned to the resource. Use this
+    #     filter to find all resources assigned a tag with a specific key,
+    #     regardless of the tag value.
+    #
+    #   * `vpc-id` - The ID of the VPC associated with the carrier gateway.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of results to return with a single call. To
+    #   retrieve the remaining results, make another call with the returned
+    #   `nextToken` value.
+    #
+    # @option params [String] :next_token
+    #   The token for the next page of results.
+    #
+    # @option params [Boolean] :dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #
+    # @return [Types::DescribeCarrierGatewaysResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeCarrierGatewaysResult#carrier_gateways #carrier_gateways} => Array&lt;Types::CarrierGateway&gt;
+    #   * {Types::DescribeCarrierGatewaysResult#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_carrier_gateways({
+    #     carrier_gateway_ids: ["CarrierGatewayId"],
+    #     filters: [
+    #       {
+    #         name: "String",
+    #         values: ["String"],
+    #       },
+    #     ],
+    #     max_results: 1,
+    #     next_token: "String",
+    #     dry_run: false,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.carrier_gateways #=> Array
+    #   resp.carrier_gateways[0].carrier_gateway_id #=> String
+    #   resp.carrier_gateways[0].vpc_id #=> String
+    #   resp.carrier_gateways[0].state #=> String, one of "pending", "available", "deleting", "deleted"
+    #   resp.carrier_gateways[0].owner_id #=> String
+    #   resp.carrier_gateways[0].tags #=> Array
+    #   resp.carrier_gateways[0].tags[0].key #=> String
+    #   resp.carrier_gateways[0].tags[0].value #=> String
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeCarrierGateways AWS API Documentation
+    #
+    # @overload describe_carrier_gateways(params = {})
+    # @param [Hash] params ({})
+    def describe_carrier_gateways(params = {}, options = {})
+      req = build_request(:describe_carrier_gateways, params)
       req.send_request(options)
     end
 
@@ -17291,6 +17530,7 @@ module Aws::EC2
     #   resp.reservations[0].instances[0].elastic_inference_accelerator_associations[0].elastic_inference_accelerator_association_state #=> String
     #   resp.reservations[0].instances[0].elastic_inference_accelerator_associations[0].elastic_inference_accelerator_association_time #=> Time
     #   resp.reservations[0].instances[0].network_interfaces #=> Array
+    #   resp.reservations[0].instances[0].network_interfaces[0].association.carrier_ip #=> String
     #   resp.reservations[0].instances[0].network_interfaces[0].association.ip_owner_id #=> String
     #   resp.reservations[0].instances[0].network_interfaces[0].association.public_dns_name #=> String
     #   resp.reservations[0].instances[0].network_interfaces[0].association.public_ip #=> String
@@ -17311,6 +17551,7 @@ module Aws::EC2
     #   resp.reservations[0].instances[0].network_interfaces[0].private_dns_name #=> String
     #   resp.reservations[0].instances[0].network_interfaces[0].private_ip_address #=> String
     #   resp.reservations[0].instances[0].network_interfaces[0].private_ip_addresses #=> Array
+    #   resp.reservations[0].instances[0].network_interfaces[0].private_ip_addresses[0].association.carrier_ip #=> String
     #   resp.reservations[0].instances[0].network_interfaces[0].private_ip_addresses[0].association.ip_owner_id #=> String
     #   resp.reservations[0].instances[0].network_interfaces[0].private_ip_addresses[0].association.public_dns_name #=> String
     #   resp.reservations[0].instances[0].network_interfaces[0].private_ip_addresses[0].association.public_ip #=> String
@@ -17862,6 +18103,7 @@ module Aws::EC2
     #   resp.launch_template_versions[0].launch_template_data.block_device_mappings[0].ebs.volume_type #=> String, one of "standard", "io1", "gp2", "sc1", "st1"
     #   resp.launch_template_versions[0].launch_template_data.block_device_mappings[0].no_device #=> String
     #   resp.launch_template_versions[0].launch_template_data.network_interfaces #=> Array
+    #   resp.launch_template_versions[0].launch_template_data.network_interfaces[0].associate_carrier_ip_address #=> Boolean
     #   resp.launch_template_versions[0].launch_template_data.network_interfaces[0].associate_public_ip_address #=> Boolean
     #   resp.launch_template_versions[0].launch_template_data.network_interfaces[0].delete_on_termination #=> Boolean
     #   resp.launch_template_versions[0].launch_template_data.network_interfaces[0].description #=> String
@@ -19435,6 +19677,7 @@ module Aws::EC2
     #   resp.network_interfaces[0].association.ip_owner_id #=> String
     #   resp.network_interfaces[0].association.public_dns_name #=> String
     #   resp.network_interfaces[0].association.public_ip #=> String
+    #   resp.network_interfaces[0].association.carrier_ip #=> String
     #   resp.network_interfaces[0].attachment.attach_time #=> Time
     #   resp.network_interfaces[0].attachment.attachment_id #=> String
     #   resp.network_interfaces[0].attachment.delete_on_termination #=> Boolean
@@ -19462,6 +19705,7 @@ module Aws::EC2
     #   resp.network_interfaces[0].private_ip_addresses[0].association.ip_owner_id #=> String
     #   resp.network_interfaces[0].private_ip_addresses[0].association.public_dns_name #=> String
     #   resp.network_interfaces[0].private_ip_addresses[0].association.public_ip #=> String
+    #   resp.network_interfaces[0].private_ip_addresses[0].association.carrier_ip #=> String
     #   resp.network_interfaces[0].private_ip_addresses[0].primary #=> Boolean
     #   resp.network_interfaces[0].private_ip_addresses[0].private_dns_name #=> String
     #   resp.network_interfaces[0].private_ip_addresses[0].private_ip_address #=> String
@@ -20658,6 +20902,7 @@ module Aws::EC2
     #   resp.route_tables[0].routes[0].nat_gateway_id #=> String
     #   resp.route_tables[0].routes[0].transit_gateway_id #=> String
     #   resp.route_tables[0].routes[0].local_gateway_id #=> String
+    #   resp.route_tables[0].routes[0].carrier_gateway_id #=> String
     #   resp.route_tables[0].routes[0].network_interface_id #=> String
     #   resp.route_tables[0].routes[0].origin #=> String, one of "CreateRouteTable", "CreateRoute", "EnableVgwRoutePropagation"
     #   resp.route_tables[0].routes[0].state #=> String, one of "active", "blackhole"
@@ -22035,6 +22280,7 @@ module Aws::EC2
     #   resp.spot_fleet_request_configs[0].spot_fleet_request_config.launch_specifications[0].network_interfaces[0].private_ip_addresses[0].private_ip_address #=> String
     #   resp.spot_fleet_request_configs[0].spot_fleet_request_config.launch_specifications[0].network_interfaces[0].secondary_private_ip_address_count #=> Integer
     #   resp.spot_fleet_request_configs[0].spot_fleet_request_config.launch_specifications[0].network_interfaces[0].subnet_id #=> String
+    #   resp.spot_fleet_request_configs[0].spot_fleet_request_config.launch_specifications[0].network_interfaces[0].associate_carrier_ip_address #=> Boolean
     #   resp.spot_fleet_request_configs[0].spot_fleet_request_config.launch_specifications[0].network_interfaces[0].interface_type #=> String
     #   resp.spot_fleet_request_configs[0].spot_fleet_request_config.launch_specifications[0].placement.availability_zone #=> String
     #   resp.spot_fleet_request_configs[0].spot_fleet_request_config.launch_specifications[0].placement.group_name #=> String
@@ -22387,6 +22633,7 @@ module Aws::EC2
     #   resp.spot_instance_requests[0].launch_specification.network_interfaces[0].private_ip_addresses[0].private_ip_address #=> String
     #   resp.spot_instance_requests[0].launch_specification.network_interfaces[0].secondary_private_ip_address_count #=> Integer
     #   resp.spot_instance_requests[0].launch_specification.network_interfaces[0].subnet_id #=> String
+    #   resp.spot_instance_requests[0].launch_specification.network_interfaces[0].associate_carrier_ip_address #=> Boolean
     #   resp.spot_instance_requests[0].launch_specification.network_interfaces[0].interface_type #=> String
     #   resp.spot_instance_requests[0].launch_specification.placement.availability_zone #=> String
     #   resp.spot_instance_requests[0].launch_specification.placement.group_name #=> String
@@ -27927,6 +28174,7 @@ module Aws::EC2
     #   resp.launch_template_data.block_device_mappings[0].ebs.volume_type #=> String, one of "standard", "io1", "gp2", "sc1", "st1"
     #   resp.launch_template_data.block_device_mappings[0].no_device #=> String
     #   resp.launch_template_data.network_interfaces #=> Array
+    #   resp.launch_template_data.network_interfaces[0].associate_carrier_ip_address #=> Boolean
     #   resp.launch_template_data.network_interfaces[0].associate_public_ip_address #=> Boolean
     #   resp.launch_template_data.network_interfaces[0].delete_on_termination #=> Boolean
     #   resp.launch_template_data.network_interfaces[0].description #=> String
@@ -29253,7 +29501,8 @@ module Aws::EC2
       req.send_request(options)
     end
 
-    # Enables or disables an Availability Zone group for your account.
+    # Changes the opt-in status of the Local Zone and Wavelength Zone group
+    # for your account.
     #
     # Use [ DescribeAvailabilityZones][1] to view the value for `GroupName`.
     #
@@ -29262,12 +29511,14 @@ module Aws::EC2
     # [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_DescribeAvailabilityZones.html
     #
     # @option params [required, String] :group_name
-    #   The name of the Availability Zone Group.
+    #   The name of the Availability Zone group, Local Zone group, or
+    #   Wavelength Zone group.
     #
     # @option params [required, String] :opt_in_status
-    #   Indicates whether to enable or disable membership. The valid values
-    #   are `opted-in`. You must contact [AWS Support][1] to disable an
-    #   Availability Zone group.
+    #   Indicates whether you are opted in to the Local Zone group or
+    #   Wavelength Zone group. The only valid value is `opted-in`. You must
+    #   contact [AWS Support][1] to opt out of a Local Zone group, or
+    #   Wavelength Zone group.
     #
     #
     #
@@ -33808,7 +34059,8 @@ module Aws::EC2
     #   \[EC2-Classic\] The Elastic IP address. Required for EC2-Classic.
     #
     # @option params [String] :network_border_group
-    #   The location that the IP address is released from.
+    #   The set of Availability Zones, Local Zones, or Wavelength Zones from
+    #   which AWS advertises IP addresses.
     #
     #   If you provide an incorrect network border group, you will receive an
     #   `InvalidAddress.NotFound` error. For more information, see [Error
@@ -34181,6 +34433,9 @@ module Aws::EC2
     # @option params [String] :local_gateway_id
     #   The ID of the local gateway.
     #
+    # @option params [String] :carrier_gateway_id
+    #   \[IPv4 traffic only\] The ID of a carrier gateway.
+    #
     # @option params [String] :network_interface_id
     #   The ID of a network interface.
     #
@@ -34218,6 +34473,7 @@ module Aws::EC2
     #     nat_gateway_id: "NatGatewayId",
     #     transit_gateway_id: "TransitGatewayId",
     #     local_gateway_id: "LocalGatewayId",
+    #     carrier_gateway_id: "CarrierGatewayId",
     #     network_interface_id: "NetworkInterfaceId",
     #     route_table_id: "RouteTableId", # required
     #     vpc_peering_connection_id: "VpcPeeringConnectionId",
@@ -34708,6 +34964,7 @@ module Aws::EC2
     #               ],
     #               secondary_private_ip_address_count: 1,
     #               subnet_id: "String",
+    #               associate_carrier_ip_address: false,
     #               interface_type: "String",
     #             },
     #           ],
@@ -35043,6 +35300,7 @@ module Aws::EC2
     #           ],
     #           secondary_private_ip_address_count: 1,
     #           subnet_id: "String",
+    #           associate_carrier_ip_address: false,
     #           interface_type: "String",
     #         },
     #       ],
@@ -35124,6 +35382,7 @@ module Aws::EC2
     #   resp.spot_instance_requests[0].launch_specification.network_interfaces[0].private_ip_addresses[0].private_ip_address #=> String
     #   resp.spot_instance_requests[0].launch_specification.network_interfaces[0].secondary_private_ip_address_count #=> Integer
     #   resp.spot_instance_requests[0].launch_specification.network_interfaces[0].subnet_id #=> String
+    #   resp.spot_instance_requests[0].launch_specification.network_interfaces[0].associate_carrier_ip_address #=> Boolean
     #   resp.spot_instance_requests[0].launch_specification.network_interfaces[0].interface_type #=> String
     #   resp.spot_instance_requests[0].launch_specification.placement.availability_zone #=> String
     #   resp.spot_instance_requests[0].launch_specification.placement.group_name #=> String
@@ -36373,6 +36632,7 @@ module Aws::EC2
     #         ],
     #         secondary_private_ip_address_count: 1,
     #         subnet_id: "String",
+    #         associate_carrier_ip_address: false,
     #         interface_type: "String",
     #       },
     #     ],
@@ -36504,6 +36764,7 @@ module Aws::EC2
     #   resp.instances[0].elastic_inference_accelerator_associations[0].elastic_inference_accelerator_association_state #=> String
     #   resp.instances[0].elastic_inference_accelerator_associations[0].elastic_inference_accelerator_association_time #=> Time
     #   resp.instances[0].network_interfaces #=> Array
+    #   resp.instances[0].network_interfaces[0].association.carrier_ip #=> String
     #   resp.instances[0].network_interfaces[0].association.ip_owner_id #=> String
     #   resp.instances[0].network_interfaces[0].association.public_dns_name #=> String
     #   resp.instances[0].network_interfaces[0].association.public_ip #=> String
@@ -36524,6 +36785,7 @@ module Aws::EC2
     #   resp.instances[0].network_interfaces[0].private_dns_name #=> String
     #   resp.instances[0].network_interfaces[0].private_ip_address #=> String
     #   resp.instances[0].network_interfaces[0].private_ip_addresses #=> Array
+    #   resp.instances[0].network_interfaces[0].private_ip_addresses[0].association.carrier_ip #=> String
     #   resp.instances[0].network_interfaces[0].private_ip_addresses[0].association.ip_owner_id #=> String
     #   resp.instances[0].network_interfaces[0].private_ip_addresses[0].association.public_dns_name #=> String
     #   resp.instances[0].network_interfaces[0].private_ip_addresses[0].association.public_ip #=> String
@@ -37927,7 +38189,7 @@ module Aws::EC2
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-ec2'
-      context[:gem_version] = '1.182.0'
+      context[:gem_version] = '1.183.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

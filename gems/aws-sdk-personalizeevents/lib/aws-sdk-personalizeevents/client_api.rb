@@ -18,18 +18,28 @@ module Aws::PersonalizeEvents
     Event = Shapes::StructureShape.new(name: 'Event')
     EventList = Shapes::ListShape.new(name: 'EventList')
     EventPropertiesJSON = Shapes::StringShape.new(name: 'EventPropertiesJSON')
+    FloatType = Shapes::FloatShape.new(name: 'FloatType')
+    Impression = Shapes::ListShape.new(name: 'Impression')
     InvalidInputException = Shapes::StructureShape.new(name: 'InvalidInputException')
+    ItemId = Shapes::StringShape.new(name: 'ItemId')
     PutEventsRequest = Shapes::StructureShape.new(name: 'PutEventsRequest')
+    RecommendationId = Shapes::StringShape.new(name: 'RecommendationId')
     StringType = Shapes::StringShape.new(name: 'StringType')
     UserId = Shapes::StringShape.new(name: 'UserId')
 
     Event.add_member(:event_id, Shapes::ShapeRef.new(shape: StringType, location_name: "eventId"))
     Event.add_member(:event_type, Shapes::ShapeRef.new(shape: StringType, required: true, location_name: "eventType"))
-    Event.add_member(:properties, Shapes::ShapeRef.new(shape: EventPropertiesJSON, required: true, location_name: "properties", metadata: {"jsonvalue"=>true}))
+    Event.add_member(:event_value, Shapes::ShapeRef.new(shape: FloatType, location_name: "eventValue"))
+    Event.add_member(:item_id, Shapes::ShapeRef.new(shape: ItemId, location_name: "itemId"))
+    Event.add_member(:properties, Shapes::ShapeRef.new(shape: EventPropertiesJSON, location_name: "properties", metadata: {"jsonvalue"=>true}))
     Event.add_member(:sent_at, Shapes::ShapeRef.new(shape: Date, required: true, location_name: "sentAt"))
+    Event.add_member(:recommendation_id, Shapes::ShapeRef.new(shape: RecommendationId, location_name: "recommendationId"))
+    Event.add_member(:impression, Shapes::ShapeRef.new(shape: Impression, location_name: "impression"))
     Event.struct_class = Types::Event
 
     EventList.member = Shapes::ShapeRef.new(shape: Event)
+
+    Impression.member = Shapes::ShapeRef.new(shape: ItemId)
 
     InvalidInputException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "message"))
     InvalidInputException.struct_class = Types::InvalidInputException

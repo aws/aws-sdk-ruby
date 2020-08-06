@@ -353,6 +353,7 @@ module Aws::EC2
     #         ],
     #         secondary_private_ip_address_count: 1,
     #         subnet_id: "String",
+    #         associate_carrier_ip_address: false,
     #         interface_type: "String",
     #       },
     #     ],

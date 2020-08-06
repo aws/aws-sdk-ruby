@@ -28,6 +28,7 @@ module Aws::PersonalizeRuntime
     ItemList = Shapes::ListShape.new(name: 'ItemList')
     NumResults = Shapes::IntegerShape.new(name: 'NumResults')
     PredictedItem = Shapes::StructureShape.new(name: 'PredictedItem')
+    RecommendationID = Shapes::StringShape.new(name: 'RecommendationID')
     ResourceNotFoundException = Shapes::StructureShape.new(name: 'ResourceNotFoundException')
     Score = Shapes::FloatShape.new(name: 'Score')
     UserID = Shapes::StringShape.new(name: 'UserID')
@@ -43,6 +44,7 @@ module Aws::PersonalizeRuntime
     GetPersonalizedRankingRequest.struct_class = Types::GetPersonalizedRankingRequest
 
     GetPersonalizedRankingResponse.add_member(:personalized_ranking, Shapes::ShapeRef.new(shape: ItemList, location_name: "personalizedRanking"))
+    GetPersonalizedRankingResponse.add_member(:recommendation_id, Shapes::ShapeRef.new(shape: RecommendationID, location_name: "recommendationId"))
     GetPersonalizedRankingResponse.struct_class = Types::GetPersonalizedRankingResponse
 
     GetRecommendationsRequest.add_member(:campaign_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "campaignArn"))
@@ -54,6 +56,7 @@ module Aws::PersonalizeRuntime
     GetRecommendationsRequest.struct_class = Types::GetRecommendationsRequest
 
     GetRecommendationsResponse.add_member(:item_list, Shapes::ShapeRef.new(shape: ItemList, location_name: "itemList"))
+    GetRecommendationsResponse.add_member(:recommendation_id, Shapes::ShapeRef.new(shape: RecommendationID, location_name: "recommendationId"))
     GetRecommendationsResponse.struct_class = Types::GetRecommendationsResponse
 
     InputList.member = Shapes::ShapeRef.new(shape: ItemID)

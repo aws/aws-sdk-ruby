@@ -329,7 +329,7 @@ module Aws::EC2
       include Aws::Structure
     end
 
-    # Describes an Elastic IP address.
+    # Describes an Elastic IP address, or a carrier IP address.
     #
     # @!attribute [rw] instance_id
     #   The ID of the instance that the address is associated with (if any).
@@ -375,7 +375,8 @@ module Aws::EC2
     #   @return [String]
     #
     # @!attribute [rw] network_border_group
-    #   The name of the location from which the IP address is advertised.
+    #   The name of the unique set of Availability Zones, Local Zones, or
+    #   Wavelength Zones from which AWS advertises IP addresses.
     #   @return [String]
     #
     # @!attribute [rw] customer_owned_ip
@@ -384,6 +385,12 @@ module Aws::EC2
     #
     # @!attribute [rw] customer_owned_ipv_4_pool
     #   The ID of the customer-owned address pool.
+    #   @return [String]
+    #
+    # @!attribute [rw] carrier_ip
+    #   The carrier IP address associated. This option is only available for
+    #   network interfaces which reside in a subnet in a Wavelength Zone
+    #   (for example an EC2 instance).
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/Address AWS API Documentation
@@ -401,7 +408,8 @@ module Aws::EC2
       :public_ipv_4_pool,
       :network_border_group,
       :customer_owned_ip,
-      :customer_owned_ipv_4_pool)
+      :customer_owned_ipv_4_pool,
+      :carrier_ip)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -481,13 +489,10 @@ module Aws::EC2
     #   @return [String]
     #
     # @!attribute [rw] network_border_group
-    #   The location from which the IP address is advertised. Use this
-    #   parameter to limit the address to this location.
-    #
-    #   A network border group is a unique set of Availability Zones or
-    #   Local Zones from where AWS advertises IP addresses and limits the
-    #   addresses to the group. IP addresses cannot move between network
-    #   border groups.
+    #   A unique set of Availability Zones, Local Zones, or Wavelength Zones
+    #   from which AWS advertises IP addresses. Use this parameter to limit
+    #   the IP address to this location. IP addresses cannot move between
+    #   network border groups.
     #
     #   Use [DescribeAvailabilityZones][1] to view the network border
     #   groups.
@@ -545,7 +550,8 @@ module Aws::EC2
     #   @return [String]
     #
     # @!attribute [rw] network_border_group
-    #   The location from which the IP address is advertised.
+    #   The set of Availability Zones, Local Zones, or Wavelength Zones from
+    #   which AWS advertises IP addresses.
     #   @return [String]
     #
     # @!attribute [rw] domain
@@ -561,6 +567,12 @@ module Aws::EC2
     #   The ID of the customer-owned address pool.
     #   @return [String]
     #
+    # @!attribute [rw] carrier_ip
+    #   The carrier IP address. This option is only available for network
+    #   interfaces which reside in a subnet in a Wavelength Zone (for
+    #   example an EC2 instance).
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/AllocateAddressResult AWS API Documentation
     #
     class AllocateAddressResult < Struct.new(
@@ -570,7 +582,8 @@ module Aws::EC2
       :network_border_group,
       :domain,
       :customer_owned_ip,
-      :customer_owned_ipv_4_pool)
+      :customer_owned_ipv_4_pool,
+      :carrier_ip)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1365,7 +1378,7 @@ module Aws::EC2
     #
     # @!attribute [rw] ipv_6_cidr_block_network_border_group
     #   The name of the location from which we advertise the IPV6 CIDR
-    #   block. Use this parameter to limit the CiDR block to this location.
+    #   block. Use this parameter to limit the CIDR block to this location.
     #
     #   You must set `AmazonProvidedIpv6CidrBlock` to `true` to use this
     #   parameter.
@@ -2133,22 +2146,23 @@ module Aws::EC2
       include Aws::Structure
     end
 
-    # Describes a Zone.
+    # Describes Availability Zones, Local Zones, and Wavelength Zones.
     #
     # @!attribute [rw] state
-    #   The state of the Zone.
+    #   The state of the Availability Zone, Local Zone, or Wavelength Zone.
     #   @return [String]
     #
     # @!attribute [rw] opt_in_status
     #   For Availability Zones, this parameter always has the value of
     #   `opt-in-not-required`.
     #
-    #   For Local Zones, this parameter is the opt in status. The possible
-    #   values are `opted-in`, and `not-opted-in`.
+    #   For Local Zones and Wavelength Zones, this parameter is the opt-in
+    #   status. The possible values are `opted-in`, and `not-opted-in`.
     #   @return [String]
     #
     # @!attribute [rw] messages
-    #   Any messages about the Zone.
+    #   Any messages about the Availability Zone, Local Zone, or Wavelength
+    #   Zone.
     #   @return [Array<Types::AvailabilityZoneMessage>]
     #
     # @!attribute [rw] region_name
@@ -2156,11 +2170,11 @@ module Aws::EC2
     #   @return [String]
     #
     # @!attribute [rw] zone_name
-    #   The name of the Zone.
+    #   The name of the Availability Zone, Local Zone, or Wavelength Zone.
     #   @return [String]
     #
     # @!attribute [rw] zone_id
-    #   The ID of the Zone.
+    #   The ID of the Availability Zone, Local Zone, or Wavelength Zone.
     #   @return [String]
     #
     # @!attribute [rw] group_name
@@ -2169,25 +2183,28 @@ module Aws::EC2
     #
     #   For Local Zones, the name of the associated group, for example
     #   `us-west-2-lax-1`.
+    #
+    #   For Wavelength Zones, the name of the associated group, for example
+    #   `us-east-1-wl1-bos-wlz-1`.
     #   @return [String]
     #
     # @!attribute [rw] network_border_group
-    #   The name of the location from which the address is advertised.
+    #   The name of the network border group.
     #   @return [String]
     #
     # @!attribute [rw] zone_type
-    #   The type of zone. The valid values are `availability-zone` and
-    #   `local-zone`.
+    #   The type of zone. The valid values are `availability-zone`,
+    #   `local-zone`, and `wavelength-zone`.
     #   @return [String]
     #
     # @!attribute [rw] parent_zone_name
-    #   The name of the zone that handles some of the Local Zone control
-    #   plane operations, such as API calls.
+    #   The name of the zone that handles some of the Local Zone or
+    #   Wavelength Zone control plane operations, such as API calls.
     #   @return [String]
     #
     # @!attribute [rw] parent_zone_id
-    #   The ID of the zone that handles some of the Local Zone control plane
-    #   operations, such as API calls.
+    #   The ID of the zone that handles some of the Local Zone or Wavelength
+    #   Zone control plane operations, such as API calls.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/AvailabilityZone AWS API Documentation
@@ -2208,10 +2225,12 @@ module Aws::EC2
       include Aws::Structure
     end
 
-    # Describes a message about a Zone.
+    # Describes a message about an Availability Zone, Local Zone, or
+    # Wavelength Zone.
     #
     # @!attribute [rw] message
-    #   The message about the Zone.
+    #   The message about the Availability Zone, Local Zone, or Wavelength
+    #   Zone.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/AvailabilityZoneMessage AWS API Documentation
@@ -3309,6 +3328,40 @@ module Aws::EC2
     class CapacityReservationTargetResponse < Struct.new(
       :capacity_reservation_id,
       :capacity_reservation_resource_group_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Describes a carrier gateway.
+    #
+    # @!attribute [rw] carrier_gateway_id
+    #   The ID of the carrier gateway.
+    #   @return [String]
+    #
+    # @!attribute [rw] vpc_id
+    #   The ID of the VPC associated with the carrier gateway.
+    #   @return [String]
+    #
+    # @!attribute [rw] state
+    #   The state of the carrier gateway.
+    #   @return [String]
+    #
+    # @!attribute [rw] owner_id
+    #   The AWS account ID of the owner of the carrier gateway.
+    #   @return [String]
+    #
+    # @!attribute [rw] tags
+    #   The tags assigned to the carrier gateway.
+    #   @return [Array<Types::Tag>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CarrierGateway AWS API Documentation
+    #
+    class CarrierGateway < Struct.new(
+      :carrier_gateway_id,
+      :vpc_id,
+      :state,
+      :owner_id,
+      :tags)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4836,6 +4889,77 @@ module Aws::EC2
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass CreateCarrierGatewayRequest
+    #   data as a hash:
+    #
+    #       {
+    #         vpc_id: "VpcId", # required
+    #         tag_specifications: [
+    #           {
+    #             resource_type: "client-vpn-endpoint", # accepts client-vpn-endpoint, customer-gateway, dedicated-host, dhcp-options, elastic-ip, elastic-gpu, export-image-task, export-instance-task, fleet, fpga-image, host-reservation, image, import-image-task, import-snapshot-task, instance, internet-gateway, key-pair, launch-template, local-gateway-route-table-vpc-association, natgateway, network-acl, network-interface, placement-group, reserved-instances, route-table, security-group, snapshot, spot-fleet-request, spot-instances-request, subnet, traffic-mirror-filter, traffic-mirror-session, traffic-mirror-target, transit-gateway, transit-gateway-attachment, transit-gateway-multicast-domain, transit-gateway-route-table, volume, vpc, vpc-peering-connection, vpn-connection, vpn-gateway, vpc-flow-log
+    #             tags: [
+    #               {
+    #                 key: "String",
+    #                 value: "String",
+    #               },
+    #             ],
+    #           },
+    #         ],
+    #         dry_run: false,
+    #         client_token: "String",
+    #       }
+    #
+    # @!attribute [rw] vpc_id
+    #   The ID of the VPC to associate with the carrier gateway.
+    #   @return [String]
+    #
+    # @!attribute [rw] tag_specifications
+    #   The tags to associate with the carrier gateway.
+    #   @return [Array<Types::TagSpecification>]
+    #
+    # @!attribute [rw] dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] client_token
+    #   Unique, case-sensitive identifier that you provide to ensure the
+    #   idempotency of the request. For more information, see [How to Ensure
+    #   Idempotency][1].
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Run_Instance_Idempotency.html
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CreateCarrierGatewayRequest AWS API Documentation
+    #
+    class CreateCarrierGatewayRequest < Struct.new(
+      :vpc_id,
+      :tag_specifications,
+      :dry_run,
+      :client_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] carrier_gateway
+    #   Information about the carrier gateway.
+    #   @return [Types::CarrierGateway]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CreateCarrierGatewayResult AWS API Documentation
+    #
+    class CreateCarrierGatewayResult < Struct.new(
+      :carrier_gateway)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass CreateClientVpnEndpointRequest
     #   data as a hash:
     #
@@ -6304,6 +6428,7 @@ module Aws::EC2
     #           ],
     #           network_interfaces: [
     #             {
+    #               associate_carrier_ip_address: false,
     #               associate_public_ip_address: false,
     #               delete_on_termination: false,
     #               description: "String",
@@ -6525,6 +6650,7 @@ module Aws::EC2
     #           ],
     #           network_interfaces: [
     #             {
+    #               associate_carrier_ip_address: false,
     #               associate_public_ip_address: false,
     #               delete_on_termination: false,
     #               description: "String",
@@ -7538,6 +7664,7 @@ module Aws::EC2
     #         nat_gateway_id: "NatGatewayId",
     #         transit_gateway_id: "TransitGatewayId",
     #         local_gateway_id: "LocalGatewayId",
+    #         carrier_gateway_id: "CarrierGatewayId",
     #         network_interface_id: "NetworkInterfaceId",
     #         route_table_id: "RouteTableId", # required
     #         vpc_peering_connection_id: "VpcPeeringConnectionId",
@@ -7593,6 +7720,13 @@ module Aws::EC2
     #   The ID of the local gateway.
     #   @return [String]
     #
+    # @!attribute [rw] carrier_gateway_id
+    #   The ID of the carrier gateway.
+    #
+    #   You can only use this option when the VPC contains a subnet which is
+    #   associated with a Wavelength Zone.
+    #   @return [String]
+    #
     # @!attribute [rw] network_interface_id
     #   The ID of a network interface.
     #   @return [String]
@@ -7618,6 +7752,7 @@ module Aws::EC2
       :nat_gateway_id,
       :transit_gateway_id,
       :local_gateway_id,
+      :carrier_gateway_id,
       :network_interface_id,
       :route_table_id,
       :vpc_peering_connection_id)
@@ -10037,6 +10172,46 @@ module Aws::EC2
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass DeleteCarrierGatewayRequest
+    #   data as a hash:
+    #
+    #       {
+    #         carrier_gateway_id: "CarrierGatewayId", # required
+    #         dry_run: false,
+    #       }
+    #
+    # @!attribute [rw] carrier_gateway_id
+    #   The ID of the carrier gateway.
+    #   @return [String]
+    #
+    # @!attribute [rw] dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DeleteCarrierGatewayRequest AWS API Documentation
+    #
+    class DeleteCarrierGatewayRequest < Struct.new(
+      :carrier_gateway_id,
+      :dry_run)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] carrier_gateway
+    #   Information about the carrier gateway.
+    #   @return [Types::CarrierGateway]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DeleteCarrierGatewayResult AWS API Documentation
+    #
+    class DeleteCarrierGatewayResult < Struct.new(
+      :carrier_gateway)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass DeleteClientVpnEndpointRequest
     #   data as a hash:
     #
@@ -12339,8 +12514,8 @@ module Aws::EC2
     #   * `instance-id` - The ID of the instance the address is associated
     #     with, if any.
     #
-    #   * `network-border-group` - The location from where the IP address is
-    #     advertised.
+    #   * `network-border-group` - A unique set of Availability Zones, Local
+    #     Zones, or Wavelength Zones from where AWS advertises IP addresses.
     #
     #   * `network-interface-id` - \[EC2-VPC\] The ID of the network
     #     interface that the address is associated with, if any.
@@ -12350,7 +12525,7 @@ module Aws::EC2
     #   * `private-ip-address` - \[EC2-VPC\] The private IP address
     #     associated with the Elastic IP address.
     #
-    #   * `public-ip` - The Elastic IP address.
+    #   * `public-ip` - The Elastic IP address, or the carrier IP address.
     #
     #   * `tag`\:&lt;key&gt; - The key/value combination of a tag assigned
     #     to the resource. Use the tag key in the filter name and the tag
@@ -12465,45 +12640,56 @@ module Aws::EC2
     #
     #   * `group-name` - For Availability Zones, use the Region name. For
     #     Local Zones, use the name of the group associated with the Local
-    #     Zone (for example, `us-west-2-lax-1`).
+    #     Zone (for example, `us-west-2-lax-1`) For Wavelength Zones, use
+    #     the name of the group associated with the Wavelength Zone (for
+    #     example, `us-east-1-wl1-bos-wlz-1`).
     #
     #   * `message` - The Zone message.
     #
-    #   * `opt-in-status` - The opt in status (`opted-in`, and
+    #   * `opt-in-status` - The opt-in status (`opted-in`, and
     #     `not-opted-in` \| `opt-in-not-required`).
     #
-    #   * The ID of the zone that handles some of the Local Zone control
-    #     plane operations, such as API calls.
+    #   * `parent-zoneID` - The ID of the zone that handles some of the
+    #     Local Zone and Wavelength Zone control plane operations, such as
+    #     API calls.
+    #
+    #   * `parent-zoneName` - The ID of the zone that handles some of the
+    #     Local Zone and Wavelength Zone control plane operations, such as
+    #     API calls.
     #
     #   * `region-name` - The name of the Region for the Zone (for example,
     #     `us-east-1`).
     #
-    #   * `state` - The state of the Availability Zone or Local Zone
-    #     (`available` \| `information` \| `impaired` \| `unavailable`).
+    #   * `state` - The state of the Availability Zone, the Local Zone, or
+    #     the Wavelength Zone (`available` \| `information` \| `impaired` \|
+    #     `unavailable`).
     #
     #   * `zone-id` - The ID of the Availability Zone (for example,
-    #     `use1-az1`) or the Local Zone (for example, use `usw2-lax1-az1`).
+    #     `use1-az1`), the Local Zone (for example, `usw2-lax1-az1`), or the
+    #     Wavelength Zone (for example, `us-east-1-wl1-bos-wlz-1`).
     #
     #   * `zone-type` - The type of zone, for example, `local-zone`.
     #
     #   * `zone-name` - The name of the Availability Zone (for example,
-    #     `us-east-1a`) or the Local Zone (for example, use
-    #     `us-west-2-lax-1a`).
+    #     `us-east-1a`), the Local Zone (for example, `us-west-2-lax-1a`),
+    #     or the Wavelength Zone (for example, `us-east-1-wl1-bos-wlz-1`).
     #
     #   * `zone-type` - The type of zone, for example, `local-zone`.
     #   @return [Array<Types::Filter>]
     #
     # @!attribute [rw] zone_names
-    #   The names of the Zones.
+    #   The names of the Availability Zones, Local Zones, and Wavelength
+    #   Zones.
     #   @return [Array<String>]
     #
     # @!attribute [rw] zone_ids
-    #   The IDs of the Zones.
+    #   The IDs of the Availability Zones, Local Zones, and Wavelength
+    #   Zones.
     #   @return [Array<String>]
     #
     # @!attribute [rw] all_availability_zones
-    #   Include all Availability Zones and Local Zones regardless of your
-    #   opt in status.
+    #   Include all Availability Zones, Local Zones, and Wavelength Zones
+    #   regardless of your opt-in status.
     #
     #   If you do not use this parameter, the results include only the zones
     #   for the Regions where you have chosen the option to opt in.
@@ -12529,7 +12715,8 @@ module Aws::EC2
     end
 
     # @!attribute [rw] availability_zones
-    #   Information about the Zones.
+    #   Information about the Availability Zones, Local Zones, and
+    #   Wavelength Zones.
     #   @return [Array<Types::AvailabilityZone>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeAvailabilityZonesResult AWS API Documentation
@@ -12819,6 +13006,97 @@ module Aws::EC2
     class DescribeCapacityReservationsResult < Struct.new(
       :next_token,
       :capacity_reservations)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass DescribeCarrierGatewaysRequest
+    #   data as a hash:
+    #
+    #       {
+    #         carrier_gateway_ids: ["CarrierGatewayId"],
+    #         filters: [
+    #           {
+    #             name: "String",
+    #             values: ["String"],
+    #           },
+    #         ],
+    #         max_results: 1,
+    #         next_token: "String",
+    #         dry_run: false,
+    #       }
+    #
+    # @!attribute [rw] carrier_gateway_ids
+    #   One or more carrier gateway IDs.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] filters
+    #   One or more filters.
+    #
+    #   * `carrier-gateway-id` - The ID of the carrier gateway.
+    #
+    #   * `state` - The state of the carrier gateway (`pending` \| `failed`
+    #     \| `available` \| `deleting` \| `deleted`).
+    #
+    #   * `owner-id` - The AWS account ID of the owner of the carrier
+    #     gateway.
+    #
+    #   * `tag`\:&lt;key&gt; - The key/value combination of a tag assigned
+    #     to the resource. Use the tag key in the filter name and the tag
+    #     value as the filter value. For example, to find all resources that
+    #     have a tag with the key `Owner` and the value `TeamA`, specify
+    #     `tag:Owner` for the filter name and `TeamA` for the filter value.
+    #
+    #   * `tag-key` - The key of a tag assigned to the resource. Use this
+    #     filter to find all resources assigned a tag with a specific key,
+    #     regardless of the tag value.
+    #
+    #   * `vpc-id` - The ID of the VPC associated with the carrier gateway.
+    #   @return [Array<Types::Filter>]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of results to return with a single call. To
+    #   retrieve the remaining results, make another call with the returned
+    #   `nextToken` value.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   The token for the next page of results.
+    #   @return [String]
+    #
+    # @!attribute [rw] dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeCarrierGatewaysRequest AWS API Documentation
+    #
+    class DescribeCarrierGatewaysRequest < Struct.new(
+      :carrier_gateway_ids,
+      :filters,
+      :max_results,
+      :next_token,
+      :dry_run)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] carrier_gateways
+    #   Information about the carrier gateway.
+    #   @return [Array<Types::CarrierGateway>]
+    #
+    # @!attribute [rw] next_token
+    #   The token to use to retrieve the next page of results. This value is
+    #   `null` when there are no more results to return.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeCarrierGatewaysResult AWS API Documentation
+    #
+    class DescribeCarrierGatewaysResult < Struct.new(
+      :carrier_gateways,
+      :next_token)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -24023,7 +24301,7 @@ module Aws::EC2
     #   Cloud User Guide*.
     #
     #   Constraints: Range is 100-16,000 IOPS for `gp2` volumes and 100 to
-    #   64,000IOPS for `io1` volumes in most Regions. Maximum `io1` IOPS of
+    #   64,000 IOPS for `io1` volumes in most Regions. Maximum `io1` IOPS of
     #   64,000 is guaranteed only on [Nitro-based instances][2]. Other
     #   instance families guarantee performance up to 32,000 IOPS. For more
     #   information, see [Amazon EBS Volume Types][1] in the *Amazon Elastic
@@ -29768,7 +30046,11 @@ module Aws::EC2
     #   @return [String]
     #
     # @!attribute [rw] public_ip_address
-    #   The public IPv4 address assigned to the instance, if applicable.
+    #   The public IPv4 address, or the Carrier IP address assigned to the
+    #   instance, if applicable.
+    #
+    #   A Carrier IP address only applies to an instance launched in a
+    #   subnet associated with a Wavelength Zone.
     #   @return [String]
     #
     # @!attribute [rw] ramdisk_id
@@ -30577,6 +30859,10 @@ module Aws::EC2
 
     # Describes association information for an Elastic IP address (IPv4).
     #
+    # @!attribute [rw] carrier_ip
+    #   The carrier IP address associated with the network interface.
+    #   @return [String]
+    #
     # @!attribute [rw] ip_owner_id
     #   The ID of the owner of the Elastic IP address.
     #   @return [String]
@@ -30593,6 +30879,7 @@ module Aws::EC2
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/InstanceNetworkInterfaceAssociation AWS API Documentation
     #
     class InstanceNetworkInterfaceAssociation < Struct.new(
+      :carrier_ip,
       :ip_owner_id,
       :public_dns_name,
       :public_ip)
@@ -30663,6 +30950,7 @@ module Aws::EC2
     #         ],
     #         secondary_private_ip_address_count: 1,
     #         subnet_id: "String",
+    #         associate_carrier_ip_address: false,
     #         interface_type: "String",
     #       }
     #
@@ -30760,6 +31048,16 @@ module Aws::EC2
     #   only if creating a network interface when launching an instance.
     #   @return [String]
     #
+    # @!attribute [rw] associate_carrier_ip_address
+    #   Indicates whether to assign a carrier IP address to the network
+    #   interface.
+    #
+    #   You can only assign a carrier IP address to a network interface that
+    #   is in a subnet in a Wavelength Zone. For more information about
+    #   carrier IP addresses, see Carrier IP addresses in the AWS Wavelength
+    #   Developer Guide.
+    #   @return [Boolean]
+    #
     # @!attribute [rw] interface_type
     #   The type of network interface. To create an Elastic Fabric Adapter
     #   (EFA), specify `efa`. For more information, see [Elastic Fabric
@@ -30790,6 +31088,7 @@ module Aws::EC2
       :private_ip_addresses,
       :secondary_private_ip_address_count,
       :subnet_id,
+      :associate_carrier_ip_address,
       :interface_type)
       SENSITIVE = []
       include Aws::Structure
@@ -32577,6 +32876,20 @@ module Aws::EC2
 
     # Describes a network interface.
     #
+    # @!attribute [rw] associate_carrier_ip_address
+    #   Indicates whether to associate a Carrier IP address with eth0 for a
+    #   new network interface.
+    #
+    #   Use this option when you launch an instance in a Wavelength Zone and
+    #   want to associate a Carrier IP address with the network interface.
+    #   For more information about Carrier IP addresses, see [Carrier IP
+    #   addresses][1] in the *AWS Wavelength Developer Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/wavelength/latest/developerguide/how-wavelengths-work.html#provider-owned-ip
+    #   @return [Boolean]
+    #
     # @!attribute [rw] associate_public_ip_address
     #   Indicates whether to associate a public IPv4 address with eth0 for a
     #   new network interface.
@@ -32635,6 +32948,7 @@ module Aws::EC2
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/LaunchTemplateInstanceNetworkInterfaceSpecification AWS API Documentation
     #
     class LaunchTemplateInstanceNetworkInterfaceSpecification < Struct.new(
+      :associate_carrier_ip_address,
       :associate_public_ip_address,
       :delete_on_termination,
       :description,
@@ -32658,6 +32972,7 @@ module Aws::EC2
     #   data as a hash:
     #
     #       {
+    #         associate_carrier_ip_address: false,
     #         associate_public_ip_address: false,
     #         delete_on_termination: false,
     #         description: "String",
@@ -32681,6 +32996,20 @@ module Aws::EC2
     #         secondary_private_ip_address_count: 1,
     #         subnet_id: "SubnetId",
     #       }
+    #
+    # @!attribute [rw] associate_carrier_ip_address
+    #   Associates a Carrier IP address with eth0 for a new network
+    #   interface.
+    #
+    #   Use this option when you launch an instance in a Wavelength Zone and
+    #   want to associate a Carrier IP address with the network interface.
+    #   For more information about Carrier IP addresses, see [Carrier IP
+    #   addresses][1] in the *AWS Wavelength Developer Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/wavelength/latest/developerguide/how-wavelengths-work.html#provider-owned-ip
+    #   @return [Boolean]
     #
     # @!attribute [rw] associate_public_ip_address
     #   Associates a public IPv4 address with eth0 for a new network
@@ -32756,6 +33085,7 @@ module Aws::EC2
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/LaunchTemplateInstanceNetworkInterfaceSpecificationRequest AWS API Documentation
     #
     class LaunchTemplateInstanceNetworkInterfaceSpecificationRequest < Struct.new(
+      :associate_carrier_ip_address,
       :associate_public_ip_address,
       :delete_on_termination,
       :description,
@@ -33761,13 +34091,15 @@ module Aws::EC2
     #       }
     #
     # @!attribute [rw] group_name
-    #   The name of the Availability Zone Group.
+    #   The name of the Availability Zone group, Local Zone group, or
+    #   Wavelength Zone group.
     #   @return [String]
     #
     # @!attribute [rw] opt_in_status
-    #   Indicates whether to enable or disable membership. The valid values
-    #   are `opted-in`. You must contact [AWS Support][1] to disable an
-    #   Availability Zone group.
+    #   Indicates whether you are opted in to the Local Zone group or
+    #   Wavelength Zone group. The only valid value is `opted-in`. You must
+    #   contact [AWS Support][1] to opt out of a Local Zone group, or
+    #   Wavelength Zone group.
     #
     #
     #
@@ -37416,7 +37748,8 @@ module Aws::EC2
     end
 
     # Describes association information for an Elastic IP address (IPv4
-    # only).
+    # only), or a Carrier IP address (for a network interface which resides
+    # in a subnet in a Wavelength Zone).
     #
     # @!attribute [rw] allocation_id
     #   The allocation ID.
@@ -37435,8 +37768,15 @@ module Aws::EC2
     #   @return [String]
     #
     # @!attribute [rw] public_ip
-    #   The address of the Elastic IP address bound to the network
-    #   interface.
+    #   The address of the Elastic IP address or Carrier IP address bound to
+    #   the network interface.
+    #   @return [String]
+    #
+    # @!attribute [rw] carrier_ip
+    #   The carrier IP address associated with the network interface.
+    #
+    #   This option is only available when the network interface is in a
+    #   subnet which is associated with a Wavelength Zone.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/NetworkInterfaceAssociation AWS API Documentation
@@ -37446,7 +37786,8 @@ module Aws::EC2
       :association_id,
       :ip_owner_id,
       :public_dns_name,
-      :public_ip)
+      :public_ip,
+      :carrier_ip)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -39836,7 +40177,8 @@ module Aws::EC2
     #   @return [String]
     #
     # @!attribute [rw] network_border_group
-    #   The location that the IP address is released from.
+    #   The set of Availability Zones, Local Zones, or Wavelength Zones from
+    #   which AWS advertises IP addresses.
     #
     #   If you provide an incorrect network border group, you will receive
     #   an `InvalidAddress.NotFound` error. For more information, see [Error
@@ -40129,6 +40471,7 @@ module Aws::EC2
     #         nat_gateway_id: "NatGatewayId",
     #         transit_gateway_id: "TransitGatewayId",
     #         local_gateway_id: "LocalGatewayId",
+    #         carrier_gateway_id: "CarrierGatewayId",
     #         network_interface_id: "NetworkInterfaceId",
     #         route_table_id: "RouteTableId", # required
     #         vpc_peering_connection_id: "VpcPeeringConnectionId",
@@ -40186,6 +40529,10 @@ module Aws::EC2
     #   The ID of the local gateway.
     #   @return [String]
     #
+    # @!attribute [rw] carrier_gateway_id
+    #   \[IPv4 traffic only\] The ID of a carrier gateway.
+    #   @return [String]
+    #
     # @!attribute [rw] network_interface_id
     #   The ID of a network interface.
     #   @return [String]
@@ -40212,6 +40559,7 @@ module Aws::EC2
       :nat_gateway_id,
       :transit_gateway_id,
       :local_gateway_id,
+      :carrier_gateway_id,
       :network_interface_id,
       :route_table_id,
       :vpc_peering_connection_id)
@@ -40442,6 +40790,7 @@ module Aws::EC2
     #         ],
     #         network_interfaces: [
     #           {
+    #             associate_carrier_ip_address: false,
     #             associate_public_ip_address: false,
     #             delete_on_termination: false,
     #             description: "String",
@@ -40861,6 +41210,7 @@ module Aws::EC2
     #                   ],
     #                   secondary_private_ip_address_count: 1,
     #                   subnet_id: "String",
+    #                   associate_carrier_ip_address: false,
     #                   interface_type: "String",
     #                 },
     #               ],
@@ -41049,6 +41399,7 @@ module Aws::EC2
     #               ],
     #               secondary_private_ip_address_count: 1,
     #               subnet_id: "String",
+    #               associate_carrier_ip_address: false,
     #               interface_type: "String",
     #             },
     #           ],
@@ -41296,6 +41647,7 @@ module Aws::EC2
     #             ],
     #             secondary_private_ip_address_count: 1,
     #             subnet_id: "String",
+    #             associate_carrier_ip_address: false,
     #             interface_type: "String",
     #           },
     #         ],
@@ -42790,6 +43142,10 @@ module Aws::EC2
     #   The ID of the local gateway.
     #   @return [String]
     #
+    # @!attribute [rw] carrier_gateway_id
+    #   The ID of the carrier gateway.
+    #   @return [String]
+    #
     # @!attribute [rw] network_interface_id
     #   The ID of the network interface.
     #   @return [String]
@@ -42830,6 +43186,7 @@ module Aws::EC2
       :nat_gateway_id,
       :transit_gateway_id,
       :local_gateway_id,
+      :carrier_gateway_id,
       :network_interface_id,
       :origin,
       :state,
@@ -43049,6 +43406,7 @@ module Aws::EC2
     #             ],
     #             secondary_private_ip_address_count: 1,
     #             subnet_id: "String",
+    #             associate_carrier_ip_address: false,
     #             interface_type: "String",
     #           },
     #         ],
@@ -45524,6 +45882,7 @@ module Aws::EC2
     #             ],
     #             secondary_private_ip_address_count: 1,
     #             subnet_id: "String",
+    #             associate_carrier_ip_address: false,
     #             interface_type: "String",
     #           },
     #         ],
@@ -45818,6 +46177,7 @@ module Aws::EC2
     #                 ],
     #                 secondary_private_ip_address_count: 1,
     #                 subnet_id: "String",
+    #                 associate_carrier_ip_address: false,
     #                 interface_type: "String",
     #               },
     #             ],
@@ -50005,8 +50365,7 @@ module Aws::EC2
     #   @return [String]
     #
     # @!attribute [rw] dhcp_options_id
-    #   The ID of the set of DHCP options you've associated with the VPC
-    #   (or `default` if the default options are associated with the VPC).
+    #   The ID of the set of DHCP options you've associated with the VPC.
     #   @return [String]
     #
     # @!attribute [rw] state
@@ -50303,8 +50662,9 @@ module Aws::EC2
     #   @return [Types::VpcCidrBlockState]
     #
     # @!attribute [rw] network_border_group
-    #   The name of the location from which we advertise the IPV6 CIDR
-    #   block.
+    #   The name of the unique set of Availability Zones, Local Zones, or
+    #   Wavelength Zones from which AWS advertises IP addresses, for
+    #   example, `us-east-1-wl1-bos-wlz-1`.
     #   @return [String]
     #
     # @!attribute [rw] ipv_6_pool

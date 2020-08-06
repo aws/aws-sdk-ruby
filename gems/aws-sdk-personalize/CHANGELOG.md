@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.16.0 (2020-08-06)
+------------------
+
+* Feature - Add 'exploration' functionality
+
 1.15.0 (2020-06-23)
 ------------------
 

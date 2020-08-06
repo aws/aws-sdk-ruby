@@ -347,6 +347,7 @@ module Aws::PersonalizeRuntime
     # @return [Types::GetPersonalizedRankingResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::GetPersonalizedRankingResponse#personalized_ranking #personalized_ranking} => Array&lt;Types::PredictedItem&gt;
+    #   * {Types::GetPersonalizedRankingResponse#recommendation_id #recommendation_id} => String
     #
     # @example Request syntax with placeholder values
     #
@@ -365,6 +366,7 @@ module Aws::PersonalizeRuntime
     #   resp.personalized_ranking #=> Array
     #   resp.personalized_ranking[0].item_id #=> String
     #   resp.personalized_ranking[0].score #=> Float
+    #   resp.recommendation_id #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/personalize-runtime-2018-05-22/GetPersonalizedRanking AWS API Documentation
     #
@@ -425,6 +427,7 @@ module Aws::PersonalizeRuntime
     # @return [Types::GetRecommendationsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::GetRecommendationsResponse#item_list #item_list} => Array&lt;Types::PredictedItem&gt;
+    #   * {Types::GetRecommendationsResponse#recommendation_id #recommendation_id} => String
     #
     # @example Request syntax with placeholder values
     #
@@ -444,6 +447,7 @@ module Aws::PersonalizeRuntime
     #   resp.item_list #=> Array
     #   resp.item_list[0].item_id #=> String
     #   resp.item_list[0].score #=> Float
+    #   resp.recommendation_id #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/personalize-runtime-2018-05-22/GetRecommendations AWS API Documentation
     #
@@ -467,7 +471,7 @@ module Aws::PersonalizeRuntime
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-personalizeruntime'
-      context[:gem_version] = '1.14.0'
+      context[:gem_version] = '1.15.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

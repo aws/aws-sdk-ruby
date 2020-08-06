@@ -91,7 +91,8 @@ module Aws::EC2
       data[:public_ipv_4_pool]
     end
 
-    # The name of the location from which the IP address is advertised.
+    # The name of the unique set of Availability Zones, Local Zones, or
+    # Wavelength Zones from which AWS advertises IP addresses.
     # @return [String]
     def network_border_group
       data[:network_border_group]
@@ -107,6 +108,14 @@ module Aws::EC2
     # @return [String]
     def customer_owned_ipv_4_pool
       data[:customer_owned_ipv_4_pool]
+    end
+
+    # The carrier IP address associated. This option is only available for
+    # network interfaces which reside in a subnet in a Wavelength Zone (for
+    # example an EC2 instance).
+    # @return [String]
+    def carrier_ip
+      data[:carrier_ip]
     end
 
     # @!endgroup
@@ -324,7 +333,8 @@ module Aws::EC2
     # @option options [String] :allocation_id
     #   \[EC2-VPC\] The allocation ID. Required for EC2-VPC.
     # @option options [String] :network_border_group
-    #   The location that the IP address is released from.
+    #   The set of Availability Zones, Local Zones, or Wavelength Zones from
+    #   which AWS advertises IP addresses.
     #
     #   If you provide an incorrect network border group, you will receive an
     #   `InvalidAddress.NotFound` error. For more information, see [Error

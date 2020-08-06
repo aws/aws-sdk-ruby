@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.183.0 (2020-08-06)
+------------------
+
+* Feature - This release supports Wavelength resources, including carrier gateways, and carrier IP addresses.
+
 1.182.0 (2020-07-30)
 ------------------
 

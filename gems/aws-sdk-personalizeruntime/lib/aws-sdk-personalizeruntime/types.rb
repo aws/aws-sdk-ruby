@@ -68,10 +68,15 @@ module Aws::PersonalizeRuntime
     #   maximum is 500.
     #   @return [Array<Types::PredictedItem>]
     #
+    # @!attribute [rw] recommendation_id
+    #   The ID of the recommendation.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/personalize-runtime-2018-05-22/GetPersonalizedRankingResponse AWS API Documentation
     #
     class GetPersonalizedRankingResponse < Struct.new(
-      :personalized_ranking)
+      :personalized_ranking,
+      :recommendation_id)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -148,10 +153,15 @@ module Aws::PersonalizeRuntime
     #   score. There can be a maximum of 500 items in the list.
     #   @return [Array<Types::PredictedItem>]
     #
+    # @!attribute [rw] recommendation_id
+    #   The ID of the recommendation.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/personalize-runtime-2018-05-22/GetRecommendationsResponse AWS API Documentation
     #
     class GetRecommendationsResponse < Struct.new(
-      :item_list)
+      :item_list,
+      :recommendation_id)
       SENSITIVE = []
       include Aws::Structure
     end

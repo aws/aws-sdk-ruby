@@ -159,6 +159,7 @@ module Aws::EC2
     #         ],
     #         secondary_private_ip_address_count: 1,
     #         subnet_id: "String",
+    #         associate_carrier_ip_address: false,
     #         interface_type: "String",
     #       },
     #     ],
@@ -1559,8 +1560,8 @@ module Aws::EC2
     #   * `instance-id` - The ID of the instance the address is associated
     #     with, if any.
     #
-    #   * `network-border-group` - The location from where the IP address is
-    #     advertised.
+    #   * `network-border-group` - A unique set of Availability Zones, Local
+    #     Zones, or Wavelength Zones from where AWS advertises IP addresses.
     #
     #   * `network-interface-id` - \[EC2-VPC\] The ID of the network interface
     #     that the address is associated with, if any.
@@ -1570,7 +1571,7 @@ module Aws::EC2
     #   * `private-ip-address` - \[EC2-VPC\] The private IP address associated
     #     with the Elastic IP address.
     #
-    #   * `public-ip` - The Elastic IP address.
+    #   * `public-ip` - The Elastic IP address, or the carrier IP address.
     #
     #   * `tag`\:&lt;key&gt; - The key/value combination of a tag assigned to
     #     the resource. Use the tag key in the filter name and the tag value
@@ -3307,8 +3308,8 @@ module Aws::EC2
     #   * `instance-id` - The ID of the instance the address is associated
     #     with, if any.
     #
-    #   * `network-border-group` - The location from where the IP address is
-    #     advertised.
+    #   * `network-border-group` - A unique set of Availability Zones, Local
+    #     Zones, or Wavelength Zones from where AWS advertises IP addresses.
     #
     #   * `network-interface-id` - \[EC2-VPC\] The ID of the network interface
     #     that the address is associated with, if any.
@@ -3318,7 +3319,7 @@ module Aws::EC2
     #   * `private-ip-address` - \[EC2-VPC\] The private IP address associated
     #     with the Elastic IP address.
     #
-    #   * `public-ip` - The Elastic IP address.
+    #   * `public-ip` - The Elastic IP address, or the carrier IP address.
     #
     #   * `tag`\:&lt;key&gt; - The key/value combination of a tag assigned to
     #     the resource. Use the tag key in the filter name and the tag value

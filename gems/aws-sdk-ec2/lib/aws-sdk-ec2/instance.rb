@@ -126,7 +126,11 @@ module Aws::EC2
       data[:public_dns_name]
     end
 
-    # The public IPv4 address assigned to the instance, if applicable.
+    # The public IPv4 address, or the Carrier IP address assigned to the
+    # instance, if applicable.
+    #
+    # A Carrier IP address only applies to an instance launched in a subnet
+    # associated with a Wavelength Zone.
     # @return [String]
     def public_ip_address
       data[:public_ip_address]
@@ -1492,8 +1496,8 @@ module Aws::EC2
     #   * `instance-id` - The ID of the instance the address is associated
     #     with, if any.
     #
-    #   * `network-border-group` - The location from where the IP address is
-    #     advertised.
+    #   * `network-border-group` - A unique set of Availability Zones, Local
+    #     Zones, or Wavelength Zones from where AWS advertises IP addresses.
     #
     #   * `network-interface-id` - \[EC2-VPC\] The ID of the network interface
     #     that the address is associated with, if any.
@@ -1503,7 +1507,7 @@ module Aws::EC2
     #   * `private-ip-address` - \[EC2-VPC\] The private IP address associated
     #     with the Elastic IP address.
     #
-    #   * `public-ip` - The Elastic IP address.
+    #   * `public-ip` - The Elastic IP address, or the carrier IP address.
     #
     #   * `tag`\:&lt;key&gt; - The key/value combination of a tag assigned to
     #     the resource. Use the tag key in the filter name and the tag value

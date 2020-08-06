@@ -19,8 +19,12 @@ module Aws::PersonalizeEvents
     #       {
     #         event_id: "StringType",
     #         event_type: "StringType", # required
-    #         properties: "EventPropertiesJSON", # required
+    #         event_value: 1.0,
+    #         item_id: "ItemId",
+    #         properties: "EventPropertiesJSON",
     #         sent_at: Time.now, # required
+    #         recommendation_id: "RecommendationId",
+    #         impression: ["ItemId"],
     #       }
     #
     # @!attribute [rw] event_id
@@ -36,39 +40,57 @@ module Aws::PersonalizeEvents
     #   field of the Interactions schema.
     #   @return [String]
     #
+    # @!attribute [rw] event_value
+    #   The event value that corresponds to the `EVENT_VALUE` field of the
+    #   Interactions schema.
+    #   @return [Float]
+    #
+    # @!attribute [rw] item_id
+    #   The item ID key that corresponds to the `ITEM_ID` field of the
+    #   Interactions schema.
+    #   @return [String]
+    #
     # @!attribute [rw] properties
     #   A string map of event-specific data that you might choose to record.
-    #   For example, if a user rates a movie on your site, you might send
-    #   the movie ID and rating, and the number of movie ratings made by the
-    #   user.
+    #   For example, if a user rates a movie on your site, other than movie
+    #   ID (`itemId`) and rating (`eventValue`) , you might also send the
+    #   number of movie ratings made by the user.
     #
     #   Each item in the map consists of a key-value pair. For example,
     #
-    #   `\{"itemId": "movie1"\}`
-    #
-    #   `\{"itemId": "movie2", "eventValue": "4.5"\}`
-    #
-    #   `\{"itemId": "movie3", "eventValue": "3", "numberOfRatings": "12"\}`
+    #   `\{"numberOfRatings": "12"\}`
     #
     #   The keys use camel case names that match the fields in the
-    #   Interactions schema. The `itemId` and `eventValue` keys correspond
-    #   to the `ITEM_ID` and `EVENT_VALUE` fields. In the above example, the
-    #   `eventType` might be 'MovieRating' with `eventValue` being the
-    #   rating. The `numberOfRatings` would match the
-    #   'NUMBER\_OF\_RATINGS' field defined in the Interactions schema.
+    #   Interactions schema. In the above example, the `numberOfRatings`
+    #   would match the 'NUMBER\_OF\_RATINGS' field defined in the
+    #   Interactions schema.
     #   @return [String]
     #
     # @!attribute [rw] sent_at
-    #   The timestamp on the client side when the event occurred.
+    #   The timestamp (in Unix time) on the client side when the event
+    #   occurred.
     #   @return [Time]
+    #
+    # @!attribute [rw] recommendation_id
+    #   The ID of the recommendation.
+    #   @return [String]
+    #
+    # @!attribute [rw] impression
+    #   A list of item IDs that represents the sequence of items you have
+    #   shown the user. For example, `["itemId1", "itemId2", "itemId3"]`.
+    #   @return [Array<String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/personalize-events-2018-03-22/Event AWS API Documentation
     #
     class Event < Struct.new(
       :event_id,
       :event_type,
+      :event_value,
+      :item_id,
       :properties,
-      :sent_at)
+      :sent_at,
+      :recommendation_id,
+      :impression)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -97,8 +119,12 @@ module Aws::PersonalizeEvents
     #           {
     #             event_id: "StringType",
     #             event_type: "StringType", # required
-    #             properties: "EventPropertiesJSON", # required
+    #             event_value: 1.0,
+    #             item_id: "ItemId",
+    #             properties: "EventPropertiesJSON",
     #             sent_at: Time.now, # required
+    #             recommendation_id: "RecommendationId",
+    #             impression: ["ItemId"],
     #           },
     #         ],
     #       }
@@ -117,7 +143,11 @@ module Aws::PersonalizeEvents
     #   @return [String]
     #
     # @!attribute [rw] session_id
-    #   The session ID associated with the user's visit.
+    #   The session ID associated with the user's visit. Your application
+    #   generates the sessionId when a user first visits your website or
+    #   uses your application. Amazon Personalize uses the sessionId to
+    #   associate events with the user before they log in. For more
+    #   information see event-record-api.
     #   @return [String]
     #
     # @!attribute [rw] event_list

@@ -47,6 +47,6 @@ require_relative 'aws-sdk-personalizeevents/customizations'
 # @service
 module Aws::PersonalizeEvents
 
-  GEM_VERSION = '1.9.0'
+  GEM_VERSION = '1.10.0'
 
 end

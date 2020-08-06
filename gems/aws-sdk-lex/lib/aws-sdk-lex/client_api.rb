@@ -20,6 +20,7 @@ module Aws::Lex
     BlobStream = Shapes::BlobShape.new(name: 'BlobStream', streaming: true)
     BotAlias = Shapes::StringShape.new(name: 'BotAlias')
     BotName = Shapes::StringShape.new(name: 'BotName')
+    BotVersion = Shapes::StringShape.new(name: 'BotVersion')
     Button = Shapes::StructureShape.new(name: 'Button')
     ButtonTextStringWithLength = Shapes::StringShape.new(name: 'ButtonTextStringWithLength')
     ButtonValueStringWithLength = Shapes::StringShape.new(name: 'ButtonValueStringWithLength')
@@ -32,12 +33,15 @@ module Aws::Lex
     DialogAction = Shapes::StructureShape.new(name: 'DialogAction')
     DialogActionType = Shapes::StringShape.new(name: 'DialogActionType')
     DialogState = Shapes::StringShape.new(name: 'DialogState')
+    Double = Shapes::FloatShape.new(name: 'Double')
     ErrorMessage = Shapes::StringShape.new(name: 'ErrorMessage')
     FulfillmentState = Shapes::StringShape.new(name: 'FulfillmentState')
     GenericAttachment = Shapes::StructureShape.new(name: 'GenericAttachment')
     GetSessionRequest = Shapes::StructureShape.new(name: 'GetSessionRequest')
     GetSessionResponse = Shapes::StructureShape.new(name: 'GetSessionResponse')
     HttpContentType = Shapes::StringShape.new(name: 'HttpContentType')
+    IntentConfidence = Shapes::StructureShape.new(name: 'IntentConfidence')
+    IntentList = Shapes::ListShape.new(name: 'IntentList')
     IntentName = Shapes::StringShape.new(name: 'IntentName')
     IntentSummary = Shapes::StructureShape.new(name: 'IntentSummary')
     IntentSummaryCheckpointLabel = Shapes::StringShape.new(name: 'IntentSummaryCheckpointLabel')
@@ -52,6 +56,7 @@ module Aws::Lex
     PostContentResponse = Shapes::StructureShape.new(name: 'PostContentResponse')
     PostTextRequest = Shapes::StructureShape.new(name: 'PostTextRequest')
     PostTextResponse = Shapes::StructureShape.new(name: 'PostTextResponse')
+    PredictedIntent = Shapes::StructureShape.new(name: 'PredictedIntent')
     PutSessionRequest = Shapes::StructureShape.new(name: 'PutSessionRequest')
     PutSessionResponse = Shapes::StructureShape.new(name: 'PutSessionResponse')
     RequestTimeoutException = Shapes::StructureShape.new(name: 'RequestTimeoutException')
@@ -124,6 +129,11 @@ module Aws::Lex
     GetSessionResponse.add_member(:dialog_action, Shapes::ShapeRef.new(shape: DialogAction, location_name: "dialogAction"))
     GetSessionResponse.struct_class = Types::GetSessionResponse
 
+    IntentConfidence.add_member(:score, Shapes::ShapeRef.new(shape: Double, location_name: "score"))
+    IntentConfidence.struct_class = Types::IntentConfidence
+
+    IntentList.member = Shapes::ShapeRef.new(shape: PredictedIntent)
+
     IntentSummary.add_member(:intent_name, Shapes::ShapeRef.new(shape: IntentName, location_name: "intentName"))
     IntentSummary.add_member(:checkpoint_label, Shapes::ShapeRef.new(shape: IntentSummaryCheckpointLabel, location_name: "checkpointLabel"))
     IntentSummary.add_member(:slots, Shapes::ShapeRef.new(shape: StringMap, location_name: "slots"))
@@ -165,6 +175,8 @@ module Aws::Lex
 
     PostContentResponse.add_member(:content_type, Shapes::ShapeRef.new(shape: HttpContentType, location: "header", location_name: "Content-Type"))
     PostContentResponse.add_member(:intent_name, Shapes::ShapeRef.new(shape: IntentName, location: "header", location_name: "x-amz-lex-intent-name"))
+    PostContentResponse.add_member(:nlu_intent_confidence, Shapes::ShapeRef.new(shape: String, location: "header", location_name: "x-amz-lex-nlu-intent-confidence", metadata: {"jsonvalue"=>true}))
+    PostContentResponse.add_member(:alternative_intents, Shapes::ShapeRef.new(shape: String, location: "header", location_name: "x-amz-lex-alternative-intents", metadata: {"jsonvalue"=>true}))
     PostContentResponse.add_member(:slots, Shapes::ShapeRef.new(shape: String, location: "header", location_name: "x-amz-lex-slots", metadata: {"jsonvalue"=>true}))
     PostContentResponse.add_member(:session_attributes, Shapes::ShapeRef.new(shape: String, location: "header", location_name: "x-amz-lex-session-attributes", metadata: {"jsonvalue"=>true}))
     PostContentResponse.add_member(:sentiment_response, Shapes::ShapeRef.new(shape: String, location: "header", location_name: "x-amz-lex-sentiment"))
@@ -174,6 +186,7 @@ module Aws::Lex
     PostContentResponse.add_member(:slot_to_elicit, Shapes::ShapeRef.new(shape: String, location: "header", location_name: "x-amz-lex-slot-to-elicit"))
     PostContentResponse.add_member(:input_transcript, Shapes::ShapeRef.new(shape: String, location: "header", location_name: "x-amz-lex-input-transcript"))
     PostContentResponse.add_member(:audio_stream, Shapes::ShapeRef.new(shape: BlobStream, location_name: "audioStream"))
+    PostContentResponse.add_member(:bot_version, Shapes::ShapeRef.new(shape: BotVersion, location: "header", location_name: "x-amz-lex-bot-version"))
     PostContentResponse.add_member(:session_id, Shapes::ShapeRef.new(shape: String, location: "header", location_name: "x-amz-lex-session-id"))
     PostContentResponse.struct_class = Types::PostContentResponse
     PostContentResponse[:payload] = :audio_stream
@@ -188,6 +201,8 @@ module Aws::Lex
     PostTextRequest.struct_class = Types::PostTextRequest
 
     PostTextResponse.add_member(:intent_name, Shapes::ShapeRef.new(shape: IntentName, location_name: "intentName"))
+    PostTextResponse.add_member(:nlu_intent_confidence, Shapes::ShapeRef.new(shape: IntentConfidence, location_name: "nluIntentConfidence"))
+    PostTextResponse.add_member(:alternative_intents, Shapes::ShapeRef.new(shape: IntentList, location_name: "alternativeIntents"))
     PostTextResponse.add_member(:slots, Shapes::ShapeRef.new(shape: StringMap, location_name: "slots"))
     PostTextResponse.add_member(:session_attributes, Shapes::ShapeRef.new(shape: StringMap, location_name: "sessionAttributes"))
     PostTextResponse.add_member(:message, Shapes::ShapeRef.new(shape: Text, location_name: "message"))
@@ -197,7 +212,13 @@ module Aws::Lex
     PostTextResponse.add_member(:slot_to_elicit, Shapes::ShapeRef.new(shape: String, location_name: "slotToElicit"))
     PostTextResponse.add_member(:response_card, Shapes::ShapeRef.new(shape: ResponseCard, location_name: "responseCard"))
     PostTextResponse.add_member(:session_id, Shapes::ShapeRef.new(shape: String, location_name: "sessionId"))
+    PostTextResponse.add_member(:bot_version, Shapes::ShapeRef.new(shape: BotVersion, location_name: "botVersion"))
     PostTextResponse.struct_class = Types::PostTextResponse
+
+    PredictedIntent.add_member(:intent_name, Shapes::ShapeRef.new(shape: IntentName, location_name: "intentName"))
+    PredictedIntent.add_member(:nlu_intent_confidence, Shapes::ShapeRef.new(shape: IntentConfidence, location_name: "nluIntentConfidence"))
+    PredictedIntent.add_member(:slots, Shapes::ShapeRef.new(shape: StringMap, location_name: "slots"))
+    PredictedIntent.struct_class = Types::PredictedIntent
 
     PutSessionRequest.add_member(:bot_name, Shapes::ShapeRef.new(shape: BotName, required: true, location: "uri", location_name: "botName"))
     PutSessionRequest.add_member(:bot_alias, Shapes::ShapeRef.new(shape: BotAlias, required: true, location: "uri", location_name: "botAlias"))
