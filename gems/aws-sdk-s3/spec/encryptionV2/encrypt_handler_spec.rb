@@ -58,7 +58,7 @@ module Aws
 
           it 'adds a user_agent_suffix' do
             handler.call(context)
-            expect(config.user_agent_suffix).to include('CSE_V2')
+            expect(config.user_agent_suffix).to include('S3CryptoV2')
           end
 
           it 'sets the body to the IOEncrypter and calls close on_headers' do

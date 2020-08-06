@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'base64'
 
 module Aws
@@ -45,7 +47,8 @@ module Aws
           context.params[:metadata] ||= {}
           context.params[:metadata]['x-amz-unencrypted-content-length'] = io.size
           if context.params.delete(:content_md5)
-            raise ArgumentError, 'content_md5 is not supported'
+            raise ArgumentError, 'Setting content_md5 on client side '\
+              'encrypted objects is deprecated.'
           end
           context.http_response.on_headers do
             context.params[:body].close
@@ -54,9 +57,9 @@ module Aws
 
         def apply_cse_user_agent(context)
           if context.config.user_agent_suffix.nil?
-            context.config.user_agent_suffix = 'CSE_V2'
-          elsif !context.config.user_agent_suffix.include? 'CSE_V2'
-            context.config.user_agent_suffix += ' CSE_V2'
+            context.config.user_agent_suffix = EC_USER_AGENT
+          elsif !context.config.user_agent_suffix.include? EC_USER_AGENT
+            context.config.user_agent_suffix += " #{EC_USER_AGENT}"
           end
         end
 

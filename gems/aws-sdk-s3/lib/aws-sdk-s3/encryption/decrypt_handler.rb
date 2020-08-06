@@ -22,13 +22,25 @@ module Aws
           x-amz-matdesc
         )
 
-        POSSIBLE_ENVELOPE_KEYS = (V1_ENVELOPE_KEYS + V2_ENVELOPE_KEYS).uniq
+        V2_OPTIONAL_KEYS = %w(x-amz-tag-len)
+
+        POSSIBLE_ENVELOPE_KEYS = (V1_ENVELOPE_KEYS +
+          V2_ENVELOPE_KEYS + V2_OPTIONAL_KEYS).uniq
+
+        POSSIBLE_WRAPPING_FORMATS = %w(
+          AES/GCM
+          kms
+          kms+context
+          RSA-OAEP-SHA1
+        )
 
         POSSIBLE_ENCRYPTION_FORMATS = %w(
           AES/GCM/NoPadding
           AES/CBC/PKCS5Padding
           AES/CBC/PKCS7Padding
         )
+
+        AUTH_REQUIRED_CEK_ALGS = %w(AES/GCM/NoPadding)
 
         def call(context)
           attach_http_event_listeners(context)
@@ -41,9 +53,9 @@ module Aws
         def attach_http_event_listeners(context)
 
           context.http_response.on_headers(200) do
-            cipher = decryption_cipher(context)
-            decrypter = body_contains_auth_tag?(context) ?
-              authenticated_decrypter(context, cipher) :
+            cipher, envelope = decryption_cipher(context)
+            decrypter = body_contains_auth_tag?(envelope) ?
+              authenticated_decrypter(context, cipher, envelope) :
               IODecrypter.new(cipher, context.http_response.body)
             context.http_response.body = decrypter
           end
@@ -64,7 +76,12 @@ module Aws
 
         def decryption_cipher(context)
           if envelope = get_encryption_envelope(context)
-            context[:encryption][:cipher_provider].decryption_cipher(envelope)
+            cipher = context[:encryption][:cipher_provider]
+                     .decryption_cipher(
+                       envelope,
+                       kms_encryption_context: context[:encryption][:kms_encryption_context]
+                     )
+            [cipher, envelope]
           else
             raise Errors::DecryptionError, "unable to locate encryption envelope"
           end
@@ -100,13 +117,12 @@ module Aws
         end
 
         def extract_envelope(hash)
+          return nil unless hash
           return v1_envelope(hash) if hash.key?('x-amz-key')
           return v2_envelope(hash) if hash.key?('x-amz-key-v2')
           if hash.keys.any? { |key| key.match(/^x-amz-key-(.+)$/) }
             msg = "unsupported envelope encryption version #{$1}"
             raise Errors::DecryptionError, msg
-          else
-            nil # no envelope found
           end
         end
 
@@ -120,39 +136,31 @@ module Aws
             msg = "unsupported content encrypting key (cek) format: #{alg}"
             raise Errors::DecryptionError, msg
           end
-          unless envelope['x-amz-wrap-alg'] == 'kms'
-            # possible to support
-            #   RSA/ECB/OAEPWithSHA-256AndMGF1Padding
+          unless POSSIBLE_WRAPPING_FORMATS.include? envelope['x-amz-wrap-alg']
             alg = envelope['x-amz-wrap-alg'].inspect
             msg = "unsupported key wrapping algorithm: #{alg}"
             raise Errors::DecryptionError, msg
           end
-          unless V2_ENVELOPE_KEYS.sort == envelope.keys.sort
+          unless (missing_keys = V2_ENVELOPE_KEYS - envelope.keys).empty?
             msg = "incomplete v2 encryption envelope:\n"
-            msg += "  expected: #{V2_ENVELOPE_KEYS.join(',')}\n"
-            msg += "  got: #{envelope_keys.join(', ')}"
+            msg += "  missing: #{missing_keys.join(',')}\n"
             raise Errors::DecryptionError, msg
           end
           envelope
         end
 
-        # When the x-amz-meta-x-amz-tag-len header is present, it indicates
-        # that the body of this object has a trailing auth tag. The header
-        # indicates the length of that tag.
-        #
         # This method fetches the tag from the end of the object by
         # making a GET Object w/range request. This auth tag is used
         # to initialize the cipher, and the decrypter truncates the
         # auth tag from the body when writing the final bytes.
-        def authenticated_decrypter(context, cipher)
+        def authenticated_decrypter(context, cipher, envelope)
           if RUBY_VERSION.match(/1.9/)
-            raise "authenticated decryption not supported by OpeenSSL in Ruby version ~> 1.9"
+            raise "authenticated decryption not supported by OpenSSL in Ruby version ~> 1.9"
             raise Aws::Errors::NonSupportedRubyVersionError, msg
           end
           http_resp = context.http_response
           content_length = http_resp.headers['content-length'].to_i
-          auth_tag_length = http_resp.headers['x-amz-meta-x-amz-tag-len']
-          auth_tag_length = auth_tag_length.to_i / 8
+          auth_tag_length = auth_tag_length(envelope)
 
           auth_tag = context.client.get_object(
             bucket: context.params[:bucket],
@@ -164,23 +172,39 @@ module Aws
           cipher.auth_data = ''
 
           # The encrypted object contains both the cipher text
-          # plus a trailing auth tag. This decrypter will the body
-          # expect for the trailing auth tag.
+          # plus a trailing auth tag.
           IOAuthDecrypter.new(
             io: http_resp.body,
             encrypted_content_length: content_length - auth_tag_length,
             cipher: cipher)
         end
 
-        def body_contains_auth_tag?(context)
-          context.http_response.headers['x-amz-meta-x-amz-tag-len']
+        def body_contains_auth_tag?(envelope)
+          AUTH_REQUIRED_CEK_ALGS.include?(envelope['x-amz-cek-alg'])
+        end
+
+        # Determine the auth tag length from the algorithm
+        # Validate it against the value provided in the x-amz-tag-len
+        # Return the tag length in bytes
+        def auth_tag_length(envelope)
+          tag_length =
+            case envelope['x-amz-cek-alg']
+            when 'AES/GCM/NoPadding' then AES_GCM_TAG_LEN_BYTES
+            else
+              raise ArgumentError, 'Unsupported cek-alg: ' \
+                "#{envelope['x-amz-cek-alg']}"
+            end
+          if (tag_length * 8) != envelope['x-amz-tag-len'].to_i
+            raise Errors::DecryptionError, 'x-amz-tag-len does not match expected'
+          end
+          tag_length
         end
 
         def apply_cse_user_agent(context)
           if context.config.user_agent_suffix.nil?
-            context.config.user_agent_suffix = 'CSE_V1'
-          elsif !context.config.user_agent_suffix.include? 'CSE_V1'
-            context.config.user_agent_suffix += ' CSE_V1'
+            context.config.user_agent_suffix = EC_USER_AGENT
+          elsif !context.config.user_agent_suffix.include? EC_USER_AGENT
+            context.config.user_agent_suffix += " #{EC_USER_AGENT}"
           end
         end
 

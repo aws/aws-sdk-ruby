@@ -5,6 +5,10 @@ require 'forwardable'
 module Aws
   module S3
 
+    # [MAINTENANCE MODE] There is a new version of the Encryption Client.
+    # AWS strongly recommends upgrading to the {Aws::S3::EncryptionV2::Client},
+    # which provides updated data security best practices.
+    # See documentation for {Aws::S3::EncryptionV2::Client}.
     # Provides an encryption client that encrypts and decrypts data client-side,
     # storing the encrypted data in Amazon S3.
     #
@@ -229,6 +233,13 @@ module Aws
           @envelope_location = extract_location(options)
           @instruction_file_suffix = extract_suffix(options)
         end
+        deprecated :initialize,
+                   message:
+                     '[MAINTENANCE MODE] This version of the S3 Encryption client is currently in maintenance mode. ' \
+	                     'AWS strongly recommends upgrading to the Aws::S3::EncryptionV2::Client, ' \
+	                     'which provides updated data security best practices. ' \
+	                     'See documentation for Aws::S3::EncryptionV2::Client.'
+
 
         # @return [S3::Client]
         attr_reader :client
