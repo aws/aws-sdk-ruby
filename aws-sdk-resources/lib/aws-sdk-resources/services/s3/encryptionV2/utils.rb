@@ -4,24 +4,24 @@ require 'openssl'
 
 module Aws
   module S3
-    module Encryption
+    module EncryptionV2
       # @api private
       module Utils
 
-        UNSAFE_MSG = "unsafe encryption, data is longer than key length"
-
         class << self
 
-          def encrypt(key, data)
-            case key
-            when OpenSSL::PKey::RSA # asymmetric encryption
-              warn(UNSAFE_MSG) if key.public_key.n.num_bits < cipher_size(data)
-              key.public_encrypt(data)
-            when String # symmetric encryption
-              warn(UNSAFE_MSG) if cipher_size(key) < cipher_size(data)
-              cipher = aes_encryption_cipher(:ECB, key)
-              cipher.update(data) + cipher.final
-            end
+          def encrypt_aes_gcm(key, data, auth_data)
+            cipher = aes_encryption_cipher(:GCM, key)
+            cipher.iv = (iv = cipher.random_iv)
+            cipher.auth_data = auth_data
+
+            iv + cipher.update(data) + cipher.final + cipher.auth_tag
+          end
+
+          def encrypt_rsa(key, data, auth_data)
+            # Plaintext must be KeyLengthInBytes (1 Byte) + DataKey + AuthData
+            buf = [data.bytesize] + data.unpack('C*') + auth_data.unpack('C*')
+            key.public_encrypt(buf.pack('C*'), OpenSSL::PKey::RSA::PKCS1_OAEP_PADDING)
           end
 
           def decrypt(key, data)
@@ -38,7 +38,6 @@ module Aws
               raise Errors::DecryptionError, msg
             end
           end
-
 
           def decrypt_aes_gcm(key, data, auth_data)
             # data is iv (12B) + key + tag (16B)

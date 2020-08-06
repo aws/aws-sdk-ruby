@@ -2,7 +2,7 @@
 
 module Aws
   module S3
-    module Encryption
+    module EncryptionV2
 
       # This module defines the interface required for a {Client#key_provider}.
       # A key provider is any object that:

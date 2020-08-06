@@ -1,6 +1,8 @@
 Unreleased Changes
 ------------------
 
+* Feature - Updates to the Amazon S3 Encryption Client. This change includes fixes for issues that were reported by Sophie Schmieg from the Google ISE team, and for issues that were discovered by AWS Cryptography.
+
 2.11.561 (2020-08-06)
 ------------------
 

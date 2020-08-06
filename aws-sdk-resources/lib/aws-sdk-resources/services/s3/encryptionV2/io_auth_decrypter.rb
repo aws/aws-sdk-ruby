@@ -2,7 +2,7 @@
 
 module Aws
   module S3
-    module Encryption
+    module EncryptionV2
       # @api private
       class IOAuthDecrypter
 

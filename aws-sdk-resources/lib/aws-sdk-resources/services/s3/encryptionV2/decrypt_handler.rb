@@ -4,7 +4,7 @@ require 'base64'
 
 module Aws
   module S3
-    module Encryption
+    module EncryptionV2
       # @api private
       class DecryptHandler < Seahorse::Client::Handler
 
@@ -75,12 +75,12 @@ module Aws
         end
 
         def decryption_cipher(context)
-          if envelope = get_encryption_envelope(context)
+          if (envelope = get_encryption_envelope(context))
             cipher = context[:encryption][:cipher_provider]
-                     .decryption_cipher(
-                       envelope,
-                       kms_encryption_context: context[:encryption][:kms_encryption_context]
-                     )
+             .decryption_cipher(
+               envelope,
+               context[:encryption]
+             )
             [cipher, envelope]
           else
             raise Errors::DecryptionError, "unable to locate encryption envelope"

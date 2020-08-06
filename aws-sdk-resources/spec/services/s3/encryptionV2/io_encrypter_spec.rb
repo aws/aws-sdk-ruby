@@ -1,31 +1,42 @@
-# frozen_string_literal: true
 require 'spec_helper'
 require 'openssl'
 
 module Aws
   module S3
-    module Encryption
+    module EncryptionV2
       describe IOEncrypter do
+
+        before do
+          if RUBY_VERSION.match(/1.9/)
+            skip('authenticated encryption not supported by OpenSSL in Ruby version ~> 1.9')
+          end
+        end
+
         let(:key) do
           Base64.decode64('kM5UVbhE/4rtMZJfsadYEdm2vaKFsmV2f5+URSeUCV4=')
         end
 
-        let(:iv) { Base64.decode64('k8n8oF8ZNPRKAYY0RFqN2Q==') }
+        let(:iv) { Base64.decode64("IqR6MLs8IskchoMh\n") }
 
         let(:plain_text) { 'The quick brown fox jumps over the lazy dog.' }
 
         let(:cipher_text) do
           Base64.decode64(
-            'MUeGuvB6IcjFo5VBWET659nWwx3+YH21HyVhF2Jf8bQ++2wvmtpXaGMJC2fae4j/'
+            "GMI8Qdfj7RfkzTKtOhy+hX2weKtMbU+e1/ZMUQgTi+3I7jOAmO+yxt17fgHm\ntlVCo4J45qiD0gWdkUqU\n"
           )
         end
 
         let(:cipher) do
-          cipher = OpenSSL::Cipher.new('AES-256-CBC')
+          cipher = OpenSSL::Cipher.new('aes-256-gcm')
           cipher.encrypt
           cipher.key = key
           cipher.iv = iv
           cipher
+        end
+
+        it 'adds the auth_tag' do
+          expect(cipher).to receive(:auth_tag).and_return('auth_tag')
+          IOEncrypter.new(cipher, StringIO.new(plain_text))
         end
 
         it 'encrypts an IO object' do

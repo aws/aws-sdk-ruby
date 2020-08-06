@@ -2,6 +2,9 @@ module Aws
   module S3
     module Encryption
 
+      AES_GCM_TAG_LEN_BYTES = 16
+      EC_USER_AGENT = 'S3CryptoV1n'
+
       autoload :Client, 'aws-sdk-resources/services/s3/encryption/client'
       autoload :DecryptHandler, 'aws-sdk-resources/services/s3/encryption/decrypt_handler'
       autoload :DefaultCipherProvider, 'aws-sdk-resources/services/s3/encryption/default_cipher_provider'

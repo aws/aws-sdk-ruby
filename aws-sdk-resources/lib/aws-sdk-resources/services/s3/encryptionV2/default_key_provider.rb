@@ -2,7 +2,7 @@
 
 module Aws
   module S3
-    module Encryption
+    module EncryptionV2
 
       # The default key provider is constructed with a single key
       # that is used for both encryption and decryption, ignoring

@@ -4,7 +4,7 @@ require 'base64'
 
 module Aws
   module S3
-    module Encryption
+    module EncryptionV2
       class Materials
 
         # @option options [required, OpenSSL::PKey::RSA, String] :key
