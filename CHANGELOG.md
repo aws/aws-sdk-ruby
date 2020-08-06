@@ -1,6 +1,18 @@
 Unreleased Changes
 ------------------
 
+* Feature - Aws::EC2 - Updated the API, and documentation for Amazon Elastic Compute Cloud.
+
+* Feature - Aws::LexModelBuildingService - Updated the API, and documentation for Amazon Lex Model Building Service.
+
+* Feature - Aws::PersonalizeEvents - Updated the API, and documentation for Amazon Personalize Events.
+
+* Feature - Aws::PersonalizeRuntime - Updated the API, and documentation for Amazon Personalize Runtime.
+
+* Feature - Aws::Personalize - Updated the API, and documentation for Amazon Personalize.
+
+* Feature - Aws::Lex - Updated the API, and documentation for Amazon Lex Runtime Service.
+
 2.11.560 (2020-08-05)
 ------------------
 
