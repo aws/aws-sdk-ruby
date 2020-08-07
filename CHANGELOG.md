@@ -1,6 +1,14 @@
 Unreleased Changes
 ------------------
 
+* Feature - Aws::Glue - Updated the API, and documentation for AWS Glue.
+
+* Feature - Aws::Organizations - Updated the API, and documentation for AWS Organizations.
+
+* Feature - Aws::S3 - Updated the documentation for Amazon Simple Storage Service.
+
+* Feature - Aws::SMS - Updated the API, and documentation for AWS Server Migration Service.
+
 * Feature - Updates to the Amazon S3 Encryption Client. This change includes fixes for issues that were reported by Sophie Schmieg from the Google ISE team, and for issues that were discovered by AWS Cryptography.
 
 2.11.561 (2020-08-06)
