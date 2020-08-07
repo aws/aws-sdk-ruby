@@ -650,7 +650,7 @@ module Aws
               expect do
                 client.put_object(
                   bucket: test_bucket, key: test_object, body: plaintext,
-                  kms_encryption_context: {'aws:x-amz-cek-alg': 'error'})
+                  kms_encryption_context: {'aws:x-amz-cek-alg' => 'error'})
               end.to raise_error(ArgumentError,
                                  /Conflict in reserved KMS Encryption Context/)
             end
