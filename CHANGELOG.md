@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+2.11.562 (2020-08-07)
+------------------
+
 * Feature - Aws::Glue - Updated the API, and documentation for AWS Glue.
 
 * Feature - Aws::Organizations - Updated the API, and documentation for AWS Organizations.
