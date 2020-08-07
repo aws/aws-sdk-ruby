@@ -642,6 +642,7 @@ module Aws::Glue
     #   resp.crawlers[0].targets.s3_targets[0].path #=> String
     #   resp.crawlers[0].targets.s3_targets[0].exclusions #=> Array
     #   resp.crawlers[0].targets.s3_targets[0].exclusions[0] #=> String
+    #   resp.crawlers[0].targets.s3_targets[0].connection_name #=> String
     #   resp.crawlers[0].targets.jdbc_targets #=> Array
     #   resp.crawlers[0].targets.jdbc_targets[0].connection_name #=> String
     #   resp.crawlers[0].targets.jdbc_targets[0].path #=> String
@@ -1300,7 +1301,7 @@ module Aws::Glue
     #     connection_input: { # required
     #       name: "NameString", # required
     #       description: "DescriptionString",
-    #       connection_type: "JDBC", # required, accepts JDBC, SFTP, MONGODB, KAFKA
+    #       connection_type: "JDBC", # required, accepts JDBC, SFTP, MONGODB, KAFKA, NETWORK
     #       match_criteria: ["NameString"],
     #       connection_properties: { # required
     #         "HOST" => "ValueString",
@@ -1401,6 +1402,7 @@ module Aws::Glue
     #         {
     #           path: "Path",
     #           exclusions: ["Path"],
+    #           connection_name: "ConnectionName",
     #         },
     #       ],
     #       jdbc_targets: [
@@ -3466,7 +3468,7 @@ module Aws::Glue
     #
     #   resp.connection.name #=> String
     #   resp.connection.description #=> String
-    #   resp.connection.connection_type #=> String, one of "JDBC", "SFTP", "MONGODB", "KAFKA"
+    #   resp.connection.connection_type #=> String, one of "JDBC", "SFTP", "MONGODB", "KAFKA", "NETWORK"
     #   resp.connection.match_criteria #=> Array
     #   resp.connection.match_criteria[0] #=> String
     #   resp.connection.connection_properties #=> Hash
@@ -3524,7 +3526,7 @@ module Aws::Glue
     #     catalog_id: "CatalogIdString",
     #     filter: {
     #       match_criteria: ["NameString"],
-    #       connection_type: "JDBC", # accepts JDBC, SFTP, MONGODB, KAFKA
+    #       connection_type: "JDBC", # accepts JDBC, SFTP, MONGODB, KAFKA, NETWORK
     #     },
     #     hide_password: false,
     #     next_token: "Token",
@@ -3536,7 +3538,7 @@ module Aws::Glue
     #   resp.connection_list #=> Array
     #   resp.connection_list[0].name #=> String
     #   resp.connection_list[0].description #=> String
-    #   resp.connection_list[0].connection_type #=> String, one of "JDBC", "SFTP", "MONGODB", "KAFKA"
+    #   resp.connection_list[0].connection_type #=> String, one of "JDBC", "SFTP", "MONGODB", "KAFKA", "NETWORK"
     #   resp.connection_list[0].match_criteria #=> Array
     #   resp.connection_list[0].match_criteria[0] #=> String
     #   resp.connection_list[0].connection_properties #=> Hash
@@ -3582,6 +3584,7 @@ module Aws::Glue
     #   resp.crawler.targets.s3_targets[0].path #=> String
     #   resp.crawler.targets.s3_targets[0].exclusions #=> Array
     #   resp.crawler.targets.s3_targets[0].exclusions[0] #=> String
+    #   resp.crawler.targets.s3_targets[0].connection_name #=> String
     #   resp.crawler.targets.jdbc_targets #=> Array
     #   resp.crawler.targets.jdbc_targets[0].connection_name #=> String
     #   resp.crawler.targets.jdbc_targets[0].path #=> String
@@ -3706,6 +3709,7 @@ module Aws::Glue
     #   resp.crawlers[0].targets.s3_targets[0].path #=> String
     #   resp.crawlers[0].targets.s3_targets[0].exclusions #=> Array
     #   resp.crawlers[0].targets.s3_targets[0].exclusions[0] #=> String
+    #   resp.crawlers[0].targets.s3_targets[0].connection_name #=> String
     #   resp.crawlers[0].targets.jdbc_targets #=> Array
     #   resp.crawlers[0].targets.jdbc_targets[0].connection_name #=> String
     #   resp.crawlers[0].targets.jdbc_targets[0].path #=> String
@@ -8029,7 +8033,7 @@ module Aws::Glue
     #     connection_input: { # required
     #       name: "NameString", # required
     #       description: "DescriptionString",
-    #       connection_type: "JDBC", # required, accepts JDBC, SFTP, MONGODB, KAFKA
+    #       connection_type: "JDBC", # required, accepts JDBC, SFTP, MONGODB, KAFKA, NETWORK
     #       match_criteria: ["NameString"],
     #       connection_properties: { # required
     #         "HOST" => "ValueString",
@@ -8119,6 +8123,7 @@ module Aws::Glue
     #         {
     #           path: "Path",
     #           exclusions: ["Path"],
+    #           connection_name: "ConnectionName",
     #         },
     #       ],
     #       jdbc_targets: [
@@ -8885,7 +8890,7 @@ module Aws::Glue
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-glue'
-      context[:gem_version] = '1.65.0'
+      context[:gem_version] = '1.66.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

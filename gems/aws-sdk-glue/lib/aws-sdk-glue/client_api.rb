@@ -2352,6 +2352,7 @@ module Aws::Glue
 
     S3Target.add_member(:path, Shapes::ShapeRef.new(shape: Path, location_name: "Path"))
     S3Target.add_member(:exclusions, Shapes::ShapeRef.new(shape: PathList, location_name: "Exclusions"))
+    S3Target.add_member(:connection_name, Shapes::ShapeRef.new(shape: ConnectionName, location_name: "ConnectionName"))
     S3Target.struct_class = Types::S3Target
 
     S3TargetList.member = Shapes::ShapeRef.new(shape: S3Target)

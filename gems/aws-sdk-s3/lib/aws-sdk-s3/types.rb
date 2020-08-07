@@ -1350,7 +1350,7 @@ module Aws::S3
     #   in encrypting data. This value is used to store the object and then
     #   it is discarded; Amazon S3 does not store the encryption key. The
     #   key must be appropriate for use with the algorithm specified in the
-    #   `x-amz-server-side​-encryption​-customer-algorithm` header.
+    #   `x-amz-server-side-encryption-customer-algorithm` header.
     #   @return [String]
     #
     # @!attribute [rw] sse_customer_key_md5
@@ -1843,7 +1843,7 @@ module Aws::S3
     #   in encrypting data. This value is used to store the object and then
     #   it is discarded; Amazon S3 does not store the encryption key. The
     #   key must be appropriate for use with the algorithm specified in the
-    #   `x-amz-server-side​-encryption​-customer-algorithm` header.
+    #   `x-amz-server-side-encryption-customer-algorithm` header.
     #   @return [String]
     #
     # @!attribute [rw] sse_customer_key_md5
@@ -2457,7 +2457,7 @@ module Aws::S3
     #   @return [String]
     #
     # @!attribute [rw] key
-    #   Name of the tag.
+    #   Name of the object key.
     #   @return [String]
     #
     # @!attribute [rw] version_id
@@ -4884,7 +4884,7 @@ module Aws::S3
     #   in encrypting data. This value is used to store the object and then
     #   it is discarded; Amazon S3 does not store the encryption key. The
     #   key must be appropriate for use with the algorithm specified in the
-    #   `x-amz-server-side​-encryption​-customer-algorithm` header.
+    #   `x-amz-server-side-encryption-customer-algorithm` header.
     #   @return [String]
     #
     # @!attribute [rw] sse_customer_key_md5
@@ -5332,8 +5332,8 @@ module Aws::S3
     # @!attribute [rw] restore
     #   If the object is an archived object (an object whose storage class
     #   is GLACIER), the response includes this header if either the archive
-    #   restoration is in progress (see RestoreObject or an archive copy is
-    #   already restored.
+    #   restoration is in progress (see [RestoreObject][1] or an archive
+    #   copy is already restored.
     #
     #   If an archive copy is already restored, the header value indicates
     #   when Amazon S3 is scheduled to delete the object copy. For example:
@@ -5345,11 +5345,12 @@ module Aws::S3
     #   value `ongoing-request="true"`.
     #
     #   For more information about archiving objects, see [Transitioning
-    #   Objects: General Considerations][1].
+    #   Objects: General Considerations][2].
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/dev/object-lifecycle-mgmt.html#lifecycle-transition-general-considerations
+    #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_RestoreObject.html
+    #   [2]: https://docs.aws.amazon.com/AmazonS3/latest/dev/object-lifecycle-mgmt.html#lifecycle-transition-general-considerations
     #   @return [String]
     #
     # @!attribute [rw] last_modified
@@ -5638,7 +5639,7 @@ module Aws::S3
     #   in encrypting data. This value is used to store the object and then
     #   it is discarded; Amazon S3 does not store the encryption key. The
     #   key must be appropriate for use with the algorithm specified in the
-    #   `x-amz-server-side​-encryption​-customer-algorithm` header.
+    #   `x-amz-server-side-encryption-customer-algorithm` header.
     #   @return [String]
     #
     # @!attribute [rw] sse_customer_key_md5
@@ -7042,7 +7043,7 @@ module Aws::S3
     #   in the subsequent request to get next set of objects. Amazon S3
     #   lists objects in alphabetical order Note: This element is returned
     #   only if you have delimiter request parameter specified. If response
-    #   does not include the NextMaker and it is truncated, you can use the
+    #   does not include the NextMarker and it is truncated, you can use the
     #   value of the last Key in the response as the marker in the
     #   subsequent request to get the next set of object keys.
     #   @return [String]
@@ -8140,8 +8141,25 @@ module Aws::S3
     #   @return [Time]
     #
     # @!attribute [rw] etag
-    #   The entity tag is an MD5 hash of the object. ETag reflects only
-    #   changes to the contents of an object, not its metadata.
+    #   The entity tag is a hash of the object. The ETag reflects changes
+    #   only to the contents of an object, not its metadata. The ETag may or
+    #   may not be an MD5 digest of the object data. Whether or not it is
+    #   depends on how the object was created and how it is encrypted as
+    #   described below:
+    #
+    #   * Objects created by the PUT Object, POST Object, or Copy operation,
+    #     or through the AWS Management Console, and are encrypted by SSE-S3
+    #     or plaintext, have ETags that are an MD5 digest of their object
+    #     data.
+    #
+    #   * Objects created by the PUT Object, POST Object, or Copy operation,
+    #     or through the AWS Management Console, and are encrypted by SSE-C
+    #     or SSE-KMS, have ETags that are not an MD5 digest of their object
+    #     data.
+    #
+    #   * If an object is created by either the Multipart Upload or Part
+    #     Copy operation, the ETag is not an MD5 digest, regardless of the
+    #     method of encryption.
     #   @return [String]
     #
     # @!attribute [rw] size
@@ -10017,10 +10035,14 @@ module Aws::S3
 
     # @!attribute [rw] expiration
     #   If the expiration is configured for the object (see
-    #   PutBucketLifecycleConfiguration), the response includes this header.
-    #   It includes the expiry-date and rule-id key-value pairs that provide
-    #   information about object expiration. The value of the rule-id is URL
-    #   encoded.
+    #   [PutBucketLifecycleConfiguration][1]), the response includes this
+    #   header. It includes the expiry-date and rule-id key-value pairs that
+    #   provide information about object expiration. The value of the
+    #   rule-id is URL encoded.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_PutBucketLifecycleConfiguration.html
     #   @return [String]
     #
     # @!attribute [rw] etag
@@ -10308,7 +10330,7 @@ module Aws::S3
     #   in encrypting data. This value is used to store the object and then
     #   it is discarded; Amazon S3 does not store the encryption key. The
     #   key must be appropriate for use with the algorithm specified in the
-    #   `x-amz-server-side​-encryption​-customer-algorithm` header.
+    #   `x-amz-server-side-encryption-customer-algorithm` header.
     #   @return [String]
     #
     # @!attribute [rw] sse_customer_key_md5
@@ -10553,7 +10575,7 @@ module Aws::S3
     #   @return [String]
     #
     # @!attribute [rw] key
-    #   Name of the tag.
+    #   Name of the object key.
     #   @return [String]
     #
     # @!attribute [rw] version_id
@@ -10685,10 +10707,14 @@ module Aws::S3
       include Aws::Structure
     end
 
-    # This data type is deprecated. Use QueueConfiguration for the same
+    # This data type is deprecated. Use [QueueConfiguration][1] for the same
     # purposes. This data type specifies the configuration for publishing
     # messages to an Amazon Simple Queue Service (Amazon SQS) queue when
     # Amazon S3 detects specified events.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_QueueConfiguration.html
     #
     # @note When making an API call, you may pass QueueConfigurationDeprecated
     #   data as a hash:
@@ -11580,7 +11606,14 @@ module Aws::S3
       include Aws::Structure
     end
 
-    # Specifies the redirect behavior and when a redirect is applied.
+    # Specifies the redirect behavior and when a redirect is applied. For
+    # more information about routing rules, see [Configuring advanced
+    # conditional redirects][1] in the *Amazon Simple Storage Service
+    # Developer Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AmazonS3/latest/dev/how-to-page-redirect.html#advanced-conditional-redirects
     #
     # @note When making an API call, you may pass RoutingRule
     #   data as a hash:
@@ -12453,7 +12486,7 @@ module Aws::S3
     #       }
     #
     # @!attribute [rw] key
-    #   Name of the tag.
+    #   Name of the object key.
     #   @return [String]
     #
     # @!attribute [rw] value
@@ -12597,7 +12630,11 @@ module Aws::S3
     # A container for specifying the configuration for publication of
     # messages to an Amazon Simple Notification Service (Amazon SNS) topic
     # when Amazon S3 detects specified events. This data type is deprecated.
-    # Use TopicConfiguration instead.
+    # Use [TopicConfiguration][1] instead.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_TopicConfiguration.html
     #
     # @note When making an API call, you may pass TopicConfigurationDeprecated
     #   data as a hash:
@@ -12818,8 +12855,8 @@ module Aws::S3
     #   in encrypting data. This value is used to store the object and then
     #   it is discarded; Amazon S3 does not store the encryption key. The
     #   key must be appropriate for use with the algorithm specified in the
-    #   `x-amz-server-side​-encryption​-customer-algorithm` header. This
-    #   must be the same encryption key specified in the initiate multipart
+    #   `x-amz-server-side-encryption-customer-algorithm` header. This must
+    #   be the same encryption key specified in the initiate multipart
     #   upload request.
     #   @return [String]
     #
@@ -12988,8 +13025,8 @@ module Aws::S3
     #   in encrypting data. This value is used to store the object and then
     #   it is discarded; Amazon S3 does not store the encryption key. The
     #   key must be appropriate for use with the algorithm specified in the
-    #   `x-amz-server-side​-encryption​-customer-algorithm header`. This
-    #   must be the same encryption key specified in the initiate multipart
+    #   `x-amz-server-side-encryption-customer-algorithm header`. This must
+    #   be the same encryption key specified in the initiate multipart
     #   upload request.
     #   @return [String]
     #

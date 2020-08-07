@@ -402,27 +402,32 @@ module Aws::S3
     # completely free all storage consumed by all parts.
     #
     # To verify that all parts have been removed, so you don't get charged
-    # for the part storage, you should call the ListParts operation and
+    # for the part storage, you should call the [ListParts][1] operation and
     # ensure that the parts list is empty.
     #
     # For information about permissions required to use the multipart upload
-    # API, see [Multipart Upload API and Permissions][1].
+    # API, see [Multipart Upload API and Permissions][2].
     #
     # The following operations are related to `AbortMultipartUpload`\:
     #
-    # * CreateMultipartUpload
+    # * [CreateMultipartUpload][3]
     #
-    # * UploadPart
+    # * [UploadPart][4]
     #
-    # * CompleteMultipartUpload
+    # * [CompleteMultipartUpload][5]
     #
-    # * ListParts
+    # * [ListParts][1]
     #
-    # * ListMultipartUploads
+    # * [ListMultipartUploads][6]
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/AmazonS3/latest/dev/mpuAndPermissions.html
+    # [1]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_ListParts.html
+    # [2]: https://docs.aws.amazon.com/AmazonS3/latest/dev/mpuAndPermissions.html
+    # [3]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_CreateMultipartUpload.html
+    # [4]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_UploadPart.html
+    # [5]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_CompleteMultipartUpload.html
+    # [6]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_ListMultipartUploads.html
     #
     # @option params [required, String] :bucket
     #   The bucket name to which the upload was taking place.
@@ -500,7 +505,7 @@ module Aws::S3
     # Completes a multipart upload by assembling previously uploaded parts.
     #
     # You first initiate the multipart upload and then upload all parts
-    # using the UploadPart operation. After successfully uploading all
+    # using the [UploadPart][1] operation. After successfully uploading all
     # relevant parts of an upload, you call this operation to complete the
     # upload. Upon receiving this request, Amazon S3 concatenates all the
     # parts in ascending order by part number to create a new object. In the
@@ -521,15 +526,15 @@ module Aws::S3
     #
     # Note that if `CompleteMultipartUpload` fails, applications should be
     # prepared to retry the failed requests. For more information, see
-    # [Amazon S3 Error Best Practices][1].
+    # [Amazon S3 Error Best Practices][2].
     #
     # For more information about multipart uploads, see [Uploading Objects
-    # Using Multipart Upload][2].
+    # Using Multipart Upload][3].
     #
     # For information about permissions required to use the multipart upload
-    # API, see [Multipart Upload API and Permissions][3].
+    # API, see [Multipart Upload API and Permissions][4].
     #
-    # `GetBucketLifecycle` has the following special errors:
+    # `CompleteMultipartUpload` has the following special errors:
     #
     # * Error code: `EntityTooSmall`
     #
@@ -564,21 +569,26 @@ module Aws::S3
     #
     # The following operations are related to `CompleteMultipartUpload`\:
     #
-    # * CreateMultipartUpload
+    # * [CreateMultipartUpload][5]
     #
-    # * UploadPart
+    # * [UploadPart][1]
     #
-    # * AbortMultipartUpload
+    # * [AbortMultipartUpload][6]
     #
-    # * ListParts
+    # * [ListParts][7]
     #
-    # * ListMultipartUploads
+    # * [ListMultipartUploads][8]
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/AmazonS3/latest/dev/ErrorBestPractices.html
-    # [2]: https://docs.aws.amazon.com/AmazonS3/latest/dev/uploadobjusingmpu.html
-    # [3]: https://docs.aws.amazon.com/AmazonS3/latest/dev/mpuAndPermissions.html
+    # [1]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_UploadPart.html
+    # [2]: https://docs.aws.amazon.com/AmazonS3/latest/dev/ErrorBestPractices.html
+    # [3]: https://docs.aws.amazon.com/AmazonS3/latest/dev/uploadobjusingmpu.html
+    # [4]: https://docs.aws.amazon.com/AmazonS3/latest/dev/mpuAndPermissions.html
+    # [5]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_CreateMultipartUpload.html
+    # [6]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_AbortMultipartUpload.html
+    # [7]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_ListParts.html
+    # [8]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_ListMultipartUploads.html
     #
     # @option params [required, String] :bucket
     #   Name of the bucket to which the multipart upload was initiated.
@@ -835,15 +845,15 @@ module Aws::S3
     #
     # If the source object's storage class is GLACIER, you must restore a
     # copy of this object before you can use it as a source object for the
-    # copy operation. For more information, see .
+    # copy operation. For more information, see [RestoreObject][12].
     #
     # The following operations are related to `CopyObject`\:
     #
-    # * PutObject
+    # * [PutObject][13]
     #
-    # * GetObject
+    # * [GetObject][14]
     #
-    # For more information, see [Copying Objects][12].
+    # For more information, see [Copying Objects][15].
     #
     #
     #
@@ -858,7 +868,10 @@ module Aws::S3
     # [9]: https://docs.aws.amazon.com/AmazonS3/latest/dev/acl-overview.html
     # [10]: https://docs.aws.amazon.com/AmazonS3/latest/dev/acl-using-rest-api.html
     # [11]: https://docs.aws.amazon.com/AmazonS3/latest/dev/storage-class-intro.html
-    # [12]: https://docs.aws.amazon.com/AmazonS3/latest/dev/CopyingObjectsExamples.html
+    # [12]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_RestoreObject.html
+    # [13]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_PutObject.html
+    # [14]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_GetObject.html
+    # [15]: https://docs.aws.amazon.com/AmazonS3/latest/dev/CopyingObjectsExamples.html
     #
     # @option params [String] :acl
     #   The canned ACL to apply to the object.
@@ -952,7 +965,7 @@ module Aws::S3
     #   encrypting data. This value is used to store the object and then it is
     #   discarded; Amazon S3 does not store the encryption key. The key must
     #   be appropriate for use with the algorithm specified in the
-    #   `x-amz-server-side​-encryption​-customer-algorithm` header.
+    #   `x-amz-server-side-encryption-customer-algorithm` header.
     #
     # @option params [String] :sse_customer_key_md5
     #   Specifies the 128-bit MD5 digest of the encryption key according to
@@ -1207,9 +1220,9 @@ module Aws::S3
     #
     # The following operations are related to `CreateBucket`\:
     #
-    # * PutObject
+    # * [PutObject][7]
     #
-    # * DeleteBucket
+    # * [DeleteBucket][8]
     #
     #
     #
@@ -1219,6 +1232,8 @@ module Aws::S3
     # [4]: https://docs.aws.amazon.com/AmazonS3/latest/dev/acl-overview.html#CannedACL
     # [5]: https://docs.aws.amazon.com/AmazonS3/latest/dev/acl-overview.html
     # [6]: https://docs.aws.amazon.com/general/latest/gr/rande.html#s3_region
+    # [7]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_PutObject.html
+    # [8]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_DeleteBucket.html
     #
     # @option params [String] :acl
     #   The canned ACL to apply to the bucket.
@@ -1316,29 +1331,29 @@ module Aws::S3
     # This operation initiates a multipart upload and returns an upload ID.
     # This upload ID is used to associate all of the parts in the specific
     # multipart upload. You specify this upload ID in each of your
-    # subsequent upload part requests (see UploadPart). You also include
-    # this upload ID in the final request to either complete or abort the
-    # multipart upload request.
+    # subsequent upload part requests (see [UploadPart][1]). You also
+    # include this upload ID in the final request to either complete or
+    # abort the multipart upload request.
     #
     # For more information about multipart uploads, see [Multipart Upload
-    # Overview][1].
+    # Overview][2].
     #
     # If you have configured a lifecycle rule to abort incomplete multipart
     # uploads, the upload must complete within the number of days specified
     # in the bucket lifecycle configuration. Otherwise, the incomplete
     # multipart upload becomes eligible for an abort operation and Amazon S3
     # aborts the multipart upload. For more information, see [Aborting
-    # Incomplete Multipart Uploads Using a Bucket Lifecycle Policy][2].
+    # Incomplete Multipart Uploads Using a Bucket Lifecycle Policy][3].
     #
     # For information about the permissions required to use the multipart
-    # upload API, see [Multipart Upload API and Permissions][3].
+    # upload API, see [Multipart Upload API and Permissions][4].
     #
     # For request signing, multipart upload is just a series of regular
     # requests. You initiate a multipart upload, send one or more requests
     # to upload parts, and then complete the multipart upload process. You
     # sign each request individually. There is nothing special about signing
     # multipart upload requests. For more information about signing, see
-    # [Authenticating Requests (AWS Signature Version 4)][4].
+    # [Authenticating Requests (AWS Signature Version 4)][5].
     #
     # <note markdown="1"> After you initiate a multipart upload and upload one or more parts, to
     # stop being charged for storing the uploaded parts, you must either
@@ -1354,9 +1369,9 @@ module Aws::S3
     # your own encryption key, or use AWS Key Management Service (AWS KMS)
     # customer master keys (CMKs) or Amazon S3-managed encryption keys. If
     # you choose to provide your own encryption key, the request headers you
-    # provide in UploadPart) and UploadPartCopy) requests must match the
-    # headers you used in the request to initiate the upload by using
-    # `CreateMultipartUpload`.
+    # provide in [UploadPart](AmazonS3/latest/API/API_UploadPart.html) and
+    # [UploadPartCopy][6] requests must match the headers you used in the
+    # request to initiate the upload by using `CreateMultipartUpload`.
     #
     # To perform a multipart upload with encryption using an AWS KMS CMK,
     # the requester must have permission to the `kms:Encrypt`,
@@ -1372,7 +1387,7 @@ module Aws::S3
     # both the key policy and your IAM user or role.
     #
     # For more information, see [Protecting Data Using Server-Side
-    # Encryption][5].
+    # Encryption][7].
     #
     # Access Permissions
     #
@@ -1382,13 +1397,13 @@ module Aws::S3
     #   request headers:
     #
     #   * Specify a canned ACL with the `x-amz-acl` request header. For more
-    #     information, see [Canned ACL][6].
+    #     information, see [Canned ACL][8].
     #
     #   * Specify access permissions explicitly with the `x-amz-grant-read`,
     #     `x-amz-grant-read-acp`, `x-amz-grant-write-acp`, and
     #     `x-amz-grant-full-control` headers. These parameters map to the
     #     set of permissions that Amazon S3 supports in an ACL. For more
-    #     information, see [Access Control List (ACL) Overview][7].
+    #     information, see [Access Control List (ACL) Overview][9].
     #
     #   You can use either a canned ACL or specify access permissions
     #   explicitly. You cannot do both.
@@ -1407,7 +1422,7 @@ module Aws::S3
     #     want AWS to manage the keys used to encrypt data, specify the
     #     following headers in the request.
     #
-    #     * x-amz-server-side​-encryption
+    #     * x-amz-server-side-encryption
     #
     #     * x-amz-server-side-encryption-aws-kms-key-id
     #
@@ -1424,21 +1439,21 @@ module Aws::S3
     #
     #     For more information about server-side encryption with CMKs stored
     #     in AWS KMS (SSE-KMS), see [Protecting Data Using Server-Side
-    #     Encryption with CMKs stored in AWS KMS][8].
+    #     Encryption with CMKs stored in AWS KMS][10].
     #
     #   * Use customer-provided encryption keys – If you want to manage your
     #     own encryption keys, provide all the following headers in the
     #     request.
     #
-    #     * x-amz-server-side​-encryption​-customer-algorithm
+    #     * x-amz-server-side-encryption-customer-algorithm
     #
-    #     * x-amz-server-side​-encryption​-customer-key
+    #     * x-amz-server-side-encryption-customer-key
     #
-    #     * x-amz-server-side​-encryption​-customer-key-MD5
+    #     * x-amz-server-side-encryption-customer-key-MD5
     #
     #     For more information about server-side encryption with CMKs stored
     #     in AWS KMS (SSE-KMS), see [Protecting Data Using Server-Side
-    #     Encryption with CMKs stored in AWS KMS][8].
+    #     Encryption with CMKs stored in AWS KMS][10].
     #
     # Access-Control-List (ACL)-Specific Request Headers
     #
@@ -1448,19 +1463,19 @@ module Aws::S3
     #   permissions to individual AWS accounts or to predefined groups
     #   defined by Amazon S3. These permissions are then added to the access
     #   control list (ACL) on the object. For more information, see [Using
-    #   ACLs][9]. With this operation, you can grant access permissions
+    #   ACLs][11]. With this operation, you can grant access permissions
     #   using one of the following two methods:
     #
     #   * Specify a canned ACL (`x-amz-acl`) — Amazon S3 supports a set of
     #     predefined ACLs, known as *canned ACLs*. Each canned ACL has a
     #     predefined set of grantees and permissions. For more information,
-    #     see [Canned ACL][6].
+    #     see [Canned ACL][8].
     #
     #   * Specify access permissions explicitly — To explicitly grant access
     #     permissions to specific AWS accounts or groups, use the following
     #     headers. Each header maps to specific permissions that Amazon S3
     #     supports in an ACL. For more information, see [Access Control List
-    #     (ACL) Overview][7]. In the header, you specify a list of grantees
+    #     (ACL) Overview][9]. In the header, you specify a list of grantees
     #     who get the specific permission. To grant permissions explicitly,
     #     use:
     #
@@ -1505,7 +1520,7 @@ module Aws::S3
     #       * South America (São Paulo)
     #
     #        For a list of all the Amazon S3 supported Regions and endpoints,
-    #       see [Regions and Endpoints][10] in the AWS General Reference.
+    #       see [Regions and Endpoints][12] in the AWS General Reference.
     #
     #        </note>
     #
@@ -1517,28 +1532,34 @@ module Aws::S3
     #
     # The following operations are related to `CreateMultipartUpload`\:
     #
-    # * UploadPart
+    # * [UploadPart][1]
     #
-    # * CompleteMultipartUpload
+    # * [CompleteMultipartUpload][13]
     #
-    # * AbortMultipartUpload
+    # * [AbortMultipartUpload][14]
     #
-    # * ListParts
+    # * [ListParts][15]
     #
-    # * ListMultipartUploads
+    # * [ListMultipartUploads][16]
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/AmazonS3/latest/dev/mpuoverview.html
-    # [2]: https://docs.aws.amazon.com/AmazonS3/latest/dev/mpuoverview.html#mpu-abort-incomplete-mpu-lifecycle-config
-    # [3]: https://docs.aws.amazon.com/AmazonS3/latest/dev/mpuAndPermissions.html
-    # [4]: https://docs.aws.amazon.com/AmazonS3/latest/API/sig-v4-authenticating-requests.html
-    # [5]: https://docs.aws.amazon.com/AmazonS3/latest/dev/serv-side-encryption.html
-    # [6]: https://docs.aws.amazon.com/AmazonS3/latest/dev/acl-overview.html#CannedACL
-    # [7]: https://docs.aws.amazon.com/AmazonS3/latest/dev/acl-overview.html
-    # [8]: https://docs.aws.amazon.com/AmazonS3/latest/dev/UsingKMSEncryption.html
-    # [9]: https://docs.aws.amazon.com/AmazonS3/latest/dev/S3_ACLs_UsingACLs.html
-    # [10]: https://docs.aws.amazon.com/general/latest/gr/rande.html#s3_region
+    # [1]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_UploadPart.html
+    # [2]: https://docs.aws.amazon.com/AmazonS3/latest/dev/mpuoverview.html
+    # [3]: https://docs.aws.amazon.com/AmazonS3/latest/dev/mpuoverview.html#mpu-abort-incomplete-mpu-lifecycle-config
+    # [4]: https://docs.aws.amazon.com/AmazonS3/latest/dev/mpuAndPermissions.html
+    # [5]: https://docs.aws.amazon.com/AmazonS3/latest/API/sig-v4-authenticating-requests.html
+    # [6]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_UploadPartCopy.html
+    # [7]: https://docs.aws.amazon.com/AmazonS3/latest/dev/serv-side-encryption.html
+    # [8]: https://docs.aws.amazon.com/AmazonS3/latest/dev/acl-overview.html#CannedACL
+    # [9]: https://docs.aws.amazon.com/AmazonS3/latest/dev/acl-overview.html
+    # [10]: https://docs.aws.amazon.com/AmazonS3/latest/dev/UsingKMSEncryption.html
+    # [11]: https://docs.aws.amazon.com/AmazonS3/latest/dev/S3_ACLs_UsingACLs.html
+    # [12]: https://docs.aws.amazon.com/general/latest/gr/rande.html#s3_region
+    # [13]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_CompleteMultipartUpload.html
+    # [14]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_AbortMultipartUpload.html
+    # [15]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_ListParts.html
+    # [16]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_ListMultipartUploads.html
     #
     # @option params [String] :acl
     #   The canned ACL to apply to the object.
@@ -1606,7 +1627,7 @@ module Aws::S3
     #   encrypting data. This value is used to store the object and then it is
     #   discarded; Amazon S3 does not store the encryption key. The key must
     #   be appropriate for use with the algorithm specified in the
-    #   `x-amz-server-side​-encryption​-customer-algorithm` header.
+    #   `x-amz-server-side-encryption-customer-algorithm` header.
     #
     # @option params [String] :sse_customer_key_md5
     #   Specifies the 128-bit MD5 digest of the encryption key according to
@@ -1750,8 +1771,14 @@ module Aws::S3
     #
     # **Related Resources**
     #
-    # *
-    # *
+    # * [CreateBucket][1]
+    #
+    # * [DeleteObject][2]
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_CreateBucket.html
+    # [2]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_DeleteObject.html
     #
     # @option params [required, String] :bucket
     #   Specifies the bucket being deleted.
@@ -1798,15 +1825,20 @@ module Aws::S3
     # The following operations are related to
     # `DeleteBucketAnalyticsConfiguration`\:
     #
-    # *
-    # *
-    # *
+    # * [GetBucketAnalyticsConfiguration][4]
+    #
+    # * [ListBucketAnalyticsConfigurations][5]
+    #
+    # * [PutBucketAnalyticsConfiguration][6]
     #
     #
     #
     # [1]: https://docs.aws.amazon.com/AmazonS3/latest/dev/using-with-s3-actions.html#using-with-s3-actions-related-to-bucket-subresources
     # [2]: https://docs.aws.amazon.com/AmazonS3/latest/dev/s3-access-control.html
     # [3]: https://docs.aws.amazon.com/AmazonS3/latest/dev/analytics-storage-class.html
+    # [4]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_GetBucketAnalyticsConfiguration.html
+    # [5]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_ListBucketAnalyticsConfigurations.html
+    # [6]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_PutBucketAnalyticsConfiguration.html
     #
     # @option params [required, String] :bucket
     #   The name of the bucket from which an analytics configuration is
@@ -1844,12 +1876,15 @@ module Aws::S3
     #
     # **Related Resources:**
     #
-    # *
-    # * RESTOPTIONSobject
+    # * [PutBucketCors][2]
+    #
+    # * [RESTOPTIONSobject][3]
     #
     #
     #
     # [1]: https://docs.aws.amazon.com/AmazonS3/latest/dev/cors.html
+    # [2]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_PutBucketCors.html
+    # [3]: https://docs.aws.amazon.com/AmazonS3/latest/API/RESTOPTIONSobject.html
     #
     # @option params [required, String] :bucket
     #   Specifies the bucket whose `cors` configuration is being deleted.
@@ -1895,15 +1930,17 @@ module Aws::S3
     #
     # **Related Resources**
     #
-    # * PutBucketEncryption
+    # * [PutBucketEncryption][4]
     #
-    # * GetBucketEncryption
+    # * [GetBucketEncryption][5]
     #
     #
     #
     # [1]: https://docs.aws.amazon.com/AmazonS3/latest/dev/bucket-encryption.html
     # [2]: https://docs.aws.amazon.com/AmazonS3/latest/dev/using-with-s3-actions.html#using-with-s3-actions-related-to-bucket-subresources
     # [3]: https://docs.aws.amazon.com/AmazonS3/latest/dev/s3-access-control.html
+    # [4]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_PutBucketEncryption.html
+    # [5]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_GetBucketEncryption.html
     #
     # @option params [required, String] :bucket
     #   The name of the bucket containing the server-side encryption
@@ -1941,17 +1978,20 @@ module Aws::S3
     #
     # Operations related to `DeleteBucketInventoryConfiguration` include:
     #
-    # * GetBucketInventoryConfiguration
+    # * [GetBucketInventoryConfiguration][4]
     #
-    # * PutBucketInventoryConfiguration
+    # * [PutBucketInventoryConfiguration][5]
     #
-    # * ListBucketInventoryConfigurations
+    # * [ListBucketInventoryConfigurations][6]
     #
     #
     #
     # [1]: https://docs.aws.amazon.com/AmazonS3/latest/dev/using-with-s3-actions.html#using-with-s3-actions-related-to-bucket-subresources
     # [2]: https://docs.aws.amazon.com/AmazonS3/latest/dev/s3-access-control.html
     # [3]: https://docs.aws.amazon.com/AmazonS3/latest/dev/storage-inventory.html
+    # [4]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_GetBucketInventoryConfiguration.html
+    # [5]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_PutBucketInventoryConfiguration.html
+    # [6]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_ListBucketInventoryConfigurations.html
     #
     # @option params [required, String] :bucket
     #   The name of the bucket containing the inventory configuration to
@@ -1997,13 +2037,15 @@ module Aws::S3
     #
     # Related actions include:
     #
-    # * PutBucketLifecycleConfiguration
+    # * [PutBucketLifecycleConfiguration][2]
     #
-    # * GetBucketLifecycleConfiguration
+    # * [GetBucketLifecycleConfiguration][3]
     #
     #
     #
     # [1]: https://docs.aws.amazon.com/AmazonS3/latest/dev/intro-lifecycle-rules.html#intro-lifecycle-rules-actions
+    # [2]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_PutBucketLifecycleConfiguration.html
+    # [3]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_GetBucketLifecycleConfiguration.html
     #
     # @option params [required, String] :bucket
     #   The bucket name of the lifecycle to delete.
@@ -2051,11 +2093,11 @@ module Aws::S3
     # The following operations are related to
     # `DeleteBucketMetricsConfiguration`\:
     #
-    # * GetBucketMetricsConfiguration
+    # * [GetBucketMetricsConfiguration][4]
     #
-    # * PutBucketMetricsConfiguration
+    # * [PutBucketMetricsConfiguration][5]
     #
-    # * ListBucketMetricsConfigurations
+    # * [ListBucketMetricsConfigurations][6]
     #
     # * [Monitoring Metrics with Amazon CloudWatch][3]
     #
@@ -2064,6 +2106,9 @@ module Aws::S3
     # [1]: https://docs.aws.amazon.com/AmazonS3/latest/dev/using-with-s3-actions.html#using-with-s3-actions-related-to-bucket-subresources
     # [2]: https://docs.aws.amazon.com/AmazonS3/latest/dev/s3-access-control.html
     # [3]: https://docs.aws.amazon.com/AmazonS3/latest/dev/cloudwatch-monitoring.html
+    # [4]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_GetBucketMetricsConfiguration.html
+    # [5]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_PutBucketMetricsConfiguration.html
+    # [6]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_ListBucketMetricsConfigurations.html
     #
     # @option params [required, String] :bucket
     #   The name of the bucket containing the metrics configuration to delete.
@@ -2111,9 +2156,14 @@ module Aws::S3
     #
     # The following operations are related to `DeleteBucketPolicy`
     #
-    # * CreateBucket
+    # * [CreateBucket][1]
     #
-    # * DeleteObject
+    # * [DeleteObject][2]
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_CreateBucket.html
+    # [2]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_DeleteObject.html
     #
     # @option params [required, String] :bucket
     #   The bucket name.
@@ -2164,14 +2214,16 @@ module Aws::S3
     #
     # The following operations are related to `DeleteBucketReplication`\:
     #
-    # * PutBucketReplication
+    # * [PutBucketReplication][3]
     #
-    # * GetBucketReplication
+    # * [GetBucketReplication][4]
     #
     #
     #
     # [1]: https://docs.aws.amazon.com/AmazonS3/latest/dev/using-with-s3-actions.html#using-with-s3-actions-related-to-bucket-subresources
     # [2]: https://docs.aws.amazon.com/AmazonS3/latest/dev/s3-access-control.html
+    # [3]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_PutBucketReplication.html
+    # [4]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_GetBucketReplication.html
     #
     # @option params [required, String] :bucket
     #   The bucket name.
@@ -2210,9 +2262,14 @@ module Aws::S3
     #
     # The following operations are related to `DeleteBucketTagging`\:
     #
-    # * GetBucketTagging
+    # * [GetBucketTagging][1]
     #
-    # * PutBucketTagging
+    # * [PutBucketTagging][2]
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_GetBucketTagging.html
+    # [2]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_PutBucketTagging.html
     #
     # @option params [required, String] :bucket
     #   The bucket that has the tag set to be removed.
@@ -2261,13 +2318,15 @@ module Aws::S3
     #
     # The following operations are related to `DeleteBucketWebsite`\:
     #
-    # * GetBucketWebsite
+    # * [GetBucketWebsite][2]
     #
-    # * PutBucketWebsite
+    # * [PutBucketWebsite][3]
     #
     #
     #
     # [1]: https://docs.aws.amazon.com/AmazonS3/latest/dev/WebsiteHosting.html
+    # [2]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_GetBucketWebsite.html
+    # [3]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_PutBucketWebsite.html
     #
     # @option params [required, String] :bucket
     #   The bucket name for which you want to remove the website
@@ -2318,15 +2377,15 @@ module Aws::S3
     # see sample requests that use versioning, see [Sample Request][2].
     #
     # You can delete objects by explicitly calling the DELETE Object API or
-    # configure its lifecycle (PutBucketLifecycle) to enable Amazon S3 to
-    # remove them for you. If you want to block users or accounts from
+    # configure its lifecycle ([PutBucketLifecycle][3]) to enable Amazon S3
+    # to remove them for you. If you want to block users or accounts from
     # removing or deleting objects from your bucket, you must deny them the
     # `s3:DeleteObject`, `s3:DeleteObjectVersion`, and
     # `s3:PutLifeCycleConfiguration` actions.
     #
     # The following operation is related to `DeleteObject`\:
     #
-    # * PutObject
+    # * [PutObject][4]
     #
     # ^
     #
@@ -2334,6 +2393,8 @@ module Aws::S3
     #
     # [1]: https://docs.aws.amazon.com/AmazonS3/latest/dev/UsingMFADelete.html
     # [2]: https://docs.aws.amazon.com/AmazonS3/latest/API/RESTObjectDELETE.html#ExampleVersionObjectDelete
+    # [3]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_PutBucketLifecycle.html
+    # [4]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_PutObject.html
     #
     # @option params [required, String] :bucket
     #   The bucket name of the bucket containing the object.
@@ -2445,13 +2506,15 @@ module Aws::S3
     # The following operations are related to
     # `DeleteBucketMetricsConfiguration`\:
     #
-    # * PutObjectTagging
+    # * [PutObjectTagging][2]
     #
-    # * GetObjectTagging
+    # * [GetObjectTagging][3]
     #
     #
     #
     # [1]: https://docs.aws.amazon.com/AmazonS3/latest/dev/object-tagging.html
+    # [2]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_PutObjectTagging.html
+    # [3]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_GetObjectTagging.html
     #
     # @option params [required, String] :bucket
     #   The bucket name containing the objects from which to remove the tags.
@@ -2469,7 +2532,7 @@ module Aws::S3
     #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/dev/using-access-points.html
     #
     # @option params [required, String] :key
-    #   Name of the tag.
+    #   Name of the object key.
     #
     # @option params [String] :version_id
     #   The versionId of the object that the tag-set will be removed from.
@@ -2478,6 +2541,21 @@ module Aws::S3
     #
     #   * {Types::DeleteObjectTaggingOutput#version_id #version_id} => String
     #
+    #
+    # @example Example: To remove tag set from an object
+    #
+    #   # The following example removes tag set associated with the specified object. If the bucket is versioning enabled, the
+    #   # operation removes tag set from the latest object version.
+    #
+    #   resp = client.delete_object_tagging({
+    #     bucket: "examplebucket", 
+    #     key: "HappyFace.jpg", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     version_id: "null", 
+    #   }
     #
     # @example Example: To remove tag set from an object version
     #
@@ -2493,21 +2571,6 @@ module Aws::S3
     #   resp.to_h outputs the following:
     #   {
     #     version_id: "ydlaNkwWm0SfKJR.T1b1fIdPRbldTYRI", 
-    #   }
-    #
-    # @example Example: To remove tag set from an object
-    #
-    #   # The following example removes tag set associated with the specified object. If the bucket is versioning enabled, the
-    #   # operation removes tag set from the latest object version.
-    #
-    #   resp = client.delete_object_tagging({
-    #     bucket: "examplebucket", 
-    #     key: "HappyFace.jpg", 
-    #   })
-    #
-    #   resp.to_h outputs the following:
-    #   {
-    #     version_id: "null", 
     #   }
     #
     # @example Request syntax with placeholder values
@@ -2565,19 +2628,24 @@ module Aws::S3
     #
     # The following operations are related to `DeleteObjects`\:
     #
-    # * CreateMultipartUpload
+    # * [CreateMultipartUpload][2]
     #
-    # * UploadPart
+    # * [UploadPart][3]
     #
-    # * CompleteMultipartUpload
+    # * [CompleteMultipartUpload][4]
     #
-    # * ListParts
+    # * [ListParts][5]
     #
-    # * AbortMultipartUpload
+    # * [AbortMultipartUpload][6]
     #
     #
     #
     # [1]: https://docs.aws.amazon.com/AmazonS3/latest/dev/Versioning.html#MultiFactorAuthenticationDelete
+    # [2]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_CreateMultipartUpload.html
+    # [3]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_UploadPart.html
+    # [4]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_CompleteMultipartUpload.html
+    # [5]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_ListParts.html
+    # [6]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_AbortMultipartUpload.html
     #
     # @option params [required, String] :bucket
     #   The bucket name containing the objects to delete.
@@ -2750,17 +2818,20 @@ module Aws::S3
     #
     # * [Using Amazon S3 Block Public Access][3]
     #
-    # * GetPublicAccessBlock
+    # * [GetPublicAccessBlock][4]
     #
-    # * PutPublicAccessBlock
+    # * [PutPublicAccessBlock][5]
     #
-    # * GetBucketPolicyStatus
+    # * [GetBucketPolicyStatus][6]
     #
     #
     #
     # [1]: https://docs.aws.amazon.com/AmazonS3/latest/dev/using-with-s3-actions.html#using-with-s3-actions-related-to-bucket-subresources
     # [2]: https://docs.aws.amazon.com/AmazonS3/latest/dev/s3-access-control.html
     # [3]: https://docs.aws.amazon.com/AmazonS3/latest/dev/access-control-block-public-access.html
+    # [4]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_GetPublicAccessBlock.html
+    # [5]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_PutPublicAccessBlock.html
+    # [6]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_GetBucketPolicyStatus.html
     #
     # @option params [required, String] :bucket
     #   The Amazon S3 bucket whose `PublicAccessBlock` configuration you want
@@ -2798,19 +2869,19 @@ module Aws::S3
     # Storage Service Developer Guide*.
     #
     # You set the Transfer Acceleration state of an existing bucket to
-    # `Enabled` or `Suspended` by using the PutBucketAccelerateConfiguration
-    # operation.
+    # `Enabled` or `Suspended` by using the
+    # [PutBucketAccelerateConfiguration][3] operation.
     #
     # A GET `accelerate` request does not return a state value for a bucket
     # that has no transfer acceleration state. A bucket has no Transfer
     # Acceleration state if a state has never been set on the bucket.
     #
     # For more information about transfer acceleration, see [Transfer
-    # Acceleration][3] in the Amazon Simple Storage Service Developer Guide.
+    # Acceleration][4] in the Amazon Simple Storage Service Developer Guide.
     #
     # **Related Resources**
     #
-    # * PutBucketAccelerateConfiguration
+    # * [PutBucketAccelerateConfiguration][3]
     #
     # ^
     #
@@ -2818,7 +2889,8 @@ module Aws::S3
     #
     # [1]: https://docs.aws.amazon.com/AmazonS3/latest/dev/using-with-s3-actions.html#using-with-s3-actions-related-to-bucket-subresources
     # [2]: https://docs.aws.amazon.com/AmazonS3/latest/dev/s3-access-control.html
-    # [3]: https://docs.aws.amazon.com/AmazonS3/latest/dev/transfer-acceleration.html
+    # [3]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_PutBucketAccelerateConfiguration.html
+    # [4]: https://docs.aws.amazon.com/AmazonS3/latest/dev/transfer-acceleration.html
     #
     # @option params [required, String] :bucket
     #   Name of the bucket for which the accelerate configuration is
@@ -2856,8 +2928,13 @@ module Aws::S3
     #
     # **Related Resources**
     #
-    # *
+    # * [ListObjects][1]
+    #
     # ^
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_ListObjects.html
     #
     # @option params [required, String] :bucket
     #   Specifies the S3 bucket whose ACL is being requested.
@@ -2912,15 +2989,20 @@ module Aws::S3
     #
     # **Related Resources**
     #
-    # *
-    # *
-    # *
+    # * [DeleteBucketAnalyticsConfiguration][4]
+    #
+    # * [ListBucketAnalyticsConfigurations][5]
+    #
+    # * [PutBucketAnalyticsConfiguration][6]
     #
     #
     #
     # [1]: https://docs.aws.amazon.com/AmazonS3/latest/dev/using-with-s3-actions.html#using-with-s3-actions-related-to-bucket-subresources
     # [2]: https://docs.aws.amazon.com/AmazonS3/latest/dev/s3-access-control.html
     # [3]: https://docs.aws.amazon.com/AmazonS3/latest/dev/analytics-storage-class.html
+    # [4]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_DeleteBucketAnalyticsConfiguration.html
+    # [5]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_ListBucketAnalyticsConfigurations.html
+    # [6]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_PutBucketAnalyticsConfiguration.html
     #
     # @option params [required, String] :bucket
     #   The name of the bucket from which an analytics configuration is
@@ -2976,13 +3058,15 @@ module Aws::S3
     #
     # The following operations are related to `GetBucketCors`\:
     #
-    # * PutBucketCors
+    # * [PutBucketCors][2]
     #
-    # * DeleteBucketCors
+    # * [DeleteBucketCors][3]
     #
     #
     #
     # [1]: https://docs.aws.amazon.com/AmazonS3/latest/dev/cors.html
+    # [2]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_PutBucketCors.html
+    # [3]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_DeleteBucketCors.html
     #
     # @option params [required, String] :bucket
     #   The bucket name for which to get the cors configuration.
@@ -3059,15 +3143,17 @@ module Aws::S3
     #
     # The following operations are related to `GetBucketEncryption`\:
     #
-    # * PutBucketEncryption
+    # * [PutBucketEncryption][4]
     #
-    # * DeleteBucketEncryption
+    # * [DeleteBucketEncryption][5]
     #
     #
     #
     # [1]: https://docs.aws.amazon.com/AmazonS3/latest/dev/bucket-encryption.html
     # [2]: https://docs.aws.amazon.com/AmazonS3/latest/dev/using-with-s3-actions.html#using-with-s3-actions-related-to-bucket-subresources
     # [3]: https://docs.aws.amazon.com/AmazonS3/latest/dev/s3-access-control.html
+    # [4]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_PutBucketEncryption.html
+    # [5]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_DeleteBucketEncryption.html
     #
     # @option params [required, String] :bucket
     #   The name of the bucket from which the server-side encryption
@@ -3114,17 +3200,20 @@ module Aws::S3
     # The following operations are related to
     # `GetBucketInventoryConfiguration`\:
     #
-    # * DeleteBucketInventoryConfiguration
+    # * [DeleteBucketInventoryConfiguration][4]
     #
-    # * ListBucketInventoryConfigurations
+    # * [ListBucketInventoryConfigurations][5]
     #
-    # * PutBucketInventoryConfiguration
+    # * [PutBucketInventoryConfiguration][6]
     #
     #
     #
     # [1]: https://docs.aws.amazon.com/AmazonS3/latest/dev/using-with-s3-actions.html#using-with-s3-actions-related-to-bucket-subresources
     # [2]: https://docs.aws.amazon.com/AmazonS3/latest/dev/s3-access-control.html
     # [3]: https://docs.aws.amazon.com/AmazonS3/latest/dev/storage-inventory.html
+    # [4]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_DeleteBucketInventoryConfiguration.html
+    # [5]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_ListBucketInventoryConfigurations.html
+    # [6]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_PutBucketInventoryConfiguration.html
     #
     # @option params [required, String] :bucket
     #   The name of the bucket containing the inventory configuration to
@@ -3169,20 +3258,21 @@ module Aws::S3
     end
 
     # For an updated version of this API, see
-    # GetBucketLifecycleConfiguration. If you configured a bucket lifecycle
-    # using the `filter` element, you should see the updated version of this
-    # topic. This topic is provided for backward compatibility.
+    # [GetBucketLifecycleConfiguration][1]. If you configured a bucket
+    # lifecycle using the `filter` element, you should see the updated
+    # version of this topic. This topic is provided for backward
+    # compatibility.
     #
     # Returns the lifecycle configuration information set on the bucket. For
     # information about lifecycle configuration, see [Object Lifecycle
-    # Management][1].
+    # Management][2].
     #
     # To use this operation, you must have permission to perform the
     # `s3:GetLifecycleConfiguration` action. The bucket owner has this
     # permission by default. The bucket owner can grant this permission to
     # others. For more information about permissions, see [Permissions
-    # Related to Bucket Subresource Operations][2] and [Managing Access
-    # Permissions to Your Amazon S3 Resources][3].
+    # Related to Bucket Subresource Operations][3] and [Managing Access
+    # Permissions to Your Amazon S3 Resources][4].
     #
     # `GetBucketLifecycle` has the following special error:
     #
@@ -3196,17 +3286,20 @@ module Aws::S3
     #
     # The following operations are related to `GetBucketLifecycle`\:
     #
-    # * GetBucketLifecycleConfiguration
+    # * [GetBucketLifecycleConfiguration][1]
     #
-    # * PutBucketLifecycle
+    # * [PutBucketLifecycle][5]
     #
-    # * DeleteBucketLifecycle
+    # * [DeleteBucketLifecycle][6]
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/AmazonS3/latest/dev/object-lifecycle-mgmt.html
-    # [2]: https://docs.aws.amazon.com/AmazonS3/latest/dev/using-with-s3-actions.html#using-with-s3-actions-related-to-bucket-subresources
-    # [3]: https://docs.aws.amazon.com/AmazonS3/latest/dev/s3-access-control.html
+    # [1]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_GetBucketLifecycleConfiguration.html
+    # [2]: https://docs.aws.amazon.com/AmazonS3/latest/dev/object-lifecycle-mgmt.html
+    # [3]: https://docs.aws.amazon.com/AmazonS3/latest/dev/using-with-s3-actions.html#using-with-s3-actions-related-to-bucket-subresources
+    # [4]: https://docs.aws.amazon.com/AmazonS3/latest/dev/s3-access-control.html
+    # [5]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_PutBucketLifecycle.html
+    # [6]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_DeleteBucketLifecycle.html
     #
     # @option params [required, String] :bucket
     #   The name of the bucket for which to get the lifecycle information.
@@ -3277,20 +3370,20 @@ module Aws::S3
     # specify a filter to select a subset of objects to which the rule
     # applies. If you are still using previous version of the lifecycle
     # configuration, it works. For the earlier API description, see
-    # GetBucketLifecycle.
+    # [GetBucketLifecycle][1].
     #
     #  </note>
     #
     # Returns the lifecycle configuration information set on the bucket. For
     # information about lifecycle configuration, see [Object Lifecycle
-    # Management][1].
+    # Management][2].
     #
     # To use this operation, you must have permission to perform the
     # `s3:GetLifecycleConfiguration` action. The bucket owner has this
     # permission, by default. The bucket owner can grant this permission to
     # others. For more information about permissions, see [Permissions
-    # Related to Bucket Subresource Operations][2] and [Managing Access
-    # Permissions to Your Amazon S3 Resources][3].
+    # Related to Bucket Subresource Operations][3] and [Managing Access
+    # Permissions to Your Amazon S3 Resources][4].
     #
     # `GetBucketLifecycleConfiguration` has the following special error:
     #
@@ -3305,17 +3398,20 @@ module Aws::S3
     # The following operations are related to
     # `GetBucketLifecycleConfiguration`\:
     #
-    # * GetBucketLifecycle
+    # * [GetBucketLifecycle][1]
     #
-    # * PutBucketLifecycle
+    # * [PutBucketLifecycle][5]
     #
-    # * DeleteBucketLifecycle
+    # * [DeleteBucketLifecycle][6]
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/AmazonS3/latest/dev/object-lifecycle-mgmt.html
-    # [2]: https://docs.aws.amazon.com/AmazonS3/latest/dev/using-with-s3-actions.html#using-with-s3-actions-related-to-bucket-subresources
-    # [3]: https://docs.aws.amazon.com/AmazonS3/latest/dev/s3-access-control.html
+    # [1]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_GetBucketLifecycle.html
+    # [2]: https://docs.aws.amazon.com/AmazonS3/latest/dev/object-lifecycle-mgmt.html
+    # [3]: https://docs.aws.amazon.com/AmazonS3/latest/dev/using-with-s3-actions.html#using-with-s3-actions-related-to-bucket-subresources
+    # [4]: https://docs.aws.amazon.com/AmazonS3/latest/dev/s3-access-control.html
+    # [5]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_PutBucketLifecycle.html
+    # [6]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_DeleteBucketLifecycle.html
     #
     # @option params [required, String] :bucket
     #   The name of the bucket for which to get the lifecycle information.
@@ -3393,16 +3489,21 @@ module Aws::S3
 
     # Returns the Region the bucket resides in. You set the bucket's Region
     # using the `LocationConstraint` request parameter in a `CreateBucket`
-    # request. For more information, see CreateBucket.
+    # request. For more information, see [CreateBucket][1].
     #
     # To use this implementation of the operation, you must be the bucket
     # owner.
     #
     # The following operations are related to `GetBucketLocation`\:
     #
-    # * GetObject
+    # * [GetObject][2]
     #
-    # * CreateBucket
+    # * [CreateBucket][1]
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_CreateBucket.html
+    # [2]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_GetObject.html
     #
     # @option params [required, String] :bucket
     #   The name of the bucket for which to get the location.
@@ -3450,9 +3551,14 @@ module Aws::S3
     #
     # The following operations are related to `GetBucketLogging`\:
     #
-    # * CreateBucket
+    # * [CreateBucket][1]
     #
-    # * PutBucketLogging
+    # * [PutBucketLogging][2]
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_CreateBucket.html
+    # [2]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_PutBucketLogging.html
     #
     # @option params [required, String] :bucket
     #   The bucket name for which to get the logging information.
@@ -3505,11 +3611,11 @@ module Aws::S3
     # The following operations are related to
     # `GetBucketMetricsConfiguration`\:
     #
-    # * PutBucketMetricsConfiguration
+    # * [PutBucketMetricsConfiguration][4]
     #
-    # * DeleteBucketMetricsConfiguration
+    # * [DeleteBucketMetricsConfiguration][5]
     #
-    # * ListBucketMetricsConfigurations
+    # * [ListBucketMetricsConfigurations][6]
     #
     # * [Monitoring Metrics with Amazon CloudWatch][3]
     #
@@ -3518,6 +3624,9 @@ module Aws::S3
     # [1]: https://docs.aws.amazon.com/AmazonS3/latest/dev/using-with-s3-actions.html#using-with-s3-actions-related-to-bucket-subresources
     # [2]: https://docs.aws.amazon.com/AmazonS3/latest/dev/s3-access-control.html
     # [3]: https://docs.aws.amazon.com/AmazonS3/latest/dev/cloudwatch-monitoring.html
+    # [4]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_PutBucketMetricsConfiguration.html
+    # [5]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_DeleteBucketMetricsConfiguration.html
+    # [6]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_ListBucketMetricsConfigurations.html
     #
     # @option params [required, String] :bucket
     #   The name of the bucket containing the metrics configuration to
@@ -3557,7 +3666,11 @@ module Aws::S3
       req.send_request(options)
     end
 
-    # No longer used, see GetBucketNotificationConfiguration.
+    # No longer used, see [GetBucketNotificationConfiguration][1].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_GetBucketNotificationConfiguration.html
     #
     # @option params [required, String] :bucket
     #   Name of the bucket for which to get the notification configuration.
@@ -3676,7 +3789,7 @@ module Aws::S3
     #
     # The following operation is related to `GetBucketNotification`\:
     #
-    # * PutBucketNotification
+    # * [PutBucketNotification][3]
     #
     # ^
     #
@@ -3684,6 +3797,7 @@ module Aws::S3
     #
     # [1]: https://docs.aws.amazon.com/AmazonS3/latest/dev/NotificationHowTo.html
     # [2]: https://docs.aws.amazon.com/AmazonS3/latest/dev/using-iam-policies.html
+    # [3]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_PutBucketNotification.html
     #
     # @option params [required, String] :bucket
     #   Name of the bucket for which to get the notification configuration.
@@ -3756,13 +3870,14 @@ module Aws::S3
     #
     # The following operation is related to `GetBucketPolicy`\:
     #
-    # * GetObject
+    # * [GetObject][2]
     #
     # ^
     #
     #
     #
     # [1]: https://docs.aws.amazon.com/AmazonS3/latest/dev/using-iam-policies.html
+    # [2]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_GetObject.html
     #
     # @option params [required, String] :bucket
     #   The bucket name for which to get the bucket policy.
@@ -3817,17 +3932,20 @@ module Aws::S3
     #
     # * [Using Amazon S3 Block Public Access][3]
     #
-    # * GetPublicAccessBlock
+    # * [GetPublicAccessBlock][4]
     #
-    # * PutPublicAccessBlock
+    # * [PutPublicAccessBlock][5]
     #
-    # * DeletePublicAccessBlock
+    # * [DeletePublicAccessBlock][6]
     #
     #
     #
     # [1]: https://docs.aws.amazon.com/AmazonS3/latest/dev/using-with-s3-actions.html
     # [2]: https://docs.aws.amazon.com/AmazonS3/latest/dev/access-control-block-public-access.html#access-control-block-public-access-policy-status
     # [3]: https://docs.aws.amazon.com/AmazonS3/latest/dev/access-control-block-public-access.html
+    # [4]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_GetPublicAccessBlock.html
+    # [5]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_PutPublicAccessBlock.html
+    # [6]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_DeletePublicAccessBlock.html
     #
     # @option params [required, String] :bucket
     #   The name of the Amazon S3 bucket whose policy status you want to
@@ -3875,19 +3993,22 @@ module Aws::S3
     # you must also include the `DeleteMarkerReplication` and `Priority`
     # elements. The response also returns those elements.
     #
-    # For information about `GetBucketReplication` errors, see
-    # ReplicationErrorCodeList
+    # For information about `GetBucketReplication` errors, see [List of
+    # replication-related error codes][3]
     #
     # The following operations are related to `GetBucketReplication`\:
     #
-    # * PutBucketReplication
+    # * [PutBucketReplication][4]
     #
-    # * DeleteBucketReplication
+    # * [DeleteBucketReplication][5]
     #
     #
     #
     # [1]: https://docs.aws.amazon.com/AmazonS3/latest/dev/replication.html
     # [2]: https://docs.aws.amazon.com/AmazonS3/latest/dev/using-iam-policies.html
+    # [3]: https://docs.aws.amazon.com/AmazonS3/latest/API/ErrorResponses.html#ReplicationErrorCodeList
+    # [4]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_PutBucketReplication.html
+    # [5]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_DeleteBucketReplication.html
     #
     # @option params [required, String] :bucket
     #   The bucket name for which to get the replication information.
@@ -3971,13 +4092,14 @@ module Aws::S3
     #
     # The following operations are related to `GetBucketRequestPayment`\:
     #
-    # * ListObjects
+    # * [ListObjects][2]
     #
     # ^
     #
     #
     #
     # [1]: https://docs.aws.amazon.com/AmazonS3/latest/dev/RequesterPaysBuckets.html
+    # [2]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_ListObjects.html
     #
     # @option params [required, String] :bucket
     #   The name of the bucket for which to get the payment request
@@ -4036,9 +4158,14 @@ module Aws::S3
     #
     # The following operations are related to `GetBucketTagging`\:
     #
-    # * PutBucketTagging
+    # * [PutBucketTagging][1]
     #
-    # * DeleteBucketTagging
+    # * [DeleteBucketTagging][2]
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_PutBucketTagging.html
+    # [2]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_DeleteBucketTagging.html
     #
     # @option params [required, String] :bucket
     #   The name of the bucket for which to get the tagging information.
@@ -4103,11 +4230,17 @@ module Aws::S3
     #
     # The following operations are related to `GetBucketVersioning`\:
     #
-    # * GetObject
+    # * [GetObject][1]
     #
-    # * PutObject
+    # * [PutObject][2]
     #
-    # * DeleteObject
+    # * [DeleteObject][3]
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_GetObject.html
+    # [2]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_PutObject.html
+    # [3]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_DeleteObject.html
     #
     # @option params [required, String] :bucket
     #   The name of the bucket for which to get the versioning information.
@@ -4165,13 +4298,15 @@ module Aws::S3
     #
     # The following operations are related to `DeleteBucketWebsite`\:
     #
-    # * DeleteBucketWebsite
+    # * [DeleteBucketWebsite][2]
     #
-    # * PutBucketWebsite
+    # * [PutBucketWebsite][3]
     #
     #
     #
     # [1]: https://docs.aws.amazon.com/AmazonS3/latest/dev/WebsiteHosting.html
+    # [2]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_DeleteBucketWebsite.html
+    # [3]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_PutBucketWebsite.html
     #
     # @option params [required, String] :bucket
     #   The bucket name for which to get the website configuration.
@@ -4255,13 +4390,13 @@ module Aws::S3
     # To distribute large files to many people, you can save bandwidth costs
     # by using BitTorrent. For more information, see [Amazon S3 Torrent][2].
     # For more information about returning the ACL of an object, see
-    # GetObjectAcl.
+    # [GetObjectAcl][3].
     #
     # If the object you are retrieving is stored in the GLACIER or
     # DEEP\_ARCHIVE storage classes, before you can retrieve the object you
-    # must first restore a copy using . Otherwise, this operation returns an
-    # `InvalidObjectStateError` error. For information about restoring
-    # archived objects, see [Restoring Archived Objects][3].
+    # must first restore a copy using [RestoreObject][4]. Otherwise, this
+    # operation returns an `InvalidObjectStateError` error. For information
+    # about restoring archived objects, see [Restoring Archived Objects][5].
     #
     # Encryption request headers, like `x-amz-server-side-encryption`,
     # should not be sent for GET requests if your object uses server-side
@@ -4275,25 +4410,25 @@ module Aws::S3
     # Amazon S3, then when you GET the object, you must use the following
     # headers:
     #
-    # * x-amz-server-side​-encryption​-customer-algorithm
+    # * x-amz-server-side-encryption-customer-algorithm
     #
-    # * x-amz-server-side​-encryption​-customer-key
+    # * x-amz-server-side-encryption-customer-key
     #
-    # * x-amz-server-side​-encryption​-customer-key-MD5
+    # * x-amz-server-side-encryption-customer-key-MD5
     #
     # For more information about SSE-C, see [Server-Side Encryption (Using
-    # Customer-Provided Encryption Keys)][4].
+    # Customer-Provided Encryption Keys)][6].
     #
     # Assuming you have permission to read object tags (permission for the
     # `s3:GetObjectVersionTagging` action), the response also returns the
     # `x-amz-tagging-count` header that provides the count of number of tags
-    # associated with the object. You can use GetObjectTagging to retrieve
-    # the tag set associated with an object.
+    # associated with the object. You can use [GetObjectTagging][7] to
+    # retrieve the tag set associated with an object.
     #
     # **Permissions**
     #
     # You need the `s3:GetObject` permission for this operation. For more
-    # information, see [Specifying Permissions in a Policy][5]. If the
+    # information, see [Specifying Permissions in a Policy][8]. If the
     # object you request does not exist, the error Amazon S3 returns depends
     # on whether you also have the `s3:ListBucket` permission.
     #
@@ -4315,7 +4450,7 @@ module Aws::S3
     #
     #  </note>
     #
-    # For more information about versioning, see PutBucketVersioning.
+    # For more information about versioning, see [PutBucketVersioning][9].
     #
     # **Overriding Response Header Values**
     #
@@ -4364,22 +4499,27 @@ module Aws::S3
     # to `false`, and; `If-Modified-Since` condition evaluates to `true`;
     # then, S3 returns 304 Not Modified response code.
     #
-    # For more information about conditional requests, see [RFC 7232][6].
+    # For more information about conditional requests, see [RFC 7232][10].
     #
     # The following operations are related to `GetObject`\:
     #
-    # * ListBuckets
+    # * [ListBuckets][11]
     #
-    # * GetObjectAcl
+    # * [GetObjectAcl][3]
     #
     #
     #
     # [1]: https://docs.aws.amazon.com/AmazonS3/latest/dev/VirtualHosting.html#VirtualHostingSpecifyBucket
     # [2]: https://docs.aws.amazon.com/AmazonS3/latest/dev/S3Torrent.html
-    # [3]: https://docs.aws.amazon.com/AmazonS3/latest/dev/restoring-objects.html
-    # [4]: https://docs.aws.amazon.com/AmazonS3/latest/dev/ServerSideEncryptionCustomerKeys.html
-    # [5]: https://docs.aws.amazon.com/AmazonS3/latest/dev/using-with-s3-actions.html
-    # [6]: https://tools.ietf.org/html/rfc7232
+    # [3]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_GetObjectAcl.html
+    # [4]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_RestoreObject.html
+    # [5]: https://docs.aws.amazon.com/AmazonS3/latest/dev/restoring-objects.html
+    # [6]: https://docs.aws.amazon.com/AmazonS3/latest/dev/ServerSideEncryptionCustomerKeys.html
+    # [7]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_GetObjectTagging.html
+    # [8]: https://docs.aws.amazon.com/AmazonS3/latest/dev/using-with-s3-actions.html
+    # [9]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_PutBucketVersioning.html
+    # [10]: https://tools.ietf.org/html/rfc7232
+    # [11]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_ListBuckets.html
     #
     # @option params [String, IO] :response_target
     #   Where to write response data, file path, or IO object.
@@ -4462,7 +4602,7 @@ module Aws::S3
     #   encrypting data. This value is used to store the object and then it is
     #   discarded; Amazon S3 does not store the encryption key. The key must
     #   be appropriate for use with the algorithm specified in the
-    #   `x-amz-server-side​-encryption​-customer-algorithm` header.
+    #   `x-amz-server-side-encryption-customer-algorithm` header.
     #
     # @option params [String] :sse_customer_key_md5
     #   Specifies the 128-bit MD5 digest of the encryption key according to
@@ -4677,11 +4817,17 @@ module Aws::S3
     #
     # The following operations are related to `GetObjectAcl`\:
     #
-    # * GetObject
+    # * [GetObject][1]
     #
-    # * DeleteObject
+    # * [DeleteObject][2]
     #
-    # * PutObject
+    # * [PutObject][3]
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_GetObject.html
+    # [2]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_DeleteObject.html
+    # [3]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_PutObject.html
     #
     # @option params [required, String] :bucket
     #   The bucket name that contains the object for which to get the ACL
@@ -4998,13 +5144,14 @@ module Aws::S3
     #
     # The following operation is related to `GetObjectTagging`\:
     #
-    # * PutObjectTagging
+    # * [PutObjectTagging][2]
     #
     # ^
     #
     #
     #
     # [1]: https://docs.aws.amazon.com/AmazonS3/latest/dev/object-tagging.html
+    # [2]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_PutObjectTagging.html
     #
     # @option params [required, String] :bucket
     #   The bucket name containing the object for which to get the tagging
@@ -5117,13 +5264,14 @@ module Aws::S3
     #
     # The following operation is related to `GetObjectTorrent`\:
     #
-    # * GetObject
+    # * [GetObject][2]
     #
     # ^
     #
     #
     #
     # [1]: https://docs.aws.amazon.com/AmazonS3/latest/dev/S3Torrent.html
+    # [2]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_GetObject.html
     #
     # @option params [String, IO] :response_target
     #   Where to write response data, file path, or IO object.
@@ -5207,17 +5355,20 @@ module Aws::S3
     #
     # * [Using Amazon S3 Block Public Access][3]
     #
-    # * PutPublicAccessBlock
+    # * [PutPublicAccessBlock][4]
     #
-    # * GetPublicAccessBlock
+    # * [GetPublicAccessBlock][5]
     #
-    # * DeletePublicAccessBlock
+    # * [DeletePublicAccessBlock][6]
     #
     #
     #
     # [1]: https://docs.aws.amazon.com/AmazonS3/latest/dev/using-with-s3-actions.html
     # [2]: https://docs.aws.amazon.com/AmazonS3/latest/dev/access-control-block-public-access.html#access-control-block-public-access-policy-status
     # [3]: https://docs.aws.amazon.com/AmazonS3/latest/dev/access-control-block-public-access.html
+    # [4]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_PutPublicAccessBlock.html
+    # [5]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_GetPublicAccessBlock.html
+    # [6]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_DeletePublicAccessBlock.html
     #
     # @option params [required, String] :bucket
     #   The name of the Amazon S3 bucket whose `PublicAccessBlock`
@@ -5316,11 +5467,11 @@ module Aws::S3
     # Amazon S3, then when you retrieve the metadata from the object, you
     # must use the following headers:
     #
-    # * x-amz-server-side​-encryption​-customer-algorithm
+    # * x-amz-server-side-encryption-customer-algorithm
     #
-    # * x-amz-server-side​-encryption​-customer-key
+    # * x-amz-server-side-encryption-customer-key
     #
-    # * x-amz-server-side​-encryption​-customer-key-MD5
+    # * x-amz-server-side-encryption-customer-key-MD5
     #
     # For more information about SSE-C, see [Server-Side Encryption (Using
     # Customer-Provided Encryption Keys)][1].
@@ -5374,7 +5525,7 @@ module Aws::S3
     #
     # The following operation is related to `HeadObject`\:
     #
-    # * GetObject
+    # * [GetObject][5]
     #
     # ^
     #
@@ -5384,6 +5535,7 @@ module Aws::S3
     # [2]: https://docs.aws.amazon.com/AmazonS3/latest/API/RESTCommonRequestHeaders.html
     # [3]: https://tools.ietf.org/html/rfc7232
     # [4]: https://docs.aws.amazon.com/AmazonS3/latest/dev/using-with-s3-actions.html
+    # [5]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_GetObject.html
     #
     # @option params [required, String] :bucket
     #   The name of the bucket containing the object.
@@ -5429,7 +5581,7 @@ module Aws::S3
     #   encrypting data. This value is used to store the object and then it is
     #   discarded; Amazon S3 does not store the encryption key. The key must
     #   be appropriate for use with the algorithm specified in the
-    #   `x-amz-server-side​-encryption​-customer-algorithm` header.
+    #   `x-amz-server-side-encryption-customer-algorithm` header.
     #
     # @option params [String] :sse_customer_key_md5
     #   Specifies the 128-bit MD5 digest of the encryption key according to
@@ -5599,17 +5751,20 @@ module Aws::S3
     # The following operations are related to
     # `ListBucketAnalyticsConfigurations`\:
     #
-    # * GetBucketAnalyticsConfiguration
+    # * [GetBucketAnalyticsConfiguration][4]
     #
-    # * DeleteBucketAnalyticsConfiguration
+    # * [DeleteBucketAnalyticsConfiguration][5]
     #
-    # * PutBucketAnalyticsConfiguration
+    # * [PutBucketAnalyticsConfiguration][6]
     #
     #
     #
     # [1]: https://docs.aws.amazon.com/AmazonS3/latest/dev/using-with-s3-actions.html#using-with-s3-actions-related-to-bucket-subresources
     # [2]: https://docs.aws.amazon.com/AmazonS3/latest/dev/s3-access-control.html
     # [3]: https://docs.aws.amazon.com/AmazonS3/latest/dev/analytics-storage-class.html
+    # [4]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_GetBucketAnalyticsConfiguration.html
+    # [5]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_DeleteBucketAnalyticsConfiguration.html
+    # [6]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_PutBucketAnalyticsConfiguration.html
     #
     # @option params [required, String] :bucket
     #   The name of the bucket from which analytics configurations are
@@ -5687,17 +5842,20 @@ module Aws::S3
     # The following operations are related to
     # `ListBucketInventoryConfigurations`\:
     #
-    # * GetBucketInventoryConfiguration
+    # * [GetBucketInventoryConfiguration][4]
     #
-    # * DeleteBucketInventoryConfiguration
+    # * [DeleteBucketInventoryConfiguration][5]
     #
-    # * PutBucketInventoryConfiguration
+    # * [PutBucketInventoryConfiguration][6]
     #
     #
     #
     # [1]: https://docs.aws.amazon.com/AmazonS3/latest/dev/using-with-s3-actions.html#using-with-s3-actions-related-to-bucket-subresources
     # [2]: https://docs.aws.amazon.com/AmazonS3/latest/dev/s3-access-control.html
     # [3]: https://docs.aws.amazon.com/AmazonS3/latest/dev/storage-inventory.html
+    # [4]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_GetBucketInventoryConfiguration.html
+    # [5]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_DeleteBucketInventoryConfiguration.html
+    # [6]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_PutBucketInventoryConfiguration.html
     #
     # @option params [required, String] :bucket
     #   The name of the bucket containing the inventory configurations to
@@ -5778,17 +5936,20 @@ module Aws::S3
     # The following operations are related to
     # `ListBucketMetricsConfigurations`\:
     #
-    # * PutBucketMetricsConfiguration
+    # * [PutBucketMetricsConfiguration][4]
     #
-    # * GetBucketMetricsConfiguration
+    # * [GetBucketMetricsConfiguration][5]
     #
-    # * DeleteBucketMetricsConfiguration
+    # * [DeleteBucketMetricsConfiguration][6]
     #
     #
     #
     # [1]: https://docs.aws.amazon.com/AmazonS3/latest/dev/using-with-s3-actions.html#using-with-s3-actions-related-to-bucket-subresources
     # [2]: https://docs.aws.amazon.com/AmazonS3/latest/dev/s3-access-control.html
     # [3]: https://docs.aws.amazon.com/AmazonS3/latest/dev/cloudwatch-monitoring.html
+    # [4]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_PutBucketMetricsConfiguration.html
+    # [5]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_GetBucketMetricsConfiguration.html
+    # [6]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_DeleteBucketMetricsConfiguration.html
     #
     # @option params [required, String] :bucket
     #   The name of the bucket containing the metrics configurations to
@@ -5924,20 +6085,25 @@ module Aws::S3
     #
     # The following operations are related to `ListMultipartUploads`\:
     #
-    # * CreateMultipartUpload
+    # * [CreateMultipartUpload][3]
     #
-    # * UploadPart
+    # * [UploadPart][4]
     #
-    # * CompleteMultipartUpload
+    # * [CompleteMultipartUpload][5]
     #
-    # * ListParts
+    # * [ListParts][6]
     #
-    # * AbortMultipartUpload
+    # * [AbortMultipartUpload][7]
     #
     #
     #
     # [1]: https://docs.aws.amazon.com/AmazonS3/latest/dev/uploadobjusingmpu.html
     # [2]: https://docs.aws.amazon.com/AmazonS3/latest/dev/mpuAndPermissions.html
+    # [3]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_CreateMultipartUpload.html
+    # [4]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_UploadPart.html
+    # [5]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_CompleteMultipartUpload.html
+    # [6]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_ListParts.html
+    # [7]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_AbortMultipartUpload.html
     #
     # @option params [required, String] :bucket
     #   Name of the bucket to which the multipart upload was initiated.
@@ -6022,6 +6188,48 @@ module Aws::S3
     # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     #
+    # @example Example: To list in-progress multipart uploads on a bucket
+    #
+    #   # The following example lists in-progress multipart uploads on a specific bucket.
+    #
+    #   resp = client.list_multipart_uploads({
+    #     bucket: "examplebucket", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     uploads: [
+    #       {
+    #         initiated: Time.parse("2014-05-01T05:40:58.000Z"), 
+    #         initiator: {
+    #           display_name: "display-name", 
+    #           id: "examplee7a2f25102679df27bb0ae12b3f85be6f290b936c4393484be31bebcc", 
+    #         }, 
+    #         key: "JavaFile", 
+    #         owner: {
+    #           display_name: "display-name", 
+    #           id: "examplee7a2f25102679df27bb0ae12b3f85be6f290b936c4393484be31bebcc", 
+    #         }, 
+    #         storage_class: "STANDARD", 
+    #         upload_id: "examplelUa.CInXklLQtSMJITdUnoZ1Y5GACB5UckOtspm5zbDMCkPF_qkfZzMiFZ6dksmcnqxJyIBvQMG9X9Q--", 
+    #       }, 
+    #       {
+    #         initiated: Time.parse("2014-05-01T05:41:27.000Z"), 
+    #         initiator: {
+    #           display_name: "display-name", 
+    #           id: "examplee7a2f25102679df27bb0ae12b3f85be6f290b936c4393484be31bebcc", 
+    #         }, 
+    #         key: "JavaFile", 
+    #         owner: {
+    #           display_name: "display-name", 
+    #           id: "examplee7a2f25102679df27bb0ae12b3f85be6f290b936c4393484be31bebcc", 
+    #         }, 
+    #         storage_class: "STANDARD", 
+    #         upload_id: "examplelo91lv1iwvWpvCiJWugw2xXLPAD7Z8cJyX9.WiIRgNrdG6Ldsn.9FtS63TCl1Uf5faTB.1U5Ckcbmdw--", 
+    #       }, 
+    #     ], 
+    #   }
+    #
     # @example Example: List next set of multipart uploads when previous result is truncated
     #
     #   # The following example specifies the upload-id-marker and key-marker from previous truncated response to retrieve next
@@ -6071,48 +6279,6 @@ module Aws::S3
     #         }, 
     #         storage_class: "STANDARD", 
     #         upload_id: "b7tZSqIlo91lv1iwvWpvCiJWugw2xXLPAD7Z8cJyX9.WiIRgNrdG6Ldsn.9FtS63TCl1Uf5faTB.1U5Ckcbmdw--", 
-    #       }, 
-    #     ], 
-    #   }
-    #
-    # @example Example: To list in-progress multipart uploads on a bucket
-    #
-    #   # The following example lists in-progress multipart uploads on a specific bucket.
-    #
-    #   resp = client.list_multipart_uploads({
-    #     bucket: "examplebucket", 
-    #   })
-    #
-    #   resp.to_h outputs the following:
-    #   {
-    #     uploads: [
-    #       {
-    #         initiated: Time.parse("2014-05-01T05:40:58.000Z"), 
-    #         initiator: {
-    #           display_name: "display-name", 
-    #           id: "examplee7a2f25102679df27bb0ae12b3f85be6f290b936c4393484be31bebcc", 
-    #         }, 
-    #         key: "JavaFile", 
-    #         owner: {
-    #           display_name: "display-name", 
-    #           id: "examplee7a2f25102679df27bb0ae12b3f85be6f290b936c4393484be31bebcc", 
-    #         }, 
-    #         storage_class: "STANDARD", 
-    #         upload_id: "examplelUa.CInXklLQtSMJITdUnoZ1Y5GACB5UckOtspm5zbDMCkPF_qkfZzMiFZ6dksmcnqxJyIBvQMG9X9Q--", 
-    #       }, 
-    #       {
-    #         initiated: Time.parse("2014-05-01T05:41:27.000Z"), 
-    #         initiator: {
-    #           display_name: "display-name", 
-    #           id: "examplee7a2f25102679df27bb0ae12b3f85be6f290b936c4393484be31bebcc", 
-    #         }, 
-    #         key: "JavaFile", 
-    #         owner: {
-    #           display_name: "display-name", 
-    #           id: "examplee7a2f25102679df27bb0ae12b3f85be6f290b936c4393484be31bebcc", 
-    #         }, 
-    #         storage_class: "STANDARD", 
-    #         upload_id: "examplelo91lv1iwvWpvCiJWugw2xXLPAD7Z8cJyX9.WiIRgNrdG6Ldsn.9FtS63TCl1Uf5faTB.1U5Ckcbmdw--", 
     #       }, 
     #     ], 
     #   }
@@ -6176,13 +6342,20 @@ module Aws::S3
     #
     # The following operations are related to `ListObjectVersions`\:
     #
-    # * ListObjectsV2
+    # * [ListObjectsV2][1]
     #
-    # * GetObject
+    # * [GetObject][2]
     #
-    # * PutObject
+    # * [PutObject][3]
     #
-    # * DeleteObject
+    # * [DeleteObject][4]
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_ListObjectsV2.html
+    # [2]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_GetObject.html
+    # [3]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_PutObject.html
+    # [4]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_DeleteObject.html
     #
     # @option params [required, String] :bucket
     #   The bucket name that contains the objects.
@@ -6359,20 +6532,28 @@ module Aws::S3
     # of the response and handle it appropriately.
     #
     # This API has been revised. We recommend that you use the newer
-    # version, ListObjectsV2, when developing applications. For backward
-    # compatibility, Amazon S3 continues to support `ListObjects`.
+    # version, [ListObjectsV2][1], when developing applications. For
+    # backward compatibility, Amazon S3 continues to support `ListObjects`.
     #
     # The following operations are related to `ListObjects`\:
     #
-    # * ListObjectsV2
+    # * [ListObjectsV2][1]
     #
-    # * GetObject
+    # * [GetObject][2]
     #
-    # * PutObject
+    # * [PutObject][3]
     #
-    # * CreateBucket
+    # * [CreateBucket][4]
     #
-    # * ListBuckets
+    # * [ListBuckets][5]
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_ListObjectsV2.html
+    # [2]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_GetObject.html
+    # [3]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_PutObject.html
+    # [4]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_CreateBucket.html
+    # [5]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_ListBuckets.html
     #
     # @option params [required, String] :bucket
     #   The name of the bucket containing the objects.
@@ -6518,22 +6699,27 @@ module Aws::S3
     # This section describes the latest revision of the API. We recommend
     # that you use this revised API for application development. For
     # backward compatibility, Amazon S3 continues to support the prior
-    # version of this API, ListObjects.
+    # version of this API, [ListObjects][3].
     #
-    # To get a list of your buckets, see ListBuckets.
+    # To get a list of your buckets, see [ListBuckets][4].
     #
     # The following operations are related to `ListObjectsV2`\:
     #
-    # * GetObject
+    # * [GetObject][5]
     #
-    # * PutObject
+    # * [PutObject][6]
     #
-    # * CreateBucket
+    # * [CreateBucket][7]
     #
     #
     #
     # [1]: https://docs.aws.amazon.com/AmazonS3/latest/dev/using-with-s3-actions.html#using-with-s3-actions-related-to-bucket-subresources
     # [2]: https://docs.aws.amazon.com/AmazonS3/latest/dev/s3-access-control.html
+    # [3]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_ListObjects.html
+    # [4]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_ListBuckets.html
+    # [5]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_GetObject.html
+    # [6]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_PutObject.html
+    # [7]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_CreateBucket.html
     #
     # @option params [required, String] :bucket
     #   Bucket name to list.
@@ -6687,7 +6873,7 @@ module Aws::S3
     # Lists the parts that have been uploaded for a specific multipart
     # upload. This operation must include the upload ID, which you obtain by
     # sending the initiate multipart upload request (see
-    # CreateMultipartUpload). This request returns a maximum of 1,000
+    # [CreateMultipartUpload][1]). This request returns a maximum of 1,000
     # uploaded parts. The default number of parts returned is 1,000 parts.
     # You can restrict the number of parts returned by specifying the
     # `max-parts` request parameter. If your multipart upload consists of
@@ -6698,27 +6884,32 @@ module Aws::S3
     # field value from the previous response.
     #
     # For more information on multipart uploads, see [Uploading Objects
-    # Using Multipart Upload][1].
+    # Using Multipart Upload][2].
     #
     # For information on permissions required to use the multipart upload
-    # API, see [Multipart Upload API and Permissions][2].
+    # API, see [Multipart Upload API and Permissions][3].
     #
     # The following operations are related to `ListParts`\:
     #
-    # * CreateMultipartUpload
+    # * [CreateMultipartUpload][1]
     #
-    # * UploadPart
+    # * [UploadPart][4]
     #
-    # * CompleteMultipartUpload
+    # * [CompleteMultipartUpload][5]
     #
-    # * AbortMultipartUpload
+    # * [AbortMultipartUpload][6]
     #
-    # * ListMultipartUploads
+    # * [ListMultipartUploads][7]
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/AmazonS3/latest/dev/uploadobjusingmpu.html
-    # [2]: https://docs.aws.amazon.com/AmazonS3/latest/dev/mpuAndPermissions.html
+    # [1]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_CreateMultipartUpload.html
+    # [2]: https://docs.aws.amazon.com/AmazonS3/latest/dev/uploadobjusingmpu.html
+    # [3]: https://docs.aws.amazon.com/AmazonS3/latest/dev/mpuAndPermissions.html
+    # [4]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_UploadPart.html
+    # [5]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_CompleteMultipartUpload.html
+    # [6]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_AbortMultipartUpload.html
+    # [7]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_ListMultipartUploads.html
     #
     # @option params [required, String] :bucket
     #   Name of the bucket to which the parts are being uploaded.
@@ -6878,8 +7069,8 @@ module Aws::S3
     #
     # * Suspended – Disables accelerated data transfers to the bucket.
     #
-    # The GetBucketAccelerateConfiguration operation returns the transfer
-    # acceleration state of a bucket.
+    # The [GetBucketAccelerateConfiguration][3] operation returns the
+    # transfer acceleration state of a bucket.
     #
     # After setting the Transfer Acceleration state of a bucket to Enabled,
     # it might take up to thirty minutes before the data transfer rates to
@@ -6889,20 +7080,22 @@ module Aws::S3
     # DNS-compliant and must not contain periods (".").
     #
     # For more information about transfer acceleration, see [Transfer
-    # Acceleration][3].
+    # Acceleration][4].
     #
     # The following operations are related to
     # `PutBucketAccelerateConfiguration`\:
     #
-    # * GetBucketAccelerateConfiguration
+    # * [GetBucketAccelerateConfiguration][3]
     #
-    # * CreateBucket
+    # * [CreateBucket][5]
     #
     #
     #
     # [1]: https://docs.aws.amazon.com/AmazonS3/latest/dev/using-with-s3-actions.html#using-with-s3-actions-related-to-bucket-subresources
     # [2]: https://docs.aws.amazon.com/AmazonS3/latest/dev/s3-access-control.html
-    # [3]: https://docs.aws.amazon.com/AmazonS3/latest/dev/transfer-acceleration.html
+    # [3]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_GetBucketAccelerateConfiguration.html
+    # [4]: https://docs.aws.amazon.com/AmazonS3/latest/dev/transfer-acceleration.html
+    # [5]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_CreateBucket.html
     #
     # @option params [required, String] :bucket
     #   Name of the bucket for which the accelerate configuration is set.
@@ -7071,11 +7264,11 @@ module Aws::S3
     #
     # **Related Resources**
     #
-    # * CreateBucket
+    # * [CreateBucket][5]
     #
-    # * DeleteBucket
+    # * [DeleteBucket][6]
     #
-    # * GetObjectAcl
+    # * [GetObjectAcl][7]
     #
     #
     #
@@ -7083,6 +7276,9 @@ module Aws::S3
     # [2]: https://docs.aws.amazon.com/AmazonS3/latest/dev/acl-overview.html#CannedACL
     # [3]: https://docs.aws.amazon.com/AmazonS3/latest/dev/acl-overview.html
     # [4]: https://docs.aws.amazon.com/general/latest/gr/rande.html#s3_region
+    # [5]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_CreateBucket.html
+    # [6]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_DeleteBucket.html
+    # [7]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_GetObjectAcl.html
     #
     # @option params [String] :acl
     #   The canned ACL to apply to the bucket.
@@ -7227,9 +7423,11 @@ module Aws::S3
     #
     # **Related Resources**
     #
-    # *
-    # *
-    # *
+    # * [GetBucketAnalyticsConfiguration][5]
+    #
+    # * [DeleteBucketAnalyticsConfiguration][6]
+    #
+    # * [ListBucketAnalyticsConfigurations][7]
     #
     #
     #
@@ -7237,6 +7435,9 @@ module Aws::S3
     # [2]: https://docs.aws.amazon.com/AmazonS3/latest/dev/example-bucket-policies.html#example-bucket-policies-use-case-9
     # [3]: https://docs.aws.amazon.com/AmazonS3/latest/dev/using-with-s3-actions.html#using-with-s3-actions-related-to-bucket-subresources
     # [4]: https://docs.aws.amazon.com/AmazonS3/latest/dev/s3-access-control.html
+    # [5]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_GetBucketAnalyticsConfiguration.html
+    # [6]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_DeleteBucketAnalyticsConfiguration.html
+    # [7]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_ListBucketAnalyticsConfigurations.html
     #
     # @option params [required, String] :bucket
     #   The name of the bucket to which an analytics configuration is stored.
@@ -7337,15 +7538,18 @@ module Aws::S3
     #
     # **Related Resources**
     #
-    # * GetBucketCors
+    # * [GetBucketCors][2]
     #
-    # * DeleteBucketCors
+    # * [DeleteBucketCors][3]
     #
-    # * RESTOPTIONSobject
+    # * [RESTOPTIONSobject][4]
     #
     #
     #
     # [1]: https://docs.aws.amazon.com/AmazonS3/latest/dev/cors.html
+    # [2]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_GetBucketCors.html
+    # [3]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_DeleteBucketCors.html
+    # [4]: https://docs.aws.amazon.com/AmazonS3/latest/API/RESTOPTIONSobject.html
     #
     # @option params [required, String] :bucket
     #   Specifies the bucket impacted by the `cors`configuration.
@@ -7465,15 +7669,17 @@ module Aws::S3
     #
     # **Related Resources**
     #
-    # * GetBucketEncryption
+    # * [GetBucketEncryption][4]
     #
-    # * DeleteBucketEncryption
+    # * [DeleteBucketEncryption][5]
     #
     #
     #
     # [1]: https://docs.aws.amazon.com/AmazonS3/latest/dev/bucket-encryption.html
     # [2]: https://docs.aws.amazon.com/AmazonS3/latest/dev/using-with-s3-actions.html#using-with-s3-actions-related-to-bucket-subresources
     # [3]: https://docs.aws.amazon.com/AmazonS3/latest/dev/s3-access-control.html
+    # [4]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_GetBucketEncryption.html
+    # [5]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_DeleteBucketEncryption.html
     #
     # @option params [required, String] :bucket
     #   Specifies default encryption for a bucket using server-side encryption
@@ -7579,11 +7785,11 @@ module Aws::S3
     #
     # **Related Resources**
     #
-    # * GetBucketInventoryConfiguration
+    # * [GetBucketInventoryConfiguration][5]
     #
-    # * DeleteBucketInventoryConfiguration
+    # * [DeleteBucketInventoryConfiguration][6]
     #
-    # * ListBucketInventoryConfigurations
+    # * [ListBucketInventoryConfigurations][7]
     #
     #
     #
@@ -7591,6 +7797,9 @@ module Aws::S3
     # [2]: https://docs.aws.amazon.com/AmazonS3/latest/dev/example-bucket-policies.html#example-bucket-policies-use-case-9
     # [3]: https://docs.aws.amazon.com/AmazonS3/latest/dev/using-with-s3-actions.html#using-with-s3-actions-related-to-bucket-subresources
     # [4]: https://docs.aws.amazon.com/AmazonS3/latest/dev/s3-access-control.html
+    # [5]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_GetBucketInventoryConfiguration.html
+    # [6]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_DeleteBucketInventoryConfiguration.html
+    # [7]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_ListBucketInventoryConfigurations.html
     #
     # @option params [required, String] :bucket
     #   The name of the bucket where the inventory configuration will be
@@ -7648,13 +7857,13 @@ module Aws::S3
     end
 
     # For an updated version of this API, see
-    # PutBucketLifecycleConfiguration. This version has been deprecated.
-    # Existing lifecycle configurations will work. For new lifecycle
-    # configurations, use the updated API.
+    # [PutBucketLifecycleConfiguration][1]. This version has been
+    # deprecated. Existing lifecycle configurations will work. For new
+    # lifecycle configurations, use the updated API.
     #
     # Creates a new lifecycle configuration for the bucket or replaces an
     # existing lifecycle configuration. For information about lifecycle
-    # configuration, see [Object Lifecycle Management][1] in the *Amazon
+    # configuration, see [Object Lifecycle Management][2] in the *Amazon
     # Simple Storage Service Developer Guide*.
     #
     # By default, all Amazon S3 resources, including buckets, objects, and
@@ -7677,36 +7886,41 @@ module Aws::S3
     # * `s3:PutLifecycleConfiguration`
     #
     # For more information about permissions, see [Managing Access
-    # Permissions to your Amazon S3 Resources][2] in the *Amazon Simple
+    # Permissions to your Amazon S3 Resources][3] in the *Amazon Simple
     # Storage Service Developer Guide*.
     #
     # For more examples of transitioning objects to storage classes such as
     # STANDARD\_IA or ONEZONE\_IA, see [Examples of Lifecycle
-    # Configuration][3].
+    # Configuration][4].
     #
     # **Related Resources**
     #
-    # * GetBucketLifecycle(Deprecated)
+    # * [GetBucketLifecycle][5](Deprecated)
     #
-    # * GetBucketLifecycleConfiguration
+    # * [GetBucketLifecycleConfiguration][6]
     #
-    # *
+    # * [RestoreObject][7]
+    #
     # * By default, a resource owner—in this case, a bucket owner, which is
     #   the AWS account that created the bucket—can perform any of the
     #   operations. A resource owner can also grant others permission to
     #   perform the operation. For more information, see the following
     #   topics in the Amazon Simple Storage Service Developer Guide:
     #
-    #   * [Specifying Permissions in a Policy][4]
+    #   * [Specifying Permissions in a Policy][8]
     #
-    #   * [Managing Access Permissions to your Amazon S3 Resources][2]
+    #   * [Managing Access Permissions to your Amazon S3 Resources][3]
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/AmazonS3/latest/dev/object-lifecycle-mgmt.html
-    # [2]: https://docs.aws.amazon.com/AmazonS3/latest/dev/s3-access-control.html
-    # [3]: https://docs.aws.amazon.com/AmazonS3/latest/dev/intro-lifecycle-rules.html#lifecycle-configuration-examples
-    # [4]: https://docs.aws.amazon.com/AmazonS3/latest/dev/using-with-s3-actions.html
+    # [1]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_PutBucketLifecycleConfiguration.html
+    # [2]: https://docs.aws.amazon.com/AmazonS3/latest/dev/object-lifecycle-mgmt.html
+    # [3]: https://docs.aws.amazon.com/AmazonS3/latest/dev/s3-access-control.html
+    # [4]: https://docs.aws.amazon.com/AmazonS3/latest/dev/intro-lifecycle-rules.html#lifecycle-configuration-examples
+    # [5]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_GetBucketLifecycle.html
+    # [6]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_GetBucketLifecycleConfiguration.html
+    # [7]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_RestoreObject.html
+    # [8]: https://docs.aws.amazon.com/AmazonS3/latest/dev/using-with-s3-actions.html
     #
     # @option params [required, String] :bucket
     #
@@ -7772,7 +7986,7 @@ module Aws::S3
     # API. The previous version of the API supported filtering based only on
     # an object key name prefix, which is supported for backward
     # compatibility. For the related API description, see
-    # PutBucketLifecycle.
+    # [PutBucketLifecycle][2].
     #
     #  </note>
     #
@@ -7796,8 +8010,8 @@ module Aws::S3
     #   S3 provides predefined actions that you can specify for current and
     #   noncurrent object versions.
     #
-    # For more information, see [Object Lifecycle Management][2] and
-    # [Lifecycle Configuration Elements][3].
+    # For more information, see [Object Lifecycle Management][3] and
+    # [Lifecycle Configuration Elements][4].
     #
     # **Permissions**
     #
@@ -7825,18 +8039,21 @@ module Aws::S3
     #
     # The following are related to `PutBucketLifecycleConfiguration`\:
     #
-    # * [Examples of Lifecycle Configuration][4]
+    # * [Examples of Lifecycle Configuration][5]
     #
-    # * GetBucketLifecycleConfiguration
+    # * [GetBucketLifecycleConfiguration][6]
     #
-    # * DeleteBucketLifecycle
+    # * [DeleteBucketLifecycle][7]
     #
     #
     #
     # [1]: https://docs.aws.amazon.com/AmazonS3/latest/dev/s3-access-control.html
-    # [2]: https://docs.aws.amazon.com/AmazonS3/latest/dev/object-lifecycle-mgmt.html
-    # [3]: https://docs.aws.amazon.com/AmazonS3/latest/dev/intro-lifecycle-rules.html
-    # [4]: https://docs.aws.amazon.com/AmazonS3/latest/dev/lifecycle-configuration-examples.html
+    # [2]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_PutBucketLifecycle.html
+    # [3]: https://docs.aws.amazon.com/AmazonS3/latest/dev/object-lifecycle-mgmt.html
+    # [4]: https://docs.aws.amazon.com/AmazonS3/latest/dev/intro-lifecycle-rules.html
+    # [5]: https://docs.aws.amazon.com/AmazonS3/latest/dev/lifecycle-configuration-examples.html
+    # [6]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_GetBucketLifecycleConfiguration.html
+    # [7]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_DeleteBucketLifecycle.html
     #
     # @option params [required, String] :bucket
     #   The name of the bucket for which to set the configuration.
@@ -7985,23 +8202,27 @@ module Aws::S3
     # For more information about server access logging, see [Server Access
     # Logging][1].
     #
-    # For more information about creating a bucket, see CreateBucket. For
-    # more information about returning the logging status of a bucket, see
-    # GetBucketLogging.
+    # For more information about creating a bucket, see [CreateBucket][2].
+    # For more information about returning the logging status of a bucket,
+    # see [GetBucketLogging][3].
     #
     # The following operations are related to `PutBucketLogging`\:
     #
-    # * PutObject
+    # * [PutObject][4]
     #
-    # * DeleteBucket
+    # * [DeleteBucket][5]
     #
-    # * CreateBucket
+    # * [CreateBucket][2]
     #
-    # * GetBucketLogging
+    # * [GetBucketLogging][3]
     #
     #
     #
     # [1]: https://docs.aws.amazon.com/AmazonS3/latest/dev/ServerLogs.html
+    # [2]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_CreateBucket.html
+    # [3]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_GetBucketLogging.html
+    # [4]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_PutObject.html
+    # [5]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_DeleteBucket.html
     #
     # @option params [required, String] :bucket
     #   The name of the bucket for which to set the logging parameters.
@@ -8093,11 +8314,11 @@ module Aws::S3
     # The following operations are related to
     # `PutBucketMetricsConfiguration`\:
     #
-    # * DeleteBucketMetricsConfiguration
+    # * [DeleteBucketMetricsConfiguration][4]
     #
-    # * PutBucketMetricsConfiguration
+    # * [PutBucketMetricsConfiguration][5]
     #
-    # * ListBucketMetricsConfigurations
+    # * [ListBucketMetricsConfigurations][6]
     #
     # `GetBucketLifecycle` has the following special error:
     #
@@ -8113,6 +8334,9 @@ module Aws::S3
     # [1]: https://docs.aws.amazon.com/AmazonS3/latest/dev/using-with-s3-actions.html#using-with-s3-actions-related-to-bucket-subresources
     # [2]: https://docs.aws.amazon.com/AmazonS3/latest/dev/s3-access-control.html
     # [3]: https://docs.aws.amazon.com/AmazonS3/latest/dev/cloudwatch-monitoring.html
+    # [4]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_DeleteBucketMetricsConfiguration.html
+    # [5]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_PutBucketMetricsConfiguration.html
+    # [6]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_ListBucketMetricsConfigurations.html
     #
     # @option params [required, String] :bucket
     #   The name of the bucket for which the metrics configuration is set.
@@ -8160,7 +8384,12 @@ module Aws::S3
       req.send_request(options)
     end
 
-    # No longer used, see the PutBucketNotificationConfiguration operation.
+    # No longer used, see the [PutBucketNotificationConfiguration][1]
+    # operation.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_PutBucketNotificationConfiguration.html
     #
     # @option params [required, String] :bucket
     #   The name of the bucket.
@@ -8268,13 +8497,14 @@ module Aws::S3
     # The following operation is related to
     # `PutBucketNotificationConfiguration`\:
     #
-    # * GetBucketNotificationConfiguration
+    # * [GetBucketNotificationConfiguration][2]
     #
     # ^
     #
     #
     #
     # [1]: https://docs.aws.amazon.com/AmazonS3/latest/dev/NotificationHowTo.html
+    # [2]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_GetBucketNotificationConfiguration.html
     #
     # @option params [required, String] :bucket
     #   The name of the bucket.
@@ -8393,13 +8623,15 @@ module Aws::S3
     #
     # The following operations are related to `PutBucketPolicy`\:
     #
-    # * CreateBucket
+    # * [CreateBucket][2]
     #
-    # * DeleteBucket
+    # * [DeleteBucket][3]
     #
     #
     #
     # [1]: https://docs.aws.amazon.com/AmazonS3/latest/dev/using-iam-policies.html
+    # [2]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_CreateBucket.html
+    # [3]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_DeleteBucket.html
     #
     # @option params [required, String] :bucket
     #   The name of the bucket.
@@ -8472,6 +8704,17 @@ module Aws::S3
     # configuration, you must also add the following elements:
     # `DeleteMarkerReplication`, `Status`, and `Priority`.
     #
+    # <note markdown="1"> The latest version of the replication configuration XML is V2. XML V2
+    # replication configurations are those that contain the `Filter` element
+    # for rules, and rules that specify S3 Replication Time Control (S3
+    # RTC). In XML V2 replication configurations, Amazon S3 doesn't
+    # replicate delete markers. Therefore, you must set the
+    # `DeleteMarkerReplication` element to `Disabled`. For backward
+    # compatibility, Amazon S3 continues to support the XML V1 replication
+    # configuration.
+    #
+    #  </note>
+    #
     # For information about enabling versioning on a bucket, see [Using
     # Versioning][3].
     #
@@ -8492,14 +8735,14 @@ module Aws::S3
     # about replication configuration, see [Replicating Objects Created with
     # SSE Using CMKs stored in AWS KMS][6].
     #
-    # For information on `PutBucketReplication` errors, see
-    # ReplicationErrorCodeList
+    # For information on `PutBucketReplication` errors, see [List of
+    # replication-related error codes][7]
     #
     # The following operations are related to `PutBucketReplication`\:
     #
-    # * GetBucketReplication
+    # * [GetBucketReplication][8]
     #
-    # * DeleteBucketReplication
+    # * [DeleteBucketReplication][9]
     #
     #
     #
@@ -8509,6 +8752,9 @@ module Aws::S3
     # [4]: https://docs.aws.amazon.com/AmazonS3/latest/dev/using-with-s3-actions.html
     # [5]: https://docs.aws.amazon.com/AmazonS3/latest/dev/s3-access-control.html
     # [6]: https://docs.aws.amazon.com/AmazonS3/latest/dev/replication-config-for-kms-objects.html
+    # [7]: https://docs.aws.amazon.com/AmazonS3/latest/API/ErrorResponses.html#ReplicationErrorCodeList
+    # [8]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_GetBucketReplication.html
+    # [9]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_DeleteBucketReplication.html
     #
     # @option params [required, String] :bucket
     #   The name of the bucket
@@ -8638,13 +8884,15 @@ module Aws::S3
     #
     # The following operations are related to `PutBucketRequestPayment`\:
     #
-    # * CreateBucket
+    # * [CreateBucket][2]
     #
-    # * GetBucketRequestPayment
+    # * [GetBucketRequestPayment][3]
     #
     #
     #
     # [1]: https://docs.aws.amazon.com/AmazonS3/latest/dev/RequesterPaysBuckets.html
+    # [2]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_CreateBucket.html
+    # [3]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_GetBucketRequestPayment.html
     #
     # @option params [required, String] :bucket
     #   The bucket name.
@@ -8752,9 +9000,9 @@ module Aws::S3
     #
     # The following operations are related to `PutBucketTagging`\:
     #
-    # * GetBucketTagging
+    # * [GetBucketTagging][7]
     #
-    # * DeleteBucketTagging
+    # * [DeleteBucketTagging][8]
     #
     #
     #
@@ -8764,6 +9012,8 @@ module Aws::S3
     # [4]: https://docs.aws.amazon.com/AmazonS3/latest/dev/s3-access-control.html
     # [5]: https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/allocation-tag-restrictions.html
     # [6]: https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/aws-tag-restrictions.html
+    # [7]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_GetBucketTagging.html
+    # [8]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_DeleteBucketTagging.html
     #
     # @option params [required, String] :bucket
     #   The bucket name.
@@ -8839,7 +9089,7 @@ module Aws::S3
     # objects added to the bucket receive the version ID null.
     #
     # If the versioning state has never been set on a bucket, it has no
-    # versioning state; a GetBucketVersioning request does not return a
+    # versioning state; a [GetBucketVersioning][1] request does not return a
     # versioning state value.
     #
     # If the bucket owner enables MFA Delete in the bucket versioning
@@ -8854,19 +9104,22 @@ module Aws::S3
     # manage the deletes of the noncurrent object versions in the
     # version-enabled bucket. (A version-enabled bucket maintains one
     # current and zero or more noncurrent object versions.) For more
-    # information, see [Lifecycle and Versioning][1].
+    # information, see [Lifecycle and Versioning][2].
     #
     # **Related Resources**
     #
-    # * CreateBucket
+    # * [CreateBucket][3]
     #
-    # * DeleteBucket
+    # * [DeleteBucket][4]
     #
-    # * GetBucketVersioning
+    # * [GetBucketVersioning][1]
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/AmazonS3/latest/dev/object-lifecycle-mgmt.html#lifecycle-and-other-bucket-config
+    # [1]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_GetBucketVersioning.html
+    # [2]: https://docs.aws.amazon.com/AmazonS3/latest/dev/object-lifecycle-mgmt.html#lifecycle-and-other-bucket-config
+    # [3]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_CreateBucket.html
+    # [4]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_DeleteBucket.html
     #
     # @option params [required, String] :bucket
     #   The bucket name.
@@ -9139,13 +9392,13 @@ module Aws::S3
     #
     # For more information about versioning, see [Adding Objects to
     # Versioning Enabled Buckets][6]. For information about returning the
-    # versioning state of a bucket, see GetBucketVersioning.
+    # versioning state of a bucket, see [GetBucketVersioning][7].
     #
     # **Related Resources**
     #
-    # * CopyObject
+    # * [CopyObject][8]
     #
-    # * DeleteObject
+    # * [DeleteObject][9]
     #
     #
     #
@@ -9155,6 +9408,9 @@ module Aws::S3
     # [4]: https://docs.aws.amazon.com/AmazonS3/latest/dev/acl-using-rest-api.html
     # [5]: https://docs.aws.amazon.com/AmazonS3/latest/dev/storage-class-intro.html
     # [6]: https://docs.aws.amazon.com/AmazonS3/latest/dev/AddingObjectstoVersioningEnabledBuckets.html
+    # [7]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_GetBucketVersioning.html
+    # [8]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_CopyObject.html
+    # [9]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_DeleteObject.html
     #
     # @option params [String] :acl
     #   The canned ACL to apply to the object. For more information, see
@@ -9315,7 +9571,7 @@ module Aws::S3
     #   encrypting data. This value is used to store the object and then it is
     #   discarded; Amazon S3 does not store the encryption key. The key must
     #   be appropriate for use with the algorithm specified in the
-    #   `x-amz-server-side​-encryption​-customer-algorithm` header.
+    #   `x-amz-server-side-encryption-customer-algorithm` header.
     #
     # @option params [String] :sse_customer_key_md5
     #   Specifies the 128-bit MD5 digest of the encryption key according to
@@ -9382,80 +9638,6 @@ module Aws::S3
     #   * {Types::PutObjectOutput#request_charged #request_charged} => String
     #
     #
-    # @example Example: To upload an object and specify server-side encryption and object tags
-    #
-    #   # The following example uploads and object. The request specifies the optional server-side encryption option. The request
-    #   # also specifies optional object tags. If the bucket is versioning enabled, S3 returns version ID in response.
-    #
-    #   resp = client.put_object({
-    #     body: "filetoupload", 
-    #     bucket: "examplebucket", 
-    #     key: "exampleobject", 
-    #     server_side_encryption: "AES256", 
-    #     tagging: "key1=value1&key2=value2", 
-    #   })
-    #
-    #   resp.to_h outputs the following:
-    #   {
-    #     etag: "\"6805f2cfc46c0f04559748bb039d69ae\"", 
-    #     server_side_encryption: "AES256", 
-    #     version_id: "Ri.vC6qVlA4dEnjgRV4ZHsHoFIjqEMNt", 
-    #   }
-    #
-    # @example Example: To create an object.
-    #
-    #   # The following example creates an object. If the bucket is versioning enabled, S3 returns version ID in response.
-    #
-    #   resp = client.put_object({
-    #     body: "filetoupload", 
-    #     bucket: "examplebucket", 
-    #     key: "objectkey", 
-    #   })
-    #
-    #   resp.to_h outputs the following:
-    #   {
-    #     etag: "\"6805f2cfc46c0f04559748bb039d69ae\"", 
-    #     version_id: "Bvq0EDKxOcXLJXNo_Lkz37eM3R4pfzyQ", 
-    #   }
-    #
-    # @example Example: To upload an object and specify optional tags
-    #
-    #   # The following example uploads an object. The request specifies optional object tags. The bucket is versioned, therefore
-    #   # S3 returns version ID of the newly created object.
-    #
-    #   resp = client.put_object({
-    #     body: "c:\\HappyFace.jpg", 
-    #     bucket: "examplebucket", 
-    #     key: "HappyFace.jpg", 
-    #     tagging: "key1=value1&key2=value2", 
-    #   })
-    #
-    #   resp.to_h outputs the following:
-    #   {
-    #     etag: "\"6805f2cfc46c0f04559748bb039d69ae\"", 
-    #     version_id: "psM2sYY4.o1501dSx8wMvnkOzSBB.V4a", 
-    #   }
-    #
-    # @example Example: To upload an object (specify optional headers)
-    #
-    #   # The following example uploads an object. The request specifies optional request headers to directs S3 to use specific
-    #   # storage class and use server-side encryption.
-    #
-    #   resp = client.put_object({
-    #     body: "HappyFace.jpg", 
-    #     bucket: "examplebucket", 
-    #     key: "HappyFace.jpg", 
-    #     server_side_encryption: "AES256", 
-    #     storage_class: "STANDARD_IA", 
-    #   })
-    #
-    #   resp.to_h outputs the following:
-    #   {
-    #     etag: "\"6805f2cfc46c0f04559748bb039d69ae\"", 
-    #     server_side_encryption: "AES256", 
-    #     version_id: "CG612hodqujkf8FaaNfp8U..FIhLROcp", 
-    #   }
-    #
     # @example Example: To upload object and specify user-defined metadata
     #
     #   # The following example creates an object. The request also specifies optional metadata. If the bucket is versioning
@@ -9495,6 +9677,22 @@ module Aws::S3
     #     version_id: "Kirh.unyZwjQ69YxcQLA8z4F5j3kJJKr", 
     #   }
     #
+    # @example Example: To create an object.
+    #
+    #   # The following example creates an object. If the bucket is versioning enabled, S3 returns version ID in response.
+    #
+    #   resp = client.put_object({
+    #     body: "filetoupload", 
+    #     bucket: "examplebucket", 
+    #     key: "objectkey", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     etag: "\"6805f2cfc46c0f04559748bb039d69ae\"", 
+    #     version_id: "Bvq0EDKxOcXLJXNo_Lkz37eM3R4pfzyQ", 
+    #   }
+    #
     # @example Example: To upload an object
     #
     #   # The following example uploads an object to a versioning-enabled bucket. The source file is specified using Windows file
@@ -9510,6 +9708,64 @@ module Aws::S3
     #   {
     #     etag: "\"6805f2cfc46c0f04559748bb039d69ae\"", 
     #     version_id: "tpf3zF08nBplQK1XLOefGskR7mGDwcDk", 
+    #   }
+    #
+    # @example Example: To upload an object and specify optional tags
+    #
+    #   # The following example uploads an object. The request specifies optional object tags. The bucket is versioned, therefore
+    #   # S3 returns version ID of the newly created object.
+    #
+    #   resp = client.put_object({
+    #     body: "c:\\HappyFace.jpg", 
+    #     bucket: "examplebucket", 
+    #     key: "HappyFace.jpg", 
+    #     tagging: "key1=value1&key2=value2", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     etag: "\"6805f2cfc46c0f04559748bb039d69ae\"", 
+    #     version_id: "psM2sYY4.o1501dSx8wMvnkOzSBB.V4a", 
+    #   }
+    #
+    # @example Example: To upload an object and specify server-side encryption and object tags
+    #
+    #   # The following example uploads and object. The request specifies the optional server-side encryption option. The request
+    #   # also specifies optional object tags. If the bucket is versioning enabled, S3 returns version ID in response.
+    #
+    #   resp = client.put_object({
+    #     body: "filetoupload", 
+    #     bucket: "examplebucket", 
+    #     key: "exampleobject", 
+    #     server_side_encryption: "AES256", 
+    #     tagging: "key1=value1&key2=value2", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     etag: "\"6805f2cfc46c0f04559748bb039d69ae\"", 
+    #     server_side_encryption: "AES256", 
+    #     version_id: "Ri.vC6qVlA4dEnjgRV4ZHsHoFIjqEMNt", 
+    #   }
+    #
+    # @example Example: To upload an object (specify optional headers)
+    #
+    #   # The following example uploads an object. The request specifies optional request headers to directs S3 to use specific
+    #   # storage class and use server-side encryption.
+    #
+    #   resp = client.put_object({
+    #     body: "HappyFace.jpg", 
+    #     bucket: "examplebucket", 
+    #     key: "HappyFace.jpg", 
+    #     server_side_encryption: "AES256", 
+    #     storage_class: "STANDARD_IA", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     etag: "\"6805f2cfc46c0f04559748bb039d69ae\"", 
+    #     server_side_encryption: "AES256", 
+    #     version_id: "CG612hodqujkf8FaaNfp8U..FIhLROcp", 
     #   }
     #
     # @example Streaming a file from disk
@@ -9711,15 +9967,17 @@ module Aws::S3
     #
     # **Related Resources**
     #
-    # * CopyObject
+    # * [CopyObject][4]
     #
-    # * GetObject
+    # * [GetObject][5]
     #
     #
     #
     # [1]: https://docs.aws.amazon.com/AmazonS3/latest/dev/acl-overview.html
     # [2]: https://docs.aws.amazon.com/AmazonS3/latest/dev/acl-overview.html#CannedACL
     # [3]: https://docs.aws.amazon.com/general/latest/gr/rande.html#s3_region
+    # [4]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_CopyObject.html
+    # [5]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_GetObject.html
     #
     # @option params [String] :acl
     #   The canned ACL to apply to the object. For more information, see
@@ -10120,10 +10378,10 @@ module Aws::S3
     # A tag is a key-value pair. You can associate tags with an object by
     # sending a PUT request against the tagging subresource that is
     # associated with the object. You can retrieve tags by sending a GET
-    # request. For more information, see GetObjectTagging.
+    # request. For more information, see [GetObjectTagging][1].
     #
     # For tagging-related restrictions related to characters and encodings,
-    # see [Tag Restrictions][1]. Note that Amazon S3 limits the maximum
+    # see [Tag Restrictions][2]. Note that Amazon S3 limits the maximum
     # number of tags to 10 tags per object.
     #
     # To use this operation, you must have permission to perform the
@@ -10134,7 +10392,7 @@ module Aws::S3
     # You also need permission for the `s3:PutObjectVersionTagging` action.
     #
     # For information about the Amazon S3 object tagging feature, see
-    # [Object Tagging][2].
+    # [Object Tagging][3].
     #
     # **Special Errors**
     #
@@ -10144,7 +10402,7 @@ module Aws::S3
     #
     #   * *Cause: The tag provided was not a valid tag. This error can occur
     #     if the tag did not pass input validation. For more information,
-    #     see [Object Tagging][2].*
+    #     see [Object Tagging][3].*
     #
     # * ****
     #
@@ -10164,14 +10422,15 @@ module Aws::S3
     #
     # **Related Resources**
     #
-    # * GetObjectTagging
+    # * [GetObjectTagging][1]
     #
     # ^
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/allocation-tag-restrictions.html
-    # [2]: https://docs.aws.amazon.com/AmazonS3/latest/dev/object-tagging.html
+    # [1]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_GetObjectTagging.html
+    # [2]: https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/allocation-tag-restrictions.html
+    # [3]: https://docs.aws.amazon.com/AmazonS3/latest/dev/object-tagging.html
     #
     # @option params [required, String] :bucket
     #   The bucket name containing the object.
@@ -10189,7 +10448,7 @@ module Aws::S3
     #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/dev/using-access-points.html
     #
     # @option params [required, String] :key
-    #   Name of the tag.
+    #   Name of the object key.
     #
     # @option params [String] :version_id
     #   The versionId of the object that the tag-set will be added to.
@@ -10279,19 +10538,22 @@ module Aws::S3
     #
     # **Related Resources**
     #
-    # * GetPublicAccessBlock
+    # * [GetPublicAccessBlock][3]
     #
-    # * DeletePublicAccessBlock
+    # * [DeletePublicAccessBlock][4]
     #
-    # * GetBucketPolicyStatus
+    # * [GetBucketPolicyStatus][5]
     #
-    # * [Using Amazon S3 Block Public Access][3]
+    # * [Using Amazon S3 Block Public Access][6]
     #
     #
     #
     # [1]: https://docs.aws.amazon.com/AmazonS3/latest/dev/using-with-s3-actions.html
     # [2]: https://docs.aws.amazon.com/AmazonS3/latest/dev/access-control-block-public-access.html#access-control-block-public-access-policy-status
-    # [3]: https://docs.aws.amazon.com/AmazonS3/latest/dev/access-control-block-public-access.html
+    # [3]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_GetPublicAccessBlock.html
+    # [4]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_DeletePublicAccessBlock.html
+    # [5]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_GetBucketPolicyStatus.html
+    # [6]: https://docs.aws.amazon.com/AmazonS3/latest/dev/access-control-block-public-access.html
     #
     # @option params [required, String] :bucket
     #   The name of the Amazon S3 bucket whose `PublicAccessBlock`
@@ -10374,12 +10636,12 @@ module Aws::S3
     #   For more information about the `S3` structure in the request body,
     #   see the following:
     #
-    #   * PutObject
+    #   * [PutObject][4]
     #
-    #   * [Managing Access with ACLs][4] in the *Amazon Simple Storage
+    #   * [Managing Access with ACLs][5] in the *Amazon Simple Storage
     #     Service Developer Guide*
     #
-    #   * [Protecting Data Using Server-Side Encryption][5] in the *Amazon
+    #   * [Protecting Data Using Server-Side Encryption][6] in the *Amazon
     #     Simple Storage Service Developer Guide*
     #
     # * Define the SQL expression for the `SELECT` type of restoration for
@@ -10405,7 +10667,7 @@ module Aws::S3
     #     `SELECT s.Id, s.FirstName, s.SSN FROM S3Object s`
     #
     # For more information about using SQL with S3 Glacier Select restore,
-    # see [SQL Reference for Amazon S3 Select and S3 Glacier Select][6] in
+    # see [SQL Reference for Amazon S3 Select and S3 Glacier Select][7] in
     # the *Amazon Simple Storage Service Developer Guide*.
     #
     # When making a select request, you can also do the following:
@@ -10480,7 +10742,7 @@ module Aws::S3
     #
     # For more information about archive retrieval options and provisioned
     # capacity for `Expedited` data access, see [Restoring Archived
-    # Objects][7] in the *Amazon Simple Storage Service Developer Guide*.
+    # Objects][8] in the *Amazon Simple Storage Service Developer Guide*.
     #
     # You can use Amazon S3 restore speed upgrade to change the restore
     # speed to a faster speed while it is in progress. You upgrade the speed
@@ -10490,14 +10752,14 @@ module Aws::S3
     # faster than the tier that the in-progress restore is using. You must
     # not change any other parameters, such as the `Days` request element.
     # For more information, see [ Upgrading the Speed of an In-Progress
-    # Restore][8] in the *Amazon Simple Storage Service Developer Guide*.
+    # Restore][9] in the *Amazon Simple Storage Service Developer Guide*.
     #
     # To get the status of object restoration, you can send a `HEAD`
     # request. Operations return the `x-amz-restore` header, which provides
     # information about the restoration status, in the response. You can use
     # Amazon S3 event notifications to notify you when a restore is
     # initiated or completed. For more information, see [Configuring Amazon
-    # S3 Event Notifications][9] in the *Amazon Simple Storage Service
+    # S3 Event Notifications][10] in the *Amazon Simple Storage Service
     # Developer Guide*.
     #
     # After restoring an archived object, you can update the restoration
@@ -10512,9 +10774,9 @@ module Aws::S3
     # that you specify in a restore request. For example, if you restore an
     # object copy for 10 days, but the object is scheduled to expire in 3
     # days, Amazon S3 deletes the object in 3 days. For more information
-    # about lifecycle configuration, see PutBucketLifecycleConfiguration and
-    # [Object Lifecycle Management][10] in *Amazon Simple Storage Service
-    # Developer Guide*.
+    # about lifecycle configuration, see
+    # [PutBucketLifecycleConfiguration][11] and [Object Lifecycle
+    # Management][12] in *Amazon Simple Storage Service Developer Guide*.
     #
     # **Responses**
     #
@@ -10556,11 +10818,11 @@ module Aws::S3
     #
     # **Related Resources**
     #
-    # * PutBucketLifecycleConfiguration
+    # * [PutBucketLifecycleConfiguration][11]
     #
-    # * GetBucketNotificationConfiguration
+    # * [GetBucketNotificationConfiguration][13]
     #
-    # * [SQL Reference for Amazon S3 Select and S3 Glacier Select ][6] in
+    # * [SQL Reference for Amazon S3 Select and S3 Glacier Select ][7] in
     #   the *Amazon Simple Storage Service Developer Guide*
     #
     #
@@ -10568,13 +10830,16 @@ module Aws::S3
     # [1]: https://docs.aws.amazon.com/AmazonS3/latest/dev/using-with-s3-actions.html#using-with-s3-actions-related-to-bucket-subresources
     # [2]: https://docs.aws.amazon.com/AmazonS3/latest/dev/s3-access-control.html
     # [3]: https://docs.aws.amazon.com/AmazonS3/latest/dev/querying-glacier-archives.html
-    # [4]: https://docs.aws.amazon.com/AmazonS3/latest/dev/S3_ACLs_UsingACLs.html
-    # [5]: https://docs.aws.amazon.com/AmazonS3/latest/dev/serv-side-encryption.html
-    # [6]: https://docs.aws.amazon.com/AmazonS3/latest/dev/s3-glacier-select-sql-reference.html
-    # [7]: https://docs.aws.amazon.com/AmazonS3/latest/dev/restoring-objects.html
-    # [8]: https://docs.aws.amazon.com/AmazonS3/latest/dev/restoring-objects.html#restoring-objects-upgrade-tier.title.html
-    # [9]: https://docs.aws.amazon.com/AmazonS3/latest/dev/NotificationHowTo.html
-    # [10]: https://docs.aws.amazon.com/AmazonS3/latest/dev/object-lifecycle-mgmt.html
+    # [4]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_PutObject.html
+    # [5]: https://docs.aws.amazon.com/AmazonS3/latest/dev/S3_ACLs_UsingACLs.html
+    # [6]: https://docs.aws.amazon.com/AmazonS3/latest/dev/serv-side-encryption.html
+    # [7]: https://docs.aws.amazon.com/AmazonS3/latest/dev/s3-glacier-select-sql-reference.html
+    # [8]: https://docs.aws.amazon.com/AmazonS3/latest/dev/restoring-objects.html
+    # [9]: https://docs.aws.amazon.com/AmazonS3/latest/dev/restoring-objects.html#restoring-objects-upgrade-tier.title.html
+    # [10]: https://docs.aws.amazon.com/AmazonS3/latest/dev/NotificationHowTo.html
+    # [11]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_PutBucketLifecycleConfiguration.html
+    # [12]: https://docs.aws.amazon.com/AmazonS3/latest/dev/object-lifecycle-mgmt.html
+    # [13]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_GetBucketNotificationConfiguration.html
     #
     # @option params [required, String] :bucket
     #   The bucket name or containing the object to restore.
@@ -10789,16 +11054,17 @@ module Aws::S3
     #
     #   For objects that are encrypted with customer-provided encryption
     #   keys (SSE-C), you must use HTTPS, and you must use the headers that
-    #   are documented in the GetObject. For more information about SSE-C,
-    #   see [Server-Side Encryption (Using Customer-Provided Encryption
-    #   Keys)][4] in the *Amazon Simple Storage Service Developer Guide*.
+    #   are documented in the [GetObject][4]. For more information about
+    #   SSE-C, see [Server-Side Encryption (Using Customer-Provided
+    #   Encryption Keys)][5] in the *Amazon Simple Storage Service Developer
+    #   Guide*.
     #
     #   For objects that are encrypted with Amazon S3 managed encryption
     #   keys (SSE-S3) and customer master keys (CMKs) stored in AWS Key
     #   Management Service (SSE-KMS), server-side encryption is handled
     #   transparently, so you don't need to specify anything. For more
     #   information about server-side encryption, including SSE-S3 and
-    #   SSE-KMS, see [Protecting Data Using Server-Side Encryption][5] in
+    #   SSE-KMS, see [Protecting Data Using Server-Side Encryption][6] in
     #   the *Amazon Simple Storage Service Developer Guide*.
     #
     # **Working with the Response Body**
@@ -10806,49 +11072,55 @@ module Aws::S3
     # Given the response size is unknown, Amazon S3 Select streams the
     # response as a series of messages and includes a `Transfer-Encoding`
     # header with `chunked` as its value in the response. For more
-    # information, see RESTSelectObjectAppendix .
+    # information, see [Appendix: SelectObjectContent Response][7] .
     #
     #
     #
     # **GetObject Support**
     #
     # The `SelectObjectContent` operation does not support the following
-    # `GetObject` functionality. For more information, see GetObject.
+    # `GetObject` functionality. For more information, see [GetObject][4].
     #
     # * `Range`\: Although you can specify a scan range for an Amazon S3
-    #   Select request (see SelectObjectContentRequest$ScanRange in the
-    #   request parameters), you cannot specify the range of bytes of an
+    #   Select request (see [SelectObjectContentRequest - ScanRange][8] in
+    #   the request parameters), you cannot specify the range of bytes of an
     #   object to return.
     #
     # * GLACIER, DEEP\_ARCHIVE and REDUCED\_REDUNDANCY storage classes: You
     #   cannot specify the GLACIER, DEEP\_ARCHIVE, or `REDUCED_REDUNDANCY`
     #   storage classes. For more information, about storage classes see
-    #   [Storage Classes][6] in the *Amazon Simple Storage Service Developer
+    #   [Storage Classes][9] in the *Amazon Simple Storage Service Developer
     #   Guide*.
     #
     #
     #
     # **Special Errors**
     #
-    # For a list of special errors for this operation, see
-    # SelectObjectContentErrorCodeList
+    # For a list of special errors for this operation, see [List of SELECT
+    # Object Content Error Codes][10]
     #
     # **Related Resources**
     #
-    # * GetObject
+    # * [GetObject][4]
     #
-    # * GetBucketLifecycleConfiguration
+    # * [GetBucketLifecycleConfiguration][11]
     #
-    # * PutBucketLifecycleConfiguration
+    # * [PutBucketLifecycleConfiguration][12]
     #
     #
     #
     # [1]: https://docs.aws.amazon.com/AmazonS3/latest/dev/selecting-content-from-objects.html
     # [2]: https://docs.aws.amazon.com/AmazonS3/latest/dev/s3-glacier-select-sql-reference.html
     # [3]: https://docs.aws.amazon.com/AmazonS3/latest/dev/using-with-s3-actions.html
-    # [4]: https://docs.aws.amazon.com/AmazonS3/latest/dev/ServerSideEncryptionCustomerKeys.html
-    # [5]: https://docs.aws.amazon.com/AmazonS3/latest/dev/serv-side-encryption.html
-    # [6]: https://docs.aws.amazon.com/AmazonS3/latest/dev/UsingMetadata.html#storage-class-intro
+    # [4]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_GetObject.html
+    # [5]: https://docs.aws.amazon.com/AmazonS3/latest/dev/ServerSideEncryptionCustomerKeys.html
+    # [6]: https://docs.aws.amazon.com/AmazonS3/latest/dev/serv-side-encryption.html
+    # [7]: https://docs.aws.amazon.com/AmazonS3/latest/API/RESTSelectObjectAppendix.html
+    # [8]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_SelectObjectContent.html#AmazonS3-SelectObjectContent-request-ScanRange
+    # [9]: https://docs.aws.amazon.com/AmazonS3/latest/dev/UsingMetadata.html#storage-class-intro
+    # [10]: https://docs.aws.amazon.com/AmazonS3/latest/API/ErrorResponses.html#SelectObjectContentErrorCodeList
+    # [11]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_GetBucketLifecycleConfiguration.html
+    # [12]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_PutBucketLifecycleConfiguration.html
     #
     # @option params [required, String] :bucket
     #   The S3 bucket.
@@ -11144,11 +11416,11 @@ module Aws::S3
     # <note markdown="1"> In this operation, you provide part data in your request. However, you
     # have an option to specify your existing Amazon S3 object as a data
     # source for the part you are uploading. To upload a part from an
-    # existing object, you use the UploadPartCopy operation.
+    # existing object, you use the [UploadPartCopy][1] operation.
     #
     #  </note>
     #
-    # You must initiate a multipart upload (see CreateMultipartUpload)
+    # You must initiate a multipart upload (see [CreateMultipartUpload][2])
     # before you can upload any part. In response to your initiate request,
     # Amazon S3 returns an upload ID, a unique identifier, that you must
     # include in your upload part request.
@@ -11173,11 +11445,11 @@ module Aws::S3
     # parts storage and stops charging you for the parts storage.
     #
     # For more information on multipart uploads, go to [Multipart Upload
-    # Overview][1] in the <i>Amazon Simple Storage Service Developer Guide
+    # Overview][3] in the <i>Amazon Simple Storage Service Developer Guide
     # </i>.
     #
     # For information on the permissions required to use the multipart
-    # upload API, go to [Multipart Upload API and Permissions][2] in the
+    # upload API, go to [Multipart Upload API and Permissions][4] in the
     # *Amazon Simple Storage Service Developer Guide*.
     #
     # You can optionally request server-side encryption where Amazon S3
@@ -11187,26 +11459,27 @@ module Aws::S3
     # encryption keys. If you choose to provide your own encryption key, the
     # request headers you provide in the request must match the headers you
     # used in the request to initiate the upload by using
-    # CreateMultipartUpload. For more information, go to [Using Server-Side
-    # Encryption][3] in the *Amazon Simple Storage Service Developer Guide*.
+    # [CreateMultipartUpload][2]. For more information, go to [Using
+    # Server-Side Encryption][5] in the *Amazon Simple Storage Service
+    # Developer Guide*.
     #
     # Server-side encryption is supported by the S3 Multipart Upload
     # actions. Unless you are using a customer-provided encryption key, you
     # don't need to specify the encryption parameters in each UploadPart
     # request. Instead, you only need to specify the server-side encryption
     # parameters in the initial Initiate Multipart request. For more
-    # information, see CreateMultipartUpload.
+    # information, see [CreateMultipartUpload][2].
     #
     # If you requested server-side encryption using a customer-provided
     # encryption key in your initiate multipart upload request, you must
     # provide identical encryption information in each part upload using the
     # following headers.
     #
-    # * x-amz-server-side​-encryption​-customer-algorithm
+    # * x-amz-server-side-encryption-customer-algorithm
     #
-    # * x-amz-server-side​-encryption​-customer-key
+    # * x-amz-server-side-encryption-customer-key
     #
-    # * x-amz-server-side​-encryption​-customer-key-MD5
+    # * x-amz-server-side-encryption-customer-key-MD5
     #
     # **Special Errors**
     #
@@ -11224,21 +11497,27 @@ module Aws::S3
     #
     # **Related Resources**
     #
-    # * CreateMultipartUpload
+    # * [CreateMultipartUpload][2]
     #
-    # * CompleteMultipartUpload
+    # * [CompleteMultipartUpload][6]
     #
-    # * AbortMultipartUpload
+    # * [AbortMultipartUpload][7]
     #
-    # * ListParts
+    # * [ListParts][8]
     #
-    # * ListMultipartUploads
+    # * [ListMultipartUploads][9]
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/AmazonS3/latest/dev/mpuoverview.html
-    # [2]: https://docs.aws.amazon.com/AmazonS3/latest/dev/mpuAndPermissions.html
-    # [3]: https://docs.aws.amazon.com/AmazonS3/latest/dev/UsingServerSideEncryption.html
+    # [1]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_UploadPartCopy.html
+    # [2]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_CreateMultipartUpload.html
+    # [3]: https://docs.aws.amazon.com/AmazonS3/latest/dev/mpuoverview.html
+    # [4]: https://docs.aws.amazon.com/AmazonS3/latest/dev/mpuAndPermissions.html
+    # [5]: https://docs.aws.amazon.com/AmazonS3/latest/dev/UsingServerSideEncryption.html
+    # [6]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_CompleteMultipartUpload.html
+    # [7]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_AbortMultipartUpload.html
+    # [8]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_ListParts.html
+    # [9]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_ListMultipartUploads.html
     #
     # @option params [String, StringIO, File] :body
     #   Object data.
@@ -11275,8 +11554,8 @@ module Aws::S3
     #   encrypting data. This value is used to store the object and then it is
     #   discarded; Amazon S3 does not store the encryption key. The key must
     #   be appropriate for use with the algorithm specified in the
-    #   `x-amz-server-side​-encryption​-customer-algorithm header`. This must
-    #   be the same encryption key specified in the initiate multipart upload
+    #   `x-amz-server-side-encryption-customer-algorithm header`. This must be
+    #   the same encryption key specified in the initiate multipart upload
     #   request.
     #
     # @option params [String] :sse_customer_key_md5
@@ -11367,7 +11646,7 @@ module Aws::S3
     # in the *Amazon Simple Storage Service Developer Guide*.
     #
     # <note markdown="1"> Instead of using an existing object as part data, you might use the
-    # UploadPart operation and provide data in your request.
+    # [UploadPart][2] operation and provide data in your request.
     #
     #  </note>
     #
@@ -11380,20 +11659,20 @@ module Aws::S3
     # the following:
     #
     # * For conceptual information about multipart uploads, see [Uploading
-    #   Objects Using Multipart Upload][2] in the *Amazon Simple Storage
+    #   Objects Using Multipart Upload][3] in the *Amazon Simple Storage
     #   Service Developer Guide*.
     #
     # * For information about permissions required to use the multipart
-    #   upload API, see [Multipart Upload API and Permissions][3] in the
+    #   upload API, see [Multipart Upload API and Permissions][4] in the
     #   *Amazon Simple Storage Service Developer Guide*.
     #
     # * For information about copying objects using a single atomic
-    #   operation vs. the multipart upload, see [Operations on Objects][4]
+    #   operation vs. the multipart upload, see [Operations on Objects][5]
     #   in the *Amazon Simple Storage Service Developer Guide*.
     #
     # * For information about using server-side encryption with
     #   customer-provided encryption keys with the UploadPartCopy operation,
-    #   see CopyObject and UploadPart.
+    #   see [CopyObject][6] and [UploadPart][2].
     #
     # Note the following additional considerations about the request headers
     # `x-amz-copy-source-if-match`, `x-amz-copy-source-if-none-match`,
@@ -11466,24 +11745,31 @@ module Aws::S3
     #
     # **Related Resources**
     #
-    # * CreateMultipartUpload
+    # * [CreateMultipartUpload][7]
     #
-    # * UploadPart
+    # * [UploadPart][2]
     #
-    # * CompleteMultipartUpload
+    # * [CompleteMultipartUpload][8]
     #
-    # * AbortMultipartUpload
+    # * [AbortMultipartUpload][9]
     #
-    # * ListParts
+    # * [ListParts][10]
     #
-    # * ListMultipartUploads
+    # * [ListMultipartUploads][11]
     #
     #
     #
     # [1]: https://docs.aws.amazon.com/AmazonS3/latest/dev/qfacts.html
-    # [2]: https://docs.aws.amazon.com/AmazonS3/latest/dev/uploadobjusingmpu.html
-    # [3]: https://docs.aws.amazon.com/AmazonS3/latest/dev/mpuAndPermissions.html
-    # [4]: https://docs.aws.amazon.com/AmazonS3/latest/dev/ObjectOperations.html
+    # [2]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_UploadPart.html
+    # [3]: https://docs.aws.amazon.com/AmazonS3/latest/dev/uploadobjusingmpu.html
+    # [4]: https://docs.aws.amazon.com/AmazonS3/latest/dev/mpuAndPermissions.html
+    # [5]: https://docs.aws.amazon.com/AmazonS3/latest/dev/ObjectOperations.html
+    # [6]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_CopyObject.html
+    # [7]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_CreateMultipartUpload.html
+    # [8]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_CompleteMultipartUpload.html
+    # [9]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_AbortMultipartUpload.html
+    # [10]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_ListParts.html
+    # [11]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_ListMultipartUploads.html
     #
     # @option params [required, String] :bucket
     #   The bucket name.
@@ -11532,8 +11818,8 @@ module Aws::S3
     #   encrypting data. This value is used to store the object and then it is
     #   discarded; Amazon S3 does not store the encryption key. The key must
     #   be appropriate for use with the algorithm specified in the
-    #   `x-amz-server-side​-encryption​-customer-algorithm` header. This must
-    #   be the same encryption key specified in the initiate multipart upload
+    #   `x-amz-server-side-encryption-customer-algorithm` header. This must be
+    #   the same encryption key specified in the initiate multipart upload
     #   request.
     #
     # @option params [String] :sse_customer_key_md5
@@ -11577,26 +11863,6 @@ module Aws::S3
     #   * {Types::UploadPartCopyOutput#request_charged #request_charged} => String
     #
     #
-    # @example Example: To upload a part by copying data from an existing object as data source
-    #
-    #   # The following example uploads a part of a multipart upload by copying data from an existing object as data source.
-    #
-    #   resp = client.upload_part_copy({
-    #     bucket: "examplebucket", 
-    #     copy_source: "/bucketname/sourceobjectkey", 
-    #     key: "examplelargeobject", 
-    #     part_number: 1, 
-    #     upload_id: "exampleuoh_10OhKhT7YukE9bjzTPRiuaCotmZM_pFngJFir9OZNrSr5cWa3cq3LZSUsfjI4FI7PkP91We7Nrw--", 
-    #   })
-    #
-    #   resp.to_h outputs the following:
-    #   {
-    #     copy_part_result: {
-    #       etag: "\"b0c6f0e7e054ab8fa2536a2677f8734d\"", 
-    #       last_modified: Time.parse("2016-12-29T21:24:43.000Z"), 
-    #     }, 
-    #   }
-    #
     # @example Example: To upload a part by copying byte range from an existing object as data source
     #
     #   # The following example uploads a part of a multipart upload by copying a specified byte range from an existing object as
@@ -11616,6 +11882,26 @@ module Aws::S3
     #     copy_part_result: {
     #       etag: "\"65d16d19e65a7508a51f043180edcc36\"", 
     #       last_modified: Time.parse("2016-12-29T21:44:28.000Z"), 
+    #     }, 
+    #   }
+    #
+    # @example Example: To upload a part by copying data from an existing object as data source
+    #
+    #   # The following example uploads a part of a multipart upload by copying data from an existing object as data source.
+    #
+    #   resp = client.upload_part_copy({
+    #     bucket: "examplebucket", 
+    #     copy_source: "/bucketname/sourceobjectkey", 
+    #     key: "examplelargeobject", 
+    #     part_number: 1, 
+    #     upload_id: "exampleuoh_10OhKhT7YukE9bjzTPRiuaCotmZM_pFngJFir9OZNrSr5cWa3cq3LZSUsfjI4FI7PkP91We7Nrw--", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     copy_part_result: {
+    #       etag: "\"b0c6f0e7e054ab8fa2536a2677f8734d\"", 
+    #       last_modified: Time.parse("2016-12-29T21:24:43.000Z"), 
     #     }, 
     #   }
     #
@@ -11674,7 +11960,7 @@ module Aws::S3
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-s3'
-      context[:gem_version] = '1.75.0'
+      context[:gem_version] = '1.76.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

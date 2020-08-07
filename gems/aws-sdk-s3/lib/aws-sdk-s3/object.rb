@@ -67,8 +67,8 @@ module Aws::S3
 
     # If the object is an archived object (an object whose storage class is
     # GLACIER), the response includes this header if either the archive
-    # restoration is in progress (see RestoreObject or an archive copy is
-    # already restored.
+    # restoration is in progress (see [RestoreObject][1] or an archive copy
+    # is already restored.
     #
     # If an archive copy is already restored, the header value indicates
     # when Amazon S3 is scheduled to delete the object copy. For example:
@@ -80,11 +80,12 @@ module Aws::S3
     # `ongoing-request="true"`.
     #
     # For more information about archiving objects, see [Transitioning
-    # Objects: General Considerations][1].
+    # Objects: General Considerations][2].
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/AmazonS3/latest/dev/object-lifecycle-mgmt.html#lifecycle-transition-general-considerations
+    # [1]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_RestoreObject.html
+    # [2]: https://docs.aws.amazon.com/AmazonS3/latest/dev/object-lifecycle-mgmt.html#lifecycle-transition-general-considerations
     # @return [String]
     def restore
       data[:restore]
@@ -609,7 +610,7 @@ module Aws::S3
     #   encrypting data. This value is used to store the object and then it is
     #   discarded; Amazon S3 does not store the encryption key. The key must
     #   be appropriate for use with the algorithm specified in the
-    #   `x-amz-server-side​-encryption​-customer-algorithm` header.
+    #   `x-amz-server-side-encryption-customer-algorithm` header.
     # @option options [String] :sse_customer_key_md5
     #   Specifies the 128-bit MD5 digest of the encryption key according to
     #   RFC 1321. Amazon S3 uses this header for a message integrity check to
@@ -779,7 +780,7 @@ module Aws::S3
     #   encrypting data. This value is used to store the object and then it is
     #   discarded; Amazon S3 does not store the encryption key. The key must
     #   be appropriate for use with the algorithm specified in the
-    #   `x-amz-server-side​-encryption​-customer-algorithm` header.
+    #   `x-amz-server-side-encryption-customer-algorithm` header.
     # @option options [String] :sse_customer_key_md5
     #   Specifies the 128-bit MD5 digest of the encryption key according to
     #   RFC 1321. Amazon S3 uses this header for a message integrity check to
@@ -885,7 +886,7 @@ module Aws::S3
     #   encrypting data. This value is used to store the object and then it is
     #   discarded; Amazon S3 does not store the encryption key. The key must
     #   be appropriate for use with the algorithm specified in the
-    #   `x-amz-server-side​-encryption​-customer-algorithm` header.
+    #   `x-amz-server-side-encryption-customer-algorithm` header.
     # @option options [String] :sse_customer_key_md5
     #   Specifies the 128-bit MD5 digest of the encryption key according to
     #   RFC 1321. Amazon S3 uses this header for a message integrity check to
@@ -1098,7 +1099,7 @@ module Aws::S3
     #   encrypting data. This value is used to store the object and then it is
     #   discarded; Amazon S3 does not store the encryption key. The key must
     #   be appropriate for use with the algorithm specified in the
-    #   `x-amz-server-side​-encryption​-customer-algorithm` header.
+    #   `x-amz-server-side-encryption-customer-algorithm` header.
     # @option options [String] :sse_customer_key_md5
     #   Specifies the 128-bit MD5 digest of the encryption key according to
     #   RFC 1321. Amazon S3 uses this header for a message integrity check to

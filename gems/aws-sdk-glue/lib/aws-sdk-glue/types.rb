@@ -1674,7 +1674,7 @@ module Aws::Glue
     #       {
     #         name: "NameString", # required
     #         description: "DescriptionString",
-    #         connection_type: "JDBC", # required, accepts JDBC, SFTP, MONGODB, KAFKA
+    #         connection_type: "JDBC", # required, accepts JDBC, SFTP, MONGODB, KAFKA, NETWORK
     #         match_criteria: ["NameString"],
     #         connection_properties: { # required
     #           "HOST" => "ValueString",
@@ -1705,6 +1705,9 @@ module Aws::Glue
     #
     #   * `MONGODB` - Designates a connection to a MongoDB document
     #     database.
+    #
+    #   * `NETWORK` - Designates a network connection to a data source
+    #     within an Amazon Virtual Private Cloud environment (Amazon VPC).
     #
     #   SFTP is not supported.
     #   @return [String]
@@ -2075,6 +2078,7 @@ module Aws::Glue
     #           {
     #             path: "Path",
     #             exclusions: ["Path"],
+    #             connection_name: "ConnectionName",
     #           },
     #         ],
     #         jdbc_targets: [
@@ -2195,7 +2199,7 @@ module Aws::Glue
     #         connection_input: { # required
     #           name: "NameString", # required
     #           description: "DescriptionString",
-    #           connection_type: "JDBC", # required, accepts JDBC, SFTP, MONGODB, KAFKA
+    #           connection_type: "JDBC", # required, accepts JDBC, SFTP, MONGODB, KAFKA, NETWORK
     #           match_criteria: ["NameString"],
     #           connection_properties: { # required
     #             "HOST" => "ValueString",
@@ -2243,6 +2247,7 @@ module Aws::Glue
     #             {
     #               path: "Path",
     #               exclusions: ["Path"],
+    #               connection_name: "ConnectionName",
     #             },
     #           ],
     #           jdbc_targets: [
@@ -5837,7 +5842,7 @@ module Aws::Glue
     #
     #       {
     #         match_criteria: ["NameString"],
-    #         connection_type: "JDBC", # accepts JDBC, SFTP, MONGODB, KAFKA
+    #         connection_type: "JDBC", # accepts JDBC, SFTP, MONGODB, KAFKA, NETWORK
     #       }
     #
     # @!attribute [rw] match_criteria
@@ -5865,7 +5870,7 @@ module Aws::Glue
     #         catalog_id: "CatalogIdString",
     #         filter: {
     #           match_criteria: ["NameString"],
-    #           connection_type: "JDBC", # accepts JDBC, SFTP, MONGODB, KAFKA
+    #           connection_type: "JDBC", # accepts JDBC, SFTP, MONGODB, KAFKA, NETWORK
     #         },
     #         hide_password: false,
     #         next_token: "Token",
@@ -10652,6 +10657,7 @@ module Aws::Glue
     #       {
     #         path: "Path",
     #         exclusions: ["Path"],
+    #         connection_name: "ConnectionName",
     #       }
     #
     # @!attribute [rw] path
@@ -10667,11 +10673,18 @@ module Aws::Glue
     #   [1]: https://docs.aws.amazon.com/glue/latest/dg/add-crawler.html
     #   @return [Array<String>]
     #
+    # @!attribute [rw] connection_name
+    #   The name of a connection which allows a job or crawler to access
+    #   data in Amazon S3 within an Amazon Virtual Private Cloud environment
+    #   (Amazon VPC).
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/S3Target AWS API Documentation
     #
     class S3Target < Struct.new(
       :path,
-      :exclusions)
+      :exclusions,
+      :connection_name)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -12955,7 +12968,7 @@ module Aws::Glue
     #         connection_input: { # required
     #           name: "NameString", # required
     #           description: "DescriptionString",
-    #           connection_type: "JDBC", # required, accepts JDBC, SFTP, MONGODB, KAFKA
+    #           connection_type: "JDBC", # required, accepts JDBC, SFTP, MONGODB, KAFKA, NETWORK
     #           match_criteria: ["NameString"],
     #           connection_properties: { # required
     #             "HOST" => "ValueString",
@@ -13009,6 +13022,7 @@ module Aws::Glue
     #             {
     #               path: "Path",
     #               exclusions: ["Path"],
+    #               connection_name: "ConnectionName",
     #             },
     #           ],
     #           jdbc_targets: [

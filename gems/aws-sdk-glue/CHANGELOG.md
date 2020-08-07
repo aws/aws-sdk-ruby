@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.66.0 (2020-08-07)
+------------------
+
+* Feature - AWS Glue now adds support for Network connection type enabling you to access resources inside your VPC using Glue crawlers and Glue ETL jobs.
+
 1.65.0 (2020-07-27)
 ------------------
 
