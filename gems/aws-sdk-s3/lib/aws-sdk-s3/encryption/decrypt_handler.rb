@@ -7,6 +7,7 @@ module Aws
     module Encryption
       # @api private
       class DecryptHandler < Seahorse::Client::Handler
+        @@warned_response_target_proc = false
 
         V1_ENVELOPE_KEYS = %w(
           x-amz-key
@@ -45,6 +46,17 @@ module Aws
         def call(context)
           attach_http_event_listeners(context)
           apply_cse_user_agent(context)
+
+          if context[:response_target].is_a?(Proc) && !@@warned_response_target_proc
+            @@warned_response_target_proc = true
+            warn(':response_target is a Proc, or a block was provided. ' \
+              'Read the entire object to the ' \
+              'end before you start using the decrypted data. This is to ' \
+              'verify that the object has not been modified since it ' \
+              'was encrypted.')
+
+          end
+
           @handler.call(context)
         end
 
@@ -75,11 +87,11 @@ module Aws
         end
 
         def decryption_cipher(context)
-          if envelope = get_encryption_envelope(context)
+          if (envelope = get_encryption_envelope(context))
             cipher = context[:encryption][:cipher_provider]
                      .decryption_cipher(
                        envelope,
-                       kms_encryption_context: context[:encryption][:kms_encryption_context]
+                       context[:encryption]
                      )
             [cipher, envelope]
           else
