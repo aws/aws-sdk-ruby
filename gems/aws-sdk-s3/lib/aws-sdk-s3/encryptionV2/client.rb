@@ -234,6 +234,7 @@ module Aws
         def_delegators :@client, :config, :delete_object, :head_object, :build_request
 
         # Creates a new encryption client. You must configure all of the following:
+        #
         # * a key or key provider - The key provided also determines the key wrapping
         #   schema(s) supported for both encryption and decryption.
         # * `key_wrap_schema` - The key wrapping schema. It must match the type of key configured.
