@@ -123,7 +123,10 @@ end
 Given(/^I have a V2 encryption client$/) do
   @cse = Aws::S3::EncryptionV2::Client.new(
    client: @s3.client,
-   encryption_key: Base64.decode64("w1WLio3agRWRTSJK/Ouh8NHoqRQ6fn5WbSXDTHjXMSo=")
+   encryption_key: Base64.decode64("w1WLio3agRWRTSJK/Ouh8NHoqRQ6fn5WbSXDTHjXMSo="),
+   key_wrap_schema: :aes_gcm,
+   content_encryption_schema: :aes_gcm_no_padding,
+   security_profile: :v2_and_legacy
   )
 end
 
