@@ -1,6 +1,8 @@
 Unreleased Changes
 ------------------
 
+* Issue - Fix issue with JRuby and bump minimum version of core.
+
 1.76.0 (2020-08-07)
 ------------------
 
