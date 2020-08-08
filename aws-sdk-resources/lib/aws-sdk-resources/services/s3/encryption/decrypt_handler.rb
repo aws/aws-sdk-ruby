@@ -54,7 +54,6 @@ module Aws
               'end before you start using the decrypted data. This is to ' \
               'verify that the object has not been modified since it ' \
               'was encrypted.')
-
           end
 
           @handler.call(context)
