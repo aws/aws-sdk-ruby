@@ -71,6 +71,7 @@ module Aws
     # ## Required Configuration
     #
     # You must configure all of the following:
+    #
     # * a key or key provider - See the Keys section below. The key provided determines
     #   the key wrapping schema(s) supported for both encryption and decryption.
     # * `key_wrap_schema` - The key wrapping schema. It must match the type of key configured.
@@ -234,6 +235,7 @@ module Aws
         def_delegators :@client, :config, :delete_object, :head_object, :build_request
 
         # Creates a new encryption client. You must configure all of the following:
+        #
         # * a key or key provider - The key provided also determines the key wrapping
         #   schema(s) supported for both encryption and decryption.
         # * `key_wrap_schema` - The key wrapping schema. It must match the type of key configured.
@@ -392,7 +394,7 @@ module Aws
         # @option (see S3::Client#get_object)
         # @return (see S3::Client#get_object)
         # @see S3::Client#get_object
-        # @note The `:range` request parameter is not yet supported.
+        # @note The `:range` request parameter is not supported.
         def get_object(params = {}, &block)
           if params[:range]
             raise NotImplementedError, '#get_object with :range not supported'
