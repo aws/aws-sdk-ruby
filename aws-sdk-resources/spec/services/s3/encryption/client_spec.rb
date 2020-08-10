@@ -608,11 +608,8 @@ module Aws
             "\x8E\x0E\xC0\xD5\x1A\x88\xAF2\xB1\xEEg#\x15"
           end
 
-          if !ENV['TRAVIS'] && RUBY_VERSION > '1.9.3'
+          if !ENV['TRAVIS'] && RUBY_VERSION > '1.9.3' && OpenSSL::Cipher.ciphers.include?('aes-256-gcm')
             it 'supports decryption via KMS w/ GCM' do
-              unless OpenSSL::Cipher.ciphers.include?('aes-256-gcm')
-                pending('aes-256-gcm not supported')
-              end
               kms_client.stub_responses(
                 :decrypt, plaintext: plaintext_object_key
               )
