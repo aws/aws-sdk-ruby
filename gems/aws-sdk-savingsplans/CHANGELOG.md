@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.8.0 (2020-08-10)
+------------------
+
+* Feature - Updates to the list of services supported by this API.
+
 1.7.0 (2020-06-23)
 ------------------
 

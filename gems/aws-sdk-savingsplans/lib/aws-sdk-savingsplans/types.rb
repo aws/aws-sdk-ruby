@@ -150,7 +150,7 @@ module Aws::SavingsPlans
     #         savings_plan_payment_options: ["All Upfront"], # accepts All Upfront, Partial Upfront, No Upfront
     #         savings_plan_types: ["Compute"], # accepts Compute, EC2Instance
     #         products: ["EC2"], # accepts EC2, Fargate, Lambda
-    #         service_codes: ["AmazonEC2"], # accepts AmazonEC2, AmazonECS, AWSLambda
+    #         service_codes: ["AmazonEC2"], # accepts AmazonEC2, AmazonECS, AmazonEKS, AWSLambda
     #         usage_types: ["SavingsPlanRateUsageType"],
     #         operations: ["SavingsPlanRateOperation"],
     #         filters: [

@@ -1452,8 +1452,10 @@ module Aws::Glue
     #   @return [String]
     #
     # @!attribute [rw] state
-    #   The condition state. Currently, the values supported are
-    #   `SUCCEEDED`, `STOPPED`, `TIMEOUT`, and `FAILED`.
+    #   The condition state. Currently, the only job states that a trigger
+    #   can listen for are `SUCCEEDED`, `STOPPED`, `FAILED`, and `TIMEOUT`.
+    #   The only crawler states that a trigger can listen for are
+    #   `SUCCEEDED`, `FAILED`, and `CANCELLED`.
     #   @return [String]
     #
     # @!attribute [rw] crawler_name
@@ -3828,6 +3830,7 @@ module Aws::Glue
     #         tags: {
     #           "TagKey" => "TagValue",
     #         },
+    #         max_concurrent_runs: 1,
     #       }
     #
     # @!attribute [rw] name
@@ -3848,13 +3851,22 @@ module Aws::Glue
     #   The tags to be used with this workflow.
     #   @return [Hash<String,String>]
     #
+    # @!attribute [rw] max_concurrent_runs
+    #   You can use this parameter to prevent unwanted multiple updates to
+    #   data, to control costs, or in some cases, to prevent exceeding the
+    #   maximum number of concurrent runs of any of the component jobs. If
+    #   you leave this parameter blank, there is no limit to the number of
+    #   concurrent workflow runs.
+    #   @return [Integer]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/CreateWorkflowRequest AWS API Documentation
     #
     class CreateWorkflowRequest < Struct.new(
       :name,
       :description,
       :default_run_properties,
-      :tags)
+      :tags,
+      :max_concurrent_runs)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -8706,7 +8718,13 @@ module Aws::Glue
     #   @return [Time]
     #
     # @!attribute [rw] job_run_state
-    #   The current state of the job run.
+    #   The current state of the job run. For more information about the
+    #   statuses of jobs that have terminated abnormally, see [AWS Glue Job
+    #   Run Statuses][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/glue/latest/dg/job-run-statuses.html
     #   @return [String]
     #
     # @!attribute [rw] arguments
@@ -10588,8 +10606,8 @@ module Aws::Glue
     #
     # @!attribute [rw] node_ids
     #   A list of the node IDs for the nodes you want to restart. The nodes
-    #   that are to be restarted must have an execution attempt in the
-    #   original run.
+    #   that are to be restarted must have a run attempt in the original
+    #   run.
     #   @return [Array<String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/ResumeWorkflowRunRequest AWS API Documentation
@@ -14010,6 +14028,7 @@ module Aws::Glue
     #         default_run_properties: {
     #           "IdString" => "GenericString",
     #         },
+    #         max_concurrent_runs: 1,
     #       }
     #
     # @!attribute [rw] name
@@ -14025,12 +14044,21 @@ module Aws::Glue
     #   the workflow.
     #   @return [Hash<String,String>]
     #
+    # @!attribute [rw] max_concurrent_runs
+    #   You can use this parameter to prevent unwanted multiple updates to
+    #   data, to control costs, or in some cases, to prevent exceeding the
+    #   maximum number of concurrent runs of any of the component jobs. If
+    #   you leave this parameter blank, there is no limit to the number of
+    #   concurrent workflow runs.
+    #   @return [Integer]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/UpdateWorkflowRequest AWS API Documentation
     #
     class UpdateWorkflowRequest < Struct.new(
       :name,
       :description,
-      :default_run_properties)
+      :default_run_properties,
+      :max_concurrent_runs)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -14247,6 +14275,14 @@ module Aws::Glue
     #   edges.
     #   @return [Types::WorkflowGraph]
     #
+    # @!attribute [rw] max_concurrent_runs
+    #   You can use this parameter to prevent unwanted multiple updates to
+    #   data, to control costs, or in some cases, to prevent exceeding the
+    #   maximum number of concurrent runs of any of the component jobs. If
+    #   you leave this parameter blank, there is no limit to the number of
+    #   concurrent workflow runs.
+    #   @return [Integer]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/Workflow AWS API Documentation
     #
     class Workflow < Struct.new(
@@ -14256,7 +14292,8 @@ module Aws::Glue
       :created_on,
       :last_modified_on,
       :last_run,
-      :graph)
+      :graph,
+      :max_concurrent_runs)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -14315,6 +14352,12 @@ module Aws::Glue
     #   The status of the workflow run.
     #   @return [String]
     #
+    # @!attribute [rw] error_message
+    #   This error message describes any error that may have occurred in
+    #   starting the workflow run. Currently the only error message is
+    #   "Concurrent runs exceeded for workflow: `foo`."
+    #   @return [String]
+    #
     # @!attribute [rw] statistics
     #   The statistics of the run.
     #   @return [Types::WorkflowRunStatistics]
@@ -14335,6 +14378,7 @@ module Aws::Glue
       :started_on,
       :completed_on,
       :status,
+      :error_message,
       :statistics,
       :graph)
       SENSITIVE = []

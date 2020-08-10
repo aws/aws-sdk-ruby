@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.77.0 (2020-08-10)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
 * Issue - Fix issue with JRuby and bump minimum version of core.
 
 1.76.0 (2020-08-07)

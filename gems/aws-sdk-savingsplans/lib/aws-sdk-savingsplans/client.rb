@@ -410,7 +410,7 @@ module Aws::SavingsPlans
     #   resp.search_results[0].currency #=> String, one of "CNY", "USD"
     #   resp.search_results[0].unit #=> String, one of "Hrs", "Lambda-GB-Second", "Request"
     #   resp.search_results[0].product_type #=> String, one of "EC2", "Fargate", "Lambda"
-    #   resp.search_results[0].service_code #=> String, one of "AmazonEC2", "AmazonECS", "AWSLambda"
+    #   resp.search_results[0].service_code #=> String, one of "AmazonEC2", "AmazonECS", "AmazonEKS", "AWSLambda"
     #   resp.search_results[0].usage_type #=> String
     #   resp.search_results[0].operation #=> String
     #   resp.search_results[0].properties #=> Array
@@ -550,7 +550,7 @@ module Aws::SavingsPlans
     #     savings_plan_payment_options: ["All Upfront"], # accepts All Upfront, Partial Upfront, No Upfront
     #     savings_plan_types: ["Compute"], # accepts Compute, EC2Instance
     #     products: ["EC2"], # accepts EC2, Fargate, Lambda
-    #     service_codes: ["AmazonEC2"], # accepts AmazonEC2, AmazonECS, AWSLambda
+    #     service_codes: ["AmazonEC2"], # accepts AmazonEC2, AmazonECS, AmazonEKS, AWSLambda
     #     usage_types: ["SavingsPlanRateUsageType"],
     #     operations: ["SavingsPlanRateOperation"],
     #     filters: [
@@ -575,7 +575,7 @@ module Aws::SavingsPlans
     #   resp.search_results[0].rate #=> String
     #   resp.search_results[0].unit #=> String, one of "Hrs", "Lambda-GB-Second", "Request"
     #   resp.search_results[0].product_type #=> String, one of "EC2", "Fargate", "Lambda"
-    #   resp.search_results[0].service_code #=> String, one of "AmazonEC2", "AmazonECS", "AWSLambda"
+    #   resp.search_results[0].service_code #=> String, one of "AmazonEC2", "AmazonECS", "AmazonEKS", "AWSLambda"
     #   resp.search_results[0].usage_type #=> String
     #   resp.search_results[0].operation #=> String
     #   resp.search_results[0].properties #=> Array
@@ -788,7 +788,7 @@ module Aws::SavingsPlans
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-savingsplans'
-      context[:gem_version] = '1.7.0'
+      context[:gem_version] = '1.8.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

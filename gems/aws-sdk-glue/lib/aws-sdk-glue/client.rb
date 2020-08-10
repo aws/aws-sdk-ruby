@@ -1003,7 +1003,8 @@ module Aws::Glue
     #   resp.workflows[0].last_run.workflow_run_properties["IdString"] #=> String
     #   resp.workflows[0].last_run.started_on #=> Time
     #   resp.workflows[0].last_run.completed_on #=> Time
-    #   resp.workflows[0].last_run.status #=> String, one of "RUNNING", "COMPLETED", "STOPPING", "STOPPED"
+    #   resp.workflows[0].last_run.status #=> String, one of "RUNNING", "COMPLETED", "STOPPING", "STOPPED", "ERROR"
+    #   resp.workflows[0].last_run.error_message #=> String
     #   resp.workflows[0].last_run.statistics.total_actions #=> Integer
     #   resp.workflows[0].last_run.statistics.timeout_actions #=> Integer
     #   resp.workflows[0].last_run.statistics.failed_actions #=> Integer
@@ -1134,6 +1135,7 @@ module Aws::Glue
     #   resp.workflows[0].graph.edges #=> Array
     #   resp.workflows[0].graph.edges[0].source_id #=> String
     #   resp.workflows[0].graph.edges[0].destination_id #=> String
+    #   resp.workflows[0].max_concurrent_runs #=> Integer
     #   resp.missing_workflows #=> Array
     #   resp.missing_workflows[0] #=> String
     #
@@ -2562,6 +2564,13 @@ module Aws::Glue
     # @option params [Hash<String,String>] :tags
     #   The tags to be used with this workflow.
     #
+    # @option params [Integer] :max_concurrent_runs
+    #   You can use this parameter to prevent unwanted multiple updates to
+    #   data, to control costs, or in some cases, to prevent exceeding the
+    #   maximum number of concurrent runs of any of the component jobs. If you
+    #   leave this parameter blank, there is no limit to the number of
+    #   concurrent workflow runs.
+    #
     # @return [Types::CreateWorkflowResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateWorkflowResponse#name #name} => String
@@ -2577,6 +2586,7 @@ module Aws::Glue
     #     tags: {
     #       "TagKey" => "TagValue",
     #     },
+    #     max_concurrent_runs: 1,
     #   })
     #
     # @example Response structure
@@ -5965,7 +5975,8 @@ module Aws::Glue
     #   resp.workflow.last_run.workflow_run_properties["IdString"] #=> String
     #   resp.workflow.last_run.started_on #=> Time
     #   resp.workflow.last_run.completed_on #=> Time
-    #   resp.workflow.last_run.status #=> String, one of "RUNNING", "COMPLETED", "STOPPING", "STOPPED"
+    #   resp.workflow.last_run.status #=> String, one of "RUNNING", "COMPLETED", "STOPPING", "STOPPED", "ERROR"
+    #   resp.workflow.last_run.error_message #=> String
     #   resp.workflow.last_run.statistics.total_actions #=> Integer
     #   resp.workflow.last_run.statistics.timeout_actions #=> Integer
     #   resp.workflow.last_run.statistics.failed_actions #=> Integer
@@ -6096,6 +6107,7 @@ module Aws::Glue
     #   resp.workflow.graph.edges #=> Array
     #   resp.workflow.graph.edges[0].source_id #=> String
     #   resp.workflow.graph.edges[0].destination_id #=> String
+    #   resp.workflow.max_concurrent_runs #=> Integer
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/GetWorkflow AWS API Documentation
     #
@@ -6138,7 +6150,8 @@ module Aws::Glue
     #   resp.run.workflow_run_properties["IdString"] #=> String
     #   resp.run.started_on #=> Time
     #   resp.run.completed_on #=> Time
-    #   resp.run.status #=> String, one of "RUNNING", "COMPLETED", "STOPPING", "STOPPED"
+    #   resp.run.status #=> String, one of "RUNNING", "COMPLETED", "STOPPING", "STOPPED", "ERROR"
+    #   resp.run.error_message #=> String
     #   resp.run.statistics.total_actions #=> Integer
     #   resp.run.statistics.timeout_actions #=> Integer
     #   resp.run.statistics.failed_actions #=> Integer
@@ -6290,7 +6303,8 @@ module Aws::Glue
     #   resp.runs[0].workflow_run_properties["IdString"] #=> String
     #   resp.runs[0].started_on #=> Time
     #   resp.runs[0].completed_on #=> Time
-    #   resp.runs[0].status #=> String, one of "RUNNING", "COMPLETED", "STOPPING", "STOPPED"
+    #   resp.runs[0].status #=> String, one of "RUNNING", "COMPLETED", "STOPPING", "STOPPED", "ERROR"
+    #   resp.runs[0].error_message #=> String
     #   resp.runs[0].statistics.total_actions #=> Integer
     #   resp.runs[0].statistics.timeout_actions #=> Integer
     #   resp.runs[0].statistics.failed_actions #=> Integer
@@ -6888,8 +6902,9 @@ module Aws::Glue
       req.send_request(options)
     end
 
-    # Restarts any completed nodes in a workflow run and resumes the run
-    # execution.
+    # Restarts selected nodes of a previous partially completed workflow run
+    # and resumes the workflow run. The selected nodes and all nodes that
+    # are downstream from the selected nodes are run.
     #
     # @option params [required, String] :name
     #   The name of the workflow to resume.
@@ -6899,8 +6914,7 @@ module Aws::Glue
     #
     # @option params [required, Array<String>] :node_ids
     #   A list of the node IDs for the nodes you want to restart. The nodes
-    #   that are to be restarted must have an execution attempt in the
-    #   original run.
+    #   that are to be restarted must have a run attempt in the original run.
     #
     # @return [Types::ResumeWorkflowRunResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -8850,6 +8864,13 @@ module Aws::Glue
     #   A collection of properties to be used as part of each execution of the
     #   workflow.
     #
+    # @option params [Integer] :max_concurrent_runs
+    #   You can use this parameter to prevent unwanted multiple updates to
+    #   data, to control costs, or in some cases, to prevent exceeding the
+    #   maximum number of concurrent runs of any of the component jobs. If you
+    #   leave this parameter blank, there is no limit to the number of
+    #   concurrent workflow runs.
+    #
     # @return [Types::UpdateWorkflowResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::UpdateWorkflowResponse#name #name} => String
@@ -8862,6 +8883,7 @@ module Aws::Glue
     #     default_run_properties: {
     #       "IdString" => "GenericString",
     #     },
+    #     max_concurrent_runs: 1,
     #   })
     #
     # @example Response structure
@@ -8890,7 +8912,7 @@ module Aws::Glue
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-glue'
-      context[:gem_version] = '1.66.0'
+      context[:gem_version] = '1.67.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

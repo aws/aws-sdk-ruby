@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.184.0 (2020-08-10)
+------------------
+
+* Feature - Remove CoIP Auto-Assign feature references.
+
 1.183.0 (2020-08-06)
 ------------------
 

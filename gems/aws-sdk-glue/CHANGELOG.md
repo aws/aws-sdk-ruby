@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.67.0 (2020-08-10)
+------------------
+
+* Feature - Starting today, you can further control orchestration of your ETL workloads in AWS Glue by specifying the maximum number of concurrent runs for a Glue workflow.
+
 1.66.0 (2020-08-07)
 ------------------
 

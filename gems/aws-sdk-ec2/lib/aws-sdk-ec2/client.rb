@@ -31530,20 +31530,6 @@ module Aws::EC2
     # @option params [required, String] :subnet_id
     #   The ID of the subnet.
     #
-    # @option params [Types::AttributeBooleanValue] :map_customer_owned_ip_on_launch
-    #   Specify `true` to indicate that network interfaces attached to
-    #   instances created in the specified subnet should be assigned a
-    #   customer-owned IPv4 address.
-    #
-    #   When this value is `true`, you must specify the customer-owned IP pool
-    #   using `CustomerOwnedIpv4Pool`.
-    #
-    # @option params [String] :customer_owned_ipv_4_pool
-    #   The customer-owned IPv4 address pool associated with the subnet.
-    #
-    #   You must set this value when you specify `true` for
-    #   `MapCustomerOwnedIpOnLaunch`.
-    #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
     #
@@ -31569,10 +31555,6 @@ module Aws::EC2
     #       value: false,
     #     },
     #     subnet_id: "SubnetId", # required
-    #     map_customer_owned_ip_on_launch: {
-    #       value: false,
-    #     },
-    #     customer_owned_ipv_4_pool: "CoipPoolId",
     #   })
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ModifySubnetAttribute AWS API Documentation
@@ -38189,7 +38171,7 @@ module Aws::EC2
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-ec2'
-      context[:gem_version] = '1.183.0'
+      context[:gem_version] = '1.184.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 
