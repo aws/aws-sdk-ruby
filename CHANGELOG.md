@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+2.11.564 (2020-08-11)
+------------------
+
 * Feature - Aws::EC2 - Updated the API for Amazon Elastic Compute Cloud.
 
 * Feature - Aws::Lambda - Updated the API, and documentation for AWS Lambda.
