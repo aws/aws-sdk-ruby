@@ -316,7 +316,7 @@ module Aws::APIGateway
 
     # Create an ApiKey resource.
     #
-    # <div class="seeAlso">
+    # <div class="seeAlso" markdown="1">
     # [AWS CLI][1]
     # </div>
     #
@@ -411,7 +411,7 @@ module Aws::APIGateway
 
     # Adds a new Authorizer resource to an existing RestApi resource.
     #
-    # <div class="seeAlso">
+    # <div class="seeAlso" markdown="1">
     # [AWS CLI][1]
     # </div>
     #
@@ -1541,7 +1541,7 @@ module Aws::APIGateway
 
     # Deletes an existing Authorizer resource.
     #
-    # <div class="seeAlso">
+    # <div class="seeAlso" markdown="1">
     # [AWS CLI][1]
     # </div>
     #
@@ -2300,7 +2300,7 @@ module Aws::APIGateway
 
     # Describe an existing Authorizer resource.
     #
-    # <div class="seeAlso">
+    # <div class="seeAlso" markdown="1">
     # [AWS CLI][1]
     # </div>
     #
@@ -2357,7 +2357,7 @@ module Aws::APIGateway
 
     # Describe an existing Authorizers resource.
     #
-    # <div class="seeAlso">
+    # <div class="seeAlso" markdown="1">
     # [AWS CLI][1]
     # </div>
     #
@@ -5426,7 +5426,7 @@ module Aws::APIGateway
     # Simulate the execution of an Authorizer in your RestApi with headers,
     # parameters, and an incoming request body.
     #
-    # <div class="seeAlso">
+    # <div class="seeAlso" markdown="1">
     # [Use Lambda Function as Authorizer][1] [Use Cognito User Pool as
     # Authorizer][2]
     # </div>
@@ -5730,7 +5730,7 @@ module Aws::APIGateway
 
     # Updates an existing Authorizer resource.
     #
-    # <div class="seeAlso">
+    # <div class="seeAlso" markdown="1">
     # [AWS CLI][1]
     # </div>
     #
@@ -7018,7 +7018,7 @@ module Aws::APIGateway
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-apigateway'
-      context[:gem_version] = '1.48.0'
+      context[:gem_version] = '1.49.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

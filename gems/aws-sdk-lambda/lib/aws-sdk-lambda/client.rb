@@ -660,6 +660,8 @@ module Aws::Lambda
     #
     # * [Using AWS Lambda with Amazon SQS][3]
     #
+    # * [Using AWS Lambda with Amazon MSK][4]
+    #
     # The following error handling options are only available for stream
     # sources (DynamoDB and Kinesis):
     #
@@ -670,10 +672,11 @@ module Aws::Lambda
     #   or Amazon SNS topic.
     #
     # * `MaximumRecordAgeInSeconds` - Discard records older than the
-    #   specified age.
+    #   specified age. Default -1 (infinite). Minimum 60. Maximum 604800.
     #
     # * `MaximumRetryAttempts` - Discard records after the specified number
-    #   of retries.
+    #   of retries. Default -1 (infinite). Minimum 0. Maximum 10000. When
+    #   infinite, failed records will be retried until the record expires.
     #
     # * `ParallelizationFactor` - Process multiple batches from each shard
     #   concurrently.
@@ -683,6 +686,7 @@ module Aws::Lambda
     # [1]: https://docs.aws.amazon.com/lambda/latest/dg/with-ddb.html
     # [2]: https://docs.aws.amazon.com/lambda/latest/dg/with-kinesis.html
     # [3]: https://docs.aws.amazon.com/lambda/latest/dg/with-sqs.html
+    # [4]: https://docs.aws.amazon.com/lambda/latest/dg/with-msk.html
     #
     # @option params [required, String] :event_source_arn
     #   The Amazon Resource Name (ARN) of the event source.
@@ -693,6 +697,9 @@ module Aws::Lambda
     #   * **Amazon DynamoDB Streams** - The ARN of the stream.
     #
     #   * **Amazon Simple Queue Service** - The ARN of the queue.
+    #
+    #   * **Amazon Managed Streaming for Apache Kafka** - The ARN of the
+    #     cluster.
     #
     # @option params [required, String] :function_name
     #   The name of the Lambda function.
@@ -713,7 +720,8 @@ module Aws::Lambda
     #   only the function name, it's limited to 64 characters in length.
     #
     # @option params [Boolean] :enabled
-    #   Disables the event source mapping to pause polling and invocation.
+    #   If true, the event source mapping is active. Set to false to pause
+    #   polling and invocation.
     #
     # @option params [Integer] :batch_size
     #   The maximum number of items to retrieve in a single batch.
@@ -723,6 +731,9 @@ module Aws::Lambda
     #   * **Amazon DynamoDB Streams** - Default 100. Max 1,000.
     #
     #   * **Amazon Simple Queue Service** - Default 10. Max 10.
+    #
+    #   * **Amazon Managed Streaming for Apache Kafka** - Default 100. Max
+    #     10,000.
     #
     # @option params [Integer] :maximum_batching_window_in_seconds
     #   (Streams) The maximum amount of time to gather records before invoking
@@ -734,8 +745,8 @@ module Aws::Lambda
     #
     # @option params [String] :starting_position
     #   The position in a stream from which to start reading. Required for
-    #   Amazon Kinesis and Amazon DynamoDB Streams sources. `AT_TIMESTAMP` is
-    #   only supported for Amazon Kinesis streams.
+    #   Amazon Kinesis, Amazon DynamoDB, and Amazon MSK Streams sources.
+    #   `AT_TIMESTAMP` is only supported for Amazon Kinesis streams.
     #
     # @option params [Time,DateTime,Date,Integer,String] :starting_position_timestamp
     #   With `StartingPosition` set to `AT_TIMESTAMP`, the time from which to
@@ -746,16 +757,20 @@ module Aws::Lambda
     #   discarded records.
     #
     # @option params [Integer] :maximum_record_age_in_seconds
-    #   (Streams) The maximum age of a record that Lambda sends to a function
-    #   for processing.
+    #   (Streams) Discard records older than the specified age. The default
+    #   value is infinite (-1).
     #
     # @option params [Boolean] :bisect_batch_on_function_error
     #   (Streams) If the function returns an error, split the batch in two and
     #   retry.
     #
     # @option params [Integer] :maximum_retry_attempts
-    #   (Streams) The maximum number of times to retry when the function
-    #   returns an error.
+    #   (Streams) Discard records after the specified number of retries. The
+    #   default value is infinite (-1). When set to infinite (-1), failed
+    #   records will be retried until the record expires.
+    #
+    # @option params [Array<String>] :topics
+    #   (MSK) The name of the Kafka topic.
     #
     # @return [Types::EventSourceMappingConfiguration] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -770,6 +785,7 @@ module Aws::Lambda
     #   * {Types::EventSourceMappingConfiguration#state #state} => String
     #   * {Types::EventSourceMappingConfiguration#state_transition_reason #state_transition_reason} => String
     #   * {Types::EventSourceMappingConfiguration#destination_config #destination_config} => Types::DestinationConfig
+    #   * {Types::EventSourceMappingConfiguration#topics #topics} => Array&lt;String&gt;
     #   * {Types::EventSourceMappingConfiguration#maximum_record_age_in_seconds #maximum_record_age_in_seconds} => Integer
     #   * {Types::EventSourceMappingConfiguration#bisect_batch_on_function_error #bisect_batch_on_function_error} => Boolean
     #   * {Types::EventSourceMappingConfiguration#maximum_retry_attempts #maximum_retry_attempts} => Integer
@@ -818,6 +834,7 @@ module Aws::Lambda
     #     maximum_record_age_in_seconds: 1,
     #     bisect_batch_on_function_error: false,
     #     maximum_retry_attempts: 1,
+    #     topics: ["Topic"],
     #   })
     #
     # @example Response structure
@@ -834,6 +851,8 @@ module Aws::Lambda
     #   resp.state_transition_reason #=> String
     #   resp.destination_config.on_success.destination #=> String
     #   resp.destination_config.on_failure.destination #=> String
+    #   resp.topics #=> Array
+    #   resp.topics[0] #=> String
     #   resp.maximum_record_age_in_seconds #=> Integer
     #   resp.bisect_batch_on_function_error #=> Boolean
     #   resp.maximum_retry_attempts #=> Integer
@@ -1264,6 +1283,7 @@ module Aws::Lambda
     #   * {Types::EventSourceMappingConfiguration#state #state} => String
     #   * {Types::EventSourceMappingConfiguration#state_transition_reason #state_transition_reason} => String
     #   * {Types::EventSourceMappingConfiguration#destination_config #destination_config} => Types::DestinationConfig
+    #   * {Types::EventSourceMappingConfiguration#topics #topics} => Array&lt;String&gt;
     #   * {Types::EventSourceMappingConfiguration#maximum_record_age_in_seconds #maximum_record_age_in_seconds} => Integer
     #   * {Types::EventSourceMappingConfiguration#bisect_batch_on_function_error #bisect_batch_on_function_error} => Boolean
     #   * {Types::EventSourceMappingConfiguration#maximum_retry_attempts #maximum_retry_attempts} => Integer
@@ -1308,6 +1328,8 @@ module Aws::Lambda
     #   resp.state_transition_reason #=> String
     #   resp.destination_config.on_success.destination #=> String
     #   resp.destination_config.on_failure.destination #=> String
+    #   resp.topics #=> Array
+    #   resp.topics[0] #=> String
     #   resp.maximum_record_age_in_seconds #=> Integer
     #   resp.bisect_batch_on_function_error #=> Boolean
     #   resp.maximum_retry_attempts #=> Integer
@@ -1719,6 +1741,7 @@ module Aws::Lambda
     #   * {Types::EventSourceMappingConfiguration#state #state} => String
     #   * {Types::EventSourceMappingConfiguration#state_transition_reason #state_transition_reason} => String
     #   * {Types::EventSourceMappingConfiguration#destination_config #destination_config} => Types::DestinationConfig
+    #   * {Types::EventSourceMappingConfiguration#topics #topics} => Array&lt;String&gt;
     #   * {Types::EventSourceMappingConfiguration#maximum_record_age_in_seconds #maximum_record_age_in_seconds} => Integer
     #   * {Types::EventSourceMappingConfiguration#bisect_batch_on_function_error #bisect_batch_on_function_error} => Boolean
     #   * {Types::EventSourceMappingConfiguration#maximum_retry_attempts #maximum_retry_attempts} => Integer
@@ -1770,6 +1793,8 @@ module Aws::Lambda
     #   resp.state_transition_reason #=> String
     #   resp.destination_config.on_success.destination #=> String
     #   resp.destination_config.on_failure.destination #=> String
+    #   resp.topics #=> Array
+    #   resp.topics[0] #=> String
     #   resp.maximum_record_age_in_seconds #=> Integer
     #   resp.bisect_batch_on_function_error #=> Boolean
     #   resp.maximum_retry_attempts #=> Integer
@@ -2530,9 +2555,9 @@ module Aws::Lambda
     #   * {Types::GetProvisionedConcurrencyConfigResponse#last_modified #last_modified} => Time
     #
     #
-    # @example Example: To view a provisioned concurrency configuration
+    # @example Example: To get a provisioned concurrency configuration
     #
-    #   # The following example displays details for the provisioned concurrency configuration for the BLUE alias of the specified
+    #   # The following example returns details for the provisioned concurrency configuration for the BLUE alias of the specified
     #   # function.
     #
     #   resp = client.get_provisioned_concurrency_config({
@@ -2549,9 +2574,9 @@ module Aws::Lambda
     #     status: "READY", 
     #   }
     #
-    # @example Example: To get a provisioned concurrency configuration
+    # @example Example: To view a provisioned concurrency configuration
     #
-    #   # The following example returns details for the provisioned concurrency configuration for the BLUE alias of the specified
+    #   # The following example displays details for the provisioned concurrency configuration for the BLUE alias of the specified
     #   # function.
     #
     #   resp = client.get_provisioned_concurrency_config({
@@ -2936,6 +2961,9 @@ module Aws::Lambda
     #
     #   * **Amazon Simple Queue Service** - The ARN of the queue.
     #
+    #   * **Amazon Managed Streaming for Apache Kafka** - The ARN of the
+    #     cluster.
+    #
     # @option params [String] :function_name
     #   The name of the Lambda function.
     #
@@ -3016,6 +3044,8 @@ module Aws::Lambda
     #   resp.event_source_mappings[0].state_transition_reason #=> String
     #   resp.event_source_mappings[0].destination_config.on_success.destination #=> String
     #   resp.event_source_mappings[0].destination_config.on_failure.destination #=> String
+    #   resp.event_source_mappings[0].topics #=> Array
+    #   resp.event_source_mappings[0].topics[0] #=> String
     #   resp.event_source_mappings[0].maximum_record_age_in_seconds #=> Integer
     #   resp.event_source_mappings[0].bisect_batch_on_function_error #=> Boolean
     #   resp.event_source_mappings[0].maximum_retry_attempts #=> Integer
@@ -4680,10 +4710,11 @@ module Aws::Lambda
     #   or Amazon SNS topic.
     #
     # * `MaximumRecordAgeInSeconds` - Discard records older than the
-    #   specified age.
+    #   specified age. Default -1 (infinite). Minimum 60. Maximum 604800.
     #
     # * `MaximumRetryAttempts` - Discard records after the specified number
-    #   of retries.
+    #   of retries. Default -1 (infinite). Minimum 0. Maximum 10000. When
+    #   infinite, failed records will be retried until the record expires.
     #
     # * `ParallelizationFactor` - Process multiple batches from each shard
     #   concurrently.
@@ -4710,7 +4741,8 @@ module Aws::Lambda
     #   only the function name, it's limited to 64 characters in length.
     #
     # @option params [Boolean] :enabled
-    #   Disables the event source mapping to pause polling and invocation.
+    #   If true, the event source mapping is active. Set to false to pause
+    #   polling and invocation.
     #
     # @option params [Integer] :batch_size
     #   The maximum number of items to retrieve in a single batch.
@@ -4721,6 +4753,9 @@ module Aws::Lambda
     #
     #   * **Amazon Simple Queue Service** - Default 10. Max 10.
     #
+    #   * **Amazon Managed Streaming for Apache Kafka** - Default 100. Max
+    #     10,000.
+    #
     # @option params [Integer] :maximum_batching_window_in_seconds
     #   (Streams) The maximum amount of time to gather records before invoking
     #   the function, in seconds.
@@ -4730,16 +4765,17 @@ module Aws::Lambda
     #   discarded records.
     #
     # @option params [Integer] :maximum_record_age_in_seconds
-    #   (Streams) The maximum age of a record that Lambda sends to a function
-    #   for processing.
+    #   (Streams) Discard records older than the specified age. The default
+    #   value is infinite (-1).
     #
     # @option params [Boolean] :bisect_batch_on_function_error
     #   (Streams) If the function returns an error, split the batch in two and
     #   retry.
     #
     # @option params [Integer] :maximum_retry_attempts
-    #   (Streams) The maximum number of times to retry when the function
-    #   returns an error.
+    #   (Streams) Discard records after the specified number of retries. The
+    #   default value is infinite (-1). When set to infinite (-1), failed
+    #   records will be retried until the record expires.
     #
     # @option params [Integer] :parallelization_factor
     #   (Streams) The number of batches to process from each shard
@@ -4758,6 +4794,7 @@ module Aws::Lambda
     #   * {Types::EventSourceMappingConfiguration#state #state} => String
     #   * {Types::EventSourceMappingConfiguration#state_transition_reason #state_transition_reason} => String
     #   * {Types::EventSourceMappingConfiguration#destination_config #destination_config} => Types::DestinationConfig
+    #   * {Types::EventSourceMappingConfiguration#topics #topics} => Array&lt;String&gt;
     #   * {Types::EventSourceMappingConfiguration#maximum_record_age_in_seconds #maximum_record_age_in_seconds} => Integer
     #   * {Types::EventSourceMappingConfiguration#bisect_batch_on_function_error #bisect_batch_on_function_error} => Boolean
     #   * {Types::EventSourceMappingConfiguration#maximum_retry_attempts #maximum_retry_attempts} => Integer
@@ -4822,6 +4859,8 @@ module Aws::Lambda
     #   resp.state_transition_reason #=> String
     #   resp.destination_config.on_success.destination #=> String
     #   resp.destination_config.on_failure.destination #=> String
+    #   resp.topics #=> Array
+    #   resp.topics[0] #=> String
     #   resp.maximum_record_age_in_seconds #=> Integer
     #   resp.bisect_batch_on_function_error #=> Boolean
     #   resp.maximum_retry_attempts #=> Integer
@@ -5410,7 +5449,7 @@ module Aws::Lambda
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-lambda'
-      context[:gem_version] = '1.46.0'
+      context[:gem_version] = '1.47.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

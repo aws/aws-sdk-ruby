@@ -250,8 +250,8 @@ module Aws::S3
     #   encrypting data. This value is used to store the object and then it is
     #   discarded; Amazon S3 does not store the encryption key. The key must
     #   be appropriate for use with the algorithm specified in the
-    #   `x-amz-server-side-encryption-customer-algorithm` header. This must be
-    #   the same encryption key specified in the initiate multipart upload
+    #   `x-amz-server-side​-encryption​-customer-algorithm` header. This must
+    #   be the same encryption key specified in the initiate multipart upload
     #   request.
     # @option options [String] :sse_customer_key_md5
     #   Specifies the 128-bit MD5 digest of the encryption key according to
@@ -319,8 +319,8 @@ module Aws::S3
     #   encrypting data. This value is used to store the object and then it is
     #   discarded; Amazon S3 does not store the encryption key. The key must
     #   be appropriate for use with the algorithm specified in the
-    #   `x-amz-server-side-encryption-customer-algorithm header`. This must be
-    #   the same encryption key specified in the initiate multipart upload
+    #   `x-amz-server-side​-encryption​-customer-algorithm header`. This must
+    #   be the same encryption key specified in the initiate multipart upload
     #   request.
     # @option options [String] :sse_customer_key_md5
     #   Specifies the 128-bit MD5 digest of the encryption key according to

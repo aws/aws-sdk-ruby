@@ -1350,7 +1350,7 @@ module Aws::S3
     #   in encrypting data. This value is used to store the object and then
     #   it is discarded; Amazon S3 does not store the encryption key. The
     #   key must be appropriate for use with the algorithm specified in the
-    #   `x-amz-server-side-encryption-customer-algorithm` header.
+    #   `x-amz-server-side​-encryption​-customer-algorithm` header.
     #   @return [String]
     #
     # @!attribute [rw] sse_customer_key_md5
@@ -1517,7 +1517,7 @@ module Aws::S3
     #   data as a hash:
     #
     #       {
-    #         location_constraint: "EU", # accepts EU, eu-west-1, us-west-1, us-west-2, ap-south-1, ap-southeast-1, ap-southeast-2, ap-northeast-1, sa-east-1, cn-north-1, eu-central-1
+    #         location_constraint: "af-south-1", # accepts af-south-1, ap-east-1, ap-northeast-1, ap-northeast-2, ap-northeast-3, ap-south-1, ap-southeast-1, ap-southeast-2, ca-central-1, cn-north-1, cn-northwest-1, EU, eu-central-1, eu-north-1, eu-south-1, eu-west-1, eu-west-2, eu-west-3, me-south-1, sa-east-1, us-east-2, us-gov-east-1, us-gov-west-1, us-west-1, us-west-2
     #       }
     #
     # @!attribute [rw] location_constraint
@@ -1555,7 +1555,7 @@ module Aws::S3
     #         acl: "private", # accepts private, public-read, public-read-write, authenticated-read
     #         bucket: "BucketName", # required
     #         create_bucket_configuration: {
-    #           location_constraint: "EU", # accepts EU, eu-west-1, us-west-1, us-west-2, ap-south-1, ap-southeast-1, ap-southeast-2, ap-northeast-1, sa-east-1, cn-north-1, eu-central-1
+    #           location_constraint: "af-south-1", # accepts af-south-1, ap-east-1, ap-northeast-1, ap-northeast-2, ap-northeast-3, ap-south-1, ap-southeast-1, ap-southeast-2, ca-central-1, cn-north-1, cn-northwest-1, EU, eu-central-1, eu-north-1, eu-south-1, eu-west-1, eu-west-2, eu-west-3, me-south-1, sa-east-1, us-east-2, us-gov-east-1, us-gov-west-1, us-west-1, us-west-2
     #         },
     #         grant_full_control: "GrantFullControl",
     #         grant_read: "GrantRead",
@@ -1843,7 +1843,7 @@ module Aws::S3
     #   in encrypting data. This value is used to store the object and then
     #   it is discarded; Amazon S3 does not store the encryption key. The
     #   key must be appropriate for use with the algorithm specified in the
-    #   `x-amz-server-side-encryption-customer-algorithm` header.
+    #   `x-amz-server-side​-encryption​-customer-algorithm` header.
     #   @return [String]
     #
     # @!attribute [rw] sse_customer_key_md5
@@ -4884,7 +4884,7 @@ module Aws::S3
     #   in encrypting data. This value is used to store the object and then
     #   it is discarded; Amazon S3 does not store the encryption key. The
     #   key must be appropriate for use with the algorithm specified in the
-    #   `x-amz-server-side-encryption-customer-algorithm` header.
+    #   `x-amz-server-side​-encryption​-customer-algorithm` header.
     #   @return [String]
     #
     # @!attribute [rw] sse_customer_key_md5
@@ -5332,8 +5332,8 @@ module Aws::S3
     # @!attribute [rw] restore
     #   If the object is an archived object (an object whose storage class
     #   is GLACIER), the response includes this header if either the archive
-    #   restoration is in progress (see [RestoreObject][1] or an archive
-    #   copy is already restored.
+    #   restoration is in progress (see RestoreObject or an archive copy is
+    #   already restored.
     #
     #   If an archive copy is already restored, the header value indicates
     #   when Amazon S3 is scheduled to delete the object copy. For example:
@@ -5345,12 +5345,11 @@ module Aws::S3
     #   value `ongoing-request="true"`.
     #
     #   For more information about archiving objects, see [Transitioning
-    #   Objects: General Considerations][2].
+    #   Objects: General Considerations][1].
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_RestoreObject.html
-    #   [2]: https://docs.aws.amazon.com/AmazonS3/latest/dev/object-lifecycle-mgmt.html#lifecycle-transition-general-considerations
+    #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/dev/object-lifecycle-mgmt.html#lifecycle-transition-general-considerations
     #   @return [String]
     #
     # @!attribute [rw] last_modified
@@ -5639,7 +5638,7 @@ module Aws::S3
     #   in encrypting data. This value is used to store the object and then
     #   it is discarded; Amazon S3 does not store the encryption key. The
     #   key must be appropriate for use with the algorithm specified in the
-    #   `x-amz-server-side-encryption-customer-algorithm` header.
+    #   `x-amz-server-side​-encryption​-customer-algorithm` header.
     #   @return [String]
     #
     # @!attribute [rw] sse_customer_key_md5
@@ -10035,14 +10034,10 @@ module Aws::S3
 
     # @!attribute [rw] expiration
     #   If the expiration is configured for the object (see
-    #   [PutBucketLifecycleConfiguration][1]), the response includes this
-    #   header. It includes the expiry-date and rule-id key-value pairs that
-    #   provide information about object expiration. The value of the
-    #   rule-id is URL encoded.
-    #
-    #
-    #
-    #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_PutBucketLifecycleConfiguration.html
+    #   PutBucketLifecycleConfiguration), the response includes this header.
+    #   It includes the expiry-date and rule-id key-value pairs that provide
+    #   information about object expiration. The value of the rule-id is URL
+    #   encoded.
     #   @return [String]
     #
     # @!attribute [rw] etag
@@ -10330,7 +10325,7 @@ module Aws::S3
     #   in encrypting data. This value is used to store the object and then
     #   it is discarded; Amazon S3 does not store the encryption key. The
     #   key must be appropriate for use with the algorithm specified in the
-    #   `x-amz-server-side-encryption-customer-algorithm` header.
+    #   `x-amz-server-side​-encryption​-customer-algorithm` header.
     #   @return [String]
     #
     # @!attribute [rw] sse_customer_key_md5
@@ -10707,14 +10702,10 @@ module Aws::S3
       include Aws::Structure
     end
 
-    # This data type is deprecated. Use [QueueConfiguration][1] for the same
+    # This data type is deprecated. Use QueueConfiguration for the same
     # purposes. This data type specifies the configuration for publishing
     # messages to an Amazon Simple Queue Service (Amazon SQS) queue when
     # Amazon S3 detects specified events.
-    #
-    #
-    #
-    # [1]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_QueueConfiguration.html
     #
     # @note When making an API call, you may pass QueueConfigurationDeprecated
     #   data as a hash:
@@ -11606,14 +11597,7 @@ module Aws::S3
       include Aws::Structure
     end
 
-    # Specifies the redirect behavior and when a redirect is applied. For
-    # more information about routing rules, see [Configuring advanced
-    # conditional redirects][1] in the *Amazon Simple Storage Service
-    # Developer Guide*.
-    #
-    #
-    #
-    # [1]: https://docs.aws.amazon.com/AmazonS3/latest/dev/how-to-page-redirect.html#advanced-conditional-redirects
+    # Specifies the redirect behavior and when a redirect is applied.
     #
     # @note When making an API call, you may pass RoutingRule
     #   data as a hash:
@@ -12630,11 +12614,7 @@ module Aws::S3
     # A container for specifying the configuration for publication of
     # messages to an Amazon Simple Notification Service (Amazon SNS) topic
     # when Amazon S3 detects specified events. This data type is deprecated.
-    # Use [TopicConfiguration][1] instead.
-    #
-    #
-    #
-    # [1]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_TopicConfiguration.html
+    # Use TopicConfiguration instead.
     #
     # @note When making an API call, you may pass TopicConfigurationDeprecated
     #   data as a hash:
@@ -12855,8 +12835,8 @@ module Aws::S3
     #   in encrypting data. This value is used to store the object and then
     #   it is discarded; Amazon S3 does not store the encryption key. The
     #   key must be appropriate for use with the algorithm specified in the
-    #   `x-amz-server-side-encryption-customer-algorithm` header. This must
-    #   be the same encryption key specified in the initiate multipart
+    #   `x-amz-server-side​-encryption​-customer-algorithm` header. This
+    #   must be the same encryption key specified in the initiate multipart
     #   upload request.
     #   @return [String]
     #
@@ -13025,8 +13005,8 @@ module Aws::S3
     #   in encrypting data. This value is used to store the object and then
     #   it is discarded; Amazon S3 does not store the encryption key. The
     #   key must be appropriate for use with the algorithm specified in the
-    #   `x-amz-server-side-encryption-customer-algorithm header`. This must
-    #   be the same encryption key specified in the initiate multipart
+    #   `x-amz-server-side​-encryption​-customer-algorithm header`. This
+    #   must be the same encryption key specified in the initiate multipart
     #   upload request.
     #   @return [String]
     #

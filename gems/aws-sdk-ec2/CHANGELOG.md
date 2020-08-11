@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.185.0 (2020-08-11)
+------------------
+
+* Feature - This release rolls back the EC2 On-Demand Capacity Reservations (ODCRs) release 1.11.831 published on 2020-07-30, which was deployed in error.
+
 1.184.0 (2020-08-10)
 ------------------
 

@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.78.0 (2020-08-11)
+------------------
+
+* Feature - Add support for in-region CopyObject and UploadPartCopy through S3 Access Points
+
 1.77.0 (2020-08-10)
 ------------------
 

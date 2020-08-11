@@ -3588,9 +3588,7 @@ module Aws::Organizations
     #
     #  </note>
     #
-    # This operation can be called only from the organization's master
-    # account or by a member account that is a delegated administrator for
-    # an AWS service.
+    # This operation can be called from any account in the organization.
     #
     # @option params [Types::HandshakeFilter] :filter
     #   Filters the handshakes that you want included in the response. The
@@ -5137,7 +5135,7 @@ module Aws::Organizations
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-organizations'
-      context[:gem_version] = '1.47.0'
+      context[:gem_version] = '1.48.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

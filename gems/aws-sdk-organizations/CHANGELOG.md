@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.48.0 (2020-08-11)
+------------------
+
+* Feature - Minor documentation update for AWS Organizations
+
 1.47.0 (2020-08-07)
 ------------------
 
