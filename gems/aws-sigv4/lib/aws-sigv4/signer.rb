@@ -514,16 +514,23 @@ module Aws
         # Default sort <=> in JRuby will swap members
         # occasionally when <=> is 0 (considered still sorted), but this
         # causes our normalized query string to not match the sent querystring.
-        # When names match, we then sort by their values
-        params.sort do |a, b|
+        # When names match, we then sort by their values.  When values also
+        # match then we sort by
+        params.each.with_index.sort do |a, b|
+          a, a_offset = a
+          b, b_offset = b
           a_name, a_value = a.split('=')
           b_name, b_value = b.split('=')
           if a_name == b_name
-            a_value <=> b_value
+            if a_value == b_value
+              a_offset <=> b_offset
+            else
+              a_value <=> b_value
+            end
           else
             a_name <=> b_name
           end
-        end.join('&')
+        end.map(&:first).join('&')
       end
 
       def signed_headers(headers)
