@@ -548,7 +548,7 @@ e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
           EOF
         end
 
-        it 'sorts by name, params with same name stay in the same order' do
+        it 'sorts by name, params with same name are ordered by value' do
           signature = Signer.new(options).sign_request(
             http_method: 'PUT',
             url: 'http://domain.com?q.options=abc&q=xyz&q=mno',
@@ -556,17 +556,7 @@ e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
               'X-Amz-Date' => '20160101T112233Z',
             }
           )
-          expect(signature.canonical_request).to eq(<<-EOF.strip)
-PUT
-/
-q=xyz&q=mno&q.options=abc
-host:domain.com
-x-amz-content-sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
-x-amz-date:20160101T112233Z
-
-host;x-amz-content-sha256;x-amz-date
-e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
-          EOF
+          expect(signature.canonical_request).to include('q=mno&q=xyz&q.options=abc')
         end
 
         it 'uses the X-Amz-Content-Sha256 header when present' do
