@@ -1,8 +1,6 @@
 Unreleased Changes
 ------------------
 
-* Issue - Sort query params with same names by value when signing. Fixes #2376
-
 3.104.3 (2020-07-23)
 ------------------
 
