@@ -71,7 +71,7 @@ def apply_expectations(test_case)
       resp.context.config.client_rate_limiter.instance_variable_get(
         :@calculated_rate
       )
-    ).to be_within(0.1).of(expected[:calculated_rate])
+    ).to be_within(0.2).of(expected[:calculated_rate])
   end
   if expected[:measured_tx_rate]
     expect(
