@@ -9854,9 +9854,11 @@ module Aws::EC2
     #         options: {
     #           enable_acceleration: false,
     #           static_routes_only: false,
+    #           tunnel_inside_ip_version: "ipv4", # accepts ipv4, ipv6
     #           tunnel_options: [
     #             {
     #               tunnel_inside_cidr: "String",
+    #               tunnel_inside_ipv_6_cidr: "String",
     #               pre_shared_key: "String",
     #               phase_1_lifetime_seconds: 1,
     #               phase_2_lifetime_seconds: 1,
@@ -36886,6 +36888,7 @@ module Aws::EC2
     #         vpn_tunnel_outside_ip_address: "String", # required
     #         tunnel_options: { # required
     #           tunnel_inside_cidr: "String",
+    #           tunnel_inside_ipv_6_cidr: "String",
     #           pre_shared_key: "String",
     #           phase_1_lifetime_seconds: 1,
     #           phase_2_lifetime_seconds: 1,
@@ -36981,6 +36984,7 @@ module Aws::EC2
     #
     #       {
     #         tunnel_inside_cidr: "String",
+    #         tunnel_inside_ipv_6_cidr: "String",
     #         pre_shared_key: "String",
     #         phase_1_lifetime_seconds: 1,
     #         phase_2_lifetime_seconds: 1,
@@ -37026,9 +37030,9 @@ module Aws::EC2
     #       }
     #
     # @!attribute [rw] tunnel_inside_cidr
-    #   The range of inside IP addresses for the tunnel. Any specified CIDR
-    #   blocks must be unique across all VPN connections that use the same
-    #   virtual private gateway.
+    #   The range of inside IPv4 addresses for the tunnel. Any specified
+    #   CIDR blocks must be unique across all VPN connections that use the
+    #   same virtual private gateway.
     #
     #   Constraints: A size /30 CIDR block from the `169.254.0.0/16` range.
     #   The following CIDR blocks are reserved and cannot be used:
@@ -37046,6 +37050,14 @@ module Aws::EC2
     #   * `169.254.5.0/30`
     #
     #   * `169.254.169.252/30`
+    #   @return [String]
+    #
+    # @!attribute [rw] tunnel_inside_ipv_6_cidr
+    #   The range of inside IPv6 addresses for the tunnel. Any specified
+    #   CIDR blocks must be unique across all VPN connections that use the
+    #   same transit gateway.
+    #
+    #   Constraints: A size /126 CIDR block from the local `fd00::/8` range.
     #   @return [String]
     #
     # @!attribute [rw] pre_shared_key
@@ -37115,36 +37127,38 @@ module Aws::EC2
     #   One or more encryption algorithms that are permitted for the VPN
     #   tunnel for phase 1 IKE negotiations.
     #
-    #   Valid values: `AES128` \| `AES256`
+    #   Valid values: `AES128` \| `AES256` \| `AES128-GCM-16` \|
+    #   `AES256-GCM-16`
     #   @return [Array<Types::Phase1EncryptionAlgorithmsRequestListValue>]
     #
     # @!attribute [rw] phase_2_encryption_algorithms
     #   One or more encryption algorithms that are permitted for the VPN
     #   tunnel for phase 2 IKE negotiations.
     #
-    #   Valid values: `AES128` \| `AES256`
+    #   Valid values: `AES128` \| `AES256` \| `AES128-GCM-16` \|
+    #   `AES256-GCM-16`
     #   @return [Array<Types::Phase2EncryptionAlgorithmsRequestListValue>]
     #
     # @!attribute [rw] phase_1_integrity_algorithms
     #   One or more integrity algorithms that are permitted for the VPN
     #   tunnel for phase 1 IKE negotiations.
     #
-    #   Valid values: `SHA1` \| `SHA2-256`
+    #   Valid values: `SHA1` \| `SHA2-256` \| `SHA2-384` \| `SHA2-512`
     #   @return [Array<Types::Phase1IntegrityAlgorithmsRequestListValue>]
     #
     # @!attribute [rw] phase_2_integrity_algorithms
     #   One or more integrity algorithms that are permitted for the VPN
     #   tunnel for phase 2 IKE negotiations.
     #
-    #   Valid values: `SHA1` \| `SHA2-256`
+    #   Valid values: `SHA1` \| `SHA2-256` \| `SHA2-384` \| `SHA2-512`
     #   @return [Array<Types::Phase2IntegrityAlgorithmsRequestListValue>]
     #
     # @!attribute [rw] phase_1_dh_group_numbers
     #   One or more Diffie-Hellman group numbers that are permitted for the
     #   VPN tunnel for phase 1 IKE negotiations.
     #
-    #   Valid values: `2` \| `14` \| `15` \| `16` \| `17` \| `18` \| `22` \|
-    #   `23` \| `24`
+    #   Valid values: `2` \| `14` \| `15` \| `16` \| `17` \| `18` \| `19` \|
+    #   `20` \| `21` \| `22` \| `23` \| `24`
     #   @return [Array<Types::Phase1DHGroupNumbersRequestListValue>]
     #
     # @!attribute [rw] phase_2_dh_group_numbers
@@ -37152,7 +37166,7 @@ module Aws::EC2
     #   VPN tunnel for phase 2 IKE negotiations.
     #
     #   Valid values: `2` \| `5` \| `14` \| `15` \| `16` \| `17` \| `18` \|
-    #   `22` \| `23` \| `24`
+    #   `19` \| `20` \| `21` \| `22` \| `23` \| `24`
     #   @return [Array<Types::Phase2DHGroupNumbersRequestListValue>]
     #
     # @!attribute [rw] ike_versions
@@ -37165,6 +37179,7 @@ module Aws::EC2
     #
     class ModifyVpnTunnelOptionsSpecification < Struct.new(
       :tunnel_inside_cidr,
+      :tunnel_inside_ipv_6_cidr,
       :pre_shared_key,
       :phase_1_lifetime_seconds,
       :phase_2_lifetime_seconds,
@@ -49185,7 +49200,11 @@ module Aws::EC2
     #   @return [String]
     #
     # @!attribute [rw] tunnel_inside_cidr
-    #   The range of inside IP addresses for the tunnel.
+    #   The range of inside IPv4 addresses for the tunnel.
+    #   @return [String]
+    #
+    # @!attribute [rw] tunnel_inside_ipv_6_cidr
+    #   The range of inside IPv6 addresses for the tunnel.
     #   @return [String]
     #
     # @!attribute [rw] pre_shared_key
@@ -49260,6 +49279,7 @@ module Aws::EC2
     class TunnelOption < Struct.new(
       :outside_ip_address,
       :tunnel_inside_cidr,
+      :tunnel_inside_ipv_6_cidr,
       :pre_shared_key,
       :phase_1_lifetime_seconds,
       :phase_2_lifetime_seconds,
@@ -50882,6 +50902,10 @@ module Aws::EC2
     #   routes must be used for devices that don't support BGP.
     #   @return [Boolean]
     #
+    # @!attribute [rw] tunnel_inside_ip_version
+    #   Indicates whether the VPN tunnels process IPv4 or IPv6 traffic.
+    #   @return [String]
+    #
     # @!attribute [rw] tunnel_options
     #   Indicates the VPN tunnel options.
     #   @return [Array<Types::TunnelOption>]
@@ -50891,6 +50915,7 @@ module Aws::EC2
     class VpnConnectionOptions < Struct.new(
       :enable_acceleration,
       :static_routes_only,
+      :tunnel_inside_ip_version,
       :tunnel_options)
       SENSITIVE = []
       include Aws::Structure
@@ -50904,9 +50929,11 @@ module Aws::EC2
     #       {
     #         enable_acceleration: false,
     #         static_routes_only: false,
+    #         tunnel_inside_ip_version: "ipv4", # accepts ipv4, ipv6
     #         tunnel_options: [
     #           {
     #             tunnel_inside_cidr: "String",
+    #             tunnel_inside_ipv_6_cidr: "String",
     #             pre_shared_key: "String",
     #             phase_1_lifetime_seconds: 1,
     #             phase_2_lifetime_seconds: 1,
@@ -50968,6 +50995,12 @@ module Aws::EC2
     #   Default: `false`
     #   @return [Boolean]
     #
+    # @!attribute [rw] tunnel_inside_ip_version
+    #   Indicate whether the VPN tunnels process IPv4 or IPv6 traffic.
+    #
+    #   Default: `ipv4`
+    #   @return [String]
+    #
     # @!attribute [rw] tunnel_options
     #   The tunnel options for the VPN connection.
     #   @return [Array<Types::VpnTunnelOptionsSpecification>]
@@ -50977,6 +51010,7 @@ module Aws::EC2
     class VpnConnectionOptionsSpecification < Struct.new(
       :enable_acceleration,
       :static_routes_only,
+      :tunnel_inside_ip_version,
       :tunnel_options)
       SENSITIVE = []
       include Aws::Structure
@@ -51060,6 +51094,7 @@ module Aws::EC2
     #
     #       {
     #         tunnel_inside_cidr: "String",
+    #         tunnel_inside_ipv_6_cidr: "String",
     #         pre_shared_key: "String",
     #         phase_1_lifetime_seconds: 1,
     #         phase_2_lifetime_seconds: 1,
@@ -51105,9 +51140,9 @@ module Aws::EC2
     #       }
     #
     # @!attribute [rw] tunnel_inside_cidr
-    #   The range of inside IP addresses for the tunnel. Any specified CIDR
-    #   blocks must be unique across all VPN connections that use the same
-    #   virtual private gateway.
+    #   The range of inside IPv4 addresses for the tunnel. Any specified
+    #   CIDR blocks must be unique across all VPN connections that use the
+    #   same virtual private gateway.
     #
     #   Constraints: A size /30 CIDR block from the `169.254.0.0/16` range.
     #   The following CIDR blocks are reserved and cannot be used:
@@ -51125,6 +51160,14 @@ module Aws::EC2
     #   * `169.254.5.0/30`
     #
     #   * `169.254.169.252/30`
+    #   @return [String]
+    #
+    # @!attribute [rw] tunnel_inside_ipv_6_cidr
+    #   The range of inside IPv6 addresses for the tunnel. Any specified
+    #   CIDR blocks must be unique across all VPN connections that use the
+    #   same transit gateway.
+    #
+    #   Constraints: A size /126 CIDR block from the local `fd00::/8` range.
     #   @return [String]
     #
     # @!attribute [rw] pre_shared_key
@@ -51194,36 +51237,38 @@ module Aws::EC2
     #   One or more encryption algorithms that are permitted for the VPN
     #   tunnel for phase 1 IKE negotiations.
     #
-    #   Valid values: `AES128` \| `AES256`
+    #   Valid values: `AES128` \| `AES256` \| `AES128-GCM-16` \|
+    #   `AES256-GCM-16`
     #   @return [Array<Types::Phase1EncryptionAlgorithmsRequestListValue>]
     #
     # @!attribute [rw] phase_2_encryption_algorithms
     #   One or more encryption algorithms that are permitted for the VPN
     #   tunnel for phase 2 IKE negotiations.
     #
-    #   Valid values: `AES128` \| `AES256`
+    #   Valid values: `AES128` \| `AES256` \| `AES128-GCM-16` \|
+    #   `AES256-GCM-16`
     #   @return [Array<Types::Phase2EncryptionAlgorithmsRequestListValue>]
     #
     # @!attribute [rw] phase_1_integrity_algorithms
     #   One or more integrity algorithms that are permitted for the VPN
     #   tunnel for phase 1 IKE negotiations.
     #
-    #   Valid values: `SHA1` \| `SHA2-256`
+    #   Valid values: `SHA1` \| `SHA2-256` \| `SHA2-384` \| `SHA2-512`
     #   @return [Array<Types::Phase1IntegrityAlgorithmsRequestListValue>]
     #
     # @!attribute [rw] phase_2_integrity_algorithms
     #   One or more integrity algorithms that are permitted for the VPN
     #   tunnel for phase 2 IKE negotiations.
     #
-    #   Valid values: `SHA1` \| `SHA2-256`
+    #   Valid values: `SHA1` \| `SHA2-256` \| `SHA2-384` \| `SHA2-512`
     #   @return [Array<Types::Phase2IntegrityAlgorithmsRequestListValue>]
     #
     # @!attribute [rw] phase_1_dh_group_numbers
     #   One or more Diffie-Hellman group numbers that are permitted for the
     #   VPN tunnel for phase 1 IKE negotiations.
     #
-    #   Valid values: `2` \| `14` \| `15` \| `16` \| `17` \| `18` \| `22` \|
-    #   `23` \| `24`
+    #   Valid values: `2` \| `14` \| `15` \| `16` \| `17` \| `18` \| `19` \|
+    #   `20` \| `21` \| `22` \| `23` \| `24`
     #   @return [Array<Types::Phase1DHGroupNumbersRequestListValue>]
     #
     # @!attribute [rw] phase_2_dh_group_numbers
@@ -51231,7 +51276,7 @@ module Aws::EC2
     #   VPN tunnel for phase 2 IKE negotiations.
     #
     #   Valid values: `2` \| `5` \| `14` \| `15` \| `16` \| `17` \| `18` \|
-    #   `22` \| `23` \| `24`
+    #   `19` \| `20` \| `21` \| `22` \| `23` \| `24`
     #   @return [Array<Types::Phase2DHGroupNumbersRequestListValue>]
     #
     # @!attribute [rw] ike_versions
@@ -51244,6 +51289,7 @@ module Aws::EC2
     #
     class VpnTunnelOptionsSpecification < Struct.new(
       :tunnel_inside_cidr,
+      :tunnel_inside_ipv_6_cidr,
       :pre_shared_key,
       :phase_1_lifetime_seconds,
       :phase_2_lifetime_seconds,

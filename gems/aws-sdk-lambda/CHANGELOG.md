@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.48.0 (2020-08-12)
+------------------
+
+* Feature - Support for creating Lambda Functions using 'java8.al2' and 'provided.al2'
+
 1.47.0 (2020-08-11)
 ------------------
 

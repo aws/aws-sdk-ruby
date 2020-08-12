@@ -9737,15 +9737,15 @@ module Aws::EC2
     end
 
     # Creates a VPN connection between an existing virtual private gateway
-    # and a VPN customer gateway. The supported connection type is
-    # `ipsec.1`.
+    # or transit gateway and a customer gateway. The supported connection
+    # type is `ipsec.1`.
     #
     # The response includes information that you need to give to your
     # network administrator to configure your customer gateway.
     #
     # We strongly recommend that you use HTTPS when calling this operation
     # because the response contains sensitive cryptographic information for
-    # configuring your customer gateway.
+    # configuring your customer gateway device.
     #
     # If you decide to shut down your VPN connection for any reason and
     # later create a new VPN connection, you must reconfigure your customer
@@ -9802,9 +9802,11 @@ module Aws::EC2
     #     options: {
     #       enable_acceleration: false,
     #       static_routes_only: false,
+    #       tunnel_inside_ip_version: "ipv4", # accepts ipv4, ipv6
     #       tunnel_options: [
     #         {
     #           tunnel_inside_cidr: "String",
+    #           tunnel_inside_ipv_6_cidr: "String",
     #           pre_shared_key: "String",
     #           phase_1_lifetime_seconds: 1,
     #           phase_2_lifetime_seconds: 1,
@@ -9875,9 +9877,11 @@ module Aws::EC2
     #   resp.vpn_connection.transit_gateway_id #=> String
     #   resp.vpn_connection.options.enable_acceleration #=> Boolean
     #   resp.vpn_connection.options.static_routes_only #=> Boolean
+    #   resp.vpn_connection.options.tunnel_inside_ip_version #=> String, one of "ipv4", "ipv6"
     #   resp.vpn_connection.options.tunnel_options #=> Array
     #   resp.vpn_connection.options.tunnel_options[0].outside_ip_address #=> String
     #   resp.vpn_connection.options.tunnel_options[0].tunnel_inside_cidr #=> String
+    #   resp.vpn_connection.options.tunnel_options[0].tunnel_inside_ipv_6_cidr #=> String
     #   resp.vpn_connection.options.tunnel_options[0].pre_shared_key #=> String
     #   resp.vpn_connection.options.tunnel_options[0].phase_1_lifetime_seconds #=> Integer
     #   resp.vpn_connection.options.tunnel_options[0].phase_2_lifetime_seconds #=> Integer
@@ -25790,9 +25794,11 @@ module Aws::EC2
     #   resp.vpn_connections[0].transit_gateway_id #=> String
     #   resp.vpn_connections[0].options.enable_acceleration #=> Boolean
     #   resp.vpn_connections[0].options.static_routes_only #=> Boolean
+    #   resp.vpn_connections[0].options.tunnel_inside_ip_version #=> String, one of "ipv4", "ipv6"
     #   resp.vpn_connections[0].options.tunnel_options #=> Array
     #   resp.vpn_connections[0].options.tunnel_options[0].outside_ip_address #=> String
     #   resp.vpn_connections[0].options.tunnel_options[0].tunnel_inside_cidr #=> String
+    #   resp.vpn_connections[0].options.tunnel_options[0].tunnel_inside_ipv_6_cidr #=> String
     #   resp.vpn_connections[0].options.tunnel_options[0].pre_shared_key #=> String
     #   resp.vpn_connections[0].options.tunnel_options[0].phase_1_lifetime_seconds #=> Integer
     #   resp.vpn_connections[0].options.tunnel_options[0].phase_2_lifetime_seconds #=> Integer
@@ -32662,9 +32668,11 @@ module Aws::EC2
     #   resp.vpn_connection.transit_gateway_id #=> String
     #   resp.vpn_connection.options.enable_acceleration #=> Boolean
     #   resp.vpn_connection.options.static_routes_only #=> Boolean
+    #   resp.vpn_connection.options.tunnel_inside_ip_version #=> String, one of "ipv4", "ipv6"
     #   resp.vpn_connection.options.tunnel_options #=> Array
     #   resp.vpn_connection.options.tunnel_options[0].outside_ip_address #=> String
     #   resp.vpn_connection.options.tunnel_options[0].tunnel_inside_cidr #=> String
+    #   resp.vpn_connection.options.tunnel_options[0].tunnel_inside_ipv_6_cidr #=> String
     #   resp.vpn_connection.options.tunnel_options[0].pre_shared_key #=> String
     #   resp.vpn_connection.options.tunnel_options[0].phase_1_lifetime_seconds #=> Integer
     #   resp.vpn_connection.options.tunnel_options[0].phase_2_lifetime_seconds #=> Integer
@@ -32748,9 +32756,11 @@ module Aws::EC2
     #   resp.vpn_connection.transit_gateway_id #=> String
     #   resp.vpn_connection.options.enable_acceleration #=> Boolean
     #   resp.vpn_connection.options.static_routes_only #=> Boolean
+    #   resp.vpn_connection.options.tunnel_inside_ip_version #=> String, one of "ipv4", "ipv6"
     #   resp.vpn_connection.options.tunnel_options #=> Array
     #   resp.vpn_connection.options.tunnel_options[0].outside_ip_address #=> String
     #   resp.vpn_connection.options.tunnel_options[0].tunnel_inside_cidr #=> String
+    #   resp.vpn_connection.options.tunnel_options[0].tunnel_inside_ipv_6_cidr #=> String
     #   resp.vpn_connection.options.tunnel_options[0].pre_shared_key #=> String
     #   resp.vpn_connection.options.tunnel_options[0].phase_1_lifetime_seconds #=> Integer
     #   resp.vpn_connection.options.tunnel_options[0].phase_2_lifetime_seconds #=> Integer
@@ -32833,6 +32843,7 @@ module Aws::EC2
     #     vpn_tunnel_outside_ip_address: "String", # required
     #     tunnel_options: { # required
     #       tunnel_inside_cidr: "String",
+    #       tunnel_inside_ipv_6_cidr: "String",
     #       pre_shared_key: "String",
     #       phase_1_lifetime_seconds: 1,
     #       phase_2_lifetime_seconds: 1,
@@ -32891,9 +32902,11 @@ module Aws::EC2
     #   resp.vpn_connection.transit_gateway_id #=> String
     #   resp.vpn_connection.options.enable_acceleration #=> Boolean
     #   resp.vpn_connection.options.static_routes_only #=> Boolean
+    #   resp.vpn_connection.options.tunnel_inside_ip_version #=> String, one of "ipv4", "ipv6"
     #   resp.vpn_connection.options.tunnel_options #=> Array
     #   resp.vpn_connection.options.tunnel_options[0].outside_ip_address #=> String
     #   resp.vpn_connection.options.tunnel_options[0].tunnel_inside_cidr #=> String
+    #   resp.vpn_connection.options.tunnel_options[0].tunnel_inside_ipv_6_cidr #=> String
     #   resp.vpn_connection.options.tunnel_options[0].pre_shared_key #=> String
     #   resp.vpn_connection.options.tunnel_options[0].phase_1_lifetime_seconds #=> Integer
     #   resp.vpn_connection.options.tunnel_options[0].phase_2_lifetime_seconds #=> Integer
@@ -38171,7 +38184,7 @@ module Aws::EC2
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-ec2'
-      context[:gem_version] = '1.185.0'
+      context[:gem_version] = '1.186.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

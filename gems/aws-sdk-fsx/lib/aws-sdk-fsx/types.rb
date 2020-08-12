@@ -434,21 +434,21 @@ module Aws::FSx
     #   @return [String]
     #
     # @!attribute [rw] client_request_token
-    #   (Optional) A string of up to 64 ASCII characters that Amazon FSx
-    #   uses to ensure idempotent creation. This string is automatically
-    #   filled on your behalf when you use the AWS Command Line Interface
-    #   (AWS CLI) or an AWS SDK.
+    #   A string of up to 64 ASCII characters that Amazon FSx uses to ensure
+    #   idempotent creation. This string is automatically filled on your
+    #   behalf when you use the AWS Command Line Interface (AWS CLI) or an
+    #   AWS SDK.
     #
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.
     #   @return [String]
     #
     # @!attribute [rw] tags
-    #   (Optional) The tags to apply to the backup at backup creation. The
-    #   key value of the `Name` tag appears in the console as the backup
-    #   name. If you have set `CopyTagsToBackups` to true, and you specify
-    #   one or more tags using the `CreateBackup` action, no existing file
-    #   system tags are copied from the file system to the backup.
+    #   The tags to apply to the backup at backup creation. The key value of
+    #   the `Name` tag appears in the console as the backup name. If you
+    #   have set `CopyTagsToBackups` to true, and you specify one or more
+    #   tags using the `CreateBackup` action, no existing tags on the file
+    #   system are copied from the file system to the backup.
     #   @return [Array<Types::Tag>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/fsx-2018-03-01/CreateBackupRequest AWS API Documentation
@@ -611,6 +611,7 @@ module Aws::FSx
     #           daily_automatic_backup_start_time: "DailyTime",
     #           automatic_backup_retention_days: 1,
     #           copy_tags_to_backups: false,
+    #           drive_cache_type: "NONE", # accepts NONE, READ
     #         },
     #         storage_type: "SSD", # accepts SSD, HDD
     #       }
@@ -732,13 +733,13 @@ module Aws::FSx
     #         daily_automatic_backup_start_time: "DailyTime",
     #         automatic_backup_retention_days: 1,
     #         copy_tags_to_backups: false,
+    #         drive_cache_type: "NONE", # accepts NONE, READ
     #       }
     #
     # @!attribute [rw] weekly_maintenance_start_time
-    #   (Optional) The preferred start time to perform weekly maintenance,
-    #   formatted d:HH:MM in the UTC time zone, where d is the weekday
-    #   number, from 1 through 7, beginning with Monday and ending with
-    #   Sunday.
+    #   The preferred start time to perform weekly maintenance, formatted
+    #   d:HH:MM in the UTC time zone, where d is the weekday number, from 1
+    #   through 7, beginning with Monday and ending with Sunday.
     #   @return [String]
     #
     # @!attribute [rw] import_path
@@ -812,25 +813,27 @@ module Aws::FSx
     #   @return [String]
     #
     # @!attribute [rw] auto_import_policy
-    #   (Optional) When you create your file system, your existing S3
-    #   objects appear as file and directory listings. Use this property to
-    #   choose how Amazon FSx keeps your file and directory listings up to
-    #   date as you add or modify objects in your linked S3 bucket.
-    #   `AutoImportPolicy` can have the following values:
+    #   (Optional) Use this property to configure the AutoImport feature on
+    #   the file system's linked Amazon S3 data repository. You use
+    #   AutoImport to update the contents of your FSx for Lustre file system
+    #   automatically with changes that occur in the linked S3 data
+    #   repository. `AutoImportPolicy` can have the following values:
     #
-    #   * `NONE` - (Default) AutoImport is off. Amazon FSx only updates file
-    #     and directory listings from the linked S3 bucket when the file
-    #     system is created. FSx does not update file and directory listings
-    #     for any new or changed objects after choosing this option.
+    #   * `NONE` - (Default) AutoImport is off. Changes in the linked data
+    #     repository are not reflected on the FSx file system.
     #
-    #   * `NEW` - AutoImport is on. Amazon FSx automatically imports
-    #     directory listings of any new objects added to the linked S3
-    #     bucket that do not currently exist in the FSx file system.
+    #   * `NEW` - AutoImport is on. New files in the linked data repository
+    #     that do not currently exist in the FSx file system are
+    #     automatically imported. Updates to existing FSx files are not
+    #     imported to the FSx file system. Files deleted from the linked
+    #     data repository are not deleted from the FSx file system.
     #
-    #   * `NEW_CHANGED` - AutoImport is on. Amazon FSx automatically imports
-    #     file and directory listings of any new objects added to the S3
-    #     bucket and any existing objects that are changed in the S3 bucket
-    #     after you choose this option.
+    #   * `NEW_CHANGED` - AutoImport is on. New files in the linked S3 data
+    #     repository that do not currently exist in the FSx file system are
+    #     automatically imported. Changes to existing FSx files in the
+    #     linked repository are also automatically imported to the FSx file
+    #     system. Files deleted from the linked data repository are not
+    #     deleted from the FSx file system.
     #
     #   For more information, see [Automatically import updates from your S3
     #   bucket][1].
@@ -850,7 +853,8 @@ module Aws::FSx
     #   of ﬁle system throughput. You pay for the amount of throughput that
     #   you provision.
     #
-    #   Valid values are 50, 100, 200.
+    #   Valid values for SSD storage: 50, 100, 200. Valid values for HDD
+    #   storage: 12, 40.
     #   @return [Integer]
     #
     # @!attribute [rw] daily_automatic_backup_start_time
@@ -862,20 +866,18 @@ module Aws::FSx
     # @!attribute [rw] automatic_backup_retention_days
     #   The number of days to retain automatic backups. Setting this to 0
     #   disables automatic backups. You can retain automatic backups for a
-    #   maximum of 35 days. The default is 0.
+    #   maximum of 90 days. The default is 0.
     #   @return [Integer]
     #
     # @!attribute [rw] copy_tags_to_backups
-    #   (Optional) Not available to use with file systems that are linked to
-    #   a data repository. A boolean flag indicating whether tags for the
-    #   file system should be copied to backups. The default value is false.
-    #   If it's set to true, all file system tags are copied to all
-    #   automatic and user-initiated backups when the user doesn't specify
-    #   any backup-specific tags. If this value is true, and you specify one
-    #   or more backup tags, only the specified tags are copied to backups.
-    #   If you specify one or more tags when creating a user-initiated
-    #   backup, no tags are copied from the file system, regardless of this
-    #   value.
+    #   A boolean flag indicating whether tags for the file system should be
+    #   copied to backups. This value defaults to false. If it's set to
+    #   true, all tags for the file system are copied to all automatic and
+    #   user-initiated backups where the user doesn't specify tags. If this
+    #   value is true, and you specify one or more tags, only the specified
+    #   tags are copied to backups. If you specify one or more tags when
+    #   creating a user-initiated backup, no tags are copied from the file
+    #   system, regardless of this value.
     #
     #   For more information, see [Working with backups][1].
     #
@@ -883,6 +885,16 @@ module Aws::FSx
     #
     #   [1]: https://docs.aws.amazon.com/fsx/latest/LustreGuide/using-backups-fsx.html
     #   @return [Boolean]
+    #
+    # @!attribute [rw] drive_cache_type
+    #   The type of drive cache used by PERSISTENT\_1 file systems that are
+    #   provisioned with HDD storage devices. This parameter is required
+    #   when storage type is HDD. Set to `READ`, improve the performance for
+    #   frequently accessed files and allows 20% of the total storage
+    #   capacity of the file system to be cached.
+    #
+    #   This parameter is required when `StorageType` is set to HDD.
+    #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/fsx-2018-03-01/CreateFileSystemLustreConfiguration AWS API Documentation
     #
@@ -896,7 +908,8 @@ module Aws::FSx
       :per_unit_storage_throughput,
       :daily_automatic_backup_start_time,
       :automatic_backup_retention_days,
-      :copy_tags_to_backups)
+      :copy_tags_to_backups,
+      :drive_cache_type)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -949,6 +962,7 @@ module Aws::FSx
     #           daily_automatic_backup_start_time: "DailyTime",
     #           automatic_backup_retention_days: 1,
     #           copy_tags_to_backups: false,
+    #           drive_cache_type: "NONE", # accepts NONE, READ
     #         },
     #       }
     #
@@ -973,10 +987,10 @@ module Aws::FSx
     #   For Lustre file systems:
     #
     #   * For `SCRATCH_2` and `PERSISTENT_1` deployment types, valid values
-    #     are 1200 GiB, 2400 GiB, and increments of 2400 GiB.
+    #     are 1.2, 2.4, and increments of 2.4 TiB.
     #
-    #   * For `SCRATCH_1` deployment type, valid values are 1200 GiB, 2400
-    #     GiB, and increments of 3600 GiB.
+    #   * For `SCRATCH_1` deployment type, valid values are 1.2, 2.4, and
+    #     increments of 3.6 TiB.
     #
     #   For Windows file systems:
     #
@@ -1176,7 +1190,7 @@ module Aws::FSx
     #   The number of days to retain automatic backups. The default is to
     #   retain backups for 7 days. Setting this value to 0 disables the
     #   creation of automatic backups. The maximum retention period for
-    #   backups is 35 days.
+    #   backups is 90 days.
     #   @return [Integer]
     #
     # @!attribute [rw] copy_tags_to_backups
@@ -1260,24 +1274,26 @@ module Aws::FSx
     #
     # @!attribute [rw] auto_import_policy
     #   Describes the file system's linked S3 data repository's
-    #   `AutoImportPolicy`. The AutoImportPolicy configures how Amazon FSx
-    #   keeps your file and directory listings up to date as you add or
-    #   modify objects in your linked S3 bucket. `AutoImportPolicy` can have
-    #   the following values:
+    #   `AutoImportPolicy`. The AutoImportPolicy configures how your FSx for
+    #   Lustre file system automatically updates its contents with changes
+    #   that occur in the linked S3 data repository. `AutoImportPolicy` can
+    #   have the following values:
     #
-    #   * `NONE` - (Default) AutoImport is off. Amazon FSx only updates file
-    #     and directory listings from the linked S3 bucket when the file
-    #     system is created. FSx does not update file and directory listings
-    #     for any new or changed objects after choosing this option.
+    #   * `NONE` - (Default) AutoImport is off. Changes in the linked data
+    #     repository are not reflected on the FSx file system.
     #
-    #   * `NEW` - AutoImport is on. Amazon FSx automatically imports
-    #     directory listings of any new objects added to the linked S3
-    #     bucket that do not currently exist in the FSx file system.
+    #   * `NEW` - AutoImport is on. New files in the linked data repository
+    #     that do not currently exist in the FSx file system are
+    #     automatically imported. Updates to existing FSx files are not
+    #     imported to the FSx file system. Files deleted from the linked
+    #     data repository are not deleted from the FSx file system.
     #
-    #   * `NEW_CHANGED` - AutoImport is on. Amazon FSx automatically imports
-    #     file and directory listings of any new objects added to the S3
-    #     bucket and any existing objects that are changed in the S3 bucket
-    #     after you choose this option.
+    #   * `NEW_CHANGED` - AutoImport is on. New files in the linked S3 data
+    #     repository that do not currently exist in the FSx file system are
+    #     automatically imported. Changes to existing FSx files in the
+    #     linked repository are also automatically imported to the FSx file
+    #     system. Files deleted from the linked data repository are not
+    #     deleted from the FSx file system.
     #
     #   For more information, see [Automatically import updates from your S3
     #   bucket][1].
@@ -2492,7 +2508,10 @@ module Aws::FSx
     #   read or write throughput per 1 tebibyte of storage provisioned. File
     #   system throughput capacity is equal to Storage capacity (TiB) *
     #   PerUnitStorageThroughput (MB/s/TiB). This option is only valid for
-    #   `PERSISTENT_1` deployment types. Valid values are 50, 100, 200.
+    #   `PERSISTENT_1` deployment types.
+    #
+    #   Valid values for SSD storage: 50, 100, 200. Valid values for HDD
+    #   storage: 12, 40.
     #   @return [Integer]
     #
     # @!attribute [rw] mount_name
@@ -2512,7 +2531,7 @@ module Aws::FSx
     # @!attribute [rw] automatic_backup_retention_days
     #   The number of days to retain automatic backups. Setting this to 0
     #   disables automatic backups. You can retain automatic backups for a
-    #   maximum of 35 days. The default is 0.
+    #   maximum of 90 days. The default is 0.
     #   @return [Integer]
     #
     # @!attribute [rw] copy_tags_to_backups
@@ -2526,6 +2545,16 @@ module Aws::FSx
     #   regardless of this value. (Default = false)
     #   @return [Boolean]
     #
+    # @!attribute [rw] drive_cache_type
+    #   The type of drive cache used by PERSISTENT\_1 file systems that are
+    #   provisioned with HDD storage devices. This parameter is required
+    #   when storage type is HDD. Set to `READ`, improve the performance for
+    #   frequently accessed files and allows 20% of the total storage
+    #   capacity of the file system to be cached.
+    #
+    #   This parameter is required when `StorageType` is set to HDD.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/fsx-2018-03-01/LustreFileSystemConfiguration AWS API Documentation
     #
     class LustreFileSystemConfiguration < Struct.new(
@@ -2536,7 +2565,8 @@ module Aws::FSx
       :mount_name,
       :daily_automatic_backup_start_time,
       :automatic_backup_retention_days,
-      :copy_tags_to_backups)
+      :copy_tags_to_backups,
+      :drive_cache_type)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2943,9 +2973,9 @@ module Aws::FSx
     #       }
     #
     # @!attribute [rw] weekly_maintenance_start_time
-    #   (Optional) The preferred start time to perform weekly maintenance,
-    #   formatted d:HH:MM in the UTC time zone. d is the weekday number,
-    #   from 1 through 7, beginning with Monday and ending with Sunday.
+    #   The preferred start time to perform weekly maintenance, formatted
+    #   d:HH:MM in the UTC time zone. d is the weekday number, from 1
+    #   through 7, beginning with Monday and ending with Sunday.
     #   @return [String]
     #
     # @!attribute [rw] daily_automatic_backup_start_time
@@ -2957,29 +2987,31 @@ module Aws::FSx
     # @!attribute [rw] automatic_backup_retention_days
     #   The number of days to retain automatic backups. Setting this to 0
     #   disables automatic backups. You can retain automatic backups for a
-    #   maximum of 35 days. The default is 0.
+    #   maximum of 90 days. The default is 0.
     #   @return [Integer]
     #
     # @!attribute [rw] auto_import_policy
-    #   (Optional) When you create your file system, your existing S3
-    #   objects appear as file and directory listings. Use this property to
-    #   choose how Amazon FSx keeps your file and directory listing up to
-    #   date as you add or modify objects in your linked S3 bucket.
-    #   `AutoImportPolicy` can have the following values:
+    #   (Optional) Use this property to configure the AutoImport feature on
+    #   the file system's linked Amazon S3 data repository. You use
+    #   AutoImport to update the contents of your FSx for Lustre file system
+    #   automatically with changes that occur in the linked S3 data
+    #   repository. `AutoImportPolicy` can have the following values:
     #
-    #   * `NONE` - (Default) AutoImport is off. Amazon FSx only updates file
-    #     and directory listings from the linked S3 bucket when the file
-    #     system is created. FSx does not update the file and directory
-    #     listing for any new or changed objects after choosing this option.
+    #   * `NONE` - (Default) AutoImport is off. Changes in the linked data
+    #     repository are not reflected on the FSx file system.
     #
-    #   * `NEW` - AutoImport is on. Amazon FSx automatically imports
-    #     directory listings of any new objects added to the linked S3
-    #     bucket that do not currently exist in the FSx file system.
+    #   * `NEW` - AutoImport is on. New files in the linked data repository
+    #     that do not currently exist in the FSx file system are
+    #     automatically imported. Updates to existing FSx files are not
+    #     imported to the FSx file system. Files deleted from the linked
+    #     data repository are not deleted from the FSx file system.
     #
-    #   * `NEW_CHANGED` - AutoImport is on. Amazon FSx automatically imports
-    #     file and directory listings of any new objects added to the S3
-    #     bucket and any existing objects that are changed in the S3 bucket
-    #     after you choose this option.
+    #   * `NEW_CHANGED` - AutoImport is on. New files in the linked S3 data
+    #     repository that do not currently exist in the FSx file system are
+    #     automatically imported. Changes to existing FSx files in the
+    #     linked repository are also automatically imported to the FSx file
+    #     system. Files deleted from the linked data repository are not
+    #     deleted from the FSx file system.
     #
     #   For more information, see [Automatically import updates from your S3
     #   bucket][1].
@@ -3127,7 +3159,7 @@ module Aws::FSx
     # @!attribute [rw] automatic_backup_retention_days
     #   The number of days to retain automatic daily backups. Setting this
     #   to zero (0) disables automatic daily backups. You can retain
-    #   automatic daily backups for a maximum of 35 days. For more
+    #   automatic daily backups for a maximum of 90 days. For more
     #   information, see [Working with Automatic Daily Backups][1].
     #
     #
@@ -3272,7 +3304,7 @@ module Aws::FSx
     # @!attribute [rw] automatic_backup_retention_days
     #   The number of days to retain automatic backups. Setting this to 0
     #   disables automatic backups. You can retain automatic backups for a
-    #   maximum of 35 days.
+    #   maximum of 90 days.
     #   @return [Integer]
     #
     # @!attribute [rw] copy_tags_to_backups

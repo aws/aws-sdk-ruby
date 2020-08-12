@@ -1621,6 +1621,7 @@ module Aws::WorkSpaces
     #   resp = client.modify_workspace_creation_properties({
     #     resource_id: "DirectoryId", # required
     #     workspace_creation_properties: { # required
+    #       enable_work_docs: false,
     #       enable_internet_access: false,
     #       default_ou: "DefaultOu",
     #       custom_security_group_id: "SecurityGroupId",
@@ -2148,7 +2149,7 @@ module Aws::WorkSpaces
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-workspaces'
-      context[:gem_version] = '1.41.0'
+      context[:gem_version] = '1.42.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

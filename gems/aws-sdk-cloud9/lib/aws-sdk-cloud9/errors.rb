@@ -28,6 +28,7 @@ module Aws::Cloud9
   #
   # ## Error Classes
   # * {BadRequestException}
+  # * {ConcurrentAccessException}
   # * {ConflictException}
   # * {ForbiddenException}
   # * {InternalServerErrorException}
@@ -46,6 +47,16 @@ module Aws::Cloud9
       # @param [Seahorse::Client::RequestContext] context
       # @param [String] message
       # @param [Aws::Cloud9::Types::BadRequestException] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+    end
+
+    class ConcurrentAccessException < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::Cloud9::Types::ConcurrentAccessException] data
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end

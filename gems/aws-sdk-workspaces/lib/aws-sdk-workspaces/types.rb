@@ -1620,6 +1620,7 @@ module Aws::WorkSpaces
     #       {
     #         resource_id: "DirectoryId", # required
     #         workspace_creation_properties: { # required
+    #           enable_work_docs: false,
     #           enable_internet_access: false,
     #           default_ou: "DefaultOu",
     #           custom_security_group_id: "SecurityGroupId",
@@ -2533,7 +2534,13 @@ module Aws::WorkSpaces
     #   @return [String]
     #
     # @!attribute [rw] computer_name
-    #   The name of the WorkSpace, as seen by the operating system.
+    #   The name of the WorkSpace, as seen by the operating system. The
+    #   format of this name varies. For more information, see [ Launch a
+    #   WorkSpace][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/workspaces/latest/adminguide/launch-workspaces-tutorials.html
     #   @return [String]
     #
     # @!attribute [rw] volume_encryption_key
@@ -2766,12 +2773,37 @@ module Aws::WorkSpaces
     #   data as a hash:
     #
     #       {
+    #         enable_work_docs: false,
     #         enable_internet_access: false,
     #         default_ou: "DefaultOu",
     #         custom_security_group_id: "SecurityGroupId",
     #         user_enabled_as_local_administrator: false,
     #         enable_maintenance_mode: false,
     #       }
+    #
+    # @!attribute [rw] enable_work_docs
+    #   Indicates whether Amazon WorkDocs is enabled for your WorkSpaces.
+    #
+    #   <note markdown="1"> If WorkDocs is already enabled for a WorkSpaces directory and you
+    #   disable it, new WorkSpaces launched in the directory will not have
+    #   WorkDocs enabled. However, WorkDocs remains enabled for any existing
+    #   WorkSpaces, unless you either disable users' access to WorkDocs or
+    #   you delete the WorkDocs site. To disable users' access to WorkDocs,
+    #   see [Disabling Users][1] in the *Amazon WorkDocs Administration
+    #   Guide*. To delete a WorkDocs site, see [Deleting a Site][2] in the
+    #   *Amazon WorkDocs Administration Guide*.
+    #
+    #    If you enable WorkDocs on a directory that already has existing
+    #   WorkSpaces, the existing WorkSpaces and any new WorkSpaces that are
+    #   launched in the directory will have WorkDocs enabled.
+    #
+    #    </note>
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/workdocs/latest/adminguide/inactive-user.html
+    #   [2]: https://docs.aws.amazon.com/workdocs/latest/adminguide/manage-sites.html
+    #   @return [Boolean]
     #
     # @!attribute [rw] enable_internet_access
     #   Indicates whether internet access is enabled for your WorkSpaces.
@@ -2802,6 +2834,7 @@ module Aws::WorkSpaces
     # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/WorkspaceCreationProperties AWS API Documentation
     #
     class WorkspaceCreationProperties < Struct.new(
+      :enable_work_docs,
       :enable_internet_access,
       :default_ou,
       :custom_security_group_id,

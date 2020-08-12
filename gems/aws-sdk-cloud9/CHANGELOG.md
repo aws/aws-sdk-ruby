@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.26.0 (2020-08-12)
+------------------
+
+* Feature - Add ConnectionType input parameter to CreateEnvironmentEC2 endpoint. New parameter enables creation of environments with SSM connection.
+
 1.25.0 (2020-06-23)
 ------------------
 

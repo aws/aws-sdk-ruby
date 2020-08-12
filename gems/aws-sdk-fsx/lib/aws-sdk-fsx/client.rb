@@ -371,7 +371,7 @@ module Aws::FSx
     #
     # * a Persistent deployment type
     #
-    # * is *not* linked to a data respository.
+    # * is *not* linked to an Amazon S3 data respository.
     #
     # For more information about backing up Amazon FSx for Lustre file
     # systems, see [Working with FSx for Lustre backups][1].
@@ -412,20 +412,20 @@ module Aws::FSx
     #   The ID of the file system to back up.
     #
     # @option params [String] :client_request_token
-    #   (Optional) A string of up to 64 ASCII characters that Amazon FSx uses
-    #   to ensure idempotent creation. This string is automatically filled on
-    #   your behalf when you use the AWS Command Line Interface (AWS CLI) or
-    #   an AWS SDK.
+    #   A string of up to 64 ASCII characters that Amazon FSx uses to ensure
+    #   idempotent creation. This string is automatically filled on your
+    #   behalf when you use the AWS Command Line Interface (AWS CLI) or an AWS
+    #   SDK.
     #
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.**
     #
     # @option params [Array<Types::Tag>] :tags
-    #   (Optional) The tags to apply to the backup at backup creation. The key
-    #   value of the `Name` tag appears in the console as the backup name. If
-    #   you have set `CopyTagsToBackups` to true, and you specify one or more
-    #   tags using the `CreateBackup` action, no existing file system tags are
-    #   copied from the file system to the backup.
+    #   The tags to apply to the backup at backup creation. The key value of
+    #   the `Name` tag appears in the console as the backup name. If you have
+    #   set `CopyTagsToBackups` to true, and you specify one or more tags
+    #   using the `CreateBackup` action, no existing tags on the file system
+    #   are copied from the file system to the backup.
     #
     # @return [Types::CreateBackupResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -491,7 +491,7 @@ module Aws::FSx
     # @example Response structure
     #
     #   resp.backup.backup_id #=> String
-    #   resp.backup.lifecycle #=> String, one of "AVAILABLE", "CREATING", "DELETED", "FAILED"
+    #   resp.backup.lifecycle #=> String, one of "AVAILABLE", "CREATING", "TRANSFERRING", "DELETED", "FAILED"
     #   resp.backup.failure_details.message #=> String
     #   resp.backup.type #=> String, one of "AUTOMATIC", "USER_INITIATED"
     #   resp.backup.progress_percent #=> Integer
@@ -551,6 +551,7 @@ module Aws::FSx
     #   resp.backup.file_system.lustre_configuration.daily_automatic_backup_start_time #=> String
     #   resp.backup.file_system.lustre_configuration.automatic_backup_retention_days #=> Integer
     #   resp.backup.file_system.lustre_configuration.copy_tags_to_backups #=> Boolean
+    #   resp.backup.file_system.lustre_configuration.drive_cache_type #=> String, one of "NONE", "READ"
     #   resp.backup.file_system.administrative_actions #=> Array
     #   resp.backup.file_system.administrative_actions[0].administrative_action_type #=> String, one of "FILE_SYSTEM_UPDATE", "STORAGE_OPTIMIZATION"
     #   resp.backup.file_system.administrative_actions[0].progress_percent #=> Integer
@@ -737,10 +738,10 @@ module Aws::FSx
     #   For Lustre file systems:
     #
     #   * For `SCRATCH_2` and `PERSISTENT_1` deployment types, valid values
-    #     are 1200 GiB, 2400 GiB, and increments of 2400 GiB.
+    #     are 1.2, 2.4, and increments of 2.4 TiB.
     #
-    #   * For `SCRATCH_1` deployment type, valid values are 1200 GiB, 2400
-    #     GiB, and increments of 3600 GiB.
+    #   * For `SCRATCH_1` deployment type, valid values are 1.2, 2.4, and
+    #     increments of 3.6 TiB.
     #
     #   For Windows file systems:
     #
@@ -918,6 +919,7 @@ module Aws::FSx
     #       daily_automatic_backup_start_time: "DailyTime",
     #       automatic_backup_retention_days: 1,
     #       copy_tags_to_backups: false,
+    #       drive_cache_type: "NONE", # accepts NONE, READ
     #     },
     #   })
     #
@@ -973,6 +975,7 @@ module Aws::FSx
     #   resp.file_system.lustre_configuration.daily_automatic_backup_start_time #=> String
     #   resp.file_system.lustre_configuration.automatic_backup_retention_days #=> Integer
     #   resp.file_system.lustre_configuration.copy_tags_to_backups #=> Boolean
+    #   resp.file_system.lustre_configuration.drive_cache_type #=> String, one of "NONE", "READ"
     #   resp.file_system.administrative_actions #=> Array
     #   resp.file_system.administrative_actions[0].administrative_action_type #=> String, one of "FILE_SYSTEM_UPDATE", "STORAGE_OPTIMIZATION"
     #   resp.file_system.administrative_actions[0].progress_percent #=> Integer
@@ -1192,6 +1195,7 @@ module Aws::FSx
     #       daily_automatic_backup_start_time: "DailyTime",
     #       automatic_backup_retention_days: 1,
     #       copy_tags_to_backups: false,
+    #       drive_cache_type: "NONE", # accepts NONE, READ
     #     },
     #     storage_type: "SSD", # accepts SSD, HDD
     #   })
@@ -1248,6 +1252,7 @@ module Aws::FSx
     #   resp.file_system.lustre_configuration.daily_automatic_backup_start_time #=> String
     #   resp.file_system.lustre_configuration.automatic_backup_retention_days #=> Integer
     #   resp.file_system.lustre_configuration.copy_tags_to_backups #=> Boolean
+    #   resp.file_system.lustre_configuration.drive_cache_type #=> String, one of "NONE", "READ"
     #   resp.file_system.administrative_actions #=> Array
     #   resp.file_system.administrative_actions[0].administrative_action_type #=> String, one of "FILE_SYSTEM_UPDATE", "STORAGE_OPTIMIZATION"
     #   resp.file_system.administrative_actions[0].progress_percent #=> Integer
@@ -1315,7 +1320,7 @@ module Aws::FSx
     # @example Response structure
     #
     #   resp.backup_id #=> String
-    #   resp.lifecycle #=> String, one of "AVAILABLE", "CREATING", "DELETED", "FAILED"
+    #   resp.lifecycle #=> String, one of "AVAILABLE", "CREATING", "TRANSFERRING", "DELETED", "FAILED"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/fsx-2018-03-01/DeleteBackup AWS API Documentation
     #
@@ -1548,7 +1553,7 @@ module Aws::FSx
     #
     #   resp.backups #=> Array
     #   resp.backups[0].backup_id #=> String
-    #   resp.backups[0].lifecycle #=> String, one of "AVAILABLE", "CREATING", "DELETED", "FAILED"
+    #   resp.backups[0].lifecycle #=> String, one of "AVAILABLE", "CREATING", "TRANSFERRING", "DELETED", "FAILED"
     #   resp.backups[0].failure_details.message #=> String
     #   resp.backups[0].type #=> String, one of "AUTOMATIC", "USER_INITIATED"
     #   resp.backups[0].progress_percent #=> Integer
@@ -1608,6 +1613,7 @@ module Aws::FSx
     #   resp.backups[0].file_system.lustre_configuration.daily_automatic_backup_start_time #=> String
     #   resp.backups[0].file_system.lustre_configuration.automatic_backup_retention_days #=> Integer
     #   resp.backups[0].file_system.lustre_configuration.copy_tags_to_backups #=> Boolean
+    #   resp.backups[0].file_system.lustre_configuration.drive_cache_type #=> String, one of "NONE", "READ"
     #   resp.backups[0].file_system.administrative_actions #=> Array
     #   resp.backups[0].file_system.administrative_actions[0].administrative_action_type #=> String, one of "FILE_SYSTEM_UPDATE", "STORAGE_OPTIMIZATION"
     #   resp.backups[0].file_system.administrative_actions[0].progress_percent #=> Integer
@@ -1874,6 +1880,7 @@ module Aws::FSx
     #   resp.file_systems[0].lustre_configuration.daily_automatic_backup_start_time #=> String
     #   resp.file_systems[0].lustre_configuration.automatic_backup_retention_days #=> Integer
     #   resp.file_systems[0].lustre_configuration.copy_tags_to_backups #=> Boolean
+    #   resp.file_systems[0].lustre_configuration.drive_cache_type #=> String, one of "NONE", "READ"
     #   resp.file_systems[0].administrative_actions #=> Array
     #   resp.file_systems[0].administrative_actions[0].administrative_action_type #=> String, one of "FILE_SYSTEM_UPDATE", "STORAGE_OPTIMIZATION"
     #   resp.file_systems[0].administrative_actions[0].progress_percent #=> Integer
@@ -2255,6 +2262,7 @@ module Aws::FSx
     #   resp.file_system.lustre_configuration.daily_automatic_backup_start_time #=> String
     #   resp.file_system.lustre_configuration.automatic_backup_retention_days #=> Integer
     #   resp.file_system.lustre_configuration.copy_tags_to_backups #=> Boolean
+    #   resp.file_system.lustre_configuration.drive_cache_type #=> String, one of "NONE", "READ"
     #   resp.file_system.administrative_actions #=> Array
     #   resp.file_system.administrative_actions[0].administrative_action_type #=> String, one of "FILE_SYSTEM_UPDATE", "STORAGE_OPTIMIZATION"
     #   resp.file_system.administrative_actions[0].progress_percent #=> Integer
@@ -2285,7 +2293,7 @@ module Aws::FSx
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-fsx'
-      context[:gem_version] = '1.26.0'
+      context[:gem_version] = '1.27.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

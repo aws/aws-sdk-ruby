@@ -899,6 +899,11 @@ module Aws::IoT
     #   check.
     #   @return [Integer]
     #
+    # @!attribute [rw] suppressed_non_compliant_resources_count
+    #   Describes how many of the non-compliant resources created during the
+    #   evaluation of an audit check were marked as suppressed.
+    #   @return [Integer]
+    #
     # @!attribute [rw] error_code
     #   The code of any error encountered when this check is performed
     #   during this audit. One of "INSUFFICIENT\_PERMISSIONS" or
@@ -915,6 +920,7 @@ module Aws::IoT
       :check_compliant,
       :total_resources_count,
       :non_compliant_resources_count,
+      :suppressed_non_compliant_resources_count,
       :error_code,
       :message)
       SENSITIVE = []
@@ -964,6 +970,11 @@ module Aws::IoT
     #   A code that indicates the reason that the resource was noncompliant.
     #   @return [String]
     #
+    # @!attribute [rw] is_suppressed
+    #   Indicates whether the audit finding was suppressed or not during
+    #   reporting.
+    #   @return [Boolean]
+    #
     class AuditFinding < Struct.new(
       :finding_id,
       :task_id,
@@ -974,7 +985,8 @@ module Aws::IoT
       :non_compliant_resource,
       :related_resources,
       :reason_for_non_compliance,
-      :reason_for_non_compliance_code)
+      :reason_for_non_compliance_code,
+      :is_suppressed)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1129,6 +1141,43 @@ module Aws::IoT
       :target_arn,
       :role_arn,
       :enabled)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Filters out specific findings of a Device Defender audit.
+    #
+    # @!attribute [rw] check_name
+    #   An audit check name. Checks must be enabled for your account. (Use
+    #   `DescribeAccountAuditConfiguration` to see the list of all checks,
+    #   including those that are enabled or use
+    #   `UpdateAccountAuditConfiguration` to select which checks are
+    #   enabled.)
+    #   @return [String]
+    #
+    # @!attribute [rw] resource_identifier
+    #   Information that identifies the noncompliant resource.
+    #   @return [Types::ResourceIdentifier]
+    #
+    # @!attribute [rw] expiration_date
+    #   The expiration date (epoch timestamp in seconds) that you want the
+    #   suppression to adhere to.
+    #   @return [Time]
+    #
+    # @!attribute [rw] suppress_indefinitely
+    #   Indicates whether a suppression should exist indefinitely or not.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] description
+    #   The description of the audit suppression.
+    #   @return [String]
+    #
+    class AuditSuppression < Struct.new(
+      :check_name,
+      :resource_identifier,
+      :expiration_date,
+      :suppress_indefinitely,
+      :description)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2415,6 +2464,74 @@ module Aws::IoT
       SENSITIVE = []
       include Aws::Structure
     end
+
+    # @note When making an API call, you may pass CreateAuditSuppressionRequest
+    #   data as a hash:
+    #
+    #       {
+    #         check_name: "AuditCheckName", # required
+    #         resource_identifier: { # required
+    #           device_certificate_id: "CertificateId",
+    #           ca_certificate_id: "CertificateId",
+    #           cognito_identity_pool_id: "CognitoIdentityPoolId",
+    #           client_id: "ClientId",
+    #           policy_version_identifier: {
+    #             policy_name: "PolicyName",
+    #             policy_version_id: "PolicyVersionId",
+    #           },
+    #           account: "AwsAccountId",
+    #           iam_role_arn: "RoleArn",
+    #           role_alias_arn: "RoleAliasArn",
+    #         },
+    #         expiration_date: Time.now,
+    #         suppress_indefinitely: false,
+    #         description: "AuditDescription",
+    #         client_request_token: "ClientRequestToken", # required
+    #       }
+    #
+    # @!attribute [rw] check_name
+    #   An audit check name. Checks must be enabled for your account. (Use
+    #   `DescribeAccountAuditConfiguration` to see the list of all checks,
+    #   including those that are enabled or use
+    #   `UpdateAccountAuditConfiguration` to select which checks are
+    #   enabled.)
+    #   @return [String]
+    #
+    # @!attribute [rw] resource_identifier
+    #   Information that identifies the noncompliant resource.
+    #   @return [Types::ResourceIdentifier]
+    #
+    # @!attribute [rw] expiration_date
+    #   The epoch timestamp in seconds at which this suppression expires.
+    #   @return [Time]
+    #
+    # @!attribute [rw] suppress_indefinitely
+    #   Indicates whether a suppression should exist indefinitely or not.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] description
+    #   The description of the audit suppression.
+    #   @return [String]
+    #
+    # @!attribute [rw] client_request_token
+    #   The epoch timestamp in seconds at which this suppression expires.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.
+    #   @return [String]
+    #
+    class CreateAuditSuppressionRequest < Struct.new(
+      :check_name,
+      :resource_identifier,
+      :expiration_date,
+      :suppress_indefinitely,
+      :description,
+      :client_request_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    class CreateAuditSuppressionResponse < Aws::EmptyStructure; end
 
     # @note When making an API call, you may pass CreateAuthorizerRequest
     #   data as a hash:
@@ -4669,6 +4786,47 @@ module Aws::IoT
 
     class DeleteAccountAuditConfigurationResponse < Aws::EmptyStructure; end
 
+    # @note When making an API call, you may pass DeleteAuditSuppressionRequest
+    #   data as a hash:
+    #
+    #       {
+    #         check_name: "AuditCheckName", # required
+    #         resource_identifier: { # required
+    #           device_certificate_id: "CertificateId",
+    #           ca_certificate_id: "CertificateId",
+    #           cognito_identity_pool_id: "CognitoIdentityPoolId",
+    #           client_id: "ClientId",
+    #           policy_version_identifier: {
+    #             policy_name: "PolicyName",
+    #             policy_version_id: "PolicyVersionId",
+    #           },
+    #           account: "AwsAccountId",
+    #           iam_role_arn: "RoleArn",
+    #           role_alias_arn: "RoleAliasArn",
+    #         },
+    #       }
+    #
+    # @!attribute [rw] check_name
+    #   An audit check name. Checks must be enabled for your account. (Use
+    #   `DescribeAccountAuditConfiguration` to see the list of all checks,
+    #   including those that are enabled or use
+    #   `UpdateAccountAuditConfiguration` to select which checks are
+    #   enabled.)
+    #   @return [String]
+    #
+    # @!attribute [rw] resource_identifier
+    #   Information that identifies the noncompliant resource.
+    #   @return [Types::ResourceIdentifier]
+    #
+    class DeleteAuditSuppressionRequest < Struct.new(
+      :check_name,
+      :resource_identifier)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    class DeleteAuditSuppressionResponse < Aws::EmptyStructure; end
+
     # @note When making an API call, you may pass DeleteAuthorizerRequest
     #   data as a hash:
     #
@@ -5475,6 +5633,79 @@ module Aws::IoT
       :target,
       :audit_check_to_actions_mapping,
       :actions_definition)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass DescribeAuditSuppressionRequest
+    #   data as a hash:
+    #
+    #       {
+    #         check_name: "AuditCheckName", # required
+    #         resource_identifier: { # required
+    #           device_certificate_id: "CertificateId",
+    #           ca_certificate_id: "CertificateId",
+    #           cognito_identity_pool_id: "CognitoIdentityPoolId",
+    #           client_id: "ClientId",
+    #           policy_version_identifier: {
+    #             policy_name: "PolicyName",
+    #             policy_version_id: "PolicyVersionId",
+    #           },
+    #           account: "AwsAccountId",
+    #           iam_role_arn: "RoleArn",
+    #           role_alias_arn: "RoleAliasArn",
+    #         },
+    #       }
+    #
+    # @!attribute [rw] check_name
+    #   An audit check name. Checks must be enabled for your account. (Use
+    #   `DescribeAccountAuditConfiguration` to see the list of all checks,
+    #   including those that are enabled or use
+    #   `UpdateAccountAuditConfiguration` to select which checks are
+    #   enabled.)
+    #   @return [String]
+    #
+    # @!attribute [rw] resource_identifier
+    #   Information that identifies the noncompliant resource.
+    #   @return [Types::ResourceIdentifier]
+    #
+    class DescribeAuditSuppressionRequest < Struct.new(
+      :check_name,
+      :resource_identifier)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] check_name
+    #   An audit check name. Checks must be enabled for your account. (Use
+    #   `DescribeAccountAuditConfiguration` to see the list of all checks,
+    #   including those that are enabled or use
+    #   `UpdateAccountAuditConfiguration` to select which checks are
+    #   enabled.)
+    #   @return [String]
+    #
+    # @!attribute [rw] resource_identifier
+    #   Information that identifies the noncompliant resource.
+    #   @return [Types::ResourceIdentifier]
+    #
+    # @!attribute [rw] expiration_date
+    #   The epoch timestamp in seconds at which this suppression expires.
+    #   @return [Time]
+    #
+    # @!attribute [rw] suppress_indefinitely
+    #   Indicates whether a suppression should exist indefinitely or not.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] description
+    #   The description of the audit suppression.
+    #   @return [String]
+    #
+    class DescribeAuditSuppressionResponse < Struct.new(
+      :check_name,
+      :resource_identifier,
+      :expiration_date,
+      :suppress_indefinitely,
+      :description)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -6756,9 +6987,11 @@ module Aws::IoT
     # @!attribute [rw] principal
     #   The principal.
     #
-    #   If the principal is a certificate, specify the certificate ARN. If
-    #   the principal is an Amazon Cognito identity, specify the identity
-    #   ID.
+    #   Valid principals are CertificateArn
+    #   (arn:aws:iot:*region*\:*accountId*\:cert/*certificateId*),
+    #   thingGroupArn
+    #   (arn:aws:iot:*region*\:*accountId*\:thinggroup/*groupName*) and
+    #   CognitoId (*region*\:*id*).
     #   @return [String]
     #
     class DetachPrincipalPolicyRequest < Struct.new(
@@ -7337,7 +7570,11 @@ module Aws::IoT
     #       }
     #
     # @!attribute [rw] principal
-    #   The principal.
+    #   The principal. Valid principals are CertificateArn
+    #   (arn:aws:iot:*region*\:*accountId*\:cert/*certificateId*),
+    #   thingGroupArn
+    #   (arn:aws:iot:*region*\:*accountId*\:thinggroup/*groupName*) and
+    #   CognitoId (*region*\:*id*).
     #   @return [String]
     #
     # @!attribute [rw] cognito_identity_pool_id
@@ -8784,7 +9021,12 @@ module Aws::IoT
     #       }
     #
     # @!attribute [rw] target
-    #   The group or principal for which the policies will be listed.
+    #   The group or principal for which the policies will be listed. Valid
+    #   principals are CertificateArn
+    #   (arn:aws:iot:*region*\:*accountId*\:cert/*certificateId*),
+    #   thingGroupArn
+    #   (arn:aws:iot:*region*\:*accountId*\:thinggroup/*groupName*) and
+    #   CognitoId (*region*\:*id*).
     #   @return [String]
     #
     # @!attribute [rw] recursive
@@ -8847,6 +9089,7 @@ module Aws::IoT
     #         next_token: "NextToken",
     #         start_time: Time.now,
     #         end_time: Time.now,
+    #         list_suppressed_findings: false,
     #       }
     #
     # @!attribute [rw] task_id
@@ -8885,6 +9128,13 @@ module Aws::IoT
     #   not both.
     #   @return [Time]
     #
+    # @!attribute [rw] list_suppressed_findings
+    #   Boolean flag indicating whether only the suppressed findings or the
+    #   unsuppressed findings should be listed. If this parameter isn't
+    #   provided, the response will list both suppressed and unsuppressed
+    #   findings.
+    #   @return [Boolean]
+    #
     class ListAuditFindingsRequest < Struct.new(
       :task_id,
       :check_name,
@@ -8892,7 +9142,8 @@ module Aws::IoT
       :max_results,
       :next_token,
       :start_time,
-      :end_time)
+      :end_time,
+      :list_suppressed_findings)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -9045,6 +9296,82 @@ module Aws::IoT
     #
     class ListAuditMitigationActionsTasksResponse < Struct.new(
       :tasks,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass ListAuditSuppressionsRequest
+    #   data as a hash:
+    #
+    #       {
+    #         check_name: "AuditCheckName",
+    #         resource_identifier: {
+    #           device_certificate_id: "CertificateId",
+    #           ca_certificate_id: "CertificateId",
+    #           cognito_identity_pool_id: "CognitoIdentityPoolId",
+    #           client_id: "ClientId",
+    #           policy_version_identifier: {
+    #             policy_name: "PolicyName",
+    #             policy_version_id: "PolicyVersionId",
+    #           },
+    #           account: "AwsAccountId",
+    #           iam_role_arn: "RoleArn",
+    #           role_alias_arn: "RoleAliasArn",
+    #         },
+    #         ascending_order: false,
+    #         next_token: "NextToken",
+    #         max_results: 1,
+    #       }
+    #
+    # @!attribute [rw] check_name
+    #   An audit check name. Checks must be enabled for your account. (Use
+    #   `DescribeAccountAuditConfiguration` to see the list of all checks,
+    #   including those that are enabled or use
+    #   `UpdateAccountAuditConfiguration` to select which checks are
+    #   enabled.)
+    #   @return [String]
+    #
+    # @!attribute [rw] resource_identifier
+    #   Information that identifies the noncompliant resource.
+    #   @return [Types::ResourceIdentifier]
+    #
+    # @!attribute [rw] ascending_order
+    #   Determines whether suppressions are listed in ascending order by
+    #   expiration date or not. If parameter isn't provided,
+    #   `ascendingOrder=true`.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] next_token
+    #   The token for the next set of results.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of results to return at one time. The default is
+    #   25.
+    #   @return [Integer]
+    #
+    class ListAuditSuppressionsRequest < Struct.new(
+      :check_name,
+      :resource_identifier,
+      :ascending_order,
+      :next_token,
+      :max_results)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] suppressions
+    #   List of audit suppressions.
+    #   @return [Array<Types::AuditSuppression>]
+    #
+    # @!attribute [rw] next_token
+    #   A token that can be used to retrieve the next set of results, or
+    #   `null` if there are no additional results.
+    #   @return [String]
+    #
+    class ListAuditSuppressionsResponse < Struct.new(
+      :suppressions,
       :next_token)
       SENSITIVE = []
       include Aws::Structure
@@ -9959,7 +10286,11 @@ module Aws::IoT
     #       }
     #
     # @!attribute [rw] principal
-    #   The principal.
+    #   The principal. Valid principals are CertificateArn
+    #   (arn:aws:iot:*region*\:*accountId*\:cert/*certificateId*),
+    #   thingGroupArn
+    #   (arn:aws:iot:*region*\:*accountId*\:thinggroup/*groupName*) and
+    #   CognitoId (*region*\:*id*).
     #   @return [String]
     #
     # @!attribute [rw] marker
@@ -10580,8 +10911,8 @@ module Aws::IoT
     #   @return [Array<Types::GroupNameAndArn>]
     #
     # @!attribute [rw] next_token
-    #   The token used to get the next set of results, or **null** if there
-    #   are no additional results.
+    #   The token used to get the next set of results. Will not be returned
+    #   if operation has returned all results.
     #   @return [String]
     #
     class ListThingGroupsResponse < Struct.new(
@@ -10761,8 +11092,8 @@ module Aws::IoT
     #   @return [Array<Types::ThingTypeDefinition>]
     #
     # @!attribute [rw] next_token
-    #   The token for the next set of results, or **null** if there are no
-    #   additional results.
+    #   The token for the next set of results. Will not be returned if
+    #   operation has returned all results.
     #   @return [String]
     #
     class ListThingTypesResponse < Struct.new(
@@ -10806,8 +11137,8 @@ module Aws::IoT
     #   @return [Array<String>]
     #
     # @!attribute [rw] next_token
-    #   The token used to get the next set of results, or **null** if there
-    #   are no additional results.
+    #   The token used to get the next set of results. Will not be returned
+    #   if operation has returned all results.
     #   @return [String]
     #
     class ListThingsInBillingGroupResponse < Struct.new(
@@ -10919,8 +11250,8 @@ module Aws::IoT
     #   @return [Array<Types::ThingAttribute>]
     #
     # @!attribute [rw] next_token
-    #   The token used to get the next set of results, or **null** if there
-    #   are no additional results.
+    #   The token used to get the next set of results. Will not be returned
+    #   if operation has returned all results.
     #   @return [String]
     #
     class ListThingsResponse < Struct.new(
@@ -14181,7 +14512,11 @@ module Aws::IoT
     #       }
     #
     # @!attribute [rw] principal
-    #   The principal.
+    #   The principal. Valid principals are CertificateArn
+    #   (arn:aws:iot:*region*\:*accountId*\:cert/*certificateId*),
+    #   thingGroupArn
+    #   (arn:aws:iot:*region*\:*accountId*\:thinggroup/*groupName*) and
+    #   CognitoId (*region*\:*id*).
     #   @return [String]
     #
     # @!attribute [rw] cognito_identity_pool_id
@@ -15499,6 +15834,66 @@ module Aws::IoT
     end
 
     class UpdateAccountAuditConfigurationResponse < Aws::EmptyStructure; end
+
+    # @note When making an API call, you may pass UpdateAuditSuppressionRequest
+    #   data as a hash:
+    #
+    #       {
+    #         check_name: "AuditCheckName", # required
+    #         resource_identifier: { # required
+    #           device_certificate_id: "CertificateId",
+    #           ca_certificate_id: "CertificateId",
+    #           cognito_identity_pool_id: "CognitoIdentityPoolId",
+    #           client_id: "ClientId",
+    #           policy_version_identifier: {
+    #             policy_name: "PolicyName",
+    #             policy_version_id: "PolicyVersionId",
+    #           },
+    #           account: "AwsAccountId",
+    #           iam_role_arn: "RoleArn",
+    #           role_alias_arn: "RoleAliasArn",
+    #         },
+    #         expiration_date: Time.now,
+    #         suppress_indefinitely: false,
+    #         description: "AuditDescription",
+    #       }
+    #
+    # @!attribute [rw] check_name
+    #   An audit check name. Checks must be enabled for your account. (Use
+    #   `DescribeAccountAuditConfiguration` to see the list of all checks,
+    #   including those that are enabled or use
+    #   `UpdateAccountAuditConfiguration` to select which checks are
+    #   enabled.)
+    #   @return [String]
+    #
+    # @!attribute [rw] resource_identifier
+    #   Information that identifies the noncompliant resource.
+    #   @return [Types::ResourceIdentifier]
+    #
+    # @!attribute [rw] expiration_date
+    #   The expiration date (epoch timestamp in seconds) that you want the
+    #   suppression to adhere to.
+    #   @return [Time]
+    #
+    # @!attribute [rw] suppress_indefinitely
+    #   Indicates whether a suppression should exist indefinitely or not.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] description
+    #   The description of the audit suppression.
+    #   @return [String]
+    #
+    class UpdateAuditSuppressionRequest < Struct.new(
+      :check_name,
+      :resource_identifier,
+      :expiration_date,
+      :suppress_indefinitely,
+      :description)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    class UpdateAuditSuppressionResponse < Aws::EmptyStructure; end
 
     # @note When making an API call, you may pass UpdateAuthorizerRequest
     #   data as a hash:

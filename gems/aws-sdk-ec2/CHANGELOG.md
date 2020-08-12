@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.186.0 (2020-08-12)
+------------------
+
+* Feature - Introduces support for IPv6-in-IPv4 IPsec tunnels. A user can now send traffic from their on-premise IPv6 network to AWS VPCs that have IPv6 support enabled.
+
 1.185.0 (2020-08-11)
 ------------------
 
