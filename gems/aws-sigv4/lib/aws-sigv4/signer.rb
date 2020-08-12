@@ -515,7 +515,7 @@ module Aws
         # occasionally when <=> is 0 (considered still sorted), but this
         # causes our normalized query string to not match the sent querystring.
         # When names match, we then sort by their values.  When values also
-        # match then we sort by
+        # match then we sort by their original order
         params.each.with_index.sort do |a, b|
           a, a_offset = a
           b, b_offset = b
