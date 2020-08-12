@@ -84,6 +84,7 @@ module Aws
             client.put_object(bucket: test_bucket, key: test_object, body: plaintext)
 
             stub_get(s3_client, data, true)
+            expect_any_instance_of(Aws::S3::Encryption::DecryptHandler).to receive(:warn)
             decrypted = ''
             client.get_object(bucket: test_bucket, key: test_object) do |chunk|
               decrypted += chunk

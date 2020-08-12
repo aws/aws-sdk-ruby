@@ -507,22 +507,23 @@ module Aws
       def normalized_querystring(querystring)
         params = querystring.split('&')
         params = params.map { |p| p.match(/=/) ? p : p + '=' }
-        # We have to sort by param name and preserve order of params that
-        # have the same name. Default sort <=> in JRuby will swap members
+        # From: https://docs.aws.amazon.com/general/latest/gr/sigv4-create-canonical-request.html
+        # Sort the parameter names by character code point in ascending order.
+        # Parameters with duplicate names should be sorted by value.
+        #
+        # Default sort <=> in JRuby will swap members
         # occasionally when <=> is 0 (considered still sorted), but this
         # causes our normalized query string to not match the sent querystring.
-        # When names match, we then sort by their original order
-        params = params.each.with_index.sort do |a, b|
-          a, a_offset = a
-          a_name = a.split('=')[0]
-          b, b_offset = b
-          b_name = b.split('=')[0]
+        # When names match, we then sort by their values
+        params.sort do |a, b|
+          a_name, a_value = a.split('=')
+          b_name, b_value = b.split('=')
           if a_name == b_name
-            a_offset <=> b_offset
+            a_value <=> b_value
           else
             a_name <=> b_name
           end
-        end.map(&:first).join('&')
+        end.join('&')
       end
 
       def signed_headers(headers)
