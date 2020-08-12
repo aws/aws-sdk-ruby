@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+2.11.565 (2020-08-12)
+------------------
+
 * Feature - Aws::Cloud9 - Updated the API, and documentation for AWS Cloud9.
 
 * Feature - Aws::Comprehend - Updated the documentation for Amazon Comprehend.
