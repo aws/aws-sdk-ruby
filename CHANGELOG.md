@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+2.11.566 (2020-08-13)
+------------------
+
 * Feature - Aws::AppSync - Updated the documentation for AWS AppSync.
 
 * Feature - Aws::CognitoIdentityProvider - Updated the API, and documentation for Amazon Cognito Identity Provider.
