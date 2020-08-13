@@ -83,6 +83,10 @@
     "models": "batch/2016-08-10",
     "endpoint": "batch"
   },
+  "Braket": {
+    "models": "braket/2019-09-01",
+    "endpoint": "braket"
+  },
   "Budgets": {
     "models": "budgets/2016-10-20",
     "endpoint": "budgets"

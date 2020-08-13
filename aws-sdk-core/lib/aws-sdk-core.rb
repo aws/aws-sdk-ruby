@@ -44,6 +44,7 @@ module Aws
     AutoScalingPlans
     Backup
     Batch
+    Braket
     Budgets
     Chime
     Cloud9
