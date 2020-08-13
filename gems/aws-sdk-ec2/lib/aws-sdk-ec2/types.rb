@@ -35816,6 +35816,10 @@ module Aws::EC2
     #           value: false,
     #         },
     #         subnet_id: "SubnetId", # required
+    #         map_customer_owned_ip_on_launch: {
+    #           value: false,
+    #         },
+    #         customer_owned_ipv_4_pool: "CoipPoolId",
     #       }
     #
     # @!attribute [rw] assign_ipv_6_address_on_creation
@@ -35839,12 +35843,30 @@ module Aws::EC2
     #   The ID of the subnet.
     #   @return [String]
     #
+    # @!attribute [rw] map_customer_owned_ip_on_launch
+    #   Specify `true` to indicate that network interfaces attached to
+    #   instances created in the specified subnet should be assigned a
+    #   customer-owned IPv4 address.
+    #
+    #   When this value is `true`, you must specify the customer-owned IP
+    #   pool using `CustomerOwnedIpv4Pool`.
+    #   @return [Types::AttributeBooleanValue]
+    #
+    # @!attribute [rw] customer_owned_ipv_4_pool
+    #   The customer-owned IPv4 address pool associated with the subnet.
+    #
+    #   You must set this value when you specify `true` for
+    #   `MapCustomerOwnedIpOnLaunch`.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ModifySubnetAttributeRequest AWS API Documentation
     #
     class ModifySubnetAttributeRequest < Struct.new(
       :assign_ipv_6_address_on_creation,
       :map_public_ip_on_launch,
-      :subnet_id)
+      :subnet_id,
+      :map_customer_owned_ip_on_launch,
+      :customer_owned_ipv_4_pool)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -37765,6 +37787,10 @@ module Aws::EC2
     #   the network interface.
     #   @return [String]
     #
+    # @!attribute [rw] customer_owned_ip
+    #   The customer-owned IP address associated with the network interface.
+    #   @return [String]
+    #
     # @!attribute [rw] carrier_ip
     #   The carrier IP address associated with the network interface.
     #
@@ -37780,6 +37806,7 @@ module Aws::EC2
       :ip_owner_id,
       :public_dns_name,
       :public_ip,
+      :customer_owned_ip,
       :carrier_ip)
       SENSITIVE = []
       include Aws::Structure

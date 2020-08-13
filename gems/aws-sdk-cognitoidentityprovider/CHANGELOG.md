@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.43.0 (2020-08-13)
+------------------
+
+* Feature - Adding ability to customize expiry for Refresh, Access and ID tokens.
+
 1.42.0 (2020-07-02)
 ------------------
 

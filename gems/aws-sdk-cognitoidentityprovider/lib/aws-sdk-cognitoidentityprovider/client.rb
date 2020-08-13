@@ -471,19 +471,18 @@ module Aws::CognitoIdentityProvider
     # If `MessageAction` is not set, the default is to send a welcome
     # message via email or phone (SMS).
     #
-    # <note markdown="1"> This message is based on a template that you configured in your call
-    # to or . This template includes your custom sign-up instructions and
-    # placeholders for user name and temporary password.
+    # This message is based on a template that you configured in your call
+    # to create or update a user pool. This template includes your custom
+    # sign-up instructions and placeholders for user name and temporary
+    # password.
     #
-    #  </note>
-    #
-    # Alternatively, you can call AdminCreateUser with “SUPPRESS” for the
+    # Alternatively, you can call `AdminCreateUser` with “SUPPRESS” for the
     # `MessageAction` parameter, and Amazon Cognito will not send any email.
     #
     # In either case, the user will be in the `FORCE_CHANGE_PASSWORD` state
     # until they sign in and change their password.
     #
-    # AdminCreateUser requires developer credentials.
+    # `AdminCreateUser` requires developer credentials.
     #
     # @option params [required, String] :user_pool_id
     #   The user pool ID for the user pool where the user will be created.
@@ -497,10 +496,10 @@ module Aws::CognitoIdentityProvider
     #   An array of name-value pairs that contain user attributes and
     #   attribute values to be set for the user to be created. You can create
     #   a user without specifying any attributes other than `Username`.
-    #   However, any attributes that you specify as required (in or in the
-    #   **Attributes** tab of the console) must be supplied either by you (in
-    #   your call to `AdminCreateUser`) or by the user (when he or she signs
-    #   up in response to your welcome message).
+    #   However, any attributes that you specify as required (when creating a
+    #   user pool or in the **Attributes** tab of the console) must be
+    #   supplied either by you (in your call to `AdminCreateUser`) or by the
+    #   user (when he or she signs up in response to your welcome message).
     #
     #   For custom attributes, you must prepend the `custom:` prefix to the
     #   attribute name.
@@ -512,7 +511,8 @@ module Aws::CognitoIdentityProvider
     #
     #   In your call to `AdminCreateUser`, you can set the `email_verified`
     #   attribute to `True`, and you can set the `phone_number_verified`
-    #   attribute to `True`. (You can also do this by calling .)
+    #   attribute to `True`. (You can also do this by calling
+    #   [AdminUpdateUserAttributes][1].)
     #
     #   * **email**\: The email address of the user to whom the message that
     #     contains the code and username will be sent. Required if the
@@ -523,6 +523,10 @@ module Aws::CognitoIdentityProvider
     #     that contains the code and username will be sent. Required if the
     #     `phone_number_verified` attribute is set to `True`, or if `"SMS"` is
     #     specified in the `DesiredDeliveryMediums` parameter.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/cognito-user-identity-pools/latest/APIReference/API_AdminUpdateUserAttributes.html
     #
     # @option params [Array<Types::AttributeType>] :validation_data
     #   The user's validation data. This is an array of name-value pairs that
@@ -745,7 +749,7 @@ module Aws::CognitoIdentityProvider
     # IdP user, any link between that user and an existing user is removed.
     # The next time the external user (no longer attached to the previously
     # linked `DestinationUser`) signs in, they must create a new user
-    # account. See .
+    # account. See [AdminLinkProviderForUser][1].
     #
     # This action is enabled only for admin access and requires developer
     # credentials.
@@ -766,12 +770,16 @@ module Aws::CognitoIdentityProvider
     # For de-linking a SAML identity, there are two scenarios. If the linked
     # identity has not yet been used to sign-in, the `ProviderAttributeName`
     # and `ProviderAttributeValue` must be the same values that were used
-    # for the `SourceUser` when the identities were originally linked in the
-    # call. (If the linking was done with `ProviderAttributeName` set to
-    # `Cognito_Subject`, the same applies here). However, if the user has
-    # already signed in, the `ProviderAttributeName` must be
-    # `Cognito_Subject` and `ProviderAttributeValue` must be the subject of
-    # the SAML assertion.
+    # for the `SourceUser` when the identities were originally linked using
+    # ` AdminLinkProviderForUser` call. (If the linking was done with
+    # `ProviderAttributeName` set to `Cognito_Subject`, the same applies
+    # here). However, if the user has already signed in, the
+    # `ProviderAttributeName` must be `Cognito_Subject` and
+    # `ProviderAttributeValue` must be the subject of the SAML assertion.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/cognito-user-identity-pools/latest/APIReference/API_AdminLinkProviderForUser.html
     #
     # @option params [required, String] :user_pool_id
     #   The user pool ID for the user pool.
@@ -1045,18 +1053,20 @@ module Aws::CognitoIdentityProvider
     #
     #   * For `USER_SRP_AUTH`\: `USERNAME` (required), `SRP_A` (required),
     #     `SECRET_HASH` (required if the app client is configured with a
-    #     client secret), `DEVICE_KEY`
+    #     client secret), `DEVICE_KEY`.
     #
     #   * For `REFRESH_TOKEN_AUTH/REFRESH_TOKEN`\: `REFRESH_TOKEN` (required),
     #     `SECRET_HASH` (required if the app client is configured with a
-    #     client secret), `DEVICE_KEY`
+    #     client secret), `DEVICE_KEY`.
     #
     #   * For `ADMIN_NO_SRP_AUTH`\: `USERNAME` (required), `SECRET_HASH` (if
     #     app client is configured with client secret), `PASSWORD` (required),
-    #     `DEVICE_KEY`
+    #     `DEVICE_KEY`.
     #
     #   * For `CUSTOM_AUTH`\: `USERNAME` (required), `SECRET_HASH` (if app
-    #     client is configured with client secret), `DEVICE_KEY`
+    #     client is configured with client secret), `DEVICE_KEY`. To start the
+    #     authentication flow with password verification, include
+    #     `ChallengeName: SRP_A` and `SRP_A: (The SRP_A Value)`.
     #
     # @option params [Hash<String,String>] :client_metadata
     #   A map of custom key-value pairs that you can provide as input for
@@ -1202,12 +1212,14 @@ module Aws::CognitoIdentityProvider
     # that when the federated user identity is used, the user signs in as
     # the existing user account.
     #
+    # <note markdown="1"> The maximum number of federated identities linked to a user is 5.
+    #
+    #  </note>
+    #
     # Because this API allows a user with an external federated identity to
     # sign in as an existing user in the user pool, it is critical that it
     # only be used with external identity providers and provider attributes
     # that have been trusted by the application owner.
-    #
-    # See also .
     #
     # This action is enabled only for admin access and requires developer
     # credentials.
@@ -1578,7 +1590,11 @@ module Aws::CognitoIdentityProvider
     #   The app client ID.
     #
     # @option params [required, String] :challenge_name
-    #   The challenge name. For more information, see .
+    #   The challenge name. For more information, see [AdminInitiateAuth][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/cognito-user-identity-pools/latest/APIReference/API_AdminInitiateAuth.html
     #
     # @option params [Hash<String,String>] :challenge_responses
     #   The challenge responses. These are inputs corresponding to the value
@@ -1816,8 +1832,12 @@ module Aws::CognitoIdentityProvider
 
     # *This action is no longer supported.* You can use it to configure only
     # SMS MFA. You can't use it to configure TOTP software token MFA. To
-    # configure either type of MFA, use the AdminSetUserMFAPreference action
+    # configure either type of MFA, use [AdminSetUserMFAPreference][1]
     # instead.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/cognito-user-identity-pools/latest/APIReference/API_AdminSetUserMFAPreference.html
     #
     # @option params [required, String] :user_pool_id
     #   The ID of the user pool that contains the user that you are setting
@@ -2176,7 +2196,11 @@ module Aws::CognitoIdentityProvider
     #
     # @option params [required, String] :confirmation_code
     #   The confirmation code sent by a user's request to retrieve a
-    #   forgotten password. For more information, see
+    #   forgotten password. For more information, see [ForgotPassword][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/cognito-user-identity-pools/latest/APIReference/API_ForgotPassword.html
     #
     # @option params [required, String] :password
     #   The password sent by a user's request to retrieve a forgotten
@@ -2446,13 +2470,23 @@ module Aws::CognitoIdentityProvider
     #   The identity provider details. The following list describes the
     #   provider detail keys for each identity provider type.
     #
-    #   * For Google, Facebook and Login with Amazon:
+    #   * For Google and Login with Amazon:
     #
     #     * client\_id
     #
     #     * client\_secret
     #
     #     * authorize\_scopes
+    #
+    #   * For Facebook:
+    #
+    #     * client\_id
+    #
+    #     * client\_secret
+    #
+    #     * authorize\_scopes
+    #
+    #     * api\_version
     #
     #   * For Sign in with Apple:
     #
@@ -2489,8 +2523,6 @@ module Aws::CognitoIdentityProvider
     #
     #     * jwks\_uri *if not available from discovery URL specified by
     #       oidc\_issuer key*
-    #
-    #     * authorize\_scopes
     #
     #   * For SAML providers:
     #
@@ -2743,7 +2775,11 @@ module Aws::CognitoIdentityProvider
     #   selected sign-in option. For example, when this is set to `False`,
     #   users will be able to sign in using either "username" or
     #   "Username". This configuration is immutable once it has been set.
-    #   For more information, see .
+    #   For more information, see [UsernameConfigurationType][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/cognito-user-identity-pools/latest/APIReference/API_UsernameConfigurationType.html
     #
     # @option params [Types::AccountRecoverySettingType] :account_recovery_setting
     #   Use this setting to define which verified available method a user can
@@ -2753,12 +2789,6 @@ module Aws::CognitoIdentityProvider
     #   password recovery mechanism if the user also has SMS MFA enabled. In
     #   the absence of this setting, Cognito uses the legacy behavior to
     #   determine the recovery method where SMS is preferred over email.
-    #
-    #   <note markdown="1"> Starting February 1, 2020, the value of `AccountRecoverySetting` will
-    #   default to `verified_email` first and `verified_phone_number` as the
-    #   second option for newly created user pools if no value is provided.
-    #
-    #    </note>
     #
     # @return [Types::CreateUserPoolResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -2970,6 +3000,20 @@ module Aws::CognitoIdentityProvider
     #   The time limit, in days, after which the refresh token is no longer
     #   valid and cannot be used.
     #
+    # @option params [Integer] :access_token_validity
+    #   The time limit, between 5 minutes and 1 day, after which the access
+    #   token is no longer valid and cannot be used. This value will be
+    #   overridden if you have entered a value in TokenValidityUnits.
+    #
+    # @option params [Integer] :id_token_validity
+    #   The time limit, between 5 minutes and 1 day, after which the ID token
+    #   is no longer valid and cannot be used. This value will be overridden
+    #   if you have entered a value in TokenValidityUnits.
+    #
+    # @option params [Types::TokenValidityUnitsType] :token_validity_units
+    #   The units in which the validity times are represented in. Default for
+    #   RefreshToken is days, and default for ID and access tokens are hours.
+    #
     # @option params [Array<String>] :read_attributes
     #   The read attributes.
     #
@@ -3094,9 +3138,10 @@ module Aws::CognitoIdentityProvider
     #   The Amazon Pinpoint analytics configuration for collecting metrics for
     #   this user pool.
     #
-    #   <note markdown="1"> Cognito User Pools only supports sending events to Amazon Pinpoint
-    #   projects in the US East (N. Virginia) us-east-1 Region, regardless of
-    #   the region in which the user pool resides.
+    #   <note markdown="1"> In regions where Pinpoint is not available, Cognito User Pools only
+    #   supports sending events to Amazon Pinpoint projects in us-east-1. In
+    #   regions where Pinpoint is available, Cognito User Pools will support
+    #   sending events to Amazon Pinpoint projects within that same region.
     #
     #    </note>
     #
@@ -3118,24 +3163,6 @@ module Aws::CognitoIdentityProvider
     #   * `LEGACY` - This represents the old behavior of Cognito where user
     #     existence related errors are not prevented.
     #
-    #   This setting affects the behavior of following APIs:
-    #
-    #   * AdminInitiateAuth
-    #
-    #   * AdminRespondToAuthChallenge
-    #
-    #   * InitiateAuth
-    #
-    #   * RespondToAuthChallenge
-    #
-    #   * ForgotPassword
-    #
-    #   * ConfirmForgotPassword
-    #
-    #   * ConfirmSignUp
-    #
-    #   * ResendConfirmationCode
-    #
     #   <note markdown="1"> After February 15th 2020, the value of `PreventUserExistenceErrors`
     #   will default to `ENABLED` for newly created user pool clients if no
     #   value is provided.
@@ -3153,6 +3180,13 @@ module Aws::CognitoIdentityProvider
     #     client_name: "ClientNameType", # required
     #     generate_secret: false,
     #     refresh_token_validity: 1,
+    #     access_token_validity: 1,
+    #     id_token_validity: 1,
+    #     token_validity_units: {
+    #       access_token: "seconds", # accepts seconds, minutes, hours, days
+    #       id_token: "seconds", # accepts seconds, minutes, hours, days
+    #       refresh_token: "seconds", # accepts seconds, minutes, hours, days
+    #     },
     #     read_attributes: ["ClientPermissionType"],
     #     write_attributes: ["ClientPermissionType"],
     #     explicit_auth_flows: ["ADMIN_NO_SRP_AUTH"], # accepts ADMIN_NO_SRP_AUTH, CUSTOM_AUTH_FLOW_ONLY, USER_PASSWORD_AUTH, ALLOW_ADMIN_USER_PASSWORD_AUTH, ALLOW_CUSTOM_AUTH, ALLOW_USER_PASSWORD_AUTH, ALLOW_USER_SRP_AUTH, ALLOW_REFRESH_TOKEN_AUTH
@@ -3181,6 +3215,11 @@ module Aws::CognitoIdentityProvider
     #   resp.user_pool_client.last_modified_date #=> Time
     #   resp.user_pool_client.creation_date #=> Time
     #   resp.user_pool_client.refresh_token_validity #=> Integer
+    #   resp.user_pool_client.access_token_validity #=> Integer
+    #   resp.user_pool_client.id_token_validity #=> Integer
+    #   resp.user_pool_client.token_validity_units.access_token #=> String, one of "seconds", "minutes", "hours", "days"
+    #   resp.user_pool_client.token_validity_units.id_token #=> String, one of "seconds", "minutes", "hours", "days"
+    #   resp.user_pool_client.token_validity_units.refresh_token #=> String, one of "seconds", "minutes", "hours", "days"
     #   resp.user_pool_client.read_attributes #=> Array
     #   resp.user_pool_client.read_attributes[0] #=> String
     #   resp.user_pool_client.write_attributes #=> Array
@@ -3786,6 +3825,11 @@ module Aws::CognitoIdentityProvider
     #   resp.user_pool_client.last_modified_date #=> Time
     #   resp.user_pool_client.creation_date #=> Time
     #   resp.user_pool_client.refresh_token_validity #=> Integer
+    #   resp.user_pool_client.access_token_validity #=> Integer
+    #   resp.user_pool_client.id_token_validity #=> Integer
+    #   resp.user_pool_client.token_validity_units.access_token #=> String, one of "seconds", "minutes", "hours", "days"
+    #   resp.user_pool_client.token_validity_units.id_token #=> String, one of "seconds", "minutes", "hours", "days"
+    #   resp.user_pool_client.token_validity_units.refresh_token #=> String, one of "seconds", "minutes", "hours", "days"
     #   resp.user_pool_client.read_attributes #=> Array
     #   resp.user_pool_client.read_attributes[0] #=> String
     #   resp.user_pool_client.write_attributes #=> Array
@@ -3885,10 +3929,15 @@ module Aws::CognitoIdentityProvider
     # the `Username` parameter, you can use the username or user alias. The
     # method used to send the confirmation code is sent according to the
     # specified AccountRecoverySetting. For more information, see
-    # [Recovering User Accounts]() in the *Amazon Cognito Developer Guide*.
+    # [Recovering User Accounts][1] in the *Amazon Cognito Developer Guide*.
     # If neither a verified phone number nor a verified email exists, an
     # `InvalidParameterException` is thrown. To use the confirmation code
-    # for resetting the password, call .
+    # for resetting the password, call [ConfirmForgotPassword][2].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/cognito/latest/developerguide/how-to-recover-a-user-account.html
+    # [2]: https://docs.aws.amazon.com/cognito-user-identity-pools/latest/APIReference/API_ConfirmForgotPassword.html
     #
     # @option params [required, String] :client_id
     #   The ID of the client associated with the user pool.
@@ -4432,14 +4481,16 @@ module Aws::CognitoIdentityProvider
     #
     #   * For `USER_SRP_AUTH`\: `USERNAME` (required), `SRP_A` (required),
     #     `SECRET_HASH` (required if the app client is configured with a
-    #     client secret), `DEVICE_KEY`
+    #     client secret), `DEVICE_KEY`.
     #
     #   * For `REFRESH_TOKEN_AUTH/REFRESH_TOKEN`\: `REFRESH_TOKEN` (required),
     #     `SECRET_HASH` (required if the app client is configured with a
-    #     client secret), `DEVICE_KEY`
+    #     client secret), `DEVICE_KEY`.
     #
     #   * For `CUSTOM_AUTH`\: `USERNAME` (required), `SECRET_HASH` (if app
-    #     client is configured with client secret), `DEVICE_KEY`
+    #     client is configured with client secret), `DEVICE_KEY`. To start the
+    #     authentication flow with password verification, include
+    #     `ChallengeName: SRP_A` and `SRP_A: (The SRP_A Value)`.
     #
     # @option params [Hash<String,String>] :client_metadata
     #   A map of custom key-value pairs that you can provide as input for
@@ -5219,9 +5270,13 @@ module Aws::CognitoIdentityProvider
     #   The app client ID.
     #
     # @option params [required, String] :challenge_name
-    #   The challenge name. For more information, see .
+    #   The challenge name. For more information, see [InitiateAuth][1].
     #
     #   `ADMIN_NO_SRP_AUTH` is not a valid value.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/cognito-user-identity-pools/latest/APIReference/API_InitiateAuth.html
     #
     # @option params [String] :session
     #   The session which should be passed both ways in challenge-response
@@ -5362,8 +5417,6 @@ module Aws::CognitoIdentityProvider
     #
     # To enable Amazon Cognito advanced security features, update the user
     # pool to include the `UserPoolAddOns` key`AdvancedSecurityMode`.
-    #
-    # See .
     #
     # @option params [required, String] :user_pool_id
     #   The user pool ID.
@@ -5647,8 +5700,11 @@ module Aws::CognitoIdentityProvider
 
     # *This action is no longer supported.* You can use it to configure only
     # SMS MFA. You can't use it to configure TOTP software token MFA. To
-    # configure either type of MFA, use the SetUserMFAPreference action
-    # instead.
+    # configure either type of MFA, use [SetUserMFAPreference][1] instead.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/cognito-user-identity-pools/latest/APIReference/API_SetUserMFAPreference.html
     #
     # @option params [required, String] :access_token
     #   The access token for the set user settings request.
@@ -6063,7 +6119,11 @@ module Aws::CognitoIdentityProvider
     #
     # @option params [Integer] :precedence
     #   The new precedence value for the group. For more information about
-    #   this parameter, see .
+    #   this parameter, see [CreateGroup][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/cognito-user-identity-pools/latest/APIReference/API_CreateGroup.html
     #
     # @return [Types::UpdateGroupResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -6296,10 +6356,15 @@ module Aws::CognitoIdentityProvider
     end
 
     # Updates the specified user pool with the specified attributes. You can
-    # get a list of the current user pool settings with .
+    # get a list of the current user pool settings using
+    # [DescribeUserPool][1].
     #
     # If you don't provide a value for an attribute, it will be set to the
     # default value.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/cognito-user-identity-pools/latest/APIReference/API_DescribeUserPool.html
     #
     # @option params [required, String] :user_pool_id
     #   The user pool ID for the user pool you want to update.
@@ -6465,10 +6530,14 @@ module Aws::CognitoIdentityProvider
 
     # Updates the specified user pool app client with the specified
     # attributes. You can get a list of the current user pool app client
-    # settings with .
+    # settings using [DescribeUserPoolClient][1].
     #
     # If you don't provide a value for an attribute, it will be set to the
     # default value.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/cognito-user-identity-pools/latest/APIReference/API_DescribeUserPoolClient.html
     #
     # @option params [required, String] :user_pool_id
     #   The user pool ID for the user pool where you want to update the user
@@ -6483,6 +6552,18 @@ module Aws::CognitoIdentityProvider
     # @option params [Integer] :refresh_token_validity
     #   The time limit, in days, after which the refresh token is no longer
     #   valid and cannot be used.
+    #
+    # @option params [Integer] :access_token_validity
+    #   The time limit, after which the access token is no longer valid and
+    #   cannot be used.
+    #
+    # @option params [Integer] :id_token_validity
+    #   The time limit, after which the ID token is no longer valid and cannot
+    #   be used.
+    #
+    # @option params [Types::TokenValidityUnitsType] :token_validity_units
+    #   The units in which the validity times are represented in. Default for
+    #   RefreshToken is days, and default for ID and access tokens are hours.
     #
     # @option params [Array<String>] :read_attributes
     #   The read-only attributes of the user pool.
@@ -6594,9 +6675,10 @@ module Aws::CognitoIdentityProvider
     #   The Amazon Pinpoint analytics configuration for collecting metrics for
     #   this user pool.
     #
-    #   <note markdown="1"> Cognito User Pools only supports sending events to Amazon Pinpoint
-    #   projects in the US East (N. Virginia) us-east-1 Region, regardless of
-    #   the region in which the user pool resides.
+    #   <note markdown="1"> In regions where Pinpoint is not available, Cognito User Pools only
+    #   supports sending events to Amazon Pinpoint projects in us-east-1. In
+    #   regions where Pinpoint is available, Cognito User Pools will support
+    #   sending events to Amazon Pinpoint projects within that same region.
     #
     #    </note>
     #
@@ -6618,24 +6700,6 @@ module Aws::CognitoIdentityProvider
     #   * `LEGACY` - This represents the old behavior of Cognito where user
     #     existence related errors are not prevented.
     #
-    #   This setting affects the behavior of following APIs:
-    #
-    #   * AdminInitiateAuth
-    #
-    #   * AdminRespondToAuthChallenge
-    #
-    #   * InitiateAuth
-    #
-    #   * RespondToAuthChallenge
-    #
-    #   * ForgotPassword
-    #
-    #   * ConfirmForgotPassword
-    #
-    #   * ConfirmSignUp
-    #
-    #   * ResendConfirmationCode
-    #
     #   <note markdown="1"> After February 15th 2020, the value of `PreventUserExistenceErrors`
     #   will default to `ENABLED` for newly created user pool clients if no
     #   value is provided.
@@ -6653,6 +6717,13 @@ module Aws::CognitoIdentityProvider
     #     client_id: "ClientIdType", # required
     #     client_name: "ClientNameType",
     #     refresh_token_validity: 1,
+    #     access_token_validity: 1,
+    #     id_token_validity: 1,
+    #     token_validity_units: {
+    #       access_token: "seconds", # accepts seconds, minutes, hours, days
+    #       id_token: "seconds", # accepts seconds, minutes, hours, days
+    #       refresh_token: "seconds", # accepts seconds, minutes, hours, days
+    #     },
     #     read_attributes: ["ClientPermissionType"],
     #     write_attributes: ["ClientPermissionType"],
     #     explicit_auth_flows: ["ADMIN_NO_SRP_AUTH"], # accepts ADMIN_NO_SRP_AUTH, CUSTOM_AUTH_FLOW_ONLY, USER_PASSWORD_AUTH, ALLOW_ADMIN_USER_PASSWORD_AUTH, ALLOW_CUSTOM_AUTH, ALLOW_USER_PASSWORD_AUTH, ALLOW_USER_SRP_AUTH, ALLOW_REFRESH_TOKEN_AUTH
@@ -6681,6 +6752,11 @@ module Aws::CognitoIdentityProvider
     #   resp.user_pool_client.last_modified_date #=> Time
     #   resp.user_pool_client.creation_date #=> Time
     #   resp.user_pool_client.refresh_token_validity #=> Integer
+    #   resp.user_pool_client.access_token_validity #=> Integer
+    #   resp.user_pool_client.id_token_validity #=> Integer
+    #   resp.user_pool_client.token_validity_units.access_token #=> String, one of "seconds", "minutes", "hours", "days"
+    #   resp.user_pool_client.token_validity_units.id_token #=> String, one of "seconds", "minutes", "hours", "days"
+    #   resp.user_pool_client.token_validity_units.refresh_token #=> String, one of "seconds", "minutes", "hours", "days"
     #   resp.user_pool_client.read_attributes #=> Array
     #   resp.user_pool_client.read_attributes[0] #=> String
     #   resp.user_pool_client.write_attributes #=> Array
@@ -6806,6 +6882,11 @@ module Aws::CognitoIdentityProvider
     #
     # @option params [required, String] :user_code
     #   The one time password computed using the secret code returned by
+    #   [AssociateSoftwareToken"][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/cognito-user-identity-pools/latest/APIReference/API_AssociateSoftwareToken.html
     #
     # @option params [String] :friendly_device_name
     #   The friendly device name.
@@ -6881,7 +6962,7 @@ module Aws::CognitoIdentityProvider
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-cognitoidentityprovider'
-      context[:gem_version] = '1.42.0'
+      context[:gem_version] = '1.43.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

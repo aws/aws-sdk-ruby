@@ -26,6 +26,7 @@ module Aws
   autoload :AutoScalingPlans, 'aws-sdk-autoscalingplans'
   autoload :Backup, 'aws-sdk-backup'
   autoload :Batch, 'aws-sdk-batch'
+  autoload :Braket, 'aws-sdk-braket'
   autoload :Budgets, 'aws-sdk-budgets'
   autoload :Chime, 'aws-sdk-chime'
   autoload :Cloud9, 'aws-sdk-cloud9'

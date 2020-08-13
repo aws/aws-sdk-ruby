@@ -238,9 +238,9 @@ module Aws::EKS
     #
     # @!attribute [rw] role_arn
     #   The Amazon Resource Name (ARN) of the IAM role that provides
-    #   permissions for Amazon EKS to make calls to other AWS API operations
-    #   on your behalf. For more information, see [Amazon EKS Service IAM
-    #   Role][1] in the <i> <i>Amazon EKS User Guide</i> </i>.
+    #   permissions for the Kubernetes control plane to make calls to AWS
+    #   API operations on your behalf. For more information, see [Amazon EKS
+    #   Service IAM Role][1] in the <i> <i>Amazon EKS User Guide</i> </i>.
     #
     #
     #
@@ -439,7 +439,7 @@ module Aws::EKS
     #         disk_size: 1,
     #         subnets: ["String"], # required
     #         instance_types: ["String"],
-    #         ami_type: "AL2_x86_64", # accepts AL2_x86_64, AL2_x86_64_GPU
+    #         ami_type: "AL2_x86_64", # accepts AL2_x86_64, AL2_x86_64_GPU, AL2_ARM_64
     #         remote_access: {
     #           ec2_ssh_key: "String",
     #           source_security_groups: ["String"],
@@ -452,6 +452,11 @@ module Aws::EKS
     #           "TagKey" => "TagValue",
     #         },
     #         client_request_token: "String",
+    #         launch_template: {
+    #           name: "String",
+    #           version: "String",
+    #           id: "String",
+    #         },
     #         version: "String",
     #         release_version: "String",
     #       }
@@ -471,33 +476,73 @@ module Aws::EKS
     #
     # @!attribute [rw] disk_size
     #   The root device disk size (in GiB) for your node group instances.
-    #   The default disk size is 20 GiB.
+    #   The default disk size is 20 GiB. If you specify `launchTemplate`,
+    #   then don't specify `diskSize`, or the node group deployment will
+    #   fail. For more information about using launch templates with Amazon
+    #   EKS, see [Launch template support][1] in the Amazon EKS User Guide.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/eks/latest/userguide/launch-templates.html
     #   @return [Integer]
     #
     # @!attribute [rw] subnets
     #   The subnets to use for the Auto Scaling group that is created for
     #   your node group. These subnets must have the tag key
     #   `kubernetes.io/cluster/CLUSTER_NAME` with a value of `shared`, where
-    #   `CLUSTER_NAME` is replaced with the name of your cluster.
+    #   `CLUSTER_NAME` is replaced with the name of your cluster. If you
+    #   specify `launchTemplate`, then don't specify [ `SubnetId` ][1] in
+    #   your launch template, or the node group deployment will fail. For
+    #   more information about using launch templates with Amazon EKS, see
+    #   [Launch template support][2] in the Amazon EKS User Guide.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_CreateNetworkInterface.html
+    #   [2]: https://docs.aws.amazon.com/eks/latest/userguide/launch-templates.html
     #   @return [Array<String>]
     #
     # @!attribute [rw] instance_types
-    #   The instance type to use for your node group. Currently, you can
-    #   specify a single instance type for a node group. The default value
-    #   for this parameter is `t3.medium`. If you choose a GPU instance
-    #   type, be sure to specify the `AL2_x86_64_GPU` with the `amiType`
-    #   parameter.
+    #   The instance type to use for your node group. You can specify a
+    #   single instance type for a node group. The default value for
+    #   `instanceTypes` is `t3.medium`. If you choose a GPU instance type,
+    #   be sure to specify `AL2_x86_64_GPU` with the `amiType` parameter. If
+    #   you specify `launchTemplate`, then don't specify `instanceTypes`,
+    #   or the node group deployment will fail. For more information about
+    #   using launch templates with Amazon EKS, see [Launch template
+    #   support][1] in the Amazon EKS User Guide.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/eks/latest/userguide/launch-templates.html
     #   @return [Array<String>]
     #
     # @!attribute [rw] ami_type
     #   The AMI type for your node group. GPU instance types should use the
     #   `AL2_x86_64_GPU` AMI type, which uses the Amazon EKS-optimized Linux
     #   AMI with GPU support. Non-GPU instances should use the `AL2_x86_64`
-    #   AMI type, which uses the Amazon EKS-optimized Linux AMI.
+    #   AMI type, which uses the Amazon EKS-optimized Linux AMI. If you
+    #   specify `launchTemplate`, and your launch template uses a custom
+    #   AMI, then don't specify `amiType`, or the node group deployment
+    #   will fail. For more information about using launch templates with
+    #   Amazon EKS, see [Launch template support][1] in the Amazon EKS User
+    #   Guide.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/eks/latest/userguide/launch-templates.html
     #   @return [String]
     #
     # @!attribute [rw] remote_access
     #   The remote access (SSH) configuration to use with your node group.
+    #   If you specify `launchTemplate`, then don't specify `remoteAccess`,
+    #   or the node group deployment will fail. For more information about
+    #   using launch templates with Amazon EKS, see [Launch template
+    #   support][1] in the Amazon EKS User Guide.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/eks/latest/userguide/launch-templates.html
     #   @return [Types::RemoteAccessConfig]
     #
     # @!attribute [rw] node_role
@@ -508,11 +553,18 @@ module Aws::EKS
     #   policies. Before you can launch worker nodes and register them into
     #   a cluster, you must create an IAM role for those worker nodes to use
     #   when they are launched. For more information, see [Amazon EKS Worker
-    #   Node IAM Role][1] in the <i> <i>Amazon EKS User Guide</i> </i>.
+    #   Node IAM Role][1] in the <i> <i>Amazon EKS User Guide</i> </i>. If
+    #   you specify `launchTemplate`, then don't specify [
+    #   `IamInstanceProfile` ][2] in your launch template, or the node group
+    #   deployment will fail. For more information about using launch
+    #   templates with Amazon EKS, see [Launch template support][3] in the
+    #   Amazon EKS User Guide.
     #
     #
     #
     #   [1]: https://docs.aws.amazon.com/eks/latest/userguide/worker_node_IAM_role.html
+    #   [2]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_IamInstanceProfile.html
+    #   [3]: https://docs.aws.amazon.com/eks/latest/userguide/launch-templates.html
     #   @return [String]
     #
     # @!attribute [rw] labels
@@ -536,10 +588,26 @@ module Aws::EKS
     #   not need to pass this option.
     #   @return [String]
     #
+    # @!attribute [rw] launch_template
+    #   An object representing a node group's launch template
+    #   specification. If specified, then do not specify `instanceTypes`,
+    #   `diskSize`, or `remoteAccess`. If specified, make sure that the
+    #   launch template meets the requirements in
+    #   `launchTemplateSpecification`.
+    #   @return [Types::LaunchTemplateSpecification]
+    #
     # @!attribute [rw] version
     #   The Kubernetes version to use for your managed nodes. By default,
     #   the Kubernetes version of the cluster is used, and this is the only
-    #   accepted specified value.
+    #   accepted specified value. If you specify `launchTemplate`, and your
+    #   launch template uses a custom AMI, then don't specify `version`, or
+    #   the node group deployment will fail. For more information about
+    #   using launch templates with Amazon EKS, see [Launch template
+    #   support][1] in the Amazon EKS User Guide.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/eks/latest/userguide/launch-templates.html
     #   @return [String]
     #
     # @!attribute [rw] release_version
@@ -547,11 +615,16 @@ module Aws::EKS
     #   node group. By default, the latest available AMI version for the
     #   node group's current Kubernetes version is used. For more
     #   information, see [Amazon EKS-Optimized Linux AMI Versions][1] in the
-    #   *Amazon EKS User Guide*.
+    #   *Amazon EKS User Guide*. If you specify `launchTemplate`, and your
+    #   launch template uses a custom AMI, then don't specify
+    #   `releaseVersion`, or the node group deployment will fail. For more
+    #   information about using launch templates with Amazon EKS, see
+    #   [Launch template support][2] in the Amazon EKS User Guide.
     #
     #
     #
     #   [1]: https://docs.aws.amazon.com/eks/latest/userguide/eks-linux-ami-versions.html
+    #   [2]: https://docs.aws.amazon.com/eks/latest/userguide/launch-templates.html
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/eks-2017-11-01/CreateNodegroupRequest AWS API Documentation
@@ -569,6 +642,7 @@ module Aws::EKS
       :labels,
       :tags,
       :client_request_token,
+      :launch_template,
       :version,
       :release_version)
       SENSITIVE = []
@@ -1117,6 +1191,14 @@ module Aws::EKS
     #     version that Amazon EKS created. You may be able to revert to the
     #     version that Amazon EKS created to recover.
     #
+    #   * **Ec2SubnetInvalidConfiguration**\: One or more Amazon EC2 subnets
+    #     specified for a node group do not automatically assign public IP
+    #     addresses to instances launched into it. If you want your
+    #     instances to be assigned a public IP address, then you need to
+    #     enable the `auto-assign public IP address` setting for the subnet.
+    #     See [Modifying the public IPv4 addressing attribute for your
+    #     subnet][1] in the Amazon VPC User Guide.
+    #
     #   * **IamInstanceProfileNotFound**\: We couldn't find the IAM
     #     instance profile for your managed node group. You may be able to
     #     recreate an instance profile with the same settings to recover.
@@ -1130,7 +1212,7 @@ module Aws::EKS
     #
     #   * **NodeCreationFailure**\: Your launched instances are unable to
     #     register with your Amazon EKS cluster. Common causes of this
-    #     failure are insufficient [worker node IAM role][1] permissions or
+    #     failure are insufficient [worker node IAM role][2] permissions or
     #     lack of outbound internet access for the nodes.
     #
     #   * **InstanceLimitExceeded**\: Your AWS account is unable to launch
@@ -1149,7 +1231,8 @@ module Aws::EKS
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/eks/latest/userguide/worker_node_IAM_role.html
+    #   [1]: https://docs.aws.amazon.com/vpc/latest/userguide/vpc-ip-addressing.html#subnet-public-ip
+    #   [2]: https://docs.aws.amazon.com/eks/latest/userguide/worker_node_IAM_role.html
     #   @return [String]
     #
     # @!attribute [rw] message
@@ -1166,6 +1249,60 @@ module Aws::EKS
       :code,
       :message,
       :resource_ids)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # An object representing a node group launch template specification. The
+    # launch template cannot include [ `SubnetId` ][1], [
+    # `IamInstanceProfile` ][2], [ `RequestSpotInstances` ][3], [
+    # `HibernationOptions` ][4], or [ `TerminateInstances` ][5], or the node
+    # group deployment or update will fail. For more information about
+    # launch templates, see [ `CreateLaunchTemplate` ][6] in the Amazon EC2
+    # API Reference. For more information about using launch templates with
+    # Amazon EKS, see [Launch template support][7] in the Amazon EKS User
+    # Guide.
+    #
+    # Specify either `name` or `id`, but not both.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_CreateNetworkInterface.html
+    # [2]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_IamInstanceProfile.html
+    # [3]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_RequestSpotInstances.html
+    # [4]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_HibernationOptionsRequest.html
+    # [5]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_TerminateInstances.html
+    # [6]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_CreateLaunchTemplate.html
+    # [7]: https://docs.aws.amazon.com/eks/latest/userguide/launch-templates.html
+    #
+    # @note When making an API call, you may pass LaunchTemplateSpecification
+    #   data as a hash:
+    #
+    #       {
+    #         name: "String",
+    #         version: "String",
+    #         id: "String",
+    #       }
+    #
+    # @!attribute [rw] name
+    #   The name of the launch template.
+    #   @return [String]
+    #
+    # @!attribute [rw] version
+    #   The version of the launch template to use. If no version is
+    #   specified, then the template's default version is used.
+    #   @return [String]
+    #
+    # @!attribute [rw] id
+    #   The ID of the launch template.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/eks-2017-11-01/LaunchTemplateSpecification AWS API Documentation
+    #
+    class LaunchTemplateSpecification < Struct.new(
+      :name,
+      :version,
+      :id)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1541,13 +1678,11 @@ module Aws::EKS
     #   @return [String]
     #
     # @!attribute [rw] release_version
-    #   The AMI version of the managed node group. For more information, see
-    #   [Amazon EKS-Optimized Linux AMI Versions ][1] in the *Amazon EKS
-    #   User Guide*.
-    #
-    #
-    #
-    #   [1]: https://docs.aws.amazon.com/eks/latest/userguide/eks-linux-ami-versions.html
+    #   If the node group was deployed using a launch template with a custom
+    #   AMI, then this is the AMI ID that was specified in the launch
+    #   template. For node groups that weren't deployed using a launch
+    #   template, this is the version of the Amazon EKS-optimized AMI that
+    #   the node group was deployed with.
     #   @return [String]
     #
     # @!attribute [rw] created_at
@@ -1570,42 +1705,36 @@ module Aws::EKS
     #   @return [Types::NodegroupScalingConfig]
     #
     # @!attribute [rw] instance_types
-    #   The instance types associated with your node group.
+    #   If the node group wasn't deployed with a launch template, then this
+    #   is the instance type that is associated with the node group. If the
+    #   node group was deployed with a launch template, then `instanceTypes`
+    #   is `null`.
     #   @return [Array<String>]
     #
     # @!attribute [rw] subnets
-    #   The subnets allowed for the Auto Scaling group that is associated
-    #   with your node group. These subnets must have the following tag:
-    #   `kubernetes.io/cluster/CLUSTER_NAME`, where `CLUSTER_NAME` is
-    #   replaced with the name of your cluster.
+    #   The subnets that were specified for the Auto Scaling group that is
+    #   associated with your node group.
     #   @return [Array<String>]
     #
     # @!attribute [rw] remote_access
-    #   The remote access (SSH) configuration that is associated with the
-    #   node group.
+    #   If the node group wasn't deployed with a launch template, then this
+    #   is the remote access configuration that is associated with the node
+    #   group. If the node group was deployed with a launch template, then
+    #   `remoteAccess` is `null`.
     #   @return [Types::RemoteAccessConfig]
     #
     # @!attribute [rw] ami_type
-    #   The AMI type associated with your node group. GPU instance types
-    #   should use the `AL2_x86_64_GPU` AMI type, which uses the Amazon
-    #   EKS-optimized Linux AMI with GPU support. Non-GPU instances should
-    #   use the `AL2_x86_64` AMI type, which uses the Amazon EKS-optimized
-    #   Linux AMI.
+    #   If the node group was deployed using a launch template with a custom
+    #   AMI, then this is `CUSTOM`. For node groups that weren't deployed
+    #   using a launch template, this is the AMI type that was specified in
+    #   the node group configuration.
     #   @return [String]
     #
     # @!attribute [rw] node_role
     #   The IAM role associated with your node group. The Amazon EKS worker
     #   node `kubelet` daemon makes calls to AWS APIs on your behalf. Worker
     #   nodes receive permissions for these API calls through an IAM
-    #   instance profile and associated policies. Before you can launch
-    #   worker nodes and register them into a cluster, you must create an
-    #   IAM role for those worker nodes to use when they are launched. For
-    #   more information, see [Amazon EKS Worker Node IAM Role][1] in the
-    #   <i> <i>Amazon EKS User Guide</i> </i>.
-    #
-    #
-    #
-    #   [1]: https://docs.aws.amazon.com/eks/latest/userguide/worker_node_IAM_role.html
+    #   instance profile and associated policies.
     #   @return [String]
     #
     # @!attribute [rw] labels
@@ -1624,14 +1753,20 @@ module Aws::EKS
     #   @return [Types::NodegroupResources]
     #
     # @!attribute [rw] disk_size
-    #   The root device disk size (in GiB) for your node group instances.
-    #   The default disk size is 20 GiB.
+    #   If the node group wasn't deployed with a launch template, then this
+    #   is the disk size in the node group configuration. If the node group
+    #   was deployed with a launch template, then `diskSize` is `null`.
     #   @return [Integer]
     #
     # @!attribute [rw] health
     #   The health status of the node group. If there are issues with your
     #   node group's health, they are listed here.
     #   @return [Types::NodegroupHealth]
+    #
+    # @!attribute [rw] launch_template
+    #   If a launch template was used to create the node group, then this is
+    #   the launch template that was used.
+    #   @return [Types::LaunchTemplateSpecification]
     #
     # @!attribute [rw] tags
     #   The metadata applied to the node group to assist with categorization
@@ -1662,6 +1797,7 @@ module Aws::EKS
       :resources,
       :disk_size,
       :health,
+      :launch_template,
       :tags)
       SENSITIVE = []
       include Aws::Structure
@@ -1703,7 +1839,9 @@ module Aws::EKS
     end
 
     # An object representing the scaling configuration details for the Auto
-    # Scaling group that is associated with your node group.
+    # Scaling group that is associated with your node group. If you specify
+    # a value for any property, then you must specify values for all of the
+    # properties.
     #
     # @note When making an API call, you may pass NodegroupScalingConfig
     #   data as a hash:
@@ -2336,6 +2474,11 @@ module Aws::EKS
     #         nodegroup_name: "String", # required
     #         version: "String",
     #         release_version: "String",
+    #         launch_template: {
+    #           name: "String",
+    #           version: "String",
+    #           id: "String",
+    #         },
     #         force: false,
     #         client_request_token: "String",
     #       }
@@ -2354,7 +2497,15 @@ module Aws::EKS
     #   then the Kubernetes version of the node group does not change. You
     #   can specify the Kubernetes version of the cluster to update the node
     #   group to the latest AMI version of the cluster's Kubernetes
-    #   version.
+    #   version. If you specify `launchTemplate`, and your launch template
+    #   uses a custom AMI, then don't specify `version`, or the node group
+    #   update will fail. For more information about using launch templates
+    #   with Amazon EKS, see [Launch template support][1] in the Amazon EKS
+    #   User Guide.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/eks/latest/userguide/launch-templates.html
     #   @return [String]
     #
     # @!attribute [rw] release_version
@@ -2362,12 +2513,24 @@ module Aws::EKS
     #   update. By default, the latest available AMI version for the node
     #   group's Kubernetes version is used. For more information, see
     #   [Amazon EKS-Optimized Linux AMI Versions ][1] in the *Amazon EKS
-    #   User Guide*.
+    #   User Guide*. If you specify `launchTemplate`, and your launch
+    #   template uses a custom AMI, then don't specify `releaseVersion`, or
+    #   the node group update will fail. For more information about using
+    #   launch templates with Amazon EKS, see [Launch template support][2]
+    #   in the Amazon EKS User Guide.
     #
     #
     #
     #   [1]: https://docs.aws.amazon.com/eks/latest/userguide/eks-linux-ami-versions.html
+    #   [2]: https://docs.aws.amazon.com/eks/latest/userguide/launch-templates.html
     #   @return [String]
+    #
+    # @!attribute [rw] launch_template
+    #   An object representing a node group's launch template
+    #   specification. You can only update a node group using a launch
+    #   template if the node group was originally deployed with a launch
+    #   template.
+    #   @return [Types::LaunchTemplateSpecification]
     #
     # @!attribute [rw] force
     #   Force the update if the existing node group's pods are unable to be
@@ -2392,6 +2555,7 @@ module Aws::EKS
       :nodegroup_name,
       :version,
       :release_version,
+      :launch_template,
       :force,
       :client_request_token)
       SENSITIVE = []

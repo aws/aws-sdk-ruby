@@ -230,17 +230,23 @@ module Aws::RDS
     #
     #   Constraints:
     #
-    #   * If the source type is a DB instance, then a `DBInstanceIdentifier`
-    #     must be supplied.
+    #   * If the source type is a DB instance, a `DBInstanceIdentifier`
+    #     value must be supplied.
     #
-    #   * If the source type is a DB security group, a `DBSecurityGroupName`
+    #   * If the source type is a DB cluster, a `DBClusterIdentifier` value
     #     must be supplied.
     #
     #   * If the source type is a DB parameter group, a
-    #     `DBParameterGroupName` must be supplied.
+    #     `DBParameterGroupName` value must be supplied.
     #
-    #   * If the source type is a DB snapshot, a `DBSnapshotIdentifier` must
-    #     be supplied.
+    #   * If the source type is a DB security group, a `DBSecurityGroupName`
+    #     value must be supplied.
+    #
+    #   * If the source type is a DB snapshot, a `DBSnapshotIdentifier`
+    #     value must be supplied.
+    #
+    #   * If the source type is a DB cluster snapshot, a
+    #     `DBClusterSnapshotIdentifier` value must be supplied.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/AddSourceIdentifierToSubscriptionMessage AWS API Documentation
@@ -2450,6 +2456,9 @@ module Aws::RDS
     #
     #   * Must contain 1 to 64 letters or numbers.
     #
+    #   * Must begin with a letter. Subsequent characters can be letters,
+    #     underscores, or digits (0-9).
+    #
     #   * Can't be a word reserved by the specified database engine
     #
     #   **MariaDB**
@@ -2461,6 +2470,9 @@ module Aws::RDS
     #   Constraints:
     #
     #   * Must contain 1 to 64 letters or numbers.
+    #
+    #   * Must begin with a letter. Subsequent characters can be letters,
+    #     underscores, or digits (0-9).
     #
     #   * Can't be a word reserved by the specified database engine
     #
@@ -2474,8 +2486,8 @@ module Aws::RDS
     #
     #   * Must contain 1 to 63 letters, numbers, or underscores.
     #
-    #   * Must begin with a letter or an underscore. Subsequent characters
-    #     can be letters, underscores, or digits (0-9).
+    #   * Must begin with a letter. Subsequent characters can be letters,
+    #     underscores, or digits (0-9).
     #
     #   * Can't be a word reserved by the specified database engine
     #
@@ -3151,24 +3163,15 @@ module Aws::RDS
     #
     # @!attribute [rw] domain
     #   The Active Directory directory ID to create the DB instance in.
-    #   Currently, only Microsoft SQL Server and Oracle DB instances can be
-    #   created in an Active Directory Domain.
+    #   Currently, only MySQL, Microsoft SQL Server, Oracle, and PostgreSQL
+    #   DB instances can be created in an Active Directory Domain.
     #
-    #   For Microsoft SQL Server DB instances, Amazon RDS can use Windows
-    #   Authentication to authenticate users that connect to the DB
-    #   instance. For more information, see [ Using Windows Authentication
-    #   with an Amazon RDS DB Instance Running Microsoft SQL Server][1] in
-    #   the *Amazon RDS User Guide*.
-    #
-    #   For Oracle DB instances, Amazon RDS can use Kerberos Authentication
-    #   to authenticate users that connect to the DB instance. For more
-    #   information, see [ Using Kerberos Authentication with Amazon RDS for
-    #   Oracle][2] in the *Amazon RDS User Guide*.
+    #   For more information, see [ Kerberos Authentication][1] in the
+    #   *Amazon RDS User Guide*.
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_SQLServerWinAuth.html
-    #   [2]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/oracle-kerberos.html
+    #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/kerberos-authentication.html
     #   @return [String]
     #
     # @!attribute [rw] copy_tags_to_snapshot
@@ -3439,6 +3442,7 @@ module Aws::RDS
     #         deletion_protection: false,
     #         domain: "String",
     #         domain_iam_role_name: "String",
+    #         replica_mode: "open-read-only", # accepts open-read-only, mounted
     #         source_region: "String",
     #       }
     #
@@ -3844,27 +3848,44 @@ module Aws::RDS
     #
     # @!attribute [rw] domain
     #   The Active Directory directory ID to create the DB instance in.
+    #   Currently, only MySQL, Microsoft SQL Server, Oracle, and PostgreSQL
+    #   DB instances can be created in an Active Directory Domain.
     #
-    #   For Oracle DB instances, Amazon RDS can use Kerberos authentication
-    #   to authenticate users that connect to the DB instance. For more
-    #   information, see [ Using Kerberos Authentication with Amazon RDS for
-    #   Oracle][1] in the *Amazon RDS User Guide*.
-    #
-    #   For Microsoft SQL Server DB instances, Amazon RDS can use Windows
-    #   Authentication to authenticate users that connect to the DB
-    #   instance. For more information, see [ Using Windows Authentication
-    #   with an Amazon RDS DB Instance Running Microsoft SQL Server][2] in
-    #   the *Amazon RDS User Guide*.
+    #   For more information, see [ Kerberos Authentication][1] in the
+    #   *Amazon RDS User Guide*.
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/oracle-kerberos.html
-    #   [2]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_SQLServerWinAuth.html
+    #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/kerberos-authentication.html
     #   @return [String]
     #
     # @!attribute [rw] domain_iam_role_name
     #   Specify the name of the IAM role to be used when making API calls to
     #   the Directory Service.
+    #   @return [String]
+    #
+    # @!attribute [rw] replica_mode
+    #   The open mode of the replica database: mounted or read-only.
+    #
+    #   <note markdown="1"> This parameter is only supported for Oracle DB instances.
+    #
+    #    </note>
+    #
+    #   Mounted DB replicas are included in Oracle Enterprise Edition. The
+    #   main use case for mounted replicas is cross-Region disaster
+    #   recovery. The primary database doesn't use Active Data Guard to
+    #   transmit information to the mounted replica. Because it doesn't
+    #   accept user connections, a mounted replica can't serve a read-only
+    #   workload.
+    #
+    #   You can create a combination of mounted and read-only DB replicas
+    #   for the same primary DB instance. For more information, see [Working
+    #   with Oracle Read Replicas for Amazon RDS][1] in the *Amazon RDS User
+    #   Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/oracle-read-replicas.html
     #   @return [String]
     #
     # @!attribute [rw] destination_region
@@ -3908,6 +3929,7 @@ module Aws::RDS
       :deletion_protection,
       :domain,
       :domain_iam_role_name,
+      :replica_mode,
       :destination_region,
       :source_region)
       SENSITIVE = []
@@ -4380,18 +4402,18 @@ module Aws::RDS
     # @!attribute [rw] source_type
     #   The type of source that is generating the events. For example, if
     #   you want to be notified of events generated by a DB instance, you
-    #   would set this parameter to db-instance. if this value isn't
-    #   specified, all events are returned.
+    #   set this parameter to `db-instance`. If this value isn't specified,
+    #   all events are returned.
     #
     #   Valid values: `db-instance` \| `db-cluster` \| `db-parameter-group`
     #   \| `db-security-group` \| `db-snapshot` \| `db-cluster-snapshot`
     #   @return [String]
     #
     # @!attribute [rw] event_categories
-    #   A list of event categories for a SourceType that you want to
-    #   subscribe to. You can see a list of the categories for a given
-    #   SourceType in the [Events][1] topic in the *Amazon RDS User Guide*
-    #   or by using the **DescribeEventCategories** action.
+    #   A list of event categories for a particular source type
+    #   (`SourceType`) that you want to subscribe to. You can see a list of
+    #   the categories for a given source type in [Events][1] in the *Amazon
+    #   RDS User Guide* or by using the `DescribeEventCategories` operation.
     #
     #
     #
@@ -4407,19 +4429,26 @@ module Aws::RDS
     #
     #   Constraints:
     #
-    #   * If SourceIds are supplied, SourceType must also be provided.
+    #   * If a `SourceIds` value is supplied, `SourceType` must also be
+    #     provided.
     #
-    #   * If the source type is a DB instance, then a `DBInstanceIdentifier`
-    #     must be supplied.
+    #   * If the source type is a DB instance, a `DBInstanceIdentifier`
+    #     value must be supplied.
     #
-    #   * If the source type is a DB security group, a `DBSecurityGroupName`
+    #   * If the source type is a DB cluster, a `DBClusterIdentifier` value
     #     must be supplied.
     #
     #   * If the source type is a DB parameter group, a
-    #     `DBParameterGroupName` must be supplied.
+    #     `DBParameterGroupName` value must be supplied.
     #
-    #   * If the source type is a DB snapshot, a `DBSnapshotIdentifier` must
-    #     be supplied.
+    #   * If the source type is a DB security group, a `DBSecurityGroupName`
+    #     value must be supplied.
+    #
+    #   * If the source type is a DB snapshot, a `DBSnapshotIdentifier`
+    #     value must be supplied.
+    #
+    #   * If the source type is a DB cluster snapshot, a
+    #     `DBClusterSnapshotIdentifier` value must be supplied.
     #   @return [Array<String>]
     #
     # @!attribute [rw] enabled
@@ -5242,7 +5271,10 @@ module Aws::RDS
     #
     # @!attribute [rw] status
     #   The current status of the endpoint. One of: `creating`, `available`,
-    #   `deleting`, `modifying`.
+    #   `deleting`, `inactive`, `modifying`. The `inactive` state applies to
+    #   an endpoint that can't be used for a certain kind of cluster, such
+    #   as a `writer` endpoint for a read-only secondary cluster in a global
+    #   database.
     #   @return [String]
     #
     # @!attribute [rw] endpoint_type
@@ -6102,6 +6134,20 @@ module Aws::RDS
     #    </note>
     #   @return [Array<String>]
     #
+    # @!attribute [rw] replica_mode
+    #   The open mode of an Oracle read replica. The default is
+    #   `open-read-only`. For more information, see [Working with Oracle
+    #   Read Replicas for Amazon RDS][1] in the *Amazon RDS User Guide*.
+    #
+    #   <note markdown="1"> This attribute is only supported in RDS for Oracle.
+    #
+    #    </note>
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/oracle-read-replicas.html
+    #   @return [String]
+    #
     # @!attribute [rw] license_model
     #   License model information for this DB instance.
     #   @return [String]
@@ -6338,6 +6384,7 @@ module Aws::RDS
       :read_replica_source_db_instance_identifier,
       :read_replica_db_instance_identifiers,
       :read_replica_db_cluster_identifiers,
+      :replica_mode,
       :license_model,
       :iops,
       :option_group_memberships,
@@ -8502,7 +8549,7 @@ module Aws::RDS
     #   `db-cluster-endpoint-custom-type` filter can be one or more of:
     #   `reader`, `any`. `Values` for the `db-cluster-endpoint-status`
     #   filter can be one or more of: `available`, `creating`, `deleting`,
-    #   `modifying`.
+    #   `inactive`, `modifying`.
     #   @return [Array<Types::Filter>]
     #
     # @!attribute [rw] max_records
@@ -10117,8 +10164,8 @@ module Aws::RDS
     # @!attribute [rw] source_type
     #   The type of source that is generating the events.
     #
-    #   Valid values: db-instance \| db-parameter-group \| db-security-group
-    #   \| db-snapshot
+    #   Valid values: `db-instance` \| `db-cluster` \| `db-parameter-group`
+    #   \| `db-security-group` \| `db-snapshot` \| `db-cluster-snapshot`
     #   @return [String]
     #
     # @!attribute [rw] filters
@@ -10213,19 +10260,26 @@ module Aws::RDS
     #
     #   Constraints:
     #
-    #   * If SourceIdentifier is supplied, SourceType must also be provided.
+    #   * If `SourceIdentifier` is supplied, `SourceType` must also be
+    #     provided.
     #
-    #   * If the source type is `DBInstance`, then a `DBInstanceIdentifier`
+    #   * If the source type is a DB instance, a `DBInstanceIdentifier`
+    #     value must be supplied.
+    #
+    #   * If the source type is a DB cluster, a `DBClusterIdentifier` value
     #     must be supplied.
     #
-    #   * If the source type is `DBSecurityGroup`, a `DBSecurityGroupName`
-    #     must be supplied.
+    #   * If the source type is a DB parameter group, a
+    #     `DBParameterGroupName` value must be supplied.
     #
-    #   * If the source type is `DBParameterGroup`, a `DBParameterGroupName`
-    #     must be supplied.
+    #   * If the source type is a DB security group, a `DBSecurityGroupName`
+    #     value must be supplied.
     #
-    #   * If the source type is `DBSnapshot`, a `DBSnapshotIdentifier` must
-    #     be supplied.
+    #   * If the source type is a DB snapshot, a `DBSnapshotIdentifier`
+    #     value must be supplied.
+    #
+    #   * If the source type is a DB cluster snapshot, a
+    #     `DBClusterSnapshotIdentifier` value must be supplied.
     #
     #   * Can't end with a hyphen or contain two consecutive hyphens.
     #   @return [String]
@@ -11393,7 +11447,7 @@ module Aws::RDS
     end
 
     # Contains the results of a successful invocation of the
-    # `DescribeEventCategories` action.
+    # `DescribeEventCategories` operation.
     #
     # @!attribute [rw] source_type
     #   The source type that the returned categories belong to
@@ -11412,7 +11466,7 @@ module Aws::RDS
       include Aws::Structure
     end
 
-    # Data returned from the **DescribeEventCategories** action.
+    # Data returned from the `DescribeEventCategories` operation.
     #
     # @!attribute [rw] event_categories_map_list
     #   A list of EventCategoriesMap data types.
@@ -12803,6 +12857,13 @@ module Aws::RDS
     #   The Active Directory directory ID to move the DB cluster to. Specify
     #   `none` to remove the cluster from its current domain. The domain
     #   must be created prior to this operation.
+    #
+    #   For more information, see [Kerberos Authentication][1] in the
+    #   *Amazon Aurora User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/kerberos-authentication.html
     #   @return [String]
     #
     # @!attribute [rw] domain_iam_role_name
@@ -13073,6 +13134,7 @@ module Aws::RDS
     #         deletion_protection: false,
     #         max_allocated_storage: 1,
     #         certificate_rotation_restart: false,
+    #         replica_mode: "open-read-only", # accepts open-read-only, mounted
     #       }
     #
     # @!attribute [rw] db_instance_identifier
@@ -13489,24 +13551,15 @@ module Aws::RDS
     #   The Active Directory directory ID to move the DB instance to.
     #   Specify `none` to remove the instance from its current domain. The
     #   domain must be created prior to this operation. Currently, only
-    #   Microsoft SQL Server and Oracle DB instances can be created in an
-    #   Active Directory Domain.
+    #   MySQL, Microsoft SQL Server, Oracle, and PostgreSQL DB instances can
+    #   be created in an Active Directory Domain.
     #
-    #   For Microsoft SQL Server DB instances, Amazon RDS can use Windows
-    #   Authentication to authenticate users that connect to the DB
-    #   instance. For more information, see [ Using Windows Authentication
-    #   with an Amazon RDS DB Instance Running Microsoft SQL Server][1] in
-    #   the *Amazon RDS User Guide*.
-    #
-    #   For Oracle DB instances, Amazon RDS can use Kerberos authentication
-    #   to authenticate users that connect to the DB instance. For more
-    #   information, see [ Using Kerberos Authentication with Amazon RDS for
-    #   Oracle][2] in the *Amazon RDS User Guide*.
+    #   For more information, see [ Kerberos Authentication][1] in the
+    #   *Amazon RDS User Guide*.
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_SQLServerWinAuth.html
-    #   [2]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/oracle-kerberos.html
+    #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/kerberos-authentication.html
     #   @return [String]
     #
     # @!attribute [rw] copy_tags_to_snapshot
@@ -13747,6 +13800,27 @@ module Aws::RDS
     #   [2]: https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/UsingWithRDS.SSL-certificate-rotation.html
     #   @return [Boolean]
     #
+    # @!attribute [rw] replica_mode
+    #   A value that sets the open mode of a replica database to either
+    #   mounted or read-only.
+    #
+    #   <note markdown="1"> Currently, this parameter is only supported for Oracle DB instances.
+    #
+    #    </note>
+    #
+    #   Mounted DB replicas are included in Oracle Enterprise Edition. The
+    #   main use case for mounted replicas is cross-Region disaster
+    #   recovery. The primary database doesn't use Active Data Guard to
+    #   transmit information to the mounted replica. Because it doesn't
+    #   accept user connections, a mounted replica can't serve a read-only
+    #   workload. For more information, see [Working with Oracle Read
+    #   Replicas for Amazon RDS][1] in the *Amazon RDS User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/oracle-read-replicas.html
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/ModifyDBInstanceMessage AWS API Documentation
     #
     class ModifyDBInstanceMessage < Struct.new(
@@ -13791,7 +13865,8 @@ module Aws::RDS
       :use_default_processor_features,
       :deletion_protection,
       :max_allocated_storage,
-      :certificate_rotation_restart)
+      :certificate_rotation_restart,
+      :replica_mode)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -14264,15 +14339,15 @@ module Aws::RDS
     #   would set this parameter to db-instance. If this value isn't
     #   specified, all events are returned.
     #
-    #   Valid values: db-instance \| db-parameter-group \| db-security-group
-    #   \| db-snapshot
+    #   Valid values: `db-instance` \| `db-cluster` \| `db-parameter-group`
+    #   \| `db-security-group` \| `db-snapshot` \| `db-cluster-snapshot`
     #   @return [String]
     #
     # @!attribute [rw] event_categories
-    #   A list of event categories for a SourceType that you want to
-    #   subscribe to. You can see a list of the categories for a given
-    #   SourceType in the [Events][1] topic in the *Amazon RDS User Guide*
-    #   or by using the **DescribeEventCategories** action.
+    #   A list of event categories for a source type (`SourceType`) that you
+    #   want to subscribe to. You can see a list of the categories for a
+    #   given source type in [Events][1] in the *Amazon RDS User Guide* or
+    #   by using the `DescribeEventCategories` operation.
     #
     #
     #
@@ -16552,10 +16627,11 @@ module Aws::RDS
     #   @return [String]
     #
     # @!attribute [rw] engine
-    #   The name of the database engine to be used for the restored DB
-    #   cluster.
+    #   The name of the database engine to be used for this DB cluster.
     #
-    #   Valid Values: `aurora`, `aurora-postgresql`
+    #   Valid Values: `aurora` (for MySQL 5.6-compatible Aurora),
+    #   `aurora-mysql` (for MySQL 5.7-compatible Aurora), and
+    #   `aurora-postgresql`
     #   @return [String]
     #
     # @!attribute [rw] engine_version
@@ -16723,7 +16799,7 @@ module Aws::RDS
     #
     #   MySQL versions 5.5, 5.6, and 5.7 are supported.
     #
-    #   Example: `5.6.40`
+    #   Example: `5.6.40`, `5.7.28`
     #   @return [String]
     #
     # @!attribute [rw] s3_bucket_name
@@ -17114,7 +17190,16 @@ module Aws::RDS
     #
     # @!attribute [rw] domain
     #   Specify the Active Directory directory ID to restore the DB cluster
-    #   in. The domain must be created prior to this operation.
+    #   in. The domain must be created prior to this operation. Currently,
+    #   only MySQL, Microsoft SQL Server, Oracle, and PostgreSQL DB
+    #   instances can be created in an Active Directory Domain.
+    #
+    #   For more information, see [ Kerberos Authentication][1] in the
+    #   *Amazon RDS User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/kerberos-authentication.html
     #   @return [String]
     #
     # @!attribute [rw] domain_iam_role_name
@@ -17725,24 +17810,15 @@ module Aws::RDS
     # @!attribute [rw] domain
     #   Specify the Active Directory directory ID to restore the DB instance
     #   in. The domain must be created prior to this operation. Currently,
-    #   only Microsoft SQL Server and Oracle DB instances can be created in
-    #   an Active Directory Domain.
+    #   only MySQL, Microsoft SQL Server, Oracle, and PostgreSQL DB
+    #   instances can be created in an Active Directory Domain.
     #
-    #   For Microsoft SQL Server DB instances, Amazon RDS can use Windows
-    #   Authentication to authenticate users that connect to the DB
-    #   instance. For more information, see [ Using Windows Authentication
-    #   with an Amazon RDS DB Instance Running Microsoft SQL Server][1] in
-    #   the *Amazon RDS User Guide*.
-    #
-    #   For Oracle DB instances, Amazon RDS can use Kerberos authentication
-    #   to authenticate users that connect to the DB instance. For more
-    #   information, see [ Using Kerberos Authentication with Amazon RDS for
-    #   Oracle][2] in the *Amazon RDS User Guide*.
+    #   For more information, see [ Kerberos Authentication][1] in the
+    #   *Amazon RDS User Guide*.
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_SQLServerWinAuth.html
-    #   [2]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/oracle-kerberos.html
+    #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/kerberos-authentication.html
     #   @return [String]
     #
     # @!attribute [rw] copy_tags_to_snapshot
@@ -18686,24 +18762,15 @@ module Aws::RDS
     # @!attribute [rw] domain
     #   Specify the Active Directory directory ID to restore the DB instance
     #   in. The domain must be created prior to this operation. Currently,
-    #   only Microsoft SQL Server and Oracle DB instances can be created in
-    #   an Active Directory Domain.
+    #   only MySQL, Microsoft SQL Server, Oracle, and PostgreSQL DB
+    #   instances can be created in an Active Directory Domain.
     #
-    #   For Microsoft SQL Server DB instances, Amazon RDS can use Windows
-    #   Authentication to authenticate users that connect to the DB
-    #   instance. For more information, see [ Using Windows Authentication
-    #   with an Amazon RDS DB Instance Running Microsoft SQL Server][1] in
-    #   the *Amazon RDS User Guide*.
-    #
-    #   For Oracle DB instances, Amazon RDS can use Kerberos authentication
-    #   to authenticate users that connect to the DB instance. For more
-    #   information, see [ Using Kerberos Authentication with Amazon RDS for
-    #   Oracle][2] in the *Amazon RDS User Guide*.
+    #   For more information, see [ Kerberos Authentication][1] in the
+    #   *Amazon RDS User Guide*.
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_SQLServerWinAuth.html
-    #   [2]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/oracle-kerberos.html
+    #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/kerberos-authentication.html
     #   @return [String]
     #
     # @!attribute [rw] domain_iam_role_name
@@ -19347,8 +19414,26 @@ module Aws::RDS
     #   The ID of the AWS KMS key to use to encrypt the snapshot exported to
     #   Amazon S3. The KMS key ID is the Amazon Resource Name (ARN), the KMS
     #   key identifier, or the KMS key alias for the KMS encryption key. The
-    #   IAM role used for the snapshot export must have encryption and
-    #   decryption permissions to use this KMS key.
+    #   caller of this operation must be authorized to execute the following
+    #   operations. These can be set in the KMS key policy:
+    #
+    #   * GrantOperation.Encrypt
+    #
+    #   * GrantOperation.Decrypt
+    #
+    #   * GrantOperation.GenerateDataKey
+    #
+    #   * GrantOperation.GenerateDataKeyWithoutPlaintext
+    #
+    #   * GrantOperation.ReEncryptFrom
+    #
+    #   * GrantOperation.ReEncryptTo
+    #
+    #   * GrantOperation.CreateGrant
+    #
+    #   * GrantOperation.DescribeKey
+    #
+    #   * GrantOperation.RetireGrant
     #   @return [String]
     #
     # @!attribute [rw] s3_prefix

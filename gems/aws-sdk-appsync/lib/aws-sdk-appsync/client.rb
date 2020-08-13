@@ -781,6 +781,10 @@ module Aws::AppSync
     #   expression into a format that a data source can understand. Mapping
     #   templates are written in Apache Velocity Template Language (VTL).
     #
+    #   VTL request mapping templates are optional when using a Lambda data
+    #   source. For all other data sources, VTL request and response mapping
+    #   templates are required.
+    #
     # @option params [String] :response_mapping_template
     #   The mapping template to be used for responses from the data source.
     #
@@ -2414,6 +2418,14 @@ module Aws::AppSync
     # @option params [String] :request_mapping_template
     #   The new request mapping template.
     #
+    #   A resolver uses a request mapping template to convert a GraphQL
+    #   expression into a format that a data source can understand. Mapping
+    #   templates are written in Apache Velocity Template Language (VTL).
+    #
+    #   VTL request mapping templates are optional when using a Lambda data
+    #   source. For all other data sources, VTL request and response mapping
+    #   templates are required.
+    #
     # @option params [String] :response_mapping_template
     #   The new response mapping template.
     #
@@ -2552,7 +2564,7 @@ module Aws::AppSync
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-appsync'
-      context[:gem_version] = '1.31.0'
+      context[:gem_version] = '1.32.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

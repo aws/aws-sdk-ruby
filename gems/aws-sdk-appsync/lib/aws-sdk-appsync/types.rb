@@ -360,8 +360,8 @@ module Aws::AppSync
     # @!attribute [rw] caching_keys
     #   The caching keys for a resolver that has caching enabled.
     #
-    #   Valid values are entries from the `$context.identity` and
-    #   `$context.arguments` maps.
+    #   Valid values are entries from the `$context.arguments`,
+    #   `$context.source`, and `$context.identity` maps.
     #   @return [Array<String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appsync-2017-07-25/CachingConfig AWS API Documentation
@@ -922,6 +922,10 @@ module Aws::AppSync
     #   A resolver uses a request mapping template to convert a GraphQL
     #   expression into a format that a data source can understand. Mapping
     #   templates are written in Apache Velocity Template Language (VTL).
+    #
+    #   VTL request mapping templates are optional when using a Lambda data
+    #   source. For all other data sources, VTL request and response mapping
+    #   templates are required.
     #   @return [String]
     #
     # @!attribute [rw] response_mapping_template
@@ -3383,6 +3387,14 @@ module Aws::AppSync
     #
     # @!attribute [rw] request_mapping_template
     #   The new request mapping template.
+    #
+    #   A resolver uses a request mapping template to convert a GraphQL
+    #   expression into a format that a data source can understand. Mapping
+    #   templates are written in Apache Velocity Template Language (VTL).
+    #
+    #   VTL request mapping templates are optional when using a Lambda data
+    #   source. For all other data sources, VTL request and response mapping
+    #   templates are required.
     #   @return [String]
     #
     # @!attribute [rw] response_mapping_template

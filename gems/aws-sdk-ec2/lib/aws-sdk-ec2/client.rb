@@ -6738,6 +6738,7 @@ module Aws::EC2
     #   resp.network_interface.association.ip_owner_id #=> String
     #   resp.network_interface.association.public_dns_name #=> String
     #   resp.network_interface.association.public_ip #=> String
+    #   resp.network_interface.association.customer_owned_ip #=> String
     #   resp.network_interface.association.carrier_ip #=> String
     #   resp.network_interface.attachment.attach_time #=> Time
     #   resp.network_interface.attachment.attachment_id #=> String
@@ -6766,6 +6767,7 @@ module Aws::EC2
     #   resp.network_interface.private_ip_addresses[0].association.ip_owner_id #=> String
     #   resp.network_interface.private_ip_addresses[0].association.public_dns_name #=> String
     #   resp.network_interface.private_ip_addresses[0].association.public_ip #=> String
+    #   resp.network_interface.private_ip_addresses[0].association.customer_owned_ip #=> String
     #   resp.network_interface.private_ip_addresses[0].association.carrier_ip #=> String
     #   resp.network_interface.private_ip_addresses[0].primary #=> Boolean
     #   resp.network_interface.private_ip_addresses[0].private_dns_name #=> String
@@ -19681,6 +19683,7 @@ module Aws::EC2
     #   resp.network_interfaces[0].association.ip_owner_id #=> String
     #   resp.network_interfaces[0].association.public_dns_name #=> String
     #   resp.network_interfaces[0].association.public_ip #=> String
+    #   resp.network_interfaces[0].association.customer_owned_ip #=> String
     #   resp.network_interfaces[0].association.carrier_ip #=> String
     #   resp.network_interfaces[0].attachment.attach_time #=> Time
     #   resp.network_interfaces[0].attachment.attachment_id #=> String
@@ -19709,6 +19712,7 @@ module Aws::EC2
     #   resp.network_interfaces[0].private_ip_addresses[0].association.ip_owner_id #=> String
     #   resp.network_interfaces[0].private_ip_addresses[0].association.public_dns_name #=> String
     #   resp.network_interfaces[0].private_ip_addresses[0].association.public_ip #=> String
+    #   resp.network_interfaces[0].private_ip_addresses[0].association.customer_owned_ip #=> String
     #   resp.network_interfaces[0].private_ip_addresses[0].association.carrier_ip #=> String
     #   resp.network_interfaces[0].private_ip_addresses[0].primary #=> Boolean
     #   resp.network_interfaces[0].private_ip_addresses[0].private_dns_name #=> String
@@ -31536,6 +31540,20 @@ module Aws::EC2
     # @option params [required, String] :subnet_id
     #   The ID of the subnet.
     #
+    # @option params [Types::AttributeBooleanValue] :map_customer_owned_ip_on_launch
+    #   Specify `true` to indicate that network interfaces attached to
+    #   instances created in the specified subnet should be assigned a
+    #   customer-owned IPv4 address.
+    #
+    #   When this value is `true`, you must specify the customer-owned IP pool
+    #   using `CustomerOwnedIpv4Pool`.
+    #
+    # @option params [String] :customer_owned_ipv_4_pool
+    #   The customer-owned IPv4 address pool associated with the subnet.
+    #
+    #   You must set this value when you specify `true` for
+    #   `MapCustomerOwnedIpOnLaunch`.
+    #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
     #
@@ -31561,6 +31579,10 @@ module Aws::EC2
     #       value: false,
     #     },
     #     subnet_id: "SubnetId", # required
+    #     map_customer_owned_ip_on_launch: {
+    #       value: false,
+    #     },
+    #     customer_owned_ipv_4_pool: "CoipPoolId",
     #   })
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ModifySubnetAttribute AWS API Documentation
@@ -38184,7 +38206,7 @@ module Aws::EC2
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-ec2'
-      context[:gem_version] = '1.186.0'
+      context[:gem_version] = '1.187.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

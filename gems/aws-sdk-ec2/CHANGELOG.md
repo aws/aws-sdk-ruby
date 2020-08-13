@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.187.0 (2020-08-13)
+------------------
+
+* Feature - Added MapCustomerOwnedIpOnLaunch and CustomerOwnedIpv4Pool to ModifySubnetAttribute to allow CoIP auto assign. Fields are returned in DescribeSubnets and DescribeNetworkInterfaces responses.
+
 1.186.0 (2020-08-12)
 ------------------
 

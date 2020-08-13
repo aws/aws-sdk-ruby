@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.355.0 (2020-08-13)
+------------------
+
+* Feature - Added support for enumerating regions for `Aws::Braket`.
+
 1.354.0 (2020-08-10)
 ------------------
 

@@ -1,0 +1,643 @@
+# frozen_string_literal: true
+
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/master/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+require 'seahorse/client/plugins/content_length.rb'
+require 'aws-sdk-core/plugins/credentials_configuration.rb'
+require 'aws-sdk-core/plugins/logging.rb'
+require 'aws-sdk-core/plugins/param_converter.rb'
+require 'aws-sdk-core/plugins/param_validator.rb'
+require 'aws-sdk-core/plugins/user_agent.rb'
+require 'aws-sdk-core/plugins/helpful_socket_errors.rb'
+require 'aws-sdk-core/plugins/retry_errors.rb'
+require 'aws-sdk-core/plugins/global_configuration.rb'
+require 'aws-sdk-core/plugins/regional_endpoint.rb'
+require 'aws-sdk-core/plugins/endpoint_discovery.rb'
+require 'aws-sdk-core/plugins/endpoint_pattern.rb'
+require 'aws-sdk-core/plugins/response_paging.rb'
+require 'aws-sdk-core/plugins/stub_responses.rb'
+require 'aws-sdk-core/plugins/idempotency_token.rb'
+require 'aws-sdk-core/plugins/jsonvalue_converter.rb'
+require 'aws-sdk-core/plugins/client_metrics_plugin.rb'
+require 'aws-sdk-core/plugins/client_metrics_send_plugin.rb'
+require 'aws-sdk-core/plugins/transfer_encoding.rb'
+require 'aws-sdk-core/plugins/http_checksum.rb'
+require 'aws-sdk-core/plugins/signature_v4.rb'
+require 'aws-sdk-core/plugins/protocols/rest_json.rb'
+
+Aws::Plugins::GlobalConfiguration.add_identifier(:braket)
+
+module Aws::Braket
+  # An API client for Braket.  To construct a client, you need to configure a `:region` and `:credentials`.
+  #
+  #     client = Aws::Braket::Client.new(
+  #       region: region_name,
+  #       credentials: credentials,
+  #       # ...
+  #     )
+  #
+  # For details on configuring region and credentials see
+  # the [developer guide](/sdk-for-ruby/v3/developer-guide/setup-config.html).
+  #
+  # See {#initialize} for a full list of supported configuration options.
+  class Client < Seahorse::Client::Base
+
+    include Aws::ClientStubs
+
+    @identifier = :braket
+
+    set_api(ClientApi::API)
+
+    add_plugin(Seahorse::Client::Plugins::ContentLength)
+    add_plugin(Aws::Plugins::CredentialsConfiguration)
+    add_plugin(Aws::Plugins::Logging)
+    add_plugin(Aws::Plugins::ParamConverter)
+    add_plugin(Aws::Plugins::ParamValidator)
+    add_plugin(Aws::Plugins::UserAgent)
+    add_plugin(Aws::Plugins::HelpfulSocketErrors)
+    add_plugin(Aws::Plugins::RetryErrors)
+    add_plugin(Aws::Plugins::GlobalConfiguration)
+    add_plugin(Aws::Plugins::RegionalEndpoint)
+    add_plugin(Aws::Plugins::EndpointDiscovery)
+    add_plugin(Aws::Plugins::EndpointPattern)
+    add_plugin(Aws::Plugins::ResponsePaging)
+    add_plugin(Aws::Plugins::StubResponses)
+    add_plugin(Aws::Plugins::IdempotencyToken)
+    add_plugin(Aws::Plugins::JsonvalueConverter)
+    add_plugin(Aws::Plugins::ClientMetricsPlugin)
+    add_plugin(Aws::Plugins::ClientMetricsSendPlugin)
+    add_plugin(Aws::Plugins::TransferEncoding)
+    add_plugin(Aws::Plugins::HttpChecksum)
+    add_plugin(Aws::Plugins::SignatureV4)
+    add_plugin(Aws::Plugins::Protocols::RestJson)
+
+    # @overload initialize(options)
+    #   @param [Hash] options
+    #   @option options [required, Aws::CredentialProvider] :credentials
+    #     Your AWS credentials. This can be an instance of any one of the
+    #     following classes:
+    #
+    #     * `Aws::Credentials` - Used for configuring static, non-refreshing
+    #       credentials.
+    #
+    #     * `Aws::InstanceProfileCredentials` - Used for loading credentials
+    #       from an EC2 IMDS on an EC2 instance.
+    #
+    #     * `Aws::SharedCredentials` - Used for loading credentials from a
+    #       shared file, such as `~/.aws/config`.
+    #
+    #     * `Aws::AssumeRoleCredentials` - Used when you need to assume a role.
+    #
+    #     When `:credentials` are not configured directly, the following
+    #     locations will be searched for credentials:
+    #
+    #     * `Aws.config[:credentials]`
+    #     * The `:access_key_id`, `:secret_access_key`, and `:session_token` options.
+    #     * ENV['AWS_ACCESS_KEY_ID'], ENV['AWS_SECRET_ACCESS_KEY']
+    #     * `~/.aws/credentials`
+    #     * `~/.aws/config`
+    #     * EC2 IMDS instance profile - When used by default, the timeouts are
+    #       very aggressive. Construct and pass an instance of
+    #       `Aws::InstanceProfileCredentails` to enable retries and extended
+    #       timeouts.
+    #
+    #   @option options [required, String] :region
+    #     The AWS region to connect to.  The configured `:region` is
+    #     used to determine the service `:endpoint`. When not passed,
+    #     a default `:region` is searched for in the following locations:
+    #
+    #     * `Aws.config[:region]`
+    #     * `ENV['AWS_REGION']`
+    #     * `ENV['AMAZON_REGION']`
+    #     * `ENV['AWS_DEFAULT_REGION']`
+    #     * `~/.aws/credentials`
+    #     * `~/.aws/config`
+    #
+    #   @option options [String] :access_key_id
+    #
+    #   @option options [Boolean] :active_endpoint_cache (false)
+    #     When set to `true`, a thread polling for endpoints will be running in
+    #     the background every 60 secs (default). Defaults to `false`.
+    #
+    #   @option options [Boolean] :adaptive_retry_wait_to_fill (true)
+    #     Used only in `adaptive` retry mode.  When true, the request will sleep
+    #     until there is sufficent client side capacity to retry the request.
+    #     When false, the request will raise a `RetryCapacityNotAvailableError` and will
+    #     not retry instead of sleeping.
+    #
+    #   @option options [Boolean] :client_side_monitoring (false)
+    #     When `true`, client-side metrics will be collected for all API requests from
+    #     this client.
+    #
+    #   @option options [String] :client_side_monitoring_client_id ("")
+    #     Allows you to provide an identifier for this client which will be attached to
+    #     all generated client side metrics. Defaults to an empty string.
+    #
+    #   @option options [String] :client_side_monitoring_host ("127.0.0.1")
+    #     Allows you to specify the DNS hostname or IPv4 or IPv6 address that the client
+    #     side monitoring agent is running on, where client metrics will be published via UDP.
+    #
+    #   @option options [Integer] :client_side_monitoring_port (31000)
+    #     Required for publishing client metrics. The port that the client side monitoring
+    #     agent is running on, where client metrics will be published via UDP.
+    #
+    #   @option options [Aws::ClientSideMonitoring::Publisher] :client_side_monitoring_publisher (Aws::ClientSideMonitoring::Publisher)
+    #     Allows you to provide a custom client-side monitoring publisher class. By default,
+    #     will use the Client Side Monitoring Agent Publisher.
+    #
+    #   @option options [Boolean] :convert_params (true)
+    #     When `true`, an attempt is made to coerce request parameters into
+    #     the required types.
+    #
+    #   @option options [Boolean] :correct_clock_skew (true)
+    #     Used only in `standard` and adaptive retry modes. Specifies whether to apply
+    #     a clock skew correction and retry requests with skewed client clocks.
+    #
+    #   @option options [Boolean] :disable_host_prefix_injection (false)
+    #     Set to true to disable SDK automatically adding host prefix
+    #     to default service endpoint when available.
+    #
+    #   @option options [String] :endpoint
+    #     The client endpoint is normally constructed from the `:region`
+    #     option. You should only configure an `:endpoint` when connecting
+    #     to test or custom endpoints. This should be a valid HTTP(S) URI.
+    #
+    #   @option options [Integer] :endpoint_cache_max_entries (1000)
+    #     Used for the maximum size limit of the LRU cache storing endpoints data
+    #     for endpoint discovery enabled operations. Defaults to 1000.
+    #
+    #   @option options [Integer] :endpoint_cache_max_threads (10)
+    #     Used for the maximum threads in use for polling endpoints to be cached, defaults to 10.
+    #
+    #   @option options [Integer] :endpoint_cache_poll_interval (60)
+    #     When :endpoint_discovery and :active_endpoint_cache is enabled,
+    #     Use this option to config the time interval in seconds for making
+    #     requests fetching endpoints information. Defaults to 60 sec.
+    #
+    #   @option options [Boolean] :endpoint_discovery (false)
+    #     When set to `true`, endpoint discovery will be enabled for operations when available.
+    #
+    #   @option options [Aws::Log::Formatter] :log_formatter (Aws::Log::Formatter.default)
+    #     The log formatter.
+    #
+    #   @option options [Symbol] :log_level (:info)
+    #     The log level to send messages to the `:logger` at.
+    #
+    #   @option options [Logger] :logger
+    #     The Logger instance to send log messages to.  If this option
+    #     is not set, logging will be disabled.
+    #
+    #   @option options [Integer] :max_attempts (3)
+    #     An integer representing the maximum number attempts that will be made for
+    #     a single request, including the initial attempt.  For example,
+    #     setting this value to 5 will result in a request being retried up to
+    #     4 times. Used in `standard` and `adaptive` retry modes.
+    #
+    #   @option options [String] :profile ("default")
+    #     Used when loading credentials from the shared credentials file
+    #     at HOME/.aws/credentials.  When not specified, 'default' is used.
+    #
+    #   @option options [Proc] :retry_backoff
+    #     A proc or lambda used for backoff. Defaults to 2**retries * retry_base_delay.
+    #     This option is only used in the `legacy` retry mode.
+    #
+    #   @option options [Float] :retry_base_delay (0.3)
+    #     The base delay in seconds used by the default backoff function. This option
+    #     is only used in the `legacy` retry mode.
+    #
+    #   @option options [Symbol] :retry_jitter (:none)
+    #     A delay randomiser function used by the default backoff function.
+    #     Some predefined functions can be referenced by name - :none, :equal, :full,
+    #     otherwise a Proc that takes and returns a number. This option is only used
+    #     in the `legacy` retry mode.
+    #
+    #     @see https://www.awsarchitectureblog.com/2015/03/backoff.html
+    #
+    #   @option options [Integer] :retry_limit (3)
+    #     The maximum number of times to retry failed requests.  Only
+    #     ~ 500 level server errors and certain ~ 400 level client errors
+    #     are retried.  Generally, these are throttling errors, data
+    #     checksum errors, networking errors, timeout errors, auth errors,
+    #     endpoint discovery, and errors from expired credentials.
+    #     This option is only used in the `legacy` retry mode.
+    #
+    #   @option options [Integer] :retry_max_delay (0)
+    #     The maximum number of seconds to delay between retries (0 for no limit)
+    #     used by the default backoff function. This option is only used in the
+    #     `legacy` retry mode.
+    #
+    #   @option options [String] :retry_mode ("legacy")
+    #     Specifies which retry algorithm to use. Values are:
+    #
+    #     * `legacy` - The pre-existing retry behavior.  This is default value if
+    #       no retry mode is provided.
+    #
+    #     * `standard` - A standardized set of retry rules across the AWS SDKs.
+    #       This includes support for retry quotas, which limit the number of
+    #       unsuccessful retries a client can make.
+    #
+    #     * `adaptive` - An experimental retry mode that includes all the
+    #       functionality of `standard` mode along with automatic client side
+    #       throttling.  This is a provisional mode that may change behavior
+    #       in the future.
+    #
+    #
+    #   @option options [String] :secret_access_key
+    #
+    #   @option options [String] :session_token
+    #
+    #   @option options [Boolean] :stub_responses (false)
+    #     Causes the client to return stubbed responses. By default
+    #     fake responses are generated and returned. You can specify
+    #     the response data to return or errors to raise by calling
+    #     {ClientStubs#stub_responses}. See {ClientStubs} for more information.
+    #
+    #     ** Please note ** When response stubbing is enabled, no HTTP
+    #     requests are made, and retries are disabled.
+    #
+    #   @option options [Boolean] :validate_params (true)
+    #     When `true`, request parameters are validated before
+    #     sending the request.
+    #
+    #   @option options [URI::HTTP,String] :http_proxy A proxy to send
+    #     requests through.  Formatted like 'http://proxy.com:123'.
+    #
+    #   @option options [Float] :http_open_timeout (15) The number of
+    #     seconds to wait when opening a HTTP session before raising a
+    #     `Timeout::Error`.
+    #
+    #   @option options [Integer] :http_read_timeout (60) The default
+    #     number of seconds to wait for response data.  This value can
+    #     safely be set per-request on the session.
+    #
+    #   @option options [Float] :http_idle_timeout (5) The number of
+    #     seconds a connection is allowed to sit idle before it is
+    #     considered stale.  Stale connections are closed and removed
+    #     from the pool before making a request.
+    #
+    #   @option options [Float] :http_continue_timeout (1) The number of
+    #     seconds to wait for a 100-continue response before sending the
+    #     request body.  This option has no effect unless the request has
+    #     "Expect" header set to "100-continue".  Defaults to `nil` which
+    #     disables this behaviour.  This value can safely be set per
+    #     request on the session.
+    #
+    #   @option options [Boolean] :http_wire_trace (false) When `true`,
+    #     HTTP debug output will be sent to the `:logger`.
+    #
+    #   @option options [Boolean] :ssl_verify_peer (true) When `true`,
+    #     SSL peer certificates are verified when establishing a
+    #     connection.
+    #
+    #   @option options [String] :ssl_ca_bundle Full path to the SSL
+    #     certificate authority bundle file that should be used when
+    #     verifying peer certificates.  If you do not pass
+    #     `:ssl_ca_bundle` or `:ssl_ca_directory` the the system default
+    #     will be used if available.
+    #
+    #   @option options [String] :ssl_ca_directory Full path of the
+    #     directory that contains the unbundled SSL certificate
+    #     authority files for verifying peer certificates.  If you do
+    #     not pass `:ssl_ca_bundle` or `:ssl_ca_directory` the the
+    #     system default will be used if available.
+    #
+    def initialize(*args)
+      super
+    end
+
+    # @!group API Operations
+
+    # Cancels the specified task.
+    #
+    # @option params [required, String] :client_token
+    #   The client token associated with the request.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.**
+    #
+    # @option params [required, String] :quantum_task_arn
+    #   The ARN of the task to cancel.
+    #
+    # @return [Types::CancelQuantumTaskResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CancelQuantumTaskResponse#cancellation_status #cancellation_status} => String
+    #   * {Types::CancelQuantumTaskResponse#quantum_task_arn #quantum_task_arn} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.cancel_quantum_task({
+    #     client_token: "String64", # required
+    #     quantum_task_arn: "QuantumTaskArn", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.cancellation_status #=> String, one of "CANCELLED", "CANCELLING"
+    #   resp.quantum_task_arn #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/braket-2019-09-01/CancelQuantumTask AWS API Documentation
+    #
+    # @overload cancel_quantum_task(params = {})
+    # @param [Hash] params ({})
+    def cancel_quantum_task(params = {}, options = {})
+      req = build_request(:cancel_quantum_task, params)
+      req.send_request(options)
+    end
+
+    # Creates a quantum task.
+    #
+    # @option params [required, String] :action
+    #   The action associated with the task.
+    #
+    #   **SDK automatically handles json encoding and base64 encoding for you
+    #   when the required value (Hash, Array, etc.) is provided according to
+    #   the description.**
+    #
+    # @option params [required, String] :client_token
+    #   The client token associated with the request.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.**
+    #
+    # @option params [required, String] :device_arn
+    #   The ARN of the device to run the task on.
+    #
+    # @option params [String] :device_parameters
+    #   The parameters for the device to run the task on.
+    #
+    #   **SDK automatically handles json encoding and base64 encoding for you
+    #   when the required value (Hash, Array, etc.) is provided according to
+    #   the description.**
+    #
+    # @option params [required, String] :output_s3_bucket
+    #   The S3 bucket to store task result files in.
+    #
+    # @option params [required, String] :output_s3_key_prefix
+    #   The key prefix for the location in the S3 bucket to store task results
+    #   in.
+    #
+    # @option params [required, Integer] :shots
+    #   The number of shots to use for the task.
+    #
+    # @return [Types::CreateQuantumTaskResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateQuantumTaskResponse#quantum_task_arn #quantum_task_arn} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_quantum_task({
+    #     action: "JsonValue", # required
+    #     client_token: "String64", # required
+    #     device_arn: "DeviceArn", # required
+    #     device_parameters: "CreateQuantumTaskRequestdeviceParametersJsonValue",
+    #     output_s3_bucket: "CreateQuantumTaskRequestoutputS3BucketString", # required
+    #     output_s3_key_prefix: "CreateQuantumTaskRequestoutputS3KeyPrefixString", # required
+    #     shots: 1, # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.quantum_task_arn #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/braket-2019-09-01/CreateQuantumTask AWS API Documentation
+    #
+    # @overload create_quantum_task(params = {})
+    # @param [Hash] params ({})
+    def create_quantum_task(params = {}, options = {})
+      req = build_request(:create_quantum_task, params)
+      req.send_request(options)
+    end
+
+    # Retrieves the devices available in Amazon Braket.
+    #
+    # @option params [required, String] :device_arn
+    #   The ARN of the device to retrieve.
+    #
+    # @return [Types::GetDeviceResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetDeviceResponse#device_arn #device_arn} => String
+    #   * {Types::GetDeviceResponse#device_capabilities #device_capabilities} => String
+    #   * {Types::GetDeviceResponse#device_name #device_name} => String
+    #   * {Types::GetDeviceResponse#device_status #device_status} => String
+    #   * {Types::GetDeviceResponse#device_type #device_type} => String
+    #   * {Types::GetDeviceResponse#provider_name #provider_name} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_device({
+    #     device_arn: "DeviceArn", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.device_arn #=> String
+    #   resp.device_capabilities #=> String
+    #   resp.device_name #=> String
+    #   resp.device_status #=> String, one of "QPU", "SIMULATOR"
+    #   resp.device_type #=> String, one of "OFFLINE", "ONLINE"
+    #   resp.provider_name #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/braket-2019-09-01/GetDevice AWS API Documentation
+    #
+    # @overload get_device(params = {})
+    # @param [Hash] params ({})
+    def get_device(params = {}, options = {})
+      req = build_request(:get_device, params)
+      req.send_request(options)
+    end
+
+    # Retrieves the specified quantum task.
+    #
+    # @option params [required, String] :quantum_task_arn
+    #   the ARN of the task to retrieve.
+    #
+    # @return [Types::GetQuantumTaskResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetQuantumTaskResponse#created_at #created_at} => Time
+    #   * {Types::GetQuantumTaskResponse#device_arn #device_arn} => String
+    #   * {Types::GetQuantumTaskResponse#device_parameters #device_parameters} => String
+    #   * {Types::GetQuantumTaskResponse#ended_at #ended_at} => Time
+    #   * {Types::GetQuantumTaskResponse#failure_reason #failure_reason} => String
+    #   * {Types::GetQuantumTaskResponse#output_s3_bucket #output_s3_bucket} => String
+    #   * {Types::GetQuantumTaskResponse#output_s3_directory #output_s3_directory} => String
+    #   * {Types::GetQuantumTaskResponse#quantum_task_arn #quantum_task_arn} => String
+    #   * {Types::GetQuantumTaskResponse#shots #shots} => Integer
+    #   * {Types::GetQuantumTaskResponse#status #status} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_quantum_task({
+    #     quantum_task_arn: "QuantumTaskArn", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.created_at #=> Time
+    #   resp.device_arn #=> String
+    #   resp.device_parameters #=> String
+    #   resp.ended_at #=> Time
+    #   resp.failure_reason #=> String
+    #   resp.output_s3_bucket #=> String
+    #   resp.output_s3_directory #=> String
+    #   resp.quantum_task_arn #=> String
+    #   resp.shots #=> Integer
+    #   resp.status #=> String, one of "CANCELLED", "CANCELLING", "COMPLETED", "CREATED", "FAILED", "QUEUED", "RUNNING"
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/braket-2019-09-01/GetQuantumTask AWS API Documentation
+    #
+    # @overload get_quantum_task(params = {})
+    # @param [Hash] params ({})
+    def get_quantum_task(params = {}, options = {})
+      req = build_request(:get_quantum_task, params)
+      req.send_request(options)
+    end
+
+    # Searches for devices using the specified filters.
+    #
+    # @option params [required, Array<Types::SearchDevicesFilter>] :filters
+    #   The filter values to use to search for a device.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of results to return in the response.
+    #
+    # @option params [String] :next_token
+    #   A token used for pagination of results returned in the response. Use
+    #   the token returned from the previous request continue results where
+    #   the previous request ended.
+    #
+    # @return [Types::SearchDevicesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::SearchDevicesResponse#devices #devices} => Array&lt;Types::DeviceSummary&gt;
+    #   * {Types::SearchDevicesResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.search_devices({
+    #     filters: [ # required
+    #       {
+    #         name: "SearchDevicesFilternameString", # required
+    #         values: ["String256"], # required
+    #       },
+    #     ],
+    #     max_results: 1,
+    #     next_token: "String",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.devices #=> Array
+    #   resp.devices[0].device_arn #=> String
+    #   resp.devices[0].device_name #=> String
+    #   resp.devices[0].device_status #=> String, one of "QPU", "SIMULATOR"
+    #   resp.devices[0].device_type #=> String, one of "OFFLINE", "ONLINE"
+    #   resp.devices[0].provider_name #=> String
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/braket-2019-09-01/SearchDevices AWS API Documentation
+    #
+    # @overload search_devices(params = {})
+    # @param [Hash] params ({})
+    def search_devices(params = {}, options = {})
+      req = build_request(:search_devices, params)
+      req.send_request(options)
+    end
+
+    # Searches for tasks that match the specified filter values.
+    #
+    # @option params [required, Array<Types::SearchQuantumTasksFilter>] :filters
+    #   Array of `SearchQuantumTasksFilter` objects.
+    #
+    # @option params [Integer] :max_results
+    #   Maximum number of results to return in the response.
+    #
+    # @option params [String] :next_token
+    #   A token used for pagination of results returned in the response. Use
+    #   the token returned from the previous request continue results where
+    #   the previous request ended.
+    #
+    # @return [Types::SearchQuantumTasksResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::SearchQuantumTasksResponse#next_token #next_token} => String
+    #   * {Types::SearchQuantumTasksResponse#quantum_tasks #quantum_tasks} => Array&lt;Types::QuantumTaskSummary&gt;
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.search_quantum_tasks({
+    #     filters: [ # required
+    #       {
+    #         name: "String64", # required
+    #         operator: "BETWEEN", # required, accepts BETWEEN, EQUAL, GT, GTE, LT, LTE
+    #         values: ["String256"], # required
+    #       },
+    #     ],
+    #     max_results: 1,
+    #     next_token: "String",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.next_token #=> String
+    #   resp.quantum_tasks #=> Array
+    #   resp.quantum_tasks[0].created_at #=> Time
+    #   resp.quantum_tasks[0].device_arn #=> String
+    #   resp.quantum_tasks[0].ended_at #=> Time
+    #   resp.quantum_tasks[0].output_s3_bucket #=> String
+    #   resp.quantum_tasks[0].output_s3_directory #=> String
+    #   resp.quantum_tasks[0].quantum_task_arn #=> String
+    #   resp.quantum_tasks[0].shots #=> Integer
+    #   resp.quantum_tasks[0].status #=> String, one of "CANCELLED", "CANCELLING", "COMPLETED", "CREATED", "FAILED", "QUEUED", "RUNNING"
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/braket-2019-09-01/SearchQuantumTasks AWS API Documentation
+    #
+    # @overload search_quantum_tasks(params = {})
+    # @param [Hash] params ({})
+    def search_quantum_tasks(params = {}, options = {})
+      req = build_request(:search_quantum_tasks, params)
+      req.send_request(options)
+    end
+
+    # @!endgroup
+
+    # @param params ({})
+    # @api private
+    def build_request(operation_name, params = {})
+      handlers = @handlers.for(operation_name)
+      context = Seahorse::Client::RequestContext.new(
+        operation_name: operation_name,
+        operation: config.api.operation(operation_name),
+        client: self,
+        params: params,
+        config: config)
+      context[:gem_name] = 'aws-sdk-braket'
+      context[:gem_version] = '1.0.0'
+      Seahorse::Client::Request.new(handlers, context)
+    end
+
+    # @api private
+    # @deprecated
+    def waiter_names
+      []
+    end
+
+    class << self
+
+      # @api private
+      attr_reader :identifier
+
+      # @api private
+      def errors_module
+        Errors
+      end
+
+    end
+  end
+end

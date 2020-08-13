@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.96.0 (2020-08-13)
+------------------
+
+* Feature - This release allows customers to specify a replica mode when creating or modifying a Read Replica, for DB engines which support this feature.
+
 1.95.0 (2020-07-28)
 ------------------
 
