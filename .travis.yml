@@ -21,12 +21,12 @@ rvm:
 
 sudo: false
 
-# Disable Ruby warnings (Struct::Tms deprecation for 2.6+)
 env:
-  - RUBY_OPT='-W0' PURE_RUBY=1
-  - RUBY_OPT='-W0' KITCHEN_SINK=1
+  - PURE_RUBY=1
+  - KITCHEN_SINK=1
 
-script: bundle exec rake
+# Disable Ruby warnings (Struct::Tms deprecation for 2.6+)
+script: RUBY_OPT='-W0' bundle exec rake
 
 bundler_args: --without docs release repl
 
