@@ -12,4 +12,6 @@ $:.unshift(File.expand_path('../../../{{dependency}}/lib', __FILE__))
 
 require 'rspec'
 require 'webmock/rspec'
+require 'coveralls'
+Coveralls.wear!
 require '{{gem_name}}'

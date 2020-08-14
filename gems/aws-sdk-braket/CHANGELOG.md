@@ -5,4 +5,3 @@ Unreleased Changes
 ------------------
 
 * Feature - Initial release of `aws-sdk-braket`.
-

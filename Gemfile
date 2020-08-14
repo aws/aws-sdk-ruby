@@ -94,6 +94,7 @@ group :test do
 
   gem 'multipart-post'
   gem 'rspec'
+  gem 'coveralls', require: false
 end
 
 group :build do

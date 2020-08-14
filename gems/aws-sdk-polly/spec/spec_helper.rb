@@ -15,4 +15,6 @@ $:.unshift(File.expand_path('../../../aws-sigv4/lib', __FILE__))
 
 require 'rspec'
 require 'webmock/rspec'
+require 'coveralls'
+Coveralls.wear!
 require 'aws-sdk-polly'
