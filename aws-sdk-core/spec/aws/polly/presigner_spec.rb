@@ -48,7 +48,7 @@ module Aws
             "us-west-2%2Fpolly%2Faws4_request&"\
             "X-Amz-Date=20160101T112233Z&X-Amz-Expires=900&"\
             "X-Amz-SignedHeaders=host&"\
-            "X-Amz-Signature=956ef486286b12f43ffc02dd09eae03cfea4cd8dfb30e0fab3f23de4e131195a"
+            "X-Amz-Signature=acb554087d5e340223b3415c79618adeb5c2b6dba19ba91771fbbe1d50a78f3d"
 
           pre = Presigner.new(region: region, credentials: credentials)
           params = {
