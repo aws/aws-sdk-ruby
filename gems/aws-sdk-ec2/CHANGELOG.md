@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.188.0 (2020-08-14)
+------------------
+
+* Feature - New C5ad instances featuring AMD's 2nd Generation EPYC processors, offering up to 96 vCPUs, 192 GiB of instance memory, 3.8 TB of NVMe based SSD instance storage, and 20 Gbps in Network bandwidth
+
 1.187.0 (2020-08-13)
 ------------------
 

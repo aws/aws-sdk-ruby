@@ -123,21 +123,26 @@ module Aws::LicenseManager
     #
     # @!attribute [rw] license_rules
     #   License rules. The syntax is #name=value (for example,
-    #   #allowedTenancy=EC2-DedicatedHost). Available rules vary by
-    #   dimension.
+    #   #allowedTenancy=EC2-DedicatedHost). The available rules vary by
+    #   dimension, as follows.
     #
-    #   * `Cores` dimension: `allowedTenancy` \| `maximumCores` \|
-    #     `minimumCores`
+    #   * `Cores` dimension: `allowedTenancy` \| `licenseAffinityToHost` \|
+    #     `maximumCores` \| `minimumCores`
     #
     #   * `Instances` dimension: `allowedTenancy` \| `maximumCores` \|
     #     `minimumCores` \| `maximumSockets` \| `minimumSockets` \|
     #     `maximumVcpus` \| `minimumVcpus`
     #
-    #   * `Sockets` dimension: `allowedTenancy` \| `maximumSockets` \|
-    #     `minimumSockets`
+    #   * `Sockets` dimension: `allowedTenancy` \| `licenseAffinityToHost`
+    #     \| `maximumSockets` \| `minimumSockets`
     #
     #   * `vCPUs` dimension: `allowedTenancy` \| `honorVcpuOptimization` \|
     #     `maximumVcpus` \| `minimumVcpus`
+    #
+    #   The unit for `licenseAffinityToHost` is days and the range is 1 to
+    #   180. The possible values for `allowedTenancy` are `EC2-Default`,
+    #   `EC2-DedicatedHost`, and `EC2-DedicatedInstance`. The possible
+    #   values for `honorVcpuOptimization` are `True` and `False`.
     #   @return [Array<String>]
     #
     # @!attribute [rw] tags
@@ -837,7 +842,8 @@ module Aws::LicenseManager
     #   operators are supported:
     #
     #   * `licenseCountingType` - The dimension on which licenses are
-    #     counted (vCPU). Logical operators are `EQUALS` \| `NOT_EQUALS`.
+    #     counted. Possible values are `vCPU` \| `Instance` \| `Core` \|
+    #     `Socket`. Logical operators are `EQUALS` \| `NOT_EQUALS`.
     #
     #   * `enforceLicenseCount` - A Boolean value that indicates whether
     #     hard license enforcement is used. Logical operators are `EQUALS`
@@ -1174,12 +1180,14 @@ module Aws::LicenseManager
     #       }
     #
     # @!attribute [rw] resource_type
-    #   Resource type. The value is `SSM_MANAGED`.
+    #   Resource type. The possible values are `SSM_MANAGED` \| `RDS`.
     #   @return [String]
     #
     # @!attribute [rw] product_information_filter_list
-    #   Product information filters. The following filters and logical
-    #   operators are supported:
+    #   Product information filters.
+    #
+    #   The following filters and logical operators are supported when the
+    #   resource type is `SSM_MANAGED`\:
     #
     #   * `Application Name` - The name of the application. Logical operator
     #     is `EQUALS`.
@@ -1196,9 +1204,20 @@ module Aws::LicenseManager
     #   * `Platform Type` - The platform type. Logical operator is `EQUALS`.
     #
     #   * `License Included` - The type of license included. Logical
-    #     operators are `EQUALS` and `NOT_EQUALS`. Possible values are
+    #     operators are `EQUALS` and `NOT_EQUALS`. Possible values are:
     #     `sql-server-enterprise` \| `sql-server-standard` \|
     #     `sql-server-web` \| `windows-server-datacenter`.
+    #
+    #   The following filters and logical operators are supported when the
+    #   resource type is `RDS`\:
+    #
+    #   * `Engine Edition` - The edition of the database engine. Logical
+    #     operator is `EQUALS`. Possible values are: `oracle-ee` \|
+    #     `oracle-se` \| `oracle-se1` \| `oracle-se2`.
+    #
+    #   * `License Pack` - The license pack. Logical operator is `EQUALS`.
+    #     Possible values are: `data guard` \| `diagnostic pack sqlt` \|
+    #     `tuning pack sqlt` \| `ols` \| `olap`.
     #   @return [Array<Types::ProductInformationFilter>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/license-manager-2018-08-01/ProductInformation AWS API Documentation
@@ -1445,7 +1464,8 @@ module Aws::LicenseManager
     #   @return [String]
     #
     # @!attribute [rw] license_rules
-    #   New license rules.
+    #   New license rule. The only rule that you can add after you create a
+    #   license configuration is licenseAffinityToHost.
     #   @return [Array<String>]
     #
     # @!attribute [rw] license_count

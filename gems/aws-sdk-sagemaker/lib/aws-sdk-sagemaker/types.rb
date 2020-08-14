@@ -1285,7 +1285,7 @@ module Aws::SageMaker
       include Aws::Structure
     end
 
-    # An AutoPilot job will return recommendations, or candidates. Each
+    # An Autopilot job returns recommendations, or candidates. Each
     # candidate has futher details about the steps involed, and the status.
     #
     # @!attribute [rw] candidate_name
@@ -1293,7 +1293,7 @@ module Aws::SageMaker
     #   @return [String]
     #
     # @!attribute [rw] final_auto_ml_job_objective_metric
-    #   The candidate result from a job.
+    #   The best candidate result from an AutoML training job.
     #   @return [Types::FinalAutoMLJobObjectiveMetric]
     #
     # @!attribute [rw] objective_status
@@ -1440,7 +1440,7 @@ module Aws::SageMaker
       include Aws::Structure
     end
 
-    # The data source for the AutoPilot job.
+    # The data source for the Autopilot job.
     #
     # @note When making an API call, you may pass AutoMLDataSource
     #   data as a hash:
@@ -1563,17 +1563,91 @@ module Aws::SageMaker
       include Aws::Structure
     end
 
-    # Applies a metric to minimize or maximize for the job's objective.
+    # Specifies a metric to minimize or maximize as the objective of a job.
     #
     # @note When making an API call, you may pass AutoMLJobObjective
     #   data as a hash:
     #
     #       {
-    #         metric_name: "Accuracy", # required, accepts Accuracy, MSE, F1, F1macro
+    #         metric_name: "Accuracy", # required, accepts Accuracy, MSE, F1, F1macro, AUC
     #       }
     #
     # @!attribute [rw] metric_name
-    #   The name of the metric.
+    #   The name of the objective metric used to measure the predictive
+    #   quality of a machine learning system. This metric is optimized
+    #   during training to provide the best estimate for model parameter
+    #   values from data.
+    #
+    #   Here are the options:
+    #
+    #   * `MSE`\: The mean squared error (MSE) is the average of the squared
+    #     differences between the predicted and actual values. It is used
+    #     for regression. MSE values are always positive, the better a model
+    #     is at predicting the actual values the smaller the MSE value. When
+    #     the data contains outliers, they tend to dominate the MSE which
+    #     might cause subpar prediction performance.
+    #
+    #   * `Accuracy`\: The ratio of the number correctly classified items to
+    #     the total number (correctly and incorrectly) classified. It is
+    #     used for binary and multiclass classification. Measures how close
+    #     the predicted class values are to the actual values. Accuracy
+    #     values vary between zero and one, one being perfect accuracy and
+    #     zero perfect inaccuracy.
+    #
+    #   * `F1`\: The F1 score is the harmonic mean of the precision and
+    #     recall. It is used for binary classification into classes
+    #     traditionally referred to as positive and negative. Predictions
+    #     are said to be true when they match their actual (correct) class;
+    #     false when they do not. Precision is the ratio of the true
+    #     positive predictions to all positive predictions (including the
+    #     false positives) in a data set and measures the quality of the
+    #     prediction when it predicts the positive class. Recall (or
+    #     sensitivity) is the ratio of the true positive predictions to all
+    #     actual positive instances and measures how completely a model
+    #     predicts the actual class members in a data set. The standard F1
+    #     score weighs precision and recall equally. But which metric is
+    #     paramount typically depends on specific aspects of a problem. F1
+    #     scores vary between zero and one, one being the best possible
+    #     performance and zero the worst.
+    #
+    #   * `AUC`\: The area under the curve (AUC) metric is used to compare
+    #     and evaluate binary classification by algorithms such as logistic
+    #     regression that return probabilities. A threshold is needed to map
+    #     the probabilities into classifications. The relevant curve is the
+    #     receiver operating characteristic curve that plots the true
+    #     positive rate (TPR) of predictions (or recall) against the false
+    #     positive rate (FPR) as a function of the threshold value, above
+    #     which a prediction is considered positive. Increasing the
+    #     threshold results in fewer false positives but more false
+    #     negatives. AUC is the area under this receiver operating
+    #     characteristic curve and so provides an aggregated measure of the
+    #     model performance across all possible classification thresholds.
+    #     The AUC score can also be interpreted as the probability that a
+    #     randomly selected positive data point is more likely to be
+    #     predicted positive than a randomly selected negative example. AUC
+    #     scores vary between zero and one, one being perfect accuracy and
+    #     one half not better than a random classifier. Values less that one
+    #     half predict worse than a random predictor and such consistently
+    #     bad predictors can be inverted to obtain better than random
+    #     predictors.
+    #
+    #   * `F1macro`\: The F1macro score applies F1 scoring to multiclass
+    #     classification. In this context, you have multiple classes to
+    #     predict. You just calculate the precision and recall for each
+    #     class as you did for the positive class in binary classification.
+    #     Then used these values to calculate the F1 score for each class
+    #     and average them to obtain the F1macro score. F1macro scores vary
+    #     between zero and one, one being the best possible performance and
+    #     zero the worst.
+    #
+    #   If you do not specify a metric explicitly, the default behavior is
+    #   to automatically use:
+    #
+    #   * `MSE`\: for regression.
+    #
+    #   * `F1`\: for binary classification
+    #
+    #   * `Accuracy`\: for multiclass classification.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/AutoMLJobObjective AWS API Documentation
@@ -1607,7 +1681,7 @@ module Aws::SageMaker
     #   @return [Time]
     #
     # @!attribute [rw] end_time
-    #   The end time.
+    #   The end time of an AutoML job.
     #   @return [Time]
     #
     # @!attribute [rw] last_modified_time
@@ -1615,7 +1689,7 @@ module Aws::SageMaker
     #   @return [Time]
     #
     # @!attribute [rw] failure_reason
-    #   The failure reason.
+    #   The failure reason of a job.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/AutoMLJobSummary AWS API Documentation
@@ -2249,6 +2323,9 @@ module Aws::SageMaker
     #       {
     #         container_hostname: "ContainerHostname",
     #         image: "ContainerImage",
+    #         image_config: {
+    #           repository_access_mode: "Platform", # required, accepts Platform, Vpc
+    #         },
     #         mode: "SingleModel", # accepts SingleModel, MultiModel
     #         model_data_url: "Url",
     #         environment: {
@@ -2291,6 +2368,18 @@ module Aws::SageMaker
     #
     #   [1]: https://docs.aws.amazon.com/sagemaker/latest/dg/your-algorithms.html
     #   @return [String]
+    #
+    # @!attribute [rw] image_config
+    #   Specifies whether the model container is in Amazon ECR or a private
+    #   Docker registry in your Amazon Virtual Private Cloud (VPC). For
+    #   information about storing containers in a private Docker registry,
+    #   see [Use a Private Docker Registry for Real-Time Inference
+    #   Containers][1]
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/sagemaker/latest/dg/your-algorithms-containers-inference-private.html
+    #   @return [Types::ImageConfig]
     #
     # @!attribute [rw] mode
     #   Whether the container hosts a single model or multiple models.
@@ -2338,6 +2427,7 @@ module Aws::SageMaker
     class ContainerDefinition < Struct.new(
       :container_hostname,
       :image,
+      :image_config,
       :mode,
       :model_data_url,
       :environment,
@@ -2783,7 +2873,7 @@ module Aws::SageMaker
     #         },
     #         problem_type: "BinaryClassification", # accepts BinaryClassification, MulticlassClassification, Regression
     #         auto_ml_job_objective: {
-    #           metric_name: "Accuracy", # required, accepts Accuracy, MSE, F1, F1macro
+    #           metric_name: "Accuracy", # required, accepts Accuracy, MSE, F1, F1macro, AUC
     #         },
     #         auto_ml_job_config: {
     #           completion_criteria: {
@@ -2811,7 +2901,7 @@ module Aws::SageMaker
     #       }
     #
     # @!attribute [rw] auto_ml_job_name
-    #   Identifies an AutoPilot job. Must be unique to your account and is
+    #   Identifies an Autopilot job. Must be unique to your account and is
     #   case-insensitive.
     #   @return [String]
     #
@@ -2832,9 +2922,11 @@ module Aws::SageMaker
     #   @return [String]
     #
     # @!attribute [rw] auto_ml_job_objective
-    #   Defines the job's objective. You provide a MetricName and AutoML
-    #   will infer minimize or maximize. If this is not provided, the most
-    #   commonly used ObjectiveMetric for problem type will be selected.
+    #   Defines the objective of a an AutoML job. You provide a
+    #   AutoMLJobObjective$MetricName and Autopilot infers whether to
+    #   minimize or maximize it. If a metric is not specified, the most
+    #   commonly used ObjectiveMetric for problem type is automaically
+    #   selected.
     #   @return [Types::AutoMLJobObjective]
     #
     # @!attribute [rw] auto_ml_job_config
@@ -2842,13 +2934,13 @@ module Aws::SageMaker
     #   @return [Types::AutoMLJobConfig]
     #
     # @!attribute [rw] role_arn
-    #   The ARN of the role that will be used to access the data.
+    #   The ARN of the role that is used to access the data.
     #   @return [String]
     #
     # @!attribute [rw] generate_candidate_definitions_only
-    #   This will generate possible candidates without training a model. A
-    #   candidate is a combination of data preprocessors, algorithms, and
-    #   algorithm parameter settings.
+    #   Generates possible candidates without training a model. A candidate
+    #   is a combination of data preprocessors, algorithms, and algorithm
+    #   parameter settings.
     #   @return [Boolean]
     #
     # @!attribute [rw] tags
@@ -4108,6 +4200,9 @@ module Aws::SageMaker
     #         primary_container: {
     #           container_hostname: "ContainerHostname",
     #           image: "ContainerImage",
+    #           image_config: {
+    #             repository_access_mode: "Platform", # required, accepts Platform, Vpc
+    #           },
     #           mode: "SingleModel", # accepts SingleModel, MultiModel
     #           model_data_url: "Url",
     #           environment: {
@@ -4119,6 +4214,9 @@ module Aws::SageMaker
     #           {
     #             container_hostname: "ContainerHostname",
     #             image: "ContainerImage",
+    #             image_config: {
+    #               repository_access_mode: "Platform", # required, accepts Platform, Vpc
+    #             },
     #             mode: "SingleModel", # accepts SingleModel, MultiModel
     #             model_data_url: "Url",
     #             environment: {
@@ -5844,14 +5942,17 @@ module Aws::SageMaker
     #
     # @!attribute [rw] oidc_config
     #   Use this parameter to configure a private workforce using your own
-    #   OIDC Identity Provider. Do not use `CognitoConfig` if you specify
-    #   values for `OidcConfig`.
+    #   OIDC Identity Provider.
+    #
+    #   Do not use `CognitoConfig` if you specify values for `OidcConfig`.
     #   @return [Types::OidcConfig]
     #
     # @!attribute [rw] source_ip_config
     #   A list of IP address ranges ([CIDRs][1]). Used to create an allow
-    #   list of IP addresses for a private workforce. For more information,
-    #   see .
+    #   list of IP addresses for a private workforce. Workers will only be
+    #   able to login to their worker portal from an IP address within this
+    #   range. By default, a workforce isn't restricted to specific IP
+    #   addresses.
     #
     #
     #
@@ -5932,11 +6033,25 @@ module Aws::SageMaker
     #
     # @!attribute [rw] member_definitions
     #   A list of `MemberDefinition` objects that contains objects that
-    #   identify the Amazon Cognito user pool that makes up the work team.
-    #   For more information, see [Amazon Cognito User Pools][1].
+    #   identify the workers that make up the work team.
     #
-    #   All of the `CognitoMemberDefinition` objects that make up the member
-    #   definition must have the same `ClientId` and `UserPool` values.
+    #   Workforces can be created using Amazon Cognito or your own OIDC
+    #   Identity Provider (IdP). For private workforces created using Amazon
+    #   Cognito use `CognitoMemberDefinition`. For workforces created using
+    #   your own OIDC identity provider (IdP) use `OidcMemberDefinition`. Do
+    #   not provide input for both of these parameters in a single request.
+    #
+    #   For workforces created using Amazon Cognito, private work teams
+    #   correspond to Amazon Cognito *user groups* within the user pool used
+    #   to create a workforce. All of the `CognitoMemberDefinition` objects
+    #   that make up the member definition must have the same `ClientId` and
+    #   `UserPool` values. To add a Amazon Cognito user group to an existing
+    #   worker pool, see [Adding groups to a User Pool](). For more
+    #   information about user pools, see [Amazon Cognito User Pools][1].
+    #
+    #   For workforces created using your own OIDC IdP, specify the user
+    #   groups that you want to include in your private work team in
+    #   `OidcMemberDefinition` by listing those groups in `Groups`.
     #
     #
     #
@@ -8841,7 +8956,7 @@ module Aws::SageMaker
     #   : * `MaxRuntimeExceeded` - The job stopped because it exceeded the
     #       maximum allowed runtime.
     #
-    #     * `MaxWaitTmeExceeded` - The job stopped because it exceeded the
+    #     * `MaxWaitTimeExceeded` - The job stopped because it exceeded the
     #       maximum allowed wait time.
     #
     #     * `Stopped` - The training job has stopped.
@@ -10210,18 +10325,19 @@ module Aws::SageMaker
       include Aws::Structure
     end
 
-    # The candidate result from a job.
+    # The best candidate result from an AutoML training job.
     #
     # @!attribute [rw] type
-    #   The metric type used.
+    #   The type of metric with the best result.
     #   @return [String]
     #
     # @!attribute [rw] metric_name
-    #   The name of the metric.
+    #   The name of the metric with the best result. For a description of
+    #   the possible objective metrics, see AutoMLJobObjective$MetricName.
     #   @return [String]
     #
     # @!attribute [rw] value
-    #   The value of the metric.
+    #   The value of the metric with the best result.
     #   @return [Float]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/FinalAutoMLJobObjectiveMetric AWS API Documentation
@@ -12362,6 +12478,33 @@ module Aws::SageMaker
       include Aws::Structure
     end
 
+    # Specifies whether the model container is in Amazon ECR or a private
+    # Docker registry in your Amazon Virtual Private Cloud (VPC).
+    #
+    # @note When making an API call, you may pass ImageConfig
+    #   data as a hash:
+    #
+    #       {
+    #         repository_access_mode: "Platform", # required, accepts Platform, Vpc
+    #       }
+    #
+    # @!attribute [rw] repository_access_mode
+    #   Set this to one of the following values:
+    #
+    #   * `Platform` - The model image is hosted in Amazon ECR.
+    #
+    #   * `VPC` - The model image is hosted in a private Docker registry in
+    #     your VPC.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/ImageConfig AWS API Documentation
+    #
+    class ImageConfig < Struct.new(
+      :repository_access_mode)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Defines how to perform inference generation after a training job is
     # run.
     #
@@ -13366,8 +13509,8 @@ module Aws::SageMaker
     #   @return [Integer]
     #
     # @!attribute [rw] next_token
-    #   If the previous response was truncated, you will receive this token.
-    #   Use it in your next request to receive the next set of results.
+    #   If the previous response was truncated, you receive this token. Use
+    #   it in your next request to receive the next set of results.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/ListAutoMLJobsRequest AWS API Documentation
@@ -13392,8 +13535,8 @@ module Aws::SageMaker
     #   @return [Array<Types::AutoMLJobSummary>]
     #
     # @!attribute [rw] next_token
-    #   If the previous response was truncated, you will receive this token.
-    #   Use it in your next request to receive the next set of results.
+    #   If the previous response was truncated, you receive this token. Use
+    #   it in your next request to receive the next set of results.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/ListAutoMLJobsResponse AWS API Documentation
@@ -13445,8 +13588,8 @@ module Aws::SageMaker
     #   @return [Integer]
     #
     # @!attribute [rw] next_token
-    #   If the previous response was truncated, you will receive this token.
-    #   Use it in your next request to receive the next set of results.
+    #   If the previous response was truncated, you receive this token. Use
+    #   it in your next request to receive the next set of results.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/ListCandidatesForAutoMLJobRequest AWS API Documentation
@@ -13468,8 +13611,8 @@ module Aws::SageMaker
     #   @return [Array<Types::AutoMLCandidate>]
     #
     # @!attribute [rw] next_token
-    #   If the previous response was truncated, you will receive this token.
-    #   Use it in your next request to receive the next set of results.
+    #   If the previous response was truncated, you receive this token. Use
+    #   it in your next request to receive the next set of results.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/ListCandidatesForAutoMLJobResponse AWS API Documentation
@@ -15879,7 +16022,8 @@ module Aws::SageMaker
       include Aws::Structure
     end
 
-    # Defines the Amazon Cognito user group that is part of a work team.
+    # Defines an Amazon Cognito or your own OIDC IdP user group that is part
+    # of a work team.
     #
     # @note When making an API call, you may pass MemberDefinition
     #   data as a hash:
@@ -17364,7 +17508,7 @@ module Aws::SageMaker
       include Aws::Structure
     end
 
-    # Your Amazon Cognito workforce configuration.
+    # Your OIDC IdP workforce configuration.
     #
     # @!attribute [rw] client_id
     #   The OIDC IdP client ID used to configure your private workforce.
@@ -17413,7 +17557,7 @@ module Aws::SageMaker
       include Aws::Structure
     end
 
-    # A list user groups that exist in your OIDC Identity Provider (IdP).
+    # A list of user groups that exist in your OIDC Identity Provider (IdP).
     # One to ten groups can be used to create a single private work team.
     # When you add a user group to the list of `Groups`, you can add that
     # user group to one or more private work teams. If you add a user group
@@ -18813,7 +18957,8 @@ module Aws::SageMaker
     # The resolved attributes.
     #
     # @!attribute [rw] auto_ml_job_objective
-    #   Applies a metric to minimize or maximize for the job's objective.
+    #   Specifies a metric to minimize or maximize as the objective of a
+    #   job.
     #   @return [Types::AutoMLJobObjective]
     #
     # @!attribute [rw] problem_type
@@ -19735,7 +19880,9 @@ module Aws::SageMaker
     end
 
     # A list of IP address ranges ([CIDRs][1]). Used to create an allow list
-    # of IP addresses for a private workforce. For more information, see .
+    # of IP addresses for a private workforce. Workers will only be able to
+    # login to their worker portal from an IP address within this range. By
+    # default, a workforce isn't restricted to specific IP addresses.
     #
     #
     #
@@ -20930,7 +21077,12 @@ module Aws::SageMaker
     #   request payloads contain the entire contents of an input object. Set
     #   the value of this parameter to `Line` to split records on a newline
     #   character boundary. `SplitType` also supports a number of
-    #   record-oriented binary data formats.
+    #   record-oriented binary data formats. Currently, the supported record
+    #   formats are:
+    #
+    #   * RecordIO
+    #
+    #   * TFRecord
     #
     #   When splitting is enabled, the size of a mini-batch depends on the
     #   values of the `BatchStrategy` and `MaxPayloadInMB` parameters. When
@@ -22063,7 +22215,7 @@ module Aws::SageMaker
     #       }
     #
     # @!attribute [rw] target_objective_metric_value
-    #   The objective metric's value.
+    #   The value of the objective metric.
     #   @return [Float]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/TuningJobCompletionCriteria AWS API Documentation
@@ -23050,9 +23202,8 @@ module Aws::SageMaker
     #       }
     #
     # @!attribute [rw] workforce_name
-    #   The name of the private workforce whose access you want to restrict.
-    #   `WorkforceName` is automatically set to `default` when a workforce
-    #   is created and cannot be modified.
+    #   The name of the private workforce that you want to update. You can
+    #   find your workforce name by using the operation.
     #   @return [String]
     #
     # @!attribute [rw] source_ip_config
@@ -23082,12 +23233,11 @@ module Aws::SageMaker
     end
 
     # @!attribute [rw] workforce
-    #   A single private workforce, which is automatically created when you
-    #   create your first private work team. You can create one private work
-    #   force in each AWS Region. By default, any workforce-related API
-    #   operation used in a specific region will apply to the workforce
-    #   created in that region. To learn how to create a private workforce,
-    #   see [Create a Private Workforce][1].
+    #   A single private workforce. You can create one private work force in
+    #   each AWS Region. By default, any workforce-related API operation
+    #   used in a specific region will apply to the workforce created in
+    #   that region. To learn how to create a private workforce, see [Create
+    #   a Private Workforce][1].
     #
     #
     #
@@ -23130,8 +23280,35 @@ module Aws::SageMaker
     #   @return [String]
     #
     # @!attribute [rw] member_definitions
-    #   A list of `MemberDefinition` objects that contain the updated work
-    #   team members.
+    #   A list of `MemberDefinition` objects that contains objects that
+    #   identify the workers that make up the work team.
+    #
+    #   Workforces can be created using Amazon Cognito or your own OIDC
+    #   Identity Provider (IdP). For private workforces created using Amazon
+    #   Cognito use `CognitoMemberDefinition`. For workforces created using
+    #   your own OIDC identity provider (IdP) use `OidcMemberDefinition`.
+    #   You should not provide input for both of these parameters in a
+    #   single request.
+    #
+    #   For workforces created using Amazon Cognito, private work teams
+    #   correspond to Amazon Cognito *user groups* within the user pool used
+    #   to create a workforce. All of the `CognitoMemberDefinition` objects
+    #   that make up the member definition must have the same `ClientId` and
+    #   `UserPool` values. To add a Amazon Cognito user group to an existing
+    #   worker pool, see [Adding groups to a User Pool](). For more
+    #   information about user pools, see [Amazon Cognito User Pools][1].
+    #
+    #   For workforces created using your own OIDC IdP, specify the user
+    #   groups that you want to include in your private work team in
+    #   `OidcMemberDefinition` by listing those groups in `Groups`. Be aware
+    #   that user groups that are already in the work team must also be
+    #   listed in `Groups` when you make this request to remain on the work
+    #   team. If you do not include these user groups, they will no longer
+    #   be associated with the work team you update.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/cognito/latest/developerguide/cognito-user-identity-pools.html
     #   @return [Array<Types::MemberDefinition>]
     #
     # @!attribute [rw] description
@@ -23407,7 +23584,8 @@ module Aws::SageMaker
     #
     # @!attribute [rw] source_ip_config
     #   A list of one to ten IP address ranges ([CIDRs][1]) to be added to
-    #   the workforce allow list.
+    #   the workforce allow list. By default, a workforce isn't restricted
+    #   to specific IP addresses.
     #
     #
     #
@@ -23459,7 +23637,13 @@ module Aws::SageMaker
     #   @return [String]
     #
     # @!attribute [rw] member_definitions
-    #   The Amazon Cognito user groups that make up the work team.
+    #   A list of `MemberDefinition` objects that contains objects that
+    #   identify the workers that make up the work team.
+    #
+    #   Workforces can be created using Amazon Cognito or your own OIDC
+    #   Identity Provider (IdP). For private workforces created using Amazon
+    #   Cognito use `CognitoMemberDefinition`. For workforces created using
+    #   your own OIDC identity provider (IdP) use `OidcMemberDefinition`.
     #   @return [Array<Types::MemberDefinition>]
     #
     # @!attribute [rw] workteam_arn

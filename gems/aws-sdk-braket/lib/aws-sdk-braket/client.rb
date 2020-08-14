@@ -438,8 +438,8 @@ module Aws::Braket
     #   resp.device_arn #=> String
     #   resp.device_capabilities #=> String
     #   resp.device_name #=> String
-    #   resp.device_status #=> String, one of "QPU", "SIMULATOR"
-    #   resp.device_type #=> String, one of "OFFLINE", "ONLINE"
+    #   resp.device_status #=> String, one of "OFFLINE", "ONLINE"
+    #   resp.device_type #=> String, one of "QPU", "SIMULATOR"
     #   resp.provider_name #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/braket-2019-09-01/GetDevice AWS API Documentation
@@ -535,8 +535,8 @@ module Aws::Braket
     #   resp.devices #=> Array
     #   resp.devices[0].device_arn #=> String
     #   resp.devices[0].device_name #=> String
-    #   resp.devices[0].device_status #=> String, one of "QPU", "SIMULATOR"
-    #   resp.devices[0].device_type #=> String, one of "OFFLINE", "ONLINE"
+    #   resp.devices[0].device_status #=> String, one of "OFFLINE", "ONLINE"
+    #   resp.devices[0].device_type #=> String, one of "QPU", "SIMULATOR"
     #   resp.devices[0].provider_name #=> String
     #   resp.next_token #=> String
     #
@@ -618,7 +618,7 @@ module Aws::Braket
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-braket'
-      context[:gem_version] = '1.0.0'
+      context[:gem_version] = '1.1.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

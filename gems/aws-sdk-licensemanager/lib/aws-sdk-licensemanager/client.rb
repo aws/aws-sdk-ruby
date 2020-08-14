@@ -328,9 +328,9 @@ module Aws::LicenseManager
     # agreement that can be consumed and enforced by License Manager.
     # Components include specifications for the license type (licensing by
     # instance, socket, CPU, or vCPU), allowed tenancy (shared tenancy,
-    # Dedicated Instance, Dedicated Host, or all of these), host affinity
-    # (how long a VM must be associated with a host), and the number of
-    # licenses purchased and used.
+    # Dedicated Instance, Dedicated Host, or all of these), license affinity
+    # to host (how long a license must be associated with a host), and the
+    # number of licenses purchased and used.
     #
     # @option params [required, String] :name
     #   Name of the license configuration.
@@ -350,20 +350,26 @@ module Aws::LicenseManager
     #
     # @option params [Array<String>] :license_rules
     #   License rules. The syntax is #name=value (for example,
-    #   #allowedTenancy=EC2-DedicatedHost). Available rules vary by dimension.
+    #   #allowedTenancy=EC2-DedicatedHost). The available rules vary by
+    #   dimension, as follows.
     #
-    #   * `Cores` dimension: `allowedTenancy` \| `maximumCores` \|
-    #     `minimumCores`
+    #   * `Cores` dimension: `allowedTenancy` \| `licenseAffinityToHost` \|
+    #     `maximumCores` \| `minimumCores`
     #
     #   * `Instances` dimension: `allowedTenancy` \| `maximumCores` \|
     #     `minimumCores` \| `maximumSockets` \| `minimumSockets` \|
     #     `maximumVcpus` \| `minimumVcpus`
     #
-    #   * `Sockets` dimension: `allowedTenancy` \| `maximumSockets` \|
-    #     `minimumSockets`
+    #   * `Sockets` dimension: `allowedTenancy` \| `licenseAffinityToHost` \|
+    #     `maximumSockets` \| `minimumSockets`
     #
     #   * `vCPUs` dimension: `allowedTenancy` \| `honorVcpuOptimization` \|
     #     `maximumVcpus` \| `minimumVcpus`
+    #
+    #   The unit for `licenseAffinityToHost` is days and the range is 1 to
+    #   180. The possible values for `allowedTenancy` are `EC2-Default`,
+    #   `EC2-DedicatedHost`, and `EC2-DedicatedInstance`. The possible values
+    #   for `honorVcpuOptimization` are `True` and `False`.
     #
     # @option params [Array<Types::Tag>] :tags
     #   Tags to add to the license configuration.
@@ -649,8 +655,9 @@ module Aws::LicenseManager
     #   Filters to scope the results. The following filters and logical
     #   operators are supported:
     #
-    #   * `licenseCountingType` - The dimension on which licenses are counted
-    #     (vCPU). Logical operators are `EQUALS` \| `NOT_EQUALS`.
+    #   * `licenseCountingType` - The dimension on which licenses are counted.
+    #     Possible values are `vCPU` \| `Instance` \| `Core` \| `Socket`.
+    #     Logical operators are `EQUALS` \| `NOT_EQUALS`.
     #
     #   * `enforceLicenseCount` - A Boolean value that indicates whether hard
     #     license enforcement is used. Logical operators are `EQUALS` \|
@@ -983,14 +990,6 @@ module Aws::LicenseManager
 
     # Modifies the attributes of an existing license configuration.
     #
-    # A license configuration is an abstraction of a customer license
-    # agreement that can be consumed and enforced by License Manager.
-    # Components include specifications for the license type (licensing by
-    # instance, socket, CPU, or vCPU), allowed tenancy (shared tenancy,
-    # Dedicated Instance, Dedicated Host, or all of these), host affinity
-    # (how long a VM must be associated with a host), and the number of
-    # licenses purchased and used.
-    #
     # @option params [required, String] :license_configuration_arn
     #   Amazon Resource Name (ARN) of the license configuration.
     #
@@ -998,7 +997,8 @@ module Aws::LicenseManager
     #   New status of the license configuration.
     #
     # @option params [Array<String>] :license_rules
-    #   New license rules.
+    #   New license rule. The only rule that you can add after you create a
+    #   license configuration is licenseAffinityToHost.
     #
     # @option params [Integer] :license_count
     #   New number of licenses managed by the license configuration.
@@ -1146,7 +1146,7 @@ module Aws::LicenseManager
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-licensemanager'
-      context[:gem_version] = '1.16.0'
+      context[:gem_version] = '1.17.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 
