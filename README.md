@@ -257,6 +257,24 @@ A CHANGELOG can be found at each gem's root path (i.e. `aws-sdk-s3` can be found
 at `gems/aws-sdk-s3/CHANGELOG.md`). The CHANGELOG is also accessible via the
 RubyGems.org page under "LINKS" section.
 
+## Getting Help
+
+Please use any of these resources for getting help:
+
+* Ask a question on StackOverflow and [tag it](http://stackoverflow.com/questions/tagged/aws-sdk-ruby) with `aws-sdk-ruby`.
+* Join the AWS SDK for Ruby [Gitter Channel](https://gitter.im/aws/aws-sdk-ruby).
+* Open a support ticket with [AWS Support](https://console.aws.amazon.com/support/home).
+
+## Opening Issues
+
+If you encounter a bug or have a feature request, we would like to hear about
+it. Search the existing issues and try to make sure your problem doesn’t already
+exist before opening a new issue.
+
+The GitHub issues are intended for bug reports and feature requests. For help
+and questions with using `aws-sdk-ruby` please make use of the resources listed
+in the Getting Help section.
+
 ## Supported Services
 
 | Service Name                                          | Service Module                       | gem_name                                | API Version |
@@ -489,24 +507,6 @@ RubyGems.org page under "LINKS" section.
 | Schemas                                               | Aws::Schemas                         | aws-sdk-schemas                         | 2019-12-02  |
 | Service Quotas                                        | Aws::ServiceQuotas                   | aws-sdk-servicequotas                   | 2019-06-24  |
 | Synthetics                                            | Aws::Synthetics                      | aws-sdk-synthetics                      | 2017-10-11  |
-
-## Getting Help
-
-Please use any of these resources for getting help:
-
-* Ask a question on StackOverflow and [tag it](http://stackoverflow.com/questions/tagged/aws-sdk-ruby) with `aws-sdk-ruby`.
-* Join the AWS SDK for Ruby [Gitter Channel](https://gitter.im/aws/aws-sdk-ruby).
-* Open a support ticket with [AWS Support](https://console.aws.amazon.com/support/home).
-
-## Opening Issues
-
-If you encounter a bug or have a feature request, we would like to hear about
-it. Search the existing issues and try to make sure your problem doesn’t already
-exist before opening a new issue.
-
-The GitHub issues are intended for bug reports and feature requests. For help
-and questions with using `aws-sdk-ruby` please make use of the resources listed
-in the Getting Help section.
 
 ## License
 
