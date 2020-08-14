@@ -14,6 +14,8 @@ rvm:
   - 2.3
   - 2.4
   - 2.5
+  - 2.6
+  - 2.7
   - jruby-9.1
   - jruby-9.2
 
@@ -23,7 +25,8 @@ env:
   - PURE_RUBY=1
   - KITCHEN_SINK=1
 
-script: bundle exec rake
+# Disable Ruby warnings (Struct::Tms deprecation for 2.6+)
+script: RUBYOPT='-W0' bundle exec rake
 
 bundler_args: --without docs release repl
 
@@ -38,11 +41,3 @@ matrix:
       env: OLD_OJ=1
     - rvm: 2.3
       env: OLD_OX=1
-
-notifications:
-  webhooks:
-    urls:
-      - "https://webhooks.gitter.im/e/4442efd380ec811746d9"
-    on_success: change
-    on_failure: always
-    on_start: false
