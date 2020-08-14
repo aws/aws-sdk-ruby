@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.45.0 (2020-08-14)
+------------------
+
+* Feature - Adds support for the Desktop View feature
+
 1.44.0 (2020-07-02)
 ------------------
 

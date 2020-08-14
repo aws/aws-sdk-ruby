@@ -379,7 +379,7 @@ module Aws::AppStream
     #   resp.errors[0].user_stack_association.user_name #=> String
     #   resp.errors[0].user_stack_association.authentication_type #=> String, one of "API", "SAML", "USERPOOL"
     #   resp.errors[0].user_stack_association.send_email_notification #=> Boolean
-    #   resp.errors[0].error_code #=> String, one of "STACK_NOT_FOUND", "USER_NAME_NOT_FOUND", "INTERNAL_ERROR"
+    #   resp.errors[0].error_code #=> String, one of "STACK_NOT_FOUND", "USER_NAME_NOT_FOUND", "DIRECTORY_NOT_FOUND", "INTERNAL_ERROR"
     #   resp.errors[0].error_message #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/BatchAssociateUserStack AWS API Documentation
@@ -420,7 +420,7 @@ module Aws::AppStream
     #   resp.errors[0].user_stack_association.user_name #=> String
     #   resp.errors[0].user_stack_association.authentication_type #=> String, one of "API", "SAML", "USERPOOL"
     #   resp.errors[0].user_stack_association.send_email_notification #=> Boolean
-    #   resp.errors[0].error_code #=> String, one of "STACK_NOT_FOUND", "USER_NAME_NOT_FOUND", "INTERNAL_ERROR"
+    #   resp.errors[0].error_code #=> String, one of "STACK_NOT_FOUND", "USER_NAME_NOT_FOUND", "DIRECTORY_NOT_FOUND", "INTERNAL_ERROR"
     #   resp.errors[0].error_message #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/BatchDisassociateUserStack AWS API Documentation
@@ -490,7 +490,7 @@ module Aws::AppStream
     #   The distinguished names of the organizational units for computer
     #   accounts.
     #
-    # @option params [required, Types::ServiceAccountCredentials] :service_account_credentials
+    # @option params [Types::ServiceAccountCredentials] :service_account_credentials
     #   The credentials for the service account used by the fleet or image
     #   builder to connect to the directory.
     #
@@ -503,7 +503,7 @@ module Aws::AppStream
     #   resp = client.create_directory_config({
     #     directory_name: "DirectoryName", # required
     #     organizational_unit_distinguished_names: ["OrganizationalUnitDistinguishedName"], # required
-    #     service_account_credentials: { # required
+    #     service_account_credentials: {
     #       account_name: "AccountName", # required
     #       account_password: "AccountPassword", # required
     #     },
@@ -567,6 +567,18 @@ module Aws::AppStream
     #
     #   * stream.memory.8xlarge
     #
+    #   * stream.memory.z1d.large
+    #
+    #   * stream.memory.z1d.xlarge
+    #
+    #   * stream.memory.z1d.2xlarge
+    #
+    #   * stream.memory.z1d.3xlarge
+    #
+    #   * stream.memory.z1d.6xlarge
+    #
+    #   * stream.memory.z1d.12xlarge
+    #
     #   * stream.graphics-design.large
     #
     #   * stream.graphics-design.xlarge
@@ -576,6 +588,18 @@ module Aws::AppStream
     #   * stream.graphics-design.4xlarge
     #
     #   * stream.graphics-desktop.2xlarge
+    #
+    #   * stream.graphics.g4dn.xlarge
+    #
+    #   * stream.graphics.g4dn.2xlarge
+    #
+    #   * stream.graphics.g4dn.4xlarge
+    #
+    #   * stream.graphics.g4dn.8xlarge
+    #
+    #   * stream.graphics.g4dn.12xlarge
+    #
+    #   * stream.graphics.g4dn.16xlarge
     #
     #   * stream.graphics-pro.4xlarge
     #
@@ -689,7 +713,7 @@ module Aws::AppStream
     #   Service (STS) `AssumeRole` API operation and passes the ARN of the
     #   role to use. The operation creates a new session with temporary
     #   credentials. AppStream 2.0 retrieves the temporary credentials and
-    #   creates the **AppStream\_Machine\_Role** credential profile on the
+    #   creates the **appstream\_machine\_role** credential profile on the
     #   instance.
     #
     #   For more information, see [Using an IAM Role to Grant Permissions to
@@ -699,6 +723,14 @@ module Aws::AppStream
     #
     #
     #   [1]: https://docs.aws.amazon.com/appstream2/latest/developerguide/using-iam-roles-to-grant-permissions-to-applications-scripts-streaming-instances.html
+    #
+    # @option params [String] :stream_view
+    #   The AppStream 2.0 view that is displayed to your users when they
+    #   stream from the fleet. When `APP` is specified, only the windows of
+    #   applications opened by users display. When `DESKTOP` is specified, the
+    #   standard desktop that is provided by the operating system displays.
+    #
+    #   The default value is `APP`.
     #
     # @return [Types::CreateFleetResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -733,6 +765,7 @@ module Aws::AppStream
     #     },
     #     idle_disconnect_timeout_in_seconds: 1,
     #     iam_role_arn: "Arn",
+    #     stream_view: "APP", # accepts APP, DESKTOP
     #   })
     #
     # @example Response structure
@@ -765,6 +798,7 @@ module Aws::AppStream
     #   resp.fleet.domain_join_info.organizational_unit_distinguished_name #=> String
     #   resp.fleet.idle_disconnect_timeout_in_seconds #=> Integer
     #   resp.fleet.iam_role_arn #=> String
+    #   resp.fleet.stream_view #=> String, one of "APP", "DESKTOP"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/CreateFleet AWS API Documentation
     #
@@ -818,6 +852,18 @@ module Aws::AppStream
     #
     #   * stream.memory.8xlarge
     #
+    #   * stream.memory.z1d.large
+    #
+    #   * stream.memory.z1d.xlarge
+    #
+    #   * stream.memory.z1d.2xlarge
+    #
+    #   * stream.memory.z1d.3xlarge
+    #
+    #   * stream.memory.z1d.6xlarge
+    #
+    #   * stream.memory.z1d.12xlarge
+    #
     #   * stream.graphics-design.large
     #
     #   * stream.graphics-design.xlarge
@@ -827,6 +873,18 @@ module Aws::AppStream
     #   * stream.graphics-design.4xlarge
     #
     #   * stream.graphics-desktop.2xlarge
+    #
+    #   * stream.graphics.g4dn.xlarge
+    #
+    #   * stream.graphics.g4dn.2xlarge
+    #
+    #   * stream.graphics.g4dn.4xlarge
+    #
+    #   * stream.graphics.g4dn.8xlarge
+    #
+    #   * stream.graphics.g4dn.12xlarge
+    #
+    #   * stream.graphics.g4dn.16xlarge
     #
     #   * stream.graphics-pro.4xlarge
     #
@@ -850,7 +908,7 @@ module Aws::AppStream
     #   Token Service (STS) `AssumeRole` API operation and passes the ARN of
     #   the role to use. The operation creates a new session with temporary
     #   credentials. AppStream 2.0 retrieves the temporary credentials and
-    #   creates the **AppStream\_Machine\_Role** credential profile on the
+    #   creates the **appstream\_machine\_role** credential profile on the
     #   instance.
     #
     #   For more information, see [Using an IAM Role to Grant Permissions to
@@ -1647,6 +1705,7 @@ module Aws::AppStream
     #   resp.fleets[0].domain_join_info.organizational_unit_distinguished_name #=> String
     #   resp.fleets[0].idle_disconnect_timeout_in_seconds #=> Integer
     #   resp.fleets[0].iam_role_arn #=> String
+    #   resp.fleets[0].stream_view #=> String, one of "APP", "DESKTOP"
     #   resp.next_token #=> String
     #
     #
@@ -1877,7 +1936,8 @@ module Aws::AppStream
     #   The name of the fleet. This value is case-sensitive.
     #
     # @option params [String] :user_id
-    #   The user identifier.
+    #   The user identifier (ID). If you specify a user ID, you must also
+    #   specify the authentication type.
     #
     # @option params [String] :next_token
     #   The pagination token to use to retrieve the next page of results for
@@ -2719,6 +2779,18 @@ module Aws::AppStream
     #
     #   * stream.memory.8xlarge
     #
+    #   * stream.memory.z1d.large
+    #
+    #   * stream.memory.z1d.xlarge
+    #
+    #   * stream.memory.z1d.2xlarge
+    #
+    #   * stream.memory.z1d.3xlarge
+    #
+    #   * stream.memory.z1d.6xlarge
+    #
+    #   * stream.memory.z1d.12xlarge
+    #
     #   * stream.graphics-design.large
     #
     #   * stream.graphics-design.xlarge
@@ -2728,6 +2800,18 @@ module Aws::AppStream
     #   * stream.graphics-design.4xlarge
     #
     #   * stream.graphics-desktop.2xlarge
+    #
+    #   * stream.graphics.g4dn.xlarge
+    #
+    #   * stream.graphics.g4dn.2xlarge
+    #
+    #   * stream.graphics.g4dn.4xlarge
+    #
+    #   * stream.graphics.g4dn.8xlarge
+    #
+    #   * stream.graphics.g4dn.12xlarge
+    #
+    #   * stream.graphics.g4dn.16xlarge
     #
     #   * stream.graphics-pro.4xlarge
     #
@@ -2812,7 +2896,7 @@ module Aws::AppStream
     #   Service (STS) `AssumeRole` API operation and passes the ARN of the
     #   role to use. The operation creates a new session with temporary
     #   credentials. AppStream 2.0 retrieves the temporary credentials and
-    #   creates the **AppStream\_Machine\_Role** credential profile on the
+    #   creates the **appstream\_machine\_role** credential profile on the
     #   instance.
     #
     #   For more information, see [Using an IAM Role to Grant Permissions to
@@ -2822,6 +2906,14 @@ module Aws::AppStream
     #
     #
     #   [1]: https://docs.aws.amazon.com/appstream2/latest/developerguide/using-iam-roles-to-grant-permissions-to-applications-scripts-streaming-instances.html
+    #
+    # @option params [String] :stream_view
+    #   The AppStream 2.0 view that is displayed to your users when they
+    #   stream from the fleet. When `APP` is specified, only the windows of
+    #   applications opened by users display. When `DESKTOP` is specified, the
+    #   standard desktop that is provided by the operating system displays.
+    #
+    #   The default value is `APP`.
     #
     # @return [Types::UpdateFleetResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -2854,6 +2946,7 @@ module Aws::AppStream
     #     idle_disconnect_timeout_in_seconds: 1,
     #     attributes_to_delete: ["VPC_CONFIGURATION"], # accepts VPC_CONFIGURATION, VPC_CONFIGURATION_SECURITY_GROUP_IDS, DOMAIN_JOIN_INFO, IAM_ROLE_ARN
     #     iam_role_arn: "Arn",
+    #     stream_view: "APP", # accepts APP, DESKTOP
     #   })
     #
     # @example Response structure
@@ -2886,6 +2979,7 @@ module Aws::AppStream
     #   resp.fleet.domain_join_info.organizational_unit_distinguished_name #=> String
     #   resp.fleet.idle_disconnect_timeout_in_seconds #=> Integer
     #   resp.fleet.iam_role_arn #=> String
+    #   resp.fleet.stream_view #=> String, one of "APP", "DESKTOP"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/UpdateFleet AWS API Documentation
     #
@@ -3070,7 +3164,7 @@ module Aws::AppStream
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-appstream'
-      context[:gem_version] = '1.44.0'
+      context[:gem_version] = '1.45.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

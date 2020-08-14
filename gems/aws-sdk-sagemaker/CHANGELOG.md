@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.65.0 (2020-08-14)
+------------------
+
+* Feature - Amazon SageMaker now supports 1) creating real-time inference endpoints using model container images from Docker registries in customers' VPC 2) AUC(Area under the curve) as AutoPilot objective metric
+
 1.64.0 (2020-07-24)
 ------------------
 

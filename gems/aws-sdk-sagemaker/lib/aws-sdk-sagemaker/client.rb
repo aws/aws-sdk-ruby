@@ -713,15 +713,14 @@ module Aws::SageMaker
       req.send_request(options)
     end
 
-    # Creates an AutoPilot job.
+    # Creates an Autopilot job.
     #
-    # After you run an AutoPilot job, you can find the best performing model
-    # by calling , and then deploy that model by following the steps
-    # described in [Step 6.1: Deploy the Model to Amazon SageMaker Hosting
-    # Services][1].
+    # Find the best performing model after you run an Autopilot job by
+    # calling . Deploy that model by following the steps described in [Step
+    # 6.1: Deploy the Model to Amazon SageMaker Hosting Services][1].
     #
-    # For information about how to use AutoPilot, see [Use AutoPilot to
-    # Automate Model Development][2].
+    # For information about how to use Autopilot, see [ Automate Model
+    # Development with Amazon SageMaker Autopilot][2].
     #
     #
     #
@@ -729,7 +728,7 @@ module Aws::SageMaker
     # [2]: https://docs.aws.amazon.com/sagemaker/latest/dg/autopilot-automate-model-development.html
     #
     # @option params [required, String] :auto_ml_job_name
-    #   Identifies an AutoPilot job. Must be unique to your account and is
+    #   Identifies an Autopilot job. Must be unique to your account and is
     #   case-insensitive.
     #
     # @option params [required, Array<Types::AutoMLChannel>] :input_data_config
@@ -746,20 +745,21 @@ module Aws::SageMaker
     #   MulticlassClassification, and Regression.
     #
     # @option params [Types::AutoMLJobObjective] :auto_ml_job_objective
-    #   Defines the job's objective. You provide a MetricName and AutoML will
-    #   infer minimize or maximize. If this is not provided, the most commonly
-    #   used ObjectiveMetric for problem type will be selected.
+    #   Defines the objective of a an AutoML job. You provide a
+    #   AutoMLJobObjective$MetricName and Autopilot infers whether to minimize
+    #   or maximize it. If a metric is not specified, the most commonly used
+    #   ObjectiveMetric for problem type is automaically selected.
     #
     # @option params [Types::AutoMLJobConfig] :auto_ml_job_config
     #   Contains CompletionCriteria and SecurityConfig.
     #
     # @option params [required, String] :role_arn
-    #   The ARN of the role that will be used to access the data.
+    #   The ARN of the role that is used to access the data.
     #
     # @option params [Boolean] :generate_candidate_definitions_only
-    #   This will generate possible candidates without training a model. A
-    #   candidate is a combination of data preprocessors, algorithms, and
-    #   algorithm parameter settings.
+    #   Generates possible candidates without training a model. A candidate is
+    #   a combination of data preprocessors, algorithms, and algorithm
+    #   parameter settings.
     #
     # @option params [Array<Types::Tag>] :tags
     #   Each tag consists of a key and an optional value. Tag keys must be
@@ -791,7 +791,7 @@ module Aws::SageMaker
     #     },
     #     problem_type: "BinaryClassification", # accepts BinaryClassification, MulticlassClassification, Regression
     #     auto_ml_job_objective: {
-    #       metric_name: "Accuracy", # required, accepts Accuracy, MSE, F1, F1macro
+    #       metric_name: "Accuracy", # required, accepts Accuracy, MSE, F1, F1macro, AUC
     #     },
     #     auto_ml_job_config: {
     #       completion_criteria: {
@@ -2247,6 +2247,9 @@ module Aws::SageMaker
     #     primary_container: {
     #       container_hostname: "ContainerHostname",
     #       image: "ContainerImage",
+    #       image_config: {
+    #         repository_access_mode: "Platform", # required, accepts Platform, Vpc
+    #       },
     #       mode: "SingleModel", # accepts SingleModel, MultiModel
     #       model_data_url: "Url",
     #       environment: {
@@ -2258,6 +2261,9 @@ module Aws::SageMaker
     #       {
     #         container_hostname: "ContainerHostname",
     #         image: "ContainerImage",
+    #         image_config: {
+    #           repository_access_mode: "Platform", # required, accepts Platform, Vpc
+    #         },
     #         mode: "SingleModel", # accepts SingleModel, MultiModel
     #         model_data_url: "Url",
     #         environment: {
@@ -3902,11 +3908,12 @@ module Aws::SageMaker
 
     # Use this operation to create a workforce. This operation will return
     # an error if a workforce already exists in the AWS Region that you
-    # specify. You can only create one workforce in each AWS Region.
+    # specify. You can only create one workforce in each AWS Region per AWS
+    # account.
     #
-    # If you want to create a new workforce in an AWS Region where the a
+    # If you want to create a new workforce in an AWS Region where a
     # workforce already exists, use the API operation to delete the existing
-    # workforce and then use this operation to create a new workforce.
+    # workforce and then use `CreateWorkforce` to create a new workforce.
     #
     # To create a private workforce using Amazon Cognito, you must specify a
     # Cognito user pool in `CognitoConfig`. You can also create an Amazon
@@ -3914,9 +3921,10 @@ module Aws::SageMaker
     # information, see [ Create a Private Workforce (Amazon Cognito)][1].
     #
     # To create a private workforce using your own OIDC Identity Provider
-    # (IdP), specify your IdP configuration in `OidcConfig`. You must create
-    # a OIDC IdP workforce using this API operation. For more information,
-    # see [ Create a Private Workforce (OIDC IdP)][2].
+    # (IdP), specify your IdP configuration in `OidcConfig`. Your OIDC IdP
+    # must support *groups* because groups are used by Ground Truth and
+    # Amazon A2I to create work teams. For more information, see [ Create a
+    # Private Workforce (OIDC IdP)][2].
     #
     #
     #
@@ -3936,12 +3944,15 @@ module Aws::SageMaker
     #
     # @option params [Types::OidcConfig] :oidc_config
     #   Use this parameter to configure a private workforce using your own
-    #   OIDC Identity Provider. Do not use `CognitoConfig` if you specify
-    #   values for `OidcConfig`.
+    #   OIDC Identity Provider.
+    #
+    #   Do not use `CognitoConfig` if you specify values for `OidcConfig`.
     #
     # @option params [Types::SourceIpConfig] :source_ip_config
     #   A list of IP address ranges ([CIDRs][1]). Used to create an allow list
-    #   of IP addresses for a private workforce. For more information, see .
+    #   of IP addresses for a private workforce. Workers will only be able to
+    #   login to their worker portal from an IP address within this range. By
+    #   default, a workforce isn't restricted to specific IP addresses.
     #
     #
     #
@@ -4015,11 +4026,25 @@ module Aws::SageMaker
     #
     # @option params [required, Array<Types::MemberDefinition>] :member_definitions
     #   A list of `MemberDefinition` objects that contains objects that
-    #   identify the Amazon Cognito user pool that makes up the work team. For
-    #   more information, see [Amazon Cognito User Pools][1].
+    #   identify the workers that make up the work team.
     #
-    #   All of the `CognitoMemberDefinition` objects that make up the member
-    #   definition must have the same `ClientId` and `UserPool` values.
+    #   Workforces can be created using Amazon Cognito or your own OIDC
+    #   Identity Provider (IdP). For private workforces created using Amazon
+    #   Cognito use `CognitoMemberDefinition`. For workforces created using
+    #   your own OIDC identity provider (IdP) use `OidcMemberDefinition`. Do
+    #   not provide input for both of these parameters in a single request.
+    #
+    #   For workforces created using Amazon Cognito, private work teams
+    #   correspond to Amazon Cognito *user groups* within the user pool used
+    #   to create a workforce. All of the `CognitoMemberDefinition` objects
+    #   that make up the member definition must have the same `ClientId` and
+    #   `UserPool` values. To add a Amazon Cognito user group to an existing
+    #   worker pool, see [Adding groups to a User Pool](). For more
+    #   information about user pools, see [Amazon Cognito User Pools][1].
+    #
+    #   For workforces created using your own OIDC IdP, specify the user
+    #   groups that you want to include in your private work team in
+    #   `OidcMemberDefinition` by listing those groups in `Groups`.
     #
     #
     #
@@ -4594,9 +4619,14 @@ module Aws::SageMaker
 
     # Use this operation to delete a workforce.
     #
-    # If you want to create a new workforce in an AWS Region where the a
+    # If you want to create a new workforce in an AWS Region where a
     # workforce already exists, use this operation to delete the existing
     # workforce and then use to create a new workforce.
+    #
+    # If a private workforce contains one or more work teams, you must use
+    # the operation to delete all work teams before you delete the
+    # workforce. If you try to delete a workforce that contains one or more
+    # work teams, you will recieve a `ResourceInUse` error.
     #
     # @option params [required, String] :workforce_name
     #   The name of the workforce.
@@ -4899,7 +4929,7 @@ module Aws::SageMaker
     #   resp.output_data_config.kms_key_id #=> String
     #   resp.output_data_config.s3_output_path #=> String
     #   resp.role_arn #=> String
-    #   resp.auto_ml_job_objective.metric_name #=> String, one of "Accuracy", "MSE", "F1", "F1macro"
+    #   resp.auto_ml_job_objective.metric_name #=> String, one of "Accuracy", "MSE", "F1", "F1macro", "AUC"
     #   resp.problem_type #=> String, one of "BinaryClassification", "MulticlassClassification", "Regression"
     #   resp.auto_ml_job_config.completion_criteria.max_candidates #=> Integer
     #   resp.auto_ml_job_config.completion_criteria.max_runtime_per_training_job_in_seconds #=> Integer
@@ -4916,7 +4946,7 @@ module Aws::SageMaker
     #   resp.failure_reason #=> String
     #   resp.best_candidate.candidate_name #=> String
     #   resp.best_candidate.final_auto_ml_job_objective_metric.type #=> String, one of "Maximize", "Minimize"
-    #   resp.best_candidate.final_auto_ml_job_objective_metric.metric_name #=> String, one of "Accuracy", "MSE", "F1", "F1macro"
+    #   resp.best_candidate.final_auto_ml_job_objective_metric.metric_name #=> String, one of "Accuracy", "MSE", "F1", "F1macro", "AUC"
     #   resp.best_candidate.final_auto_ml_job_objective_metric.value #=> Float
     #   resp.best_candidate.objective_status #=> String, one of "Succeeded", "Pending", "Failed"
     #   resp.best_candidate.candidate_steps #=> Array
@@ -4938,7 +4968,7 @@ module Aws::SageMaker
     #   resp.generate_candidate_definitions_only #=> Boolean
     #   resp.auto_ml_job_artifacts.candidate_definition_notebook_location #=> String
     #   resp.auto_ml_job_artifacts.data_exploration_notebook_location #=> String
-    #   resp.resolved_attributes.auto_ml_job_objective.metric_name #=> String, one of "Accuracy", "MSE", "F1", "F1macro"
+    #   resp.resolved_attributes.auto_ml_job_objective.metric_name #=> String, one of "Accuracy", "MSE", "F1", "F1macro", "AUC"
     #   resp.resolved_attributes.problem_type #=> String, one of "BinaryClassification", "MulticlassClassification", "Regression"
     #   resp.resolved_attributes.completion_criteria.max_candidates #=> Integer
     #   resp.resolved_attributes.completion_criteria.max_runtime_per_training_job_in_seconds #=> Integer
@@ -5732,6 +5762,7 @@ module Aws::SageMaker
     #   resp.model_name #=> String
     #   resp.primary_container.container_hostname #=> String
     #   resp.primary_container.image #=> String
+    #   resp.primary_container.image_config.repository_access_mode #=> String, one of "Platform", "Vpc"
     #   resp.primary_container.mode #=> String, one of "SingleModel", "MultiModel"
     #   resp.primary_container.model_data_url #=> String
     #   resp.primary_container.environment #=> Hash
@@ -5740,6 +5771,7 @@ module Aws::SageMaker
     #   resp.containers #=> Array
     #   resp.containers[0].container_hostname #=> String
     #   resp.containers[0].image #=> String
+    #   resp.containers[0].image_config.repository_access_mode #=> String, one of "Platform", "Vpc"
     #   resp.containers[0].mode #=> String, one of "SingleModel", "MultiModel"
     #   resp.containers[0].model_data_url #=> String
     #   resp.containers[0].environment #=> Hash
@@ -6972,8 +7004,8 @@ module Aws::SageMaker
     #   Request a list of jobs up to a specified limit.
     #
     # @option params [String] :next_token
-    #   If the previous response was truncated, you will receive this token.
-    #   Use it in your next request to receive the next set of results.
+    #   If the previous response was truncated, you receive this token. Use it
+    #   in your next request to receive the next set of results.
     #
     # @return [Types::ListAutoMLJobsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -7040,8 +7072,8 @@ module Aws::SageMaker
     #   List the job's Candidates up to a specified limit.
     #
     # @option params [String] :next_token
-    #   If the previous response was truncated, you will receive this token.
-    #   Use it in your next request to receive the next set of results.
+    #   If the previous response was truncated, you receive this token. Use it
+    #   in your next request to receive the next set of results.
     #
     # @return [Types::ListCandidatesForAutoMLJobResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -7067,7 +7099,7 @@ module Aws::SageMaker
     #   resp.candidates #=> Array
     #   resp.candidates[0].candidate_name #=> String
     #   resp.candidates[0].final_auto_ml_job_objective_metric.type #=> String, one of "Maximize", "Minimize"
-    #   resp.candidates[0].final_auto_ml_job_objective_metric.metric_name #=> String, one of "Accuracy", "MSE", "F1", "F1macro"
+    #   resp.candidates[0].final_auto_ml_job_objective_metric.metric_name #=> String, one of "Accuracy", "MSE", "F1", "F1macro", "AUC"
     #   resp.candidates[0].final_auto_ml_job_objective_metric.value #=> Float
     #   resp.candidates[0].objective_status #=> String, one of "Succeeded", "Pending", "Failed"
     #   resp.candidates[0].candidate_steps #=> Array
@@ -9125,9 +9157,9 @@ module Aws::SageMaker
       req.send_request(options)
     end
 
-    # Gets a list of work teams that you have defined in a region. The list
-    # may be empty if no work team satisfies the filter specified in the
-    # `NameContains` parameter.
+    # Gets a list of private work teams that you have defined in a region.
+    # The list may be empty if no work team satisfies the filter specified
+    # in the `NameContains` parameter.
     #
     # @option params [String] :sort_by
     #   The field to sort results by. The default is `CreationTime`.
@@ -10731,27 +10763,39 @@ module Aws::SageMaker
       req.send_request(options)
     end
 
-    # Restricts access to tasks assigned to workers in the specified
-    # workforce to those within specific ranges of IP addresses. You specify
-    # allowed IP addresses by creating a list of up to ten [CIDRs][1].
+    # Use this operation to update your workforce. You can use this
+    # operation to require that workers use specific IP addresses to work on
+    # tasks and to update your OpenID Connect (OIDC) Identity Provider (IdP)
+    # workforce configuration.
     #
-    # By default, a workforce isn't restricted to specific IP addresses. If
-    # you specify a range of IP addresses, workers who attempt to access
-    # tasks using any IP address outside the specified range are denied
-    # access and get a `Not Found` error message on the worker portal. After
-    # restricting access with this operation, you can see the allowed IP
-    # values for a private workforce with the operation.
+    # Use `SourceIpConfig` to restrict worker access to tasks to a specific
+    # range of IP addresses. You specify allowed IP addresses by creating a
+    # list of up to ten [CIDRs][1]. By default, a workforce isn't
+    # restricted to specific IP addresses. If you specify a range of IP
+    # addresses, workers who attempt to access tasks using any IP address
+    # outside the specified range are denied and get a `Not Found` error
+    # message on the worker portal.
     #
-    # This operation applies only to private workforces.
+    # Use `OidcConfig` to update the configuration of a workforce created
+    # using your own OIDC IdP.
+    #
+    # You can only update your OIDC IdP configuration when there are no work
+    # teams associated with your workforce. You can delete work teams using
+    # the operation.
+    #
+    # After restricting access to a range of IP addresses or updating your
+    # OIDC IdP configuration with this operation, you can view details about
+    # your update workforce using the operation.
+    #
+    # This operation only applies to private workforces.
     #
     #
     #
     # [1]: https://docs.aws.amazon.com/vpc/latest/userguide/VPC_Subnets.html
     #
     # @option params [required, String] :workforce_name
-    #   The name of the private workforce whose access you want to restrict.
-    #   `WorkforceName` is automatically set to `default` when a workforce is
-    #   created and cannot be modified.
+    #   The name of the private workforce that you want to update. You can
+    #   find your workforce name by using the operation.
     #
     # @option params [Types::SourceIpConfig] :source_ip_config
     #   A list of one to ten worker IP address ranges ([CIDRs][1]) that can be
@@ -10825,8 +10869,35 @@ module Aws::SageMaker
     #   The name of the work team to update.
     #
     # @option params [Array<Types::MemberDefinition>] :member_definitions
-    #   A list of `MemberDefinition` objects that contain the updated work
-    #   team members.
+    #   A list of `MemberDefinition` objects that contains objects that
+    #   identify the workers that make up the work team.
+    #
+    #   Workforces can be created using Amazon Cognito or your own OIDC
+    #   Identity Provider (IdP). For private workforces created using Amazon
+    #   Cognito use `CognitoMemberDefinition`. For workforces created using
+    #   your own OIDC identity provider (IdP) use `OidcMemberDefinition`. You
+    #   should not provide input for both of these parameters in a single
+    #   request.
+    #
+    #   For workforces created using Amazon Cognito, private work teams
+    #   correspond to Amazon Cognito *user groups* within the user pool used
+    #   to create a workforce. All of the `CognitoMemberDefinition` objects
+    #   that make up the member definition must have the same `ClientId` and
+    #   `UserPool` values. To add a Amazon Cognito user group to an existing
+    #   worker pool, see [Adding groups to a User Pool](). For more
+    #   information about user pools, see [Amazon Cognito User Pools][1].
+    #
+    #   For workforces created using your own OIDC IdP, specify the user
+    #   groups that you want to include in your private work team in
+    #   `OidcMemberDefinition` by listing those groups in `Groups`. Be aware
+    #   that user groups that are already in the work team must also be listed
+    #   in `Groups` when you make this request to remain on the work team. If
+    #   you do not include these user groups, they will no longer be
+    #   associated with the work team you update.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/cognito/latest/developerguide/cognito-user-identity-pools.html
     #
     # @option params [String] :description
     #   An updated description for the work team.
@@ -10902,7 +10973,7 @@ module Aws::SageMaker
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-sagemaker'
-      context[:gem_version] = '1.64.0'
+      context[:gem_version] = '1.65.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -429,6 +429,7 @@ module Aws::SageMaker
     HyperParameterTuningJobWarmStartType = Shapes::StringShape.new(name: 'HyperParameterTuningJobWarmStartType')
     HyperParameters = Shapes::MapShape.new(name: 'HyperParameters')
     ImageArn = Shapes::StringShape.new(name: 'ImageArn')
+    ImageConfig = Shapes::StructureShape.new(name: 'ImageConfig')
     ImageDigest = Shapes::StringShape.new(name: 'ImageDigest')
     ImageUri = Shapes::StringShape.new(name: 'ImageUri')
     InferenceSpecification = Shapes::StructureShape.new(name: 'InferenceSpecification')
@@ -722,6 +723,7 @@ module Aws::SageMaker
     RenderableTask = Shapes::StructureShape.new(name: 'RenderableTask')
     RenderingError = Shapes::StructureShape.new(name: 'RenderingError')
     RenderingErrorList = Shapes::ListShape.new(name: 'RenderingErrorList')
+    RepositoryAccessMode = Shapes::StringShape.new(name: 'RepositoryAccessMode')
     ResolvedAttributes = Shapes::StructureShape.new(name: 'ResolvedAttributes')
     ResourceArn = Shapes::StringShape.new(name: 'ResourceArn')
     ResourceConfig = Shapes::StructureShape.new(name: 'ResourceConfig')
@@ -1199,6 +1201,7 @@ module Aws::SageMaker
 
     ContainerDefinition.add_member(:container_hostname, Shapes::ShapeRef.new(shape: ContainerHostname, location_name: "ContainerHostname"))
     ContainerDefinition.add_member(:image, Shapes::ShapeRef.new(shape: ContainerImage, location_name: "Image"))
+    ContainerDefinition.add_member(:image_config, Shapes::ShapeRef.new(shape: ImageConfig, location_name: "ImageConfig"))
     ContainerDefinition.add_member(:mode, Shapes::ShapeRef.new(shape: ContainerMode, location_name: "Mode"))
     ContainerDefinition.add_member(:model_data_url, Shapes::ShapeRef.new(shape: Url, location_name: "ModelDataUrl"))
     ContainerDefinition.add_member(:environment, Shapes::ShapeRef.new(shape: EnvironmentMap, location_name: "Environment"))
@@ -2413,6 +2416,9 @@ module Aws::SageMaker
 
     HyperParameters.key = Shapes::ShapeRef.new(shape: ParameterKey)
     HyperParameters.value = Shapes::ShapeRef.new(shape: ParameterValue)
+
+    ImageConfig.add_member(:repository_access_mode, Shapes::ShapeRef.new(shape: RepositoryAccessMode, required: true, location_name: "RepositoryAccessMode"))
+    ImageConfig.struct_class = Types::ImageConfig
 
     InferenceSpecification.add_member(:containers, Shapes::ShapeRef.new(shape: ModelPackageContainerDefinitionList, required: true, location_name: "Containers"))
     InferenceSpecification.add_member(:supported_transform_instance_types, Shapes::ShapeRef.new(shape: TransformInstanceTypes, required: true, location_name: "SupportedTransformInstanceTypes"))
