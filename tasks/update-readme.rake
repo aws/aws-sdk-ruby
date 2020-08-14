@@ -20,7 +20,7 @@ task 'update-readme' do
   BuildTools.replace_lines(
     filename: "#{$REPO_ROOT}/README.md",
     start: /## Supported Services/,
-    stop: /## License/,
+    stop: /## Versioning/,
     new_lines: lines
   )
 end

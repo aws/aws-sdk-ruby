@@ -247,16 +247,6 @@ Simply downcase the service module name for the helper:
 * `ec2` => `#<Aws::EC2::Client>`
 * etc
 
-## Versioning
-
-This project uses [semantic versioning](http://semver.org/). You can safely
-express a dependency on a major version and expect all minor and patch versions
-to be backwards compatible.
-
-A CHANGELOG can be found at each gem's root path (i.e. `aws-sdk-s3` can be found
-at `gems/aws-sdk-s3/CHANGELOG.md`). The CHANGELOG is also accessible via the
-RubyGems.org page under "LINKS" section.
-
 ## Getting Help
 
 Please use any of these resources for getting help:
@@ -507,6 +497,16 @@ in the Getting Help section.
 | Schemas                                               | Aws::Schemas                         | aws-sdk-schemas                         | 2019-12-02  |
 | Service Quotas                                        | Aws::ServiceQuotas                   | aws-sdk-servicequotas                   | 2019-06-24  |
 | Synthetics                                            | Aws::Synthetics                      | aws-sdk-synthetics                      | 2017-10-11  |
+
+## Versioning
+
+This project uses [semantic versioning](http://semver.org/). You can safely
+express a dependency on a major version and expect all minor and patch versions
+to be backwards compatible.
+
+A CHANGELOG can be found at each gem's root path (i.e. `aws-sdk-s3` can be found
+at `gems/aws-sdk-s3/CHANGELOG.md`). The CHANGELOG is also accessible via the
+RubyGems.org page under "LINKS" section.
 
 ## License
 
