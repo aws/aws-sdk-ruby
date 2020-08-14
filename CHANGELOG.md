@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+2.11.567 (2020-08-14)
+------------------
+
 * Feature - Aws::AppStream - Updated the API, and documentation for Amazon AppStream.
 
 * Feature - Aws::Braket - Updated the API for Braket.
