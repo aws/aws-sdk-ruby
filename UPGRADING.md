@@ -38,12 +38,12 @@
   credential provider chain, and for default region selection. Since these
   changes could technically be a breaking change to default (and commonly used)
   behavior, there is a feature flag around this functionality.
-  
+
   To use these new features, you must set the `AWS_SDK_LOAD_CONFIG` environment
   variable. If not set, the existing default behavior will continue.
-  
+
   Two other upgrading notes are worth keeping in mind for this release:
-  
+
   * Private interfaces regarding handling of configuration were changed for this
     feature. Those interfaces were marked `@api private`, signifying that they
     should not have been used outside the SDK for development. If you were
@@ -424,4 +424,4 @@ changes before 2.0.0 final.
 
 # Upgrading from v1?
 
-Please see [MIGRATING.md](https://github.com/aws/aws-sdk-ruby/blob/master/MIGRATING.md)
+Please see [MIGRATING.md](https://github.com/aws/aws-sdk-ruby/blob/version-2/MIGRATING.md)
