@@ -59,6 +59,29 @@ module Aws
     # @return [String]
     attr_reader :resource
 
+    # Determine the "official" name of a resource
+    #
+    # This function attempts to render a resource name in this form
+    # https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-template-resource-type-ref.html
+    #
+    # Barring an API call that accomplishes this, we guess the capitalization by introspection
+    # on the AWS SDK class names
+    def resource_type
+      # look for a match in the defined constants, to get proper capitalization. default capitalize first letter
+      guess_capitalization = Proc.new do |a_module, member_name|
+        a_module.constants.map(&:to_s).find(member_name.method(:capitalize)) { |t| member_name.casecmp(t) == 0 }
+      end
+
+      # extract the portion of resource type that's contained in the ARN. split on either : or /
+      local_type = resource.split(/[:\/]/)[0]
+
+      # look for a match in the defined constants, to get proper capitalization.  Same for resource
+      official_service = guess_capitalization.call(Aws, service)
+      official_resource = guess_capitalization.call(Object.const_get(official_service), local_type
+
+      ["AWS", official_service, official_resource].join("::")
+    end
+    
     # Validates ARN contains non-empty required components.
     # Region and account_id can be optional.
     #
