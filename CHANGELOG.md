@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+2.11.568 (2020-08-17)
+------------------
+
 * Feature - Aws::ACMPCA - Updated the API, and documentation for AWS Certificate Manager Private Certificate Authority.
 
 * Feature - Aws::ACM - Updated the API for AWS Certificate Manager.
