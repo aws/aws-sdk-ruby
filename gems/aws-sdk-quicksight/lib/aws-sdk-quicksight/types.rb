@@ -32,7 +32,8 @@ module Aws::QuickSight
       include Aws::Structure
     end
 
-    # The customizations associated with your AWS account for QuickSight.
+    # The Amazon QuickSight customizations associated with your AWS account
+    # or a QuickSight namespace in a specific AWS Region.
     #
     # @note When making an API call, you may pass AccountCustomization
     #   data as a hash:
@@ -56,12 +57,15 @@ module Aws::QuickSight
     # The QuickSight settings associated with your AWS account.
     #
     # @!attribute [rw] account_name
-    #   The name associated with the QuickSight subscription in your AWS
-    #   account.
+    #   The "account name" you provided for the QuickSight subscription in
+    #   your AWS account. You create this name when you sign up for
+    #   QuickSight. It is unique in all of AWS and it appears only in the
+    #   console when users sign in.
     #   @return [String]
     #
     # @!attribute [rw] edition
-    #   The edition of QuickSight that you're currently subscribed to.
+    #   The edition of QuickSight that you're currently subscribed to:
+    #   Enterprise edition or Standard edition.
     #   @return [String]
     #
     # @!attribute [rw] default_namespace
@@ -140,6 +144,218 @@ module Aws::QuickSight
     #
     class AmazonElasticsearchParameters < Struct.new(
       :domain)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Metadata structure for an analysis in Amazon QuickSight
+    #
+    # @!attribute [rw] analysis_id
+    #   The ID of the analysis.
+    #   @return [String]
+    #
+    # @!attribute [rw] arn
+    #   The Amazon Resource Name (ARN) of the analysis.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The descriptive name of the analysis.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   Status associated with the analysis.
+    #   @return [String]
+    #
+    # @!attribute [rw] errors
+    #   Errors associated with the analysis.
+    #   @return [Array<Types::AnalysisError>]
+    #
+    # @!attribute [rw] data_set_arns
+    #   The ARNs of the datasets of the analysis.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] theme_arn
+    #   The ARN of the theme of the analysis.
+    #   @return [String]
+    #
+    # @!attribute [rw] created_time
+    #   The time that the analysis was created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] last_updated_time
+    #   The time that the analysis was last updated.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/Analysis AWS API Documentation
+    #
+    class Analysis < Struct.new(
+      :analysis_id,
+      :arn,
+      :name,
+      :status,
+      :errors,
+      :data_set_arns,
+      :theme_arn,
+      :created_time,
+      :last_updated_time)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A metadata error structure for an analysis.
+    #
+    # @!attribute [rw] type
+    #   The type of the analysis error.
+    #   @return [String]
+    #
+    # @!attribute [rw] message
+    #   The message associated with the analysis error.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/AnalysisError AWS API Documentation
+    #
+    class AnalysisError < Struct.new(
+      :type,
+      :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A filter that you apply when searching for one or more analyses.
+    #
+    # @note When making an API call, you may pass AnalysisSearchFilter
+    #   data as a hash:
+    #
+    #       {
+    #         operator: "StringEquals", # accepts StringEquals
+    #         name: "QUICKSIGHT_USER", # accepts QUICKSIGHT_USER
+    #         value: "String",
+    #       }
+    #
+    # @!attribute [rw] operator
+    #   The comparison operator that you want to use as a filter, for
+    #   example `"Operator": "StringEquals"`.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The name of the value that you want to use as a filter, for example
+    #   `"Name": "QUICKSIGHT_USER"`.
+    #   @return [String]
+    #
+    # @!attribute [rw] value
+    #   The value of the named item, in this case `QUICKSIGHT_USER`, that
+    #   you want to use as a filter, for example `"Value"`. An example is
+    #   `"arn:aws:quicksight:us-east-1:1:user/default/UserName1"`.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/AnalysisSearchFilter AWS API Documentation
+    #
+    class AnalysisSearchFilter < Struct.new(
+      :operator,
+      :name,
+      :value)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The source entity of an analysis.
+    #
+    # @note When making an API call, you may pass AnalysisSourceEntity
+    #   data as a hash:
+    #
+    #       {
+    #         source_template: {
+    #           data_set_references: [ # required
+    #             {
+    #               data_set_placeholder: "NonEmptyString", # required
+    #               data_set_arn: "Arn", # required
+    #             },
+    #           ],
+    #           arn: "Arn", # required
+    #         },
+    #       }
+    #
+    # @!attribute [rw] source_template
+    #   The source template for the source entity of the analysis.
+    #   @return [Types::AnalysisSourceTemplate]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/AnalysisSourceEntity AWS API Documentation
+    #
+    class AnalysisSourceEntity < Struct.new(
+      :source_template)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The source template of an analysis.
+    #
+    # @note When making an API call, you may pass AnalysisSourceTemplate
+    #   data as a hash:
+    #
+    #       {
+    #         data_set_references: [ # required
+    #           {
+    #             data_set_placeholder: "NonEmptyString", # required
+    #             data_set_arn: "Arn", # required
+    #           },
+    #         ],
+    #         arn: "Arn", # required
+    #       }
+    #
+    # @!attribute [rw] data_set_references
+    #   The dataset references of the source template of an analysis.
+    #   @return [Array<Types::DataSetReference>]
+    #
+    # @!attribute [rw] arn
+    #   The Amazon Resource Name (ARN) of the source template of an
+    #   analysis.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/AnalysisSourceTemplate AWS API Documentation
+    #
+    class AnalysisSourceTemplate < Struct.new(
+      :data_set_references,
+      :arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The summary metadata that describes an analysis.
+    #
+    # @!attribute [rw] arn
+    #   The Amazon Resource Name (ARN) for the analysis.
+    #   @return [String]
+    #
+    # @!attribute [rw] analysis_id
+    #   The ID of the analysis. This ID displays in the URL.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The name of the analysis. This name is displayed in the QuickSight
+    #   console.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The last known status for the analysis.
+    #   @return [String]
+    #
+    # @!attribute [rw] created_time
+    #   The time that the analysis was created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] last_updated_time
+    #   The time that the analysis was last updated.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/AnalysisSummary AWS API Documentation
+    #
+    class AnalysisSummary < Struct.new(
+      :arn,
+      :analysis_id,
+      :name,
+      :status,
+      :created_time,
+      :last_updated_time)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -510,8 +726,8 @@ module Aws::QuickSight
       include Aws::Structure
     end
 
-    # A resource is already in a state that indicates an action is happening
-    # that must complete before a new update can be applied.
+    # A resource is already in a state that indicates an operation is
+    # happening that must complete before a new update can be applied.
     #
     # @!attribute [rw] message
     #   @return [String]
@@ -563,17 +779,22 @@ module Aws::QuickSight
     #   @return [String]
     #
     # @!attribute [rw] namespace
-    #   The namespace associated with the customization that you're
-    #   creating.
+    #   The QuickSight namespace that you want to add customizations to.
     #   @return [String]
     #
     # @!attribute [rw] account_customization
-    #   The customizations you're adding to the QuickSight subscription for
-    #   the AWS account. For example, you could add a default theme by
-    #   setting `AccountCustomization` to the midnight theme
-    #   (`DefaultTheme="arn:aws:quicksight::aws:theme/MIDNIGHT"`) or to a
-    #   custom theme
-    #   (`DefaultTheme="arn:aws:quicksight:us-west-2:111122223333:theme/bdb844d0-0fe9-4d9d-b520-0fe602d93639"`).
+    #   The QuickSight customizations you're adding in the current AWS
+    #   Region. You can add these to an AWS account and a QuickSight
+    #   namespace.
+    #
+    #   For example, you could add a default theme by setting
+    #   `AccountCustomization` to the midnight theme:
+    #   `"AccountCustomization": \{ "DefaultTheme":
+    #   "arn:aws:quicksight::aws:theme/MIDNIGHT" \}. `. Or, you could add a
+    #   custom theme by specifying `"AccountCustomization": \{
+    #   "DefaultTheme":
+    #   "arn:aws:quicksight:us-west-2:111122223333:theme/bdb844d0-0fe9-4d9d-b520-0fe602d93639"
+    #   \}`.
     #   @return [Types::AccountCustomization]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/CreateAccountCustomizationRequest AWS API Documentation
@@ -596,8 +817,8 @@ module Aws::QuickSight
     #   @return [String]
     #
     # @!attribute [rw] account_customization
-    #   The customizations you're adding to the QuickSight subscription for
-    #   the AWS account.
+    #   The QuickSight customizations you're adding in the current AWS
+    #   Region.
     #   @return [Types::AccountCustomization]
     #
     # @!attribute [rw] request_id
@@ -616,6 +837,159 @@ module Aws::QuickSight
       :account_customization,
       :request_id,
       :status)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass CreateAnalysisRequest
+    #   data as a hash:
+    #
+    #       {
+    #         aws_account_id: "AwsAccountId", # required
+    #         analysis_id: "RestrictiveResourceId", # required
+    #         name: "AnalysisName", # required
+    #         parameters: {
+    #           string_parameters: [
+    #             {
+    #               name: "NonEmptyString", # required
+    #               values: ["String"], # required
+    #             },
+    #           ],
+    #           integer_parameters: [
+    #             {
+    #               name: "NonEmptyString", # required
+    #               values: [1], # required
+    #             },
+    #           ],
+    #           decimal_parameters: [
+    #             {
+    #               name: "NonEmptyString", # required
+    #               values: [1.0], # required
+    #             },
+    #           ],
+    #           date_time_parameters: [
+    #             {
+    #               name: "NonEmptyString", # required
+    #               values: [Time.now], # required
+    #             },
+    #           ],
+    #         },
+    #         permissions: [
+    #           {
+    #             principal: "Principal", # required
+    #             actions: ["String"], # required
+    #           },
+    #         ],
+    #         source_entity: { # required
+    #           source_template: {
+    #             data_set_references: [ # required
+    #               {
+    #                 data_set_placeholder: "NonEmptyString", # required
+    #                 data_set_arn: "Arn", # required
+    #               },
+    #             ],
+    #             arn: "Arn", # required
+    #           },
+    #         },
+    #         theme_arn: "Arn",
+    #         tags: [
+    #           {
+    #             key: "TagKey", # required
+    #             value: "TagValue", # required
+    #           },
+    #         ],
+    #       }
+    #
+    # @!attribute [rw] aws_account_id
+    #   The ID of the AWS account where you are creating an analysis.
+    #   @return [String]
+    #
+    # @!attribute [rw] analysis_id
+    #   The ID for the analysis that you're creating. This ID displays in
+    #   the URL of the analysis.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   A descriptive name for the analysis that you're creating. This name
+    #   displays for the analysis in the QuickSight console.
+    #   @return [String]
+    #
+    # @!attribute [rw] parameters
+    #   The parameter names and override values that you want to use. An
+    #   analysis can have any parameter type, and some parameters might
+    #   accept multiple values.
+    #   @return [Types::Parameters]
+    #
+    # @!attribute [rw] permissions
+    #   A structure that describes the principals and the resource-level
+    #   permissions on an analysis. You can use the `Permissions` structure
+    #   to grant permissions by providing a list of AWS Identity and Access
+    #   Management (IAM) action information for each principal listed by
+    #   Amazon Resource Name (ARN).
+    #
+    #   To specify no permissions, omit `Permissions`.
+    #   @return [Array<Types::ResourcePermission>]
+    #
+    # @!attribute [rw] source_entity
+    #   A source entity to use for the analysis that you're creating. This
+    #   metadata structure contains details that describe a source template
+    #   and one or more datasets.
+    #   @return [Types::AnalysisSourceEntity]
+    #
+    # @!attribute [rw] theme_arn
+    #   The ARN for the theme to apply to the analysis that you're
+    #   creating. To see the theme in the QuickSight console, make sure that
+    #   you have access to it.
+    #   @return [String]
+    #
+    # @!attribute [rw] tags
+    #   Contains a map of the key-value pairs for the resource tag or tags
+    #   assigned to the analysis.
+    #   @return [Array<Types::Tag>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/CreateAnalysisRequest AWS API Documentation
+    #
+    class CreateAnalysisRequest < Struct.new(
+      :aws_account_id,
+      :analysis_id,
+      :name,
+      :parameters,
+      :permissions,
+      :source_entity,
+      :theme_arn,
+      :tags)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] arn
+    #   The ARN for the analysis.
+    #   @return [String]
+    #
+    # @!attribute [rw] analysis_id
+    #   The ID of the analysis.
+    #   @return [String]
+    #
+    # @!attribute [rw] creation_status
+    #   The status of the creation of the analysis.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The HTTP status of the request.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] request_id
+    #   The AWS request ID for this operation.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/CreateAnalysisResponse AWS API Documentation
+    #
+    class CreateAnalysisResponse < Struct.new(
+      :arn,
+      :analysis_id,
+      :creation_status,
+      :status,
+      :request_id)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -739,8 +1113,10 @@ module Aws::QuickSight
     #
     # @!attribute [rw] permissions
     #   A structure that contains the permissions of the dashboard. You can
-    #   use this structure for granting permissions with principal and
-    #   action information.
+    #   use this structure for granting permissions by providing a list of
+    #   IAM action information for each principal ARN.
+    #
+    #   To specify no permissions, omit the permissions list.
     #   @return [Array<Types::ResourcePermission>]
     #
     # @!attribute [rw] source_entity
@@ -779,7 +1155,7 @@ module Aws::QuickSight
     #
     #   * `AvailabilityStatus` for `ExportToCSVOption` - This status can be
     #     either `ENABLED` or `DISABLED`. The visual option to export data
-    #     to .csv format isn't enabled when this is set to `DISABLED`. This
+    #     to .CSV format isn't enabled when this is set to `DISABLED`. This
     #     option is `ENABLED` by default.
     #
     #   * `VisibilityState` for `SheetControlsOption` - This visibility
@@ -1760,7 +2136,7 @@ module Aws::QuickSight
     #   process. A status of `CREATED` means that your namespace is ready to
     #   use. If an error occurs, it indicates if the process is `retryable`
     #   or `non-retryable`. In the case of a non-retryable error, refer to
-    #   the error message for follow-up actions.
+    #   the error message for follow-up tasks.
     #   @return [String]
     #
     # @!attribute [rw] identity_store
@@ -2317,13 +2693,14 @@ module Aws::QuickSight
     #   A set of alternate data source parameters that you want to share for
     #   these credentials. The credentials are applied in tandem with the
     #   data source parameters when you copy a data source by using a create
-    #   or update request. The API compares the `DataSourceParameters`
-    #   structure that's in the request with the structures in the
-    #   `AlternateDataSourceParameters` allowlist. If the structures are an
-    #   exact match, the request is allowed to use the new data source with
-    #   the existing credentials. If the `AlternateDataSourceParameters`
-    #   list is null, the `DataSourceParameters` originally used with these
-    #   `Credentials` is automatically allowed.
+    #   or update request. The API operation compares the
+    #   `DataSourceParameters` structure that's in the request with the
+    #   structures in the `AlternateDataSourceParameters` allowlist. If the
+    #   structures are an exact match, the request is allowed to use the new
+    #   data source with the existing credentials. If the
+    #   `AlternateDataSourceParameters` list is null, the
+    #   `DataSourceParameters` originally used with these `Credentials` is
+    #   automatically allowed.
     #   @return [Array<Types::DataSourceParameters>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/CredentialPair AWS API Documentation
@@ -2631,11 +3008,11 @@ module Aws::QuickSight
     #   @return [Time]
     #
     # @!attribute [rw] errors
-    #   Errors.
+    #   Errors associated with this dashboard version.
     #   @return [Array<Types::DashboardError>]
     #
     # @!attribute [rw] version_number
-    #   Version number.
+    #   Version number for this version of the dashboard.
     #   @return [Integer]
     #
     # @!attribute [rw] status
@@ -2652,11 +3029,15 @@ module Aws::QuickSight
     #
     # @!attribute [rw] data_set_arns
     #   The Amazon Resource Numbers (ARNs) for the datasets that are
-    #   associated with a version of the dashboard.
+    #   associated with this version of the dashboard.
     #   @return [Array<String>]
     #
     # @!attribute [rw] description
     #   Description.
+    #   @return [String]
+    #
+    # @!attribute [rw] theme_arn
+    #   The ARN of the theme associated with a version of the dashboard.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/DashboardVersion AWS API Documentation
@@ -2669,7 +3050,8 @@ module Aws::QuickSight
       :arn,
       :source_entity_arn,
       :data_set_arns,
-      :description)
+      :description,
+      :theme_arn)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2975,12 +3357,12 @@ module Aws::QuickSight
     #   A set of alternate data source parameters that you want to share for
     #   the credentials stored with this data source. The credentials are
     #   applied in tandem with the data source parameters when you copy a
-    #   data source by using a create or update request. The API compares
-    #   the `DataSourceParameters` structure that's in the request with the
-    #   structures in the `AlternateDataSourceParameters` allowlist. If the
-    #   structures are an exact match, the request is allowed to use the
-    #   credentials from this existing data source. If the
-    #   `AlternateDataSourceParameters` list is null, the `Credentials`
+    #   data source by using a create or update request. The API operation
+    #   compares the `DataSourceParameters` structure that's in the request
+    #   with the structures in the `AlternateDataSourceParameters`
+    #   allowlist. If the structures are an exact match, the request is
+    #   allowed to use the credentials from this existing data source. If
+    #   the `AlternateDataSourceParameters` list is null, the `Credentials`
     #   originally used with this `DataSourceParameters` are automatically
     #   allowed.
     #   @return [Array<Types::DataSourceParameters>]
@@ -3357,7 +3739,7 @@ module Aws::QuickSight
       include Aws::Structure
     end
 
-    # Date time parameter.
+    # A date-time parameter.
     #
     # @note When making an API call, you may pass DateTimeParameter
     #   data as a hash:
@@ -3368,11 +3750,11 @@ module Aws::QuickSight
     #       }
     #
     # @!attribute [rw] name
-    #   A display name for the dataset.
+    #   A display name for the date-time parameter.
     #   @return [String]
     #
     # @!attribute [rw] values
-    #   Values.
+    #   The values for the date-time parameter.
     #   @return [Array<Time>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/DateTimeParameter AWS API Documentation
@@ -3384,7 +3766,7 @@ module Aws::QuickSight
       include Aws::Structure
     end
 
-    # Decimal parameter.
+    # A decimal parameter.
     #
     # @note When making an API call, you may pass DecimalParameter
     #   data as a hash:
@@ -3395,11 +3777,11 @@ module Aws::QuickSight
     #       }
     #
     # @!attribute [rw] name
-    #   A display name for the dataset.
+    #   A display name for the decimal parameter.
     #   @return [String]
     #
     # @!attribute [rw] values
-    #   Values.
+    #   The values for the decimal parameter.
     #   @return [Array<Float>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/DecimalParameter AWS API Documentation
@@ -3421,12 +3803,12 @@ module Aws::QuickSight
     #
     # @!attribute [rw] aws_account_id
     #   The ID for the AWS account that you want to delete QuickSight
-    #   customizations from.
+    #   customizations from in this AWS Region.
     #   @return [String]
     #
     # @!attribute [rw] namespace
-    #   The namespace associated with the customization that you're
-    #   deleting.
+    #   The QuickSight namespace that you're deleting the customizations
+    #   from.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/DeleteAccountCustomizationRequest AWS API Documentation
@@ -3451,6 +3833,81 @@ module Aws::QuickSight
     class DeleteAccountCustomizationResponse < Struct.new(
       :request_id,
       :status)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass DeleteAnalysisRequest
+    #   data as a hash:
+    #
+    #       {
+    #         aws_account_id: "AwsAccountId", # required
+    #         analysis_id: "RestrictiveResourceId", # required
+    #         recovery_window_in_days: 1,
+    #         force_delete_without_recovery: false,
+    #       }
+    #
+    # @!attribute [rw] aws_account_id
+    #   The ID of the AWS account where you want to delete an analysis.
+    #   @return [String]
+    #
+    # @!attribute [rw] analysis_id
+    #   The ID of the analysis that you're deleting.
+    #   @return [String]
+    #
+    # @!attribute [rw] recovery_window_in_days
+    #   A value that specifies the number of days that QuickSight waits
+    #   before it deletes the analysis. You can't use this parameter with
+    #   the `ForceDeleteWithoutRecovery` option in the same API call. The
+    #   default value is 30.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] force_delete_without_recovery
+    #   This option defaults to the value `NoForceDeleteWithoutRecovery`. To
+    #   immediately delete the analysis, add the
+    #   `ForceDeleteWithoutRecovery` option. You can't restore an analysis
+    #   after it's deleted.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/DeleteAnalysisRequest AWS API Documentation
+    #
+    class DeleteAnalysisRequest < Struct.new(
+      :aws_account_id,
+      :analysis_id,
+      :recovery_window_in_days,
+      :force_delete_without_recovery)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] status
+    #   The HTTP status of the request.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] arn
+    #   The Amazon Resource Name (ARN) of the deleted analysis.
+    #   @return [String]
+    #
+    # @!attribute [rw] analysis_id
+    #   The ID of the deleted analysis.
+    #   @return [String]
+    #
+    # @!attribute [rw] deletion_time
+    #   The date and time that the analysis is scheduled to be deleted.
+    #   @return [Time]
+    #
+    # @!attribute [rw] request_id
+    #   The AWS request ID for this operation.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/DeleteAnalysisResponse AWS API Documentation
+    #
+    class DeleteAnalysisResponse < Struct.new(
+      :status,
+      :arn,
+      :analysis_id,
+      :deletion_time,
+      :request_id)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4196,14 +4653,17 @@ module Aws::QuickSight
     #   @return [String]
     #
     # @!attribute [rw] namespace
-    #   The namespace associated with the customization that you're
-    #   describing.
+    #   The QuickSight namespace that you want to describe QuickSight
+    #   customizations for.
     #   @return [String]
     #
     # @!attribute [rw] resolved
-    #   The status of the creation of the customization. This is an
-    #   asynchronous process. A status of `CREATED` means that your
-    #   customization is ready to use.
+    #   The `Resolved` flag works with the other parameters to determine
+    #   which view of QuickSight customizations is returned. You can add
+    #   this flag to your command to use the same view that QuickSight uses
+    #   to identify which customizations to apply to the console. Omit this
+    #   flag, or set it to `no-resolved`, to reveal customizations that are
+    #   configured at different levels.
     #   @return [Boolean]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/DescribeAccountCustomizationRequest AWS API Documentation
@@ -4217,17 +4677,15 @@ module Aws::QuickSight
     end
 
     # @!attribute [rw] aws_account_id
-    #   The ID for the AWS account that you want to describe QuickSight
-    #   customizations for.
+    #   The ID for the AWS account that you're describing.
     #   @return [String]
     #
     # @!attribute [rw] namespace
-    #   The namespace associated with the customization that you're
-    #   describing.
+    #   The QuickSight namespace that you're describing.
     #   @return [String]
     #
     # @!attribute [rw] account_customization
-    #   The customizations associated with QuickSight.
+    #   The QuickSight customizations that exist in the current AWS Region.
     #   @return [Types::AccountCustomization]
     #
     # @!attribute [rw] request_id
@@ -4258,8 +4716,8 @@ module Aws::QuickSight
     #       }
     #
     # @!attribute [rw] aws_account_id
-    #   The ID for the AWS account that contains the QuickSight namespaces
-    #   that you want to list.
+    #   The ID for the AWS account that contains the settings that you want
+    #   to list.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/DescribeAccountSettingsRequest AWS API Documentation
@@ -4271,13 +4729,15 @@ module Aws::QuickSight
     end
 
     # @!attribute [rw] account_settings
-    #   The settings associated with the QuickSight subscription associated
-    #   with this AWS account. This information includes the edition of
-    #   Amazon QuickSight that you subscribed to (Standard or Enterprise)
-    #   and the notification email for the QuickSight subscription. The
-    #   QuickSight console, the QuickSight subscription is sometimes
-    #   referred to as a QuickSight "account" even though it is
-    #   technically not an account, but a subscription in your AWS account.
+    #   The QuickSight settings for this AWS account. This information
+    #   includes the edition of Amazon QuickSight that you subscribed to
+    #   (Standard or Enterprise) and the notification email for the
+    #   QuickSight subscription. The QuickSight console, the QuickSight
+    #   subscription is sometimes referred to as a QuickSight "account"
+    #   even though it's technically not an account by itself. Instead,
+    #   it's a subscription to the QuickSight service for your AWS account.
+    #   The edition that you subscribe to applies to QuickSight in every AWS
+    #   Region where you use it.
     #   @return [Types::AccountSettings]
     #
     # @!attribute [rw] request_id
@@ -4294,6 +4754,118 @@ module Aws::QuickSight
       :account_settings,
       :request_id,
       :status)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass DescribeAnalysisPermissionsRequest
+    #   data as a hash:
+    #
+    #       {
+    #         aws_account_id: "AwsAccountId", # required
+    #         analysis_id: "RestrictiveResourceId", # required
+    #       }
+    #
+    # @!attribute [rw] aws_account_id
+    #   The ID of the AWS account that contains the analysis whose
+    #   permissions you're describing. You must be using the AWS account
+    #   that the analysis is in.
+    #   @return [String]
+    #
+    # @!attribute [rw] analysis_id
+    #   The ID of the analysis whose permissions you're describing. The ID
+    #   is part of the analysis URL.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/DescribeAnalysisPermissionsRequest AWS API Documentation
+    #
+    class DescribeAnalysisPermissionsRequest < Struct.new(
+      :aws_account_id,
+      :analysis_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] analysis_id
+    #   The ID of the analysis whose permissions you're describing.
+    #   @return [String]
+    #
+    # @!attribute [rw] analysis_arn
+    #   The Amazon Resource Name (ARN) of the analysis whose permissions
+    #   you're describing.
+    #   @return [String]
+    #
+    # @!attribute [rw] permissions
+    #   A structure that describes the principals and the resource-level
+    #   permissions on an analysis.
+    #   @return [Array<Types::ResourcePermission>]
+    #
+    # @!attribute [rw] status
+    #   The HTTP status of the request.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] request_id
+    #   The AWS request ID for this operation.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/DescribeAnalysisPermissionsResponse AWS API Documentation
+    #
+    class DescribeAnalysisPermissionsResponse < Struct.new(
+      :analysis_id,
+      :analysis_arn,
+      :permissions,
+      :status,
+      :request_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass DescribeAnalysisRequest
+    #   data as a hash:
+    #
+    #       {
+    #         aws_account_id: "AwsAccountId", # required
+    #         analysis_id: "RestrictiveResourceId", # required
+    #       }
+    #
+    # @!attribute [rw] aws_account_id
+    #   The ID of the AWS account that contains the analysis. You must be
+    #   using the AWS account that the analysis is in.
+    #   @return [String]
+    #
+    # @!attribute [rw] analysis_id
+    #   The ID of the analysis that you're describing. The ID is part of
+    #   the URL of the analysis.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/DescribeAnalysisRequest AWS API Documentation
+    #
+    class DescribeAnalysisRequest < Struct.new(
+      :aws_account_id,
+      :analysis_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] analysis
+    #   A metadata structure that contains summary information for the
+    #   analysis that you're describing.
+    #   @return [Types::Analysis]
+    #
+    # @!attribute [rw] status
+    #   The HTTP status of the request.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] request_id
+    #   The AWS request ID for this operation.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/DescribeAnalysisResponse AWS API Documentation
+    #
+    class DescribeAnalysisResponse < Struct.new(
+      :analysis,
+      :status,
+      :request_id)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4824,8 +5396,8 @@ module Aws::QuickSight
     #   response includes the namespace ARN, name, AWS Region, creation
     #   status, and identity store. `DescribeNamespace` also works for
     #   namespaces that are in the process of being created. For incomplete
-    #   namespaces, this API lists the namespace error types and messages
-    #   associated with the creation process.
+    #   namespaces, this API operation lists the namespace error types and
+    #   messages associated with the creation process.
     #   @return [Types::NamespaceInfoV2]
     #
     # @!attribute [rw] request_id
@@ -5430,6 +6002,9 @@ module Aws::QuickSight
     #   * IAM users and IAM role-based sessions authenticated through
     #     Federated Single Sign-On using SAML, OpenID Connect, or IAM
     #     federation.
+    #
+    #   Omit this parameter for users in the third group – IAM users and IAM
+    #   role-based sessions.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/GetDashboardEmbedUrlRequest AWS API Documentation
@@ -5449,8 +6024,9 @@ module Aws::QuickSight
     # @!attribute [rw] embed_url
     #   A single-use URL that you can put into your server-side webpage to
     #   embed your dashboard. This URL is valid for 5 minutes. The API
-    #   provides the URL with an `auth_code` value that enables one (and
-    #   only one) sign-on to a user session that is valid for 10 hours.
+    #   operation provides the URL with an `auth_code` value that enables
+    #   one (and only one) sign-on to a user session that is valid for 10
+    #   hours.
     #   @return [String]
     #
     # @!attribute [rw] status
@@ -5482,12 +6058,27 @@ module Aws::QuickSight
     #       }
     #
     # @!attribute [rw] aws_account_id
-    #   The ID for the AWS account that contains the QuickSight session that
-    #   you're embedding.
+    #   The ID for the AWS account associated with your QuickSight
+    #   subscription.
     #   @return [String]
     #
     # @!attribute [rw] entry_point
-    #   The entry point for the embedded session.
+    #   The URL you use to access the embedded session. The entry point URL
+    #   is constrained to the following paths:
+    #
+    #   * `/start`
+    #
+    #   * `/start/analyses`
+    #
+    #   * `/start/dashboards`
+    #
+    #   * `/start/favorites`
+    #
+    #   * `/dashboards/DashboardId ` - where `DashboardId` is the actual ID
+    #     key from the QuickSight console URL of the dashboard
+    #
+    #   * `/analyses/AnalysisId ` - where `AnalysisId` is the actual ID key
+    #     from the QuickSight console URL of the analysis
     #   @return [String]
     #
     # @!attribute [rw] session_lifetime_in_minutes
@@ -5497,17 +6088,20 @@ module Aws::QuickSight
     #
     # @!attribute [rw] user_arn
     #   The Amazon QuickSight user's Amazon Resource Name (ARN), for use
-    #   with `QUICKSIGHT` identity type. You can use this for any Amazon
-    #   QuickSight users in your account (readers, authors, or admins)
-    #   authenticated as one of the following:
+    #   with `QUICKSIGHT` identity type. You can use this for any type of
+    #   Amazon QuickSight users in your account (readers, authors, or
+    #   admins). They need to be authenticated as one of the following:
     #
-    #   * Active Directory (AD) users or group members
+    #   1.  Active Directory (AD) users or group members
     #
-    #   * Invited nonfederated users
+    #   2.  Invited nonfederated users
     #
-    #   * IAM users and IAM role-based sessions authenticated through
-    #     Federated Single Sign-On using SAML, OpenID Connect, or IAM
-    #     federation.
+    #   3.  IAM users and IAM role-based sessions authenticated through
+    #       Federated Single Sign-On using SAML, OpenID Connect, or IAM
+    #       federation
+    #
+    #   Omit this parameter for users in the third group – IAM users and IAM
+    #   role-based sessions.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/GetSessionEmbedUrlRequest AWS API Documentation
@@ -5524,8 +6118,9 @@ module Aws::QuickSight
     # @!attribute [rw] embed_url
     #   A single-use URL that you can put into your server-side web page to
     #   embed your QuickSight session. This URL is valid for 5 minutes. The
-    #   API provides the URL with an `auth_code` value that enables one (and
-    #   only one) sign-on to a user session that is valid for 10 hours.
+    #   API operation provides the URL with an `auth_code` value that
+    #   enables one (and only one) sign-on to a user session that is valid
+    #   for 10 hours.
     #   @return [String]
     #
     # @!attribute [rw] status
@@ -5547,9 +6142,7 @@ module Aws::QuickSight
     end
 
     # A *group* in Amazon QuickSight consists of a set of users. You can use
-    # groups to make it easier to manage access and security. Currently, an
-    # Amazon QuickSight subscription can't contain more than 500 Amazon
-    # QuickSight groups.
+    # groups to make it easier to manage access and security.
     #
     # @!attribute [rw] arn
     #   The Amazon Resource Name (ARN) for the group.
@@ -5789,7 +6382,7 @@ module Aws::QuickSight
       include Aws::Structure
     end
 
-    # Integer parameter.
+    # An integer parameter.
     #
     # @note When making an API call, you may pass IntegerParameter
     #   data as a hash:
@@ -5800,11 +6393,11 @@ module Aws::QuickSight
     #       }
     #
     # @!attribute [rw] name
-    #   A display name for the dataset.
+    #   The name of the integer parameter.
     #   @return [String]
     #
     # @!attribute [rw] values
-    #   Values.
+    #   The values for the integer parameter.
     #   @return [Array<Integer>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/IntegerParameter AWS API Documentation
@@ -5948,6 +6541,64 @@ module Aws::QuickSight
     class LimitExceededException < Struct.new(
       :message,
       :resource_type,
+      :request_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass ListAnalysesRequest
+    #   data as a hash:
+    #
+    #       {
+    #         aws_account_id: "AwsAccountId", # required
+    #         next_token: "String",
+    #         max_results: 1,
+    #       }
+    #
+    # @!attribute [rw] aws_account_id
+    #   The ID of the AWS account that contains the analyses.
+    #   @return [String]
+    #
+    # @!attribute [rw] next_token
+    #   A pagination token that can be used in a subsequent request.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of results to return.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/ListAnalysesRequest AWS API Documentation
+    #
+    class ListAnalysesRequest < Struct.new(
+      :aws_account_id,
+      :next_token,
+      :max_results)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] analysis_summary_list
+    #   Metadata describing each of the analyses that are listed.
+    #   @return [Array<Types::AnalysisSummary>]
+    #
+    # @!attribute [rw] next_token
+    #   A pagination token that can be used in a subsequent request.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The HTTP status of the request.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] request_id
+    #   The AWS request ID for this operation.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/ListAnalysesResponse AWS API Documentation
+    #
+    class ListAnalysesResponse < Struct.new(
+      :analysis_summary_list,
+      :next_token,
+      :status,
       :request_id)
       SENSITIVE = []
       include Aws::Structure
@@ -7472,7 +8123,7 @@ module Aws::QuickSight
     #   @return [String]
     #
     # @!attribute [rw] namespace_error
-    #   An error that occured when the namespace was created.
+    #   An error that occurred when the namespace was created.
     #   @return [Types::NamespaceError]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/NamespaceInfoV2 AWS API Documentation
@@ -7507,7 +8158,7 @@ module Aws::QuickSight
       include Aws::Structure
     end
 
-    # Parameters.
+    # A list of QuickSight parameters and the list's override values.
     #
     # @note When making an API call, you may pass Parameters
     #   data as a hash:
@@ -7552,7 +8203,7 @@ module Aws::QuickSight
     #   @return [Array<Types::DecimalParameter>]
     #
     # @!attribute [rw] date_time_parameters
-    #   DateTime parameters.
+    #   Date-time parameters.
     #   @return [Array<Types::DateTimeParameter>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/Parameters AWS API Documentation
@@ -7938,23 +8589,31 @@ module Aws::QuickSight
     #
     # @!attribute [rw] custom_permissions_name
     #   (Enterprise edition only) The name of the custom permissions profile
-    #   that you want to assign to this user. Currently, custom permissions
-    #   profile names are assigned to permissions profiles in the QuickSight
-    #   console. You use this API to assign the named set of permissions to
-    #   a QuickSight user.
+    #   that you want to assign to this user. Customized permissions allows
+    #   you to control a user's access by restricting access the following
+    #   operations:
     #
-    #   Customizing permissions in the QuickSight UI allows you to control a
-    #   user's access to the following operations:
+    #   * Create and update data sources
     #
-    #   *
-    #   *
-    #   *
-    #   *
+    #   * Create and update datasets
+    #
+    #   * Create and update email reports
+    #
+    #   * Subscribe to email reports
+    #
+    #   To add custom permissions to an existing user, use ` UpdateUser `
+    #   instead.
+    #
+    #   A set of custom permissions includes any combination of these
+    #   restrictions. Currently, you need to create the profile names for
+    #   custom permission sets by using the QuickSight console. Then, you
+    #   use the `RegisterUser` API operation to assign the named set of
+    #   permissions to a QuickSight user.
     #
     #   QuickSight custom permissions are applied through IAM policies.
     #   Therefore, they override the permissions typically granted by
-    #   assigning QuickSight users to one of the default security cohorts
-    #   (admin, author, reader) in QuickSight.
+    #   assigning QuickSight users to one of the default security cohorts in
+    #   QuickSight (admin, author, reader).
     #
     #   This feature is available only to QuickSight Enterprise edition
     #   subscriptions that use SAML 2.0-Based Federation for Single Sign-On
@@ -7978,7 +8637,7 @@ module Aws::QuickSight
     end
 
     # @!attribute [rw] user
-    #   The user name.
+    #   The user's user name.
     #   @return [Types::User]
     #
     # @!attribute [rw] user_invitation_url
@@ -8147,7 +8806,7 @@ module Aws::QuickSight
     #   @return [String]
     #
     # @!attribute [rw] actions
-    #   The action to grant or revoke permissions on, for example
+    #   The IAM action to grant or revoke permissions on, for example
     #   `"quicksight:DescribeDashboard"`.
     #   @return [Array<String>]
     #
@@ -8178,6 +8837,59 @@ module Aws::QuickSight
     class ResourceUnavailableException < Struct.new(
       :message,
       :resource_type,
+      :request_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass RestoreAnalysisRequest
+    #   data as a hash:
+    #
+    #       {
+    #         aws_account_id: "AwsAccountId", # required
+    #         analysis_id: "RestrictiveResourceId", # required
+    #       }
+    #
+    # @!attribute [rw] aws_account_id
+    #   The ID of the AWS account that contains the analysis.
+    #   @return [String]
+    #
+    # @!attribute [rw] analysis_id
+    #   The ID of the analysis that you're restoring.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/RestoreAnalysisRequest AWS API Documentation
+    #
+    class RestoreAnalysisRequest < Struct.new(
+      :aws_account_id,
+      :analysis_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] status
+    #   The HTTP status of the request.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] arn
+    #   The Amazon Resource Name (ARN) of the analysis that you're
+    #   restoring.
+    #   @return [String]
+    #
+    # @!attribute [rw] analysis_id
+    #   The ID of the analysis that you're restoring.
+    #   @return [String]
+    #
+    # @!attribute [rw] request_id
+    #   The AWS request ID for this operation.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/RestoreAnalysisResponse AWS API Documentation
+    #
+    class RestoreAnalysisResponse < Struct.new(
+      :status,
+      :arn,
+      :analysis_id,
       :request_id)
       SENSITIVE = []
       include Aws::Structure
@@ -8300,6 +9012,78 @@ module Aws::QuickSight
       :data_source_arn,
       :upload_settings,
       :input_columns)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass SearchAnalysesRequest
+    #   data as a hash:
+    #
+    #       {
+    #         aws_account_id: "AwsAccountId", # required
+    #         filters: [ # required
+    #           {
+    #             operator: "StringEquals", # accepts StringEquals
+    #             name: "QUICKSIGHT_USER", # accepts QUICKSIGHT_USER
+    #             value: "String",
+    #           },
+    #         ],
+    #         next_token: "String",
+    #         max_results: 1,
+    #       }
+    #
+    # @!attribute [rw] aws_account_id
+    #   The ID of the AWS account that contains the analyses that you're
+    #   searching for.
+    #   @return [String]
+    #
+    # @!attribute [rw] filters
+    #   The structure for the search filters that you want to apply to your
+    #   search.
+    #   @return [Array<Types::AnalysisSearchFilter>]
+    #
+    # @!attribute [rw] next_token
+    #   A pagination token that can be used in a subsequent request.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of results to return.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/SearchAnalysesRequest AWS API Documentation
+    #
+    class SearchAnalysesRequest < Struct.new(
+      :aws_account_id,
+      :filters,
+      :next_token,
+      :max_results)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] analysis_summary_list
+    #   Metadata describing the analyses that you searched for.
+    #   @return [Array<Types::AnalysisSummary>]
+    #
+    # @!attribute [rw] next_token
+    #   A pagination token that can be used in a subsequent request.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The HTTP status of the request.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] request_id
+    #   The AWS request ID for this operation.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/SearchAnalysesResponse AWS API Documentation
+    #
+    class SearchAnalysesResponse < Struct.new(
+      :analysis_summary_list,
+      :next_token,
+      :status,
+      :request_id)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -8595,7 +9379,7 @@ module Aws::QuickSight
       include Aws::Structure
     end
 
-    # String parameter.
+    # A string parameter.
     #
     # @note When making an API call, you may pass StringParameter
     #   data as a hash:
@@ -8606,11 +9390,11 @@ module Aws::QuickSight
     #       }
     #
     # @!attribute [rw] name
-    #   A display name for the dataset.
+    #   A display name for a string parameter.
     #   @return [String]
     #
     # @!attribute [rw] values
-    #   Values.
+    #   The values of a string parameter.
     #   @return [Array<String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/StringParameter AWS API Documentation
@@ -8737,7 +9521,7 @@ module Aws::QuickSight
     # A template object. A *template* is an entity in QuickSight that
     # encapsulates the metadata required to create an analysis and that you
     # can use to create a dashboard. A template adds a layer of abstraction
-    # by using placeholders to replace the dataset associated with the
+    # by using placeholders to replace the dataset associated with an
     # analysis. You can use templates to create dashboards by replacing
     # dataset placeholders with datasets that follow the same schema that
     # was used to create the source analysis and template.
@@ -8967,11 +9751,11 @@ module Aws::QuickSight
     #   @return [Time]
     #
     # @!attribute [rw] errors
-    #   Errors associated with the template.
+    #   Errors associated with this template version.
     #   @return [Array<Types::TemplateError>]
     #
     # @!attribute [rw] version_number
-    #   The version number of the template.
+    #   The version number of the template version.
     #   @return [Integer]
     #
     # @!attribute [rw] status
@@ -8979,9 +9763,9 @@ module Aws::QuickSight
     #   @return [String]
     #
     # @!attribute [rw] data_set_configurations
-    #   Schema of the dataset identified by the placeholder. The idea is
-    #   that any dashboard created from the template should be bound to new
-    #   datasets matching the same schema described through this API. .
+    #   Schema of the dataset identified by the placeholder. Any dashboard
+    #   created from this template should be bound to new datasets matching
+    #   the same schema described through this API operation.
     #   @return [Array<Types::DataSetConfiguration>]
     #
     # @!attribute [rw] description
@@ -8989,8 +9773,12 @@ module Aws::QuickSight
     #   @return [String]
     #
     # @!attribute [rw] source_entity_arn
-    #   The Amazon Resource Name (ARN) of the analysis or template which was
+    #   The Amazon Resource Name (ARN) of an analysis or template that was
     #   used to create this template.
+    #   @return [String]
+    #
+    # @!attribute [rw] theme_arn
+    #   The ARN of the theme associated with this version of the template.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/TemplateVersion AWS API Documentation
@@ -9002,7 +9790,8 @@ module Aws::QuickSight
       :status,
       :data_set_configurations,
       :description,
-      :source_entity_arn)
+      :source_entity_arn,
+      :theme_arn)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -9074,6 +9863,8 @@ module Aws::QuickSight
       include Aws::Structure
     end
 
+    # Summary information about a theme.
+    #
     # @!attribute [rw] arn
     #   The Amazon Resource Name (ARN) of the theme.
     #   @return [String]
@@ -9752,12 +10543,12 @@ module Aws::QuickSight
     #   @return [String]
     #
     # @!attribute [rw] namespace
-    #   The namespace associated with the customization that you're
-    #   updating.
+    #   The namespace that you want to update QuickSight customizations for.
     #   @return [String]
     #
     # @!attribute [rw] account_customization
-    #   The customizations you want to update in QuickSight.
+    #   The QuickSight customizations you're updating in the current AWS
+    #   Region.
     #   @return [Types::AccountCustomization]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/UpdateAccountCustomizationRequest AWS API Documentation
@@ -9781,7 +10572,8 @@ module Aws::QuickSight
     #   @return [String]
     #
     # @!attribute [rw] account_customization
-    #   The customizations associated with your QuickSight subscription.
+    #   The QuickSight customizations you're updating in the current AWS
+    #   Region.
     #   @return [Types::AccountCustomization]
     #
     # @!attribute [rw] request_id
@@ -9814,7 +10606,7 @@ module Aws::QuickSight
     #       }
     #
     # @!attribute [rw] aws_account_id
-    #   The ID for the AWS account that contains the QuickSight namespaces
+    #   The ID for the AWS account that contains the QuickSight settings
     #   that you want to list.
     #   @return [String]
     #
@@ -9826,8 +10618,8 @@ module Aws::QuickSight
     #   @return [String]
     #
     # @!attribute [rw] notification_email
-    #   Email address used to send notifications regarding administration of
-    #   QuickSight.
+    #   The email address that you want QuickSight to send notifications to
+    #   regarding your AWS account or QuickSight subscription.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/UpdateAccountSettingsRequest AWS API Documentation
@@ -9853,6 +10645,216 @@ module Aws::QuickSight
     class UpdateAccountSettingsResponse < Struct.new(
       :request_id,
       :status)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass UpdateAnalysisPermissionsRequest
+    #   data as a hash:
+    #
+    #       {
+    #         aws_account_id: "AwsAccountId", # required
+    #         analysis_id: "RestrictiveResourceId", # required
+    #         grant_permissions: [
+    #           {
+    #             principal: "Principal", # required
+    #             actions: ["String"], # required
+    #           },
+    #         ],
+    #         revoke_permissions: [
+    #           {
+    #             principal: "Principal", # required
+    #             actions: ["String"], # required
+    #           },
+    #         ],
+    #       }
+    #
+    # @!attribute [rw] aws_account_id
+    #   The ID of the AWS account that contains the analysis whose
+    #   permissions you're updating. You must be using the AWS account that
+    #   the analysis is in.
+    #   @return [String]
+    #
+    # @!attribute [rw] analysis_id
+    #   The ID of the analysis whose permissions you're updating. The ID is
+    #   part of the analysis URL.
+    #   @return [String]
+    #
+    # @!attribute [rw] grant_permissions
+    #   A structure that describes the permissions to add and the principal
+    #   to add them to.
+    #   @return [Array<Types::ResourcePermission>]
+    #
+    # @!attribute [rw] revoke_permissions
+    #   A structure that describes the permissions to remove and the
+    #   principal to remove them from.
+    #   @return [Array<Types::ResourcePermission>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/UpdateAnalysisPermissionsRequest AWS API Documentation
+    #
+    class UpdateAnalysisPermissionsRequest < Struct.new(
+      :aws_account_id,
+      :analysis_id,
+      :grant_permissions,
+      :revoke_permissions)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] analysis_arn
+    #   The Amazon Resource Name (ARN) of the analysis that you updated.
+    #   @return [String]
+    #
+    # @!attribute [rw] analysis_id
+    #   The ID of the analysis that you updated permissions for.
+    #   @return [String]
+    #
+    # @!attribute [rw] permissions
+    #   A structure that describes the principals and the resource-level
+    #   permissions on an analysis.
+    #   @return [Array<Types::ResourcePermission>]
+    #
+    # @!attribute [rw] request_id
+    #   The AWS request ID for this operation.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The HTTP status of the request.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/UpdateAnalysisPermissionsResponse AWS API Documentation
+    #
+    class UpdateAnalysisPermissionsResponse < Struct.new(
+      :analysis_arn,
+      :analysis_id,
+      :permissions,
+      :request_id,
+      :status)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass UpdateAnalysisRequest
+    #   data as a hash:
+    #
+    #       {
+    #         aws_account_id: "AwsAccountId", # required
+    #         analysis_id: "RestrictiveResourceId", # required
+    #         name: "AnalysisName", # required
+    #         parameters: {
+    #           string_parameters: [
+    #             {
+    #               name: "NonEmptyString", # required
+    #               values: ["String"], # required
+    #             },
+    #           ],
+    #           integer_parameters: [
+    #             {
+    #               name: "NonEmptyString", # required
+    #               values: [1], # required
+    #             },
+    #           ],
+    #           decimal_parameters: [
+    #             {
+    #               name: "NonEmptyString", # required
+    #               values: [1.0], # required
+    #             },
+    #           ],
+    #           date_time_parameters: [
+    #             {
+    #               name: "NonEmptyString", # required
+    #               values: [Time.now], # required
+    #             },
+    #           ],
+    #         },
+    #         source_entity: { # required
+    #           source_template: {
+    #             data_set_references: [ # required
+    #               {
+    #                 data_set_placeholder: "NonEmptyString", # required
+    #                 data_set_arn: "Arn", # required
+    #               },
+    #             ],
+    #             arn: "Arn", # required
+    #           },
+    #         },
+    #         theme_arn: "Arn",
+    #       }
+    #
+    # @!attribute [rw] aws_account_id
+    #   The ID of the AWS account that contains the analysis that you're
+    #   updating.
+    #   @return [String]
+    #
+    # @!attribute [rw] analysis_id
+    #   The ID for the analysis that you're updating. This ID displays in
+    #   the URL of the analysis.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   A descriptive name for the analysis that you're updating. This name
+    #   displays for the analysis in the QuickSight console.
+    #   @return [String]
+    #
+    # @!attribute [rw] parameters
+    #   The parameter names and override values that you want to use. An
+    #   analysis can have any parameter type, and some parameters might
+    #   accept multiple values.
+    #   @return [Types::Parameters]
+    #
+    # @!attribute [rw] source_entity
+    #   A source entity to use for the analysis that you're updating. This
+    #   metadata structure contains details that describe a source template
+    #   and one or more datasets.
+    #   @return [Types::AnalysisSourceEntity]
+    #
+    # @!attribute [rw] theme_arn
+    #   The Amazon Resource Name (ARN) for the theme to apply to the
+    #   analysis that you're creating. To see the theme in the QuickSight
+    #   console, make sure that you have access to it.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/UpdateAnalysisRequest AWS API Documentation
+    #
+    class UpdateAnalysisRequest < Struct.new(
+      :aws_account_id,
+      :analysis_id,
+      :name,
+      :parameters,
+      :source_entity,
+      :theme_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] arn
+    #   The ARN of the analysis that you're updating.
+    #   @return [String]
+    #
+    # @!attribute [rw] analysis_id
+    #   The ID of the analysis.
+    #   @return [String]
+    #
+    # @!attribute [rw] update_status
+    #   The update status of the last update that was made to the analysis.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The HTTP status of the request.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] request_id
+    #   The AWS request ID for this operation.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/UpdateAnalysisResponse AWS API Documentation
+    #
+    class UpdateAnalysisResponse < Struct.new(
+      :arn,
+      :analysis_id,
+      :update_status,
+      :status,
+      :request_id)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -10105,7 +11107,7 @@ module Aws::QuickSight
     #
     #   * `AvailabilityStatus` for `ExportToCSVOption` - This status can be
     #     either `ENABLED` or `DISABLED`. The visual option to export data
-    #     to .csv format isn't enabled when this is set to `DISABLED`. This
+    #     to .CSV format isn't enabled when this is set to `DISABLED`. This
     #     option is `ENABLED` by default.
     #
     #   * `VisibilityState` for `SheetControlsOption` - This visibility
@@ -11544,8 +12546,8 @@ module Aws::QuickSight
     #   @return [String]
     #
     # @!attribute [rw] role
-    #   The Amazon QuickSight role of the user. The user role can be one of
-    #   the following:
+    #   The Amazon QuickSight role of the user. The role can be one of the
+    #   following default security cohorts:
     #
     #   * `READER`\: A user who has read-only access to dashboards.
     #
@@ -11554,14 +12556,39 @@ module Aws::QuickSight
     #
     #   * `ADMIN`\: A user who is an author, who can also manage Amazon
     #     QuickSight settings.
+    #
+    #   The name of the QuickSight role is invisible to the user except for
+    #   the console screens dealing with permissions.
     #   @return [String]
     #
     # @!attribute [rw] custom_permissions_name
-    #   The name of the custom permissions profile that you want to assign
-    #   to this user. Currently, custom permissions profile names are
-    #   assigned to permissions profiles in the QuickSight console. You use
-    #   this API to assign the named set of permissions to a QuickSight
-    #   user.
+    #   (Enterprise edition only) The name of the custom permissions profile
+    #   that you want to assign to this user. Customized permissions allows
+    #   you to control a user's access by restricting access the following
+    #   operations:
+    #
+    #   * Create and update data sources
+    #
+    #   * Create and update datasets
+    #
+    #   * Create and update email reports
+    #
+    #   * Subscribe to email reports
+    #
+    #   A set of custom permissions includes any combination of these
+    #   restrictions. Currently, you need to create the profile names for
+    #   custom permission sets by using the QuickSight console. Then, you
+    #   use the `RegisterUser` API operation to assign the named set of
+    #   permissions to a QuickSight user.
+    #
+    #   QuickSight custom permissions are applied through IAM policies.
+    #   Therefore, they override the permissions typically granted by
+    #   assigning QuickSight users to one of the default security cohorts in
+    #   QuickSight (admin, author, reader).
+    #
+    #   This feature is available only to QuickSight Enterprise edition
+    #   subscriptions that use SAML 2.0-Based Federation for Single Sign-On
+    #   (SSO).
     #   @return [String]
     #
     # @!attribute [rw] unapply_custom_permissions
@@ -11654,8 +12681,7 @@ module Aws::QuickSight
       include Aws::Structure
     end
 
-    # A registered user of Amazon QuickSight. Currently, an Amazon
-    # QuickSight subscription can't contain more than 20 million users.
+    # A registered user of Amazon QuickSight.
     #
     # @!attribute [rw] arn
     #   The Amazon Resource Name (ARN) for the user.

@@ -324,7 +324,7 @@ module Aws::ElasticLoadBalancing
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/elasticloadbalancing/latest/classic/add-remove-tags.html
+    # [1]: https://docs.aws.amazon.com/elasticloadbalancing/latest/classic/add-remove-tags.html
     #
     # @option params [required, Array<String>] :load_balancer_names
     #   The name of the load balancer. You can specify one load balancer only.
@@ -385,7 +385,7 @@ module Aws::ElasticLoadBalancing
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/elasticloadbalancing/latest/classic/elb-security-groups.html#elb-vpc-security-groups
+    # [1]: https://docs.aws.amazon.com/elasticloadbalancing/latest/classic/elb-security-groups.html#elb-vpc-security-groups
     #
     # @option params [required, String] :load_balancer_name
     #   The name of the load balancer.
@@ -447,7 +447,7 @@ module Aws::ElasticLoadBalancing
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/elasticloadbalancing/latest/classic/elb-manage-subnets.html
+    # [1]: https://docs.aws.amazon.com/elasticloadbalancing/latest/classic/elb-manage-subnets.html
     #
     # @option params [required, String] :load_balancer_name
     #   The name of the load balancer.
@@ -509,7 +509,7 @@ module Aws::ElasticLoadBalancing
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/elasticloadbalancing/latest/classic/elb-healthchecks.html
+    # [1]: https://docs.aws.amazon.com/elasticloadbalancing/latest/classic/elb-healthchecks.html
     #
     # @option params [required, String] :load_balancer_name
     #   The name of the load balancer.
@@ -597,7 +597,7 @@ module Aws::ElasticLoadBalancing
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/elasticloadbalancing/latest/classic/elb-sticky-sessions.html#enable-sticky-sessions-application
+    # [1]: https://docs.aws.amazon.com/elasticloadbalancing/latest/classic/elb-sticky-sessions.html#enable-sticky-sessions-application
     #
     # @option params [required, String] :load_balancer_name
     #   The name of the load balancer.
@@ -663,7 +663,7 @@ module Aws::ElasticLoadBalancing
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/elasticloadbalancing/latest/classic/elb-sticky-sessions.html#enable-sticky-sessions-duration
+    # [1]: https://docs.aws.amazon.com/elasticloadbalancing/latest/classic/elb-sticky-sessions.html#enable-sticky-sessions-duration
     #
     # @option params [required, String] :load_balancer_name
     #   The name of the load balancer.
@@ -727,7 +727,7 @@ module Aws::ElasticLoadBalancing
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/elasticloadbalancing/latest/classic/elb-limits.html
+    # [1]: https://docs.aws.amazon.com/elasticloadbalancing/latest/classic/elb-limits.html
     #
     # @option params [required, String] :load_balancer_name
     #   The name of the load balancer.
@@ -745,7 +745,7 @@ module Aws::ElasticLoadBalancing
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/elasticloadbalancing/latest/classic/elb-listener-config.html
+    #   [1]: https://docs.aws.amazon.com/elasticloadbalancing/latest/classic/elb-listener-config.html
     #
     # @option params [Array<String>] :availability_zones
     #   One or more Availability Zones from the same region as the load
@@ -778,7 +778,7 @@ module Aws::ElasticLoadBalancing
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/elasticloadbalancing/latest/userguide/how-elastic-load-balancing-works.html#load-balancer-scheme
+    #   [1]: https://docs.aws.amazon.com/elasticloadbalancing/latest/userguide/how-elastic-load-balancing-works.html#load-balancer-scheme
     #
     # @option params [Array<Types::Tag>] :tags
     #   A list of tags to assign to the load balancer.
@@ -788,7 +788,7 @@ module Aws::ElasticLoadBalancing
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/elasticloadbalancing/latest/classic/add-remove-tags.html
+    #   [1]: https://docs.aws.amazon.com/elasticloadbalancing/latest/classic/add-remove-tags.html
     #
     # @return [Types::CreateAccessPointOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -987,7 +987,7 @@ module Aws::ElasticLoadBalancing
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/elasticloadbalancing/latest/classic/elb-listener-config.html
+    # [1]: https://docs.aws.amazon.com/elasticloadbalancing/latest/classic/elb-listener-config.html
     #
     # @option params [required, String] :load_balancer_name
     #   The name of the load balancer.
@@ -1279,7 +1279,7 @@ module Aws::ElasticLoadBalancing
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/elasticloadbalancing/latest/classic/elb-deregister-register-instances.html
+    # [1]: https://docs.aws.amazon.com/elasticloadbalancing/latest/classic/elb-deregister-register-instances.html
     #
     # @option params [required, String] :load_balancer_name
     #   The name of the load balancer.
@@ -1350,7 +1350,7 @@ module Aws::ElasticLoadBalancing
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/elasticloadbalancing/latest/classic/elb-limits.html
+    # [1]: https://docs.aws.amazon.com/elasticloadbalancing/latest/classic/elb-limits.html
     #
     # @option params [String] :marker
     #   The marker for the next set of results. (You received this marker from
@@ -2007,7 +2007,7 @@ module Aws::ElasticLoadBalancing
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/elasticloadbalancing/latest/classic/enable-disable-az.html
+    # [1]: https://docs.aws.amazon.com/elasticloadbalancing/latest/classic/enable-disable-az.html
     #
     # @option params [required, String] :load_balancer_name
     #   The name of the load balancer.
@@ -2072,7 +2072,7 @@ module Aws::ElasticLoadBalancing
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/elasticloadbalancing/latest/classic/enable-disable-az.html
+    # [1]: https://docs.aws.amazon.com/elasticloadbalancing/latest/classic/enable-disable-az.html
     #
     # @option params [required, String] :load_balancer_name
     #   The name of the load balancer.
@@ -2147,10 +2147,10 @@ module Aws::ElasticLoadBalancing
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/elasticloadbalancing/latest/classic/enable-disable-crosszone-lb.html
-    # [2]: http://docs.aws.amazon.com/elasticloadbalancing/latest/classic/config-conn-drain.html
-    # [3]: http://docs.aws.amazon.com/elasticloadbalancing/latest/classic/access-log-collection.html
-    # [4]: http://docs.aws.amazon.com/elasticloadbalancing/latest/classic/config-idle-timeout.html
+    # [1]: https://docs.aws.amazon.com/elasticloadbalancing/latest/classic/enable-disable-crosszone-lb.html
+    # [2]: https://docs.aws.amazon.com/elasticloadbalancing/latest/classic/config-conn-drain.html
+    # [3]: https://docs.aws.amazon.com/elasticloadbalancing/latest/classic/access-log-collection.html
+    # [4]: https://docs.aws.amazon.com/elasticloadbalancing/latest/classic/config-idle-timeout.html
     #
     # @option params [required, String] :load_balancer_name
     #   The name of the load balancer.
@@ -2294,7 +2294,7 @@ module Aws::ElasticLoadBalancing
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/elasticloadbalancing/latest/classic/elb-deregister-register-instances.html
+    # [1]: https://docs.aws.amazon.com/elasticloadbalancing/latest/classic/elb-deregister-register-instances.html
     #
     # @option params [required, String] :load_balancer_name
     #   The name of the load balancer.
@@ -2417,7 +2417,7 @@ module Aws::ElasticLoadBalancing
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/elasticloadbalancing/latest/classic/elb-update-ssl-cert.html
+    # [1]: https://docs.aws.amazon.com/elasticloadbalancing/latest/classic/elb-update-ssl-cert.html
     #
     # @option params [required, String] :load_balancer_name
     #   The name of the load balancer.
@@ -2479,8 +2479,8 @@ module Aws::ElasticLoadBalancing
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/elasticloadbalancing/latest/classic/elb-create-https-ssl-load-balancer.html#configure_backendauth_clt
-    # [2]: http://docs.aws.amazon.com/elasticloadbalancing/latest/classic/enable-proxy-protocol.html
+    # [1]: https://docs.aws.amazon.com/elasticloadbalancing/latest/classic/elb-create-https-ssl-load-balancer.html#configure_backendauth_clt
+    # [2]: https://docs.aws.amazon.com/elasticloadbalancing/latest/classic/enable-proxy-protocol.html
     #
     # @option params [required, String] :load_balancer_name
     #   The name of the load balancer.
@@ -2537,9 +2537,9 @@ module Aws::ElasticLoadBalancing
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/elasticloadbalancing/latest/classic/ssl-config-update.html
-    # [2]: http://docs.aws.amazon.com/elasticloadbalancing/latest/classic/elb-sticky-sessions.html#enable-sticky-sessions-duration
-    # [3]: http://docs.aws.amazon.com/elasticloadbalancing/latest/classic/elb-sticky-sessions.html#enable-sticky-sessions-application
+    # [1]: https://docs.aws.amazon.com/elasticloadbalancing/latest/classic/ssl-config-update.html
+    # [2]: https://docs.aws.amazon.com/elasticloadbalancing/latest/classic/elb-sticky-sessions.html#enable-sticky-sessions-duration
+    # [3]: https://docs.aws.amazon.com/elasticloadbalancing/latest/classic/elb-sticky-sessions.html#enable-sticky-sessions-application
     #
     # @option params [required, String] :load_balancer_name
     #   The name of the load balancer.
@@ -2597,7 +2597,7 @@ module Aws::ElasticLoadBalancing
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-elasticloadbalancing'
-      context[:gem_version] = '1.25.0'
+      context[:gem_version] = '1.26.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

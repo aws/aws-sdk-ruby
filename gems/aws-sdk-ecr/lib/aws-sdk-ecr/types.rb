@@ -1249,7 +1249,7 @@ module Aws::ECR
     #   @return [String]
     #
     # @!attribute [rw] image_manifest_media_type
-    #   The media type associated with the image manifest.
+    #   The manifest media type of the image.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ecr-2015-09-21/Image AWS API Documentation
@@ -1327,6 +1327,14 @@ module Aws::ECR
     #   A summary of the last completed image scan.
     #   @return [Types::ImageScanFindingsSummary]
     #
+    # @!attribute [rw] image_manifest_media_type
+    #   The media type of the image manifest.
+    #   @return [String]
+    #
+    # @!attribute [rw] artifact_media_type
+    #   The artifact media type of the image.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ecr-2015-09-21/ImageDetail AWS API Documentation
     #
     class ImageDetail < Struct.new(
@@ -1337,7 +1345,9 @@ module Aws::ECR
       :image_size_in_bytes,
       :image_pushed_at,
       :image_scan_status,
-      :image_scan_findings_summary)
+      :image_scan_findings_summary,
+      :image_manifest_media_type,
+      :artifact_media_type)
       SENSITIVE = []
       include Aws::Structure
     end

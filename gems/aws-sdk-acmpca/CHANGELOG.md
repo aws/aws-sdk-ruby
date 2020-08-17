@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.27.0 (2020-08-17)
+------------------
+
+* Feature - ACM Private CA is launching cross-account support. This allows customers to share their private CAs with other accounts, AWS Organizations, and organizational units to issue end-entity certificates.
+
 1.26.0 (2020-06-23)
 ------------------
 

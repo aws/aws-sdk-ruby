@@ -10,6 +10,39 @@
 module Aws::RoboMaker
   module Types
 
+    # @note When making an API call, you may pass BatchDeleteWorldsRequest
+    #   data as a hash:
+    #
+    #       {
+    #         worlds: ["Arn"], # required
+    #       }
+    #
+    # @!attribute [rw] worlds
+    #   A list of Amazon Resource Names (arns) that correspond to worlds to
+    #   delete.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/robomaker-2018-06-29/BatchDeleteWorldsRequest AWS API Documentation
+    #
+    class BatchDeleteWorldsRequest < Struct.new(
+      :worlds)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] unprocessed_worlds
+    #   A list of unprocessed worlds associated with the call. These worlds
+    #   were not deleted.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/robomaker-2018-06-29/BatchDeleteWorldsResponse AWS API Documentation
+    #
+    class BatchDeleteWorldsResponse < Struct.new(
+      :unprocessed_worlds)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass BatchDescribeSimulationJobRequest
     #   data as a hash:
     #
@@ -155,6 +188,52 @@ module Aws::RoboMaker
     #
     class CancelSimulationJobResponse < Aws::EmptyStructure; end
 
+    # @note When making an API call, you may pass CancelWorldExportJobRequest
+    #   data as a hash:
+    #
+    #       {
+    #         job: "Arn", # required
+    #       }
+    #
+    # @!attribute [rw] job
+    #   The Amazon Resource Name (arn) of the world export job to cancel.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/robomaker-2018-06-29/CancelWorldExportJobRequest AWS API Documentation
+    #
+    class CancelWorldExportJobRequest < Struct.new(
+      :job)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/robomaker-2018-06-29/CancelWorldExportJobResponse AWS API Documentation
+    #
+    class CancelWorldExportJobResponse < Aws::EmptyStructure; end
+
+    # @note When making an API call, you may pass CancelWorldGenerationJobRequest
+    #   data as a hash:
+    #
+    #       {
+    #         job: "Arn", # required
+    #       }
+    #
+    # @!attribute [rw] job
+    #   The Amazon Resource Name (arn) of the world generator job to cancel.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/robomaker-2018-06-29/CancelWorldGenerationJobRequest AWS API Documentation
+    #
+    class CancelWorldGenerationJobRequest < Struct.new(
+      :job)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/robomaker-2018-06-29/CancelWorldGenerationJobResponse AWS API Documentation
+    #
+    class CancelWorldGenerationJobResponse < Aws::EmptyStructure; end
+
     # Compute information for the simulation job.
     #
     # @note When making an API call, you may pass Compute
@@ -168,7 +247,8 @@ module Aws::RoboMaker
     #   The simulation unit limit. Your simulation is allocated CPU and
     #   memory proportional to the supplied simulation unit limit. A
     #   simulation unit is 1 vcpu and 2GB of memory. You are only billed for
-    #   the SU utilization you consume up to the maximim value provided.
+    #   the SU utilization you consume up to the maximim value provided. The
+    #   default is 15.
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/robomaker-2018-06-29/Compute AWS API Documentation
@@ -185,7 +265,8 @@ module Aws::RoboMaker
     #   The simulation unit limit. Your simulation is allocated CPU and
     #   memory proportional to the supplied simulation unit limit. A
     #   simulation unit is 1 vcpu and 2GB of memory. You are only billed for
-    #   the SU utilization you consume up to the maximim value provided.
+    #   the SU utilization you consume up to the maximim value provided. The
+    #   default is 15.
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/robomaker-2018-06-29/ComputeResponse AWS API Documentation
@@ -967,6 +1048,11 @@ module Aws::RoboMaker
     #               },
     #               stream_ui: false,
     #             },
+    #             world_configs: [
+    #               {
+    #                 world: "Arn",
+    #               },
+    #             ],
     #           },
     #         ],
     #         data_sources: [
@@ -1246,6 +1332,393 @@ module Aws::RoboMaker
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass CreateWorldExportJobRequest
+    #   data as a hash:
+    #
+    #       {
+    #         client_request_token: "ClientRequestToken",
+    #         worlds: ["Arn"], # required
+    #         output_location: { # required
+    #           s3_bucket: "S3Bucket",
+    #           s3_prefix: "S3Key",
+    #         },
+    #         iam_role: "IamRole", # required
+    #         tags: {
+    #           "TagKey" => "TagValue",
+    #         },
+    #       }
+    #
+    # @!attribute [rw] client_request_token
+    #   Unique, case-sensitive identifier that you provide to ensure the
+    #   idempotency of the request.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.
+    #   @return [String]
+    #
+    # @!attribute [rw] worlds
+    #   A list of Amazon Resource Names (arns) that correspond to worlds to
+    #   export.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] output_location
+    #   The output location.
+    #   @return [Types::OutputLocation]
+    #
+    # @!attribute [rw] iam_role
+    #   The IAM role that the world export process uses to access the Amazon
+    #   S3 bucket and put the export.
+    #   @return [String]
+    #
+    # @!attribute [rw] tags
+    #   A map that contains tag keys and tag values that are attached to the
+    #   world export job.
+    #   @return [Hash<String,String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/robomaker-2018-06-29/CreateWorldExportJobRequest AWS API Documentation
+    #
+    class CreateWorldExportJobRequest < Struct.new(
+      :client_request_token,
+      :worlds,
+      :output_location,
+      :iam_role,
+      :tags)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] arn
+    #   The Amazon Resource Name (ARN) of the world export job.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The status of the world export job.
+    #
+    #   Pending
+    #
+    #   : The world export job request is pending.
+    #
+    #   Running
+    #
+    #   : The world export job is running.
+    #
+    #   Completed
+    #
+    #   : The world export job completed.
+    #
+    #   Failed
+    #
+    #   : The world export job failed. See `failureCode` for more
+    #     information.
+    #
+    #   Canceled
+    #
+    #   : The world export job was cancelled.
+    #
+    #   Canceling
+    #
+    #   : The world export job is being cancelled.
+    #   @return [String]
+    #
+    # @!attribute [rw] created_at
+    #   The time, in milliseconds since the epoch, when the world export job
+    #   was created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] failure_code
+    #   The failure code of the world export job if it failed:
+    #
+    #   InternalServiceError
+    #
+    #   : Internal service error.
+    #
+    #   LimitExceeded
+    #
+    #   : The requested resource exceeds the maximum number allowed, or the
+    #     number of concurrent stream requests exceeds the maximum number
+    #     allowed.
+    #
+    #   ResourceNotFound
+    #
+    #   : The specified resource could not be found.
+    #
+    #   RequestThrottled
+    #
+    #   : The request was throttled.
+    #
+    #   InvalidInput
+    #
+    #   : An input parameter in the request is not valid.
+    #   @return [String]
+    #
+    # @!attribute [rw] client_request_token
+    #   Unique, case-sensitive identifier that you provide to ensure the
+    #   idempotency of the request.
+    #   @return [String]
+    #
+    # @!attribute [rw] output_location
+    #   The output location.
+    #   @return [Types::OutputLocation]
+    #
+    # @!attribute [rw] iam_role
+    #   The IAM role that the world export process uses to access the Amazon
+    #   S3 bucket and put the export.
+    #   @return [String]
+    #
+    # @!attribute [rw] tags
+    #   A map that contains tag keys and tag values that are attached to the
+    #   world export job.
+    #   @return [Hash<String,String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/robomaker-2018-06-29/CreateWorldExportJobResponse AWS API Documentation
+    #
+    class CreateWorldExportJobResponse < Struct.new(
+      :arn,
+      :status,
+      :created_at,
+      :failure_code,
+      :client_request_token,
+      :output_location,
+      :iam_role,
+      :tags)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass CreateWorldGenerationJobRequest
+    #   data as a hash:
+    #
+    #       {
+    #         client_request_token: "ClientRequestToken",
+    #         template: "Arn", # required
+    #         world_count: { # required
+    #           floorplan_count: 1,
+    #           interior_count_per_floorplan: 1,
+    #         },
+    #         tags: {
+    #           "TagKey" => "TagValue",
+    #         },
+    #       }
+    #
+    # @!attribute [rw] client_request_token
+    #   Unique, case-sensitive identifier that you provide to ensure the
+    #   idempotency of the request.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.
+    #   @return [String]
+    #
+    # @!attribute [rw] template
+    #   The Amazon Resource Name (arn) of the world template describing the
+    #   worlds you want to create.
+    #   @return [String]
+    #
+    # @!attribute [rw] world_count
+    #   Information about the world count.
+    #   @return [Types::WorldCount]
+    #
+    # @!attribute [rw] tags
+    #   A map that contains tag keys and tag values that are attached to the
+    #   world generator job.
+    #   @return [Hash<String,String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/robomaker-2018-06-29/CreateWorldGenerationJobRequest AWS API Documentation
+    #
+    class CreateWorldGenerationJobRequest < Struct.new(
+      :client_request_token,
+      :template,
+      :world_count,
+      :tags)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] arn
+    #   The Amazon Resource Name (ARN) of the world generator job.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The status of the world generator job.
+    #
+    #   Pending
+    #
+    #   : The world generator job request is pending.
+    #
+    #   Running
+    #
+    #   : The world generator job is running.
+    #
+    #   Completed
+    #
+    #   : The world generator job completed.
+    #
+    #   Failed
+    #
+    #   : The world generator job failed. See `failureCode` for more
+    #     information.
+    #
+    #   PartialFailed
+    #
+    #   : Some worlds did not generate.
+    #
+    #   Canceled
+    #
+    #   : The world generator job was cancelled.
+    #
+    #   Canceling
+    #
+    #   : The world generator job is being cancelled.
+    #   @return [String]
+    #
+    # @!attribute [rw] created_at
+    #   The time, in milliseconds since the epoch, when the world generator
+    #   job was created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] failure_code
+    #   The failure code of the world generator job if it failed:
+    #
+    #   InternalServiceError
+    #
+    #   : Internal service error.
+    #
+    #   LimitExceeded
+    #
+    #   : The requested resource exceeds the maximum number allowed, or the
+    #     number of concurrent stream requests exceeds the maximum number
+    #     allowed.
+    #
+    #   ResourceNotFound
+    #
+    #   : The specified resource could not be found.
+    #
+    #   RequestThrottled
+    #
+    #   : The request was throttled.
+    #
+    #   InvalidInput
+    #
+    #   : An input parameter in the request is not valid.
+    #   @return [String]
+    #
+    # @!attribute [rw] client_request_token
+    #   Unique, case-sensitive identifier that you provide to ensure the
+    #   idempotency of the request.
+    #   @return [String]
+    #
+    # @!attribute [rw] template
+    #   The Amazon Resource Name (arn) of the world template.
+    #   @return [String]
+    #
+    # @!attribute [rw] world_count
+    #   Information about the world count.
+    #   @return [Types::WorldCount]
+    #
+    # @!attribute [rw] tags
+    #   A map that contains tag keys and tag values that are attached to the
+    #   world generator job.
+    #   @return [Hash<String,String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/robomaker-2018-06-29/CreateWorldGenerationJobResponse AWS API Documentation
+    #
+    class CreateWorldGenerationJobResponse < Struct.new(
+      :arn,
+      :status,
+      :created_at,
+      :failure_code,
+      :client_request_token,
+      :template,
+      :world_count,
+      :tags)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass CreateWorldTemplateRequest
+    #   data as a hash:
+    #
+    #       {
+    #         client_request_token: "ClientRequestToken",
+    #         name: "TemplateName",
+    #         template_body: "Json",
+    #         template_location: {
+    #           s3_bucket: "S3Bucket", # required
+    #           s3_key: "S3Key", # required
+    #         },
+    #         tags: {
+    #           "TagKey" => "TagValue",
+    #         },
+    #       }
+    #
+    # @!attribute [rw] client_request_token
+    #   Unique, case-sensitive identifier that you provide to ensure the
+    #   idempotency of the request.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The name of the world template.
+    #   @return [String]
+    #
+    # @!attribute [rw] template_body
+    #   The world template body.
+    #   @return [String]
+    #
+    # @!attribute [rw] template_location
+    #   The location of the world template.
+    #   @return [Types::TemplateLocation]
+    #
+    # @!attribute [rw] tags
+    #   A map that contains tag keys and tag values that are attached to the
+    #   world template.
+    #   @return [Hash<String,String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/robomaker-2018-06-29/CreateWorldTemplateRequest AWS API Documentation
+    #
+    class CreateWorldTemplateRequest < Struct.new(
+      :client_request_token,
+      :name,
+      :template_body,
+      :template_location,
+      :tags)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] arn
+    #   The Amazon Resource Name (ARN) of the world template.
+    #   @return [String]
+    #
+    # @!attribute [rw] client_request_token
+    #   Unique, case-sensitive identifier that you provide to ensure the
+    #   idempotency of the request.
+    #   @return [String]
+    #
+    # @!attribute [rw] created_at
+    #   The time, in milliseconds since the epoch, when the world template
+    #   was created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] name
+    #   The name of the world template.
+    #   @return [String]
+    #
+    # @!attribute [rw] tags
+    #   A map that contains tag keys and tag values that are attached to the
+    #   world template.
+    #   @return [Hash<String,String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/robomaker-2018-06-29/CreateWorldTemplateResponse AWS API Documentation
+    #
+    class CreateWorldTemplateResponse < Struct.new(
+      :arn,
+      :client_request_token,
+      :created_at,
+      :name,
+      :tags)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Information about a data source.
     #
     # @!attribute [rw] name
@@ -1407,6 +1880,30 @@ module Aws::RoboMaker
     # @see http://docs.aws.amazon.com/goto/WebAPI/robomaker-2018-06-29/DeleteSimulationApplicationResponse AWS API Documentation
     #
     class DeleteSimulationApplicationResponse < Aws::EmptyStructure; end
+
+    # @note When making an API call, you may pass DeleteWorldTemplateRequest
+    #   data as a hash:
+    #
+    #       {
+    #         template: "Arn", # required
+    #       }
+    #
+    # @!attribute [rw] template
+    #   The Amazon Resource Name (arn) of the world template you want to
+    #   delete.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/robomaker-2018-06-29/DeleteWorldTemplateRequest AWS API Documentation
+    #
+    class DeleteWorldTemplateRequest < Struct.new(
+      :template)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/robomaker-2018-06-29/DeleteWorldTemplateResponse AWS API Documentation
+    #
+    class DeleteWorldTemplateResponse < Aws::EmptyStructure; end
 
     # Information about a deployment application configuration.
     #
@@ -2360,6 +2857,380 @@ module Aws::RoboMaker
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass DescribeWorldExportJobRequest
+    #   data as a hash:
+    #
+    #       {
+    #         job: "Arn", # required
+    #       }
+    #
+    # @!attribute [rw] job
+    #   The Amazon Resource Name (arn) of the world export job to describe.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/robomaker-2018-06-29/DescribeWorldExportJobRequest AWS API Documentation
+    #
+    class DescribeWorldExportJobRequest < Struct.new(
+      :job)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] arn
+    #   The Amazon Resource Name (ARN) of the world export job.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The status of the world export job.
+    #
+    #   Pending
+    #
+    #   : The world export job request is pending.
+    #
+    #   Running
+    #
+    #   : The world export job is running.
+    #
+    #   Completed
+    #
+    #   : The world export job completed.
+    #
+    #   Failed
+    #
+    #   : The world export job failed. See `failureCode` and `failureReason`
+    #     for more information.
+    #
+    #   Canceled
+    #
+    #   : The world export job was cancelled.
+    #
+    #   Canceling
+    #
+    #   : The world export job is being cancelled.
+    #   @return [String]
+    #
+    # @!attribute [rw] created_at
+    #   The time, in milliseconds since the epoch, when the world export job
+    #   was created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] failure_code
+    #   The failure code of the world export job if it failed:
+    #
+    #   InternalServiceError
+    #
+    #   : Internal service error.
+    #
+    #   LimitExceeded
+    #
+    #   : The requested resource exceeds the maximum number allowed, or the
+    #     number of concurrent stream requests exceeds the maximum number
+    #     allowed.
+    #
+    #   ResourceNotFound
+    #
+    #   : The specified resource could not be found.
+    #
+    #   RequestThrottled
+    #
+    #   : The request was throttled.
+    #
+    #   InvalidInput
+    #
+    #   : An input parameter in the request is not valid.
+    #   @return [String]
+    #
+    # @!attribute [rw] failure_reason
+    #   The reason why the world export job failed.
+    #   @return [String]
+    #
+    # @!attribute [rw] client_request_token
+    #   Unique, case-sensitive identifier that you provide to ensure the
+    #   idempotency of the request.
+    #   @return [String]
+    #
+    # @!attribute [rw] worlds
+    #   A list of Amazon Resource Names (arns) that correspond to worlds to
+    #   be exported.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] output_location
+    #   The output location.
+    #   @return [Types::OutputLocation]
+    #
+    # @!attribute [rw] iam_role
+    #   The IAM role that the world export process uses to access the Amazon
+    #   S3 bucket and put the export.
+    #   @return [String]
+    #
+    # @!attribute [rw] tags
+    #   A map that contains tag keys and tag values that are attached to the
+    #   world export job.
+    #   @return [Hash<String,String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/robomaker-2018-06-29/DescribeWorldExportJobResponse AWS API Documentation
+    #
+    class DescribeWorldExportJobResponse < Struct.new(
+      :arn,
+      :status,
+      :created_at,
+      :failure_code,
+      :failure_reason,
+      :client_request_token,
+      :worlds,
+      :output_location,
+      :iam_role,
+      :tags)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass DescribeWorldGenerationJobRequest
+    #   data as a hash:
+    #
+    #       {
+    #         job: "Arn", # required
+    #       }
+    #
+    # @!attribute [rw] job
+    #   The Amazon Resource Name (arn) of the world generation job to
+    #   describe.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/robomaker-2018-06-29/DescribeWorldGenerationJobRequest AWS API Documentation
+    #
+    class DescribeWorldGenerationJobRequest < Struct.new(
+      :job)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] arn
+    #   The Amazon Resource Name (ARN) of the world generation job.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The status of the world generation job:
+    #
+    #   Pending
+    #
+    #   : The world generation job request is pending.
+    #
+    #   Running
+    #
+    #   : The world generation job is running.
+    #
+    #   Completed
+    #
+    #   : The world generation job completed.
+    #
+    #   Failed
+    #
+    #   : The world generation job failed. See `failureCode` for more
+    #     information.
+    #
+    #   PartialFailed
+    #
+    #   : Some worlds did not generate.
+    #
+    #   Canceled
+    #
+    #   : The world generation job was cancelled.
+    #
+    #   Canceling
+    #
+    #   : The world generation job is being cancelled.
+    #   @return [String]
+    #
+    # @!attribute [rw] created_at
+    #   The time, in milliseconds since the epoch, when the world generation
+    #   job was created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] failure_code
+    #   The failure code of the world generation job if it failed:
+    #
+    #   InternalServiceError
+    #
+    #   : Internal service error.
+    #
+    #   LimitExceeded
+    #
+    #   : The requested resource exceeds the maximum number allowed, or the
+    #     number of concurrent stream requests exceeds the maximum number
+    #     allowed.
+    #
+    #   ResourceNotFound
+    #
+    #   : The specified resource could not be found.
+    #
+    #   RequestThrottled
+    #
+    #   : The request was throttled.
+    #
+    #   InvalidInput
+    #
+    #   : An input parameter in the request is not valid.
+    #   @return [String]
+    #
+    # @!attribute [rw] failure_reason
+    #   The reason why the world generation job failed.
+    #   @return [String]
+    #
+    # @!attribute [rw] client_request_token
+    #   Unique, case-sensitive identifier that you provide to ensure the
+    #   idempotency of the request.
+    #   @return [String]
+    #
+    # @!attribute [rw] template
+    #   The Amazon Resource Name (arn) of the world template.
+    #   @return [String]
+    #
+    # @!attribute [rw] world_count
+    #   Information about the world count.
+    #   @return [Types::WorldCount]
+    #
+    # @!attribute [rw] finished_worlds_summary
+    #   Summary information about finished worlds.
+    #   @return [Types::FinishedWorldsSummary]
+    #
+    # @!attribute [rw] tags
+    #   A map that contains tag keys and tag values that are attached to the
+    #   world generation job.
+    #   @return [Hash<String,String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/robomaker-2018-06-29/DescribeWorldGenerationJobResponse AWS API Documentation
+    #
+    class DescribeWorldGenerationJobResponse < Struct.new(
+      :arn,
+      :status,
+      :created_at,
+      :failure_code,
+      :failure_reason,
+      :client_request_token,
+      :template,
+      :world_count,
+      :finished_worlds_summary,
+      :tags)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass DescribeWorldRequest
+    #   data as a hash:
+    #
+    #       {
+    #         world: "Arn", # required
+    #       }
+    #
+    # @!attribute [rw] world
+    #   The Amazon Resource Name (arn) of the world you want to describe.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/robomaker-2018-06-29/DescribeWorldRequest AWS API Documentation
+    #
+    class DescribeWorldRequest < Struct.new(
+      :world)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] arn
+    #   The Amazon Resource Name (arn) of the world.
+    #   @return [String]
+    #
+    # @!attribute [rw] generation_job
+    #   The Amazon Resource Name (arn) of the world generation job that
+    #   generated the world.
+    #   @return [String]
+    #
+    # @!attribute [rw] template
+    #   The world template.
+    #   @return [String]
+    #
+    # @!attribute [rw] created_at
+    #   The time, in milliseconds since the epoch, when the world was
+    #   created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] tags
+    #   A map that contains tag keys and tag values that are attached to the
+    #   world.
+    #   @return [Hash<String,String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/robomaker-2018-06-29/DescribeWorldResponse AWS API Documentation
+    #
+    class DescribeWorldResponse < Struct.new(
+      :arn,
+      :generation_job,
+      :template,
+      :created_at,
+      :tags)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass DescribeWorldTemplateRequest
+    #   data as a hash:
+    #
+    #       {
+    #         template: "Arn", # required
+    #       }
+    #
+    # @!attribute [rw] template
+    #   The Amazon Resource Name (arn) of the world template you want to
+    #   describe.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/robomaker-2018-06-29/DescribeWorldTemplateRequest AWS API Documentation
+    #
+    class DescribeWorldTemplateRequest < Struct.new(
+      :template)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] arn
+    #   The Amazon Resource Name (ARN) of the world template.
+    #   @return [String]
+    #
+    # @!attribute [rw] client_request_token
+    #   Unique, case-sensitive identifier that you provide to ensure the
+    #   idempotency of the request.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The name of the world template.
+    #   @return [String]
+    #
+    # @!attribute [rw] created_at
+    #   The time, in milliseconds since the epoch, when the world template
+    #   was created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] last_updated_at
+    #   The time, in milliseconds since the epoch, when the world template
+    #   was last updated.
+    #   @return [Time]
+    #
+    # @!attribute [rw] tags
+    #   A map that contains tag keys and tag values that are attached to the
+    #   world template.
+    #   @return [Hash<String,String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/robomaker-2018-06-29/DescribeWorldTemplateResponse AWS API Documentation
+    #
+    class DescribeWorldTemplateResponse < Struct.new(
+      :arn,
+      :client_request_token,
+      :name,
+      :created_at,
+      :last_updated_at,
+      :tags)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Information about a failed create simulation job request.
     #
     # @!attribute [rw] request
@@ -2390,6 +3261,25 @@ module Aws::RoboMaker
       include Aws::Structure
     end
 
+    # Information about worlds that failed.
+    #
+    # @!attribute [rw] total_failure_count
+    #   The total number of failures.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] failures
+    #   The worlds that failed.
+    #   @return [Array<Types::WorldFailure>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/robomaker-2018-06-29/FailureSummary AWS API Documentation
+    #
+    class FailureSummary < Struct.new(
+      :total_failure_count,
+      :failures)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Information about a filter.
     #
     # @note When making an API call, you may pass Filter
@@ -2413,6 +3303,30 @@ module Aws::RoboMaker
     class Filter < Struct.new(
       :name,
       :values)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Information about worlds that finished.
+    #
+    # @!attribute [rw] finished_count
+    #   The total number of finished worlds.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] succeeded_worlds
+    #   A list of worlds that succeeded.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] failure_summary
+    #   Information about worlds that failed.
+    #   @return [Types::FailureSummary]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/robomaker-2018-06-29/FinishedWorldsSummary AWS API Documentation
+    #
+    class FinishedWorldsSummary < Struct.new(
+      :finished_count,
+      :succeeded_worlds,
+      :failure_summary)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2453,6 +3367,43 @@ module Aws::RoboMaker
       :last_deployment_status,
       :last_deployment_job,
       :last_deployment_time)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass GetWorldTemplateBodyRequest
+    #   data as a hash:
+    #
+    #       {
+    #         template: "Arn",
+    #         generation_job: "Arn",
+    #       }
+    #
+    # @!attribute [rw] template
+    #   The Amazon Resource Name (arn) of the world template.
+    #   @return [String]
+    #
+    # @!attribute [rw] generation_job
+    #   The Amazon Resource Name (arn) of the world generator job.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/robomaker-2018-06-29/GetWorldTemplateBodyRequest AWS API Documentation
+    #
+    class GetWorldTemplateBodyRequest < Struct.new(
+      :template,
+      :generation_job)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] template_body
+    #   The world template body.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/robomaker-2018-06-29/GetWorldTemplateBodyResponse AWS API Documentation
+    #
+    class GetWorldTemplateBodyResponse < Struct.new(
+      :template_body)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2599,11 +3550,12 @@ module Aws::RoboMaker
     #   @return [Array<Types::Filter>]
     #
     # @!attribute [rw] next_token
-    #   The `nextToken` value returned from a previous paginated
-    #   `ListDeploymentJobs` request where `maxResults` was used and the
-    #   results exceeded the value of that parameter. Pagination continues
-    #   from the end of the previous results that returned the `nextToken`
-    #   value.
+    #   If the previous paginated request did not return all of the
+    #   remaining results, the response object's `nextToken` parameter
+    #   value is set to a token. To retrieve the next set of results, call
+    #   `ListDeploymentJobs` again and assign that token to the request
+    #   object's `nextToken` parameter. If there are no remaining results,
+    #   the previous response object's NextToken parameter is set to null.
     #   @return [String]
     #
     # @!attribute [rw] max_results
@@ -2631,11 +3583,12 @@ module Aws::RoboMaker
     #   @return [Array<Types::DeploymentJob>]
     #
     # @!attribute [rw] next_token
-    #   The `nextToken` value to include in a future `ListDeploymentJobs`
-    #   request. When the results of a `ListDeploymentJobs` request exceed
-    #   `maxResults`, this value can be used to retrieve the next page of
-    #   results. This value is `null` when there are no more results to
-    #   return.
+    #   If the previous paginated request did not return all of the
+    #   remaining results, the response object's `nextToken` parameter
+    #   value is set to a token. To retrieve the next set of results, call
+    #   `ListDeploymentJobs` again and assign that token to the request
+    #   object's `nextToken` parameter. If there are no remaining results,
+    #   the previous response object's NextToken parameter is set to null.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/robomaker-2018-06-29/ListDeploymentJobsResponse AWS API Documentation
@@ -2662,10 +3615,12 @@ module Aws::RoboMaker
     #       }
     #
     # @!attribute [rw] next_token
-    #   The `nextToken` value returned from a previous paginated
-    #   `ListFleets` request where `maxResults` was used and the results
-    #   exceeded the value of that parameter. Pagination continues from the
-    #   end of the previous results that returned the `nextToken` value.
+    #   If the previous paginated request did not return all of the
+    #   remaining results, the response object's `nextToken` parameter
+    #   value is set to a token. To retrieve the next set of results, call
+    #   `ListFleets` again and assign that token to the request object's
+    #   `nextToken` parameter. If there are no remaining results, the
+    #   previous response object's NextToken parameter is set to null.
     #
     #   <note markdown="1"> This token should be treated as an opaque identifier that is only
     #   used to retrieve the next items in a list and not for other
@@ -2707,11 +3662,12 @@ module Aws::RoboMaker
     #   @return [Array<Types::Fleet>]
     #
     # @!attribute [rw] next_token
-    #   The `nextToken` value to include in a future `ListDeploymentJobs`
-    #   request. When the results of a `ListFleets` request exceed
-    #   `maxResults`, this value can be used to retrieve the next page of
-    #   results. This value is `null` when there are no more results to
-    #   return.
+    #   If the previous paginated request did not return all of the
+    #   remaining results, the response object's `nextToken` parameter
+    #   value is set to a token. To retrieve the next set of results, call
+    #   `ListFleets` again and assign that token to the request object's
+    #   `nextToken` parameter. If there are no remaining results, the
+    #   previous response object's NextToken parameter is set to null.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/robomaker-2018-06-29/ListFleetsResponse AWS API Documentation
@@ -2743,11 +3699,12 @@ module Aws::RoboMaker
     #   @return [String]
     #
     # @!attribute [rw] next_token
-    #   The `nextToken` value returned from a previous paginated
-    #   `ListRobotApplications` request where `maxResults` was used and the
-    #   results exceeded the value of that parameter. Pagination continues
-    #   from the end of the previous results that returned the `nextToken`
-    #   value.
+    #   If the previous paginated request did not return all of the
+    #   remaining results, the response object's `nextToken` parameter
+    #   value is set to a token. To retrieve the next set of results, call
+    #   `ListRobotApplications` again and assign that token to the request
+    #   object's `nextToken` parameter. If there are no remaining results,
+    #   the previous response object's NextToken parameter is set to null.
     #   @return [String]
     #
     # @!attribute [rw] max_results
@@ -2785,11 +3742,12 @@ module Aws::RoboMaker
     #   @return [Array<Types::RobotApplicationSummary>]
     #
     # @!attribute [rw] next_token
-    #   The `nextToken` value to include in a future `ListRobotApplications`
-    #   request. When the results of a `ListRobotApplications` request
-    #   exceed `maxResults`, this value can be used to retrieve the next
-    #   page of results. This value is `null` when there are no more results
-    #   to return.
+    #   If the previous paginated request did not return all of the
+    #   remaining results, the response object's `nextToken` parameter
+    #   value is set to a token. To retrieve the next set of results, call
+    #   `ListRobotApplications` again and assign that token to the request
+    #   object's `nextToken` parameter. If there are no remaining results,
+    #   the previous response object's NextToken parameter is set to null.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/robomaker-2018-06-29/ListRobotApplicationsResponse AWS API Documentation
@@ -2816,10 +3774,12 @@ module Aws::RoboMaker
     #       }
     #
     # @!attribute [rw] next_token
-    #   The `nextToken` value returned from a previous paginated
-    #   `ListRobots` request where `maxResults` was used and the results
-    #   exceeded the value of that parameter. Pagination continues from the
-    #   end of the previous results that returned the `nextToken` value.
+    #   If the previous paginated request did not return all of the
+    #   remaining results, the response object's `nextToken` parameter
+    #   value is set to a token. To retrieve the next set of results, call
+    #   `ListRobots` again and assign that token to the request object's
+    #   `nextToken` parameter. If there are no remaining results, the
+    #   previous response object's NextToken parameter is set to null.
     #   @return [String]
     #
     # @!attribute [rw] max_results
@@ -2857,10 +3817,12 @@ module Aws::RoboMaker
     #   @return [Array<Types::Robot>]
     #
     # @!attribute [rw] next_token
-    #   The `nextToken` value to include in a future `ListRobots` request.
-    #   When the results of a `ListRobot` request exceed `maxResults`, this
-    #   value can be used to retrieve the next page of results. This value
-    #   is `null` when there are no more results to return.
+    #   If the previous paginated request did not return all of the
+    #   remaining results, the response object's `nextToken` parameter
+    #   value is set to a token. To retrieve the next set of results, call
+    #   `ListRobots` again and assign that token to the request object's
+    #   `nextToken` parameter. If there are no remaining results, the
+    #   previous response object's NextToken parameter is set to null.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/robomaker-2018-06-29/ListRobotsResponse AWS API Documentation
@@ -2892,11 +3854,13 @@ module Aws::RoboMaker
     #   @return [String]
     #
     # @!attribute [rw] next_token
-    #   The `nextToken` value returned from a previous paginated
-    #   `ListSimulationApplications` request where `maxResults` was used and
-    #   the results exceeded the value of that parameter. Pagination
-    #   continues from the end of the previous results that returned the
-    #   `nextToken` value.
+    #   If the previous paginated request did not return all of the
+    #   remaining results, the response object's `nextToken` parameter
+    #   value is set to a token. To retrieve the next set of results, call
+    #   `ListSimulationApplications` again and assign that token to the
+    #   request object's `nextToken` parameter. If there are no remaining
+    #   results, the previous response object's NextToken parameter is set
+    #   to null.
     #   @return [String]
     #
     # @!attribute [rw] max_results
@@ -2935,11 +3899,13 @@ module Aws::RoboMaker
     #   @return [Array<Types::SimulationApplicationSummary>]
     #
     # @!attribute [rw] next_token
-    #   The `nextToken` value to include in a future
-    #   `ListSimulationApplications` request. When the results of a
-    #   `ListRobot` request exceed `maxResults`, this value can be used to
-    #   retrieve the next page of results. This value is `null` when there
-    #   are no more results to return.
+    #   If the previous paginated request did not return all of the
+    #   remaining results, the response object's `nextToken` parameter
+    #   value is set to a token. To retrieve the next set of results, call
+    #   `ListSimulationApplications` again and assign that token to the
+    #   request object's `nextToken` parameter. If there are no remaining
+    #   results, the previous response object's NextToken parameter is set
+    #   to null.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/robomaker-2018-06-29/ListSimulationApplicationsResponse AWS API Documentation
@@ -2966,11 +3932,13 @@ module Aws::RoboMaker
     #       }
     #
     # @!attribute [rw] next_token
-    #   The `nextToken` value returned from a previous paginated
-    #   `ListSimulationJobBatches` request where `maxResults` was used and
-    #   the results exceeded the value of that parameter. Pagination
-    #   continues from the end of the previous results that returned the
-    #   `nextToken` value.
+    #   If the previous paginated request did not return all of the
+    #   remaining results, the response object's `nextToken` parameter
+    #   value is set to a token. To retrieve the next set of results, call
+    #   `ListSimulationJobBatches` again and assign that token to the
+    #   request object's `nextToken` parameter. If there are no remaining
+    #   results, the previous response object's NextToken parameter is set
+    #   to null.
     #   @return [String]
     #
     # @!attribute [rw] max_results
@@ -3000,11 +3968,13 @@ module Aws::RoboMaker
     #   @return [Array<Types::SimulationJobBatchSummary>]
     #
     # @!attribute [rw] next_token
-    #   The `nextToken` value to include in a future
-    #   `ListSimulationJobBatches` request. When the results of a
-    #   `ListSimulationJobBatches` request exceed `maxResults`, this value
-    #   can be used to retrieve the next page of results. This value is
-    #   `null` when there are no more results to return.
+    #   If the previous paginated request did not return all of the
+    #   remaining results, the response object's `nextToken` parameter
+    #   value is set to a token. To retrieve the next set of results, call
+    #   `ListSimulationJobBatches` again and assign that token to the
+    #   request object's `nextToken` parameter. If there are no remaining
+    #   results, the previous response object's NextToken parameter is set
+    #   to null.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/robomaker-2018-06-29/ListSimulationJobBatchesResponse AWS API Documentation
@@ -3031,17 +4001,12 @@ module Aws::RoboMaker
     #       }
     #
     # @!attribute [rw] next_token
-    #   The `nextToken` value returned from a previous paginated
-    #   `ListSimulationJobs` request where `maxResults` was used and the
-    #   results exceeded the value of that parameter. Pagination continues
-    #   from the end of the previous results that returned the `nextToken`
-    #   value.
-    #
-    #   <note markdown="1"> This token should be treated as an opaque identifier that is only
-    #   used to retrieve the next items in a list and not for other
-    #   programmatic purposes.
-    #
-    #    </note>
+    #   If the previous paginated request did not return all of the
+    #   remaining results, the response object's `nextToken` parameter
+    #   value is set to a token. To retrieve the next set of results, call
+    #   `ListSimulationJobs` again and assign that token to the request
+    #   object's `nextToken` parameter. If there are no remaining results,
+    #   the previous response object's NextToken parameter is set to null.
     #   @return [String]
     #
     # @!attribute [rw] max_results
@@ -3081,11 +4046,12 @@ module Aws::RoboMaker
     #   @return [Array<Types::SimulationJobSummary>]
     #
     # @!attribute [rw] next_token
-    #   The `nextToken` value to include in a future `ListSimulationJobs`
-    #   request. When the results of a `ListRobot` request exceed
-    #   `maxResults`, this value can be used to retrieve the next page of
-    #   results. This value is `null` when there are no more results to
-    #   return.
+    #   If the previous paginated request did not return all of the
+    #   remaining results, the response object's `nextToken` parameter
+    #   value is set to a token. To retrieve the next set of results, call
+    #   `ListSimulationJobs` again and assign that token to the request
+    #   object's `nextToken` parameter. If there are no remaining results,
+    #   the previous response object's NextToken parameter is set to null.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/robomaker-2018-06-29/ListSimulationJobsResponse AWS API Documentation
@@ -3124,6 +4090,276 @@ module Aws::RoboMaker
     #
     class ListTagsForResourceResponse < Struct.new(
       :tags)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass ListWorldExportJobsRequest
+    #   data as a hash:
+    #
+    #       {
+    #         next_token: "PaginationToken",
+    #         max_results: 1,
+    #         filters: [
+    #           {
+    #             name: "Name",
+    #             values: ["Name"],
+    #           },
+    #         ],
+    #       }
+    #
+    # @!attribute [rw] next_token
+    #   If the previous paginated request did not return all of the
+    #   remaining results, the response object's `nextToken` parameter
+    #   value is set to a token. To retrieve the next set of results, call
+    #   `ListWorldExportJobs` again and assign that token to the request
+    #   object's `nextToken` parameter. If there are no remaining results,
+    #   the previous response object's NextToken parameter is set to null.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   When this parameter is used, `ListWorldExportJobs` only returns
+    #   `maxResults` results in a single page along with a `nextToken`
+    #   response element. The remaining results of the initial request can
+    #   be seen by sending another `ListWorldExportJobs` request with the
+    #   returned `nextToken` value. This value can be between 1 and 100. If
+    #   this parameter is not used, then `ListWorldExportJobs` returns up to
+    #   100 results and a `nextToken` value if applicable.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] filters
+    #   Optional filters to limit results. You can use `generationJobId` and
+    #   `templateId`.
+    #   @return [Array<Types::Filter>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/robomaker-2018-06-29/ListWorldExportJobsRequest AWS API Documentation
+    #
+    class ListWorldExportJobsRequest < Struct.new(
+      :next_token,
+      :max_results,
+      :filters)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] world_export_job_summaries
+    #   Summary information for world export jobs.
+    #   @return [Array<Types::WorldExportJobSummary>]
+    #
+    # @!attribute [rw] next_token
+    #   If the previous paginated request did not return all of the
+    #   remaining results, the response object's `nextToken` parameter
+    #   value is set to a token. To retrieve the next set of results, call
+    #   `ListWorldExportJobsRequest` again and assign that token to the
+    #   request object's `nextToken` parameter. If there are no remaining
+    #   results, the previous response object's NextToken parameter is set
+    #   to null.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/robomaker-2018-06-29/ListWorldExportJobsResponse AWS API Documentation
+    #
+    class ListWorldExportJobsResponse < Struct.new(
+      :world_export_job_summaries,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass ListWorldGenerationJobsRequest
+    #   data as a hash:
+    #
+    #       {
+    #         next_token: "PaginationToken",
+    #         max_results: 1,
+    #         filters: [
+    #           {
+    #             name: "Name",
+    #             values: ["Name"],
+    #           },
+    #         ],
+    #       }
+    #
+    # @!attribute [rw] next_token
+    #   If the previous paginated request did not return all of the
+    #   remaining results, the response object's `nextToken` parameter
+    #   value is set to a token. To retrieve the next set of results, call
+    #   `ListWorldGenerationJobsRequest` again and assign that token to the
+    #   request object's `nextToken` parameter. If there are no remaining
+    #   results, the previous response object's NextToken parameter is set
+    #   to null.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   When this parameter is used, `ListWorldGeneratorJobs` only returns
+    #   `maxResults` results in a single page along with a `nextToken`
+    #   response element. The remaining results of the initial request can
+    #   be seen by sending another `ListWorldGeneratorJobs` request with the
+    #   returned `nextToken` value. This value can be between 1 and 100. If
+    #   this parameter is not used, then `ListWorldGeneratorJobs` returns up
+    #   to 100 results and a `nextToken` value if applicable.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] filters
+    #   Optional filters to limit results. You can use `status` and
+    #   `templateId`.
+    #   @return [Array<Types::Filter>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/robomaker-2018-06-29/ListWorldGenerationJobsRequest AWS API Documentation
+    #
+    class ListWorldGenerationJobsRequest < Struct.new(
+      :next_token,
+      :max_results,
+      :filters)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] world_generation_job_summaries
+    #   Summary information for world generator jobs.
+    #   @return [Array<Types::WorldGenerationJobSummary>]
+    #
+    # @!attribute [rw] next_token
+    #   If the previous paginated request did not return all of the
+    #   remaining results, the response object's `nextToken` parameter
+    #   value is set to a token. To retrieve the next set of results, call
+    #   `ListWorldGeneratorJobsRequest` again and assign that token to the
+    #   request object's `nextToken` parameter. If there are no remaining
+    #   results, the previous response object's NextToken parameter is set
+    #   to null.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/robomaker-2018-06-29/ListWorldGenerationJobsResponse AWS API Documentation
+    #
+    class ListWorldGenerationJobsResponse < Struct.new(
+      :world_generation_job_summaries,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass ListWorldTemplatesRequest
+    #   data as a hash:
+    #
+    #       {
+    #         next_token: "PaginationToken",
+    #         max_results: 1,
+    #       }
+    #
+    # @!attribute [rw] next_token
+    #   If the previous paginated request did not return all of the
+    #   remaining results, the response object's `nextToken` parameter
+    #   value is set to a token. To retrieve the next set of results, call
+    #   `ListWorldTemplates` again and assign that token to the request
+    #   object's `nextToken` parameter. If there are no remaining results,
+    #   the previous response object's NextToken parameter is set to null.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   When this parameter is used, `ListWorldTemplates` only returns
+    #   `maxResults` results in a single page along with a `nextToken`
+    #   response element. The remaining results of the initial request can
+    #   be seen by sending another `ListWorldTemplates` request with the
+    #   returned `nextToken` value. This value can be between 1 and 100. If
+    #   this parameter is not used, then `ListWorldTemplates` returns up to
+    #   100 results and a `nextToken` value if applicable.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/robomaker-2018-06-29/ListWorldTemplatesRequest AWS API Documentation
+    #
+    class ListWorldTemplatesRequest < Struct.new(
+      :next_token,
+      :max_results)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] template_summaries
+    #   Summary information for templates.
+    #   @return [Array<Types::TemplateSummary>]
+    #
+    # @!attribute [rw] next_token
+    #   If the previous paginated request did not return all of the
+    #   remaining results, the response object's `nextToken` parameter
+    #   value is set to a token. To retrieve the next set of results, call
+    #   `ListWorldTemplates` again and assign that token to the request
+    #   object's `nextToken` parameter. If there are no remaining results,
+    #   the previous response object's NextToken parameter is set to null.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/robomaker-2018-06-29/ListWorldTemplatesResponse AWS API Documentation
+    #
+    class ListWorldTemplatesResponse < Struct.new(
+      :template_summaries,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass ListWorldsRequest
+    #   data as a hash:
+    #
+    #       {
+    #         next_token: "PaginationToken",
+    #         max_results: 1,
+    #         filters: [
+    #           {
+    #             name: "Name",
+    #             values: ["Name"],
+    #           },
+    #         ],
+    #       }
+    #
+    # @!attribute [rw] next_token
+    #   If the previous paginated request did not return all of the
+    #   remaining results, the response object's `nextToken` parameter
+    #   value is set to a token. To retrieve the next set of results, call
+    #   `ListWorlds` again and assign that token to the request object's
+    #   `nextToken` parameter. If there are no remaining results, the
+    #   previous response object's NextToken parameter is set to null.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   When this parameter is used, `ListWorlds` only returns `maxResults`
+    #   results in a single page along with a `nextToken` response element.
+    #   The remaining results of the initial request can be seen by sending
+    #   another `ListWorlds` request with the returned `nextToken` value.
+    #   This value can be between 1 and 100. If this parameter is not used,
+    #   then `ListWorlds` returns up to 100 results and a `nextToken` value
+    #   if applicable.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] filters
+    #   Optional filters to limit results. You can use `status`.
+    #   @return [Array<Types::Filter>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/robomaker-2018-06-29/ListWorldsRequest AWS API Documentation
+    #
+    class ListWorldsRequest < Struct.new(
+      :next_token,
+      :max_results,
+      :filters)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] world_summaries
+    #   Summary information for worlds.
+    #   @return [Array<Types::WorldSummary>]
+    #
+    # @!attribute [rw] next_token
+    #   If the previous paginated request did not return all of the
+    #   remaining results, the response object's `nextToken` parameter
+    #   value is set to a token. To retrieve the next set of results, call
+    #   `ListWorlds` again and assign that token to the request object's
+    #   `nextToken` parameter. If there are no remaining results, the
+    #   previous response object's NextToken parameter is set to null.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/robomaker-2018-06-29/ListWorldsResponse AWS API Documentation
+    #
+    class ListWorldsResponse < Struct.new(
+      :world_summaries,
+      :next_token)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3740,6 +4976,11 @@ module Aws::RoboMaker
     #           },
     #           stream_ui: false,
     #         },
+    #         world_configs: [
+    #           {
+    #             world: "Arn",
+    #           },
+    #         ],
     #       }
     #
     # @!attribute [rw] application
@@ -3754,12 +4995,17 @@ module Aws::RoboMaker
     #   The launch configuration for the simulation application.
     #   @return [Types::LaunchConfig]
     #
+    # @!attribute [rw] world_configs
+    #   A list of world configurations.
+    #   @return [Array<Types::WorldConfig>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/robomaker-2018-06-29/SimulationApplicationConfig AWS API Documentation
     #
     class SimulationApplicationConfig < Struct.new(
       :application,
       :application_version,
-      :launch_config)
+      :launch_config,
+      :world_configs)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4088,6 +5334,11 @@ module Aws::RoboMaker
     #               },
     #               stream_ui: false,
     #             },
+    #             world_configs: [
+    #               {
+    #                 world: "Arn",
+    #               },
+    #             ],
     #           },
     #         ],
     #         data_sources: [
@@ -4401,6 +5652,11 @@ module Aws::RoboMaker
     #                   },
     #                   stream_ui: false,
     #                 },
+    #                 world_configs: [
+    #                   {
+    #                     world: "Arn",
+    #                   },
+    #                 ],
     #               },
     #             ],
     #             data_sources: [
@@ -4748,6 +6004,64 @@ module Aws::RoboMaker
     #
     class TagResourceResponse < Aws::EmptyStructure; end
 
+    # Information about a template location.
+    #
+    # @note When making an API call, you may pass TemplateLocation
+    #   data as a hash:
+    #
+    #       {
+    #         s3_bucket: "S3Bucket", # required
+    #         s3_key: "S3Key", # required
+    #       }
+    #
+    # @!attribute [rw] s3_bucket
+    #   The Amazon S3 bucket name.
+    #   @return [String]
+    #
+    # @!attribute [rw] s3_key
+    #   The list of S3 keys identifying the data source files.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/robomaker-2018-06-29/TemplateLocation AWS API Documentation
+    #
+    class TemplateLocation < Struct.new(
+      :s3_bucket,
+      :s3_key)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Summary information for a template.
+    #
+    # @!attribute [rw] arn
+    #   The Amazon Resource Name (ARN) of the template.
+    #   @return [String]
+    #
+    # @!attribute [rw] created_at
+    #   The time, in milliseconds since the epoch, when the template was
+    #   created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] last_updated_at
+    #   The time, in milliseconds since the epoch, when the template was
+    #   last updated.
+    #   @return [Time]
+    #
+    # @!attribute [rw] name
+    #   The name of the template.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/robomaker-2018-06-29/TemplateSummary AWS API Documentation
+    #
+    class TemplateSummary < Struct.new(
+      :arn,
+      :created_at,
+      :last_updated_at,
+      :name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # AWS RoboMaker is temporarily unable to process the request. Try your
     # call again.
     #
@@ -5002,6 +6316,75 @@ module Aws::RoboMaker
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass UpdateWorldTemplateRequest
+    #   data as a hash:
+    #
+    #       {
+    #         template: "Arn", # required
+    #         name: "TemplateName",
+    #         template_body: "Json",
+    #         template_location: {
+    #           s3_bucket: "S3Bucket", # required
+    #           s3_key: "S3Key", # required
+    #         },
+    #       }
+    #
+    # @!attribute [rw] template
+    #   The Amazon Resource Name (arn) of the world template to update.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The name of the template.
+    #   @return [String]
+    #
+    # @!attribute [rw] template_body
+    #   The world template body.
+    #   @return [String]
+    #
+    # @!attribute [rw] template_location
+    #   The location of the world template.
+    #   @return [Types::TemplateLocation]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/robomaker-2018-06-29/UpdateWorldTemplateRequest AWS API Documentation
+    #
+    class UpdateWorldTemplateRequest < Struct.new(
+      :template,
+      :name,
+      :template_body,
+      :template_location)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] arn
+    #   The Amazon Resource Name (arn) of the world template.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The name of the world template.
+    #   @return [String]
+    #
+    # @!attribute [rw] created_at
+    #   The time, in milliseconds since the epoch, when the world template
+    #   was created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] last_updated_at
+    #   The time, in milliseconds since the epoch, when the world template
+    #   was last updated.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/robomaker-2018-06-29/UpdateWorldTemplateResponse AWS API Documentation
+    #
+    class UpdateWorldTemplateResponse < Struct.new(
+      :arn,
+      :name,
+      :created_at,
+      :last_updated_at)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # If your simulation job accesses resources in a VPC, you provide this
     # parameter identifying the list of security group IDs and subnet IDs.
     # These must belong to the same VPC. You must provide at least one
@@ -5063,6 +6446,268 @@ module Aws::RoboMaker
       :security_groups,
       :vpc_id,
       :assign_public_ip)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Configuration information for a world.
+    #
+    # @note When making an API call, you may pass WorldConfig
+    #   data as a hash:
+    #
+    #       {
+    #         world: "Arn",
+    #       }
+    #
+    # @!attribute [rw] world
+    #   The world generated by Simulation WorldForge.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/robomaker-2018-06-29/WorldConfig AWS API Documentation
+    #
+    class WorldConfig < Struct.new(
+      :world)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The number of worlds that will be created. You can configure the
+    # number of unique floorplans and the number of unique interiors for
+    # each floor plan. For example, if you want 1 world with 20 unique
+    # interiors, you set `floorplanCount = 1` and `interiorCountPerFloorplan
+    # = 20`. This will result in 20 worlds (`floorplanCount` *
+    # `interiorCountPerFloorplan)`.
+    #
+    # If you set `floorplanCount = 4` and `interiorCountPerFloorplan = 5`,
+    # there will be 20 worlds with 5 unique floor plans.
+    #
+    # @note When making an API call, you may pass WorldCount
+    #   data as a hash:
+    #
+    #       {
+    #         floorplan_count: 1,
+    #         interior_count_per_floorplan: 1,
+    #       }
+    #
+    # @!attribute [rw] floorplan_count
+    #   The number of unique floorplans.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] interior_count_per_floorplan
+    #   The number of unique interiors per floorplan.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/robomaker-2018-06-29/WorldCount AWS API Documentation
+    #
+    class WorldCount < Struct.new(
+      :floorplan_count,
+      :interior_count_per_floorplan)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Information about a world export job.
+    #
+    # @!attribute [rw] arn
+    #   The Amazon Resource Name (ARN) of the world export job.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The status of the world export job.
+    #
+    #   Pending
+    #
+    #   : The world export job request is pending.
+    #
+    #   Running
+    #
+    #   : The world export job is running.
+    #
+    #   Completed
+    #
+    #   : The world export job completed.
+    #
+    #   Failed
+    #
+    #   : The world export job failed. See `failureCode` for more
+    #     information.
+    #
+    #   Canceled
+    #
+    #   : The world export job was cancelled.
+    #
+    #   Canceling
+    #
+    #   : The world export job is being cancelled.
+    #   @return [String]
+    #
+    # @!attribute [rw] created_at
+    #   The time, in milliseconds since the epoch, when the world export job
+    #   was created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] worlds
+    #   A list of worlds.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/robomaker-2018-06-29/WorldExportJobSummary AWS API Documentation
+    #
+    class WorldExportJobSummary < Struct.new(
+      :arn,
+      :status,
+      :created_at,
+      :worlds)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Information about a failed world.
+    #
+    # @!attribute [rw] failure_code
+    #   The failure code of the world export job if it failed:
+    #
+    #   InternalServiceError
+    #
+    #   : Internal service error.
+    #
+    #   LimitExceeded
+    #
+    #   : The requested resource exceeds the maximum number allowed, or the
+    #     number of concurrent stream requests exceeds the maximum number
+    #     allowed.
+    #
+    #   ResourceNotFound
+    #
+    #   : The specified resource could not be found.
+    #
+    #   RequestThrottled
+    #
+    #   : The request was throttled.
+    #
+    #   InvalidInput
+    #
+    #   : An input parameter in the request is not valid.
+    #   @return [String]
+    #
+    # @!attribute [rw] sample_failure_reason
+    #   The sample reason why the world failed. World errors are aggregated.
+    #   A sample is used as the `sampleFailureReason`.
+    #   @return [String]
+    #
+    # @!attribute [rw] failure_count
+    #   The number of failed worlds.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/robomaker-2018-06-29/WorldFailure AWS API Documentation
+    #
+    class WorldFailure < Struct.new(
+      :failure_code,
+      :sample_failure_reason,
+      :failure_count)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Information about a world generator job.
+    #
+    # @!attribute [rw] arn
+    #   The Amazon Resource Name (ARN) of the world generator job.
+    #   @return [String]
+    #
+    # @!attribute [rw] template
+    #   The Amazon Resource Name (arn) of the world template.
+    #   @return [String]
+    #
+    # @!attribute [rw] created_at
+    #   The time, in milliseconds since the epoch, when the world generator
+    #   job was created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] status
+    #   The status of the world generator job:
+    #
+    #   Pending
+    #
+    #   : The world generator job request is pending.
+    #
+    #   Running
+    #
+    #   : The world generator job is running.
+    #
+    #   Completed
+    #
+    #   : The world generator job completed.
+    #
+    #   Failed
+    #
+    #   : The world generator job failed. See `failureCode` for more
+    #     information.
+    #
+    #   PartialFailed
+    #
+    #   : Some worlds did not generate.
+    #
+    #   Canceled
+    #
+    #   : The world generator job was cancelled.
+    #
+    #   Canceling
+    #
+    #   : The world generator job is being cancelled.
+    #   @return [String]
+    #
+    # @!attribute [rw] world_count
+    #   Information about the world count.
+    #   @return [Types::WorldCount]
+    #
+    # @!attribute [rw] succeeded_world_count
+    #   The number of worlds that were generated.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] failed_world_count
+    #   The number of worlds that failed.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/robomaker-2018-06-29/WorldGenerationJobSummary AWS API Documentation
+    #
+    class WorldGenerationJobSummary < Struct.new(
+      :arn,
+      :template,
+      :created_at,
+      :status,
+      :world_count,
+      :succeeded_world_count,
+      :failed_world_count)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Information about a world.
+    #
+    # @!attribute [rw] arn
+    #   The Amazon Resource Name (ARN) of the world.
+    #   @return [String]
+    #
+    # @!attribute [rw] created_at
+    #   The time, in milliseconds since the epoch, when the world was
+    #   created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] generation_job
+    #   The Amazon Resource Name (arn) of the world generation job.
+    #   @return [String]
+    #
+    # @!attribute [rw] template
+    #   The Amazon Resource Name (arn) of the world template.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/robomaker-2018-06-29/WorldSummary AWS API Documentation
+    #
+    class WorldSummary < Struct.new(
+      :arn,
+      :created_at,
+      :generation_job,
+      :template)
       SENSITIVE = []
       include Aws::Structure
     end

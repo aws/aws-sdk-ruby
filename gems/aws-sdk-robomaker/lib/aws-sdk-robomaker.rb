@@ -27,7 +27,7 @@ require_relative 'aws-sdk-robomaker/customizations'
 # structure.
 #
 #     robo_maker = Aws::RoboMaker::Client.new
-#     resp = robo_maker.batch_describe_simulation_job(params)
+#     resp = robo_maker.batch_delete_worlds(params)
 #
 # See {Client} for more information.
 #
@@ -47,6 +47,6 @@ require_relative 'aws-sdk-robomaker/customizations'
 # @service
 module Aws::RoboMaker
 
-  GEM_VERSION = '1.26.0'
+  GEM_VERSION = '1.27.0'
 
 end

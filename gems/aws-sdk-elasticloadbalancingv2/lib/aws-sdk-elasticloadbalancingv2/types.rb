@@ -18,6 +18,10 @@ module Aws::ElasticLoadBalancingV2
 
     # Information about an action.
     #
+    # Each rule must include exactly one of the following types of actions:
+    # `forward`, `fixed-response`, or `redirect`, and it must be the last
+    # action to be performed.
+    #
     # @note When making an API call, you may pass Action
     #   data as a hash:
     #
@@ -106,9 +110,7 @@ module Aws::ElasticLoadBalancingV2
     # @!attribute [rw] order
     #   The order for the action. This value is required for rules with
     #   multiple actions. The action with the lowest value for order is
-    #   performed first. The last action to be performed must be one of the
-    #   following types of actions: a `forward`, `fixed-response`, or
-    #   `redirect`.
+    #   performed first.
     #   @return [Integer]
     #
     # @!attribute [rw] redirect_config
@@ -951,9 +953,10 @@ module Aws::ElasticLoadBalancingV2
     #   @return [String]
     #
     # @!attribute [rw] conditions
-    #   The conditions. Each rule can include zero or one of the following
-    #   conditions: `http-request-method`, `host-header`, `path-pattern`,
-    #   and `source-ip`, and zero or more of the following conditions:
+    #   The conditions. Each rule can optionally include up to one of each
+    #   of the following conditions: `http-request-method`, `host-header`,
+    #   `path-pattern`, and `source-ip`. Each rule can also optionally
+    #   include one or more of each of the following conditions:
     #   `http-header` and `query-string`.
     #   @return [Array<Types::RuleCondition>]
     #
@@ -1134,8 +1137,7 @@ module Aws::ElasticLoadBalancingV2
     #   group using more than one target type.
     #
     #   * `instance` - Targets are specified by instance ID. This is the
-    #     default value. If the target group protocol is UDP or TCP\_UDP,
-    #     the target type must be `instance`.
+    #     default value.
     #
     #   * `ip` - Targets are specified by IP address. You can specify IP
     #     addresses from the subnets of the virtual private cloud (VPC) for
@@ -2324,6 +2326,11 @@ module Aws::ElasticLoadBalancingV2
     #     seconds. The valid range is 1-4000 seconds. The default is 60
     #     seconds.
     #
+    #   * `routing.http.desync_mitigation_mode` - Determines how the load
+    #     balancer handles requests that might pose a security risk to your
+    #     application. The possible values are `monitor`, `defensive`, and
+    #     `strictest`. The default is `defensive`.
+    #
     #   * `routing.http.drop_invalid_header_fields.enabled` - Indicates
     #     whether HTTP headers with invalid header fields are removed by the
     #     load balancer (`true`) or routed to targets (`false`). The default
@@ -2935,7 +2942,10 @@ module Aws::ElasticLoadBalancingV2
     #
     # @!attribute [rw] matcher
     #   \[HTTP/HTTPS health checks\] The HTTP codes to use when checking for
-    #   a successful response from a target.
+    #   a successful response from a target. The possible values are from
+    #   200 to 499. You can specify multiple values (for example,
+    #   "200,202") or a range of values (for example, "200-299"). The
+    #   default is 200.
     #
     #   With Network Load Balancers, you can't modify this setting.
     #   @return [Types::Matcher]
@@ -3310,6 +3320,11 @@ module Aws::ElasticLoadBalancingV2
 
     # Information about a condition for a rule.
     #
+    # Each rule can optionally include up to one of each of the following
+    # conditions: `http-request-method`, `host-header`, `path-pattern`, and
+    # `source-ip`. Each rule can also optionally include one or more of each
+    # of the following conditions: `http-header` and `query-string`.
+    #
     # @note When making an API call, you may pass RuleCondition
     #   data as a hash:
     #
@@ -3360,14 +3375,15 @@ module Aws::ElasticLoadBalancingV2
     #   @return [String]
     #
     # @!attribute [rw] values
-    #   The condition value. You can use `Values` if the rule contains only
-    #   `host-header` and `path-pattern` conditions. Otherwise, you can use
-    #   `HostHeaderConfig` for `host-header` conditions and
-    #   `PathPatternConfig` for `path-pattern` conditions.
+    #   The condition value. Specify only when `Field` is `host-header` or
+    #   `path-pattern`. Alternatively, to specify multiple host names or
+    #   multiple path patterns, use `HostHeaderConfig` or
+    #   `PathPatternConfig`.
     #
-    #   If `Field` is `host-header`, you can specify a single host name (for
-    #   example, my.example.com). A host name is case insensitive, can be up
-    #   to 128 characters in length, and can contain any of the following
+    #   If `Field` is `host-header` and you are not using
+    #   `HostHeaderConfig`, you can specify a single host name (for example,
+    #   my.example.com) in `Values`. A host name is case insensitive, can be
+    #   up to 128 characters in length, and can contain any of the following
     #   characters.
     #
     #   * A-Z, a-z, 0-9
@@ -3378,10 +3394,11 @@ module Aws::ElasticLoadBalancingV2
     #
     #   * ? (matches exactly 1 character)
     #
-    #   If `Field` is `path-pattern`, you can specify a single path pattern
-    #   (for example, /img/*). A path pattern is case-sensitive, can be up
-    #   to 128 characters in length, and can contain any of the following
-    #   characters.
+    #   If `Field` is `path-pattern` and you are not using
+    #   `PathPatternConfig`, you can specify a single path pattern (for
+    #   example, /img/*) in `Values`. A path pattern is case-sensitive, can
+    #   be up to 128 characters in length, and can contain any of the
+    #   following characters.
     #
     #   * A-Z, a-z, 0-9
     #
@@ -4002,8 +4019,7 @@ module Aws::ElasticLoadBalancingV2
     #     during which a newly registered target receives an increasing
     #     share of the traffic to the target group. After this time period
     #     ends, the target receives its full share of traffic. The range is
-    #     30-900 seconds (15 minutes). Slow start mode is disabled by
-    #     default.
+    #     30-900 seconds (15 minutes). The default is 0 seconds (disabled).
     #
     #   * `stickiness.lb_cookie.duration_seconds` - The time period, in
     #     seconds, during which requests from a client should be routed to

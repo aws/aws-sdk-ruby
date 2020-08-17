@@ -13,7 +13,9 @@ module Aws::ACMPCA
 
     include Seahorse::Model
 
+    ASN1PrintableString64 = Shapes::StringShape.new(name: 'ASN1PrintableString64')
     ASN1Subject = Shapes::StructureShape.new(name: 'ASN1Subject')
+    AWSPolicy = Shapes::StringShape.new(name: 'AWSPolicy')
     AccountId = Shapes::StringShape.new(name: 'AccountId')
     ActionList = Shapes::ListShape.new(name: 'ActionList')
     ActionType = Shapes::StringShape.new(name: 'ActionType')
@@ -44,11 +46,11 @@ module Aws::ACMPCA
     CsrBody = Shapes::StringShape.new(name: 'CsrBody')
     DeleteCertificateAuthorityRequest = Shapes::StructureShape.new(name: 'DeleteCertificateAuthorityRequest')
     DeletePermissionRequest = Shapes::StructureShape.new(name: 'DeletePermissionRequest')
+    DeletePolicyRequest = Shapes::StructureShape.new(name: 'DeletePolicyRequest')
     DescribeCertificateAuthorityAuditReportRequest = Shapes::StructureShape.new(name: 'DescribeCertificateAuthorityAuditReportRequest')
     DescribeCertificateAuthorityAuditReportResponse = Shapes::StructureShape.new(name: 'DescribeCertificateAuthorityAuditReportResponse')
     DescribeCertificateAuthorityRequest = Shapes::StructureShape.new(name: 'DescribeCertificateAuthorityRequest')
     DescribeCertificateAuthorityResponse = Shapes::StructureShape.new(name: 'DescribeCertificateAuthorityResponse')
-    DistinguishedNameQualifierString = Shapes::StringShape.new(name: 'DistinguishedNameQualifierString')
     FailureReason = Shapes::StringShape.new(name: 'FailureReason')
     GetCertificateAuthorityCertificateRequest = Shapes::StructureShape.new(name: 'GetCertificateAuthorityCertificateRequest')
     GetCertificateAuthorityCertificateResponse = Shapes::StructureShape.new(name: 'GetCertificateAuthorityCertificateResponse')
@@ -56,6 +58,8 @@ module Aws::ACMPCA
     GetCertificateAuthorityCsrResponse = Shapes::StructureShape.new(name: 'GetCertificateAuthorityCsrResponse')
     GetCertificateRequest = Shapes::StructureShape.new(name: 'GetCertificateRequest')
     GetCertificateResponse = Shapes::StructureShape.new(name: 'GetCertificateResponse')
+    GetPolicyRequest = Shapes::StructureShape.new(name: 'GetPolicyRequest')
+    GetPolicyResponse = Shapes::StructureShape.new(name: 'GetPolicyResponse')
     IdempotencyToken = Shapes::StringShape.new(name: 'IdempotencyToken')
     ImportCertificateAuthorityCertificateRequest = Shapes::StructureShape.new(name: 'ImportCertificateAuthorityCertificateRequest')
     Integer1To5000 = Shapes::IntegerShape.new(name: 'Integer1To5000')
@@ -76,6 +80,7 @@ module Aws::ACMPCA
     ListPermissionsResponse = Shapes::StructureShape.new(name: 'ListPermissionsResponse')
     ListTagsRequest = Shapes::StructureShape.new(name: 'ListTagsRequest')
     ListTagsResponse = Shapes::StructureShape.new(name: 'ListTagsResponse')
+    LockoutPreventedException = Shapes::StructureShape.new(name: 'LockoutPreventedException')
     MalformedCSRException = Shapes::StructureShape.new(name: 'MalformedCSRException')
     MalformedCertificateException = Shapes::StructureShape.new(name: 'MalformedCertificateException')
     MaxResults = Shapes::IntegerShape.new(name: 'MaxResults')
@@ -86,14 +91,18 @@ module Aws::ACMPCA
     PermissionList = Shapes::ListShape.new(name: 'PermissionList')
     PositiveLong = Shapes::IntegerShape.new(name: 'PositiveLong')
     Principal = Shapes::StringShape.new(name: 'Principal')
+    PutPolicyRequest = Shapes::StructureShape.new(name: 'PutPolicyRequest')
     RequestAlreadyProcessedException = Shapes::StructureShape.new(name: 'RequestAlreadyProcessedException')
     RequestFailedException = Shapes::StructureShape.new(name: 'RequestFailedException')
     RequestInProgressException = Shapes::StructureShape.new(name: 'RequestInProgressException')
     ResourceNotFoundException = Shapes::StructureShape.new(name: 'ResourceNotFoundException')
+    ResourceOwner = Shapes::StringShape.new(name: 'ResourceOwner')
     RestoreCertificateAuthorityRequest = Shapes::StructureShape.new(name: 'RestoreCertificateAuthorityRequest')
     RevocationConfiguration = Shapes::StructureShape.new(name: 'RevocationConfiguration')
     RevocationReason = Shapes::StringShape.new(name: 'RevocationReason')
     RevokeCertificateRequest = Shapes::StructureShape.new(name: 'RevokeCertificateRequest')
+    S3BucketName = Shapes::StringShape.new(name: 'S3BucketName')
+    S3Key = Shapes::StringShape.new(name: 'S3Key')
     SigningAlgorithm = Shapes::StringShape.new(name: 'SigningAlgorithm')
     String = Shapes::StringShape.new(name: 'String')
     String128 = Shapes::StringShape.new(name: 'String128')
@@ -119,10 +128,10 @@ module Aws::ACMPCA
     ASN1Subject.add_member(:country, Shapes::ShapeRef.new(shape: CountryCodeString, location_name: "Country"))
     ASN1Subject.add_member(:organization, Shapes::ShapeRef.new(shape: String64, location_name: "Organization"))
     ASN1Subject.add_member(:organizational_unit, Shapes::ShapeRef.new(shape: String64, location_name: "OrganizationalUnit"))
-    ASN1Subject.add_member(:distinguished_name_qualifier, Shapes::ShapeRef.new(shape: DistinguishedNameQualifierString, location_name: "DistinguishedNameQualifier"))
+    ASN1Subject.add_member(:distinguished_name_qualifier, Shapes::ShapeRef.new(shape: ASN1PrintableString64, location_name: "DistinguishedNameQualifier"))
     ASN1Subject.add_member(:state, Shapes::ShapeRef.new(shape: String128, location_name: "State"))
     ASN1Subject.add_member(:common_name, Shapes::ShapeRef.new(shape: String64, location_name: "CommonName"))
-    ASN1Subject.add_member(:serial_number, Shapes::ShapeRef.new(shape: String64, location_name: "SerialNumber"))
+    ASN1Subject.add_member(:serial_number, Shapes::ShapeRef.new(shape: ASN1PrintableString64, location_name: "SerialNumber"))
     ASN1Subject.add_member(:locality, Shapes::ShapeRef.new(shape: String128, location_name: "Locality"))
     ASN1Subject.add_member(:title, Shapes::ShapeRef.new(shape: String64, location_name: "Title"))
     ASN1Subject.add_member(:surname, Shapes::ShapeRef.new(shape: String40, location_name: "Surname"))
@@ -137,6 +146,7 @@ module Aws::ACMPCA
     CertificateAuthorities.member = Shapes::ShapeRef.new(shape: CertificateAuthority)
 
     CertificateAuthority.add_member(:arn, Shapes::ShapeRef.new(shape: Arn, location_name: "Arn"))
+    CertificateAuthority.add_member(:owner_account, Shapes::ShapeRef.new(shape: AccountId, location_name: "OwnerAccount"))
     CertificateAuthority.add_member(:created_at, Shapes::ShapeRef.new(shape: TStamp, location_name: "CreatedAt"))
     CertificateAuthority.add_member(:last_state_change_at, Shapes::ShapeRef.new(shape: TStamp, location_name: "LastStateChangeAt"))
     CertificateAuthority.add_member(:type, Shapes::ShapeRef.new(shape: CertificateAuthorityType, location_name: "Type"))
@@ -162,12 +172,12 @@ module Aws::ACMPCA
     ConcurrentModificationException.struct_class = Types::ConcurrentModificationException
 
     CreateCertificateAuthorityAuditReportRequest.add_member(:certificate_authority_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "CertificateAuthorityArn"))
-    CreateCertificateAuthorityAuditReportRequest.add_member(:s3_bucket_name, Shapes::ShapeRef.new(shape: String, required: true, location_name: "S3BucketName"))
+    CreateCertificateAuthorityAuditReportRequest.add_member(:s3_bucket_name, Shapes::ShapeRef.new(shape: S3BucketName, required: true, location_name: "S3BucketName"))
     CreateCertificateAuthorityAuditReportRequest.add_member(:audit_report_response_format, Shapes::ShapeRef.new(shape: AuditReportResponseFormat, required: true, location_name: "AuditReportResponseFormat"))
     CreateCertificateAuthorityAuditReportRequest.struct_class = Types::CreateCertificateAuthorityAuditReportRequest
 
     CreateCertificateAuthorityAuditReportResponse.add_member(:audit_report_id, Shapes::ShapeRef.new(shape: AuditReportId, location_name: "AuditReportId"))
-    CreateCertificateAuthorityAuditReportResponse.add_member(:s3_key, Shapes::ShapeRef.new(shape: String, location_name: "S3Key"))
+    CreateCertificateAuthorityAuditReportResponse.add_member(:s3_key, Shapes::ShapeRef.new(shape: S3Key, location_name: "S3Key"))
     CreateCertificateAuthorityAuditReportResponse.struct_class = Types::CreateCertificateAuthorityAuditReportResponse
 
     CreateCertificateAuthorityRequest.add_member(:certificate_authority_configuration, Shapes::ShapeRef.new(shape: CertificateAuthorityConfiguration, required: true, location_name: "CertificateAuthorityConfiguration"))
@@ -201,13 +211,16 @@ module Aws::ACMPCA
     DeletePermissionRequest.add_member(:source_account, Shapes::ShapeRef.new(shape: AccountId, location_name: "SourceAccount"))
     DeletePermissionRequest.struct_class = Types::DeletePermissionRequest
 
+    DeletePolicyRequest.add_member(:resource_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "ResourceArn"))
+    DeletePolicyRequest.struct_class = Types::DeletePolicyRequest
+
     DescribeCertificateAuthorityAuditReportRequest.add_member(:certificate_authority_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "CertificateAuthorityArn"))
     DescribeCertificateAuthorityAuditReportRequest.add_member(:audit_report_id, Shapes::ShapeRef.new(shape: AuditReportId, required: true, location_name: "AuditReportId"))
     DescribeCertificateAuthorityAuditReportRequest.struct_class = Types::DescribeCertificateAuthorityAuditReportRequest
 
     DescribeCertificateAuthorityAuditReportResponse.add_member(:audit_report_status, Shapes::ShapeRef.new(shape: AuditReportStatus, location_name: "AuditReportStatus"))
-    DescribeCertificateAuthorityAuditReportResponse.add_member(:s3_bucket_name, Shapes::ShapeRef.new(shape: String, location_name: "S3BucketName"))
-    DescribeCertificateAuthorityAuditReportResponse.add_member(:s3_key, Shapes::ShapeRef.new(shape: String, location_name: "S3Key"))
+    DescribeCertificateAuthorityAuditReportResponse.add_member(:s3_bucket_name, Shapes::ShapeRef.new(shape: S3BucketName, location_name: "S3BucketName"))
+    DescribeCertificateAuthorityAuditReportResponse.add_member(:s3_key, Shapes::ShapeRef.new(shape: S3Key, location_name: "S3Key"))
     DescribeCertificateAuthorityAuditReportResponse.add_member(:created_at, Shapes::ShapeRef.new(shape: TStamp, location_name: "CreatedAt"))
     DescribeCertificateAuthorityAuditReportResponse.struct_class = Types::DescribeCertificateAuthorityAuditReportResponse
 
@@ -237,6 +250,12 @@ module Aws::ACMPCA
     GetCertificateResponse.add_member(:certificate, Shapes::ShapeRef.new(shape: CertificateBody, location_name: "Certificate"))
     GetCertificateResponse.add_member(:certificate_chain, Shapes::ShapeRef.new(shape: CertificateChain, location_name: "CertificateChain"))
     GetCertificateResponse.struct_class = Types::GetCertificateResponse
+
+    GetPolicyRequest.add_member(:resource_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "ResourceArn"))
+    GetPolicyRequest.struct_class = Types::GetPolicyRequest
+
+    GetPolicyResponse.add_member(:policy, Shapes::ShapeRef.new(shape: AWSPolicy, location_name: "Policy"))
+    GetPolicyResponse.struct_class = Types::GetPolicyResponse
 
     ImportCertificateAuthorityCertificateRequest.add_member(:certificate_authority_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "CertificateAuthorityArn"))
     ImportCertificateAuthorityCertificateRequest.add_member(:certificate, Shapes::ShapeRef.new(shape: CertificateBodyBlob, required: true, location_name: "Certificate"))
@@ -280,6 +299,7 @@ module Aws::ACMPCA
 
     ListCertificateAuthoritiesRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
     ListCertificateAuthoritiesRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location_name: "MaxResults"))
+    ListCertificateAuthoritiesRequest.add_member(:resource_owner, Shapes::ShapeRef.new(shape: ResourceOwner, location_name: "ResourceOwner"))
     ListCertificateAuthoritiesRequest.struct_class = Types::ListCertificateAuthoritiesRequest
 
     ListCertificateAuthoritiesResponse.add_member(:certificate_authorities, Shapes::ShapeRef.new(shape: CertificateAuthorities, location_name: "CertificateAuthorities"))
@@ -304,6 +324,9 @@ module Aws::ACMPCA
     ListTagsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
     ListTagsResponse.struct_class = Types::ListTagsResponse
 
+    LockoutPreventedException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "message"))
+    LockoutPreventedException.struct_class = Types::LockoutPreventedException
+
     MalformedCSRException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "message"))
     MalformedCSRException.struct_class = Types::MalformedCSRException
 
@@ -312,16 +335,20 @@ module Aws::ACMPCA
 
     Permission.add_member(:certificate_authority_arn, Shapes::ShapeRef.new(shape: Arn, location_name: "CertificateAuthorityArn"))
     Permission.add_member(:created_at, Shapes::ShapeRef.new(shape: TStamp, location_name: "CreatedAt"))
-    Permission.add_member(:principal, Shapes::ShapeRef.new(shape: String, location_name: "Principal"))
-    Permission.add_member(:source_account, Shapes::ShapeRef.new(shape: String, location_name: "SourceAccount"))
+    Permission.add_member(:principal, Shapes::ShapeRef.new(shape: Principal, location_name: "Principal"))
+    Permission.add_member(:source_account, Shapes::ShapeRef.new(shape: AccountId, location_name: "SourceAccount"))
     Permission.add_member(:actions, Shapes::ShapeRef.new(shape: ActionList, location_name: "Actions"))
-    Permission.add_member(:policy, Shapes::ShapeRef.new(shape: String, location_name: "Policy"))
+    Permission.add_member(:policy, Shapes::ShapeRef.new(shape: AWSPolicy, location_name: "Policy"))
     Permission.struct_class = Types::Permission
 
     PermissionAlreadyExistsException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "message"))
     PermissionAlreadyExistsException.struct_class = Types::PermissionAlreadyExistsException
 
     PermissionList.member = Shapes::ShapeRef.new(shape: Permission)
+
+    PutPolicyRequest.add_member(:resource_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "ResourceArn"))
+    PutPolicyRequest.add_member(:policy, Shapes::ShapeRef.new(shape: AWSPolicy, required: true, location_name: "Policy"))
+    PutPolicyRequest.struct_class = Types::PutPolicyRequest
 
     RequestAlreadyProcessedException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "message"))
     RequestAlreadyProcessedException.struct_class = Types::RequestAlreadyProcessedException
@@ -455,6 +482,20 @@ module Aws::ACMPCA
         o.errors << Shapes::ShapeRef.new(shape: RequestFailedException)
       end)
 
+      api.add_operation(:delete_policy, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DeletePolicy"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DeletePolicyRequest)
+        o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
+        o.errors << Shapes::ShapeRef.new(shape: ConcurrentModificationException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidArnException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidStateException)
+        o.errors << Shapes::ShapeRef.new(shape: LockoutPreventedException)
+        o.errors << Shapes::ShapeRef.new(shape: RequestFailedException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+      end)
+
       api.add_operation(:describe_certificate_authority, Seahorse::Model::Operation.new.tap do |o|
         o.name = "DescribeCertificateAuthority"
         o.http_method = "POST"
@@ -511,6 +552,18 @@ module Aws::ACMPCA
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidArnException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidStateException)
+      end)
+
+      api.add_operation(:get_policy, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetPolicy"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: GetPolicyRequest)
+        o.output = Shapes::ShapeRef.new(shape: GetPolicyResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidArnException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidStateException)
+        o.errors << Shapes::ShapeRef.new(shape: RequestFailedException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
       end)
 
       api.add_operation(:import_certificate_authority_certificate, Seahorse::Model::Operation.new.tap do |o|
@@ -593,6 +646,21 @@ module Aws::ACMPCA
             "next_token" => "next_token"
           }
         )
+      end)
+
+      api.add_operation(:put_policy, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "PutPolicy"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: PutPolicyRequest)
+        o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
+        o.errors << Shapes::ShapeRef.new(shape: ConcurrentModificationException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidArnException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidStateException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidPolicyException)
+        o.errors << Shapes::ShapeRef.new(shape: LockoutPreventedException)
+        o.errors << Shapes::ShapeRef.new(shape: RequestFailedException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
       end)
 
       api.add_operation(:restore_certificate_authority, Seahorse::Model::Operation.new.tap do |o|

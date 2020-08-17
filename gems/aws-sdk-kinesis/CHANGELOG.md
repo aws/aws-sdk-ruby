@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.27.0 (2020-08-17)
+------------------
+
+* Feature - Introducing ShardFilter for ListShards API to filter the shards using a position in the stream, and ChildShards support for GetRecords and SubscribeToShard API to discover children shards on shard end
+
 1.26.0 (2020-07-02)
 ------------------
 

@@ -1071,6 +1071,8 @@ module Aws::ECR
     #   resp.image_details[0].image_scan_findings_summary.vulnerability_source_updated_at #=> Time
     #   resp.image_details[0].image_scan_findings_summary.finding_severity_counts #=> Hash
     #   resp.image_details[0].image_scan_findings_summary.finding_severity_counts["FindingSeverity"] #=> Integer
+    #   resp.image_details[0].image_manifest_media_type #=> String
+    #   resp.image_details[0].artifact_media_type #=> String
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ecr-2015-09-21/DescribeImages AWS API Documentation
@@ -2202,7 +2204,7 @@ module Aws::ECR
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-ecr'
-      context[:gem_version] = '1.35.0'
+      context[:gem_version] = '1.36.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

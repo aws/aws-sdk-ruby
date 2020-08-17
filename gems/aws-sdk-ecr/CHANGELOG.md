@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.36.0 (2020-08-17)
+------------------
+
+* Feature - This feature adds support for pushing and pulling Open Container Initiative (OCI) artifacts.
+
 1.35.0 (2020-07-29)
 ------------------
 

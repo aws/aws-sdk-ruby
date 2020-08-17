@@ -141,7 +141,7 @@ module Aws::ElasticLoadBalancing
     #
     class AddTagsOutput < Aws::EmptyStructure; end
 
-    # This data type is reserved.
+    # Information about additional load balancer attributes.
     #
     # @note When making an API call, you may pass AdditionalAttribute
     #   data as a hash:
@@ -152,11 +152,20 @@ module Aws::ElasticLoadBalancing
     #       }
     #
     # @!attribute [rw] key
-    #   This parameter is reserved.
+    #   The name of the attribute.
+    #
+    #   The following attribute is supported.
+    #
+    #   * `elb.http.desyncmitigationmode` - Determines how the load balancer
+    #     handles requests that might pose a security risk to your
+    #     application. The possible values are `monitor`, `defensive`, and
+    #     `strictest`. The default is `defensive`.
+    #
+    #   ^
     #   @return [String]
     #
     # @!attribute [rw] value
-    #   This parameter is reserved.
+    #   This value of the attribute.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancing-2012-06-01/AdditionalAttribute AWS API Documentation
@@ -445,7 +454,7 @@ module Aws::ElasticLoadBalancing
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/elasticloadbalancing/latest/classic/elb-listener-config.html
+    #   [1]: https://docs.aws.amazon.com/elasticloadbalancing/latest/classic/elb-listener-config.html
     #   @return [Array<Types::Listener>]
     #
     # @!attribute [rw] availability_zones
@@ -482,7 +491,7 @@ module Aws::ElasticLoadBalancing
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/elasticloadbalancing/latest/userguide/how-elastic-load-balancing-works.html#load-balancer-scheme
+    #   [1]: https://docs.aws.amazon.com/elasticloadbalancing/latest/userguide/how-elastic-load-balancing-works.html#load-balancer-scheme
     #   @return [String]
     #
     # @!attribute [rw] tags
@@ -493,7 +502,7 @@ module Aws::ElasticLoadBalancing
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/elasticloadbalancing/latest/classic/add-remove-tags.html
+    #   [1]: https://docs.aws.amazon.com/elasticloadbalancing/latest/classic/add-remove-tags.html
     #   @return [Array<Types::Tag>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancing-2012-06-01/CreateAccessPointInput AWS API Documentation
@@ -1468,7 +1477,7 @@ module Aws::ElasticLoadBalancing
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/elasticloadbalancing/latest/classic/elb-listener-config.html
+    # [1]: https://docs.aws.amazon.com/elasticloadbalancing/latest/classic/elb-listener-config.html
     #
     # @note When making an API call, you may pass Listener
     #   data as a hash:
@@ -1497,8 +1506,9 @@ module Aws::ElasticLoadBalancing
     #   The protocol to use for routing traffic to instances: HTTP, HTTPS,
     #   TCP, or SSL.
     #
-    #   If the front-end protocol is HTTP, HTTPS, TCP, or SSL,
-    #   `InstanceProtocol` must be at the same protocol.
+    #   If the front-end protocol is TCP or SSL, the back-end protocol must
+    #   be TCP or SSL. If the front-end protocol is HTTP or HTTPS, the
+    #   back-end protocol must be HTTP or HTTPS.
     #
     #   If there is another listener with the same `InstancePort` whose
     #   `InstanceProtocol` is secure, (HTTPS or SSL), the listener's
@@ -1600,7 +1610,7 @@ module Aws::ElasticLoadBalancing
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/elasticloadbalancing/latest/classic/enable-disable-crosszone-lb.html
+    #   [1]: https://docs.aws.amazon.com/elasticloadbalancing/latest/classic/enable-disable-crosszone-lb.html
     #   @return [Types::CrossZoneLoadBalancing]
     #
     # @!attribute [rw] access_log
@@ -1613,7 +1623,7 @@ module Aws::ElasticLoadBalancing
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/elasticloadbalancing/latest/classic/enable-access-logs.html
+    #   [1]: https://docs.aws.amazon.com/elasticloadbalancing/latest/classic/enable-access-logs.html
     #   @return [Types::AccessLog]
     #
     # @!attribute [rw] connection_draining
@@ -1626,7 +1636,7 @@ module Aws::ElasticLoadBalancing
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/elasticloadbalancing/latest/classic/config-conn-drain.html
+    #   [1]: https://docs.aws.amazon.com/elasticloadbalancing/latest/classic/config-conn-drain.html
     #   @return [Types::ConnectionDraining]
     #
     # @!attribute [rw] connection_settings
@@ -1640,11 +1650,11 @@ module Aws::ElasticLoadBalancing
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/elasticloadbalancing/latest/classic/config-idle-timeout.html
+    #   [1]: https://docs.aws.amazon.com/elasticloadbalancing/latest/classic/config-idle-timeout.html
     #   @return [Types::ConnectionSettings]
     #
     # @!attribute [rw] additional_attributes
-    #   This parameter is reserved.
+    #   Any additional attributes.
     #   @return [Array<Types::AdditionalAttribute>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancing-2012-06-01/LoadBalancerAttributes AWS API Documentation
@@ -1677,7 +1687,7 @@ module Aws::ElasticLoadBalancing
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/elasticloadbalancing/latest/classic/using-domain-names-with-elb.html
+    #   [1]: https://docs.aws.amazon.com/elasticloadbalancing/latest/classic/using-domain-names-with-elb.html
     #   @return [String]
     #
     # @!attribute [rw] canonical_hosted_zone_name_id

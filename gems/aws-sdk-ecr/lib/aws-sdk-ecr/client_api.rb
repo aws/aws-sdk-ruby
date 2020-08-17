@@ -410,6 +410,8 @@ module Aws::ECR
     ImageDetail.add_member(:image_pushed_at, Shapes::ShapeRef.new(shape: PushTimestamp, location_name: "imagePushedAt"))
     ImageDetail.add_member(:image_scan_status, Shapes::ShapeRef.new(shape: ImageScanStatus, location_name: "imageScanStatus"))
     ImageDetail.add_member(:image_scan_findings_summary, Shapes::ShapeRef.new(shape: ImageScanFindingsSummary, location_name: "imageScanFindingsSummary"))
+    ImageDetail.add_member(:image_manifest_media_type, Shapes::ShapeRef.new(shape: MediaType, location_name: "imageManifestMediaType"))
+    ImageDetail.add_member(:artifact_media_type, Shapes::ShapeRef.new(shape: MediaType, location_name: "artifactMediaType"))
     ImageDetail.struct_class = Types::ImageDetail
 
     ImageDetailList.member = Shapes::ShapeRef.new(shape: ImageDetail)
