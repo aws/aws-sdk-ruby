@@ -58,6 +58,7 @@ module Aws::Transfer
     #         identity_provider_type: "SERVICE_MANAGED", # accepts SERVICE_MANAGED, API_GATEWAY
     #         logging_role: "Role",
     #         protocols: ["SFTP"], # accepts SFTP, FTP, FTPS
+    #         security_policy_name: "SecurityPolicyName",
     #         tags: [
     #           {
     #             key: "TagKey", # required
@@ -184,8 +185,9 @@ module Aws::Transfer
     #   * `FTP` (File Transfer Protocol): Unencrypted file transfer
     #
     #   <note markdown="1"> If you select `FTPS`, you must choose a certificate stored in AWS
-    #   Certificate Manager (ACM) which will be used to identify your server
-    #   when clients connect to it over FTPS.
+    #   Certificate Manager (ACM) which will be used to identify your file
+    #   transfer protocol-enabled server when clients connect to it over
+    #   FTPS.
     #
     #    If `Protocol` includes either `FTP` or `FTPS`, then the
     #   `EndpointType` must be `VPC` and the `IdentityProviderType` must be
@@ -200,6 +202,11 @@ module Aws::Transfer
     #
     #    </note>
     #   @return [Array<String>]
+    #
+    # @!attribute [rw] security_policy_name
+    #   Specifies the name of the security policy that is attached to the
+    #   server.
+    #   @return [String]
     #
     # @!attribute [rw] tags
     #   Key-value pairs that can be used to group and search for file
@@ -217,6 +224,7 @@ module Aws::Transfer
       :identity_provider_type,
       :logging_role,
       :protocols,
+      :security_policy_name,
       :tags)
       SENSITIVE = [:host_key]
       include Aws::Structure
@@ -299,7 +307,7 @@ module Aws::Transfer
     #
     #   <note markdown="1"> If the target of a logical directory entry does not exist in Amazon
     #   S3, the entry will be ignored. As a workaround, you can use the
-    #   Amazon S3 api to create 0 byte objects as place holders for your
+    #   Amazon S3 API to create 0 byte objects as place holders for your
     #   directory. If using the CLI, use the `s3api` call instead of `s3` so
     #   you can use the put-object operation. For example, you use the
     #   following: `aws s3api put-object --bucket bucketname --key
@@ -364,9 +372,10 @@ module Aws::Transfer
     # @!attribute [rw] user_name
     #   A unique string that identifies a user and is associated with a file
     #   transfer protocol-enabled server as specified by the `ServerId`.
-    #   This user name must be a minimum of 3 and a maximum of 32 characters
-    #   long. The following are valid characters: a-z, A-Z, 0-9, underscore,
-    #   and hyphen. The user name can't start with a hyphen.
+    #   This user name must be a minimum of 3 and a maximum of 100
+    #   characters long. The following are valid characters: a-z, A-Z, 0-9,
+    #   underscore '\_', hyphen '-', period '.', and at sign '@'.
+    #   The user name can't start with a hyphen, period, and at sign.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/transfer-2018-11-05/CreateUserRequest AWS API Documentation
@@ -484,6 +493,38 @@ module Aws::Transfer
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass DescribeSecurityPolicyRequest
+    #   data as a hash:
+    #
+    #       {
+    #         security_policy_name: "SecurityPolicyName", # required
+    #       }
+    #
+    # @!attribute [rw] security_policy_name
+    #   Specifies the name of the security policy that is attached to the
+    #   server.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/transfer-2018-11-05/DescribeSecurityPolicyRequest AWS API Documentation
+    #
+    class DescribeSecurityPolicyRequest < Struct.new(
+      :security_policy_name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] security_policy
+    #   An array containing the properties of the security policy.
+    #   @return [Types::DescribedSecurityPolicy]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/transfer-2018-11-05/DescribeSecurityPolicyResponse AWS API Documentation
+    #
+    class DescribeSecurityPolicyResponse < Struct.new(
+      :security_policy)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass DescribeServerRequest
     #   data as a hash:
     #
@@ -565,17 +606,65 @@ module Aws::Transfer
       include Aws::Structure
     end
 
+    # Describes the properties of a security policy that was specified. For
+    # more information about security policies, see [Working with security
+    # policies][1].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/transfer/latest/userguide/security-policies.html
+    #
+    # @!attribute [rw] fips
+    #   Specifies whether this policy enables Federal Information Processing
+    #   Standards (FIPS).
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] security_policy_name
+    #   Specifies the name of the security policy that is attached to the
+    #   server.
+    #   @return [String]
+    #
+    # @!attribute [rw] ssh_ciphers
+    #   Specifies the enabled Secure Shell (SSH) cipher encryption
+    #   algorithms in the security policy that is attached to the server.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] ssh_kexs
+    #   Specifies the enabled SSH key exchange (KEX) encryption algorithms
+    #   in the security policy that is attached to the server.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] ssh_macs
+    #   Specifies the enabled SSH message authentication code (MAC)
+    #   encryption algorithms in the security policy that is attached to the
+    #   server.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] tls_ciphers
+    #   Specifies the enabled Transport Layer Security (TLS) cipher
+    #   encryption algorithms in the security policy that is attached to the
+    #   server.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/transfer-2018-11-05/DescribedSecurityPolicy AWS API Documentation
+    #
+    class DescribedSecurityPolicy < Struct.new(
+      :fips,
+      :security_policy_name,
+      :ssh_ciphers,
+      :ssh_kexs,
+      :ssh_macs,
+      :tls_ciphers)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Describes the properties of a file transfer protocol-enabled server
-    # that was specified. Information returned includes the following: the
-    # server Amazon Resource Name (ARN), the certificate ARN (if the FTPS
-    # protocol was selected), the endpoint type and details, the
-    # authentication configuration and type, the logging role, the file
-    # transfer protocol or protocols, the server ID and state, and assigned
-    # tags or metadata.
+    # that was specified.
     #
     # @!attribute [rw] arn
-    #   Specifies the unique Amazon Resource Name (ARN) for a file transfer
-    #   protocol-enabled server to be described.
+    #   Specifies the unique Amazon Resource Name (ARN) of the file transfer
+    #   protocol-enabled server.
     #   @return [String]
     #
     # @!attribute [rw] certificate
@@ -637,6 +726,11 @@ module Aws::Transfer
     #   * `FTP` (File Transfer Protocol): Unencrypted file transfer
     #   @return [Array<String>]
     #
+    # @!attribute [rw] security_policy_name
+    #   Specifies the name of the security policy that is attached to the
+    #   server.
+    #   @return [String]
+    #
     # @!attribute [rw] server_id
     #   Specifies the unique system-assigned identifier for a file transfer
     #   protocol-enabled server that you instantiate.
@@ -678,6 +772,7 @@ module Aws::Transfer
       :identity_provider_type,
       :logging_role,
       :protocols,
+      :security_policy_name,
       :server_id,
       :state,
       :tags,
@@ -686,7 +781,7 @@ module Aws::Transfer
       include Aws::Structure
     end
 
-    # Returns properties of the user that you want to describe.
+    # Describes the properties of a user that was specified.
     #
     # @!attribute [rw] arn
     #   Specifies the unique Amazon Resource Name (ARN) for the user that
@@ -837,7 +932,7 @@ module Aws::Transfer
       include Aws::Structure
     end
 
-    # Represents an object that contains entries and a targets for
+    # Represents an object that contains entries and targets for
     # `HomeDirectoryMappings`.
     #
     # @note When making an API call, you may pass HomeDirectoryMapEntry
@@ -997,6 +1092,55 @@ module Aws::Transfer
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass ListSecurityPoliciesRequest
+    #   data as a hash:
+    #
+    #       {
+    #         max_results: 1,
+    #         next_token: "NextToken",
+    #       }
+    #
+    # @!attribute [rw] max_results
+    #   Specifies the number of security policies to return as a response to
+    #   the `ListSecurityPolicies` query.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   When additional results are obtained from the `ListSecurityPolicies`
+    #   command, a `NextToken` parameter is returned in the output. You can
+    #   then pass the `NextToken` parameter in a subsequent command to
+    #   continue listing additional security policies.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/transfer-2018-11-05/ListSecurityPoliciesRequest AWS API Documentation
+    #
+    class ListSecurityPoliciesRequest < Struct.new(
+      :max_results,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] next_token
+    #   When you can get additional results from the `ListSecurityPolicies`
+    #   operation, a `NextToken` parameter is returned in the output. In a
+    #   following command, you can pass in the `NextToken` parameter to
+    #   continue listing security policies.
+    #   @return [String]
+    #
+    # @!attribute [rw] security_policy_names
+    #   An array of security policies that were listed.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/transfer-2018-11-05/ListSecurityPoliciesResponse AWS API Documentation
+    #
+    class ListSecurityPoliciesResponse < Struct.new(
+      :next_token,
+      :security_policy_names)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass ListServersRequest
     #   data as a hash:
     #
@@ -1011,7 +1155,7 @@ module Aws::Transfer
     #   @return [Integer]
     #
     # @!attribute [rw] next_token
-    #   When additional results are obtained from the`ListServers` command,
+    #   When additional results are obtained from the `ListServers` command,
     #   a `NextToken` parameter is returned in the output. You can then pass
     #   the `NextToken` parameter in a subsequent command to continue
     #   listing additional file transfer protocol-enabled servers.
@@ -1630,6 +1774,7 @@ module Aws::Transfer
     #         },
     #         logging_role: "NullableRole",
     #         protocols: ["SFTP"], # accepts SFTP, FTP, FTPS
+    #         security_policy_name: "SecurityPolicyName",
     #         server_id: "ServerId", # required
     #       }
     #
@@ -1757,6 +1902,11 @@ module Aws::Transfer
     #    </note>
     #   @return [Array<String>]
     #
+    # @!attribute [rw] security_policy_name
+    #   Specifies the name of the security policy that is attached to the
+    #   server.
+    #   @return [String]
+    #
     # @!attribute [rw] server_id
     #   A system-assigned unique identifier for a file transfer
     #   protocol-enabled server instance that the user account is assigned
@@ -1773,6 +1923,7 @@ module Aws::Transfer
       :identity_provider_details,
       :logging_role,
       :protocols,
+      :security_policy_name,
       :server_id)
       SENSITIVE = [:host_key]
       include Aws::Structure
@@ -1848,7 +1999,7 @@ module Aws::Transfer
     #
     #   <note markdown="1"> If the target of a logical directory entry does not exist in Amazon
     #   S3, the entry will be ignored. As a workaround, you can use the
-    #   Amazon S3 api to create 0 byte objects as place holders for your
+    #   Amazon S3 API to create 0 byte objects as place holders for your
     #   directory. If using the CLI, use the `s3api` call instead of `s3` so
     #   you can use the put-object operation. For example, you use the
     #   following: `aws s3api put-object --bucket bucketname --key
@@ -1903,10 +2054,10 @@ module Aws::Transfer
     # @!attribute [rw] user_name
     #   A unique string that identifies a user and is associated with a file
     #   transfer protocol-enabled server as specified by the `ServerId`.
-    #   This is the string that will be used by your user when they log in
-    #   to your server. This user name is a minimum of 3 and a maximum of 32
+    #   This user name must be a minimum of 3 and a maximum of 100
     #   characters long. The following are valid characters: a-z, A-Z, 0-9,
-    #   underscore, and hyphen. The user name can't start with a hyphen.
+    #   underscore '\_', hyphen '-', period '.', and at sign '@'.
+    #   The user name can't start with a hyphen, period, and at sign.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/transfer-2018-11-05/UpdateUserRequest AWS API Documentation

@@ -324,7 +324,7 @@ module Aws::DataSync
 
     # Cancels execution of a task.
     #
-    # When you cancel a task execution, the transfer of some files are
+    # When you cancel a task execution, the transfer of some files is
     # abruptly interrupted. The contents of files that are transferred to
     # the destination might be incomplete or inconsistent with the source
     # files. However, if you start a new task execution on the same task and
@@ -361,7 +361,7 @@ module Aws::DataSync
     # AWS Region where your target locations (in Amazon S3 or Amazon EFS)
     # reside. Your tasks are created in this AWS Region.
     #
-    # You can activate the agent in a VPC (Virtual private Cloud) or provide
+    # You can activate the agent in a VPC (virtual private cloud) or provide
     # the agent access to a VPC endpoint so you can run tasks without going
     # over the public Internet.
     #
@@ -404,11 +404,11 @@ module Aws::DataSync
     #    </note>
     #
     # @option params [String] :vpc_endpoint_id
-    #   The ID of the VPC (Virtual Private Cloud) endpoint that the agent has
+    #   The ID of the VPC (virtual private cloud) endpoint that the agent has
     #   access to. This is the client-side VPC endpoint, also called a
     #   PrivateLink. If you don't have a PrivateLink VPC endpoint, see
-    #   [Creating a VPC Endpoint Service Configuration][1] in the AWS VPC User
-    #   Guide.
+    #   [Creating a VPC Endpoint Service Configuration][1] in the Amazon VPC
+    #   User Guide.
     #
     #   VPC endpoint ID looks like this: `vpce-01234d5aff67890e1`.
     #
@@ -471,7 +471,7 @@ module Aws::DataSync
     #   data to the EFS destination. By default, AWS DataSync uses the root
     #   directory.
     #
-    #   <note markdown="1"> `Subdirectory` must be specified with forward slashes. For example
+    #   <note markdown="1"> `Subdirectory` must be specified with forward slashes. For example,
     #   `/path/to/folder`.
     #
     #    </note>
@@ -610,7 +610,7 @@ module Aws::DataSync
     end
 
     # Defines a file system on a Network File System (NFS) server that can
-    # be read from or written to
+    # be read from or written to.
     #
     # @option params [required, String] :subdirectory
     #   The subdirectory in the NFS file system that is used to read data from
@@ -633,23 +633,44 @@ module Aws::DataSync
     #   files. For the agent to access directories, you must additionally
     #   enable all execute access.
     #
+    #   If you are copying data to or from your AWS Snowcone device, see [NFS
+    #   Server on AWS Snowcone][1] for more information.
+    #
     #   For information about NFS export configuration, see 18.7. The
     #   /etc/exports Configuration File in the Red Hat Enterprise Linux
     #   documentation.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/datasync/latest/userguide/create-nfs-location.html#nfs-on-snowcone
     #
     # @option params [required, String] :server_hostname
     #   The name of the NFS server. This value is the IP address or Domain
     #   Name Service (DNS) name of the NFS server. An agent that is installed
     #   on-premises uses this host name to mount the NFS server in a network.
     #
+    #   If you are copying data to or from your AWS Snowcone device, see [NFS
+    #   Server on AWS Snowcone][1] for more information.
+    #
     #   <note markdown="1"> This name must either be DNS-compliant or must be an IP version 4
     #   (IPv4) address.
     #
     #    </note>
     #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/datasync/latest/userguide/create-nfs-location.html#nfs-on-snowcone
+    #
     # @option params [required, Types::OnPremConfig] :on_prem_config
     #   Contains a list of Amazon Resource Names (ARNs) of agents that are
     #   used to connect to an NFS server.
+    #
+    #   If you are copying data to or from your AWS Snowcone device, see [NFS
+    #   Server on AWS Snowcone][1] for more information.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/datasync/latest/userguide/create-nfs-location.html#nfs-on-snowcone
     #
     # @option params [Types::NfsMountOptions] :mount_options
     #   The NFS mount options that DataSync can use to mount your NFS share.
@@ -692,6 +713,85 @@ module Aws::DataSync
     # @param [Hash] params ({})
     def create_location_nfs(params = {}, options = {})
       req = build_request(:create_location_nfs, params)
+      req.send_request(options)
+    end
+
+    # Creates an endpoint for a self-managed object storage bucket.
+    #
+    # @option params [required, String] :server_hostname
+    #   The name of the self-managed object storage server. This value is the
+    #   IP address or Domain Name Service (DNS) name of the object storage
+    #   server. An agent uses this host name to mount the object storage
+    #   server in a network.
+    #
+    # @option params [Integer] :server_port
+    #   The port that your self-managed object storage server accepts inbound
+    #   network traffic on. The server port is set by default to TCP 80 (HTTP)
+    #   or TCP 443 (HTTPS). You can specify a custom port if your self-managed
+    #   object storage server requires one.
+    #
+    # @option params [String] :server_protocol
+    #   The protocol that the object storage server uses to communicate. Valid
+    #   values are HTTP or HTTPS.
+    #
+    # @option params [String] :subdirectory
+    #   The subdirectory in the self-managed object storage server that is
+    #   used to read data from.
+    #
+    # @option params [required, String] :bucket_name
+    #   The bucket on the self-managed object storage server that is used to
+    #   read data from.
+    #
+    # @option params [String] :access_key
+    #   Optional. The access key is used if credentials are required to access
+    #   the self-managed object storage server.
+    #
+    # @option params [String] :secret_key
+    #   Optional. The secret key is used if credentials are required to access
+    #   the self-managed object storage server.
+    #
+    # @option params [required, Array<String>] :agent_arns
+    #   The Amazon Resource Name (ARN) of the agents associated with the
+    #   self-managed object storage server location.
+    #
+    # @option params [Array<Types::TagListEntry>] :tags
+    #   The key-value pair that represents the tag that you want to add to the
+    #   location. The value can be an empty string. We recommend using tags to
+    #   name your resources.
+    #
+    # @return [Types::CreateLocationObjectStorageResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateLocationObjectStorageResponse#location_arn #location_arn} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_location_object_storage({
+    #     server_hostname: "ServerHostname", # required
+    #     server_port: 1,
+    #     server_protocol: "HTTPS", # accepts HTTPS, HTTP
+    #     subdirectory: "S3Subdirectory",
+    #     bucket_name: "ObjectStorageBucketName", # required
+    #     access_key: "ObjectStorageAccessKey",
+    #     secret_key: "ObjectStorageSecretKey",
+    #     agent_arns: ["AgentArn"], # required
+    #     tags: [
+    #       {
+    #         key: "TagKey", # required
+    #         value: "TagValue",
+    #       },
+    #     ],
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.location_arn #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/datasync-2018-11-09/CreateLocationObjectStorage AWS API Documentation
+    #
+    # @overload create_location_object_storage(params = {})
+    # @param [Hash] params ({})
+    def create_location_object_storage(params = {}, options = {})
+      req = build_request(:create_location_object_storage, params)
       req.send_request(options)
     end
 
@@ -774,7 +874,7 @@ module Aws::DataSync
       req.send_request(options)
     end
 
-    # Defines a file system on an Server Message Block (SMB) server that can
+    # Defines a file system on a Server Message Block (SMB) server that can
     # be read from or written to.
     #
     # @option params [required, String] :subdirectory
@@ -784,7 +884,7 @@ module Aws::DataSync
     #   subdirectory of that path. The path should be such that it can be
     #   mounted by other SMB clients in your network.
     #
-    #   <note markdown="1"> `Subdirectory` must be specified with forward slashes. For example
+    #   <note markdown="1"> `Subdirectory` must be specified with forward slashes. For example,
     #   `/path/to/folder`.
     #
     #    </note>
@@ -898,12 +998,6 @@ module Aws::DataSync
     #   The Amazon Resource Name (ARN) of the Amazon CloudWatch log group that
     #   is used to monitor and log events in the task.
     #
-    #   For more information on these groups, see Working with Log Groups and
-    #   Log Streams in the *Amazon CloudWatch User Guide.*
-    #
-    #   For more information about how to use CloudWatch Logs with DataSync,
-    #   see Monitoring Your Task in the *AWS DataSync User Guide.*
-    #
     # @option params [String] :name
     #   The name of a task. This value is a text reference that is used to
     #   identify the task in the console.
@@ -916,7 +1010,7 @@ module Aws::DataSync
     #   verification, and so on.
     #
     #   For each individual task execution, you can override these options by
-    #   specifying the `OverrideOptions` before starting a the task execution.
+    #   specifying the `OverrideOptions` before starting the task execution.
     #   For more information, see the operation.
     #
     # @option params [Array<Types::FilterRule>] :excludes
@@ -958,6 +1052,7 @@ module Aws::DataSync
     #       bytes_per_second: 1,
     #       task_queueing: "ENABLED", # accepts ENABLED, DISABLED
     #       log_level: "OFF", # accepts OFF, BASIC, TRANSFER
+    #       transfer_mode: "CHANGED", # accepts CHANGED, ALL
     #     },
     #     excludes: [
     #       {
@@ -1187,10 +1282,10 @@ module Aws::DataSync
       req.send_request(options)
     end
 
-    # Returns metadata, such as the path information, about a NFS location.
+    # Returns metadata, such as the path information, about an NFS location.
     #
     # @option params [required, String] :location_arn
-    #   The Amazon resource Name (ARN) of the NFS location to describe.
+    #   The Amazon Resource Name (ARN) of the NFS location to describe.
     #
     # @return [Types::DescribeLocationNfsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1221,6 +1316,48 @@ module Aws::DataSync
     # @param [Hash] params ({})
     def describe_location_nfs(params = {}, options = {})
       req = build_request(:describe_location_nfs, params)
+      req.send_request(options)
+    end
+
+    # Returns metadata about a self-managed object storage server location.
+    #
+    # @option params [required, String] :location_arn
+    #   The Amazon Resource Name (ARN) of the self-managed object storage
+    #   server location that was described.
+    #
+    # @return [Types::DescribeLocationObjectStorageResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeLocationObjectStorageResponse#location_arn #location_arn} => String
+    #   * {Types::DescribeLocationObjectStorageResponse#location_uri #location_uri} => String
+    #   * {Types::DescribeLocationObjectStorageResponse#access_key #access_key} => String
+    #   * {Types::DescribeLocationObjectStorageResponse#server_port #server_port} => Integer
+    #   * {Types::DescribeLocationObjectStorageResponse#server_protocol #server_protocol} => String
+    #   * {Types::DescribeLocationObjectStorageResponse#agent_arns #agent_arns} => Array&lt;String&gt;
+    #   * {Types::DescribeLocationObjectStorageResponse#creation_time #creation_time} => Time
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_location_object_storage({
+    #     location_arn: "LocationArn", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.location_arn #=> String
+    #   resp.location_uri #=> String
+    #   resp.access_key #=> String
+    #   resp.server_port #=> Integer
+    #   resp.server_protocol #=> String, one of "HTTPS", "HTTP"
+    #   resp.agent_arns #=> Array
+    #   resp.agent_arns[0] #=> String
+    #   resp.creation_time #=> Time
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/datasync-2018-11-09/DescribeLocationObjectStorage AWS API Documentation
+    #
+    # @overload describe_location_object_storage(params = {})
+    # @param [Hash] params ({})
+    def describe_location_object_storage(params = {}, options = {})
+      req = build_request(:describe_location_object_storage, params)
       req.send_request(options)
     end
 
@@ -1262,11 +1399,11 @@ module Aws::DataSync
       req.send_request(options)
     end
 
-    # Returns metadata, such as the path and user information about a SMB
+    # Returns metadata, such as the path and user information about an SMB
     # location.
     #
     # @option params [required, String] :location_arn
-    #   The Amazon resource Name (ARN) of the SMB location to describe.
+    #   The Amazon Resource Name (ARN) of the SMB location to describe.
     #
     # @return [Types::DescribeLocationSmbResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1358,6 +1495,7 @@ module Aws::DataSync
     #   resp.options.bytes_per_second #=> Integer
     #   resp.options.task_queueing #=> String, one of "ENABLED", "DISABLED"
     #   resp.options.log_level #=> String, one of "OFF", "BASIC", "TRANSFER"
+    #   resp.options.transfer_mode #=> String, one of "CHANGED", "ALL"
     #   resp.excludes #=> Array
     #   resp.excludes[0].filter_type #=> String, one of "SIMPLE_PATTERN"
     #   resp.excludes[0].value #=> String
@@ -1417,6 +1555,7 @@ module Aws::DataSync
     #   resp.options.bytes_per_second #=> Integer
     #   resp.options.task_queueing #=> String, one of "ENABLED", "DISABLED"
     #   resp.options.log_level #=> String, one of "OFF", "BASIC", "TRANSFER"
+    #   resp.options.transfer_mode #=> String, one of "CHANGED", "ALL"
     #   resp.excludes #=> Array
     #   resp.excludes[0].filter_type #=> String, one of "SIMPLE_PATTERN"
     #   resp.excludes[0].value #=> String
@@ -1499,7 +1638,7 @@ module Aws::DataSync
       req.send_request(options)
     end
 
-    # Returns a lists of source and destination locations.
+    # Returns a list of source and destination locations.
     #
     # If you have more locations than are returned in a response (that is,
     # the response returns only a truncated list of your agents), the
@@ -1543,7 +1682,7 @@ module Aws::DataSync
       req.send_request(options)
     end
 
-    # Returns all the tags associated with a specified resources.
+    # Returns all the tags associated with a specified resource.
     #
     # @option params [required, String] :resource_arn
     #   The Amazon Resource Name (ARN) of the resource whose tags to list.
@@ -1722,6 +1861,7 @@ module Aws::DataSync
     #       bytes_per_second: 1,
     #       task_queueing: "ENABLED", # accepts ENABLED, DISABLED
     #       log_level: "OFF", # accepts OFF, BASIC, TRANSFER
+    #       transfer_mode: "CHANGED", # accepts CHANGED, ALL
     #     },
     #     includes: [
     #       {
@@ -1884,6 +2024,7 @@ module Aws::DataSync
     #       bytes_per_second: 1,
     #       task_queueing: "ENABLED", # accepts ENABLED, DISABLED
     #       log_level: "OFF", # accepts OFF, BASIC, TRANSFER
+    #       transfer_mode: "CHANGED", # accepts CHANGED, ALL
     #     },
     #     excludes: [
     #       {
@@ -1920,7 +2061,7 @@ module Aws::DataSync
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-datasync'
-      context[:gem_version] = '1.22.0'
+      context[:gem_version] = '1.23.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

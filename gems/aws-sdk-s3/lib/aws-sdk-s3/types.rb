@@ -1517,7 +1517,7 @@ module Aws::S3
     #   data as a hash:
     #
     #       {
-    #         location_constraint: "EU", # accepts EU, eu-west-1, us-west-1, us-west-2, ap-south-1, ap-southeast-1, ap-southeast-2, ap-northeast-1, sa-east-1, cn-north-1, eu-central-1
+    #         location_constraint: "af-south-1", # accepts af-south-1, ap-east-1, ap-northeast-1, ap-northeast-2, ap-northeast-3, ap-south-1, ap-southeast-1, ap-southeast-2, ca-central-1, cn-north-1, cn-northwest-1, EU, eu-central-1, eu-north-1, eu-south-1, eu-west-1, eu-west-2, eu-west-3, me-south-1, sa-east-1, us-east-2, us-gov-east-1, us-gov-west-1, us-west-1, us-west-2
     #       }
     #
     # @!attribute [rw] location_constraint
@@ -1555,7 +1555,7 @@ module Aws::S3
     #         acl: "private", # accepts private, public-read, public-read-write, authenticated-read
     #         bucket: "BucketName", # required
     #         create_bucket_configuration: {
-    #           location_constraint: "EU", # accepts EU, eu-west-1, us-west-1, us-west-2, ap-south-1, ap-southeast-1, ap-southeast-2, ap-northeast-1, sa-east-1, cn-north-1, eu-central-1
+    #           location_constraint: "af-south-1", # accepts af-south-1, ap-east-1, ap-northeast-1, ap-northeast-2, ap-northeast-3, ap-south-1, ap-southeast-1, ap-southeast-2, ca-central-1, cn-north-1, cn-northwest-1, EU, eu-central-1, eu-north-1, eu-south-1, eu-west-1, eu-west-2, eu-west-3, me-south-1, sa-east-1, us-east-2, us-gov-east-1, us-gov-west-1, us-west-1, us-west-2
     #         },
     #         grant_full_control: "GrantFullControl",
     #         grant_read: "GrantRead",
@@ -2457,7 +2457,7 @@ module Aws::S3
     #   @return [String]
     #
     # @!attribute [rw] key
-    #   Name of the tag.
+    #   Name of the object key.
     #   @return [String]
     #
     # @!attribute [rw] version_id
@@ -7042,7 +7042,7 @@ module Aws::S3
     #   in the subsequent request to get next set of objects. Amazon S3
     #   lists objects in alphabetical order Note: This element is returned
     #   only if you have delimiter request parameter specified. If response
-    #   does not include the NextMaker and it is truncated, you can use the
+    #   does not include the NextMarker and it is truncated, you can use the
     #   value of the last Key in the response as the marker in the
     #   subsequent request to get the next set of object keys.
     #   @return [String]
@@ -8140,8 +8140,25 @@ module Aws::S3
     #   @return [Time]
     #
     # @!attribute [rw] etag
-    #   The entity tag is an MD5 hash of the object. ETag reflects only
-    #   changes to the contents of an object, not its metadata.
+    #   The entity tag is a hash of the object. The ETag reflects changes
+    #   only to the contents of an object, not its metadata. The ETag may or
+    #   may not be an MD5 digest of the object data. Whether or not it is
+    #   depends on how the object was created and how it is encrypted as
+    #   described below:
+    #
+    #   * Objects created by the PUT Object, POST Object, or Copy operation,
+    #     or through the AWS Management Console, and are encrypted by SSE-S3
+    #     or plaintext, have ETags that are an MD5 digest of their object
+    #     data.
+    #
+    #   * Objects created by the PUT Object, POST Object, or Copy operation,
+    #     or through the AWS Management Console, and are encrypted by SSE-C
+    #     or SSE-KMS, have ETags that are not an MD5 digest of their object
+    #     data.
+    #
+    #   * If an object is created by either the Multipart Upload or Part
+    #     Copy operation, the ETag is not an MD5 digest, regardless of the
+    #     method of encryption.
     #   @return [String]
     #
     # @!attribute [rw] size
@@ -10553,7 +10570,7 @@ module Aws::S3
     #   @return [String]
     #
     # @!attribute [rw] key
-    #   Name of the tag.
+    #   Name of the object key.
     #   @return [String]
     #
     # @!attribute [rw] version_id
@@ -12453,7 +12470,7 @@ module Aws::S3
     #       }
     #
     # @!attribute [rw] key
-    #   Name of the tag.
+    #   Name of the object key.
     #   @return [String]
     #
     # @!attribute [rw] value

@@ -456,7 +456,7 @@ module Aws::ECR
     #   resp.failures #=> Array
     #   resp.failures[0].image_id.image_digest #=> String
     #   resp.failures[0].image_id.image_tag #=> String
-    #   resp.failures[0].failure_code #=> String, one of "InvalidImageDigest", "InvalidImageTag", "ImageTagDoesNotMatchDigest", "ImageNotFound", "MissingDigestAndTag", "ImageReferencedByManifestList"
+    #   resp.failures[0].failure_code #=> String, one of "InvalidImageDigest", "InvalidImageTag", "ImageTagDoesNotMatchDigest", "ImageNotFound", "MissingDigestAndTag", "ImageReferencedByManifestList", "KmsError"
     #   resp.failures[0].failure_reason #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ecr-2015-09-21/BatchDeleteImage AWS API Documentation
@@ -557,7 +557,7 @@ module Aws::ECR
     #   resp.failures #=> Array
     #   resp.failures[0].image_id.image_digest #=> String
     #   resp.failures[0].image_id.image_tag #=> String
-    #   resp.failures[0].failure_code #=> String, one of "InvalidImageDigest", "InvalidImageTag", "ImageTagDoesNotMatchDigest", "ImageNotFound", "MissingDigestAndTag", "ImageReferencedByManifestList"
+    #   resp.failures[0].failure_code #=> String, one of "InvalidImageDigest", "InvalidImageTag", "ImageTagDoesNotMatchDigest", "ImageNotFound", "MissingDigestAndTag", "ImageReferencedByManifestList", "KmsError"
     #   resp.failures[0].failure_reason #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ecr-2015-09-21/BatchGetImage AWS API Documentation
@@ -659,9 +659,13 @@ module Aws::ECR
     #   them from being overwritten.
     #
     # @option params [Types::ImageScanningConfiguration] :image_scanning_configuration
-    #   The image scanning configuration for the repository. This setting
-    #   determines whether images are scanned for known vulnerabilities after
-    #   being pushed to the repository.
+    #   The image scanning configuration for the repository. This determines
+    #   whether images are scanned for known vulnerabilities after being
+    #   pushed to the repository.
+    #
+    # @option params [Types::EncryptionConfiguration] :encryption_configuration
+    #   The encryption configuration for the repository. This determines how
+    #   the contents of your repository are encrypted at rest.
     #
     # @return [Types::CreateRepositoryResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -700,6 +704,10 @@ module Aws::ECR
     #     image_scanning_configuration: {
     #       scan_on_push: false,
     #     },
+    #     encryption_configuration: {
+    #       encryption_type: "AES256", # required, accepts AES256, KMS
+    #       kms_key: "KmsKey",
+    #     },
     #   })
     #
     # @example Response structure
@@ -711,6 +719,8 @@ module Aws::ECR
     #   resp.repository.created_at #=> Time
     #   resp.repository.image_tag_mutability #=> String, one of "MUTABLE", "IMMUTABLE"
     #   resp.repository.image_scanning_configuration.scan_on_push #=> Boolean
+    #   resp.repository.encryption_configuration.encryption_type #=> String, one of "AES256", "KMS"
+    #   resp.repository.encryption_configuration.kms_key #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ecr-2015-09-21/CreateRepository AWS API Documentation
     #
@@ -817,6 +827,8 @@ module Aws::ECR
     #   resp.repository.created_at #=> Time
     #   resp.repository.image_tag_mutability #=> String, one of "MUTABLE", "IMMUTABLE"
     #   resp.repository.image_scanning_configuration.scan_on_push #=> Boolean
+    #   resp.repository.encryption_configuration.encryption_type #=> String, one of "AES256", "KMS"
+    #   resp.repository.encryption_configuration.kms_key #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ecr-2015-09-21/DeleteRepository AWS API Documentation
     #
@@ -1059,6 +1071,8 @@ module Aws::ECR
     #   resp.image_details[0].image_scan_findings_summary.vulnerability_source_updated_at #=> Time
     #   resp.image_details[0].image_scan_findings_summary.finding_severity_counts #=> Hash
     #   resp.image_details[0].image_scan_findings_summary.finding_severity_counts["FindingSeverity"] #=> Integer
+    #   resp.image_details[0].image_manifest_media_type #=> String
+    #   resp.image_details[0].artifact_media_type #=> String
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ecr-2015-09-21/DescribeImages AWS API Documentation
@@ -1159,6 +1173,8 @@ module Aws::ECR
     #   resp.repositories[0].created_at #=> Time
     #   resp.repositories[0].image_tag_mutability #=> String, one of "MUTABLE", "IMMUTABLE"
     #   resp.repositories[0].image_scanning_configuration.scan_on_push #=> Boolean
+    #   resp.repositories[0].encryption_configuration.encryption_type #=> String, one of "AES256", "KMS"
+    #   resp.repositories[0].encryption_configuration.kms_key #=> String
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ecr-2015-09-21/DescribeRepositories AWS API Documentation
@@ -1690,7 +1706,8 @@ module Aws::ECR
     #
     # @option params [String] :image_tag
     #   The tag to associate with the image. This parameter is required for
-    #   images that use the Docker Image Manifest V2 Schema 2 or OCI formats.
+    #   images that use the Docker Image Manifest V2 Schema 2 or Open
+    #   Container Initiative (OCI) formats.
     #
     # @option params [String] :image_digest
     #   The image digest of the image manifest corresponding to the image.
@@ -2187,7 +2204,7 @@ module Aws::ECR
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-ecr'
-      context[:gem_version] = '1.34.0'
+      context[:gem_version] = '1.36.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

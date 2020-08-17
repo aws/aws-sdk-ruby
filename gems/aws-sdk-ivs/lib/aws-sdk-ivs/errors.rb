@@ -31,6 +31,7 @@ module Aws::IVS
   # * {ChannelNotBroadcasting}
   # * {ConflictException}
   # * {InternalServerException}
+  # * {PendingVerification}
   # * {ResourceNotFoundException}
   # * {ServiceQuotaExceededException}
   # * {StreamUnavailable}
@@ -93,6 +94,21 @@ module Aws::IVS
       # @param [Seahorse::Client::RequestContext] context
       # @param [String] message
       # @param [Aws::IVS::Types::InternalServerException] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+
+      # @return [String]
+      def exception_message
+        @data[:exception_message]
+      end
+    end
+
+    class PendingVerification < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::IVS::Types::PendingVerification] data
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end

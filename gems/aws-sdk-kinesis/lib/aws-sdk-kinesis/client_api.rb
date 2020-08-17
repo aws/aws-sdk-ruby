@@ -15,6 +15,8 @@ module Aws::Kinesis
 
     AddTagsToStreamInput = Shapes::StructureShape.new(name: 'AddTagsToStreamInput')
     BooleanObject = Shapes::BooleanShape.new(name: 'BooleanObject')
+    ChildShard = Shapes::StructureShape.new(name: 'ChildShard')
+    ChildShardList = Shapes::ListShape.new(name: 'ChildShardList')
     Consumer = Shapes::StructureShape.new(name: 'Consumer')
     ConsumerARN = Shapes::StringShape.new(name: 'ConsumerARN')
     ConsumerCountObject = Shapes::IntegerShape.new(name: 'ConsumerCountObject')
@@ -105,7 +107,10 @@ module Aws::Kinesis
     SequenceNumberRange = Shapes::StructureShape.new(name: 'SequenceNumberRange')
     Shard = Shapes::StructureShape.new(name: 'Shard')
     ShardCountObject = Shapes::IntegerShape.new(name: 'ShardCountObject')
+    ShardFilter = Shapes::StructureShape.new(name: 'ShardFilter')
+    ShardFilterType = Shapes::StringShape.new(name: 'ShardFilterType')
     ShardId = Shapes::StringShape.new(name: 'ShardId')
+    ShardIdList = Shapes::ListShape.new(name: 'ShardIdList')
     ShardIterator = Shapes::StringShape.new(name: 'ShardIterator')
     ShardIteratorType = Shapes::StringShape.new(name: 'ShardIteratorType')
     ShardList = Shapes::ListShape.new(name: 'ShardList')
@@ -136,6 +141,13 @@ module Aws::Kinesis
     AddTagsToStreamInput.add_member(:stream_name, Shapes::ShapeRef.new(shape: StreamName, required: true, location_name: "StreamName"))
     AddTagsToStreamInput.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, required: true, location_name: "Tags"))
     AddTagsToStreamInput.struct_class = Types::AddTagsToStreamInput
+
+    ChildShard.add_member(:shard_id, Shapes::ShapeRef.new(shape: ShardId, required: true, location_name: "ShardId"))
+    ChildShard.add_member(:parent_shards, Shapes::ShapeRef.new(shape: ShardIdList, required: true, location_name: "ParentShards"))
+    ChildShard.add_member(:hash_key_range, Shapes::ShapeRef.new(shape: HashKeyRange, required: true, location_name: "HashKeyRange"))
+    ChildShard.struct_class = Types::ChildShard
+
+    ChildShardList.member = Shapes::ShapeRef.new(shape: ChildShard)
 
     Consumer.add_member(:consumer_name, Shapes::ShapeRef.new(shape: ConsumerName, required: true, location_name: "ConsumerName"))
     Consumer.add_member(:consumer_arn, Shapes::ShapeRef.new(shape: ConsumerARN, required: true, location_name: "ConsumerARN"))
@@ -228,6 +240,7 @@ module Aws::Kinesis
     GetRecordsOutput.add_member(:records, Shapes::ShapeRef.new(shape: RecordList, required: true, location_name: "Records"))
     GetRecordsOutput.add_member(:next_shard_iterator, Shapes::ShapeRef.new(shape: ShardIterator, location_name: "NextShardIterator"))
     GetRecordsOutput.add_member(:millis_behind_latest, Shapes::ShapeRef.new(shape: MillisBehindLatest, location_name: "MillisBehindLatest"))
+    GetRecordsOutput.add_member(:child_shards, Shapes::ShapeRef.new(shape: ChildShardList, location_name: "ChildShards"))
     GetRecordsOutput.struct_class = Types::GetRecordsOutput
 
     GetShardIteratorInput.add_member(:stream_name, Shapes::ShapeRef.new(shape: StreamName, required: true, location_name: "StreamName"))
@@ -280,6 +293,7 @@ module Aws::Kinesis
     ListShardsInput.add_member(:exclusive_start_shard_id, Shapes::ShapeRef.new(shape: ShardId, location_name: "ExclusiveStartShardId"))
     ListShardsInput.add_member(:max_results, Shapes::ShapeRef.new(shape: ListShardsInputLimit, location_name: "MaxResults"))
     ListShardsInput.add_member(:stream_creation_timestamp, Shapes::ShapeRef.new(shape: Timestamp, location_name: "StreamCreationTimestamp"))
+    ListShardsInput.add_member(:shard_filter, Shapes::ShapeRef.new(shape: ShardFilter, location_name: "ShardFilter"))
     ListShardsInput.struct_class = Types::ListShardsInput
 
     ListShardsOutput.add_member(:shards, Shapes::ShapeRef.new(shape: ShardList, location_name: "Shards"))
@@ -396,6 +410,13 @@ module Aws::Kinesis
     Shard.add_member(:sequence_number_range, Shapes::ShapeRef.new(shape: SequenceNumberRange, required: true, location_name: "SequenceNumberRange"))
     Shard.struct_class = Types::Shard
 
+    ShardFilter.add_member(:type, Shapes::ShapeRef.new(shape: ShardFilterType, required: true, location_name: "Type"))
+    ShardFilter.add_member(:shard_id, Shapes::ShapeRef.new(shape: ShardId, location_name: "ShardId"))
+    ShardFilter.add_member(:timestamp, Shapes::ShapeRef.new(shape: Timestamp, location_name: "Timestamp"))
+    ShardFilter.struct_class = Types::ShardFilter
+
+    ShardIdList.member = Shapes::ShapeRef.new(shape: ShardId)
+
     ShardList.member = Shapes::ShapeRef.new(shape: Shard)
 
     SplitShardInput.add_member(:stream_name, Shapes::ShapeRef.new(shape: StreamName, required: true, location_name: "StreamName"))
@@ -433,7 +454,7 @@ module Aws::Kinesis
     StreamDescriptionSummary.add_member(:stream_name, Shapes::ShapeRef.new(shape: StreamName, required: true, location_name: "StreamName"))
     StreamDescriptionSummary.add_member(:stream_arn, Shapes::ShapeRef.new(shape: StreamARN, required: true, location_name: "StreamARN"))
     StreamDescriptionSummary.add_member(:stream_status, Shapes::ShapeRef.new(shape: StreamStatus, required: true, location_name: "StreamStatus"))
-    StreamDescriptionSummary.add_member(:retention_period_hours, Shapes::ShapeRef.new(shape: PositiveIntegerObject, required: true, location_name: "RetentionPeriodHours"))
+    StreamDescriptionSummary.add_member(:retention_period_hours, Shapes::ShapeRef.new(shape: RetentionPeriodHours, required: true, location_name: "RetentionPeriodHours"))
     StreamDescriptionSummary.add_member(:stream_creation_timestamp, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "StreamCreationTimestamp"))
     StreamDescriptionSummary.add_member(:enhanced_monitoring, Shapes::ShapeRef.new(shape: EnhancedMonitoringList, required: true, location_name: "EnhancedMonitoring"))
     StreamDescriptionSummary.add_member(:encryption_type, Shapes::ShapeRef.new(shape: EncryptionType, location_name: "EncryptionType"))
@@ -447,6 +468,7 @@ module Aws::Kinesis
     SubscribeToShardEvent.add_member(:records, Shapes::ShapeRef.new(shape: RecordList, required: true, location_name: "Records"))
     SubscribeToShardEvent.add_member(:continuation_sequence_number, Shapes::ShapeRef.new(shape: SequenceNumber, required: true, location_name: "ContinuationSequenceNumber"))
     SubscribeToShardEvent.add_member(:millis_behind_latest, Shapes::ShapeRef.new(shape: MillisBehindLatest, required: true, location_name: "MillisBehindLatest"))
+    SubscribeToShardEvent.add_member(:child_shards, Shapes::ShapeRef.new(shape: ChildShardList, location_name: "ChildShards"))
     SubscribeToShardEvent.struct_class = Types::SubscribeToShardEvent
 
     SubscribeToShardEventStream.add_member(:subscribe_to_shard_event, Shapes::ShapeRef.new(shape: SubscribeToShardEvent, required: true, event: true, location_name: "SubscribeToShardEvent"))

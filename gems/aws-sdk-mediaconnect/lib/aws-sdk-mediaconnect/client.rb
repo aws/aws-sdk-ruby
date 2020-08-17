@@ -580,6 +580,7 @@ module Aws::MediaConnect
     #           secret_arn: "__string",
     #           url: "__string",
     #         },
+    #         entitlement_status: "ENABLED", # accepts ENABLED, DISABLED
     #         name: "__string",
     #         subscribers: ["__string"], # required
     #       },
@@ -693,6 +694,7 @@ module Aws::MediaConnect
     #   resp.flow.entitlements[0].encryption.secret_arn #=> String
     #   resp.flow.entitlements[0].encryption.url #=> String
     #   resp.flow.entitlements[0].entitlement_arn #=> String
+    #   resp.flow.entitlements[0].entitlement_status #=> String, one of "ENABLED", "DISABLED"
     #   resp.flow.entitlements[0].name #=> String
     #   resp.flow.entitlements[0].subscribers #=> Array
     #   resp.flow.entitlements[0].subscribers[0] #=> String
@@ -863,6 +865,7 @@ module Aws::MediaConnect
     #   resp.flow.entitlements[0].encryption.secret_arn #=> String
     #   resp.flow.entitlements[0].encryption.url #=> String
     #   resp.flow.entitlements[0].entitlement_arn #=> String
+    #   resp.flow.entitlements[0].entitlement_status #=> String, one of "ENABLED", "DISABLED"
     #   resp.flow.entitlements[0].name #=> String
     #   resp.flow.entitlements[0].subscribers #=> Array
     #   resp.flow.entitlements[0].subscribers[0] #=> String
@@ -1001,6 +1004,7 @@ module Aws::MediaConnect
     #           secret_arn: "__string",
     #           url: "__string",
     #         },
+    #         entitlement_status: "ENABLED", # accepts ENABLED, DISABLED
     #         name: "__string",
     #         subscribers: ["__string"], # required
     #       },
@@ -1023,6 +1027,7 @@ module Aws::MediaConnect
     #   resp.entitlements[0].encryption.secret_arn #=> String
     #   resp.entitlements[0].encryption.url #=> String
     #   resp.entitlements[0].entitlement_arn #=> String
+    #   resp.entitlements[0].entitlement_status #=> String, one of "ENABLED", "DISABLED"
     #   resp.entitlements[0].name #=> String
     #   resp.entitlements[0].subscribers #=> Array
     #   resp.entitlements[0].subscribers[0] #=> String
@@ -1439,6 +1444,7 @@ module Aws::MediaConnect
     #   resp.flow.entitlements[0].encryption.secret_arn #=> String
     #   resp.flow.entitlements[0].encryption.url #=> String
     #   resp.flow.entitlements[0].entitlement_arn #=> String
+    #   resp.flow.entitlements[0].entitlement_status #=> String, one of "ENABLED", "DISABLED"
     #   resp.flow.entitlements[0].name #=> String
     #   resp.flow.entitlements[0].subscribers #=> Array
     #   resp.flow.entitlements[0].subscribers[0] #=> String
@@ -1560,6 +1566,12 @@ module Aws::MediaConnect
     #
     # @option params [required, String] :entitlement_arn
     #
+    # @option params [String] :entitlement_status
+    #   An indication of whether you want to enable the entitlement to allow
+    #   access, or disable it to stop streaming content to the subscriber’s
+    #   flow temporarily. If you don’t specify the entitlementStatus field in
+    #   your request, MediaConnect leaves the value unchanged.
+    #
     # @option params [required, String] :flow_arn
     #
     # @option params [Array<String>] :subscribers
@@ -1588,6 +1600,7 @@ module Aws::MediaConnect
     #       url: "__string",
     #     },
     #     entitlement_arn: "__string", # required
+    #     entitlement_status: "ENABLED", # accepts ENABLED, DISABLED
     #     flow_arn: "__string", # required
     #     subscribers: ["__string"],
     #   })
@@ -1606,6 +1619,7 @@ module Aws::MediaConnect
     #   resp.entitlement.encryption.secret_arn #=> String
     #   resp.entitlement.encryption.url #=> String
     #   resp.entitlement.entitlement_arn #=> String
+    #   resp.entitlement.entitlement_status #=> String, one of "ENABLED", "DISABLED"
     #   resp.entitlement.name #=> String
     #   resp.entitlement.subscribers #=> Array
     #   resp.entitlement.subscribers[0] #=> String
@@ -1866,7 +1880,7 @@ module Aws::MediaConnect
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-mediaconnect'
-      context[:gem_version] = '1.24.0'
+      context[:gem_version] = '1.25.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -343,7 +343,7 @@ module Aws::MediaLive
     #               id_3: "__string", # required
     #             },
     #             input_prepare_settings: {
-    #               input_attachment_name_reference: "__string", # required
+    #               input_attachment_name_reference: "__string",
     #               input_clipping_settings: {
     #                 input_timecode_source: "ZEROBASED", # required, accepts ZEROBASED, EMBEDDED
     #                 start_timecode: {
@@ -694,7 +694,7 @@ module Aws::MediaLive
     #             pass_through_settings: {
     #             },
     #           },
-    #           language_code: "__stringMin3Max3",
+    #           language_code: "__stringMin1Max35",
     #           language_code_control: "FOLLOW_INPUT", # accepts FOLLOW_INPUT, USE_CONFIGURED
     #           name: "__string", # required
     #           remix_settings: {
@@ -803,6 +803,11 @@ module Aws::MediaLive
     #               teletext_grid_control: "FIXED", # accepts FIXED, SCALED
     #               x_position: 1,
     #               y_position: 1,
+    #             },
+    #             ebu_tt_d_destination_settings: {
+    #               fill_line_gap: "DISABLED", # accepts DISABLED, ENABLED
+    #               font_family: "__string",
+    #               style_control: "EXCLUDE", # accepts EXCLUDE, INCLUDE
     #             },
     #             embedded_destination_settings: {
     #             },
@@ -945,7 +950,7 @@ module Aws::MediaLive
     #               manifest_duration_format: "FLOATING_POINT", # accepts FLOATING_POINT, INTEGER
     #               min_segment_length: 1,
     #               mode: "LIVE", # accepts LIVE, VOD
-    #               output_selection: "MANIFESTS_AND_SEGMENTS", # accepts MANIFESTS_AND_SEGMENTS, SEGMENTS_ONLY
+    #               output_selection: "MANIFESTS_AND_SEGMENTS", # accepts MANIFESTS_AND_SEGMENTS, SEGMENTS_ONLY, VARIANT_MANIFESTS_AND_SEGMENTS
     #               program_date_time: "EXCLUDE", # accepts EXCLUDE, INCLUDE
     #               program_date_time_period: 1,
     #               redundant_manifest: "DISABLED", # accepts DISABLED, ENABLED
@@ -1304,6 +1309,12 @@ module Aws::MediaLive
     #                 rec_709_settings: {
     #                 },
     #               },
+    #               filter_settings: {
+    #                 temporal_filter_settings: {
+    #                   post_filter_sharpening: "AUTO", # accepts AUTO, DISABLED, ENABLED
+    #                   strength: "AUTO", # accepts AUTO, STRENGTH_1, STRENGTH_2, STRENGTH_3, STRENGTH_4, STRENGTH_5, STRENGTH_6, STRENGTH_7, STRENGTH_8, STRENGTH_9, STRENGTH_10, STRENGTH_11, STRENGTH_12, STRENGTH_13, STRENGTH_14, STRENGTH_15, STRENGTH_16
+    #                 },
+    #               },
     #               fixed_afd: "AFD_0000", # accepts AFD_0000, AFD_0010, AFD_0011, AFD_0100, AFD_1000, AFD_1001, AFD_1010, AFD_1011, AFD_1101, AFD_1110, AFD_1111
     #               flicker_aq: "DISABLED", # accepts DISABLED, ENABLED
     #               framerate_denominator: 1, # required
@@ -1320,7 +1331,7 @@ module Aws::MediaLive
     #               profile: "MAIN", # accepts MAIN, MAIN_10BIT
     #               qvbr_quality_level: 1,
     #               rate_control_mode: "CBR", # accepts CBR, MULTIPLEX, QVBR
-    #               scan_type: "PROGRESSIVE", # accepts PROGRESSIVE
+    #               scan_type: "INTERLACED", # accepts INTERLACED, PROGRESSIVE
     #               scene_change_detect: "DISABLED", # accepts DISABLED, ENABLED
     #               slices: 1,
     #               tier: "HIGH", # accepts HIGH, MAIN
@@ -1573,6 +1584,9 @@ module Aws::MediaLive
     #   resp.channel.encoder_settings.caption_descriptions[0].destination_settings.dvb_sub_destination_settings.teletext_grid_control #=> String, one of "FIXED", "SCALED"
     #   resp.channel.encoder_settings.caption_descriptions[0].destination_settings.dvb_sub_destination_settings.x_position #=> Integer
     #   resp.channel.encoder_settings.caption_descriptions[0].destination_settings.dvb_sub_destination_settings.y_position #=> Integer
+    #   resp.channel.encoder_settings.caption_descriptions[0].destination_settings.ebu_tt_d_destination_settings.fill_line_gap #=> String, one of "DISABLED", "ENABLED"
+    #   resp.channel.encoder_settings.caption_descriptions[0].destination_settings.ebu_tt_d_destination_settings.font_family #=> String
+    #   resp.channel.encoder_settings.caption_descriptions[0].destination_settings.ebu_tt_d_destination_settings.style_control #=> String, one of "EXCLUDE", "INCLUDE"
     #   resp.channel.encoder_settings.caption_descriptions[0].destination_settings.ttml_destination_settings.style_control #=> String, one of "PASSTHROUGH", "USE_CONFIGURED"
     #   resp.channel.encoder_settings.caption_descriptions[0].language_code #=> String
     #   resp.channel.encoder_settings.caption_descriptions[0].language_description #=> String
@@ -1652,7 +1666,7 @@ module Aws::MediaLive
     #   resp.channel.encoder_settings.output_groups[0].output_group_settings.hls_group_settings.manifest_duration_format #=> String, one of "FLOATING_POINT", "INTEGER"
     #   resp.channel.encoder_settings.output_groups[0].output_group_settings.hls_group_settings.min_segment_length #=> Integer
     #   resp.channel.encoder_settings.output_groups[0].output_group_settings.hls_group_settings.mode #=> String, one of "LIVE", "VOD"
-    #   resp.channel.encoder_settings.output_groups[0].output_group_settings.hls_group_settings.output_selection #=> String, one of "MANIFESTS_AND_SEGMENTS", "SEGMENTS_ONLY"
+    #   resp.channel.encoder_settings.output_groups[0].output_group_settings.hls_group_settings.output_selection #=> String, one of "MANIFESTS_AND_SEGMENTS", "SEGMENTS_ONLY", "VARIANT_MANIFESTS_AND_SEGMENTS"
     #   resp.channel.encoder_settings.output_groups[0].output_group_settings.hls_group_settings.program_date_time #=> String, one of "EXCLUDE", "INCLUDE"
     #   resp.channel.encoder_settings.output_groups[0].output_group_settings.hls_group_settings.program_date_time_period #=> Integer
     #   resp.channel.encoder_settings.output_groups[0].output_group_settings.hls_group_settings.redundant_manifest #=> String, one of "DISABLED", "ENABLED"
@@ -1903,6 +1917,8 @@ module Aws::MediaLive
     #   resp.channel.encoder_settings.video_descriptions[0].codec_settings.h265_settings.color_metadata #=> String, one of "IGNORE", "INSERT"
     #   resp.channel.encoder_settings.video_descriptions[0].codec_settings.h265_settings.color_space_settings.hdr_10_settings.max_cll #=> Integer
     #   resp.channel.encoder_settings.video_descriptions[0].codec_settings.h265_settings.color_space_settings.hdr_10_settings.max_fall #=> Integer
+    #   resp.channel.encoder_settings.video_descriptions[0].codec_settings.h265_settings.filter_settings.temporal_filter_settings.post_filter_sharpening #=> String, one of "AUTO", "DISABLED", "ENABLED"
+    #   resp.channel.encoder_settings.video_descriptions[0].codec_settings.h265_settings.filter_settings.temporal_filter_settings.strength #=> String, one of "AUTO", "STRENGTH_1", "STRENGTH_2", "STRENGTH_3", "STRENGTH_4", "STRENGTH_5", "STRENGTH_6", "STRENGTH_7", "STRENGTH_8", "STRENGTH_9", "STRENGTH_10", "STRENGTH_11", "STRENGTH_12", "STRENGTH_13", "STRENGTH_14", "STRENGTH_15", "STRENGTH_16"
     #   resp.channel.encoder_settings.video_descriptions[0].codec_settings.h265_settings.fixed_afd #=> String, one of "AFD_0000", "AFD_0010", "AFD_0011", "AFD_0100", "AFD_1000", "AFD_1001", "AFD_1010", "AFD_1011", "AFD_1101", "AFD_1110", "AFD_1111"
     #   resp.channel.encoder_settings.video_descriptions[0].codec_settings.h265_settings.flicker_aq #=> String, one of "DISABLED", "ENABLED"
     #   resp.channel.encoder_settings.video_descriptions[0].codec_settings.h265_settings.framerate_denominator #=> Integer
@@ -1919,7 +1935,7 @@ module Aws::MediaLive
     #   resp.channel.encoder_settings.video_descriptions[0].codec_settings.h265_settings.profile #=> String, one of "MAIN", "MAIN_10BIT"
     #   resp.channel.encoder_settings.video_descriptions[0].codec_settings.h265_settings.qvbr_quality_level #=> Integer
     #   resp.channel.encoder_settings.video_descriptions[0].codec_settings.h265_settings.rate_control_mode #=> String, one of "CBR", "MULTIPLEX", "QVBR"
-    #   resp.channel.encoder_settings.video_descriptions[0].codec_settings.h265_settings.scan_type #=> String, one of "PROGRESSIVE"
+    #   resp.channel.encoder_settings.video_descriptions[0].codec_settings.h265_settings.scan_type #=> String, one of "INTERLACED", "PROGRESSIVE"
     #   resp.channel.encoder_settings.video_descriptions[0].codec_settings.h265_settings.scene_change_detect #=> String, one of "DISABLED", "ENABLED"
     #   resp.channel.encoder_settings.video_descriptions[0].codec_settings.h265_settings.slices #=> Integer
     #   resp.channel.encoder_settings.video_descriptions[0].codec_settings.h265_settings.tier #=> String, one of "HIGH", "MAIN"
@@ -2481,6 +2497,9 @@ module Aws::MediaLive
     #   resp.encoder_settings.caption_descriptions[0].destination_settings.dvb_sub_destination_settings.teletext_grid_control #=> String, one of "FIXED", "SCALED"
     #   resp.encoder_settings.caption_descriptions[0].destination_settings.dvb_sub_destination_settings.x_position #=> Integer
     #   resp.encoder_settings.caption_descriptions[0].destination_settings.dvb_sub_destination_settings.y_position #=> Integer
+    #   resp.encoder_settings.caption_descriptions[0].destination_settings.ebu_tt_d_destination_settings.fill_line_gap #=> String, one of "DISABLED", "ENABLED"
+    #   resp.encoder_settings.caption_descriptions[0].destination_settings.ebu_tt_d_destination_settings.font_family #=> String
+    #   resp.encoder_settings.caption_descriptions[0].destination_settings.ebu_tt_d_destination_settings.style_control #=> String, one of "EXCLUDE", "INCLUDE"
     #   resp.encoder_settings.caption_descriptions[0].destination_settings.ttml_destination_settings.style_control #=> String, one of "PASSTHROUGH", "USE_CONFIGURED"
     #   resp.encoder_settings.caption_descriptions[0].language_code #=> String
     #   resp.encoder_settings.caption_descriptions[0].language_description #=> String
@@ -2560,7 +2579,7 @@ module Aws::MediaLive
     #   resp.encoder_settings.output_groups[0].output_group_settings.hls_group_settings.manifest_duration_format #=> String, one of "FLOATING_POINT", "INTEGER"
     #   resp.encoder_settings.output_groups[0].output_group_settings.hls_group_settings.min_segment_length #=> Integer
     #   resp.encoder_settings.output_groups[0].output_group_settings.hls_group_settings.mode #=> String, one of "LIVE", "VOD"
-    #   resp.encoder_settings.output_groups[0].output_group_settings.hls_group_settings.output_selection #=> String, one of "MANIFESTS_AND_SEGMENTS", "SEGMENTS_ONLY"
+    #   resp.encoder_settings.output_groups[0].output_group_settings.hls_group_settings.output_selection #=> String, one of "MANIFESTS_AND_SEGMENTS", "SEGMENTS_ONLY", "VARIANT_MANIFESTS_AND_SEGMENTS"
     #   resp.encoder_settings.output_groups[0].output_group_settings.hls_group_settings.program_date_time #=> String, one of "EXCLUDE", "INCLUDE"
     #   resp.encoder_settings.output_groups[0].output_group_settings.hls_group_settings.program_date_time_period #=> Integer
     #   resp.encoder_settings.output_groups[0].output_group_settings.hls_group_settings.redundant_manifest #=> String, one of "DISABLED", "ENABLED"
@@ -2811,6 +2830,8 @@ module Aws::MediaLive
     #   resp.encoder_settings.video_descriptions[0].codec_settings.h265_settings.color_metadata #=> String, one of "IGNORE", "INSERT"
     #   resp.encoder_settings.video_descriptions[0].codec_settings.h265_settings.color_space_settings.hdr_10_settings.max_cll #=> Integer
     #   resp.encoder_settings.video_descriptions[0].codec_settings.h265_settings.color_space_settings.hdr_10_settings.max_fall #=> Integer
+    #   resp.encoder_settings.video_descriptions[0].codec_settings.h265_settings.filter_settings.temporal_filter_settings.post_filter_sharpening #=> String, one of "AUTO", "DISABLED", "ENABLED"
+    #   resp.encoder_settings.video_descriptions[0].codec_settings.h265_settings.filter_settings.temporal_filter_settings.strength #=> String, one of "AUTO", "STRENGTH_1", "STRENGTH_2", "STRENGTH_3", "STRENGTH_4", "STRENGTH_5", "STRENGTH_6", "STRENGTH_7", "STRENGTH_8", "STRENGTH_9", "STRENGTH_10", "STRENGTH_11", "STRENGTH_12", "STRENGTH_13", "STRENGTH_14", "STRENGTH_15", "STRENGTH_16"
     #   resp.encoder_settings.video_descriptions[0].codec_settings.h265_settings.fixed_afd #=> String, one of "AFD_0000", "AFD_0010", "AFD_0011", "AFD_0100", "AFD_1000", "AFD_1001", "AFD_1010", "AFD_1011", "AFD_1101", "AFD_1110", "AFD_1111"
     #   resp.encoder_settings.video_descriptions[0].codec_settings.h265_settings.flicker_aq #=> String, one of "DISABLED", "ENABLED"
     #   resp.encoder_settings.video_descriptions[0].codec_settings.h265_settings.framerate_denominator #=> Integer
@@ -2827,7 +2848,7 @@ module Aws::MediaLive
     #   resp.encoder_settings.video_descriptions[0].codec_settings.h265_settings.profile #=> String, one of "MAIN", "MAIN_10BIT"
     #   resp.encoder_settings.video_descriptions[0].codec_settings.h265_settings.qvbr_quality_level #=> Integer
     #   resp.encoder_settings.video_descriptions[0].codec_settings.h265_settings.rate_control_mode #=> String, one of "CBR", "MULTIPLEX", "QVBR"
-    #   resp.encoder_settings.video_descriptions[0].codec_settings.h265_settings.scan_type #=> String, one of "PROGRESSIVE"
+    #   resp.encoder_settings.video_descriptions[0].codec_settings.h265_settings.scan_type #=> String, one of "INTERLACED", "PROGRESSIVE"
     #   resp.encoder_settings.video_descriptions[0].codec_settings.h265_settings.scene_change_detect #=> String, one of "DISABLED", "ENABLED"
     #   resp.encoder_settings.video_descriptions[0].codec_settings.h265_settings.slices #=> Integer
     #   resp.encoder_settings.video_descriptions[0].codec_settings.h265_settings.tier #=> String, one of "HIGH", "MAIN"
@@ -3328,6 +3349,9 @@ module Aws::MediaLive
     #   resp.encoder_settings.caption_descriptions[0].destination_settings.dvb_sub_destination_settings.teletext_grid_control #=> String, one of "FIXED", "SCALED"
     #   resp.encoder_settings.caption_descriptions[0].destination_settings.dvb_sub_destination_settings.x_position #=> Integer
     #   resp.encoder_settings.caption_descriptions[0].destination_settings.dvb_sub_destination_settings.y_position #=> Integer
+    #   resp.encoder_settings.caption_descriptions[0].destination_settings.ebu_tt_d_destination_settings.fill_line_gap #=> String, one of "DISABLED", "ENABLED"
+    #   resp.encoder_settings.caption_descriptions[0].destination_settings.ebu_tt_d_destination_settings.font_family #=> String
+    #   resp.encoder_settings.caption_descriptions[0].destination_settings.ebu_tt_d_destination_settings.style_control #=> String, one of "EXCLUDE", "INCLUDE"
     #   resp.encoder_settings.caption_descriptions[0].destination_settings.ttml_destination_settings.style_control #=> String, one of "PASSTHROUGH", "USE_CONFIGURED"
     #   resp.encoder_settings.caption_descriptions[0].language_code #=> String
     #   resp.encoder_settings.caption_descriptions[0].language_description #=> String
@@ -3407,7 +3431,7 @@ module Aws::MediaLive
     #   resp.encoder_settings.output_groups[0].output_group_settings.hls_group_settings.manifest_duration_format #=> String, one of "FLOATING_POINT", "INTEGER"
     #   resp.encoder_settings.output_groups[0].output_group_settings.hls_group_settings.min_segment_length #=> Integer
     #   resp.encoder_settings.output_groups[0].output_group_settings.hls_group_settings.mode #=> String, one of "LIVE", "VOD"
-    #   resp.encoder_settings.output_groups[0].output_group_settings.hls_group_settings.output_selection #=> String, one of "MANIFESTS_AND_SEGMENTS", "SEGMENTS_ONLY"
+    #   resp.encoder_settings.output_groups[0].output_group_settings.hls_group_settings.output_selection #=> String, one of "MANIFESTS_AND_SEGMENTS", "SEGMENTS_ONLY", "VARIANT_MANIFESTS_AND_SEGMENTS"
     #   resp.encoder_settings.output_groups[0].output_group_settings.hls_group_settings.program_date_time #=> String, one of "EXCLUDE", "INCLUDE"
     #   resp.encoder_settings.output_groups[0].output_group_settings.hls_group_settings.program_date_time_period #=> Integer
     #   resp.encoder_settings.output_groups[0].output_group_settings.hls_group_settings.redundant_manifest #=> String, one of "DISABLED", "ENABLED"
@@ -3658,6 +3682,8 @@ module Aws::MediaLive
     #   resp.encoder_settings.video_descriptions[0].codec_settings.h265_settings.color_metadata #=> String, one of "IGNORE", "INSERT"
     #   resp.encoder_settings.video_descriptions[0].codec_settings.h265_settings.color_space_settings.hdr_10_settings.max_cll #=> Integer
     #   resp.encoder_settings.video_descriptions[0].codec_settings.h265_settings.color_space_settings.hdr_10_settings.max_fall #=> Integer
+    #   resp.encoder_settings.video_descriptions[0].codec_settings.h265_settings.filter_settings.temporal_filter_settings.post_filter_sharpening #=> String, one of "AUTO", "DISABLED", "ENABLED"
+    #   resp.encoder_settings.video_descriptions[0].codec_settings.h265_settings.filter_settings.temporal_filter_settings.strength #=> String, one of "AUTO", "STRENGTH_1", "STRENGTH_2", "STRENGTH_3", "STRENGTH_4", "STRENGTH_5", "STRENGTH_6", "STRENGTH_7", "STRENGTH_8", "STRENGTH_9", "STRENGTH_10", "STRENGTH_11", "STRENGTH_12", "STRENGTH_13", "STRENGTH_14", "STRENGTH_15", "STRENGTH_16"
     #   resp.encoder_settings.video_descriptions[0].codec_settings.h265_settings.fixed_afd #=> String, one of "AFD_0000", "AFD_0010", "AFD_0011", "AFD_0100", "AFD_1000", "AFD_1001", "AFD_1010", "AFD_1011", "AFD_1101", "AFD_1110", "AFD_1111"
     #   resp.encoder_settings.video_descriptions[0].codec_settings.h265_settings.flicker_aq #=> String, one of "DISABLED", "ENABLED"
     #   resp.encoder_settings.video_descriptions[0].codec_settings.h265_settings.framerate_denominator #=> Integer
@@ -3674,7 +3700,7 @@ module Aws::MediaLive
     #   resp.encoder_settings.video_descriptions[0].codec_settings.h265_settings.profile #=> String, one of "MAIN", "MAIN_10BIT"
     #   resp.encoder_settings.video_descriptions[0].codec_settings.h265_settings.qvbr_quality_level #=> Integer
     #   resp.encoder_settings.video_descriptions[0].codec_settings.h265_settings.rate_control_mode #=> String, one of "CBR", "MULTIPLEX", "QVBR"
-    #   resp.encoder_settings.video_descriptions[0].codec_settings.h265_settings.scan_type #=> String, one of "PROGRESSIVE"
+    #   resp.encoder_settings.video_descriptions[0].codec_settings.h265_settings.scan_type #=> String, one of "INTERLACED", "PROGRESSIVE"
     #   resp.encoder_settings.video_descriptions[0].codec_settings.h265_settings.scene_change_detect #=> String, one of "DISABLED", "ENABLED"
     #   resp.encoder_settings.video_descriptions[0].codec_settings.h265_settings.slices #=> Integer
     #   resp.encoder_settings.video_descriptions[0].codec_settings.h265_settings.tier #=> String, one of "HIGH", "MAIN"
@@ -3887,6 +3913,45 @@ module Aws::MediaLive
     def describe_input_device(params = {}, options = {})
       req = build_request(:describe_input_device, params)
       req.send_request(options)
+    end
+
+    # Get the latest thumbnail data for the input device.
+    #
+    # @option params [required, String] :input_device_id
+    #
+    # @option params [required, String] :accept
+    #   Accept Header
+    #
+    # @return [Types::DescribeInputDeviceThumbnailResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeInputDeviceThumbnailResponse#body #body} => IO
+    #   * {Types::DescribeInputDeviceThumbnailResponse#content_type #content_type} => String
+    #   * {Types::DescribeInputDeviceThumbnailResponse#content_length #content_length} => Integer
+    #   * {Types::DescribeInputDeviceThumbnailResponse#etag #etag} => String
+    #   * {Types::DescribeInputDeviceThumbnailResponse#last_modified #last_modified} => Time
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_input_device_thumbnail({
+    #     input_device_id: "__string", # required
+    #     accept: "image/jpeg", # required, accepts image/jpeg
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.body #=> IO
+    #   resp.content_type #=> String, one of "image/jpeg"
+    #   resp.content_length #=> Integer
+    #   resp.etag #=> String
+    #   resp.last_modified #=> Time
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/DescribeInputDeviceThumbnail AWS API Documentation
+    #
+    # @overload describe_input_device_thumbnail(params = {})
+    # @param [Hash] params ({})
+    def describe_input_device_thumbnail(params = {}, options = {}, &block)
+      req = build_request(:describe_input_device_thumbnail, params)
+      req.send_request(options, &block)
     end
 
     # Produces a summary of an Input Security Group
@@ -5030,6 +5095,9 @@ module Aws::MediaLive
     #   resp.encoder_settings.caption_descriptions[0].destination_settings.dvb_sub_destination_settings.teletext_grid_control #=> String, one of "FIXED", "SCALED"
     #   resp.encoder_settings.caption_descriptions[0].destination_settings.dvb_sub_destination_settings.x_position #=> Integer
     #   resp.encoder_settings.caption_descriptions[0].destination_settings.dvb_sub_destination_settings.y_position #=> Integer
+    #   resp.encoder_settings.caption_descriptions[0].destination_settings.ebu_tt_d_destination_settings.fill_line_gap #=> String, one of "DISABLED", "ENABLED"
+    #   resp.encoder_settings.caption_descriptions[0].destination_settings.ebu_tt_d_destination_settings.font_family #=> String
+    #   resp.encoder_settings.caption_descriptions[0].destination_settings.ebu_tt_d_destination_settings.style_control #=> String, one of "EXCLUDE", "INCLUDE"
     #   resp.encoder_settings.caption_descriptions[0].destination_settings.ttml_destination_settings.style_control #=> String, one of "PASSTHROUGH", "USE_CONFIGURED"
     #   resp.encoder_settings.caption_descriptions[0].language_code #=> String
     #   resp.encoder_settings.caption_descriptions[0].language_description #=> String
@@ -5109,7 +5177,7 @@ module Aws::MediaLive
     #   resp.encoder_settings.output_groups[0].output_group_settings.hls_group_settings.manifest_duration_format #=> String, one of "FLOATING_POINT", "INTEGER"
     #   resp.encoder_settings.output_groups[0].output_group_settings.hls_group_settings.min_segment_length #=> Integer
     #   resp.encoder_settings.output_groups[0].output_group_settings.hls_group_settings.mode #=> String, one of "LIVE", "VOD"
-    #   resp.encoder_settings.output_groups[0].output_group_settings.hls_group_settings.output_selection #=> String, one of "MANIFESTS_AND_SEGMENTS", "SEGMENTS_ONLY"
+    #   resp.encoder_settings.output_groups[0].output_group_settings.hls_group_settings.output_selection #=> String, one of "MANIFESTS_AND_SEGMENTS", "SEGMENTS_ONLY", "VARIANT_MANIFESTS_AND_SEGMENTS"
     #   resp.encoder_settings.output_groups[0].output_group_settings.hls_group_settings.program_date_time #=> String, one of "EXCLUDE", "INCLUDE"
     #   resp.encoder_settings.output_groups[0].output_group_settings.hls_group_settings.program_date_time_period #=> Integer
     #   resp.encoder_settings.output_groups[0].output_group_settings.hls_group_settings.redundant_manifest #=> String, one of "DISABLED", "ENABLED"
@@ -5360,6 +5428,8 @@ module Aws::MediaLive
     #   resp.encoder_settings.video_descriptions[0].codec_settings.h265_settings.color_metadata #=> String, one of "IGNORE", "INSERT"
     #   resp.encoder_settings.video_descriptions[0].codec_settings.h265_settings.color_space_settings.hdr_10_settings.max_cll #=> Integer
     #   resp.encoder_settings.video_descriptions[0].codec_settings.h265_settings.color_space_settings.hdr_10_settings.max_fall #=> Integer
+    #   resp.encoder_settings.video_descriptions[0].codec_settings.h265_settings.filter_settings.temporal_filter_settings.post_filter_sharpening #=> String, one of "AUTO", "DISABLED", "ENABLED"
+    #   resp.encoder_settings.video_descriptions[0].codec_settings.h265_settings.filter_settings.temporal_filter_settings.strength #=> String, one of "AUTO", "STRENGTH_1", "STRENGTH_2", "STRENGTH_3", "STRENGTH_4", "STRENGTH_5", "STRENGTH_6", "STRENGTH_7", "STRENGTH_8", "STRENGTH_9", "STRENGTH_10", "STRENGTH_11", "STRENGTH_12", "STRENGTH_13", "STRENGTH_14", "STRENGTH_15", "STRENGTH_16"
     #   resp.encoder_settings.video_descriptions[0].codec_settings.h265_settings.fixed_afd #=> String, one of "AFD_0000", "AFD_0010", "AFD_0011", "AFD_0100", "AFD_1000", "AFD_1001", "AFD_1010", "AFD_1011", "AFD_1101", "AFD_1110", "AFD_1111"
     #   resp.encoder_settings.video_descriptions[0].codec_settings.h265_settings.flicker_aq #=> String, one of "DISABLED", "ENABLED"
     #   resp.encoder_settings.video_descriptions[0].codec_settings.h265_settings.framerate_denominator #=> Integer
@@ -5376,7 +5446,7 @@ module Aws::MediaLive
     #   resp.encoder_settings.video_descriptions[0].codec_settings.h265_settings.profile #=> String, one of "MAIN", "MAIN_10BIT"
     #   resp.encoder_settings.video_descriptions[0].codec_settings.h265_settings.qvbr_quality_level #=> Integer
     #   resp.encoder_settings.video_descriptions[0].codec_settings.h265_settings.rate_control_mode #=> String, one of "CBR", "MULTIPLEX", "QVBR"
-    #   resp.encoder_settings.video_descriptions[0].codec_settings.h265_settings.scan_type #=> String, one of "PROGRESSIVE"
+    #   resp.encoder_settings.video_descriptions[0].codec_settings.h265_settings.scan_type #=> String, one of "INTERLACED", "PROGRESSIVE"
     #   resp.encoder_settings.video_descriptions[0].codec_settings.h265_settings.scene_change_detect #=> String, one of "DISABLED", "ENABLED"
     #   resp.encoder_settings.video_descriptions[0].codec_settings.h265_settings.slices #=> Integer
     #   resp.encoder_settings.video_descriptions[0].codec_settings.h265_settings.tier #=> String, one of "HIGH", "MAIN"
@@ -5664,6 +5734,9 @@ module Aws::MediaLive
     #   resp.encoder_settings.caption_descriptions[0].destination_settings.dvb_sub_destination_settings.teletext_grid_control #=> String, one of "FIXED", "SCALED"
     #   resp.encoder_settings.caption_descriptions[0].destination_settings.dvb_sub_destination_settings.x_position #=> Integer
     #   resp.encoder_settings.caption_descriptions[0].destination_settings.dvb_sub_destination_settings.y_position #=> Integer
+    #   resp.encoder_settings.caption_descriptions[0].destination_settings.ebu_tt_d_destination_settings.fill_line_gap #=> String, one of "DISABLED", "ENABLED"
+    #   resp.encoder_settings.caption_descriptions[0].destination_settings.ebu_tt_d_destination_settings.font_family #=> String
+    #   resp.encoder_settings.caption_descriptions[0].destination_settings.ebu_tt_d_destination_settings.style_control #=> String, one of "EXCLUDE", "INCLUDE"
     #   resp.encoder_settings.caption_descriptions[0].destination_settings.ttml_destination_settings.style_control #=> String, one of "PASSTHROUGH", "USE_CONFIGURED"
     #   resp.encoder_settings.caption_descriptions[0].language_code #=> String
     #   resp.encoder_settings.caption_descriptions[0].language_description #=> String
@@ -5743,7 +5816,7 @@ module Aws::MediaLive
     #   resp.encoder_settings.output_groups[0].output_group_settings.hls_group_settings.manifest_duration_format #=> String, one of "FLOATING_POINT", "INTEGER"
     #   resp.encoder_settings.output_groups[0].output_group_settings.hls_group_settings.min_segment_length #=> Integer
     #   resp.encoder_settings.output_groups[0].output_group_settings.hls_group_settings.mode #=> String, one of "LIVE", "VOD"
-    #   resp.encoder_settings.output_groups[0].output_group_settings.hls_group_settings.output_selection #=> String, one of "MANIFESTS_AND_SEGMENTS", "SEGMENTS_ONLY"
+    #   resp.encoder_settings.output_groups[0].output_group_settings.hls_group_settings.output_selection #=> String, one of "MANIFESTS_AND_SEGMENTS", "SEGMENTS_ONLY", "VARIANT_MANIFESTS_AND_SEGMENTS"
     #   resp.encoder_settings.output_groups[0].output_group_settings.hls_group_settings.program_date_time #=> String, one of "EXCLUDE", "INCLUDE"
     #   resp.encoder_settings.output_groups[0].output_group_settings.hls_group_settings.program_date_time_period #=> Integer
     #   resp.encoder_settings.output_groups[0].output_group_settings.hls_group_settings.redundant_manifest #=> String, one of "DISABLED", "ENABLED"
@@ -5994,6 +6067,8 @@ module Aws::MediaLive
     #   resp.encoder_settings.video_descriptions[0].codec_settings.h265_settings.color_metadata #=> String, one of "IGNORE", "INSERT"
     #   resp.encoder_settings.video_descriptions[0].codec_settings.h265_settings.color_space_settings.hdr_10_settings.max_cll #=> Integer
     #   resp.encoder_settings.video_descriptions[0].codec_settings.h265_settings.color_space_settings.hdr_10_settings.max_fall #=> Integer
+    #   resp.encoder_settings.video_descriptions[0].codec_settings.h265_settings.filter_settings.temporal_filter_settings.post_filter_sharpening #=> String, one of "AUTO", "DISABLED", "ENABLED"
+    #   resp.encoder_settings.video_descriptions[0].codec_settings.h265_settings.filter_settings.temporal_filter_settings.strength #=> String, one of "AUTO", "STRENGTH_1", "STRENGTH_2", "STRENGTH_3", "STRENGTH_4", "STRENGTH_5", "STRENGTH_6", "STRENGTH_7", "STRENGTH_8", "STRENGTH_9", "STRENGTH_10", "STRENGTH_11", "STRENGTH_12", "STRENGTH_13", "STRENGTH_14", "STRENGTH_15", "STRENGTH_16"
     #   resp.encoder_settings.video_descriptions[0].codec_settings.h265_settings.fixed_afd #=> String, one of "AFD_0000", "AFD_0010", "AFD_0011", "AFD_0100", "AFD_1000", "AFD_1001", "AFD_1010", "AFD_1011", "AFD_1101", "AFD_1110", "AFD_1111"
     #   resp.encoder_settings.video_descriptions[0].codec_settings.h265_settings.flicker_aq #=> String, one of "DISABLED", "ENABLED"
     #   resp.encoder_settings.video_descriptions[0].codec_settings.h265_settings.framerate_denominator #=> Integer
@@ -6010,7 +6085,7 @@ module Aws::MediaLive
     #   resp.encoder_settings.video_descriptions[0].codec_settings.h265_settings.profile #=> String, one of "MAIN", "MAIN_10BIT"
     #   resp.encoder_settings.video_descriptions[0].codec_settings.h265_settings.qvbr_quality_level #=> Integer
     #   resp.encoder_settings.video_descriptions[0].codec_settings.h265_settings.rate_control_mode #=> String, one of "CBR", "MULTIPLEX", "QVBR"
-    #   resp.encoder_settings.video_descriptions[0].codec_settings.h265_settings.scan_type #=> String, one of "PROGRESSIVE"
+    #   resp.encoder_settings.video_descriptions[0].codec_settings.h265_settings.scan_type #=> String, one of "INTERLACED", "PROGRESSIVE"
     #   resp.encoder_settings.video_descriptions[0].codec_settings.h265_settings.scene_change_detect #=> String, one of "DISABLED", "ENABLED"
     #   resp.encoder_settings.video_descriptions[0].codec_settings.h265_settings.slices #=> Integer
     #   resp.encoder_settings.video_descriptions[0].codec_settings.h265_settings.tier #=> String, one of "HIGH", "MAIN"
@@ -6249,7 +6324,7 @@ module Aws::MediaLive
     #             pass_through_settings: {
     #             },
     #           },
-    #           language_code: "__stringMin3Max3",
+    #           language_code: "__stringMin1Max35",
     #           language_code_control: "FOLLOW_INPUT", # accepts FOLLOW_INPUT, USE_CONFIGURED
     #           name: "__string", # required
     #           remix_settings: {
@@ -6358,6 +6433,11 @@ module Aws::MediaLive
     #               teletext_grid_control: "FIXED", # accepts FIXED, SCALED
     #               x_position: 1,
     #               y_position: 1,
+    #             },
+    #             ebu_tt_d_destination_settings: {
+    #               fill_line_gap: "DISABLED", # accepts DISABLED, ENABLED
+    #               font_family: "__string",
+    #               style_control: "EXCLUDE", # accepts EXCLUDE, INCLUDE
     #             },
     #             embedded_destination_settings: {
     #             },
@@ -6500,7 +6580,7 @@ module Aws::MediaLive
     #               manifest_duration_format: "FLOATING_POINT", # accepts FLOATING_POINT, INTEGER
     #               min_segment_length: 1,
     #               mode: "LIVE", # accepts LIVE, VOD
-    #               output_selection: "MANIFESTS_AND_SEGMENTS", # accepts MANIFESTS_AND_SEGMENTS, SEGMENTS_ONLY
+    #               output_selection: "MANIFESTS_AND_SEGMENTS", # accepts MANIFESTS_AND_SEGMENTS, SEGMENTS_ONLY, VARIANT_MANIFESTS_AND_SEGMENTS
     #               program_date_time: "EXCLUDE", # accepts EXCLUDE, INCLUDE
     #               program_date_time_period: 1,
     #               redundant_manifest: "DISABLED", # accepts DISABLED, ENABLED
@@ -6859,6 +6939,12 @@ module Aws::MediaLive
     #                 rec_709_settings: {
     #                 },
     #               },
+    #               filter_settings: {
+    #                 temporal_filter_settings: {
+    #                   post_filter_sharpening: "AUTO", # accepts AUTO, DISABLED, ENABLED
+    #                   strength: "AUTO", # accepts AUTO, STRENGTH_1, STRENGTH_2, STRENGTH_3, STRENGTH_4, STRENGTH_5, STRENGTH_6, STRENGTH_7, STRENGTH_8, STRENGTH_9, STRENGTH_10, STRENGTH_11, STRENGTH_12, STRENGTH_13, STRENGTH_14, STRENGTH_15, STRENGTH_16
+    #                 },
+    #               },
     #               fixed_afd: "AFD_0000", # accepts AFD_0000, AFD_0010, AFD_0011, AFD_0100, AFD_1000, AFD_1001, AFD_1010, AFD_1011, AFD_1101, AFD_1110, AFD_1111
     #               flicker_aq: "DISABLED", # accepts DISABLED, ENABLED
     #               framerate_denominator: 1, # required
@@ -6875,7 +6961,7 @@ module Aws::MediaLive
     #               profile: "MAIN", # accepts MAIN, MAIN_10BIT
     #               qvbr_quality_level: 1,
     #               rate_control_mode: "CBR", # accepts CBR, MULTIPLEX, QVBR
-    #               scan_type: "PROGRESSIVE", # accepts PROGRESSIVE
+    #               scan_type: "INTERLACED", # accepts INTERLACED, PROGRESSIVE
     #               scene_change_detect: "DISABLED", # accepts DISABLED, ENABLED
     #               slices: 1,
     #               tier: "HIGH", # accepts HIGH, MAIN
@@ -7123,6 +7209,9 @@ module Aws::MediaLive
     #   resp.channel.encoder_settings.caption_descriptions[0].destination_settings.dvb_sub_destination_settings.teletext_grid_control #=> String, one of "FIXED", "SCALED"
     #   resp.channel.encoder_settings.caption_descriptions[0].destination_settings.dvb_sub_destination_settings.x_position #=> Integer
     #   resp.channel.encoder_settings.caption_descriptions[0].destination_settings.dvb_sub_destination_settings.y_position #=> Integer
+    #   resp.channel.encoder_settings.caption_descriptions[0].destination_settings.ebu_tt_d_destination_settings.fill_line_gap #=> String, one of "DISABLED", "ENABLED"
+    #   resp.channel.encoder_settings.caption_descriptions[0].destination_settings.ebu_tt_d_destination_settings.font_family #=> String
+    #   resp.channel.encoder_settings.caption_descriptions[0].destination_settings.ebu_tt_d_destination_settings.style_control #=> String, one of "EXCLUDE", "INCLUDE"
     #   resp.channel.encoder_settings.caption_descriptions[0].destination_settings.ttml_destination_settings.style_control #=> String, one of "PASSTHROUGH", "USE_CONFIGURED"
     #   resp.channel.encoder_settings.caption_descriptions[0].language_code #=> String
     #   resp.channel.encoder_settings.caption_descriptions[0].language_description #=> String
@@ -7202,7 +7291,7 @@ module Aws::MediaLive
     #   resp.channel.encoder_settings.output_groups[0].output_group_settings.hls_group_settings.manifest_duration_format #=> String, one of "FLOATING_POINT", "INTEGER"
     #   resp.channel.encoder_settings.output_groups[0].output_group_settings.hls_group_settings.min_segment_length #=> Integer
     #   resp.channel.encoder_settings.output_groups[0].output_group_settings.hls_group_settings.mode #=> String, one of "LIVE", "VOD"
-    #   resp.channel.encoder_settings.output_groups[0].output_group_settings.hls_group_settings.output_selection #=> String, one of "MANIFESTS_AND_SEGMENTS", "SEGMENTS_ONLY"
+    #   resp.channel.encoder_settings.output_groups[0].output_group_settings.hls_group_settings.output_selection #=> String, one of "MANIFESTS_AND_SEGMENTS", "SEGMENTS_ONLY", "VARIANT_MANIFESTS_AND_SEGMENTS"
     #   resp.channel.encoder_settings.output_groups[0].output_group_settings.hls_group_settings.program_date_time #=> String, one of "EXCLUDE", "INCLUDE"
     #   resp.channel.encoder_settings.output_groups[0].output_group_settings.hls_group_settings.program_date_time_period #=> Integer
     #   resp.channel.encoder_settings.output_groups[0].output_group_settings.hls_group_settings.redundant_manifest #=> String, one of "DISABLED", "ENABLED"
@@ -7453,6 +7542,8 @@ module Aws::MediaLive
     #   resp.channel.encoder_settings.video_descriptions[0].codec_settings.h265_settings.color_metadata #=> String, one of "IGNORE", "INSERT"
     #   resp.channel.encoder_settings.video_descriptions[0].codec_settings.h265_settings.color_space_settings.hdr_10_settings.max_cll #=> Integer
     #   resp.channel.encoder_settings.video_descriptions[0].codec_settings.h265_settings.color_space_settings.hdr_10_settings.max_fall #=> Integer
+    #   resp.channel.encoder_settings.video_descriptions[0].codec_settings.h265_settings.filter_settings.temporal_filter_settings.post_filter_sharpening #=> String, one of "AUTO", "DISABLED", "ENABLED"
+    #   resp.channel.encoder_settings.video_descriptions[0].codec_settings.h265_settings.filter_settings.temporal_filter_settings.strength #=> String, one of "AUTO", "STRENGTH_1", "STRENGTH_2", "STRENGTH_3", "STRENGTH_4", "STRENGTH_5", "STRENGTH_6", "STRENGTH_7", "STRENGTH_8", "STRENGTH_9", "STRENGTH_10", "STRENGTH_11", "STRENGTH_12", "STRENGTH_13", "STRENGTH_14", "STRENGTH_15", "STRENGTH_16"
     #   resp.channel.encoder_settings.video_descriptions[0].codec_settings.h265_settings.fixed_afd #=> String, one of "AFD_0000", "AFD_0010", "AFD_0011", "AFD_0100", "AFD_1000", "AFD_1001", "AFD_1010", "AFD_1011", "AFD_1101", "AFD_1110", "AFD_1111"
     #   resp.channel.encoder_settings.video_descriptions[0].codec_settings.h265_settings.flicker_aq #=> String, one of "DISABLED", "ENABLED"
     #   resp.channel.encoder_settings.video_descriptions[0].codec_settings.h265_settings.framerate_denominator #=> Integer
@@ -7469,7 +7560,7 @@ module Aws::MediaLive
     #   resp.channel.encoder_settings.video_descriptions[0].codec_settings.h265_settings.profile #=> String, one of "MAIN", "MAIN_10BIT"
     #   resp.channel.encoder_settings.video_descriptions[0].codec_settings.h265_settings.qvbr_quality_level #=> Integer
     #   resp.channel.encoder_settings.video_descriptions[0].codec_settings.h265_settings.rate_control_mode #=> String, one of "CBR", "MULTIPLEX", "QVBR"
-    #   resp.channel.encoder_settings.video_descriptions[0].codec_settings.h265_settings.scan_type #=> String, one of "PROGRESSIVE"
+    #   resp.channel.encoder_settings.video_descriptions[0].codec_settings.h265_settings.scan_type #=> String, one of "INTERLACED", "PROGRESSIVE"
     #   resp.channel.encoder_settings.video_descriptions[0].codec_settings.h265_settings.scene_change_detect #=> String, one of "DISABLED", "ENABLED"
     #   resp.channel.encoder_settings.video_descriptions[0].codec_settings.h265_settings.slices #=> Integer
     #   resp.channel.encoder_settings.video_descriptions[0].codec_settings.h265_settings.tier #=> String, one of "HIGH", "MAIN"
@@ -7720,6 +7811,9 @@ module Aws::MediaLive
     #   resp.channel.encoder_settings.caption_descriptions[0].destination_settings.dvb_sub_destination_settings.teletext_grid_control #=> String, one of "FIXED", "SCALED"
     #   resp.channel.encoder_settings.caption_descriptions[0].destination_settings.dvb_sub_destination_settings.x_position #=> Integer
     #   resp.channel.encoder_settings.caption_descriptions[0].destination_settings.dvb_sub_destination_settings.y_position #=> Integer
+    #   resp.channel.encoder_settings.caption_descriptions[0].destination_settings.ebu_tt_d_destination_settings.fill_line_gap #=> String, one of "DISABLED", "ENABLED"
+    #   resp.channel.encoder_settings.caption_descriptions[0].destination_settings.ebu_tt_d_destination_settings.font_family #=> String
+    #   resp.channel.encoder_settings.caption_descriptions[0].destination_settings.ebu_tt_d_destination_settings.style_control #=> String, one of "EXCLUDE", "INCLUDE"
     #   resp.channel.encoder_settings.caption_descriptions[0].destination_settings.ttml_destination_settings.style_control #=> String, one of "PASSTHROUGH", "USE_CONFIGURED"
     #   resp.channel.encoder_settings.caption_descriptions[0].language_code #=> String
     #   resp.channel.encoder_settings.caption_descriptions[0].language_description #=> String
@@ -7799,7 +7893,7 @@ module Aws::MediaLive
     #   resp.channel.encoder_settings.output_groups[0].output_group_settings.hls_group_settings.manifest_duration_format #=> String, one of "FLOATING_POINT", "INTEGER"
     #   resp.channel.encoder_settings.output_groups[0].output_group_settings.hls_group_settings.min_segment_length #=> Integer
     #   resp.channel.encoder_settings.output_groups[0].output_group_settings.hls_group_settings.mode #=> String, one of "LIVE", "VOD"
-    #   resp.channel.encoder_settings.output_groups[0].output_group_settings.hls_group_settings.output_selection #=> String, one of "MANIFESTS_AND_SEGMENTS", "SEGMENTS_ONLY"
+    #   resp.channel.encoder_settings.output_groups[0].output_group_settings.hls_group_settings.output_selection #=> String, one of "MANIFESTS_AND_SEGMENTS", "SEGMENTS_ONLY", "VARIANT_MANIFESTS_AND_SEGMENTS"
     #   resp.channel.encoder_settings.output_groups[0].output_group_settings.hls_group_settings.program_date_time #=> String, one of "EXCLUDE", "INCLUDE"
     #   resp.channel.encoder_settings.output_groups[0].output_group_settings.hls_group_settings.program_date_time_period #=> Integer
     #   resp.channel.encoder_settings.output_groups[0].output_group_settings.hls_group_settings.redundant_manifest #=> String, one of "DISABLED", "ENABLED"
@@ -8050,6 +8144,8 @@ module Aws::MediaLive
     #   resp.channel.encoder_settings.video_descriptions[0].codec_settings.h265_settings.color_metadata #=> String, one of "IGNORE", "INSERT"
     #   resp.channel.encoder_settings.video_descriptions[0].codec_settings.h265_settings.color_space_settings.hdr_10_settings.max_cll #=> Integer
     #   resp.channel.encoder_settings.video_descriptions[0].codec_settings.h265_settings.color_space_settings.hdr_10_settings.max_fall #=> Integer
+    #   resp.channel.encoder_settings.video_descriptions[0].codec_settings.h265_settings.filter_settings.temporal_filter_settings.post_filter_sharpening #=> String, one of "AUTO", "DISABLED", "ENABLED"
+    #   resp.channel.encoder_settings.video_descriptions[0].codec_settings.h265_settings.filter_settings.temporal_filter_settings.strength #=> String, one of "AUTO", "STRENGTH_1", "STRENGTH_2", "STRENGTH_3", "STRENGTH_4", "STRENGTH_5", "STRENGTH_6", "STRENGTH_7", "STRENGTH_8", "STRENGTH_9", "STRENGTH_10", "STRENGTH_11", "STRENGTH_12", "STRENGTH_13", "STRENGTH_14", "STRENGTH_15", "STRENGTH_16"
     #   resp.channel.encoder_settings.video_descriptions[0].codec_settings.h265_settings.fixed_afd #=> String, one of "AFD_0000", "AFD_0010", "AFD_0011", "AFD_0100", "AFD_1000", "AFD_1001", "AFD_1010", "AFD_1011", "AFD_1101", "AFD_1110", "AFD_1111"
     #   resp.channel.encoder_settings.video_descriptions[0].codec_settings.h265_settings.flicker_aq #=> String, one of "DISABLED", "ENABLED"
     #   resp.channel.encoder_settings.video_descriptions[0].codec_settings.h265_settings.framerate_denominator #=> Integer
@@ -8066,7 +8162,7 @@ module Aws::MediaLive
     #   resp.channel.encoder_settings.video_descriptions[0].codec_settings.h265_settings.profile #=> String, one of "MAIN", "MAIN_10BIT"
     #   resp.channel.encoder_settings.video_descriptions[0].codec_settings.h265_settings.qvbr_quality_level #=> Integer
     #   resp.channel.encoder_settings.video_descriptions[0].codec_settings.h265_settings.rate_control_mode #=> String, one of "CBR", "MULTIPLEX", "QVBR"
-    #   resp.channel.encoder_settings.video_descriptions[0].codec_settings.h265_settings.scan_type #=> String, one of "PROGRESSIVE"
+    #   resp.channel.encoder_settings.video_descriptions[0].codec_settings.h265_settings.scan_type #=> String, one of "INTERLACED", "PROGRESSIVE"
     #   resp.channel.encoder_settings.video_descriptions[0].codec_settings.h265_settings.scene_change_detect #=> String, one of "DISABLED", "ENABLED"
     #   resp.channel.encoder_settings.video_descriptions[0].codec_settings.h265_settings.slices #=> Integer
     #   resp.channel.encoder_settings.video_descriptions[0].codec_settings.h265_settings.tier #=> String, one of "HIGH", "MAIN"
@@ -8543,7 +8639,7 @@ module Aws::MediaLive
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-medialive'
-      context[:gem_version] = '1.49.0'
+      context[:gem_version] = '1.51.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

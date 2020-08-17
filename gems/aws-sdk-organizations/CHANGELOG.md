@@ -1,6 +1,21 @@
 Unreleased Changes
 ------------------
 
+1.48.0 (2020-08-11)
+------------------
+
+* Feature - Minor documentation update for AWS Organizations
+
+1.47.0 (2020-08-07)
+------------------
+
+* Feature - Documentation updates for some new error reasons.
+
+1.46.0 (2020-07-30)
+------------------
+
+* Feature - Documentation updates for AWS Organizations
+
 1.45.0 (2020-07-08)
 ------------------
 

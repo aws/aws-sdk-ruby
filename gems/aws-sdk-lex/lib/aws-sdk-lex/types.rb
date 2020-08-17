@@ -372,6 +372,23 @@ module Aws::Lex
       include Aws::Structure
     end
 
+    # Provides a score that indicates the confidence that Amazon Lex has
+    # that an intent is the one that satisfies the user's intent.
+    #
+    # @!attribute [rw] score
+    #   A score that indicates how confident Amazon Lex is that an intent
+    #   satisfies the user's intent. Ranges between 0.00 and 1.00. Higher
+    #   scores indicate higher confidence.
+    #   @return [Float]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/runtime.lex-2016-11-28/IntentConfidence AWS API Documentation
+    #
+    class IntentConfidence < Struct.new(
+      :score)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Provides information about the state of an intent. You can use this
     # information to get the current state of an intent so that you can
     # process the intent, or so that you can return the intent to its
@@ -728,6 +745,24 @@ module Aws::Lex
     #   Current user intent that Amazon Lex is aware of.
     #   @return [String]
     #
+    # @!attribute [rw] nlu_intent_confidence
+    #   Provides a score that indicates how confident Amazon Lex is that the
+    #   returned intent is the one that matches the user's intent. The
+    #   score is between 0.0 and 1.0.
+    #
+    #   The score is a relative score, not an absolute score. The score may
+    #   change based on improvements to the Amazon Lex NLU.
+    #   @return [String]
+    #
+    # @!attribute [rw] alternative_intents
+    #   One to four alternative intents that may be applicable to the
+    #   user's intent.
+    #
+    #   Each alternative includes a score that indicates how confident
+    #   Amazon Lex is that the intent matches the user's intent. The
+    #   intents are sorted by the confidence score.
+    #   @return [String]
+    #
     # @!attribute [rw] slots
     #   Map of zero or more intent slots (name/value pairs) Amazon Lex
     #   detected from the user input during the conversation. The field is
@@ -751,7 +786,7 @@ module Aws::Lex
     #   @return [String]
     #
     # @!attribute [rw] sentiment_response
-    #   The sentiment expressed in and utterance.
+    #   The sentiment expressed in an utterance.
     #
     #   When the bot is configured to send utterances to Amazon Comprehend
     #   for sentiment analysis, this field contains the result of the
@@ -868,6 +903,23 @@ module Aws::Lex
     #   Amazon Lex sends that message in the response.
     #   @return [IO]
     #
+    # @!attribute [rw] bot_version
+    #   The version of the bot that responded to the conversation. You can
+    #   use this information to help determine if one version of a bot is
+    #   performing better than another version.
+    #
+    #   If you have enabled the new natural language understanding (NLU)
+    #   model, you can use this to determine if the improvement is due to
+    #   changes to the bot or changes to the NLU.
+    #
+    #   For more information about enabling the new NLU, see the
+    #   [enableModelImprovements][1] parameter of the `PutBot` operation.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/lex/latest/dg/API_PutBot.html#lex-PutBot-request-enableModelImprovements
+    #   @return [String]
+    #
     # @!attribute [rw] session_id
     #   The unique identifier for the session.
     #   @return [String]
@@ -877,6 +929,8 @@ module Aws::Lex
     class PostContentResponse < Struct.new(
       :content_type,
       :intent_name,
+      :nlu_intent_confidence,
+      :alternative_intents,
       :slots,
       :session_attributes,
       :sentiment_response,
@@ -886,6 +940,7 @@ module Aws::Lex
       :slot_to_elicit,
       :input_transcript,
       :audio_stream,
+      :bot_version,
       :session_id)
       SENSITIVE = [:message]
       include Aws::Structure
@@ -987,6 +1042,30 @@ module Aws::Lex
     # @!attribute [rw] intent_name
     #   The current user intent that Amazon Lex is aware of.
     #   @return [String]
+    #
+    # @!attribute [rw] nlu_intent_confidence
+    #   Provides a score that indicates how confident Amazon Lex is that the
+    #   returned intent is the one that matches the user's intent. The
+    #   score is between 0.0 and 1.0. For more information, see [Confidence
+    #   Scores][1].
+    #
+    #   The score is a relative score, not an absolute score. The score may
+    #   change based on improvements to the Amazon Lex natural language
+    #   understanding (NLU) model.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/lex/latest/dg/confidence-scores.html
+    #   @return [Types::IntentConfidence]
+    #
+    # @!attribute [rw] alternative_intents
+    #   One to four alternative intents that may be applicable to the
+    #   user's intent.
+    #
+    #   Each alternative includes a score that indicates how confident
+    #   Amazon Lex is that the intent matches the user's intent. The
+    #   intents are sorted by the confidence score.
+    #   @return [Array<Types::PredictedIntent>]
     #
     # @!attribute [rw] slots
     #   The intent slots that Amazon Lex detected from the user input in the
@@ -1119,10 +1198,29 @@ module Aws::Lex
     #   A unique identifier for the session.
     #   @return [String]
     #
+    # @!attribute [rw] bot_version
+    #   The version of the bot that responded to the conversation. You can
+    #   use this information to help determine if one version of a bot is
+    #   performing better than another version.
+    #
+    #   If you have enabled the new natural language understanding (NLU)
+    #   model, you can use this to determine if the improvement is due to
+    #   changes to the bot or changes to the NLU.
+    #
+    #   For more information about enabling the new NLU, see the
+    #   [enableModelImprovements][1] parameter of the `PutBot` operation.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/lex/latest/dg/API_PutBot.html#lex-PutBot-request-enableModelImprovements
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/runtime.lex-2016-11-28/PostTextResponse AWS API Documentation
     #
     class PostTextResponse < Struct.new(
       :intent_name,
+      :nlu_intent_confidence,
+      :alternative_intents,
       :slots,
       :session_attributes,
       :message,
@@ -1131,8 +1229,38 @@ module Aws::Lex
       :dialog_state,
       :slot_to_elicit,
       :response_card,
-      :session_id)
+      :session_id,
+      :bot_version)
       SENSITIVE = [:slots, :session_attributes, :message]
+      include Aws::Structure
+    end
+
+    # An intent that Amazon Lex suggests satisfies the user's intent.
+    # Includes the name of the intent, the confidence that Amazon Lex has
+    # that the user's intent is satisfied, and the slots defined for the
+    # intent.
+    #
+    # @!attribute [rw] intent_name
+    #   The name of the intent that Amazon Lex suggests satisfies the
+    #   user's intent.
+    #   @return [String]
+    #
+    # @!attribute [rw] nlu_intent_confidence
+    #   Indicates how confident Amazon Lex is that an intent satisfies the
+    #   user's intent.
+    #   @return [Types::IntentConfidence]
+    #
+    # @!attribute [rw] slots
+    #   The slot and slot values associated with the predicted intent.
+    #   @return [Hash<String,String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/runtime.lex-2016-11-28/PredictedIntent AWS API Documentation
+    #
+    class PredictedIntent < Struct.new(
+      :intent_name,
+      :nlu_intent_confidence,
+      :slots)
+      SENSITIVE = [:slots]
       include Aws::Structure
     end
 

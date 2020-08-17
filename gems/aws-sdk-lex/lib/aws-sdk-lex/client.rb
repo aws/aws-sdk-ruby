@@ -628,6 +628,8 @@ module Aws::Lex
     #
     #   * {Types::PostContentResponse#content_type #content_type} => String
     #   * {Types::PostContentResponse#intent_name #intent_name} => String
+    #   * {Types::PostContentResponse#nlu_intent_confidence #nlu_intent_confidence} => String
+    #   * {Types::PostContentResponse#alternative_intents #alternative_intents} => String
     #   * {Types::PostContentResponse#slots #slots} => String
     #   * {Types::PostContentResponse#session_attributes #session_attributes} => String
     #   * {Types::PostContentResponse#sentiment_response #sentiment_response} => String
@@ -637,6 +639,7 @@ module Aws::Lex
     #   * {Types::PostContentResponse#slot_to_elicit #slot_to_elicit} => String
     #   * {Types::PostContentResponse#input_transcript #input_transcript} => String
     #   * {Types::PostContentResponse#audio_stream #audio_stream} => IO
+    #   * {Types::PostContentResponse#bot_version #bot_version} => String
     #   * {Types::PostContentResponse#session_id #session_id} => String
     #
     # @example Request syntax with placeholder values
@@ -656,6 +659,8 @@ module Aws::Lex
     #
     #   resp.content_type #=> String
     #   resp.intent_name #=> String
+    #   resp.nlu_intent_confidence #=> String
+    #   resp.alternative_intents #=> String
     #   resp.slots #=> String
     #   resp.session_attributes #=> String
     #   resp.sentiment_response #=> String
@@ -665,6 +670,7 @@ module Aws::Lex
     #   resp.slot_to_elicit #=> String
     #   resp.input_transcript #=> String
     #   resp.audio_stream #=> IO
+    #   resp.bot_version #=> String
     #   resp.session_id #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/runtime.lex-2016-11-28/PostContent AWS API Documentation
@@ -794,6 +800,8 @@ module Aws::Lex
     # @return [Types::PostTextResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::PostTextResponse#intent_name #intent_name} => String
+    #   * {Types::PostTextResponse#nlu_intent_confidence #nlu_intent_confidence} => Types::IntentConfidence
+    #   * {Types::PostTextResponse#alternative_intents #alternative_intents} => Array&lt;Types::PredictedIntent&gt;
     #   * {Types::PostTextResponse#slots #slots} => Hash&lt;String,String&gt;
     #   * {Types::PostTextResponse#session_attributes #session_attributes} => Hash&lt;String,String&gt;
     #   * {Types::PostTextResponse#message #message} => String
@@ -803,6 +811,7 @@ module Aws::Lex
     #   * {Types::PostTextResponse#slot_to_elicit #slot_to_elicit} => String
     #   * {Types::PostTextResponse#response_card #response_card} => Types::ResponseCard
     #   * {Types::PostTextResponse#session_id #session_id} => String
+    #   * {Types::PostTextResponse#bot_version #bot_version} => String
     #
     # @example Request syntax with placeholder values
     #
@@ -822,6 +831,12 @@ module Aws::Lex
     # @example Response structure
     #
     #   resp.intent_name #=> String
+    #   resp.nlu_intent_confidence.score #=> Float
+    #   resp.alternative_intents #=> Array
+    #   resp.alternative_intents[0].intent_name #=> String
+    #   resp.alternative_intents[0].nlu_intent_confidence.score #=> Float
+    #   resp.alternative_intents[0].slots #=> Hash
+    #   resp.alternative_intents[0].slots["String"] #=> String
     #   resp.slots #=> Hash
     #   resp.slots["String"] #=> String
     #   resp.session_attributes #=> Hash
@@ -843,6 +858,7 @@ module Aws::Lex
     #   resp.response_card.generic_attachments[0].buttons[0].text #=> String
     #   resp.response_card.generic_attachments[0].buttons[0].value #=> String
     #   resp.session_id #=> String
+    #   resp.bot_version #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/runtime.lex-2016-11-28/PostText AWS API Documentation
     #
@@ -1017,7 +1033,7 @@ module Aws::Lex
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-lex'
-      context[:gem_version] = '1.28.0'
+      context[:gem_version] = '1.29.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

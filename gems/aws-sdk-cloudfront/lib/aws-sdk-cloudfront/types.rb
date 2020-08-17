@@ -477,39 +477,67 @@ module Aws::CloudFront
     #
     # @!attribute [rw] cache_policy_id
     #   The unique identifier of the cache policy that is attached to this
-    #   cache behavior. For more information, see `CreateCachePolicy`.
+    #   cache behavior. For more information, see [Creating cache
+    #   policies][1] or [Using the managed cache policies][2] in the *Amazon
+    #   CloudFront Developer Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/controlling-the-cache-key.html#cache-key-create-cache-policy
+    #   [2]: https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/using-managed-cache-policies.html
     #   @return [String]
     #
     # @!attribute [rw] origin_request_policy_id
     #   The unique identifier of the origin request policy that is attached
-    #   to this cache behavior. For more information, see
-    #   `CreateOriginRequestPolicy`.
+    #   to this cache behavior. For more information, see [Creating origin
+    #   request policies][1] or [Using the managed origin request
+    #   policies][2] in the *Amazon CloudFront Developer Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/controlling-origin-requests.html#origin-request-create-origin-request-policy
+    #   [2]: https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/using-managed-origin-request-policies.html
     #   @return [String]
     #
     # @!attribute [rw] forwarded_values
     #   This field is deprecated. We recommend that you use a cache policy
-    #   or an origin request policy instead of this field.
+    #   or an origin request policy instead of this field. For more
+    #   information, see [Working with policies][1] in the *Amazon
+    #   CloudFront Developer Guide*.
     #
-    #   If you want to include values in the cache key, use a `CachePolicy`.
-    #   See `CreateCachePolicy`.
+    #   If you want to include values in the cache key, use a cache policy.
+    #   For more information, see [Creating cache policies][2] or [Using the
+    #   managed cache policies][3] in the *Amazon CloudFront Developer
+    #   Guide*.
     #
     #   If you want to send values to the origin but not include them in the
-    #   cache key, use an `OriginRequestPolicy`. See
-    #   `CreateOriginRequestPolicy`.
+    #   cache key, use an origin request policy. For more information, see
+    #   [Creating origin request policies][4] or [Using the managed origin
+    #   request policies][5] in the *Amazon CloudFront Developer Guide*.
     #
     #   A complex type that specifies how CloudFront handles query strings,
     #   cookies, and HTTP headers.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/working-with-policies.html
+    #   [2]: https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/controlling-the-cache-key.html#cache-key-create-cache-policy
+    #   [3]: https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/using-managed-cache-policies.html
+    #   [4]: https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/controlling-origin-requests.html#origin-request-create-origin-request-policy
+    #   [5]: https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/using-managed-origin-request-policies.html
     #   @return [Types::ForwardedValues]
     #
     # @!attribute [rw] min_ttl
     #   This field is deprecated. We recommend that you use the `MinTTL`
-    #   field in `CachePolicyConfig` instead of this field.
+    #   field in a cache policy instead of this field. For more information,
+    #   see [Creating cache policies][1] or [Using the managed cache
+    #   policies][2] in the *Amazon CloudFront Developer Guide*.
     #
     #   The minimum amount of time that you want objects to stay in
     #   CloudFront caches before CloudFront forwards another request to your
     #   origin to determine whether the object has been updated. For more
     #   information, see [ Managing How Long Content Stays in an Edge Cache
-    #   (Expiration)][1] in the <i> Amazon CloudFront Developer Guide</i>.
+    #   (Expiration)][3] in the <i> Amazon CloudFront Developer Guide</i>.
     #
     #   You must specify `0` for `MinTTL` if you configure CloudFront to
     #   forward all headers to your origin (under `Headers`, if you specify
@@ -517,12 +545,16 @@ module Aws::CloudFront
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/Expiration.html
+    #   [1]: https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/controlling-the-cache-key.html#cache-key-create-cache-policy
+    #   [2]: https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/using-managed-cache-policies.html
+    #   [3]: https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/Expiration.html
     #   @return [Integer]
     #
     # @!attribute [rw] default_ttl
     #   This field is deprecated. We recommend that you use the `DefaultTTL`
-    #   field in `CachePolicyConfig` instead of this field.
+    #   field in a cache policy instead of this field. For more information,
+    #   see [Creating cache policies][1] or [Using the managed cache
+    #   policies][2] in the *Amazon CloudFront Developer Guide*.
     #
     #   The default amount of time that you want objects to stay in
     #   CloudFront caches before CloudFront forwards another request to your
@@ -530,17 +562,21 @@ module Aws::CloudFront
     #   that you specify applies only when your origin does not add HTTP
     #   headers such as `Cache-Control max-age`, `Cache-Control s-maxage`,
     #   and `Expires` to objects. For more information, see [Managing How
-    #   Long Content Stays in an Edge Cache (Expiration)][1] in the *Amazon
+    #   Long Content Stays in an Edge Cache (Expiration)][3] in the *Amazon
     #   CloudFront Developer Guide*.
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/Expiration.html
+    #   [1]: https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/controlling-the-cache-key.html#cache-key-create-cache-policy
+    #   [2]: https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/using-managed-cache-policies.html
+    #   [3]: https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/Expiration.html
     #   @return [Integer]
     #
     # @!attribute [rw] max_ttl
     #   This field is deprecated. We recommend that you use the `MaxTTL`
-    #   field in `CachePolicyConfig` instead of this field.
+    #   field in a cache policy instead of this field. For more information,
+    #   see [Creating cache policies][1] or [Using the managed cache
+    #   policies][2] in the *Amazon CloudFront Developer Guide*.
     #
     #   The maximum amount of time that you want objects to stay in
     #   CloudFront caches before CloudFront forwards another request to your
@@ -548,12 +584,14 @@ module Aws::CloudFront
     #   that you specify applies only when your origin adds HTTP headers
     #   such as `Cache-Control max-age`, `Cache-Control s-maxage`, and
     #   `Expires` to objects. For more information, see [Managing How Long
-    #   Content Stays in an Edge Cache (Expiration)][1] in the *Amazon
+    #   Content Stays in an Edge Cache (Expiration)][3] in the *Amazon
     #   CloudFront Developer Guide*.
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/Expiration.html
+    #   [1]: https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/controlling-the-cache-key.html#cache-key-create-cache-policy
+    #   [2]: https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/using-managed-cache-policies.html
+    #   [3]: https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/Expiration.html
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/CacheBehavior AWS API Documentation
@@ -800,10 +838,10 @@ module Aws::CloudFront
     #   @return [Integer]
     #
     # @!attribute [rw] max_ttl
-    #   The maximum amount of time, in seconds, that you want objects to
-    #   stay in the CloudFront cache before CloudFront sends another request
-    #   to the origin to see if the object has been updated. CloudFront uses
-    #   this value only when the origin sends `Cache-Control` or `Expires`
+    #   The maximum amount of time, in seconds, that objects stay in the
+    #   CloudFront cache before CloudFront sends another request to the
+    #   origin to see if the object has been updated. CloudFront uses this
+    #   value only when the origin sends `Cache-Control` or `Expires`
     #   headers with the object. For more information, see [Managing How
     #   Long Content Stays in an Edge Cache (Expiration)][1] in the *Amazon
     #   CloudFront Developer Guide*.
@@ -1490,12 +1528,14 @@ module Aws::CloudFront
     #   This field is deprecated. We recommend that you use a cache policy
     #   or an origin request policy instead of this field.
     #
-    #   If you want to include cookies in the cache key, use `CookiesConfig`
-    #   in a cache policy. See `CreateCachePolicy`.
+    #   If you want to include cookies in the cache key, use a cache policy.
+    #   For more information, see [Creating cache policies][1] in the
+    #   *Amazon CloudFront Developer Guide*.
     #
     #   If you want to send cookies to the origin but not include them in
-    #   the cache key, use `CookiesConfig` in an origin request policy. See
-    #   `CreateOriginRequestPolicy`.
+    #   the cache key, use origin request policy. For more information, see
+    #   [Creating origin request policies][2] in the *Amazon CloudFront
+    #   Developer Guide*.
     #
     #   Specifies which cookies to forward to the origin for this cache
     #   behavior: all, none, or the list of cookies specified in the
@@ -1504,18 +1544,25 @@ module Aws::CloudFront
     #   Amazon S3 doesn't process cookies. When the cache behavior is
     #   forwarding requests to an Amazon S3 origin, specify none for the
     #   `Forward` element.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/controlling-the-cache-key.html#cache-key-create-cache-policy
+    #   [2]: https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/controlling-origin-requests.html#origin-request-create-origin-request-policy
     #   @return [String]
     #
     # @!attribute [rw] whitelisted_names
     #   This field is deprecated. We recommend that you use a cache policy
     #   or an origin request policy instead of this field.
     #
-    #   If you want to include cookies in the cache key, use `CookiesConfig`
-    #   in a cache policy. See `CreateCachePolicy`.
+    #   If you want to include cookies in the cache key, use a cache policy.
+    #   For more information, see [Creating cache policies][1] in the
+    #   *Amazon CloudFront Developer Guide*.
     #
     #   If you want to send cookies to the origin but not include them in
-    #   the cache key, use `CookiesConfig` in an origin request policy. See
-    #   `CreateOriginRequestPolicy`.
+    #   the cache key, use an origin request policy. For more information,
+    #   see [Creating origin request policies][2] in the *Amazon CloudFront
+    #   Developer Guide*.
     #
     #   Required if you specify `whitelist` for the value of `Forward`. A
     #   complex type that specifies how many different cookies you want
@@ -1529,12 +1576,14 @@ module Aws::CloudFront
     #   deletes them automatically.
     #
     #   For the current limit on the number of cookie names that you can
-    #   whitelist for each cache behavior, see [ CloudFront Limits][1] in
+    #   whitelist for each cache behavior, see [ CloudFront Limits][3] in
     #   the *AWS General Reference*.
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/general/latest/gr/xrefaws_service_limits.html#limits_cloudfront
+    #   [1]: https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/controlling-the-cache-key.html#cache-key-create-cache-policy
+    #   [2]: https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/controlling-origin-requests.html#origin-request-create-origin-request-policy
+    #   [3]: https://docs.aws.amazon.com/general/latest/gr/xrefaws_service_limits.html#limits_cloudfront
     #   @return [Types::CookieNames]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/CookiePreference AWS API Documentation
@@ -3127,39 +3176,67 @@ module Aws::CloudFront
     #
     # @!attribute [rw] cache_policy_id
     #   The unique identifier of the cache policy that is attached to the
-    #   default cache behavior. For more information, see CachePolicy.
+    #   default cache behavior. For more information, see [Creating cache
+    #   policies][1] or [Using the managed cache policies][2] in the *Amazon
+    #   CloudFront Developer Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/controlling-the-cache-key.html#cache-key-create-cache-policy
+    #   [2]: https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/using-managed-cache-policies.html
     #   @return [String]
     #
     # @!attribute [rw] origin_request_policy_id
     #   The unique identifier of the origin request policy that is attached
-    #   to the default cache behavior. For more information, see
-    #   OriginRequestPolicy.
+    #   to the default cache behavior. For more information, see [Creating
+    #   origin request policies][1] or [Using the managed origin request
+    #   policies][2] in the *Amazon CloudFront Developer Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/controlling-origin-requests.html#origin-request-create-origin-request-policy
+    #   [2]: https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/using-managed-origin-request-policies.html
     #   @return [String]
     #
     # @!attribute [rw] forwarded_values
     #   This field is deprecated. We recommend that you use a cache policy
-    #   or an origin request policy instead of this field.
+    #   or an origin request policy instead of this field. For more
+    #   information, see [Working with policies][1] in the *Amazon
+    #   CloudFront Developer Guide*.
     #
-    #   If you want to include values in the cache key, use a `CachePolicy`.
-    #   See `CreateCachePolicy`.
+    #   If you want to include values in the cache key, use a cache policy.
+    #   For more information, see [Creating cache policies][2] or [Using the
+    #   managed cache policies][3] in the *Amazon CloudFront Developer
+    #   Guide*.
     #
     #   If you want to send values to the origin but not include them in the
-    #   cache key, use an `OriginRequestPolicy`. See
-    #   `CreateOriginRequestPolicy`.
+    #   cache key, use an origin request policy. For more information, see
+    #   [Creating origin request policies][4] or [Using the managed origin
+    #   request policies][5] in the *Amazon CloudFront Developer Guide*.
     #
     #   A complex type that specifies how CloudFront handles query strings,
     #   cookies, and HTTP headers.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/working-with-policies.html
+    #   [2]: https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/controlling-the-cache-key.html#cache-key-create-cache-policy
+    #   [3]: https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/using-managed-cache-policies.html
+    #   [4]: https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/controlling-origin-requests.html#origin-request-create-origin-request-policy
+    #   [5]: https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/using-managed-origin-request-policies.html
     #   @return [Types::ForwardedValues]
     #
     # @!attribute [rw] min_ttl
     #   This field is deprecated. We recommend that you use the `MinTTL`
-    #   field in `CachePolicyConfig` instead of this field.
+    #   field in a cache policy instead of this field. For more information,
+    #   see [Creating cache policies][1] or [Using the managed cache
+    #   policies][2] in the *Amazon CloudFront Developer Guide*.
     #
     #   The minimum amount of time that you want objects to stay in
     #   CloudFront caches before CloudFront forwards another request to your
     #   origin to determine whether the object has been updated. For more
     #   information, see [Managing How Long Content Stays in an Edge Cache
-    #   (Expiration)][1] in the *Amazon CloudFront Developer Guide*.
+    #   (Expiration)][3] in the *Amazon CloudFront Developer Guide*.
     #
     #   You must specify `0` for `MinTTL` if you configure CloudFront to
     #   forward all headers to your origin (under `Headers`, if you specify
@@ -3167,12 +3244,16 @@ module Aws::CloudFront
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/Expiration.html
+    #   [1]: https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/controlling-the-cache-key.html#cache-key-create-cache-policy
+    #   [2]: https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/using-managed-cache-policies.html
+    #   [3]: https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/Expiration.html
     #   @return [Integer]
     #
     # @!attribute [rw] default_ttl
     #   This field is deprecated. We recommend that you use the `DefaultTTL`
-    #   field in `CachePolicyConfig` instead of this field.
+    #   field in a cache policy instead of this field. For more information,
+    #   see [Creating cache policies][1] or [Using the managed cache
+    #   policies][2] in the *Amazon CloudFront Developer Guide*.
     #
     #   The default amount of time that you want objects to stay in
     #   CloudFront caches before CloudFront forwards another request to your
@@ -3180,17 +3261,21 @@ module Aws::CloudFront
     #   that you specify applies only when your origin does not add HTTP
     #   headers such as `Cache-Control max-age`, `Cache-Control s-maxage`,
     #   and `Expires` to objects. For more information, see [Managing How
-    #   Long Content Stays in an Edge Cache (Expiration)][1] in the *Amazon
+    #   Long Content Stays in an Edge Cache (Expiration)][3] in the *Amazon
     #   CloudFront Developer Guide*.
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/Expiration.html
+    #   [1]: https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/controlling-the-cache-key.html#cache-key-create-cache-policy
+    #   [2]: https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/using-managed-cache-policies.html
+    #   [3]: https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/Expiration.html
     #   @return [Integer]
     #
     # @!attribute [rw] max_ttl
     #   This field is deprecated. We recommend that you use the `MaxTTL`
-    #   field in `CachePolicyConfig` instead of this field.
+    #   field in a cache policy instead of this field. For more information,
+    #   see [Creating cache policies][1] or [Using the managed cache
+    #   policies][2] in the *Amazon CloudFront Developer Guide*.
     #
     #   The maximum amount of time that you want objects to stay in
     #   CloudFront caches before CloudFront forwards another request to your
@@ -3198,12 +3283,14 @@ module Aws::CloudFront
     #   that you specify applies only when your origin adds HTTP headers
     #   such as `Cache-Control max-age`, `Cache-Control s-maxage`, and
     #   `Expires` to objects. For more information, see [Managing How Long
-    #   Content Stays in an Edge Cache (Expiration)][1] in the *Amazon
+    #   Content Stays in an Edge Cache (Expiration)][3] in the *Amazon
     #   CloudFront Developer Guide*.
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/Expiration.html
+    #   [1]: https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/controlling-the-cache-key.html#cache-key-create-cache-policy
+    #   [2]: https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/using-managed-cache-policies.html
+    #   [3]: https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/Expiration.html
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/DefaultCacheBehavior AWS API Documentation
@@ -5049,15 +5136,22 @@ module Aws::CloudFront
     # This field is deprecated. We recommend that you use a cache policy or
     # an origin request policy instead of this field.
     #
-    # If you want to include values in the cache key, use a `CachePolicy`.
-    # See `CreateCachePolicy`.
+    # If you want to include values in the cache key, use a cache policy.
+    # For more information, see [Creating cache policies][1] in the *Amazon
+    # CloudFront Developer Guide*.
     #
     # If you want to send values to the origin but not include them in the
-    # cache key, use an `OriginRequestPolicy`. See
-    # `CreateOriginRequestPolicy`.
+    # cache key, use an origin request policy. For more information, see
+    # [Creating origin request policies][2] in the *Amazon CloudFront
+    # Developer Guide*.
     #
     # A complex type that specifies how CloudFront handles query strings,
     # cookies, and HTTP headers.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/controlling-the-cache-key.html#cache-key-create-cache-policy
+    # [2]: https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/controlling-origin-requests.html#origin-request-create-origin-request-policy
     #
     # @note When making an API call, you may pass ForwardedValues
     #   data as a hash:
@@ -5085,12 +5179,14 @@ module Aws::CloudFront
     #   This field is deprecated. We recommend that you use a cache policy
     #   or an origin request policy instead of this field.
     #
-    #   If you want to include query strings in the cache key, use
-    #   `QueryStringsConfig` in a cache policy. See `CreateCachePolicy`.
+    #   If you want to include query strings in the cache key, use a cache
+    #   policy. For more information, see [Creating cache policies][1] in
+    #   the *Amazon CloudFront Developer Guide*.
     #
     #   If you want to send query strings to the origin but not include them
-    #   in the cache key, use `QueryStringsConfig` in an origin request
-    #   policy. See `CreateOriginRequestPolicy`.
+    #   in the cache key, use an origin request policy. For more
+    #   information, see [Creating origin request policies][2] in the
+    #   *Amazon CloudFront Developer Guide*.
     #
     #   Indicates whether you want CloudFront to forward query strings to
     #   the origin that is associated with this cache behavior and cache
@@ -5115,46 +5211,54 @@ module Aws::CloudFront
     #   on query string parameters.
     #
     #   For more information, see [Configuring CloudFront to Cache Based on
-    #   Query String Parameters][1] in the *Amazon CloudFront Developer
+    #   Query String Parameters][3] in the *Amazon CloudFront Developer
     #   Guide*.
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/QueryStringParameters.html
+    #   [1]: https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/controlling-the-cache-key.html#cache-key-create-cache-policy
+    #   [2]: https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/controlling-origin-requests.html#origin-request-create-origin-request-policy
+    #   [3]: https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/QueryStringParameters.html
     #   @return [Boolean]
     #
     # @!attribute [rw] cookies
     #   This field is deprecated. We recommend that you use a cache policy
     #   or an origin request policy instead of this field.
     #
-    #   If you want to include cookies in the cache key, use `CookiesConfig`
-    #   in a cache policy. See `CreateCachePolicy`.
+    #   If you want to include cookies in the cache key, use a cache policy.
+    #   For more information, see [Creating cache policies][1] in the
+    #   *Amazon CloudFront Developer Guide*.
     #
     #   If you want to send cookies to the origin but not include them in
-    #   the cache key, use `CookiesConfig` in an origin request policy. See
-    #   `CreateOriginRequestPolicy`.
+    #   the cache key, use an origin request policy. For more information,
+    #   see [Creating origin request policies][2] in the *Amazon CloudFront
+    #   Developer Guide*.
     #
     #   A complex type that specifies whether you want CloudFront to forward
     #   cookies to the origin and, if so, which ones. For more information
     #   about forwarding cookies to the origin, see [How CloudFront
-    #   Forwards, Caches, and Logs Cookies][1] in the *Amazon CloudFront
+    #   Forwards, Caches, and Logs Cookies][3] in the *Amazon CloudFront
     #   Developer Guide*.
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/Cookies.html
+    #   [1]: https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/controlling-the-cache-key.html#cache-key-create-cache-policy
+    #   [2]: https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/controlling-origin-requests.html#origin-request-create-origin-request-policy
+    #   [3]: https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/Cookies.html
     #   @return [Types::CookiePreference]
     #
     # @!attribute [rw] headers
     #   This field is deprecated. We recommend that you use a cache policy
     #   or an origin request policy instead of this field.
     #
-    #   If you want to include headers in the cache key, use `HeadersConfig`
-    #   in a cache policy. See `CreateCachePolicy`.
+    #   If you want to include headers in the cache key, use a cache policy.
+    #   For more information, see [Creating cache policies][1] in the
+    #   *Amazon CloudFront Developer Guide*.
     #
     #   If you want to send headers to the origin but not include them in
-    #   the cache key, use `HeadersConfig` in an origin request policy. See
-    #   `CreateOriginRequestPolicy`.
+    #   the cache key, use an origin request policy. For more information,
+    #   see [Creating origin request policies][2] in the *Amazon CloudFront
+    #   Developer Guide*.
     #
     #   A complex type that specifies the `Headers`, if any, that you want
     #   CloudFront to forward to the origin for this cache behavior
@@ -5163,27 +5267,36 @@ module Aws::CloudFront
     #   the header values in viewer requests.
     #
     #   For more information, see [ Caching Content Based on Request
-    #   Headers][1] in the *Amazon CloudFront Developer Guide*.
+    #   Headers][3] in the *Amazon CloudFront Developer Guide*.
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/header-caching.html
+    #   [1]: https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/controlling-the-cache-key.html#cache-key-create-cache-policy
+    #   [2]: https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/controlling-origin-requests.html#origin-request-create-origin-request-policy
+    #   [3]: https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/header-caching.html
     #   @return [Types::Headers]
     #
     # @!attribute [rw] query_string_cache_keys
     #   This field is deprecated. We recommend that you use a cache policy
     #   or an origin request policy instead of this field.
     #
-    #   If you want to include query strings in the cache key, use
-    #   `QueryStringsConfig` in a cache policy. See `CreateCachePolicy`.
+    #   If you want to include query strings in the cache key, use a cache
+    #   policy. For more information, see [Creating cache policies][1] in
+    #   the *Amazon CloudFront Developer Guide*.
     #
     #   If you want to send query strings to the origin but not include them
-    #   in the cache key, use an `QueryStringsConfig` in an origin request
-    #   policy. See `CreateOriginRequestPolicy`.
+    #   in the cache key, use an origin request policy. For more
+    #   information, see [Creating origin request policies][2] in the
+    #   *Amazon CloudFront Developer Guide*.
     #
     #   A complex type that contains information about the query string
     #   parameters that you want CloudFront to use for caching for this
     #   cache behavior.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/controlling-the-cache-key.html#cache-key-create-cache-policy
+    #   [2]: https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/controlling-origin-requests.html#origin-request-create-origin-request-policy
     #   @return [Types::QueryStringCacheKeys]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/ForwardedValues AWS API Documentation

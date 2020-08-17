@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.58.0 (2020-07-30)
+------------------
+
+* Feature - Adding support for BuildBatch, and CodeCoverage APIs. BuildBatch allows you to model your project environment in source, and helps start multiple builds with a single API call. CodeCoverage allows you to track your code coverage using AWS CodeBuild.
+
 1.57.0 (2020-07-20)
 ------------------
 

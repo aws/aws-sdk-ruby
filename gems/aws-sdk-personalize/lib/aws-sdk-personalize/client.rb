@@ -354,6 +354,9 @@ module Aws::Personalize
     #   permissions to read and write to your input and out Amazon S3 buckets
     #   respectively.
     #
+    # @option params [Types::BatchInferenceJobConfig] :batch_inference_job_config
+    #   The configuration details of a batch inference job.
+    #
     # @return [Types::CreateBatchInferenceJobResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateBatchInferenceJobResponse#batch_inference_job_arn #batch_inference_job_arn} => String
@@ -378,6 +381,11 @@ module Aws::Personalize
     #       },
     #     },
     #     role_arn: "RoleArn", # required
+    #     batch_inference_job_config: {
+    #       item_exploration_config: {
+    #         "ParameterName" => "ParameterValue",
+    #       },
+    #     },
     #   })
     #
     # @example Response structure
@@ -454,6 +462,9 @@ module Aws::Personalize
     #   Specifies the requested minimum provisioned transactions
     #   (recommendations) per second that Amazon Personalize will support.
     #
+    # @option params [Types::CampaignConfig] :campaign_config
+    #   The configuration details of a campaign.
+    #
     # @return [Types::CreateCampaignResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateCampaignResponse#campaign_arn #campaign_arn} => String
@@ -464,6 +475,11 @@ module Aws::Personalize
     #     name: "Name", # required
     #     solution_version_arn: "Arn", # required
     #     min_provisioned_tps: 1, # required
+    #     campaign_config: {
+    #       item_exploration_config: {
+    #         "ParameterName" => "ParameterValue",
+    #       },
+    #     },
     #   })
     #
     # @example Response structure
@@ -652,7 +668,8 @@ module Aws::Personalize
     # Amazon S3 bucket) to an Amazon Personalize dataset. To allow Amazon
     # Personalize to import the training data, you must specify an AWS
     # Identity and Access Management (IAM) role that has permission to read
-    # from the data source.
+    # from the data source, as Amazon Personalize makes a copy of your data
+    # and processes it in an internal AWS system.
     #
     # The dataset import job replaces any previous data in the dataset.
     #
@@ -800,8 +817,12 @@ module Aws::Personalize
       req.send_request(options)
     end
 
-    # Creates a recommendation filter. For more information, see Using
-    # Filters with Amazon Personalize.
+    # Creates a recommendation filter. For more information, see [Using
+    # Filters with Amazon Personalize][1].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/personalize/latest/dg/filters.html
     #
     # @option params [required, String] :name
     #   The name of the filter to create.
@@ -818,8 +839,12 @@ module Aws::Personalize
     #
     #   Where "EVENT\_TYPE" is the type of event to filter out. To filter
     #   out all items with any interactions history, set `"*"` as the
-    #   EVENT\_TYPE. For more information, see Using Filters with Amazon
-    #   Personalize.
+    #   EVENT\_TYPE. For more information, see [Using Filters with Amazon
+    #   Personalize][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/personalize/latest/dg/filters.html
     #
     # @return [Types::CreateFilterResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1394,6 +1419,8 @@ module Aws::Personalize
     #   resp.batch_inference_job.job_input.s3_data_source.kms_key_arn #=> String
     #   resp.batch_inference_job.job_output.s3_data_destination.path #=> String
     #   resp.batch_inference_job.job_output.s3_data_destination.kms_key_arn #=> String
+    #   resp.batch_inference_job.batch_inference_job_config.item_exploration_config #=> Hash
+    #   resp.batch_inference_job.batch_inference_job_config.item_exploration_config["ParameterName"] #=> String
     #   resp.batch_inference_job.role_arn #=> String
     #   resp.batch_inference_job.status #=> String
     #   resp.batch_inference_job.creation_date_time #=> Time
@@ -1441,12 +1468,16 @@ module Aws::Personalize
     #   resp.campaign.campaign_arn #=> String
     #   resp.campaign.solution_version_arn #=> String
     #   resp.campaign.min_provisioned_tps #=> Integer
+    #   resp.campaign.campaign_config.item_exploration_config #=> Hash
+    #   resp.campaign.campaign_config.item_exploration_config["ParameterName"] #=> String
     #   resp.campaign.status #=> String
     #   resp.campaign.failure_reason #=> String
     #   resp.campaign.creation_date_time #=> Time
     #   resp.campaign.last_updated_date_time #=> Time
     #   resp.campaign.latest_campaign_update.solution_version_arn #=> String
     #   resp.campaign.latest_campaign_update.min_provisioned_tps #=> Integer
+    #   resp.campaign.latest_campaign_update.campaign_config.item_exploration_config #=> Hash
+    #   resp.campaign.latest_campaign_update.campaign_config.item_exploration_config["ParameterName"] #=> String
     #   resp.campaign.latest_campaign_update.status #=> String
     #   resp.campaign.latest_campaign_update.failure_reason #=> String
     #   resp.campaign.latest_campaign_update.creation_date_time #=> Time
@@ -2495,6 +2526,9 @@ module Aws::Personalize
     #   Specifies the requested minimum provisioned transactions
     #   (recommendations) per second that Amazon Personalize will support.
     #
+    # @option params [Types::CampaignConfig] :campaign_config
+    #   The configuration details of a campaign.
+    #
     # @return [Types::UpdateCampaignResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::UpdateCampaignResponse#campaign_arn #campaign_arn} => String
@@ -2505,6 +2539,11 @@ module Aws::Personalize
     #     campaign_arn: "Arn", # required
     #     solution_version_arn: "Arn",
     #     min_provisioned_tps: 1,
+    #     campaign_config: {
+    #       item_exploration_config: {
+    #         "ParameterName" => "ParameterValue",
+    #       },
+    #     },
     #   })
     #
     # @example Response structure
@@ -2533,7 +2572,7 @@ module Aws::Personalize
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-personalize'
-      context[:gem_version] = '1.15.0'
+      context[:gem_version] = '1.16.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

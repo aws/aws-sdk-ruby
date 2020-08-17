@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.17.0 (2020-08-14)
+------------------
+
+* Feature - This release includes ability to enforce license assignment rules with EC2 Dedicated Hosts.
+
 1.16.0 (2020-06-23)
 ------------------
 

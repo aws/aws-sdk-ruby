@@ -41,8 +41,7 @@ module Aws::EC2
       data[:cidr_block]
     end
 
-    # The ID of the set of DHCP options you've associated with the VPC (or
-    # `default` if the default options are associated with the VPC).
+    # The ID of the set of DHCP options you've associated with the VPC.
     # @return [String]
     def dhcp_options_id
       data[:dhcp_options_id]

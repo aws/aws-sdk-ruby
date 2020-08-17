@@ -108,6 +108,8 @@ module Aws::SageMaker
     CheckpointConfig = Shapes::StructureShape.new(name: 'CheckpointConfig')
     Cidr = Shapes::StringShape.new(name: 'Cidr')
     Cidrs = Shapes::ListShape.new(name: 'Cidrs')
+    ClientId = Shapes::StringShape.new(name: 'ClientId')
+    ClientSecret = Shapes::StringShape.new(name: 'ClientSecret')
     CodeRepositoryArn = Shapes::StringShape.new(name: 'CodeRepositoryArn')
     CodeRepositoryContains = Shapes::StringShape.new(name: 'CodeRepositoryContains')
     CodeRepositoryNameContains = Shapes::StringShape.new(name: 'CodeRepositoryNameContains')
@@ -116,7 +118,7 @@ module Aws::SageMaker
     CodeRepositorySortOrder = Shapes::StringShape.new(name: 'CodeRepositorySortOrder')
     CodeRepositorySummary = Shapes::StructureShape.new(name: 'CodeRepositorySummary')
     CodeRepositorySummaryList = Shapes::ListShape.new(name: 'CodeRepositorySummaryList')
-    CognitoClientId = Shapes::StringShape.new(name: 'CognitoClientId')
+    CognitoConfig = Shapes::StructureShape.new(name: 'CognitoConfig')
     CognitoMemberDefinition = Shapes::StructureShape.new(name: 'CognitoMemberDefinition')
     CognitoUserGroup = Shapes::StringShape.new(name: 'CognitoUserGroup')
     CognitoUserPool = Shapes::StringShape.new(name: 'CognitoUserPool')
@@ -128,6 +130,7 @@ module Aws::SageMaker
     CompilationJobStatus = Shapes::StringShape.new(name: 'CompilationJobStatus')
     CompilationJobSummaries = Shapes::ListShape.new(name: 'CompilationJobSummaries')
     CompilationJobSummary = Shapes::StructureShape.new(name: 'CompilationJobSummary')
+    CompilerOptions = Shapes::StringShape.new(name: 'CompilerOptions')
     CompressionType = Shapes::StringShape.new(name: 'CompressionType')
     CompressionTypes = Shapes::ListShape.new(name: 'CompressionTypes')
     ConfigKey = Shapes::StringShape.new(name: 'ConfigKey')
@@ -140,6 +143,7 @@ module Aws::SageMaker
     ContainerEntrypoint = Shapes::ListShape.new(name: 'ContainerEntrypoint')
     ContainerEntrypointString = Shapes::StringShape.new(name: 'ContainerEntrypointString')
     ContainerHostname = Shapes::StringShape.new(name: 'ContainerHostname')
+    ContainerImage = Shapes::StringShape.new(name: 'ContainerImage')
     ContainerMode = Shapes::StringShape.new(name: 'ContainerMode')
     ContentClassifier = Shapes::StringShape.new(name: 'ContentClassifier')
     ContentClassifiers = Shapes::ListShape.new(name: 'ContentClassifiers')
@@ -200,6 +204,8 @@ module Aws::SageMaker
     CreateTrialResponse = Shapes::StructureShape.new(name: 'CreateTrialResponse')
     CreateUserProfileRequest = Shapes::StructureShape.new(name: 'CreateUserProfileRequest')
     CreateUserProfileResponse = Shapes::StructureShape.new(name: 'CreateUserProfileResponse')
+    CreateWorkforceRequest = Shapes::StructureShape.new(name: 'CreateWorkforceRequest')
+    CreateWorkforceResponse = Shapes::StructureShape.new(name: 'CreateWorkforceResponse')
     CreateWorkteamRequest = Shapes::StructureShape.new(name: 'CreateWorkteamRequest')
     CreateWorkteamResponse = Shapes::StructureShape.new(name: 'CreateWorkteamResponse')
     CreationTime = Shapes::TimestampShape.new(name: 'CreationTime')
@@ -240,6 +246,8 @@ module Aws::SageMaker
     DeleteTrialRequest = Shapes::StructureShape.new(name: 'DeleteTrialRequest')
     DeleteTrialResponse = Shapes::StructureShape.new(name: 'DeleteTrialResponse')
     DeleteUserProfileRequest = Shapes::StructureShape.new(name: 'DeleteUserProfileRequest')
+    DeleteWorkforceRequest = Shapes::StructureShape.new(name: 'DeleteWorkforceRequest')
+    DeleteWorkforceResponse = Shapes::StructureShape.new(name: 'DeleteWorkforceResponse')
     DeleteWorkteamRequest = Shapes::StructureShape.new(name: 'DeleteWorkteamRequest')
     DeleteWorkteamResponse = Shapes::StructureShape.new(name: 'DeleteWorkteamResponse')
     DeployedImage = Shapes::StructureShape.new(name: 'DeployedImage')
@@ -383,6 +391,8 @@ module Aws::SageMaker
     GitConfig = Shapes::StructureShape.new(name: 'GitConfig')
     GitConfigForUpdate = Shapes::StructureShape.new(name: 'GitConfigForUpdate')
     GitConfigUrl = Shapes::StringShape.new(name: 'GitConfigUrl')
+    Group = Shapes::StringShape.new(name: 'Group')
+    Groups = Shapes::ListShape.new(name: 'Groups')
     HookParameters = Shapes::MapShape.new(name: 'HookParameters')
     HumanLoopActivationConditions = Shapes::StringShape.new(name: 'HumanLoopActivationConditions')
     HumanLoopActivationConditionsConfig = Shapes::StructureShape.new(name: 'HumanLoopActivationConditionsConfig')
@@ -418,7 +428,8 @@ module Aws::SageMaker
     HyperParameterTuningJobWarmStartConfig = Shapes::StructureShape.new(name: 'HyperParameterTuningJobWarmStartConfig')
     HyperParameterTuningJobWarmStartType = Shapes::StringShape.new(name: 'HyperParameterTuningJobWarmStartType')
     HyperParameters = Shapes::MapShape.new(name: 'HyperParameters')
-    Image = Shapes::StringShape.new(name: 'Image')
+    ImageArn = Shapes::StringShape.new(name: 'ImageArn')
+    ImageConfig = Shapes::StructureShape.new(name: 'ImageConfig')
     ImageDigest = Shapes::StringShape.new(name: 'ImageDigest')
     ImageUri = Shapes::StringShape.new(name: 'ImageUri')
     InferenceSpecification = Shapes::StructureShape.new(name: 'InferenceSpecification')
@@ -527,6 +538,9 @@ module Aws::SageMaker
     ListTrialsResponse = Shapes::StructureShape.new(name: 'ListTrialsResponse')
     ListUserProfilesRequest = Shapes::StructureShape.new(name: 'ListUserProfilesRequest')
     ListUserProfilesResponse = Shapes::StructureShape.new(name: 'ListUserProfilesResponse')
+    ListWorkforcesRequest = Shapes::StructureShape.new(name: 'ListWorkforcesRequest')
+    ListWorkforcesResponse = Shapes::StructureShape.new(name: 'ListWorkforcesResponse')
+    ListWorkforcesSortByOptions = Shapes::StringShape.new(name: 'ListWorkforcesSortByOptions')
     ListWorkteamsRequest = Shapes::StructureShape.new(name: 'ListWorkteamsRequest')
     ListWorkteamsResponse = Shapes::StructureShape.new(name: 'ListWorkteamsResponse')
     ListWorkteamsSortByOptions = Shapes::StringShape.new(name: 'ListWorkteamsSortByOptions')
@@ -635,6 +649,10 @@ module Aws::SageMaker
     ObjectiveStatus = Shapes::StringShape.new(name: 'ObjectiveStatus')
     ObjectiveStatusCounter = Shapes::IntegerShape.new(name: 'ObjectiveStatusCounter')
     ObjectiveStatusCounters = Shapes::StructureShape.new(name: 'ObjectiveStatusCounters')
+    OidcConfig = Shapes::StructureShape.new(name: 'OidcConfig')
+    OidcConfigForResponse = Shapes::StructureShape.new(name: 'OidcConfigForResponse')
+    OidcEndpoint = Shapes::StringShape.new(name: 'OidcEndpoint')
+    OidcMemberDefinition = Shapes::StructureShape.new(name: 'OidcMemberDefinition')
     Operator = Shapes::StringShape.new(name: 'Operator')
     OptionalDouble = Shapes::FloatShape.new(name: 'OptionalDouble')
     OptionalInteger = Shapes::IntegerShape.new(name: 'OptionalInteger')
@@ -705,6 +723,7 @@ module Aws::SageMaker
     RenderableTask = Shapes::StructureShape.new(name: 'RenderableTask')
     RenderingError = Shapes::StructureShape.new(name: 'RenderingError')
     RenderingErrorList = Shapes::ListShape.new(name: 'RenderingErrorList')
+    RepositoryAccessMode = Shapes::StringShape.new(name: 'RepositoryAccessMode')
     ResolvedAttributes = Shapes::StructureShape.new(name: 'ResolvedAttributes')
     ResourceArn = Shapes::StringShape.new(name: 'ResourceArn')
     ResourceConfig = Shapes::StructureShape.new(name: 'ResourceConfig')
@@ -729,7 +748,6 @@ module Aws::SageMaker
     S3DataSource = Shapes::StructureShape.new(name: 'S3DataSource')
     S3DataType = Shapes::StringShape.new(name: 'S3DataType')
     S3Uri = Shapes::StringShape.new(name: 'S3Uri')
-    SageMakerImageArn = Shapes::StringShape.new(name: 'SageMakerImageArn')
     SamplingPercentage = Shapes::IntegerShape.new(name: 'SamplingPercentage')
     ScheduleConfig = Shapes::StructureShape.new(name: 'ScheduleConfig')
     ScheduleExpression = Shapes::StringShape.new(name: 'ScheduleExpression')
@@ -796,6 +814,10 @@ module Aws::SageMaker
     TargetAttributeName = Shapes::StringShape.new(name: 'TargetAttributeName')
     TargetDevice = Shapes::StringShape.new(name: 'TargetDevice')
     TargetObjectiveMetricValue = Shapes::FloatShape.new(name: 'TargetObjectiveMetricValue')
+    TargetPlatform = Shapes::StructureShape.new(name: 'TargetPlatform')
+    TargetPlatformAccelerator = Shapes::StringShape.new(name: 'TargetPlatformAccelerator')
+    TargetPlatformArch = Shapes::StringShape.new(name: 'TargetPlatformArch')
+    TargetPlatformOs = Shapes::StringShape.new(name: 'TargetPlatformOs')
     TaskAvailabilityLifetimeInSeconds = Shapes::IntegerShape.new(name: 'TaskAvailabilityLifetimeInSeconds')
     TaskCount = Shapes::IntegerShape.new(name: 'TaskCount')
     TaskDescription = Shapes::StringShape.new(name: 'TaskDescription')
@@ -836,6 +858,7 @@ module Aws::SageMaker
     TransformInstanceCount = Shapes::IntegerShape.new(name: 'TransformInstanceCount')
     TransformInstanceType = Shapes::StringShape.new(name: 'TransformInstanceType')
     TransformInstanceTypes = Shapes::ListShape.new(name: 'TransformInstanceTypes')
+    TransformJob = Shapes::StructureShape.new(name: 'TransformJob')
     TransformJobArn = Shapes::StringShape.new(name: 'TransformJobArn')
     TransformJobDefinition = Shapes::StructureShape.new(name: 'TransformJobDefinition')
     TransformJobName = Shapes::StringShape.new(name: 'TransformJobName')
@@ -924,6 +947,7 @@ module Aws::SageMaker
     Workforce = Shapes::StructureShape.new(name: 'Workforce')
     WorkforceArn = Shapes::StringShape.new(name: 'WorkforceArn')
     WorkforceName = Shapes::StringShape.new(name: 'WorkforceName')
+    Workforces = Shapes::ListShape.new(name: 'Workforces')
     Workteam = Shapes::StructureShape.new(name: 'Workteam')
     WorkteamArn = Shapes::StringShape.new(name: 'WorkteamArn')
     WorkteamName = Shapes::StringShape.new(name: 'WorkteamName')
@@ -1028,7 +1052,7 @@ module Aws::SageMaker
     AutoMLChannel.add_member(:target_attribute_name, Shapes::ShapeRef.new(shape: TargetAttributeName, required: true, location_name: "TargetAttributeName"))
     AutoMLChannel.struct_class = Types::AutoMLChannel
 
-    AutoMLContainerDefinition.add_member(:image, Shapes::ShapeRef.new(shape: Image, required: true, location_name: "Image"))
+    AutoMLContainerDefinition.add_member(:image, Shapes::ShapeRef.new(shape: ContainerImage, required: true, location_name: "Image"))
     AutoMLContainerDefinition.add_member(:model_data_url, Shapes::ShapeRef.new(shape: Url, required: true, location_name: "ModelDataUrl"))
     AutoMLContainerDefinition.add_member(:environment, Shapes::ShapeRef.new(shape: EnvironmentMap, location_name: "Environment"))
     AutoMLContainerDefinition.struct_class = Types::AutoMLContainerDefinition
@@ -1135,9 +1159,13 @@ module Aws::SageMaker
 
     CodeRepositorySummaryList.member = Shapes::ShapeRef.new(shape: CodeRepositorySummary)
 
+    CognitoConfig.add_member(:user_pool, Shapes::ShapeRef.new(shape: CognitoUserPool, required: true, location_name: "UserPool"))
+    CognitoConfig.add_member(:client_id, Shapes::ShapeRef.new(shape: ClientId, required: true, location_name: "ClientId"))
+    CognitoConfig.struct_class = Types::CognitoConfig
+
     CognitoMemberDefinition.add_member(:user_pool, Shapes::ShapeRef.new(shape: CognitoUserPool, required: true, location_name: "UserPool"))
     CognitoMemberDefinition.add_member(:user_group, Shapes::ShapeRef.new(shape: CognitoUserGroup, required: true, location_name: "UserGroup"))
-    CognitoMemberDefinition.add_member(:client_id, Shapes::ShapeRef.new(shape: CognitoClientId, required: true, location_name: "ClientId"))
+    CognitoMemberDefinition.add_member(:client_id, Shapes::ShapeRef.new(shape: ClientId, required: true, location_name: "ClientId"))
     CognitoMemberDefinition.struct_class = Types::CognitoMemberDefinition
 
     CollectionConfiguration.add_member(:collection_name, Shapes::ShapeRef.new(shape: CollectionName, location_name: "CollectionName"))
@@ -1156,7 +1184,10 @@ module Aws::SageMaker
     CompilationJobSummary.add_member(:creation_time, Shapes::ShapeRef.new(shape: CreationTime, required: true, location_name: "CreationTime"))
     CompilationJobSummary.add_member(:compilation_start_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "CompilationStartTime"))
     CompilationJobSummary.add_member(:compilation_end_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "CompilationEndTime"))
-    CompilationJobSummary.add_member(:compilation_target_device, Shapes::ShapeRef.new(shape: TargetDevice, required: true, location_name: "CompilationTargetDevice"))
+    CompilationJobSummary.add_member(:compilation_target_device, Shapes::ShapeRef.new(shape: TargetDevice, location_name: "CompilationTargetDevice"))
+    CompilationJobSummary.add_member(:compilation_target_platform_os, Shapes::ShapeRef.new(shape: TargetPlatformOs, location_name: "CompilationTargetPlatformOs"))
+    CompilationJobSummary.add_member(:compilation_target_platform_arch, Shapes::ShapeRef.new(shape: TargetPlatformArch, location_name: "CompilationTargetPlatformArch"))
+    CompilationJobSummary.add_member(:compilation_target_platform_accelerator, Shapes::ShapeRef.new(shape: TargetPlatformAccelerator, location_name: "CompilationTargetPlatformAccelerator"))
     CompilationJobSummary.add_member(:last_modified_time, Shapes::ShapeRef.new(shape: LastModifiedTime, location_name: "LastModifiedTime"))
     CompilationJobSummary.add_member(:compilation_job_status, Shapes::ShapeRef.new(shape: CompilationJobStatus, required: true, location_name: "CompilationJobStatus"))
     CompilationJobSummary.struct_class = Types::CompilationJobSummary
@@ -1169,7 +1200,8 @@ module Aws::SageMaker
     ContainerArguments.member = Shapes::ShapeRef.new(shape: ContainerArgument)
 
     ContainerDefinition.add_member(:container_hostname, Shapes::ShapeRef.new(shape: ContainerHostname, location_name: "ContainerHostname"))
-    ContainerDefinition.add_member(:image, Shapes::ShapeRef.new(shape: Image, location_name: "Image"))
+    ContainerDefinition.add_member(:image, Shapes::ShapeRef.new(shape: ContainerImage, location_name: "Image"))
+    ContainerDefinition.add_member(:image_config, Shapes::ShapeRef.new(shape: ImageConfig, location_name: "ImageConfig"))
     ContainerDefinition.add_member(:mode, Shapes::ShapeRef.new(shape: ContainerMode, location_name: "Mode"))
     ContainerDefinition.add_member(:model_data_url, Shapes::ShapeRef.new(shape: Url, location_name: "ModelDataUrl"))
     ContainerDefinition.add_member(:environment, Shapes::ShapeRef.new(shape: EnvironmentMap, location_name: "Environment"))
@@ -1499,7 +1531,18 @@ module Aws::SageMaker
     CreateUserProfileResponse.add_member(:user_profile_arn, Shapes::ShapeRef.new(shape: UserProfileArn, location_name: "UserProfileArn"))
     CreateUserProfileResponse.struct_class = Types::CreateUserProfileResponse
 
+    CreateWorkforceRequest.add_member(:cognito_config, Shapes::ShapeRef.new(shape: CognitoConfig, location_name: "CognitoConfig"))
+    CreateWorkforceRequest.add_member(:oidc_config, Shapes::ShapeRef.new(shape: OidcConfig, location_name: "OidcConfig"))
+    CreateWorkforceRequest.add_member(:source_ip_config, Shapes::ShapeRef.new(shape: SourceIpConfig, location_name: "SourceIpConfig"))
+    CreateWorkforceRequest.add_member(:workforce_name, Shapes::ShapeRef.new(shape: WorkforceName, required: true, location_name: "WorkforceName"))
+    CreateWorkforceRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
+    CreateWorkforceRequest.struct_class = Types::CreateWorkforceRequest
+
+    CreateWorkforceResponse.add_member(:workforce_arn, Shapes::ShapeRef.new(shape: WorkforceArn, required: true, location_name: "WorkforceArn"))
+    CreateWorkforceResponse.struct_class = Types::CreateWorkforceResponse
+
     CreateWorkteamRequest.add_member(:workteam_name, Shapes::ShapeRef.new(shape: WorkteamName, required: true, location_name: "WorkteamName"))
+    CreateWorkteamRequest.add_member(:workforce_name, Shapes::ShapeRef.new(shape: WorkforceName, location_name: "WorkforceName"))
     CreateWorkteamRequest.add_member(:member_definitions, Shapes::ShapeRef.new(shape: MemberDefinitions, required: true, location_name: "MemberDefinitions"))
     CreateWorkteamRequest.add_member(:description, Shapes::ShapeRef.new(shape: String200, required: true, location_name: "Description"))
     CreateWorkteamRequest.add_member(:notification_configuration, Shapes::ShapeRef.new(shape: NotificationConfiguration, location_name: "NotificationConfiguration"))
@@ -1636,14 +1679,19 @@ module Aws::SageMaker
     DeleteUserProfileRequest.add_member(:user_profile_name, Shapes::ShapeRef.new(shape: UserProfileName, required: true, location_name: "UserProfileName"))
     DeleteUserProfileRequest.struct_class = Types::DeleteUserProfileRequest
 
+    DeleteWorkforceRequest.add_member(:workforce_name, Shapes::ShapeRef.new(shape: WorkforceName, required: true, location_name: "WorkforceName"))
+    DeleteWorkforceRequest.struct_class = Types::DeleteWorkforceRequest
+
+    DeleteWorkforceResponse.struct_class = Types::DeleteWorkforceResponse
+
     DeleteWorkteamRequest.add_member(:workteam_name, Shapes::ShapeRef.new(shape: WorkteamName, required: true, location_name: "WorkteamName"))
     DeleteWorkteamRequest.struct_class = Types::DeleteWorkteamRequest
 
     DeleteWorkteamResponse.add_member(:success, Shapes::ShapeRef.new(shape: Success, required: true, location_name: "Success"))
     DeleteWorkteamResponse.struct_class = Types::DeleteWorkteamResponse
 
-    DeployedImage.add_member(:specified_image, Shapes::ShapeRef.new(shape: Image, location_name: "SpecifiedImage"))
-    DeployedImage.add_member(:resolved_image, Shapes::ShapeRef.new(shape: Image, location_name: "ResolvedImage"))
+    DeployedImage.add_member(:specified_image, Shapes::ShapeRef.new(shape: ContainerImage, location_name: "SpecifiedImage"))
+    DeployedImage.add_member(:resolved_image, Shapes::ShapeRef.new(shape: ContainerImage, location_name: "ResolvedImage"))
     DeployedImage.add_member(:resolution_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "ResolutionTime"))
     DeployedImage.struct_class = Types::DeployedImage
 
@@ -2236,6 +2284,8 @@ module Aws::SageMaker
     GitConfigForUpdate.add_member(:secret_arn, Shapes::ShapeRef.new(shape: SecretArn, location_name: "SecretArn"))
     GitConfigForUpdate.struct_class = Types::GitConfigForUpdate
 
+    Groups.member = Shapes::ShapeRef.new(shape: Group)
+
     HookParameters.key = Shapes::ShapeRef.new(shape: ConfigKey)
     HookParameters.value = Shapes::ShapeRef.new(shape: ConfigValue)
 
@@ -2367,6 +2417,9 @@ module Aws::SageMaker
     HyperParameters.key = Shapes::ShapeRef.new(shape: ParameterKey)
     HyperParameters.value = Shapes::ShapeRef.new(shape: ParameterValue)
 
+    ImageConfig.add_member(:repository_access_mode, Shapes::ShapeRef.new(shape: RepositoryAccessMode, required: true, location_name: "RepositoryAccessMode"))
+    ImageConfig.struct_class = Types::ImageConfig
+
     InferenceSpecification.add_member(:containers, Shapes::ShapeRef.new(shape: ModelPackageContainerDefinitionList, required: true, location_name: "Containers"))
     InferenceSpecification.add_member(:supported_transform_instance_types, Shapes::ShapeRef.new(shape: TransformInstanceTypes, required: true, location_name: "SupportedTransformInstanceTypes"))
     InferenceSpecification.add_member(:supported_realtime_inference_instance_types, Shapes::ShapeRef.new(shape: RealtimeInferenceInstanceTypes, required: true, location_name: "SupportedRealtimeInferenceInstanceTypes"))
@@ -2423,7 +2476,7 @@ module Aws::SageMaker
     LabelingJobDataAttributes.add_member(:content_classifiers, Shapes::ShapeRef.new(shape: ContentClassifiers, location_name: "ContentClassifiers"))
     LabelingJobDataAttributes.struct_class = Types::LabelingJobDataAttributes
 
-    LabelingJobDataSource.add_member(:s3_data_source, Shapes::ShapeRef.new(shape: LabelingJobS3DataSource, required: true, location_name: "S3DataSource"))
+    LabelingJobDataSource.add_member(:s3_data_source, Shapes::ShapeRef.new(shape: LabelingJobS3DataSource, location_name: "S3DataSource"))
     LabelingJobDataSource.struct_class = Types::LabelingJobDataSource
 
     LabelingJobForWorkteamSummary.add_member(:labeling_job_name, Shapes::ShapeRef.new(shape: LabelingJobName, location_name: "LabelingJobName"))
@@ -2893,6 +2946,17 @@ module Aws::SageMaker
     ListUserProfilesResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
     ListUserProfilesResponse.struct_class = Types::ListUserProfilesResponse
 
+    ListWorkforcesRequest.add_member(:sort_by, Shapes::ShapeRef.new(shape: ListWorkforcesSortByOptions, location_name: "SortBy"))
+    ListWorkforcesRequest.add_member(:sort_order, Shapes::ShapeRef.new(shape: SortOrder, location_name: "SortOrder"))
+    ListWorkforcesRequest.add_member(:name_contains, Shapes::ShapeRef.new(shape: WorkforceName, location_name: "NameContains"))
+    ListWorkforcesRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    ListWorkforcesRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location_name: "MaxResults", metadata: {"box"=>true}))
+    ListWorkforcesRequest.struct_class = Types::ListWorkforcesRequest
+
+    ListWorkforcesResponse.add_member(:workforces, Shapes::ShapeRef.new(shape: Workforces, required: true, location_name: "Workforces"))
+    ListWorkforcesResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    ListWorkforcesResponse.struct_class = Types::ListWorkforcesResponse
+
     ListWorkteamsRequest.add_member(:sort_by, Shapes::ShapeRef.new(shape: ListWorkteamsSortByOptions, location_name: "SortBy"))
     ListWorkteamsRequest.add_member(:sort_order, Shapes::ShapeRef.new(shape: SortOrder, location_name: "SortOrder"))
     ListWorkteamsRequest.add_member(:name_contains, Shapes::ShapeRef.new(shape: WorkteamName, location_name: "NameContains"))
@@ -2905,6 +2969,7 @@ module Aws::SageMaker
     ListWorkteamsResponse.struct_class = Types::ListWorkteamsResponse
 
     MemberDefinition.add_member(:cognito_member_definition, Shapes::ShapeRef.new(shape: CognitoMemberDefinition, location_name: "CognitoMemberDefinition"))
+    MemberDefinition.add_member(:oidc_member_definition, Shapes::ShapeRef.new(shape: OidcMemberDefinition, location_name: "OidcMemberDefinition"))
     MemberDefinition.struct_class = Types::MemberDefinition
 
     MemberDefinitions.member = Shapes::ShapeRef.new(shape: MemberDefinition)
@@ -2928,7 +2993,7 @@ module Aws::SageMaker
     ModelClientConfig.struct_class = Types::ModelClientConfig
 
     ModelPackageContainerDefinition.add_member(:container_hostname, Shapes::ShapeRef.new(shape: ContainerHostname, location_name: "ContainerHostname"))
-    ModelPackageContainerDefinition.add_member(:image, Shapes::ShapeRef.new(shape: Image, required: true, location_name: "Image"))
+    ModelPackageContainerDefinition.add_member(:image, Shapes::ShapeRef.new(shape: ContainerImage, required: true, location_name: "Image"))
     ModelPackageContainerDefinition.add_member(:image_digest, Shapes::ShapeRef.new(shape: ImageDigest, location_name: "ImageDigest"))
     ModelPackageContainerDefinition.add_member(:model_data_url, Shapes::ShapeRef.new(shape: Url, location_name: "ModelDataUrl"))
     ModelPackageContainerDefinition.add_member(:product_id, Shapes::ShapeRef.new(shape: ProductId, location_name: "ProductId"))
@@ -3111,8 +3176,32 @@ module Aws::SageMaker
     ObjectiveStatusCounters.add_member(:failed, Shapes::ShapeRef.new(shape: ObjectiveStatusCounter, location_name: "Failed"))
     ObjectiveStatusCounters.struct_class = Types::ObjectiveStatusCounters
 
+    OidcConfig.add_member(:client_id, Shapes::ShapeRef.new(shape: ClientId, required: true, location_name: "ClientId"))
+    OidcConfig.add_member(:client_secret, Shapes::ShapeRef.new(shape: ClientSecret, required: true, location_name: "ClientSecret"))
+    OidcConfig.add_member(:issuer, Shapes::ShapeRef.new(shape: OidcEndpoint, required: true, location_name: "Issuer"))
+    OidcConfig.add_member(:authorization_endpoint, Shapes::ShapeRef.new(shape: OidcEndpoint, required: true, location_name: "AuthorizationEndpoint"))
+    OidcConfig.add_member(:token_endpoint, Shapes::ShapeRef.new(shape: OidcEndpoint, required: true, location_name: "TokenEndpoint"))
+    OidcConfig.add_member(:user_info_endpoint, Shapes::ShapeRef.new(shape: OidcEndpoint, required: true, location_name: "UserInfoEndpoint"))
+    OidcConfig.add_member(:logout_endpoint, Shapes::ShapeRef.new(shape: OidcEndpoint, required: true, location_name: "LogoutEndpoint"))
+    OidcConfig.add_member(:jwks_uri, Shapes::ShapeRef.new(shape: OidcEndpoint, required: true, location_name: "JwksUri"))
+    OidcConfig.struct_class = Types::OidcConfig
+
+    OidcConfigForResponse.add_member(:client_id, Shapes::ShapeRef.new(shape: ClientId, location_name: "ClientId"))
+    OidcConfigForResponse.add_member(:issuer, Shapes::ShapeRef.new(shape: OidcEndpoint, location_name: "Issuer"))
+    OidcConfigForResponse.add_member(:authorization_endpoint, Shapes::ShapeRef.new(shape: OidcEndpoint, location_name: "AuthorizationEndpoint"))
+    OidcConfigForResponse.add_member(:token_endpoint, Shapes::ShapeRef.new(shape: OidcEndpoint, location_name: "TokenEndpoint"))
+    OidcConfigForResponse.add_member(:user_info_endpoint, Shapes::ShapeRef.new(shape: OidcEndpoint, location_name: "UserInfoEndpoint"))
+    OidcConfigForResponse.add_member(:logout_endpoint, Shapes::ShapeRef.new(shape: OidcEndpoint, location_name: "LogoutEndpoint"))
+    OidcConfigForResponse.add_member(:jwks_uri, Shapes::ShapeRef.new(shape: OidcEndpoint, location_name: "JwksUri"))
+    OidcConfigForResponse.struct_class = Types::OidcConfigForResponse
+
+    OidcMemberDefinition.add_member(:groups, Shapes::ShapeRef.new(shape: Groups, required: true, location_name: "Groups"))
+    OidcMemberDefinition.struct_class = Types::OidcMemberDefinition
+
     OutputConfig.add_member(:s3_output_location, Shapes::ShapeRef.new(shape: S3Uri, required: true, location_name: "S3OutputLocation"))
-    OutputConfig.add_member(:target_device, Shapes::ShapeRef.new(shape: TargetDevice, required: true, location_name: "TargetDevice"))
+    OutputConfig.add_member(:target_device, Shapes::ShapeRef.new(shape: TargetDevice, location_name: "TargetDevice"))
+    OutputConfig.add_member(:target_platform, Shapes::ShapeRef.new(shape: TargetPlatform, location_name: "TargetPlatform"))
+    OutputConfig.add_member(:compiler_options, Shapes::ShapeRef.new(shape: CompilerOptions, location_name: "CompilerOptions"))
     OutputConfig.struct_class = Types::OutputConfig
 
     OutputDataConfig.add_member(:kms_key_id, Shapes::ShapeRef.new(shape: KmsKeyId, location_name: "KmsKeyId"))
@@ -3300,7 +3389,7 @@ module Aws::SageMaker
     ResourceNotFound.add_member(:message, Shapes::ShapeRef.new(shape: FailureReason, location_name: "Message"))
     ResourceNotFound.struct_class = Types::ResourceNotFound
 
-    ResourceSpec.add_member(:sage_maker_image_arn, Shapes::ShapeRef.new(shape: SageMakerImageArn, location_name: "SageMakerImageArn"))
+    ResourceSpec.add_member(:sage_maker_image_arn, Shapes::ShapeRef.new(shape: ImageArn, location_name: "SageMakerImageArn"))
     ResourceSpec.add_member(:instance_type, Shapes::ShapeRef.new(shape: AppInstanceType, location_name: "InstanceType"))
     ResourceSpec.struct_class = Types::ResourceSpec
 
@@ -3438,6 +3527,11 @@ module Aws::SageMaker
 
     TagList.member = Shapes::ShapeRef.new(shape: Tag)
 
+    TargetPlatform.add_member(:os, Shapes::ShapeRef.new(shape: TargetPlatformOs, required: true, location_name: "Os"))
+    TargetPlatform.add_member(:arch, Shapes::ShapeRef.new(shape: TargetPlatformArch, required: true, location_name: "Arch"))
+    TargetPlatform.add_member(:accelerator, Shapes::ShapeRef.new(shape: TargetPlatformAccelerator, location_name: "Accelerator"))
+    TargetPlatform.struct_class = Types::TargetPlatform
+
     TaskKeywords.member = Shapes::ShapeRef.new(shape: TaskKeyword)
 
     TensorBoardAppSettings.add_member(:default_resource_spec, Shapes::ShapeRef.new(shape: ResourceSpec, location_name: "DefaultResourceSpec"))
@@ -3511,7 +3605,7 @@ module Aws::SageMaker
     TrainingJobSummary.add_member(:training_job_status, Shapes::ShapeRef.new(shape: TrainingJobStatus, required: true, location_name: "TrainingJobStatus"))
     TrainingJobSummary.struct_class = Types::TrainingJobSummary
 
-    TrainingSpecification.add_member(:training_image, Shapes::ShapeRef.new(shape: Image, required: true, location_name: "TrainingImage"))
+    TrainingSpecification.add_member(:training_image, Shapes::ShapeRef.new(shape: ContainerImage, required: true, location_name: "TrainingImage"))
     TrainingSpecification.add_member(:training_image_digest, Shapes::ShapeRef.new(shape: ImageDigest, location_name: "TrainingImageDigest"))
     TrainingSpecification.add_member(:supported_hyper_parameters, Shapes::ShapeRef.new(shape: HyperParameterSpecifications, location_name: "SupportedHyperParameters"))
     TrainingSpecification.add_member(:supported_training_instance_types, Shapes::ShapeRef.new(shape: TrainingInstanceTypes, required: true, location_name: "SupportedTrainingInstanceTypes"))
@@ -3534,6 +3628,29 @@ module Aws::SageMaker
     TransformInput.struct_class = Types::TransformInput
 
     TransformInstanceTypes.member = Shapes::ShapeRef.new(shape: TransformInstanceType)
+
+    TransformJob.add_member(:transform_job_name, Shapes::ShapeRef.new(shape: TransformJobName, location_name: "TransformJobName"))
+    TransformJob.add_member(:transform_job_arn, Shapes::ShapeRef.new(shape: TransformJobArn, location_name: "TransformJobArn"))
+    TransformJob.add_member(:transform_job_status, Shapes::ShapeRef.new(shape: TransformJobStatus, location_name: "TransformJobStatus"))
+    TransformJob.add_member(:failure_reason, Shapes::ShapeRef.new(shape: FailureReason, location_name: "FailureReason"))
+    TransformJob.add_member(:model_name, Shapes::ShapeRef.new(shape: ModelName, location_name: "ModelName"))
+    TransformJob.add_member(:max_concurrent_transforms, Shapes::ShapeRef.new(shape: MaxConcurrentTransforms, location_name: "MaxConcurrentTransforms"))
+    TransformJob.add_member(:model_client_config, Shapes::ShapeRef.new(shape: ModelClientConfig, location_name: "ModelClientConfig"))
+    TransformJob.add_member(:max_payload_in_mb, Shapes::ShapeRef.new(shape: MaxPayloadInMB, location_name: "MaxPayloadInMB"))
+    TransformJob.add_member(:batch_strategy, Shapes::ShapeRef.new(shape: BatchStrategy, location_name: "BatchStrategy"))
+    TransformJob.add_member(:environment, Shapes::ShapeRef.new(shape: TransformEnvironmentMap, location_name: "Environment"))
+    TransformJob.add_member(:transform_input, Shapes::ShapeRef.new(shape: TransformInput, location_name: "TransformInput"))
+    TransformJob.add_member(:transform_output, Shapes::ShapeRef.new(shape: TransformOutput, location_name: "TransformOutput"))
+    TransformJob.add_member(:transform_resources, Shapes::ShapeRef.new(shape: TransformResources, location_name: "TransformResources"))
+    TransformJob.add_member(:creation_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "CreationTime"))
+    TransformJob.add_member(:transform_start_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "TransformStartTime"))
+    TransformJob.add_member(:transform_end_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "TransformEndTime"))
+    TransformJob.add_member(:labeling_job_arn, Shapes::ShapeRef.new(shape: LabelingJobArn, location_name: "LabelingJobArn"))
+    TransformJob.add_member(:auto_ml_job_arn, Shapes::ShapeRef.new(shape: AutoMLJobArn, location_name: "AutoMLJobArn"))
+    TransformJob.add_member(:data_processing, Shapes::ShapeRef.new(shape: DataProcessing, location_name: "DataProcessing"))
+    TransformJob.add_member(:experiment_config, Shapes::ShapeRef.new(shape: ExperimentConfig, location_name: "ExperimentConfig"))
+    TransformJob.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
+    TransformJob.struct_class = Types::TransformJob
 
     TransformJobDefinition.add_member(:max_concurrent_transforms, Shapes::ShapeRef.new(shape: MaxConcurrentTransforms, location_name: "MaxConcurrentTransforms"))
     TransformJobDefinition.add_member(:max_payload_in_mb, Shapes::ShapeRef.new(shape: MaxPayloadInMB, location_name: "MaxPayloadInMB"))
@@ -3646,6 +3763,7 @@ module Aws::SageMaker
     TrialComponentSourceDetail.add_member(:source_arn, Shapes::ShapeRef.new(shape: TrialComponentSourceArn, location_name: "SourceArn"))
     TrialComponentSourceDetail.add_member(:training_job, Shapes::ShapeRef.new(shape: TrainingJob, location_name: "TrainingJob"))
     TrialComponentSourceDetail.add_member(:processing_job, Shapes::ShapeRef.new(shape: ProcessingJob, location_name: "ProcessingJob"))
+    TrialComponentSourceDetail.add_member(:transform_job, Shapes::ShapeRef.new(shape: TransformJob, location_name: "TransformJob"))
     TrialComponentSourceDetail.struct_class = Types::TrialComponentSourceDetail
 
     TrialComponentStatus.add_member(:primary_status, Shapes::ShapeRef.new(shape: TrialComponentPrimaryStatus, location_name: "PrimaryStatus"))
@@ -3802,6 +3920,7 @@ module Aws::SageMaker
 
     UpdateWorkforceRequest.add_member(:workforce_name, Shapes::ShapeRef.new(shape: WorkforceName, required: true, location_name: "WorkforceName"))
     UpdateWorkforceRequest.add_member(:source_ip_config, Shapes::ShapeRef.new(shape: SourceIpConfig, location_name: "SourceIpConfig"))
+    UpdateWorkforceRequest.add_member(:oidc_config, Shapes::ShapeRef.new(shape: OidcConfig, location_name: "OidcConfig"))
     UpdateWorkforceRequest.struct_class = Types::UpdateWorkforceRequest
 
     UpdateWorkforceResponse.add_member(:workforce, Shapes::ShapeRef.new(shape: Workforce, required: true, location_name: "Workforce"))
@@ -3853,11 +3972,18 @@ module Aws::SageMaker
     Workforce.add_member(:workforce_arn, Shapes::ShapeRef.new(shape: WorkforceArn, required: true, location_name: "WorkforceArn"))
     Workforce.add_member(:last_updated_date, Shapes::ShapeRef.new(shape: Timestamp, location_name: "LastUpdatedDate"))
     Workforce.add_member(:source_ip_config, Shapes::ShapeRef.new(shape: SourceIpConfig, location_name: "SourceIpConfig"))
+    Workforce.add_member(:sub_domain, Shapes::ShapeRef.new(shape: String, location_name: "SubDomain"))
+    Workforce.add_member(:cognito_config, Shapes::ShapeRef.new(shape: CognitoConfig, location_name: "CognitoConfig"))
+    Workforce.add_member(:oidc_config, Shapes::ShapeRef.new(shape: OidcConfigForResponse, location_name: "OidcConfig"))
+    Workforce.add_member(:create_date, Shapes::ShapeRef.new(shape: Timestamp, location_name: "CreateDate"))
     Workforce.struct_class = Types::Workforce
+
+    Workforces.member = Shapes::ShapeRef.new(shape: Workforce)
 
     Workteam.add_member(:workteam_name, Shapes::ShapeRef.new(shape: WorkteamName, required: true, location_name: "WorkteamName"))
     Workteam.add_member(:member_definitions, Shapes::ShapeRef.new(shape: MemberDefinitions, required: true, location_name: "MemberDefinitions"))
     Workteam.add_member(:workteam_arn, Shapes::ShapeRef.new(shape: WorkteamArn, required: true, location_name: "WorkteamArn"))
+    Workteam.add_member(:workforce_arn, Shapes::ShapeRef.new(shape: WorkforceArn, location_name: "WorkforceArn"))
     Workteam.add_member(:product_listing_ids, Shapes::ShapeRef.new(shape: ProductListings, location_name: "ProductListingIds"))
     Workteam.add_member(:description, Shapes::ShapeRef.new(shape: String200, required: true, location_name: "Description"))
     Workteam.add_member(:sub_domain, Shapes::ShapeRef.new(shape: String, location_name: "SubDomain"))
@@ -4153,6 +4279,14 @@ module Aws::SageMaker
         o.errors << Shapes::ShapeRef.new(shape: ResourceInUse)
       end)
 
+      api.add_operation(:create_workforce, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "CreateWorkforce"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: CreateWorkforceRequest)
+        o.output = Shapes::ShapeRef.new(shape: CreateWorkforceResponse)
+      end)
+
       api.add_operation(:create_workteam, Seahorse::Model::Operation.new.tap do |o|
         o.name = "CreateWorkteam"
         o.http_method = "POST"
@@ -4230,6 +4364,7 @@ module Aws::SageMaker
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: DeleteFlowDefinitionRequest)
         o.output = Shapes::ShapeRef.new(shape: DeleteFlowDefinitionResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceInUse)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFound)
       end)
 
@@ -4317,6 +4452,14 @@ module Aws::SageMaker
         o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
         o.errors << Shapes::ShapeRef.new(shape: ResourceInUse)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFound)
+      end)
+
+      api.add_operation(:delete_workforce, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DeleteWorkforce"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DeleteWorkforceRequest)
+        o.output = Shapes::ShapeRef.new(shape: DeleteWorkforceResponse)
       end)
 
       api.add_operation(:delete_workteam, Seahorse::Model::Operation.new.tap do |o|
@@ -5002,6 +5145,20 @@ module Aws::SageMaker
         )
       end)
 
+      api.add_operation(:list_workforces, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListWorkforces"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: ListWorkforcesRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListWorkforcesResponse)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
       api.add_operation(:list_workteams, Seahorse::Model::Operation.new.tap do |o|
         o.name = "ListWorkteams"
         o.http_method = "POST"
@@ -5022,6 +5179,7 @@ module Aws::SageMaker
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: RenderUiTemplateRequest)
         o.output = Shapes::ShapeRef.new(shape: RenderUiTemplateResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFound)
       end)
 
       api.add_operation(:search, Seahorse::Model::Operation.new.tap do |o|

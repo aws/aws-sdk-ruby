@@ -1150,6 +1150,39 @@ module Aws::Kafka
       req.send_request(options)
     end
 
+    # Executes a reboot on a broker.
+    #
+    # @option params [required, Array<String>] :broker_ids
+    #   The list of broker ids to be rebooted.
+    #
+    # @option params [required, String] :cluster_arn
+    #
+    # @return [Types::RebootBrokerResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::RebootBrokerResponse#cluster_arn #cluster_arn} => String
+    #   * {Types::RebootBrokerResponse#cluster_operation_arn #cluster_operation_arn} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.reboot_broker({
+    #     broker_ids: ["__string"], # required
+    #     cluster_arn: "__string", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.cluster_arn #=> String
+    #   resp.cluster_operation_arn #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kafka-2018-11-14/RebootBroker AWS API Documentation
+    #
+    # @overload reboot_broker(params = {})
+    # @param [Hash] params ({})
+    def reboot_broker(params = {}, options = {})
+      req = build_request(:reboot_broker, params)
+      req.send_request(options)
+    end
+
     # Adds tags to the specified MSK resource.
     #
     # @option params [required, String] :resource_arn
@@ -1465,7 +1498,7 @@ module Aws::Kafka
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-kafka'
-      context[:gem_version] = '1.23.0'
+      context[:gem_version] = '1.24.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

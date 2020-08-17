@@ -2910,6 +2910,8 @@ module Aws::StorageGateway
     #   * {Types::DescribeGatewayInformationOutput#cloud_watch_log_group_arn #cloud_watch_log_group_arn} => String
     #   * {Types::DescribeGatewayInformationOutput#host_environment #host_environment} => String
     #   * {Types::DescribeGatewayInformationOutput#endpoint_type #endpoint_type} => String
+    #   * {Types::DescribeGatewayInformationOutput#software_updates_end_date #software_updates_end_date} => String
+    #   * {Types::DescribeGatewayInformationOutput#deprecation_date #deprecation_date} => String
     #
     #
     # @example Example: To describe metadata about the gateway
@@ -2967,6 +2969,8 @@ module Aws::StorageGateway
     #   resp.cloud_watch_log_group_arn #=> String
     #   resp.host_environment #=> String, one of "VMWARE", "HYPER-V", "EC2", "KVM", "OTHER"
     #   resp.endpoint_type #=> String
+    #   resp.software_updates_end_date #=> String
+    #   resp.deprecation_date #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/DescribeGatewayInformation AWS API Documentation
     #
@@ -6239,7 +6243,7 @@ module Aws::StorageGateway
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-storagegateway'
-      context[:gem_version] = '1.45.0'
+      context[:gem_version] = '1.46.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

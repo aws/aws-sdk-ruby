@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.55.0 (2020-08-12)
+------------------
+
+* Feature - Audit finding suppressions: Device Defender enables customers to turn off non-compliant findings for specific resources on a per check basis.
+
 1.54.0 (2020-07-02)
 ------------------
 

@@ -58,7 +58,6 @@ module Aws::FraudDetector
     DetectorsMaxResults = Shapes::IntegerShape.new(name: 'DetectorsMaxResults')
     Entity = Shapes::StructureShape.new(name: 'Entity')
     EntityType = Shapes::StructureShape.new(name: 'EntityType')
-    EventAttributeMap = Shapes::MapShape.new(name: 'EventAttributeMap')
     EventType = Shapes::StructureShape.new(name: 'EventType')
     EventVariableMap = Shapes::MapShape.new(name: 'EventVariableMap')
     ExternalEventsDetail = Shapes::StructureShape.new(name: 'ExternalEventsDetail')
@@ -89,8 +88,6 @@ module Aws::FraudDetector
     GetModelsResult = Shapes::StructureShape.new(name: 'GetModelsResult')
     GetOutcomesRequest = Shapes::StructureShape.new(name: 'GetOutcomesRequest')
     GetOutcomesResult = Shapes::StructureShape.new(name: 'GetOutcomesResult')
-    GetPredictionRequest = Shapes::StructureShape.new(name: 'GetPredictionRequest')
-    GetPredictionResult = Shapes::StructureShape.new(name: 'GetPredictionResult')
     GetRulesRequest = Shapes::StructureShape.new(name: 'GetRulesRequest')
     GetRulesResult = Shapes::StructureShape.new(name: 'GetRulesResult')
     GetVariablesRequest = Shapes::StructureShape.new(name: 'GetVariablesRequest')
@@ -143,7 +140,6 @@ module Aws::FraudDetector
     PutOutcomeRequest = Shapes::StructureShape.new(name: 'PutOutcomeRequest')
     PutOutcomeResult = Shapes::StructureShape.new(name: 'PutOutcomeResult')
     ResourceNotFoundException = Shapes::StructureShape.new(name: 'ResourceNotFoundException')
-    Role = Shapes::StructureShape.new(name: 'Role')
     Rule = Shapes::StructureShape.new(name: 'Rule')
     RuleDetail = Shapes::StructureShape.new(name: 'RuleDetail')
     RuleDetailList = Shapes::ListShape.new(name: 'RuleDetailList')
@@ -187,8 +183,6 @@ module Aws::FraudDetector
     VariableEntryList = Shapes::ListShape.new(name: 'VariableEntryList')
     VariableList = Shapes::ListShape.new(name: 'VariableList')
     VariablesMaxResults = Shapes::IntegerShape.new(name: 'VariablesMaxResults')
-    attributeKey = Shapes::StringShape.new(name: 'attributeKey')
-    attributeValue = Shapes::StringShape.new(name: 'attributeValue')
     blob = Shapes::BlobShape.new(name: 'blob')
     contentType = Shapes::StringShape.new(name: 'contentType')
     description = Shapes::StringShape.new(name: 'description')
@@ -209,6 +203,7 @@ module Aws::FraudDetector
     labelsMaxResults = Shapes::IntegerShape.new(name: 'labelsMaxResults')
     listOfEntities = Shapes::ListShape.new(name: 'listOfEntities')
     metricDataPointsList = Shapes::ListShape.new(name: 'metricDataPointsList')
+    modelIdentifier = Shapes::StringShape.new(name: 'modelIdentifier')
     modelList = Shapes::ListShape.new(name: 'modelList')
     modelVersionDetailList = Shapes::ListShape.new(name: 'modelVersionDetailList')
     modelsMaxPageSize = Shapes::IntegerShape.new(name: 'modelsMaxPageSize')
@@ -274,7 +269,7 @@ module Aws::FraudDetector
     CreateDetectorVersionResult.add_member(:status, Shapes::ShapeRef.new(shape: DetectorVersionStatus, location_name: "status"))
     CreateDetectorVersionResult.struct_class = Types::CreateDetectorVersionResult
 
-    CreateModelRequest.add_member(:model_id, Shapes::ShapeRef.new(shape: identifier, required: true, location_name: "modelId"))
+    CreateModelRequest.add_member(:model_id, Shapes::ShapeRef.new(shape: modelIdentifier, required: true, location_name: "modelId"))
     CreateModelRequest.add_member(:model_type, Shapes::ShapeRef.new(shape: ModelTypeEnum, required: true, location_name: "modelType"))
     CreateModelRequest.add_member(:description, Shapes::ShapeRef.new(shape: description, location_name: "description"))
     CreateModelRequest.add_member(:event_type_name, Shapes::ShapeRef.new(shape: string, required: true, location_name: "eventTypeName"))
@@ -283,7 +278,7 @@ module Aws::FraudDetector
 
     CreateModelResult.struct_class = Types::CreateModelResult
 
-    CreateModelVersionRequest.add_member(:model_id, Shapes::ShapeRef.new(shape: identifier, required: true, location_name: "modelId"))
+    CreateModelVersionRequest.add_member(:model_id, Shapes::ShapeRef.new(shape: modelIdentifier, required: true, location_name: "modelId"))
     CreateModelVersionRequest.add_member(:model_type, Shapes::ShapeRef.new(shape: ModelTypeEnum, required: true, location_name: "modelType"))
     CreateModelVersionRequest.add_member(:training_data_source, Shapes::ShapeRef.new(shape: TrainingDataSourceEnum, required: true, location_name: "trainingDataSource"))
     CreateModelVersionRequest.add_member(:training_data_schema, Shapes::ShapeRef.new(shape: TrainingDataSchema, required: true, location_name: "trainingDataSchema"))
@@ -291,7 +286,7 @@ module Aws::FraudDetector
     CreateModelVersionRequest.add_member(:tags, Shapes::ShapeRef.new(shape: tagList, location_name: "tags"))
     CreateModelVersionRequest.struct_class = Types::CreateModelVersionRequest
 
-    CreateModelVersionResult.add_member(:model_id, Shapes::ShapeRef.new(shape: identifier, location_name: "modelId"))
+    CreateModelVersionResult.add_member(:model_id, Shapes::ShapeRef.new(shape: modelIdentifier, location_name: "modelId"))
     CreateModelVersionResult.add_member(:model_type, Shapes::ShapeRef.new(shape: ModelTypeEnum, location_name: "modelType"))
     CreateModelVersionResult.add_member(:model_version_number, Shapes::ShapeRef.new(shape: nonEmptyString, location_name: "modelVersionNumber"))
     CreateModelVersionResult.add_member(:status, Shapes::ShapeRef.new(shape: string, location_name: "status"))
@@ -360,7 +355,7 @@ module Aws::FraudDetector
     DescribeDetectorResult.add_member(:arn, Shapes::ShapeRef.new(shape: fraudDetectorArn, location_name: "arn"))
     DescribeDetectorResult.struct_class = Types::DescribeDetectorResult
 
-    DescribeModelVersionsRequest.add_member(:model_id, Shapes::ShapeRef.new(shape: identifier, location_name: "modelId"))
+    DescribeModelVersionsRequest.add_member(:model_id, Shapes::ShapeRef.new(shape: modelIdentifier, location_name: "modelId"))
     DescribeModelVersionsRequest.add_member(:model_version_number, Shapes::ShapeRef.new(shape: floatVersionString, location_name: "modelVersionNumber"))
     DescribeModelVersionsRequest.add_member(:model_type, Shapes::ShapeRef.new(shape: ModelTypeEnum, location_name: "modelType"))
     DescribeModelVersionsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: string, location_name: "nextToken"))
@@ -389,8 +384,8 @@ module Aws::FraudDetector
 
     DetectorVersionSummaryList.member = Shapes::ShapeRef.new(shape: DetectorVersionSummary)
 
-    Entity.add_member(:entity_type, Shapes::ShapeRef.new(shape: string, location_name: "entityType"))
-    Entity.add_member(:entity_id, Shapes::ShapeRef.new(shape: identifier, location_name: "entityId"))
+    Entity.add_member(:entity_type, Shapes::ShapeRef.new(shape: string, required: true, location_name: "entityType"))
+    Entity.add_member(:entity_id, Shapes::ShapeRef.new(shape: identifier, required: true, location_name: "entityId"))
     Entity.struct_class = Types::Entity
 
     EntityType.add_member(:name, Shapes::ShapeRef.new(shape: string, location_name: "name"))
@@ -399,9 +394,6 @@ module Aws::FraudDetector
     EntityType.add_member(:created_time, Shapes::ShapeRef.new(shape: time, location_name: "createdTime"))
     EntityType.add_member(:arn, Shapes::ShapeRef.new(shape: fraudDetectorArn, location_name: "arn"))
     EntityType.struct_class = Types::EntityType
-
-    EventAttributeMap.key = Shapes::ShapeRef.new(shape: attributeKey)
-    EventAttributeMap.value = Shapes::ShapeRef.new(shape: attributeValue)
 
     EventType.add_member(:name, Shapes::ShapeRef.new(shape: string, location_name: "name"))
     EventType.add_member(:description, Shapes::ShapeRef.new(shape: description, location_name: "description"))
@@ -421,9 +413,8 @@ module Aws::FraudDetector
     ExternalEventsDetail.struct_class = Types::ExternalEventsDetail
 
     ExternalModel.add_member(:model_endpoint, Shapes::ShapeRef.new(shape: string, location_name: "modelEndpoint"))
-    ExternalModel.add_member(:event_type_name, Shapes::ShapeRef.new(shape: identifier, location_name: "eventTypeName"))
     ExternalModel.add_member(:model_source, Shapes::ShapeRef.new(shape: ModelSource, location_name: "modelSource"))
-    ExternalModel.add_member(:role, Shapes::ShapeRef.new(shape: Role, location_name: "role"))
+    ExternalModel.add_member(:invoke_model_endpoint_role_arn, Shapes::ShapeRef.new(shape: string, location_name: "invokeModelEndpointRoleArn"))
     ExternalModel.add_member(:input_configuration, Shapes::ShapeRef.new(shape: ModelInputConfiguration, location_name: "inputConfiguration"))
     ExternalModel.add_member(:output_configuration, Shapes::ShapeRef.new(shape: ModelOutputConfiguration, location_name: "outputConfiguration"))
     ExternalModel.add_member(:model_endpoint_status, Shapes::ShapeRef.new(shape: ModelEndpointStatus, location_name: "modelEndpointStatus"))
@@ -485,7 +476,7 @@ module Aws::FraudDetector
     GetEntityTypesResult.struct_class = Types::GetEntityTypesResult
 
     GetEventPredictionRequest.add_member(:detector_id, Shapes::ShapeRef.new(shape: string, required: true, location_name: "detectorId"))
-    GetEventPredictionRequest.add_member(:detector_version_id, Shapes::ShapeRef.new(shape: string, location_name: "detectorVersionId"))
+    GetEventPredictionRequest.add_member(:detector_version_id, Shapes::ShapeRef.new(shape: wholeNumberVersionString, location_name: "detectorVersionId"))
     GetEventPredictionRequest.add_member(:event_id, Shapes::ShapeRef.new(shape: string, required: true, location_name: "eventId"))
     GetEventPredictionRequest.add_member(:event_type_name, Shapes::ShapeRef.new(shape: string, required: true, location_name: "eventTypeName"))
     GetEventPredictionRequest.add_member(:entities, Shapes::ShapeRef.new(shape: listOfEntities, required: true, location_name: "entities"))
@@ -528,12 +519,12 @@ module Aws::FraudDetector
     GetLabelsResult.add_member(:next_token, Shapes::ShapeRef.new(shape: string, location_name: "nextToken"))
     GetLabelsResult.struct_class = Types::GetLabelsResult
 
-    GetModelVersionRequest.add_member(:model_id, Shapes::ShapeRef.new(shape: identifier, required: true, location_name: "modelId"))
+    GetModelVersionRequest.add_member(:model_id, Shapes::ShapeRef.new(shape: modelIdentifier, required: true, location_name: "modelId"))
     GetModelVersionRequest.add_member(:model_type, Shapes::ShapeRef.new(shape: ModelTypeEnum, required: true, location_name: "modelType"))
     GetModelVersionRequest.add_member(:model_version_number, Shapes::ShapeRef.new(shape: floatVersionString, required: true, location_name: "modelVersionNumber"))
     GetModelVersionRequest.struct_class = Types::GetModelVersionRequest
 
-    GetModelVersionResult.add_member(:model_id, Shapes::ShapeRef.new(shape: identifier, location_name: "modelId"))
+    GetModelVersionResult.add_member(:model_id, Shapes::ShapeRef.new(shape: modelIdentifier, location_name: "modelId"))
     GetModelVersionResult.add_member(:model_type, Shapes::ShapeRef.new(shape: ModelTypeEnum, location_name: "modelType"))
     GetModelVersionResult.add_member(:model_version_number, Shapes::ShapeRef.new(shape: floatVersionString, location_name: "modelVersionNumber"))
     GetModelVersionResult.add_member(:training_data_source, Shapes::ShapeRef.new(shape: TrainingDataSourceEnum, location_name: "trainingDataSource"))
@@ -543,7 +534,7 @@ module Aws::FraudDetector
     GetModelVersionResult.add_member(:arn, Shapes::ShapeRef.new(shape: fraudDetectorArn, location_name: "arn"))
     GetModelVersionResult.struct_class = Types::GetModelVersionResult
 
-    GetModelsRequest.add_member(:model_id, Shapes::ShapeRef.new(shape: identifier, location_name: "modelId"))
+    GetModelsRequest.add_member(:model_id, Shapes::ShapeRef.new(shape: modelIdentifier, location_name: "modelId"))
     GetModelsRequest.add_member(:model_type, Shapes::ShapeRef.new(shape: ModelTypeEnum, location_name: "modelType"))
     GetModelsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: string, location_name: "nextToken"))
     GetModelsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: modelsMaxPageSize, location_name: "maxResults"))
@@ -561,18 +552,6 @@ module Aws::FraudDetector
     GetOutcomesResult.add_member(:outcomes, Shapes::ShapeRef.new(shape: OutcomeList, location_name: "outcomes"))
     GetOutcomesResult.add_member(:next_token, Shapes::ShapeRef.new(shape: string, location_name: "nextToken"))
     GetOutcomesResult.struct_class = Types::GetOutcomesResult
-
-    GetPredictionRequest.add_member(:detector_id, Shapes::ShapeRef.new(shape: string, required: true, location_name: "detectorId"))
-    GetPredictionRequest.add_member(:detector_version_id, Shapes::ShapeRef.new(shape: string, location_name: "detectorVersionId"))
-    GetPredictionRequest.add_member(:event_id, Shapes::ShapeRef.new(shape: string, required: true, location_name: "eventId"))
-    GetPredictionRequest.add_member(:event_attributes, Shapes::ShapeRef.new(shape: EventAttributeMap, location_name: "eventAttributes"))
-    GetPredictionRequest.add_member(:external_model_endpoint_data_blobs, Shapes::ShapeRef.new(shape: ExternalModelEndpointDataBlobMap, location_name: "externalModelEndpointDataBlobs"))
-    GetPredictionRequest.struct_class = Types::GetPredictionRequest
-
-    GetPredictionResult.add_member(:outcomes, Shapes::ShapeRef.new(shape: ListOfStrings, location_name: "outcomes"))
-    GetPredictionResult.add_member(:model_scores, Shapes::ShapeRef.new(shape: ListOfModelScores, location_name: "modelScores"))
-    GetPredictionResult.add_member(:rule_results, Shapes::ShapeRef.new(shape: ListOfRuleResults, location_name: "ruleResults"))
-    GetPredictionResult.struct_class = Types::GetPredictionResult
 
     GetRulesRequest.add_member(:rule_id, Shapes::ShapeRef.new(shape: identifier, location_name: "ruleId"))
     GetRulesRequest.add_member(:detector_id, Shapes::ShapeRef.new(shape: identifier, required: true, location_name: "detectorId"))
@@ -636,7 +615,7 @@ module Aws::FraudDetector
     MetricDataPoint.add_member(:threshold, Shapes::ShapeRef.new(shape: float, location_name: "threshold"))
     MetricDataPoint.struct_class = Types::MetricDataPoint
 
-    Model.add_member(:model_id, Shapes::ShapeRef.new(shape: identifier, location_name: "modelId"))
+    Model.add_member(:model_id, Shapes::ShapeRef.new(shape: modelIdentifier, location_name: "modelId"))
     Model.add_member(:model_type, Shapes::ShapeRef.new(shape: ModelTypeEnum, location_name: "modelType"))
     Model.add_member(:description, Shapes::ShapeRef.new(shape: description, location_name: "description"))
     Model.add_member(:event_type_name, Shapes::ShapeRef.new(shape: string, location_name: "eventTypeName"))
@@ -649,6 +628,7 @@ module Aws::FraudDetector
     ModelEndpointDataBlob.add_member(:content_type, Shapes::ShapeRef.new(shape: contentType, location_name: "contentType"))
     ModelEndpointDataBlob.struct_class = Types::ModelEndpointDataBlob
 
+    ModelInputConfiguration.add_member(:event_type_name, Shapes::ShapeRef.new(shape: identifier, location_name: "eventTypeName"))
     ModelInputConfiguration.add_member(:format, Shapes::ShapeRef.new(shape: ModelInputDataFormat, location_name: "format"))
     ModelInputConfiguration.add_member(:use_event_variables, Shapes::ShapeRef.new(shape: UseEventVariables, required: true, location_name: "useEventVariables"))
     ModelInputConfiguration.add_member(:json_input_template, Shapes::ShapeRef.new(shape: string, location_name: "jsonInputTemplate"))
@@ -667,13 +647,13 @@ module Aws::FraudDetector
     ModelScores.add_member(:scores, Shapes::ShapeRef.new(shape: ModelPredictionMap, location_name: "scores"))
     ModelScores.struct_class = Types::ModelScores
 
-    ModelVersion.add_member(:model_id, Shapes::ShapeRef.new(shape: identifier, required: true, location_name: "modelId"))
+    ModelVersion.add_member(:model_id, Shapes::ShapeRef.new(shape: modelIdentifier, required: true, location_name: "modelId"))
     ModelVersion.add_member(:model_type, Shapes::ShapeRef.new(shape: ModelTypeEnum, required: true, location_name: "modelType"))
     ModelVersion.add_member(:model_version_number, Shapes::ShapeRef.new(shape: nonEmptyString, required: true, location_name: "modelVersionNumber"))
     ModelVersion.add_member(:arn, Shapes::ShapeRef.new(shape: fraudDetectorArn, location_name: "arn"))
     ModelVersion.struct_class = Types::ModelVersion
 
-    ModelVersionDetail.add_member(:model_id, Shapes::ShapeRef.new(shape: identifier, location_name: "modelId"))
+    ModelVersionDetail.add_member(:model_id, Shapes::ShapeRef.new(shape: modelIdentifier, location_name: "modelId"))
     ModelVersionDetail.add_member(:model_type, Shapes::ShapeRef.new(shape: ModelTypeEnum, location_name: "modelType"))
     ModelVersionDetail.add_member(:model_version_number, Shapes::ShapeRef.new(shape: floatVersionString, location_name: "modelVersionNumber"))
     ModelVersionDetail.add_member(:status, Shapes::ShapeRef.new(shape: string, location_name: "status"))
@@ -725,9 +705,8 @@ module Aws::FraudDetector
     PutEventTypeResult.struct_class = Types::PutEventTypeResult
 
     PutExternalModelRequest.add_member(:model_endpoint, Shapes::ShapeRef.new(shape: sageMakerEndpointIdentifier, required: true, location_name: "modelEndpoint"))
-    PutExternalModelRequest.add_member(:event_type_name, Shapes::ShapeRef.new(shape: identifier, location_name: "eventTypeName"))
     PutExternalModelRequest.add_member(:model_source, Shapes::ShapeRef.new(shape: ModelSource, required: true, location_name: "modelSource"))
-    PutExternalModelRequest.add_member(:role, Shapes::ShapeRef.new(shape: Role, required: true, location_name: "role"))
+    PutExternalModelRequest.add_member(:invoke_model_endpoint_role_arn, Shapes::ShapeRef.new(shape: string, required: true, location_name: "invokeModelEndpointRoleArn"))
     PutExternalModelRequest.add_member(:input_configuration, Shapes::ShapeRef.new(shape: ModelInputConfiguration, required: true, location_name: "inputConfiguration"))
     PutExternalModelRequest.add_member(:output_configuration, Shapes::ShapeRef.new(shape: ModelOutputConfiguration, required: true, location_name: "outputConfiguration"))
     PutExternalModelRequest.add_member(:model_endpoint_status, Shapes::ShapeRef.new(shape: ModelEndpointStatus, required: true, location_name: "modelEndpointStatus"))
@@ -757,10 +736,6 @@ module Aws::FraudDetector
 
     ResourceNotFoundException.add_member(:message, Shapes::ShapeRef.new(shape: string, required: true, location_name: "message"))
     ResourceNotFoundException.struct_class = Types::ResourceNotFoundException
-
-    Role.add_member(:arn, Shapes::ShapeRef.new(shape: string, required: true, location_name: "arn"))
-    Role.add_member(:name, Shapes::ShapeRef.new(shape: string, required: true, location_name: "name"))
-    Role.struct_class = Types::Role
 
     Rule.add_member(:detector_id, Shapes::ShapeRef.new(shape: identifier, required: true, location_name: "detectorId"))
     Rule.add_member(:rule_id, Shapes::ShapeRef.new(shape: identifier, required: true, location_name: "ruleId"))
@@ -843,27 +818,27 @@ module Aws::FraudDetector
 
     UpdateDetectorVersionStatusResult.struct_class = Types::UpdateDetectorVersionStatusResult
 
-    UpdateModelRequest.add_member(:model_id, Shapes::ShapeRef.new(shape: identifier, required: true, location_name: "modelId"))
+    UpdateModelRequest.add_member(:model_id, Shapes::ShapeRef.new(shape: modelIdentifier, required: true, location_name: "modelId"))
     UpdateModelRequest.add_member(:model_type, Shapes::ShapeRef.new(shape: ModelTypeEnum, required: true, location_name: "modelType"))
     UpdateModelRequest.add_member(:description, Shapes::ShapeRef.new(shape: description, location_name: "description"))
     UpdateModelRequest.struct_class = Types::UpdateModelRequest
 
     UpdateModelResult.struct_class = Types::UpdateModelResult
 
-    UpdateModelVersionRequest.add_member(:model_id, Shapes::ShapeRef.new(shape: identifier, required: true, location_name: "modelId"))
+    UpdateModelVersionRequest.add_member(:model_id, Shapes::ShapeRef.new(shape: modelIdentifier, required: true, location_name: "modelId"))
     UpdateModelVersionRequest.add_member(:model_type, Shapes::ShapeRef.new(shape: ModelTypeEnum, required: true, location_name: "modelType"))
     UpdateModelVersionRequest.add_member(:major_version_number, Shapes::ShapeRef.new(shape: wholeNumberVersionString, required: true, location_name: "majorVersionNumber"))
     UpdateModelVersionRequest.add_member(:external_events_detail, Shapes::ShapeRef.new(shape: ExternalEventsDetail, location_name: "externalEventsDetail"))
     UpdateModelVersionRequest.add_member(:tags, Shapes::ShapeRef.new(shape: tagList, location_name: "tags"))
     UpdateModelVersionRequest.struct_class = Types::UpdateModelVersionRequest
 
-    UpdateModelVersionResult.add_member(:model_id, Shapes::ShapeRef.new(shape: identifier, location_name: "modelId"))
+    UpdateModelVersionResult.add_member(:model_id, Shapes::ShapeRef.new(shape: modelIdentifier, location_name: "modelId"))
     UpdateModelVersionResult.add_member(:model_type, Shapes::ShapeRef.new(shape: ModelTypeEnum, location_name: "modelType"))
     UpdateModelVersionResult.add_member(:model_version_number, Shapes::ShapeRef.new(shape: floatVersionString, location_name: "modelVersionNumber"))
     UpdateModelVersionResult.add_member(:status, Shapes::ShapeRef.new(shape: string, location_name: "status"))
     UpdateModelVersionResult.struct_class = Types::UpdateModelVersionResult
 
-    UpdateModelVersionStatusRequest.add_member(:model_id, Shapes::ShapeRef.new(shape: identifier, required: true, location_name: "modelId"))
+    UpdateModelVersionStatusRequest.add_member(:model_id, Shapes::ShapeRef.new(shape: modelIdentifier, required: true, location_name: "modelId"))
     UpdateModelVersionStatusRequest.add_member(:model_type, Shapes::ShapeRef.new(shape: ModelTypeEnum, required: true, location_name: "modelType"))
     UpdateModelVersionStatusRequest.add_member(:model_version_number, Shapes::ShapeRef.new(shape: floatVersionString, required: true, location_name: "modelVersionNumber"))
     UpdateModelVersionStatusRequest.add_member(:status, Shapes::ShapeRef.new(shape: ModelVersionStatus, required: true, location_name: "status"))
@@ -1307,19 +1282,6 @@ module Aws::FraudDetector
             "next_token" => "next_token"
           }
         )
-      end)
-
-      api.add_operation(:get_prediction, Seahorse::Model::Operation.new.tap do |o|
-        o.name = "GetPrediction"
-        o.http_method = "POST"
-        o.http_request_uri = "/"
-        o.input = Shapes::ShapeRef.new(shape: GetPredictionRequest)
-        o.output = Shapes::ShapeRef.new(shape: GetPredictionResult)
-        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
-        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
-        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
-        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
       end)
 
       api.add_operation(:get_rules, Seahorse::Model::Operation.new.tap do |o|

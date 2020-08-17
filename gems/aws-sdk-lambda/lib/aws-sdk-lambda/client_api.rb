@@ -230,6 +230,8 @@ module Aws::Lambda
     Timeout = Shapes::IntegerShape.new(name: 'Timeout')
     Timestamp = Shapes::TimestampShape.new(name: 'Timestamp')
     TooManyRequestsException = Shapes::StructureShape.new(name: 'TooManyRequestsException')
+    Topic = Shapes::StringShape.new(name: 'Topic')
+    Topics = Shapes::ListShape.new(name: 'Topics')
     TracingConfig = Shapes::StructureShape.new(name: 'TracingConfig')
     TracingConfigResponse = Shapes::StructureShape.new(name: 'TracingConfigResponse')
     TracingMode = Shapes::StringShape.new(name: 'TracingMode')
@@ -329,6 +331,7 @@ module Aws::Lambda
     CreateEventSourceMappingRequest.add_member(:maximum_record_age_in_seconds, Shapes::ShapeRef.new(shape: MaximumRecordAgeInSeconds, location_name: "MaximumRecordAgeInSeconds"))
     CreateEventSourceMappingRequest.add_member(:bisect_batch_on_function_error, Shapes::ShapeRef.new(shape: BisectBatchOnFunctionError, location_name: "BisectBatchOnFunctionError"))
     CreateEventSourceMappingRequest.add_member(:maximum_retry_attempts, Shapes::ShapeRef.new(shape: MaximumRetryAttemptsEventSourceMapping, location_name: "MaximumRetryAttempts"))
+    CreateEventSourceMappingRequest.add_member(:topics, Shapes::ShapeRef.new(shape: Topics, location_name: "Topics"))
     CreateEventSourceMappingRequest.struct_class = Types::CreateEventSourceMappingRequest
 
     CreateFunctionRequest.add_member(:function_name, Shapes::ShapeRef.new(shape: FunctionName, required: true, location_name: "FunctionName"))
@@ -441,6 +444,7 @@ module Aws::Lambda
     EventSourceMappingConfiguration.add_member(:state, Shapes::ShapeRef.new(shape: String, location_name: "State"))
     EventSourceMappingConfiguration.add_member(:state_transition_reason, Shapes::ShapeRef.new(shape: String, location_name: "StateTransitionReason"))
     EventSourceMappingConfiguration.add_member(:destination_config, Shapes::ShapeRef.new(shape: DestinationConfig, location_name: "DestinationConfig"))
+    EventSourceMappingConfiguration.add_member(:topics, Shapes::ShapeRef.new(shape: Topics, location_name: "Topics"))
     EventSourceMappingConfiguration.add_member(:maximum_record_age_in_seconds, Shapes::ShapeRef.new(shape: MaximumRecordAgeInSeconds, location_name: "MaximumRecordAgeInSeconds"))
     EventSourceMappingConfiguration.add_member(:bisect_batch_on_function_error, Shapes::ShapeRef.new(shape: BisectBatchOnFunctionError, location_name: "BisectBatchOnFunctionError"))
     EventSourceMappingConfiguration.add_member(:maximum_retry_attempts, Shapes::ShapeRef.new(shape: MaximumRetryAttemptsEventSourceMapping, location_name: "MaximumRetryAttempts"))
@@ -906,6 +910,8 @@ module Aws::Lambda
     TooManyRequestsException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "message"))
     TooManyRequestsException.add_member(:reason, Shapes::ShapeRef.new(shape: ThrottleReason, location_name: "Reason"))
     TooManyRequestsException.struct_class = Types::TooManyRequestsException
+
+    Topics.member = Shapes::ShapeRef.new(shape: Topic)
 
     TracingConfig.add_member(:mode, Shapes::ShapeRef.new(shape: TracingMode, location_name: "Mode"))
     TracingConfig.struct_class = Types::TracingConfig

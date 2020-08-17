@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.12.0 (2020-07-28)
+------------------
+
+* Feature - This release updates distribution configurations to allow periods in AMI names.
+
 1.11.0 (2020-07-01)
 ------------------
 

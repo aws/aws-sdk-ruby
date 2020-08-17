@@ -326,8 +326,8 @@ module Aws::ServiceDiscovery
     # an HTTP namespace can be discovered using a `DiscoverInstances`
     # request but can't be discovered using DNS.
     #
-    # For the current limit on the number of namespaces that you can create
-    # using the same AWS account, see [AWS Cloud Map Limits][1] in the *AWS
+    # For the current quota on the number of namespaces that you can create
+    # using the same AWS account, see [AWS Cloud Map quotas][1] in the *AWS
     # Cloud Map Developer Guide*.
     #
     #
@@ -406,7 +406,7 @@ module Aws::ServiceDiscovery
     # inside a specified Amazon VPC. The namespace defines your service
     # naming scheme. For example, if you name your namespace `example.com`
     # and name your service `backend`, the resulting DNS name for the
-    # service will be `backend.example.com`. For the current limit on the
+    # service will be `backend.example.com`. For the current quota on the
     # number of namespaces that you can create using the same AWS account,
     # see [AWS Cloud Map Limits][1] in the *AWS Cloud Map Developer Guide*.
     #
@@ -417,7 +417,7 @@ module Aws::ServiceDiscovery
     # @option params [required, String] :name
     #   The name that you want to assign to this namespace. When you create a
     #   private DNS namespace, AWS Cloud Map automatically creates an Amazon
-    #   Route 53 private hosted zone that has the same name as the namespace.
+    #   Route 53 private hosted zone that has the same name as the namespace.
     #
     # @option params [String] :creator_request_id
     #   A unique string that identifies the request and that allows failed
@@ -493,7 +493,7 @@ module Aws::ServiceDiscovery
     # internet. The namespace defines your service naming scheme. For
     # example, if you name your namespace `example.com` and name your
     # service `backend`, the resulting DNS name for the service will be
-    # `backend.example.com`. For the current limit on the number of
+    # `backend.example.com`. For the current quota on the number of
     # namespaces that you can create using the same AWS account, see [AWS
     # Cloud Map Limits][1] in the *AWS Cloud Map Developer Guide*.
     #
@@ -573,17 +573,17 @@ module Aws::ServiceDiscovery
     # entities:
     #
     # * For public and private DNS namespaces, one of the following
-    #   combinations of DNS records in Amazon Route 53:
+    #   combinations of DNS records in Amazon Route 53:
     #
-    #   * A
+    #   * `A`
     #
-    #   * AAAA
+    #   * `AAAA`
     #
-    #   * A and AAAA
+    #   * `A` and `AAAA`
     #
-    #   * SRV
+    #   * `SRV`
     #
-    #   * CNAME
+    #   * `CNAME`
     #
     # * Optionally, a health check
     #
@@ -591,7 +591,7 @@ module Aws::ServiceDiscovery
     # request, and AWS Cloud Map uses the values in the configuration to
     # create the specified entities.
     #
-    # For the current limit on the number of instances that you can register
+    # For the current quota on the number of instances that you can register
     # using the same namespace and using the same service, see [AWS Cloud
     # Map Limits][2] in the *AWS Cloud Map Developer Guide*.
     #
@@ -603,17 +603,17 @@ module Aws::ServiceDiscovery
     # @option params [required, String] :name
     #   The name that you want to assign to the service.
     #
-    #   If you want AWS Cloud Map to create an SRV record when you register an
-    #   instance, and if you're using a system that requires a specific SRV
-    #   format, such as [HAProxy][1], specify the following for `Name`\:
+    #   If you want AWS Cloud Map to create an `SRV` record when you register
+    #   an instance, and if you're using a system that requires a specific
+    #   `SRV` format, such as [HAProxy][1], specify the following for `Name`\:
     #
     #   * Start the name with an underscore (\_), such as `_exampleservice`
     #
     #   * End the name with *.\_protocol*, such as `._tcp`
     #
-    #   When you register an instance, AWS Cloud Map creates an SRV record and
-    #   assigns a name to the record by concatenating the service name and the
-    #   namespace name, for example:
+    #   When you register an instance, AWS Cloud Map creates an `SRV` record
+    #   and assigns a name to the record by concatenating the service name and
+    #   the namespace name, for example:
     #
     #   `_exampleservice._tcp.example.com`
     #
@@ -637,15 +637,15 @@ module Aws::ServiceDiscovery
     #   A description for the service.
     #
     # @option params [Types::DnsConfig] :dns_config
-    #   A complex type that contains information about the Amazon Route 53
+    #   A complex type that contains information about the Amazon Route 53
     #   records that you want AWS Cloud Map to create when you register an
     #   instance.
     #
     # @option params [Types::HealthCheckConfig] :health_check_config
     #   *Public DNS and HTTP namespaces only.* A complex type that contains
-    #   settings for an optional Route 53 health check. If you specify
+    #   settings for an optional Route 53 health check. If you specify
     #   settings for a health check, AWS Cloud Map associates the health check
-    #   with all the Route 53 DNS records that you specify in `DnsConfig`.
+    #   with all the Route 53 DNS records that you specify in `DnsConfig`.
     #
     #   If you specify a health check configuration, you can specify either
     #   `HealthCheckCustomConfig` or `HealthCheckConfig` but not both.
@@ -861,7 +861,7 @@ module Aws::ServiceDiscovery
       req.send_request(options)
     end
 
-    # Deletes the Amazon Route 53 DNS records and health check, if any, that
+    # Deletes the Amazon Route 53 DNS records and health check, if any, that
     # AWS Cloud Map created for the specified instance.
     #
     # @option params [required, String] :service_id
@@ -1861,7 +1861,7 @@ module Aws::ServiceDiscovery
     # * **If you didn't specify a health check configuration**\: returns
     #   all the records
     #
-    # For the current limit on the number of instances that you can register
+    # For the current quota on the number of instances that you can register
     # using the same namespace and using the same service, see [AWS Cloud
     # Map Limits][2] in the *AWS Cloud Map Developer Guide*.
     #
@@ -1879,8 +1879,8 @@ module Aws::ServiceDiscovery
     #   following:
     #
     #   * If the service that is specified by `ServiceId` includes settings
-    #     for an SRV record, the value of `InstanceId` is automatically
-    #     included as part of the value for the SRV record. For more
+    #     for an `SRV` record, the value of `InstanceId` is automatically
+    #     included as part of the value for the `SRV` record. For more
     #     information, see [DnsRecord &gt; Type][1].
     #
     #   * You can use this value to update an existing instance.
@@ -1927,32 +1927,40 @@ module Aws::ServiceDiscovery
     #
     #   **AWS\_ALIAS\_DNS\_NAME**
     #
-    #   ****
-    #
-    #   If you want AWS Cloud Map to create an Amazon Route 53 alias record
+    #   If you want AWS Cloud Map to create an Amazon Route 53 alias record
     #   that routes traffic to an Elastic Load Balancing load balancer,
     #   specify the DNS name that is associated with the load balancer. For
     #   information about how to get the DNS name, see "DNSName" in the
-    #   topic [AliasTarget][1] in the *Route 53 API Reference*.
+    #   topic [AliasTarget][1] in the *Route 53 API Reference*.
     #
     #   Note the following:
     #
     #   * The configuration for the service that is specified by `ServiceId`
-    #     must include settings for an A record, an AAAA record, or both.
+    #     must include settings for an `A` record, an `AAAA` record, or both.
     #
     #   * In the service that is specified by `ServiceId`, the value of
     #     `RoutingPolicy` must be `WEIGHTED`.
     #
     #   * If the service that is specified by `ServiceId` includes
-    #     `HealthCheckConfig` settings, AWS Cloud Map will create the Route 53
+    #     `HealthCheckConfig` settings, AWS Cloud Map will create the Route 53
     #     health check, but it won't associate the health check with the
     #     alias record.
     #
     #   * Auto naming currently doesn't support creating alias records that
-    #     route traffic to AWS resources other than ELB load balancers.
+    #     route traffic to AWS resources other than Elastic Load Balancing
+    #     load balancers.
     #
     #   * If you specify a value for `AWS_ALIAS_DNS_NAME`, don't specify
     #     values for any of the `AWS_INSTANCE` attributes.
+    #
+    #   **AWS\_EC2\_INSTANCE\_ID**
+    #
+    #   *HTTP namespaces only.* The Amazon EC2 instance ID for the instance.
+    #   If the `AWS_EC2_INSTANCE_ID` attribute is specified, then the only
+    #   other attribute that can be specified is `AWS_INIT_HEALTH_STATUS`.
+    #   When the `AWS_EC2_INSTANCE_ID` attribute is specified, then the
+    #   `AWS_INSTANCE_IPV4` attribute will be filled out with the primary
+    #   private IPv4 address.
     #
     #   **AWS\_INIT\_HEALTH\_STATUS**
     #
@@ -1964,52 +1972,52 @@ module Aws::ServiceDiscovery
     #
     #   **AWS\_INSTANCE\_CNAME**
     #
-    #   If the service configuration includes a CNAME record, the domain name
-    #   that you want Route 53 to return in response to DNS queries, for
+    #   If the service configuration includes a `CNAME` record, the domain
+    #   name that you want Route 53 to return in response to DNS queries, for
     #   example, `example.com`.
     #
     #   This value is required if the service specified by `ServiceId`
-    #   includes settings for an CNAME record.
+    #   includes settings for an `CNAME` record.
     #
     #   **AWS\_INSTANCE\_IPV4**
     #
-    #   If the service configuration includes an A record, the IPv4 address
-    #   that you want Route 53 to return in response to DNS queries, for
+    #   If the service configuration includes an `A` record, the IPv4 address
+    #   that you want Route 53 to return in response to DNS queries, for
     #   example, `192.0.2.44`.
     #
     #   This value is required if the service specified by `ServiceId`
-    #   includes settings for an A record. If the service includes settings
-    #   for an SRV record, you must specify a value for `AWS_INSTANCE_IPV4`,
+    #   includes settings for an `A` record. If the service includes settings
+    #   for an `SRV` record, you must specify a value for `AWS_INSTANCE_IPV4`,
     #   `AWS_INSTANCE_IPV6`, or both.
     #
     #   **AWS\_INSTANCE\_IPV6**
     #
-    #   If the service configuration includes an AAAA record, the IPv6 address
-    #   that you want Route 53 to return in response to DNS queries, for
-    #   example, `2001:0db8:85a3:0000:0000:abcd:0001:2345`.
+    #   If the service configuration includes an `AAAA` record, the IPv6
+    #   address that you want Route 53 to return in response to DNS queries,
+    #   for example, `2001:0db8:85a3:0000:0000:abcd:0001:2345`.
     #
     #   This value is required if the service specified by `ServiceId`
-    #   includes settings for an AAAA record. If the service includes settings
-    #   for an SRV record, you must specify a value for `AWS_INSTANCE_IPV4`,
-    #   `AWS_INSTANCE_IPV6`, or both.
+    #   includes settings for an `AAAA` record. If the service includes
+    #   settings for an `SRV` record, you must specify a value for
+    #   `AWS_INSTANCE_IPV4`, `AWS_INSTANCE_IPV6`, or both.
     #
     #   **AWS\_INSTANCE\_PORT**
     #
-    #   If the service includes an SRV record, the value that you want Route
-    #   53 to return for the port.
+    #   If the service includes an `SRV` record, the value that you want
+    #   Route 53 to return for the port.
     #
     #   If the service includes `HealthCheckConfig`, the port on the endpoint
-    #   that you want Route 53 to send requests to.
+    #   that you want Route 53 to send requests to.
     #
-    #   This value is required if you specified settings for an SRV record or
-    #   a Route 53 health check when you created the service.
+    #   This value is required if you specified settings for an `SRV` record
+    #   or a Route 53 health check when you created the service.
     #
     #   **Custom attributes**
     #
     #   You can add up to 30 custom attributes. For each key-value pair, the
     #   maximum length of the attribute name is 255 characters, and the
-    #   maximum length of the attribute value is 1,024 characters. Total size
-    #   of all provided attributes (sum of all keys and values) must not
+    #   maximum length of the attribute value is 1,024 characters. The total
+    #   size of all provided attributes (sum of all keys and values) must not
     #   exceed 5,000 characters.
     #
     #
@@ -2171,7 +2179,7 @@ module Aws::ServiceDiscovery
     # You can use `UpdateInstanceCustomHealthStatus` to change the status
     # only for custom health checks, which you define using
     # `HealthCheckCustomConfig` when you create a service. You can't use it
-    # to change the status for Route 53 health checks, which you define
+    # to change the status for Route 53 health checks, which you define
     # using `HealthCheckConfig`.
     #
     # For more information, see [HealthCheckCustomConfig][1].
@@ -2333,7 +2341,7 @@ module Aws::ServiceDiscovery
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-servicediscovery'
-      context[:gem_version] = '1.26.0'
+      context[:gem_version] = '1.27.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

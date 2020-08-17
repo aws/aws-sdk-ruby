@@ -1,6 +1,14 @@
 Unreleased Changes
 ------------------
 
+3.104.3 (2020-07-23)
+------------------
+
+* Issue - Revert duplication of params.  Ensure code that relied on internal modification of parameters is not broken.
+
+3.104.2 (2020-07-22)
+------------------
+
 * Issue - Validate IO like objects support read,rewind and size unless streaming. Fixes #2364
 
 3.104.1 (2020-07-20)

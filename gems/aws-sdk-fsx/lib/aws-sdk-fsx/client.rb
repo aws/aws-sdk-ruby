@@ -373,8 +373,11 @@ module Aws::FSx
     #
     # * is *not* linked to an Amazon S3 data respository.
     #
-    # For more information, see
-    # [https://docs.aws.amazon.com/fsx/latest/LustreGuide/lustre-backups.html][1].
+    # For more information about backing up Amazon FSx for Lustre file
+    # systems, see [Working with FSx for Lustre backups][1].
+    #
+    # For more information about backing up Amazon FSx for Lustre file
+    # systems, see [Working with FSx for Windows backups][2].
     #
     # If a backup with the specified client request token exists, and the
     # parameters match, this operation returns the description of the
@@ -402,7 +405,8 @@ module Aws::FSx
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/fsx/latest/LustreGuide/lustre-backups.html
+    # [1]: https://docs.aws.amazon.com/fsx/latest/LustreGuide/using-backups-fsx.html
+    # [2]: https://docs.aws.amazon.com/fsx/latest/WindowsGuide/using-backups.html
     #
     # @option params [required, String] :file_system_id
     #   The ID of the file system to back up.
@@ -478,8 +482,8 @@ module Aws::FSx
     #     client_request_token: "ClientRequestToken",
     #     tags: [
     #       {
-    #         key: "TagKey",
-    #         value: "TagValue",
+    #         key: "TagKey", # required
+    #         value: "TagValue", # required
     #       },
     #     ],
     #   })
@@ -487,7 +491,7 @@ module Aws::FSx
     # @example Response structure
     #
     #   resp.backup.backup_id #=> String
-    #   resp.backup.lifecycle #=> String, one of "AVAILABLE", "CREATING", "DELETED", "FAILED"
+    #   resp.backup.lifecycle #=> String, one of "AVAILABLE", "CREATING", "TRANSFERRING", "DELETED", "FAILED"
     #   resp.backup.failure_details.message #=> String
     #   resp.backup.type #=> String, one of "AUTOMATIC", "USER_INITIATED"
     #   resp.backup.progress_percent #=> Integer
@@ -535,15 +539,19 @@ module Aws::FSx
     #   resp.backup.file_system.windows_configuration.automatic_backup_retention_days #=> Integer
     #   resp.backup.file_system.windows_configuration.copy_tags_to_backups #=> Boolean
     #   resp.backup.file_system.lustre_configuration.weekly_maintenance_start_time #=> String
+    #   resp.backup.file_system.lustre_configuration.data_repository_configuration.lifecycle #=> String, one of "CREATING", "AVAILABLE", "MISCONFIGURED", "UPDATING", "DELETING"
     #   resp.backup.file_system.lustre_configuration.data_repository_configuration.import_path #=> String
     #   resp.backup.file_system.lustre_configuration.data_repository_configuration.export_path #=> String
     #   resp.backup.file_system.lustre_configuration.data_repository_configuration.imported_file_chunk_size #=> Integer
+    #   resp.backup.file_system.lustre_configuration.data_repository_configuration.auto_import_policy #=> String, one of "NONE", "NEW", "NEW_CHANGED"
+    #   resp.backup.file_system.lustre_configuration.data_repository_configuration.failure_details.message #=> String
     #   resp.backup.file_system.lustre_configuration.deployment_type #=> String, one of "SCRATCH_1", "SCRATCH_2", "PERSISTENT_1"
     #   resp.backup.file_system.lustre_configuration.per_unit_storage_throughput #=> Integer
     #   resp.backup.file_system.lustre_configuration.mount_name #=> String
     #   resp.backup.file_system.lustre_configuration.daily_automatic_backup_start_time #=> String
     #   resp.backup.file_system.lustre_configuration.automatic_backup_retention_days #=> Integer
     #   resp.backup.file_system.lustre_configuration.copy_tags_to_backups #=> Boolean
+    #   resp.backup.file_system.lustre_configuration.drive_cache_type #=> String, one of "NONE", "READ"
     #   resp.backup.file_system.administrative_actions #=> Array
     #   resp.backup.file_system.administrative_actions[0].administrative_action_type #=> String, one of "FILE_SYSTEM_UPDATE", "STORAGE_OPTIMIZATION"
     #   resp.backup.file_system.administrative_actions[0].progress_percent #=> Integer
@@ -637,8 +645,8 @@ module Aws::FSx
     #     client_request_token: "ClientRequestToken",
     #     tags: [
     #       {
-    #         key: "TagKey",
-    #         value: "TagValue",
+    #         key: "TagKey", # required
+    #         value: "TagValue", # required
     #       },
     #     ],
     #   })
@@ -877,8 +885,8 @@ module Aws::FSx
     #     security_group_ids: ["SecurityGroupId"],
     #     tags: [
     #       {
-    #         key: "TagKey",
-    #         value: "TagValue",
+    #         key: "TagKey", # required
+    #         value: "TagValue", # required
     #       },
     #     ],
     #     kms_key_id: "KmsKeyId",
@@ -906,10 +914,12 @@ module Aws::FSx
     #       export_path: "ArchivePath",
     #       imported_file_chunk_size: 1,
     #       deployment_type: "SCRATCH_1", # accepts SCRATCH_1, SCRATCH_2, PERSISTENT_1
+    #       auto_import_policy: "NONE", # accepts NONE, NEW, NEW_CHANGED
     #       per_unit_storage_throughput: 1,
     #       daily_automatic_backup_start_time: "DailyTime",
     #       automatic_backup_retention_days: 1,
     #       copy_tags_to_backups: false,
+    #       drive_cache_type: "NONE", # accepts NONE, READ
     #     },
     #   })
     #
@@ -953,15 +963,19 @@ module Aws::FSx
     #   resp.file_system.windows_configuration.automatic_backup_retention_days #=> Integer
     #   resp.file_system.windows_configuration.copy_tags_to_backups #=> Boolean
     #   resp.file_system.lustre_configuration.weekly_maintenance_start_time #=> String
+    #   resp.file_system.lustre_configuration.data_repository_configuration.lifecycle #=> String, one of "CREATING", "AVAILABLE", "MISCONFIGURED", "UPDATING", "DELETING"
     #   resp.file_system.lustre_configuration.data_repository_configuration.import_path #=> String
     #   resp.file_system.lustre_configuration.data_repository_configuration.export_path #=> String
     #   resp.file_system.lustre_configuration.data_repository_configuration.imported_file_chunk_size #=> Integer
+    #   resp.file_system.lustre_configuration.data_repository_configuration.auto_import_policy #=> String, one of "NONE", "NEW", "NEW_CHANGED"
+    #   resp.file_system.lustre_configuration.data_repository_configuration.failure_details.message #=> String
     #   resp.file_system.lustre_configuration.deployment_type #=> String, one of "SCRATCH_1", "SCRATCH_2", "PERSISTENT_1"
     #   resp.file_system.lustre_configuration.per_unit_storage_throughput #=> Integer
     #   resp.file_system.lustre_configuration.mount_name #=> String
     #   resp.file_system.lustre_configuration.daily_automatic_backup_start_time #=> String
     #   resp.file_system.lustre_configuration.automatic_backup_retention_days #=> Integer
     #   resp.file_system.lustre_configuration.copy_tags_to_backups #=> Boolean
+    #   resp.file_system.lustre_configuration.drive_cache_type #=> String, one of "NONE", "READ"
     #   resp.file_system.administrative_actions #=> Array
     #   resp.file_system.administrative_actions[0].administrative_action_type #=> String, one of "FILE_SYSTEM_UPDATE", "STORAGE_OPTIMIZATION"
     #   resp.file_system.administrative_actions[0].progress_percent #=> Integer
@@ -1148,8 +1162,8 @@ module Aws::FSx
     #     security_group_ids: ["SecurityGroupId"],
     #     tags: [
     #       {
-    #         key: "TagKey",
-    #         value: "TagValue",
+    #         key: "TagKey", # required
+    #         value: "TagValue", # required
     #       },
     #     ],
     #     windows_configuration: {
@@ -1176,10 +1190,12 @@ module Aws::FSx
     #       export_path: "ArchivePath",
     #       imported_file_chunk_size: 1,
     #       deployment_type: "SCRATCH_1", # accepts SCRATCH_1, SCRATCH_2, PERSISTENT_1
+    #       auto_import_policy: "NONE", # accepts NONE, NEW, NEW_CHANGED
     #       per_unit_storage_throughput: 1,
     #       daily_automatic_backup_start_time: "DailyTime",
     #       automatic_backup_retention_days: 1,
     #       copy_tags_to_backups: false,
+    #       drive_cache_type: "NONE", # accepts NONE, READ
     #     },
     #     storage_type: "SSD", # accepts SSD, HDD
     #   })
@@ -1224,15 +1240,19 @@ module Aws::FSx
     #   resp.file_system.windows_configuration.automatic_backup_retention_days #=> Integer
     #   resp.file_system.windows_configuration.copy_tags_to_backups #=> Boolean
     #   resp.file_system.lustre_configuration.weekly_maintenance_start_time #=> String
+    #   resp.file_system.lustre_configuration.data_repository_configuration.lifecycle #=> String, one of "CREATING", "AVAILABLE", "MISCONFIGURED", "UPDATING", "DELETING"
     #   resp.file_system.lustre_configuration.data_repository_configuration.import_path #=> String
     #   resp.file_system.lustre_configuration.data_repository_configuration.export_path #=> String
     #   resp.file_system.lustre_configuration.data_repository_configuration.imported_file_chunk_size #=> Integer
+    #   resp.file_system.lustre_configuration.data_repository_configuration.auto_import_policy #=> String, one of "NONE", "NEW", "NEW_CHANGED"
+    #   resp.file_system.lustre_configuration.data_repository_configuration.failure_details.message #=> String
     #   resp.file_system.lustre_configuration.deployment_type #=> String, one of "SCRATCH_1", "SCRATCH_2", "PERSISTENT_1"
     #   resp.file_system.lustre_configuration.per_unit_storage_throughput #=> Integer
     #   resp.file_system.lustre_configuration.mount_name #=> String
     #   resp.file_system.lustre_configuration.daily_automatic_backup_start_time #=> String
     #   resp.file_system.lustre_configuration.automatic_backup_retention_days #=> Integer
     #   resp.file_system.lustre_configuration.copy_tags_to_backups #=> Boolean
+    #   resp.file_system.lustre_configuration.drive_cache_type #=> String, one of "NONE", "READ"
     #   resp.file_system.administrative_actions #=> Array
     #   resp.file_system.administrative_actions[0].administrative_action_type #=> String, one of "FILE_SYSTEM_UPDATE", "STORAGE_OPTIMIZATION"
     #   resp.file_system.administrative_actions[0].progress_percent #=> Integer
@@ -1300,7 +1320,7 @@ module Aws::FSx
     # @example Response structure
     #
     #   resp.backup_id #=> String
-    #   resp.lifecycle #=> String, one of "AVAILABLE", "CREATING", "DELETED", "FAILED"
+    #   resp.lifecycle #=> String, one of "AVAILABLE", "CREATING", "TRANSFERRING", "DELETED", "FAILED"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/fsx-2018-03-01/DeleteBackup AWS API Documentation
     #
@@ -1386,8 +1406,8 @@ module Aws::FSx
     #       skip_final_backup: false,
     #       final_backup_tags: [
     #         {
-    #           key: "TagKey",
-    #           value: "TagValue",
+    #           key: "TagKey", # required
+    #           value: "TagValue", # required
     #         },
     #       ],
     #     },
@@ -1395,8 +1415,8 @@ module Aws::FSx
     #       skip_final_backup: false,
     #       final_backup_tags: [
     #         {
-    #           key: "TagKey",
-    #           value: "TagValue",
+    #           key: "TagKey", # required
+    #           value: "TagValue", # required
     #         },
     #       ],
     #     },
@@ -1533,7 +1553,7 @@ module Aws::FSx
     #
     #   resp.backups #=> Array
     #   resp.backups[0].backup_id #=> String
-    #   resp.backups[0].lifecycle #=> String, one of "AVAILABLE", "CREATING", "DELETED", "FAILED"
+    #   resp.backups[0].lifecycle #=> String, one of "AVAILABLE", "CREATING", "TRANSFERRING", "DELETED", "FAILED"
     #   resp.backups[0].failure_details.message #=> String
     #   resp.backups[0].type #=> String, one of "AUTOMATIC", "USER_INITIATED"
     #   resp.backups[0].progress_percent #=> Integer
@@ -1581,15 +1601,19 @@ module Aws::FSx
     #   resp.backups[0].file_system.windows_configuration.automatic_backup_retention_days #=> Integer
     #   resp.backups[0].file_system.windows_configuration.copy_tags_to_backups #=> Boolean
     #   resp.backups[0].file_system.lustre_configuration.weekly_maintenance_start_time #=> String
+    #   resp.backups[0].file_system.lustre_configuration.data_repository_configuration.lifecycle #=> String, one of "CREATING", "AVAILABLE", "MISCONFIGURED", "UPDATING", "DELETING"
     #   resp.backups[0].file_system.lustre_configuration.data_repository_configuration.import_path #=> String
     #   resp.backups[0].file_system.lustre_configuration.data_repository_configuration.export_path #=> String
     #   resp.backups[0].file_system.lustre_configuration.data_repository_configuration.imported_file_chunk_size #=> Integer
+    #   resp.backups[0].file_system.lustre_configuration.data_repository_configuration.auto_import_policy #=> String, one of "NONE", "NEW", "NEW_CHANGED"
+    #   resp.backups[0].file_system.lustre_configuration.data_repository_configuration.failure_details.message #=> String
     #   resp.backups[0].file_system.lustre_configuration.deployment_type #=> String, one of "SCRATCH_1", "SCRATCH_2", "PERSISTENT_1"
     #   resp.backups[0].file_system.lustre_configuration.per_unit_storage_throughput #=> Integer
     #   resp.backups[0].file_system.lustre_configuration.mount_name #=> String
     #   resp.backups[0].file_system.lustre_configuration.daily_automatic_backup_start_time #=> String
     #   resp.backups[0].file_system.lustre_configuration.automatic_backup_retention_days #=> Integer
     #   resp.backups[0].file_system.lustre_configuration.copy_tags_to_backups #=> Boolean
+    #   resp.backups[0].file_system.lustre_configuration.drive_cache_type #=> String, one of "NONE", "READ"
     #   resp.backups[0].file_system.administrative_actions #=> Array
     #   resp.backups[0].file_system.administrative_actions[0].administrative_action_type #=> String, one of "FILE_SYSTEM_UPDATE", "STORAGE_OPTIMIZATION"
     #   resp.backups[0].file_system.administrative_actions[0].progress_percent #=> Integer
@@ -1844,15 +1868,19 @@ module Aws::FSx
     #   resp.file_systems[0].windows_configuration.automatic_backup_retention_days #=> Integer
     #   resp.file_systems[0].windows_configuration.copy_tags_to_backups #=> Boolean
     #   resp.file_systems[0].lustre_configuration.weekly_maintenance_start_time #=> String
+    #   resp.file_systems[0].lustre_configuration.data_repository_configuration.lifecycle #=> String, one of "CREATING", "AVAILABLE", "MISCONFIGURED", "UPDATING", "DELETING"
     #   resp.file_systems[0].lustre_configuration.data_repository_configuration.import_path #=> String
     #   resp.file_systems[0].lustre_configuration.data_repository_configuration.export_path #=> String
     #   resp.file_systems[0].lustre_configuration.data_repository_configuration.imported_file_chunk_size #=> Integer
+    #   resp.file_systems[0].lustre_configuration.data_repository_configuration.auto_import_policy #=> String, one of "NONE", "NEW", "NEW_CHANGED"
+    #   resp.file_systems[0].lustre_configuration.data_repository_configuration.failure_details.message #=> String
     #   resp.file_systems[0].lustre_configuration.deployment_type #=> String, one of "SCRATCH_1", "SCRATCH_2", "PERSISTENT_1"
     #   resp.file_systems[0].lustre_configuration.per_unit_storage_throughput #=> Integer
     #   resp.file_systems[0].lustre_configuration.mount_name #=> String
     #   resp.file_systems[0].lustre_configuration.daily_automatic_backup_start_time #=> String
     #   resp.file_systems[0].lustre_configuration.automatic_backup_retention_days #=> Integer
     #   resp.file_systems[0].lustre_configuration.copy_tags_to_backups #=> Boolean
+    #   resp.file_systems[0].lustre_configuration.drive_cache_type #=> String, one of "NONE", "READ"
     #   resp.file_systems[0].administrative_actions #=> Array
     #   resp.file_systems[0].administrative_actions[0].administrative_action_type #=> String, one of "FILE_SYSTEM_UPDATE", "STORAGE_OPTIMIZATION"
     #   resp.file_systems[0].administrative_actions[0].progress_percent #=> Integer
@@ -1991,8 +2019,8 @@ module Aws::FSx
     #     resource_arn: "ResourceARN", # required
     #     tags: [ # required
     #       {
-    #         key: "TagKey",
-    #         value: "TagValue",
+    #         key: "TagKey", # required
+    #         value: "TagValue", # required
     #       },
     #     ],
     #   })
@@ -2046,9 +2074,11 @@ module Aws::FSx
     end
 
     # Use this operation to update the configuration of an existing Amazon
-    # FSx file system. For an Amazon FSx for Lustre file system, you can
-    # update only the WeeklyMaintenanceStartTime. For an Amazon for Windows
-    # File Server file system, you can update the following properties:
+    # FSx file system. You can update multiple properties in a single
+    # request.
+    #
+    # For Amazon FSx for Windows File Server file systems, you can update
+    # the following properties:
     #
     # * AutomaticBackupRetentionDays
     #
@@ -2062,7 +2092,16 @@ module Aws::FSx
     #
     # * WeeklyMaintenanceStartTime
     #
-    # You can update multiple properties in a single request.
+    # For Amazon FSx for Lustre file systems, you can update the following
+    # properties:
+    #
+    # * AutoImportPolicy
+    #
+    # * AutomaticBackupRetentionDays
+    #
+    # * DailyAutomaticBackupStartTime
+    #
+    # * WeeklyMaintenanceStartTime
     #
     # @option params [required, String] :file_system_id
     #   Identifies the file system that you are updating.
@@ -2167,6 +2206,7 @@ module Aws::FSx
     #       weekly_maintenance_start_time: "WeeklyTime",
     #       daily_automatic_backup_start_time: "DailyTime",
     #       automatic_backup_retention_days: 1,
+    #       auto_import_policy: "NONE", # accepts NONE, NEW, NEW_CHANGED
     #     },
     #   })
     #
@@ -2210,15 +2250,19 @@ module Aws::FSx
     #   resp.file_system.windows_configuration.automatic_backup_retention_days #=> Integer
     #   resp.file_system.windows_configuration.copy_tags_to_backups #=> Boolean
     #   resp.file_system.lustre_configuration.weekly_maintenance_start_time #=> String
+    #   resp.file_system.lustre_configuration.data_repository_configuration.lifecycle #=> String, one of "CREATING", "AVAILABLE", "MISCONFIGURED", "UPDATING", "DELETING"
     #   resp.file_system.lustre_configuration.data_repository_configuration.import_path #=> String
     #   resp.file_system.lustre_configuration.data_repository_configuration.export_path #=> String
     #   resp.file_system.lustre_configuration.data_repository_configuration.imported_file_chunk_size #=> Integer
+    #   resp.file_system.lustre_configuration.data_repository_configuration.auto_import_policy #=> String, one of "NONE", "NEW", "NEW_CHANGED"
+    #   resp.file_system.lustre_configuration.data_repository_configuration.failure_details.message #=> String
     #   resp.file_system.lustre_configuration.deployment_type #=> String, one of "SCRATCH_1", "SCRATCH_2", "PERSISTENT_1"
     #   resp.file_system.lustre_configuration.per_unit_storage_throughput #=> Integer
     #   resp.file_system.lustre_configuration.mount_name #=> String
     #   resp.file_system.lustre_configuration.daily_automatic_backup_start_time #=> String
     #   resp.file_system.lustre_configuration.automatic_backup_retention_days #=> Integer
     #   resp.file_system.lustre_configuration.copy_tags_to_backups #=> Boolean
+    #   resp.file_system.lustre_configuration.drive_cache_type #=> String, one of "NONE", "READ"
     #   resp.file_system.administrative_actions #=> Array
     #   resp.file_system.administrative_actions[0].administrative_action_type #=> String, one of "FILE_SYSTEM_UPDATE", "STORAGE_OPTIMIZATION"
     #   resp.file_system.administrative_actions[0].progress_percent #=> Integer
@@ -2249,7 +2293,7 @@ module Aws::FSx
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-fsx'
-      context[:gem_version] = '1.23.0'
+      context[:gem_version] = '1.27.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

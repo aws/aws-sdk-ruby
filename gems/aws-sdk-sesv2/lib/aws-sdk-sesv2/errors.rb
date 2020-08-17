@@ -31,6 +31,7 @@ module Aws::SESV2
   # * {AlreadyExistsException}
   # * {BadRequestException}
   # * {ConcurrentModificationException}
+  # * {ConflictException}
   # * {InvalidNextTokenException}
   # * {LimitExceededException}
   # * {MailFromDomainNotVerifiedException}
@@ -80,6 +81,16 @@ module Aws::SESV2
       # @param [Seahorse::Client::RequestContext] context
       # @param [String] message
       # @param [Aws::SESV2::Types::ConcurrentModificationException] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+    end
+
+    class ConflictException < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::SESV2::Types::ConflictException] data
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end

@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.38.0 (2020-07-30)
+------------------
+
+* Feature - GuardDuty can now provide detailed cost metrics broken down by account, data source, and S3 resources, based on the past 30 days of usage.  This new feature also supports viewing cost metrics for all member accounts as a GuardDuty master.
+
+1.37.0 (2020-07-29)
+------------------
+
+* Feature - GuardDuty now supports S3 Data Events as a configurable data source type. This feature expands GuardDuty's monitoring scope to include S3 data plane operations, such as GetObject and PutObject. This data source is optional and can be enabled or disabled at anytime. Accounts already using GuardDuty must first enable the new feature to use it; new accounts will be enabled by default. GuardDuty masters can configure this data source for individual member accounts and GuardDuty masters associated through AWS Organizations can automatically enable the data source in member accounts.
+
 1.36.0 (2020-06-23)
 ------------------
 

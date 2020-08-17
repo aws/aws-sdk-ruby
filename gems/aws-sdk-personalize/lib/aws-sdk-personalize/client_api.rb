@@ -22,12 +22,14 @@ module Aws::Personalize
     AutoMLResult = Shapes::StructureShape.new(name: 'AutoMLResult')
     AvroSchema = Shapes::StringShape.new(name: 'AvroSchema')
     BatchInferenceJob = Shapes::StructureShape.new(name: 'BatchInferenceJob')
+    BatchInferenceJobConfig = Shapes::StructureShape.new(name: 'BatchInferenceJobConfig')
     BatchInferenceJobInput = Shapes::StructureShape.new(name: 'BatchInferenceJobInput')
     BatchInferenceJobOutput = Shapes::StructureShape.new(name: 'BatchInferenceJobOutput')
     BatchInferenceJobSummary = Shapes::StructureShape.new(name: 'BatchInferenceJobSummary')
     BatchInferenceJobs = Shapes::ListShape.new(name: 'BatchInferenceJobs')
     Boolean = Shapes::BooleanShape.new(name: 'Boolean')
     Campaign = Shapes::StructureShape.new(name: 'Campaign')
+    CampaignConfig = Shapes::StructureShape.new(name: 'CampaignConfig')
     CampaignSummary = Shapes::StructureShape.new(name: 'CampaignSummary')
     CampaignUpdateSummary = Shapes::StructureShape.new(name: 'CampaignUpdateSummary')
     Campaigns = Shapes::ListShape.new(name: 'Campaigns')
@@ -244,11 +246,15 @@ module Aws::Personalize
     BatchInferenceJob.add_member(:num_results, Shapes::ShapeRef.new(shape: NumBatchResults, location_name: "numResults"))
     BatchInferenceJob.add_member(:job_input, Shapes::ShapeRef.new(shape: BatchInferenceJobInput, location_name: "jobInput"))
     BatchInferenceJob.add_member(:job_output, Shapes::ShapeRef.new(shape: BatchInferenceJobOutput, location_name: "jobOutput"))
+    BatchInferenceJob.add_member(:batch_inference_job_config, Shapes::ShapeRef.new(shape: BatchInferenceJobConfig, location_name: "batchInferenceJobConfig"))
     BatchInferenceJob.add_member(:role_arn, Shapes::ShapeRef.new(shape: RoleArn, location_name: "roleArn"))
     BatchInferenceJob.add_member(:status, Shapes::ShapeRef.new(shape: Status, location_name: "status"))
     BatchInferenceJob.add_member(:creation_date_time, Shapes::ShapeRef.new(shape: Date, location_name: "creationDateTime"))
     BatchInferenceJob.add_member(:last_updated_date_time, Shapes::ShapeRef.new(shape: Date, location_name: "lastUpdatedDateTime"))
     BatchInferenceJob.struct_class = Types::BatchInferenceJob
+
+    BatchInferenceJobConfig.add_member(:item_exploration_config, Shapes::ShapeRef.new(shape: HyperParameters, location_name: "itemExplorationConfig"))
+    BatchInferenceJobConfig.struct_class = Types::BatchInferenceJobConfig
 
     BatchInferenceJobInput.add_member(:s3_data_source, Shapes::ShapeRef.new(shape: S3DataConfig, required: true, location_name: "s3DataSource"))
     BatchInferenceJobInput.struct_class = Types::BatchInferenceJobInput
@@ -271,12 +277,16 @@ module Aws::Personalize
     Campaign.add_member(:campaign_arn, Shapes::ShapeRef.new(shape: Arn, location_name: "campaignArn"))
     Campaign.add_member(:solution_version_arn, Shapes::ShapeRef.new(shape: Arn, location_name: "solutionVersionArn"))
     Campaign.add_member(:min_provisioned_tps, Shapes::ShapeRef.new(shape: TransactionsPerSecond, location_name: "minProvisionedTPS"))
+    Campaign.add_member(:campaign_config, Shapes::ShapeRef.new(shape: CampaignConfig, location_name: "campaignConfig"))
     Campaign.add_member(:status, Shapes::ShapeRef.new(shape: Status, location_name: "status"))
     Campaign.add_member(:failure_reason, Shapes::ShapeRef.new(shape: FailureReason, location_name: "failureReason"))
     Campaign.add_member(:creation_date_time, Shapes::ShapeRef.new(shape: Date, location_name: "creationDateTime"))
     Campaign.add_member(:last_updated_date_time, Shapes::ShapeRef.new(shape: Date, location_name: "lastUpdatedDateTime"))
     Campaign.add_member(:latest_campaign_update, Shapes::ShapeRef.new(shape: CampaignUpdateSummary, location_name: "latestCampaignUpdate"))
     Campaign.struct_class = Types::Campaign
+
+    CampaignConfig.add_member(:item_exploration_config, Shapes::ShapeRef.new(shape: HyperParameters, location_name: "itemExplorationConfig"))
+    CampaignConfig.struct_class = Types::CampaignConfig
 
     CampaignSummary.add_member(:name, Shapes::ShapeRef.new(shape: Name, location_name: "name"))
     CampaignSummary.add_member(:campaign_arn, Shapes::ShapeRef.new(shape: Arn, location_name: "campaignArn"))
@@ -288,6 +298,7 @@ module Aws::Personalize
 
     CampaignUpdateSummary.add_member(:solution_version_arn, Shapes::ShapeRef.new(shape: Arn, location_name: "solutionVersionArn"))
     CampaignUpdateSummary.add_member(:min_provisioned_tps, Shapes::ShapeRef.new(shape: TransactionsPerSecond, location_name: "minProvisionedTPS"))
+    CampaignUpdateSummary.add_member(:campaign_config, Shapes::ShapeRef.new(shape: CampaignConfig, location_name: "campaignConfig"))
     CampaignUpdateSummary.add_member(:status, Shapes::ShapeRef.new(shape: Status, location_name: "status"))
     CampaignUpdateSummary.add_member(:failure_reason, Shapes::ShapeRef.new(shape: FailureReason, location_name: "failureReason"))
     CampaignUpdateSummary.add_member(:creation_date_time, Shapes::ShapeRef.new(shape: Date, location_name: "creationDateTime"))
@@ -318,6 +329,7 @@ module Aws::Personalize
     CreateBatchInferenceJobRequest.add_member(:job_input, Shapes::ShapeRef.new(shape: BatchInferenceJobInput, required: true, location_name: "jobInput"))
     CreateBatchInferenceJobRequest.add_member(:job_output, Shapes::ShapeRef.new(shape: BatchInferenceJobOutput, required: true, location_name: "jobOutput"))
     CreateBatchInferenceJobRequest.add_member(:role_arn, Shapes::ShapeRef.new(shape: RoleArn, required: true, location_name: "roleArn"))
+    CreateBatchInferenceJobRequest.add_member(:batch_inference_job_config, Shapes::ShapeRef.new(shape: BatchInferenceJobConfig, location_name: "batchInferenceJobConfig"))
     CreateBatchInferenceJobRequest.struct_class = Types::CreateBatchInferenceJobRequest
 
     CreateBatchInferenceJobResponse.add_member(:batch_inference_job_arn, Shapes::ShapeRef.new(shape: Arn, location_name: "batchInferenceJobArn"))
@@ -326,6 +338,7 @@ module Aws::Personalize
     CreateCampaignRequest.add_member(:name, Shapes::ShapeRef.new(shape: Name, required: true, location_name: "name"))
     CreateCampaignRequest.add_member(:solution_version_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "solutionVersionArn"))
     CreateCampaignRequest.add_member(:min_provisioned_tps, Shapes::ShapeRef.new(shape: TransactionsPerSecond, required: true, location_name: "minProvisionedTPS"))
+    CreateCampaignRequest.add_member(:campaign_config, Shapes::ShapeRef.new(shape: CampaignConfig, location_name: "campaignConfig"))
     CreateCampaignRequest.struct_class = Types::CreateCampaignRequest
 
     CreateCampaignResponse.add_member(:campaign_arn, Shapes::ShapeRef.new(shape: Arn, location_name: "campaignArn"))
@@ -903,6 +916,7 @@ module Aws::Personalize
     UpdateCampaignRequest.add_member(:campaign_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "campaignArn"))
     UpdateCampaignRequest.add_member(:solution_version_arn, Shapes::ShapeRef.new(shape: Arn, location_name: "solutionVersionArn"))
     UpdateCampaignRequest.add_member(:min_provisioned_tps, Shapes::ShapeRef.new(shape: TransactionsPerSecond, location_name: "minProvisionedTPS"))
+    UpdateCampaignRequest.add_member(:campaign_config, Shapes::ShapeRef.new(shape: CampaignConfig, location_name: "campaignConfig"))
     UpdateCampaignRequest.struct_class = Types::UpdateCampaignRequest
 
     UpdateCampaignResponse.add_member(:campaign_arn, Shapes::ShapeRef.new(shape: Arn, location_name: "campaignArn"))
@@ -1047,6 +1061,7 @@ module Aws::Personalize
         o.output = Shapes::ShapeRef.new(shape: CreateSolutionVersionResponse)
         o.errors << Shapes::ShapeRef.new(shape: InvalidInputException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceInUseException)
       end)
 
@@ -1102,6 +1117,7 @@ module Aws::Personalize
         o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
         o.errors << Shapes::ShapeRef.new(shape: InvalidInputException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceInUseException)
       end)
 
       api.add_operation(:delete_schema, Seahorse::Model::Operation.new.tap do |o|

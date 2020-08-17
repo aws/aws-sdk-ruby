@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.46.0 (2020-07-31)
+------------------
+
+* Feature - Add support for gateway VM deprecation dates
+
 1.45.0 (2020-07-07)
 ------------------
 

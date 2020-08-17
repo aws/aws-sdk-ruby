@@ -777,6 +777,11 @@ module Aws::ResourceGroupsTaggingAPI
     #   the service that the resource belongs to as well as permissions for
     #   adding tags. For more information, see [this list][1].
     #
+    # Do not store personally identifiable information (PII) or other
+    # confidential or sensitive information in tags. We use tags to provide
+    # you with billing and administration services. Tags are not intended to
+    # be used for private or sensitive data.
+    #
     #
     #
     # [1]: http://docs.aws.amazon.com/resourcegroupstagging/latest/APIReference/Welcome.html
@@ -893,7 +898,7 @@ module Aws::ResourceGroupsTaggingAPI
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-resourcegroupstaggingapi'
-      context[:gem_version] = '1.28.0'
+      context[:gem_version] = '1.30.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

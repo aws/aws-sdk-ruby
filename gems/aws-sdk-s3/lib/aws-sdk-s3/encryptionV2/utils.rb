@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'openssl'
 
 module Aws
@@ -6,24 +8,9 @@ module Aws
       # @api private
       module Utils
 
-        UNSAFE_MSG = "unsafe encryption, data is longer than key length"
-
         class << self
 
-          def encrypt(key, data)
-            case key
-            when OpenSSL::PKey::RSA # asymmetric encryption
-              warn(UNSAFE_MSG) if key.public_key.n.num_bits < cipher_size(data)
-              key.public_encrypt(data)
-            when String # symmetric encryption
-              warn(UNSAFE_MSG) if cipher_size(key) < cipher_size(data)
-              cipher = aes_encryption_cipher(:ECB, key)
-              cipher.update(data) + cipher.final
-            end
-          end
-
           def encrypt_aes_gcm(key, data, auth_data)
-            warn(UNSAFE_MSG) if cipher_size(key) < cipher_size(data)
             cipher = aes_encryption_cipher(:GCM, key)
             cipher.iv = (iv = cipher.random_iv)
             cipher.auth_data = auth_data

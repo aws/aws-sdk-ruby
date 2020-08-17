@@ -339,7 +339,30 @@ module Aws::AppSync
     #     are cached.
     #
     # @option params [required, String] :type
-    #   The cache instance type.
+    #   The cache instance type. Valid values are
+    #
+    #   * `SMALL`
+    #
+    #   * `MEDIUM`
+    #
+    #   * `LARGE`
+    #
+    #   * `XLARGE`
+    #
+    #   * `LARGE_2X`
+    #
+    #   * `LARGE_4X`
+    #
+    #   * `LARGE_8X` (not available in all regions)
+    #
+    #   * `LARGE_12X`
+    #
+    #   Historically, instance types were identified by an EC2-style value. As
+    #   of July 2020, this is deprecated, and the generic identifiers above
+    #   should be used.
+    #
+    #   The following legacy instance types are avaible, but their use is
+    #   discouraged:
     #
     #   * **T2\_SMALL**\: A t2.small instance type.
     #
@@ -569,7 +592,7 @@ module Aws::AppSync
     # @option params [required, String] :data_source_name
     #   The `Function` `DataSource` name.
     #
-    # @option params [required, String] :request_mapping_template
+    # @option params [String] :request_mapping_template
     #   The `Function` request mapping template. Functions support only the
     #   2018-05-29 version of the request mapping template.
     #
@@ -591,7 +614,7 @@ module Aws::AppSync
     #     name: "ResourceName", # required
     #     description: "String",
     #     data_source_name: "ResourceName", # required
-    #     request_mapping_template: "MappingTemplate", # required
+    #     request_mapping_template: "MappingTemplate",
     #     response_mapping_template: "MappingTemplate",
     #     function_version: "String", # required
     #   })
@@ -751,12 +774,16 @@ module Aws::AppSync
     # @option params [String] :data_source_name
     #   The name of the data source for which the resolver is being created.
     #
-    # @option params [required, String] :request_mapping_template
+    # @option params [String] :request_mapping_template
     #   The mapping template to be used for requests.
     #
     #   A resolver uses a request mapping template to convert a GraphQL
     #   expression into a format that a data source can understand. Mapping
     #   templates are written in Apache Velocity Template Language (VTL).
+    #
+    #   VTL request mapping templates are optional when using a Lambda data
+    #   source. For all other data sources, VTL request and response mapping
+    #   templates are required.
     #
     # @option params [String] :response_mapping_template
     #   The mapping template to be used for responses from the data source.
@@ -793,7 +820,7 @@ module Aws::AppSync
     #     type_name: "ResourceName", # required
     #     field_name: "ResourceName", # required
     #     data_source_name: "ResourceName",
-    #     request_mapping_template: "MappingTemplate", # required
+    #     request_mapping_template: "MappingTemplate",
     #     response_mapping_template: "MappingTemplate",
     #     kind: "UNIT", # accepts UNIT, PIPELINE
     #     pipeline_config: {
@@ -1959,7 +1986,30 @@ module Aws::AppSync
     #     are cached.
     #
     # @option params [required, String] :type
-    #   The cache instance type.
+    #   The cache instance type. Valid values are
+    #
+    #   * `SMALL`
+    #
+    #   * `MEDIUM`
+    #
+    #   * `LARGE`
+    #
+    #   * `XLARGE`
+    #
+    #   * `LARGE_2X`
+    #
+    #   * `LARGE_4X`
+    #
+    #   * `LARGE_8X` (not available in all regions)
+    #
+    #   * `LARGE_12X`
+    #
+    #   Historically, instance types were identified by an EC2-style value. As
+    #   of July 2020, this is deprecated, and the generic identifiers above
+    #   should be used.
+    #
+    #   The following legacy instance types are avaible, but their use is
+    #   discouraged:
     #
     #   * **T2\_SMALL**\: A t2.small instance type.
     #
@@ -2187,7 +2237,7 @@ module Aws::AppSync
     # @option params [required, String] :data_source_name
     #   The `Function` `DataSource` name.
     #
-    # @option params [required, String] :request_mapping_template
+    # @option params [String] :request_mapping_template
     #   The `Function` request mapping template. Functions support only the
     #   2018-05-29 version of the request mapping template.
     #
@@ -2210,7 +2260,7 @@ module Aws::AppSync
     #     description: "String",
     #     function_id: "ResourceName", # required
     #     data_source_name: "ResourceName", # required
-    #     request_mapping_template: "MappingTemplate", # required
+    #     request_mapping_template: "MappingTemplate",
     #     response_mapping_template: "MappingTemplate",
     #     function_version: "String", # required
     #   })
@@ -2365,8 +2415,16 @@ module Aws::AppSync
     # @option params [String] :data_source_name
     #   The new data source name.
     #
-    # @option params [required, String] :request_mapping_template
+    # @option params [String] :request_mapping_template
     #   The new request mapping template.
+    #
+    #   A resolver uses a request mapping template to convert a GraphQL
+    #   expression into a format that a data source can understand. Mapping
+    #   templates are written in Apache Velocity Template Language (VTL).
+    #
+    #   VTL request mapping templates are optional when using a Lambda data
+    #   source. For all other data sources, VTL request and response mapping
+    #   templates are required.
     #
     # @option params [String] :response_mapping_template
     #   The new response mapping template.
@@ -2403,7 +2461,7 @@ module Aws::AppSync
     #     type_name: "ResourceName", # required
     #     field_name: "ResourceName", # required
     #     data_source_name: "ResourceName",
-    #     request_mapping_template: "MappingTemplate", # required
+    #     request_mapping_template: "MappingTemplate",
     #     response_mapping_template: "MappingTemplate",
     #     kind: "UNIT", # accepts UNIT, PIPELINE
     #     pipeline_config: {
@@ -2506,7 +2564,7 @@ module Aws::AppSync
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-appsync'
-      context[:gem_version] = '1.30.0'
+      context[:gem_version] = '1.32.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

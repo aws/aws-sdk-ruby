@@ -66,6 +66,9 @@
   "Batch": {
     "models": "batch/2016-08-10"
   },
+  "Braket": {
+    "models": "braket/2019-09-01"
+  },
   "Budgets": {
     "models": "budgets/2016-10-20"
   },

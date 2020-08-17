@@ -611,6 +611,7 @@ module Aws::WAFV2
     LoggingConfiguration.add_member(:resource_arn, Shapes::ShapeRef.new(shape: ResourceArn, required: true, location_name: "ResourceArn"))
     LoggingConfiguration.add_member(:log_destination_configs, Shapes::ShapeRef.new(shape: LogDestinationConfigs, required: true, location_name: "LogDestinationConfigs"))
     LoggingConfiguration.add_member(:redacted_fields, Shapes::ShapeRef.new(shape: RedactedFields, location_name: "RedactedFields"))
+    LoggingConfiguration.add_member(:managed_by_firewall_manager, Shapes::ShapeRef.new(shape: Boolean, location_name: "ManagedByFirewallManager"))
     LoggingConfiguration.struct_class = Types::LoggingConfiguration
 
     LoggingConfigurations.member = Shapes::ShapeRef.new(shape: LoggingConfiguration)

@@ -942,6 +942,9 @@ module Aws::Kendra
     #             acl_configuration: {
     #               allowed_groups_column_name: "ColumnName", # required
     #             },
+    #             sql_configuration: {
+    #               query_identifiers_enclosing_option: "DOUBLE_QUOTES", # accepts DOUBLE_QUOTES, NONE
+    #             },
     #           },
     #           salesforce_configuration: {
     #             server_url: "Url", # required
@@ -1387,6 +1390,9 @@ module Aws::Kendra
     #           acl_configuration: {
     #             allowed_groups_column_name: "ColumnName", # required
     #           },
+    #           sql_configuration: {
+    #             query_identifiers_enclosing_option: "DOUBLE_QUOTES", # accepts DOUBLE_QUOTES, NONE
+    #           },
     #         },
     #         salesforce_configuration: {
     #           server_url: "Url", # required
@@ -1824,6 +1830,9 @@ module Aws::Kendra
     #         acl_configuration: {
     #           allowed_groups_column_name: "ColumnName", # required
     #         },
+    #         sql_configuration: {
+    #           query_identifiers_enclosing_option: "DOUBLE_QUOTES", # accepts DOUBLE_QUOTES, NONE
+    #         },
     #       }
     #
     # @!attribute [rw] database_engine_type
@@ -1848,6 +1857,11 @@ module Aws::Kendra
     #   user context filtering.
     #   @return [Types::AclConfiguration]
     #
+    # @!attribute [rw] sql_configuration
+    #   Provides information about how Amazon Kendra uses quote marks around
+    #   SQL identifiers when querying a database data source.
+    #   @return [Types::SqlConfiguration]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/kendra-2019-02-03/DatabaseConfiguration AWS API Documentation
     #
     class DatabaseConfiguration < Struct.new(
@@ -1855,7 +1869,8 @@ module Aws::Kendra
       :connection_configuration,
       :vpc_configuration,
       :column_configuration,
-      :acl_configuration)
+      :acl_configuration,
+      :sql_configuration)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2360,7 +2375,7 @@ module Aws::Kendra
     #   @return [Integer]
     #
     # @!attribute [rw] date_value
-    #   A date value expressed as seconds from the Unix epoch.
+    #   A date expressed as an ISO 8601 string.
     #   @return [Time]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/kendra-2019-02-03/DocumentAttributeValue AWS API Documentation
@@ -2416,6 +2431,7 @@ module Aws::Kendra
     #           facetable: false,
     #           searchable: false,
     #           displayable: false,
+    #           sortable: false,
     #         },
     #       }
     #
@@ -3180,6 +3196,10 @@ module Aws::Kendra
     #         query_result_type_filter: "DOCUMENT", # accepts DOCUMENT, QUESTION_ANSWER, ANSWER
     #         page_number: 1,
     #         page_size: 1,
+    #         sorting_configuration: {
+    #           document_attribute_key: "DocumentAttributeKey", # required
+    #           sort_order: "DESC", # required, accepts DESC, ASC
+    #         },
     #       }
     #
     # @!attribute [rw] index_id
@@ -3232,6 +3252,17 @@ module Aws::Kendra
     #   returned.
     #   @return [Integer]
     #
+    # @!attribute [rw] sorting_configuration
+    #   Provides information that determines how the results of the query
+    #   are sorted. You can set the field that Amazon Kendra should sort the
+    #   results on, and specify whether the results should be sorted in
+    #   ascending or descending order. In the case of ties in sorting the
+    #   results, the results are sorted by relevance.
+    #
+    #   If you don't provide sorting configuration, the results are sorted
+    #   by the relevance that Amazon Kendra determines for the result.
+    #   @return [Types::SortingConfiguration]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/kendra-2019-02-03/QueryRequest AWS API Documentation
     #
     class QueryRequest < Struct.new(
@@ -3242,7 +3273,8 @@ module Aws::Kendra
       :requested_document_attributes,
       :query_result_type_filter,
       :page_number,
-      :page_size)
+      :page_size,
+      :sorting_configuration)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4056,6 +4088,7 @@ module Aws::Kendra
     #         facetable: false,
     #         searchable: false,
     #         displayable: false,
+    #         sortable: false,
     #       }
     #
     # @!attribute [rw] facetable
@@ -4077,12 +4110,20 @@ module Aws::Kendra
     #   default is `true`.
     #   @return [Boolean]
     #
+    # @!attribute [rw] sortable
+    #   Determines whether the field can be used to sort the results of a
+    #   query. If you specify sorting on a field that does not have
+    #   `Sortable` set to `true`, Amazon Kendra returns an exception. The
+    #   default is `false`.
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/kendra-2019-02-03/Search AWS API Documentation
     #
     class Search < Struct.new(
       :facetable,
       :searchable,
-      :displayable)
+      :displayable,
+      :sortable)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4407,7 +4448,7 @@ module Aws::Kendra
     #   @return [Array<String>]
     #
     # @!attribute [rw] exclusion_patterns
-    #   A list of regulary expression patterns. Documents that match the
+    #   A list of regular expression patterns. Documents that match the
     #   patterns are excluded from the index. Documents that don't match
     #   the patterns are included in the index. If a document matches both
     #   an exclusion pattern and an inclusion pattern, the document is not
@@ -4450,6 +4491,86 @@ module Aws::Kendra
       :vpc_configuration,
       :field_mappings,
       :document_title_field_name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Specifies the document attribute to use to sort the response to a
+    # Amazon Kendra query. You can specify a single attribute for sorting.
+    # The attribute must have the `Sortable` flag set to `true`, otherwise
+    # Amazon Kendra returns an exception.
+    #
+    # @note When making an API call, you may pass SortingConfiguration
+    #   data as a hash:
+    #
+    #       {
+    #         document_attribute_key: "DocumentAttributeKey", # required
+    #         sort_order: "DESC", # required, accepts DESC, ASC
+    #       }
+    #
+    # @!attribute [rw] document_attribute_key
+    #   The name of the document attribute used to sort the response. You
+    #   can use any field that has the `Sortable` flag set to true.
+    #
+    #   You can also sort by any of the following built-in attributes:
+    #
+    #   * \_category
+    #
+    #   * \_created\_at
+    #
+    #   * \_last\_updated\_at
+    #
+    #   * \_version
+    #
+    #   * \_view\_count
+    #   @return [String]
+    #
+    # @!attribute [rw] sort_order
+    #   The order that the results should be returned in. In case of ties,
+    #   the relevance assigned to the result by Amazon Kendra is used as the
+    #   tie-breaker.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kendra-2019-02-03/SortingConfiguration AWS API Documentation
+    #
+    class SortingConfiguration < Struct.new(
+      :document_attribute_key,
+      :sort_order)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Provides information that configures Amazon Kendra to use a SQL
+    # database.
+    #
+    # @note When making an API call, you may pass SqlConfiguration
+    #   data as a hash:
+    #
+    #       {
+    #         query_identifiers_enclosing_option: "DOUBLE_QUOTES", # accepts DOUBLE_QUOTES, NONE
+    #       }
+    #
+    # @!attribute [rw] query_identifiers_enclosing_option
+    #   Determines whether Amazon Kendra encloses SQL identifiers in double
+    #   quotes (") when making a database query.
+    #
+    #   By default, Amazon Kendra passes SQL identifiers the way that they
+    #   are entered into the data source configuration. It does not change
+    #   the case of identifiers or enclose them in quotes.
+    #
+    #   PostgreSQL internally converts uppercase characters to lower case
+    #   characters in identifiers unless they are quoted. Choosing this
+    #   option encloses identifiers in quotes so that PostgreSQL does not
+    #   convert the character's case.
+    #
+    #   For MySQL databases, you must enable the `ansi_quotes` option when
+    #   you choose this option.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kendra-2019-02-03/SqlConfiguration AWS API Documentation
+    #
+    class SqlConfiguration < Struct.new(
+      :query_identifiers_enclosing_option)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4811,6 +4932,9 @@ module Aws::Kendra
     #             acl_configuration: {
     #               allowed_groups_column_name: "ColumnName", # required
     #             },
+    #             sql_configuration: {
+    #               query_identifiers_enclosing_option: "DOUBLE_QUOTES", # accepts DOUBLE_QUOTES, NONE
+    #             },
     #           },
     #           salesforce_configuration: {
     #             server_url: "Url", # required
@@ -5012,6 +5136,7 @@ module Aws::Kendra
     #               facetable: false,
     #               searchable: false,
     #               displayable: false,
+    #               sortable: false,
     #             },
     #           },
     #         ],

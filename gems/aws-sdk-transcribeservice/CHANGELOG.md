@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.46.0 (2020-08-05)
+------------------
+
+* Feature - Amazon Transcribe now supports custom language models, which can improve transcription accuracy for your specific use case.
+
 1.45.0 (2020-06-23)
 ------------------
 

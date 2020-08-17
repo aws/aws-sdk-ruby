@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.27.0 (2020-08-17)
+------------------
+
+* Feature - This release introduces RoboMaker Simulation WorldForge, a capability that automatically generates one or more simulation worlds.
+
 1.26.0 (2020-06-23)
 ------------------
 

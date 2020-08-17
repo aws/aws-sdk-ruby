@@ -492,6 +492,12 @@ module Aws::LexModelBuildingService
     #   [1]: https://aws.amazon.com/lex/faqs#data-security
     #   @return [Boolean]
     #
+    # @!attribute [rw] enable_model_improvements
+    #   Indicates whether the bot uses the new natural language
+    #   understanding (NLU) model or the original NLU. True indicates that
+    #   the bot is using the new model, otherwise, false.
+    #   @return [Boolean]
+    #
     # @!attribute [rw] detect_sentiment
     #   Indicates whether utterances entered by the user should be sent to
     #   Amazon Comprehend for sentiment analysis.
@@ -515,6 +521,7 @@ module Aws::LexModelBuildingService
       :version,
       :locale,
       :child_directed,
+      :enable_model_improvements,
       :detect_sentiment)
       SENSITIVE = []
       include Aws::Structure
@@ -1449,6 +1456,25 @@ module Aws::LexModelBuildingService
     #   An array of `intent` objects. For more information, see PutBot.
     #   @return [Array<Types::Intent>]
     #
+    # @!attribute [rw] enable_model_improvements
+    #   Indicates whether the bot uses the new natural language
+    #   understanding (NLU) model or the original NLU. True indicates that
+    #   the bot is using the new model, otherwise, false.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] nlu_intent_confidence_threshold
+    #   The score that determines where Amazon Lex inserts the
+    #   `AMAZON.FallbackIntent`, `AMAZON.KendraSearchIntent`, or both when
+    #   returning alternative intents in a [PostContent][1] or [PostText][2]
+    #   response. `AMAZON.FallbackIntent` and `AMAZON.KendraSearchIntent`
+    #   are only inserted if they are configured for the bot.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/lex/latest/dg/API_runtime_PostContent.html
+    #   [2]: https://docs.aws.amazon.com/lex/latest/dg/API_runtime_PostText.html
+    #   @return [Float]
+    #
     # @!attribute [rw] clarification_prompt
     #   The message Amazon Lex uses when it doesn't understand the user's
     #   request. For more information, see PutBot.
@@ -1558,6 +1584,8 @@ module Aws::LexModelBuildingService
       :name,
       :description,
       :intents,
+      :enable_model_improvements,
+      :nlu_intent_confidence_threshold,
       :clarification_prompt,
       :abort_statement,
       :status,
@@ -3036,6 +3064,8 @@ module Aws::LexModelBuildingService
     #             intent_version: "Version", # required
     #           },
     #         ],
+    #         enable_model_improvements: false,
+    #         nlu_intent_confidence_threshold: 1.0,
     #         clarification_prompt: {
     #           messages: [ # required
     #             {
@@ -3086,6 +3116,79 @@ module Aws::LexModelBuildingService
     #   a user can express. For example, a pizza ordering bot might support
     #   an OrderPizza intent. For more information, see how-it-works.
     #   @return [Array<Types::Intent>]
+    #
+    # @!attribute [rw] enable_model_improvements
+    #   Set to `true` to enable the use of a new natural language
+    #   understanding (NLU) model. Using the new NLU may improve the
+    #   performance of your bot.
+    #
+    #   When you set the `enableModelImprovements` parameter to `true` you
+    #   can use the `nluIntentConfidenceThreshold` parameter to configure
+    #   confidence scores. For more information, see [Confidence Scores][1].
+    #
+    #   You can only set the `enableModelImprovements` parameter in certain
+    #   Regions. If you set the parameter to `true`, your bot will use the
+    #   new NLU. If you set the parameter to `false`, your bot will continue
+    #   to use the original NLU. If you set the parameter to `false` after
+    #   setting it to `true`, your bot will return to the original NLU.
+    #
+    #   The Regions where you can set the `enableModelImprovements`
+    #   parameter to `true` are:
+    #
+    #   * US East (N. Virginia) (us-east-1)
+    #
+    #   * US West (Oregon) (us-west-2)
+    #
+    #   * Asia Pacific (Sydney) (ap-southeast-2)
+    #
+    #   * EU (Ireland) (eu-west-1)
+    #
+    #   In other Regions, the `enableModelImprovements` parameter is set to
+    #   `true` by default. In these Regions setting the parameter to `false`
+    #   throws a `ValidationException` exception.
+    #
+    #   * Asia Pacific (Singapore) (ap-southeast-1)
+    #
+    #   * Asia Pacific (Tokyo) (ap-northeast-1)
+    #
+    #   * EU (Frankfurt) (eu-central-1)
+    #
+    #   * EU (London) (eu-west-2)
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/lex/latest/dg/confidence-scores.html
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] nlu_intent_confidence_threshold
+    #   Determines the threshold where Amazon Lex will insert the
+    #   `AMAZON.FallbackIntent`, `AMAZON.KendraSearchIntent`, or both when
+    #   returning alternative intents in a [PostContent][1] or [PostText][2]
+    #   response. `AMAZON.FallbackIntent` and `AMAZON.KendraSearchIntent`
+    #   are only inserted if they are configured for the bot.
+    #
+    #   You must set the `enableModelImprovements` parameter to `true` to
+    #   use confidence scores.
+    #
+    #   For example, suppose a bot is configured with the confidence
+    #   threshold of 0.80 and the `AMAZON.FallbackIntent`. Amazon Lex
+    #   returns three alternative intents with the following confidence
+    #   scores: IntentA (0.70), IntentB (0.60), IntentC (0.50). The response
+    #   from the `PostText` operation would be:
+    #
+    #   * AMAZON.FallbackIntent
+    #
+    #   * IntentA
+    #
+    #   * IntentB
+    #
+    #   * IntentC
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/lex/latest/dg/API_runtime_PostContent.html
+    #   [2]: https://docs.aws.amazon.com/lex/latest/dg/API_runtime_PostText.html
+    #   @return [Float]
     #
     # @!attribute [rw] clarification_prompt
     #   When Amazon Lex doesn't understand the user's intent, it uses this
@@ -3274,6 +3377,8 @@ module Aws::LexModelBuildingService
       :name,
       :description,
       :intents,
+      :enable_model_improvements,
+      :nlu_intent_confidence_threshold,
       :clarification_prompt,
       :abort_statement,
       :idle_session_ttl_in_seconds,
@@ -3300,6 +3405,25 @@ module Aws::LexModelBuildingService
     # @!attribute [rw] intents
     #   An array of `Intent` objects. For more information, see PutBot.
     #   @return [Array<Types::Intent>]
+    #
+    # @!attribute [rw] enable_model_improvements
+    #   Indicates whether the bot uses the new natural language
+    #   understanding (NLU) model or the original NLU. True indicates that
+    #   the bot is using the new model, otherwise, false.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] nlu_intent_confidence_threshold
+    #   The score that determines where Amazon Lex inserts the
+    #   `AMAZON.FallbackIntent`, `AMAZON.KendraSearchIntent`, or both when
+    #   returning alternative intents in a [PostContent][1] or [PostText][2]
+    #   response. `AMAZON.FallbackIntent` and `AMAZON.KendraSearchIntent`
+    #   are only inserted if they are configured for the bot.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/lex/latest/dg/API_runtime_PostContent.html
+    #   [2]: https://docs.aws.amazon.com/lex/latest/dg/API_runtime_PostText.html
+    #   @return [Float]
     #
     # @!attribute [rw] clarification_prompt
     #   The prompts that Amazon Lex uses when it doesn't understand the
@@ -3424,6 +3548,8 @@ module Aws::LexModelBuildingService
       :name,
       :description,
       :intents,
+      :enable_model_improvements,
+      :nlu_intent_confidence_threshold,
       :clarification_prompt,
       :abort_statement,
       :status,

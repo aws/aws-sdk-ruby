@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.23.0 (2020-07-27)
+------------------
+
+* Feature - Today AWS DataSync releases support for self-managed object storage Locations and the new TransferMode Option.
+
 1.22.0 (2020-06-23)
 ------------------
 

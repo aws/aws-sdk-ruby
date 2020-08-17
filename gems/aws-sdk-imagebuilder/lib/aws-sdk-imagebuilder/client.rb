@@ -1741,6 +1741,10 @@ module Aws::Imagebuilder
     # @option params [Array<Types::Filter>] :filters
     #   The filters.
     #
+    #   * `name` - The name of this distribution configuration.
+    #
+    #   ^
+    #
     # @option params [Integer] :max_results
     #   The maximum items to return in a request.
     #
@@ -2703,7 +2707,7 @@ module Aws::Imagebuilder
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-imagebuilder'
-      context[:gem_version] = '1.11.0'
+      context[:gem_version] = '1.12.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

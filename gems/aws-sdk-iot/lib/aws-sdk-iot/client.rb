@@ -785,6 +785,64 @@ module Aws::IoT
       req.send_request(options)
     end
 
+    # Creates a Device Defender audit suppression.
+    #
+    # @option params [required, String] :check_name
+    #   An audit check name. Checks must be enabled for your account. (Use
+    #   `DescribeAccountAuditConfiguration` to see the list of all checks,
+    #   including those that are enabled or use
+    #   `UpdateAccountAuditConfiguration` to select which checks are enabled.)
+    #
+    # @option params [required, Types::ResourceIdentifier] :resource_identifier
+    #   Information that identifies the noncompliant resource.
+    #
+    # @option params [Time,DateTime,Date,Integer,String] :expiration_date
+    #   The epoch timestamp in seconds at which this suppression expires.
+    #
+    # @option params [Boolean] :suppress_indefinitely
+    #   Indicates whether a suppression should exist indefinitely or not.
+    #
+    # @option params [String] :description
+    #   The description of the audit suppression.
+    #
+    # @option params [required, String] :client_request_token
+    #   The epoch timestamp in seconds at which this suppression expires.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.**
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_audit_suppression({
+    #     check_name: "AuditCheckName", # required
+    #     resource_identifier: { # required
+    #       device_certificate_id: "CertificateId",
+    #       ca_certificate_id: "CertificateId",
+    #       cognito_identity_pool_id: "CognitoIdentityPoolId",
+    #       client_id: "ClientId",
+    #       policy_version_identifier: {
+    #         policy_name: "PolicyName",
+    #         policy_version_id: "PolicyVersionId",
+    #       },
+    #       account: "AwsAccountId",
+    #       iam_role_arn: "RoleArn",
+    #       role_alias_arn: "RoleAliasArn",
+    #     },
+    #     expiration_date: Time.now,
+    #     suppress_indefinitely: false,
+    #     description: "AuditDescription",
+    #     client_request_token: "ClientRequestToken", # required
+    #   })
+    #
+    # @overload create_audit_suppression(params = {})
+    # @param [Hash] params ({})
+    def create_audit_suppression(params = {}, options = {})
+      req = build_request(:create_audit_suppression, params)
+      req.send_request(options)
+    end
+
     # Creates an authorizer.
     #
     # @option params [required, String] :authorizer_name
@@ -1382,8 +1440,14 @@ module Aws::IoT
     end
 
     # Defines an action that can be applied to audit findings by using
-    # StartAuditMitigationActionsTask. Each mitigation action can apply only
-    # one type of change.
+    # StartAuditMitigationActionsTask. Only certain types of mitigation
+    # actions can be applied to specific check names. For more information,
+    # see [Mitigation actions][1]. Each mitigation action can apply only one
+    # type of change.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/iot/latest/developerguide/device-defender-mitigation-actions.html
     #
     # @option params [required, String] :action_name
     #   A friendly name for the action. Choose a friendly name that accurately
@@ -2737,6 +2801,45 @@ module Aws::IoT
       req.send_request(options)
     end
 
+    # Deletes a Device Defender audit suppression.
+    #
+    # @option params [required, String] :check_name
+    #   An audit check name. Checks must be enabled for your account. (Use
+    #   `DescribeAccountAuditConfiguration` to see the list of all checks,
+    #   including those that are enabled or use
+    #   `UpdateAccountAuditConfiguration` to select which checks are enabled.)
+    #
+    # @option params [required, Types::ResourceIdentifier] :resource_identifier
+    #   Information that identifies the noncompliant resource.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_audit_suppression({
+    #     check_name: "AuditCheckName", # required
+    #     resource_identifier: { # required
+    #       device_certificate_id: "CertificateId",
+    #       ca_certificate_id: "CertificateId",
+    #       cognito_identity_pool_id: "CognitoIdentityPoolId",
+    #       client_id: "ClientId",
+    #       policy_version_identifier: {
+    #         policy_name: "PolicyName",
+    #         policy_version_id: "PolicyVersionId",
+    #       },
+    #       account: "AwsAccountId",
+    #       iam_role_arn: "RoleArn",
+    #       role_alias_arn: "RoleAliasArn",
+    #     },
+    #   })
+    #
+    # @overload delete_audit_suppression(params = {})
+    # @param [Hash] params ({})
+    def delete_audit_suppression(params = {}, options = {})
+      req = build_request(:delete_audit_suppression, params)
+      req.send_request(options)
+    end
+
     # Deletes an authorizer.
     #
     # @option params [required, String] :authorizer_name
@@ -3502,6 +3605,7 @@ module Aws::IoT
     #   resp.finding.related_resources[0].additional_info["String"] #=> String
     #   resp.finding.reason_for_non_compliance #=> String
     #   resp.finding.reason_for_non_compliance_code #=> String
+    #   resp.finding.is_suppressed #=> Boolean
     #
     # @overload describe_audit_finding(params = {})
     # @param [Hash] params ({})
@@ -3575,6 +3679,67 @@ module Aws::IoT
       req.send_request(options)
     end
 
+    # Gets information about a Device Defender audit suppression.
+    #
+    # @option params [required, String] :check_name
+    #   An audit check name. Checks must be enabled for your account. (Use
+    #   `DescribeAccountAuditConfiguration` to see the list of all checks,
+    #   including those that are enabled or use
+    #   `UpdateAccountAuditConfiguration` to select which checks are enabled.)
+    #
+    # @option params [required, Types::ResourceIdentifier] :resource_identifier
+    #   Information that identifies the noncompliant resource.
+    #
+    # @return [Types::DescribeAuditSuppressionResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeAuditSuppressionResponse#check_name #check_name} => String
+    #   * {Types::DescribeAuditSuppressionResponse#resource_identifier #resource_identifier} => Types::ResourceIdentifier
+    #   * {Types::DescribeAuditSuppressionResponse#expiration_date #expiration_date} => Time
+    #   * {Types::DescribeAuditSuppressionResponse#suppress_indefinitely #suppress_indefinitely} => Boolean
+    #   * {Types::DescribeAuditSuppressionResponse#description #description} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_audit_suppression({
+    #     check_name: "AuditCheckName", # required
+    #     resource_identifier: { # required
+    #       device_certificate_id: "CertificateId",
+    #       ca_certificate_id: "CertificateId",
+    #       cognito_identity_pool_id: "CognitoIdentityPoolId",
+    #       client_id: "ClientId",
+    #       policy_version_identifier: {
+    #         policy_name: "PolicyName",
+    #         policy_version_id: "PolicyVersionId",
+    #       },
+    #       account: "AwsAccountId",
+    #       iam_role_arn: "RoleArn",
+    #       role_alias_arn: "RoleAliasArn",
+    #     },
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.check_name #=> String
+    #   resp.resource_identifier.device_certificate_id #=> String
+    #   resp.resource_identifier.ca_certificate_id #=> String
+    #   resp.resource_identifier.cognito_identity_pool_id #=> String
+    #   resp.resource_identifier.client_id #=> String
+    #   resp.resource_identifier.policy_version_identifier.policy_name #=> String
+    #   resp.resource_identifier.policy_version_identifier.policy_version_id #=> String
+    #   resp.resource_identifier.account #=> String
+    #   resp.resource_identifier.iam_role_arn #=> String
+    #   resp.resource_identifier.role_alias_arn #=> String
+    #   resp.expiration_date #=> Time
+    #   resp.suppress_indefinitely #=> Boolean
+    #   resp.description #=> String
+    #
+    # @overload describe_audit_suppression(params = {})
+    # @param [Hash] params ({})
+    def describe_audit_suppression(params = {}, options = {})
+      req = build_request(:describe_audit_suppression, params)
+      req.send_request(options)
+    end
+
     # Gets information about a Device Defender audit.
     #
     # @option params [required, String] :task_id
@@ -3613,6 +3778,7 @@ module Aws::IoT
     #   resp.audit_details["AuditCheckName"].check_compliant #=> Boolean
     #   resp.audit_details["AuditCheckName"].total_resources_count #=> Integer
     #   resp.audit_details["AuditCheckName"].non_compliant_resources_count #=> Integer
+    #   resp.audit_details["AuditCheckName"].suppressed_non_compliant_resources_count #=> Integer
     #   resp.audit_details["AuditCheckName"].error_code #=> String
     #   resp.audit_details["AuditCheckName"].message #=> String
     #
@@ -4614,8 +4780,11 @@ module Aws::IoT
     # @option params [required, String] :principal
     #   The principal.
     #
-    #   If the principal is a certificate, specify the certificate ARN. If the
-    #   principal is an Amazon Cognito identity, specify the identity ID.
+    #   Valid principals are CertificateArn
+    #   (arn:aws:iot:*region*\:*accountId*\:cert/*certificateId*),
+    #   thingGroupArn
+    #   (arn:aws:iot:*region*\:*accountId*\:thinggroup/*groupName*) and
+    #   CognitoId (*region*\:*id*).
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -4775,7 +4944,11 @@ module Aws::IoT
     # device gateway.
     #
     # @option params [String] :principal
-    #   The principal.
+    #   The principal. Valid principals are CertificateArn
+    #   (arn:aws:iot:*region*\:*accountId*\:cert/*certificateId*),
+    #   thingGroupArn
+    #   (arn:aws:iot:*region*\:*accountId*\:thinggroup/*groupName*) and
+    #   CognitoId (*region*\:*id*).
     #
     # @option params [String] :cognito_identity_pool_id
     #   The Cognito identity pool ID.
@@ -5432,6 +5605,8 @@ module Aws::IoT
     #   * {Types::ListActiveViolationsResponse#active_violations #active_violations} => Array&lt;Types::ActiveViolation&gt;
     #   * {Types::ListActiveViolationsResponse#next_token #next_token} => String
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_active_violations({
@@ -5480,7 +5655,12 @@ module Aws::IoT
     # Lists the policies attached to the specified thing group.
     #
     # @option params [required, String] :target
-    #   The group or principal for which the policies will be listed.
+    #   The group or principal for which the policies will be listed. Valid
+    #   principals are CertificateArn
+    #   (arn:aws:iot:*region*\:*accountId*\:cert/*certificateId*),
+    #   thingGroupArn
+    #   (arn:aws:iot:*region*\:*accountId*\:thinggroup/*groupName*) and
+    #   CognitoId (*region*\:*id*).
     #
     # @option params [Boolean] :recursive
     #   When true, recursively list attached policies.
@@ -5495,6 +5675,8 @@ module Aws::IoT
     #
     #   * {Types::ListAttachedPoliciesResponse#policies #policies} => Array&lt;Types::Policy&gt;
     #   * {Types::ListAttachedPoliciesResponse#next_marker #next_marker} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     # @example Request syntax with placeholder values
     #
@@ -5551,10 +5733,18 @@ module Aws::IoT
     #   You must specify either the startTime and endTime or the taskId, but
     #   not both.
     #
+    # @option params [Boolean] :list_suppressed_findings
+    #   Boolean flag indicating whether only the suppressed findings or the
+    #   unsuppressed findings should be listed. If this parameter isn't
+    #   provided, the response will list both suppressed and unsuppressed
+    #   findings.
+    #
     # @return [Types::ListAuditFindingsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::ListAuditFindingsResponse#findings #findings} => Array&lt;Types::AuditFinding&gt;
     #   * {Types::ListAuditFindingsResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     # @example Request syntax with placeholder values
     #
@@ -5578,6 +5768,7 @@ module Aws::IoT
     #     next_token: "NextToken",
     #     start_time: Time.now,
     #     end_time: Time.now,
+    #     list_suppressed_findings: false,
     #   })
     #
     # @example Response structure
@@ -5616,6 +5807,7 @@ module Aws::IoT
     #   resp.findings[0].related_resources[0].additional_info["String"] #=> String
     #   resp.findings[0].reason_for_non_compliance #=> String
     #   resp.findings[0].reason_for_non_compliance_code #=> String
+    #   resp.findings[0].is_suppressed #=> Boolean
     #   resp.next_token #=> String
     #
     # @overload list_audit_findings(params = {})
@@ -5649,6 +5841,8 @@ module Aws::IoT
     #
     #   * {Types::ListAuditMitigationActionsExecutionsResponse#actions_executions #actions_executions} => Array&lt;Types::AuditMitigationActionExecutionMetadata&gt;
     #   * {Types::ListAuditMitigationActionsExecutionsResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     # @example Request syntax with placeholder values
     #
@@ -5716,6 +5910,8 @@ module Aws::IoT
     #   * {Types::ListAuditMitigationActionsTasksResponse#tasks #tasks} => Array&lt;Types::AuditMitigationActionsTaskMetadata&gt;
     #   * {Types::ListAuditMitigationActionsTasksResponse#next_token #next_token} => String
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_audit_mitigation_actions_tasks({
@@ -5740,6 +5936,83 @@ module Aws::IoT
     # @param [Hash] params ({})
     def list_audit_mitigation_actions_tasks(params = {}, options = {})
       req = build_request(:list_audit_mitigation_actions_tasks, params)
+      req.send_request(options)
+    end
+
+    # Lists your Device Defender audit listings.
+    #
+    # @option params [String] :check_name
+    #   An audit check name. Checks must be enabled for your account. (Use
+    #   `DescribeAccountAuditConfiguration` to see the list of all checks,
+    #   including those that are enabled or use
+    #   `UpdateAccountAuditConfiguration` to select which checks are enabled.)
+    #
+    # @option params [Types::ResourceIdentifier] :resource_identifier
+    #   Information that identifies the noncompliant resource.
+    #
+    # @option params [Boolean] :ascending_order
+    #   Determines whether suppressions are listed in ascending order by
+    #   expiration date or not. If parameter isn't provided,
+    #   `ascendingOrder=true`.
+    #
+    # @option params [String] :next_token
+    #   The token for the next set of results.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of results to return at one time. The default is
+    #   25.
+    #
+    # @return [Types::ListAuditSuppressionsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListAuditSuppressionsResponse#suppressions #suppressions} => Array&lt;Types::AuditSuppression&gt;
+    #   * {Types::ListAuditSuppressionsResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_audit_suppressions({
+    #     check_name: "AuditCheckName",
+    #     resource_identifier: {
+    #       device_certificate_id: "CertificateId",
+    #       ca_certificate_id: "CertificateId",
+    #       cognito_identity_pool_id: "CognitoIdentityPoolId",
+    #       client_id: "ClientId",
+    #       policy_version_identifier: {
+    #         policy_name: "PolicyName",
+    #         policy_version_id: "PolicyVersionId",
+    #       },
+    #       account: "AwsAccountId",
+    #       iam_role_arn: "RoleArn",
+    #       role_alias_arn: "RoleAliasArn",
+    #     },
+    #     ascending_order: false,
+    #     next_token: "NextToken",
+    #     max_results: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.suppressions #=> Array
+    #   resp.suppressions[0].check_name #=> String
+    #   resp.suppressions[0].resource_identifier.device_certificate_id #=> String
+    #   resp.suppressions[0].resource_identifier.ca_certificate_id #=> String
+    #   resp.suppressions[0].resource_identifier.cognito_identity_pool_id #=> String
+    #   resp.suppressions[0].resource_identifier.client_id #=> String
+    #   resp.suppressions[0].resource_identifier.policy_version_identifier.policy_name #=> String
+    #   resp.suppressions[0].resource_identifier.policy_version_identifier.policy_version_id #=> String
+    #   resp.suppressions[0].resource_identifier.account #=> String
+    #   resp.suppressions[0].resource_identifier.iam_role_arn #=> String
+    #   resp.suppressions[0].resource_identifier.role_alias_arn #=> String
+    #   resp.suppressions[0].expiration_date #=> Time
+    #   resp.suppressions[0].suppress_indefinitely #=> Boolean
+    #   resp.suppressions[0].description #=> String
+    #   resp.next_token #=> String
+    #
+    # @overload list_audit_suppressions(params = {})
+    # @param [Hash] params ({})
+    def list_audit_suppressions(params = {}, options = {})
+      req = build_request(:list_audit_suppressions, params)
       req.send_request(options)
     end
 
@@ -5774,6 +6047,8 @@ module Aws::IoT
     #
     #   * {Types::ListAuditTasksResponse#tasks #tasks} => Array&lt;Types::AuditTaskMetadata&gt;
     #   * {Types::ListAuditTasksResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     # @example Request syntax with placeholder values
     #
@@ -5820,6 +6095,8 @@ module Aws::IoT
     #   * {Types::ListAuthorizersResponse#authorizers #authorizers} => Array&lt;Types::AuthorizerSummary&gt;
     #   * {Types::ListAuthorizersResponse#next_marker #next_marker} => String
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_authorizers({
@@ -5858,6 +6135,8 @@ module Aws::IoT
     #
     #   * {Types::ListBillingGroupsResponse#billing_groups #billing_groups} => Array&lt;Types::GroupNameAndArn&gt;
     #   * {Types::ListBillingGroupsResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     # @example Request syntax with placeholder values
     #
@@ -5899,6 +6178,8 @@ module Aws::IoT
     #
     #   * {Types::ListCACertificatesResponse#certificates #certificates} => Array&lt;Types::CACertificate&gt;
     #   * {Types::ListCACertificatesResponse#next_marker #next_marker} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     # @example Request syntax with placeholder values
     #
@@ -5943,6 +6224,8 @@ module Aws::IoT
     #
     #   * {Types::ListCertificatesResponse#certificates #certificates} => Array&lt;Types::Certificate&gt;
     #   * {Types::ListCertificatesResponse#next_marker #next_marker} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     # @example Request syntax with placeholder values
     #
@@ -5990,6 +6273,8 @@ module Aws::IoT
     #   * {Types::ListCertificatesByCAResponse#certificates #certificates} => Array&lt;Types::Certificate&gt;
     #   * {Types::ListCertificatesByCAResponse#next_marker #next_marker} => String
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_certificates_by_ca({
@@ -6028,6 +6313,8 @@ module Aws::IoT
     #
     #   * {Types::ListDimensionsResponse#dimension_names #dimension_names} => Array&lt;String&gt;
     #   * {Types::ListDimensionsResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     # @example Request syntax with placeholder values
     #
@@ -6071,6 +6358,8 @@ module Aws::IoT
     #   * {Types::ListDomainConfigurationsResponse#domain_configurations #domain_configurations} => Array&lt;Types::DomainConfigurationSummary&gt;
     #   * {Types::ListDomainConfigurationsResponse#next_marker #next_marker} => String
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_domain_configurations({
@@ -6107,6 +6396,8 @@ module Aws::IoT
     #
     #   * {Types::ListIndicesResponse#index_names #index_names} => Array&lt;String&gt;
     #   * {Types::ListIndicesResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     # @example Request syntax with placeholder values
     #
@@ -6146,6 +6437,8 @@ module Aws::IoT
     #
     #   * {Types::ListJobExecutionsForJobResponse#execution_summaries #execution_summaries} => Array&lt;Types::JobExecutionSummaryForJob&gt;
     #   * {Types::ListJobExecutionsForJobResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     # @example Request syntax with placeholder values
     #
@@ -6193,6 +6486,8 @@ module Aws::IoT
     #
     #   * {Types::ListJobExecutionsForThingResponse#execution_summaries #execution_summaries} => Array&lt;Types::JobExecutionSummaryForThing&gt;
     #   * {Types::ListJobExecutionsForThingResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     # @example Request syntax with placeholder values
     #
@@ -6254,6 +6549,8 @@ module Aws::IoT
     #   * {Types::ListJobsResponse#jobs #jobs} => Array&lt;Types::JobSummary&gt;
     #   * {Types::ListJobsResponse#next_token #next_token} => String
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_jobs({
@@ -6304,6 +6601,8 @@ module Aws::IoT
     #   * {Types::ListMitigationActionsResponse#action_identifiers #action_identifiers} => Array&lt;Types::MitigationActionIdentifier&gt;
     #   * {Types::ListMitigationActionsResponse#next_token #next_token} => String
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_mitigation_actions({
@@ -6342,6 +6641,8 @@ module Aws::IoT
     #
     #   * {Types::ListOTAUpdatesResponse#ota_updates #ota_updates} => Array&lt;Types::OTAUpdateSummary&gt;
     #   * {Types::ListOTAUpdatesResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     # @example Request syntax with placeholder values
     #
@@ -6382,6 +6683,8 @@ module Aws::IoT
     #
     #   * {Types::ListOutgoingCertificatesResponse#outgoing_certificates #outgoing_certificates} => Array&lt;Types::OutgoingCertificate&gt;
     #   * {Types::ListOutgoingCertificatesResponse#next_marker #next_marker} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     # @example Request syntax with placeholder values
     #
@@ -6425,6 +6728,8 @@ module Aws::IoT
     #
     #   * {Types::ListPoliciesResponse#policies #policies} => Array&lt;Types::Policy&gt;
     #   * {Types::ListPoliciesResponse#next_marker #next_marker} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     # @example Request syntax with placeholder values
     #
@@ -6470,6 +6775,8 @@ module Aws::IoT
     #
     #   * {Types::ListPolicyPrincipalsResponse#principals #principals} => Array&lt;String&gt;
     #   * {Types::ListPolicyPrincipalsResponse#next_marker #next_marker} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     # @example Request syntax with placeholder values
     #
@@ -6535,7 +6842,11 @@ module Aws::IoT
     # [1]: https://docs.aws.amazon.com/cognitoidentity/latest/APIReference/API_GetCredentialsForIdentity.html#API_GetCredentialsForIdentity_RequestSyntax
     #
     # @option params [required, String] :principal
-    #   The principal.
+    #   The principal. Valid principals are CertificateArn
+    #   (arn:aws:iot:*region*\:*accountId*\:cert/*certificateId*),
+    #   thingGroupArn
+    #   (arn:aws:iot:*region*\:*accountId*\:thinggroup/*groupName*) and
+    #   CognitoId (*region*\:*id*).
     #
     # @option params [String] :marker
     #   The marker for the next set of results.
@@ -6551,6 +6862,8 @@ module Aws::IoT
     #
     #   * {Types::ListPrincipalPoliciesResponse#policies #policies} => Array&lt;Types::Policy&gt;
     #   * {Types::ListPrincipalPoliciesResponse#next_marker #next_marker} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     # @example Request syntax with placeholder values
     #
@@ -6593,6 +6906,8 @@ module Aws::IoT
     #   * {Types::ListPrincipalThingsResponse#things #things} => Array&lt;String&gt;
     #   * {Types::ListPrincipalThingsResponse#next_token #next_token} => String
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_principal_things({
@@ -6630,6 +6945,8 @@ module Aws::IoT
     #   * {Types::ListProvisioningTemplateVersionsResponse#versions #versions} => Array&lt;Types::ProvisioningTemplateVersionSummary&gt;
     #   * {Types::ListProvisioningTemplateVersionsResponse#next_token #next_token} => String
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_provisioning_template_versions({
@@ -6665,6 +6982,8 @@ module Aws::IoT
     #
     #   * {Types::ListProvisioningTemplatesResponse#templates #templates} => Array&lt;Types::ProvisioningTemplateSummary&gt;
     #   * {Types::ListProvisioningTemplatesResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     # @example Request syntax with placeholder values
     #
@@ -6707,6 +7026,8 @@ module Aws::IoT
     #   * {Types::ListRoleAliasesResponse#role_aliases #role_aliases} => Array&lt;String&gt;
     #   * {Types::ListRoleAliasesResponse#next_marker #next_marker} => String
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_role_aliases({
@@ -6741,6 +7062,8 @@ module Aws::IoT
     #
     #   * {Types::ListScheduledAuditsResponse#scheduled_audits #scheduled_audits} => Array&lt;Types::ScheduledAuditMetadata&gt;
     #   * {Types::ListScheduledAuditsResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     # @example Request syntax with placeholder values
     #
@@ -6785,6 +7108,8 @@ module Aws::IoT
     #   * {Types::ListSecurityProfilesResponse#security_profile_identifiers #security_profile_identifiers} => Array&lt;Types::SecurityProfileIdentifier&gt;
     #   * {Types::ListSecurityProfilesResponse#next_token #next_token} => String
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_security_profiles({
@@ -6828,6 +7153,8 @@ module Aws::IoT
     #   * {Types::ListSecurityProfilesForTargetResponse#security_profile_target_mappings #security_profile_target_mappings} => Array&lt;Types::SecurityProfileTargetMapping&gt;
     #   * {Types::ListSecurityProfilesForTargetResponse#next_token #next_token} => String
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_security_profiles_for_target({
@@ -6868,6 +7195,8 @@ module Aws::IoT
     #   * {Types::ListStreamsResponse#streams #streams} => Array&lt;Types::StreamSummary&gt;
     #   * {Types::ListStreamsResponse#next_token #next_token} => String
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_streams({
@@ -6904,6 +7233,8 @@ module Aws::IoT
     #
     #   * {Types::ListTagsForResourceResponse#tags #tags} => Array&lt;Types::Tag&gt;
     #   * {Types::ListTagsForResourceResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     # @example Request syntax with placeholder values
     #
@@ -6942,6 +7273,8 @@ module Aws::IoT
     #   * {Types::ListTargetsForPolicyResponse#targets #targets} => Array&lt;String&gt;
     #   * {Types::ListTargetsForPolicyResponse#next_marker #next_marker} => String
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_targets_for_policy({
@@ -6979,6 +7312,8 @@ module Aws::IoT
     #
     #   * {Types::ListTargetsForSecurityProfileResponse#security_profile_targets #security_profile_targets} => Array&lt;Types::SecurityProfileTarget&gt;
     #   * {Types::ListTargetsForSecurityProfileResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     # @example Request syntax with placeholder values
     #
@@ -7025,6 +7360,8 @@ module Aws::IoT
     #   * {Types::ListThingGroupsResponse#thing_groups #thing_groups} => Array&lt;Types::GroupNameAndArn&gt;
     #   * {Types::ListThingGroupsResponse#next_token #next_token} => String
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_thing_groups({
@@ -7064,6 +7401,8 @@ module Aws::IoT
     #
     #   * {Types::ListThingGroupsForThingResponse#thing_groups #thing_groups} => Array&lt;Types::GroupNameAndArn&gt;
     #   * {Types::ListThingGroupsForThingResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     # @example Request syntax with placeholder values
     #
@@ -7136,6 +7475,8 @@ module Aws::IoT
     #   * {Types::ListThingRegistrationTaskReportsResponse#report_type #report_type} => String
     #   * {Types::ListThingRegistrationTaskReportsResponse#next_token #next_token} => String
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_thing_registration_task_reports({
@@ -7175,6 +7516,8 @@ module Aws::IoT
     #   * {Types::ListThingRegistrationTasksResponse#task_ids #task_ids} => Array&lt;String&gt;
     #   * {Types::ListThingRegistrationTasksResponse#next_token #next_token} => String
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_thing_registration_tasks({
@@ -7212,6 +7555,8 @@ module Aws::IoT
     #   * {Types::ListThingTypesResponse#thing_types #thing_types} => Array&lt;Types::ThingTypeDefinition&gt;
     #   * {Types::ListThingTypesResponse#next_token #next_token} => String
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_thing_types({
@@ -7246,6 +7591,13 @@ module Aws::IoT
     # in the registry that contain an attribute **Color** with the value
     # **Red**.
     #
+    # <note markdown="1"> You will not be charged for calling this API if an `Access denied`
+    # error is returned. You will also not be charged if no attributes or
+    # pagination token was provided in request and no pagination token and
+    # no results were returned.
+    #
+    #  </note>
+    #
     # @option params [String] :next_token
     #   The token to retrieve the next set of results.
     #
@@ -7265,6 +7617,8 @@ module Aws::IoT
     #
     #   * {Types::ListThingsResponse#things #things} => Array&lt;Types::ThingAttribute&gt;
     #   * {Types::ListThingsResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     # @example Request syntax with placeholder values
     #
@@ -7310,6 +7664,8 @@ module Aws::IoT
     #   * {Types::ListThingsInBillingGroupResponse#things #things} => Array&lt;String&gt;
     #   * {Types::ListThingsInBillingGroupResponse#next_token #next_token} => String
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_things_in_billing_group({
@@ -7351,6 +7707,8 @@ module Aws::IoT
     #   * {Types::ListThingsInThingGroupResponse#things #things} => Array&lt;String&gt;
     #   * {Types::ListThingsInThingGroupResponse#next_token #next_token} => String
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_things_in_thing_group({
@@ -7385,6 +7743,8 @@ module Aws::IoT
     #
     #   * {Types::ListTopicRuleDestinationsResponse#destination_summaries #destination_summaries} => Array&lt;Types::TopicRuleDestinationSummary&gt;
     #   * {Types::ListTopicRuleDestinationsResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     # @example Request syntax with placeholder values
     #
@@ -7427,6 +7787,8 @@ module Aws::IoT
     #
     #   * {Types::ListTopicRulesResponse#rules #rules} => Array&lt;Types::TopicRuleListItem&gt;
     #   * {Types::ListTopicRulesResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     # @example Request syntax with placeholder values
     #
@@ -7471,6 +7833,8 @@ module Aws::IoT
     #
     #   * {Types::ListV2LoggingLevelsResponse#log_target_configurations #log_target_configurations} => Array&lt;Types::LogTargetConfiguration&gt;
     #   * {Types::ListV2LoggingLevelsResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     # @example Request syntax with placeholder values
     #
@@ -7524,6 +7888,8 @@ module Aws::IoT
     #
     #   * {Types::ListViolationEventsResponse#violation_events #violation_events} => Array&lt;Types::ViolationEvent&gt;
     #   * {Types::ListViolationEventsResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     # @example Request syntax with placeholder values
     #
@@ -8580,7 +8946,11 @@ module Aws::IoT
     # gateway.
     #
     # @option params [String] :principal
-    #   The principal.
+    #   The principal. Valid principals are CertificateArn
+    #   (arn:aws:iot:*region*\:*accountId*\:cert/*certificateId*),
+    #   thingGroupArn
+    #   (arn:aws:iot:*region*\:*accountId*\:thinggroup/*groupName*) and
+    #   CognitoId (*region*\:*id*).
     #
     # @option params [String] :cognito_identity_pool_id
     #   The Cognito identity pool ID.
@@ -8840,6 +9210,58 @@ module Aws::IoT
       req.send_request(options)
     end
 
+    # Updates a Device Defender audit suppression.
+    #
+    # @option params [required, String] :check_name
+    #   An audit check name. Checks must be enabled for your account. (Use
+    #   `DescribeAccountAuditConfiguration` to see the list of all checks,
+    #   including those that are enabled or use
+    #   `UpdateAccountAuditConfiguration` to select which checks are enabled.)
+    #
+    # @option params [required, Types::ResourceIdentifier] :resource_identifier
+    #   Information that identifies the noncompliant resource.
+    #
+    # @option params [Time,DateTime,Date,Integer,String] :expiration_date
+    #   The expiration date (epoch timestamp in seconds) that you want the
+    #   suppression to adhere to.
+    #
+    # @option params [Boolean] :suppress_indefinitely
+    #   Indicates whether a suppression should exist indefinitely or not.
+    #
+    # @option params [String] :description
+    #   The description of the audit suppression.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_audit_suppression({
+    #     check_name: "AuditCheckName", # required
+    #     resource_identifier: { # required
+    #       device_certificate_id: "CertificateId",
+    #       ca_certificate_id: "CertificateId",
+    #       cognito_identity_pool_id: "CognitoIdentityPoolId",
+    #       client_id: "ClientId",
+    #       policy_version_identifier: {
+    #         policy_name: "PolicyName",
+    #         policy_version_id: "PolicyVersionId",
+    #       },
+    #       account: "AwsAccountId",
+    #       iam_role_arn: "RoleArn",
+    #       role_alias_arn: "RoleAliasArn",
+    #     },
+    #     expiration_date: Time.now,
+    #     suppress_indefinitely: false,
+    #     description: "AuditDescription",
+    #   })
+    #
+    # @overload update_audit_suppression(params = {})
+    # @param [Hash] params ({})
+    def update_audit_suppression(params = {}, options = {})
+      req = build_request(:update_audit_suppression, params)
+      req.send_request(options)
+    end
+
     # Updates an authorizer.
     #
     # @option params [required, String] :authorizer_name
@@ -8971,12 +9393,13 @@ module Aws::IoT
     # Updates the status of the specified certificate. This operation is
     # idempotent.
     #
-    # Moving a certificate from the ACTIVE state (including REVOKED) will
-    # not disconnect currently connected devices, but these devices will be
-    # unable to reconnect.
+    # Certificates must be in the ACTIVE state to authenticate devices that
+    # use a certificate to connect to AWS IoT.
     #
-    # The ACTIVE state is required to authenticate devices connecting to AWS
-    # IoT using a certificate.
+    # Within a few minutes of updating a certificate from the ACTIVE state
+    # to any other state, AWS IoT disconnects all devices that used that
+    # certificate to connect. Devices cannot use a certificate that is not
+    # in the ACTIVE state to reconnect.
     #
     # @option params [required, String] :certificate_id
     #   The ID of the certificate. (The last part of the certificate ARN
@@ -9969,7 +10392,7 @@ module Aws::IoT
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-iot'
-      context[:gem_version] = '1.54.0'
+      context[:gem_version] = '1.55.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

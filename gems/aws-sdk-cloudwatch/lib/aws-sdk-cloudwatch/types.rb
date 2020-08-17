@@ -691,7 +691,7 @@ module Aws::CloudWatch
     #
     #   If you specify `ChildrenOfAlarmName`, you cannot specify any other
     #   parameters in the request except for `MaxRecords` and `NextToken`.
-    #   If you do so, you will receive a validation error.
+    #   If you do so, you receive a validation error.
     #
     #   <note markdown="1"> Only the `Alarm Name`, `ARN`, `StateValue`
     #   (OK/ALARM/INSUFFICIENT\_DATA), and `StateUpdatedTimestamp`
@@ -713,7 +713,7 @@ module Aws::CloudWatch
     #
     #   If you specify `ParentsOfAlarmName`, you cannot specify any other
     #   parameters in the request except for `MaxRecords` and `NextToken`.
-    #   If you do so, you will receive a validation error.
+    #   If you do so, you receive a validation error.
     #
     #   <note markdown="1"> Only the Alarm Name and ARN are returned by this operation when you
     #   use this parameter. To get complete information about these alarms,
@@ -876,7 +876,7 @@ module Aws::CloudWatch
     #
     # @!attribute [rw] max_results
     #   This parameter is not currently used. Reserved for future use. If it
-    #   is used in the future, the maximum value may be different.
+    #   is used in the future, the maximum value might be different.
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/monitoring-2010-08-01/DescribeInsightRulesInput AWS API Documentation
@@ -905,7 +905,11 @@ module Aws::CloudWatch
       include Aws::Structure
     end
 
-    # Expands the identity of a metric.
+    # A dimension is a name/value pair that is part of the identity of a
+    # metric. You can assign up to 10 dimensions to a metric. Because
+    # dimensions are part of the unique identifier for a metric, whenever
+    # you add a unique name/value pair to one of your metrics, you are
+    # creating a new variation of that metric.
     #
     # @note When making an API call, you may pass Dimension
     #   data as a hash:
@@ -916,11 +920,12 @@ module Aws::CloudWatch
     #       }
     #
     # @!attribute [rw] name
-    #   The name of the dimension.
+    #   The name of the dimension. Dimension names cannot contain blank
+    #   spaces or non-ASCII characters.
     #   @return [String]
     #
     # @!attribute [rw] value
-    #   The value representing the dimension measurement.
+    #   The value of the dimension.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/monitoring-2010-08-01/Dimension AWS API Documentation
@@ -1167,7 +1172,7 @@ module Aws::CloudWatch
     #     data point.
     #
     #   * `MaxContributorValue` -- the value of the top contributor for each
-    #     data point. The identity of the contributor may change for each
+    #     data point. The identity of the contributor might change for each
     #     data point in the graph.
     #
     #     If this rule aggregates by COUNT, the top contributor for each
@@ -1391,8 +1396,8 @@ module Aws::CloudWatch
     # @!attribute [rw] messages
     #   Contains a message about this `GetMetricData` operation, if the
     #   operation results in such a message. An example of a message that
-    #   may be returned is `Maximum number of allowed metrics exceeded`. If
-    #   there is a message, as much of the operation as possible is still
+    #   might be returned is `Maximum number of allowed metrics exceeded`.
+    #   If there is a message, as much of the operation as possible is still
     #   executed.
     #
     #   A message appears here only if it is related to the global
@@ -1539,7 +1544,7 @@ module Aws::CloudWatch
     #   The unit for a given metric. If you omit `Unit`, all data that was
     #   collected with any unit is returned, along with the corresponding
     #   units that were specified when the data was reported to CloudWatch.
-    #   If you specify a unit, the operation returns only data data that was
+    #   If you specify a unit, the operation returns only data that was
     #   collected with that unit specified. If you specify a unit that does
     #   not match the data collected, the results of the operation are null.
     #   CloudWatch does not perform unit conversions.
@@ -1648,7 +1653,8 @@ module Aws::CloudWatch
     end
 
     # @!attribute [rw] metric_widget_image
-    #   The image of the graph, in the output format specified.
+    #   The image of the graph, in the output format specified. The output
+    #   is base64-encoded.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/monitoring-2010-08-01/GetMetricWidgetImageOutput AWS API Documentation
@@ -1996,6 +2002,7 @@ module Aws::CloudWatch
     #           },
     #         ],
     #         next_token: "NextToken",
+    #         recently_active: "PT3H", # accepts PT3H
     #       }
     #
     # @!attribute [rw] namespace
@@ -2015,19 +2022,31 @@ module Aws::CloudWatch
     #   data available.
     #   @return [String]
     #
+    # @!attribute [rw] recently_active
+    #   To filter the results to show only metrics that have had data points
+    #   published in the past three hours, specify this parameter with a
+    #   value of `PT3H`. This is the only valid value for this parameter.
+    #
+    #   The results that are returned are an approximation of the value you
+    #   specify. There is a low probability that the returned results
+    #   include metrics with last published data as much as 40 minutes more
+    #   than the specified time interval.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/monitoring-2010-08-01/ListMetricsInput AWS API Documentation
     #
     class ListMetricsInput < Struct.new(
       :namespace,
       :metric_name,
       :dimensions,
-      :next_token)
+      :next_token,
+      :recently_active)
       SENSITIVE = []
       include Aws::Structure
     end
 
     # @!attribute [rw] metrics
-    #   The metrics.
+    #   The metrics that match your request.
     #   @return [Array<Types::Metric>]
     #
     # @!attribute [rw] next_token
@@ -2061,8 +2080,8 @@ module Aws::CloudWatch
     #   `arn:aws:cloudwatch:Region:account-id:insight-rule:insight-rule-name
     #   `
     #
-    #   For more information on ARN format, see [ Resource Types Defined by
-    #   Amazon CloudWatch][1] in the *Amazon Web Services General
+    #   For more information about ARN format, see [ Resource Types Defined
+    #   by Amazon CloudWatch][1] in the *Amazon Web Services General
     #   Reference*.
     #
     #
@@ -2694,7 +2713,7 @@ module Aws::CloudWatch
     #   In a `Get` operation, if you omit `Unit` then all data that was
     #   collected with any unit is returned, along with the corresponding
     #   units that were specified when the data was reported to CloudWatch.
-    #   If you specify a unit, the operation returns only data data that was
+    #   If you specify a unit, the operation returns only data that was
     #   collected with that unit specified. If you specify a unit that does
     #   not match the data collected, the results of the operation are null.
     #   CloudWatch does not perform unit conversions.
@@ -2862,7 +2881,7 @@ module Aws::CloudWatch
     #
     # @!attribute [rw] alarm_name
     #   The name for the composite alarm. This name must be unique within
-    #   your AWS account.
+    #   the Region.
     #   @return [String]
     #
     # @!attribute [rw] alarm_rule
@@ -3009,7 +3028,7 @@ module Aws::CloudWatch
     #
     #   If this result includes only warning messages, then the input was
     #   valid enough for the dashboard to be created or modified, but some
-    #   elements of the dashboard may not render.
+    #   elements of the dashboard might not render.
     #
     #   If this result includes error messages, the input was not valid and
     #   the operation failed.
@@ -3154,8 +3173,7 @@ module Aws::CloudWatch
     #       }
     #
     # @!attribute [rw] alarm_name
-    #   The name for the alarm. This name must be unique within your AWS
-    #   account.
+    #   The name for the alarm. This name must be unique within the Region.
     #   @return [String]
     #
     # @!attribute [rw] alarm_description
@@ -3279,7 +3297,7 @@ module Aws::CloudWatch
     #   resolution, the alarm still attempts to gather data at the period
     #   rate that you specify. In this case, it does not receive data for
     #   the attempts that do not correspond to a one-minute data resolution,
-    #   and the alarm may often lapse into INSUFFICENT\_DATA status.
+    #   and the alarm might often lapse into INSUFFICENT\_DATA status.
     #   Specifying 10 or 30 also sets this alarm as a high-resolution alarm,
     #   which has a higher charge than other alarms. For more information
     #   about pricing, see [Amazon CloudWatch Pricing][1].
@@ -3304,12 +3322,12 @@ module Aws::CloudWatch
     #
     #   If you don't specify `Unit`, CloudWatch retrieves all unit types
     #   that have been published for the metric and attempts to evaluate the
-    #   alarm. Usually metrics are published with only one unit, so the
-    #   alarm will work as intended.
+    #   alarm. Usually, metrics are published with only one unit, so the
+    #   alarm works as intended.
     #
     #   However, if the metric is published with multiple types of units and
     #   you don't specify a unit, the alarm's behavior is not defined and
-    #   will behave un-predictably.
+    #   it behaves predictably.
     #
     #   We recommend omitting `Unit` so that you don't inadvertently
     #   specify an incorrect unit that is not published for this metric.
@@ -3416,7 +3434,7 @@ module Aws::CloudWatch
     #   associate as many as 50 tags with an alarm.
     #
     #   Tags can help you organize and categorize your resources. You can
-    #   also use them to scope user permissions, by granting a user
+    #   also use them to scope user permissions by granting a user
     #   permission to access or change only resources with certain tag
     #   values.
     #   @return [Array<Types::Tag>]
@@ -3583,8 +3601,7 @@ module Aws::CloudWatch
     #       }
     #
     # @!attribute [rw] alarm_name
-    #   The name for the alarm. This name must be unique within the AWS
-    #   account. The maximum length is 255 characters.
+    #   The name of the alarm.
     #   @return [String]
     #
     # @!attribute [rw] state_value
@@ -3707,8 +3724,8 @@ module Aws::CloudWatch
     #   `arn:aws:cloudwatch:Region:account-id:insight-rule:insight-rule-name
     #   `
     #
-    #   For more information on ARN format, see [ Resource Types Defined by
-    #   Amazon CloudWatch][1] in the *Amazon Web Services General
+    #   For more information about ARN format, see [ Resource Types Defined
+    #   by Amazon CloudWatch][1] in the *Amazon Web Services General
     #   Reference*.
     #
     #
@@ -3751,8 +3768,8 @@ module Aws::CloudWatch
     #   `arn:aws:cloudwatch:Region:account-id:insight-rule:insight-rule-name
     #   `
     #
-    #   For more information on ARN format, see [ Resource Types Defined by
-    #   Amazon CloudWatch][1] in the *Amazon Web Services General
+    #   For more information about ARN format, see [ Resource Types Defined
+    #   by Amazon CloudWatch][1] in the *Amazon Web Services General
     #   Reference*.
     #
     #

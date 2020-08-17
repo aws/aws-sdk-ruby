@@ -366,6 +366,9 @@ module Aws::Cloud9
     #   An array of key-value pairs that will be associated with the new AWS
     #   Cloud9 development environment.
     #
+    # @option params [String] :connection_type
+    #   The connection type used for connecting to an Amazon EC2 environment.
+    #
     # @return [Types::CreateEnvironmentEC2Result] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateEnvironmentEC2Result#environment_id #environment_id} => String
@@ -403,6 +406,7 @@ module Aws::Cloud9
     #         value: "TagValue", # required
     #       },
     #     ],
+    #     connection_type: "CONNECT_SSH", # accepts CONNECT_SSH, CONNECT_SSM
     #   })
     #
     # @example Response structure
@@ -813,6 +817,7 @@ module Aws::Cloud9
     #   resp.environments[0].name #=> String
     #   resp.environments[0].description #=> String
     #   resp.environments[0].type #=> String, one of "ssh", "ec2"
+    #   resp.environments[0].connection_type #=> String, one of "CONNECT_SSH", "CONNECT_SSM"
     #   resp.environments[0].arn #=> String
     #   resp.environments[0].owner_arn #=> String
     #   resp.environments[0].lifecycle.status #=> String, one of "CREATING", "CREATED", "CREATE_FAILED", "DELETING", "DELETE_FAILED"
@@ -1105,7 +1110,7 @@ module Aws::Cloud9
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-cloud9'
-      context[:gem_version] = '1.25.0'
+      context[:gem_version] = '1.26.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

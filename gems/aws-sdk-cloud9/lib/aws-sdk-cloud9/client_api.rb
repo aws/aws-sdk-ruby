@@ -17,7 +17,9 @@ module Aws::Cloud9
     BadRequestException = Shapes::StructureShape.new(name: 'BadRequestException')
     BoundedEnvironmentIdList = Shapes::ListShape.new(name: 'BoundedEnvironmentIdList')
     ClientRequestToken = Shapes::StringShape.new(name: 'ClientRequestToken')
+    ConcurrentAccessException = Shapes::StructureShape.new(name: 'ConcurrentAccessException')
     ConflictException = Shapes::StructureShape.new(name: 'ConflictException')
+    ConnectionType = Shapes::StringShape.new(name: 'ConnectionType')
     CreateEnvironmentEC2Request = Shapes::StructureShape.new(name: 'CreateEnvironmentEC2Request')
     CreateEnvironmentEC2Result = Shapes::StructureShape.new(name: 'CreateEnvironmentEC2Result')
     CreateEnvironmentMembershipRequest = Shapes::StructureShape.new(name: 'CreateEnvironmentMembershipRequest')
@@ -81,6 +83,8 @@ module Aws::Cloud9
 
     BoundedEnvironmentIdList.member = Shapes::ShapeRef.new(shape: EnvironmentId)
 
+    ConcurrentAccessException.struct_class = Types::ConcurrentAccessException
+
     ConflictException.struct_class = Types::ConflictException
 
     CreateEnvironmentEC2Request.add_member(:name, Shapes::ShapeRef.new(shape: EnvironmentName, required: true, location_name: "name"))
@@ -91,6 +95,7 @@ module Aws::Cloud9
     CreateEnvironmentEC2Request.add_member(:automatic_stop_time_minutes, Shapes::ShapeRef.new(shape: AutomaticStopTimeMinutes, location_name: "automaticStopTimeMinutes"))
     CreateEnvironmentEC2Request.add_member(:owner_arn, Shapes::ShapeRef.new(shape: UserArn, location_name: "ownerArn"))
     CreateEnvironmentEC2Request.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "tags"))
+    CreateEnvironmentEC2Request.add_member(:connection_type, Shapes::ShapeRef.new(shape: ConnectionType, location_name: "connectionType"))
     CreateEnvironmentEC2Request.struct_class = Types::CreateEnvironmentEC2Request
 
     CreateEnvironmentEC2Result.add_member(:environment_id, Shapes::ShapeRef.new(shape: EnvironmentId, location_name: "environmentId"))
@@ -143,6 +148,7 @@ module Aws::Cloud9
     Environment.add_member(:name, Shapes::ShapeRef.new(shape: EnvironmentName, location_name: "name"))
     Environment.add_member(:description, Shapes::ShapeRef.new(shape: EnvironmentDescription, location_name: "description"))
     Environment.add_member(:type, Shapes::ShapeRef.new(shape: EnvironmentType, location_name: "type"))
+    Environment.add_member(:connection_type, Shapes::ShapeRef.new(shape: ConnectionType, location_name: "connectionType"))
     Environment.add_member(:arn, Shapes::ShapeRef.new(shape: String, location_name: "arn"))
     Environment.add_member(:owner_arn, Shapes::ShapeRef.new(shape: String, location_name: "ownerArn"))
     Environment.add_member(:lifecycle, Shapes::ShapeRef.new(shape: EnvironmentLifecycle, location_name: "lifecycle"))
@@ -397,6 +403,7 @@ module Aws::Cloud9
         o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerErrorException)
         o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: ConcurrentAccessException)
       end)
 
       api.add_operation(:untag_resource, Seahorse::Model::Operation.new.tap do |o|
@@ -408,6 +415,7 @@ module Aws::Cloud9
         o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerErrorException)
         o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: ConcurrentAccessException)
       end)
 
       api.add_operation(:update_environment, Seahorse::Model::Operation.new.tap do |o|

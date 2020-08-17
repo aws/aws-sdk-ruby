@@ -47,6 +47,6 @@ require_relative 'aws-sdk-frauddetector/customizations'
 # @service
 module Aws::FraudDetector
 
-  GEM_VERSION = '1.7.0'
+  GEM_VERSION = '1.9.0'
 
 end

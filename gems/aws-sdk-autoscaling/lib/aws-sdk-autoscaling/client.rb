@@ -712,6 +712,13 @@ module Aws::AutoScaling
     # Scaling User Guide*. For more information, see [Auto Scaling
     # Groups][4] in the *Amazon EC2 Auto Scaling User Guide*.
     #
+    # Every Auto Scaling group has three size parameters (`DesiredCapacity`,
+    # `MaxSize`, and `MinSize`). Usually, you set these sizes based on a
+    # specific number of instances. However, if you configure a mixed
+    # instances policy that defines weights for the instance types, you must
+    # specify these sizes with the same units that you use for weighting
+    # instances.
+    #
     #
     #
     # [1]: https://docs.aws.amazon.com/autoscaling/ec2/userguide/as-account-limits.html
@@ -804,8 +811,8 @@ module Aws::AutoScaling
     #   <note markdown="1"> With a mixed instances policy that uses instance weighting, Amazon EC2
     #   Auto Scaling may need to go above `MaxSize` to meet your capacity
     #   requirements. In this event, Amazon EC2 Auto Scaling will never go
-    #   above `MaxSize` by more than your maximum instance weight (weights
-    #   that define how many capacity units each instance contributes to the
+    #   above `MaxSize` by more than your largest instance weight (weights
+    #   that define how many units each instance contributes to the desired
     #   capacity of the group).
     #
     #    </note>
@@ -1374,6 +1381,15 @@ module Aws::AutoScaling
     #
     #   [1]: https://docs.aws.amazon.com/autoscaling/ec2/userguide/asg-in-vpc.html#as-vpc-tenancy
     #
+    # @option params [Types::InstanceMetadataOptions] :metadata_options
+    #   The metadata options for the instances. For more information, see
+    #   [Instance Metadata and User Data][1] in the *Amazon EC2 User Guide for
+    #   Linux Instances*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-instance-metadata.html
+    #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
     #
@@ -1428,6 +1444,11 @@ module Aws::AutoScaling
     #     ebs_optimized: false,
     #     associate_public_ip_address: false,
     #     placement_tenancy: "XmlStringMaxLen64",
+    #     metadata_options: {
+    #       http_tokens: "optional", # accepts optional, required
+    #       http_put_response_hop_limit: 1,
+    #       http_endpoint: "disabled", # accepts disabled, enabled
+    #     },
     #   })
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/CreateLaunchConfiguration AWS API Documentation
@@ -2411,6 +2432,9 @@ module Aws::AutoScaling
     #   resp.launch_configurations[0].ebs_optimized #=> Boolean
     #   resp.launch_configurations[0].associate_public_ip_address #=> Boolean
     #   resp.launch_configurations[0].placement_tenancy #=> String
+    #   resp.launch_configurations[0].metadata_options.http_tokens #=> String, one of "optional", "required"
+    #   resp.launch_configurations[0].metadata_options.http_put_response_hop_limit #=> Integer
+    #   resp.launch_configurations[0].metadata_options.http_endpoint #=> String, one of "disabled", "enabled"
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/DescribeLaunchConfigurations AWS API Documentation
@@ -4119,7 +4143,7 @@ module Aws::AutoScaling
     #   * `SimpleScaling` (default)
     #
     # @option params [String] :adjustment_type
-    #   Specifies how the scaling adjustment is interpreted (either an
+    #   Specifies how the scaling adjustment is interpreted (for example, an
     #   absolute number or a percentage). The valid values are
     #   `ChangeInCapacity`, `ExactCapacity`, and `PercentChangeInCapacity`.
     #
@@ -5097,8 +5121,8 @@ module Aws::AutoScaling
     #   <note markdown="1"> With a mixed instances policy that uses instance weighting, Amazon EC2
     #   Auto Scaling may need to go above `MaxSize` to meet your capacity
     #   requirements. In this event, Amazon EC2 Auto Scaling will never go
-    #   above `MaxSize` by more than your maximum instance weight (weights
-    #   that define how many capacity units each instance contributes to the
+    #   above `MaxSize` by more than your largest instance weight (weights
+    #   that define how many units each instance contributes to the desired
     #   capacity of the group).
     #
     #    </note>
@@ -5319,7 +5343,7 @@ module Aws::AutoScaling
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-autoscaling'
-      context[:gem_version] = '1.43.0'
+      context[:gem_version] = '1.44.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

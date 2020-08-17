@@ -1024,11 +1024,12 @@ module Aws::ElasticLoadBalancingV2
     # Creates a rule for the specified listener. The listener must be
     # associated with an Application Load Balancer.
     #
-    # Rules are evaluated in priority order, from the lowest value to the
-    # highest value. When the conditions for a rule are met, its actions are
-    # performed. If the conditions for no rules are met, the actions for the
-    # default rule are performed. For more information, see [Listener
-    # Rules][1] in the *Application Load Balancers Guide*.
+    # Each rule consists of a priority, one or more actions, and one or more
+    # conditions. Rules are evaluated in priority order, from the lowest
+    # value to the highest value. When the conditions for a rule are met,
+    # its actions are performed. If the conditions for no rules are met, the
+    # actions for the default rule are performed. For more information, see
+    # [Listener Rules][1] in the *Application Load Balancers Guide*.
     #
     # To view your current rules, use DescribeRules. To update a rule, use
     # ModifyRule. To set the priorities of your rules, use
@@ -1042,10 +1043,11 @@ module Aws::ElasticLoadBalancingV2
     #   The Amazon Resource Name (ARN) of the listener.
     #
     # @option params [required, Array<Types::RuleCondition>] :conditions
-    #   The conditions. Each rule can include zero or one of the following
-    #   conditions: `http-request-method`, `host-header`, `path-pattern`, and
-    #   `source-ip`, and zero or more of the following conditions:
-    #   `http-header` and `query-string`.
+    #   The conditions. Each rule can optionally include up to one of each of
+    #   the following conditions: `http-request-method`, `host-header`,
+    #   `path-pattern`, and `source-ip`. Each rule can also optionally include
+    #   one or more of each of the following conditions: `http-header` and
+    #   `query-string`.
     #
     # @option params [required, Integer] :priority
     #   The rule priority. A listener can't have multiple rules with the same
@@ -1412,8 +1414,7 @@ module Aws::ElasticLoadBalancingV2
     #   more than one target type.
     #
     #   * `instance` - Targets are specified by instance ID. This is the
-    #     default value. If the target group protocol is UDP or TCP\_UDP, the
-    #     target type must be `instance`.
+    #     default value.
     #
     #   * `ip` - Targets are specified by IP address. You can specify IP
     #     addresses from the subnets of the virtual private cloud (VPC) for
@@ -1590,6 +1591,8 @@ module Aws::ElasticLoadBalancingV2
     end
 
     # Deletes the specified rule.
+    #
+    # You can't delete the default rule.
     #
     # @option params [required, String] :rule_arn
     #   The Amazon Resource Name (ARN) of the rule.
@@ -3595,7 +3598,9 @@ module Aws::ElasticLoadBalancingV2
     #
     # @option params [Types::Matcher] :matcher
     #   \[HTTP/HTTPS health checks\] The HTTP codes to use when checking for a
-    #   successful response from a target.
+    #   successful response from a target. The possible values are from 200 to
+    #   499. You can specify multiple values (for example, "200,202") or a
+    #   range of values (for example, "200-299"). The default is 200.
     #
     #   With Network Load Balancers, you can't modify this setting.
     #
@@ -4271,7 +4276,7 @@ module Aws::ElasticLoadBalancingV2
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-elasticloadbalancingv2'
-      context[:gem_version] = '1.47.0'
+      context[:gem_version] = '1.48.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

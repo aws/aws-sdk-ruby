@@ -94,7 +94,30 @@ module Aws::AppSync
     #   @return [Boolean]
     #
     # @!attribute [rw] type
-    #   The cache instance type.
+    #   The cache instance type. Valid values are
+    #
+    #   * `SMALL`
+    #
+    #   * `MEDIUM`
+    #
+    #   * `LARGE`
+    #
+    #   * `XLARGE`
+    #
+    #   * `LARGE_2X`
+    #
+    #   * `LARGE_4X`
+    #
+    #   * `LARGE_8X` (not available in all regions)
+    #
+    #   * `LARGE_12X`
+    #
+    #   Historically, instance types were identified by an EC2-style value.
+    #   As of July 2020, this is deprecated, and the generic identifiers
+    #   above should be used.
+    #
+    #   The following legacy instance types are avaible, but their use is
+    #   discouraged:
     #
     #   * **T2\_SMALL**\: A t2.small instance type.
     #
@@ -442,7 +465,30 @@ module Aws::AppSync
     #   @return [String]
     #
     # @!attribute [rw] type
-    #   The cache instance type.
+    #   The cache instance type. Valid values are
+    #
+    #   * `SMALL`
+    #
+    #   * `MEDIUM`
+    #
+    #   * `LARGE`
+    #
+    #   * `XLARGE`
+    #
+    #   * `LARGE_2X`
+    #
+    #   * `LARGE_4X`
+    #
+    #   * `LARGE_8X` (not available in all regions)
+    #
+    #   * `LARGE_12X`
+    #
+    #   Historically, instance types were identified by an EC2-style value.
+    #   As of July 2020, this is deprecated, and the generic identifiers
+    #   above should be used.
+    #
+    #   The following legacy instance types are avaible, but their use is
+    #   discouraged:
     #
     #   * **T2\_SMALL**\: A t2.small instance type.
     #
@@ -659,7 +705,7 @@ module Aws::AppSync
     #         name: "ResourceName", # required
     #         description: "String",
     #         data_source_name: "ResourceName", # required
-    #         request_mapping_template: "MappingTemplate", # required
+    #         request_mapping_template: "MappingTemplate",
     #         response_mapping_template: "MappingTemplate",
     #         function_version: "String", # required
     #       }
@@ -835,7 +881,7 @@ module Aws::AppSync
     #         type_name: "ResourceName", # required
     #         field_name: "ResourceName", # required
     #         data_source_name: "ResourceName",
-    #         request_mapping_template: "MappingTemplate", # required
+    #         request_mapping_template: "MappingTemplate",
     #         response_mapping_template: "MappingTemplate",
     #         kind: "UNIT", # accepts UNIT, PIPELINE
     #         pipeline_config: {
@@ -876,6 +922,10 @@ module Aws::AppSync
     #   A resolver uses a request mapping template to convert a GraphQL
     #   expression into a format that a data source can understand. Mapping
     #   templates are written in Apache Velocity Template Language (VTL).
+    #
+    #   VTL request mapping templates are optional when using a Lambda data
+    #   source. For all other data sources, VTL request and response mapping
+    #   templates are required.
     #   @return [String]
     #
     # @!attribute [rw] response_mapping_template
@@ -2877,7 +2927,30 @@ module Aws::AppSync
     #   @return [String]
     #
     # @!attribute [rw] type
-    #   The cache instance type.
+    #   The cache instance type. Valid values are
+    #
+    #   * `SMALL`
+    #
+    #   * `MEDIUM`
+    #
+    #   * `LARGE`
+    #
+    #   * `XLARGE`
+    #
+    #   * `LARGE_2X`
+    #
+    #   * `LARGE_4X`
+    #
+    #   * `LARGE_8X` (not available in all regions)
+    #
+    #   * `LARGE_12X`
+    #
+    #   Historically, instance types were identified by an EC2-style value.
+    #   As of July 2020, this is deprecated, and the generic identifiers
+    #   above should be used.
+    #
+    #   The following legacy instance types are avaible, but their use is
+    #   discouraged:
     #
     #   * **T2\_SMALL**\: A t2.small instance type.
     #
@@ -3097,7 +3170,7 @@ module Aws::AppSync
     #         description: "String",
     #         function_id: "ResourceName", # required
     #         data_source_name: "ResourceName", # required
-    #         request_mapping_template: "MappingTemplate", # required
+    #         request_mapping_template: "MappingTemplate",
     #         response_mapping_template: "MappingTemplate",
     #         function_version: "String", # required
     #       }
@@ -3277,7 +3350,7 @@ module Aws::AppSync
     #         type_name: "ResourceName", # required
     #         field_name: "ResourceName", # required
     #         data_source_name: "ResourceName",
-    #         request_mapping_template: "MappingTemplate", # required
+    #         request_mapping_template: "MappingTemplate",
     #         response_mapping_template: "MappingTemplate",
     #         kind: "UNIT", # accepts UNIT, PIPELINE
     #         pipeline_config: {
@@ -3314,6 +3387,14 @@ module Aws::AppSync
     #
     # @!attribute [rw] request_mapping_template
     #   The new request mapping template.
+    #
+    #   A resolver uses a request mapping template to convert a GraphQL
+    #   expression into a format that a data source can understand. Mapping
+    #   templates are written in Apache Velocity Template Language (VTL).
+    #
+    #   VTL request mapping templates are optional when using a Lambda data
+    #   source. For all other data sources, VTL request and response mapping
+    #   templates are required.
     #   @return [String]
     #
     # @!attribute [rw] response_mapping_template

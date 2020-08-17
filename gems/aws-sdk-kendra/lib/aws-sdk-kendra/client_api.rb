@@ -161,6 +161,7 @@ module Aws::Kendra
     PrincipalType = Shapes::StringShape.new(name: 'PrincipalType')
     QueryCapacityUnit = Shapes::IntegerShape.new(name: 'QueryCapacityUnit')
     QueryId = Shapes::StringShape.new(name: 'QueryId')
+    QueryIdentifiersEnclosingOption = Shapes::StringShape.new(name: 'QueryIdentifiersEnclosingOption')
     QueryRequest = Shapes::StructureShape.new(name: 'QueryRequest')
     QueryResult = Shapes::StructureShape.new(name: 'QueryResult')
     QueryResultItem = Shapes::StructureShape.new(name: 'QueryResultItem')
@@ -211,6 +212,9 @@ module Aws::Kendra
     SharePointConfiguration = Shapes::StructureShape.new(name: 'SharePointConfiguration')
     SharePointUrlList = Shapes::ListShape.new(name: 'SharePointUrlList')
     SharePointVersion = Shapes::StringShape.new(name: 'SharePointVersion')
+    SortOrder = Shapes::StringShape.new(name: 'SortOrder')
+    SortingConfiguration = Shapes::StructureShape.new(name: 'SortingConfiguration')
+    SqlConfiguration = Shapes::StructureShape.new(name: 'SqlConfiguration')
     StartDataSourceSyncJobRequest = Shapes::StructureShape.new(name: 'StartDataSourceSyncJobRequest')
     StartDataSourceSyncJobResponse = Shapes::StructureShape.new(name: 'StartDataSourceSyncJobResponse')
     StopDataSourceSyncJobRequest = Shapes::StructureShape.new(name: 'StopDataSourceSyncJobRequest')
@@ -431,6 +435,7 @@ module Aws::Kendra
     DatabaseConfiguration.add_member(:vpc_configuration, Shapes::ShapeRef.new(shape: DataSourceVpcConfiguration, location_name: "VpcConfiguration"))
     DatabaseConfiguration.add_member(:column_configuration, Shapes::ShapeRef.new(shape: ColumnConfiguration, required: true, location_name: "ColumnConfiguration"))
     DatabaseConfiguration.add_member(:acl_configuration, Shapes::ShapeRef.new(shape: AclConfiguration, location_name: "AclConfiguration"))
+    DatabaseConfiguration.add_member(:sql_configuration, Shapes::ShapeRef.new(shape: SqlConfiguration, location_name: "SqlConfiguration"))
     DatabaseConfiguration.struct_class = Types::DatabaseConfiguration
 
     DeleteDataSourceRequest.add_member(:id, Shapes::ShapeRef.new(shape: DataSourceId, required: true, location_name: "Id"))
@@ -662,6 +667,7 @@ module Aws::Kendra
     QueryRequest.add_member(:query_result_type_filter, Shapes::ShapeRef.new(shape: QueryResultType, location_name: "QueryResultTypeFilter"))
     QueryRequest.add_member(:page_number, Shapes::ShapeRef.new(shape: Integer, location_name: "PageNumber"))
     QueryRequest.add_member(:page_size, Shapes::ShapeRef.new(shape: Integer, location_name: "PageSize"))
+    QueryRequest.add_member(:sorting_configuration, Shapes::ShapeRef.new(shape: SortingConfiguration, location_name: "SortingConfiguration"))
     QueryRequest.struct_class = Types::QueryRequest
 
     QueryResult.add_member(:query_id, Shapes::ShapeRef.new(shape: QueryId, location_name: "QueryId"))
@@ -772,6 +778,7 @@ module Aws::Kendra
     Search.add_member(:facetable, Shapes::ShapeRef.new(shape: Boolean, location_name: "Facetable"))
     Search.add_member(:searchable, Shapes::ShapeRef.new(shape: Boolean, location_name: "Searchable"))
     Search.add_member(:displayable, Shapes::ShapeRef.new(shape: Boolean, location_name: "Displayable"))
+    Search.add_member(:sortable, Shapes::ShapeRef.new(shape: Boolean, location_name: "Sortable"))
     Search.struct_class = Types::Search
 
     SecurityGroupIdList.member = Shapes::ShapeRef.new(shape: VpcSecurityGroupId)
@@ -818,6 +825,13 @@ module Aws::Kendra
     SharePointConfiguration.struct_class = Types::SharePointConfiguration
 
     SharePointUrlList.member = Shapes::ShapeRef.new(shape: Url)
+
+    SortingConfiguration.add_member(:document_attribute_key, Shapes::ShapeRef.new(shape: DocumentAttributeKey, required: true, location_name: "DocumentAttributeKey"))
+    SortingConfiguration.add_member(:sort_order, Shapes::ShapeRef.new(shape: SortOrder, required: true, location_name: "SortOrder"))
+    SortingConfiguration.struct_class = Types::SortingConfiguration
+
+    SqlConfiguration.add_member(:query_identifiers_enclosing_option, Shapes::ShapeRef.new(shape: QueryIdentifiersEnclosingOption, location_name: "QueryIdentifiersEnclosingOption"))
+    SqlConfiguration.struct_class = Types::SqlConfiguration
 
     StartDataSourceSyncJobRequest.add_member(:id, Shapes::ShapeRef.new(shape: DataSourceId, required: true, location_name: "Id"))
     StartDataSourceSyncJobRequest.add_member(:index_id, Shapes::ShapeRef.new(shape: IndexId, required: true, location_name: "IndexId"))

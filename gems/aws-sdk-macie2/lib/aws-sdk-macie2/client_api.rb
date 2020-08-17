@@ -241,6 +241,7 @@ module Aws::Macie2
     UsageByAccount = Shapes::StructureShape.new(name: 'UsageByAccount')
     UsageRecord = Shapes::StructureShape.new(name: 'UsageRecord')
     UsageStatisticsFilter = Shapes::StructureShape.new(name: 'UsageStatisticsFilter')
+    UsageStatisticsFilterComparator = Shapes::StringShape.new(name: 'UsageStatisticsFilterComparator')
     UsageStatisticsFilterKey = Shapes::StringShape.new(name: 'UsageStatisticsFilterKey')
     UsageStatisticsSortBy = Shapes::StructureShape.new(name: 'UsageStatisticsSortBy')
     UsageStatisticsSortKey = Shapes::StringShape.new(name: 'UsageStatisticsSortKey')
@@ -1169,6 +1170,7 @@ module Aws::Macie2
     UsageRecord.add_member(:usage, Shapes::ShapeRef.new(shape: __listOfUsageByAccount, location_name: "usage"))
     UsageRecord.struct_class = Types::UsageRecord
 
+    UsageStatisticsFilter.add_member(:comparator, Shapes::ShapeRef.new(shape: UsageStatisticsFilterComparator, location_name: "comparator"))
     UsageStatisticsFilter.add_member(:key, Shapes::ShapeRef.new(shape: UsageStatisticsFilterKey, location_name: "key"))
     UsageStatisticsFilter.add_member(:values, Shapes::ShapeRef.new(shape: __listOf__string, location_name: "values"))
     UsageStatisticsFilter.struct_class = Types::UsageStatisticsFilter

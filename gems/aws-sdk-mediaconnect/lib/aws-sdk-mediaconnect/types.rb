@@ -383,6 +383,7 @@ module Aws::MediaConnect
     #               secret_arn: "__string",
     #               url: "__string",
     #             },
+    #             entitlement_status: "ENABLED", # accepts ENABLED, DISABLED
     #             name: "__string",
     #             subscribers: ["__string"], # required
     #           },
@@ -722,6 +723,10 @@ module Aws::MediaConnect
     #   The ARN of the entitlement.
     #   @return [String]
     #
+    # @!attribute [rw] entitlement_status
+    #   An indication of whether the entitlement is enabled.
+    #   @return [String]
+    #
     # @!attribute [rw] name
     #   The name of the entitlement.
     #   @return [String]
@@ -739,6 +744,7 @@ module Aws::MediaConnect
       :description,
       :encryption,
       :entitlement_arn,
+      :entitlement_status,
       :name,
       :subscribers)
       SENSITIVE = []
@@ -878,6 +884,7 @@ module Aws::MediaConnect
     #           secret_arn: "__string",
     #           url: "__string",
     #         },
+    #         entitlement_status: "ENABLED", # accepts ENABLED, DISABLED
     #         name: "__string",
     #         subscribers: ["__string"], # required
     #       }
@@ -898,6 +905,13 @@ module Aws::MediaConnect
     #   associated with this entitlement.
     #   @return [Types::Encryption]
     #
+    # @!attribute [rw] entitlement_status
+    #   An indication of whether the new entitlement should be enabled or
+    #   disabled as soon as it is created. If you don’t specify the
+    #   entitlementStatus field in your request, MediaConnect sets it to
+    #   ENABLED.
+    #   @return [String]
+    #
     # @!attribute [rw] name
     #   The name of the entitlement. This value must be unique within the
     #   current flow.
@@ -915,6 +929,7 @@ module Aws::MediaConnect
       :data_transfer_subscriber_fee_percent,
       :description,
       :encryption,
+      :entitlement_status,
       :name,
       :subscribers)
       SENSITIVE = []
@@ -957,6 +972,7 @@ module Aws::MediaConnect
     #               secret_arn: "__string",
     #               url: "__string",
     #             },
+    #             entitlement_status: "ENABLED", # accepts ENABLED, DISABLED
     #             name: "__string",
     #             subscribers: ["__string"], # required
     #           },
@@ -2027,6 +2043,7 @@ module Aws::MediaConnect
     #           url: "__string",
     #         },
     #         entitlement_arn: "__string", # required
+    #         entitlement_status: "ENABLED", # accepts ENABLED, DISABLED
     #         flow_arn: "__string", # required
     #         subscribers: ["__string"],
     #       }
@@ -2045,6 +2062,13 @@ module Aws::MediaConnect
     # @!attribute [rw] entitlement_arn
     #   @return [String]
     #
+    # @!attribute [rw] entitlement_status
+    #   An indication of whether you want to enable the entitlement to allow
+    #   access, or disable it to stop streaming content to the subscriber’s
+    #   flow temporarily. If you don’t specify the entitlementStatus field
+    #   in your request, MediaConnect leaves the value unchanged.
+    #   @return [String]
+    #
     # @!attribute [rw] flow_arn
     #   @return [String]
     #
@@ -2060,6 +2084,7 @@ module Aws::MediaConnect
       :description,
       :encryption,
       :entitlement_arn,
+      :entitlement_status,
       :flow_arn,
       :subscribers)
       SENSITIVE = []

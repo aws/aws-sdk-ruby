@@ -679,7 +679,7 @@ module Aws::WorkSpaces
 
     # Deletes the specified image from your account. To delete an image, you
     # must first delete any bundles that are associated with the image and
-    # un-share the image if it is shared with other accounts.
+    # unshare the image if it is shared with other accounts.
     #
     # @option params [required, String] :image_id
     #   The identifier of the image.
@@ -1032,12 +1032,58 @@ module Aws::WorkSpaces
       req.send_request(options)
     end
 
+    # Describes the permissions that the owner of an image has granted to
+    # other AWS accounts for an image.
+    #
+    # @option params [required, String] :image_id
+    #   The identifier of the image.
+    #
+    # @option params [String] :next_token
+    #   If you received a `NextToken` from a previous call that was paginated,
+    #   provide this token to receive the next set of results.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of items to return.
+    #
+    # @return [Types::DescribeWorkspaceImagePermissionsResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeWorkspaceImagePermissionsResult#image_id #image_id} => String
+    #   * {Types::DescribeWorkspaceImagePermissionsResult#image_permissions #image_permissions} => Array&lt;Types::ImagePermission&gt;
+    #   * {Types::DescribeWorkspaceImagePermissionsResult#next_token #next_token} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_workspace_image_permissions({
+    #     image_id: "WorkspaceImageId", # required
+    #     next_token: "PaginationToken",
+    #     max_results: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.image_id #=> String
+    #   resp.image_permissions #=> Array
+    #   resp.image_permissions[0].shared_account_id #=> String
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/DescribeWorkspaceImagePermissions AWS API Documentation
+    #
+    # @overload describe_workspace_image_permissions(params = {})
+    # @param [Hash] params ({})
+    def describe_workspace_image_permissions(params = {}, options = {})
+      req = build_request(:describe_workspace_image_permissions, params)
+      req.send_request(options)
+    end
+
     # Retrieves a list that describes one or more specified images, if the
     # image identifiers are provided. Otherwise, all images in the account
     # are described.
     #
     # @option params [Array<String>] :image_ids
     #   The identifier of the image.
+    #
+    # @option params [String] :image_type
+    #   The type (owned or shared) of the image.
     #
     # @option params [String] :next_token
     #   If you received a `NextToken` from a previous call that was paginated,
@@ -1055,6 +1101,7 @@ module Aws::WorkSpaces
     #
     #   resp = client.describe_workspace_images({
     #     image_ids: ["WorkspaceImageId"],
+    #     image_type: "OWNED", # accepts OWNED, SHARED
     #     next_token: "PaginationToken",
     #     max_results: 1,
     #   })
@@ -1070,6 +1117,8 @@ module Aws::WorkSpaces
     #   resp.images[0].required_tenancy #=> String, one of "DEFAULT", "DEDICATED"
     #   resp.images[0].error_code #=> String
     #   resp.images[0].error_message #=> String
+    #   resp.images[0].created #=> Time
+    #   resp.images[0].owner_account_id #=> String
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/DescribeWorkspaceImages AWS API Documentation
@@ -1572,6 +1621,7 @@ module Aws::WorkSpaces
     #   resp = client.modify_workspace_creation_properties({
     #     resource_id: "DirectoryId", # required
     #     workspace_creation_properties: { # required
+    #       enable_work_docs: false,
     #       enable_internet_access: false,
     #       default_ou: "DefaultOu",
     #       custom_security_group_id: "SecurityGroupId",
@@ -1589,7 +1639,13 @@ module Aws::WorkSpaces
       req.send_request(options)
     end
 
-    # Modifies the specified WorkSpace properties.
+    # Modifies the specified WorkSpace properties. For important information
+    # about how to modify the size of the root and user volumes, see [
+    # Modify a WorkSpace][1].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/workspaces/latest/adminguide/modify-workspaces.html
     #
     # @option params [required, String] :workspace_id
     #   The identifier of the WorkSpace.
@@ -1697,7 +1753,7 @@ module Aws::WorkSpaces
     # Rebuilds the specified WorkSpace.
     #
     # You cannot rebuild a WorkSpace unless its state is `AVAILABLE`,
-    # `ERROR`, `UNHEALTHY`, or `STOPPED`.
+    # `ERROR`, `UNHEALTHY`, `STOPPED`, or `REBOOTING`.
     #
     # Rebuilding a WorkSpace is a potentially destructive action that can
     # result in the loss of data. For more information, see [Rebuild a
@@ -2035,6 +2091,51 @@ module Aws::WorkSpaces
       req.send_request(options)
     end
 
+    # Shares or unshares an image with one account by specifying whether
+    # that account has permission to copy the image. If the copy image
+    # permission is granted, the image is shared with that account. If the
+    # copy image permission is revoked, the image is unshared with the
+    # account.
+    #
+    # <note markdown="1"> * To delete an image that has been shared, you must unshare the image
+    #   before you delete it.
+    #
+    # * Sharing Bring Your Own License (BYOL) images across AWS accounts
+    #   isn't supported at this time in the AWS GovCloud (US-West) Region.
+    #   To share BYOL images across accounts in the AWS GovCloud (US-West)
+    #   Region, contact AWS Support.
+    #
+    #  </note>
+    #
+    # @option params [required, String] :image_id
+    #   The identifier of the image.
+    #
+    # @option params [required, Boolean] :allow_copy_image
+    #   The permission to copy the image. This permission can be revoked only
+    #   after an image has been shared.
+    #
+    # @option params [required, String] :shared_account_id
+    #   The identifier of the AWS account to share or unshare the image with.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_workspace_image_permission({
+    #     image_id: "WorkspaceImageId", # required
+    #     allow_copy_image: false, # required
+    #     shared_account_id: "AwsAccount", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/UpdateWorkspaceImagePermission AWS API Documentation
+    #
+    # @overload update_workspace_image_permission(params = {})
+    # @param [Hash] params ({})
+    def update_workspace_image_permission(params = {}, options = {})
+      req = build_request(:update_workspace_image_permission, params)
+      req.send_request(options)
+    end
+
     # @!endgroup
 
     # @param params ({})
@@ -2048,7 +2149,7 @@ module Aws::WorkSpaces
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-workspaces'
-      context[:gem_version] = '1.40.0'
+      context[:gem_version] = '1.42.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.48.0 (2020-08-12)
+------------------
+
+* Feature - Support for creating Lambda Functions using 'java8.al2' and 'provided.al2'
+
+1.47.0 (2020-08-11)
+------------------
+
+* Feature - Support Managed Streaming for Kafka as an Event Source. Support retry until record expiration for Kinesis and Dynamodb streams event source mappings.
+
 1.46.0 (2020-07-02)
 ------------------
 

@@ -642,6 +642,7 @@ module Aws::Glue
     #   resp.crawlers[0].targets.s3_targets[0].path #=> String
     #   resp.crawlers[0].targets.s3_targets[0].exclusions #=> Array
     #   resp.crawlers[0].targets.s3_targets[0].exclusions[0] #=> String
+    #   resp.crawlers[0].targets.s3_targets[0].connection_name #=> String
     #   resp.crawlers[0].targets.jdbc_targets #=> Array
     #   resp.crawlers[0].targets.jdbc_targets[0].connection_name #=> String
     #   resp.crawlers[0].targets.jdbc_targets[0].path #=> String
@@ -997,11 +998,13 @@ module Aws::Glue
     #   resp.workflows[0].last_modified_on #=> Time
     #   resp.workflows[0].last_run.name #=> String
     #   resp.workflows[0].last_run.workflow_run_id #=> String
+    #   resp.workflows[0].last_run.previous_run_id #=> String
     #   resp.workflows[0].last_run.workflow_run_properties #=> Hash
     #   resp.workflows[0].last_run.workflow_run_properties["IdString"] #=> String
     #   resp.workflows[0].last_run.started_on #=> Time
     #   resp.workflows[0].last_run.completed_on #=> Time
-    #   resp.workflows[0].last_run.status #=> String, one of "RUNNING", "COMPLETED", "STOPPING", "STOPPED"
+    #   resp.workflows[0].last_run.status #=> String, one of "RUNNING", "COMPLETED", "STOPPING", "STOPPED", "ERROR"
+    #   resp.workflows[0].last_run.error_message #=> String
     #   resp.workflows[0].last_run.statistics.total_actions #=> Integer
     #   resp.workflows[0].last_run.statistics.timeout_actions #=> Integer
     #   resp.workflows[0].last_run.statistics.failed_actions #=> Integer
@@ -1132,6 +1135,7 @@ module Aws::Glue
     #   resp.workflows[0].graph.edges #=> Array
     #   resp.workflows[0].graph.edges[0].source_id #=> String
     #   resp.workflows[0].graph.edges[0].destination_id #=> String
+    #   resp.workflows[0].max_concurrent_runs #=> Integer
     #   resp.missing_workflows #=> Array
     #   resp.missing_workflows[0] #=> String
     #
@@ -1299,7 +1303,7 @@ module Aws::Glue
     #     connection_input: { # required
     #       name: "NameString", # required
     #       description: "DescriptionString",
-    #       connection_type: "JDBC", # required, accepts JDBC, SFTP, MONGODB, KAFKA
+    #       connection_type: "JDBC", # required, accepts JDBC, SFTP, MONGODB, KAFKA, NETWORK
     #       match_criteria: ["NameString"],
     #       connection_properties: { # required
     #         "HOST" => "ValueString",
@@ -1400,6 +1404,7 @@ module Aws::Glue
     #         {
     #           path: "Path",
     #           exclusions: ["Path"],
+    #           connection_name: "ConnectionName",
     #         },
     #       ],
     #       jdbc_targets: [
@@ -1777,9 +1782,10 @@ module Aws::Glue
     #     or 1 DPU. The default is 0.0625 DPU.
     #
     #   * When you specify an Apache Spark ETL job
-    #     (`JobCommand.Name`="glueetl"), you can allocate from 2 to 100
-    #     DPUs. The default is 10 DPUs. This job type cannot have a fractional
-    #     DPU allocation.
+    #     (`JobCommand.Name`="glueetl") or Apache Spark streaming ETL job
+    #     (`JobCommand.Name`="gluestreaming"), you can allocate from 2 to
+    #     100 DPUs. The default is 10 DPUs. This job type cannot have a
+    #     fractional DPU allocation.
     #
     #
     #
@@ -2558,6 +2564,13 @@ module Aws::Glue
     # @option params [Hash<String,String>] :tags
     #   The tags to be used with this workflow.
     #
+    # @option params [Integer] :max_concurrent_runs
+    #   You can use this parameter to prevent unwanted multiple updates to
+    #   data, to control costs, or in some cases, to prevent exceeding the
+    #   maximum number of concurrent runs of any of the component jobs. If you
+    #   leave this parameter blank, there is no limit to the number of
+    #   concurrent workflow runs.
+    #
     # @return [Types::CreateWorkflowResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateWorkflowResponse#name #name} => String
@@ -2573,6 +2586,7 @@ module Aws::Glue
     #     tags: {
     #       "TagKey" => "TagValue",
     #     },
+    #     max_concurrent_runs: 1,
     #   })
     #
     # @example Response structure
@@ -3464,7 +3478,7 @@ module Aws::Glue
     #
     #   resp.connection.name #=> String
     #   resp.connection.description #=> String
-    #   resp.connection.connection_type #=> String, one of "JDBC", "SFTP", "MONGODB", "KAFKA"
+    #   resp.connection.connection_type #=> String, one of "JDBC", "SFTP", "MONGODB", "KAFKA", "NETWORK"
     #   resp.connection.match_criteria #=> Array
     #   resp.connection.match_criteria[0] #=> String
     #   resp.connection.connection_properties #=> Hash
@@ -3522,7 +3536,7 @@ module Aws::Glue
     #     catalog_id: "CatalogIdString",
     #     filter: {
     #       match_criteria: ["NameString"],
-    #       connection_type: "JDBC", # accepts JDBC, SFTP, MONGODB, KAFKA
+    #       connection_type: "JDBC", # accepts JDBC, SFTP, MONGODB, KAFKA, NETWORK
     #     },
     #     hide_password: false,
     #     next_token: "Token",
@@ -3534,7 +3548,7 @@ module Aws::Glue
     #   resp.connection_list #=> Array
     #   resp.connection_list[0].name #=> String
     #   resp.connection_list[0].description #=> String
-    #   resp.connection_list[0].connection_type #=> String, one of "JDBC", "SFTP", "MONGODB", "KAFKA"
+    #   resp.connection_list[0].connection_type #=> String, one of "JDBC", "SFTP", "MONGODB", "KAFKA", "NETWORK"
     #   resp.connection_list[0].match_criteria #=> Array
     #   resp.connection_list[0].match_criteria[0] #=> String
     #   resp.connection_list[0].connection_properties #=> Hash
@@ -3580,6 +3594,7 @@ module Aws::Glue
     #   resp.crawler.targets.s3_targets[0].path #=> String
     #   resp.crawler.targets.s3_targets[0].exclusions #=> Array
     #   resp.crawler.targets.s3_targets[0].exclusions[0] #=> String
+    #   resp.crawler.targets.s3_targets[0].connection_name #=> String
     #   resp.crawler.targets.jdbc_targets #=> Array
     #   resp.crawler.targets.jdbc_targets[0].connection_name #=> String
     #   resp.crawler.targets.jdbc_targets[0].path #=> String
@@ -3704,6 +3719,7 @@ module Aws::Glue
     #   resp.crawlers[0].targets.s3_targets[0].path #=> String
     #   resp.crawlers[0].targets.s3_targets[0].exclusions #=> Array
     #   resp.crawlers[0].targets.s3_targets[0].exclusions[0] #=> String
+    #   resp.crawlers[0].targets.s3_targets[0].connection_name #=> String
     #   resp.crawlers[0].targets.jdbc_targets #=> Array
     #   resp.crawlers[0].targets.jdbc_targets[0].connection_name #=> String
     #   resp.crawlers[0].targets.jdbc_targets[0].path #=> String
@@ -5103,6 +5119,11 @@ module Aws::Glue
     # Retrieves the security configurations for the resource policies set on
     # individual resources, and also the account-level policy.
     #
+    # This operation also returns the Data Catalog resource policy. However,
+    # if you enabled metadata encryption in Data Catalog settings, and you
+    # do not have permission on the AWS KMS key, the operation can't return
+    # the Data Catalog resource policy.
+    #
     # @option params [String] :next_token
     #   A continuation token, if this is a continuation request.
     #
@@ -5949,11 +5970,13 @@ module Aws::Glue
     #   resp.workflow.last_modified_on #=> Time
     #   resp.workflow.last_run.name #=> String
     #   resp.workflow.last_run.workflow_run_id #=> String
+    #   resp.workflow.last_run.previous_run_id #=> String
     #   resp.workflow.last_run.workflow_run_properties #=> Hash
     #   resp.workflow.last_run.workflow_run_properties["IdString"] #=> String
     #   resp.workflow.last_run.started_on #=> Time
     #   resp.workflow.last_run.completed_on #=> Time
-    #   resp.workflow.last_run.status #=> String, one of "RUNNING", "COMPLETED", "STOPPING", "STOPPED"
+    #   resp.workflow.last_run.status #=> String, one of "RUNNING", "COMPLETED", "STOPPING", "STOPPED", "ERROR"
+    #   resp.workflow.last_run.error_message #=> String
     #   resp.workflow.last_run.statistics.total_actions #=> Integer
     #   resp.workflow.last_run.statistics.timeout_actions #=> Integer
     #   resp.workflow.last_run.statistics.failed_actions #=> Integer
@@ -6084,6 +6107,7 @@ module Aws::Glue
     #   resp.workflow.graph.edges #=> Array
     #   resp.workflow.graph.edges[0].source_id #=> String
     #   resp.workflow.graph.edges[0].destination_id #=> String
+    #   resp.workflow.max_concurrent_runs #=> Integer
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/GetWorkflow AWS API Documentation
     #
@@ -6121,11 +6145,13 @@ module Aws::Glue
     #
     #   resp.run.name #=> String
     #   resp.run.workflow_run_id #=> String
+    #   resp.run.previous_run_id #=> String
     #   resp.run.workflow_run_properties #=> Hash
     #   resp.run.workflow_run_properties["IdString"] #=> String
     #   resp.run.started_on #=> Time
     #   resp.run.completed_on #=> Time
-    #   resp.run.status #=> String, one of "RUNNING", "COMPLETED", "STOPPING", "STOPPED"
+    #   resp.run.status #=> String, one of "RUNNING", "COMPLETED", "STOPPING", "STOPPED", "ERROR"
+    #   resp.run.error_message #=> String
     #   resp.run.statistics.total_actions #=> Integer
     #   resp.run.statistics.timeout_actions #=> Integer
     #   resp.run.statistics.failed_actions #=> Integer
@@ -6272,11 +6298,13 @@ module Aws::Glue
     #   resp.runs #=> Array
     #   resp.runs[0].name #=> String
     #   resp.runs[0].workflow_run_id #=> String
+    #   resp.runs[0].previous_run_id #=> String
     #   resp.runs[0].workflow_run_properties #=> Hash
     #   resp.runs[0].workflow_run_properties["IdString"] #=> String
     #   resp.runs[0].started_on #=> Time
     #   resp.runs[0].completed_on #=> Time
-    #   resp.runs[0].status #=> String, one of "RUNNING", "COMPLETED", "STOPPING", "STOPPED"
+    #   resp.runs[0].status #=> String, one of "RUNNING", "COMPLETED", "STOPPING", "STOPPED", "ERROR"
+    #   resp.runs[0].error_message #=> String
     #   resp.runs[0].statistics.total_actions #=> Integer
     #   resp.runs[0].statistics.timeout_actions #=> Integer
     #   resp.runs[0].statistics.failed_actions #=> Integer
@@ -6874,6 +6902,48 @@ module Aws::Glue
       req.send_request(options)
     end
 
+    # Restarts selected nodes of a previous partially completed workflow run
+    # and resumes the workflow run. The selected nodes and all nodes that
+    # are downstream from the selected nodes are run.
+    #
+    # @option params [required, String] :name
+    #   The name of the workflow to resume.
+    #
+    # @option params [required, String] :run_id
+    #   The ID of the workflow run to resume.
+    #
+    # @option params [required, Array<String>] :node_ids
+    #   A list of the node IDs for the nodes you want to restart. The nodes
+    #   that are to be restarted must have a run attempt in the original run.
+    #
+    # @return [Types::ResumeWorkflowRunResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ResumeWorkflowRunResponse#run_id #run_id} => String
+    #   * {Types::ResumeWorkflowRunResponse#node_ids #node_ids} => Array&lt;String&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.resume_workflow_run({
+    #     name: "NameString", # required
+    #     run_id: "IdString", # required
+    #     node_ids: ["NameString"], # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.run_id #=> String
+    #   resp.node_ids #=> Array
+    #   resp.node_ids[0] #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/ResumeWorkflowRun AWS API Documentation
+    #
+    # @overload resume_workflow_run(params = {})
+    # @param [Hash] params ({})
+    def resume_workflow_run(params = {}, options = {})
+      req = build_request(:resume_workflow_run, params)
+      req.send_request(options)
+    end
+
     # Searches a set of tables based on properties in the table metadata as
     # well as on the parent database. You can search against text or filter
     # conditions.
@@ -6888,7 +6958,7 @@ module Aws::Glue
     # search.
     #
     # @option params [String] :catalog_id
-    #   A unique identifier, consisting of ` account_id/datalake`.
+    #   A unique identifier, consisting of ` account_id `.
     #
     # @option params [String] :next_token
     #   A continuation token, included if this is a continuation call.
@@ -6896,6 +6966,16 @@ module Aws::Glue
     # @option params [Array<Types::PropertyPredicate>] :filters
     #   A list of key-value pairs, and a comparator used to filter the search
     #   results. Returns all entities matching the predicate.
+    #
+    #   The `Comparator` member of the `PropertyPredicate` struct is used only
+    #   for time fields, and can be omitted for other field types. Also, when
+    #   comparing string values, such as when `Key=Name`, a fuzzy match
+    #   algorithm is used. The `Key` field (for example, the value of the
+    #   `Name` field) is split on certain punctuation characters, for example,
+    #   -, :, #, etc. into tokens. Then each token is exact-match compared
+    #   with the `Value` member of `PropertyPredicate`. For example, if
+    #   `Key=Name` and `Value=link`, tables named `customer-link` and
+    #   `xx-link-yy` are returned, but `xxlinkyy` is not returned.
     #
     # @option params [String] :search_text
     #   A string used for a text search.
@@ -7967,7 +8047,7 @@ module Aws::Glue
     #     connection_input: { # required
     #       name: "NameString", # required
     #       description: "DescriptionString",
-    #       connection_type: "JDBC", # required, accepts JDBC, SFTP, MONGODB, KAFKA
+    #       connection_type: "JDBC", # required, accepts JDBC, SFTP, MONGODB, KAFKA, NETWORK
     #       match_criteria: ["NameString"],
     #       connection_properties: { # required
     #         "HOST" => "ValueString",
@@ -8057,6 +8137,7 @@ module Aws::Glue
     #         {
     #           path: "Path",
     #           exclusions: ["Path"],
+    #           connection_name: "ConnectionName",
     #         },
     #       ],
     #       jdbc_targets: [
@@ -8452,10 +8533,14 @@ module Aws::Glue
     #   The name of the table in which the partition to be updated is located.
     #
     # @option params [required, Array<String>] :partition_value_list
-    #   A list of the values defining the partition.
+    #   List of partition key values that define the partition to update.
     #
     # @option params [required, Types::PartitionInput] :partition_input
     #   The new partition object to update the partition to.
+    #
+    #   The `Values` property can't be changed. If you want to change the
+    #   partition key values for a partition, delete and recreate the
+    #   partition.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -8779,6 +8864,13 @@ module Aws::Glue
     #   A collection of properties to be used as part of each execution of the
     #   workflow.
     #
+    # @option params [Integer] :max_concurrent_runs
+    #   You can use this parameter to prevent unwanted multiple updates to
+    #   data, to control costs, or in some cases, to prevent exceeding the
+    #   maximum number of concurrent runs of any of the component jobs. If you
+    #   leave this parameter blank, there is no limit to the number of
+    #   concurrent workflow runs.
+    #
     # @return [Types::UpdateWorkflowResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::UpdateWorkflowResponse#name #name} => String
@@ -8791,6 +8883,7 @@ module Aws::Glue
     #     default_run_properties: {
     #       "IdString" => "GenericString",
     #     },
+    #     max_concurrent_runs: 1,
     #   })
     #
     # @example Response structure
@@ -8819,7 +8912,7 @@ module Aws::Glue
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-glue'
-      context[:gem_version] = '1.63.0'
+      context[:gem_version] = '1.67.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

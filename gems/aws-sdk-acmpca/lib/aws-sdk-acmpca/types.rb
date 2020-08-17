@@ -28,10 +28,10 @@ module Aws::ACMPCA
     #         country: "CountryCodeString",
     #         organization: "String64",
     #         organizational_unit: "String64",
-    #         distinguished_name_qualifier: "DistinguishedNameQualifierString",
+    #         distinguished_name_qualifier: "ASN1PrintableString64",
     #         state: "String128",
     #         common_name: "String64",
-    #         serial_number: "String64",
+    #         serial_number: "ASN1PrintableString64",
     #         locality: "String128",
     #         title: "String64",
     #         surname: "String40",
@@ -135,17 +135,28 @@ module Aws::ACMPCA
     # Your private CA can issue and revoke X.509 digital certificates.
     # Digital certificates verify that the entity named in the certificate
     # **Subject** field owns or controls the public key contained in the
-    # **Subject Public Key Info** field. Call the CreateCertificateAuthority
-    # action to create your private CA. You must then call the
-    # GetCertificateAuthorityCertificate action to retrieve a private CA
-    # certificate signing request (CSR). Sign the CSR with your ACM Private
-    # CA-hosted or on-premises root or subordinate CA certificate. Call the
-    # ImportCertificateAuthorityCertificate action to import the signed
-    # certificate into AWS Certificate Manager (ACM).
+    # **Subject Public Key Info** field. Call the
+    # [CreateCertificateAuthority][1] action to create your private CA. You
+    # must then call the [GetCertificateAuthorityCertificate][2] action to
+    # retrieve a private CA certificate signing request (CSR). Sign the CSR
+    # with your ACM Private CA-hosted or on-premises root or subordinate CA
+    # certificate. Call the [ImportCertificateAuthorityCertificate][3]
+    # action to import the signed certificate into AWS Certificate Manager
+    # (ACM).
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/acm-pca/latest/APIReference/API_CreateCertificateAuthority.html
+    # [2]: https://docs.aws.amazon.com/acm-pca/latest/APIReference/API_GetCertificateAuthorityCertificate.html
+    # [3]: https://docs.aws.amazon.com/acm-pca/latest/APIReference/API_ImportCertificateAuthorityCertificate.html
     #
     # @!attribute [rw] arn
     #   Amazon Resource Name (ARN) for your private certificate authority
     #   (CA). The format is ` 12345678-1234-1234-1234-123456789012 `.
+    #   @return [String]
+    #
+    # @!attribute [rw] owner_account
+    #   The AWS account ID that owns the certificate authority.
     #   @return [String]
     #
     # @!attribute [rw] created_at
@@ -192,13 +203,18 @@ module Aws::ACMPCA
     # @!attribute [rw] restorable_until
     #   The period during which a deleted CA can be restored. For more
     #   information, see the `PermanentDeletionTimeInDays` parameter of the
-    #   DeleteCertificateAuthorityRequest action.
+    #   [DeleteCertificateAuthorityRequest][1] action.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/acm-pca/latest/APIReference/API_DeleteCertificateAuthorityRequest.html
     #   @return [Time]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/acm-pca-2017-08-22/CertificateAuthority AWS API Documentation
     #
     class CertificateAuthority < Struct.new(
       :arn,
+      :owner_account,
       :created_at,
       :last_state_change_at,
       :type,
@@ -220,7 +236,11 @@ module Aws::ACMPCA
     # issues a certificate. It also includes the signature algorithm that it
     # uses when issuing certificates, and its X.500 distinguished name. You
     # must specify this information when you call the
-    # CreateCertificateAuthority action.
+    # [CreateCertificateAuthority][1] action.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/acm-pca/latest/APIReference/API_CreateCertificateAuthority.html
     #
     # @note When making an API call, you may pass CertificateAuthorityConfiguration
     #   data as a hash:
@@ -232,10 +252,10 @@ module Aws::ACMPCA
     #           country: "CountryCodeString",
     #           organization: "String64",
     #           organizational_unit: "String64",
-    #           distinguished_name_qualifier: "DistinguishedNameQualifierString",
+    #           distinguished_name_qualifier: "ASN1PrintableString64",
     #           state: "String128",
     #           common_name: "String64",
-    #           serial_number: "String64",
+    #           serial_number: "ASN1PrintableString64",
     #           locality: "String128",
     #           title: "String64",
     #           surname: "String40",
@@ -256,6 +276,9 @@ module Aws::ACMPCA
     # @!attribute [rw] signing_algorithm
     #   Name of the algorithm your private CA uses to sign certificate
     #   requests.
+    #
+    #   This parameter should not be confused with the `SigningAlgorithm`
+    #   parameter used to sign certificates when they are issued.
     #   @return [String]
     #
     # @!attribute [rw] subject
@@ -305,7 +328,7 @@ module Aws::ACMPCA
     #
     #       {
     #         certificate_authority_arn: "Arn", # required
-    #         s3_bucket_name: "String", # required
+    #         s3_bucket_name: "S3BucketName", # required
     #         audit_report_response_format: "JSON", # required, accepts JSON, CSV
     #       }
     #
@@ -365,10 +388,10 @@ module Aws::ACMPCA
     #             country: "CountryCodeString",
     #             organization: "String64",
     #             organizational_unit: "String64",
-    #             distinguished_name_qualifier: "DistinguishedNameQualifierString",
+    #             distinguished_name_qualifier: "ASN1PrintableString64",
     #             state: "String128",
     #             common_name: "String64",
-    #             serial_number: "String64",
+    #             serial_number: "ASN1PrintableString64",
     #             locality: "String128",
     #             title: "String64",
     #             surname: "String40",
@@ -407,7 +430,11 @@ module Aws::ACMPCA
     #   ACM Private CA will write the CRL, and an optional CNAME alias that
     #   you can use to hide the name of your bucket in the **CRL
     #   Distribution Points** extension of your CA certificate. For more
-    #   information, see the CrlConfiguration structure.
+    #   information, see the [CrlConfiguration][1] structure.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/acm-pca/latest/APIReference/API_CrlConfiguration.html
     #   @return [Types::RevocationConfiguration]
     #
     # @!attribute [rw] certificate_authority_type
@@ -416,22 +443,19 @@ module Aws::ACMPCA
     #
     # @!attribute [rw] idempotency_token
     #   Alphanumeric string that can be used to distinguish between calls to
-    #   **CreateCertificateAuthority**. Idempotency tokens time out after
-    #   five minutes. Therefore, if you call **CreateCertificateAuthority**
-    #   multiple times with the same idempotency token within a five minute
-    #   period, ACM Private CA recognizes that you are requesting only one
-    #   certificate. As a result, ACM Private CA issues only one. If you
-    #   change the idempotency token for each call, however, ACM Private CA
-    #   recognizes that you are requesting multiple certificates.
+    #   **CreateCertificateAuthority**. For a given token, ACM Private CA
+    #   creates exactly one CA. If you issue a subsequent call using the
+    #   same token, ACM Private CA returns the ARN of the existing CA and
+    #   takes no further action. If you change the idempotency token across
+    #   multiple calls, ACM Private CA creates a unique CA for each unique
+    #   token.
     #   @return [String]
     #
     # @!attribute [rw] tags
     #   Key-value pairs that will be attached to the new private CA. You can
     #   associate up to 50 tags with a private CA. For information using
-    #   tags with
-    #
-    #   IAM to manage permissions, see [Controlling Access Using IAM
-    #   Tags][1].
+    #   tags with IAM to manage permissions, see [Controlling Access Using
+    #   IAM Tags][1].
     #
     #
     #
@@ -479,11 +503,15 @@ module Aws::ACMPCA
     # @!attribute [rw] certificate_authority_arn
     #   The Amazon Resource Name (ARN) of the CA that grants the
     #   permissions. You can find the ARN by calling the
-    #   ListCertificateAuthorities action. This must have the following
+    #   [ListCertificateAuthorities][1] action. This must have the following
     #   form:
     #
     #   `arn:aws:acm-pca:region:account:certificate-authority/12345678-1234-1234-1234-123456789012
     #   `.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/acm-pca/latest/APIReference/API_ListCertificateAuthorities.html
     #   @return [String]
     #
     # @!attribute [rw] principal
@@ -521,6 +549,9 @@ module Aws::ACMPCA
     # copies the CNAME or the S3 bucket name to the **CRL Distribution
     # Points** extension of each certificate it issues. Your S3 bucket
     # policy must give write permission to ACM Private CA.
+    #
+    # ACM Private CAA assets that are stored in Amazon S3 can be protected
+    # with encryption. For more information, see [Encrypting Your CRLs][1].
     #
     # Your private CA uses the value in the **ExpirationInDays** parameter
     # to calculate the **nextUpdate** field in the CRL. The CRL is refreshed
@@ -576,6 +607,10 @@ module Aws::ACMPCA
     #
     # `openssl crl -inform DER -text -in crl_path -noout`
     #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/acm-pca/latest/userguide/PcaCreateCa.html#crl-encryption
+    #
     # @note When making an API call, you may pass CrlConfiguration
     #   data as a hash:
     #
@@ -589,9 +624,14 @@ module Aws::ACMPCA
     # @!attribute [rw] enabled
     #   Boolean value that specifies whether certificate revocation lists
     #   (CRLs) are enabled. You can use this value to enable certificate
-    #   revocation for a new CA when you call the CreateCertificateAuthority
-    #   action or for an existing CA when you call the
-    #   UpdateCertificateAuthority action.
+    #   revocation for a new CA when you call the
+    #   [CreateCertificateAuthority][1] action or for an existing CA when
+    #   you call the [UpdateCertificateAuthority][2] action.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/acm-pca/latest/APIReference/API_CreateCertificateAuthority.html
+    #   [2]: https://docs.aws.amazon.com/acm-pca/latest/APIReference/API_UpdateCertificateAuthority.html
     #   @return [Boolean]
     #
     # @!attribute [rw] expiration_in_days
@@ -610,9 +650,13 @@ module Aws::ACMPCA
     #   value for the **CustomCname** argument, the name of your S3 bucket
     #   is placed into the **CRL Distribution Points** extension of the
     #   issued certificate. You can change the name of your bucket by
-    #   calling the UpdateCertificateAuthority action. You must specify a
-    #   bucket policy that allows ACM Private CA to write the CRL to your
+    #   calling the [UpdateCertificateAuthority][1] action. You must specify
+    #   a bucket policy that allows ACM Private CA to write the CRL to your
     #   bucket.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/acm-pca/latest/APIReference/API_UpdateCertificateAuthority.html
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/acm-pca-2017-08-22/CrlConfiguration AWS API Documentation
@@ -636,10 +680,14 @@ module Aws::ACMPCA
     #
     # @!attribute [rw] certificate_authority_arn
     #   The Amazon Resource Name (ARN) that was returned when you called
-    #   CreateCertificateAuthority. This must have the following form:
+    #   [CreateCertificateAuthority][1]. This must have the following form:
     #
     #   `arn:aws:acm-pca:region:account:certificate-authority/12345678-1234-1234-1234-123456789012
     #   `.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/acm-pca/latest/APIReference/API_CreateCertificateAuthority.html
     #   @return [String]
     #
     # @!attribute [rw] permanent_deletion_time_in_days
@@ -669,11 +717,15 @@ module Aws::ACMPCA
     # @!attribute [rw] certificate_authority_arn
     #   The Amazon Resource Number (ARN) of the private CA that issued the
     #   permissions. You can find the CA's ARN by calling the
-    #   ListCertificateAuthorities action. This must have the following
+    #   [ListCertificateAuthorities][1] action. This must have the following
     #   form:
     #
     #   `arn:aws:acm-pca:region:account:certificate-authority/12345678-1234-1234-1234-123456789012
     #   `.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/acm-pca/latest/APIReference/API_ListCertificateAuthorities.html
     #   @return [String]
     #
     # @!attribute [rw] principal
@@ -696,6 +748,33 @@ module Aws::ACMPCA
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass DeletePolicyRequest
+    #   data as a hash:
+    #
+    #       {
+    #         resource_arn: "Arn", # required
+    #       }
+    #
+    # @!attribute [rw] resource_arn
+    #   The Amazon Resource Number (ARN) of the private CA that will have
+    #   its policy deleted. You can find the CA's ARN by calling the
+    #   [ListCertificateAuthorities][1] action. The ARN value must have the
+    #   form
+    #   `arn:aws:acm-pca:region:account:certificate-authority/01234567-89ab-cdef-0123-0123456789ab`.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/acm-pca/latest/APIReference/API_ListCertificateAuthorities.html
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/acm-pca-2017-08-22/DeletePolicyRequest AWS API Documentation
+    #
+    class DeletePolicyRequest < Struct.new(
+      :resource_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass DescribeCertificateAuthorityAuditReportRequest
     #   data as a hash:
     #
@@ -714,7 +793,11 @@ module Aws::ACMPCA
     #
     # @!attribute [rw] audit_report_id
     #   The report ID returned by calling the
-    #   CreateCertificateAuthorityAuditReport action.
+    #   [CreateCertificateAuthorityAuditReport][1] action.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/acm-pca/latest/APIReference/API_CreateCertificateAuthorityAuditReport.html
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/acm-pca-2017-08-22/DescribeCertificateAuthorityAuditReportRequest AWS API Documentation
@@ -764,10 +847,14 @@ module Aws::ACMPCA
     #
     # @!attribute [rw] certificate_authority_arn
     #   The Amazon Resource Name (ARN) that was returned when you called
-    #   CreateCertificateAuthority. This must be of the form:
+    #   [CreateCertificateAuthority][1]. This must be of the form:
     #
     #   `arn:aws:acm-pca:region:account:certificate-authority/12345678-1234-1234-1234-123456789012
     #   `.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/acm-pca/latest/APIReference/API_CreateCertificateAuthority.html
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/acm-pca-2017-08-22/DescribeCertificateAuthorityRequest AWS API Documentation
@@ -779,8 +866,12 @@ module Aws::ACMPCA
     end
 
     # @!attribute [rw] certificate_authority
-    #   A CertificateAuthority structure that contains information about
-    #   your private CA.
+    #   A [CertificateAuthority][1] structure that contains information
+    #   about your private CA.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/acm-pca/latest/APIReference/API_CertificateAuthority.html
     #   @return [Types::CertificateAuthority]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/acm-pca-2017-08-22/DescribeCertificateAuthorityResponse AWS API Documentation
@@ -844,10 +935,14 @@ module Aws::ACMPCA
     #
     # @!attribute [rw] certificate_authority_arn
     #   The Amazon Resource Name (ARN) that was returned when you called the
-    #   CreateCertificateAuthority action. This must be of the form:
+    #   [CreateCertificateAuthority][1] action. This must be of the form:
     #
     #   `arn:aws:acm-pca:region:account:certificate-authority/12345678-1234-1234-1234-123456789012
     #   `
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/acm-pca/latest/APIReference/API_CreateCertificateAuthority.html
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/acm-pca-2017-08-22/GetCertificateAuthorityCsrRequest AWS API Documentation
@@ -881,10 +976,14 @@ module Aws::ACMPCA
     #
     # @!attribute [rw] certificate_authority_arn
     #   The Amazon Resource Name (ARN) that was returned when you called
-    #   CreateCertificateAuthority. This must be of the form:
+    #   [CreateCertificateAuthority][1]. This must be of the form:
     #
     #   `arn:aws:acm-pca:region:account:certificate-authority/12345678-1234-1234-1234-123456789012
     #   `.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/acm-pca/latest/APIReference/API_CreateCertificateAuthority.html
     #   @return [String]
     #
     # @!attribute [rw] certificate_arn
@@ -924,6 +1023,39 @@ module Aws::ACMPCA
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass GetPolicyRequest
+    #   data as a hash:
+    #
+    #       {
+    #         resource_arn: "Arn", # required
+    #       }
+    #
+    # @!attribute [rw] resource_arn
+    #   The Amazon Resource Number (ARN) of the private CA that will have
+    #   its policy retrieved. You can find the CA's ARN by calling the
+    #   ListCertificateAuthorities action.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/acm-pca-2017-08-22/GetPolicyRequest AWS API Documentation
+    #
+    class GetPolicyRequest < Struct.new(
+      :resource_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] policy
+    #   The policy attached to the private CA as a JSON document.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/acm-pca-2017-08-22/GetPolicyResponse AWS API Documentation
+    #
+    class GetPolicyResponse < Struct.new(
+      :policy)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass ImportCertificateAuthorityCertificateRequest
     #   data as a hash:
     #
@@ -935,10 +1067,14 @@ module Aws::ACMPCA
     #
     # @!attribute [rw] certificate_authority_arn
     #   The Amazon Resource Name (ARN) that was returned when you called
-    #   CreateCertificateAuthority. This must be of the form:
+    #   [CreateCertificateAuthority][1]. This must be of the form:
     #
     #   `arn:aws:acm-pca:region:account:certificate-authority/12345678-1234-1234-1234-123456789012
     #   `
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/acm-pca/latest/APIReference/API_CreateCertificateAuthority.html
     #   @return [String]
     #
     # @!attribute [rw] certificate
@@ -996,7 +1132,12 @@ module Aws::ACMPCA
     end
 
     # The token specified in the `NextToken` argument is not valid. Use the
-    # token returned from your previous call to ListCertificateAuthorities.
+    # token returned from your previous call to
+    # [ListCertificateAuthorities][1].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/acm-pca/latest/APIReference/API_ListCertificateAuthorities.html
     #
     # @!attribute [rw] message
     #   @return [String]
@@ -1009,9 +1150,13 @@ module Aws::ACMPCA
       include Aws::Structure
     end
 
-    # The S3 bucket policy is not valid. The policy must give ACM Private CA
-    # rights to read from and write to the bucket and find the bucket
-    # location.
+    # The resource policy is invalid or is missing a required statement. For
+    # general information about IAM policy and statement structure, see
+    # [Overview of JSON Policies][1].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/https:/docs.aws.amazon.com/IAM/latest/UserGuide/access_policies.html#access_policies-json
     #
     # @!attribute [rw] message
     #   @return [String]
@@ -1037,8 +1182,7 @@ module Aws::ACMPCA
       include Aws::Structure
     end
 
-    # The private CA is in a state during which a report or certificate
-    # cannot be generated.
+    # The state of the private CA does not allow this action to occur.
     #
     # @!attribute [rw] message
     #   @return [String]
@@ -1082,10 +1226,14 @@ module Aws::ACMPCA
     #
     # @!attribute [rw] certificate_authority_arn
     #   The Amazon Resource Name (ARN) that was returned when you called
-    #   CreateCertificateAuthority. This must be of the form:
+    #   [CreateCertificateAuthority][1]. This must be of the form:
     #
     #   `arn:aws:acm-pca:region:account:certificate-authority/12345678-1234-1234-1234-123456789012
     #   `
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/acm-pca/latest/APIReference/API_CreateCertificateAuthority.html
     #   @return [String]
     #
     # @!attribute [rw] csr
@@ -1103,22 +1251,54 @@ module Aws::ACMPCA
     #   `openssl req -new -config openssl_rsa.cnf -extensions usr_cert
     #   -newkey rsa:2048 -days -365 -keyout private/test_cert_priv_key.pem
     #   -out csr/test_cert_.csr`
+    #
+    #   Note: A CSR must provide either a *subject name* or a *subject
+    #   alternative name* or the request will be rejected.
     #   @return [String]
     #
     # @!attribute [rw] signing_algorithm
     #   The name of the algorithm that will be used to sign the certificate
     #   to be issued.
+    #
+    #   This parameter should not be confused with the `SigningAlgorithm`
+    #   parameter used to sign a CSR.
     #   @return [String]
     #
     # @!attribute [rw] template_arn
     #   Specifies a custom configuration template to use when issuing a
     #   certificate. If this parameter is not provided, ACM Private CA
-    #   defaults to the `EndEntityCertificate/V1` template.
+    #   defaults to the `EndEntityCertificate/V1` template. For CA
+    #   certificates, you should choose the shortest path length that meets
+    #   your needs. The path length is indicated by the PathLen*N* portion
+    #   of the ARN, where *N* is the [CA depth][1].
+    #
+    #   Note: The CA depth configured on a subordinate CA certificate must
+    #   not exceed the limit set by its parents in the CA hierarchy.
     #
     #   The following service-owned `TemplateArn` values are supported by
     #   ACM Private CA:
     #
+    #   * arn:aws:acm-pca:::template/CodeSigningCertificate/V1
+    #
+    #   * arn:aws:acm-pca:::template/CodeSigningCertificate\_CSRPassthrough/V1
+    #
     #   * arn:aws:acm-pca:::template/EndEntityCertificate/V1
+    #
+    #   * arn:aws:acm-pca:::template/EndEntityCertificate\_CSRPassthrough/V1
+    #
+    #   * arn:aws:acm-pca:::template/EndEntityClientAuthCertificate/V1
+    #
+    #   * arn:aws:acm-pca:::template/EndEntityClientAuthCertificate\_CSRPassthrough/V1
+    #
+    #   * arn:aws:acm-pca:::template/EndEntityServerAuthCertificate/V1
+    #
+    #   * arn:aws:acm-pca:::template/EndEntityServerAuthCertificate\_CSRPassthrough/V1
+    #
+    #   * arn:aws:acm-pca:::template/OCSPSigningCertificate/V1
+    #
+    #   * arn:aws:acm-pca:::template/OCSPSigningCertificate\_CSRPassthrough/V1
+    #
+    #   * arn:aws:acm-pca:::template/RootCACertificate/V1
     #
     #   * arn:aws:acm-pca:::template/SubordinateCACertificate\_PathLen0/V1
     #
@@ -1128,17 +1308,24 @@ module Aws::ACMPCA
     #
     #   * arn:aws:acm-pca:::template/SubordinateCACertificate\_PathLen3/V1
     #
-    #   * arn:aws:acm-pca:::template/RootCACertificate/V1
-    #
-    #   For more information, see [Using Templates][1].
+    #   For more information, see [Using Templates][2].
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/acm-pca/latest/userguide/UsingTemplates.html
+    #   [1]: https://docs.aws.amazon.com/acm-pca/latest/userguide/PcaTerms.html#terms-cadepth
+    #   [2]: https://docs.aws.amazon.com/acm-pca/latest/userguide/UsingTemplates.html
     #   @return [String]
     #
     # @!attribute [rw] validity
-    #   The type of the validity period.
+    #   Information describing the validity period of the certificate.
+    #
+    #   When issuing a certificate, ACM Private CA sets the "Not Before"
+    #   date in the validity field to date and time minus 60 minutes. This
+    #   is intended to compensate for time inconsistencies across systems of
+    #   60 minutes or less.
+    #
+    #   The validity period configured on a certificate must not exceed the
+    #   limit set by its parents in the CA hierarchy.
     #   @return [Types::Validity]
     #
     # @!attribute [rw] idempotency_token
@@ -1180,8 +1367,8 @@ module Aws::ACMPCA
       include Aws::Structure
     end
 
-    # An ACM Private CA limit has been exceeded. See the exception message
-    # returned to determine the limit that was exceeded.
+    # An ACM Private CA quota has been exceeded. See the exception message
+    # returned to determine the quota that was exceeded.
     #
     # @!attribute [rw] message
     #   @return [String]
@@ -1200,6 +1387,7 @@ module Aws::ACMPCA
     #       {
     #         next_token: "NextToken",
     #         max_results: 1,
+    #         resource_owner: "SELF", # accepts SELF, OTHER_ACCOUNTS
     #       }
     #
     # @!attribute [rw] next_token
@@ -1217,11 +1405,17 @@ module Aws::ACMPCA
     #   value in a subsequent request to retrieve additional items.
     #   @return [Integer]
     #
+    # @!attribute [rw] resource_owner
+    #   Use this parameter to filter the returned set of certificate
+    #   authorities based on their owner. The default is SELF.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/acm-pca-2017-08-22/ListCertificateAuthoritiesRequest AWS API Documentation
     #
     class ListCertificateAuthoritiesRequest < Struct.new(
       :next_token,
-      :max_results)
+      :max_results,
+      :resource_owner)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1256,11 +1450,15 @@ module Aws::ACMPCA
     #
     # @!attribute [rw] certificate_authority_arn
     #   The Amazon Resource Number (ARN) of the private CA to inspect. You
-    #   can find the ARN by calling the ListCertificateAuthorities action.
-    #   This must be of the form:
+    #   can find the ARN by calling the [ListCertificateAuthorities][1]
+    #   action. This must be of the form:
     #   `arn:aws:acm-pca:region:account:certificate-authority/12345678-1234-1234-1234-123456789012`
     #   You can get a private CA's ARN by running the
-    #   ListCertificateAuthorities action.
+    #   [ListCertificateAuthorities][1] action.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/acm-pca/latest/APIReference/API_ListCertificateAuthorities.html
     #   @return [String]
     #
     # @!attribute [rw] next_token
@@ -1318,10 +1516,14 @@ module Aws::ACMPCA
     #
     # @!attribute [rw] certificate_authority_arn
     #   The Amazon Resource Name (ARN) that was returned when you called the
-    #   CreateCertificateAuthority action. This must be of the form:
+    #   [CreateCertificateAuthority][1] action. This must be of the form:
     #
     #   `arn:aws:acm-pca:region:account:certificate-authority/12345678-1234-1234-1234-123456789012
     #   `
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/acm-pca/latest/APIReference/API_CreateCertificateAuthority.html
     #   @return [String]
     #
     # @!attribute [rw] next_token
@@ -1366,6 +1568,22 @@ module Aws::ACMPCA
       include Aws::Structure
     end
 
+    # The current action was prevented because it would lock the caller out
+    # from performing subsequent actions. Verify that the specified
+    # parameters would not result in the caller being denied access to the
+    # resource.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/acm-pca-2017-08-22/LockoutPreventedException AWS API Documentation
+    #
+    class LockoutPreventedException < Struct.new(
+      :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The certificate signing request is invalid.
     #
     # @!attribute [rw] message
@@ -1397,8 +1615,14 @@ module Aws::ACMPCA
     # certificates, you must give the ACM service principal all available
     # permissions (`IssueCertificate`, `GetCertificate`, and
     # `ListPermissions`). Permissions can be assigned with the
-    # CreatePermission action, removed with the DeletePermission action, and
-    # listed with the ListPermissions action.
+    # [CreatePermission][1] action, removed with the [DeletePermission][2]
+    # action, and listed with the [ListPermissions][3] action.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/acm-pca/latest/APIReference/API_CreatePermission.html
+    # [2]: https://docs.aws.amazon.com/acm-pca/latest/APIReference/API_DeletePermission.html
+    # [3]: https://docs.aws.amazon.com/acm-pca/latest/APIReference/API_ListPermissions.html
     #
     # @!attribute [rw] certificate_authority_arn
     #   The Amazon Resource Number (ARN) of the private CA from which the
@@ -1453,6 +1677,48 @@ module Aws::ACMPCA
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass PutPolicyRequest
+    #   data as a hash:
+    #
+    #       {
+    #         resource_arn: "Arn", # required
+    #         policy: "AWSPolicy", # required
+    #       }
+    #
+    # @!attribute [rw] resource_arn
+    #   The Amazon Resource Number (ARN) of the private CA to associate with
+    #   the policy. The ARN of the CA can be found by calling the
+    #   [ListCertificateAuthorities][1] action.
+    #
+    #
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/acm-pca/latest/APIReference/API_ListCertificateAuthorities.html
+    #   @return [String]
+    #
+    # @!attribute [rw] policy
+    #   The path and filename of a JSON-formatted IAM policy to attach to
+    #   the specified private CA resource. If this policy does not contain
+    #   all required statements or if it includes any statement that is not
+    #   allowed, the `PutPolicy` action returns an `InvalidPolicyException`.
+    #   For information about IAM policy and statement structure, see
+    #   [Overview of JSON Policies][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies.html#access_policies-json
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/acm-pca-2017-08-22/PutPolicyRequest AWS API Documentation
+    #
+    class PutPolicyRequest < Struct.new(
+      :resource_arn,
+      :policy)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Your request has already been completed.
     #
     # @!attribute [rw] message
@@ -1492,8 +1758,8 @@ module Aws::ACMPCA
       include Aws::Structure
     end
 
-    # A resource such as a private CA, S3 bucket, certificate, or audit
-    # report cannot be found.
+    # A resource such as a private CA, S3 bucket, certificate, audit report,
+    # or policy cannot be found.
     #
     # @!attribute [rw] message
     #   @return [String]
@@ -1515,10 +1781,14 @@ module Aws::ACMPCA
     #
     # @!attribute [rw] certificate_authority_arn
     #   The Amazon Resource Name (ARN) that was returned when you called the
-    #   CreateCertificateAuthority action. This must be of the form:
+    #   [CreateCertificateAuthority][1] action. This must be of the form:
     #
     #   `arn:aws:acm-pca:region:account:certificate-authority/12345678-1234-1234-1234-123456789012
     #   `
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/acm-pca/latest/APIReference/API_CreateCertificateAuthority.html
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/acm-pca-2017-08-22/RestoreCertificateAuthorityRequest AWS API Documentation
@@ -1530,11 +1800,17 @@ module Aws::ACMPCA
     end
 
     # Certificate revocation information used by the
-    # CreateCertificateAuthority and UpdateCertificateAuthority actions.
-    # Your private certificate authority (CA) can create and maintain a
-    # certificate revocation list (CRL). A CRL contains information about
-    # certificates revoked by your CA. For more information, see
-    # RevokeCertificate.
+    # [CreateCertificateAuthority][1] and [UpdateCertificateAuthority][2]
+    # actions. Your private certificate authority (CA) can create and
+    # maintain a certificate revocation list (CRL). A CRL contains
+    # information about certificates revoked by your CA. For more
+    # information, see [RevokeCertificate][3].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/acm-pca/latest/APIReference/API_CreateCertificateAuthority.html
+    # [2]: https://docs.aws.amazon.com/acm-pca/latest/APIReference/API_UpdateCertificateAuthority.html
+    # [3]: https://docs.aws.amazon.com/acm-pca/latest/APIReference/API_RevokeCertificate.html
     #
     # @note When making an API call, you may pass RevocationConfiguration
     #   data as a hash:
@@ -1581,7 +1857,7 @@ module Aws::ACMPCA
     # @!attribute [rw] certificate_serial
     #   Serial number of the certificate to be revoked. This must be in
     #   hexadecimal format. You can retrieve the serial number by calling
-    #   GetCertificate with the Amazon Resource Name (ARN) of the
+    #   [GetCertificate][1] with the Amazon Resource Name (ARN) of the
     #   certificate you want and the ARN of your private CA. The
     #   **GetCertificate** action retrieves the certificate in the PEM
     #   format. You can use the following OpenSSL command to list the
@@ -1590,12 +1866,13 @@ module Aws::ACMPCA
     #   `openssl x509 -in file_path -text -noout`
     #
     #   You can also copy the serial number from the console or use the
-    #   [DescribeCertificate][1] action in the *AWS Certificate Manager API
+    #   [DescribeCertificate][2] action in the *AWS Certificate Manager API
     #   Reference*.
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/acm/latest/APIReference/API_DescribeCertificate.html
+    #   [1]: https://docs.aws.amazon.com/acm-pca/latest/APIReference/API_GetCertificate.html
+    #   [2]: https://docs.aws.amazon.com/acm/latest/APIReference/API_DescribeCertificate.html
     #   @return [String]
     #
     # @!attribute [rw] revocation_reason
@@ -1615,8 +1892,13 @@ module Aws::ACMPCA
     # Tags are labels that you can use to identify and organize your private
     # CAs. Each tag consists of a key and an optional value. You can
     # associate up to 50 tags with a private CA. To add one or more tags to
-    # a private CA, call the TagCertificateAuthority action. To remove a
-    # tag, call the UntagCertificateAuthority action.
+    # a private CA, call the [TagCertificateAuthority][1] action. To remove
+    # a tag, call the [UntagCertificateAuthority][2] action.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/acm-pca/latest/APIReference/API_TagCertificateAuthority.html
+    # [2]: https://docs.aws.amazon.com/acm-pca/latest/APIReference/API_UntagCertificateAuthority.html
     #
     # @note When making an API call, you may pass Tag
     #   data as a hash:
@@ -1658,10 +1940,14 @@ module Aws::ACMPCA
     #
     # @!attribute [rw] certificate_authority_arn
     #   The Amazon Resource Name (ARN) that was returned when you called
-    #   CreateCertificateAuthority. This must be of the form:
+    #   [CreateCertificateAuthority][1]. This must be of the form:
     #
     #   `arn:aws:acm-pca:region:account:certificate-authority/12345678-1234-1234-1234-123456789012
     #   `
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/acm-pca/latest/APIReference/API_CreateCertificateAuthority.html
     #   @return [String]
     #
     # @!attribute [rw] tags
@@ -1706,10 +1992,14 @@ module Aws::ACMPCA
     #
     # @!attribute [rw] certificate_authority_arn
     #   The Amazon Resource Name (ARN) that was returned when you called
-    #   CreateCertificateAuthority. This must be of the form:
+    #   [CreateCertificateAuthority][1]. This must be of the form:
     #
     #   `arn:aws:acm-pca:region:account:certificate-authority/12345678-1234-1234-1234-123456789012
     #   `
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/acm-pca/latest/APIReference/API_CreateCertificateAuthority.html
     #   @return [String]
     #
     # @!attribute [rw] tags
@@ -1767,10 +2057,19 @@ module Aws::ACMPCA
       include Aws::Structure
     end
 
-    # Length of time for which the certificate issued by your private
-    # certificate authority (CA), or by the private CA itself, is valid in
-    # days, months, or years. You can issue a certificate by calling the
-    # IssueCertificate action.
+    # Validity specifies the period of time during which a certificate is
+    # valid. Validity can be expressed as an explicit date and time when the
+    # certificate expires, or as a span of time after issuance, stated in
+    # days, months, or years. For more information, see [Validity][1] in RFC
+    # 5280.
+    #
+    # You can issue a certificate by calling the [IssueCertificate][2]
+    # action.
+    #
+    #
+    #
+    # [1]: https://tools.ietf.org/html/rfc5280#section-4.1.2.5
+    # [2]: https://docs.aws.amazon.com/acm-pca/latest/APIReference/API_IssueCertificate.html
     #
     # @note When making an API call, you may pass Validity
     #   data as a hash:
@@ -1781,12 +2080,42 @@ module Aws::ACMPCA
     #       }
     #
     # @!attribute [rw] value
-    #   Time period.
+    #   A long integer interpreted according to the value of `Type`, below.
     #   @return [Integer]
     #
     # @!attribute [rw] type
-    #   Specifies whether the `Value` parameter represents days, months, or
-    #   years.
+    #   Determines how *ACM Private CA* interprets the `Value` parameter, an
+    #   integer. Supported validity types include those listed below. Type
+    #   definitions with values include a sample input value and the
+    #   resulting output.
+    #
+    #   `END_DATE`\: The specific date and time when the certificate will
+    #   expire, expressed using UTCTime (YYMMDDHHMMSS) or GeneralizedTime
+    #   (YYYYMMDDHHMMSS) format. When UTCTime is used, if the year field
+    #   (YY) is greater than or equal to 50, the year is interpreted as
+    #   19YY. If the year field is less than 50, the year is interpreted as
+    #   20YY.
+    #
+    #   * Sample input value: 491231235959 (UTCTime format)
+    #
+    #   * Output expiration date/time: 12/31/2049 23:59:59
+    #
+    #   `ABSOLUTE`\: The specific date and time when the certificate will
+    #   expire, expressed in seconds since the Unix Epoch.
+    #
+    #   * Sample input value: 2524608000
+    #
+    #   * Output expiration date/time: 01/01/2050 00:00:00
+    #
+    #   `DAYS`, `MONTHS`, `YEARS`\: The relative time from the moment of
+    #   issuance until the certificate will expire, expressed in days,
+    #   months, or years.
+    #
+    #   Example if `DAYS`, issued on 10/12/2020 at 12:34:54 UTC:
+    #
+    #   * Sample input value: 90
+    #
+    #   * Output expiration date: 01/10/2020 12:34:54 UTC
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/acm-pca-2017-08-22/Validity AWS API Documentation

@@ -39,6 +39,29 @@ module Aws
             end
           end
 
+
+          def decrypt_aes_gcm(key, data, auth_data)
+            # data is iv (12B) + key + tag (16B)
+            buf = data.unpack('C*')
+            iv = buf[0,12].pack('C*') # iv will always be 12 bytes
+            tag = buf[-16, 16].pack('C*') # tag is 16 bytes
+            enc_key = buf[12, buf.size - (12+16)].pack('C*')
+            cipher = aes_cipher(:decrypt, :GCM, key, iv)
+            cipher.auth_tag = tag
+            cipher.auth_data = auth_data
+            cipher.update(enc_key) + cipher.final
+          end
+
+          # returns the decrypted data + auth_data
+          def decrypt_rsa(key, enc_data)
+            # Plaintext must be KeyLengthInBytes (1 Byte) + DataKey + AuthData
+            buf = key.private_decrypt(enc_data, OpenSSL::PKey::RSA::PKCS1_OAEP_PADDING).unpack('C*')
+            key_length = buf[0]
+            data = buf[1, key_length].pack('C*')
+            auth_data = buf[key_length+1, buf.length - key_length].pack('C*')
+            [data, auth_data]
+          end
+
           # @param [String] block_mode "CBC" or "ECB"
           # @param [OpenSSL::PKey::RSA, String, nil] key
           # @param [String, nil] iv The initialization vector

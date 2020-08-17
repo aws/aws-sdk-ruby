@@ -2910,6 +2910,10 @@ module Aws::Imagebuilder
     #
     # @!attribute [rw] filters
     #   The filters.
+    #
+    #   * `name` - The name of this distribution configuration.
+    #
+    #   ^
     #   @return [Array<Types::Filter>]
     #
     # @!attribute [rw] max_results

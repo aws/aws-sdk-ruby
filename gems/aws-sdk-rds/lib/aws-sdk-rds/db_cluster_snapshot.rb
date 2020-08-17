@@ -667,7 +667,16 @@ module Aws::RDS
     #   copy them.
     # @option options [String] :domain
     #   Specify the Active Directory directory ID to restore the DB cluster
-    #   in. The domain must be created prior to this operation.
+    #   in. The domain must be created prior to this operation. Currently,
+    #   only MySQL, Microsoft SQL Server, Oracle, and PostgreSQL DB instances
+    #   can be created in an Active Directory Domain.
+    #
+    #   For more information, see [ Kerberos Authentication][1] in the *Amazon
+    #   RDS User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/kerberos-authentication.html
     # @option options [String] :domain_iam_role_name
     #   Specify the name of the IAM role to be used when making API calls to
     #   the Directory Service.

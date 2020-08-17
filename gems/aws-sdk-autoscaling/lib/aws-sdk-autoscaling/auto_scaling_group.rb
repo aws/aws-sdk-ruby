@@ -592,7 +592,7 @@ module Aws::AutoScaling
     #
     #   * `SimpleScaling` (default)
     # @option options [String] :adjustment_type
-    #   Specifies how the scaling adjustment is interpreted (either an
+    #   Specifies how the scaling adjustment is interpreted (for example, an
     #   absolute number or a percentage). The valid values are
     #   `ChangeInCapacity`, `ExactCapacity`, and `PercentChangeInCapacity`.
     #
@@ -956,8 +956,8 @@ module Aws::AutoScaling
     #   <note markdown="1"> With a mixed instances policy that uses instance weighting, Amazon EC2
     #   Auto Scaling may need to go above `MaxSize` to meet your capacity
     #   requirements. In this event, Amazon EC2 Auto Scaling will never go
-    #   above `MaxSize` by more than your maximum instance weight (weights
-    #   that define how many capacity units each instance contributes to the
+    #   above `MaxSize` by more than your largest instance weight (weights
+    #   that define how many units each instance contributes to the desired
     #   capacity of the group).
     #
     #    </note>

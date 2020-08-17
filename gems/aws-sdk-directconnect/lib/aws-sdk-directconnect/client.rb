@@ -1640,10 +1640,8 @@ module Aws::DirectConnect
     # Creates a proposal to associate the specified virtual private gateway
     # or transit gateway with the specified Direct Connect gateway.
     #
-    # You can only associate a Direct Connect gateway and virtual private
-    # gateway or transit gateway when the account that owns the Direct
-    # Connect gateway and the account that owns the virtual private gateway
-    # or transit gateway have the same AWS Payer ID.
+    # You can associate a Direct Connect gateway and virtual private gateway
+    # or transit gateway that is owned by any AWS account.
     #
     # @option params [required, String] :direct_connect_gateway_id
     #   The ID of the Direct Connect gateway.
@@ -4144,7 +4142,7 @@ module Aws::DirectConnect
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-directconnect'
-      context[:gem_version] = '1.33.0'
+      context[:gem_version] = '1.34.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

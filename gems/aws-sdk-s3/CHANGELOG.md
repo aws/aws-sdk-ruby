@@ -1,6 +1,25 @@
 Unreleased Changes
 ------------------
 
+1.78.0 (2020-08-11)
+------------------
+
+* Feature - Add support for in-region CopyObject and UploadPartCopy through S3 Access Points
+
+1.77.0 (2020-08-10)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+* Issue - Fix issue with JRuby and bump minimum version of core.
+
+1.76.0 (2020-08-07)
+------------------
+
+* Feature - Updates Amazon S3 API reference documentation.
+
+* Feature - Updates to the Amazon S3 Encryption Client. This change includes fixes for issues that were reported by Sophie Schmieg from the Google ISE team, and for issues that were discovered by AWS Cryptography.
+
 1.75.0 (2020-07-21)
 ------------------
 

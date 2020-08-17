@@ -225,6 +225,22 @@ module Aws::RDS
       data[:read_replica_db_cluster_identifiers]
     end
 
+    # The open mode of an Oracle read replica. The default is
+    # `open-read-only`. For more information, see [Working with Oracle Read
+    # Replicas for Amazon RDS][1] in the *Amazon RDS User Guide*.
+    #
+    # <note markdown="1"> This attribute is only supported in RDS for Oracle.
+    #
+    #  </note>
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/oracle-read-replicas.html
+    # @return [String]
+    def replica_mode
+      data[:replica_mode]
+    end
+
     # License model information for this DB instance.
     # @return [String]
     def license_model
@@ -707,6 +723,9 @@ module Aws::RDS
     #
     #   * Must contain 1 to 64 letters or numbers.
     #
+    #   * Must begin with a letter. Subsequent characters can be letters,
+    #     underscores, or digits (0-9).
+    #
     #   * Can't be a word reserved by the specified database engine
     #
     #   **MariaDB**
@@ -718,6 +737,9 @@ module Aws::RDS
     #   Constraints:
     #
     #   * Must contain 1 to 64 letters or numbers.
+    #
+    #   * Must begin with a letter. Subsequent characters can be letters,
+    #     underscores, or digits (0-9).
     #
     #   * Can't be a word reserved by the specified database engine
     #
@@ -731,8 +753,8 @@ module Aws::RDS
     #
     #   * Must contain 1 to 63 letters, numbers, or underscores.
     #
-    #   * Must begin with a letter or an underscore. Subsequent characters can
-    #     be letters, underscores, or digits (0-9).
+    #   * Must begin with a letter. Subsequent characters can be letters,
+    #     underscores, or digits (0-9).
     #
     #   * Can't be a word reserved by the specified database engine
     #
@@ -1330,24 +1352,15 @@ module Aws::RDS
     #   for each AWS Region.
     # @option options [String] :domain
     #   The Active Directory directory ID to create the DB instance in.
-    #   Currently, only Microsoft SQL Server and Oracle DB instances can be
-    #   created in an Active Directory Domain.
+    #   Currently, only MySQL, Microsoft SQL Server, Oracle, and PostgreSQL DB
+    #   instances can be created in an Active Directory Domain.
     #
-    #   For Microsoft SQL Server DB instances, Amazon RDS can use Windows
-    #   Authentication to authenticate users that connect to the DB instance.
-    #   For more information, see [ Using Windows Authentication with an
-    #   Amazon RDS DB Instance Running Microsoft SQL Server][1] in the *Amazon
+    #   For more information, see [ Kerberos Authentication][1] in the *Amazon
     #   RDS User Guide*.
     #
-    #   For Oracle DB instances, Amazon RDS can use Kerberos Authentication to
-    #   authenticate users that connect to the DB instance. For more
-    #   information, see [ Using Kerberos Authentication with Amazon RDS for
-    #   Oracle][2] in the *Amazon RDS User Guide*.
     #
     #
-    #
-    #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_SQLServerWinAuth.html
-    #   [2]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/oracle-kerberos.html
+    #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/kerberos-authentication.html
     # @option options [Boolean] :copy_tags_to_snapshot
     #   A value that indicates whether to copy tags from the DB instance to
     #   snapshots of the DB instance. By default, tags are not copied.
@@ -1544,6 +1557,7 @@ module Aws::RDS
     #     deletion_protection: false,
     #     domain: "String",
     #     domain_iam_role_name: "String",
+    #     replica_mode: "open-read-only", # accepts open-read-only, mounted
     #     source_region: "String",
     #   })
     # @param [Hash] options ({})
@@ -1847,25 +1861,39 @@ module Aws::RDS
     #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_DeleteInstance.html
     # @option options [String] :domain
     #   The Active Directory directory ID to create the DB instance in.
+    #   Currently, only MySQL, Microsoft SQL Server, Oracle, and PostgreSQL DB
+    #   instances can be created in an Active Directory Domain.
     #
-    #   For Oracle DB instances, Amazon RDS can use Kerberos authentication to
-    #   authenticate users that connect to the DB instance. For more
-    #   information, see [ Using Kerberos Authentication with Amazon RDS for
-    #   Oracle][1] in the *Amazon RDS User Guide*.
-    #
-    #   For Microsoft SQL Server DB instances, Amazon RDS can use Windows
-    #   Authentication to authenticate users that connect to the DB instance.
-    #   For more information, see [ Using Windows Authentication with an
-    #   Amazon RDS DB Instance Running Microsoft SQL Server][2] in the *Amazon
+    #   For more information, see [ Kerberos Authentication][1] in the *Amazon
     #   RDS User Guide*.
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/oracle-kerberos.html
-    #   [2]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_SQLServerWinAuth.html
+    #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/kerberos-authentication.html
     # @option options [String] :domain_iam_role_name
     #   Specify the name of the IAM role to be used when making API calls to
     #   the Directory Service.
+    # @option options [String] :replica_mode
+    #   The open mode of the replica database: mounted or read-only.
+    #
+    #   <note markdown="1"> This parameter is only supported for Oracle DB instances.
+    #
+    #    </note>
+    #
+    #   Mounted DB replicas are included in Oracle Enterprise Edition. The
+    #   main use case for mounted replicas is cross-Region disaster recovery.
+    #   The primary database doesn't use Active Data Guard to transmit
+    #   information to the mounted replica. Because it doesn't accept user
+    #   connections, a mounted replica can't serve a read-only workload.
+    #
+    #   You can create a combination of mounted and read-only DB replicas for
+    #   the same primary DB instance. For more information, see [Working with
+    #   Oracle Read Replicas for Amazon RDS][1] in the *Amazon RDS User
+    #   Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/oracle-read-replicas.html
     # @option options [String] :destination_region
     # @option options [String] :source_region
     #   The source region of the snapshot. This is only needed when the
@@ -2037,6 +2065,7 @@ module Aws::RDS
     #     deletion_protection: false,
     #     max_allocated_storage: 1,
     #     certificate_rotation_restart: false,
+    #     replica_mode: "open-read-only", # accepts open-read-only, mounted
     #   })
     # @param [Hash] options ({})
     # @option options [Integer] :allocated_storage
@@ -2390,25 +2419,16 @@ module Aws::RDS
     # @option options [String] :domain
     #   The Active Directory directory ID to move the DB instance to. Specify
     #   `none` to remove the instance from its current domain. The domain must
-    #   be created prior to this operation. Currently, only Microsoft SQL
-    #   Server and Oracle DB instances can be created in an Active Directory
-    #   Domain.
+    #   be created prior to this operation. Currently, only MySQL, Microsoft
+    #   SQL Server, Oracle, and PostgreSQL DB instances can be created in an
+    #   Active Directory Domain.
     #
-    #   For Microsoft SQL Server DB instances, Amazon RDS can use Windows
-    #   Authentication to authenticate users that connect to the DB instance.
-    #   For more information, see [ Using Windows Authentication with an
-    #   Amazon RDS DB Instance Running Microsoft SQL Server][1] in the *Amazon
+    #   For more information, see [ Kerberos Authentication][1] in the *Amazon
     #   RDS User Guide*.
     #
-    #   For Oracle DB instances, Amazon RDS can use Kerberos authentication to
-    #   authenticate users that connect to the DB instance. For more
-    #   information, see [ Using Kerberos Authentication with Amazon RDS for
-    #   Oracle][2] in the *Amazon RDS User Guide*.
     #
     #
-    #
-    #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_SQLServerWinAuth.html
-    #   [2]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/oracle-kerberos.html
+    #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/kerberos-authentication.html
     # @option options [Boolean] :copy_tags_to_snapshot
     #   A value that indicates whether to copy all tags from the DB instance
     #   to snapshots of the DB instance. By default, tags are not copied.
@@ -2610,6 +2630,25 @@ module Aws::RDS
     #
     #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/UsingWithRDS.SSL-certificate-rotation.html
     #   [2]: https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/UsingWithRDS.SSL-certificate-rotation.html
+    # @option options [String] :replica_mode
+    #   A value that sets the open mode of a replica database to either
+    #   mounted or read-only.
+    #
+    #   <note markdown="1"> Currently, this parameter is only supported for Oracle DB instances.
+    #
+    #    </note>
+    #
+    #   Mounted DB replicas are included in Oracle Enterprise Edition. The
+    #   main use case for mounted replicas is cross-Region disaster recovery.
+    #   The primary database doesn't use Active Data Guard to transmit
+    #   information to the mounted replica. Because it doesn't accept user
+    #   connections, a mounted replica can't serve a read-only workload. For
+    #   more information, see [Working with Oracle Read Replicas for Amazon
+    #   RDS][1] in the *Amazon RDS User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/oracle-read-replicas.html
     # @return [DBInstance]
     def modify(options = {})
       options = options.merge(db_instance_identifier: @id)
@@ -2924,24 +2963,15 @@ module Aws::RDS
     # @option options [String] :domain
     #   Specify the Active Directory directory ID to restore the DB instance
     #   in. The domain must be created prior to this operation. Currently,
-    #   only Microsoft SQL Server and Oracle DB instances can be created in an
-    #   Active Directory Domain.
+    #   only MySQL, Microsoft SQL Server, Oracle, and PostgreSQL DB instances
+    #   can be created in an Active Directory Domain.
     #
-    #   For Microsoft SQL Server DB instances, Amazon RDS can use Windows
-    #   Authentication to authenticate users that connect to the DB instance.
-    #   For more information, see [ Using Windows Authentication with an
-    #   Amazon RDS DB Instance Running Microsoft SQL Server][1] in the *Amazon
+    #   For more information, see [ Kerberos Authentication][1] in the *Amazon
     #   RDS User Guide*.
     #
-    #   For Oracle DB instances, Amazon RDS can use Kerberos authentication to
-    #   authenticate users that connect to the DB instance. For more
-    #   information, see [ Using Kerberos Authentication with Amazon RDS for
-    #   Oracle][2] in the *Amazon RDS User Guide*.
     #
     #
-    #
-    #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_SQLServerWinAuth.html
-    #   [2]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/oracle-kerberos.html
+    #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/kerberos-authentication.html
     # @option options [String] :domain_iam_role_name
     #   Specify the name of the IAM role to be used when making API calls to
     #   the Directory Service.

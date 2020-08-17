@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.24.0 (2020-07-30)
+------------------
+
+* Feature - Amazon MSK has added a new API that allows you to reboot brokers within a cluster.
+
 1.23.0 (2020-06-23)
 ------------------
 

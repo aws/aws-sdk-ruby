@@ -16,6 +16,8 @@ module Aws::RoboMaker
     Architecture = Shapes::StringShape.new(name: 'Architecture')
     Arn = Shapes::StringShape.new(name: 'Arn')
     Arns = Shapes::ListShape.new(name: 'Arns')
+    BatchDeleteWorldsRequest = Shapes::StructureShape.new(name: 'BatchDeleteWorldsRequest')
+    BatchDeleteWorldsResponse = Shapes::StructureShape.new(name: 'BatchDeleteWorldsResponse')
     BatchDescribeSimulationJobRequest = Shapes::StructureShape.new(name: 'BatchDescribeSimulationJobRequest')
     BatchDescribeSimulationJobResponse = Shapes::StructureShape.new(name: 'BatchDescribeSimulationJobResponse')
     BatchPolicy = Shapes::StructureShape.new(name: 'BatchPolicy')
@@ -28,6 +30,10 @@ module Aws::RoboMaker
     CancelSimulationJobBatchResponse = Shapes::StructureShape.new(name: 'CancelSimulationJobBatchResponse')
     CancelSimulationJobRequest = Shapes::StructureShape.new(name: 'CancelSimulationJobRequest')
     CancelSimulationJobResponse = Shapes::StructureShape.new(name: 'CancelSimulationJobResponse')
+    CancelWorldExportJobRequest = Shapes::StructureShape.new(name: 'CancelWorldExportJobRequest')
+    CancelWorldExportJobResponse = Shapes::StructureShape.new(name: 'CancelWorldExportJobResponse')
+    CancelWorldGenerationJobRequest = Shapes::StructureShape.new(name: 'CancelWorldGenerationJobRequest')
+    CancelWorldGenerationJobResponse = Shapes::StructureShape.new(name: 'CancelWorldGenerationJobResponse')
     ClientRequestToken = Shapes::StringShape.new(name: 'ClientRequestToken')
     Command = Shapes::StringShape.new(name: 'Command')
     Compute = Shapes::StructureShape.new(name: 'Compute')
@@ -50,6 +56,12 @@ module Aws::RoboMaker
     CreateSimulationJobRequest = Shapes::StructureShape.new(name: 'CreateSimulationJobRequest')
     CreateSimulationJobRequests = Shapes::ListShape.new(name: 'CreateSimulationJobRequests')
     CreateSimulationJobResponse = Shapes::StructureShape.new(name: 'CreateSimulationJobResponse')
+    CreateWorldExportJobRequest = Shapes::StructureShape.new(name: 'CreateWorldExportJobRequest')
+    CreateWorldExportJobResponse = Shapes::StructureShape.new(name: 'CreateWorldExportJobResponse')
+    CreateWorldGenerationJobRequest = Shapes::StructureShape.new(name: 'CreateWorldGenerationJobRequest')
+    CreateWorldGenerationJobResponse = Shapes::StructureShape.new(name: 'CreateWorldGenerationJobResponse')
+    CreateWorldTemplateRequest = Shapes::StructureShape.new(name: 'CreateWorldTemplateRequest')
+    CreateWorldTemplateResponse = Shapes::StructureShape.new(name: 'CreateWorldTemplateResponse')
     CreatedAt = Shapes::TimestampShape.new(name: 'CreatedAt')
     DataSource = Shapes::StructureShape.new(name: 'DataSource')
     DataSourceConfig = Shapes::StructureShape.new(name: 'DataSourceConfig')
@@ -64,6 +76,8 @@ module Aws::RoboMaker
     DeleteRobotResponse = Shapes::StructureShape.new(name: 'DeleteRobotResponse')
     DeleteSimulationApplicationRequest = Shapes::StructureShape.new(name: 'DeleteSimulationApplicationRequest')
     DeleteSimulationApplicationResponse = Shapes::StructureShape.new(name: 'DeleteSimulationApplicationResponse')
+    DeleteWorldTemplateRequest = Shapes::StructureShape.new(name: 'DeleteWorldTemplateRequest')
+    DeleteWorldTemplateResponse = Shapes::StructureShape.new(name: 'DeleteWorldTemplateResponse')
     DeploymentApplicationConfig = Shapes::StructureShape.new(name: 'DeploymentApplicationConfig')
     DeploymentApplicationConfigs = Shapes::ListShape.new(name: 'DeploymentApplicationConfigs')
     DeploymentConfig = Shapes::StructureShape.new(name: 'DeploymentConfig')
@@ -90,6 +104,14 @@ module Aws::RoboMaker
     DescribeSimulationJobBatchResponse = Shapes::StructureShape.new(name: 'DescribeSimulationJobBatchResponse')
     DescribeSimulationJobRequest = Shapes::StructureShape.new(name: 'DescribeSimulationJobRequest')
     DescribeSimulationJobResponse = Shapes::StructureShape.new(name: 'DescribeSimulationJobResponse')
+    DescribeWorldExportJobRequest = Shapes::StructureShape.new(name: 'DescribeWorldExportJobRequest')
+    DescribeWorldExportJobResponse = Shapes::StructureShape.new(name: 'DescribeWorldExportJobResponse')
+    DescribeWorldGenerationJobRequest = Shapes::StructureShape.new(name: 'DescribeWorldGenerationJobRequest')
+    DescribeWorldGenerationJobResponse = Shapes::StructureShape.new(name: 'DescribeWorldGenerationJobResponse')
+    DescribeWorldRequest = Shapes::StructureShape.new(name: 'DescribeWorldRequest')
+    DescribeWorldResponse = Shapes::StructureShape.new(name: 'DescribeWorldResponse')
+    DescribeWorldTemplateRequest = Shapes::StructureShape.new(name: 'DescribeWorldTemplateRequest')
+    DescribeWorldTemplateResponse = Shapes::StructureShape.new(name: 'DescribeWorldTemplateResponse')
     EnvironmentVariableKey = Shapes::StringShape.new(name: 'EnvironmentVariableKey')
     EnvironmentVariableMap = Shapes::MapShape.new(name: 'EnvironmentVariableMap')
     EnvironmentVariableValue = Shapes::StringShape.new(name: 'EnvironmentVariableValue')
@@ -97,20 +119,27 @@ module Aws::RoboMaker
     FailedCreateSimulationJobRequest = Shapes::StructureShape.new(name: 'FailedCreateSimulationJobRequest')
     FailedCreateSimulationJobRequests = Shapes::ListShape.new(name: 'FailedCreateSimulationJobRequests')
     FailureBehavior = Shapes::StringShape.new(name: 'FailureBehavior')
+    FailureSummary = Shapes::StructureShape.new(name: 'FailureSummary')
     Filter = Shapes::StructureShape.new(name: 'Filter')
     FilterValues = Shapes::ListShape.new(name: 'FilterValues')
     Filters = Shapes::ListShape.new(name: 'Filters')
+    FinishedWorldsSummary = Shapes::StructureShape.new(name: 'FinishedWorldsSummary')
     Fleet = Shapes::StructureShape.new(name: 'Fleet')
     Fleets = Shapes::ListShape.new(name: 'Fleets')
+    FloorplanCount = Shapes::IntegerShape.new(name: 'FloorplanCount')
     GenericInteger = Shapes::IntegerShape.new(name: 'GenericInteger')
     GenericString = Shapes::StringShape.new(name: 'GenericString')
+    GetWorldTemplateBodyRequest = Shapes::StructureShape.new(name: 'GetWorldTemplateBodyRequest')
+    GetWorldTemplateBodyResponse = Shapes::StructureShape.new(name: 'GetWorldTemplateBodyResponse')
     IamRole = Shapes::StringShape.new(name: 'IamRole')
     Id = Shapes::StringShape.new(name: 'Id')
     IdempotentParameterMismatchException = Shapes::StructureShape.new(name: 'IdempotentParameterMismatchException')
     Integer = Shapes::IntegerShape.new(name: 'Integer')
+    InteriorCountPerFloorplan = Shapes::IntegerShape.new(name: 'InteriorCountPerFloorplan')
     InternalServerException = Shapes::StructureShape.new(name: 'InternalServerException')
     InvalidParameterException = Shapes::StructureShape.new(name: 'InvalidParameterException')
     JobDuration = Shapes::IntegerShape.new(name: 'JobDuration')
+    Json = Shapes::StringShape.new(name: 'Json')
     LastStartedAt = Shapes::TimestampShape.new(name: 'LastStartedAt')
     LastUpdatedAt = Shapes::TimestampShape.new(name: 'LastUpdatedAt')
     LaunchConfig = Shapes::StructureShape.new(name: 'LaunchConfig')
@@ -131,6 +160,14 @@ module Aws::RoboMaker
     ListSimulationJobsResponse = Shapes::StructureShape.new(name: 'ListSimulationJobsResponse')
     ListTagsForResourceRequest = Shapes::StructureShape.new(name: 'ListTagsForResourceRequest')
     ListTagsForResourceResponse = Shapes::StructureShape.new(name: 'ListTagsForResourceResponse')
+    ListWorldExportJobsRequest = Shapes::StructureShape.new(name: 'ListWorldExportJobsRequest')
+    ListWorldExportJobsResponse = Shapes::StructureShape.new(name: 'ListWorldExportJobsResponse')
+    ListWorldGenerationJobsRequest = Shapes::StructureShape.new(name: 'ListWorldGenerationJobsRequest')
+    ListWorldGenerationJobsResponse = Shapes::StructureShape.new(name: 'ListWorldGenerationJobsResponse')
+    ListWorldTemplatesRequest = Shapes::StructureShape.new(name: 'ListWorldTemplatesRequest')
+    ListWorldTemplatesResponse = Shapes::StructureShape.new(name: 'ListWorldTemplatesResponse')
+    ListWorldsRequest = Shapes::StructureShape.new(name: 'ListWorldsRequest')
+    ListWorldsResponse = Shapes::StructureShape.new(name: 'ListWorldsResponse')
     LoggingConfig = Shapes::StructureShape.new(name: 'LoggingConfig')
     MaxConcurrency = Shapes::IntegerShape.new(name: 'MaxConcurrency')
     MaxResults = Shapes::IntegerShape.new(name: 'MaxResults')
@@ -217,6 +254,10 @@ module Aws::RoboMaker
     TagResourceRequest = Shapes::StructureShape.new(name: 'TagResourceRequest')
     TagResourceResponse = Shapes::StructureShape.new(name: 'TagResourceResponse')
     TagValue = Shapes::StringShape.new(name: 'TagValue')
+    TemplateLocation = Shapes::StructureShape.new(name: 'TemplateLocation')
+    TemplateName = Shapes::StringShape.new(name: 'TemplateName')
+    TemplateSummaries = Shapes::ListShape.new(name: 'TemplateSummaries')
+    TemplateSummary = Shapes::StructureShape.new(name: 'TemplateSummary')
     ThrottlingException = Shapes::StructureShape.new(name: 'ThrottlingException')
     UntagResourceRequest = Shapes::StructureShape.new(name: 'UntagResourceRequest')
     UntagResourceResponse = Shapes::StructureShape.new(name: 'UntagResourceResponse')
@@ -224,13 +265,36 @@ module Aws::RoboMaker
     UpdateRobotApplicationResponse = Shapes::StructureShape.new(name: 'UpdateRobotApplicationResponse')
     UpdateSimulationApplicationRequest = Shapes::StructureShape.new(name: 'UpdateSimulationApplicationRequest')
     UpdateSimulationApplicationResponse = Shapes::StructureShape.new(name: 'UpdateSimulationApplicationResponse')
+    UpdateWorldTemplateRequest = Shapes::StructureShape.new(name: 'UpdateWorldTemplateRequest')
+    UpdateWorldTemplateResponse = Shapes::StructureShape.new(name: 'UpdateWorldTemplateResponse')
     VPCConfig = Shapes::StructureShape.new(name: 'VPCConfig')
     VPCConfigResponse = Shapes::StructureShape.new(name: 'VPCConfigResponse')
     Version = Shapes::StringShape.new(name: 'Version')
     VersionQualifier = Shapes::StringShape.new(name: 'VersionQualifier')
+    WorldConfig = Shapes::StructureShape.new(name: 'WorldConfig')
+    WorldConfigs = Shapes::ListShape.new(name: 'WorldConfigs')
+    WorldCount = Shapes::StructureShape.new(name: 'WorldCount')
+    WorldExportJobErrorCode = Shapes::StringShape.new(name: 'WorldExportJobErrorCode')
+    WorldExportJobStatus = Shapes::StringShape.new(name: 'WorldExportJobStatus')
+    WorldExportJobSummaries = Shapes::ListShape.new(name: 'WorldExportJobSummaries')
+    WorldExportJobSummary = Shapes::StructureShape.new(name: 'WorldExportJobSummary')
+    WorldFailure = Shapes::StructureShape.new(name: 'WorldFailure')
+    WorldFailures = Shapes::ListShape.new(name: 'WorldFailures')
+    WorldGenerationJobErrorCode = Shapes::StringShape.new(name: 'WorldGenerationJobErrorCode')
+    WorldGenerationJobStatus = Shapes::StringShape.new(name: 'WorldGenerationJobStatus')
+    WorldGenerationJobSummaries = Shapes::ListShape.new(name: 'WorldGenerationJobSummaries')
+    WorldGenerationJobSummary = Shapes::StructureShape.new(name: 'WorldGenerationJobSummary')
+    WorldSummaries = Shapes::ListShape.new(name: 'WorldSummaries')
+    WorldSummary = Shapes::StructureShape.new(name: 'WorldSummary')
     errorMessage = Shapes::StringShape.new(name: 'errorMessage')
 
     Arns.member = Shapes::ShapeRef.new(shape: Arn)
+
+    BatchDeleteWorldsRequest.add_member(:worlds, Shapes::ShapeRef.new(shape: Arns, required: true, location_name: "worlds"))
+    BatchDeleteWorldsRequest.struct_class = Types::BatchDeleteWorldsRequest
+
+    BatchDeleteWorldsResponse.add_member(:unprocessed_worlds, Shapes::ShapeRef.new(shape: Arns, location_name: "unprocessedWorlds"))
+    BatchDeleteWorldsResponse.struct_class = Types::BatchDeleteWorldsResponse
 
     BatchDescribeSimulationJobRequest.add_member(:jobs, Shapes::ShapeRef.new(shape: Arns, required: true, location_name: "jobs"))
     BatchDescribeSimulationJobRequest.struct_class = Types::BatchDescribeSimulationJobRequest
@@ -257,6 +321,16 @@ module Aws::RoboMaker
     CancelSimulationJobRequest.struct_class = Types::CancelSimulationJobRequest
 
     CancelSimulationJobResponse.struct_class = Types::CancelSimulationJobResponse
+
+    CancelWorldExportJobRequest.add_member(:job, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "job"))
+    CancelWorldExportJobRequest.struct_class = Types::CancelWorldExportJobRequest
+
+    CancelWorldExportJobResponse.struct_class = Types::CancelWorldExportJobResponse
+
+    CancelWorldGenerationJobRequest.add_member(:job, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "job"))
+    CancelWorldGenerationJobRequest.struct_class = Types::CancelWorldGenerationJobRequest
+
+    CancelWorldGenerationJobResponse.struct_class = Types::CancelWorldGenerationJobResponse
 
     Compute.add_member(:simulation_unit_limit, Shapes::ShapeRef.new(shape: SimulationUnit, location_name: "simulationUnitLimit"))
     Compute.struct_class = Types::Compute
@@ -409,6 +483,53 @@ module Aws::RoboMaker
     CreateSimulationJobResponse.add_member(:compute, Shapes::ShapeRef.new(shape: ComputeResponse, location_name: "compute"))
     CreateSimulationJobResponse.struct_class = Types::CreateSimulationJobResponse
 
+    CreateWorldExportJobRequest.add_member(:client_request_token, Shapes::ShapeRef.new(shape: ClientRequestToken, location_name: "clientRequestToken", metadata: {"idempotencyToken"=>true}))
+    CreateWorldExportJobRequest.add_member(:worlds, Shapes::ShapeRef.new(shape: Arns, required: true, location_name: "worlds"))
+    CreateWorldExportJobRequest.add_member(:output_location, Shapes::ShapeRef.new(shape: OutputLocation, required: true, location_name: "outputLocation"))
+    CreateWorldExportJobRequest.add_member(:iam_role, Shapes::ShapeRef.new(shape: IamRole, required: true, location_name: "iamRole"))
+    CreateWorldExportJobRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "tags"))
+    CreateWorldExportJobRequest.struct_class = Types::CreateWorldExportJobRequest
+
+    CreateWorldExportJobResponse.add_member(:arn, Shapes::ShapeRef.new(shape: Arn, location_name: "arn"))
+    CreateWorldExportJobResponse.add_member(:status, Shapes::ShapeRef.new(shape: WorldExportJobStatus, location_name: "status"))
+    CreateWorldExportJobResponse.add_member(:created_at, Shapes::ShapeRef.new(shape: CreatedAt, location_name: "createdAt"))
+    CreateWorldExportJobResponse.add_member(:failure_code, Shapes::ShapeRef.new(shape: WorldExportJobErrorCode, location_name: "failureCode"))
+    CreateWorldExportJobResponse.add_member(:client_request_token, Shapes::ShapeRef.new(shape: ClientRequestToken, location_name: "clientRequestToken"))
+    CreateWorldExportJobResponse.add_member(:output_location, Shapes::ShapeRef.new(shape: OutputLocation, location_name: "outputLocation"))
+    CreateWorldExportJobResponse.add_member(:iam_role, Shapes::ShapeRef.new(shape: IamRole, location_name: "iamRole"))
+    CreateWorldExportJobResponse.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "tags"))
+    CreateWorldExportJobResponse.struct_class = Types::CreateWorldExportJobResponse
+
+    CreateWorldGenerationJobRequest.add_member(:client_request_token, Shapes::ShapeRef.new(shape: ClientRequestToken, location_name: "clientRequestToken", metadata: {"idempotencyToken"=>true}))
+    CreateWorldGenerationJobRequest.add_member(:template, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "template"))
+    CreateWorldGenerationJobRequest.add_member(:world_count, Shapes::ShapeRef.new(shape: WorldCount, required: true, location_name: "worldCount"))
+    CreateWorldGenerationJobRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "tags"))
+    CreateWorldGenerationJobRequest.struct_class = Types::CreateWorldGenerationJobRequest
+
+    CreateWorldGenerationJobResponse.add_member(:arn, Shapes::ShapeRef.new(shape: Arn, location_name: "arn"))
+    CreateWorldGenerationJobResponse.add_member(:status, Shapes::ShapeRef.new(shape: WorldGenerationJobStatus, location_name: "status"))
+    CreateWorldGenerationJobResponse.add_member(:created_at, Shapes::ShapeRef.new(shape: CreatedAt, location_name: "createdAt"))
+    CreateWorldGenerationJobResponse.add_member(:failure_code, Shapes::ShapeRef.new(shape: WorldGenerationJobErrorCode, location_name: "failureCode"))
+    CreateWorldGenerationJobResponse.add_member(:client_request_token, Shapes::ShapeRef.new(shape: ClientRequestToken, location_name: "clientRequestToken"))
+    CreateWorldGenerationJobResponse.add_member(:template, Shapes::ShapeRef.new(shape: Arn, location_name: "template"))
+    CreateWorldGenerationJobResponse.add_member(:world_count, Shapes::ShapeRef.new(shape: WorldCount, location_name: "worldCount"))
+    CreateWorldGenerationJobResponse.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "tags"))
+    CreateWorldGenerationJobResponse.struct_class = Types::CreateWorldGenerationJobResponse
+
+    CreateWorldTemplateRequest.add_member(:client_request_token, Shapes::ShapeRef.new(shape: ClientRequestToken, location_name: "clientRequestToken"))
+    CreateWorldTemplateRequest.add_member(:name, Shapes::ShapeRef.new(shape: TemplateName, location_name: "name"))
+    CreateWorldTemplateRequest.add_member(:template_body, Shapes::ShapeRef.new(shape: Json, location_name: "templateBody"))
+    CreateWorldTemplateRequest.add_member(:template_location, Shapes::ShapeRef.new(shape: TemplateLocation, location_name: "templateLocation"))
+    CreateWorldTemplateRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "tags"))
+    CreateWorldTemplateRequest.struct_class = Types::CreateWorldTemplateRequest
+
+    CreateWorldTemplateResponse.add_member(:arn, Shapes::ShapeRef.new(shape: Arn, location_name: "arn"))
+    CreateWorldTemplateResponse.add_member(:client_request_token, Shapes::ShapeRef.new(shape: ClientRequestToken, location_name: "clientRequestToken"))
+    CreateWorldTemplateResponse.add_member(:created_at, Shapes::ShapeRef.new(shape: CreatedAt, location_name: "createdAt"))
+    CreateWorldTemplateResponse.add_member(:name, Shapes::ShapeRef.new(shape: TemplateName, location_name: "name"))
+    CreateWorldTemplateResponse.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "tags"))
+    CreateWorldTemplateResponse.struct_class = Types::CreateWorldTemplateResponse
+
     DataSource.add_member(:name, Shapes::ShapeRef.new(shape: Name, location_name: "name"))
     DataSource.add_member(:s3_bucket, Shapes::ShapeRef.new(shape: S3Bucket, location_name: "s3Bucket"))
     DataSource.add_member(:s3_keys, Shapes::ShapeRef.new(shape: S3KeyOutputs, location_name: "s3Keys"))
@@ -446,6 +567,11 @@ module Aws::RoboMaker
     DeleteSimulationApplicationRequest.struct_class = Types::DeleteSimulationApplicationRequest
 
     DeleteSimulationApplicationResponse.struct_class = Types::DeleteSimulationApplicationResponse
+
+    DeleteWorldTemplateRequest.add_member(:template, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "template"))
+    DeleteWorldTemplateRequest.struct_class = Types::DeleteWorldTemplateRequest
+
+    DeleteWorldTemplateResponse.struct_class = Types::DeleteWorldTemplateResponse
 
     DeploymentApplicationConfig.add_member(:application, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "application"))
     DeploymentApplicationConfig.add_member(:application_version, Shapes::ShapeRef.new(shape: DeploymentVersion, required: true, location_name: "applicationVersion"))
@@ -603,6 +729,57 @@ module Aws::RoboMaker
     DescribeSimulationJobResponse.add_member(:compute, Shapes::ShapeRef.new(shape: ComputeResponse, location_name: "compute"))
     DescribeSimulationJobResponse.struct_class = Types::DescribeSimulationJobResponse
 
+    DescribeWorldExportJobRequest.add_member(:job, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "job"))
+    DescribeWorldExportJobRequest.struct_class = Types::DescribeWorldExportJobRequest
+
+    DescribeWorldExportJobResponse.add_member(:arn, Shapes::ShapeRef.new(shape: Arn, location_name: "arn"))
+    DescribeWorldExportJobResponse.add_member(:status, Shapes::ShapeRef.new(shape: WorldExportJobStatus, location_name: "status"))
+    DescribeWorldExportJobResponse.add_member(:created_at, Shapes::ShapeRef.new(shape: CreatedAt, location_name: "createdAt"))
+    DescribeWorldExportJobResponse.add_member(:failure_code, Shapes::ShapeRef.new(shape: WorldExportJobErrorCode, location_name: "failureCode"))
+    DescribeWorldExportJobResponse.add_member(:failure_reason, Shapes::ShapeRef.new(shape: GenericString, location_name: "failureReason"))
+    DescribeWorldExportJobResponse.add_member(:client_request_token, Shapes::ShapeRef.new(shape: ClientRequestToken, location_name: "clientRequestToken"))
+    DescribeWorldExportJobResponse.add_member(:worlds, Shapes::ShapeRef.new(shape: Arns, location_name: "worlds"))
+    DescribeWorldExportJobResponse.add_member(:output_location, Shapes::ShapeRef.new(shape: OutputLocation, location_name: "outputLocation"))
+    DescribeWorldExportJobResponse.add_member(:iam_role, Shapes::ShapeRef.new(shape: IamRole, location_name: "iamRole"))
+    DescribeWorldExportJobResponse.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "tags"))
+    DescribeWorldExportJobResponse.struct_class = Types::DescribeWorldExportJobResponse
+
+    DescribeWorldGenerationJobRequest.add_member(:job, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "job"))
+    DescribeWorldGenerationJobRequest.struct_class = Types::DescribeWorldGenerationJobRequest
+
+    DescribeWorldGenerationJobResponse.add_member(:arn, Shapes::ShapeRef.new(shape: Arn, location_name: "arn"))
+    DescribeWorldGenerationJobResponse.add_member(:status, Shapes::ShapeRef.new(shape: WorldGenerationJobStatus, location_name: "status"))
+    DescribeWorldGenerationJobResponse.add_member(:created_at, Shapes::ShapeRef.new(shape: CreatedAt, location_name: "createdAt"))
+    DescribeWorldGenerationJobResponse.add_member(:failure_code, Shapes::ShapeRef.new(shape: WorldGenerationJobErrorCode, location_name: "failureCode"))
+    DescribeWorldGenerationJobResponse.add_member(:failure_reason, Shapes::ShapeRef.new(shape: GenericString, location_name: "failureReason"))
+    DescribeWorldGenerationJobResponse.add_member(:client_request_token, Shapes::ShapeRef.new(shape: ClientRequestToken, location_name: "clientRequestToken"))
+    DescribeWorldGenerationJobResponse.add_member(:template, Shapes::ShapeRef.new(shape: Arn, location_name: "template"))
+    DescribeWorldGenerationJobResponse.add_member(:world_count, Shapes::ShapeRef.new(shape: WorldCount, location_name: "worldCount"))
+    DescribeWorldGenerationJobResponse.add_member(:finished_worlds_summary, Shapes::ShapeRef.new(shape: FinishedWorldsSummary, location_name: "finishedWorldsSummary"))
+    DescribeWorldGenerationJobResponse.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "tags"))
+    DescribeWorldGenerationJobResponse.struct_class = Types::DescribeWorldGenerationJobResponse
+
+    DescribeWorldRequest.add_member(:world, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "world"))
+    DescribeWorldRequest.struct_class = Types::DescribeWorldRequest
+
+    DescribeWorldResponse.add_member(:arn, Shapes::ShapeRef.new(shape: Arn, location_name: "arn"))
+    DescribeWorldResponse.add_member(:generation_job, Shapes::ShapeRef.new(shape: Arn, location_name: "generationJob"))
+    DescribeWorldResponse.add_member(:template, Shapes::ShapeRef.new(shape: Arn, location_name: "template"))
+    DescribeWorldResponse.add_member(:created_at, Shapes::ShapeRef.new(shape: CreatedAt, location_name: "createdAt"))
+    DescribeWorldResponse.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "tags"))
+    DescribeWorldResponse.struct_class = Types::DescribeWorldResponse
+
+    DescribeWorldTemplateRequest.add_member(:template, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "template"))
+    DescribeWorldTemplateRequest.struct_class = Types::DescribeWorldTemplateRequest
+
+    DescribeWorldTemplateResponse.add_member(:arn, Shapes::ShapeRef.new(shape: Arn, location_name: "arn"))
+    DescribeWorldTemplateResponse.add_member(:client_request_token, Shapes::ShapeRef.new(shape: ClientRequestToken, location_name: "clientRequestToken"))
+    DescribeWorldTemplateResponse.add_member(:name, Shapes::ShapeRef.new(shape: TemplateName, location_name: "name"))
+    DescribeWorldTemplateResponse.add_member(:created_at, Shapes::ShapeRef.new(shape: CreatedAt, location_name: "createdAt"))
+    DescribeWorldTemplateResponse.add_member(:last_updated_at, Shapes::ShapeRef.new(shape: LastUpdatedAt, location_name: "lastUpdatedAt"))
+    DescribeWorldTemplateResponse.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "tags"))
+    DescribeWorldTemplateResponse.struct_class = Types::DescribeWorldTemplateResponse
+
     EnvironmentVariableMap.key = Shapes::ShapeRef.new(shape: EnvironmentVariableKey)
     EnvironmentVariableMap.value = Shapes::ShapeRef.new(shape: EnvironmentVariableValue)
 
@@ -614,6 +791,10 @@ module Aws::RoboMaker
 
     FailedCreateSimulationJobRequests.member = Shapes::ShapeRef.new(shape: FailedCreateSimulationJobRequest)
 
+    FailureSummary.add_member(:total_failure_count, Shapes::ShapeRef.new(shape: Integer, location_name: "totalFailureCount"))
+    FailureSummary.add_member(:failures, Shapes::ShapeRef.new(shape: WorldFailures, location_name: "failures"))
+    FailureSummary.struct_class = Types::FailureSummary
+
     Filter.add_member(:name, Shapes::ShapeRef.new(shape: Name, location_name: "name"))
     Filter.add_member(:values, Shapes::ShapeRef.new(shape: FilterValues, location_name: "values"))
     Filter.struct_class = Types::Filter
@@ -621,6 +802,11 @@ module Aws::RoboMaker
     FilterValues.member = Shapes::ShapeRef.new(shape: Name)
 
     Filters.member = Shapes::ShapeRef.new(shape: Filter)
+
+    FinishedWorldsSummary.add_member(:finished_count, Shapes::ShapeRef.new(shape: Integer, location_name: "finishedCount"))
+    FinishedWorldsSummary.add_member(:succeeded_worlds, Shapes::ShapeRef.new(shape: Arns, location_name: "succeededWorlds"))
+    FinishedWorldsSummary.add_member(:failure_summary, Shapes::ShapeRef.new(shape: FailureSummary, location_name: "failureSummary"))
+    FinishedWorldsSummary.struct_class = Types::FinishedWorldsSummary
 
     Fleet.add_member(:name, Shapes::ShapeRef.new(shape: Name, location_name: "name"))
     Fleet.add_member(:arn, Shapes::ShapeRef.new(shape: Arn, location_name: "arn"))
@@ -631,6 +817,13 @@ module Aws::RoboMaker
     Fleet.struct_class = Types::Fleet
 
     Fleets.member = Shapes::ShapeRef.new(shape: Fleet)
+
+    GetWorldTemplateBodyRequest.add_member(:template, Shapes::ShapeRef.new(shape: Arn, location_name: "template"))
+    GetWorldTemplateBodyRequest.add_member(:generation_job, Shapes::ShapeRef.new(shape: Arn, location_name: "generationJob"))
+    GetWorldTemplateBodyRequest.struct_class = Types::GetWorldTemplateBodyRequest
+
+    GetWorldTemplateBodyResponse.add_member(:template_body, Shapes::ShapeRef.new(shape: Json, location_name: "templateBody"))
+    GetWorldTemplateBodyResponse.struct_class = Types::GetWorldTemplateBodyResponse
 
     IdempotentParameterMismatchException.add_member(:message, Shapes::ShapeRef.new(shape: errorMessage, location_name: "message"))
     IdempotentParameterMismatchException.struct_class = Types::IdempotentParameterMismatchException
@@ -721,6 +914,41 @@ module Aws::RoboMaker
 
     ListTagsForResourceResponse.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "tags"))
     ListTagsForResourceResponse.struct_class = Types::ListTagsForResourceResponse
+
+    ListWorldExportJobsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location_name: "nextToken"))
+    ListWorldExportJobsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location_name: "maxResults"))
+    ListWorldExportJobsRequest.add_member(:filters, Shapes::ShapeRef.new(shape: Filters, location_name: "filters"))
+    ListWorldExportJobsRequest.struct_class = Types::ListWorldExportJobsRequest
+
+    ListWorldExportJobsResponse.add_member(:world_export_job_summaries, Shapes::ShapeRef.new(shape: WorldExportJobSummaries, required: true, location_name: "worldExportJobSummaries"))
+    ListWorldExportJobsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location_name: "nextToken"))
+    ListWorldExportJobsResponse.struct_class = Types::ListWorldExportJobsResponse
+
+    ListWorldGenerationJobsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location_name: "nextToken"))
+    ListWorldGenerationJobsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location_name: "maxResults"))
+    ListWorldGenerationJobsRequest.add_member(:filters, Shapes::ShapeRef.new(shape: Filters, location_name: "filters"))
+    ListWorldGenerationJobsRequest.struct_class = Types::ListWorldGenerationJobsRequest
+
+    ListWorldGenerationJobsResponse.add_member(:world_generation_job_summaries, Shapes::ShapeRef.new(shape: WorldGenerationJobSummaries, required: true, location_name: "worldGenerationJobSummaries"))
+    ListWorldGenerationJobsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location_name: "nextToken"))
+    ListWorldGenerationJobsResponse.struct_class = Types::ListWorldGenerationJobsResponse
+
+    ListWorldTemplatesRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location_name: "nextToken"))
+    ListWorldTemplatesRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location_name: "maxResults"))
+    ListWorldTemplatesRequest.struct_class = Types::ListWorldTemplatesRequest
+
+    ListWorldTemplatesResponse.add_member(:template_summaries, Shapes::ShapeRef.new(shape: TemplateSummaries, location_name: "templateSummaries"))
+    ListWorldTemplatesResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location_name: "nextToken"))
+    ListWorldTemplatesResponse.struct_class = Types::ListWorldTemplatesResponse
+
+    ListWorldsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location_name: "nextToken"))
+    ListWorldsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location_name: "maxResults"))
+    ListWorldsRequest.add_member(:filters, Shapes::ShapeRef.new(shape: Filters, location_name: "filters"))
+    ListWorldsRequest.struct_class = Types::ListWorldsRequest
+
+    ListWorldsResponse.add_member(:world_summaries, Shapes::ShapeRef.new(shape: WorldSummaries, location_name: "worldSummaries"))
+    ListWorldsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location_name: "nextToken"))
+    ListWorldsResponse.struct_class = Types::ListWorldsResponse
 
     LoggingConfig.add_member(:record_all_ros_topics, Shapes::ShapeRef.new(shape: BoxedBoolean, required: true, location_name: "recordAllRosTopics"))
     LoggingConfig.struct_class = Types::LoggingConfig
@@ -840,6 +1068,7 @@ module Aws::RoboMaker
     SimulationApplicationConfig.add_member(:application, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "application"))
     SimulationApplicationConfig.add_member(:application_version, Shapes::ShapeRef.new(shape: Version, location_name: "applicationVersion"))
     SimulationApplicationConfig.add_member(:launch_config, Shapes::ShapeRef.new(shape: LaunchConfig, required: true, location_name: "launchConfig"))
+    SimulationApplicationConfig.add_member(:world_configs, Shapes::ShapeRef.new(shape: WorldConfigs, location_name: "worldConfigs"))
     SimulationApplicationConfig.struct_class = Types::SimulationApplicationConfig
 
     SimulationApplicationConfigs.member = Shapes::ShapeRef.new(shape: SimulationApplicationConfig)
@@ -982,6 +1211,18 @@ module Aws::RoboMaker
 
     TagResourceResponse.struct_class = Types::TagResourceResponse
 
+    TemplateLocation.add_member(:s3_bucket, Shapes::ShapeRef.new(shape: S3Bucket, required: true, location_name: "s3Bucket"))
+    TemplateLocation.add_member(:s3_key, Shapes::ShapeRef.new(shape: S3Key, required: true, location_name: "s3Key"))
+    TemplateLocation.struct_class = Types::TemplateLocation
+
+    TemplateSummaries.member = Shapes::ShapeRef.new(shape: TemplateSummary)
+
+    TemplateSummary.add_member(:arn, Shapes::ShapeRef.new(shape: Arn, location_name: "arn"))
+    TemplateSummary.add_member(:created_at, Shapes::ShapeRef.new(shape: CreatedAt, location_name: "createdAt"))
+    TemplateSummary.add_member(:last_updated_at, Shapes::ShapeRef.new(shape: LastUpdatedAt, location_name: "lastUpdatedAt"))
+    TemplateSummary.add_member(:name, Shapes::ShapeRef.new(shape: TemplateName, location_name: "name"))
+    TemplateSummary.struct_class = Types::TemplateSummary
+
     ThrottlingException.add_member(:message, Shapes::ShapeRef.new(shape: errorMessage, location_name: "message"))
     ThrottlingException.struct_class = Types::ThrottlingException
 
@@ -1025,6 +1266,18 @@ module Aws::RoboMaker
     UpdateSimulationApplicationResponse.add_member(:revision_id, Shapes::ShapeRef.new(shape: RevisionId, location_name: "revisionId"))
     UpdateSimulationApplicationResponse.struct_class = Types::UpdateSimulationApplicationResponse
 
+    UpdateWorldTemplateRequest.add_member(:template, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "template"))
+    UpdateWorldTemplateRequest.add_member(:name, Shapes::ShapeRef.new(shape: TemplateName, location_name: "name"))
+    UpdateWorldTemplateRequest.add_member(:template_body, Shapes::ShapeRef.new(shape: Json, location_name: "templateBody"))
+    UpdateWorldTemplateRequest.add_member(:template_location, Shapes::ShapeRef.new(shape: TemplateLocation, location_name: "templateLocation"))
+    UpdateWorldTemplateRequest.struct_class = Types::UpdateWorldTemplateRequest
+
+    UpdateWorldTemplateResponse.add_member(:arn, Shapes::ShapeRef.new(shape: Arn, location_name: "arn"))
+    UpdateWorldTemplateResponse.add_member(:name, Shapes::ShapeRef.new(shape: TemplateName, location_name: "name"))
+    UpdateWorldTemplateResponse.add_member(:created_at, Shapes::ShapeRef.new(shape: CreatedAt, location_name: "createdAt"))
+    UpdateWorldTemplateResponse.add_member(:last_updated_at, Shapes::ShapeRef.new(shape: LastUpdatedAt, location_name: "lastUpdatedAt"))
+    UpdateWorldTemplateResponse.struct_class = Types::UpdateWorldTemplateResponse
+
     VPCConfig.add_member(:subnets, Shapes::ShapeRef.new(shape: Subnets, required: true, location_name: "subnets"))
     VPCConfig.add_member(:security_groups, Shapes::ShapeRef.new(shape: SecurityGroups, location_name: "securityGroups"))
     VPCConfig.add_member(:assign_public_ip, Shapes::ShapeRef.new(shape: Boolean, location_name: "assignPublicIp"))
@@ -1035,6 +1288,49 @@ module Aws::RoboMaker
     VPCConfigResponse.add_member(:vpc_id, Shapes::ShapeRef.new(shape: GenericString, location_name: "vpcId"))
     VPCConfigResponse.add_member(:assign_public_ip, Shapes::ShapeRef.new(shape: Boolean, location_name: "assignPublicIp"))
     VPCConfigResponse.struct_class = Types::VPCConfigResponse
+
+    WorldConfig.add_member(:world, Shapes::ShapeRef.new(shape: Arn, location_name: "world"))
+    WorldConfig.struct_class = Types::WorldConfig
+
+    WorldConfigs.member = Shapes::ShapeRef.new(shape: WorldConfig)
+
+    WorldCount.add_member(:floorplan_count, Shapes::ShapeRef.new(shape: FloorplanCount, location_name: "floorplanCount"))
+    WorldCount.add_member(:interior_count_per_floorplan, Shapes::ShapeRef.new(shape: InteriorCountPerFloorplan, location_name: "interiorCountPerFloorplan"))
+    WorldCount.struct_class = Types::WorldCount
+
+    WorldExportJobSummaries.member = Shapes::ShapeRef.new(shape: WorldExportJobSummary)
+
+    WorldExportJobSummary.add_member(:arn, Shapes::ShapeRef.new(shape: Arn, location_name: "arn"))
+    WorldExportJobSummary.add_member(:status, Shapes::ShapeRef.new(shape: WorldExportJobStatus, location_name: "status"))
+    WorldExportJobSummary.add_member(:created_at, Shapes::ShapeRef.new(shape: CreatedAt, location_name: "createdAt"))
+    WorldExportJobSummary.add_member(:worlds, Shapes::ShapeRef.new(shape: Arns, location_name: "worlds"))
+    WorldExportJobSummary.struct_class = Types::WorldExportJobSummary
+
+    WorldFailure.add_member(:failure_code, Shapes::ShapeRef.new(shape: WorldGenerationJobErrorCode, location_name: "failureCode"))
+    WorldFailure.add_member(:sample_failure_reason, Shapes::ShapeRef.new(shape: GenericString, location_name: "sampleFailureReason"))
+    WorldFailure.add_member(:failure_count, Shapes::ShapeRef.new(shape: Integer, location_name: "failureCount"))
+    WorldFailure.struct_class = Types::WorldFailure
+
+    WorldFailures.member = Shapes::ShapeRef.new(shape: WorldFailure)
+
+    WorldGenerationJobSummaries.member = Shapes::ShapeRef.new(shape: WorldGenerationJobSummary)
+
+    WorldGenerationJobSummary.add_member(:arn, Shapes::ShapeRef.new(shape: Arn, location_name: "arn"))
+    WorldGenerationJobSummary.add_member(:template, Shapes::ShapeRef.new(shape: Arn, location_name: "template"))
+    WorldGenerationJobSummary.add_member(:created_at, Shapes::ShapeRef.new(shape: CreatedAt, location_name: "createdAt"))
+    WorldGenerationJobSummary.add_member(:status, Shapes::ShapeRef.new(shape: WorldGenerationJobStatus, location_name: "status"))
+    WorldGenerationJobSummary.add_member(:world_count, Shapes::ShapeRef.new(shape: WorldCount, location_name: "worldCount"))
+    WorldGenerationJobSummary.add_member(:succeeded_world_count, Shapes::ShapeRef.new(shape: Integer, location_name: "succeededWorldCount"))
+    WorldGenerationJobSummary.add_member(:failed_world_count, Shapes::ShapeRef.new(shape: Integer, location_name: "failedWorldCount"))
+    WorldGenerationJobSummary.struct_class = Types::WorldGenerationJobSummary
+
+    WorldSummaries.member = Shapes::ShapeRef.new(shape: WorldSummary)
+
+    WorldSummary.add_member(:arn, Shapes::ShapeRef.new(shape: Arn, location_name: "arn"))
+    WorldSummary.add_member(:created_at, Shapes::ShapeRef.new(shape: CreatedAt, location_name: "createdAt"))
+    WorldSummary.add_member(:generation_job, Shapes::ShapeRef.new(shape: Arn, location_name: "generationJob"))
+    WorldSummary.add_member(:template, Shapes::ShapeRef.new(shape: Arn, location_name: "template"))
+    WorldSummary.struct_class = Types::WorldSummary
 
 
     # @api private
@@ -1054,6 +1350,17 @@ module Aws::RoboMaker
         "signingName" => "robomaker",
         "uid" => "robomaker-2018-06-29",
       }
+
+      api.add_operation(:batch_delete_worlds, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "BatchDeleteWorlds"
+        o.http_method = "POST"
+        o.http_request_uri = "/batchDeleteWorlds"
+        o.input = Shapes::ShapeRef.new(shape: BatchDeleteWorldsRequest)
+        o.output = Shapes::ShapeRef.new(shape: BatchDeleteWorldsResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+      end)
 
       api.add_operation(:batch_describe_simulation_job, Seahorse::Model::Operation.new.tap do |o|
         o.name = "BatchDescribeSimulationJob"
@@ -1097,6 +1404,30 @@ module Aws::RoboMaker
         o.http_request_uri = "/cancelSimulationJobBatch"
         o.input = Shapes::ShapeRef.new(shape: CancelSimulationJobBatchRequest)
         o.output = Shapes::ShapeRef.new(shape: CancelSimulationJobBatchResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+      end)
+
+      api.add_operation(:cancel_world_export_job, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "CancelWorldExportJob"
+        o.http_method = "POST"
+        o.http_request_uri = "/cancelWorldExportJob"
+        o.input = Shapes::ShapeRef.new(shape: CancelWorldExportJobRequest)
+        o.output = Shapes::ShapeRef.new(shape: CancelWorldExportJobResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+      end)
+
+      api.add_operation(:cancel_world_generation_job, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "CancelWorldGenerationJob"
+        o.http_method = "POST"
+        o.http_request_uri = "/cancelWorldGenerationJob"
+        o.input = Shapes::ShapeRef.new(shape: CancelWorldGenerationJobRequest)
+        o.output = Shapes::ShapeRef.new(shape: CancelWorldGenerationJobResponse)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
@@ -1212,6 +1543,49 @@ module Aws::RoboMaker
         o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
       end)
 
+      api.add_operation(:create_world_export_job, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "CreateWorldExportJob"
+        o.http_method = "POST"
+        o.http_request_uri = "/createWorldExportJob"
+        o.input = Shapes::ShapeRef.new(shape: CreateWorldExportJobRequest)
+        o.output = Shapes::ShapeRef.new(shape: CreateWorldExportJobResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: IdempotentParameterMismatchException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
+      end)
+
+      api.add_operation(:create_world_generation_job, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "CreateWorldGenerationJob"
+        o.http_method = "POST"
+        o.http_request_uri = "/createWorldGenerationJob"
+        o.input = Shapes::ShapeRef.new(shape: CreateWorldGenerationJobRequest)
+        o.output = Shapes::ShapeRef.new(shape: CreateWorldGenerationJobResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: IdempotentParameterMismatchException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
+      end)
+
+      api.add_operation(:create_world_template, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "CreateWorldTemplate"
+        o.http_method = "POST"
+        o.http_request_uri = "/createWorldTemplate"
+        o.input = Shapes::ShapeRef.new(shape: CreateWorldTemplateRequest)
+        o.output = Shapes::ShapeRef.new(shape: CreateWorldTemplateResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceAlreadyExistsException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+      end)
+
       api.add_operation(:delete_fleet, Seahorse::Model::Operation.new.tap do |o|
         o.name = "DeleteFleet"
         o.http_method = "POST"
@@ -1252,6 +1626,18 @@ module Aws::RoboMaker
         o.input = Shapes::ShapeRef.new(shape: DeleteSimulationApplicationRequest)
         o.output = Shapes::ShapeRef.new(shape: DeleteSimulationApplicationResponse)
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+      end)
+
+      api.add_operation(:delete_world_template, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DeleteWorldTemplate"
+        o.http_method = "POST"
+        o.http_request_uri = "/deleteWorldTemplate"
+        o.input = Shapes::ShapeRef.new(shape: DeleteWorldTemplateRequest)
+        o.output = Shapes::ShapeRef.new(shape: DeleteWorldTemplateResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
       end)
@@ -1348,6 +1734,66 @@ module Aws::RoboMaker
         o.output = Shapes::ShapeRef.new(shape: DescribeSimulationJobBatchResponse)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+      end)
+
+      api.add_operation(:describe_world, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DescribeWorld"
+        o.http_method = "POST"
+        o.http_request_uri = "/describeWorld"
+        o.input = Shapes::ShapeRef.new(shape: DescribeWorldRequest)
+        o.output = Shapes::ShapeRef.new(shape: DescribeWorldResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+      end)
+
+      api.add_operation(:describe_world_export_job, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DescribeWorldExportJob"
+        o.http_method = "POST"
+        o.http_request_uri = "/describeWorldExportJob"
+        o.input = Shapes::ShapeRef.new(shape: DescribeWorldExportJobRequest)
+        o.output = Shapes::ShapeRef.new(shape: DescribeWorldExportJobResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+      end)
+
+      api.add_operation(:describe_world_generation_job, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DescribeWorldGenerationJob"
+        o.http_method = "POST"
+        o.http_request_uri = "/describeWorldGenerationJob"
+        o.input = Shapes::ShapeRef.new(shape: DescribeWorldGenerationJobRequest)
+        o.output = Shapes::ShapeRef.new(shape: DescribeWorldGenerationJobResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+      end)
+
+      api.add_operation(:describe_world_template, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DescribeWorldTemplate"
+        o.http_method = "POST"
+        o.http_request_uri = "/describeWorldTemplate"
+        o.input = Shapes::ShapeRef.new(shape: DescribeWorldTemplateRequest)
+        o.output = Shapes::ShapeRef.new(shape: DescribeWorldTemplateResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+      end)
+
+      api.add_operation(:get_world_template_body, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetWorldTemplateBody"
+        o.http_method = "POST"
+        o.http_request_uri = "/getWorldTemplateBody"
+        o.input = Shapes::ShapeRef.new(shape: GetWorldTemplateBodyRequest)
+        o.output = Shapes::ShapeRef.new(shape: GetWorldTemplateBodyResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
       end)
 
@@ -1484,6 +1930,74 @@ module Aws::RoboMaker
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
       end)
 
+      api.add_operation(:list_world_export_jobs, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListWorldExportJobs"
+        o.http_method = "POST"
+        o.http_request_uri = "/listWorldExportJobs"
+        o.input = Shapes::ShapeRef.new(shape: ListWorldExportJobsRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListWorldExportJobsResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
+      api.add_operation(:list_world_generation_jobs, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListWorldGenerationJobs"
+        o.http_method = "POST"
+        o.http_request_uri = "/listWorldGenerationJobs"
+        o.input = Shapes::ShapeRef.new(shape: ListWorldGenerationJobsRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListWorldGenerationJobsResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
+      api.add_operation(:list_world_templates, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListWorldTemplates"
+        o.http_method = "POST"
+        o.http_request_uri = "/listWorldTemplates"
+        o.input = Shapes::ShapeRef.new(shape: ListWorldTemplatesRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListWorldTemplatesResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
+      api.add_operation(:list_worlds, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListWorlds"
+        o.http_method = "POST"
+        o.http_request_uri = "/listWorlds"
+        o.input = Shapes::ShapeRef.new(shape: ListWorldsRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListWorldsResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
       api.add_operation(:register_robot, Seahorse::Model::Operation.new.tap do |o|
         o.name = "RegisterRobot"
         o.http_method = "POST"
@@ -1584,6 +2098,18 @@ module Aws::RoboMaker
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+      end)
+
+      api.add_operation(:update_world_template, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "UpdateWorldTemplate"
+        o.http_method = "POST"
+        o.http_request_uri = "/updateWorldTemplate"
+        o.input = Shapes::ShapeRef.new(shape: UpdateWorldTemplateRequest)
+        o.output = Shapes::ShapeRef.new(shape: UpdateWorldTemplateResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
       end)

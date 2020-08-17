@@ -499,6 +499,72 @@ module Aws::Firehose
     #             log_stream_name: "LogStreamName",
     #           },
     #         },
+    #         http_endpoint_destination_configuration: {
+    #           endpoint_configuration: { # required
+    #             url: "HttpEndpointUrl", # required
+    #             name: "HttpEndpointName",
+    #             access_key: "HttpEndpointAccessKey",
+    #           },
+    #           buffering_hints: {
+    #             size_in_m_bs: 1,
+    #             interval_in_seconds: 1,
+    #           },
+    #           cloud_watch_logging_options: {
+    #             enabled: false,
+    #             log_group_name: "LogGroupName",
+    #             log_stream_name: "LogStreamName",
+    #           },
+    #           request_configuration: {
+    #             content_encoding: "NONE", # accepts NONE, GZIP
+    #             common_attributes: [
+    #               {
+    #                 attribute_name: "HttpEndpointAttributeName", # required
+    #                 attribute_value: "HttpEndpointAttributeValue", # required
+    #               },
+    #             ],
+    #           },
+    #           processing_configuration: {
+    #             enabled: false,
+    #             processors: [
+    #               {
+    #                 type: "Lambda", # required, accepts Lambda
+    #                 parameters: [
+    #                   {
+    #                     parameter_name: "LambdaArn", # required, accepts LambdaArn, NumberOfRetries, RoleArn, BufferSizeInMBs, BufferIntervalInSeconds
+    #                     parameter_value: "ProcessorParameterValue", # required
+    #                   },
+    #                 ],
+    #               },
+    #             ],
+    #           },
+    #           role_arn: "RoleARN",
+    #           retry_options: {
+    #             duration_in_seconds: 1,
+    #           },
+    #           s3_backup_mode: "FailedDataOnly", # accepts FailedDataOnly, AllData
+    #           s3_configuration: { # required
+    #             role_arn: "RoleARN", # required
+    #             bucket_arn: "BucketARN", # required
+    #             prefix: "Prefix",
+    #             error_output_prefix: "ErrorOutputPrefix",
+    #             buffering_hints: {
+    #               size_in_m_bs: 1,
+    #               interval_in_seconds: 1,
+    #             },
+    #             compression_format: "UNCOMPRESSED", # accepts UNCOMPRESSED, GZIP, ZIP, Snappy, HADOOP_SNAPPY
+    #             encryption_configuration: {
+    #               no_encryption_config: "NoEncryption", # accepts NoEncryption
+    #               kms_encryption_config: {
+    #                 awskms_key_arn: "AWSKMSKeyARN", # required
+    #               },
+    #             },
+    #             cloud_watch_logging_options: {
+    #               enabled: false,
+    #               log_group_name: "LogGroupName",
+    #               log_stream_name: "LogStreamName",
+    #             },
+    #           },
+    #         },
     #         tags: [
     #           {
     #             key: "TagKey", # required
@@ -559,6 +625,11 @@ module Aws::Firehose
     #   The destination in Splunk. You can specify only one destination.
     #   @return [Types::SplunkDestinationConfiguration]
     #
+    # @!attribute [rw] http_endpoint_destination_configuration
+    #   Enables configuring Kinesis Firehose to deliver data to any HTTP
+    #   endpoint destination. You can specify only one destination.
+    #   @return [Types::HttpEndpointDestinationConfiguration]
+    #
     # @!attribute [rw] tags
     #   A set of tags to assign to the delivery stream. A tag is a key-value
     #   pair that you can define and assign to AWS resources. Tags are
@@ -587,6 +658,7 @@ module Aws::Firehose
       :redshift_destination_configuration,
       :elasticsearch_destination_configuration,
       :splunk_destination_configuration,
+      :http_endpoint_destination_configuration,
       :tags)
       SENSITIVE = []
       include Aws::Structure
@@ -1071,6 +1143,10 @@ module Aws::Firehose
     #   The destination in Splunk.
     #   @return [Types::SplunkDestinationDescription]
     #
+    # @!attribute [rw] http_endpoint_destination_description
+    #   Describes the specified HTTP endpoint destination.
+    #   @return [Types::HttpEndpointDestinationDescription]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/firehose-2015-08-04/DestinationDescription AWS API Documentation
     #
     class DestinationDescription < Struct.new(
@@ -1079,7 +1155,8 @@ module Aws::Firehose
       :extended_s3_destination_description,
       :redshift_destination_description,
       :elasticsearch_destination_description,
-      :splunk_destination_description)
+      :splunk_destination_description,
+      :http_endpoint_destination_description)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1265,6 +1342,9 @@ module Aws::Firehose
     #   with `elasticsearch-failed/` appended to the prefix. For more
     #   information, see [Amazon S3 Backup for the Amazon ES
     #   Destination][1]. Default value is `FailedDocumentsOnly`.
+    #
+    #   You can't change this backup mode after you create the delivery
+    #   stream.
     #
     #
     #
@@ -1795,7 +1875,10 @@ module Aws::Firehose
     #   @return [Types::ProcessingConfiguration]
     #
     # @!attribute [rw] s3_backup_mode
-    #   The Amazon S3 backup mode.
+    #   The Amazon S3 backup mode. After you create a delivery stream, you
+    #   can update it to enable Amazon S3 backup if it is disabled. If
+    #   backup is enabled, you can't update the delivery stream to disable
+    #   it.
     #   @return [String]
     #
     # @!attribute [rw] s3_backup_configuration
@@ -2101,7 +2184,9 @@ module Aws::Firehose
     #   @return [Types::ProcessingConfiguration]
     #
     # @!attribute [rw] s3_backup_mode
-    #   Enables or disables Amazon S3 backup mode.
+    #   You can update a delivery stream to enable Amazon S3 backup if it is
+    #   disabled. If backup is enabled, you can't update the delivery
+    #   stream to disable it.
     #   @return [String]
     #
     # @!attribute [rw] s3_backup_update
@@ -2187,6 +2272,542 @@ module Aws::Firehose
     #
     class HiveJsonSerDe < Struct.new(
       :timestamp_formats)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Describes the buffering options that can be applied before data is
+    # delivered to the HTTP endpoint destination. Kinesis Data Firehose
+    # treats these options as hints, and it might choose to use more optimal
+    # values. The `SizeInMBs` and `IntervalInSeconds` parameters are
+    # optional. However, if specify a value for one of them, you must also
+    # provide a value for the other.
+    #
+    # @note When making an API call, you may pass HttpEndpointBufferingHints
+    #   data as a hash:
+    #
+    #       {
+    #         size_in_m_bs: 1,
+    #         interval_in_seconds: 1,
+    #       }
+    #
+    # @!attribute [rw] size_in_m_bs
+    #   Buffer incoming data to the specified size, in MBs, before
+    #   delivering it to the destination. The default value is 5.
+    #
+    #   We recommend setting this parameter to a value greater than the
+    #   amount of data you typically ingest into the delivery stream in 10
+    #   seconds. For example, if you typically ingest data at 1 MB/sec, the
+    #   value should be 10 MB or higher.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] interval_in_seconds
+    #   Buffer incoming data for the specified period of time, in seconds,
+    #   before delivering it to the destination. The default value is 300 (5
+    #   minutes).
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/firehose-2015-08-04/HttpEndpointBufferingHints AWS API Documentation
+    #
+    class HttpEndpointBufferingHints < Struct.new(
+      :size_in_m_bs,
+      :interval_in_seconds)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Describes the metadata that's delivered to the specified HTTP
+    # endpoint destination.
+    #
+    # @note When making an API call, you may pass HttpEndpointCommonAttribute
+    #   data as a hash:
+    #
+    #       {
+    #         attribute_name: "HttpEndpointAttributeName", # required
+    #         attribute_value: "HttpEndpointAttributeValue", # required
+    #       }
+    #
+    # @!attribute [rw] attribute_name
+    #   The name of the HTTP endpoint common attribute.
+    #   @return [String]
+    #
+    # @!attribute [rw] attribute_value
+    #   The value of the HTTP endpoint common attribute.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/firehose-2015-08-04/HttpEndpointCommonAttribute AWS API Documentation
+    #
+    class HttpEndpointCommonAttribute < Struct.new(
+      :attribute_name,
+      :attribute_value)
+      SENSITIVE = [:attribute_name, :attribute_value]
+      include Aws::Structure
+    end
+
+    # Describes the configuration of the HTTP endpoint to which Kinesis
+    # Firehose delivers data.
+    #
+    # @note When making an API call, you may pass HttpEndpointConfiguration
+    #   data as a hash:
+    #
+    #       {
+    #         url: "HttpEndpointUrl", # required
+    #         name: "HttpEndpointName",
+    #         access_key: "HttpEndpointAccessKey",
+    #       }
+    #
+    # @!attribute [rw] url
+    #   The URL of the HTTP endpoint selected as the destination.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The name of the HTTP endpoint selected as the destination.
+    #   @return [String]
+    #
+    # @!attribute [rw] access_key
+    #   The access key required for Kinesis Firehose to authenticate with
+    #   the HTTP endpoint selected as the destination.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/firehose-2015-08-04/HttpEndpointConfiguration AWS API Documentation
+    #
+    class HttpEndpointConfiguration < Struct.new(
+      :url,
+      :name,
+      :access_key)
+      SENSITIVE = [:url, :access_key]
+      include Aws::Structure
+    end
+
+    # Describes the HTTP endpoint selected as the destination.
+    #
+    # @!attribute [rw] url
+    #   The URL of the HTTP endpoint selected as the destination.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The name of the HTTP endpoint selected as the destination.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/firehose-2015-08-04/HttpEndpointDescription AWS API Documentation
+    #
+    class HttpEndpointDescription < Struct.new(
+      :url,
+      :name)
+      SENSITIVE = [:url]
+      include Aws::Structure
+    end
+
+    # Describes the configuration of the HTTP endpoint destination.
+    #
+    # @note When making an API call, you may pass HttpEndpointDestinationConfiguration
+    #   data as a hash:
+    #
+    #       {
+    #         endpoint_configuration: { # required
+    #           url: "HttpEndpointUrl", # required
+    #           name: "HttpEndpointName",
+    #           access_key: "HttpEndpointAccessKey",
+    #         },
+    #         buffering_hints: {
+    #           size_in_m_bs: 1,
+    #           interval_in_seconds: 1,
+    #         },
+    #         cloud_watch_logging_options: {
+    #           enabled: false,
+    #           log_group_name: "LogGroupName",
+    #           log_stream_name: "LogStreamName",
+    #         },
+    #         request_configuration: {
+    #           content_encoding: "NONE", # accepts NONE, GZIP
+    #           common_attributes: [
+    #             {
+    #               attribute_name: "HttpEndpointAttributeName", # required
+    #               attribute_value: "HttpEndpointAttributeValue", # required
+    #             },
+    #           ],
+    #         },
+    #         processing_configuration: {
+    #           enabled: false,
+    #           processors: [
+    #             {
+    #               type: "Lambda", # required, accepts Lambda
+    #               parameters: [
+    #                 {
+    #                   parameter_name: "LambdaArn", # required, accepts LambdaArn, NumberOfRetries, RoleArn, BufferSizeInMBs, BufferIntervalInSeconds
+    #                   parameter_value: "ProcessorParameterValue", # required
+    #                 },
+    #               ],
+    #             },
+    #           ],
+    #         },
+    #         role_arn: "RoleARN",
+    #         retry_options: {
+    #           duration_in_seconds: 1,
+    #         },
+    #         s3_backup_mode: "FailedDataOnly", # accepts FailedDataOnly, AllData
+    #         s3_configuration: { # required
+    #           role_arn: "RoleARN", # required
+    #           bucket_arn: "BucketARN", # required
+    #           prefix: "Prefix",
+    #           error_output_prefix: "ErrorOutputPrefix",
+    #           buffering_hints: {
+    #             size_in_m_bs: 1,
+    #             interval_in_seconds: 1,
+    #           },
+    #           compression_format: "UNCOMPRESSED", # accepts UNCOMPRESSED, GZIP, ZIP, Snappy, HADOOP_SNAPPY
+    #           encryption_configuration: {
+    #             no_encryption_config: "NoEncryption", # accepts NoEncryption
+    #             kms_encryption_config: {
+    #               awskms_key_arn: "AWSKMSKeyARN", # required
+    #             },
+    #           },
+    #           cloud_watch_logging_options: {
+    #             enabled: false,
+    #             log_group_name: "LogGroupName",
+    #             log_stream_name: "LogStreamName",
+    #           },
+    #         },
+    #       }
+    #
+    # @!attribute [rw] endpoint_configuration
+    #   The configuration of the HTTP endpoint selected as the destination.
+    #   @return [Types::HttpEndpointConfiguration]
+    #
+    # @!attribute [rw] buffering_hints
+    #   The buffering options that can be used before data is delivered to
+    #   the specified destination. Kinesis Data Firehose treats these
+    #   options as hints, and it might choose to use more optimal values.
+    #   The `SizeInMBs` and `IntervalInSeconds` parameters are optional.
+    #   However, if you specify a value for one of them, you must also
+    #   provide a value for the other.
+    #   @return [Types::HttpEndpointBufferingHints]
+    #
+    # @!attribute [rw] cloud_watch_logging_options
+    #   Describes the Amazon CloudWatch logging options for your delivery
+    #   stream.
+    #   @return [Types::CloudWatchLoggingOptions]
+    #
+    # @!attribute [rw] request_configuration
+    #   The configuration of the requeste sent to the HTTP endpoint
+    #   specified as the destination.
+    #   @return [Types::HttpEndpointRequestConfiguration]
+    #
+    # @!attribute [rw] processing_configuration
+    #   Describes a data processing configuration.
+    #   @return [Types::ProcessingConfiguration]
+    #
+    # @!attribute [rw] role_arn
+    #   Kinesis Data Firehose uses this IAM role for all the permissions
+    #   that the delivery stream needs.
+    #   @return [String]
+    #
+    # @!attribute [rw] retry_options
+    #   Describes the retry behavior in case Kinesis Data Firehose is unable
+    #   to deliver data to the specified HTTP endpoint destination, or if it
+    #   doesn't receive a valid acknowledgment of receipt from the
+    #   specified HTTP endpoint destination.
+    #   @return [Types::HttpEndpointRetryOptions]
+    #
+    # @!attribute [rw] s3_backup_mode
+    #   Describes the S3 bucket backup options for the data that Kinesis
+    #   Data Firehose delivers to the HTTP endpoint destination. You can
+    #   back up all documents (`AllData`) or only the documents that Kinesis
+    #   Data Firehose could not deliver to the specified HTTP endpoint
+    #   destination (`FailedDataOnly`).
+    #   @return [String]
+    #
+    # @!attribute [rw] s3_configuration
+    #   Describes the configuration of a destination in Amazon S3.
+    #   @return [Types::S3DestinationConfiguration]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/firehose-2015-08-04/HttpEndpointDestinationConfiguration AWS API Documentation
+    #
+    class HttpEndpointDestinationConfiguration < Struct.new(
+      :endpoint_configuration,
+      :buffering_hints,
+      :cloud_watch_logging_options,
+      :request_configuration,
+      :processing_configuration,
+      :role_arn,
+      :retry_options,
+      :s3_backup_mode,
+      :s3_configuration)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Describes the HTTP endpoint destination.
+    #
+    # @!attribute [rw] endpoint_configuration
+    #   The configuration of the specified HTTP endpoint destination.
+    #   @return [Types::HttpEndpointDescription]
+    #
+    # @!attribute [rw] buffering_hints
+    #   Describes buffering options that can be applied to the data before
+    #   it is delivered to the HTTPS endpoint destination. Kinesis Data
+    #   Firehose teats these options as hints, and it might choose to use
+    #   more optimal values. The `SizeInMBs` and `IntervalInSeconds`
+    #   parameters are optional. However, if specify a value for one of
+    #   them, you must also provide a value for the other.
+    #   @return [Types::HttpEndpointBufferingHints]
+    #
+    # @!attribute [rw] cloud_watch_logging_options
+    #   Describes the Amazon CloudWatch logging options for your delivery
+    #   stream.
+    #   @return [Types::CloudWatchLoggingOptions]
+    #
+    # @!attribute [rw] request_configuration
+    #   The configuration of request sent to the HTTP endpoint specified as
+    #   the destination.
+    #   @return [Types::HttpEndpointRequestConfiguration]
+    #
+    # @!attribute [rw] processing_configuration
+    #   Describes a data processing configuration.
+    #   @return [Types::ProcessingConfiguration]
+    #
+    # @!attribute [rw] role_arn
+    #   Kinesis Data Firehose uses this IAM role for all the permissions
+    #   that the delivery stream needs.
+    #   @return [String]
+    #
+    # @!attribute [rw] retry_options
+    #   Describes the retry behavior in case Kinesis Data Firehose is unable
+    #   to deliver data to the specified HTTP endpoint destination, or if it
+    #   doesn't receive a valid acknowledgment of receipt from the
+    #   specified HTTP endpoint destination.
+    #   @return [Types::HttpEndpointRetryOptions]
+    #
+    # @!attribute [rw] s3_backup_mode
+    #   Describes the S3 bucket backup options for the data that Kinesis
+    #   Firehose delivers to the HTTP endpoint destination. You can back up
+    #   all documents (`AllData`) or only the documents that Kinesis Data
+    #   Firehose could not deliver to the specified HTTP endpoint
+    #   destination (`FailedDataOnly`).
+    #   @return [String]
+    #
+    # @!attribute [rw] s3_destination_description
+    #   Describes a destination in Amazon S3.
+    #   @return [Types::S3DestinationDescription]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/firehose-2015-08-04/HttpEndpointDestinationDescription AWS API Documentation
+    #
+    class HttpEndpointDestinationDescription < Struct.new(
+      :endpoint_configuration,
+      :buffering_hints,
+      :cloud_watch_logging_options,
+      :request_configuration,
+      :processing_configuration,
+      :role_arn,
+      :retry_options,
+      :s3_backup_mode,
+      :s3_destination_description)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Updates the specified HTTP endpoint destination.
+    #
+    # @note When making an API call, you may pass HttpEndpointDestinationUpdate
+    #   data as a hash:
+    #
+    #       {
+    #         endpoint_configuration: {
+    #           url: "HttpEndpointUrl", # required
+    #           name: "HttpEndpointName",
+    #           access_key: "HttpEndpointAccessKey",
+    #         },
+    #         buffering_hints: {
+    #           size_in_m_bs: 1,
+    #           interval_in_seconds: 1,
+    #         },
+    #         cloud_watch_logging_options: {
+    #           enabled: false,
+    #           log_group_name: "LogGroupName",
+    #           log_stream_name: "LogStreamName",
+    #         },
+    #         request_configuration: {
+    #           content_encoding: "NONE", # accepts NONE, GZIP
+    #           common_attributes: [
+    #             {
+    #               attribute_name: "HttpEndpointAttributeName", # required
+    #               attribute_value: "HttpEndpointAttributeValue", # required
+    #             },
+    #           ],
+    #         },
+    #         processing_configuration: {
+    #           enabled: false,
+    #           processors: [
+    #             {
+    #               type: "Lambda", # required, accepts Lambda
+    #               parameters: [
+    #                 {
+    #                   parameter_name: "LambdaArn", # required, accepts LambdaArn, NumberOfRetries, RoleArn, BufferSizeInMBs, BufferIntervalInSeconds
+    #                   parameter_value: "ProcessorParameterValue", # required
+    #                 },
+    #               ],
+    #             },
+    #           ],
+    #         },
+    #         role_arn: "RoleARN",
+    #         retry_options: {
+    #           duration_in_seconds: 1,
+    #         },
+    #         s3_backup_mode: "FailedDataOnly", # accepts FailedDataOnly, AllData
+    #         s3_update: {
+    #           role_arn: "RoleARN",
+    #           bucket_arn: "BucketARN",
+    #           prefix: "Prefix",
+    #           error_output_prefix: "ErrorOutputPrefix",
+    #           buffering_hints: {
+    #             size_in_m_bs: 1,
+    #             interval_in_seconds: 1,
+    #           },
+    #           compression_format: "UNCOMPRESSED", # accepts UNCOMPRESSED, GZIP, ZIP, Snappy, HADOOP_SNAPPY
+    #           encryption_configuration: {
+    #             no_encryption_config: "NoEncryption", # accepts NoEncryption
+    #             kms_encryption_config: {
+    #               awskms_key_arn: "AWSKMSKeyARN", # required
+    #             },
+    #           },
+    #           cloud_watch_logging_options: {
+    #             enabled: false,
+    #             log_group_name: "LogGroupName",
+    #             log_stream_name: "LogStreamName",
+    #           },
+    #         },
+    #       }
+    #
+    # @!attribute [rw] endpoint_configuration
+    #   Describes the configuration of the HTTP endpoint destination.
+    #   @return [Types::HttpEndpointConfiguration]
+    #
+    # @!attribute [rw] buffering_hints
+    #   Describes buffering options that can be applied to the data before
+    #   it is delivered to the HTTPS endpoint destination. Kinesis Data
+    #   Firehose teats these options as hints, and it might choose to use
+    #   more optimal values. The `SizeInMBs` and `IntervalInSeconds`
+    #   parameters are optional. However, if specify a value for one of
+    #   them, you must also provide a value for the other.
+    #   @return [Types::HttpEndpointBufferingHints]
+    #
+    # @!attribute [rw] cloud_watch_logging_options
+    #   Describes the Amazon CloudWatch logging options for your delivery
+    #   stream.
+    #   @return [Types::CloudWatchLoggingOptions]
+    #
+    # @!attribute [rw] request_configuration
+    #   The configuration of the request sent to the HTTP endpoint specified
+    #   as the destination.
+    #   @return [Types::HttpEndpointRequestConfiguration]
+    #
+    # @!attribute [rw] processing_configuration
+    #   Describes a data processing configuration.
+    #   @return [Types::ProcessingConfiguration]
+    #
+    # @!attribute [rw] role_arn
+    #   Kinesis Data Firehose uses this IAM role for all the permissions
+    #   that the delivery stream needs.
+    #   @return [String]
+    #
+    # @!attribute [rw] retry_options
+    #   Describes the retry behavior in case Kinesis Data Firehose is unable
+    #   to deliver data to the specified HTTP endpoint destination, or if it
+    #   doesn't receive a valid acknowledgment of receipt from the
+    #   specified HTTP endpoint destination.
+    #   @return [Types::HttpEndpointRetryOptions]
+    #
+    # @!attribute [rw] s3_backup_mode
+    #   Describes the S3 bucket backup options for the data that Kinesis
+    #   Firehose delivers to the HTTP endpoint destination. You can back up
+    #   all documents (`AllData`) or only the documents that Kinesis Data
+    #   Firehose could not deliver to the specified HTTP endpoint
+    #   destination (`FailedDataOnly`).
+    #   @return [String]
+    #
+    # @!attribute [rw] s3_update
+    #   Describes an update for a destination in Amazon S3.
+    #   @return [Types::S3DestinationUpdate]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/firehose-2015-08-04/HttpEndpointDestinationUpdate AWS API Documentation
+    #
+    class HttpEndpointDestinationUpdate < Struct.new(
+      :endpoint_configuration,
+      :buffering_hints,
+      :cloud_watch_logging_options,
+      :request_configuration,
+      :processing_configuration,
+      :role_arn,
+      :retry_options,
+      :s3_backup_mode,
+      :s3_update)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The configuration of the HTTP endpoint request.
+    #
+    # @note When making an API call, you may pass HttpEndpointRequestConfiguration
+    #   data as a hash:
+    #
+    #       {
+    #         content_encoding: "NONE", # accepts NONE, GZIP
+    #         common_attributes: [
+    #           {
+    #             attribute_name: "HttpEndpointAttributeName", # required
+    #             attribute_value: "HttpEndpointAttributeValue", # required
+    #           },
+    #         ],
+    #       }
+    #
+    # @!attribute [rw] content_encoding
+    #   Kinesis Data Firehose uses the content encoding to compress the body
+    #   of a request before sending the request to the destination. For more
+    #   information, see [Content-Encoding][1] in MDN Web Docs, the official
+    #   Mozilla documentation.
+    #
+    #
+    #
+    #   [1]: https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Content-Encoding
+    #   @return [String]
+    #
+    # @!attribute [rw] common_attributes
+    #   Describes the metadata sent to the HTTP endpoint destination.
+    #   @return [Array<Types::HttpEndpointCommonAttribute>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/firehose-2015-08-04/HttpEndpointRequestConfiguration AWS API Documentation
+    #
+    class HttpEndpointRequestConfiguration < Struct.new(
+      :content_encoding,
+      :common_attributes)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Describes the retry behavior in case Kinesis Data Firehose is unable
+    # to deliver data to the specified HTTP endpoint destination, or if it
+    # doesn't receive a valid acknowledgment of receipt from the specified
+    # HTTP endpoint destination.
+    #
+    # @note When making an API call, you may pass HttpEndpointRetryOptions
+    #   data as a hash:
+    #
+    #       {
+    #         duration_in_seconds: 1,
+    #       }
+    #
+    # @!attribute [rw] duration_in_seconds
+    #   The total amount of time that Kinesis Data Firehose spends on
+    #   retries. This duration starts after the initial attempt to send data
+    #   to the custom destination via HTTPS endpoint fails. It doesn't
+    #   include the periods during which Kinesis Data Firehose waits for
+    #   acknowledgment from the specified destination after each attempt.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/firehose-2015-08-04/HttpEndpointRetryOptions AWS API Documentation
+    #
+    class HttpEndpointRetryOptions < Struct.new(
+      :duration_in_seconds)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3153,7 +3774,10 @@ module Aws::Firehose
     #   @return [Types::ProcessingConfiguration]
     #
     # @!attribute [rw] s3_backup_mode
-    #   The Amazon S3 backup mode.
+    #   The Amazon S3 backup mode. After you create a delivery stream, you
+    #   can update it to enable Amazon S3 backup if it is disabled. If
+    #   backup is enabled, you can't update the delivery stream to disable
+    #   it.
     #   @return [String]
     #
     # @!attribute [rw] s3_backup_configuration
@@ -3379,7 +4003,9 @@ module Aws::Firehose
     #   @return [Types::ProcessingConfiguration]
     #
     # @!attribute [rw] s3_backup_mode
-    #   The Amazon S3 backup mode.
+    #   You can update a delivery stream to enable Amazon S3 backup if it is
+    #   disabled. If backup is enabled, you can't update the delivery
+    #   stream to disable it.
     #   @return [String]
     #
     # @!attribute [rw] s3_backup_update
@@ -4001,11 +4627,15 @@ module Aws::Firehose
     #
     # @!attribute [rw] s3_backup_mode
     #   Defines how documents should be delivered to Amazon S3. When set to
-    #   `FailedDocumentsOnly`, Kinesis Data Firehose writes any data that
-    #   could not be indexed to the configured Amazon S3 destination. When
-    #   set to `AllDocuments`, Kinesis Data Firehose delivers all incoming
-    #   records to Amazon S3, and also writes failed documents to Amazon S3.
-    #   Default value is `FailedDocumentsOnly`.
+    #   `FailedEventsOnly`, Kinesis Data Firehose writes any data that could
+    #   not be indexed to the configured Amazon S3 destination. When set to
+    #   `AllEvents`, Kinesis Data Firehose delivers all incoming records to
+    #   Amazon S3, and also writes failed documents to Amazon S3. The
+    #   default value is `FailedEventsOnly`.
+    #
+    #   You can update this backup mode from `FailedEventsOnly` to
+    #   `AllEvents`. You can't update it from `AllEvents` to
+    #   `FailedEventsOnly`.
     #   @return [String]
     #
     # @!attribute [rw] s3_configuration
@@ -4187,12 +4817,16 @@ module Aws::Firehose
     #   @return [Types::SplunkRetryOptions]
     #
     # @!attribute [rw] s3_backup_mode
-    #   Defines how documents should be delivered to Amazon S3. When set to
-    #   `FailedDocumentsOnly`, Kinesis Data Firehose writes any data that
-    #   could not be indexed to the configured Amazon S3 destination. When
-    #   set to `AllDocuments`, Kinesis Data Firehose delivers all incoming
-    #   records to Amazon S3, and also writes failed documents to Amazon S3.
-    #   Default value is `FailedDocumentsOnly`.
+    #   Specifies how you want Kinesis Data Firehose to back up documents to
+    #   Amazon S3. When set to `FailedDocumentsOnly`, Kinesis Data Firehose
+    #   writes any data that could not be indexed to the configured Amazon
+    #   S3 destination. When set to `AllEvents`, Kinesis Data Firehose
+    #   delivers all incoming records to Amazon S3, and also writes failed
+    #   documents to Amazon S3. The default value is `FailedEventsOnly`.
+    #
+    #   You can update this backup mode from `FailedEventsOnly` to
+    #   `AllEvents`. You can't update it from `AllEvents` to
+    #   `FailedEventsOnly`.
     #   @return [String]
     #
     # @!attribute [rw] s3_update
@@ -4726,6 +5360,72 @@ module Aws::Firehose
     #             log_stream_name: "LogStreamName",
     #           },
     #         },
+    #         http_endpoint_destination_update: {
+    #           endpoint_configuration: {
+    #             url: "HttpEndpointUrl", # required
+    #             name: "HttpEndpointName",
+    #             access_key: "HttpEndpointAccessKey",
+    #           },
+    #           buffering_hints: {
+    #             size_in_m_bs: 1,
+    #             interval_in_seconds: 1,
+    #           },
+    #           cloud_watch_logging_options: {
+    #             enabled: false,
+    #             log_group_name: "LogGroupName",
+    #             log_stream_name: "LogStreamName",
+    #           },
+    #           request_configuration: {
+    #             content_encoding: "NONE", # accepts NONE, GZIP
+    #             common_attributes: [
+    #               {
+    #                 attribute_name: "HttpEndpointAttributeName", # required
+    #                 attribute_value: "HttpEndpointAttributeValue", # required
+    #               },
+    #             ],
+    #           },
+    #           processing_configuration: {
+    #             enabled: false,
+    #             processors: [
+    #               {
+    #                 type: "Lambda", # required, accepts Lambda
+    #                 parameters: [
+    #                   {
+    #                     parameter_name: "LambdaArn", # required, accepts LambdaArn, NumberOfRetries, RoleArn, BufferSizeInMBs, BufferIntervalInSeconds
+    #                     parameter_value: "ProcessorParameterValue", # required
+    #                   },
+    #                 ],
+    #               },
+    #             ],
+    #           },
+    #           role_arn: "RoleARN",
+    #           retry_options: {
+    #             duration_in_seconds: 1,
+    #           },
+    #           s3_backup_mode: "FailedDataOnly", # accepts FailedDataOnly, AllData
+    #           s3_update: {
+    #             role_arn: "RoleARN",
+    #             bucket_arn: "BucketARN",
+    #             prefix: "Prefix",
+    #             error_output_prefix: "ErrorOutputPrefix",
+    #             buffering_hints: {
+    #               size_in_m_bs: 1,
+    #               interval_in_seconds: 1,
+    #             },
+    #             compression_format: "UNCOMPRESSED", # accepts UNCOMPRESSED, GZIP, ZIP, Snappy, HADOOP_SNAPPY
+    #             encryption_configuration: {
+    #               no_encryption_config: "NoEncryption", # accepts NoEncryption
+    #               kms_encryption_config: {
+    #                 awskms_key_arn: "AWSKMSKeyARN", # required
+    #               },
+    #             },
+    #             cloud_watch_logging_options: {
+    #               enabled: false,
+    #               log_group_name: "LogGroupName",
+    #               log_stream_name: "LogStreamName",
+    #             },
+    #           },
+    #         },
     #       }
     #
     # @!attribute [rw] delivery_stream_name
@@ -4766,6 +5466,10 @@ module Aws::Firehose
     #   Describes an update for a destination in Splunk.
     #   @return [Types::SplunkDestinationUpdate]
     #
+    # @!attribute [rw] http_endpoint_destination_update
+    #   Describes an update to the specified HTTP endpoint destination.
+    #   @return [Types::HttpEndpointDestinationUpdate]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/firehose-2015-08-04/UpdateDestinationInput AWS API Documentation
     #
     class UpdateDestinationInput < Struct.new(
@@ -4776,7 +5480,8 @@ module Aws::Firehose
       :extended_s3_destination_update,
       :redshift_destination_update,
       :elasticsearch_destination_update,
-      :splunk_destination_update)
+      :splunk_destination_update,
+      :http_endpoint_destination_update)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4821,12 +5526,51 @@ module Aws::Firehose
     #
     # @!attribute [rw] role_arn
     #   The ARN of the IAM role that you want the delivery stream to use to
-    #   create endpoints in the destination VPC.
+    #   create endpoints in the destination VPC. You can use your existing
+    #   Kinesis Data Firehose delivery role or you can specify a new role.
+    #   In either case, make sure that the role trusts the Kinesis Data
+    #   Firehose service principal and that it grants the following
+    #   permissions:
+    #
+    #   * `ec2:DescribeVpcs`
+    #
+    #   * `ec2:DescribeVpcAttribute`
+    #
+    #   * `ec2:DescribeSubnets`
+    #
+    #   * `ec2:DescribeSecurityGroups`
+    #
+    #   * `ec2:DescribeNetworkInterfaces`
+    #
+    #   * `ec2:CreateNetworkInterface`
+    #
+    #   * `ec2:CreateNetworkInterfacePermission`
+    #
+    #   * `ec2:DeleteNetworkInterface`
+    #
+    #   If you revoke these permissions after you create the delivery
+    #   stream, Kinesis Data Firehose can't scale out by creating more ENIs
+    #   when necessary. You might therefore see a degradation in
+    #   performance.
     #   @return [String]
     #
     # @!attribute [rw] security_group_ids
     #   The IDs of the security groups that you want Kinesis Data Firehose
     #   to use when it creates ENIs in the VPC of the Amazon ES destination.
+    #   You can use the same security group that the Amazon ES domain uses
+    #   or different ones. If you specify different security groups here,
+    #   ensure that they allow outbound HTTPS traffic to the Amazon ES
+    #   domain's security group. Also ensure that the Amazon ES domain's
+    #   security group allows HTTPS traffic from the security groups
+    #   specified here. If you use the same security group for both your
+    #   delivery stream and the Amazon ES domain, make sure the security
+    #   group inbound rule allows HTTPS traffic. For more information about
+    #   security group rules, see [Security group rules][1] in the Amazon
+    #   VPC documentation.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/vpc/latest/userguide/VPC_SecurityGroups.html#SecurityGroupRules
     #   @return [Array<String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/firehose-2015-08-04/VpcConfiguration AWS API Documentation
@@ -4865,13 +5609,50 @@ module Aws::Firehose
     #   @return [Array<String>]
     #
     # @!attribute [rw] role_arn
-    #   The ARN of the IAM role that you want the delivery stream uses to
-    #   create endpoints in the destination VPC.
+    #   The ARN of the IAM role that the delivery stream uses to create
+    #   endpoints in the destination VPC. You can use your existing Kinesis
+    #   Data Firehose delivery role or you can specify a new role. In either
+    #   case, make sure that the role trusts the Kinesis Data Firehose
+    #   service principal and that it grants the following permissions:
+    #
+    #   * `ec2:DescribeVpcs`
+    #
+    #   * `ec2:DescribeVpcAttribute`
+    #
+    #   * `ec2:DescribeSubnets`
+    #
+    #   * `ec2:DescribeSecurityGroups`
+    #
+    #   * `ec2:DescribeNetworkInterfaces`
+    #
+    #   * `ec2:CreateNetworkInterface`
+    #
+    #   * `ec2:CreateNetworkInterfacePermission`
+    #
+    #   * `ec2:DeleteNetworkInterface`
+    #
+    #   If you revoke these permissions after you create the delivery
+    #   stream, Kinesis Data Firehose can't scale out by creating more ENIs
+    #   when necessary. You might therefore see a degradation in
+    #   performance.
     #   @return [String]
     #
     # @!attribute [rw] security_group_ids
     #   The IDs of the security groups that Kinesis Data Firehose uses when
-    #   it creates ENIs in the VPC of the Amazon ES destination.
+    #   it creates ENIs in the VPC of the Amazon ES destination. You can use
+    #   the same security group that the Amazon ES domain uses or different
+    #   ones. If you specify different security groups, ensure that they
+    #   allow outbound HTTPS traffic to the Amazon ES domain's security
+    #   group. Also ensure that the Amazon ES domain's security group
+    #   allows HTTPS traffic from the security groups specified here. If you
+    #   use the same security group for both your delivery stream and the
+    #   Amazon ES domain, make sure the security group inbound rule allows
+    #   HTTPS traffic. For more information about security group rules, see
+    #   [Security group rules][1] in the Amazon VPC documentation.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/vpc/latest/userguide/VPC_SecurityGroups.html#SecurityGroupRules
     #   @return [Array<String>]
     #
     # @!attribute [rw] vpc_id

@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.9.0 (2020-07-24)
+------------------
+
+* Feature - Amazon Kendra now supports sorting query results based on document attributes. Amazon Kendra also introduced an option to enclose table and column names with double quotes for database data sources.
+
 1.8.0 (2020-06-23)
 ------------------
 

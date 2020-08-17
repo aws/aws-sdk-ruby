@@ -326,7 +326,7 @@ module Aws::PersonalizeRuntime
     #   the personalized ranking.
     #
     # @option params [required, Array<String>] :input_list
-    #   A list of items (itemId's) to rank. If an item was not included in
+    #   A list of items (by `itemId`) to rank. If an item was not included in
     #   the training dataset, the item is appended to the end of the reranked
     #   list. The maximum is 500.
     #
@@ -340,9 +340,14 @@ module Aws::PersonalizeRuntime
     #   relevant when getting a user's recommendations, such as the user's
     #   current location or device type.
     #
+    # @option params [String] :filter_arn
+    #   The Amazon Resource Name (ARN) of a filter you created to include or
+    #   exclude items from recommendations for a given user.
+    #
     # @return [Types::GetPersonalizedRankingResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::GetPersonalizedRankingResponse#personalized_ranking #personalized_ranking} => Array&lt;Types::PredictedItem&gt;
+    #   * {Types::GetPersonalizedRankingResponse#recommendation_id #recommendation_id} => String
     #
     # @example Request syntax with placeholder values
     #
@@ -353,6 +358,7 @@ module Aws::PersonalizeRuntime
     #     context: {
     #       "AttributeName" => "AttributeValue",
     #     },
+    #     filter_arn: "Arn",
     #   })
     #
     # @example Response structure
@@ -360,6 +366,7 @@ module Aws::PersonalizeRuntime
     #   resp.personalized_ranking #=> Array
     #   resp.personalized_ranking[0].item_id #=> String
     #   resp.personalized_ranking[0].score #=> Float
+    #   resp.recommendation_id #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/personalize-runtime-2018-05-22/GetPersonalizedRanking AWS API Documentation
     #
@@ -409,11 +416,18 @@ module Aws::PersonalizeRuntime
     #
     # @option params [String] :filter_arn
     #   The ARN of the filter to apply to the returned recommendations. For
-    #   more information, see Using Filters with Amazon Personalize.
+    #   more information, see [Using Filters with Amazon Personalize][1].
+    #
+    #   When using this parameter, be sure the filter resource is `ACTIVE`.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/personalize/latest/dg/filters.html
     #
     # @return [Types::GetRecommendationsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::GetRecommendationsResponse#item_list #item_list} => Array&lt;Types::PredictedItem&gt;
+    #   * {Types::GetRecommendationsResponse#recommendation_id #recommendation_id} => String
     #
     # @example Request syntax with placeholder values
     #
@@ -433,6 +447,7 @@ module Aws::PersonalizeRuntime
     #   resp.item_list #=> Array
     #   resp.item_list[0].item_id #=> String
     #   resp.item_list[0].score #=> Float
+    #   resp.recommendation_id #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/personalize-runtime-2018-05-22/GetRecommendations AWS API Documentation
     #
@@ -456,7 +471,7 @@ module Aws::PersonalizeRuntime
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-personalizeruntime'
-      context[:gem_version] = '1.13.0'
+      context[:gem_version] = '1.15.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

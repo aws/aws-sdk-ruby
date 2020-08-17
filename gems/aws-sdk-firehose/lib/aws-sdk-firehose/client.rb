@@ -445,6 +445,10 @@ module Aws::Firehose
     # @option params [Types::SplunkDestinationConfiguration] :splunk_destination_configuration
     #   The destination in Splunk. You can specify only one destination.
     #
+    # @option params [Types::HttpEndpointDestinationConfiguration] :http_endpoint_destination_configuration
+    #   Enables configuring Kinesis Firehose to deliver data to any HTTP
+    #   endpoint destination. You can specify only one destination.
+    #
     # @option params [Array<Types::Tag>] :tags
     #   A set of tags to assign to the delivery stream. A tag is a key-value
     #   pair that you can define and assign to AWS resources. Tags are
@@ -797,6 +801,72 @@ module Aws::Firehose
     #         log_stream_name: "LogStreamName",
     #       },
     #     },
+    #     http_endpoint_destination_configuration: {
+    #       endpoint_configuration: { # required
+    #         url: "HttpEndpointUrl", # required
+    #         name: "HttpEndpointName",
+    #         access_key: "HttpEndpointAccessKey",
+    #       },
+    #       buffering_hints: {
+    #         size_in_m_bs: 1,
+    #         interval_in_seconds: 1,
+    #       },
+    #       cloud_watch_logging_options: {
+    #         enabled: false,
+    #         log_group_name: "LogGroupName",
+    #         log_stream_name: "LogStreamName",
+    #       },
+    #       request_configuration: {
+    #         content_encoding: "NONE", # accepts NONE, GZIP
+    #         common_attributes: [
+    #           {
+    #             attribute_name: "HttpEndpointAttributeName", # required
+    #             attribute_value: "HttpEndpointAttributeValue", # required
+    #           },
+    #         ],
+    #       },
+    #       processing_configuration: {
+    #         enabled: false,
+    #         processors: [
+    #           {
+    #             type: "Lambda", # required, accepts Lambda
+    #             parameters: [
+    #               {
+    #                 parameter_name: "LambdaArn", # required, accepts LambdaArn, NumberOfRetries, RoleArn, BufferSizeInMBs, BufferIntervalInSeconds
+    #                 parameter_value: "ProcessorParameterValue", # required
+    #               },
+    #             ],
+    #           },
+    #         ],
+    #       },
+    #       role_arn: "RoleARN",
+    #       retry_options: {
+    #         duration_in_seconds: 1,
+    #       },
+    #       s3_backup_mode: "FailedDataOnly", # accepts FailedDataOnly, AllData
+    #       s3_configuration: { # required
+    #         role_arn: "RoleARN", # required
+    #         bucket_arn: "BucketARN", # required
+    #         prefix: "Prefix",
+    #         error_output_prefix: "ErrorOutputPrefix",
+    #         buffering_hints: {
+    #           size_in_m_bs: 1,
+    #           interval_in_seconds: 1,
+    #         },
+    #         compression_format: "UNCOMPRESSED", # accepts UNCOMPRESSED, GZIP, ZIP, Snappy, HADOOP_SNAPPY
+    #         encryption_configuration: {
+    #           no_encryption_config: "NoEncryption", # accepts NoEncryption
+    #           kms_encryption_config: {
+    #             awskms_key_arn: "AWSKMSKeyARN", # required
+    #           },
+    #         },
+    #         cloud_watch_logging_options: {
+    #           enabled: false,
+    #           log_group_name: "LogGroupName",
+    #           log_stream_name: "LogStreamName",
+    #         },
+    #       },
+    #     },
     #     tags: [
     #       {
     #         key: "TagKey", # required
@@ -1105,6 +1175,38 @@ module Aws::Firehose
     #   resp.delivery_stream_description.destinations[0].splunk_destination_description.cloud_watch_logging_options.enabled #=> Boolean
     #   resp.delivery_stream_description.destinations[0].splunk_destination_description.cloud_watch_logging_options.log_group_name #=> String
     #   resp.delivery_stream_description.destinations[0].splunk_destination_description.cloud_watch_logging_options.log_stream_name #=> String
+    #   resp.delivery_stream_description.destinations[0].http_endpoint_destination_description.endpoint_configuration.url #=> String
+    #   resp.delivery_stream_description.destinations[0].http_endpoint_destination_description.endpoint_configuration.name #=> String
+    #   resp.delivery_stream_description.destinations[0].http_endpoint_destination_description.buffering_hints.size_in_m_bs #=> Integer
+    #   resp.delivery_stream_description.destinations[0].http_endpoint_destination_description.buffering_hints.interval_in_seconds #=> Integer
+    #   resp.delivery_stream_description.destinations[0].http_endpoint_destination_description.cloud_watch_logging_options.enabled #=> Boolean
+    #   resp.delivery_stream_description.destinations[0].http_endpoint_destination_description.cloud_watch_logging_options.log_group_name #=> String
+    #   resp.delivery_stream_description.destinations[0].http_endpoint_destination_description.cloud_watch_logging_options.log_stream_name #=> String
+    #   resp.delivery_stream_description.destinations[0].http_endpoint_destination_description.request_configuration.content_encoding #=> String, one of "NONE", "GZIP"
+    #   resp.delivery_stream_description.destinations[0].http_endpoint_destination_description.request_configuration.common_attributes #=> Array
+    #   resp.delivery_stream_description.destinations[0].http_endpoint_destination_description.request_configuration.common_attributes[0].attribute_name #=> String
+    #   resp.delivery_stream_description.destinations[0].http_endpoint_destination_description.request_configuration.common_attributes[0].attribute_value #=> String
+    #   resp.delivery_stream_description.destinations[0].http_endpoint_destination_description.processing_configuration.enabled #=> Boolean
+    #   resp.delivery_stream_description.destinations[0].http_endpoint_destination_description.processing_configuration.processors #=> Array
+    #   resp.delivery_stream_description.destinations[0].http_endpoint_destination_description.processing_configuration.processors[0].type #=> String, one of "Lambda"
+    #   resp.delivery_stream_description.destinations[0].http_endpoint_destination_description.processing_configuration.processors[0].parameters #=> Array
+    #   resp.delivery_stream_description.destinations[0].http_endpoint_destination_description.processing_configuration.processors[0].parameters[0].parameter_name #=> String, one of "LambdaArn", "NumberOfRetries", "RoleArn", "BufferSizeInMBs", "BufferIntervalInSeconds"
+    #   resp.delivery_stream_description.destinations[0].http_endpoint_destination_description.processing_configuration.processors[0].parameters[0].parameter_value #=> String
+    #   resp.delivery_stream_description.destinations[0].http_endpoint_destination_description.role_arn #=> String
+    #   resp.delivery_stream_description.destinations[0].http_endpoint_destination_description.retry_options.duration_in_seconds #=> Integer
+    #   resp.delivery_stream_description.destinations[0].http_endpoint_destination_description.s3_backup_mode #=> String, one of "FailedDataOnly", "AllData"
+    #   resp.delivery_stream_description.destinations[0].http_endpoint_destination_description.s3_destination_description.role_arn #=> String
+    #   resp.delivery_stream_description.destinations[0].http_endpoint_destination_description.s3_destination_description.bucket_arn #=> String
+    #   resp.delivery_stream_description.destinations[0].http_endpoint_destination_description.s3_destination_description.prefix #=> String
+    #   resp.delivery_stream_description.destinations[0].http_endpoint_destination_description.s3_destination_description.error_output_prefix #=> String
+    #   resp.delivery_stream_description.destinations[0].http_endpoint_destination_description.s3_destination_description.buffering_hints.size_in_m_bs #=> Integer
+    #   resp.delivery_stream_description.destinations[0].http_endpoint_destination_description.s3_destination_description.buffering_hints.interval_in_seconds #=> Integer
+    #   resp.delivery_stream_description.destinations[0].http_endpoint_destination_description.s3_destination_description.compression_format #=> String, one of "UNCOMPRESSED", "GZIP", "ZIP", "Snappy", "HADOOP_SNAPPY"
+    #   resp.delivery_stream_description.destinations[0].http_endpoint_destination_description.s3_destination_description.encryption_configuration.no_encryption_config #=> String, one of "NoEncryption"
+    #   resp.delivery_stream_description.destinations[0].http_endpoint_destination_description.s3_destination_description.encryption_configuration.kms_encryption_config.awskms_key_arn #=> String
+    #   resp.delivery_stream_description.destinations[0].http_endpoint_destination_description.s3_destination_description.cloud_watch_logging_options.enabled #=> Boolean
+    #   resp.delivery_stream_description.destinations[0].http_endpoint_destination_description.s3_destination_description.cloud_watch_logging_options.log_group_name #=> String
+    #   resp.delivery_stream_description.destinations[0].http_endpoint_destination_description.s3_destination_description.cloud_watch_logging_options.log_stream_name #=> String
     #   resp.delivery_stream_description.has_more_destinations #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/firehose-2015-08-04/DescribeDeliveryStream AWS API Documentation
@@ -1309,11 +1411,8 @@ module Aws::Firehose
     # use PutRecord. Applications using these operations are referred to as
     # producers.
     #
-    # By default, each delivery stream can take in up to 2,000 transactions
-    # per second, 5,000 records per second, or 5 MB per second. If you use
-    # PutRecord and PutRecordBatch, the limits are an aggregate across these
-    # two operations for each delivery stream. For more information about
-    # limits, see [Amazon Kinesis Data Firehose Limits][1].
+    # For information about service quota, see [Amazon Kinesis Data Firehose
+    # Quota][1].
     #
     # Each PutRecordBatch request supports up to 500 records. Each record in
     # the request can be as large as 1,000 KB (before 64-bit encoding), up
@@ -1693,6 +1792,9 @@ module Aws::Firehose
     # @option params [Types::SplunkDestinationUpdate] :splunk_destination_update
     #   Describes an update for a destination in Splunk.
     #
+    # @option params [Types::HttpEndpointDestinationUpdate] :http_endpoint_destination_update
+    #   Describes an update to the specified HTTP endpoint destination.
+    #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
     # @example Request syntax with placeholder values
@@ -2016,6 +2118,72 @@ module Aws::Firehose
     #         log_stream_name: "LogStreamName",
     #       },
     #     },
+    #     http_endpoint_destination_update: {
+    #       endpoint_configuration: {
+    #         url: "HttpEndpointUrl", # required
+    #         name: "HttpEndpointName",
+    #         access_key: "HttpEndpointAccessKey",
+    #       },
+    #       buffering_hints: {
+    #         size_in_m_bs: 1,
+    #         interval_in_seconds: 1,
+    #       },
+    #       cloud_watch_logging_options: {
+    #         enabled: false,
+    #         log_group_name: "LogGroupName",
+    #         log_stream_name: "LogStreamName",
+    #       },
+    #       request_configuration: {
+    #         content_encoding: "NONE", # accepts NONE, GZIP
+    #         common_attributes: [
+    #           {
+    #             attribute_name: "HttpEndpointAttributeName", # required
+    #             attribute_value: "HttpEndpointAttributeValue", # required
+    #           },
+    #         ],
+    #       },
+    #       processing_configuration: {
+    #         enabled: false,
+    #         processors: [
+    #           {
+    #             type: "Lambda", # required, accepts Lambda
+    #             parameters: [
+    #               {
+    #                 parameter_name: "LambdaArn", # required, accepts LambdaArn, NumberOfRetries, RoleArn, BufferSizeInMBs, BufferIntervalInSeconds
+    #                 parameter_value: "ProcessorParameterValue", # required
+    #               },
+    #             ],
+    #           },
+    #         ],
+    #       },
+    #       role_arn: "RoleARN",
+    #       retry_options: {
+    #         duration_in_seconds: 1,
+    #       },
+    #       s3_backup_mode: "FailedDataOnly", # accepts FailedDataOnly, AllData
+    #       s3_update: {
+    #         role_arn: "RoleARN",
+    #         bucket_arn: "BucketARN",
+    #         prefix: "Prefix",
+    #         error_output_prefix: "ErrorOutputPrefix",
+    #         buffering_hints: {
+    #           size_in_m_bs: 1,
+    #           interval_in_seconds: 1,
+    #         },
+    #         compression_format: "UNCOMPRESSED", # accepts UNCOMPRESSED, GZIP, ZIP, Snappy, HADOOP_SNAPPY
+    #         encryption_configuration: {
+    #           no_encryption_config: "NoEncryption", # accepts NoEncryption
+    #           kms_encryption_config: {
+    #             awskms_key_arn: "AWSKMSKeyARN", # required
+    #           },
+    #         },
+    #         cloud_watch_logging_options: {
+    #           enabled: false,
+    #           log_group_name: "LogGroupName",
+    #           log_stream_name: "LogStreamName",
+    #         },
+    #       },
+    #     },
     #   })
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/firehose-2015-08-04/UpdateDestination AWS API Documentation
@@ -2040,7 +2208,7 @@ module Aws::Firehose
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-firehose'
-      context[:gem_version] = '1.31.0'
+      context[:gem_version] = '1.32.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

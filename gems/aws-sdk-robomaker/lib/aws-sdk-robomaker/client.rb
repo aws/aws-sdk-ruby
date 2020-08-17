@@ -312,6 +312,36 @@ module Aws::RoboMaker
 
     # @!group API Operations
 
+    # Deletes one or more worlds in a batch operation.
+    #
+    # @option params [required, Array<String>] :worlds
+    #   A list of Amazon Resource Names (arns) that correspond to worlds to
+    #   delete.
+    #
+    # @return [Types::BatchDeleteWorldsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::BatchDeleteWorldsResponse#unprocessed_worlds #unprocessed_worlds} => Array&lt;String&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.batch_delete_worlds({
+    #     worlds: ["Arn"], # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.unprocessed_worlds #=> Array
+    #   resp.unprocessed_worlds[0] #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/robomaker-2018-06-29/BatchDeleteWorlds AWS API Documentation
+    #
+    # @overload batch_delete_worlds(params = {})
+    # @param [Hash] params ({})
+    def batch_delete_worlds(params = {}, options = {})
+      req = build_request(:batch_delete_worlds, params)
+      req.send_request(options)
+    end
+
     # Describes one or more simulation jobs.
     #
     # @option params [required, Array<String>] :jobs
@@ -370,6 +400,8 @@ module Aws::RoboMaker
     #   resp.jobs[0].simulation_applications[0].launch_config.port_forwarding_config.port_mappings[0].application_port #=> Integer
     #   resp.jobs[0].simulation_applications[0].launch_config.port_forwarding_config.port_mappings[0].enable_on_public_ip #=> Boolean
     #   resp.jobs[0].simulation_applications[0].launch_config.stream_ui #=> Boolean
+    #   resp.jobs[0].simulation_applications[0].world_configs #=> Array
+    #   resp.jobs[0].simulation_applications[0].world_configs[0].world #=> String
     #   resp.jobs[0].data_sources #=> Array
     #   resp.jobs[0].data_sources[0].name #=> String
     #   resp.jobs[0].data_sources[0].s3_bucket #=> String
@@ -465,6 +497,50 @@ module Aws::RoboMaker
     # @param [Hash] params ({})
     def cancel_simulation_job_batch(params = {}, options = {})
       req = build_request(:cancel_simulation_job_batch, params)
+      req.send_request(options)
+    end
+
+    # Cancels the specified export job.
+    #
+    # @option params [required, String] :job
+    #   The Amazon Resource Name (arn) of the world export job to cancel.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.cancel_world_export_job({
+    #     job: "Arn", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/robomaker-2018-06-29/CancelWorldExportJob AWS API Documentation
+    #
+    # @overload cancel_world_export_job(params = {})
+    # @param [Hash] params ({})
+    def cancel_world_export_job(params = {}, options = {})
+      req = build_request(:cancel_world_export_job, params)
+      req.send_request(options)
+    end
+
+    # Cancels the specified world generator job.
+    #
+    # @option params [required, String] :job
+    #   The Amazon Resource Name (arn) of the world generator job to cancel.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.cancel_world_generation_job({
+    #     job: "Arn", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/robomaker-2018-06-29/CancelWorldGenerationJob AWS API Documentation
+    #
+    # @overload cancel_world_generation_job(params = {})
+    # @param [Hash] params ({})
+    def cancel_world_generation_job(params = {}, options = {})
+      req = build_request(:cancel_world_generation_job, params)
       req.send_request(options)
     end
 
@@ -1107,6 +1183,11 @@ module Aws::RoboMaker
     #           },
     #           stream_ui: false,
     #         },
+    #         world_configs: [
+    #           {
+    #             world: "Arn",
+    #           },
+    #         ],
     #       },
     #     ],
     #     data_sources: [
@@ -1168,6 +1249,8 @@ module Aws::RoboMaker
     #   resp.simulation_applications[0].launch_config.port_forwarding_config.port_mappings[0].application_port #=> Integer
     #   resp.simulation_applications[0].launch_config.port_forwarding_config.port_mappings[0].enable_on_public_ip #=> Boolean
     #   resp.simulation_applications[0].launch_config.stream_ui #=> Boolean
+    #   resp.simulation_applications[0].world_configs #=> Array
+    #   resp.simulation_applications[0].world_configs[0].world #=> String
     #   resp.data_sources #=> Array
     #   resp.data_sources[0].name #=> String
     #   resp.data_sources[0].s3_bucket #=> String
@@ -1190,6 +1273,205 @@ module Aws::RoboMaker
     # @param [Hash] params ({})
     def create_simulation_job(params = {}, options = {})
       req = build_request(:create_simulation_job, params)
+      req.send_request(options)
+    end
+
+    # Creates a world export job.
+    #
+    # @option params [String] :client_request_token
+    #   Unique, case-sensitive identifier that you provide to ensure the
+    #   idempotency of the request.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.**
+    #
+    # @option params [required, Array<String>] :worlds
+    #   A list of Amazon Resource Names (arns) that correspond to worlds to
+    #   export.
+    #
+    # @option params [required, Types::OutputLocation] :output_location
+    #   The output location.
+    #
+    # @option params [required, String] :iam_role
+    #   The IAM role that the world export process uses to access the Amazon
+    #   S3 bucket and put the export.
+    #
+    # @option params [Hash<String,String>] :tags
+    #   A map that contains tag keys and tag values that are attached to the
+    #   world export job.
+    #
+    # @return [Types::CreateWorldExportJobResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateWorldExportJobResponse#arn #arn} => String
+    #   * {Types::CreateWorldExportJobResponse#status #status} => String
+    #   * {Types::CreateWorldExportJobResponse#created_at #created_at} => Time
+    #   * {Types::CreateWorldExportJobResponse#failure_code #failure_code} => String
+    #   * {Types::CreateWorldExportJobResponse#client_request_token #client_request_token} => String
+    #   * {Types::CreateWorldExportJobResponse#output_location #output_location} => Types::OutputLocation
+    #   * {Types::CreateWorldExportJobResponse#iam_role #iam_role} => String
+    #   * {Types::CreateWorldExportJobResponse#tags #tags} => Hash&lt;String,String&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_world_export_job({
+    #     client_request_token: "ClientRequestToken",
+    #     worlds: ["Arn"], # required
+    #     output_location: { # required
+    #       s3_bucket: "S3Bucket",
+    #       s3_prefix: "S3Key",
+    #     },
+    #     iam_role: "IamRole", # required
+    #     tags: {
+    #       "TagKey" => "TagValue",
+    #     },
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.arn #=> String
+    #   resp.status #=> String, one of "Pending", "Running", "Completed", "Failed", "Canceling", "Canceled"
+    #   resp.created_at #=> Time
+    #   resp.failure_code #=> String, one of "InternalServiceError", "LimitExceeded", "ResourceNotFound", "RequestThrottled", "InvalidInput", "AccessDenied"
+    #   resp.client_request_token #=> String
+    #   resp.output_location.s3_bucket #=> String
+    #   resp.output_location.s3_prefix #=> String
+    #   resp.iam_role #=> String
+    #   resp.tags #=> Hash
+    #   resp.tags["TagKey"] #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/robomaker-2018-06-29/CreateWorldExportJob AWS API Documentation
+    #
+    # @overload create_world_export_job(params = {})
+    # @param [Hash] params ({})
+    def create_world_export_job(params = {}, options = {})
+      req = build_request(:create_world_export_job, params)
+      req.send_request(options)
+    end
+
+    # Creates worlds using the specified template.
+    #
+    # @option params [String] :client_request_token
+    #   Unique, case-sensitive identifier that you provide to ensure the
+    #   idempotency of the request.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.**
+    #
+    # @option params [required, String] :template
+    #   The Amazon Resource Name (arn) of the world template describing the
+    #   worlds you want to create.
+    #
+    # @option params [required, Types::WorldCount] :world_count
+    #   Information about the world count.
+    #
+    # @option params [Hash<String,String>] :tags
+    #   A map that contains tag keys and tag values that are attached to the
+    #   world generator job.
+    #
+    # @return [Types::CreateWorldGenerationJobResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateWorldGenerationJobResponse#arn #arn} => String
+    #   * {Types::CreateWorldGenerationJobResponse#status #status} => String
+    #   * {Types::CreateWorldGenerationJobResponse#created_at #created_at} => Time
+    #   * {Types::CreateWorldGenerationJobResponse#failure_code #failure_code} => String
+    #   * {Types::CreateWorldGenerationJobResponse#client_request_token #client_request_token} => String
+    #   * {Types::CreateWorldGenerationJobResponse#template #template} => String
+    #   * {Types::CreateWorldGenerationJobResponse#world_count #world_count} => Types::WorldCount
+    #   * {Types::CreateWorldGenerationJobResponse#tags #tags} => Hash&lt;String,String&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_world_generation_job({
+    #     client_request_token: "ClientRequestToken",
+    #     template: "Arn", # required
+    #     world_count: { # required
+    #       floorplan_count: 1,
+    #       interior_count_per_floorplan: 1,
+    #     },
+    #     tags: {
+    #       "TagKey" => "TagValue",
+    #     },
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.arn #=> String
+    #   resp.status #=> String, one of "Pending", "Running", "Completed", "Failed", "PartialFailed", "Canceling", "Canceled"
+    #   resp.created_at #=> Time
+    #   resp.failure_code #=> String, one of "InternalServiceError", "LimitExceeded", "ResourceNotFound", "RequestThrottled", "InvalidInput", "AllWorldGenerationFailed"
+    #   resp.client_request_token #=> String
+    #   resp.template #=> String
+    #   resp.world_count.floorplan_count #=> Integer
+    #   resp.world_count.interior_count_per_floorplan #=> Integer
+    #   resp.tags #=> Hash
+    #   resp.tags["TagKey"] #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/robomaker-2018-06-29/CreateWorldGenerationJob AWS API Documentation
+    #
+    # @overload create_world_generation_job(params = {})
+    # @param [Hash] params ({})
+    def create_world_generation_job(params = {}, options = {})
+      req = build_request(:create_world_generation_job, params)
+      req.send_request(options)
+    end
+
+    # Creates a world template.
+    #
+    # @option params [String] :client_request_token
+    #   Unique, case-sensitive identifier that you provide to ensure the
+    #   idempotency of the request.
+    #
+    # @option params [String] :name
+    #   The name of the world template.
+    #
+    # @option params [String] :template_body
+    #   The world template body.
+    #
+    # @option params [Types::TemplateLocation] :template_location
+    #   The location of the world template.
+    #
+    # @option params [Hash<String,String>] :tags
+    #   A map that contains tag keys and tag values that are attached to the
+    #   world template.
+    #
+    # @return [Types::CreateWorldTemplateResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateWorldTemplateResponse#arn #arn} => String
+    #   * {Types::CreateWorldTemplateResponse#client_request_token #client_request_token} => String
+    #   * {Types::CreateWorldTemplateResponse#created_at #created_at} => Time
+    #   * {Types::CreateWorldTemplateResponse#name #name} => String
+    #   * {Types::CreateWorldTemplateResponse#tags #tags} => Hash&lt;String,String&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_world_template({
+    #     client_request_token: "ClientRequestToken",
+    #     name: "TemplateName",
+    #     template_body: "Json",
+    #     template_location: {
+    #       s3_bucket: "S3Bucket", # required
+    #       s3_key: "S3Key", # required
+    #     },
+    #     tags: {
+    #       "TagKey" => "TagValue",
+    #     },
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.arn #=> String
+    #   resp.client_request_token #=> String
+    #   resp.created_at #=> Time
+    #   resp.name #=> String
+    #   resp.tags #=> Hash
+    #   resp.tags["TagKey"] #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/robomaker-2018-06-29/CreateWorldTemplate AWS API Documentation
+    #
+    # @overload create_world_template(params = {})
+    # @param [Hash] params ({})
+    def create_world_template(params = {}, options = {})
+      req = build_request(:create_world_template, params)
       req.send_request(options)
     end
 
@@ -1286,6 +1568,29 @@ module Aws::RoboMaker
     # @param [Hash] params ({})
     def delete_simulation_application(params = {}, options = {})
       req = build_request(:delete_simulation_application, params)
+      req.send_request(options)
+    end
+
+    # Deletes a world template.
+    #
+    # @option params [required, String] :template
+    #   The Amazon Resource Name (arn) of the world template you want to
+    #   delete.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_world_template({
+    #     template: "Arn", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/robomaker-2018-06-29/DeleteWorldTemplate AWS API Documentation
+    #
+    # @overload delete_world_template(params = {})
+    # @param [Hash] params ({})
+    def delete_world_template(params = {}, options = {})
+      req = build_request(:delete_world_template, params)
       req.send_request(options)
     end
 
@@ -1678,6 +1983,8 @@ module Aws::RoboMaker
     #   resp.simulation_applications[0].launch_config.port_forwarding_config.port_mappings[0].application_port #=> Integer
     #   resp.simulation_applications[0].launch_config.port_forwarding_config.port_mappings[0].enable_on_public_ip #=> Boolean
     #   resp.simulation_applications[0].launch_config.stream_ui #=> Boolean
+    #   resp.simulation_applications[0].world_configs #=> Array
+    #   resp.simulation_applications[0].world_configs[0].world #=> String
     #   resp.data_sources #=> Array
     #   resp.data_sources[0].name #=> String
     #   resp.data_sources[0].s3_bucket #=> String
@@ -1775,6 +2082,8 @@ module Aws::RoboMaker
     #   resp.failed_requests[0].request.simulation_applications[0].launch_config.port_forwarding_config.port_mappings[0].application_port #=> Integer
     #   resp.failed_requests[0].request.simulation_applications[0].launch_config.port_forwarding_config.port_mappings[0].enable_on_public_ip #=> Boolean
     #   resp.failed_requests[0].request.simulation_applications[0].launch_config.stream_ui #=> Boolean
+    #   resp.failed_requests[0].request.simulation_applications[0].world_configs #=> Array
+    #   resp.failed_requests[0].request.simulation_applications[0].world_configs[0].world #=> String
     #   resp.failed_requests[0].request.data_sources #=> Array
     #   resp.failed_requests[0].request.data_sources[0].name #=> String
     #   resp.failed_requests[0].request.data_sources[0].s3_bucket #=> String
@@ -1823,6 +2132,8 @@ module Aws::RoboMaker
     #   resp.pending_requests[0].simulation_applications[0].launch_config.port_forwarding_config.port_mappings[0].application_port #=> Integer
     #   resp.pending_requests[0].simulation_applications[0].launch_config.port_forwarding_config.port_mappings[0].enable_on_public_ip #=> Boolean
     #   resp.pending_requests[0].simulation_applications[0].launch_config.stream_ui #=> Boolean
+    #   resp.pending_requests[0].simulation_applications[0].world_configs #=> Array
+    #   resp.pending_requests[0].simulation_applications[0].world_configs[0].world #=> String
     #   resp.pending_requests[0].data_sources #=> Array
     #   resp.pending_requests[0].data_sources[0].name #=> String
     #   resp.pending_requests[0].data_sources[0].s3_bucket #=> String
@@ -1859,6 +2170,220 @@ module Aws::RoboMaker
       req.send_request(options)
     end
 
+    # Describes a world.
+    #
+    # @option params [required, String] :world
+    #   The Amazon Resource Name (arn) of the world you want to describe.
+    #
+    # @return [Types::DescribeWorldResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeWorldResponse#arn #arn} => String
+    #   * {Types::DescribeWorldResponse#generation_job #generation_job} => String
+    #   * {Types::DescribeWorldResponse#template #template} => String
+    #   * {Types::DescribeWorldResponse#created_at #created_at} => Time
+    #   * {Types::DescribeWorldResponse#tags #tags} => Hash&lt;String,String&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_world({
+    #     world: "Arn", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.arn #=> String
+    #   resp.generation_job #=> String
+    #   resp.template #=> String
+    #   resp.created_at #=> Time
+    #   resp.tags #=> Hash
+    #   resp.tags["TagKey"] #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/robomaker-2018-06-29/DescribeWorld AWS API Documentation
+    #
+    # @overload describe_world(params = {})
+    # @param [Hash] params ({})
+    def describe_world(params = {}, options = {})
+      req = build_request(:describe_world, params)
+      req.send_request(options)
+    end
+
+    # Describes a world export job.
+    #
+    # @option params [required, String] :job
+    #   The Amazon Resource Name (arn) of the world export job to describe.
+    #
+    # @return [Types::DescribeWorldExportJobResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeWorldExportJobResponse#arn #arn} => String
+    #   * {Types::DescribeWorldExportJobResponse#status #status} => String
+    #   * {Types::DescribeWorldExportJobResponse#created_at #created_at} => Time
+    #   * {Types::DescribeWorldExportJobResponse#failure_code #failure_code} => String
+    #   * {Types::DescribeWorldExportJobResponse#failure_reason #failure_reason} => String
+    #   * {Types::DescribeWorldExportJobResponse#client_request_token #client_request_token} => String
+    #   * {Types::DescribeWorldExportJobResponse#worlds #worlds} => Array&lt;String&gt;
+    #   * {Types::DescribeWorldExportJobResponse#output_location #output_location} => Types::OutputLocation
+    #   * {Types::DescribeWorldExportJobResponse#iam_role #iam_role} => String
+    #   * {Types::DescribeWorldExportJobResponse#tags #tags} => Hash&lt;String,String&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_world_export_job({
+    #     job: "Arn", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.arn #=> String
+    #   resp.status #=> String, one of "Pending", "Running", "Completed", "Failed", "Canceling", "Canceled"
+    #   resp.created_at #=> Time
+    #   resp.failure_code #=> String, one of "InternalServiceError", "LimitExceeded", "ResourceNotFound", "RequestThrottled", "InvalidInput", "AccessDenied"
+    #   resp.failure_reason #=> String
+    #   resp.client_request_token #=> String
+    #   resp.worlds #=> Array
+    #   resp.worlds[0] #=> String
+    #   resp.output_location.s3_bucket #=> String
+    #   resp.output_location.s3_prefix #=> String
+    #   resp.iam_role #=> String
+    #   resp.tags #=> Hash
+    #   resp.tags["TagKey"] #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/robomaker-2018-06-29/DescribeWorldExportJob AWS API Documentation
+    #
+    # @overload describe_world_export_job(params = {})
+    # @param [Hash] params ({})
+    def describe_world_export_job(params = {}, options = {})
+      req = build_request(:describe_world_export_job, params)
+      req.send_request(options)
+    end
+
+    # Describes a world generation job.
+    #
+    # @option params [required, String] :job
+    #   The Amazon Resource Name (arn) of the world generation job to
+    #   describe.
+    #
+    # @return [Types::DescribeWorldGenerationJobResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeWorldGenerationJobResponse#arn #arn} => String
+    #   * {Types::DescribeWorldGenerationJobResponse#status #status} => String
+    #   * {Types::DescribeWorldGenerationJobResponse#created_at #created_at} => Time
+    #   * {Types::DescribeWorldGenerationJobResponse#failure_code #failure_code} => String
+    #   * {Types::DescribeWorldGenerationJobResponse#failure_reason #failure_reason} => String
+    #   * {Types::DescribeWorldGenerationJobResponse#client_request_token #client_request_token} => String
+    #   * {Types::DescribeWorldGenerationJobResponse#template #template} => String
+    #   * {Types::DescribeWorldGenerationJobResponse#world_count #world_count} => Types::WorldCount
+    #   * {Types::DescribeWorldGenerationJobResponse#finished_worlds_summary #finished_worlds_summary} => Types::FinishedWorldsSummary
+    #   * {Types::DescribeWorldGenerationJobResponse#tags #tags} => Hash&lt;String,String&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_world_generation_job({
+    #     job: "Arn", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.arn #=> String
+    #   resp.status #=> String, one of "Pending", "Running", "Completed", "Failed", "PartialFailed", "Canceling", "Canceled"
+    #   resp.created_at #=> Time
+    #   resp.failure_code #=> String, one of "InternalServiceError", "LimitExceeded", "ResourceNotFound", "RequestThrottled", "InvalidInput", "AllWorldGenerationFailed"
+    #   resp.failure_reason #=> String
+    #   resp.client_request_token #=> String
+    #   resp.template #=> String
+    #   resp.world_count.floorplan_count #=> Integer
+    #   resp.world_count.interior_count_per_floorplan #=> Integer
+    #   resp.finished_worlds_summary.finished_count #=> Integer
+    #   resp.finished_worlds_summary.succeeded_worlds #=> Array
+    #   resp.finished_worlds_summary.succeeded_worlds[0] #=> String
+    #   resp.finished_worlds_summary.failure_summary.total_failure_count #=> Integer
+    #   resp.finished_worlds_summary.failure_summary.failures #=> Array
+    #   resp.finished_worlds_summary.failure_summary.failures[0].failure_code #=> String, one of "InternalServiceError", "LimitExceeded", "ResourceNotFound", "RequestThrottled", "InvalidInput", "AllWorldGenerationFailed"
+    #   resp.finished_worlds_summary.failure_summary.failures[0].sample_failure_reason #=> String
+    #   resp.finished_worlds_summary.failure_summary.failures[0].failure_count #=> Integer
+    #   resp.tags #=> Hash
+    #   resp.tags["TagKey"] #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/robomaker-2018-06-29/DescribeWorldGenerationJob AWS API Documentation
+    #
+    # @overload describe_world_generation_job(params = {})
+    # @param [Hash] params ({})
+    def describe_world_generation_job(params = {}, options = {})
+      req = build_request(:describe_world_generation_job, params)
+      req.send_request(options)
+    end
+
+    # Describes a world template.
+    #
+    # @option params [required, String] :template
+    #   The Amazon Resource Name (arn) of the world template you want to
+    #   describe.
+    #
+    # @return [Types::DescribeWorldTemplateResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeWorldTemplateResponse#arn #arn} => String
+    #   * {Types::DescribeWorldTemplateResponse#client_request_token #client_request_token} => String
+    #   * {Types::DescribeWorldTemplateResponse#name #name} => String
+    #   * {Types::DescribeWorldTemplateResponse#created_at #created_at} => Time
+    #   * {Types::DescribeWorldTemplateResponse#last_updated_at #last_updated_at} => Time
+    #   * {Types::DescribeWorldTemplateResponse#tags #tags} => Hash&lt;String,String&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_world_template({
+    #     template: "Arn", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.arn #=> String
+    #   resp.client_request_token #=> String
+    #   resp.name #=> String
+    #   resp.created_at #=> Time
+    #   resp.last_updated_at #=> Time
+    #   resp.tags #=> Hash
+    #   resp.tags["TagKey"] #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/robomaker-2018-06-29/DescribeWorldTemplate AWS API Documentation
+    #
+    # @overload describe_world_template(params = {})
+    # @param [Hash] params ({})
+    def describe_world_template(params = {}, options = {})
+      req = build_request(:describe_world_template, params)
+      req.send_request(options)
+    end
+
+    # Gets the world template body.
+    #
+    # @option params [String] :template
+    #   The Amazon Resource Name (arn) of the world template.
+    #
+    # @option params [String] :generation_job
+    #   The Amazon Resource Name (arn) of the world generator job.
+    #
+    # @return [Types::GetWorldTemplateBodyResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetWorldTemplateBodyResponse#template_body #template_body} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_world_template_body({
+    #     template: "Arn",
+    #     generation_job: "Arn",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.template_body #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/robomaker-2018-06-29/GetWorldTemplateBody AWS API Documentation
+    #
+    # @overload get_world_template_body(params = {})
+    # @param [Hash] params ({})
+    def get_world_template_body(params = {}, options = {})
+      req = build_request(:get_world_template_body, params)
+      req.send_request(options)
+    end
+
     # Returns a list of deployment jobs for a fleet. You can optionally
     # provide filters to retrieve specific deployment jobs.
     #
@@ -1872,11 +2397,12 @@ module Aws::RoboMaker
     #   or the status `Pending`.
     #
     # @option params [String] :next_token
-    #   The `nextToken` value returned from a previous paginated
-    #   `ListDeploymentJobs` request where `maxResults` was used and the
-    #   results exceeded the value of that parameter. Pagination continues
-    #   from the end of the previous results that returned the `nextToken`
-    #   value.
+    #   If the previous paginated request did not return all of the remaining
+    #   results, the response object's `nextToken` parameter value is set to
+    #   a token. To retrieve the next set of results, call
+    #   `ListDeploymentJobs` again and assign that token to the request
+    #   object's `nextToken` parameter. If there are no remaining results,
+    #   the previous response object's NextToken parameter is set to null.
     #
     # @option params [Integer] :max_results
     #   When this parameter is used, `ListDeploymentJobs` only returns
@@ -1946,10 +2472,12 @@ module Aws::RoboMaker
     # retrieve specific fleets.
     #
     # @option params [String] :next_token
-    #   The `nextToken` value returned from a previous paginated `ListFleets`
-    #   request where `maxResults` was used and the results exceeded the value
-    #   of that parameter. Pagination continues from the end of the previous
-    #   results that returned the `nextToken` value.
+    #   If the previous paginated request did not return all of the remaining
+    #   results, the response object's `nextToken` parameter value is set to
+    #   a token. To retrieve the next set of results, call `ListFleets` again
+    #   and assign that token to the request object's `nextToken` parameter.
+    #   If there are no remaining results, the previous response object's
+    #   NextToken parameter is set to null.
     #
     #   <note markdown="1"> This token should be treated as an opaque identifier that is only used
     #   to retrieve the next items in a list and not for other programmatic
@@ -2019,11 +2547,12 @@ module Aws::RoboMaker
     #   The version qualifier of the robot application.
     #
     # @option params [String] :next_token
-    #   The `nextToken` value returned from a previous paginated
-    #   `ListRobotApplications` request where `maxResults` was used and the
-    #   results exceeded the value of that parameter. Pagination continues
-    #   from the end of the previous results that returned the `nextToken`
-    #   value.
+    #   If the previous paginated request did not return all of the remaining
+    #   results, the response object's `nextToken` parameter value is set to
+    #   a token. To retrieve the next set of results, call
+    #   `ListRobotApplications` again and assign that token to the request
+    #   object's `nextToken` parameter. If there are no remaining results,
+    #   the previous response object's NextToken parameter is set to null.
     #
     # @option params [Integer] :max_results
     #   When this parameter is used, `ListRobotApplications` only returns
@@ -2085,10 +2614,12 @@ module Aws::RoboMaker
     # retrieve specific robots.
     #
     # @option params [String] :next_token
-    #   The `nextToken` value returned from a previous paginated `ListRobots`
-    #   request where `maxResults` was used and the results exceeded the value
-    #   of that parameter. Pagination continues from the end of the previous
-    #   results that returned the `nextToken` value.
+    #   If the previous paginated request did not return all of the remaining
+    #   results, the response object's `nextToken` parameter value is set to
+    #   a token. To retrieve the next set of results, call `ListRobots` again
+    #   and assign that token to the request object's `nextToken` parameter.
+    #   If there are no remaining results, the previous response object's
+    #   NextToken parameter is set to null.
     #
     # @option params [Integer] :max_results
     #   When this parameter is used, `ListRobots` only returns `maxResults`
@@ -2158,11 +2689,13 @@ module Aws::RoboMaker
     #   The version qualifier of the simulation application.
     #
     # @option params [String] :next_token
-    #   The `nextToken` value returned from a previous paginated
-    #   `ListSimulationApplications` request where `maxResults` was used and
-    #   the results exceeded the value of that parameter. Pagination continues
-    #   from the end of the previous results that returned the `nextToken`
-    #   value.
+    #   If the previous paginated request did not return all of the remaining
+    #   results, the response object's `nextToken` parameter value is set to
+    #   a token. To retrieve the next set of results, call
+    #   `ListSimulationApplications` again and assign that token to the
+    #   request object's `nextToken` parameter. If there are no remaining
+    #   results, the previous response object's NextToken parameter is set to
+    #   null.
     #
     # @option params [Integer] :max_results
     #   When this parameter is used, `ListSimulationApplications` only returns
@@ -2226,11 +2759,12 @@ module Aws::RoboMaker
     # filters to retrieve specific simulation batch jobs.
     #
     # @option params [String] :next_token
-    #   The `nextToken` value returned from a previous paginated
-    #   `ListSimulationJobBatches` request where `maxResults` was used and the
-    #   results exceeded the value of that parameter. Pagination continues
-    #   from the end of the previous results that returned the `nextToken`
-    #   value.
+    #   If the previous paginated request did not return all of the remaining
+    #   results, the response object's `nextToken` parameter value is set to
+    #   a token. To retrieve the next set of results, call
+    #   `ListSimulationJobBatches` again and assign that token to the request
+    #   object's `nextToken` parameter. If there are no remaining results,
+    #   the previous response object's NextToken parameter is set to null.
     #
     # @option params [Integer] :max_results
     #   When this parameter is used, `ListSimulationJobBatches` only returns
@@ -2287,17 +2821,12 @@ module Aws::RoboMaker
     # to retrieve specific simulation jobs.
     #
     # @option params [String] :next_token
-    #   The `nextToken` value returned from a previous paginated
-    #   `ListSimulationJobs` request where `maxResults` was used and the
-    #   results exceeded the value of that parameter. Pagination continues
-    #   from the end of the previous results that returned the `nextToken`
-    #   value.
-    #
-    #   <note markdown="1"> This token should be treated as an opaque identifier that is only used
-    #   to retrieve the next items in a list and not for other programmatic
-    #   purposes.
-    #
-    #    </note>
+    #   If the previous paginated request did not return all of the remaining
+    #   results, the response object's `nextToken` parameter value is set to
+    #   a token. To retrieve the next set of results, call
+    #   `ListSimulationJobs` again and assign that token to the request
+    #   object's `nextToken` parameter. If there are no remaining results,
+    #   the previous response object's NextToken parameter is set to null.
     #
     # @option params [Integer] :max_results
     #   When this parameter is used, `ListSimulationJobs` only returns
@@ -2387,6 +2916,245 @@ module Aws::RoboMaker
     # @param [Hash] params ({})
     def list_tags_for_resource(params = {}, options = {})
       req = build_request(:list_tags_for_resource, params)
+      req.send_request(options)
+    end
+
+    # Lists world export jobs.
+    #
+    # @option params [String] :next_token
+    #   If the previous paginated request did not return all of the remaining
+    #   results, the response object's `nextToken` parameter value is set to
+    #   a token. To retrieve the next set of results, call
+    #   `ListWorldExportJobs` again and assign that token to the request
+    #   object's `nextToken` parameter. If there are no remaining results,
+    #   the previous response object's NextToken parameter is set to null.
+    #
+    # @option params [Integer] :max_results
+    #   When this parameter is used, `ListWorldExportJobs` only returns
+    #   `maxResults` results in a single page along with a `nextToken`
+    #   response element. The remaining results of the initial request can be
+    #   seen by sending another `ListWorldExportJobs` request with the
+    #   returned `nextToken` value. This value can be between 1 and 100. If
+    #   this parameter is not used, then `ListWorldExportJobs` returns up to
+    #   100 results and a `nextToken` value if applicable.
+    #
+    # @option params [Array<Types::Filter>] :filters
+    #   Optional filters to limit results. You can use `generationJobId` and
+    #   `templateId`.
+    #
+    # @return [Types::ListWorldExportJobsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListWorldExportJobsResponse#world_export_job_summaries #world_export_job_summaries} => Array&lt;Types::WorldExportJobSummary&gt;
+    #   * {Types::ListWorldExportJobsResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_world_export_jobs({
+    #     next_token: "PaginationToken",
+    #     max_results: 1,
+    #     filters: [
+    #       {
+    #         name: "Name",
+    #         values: ["Name"],
+    #       },
+    #     ],
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.world_export_job_summaries #=> Array
+    #   resp.world_export_job_summaries[0].arn #=> String
+    #   resp.world_export_job_summaries[0].status #=> String, one of "Pending", "Running", "Completed", "Failed", "Canceling", "Canceled"
+    #   resp.world_export_job_summaries[0].created_at #=> Time
+    #   resp.world_export_job_summaries[0].worlds #=> Array
+    #   resp.world_export_job_summaries[0].worlds[0] #=> String
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/robomaker-2018-06-29/ListWorldExportJobs AWS API Documentation
+    #
+    # @overload list_world_export_jobs(params = {})
+    # @param [Hash] params ({})
+    def list_world_export_jobs(params = {}, options = {})
+      req = build_request(:list_world_export_jobs, params)
+      req.send_request(options)
+    end
+
+    # Lists world generator jobs.
+    #
+    # @option params [String] :next_token
+    #   If the previous paginated request did not return all of the remaining
+    #   results, the response object's `nextToken` parameter value is set to
+    #   a token. To retrieve the next set of results, call
+    #   `ListWorldGenerationJobsRequest` again and assign that token to the
+    #   request object's `nextToken` parameter. If there are no remaining
+    #   results, the previous response object's NextToken parameter is set to
+    #   null.
+    #
+    # @option params [Integer] :max_results
+    #   When this parameter is used, `ListWorldGeneratorJobs` only returns
+    #   `maxResults` results in a single page along with a `nextToken`
+    #   response element. The remaining results of the initial request can be
+    #   seen by sending another `ListWorldGeneratorJobs` request with the
+    #   returned `nextToken` value. This value can be between 1 and 100. If
+    #   this parameter is not used, then `ListWorldGeneratorJobs` returns up
+    #   to 100 results and a `nextToken` value if applicable.
+    #
+    # @option params [Array<Types::Filter>] :filters
+    #   Optional filters to limit results. You can use `status` and
+    #   `templateId`.
+    #
+    # @return [Types::ListWorldGenerationJobsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListWorldGenerationJobsResponse#world_generation_job_summaries #world_generation_job_summaries} => Array&lt;Types::WorldGenerationJobSummary&gt;
+    #   * {Types::ListWorldGenerationJobsResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_world_generation_jobs({
+    #     next_token: "PaginationToken",
+    #     max_results: 1,
+    #     filters: [
+    #       {
+    #         name: "Name",
+    #         values: ["Name"],
+    #       },
+    #     ],
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.world_generation_job_summaries #=> Array
+    #   resp.world_generation_job_summaries[0].arn #=> String
+    #   resp.world_generation_job_summaries[0].template #=> String
+    #   resp.world_generation_job_summaries[0].created_at #=> Time
+    #   resp.world_generation_job_summaries[0].status #=> String, one of "Pending", "Running", "Completed", "Failed", "PartialFailed", "Canceling", "Canceled"
+    #   resp.world_generation_job_summaries[0].world_count.floorplan_count #=> Integer
+    #   resp.world_generation_job_summaries[0].world_count.interior_count_per_floorplan #=> Integer
+    #   resp.world_generation_job_summaries[0].succeeded_world_count #=> Integer
+    #   resp.world_generation_job_summaries[0].failed_world_count #=> Integer
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/robomaker-2018-06-29/ListWorldGenerationJobs AWS API Documentation
+    #
+    # @overload list_world_generation_jobs(params = {})
+    # @param [Hash] params ({})
+    def list_world_generation_jobs(params = {}, options = {})
+      req = build_request(:list_world_generation_jobs, params)
+      req.send_request(options)
+    end
+
+    # Lists world templates.
+    #
+    # @option params [String] :next_token
+    #   If the previous paginated request did not return all of the remaining
+    #   results, the response object's `nextToken` parameter value is set to
+    #   a token. To retrieve the next set of results, call
+    #   `ListWorldTemplates` again and assign that token to the request
+    #   object's `nextToken` parameter. If there are no remaining results,
+    #   the previous response object's NextToken parameter is set to null.
+    #
+    # @option params [Integer] :max_results
+    #   When this parameter is used, `ListWorldTemplates` only returns
+    #   `maxResults` results in a single page along with a `nextToken`
+    #   response element. The remaining results of the initial request can be
+    #   seen by sending another `ListWorldTemplates` request with the returned
+    #   `nextToken` value. This value can be between 1 and 100. If this
+    #   parameter is not used, then `ListWorldTemplates` returns up to 100
+    #   results and a `nextToken` value if applicable.
+    #
+    # @return [Types::ListWorldTemplatesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListWorldTemplatesResponse#template_summaries #template_summaries} => Array&lt;Types::TemplateSummary&gt;
+    #   * {Types::ListWorldTemplatesResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_world_templates({
+    #     next_token: "PaginationToken",
+    #     max_results: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.template_summaries #=> Array
+    #   resp.template_summaries[0].arn #=> String
+    #   resp.template_summaries[0].created_at #=> Time
+    #   resp.template_summaries[0].last_updated_at #=> Time
+    #   resp.template_summaries[0].name #=> String
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/robomaker-2018-06-29/ListWorldTemplates AWS API Documentation
+    #
+    # @overload list_world_templates(params = {})
+    # @param [Hash] params ({})
+    def list_world_templates(params = {}, options = {})
+      req = build_request(:list_world_templates, params)
+      req.send_request(options)
+    end
+
+    # Lists worlds.
+    #
+    # @option params [String] :next_token
+    #   If the previous paginated request did not return all of the remaining
+    #   results, the response object's `nextToken` parameter value is set to
+    #   a token. To retrieve the next set of results, call `ListWorlds` again
+    #   and assign that token to the request object's `nextToken` parameter.
+    #   If there are no remaining results, the previous response object's
+    #   NextToken parameter is set to null.
+    #
+    # @option params [Integer] :max_results
+    #   When this parameter is used, `ListWorlds` only returns `maxResults`
+    #   results in a single page along with a `nextToken` response element.
+    #   The remaining results of the initial request can be seen by sending
+    #   another `ListWorlds` request with the returned `nextToken` value. This
+    #   value can be between 1 and 100. If this parameter is not used, then
+    #   `ListWorlds` returns up to 100 results and a `nextToken` value if
+    #   applicable.
+    #
+    # @option params [Array<Types::Filter>] :filters
+    #   Optional filters to limit results. You can use `status`.
+    #
+    # @return [Types::ListWorldsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListWorldsResponse#world_summaries #world_summaries} => Array&lt;Types::WorldSummary&gt;
+    #   * {Types::ListWorldsResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_worlds({
+    #     next_token: "PaginationToken",
+    #     max_results: 1,
+    #     filters: [
+    #       {
+    #         name: "Name",
+    #         values: ["Name"],
+    #       },
+    #     ],
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.world_summaries #=> Array
+    #   resp.world_summaries[0].arn #=> String
+    #   resp.world_summaries[0].created_at #=> Time
+    #   resp.world_summaries[0].generation_job #=> String
+    #   resp.world_summaries[0].template #=> String
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/robomaker-2018-06-29/ListWorlds AWS API Documentation
+    #
+    # @overload list_worlds(params = {})
+    # @param [Hash] params ({})
+    def list_worlds(params = {}, options = {})
+      req = build_request(:list_worlds, params)
       req.send_request(options)
     end
 
@@ -2545,6 +3313,11 @@ module Aws::RoboMaker
     #               },
     #               stream_ui: false,
     #             },
+    #             world_configs: [
+    #               {
+    #                 world: "Arn",
+    #               },
+    #             ],
     #           },
     #         ],
     #         data_sources: [
@@ -2614,6 +3387,8 @@ module Aws::RoboMaker
     #   resp.failed_requests[0].request.simulation_applications[0].launch_config.port_forwarding_config.port_mappings[0].application_port #=> Integer
     #   resp.failed_requests[0].request.simulation_applications[0].launch_config.port_forwarding_config.port_mappings[0].enable_on_public_ip #=> Boolean
     #   resp.failed_requests[0].request.simulation_applications[0].launch_config.stream_ui #=> Boolean
+    #   resp.failed_requests[0].request.simulation_applications[0].world_configs #=> Array
+    #   resp.failed_requests[0].request.simulation_applications[0].world_configs[0].world #=> String
     #   resp.failed_requests[0].request.data_sources #=> Array
     #   resp.failed_requests[0].request.data_sources[0].name #=> String
     #   resp.failed_requests[0].request.data_sources[0].s3_bucket #=> String
@@ -2662,6 +3437,8 @@ module Aws::RoboMaker
     #   resp.pending_requests[0].simulation_applications[0].launch_config.port_forwarding_config.port_mappings[0].application_port #=> Integer
     #   resp.pending_requests[0].simulation_applications[0].launch_config.port_forwarding_config.port_mappings[0].enable_on_public_ip #=> Boolean
     #   resp.pending_requests[0].simulation_applications[0].launch_config.stream_ui #=> Boolean
+    #   resp.pending_requests[0].simulation_applications[0].world_configs #=> Array
+    #   resp.pending_requests[0].simulation_applications[0].world_configs[0].world #=> String
     #   resp.pending_requests[0].data_sources #=> Array
     #   resp.pending_requests[0].data_sources[0].name #=> String
     #   resp.pending_requests[0].data_sources[0].s3_bucket #=> String
@@ -2991,6 +3768,55 @@ module Aws::RoboMaker
       req.send_request(options)
     end
 
+    # Updates a world template.
+    #
+    # @option params [required, String] :template
+    #   The Amazon Resource Name (arn) of the world template to update.
+    #
+    # @option params [String] :name
+    #   The name of the template.
+    #
+    # @option params [String] :template_body
+    #   The world template body.
+    #
+    # @option params [Types::TemplateLocation] :template_location
+    #   The location of the world template.
+    #
+    # @return [Types::UpdateWorldTemplateResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::UpdateWorldTemplateResponse#arn #arn} => String
+    #   * {Types::UpdateWorldTemplateResponse#name #name} => String
+    #   * {Types::UpdateWorldTemplateResponse#created_at #created_at} => Time
+    #   * {Types::UpdateWorldTemplateResponse#last_updated_at #last_updated_at} => Time
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_world_template({
+    #     template: "Arn", # required
+    #     name: "TemplateName",
+    #     template_body: "Json",
+    #     template_location: {
+    #       s3_bucket: "S3Bucket", # required
+    #       s3_key: "S3Key", # required
+    #     },
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.arn #=> String
+    #   resp.name #=> String
+    #   resp.created_at #=> Time
+    #   resp.last_updated_at #=> Time
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/robomaker-2018-06-29/UpdateWorldTemplate AWS API Documentation
+    #
+    # @overload update_world_template(params = {})
+    # @param [Hash] params ({})
+    def update_world_template(params = {}, options = {})
+      req = build_request(:update_world_template, params)
+      req.send_request(options)
+    end
+
     # @!endgroup
 
     # @param params ({})
@@ -3004,7 +3830,7 @@ module Aws::RoboMaker
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-robomaker'
-      context[:gem_version] = '1.26.0'
+      context[:gem_version] = '1.27.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

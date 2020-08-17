@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.30.0 (2020-08-05)
+------------------
+
+* Feature - Documentation updates for the Resource Group Tagging API namespace.
+
+1.29.0 (2020-07-31)
+------------------
+
+* Feature - Updates to the list of services supported by this API.
+
 1.28.0 (2020-06-23)
 ------------------
 

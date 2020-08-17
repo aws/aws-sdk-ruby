@@ -52,6 +52,44 @@ module Aws::CodeBuild
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass BatchGetBuildBatchesInput
+    #   data as a hash:
+    #
+    #       {
+    #         ids: ["NonEmptyString"], # required
+    #       }
+    #
+    # @!attribute [rw] ids
+    #   An array that contains the batch build identifiers to retrieve.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codebuild-2016-10-06/BatchGetBuildBatchesInput AWS API Documentation
+    #
+    class BatchGetBuildBatchesInput < Struct.new(
+      :ids)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] build_batches
+    #   An array of `BuildBatch` objects that represent the retrieved batch
+    #   builds.
+    #   @return [Array<Types::BuildBatch>]
+    #
+    # @!attribute [rw] build_batches_not_found
+    #   An array that contains the identifiers of any batch builds that are
+    #   not found.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codebuild-2016-10-06/BatchGetBuildBatchesOutput AWS API Documentation
+    #
+    class BatchGetBuildBatchesOutput < Struct.new(
+      :build_batches,
+      :build_batches_not_found)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass BatchGetBuildsInput
     #   data as a hash:
     #
@@ -198,6 +236,39 @@ module Aws::CodeBuild
     class BatchGetReportsOutput < Struct.new(
       :reports,
       :reports_not_found)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Specifies restrictions for the batch build.
+    #
+    # @note When making an API call, you may pass BatchRestrictions
+    #   data as a hash:
+    #
+    #       {
+    #         maximum_builds_allowed: 1,
+    #         compute_types_allowed: ["NonEmptyString"],
+    #       }
+    #
+    # @!attribute [rw] maximum_builds_allowed
+    #   Specifies the maximum number of builds allowed.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] compute_types_allowed
+    #   An array of strings that specify the compute types that are allowed
+    #   for the batch build. See [Build environment compute types][1] in the
+    #   *AWS CodeBuild User Guide* for these values.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/codebuild/latest/userguide/build-env-ref-compute-types.html
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codebuild-2016-10-06/BatchRestrictions AWS API Documentation
+    #
+    class BatchRestrictions < Struct.new(
+      :maximum_builds_allowed,
+      :compute_types_allowed)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -409,6 +480,11 @@ module Aws::CodeBuild
     #   Contains information about the debug session for this build.
     #   @return [Types::DebugSession]
     #
+    # @!attribute [rw] build_batch_arn
+    #   The ARN of the batch build that this build is a member of, if
+    #   applicable.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codebuild-2016-10-06/Build AWS API Documentation
     #
     class Build < Struct.new(
@@ -442,7 +518,8 @@ module Aws::CodeBuild
       :exported_environment_variables,
       :report_arns,
       :file_system_locations,
-      :debug_session)
+      :debug_session,
+      :build_batch_arn)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -507,6 +584,383 @@ module Aws::CodeBuild
       include Aws::Structure
     end
 
+    # Contains information about a batch build.
+    #
+    # @!attribute [rw] id
+    #   The identifier of the batch build.
+    #   @return [String]
+    #
+    # @!attribute [rw] arn
+    #   The ARN of the batch build.
+    #   @return [String]
+    #
+    # @!attribute [rw] start_time
+    #   The date and time that the batch build started.
+    #   @return [Time]
+    #
+    # @!attribute [rw] end_time
+    #   The date and time that the batch build ended.
+    #   @return [Time]
+    #
+    # @!attribute [rw] current_phase
+    #   The current phase of the batch build.
+    #   @return [String]
+    #
+    # @!attribute [rw] build_batch_status
+    #   The status of the batch build.
+    #   @return [String]
+    #
+    # @!attribute [rw] source_version
+    #   The identifier of the version of the source code to be built.
+    #   @return [String]
+    #
+    # @!attribute [rw] resolved_source_version
+    #   The identifier of the resolved version of this batch build's source
+    #   code.
+    #
+    #   * For AWS CodeCommit, GitHub, GitHub Enterprise, and BitBucket, the
+    #     commit ID.
+    #
+    #   * For AWS CodePipeline, the source revision provided by AWS
+    #     CodePipeline.
+    #
+    #   * For Amazon Simple Storage Service (Amazon S3), this does not
+    #     apply.
+    #   @return [String]
+    #
+    # @!attribute [rw] project_name
+    #   The name of the batch build project.
+    #   @return [String]
+    #
+    # @!attribute [rw] phases
+    #   An array of `BuildBatchPhase` objects the specify the phases of the
+    #   batch build.
+    #   @return [Array<Types::BuildBatchPhase>]
+    #
+    # @!attribute [rw] source
+    #   Information about the build input source code for the build project.
+    #   @return [Types::ProjectSource]
+    #
+    # @!attribute [rw] secondary_sources
+    #   An array of `ProjectSource` objects that define the sources for the
+    #   batch build.
+    #   @return [Array<Types::ProjectSource>]
+    #
+    # @!attribute [rw] secondary_source_versions
+    #   An array of `ProjectSourceVersion` objects. Each
+    #   `ProjectSourceVersion` must be one of:
+    #
+    #   * For AWS CodeCommit: the commit ID, branch, or Git tag to use.
+    #
+    #   * For GitHub: the commit ID, pull request ID, branch name, or tag
+    #     name that corresponds to the version of the source code you want
+    #     to build. If a pull request ID is specified, it must use the
+    #     format `pr/pull-request-ID` (for example, `pr/25`). If a branch
+    #     name is specified, the branch's HEAD commit ID is used. If not
+    #     specified, the default branch's HEAD commit ID is used.
+    #
+    #   * For Bitbucket: the commit ID, branch name, or tag name that
+    #     corresponds to the version of the source code you want to build.
+    #     If a branch name is specified, the branch's HEAD commit ID is
+    #     used. If not specified, the default branch's HEAD commit ID is
+    #     used.
+    #
+    #   * For Amazon Simple Storage Service (Amazon S3): the version ID of
+    #     the object that represents the build input ZIP file to use.
+    #   @return [Array<Types::ProjectSourceVersion>]
+    #
+    # @!attribute [rw] artifacts
+    #   A `BuildArtifacts` object the defines the build artifacts for this
+    #   batch build.
+    #   @return [Types::BuildArtifacts]
+    #
+    # @!attribute [rw] secondary_artifacts
+    #   An array of `BuildArtifacts` objects the define the build artifacts
+    #   for this batch build.
+    #   @return [Array<Types::BuildArtifacts>]
+    #
+    # @!attribute [rw] cache
+    #   Information about the cache for the build project.
+    #   @return [Types::ProjectCache]
+    #
+    # @!attribute [rw] environment
+    #   Information about the build environment of the build project.
+    #   @return [Types::ProjectEnvironment]
+    #
+    # @!attribute [rw] service_role
+    #   The name of a service role used for builds in the batch.
+    #   @return [String]
+    #
+    # @!attribute [rw] log_config
+    #   Information about logs for a build project. These can be logs in
+    #   Amazon CloudWatch Logs, built in a specified S3 bucket, or both.
+    #   @return [Types::LogsConfig]
+    #
+    # @!attribute [rw] build_timeout_in_minutes
+    #   Specifies the maximum amount of time, in minutes, that the build in
+    #   a batch must be completed in.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] queued_timeout_in_minutes
+    #   Specifies the amount of time, in minutes, that the batch build is
+    #   allowed to be queued before it times out.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] complete
+    #   Indicates if the batch build is complete.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] initiator
+    #   The entity that started the batch build. Valid values include:
+    #
+    #   * If AWS CodePipeline started the build, the pipeline's name (for
+    #     example, `codepipeline/my-demo-pipeline`).
+    #
+    #   * If an AWS Identity and Access Management (IAM) user started the
+    #     build, the user's name.
+    #
+    #   * If the Jenkins plugin for AWS CodeBuild started the build, the
+    #     string `CodeBuild-Jenkins-Plugin`.
+    #   @return [String]
+    #
+    # @!attribute [rw] vpc_config
+    #   Information about the VPC configuration that AWS CodeBuild accesses.
+    #   @return [Types::VpcConfig]
+    #
+    # @!attribute [rw] encryption_key
+    #   The AWS Key Management Service (AWS KMS) customer master key (CMK)
+    #   to be used for encrypting the batch build output artifacts.
+    #
+    #   <note markdown="1"> You can use a cross-account KMS key to encrypt the build output
+    #   artifacts if your service role has permission to that key.
+    #
+    #    </note>
+    #
+    #   You can specify either the Amazon Resource Name (ARN) of the CMK or,
+    #   if available, the CMK's alias (using the format `alias/alias-name
+    #   `).
+    #   @return [String]
+    #
+    # @!attribute [rw] build_batch_number
+    #   The number of the batch build. For each project, the
+    #   `buildBatchNumber` of its first batch build is `1`. The
+    #   `buildBatchNumber` of each subsequent batch build is incremented by
+    #   `1`. If a batch build is deleted, the `buildBatchNumber` of other
+    #   batch builds does not change.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] file_system_locations
+    #   An array of `ProjectFileSystemLocation` objects for the batch build
+    #   project. A `ProjectFileSystemLocation` object specifies the
+    #   `identifier`, `location`, `mountOptions`, `mountPoint`, and `type`
+    #   of a file system created using Amazon Elastic File System.
+    #   @return [Array<Types::ProjectFileSystemLocation>]
+    #
+    # @!attribute [rw] build_batch_config
+    #   Contains configuration information about a batch build project.
+    #   @return [Types::ProjectBuildBatchConfig]
+    #
+    # @!attribute [rw] build_groups
+    #   An array of `BuildGroup` objects that define the build groups for
+    #   the batch build.
+    #   @return [Array<Types::BuildGroup>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codebuild-2016-10-06/BuildBatch AWS API Documentation
+    #
+    class BuildBatch < Struct.new(
+      :id,
+      :arn,
+      :start_time,
+      :end_time,
+      :current_phase,
+      :build_batch_status,
+      :source_version,
+      :resolved_source_version,
+      :project_name,
+      :phases,
+      :source,
+      :secondary_sources,
+      :secondary_source_versions,
+      :artifacts,
+      :secondary_artifacts,
+      :cache,
+      :environment,
+      :service_role,
+      :log_config,
+      :build_timeout_in_minutes,
+      :queued_timeout_in_minutes,
+      :complete,
+      :initiator,
+      :vpc_config,
+      :encryption_key,
+      :build_batch_number,
+      :file_system_locations,
+      :build_batch_config,
+      :build_groups)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Specifies filters when retrieving batch builds.
+    #
+    # @note When making an API call, you may pass BuildBatchFilter
+    #   data as a hash:
+    #
+    #       {
+    #         status: "SUCCEEDED", # accepts SUCCEEDED, FAILED, FAULT, TIMED_OUT, IN_PROGRESS, STOPPED
+    #       }
+    #
+    # @!attribute [rw] status
+    #   The status of the batch builds to retrieve. Only batch builds that
+    #   have this status will be retrieved.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codebuild-2016-10-06/BuildBatchFilter AWS API Documentation
+    #
+    class BuildBatchFilter < Struct.new(
+      :status)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains information about a stage for a batch build.
+    #
+    # @!attribute [rw] phase_type
+    #   The name of the batch build phase. Valid values include:
+    #
+    #   COMBINE\_ARTIFACTS
+    #
+    #   : Build output artifacts are being combined and uploaded to the
+    #     output location.
+    #
+    #   DOWNLOAD\_BATCHSPEC
+    #
+    #   : The batch build specification is being downloaded.
+    #
+    #   FAILED
+    #
+    #   : One or more of the builds failed.
+    #
+    #   IN\_PROGRESS
+    #
+    #   : The batch build is in progress.
+    #
+    #   STOPPED
+    #
+    #   : The batch build was stopped.
+    #
+    #   SUBMITTED
+    #
+    #   : The btach build has been submitted.
+    #
+    #   SUCCEEDED
+    #
+    #   : The batch build succeeded.
+    #   @return [String]
+    #
+    # @!attribute [rw] phase_status
+    #   The current status of the batch build phase. Valid values include:
+    #
+    #   FAILED
+    #
+    #   : The build phase failed.
+    #
+    #   FAULT
+    #
+    #   : The build phase faulted.
+    #
+    #   IN\_PROGRESS
+    #
+    #   : The build phase is still in progress.
+    #
+    #   QUEUED
+    #
+    #   : The build has been submitted and is queued behind other submitted
+    #     builds.
+    #
+    #   STOPPED
+    #
+    #   : The build phase stopped.
+    #
+    #   SUCCEEDED
+    #
+    #   : The build phase succeeded.
+    #
+    #   TIMED\_OUT
+    #
+    #   : The build phase timed out.
+    #   @return [String]
+    #
+    # @!attribute [rw] start_time
+    #   When the batch build phase started, expressed in Unix time format.
+    #   @return [Time]
+    #
+    # @!attribute [rw] end_time
+    #   When the batch build phase ended, expressed in Unix time format.
+    #   @return [Time]
+    #
+    # @!attribute [rw] duration_in_seconds
+    #   How long, in seconds, between the starting and ending times of the
+    #   batch build's phase.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] contexts
+    #   Additional information about the batch build phase. Especially to
+    #   help troubleshoot a failed btach build.
+    #   @return [Array<Types::PhaseContext>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codebuild-2016-10-06/BuildBatchPhase AWS API Documentation
+    #
+    class BuildBatchPhase < Struct.new(
+      :phase_type,
+      :phase_status,
+      :start_time,
+      :end_time,
+      :duration_in_seconds,
+      :contexts)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains information about a batch build build group. Build groups are
+    # used to combine builds that can run in parallel, while still being
+    # able to set dependencies on other build groups.
+    #
+    # @!attribute [rw] identifier
+    #   Contains the identifier of the build group.
+    #   @return [String]
+    #
+    # @!attribute [rw] depends_on
+    #   An array of strings that contain the identifiers of the build groups
+    #   that this build group depends on.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] ignore_failure
+    #   Specifies if failures in this build group can be ignored.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] current_build_summary
+    #   A `BuildSummary` object that contains a summary of the current build
+    #   group.
+    #   @return [Types::BuildSummary]
+    #
+    # @!attribute [rw] prior_build_summary_list
+    #   An array of `BuildSummary` objects that contain summaries of
+    #   previous build groups.
+    #   @return [Array<Types::BuildSummary>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codebuild-2016-10-06/BuildGroup AWS API Documentation
+    #
+    class BuildGroup < Struct.new(
+      :identifier,
+      :depends_on,
+      :ignore_failure,
+      :current_build_summary,
+      :prior_build_summary_list)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Information about a build that could not be successfully deleted.
     #
     # @!attribute [rw] id
@@ -566,20 +1020,34 @@ module Aws::CodeBuild
     # @!attribute [rw] phase_status
     #   The current status of the build phase. Valid values include:
     #
-    #   * `FAILED`\: The build phase failed.
+    #   FAILED
     #
-    #   * `FAULT`\: The build phase faulted.
+    #   : The build phase failed.
     #
-    #   * `IN_PROGRESS`\: The build phase is still in progress.
+    #   FAULT
     #
-    #   * `QUEUED`\: The build has been submitted and is queued behind other
-    #     submitted builds.
+    #   : The build phase faulted.
     #
-    #   * `STOPPED`\: The build phase stopped.
+    #   IN\_PROGRESS
     #
-    #   * `SUCCEEDED`\: The build phase succeeded.
+    #   : The build phase is still in progress.
     #
-    #   * `TIMED_OUT`\: The build phase timed out.
+    #   QUEUED
+    #
+    #   : The build has been submitted and is queued behind other submitted
+    #     builds.
+    #
+    #   STOPPED
+    #
+    #   : The build phase stopped.
+    #
+    #   SUCCEEDED
+    #
+    #   : The build phase succeeded.
+    #
+    #   TIMED\_OUT
+    #
+    #   : The build phase timed out.
     #   @return [String]
     #
     # @!attribute [rw] start_time
@@ -679,6 +1147,66 @@ module Aws::CodeBuild
       include Aws::Structure
     end
 
+    # Contains summary information about a batch build group.
+    #
+    # @!attribute [rw] arn
+    #   The batch build ARN.
+    #   @return [String]
+    #
+    # @!attribute [rw] requested_on
+    #   When the build was started, expressed in Unix time format.
+    #   @return [Time]
+    #
+    # @!attribute [rw] build_status
+    #   The status of the build group.
+    #
+    #   FAILED
+    #
+    #   : The build group failed.
+    #
+    #   FAULT
+    #
+    #   : The build group faulted.
+    #
+    #   IN\_PROGRESS
+    #
+    #   : The build group is still in progress.
+    #
+    #   STOPPED
+    #
+    #   : The build group stopped.
+    #
+    #   SUCCEEDED
+    #
+    #   : The build group succeeded.
+    #
+    #   TIMED\_OUT
+    #
+    #   : The build group timed out.
+    #   @return [String]
+    #
+    # @!attribute [rw] primary_artifact
+    #   A `ResolvedArtifact` object that represents the primary build
+    #   artifacts for the build group.
+    #   @return [Types::ResolvedArtifact]
+    #
+    # @!attribute [rw] secondary_artifacts
+    #   An array of `ResolvedArtifact` objects that represents the secondary
+    #   build artifacts for the build group.
+    #   @return [Array<Types::ResolvedArtifact>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codebuild-2016-10-06/BuildSummary AWS API Documentation
+    #
+    class BuildSummary < Struct.new(
+      :arn,
+      :requested_on,
+      :build_status,
+      :primary_artifact,
+      :secondary_artifacts)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Information about Amazon CloudWatch Logs for a build project.
     #
     # @note When making an API call, you may pass CloudWatchLogsConfig
@@ -725,6 +1253,120 @@ module Aws::CodeBuild
       :status,
       :group_name,
       :stream_name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains code coverage report information.
+    #
+    # Line coverage measures how many statements your tests cover. A
+    # statement is a single instruction, not including comments,
+    # conditionals, etc.
+    #
+    # Branch coverage determines if your tests cover every possible branch
+    # of a control structure, such as an `if` or `case` statement.
+    #
+    # @!attribute [rw] id
+    #   The identifier of the code coverage report.
+    #   @return [String]
+    #
+    # @!attribute [rw] report_arn
+    #   The ARN of the report.
+    #   @return [String]
+    #
+    # @!attribute [rw] file_path
+    #   The path of the test report file.
+    #   @return [String]
+    #
+    # @!attribute [rw] line_coverage_percentage
+    #   The percentage of lines that are covered by your tests.
+    #   @return [Float]
+    #
+    # @!attribute [rw] lines_covered
+    #   The number of lines that are covered by your tests.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] lines_missed
+    #   The number of lines that are not covered by your tests.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] branch_coverage_percentage
+    #   The percentage of branches that are covered by your tests.
+    #   @return [Float]
+    #
+    # @!attribute [rw] branches_covered
+    #   The number of conditional branches that are covered by your tests.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] branches_missed
+    #   The number of conditional branches that are not covered by your
+    #   tests.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] expired
+    #   The date and time that the tests were run.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codebuild-2016-10-06/CodeCoverage AWS API Documentation
+    #
+    class CodeCoverage < Struct.new(
+      :id,
+      :report_arn,
+      :file_path,
+      :line_coverage_percentage,
+      :lines_covered,
+      :lines_missed,
+      :branch_coverage_percentage,
+      :branches_covered,
+      :branches_missed,
+      :expired)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains a summary of a code coverage report.
+    #
+    # Line coverage measures how many statements your tests cover. A
+    # statement is a single instruction, not including comments,
+    # conditionals, etc.
+    #
+    # Branch coverage determines if your tests cover every possible branch
+    # of a control structure, such as an `if` or `case` statement.
+    #
+    # @!attribute [rw] line_coverage_percentage
+    #   The percentage of lines that are covered by your tests.
+    #   @return [Float]
+    #
+    # @!attribute [rw] lines_covered
+    #   The number of lines that are covered by your tests.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] lines_missed
+    #   The number of lines that are not covered by your tests.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] branch_coverage_percentage
+    #   The percentage of branches that are covered by your tests.
+    #   @return [Float]
+    #
+    # @!attribute [rw] branches_covered
+    #   The number of conditional branches that are covered by your tests.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] branches_missed
+    #   The number of conditional branches that are not covered by your
+    #   tests.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codebuild-2016-10-06/CodeCoverageReportSummary AWS API Documentation
+    #
+    class CodeCoverageReportSummary < Struct.new(
+      :line_coverage_percentage,
+      :lines_covered,
+      :lines_missed,
+      :branch_coverage_percentage,
+      :branches_covered,
+      :branches_missed)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -869,6 +1511,15 @@ module Aws::CodeBuild
     #             mount_options: "String",
     #           },
     #         ],
+    #         build_batch_config: {
+    #           service_role: "NonEmptyString",
+    #           combine_artifacts: false,
+    #           restrictions: {
+    #             maximum_builds_allowed: 1,
+    #             compute_types_allowed: ["NonEmptyString"],
+    #           },
+    #           timeout_in_mins: 1,
+    #         },
     #       }
     #
     # @!attribute [rw] name
@@ -1008,6 +1659,11 @@ module Aws::CodeBuild
     #   of a file system created using Amazon Elastic File System.
     #   @return [Array<Types::ProjectFileSystemLocation>]
     #
+    # @!attribute [rw] build_batch_config
+    #   A ProjectBuildBatchConfig object that defines the batch build
+    #   options for the project.
+    #   @return [Types::ProjectBuildBatchConfig]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codebuild-2016-10-06/CreateProjectInput AWS API Documentation
     #
     class CreateProjectInput < Struct.new(
@@ -1029,7 +1685,8 @@ module Aws::CodeBuild
       :vpc_config,
       :badge_enabled,
       :logs_config,
-      :file_system_locations)
+      :file_system_locations,
+      :build_batch_config)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1051,7 +1708,7 @@ module Aws::CodeBuild
     #
     #       {
     #         name: "ReportGroupName", # required
-    #         type: "TEST", # required, accepts TEST
+    #         type: "TEST", # required, accepts TEST, CODE_COVERAGE
     #         export_config: { # required
     #           export_config_type: "S3", # accepts S3, NO_EXPORT
     #           s3_destination: {
@@ -1128,6 +1785,7 @@ module Aws::CodeBuild
     #             },
     #           ],
     #         ],
+    #         build_type: "BUILD", # accepts BUILD, BUILD_BATCH
     #       }
     #
     # @!attribute [rw] project_name
@@ -1156,12 +1814,17 @@ module Aws::CodeBuild
     #   its filters must pass.
     #   @return [Array<Array<Types::WebhookFilter>>]
     #
+    # @!attribute [rw] build_type
+    #   Specifies the type of build this webhook will trigger.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codebuild-2016-10-06/CreateWebhookInput AWS API Documentation
     #
     class CreateWebhookInput < Struct.new(
       :project_name,
       :branch_filter,
-      :filter_groups)
+      :filter_groups,
+      :build_type)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1201,6 +1864,49 @@ module Aws::CodeBuild
     class DebugSession < Struct.new(
       :session_enabled,
       :session_target)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass DeleteBuildBatchInput
+    #   data as a hash:
+    #
+    #       {
+    #         id: "NonEmptyString", # required
+    #       }
+    #
+    # @!attribute [rw] id
+    #   The identifier of the batch build to delete.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codebuild-2016-10-06/DeleteBuildBatchInput AWS API Documentation
+    #
+    class DeleteBuildBatchInput < Struct.new(
+      :id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] status_code
+    #   The status code.
+    #   @return [String]
+    #
+    # @!attribute [rw] builds_deleted
+    #   An array of strings that contain the identifiers of the builds that
+    #   were deleted.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] builds_not_deleted
+    #   An array of `BuildNotDeleted` objects that specify the builds that
+    #   could not be deleted.
+    #   @return [Array<Types::BuildNotDeleted>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codebuild-2016-10-06/DeleteBuildBatchOutput AWS API Documentation
+    #
+    class DeleteBuildBatchOutput < Struct.new(
+      :status_code,
+      :builds_deleted,
+      :builds_not_deleted)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1350,6 +2056,92 @@ module Aws::CodeBuild
     # @see http://docs.aws.amazon.com/goto/WebAPI/codebuild-2016-10-06/DeleteWebhookOutput AWS API Documentation
     #
     class DeleteWebhookOutput < Aws::EmptyStructure; end
+
+    # @note When making an API call, you may pass DescribeCodeCoveragesInput
+    #   data as a hash:
+    #
+    #       {
+    #         report_arn: "NonEmptyString", # required
+    #         next_token: "String",
+    #         max_results: 1,
+    #         sort_order: "ASCENDING", # accepts ASCENDING, DESCENDING
+    #         sort_by: "LINE_COVERAGE_PERCENTAGE", # accepts LINE_COVERAGE_PERCENTAGE, FILE_PATH
+    #         min_line_coverage_percentage: 1.0,
+    #         max_line_coverage_percentage: 1.0,
+    #       }
+    #
+    # @!attribute [rw] report_arn
+    #   The ARN of the report for which test cases are returned.
+    #   @return [String]
+    #
+    # @!attribute [rw] next_token
+    #   The `nextToken` value returned from a previous call to
+    #   `DescribeCodeCoverages`. This specifies the next item to return. To
+    #   return the beginning of the list, exclude this parameter.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of results to return.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] sort_order
+    #   Specifies if the results are sorted in ascending or descending
+    #   order.
+    #   @return [String]
+    #
+    # @!attribute [rw] sort_by
+    #   Specifies how the results are sorted. Possible values are:
+    #
+    #   FILE\_PATH
+    #
+    #   : The results are sorted by file path.
+    #
+    #   LINE\_COVERAGE\_PERCENTAGE
+    #
+    #   : The results are sorted by the percentage of lines that are
+    #     covered.
+    #   @return [String]
+    #
+    # @!attribute [rw] min_line_coverage_percentage
+    #   The minimum line coverage percentage to report.
+    #   @return [Float]
+    #
+    # @!attribute [rw] max_line_coverage_percentage
+    #   The maximum line coverage percentage to report.
+    #   @return [Float]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codebuild-2016-10-06/DescribeCodeCoveragesInput AWS API Documentation
+    #
+    class DescribeCodeCoveragesInput < Struct.new(
+      :report_arn,
+      :next_token,
+      :max_results,
+      :sort_order,
+      :sort_by,
+      :min_line_coverage_percentage,
+      :max_line_coverage_percentage)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] next_token
+    #   If there are more items to return, this contains a token that is
+    #   passed to a subsequent call to `DescribeCodeCoverages` to retrieve
+    #   the next set of items.
+    #   @return [String]
+    #
+    # @!attribute [rw] code_coverages
+    #   An array of `CodeCoverage` objects that contain the results.
+    #   @return [Array<Types::CodeCoverage>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codebuild-2016-10-06/DescribeCodeCoveragesOutput AWS API Documentation
+    #
+    class DescribeCodeCoveragesOutput < Struct.new(
+      :next_token,
+      :code_coverages)
+      SENSITIVE = []
+      include Aws::Structure
+    end
 
     # @note When making an API call, you may pass DescribeTestCasesInput
     #   data as a hash:
@@ -1720,6 +2512,148 @@ module Aws::CodeBuild
     # @see http://docs.aws.amazon.com/goto/WebAPI/codebuild-2016-10-06/InvalidateProjectCacheOutput AWS API Documentation
     #
     class InvalidateProjectCacheOutput < Aws::EmptyStructure; end
+
+    # @note When making an API call, you may pass ListBuildBatchesForProjectInput
+    #   data as a hash:
+    #
+    #       {
+    #         project_name: "NonEmptyString",
+    #         filter: {
+    #           status: "SUCCEEDED", # accepts SUCCEEDED, FAILED, FAULT, TIMED_OUT, IN_PROGRESS, STOPPED
+    #         },
+    #         max_results: 1,
+    #         sort_order: "ASCENDING", # accepts ASCENDING, DESCENDING
+    #         next_token: "String",
+    #       }
+    #
+    # @!attribute [rw] project_name
+    #   The name of the project.
+    #   @return [String]
+    #
+    # @!attribute [rw] filter
+    #   A `BuildBatchFilter` object that specifies the filters for the
+    #   search.
+    #   @return [Types::BuildBatchFilter]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of results to return.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] sort_order
+    #   Specifies the sort order of the returned items. Valid values
+    #   include:
+    #
+    #   * `ASCENDING`\: List the batch build identifiers in ascending order
+    #     by identifier.
+    #
+    #   * `DESCENDING`\: List the batch build identifiers in descending
+    #     order by identifier.
+    #   @return [String]
+    #
+    # @!attribute [rw] next_token
+    #   The `nextToken` value returned from a previous call to
+    #   `ListBuildBatchesForProject`. This specifies the next item to
+    #   return. To return the beginning of the list, exclude this parameter.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codebuild-2016-10-06/ListBuildBatchesForProjectInput AWS API Documentation
+    #
+    class ListBuildBatchesForProjectInput < Struct.new(
+      :project_name,
+      :filter,
+      :max_results,
+      :sort_order,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] ids
+    #   An array of strings that contains the batch build identifiers.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] next_token
+    #   If there are more items to return, this contains a token that is
+    #   passed to a subsequent call to `ListBuildBatchesForProject` to
+    #   retrieve the next set of items.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codebuild-2016-10-06/ListBuildBatchesForProjectOutput AWS API Documentation
+    #
+    class ListBuildBatchesForProjectOutput < Struct.new(
+      :ids,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass ListBuildBatchesInput
+    #   data as a hash:
+    #
+    #       {
+    #         filter: {
+    #           status: "SUCCEEDED", # accepts SUCCEEDED, FAILED, FAULT, TIMED_OUT, IN_PROGRESS, STOPPED
+    #         },
+    #         max_results: 1,
+    #         sort_order: "ASCENDING", # accepts ASCENDING, DESCENDING
+    #         next_token: "String",
+    #       }
+    #
+    # @!attribute [rw] filter
+    #   A `BuildBatchFilter` object that specifies the filters for the
+    #   search.
+    #   @return [Types::BuildBatchFilter]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of results to return.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] sort_order
+    #   Specifies the sort order of the returned items. Valid values
+    #   include:
+    #
+    #   * `ASCENDING`\: List the batch build identifiers in ascending order
+    #     by identifier.
+    #
+    #   * `DESCENDING`\: List the batch build identifiers in descending
+    #     order by identifier.
+    #   @return [String]
+    #
+    # @!attribute [rw] next_token
+    #   The `nextToken` value returned from a previous call to
+    #   `ListBuildBatches`. This specifies the next item to return. To
+    #   return the beginning of the list, exclude this parameter.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codebuild-2016-10-06/ListBuildBatchesInput AWS API Documentation
+    #
+    class ListBuildBatchesInput < Struct.new(
+      :filter,
+      :max_results,
+      :sort_order,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] ids
+    #   An array of strings that contains the batch build identifiers.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] next_token
+    #   If there are more items to return, this contains a token that is
+    #   passed to a subsequent call to `ListBuildBatches` to retrieve the
+    #   next set of items.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codebuild-2016-10-06/ListBuildBatchesOutput AWS API Documentation
+    #
+    class ListBuildBatchesOutput < Struct.new(
+      :ids,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
 
     # @note When making an API call, you may pass ListBuildsForProjectInput
     #   data as a hash:
@@ -2646,6 +3580,11 @@ module Aws::CodeBuild
     #   of a file system created using Amazon Elastic File System.
     #   @return [Array<Types::ProjectFileSystemLocation>]
     #
+    # @!attribute [rw] build_batch_config
+    #   A ProjectBuildBatchConfig object that defines the batch build
+    #   options for the project.
+    #   @return [Types::ProjectBuildBatchConfig]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codebuild-2016-10-06/Project AWS API Documentation
     #
     class Project < Struct.new(
@@ -2671,7 +3610,8 @@ module Aws::CodeBuild
       :vpc_config,
       :badge,
       :logs_config,
-      :file_system_locations)
+      :file_system_locations,
+      :build_batch_config)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2872,6 +3812,51 @@ module Aws::CodeBuild
     class ProjectBadge < Struct.new(
       :badge_enabled,
       :badge_request_url)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains configuration information about a batch build project.
+    #
+    # @note When making an API call, you may pass ProjectBuildBatchConfig
+    #   data as a hash:
+    #
+    #       {
+    #         service_role: "NonEmptyString",
+    #         combine_artifacts: false,
+    #         restrictions: {
+    #           maximum_builds_allowed: 1,
+    #           compute_types_allowed: ["NonEmptyString"],
+    #         },
+    #         timeout_in_mins: 1,
+    #       }
+    #
+    # @!attribute [rw] service_role
+    #   Specifies the service role ARN for the batch build project.
+    #   @return [String]
+    #
+    # @!attribute [rw] combine_artifacts
+    #   Specifies if the build artifacts for the batch build should be
+    #   combined into a single artifact location.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] restrictions
+    #   A `BatchRestrictions` object that specifies the restrictions for the
+    #   batch build.
+    #   @return [Types::BatchRestrictions]
+    #
+    # @!attribute [rw] timeout_in_mins
+    #   Specifies the maximum amount of time, in minutes, that the batch
+    #   build must be completed in.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codebuild-2016-10-06/ProjectBuildBatchConfig AWS API Documentation
+    #
+    class ProjectBuildBatchConfig < Struct.new(
+      :service_role,
+      :combine_artifacts,
+      :restrictions,
+      :timeout_in_mins)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3545,6 +4530,14 @@ module Aws::CodeBuild
     #
     # @!attribute [rw] type
     #   The type of the report that was run.
+    #
+    #   CODE\_COVERAGE
+    #
+    #   : A code coverage report.
+    #
+    #   TEST
+    #
+    #   : A test report.
     #   @return [String]
     #
     # @!attribute [rw] name
@@ -3589,6 +4582,11 @@ module Aws::CodeBuild
     #   test report.
     #   @return [Types::TestReportSummary]
     #
+    # @!attribute [rw] code_coverage_summary
+    #   A `CodeCoverageReportSummary` object that contains a code coverage
+    #   summary for this report.
+    #   @return [Types::CodeCoverageReportSummary]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codebuild-2016-10-06/Report AWS API Documentation
     #
     class Report < Struct.new(
@@ -3602,7 +4600,8 @@ module Aws::CodeBuild
       :expired,
       :export_config,
       :truncated,
-      :test_summary)
+      :test_summary,
+      :code_coverage_summary)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3719,6 +4718,32 @@ module Aws::CodeBuild
       include Aws::Structure
     end
 
+    # Represents a resolved build artifact. A resolve artifact is an
+    # artifact that is built and deployed to the destination, such as Amazon
+    # Simple Storage Service (Amazon S3).
+    #
+    # @!attribute [rw] type
+    #   Specifies the type of artifact.
+    #   @return [String]
+    #
+    # @!attribute [rw] location
+    #   The location of the artifact.
+    #   @return [String]
+    #
+    # @!attribute [rw] identifier
+    #   The identifier of the artifact.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codebuild-2016-10-06/ResolvedArtifact AWS API Documentation
+    #
+    class ResolvedArtifact < Struct.new(
+      :type,
+      :location,
+      :identifier)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The specified AWS resource cannot be created, because an AWS resource
     # with the same settings already exists.
     #
@@ -3731,6 +4756,95 @@ module Aws::CodeBuild
     # @see http://docs.aws.amazon.com/goto/WebAPI/codebuild-2016-10-06/ResourceNotFoundException AWS API Documentation
     #
     class ResourceNotFoundException < Aws::EmptyStructure; end
+
+    # @note When making an API call, you may pass RetryBuildBatchInput
+    #   data as a hash:
+    #
+    #       {
+    #         id: "NonEmptyString",
+    #         idempotency_token: "String",
+    #         retry_type: "RETRY_ALL_BUILDS", # accepts RETRY_ALL_BUILDS, RETRY_FAILED_BUILDS
+    #       }
+    #
+    # @!attribute [rw] id
+    #   Specifies the identifier of the batch build to restart.
+    #   @return [String]
+    #
+    # @!attribute [rw] idempotency_token
+    #   A unique, case sensitive identifier you provide to ensure the
+    #   idempotency of the `RetryBuildBatch` request. The token is included
+    #   in the `RetryBuildBatch` request and is valid for five minutes. If
+    #   you repeat the `RetryBuildBatch` request with the same token, but
+    #   change a parameter, AWS CodeBuild returns a parameter mismatch
+    #   error.
+    #   @return [String]
+    #
+    # @!attribute [rw] retry_type
+    #   Specifies the type of retry to perform.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codebuild-2016-10-06/RetryBuildBatchInput AWS API Documentation
+    #
+    class RetryBuildBatchInput < Struct.new(
+      :id,
+      :idempotency_token,
+      :retry_type)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] build_batch
+    #   Contains information about a batch build.
+    #   @return [Types::BuildBatch]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codebuild-2016-10-06/RetryBuildBatchOutput AWS API Documentation
+    #
+    class RetryBuildBatchOutput < Struct.new(
+      :build_batch)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass RetryBuildInput
+    #   data as a hash:
+    #
+    #       {
+    #         id: "NonEmptyString",
+    #         idempotency_token: "String",
+    #       }
+    #
+    # @!attribute [rw] id
+    #   Specifies the identifier of the build to restart.
+    #   @return [String]
+    #
+    # @!attribute [rw] idempotency_token
+    #   A unique, case sensitive identifier you provide to ensure the
+    #   idempotency of the `RetryBuild` request. The token is included in
+    #   the `RetryBuild` request and is valid for five minutes. If you
+    #   repeat the `RetryBuild` request with the same token, but change a
+    #   parameter, AWS CodeBuild returns a parameter mismatch error.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codebuild-2016-10-06/RetryBuildInput AWS API Documentation
+    #
+    class RetryBuildInput < Struct.new(
+      :id,
+      :idempotency_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] build
+    #   Information about a build.
+    #   @return [Types::Build]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codebuild-2016-10-06/RetryBuildOutput AWS API Documentation
+    #
+    class RetryBuildOutput < Struct.new(
+      :build)
+      SENSITIVE = []
+      include Aws::Structure
+    end
 
     # Information about S3 logs for a build project.
     #
@@ -3890,6 +5004,415 @@ module Aws::CodeBuild
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass StartBuildBatchInput
+    #   data as a hash:
+    #
+    #       {
+    #         project_name: "NonEmptyString", # required
+    #         secondary_sources_override: [
+    #           {
+    #             type: "CODECOMMIT", # required, accepts CODECOMMIT, CODEPIPELINE, GITHUB, S3, BITBUCKET, GITHUB_ENTERPRISE, NO_SOURCE
+    #             location: "String",
+    #             git_clone_depth: 1,
+    #             git_submodules_config: {
+    #               fetch_submodules: false, # required
+    #             },
+    #             buildspec: "String",
+    #             auth: {
+    #               type: "OAUTH", # required, accepts OAUTH
+    #               resource: "String",
+    #             },
+    #             report_build_status: false,
+    #             build_status_config: {
+    #               context: "String",
+    #               target_url: "String",
+    #             },
+    #             insecure_ssl: false,
+    #             source_identifier: "String",
+    #           },
+    #         ],
+    #         secondary_sources_version_override: [
+    #           {
+    #             source_identifier: "String", # required
+    #             source_version: "String", # required
+    #           },
+    #         ],
+    #         source_version: "String",
+    #         artifacts_override: {
+    #           type: "CODEPIPELINE", # required, accepts CODEPIPELINE, S3, NO_ARTIFACTS
+    #           location: "String",
+    #           path: "String",
+    #           namespace_type: "NONE", # accepts NONE, BUILD_ID
+    #           name: "String",
+    #           packaging: "NONE", # accepts NONE, ZIP
+    #           override_artifact_name: false,
+    #           encryption_disabled: false,
+    #           artifact_identifier: "String",
+    #         },
+    #         secondary_artifacts_override: [
+    #           {
+    #             type: "CODEPIPELINE", # required, accepts CODEPIPELINE, S3, NO_ARTIFACTS
+    #             location: "String",
+    #             path: "String",
+    #             namespace_type: "NONE", # accepts NONE, BUILD_ID
+    #             name: "String",
+    #             packaging: "NONE", # accepts NONE, ZIP
+    #             override_artifact_name: false,
+    #             encryption_disabled: false,
+    #             artifact_identifier: "String",
+    #           },
+    #         ],
+    #         environment_variables_override: [
+    #           {
+    #             name: "NonEmptyString", # required
+    #             value: "String", # required
+    #             type: "PLAINTEXT", # accepts PLAINTEXT, PARAMETER_STORE, SECRETS_MANAGER
+    #           },
+    #         ],
+    #         source_type_override: "CODECOMMIT", # accepts CODECOMMIT, CODEPIPELINE, GITHUB, S3, BITBUCKET, GITHUB_ENTERPRISE, NO_SOURCE
+    #         source_location_override: "String",
+    #         source_auth_override: {
+    #           type: "OAUTH", # required, accepts OAUTH
+    #           resource: "String",
+    #         },
+    #         git_clone_depth_override: 1,
+    #         git_submodules_config_override: {
+    #           fetch_submodules: false, # required
+    #         },
+    #         buildspec_override: "String",
+    #         insecure_ssl_override: false,
+    #         report_build_batch_status_override: false,
+    #         environment_type_override: "WINDOWS_CONTAINER", # accepts WINDOWS_CONTAINER, LINUX_CONTAINER, LINUX_GPU_CONTAINER, ARM_CONTAINER, WINDOWS_SERVER_2019_CONTAINER
+    #         image_override: "NonEmptyString",
+    #         compute_type_override: "BUILD_GENERAL1_SMALL", # accepts BUILD_GENERAL1_SMALL, BUILD_GENERAL1_MEDIUM, BUILD_GENERAL1_LARGE, BUILD_GENERAL1_2XLARGE
+    #         certificate_override: "String",
+    #         cache_override: {
+    #           type: "NO_CACHE", # required, accepts NO_CACHE, S3, LOCAL
+    #           location: "String",
+    #           modes: ["LOCAL_DOCKER_LAYER_CACHE"], # accepts LOCAL_DOCKER_LAYER_CACHE, LOCAL_SOURCE_CACHE, LOCAL_CUSTOM_CACHE
+    #         },
+    #         service_role_override: "NonEmptyString",
+    #         privileged_mode_override: false,
+    #         build_timeout_in_minutes_override: 1,
+    #         queued_timeout_in_minutes_override: 1,
+    #         encryption_key_override: "NonEmptyString",
+    #         idempotency_token: "String",
+    #         logs_config_override: {
+    #           cloud_watch_logs: {
+    #             status: "ENABLED", # required, accepts ENABLED, DISABLED
+    #             group_name: "String",
+    #             stream_name: "String",
+    #           },
+    #           s3_logs: {
+    #             status: "ENABLED", # required, accepts ENABLED, DISABLED
+    #             location: "String",
+    #             encryption_disabled: false,
+    #           },
+    #         },
+    #         registry_credential_override: {
+    #           credential: "NonEmptyString", # required
+    #           credential_provider: "SECRETS_MANAGER", # required, accepts SECRETS_MANAGER
+    #         },
+    #         image_pull_credentials_type_override: "CODEBUILD", # accepts CODEBUILD, SERVICE_ROLE
+    #         build_batch_config_override: {
+    #           service_role: "NonEmptyString",
+    #           combine_artifacts: false,
+    #           restrictions: {
+    #             maximum_builds_allowed: 1,
+    #             compute_types_allowed: ["NonEmptyString"],
+    #           },
+    #           timeout_in_mins: 1,
+    #         },
+    #       }
+    #
+    # @!attribute [rw] project_name
+    #   The name of the project.
+    #   @return [String]
+    #
+    # @!attribute [rw] secondary_sources_override
+    #   An array of `ProjectSource` objects that override the secondary
+    #   sources defined in the batch build project.
+    #   @return [Array<Types::ProjectSource>]
+    #
+    # @!attribute [rw] secondary_sources_version_override
+    #   An array of `ProjectSourceVersion` objects that override the
+    #   secondary source versions in the batch build project.
+    #   @return [Array<Types::ProjectSourceVersion>]
+    #
+    # @!attribute [rw] source_version
+    #   The version of the batch build input to be built, for this build
+    #   only. If not specified, the latest version is used. If specified,
+    #   the contents depends on the source provider:
+    #
+    #   AWS CodeCommit
+    #
+    #   : The commit ID, branch, or Git tag to use.
+    #
+    #   GitHub
+    #
+    #   : The commit ID, pull request ID, branch name, or tag name that
+    #     corresponds to the version of the source code you want to build.
+    #     If a pull request ID is specified, it must use the format
+    #     `pr/pull-request-ID` (for example `pr/25`). If a branch name is
+    #     specified, the branch's HEAD commit ID is used. If not specified,
+    #     the default branch's HEAD commit ID is used.
+    #
+    #   Bitbucket
+    #
+    #   : The commit ID, branch name, or tag name that corresponds to the
+    #     version of the source code you want to build. If a branch name is
+    #     specified, the branch's HEAD commit ID is used. If not specified,
+    #     the default branch's HEAD commit ID is used.
+    #
+    #   Amazon Simple Storage Service (Amazon S3)
+    #
+    #   : The version ID of the object that represents the build input ZIP
+    #     file to use.
+    #
+    #   If `sourceVersion` is specified at the project level, then this
+    #   `sourceVersion` (at the build level) takes precedence.
+    #
+    #   For more information, see [Source Version Sample with CodeBuild][1]
+    #   in the *AWS CodeBuild User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/codebuild/latest/userguide/sample-source-version.html
+    #   @return [String]
+    #
+    # @!attribute [rw] artifacts_override
+    #   An array of `ProjectArtifacts` objects that contains information
+    #   about the build output artifact overrides for the build project.
+    #   @return [Types::ProjectArtifacts]
+    #
+    # @!attribute [rw] secondary_artifacts_override
+    #   An array of `ProjectArtifacts` objects that override the secondary
+    #   artifacts defined in the batch build project.
+    #   @return [Array<Types::ProjectArtifacts>]
+    #
+    # @!attribute [rw] environment_variables_override
+    #   An array of `EnvironmentVariable` objects that override, or add to,
+    #   the environment variables defined in the batch build project.
+    #   @return [Array<Types::EnvironmentVariable>]
+    #
+    # @!attribute [rw] source_type_override
+    #   The source input type that overrides the source input defined in the
+    #   batch build project.
+    #   @return [String]
+    #
+    # @!attribute [rw] source_location_override
+    #   A location that overrides, for this batch build, the source location
+    #   defined in the batch build project.
+    #   @return [String]
+    #
+    # @!attribute [rw] source_auth_override
+    #   A `SourceAuth` object that overrides the one defined in the batch
+    #   build project. This override applies only if the build project's
+    #   source is BitBucket or GitHub.
+    #   @return [Types::SourceAuth]
+    #
+    # @!attribute [rw] git_clone_depth_override
+    #   The user-defined depth of history, with a minimum value of 0, that
+    #   overrides, for this batch build only, any previous depth of history
+    #   defined in the batch build project.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] git_submodules_config_override
+    #   A `GitSubmodulesConfig` object that overrides the Git submodules
+    #   configuration for this batch build.
+    #   @return [Types::GitSubmodulesConfig]
+    #
+    # @!attribute [rw] buildspec_override
+    #   A buildspec file declaration that overrides, for this build only,
+    #   the latest one already defined in the build project.
+    #
+    #   If this value is set, it can be either an inline buildspec
+    #   definition, the path to an alternate buildspec file relative to the
+    #   value of the built-in `CODEBUILD_SRC_DIR` environment variable, or
+    #   the path to an S3 bucket. The bucket must be in the same AWS Region
+    #   as the build project. Specify the buildspec file using its ARN (for
+    #   example, `arn:aws:s3:::my-codebuild-sample2/buildspec.yml`). If this
+    #   value is not provided or is set to an empty string, the source code
+    #   must contain a buildspec file in its root directory. For more
+    #   information, see [Buildspec File Name and Storage Location][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/codebuild/latest/userguide/build-spec-ref.html#build-spec-ref-name-storage
+    #   @return [String]
+    #
+    # @!attribute [rw] insecure_ssl_override
+    #   Enable this flag to override the insecure SSL setting that is
+    #   specified in the batch build project. The insecure SSL setting
+    #   determines whether to ignore SSL warnings while connecting to the
+    #   project source code. This override applies only if the build's
+    #   source is GitHub Enterprise.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] report_build_batch_status_override
+    #   Set to `true` to report to your source provider the status of a
+    #   batch build's start and completion. If you use this option with a
+    #   source provider other than GitHub, GitHub Enterprise, or Bitbucket,
+    #   an `invalidInputException` is thrown.
+    #
+    #   <note markdown="1"> The status of a build triggered by a webhook is always reported to
+    #   your source provider.
+    #
+    #    </note>
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] environment_type_override
+    #   A container type for this batch build that overrides the one
+    #   specified in the batch build project.
+    #   @return [String]
+    #
+    # @!attribute [rw] image_override
+    #   The name of an image for this batch build that overrides the one
+    #   specified in the batch build project.
+    #   @return [String]
+    #
+    # @!attribute [rw] compute_type_override
+    #   The name of a compute type for this batch build that overrides the
+    #   one specified in the batch build project.
+    #   @return [String]
+    #
+    # @!attribute [rw] certificate_override
+    #   The name of a certificate for this batch build that overrides the
+    #   one specified in the batch build project.
+    #   @return [String]
+    #
+    # @!attribute [rw] cache_override
+    #   A `ProjectCache` object that specifies cache overrides.
+    #   @return [Types::ProjectCache]
+    #
+    # @!attribute [rw] service_role_override
+    #   The name of a service role for this batch build that overrides the
+    #   one specified in the batch build project.
+    #   @return [String]
+    #
+    # @!attribute [rw] privileged_mode_override
+    #   Enable this flag to override privileged mode in the batch build
+    #   project.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] build_timeout_in_minutes_override
+    #   Overrides the build timeout specified in the batch build project.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] queued_timeout_in_minutes_override
+    #   The number of minutes a batch build is allowed to be queued before
+    #   it times out.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] encryption_key_override
+    #   The AWS Key Management Service (AWS KMS) customer master key (CMK)
+    #   that overrides the one specified in the batch build project. The CMK
+    #   key encrypts the build output artifacts.
+    #
+    #   <note markdown="1"> You can use a cross-account KMS key to encrypt the build output
+    #   artifacts if your service role has permission to that key.
+    #
+    #    </note>
+    #
+    #   You can specify either the Amazon Resource Name (ARN) of the CMK or,
+    #   if available, the CMK's alias (using the format `alias/alias-name
+    #   `).
+    #   @return [String]
+    #
+    # @!attribute [rw] idempotency_token
+    #   A unique, case sensitive identifier you provide to ensure the
+    #   idempotency of the `StartBuildBatch` request. The token is included
+    #   in the `StartBuildBatch` request and is valid for five minutes. If
+    #   you repeat the `StartBuildBatch` request with the same token, but
+    #   change a parameter, AWS CodeBuild returns a parameter mismatch
+    #   error.
+    #   @return [String]
+    #
+    # @!attribute [rw] logs_config_override
+    #   A `LogsConfig` object that override the log settings defined in the
+    #   batch build project.
+    #   @return [Types::LogsConfig]
+    #
+    # @!attribute [rw] registry_credential_override
+    #   A `RegistryCredential` object that overrides credentials for access
+    #   to a private registry.
+    #   @return [Types::RegistryCredential]
+    #
+    # @!attribute [rw] image_pull_credentials_type_override
+    #   The type of credentials AWS CodeBuild uses to pull images in your
+    #   batch build. There are two valid values:
+    #
+    #   CODEBUILD
+    #
+    #   : Specifies that AWS CodeBuild uses its own credentials. This
+    #     requires that you modify your ECR repository policy to trust AWS
+    #     CodeBuild's service principal.
+    #
+    #   SERVICE\_ROLE
+    #
+    #   : Specifies that AWS CodeBuild uses your build project's service
+    #     role.
+    #
+    #   When using a cross-account or private registry image, you must use
+    #   `SERVICE_ROLE` credentials. When using an AWS CodeBuild curated
+    #   image, you must use `CODEBUILD` credentials.
+    #   @return [String]
+    #
+    # @!attribute [rw] build_batch_config_override
+    #   A `BuildBatchConfigOverride` object that contains batch build
+    #   configuration overrides.
+    #   @return [Types::ProjectBuildBatchConfig]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codebuild-2016-10-06/StartBuildBatchInput AWS API Documentation
+    #
+    class StartBuildBatchInput < Struct.new(
+      :project_name,
+      :secondary_sources_override,
+      :secondary_sources_version_override,
+      :source_version,
+      :artifacts_override,
+      :secondary_artifacts_override,
+      :environment_variables_override,
+      :source_type_override,
+      :source_location_override,
+      :source_auth_override,
+      :git_clone_depth_override,
+      :git_submodules_config_override,
+      :buildspec_override,
+      :insecure_ssl_override,
+      :report_build_batch_status_override,
+      :environment_type_override,
+      :image_override,
+      :compute_type_override,
+      :certificate_override,
+      :cache_override,
+      :service_role_override,
+      :privileged_mode_override,
+      :build_timeout_in_minutes_override,
+      :queued_timeout_in_minutes_override,
+      :encryption_key_override,
+      :idempotency_token,
+      :logs_config_override,
+      :registry_credential_override,
+      :image_pull_credentials_type_override,
+      :build_batch_config_override)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] build_batch
+    #   A `BuildBatch` object that contains information about the batch
+    #   build.
+    #   @return [Types::BuildBatch]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codebuild-2016-10-06/StartBuildBatchOutput AWS API Documentation
+    #
+    class StartBuildBatchOutput < Struct.new(
+      :build_batch)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass StartBuildInput
     #   data as a hash:
     #
@@ -4023,27 +5546,34 @@ module Aws::CodeBuild
     #   @return [Array<Types::ProjectSourceVersion>]
     #
     # @!attribute [rw] source_version
-    #   A version of the build input to be built, for this build only. If
-    #   not specified, the latest version is used. If specified, must be one
-    #   of:
+    #   The version of the build input to be built, for this build only. If
+    #   not specified, the latest version is used. If specified, the
+    #   contents depends on the source provider:
     #
-    #   * For AWS CodeCommit: the commit ID, branch, or Git tag to use.
+    #   AWS CodeCommit
     #
-    #   * For GitHub: the commit ID, pull request ID, branch name, or tag
-    #     name that corresponds to the version of the source code you want
-    #     to build. If a pull request ID is specified, it must use the
-    #     format `pr/pull-request-ID` (for example `pr/25`). If a branch
-    #     name is specified, the branch's HEAD commit ID is used. If not
-    #     specified, the default branch's HEAD commit ID is used.
+    #   : The commit ID, branch, or Git tag to use.
     #
-    #   * For Bitbucket: the commit ID, branch name, or tag name that
+    #   GitHub
+    #
+    #   : The commit ID, pull request ID, branch name, or tag name that
     #     corresponds to the version of the source code you want to build.
-    #     If a branch name is specified, the branch's HEAD commit ID is
-    #     used. If not specified, the default branch's HEAD commit ID is
-    #     used.
+    #     If a pull request ID is specified, it must use the format
+    #     `pr/pull-request-ID` (for example `pr/25`). If a branch name is
+    #     specified, the branch's HEAD commit ID is used. If not specified,
+    #     the default branch's HEAD commit ID is used.
     #
-    #   * For Amazon Simple Storage Service (Amazon S3): the version ID of
-    #     the object that represents the build input ZIP file to use.
+    #   Bitbucket
+    #
+    #   : The commit ID, branch name, or tag name that corresponds to the
+    #     version of the source code you want to build. If a branch name is
+    #     specified, the branch's HEAD commit ID is used. If not specified,
+    #     the default branch's HEAD commit ID is used.
+    #
+    #   Amazon Simple Storage Service (Amazon S3)
+    #
+    #   : The version ID of the object that represents the build input ZIP
+    #     file to use.
     #
     #   If `sourceVersion` is specified at the project level, then this
     #   `sourceVersion` (at the build level) takes precedence.
@@ -4224,16 +5754,20 @@ module Aws::CodeBuild
     #   The type of credentials AWS CodeBuild uses to pull images in your
     #   build. There are two valid values:
     #
-    #   * `CODEBUILD` specifies that AWS CodeBuild uses its own credentials.
-    #     This requires that you modify your ECR repository policy to trust
-    #     AWS CodeBuild's service principal.
+    #   CODEBUILD
     #
-    #   * `SERVICE_ROLE` specifies that AWS CodeBuild uses your build
-    #     project's service role.
+    #   : Specifies that AWS CodeBuild uses its own credentials. This
+    #     requires that you modify your ECR repository policy to trust AWS
+    #     CodeBuild's service principal.
+    #
+    #   SERVICE\_ROLE
+    #
+    #   : Specifies that AWS CodeBuild uses your build project's service
+    #     role.
     #
     #   When using a cross-account or private registry image, you must use
-    #   SERVICE\_ROLE credentials. When using an AWS CodeBuild curated
-    #   image, you must use CODEBUILD credentials.
+    #   `SERVICE_ROLE` credentials. When using an AWS CodeBuild curated
+    #   image, you must use `CODEBUILD` credentials.
     #   @return [String]
     #
     # @!attribute [rw] debug_session_enabled
@@ -4291,6 +5825,37 @@ module Aws::CodeBuild
     #
     class StartBuildOutput < Struct.new(
       :build)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass StopBuildBatchInput
+    #   data as a hash:
+    #
+    #       {
+    #         id: "NonEmptyString", # required
+    #       }
+    #
+    # @!attribute [rw] id
+    #   The identifier of the batch build to stop.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codebuild-2016-10-06/StopBuildBatchInput AWS API Documentation
+    #
+    class StopBuildBatchInput < Struct.new(
+      :id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] build_batch
+    #   Contains information about a batch build.
+    #   @return [Types::BuildBatch]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codebuild-2016-10-06/StopBuildBatchOutput AWS API Documentation
+    #
+    class StopBuildBatchOutput < Struct.new(
+      :build_batch)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4603,6 +6168,15 @@ module Aws::CodeBuild
     #             mount_options: "String",
     #           },
     #         ],
+    #         build_batch_config: {
+    #           service_role: "NonEmptyString",
+    #           combine_artifacts: false,
+    #           restrictions: {
+    #             maximum_builds_allowed: 1,
+    #             compute_types_allowed: ["NonEmptyString"],
+    #           },
+    #           timeout_in_mins: 1,
+    #         },
     #       }
     #
     # @!attribute [rw] name
@@ -4747,6 +6321,10 @@ module Aws::CodeBuild
     #   of a file system created using Amazon Elastic File System.
     #   @return [Array<Types::ProjectFileSystemLocation>]
     #
+    # @!attribute [rw] build_batch_config
+    #   Contains configuration information about a batch build project.
+    #   @return [Types::ProjectBuildBatchConfig]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codebuild-2016-10-06/UpdateProjectInput AWS API Documentation
     #
     class UpdateProjectInput < Struct.new(
@@ -4768,7 +6346,8 @@ module Aws::CodeBuild
       :vpc_config,
       :badge_enabled,
       :logs_config,
-      :file_system_locations)
+      :file_system_locations,
+      :build_batch_config)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4866,6 +6445,7 @@ module Aws::CodeBuild
     #             },
     #           ],
     #         ],
+    #         build_type: "BUILD", # accepts BUILD, BUILD_BATCH
     #       }
     #
     # @!attribute [rw] project_name
@@ -4896,13 +6476,18 @@ module Aws::CodeBuild
     #   least one `EVENT` `WebhookFilter`.
     #   @return [Array<Array<Types::WebhookFilter>>]
     #
+    # @!attribute [rw] build_type
+    #   Specifies the type of build this webhook will trigger.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codebuild-2016-10-06/UpdateWebhookInput AWS API Documentation
     #
     class UpdateWebhookInput < Struct.new(
       :project_name,
       :branch_filter,
       :rotate_secret,
-      :filter_groups)
+      :filter_groups,
+      :build_type)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4994,6 +6579,10 @@ module Aws::CodeBuild
     #   its filters must pass.
     #   @return [Array<Array<Types::WebhookFilter>>]
     #
+    # @!attribute [rw] build_type
+    #   Specifies the type of build this webhook will trigger.
+    #   @return [String]
+    #
     # @!attribute [rw] last_modified_secret
     #   A timestamp that indicates the last time a repository's secret
     #   token was modified.
@@ -5007,6 +6596,7 @@ module Aws::CodeBuild
       :secret,
       :branch_filter,
       :filter_groups,
+      :build_type,
       :last_modified_secret)
       SENSITIVE = []
       include Aws::Structure

@@ -78,7 +78,7 @@ module Aws::CloudWatch
     #
     #   If you specify `ChildrenOfAlarmName`, you cannot specify any other
     #   parameters in the request except for `MaxRecords` and `NextToken`. If
-    #   you do so, you will receive a validation error.
+    #   you do so, you receive a validation error.
     #
     #   <note markdown="1"> Only the `Alarm Name`, `ARN`, `StateValue`
     #   (OK/ALARM/INSUFFICIENT\_DATA), and `StateUpdatedTimestamp` information
@@ -98,7 +98,7 @@ module Aws::CloudWatch
     #
     #   If you specify `ParentsOfAlarmName`, you cannot specify any other
     #   parameters in the request except for `MaxRecords` and `NextToken`. If
-    #   you do so, you will receive a validation error.
+    #   you do so, you receive a validation error.
     #
     #   <note markdown="1"> Only the Alarm Name and ARN are returned by this operation when you
     #   use this parameter. To get complete information about these alarms,
@@ -176,7 +176,7 @@ module Aws::CloudWatch
     #
     #   If you specify `ChildrenOfAlarmName`, you cannot specify any other
     #   parameters in the request except for `MaxRecords` and `NextToken`. If
-    #   you do so, you will receive a validation error.
+    #   you do so, you receive a validation error.
     #
     #   <note markdown="1"> Only the `Alarm Name`, `ARN`, `StateValue`
     #   (OK/ALARM/INSUFFICIENT\_DATA), and `StateUpdatedTimestamp` information
@@ -196,7 +196,7 @@ module Aws::CloudWatch
     #
     #   If you specify `ParentsOfAlarmName`, you cannot specify any other
     #   parameters in the request except for `MaxRecords` and `NextToken`. If
-    #   you do so, you will receive a validation error.
+    #   you do so, you receive a validation error.
     #
     #   <note markdown="1"> Only the Alarm Name and ARN are returned by this operation when you
     #   use this parameter. To get complete information about these alarms,
@@ -253,6 +253,7 @@ module Aws::CloudWatch
     #         value: "DimensionValue",
     #       },
     #     ],
+    #     recently_active: "PT3H", # accepts PT3H
     #   })
     # @param [Hash] options ({})
     # @option options [String] :namespace
@@ -261,6 +262,15 @@ module Aws::CloudWatch
     #   The name of the metric to filter against.
     # @option options [Array<Types::DimensionFilter>] :dimensions
     #   The dimensions to filter against.
+    # @option options [String] :recently_active
+    #   To filter the results to show only metrics that have had data points
+    #   published in the past three hours, specify this parameter with a value
+    #   of `PT3H`. This is the only valid value for this parameter.
+    #
+    #   The results that are returned are an approximation of the value you
+    #   specify. There is a low probability that the returned results include
+    #   metrics with last published data as much as 40 minutes more than the
+    #   specified time interval.
     # @return [Metric::Collection]
     def metrics(options = {})
       batches = Enumerator.new do |y|

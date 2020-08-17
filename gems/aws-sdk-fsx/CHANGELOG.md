@@ -1,6 +1,26 @@
 Unreleased Changes
 ------------------
 
+1.27.0 (2020-08-12)
+------------------
+
+* Feature - This release adds the capability to create persistent file systems for throughput-intensive workloads using Hard Disk Drive (HDD) storage and an optional read-only Solid-State Drive (SSD) cache.
+
+1.26.0 (2020-08-05)
+------------------
+
+* Feature - Documentation updates for StorageCapacity input value format.
+
+1.25.0 (2020-07-24)
+------------------
+
+* Feature - Documentation update for FSx for Lustre
+
+1.24.0 (2020-07-23)
+------------------
+
+* Feature - Adds support for AutoImport, a new FSx for Lustre feature that allows customers to configure their FSx file system to automatically update its contents when new objects are added to S3 or existing objects are overwritten.
+
 1.23.0 (2020-06-24)
 ------------------
 

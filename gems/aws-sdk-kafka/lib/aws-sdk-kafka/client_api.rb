@@ -91,6 +91,8 @@ module Aws::Kafka
     OpenMonitoringInfo = Shapes::StructureShape.new(name: 'OpenMonitoringInfo')
     Prometheus = Shapes::StructureShape.new(name: 'Prometheus')
     PrometheusInfo = Shapes::StructureShape.new(name: 'PrometheusInfo')
+    RebootBrokerRequest = Shapes::StructureShape.new(name: 'RebootBrokerRequest')
+    RebootBrokerResponse = Shapes::StructureShape.new(name: 'RebootBrokerResponse')
     S3 = Shapes::StructureShape.new(name: 'S3')
     ServiceUnavailableException = Shapes::StructureShape.new(name: 'ServiceUnavailableException')
     StateInfo = Shapes::StructureShape.new(name: 'StateInfo')
@@ -469,6 +471,14 @@ module Aws::Kafka
     PrometheusInfo.add_member(:node_exporter, Shapes::ShapeRef.new(shape: NodeExporterInfo, location_name: "nodeExporter"))
     PrometheusInfo.struct_class = Types::PrometheusInfo
 
+    RebootBrokerRequest.add_member(:broker_ids, Shapes::ShapeRef.new(shape: __listOf__string, required: true, location_name: "brokerIds"))
+    RebootBrokerRequest.add_member(:cluster_arn, Shapes::ShapeRef.new(shape: __string, required: true, location: "uri", location_name: "clusterArn"))
+    RebootBrokerRequest.struct_class = Types::RebootBrokerRequest
+
+    RebootBrokerResponse.add_member(:cluster_arn, Shapes::ShapeRef.new(shape: __string, location_name: "clusterArn"))
+    RebootBrokerResponse.add_member(:cluster_operation_arn, Shapes::ShapeRef.new(shape: __string, location_name: "clusterOperationArn"))
+    RebootBrokerResponse.struct_class = Types::RebootBrokerResponse
+
     S3.add_member(:bucket, Shapes::ShapeRef.new(shape: __string, location_name: "bucket"))
     S3.add_member(:enabled, Shapes::ShapeRef.new(shape: __boolean, required: true, location_name: "enabled"))
     S3.add_member(:prefix, Shapes::ShapeRef.new(shape: __string, location_name: "prefix"))
@@ -845,6 +855,21 @@ module Aws::Kafka
         o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerErrorException)
+      end)
+
+      api.add_operation(:reboot_broker, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "RebootBroker"
+        o.http_method = "PUT"
+        o.http_request_uri = "/v1/clusters/{clusterArn}/reboot-broker"
+        o.input = Shapes::ShapeRef.new(shape: RebootBrokerRequest)
+        o.output = Shapes::ShapeRef.new(shape: RebootBrokerResponse)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerErrorException)
+        o.errors << Shapes::ShapeRef.new(shape: ForbiddenException)
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
       end)
 
       api.add_operation(:tag_resource, Seahorse::Model::Operation.new.tap do |o|

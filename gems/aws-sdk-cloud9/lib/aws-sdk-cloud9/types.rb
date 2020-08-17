@@ -16,6 +16,12 @@ module Aws::Cloud9
     #
     class BadRequestException < Aws::EmptyStructure; end
 
+    # A concurrent access issue occurred.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloud9-2017-09-23/ConcurrentAccessException AWS API Documentation
+    #
+    class ConcurrentAccessException < Aws::EmptyStructure; end
+
     # A conflict occurred.
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cloud9-2017-09-23/ConflictException AWS API Documentation
@@ -39,6 +45,7 @@ module Aws::Cloud9
     #             value: "TagValue", # required
     #           },
     #         ],
+    #         connection_type: "CONNECT_SSH", # accepts CONNECT_SSH, CONNECT_SSM
     #       }
     #
     # @!attribute [rw] name
@@ -89,6 +96,11 @@ module Aws::Cloud9
     #   Cloud9 development environment.
     #   @return [Array<Types::Tag>]
     #
+    # @!attribute [rw] connection_type
+    #   The connection type used for connecting to an Amazon EC2
+    #   environment.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cloud9-2017-09-23/CreateEnvironmentEC2Request AWS API Documentation
     #
     class CreateEnvironmentEC2Request < Struct.new(
@@ -99,7 +111,8 @@ module Aws::Cloud9
       :subnet_id,
       :automatic_stop_time_minutes,
       :owner_arn,
-      :tags)
+      :tags,
+      :connection_type)
       SENSITIVE = [:description]
       include Aws::Structure
     end
@@ -405,6 +418,11 @@ module Aws::Cloud9
     #   * `ssh`\: Your own server connects to the environment.
     #   @return [String]
     #
+    # @!attribute [rw] connection_type
+    #   The connection type used for connecting to an Amazon EC2
+    #   environment.
+    #   @return [String]
+    #
     # @!attribute [rw] arn
     #   The Amazon Resource Name (ARN) of the environment.
     #   @return [String]
@@ -424,6 +442,7 @@ module Aws::Cloud9
       :name,
       :description,
       :type,
+      :connection_type,
       :arn,
       :owner_arn,
       :lifecycle)

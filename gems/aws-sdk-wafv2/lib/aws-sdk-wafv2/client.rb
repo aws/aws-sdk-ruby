@@ -2112,6 +2112,7 @@ module Aws::WAFV2
     #   resp.logging_configuration.redacted_fields #=> Array
     #   resp.logging_configuration.redacted_fields[0].single_header.name #=> String
     #   resp.logging_configuration.redacted_fields[0].single_query_argument.name #=> String
+    #   resp.logging_configuration.managed_by_firewall_manager #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/wafv2-2019-07-29/GetLoggingConfiguration AWS API Documentation
     #
@@ -3025,6 +3026,7 @@ module Aws::WAFV2
     #   resp.logging_configurations[0].redacted_fields #=> Array
     #   resp.logging_configurations[0].redacted_fields[0].single_header.name #=> String
     #   resp.logging_configurations[0].redacted_fields[0].single_query_argument.name #=> String
+    #   resp.logging_configurations[0].managed_by_firewall_manager #=> Boolean
     #   resp.next_marker #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/wafv2-2019-07-29/ListLoggingConfigurations AWS API Documentation
@@ -3442,6 +3444,7 @@ module Aws::WAFV2
     #           },
     #         },
     #       ],
+    #       managed_by_firewall_manager: false,
     #     },
     #   })
     #
@@ -3453,6 +3456,7 @@ module Aws::WAFV2
     #   resp.logging_configuration.redacted_fields #=> Array
     #   resp.logging_configuration.redacted_fields[0].single_header.name #=> String
     #   resp.logging_configuration.redacted_fields[0].single_query_argument.name #=> String
+    #   resp.logging_configuration.managed_by_firewall_manager #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/wafv2-2019-07-29/PutLoggingConfiguration AWS API Documentation
     #
@@ -4479,7 +4483,7 @@ module Aws::WAFV2
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-wafv2'
-      context[:gem_version] = '1.9.0'
+      context[:gem_version] = '1.10.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -2295,6 +2295,8 @@ module Aws::SSM
     #   * {Types::DescribeAssociationExecutionTargetsResult#association_execution_targets #association_execution_targets} => Array&lt;Types::AssociationExecutionTarget&gt;
     #   * {Types::DescribeAssociationExecutionTargetsResult#next_token #next_token} => String
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.describe_association_execution_targets({
@@ -2365,6 +2367,8 @@ module Aws::SSM
     #   * {Types::DescribeAssociationExecutionsResult#association_executions #association_executions} => Array&lt;Types::AssociationExecution&gt;
     #   * {Types::DescribeAssociationExecutionsResult#next_token #next_token} => String
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.describe_association_executions({
@@ -2421,6 +2425,8 @@ module Aws::SSM
     #
     #   * {Types::DescribeAutomationExecutionsResult#automation_execution_metadata_list #automation_execution_metadata_list} => Array&lt;Types::AutomationExecutionMetadata&gt;
     #   * {Types::DescribeAutomationExecutionsResult#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     # @example Request syntax with placeholder values
     #
@@ -2510,6 +2516,8 @@ module Aws::SSM
     #   * {Types::DescribeAutomationStepExecutionsResult#step_executions #step_executions} => Array&lt;Types::StepExecution&gt;
     #   * {Types::DescribeAutomationStepExecutionsResult#next_token #next_token} => String
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.describe_automation_step_executions({
@@ -2596,6 +2604,8 @@ module Aws::SSM
     #
     #   * {Types::DescribeAvailablePatchesResult#patches #patches} => Array&lt;Types::Patch&gt;
     #   * {Types::DescribeAvailablePatchesResult#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     # @example Request syntax with placeholder values
     #
@@ -2767,6 +2777,8 @@ module Aws::SSM
     #   * {Types::DescribeEffectiveInstanceAssociationsResult#associations #associations} => Array&lt;Types::InstanceAssociation&gt;
     #   * {Types::DescribeEffectiveInstanceAssociationsResult#next_token #next_token} => String
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.describe_effective_instance_associations({
@@ -2811,6 +2823,8 @@ module Aws::SSM
     #
     #   * {Types::DescribeEffectivePatchesForPatchBaselineResult#effective_patches #effective_patches} => Array&lt;Types::EffectivePatch&gt;
     #   * {Types::DescribeEffectivePatchesForPatchBaselineResult#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     # @example Request syntax with placeholder values
     #
@@ -2868,6 +2882,8 @@ module Aws::SSM
     #
     #   * {Types::DescribeInstanceAssociationsStatusResult#instance_association_status_infos #instance_association_status_infos} => Array&lt;Types::InstanceAssociationStatusInfo&gt;
     #   * {Types::DescribeInstanceAssociationsStatusResult#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     # @example Request syntax with placeholder values
     #
@@ -3023,6 +3039,8 @@ module Aws::SSM
     #   * {Types::DescribeInstancePatchStatesResult#instance_patch_states #instance_patch_states} => Array&lt;Types::InstancePatchState&gt;
     #   * {Types::DescribeInstancePatchStatesResult#next_token #next_token} => String
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.describe_instance_patch_states({
@@ -3091,6 +3109,8 @@ module Aws::SSM
     #
     #   * {Types::DescribeInstancePatchStatesForPatchGroupResult#instance_patch_states #instance_patch_states} => Array&lt;Types::InstancePatchState&gt;
     #   * {Types::DescribeInstancePatchStatesForPatchGroupResult#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     # @example Request syntax with placeholder values
     #
@@ -3165,6 +3185,8 @@ module Aws::SSM
     #   * {Types::DescribeInstancePatchesResult#patches #patches} => Array&lt;Types::PatchComplianceData&gt;
     #   * {Types::DescribeInstancePatchesResult#next_token #next_token} => String
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.describe_instance_patches({
@@ -3218,6 +3240,8 @@ module Aws::SSM
     #
     #   * {Types::DescribeInventoryDeletionsResult#inventory_deletions #inventory_deletions} => Array&lt;Types::InventoryDeletionStatusItem&gt;
     #   * {Types::DescribeInventoryDeletionsResult#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     # @example Request syntax with placeholder values
     #
@@ -3281,6 +3305,8 @@ module Aws::SSM
     #
     #   * {Types::DescribeMaintenanceWindowExecutionTaskInvocationsResult#window_execution_task_invocation_identities #window_execution_task_invocation_identities} => Array&lt;Types::MaintenanceWindowExecutionTaskInvocationIdentity&gt;
     #   * {Types::DescribeMaintenanceWindowExecutionTaskInvocationsResult#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     # @example Request syntax with placeholder values
     #
@@ -3348,6 +3374,8 @@ module Aws::SSM
     #
     #   * {Types::DescribeMaintenanceWindowExecutionTasksResult#window_execution_task_identities #window_execution_task_identities} => Array&lt;Types::MaintenanceWindowExecutionTaskIdentity&gt;
     #   * {Types::DescribeMaintenanceWindowExecutionTasksResult#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     # @example Request syntax with placeholder values
     #
@@ -3417,6 +3445,8 @@ module Aws::SSM
     #   * {Types::DescribeMaintenanceWindowExecutionsResult#window_executions #window_executions} => Array&lt;Types::MaintenanceWindowExecution&gt;
     #   * {Types::DescribeMaintenanceWindowExecutionsResult#next_token #next_token} => String
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.describe_maintenance_window_executions({
@@ -3483,6 +3513,8 @@ module Aws::SSM
     #   * {Types::DescribeMaintenanceWindowScheduleResult#scheduled_window_executions #scheduled_window_executions} => Array&lt;Types::ScheduledWindowExecution&gt;
     #   * {Types::DescribeMaintenanceWindowScheduleResult#next_token #next_token} => String
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.describe_maintenance_window_schedule({
@@ -3545,6 +3577,8 @@ module Aws::SSM
     #   * {Types::DescribeMaintenanceWindowTargetsResult#targets #targets} => Array&lt;Types::MaintenanceWindowTarget&gt;
     #   * {Types::DescribeMaintenanceWindowTargetsResult#next_token #next_token} => String
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.describe_maintenance_window_targets({
@@ -3606,6 +3640,8 @@ module Aws::SSM
     #
     #   * {Types::DescribeMaintenanceWindowTasksResult#tasks #tasks} => Array&lt;Types::MaintenanceWindowTask&gt;
     #   * {Types::DescribeMaintenanceWindowTasksResult#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     # @example Request syntax with placeholder values
     #
@@ -3676,6 +3712,8 @@ module Aws::SSM
     #   * {Types::DescribeMaintenanceWindowsResult#window_identities #window_identities} => Array&lt;Types::MaintenanceWindowIdentity&gt;
     #   * {Types::DescribeMaintenanceWindowsResult#next_token #next_token} => String
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.describe_maintenance_windows({
@@ -3738,6 +3776,8 @@ module Aws::SSM
     #
     #   * {Types::DescribeMaintenanceWindowsForTargetResult#window_identities #window_identities} => Array&lt;Types::MaintenanceWindowIdentityForTarget&gt;
     #   * {Types::DescribeMaintenanceWindowsForTargetResult#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     # @example Request syntax with placeholder values
     #
@@ -3857,6 +3897,8 @@ module Aws::SSM
     #
     #   * {Types::DescribeOpsItemsResponse#next_token #next_token} => String
     #   * {Types::DescribeOpsItemsResponse#ops_item_summaries #ops_item_summaries} => Array&lt;Types::OpsItemSummary&gt;
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     # @example Request syntax with placeholder values
     #
@@ -4005,6 +4047,8 @@ module Aws::SSM
     #   * {Types::DescribePatchBaselinesResult#baseline_identities #baseline_identities} => Array&lt;Types::PatchBaselineIdentity&gt;
     #   * {Types::DescribePatchBaselinesResult#next_token #next_token} => String
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.describe_patch_baselines({
@@ -4091,6 +4135,22 @@ module Aws::SSM
     #   One or more filters. Use a filter to return a more specific list of
     #   results.
     #
+    #   For `DescribePatchGroups`,valid filter keys include the following:
+    #
+    #   * `NAME_PREFIX`\: The name of the patch group. Wildcards (*) are
+    #     accepted.
+    #
+    #   * `OPERATING_SYSTEM`\: The supported operating system type to return
+    #     results for. For valid operating system values, see
+    #     GetDefaultPatchBaselineRequest$OperatingSystem in
+    #     CreatePatchBaseline.
+    #
+    #     Examples:
+    #
+    #     * `--filters Key=NAME_PREFIX,Values=MyPatchGroup*`
+    #
+    #     * `--filters Key=OPERATING_SYSTEM,Values=AMAZON_LINUX_2`
+    #
     # @option params [String] :next_token
     #   The token for the next set of items to return. (You received this
     #   token from a previous call.)
@@ -4099,6 +4159,8 @@ module Aws::SSM
     #
     #   * {Types::DescribePatchGroupsResult#mappings #mappings} => Array&lt;Types::PatchGroupPatchBaselineMapping&gt;
     #   * {Types::DescribePatchGroupsResult#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     # @example Request syntax with placeholder values
     #
@@ -4197,6 +4259,8 @@ module Aws::SSM
     #   * {Types::DescribePatchPropertiesResult#properties #properties} => Array&lt;Hash&lt;String,String&gt;&gt;
     #   * {Types::DescribePatchPropertiesResult#next_token #next_token} => String
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.describe_patch_properties({
@@ -4247,6 +4311,8 @@ module Aws::SSM
     #
     #   * {Types::DescribeSessionsResponse#sessions #sessions} => Array&lt;Types::Session&gt;
     #   * {Types::DescribeSessionsResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     # @example Request syntax with placeholder values
     #
@@ -4476,6 +4542,9 @@ module Aws::SSM
     #   If the document contains only one plugin, the name can be omitted and
     #   the details will be returned.
     #
+    #   Plugin names are also referred to as step names in Systems Manager
+    #   documents.
+    #
     # @return [Types::GetCommandInvocationResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::GetCommandInvocationResult#command_id #command_id} => String
@@ -4524,6 +4593,11 @@ module Aws::SSM
     #   resp.standard_error_url #=> String
     #   resp.cloud_watch_output_config.cloud_watch_log_group_name #=> String
     #   resp.cloud_watch_output_config.cloud_watch_output_enabled #=> Boolean
+    #
+    #
+    # The following waiters are defined for this operation (see {Client#wait_until} for detailed usage):
+    #
+    #   * command_executed
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/GetCommandInvocation AWS API Documentation
     #
@@ -4739,6 +4813,8 @@ module Aws::SSM
     #   * {Types::GetInventoryResult#entities #entities} => Array&lt;Types::InventoryResultEntity&gt;
     #   * {Types::GetInventoryResult#next_token #next_token} => String
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.get_inventory({
@@ -4829,6 +4905,8 @@ module Aws::SSM
     #
     #   * {Types::GetInventorySchemaResult#schemas #schemas} => Array&lt;Types::InventoryItemSchema&gt;
     #   * {Types::GetInventorySchemaResult#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     # @example Request syntax with placeholder values
     #
@@ -5257,6 +5335,8 @@ module Aws::SSM
     #
     #   * {Types::GetOpsSummaryResult#entities #entities} => Array&lt;Types::OpsEntity&gt;
     #   * {Types::GetOpsSummaryResult#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     # @example Request syntax with placeholder values
     #
@@ -5820,6 +5900,8 @@ module Aws::SSM
     #   * {Types::ListAssociationVersionsResult#association_versions #association_versions} => Array&lt;Types::AssociationVersionInfo&gt;
     #   * {Types::ListAssociationVersionsResult#next_token #next_token} => String
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_association_versions({
@@ -6038,6 +6120,12 @@ module Aws::SSM
     # @option params [String] :instance_id
     #   (Optional) Lists commands issued against this instance ID.
     #
+    #   <note markdown="1"> You can't specify an instance ID in the same command that you specify
+    #   `Status` = `Pending`. This is because the command has not reached the
+    #   instance yet.
+    #
+    #    </note>
+    #
     # @option params [Integer] :max_results
     #   (Optional) The maximum number of items to return for this call. The
     #   call also returns a token that you can specify in a subsequent call to
@@ -6152,6 +6240,8 @@ module Aws::SSM
     #   * {Types::ListComplianceItemsResult#compliance_items #compliance_items} => Array&lt;Types::ComplianceItem&gt;
     #   * {Types::ListComplianceItemsResult#next_token #next_token} => String
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_compliance_items({
@@ -6217,6 +6307,8 @@ module Aws::SSM
     #   * {Types::ListComplianceSummariesResult#compliance_summary_items #compliance_summary_items} => Array&lt;Types::ComplianceSummaryItem&gt;
     #   * {Types::ListComplianceSummariesResult#next_token #next_token} => String
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_compliance_summaries({
@@ -6279,6 +6371,8 @@ module Aws::SSM
     #
     #   * {Types::ListDocumentVersionsResult#document_versions #document_versions} => Array&lt;Types::DocumentVersionInfo&gt;
     #   * {Types::ListDocumentVersionsResult#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     # @example Request syntax with placeholder values
     #
@@ -6480,6 +6574,8 @@ module Aws::SSM
     #   * {Types::ListResourceComplianceSummariesResult#resource_compliance_summary_items #resource_compliance_summary_items} => Array&lt;Types::ResourceComplianceSummaryItem&gt;
     #   * {Types::ListResourceComplianceSummariesResult#next_token #next_token} => String
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_resource_compliance_summaries({
@@ -6562,6 +6658,8 @@ module Aws::SSM
     #
     #   * {Types::ListResourceDataSyncResult#resource_data_sync_items #resource_data_sync_items} => Array&lt;Types::ResourceDataSyncItem&gt;
     #   * {Types::ListResourceDataSyncResult#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     # @example Request syntax with placeholder values
     #
@@ -7699,23 +7797,37 @@ module Aws::SSM
     # Runs commands on one or more managed instances.
     #
     # @option params [Array<String>] :instance_ids
-    #   The instance IDs where the command should run. You can specify a
-    #   maximum of 50 IDs. If you prefer not to list individual instance IDs,
-    #   you can instead send commands to a fleet of instances using the
-    #   Targets parameter, which accepts EC2 tags. For more information about
-    #   how to use targets, see [Using targets and rate controls to send
-    #   commands to a fleet][1] in the *AWS Systems Manager User Guide*.
+    #   The IDs of the instances where the command should run. Specifying
+    #   instance IDs is most useful when you are targeting a limited number of
+    #   instances, though you can specify up to 50 IDs.
+    #
+    #   To target a larger number of instances, or if you prefer not to list
+    #   individual instance IDs, we recommend using the `Targets` option
+    #   instead. Using `Targets`, which accepts tag key-value pairs to
+    #   identify the instances to send commands to, you can a send command to
+    #   tens, hundreds, or thousands of instances at once.
+    #
+    #   For more information about how to use targets, see [Using targets and
+    #   rate controls to send commands to a fleet][1] in the *AWS Systems
+    #   Manager User Guide*.
     #
     #
     #
     #   [1]: https://docs.aws.amazon.com/systems-manager/latest/userguide/send-commands-multiple.html
     #
     # @option params [Array<Types::Target>] :targets
-    #   (Optional) An array of search criteria that targets instances using a
-    #   Key,Value combination that you specify. Targets is required if you
-    #   don't provide one or more instance IDs in the call. For more
-    #   information about how to use targets, see [Sending commands to a
-    #   fleet][1] in the *AWS Systems Manager User Guide*.
+    #   An array of search criteria that targets instances using a `Key,Value`
+    #   combination that you specify. Specifying targets is most useful when
+    #   you want to send a command to a large number of instances at once.
+    #   Using `Targets`, which accepts tag key-value pairs to identify
+    #   instances, you can send a command to tens, hundreds, or thousands of
+    #   instances at once.
+    #
+    #   To send a command to a smaller number of instances, you can use the
+    #   `InstanceIds` option instead.
+    #
+    #   For more information about how to use targets, see [Sending commands
+    #   to a fleet][1] in the *AWS Systems Manager User Guide*.
     #
     #
     #
@@ -9579,14 +9691,127 @@ module Aws::SSM
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-ssm'
-      context[:gem_version] = '1.84.0'
+      context[:gem_version] = '1.86.0'
       Seahorse::Client::Request.new(handlers, context)
+    end
+
+    # Polls an API operation until a resource enters a desired state.
+    #
+    # ## Basic Usage
+    #
+    # A waiter will call an API operation until:
+    #
+    # * It is successful
+    # * It enters a terminal state
+    # * It makes the maximum number of attempts
+    #
+    # In between attempts, the waiter will sleep.
+    #
+    #     # polls in a loop, sleeping between attempts
+    #     client.wait_until(waiter_name, params)
+    #
+    # ## Configuration
+    #
+    # You can configure the maximum number of polling attempts, and the
+    # delay (in seconds) between each polling attempt. You can pass
+    # configuration as the final arguments hash.
+    #
+    #     # poll for ~25 seconds
+    #     client.wait_until(waiter_name, params, {
+    #       max_attempts: 5,
+    #       delay: 5,
+    #     })
+    #
+    # ## Callbacks
+    #
+    # You can be notified before each polling attempt and before each
+    # delay. If you throw `:success` or `:failure` from these callbacks,
+    # it will terminate the waiter.
+    #
+    #     started_at = Time.now
+    #     client.wait_until(waiter_name, params, {
+    #
+    #       # disable max attempts
+    #       max_attempts: nil,
+    #
+    #       # poll for 1 hour, instead of a number of attempts
+    #       before_wait: -> (attempts, response) do
+    #         throw :failure if Time.now - started_at > 3600
+    #       end
+    #     })
+    #
+    # ## Handling Errors
+    #
+    # When a waiter is unsuccessful, it will raise an error.
+    # All of the failure errors extend from
+    # {Aws::Waiters::Errors::WaiterFailed}.
+    #
+    #     begin
+    #       client.wait_until(...)
+    #     rescue Aws::Waiters::Errors::WaiterFailed
+    #       # resource did not enter the desired state in time
+    #     end
+    #
+    # ## Valid Waiters
+    #
+    # The following table lists the valid waiter names, the operations they call,
+    # and the default `:delay` and `:max_attempts` values.
+    #
+    # | waiter_name      | params                          | :delay   | :max_attempts |
+    # | ---------------- | ------------------------------- | -------- | ------------- |
+    # | command_executed | {Client#get_command_invocation} | 5        | 20            |
+    #
+    # @raise [Errors::FailureStateError] Raised when the waiter terminates
+    #   because the waiter has entered a state that it will not transition
+    #   out of, preventing success.
+    #
+    # @raise [Errors::TooManyAttemptsError] Raised when the configured
+    #   maximum number of attempts have been made, and the waiter is not
+    #   yet successful.
+    #
+    # @raise [Errors::UnexpectedError] Raised when an error is encounted
+    #   while polling for a resource that is not expected.
+    #
+    # @raise [Errors::NoSuchWaiterError] Raised when you request to wait
+    #   for an unknown state.
+    #
+    # @return [Boolean] Returns `true` if the waiter was successful.
+    # @param [Symbol] waiter_name
+    # @param [Hash] params ({})
+    # @param [Hash] options ({})
+    # @option options [Integer] :max_attempts
+    # @option options [Integer] :delay
+    # @option options [Proc] :before_attempt
+    # @option options [Proc] :before_wait
+    def wait_until(waiter_name, params = {}, options = {})
+      w = waiter(waiter_name, options)
+      yield(w.waiter) if block_given? # deprecated
+      w.wait(params)
     end
 
     # @api private
     # @deprecated
     def waiter_names
-      []
+      waiters.keys
+    end
+
+    private
+
+    # @param [Symbol] waiter_name
+    # @param [Hash] options ({})
+    def waiter(waiter_name, options = {})
+      waiter_class = waiters[waiter_name]
+      if waiter_class
+        waiter_class.new(options.merge(client: self))
+      else
+        raise Aws::Waiters::Errors::NoSuchWaiterError.new(waiter_name, waiters.keys)
+      end
+    end
+
+    def waiters
+      {
+        command_executed: Waiters::CommandExecuted
+      }
     end
 
     class << self

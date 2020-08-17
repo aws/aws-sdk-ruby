@@ -49,6 +49,10 @@ module Aws::Health
     #
     # @!attribute [rw] tags
     #   A map of entity tags attached to the affected entity.
+    #
+    #   <note markdown="1"> Currently, the `tags` property isn't supported.
+    #
+    #    </note>
     #   @return [Hash<String,String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/health-2016-08-04/AffectedEntity AWS API Documentation
@@ -66,9 +70,15 @@ module Aws::Health
       include Aws::Structure
     end
 
-    # EnableHealthServiceAccessForOrganization is already in progress. Wait
-    # for the action to complete before trying again. To get the current
-    # status, use the DescribeHealthServiceStatusForOrganization operation.
+    # [EnableHealthServiceAccessForOrganization][1] is already in progress.
+    # Wait for the action to complete before trying again. To get the
+    # current status, use the
+    # [DescribeHealthServiceStatusForOrganization][2] operation.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/health/latest/APIReference/API_EnableHealthServiceAccessForOrganization.html
+    # [2]: https://docs.aws.amazon.com/health/latest/APIReference/API_DescribeHealthServiceStatusForOrganization.html
     #
     # @!attribute [rw] message
     #   @return [String]
@@ -81,13 +91,18 @@ module Aws::Health
       include Aws::Structure
     end
 
-    # A range of dates and times that is used by the EventFilter and
-    # EntityFilter objects. If `from` is set and `to` is set: match items
-    # where the timestamp (`startTime`, `endTime`, or `lastUpdatedTime`) is
-    # between `from` and `to` inclusive. If `from` is set and `to` is not
-    # set: match items where the timestamp value is equal to or after
-    # `from`. If `from` is not set and `to` is set: match items where the
-    # timestamp value is equal to or before `to`.
+    # A range of dates and times that is used by the [EventFilter][1] and
+    # [EntityFilter][2] objects. If `from` is set and `to` is set: match
+    # items where the timestamp (`startTime`, `endTime`, or
+    # `lastUpdatedTime`) is between `from` and `to` inclusive. If `from` is
+    # set and `to` is not set: match items where the timestamp value is
+    # equal to or after `from`. If `from` is not set and `to` is set: match
+    # items where the timestamp value is equal to or before `to`.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/health/latest/APIReference/API_EventFilter.html
+    # [2]: https://docs.aws.amazon.com/health/latest/APIReference/API_EntityFilter.html
     #
     # @note When making an API call, you may pass DateTimeRange
     #   data as a hash:
@@ -158,6 +173,20 @@ module Aws::Health
     #   @return [Array<String>]
     #
     # @!attribute [rw] event_scope_code
+    #   This parameter specifies if the AWS Health event is a public AWS
+    #   service event or an account-specific event.
+    #
+    #   * If the `eventScopeCode` value is `PUBLIC`, then the
+    #     `affectedAccounts` value is always empty.
+    #
+    #   * If the `eventScopeCode` value is `ACCOUNT_SPECIFIC`, then the
+    #     `affectedAccounts` value lists the affected AWS accounts in your
+    #     organization. For example, if an event affects a service such as
+    #     Amazon Elastic Compute Cloud and you have AWS accounts that use
+    #     that service, those account IDs appear in the response.
+    #
+    #   * If the `eventScopeCode` value is `NONE`, then the `eventArn` that
+    #     you specified in the request is invalid or doesn't exist.
     #   @return [String]
     #
     # @!attribute [rw] next_token
@@ -230,7 +259,7 @@ module Aws::Health
     # @!attribute [rw] entities
     #   A JSON set of elements including the `awsAccountId` and its
     #   `entityArn`, `entityValue` and its `entityArn`, `lastUpdatedTime`,
-    #   `statusCode`, and `tags`.
+    #   and `statusCode`.
     #   @return [Array<Types::AffectedEntity>]
     #
     # @!attribute [rw] failed_set
@@ -833,7 +862,11 @@ module Aws::Health
     end
 
     # The number of entities that are affected by one or more events.
-    # Returned by the DescribeEntityAggregates operation.
+    # Returned by the [DescribeEntityAggregates][1] operation.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/health/latest/APIReference/API_DescribeEntityAggregates.html
     #
     # @!attribute [rw] event_arn
     #   The unique identifier for the event. Format:
@@ -843,7 +876,7 @@ module Aws::Health
     #   @return [String]
     #
     # @!attribute [rw] count
-    #   The number entities that match the criteria for the specified
+    #   The number of entities that match the criteria for the specified
     #   events.
     #   @return [Integer]
     #
@@ -856,8 +889,12 @@ module Aws::Health
       include Aws::Structure
     end
 
-    # The values to use to filter results from the DescribeAffectedEntities
+    # The values to use to filter results from the [EntityFilter][1]
     # operation.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/health/latest/APIReference/API_EntityFilter.html
     #
     # @note When making an API call, you may pass EntityFilter
     #   data as a hash:
@@ -901,6 +938,10 @@ module Aws::Health
     #
     # @!attribute [rw] tags
     #   A map of entity tags attached to the affected entity.
+    #
+    #   <note markdown="1"> Currently, the `tags` property isn't supported.
+    #
+    #    </note>
     #   @return [Array<Hash<String,String>>]
     #
     # @!attribute [rw] status_codes
@@ -922,6 +963,27 @@ module Aws::Health
     end
 
     # Summary information about an AWS Health event.
+    #
+    # AWS Health events can be public or account-specific:
+    #
+    # * *Public events* might be service events that are not specific to an
+    #   AWS account. For example, if there is an issue with an AWS Region,
+    #   AWS Health provides information about the event, even if you don't
+    #   use services or resources in that Region.
+    #
+    # * *Account-specific* events are specific to either your AWS account or
+    #   an account in your organization. For example, if there's an issue
+    #   with Amazon Elastic Compute Cloud in a Region that you use, AWS
+    #   Health provides information about the event and the affected
+    #   resources in the account.
+    #
+    # You can determine if an event is public or account-specific by using
+    # the `eventScopeCode` parameter. For more information, see
+    # [eventScopeCode][1].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/health/latest/APIReference/API_Event.html#AWSHealth-Type-Event-eventScopeCode
     #
     # @!attribute [rw] arn
     #   The unique identifier for the event. Format:
@@ -972,6 +1034,20 @@ module Aws::Health
     #   @return [String]
     #
     # @!attribute [rw] event_scope_code
+    #   This parameter specifies if the AWS Health event is a public AWS
+    #   service event or an account-specific event.
+    #
+    #   * If the `eventScopeCode` value is `PUBLIC`, then the
+    #     `affectedAccounts` value is always empty.
+    #
+    #   * If the `eventScopeCode` value is `ACCOUNT_SPECIFIC`, then the
+    #     `affectedAccounts` value lists the affected AWS accounts in your
+    #     organization. For example, if an event affects a service such as
+    #     Amazon Elastic Compute Cloud and you have AWS accounts that use
+    #     that service, those account IDs appear in the response.
+    #
+    #   * If the `eventScopeCode` value is `NONE`, then the `eventArn` that
+    #     you specified in the request is invalid or doesn't exist.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/health-2016-08-04/Event AWS API Documentation
@@ -993,8 +1069,13 @@ module Aws::Health
     end
 
     # The values used to filter results from the
-    # DescribeEventDetailsForOrganization and
-    # DescribeAffectedEntitiesForOrganization operations.
+    # [DescribeEventDetailsForOrganization][1] and
+    # [DescribeAffectedEntitiesForOrganization][2] operations.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/health/latest/APIReference/API_DescribeEventDetailsForOrganization.html
+    # [2]: https://docs.aws.amazon.com/health/latest/APIReference/API_DescribeAffectedEntitiesForOrganization.html
     #
     # @note When making an API call, you may pass EventAccountFilter
     #   data as a hash:
@@ -1026,7 +1107,11 @@ module Aws::Health
     end
 
     # The number of events of each issue type. Returned by the
-    # DescribeEventAggregates operation.
+    # [DescribeEventAggregates][1] operation.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/health/latest/APIReference/API_DescribeEventAggregates.html
     #
     # @!attribute [rw] aggregate_value
     #   The issue type for the associated count.
@@ -1046,7 +1131,11 @@ module Aws::Health
     end
 
     # The detailed description of the event. Included in the information
-    # returned by the DescribeEventDetails operation.
+    # returned by the [DescribeEventDetails][1] operation.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/health/latest/APIReference/API_DescribeEventDetails.html
     #
     # @!attribute [rw] latest_description
     #   The most recent description of the event.
@@ -1060,9 +1149,15 @@ module Aws::Health
       include Aws::Structure
     end
 
-    # Detailed information about an event. A combination of an Event object,
-    # an EventDescription object, and additional metadata about the event.
-    # Returned by the DescribeEventDetails operation.
+    # Detailed information about an event. A combination of an [Event][1]
+    # object, an [EventDescription][2] object, and additional metadata about
+    # the event. Returned by the [DescribeEventDetails][3] operation.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/health/latest/APIReference/API_Event.html
+    # [2]: https://docs.aws.amazon.com/health/latest/APIReference/API_EventDescription.html
+    # [3]: https://docs.aws.amazon.com/health/latest/APIReference/API_DescribeEventDetails.html
     #
     # @!attribute [rw] event
     #   Summary information about the event.
@@ -1086,8 +1181,12 @@ module Aws::Health
       include Aws::Structure
     end
 
-    # Error information returned when a DescribeEventDetails operation
+    # Error information returned when a [DescribeEventDetails][1] operation
     # cannot find a specified event.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/health/latest/APIReference/API_DescribeEventDetails.html
     #
     # @!attribute [rw] event_arn
     #   The unique identifier for the event. Format:
@@ -1114,8 +1213,13 @@ module Aws::Health
       include Aws::Structure
     end
 
-    # The values to use to filter results from the DescribeEvents and
-    # DescribeEventAggregates operations.
+    # The values to use to filter results from the [DescribeEvents][1] and
+    # [DescribeEventAggregates][2] operations.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/health/latest/APIReference/API_DescribeEvents.html
+    # [2]: https://docs.aws.amazon.com/health/latest/APIReference/API_DescribeEventAggregates.html
     #
     # @note When making an API call, you may pass EventFilter
     #   data as a hash:
@@ -1207,6 +1311,10 @@ module Aws::Health
     #
     # @!attribute [rw] tags
     #   A map of entity tags attached to the affected entity.
+    #
+    #   <note markdown="1"> Currently, the `tags` property isn't supported.
+    #
+    #    </note>
     #   @return [Array<Hash<String,String>>]
     #
     # @!attribute [rw] event_status_codes
@@ -1264,8 +1372,12 @@ module Aws::Health
       include Aws::Structure
     end
 
-    # The values to use to filter results from the DescribeEventTypes
+    # The values to use to filter results from the [DescribeEventTypes][1]
     # operation.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/health/latest/APIReference/API_DescribeEventTypes.html
     #
     # @note When making an API call, you may pass EventTypeFilter
     #   data as a hash:
@@ -1314,8 +1426,12 @@ module Aws::Health
     end
 
     # Error information returned when a
-    # DescribeAffectedEntitiesForOrganization operation cannot find or
+    # [DescribeAffectedEntitiesForOrganization][1] operation cannot find or
     # process a specific entity.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/health/latest/APIReference/API_DescribeAffectedEntitiesForOrganization.html
     #
     # @!attribute [rw] aws_account_id
     #   The 12-digit AWS account numbers that contains the affected
@@ -1351,7 +1467,11 @@ module Aws::Health
     end
 
     # Summary information about an event, returned by the
-    # DescribeEventsForOrganization operation.
+    # [DescribeEventsForOrganization][1] operation.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/health/latest/APIReference/API_DescribeEventsForOrganization.html
     #
     # @!attribute [rw] arn
     #   The unique identifier for the event. Format:
@@ -1376,6 +1496,20 @@ module Aws::Health
     #   @return [String]
     #
     # @!attribute [rw] event_scope_code
+    #   This parameter specifies if the AWS Health event is a public AWS
+    #   service event or an account-specific event.
+    #
+    #   * If the `eventScopeCode` value is `PUBLIC`, then the
+    #     `affectedAccounts` value is always empty.
+    #
+    #   * If the `eventScopeCode` value is `ACCOUNT_SPECIFIC`, then the
+    #     `affectedAccounts` value lists the affected AWS accounts in your
+    #     organization. For example, if an event affects a service such as
+    #     Amazon Elastic Compute Cloud and you have AWS accounts that use
+    #     that service, those account IDs appear in the response.
+    #
+    #   * If the `eventScopeCode` value is `NONE`, then the `eventArn` that
+    #     you specified in the request is invalid or doesn't exist.
     #   @return [String]
     #
     # @!attribute [rw] region
@@ -1416,9 +1550,16 @@ module Aws::Health
       include Aws::Structure
     end
 
-    # Detailed information about an event. A combination of an Event object,
-    # an EventDescription object, and additional metadata about the event.
-    # Returned by the DescribeEventDetailsForOrganization operation.
+    # Detailed information about an event. A combination of an [Event][1]
+    # object, an [EventDescription][2] object, and additional metadata about
+    # the event. Returned by the [DescribeEventDetailsForOrganization][3]
+    # operation.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/health/latest/APIReference/API_Event.html
+    # [2]: https://docs.aws.amazon.com/health/latest/APIReference/API_EventDescription.html
+    # [3]: https://docs.aws.amazon.com/health/latest/APIReference/API_DescribeEventDetailsForOrganization.html
     #
     # @!attribute [rw] aws_account_id
     #   The 12-digit AWS account numbers that contains the affected
@@ -1427,11 +1568,36 @@ module Aws::Health
     #
     # @!attribute [rw] event
     #   Summary information about an AWS Health event.
+    #
+    #   AWS Health events can be public or account-specific:
+    #
+    #   * *Public events* might be service events that are not specific to
+    #     an AWS account. For example, if there is an issue with an AWS
+    #     Region, AWS Health provides information about the event, even if
+    #     you don't use services or resources in that Region.
+    #
+    #   * *Account-specific* events are specific to either your AWS account
+    #     or an account in your organization. For example, if there's an
+    #     issue with Amazon Elastic Compute Cloud in a Region that you use,
+    #     AWS Health provides information about the event and the affected
+    #     resources in the account.
+    #
+    #   You can determine if an event is public or account-specific by using
+    #   the `eventScopeCode` parameter. For more information, see
+    #   [eventScopeCode][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/health/latest/APIReference/API_Event.html#AWSHealth-Type-Event-eventScopeCode
     #   @return [Types::Event]
     #
     # @!attribute [rw] event_description
     #   The detailed description of the event. Included in the information
-    #   returned by the DescribeEventDetails operation.
+    #   returned by the [DescribeEventDetails][1] operation.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/health/latest/APIReference/API_DescribeEventDetails.html
     #   @return [Types::EventDescription]
     #
     # @!attribute [rw] event_metadata
@@ -1449,13 +1615,22 @@ module Aws::Health
       include Aws::Structure
     end
 
-    # Error information returned when a DescribeEventDetailsForOrganization
-    # operation cannot find a specified event.
+    # Error information returned when a
+    # [DescribeEventDetailsForOrganization][1] operation cannot find a
+    # specified event.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/health/latest/APIReference/API_DescribeEventDetailsForOrganization.html
     #
     # @!attribute [rw] aws_account_id
     #   Error information returned when a
-    #   DescribeEventDetailsForOrganization operation cannot find a
+    #   [DescribeEventDetailsForOrganization][1] operation cannot find a
     #   specified event.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/health/latest/APIReference/API_DescribeEventDetailsForOrganization.html
     #   @return [String]
     #
     # @!attribute [rw] event_arn
@@ -1484,8 +1659,12 @@ module Aws::Health
       include Aws::Structure
     end
 
-    # The values to filter results from the DescribeEventsForOrganization
-    # operation.
+    # The values to filter results from the
+    # [DescribeEventsForOrganization][1] operation.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/health/latest/APIReference/API_DescribeEventsForOrganization.html
     #
     # @note When making an API call, you may pass OrganizationEventFilter
     #   data as a hash:
@@ -1533,37 +1712,52 @@ module Aws::Health
     #   @return [Array<String>]
     #
     # @!attribute [rw] start_time
-    #   A range of dates and times that is used by the EventFilter and
-    #   EntityFilter objects. If `from` is set and `to` is set: match items
-    #   where the timestamp (`startTime`, `endTime`, or `lastUpdatedTime`)
-    #   is between `from` and `to` inclusive. If `from` is set and `to` is
-    #   not set: match items where the timestamp value is equal to or after
-    #   `from`. If `from` is not set and `to` is set: match items where the
-    #   timestamp value is equal to or before `to`.
+    #   A range of dates and times that is used by the [EventFilter][1] and
+    #   [EntityFilter][2] objects. If `from` is set and `to` is set: match
+    #   items where the timestamp (`startTime`, `endTime`, or
+    #   `lastUpdatedTime`) is between `from` and `to` inclusive. If `from`
+    #   is set and `to` is not set: match items where the timestamp value is
+    #   equal to or after `from`. If `from` is not set and `to` is set:
+    #   match items where the timestamp value is equal to or before `to`.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/health/latest/APIReference/API_EventFilter.html
+    #   [2]: https://docs.aws.amazon.com/health/latest/APIReference/API_EntityFilter.html
     #   @return [Types::DateTimeRange]
     #
     # @!attribute [rw] end_time
-    #   A range of dates and times that is used by the EventFilter and
-    #   EntityFilter objects. If `from` is set and `to` is set: match items
-    #   where the timestamp (`startTime`, `endTime`, or `lastUpdatedTime`)
-    #   is between `from` and `to` inclusive. If `from` is set and `to` is
-    #   not set: match items where the timestamp value is equal to or after
-    #   `from`. If `from` is not set and `to` is set: match items where the
-    #   timestamp value is equal to or before `to`.
+    #   A range of dates and times that is used by the [EventFilter][1] and
+    #   [EntityFilter][2] objects. If `from` is set and `to` is set: match
+    #   items where the timestamp (`startTime`, `endTime`, or
+    #   `lastUpdatedTime`) is between `from` and `to` inclusive. If `from`
+    #   is set and `to` is not set: match items where the timestamp value is
+    #   equal to or after `from`. If `from` is not set and `to` is set:
+    #   match items where the timestamp value is equal to or before `to`.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/health/latest/APIReference/API_EventFilter.html
+    #   [2]: https://docs.aws.amazon.com/health/latest/APIReference/API_EntityFilter.html
     #   @return [Types::DateTimeRange]
     #
     # @!attribute [rw] last_updated_time
-    #   A range of dates and times that is used by the EventFilter and
-    #   EntityFilter objects. If `from` is set and `to` is set: match items
-    #   where the timestamp (`startTime`, `endTime`, or `lastUpdatedTime`)
-    #   is between `from` and `to` inclusive. If `from` is set and `to` is
-    #   not set: match items where the timestamp value is equal to or after
-    #   `from`. If `from` is not set and `to` is set: match items where the
-    #   timestamp value is equal to or before `to`.
+    #   A range of dates and times that is used by the [EventFilter][1] and
+    #   [EntityFilter][2] objects. If `from` is set and `to` is set: match
+    #   items where the timestamp (`startTime`, `endTime`, or
+    #   `lastUpdatedTime`) is between `from` and `to` inclusive. If `from`
+    #   is set and `to` is not set: match items where the timestamp value is
+    #   equal to or after `from`. If `from` is not set and `to` is set:
+    #   match items where the timestamp value is equal to or before `to`.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/health/latest/APIReference/API_EventFilter.html
+    #   [2]: https://docs.aws.amazon.com/health/latest/APIReference/API_EntityFilter.html
     #   @return [Types::DateTimeRange]
     #
     # @!attribute [rw] entity_arns
-    #   REPLACEME
+    #   A list of entity ARNs (unique identifiers).
     #   @return [Array<String>]
     #
     # @!attribute [rw] entity_values
@@ -1572,7 +1766,8 @@ module Aws::Health
     #   @return [Array<String>]
     #
     # @!attribute [rw] event_type_categories
-    #   REPLACEME
+    #   A list of event type category codes (issue, scheduledChange, or
+    #   accountNotification).
     #   @return [Array<String>]
     #
     # @!attribute [rw] event_status_codes

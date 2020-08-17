@@ -379,9 +379,9 @@ module Aws::Kinesis
     #
     # You specify and control the number of shards that a stream is composed
     # of. Each shard can support reads up to five transactions per second,
-    # up to a maximum data read total of 2 MB per second. Each shard can
+    # up to a maximum data read total of 2 MiB per second. Each shard can
     # support writes up to 1,000 records per second, up to a maximum data
-    # write total of 1 MB per second. If the amount of data input increases
+    # write total of 1 MiB per second. If the amount of data input increases
     # or decreases, you can add or remove shards.
     #
     # The stream name identifies the stream. The name is scoped to the AWS
@@ -415,8 +415,8 @@ module Aws::Kinesis
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/kinesis/latest/dev/service-sizes-and-limits.html
-    # [2]: http://docs.aws.amazon.com/general/latest/gr/aws_service_limits.html
+    # [1]: https://docs.aws.amazon.com/kinesis/latest/dev/service-sizes-and-limits.html
+    # [2]: https://docs.aws.amazon.com/general/latest/gr/aws_service_limits.html
     #
     # @option params [required, String] :stream_name
     #   A name to identify the stream. The stream name is scoped to the AWS
@@ -429,8 +429,6 @@ module Aws::Kinesis
     #   The number of shards that the stream will use. The throughput of the
     #   stream is a function of the number of shards; more shards are required
     #   for greater provisioned throughput.
-    #
-    #   DefaultShardLimit;
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -539,8 +537,7 @@ module Aws::Kinesis
     # all the consumers that are currently registered with a given data
     # stream. The description of a consumer contains its name and ARN.
     #
-    # This operation has a limit of five transactions per second per
-    # account.
+    # This operation has a limit of five transactions per second per stream.
     #
     # @option params [String] :stream_arn
     #   The ARN of the Kinesis data stream that the consumer is registered
@@ -630,7 +627,7 @@ module Aws::Kinesis
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/kinesis/latest/dev/kinesis-using-sdk-java-retrieve-shards.html
+    # [1]: https://docs.aws.amazon.com/kinesis/latest/dev/kinesis-using-sdk-java-retrieve-shards.html
     #
     # @option params [required, String] :stream_name
     #   The name of the stream to describe.
@@ -703,7 +700,7 @@ module Aws::Kinesis
     # operation to get a list of the descriptions of all the consumers that
     # are currently registered with a given data stream.
     #
-    # This operation has a limit of 20 transactions per second per account.
+    # This operation has a limit of 20 transactions per second per stream.
     #
     # @option params [String] :stream_arn
     #   The ARN of the Kinesis data stream that the consumer is registered
@@ -756,6 +753,9 @@ module Aws::Kinesis
     # The information returned includes the stream name, Amazon Resource
     # Name (ARN), status, record retention period, approximate creation
     # time, monitoring, encryption details, and open shard count.
+    #
+    # DescribeStreamSummary has a limit of 20 transactions per second per
+    # account.
     #
     # @option params [required, String] :stream_name
     #   The name of the stream to describe.
@@ -828,7 +828,7 @@ module Aws::Kinesis
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/kinesis/latest/dev/monitoring-with-cloudwatch.html
+    #   [1]: https://docs.aws.amazon.com/kinesis/latest/dev/monitoring-with-cloudwatch.html
     #
     # @return [Types::EnhancedMonitoringOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -894,7 +894,7 @@ module Aws::Kinesis
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/kinesis/latest/dev/monitoring-with-cloudwatch.html
+    #   [1]: https://docs.aws.amazon.com/kinesis/latest/dev/monitoring-with-cloudwatch.html
     #
     # @return [Types::EnhancedMonitoringOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -985,13 +985,12 @@ module Aws::Kinesis
     # always increasing. For example, records in a shard or across a stream
     # might have time stamps that are out of order.
     #
-    # This operation has a limit of five transactions per second per
-    # account.
+    # This operation has a limit of five transactions per second per shard.
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/kinesis/latest/dev/service-sizes-and-limits.html
-    # [2]: http://docs.aws.amazon.com/kinesis/latest/dev/monitoring.html
+    # [1]: https://docs.aws.amazon.com/kinesis/latest/dev/service-sizes-and-limits.html
+    # [2]: https://docs.aws.amazon.com/kinesis/latest/dev/monitoring.html
     #
     # @option params [required, String] :shard_iterator
     #   The position in the shard from which you want to start sequentially
@@ -1001,13 +1000,14 @@ module Aws::Kinesis
     # @option params [Integer] :limit
     #   The maximum number of records to return. Specify a value of up to
     #   10,000. If you specify a value that is greater than 10,000, GetRecords
-    #   throws `InvalidArgumentException`.
+    #   throws `InvalidArgumentException`. The default value is 10,000.
     #
     # @return [Types::GetRecordsOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::GetRecordsOutput#records #records} => Array&lt;Types::Record&gt;
     #   * {Types::GetRecordsOutput#next_shard_iterator #next_shard_iterator} => String
     #   * {Types::GetRecordsOutput#millis_behind_latest #millis_behind_latest} => Integer
+    #   * {Types::GetRecordsOutput#child_shards #child_shards} => Array&lt;Types::ChildShard&gt;
     #
     # @example Request syntax with placeholder values
     #
@@ -1026,6 +1026,12 @@ module Aws::Kinesis
     #   resp.records[0].encryption_type #=> String, one of "NONE", "KMS"
     #   resp.next_shard_iterator #=> String
     #   resp.millis_behind_latest #=> Integer
+    #   resp.child_shards #=> Array
+    #   resp.child_shards[0].shard_id #=> String
+    #   resp.child_shards[0].parent_shards #=> Array
+    #   resp.child_shards[0].parent_shards[0] #=> String
+    #   resp.child_shards[0].hash_key_range.starting_hash_key #=> String
+    #   resp.child_shards[0].hash_key_range.ending_hash_key #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/kinesis-2013-12-02/GetRecords AWS API Documentation
     #
@@ -1081,7 +1087,7 @@ module Aws::Kinesis
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/kinesis/latest/dev/service-sizes-and-limits.html
+    # [1]: https://docs.aws.amazon.com/kinesis/latest/dev/service-sizes-and-limits.html
     #
     # @option params [required, String] :stream_name
     #   The name of the Amazon Kinesis data stream.
@@ -1252,7 +1258,7 @@ module Aws::Kinesis
     # @option params [Integer] :max_results
     #   The maximum number of shards to return in a single call to
     #   `ListShards`. The minimum value you can specify for this parameter is
-    #   1, and the maximum is 1,000, which is also the default.
+    #   1, and the maximum is 10,000, which is also the default.
     #
     #   When the number of shards to be listed is greater than the value of
     #   `MaxResults`, the response contains a `NextToken` value that you can
@@ -1269,6 +1275,8 @@ module Aws::Kinesis
     #   You cannot specify this parameter if you specify the `NextToken`
     #   parameter.
     #
+    # @option params [Types::ShardFilter] :shard_filter
+    #
     # @return [Types::ListShardsOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::ListShardsOutput#shards #shards} => Array&lt;Types::Shard&gt;
@@ -1282,6 +1290,11 @@ module Aws::Kinesis
     #     exclusive_start_shard_id: "ShardId",
     #     max_results: 1,
     #     stream_creation_timestamp: Time.now,
+    #     shard_filter: {
+    #       type: "AFTER_SHARD_ID", # required, accepts AFTER_SHARD_ID, AT_TRIM_HORIZON, FROM_TRIM_HORIZON, AT_LATEST, AT_TIMESTAMP, FROM_TIMESTAMP
+    #       shard_id: "ShardId",
+    #       timestamp: Time.now,
+    #     },
     #   })
     #
     # @example Response structure
@@ -1308,7 +1321,7 @@ module Aws::Kinesis
     # Lists the consumers registered to receive data from a stream using
     # enhanced fan-out, and provides information about each consumer.
     #
-    # This operation has a limit of 10 transactions per second per account.
+    # This operation has a limit of 5 transactions per second per stream.
     #
     # @option params [required, String] :stream_arn
     #   The ARN of the Kinesis data stream for which you want to list the
@@ -1537,7 +1550,7 @@ module Aws::Kinesis
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/kinesis/latest/dev/kinesis-using-sdk-java-resharding-merge.html
+    # [1]: https://docs.aws.amazon.com/kinesis/latest/dev/kinesis-using-sdk-java-resharding-merge.html
     #
     # @option params [required, String] :stream_name
     #   The name of the stream for the merge.
@@ -1572,7 +1585,7 @@ module Aws::Kinesis
     # `PutRecord` to send data into the stream for real-time ingestion and
     # subsequent processing, one record at a time. Each shard can support
     # writes up to 1,000 records per second, up to a maximum data write
-    # total of 1 MB per second.
+    # total of 1 MiB per second.
     #
     # You must specify the name of the stream that captures, stores, and
     # transports the data; a partition key; and the data blob itself.
@@ -1606,6 +1619,9 @@ module Aws::Kinesis
     # [Adding Data to a Stream][1] in the *Amazon Kinesis Data Streams
     # Developer Guide*.
     #
+    # After you write a record to a stream, you cannot modify that record or
+    # its order within the stream.
+    #
     # If a `PutRecord` request cannot be processed because of insufficient
     # provisioned throughput on the shard involved in the request,
     # `PutRecord` throws `ProvisionedThroughputExceededException`.
@@ -1617,7 +1633,7 @@ module Aws::Kinesis
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/kinesis/latest/dev/developing-producers-with-sdk.html#kinesis-using-sdk-java-add-data-to-stream
+    # [1]: https://docs.aws.amazon.com/kinesis/latest/dev/developing-producers-with-sdk.html#kinesis-using-sdk-java-add-data-to-stream
     #
     # @option params [required, String] :stream_name
     #   The name of the stream to put the data record into.
@@ -1626,7 +1642,7 @@ module Aws::Kinesis
     #   The data blob to put into the record, which is base64-encoded when the
     #   blob is serialized. When the data blob (the payload before
     #   base64-encoding) is added to the partition key size, the total size
-    #   must not exceed the maximum record size (1 MB).
+    #   must not exceed the maximum record size (1 MiB).
     #
     # @option params [required, String] :partition_key
     #   Determines which shard in the stream the data record is assigned to.
@@ -1687,10 +1703,10 @@ module Aws::Kinesis
     # to send data into the stream for data ingestion and processing.
     #
     # Each `PutRecords` request can support up to 500 records. Each record
-    # in the request can be as large as 1 MB, up to a limit of 5 MB for the
-    # entire request, including partition keys. Each shard can support
+    # in the request can be as large as 1 MiB, up to a limit of 5 MiB for
+    # the entire request, including partition keys. Each shard can support
     # writes up to 1,000 records per second, up to a maximum data write
-    # total of 1 MB per second.
+    # total of 1 MiB per second.
     #
     # You must specify the name of the stream that captures, stores, and
     # transports the data; and an array of request `Records`, with each
@@ -1727,7 +1743,10 @@ module Aws::Kinesis
     # The response `Records` array includes both successfully and
     # unsuccessfully processed records. Kinesis Data Streams attempts to
     # process all records in each `PutRecords` request. A single record
-    # failure does not stop the processing of subsequent records.
+    # failure does not stop the processing of subsequent records. As a
+    # result, PutRecords doesn't guarantee the ordering of records. If you
+    # need to read records in the same order they are written to the stream,
+    # use PutRecord instead of `PutRecords`, and write to the same shard.
     #
     # A successfully processed record includes `ShardId` and
     # `SequenceNumber` values. The `ShardId` parameter identifies the shard
@@ -1746,6 +1765,9 @@ module Aws::Kinesis
     # see [Adding Multiple Records with PutRecords][3] in the *Amazon
     # Kinesis Data Streams Developer Guide*.
     #
+    # After you write a record to a stream, you cannot modify that record or
+    # its order within the stream.
+    #
     # By default, data records are accessible for 24 hours from the time
     # that they are added to a stream. You can use
     # IncreaseStreamRetentionPeriod or DecreaseStreamRetentionPeriod to
@@ -1753,9 +1775,9 @@ module Aws::Kinesis
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/kinesis/latest/dev/developing-producers-with-sdk.html#kinesis-using-sdk-java-add-data-to-stream
-    # [2]: http://docs.aws.amazon.com/kinesis/latest/dev/developing-producers-with-sdk.html#kinesis-using-sdk-java-putrecords
-    # [3]: http://docs.aws.amazon.com/kinesis/latest/dev/kinesis-using-sdk-java-add-data-to-stream.html#kinesis-using-sdk-java-putrecords
+    # [1]: https://docs.aws.amazon.com/kinesis/latest/dev/developing-producers-with-sdk.html#kinesis-using-sdk-java-add-data-to-stream
+    # [2]: https://docs.aws.amazon.com/kinesis/latest/dev/developing-producers-with-sdk.html#kinesis-using-sdk-java-putrecords
+    # [3]: https://docs.aws.amazon.com/kinesis/latest/dev/kinesis-using-sdk-java-add-data-to-stream.html#kinesis-using-sdk-java-putrecords
     #
     # @option params [required, Array<Types::PutRecordsRequestEntry>] :records
     #   The records associated with the request.
@@ -1802,15 +1824,24 @@ module Aws::Kinesis
     end
 
     # Registers a consumer with a Kinesis data stream. When you use this
-    # operation, the consumer you register can read data from the stream at
-    # a rate of up to 2 MiB per second. This rate is unaffected by the total
-    # number of consumers that read from the same stream.
+    # operation, the consumer you register can then call SubscribeToShard to
+    # receive data from the stream using enhanced fan-out, at a rate of up
+    # to 2 MiB per second for every shard you subscribe to. This rate is
+    # unaffected by the total number of consumers that read from the same
+    # stream.
     #
-    # You can register up to 5 consumers per stream. A given consumer can
-    # only be registered with one stream.
+    # You can register up to 20 consumers per stream. A given consumer can
+    # only be registered with one stream at a time.
     #
-    # This operation has a limit of five transactions per second per
-    # account.
+    # For an example of how to use this operations, see [Enhanced Fan-Out
+    # Using the Kinesis Data Streams
+    # API](/streams/latest/dev/building-enhanced-consumers-api.html).
+    #
+    # The use of this operation has a limit of five transactions per second
+    # per account. Also, only 5 consumers can be created simultaneously. In
+    # other words, you cannot have more than 5 consumers in a `CREATING`
+    # status at the same time. Registering a 6th consumer while there are 5
+    # in a `CREATING` status results in a `LimitExceededException`.
     #
     # @option params [required, String] :stream_arn
     #   The ARN of the Kinesis data stream that you want to register the
@@ -1939,9 +1970,9 @@ module Aws::Kinesis
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/kinesis/latest/dev/kinesis-using-sdk-java-resharding-split.html
-    # [2]: http://docs.aws.amazon.com/kinesis/latest/dev/service-sizes-and-limits.html
-    # [3]: http://docs.aws.amazon.com/general/latest/gr/aws_service_limits.html
+    # [1]: https://docs.aws.amazon.com/kinesis/latest/dev/kinesis-using-sdk-java-resharding-split.html
+    # [2]: https://docs.aws.amazon.com/kinesis/latest/dev/service-sizes-and-limits.html
+    # [3]: https://docs.aws.amazon.com/general/latest/gr/aws_service_limits.html
     #
     # @option params [required, String] :stream_name
     #   The name of the stream for the shard split.
@@ -2122,14 +2153,19 @@ module Aws::Kinesis
     #
     # To update the shard count, Kinesis Data Streams performs splits or
     # merges on individual shards. This can cause short-lived shards to be
-    # created, in addition to the final shards. We recommend that you double
-    # or halve the shard count, as this results in the fewest number of
-    # splits or merges.
+    # created, in addition to the final shards. These short-lived shards
+    # count towards your total shard limit for your account in the Region.
+    #
+    # When using this operation, we recommend that you specify a target
+    # shard count that is a multiple of 25% (25%, 50%, 75%, 100%). You can
+    # specify any target value within your shard limit. However, if you
+    # specify a target that isn't a multiple of 25%, the scaling action
+    # might take longer to complete.
     #
     # This operation has the following default limits. By default, you
     # cannot do the following:
     #
-    # * Scale more than twice per rolling 24-hour period per stream
+    # * Scale more than ten times per rolling 24-hour period per stream
     #
     # * Scale up to more than double your current shard count for a stream
     #
@@ -2149,14 +2185,27 @@ module Aws::Kinesis
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/kinesis/latest/dev/service-sizes-and-limits.html
+    # [1]: https://docs.aws.amazon.com/kinesis/latest/dev/service-sizes-and-limits.html
     # [2]: https://console.aws.amazon.com/support/v1#/case/create?issueType=service-limit-increase&amp;limitType=service-code-kinesis
     #
     # @option params [required, String] :stream_name
     #   The name of the stream.
     #
     # @option params [required, Integer] :target_shard_count
-    #   The new number of shards.
+    #   The new number of shards. This value has the following default limits.
+    #   By default, you cannot do the following:
+    #
+    #   * Set this value to more than double your current shard count for a
+    #     stream.
+    #
+    #   * Set this value below half your current shard count for a stream.
+    #
+    #   * Set this value to more than 500 shards in a stream (the default
+    #     limit for shard count per stream is 500 per account per region),
+    #     unless you request a limit increase.
+    #
+    #   * Scale a stream with more than 500 shards down unless you set this
+    #     value to less than 500 shards.
     #
     # @option params [required, String] :scaling_type
     #   The scaling type. Uniform scaling creates shards of equal size.
@@ -2203,7 +2252,7 @@ module Aws::Kinesis
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-kinesis'
-      context[:gem_version] = '1.26.0'
+      context[:gem_version] = '1.27.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

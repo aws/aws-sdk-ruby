@@ -401,11 +401,20 @@ module Aws::IVS
     #
     # @option params [String] :type
     #   Channel type, which determines the allowable resolution and bitrate.
-    #   `STANDARD`\: The stream is transcoded; resolution (width, in landscape
-    #   orientation) can be up to 1080p or the input source resolution,
-    #   whichever is lower; and bitrate can be up to 8.5 Mbps. `BASIC`\: The
-    #   stream is transfixed; resolution can be up to 480p; and bitrate can be
-    #   up to 1.5 Mbps. Default: `STANDARD`.
+    #   *If you exceed the allowable resolution or bitrate, the stream
+    #   probably will disconnect immediately.* Valid values:
+    #
+    #   * `STANDARD`\: Multiple qualities are generated from the original
+    #     input, to automatically give viewers the best experience for their
+    #     devices and network conditions. Vertical resolution can be up to
+    #     1080 and bitrate can be up to 8.5 Mbps.
+    #
+    #   * `BASIC`\: Amazon IVS delivers the original input to viewers. The
+    #     viewer’s video-quality choice is limited to the original input.
+    #     Vertical resolution can be up to 480 and bitrate can be up to 1.5
+    #     Mbps.
+    #
+    #   Default: `STANDARD`.
     #
     # @option params [Hash<String,String>] :tags
     #   See Channel$tags.
@@ -451,7 +460,7 @@ module Aws::IVS
       req.send_request(options)
     end
 
-    # Creates a stream key, used to initiate a stream, for a specified
+    # Creates a stream key, used to initiate a stream, for the specified
     # channel ARN.
     #
     # Note that CreateChannel creates a stream key. If you subsequently use
@@ -496,7 +505,7 @@ module Aws::IVS
       req.send_request(options)
     end
 
-    # Deletes a specified channel and its associated stream keys.
+    # Deletes the specified channel and its associated stream keys.
     #
     # @option params [required, String] :arn
     #   ARN of the channel to be deleted.
@@ -518,7 +527,7 @@ module Aws::IVS
       req.send_request(options)
     end
 
-    # Deletes the stream key for a specified ARN, so it can no longer be
+    # Deletes the stream key for the specified ARN, so it can no longer be
     # used to stream.
     #
     # @option params [required, String] :arn
@@ -541,7 +550,7 @@ module Aws::IVS
       req.send_request(options)
     end
 
-    # Gets the channel configuration for a specified channel ARN. See also
+    # Gets the channel configuration for the specified channel ARN. See also
     # BatchGetChannel.
     #
     # @option params [required, String] :arn
@@ -643,8 +652,9 @@ module Aws::IVS
       req.send_request(options)
     end
 
-    # Gets summary information about channels. This list can be filtered to
-    # match a specified string.
+    # Gets summary information about all channels in your account, in the
+    # AWS region where the API request is processed. This list can be
+    # filtered to match a specified string.
     #
     # @option params [String] :filter_by_name
     #   Filters the channel list to match the specified name.
@@ -690,8 +700,7 @@ module Aws::IVS
       req.send_request(options)
     end
 
-    # Gets summary information about stream keys. The list can be filtered
-    # to a particular channel.
+    # Gets summary information about stream keys for the specified channel.
     #
     # @option params [required, String] :channel_arn
     #   Channel ARN used to filter the list.
@@ -736,7 +745,8 @@ module Aws::IVS
       req.send_request(options)
     end
 
-    # Gets summary information about live streams.
+    # Gets summary information about live streams in your account, in the
+    # AWS region where the API request is processed.
     #
     # @option params [String] :next_token
     #   The first stream to retrieve. This is used for pagination; see the
@@ -778,7 +788,7 @@ module Aws::IVS
       req.send_request(options)
     end
 
-    # Gets information about the tags for a specified ARN.
+    # Gets information about AWS tags for the specified ARN.
     #
     # @option params [required, String] :resource_arn
     #   The ARN of the resource to be retrieved.
@@ -820,7 +830,7 @@ module Aws::IVS
       req.send_request(options)
     end
 
-    # Inserts metadata into an RTMP stream for a specified channel. A
+    # Inserts metadata into an RTMPS stream for the specified channel. A
     # maximum of 5 requests per second per channel is allowed, each with a
     # maximum 1KB payload.
     #
@@ -849,12 +859,12 @@ module Aws::IVS
       req.send_request(options)
     end
 
-    # Disconnects the stream for the specified channel. This disconnects the
-    # incoming RTMP stream from the client. Can be used in conjunction with
-    # DeleteStreamKey to prevent further streaming to a channel.
+    # Disconnects the incoming RTMPS stream for the specified channel. Can
+    # be used in conjunction with DeleteStreamKey to prevent further
+    # streaming to a channel.
     #
     # <note markdown="1"> Many streaming client-software libraries automatically reconnect a
-    # dropped RTMP session, so to stop the stream permanently, you may want
+    # dropped RTMPS session, so to stop the stream permanently, you may want
     # to first revoke the `streamKey` attached to the channel.
     #
     #  </note>
@@ -879,7 +889,7 @@ module Aws::IVS
       req.send_request(options)
     end
 
-    # Adds or updates tags for a resource with a specified ARN.
+    # Adds or updates tags for the AWS resource with the specified ARN.
     #
     # @option params [required, String] :resource_arn
     #   ARN of the resource for which tags are to be added or updated.
@@ -907,7 +917,7 @@ module Aws::IVS
       req.send_request(options)
     end
 
-    # Removes tags for a resource with a specified ARN.
+    # Removes tags from the resource with the specified ARN.
     #
     # @option params [required, String] :resource_arn
     #   ARN of the resource for which tags are to be removed.
@@ -948,11 +958,20 @@ module Aws::IVS
     #
     # @option params [String] :type
     #   Channel type, which determines the allowable resolution and bitrate.
-    #   `STANDARD`\: The stream is transcoded; resolution (width, in landscape
-    #   orientation) can be up to 1080p or the input source resolution,
-    #   whichever is lower; and bitrate can be up to 8.5 Mbps. `BASIC`\: The
-    #   stream is transfixed; resolution can be up to 480p; and bitrate can be
-    #   up to 1.5 Mbps. Default `STANDARD`.
+    #   *If you exceed the allowable resolution or bitrate, the stream
+    #   probably will disconnect immediately.* Valid values:
+    #
+    #   * `STANDARD`\: Multiple qualities are generated from the original
+    #     input, to automatically give viewers the best experience for their
+    #     devices and network conditions. Vertical resolution can be up to
+    #     1080 and bitrate can be up to 8.5 Mbps.
+    #
+    #   * `BASIC`\: Amazon IVS delivers the original input to viewers. The
+    #     viewer’s video-quality choice is limited to the original input.
+    #     Vertical resolution can be up to 480 and bitrate can be up to 1.5
+    #     Mbps.
+    #
+    #   Default: `STANDARD`.
     #
     # @return [Types::UpdateChannelResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1000,7 +1019,7 @@ module Aws::IVS
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-ivs'
-      context[:gem_version] = '1.0.0'
+      context[:gem_version] = '1.1.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

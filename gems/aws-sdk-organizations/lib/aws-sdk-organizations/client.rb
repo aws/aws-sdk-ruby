@@ -855,7 +855,7 @@ module Aws::Organizations
     #   resp.create_account_status.completed_timestamp #=> Time
     #   resp.create_account_status.account_id #=> String
     #   resp.create_account_status.gov_cloud_account_id #=> String
-    #   resp.create_account_status.failure_reason #=> String, one of "ACCOUNT_LIMIT_EXCEEDED", "EMAIL_ALREADY_EXISTS", "INVALID_ADDRESS", "INVALID_EMAIL", "CONCURRENT_ACCOUNT_MODIFICATION", "INTERNAL_FAILURE", "GOVCLOUD_ACCOUNT_ALREADY_EXISTS"
+    #   resp.create_account_status.failure_reason #=> String, one of "ACCOUNT_LIMIT_EXCEEDED", "EMAIL_ALREADY_EXISTS", "INVALID_ADDRESS", "INVALID_EMAIL", "CONCURRENT_ACCOUNT_MODIFICATION", "INTERNAL_FAILURE", "GOVCLOUD_ACCOUNT_ALREADY_EXISTS", "MISSING_BUSINESS_VALIDATION", "MISSING_PAYMENT_INSTRUMENT"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/CreateAccount AWS API Documentation
     #
@@ -1069,7 +1069,7 @@ module Aws::Organizations
     #   resp.create_account_status.completed_timestamp #=> Time
     #   resp.create_account_status.account_id #=> String
     #   resp.create_account_status.gov_cloud_account_id #=> String
-    #   resp.create_account_status.failure_reason #=> String, one of "ACCOUNT_LIMIT_EXCEEDED", "EMAIL_ALREADY_EXISTS", "INVALID_ADDRESS", "INVALID_EMAIL", "CONCURRENT_ACCOUNT_MODIFICATION", "INTERNAL_FAILURE", "GOVCLOUD_ACCOUNT_ALREADY_EXISTS"
+    #   resp.create_account_status.failure_reason #=> String, one of "ACCOUNT_LIMIT_EXCEEDED", "EMAIL_ALREADY_EXISTS", "INVALID_ADDRESS", "INVALID_EMAIL", "CONCURRENT_ACCOUNT_MODIFICATION", "INTERNAL_FAILURE", "GOVCLOUD_ACCOUNT_ALREADY_EXISTS", "MISSING_BUSINESS_VALIDATION", "MISSING_PAYMENT_INSTRUMENT"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/CreateGovCloudAccount AWS API Documentation
     #
@@ -1625,6 +1625,11 @@ module Aws::Organizations
     # Removes the specified member AWS account as a delegated administrator
     # for the specified AWS service.
     #
+    # Deregistering a delegated administrator can have unintended impacts on
+    # the functionality of the enabled AWS service. See the documentation
+    # for the enabled service before you deregister a delegated
+    # administrator so that you understand any potential impacts.
+    #
     # You can run this action only for AWS services that support this
     # feature. For a current list of services that support it, see the
     # column *Supports Delegated Administrator* in the table at [AWS
@@ -1795,7 +1800,7 @@ module Aws::Organizations
     #   resp.create_account_status.completed_timestamp #=> Time
     #   resp.create_account_status.account_id #=> String
     #   resp.create_account_status.gov_cloud_account_id #=> String
-    #   resp.create_account_status.failure_reason #=> String, one of "ACCOUNT_LIMIT_EXCEEDED", "EMAIL_ALREADY_EXISTS", "INVALID_ADDRESS", "INVALID_EMAIL", "CONCURRENT_ACCOUNT_MODIFICATION", "INTERNAL_FAILURE", "GOVCLOUD_ACCOUNT_ALREADY_EXISTS"
+    #   resp.create_account_status.failure_reason #=> String, one of "ACCOUNT_LIMIT_EXCEEDED", "EMAIL_ALREADY_EXISTS", "INVALID_ADDRESS", "INVALID_EMAIL", "CONCURRENT_ACCOUNT_MODIFICATION", "INTERNAL_FAILURE", "GOVCLOUD_ACCOUNT_ALREADY_EXISTS", "MISSING_BUSINESS_VALIDATION", "MISSING_PAYMENT_INSTRUMENT"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/DescribeCreateAccountStatus AWS API Documentation
     #
@@ -3425,7 +3430,7 @@ module Aws::Organizations
     #   resp.create_account_statuses[0].completed_timestamp #=> Time
     #   resp.create_account_statuses[0].account_id #=> String
     #   resp.create_account_statuses[0].gov_cloud_account_id #=> String
-    #   resp.create_account_statuses[0].failure_reason #=> String, one of "ACCOUNT_LIMIT_EXCEEDED", "EMAIL_ALREADY_EXISTS", "INVALID_ADDRESS", "INVALID_EMAIL", "CONCURRENT_ACCOUNT_MODIFICATION", "INTERNAL_FAILURE", "GOVCLOUD_ACCOUNT_ALREADY_EXISTS"
+    #   resp.create_account_statuses[0].failure_reason #=> String, one of "ACCOUNT_LIMIT_EXCEEDED", "EMAIL_ALREADY_EXISTS", "INVALID_ADDRESS", "INVALID_EMAIL", "CONCURRENT_ACCOUNT_MODIFICATION", "INTERNAL_FAILURE", "GOVCLOUD_ACCOUNT_ALREADY_EXISTS", "MISSING_BUSINESS_VALIDATION", "MISSING_PAYMENT_INSTRUMENT"
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/ListCreateAccountStatus AWS API Documentation
@@ -3583,9 +3588,7 @@ module Aws::Organizations
     #
     #  </note>
     #
-    # This operation can be called only from the organization's master
-    # account or by a member account that is a delegated administrator for
-    # an AWS service.
+    # This operation can be called from any account in the organization.
     #
     # @option params [Types::HandshakeFilter] :filter
     #   Filters the handshakes that you want included in the response. The
@@ -5132,7 +5135,7 @@ module Aws::Organizations
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-organizations'
-      context[:gem_version] = '1.45.0'
+      context[:gem_version] = '1.48.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

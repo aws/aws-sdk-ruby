@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.28.0 (2020-07-30)
+------------------
+
+* Feature - Improved documentation for Resource Groups API operations.
+
+1.27.0 (2020-07-29)
+------------------
+
+* Feature - Resource Groups released a new feature that enables you to create a group with an associated configuration that specifies how other AWS services interact with the group. There are two new operations `GroupResources` and `UngroupResources` to work on a group with a configuration. In this release, you can associate EC2 Capacity Reservations with a resource group. Resource Groups also added a new request parameter `Group` to replace `GroupName` for all existing operations.
+
 1.26.0 (2020-06-23)
 ------------------
 

@@ -23,6 +23,7 @@ module Aws::WorkSpaces
     AssociateIpGroupsResult = Shapes::StructureShape.new(name: 'AssociateIpGroupsResult')
     AuthorizeIpRulesRequest = Shapes::StructureShape.new(name: 'AuthorizeIpRulesRequest')
     AuthorizeIpRulesResult = Shapes::StructureShape.new(name: 'AuthorizeIpRulesResult')
+    AwsAccount = Shapes::StringShape.new(name: 'AwsAccount')
     BooleanObject = Shapes::BooleanShape.new(name: 'BooleanObject')
     BundleId = Shapes::StringShape.new(name: 'BundleId')
     BundleIdList = Shapes::ListShape.new(name: 'BundleIdList')
@@ -72,6 +73,8 @@ module Aws::WorkSpaces
     DescribeWorkspaceBundlesResult = Shapes::StructureShape.new(name: 'DescribeWorkspaceBundlesResult')
     DescribeWorkspaceDirectoriesRequest = Shapes::StructureShape.new(name: 'DescribeWorkspaceDirectoriesRequest')
     DescribeWorkspaceDirectoriesResult = Shapes::StructureShape.new(name: 'DescribeWorkspaceDirectoriesResult')
+    DescribeWorkspaceImagePermissionsRequest = Shapes::StructureShape.new(name: 'DescribeWorkspaceImagePermissionsRequest')
+    DescribeWorkspaceImagePermissionsResult = Shapes::StructureShape.new(name: 'DescribeWorkspaceImagePermissionsResult')
     DescribeWorkspaceImagesRequest = Shapes::StructureShape.new(name: 'DescribeWorkspaceImagesRequest')
     DescribeWorkspaceImagesResult = Shapes::StructureShape.new(name: 'DescribeWorkspaceImagesResult')
     DescribeWorkspaceSnapshotsRequest = Shapes::StructureShape.new(name: 'DescribeWorkspaceSnapshotsRequest')
@@ -99,6 +102,9 @@ module Aws::WorkSpaces
     FailedStopWorkspaceRequests = Shapes::ListShape.new(name: 'FailedStopWorkspaceRequests')
     FailedTerminateWorkspaceRequests = Shapes::ListShape.new(name: 'FailedTerminateWorkspaceRequests')
     FailedWorkspaceChangeRequest = Shapes::StructureShape.new(name: 'FailedWorkspaceChangeRequest')
+    ImagePermission = Shapes::StructureShape.new(name: 'ImagePermission')
+    ImagePermissions = Shapes::ListShape.new(name: 'ImagePermissions')
+    ImageType = Shapes::StringShape.new(name: 'ImageType')
     ImportWorkspaceImageRequest = Shapes::StructureShape.new(name: 'ImportWorkspaceImageRequest')
     ImportWorkspaceImageResult = Shapes::StructureShape.new(name: 'ImportWorkspaceImageResult')
     InvalidParameterValuesException = Shapes::StructureShape.new(name: 'InvalidParameterValuesException')
@@ -202,6 +208,8 @@ module Aws::WorkSpaces
     UnsupportedWorkspaceConfigurationException = Shapes::StructureShape.new(name: 'UnsupportedWorkspaceConfigurationException')
     UpdateRulesOfIpGroupRequest = Shapes::StructureShape.new(name: 'UpdateRulesOfIpGroupRequest')
     UpdateRulesOfIpGroupResult = Shapes::StructureShape.new(name: 'UpdateRulesOfIpGroupResult')
+    UpdateWorkspaceImagePermissionRequest = Shapes::StructureShape.new(name: 'UpdateWorkspaceImagePermissionRequest')
+    UpdateWorkspaceImagePermissionResult = Shapes::StructureShape.new(name: 'UpdateWorkspaceImagePermissionResult')
     UserName = Shapes::StringShape.new(name: 'UserName')
     UserStorage = Shapes::StructureShape.new(name: 'UserStorage')
     UserVolumeSizeGib = Shapes::IntegerShape.new(name: 'UserVolumeSizeGib')
@@ -393,7 +401,18 @@ module Aws::WorkSpaces
     DescribeWorkspaceDirectoriesResult.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location_name: "NextToken"))
     DescribeWorkspaceDirectoriesResult.struct_class = Types::DescribeWorkspaceDirectoriesResult
 
+    DescribeWorkspaceImagePermissionsRequest.add_member(:image_id, Shapes::ShapeRef.new(shape: WorkspaceImageId, required: true, location_name: "ImageId"))
+    DescribeWorkspaceImagePermissionsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location_name: "NextToken"))
+    DescribeWorkspaceImagePermissionsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: Limit, location_name: "MaxResults"))
+    DescribeWorkspaceImagePermissionsRequest.struct_class = Types::DescribeWorkspaceImagePermissionsRequest
+
+    DescribeWorkspaceImagePermissionsResult.add_member(:image_id, Shapes::ShapeRef.new(shape: WorkspaceImageId, location_name: "ImageId"))
+    DescribeWorkspaceImagePermissionsResult.add_member(:image_permissions, Shapes::ShapeRef.new(shape: ImagePermissions, location_name: "ImagePermissions"))
+    DescribeWorkspaceImagePermissionsResult.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location_name: "NextToken"))
+    DescribeWorkspaceImagePermissionsResult.struct_class = Types::DescribeWorkspaceImagePermissionsResult
+
     DescribeWorkspaceImagesRequest.add_member(:image_ids, Shapes::ShapeRef.new(shape: WorkspaceImageIdList, location_name: "ImageIds"))
+    DescribeWorkspaceImagesRequest.add_member(:image_type, Shapes::ShapeRef.new(shape: ImageType, location_name: "ImageType"))
     DescribeWorkspaceImagesRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location_name: "NextToken"))
     DescribeWorkspaceImagesRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: Limit, location_name: "MaxResults"))
     DescribeWorkspaceImagesRequest.struct_class = Types::DescribeWorkspaceImagesRequest
@@ -462,6 +481,11 @@ module Aws::WorkSpaces
     FailedWorkspaceChangeRequest.add_member(:error_code, Shapes::ShapeRef.new(shape: ErrorType, location_name: "ErrorCode"))
     FailedWorkspaceChangeRequest.add_member(:error_message, Shapes::ShapeRef.new(shape: Description, location_name: "ErrorMessage"))
     FailedWorkspaceChangeRequest.struct_class = Types::FailedWorkspaceChangeRequest
+
+    ImagePermission.add_member(:shared_account_id, Shapes::ShapeRef.new(shape: AwsAccount, location_name: "SharedAccountId"))
+    ImagePermission.struct_class = Types::ImagePermission
+
+    ImagePermissions.member = Shapes::ShapeRef.new(shape: ImagePermission)
 
     ImportWorkspaceImageRequest.add_member(:ec2_image_id, Shapes::ShapeRef.new(shape: Ec2ImageId, required: true, location_name: "Ec2ImageId"))
     ImportWorkspaceImageRequest.add_member(:ingestion_process, Shapes::ShapeRef.new(shape: WorkspaceImageIngestionProcess, required: true, location_name: "IngestionProcess"))
@@ -698,6 +722,13 @@ module Aws::WorkSpaces
 
     UpdateRulesOfIpGroupResult.struct_class = Types::UpdateRulesOfIpGroupResult
 
+    UpdateWorkspaceImagePermissionRequest.add_member(:image_id, Shapes::ShapeRef.new(shape: WorkspaceImageId, required: true, location_name: "ImageId"))
+    UpdateWorkspaceImagePermissionRequest.add_member(:allow_copy_image, Shapes::ShapeRef.new(shape: BooleanObject, required: true, location_name: "AllowCopyImage"))
+    UpdateWorkspaceImagePermissionRequest.add_member(:shared_account_id, Shapes::ShapeRef.new(shape: AwsAccount, required: true, location_name: "SharedAccountId"))
+    UpdateWorkspaceImagePermissionRequest.struct_class = Types::UpdateWorkspaceImagePermissionRequest
+
+    UpdateWorkspaceImagePermissionResult.struct_class = Types::UpdateWorkspaceImagePermissionResult
+
     UserStorage.add_member(:capacity, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "Capacity"))
     UserStorage.struct_class = Types::UserStorage
 
@@ -746,6 +777,7 @@ module Aws::WorkSpaces
 
     WorkspaceConnectionStatusList.member = Shapes::ShapeRef.new(shape: WorkspaceConnectionStatus)
 
+    WorkspaceCreationProperties.add_member(:enable_work_docs, Shapes::ShapeRef.new(shape: BooleanObject, location_name: "EnableWorkDocs"))
     WorkspaceCreationProperties.add_member(:enable_internet_access, Shapes::ShapeRef.new(shape: BooleanObject, location_name: "EnableInternetAccess"))
     WorkspaceCreationProperties.add_member(:default_ou, Shapes::ShapeRef.new(shape: DefaultOu, location_name: "DefaultOu"))
     WorkspaceCreationProperties.add_member(:custom_security_group_id, Shapes::ShapeRef.new(shape: SecurityGroupId, location_name: "CustomSecurityGroupId"))
@@ -781,6 +813,8 @@ module Aws::WorkSpaces
     WorkspaceImage.add_member(:required_tenancy, Shapes::ShapeRef.new(shape: WorkspaceImageRequiredTenancy, location_name: "RequiredTenancy"))
     WorkspaceImage.add_member(:error_code, Shapes::ShapeRef.new(shape: WorkspaceImageErrorCode, location_name: "ErrorCode"))
     WorkspaceImage.add_member(:error_message, Shapes::ShapeRef.new(shape: Description, location_name: "ErrorMessage"))
+    WorkspaceImage.add_member(:created, Shapes::ShapeRef.new(shape: Timestamp, location_name: "Created"))
+    WorkspaceImage.add_member(:owner_account_id, Shapes::ShapeRef.new(shape: AwsAccount, location_name: "OwnerAccountId"))
     WorkspaceImage.struct_class = Types::WorkspaceImage
 
     WorkspaceImageIdList.member = Shapes::ShapeRef.new(shape: WorkspaceImageId)
@@ -1035,6 +1069,17 @@ module Aws::WorkSpaces
         )
       end)
 
+      api.add_operation(:describe_workspace_image_permissions, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DescribeWorkspaceImagePermissions"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DescribeWorkspaceImagePermissionsRequest)
+        o.output = Shapes::ShapeRef.new(shape: DescribeWorkspaceImagePermissionsResult)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValuesException)
+      end)
+
       api.add_operation(:describe_workspace_images, Seahorse::Model::Operation.new.tap do |o|
         o.name = "DescribeWorkspaceImages"
         o.http_method = "POST"
@@ -1184,6 +1229,7 @@ module Aws::WorkSpaces
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValuesException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: OperationNotSupportedException)
       end)
 
       api.add_operation(:modify_workspace_properties, Seahorse::Model::Operation.new.tap do |o|
@@ -1302,6 +1348,19 @@ module Aws::WorkSpaces
         o.errors << Shapes::ShapeRef.new(shape: ResourceLimitExceededException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidResourceStateException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+      end)
+
+      api.add_operation(:update_workspace_image_permission, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "UpdateWorkspaceImagePermission"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: UpdateWorkspaceImagePermissionRequest)
+        o.output = Shapes::ShapeRef.new(shape: UpdateWorkspaceImagePermissionResult)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceUnavailableException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValuesException)
+        o.errors << Shapes::ShapeRef.new(shape: OperationNotSupportedException)
       end)
     end
 

@@ -486,7 +486,7 @@ module Aws::SageMaker
     #     algorithm_name: "EntityName", # required
     #     algorithm_description: "EntityDescription",
     #     training_specification: { # required
-    #       training_image: "Image", # required
+    #       training_image: "ContainerImage", # required
     #       training_image_digest: "ImageDigest",
     #       supported_hyper_parameters: [
     #         {
@@ -540,7 +540,7 @@ module Aws::SageMaker
     #       containers: [ # required
     #         {
     #           container_hostname: "ContainerHostname",
-    #           image: "Image", # required
+    #           image: "ContainerImage", # required
     #           image_digest: "ImageDigest",
     #           model_data_url: "Url",
     #           product_id: "ProductId",
@@ -695,7 +695,7 @@ module Aws::SageMaker
     #       },
     #     ],
     #     resource_spec: {
-    #       sage_maker_image_arn: "SageMakerImageArn",
+    #       sage_maker_image_arn: "ImageArn",
     #       instance_type: "system", # accepts system, ml.t3.micro, ml.t3.small, ml.t3.medium, ml.t3.large, ml.t3.xlarge, ml.t3.2xlarge, ml.m5.large, ml.m5.xlarge, ml.m5.2xlarge, ml.m5.4xlarge, ml.m5.8xlarge, ml.m5.12xlarge, ml.m5.16xlarge, ml.m5.24xlarge, ml.c5.large, ml.c5.xlarge, ml.c5.2xlarge, ml.c5.4xlarge, ml.c5.9xlarge, ml.c5.12xlarge, ml.c5.18xlarge, ml.c5.24xlarge, ml.p3.2xlarge, ml.p3.8xlarge, ml.p3.16xlarge, ml.g4dn.xlarge, ml.g4dn.2xlarge, ml.g4dn.4xlarge, ml.g4dn.8xlarge, ml.g4dn.12xlarge, ml.g4dn.16xlarge
     #     },
     #   })
@@ -713,15 +713,14 @@ module Aws::SageMaker
       req.send_request(options)
     end
 
-    # Creates an AutoPilot job.
+    # Creates an Autopilot job.
     #
-    # After you run an AutoPilot job, you can find the best performing model
-    # by calling , and then deploy that model by following the steps
-    # described in [Step 6.1: Deploy the Model to Amazon SageMaker Hosting
-    # Services][1].
+    # Find the best performing model after you run an Autopilot job by
+    # calling . Deploy that model by following the steps described in [Step
+    # 6.1: Deploy the Model to Amazon SageMaker Hosting Services][1].
     #
-    # For information about how to use AutoPilot, see [Use AutoPilot to
-    # Automate Model Development][2].
+    # For information about how to use Autopilot, see [ Automate Model
+    # Development with Amazon SageMaker Autopilot][2].
     #
     #
     #
@@ -729,7 +728,7 @@ module Aws::SageMaker
     # [2]: https://docs.aws.amazon.com/sagemaker/latest/dg/autopilot-automate-model-development.html
     #
     # @option params [required, String] :auto_ml_job_name
-    #   Identifies an AutoPilot job. Must be unique to your account and is
+    #   Identifies an Autopilot job. Must be unique to your account and is
     #   case-insensitive.
     #
     # @option params [required, Array<Types::AutoMLChannel>] :input_data_config
@@ -746,20 +745,21 @@ module Aws::SageMaker
     #   MulticlassClassification, and Regression.
     #
     # @option params [Types::AutoMLJobObjective] :auto_ml_job_objective
-    #   Defines the job's objective. You provide a MetricName and AutoML will
-    #   infer minimize or maximize. If this is not provided, the most commonly
-    #   used ObjectiveMetric for problem type will be selected.
+    #   Defines the objective of a an AutoML job. You provide a
+    #   AutoMLJobObjective$MetricName and Autopilot infers whether to minimize
+    #   or maximize it. If a metric is not specified, the most commonly used
+    #   ObjectiveMetric for problem type is automaically selected.
     #
     # @option params [Types::AutoMLJobConfig] :auto_ml_job_config
     #   Contains CompletionCriteria and SecurityConfig.
     #
     # @option params [required, String] :role_arn
-    #   The ARN of the role that will be used to access the data.
+    #   The ARN of the role that is used to access the data.
     #
     # @option params [Boolean] :generate_candidate_definitions_only
-    #   This will generate possible candidates without training a model. A
-    #   candidate is a combination of data preprocessors, algorithms, and
-    #   algorithm parameter settings.
+    #   Generates possible candidates without training a model. A candidate is
+    #   a combination of data preprocessors, algorithms, and algorithm
+    #   parameter settings.
     #
     # @option params [Array<Types::Tag>] :tags
     #   Each tag consists of a key and an optional value. Tag keys must be
@@ -791,7 +791,7 @@ module Aws::SageMaker
     #     },
     #     problem_type: "BinaryClassification", # accepts BinaryClassification, MulticlassClassification, Regression
     #     auto_ml_job_objective: {
-    #       metric_name: "Accuracy", # required, accepts Accuracy, MSE, F1, F1macro
+    #       metric_name: "Accuracy", # required, accepts Accuracy, MSE, F1, F1macro, AUC
     #     },
     #     auto_ml_job_config: {
     #       completion_criteria: {
@@ -901,8 +901,8 @@ module Aws::SageMaker
     # * The output location for the compiled model and the device (target)
     #   that the model runs on
     #
-    # * `The Amazon Resource Name (ARN) of the IAM role that Amazon
-    #   SageMaker assumes to perform the model compilation job`
+    # * The Amazon Resource Name (ARN) of the IAM role that Amazon SageMaker
+    #   assumes to perform the model compilation job.
     #
     # You can also provide a `Tag` to track the model compilation job's
     # resource use and costs. The response body contains the
@@ -970,7 +970,13 @@ module Aws::SageMaker
     #     },
     #     output_config: { # required
     #       s3_output_location: "S3Uri", # required
-    #       target_device: "lambda", # required, accepts lambda, ml_m4, ml_m5, ml_c4, ml_c5, ml_p2, ml_p3, ml_inf1, jetson_tx1, jetson_tx2, jetson_nano, jetson_xavier, rasp3b, imx8qm, deeplens, rk3399, rk3288, aisage, sbe_c, qcs605, qcs603, sitara_am57x, amba_cv22
+    #       target_device: "lambda", # accepts lambda, ml_m4, ml_m5, ml_c4, ml_c5, ml_p2, ml_p3, ml_g4dn, ml_inf1, jetson_tx1, jetson_tx2, jetson_nano, jetson_xavier, rasp3b, imx8qm, deeplens, rk3399, rk3288, aisage, sbe_c, qcs605, qcs603, sitara_am57x, amba_cv22, x86_win32, x86_win64
+    #       target_platform: {
+    #         os: "ANDROID", # required, accepts ANDROID, LINUX
+    #         arch: "X86_64", # required, accepts X86_64, X86, ARM64, ARM_EABI, ARM_EABIHF
+    #         accelerator: "INTEL_GRAPHICS", # accepts INTEL_GRAPHICS, MALI, NVIDIA
+    #       },
+    #       compiler_options: "CompilerOptions",
     #     },
     #     stopping_condition: { # required
     #       max_runtime_in_seconds: 1,
@@ -1057,19 +1063,19 @@ module Aws::SageMaker
     #       },
     #       jupyter_server_app_settings: {
     #         default_resource_spec: {
-    #           sage_maker_image_arn: "SageMakerImageArn",
+    #           sage_maker_image_arn: "ImageArn",
     #           instance_type: "system", # accepts system, ml.t3.micro, ml.t3.small, ml.t3.medium, ml.t3.large, ml.t3.xlarge, ml.t3.2xlarge, ml.m5.large, ml.m5.xlarge, ml.m5.2xlarge, ml.m5.4xlarge, ml.m5.8xlarge, ml.m5.12xlarge, ml.m5.16xlarge, ml.m5.24xlarge, ml.c5.large, ml.c5.xlarge, ml.c5.2xlarge, ml.c5.4xlarge, ml.c5.9xlarge, ml.c5.12xlarge, ml.c5.18xlarge, ml.c5.24xlarge, ml.p3.2xlarge, ml.p3.8xlarge, ml.p3.16xlarge, ml.g4dn.xlarge, ml.g4dn.2xlarge, ml.g4dn.4xlarge, ml.g4dn.8xlarge, ml.g4dn.12xlarge, ml.g4dn.16xlarge
     #         },
     #       },
     #       kernel_gateway_app_settings: {
     #         default_resource_spec: {
-    #           sage_maker_image_arn: "SageMakerImageArn",
+    #           sage_maker_image_arn: "ImageArn",
     #           instance_type: "system", # accepts system, ml.t3.micro, ml.t3.small, ml.t3.medium, ml.t3.large, ml.t3.xlarge, ml.t3.2xlarge, ml.m5.large, ml.m5.xlarge, ml.m5.2xlarge, ml.m5.4xlarge, ml.m5.8xlarge, ml.m5.12xlarge, ml.m5.16xlarge, ml.m5.24xlarge, ml.c5.large, ml.c5.xlarge, ml.c5.2xlarge, ml.c5.4xlarge, ml.c5.9xlarge, ml.c5.12xlarge, ml.c5.18xlarge, ml.c5.24xlarge, ml.p3.2xlarge, ml.p3.8xlarge, ml.p3.16xlarge, ml.g4dn.xlarge, ml.g4dn.2xlarge, ml.g4dn.4xlarge, ml.g4dn.8xlarge, ml.g4dn.12xlarge, ml.g4dn.16xlarge
     #         },
     #       },
     #       tensor_board_app_settings: {
     #         default_resource_spec: {
-    #           sage_maker_image_arn: "SageMakerImageArn",
+    #           sage_maker_image_arn: "ImageArn",
     #           instance_type: "system", # accepts system, ml.t3.micro, ml.t3.small, ml.t3.medium, ml.t3.large, ml.t3.xlarge, ml.t3.2xlarge, ml.m5.large, ml.m5.xlarge, ml.m5.2xlarge, ml.m5.4xlarge, ml.m5.8xlarge, ml.m5.12xlarge, ml.m5.16xlarge, ml.m5.24xlarge, ml.c5.large, ml.c5.xlarge, ml.c5.2xlarge, ml.c5.4xlarge, ml.c5.9xlarge, ml.c5.12xlarge, ml.c5.18xlarge, ml.c5.24xlarge, ml.p3.2xlarge, ml.p3.8xlarge, ml.p3.16xlarge, ml.g4dn.xlarge, ml.g4dn.2xlarge, ml.g4dn.4xlarge, ml.g4dn.8xlarge, ml.g4dn.12xlarge, ml.g4dn.16xlarge
     #         },
     #       },
@@ -1372,10 +1378,10 @@ module Aws::SageMaker
       req.send_request(options)
     end
 
-    # Creates an Amazon SageMaker *experiment*. An experiment is a
-    # collection of *trials* that are observed, compared and evaluated as a
-    # group. A trial is a set of steps, called *trial components*, that
-    # produce a machine learning model.
+    # Creates an SageMaker *experiment*. An experiment is a collection of
+    # *trials* that are observed, compared and evaluated as a group. A trial
+    # is a set of steps, called *trial components*, that produce a machine
+    # learning model.
     #
     # The goal of an experiment is to determine the components that produce
     # the best model. Multiple trials are performed, each one isolating and
@@ -2069,7 +2075,7 @@ module Aws::SageMaker
     #     label_attribute_name: "LabelAttributeName", # required
     #     input_config: { # required
     #       data_source: { # required
-    #         s3_data_source: { # required
+    #         s3_data_source: {
     #           manifest_s3_uri: "S3Uri", # required
     #         },
     #       },
@@ -2240,7 +2246,10 @@ module Aws::SageMaker
     #     model_name: "ModelName", # required
     #     primary_container: {
     #       container_hostname: "ContainerHostname",
-    #       image: "Image",
+    #       image: "ContainerImage",
+    #       image_config: {
+    #         repository_access_mode: "Platform", # required, accepts Platform, Vpc
+    #       },
     #       mode: "SingleModel", # accepts SingleModel, MultiModel
     #       model_data_url: "Url",
     #       environment: {
@@ -2251,7 +2260,10 @@ module Aws::SageMaker
     #     containers: [
     #       {
     #         container_hostname: "ContainerHostname",
-    #         image: "Image",
+    #         image: "ContainerImage",
+    #         image_config: {
+    #           repository_access_mode: "Platform", # required, accepts Platform, Vpc
+    #         },
     #         mode: "SingleModel", # accepts SingleModel, MultiModel
     #         model_data_url: "Url",
     #         environment: {
@@ -2341,7 +2353,7 @@ module Aws::SageMaker
     #       containers: [ # required
     #         {
     #           container_hostname: "ContainerHostname",
-    #           image: "Image", # required
+    #           image: "ContainerImage", # required
     #           image_digest: "ImageDigest",
     #           model_data_url: "Url",
     #           product_id: "ProductId",
@@ -2956,7 +2968,14 @@ module Aws::SageMaker
     #   [1]: https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/cost-alloc-tags.html#allocation-whatURL
     #
     # @option params [Types::ExperimentConfig] :experiment_config
-    #   Configuration for the experiment.
+    #   Associates a SageMaker job as a trial component with an experiment and
+    #   trial. Specified when you call the following APIs:
+    #
+    #   * CreateProcessingJob
+    #
+    #   * CreateTrainingJob
+    #
+    #   * CreateTransformJob
     #
     # @return [Types::CreateProcessingJobResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -3263,7 +3282,14 @@ module Aws::SageMaker
     #   Configuration of storage locations for TensorBoard output.
     #
     # @option params [Types::ExperimentConfig] :experiment_config
-    #   Configuration for the experiment.
+    #   Associates a SageMaker job as a trial component with an experiment and
+    #   trial. Specified when you call the following APIs:
+    #
+    #   * CreateProcessingJob
+    #
+    #   * CreateTrainingJob
+    #
+    #   * CreateTransformJob
     #
     # @return [Types::CreateTrainingJobResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -3527,7 +3553,14 @@ module Aws::SageMaker
     #   [1]: https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/cost-alloc-tags.html#allocation-what
     #
     # @option params [Types::ExperimentConfig] :experiment_config
-    #   Configuration for the experiment.
+    #   Associates a SageMaker job as a trial component with an experiment and
+    #   trial. Specified when you call the following APIs:
+    #
+    #   * CreateProcessingJob
+    #
+    #   * CreateTrainingJob
+    #
+    #   * CreateTransformJob
     #
     # @return [Types::CreateTransformJobResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -3841,19 +3874,19 @@ module Aws::SageMaker
     #       },
     #       jupyter_server_app_settings: {
     #         default_resource_spec: {
-    #           sage_maker_image_arn: "SageMakerImageArn",
+    #           sage_maker_image_arn: "ImageArn",
     #           instance_type: "system", # accepts system, ml.t3.micro, ml.t3.small, ml.t3.medium, ml.t3.large, ml.t3.xlarge, ml.t3.2xlarge, ml.m5.large, ml.m5.xlarge, ml.m5.2xlarge, ml.m5.4xlarge, ml.m5.8xlarge, ml.m5.12xlarge, ml.m5.16xlarge, ml.m5.24xlarge, ml.c5.large, ml.c5.xlarge, ml.c5.2xlarge, ml.c5.4xlarge, ml.c5.9xlarge, ml.c5.12xlarge, ml.c5.18xlarge, ml.c5.24xlarge, ml.p3.2xlarge, ml.p3.8xlarge, ml.p3.16xlarge, ml.g4dn.xlarge, ml.g4dn.2xlarge, ml.g4dn.4xlarge, ml.g4dn.8xlarge, ml.g4dn.12xlarge, ml.g4dn.16xlarge
     #         },
     #       },
     #       kernel_gateway_app_settings: {
     #         default_resource_spec: {
-    #           sage_maker_image_arn: "SageMakerImageArn",
+    #           sage_maker_image_arn: "ImageArn",
     #           instance_type: "system", # accepts system, ml.t3.micro, ml.t3.small, ml.t3.medium, ml.t3.large, ml.t3.xlarge, ml.t3.2xlarge, ml.m5.large, ml.m5.xlarge, ml.m5.2xlarge, ml.m5.4xlarge, ml.m5.8xlarge, ml.m5.12xlarge, ml.m5.16xlarge, ml.m5.24xlarge, ml.c5.large, ml.c5.xlarge, ml.c5.2xlarge, ml.c5.4xlarge, ml.c5.9xlarge, ml.c5.12xlarge, ml.c5.18xlarge, ml.c5.24xlarge, ml.p3.2xlarge, ml.p3.8xlarge, ml.p3.16xlarge, ml.g4dn.xlarge, ml.g4dn.2xlarge, ml.g4dn.4xlarge, ml.g4dn.8xlarge, ml.g4dn.12xlarge, ml.g4dn.16xlarge
     #         },
     #       },
     #       tensor_board_app_settings: {
     #         default_resource_spec: {
-    #           sage_maker_image_arn: "SageMakerImageArn",
+    #           sage_maker_image_arn: "ImageArn",
     #           instance_type: "system", # accepts system, ml.t3.micro, ml.t3.small, ml.t3.medium, ml.t3.large, ml.t3.xlarge, ml.t3.2xlarge, ml.m5.large, ml.m5.xlarge, ml.m5.2xlarge, ml.m5.4xlarge, ml.m5.8xlarge, ml.m5.12xlarge, ml.m5.16xlarge, ml.m5.24xlarge, ml.c5.large, ml.c5.xlarge, ml.c5.2xlarge, ml.c5.4xlarge, ml.c5.9xlarge, ml.c5.12xlarge, ml.c5.18xlarge, ml.c5.24xlarge, ml.p3.2xlarge, ml.p3.8xlarge, ml.p3.16xlarge, ml.g4dn.xlarge, ml.g4dn.2xlarge, ml.g4dn.4xlarge, ml.g4dn.8xlarge, ml.g4dn.12xlarge, ml.g4dn.16xlarge
     #         },
     #       },
@@ -3873,6 +3906,112 @@ module Aws::SageMaker
       req.send_request(options)
     end
 
+    # Use this operation to create a workforce. This operation will return
+    # an error if a workforce already exists in the AWS Region that you
+    # specify. You can only create one workforce in each AWS Region per AWS
+    # account.
+    #
+    # If you want to create a new workforce in an AWS Region where a
+    # workforce already exists, use the API operation to delete the existing
+    # workforce and then use `CreateWorkforce` to create a new workforce.
+    #
+    # To create a private workforce using Amazon Cognito, you must specify a
+    # Cognito user pool in `CognitoConfig`. You can also create an Amazon
+    # Cognito workforce using the Amazon SageMaker console. For more
+    # information, see [ Create a Private Workforce (Amazon Cognito)][1].
+    #
+    # To create a private workforce using your own OIDC Identity Provider
+    # (IdP), specify your IdP configuration in `OidcConfig`. Your OIDC IdP
+    # must support *groups* because groups are used by Ground Truth and
+    # Amazon A2I to create work teams. For more information, see [ Create a
+    # Private Workforce (OIDC IdP)][2].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/sagemaker/latest/dg/sms-workforce-create-private.html
+    # [2]: https://docs.aws.amazon.com/sagemaker/latest/dg/sms-workforce-create-private-oidc.html
+    #
+    # @option params [Types::CognitoConfig] :cognito_config
+    #   Use this parameter to configure an Amazon Cognito private workforce. A
+    #   single Cognito workforce is created using and corresponds to a single
+    #   [ Amazon Cognito user pool][1].
+    #
+    #   Do not use `OidcConfig` if you specify values for `CognitoConfig`.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/cognito/latest/developerguide/cognito-user-identity-pools.html
+    #
+    # @option params [Types::OidcConfig] :oidc_config
+    #   Use this parameter to configure a private workforce using your own
+    #   OIDC Identity Provider.
+    #
+    #   Do not use `CognitoConfig` if you specify values for `OidcConfig`.
+    #
+    # @option params [Types::SourceIpConfig] :source_ip_config
+    #   A list of IP address ranges ([CIDRs][1]). Used to create an allow list
+    #   of IP addresses for a private workforce. Workers will only be able to
+    #   login to their worker portal from an IP address within this range. By
+    #   default, a workforce isn't restricted to specific IP addresses.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/vpc/latest/userguide/VPC_Subnets.html
+    #
+    # @option params [required, String] :workforce_name
+    #   The name of the private workforce.
+    #
+    # @option params [Array<Types::Tag>] :tags
+    #   An array of key-value pairs that contain metadata to help you
+    #   categorize and organize our workforce. Each tag consists of a key and
+    #   a value, both of which you define.
+    #
+    # @return [Types::CreateWorkforceResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateWorkforceResponse#workforce_arn #workforce_arn} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_workforce({
+    #     cognito_config: {
+    #       user_pool: "CognitoUserPool", # required
+    #       client_id: "ClientId", # required
+    #     },
+    #     oidc_config: {
+    #       client_id: "ClientId", # required
+    #       client_secret: "ClientSecret", # required
+    #       issuer: "OidcEndpoint", # required
+    #       authorization_endpoint: "OidcEndpoint", # required
+    #       token_endpoint: "OidcEndpoint", # required
+    #       user_info_endpoint: "OidcEndpoint", # required
+    #       logout_endpoint: "OidcEndpoint", # required
+    #       jwks_uri: "OidcEndpoint", # required
+    #     },
+    #     source_ip_config: {
+    #       cidrs: ["Cidr"], # required
+    #     },
+    #     workforce_name: "WorkforceName", # required
+    #     tags: [
+    #       {
+    #         key: "TagKey", # required
+    #         value: "TagValue", # required
+    #       },
+    #     ],
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.workforce_arn #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/CreateWorkforce AWS API Documentation
+    #
+    # @overload create_workforce(params = {})
+    # @param [Hash] params ({})
+    def create_workforce(params = {}, options = {})
+      req = build_request(:create_workforce, params)
+      req.send_request(options)
+    end
+
     # Creates a new work team for labeling your data. A work team is defined
     # by one or more Amazon Cognito user pools. You must first create the
     # user pools before you can create a work team.
@@ -3882,13 +4021,30 @@ module Aws::SageMaker
     # @option params [required, String] :workteam_name
     #   The name of the work team. Use this name to identify the work team.
     #
+    # @option params [String] :workforce_name
+    #   The name of the workforce.
+    #
     # @option params [required, Array<Types::MemberDefinition>] :member_definitions
     #   A list of `MemberDefinition` objects that contains objects that
-    #   identify the Amazon Cognito user pool that makes up the work team. For
-    #   more information, see [Amazon Cognito User Pools][1].
+    #   identify the workers that make up the work team.
     #
-    #   All of the `CognitoMemberDefinition` objects that make up the member
-    #   definition must have the same `ClientId` and `UserPool` values.
+    #   Workforces can be created using Amazon Cognito or your own OIDC
+    #   Identity Provider (IdP). For private workforces created using Amazon
+    #   Cognito use `CognitoMemberDefinition`. For workforces created using
+    #   your own OIDC identity provider (IdP) use `OidcMemberDefinition`. Do
+    #   not provide input for both of these parameters in a single request.
+    #
+    #   For workforces created using Amazon Cognito, private work teams
+    #   correspond to Amazon Cognito *user groups* within the user pool used
+    #   to create a workforce. All of the `CognitoMemberDefinition` objects
+    #   that make up the member definition must have the same `ClientId` and
+    #   `UserPool` values. To add a Amazon Cognito user group to an existing
+    #   worker pool, see [Adding groups to a User Pool](). For more
+    #   information about user pools, see [Amazon Cognito User Pools][1].
+    #
+    #   For workforces created using your own OIDC IdP, specify the user
+    #   groups that you want to include in your private work team in
+    #   `OidcMemberDefinition` by listing those groups in `Groups`.
     #
     #
     #
@@ -3920,12 +4076,16 @@ module Aws::SageMaker
     #
     #   resp = client.create_workteam({
     #     workteam_name: "WorkteamName", # required
+    #     workforce_name: "WorkforceName",
     #     member_definitions: [ # required
     #       {
     #         cognito_member_definition: {
     #           user_pool: "CognitoUserPool", # required
     #           user_group: "CognitoUserGroup", # required
-    #           client_id: "CognitoClientId", # required
+    #           client_id: "ClientId", # required
+    #         },
+    #         oidc_member_definition: {
+    #           groups: ["Group"], # required
     #         },
     #       },
     #     ],
@@ -4179,7 +4339,8 @@ module Aws::SageMaker
       req.send_request(options)
     end
 
-    # Use this operation to delete a worker task template (`HumanTaskUi`).
+    # Use this operation to delete a human task user interface (worker task
+    # template).
     #
     # To see a list of human task user interfaces (work task templates) in
     # your account, use . When you delete a worker task template, it no
@@ -4453,6 +4614,37 @@ module Aws::SageMaker
     # @param [Hash] params ({})
     def delete_user_profile(params = {}, options = {})
       req = build_request(:delete_user_profile, params)
+      req.send_request(options)
+    end
+
+    # Use this operation to delete a workforce.
+    #
+    # If you want to create a new workforce in an AWS Region where a
+    # workforce already exists, use this operation to delete the existing
+    # workforce and then use to create a new workforce.
+    #
+    # If a private workforce contains one or more work teams, you must use
+    # the operation to delete all work teams before you delete the
+    # workforce. If you try to delete a workforce that contains one or more
+    # work teams, you will recieve a `ResourceInUse` error.
+    #
+    # @option params [required, String] :workforce_name
+    #   The name of the workforce.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_workforce({
+    #     workforce_name: "WorkforceName", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/DeleteWorkforce AWS API Documentation
+    #
+    # @overload delete_workforce(params = {})
+    # @param [Hash] params ({})
+    def delete_workforce(params = {}, options = {})
+      req = build_request(:delete_workforce, params)
       req.send_request(options)
     end
 
@@ -4737,7 +4929,7 @@ module Aws::SageMaker
     #   resp.output_data_config.kms_key_id #=> String
     #   resp.output_data_config.s3_output_path #=> String
     #   resp.role_arn #=> String
-    #   resp.auto_ml_job_objective.metric_name #=> String, one of "Accuracy", "MSE", "F1", "F1macro"
+    #   resp.auto_ml_job_objective.metric_name #=> String, one of "Accuracy", "MSE", "F1", "F1macro", "AUC"
     #   resp.problem_type #=> String, one of "BinaryClassification", "MulticlassClassification", "Regression"
     #   resp.auto_ml_job_config.completion_criteria.max_candidates #=> Integer
     #   resp.auto_ml_job_config.completion_criteria.max_runtime_per_training_job_in_seconds #=> Integer
@@ -4754,7 +4946,7 @@ module Aws::SageMaker
     #   resp.failure_reason #=> String
     #   resp.best_candidate.candidate_name #=> String
     #   resp.best_candidate.final_auto_ml_job_objective_metric.type #=> String, one of "Maximize", "Minimize"
-    #   resp.best_candidate.final_auto_ml_job_objective_metric.metric_name #=> String, one of "Accuracy", "MSE", "F1", "F1macro"
+    #   resp.best_candidate.final_auto_ml_job_objective_metric.metric_name #=> String, one of "Accuracy", "MSE", "F1", "F1macro", "AUC"
     #   resp.best_candidate.final_auto_ml_job_objective_metric.value #=> Float
     #   resp.best_candidate.objective_status #=> String, one of "Succeeded", "Pending", "Failed"
     #   resp.best_candidate.candidate_steps #=> Array
@@ -4776,7 +4968,7 @@ module Aws::SageMaker
     #   resp.generate_candidate_definitions_only #=> Boolean
     #   resp.auto_ml_job_artifacts.candidate_definition_notebook_location #=> String
     #   resp.auto_ml_job_artifacts.data_exploration_notebook_location #=> String
-    #   resp.resolved_attributes.auto_ml_job_objective.metric_name #=> String, one of "Accuracy", "MSE", "F1", "F1macro"
+    #   resp.resolved_attributes.auto_ml_job_objective.metric_name #=> String, one of "Accuracy", "MSE", "F1", "F1macro", "AUC"
     #   resp.resolved_attributes.problem_type #=> String, one of "BinaryClassification", "MulticlassClassification", "Regression"
     #   resp.resolved_attributes.completion_criteria.max_candidates #=> Integer
     #   resp.resolved_attributes.completion_criteria.max_runtime_per_training_job_in_seconds #=> Integer
@@ -4878,7 +5070,11 @@ module Aws::SageMaker
     #   resp.input_config.data_input_config #=> String
     #   resp.input_config.framework #=> String, one of "TENSORFLOW", "KERAS", "MXNET", "ONNX", "PYTORCH", "XGBOOST", "TFLITE"
     #   resp.output_config.s3_output_location #=> String
-    #   resp.output_config.target_device #=> String, one of "lambda", "ml_m4", "ml_m5", "ml_c4", "ml_c5", "ml_p2", "ml_p3", "ml_inf1", "jetson_tx1", "jetson_tx2", "jetson_nano", "jetson_xavier", "rasp3b", "imx8qm", "deeplens", "rk3399", "rk3288", "aisage", "sbe_c", "qcs605", "qcs603", "sitara_am57x", "amba_cv22"
+    #   resp.output_config.target_device #=> String, one of "lambda", "ml_m4", "ml_m5", "ml_c4", "ml_c5", "ml_p2", "ml_p3", "ml_g4dn", "ml_inf1", "jetson_tx1", "jetson_tx2", "jetson_nano", "jetson_xavier", "rasp3b", "imx8qm", "deeplens", "rk3399", "rk3288", "aisage", "sbe_c", "qcs605", "qcs603", "sitara_am57x", "amba_cv22", "x86_win32", "x86_win64"
+    #   resp.output_config.target_platform.os #=> String, one of "ANDROID", "LINUX"
+    #   resp.output_config.target_platform.arch #=> String, one of "X86_64", "X86", "ARM64", "ARM_EABI", "ARM_EABIHF"
+    #   resp.output_config.target_platform.accelerator #=> String, one of "INTEL_GRAPHICS", "MALI", "NVIDIA"
+    #   resp.output_config.compiler_options #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/DescribeCompilationJob AWS API Documentation
     #
@@ -5483,7 +5679,7 @@ module Aws::SageMaker
     #
     # @example Response structure
     #
-    #   resp.labeling_job_status #=> String, one of "InProgress", "Completed", "Failed", "Stopping", "Stopped"
+    #   resp.labeling_job_status #=> String, one of "Initializing", "InProgress", "Completed", "Failed", "Stopping", "Stopped"
     #   resp.label_counters.total_labeled #=> Integer
     #   resp.label_counters.human_labeled #=> Integer
     #   resp.label_counters.machine_labeled #=> Integer
@@ -5566,6 +5762,7 @@ module Aws::SageMaker
     #   resp.model_name #=> String
     #   resp.primary_container.container_hostname #=> String
     #   resp.primary_container.image #=> String
+    #   resp.primary_container.image_config.repository_access_mode #=> String, one of "Platform", "Vpc"
     #   resp.primary_container.mode #=> String, one of "SingleModel", "MultiModel"
     #   resp.primary_container.model_data_url #=> String
     #   resp.primary_container.environment #=> Hash
@@ -5574,6 +5771,7 @@ module Aws::SageMaker
     #   resp.containers #=> Array
     #   resp.containers[0].container_hostname #=> String
     #   resp.containers[0].image #=> String
+    #   resp.containers[0].image_config.repository_access_mode #=> String, one of "Platform", "Vpc"
     #   resp.containers[0].mode #=> String, one of "SingleModel", "MultiModel"
     #   resp.containers[0].model_data_url #=> String
     #   resp.containers[0].environment #=> Hash
@@ -6499,6 +6697,17 @@ module Aws::SageMaker
     #   resp.workforce.last_updated_date #=> Time
     #   resp.workforce.source_ip_config.cidrs #=> Array
     #   resp.workforce.source_ip_config.cidrs[0] #=> String
+    #   resp.workforce.sub_domain #=> String
+    #   resp.workforce.cognito_config.user_pool #=> String
+    #   resp.workforce.cognito_config.client_id #=> String
+    #   resp.workforce.oidc_config.client_id #=> String
+    #   resp.workforce.oidc_config.issuer #=> String
+    #   resp.workforce.oidc_config.authorization_endpoint #=> String
+    #   resp.workforce.oidc_config.token_endpoint #=> String
+    #   resp.workforce.oidc_config.user_info_endpoint #=> String
+    #   resp.workforce.oidc_config.logout_endpoint #=> String
+    #   resp.workforce.oidc_config.jwks_uri #=> String
+    #   resp.workforce.create_date #=> Time
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/DescribeWorkforce AWS API Documentation
     #
@@ -6533,7 +6742,10 @@ module Aws::SageMaker
     #   resp.workteam.member_definitions[0].cognito_member_definition.user_pool #=> String
     #   resp.workteam.member_definitions[0].cognito_member_definition.user_group #=> String
     #   resp.workteam.member_definitions[0].cognito_member_definition.client_id #=> String
+    #   resp.workteam.member_definitions[0].oidc_member_definition.groups #=> Array
+    #   resp.workteam.member_definitions[0].oidc_member_definition.groups[0] #=> String
     #   resp.workteam.workteam_arn #=> String
+    #   resp.workteam.workforce_arn #=> String
     #   resp.workteam.product_listing_ids #=> Array
     #   resp.workteam.product_listing_ids[0] #=> String
     #   resp.workteam.description #=> String
@@ -6792,8 +7004,8 @@ module Aws::SageMaker
     #   Request a list of jobs up to a specified limit.
     #
     # @option params [String] :next_token
-    #   If the previous response was truncated, you will receive this token.
-    #   Use it in your next request to receive the next set of results.
+    #   If the previous response was truncated, you receive this token. Use it
+    #   in your next request to receive the next set of results.
     #
     # @return [Types::ListAutoMLJobsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -6860,8 +7072,8 @@ module Aws::SageMaker
     #   List the job's Candidates up to a specified limit.
     #
     # @option params [String] :next_token
-    #   If the previous response was truncated, you will receive this token.
-    #   Use it in your next request to receive the next set of results.
+    #   If the previous response was truncated, you receive this token. Use it
+    #   in your next request to receive the next set of results.
     #
     # @return [Types::ListCandidatesForAutoMLJobResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -6887,7 +7099,7 @@ module Aws::SageMaker
     #   resp.candidates #=> Array
     #   resp.candidates[0].candidate_name #=> String
     #   resp.candidates[0].final_auto_ml_job_objective_metric.type #=> String, one of "Maximize", "Minimize"
-    #   resp.candidates[0].final_auto_ml_job_objective_metric.metric_name #=> String, one of "Accuracy", "MSE", "F1", "F1macro"
+    #   resp.candidates[0].final_auto_ml_job_objective_metric.metric_name #=> String, one of "Accuracy", "MSE", "F1", "F1macro", "AUC"
     #   resp.candidates[0].final_auto_ml_job_objective_metric.value #=> Float
     #   resp.candidates[0].objective_status #=> String, one of "Succeeded", "Pending", "Failed"
     #   resp.candidates[0].candidate_steps #=> Array
@@ -7068,7 +7280,10 @@ module Aws::SageMaker
     #   resp.compilation_job_summaries[0].creation_time #=> Time
     #   resp.compilation_job_summaries[0].compilation_start_time #=> Time
     #   resp.compilation_job_summaries[0].compilation_end_time #=> Time
-    #   resp.compilation_job_summaries[0].compilation_target_device #=> String, one of "lambda", "ml_m4", "ml_m5", "ml_c4", "ml_c5", "ml_p2", "ml_p3", "ml_inf1", "jetson_tx1", "jetson_tx2", "jetson_nano", "jetson_xavier", "rasp3b", "imx8qm", "deeplens", "rk3399", "rk3288", "aisage", "sbe_c", "qcs605", "qcs603", "sitara_am57x", "amba_cv22"
+    #   resp.compilation_job_summaries[0].compilation_target_device #=> String, one of "lambda", "ml_m4", "ml_m5", "ml_c4", "ml_c5", "ml_p2", "ml_p3", "ml_g4dn", "ml_inf1", "jetson_tx1", "jetson_tx2", "jetson_nano", "jetson_xavier", "rasp3b", "imx8qm", "deeplens", "rk3399", "rk3288", "aisage", "sbe_c", "qcs605", "qcs603", "sitara_am57x", "amba_cv22", "x86_win32", "x86_win64"
+    #   resp.compilation_job_summaries[0].compilation_target_platform_os #=> String, one of "ANDROID", "LINUX"
+    #   resp.compilation_job_summaries[0].compilation_target_platform_arch #=> String, one of "X86_64", "X86", "ARM64", "ARM_EABI", "ARM_EABIHF"
+    #   resp.compilation_job_summaries[0].compilation_target_platform_accelerator #=> String, one of "INTEL_GRAPHICS", "MALI", "NVIDIA"
     #   resp.compilation_job_summaries[0].last_modified_time #=> Time
     #   resp.compilation_job_summaries[0].compilation_job_status #=> String, one of "INPROGRESS", "COMPLETED", "FAILED", "STARTING", "STOPPING", "STOPPED"
     #   resp.next_token #=> String
@@ -7606,7 +7821,7 @@ module Aws::SageMaker
     #     name_contains: "NameContains",
     #     sort_by: "Name", # accepts Name, CreationTime, Status
     #     sort_order: "Ascending", # accepts Ascending, Descending
-    #     status_equals: "InProgress", # accepts InProgress, Completed, Failed, Stopping, Stopped
+    #     status_equals: "Initializing", # accepts Initializing, InProgress, Completed, Failed, Stopping, Stopped
     #   })
     #
     # @example Response structure
@@ -7616,7 +7831,7 @@ module Aws::SageMaker
     #   resp.labeling_job_summary_list[0].labeling_job_arn #=> String
     #   resp.labeling_job_summary_list[0].creation_time #=> Time
     #   resp.labeling_job_summary_list[0].last_modified_time #=> Time
-    #   resp.labeling_job_summary_list[0].labeling_job_status #=> String, one of "InProgress", "Completed", "Failed", "Stopping", "Stopped"
+    #   resp.labeling_job_summary_list[0].labeling_job_status #=> String, one of "Initializing", "InProgress", "Completed", "Failed", "Stopping", "Stopped"
     #   resp.labeling_job_summary_list[0].label_counters.total_labeled #=> Integer
     #   resp.labeling_job_summary_list[0].label_counters.human_labeled #=> Integer
     #   resp.labeling_job_summary_list[0].label_counters.machine_labeled #=> Integer
@@ -8875,9 +9090,76 @@ module Aws::SageMaker
       req.send_request(options)
     end
 
-    # Gets a list of work teams that you have defined in a region. The list
-    # may be empty if no work team satisfies the filter specified in the
-    # `NameContains` parameter.
+    # Use this operation to list all private and vendor workforces in an AWS
+    # Region. Note that you can only have one private workforce per AWS
+    # Region.
+    #
+    # @option params [String] :sort_by
+    #   Sort workforces using the workforce name or creation date.
+    #
+    # @option params [String] :sort_order
+    #   Sort workforces in ascending or descending order.
+    #
+    # @option params [String] :name_contains
+    #   A filter you can use to search for workforces using part of the
+    #   workforce name.
+    #
+    # @option params [String] :next_token
+    #   A token to resume pagination.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of workforces returned in the response.
+    #
+    # @return [Types::ListWorkforcesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListWorkforcesResponse#workforces #workforces} => Array&lt;Types::Workforce&gt;
+    #   * {Types::ListWorkforcesResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_workforces({
+    #     sort_by: "Name", # accepts Name, CreateDate
+    #     sort_order: "Ascending", # accepts Ascending, Descending
+    #     name_contains: "WorkforceName",
+    #     next_token: "NextToken",
+    #     max_results: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.workforces #=> Array
+    #   resp.workforces[0].workforce_name #=> String
+    #   resp.workforces[0].workforce_arn #=> String
+    #   resp.workforces[0].last_updated_date #=> Time
+    #   resp.workforces[0].source_ip_config.cidrs #=> Array
+    #   resp.workforces[0].source_ip_config.cidrs[0] #=> String
+    #   resp.workforces[0].sub_domain #=> String
+    #   resp.workforces[0].cognito_config.user_pool #=> String
+    #   resp.workforces[0].cognito_config.client_id #=> String
+    #   resp.workforces[0].oidc_config.client_id #=> String
+    #   resp.workforces[0].oidc_config.issuer #=> String
+    #   resp.workforces[0].oidc_config.authorization_endpoint #=> String
+    #   resp.workforces[0].oidc_config.token_endpoint #=> String
+    #   resp.workforces[0].oidc_config.user_info_endpoint #=> String
+    #   resp.workforces[0].oidc_config.logout_endpoint #=> String
+    #   resp.workforces[0].oidc_config.jwks_uri #=> String
+    #   resp.workforces[0].create_date #=> Time
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/ListWorkforces AWS API Documentation
+    #
+    # @overload list_workforces(params = {})
+    # @param [Hash] params ({})
+    def list_workforces(params = {}, options = {})
+      req = build_request(:list_workforces, params)
+      req.send_request(options)
+    end
+
+    # Gets a list of private work teams that you have defined in a region.
+    # The list may be empty if no work team satisfies the filter specified
+    # in the `NameContains` parameter.
     #
     # @option params [String] :sort_by
     #   The field to sort results by. The default is `CreationTime`.
@@ -8923,7 +9205,10 @@ module Aws::SageMaker
     #   resp.workteams[0].member_definitions[0].cognito_member_definition.user_pool #=> String
     #   resp.workteams[0].member_definitions[0].cognito_member_definition.user_group #=> String
     #   resp.workteams[0].member_definitions[0].cognito_member_definition.client_id #=> String
+    #   resp.workteams[0].member_definitions[0].oidc_member_definition.groups #=> Array
+    #   resp.workteams[0].member_definitions[0].oidc_member_definition.groups[0] #=> String
     #   resp.workteams[0].workteam_arn #=> String
+    #   resp.workteams[0].workforce_arn #=> String
     #   resp.workteams[0].product_listing_ids #=> Array
     #   resp.workteams[0].product_listing_ids[0] #=> String
     #   resp.workteams[0].description #=> String
@@ -9405,6 +9690,44 @@ module Aws::SageMaker
     #   resp.results[0].trial_component.source_detail.processing_job.tags #=> Array
     #   resp.results[0].trial_component.source_detail.processing_job.tags[0].key #=> String
     #   resp.results[0].trial_component.source_detail.processing_job.tags[0].value #=> String
+    #   resp.results[0].trial_component.source_detail.transform_job.transform_job_name #=> String
+    #   resp.results[0].trial_component.source_detail.transform_job.transform_job_arn #=> String
+    #   resp.results[0].trial_component.source_detail.transform_job.transform_job_status #=> String, one of "InProgress", "Completed", "Failed", "Stopping", "Stopped"
+    #   resp.results[0].trial_component.source_detail.transform_job.failure_reason #=> String
+    #   resp.results[0].trial_component.source_detail.transform_job.model_name #=> String
+    #   resp.results[0].trial_component.source_detail.transform_job.max_concurrent_transforms #=> Integer
+    #   resp.results[0].trial_component.source_detail.transform_job.model_client_config.invocations_timeout_in_seconds #=> Integer
+    #   resp.results[0].trial_component.source_detail.transform_job.model_client_config.invocations_max_retries #=> Integer
+    #   resp.results[0].trial_component.source_detail.transform_job.max_payload_in_mb #=> Integer
+    #   resp.results[0].trial_component.source_detail.transform_job.batch_strategy #=> String, one of "MultiRecord", "SingleRecord"
+    #   resp.results[0].trial_component.source_detail.transform_job.environment #=> Hash
+    #   resp.results[0].trial_component.source_detail.transform_job.environment["TransformEnvironmentKey"] #=> String
+    #   resp.results[0].trial_component.source_detail.transform_job.transform_input.data_source.s3_data_source.s3_data_type #=> String, one of "ManifestFile", "S3Prefix", "AugmentedManifestFile"
+    #   resp.results[0].trial_component.source_detail.transform_job.transform_input.data_source.s3_data_source.s3_uri #=> String
+    #   resp.results[0].trial_component.source_detail.transform_job.transform_input.content_type #=> String
+    #   resp.results[0].trial_component.source_detail.transform_job.transform_input.compression_type #=> String, one of "None", "Gzip"
+    #   resp.results[0].trial_component.source_detail.transform_job.transform_input.split_type #=> String, one of "None", "Line", "RecordIO", "TFRecord"
+    #   resp.results[0].trial_component.source_detail.transform_job.transform_output.s3_output_path #=> String
+    #   resp.results[0].trial_component.source_detail.transform_job.transform_output.accept #=> String
+    #   resp.results[0].trial_component.source_detail.transform_job.transform_output.assemble_with #=> String, one of "None", "Line"
+    #   resp.results[0].trial_component.source_detail.transform_job.transform_output.kms_key_id #=> String
+    #   resp.results[0].trial_component.source_detail.transform_job.transform_resources.instance_type #=> String, one of "ml.m4.xlarge", "ml.m4.2xlarge", "ml.m4.4xlarge", "ml.m4.10xlarge", "ml.m4.16xlarge", "ml.c4.xlarge", "ml.c4.2xlarge", "ml.c4.4xlarge", "ml.c4.8xlarge", "ml.p2.xlarge", "ml.p2.8xlarge", "ml.p2.16xlarge", "ml.p3.2xlarge", "ml.p3.8xlarge", "ml.p3.16xlarge", "ml.c5.xlarge", "ml.c5.2xlarge", "ml.c5.4xlarge", "ml.c5.9xlarge", "ml.c5.18xlarge", "ml.m5.large", "ml.m5.xlarge", "ml.m5.2xlarge", "ml.m5.4xlarge", "ml.m5.12xlarge", "ml.m5.24xlarge"
+    #   resp.results[0].trial_component.source_detail.transform_job.transform_resources.instance_count #=> Integer
+    #   resp.results[0].trial_component.source_detail.transform_job.transform_resources.volume_kms_key_id #=> String
+    #   resp.results[0].trial_component.source_detail.transform_job.creation_time #=> Time
+    #   resp.results[0].trial_component.source_detail.transform_job.transform_start_time #=> Time
+    #   resp.results[0].trial_component.source_detail.transform_job.transform_end_time #=> Time
+    #   resp.results[0].trial_component.source_detail.transform_job.labeling_job_arn #=> String
+    #   resp.results[0].trial_component.source_detail.transform_job.auto_ml_job_arn #=> String
+    #   resp.results[0].trial_component.source_detail.transform_job.data_processing.input_filter #=> String
+    #   resp.results[0].trial_component.source_detail.transform_job.data_processing.output_filter #=> String
+    #   resp.results[0].trial_component.source_detail.transform_job.data_processing.join_source #=> String, one of "Input", "None"
+    #   resp.results[0].trial_component.source_detail.transform_job.experiment_config.experiment_name #=> String
+    #   resp.results[0].trial_component.source_detail.transform_job.experiment_config.trial_name #=> String
+    #   resp.results[0].trial_component.source_detail.transform_job.experiment_config.trial_component_display_name #=> String
+    #   resp.results[0].trial_component.source_detail.transform_job.tags #=> Array
+    #   resp.results[0].trial_component.source_detail.transform_job.tags[0].key #=> String
+    #   resp.results[0].trial_component.source_detail.transform_job.tags[0].value #=> String
     #   resp.results[0].trial_component.tags #=> Array
     #   resp.results[0].trial_component.tags[0].key #=> String
     #   resp.results[0].trial_component.tags[0].value #=> String
@@ -9779,19 +10102,19 @@ module Aws::SageMaker
     #       },
     #       jupyter_server_app_settings: {
     #         default_resource_spec: {
-    #           sage_maker_image_arn: "SageMakerImageArn",
+    #           sage_maker_image_arn: "ImageArn",
     #           instance_type: "system", # accepts system, ml.t3.micro, ml.t3.small, ml.t3.medium, ml.t3.large, ml.t3.xlarge, ml.t3.2xlarge, ml.m5.large, ml.m5.xlarge, ml.m5.2xlarge, ml.m5.4xlarge, ml.m5.8xlarge, ml.m5.12xlarge, ml.m5.16xlarge, ml.m5.24xlarge, ml.c5.large, ml.c5.xlarge, ml.c5.2xlarge, ml.c5.4xlarge, ml.c5.9xlarge, ml.c5.12xlarge, ml.c5.18xlarge, ml.c5.24xlarge, ml.p3.2xlarge, ml.p3.8xlarge, ml.p3.16xlarge, ml.g4dn.xlarge, ml.g4dn.2xlarge, ml.g4dn.4xlarge, ml.g4dn.8xlarge, ml.g4dn.12xlarge, ml.g4dn.16xlarge
     #         },
     #       },
     #       kernel_gateway_app_settings: {
     #         default_resource_spec: {
-    #           sage_maker_image_arn: "SageMakerImageArn",
+    #           sage_maker_image_arn: "ImageArn",
     #           instance_type: "system", # accepts system, ml.t3.micro, ml.t3.small, ml.t3.medium, ml.t3.large, ml.t3.xlarge, ml.t3.2xlarge, ml.m5.large, ml.m5.xlarge, ml.m5.2xlarge, ml.m5.4xlarge, ml.m5.8xlarge, ml.m5.12xlarge, ml.m5.16xlarge, ml.m5.24xlarge, ml.c5.large, ml.c5.xlarge, ml.c5.2xlarge, ml.c5.4xlarge, ml.c5.9xlarge, ml.c5.12xlarge, ml.c5.18xlarge, ml.c5.24xlarge, ml.p3.2xlarge, ml.p3.8xlarge, ml.p3.16xlarge, ml.g4dn.xlarge, ml.g4dn.2xlarge, ml.g4dn.4xlarge, ml.g4dn.8xlarge, ml.g4dn.12xlarge, ml.g4dn.16xlarge
     #         },
     #       },
     #       tensor_board_app_settings: {
     #         default_resource_spec: {
-    #           sage_maker_image_arn: "SageMakerImageArn",
+    #           sage_maker_image_arn: "ImageArn",
     #           instance_type: "system", # accepts system, ml.t3.micro, ml.t3.small, ml.t3.medium, ml.t3.large, ml.t3.xlarge, ml.t3.2xlarge, ml.m5.large, ml.m5.xlarge, ml.m5.2xlarge, ml.m5.4xlarge, ml.m5.8xlarge, ml.m5.12xlarge, ml.m5.16xlarge, ml.m5.24xlarge, ml.c5.large, ml.c5.xlarge, ml.c5.2xlarge, ml.c5.4xlarge, ml.c5.9xlarge, ml.c5.12xlarge, ml.c5.18xlarge, ml.c5.24xlarge, ml.p3.2xlarge, ml.p3.8xlarge, ml.p3.16xlarge, ml.g4dn.xlarge, ml.g4dn.2xlarge, ml.g4dn.4xlarge, ml.g4dn.8xlarge, ml.g4dn.12xlarge, ml.g4dn.16xlarge
     #         },
     #       },
@@ -10408,19 +10731,19 @@ module Aws::SageMaker
     #       },
     #       jupyter_server_app_settings: {
     #         default_resource_spec: {
-    #           sage_maker_image_arn: "SageMakerImageArn",
+    #           sage_maker_image_arn: "ImageArn",
     #           instance_type: "system", # accepts system, ml.t3.micro, ml.t3.small, ml.t3.medium, ml.t3.large, ml.t3.xlarge, ml.t3.2xlarge, ml.m5.large, ml.m5.xlarge, ml.m5.2xlarge, ml.m5.4xlarge, ml.m5.8xlarge, ml.m5.12xlarge, ml.m5.16xlarge, ml.m5.24xlarge, ml.c5.large, ml.c5.xlarge, ml.c5.2xlarge, ml.c5.4xlarge, ml.c5.9xlarge, ml.c5.12xlarge, ml.c5.18xlarge, ml.c5.24xlarge, ml.p3.2xlarge, ml.p3.8xlarge, ml.p3.16xlarge, ml.g4dn.xlarge, ml.g4dn.2xlarge, ml.g4dn.4xlarge, ml.g4dn.8xlarge, ml.g4dn.12xlarge, ml.g4dn.16xlarge
     #         },
     #       },
     #       kernel_gateway_app_settings: {
     #         default_resource_spec: {
-    #           sage_maker_image_arn: "SageMakerImageArn",
+    #           sage_maker_image_arn: "ImageArn",
     #           instance_type: "system", # accepts system, ml.t3.micro, ml.t3.small, ml.t3.medium, ml.t3.large, ml.t3.xlarge, ml.t3.2xlarge, ml.m5.large, ml.m5.xlarge, ml.m5.2xlarge, ml.m5.4xlarge, ml.m5.8xlarge, ml.m5.12xlarge, ml.m5.16xlarge, ml.m5.24xlarge, ml.c5.large, ml.c5.xlarge, ml.c5.2xlarge, ml.c5.4xlarge, ml.c5.9xlarge, ml.c5.12xlarge, ml.c5.18xlarge, ml.c5.24xlarge, ml.p3.2xlarge, ml.p3.8xlarge, ml.p3.16xlarge, ml.g4dn.xlarge, ml.g4dn.2xlarge, ml.g4dn.4xlarge, ml.g4dn.8xlarge, ml.g4dn.12xlarge, ml.g4dn.16xlarge
     #         },
     #       },
     #       tensor_board_app_settings: {
     #         default_resource_spec: {
-    #           sage_maker_image_arn: "SageMakerImageArn",
+    #           sage_maker_image_arn: "ImageArn",
     #           instance_type: "system", # accepts system, ml.t3.micro, ml.t3.small, ml.t3.medium, ml.t3.large, ml.t3.xlarge, ml.t3.2xlarge, ml.m5.large, ml.m5.xlarge, ml.m5.2xlarge, ml.m5.4xlarge, ml.m5.8xlarge, ml.m5.12xlarge, ml.m5.16xlarge, ml.m5.24xlarge, ml.c5.large, ml.c5.xlarge, ml.c5.2xlarge, ml.c5.4xlarge, ml.c5.9xlarge, ml.c5.12xlarge, ml.c5.18xlarge, ml.c5.24xlarge, ml.p3.2xlarge, ml.p3.8xlarge, ml.p3.16xlarge, ml.g4dn.xlarge, ml.g4dn.2xlarge, ml.g4dn.4xlarge, ml.g4dn.8xlarge, ml.g4dn.12xlarge, ml.g4dn.16xlarge
     #         },
     #       },
@@ -10440,27 +10763,39 @@ module Aws::SageMaker
       req.send_request(options)
     end
 
-    # Restricts access to tasks assigned to workers in the specified
-    # workforce to those within specific ranges of IP addresses. You specify
-    # allowed IP addresses by creating a list of up to ten [CIDRs][1].
+    # Use this operation to update your workforce. You can use this
+    # operation to require that workers use specific IP addresses to work on
+    # tasks and to update your OpenID Connect (OIDC) Identity Provider (IdP)
+    # workforce configuration.
     #
-    # By default, a workforce isn't restricted to specific IP addresses. If
-    # you specify a range of IP addresses, workers who attempt to access
-    # tasks using any IP address outside the specified range are denied
-    # access and get a `Not Found` error message on the worker portal. After
-    # restricting access with this operation, you can see the allowed IP
-    # values for a private workforce with the operation.
+    # Use `SourceIpConfig` to restrict worker access to tasks to a specific
+    # range of IP addresses. You specify allowed IP addresses by creating a
+    # list of up to ten [CIDRs][1]. By default, a workforce isn't
+    # restricted to specific IP addresses. If you specify a range of IP
+    # addresses, workers who attempt to access tasks using any IP address
+    # outside the specified range are denied and get a `Not Found` error
+    # message on the worker portal.
     #
-    # This operation applies only to private workforces.
+    # Use `OidcConfig` to update the configuration of a workforce created
+    # using your own OIDC IdP.
+    #
+    # You can only update your OIDC IdP configuration when there are no work
+    # teams associated with your workforce. You can delete work teams using
+    # the operation.
+    #
+    # After restricting access to a range of IP addresses or updating your
+    # OIDC IdP configuration with this operation, you can view details about
+    # your update workforce using the operation.
+    #
+    # This operation only applies to private workforces.
     #
     #
     #
     # [1]: https://docs.aws.amazon.com/vpc/latest/userguide/VPC_Subnets.html
     #
     # @option params [required, String] :workforce_name
-    #   The name of the private workforce whose access you want to restrict.
-    #   `WorkforceName` is automatically set to `default` when a workforce is
-    #   created and cannot be modified.
+    #   The name of the private workforce that you want to update. You can
+    #   find your workforce name by using the operation.
     #
     # @option params [Types::SourceIpConfig] :source_ip_config
     #   A list of one to ten worker IP address ranges ([CIDRs][1]) that can be
@@ -10471,6 +10806,10 @@ module Aws::SageMaker
     #
     #
     #   [1]: https://docs.aws.amazon.com/vpc/latest/userguide/VPC_Subnets.html
+    #
+    # @option params [Types::OidcConfig] :oidc_config
+    #   Use this parameter to update your OIDC Identity Provider (IdP)
+    #   configuration for a workforce made using your own IdP.
     #
     # @return [Types::UpdateWorkforceResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -10483,6 +10822,16 @@ module Aws::SageMaker
     #     source_ip_config: {
     #       cidrs: ["Cidr"], # required
     #     },
+    #     oidc_config: {
+    #       client_id: "ClientId", # required
+    #       client_secret: "ClientSecret", # required
+    #       issuer: "OidcEndpoint", # required
+    #       authorization_endpoint: "OidcEndpoint", # required
+    #       token_endpoint: "OidcEndpoint", # required
+    #       user_info_endpoint: "OidcEndpoint", # required
+    #       logout_endpoint: "OidcEndpoint", # required
+    #       jwks_uri: "OidcEndpoint", # required
+    #     },
     #   })
     #
     # @example Response structure
@@ -10492,6 +10841,17 @@ module Aws::SageMaker
     #   resp.workforce.last_updated_date #=> Time
     #   resp.workforce.source_ip_config.cidrs #=> Array
     #   resp.workforce.source_ip_config.cidrs[0] #=> String
+    #   resp.workforce.sub_domain #=> String
+    #   resp.workforce.cognito_config.user_pool #=> String
+    #   resp.workforce.cognito_config.client_id #=> String
+    #   resp.workforce.oidc_config.client_id #=> String
+    #   resp.workforce.oidc_config.issuer #=> String
+    #   resp.workforce.oidc_config.authorization_endpoint #=> String
+    #   resp.workforce.oidc_config.token_endpoint #=> String
+    #   resp.workforce.oidc_config.user_info_endpoint #=> String
+    #   resp.workforce.oidc_config.logout_endpoint #=> String
+    #   resp.workforce.oidc_config.jwks_uri #=> String
+    #   resp.workforce.create_date #=> Time
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/UpdateWorkforce AWS API Documentation
     #
@@ -10509,8 +10869,35 @@ module Aws::SageMaker
     #   The name of the work team to update.
     #
     # @option params [Array<Types::MemberDefinition>] :member_definitions
-    #   A list of `MemberDefinition` objects that contain the updated work
-    #   team members.
+    #   A list of `MemberDefinition` objects that contains objects that
+    #   identify the workers that make up the work team.
+    #
+    #   Workforces can be created using Amazon Cognito or your own OIDC
+    #   Identity Provider (IdP). For private workforces created using Amazon
+    #   Cognito use `CognitoMemberDefinition`. For workforces created using
+    #   your own OIDC identity provider (IdP) use `OidcMemberDefinition`. You
+    #   should not provide input for both of these parameters in a single
+    #   request.
+    #
+    #   For workforces created using Amazon Cognito, private work teams
+    #   correspond to Amazon Cognito *user groups* within the user pool used
+    #   to create a workforce. All of the `CognitoMemberDefinition` objects
+    #   that make up the member definition must have the same `ClientId` and
+    #   `UserPool` values. To add a Amazon Cognito user group to an existing
+    #   worker pool, see [Adding groups to a User Pool](). For more
+    #   information about user pools, see [Amazon Cognito User Pools][1].
+    #
+    #   For workforces created using your own OIDC IdP, specify the user
+    #   groups that you want to include in your private work team in
+    #   `OidcMemberDefinition` by listing those groups in `Groups`. Be aware
+    #   that user groups that are already in the work team must also be listed
+    #   in `Groups` when you make this request to remain on the work team. If
+    #   you do not include these user groups, they will no longer be
+    #   associated with the work team you update.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/cognito/latest/developerguide/cognito-user-identity-pools.html
     #
     # @option params [String] :description
     #   An updated description for the work team.
@@ -10532,7 +10919,10 @@ module Aws::SageMaker
     #         cognito_member_definition: {
     #           user_pool: "CognitoUserPool", # required
     #           user_group: "CognitoUserGroup", # required
-    #           client_id: "CognitoClientId", # required
+    #           client_id: "ClientId", # required
+    #         },
+    #         oidc_member_definition: {
+    #           groups: ["Group"], # required
     #         },
     #       },
     #     ],
@@ -10549,7 +10939,10 @@ module Aws::SageMaker
     #   resp.workteam.member_definitions[0].cognito_member_definition.user_pool #=> String
     #   resp.workteam.member_definitions[0].cognito_member_definition.user_group #=> String
     #   resp.workteam.member_definitions[0].cognito_member_definition.client_id #=> String
+    #   resp.workteam.member_definitions[0].oidc_member_definition.groups #=> Array
+    #   resp.workteam.member_definitions[0].oidc_member_definition.groups[0] #=> String
     #   resp.workteam.workteam_arn #=> String
+    #   resp.workteam.workforce_arn #=> String
     #   resp.workteam.product_listing_ids #=> Array
     #   resp.workteam.product_listing_ids[0] #=> String
     #   resp.workteam.description #=> String
@@ -10580,7 +10973,7 @@ module Aws::SageMaker
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-sagemaker'
-      context[:gem_version] = '1.63.0'
+      context[:gem_version] = '1.65.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

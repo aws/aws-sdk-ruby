@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.30.0 (2020-07-28)
+------------------
+
+* Feature - Added UpdateSecurityHubConfiguration API. Security Hub now allows customers to choose whether to automatically enable new controls that are added to an existing standard that the customer enabled. For example, if you enabled Foundational Security Best Practices for an account, you can automatically enable new controls as we add them to that standard. By default, new controls are enabled.
+
 1.29.0 (2020-07-01)
 ------------------
 

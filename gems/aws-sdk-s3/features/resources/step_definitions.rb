@@ -123,7 +123,10 @@ end
 Given(/^I have a V2 encryption client$/) do
   @cse = Aws::S3::EncryptionV2::Client.new(
    client: @s3.client,
-   encryption_key: Base64.decode64("w1WLio3agRWRTSJK/Ouh8NHoqRQ6fn5WbSXDTHjXMSo=")
+   encryption_key: Base64.decode64("w1WLio3agRWRTSJK/Ouh8NHoqRQ6fn5WbSXDTHjXMSo="),
+   key_wrap_schema: :aes_gcm,
+   content_encryption_schema: :aes_gcm_no_padding,
+   security_profile: :v2_and_legacy
   )
 end
 
@@ -153,7 +156,10 @@ Given(/^I have a V2 encryption client configured for :instruction_file$/) do
   @cse = Aws::S3::EncryptionV2::Client.new(
    client: @s3.client,
    encryption_key: Base64.decode64("w1WLio3agRWRTSJK/Ouh8NHoqRQ6fn5WbSXDTHjXMSo="),
-   envelope_location: :instruction_file
+   envelope_location: :instruction_file,
+   key_wrap_schema: :aes_gcm,
+   content_encryption_schema: :aes_gcm_no_padding,
+   security_profile: :v2_and_legacy
   )
 end
 
@@ -170,7 +176,10 @@ end
 When(/^I GET the object with a V2 encryption client$/) do
   cse_v2 = Aws::S3::EncryptionV2::Client.new(
     client: @s3.client,
-    encryption_key: Base64.decode64("w1WLio3agRWRTSJK/Ouh8NHoqRQ6fn5WbSXDTHjXMSo=")
+    encryption_key: Base64.decode64("w1WLio3agRWRTSJK/Ouh8NHoqRQ6fn5WbSXDTHjXMSo="),
+    key_wrap_schema: :aes_gcm,
+    content_encryption_schema: :aes_gcm_no_padding,
+    security_profile: :v2_and_legacy
   )
   @cipher_text = cse_v2.get_object(bucket: @bucket_name, key: @key).body.read
 end

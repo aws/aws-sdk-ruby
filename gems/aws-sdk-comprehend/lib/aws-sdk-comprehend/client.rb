@@ -817,8 +817,10 @@ module Aws::Comprehend
     #   not need to pass this option.**
     #
     # @option params [required, String] :language_code
-    #   The language of the input documents. All documents must be in the same
-    #   language. Only English ("en") is currently supported.
+    #   You can specify any of the following languages supported by Amazon
+    #   Comprehend: English ("en"), Spanish ("es"), French ("fr"),
+    #   Italian ("it"), German ("de"), or Portuguese ("pt"). All
+    #   documents must be in the same language.
     #
     # @option params [String] :volume_kms_key_id
     #   ID for the AWS Key Management Service (KMS) key that Amazon Comprehend
@@ -3173,7 +3175,7 @@ module Aws::Comprehend
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-comprehend'
-      context[:gem_version] = '1.35.0'
+      context[:gem_version] = '1.36.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

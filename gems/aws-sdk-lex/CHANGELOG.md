@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.29.0 (2020-08-06)
+------------------
+
+* Feature - Amazon Lex supports intent classification confidence scores along with a list of the top five intents.
+
 1.28.0 (2020-06-23)
 ------------------
 

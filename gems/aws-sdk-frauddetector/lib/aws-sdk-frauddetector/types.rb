@@ -201,7 +201,7 @@ module Aws::FraudDetector
     #         ],
     #         model_versions: [
     #           {
-    #             model_id: "identifier", # required
+    #             model_id: "modelIdentifier", # required
     #             model_type: "ONLINE_FRAUD_INSIGHTS", # required, accepts ONLINE_FRAUD_INSIGHTS
     #             model_version_number: "nonEmptyString", # required
     #             arn: "fraudDetectorArn",
@@ -299,7 +299,7 @@ module Aws::FraudDetector
     #   data as a hash:
     #
     #       {
-    #         model_id: "identifier", # required
+    #         model_id: "modelIdentifier", # required
     #         model_type: "ONLINE_FRAUD_INSIGHTS", # required, accepts ONLINE_FRAUD_INSIGHTS
     #         description: "description",
     #         event_type_name: "string", # required
@@ -351,7 +351,7 @@ module Aws::FraudDetector
     #   data as a hash:
     #
     #       {
-    #         model_id: "identifier", # required
+    #         model_id: "modelIdentifier", # required
     #         model_type: "ONLINE_FRAUD_INSIGHTS", # required, accepts ONLINE_FRAUD_INSIGHTS
     #         training_data_source: "EXTERNAL_EVENTS", # required, accepts EXTERNAL_EVENTS
     #         training_data_schema: { # required
@@ -550,7 +550,7 @@ module Aws::FraudDetector
     #   @return [String]
     #
     # @!attribute [rw] variable_type
-    #   The variable type.
+    #   The variable type. For more information see [Variable types][1].
     #
     #   Valid Values: `AUTH_CODE | AVS | BILLING_ADDRESS_L1 |
     #   BILLING_ADDRESS_L2 | BILLING_CITY | BILLING_COUNTRY | BILLING_NAME |
@@ -561,6 +561,10 @@ module Aws::FraudDetector
     #   SHIPPING_ADDRESS_L2 | SHIPPING_CITY | SHIPPING_COUNTRY |
     #   SHIPPING_NAME | SHIPPING_PHONE | SHIPPING_STATE | SHIPPING_ZIP |
     #   USERAGENT | SHIPPING_ZIP | USERAGENT`
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/frauddetector/latest/ug/create-a-variable.html#variable-types
     #   @return [String]
     #
     # @!attribute [rw] tags
@@ -774,7 +778,7 @@ module Aws::FraudDetector
     #   data as a hash:
     #
     #       {
-    #         model_id: "identifier",
+    #         model_id: "modelIdentifier",
     #         model_version_number: "floatVersionString",
     #         model_type: "ONLINE_FRAUD_INSIGHTS", # accepts ONLINE_FRAUD_INSIGHTS
     #         next_token: "string",
@@ -904,8 +908,8 @@ module Aws::FraudDetector
     #   data as a hash:
     #
     #       {
-    #         entity_type: "string",
-    #         entity_id: "identifier",
+    #         entity_type: "string", # required
+    #         entity_id: "identifier", # required
     #       }
     #
     # @!attribute [rw] entity_type
@@ -1043,17 +1047,13 @@ module Aws::FraudDetector
     #   The Amazon SageMaker model endpoints.
     #   @return [String]
     #
-    # @!attribute [rw] event_type_name
-    #   The event type names.
-    #   @return [String]
-    #
     # @!attribute [rw] model_source
     #   The source of the model.
     #   @return [String]
     #
-    # @!attribute [rw] role
+    # @!attribute [rw] invoke_model_endpoint_role_arn
     #   The role used to invoke the model.
-    #   @return [Types::Role]
+    #   @return [String]
     #
     # @!attribute [rw] input_configuration
     #   The input configuration.
@@ -1083,9 +1083,8 @@ module Aws::FraudDetector
     #
     class ExternalModel < Struct.new(
       :model_endpoint,
-      :event_type_name,
       :model_source,
-      :role,
+      :invoke_model_endpoint_role_arn,
       :input_configuration,
       :output_configuration,
       :model_endpoint_status,
@@ -1353,13 +1352,13 @@ module Aws::FraudDetector
     #
     #       {
     #         detector_id: "string", # required
-    #         detector_version_id: "string",
+    #         detector_version_id: "wholeNumberVersionString",
     #         event_id: "string", # required
     #         event_type_name: "string", # required
     #         entities: [ # required
     #           {
-    #             entity_type: "string",
-    #             entity_id: "identifier",
+    #             entity_type: "string", # required
+    #             entity_id: "identifier", # required
     #           },
     #         ],
     #         event_timestamp: "string", # required
@@ -1608,7 +1607,7 @@ module Aws::FraudDetector
     #   data as a hash:
     #
     #       {
-    #         model_id: "identifier", # required
+    #         model_id: "modelIdentifier", # required
     #         model_type: "ONLINE_FRAUD_INSIGHTS", # required, accepts ONLINE_FRAUD_INSIGHTS
     #         model_version_number: "floatVersionString", # required
     #       }
@@ -1686,7 +1685,7 @@ module Aws::FraudDetector
     #   data as a hash:
     #
     #       {
-    #         model_id: "identifier",
+    #         model_id: "modelIdentifier",
     #         model_type: "ONLINE_FRAUD_INSIGHTS", # accepts ONLINE_FRAUD_INSIGHTS
     #         next_token: "string",
     #         max_results: 1,
@@ -1780,80 +1779,6 @@ module Aws::FraudDetector
     class GetOutcomesResult < Struct.new(
       :outcomes,
       :next_token)
-      SENSITIVE = []
-      include Aws::Structure
-    end
-
-    # @note When making an API call, you may pass GetPredictionRequest
-    #   data as a hash:
-    #
-    #       {
-    #         detector_id: "string", # required
-    #         detector_version_id: "string",
-    #         event_id: "string", # required
-    #         event_attributes: {
-    #           "attributeKey" => "attributeValue",
-    #         },
-    #         external_model_endpoint_data_blobs: {
-    #           "string" => {
-    #             byte_buffer: "data",
-    #             content_type: "contentType",
-    #           },
-    #         },
-    #       }
-    #
-    # @!attribute [rw] detector_id
-    #   The detector ID.
-    #   @return [String]
-    #
-    # @!attribute [rw] detector_version_id
-    #   The detector version ID.
-    #   @return [String]
-    #
-    # @!attribute [rw] event_id
-    #   The unique ID used to identify the event.
-    #   @return [String]
-    #
-    # @!attribute [rw] event_attributes
-    #   Names of variables you defined in Amazon Fraud Detector to represent
-    #   event data elements and their corresponding values for the event you
-    #   are sending for evaluation.
-    #   @return [Hash<String,String>]
-    #
-    # @!attribute [rw] external_model_endpoint_data_blobs
-    #   The Amazon SageMaker model endpoint input data blobs.
-    #   @return [Hash<String,Types::ModelEndpointDataBlob>]
-    #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/frauddetector-2019-11-15/GetPredictionRequest AWS API Documentation
-    #
-    class GetPredictionRequest < Struct.new(
-      :detector_id,
-      :detector_version_id,
-      :event_id,
-      :event_attributes,
-      :external_model_endpoint_data_blobs)
-      SENSITIVE = [:external_model_endpoint_data_blobs]
-      include Aws::Structure
-    end
-
-    # @!attribute [rw] outcomes
-    #   The prediction outcomes.
-    #   @return [Array<String>]
-    #
-    # @!attribute [rw] model_scores
-    #   The model scores for models used in the detector version.
-    #   @return [Array<Types::ModelScores>]
-    #
-    # @!attribute [rw] rule_results
-    #   The rule results in the prediction.
-    #   @return [Array<Types::RuleResult>]
-    #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/frauddetector-2019-11-15/GetPredictionResult AWS API Documentation
-    #
-    class GetPredictionResult < Struct.new(
-      :outcomes,
-      :model_scores,
-      :rule_results)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2221,11 +2146,16 @@ module Aws::FraudDetector
     #   data as a hash:
     #
     #       {
+    #         event_type_name: "identifier",
     #         format: "TEXT_CSV", # accepts TEXT_CSV, APPLICATION_JSON
     #         use_event_variables: false, # required
     #         json_input_template: "string",
     #         csv_input_template: "string",
     #       }
+    #
+    # @!attribute [rw] event_type_name
+    #   The event type name.
+    #   @return [String]
     #
     # @!attribute [rw] format
     #   The format of the model input configuration. The format differs
@@ -2254,6 +2184,7 @@ module Aws::FraudDetector
     # @see http://docs.aws.amazon.com/goto/WebAPI/frauddetector-2019-11-15/ModelInputConfiguration AWS API Documentation
     #
     class ModelInputConfiguration < Struct.new(
+      :event_type_name,
       :format,
       :use_event_variables,
       :json_input_template,
@@ -2326,7 +2257,7 @@ module Aws::FraudDetector
     #   data as a hash:
     #
     #       {
-    #         model_id: "identifier", # required
+    #         model_id: "modelIdentifier", # required
     #         model_type: "ONLINE_FRAUD_INSIGHTS", # required, accepts ONLINE_FRAUD_INSIGHTS
     #         model_version_number: "nonEmptyString", # required
     #         arn: "fraudDetectorArn",
@@ -2607,13 +2538,10 @@ module Aws::FraudDetector
     #
     #       {
     #         model_endpoint: "sageMakerEndpointIdentifier", # required
-    #         event_type_name: "identifier",
     #         model_source: "SAGEMAKER", # required, accepts SAGEMAKER
-    #         role: { # required
-    #           arn: "string", # required
-    #           name: "string", # required
-    #         },
+    #         invoke_model_endpoint_role_arn: "string", # required
     #         input_configuration: { # required
+    #           event_type_name: "identifier",
     #           format: "TEXT_CSV", # accepts TEXT_CSV, APPLICATION_JSON
     #           use_event_variables: false, # required
     #           json_input_template: "string",
@@ -2641,17 +2569,13 @@ module Aws::FraudDetector
     #   The model endpoints name.
     #   @return [String]
     #
-    # @!attribute [rw] event_type_name
-    #   The event type name.
-    #   @return [String]
-    #
     # @!attribute [rw] model_source
     #   The source of the model.
     #   @return [String]
     #
-    # @!attribute [rw] role
+    # @!attribute [rw] invoke_model_endpoint_role_arn
     #   The IAM role used to invoke the model endpoint.
-    #   @return [Types::Role]
+    #   @return [String]
     #
     # @!attribute [rw] input_configuration
     #   The model endpoint input configuration.
@@ -2673,9 +2597,8 @@ module Aws::FraudDetector
     #
     class PutExternalModelRequest < Struct.new(
       :model_endpoint,
-      :event_type_name,
       :model_source,
-      :role,
+      :invoke_model_endpoint_role_arn,
       :input_configuration,
       :output_configuration,
       :model_endpoint_status,
@@ -2799,33 +2722,6 @@ module Aws::FraudDetector
     #
     class ResourceNotFoundException < Struct.new(
       :message)
-      SENSITIVE = []
-      include Aws::Structure
-    end
-
-    # The role used to invoke external model endpoints.
-    #
-    # @note When making an API call, you may pass Role
-    #   data as a hash:
-    #
-    #       {
-    #         arn: "string", # required
-    #         name: "string", # required
-    #       }
-    #
-    # @!attribute [rw] arn
-    #   The role ARN.
-    #   @return [String]
-    #
-    # @!attribute [rw] name
-    #   The role name.
-    #   @return [String]
-    #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/frauddetector-2019-11-15/Role AWS API Documentation
-    #
-    class Role < Struct.new(
-      :arn,
-      :name)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3168,7 +3064,7 @@ module Aws::FraudDetector
     #         description: "description",
     #         model_versions: [
     #           {
-    #             model_id: "identifier", # required
+    #             model_id: "modelIdentifier", # required
     #             model_type: "ONLINE_FRAUD_INSIGHTS", # required, accepts ONLINE_FRAUD_INSIGHTS
     #             model_version_number: "nonEmptyString", # required
     #             arn: "fraudDetectorArn",
@@ -3275,7 +3171,7 @@ module Aws::FraudDetector
     #   data as a hash:
     #
     #       {
-    #         model_id: "identifier", # required
+    #         model_id: "modelIdentifier", # required
     #         model_type: "ONLINE_FRAUD_INSIGHTS", # required, accepts ONLINE_FRAUD_INSIGHTS
     #         description: "description",
     #       }
@@ -3310,7 +3206,7 @@ module Aws::FraudDetector
     #   data as a hash:
     #
     #       {
-    #         model_id: "identifier", # required
+    #         model_id: "modelIdentifier", # required
     #         model_type: "ONLINE_FRAUD_INSIGHTS", # required, accepts ONLINE_FRAUD_INSIGHTS
     #         major_version_number: "wholeNumberVersionString", # required
     #         external_events_detail: {
@@ -3388,10 +3284,10 @@ module Aws::FraudDetector
     #   data as a hash:
     #
     #       {
-    #         model_id: "identifier", # required
+    #         model_id: "modelIdentifier", # required
     #         model_type: "ONLINE_FRAUD_INSIGHTS", # required, accepts ONLINE_FRAUD_INSIGHTS
     #         model_version_number: "floatVersionString", # required
-    #         status: "TRAINING_IN_PROGRESS", # required, accepts TRAINING_IN_PROGRESS, TRAINING_COMPLETE, ACTIVATE_REQUESTED, ACTIVATE_IN_PROGRESS, ACTIVE, INACTIVATE_IN_PROGRESS, INACTIVE, DELETE_REQUESTED, DELETE_IN_PROGRESS, ERROR
+    #         status: "ACTIVE", # required, accepts ACTIVE, INACTIVE
     #       }
     #
     # @!attribute [rw] model_id
@@ -3551,7 +3447,11 @@ module Aws::FraudDetector
     #   @return [String]
     #
     # @!attribute [rw] variable_type
-    #   The variable type.
+    #   The variable type. For more information see [Variable types][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/frauddetector/latest/ug/create-a-variable.html#variable-types
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/frauddetector-2019-11-15/UpdateVariableRequest AWS API Documentation
@@ -3589,7 +3489,12 @@ module Aws::FraudDetector
     #   @return [String]
     #
     # @!attribute [rw] data_type
-    #   The data type of the variable.
+    #   The data type of the variable. For more information see [Variable
+    #   types][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/frauddetector/latest/ug/create-a-variable.html#variable-types
     #   @return [String]
     #
     # @!attribute [rw] data_source
@@ -3682,7 +3587,8 @@ module Aws::FraudDetector
     #   @return [String]
     #
     # @!attribute [rw] variable_type
-    #   The type of the variable.
+    #   The type of the variable. For more information see [Variable
+    #   types][1].
     #
     #   Valid Values: `AUTH_CODE | AVS | BILLING_ADDRESS_L1 |
     #   BILLING_ADDRESS_L2 | BILLING_CITY | BILLING_COUNTRY | BILLING_NAME |
@@ -3693,6 +3599,10 @@ module Aws::FraudDetector
     #   SHIPPING_ADDRESS_L2 | SHIPPING_CITY | SHIPPING_COUNTRY |
     #   SHIPPING_NAME | SHIPPING_PHONE | SHIPPING_STATE | SHIPPING_ZIP |
     #   USERAGENT | SHIPPING_ZIP | USERAGENT`
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/frauddetector/latest/ug/create-a-variable.html#variable-types
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/frauddetector-2019-11-15/VariableEntry AWS API Documentation
