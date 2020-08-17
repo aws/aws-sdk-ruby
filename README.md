@@ -1,10 +1,8 @@
 # AWS SDK for Ruby - Version 3
 
-<!-- BEGIN-SECTION NO-MVP -->
 [![Gem Version](https://badge.fury.io/rb/aws-sdk-core.svg)](https://badge.fury.io/rb/aws-sdk-core) [![Build Status](https://travis-ci.org/aws/aws-sdk-ruby.svg?branch=master)](https://travis-ci.org/aws/aws-sdk-ruby) [![Github forks](https://img.shields.io/github/forks/aws/aws-sdk-ruby.svg)](https://github.com/aws/aws-sdk-ruby/network)
 [![Github stars](https://img.shields.io/github/stars/aws/aws-sdk-ruby.svg)](https://github.com/aws/aws-sdk-ruby/stargazers)
 [![Gitter](https://badges.gitter.im/aws/aws-sdk-ruby.svg)](https://gitter.im/aws/aws-sdk-ruby?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge)
-<!-- END-SECTION -->
 
 ## Links of Interest
 
@@ -44,17 +42,22 @@ and it keeps your secrets out of source control.
 The SDK searches the following locations for credentials:
 
 * `ENV['AWS_ACCESS_KEY_ID']` and `ENV['AWS_SECRET_ACCESS_KEY']`
-* Unless `ENV['AWS_SDK_CONFIG_OPT_OUT']` is set, the shared configuration files (`~/.aws/credentials` and `~/.aws/config`) will be checked for a `role_arn` and `source_profile`, which if present will be used to attempt to assume a role.
 * The shared credentials ini file at `~/.aws/credentials`
-    * Unless `ENV['AWS_SDK_CONFIG_OPT_OUT']` is set, the shared configuration ini file at `~/.aws/config` will also be parsed for credentials.
+  * Credential options supported in this file are:
+    * Static Credentials (`aws_access_key_id`, `aws_secret_access_key`, `aws_session_token`)
+    * Assume Role Web Identity Credentials (`web_identity_token_file`, `role_arn`, `source_profile`)
+    * Assume Role Credentials (`role_arn`, `source_profile`)
+    * Process Credentials (`credential_process`)
+  * Unless `ENV['AWS_SDK_CONFIG_OPT_OUT']` is set, the shared configuration ini file at `~/.aws/config` will also be parsed for credentials.
 * From an instance profile when running on EC2 or from the ECS credential provider when running in an ECS container with that feature enabled.
-* If using `~/.aws/config` or `~/.aws/credentials`, a `:profile` Client option can be used to choose the proper credentials.
 
 **Shared configuration is loaded only a single time, and credentials are provided statically at client creation time. Shared credentials do not refresh.**
 
 The SDK searches the following locations for a region:
 
 * `ENV['AWS_REGION']`
+* `ENV['AMAZON_REGION']`
+* `ENV['AWS_DEFAULT_REGION']`
 * Unless `ENV['AWS_SDK_CONFIG_OPT_OUT']` is set, the shared configuration files (`~/.aws/credentials` and `~/.aws/config`) will also be checked for a region selection.
 
 **The region is used to construct an SSL endpoint**. If you need to connect to a non-standard endpoint, you may specify the `:endpoint` option.
@@ -78,24 +81,25 @@ Valid region and credentials options are:
 * `:region` - A string like `us-west-2`. See [this page](https://docs.aws.amazon.com/general/latest/gr/aws-service-information.html) for a list of supported regions by service.
 * `:credentials` - An instance of one of the following classes:
   * [`Aws::Credentials`](http://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Credentials.html)
+  * [`Aws::AssumeRoleWebIdentityCredentials`](https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AssumeRoleWebIdentityCredentials.html)
+  * [`Aws::AssumeRoleCredentials`](http://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AssumeRoleCredentials.html)
   * [`Aws::SharedCredentials`](http://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SharedCredentials.html)
   * [`Aws::ProcessCredentials`](https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ProcessCredentials.html)
   * [`Aws::InstanceProfileCredentials`](http://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/InstanceProfileCredentials.html)
   * [`Aws::ECSCredentials`](https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ECSCredentials.html)
-  * [`Aws::AssumeRoleCredentials`](http://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AssumeRoleCredentials.html)
-  * [`Aws::AssumeRoleWebIdentityCredentials`](https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AssumeRoleWebIdentityCredentials.html)
   * [`Aws::CognitoIdentityCredentials`](https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CognitoIdentity/CognitoIdentityCredentials.html)
 
 You may also pass configuration options directly to Client and Resource
 constructors. These options take precedence over the environment and
-`Aws.config` defaults.
+`Aws.config` defaults. A `:profile` Client option can also be used to choose a
+specific profile defined in your configuration file.
 
 ```ruby
-# client constructors
+# using a credentials object
 ec2 = Aws::EC2::Client.new(region: 'us-west-2', credentials: credentials)
 
-# resource constructors
-ec2 = Aws::EC2::Resource.new(region: 'us-west-2', credentials: credentials)
+# using a profile name
+ec2 = Aws::EC2::Client.new(profile: 'my_profile')
 ```
 
 Please take care to **never commit credentials to source control**. We strongly
