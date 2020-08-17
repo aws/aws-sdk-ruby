@@ -113,7 +113,7 @@ Aws.config[:credentials] = Aws::Credentials.new(
 ```
 
 For more information on how to configure credentials, see the developer guide
-for [configuring AWS SDK for Ruby](https://docs.aws.amazon.com/sdk-for-ruby/v3/developer-guide/setup-config.html) as well as
+for [configuring AWS SDK for Ruby](https://docs.aws.amazon.com/sdk-for-ruby/v3/developer-guide/setup-config.html).
 
 ## API Clients
 
@@ -264,6 +264,16 @@ exist before opening a new issue.
 The GitHub issues are intended for bug reports and feature requests. For help
 and questions with using `aws-sdk-ruby` please make use of the resources listed
 in the Getting Help section.
+
+## Versioning
+
+This project uses [semantic versioning](http://semver.org/). You can safely
+express a dependency on a major version and expect all minor and patch versions
+to be backwards compatible.
+
+A CHANGELOG can be found at each gem's root path (i.e. `aws-sdk-s3` can be found
+at `gems/aws-sdk-s3/CHANGELOG.md`). The CHANGELOG is also accessible via the
+RubyGems.org page under "LINKS" section.
 
 ## Supported Services
 
@@ -497,16 +507,6 @@ in the Getting Help section.
 | Schemas                                               | Aws::Schemas                         | aws-sdk-schemas                         | 2019-12-02  |
 | Service Quotas                                        | Aws::ServiceQuotas                   | aws-sdk-servicequotas                   | 2019-06-24  |
 | Synthetics                                            | Aws::Synthetics                      | aws-sdk-synthetics                      | 2017-10-11  |
-
-## Versioning
-
-This project uses [semantic versioning](http://semver.org/). You can safely
-express a dependency on a major version and expect all minor and patch versions
-to be backwards compatible.
-
-A CHANGELOG can be found at each gem's root path (i.e. `aws-sdk-s3` can be found
-at `gems/aws-sdk-s3/CHANGELOG.md`). The CHANGELOG is also accessible via the
-RubyGems.org page under "LINKS" section.
 
 ## License
 
