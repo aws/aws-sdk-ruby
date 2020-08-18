@@ -120,7 +120,7 @@ module Aws
 
         def encode_unknown_event(opts, event_type, event_data)
           # right now h2 events are only rest_json
-          opts[:payload] = StringIO.new(JSON.dump(event_data))
+          opts[:payload] = StringIO.new(Aws::Json.dump(event_data))
           opts[:headers][':event-type'] = Aws::EventStream::HeaderValue.new(
             value: event_type.to_s,
             type: 'string'
