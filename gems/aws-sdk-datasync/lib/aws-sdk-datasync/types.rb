@@ -1851,6 +1851,13 @@ module Aws::DataSync
     #       {
     #         max_results: 1,
     #         next_token: "NextToken",
+    #         filters: [
+    #           {
+    #             name: "LocationUri", # required, accepts LocationUri, LocationType, CreationTime
+    #             values: ["FilterAttributeValue"], # required
+    #             operator: "Equals", # required, accepts Equals, NotEquals, In, LessThanOrEqual, LessThan, GreaterThanOrEqual, GreaterThan, Contains, NotContains, BeginsWith
+    #           },
+    #         ],
     #       }
     #
     # @!attribute [rw] max_results
@@ -1862,11 +1869,15 @@ module Aws::DataSync
     #   next list of locations.
     #   @return [String]
     #
+    # @!attribute [rw] filters
+    #   @return [Array<Types::LocationFilter>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/datasync-2018-11-09/ListLocationsRequest AWS API Documentation
     #
     class ListLocationsRequest < Struct.new(
       :max_results,
-      :next_token)
+      :next_token,
+      :filters)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2008,6 +2019,13 @@ module Aws::DataSync
     #       {
     #         max_results: 1,
     #         next_token: "NextToken",
+    #         filters: [
+    #           {
+    #             name: "LocationId", # required, accepts LocationId, CreationTime
+    #             values: ["FilterAttributeValue"], # required
+    #             operator: "Equals", # required, accepts Equals, NotEquals, In, LessThanOrEqual, LessThan, GreaterThanOrEqual, GreaterThan, Contains, NotContains, BeginsWith
+    #           },
+    #         ],
     #       }
     #
     # @!attribute [rw] max_results
@@ -2019,11 +2037,15 @@ module Aws::DataSync
     #   next list of tasks.
     #   @return [String]
     #
+    # @!attribute [rw] filters
+    #   @return [Array<Types::TaskFilter>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/datasync-2018-11-09/ListTasksRequest AWS API Documentation
     #
     class ListTasksRequest < Struct.new(
       :max_results,
-      :next_token)
+      :next_token,
+      :filters)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2044,6 +2066,34 @@ module Aws::DataSync
     class ListTasksResponse < Struct.new(
       :tasks,
       :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass LocationFilter
+    #   data as a hash:
+    #
+    #       {
+    #         name: "LocationUri", # required, accepts LocationUri, LocationType, CreationTime
+    #         values: ["FilterAttributeValue"], # required
+    #         operator: "Equals", # required, accepts Equals, NotEquals, In, LessThanOrEqual, LessThan, GreaterThanOrEqual, GreaterThan, Contains, NotContains, BeginsWith
+    #       }
+    #
+    # @!attribute [rw] name
+    #   @return [String]
+    #
+    # @!attribute [rw] values
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] operator
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/datasync-2018-11-09/LocationFilter AWS API Documentation
+    #
+    class LocationFilter < Struct.new(
+      :name,
+      :values,
+      :operator)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2709,6 +2759,34 @@ module Aws::DataSync
       :verify_status,
       :error_code,
       :error_detail)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass TaskFilter
+    #   data as a hash:
+    #
+    #       {
+    #         name: "LocationId", # required, accepts LocationId, CreationTime
+    #         values: ["FilterAttributeValue"], # required
+    #         operator: "Equals", # required, accepts Equals, NotEquals, In, LessThanOrEqual, LessThan, GreaterThanOrEqual, GreaterThan, Contains, NotContains, BeginsWith
+    #       }
+    #
+    # @!attribute [rw] name
+    #   @return [String]
+    #
+    # @!attribute [rw] values
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] operator
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/datasync-2018-11-09/TaskFilter AWS API Documentation
+    #
+    class TaskFilter < Struct.new(
+      :name,
+      :values,
+      :operator)
       SENSITIVE = []
       include Aws::Structure
     end

@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.44.0 (2020-08-18)
+------------------
+
+* Feature - Adding the option to use a service linked role to publish events to Pinpoint.
+
 1.43.0 (2020-08-13)
 ------------------
 

@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.10.0 (2020-08-18)
+------------------
+
+* Feature - This release includes new APIs to allow customers to add or remove email addresses from their account-level suppression list in bulk.
+
 1.9.0 (2020-07-30)
 ------------------
 

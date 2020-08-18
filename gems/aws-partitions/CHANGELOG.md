@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.357.0 (2020-08-18)
+------------------
+
+* Feature - Added support for enumerating regions for `Aws::IdentityStore`.
+
 1.356.0 (2020-08-14)
 ------------------
 

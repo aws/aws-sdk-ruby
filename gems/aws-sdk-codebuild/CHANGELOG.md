@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.59.0 (2020-08-18)
+------------------
+
+* Feature - Documentation updates for codebuild
+
 1.58.0 (2020-07-30)
 ------------------
 

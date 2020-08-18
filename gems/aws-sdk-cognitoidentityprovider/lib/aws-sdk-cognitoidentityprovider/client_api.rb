@@ -713,9 +713,10 @@ module Aws::CognitoIdentityProvider
     AliasExistsException.add_member(:message, Shapes::ShapeRef.new(shape: MessageType, location_name: "message"))
     AliasExistsException.struct_class = Types::AliasExistsException
 
-    AnalyticsConfigurationType.add_member(:application_id, Shapes::ShapeRef.new(shape: HexStringType, required: true, location_name: "ApplicationId"))
-    AnalyticsConfigurationType.add_member(:role_arn, Shapes::ShapeRef.new(shape: ArnType, required: true, location_name: "RoleArn"))
-    AnalyticsConfigurationType.add_member(:external_id, Shapes::ShapeRef.new(shape: StringType, required: true, location_name: "ExternalId"))
+    AnalyticsConfigurationType.add_member(:application_id, Shapes::ShapeRef.new(shape: HexStringType, location_name: "ApplicationId"))
+    AnalyticsConfigurationType.add_member(:application_arn, Shapes::ShapeRef.new(shape: ArnType, location_name: "ApplicationArn"))
+    AnalyticsConfigurationType.add_member(:role_arn, Shapes::ShapeRef.new(shape: ArnType, location_name: "RoleArn"))
+    AnalyticsConfigurationType.add_member(:external_id, Shapes::ShapeRef.new(shape: StringType, location_name: "ExternalId"))
     AnalyticsConfigurationType.add_member(:user_data_shared, Shapes::ShapeRef.new(shape: BooleanType, location_name: "UserDataShared"))
     AnalyticsConfigurationType.struct_class = Types::AnalyticsConfigurationType
 

@@ -457,8 +457,8 @@ module Aws::CodeBuild
     #    </note>
     #
     #   You can specify either the Amazon Resource Name (ARN) of the CMK or,
-    #   if available, the CMK's alias (using the format `alias/alias-name
-    #   `).
+    #   if available, the CMK's alias (using the format
+    #   `alias/<alias-name>`).
     #   @return [String]
     #
     # @!attribute [rw] exported_environment_variables
@@ -737,8 +737,8 @@ module Aws::CodeBuild
     #    </note>
     #
     #   You can specify either the Amazon Resource Name (ARN) of the CMK or,
-    #   if available, the CMK's alias (using the format `alias/alias-name
-    #   `).
+    #   if available, the CMK's alias (using the format
+    #   `alias/<alias-name>`).
     #   @return [String]
     #
     # @!attribute [rw] build_batch_number
@@ -1624,8 +1624,8 @@ module Aws::CodeBuild
     #    </note>
     #
     #   You can specify either the Amazon Resource Name (ARN) of the CMK or,
-    #   if available, the CMK's alias (using the format `alias/alias-name
-    #   `).
+    #   if available, the CMK's alias (using the format
+    #   `alias/<alias-name>`).
     #   @return [String]
     #
     # @!attribute [rw] tags
@@ -3534,8 +3534,8 @@ module Aws::CodeBuild
     #    </note>
     #
     #   You can specify either the Amazon Resource Name (ARN) of the CMK or,
-    #   if available, the CMK's alias (using the format `alias/alias-name
-    #   `).
+    #   if available, the CMK's alias (using the format
+    #   `alias/<alias-name>`).
     #   @return [String]
     #
     # @!attribute [rw] tags
@@ -3704,7 +3704,7 @@ module Aws::CodeBuild
     #
     #   For example, if `path` is set to `MyArtifacts`, `namespaceType` is
     #   set to `BUILD_ID`, and `name` is set to `MyArtifact.zip`, the output
-    #   artifact is stored in `MyArtifacts/build-ID/MyArtifact.zip`.
+    #   artifact is stored in `MyArtifacts/<build-ID>/MyArtifact.zip`.
     #   @return [String]
     #
     # @!attribute [rw] name
@@ -3726,7 +3726,7 @@ module Aws::CodeBuild
     #
     #   * If `path` is set to `MyArtifacts`, `namespaceType` is set to
     #     `BUILD_ID`, and `name` is set to `MyArtifact.zip`, then the output
-    #     artifact is stored in `MyArtifacts/build-ID/MyArtifact.zip`.
+    #     artifact is stored in `MyArtifacts/<build-ID>/MyArtifact.zip`.
     #
     #   * If `path` is empty, `namespaceType` is set to `NONE`, and `name`
     #     is set to "`/`", the output artifact is stored in the root of
@@ -3734,7 +3734,7 @@ module Aws::CodeBuild
     #
     #   * If `path` is set to `MyArtifacts`, `namespaceType` is set to
     #     `BUILD_ID`, and `name` is set to "`/`", the output artifact is
-    #     stored in `MyArtifacts/build-ID `.
+    #     stored in `MyArtifacts/<build-ID>`.
     #   @return [String]
     #
     # @!attribute [rw] packaging
@@ -4251,17 +4251,16 @@ module Aws::CodeBuild
     #   * For source code in an AWS CodeCommit repository, the HTTPS clone
     #     URL to the repository that contains the source code and the
     #     buildspec file (for example,
-    #     `https://git-codecommit.region-ID.amazonaws.com/v1/repos/repo-name
-    #     `).
+    #     `https://git-codecommit.<region-ID>.amazonaws.com/v1/repos/<repo-name>`).
     #
     #   * For source code in an Amazon Simple Storage Service (Amazon S3)
     #     input bucket, one of the following.
     #
     #     * The path to the ZIP file that contains the source code (for
-    #       example, ` bucket-name/path/to/object-name.zip`).
+    #       example, `<bucket-name>/<path>/<object-name>.zip`).
     #
     #     * The path to the folder that contains the source code (for
-    #       example, ` bucket-name/path/to/source-code/folder/`).
+    #       example, `<bucket-name>/<path-to-source-code>/<folder>/`).
     #
     #   * For source code in a GitHub repository, the HTTPS clone URL to the
     #     repository that contains the source and the buildspec file. You
@@ -5315,8 +5314,8 @@ module Aws::CodeBuild
     #    </note>
     #
     #   You can specify either the Amazon Resource Name (ARN) of the CMK or,
-    #   if available, the CMK's alias (using the format `alias/alias-name
-    #   `).
+    #   if available, the CMK's alias (using the format
+    #   `alias/<alias-name>`).
     #   @return [String]
     #
     # @!attribute [rw] idempotency_token
@@ -5729,8 +5728,8 @@ module Aws::CodeBuild
     #    </note>
     #
     #   You can specify either the Amazon Resource Name (ARN) of the CMK or,
-    #   if available, the CMK's alias (using the format `alias/alias-name
-    #   `).
+    #   if available, the CMK's alias (using the format
+    #   `alias/<alias-name>`).
     #   @return [String]
     #
     # @!attribute [rw] idempotency_token
@@ -6287,8 +6286,8 @@ module Aws::CodeBuild
     #    </note>
     #
     #   You can specify either the Amazon Resource Name (ARN) of the CMK or,
-    #   if available, the CMK's alias (using the format `alias/alias-name
-    #   `).
+    #   if available, the CMK's alias (using the format
+    #   `alias/<alias-name>`).
     #   @return [String]
     #
     # @!attribute [rw] tags

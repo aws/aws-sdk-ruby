@@ -73,10 +73,12 @@ module Aws::DataSync
     EfsSubdirectory = Shapes::StringShape.new(name: 'EfsSubdirectory')
     Endpoint = Shapes::StringShape.new(name: 'Endpoint')
     EndpointType = Shapes::StringShape.new(name: 'EndpointType')
+    FilterAttributeValue = Shapes::StringShape.new(name: 'FilterAttributeValue')
     FilterList = Shapes::ListShape.new(name: 'FilterList')
     FilterRule = Shapes::StructureShape.new(name: 'FilterRule')
     FilterType = Shapes::StringShape.new(name: 'FilterType')
     FilterValue = Shapes::StringShape.new(name: 'FilterValue')
+    FilterValues = Shapes::ListShape.new(name: 'FilterValues')
     FsxFilesystemArn = Shapes::StringShape.new(name: 'FsxFilesystemArn')
     FsxWindowsSubdirectory = Shapes::StringShape.new(name: 'FsxWindowsSubdirectory')
     Gid = Shapes::StringShape.new(name: 'Gid')
@@ -95,6 +97,9 @@ module Aws::DataSync
     ListTasksRequest = Shapes::StructureShape.new(name: 'ListTasksRequest')
     ListTasksResponse = Shapes::StructureShape.new(name: 'ListTasksResponse')
     LocationArn = Shapes::StringShape.new(name: 'LocationArn')
+    LocationFilter = Shapes::StructureShape.new(name: 'LocationFilter')
+    LocationFilterName = Shapes::StringShape.new(name: 'LocationFilterName')
+    LocationFilters = Shapes::ListShape.new(name: 'LocationFilters')
     LocationList = Shapes::ListShape.new(name: 'LocationList')
     LocationListEntry = Shapes::StructureShape.new(name: 'LocationListEntry')
     LocationUri = Shapes::StringShape.new(name: 'LocationUri')
@@ -113,6 +118,7 @@ module Aws::DataSync
     ObjectStorageServerPort = Shapes::IntegerShape.new(name: 'ObjectStorageServerPort')
     ObjectStorageServerProtocol = Shapes::StringShape.new(name: 'ObjectStorageServerProtocol')
     OnPremConfig = Shapes::StructureShape.new(name: 'OnPremConfig')
+    Operator = Shapes::StringShape.new(name: 'Operator')
     Options = Shapes::StructureShape.new(name: 'Options')
     OutputTagList = Shapes::ListShape.new(name: 'OutputTagList')
     OverwriteMode = Shapes::StringShape.new(name: 'OverwriteMode')
@@ -151,6 +157,9 @@ module Aws::DataSync
     TaskExecutionListEntry = Shapes::StructureShape.new(name: 'TaskExecutionListEntry')
     TaskExecutionResultDetail = Shapes::StructureShape.new(name: 'TaskExecutionResultDetail')
     TaskExecutionStatus = Shapes::StringShape.new(name: 'TaskExecutionStatus')
+    TaskFilter = Shapes::StructureShape.new(name: 'TaskFilter')
+    TaskFilterName = Shapes::StringShape.new(name: 'TaskFilterName')
+    TaskFilters = Shapes::ListShape.new(name: 'TaskFilters')
     TaskList = Shapes::ListShape.new(name: 'TaskList')
     TaskListEntry = Shapes::StructureShape.new(name: 'TaskListEntry')
     TaskQueueing = Shapes::StringShape.new(name: 'TaskQueueing')
@@ -418,6 +427,8 @@ module Aws::DataSync
     FilterRule.add_member(:value, Shapes::ShapeRef.new(shape: FilterValue, location_name: "Value"))
     FilterRule.struct_class = Types::FilterRule
 
+    FilterValues.member = Shapes::ShapeRef.new(shape: FilterAttributeValue)
+
     InputTagList.member = Shapes::ShapeRef.new(shape: TagListEntry)
 
     InternalException.add_member(:message, Shapes::ShapeRef.new(shape: string, location_name: "message"))
@@ -438,6 +449,7 @@ module Aws::DataSync
 
     ListLocationsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location_name: "MaxResults"))
     ListLocationsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    ListLocationsRequest.add_member(:filters, Shapes::ShapeRef.new(shape: LocationFilters, location_name: "Filters"))
     ListLocationsRequest.struct_class = Types::ListLocationsRequest
 
     ListLocationsResponse.add_member(:locations, Shapes::ShapeRef.new(shape: LocationList, location_name: "Locations"))
@@ -464,11 +476,19 @@ module Aws::DataSync
 
     ListTasksRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location_name: "MaxResults"))
     ListTasksRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    ListTasksRequest.add_member(:filters, Shapes::ShapeRef.new(shape: TaskFilters, location_name: "Filters"))
     ListTasksRequest.struct_class = Types::ListTasksRequest
 
     ListTasksResponse.add_member(:tasks, Shapes::ShapeRef.new(shape: TaskList, location_name: "Tasks"))
     ListTasksResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
     ListTasksResponse.struct_class = Types::ListTasksResponse
+
+    LocationFilter.add_member(:name, Shapes::ShapeRef.new(shape: LocationFilterName, required: true, location_name: "Name"))
+    LocationFilter.add_member(:values, Shapes::ShapeRef.new(shape: FilterValues, required: true, location_name: "Values"))
+    LocationFilter.add_member(:operator, Shapes::ShapeRef.new(shape: Operator, required: true, location_name: "Operator"))
+    LocationFilter.struct_class = Types::LocationFilter
+
+    LocationFilters.member = Shapes::ShapeRef.new(shape: LocationFilter)
 
     LocationList.member = Shapes::ShapeRef.new(shape: LocationListEntry)
 
@@ -553,6 +573,13 @@ module Aws::DataSync
     TaskExecutionResultDetail.add_member(:error_code, Shapes::ShapeRef.new(shape: string, location_name: "ErrorCode"))
     TaskExecutionResultDetail.add_member(:error_detail, Shapes::ShapeRef.new(shape: string, location_name: "ErrorDetail"))
     TaskExecutionResultDetail.struct_class = Types::TaskExecutionResultDetail
+
+    TaskFilter.add_member(:name, Shapes::ShapeRef.new(shape: TaskFilterName, required: true, location_name: "Name"))
+    TaskFilter.add_member(:values, Shapes::ShapeRef.new(shape: FilterValues, required: true, location_name: "Values"))
+    TaskFilter.add_member(:operator, Shapes::ShapeRef.new(shape: Operator, required: true, location_name: "Operator"))
+    TaskFilter.struct_class = Types::TaskFilter
+
+    TaskFilters.member = Shapes::ShapeRef.new(shape: TaskFilter)
 
     TaskList.member = Shapes::ShapeRef.new(shape: TaskListEntry)
 

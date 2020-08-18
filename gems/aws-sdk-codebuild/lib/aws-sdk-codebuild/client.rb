@@ -1252,7 +1252,8 @@ module Aws::CodeBuild
     #    </note>
     #
     #   You can specify either the Amazon Resource Name (ARN) of the CMK or,
-    #   if available, the CMK's alias (using the format `alias/alias-name `).
+    #   if available, the CMK's alias (using the format
+    #   `alias/<alias-name>`).
     #
     # @option params [Array<Types::Tag>] :tags
     #   A list of tag key and value pairs associated with this build project.
@@ -3329,7 +3330,8 @@ module Aws::CodeBuild
     #    </note>
     #
     #   You can specify either the Amazon Resource Name (ARN) of the CMK or,
-    #   if available, the CMK's alias (using the format `alias/alias-name `).
+    #   if available, the CMK's alias (using the format
+    #   `alias/<alias-name>`).
     #
     # @option params [String] :idempotency_token
     #   A unique, case sensitive identifier you provide to ensure the
@@ -3787,7 +3789,8 @@ module Aws::CodeBuild
     #    </note>
     #
     #   You can specify either the Amazon Resource Name (ARN) of the CMK or,
-    #   if available, the CMK's alias (using the format `alias/alias-name `).
+    #   if available, the CMK's alias (using the format
+    #   `alias/<alias-name>`).
     #
     # @option params [String] :idempotency_token
     #   A unique, case sensitive identifier you provide to ensure the
@@ -4489,7 +4492,8 @@ module Aws::CodeBuild
     #    </note>
     #
     #   You can specify either the Amazon Resource Name (ARN) of the CMK or,
-    #   if available, the CMK's alias (using the format `alias/alias-name `).
+    #   if available, the CMK's alias (using the format
+    #   `alias/<alias-name>`).
     #
     # @option params [Array<Types::Tag>] :tags
     #   An updated list of tag key and value pairs associated with this build
@@ -4958,7 +4962,7 @@ module Aws::CodeBuild
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-codebuild'
-      context[:gem_version] = '1.58.0'
+      context[:gem_version] = '1.59.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 
