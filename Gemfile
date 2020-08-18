@@ -108,7 +108,7 @@ group :docs do
   gem 'yard-sitemap', '~> 1.0'
 end
 
-group :repl do
+group :development do
   gem 'pry'
   gem 'byebug'
 end
