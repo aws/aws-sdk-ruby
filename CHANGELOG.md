@@ -1,6 +1,18 @@
 Unreleased Changes
 ------------------
 
+* Feature - Aws::CodeBuild - Updated the documentation for AWS CodeBuild.
+
+* Feature - Aws::CognitoIdentityProvider - Updated the API, and documentation for Amazon Cognito Identity Provider.
+
+* Feature - Aws::DataSync - Updated the API, and documentation for AWS DataSync.
+
+* Feature - Aws::SecurityHub - Updated the API, and documentation for AWS SecurityHub.
+
+* Feature - Aws::SESV2 - Updated the API, and documentation for Amazon Simple Email Service.
+
+* Feature - Aws::IdentityStore - Added support for a new service, AWS SSO Identity Store.
+
 2.11.568 (2020-08-17)
 ------------------
 

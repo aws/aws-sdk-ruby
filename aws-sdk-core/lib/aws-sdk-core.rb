@@ -126,6 +126,7 @@ module Aws
     Honeycode
     IAM
     IVS
+    IdentityStore
     Imagebuilder
     ImportExport
     Inspector
