@@ -1,6 +1,5 @@
 # frozen_string_literal: true
 
-require 'json'
 require 'time'
 require 'net/http'
 
@@ -81,8 +80,8 @@ module Aws
       # service is responding but is returning invalid JSON documents
       # in response to the GET profile credentials call.
       begin
-        retry_errors([JSON::ParserError, StandardError], max_retries: 3) do
-          c = JSON.parse(get_credentials.to_s)
+        retry_errors([Aws::Json::ParseError, StandardError], max_retries: 3) do
+          c = Aws::Json.load(get_credentials.to_s)
           @credentials = Credentials.new(
             c['AccessKeyId'],
             c['SecretAccessKey'],
@@ -90,7 +89,7 @@ module Aws
           )
           @expiration = c['Expiration'] ? Time.iso8601(c['Expiration']) : nil
         end
-      rescue JSON::ParserError
+      rescue Aws::Json::ParseError
         raise Aws::Errors::MetadataParserError.new
       end
     end
