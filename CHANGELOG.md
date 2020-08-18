@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+2.11.569 (2020-08-18)
+------------------
+
 * Feature - Aws::CodeBuild - Updated the documentation for AWS CodeBuild.
 
 * Feature - Aws::CognitoIdentityProvider - Updated the API, and documentation for Amazon Cognito Identity Provider.
