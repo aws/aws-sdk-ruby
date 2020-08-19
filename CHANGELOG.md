@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+2.11.570 (2020-08-19)
+------------------
+
 * Feature - Aws::IVS - Updated the API, and documentation for Amazon Interactive Video Service.
 
 * Feature - Aws::LakeFormation - Updated the API, and documentation for AWS Lake Formation.
