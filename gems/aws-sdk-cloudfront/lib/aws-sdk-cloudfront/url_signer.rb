@@ -3,7 +3,6 @@
 require 'base64'
 require 'uri'
 require 'time'
-require 'json'
 require 'openssl'
 
 module Aws
