@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+* Feature - Aws::IVS - Updated the API, and documentation for Amazon Interactive Video Service.
+
+* Feature - Aws::LakeFormation - Updated the API, and documentation for AWS Lake Formation.
+
+* Feature - Aws::Organizations - Updated the documentation for AWS Organizations.
+
+* Feature - Aws::ServiceCatalog - Updated the API, and documentation for AWS Service Catalog.
+
+* Feature - Aws::StorageGateway - Updated the API, and documentation for AWS Storage Gateway.
+
 2.11.569 (2020-08-18)
 ------------------
 
