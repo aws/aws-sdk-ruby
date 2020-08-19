@@ -156,6 +156,10 @@ module Aws::IVS
     #   Channel playback URL.
     #   @return [String]
     #
+    # @!attribute [rw] authorized
+    #   Whether the channel is authorized.
+    #   @return [Boolean]
+    #
     # @!attribute [rw] tags
     #   Array of 1-50 maps, each of the form `string:string (key:value)`.
     #   @return [Hash<String,String>]
@@ -169,6 +173,7 @@ module Aws::IVS
       :type,
       :ingest_endpoint,
       :playback_url,
+      :authorized,
       :tags)
       SENSITIVE = []
       include Aws::Structure
@@ -200,6 +205,10 @@ module Aws::IVS
     #   Channel latency mode. Default: `LOW`.
     #   @return [String]
     #
+    # @!attribute [rw] authorized
+    #   Whether the channel is authorized.
+    #   @return [Boolean]
+    #
     # @!attribute [rw] tags
     #   Array of 1-50 maps, each of the form `string:string (key:value)`.
     #   @return [Hash<String,String>]
@@ -210,6 +219,7 @@ module Aws::IVS
       :arn,
       :name,
       :latency_mode,
+      :authorized,
       :tags)
       SENSITIVE = []
       include Aws::Structure
@@ -234,6 +244,7 @@ module Aws::IVS
     #         name: "ChannelName",
     #         latency_mode: "NORMAL", # accepts NORMAL, LOW
     #         type: "BASIC", # accepts BASIC, STANDARD
+    #         authorized: false,
     #         tags: {
     #           "TagKey" => "TagValue",
     #         },
@@ -265,6 +276,10 @@ module Aws::IVS
     #   Default: `STANDARD`.
     #   @return [String]
     #
+    # @!attribute [rw] authorized
+    #   Whether the channel is authorized. Default: `false`.
+    #   @return [Boolean]
+    #
     # @!attribute [rw] tags
     #   See Channel$tags.
     #   @return [Hash<String,String>]
@@ -275,6 +290,7 @@ module Aws::IVS
       :name,
       :latency_mode,
       :type,
+      :authorized,
       :tags)
       SENSITIVE = []
       include Aws::Structure
@@ -355,6 +371,29 @@ module Aws::IVS
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass DeletePlaybackKeyPairRequest
+    #   data as a hash:
+    #
+    #       {
+    #         arn: "PlaybackKeyPairArn", # required
+    #       }
+    #
+    # @!attribute [rw] arn
+    #   ARN of the key pair to be deleted.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ivs-2020-07-14/DeletePlaybackKeyPairRequest AWS API Documentation
+    #
+    class DeletePlaybackKeyPairRequest < Struct.new(
+      :arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ivs-2020-07-14/DeletePlaybackKeyPairResponse AWS API Documentation
+    #
+    class DeletePlaybackKeyPairResponse < Aws::EmptyStructure; end
+
     # @note When making an API call, you may pass DeleteStreamKeyRequest
     #   data as a hash:
     #
@@ -401,6 +440,37 @@ module Aws::IVS
     #
     class GetChannelResponse < Struct.new(
       :channel)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass GetPlaybackKeyPairRequest
+    #   data as a hash:
+    #
+    #       {
+    #         arn: "PlaybackKeyPairArn", # required
+    #       }
+    #
+    # @!attribute [rw] arn
+    #   ARN of the key pair to be returned.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ivs-2020-07-14/GetPlaybackKeyPairRequest AWS API Documentation
+    #
+    class GetPlaybackKeyPairRequest < Struct.new(
+      :arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] key_pair
+    #   A key pair used to sign and validate a playback authorization token.
+    #   @return [Types::PlaybackKeyPair]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ivs-2020-07-14/GetPlaybackKeyPairResponse AWS API Documentation
+    #
+    class GetPlaybackKeyPairResponse < Struct.new(
+      :key_pair)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -468,6 +538,54 @@ module Aws::IVS
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass ImportPlaybackKeyPairRequest
+    #   data as a hash:
+    #
+    #       {
+    #         public_key_material: "PlaybackPublicKeyMaterial", # required
+    #         name: "PlaybackKeyPairName",
+    #         tags: {
+    #           "TagKey" => "TagValue",
+    #         },
+    #       }
+    #
+    # @!attribute [rw] public_key_material
+    #   The public portion of a customer-generated key pair.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   An arbitrary string (a nickname) assigned to a playback key pair
+    #   that helps the customer identify that resource. The value does not
+    #   need to be unique.
+    #   @return [String]
+    #
+    # @!attribute [rw] tags
+    #   Any tags provided with the request are added to the playback key
+    #   pair tags.
+    #   @return [Hash<String,String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ivs-2020-07-14/ImportPlaybackKeyPairRequest AWS API Documentation
+    #
+    class ImportPlaybackKeyPairRequest < Struct.new(
+      :public_key_material,
+      :name,
+      :tags)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] key_pair
+    #   A key pair used to sign and validate a playback authorization token.
+    #   @return [Types::PlaybackKeyPair]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ivs-2020-07-14/ImportPlaybackKeyPairResponse AWS API Documentation
+    #
+    class ImportPlaybackKeyPairResponse < Struct.new(
+      :key_pair)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] exception_message
     #   Unexpected error during processing of request.
     #   @return [String]
@@ -525,6 +643,50 @@ module Aws::IVS
     #
     class ListChannelsResponse < Struct.new(
       :channels,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass ListPlaybackKeyPairsRequest
+    #   data as a hash:
+    #
+    #       {
+    #         next_token: "PaginationToken",
+    #         max_results: 1,
+    #       }
+    #
+    # @!attribute [rw] next_token
+    #   Maximum number of key pairs to return.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The first key pair to retrieve. This is used for pagination; see the
+    #   `nextToken` response field.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ivs-2020-07-14/ListPlaybackKeyPairsRequest AWS API Documentation
+    #
+    class ListPlaybackKeyPairsRequest < Struct.new(
+      :next_token,
+      :max_results)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] key_pairs
+    #   List of key pairs.
+    #   @return [Array<Types::PlaybackKeyPairSummary>]
+    #
+    # @!attribute [rw] next_token
+    #   If there are more key pairs than `maxResults`, use `nextToken` in
+    #   the request to get the next set.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ivs-2020-07-14/ListPlaybackKeyPairsResponse AWS API Documentation
+    #
+    class ListPlaybackKeyPairsResponse < Struct.new(
+      :key_pairs,
       :next_token)
       SENSITIVE = []
       include Aws::Structure
@@ -685,6 +847,59 @@ module Aws::IVS
       include Aws::Structure
     end
 
+    # A key pair used to sign and validate a playback authorization token.
+    #
+    # @!attribute [rw] arn
+    #   Key-pair ARN.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   Key-pair name.
+    #   @return [String]
+    #
+    # @!attribute [rw] fingerprint
+    #   Key-pair identifier.
+    #   @return [String]
+    #
+    # @!attribute [rw] tags
+    #   Array of 1-50 maps, each of the form `string:string (key:value)`.
+    #   @return [Hash<String,String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ivs-2020-07-14/PlaybackKeyPair AWS API Documentation
+    #
+    class PlaybackKeyPair < Struct.new(
+      :arn,
+      :name,
+      :fingerprint,
+      :tags)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Summary information about a playback key pair.
+    #
+    # @!attribute [rw] arn
+    #   Key-pair ARN.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   Key-pair name.
+    #   @return [String]
+    #
+    # @!attribute [rw] tags
+    #   Array of 1-50 maps, each of the form `string:string (key:value)`
+    #   @return [Hash<String,String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ivs-2020-07-14/PlaybackKeyPairSummary AWS API Documentation
+    #
+    class PlaybackKeyPairSummary < Struct.new(
+      :arn,
+      :name,
+      :tags)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass PutMetadataRequest
     #   data as a hash:
     #
@@ -813,7 +1028,7 @@ module Aws::IVS
     #   @return [String]
     #
     # @!attribute [rw] tags
-    #   Array of 1-50 maps, each of the form `string:string (key:value)`
+    #   Array of 1-50 maps, each of the form `string:string (key:value)`.
     #   @return [Hash<String,String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ivs-2020-07-14/StreamKey AWS API Documentation
@@ -838,7 +1053,7 @@ module Aws::IVS
     #   @return [String]
     #
     # @!attribute [rw] tags
-    #   Array of 1-50 maps, each of the form `string:string (key:value)`
+    #   Array of 1-50 maps, each of the form `string:string (key:value)`.
     #   @return [Hash<String,String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ivs-2020-07-14/StreamKeySummary AWS API Documentation
@@ -977,6 +1192,7 @@ module Aws::IVS
     #         name: "ChannelName",
     #         latency_mode: "NORMAL", # accepts NORMAL, LOW
     #         type: "BASIC", # accepts BASIC, STANDARD
+    #         authorized: false,
     #       }
     #
     # @!attribute [rw] arn
@@ -1009,13 +1225,18 @@ module Aws::IVS
     #   Default: `STANDARD`.
     #   @return [String]
     #
+    # @!attribute [rw] authorized
+    #   Whether the channel is authorized. Default: `false`.
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ivs-2020-07-14/UpdateChannelRequest AWS API Documentation
     #
     class UpdateChannelRequest < Struct.new(
       :arn,
       :name,
       :latency_mode,
-      :type)
+      :type,
+      :authorized)
       SENSITIVE = []
       include Aws::Structure
     end

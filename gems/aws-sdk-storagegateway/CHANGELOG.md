@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.47.0 (2020-08-19)
+------------------
+
+* Feature - Added WORM, tape retention lock, and custom pool features for virtual tapes.
+
 1.46.0 (2020-07-31)
 ------------------
 

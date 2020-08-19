@@ -337,6 +337,7 @@ module Aws::IVS
     #   resp.channels[0].type #=> String, one of "BASIC", "STANDARD"
     #   resp.channels[0].ingest_endpoint #=> String
     #   resp.channels[0].playback_url #=> String
+    #   resp.channels[0].authorized #=> Boolean
     #   resp.channels[0].tags #=> Hash
     #   resp.channels[0].tags["TagKey"] #=> String
     #   resp.errors #=> Array
@@ -416,6 +417,9 @@ module Aws::IVS
     #
     #   Default: `STANDARD`.
     #
+    # @option params [Boolean] :authorized
+    #   Whether the channel is authorized. Default: `false`.
+    #
     # @option params [Hash<String,String>] :tags
     #   See Channel$tags.
     #
@@ -430,6 +434,7 @@ module Aws::IVS
     #     name: "ChannelName",
     #     latency_mode: "NORMAL", # accepts NORMAL, LOW
     #     type: "BASIC", # accepts BASIC, STANDARD
+    #     authorized: false,
     #     tags: {
     #       "TagKey" => "TagValue",
     #     },
@@ -443,6 +448,7 @@ module Aws::IVS
     #   resp.channel.type #=> String, one of "BASIC", "STANDARD"
     #   resp.channel.ingest_endpoint #=> String
     #   resp.channel.playback_url #=> String
+    #   resp.channel.authorized #=> Boolean
     #   resp.channel.tags #=> Hash
     #   resp.channel.tags["TagKey"] #=> String
     #   resp.stream_key.arn #=> String
@@ -527,6 +533,29 @@ module Aws::IVS
       req.send_request(options)
     end
 
+    # Deletes a specified authorization key pair. This invalidates future
+    # viewer tokens generated using the key pair’s `privateKey`.
+    #
+    # @option params [required, String] :arn
+    #   ARN of the key pair to be deleted.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_playback_key_pair({
+    #     arn: "PlaybackKeyPairArn", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ivs-2020-07-14/DeletePlaybackKeyPair AWS API Documentation
+    #
+    # @overload delete_playback_key_pair(params = {})
+    # @param [Hash] params ({})
+    def delete_playback_key_pair(params = {}, options = {})
+      req = build_request(:delete_playback_key_pair, params)
+      req.send_request(options)
+    end
+
     # Deletes the stream key for the specified ARN, so it can no longer be
     # used to stream.
     #
@@ -574,6 +603,7 @@ module Aws::IVS
     #   resp.channel.type #=> String, one of "BASIC", "STANDARD"
     #   resp.channel.ingest_endpoint #=> String
     #   resp.channel.playback_url #=> String
+    #   resp.channel.authorized #=> Boolean
     #   resp.channel.tags #=> Hash
     #   resp.channel.tags["TagKey"] #=> String
     #
@@ -583,6 +613,41 @@ module Aws::IVS
     # @param [Hash] params ({})
     def get_channel(params = {}, options = {})
       req = build_request(:get_channel, params)
+      req.send_request(options)
+    end
+
+    # Gets a specified playback authorization key pair and returns the `arn`
+    # and `fingerprint`. The `privateKey` held by the caller can be used to
+    # generate viewer authorization tokens, to grant viewers access to
+    # authorized channels.
+    #
+    # @option params [required, String] :arn
+    #   ARN of the key pair to be returned.
+    #
+    # @return [Types::GetPlaybackKeyPairResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetPlaybackKeyPairResponse#key_pair #key_pair} => Types::PlaybackKeyPair
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_playback_key_pair({
+    #     arn: "PlaybackKeyPairArn", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.key_pair.arn #=> String
+    #   resp.key_pair.name #=> String
+    #   resp.key_pair.fingerprint #=> String
+    #   resp.key_pair.tags #=> Hash
+    #   resp.key_pair.tags["TagKey"] #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ivs-2020-07-14/GetPlaybackKeyPair AWS API Documentation
+    #
+    # @overload get_playback_key_pair(params = {})
+    # @param [Hash] params ({})
+    def get_playback_key_pair(params = {}, options = {})
+      req = build_request(:get_playback_key_pair, params)
       req.send_request(options)
     end
 
@@ -652,6 +717,53 @@ module Aws::IVS
       req.send_request(options)
     end
 
+    # Imports the public portion of a new key pair and returns its `arn` and
+    # `fingerprint`. The `privateKey` can then be used to generate viewer
+    # authorization tokens, to grant viewers access to authorized channels.
+    #
+    # @option params [required, String] :public_key_material
+    #   The public portion of a customer-generated key pair.
+    #
+    # @option params [String] :name
+    #   An arbitrary string (a nickname) assigned to a playback key pair that
+    #   helps the customer identify that resource. The value does not need to
+    #   be unique.
+    #
+    # @option params [Hash<String,String>] :tags
+    #   Any tags provided with the request are added to the playback key pair
+    #   tags.
+    #
+    # @return [Types::ImportPlaybackKeyPairResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ImportPlaybackKeyPairResponse#key_pair #key_pair} => Types::PlaybackKeyPair
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.import_playback_key_pair({
+    #     public_key_material: "PlaybackPublicKeyMaterial", # required
+    #     name: "PlaybackKeyPairName",
+    #     tags: {
+    #       "TagKey" => "TagValue",
+    #     },
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.key_pair.arn #=> String
+    #   resp.key_pair.name #=> String
+    #   resp.key_pair.fingerprint #=> String
+    #   resp.key_pair.tags #=> Hash
+    #   resp.key_pair.tags["TagKey"] #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ivs-2020-07-14/ImportPlaybackKeyPair AWS API Documentation
+    #
+    # @overload import_playback_key_pair(params = {})
+    # @param [Hash] params ({})
+    def import_playback_key_pair(params = {}, options = {})
+      req = build_request(:import_playback_key_pair, params)
+      req.send_request(options)
+    end
+
     # Gets summary information about all channels in your account, in the
     # AWS region where the API request is processed. This list can be
     # filtered to match a specified string.
@@ -687,6 +799,7 @@ module Aws::IVS
     #   resp.channels[0].arn #=> String
     #   resp.channels[0].name #=> String
     #   resp.channels[0].latency_mode #=> String, one of "NORMAL", "LOW"
+    #   resp.channels[0].authorized #=> Boolean
     #   resp.channels[0].tags #=> Hash
     #   resp.channels[0].tags["TagKey"] #=> String
     #   resp.next_token #=> String
@@ -697,6 +810,47 @@ module Aws::IVS
     # @param [Hash] params ({})
     def list_channels(params = {}, options = {})
       req = build_request(:list_channels, params)
+      req.send_request(options)
+    end
+
+    # Gets summary information about playback key pairs.
+    #
+    # @option params [String] :next_token
+    #   Maximum number of key pairs to return.
+    #
+    # @option params [Integer] :max_results
+    #   The first key pair to retrieve. This is used for pagination; see the
+    #   `nextToken` response field.
+    #
+    # @return [Types::ListPlaybackKeyPairsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListPlaybackKeyPairsResponse#key_pairs #key_pairs} => Array&lt;Types::PlaybackKeyPairSummary&gt;
+    #   * {Types::ListPlaybackKeyPairsResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_playback_key_pairs({
+    #     next_token: "PaginationToken",
+    #     max_results: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.key_pairs #=> Array
+    #   resp.key_pairs[0].arn #=> String
+    #   resp.key_pairs[0].name #=> String
+    #   resp.key_pairs[0].tags #=> Hash
+    #   resp.key_pairs[0].tags["TagKey"] #=> String
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ivs-2020-07-14/ListPlaybackKeyPairs AWS API Documentation
+    #
+    # @overload list_playback_key_pairs(params = {})
+    # @param [Hash] params ({})
+    def list_playback_key_pairs(params = {}, options = {})
+      req = build_request(:list_playback_key_pairs, params)
       req.send_request(options)
     end
 
@@ -973,6 +1127,9 @@ module Aws::IVS
     #
     #   Default: `STANDARD`.
     #
+    # @option params [Boolean] :authorized
+    #   Whether the channel is authorized. Default: `false`.
+    #
     # @return [Types::UpdateChannelResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::UpdateChannelResponse#channel #channel} => Types::Channel
@@ -984,6 +1141,7 @@ module Aws::IVS
     #     name: "ChannelName",
     #     latency_mode: "NORMAL", # accepts NORMAL, LOW
     #     type: "BASIC", # accepts BASIC, STANDARD
+    #     authorized: false,
     #   })
     #
     # @example Response structure
@@ -994,6 +1152,7 @@ module Aws::IVS
     #   resp.channel.type #=> String, one of "BASIC", "STANDARD"
     #   resp.channel.ingest_endpoint #=> String
     #   resp.channel.playback_url #=> String
+    #   resp.channel.authorized #=> Boolean
     #   resp.channel.tags #=> Hash
     #   resp.channel.tags["TagKey"] #=> String
     #
@@ -1019,7 +1178,7 @@ module Aws::IVS
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-ivs'
-      context[:gem_version] = '1.1.0'
+      context[:gem_version] = '1.2.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

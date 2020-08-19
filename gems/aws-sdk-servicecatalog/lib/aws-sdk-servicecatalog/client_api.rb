@@ -1258,10 +1258,14 @@ module Aws::ServiceCatalog
     ProvisionedProductAttribute.add_member(:created_time, Shapes::ShapeRef.new(shape: CreatedTime, location_name: "CreatedTime"))
     ProvisionedProductAttribute.add_member(:idempotency_token, Shapes::ShapeRef.new(shape: IdempotencyToken, location_name: "IdempotencyToken"))
     ProvisionedProductAttribute.add_member(:last_record_id, Shapes::ShapeRef.new(shape: Id, location_name: "LastRecordId"))
+    ProvisionedProductAttribute.add_member(:last_provisioning_record_id, Shapes::ShapeRef.new(shape: Id, location_name: "LastProvisioningRecordId"))
+    ProvisionedProductAttribute.add_member(:last_successful_provisioning_record_id, Shapes::ShapeRef.new(shape: Id, location_name: "LastSuccessfulProvisioningRecordId"))
     ProvisionedProductAttribute.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "Tags"))
     ProvisionedProductAttribute.add_member(:physical_id, Shapes::ShapeRef.new(shape: PhysicalId, location_name: "PhysicalId"))
     ProvisionedProductAttribute.add_member(:product_id, Shapes::ShapeRef.new(shape: Id, location_name: "ProductId"))
+    ProvisionedProductAttribute.add_member(:product_name, Shapes::ShapeRef.new(shape: ProductViewName, location_name: "ProductName"))
     ProvisionedProductAttribute.add_member(:provisioning_artifact_id, Shapes::ShapeRef.new(shape: Id, location_name: "ProvisioningArtifactId"))
+    ProvisionedProductAttribute.add_member(:provisioning_artifact_name, Shapes::ShapeRef.new(shape: ProvisioningArtifactName, location_name: "ProvisioningArtifactName"))
     ProvisionedProductAttribute.add_member(:user_arn, Shapes::ShapeRef.new(shape: UserArn, location_name: "UserArn"))
     ProvisionedProductAttribute.add_member(:user_arn_session, Shapes::ShapeRef.new(shape: UserArnSession, location_name: "UserArnSession"))
     ProvisionedProductAttribute.struct_class = Types::ProvisionedProductAttribute
@@ -1277,6 +1281,8 @@ module Aws::ServiceCatalog
     ProvisionedProductDetail.add_member(:created_time, Shapes::ShapeRef.new(shape: CreatedTime, location_name: "CreatedTime"))
     ProvisionedProductDetail.add_member(:idempotency_token, Shapes::ShapeRef.new(shape: IdempotencyToken, location_name: "IdempotencyToken"))
     ProvisionedProductDetail.add_member(:last_record_id, Shapes::ShapeRef.new(shape: LastRequestId, location_name: "LastRecordId"))
+    ProvisionedProductDetail.add_member(:last_provisioning_record_id, Shapes::ShapeRef.new(shape: Id, location_name: "LastProvisioningRecordId"))
+    ProvisionedProductDetail.add_member(:last_successful_provisioning_record_id, Shapes::ShapeRef.new(shape: Id, location_name: "LastSuccessfulProvisioningRecordId"))
     ProvisionedProductDetail.add_member(:product_id, Shapes::ShapeRef.new(shape: Id, location_name: "ProductId"))
     ProvisionedProductDetail.add_member(:provisioning_artifact_id, Shapes::ShapeRef.new(shape: Id, location_name: "ProvisioningArtifactId"))
     ProvisionedProductDetail.struct_class = Types::ProvisionedProductDetail

@@ -40,6 +40,7 @@ module Aws::LakeFormation
     DescribeResourceRequest = Shapes::StructureShape.new(name: 'DescribeResourceRequest')
     DescribeResourceResponse = Shapes::StructureShape.new(name: 'DescribeResourceResponse')
     DescriptionString = Shapes::StringShape.new(name: 'DescriptionString')
+    DetailsMap = Shapes::StructureShape.new(name: 'DetailsMap')
     EntityNotFoundException = Shapes::StructureShape.new(name: 'EntityNotFoundException')
     ErrorDetail = Shapes::StructureShape.new(name: 'ErrorDetail')
     FieldNameString = Shapes::StringShape.new(name: 'FieldNameString')
@@ -73,12 +74,14 @@ module Aws::LakeFormation
     PrincipalResourcePermissionsList = Shapes::ListShape.new(name: 'PrincipalResourcePermissionsList')
     PutDataLakeSettingsRequest = Shapes::StructureShape.new(name: 'PutDataLakeSettingsRequest')
     PutDataLakeSettingsResponse = Shapes::StructureShape.new(name: 'PutDataLakeSettingsResponse')
+    RAMResourceShareArn = Shapes::StringShape.new(name: 'RAMResourceShareArn')
     RegisterResourceRequest = Shapes::StructureShape.new(name: 'RegisterResourceRequest')
     RegisterResourceResponse = Shapes::StructureShape.new(name: 'RegisterResourceResponse')
     Resource = Shapes::StructureShape.new(name: 'Resource')
     ResourceArnString = Shapes::StringShape.new(name: 'ResourceArnString')
     ResourceInfo = Shapes::StructureShape.new(name: 'ResourceInfo')
     ResourceInfoList = Shapes::ListShape.new(name: 'ResourceInfoList')
+    ResourceShareList = Shapes::ListShape.new(name: 'ResourceShareList')
     RevokePermissionsRequest = Shapes::StructureShape.new(name: 'RevokePermissionsRequest')
     RevokePermissionsResponse = Shapes::StructureShape.new(name: 'RevokePermissionsResponse')
     StringValue = Shapes::StringShape.new(name: 'StringValue')
@@ -163,6 +166,9 @@ module Aws::LakeFormation
     DescribeResourceResponse.add_member(:resource_info, Shapes::ShapeRef.new(shape: ResourceInfo, location_name: "ResourceInfo"))
     DescribeResourceResponse.struct_class = Types::DescribeResourceResponse
 
+    DetailsMap.add_member(:resource_share, Shapes::ShapeRef.new(shape: ResourceShareList, location_name: "ResourceShare"))
+    DetailsMap.struct_class = Types::DetailsMap
+
     EntityNotFoundException.add_member(:message, Shapes::ShapeRef.new(shape: MessageString, location_name: "Message"))
     EntityNotFoundException.struct_class = Types::EntityNotFoundException
 
@@ -244,6 +250,7 @@ module Aws::LakeFormation
     PrincipalResourcePermissions.add_member(:resource, Shapes::ShapeRef.new(shape: Resource, location_name: "Resource"))
     PrincipalResourcePermissions.add_member(:permissions, Shapes::ShapeRef.new(shape: PermissionList, location_name: "Permissions"))
     PrincipalResourcePermissions.add_member(:permissions_with_grant_option, Shapes::ShapeRef.new(shape: PermissionList, location_name: "PermissionsWithGrantOption"))
+    PrincipalResourcePermissions.add_member(:additional_details, Shapes::ShapeRef.new(shape: DetailsMap, location_name: "AdditionalDetails"))
     PrincipalResourcePermissions.struct_class = Types::PrincipalResourcePermissions
 
     PrincipalResourcePermissionsList.member = Shapes::ShapeRef.new(shape: PrincipalResourcePermissions)
@@ -274,6 +281,8 @@ module Aws::LakeFormation
     ResourceInfo.struct_class = Types::ResourceInfo
 
     ResourceInfoList.member = Shapes::ShapeRef.new(shape: ResourceInfo)
+
+    ResourceShareList.member = Shapes::ShapeRef.new(shape: RAMResourceShareArn)
 
     RevokePermissionsRequest.add_member(:catalog_id, Shapes::ShapeRef.new(shape: CatalogIdString, location_name: "CatalogId"))
     RevokePermissionsRequest.add_member(:principal, Shapes::ShapeRef.new(shape: DataLakePrincipal, required: true, location_name: "Principal"))

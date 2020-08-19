@@ -2196,6 +2196,8 @@ module Aws::ServiceCatalog
     #   resp.provisioned_product_detail.created_time #=> Time
     #   resp.provisioned_product_detail.idempotency_token #=> String
     #   resp.provisioned_product_detail.last_record_id #=> String
+    #   resp.provisioned_product_detail.last_provisioning_record_id #=> String
+    #   resp.provisioned_product_detail.last_successful_provisioning_record_id #=> String
     #   resp.provisioned_product_detail.product_id #=> String
     #   resp.provisioned_product_detail.provisioning_artifact_id #=> String
     #   resp.cloud_watch_dashboards #=> Array
@@ -4348,6 +4350,8 @@ module Aws::ServiceCatalog
     #   resp.provisioned_products[0].created_time #=> Time
     #   resp.provisioned_products[0].idempotency_token #=> String
     #   resp.provisioned_products[0].last_record_id #=> String
+    #   resp.provisioned_products[0].last_provisioning_record_id #=> String
+    #   resp.provisioned_products[0].last_successful_provisioning_record_id #=> String
     #   resp.provisioned_products[0].product_id #=> String
     #   resp.provisioned_products[0].provisioning_artifact_id #=> String
     #   resp.next_page_token #=> String
@@ -4545,7 +4549,9 @@ module Aws::ServiceCatalog
     #   When the key is `SearchQuery`, the searchable fields are `arn`,
     #   `createdTime`, `id`, `lastRecordId`, `idempotencyToken`, `name`,
     #   `physicalId`, `productId`, `provisioningArtifact`, `type`, `status`,
-    #   `tags`, `userArn`, and `userArnSession`.
+    #   `tags`, `userArn`, `userArnSession`, `lastProvisioningRecordId`,
+    #   `lastSuccessfulProvisioningRecordId`, `productName`, and
+    #   `provisioningArtifactName`.
     #
     #   Example: `"SearchQuery":["status:AVAILABLE"]`
     #
@@ -4600,12 +4606,16 @@ module Aws::ServiceCatalog
     #   resp.provisioned_products[0].created_time #=> Time
     #   resp.provisioned_products[0].idempotency_token #=> String
     #   resp.provisioned_products[0].last_record_id #=> String
+    #   resp.provisioned_products[0].last_provisioning_record_id #=> String
+    #   resp.provisioned_products[0].last_successful_provisioning_record_id #=> String
     #   resp.provisioned_products[0].tags #=> Array
     #   resp.provisioned_products[0].tags[0].key #=> String
     #   resp.provisioned_products[0].tags[0].value #=> String
     #   resp.provisioned_products[0].physical_id #=> String
     #   resp.provisioned_products[0].product_id #=> String
+    #   resp.provisioned_products[0].product_name #=> String
     #   resp.provisioned_products[0].provisioning_artifact_id #=> String
+    #   resp.provisioned_products[0].provisioning_artifact_name #=> String
     #   resp.provisioned_products[0].user_arn #=> String
     #   resp.provisioned_products[0].user_arn_session #=> String
     #   resp.total_results_count #=> Integer
@@ -5411,7 +5421,7 @@ module Aws::ServiceCatalog
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-servicecatalog'
-      context[:gem_version] = '1.44.0'
+      context[:gem_version] = '1.45.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

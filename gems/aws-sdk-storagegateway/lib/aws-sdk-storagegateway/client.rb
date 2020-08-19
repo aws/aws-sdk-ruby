@@ -394,7 +394,7 @@ module Aws::StorageGateway
     #   The value that indicates the type of medium changer to use for tape
     #   gateway. This field is optional.
     #
-    #   Valid Values: `STK-L700` \| `AWS-Gateway-VTL`
+    #   Valid Values: `STK-L700` \| `AWS-Gateway-VTL` \| `IBM-03584L32-0402`
     #
     # @option params [Array<Types::Tag>] :tags
     #   A list of up to 50 tags that you can assign to the gateway. Each tag
@@ -759,6 +759,16 @@ module Aws::StorageGateway
     #
     #   Valid Values: `GLACIER` \| `DEEP_ARCHIVE`
     #
+    # @option params [Boolean] :bypass_governance_retention
+    #   Set permissions to bypass governance retention. If the lock type of
+    #   the archived tape is `Governance`, the tape's archived age is not
+    #   older than `RetentionLockInDays`, and the user does not already have
+    #   `BypassGovernanceRetention`, setting this to TRUE enables the user to
+    #   bypass the retention lock. This parameter is set to true by default
+    #   for calls from the console.
+    #
+    #   Valid values: `TRUE` \| `FALSE`
+    #
     # @return [Types::AssignTapePoolOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::AssignTapePoolOutput#tape_arn #tape_arn} => String
@@ -768,6 +778,7 @@ module Aws::StorageGateway
     #   resp = client.assign_tape_pool({
     #     tape_arn: "TapeARN", # required
     #     pool_id: "PoolId", # required
+    #     bypass_governance_retention: false,
     #   })
     #
     # @example Response structure
@@ -1291,7 +1302,7 @@ module Aws::StorageGateway
 
     # Creates a Server Message Block (SMB) file share on an existing file
     # gateway. In Storage Gateway, a file share is a file system mount point
-    # backed by Amazon S3 cloud storage. Storage Gateway expose file shares
+    # backed by Amazon S3 cloud storage. Storage Gateway exposes file shares
     # using an SMB interface. This operation is only supported for file
     # gateways.
     #
@@ -1511,14 +1522,14 @@ module Aws::StorageGateway
     # durable off-site recovery, as well as import the data to an Amazon
     # Elastic Block Store (EBS) volume in Amazon Elastic Compute Cloud
     # (EC2). You can take snapshots of your gateway volume on a scheduled or
-    # ad hoc basis. This API enables you to take ad-hoc snapshot. For more
-    # information, see [Editing a snapshot schedule][1].
+    # ad hoc basis. This API enables you to take an ad hoc snapshot. For
+    # more information, see [Editing a snapshot schedule][1].
     #
-    # In the CreateSnapshot request you identify the volume by providing its
-    # Amazon Resource Name (ARN). You must also provide description for the
-    # snapshot. When AWS Storage Gateway takes the snapshot of specified
+    # In the `CreateSnapshot` request, you identify the volume by providing
+    # its Amazon Resource Name (ARN). You must also provide description for
+    # the snapshot. When AWS Storage Gateway takes the snapshot of specified
     # volume, the snapshot and description appears in the AWS Storage
-    # Gateway Console. In response, AWS Storage Gateway returns you a
+    # Gateway console. In response, AWS Storage Gateway returns you a
     # snapshot ID. You can use this snapshot ID to check the snapshot
     # progress or later use it when you want to create a volume from a
     # snapshot. This operation is only supported in stored and cached volume
@@ -1719,7 +1730,7 @@ module Aws::StorageGateway
     # create an empty gateway volume, then any existing data on the disk is
     # erased.
     #
-    # In the request you must specify the gateway and the disk information
+    # In the request, you must specify the gateway and the disk information
     # on which you are creating the volume. In response, the gateway creates
     # the volume and returns volume information such as the volume Amazon
     # Resource Name (ARN), its size, and the iSCSI target ARN that
@@ -1858,9 +1869,75 @@ module Aws::StorageGateway
       req.send_request(options)
     end
 
+    # Creates a new custom tape pool. You can use custom tape pool to enable
+    # tape retention lock on tapes that are archived in the custom pool.
+    #
+    # @option params [required, String] :pool_name
+    #   The name of the new custom tape pool.
+    #
+    # @option params [required, String] :storage_class
+    #   The storage class that is associated with the new custom pool. When
+    #   you use your backup application to eject the tape, the tape is
+    #   archived directly into the storage class (S3 Glacier or S3 Glacier
+    #   Deep Archive) that corresponds to the pool.
+    #
+    # @option params [String] :retention_lock_type
+    #   Tape retention lock can be configured in two modes. When configured in
+    #   governance mode, AWS accounts with specific IAM permissions are
+    #   authorized to remove the tape retention lock from archived virtual
+    #   tapes. When configured in compliance mode, the tape retention lock
+    #   cannot be removed by any user, including the root AWS account.
+    #
+    # @option params [Integer] :retention_lock_time_in_days
+    #   Tape retention lock time is set in days. Tape retention lock can be
+    #   enabled for up to 100 years (36,500 days).
+    #
+    # @option params [Array<Types::Tag>] :tags
+    #   A list of up to 50 tags that can be assigned to tape pool. Each tag is
+    #   a key-value pair.
+    #
+    #   <note markdown="1"> Valid characters for key and value are letters, spaces, and numbers
+    #   representable in UTF-8 format, and the following special characters: +
+    #   - = . \_ : / @. The maximum length of a tag's key is 128 characters,
+    #   and the maximum length for a tag's value is 256.
+    #
+    #    </note>
+    #
+    # @return [Types::CreateTapePoolOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateTapePoolOutput#pool_arn #pool_arn} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_tape_pool({
+    #     pool_name: "PoolName", # required
+    #     storage_class: "DEEP_ARCHIVE", # required, accepts DEEP_ARCHIVE, GLACIER
+    #     retention_lock_type: "COMPLIANCE", # accepts COMPLIANCE, GOVERNANCE, NONE
+    #     retention_lock_time_in_days: 1,
+    #     tags: [
+    #       {
+    #         key: "TagKey", # required
+    #         value: "TagValue", # required
+    #       },
+    #     ],
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.pool_arn #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/CreateTapePool AWS API Documentation
+    #
+    # @overload create_tape_pool(params = {})
+    # @param [Hash] params ({})
+    def create_tape_pool(params = {}, options = {})
+      req = build_request(:create_tape_pool, params)
+      req.send_request(options)
+    end
+
     # Creates a virtual tape by using your own barcode. You write data to
     # the virtual tape and then archive the tape. A barcode is unique and
-    # can not be reused if it has already been used on a tape. This applies
+    # cannot be reused if it has already been used on a tape. This applies
     # to barcodes used on deleted tapes. This operation is only supported in
     # the tape gateway type.
     #
@@ -1911,6 +1988,10 @@ module Aws::StorageGateway
     #
     #   Valid Values: `GLACIER` \| `DEEP_ARCHIVE`
     #
+    # @option params [Boolean] :worm
+    #   Set to `TRUE` if the tape you are creating is to be configured as a
+    #   write-once-read-many (WORM) tape.
+    #
     # @option params [Array<Types::Tag>] :tags
     #   A list of up to 50 tags that can be assigned to a virtual tape that
     #   has a barcode. Each tag is a key-value pair.
@@ -1951,6 +2032,7 @@ module Aws::StorageGateway
     #     kms_encrypted: false,
     #     kms_key: "KMSKey",
     #     pool_id: "PoolId",
+    #     worm: false,
     #     tags: [
     #       {
     #         key: "TagKey", # required
@@ -2037,6 +2119,10 @@ module Aws::StorageGateway
     #
     #   Valid Values: `GLACIER` \| `DEEP_ARCHIVE`
     #
+    # @option params [Boolean] :worm
+    #   Set to `TRUE` if the tape you are creating is to be configured as a
+    #   write-once-read-many (WORM) tape.
+    #
     # @option params [Array<Types::Tag>] :tags
     #   A list of up to 50 tags that can be assigned to a virtual tape. Each
     #   tag is a key-value pair.
@@ -2085,6 +2171,7 @@ module Aws::StorageGateway
     #     kms_encrypted: false,
     #     kms_key: "KMSKey",
     #     pool_id: "PoolId",
+    #     worm: false,
     #     tags: [
     #       {
     #         key: "TagKey", # required
@@ -2156,7 +2243,7 @@ module Aws::StorageGateway
     #   One of the BandwidthType values that indicates the gateway bandwidth
     #   rate limit to delete.
     #
-    #   Valid Values: `Upload` \| `Download` \| `All`
+    #   Valid Values: `UPLOAD` \| `DOWNLOAD` \| `ALL`
     #
     # @return [Types::DeleteBandwidthRateLimitOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -2373,7 +2460,7 @@ module Aws::StorageGateway
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/storagegatewaylatest/userguide/backing-up-volumes.html
+    # [1]: https://docs.aws.amazon.com/storagegateway/latest/userguide/backing-up-volumes.html
     # [2]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_DescribeSnapshots.html
     #
     # @option params [required, String] :volume_arn
@@ -2427,6 +2514,12 @@ module Aws::StorageGateway
     # @option params [required, String] :tape_arn
     #   The Amazon Resource Name (ARN) of the virtual tape to delete.
     #
+    # @option params [Boolean] :bypass_governance_retention
+    #   Set to `TRUE` to delete an archived tape that belongs to a custom pool
+    #   with tape retention lock. Only archived tapes with tape retention lock
+    #   set to `governance` can be deleted. Archived tapes with tape retention
+    #   lock set to `compliance` can't be deleted.
+    #
     # @return [Types::DeleteTapeOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::DeleteTapeOutput#tape_arn #tape_arn} => String
@@ -2451,6 +2544,7 @@ module Aws::StorageGateway
     #   resp = client.delete_tape({
     #     gateway_arn: "GatewayARN", # required
     #     tape_arn: "TapeARN", # required
+    #     bypass_governance_retention: false,
     #   })
     #
     # @example Response structure
@@ -2472,6 +2566,12 @@ module Aws::StorageGateway
     # @option params [required, String] :tape_arn
     #   The Amazon Resource Name (ARN) of the virtual tape to delete from the
     #   virtual tape shelf (VTS).
+    #
+    # @option params [Boolean] :bypass_governance_retention
+    #   Set to `TRUE` to delete an archived tape that belongs to a custom pool
+    #   with tape retention lock. Only archived tapes with tape retention lock
+    #   set to `governance` can be deleted. Archived tapes with tape retention
+    #   lock set to `compliance` can't be deleted.
     #
     # @return [Types::DeleteTapeArchiveOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -2495,6 +2595,7 @@ module Aws::StorageGateway
     #
     #   resp = client.delete_tape_archive({
     #     tape_arn: "TapeARN", # required
+    #     bypass_governance_retention: false,
     #   })
     #
     # @example Response structure
@@ -2507,6 +2608,36 @@ module Aws::StorageGateway
     # @param [Hash] params ({})
     def delete_tape_archive(params = {}, options = {})
       req = build_request(:delete_tape_archive, params)
+      req.send_request(options)
+    end
+
+    # Delete a custom tape pool. A custom tape pool can only be deleted if
+    # there are no tapes in the pool and if there are no automatic tape
+    # creation policies that reference the custom tape pool.
+    #
+    # @option params [required, String] :pool_arn
+    #   The Amazon Resource Name (ARN) of the custom tape pool to delete.
+    #
+    # @return [Types::DeleteTapePoolOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DeleteTapePoolOutput#pool_arn #pool_arn} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_tape_pool({
+    #     pool_arn: "PoolARN", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.pool_arn #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/DeleteTapePool AWS API Documentation
+    #
+    # @overload delete_tape_pool(params = {})
+    # @param [Hash] params ({})
+    def delete_tape_pool(params = {}, options = {})
+      req = build_request(:delete_tape_pool, params)
       req.send_request(options)
     end
 
@@ -2613,7 +2744,7 @@ module Aws::StorageGateway
     # Returns the bandwidth rate limits of a gateway. By default, these
     # limits are not set, which means no bandwidth rate limiting is in
     # effect. This operation is supported for the stored volume, cached
-    # volume and tape gateway types.
+    # volume, and tape gateway types.
     #
     # This operation only returns a value for a bandwidth rate limit only if
     # the limit is set. If no limits are set for the gateway, then this
@@ -3430,6 +3561,9 @@ module Aws::StorageGateway
     #   resp.tape_archives[0].tape_used_in_bytes #=> Integer
     #   resp.tape_archives[0].kms_key #=> String
     #   resp.tape_archives[0].pool_id #=> String
+    #   resp.tape_archives[0].worm #=> Boolean
+    #   resp.tape_archives[0].retention_start_date #=> Time
+    #   resp.tape_archives[0].pool_entry_date #=> Time
     #   resp.marker #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/DescribeTapeArchives AWS API Documentation
@@ -3618,6 +3752,9 @@ module Aws::StorageGateway
     #   resp.tapes[0].tape_used_in_bytes #=> Integer
     #   resp.tapes[0].kms_key #=> String
     #   resp.tapes[0].pool_id #=> String
+    #   resp.tapes[0].worm #=> Boolean
+    #   resp.tapes[0].retention_start_date #=> Time
+    #   resp.tapes[0].pool_entry_date #=> Time
     #   resp.marker #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/DescribeTapes AWS API Documentation
@@ -4103,6 +4240,7 @@ module Aws::StorageGateway
     #   resp.automatic_tape_creation_policy_infos[0].automatic_tape_creation_rules[0].pool_id #=> String
     #   resp.automatic_tape_creation_policy_infos[0].automatic_tape_creation_rules[0].tape_size_in_bytes #=> Integer
     #   resp.automatic_tape_creation_policy_infos[0].automatic_tape_creation_rules[0].minimum_num_tapes #=> Integer
+    #   resp.automatic_tape_creation_policy_infos[0].automatic_tape_creation_rules[0].worm #=> Boolean
     #   resp.automatic_tape_creation_policy_infos[0].gateway_arn #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/ListAutomaticTapeCreationPolicies AWS API Documentation
@@ -4404,6 +4542,63 @@ module Aws::StorageGateway
       req.send_request(options)
     end
 
+    # Lists custom tape pools. You specify custom tape pools to list by
+    # specifying one or more custom tape pool Amazon Resource Names (ARNs).
+    # If you don't specify a custom tape pool ARN, the operation lists all
+    # custom tape pools.
+    #
+    # This operation supports pagination. You can optionally specify the
+    # `Limit` parameter in the body to limit the number of tape pools in the
+    # response. If the number of tape pools returned in the response is
+    # truncated, the response includes a `Marker` element that you can use
+    # in your subsequent request to retrieve the next set of tape pools.
+    #
+    # @option params [Array<String>] :pool_arns
+    #   The Amazon Resource Name (ARN) of each of the custom tape pools you
+    #   want to list. If you don't specify a custom tape pool ARN, the
+    #   response lists all custom tape pools.
+    #
+    # @option params [String] :marker
+    #   A string that indicates the position at which to begin the returned
+    #   list of tape pools.
+    #
+    # @option params [Integer] :limit
+    #   An optional number limit for the tape pools in the list returned by
+    #   this call.
+    #
+    # @return [Types::ListTapePoolsOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListTapePoolsOutput#pool_infos #pool_infos} => Array&lt;Types::PoolInfo&gt;
+    #   * {Types::ListTapePoolsOutput#marker #marker} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_tape_pools({
+    #     pool_arns: ["PoolARN"],
+    #     marker: "Marker",
+    #     limit: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.pool_infos #=> Array
+    #   resp.pool_infos[0].pool_arn #=> String
+    #   resp.pool_infos[0].pool_name #=> String
+    #   resp.pool_infos[0].storage_class #=> String, one of "DEEP_ARCHIVE", "GLACIER"
+    #   resp.pool_infos[0].retention_lock_type #=> String, one of "COMPLIANCE", "GOVERNANCE", "NONE"
+    #   resp.pool_infos[0].retention_lock_time_in_days #=> Integer
+    #   resp.pool_infos[0].pool_status #=> String, one of "ACTIVE", "DELETED"
+    #   resp.marker #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/ListTapePools AWS API Documentation
+    #
+    # @overload list_tape_pools(params = {})
+    # @param [Hash] params ({})
+    def list_tape_pools(params = {}, options = {})
+      req = build_request(:list_tape_pools, params)
+      req.send_request(options)
+    end
+
     # Lists virtual tapes in your virtual tape library (VTL) and your
     # virtual tape shelf (VTS). You specify the tapes to list by specifying
     # one or more tape Amazon Resource Names (ARNs). If you don't specify a
@@ -4455,6 +4650,8 @@ module Aws::StorageGateway
     #   resp.tape_infos[0].tape_status #=> String
     #   resp.tape_infos[0].gateway_arn #=> String
     #   resp.tape_infos[0].pool_id #=> String
+    #   resp.tape_infos[0].retention_start_date #=> Time
+    #   resp.tape_infos[0].pool_entry_date #=> Time
     #   resp.marker #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/ListTapes AWS API Documentation
@@ -5322,6 +5519,7 @@ module Aws::StorageGateway
     #         pool_id: "PoolId", # required
     #         tape_size_in_bytes: 1, # required
     #         minimum_num_tapes: 1, # required
+    #         worm: false,
     #       },
     #     ],
     #     gateway_arn: "GatewayARN", # required
@@ -5492,7 +5690,7 @@ module Aws::StorageGateway
     # time zone. To specify which gateway to update, use the Amazon Resource
     # Name (ARN) of the gateway in your request.
     #
-    # <note markdown="1"> For Gateways activated after September 2, 2015, the gateway's ARN
+    # <note markdown="1"> For gateways activated after September 2, 2015, the gateway's ARN
     # contains the gateway ID rather than the gateway name. However,
     # changing the name of the gateway has no effect on the gateway's ARN.
     #
@@ -5513,7 +5711,7 @@ module Aws::StorageGateway
     #   The Amazon Resource Name (ARN) of the Amazon CloudWatch log group that
     #   you want to use to monitor and log events in the gateway.
     #
-    #   For more information, see [What is Amazon CloudWatch logs?][1].
+    #   For more information, see [What is Amazon CloudWatch Logs?][1]
     #
     #
     #
@@ -6189,7 +6387,7 @@ module Aws::StorageGateway
     # @option params [required, String] :device_type
     #   The type of medium changer you want to select.
     #
-    #   Valid Values: `STK-L700` \| `AWS-Gateway-VTL`
+    #   Valid Values: `STK-L700` \| `AWS-Gateway-VTL` \| `IBM-03584L32-0402`
     #
     # @return [Types::UpdateVTLDeviceTypeOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -6243,7 +6441,7 @@ module Aws::StorageGateway
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-storagegateway'
-      context[:gem_version] = '1.46.0'
+      context[:gem_version] = '1.47.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 
