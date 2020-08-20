@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.45.0 (2020-08-19)
+------------------
+
+* Feature - Enhance SearchProvisionedProducts API to allow queries using productName and provisioningArtifactName. Added lastProvisioningRecordId and lastSuccessfulRecordId to Read ProvisionedProduct APIs
+
 1.44.0 (2020-07-30)
 ------------------
 

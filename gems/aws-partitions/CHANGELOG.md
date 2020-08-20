@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.358.0 (2020-08-19)
+------------------
+
+* Feature - Updated the partitions source data the determines the AWS service regions and endpoints.
+
+1.357.0 (2020-08-18)
+------------------
+
+* Feature - Added support for enumerating regions for `Aws::IdentityStore`.
+
 1.356.0 (2020-08-14)
 ------------------
 

@@ -1652,6 +1652,8 @@ module Aws::DataSync
     #   An opaque string that indicates the position at which to begin the
     #   next list of locations.
     #
+    # @option params [Array<Types::LocationFilter>] :filters
+    #
     # @return [Types::ListLocationsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::ListLocationsResponse#locations #locations} => Array&lt;Types::LocationListEntry&gt;
@@ -1664,6 +1666,13 @@ module Aws::DataSync
     #   resp = client.list_locations({
     #     max_results: 1,
     #     next_token: "NextToken",
+    #     filters: [
+    #       {
+    #         name: "LocationUri", # required, accepts LocationUri, LocationType, CreationTime
+    #         values: ["FilterAttributeValue"], # required
+    #         operator: "Equals", # required, accepts Equals, NotEquals, In, LessThanOrEqual, LessThan, GreaterThanOrEqual, GreaterThan, Contains, NotContains, BeginsWith
+    #       },
+    #     ],
     #   })
     #
     # @example Response structure
@@ -1778,6 +1787,8 @@ module Aws::DataSync
     #   An opaque string that indicates the position at which to begin the
     #   next list of tasks.
     #
+    # @option params [Array<Types::TaskFilter>] :filters
+    #
     # @return [Types::ListTasksResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::ListTasksResponse#tasks #tasks} => Array&lt;Types::TaskListEntry&gt;
@@ -1790,6 +1801,13 @@ module Aws::DataSync
     #   resp = client.list_tasks({
     #     max_results: 1,
     #     next_token: "NextToken",
+    #     filters: [
+    #       {
+    #         name: "LocationId", # required, accepts LocationId, CreationTime
+    #         values: ["FilterAttributeValue"], # required
+    #         operator: "Equals", # required, accepts Equals, NotEquals, In, LessThanOrEqual, LessThan, GreaterThanOrEqual, GreaterThan, Contains, NotContains, BeginsWith
+    #       },
+    #     ],
     #   })
     #
     # @example Response structure
@@ -2061,7 +2079,7 @@ module Aws::DataSync
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-datasync'
-      context[:gem_version] = '1.23.0'
+      context[:gem_version] = '1.24.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

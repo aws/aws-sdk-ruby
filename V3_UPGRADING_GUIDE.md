@@ -47,7 +47,7 @@ ddb = Aws::DynamoDB::Client.new
 
 As you can see, only gems and require statements need to be changed - the modules, classes, and methods are backwards compatible.
 
-### User of the aws-sdk-resources Gem
+## User of the aws-sdk-resources Gem
 
 This is VERY similar to if you're a user of `aws-sdk`. The V3 release provides an update to `aws-sdk-resources` as well, so your initial gemfile change is just the major version, as above. Of course, we still recommend moving over to service-level gems when you can.
 
@@ -103,13 +103,13 @@ Gem::Specification.new do |spec|
   # ...
 end
 ```
-      
+
 Your users will need to follow the upgrade paths above if they are current users of V2 of the AWS SDK for Ruby.
-      
+
 ### Simplest Upgrade Path
 
 The simplest upgrade path is to open up your dependency on `aws-sdk` or `aws-sdk-resources` like so:
-      
+
 ```ruby
 # Gemspec File
 Gem::Specification.new do |spec|
@@ -118,5 +118,17 @@ Gem::Specification.new do |spec|
   # ...
 end
 ```
-            
+
 This means users who don't have an AWS SDK dependency will end up using V3, while users who are using V2 won't have to make any changes. This is workable since the public API is backwards compatible, but it's not ideal in that you'll be adding about 100 gems to the dependency chain of your users, most of which they do not need or use.
+
+## Upgrade from version 1
+
+If you are using SDK version 1 and version 2 together in your application guided by our official [blog post](https://aws.amazon.com/blogs/developer/upcoming-stable-release-of-aws-sdk-for-ruby-version-2/), then you might have either `aws-sdk ~> 2` or `aws-sdk-resources ~> 2` exists in your project, you can simply update it to `~> 3` or using separate service gems as described in version 2 upgrade options.
+
+For additional information of migrating from Version 1 to Version 2, please follow [V1 to V2 migration guide](https://github.com/aws/aws-sdk-ruby/blob/version-2/MIGRATING.md).
+
+## Additional Information
+
+* [Introduction Blog](https://aws.amazon.com/blogs/developer/aws-sdk-for-ruby-modularization-version-3-2/)
+* [V2 to V3 Upgrade Blog Guide](https://aws.amazon.com/blogs/developer/upgrading-from-version-2-to-version-3-of-the-aws-sdk-for-ruby-2/)
+* [Upgrade Release Notes](https://github.com/aws/aws-sdk-ruby/blob/master/UPGRADING.md)

@@ -672,6 +672,8 @@ module Aws::LakeFormation
     #   resp.permissions[0].permissions[0] #=> String, one of "ALL", "SELECT", "ALTER", "DROP", "DELETE", "INSERT", "DESCRIBE", "CREATE_DATABASE", "CREATE_TABLE", "DATA_LOCATION_ACCESS"
     #   resp.permissions[0].permissions_with_grant_option #=> Array
     #   resp.permissions[0].permissions_with_grant_option[0] #=> String, one of "ALL", "SELECT", "ALTER", "DROP", "DELETE", "INSERT", "DESCRIBE", "CREATE_DATABASE", "CREATE_TABLE", "DATA_LOCATION_ACCESS"
+    #   resp.permissions[0].additional_details.resource_share #=> Array
+    #   resp.permissions[0].additional_details.resource_share[0] #=> String
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lakeformation-2017-03-31/GetEffectivePermissionsForPath AWS API Documentation
@@ -885,6 +887,8 @@ module Aws::LakeFormation
     #   resp.principal_resource_permissions[0].permissions[0] #=> String, one of "ALL", "SELECT", "ALTER", "DROP", "DELETE", "INSERT", "DESCRIBE", "CREATE_DATABASE", "CREATE_TABLE", "DATA_LOCATION_ACCESS"
     #   resp.principal_resource_permissions[0].permissions_with_grant_option #=> Array
     #   resp.principal_resource_permissions[0].permissions_with_grant_option[0] #=> String, one of "ALL", "SELECT", "ALTER", "DROP", "DELETE", "INSERT", "DESCRIBE", "CREATE_DATABASE", "CREATE_TABLE", "DATA_LOCATION_ACCESS"
+    #   resp.principal_resource_permissions[0].additional_details.resource_share #=> Array
+    #   resp.principal_resource_permissions[0].additional_details.resource_share[0] #=> String
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lakeformation-2017-03-31/ListPermissions AWS API Documentation
@@ -1191,7 +1195,7 @@ module Aws::LakeFormation
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-lakeformation'
-      context[:gem_version] = '1.7.0'
+      context[:gem_version] = '1.8.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

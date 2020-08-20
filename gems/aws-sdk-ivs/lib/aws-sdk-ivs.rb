@@ -47,6 +47,6 @@ require_relative 'aws-sdk-ivs/customizations'
 # @service
 module Aws::IVS
 
-  GEM_VERSION = '1.1.0'
+  GEM_VERSION = '1.2.0'
 
 end

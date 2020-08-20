@@ -2181,14 +2181,22 @@ module Aws::CognitoIdentityProvider
     #   data as a hash:
     #
     #       {
-    #         application_id: "HexStringType", # required
-    #         role_arn: "ArnType", # required
-    #         external_id: "StringType", # required
+    #         application_id: "HexStringType",
+    #         application_arn: "ArnType",
+    #         role_arn: "ArnType",
+    #         external_id: "StringType",
     #         user_data_shared: false,
     #       }
     #
     # @!attribute [rw] application_id
     #   The application ID for an Amazon Pinpoint application.
+    #   @return [String]
+    #
+    # @!attribute [rw] application_arn
+    #   The Amazon Resource Name (ARN) of an Amazon Pinpoint project. You
+    #   can use the Amazon Pinpoint project for Pinpoint integration with
+    #   the chosen User Pool Client. Amazon Cognito publishes events to the
+    #   pinpoint project declared by the app ARN.
     #   @return [String]
     #
     # @!attribute [rw] role_arn
@@ -2209,6 +2217,7 @@ module Aws::CognitoIdentityProvider
     #
     class AnalyticsConfigurationType < Struct.new(
       :application_id,
+      :application_arn,
       :role_arn,
       :external_id,
       :user_data_shared)
@@ -3278,9 +3287,10 @@ module Aws::CognitoIdentityProvider
     #         allowed_o_auth_scopes: ["ScopeType"],
     #         allowed_o_auth_flows_user_pool_client: false,
     #         analytics_configuration: {
-    #           application_id: "HexStringType", # required
-    #           role_arn: "ArnType", # required
-    #           external_id: "StringType", # required
+    #           application_id: "HexStringType",
+    #           application_arn: "ArnType",
+    #           role_arn: "ArnType",
+    #           external_id: "StringType",
     #           user_data_shared: false,
     #         },
     #         prevent_user_existence_errors: "LEGACY", # accepts LEGACY, ENABLED
@@ -8945,9 +8955,10 @@ module Aws::CognitoIdentityProvider
     #         allowed_o_auth_scopes: ["ScopeType"],
     #         allowed_o_auth_flows_user_pool_client: false,
     #         analytics_configuration: {
-    #           application_id: "HexStringType", # required
-    #           role_arn: "ArnType", # required
-    #           external_id: "StringType", # required
+    #           application_id: "HexStringType",
+    #           application_arn: "ArnType",
+    #           role_arn: "ArnType",
+    #           external_id: "StringType",
     #           user_data_shared: false,
     #         },
     #         prevent_user_existence_errors: "LEGACY", # accepts LEGACY, ENABLED

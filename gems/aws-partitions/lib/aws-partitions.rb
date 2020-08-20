@@ -325,6 +325,7 @@ module Aws
             'Honeycode' => 'honeycode',
             'IAM' => 'iam',
             'IVS' => 'ivs',
+            'IdentityStore' => 'identitystore',
             'Imagebuilder' => 'imagebuilder',
             'ImportExport' => 'importexport',
             'Inspector' => 'inspector',

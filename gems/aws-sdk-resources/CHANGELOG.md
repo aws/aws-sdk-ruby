@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+3.78.0 (2020-08-18)
+------------------
+
+* Feature - Added a dependency on the new `aws-sdk-identitystore` gem.
+
 3.77.0 (2020-08-13)
 ------------------
 

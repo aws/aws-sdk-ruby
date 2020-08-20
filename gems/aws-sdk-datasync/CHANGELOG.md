@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.24.0 (2020-08-18)
+------------------
+
+* Feature - DataSync support for filters as input arguments to the ListTasks and ListLocations API calls.
+
 1.23.0 (2020-07-27)
 ------------------
 

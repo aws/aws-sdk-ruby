@@ -994,6 +994,56 @@ module Aws::SESV2
     #
     class CreateEmailTemplateResponse < Aws::EmptyStructure; end
 
+    # Represents a request to create an import job from a data source for a
+    # data destination.
+    #
+    # @note When making an API call, you may pass CreateImportJobRequest
+    #   data as a hash:
+    #
+    #       {
+    #         import_destination: { # required
+    #           suppression_list_destination: { # required
+    #             suppression_list_import_action: "DELETE", # required, accepts DELETE, PUT
+    #           },
+    #         },
+    #         import_data_source: { # required
+    #           s3_url: "S3Url", # required
+    #           data_format: "CSV", # required, accepts CSV, JSON
+    #         },
+    #       }
+    #
+    # @!attribute [rw] import_destination
+    #   The destination for the import job.
+    #   @return [Types::ImportDestination]
+    #
+    # @!attribute [rw] import_data_source
+    #   The data source for the import job.
+    #   @return [Types::ImportDataSource]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sesv2-2019-09-27/CreateImportJobRequest AWS API Documentation
+    #
+    class CreateImportJobRequest < Struct.new(
+      :import_destination,
+      :import_data_source)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # An HTTP 200 response if the request succeeds, or an error message if
+    # the request fails.
+    #
+    # @!attribute [rw] job_id
+    #   A string that represents the import job ID.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sesv2-2019-09-27/CreateImportJobResponse AWS API Documentation
+    #
+    class CreateImportJobResponse < Struct.new(
+      :job_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Contains information about a custom verification email template.
     #
     # @!attribute [rw] template_name
@@ -2098,6 +2148,26 @@ module Aws::SESV2
       include Aws::Structure
     end
 
+    # An object that contains the failure details about an import job.
+    #
+    # @!attribute [rw] failed_records_s3_url
+    #   An Amazon S3 presigned URL that contains all the failed records and
+    #   related information.
+    #   @return [String]
+    #
+    # @!attribute [rw] error_message
+    #   A message about why the import job failed.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sesv2-2019-09-27/FailureInfo AWS API Documentation
+    #
+    class FailureInfo < Struct.new(
+      :failed_records_s3_url,
+      :error_message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # A request to obtain information about the email-sending capabilities
     # of your Amazon SES account.
     #
@@ -2894,6 +2964,84 @@ module Aws::SESV2
       include Aws::Structure
     end
 
+    # Represents a request for information about an import job using the
+    # import job ID.
+    #
+    # @note When making an API call, you may pass GetImportJobRequest
+    #   data as a hash:
+    #
+    #       {
+    #         job_id: "JobId", # required
+    #       }
+    #
+    # @!attribute [rw] job_id
+    #   The ID of the import job.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sesv2-2019-09-27/GetImportJobRequest AWS API Documentation
+    #
+    class GetImportJobRequest < Struct.new(
+      :job_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # An HTTP 200 response if the request succeeds, or an error message if
+    # the request fails.
+    #
+    # @!attribute [rw] job_id
+    #   A string that represents the import job ID.
+    #   @return [String]
+    #
+    # @!attribute [rw] import_destination
+    #   The destination of the import job.
+    #   @return [Types::ImportDestination]
+    #
+    # @!attribute [rw] import_data_source
+    #   The data source of the import job.
+    #   @return [Types::ImportDataSource]
+    #
+    # @!attribute [rw] failure_info
+    #   The failure details about an import job.
+    #   @return [Types::FailureInfo]
+    #
+    # @!attribute [rw] job_status
+    #   The status of the import job.
+    #   @return [String]
+    #
+    # @!attribute [rw] created_timestamp
+    #   The time stamp of when the import job was created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] completed_timestamp
+    #   The time stamp of when the import job was completed.
+    #   @return [Time]
+    #
+    # @!attribute [rw] processed_records_count
+    #   The current number of records processed.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] failed_records_count
+    #   The number of records that failed processing because of invalid
+    #   input or other reasons.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sesv2-2019-09-27/GetImportJobResponse AWS API Documentation
+    #
+    class GetImportJobResponse < Struct.new(
+      :job_id,
+      :import_destination,
+      :import_data_source,
+      :failure_info,
+      :job_status,
+      :created_timestamp,
+      :completed_timestamp,
+      :processed_records_count,
+      :failed_records_count)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # A request to retrieve information about an email address that's on
     # the suppression list for your account.
     #
@@ -2963,6 +3111,89 @@ module Aws::SESV2
       :identity_type,
       :identity_name,
       :sending_enabled)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # An object that contains details about the data source of the import
+    # job.
+    #
+    # @note When making an API call, you may pass ImportDataSource
+    #   data as a hash:
+    #
+    #       {
+    #         s3_url: "S3Url", # required
+    #         data_format: "CSV", # required, accepts CSV, JSON
+    #       }
+    #
+    # @!attribute [rw] s3_url
+    #   An Amazon S3 URL in the format
+    #   s3://*&lt;bucket\_name&gt;*/*&lt;object&gt;*.
+    #   @return [String]
+    #
+    # @!attribute [rw] data_format
+    #   The data format of the import job's data source.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sesv2-2019-09-27/ImportDataSource AWS API Documentation
+    #
+    class ImportDataSource < Struct.new(
+      :s3_url,
+      :data_format)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # An object that contains details about the resource destination the
+    # import job is going to target.
+    #
+    # @note When making an API call, you may pass ImportDestination
+    #   data as a hash:
+    #
+    #       {
+    #         suppression_list_destination: { # required
+    #           suppression_list_import_action: "DELETE", # required, accepts DELETE, PUT
+    #         },
+    #       }
+    #
+    # @!attribute [rw] suppression_list_destination
+    #   An object that contains the action of the import job towards
+    #   suppression list.
+    #   @return [Types::SuppressionListDestination]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sesv2-2019-09-27/ImportDestination AWS API Documentation
+    #
+    class ImportDestination < Struct.new(
+      :suppression_list_destination)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A summary of the import job.
+    #
+    # @!attribute [rw] job_id
+    #   A string that represents the import job ID.
+    #   @return [String]
+    #
+    # @!attribute [rw] import_destination
+    #   An object that contains details about the resource destination the
+    #   import job is going to target.
+    #   @return [Types::ImportDestination]
+    #
+    # @!attribute [rw] job_status
+    #   The status of the import job.
+    #   @return [String]
+    #
+    # @!attribute [rw] created_timestamp
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sesv2-2019-09-27/ImportJobSummary AWS API Documentation
+    #
+    class ImportJobSummary < Struct.new(
+      :job_id,
+      :import_destination,
+      :job_status,
+      :created_timestamp)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3499,6 +3730,71 @@ module Aws::SESV2
     #
     class ListEmailTemplatesResponse < Struct.new(
       :templates_metadata,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Represents a request to list all of the import jobs for a data
+    # destination within the specified maximum number of import jobs.
+    #
+    # @note When making an API call, you may pass ListImportJobsRequest
+    #   data as a hash:
+    #
+    #       {
+    #         import_destination_type: "SUPPRESSION_LIST", # accepts SUPPRESSION_LIST
+    #         next_token: "NextToken",
+    #         page_size: 1,
+    #       }
+    #
+    # @!attribute [rw] import_destination_type
+    #   The destination of the import job, which can be used to list import
+    #   jobs that have a certain `ImportDestinationType`.
+    #   @return [String]
+    #
+    # @!attribute [rw] next_token
+    #   A string token indicating that there might be additional import jobs
+    #   available to be listed. Copy this token to a subsequent call to
+    #   `ListImportJobs` with the same parameters to retrieve the next page
+    #   of import jobs.
+    #   @return [String]
+    #
+    # @!attribute [rw] page_size
+    #   Maximum number of import jobs to return at once. Use this parameter
+    #   to paginate results. If additional import jobs exist beyond the
+    #   specified limit, the `NextToken` element is sent in the response.
+    #   Use the `NextToken` value in subsequent requests to retrieve
+    #   additional addresses.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sesv2-2019-09-27/ListImportJobsRequest AWS API Documentation
+    #
+    class ListImportJobsRequest < Struct.new(
+      :import_destination_type,
+      :next_token,
+      :page_size)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # An HTTP 200 response if the request succeeds, or an error message if
+    # the request fails.
+    #
+    # @!attribute [rw] import_jobs
+    #   A list of the import job summaries.
+    #   @return [Array<Types::ImportJobSummary>]
+    #
+    # @!attribute [rw] next_token
+    #   A string token indicating that there might be additional import jobs
+    #   available to be listed. Copy this token to a subsequent call to
+    #   `ListImportJobs` with the same parameters to retrieve the next page
+    #   of import jobs.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sesv2-2019-09-27/ListImportJobsResponse AWS API Documentation
+    #
+    class ListImportJobsResponse < Struct.new(
+      :import_jobs,
       :next_token)
       SENSITIVE = []
       include Aws::Structure
@@ -5428,6 +5724,33 @@ module Aws::SESV2
     #
     class SuppressionAttributes < Struct.new(
       :suppressed_reasons)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # An object that contains details about the action of suppression list.
+    #
+    # @note When making an API call, you may pass SuppressionListDestination
+    #   data as a hash:
+    #
+    #       {
+    #         suppression_list_import_action: "DELETE", # required, accepts DELETE, PUT
+    #       }
+    #
+    # @!attribute [rw] suppression_list_import_action
+    #   The type of action that you want to perform on the address.
+    #   Acceptable values:
+    #
+    #   * PUT: add the addresses to the suppression list. If the record
+    #     already exists, it will override it with the new value.
+    #
+    #   * DELETE: remove the addresses from the suppression list.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sesv2-2019-09-27/SuppressionListDestination AWS API Documentation
+    #
+    class SuppressionListDestination < Struct.new(
+      :suppression_list_import_action)
       SENSITIVE = []
       include Aws::Structure
     end

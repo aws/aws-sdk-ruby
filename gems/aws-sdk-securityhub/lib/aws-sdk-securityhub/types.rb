@@ -169,7 +169,15 @@ module Aws::SecurityHub
     #   @return [Integer]
     #
     # @!attribute [rw] created_time
-    #   The datetime when the auto scaling group was created.
+    #   Indicates when the auto scaling group was created.
+    #
+    #   Uses the `date-time` format specified in [RFC 3339 section 5.6,
+    #   Internet Date/Time Format][1]. The value cannot contain spaces. For
+    #   example, `2020-03-22T13:22:13.933Z`.
+    #
+    #
+    #
+    #   [1]: https://tools.ietf.org/html/rfc3339#section-5.6
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/AwsAutoScalingAutoScalingGroupDetails AWS API Documentation
@@ -221,7 +229,15 @@ module Aws::SecurityHub
     #   @return [String]
     #
     # @!attribute [rw] last_modified_time
-    #   The date and time that the distribution was last modified.
+    #   Indicates when that the distribution was last modified.
+    #
+    #   Uses the `date-time` format specified in [RFC 3339 section 5.6,
+    #   Internet Date/Time Format][1]. The value cannot contain spaces. For
+    #   example, `2020-03-22T13:22:13.933Z`.
+    #
+    #
+    #
+    #   [1]: https://tools.ietf.org/html/rfc3339#section-5.6
     #   @return [String]
     #
     # @!attribute [rw] logging
@@ -673,6 +689,874 @@ module Aws::SecurityHub
       include Aws::Structure
     end
 
+    # Contains a definition of an attribute for the table.
+    #
+    # @note When making an API call, you may pass AwsDynamoDbTableAttributeDefinition
+    #   data as a hash:
+    #
+    #       {
+    #         attribute_name: "NonEmptyString",
+    #         attribute_type: "NonEmptyString",
+    #       }
+    #
+    # @!attribute [rw] attribute_name
+    #   The name of the attribute.
+    #   @return [String]
+    #
+    # @!attribute [rw] attribute_type
+    #   The type of the attribute.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/AwsDynamoDbTableAttributeDefinition AWS API Documentation
+    #
+    class AwsDynamoDbTableAttributeDefinition < Struct.new(
+      :attribute_name,
+      :attribute_type)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Provides information about the billing for read/write capacity on the
+    # table.
+    #
+    # @note When making an API call, you may pass AwsDynamoDbTableBillingModeSummary
+    #   data as a hash:
+    #
+    #       {
+    #         billing_mode: "NonEmptyString",
+    #         last_update_to_pay_per_request_date_time: "NonEmptyString",
+    #       }
+    #
+    # @!attribute [rw] billing_mode
+    #   The method used to charge for read and write throughput and to
+    #   manage capacity.
+    #   @return [String]
+    #
+    # @!attribute [rw] last_update_to_pay_per_request_date_time
+    #   If the billing mode is `PAY_PER_REQUEST`, indicates when the billing
+    #   mode was set to that value.
+    #
+    #   Uses the `date-time` format specified in [RFC 3339 section 5.6,
+    #   Internet Date/Time Format][1]. The value cannot contain spaces. For
+    #   example, `2020-03-22T13:22:13.933Z`.
+    #
+    #
+    #
+    #   [1]: https://tools.ietf.org/html/rfc3339#section-5.6
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/AwsDynamoDbTableBillingModeSummary AWS API Documentation
+    #
+    class AwsDynamoDbTableBillingModeSummary < Struct.new(
+      :billing_mode,
+      :last_update_to_pay_per_request_date_time)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Provides details about a DynamoDB table.
+    #
+    # @note When making an API call, you may pass AwsDynamoDbTableDetails
+    #   data as a hash:
+    #
+    #       {
+    #         attribute_definitions: [
+    #           {
+    #             attribute_name: "NonEmptyString",
+    #             attribute_type: "NonEmptyString",
+    #           },
+    #         ],
+    #         billing_mode_summary: {
+    #           billing_mode: "NonEmptyString",
+    #           last_update_to_pay_per_request_date_time: "NonEmptyString",
+    #         },
+    #         creation_date_time: "NonEmptyString",
+    #         global_secondary_indexes: [
+    #           {
+    #             backfilling: false,
+    #             index_arn: "NonEmptyString",
+    #             index_name: "NonEmptyString",
+    #             index_size_bytes: 1,
+    #             index_status: "NonEmptyString",
+    #             item_count: 1,
+    #             key_schema: [
+    #               {
+    #                 attribute_name: "NonEmptyString",
+    #                 key_type: "NonEmptyString",
+    #               },
+    #             ],
+    #             projection: {
+    #               non_key_attributes: ["NonEmptyString"],
+    #               projection_type: "NonEmptyString",
+    #             },
+    #             provisioned_throughput: {
+    #               last_decrease_date_time: "NonEmptyString",
+    #               last_increase_date_time: "NonEmptyString",
+    #               number_of_decreases_today: 1,
+    #               read_capacity_units: 1,
+    #               write_capacity_units: 1,
+    #             },
+    #           },
+    #         ],
+    #         global_table_version: "NonEmptyString",
+    #         item_count: 1,
+    #         key_schema: [
+    #           {
+    #             attribute_name: "NonEmptyString",
+    #             key_type: "NonEmptyString",
+    #           },
+    #         ],
+    #         latest_stream_arn: "NonEmptyString",
+    #         latest_stream_label: "NonEmptyString",
+    #         local_secondary_indexes: [
+    #           {
+    #             index_arn: "NonEmptyString",
+    #             index_name: "NonEmptyString",
+    #             key_schema: [
+    #               {
+    #                 attribute_name: "NonEmptyString",
+    #                 key_type: "NonEmptyString",
+    #               },
+    #             ],
+    #             projection: {
+    #               non_key_attributes: ["NonEmptyString"],
+    #               projection_type: "NonEmptyString",
+    #             },
+    #           },
+    #         ],
+    #         provisioned_throughput: {
+    #           last_decrease_date_time: "NonEmptyString",
+    #           last_increase_date_time: "NonEmptyString",
+    #           number_of_decreases_today: 1,
+    #           read_capacity_units: 1,
+    #           write_capacity_units: 1,
+    #         },
+    #         replicas: [
+    #           {
+    #             global_secondary_indexes: [
+    #               {
+    #                 index_name: "NonEmptyString",
+    #                 provisioned_throughput_override: {
+    #                   read_capacity_units: 1,
+    #                 },
+    #               },
+    #             ],
+    #             kms_master_key_id: "NonEmptyString",
+    #             provisioned_throughput_override: {
+    #               read_capacity_units: 1,
+    #             },
+    #             region_name: "NonEmptyString",
+    #             replica_status: "NonEmptyString",
+    #             replica_status_description: "NonEmptyString",
+    #           },
+    #         ],
+    #         restore_summary: {
+    #           source_backup_arn: "NonEmptyString",
+    #           source_table_arn: "NonEmptyString",
+    #           restore_date_time: "NonEmptyString",
+    #           restore_in_progress: false,
+    #         },
+    #         sse_description: {
+    #           inaccessible_encryption_date_time: "NonEmptyString",
+    #           status: "NonEmptyString",
+    #           sse_type: "NonEmptyString",
+    #           kms_master_key_arn: "NonEmptyString",
+    #         },
+    #         stream_specification: {
+    #           stream_enabled: false,
+    #           stream_view_type: "NonEmptyString",
+    #         },
+    #         table_id: "NonEmptyString",
+    #         table_name: "NonEmptyString",
+    #         table_size_bytes: 1,
+    #         table_status: "NonEmptyString",
+    #       }
+    #
+    # @!attribute [rw] attribute_definitions
+    #   A list of attribute definitions for the table.
+    #   @return [Array<Types::AwsDynamoDbTableAttributeDefinition>]
+    #
+    # @!attribute [rw] billing_mode_summary
+    #   Information about the billing for read/write capacity on the table.
+    #   @return [Types::AwsDynamoDbTableBillingModeSummary]
+    #
+    # @!attribute [rw] creation_date_time
+    #   Indicates when the table was created.
+    #
+    #   Uses the `date-time` format specified in [RFC 3339 section 5.6,
+    #   Internet Date/Time Format][1]. The value cannot contain spaces. For
+    #   example, `2020-03-22T13:22:13.933Z`.
+    #
+    #
+    #
+    #   [1]: https://tools.ietf.org/html/rfc3339#section-5.6
+    #   @return [String]
+    #
+    # @!attribute [rw] global_secondary_indexes
+    #   List of global secondary indexes for the table.
+    #   @return [Array<Types::AwsDynamoDbTableGlobalSecondaryIndex>]
+    #
+    # @!attribute [rw] global_table_version
+    #   The version of global tables being used.
+    #   @return [String]
+    #
+    # @!attribute [rw] item_count
+    #   The number of items in the table.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] key_schema
+    #   The primary key structure for the table.
+    #   @return [Array<Types::AwsDynamoDbTableKeySchema>]
+    #
+    # @!attribute [rw] latest_stream_arn
+    #   The ARN of the latest stream for the table.
+    #   @return [String]
+    #
+    # @!attribute [rw] latest_stream_label
+    #   The label of the latest stream. The label is not a unique
+    #   identifier.
+    #   @return [String]
+    #
+    # @!attribute [rw] local_secondary_indexes
+    #   The list of local secondary indexes for the table.
+    #   @return [Array<Types::AwsDynamoDbTableLocalSecondaryIndex>]
+    #
+    # @!attribute [rw] provisioned_throughput
+    #   Information about the provisioned throughput for the table.
+    #   @return [Types::AwsDynamoDbTableProvisionedThroughput]
+    #
+    # @!attribute [rw] replicas
+    #   The list of replicas of this table.
+    #   @return [Array<Types::AwsDynamoDbTableReplica>]
+    #
+    # @!attribute [rw] restore_summary
+    #   Information about the restore for the table.
+    #   @return [Types::AwsDynamoDbTableRestoreSummary]
+    #
+    # @!attribute [rw] sse_description
+    #   Information about the server-side encryption for the table.
+    #   @return [Types::AwsDynamoDbTableSseDescription]
+    #
+    # @!attribute [rw] stream_specification
+    #   The current DynamoDB Streams configuration for the table.
+    #   @return [Types::AwsDynamoDbTableStreamSpecification]
+    #
+    # @!attribute [rw] table_id
+    #   The identifier of the table.
+    #   @return [String]
+    #
+    # @!attribute [rw] table_name
+    #   The name of the table.
+    #   @return [String]
+    #
+    # @!attribute [rw] table_size_bytes
+    #   The total size of the table in bytes.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] table_status
+    #   The current status of the table.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/AwsDynamoDbTableDetails AWS API Documentation
+    #
+    class AwsDynamoDbTableDetails < Struct.new(
+      :attribute_definitions,
+      :billing_mode_summary,
+      :creation_date_time,
+      :global_secondary_indexes,
+      :global_table_version,
+      :item_count,
+      :key_schema,
+      :latest_stream_arn,
+      :latest_stream_label,
+      :local_secondary_indexes,
+      :provisioned_throughput,
+      :replicas,
+      :restore_summary,
+      :sse_description,
+      :stream_specification,
+      :table_id,
+      :table_name,
+      :table_size_bytes,
+      :table_status)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Information abut a global secondary index for the table.
+    #
+    # @note When making an API call, you may pass AwsDynamoDbTableGlobalSecondaryIndex
+    #   data as a hash:
+    #
+    #       {
+    #         backfilling: false,
+    #         index_arn: "NonEmptyString",
+    #         index_name: "NonEmptyString",
+    #         index_size_bytes: 1,
+    #         index_status: "NonEmptyString",
+    #         item_count: 1,
+    #         key_schema: [
+    #           {
+    #             attribute_name: "NonEmptyString",
+    #             key_type: "NonEmptyString",
+    #           },
+    #         ],
+    #         projection: {
+    #           non_key_attributes: ["NonEmptyString"],
+    #           projection_type: "NonEmptyString",
+    #         },
+    #         provisioned_throughput: {
+    #           last_decrease_date_time: "NonEmptyString",
+    #           last_increase_date_time: "NonEmptyString",
+    #           number_of_decreases_today: 1,
+    #           read_capacity_units: 1,
+    #           write_capacity_units: 1,
+    #         },
+    #       }
+    #
+    # @!attribute [rw] backfilling
+    #   Whether the index is currently backfilling.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] index_arn
+    #   The ARN of the index.
+    #   @return [String]
+    #
+    # @!attribute [rw] index_name
+    #   The name of the index.
+    #   @return [String]
+    #
+    # @!attribute [rw] index_size_bytes
+    #   The total size in bytes of the index.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] index_status
+    #   The current status of the index.
+    #   @return [String]
+    #
+    # @!attribute [rw] item_count
+    #   The number of items in the index.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] key_schema
+    #   The key schema for the index.
+    #   @return [Array<Types::AwsDynamoDbTableKeySchema>]
+    #
+    # @!attribute [rw] projection
+    #   Attributes that are copied from the table into an index.
+    #   @return [Types::AwsDynamoDbTableProjection]
+    #
+    # @!attribute [rw] provisioned_throughput
+    #   Information about the provisioned throughput settings for the
+    #   indexes.
+    #   @return [Types::AwsDynamoDbTableProvisionedThroughput]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/AwsDynamoDbTableGlobalSecondaryIndex AWS API Documentation
+    #
+    class AwsDynamoDbTableGlobalSecondaryIndex < Struct.new(
+      :backfilling,
+      :index_arn,
+      :index_name,
+      :index_size_bytes,
+      :index_status,
+      :item_count,
+      :key_schema,
+      :projection,
+      :provisioned_throughput)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A component of the key schema for the DynamoDB table, a global
+    # secondary index, or a local secondary index.
+    #
+    # @note When making an API call, you may pass AwsDynamoDbTableKeySchema
+    #   data as a hash:
+    #
+    #       {
+    #         attribute_name: "NonEmptyString",
+    #         key_type: "NonEmptyString",
+    #       }
+    #
+    # @!attribute [rw] attribute_name
+    #   The name of the key schema attribute.
+    #   @return [String]
+    #
+    # @!attribute [rw] key_type
+    #   The type of key used for the key schema attribute.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/AwsDynamoDbTableKeySchema AWS API Documentation
+    #
+    class AwsDynamoDbTableKeySchema < Struct.new(
+      :attribute_name,
+      :key_type)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Information about a local secondary index for a DynamoDB table.
+    #
+    # @note When making an API call, you may pass AwsDynamoDbTableLocalSecondaryIndex
+    #   data as a hash:
+    #
+    #       {
+    #         index_arn: "NonEmptyString",
+    #         index_name: "NonEmptyString",
+    #         key_schema: [
+    #           {
+    #             attribute_name: "NonEmptyString",
+    #             key_type: "NonEmptyString",
+    #           },
+    #         ],
+    #         projection: {
+    #           non_key_attributes: ["NonEmptyString"],
+    #           projection_type: "NonEmptyString",
+    #         },
+    #       }
+    #
+    # @!attribute [rw] index_arn
+    #   The ARN of the index.
+    #   @return [String]
+    #
+    # @!attribute [rw] index_name
+    #   The name of the index.
+    #   @return [String]
+    #
+    # @!attribute [rw] key_schema
+    #   The complete key schema for the index.
+    #   @return [Array<Types::AwsDynamoDbTableKeySchema>]
+    #
+    # @!attribute [rw] projection
+    #   Attributes that are copied from the table into the index. These are
+    #   in addition to the primary key attributes and index key attributes,
+    #   which are automatically projected.
+    #   @return [Types::AwsDynamoDbTableProjection]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/AwsDynamoDbTableLocalSecondaryIndex AWS API Documentation
+    #
+    class AwsDynamoDbTableLocalSecondaryIndex < Struct.new(
+      :index_arn,
+      :index_name,
+      :key_schema,
+      :projection)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # For global and local secondary indexes, identifies the attributes that
+    # are copied from the table into the index.
+    #
+    # @note When making an API call, you may pass AwsDynamoDbTableProjection
+    #   data as a hash:
+    #
+    #       {
+    #         non_key_attributes: ["NonEmptyString"],
+    #         projection_type: "NonEmptyString",
+    #       }
+    #
+    # @!attribute [rw] non_key_attributes
+    #   The nonkey attributes that are projected into the index. For each
+    #   attribute, provide the attribute name.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] projection_type
+    #   The types of attributes that are projected into the index.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/AwsDynamoDbTableProjection AWS API Documentation
+    #
+    class AwsDynamoDbTableProjection < Struct.new(
+      :non_key_attributes,
+      :projection_type)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Information about the provisioned throughput for the table or for a
+    # global secondary index.
+    #
+    # @note When making an API call, you may pass AwsDynamoDbTableProvisionedThroughput
+    #   data as a hash:
+    #
+    #       {
+    #         last_decrease_date_time: "NonEmptyString",
+    #         last_increase_date_time: "NonEmptyString",
+    #         number_of_decreases_today: 1,
+    #         read_capacity_units: 1,
+    #         write_capacity_units: 1,
+    #       }
+    #
+    # @!attribute [rw] last_decrease_date_time
+    #   Indicates when the provisioned throughput was last decreased.
+    #
+    #   Uses the `date-time` format specified in [RFC 3339 section 5.6,
+    #   Internet Date/Time Format][1]. The value cannot contain spaces. For
+    #   example, `2020-03-22T13:22:13.933Z`.
+    #
+    #
+    #
+    #   [1]: https://tools.ietf.org/html/rfc3339#section-5.6
+    #   @return [String]
+    #
+    # @!attribute [rw] last_increase_date_time
+    #   Indicates when the provisioned throughput was last increased.
+    #
+    #   Uses the `date-time` format specified in [RFC 3339 section 5.6,
+    #   Internet Date/Time Format][1]. The value cannot contain spaces. For
+    #   example, `2020-03-22T13:22:13.933Z`.
+    #
+    #
+    #
+    #   [1]: https://tools.ietf.org/html/rfc3339#section-5.6
+    #   @return [String]
+    #
+    # @!attribute [rw] number_of_decreases_today
+    #   The number of times during the current UTC calendar day that the
+    #   provisioned throughput was decreased.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] read_capacity_units
+    #   The maximum number of strongly consistent reads consumed per second
+    #   before DynamoDB returns a `ThrottlingException`.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] write_capacity_units
+    #   The maximum number of writes consumed per second before DynamoDB
+    #   returns a `ThrottlingException`.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/AwsDynamoDbTableProvisionedThroughput AWS API Documentation
+    #
+    class AwsDynamoDbTableProvisionedThroughput < Struct.new(
+      :last_decrease_date_time,
+      :last_increase_date_time,
+      :number_of_decreases_today,
+      :read_capacity_units,
+      :write_capacity_units)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Replica-specific configuration for the provisioned throughput.
+    #
+    # @note When making an API call, you may pass AwsDynamoDbTableProvisionedThroughputOverride
+    #   data as a hash:
+    #
+    #       {
+    #         read_capacity_units: 1,
+    #       }
+    #
+    # @!attribute [rw] read_capacity_units
+    #   The read capacity units for the replica.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/AwsDynamoDbTableProvisionedThroughputOverride AWS API Documentation
+    #
+    class AwsDynamoDbTableProvisionedThroughputOverride < Struct.new(
+      :read_capacity_units)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Information about a replica of a DynamoDB table.
+    #
+    # @note When making an API call, you may pass AwsDynamoDbTableReplica
+    #   data as a hash:
+    #
+    #       {
+    #         global_secondary_indexes: [
+    #           {
+    #             index_name: "NonEmptyString",
+    #             provisioned_throughput_override: {
+    #               read_capacity_units: 1,
+    #             },
+    #           },
+    #         ],
+    #         kms_master_key_id: "NonEmptyString",
+    #         provisioned_throughput_override: {
+    #           read_capacity_units: 1,
+    #         },
+    #         region_name: "NonEmptyString",
+    #         replica_status: "NonEmptyString",
+    #         replica_status_description: "NonEmptyString",
+    #       }
+    #
+    # @!attribute [rw] global_secondary_indexes
+    #   List of global secondary indexes for the replica.
+    #   @return [Array<Types::AwsDynamoDbTableReplicaGlobalSecondaryIndex>]
+    #
+    # @!attribute [rw] kms_master_key_id
+    #   The identifier of the AWS KMS customer master key (CMK) that will be
+    #   used for AWS KMS encryption for the replica.
+    #   @return [String]
+    #
+    # @!attribute [rw] provisioned_throughput_override
+    #   Replica-specific configuration for the provisioned throughput.
+    #   @return [Types::AwsDynamoDbTableProvisionedThroughputOverride]
+    #
+    # @!attribute [rw] region_name
+    #   The name of the Region where the replica is located.
+    #   @return [String]
+    #
+    # @!attribute [rw] replica_status
+    #   The current status of the replica.
+    #   @return [String]
+    #
+    # @!attribute [rw] replica_status_description
+    #   Detailed information about the replica status.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/AwsDynamoDbTableReplica AWS API Documentation
+    #
+    class AwsDynamoDbTableReplica < Struct.new(
+      :global_secondary_indexes,
+      :kms_master_key_id,
+      :provisioned_throughput_override,
+      :region_name,
+      :replica_status,
+      :replica_status_description)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Information about a global secondary index for a DynamoDB table
+    # replica.
+    #
+    # @note When making an API call, you may pass AwsDynamoDbTableReplicaGlobalSecondaryIndex
+    #   data as a hash:
+    #
+    #       {
+    #         index_name: "NonEmptyString",
+    #         provisioned_throughput_override: {
+    #           read_capacity_units: 1,
+    #         },
+    #       }
+    #
+    # @!attribute [rw] index_name
+    #   The name of the index.
+    #   @return [String]
+    #
+    # @!attribute [rw] provisioned_throughput_override
+    #   Replica-specific configuration for the provisioned throughput for
+    #   the index.
+    #   @return [Types::AwsDynamoDbTableProvisionedThroughputOverride]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/AwsDynamoDbTableReplicaGlobalSecondaryIndex AWS API Documentation
+    #
+    class AwsDynamoDbTableReplicaGlobalSecondaryIndex < Struct.new(
+      :index_name,
+      :provisioned_throughput_override)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Information about the restore for the table.
+    #
+    # @note When making an API call, you may pass AwsDynamoDbTableRestoreSummary
+    #   data as a hash:
+    #
+    #       {
+    #         source_backup_arn: "NonEmptyString",
+    #         source_table_arn: "NonEmptyString",
+    #         restore_date_time: "NonEmptyString",
+    #         restore_in_progress: false,
+    #       }
+    #
+    # @!attribute [rw] source_backup_arn
+    #   The ARN of the source backup from which the table was restored.
+    #   @return [String]
+    #
+    # @!attribute [rw] source_table_arn
+    #   The ARN of the source table for the backup.
+    #   @return [String]
+    #
+    # @!attribute [rw] restore_date_time
+    #   Indicates the point in time that the table was restored to.
+    #
+    #   Uses the `date-time` format specified in [RFC 3339 section 5.6,
+    #   Internet Date/Time Format][1]. The value cannot contain spaces. For
+    #   example, `2020-03-22T13:22:13.933Z`.
+    #
+    #
+    #
+    #   [1]: https://tools.ietf.org/html/rfc3339#section-5.6
+    #   @return [String]
+    #
+    # @!attribute [rw] restore_in_progress
+    #   Whether a restore is currently in progress.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/AwsDynamoDbTableRestoreSummary AWS API Documentation
+    #
+    class AwsDynamoDbTableRestoreSummary < Struct.new(
+      :source_backup_arn,
+      :source_table_arn,
+      :restore_date_time,
+      :restore_in_progress)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Information about the server-side encryption for the table.
+    #
+    # @note When making an API call, you may pass AwsDynamoDbTableSseDescription
+    #   data as a hash:
+    #
+    #       {
+    #         inaccessible_encryption_date_time: "NonEmptyString",
+    #         status: "NonEmptyString",
+    #         sse_type: "NonEmptyString",
+    #         kms_master_key_arn: "NonEmptyString",
+    #       }
+    #
+    # @!attribute [rw] inaccessible_encryption_date_time
+    #   If the key is inaccessible, the date and time when DynamoDB detected
+    #   that the key was inaccessible.
+    #
+    #   Uses the `date-time` format specified in [RFC 3339 section 5.6,
+    #   Internet Date/Time Format][1]. The value cannot contain spaces. For
+    #   example, `2020-03-22T13:22:13.933Z`.
+    #
+    #
+    #
+    #   [1]: https://tools.ietf.org/html/rfc3339#section-5.6
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The status of the server-side encryption.
+    #   @return [String]
+    #
+    # @!attribute [rw] sse_type
+    #   The type of server-side encryption.
+    #   @return [String]
+    #
+    # @!attribute [rw] kms_master_key_arn
+    #   The ARN of the AWS KMS customer master key (CMK) that is used for
+    #   the AWS KMS encryption.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/AwsDynamoDbTableSseDescription AWS API Documentation
+    #
+    class AwsDynamoDbTableSseDescription < Struct.new(
+      :inaccessible_encryption_date_time,
+      :status,
+      :sse_type,
+      :kms_master_key_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The current DynamoDB Streams configuration for the table.
+    #
+    # @note When making an API call, you may pass AwsDynamoDbTableStreamSpecification
+    #   data as a hash:
+    #
+    #       {
+    #         stream_enabled: false,
+    #         stream_view_type: "NonEmptyString",
+    #       }
+    #
+    # @!attribute [rw] stream_enabled
+    #   Indicates whether DynamoDB Streams is enabled on the table.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] stream_view_type
+    #   Determines the information that is written to the table.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/AwsDynamoDbTableStreamSpecification AWS API Documentation
+    #
+    class AwsDynamoDbTableStreamSpecification < Struct.new(
+      :stream_enabled,
+      :stream_view_type)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Information about an Elastic IP address.
+    #
+    # @note When making an API call, you may pass AwsEc2EipDetails
+    #   data as a hash:
+    #
+    #       {
+    #         instance_id: "NonEmptyString",
+    #         public_ip: "NonEmptyString",
+    #         allocation_id: "NonEmptyString",
+    #         association_id: "NonEmptyString",
+    #         domain: "NonEmptyString",
+    #         public_ipv_4_pool: "NonEmptyString",
+    #         network_border_group: "NonEmptyString",
+    #         network_interface_id: "NonEmptyString",
+    #         network_interface_owner_id: "NonEmptyString",
+    #         private_ip_address: "NonEmptyString",
+    #       }
+    #
+    # @!attribute [rw] instance_id
+    #   The identifier of the EC2 instance.
+    #   @return [String]
+    #
+    # @!attribute [rw] public_ip
+    #   A public IP address that is associated with the EC2 instance.
+    #   @return [String]
+    #
+    # @!attribute [rw] allocation_id
+    #   The identifier that AWS assigns to represent the allocation of the
+    #   Elastic IP address for use with Amazon VPC.
+    #   @return [String]
+    #
+    # @!attribute [rw] association_id
+    #   The identifier that represents the association of the Elastic IP
+    #   address with an EC2 instance.
+    #   @return [String]
+    #
+    # @!attribute [rw] domain
+    #   The domain in which to allocate the address.
+    #
+    #   If the address is for use with EC2 instances in a VPC, then `Domain`
+    #   is `vpc`. Otherwise, `Domain` is `standard`.
+    #   @return [String]
+    #
+    # @!attribute [rw] public_ipv_4_pool
+    #   The identifier of an IP address pool. This parameter allows Amazon
+    #   EC2 to select an IP address from the address pool.
+    #   @return [String]
+    #
+    # @!attribute [rw] network_border_group
+    #   The name of the location from which the Elastic IP address is
+    #   advertised.
+    #   @return [String]
+    #
+    # @!attribute [rw] network_interface_id
+    #   The identifier of the network interface.
+    #   @return [String]
+    #
+    # @!attribute [rw] network_interface_owner_id
+    #   The AWS account ID of the owner of the network interface.
+    #   @return [String]
+    #
+    # @!attribute [rw] private_ip_address
+    #   The private IP address that is associated with the Elastic IP
+    #   address.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/AwsEc2EipDetails AWS API Documentation
+    #
+    class AwsEc2EipDetails < Struct.new(
+      :instance_id,
+      :public_ip,
+      :allocation_id,
+      :association_id,
+      :domain,
+      :public_ipv_4_pool,
+      :network_border_group,
+      :network_interface_id,
+      :network_interface_owner_id,
+      :private_ip_address)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The details of an Amazon EC2 instance.
     #
     # @note When making an API call, you may pass AwsEc2InstanceDetails
@@ -723,7 +1607,15 @@ module Aws::SecurityHub
     #   @return [String]
     #
     # @!attribute [rw] launched_at
-    #   The date/time the instance was launched.
+    #   Indicates when the instance was launched.
+    #
+    #   Uses the `date-time` format specified in [RFC 3339 section 5.6,
+    #   Internet Date/Time Format][1]. The value cannot contain spaces. For
+    #   example, `2020-03-22T13:22:13.933Z`.
+    #
+    #
+    #
+    #   [1]: https://tools.ietf.org/html/rfc3339#section-5.6
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/AwsEc2InstanceDetails AWS API Documentation
@@ -758,7 +1650,15 @@ module Aws::SecurityHub
     #       }
     #
     # @!attribute [rw] attach_time
-    #   The timestamp indicating when the attachment initiated.
+    #   Indicates when the attachment initiated.
+    #
+    #   Uses the `date-time` format specified in [RFC 3339 section 5.6,
+    #   Internet Date/Time Format][1]. The value cannot contain spaces. For
+    #   example, `2020-03-22T13:22:13.933Z`.
+    #
+    #
+    #
+    #   [1]: https://tools.ietf.org/html/rfc3339#section-5.6
     #   @return [String]
     #
     # @!attribute [rw] attachment_id
@@ -1282,7 +2182,15 @@ module Aws::SecurityHub
     #       }
     #
     # @!attribute [rw] create_time
-    #   The datetime when the volume was created.
+    #   Indicates when the volume was created.
+    #
+    #   Uses the `date-time` format specified in [RFC 3339 section 5.6,
+    #   Internet Date/Time Format][1]. The value cannot contain spaces. For
+    #   example, `2020-03-22T13:22:13.933Z`.
+    #
+    #
+    #
+    #   [1]: https://tools.ietf.org/html/rfc3339#section-5.6
     #   @return [String]
     #
     # @!attribute [rw] encrypted
@@ -1643,7 +2551,15 @@ module Aws::SecurityHub
     #   @return [String]
     #
     # @!attribute [rw] created_time
-    #   The date and time the load balancer was created.
+    #   Indicates when the load balancer was created.
+    #
+    #   Uses the `date-time` format specified in [RFC 3339 section 5.6,
+    #   Internet Date/Time Format][1]. The value cannot contain spaces. For
+    #   example, `2020-03-22T13:22:13.933Z`.
+    #
+    #
+    #
+    #   [1]: https://tools.ietf.org/html/rfc3339#section-5.6
     #   @return [String]
     #
     # @!attribute [rw] dns_name
@@ -1721,7 +2637,15 @@ module Aws::SecurityHub
     #   @return [String]
     #
     # @!attribute [rw] created_at
-    #   The creation date/time of the IAM access key related to a finding.
+    #   Indicates when the IAM access key was created.
+    #
+    #   Uses the `date-time` format specified in [RFC 3339 section 5.6,
+    #   Internet Date/Time Format][1]. The value cannot contain spaces. For
+    #   example, `2020-03-22T13:22:13.933Z`.
+    #
+    #
+    #
+    #   [1]: https://tools.ietf.org/html/rfc3339#section-5.6
     #   @return [String]
     #
     # @!attribute [rw] principal_id
@@ -1749,6 +2673,208 @@ module Aws::SecurityHub
       include Aws::Structure
     end
 
+    # A managed policy that is attached to an IAM user.
+    #
+    # @note When making an API call, you may pass AwsIamAttachedManagedPolicy
+    #   data as a hash:
+    #
+    #       {
+    #         policy_name: "NonEmptyString",
+    #         policy_arn: "NonEmptyString",
+    #       }
+    #
+    # @!attribute [rw] policy_name
+    #   The name of the policy.
+    #   @return [String]
+    #
+    # @!attribute [rw] policy_arn
+    #   The ARN of the policy.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/AwsIamAttachedManagedPolicy AWS API Documentation
+    #
+    class AwsIamAttachedManagedPolicy < Struct.new(
+      :policy_name,
+      :policy_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Information about the policy used to set the permissions boundary for
+    # an IAM user.
+    #
+    # @note When making an API call, you may pass AwsIamPermissionsBoundary
+    #   data as a hash:
+    #
+    #       {
+    #         permissions_boundary_arn: "NonEmptyString",
+    #         permissions_boundary_type: "NonEmptyString",
+    #       }
+    #
+    # @!attribute [rw] permissions_boundary_arn
+    #   The ARN of the policy used to set the permissions boundary for the
+    #   user.
+    #   @return [String]
+    #
+    # @!attribute [rw] permissions_boundary_type
+    #   The usage type for the permissions boundary.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/AwsIamPermissionsBoundary AWS API Documentation
+    #
+    class AwsIamPermissionsBoundary < Struct.new(
+      :permissions_boundary_arn,
+      :permissions_boundary_type)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Represents an IAM permissions policy.
+    #
+    # @note When making an API call, you may pass AwsIamPolicyDetails
+    #   data as a hash:
+    #
+    #       {
+    #         attachment_count: 1,
+    #         create_date: "NonEmptyString",
+    #         default_version_id: "NonEmptyString",
+    #         description: "NonEmptyString",
+    #         is_attachable: false,
+    #         path: "NonEmptyString",
+    #         permissions_boundary_usage_count: 1,
+    #         policy_id: "NonEmptyString",
+    #         policy_name: "NonEmptyString",
+    #         policy_version_list: [
+    #           {
+    #             version_id: "NonEmptyString",
+    #             is_default_version: false,
+    #             create_date: "NonEmptyString",
+    #           },
+    #         ],
+    #         update_date: "NonEmptyString",
+    #       }
+    #
+    # @!attribute [rw] attachment_count
+    #   The number of users, groups, and roles that the policy is attached
+    #   to.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] create_date
+    #   When the policy was created.
+    #
+    #   Uses the `date-time` format specified in [RFC 3339 section 5.6,
+    #   Internet Date/Time Format][1]. The value cannot contain spaces. For
+    #   example, `2020-03-22T13:22:13.933Z`.
+    #
+    #
+    #
+    #   [1]: https://tools.ietf.org/html/rfc3339#section-5.6
+    #   @return [String]
+    #
+    # @!attribute [rw] default_version_id
+    #   The identifier of the default version of the policy.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   A description of the policy.
+    #   @return [String]
+    #
+    # @!attribute [rw] is_attachable
+    #   Whether the policy can be attached to a user, group, or role.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] path
+    #   The path to the policy.
+    #   @return [String]
+    #
+    # @!attribute [rw] permissions_boundary_usage_count
+    #   The number of users and roles that use the policy to set the
+    #   permissions boundary.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] policy_id
+    #   The unique identifier of the policy.
+    #   @return [String]
+    #
+    # @!attribute [rw] policy_name
+    #   The name of the policy.
+    #   @return [String]
+    #
+    # @!attribute [rw] policy_version_list
+    #   List of versions of the policy.
+    #   @return [Array<Types::AwsIamPolicyVersion>]
+    #
+    # @!attribute [rw] update_date
+    #   When the policy was most recently updated.
+    #
+    #   Uses the `date-time` format specified in [RFC 3339 section 5.6,
+    #   Internet Date/Time Format][1]. The value cannot contain spaces. For
+    #   example, `2020-03-22T13:22:13.933Z`.
+    #
+    #
+    #
+    #   [1]: https://tools.ietf.org/html/rfc3339#section-5.6
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/AwsIamPolicyDetails AWS API Documentation
+    #
+    class AwsIamPolicyDetails < Struct.new(
+      :attachment_count,
+      :create_date,
+      :default_version_id,
+      :description,
+      :is_attachable,
+      :path,
+      :permissions_boundary_usage_count,
+      :policy_id,
+      :policy_name,
+      :policy_version_list,
+      :update_date)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A version of an IAM policy.
+    #
+    # @note When making an API call, you may pass AwsIamPolicyVersion
+    #   data as a hash:
+    #
+    #       {
+    #         version_id: "NonEmptyString",
+    #         is_default_version: false,
+    #         create_date: "NonEmptyString",
+    #       }
+    #
+    # @!attribute [rw] version_id
+    #   The identifier of the policy version.
+    #   @return [String]
+    #
+    # @!attribute [rw] is_default_version
+    #   Whether the version is the default version.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] create_date
+    #   Indicates when the version was created.
+    #
+    #   Uses the `date-time` format specified in [RFC 3339 section 5.6,
+    #   Internet Date/Time Format][1]. The value cannot contain spaces. For
+    #   example, `2020-03-22T13:22:13.933Z`.
+    #
+    #
+    #
+    #   [1]: https://tools.ietf.org/html/rfc3339#section-5.6
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/AwsIamPolicyVersion AWS API Documentation
+    #
+    class AwsIamPolicyVersion < Struct.new(
+      :version_id,
+      :is_default_version,
+      :create_date)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Contains information about an IAM role, including all of the role's
     # policies.
     #
@@ -1769,8 +2895,15 @@ module Aws::SecurityHub
     #   @return [String]
     #
     # @!attribute [rw] create_date
-    #   The date and time, in ISO 8601 date-time format, when the role was
-    #   created.
+    #   Indicates when the role was created.
+    #
+    #   Uses the `date-time` format specified in [RFC 3339 section 5.6,
+    #   Internet Date/Time Format][1]. The value cannot contain spaces. For
+    #   example, `2020-03-22T13:22:13.933Z`.
+    #
+    #
+    #
+    #   [1]: https://tools.ietf.org/html/rfc3339#section-5.6
     #   @return [String]
     #
     # @!attribute [rw] role_id
@@ -1803,6 +2936,110 @@ module Aws::SecurityHub
       include Aws::Structure
     end
 
+    # Information about an IAM user.
+    #
+    # @note When making an API call, you may pass AwsIamUserDetails
+    #   data as a hash:
+    #
+    #       {
+    #         attached_managed_policies: [
+    #           {
+    #             policy_name: "NonEmptyString",
+    #             policy_arn: "NonEmptyString",
+    #           },
+    #         ],
+    #         create_date: "NonEmptyString",
+    #         group_list: ["NonEmptyString"],
+    #         path: "NonEmptyString",
+    #         permissions_boundary: {
+    #           permissions_boundary_arn: "NonEmptyString",
+    #           permissions_boundary_type: "NonEmptyString",
+    #         },
+    #         user_id: "NonEmptyString",
+    #         user_name: "NonEmptyString",
+    #         user_policy_list: [
+    #           {
+    #             policy_name: "NonEmptyString",
+    #           },
+    #         ],
+    #       }
+    #
+    # @!attribute [rw] attached_managed_policies
+    #   A list of the managed policies that are attached to the user.
+    #   @return [Array<Types::AwsIamAttachedManagedPolicy>]
+    #
+    # @!attribute [rw] create_date
+    #   Indicates when the user was created.
+    #
+    #   Uses the `date-time` format specified in [RFC 3339 section 5.6,
+    #   Internet Date/Time Format][1]. The value cannot contain spaces. For
+    #   example, `2020-03-22T13:22:13.933Z`.
+    #
+    #
+    #
+    #   [1]: https://tools.ietf.org/html/rfc3339#section-5.6
+    #   @return [String]
+    #
+    # @!attribute [rw] group_list
+    #   A list of IAM groups that the user belongs to.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] path
+    #   The path to the user.
+    #   @return [String]
+    #
+    # @!attribute [rw] permissions_boundary
+    #   The permissions boundary for the user.
+    #   @return [Types::AwsIamPermissionsBoundary]
+    #
+    # @!attribute [rw] user_id
+    #   The unique identifier for the user.
+    #   @return [String]
+    #
+    # @!attribute [rw] user_name
+    #   The name of the user.
+    #   @return [String]
+    #
+    # @!attribute [rw] user_policy_list
+    #   The list of inline policies that are embedded in the user.
+    #   @return [Array<Types::AwsIamUserPolicy>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/AwsIamUserDetails AWS API Documentation
+    #
+    class AwsIamUserDetails < Struct.new(
+      :attached_managed_policies,
+      :create_date,
+      :group_list,
+      :path,
+      :permissions_boundary,
+      :user_id,
+      :user_name,
+      :user_policy_list)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Information about an inline policy that is embedded in the user.
+    #
+    # @note When making an API call, you may pass AwsIamUserPolicy
+    #   data as a hash:
+    #
+    #       {
+    #         policy_name: "NonEmptyString",
+    #       }
+    #
+    # @!attribute [rw] policy_name
+    #   The name of the policy.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/AwsIamUserPolicy AWS API Documentation
+    #
+    class AwsIamUserPolicy < Struct.new(
+      :policy_name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Contains metadata about a customer master key (CMK).
     #
     # @note When making an API call, you may pass AwsKmsKeyDetails
@@ -1815,6 +3052,7 @@ module Aws::SecurityHub
     #         key_manager: "NonEmptyString",
     #         key_state: "NonEmptyString",
     #         origin: "NonEmptyString",
+    #         description: "NonEmptyString",
     #       }
     #
     # @!attribute [rw] aws_account_id
@@ -1822,7 +3060,15 @@ module Aws::SecurityHub
     #   @return [String]
     #
     # @!attribute [rw] creation_date
-    #   The date and time when the CMK was created.
+    #   Indicates when the CMK was created.
+    #
+    #   Uses the `date-time` format specified in [RFC 3339 section 5.6,
+    #   Internet Date/Time Format][1]. The value cannot contain spaces. For
+    #   example, `2020-03-22T13:22:13.933Z`.
+    #
+    #
+    #
+    #   [1]: https://tools.ietf.org/html/rfc3339#section-5.6
     #   @return [Float]
     #
     # @!attribute [rw] key_id
@@ -1851,6 +3097,10 @@ module Aws::SecurityHub
     #   the AWS CloudHSM cluster associated with a custom key store.
     #   @return [String]
     #
+    # @!attribute [rw] description
+    #   A description of the key.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/AwsKmsKeyDetails AWS API Documentation
     #
     class AwsKmsKeyDetails < Struct.new(
@@ -1859,7 +3109,8 @@ module Aws::SecurityHub
       :key_id,
       :key_manager,
       :key_state,
-      :origin)
+      :origin,
+      :description)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2012,8 +3263,15 @@ module Aws::SecurityHub
     #   @return [String]
     #
     # @!attribute [rw] last_modified
-    #   The date and time that the function was last updated, in ISO-8601
-    #   format (YYYY-MM-DDThh:mm:ss.sTZD).
+    #   Indicates when the function was last updated.
+    #
+    #   Uses the `date-time` format specified in [RFC 3339 section 5.6,
+    #   Internet Date/Time Format][1]. The value cannot contain spaces. For
+    #   example, `2020-03-22T13:22:13.933Z`.
+    #
+    #
+    #
+    #   [1]: https://tools.ietf.org/html/rfc3339#section-5.6
     #   @return [String]
     #
     # @!attribute [rw] layers
@@ -2248,8 +3506,15 @@ module Aws::SecurityHub
     #   @return [Array<String>]
     #
     # @!attribute [rw] created_date
-    #   The date that the version was created, in ISO 8601 format. For
-    #   example, 2018-11-27T15:10:45.123+0000.
+    #   Indicates when the version was created.
+    #
+    #   Uses the `date-time` format specified in [RFC 3339 section 5.6,
+    #   Internet Date/Time Format][1]. The value cannot contain spaces. For
+    #   example, `2020-03-22T13:22:13.933Z`.
+    #
+    #
+    #
+    #   [1]: https://tools.ietf.org/html/rfc3339#section-5.6
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/AwsLambdaLayerVersionDetails AWS API Documentation
@@ -2258,6 +3523,588 @@ module Aws::SecurityHub
       :version,
       :compatible_runtimes,
       :created_date)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # An IAM role that is associated with the Amazon RDS DB cluster.
+    #
+    # @note When making an API call, you may pass AwsRdsDbClusterAssociatedRole
+    #   data as a hash:
+    #
+    #       {
+    #         role_arn: "NonEmptyString",
+    #         status: "NonEmptyString",
+    #       }
+    #
+    # @!attribute [rw] role_arn
+    #   The ARN of the IAM role.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The status of the association between the IAM role and the DB
+    #   cluster.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/AwsRdsDbClusterAssociatedRole AWS API Documentation
+    #
+    class AwsRdsDbClusterAssociatedRole < Struct.new(
+      :role_arn,
+      :status)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Information about an Amazon RDS DB cluster.
+    #
+    # @note When making an API call, you may pass AwsRdsDbClusterDetails
+    #   data as a hash:
+    #
+    #       {
+    #         allocated_storage: 1,
+    #         availability_zones: ["NonEmptyString"],
+    #         backup_retention_period: 1,
+    #         database_name: "NonEmptyString",
+    #         status: "NonEmptyString",
+    #         endpoint: "NonEmptyString",
+    #         reader_endpoint: "NonEmptyString",
+    #         custom_endpoints: ["NonEmptyString"],
+    #         multi_az: false,
+    #         engine: "NonEmptyString",
+    #         engine_version: "NonEmptyString",
+    #         port: 1,
+    #         master_username: "NonEmptyString",
+    #         preferred_backup_window: "NonEmptyString",
+    #         preferred_maintenance_window: "NonEmptyString",
+    #         read_replica_identifiers: ["NonEmptyString"],
+    #         vpc_security_groups: [
+    #           {
+    #             vpc_security_group_id: "NonEmptyString",
+    #             status: "NonEmptyString",
+    #           },
+    #         ],
+    #         hosted_zone_id: "NonEmptyString",
+    #         storage_encrypted: false,
+    #         kms_key_id: "NonEmptyString",
+    #         db_cluster_resource_id: "NonEmptyString",
+    #         associated_roles: [
+    #           {
+    #             role_arn: "NonEmptyString",
+    #             status: "NonEmptyString",
+    #           },
+    #         ],
+    #         cluster_create_time: "NonEmptyString",
+    #         enabled_cloud_watch_logs_exports: ["NonEmptyString"],
+    #         engine_mode: "NonEmptyString",
+    #         deletion_protection: false,
+    #         http_endpoint_enabled: false,
+    #         activity_stream_status: "NonEmptyString",
+    #         copy_tags_to_snapshot: false,
+    #         cross_account_clone: false,
+    #         domain_memberships: [
+    #           {
+    #             domain: "NonEmptyString",
+    #             status: "NonEmptyString",
+    #             fqdn: "NonEmptyString",
+    #             iam_role_name: "NonEmptyString",
+    #           },
+    #         ],
+    #         db_cluster_parameter_group: "NonEmptyString",
+    #         db_subnet_group: "NonEmptyString",
+    #         db_cluster_option_group_memberships: [
+    #           {
+    #             db_cluster_option_group_name: "NonEmptyString",
+    #             status: "NonEmptyString",
+    #           },
+    #         ],
+    #         db_cluster_identifier: "NonEmptyString",
+    #         db_cluster_members: [
+    #           {
+    #             is_cluster_writer: false,
+    #             promotion_tier: 1,
+    #             db_instance_identifier: "NonEmptyString",
+    #             db_cluster_parameter_group_status: "NonEmptyString",
+    #           },
+    #         ],
+    #         iam_database_authentication_enabled: false,
+    #       }
+    #
+    # @!attribute [rw] allocated_storage
+    #   For all database engines except Aurora, specifies the allocated
+    #   storage size in gibibytes (GiB).
+    #   @return [Integer]
+    #
+    # @!attribute [rw] availability_zones
+    #   A list of Availability Zones (AZs) where instances in the DB cluster
+    #   can be created.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] backup_retention_period
+    #   The number of days for which automated backups are retained.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] database_name
+    #   The name of the database.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The current status of this DB cluster.
+    #   @return [String]
+    #
+    # @!attribute [rw] endpoint
+    #   The connection endpoint for the primary instance of the DB cluster.
+    #   @return [String]
+    #
+    # @!attribute [rw] reader_endpoint
+    #   The reader endpoint for the DB cluster.
+    #   @return [String]
+    #
+    # @!attribute [rw] custom_endpoints
+    #   A list of custom endpoints for the DB cluster.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] multi_az
+    #   Whether the DB cluster has instances in multiple Availability Zones.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] engine
+    #   The name of the database engine to use for this DB cluster.
+    #   @return [String]
+    #
+    # @!attribute [rw] engine_version
+    #   The version number of the database engine to use.
+    #   @return [String]
+    #
+    # @!attribute [rw] port
+    #   The port number on which the DB instances in the DB cluster accept
+    #   connections.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] master_username
+    #   The name of the master user for the DB cluster.
+    #   @return [String]
+    #
+    # @!attribute [rw] preferred_backup_window
+    #   The range of time each day when automated backups are created, if
+    #   automated backups are enabled.
+    #
+    #   Uses the format `HH:MM-HH:MM`. For example, `04:52-05:22`.
+    #   @return [String]
+    #
+    # @!attribute [rw] preferred_maintenance_window
+    #   The weekly time range during which system maintenance can occur, in
+    #   Universal Coordinated Time (UTC).
+    #
+    #   Uses the format `<day>:HH:MM-<day>:HH:MM`.
+    #
+    #   For the day values, use
+    #   `mon`\|`tue`\|`wed`\|`thu`\|`fri`\|`sat`\|`sun`.
+    #
+    #   For example, `sun:09:32-sun:10:02`.
+    #   @return [String]
+    #
+    # @!attribute [rw] read_replica_identifiers
+    #   The identifiers of the read replicas that are associated with this
+    #   DB cluster.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] vpc_security_groups
+    #   A list of VPC security groups that the DB cluster belongs to.
+    #   @return [Array<Types::AwsRdsDbInstanceVpcSecurityGroup>]
+    #
+    # @!attribute [rw] hosted_zone_id
+    #   Specifies the identifier that Amazon Route 53 assigns when you
+    #   create a hosted zone.
+    #   @return [String]
+    #
+    # @!attribute [rw] storage_encrypted
+    #   Whether the DB cluster is encrypted.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] kms_key_id
+    #   The ARN of the AWS KMS master key that is used to encrypt the
+    #   database instances in the DB cluster.
+    #   @return [String]
+    #
+    # @!attribute [rw] db_cluster_resource_id
+    #   The identifier of the DB cluster. The identifier must be unique
+    #   within each AWS Region and is immutable.
+    #   @return [String]
+    #
+    # @!attribute [rw] associated_roles
+    #   A list of the IAM roles that are associated with the DB cluster.
+    #   @return [Array<Types::AwsRdsDbClusterAssociatedRole>]
+    #
+    # @!attribute [rw] cluster_create_time
+    #   Indicates when the DB cluster was created, in Universal Coordinated
+    #   Time (UTC).
+    #
+    #   Uses the `date-time` format specified in [RFC 3339 section 5.6,
+    #   Internet Date/Time Format][1]. The value cannot contain spaces. For
+    #   example, `2020-03-22T13:22:13.933Z`.
+    #
+    #
+    #
+    #   [1]: https://tools.ietf.org/html/rfc3339#section-5.6
+    #   @return [String]
+    #
+    # @!attribute [rw] enabled_cloud_watch_logs_exports
+    #   A list of log types that this DB cluster is configured to export to
+    #   CloudWatch Logs.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] engine_mode
+    #   The database engine mode of the DB cluster.
+    #   @return [String]
+    #
+    # @!attribute [rw] deletion_protection
+    #   Whether the DB cluster has deletion protection enabled.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] http_endpoint_enabled
+    #   Whether the HTTP endpoint for an Aurora Serverless DB cluster is
+    #   enabled.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] activity_stream_status
+    #   The status of the database activity stream.
+    #   @return [String]
+    #
+    # @!attribute [rw] copy_tags_to_snapshot
+    #   Whether tags are copied from the DB cluster to snapshots of the DB
+    #   cluster.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] cross_account_clone
+    #   Whether the DB cluster is a clone of a DB cluster owned by a
+    #   different AWS account.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] domain_memberships
+    #   The Active Directory domain membership records that are associated
+    #   with the DB cluster.
+    #   @return [Array<Types::AwsRdsDbDomainMembership>]
+    #
+    # @!attribute [rw] db_cluster_parameter_group
+    #   The name of the DB cluster parameter group for the DB cluster.
+    #   @return [String]
+    #
+    # @!attribute [rw] db_subnet_group
+    #   The subnet group that is associated with the DB cluster, including
+    #   the name, description, and subnets in the subnet group.
+    #   @return [String]
+    #
+    # @!attribute [rw] db_cluster_option_group_memberships
+    #   The list of option group memberships for this DB cluster.
+    #   @return [Array<Types::AwsRdsDbClusterOptionGroupMembership>]
+    #
+    # @!attribute [rw] db_cluster_identifier
+    #   The DB cluster identifier that the user assigned to the cluster.
+    #   This identifier is the unique key that identifies a DB cluster.
+    #   @return [String]
+    #
+    # @!attribute [rw] db_cluster_members
+    #   The list of instances that make up the DB cluster.
+    #   @return [Array<Types::AwsRdsDbClusterMember>]
+    #
+    # @!attribute [rw] iam_database_authentication_enabled
+    #   Whether the mapping of IAM accounts to database accounts is enabled.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/AwsRdsDbClusterDetails AWS API Documentation
+    #
+    class AwsRdsDbClusterDetails < Struct.new(
+      :allocated_storage,
+      :availability_zones,
+      :backup_retention_period,
+      :database_name,
+      :status,
+      :endpoint,
+      :reader_endpoint,
+      :custom_endpoints,
+      :multi_az,
+      :engine,
+      :engine_version,
+      :port,
+      :master_username,
+      :preferred_backup_window,
+      :preferred_maintenance_window,
+      :read_replica_identifiers,
+      :vpc_security_groups,
+      :hosted_zone_id,
+      :storage_encrypted,
+      :kms_key_id,
+      :db_cluster_resource_id,
+      :associated_roles,
+      :cluster_create_time,
+      :enabled_cloud_watch_logs_exports,
+      :engine_mode,
+      :deletion_protection,
+      :http_endpoint_enabled,
+      :activity_stream_status,
+      :copy_tags_to_snapshot,
+      :cross_account_clone,
+      :domain_memberships,
+      :db_cluster_parameter_group,
+      :db_subnet_group,
+      :db_cluster_option_group_memberships,
+      :db_cluster_identifier,
+      :db_cluster_members,
+      :iam_database_authentication_enabled)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Information about an instance in the DB cluster.
+    #
+    # @note When making an API call, you may pass AwsRdsDbClusterMember
+    #   data as a hash:
+    #
+    #       {
+    #         is_cluster_writer: false,
+    #         promotion_tier: 1,
+    #         db_instance_identifier: "NonEmptyString",
+    #         db_cluster_parameter_group_status: "NonEmptyString",
+    #       }
+    #
+    # @!attribute [rw] is_cluster_writer
+    #   Whether the cluster member is the primary instance for the DB
+    #   cluster.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] promotion_tier
+    #   Specifies the order in which an Aurora replica is promoted to the
+    #   primary instance when the existing primary instance fails.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] db_instance_identifier
+    #   The instance identifier for this member of the DB cluster.
+    #   @return [String]
+    #
+    # @!attribute [rw] db_cluster_parameter_group_status
+    #   The status of the DB cluster parameter group for this member of the
+    #   DB cluster.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/AwsRdsDbClusterMember AWS API Documentation
+    #
+    class AwsRdsDbClusterMember < Struct.new(
+      :is_cluster_writer,
+      :promotion_tier,
+      :db_instance_identifier,
+      :db_cluster_parameter_group_status)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Information about an option group membership for a DB cluster.
+    #
+    # @note When making an API call, you may pass AwsRdsDbClusterOptionGroupMembership
+    #   data as a hash:
+    #
+    #       {
+    #         db_cluster_option_group_name: "NonEmptyString",
+    #         status: "NonEmptyString",
+    #       }
+    #
+    # @!attribute [rw] db_cluster_option_group_name
+    #   The name of the DB cluster option group.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The status of the DB cluster option group.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/AwsRdsDbClusterOptionGroupMembership AWS API Documentation
+    #
+    class AwsRdsDbClusterOptionGroupMembership < Struct.new(
+      :db_cluster_option_group_name,
+      :status)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Information about an Amazon RDS DB cluster snapshot.
+    #
+    # @note When making an API call, you may pass AwsRdsDbClusterSnapshotDetails
+    #   data as a hash:
+    #
+    #       {
+    #         availability_zones: ["NonEmptyString"],
+    #         snapshot_create_time: "NonEmptyString",
+    #         engine: "NonEmptyString",
+    #         allocated_storage: 1,
+    #         status: "NonEmptyString",
+    #         port: 1,
+    #         vpc_id: "NonEmptyString",
+    #         cluster_create_time: "NonEmptyString",
+    #         master_username: "NonEmptyString",
+    #         engine_version: "NonEmptyString",
+    #         license_model: "NonEmptyString",
+    #         snapshot_type: "NonEmptyString",
+    #         percent_progress: 1,
+    #         storage_encrypted: false,
+    #         kms_key_id: "NonEmptyString",
+    #         db_cluster_identifier: "NonEmptyString",
+    #         db_cluster_snapshot_identifier: "NonEmptyString",
+    #         iam_database_authentication_enabled: false,
+    #       }
+    #
+    # @!attribute [rw] availability_zones
+    #   A list of Availability Zones where instances in the DB cluster can
+    #   be created.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] snapshot_create_time
+    #   Indicates when the snapshot was taken.
+    #
+    #   Uses the `date-time` format specified in [RFC 3339 section 5.6,
+    #   Internet Date/Time Format][1]. The value cannot contain spaces. For
+    #   example, `2020-03-22T13:22:13.933Z`.
+    #
+    #
+    #
+    #   [1]: https://tools.ietf.org/html/rfc3339#section-5.6
+    #   @return [String]
+    #
+    # @!attribute [rw] engine
+    #   @return [String]
+    #
+    # @!attribute [rw] allocated_storage
+    #   Specifies the allocated storage size in gibibytes (GiB).
+    #   @return [Integer]
+    #
+    # @!attribute [rw] status
+    #   The status of this DB cluster snapshot.
+    #   @return [String]
+    #
+    # @!attribute [rw] port
+    #   The port number on which the DB instances in the DB cluster accept
+    #   connections.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] vpc_id
+    #   The VPC ID that is associated with the DB cluster snapshot.
+    #   @return [String]
+    #
+    # @!attribute [rw] cluster_create_time
+    #   Indicates when the DB cluster was created, in Universal Coordinated
+    #   Time (UTC).
+    #
+    #   Uses the `date-time` format specified in [RFC 3339 section 5.6,
+    #   Internet Date/Time Format][1]. The value cannot contain spaces. For
+    #   example, `2020-03-22T13:22:13.933Z`.
+    #
+    #
+    #
+    #   [1]: https://tools.ietf.org/html/rfc3339#section-5.6
+    #   @return [String]
+    #
+    # @!attribute [rw] master_username
+    #   The name of the master user for the DB cluster.
+    #   @return [String]
+    #
+    # @!attribute [rw] engine_version
+    #   The version of the database engine to use.
+    #   @return [String]
+    #
+    # @!attribute [rw] license_model
+    #   The license model information for this DB cluster snapshot.
+    #   @return [String]
+    #
+    # @!attribute [rw] snapshot_type
+    #   The type of DB cluster snapshot.
+    #   @return [String]
+    #
+    # @!attribute [rw] percent_progress
+    #   Specifies the percentage of the estimated data that has been
+    #   transferred.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] storage_encrypted
+    #   Whether the DB cluster is encrypted.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] kms_key_id
+    #   The ARN of the AWS KMS master key that is used to encrypt the
+    #   database instances in the DB cluster.
+    #   @return [String]
+    #
+    # @!attribute [rw] db_cluster_identifier
+    #   The DB cluster identifier.
+    #   @return [String]
+    #
+    # @!attribute [rw] db_cluster_snapshot_identifier
+    #   The identifier of the DB cluster snapshot.
+    #   @return [String]
+    #
+    # @!attribute [rw] iam_database_authentication_enabled
+    #   Whether mapping of IAM accounts to database accounts is enabled.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/AwsRdsDbClusterSnapshotDetails AWS API Documentation
+    #
+    class AwsRdsDbClusterSnapshotDetails < Struct.new(
+      :availability_zones,
+      :snapshot_create_time,
+      :engine,
+      :allocated_storage,
+      :status,
+      :port,
+      :vpc_id,
+      :cluster_create_time,
+      :master_username,
+      :engine_version,
+      :license_model,
+      :snapshot_type,
+      :percent_progress,
+      :storage_encrypted,
+      :kms_key_id,
+      :db_cluster_identifier,
+      :db_cluster_snapshot_identifier,
+      :iam_database_authentication_enabled)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Information about an Active Directory domain membership record
+    # associated with the DB instance.
+    #
+    # @note When making an API call, you may pass AwsRdsDbDomainMembership
+    #   data as a hash:
+    #
+    #       {
+    #         domain: "NonEmptyString",
+    #         status: "NonEmptyString",
+    #         fqdn: "NonEmptyString",
+    #         iam_role_name: "NonEmptyString",
+    #       }
+    #
+    # @!attribute [rw] domain
+    #   The identifier of the Active Directory domain.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The status of the Active Directory Domain membership for the DB
+    #   instance.
+    #   @return [String]
+    #
+    # @!attribute [rw] fqdn
+    #   The fully qualified domain name of the Active Directory domain.
+    #   @return [String]
+    #
+    # @!attribute [rw] iam_role_name
+    #   The name of the IAM role to use when making API calls to the
+    #   Directory Service.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/AwsRdsDbDomainMembership AWS API Documentation
+    #
+    class AwsRdsDbDomainMembership < Struct.new(
+      :domain,
+      :status,
+      :fqdn,
+      :iam_role_name)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2349,6 +4196,116 @@ module Aws::SecurityHub
     #             status: "NonEmptyString",
     #           },
     #         ],
+    #         multi_az: false,
+    #         enhanced_monitoring_resource_arn: "NonEmptyString",
+    #         db_instance_status: "NonEmptyString",
+    #         master_username: "NonEmptyString",
+    #         allocated_storage: 1,
+    #         preferred_backup_window: "NonEmptyString",
+    #         backup_retention_period: 1,
+    #         db_security_groups: ["NonEmptyString"],
+    #         db_parameter_groups: [
+    #           {
+    #             db_parameter_group_name: "NonEmptyString",
+    #             parameter_apply_status: "NonEmptyString",
+    #           },
+    #         ],
+    #         availability_zone: "NonEmptyString",
+    #         db_subnet_group: {
+    #           db_subnet_group_name: "NonEmptyString",
+    #           db_subnet_group_description: "NonEmptyString",
+    #           vpc_id: "NonEmptyString",
+    #           subnet_group_status: "NonEmptyString",
+    #           subnets: [
+    #             {
+    #               subnet_identifier: "NonEmptyString",
+    #               subnet_availability_zone: {
+    #                 name: "NonEmptyString",
+    #               },
+    #               subnet_status: "NonEmptyString",
+    #             },
+    #           ],
+    #           db_subnet_group_arn: "NonEmptyString",
+    #         },
+    #         preferred_maintenance_window: "NonEmptyString",
+    #         pending_modified_values: {
+    #           db_instance_class: "NonEmptyString",
+    #           allocated_storage: 1,
+    #           master_user_password: "NonEmptyString",
+    #           port: 1,
+    #           backup_retention_period: 1,
+    #           multi_az: false,
+    #           engine_version: "NonEmptyString",
+    #           license_model: "NonEmptyString",
+    #           iops: 1,
+    #           db_instance_identifier: "NonEmptyString",
+    #           storage_type: "NonEmptyString",
+    #           ca_certificate_identifier: "NonEmptyString",
+    #           db_subnet_group_name: "NonEmptyString",
+    #           pending_cloud_watch_logs_exports: {
+    #             log_types_to_enable: ["NonEmptyString"],
+    #             log_types_to_disable: ["NonEmptyString"],
+    #           },
+    #           processor_features: [
+    #             {
+    #               name: "NonEmptyString",
+    #               value: "NonEmptyString",
+    #             },
+    #           ],
+    #         },
+    #         latest_restorable_time: "NonEmptyString",
+    #         auto_minor_version_upgrade: false,
+    #         read_replica_source_db_instance_identifier: "NonEmptyString",
+    #         read_replica_db_instance_identifiers: ["NonEmptyString"],
+    #         read_replica_db_cluster_identifiers: ["NonEmptyString"],
+    #         license_model: "NonEmptyString",
+    #         iops: 1,
+    #         option_group_memberships: [
+    #           {
+    #             option_group_name: "NonEmptyString",
+    #             status: "NonEmptyString",
+    #           },
+    #         ],
+    #         character_set_name: "NonEmptyString",
+    #         secondary_availability_zone: "NonEmptyString",
+    #         status_infos: [
+    #           {
+    #             status_type: "NonEmptyString",
+    #             normal: false,
+    #             status: "NonEmptyString",
+    #             message: "NonEmptyString",
+    #           },
+    #         ],
+    #         storage_type: "NonEmptyString",
+    #         domain_memberships: [
+    #           {
+    #             domain: "NonEmptyString",
+    #             status: "NonEmptyString",
+    #             fqdn: "NonEmptyString",
+    #             iam_role_name: "NonEmptyString",
+    #           },
+    #         ],
+    #         copy_tags_to_snapshot: false,
+    #         monitoring_interval: 1,
+    #         monitoring_role_arn: "NonEmptyString",
+    #         promotion_tier: 1,
+    #         timezone: "NonEmptyString",
+    #         performance_insights_enabled: false,
+    #         performance_insights_kms_key_id: "NonEmptyString",
+    #         performance_insights_retention_period: 1,
+    #         enabled_cloud_watch_logs_exports: ["NonEmptyString"],
+    #         processor_features: [
+    #           {
+    #             name: "NonEmptyString",
+    #             value: "NonEmptyString",
+    #           },
+    #         ],
+    #         listener_endpoint: {
+    #           address: "NonEmptyString",
+    #           port: 1,
+    #           hosted_zone_id: "NonEmptyString",
+    #         },
+    #         max_allocated_storage: 1,
     #       }
     #
     # @!attribute [rw] associated_roles
@@ -2439,7 +4396,15 @@ module Aws::SecurityHub
     #   @return [Boolean]
     #
     # @!attribute [rw] instance_create_time
-    #   Provides the date and time the DB instance was created.
+    #   Indicates when the DB instance was created.
+    #
+    #   Uses the `date-time` format specified in [RFC 3339 section 5.6,
+    #   Internet Date/Time Format][1]. The value cannot contain spaces. For
+    #   example, `2020-03-22T13:22:13.933Z`.
+    #
+    #
+    #
+    #   [1]: https://tools.ietf.org/html/rfc3339#section-5.6
     #   @return [String]
     #
     # @!attribute [rw] kms_key_id
@@ -2470,6 +4435,197 @@ module Aws::SecurityHub
     #   A list of VPC security groups that the DB instance belongs to.
     #   @return [Array<Types::AwsRdsDbInstanceVpcSecurityGroup>]
     #
+    # @!attribute [rw] multi_az
+    #   Whether the DB instance is a multiple Availability Zone deployment.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] enhanced_monitoring_resource_arn
+    #   The ARN of the CloudWatch Logs log stream that receives the enhanced
+    #   monitoring metrics data for the DB instance.
+    #   @return [String]
+    #
+    # @!attribute [rw] db_instance_status
+    #   The current status of the DB instance.
+    #   @return [String]
+    #
+    # @!attribute [rw] master_username
+    #   The master user name of the DB instance.
+    #   @return [String]
+    #
+    # @!attribute [rw] allocated_storage
+    #   The amount of storage (in gigabytes) to initially allocate for the
+    #   DB instance.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] preferred_backup_window
+    #   The range of time each day when automated backups are created, if
+    #   automated backups are enabled.
+    #
+    #   Uses the format `HH:MM-HH:MM`. For example, `04:52-05:22`.
+    #   @return [String]
+    #
+    # @!attribute [rw] backup_retention_period
+    #   The number of days for which to retain automated backups.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] db_security_groups
+    #   A list of the DB security groups to assign to the DB instance.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] db_parameter_groups
+    #   A list of the DB parameter groups to assign to the DB instance.
+    #   @return [Array<Types::AwsRdsDbParameterGroup>]
+    #
+    # @!attribute [rw] availability_zone
+    #   The Availability Zone where the DB instance will be created.
+    #   @return [String]
+    #
+    # @!attribute [rw] db_subnet_group
+    #   Information about the subnet group that is associated with the DB
+    #   instance.
+    #   @return [Types::AwsRdsDbSubnetGroup]
+    #
+    # @!attribute [rw] preferred_maintenance_window
+    #   The weekly time range during which system maintenance can occur, in
+    #   Universal Coordinated Time (UTC).
+    #
+    #   Uses the format `<day>:HH:MM-<day>:HH:MM`.
+    #
+    #   For the day values, use
+    #   `mon`\|`tue`\|`wed`\|`thu`\|`fri`\|`sat`\|`sun`.
+    #
+    #   For example, `sun:09:32-sun:10:02`.
+    #   @return [String]
+    #
+    # @!attribute [rw] pending_modified_values
+    #   Changes to the DB instance that are currently pending.
+    #   @return [Types::AwsRdsDbPendingModifiedValues]
+    #
+    # @!attribute [rw] latest_restorable_time
+    #   Specifies the latest time to which a database can be restored with
+    #   point-in-time restore.
+    #
+    #   Uses the `date-time` format specified in [RFC 3339 section 5.6,
+    #   Internet Date/Time Format][1]. The value cannot contain spaces. For
+    #   example, `2020-03-22T13:22:13.933Z`.
+    #
+    #
+    #
+    #   [1]: https://tools.ietf.org/html/rfc3339#section-5.6
+    #   @return [String]
+    #
+    # @!attribute [rw] auto_minor_version_upgrade
+    #   Indicates whether minor version patches are applied automatically.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] read_replica_source_db_instance_identifier
+    #   If this DB instance is a read replica, contains the identifier of
+    #   the source DB instance.
+    #   @return [String]
+    #
+    # @!attribute [rw] read_replica_db_instance_identifiers
+    #   List of identifiers of the read replicas associated with this DB
+    #   instance.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] read_replica_db_cluster_identifiers
+    #   List of identifiers of Aurora DB clusters to which the RDS DB
+    #   instance is replicated as a read replica.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] license_model
+    #   License model information for this DB instance.
+    #   @return [String]
+    #
+    # @!attribute [rw] iops
+    #   Specifies the provisioned IOPS (I/O operations per second) for this
+    #   DB instance.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] option_group_memberships
+    #   The list of option group memberships for this DB instance.
+    #   @return [Array<Types::AwsRdsDbOptionGroupMembership>]
+    #
+    # @!attribute [rw] character_set_name
+    #   The name of the character set that this DB instance is associated
+    #   with.
+    #   @return [String]
+    #
+    # @!attribute [rw] secondary_availability_zone
+    #   For a DB instance with multi-Availability Zone support, the name of
+    #   the secondary Availability Zone.
+    #   @return [String]
+    #
+    # @!attribute [rw] status_infos
+    #   The status of a read replica. If the instance isn't a read replica,
+    #   this is empty.
+    #   @return [Array<Types::AwsRdsDbStatusInfo>]
+    #
+    # @!attribute [rw] storage_type
+    #   The storage type for the DB instance.
+    #   @return [String]
+    #
+    # @!attribute [rw] domain_memberships
+    #   The Active Directory domain membership records associated with the
+    #   DB instance.
+    #   @return [Array<Types::AwsRdsDbDomainMembership>]
+    #
+    # @!attribute [rw] copy_tags_to_snapshot
+    #   Whether to copy resource tags to snapshots of the DB instance.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] monitoring_interval
+    #   The interval, in seconds, between points when enhanced monitoring
+    #   metrics are collected for the DB instance.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] monitoring_role_arn
+    #   The ARN for the IAM role that permits Amazon RDS to send enhanced
+    #   monitoring metrics to CloudWatch Logs.
+    #   @return [String]
+    #
+    # @!attribute [rw] promotion_tier
+    #   The order in which to promote an Aurora replica to the primary
+    #   instance after a failure of the existing primary instance.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] timezone
+    #   The time zone of the DB instance.
+    #   @return [String]
+    #
+    # @!attribute [rw] performance_insights_enabled
+    #   Indicates whether Performance Insights is enabled for the DB
+    #   instance.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] performance_insights_kms_key_id
+    #   The identifier of the AWS KMS key used to encrypt the Performance
+    #   Insights data.
+    #   @return [String]
+    #
+    # @!attribute [rw] performance_insights_retention_period
+    #   The number of days to retain Performance Insights data.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] enabled_cloud_watch_logs_exports
+    #   A list of log types that this DB instance is configured to export to
+    #   CloudWatch Logs.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] processor_features
+    #   The number of CPU cores and the number of threads per core for the
+    #   DB instance class of the DB instance.
+    #   @return [Array<Types::AwsRdsDbProcessorFeature>]
+    #
+    # @!attribute [rw] listener_endpoint
+    #   Specifies the connection endpoint.
+    #   @return [Types::AwsRdsDbInstanceEndpoint]
+    #
+    # @!attribute [rw] max_allocated_storage
+    #   The upper limit to which Amazon RDS can automatically scale the
+    #   storage of the DB instance.
+    #   @return [Integer]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/AwsRdsDbInstanceDetails AWS API Documentation
     #
     class AwsRdsDbInstanceDetails < Struct.new(
@@ -2491,7 +4647,45 @@ module Aws::SecurityHub
       :publicly_accessible,
       :storage_encrypted,
       :tde_credential_arn,
-      :vpc_security_groups)
+      :vpc_security_groups,
+      :multi_az,
+      :enhanced_monitoring_resource_arn,
+      :db_instance_status,
+      :master_username,
+      :allocated_storage,
+      :preferred_backup_window,
+      :backup_retention_period,
+      :db_security_groups,
+      :db_parameter_groups,
+      :availability_zone,
+      :db_subnet_group,
+      :preferred_maintenance_window,
+      :pending_modified_values,
+      :latest_restorable_time,
+      :auto_minor_version_upgrade,
+      :read_replica_source_db_instance_identifier,
+      :read_replica_db_instance_identifiers,
+      :read_replica_db_cluster_identifiers,
+      :license_model,
+      :iops,
+      :option_group_memberships,
+      :character_set_name,
+      :secondary_availability_zone,
+      :status_infos,
+      :storage_type,
+      :domain_memberships,
+      :copy_tags_to_snapshot,
+      :monitoring_interval,
+      :monitoring_role_arn,
+      :promotion_tier,
+      :timezone,
+      :performance_insights_enabled,
+      :performance_insights_kms_key_id,
+      :performance_insights_retention_period,
+      :enabled_cloud_watch_logs_exports,
+      :processor_features,
+      :listener_endpoint,
+      :max_allocated_storage)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2557,6 +4751,508 @@ module Aws::SecurityHub
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass AwsRdsDbOptionGroupMembership
+    #   data as a hash:
+    #
+    #       {
+    #         option_group_name: "NonEmptyString",
+    #         status: "NonEmptyString",
+    #       }
+    #
+    # @!attribute [rw] option_group_name
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/AwsRdsDbOptionGroupMembership AWS API Documentation
+    #
+    class AwsRdsDbOptionGroupMembership < Struct.new(
+      :option_group_name,
+      :status)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass AwsRdsDbParameterGroup
+    #   data as a hash:
+    #
+    #       {
+    #         db_parameter_group_name: "NonEmptyString",
+    #         parameter_apply_status: "NonEmptyString",
+    #       }
+    #
+    # @!attribute [rw] db_parameter_group_name
+    #   @return [String]
+    #
+    # @!attribute [rw] parameter_apply_status
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/AwsRdsDbParameterGroup AWS API Documentation
+    #
+    class AwsRdsDbParameterGroup < Struct.new(
+      :db_parameter_group_name,
+      :parameter_apply_status)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass AwsRdsDbPendingModifiedValues
+    #   data as a hash:
+    #
+    #       {
+    #         db_instance_class: "NonEmptyString",
+    #         allocated_storage: 1,
+    #         master_user_password: "NonEmptyString",
+    #         port: 1,
+    #         backup_retention_period: 1,
+    #         multi_az: false,
+    #         engine_version: "NonEmptyString",
+    #         license_model: "NonEmptyString",
+    #         iops: 1,
+    #         db_instance_identifier: "NonEmptyString",
+    #         storage_type: "NonEmptyString",
+    #         ca_certificate_identifier: "NonEmptyString",
+    #         db_subnet_group_name: "NonEmptyString",
+    #         pending_cloud_watch_logs_exports: {
+    #           log_types_to_enable: ["NonEmptyString"],
+    #           log_types_to_disable: ["NonEmptyString"],
+    #         },
+    #         processor_features: [
+    #           {
+    #             name: "NonEmptyString",
+    #             value: "NonEmptyString",
+    #           },
+    #         ],
+    #       }
+    #
+    # @!attribute [rw] db_instance_class
+    #   @return [String]
+    #
+    # @!attribute [rw] allocated_storage
+    #   @return [Integer]
+    #
+    # @!attribute [rw] master_user_password
+    #   @return [String]
+    #
+    # @!attribute [rw] port
+    #   @return [Integer]
+    #
+    # @!attribute [rw] backup_retention_period
+    #   @return [Integer]
+    #
+    # @!attribute [rw] multi_az
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] engine_version
+    #   @return [String]
+    #
+    # @!attribute [rw] license_model
+    #   @return [String]
+    #
+    # @!attribute [rw] iops
+    #   @return [Integer]
+    #
+    # @!attribute [rw] db_instance_identifier
+    #   @return [String]
+    #
+    # @!attribute [rw] storage_type
+    #   @return [String]
+    #
+    # @!attribute [rw] ca_certificate_identifier
+    #   @return [String]
+    #
+    # @!attribute [rw] db_subnet_group_name
+    #   @return [String]
+    #
+    # @!attribute [rw] pending_cloud_watch_logs_exports
+    #   @return [Types::AwsRdsPendingCloudWatchLogsExports]
+    #
+    # @!attribute [rw] processor_features
+    #   @return [Array<Types::AwsRdsDbProcessorFeature>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/AwsRdsDbPendingModifiedValues AWS API Documentation
+    #
+    class AwsRdsDbPendingModifiedValues < Struct.new(
+      :db_instance_class,
+      :allocated_storage,
+      :master_user_password,
+      :port,
+      :backup_retention_period,
+      :multi_az,
+      :engine_version,
+      :license_model,
+      :iops,
+      :db_instance_identifier,
+      :storage_type,
+      :ca_certificate_identifier,
+      :db_subnet_group_name,
+      :pending_cloud_watch_logs_exports,
+      :processor_features)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass AwsRdsDbProcessorFeature
+    #   data as a hash:
+    #
+    #       {
+    #         name: "NonEmptyString",
+    #         value: "NonEmptyString",
+    #       }
+    #
+    # @!attribute [rw] name
+    #   @return [String]
+    #
+    # @!attribute [rw] value
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/AwsRdsDbProcessorFeature AWS API Documentation
+    #
+    class AwsRdsDbProcessorFeature < Struct.new(
+      :name,
+      :value)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass AwsRdsDbSnapshotDetails
+    #   data as a hash:
+    #
+    #       {
+    #         db_snapshot_identifier: "NonEmptyString",
+    #         db_instance_identifier: "NonEmptyString",
+    #         snapshot_create_time: "NonEmptyString",
+    #         engine: "NonEmptyString",
+    #         allocated_storage: 1,
+    #         status: "NonEmptyString",
+    #         port: 1,
+    #         availability_zone: "NonEmptyString",
+    #         vpc_id: "NonEmptyString",
+    #         instance_create_time: "NonEmptyString",
+    #         master_username: "NonEmptyString",
+    #         engine_version: "NonEmptyString",
+    #         license_model: "NonEmptyString",
+    #         snapshot_type: "NonEmptyString",
+    #         iops: 1,
+    #         option_group_name: "NonEmptyString",
+    #         percent_progress: 1,
+    #         source_region: "NonEmptyString",
+    #         source_db_snapshot_identifier: "NonEmptyString",
+    #         storage_type: "NonEmptyString",
+    #         tde_credential_arn: "NonEmptyString",
+    #         encrypted: false,
+    #         kms_key_id: "NonEmptyString",
+    #         timezone: "NonEmptyString",
+    #         iam_database_authentication_enabled: false,
+    #         processor_features: [
+    #           {
+    #             name: "NonEmptyString",
+    #             value: "NonEmptyString",
+    #           },
+    #         ],
+    #         dbi_resource_id: "NonEmptyString",
+    #       }
+    #
+    # @!attribute [rw] db_snapshot_identifier
+    #   @return [String]
+    #
+    # @!attribute [rw] db_instance_identifier
+    #   @return [String]
+    #
+    # @!attribute [rw] snapshot_create_time
+    #   @return [String]
+    #
+    # @!attribute [rw] engine
+    #   @return [String]
+    #
+    # @!attribute [rw] allocated_storage
+    #   @return [Integer]
+    #
+    # @!attribute [rw] status
+    #   @return [String]
+    #
+    # @!attribute [rw] port
+    #   @return [Integer]
+    #
+    # @!attribute [rw] availability_zone
+    #   @return [String]
+    #
+    # @!attribute [rw] vpc_id
+    #   @return [String]
+    #
+    # @!attribute [rw] instance_create_time
+    #   @return [String]
+    #
+    # @!attribute [rw] master_username
+    #   @return [String]
+    #
+    # @!attribute [rw] engine_version
+    #   @return [String]
+    #
+    # @!attribute [rw] license_model
+    #   @return [String]
+    #
+    # @!attribute [rw] snapshot_type
+    #   @return [String]
+    #
+    # @!attribute [rw] iops
+    #   @return [Integer]
+    #
+    # @!attribute [rw] option_group_name
+    #   @return [String]
+    #
+    # @!attribute [rw] percent_progress
+    #   @return [Integer]
+    #
+    # @!attribute [rw] source_region
+    #   @return [String]
+    #
+    # @!attribute [rw] source_db_snapshot_identifier
+    #   @return [String]
+    #
+    # @!attribute [rw] storage_type
+    #   @return [String]
+    #
+    # @!attribute [rw] tde_credential_arn
+    #   @return [String]
+    #
+    # @!attribute [rw] encrypted
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] kms_key_id
+    #   @return [String]
+    #
+    # @!attribute [rw] timezone
+    #   @return [String]
+    #
+    # @!attribute [rw] iam_database_authentication_enabled
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] processor_features
+    #   @return [Array<Types::AwsRdsDbProcessorFeature>]
+    #
+    # @!attribute [rw] dbi_resource_id
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/AwsRdsDbSnapshotDetails AWS API Documentation
+    #
+    class AwsRdsDbSnapshotDetails < Struct.new(
+      :db_snapshot_identifier,
+      :db_instance_identifier,
+      :snapshot_create_time,
+      :engine,
+      :allocated_storage,
+      :status,
+      :port,
+      :availability_zone,
+      :vpc_id,
+      :instance_create_time,
+      :master_username,
+      :engine_version,
+      :license_model,
+      :snapshot_type,
+      :iops,
+      :option_group_name,
+      :percent_progress,
+      :source_region,
+      :source_db_snapshot_identifier,
+      :storage_type,
+      :tde_credential_arn,
+      :encrypted,
+      :kms_key_id,
+      :timezone,
+      :iam_database_authentication_enabled,
+      :processor_features,
+      :dbi_resource_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Information about the status of a read replica.
+    #
+    # @note When making an API call, you may pass AwsRdsDbStatusInfo
+    #   data as a hash:
+    #
+    #       {
+    #         status_type: "NonEmptyString",
+    #         normal: false,
+    #         status: "NonEmptyString",
+    #         message: "NonEmptyString",
+    #       }
+    #
+    # @!attribute [rw] status_type
+    #   The type of status. For a read replica, the status type is read
+    #   replication.
+    #   @return [String]
+    #
+    # @!attribute [rw] normal
+    #   Whether the read replica instance is operating normally.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] status
+    #   The status of the read replica instance.
+    #   @return [String]
+    #
+    # @!attribute [rw] message
+    #   If the read replica is currently in an error state, provides the
+    #   error details.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/AwsRdsDbStatusInfo AWS API Documentation
+    #
+    class AwsRdsDbStatusInfo < Struct.new(
+      :status_type,
+      :normal,
+      :status,
+      :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Information about the subnet group for the database instance.
+    #
+    # @note When making an API call, you may pass AwsRdsDbSubnetGroup
+    #   data as a hash:
+    #
+    #       {
+    #         db_subnet_group_name: "NonEmptyString",
+    #         db_subnet_group_description: "NonEmptyString",
+    #         vpc_id: "NonEmptyString",
+    #         subnet_group_status: "NonEmptyString",
+    #         subnets: [
+    #           {
+    #             subnet_identifier: "NonEmptyString",
+    #             subnet_availability_zone: {
+    #               name: "NonEmptyString",
+    #             },
+    #             subnet_status: "NonEmptyString",
+    #           },
+    #         ],
+    #         db_subnet_group_arn: "NonEmptyString",
+    #       }
+    #
+    # @!attribute [rw] db_subnet_group_name
+    #   The name of the subnet group.
+    #   @return [String]
+    #
+    # @!attribute [rw] db_subnet_group_description
+    #   The description of the subnet group.
+    #   @return [String]
+    #
+    # @!attribute [rw] vpc_id
+    #   The VPC ID of the subnet group.
+    #   @return [String]
+    #
+    # @!attribute [rw] subnet_group_status
+    #   The status of the subnet group.
+    #   @return [String]
+    #
+    # @!attribute [rw] subnets
+    #   A list of subnets in the subnet group.
+    #   @return [Array<Types::AwsRdsDbSubnetGroupSubnet>]
+    #
+    # @!attribute [rw] db_subnet_group_arn
+    #   The ARN of the subnet group.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/AwsRdsDbSubnetGroup AWS API Documentation
+    #
+    class AwsRdsDbSubnetGroup < Struct.new(
+      :db_subnet_group_name,
+      :db_subnet_group_description,
+      :vpc_id,
+      :subnet_group_status,
+      :subnets,
+      :db_subnet_group_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Information about a subnet in a subnet group.
+    #
+    # @note When making an API call, you may pass AwsRdsDbSubnetGroupSubnet
+    #   data as a hash:
+    #
+    #       {
+    #         subnet_identifier: "NonEmptyString",
+    #         subnet_availability_zone: {
+    #           name: "NonEmptyString",
+    #         },
+    #         subnet_status: "NonEmptyString",
+    #       }
+    #
+    # @!attribute [rw] subnet_identifier
+    #   The identifier of a subnet in the subnet group.
+    #   @return [String]
+    #
+    # @!attribute [rw] subnet_availability_zone
+    #   Information about the Availability Zone for a subnet in the subnet
+    #   group.
+    #   @return [Types::AwsRdsDbSubnetGroupSubnetAvailabilityZone]
+    #
+    # @!attribute [rw] subnet_status
+    #   The status of a subnet in the subnet group.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/AwsRdsDbSubnetGroupSubnet AWS API Documentation
+    #
+    class AwsRdsDbSubnetGroupSubnet < Struct.new(
+      :subnet_identifier,
+      :subnet_availability_zone,
+      :subnet_status)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # An Availability Zone for a subnet in a subnet group.
+    #
+    # @note When making an API call, you may pass AwsRdsDbSubnetGroupSubnetAvailabilityZone
+    #   data as a hash:
+    #
+    #       {
+    #         name: "NonEmptyString",
+    #       }
+    #
+    # @!attribute [rw] name
+    #   The name of the Availability Zone for a subnet in the subnet group.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/AwsRdsDbSubnetGroupSubnetAvailabilityZone AWS API Documentation
+    #
+    class AwsRdsDbSubnetGroupSubnetAvailabilityZone < Struct.new(
+      :name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Identifies the log types to enable and disable.
+    #
+    # @note When making an API call, you may pass AwsRdsPendingCloudWatchLogsExports
+    #   data as a hash:
+    #
+    #       {
+    #         log_types_to_enable: ["NonEmptyString"],
+    #         log_types_to_disable: ["NonEmptyString"],
+    #       }
+    #
+    # @!attribute [rw] log_types_to_enable
+    #   A list of log types that are being enabled.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] log_types_to_disable
+    #   A list of log types that are being disabled.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/AwsRdsPendingCloudWatchLogsExports AWS API Documentation
+    #
+    class AwsRdsPendingCloudWatchLogsExports < Struct.new(
+      :log_types_to_enable,
+      :log_types_to_disable)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The details of an Amazon S3 bucket.
     #
     # @note When making an API call, you may pass AwsS3BucketDetails
@@ -2587,7 +5283,15 @@ module Aws::SecurityHub
     #   @return [String]
     #
     # @!attribute [rw] created_at
-    #   The date and time when the S3 bucket was created.
+    #   Indicates when the S3 bucket was created.
+    #
+    #   Uses the `date-time` format specified in [RFC 3339 section 5.6,
+    #   Internet Date/Time Format][1]. The value cannot contain spaces. For
+    #   example, `2020-03-22T13:22:13.933Z`.
+    #
+    #
+    #
+    #   [1]: https://tools.ietf.org/html/rfc3339#section-5.6
     #   @return [String]
     #
     # @!attribute [rw] server_side_encryption_configuration
@@ -2703,7 +5407,15 @@ module Aws::SecurityHub
     #       }
     #
     # @!attribute [rw] last_modified
-    #   The date and time when the object was last modified.
+    #   Indicates when the object was last modified.
+    #
+    #   Uses the `date-time` format specified in [RFC 3339 section 5.6,
+    #   Internet Date/Time Format][1]. The value cannot contain spaces. For
+    #   example, `2020-03-22T13:22:13.933Z`.
+    #
+    #
+    #
+    #   [1]: https://tools.ietf.org/html/rfc3339#section-5.6
     #   @return [String]
     #
     # @!attribute [rw] etag
@@ -2740,6 +5452,95 @@ module Aws::SecurityHub
       :content_type,
       :server_side_encryption,
       :ssekms_key_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Details about an AWS Secrets Manager secret.
+    #
+    # @note When making an API call, you may pass AwsSecretsManagerSecretDetails
+    #   data as a hash:
+    #
+    #       {
+    #         rotation_rules: {
+    #           automatically_after_days: 1,
+    #         },
+    #         rotation_occurred_within_frequency: false,
+    #         kms_key_id: "NonEmptyString",
+    #         rotation_enabled: false,
+    #         rotation_lambda_arn: "NonEmptyString",
+    #         deleted: false,
+    #         name: "NonEmptyString",
+    #         description: "NonEmptyString",
+    #       }
+    #
+    # @!attribute [rw] rotation_rules
+    #   Defines the rotation schedule for the secret.
+    #   @return [Types::AwsSecretsManagerSecretRotationRules]
+    #
+    # @!attribute [rw] rotation_occurred_within_frequency
+    #   Whether the rotation occurred within the specified rotation
+    #   frequency.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] kms_key_id
+    #   The ARN, Key ID, or alias of the AWS KMS customer master key (CMK)
+    #   used to encrypt the `SecretString` or `SecretBinary` values for
+    #   versions of this secret.
+    #   @return [String]
+    #
+    # @!attribute [rw] rotation_enabled
+    #   Whether rotation is enabled.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] rotation_lambda_arn
+    #   The ARN of the Lambda function that rotates the secret.
+    #   @return [String]
+    #
+    # @!attribute [rw] deleted
+    #   Whether the secret is deleted.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] name
+    #   The name of the secret.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   The user-provided description of the secret.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/AwsSecretsManagerSecretDetails AWS API Documentation
+    #
+    class AwsSecretsManagerSecretDetails < Struct.new(
+      :rotation_rules,
+      :rotation_occurred_within_frequency,
+      :kms_key_id,
+      :rotation_enabled,
+      :rotation_lambda_arn,
+      :deleted,
+      :name,
+      :description)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Defines the rotation schedule for the secret.
+    #
+    # @note When making an API call, you may pass AwsSecretsManagerSecretRotationRules
+    #   data as a hash:
+    #
+    #       {
+    #         automatically_after_days: 1,
+    #       }
+    #
+    # @!attribute [rw] automatically_after_days
+    #   The number of days after the previous rotation to rotate the secret.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/AwsSecretsManagerSecretRotationRules AWS API Documentation
+    #
+    class AwsSecretsManagerSecretRotationRules < Struct.new(
+      :automatically_after_days)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3081,6 +5882,18 @@ module Aws::SecurityHub
     #                 dhcp_options_id: "NonEmptyString",
     #                 state: "NonEmptyString",
     #               },
+    #               aws_ec2_eip: {
+    #                 instance_id: "NonEmptyString",
+    #                 public_ip: "NonEmptyString",
+    #                 allocation_id: "NonEmptyString",
+    #                 association_id: "NonEmptyString",
+    #                 domain: "NonEmptyString",
+    #                 public_ipv_4_pool: "NonEmptyString",
+    #                 network_border_group: "NonEmptyString",
+    #                 network_interface_id: "NonEmptyString",
+    #                 network_interface_owner_id: "NonEmptyString",
+    #                 private_ip_address: "NonEmptyString",
+    #               },
     #               aws_elbv_2_load_balancer: {
     #                 availability_zones: [
     #                   {
@@ -3151,6 +5964,18 @@ module Aws::SecurityHub
     #                 server_side_encryption: "NonEmptyString",
     #                 ssekms_key_id: "NonEmptyString",
     #               },
+    #               aws_secrets_manager_secret: {
+    #                 rotation_rules: {
+    #                   automatically_after_days: 1,
+    #                 },
+    #                 rotation_occurred_within_frequency: false,
+    #                 kms_key_id: "NonEmptyString",
+    #                 rotation_enabled: false,
+    #                 rotation_lambda_arn: "NonEmptyString",
+    #                 deleted: false,
+    #                 name: "NonEmptyString",
+    #                 description: "NonEmptyString",
+    #               },
     #               aws_iam_access_key: {
     #                 user_name: "NonEmptyString",
     #                 status: "Active", # accepts Active, Inactive
@@ -3158,6 +5983,159 @@ module Aws::SecurityHub
     #                 principal_id: "NonEmptyString",
     #                 principal_type: "NonEmptyString",
     #                 principal_name: "NonEmptyString",
+    #               },
+    #               aws_iam_user: {
+    #                 attached_managed_policies: [
+    #                   {
+    #                     policy_name: "NonEmptyString",
+    #                     policy_arn: "NonEmptyString",
+    #                   },
+    #                 ],
+    #                 create_date: "NonEmptyString",
+    #                 group_list: ["NonEmptyString"],
+    #                 path: "NonEmptyString",
+    #                 permissions_boundary: {
+    #                   permissions_boundary_arn: "NonEmptyString",
+    #                   permissions_boundary_type: "NonEmptyString",
+    #                 },
+    #                 user_id: "NonEmptyString",
+    #                 user_name: "NonEmptyString",
+    #                 user_policy_list: [
+    #                   {
+    #                     policy_name: "NonEmptyString",
+    #                   },
+    #                 ],
+    #               },
+    #               aws_iam_policy: {
+    #                 attachment_count: 1,
+    #                 create_date: "NonEmptyString",
+    #                 default_version_id: "NonEmptyString",
+    #                 description: "NonEmptyString",
+    #                 is_attachable: false,
+    #                 path: "NonEmptyString",
+    #                 permissions_boundary_usage_count: 1,
+    #                 policy_id: "NonEmptyString",
+    #                 policy_name: "NonEmptyString",
+    #                 policy_version_list: [
+    #                   {
+    #                     version_id: "NonEmptyString",
+    #                     is_default_version: false,
+    #                     create_date: "NonEmptyString",
+    #                   },
+    #                 ],
+    #                 update_date: "NonEmptyString",
+    #               },
+    #               aws_dynamo_db_table: {
+    #                 attribute_definitions: [
+    #                   {
+    #                     attribute_name: "NonEmptyString",
+    #                     attribute_type: "NonEmptyString",
+    #                   },
+    #                 ],
+    #                 billing_mode_summary: {
+    #                   billing_mode: "NonEmptyString",
+    #                   last_update_to_pay_per_request_date_time: "NonEmptyString",
+    #                 },
+    #                 creation_date_time: "NonEmptyString",
+    #                 global_secondary_indexes: [
+    #                   {
+    #                     backfilling: false,
+    #                     index_arn: "NonEmptyString",
+    #                     index_name: "NonEmptyString",
+    #                     index_size_bytes: 1,
+    #                     index_status: "NonEmptyString",
+    #                     item_count: 1,
+    #                     key_schema: [
+    #                       {
+    #                         attribute_name: "NonEmptyString",
+    #                         key_type: "NonEmptyString",
+    #                       },
+    #                     ],
+    #                     projection: {
+    #                       non_key_attributes: ["NonEmptyString"],
+    #                       projection_type: "NonEmptyString",
+    #                     },
+    #                     provisioned_throughput: {
+    #                       last_decrease_date_time: "NonEmptyString",
+    #                       last_increase_date_time: "NonEmptyString",
+    #                       number_of_decreases_today: 1,
+    #                       read_capacity_units: 1,
+    #                       write_capacity_units: 1,
+    #                     },
+    #                   },
+    #                 ],
+    #                 global_table_version: "NonEmptyString",
+    #                 item_count: 1,
+    #                 key_schema: [
+    #                   {
+    #                     attribute_name: "NonEmptyString",
+    #                     key_type: "NonEmptyString",
+    #                   },
+    #                 ],
+    #                 latest_stream_arn: "NonEmptyString",
+    #                 latest_stream_label: "NonEmptyString",
+    #                 local_secondary_indexes: [
+    #                   {
+    #                     index_arn: "NonEmptyString",
+    #                     index_name: "NonEmptyString",
+    #                     key_schema: [
+    #                       {
+    #                         attribute_name: "NonEmptyString",
+    #                         key_type: "NonEmptyString",
+    #                       },
+    #                     ],
+    #                     projection: {
+    #                       non_key_attributes: ["NonEmptyString"],
+    #                       projection_type: "NonEmptyString",
+    #                     },
+    #                   },
+    #                 ],
+    #                 provisioned_throughput: {
+    #                   last_decrease_date_time: "NonEmptyString",
+    #                   last_increase_date_time: "NonEmptyString",
+    #                   number_of_decreases_today: 1,
+    #                   read_capacity_units: 1,
+    #                   write_capacity_units: 1,
+    #                 },
+    #                 replicas: [
+    #                   {
+    #                     global_secondary_indexes: [
+    #                       {
+    #                         index_name: "NonEmptyString",
+    #                         provisioned_throughput_override: {
+    #                           read_capacity_units: 1,
+    #                         },
+    #                       },
+    #                     ],
+    #                     kms_master_key_id: "NonEmptyString",
+    #                     provisioned_throughput_override: {
+    #                       read_capacity_units: 1,
+    #                     },
+    #                     region_name: "NonEmptyString",
+    #                     replica_status: "NonEmptyString",
+    #                     replica_status_description: "NonEmptyString",
+    #                   },
+    #                 ],
+    #                 restore_summary: {
+    #                   source_backup_arn: "NonEmptyString",
+    #                   source_table_arn: "NonEmptyString",
+    #                   restore_date_time: "NonEmptyString",
+    #                   restore_in_progress: false,
+    #                 },
+    #                 sse_description: {
+    #                   inaccessible_encryption_date_time: "NonEmptyString",
+    #                   status: "NonEmptyString",
+    #                   sse_type: "NonEmptyString",
+    #                   kms_master_key_arn: "NonEmptyString",
+    #                 },
+    #                 stream_specification: {
+    #                   stream_enabled: false,
+    #                   stream_view_type: "NonEmptyString",
+    #                 },
+    #                 table_id: "NonEmptyString",
+    #                 table_name: "NonEmptyString",
+    #                 table_size_bytes: 1,
+    #                 table_status: "NonEmptyString",
     #               },
     #               aws_iam_role: {
     #                 assume_role_policy_document: "AwsIamRoleAssumeRolePolicyDocument",
@@ -3174,6 +6152,7 @@ module Aws::SecurityHub
     #                 key_manager: "NonEmptyString",
     #                 key_state: "NonEmptyString",
     #                 origin: "NonEmptyString",
+    #                 description: "NonEmptyString",
     #               },
     #               aws_lambda_function: {
     #                 code: {
@@ -3261,6 +6240,116 @@ module Aws::SecurityHub
     #                     status: "NonEmptyString",
     #                   },
     #                 ],
+    #                 multi_az: false,
+    #                 enhanced_monitoring_resource_arn: "NonEmptyString",
+    #                 db_instance_status: "NonEmptyString",
+    #                 master_username: "NonEmptyString",
+    #                 allocated_storage: 1,
+    #                 preferred_backup_window: "NonEmptyString",
+    #                 backup_retention_period: 1,
+    #                 db_security_groups: ["NonEmptyString"],
+    #                 db_parameter_groups: [
+    #                   {
+    #                     db_parameter_group_name: "NonEmptyString",
+    #                     parameter_apply_status: "NonEmptyString",
+    #                   },
+    #                 ],
+    #                 availability_zone: "NonEmptyString",
+    #                 db_subnet_group: {
+    #                   db_subnet_group_name: "NonEmptyString",
+    #                   db_subnet_group_description: "NonEmptyString",
+    #                   vpc_id: "NonEmptyString",
+    #                   subnet_group_status: "NonEmptyString",
+    #                   subnets: [
+    #                     {
+    #                       subnet_identifier: "NonEmptyString",
+    #                       subnet_availability_zone: {
+    #                         name: "NonEmptyString",
+    #                       },
+    #                       subnet_status: "NonEmptyString",
+    #                     },
+    #                   ],
+    #                   db_subnet_group_arn: "NonEmptyString",
+    #                 },
+    #                 preferred_maintenance_window: "NonEmptyString",
+    #                 pending_modified_values: {
+    #                   db_instance_class: "NonEmptyString",
+    #                   allocated_storage: 1,
+    #                   master_user_password: "NonEmptyString",
+    #                   port: 1,
+    #                   backup_retention_period: 1,
+    #                   multi_az: false,
+    #                   engine_version: "NonEmptyString",
+    #                   license_model: "NonEmptyString",
+    #                   iops: 1,
+    #                   db_instance_identifier: "NonEmptyString",
+    #                   storage_type: "NonEmptyString",
+    #                   ca_certificate_identifier: "NonEmptyString",
+    #                   db_subnet_group_name: "NonEmptyString",
+    #                   pending_cloud_watch_logs_exports: {
+    #                     log_types_to_enable: ["NonEmptyString"],
+    #                     log_types_to_disable: ["NonEmptyString"],
+    #                   },
+    #                   processor_features: [
+    #                     {
+    #                       name: "NonEmptyString",
+    #                       value: "NonEmptyString",
+    #                     },
+    #                   ],
+    #                 },
+    #                 latest_restorable_time: "NonEmptyString",
+    #                 auto_minor_version_upgrade: false,
+    #                 read_replica_source_db_instance_identifier: "NonEmptyString",
+    #                 read_replica_db_instance_identifiers: ["NonEmptyString"],
+    #                 read_replica_db_cluster_identifiers: ["NonEmptyString"],
+    #                 license_model: "NonEmptyString",
+    #                 iops: 1,
+    #                 option_group_memberships: [
+    #                   {
+    #                     option_group_name: "NonEmptyString",
+    #                     status: "NonEmptyString",
+    #                   },
+    #                 ],
+    #                 character_set_name: "NonEmptyString",
+    #                 secondary_availability_zone: "NonEmptyString",
+    #                 status_infos: [
+    #                   {
+    #                     status_type: "NonEmptyString",
+    #                     normal: false,
+    #                     status: "NonEmptyString",
+    #                     message: "NonEmptyString",
+    #                   },
+    #                 ],
+    #                 storage_type: "NonEmptyString",
+    #                 domain_memberships: [
+    #                   {
+    #                     domain: "NonEmptyString",
+    #                     status: "NonEmptyString",
+    #                     fqdn: "NonEmptyString",
+    #                     iam_role_name: "NonEmptyString",
+    #                   },
+    #                 ],
+    #                 copy_tags_to_snapshot: false,
+    #                 monitoring_interval: 1,
+    #                 monitoring_role_arn: "NonEmptyString",
+    #                 promotion_tier: 1,
+    #                 timezone: "NonEmptyString",
+    #                 performance_insights_enabled: false,
+    #                 performance_insights_kms_key_id: "NonEmptyString",
+    #                 performance_insights_retention_period: 1,
+    #                 enabled_cloud_watch_logs_exports: ["NonEmptyString"],
+    #                 processor_features: [
+    #                   {
+    #                     name: "NonEmptyString",
+    #                     value: "NonEmptyString",
+    #                   },
+    #                 ],
+    #                 listener_endpoint: {
+    #                   address: "NonEmptyString",
+    #                   port: 1,
+    #                   hosted_zone_id: "NonEmptyString",
+    #                 },
+    #                 max_allocated_storage: 1,
     #               },
     #               aws_sns_topic: {
     #                 kms_master_key_id: "NonEmptyString",
@@ -3301,6 +6390,128 @@ module Aws::SecurityHub
     #                   },
     #                 ],
     #                 web_acl_id: "NonEmptyString",
+    #               },
+    #               aws_rds_db_snapshot: {
+    #                 db_snapshot_identifier: "NonEmptyString",
+    #                 db_instance_identifier: "NonEmptyString",
+    #                 snapshot_create_time: "NonEmptyString",
+    #                 engine: "NonEmptyString",
+    #                 allocated_storage: 1,
+    #                 status: "NonEmptyString",
+    #                 port: 1,
+    #                 availability_zone: "NonEmptyString",
+    #                 vpc_id: "NonEmptyString",
+    #                 instance_create_time: "NonEmptyString",
+    #                 master_username: "NonEmptyString",
+    #                 engine_version: "NonEmptyString",
+    #                 license_model: "NonEmptyString",
+    #                 snapshot_type: "NonEmptyString",
+    #                 iops: 1,
+    #                 option_group_name: "NonEmptyString",
+    #                 percent_progress: 1,
+    #                 source_region: "NonEmptyString",
+    #                 source_db_snapshot_identifier: "NonEmptyString",
+    #                 storage_type: "NonEmptyString",
+    #                 tde_credential_arn: "NonEmptyString",
+    #                 encrypted: false,
+    #                 kms_key_id: "NonEmptyString",
+    #                 timezone: "NonEmptyString",
+    #                 iam_database_authentication_enabled: false,
+    #                 processor_features: [
+    #                   {
+    #                     name: "NonEmptyString",
+    #                     value: "NonEmptyString",
+    #                   },
+    #                 ],
+    #                 dbi_resource_id: "NonEmptyString",
+    #               },
+    #               aws_rds_db_cluster_snapshot: {
+    #                 availability_zones: ["NonEmptyString"],
+    #                 snapshot_create_time: "NonEmptyString",
+    #                 engine: "NonEmptyString",
+    #                 allocated_storage: 1,
+    #                 status: "NonEmptyString",
+    #                 port: 1,
+    #                 vpc_id: "NonEmptyString",
+    #                 cluster_create_time: "NonEmptyString",
+    #                 master_username: "NonEmptyString",
+    #                 engine_version: "NonEmptyString",
+    #                 license_model: "NonEmptyString",
+    #                 snapshot_type: "NonEmptyString",
+    #                 percent_progress: 1,
+    #                 storage_encrypted: false,
+    #                 kms_key_id: "NonEmptyString",
+    #                 db_cluster_identifier: "NonEmptyString",
+    #                 db_cluster_snapshot_identifier: "NonEmptyString",
+    #                 iam_database_authentication_enabled: false,
+    #               },
+    #               aws_rds_db_cluster: {
+    #                 allocated_storage: 1,
+    #                 availability_zones: ["NonEmptyString"],
+    #                 backup_retention_period: 1,
+    #                 database_name: "NonEmptyString",
+    #                 status: "NonEmptyString",
+    #                 endpoint: "NonEmptyString",
+    #                 reader_endpoint: "NonEmptyString",
+    #                 custom_endpoints: ["NonEmptyString"],
+    #                 multi_az: false,
+    #                 engine: "NonEmptyString",
+    #                 engine_version: "NonEmptyString",
+    #                 port: 1,
+    #                 master_username: "NonEmptyString",
+    #                 preferred_backup_window: "NonEmptyString",
+    #                 preferred_maintenance_window: "NonEmptyString",
+    #                 read_replica_identifiers: ["NonEmptyString"],
+    #                 vpc_security_groups: [
+    #                   {
+    #                     vpc_security_group_id: "NonEmptyString",
+    #                     status: "NonEmptyString",
+    #                   },
+    #                 ],
+    #                 hosted_zone_id: "NonEmptyString",
+    #                 storage_encrypted: false,
+    #                 kms_key_id: "NonEmptyString",
+    #                 db_cluster_resource_id: "NonEmptyString",
+    #                 associated_roles: [
+    #                   {
+    #                     role_arn: "NonEmptyString",
+    #                     status: "NonEmptyString",
+    #                   },
+    #                 ],
+    #                 cluster_create_time: "NonEmptyString",
+    #                 enabled_cloud_watch_logs_exports: ["NonEmptyString"],
+    #                 engine_mode: "NonEmptyString",
+    #                 deletion_protection: false,
+    #                 http_endpoint_enabled: false,
+    #                 activity_stream_status: "NonEmptyString",
+    #                 copy_tags_to_snapshot: false,
+    #                 cross_account_clone: false,
+    #                 domain_memberships: [
+    #                   {
+    #                     domain: "NonEmptyString",
+    #                     status: "NonEmptyString",
+    #                     fqdn: "NonEmptyString",
+    #                     iam_role_name: "NonEmptyString",
+    #                   },
+    #                 ],
+    #                 db_cluster_parameter_group: "NonEmptyString",
+    #                 db_subnet_group: "NonEmptyString",
+    #                 db_cluster_option_group_memberships: [
+    #                   {
+    #                     db_cluster_option_group_name: "NonEmptyString",
+    #                     status: "NonEmptyString",
+    #                   },
+    #                 ],
+    #                 db_cluster_identifier: "NonEmptyString",
+    #                 db_cluster_members: [
+    #                   {
+    #                     is_cluster_writer: false,
+    #                     promotion_tier: 1,
+    #                     db_instance_identifier: "NonEmptyString",
+    #                     db_cluster_parameter_group_status: "NonEmptyString",
+    #                   },
+    #                 ],
+    #                 iam_database_authentication_enabled: false,
     #               },
     #               container: {
     #                 name: "NonEmptyString",
@@ -3409,26 +6620,55 @@ module Aws::SecurityHub
     #   @return [Array<String>]
     #
     # @!attribute [rw] first_observed_at
-    #   An ISO8601-formatted timestamp that indicates when the
-    #   security-findings provider first observed the potential security
-    #   issue that a finding captured.
+    #   Indicates when the security-findings provider first observed the
+    #   potential security issue that a finding captured.
+    #
+    #   Uses the `date-time` format specified in [RFC 3339 section 5.6,
+    #   Internet Date/Time Format][1]. The value cannot contain spaces. For
+    #   example, `2020-03-22T13:22:13.933Z`.
+    #
+    #
+    #
+    #   [1]: https://tools.ietf.org/html/rfc3339#section-5.6
     #   @return [String]
     #
     # @!attribute [rw] last_observed_at
-    #   An ISO8601-formatted timestamp that indicates when the
-    #   security-findings provider most recently observed the potential
-    #   security issue that a finding captured.
+    #   Indicates when the security-findings provider most recently observed
+    #   the potential security issue that a finding captured.
+    #
+    #   Uses the `date-time` format specified in [RFC 3339 section 5.6,
+    #   Internet Date/Time Format][1]. The value cannot contain spaces. For
+    #   example, `2020-03-22T13:22:13.933Z`.
+    #
+    #
+    #
+    #   [1]: https://tools.ietf.org/html/rfc3339#section-5.6
     #   @return [String]
     #
     # @!attribute [rw] created_at
-    #   An ISO8601-formatted timestamp that indicates when the
-    #   security-findings provider created the potential security issue that
-    #   a finding captured.
+    #   Indicates when the security-findings provider created the potential
+    #   security issue that a finding captured.
+    #
+    #   Uses the `date-time` format specified in [RFC 3339 section 5.6,
+    #   Internet Date/Time Format][1]. The value cannot contain spaces. For
+    #   example, `2020-03-22T13:22:13.933Z`.
+    #
+    #
+    #
+    #   [1]: https://tools.ietf.org/html/rfc3339#section-5.6
     #   @return [String]
     #
     # @!attribute [rw] updated_at
-    #   An ISO8601-formatted timestamp that indicates when the
-    #   security-findings provider last updated the finding record.
+    #   Indicates when the security-findings provider last updated the
+    #   finding record.
+    #
+    #   Uses the `date-time` format specified in [RFC 3339 section 5.6,
+    #   Internet Date/Time Format][1]. The value cannot contain spaces. For
+    #   example, `2020-03-22T13:22:13.933Z`.
+    #
+    #
+    #
+    #   [1]: https://tools.ietf.org/html/rfc3339#section-5.6
     #   @return [String]
     #
     # @!attribute [rw] severity
@@ -3603,31 +6843,31 @@ module Aws::SecurityHub
     #         product_arn: [
     #           {
     #             value: "NonEmptyString",
-    #             comparison: "EQUALS", # accepts EQUALS, PREFIX
+    #             comparison: "EQUALS", # accepts EQUALS, PREFIX, NOT_EQUALS, PREFIX_NOT_EQUALS
     #           },
     #         ],
     #         aws_account_id: [
     #           {
     #             value: "NonEmptyString",
-    #             comparison: "EQUALS", # accepts EQUALS, PREFIX
+    #             comparison: "EQUALS", # accepts EQUALS, PREFIX, NOT_EQUALS, PREFIX_NOT_EQUALS
     #           },
     #         ],
     #         id: [
     #           {
     #             value: "NonEmptyString",
-    #             comparison: "EQUALS", # accepts EQUALS, PREFIX
+    #             comparison: "EQUALS", # accepts EQUALS, PREFIX, NOT_EQUALS, PREFIX_NOT_EQUALS
     #           },
     #         ],
     #         generator_id: [
     #           {
     #             value: "NonEmptyString",
-    #             comparison: "EQUALS", # accepts EQUALS, PREFIX
+    #             comparison: "EQUALS", # accepts EQUALS, PREFIX, NOT_EQUALS, PREFIX_NOT_EQUALS
     #           },
     #         ],
     #         type: [
     #           {
     #             value: "NonEmptyString",
-    #             comparison: "EQUALS", # accepts EQUALS, PREFIX
+    #             comparison: "EQUALS", # accepts EQUALS, PREFIX, NOT_EQUALS, PREFIX_NOT_EQUALS
     #           },
     #         ],
     #         first_observed_at: [
@@ -3687,7 +6927,7 @@ module Aws::SecurityHub
     #         severity_label: [
     #           {
     #             value: "NonEmptyString",
-    #             comparison: "EQUALS", # accepts EQUALS, PREFIX
+    #             comparison: "EQUALS", # accepts EQUALS, PREFIX, NOT_EQUALS, PREFIX_NOT_EQUALS
     #           },
     #         ],
     #         confidence: [
@@ -3707,87 +6947,87 @@ module Aws::SecurityHub
     #         title: [
     #           {
     #             value: "NonEmptyString",
-    #             comparison: "EQUALS", # accepts EQUALS, PREFIX
+    #             comparison: "EQUALS", # accepts EQUALS, PREFIX, NOT_EQUALS, PREFIX_NOT_EQUALS
     #           },
     #         ],
     #         description: [
     #           {
     #             value: "NonEmptyString",
-    #             comparison: "EQUALS", # accepts EQUALS, PREFIX
+    #             comparison: "EQUALS", # accepts EQUALS, PREFIX, NOT_EQUALS, PREFIX_NOT_EQUALS
     #           },
     #         ],
     #         recommendation_text: [
     #           {
     #             value: "NonEmptyString",
-    #             comparison: "EQUALS", # accepts EQUALS, PREFIX
+    #             comparison: "EQUALS", # accepts EQUALS, PREFIX, NOT_EQUALS, PREFIX_NOT_EQUALS
     #           },
     #         ],
     #         source_url: [
     #           {
     #             value: "NonEmptyString",
-    #             comparison: "EQUALS", # accepts EQUALS, PREFIX
+    #             comparison: "EQUALS", # accepts EQUALS, PREFIX, NOT_EQUALS, PREFIX_NOT_EQUALS
     #           },
     #         ],
     #         product_fields: [
     #           {
     #             key: "NonEmptyString",
     #             value: "NonEmptyString",
-    #             comparison: "EQUALS", # accepts EQUALS
+    #             comparison: "EQUALS", # accepts EQUALS, NOT_EQUALS
     #           },
     #         ],
     #         product_name: [
     #           {
     #             value: "NonEmptyString",
-    #             comparison: "EQUALS", # accepts EQUALS, PREFIX
+    #             comparison: "EQUALS", # accepts EQUALS, PREFIX, NOT_EQUALS, PREFIX_NOT_EQUALS
     #           },
     #         ],
     #         company_name: [
     #           {
     #             value: "NonEmptyString",
-    #             comparison: "EQUALS", # accepts EQUALS, PREFIX
+    #             comparison: "EQUALS", # accepts EQUALS, PREFIX, NOT_EQUALS, PREFIX_NOT_EQUALS
     #           },
     #         ],
     #         user_defined_fields: [
     #           {
     #             key: "NonEmptyString",
     #             value: "NonEmptyString",
-    #             comparison: "EQUALS", # accepts EQUALS
+    #             comparison: "EQUALS", # accepts EQUALS, NOT_EQUALS
     #           },
     #         ],
     #         malware_name: [
     #           {
     #             value: "NonEmptyString",
-    #             comparison: "EQUALS", # accepts EQUALS, PREFIX
+    #             comparison: "EQUALS", # accepts EQUALS, PREFIX, NOT_EQUALS, PREFIX_NOT_EQUALS
     #           },
     #         ],
     #         malware_type: [
     #           {
     #             value: "NonEmptyString",
-    #             comparison: "EQUALS", # accepts EQUALS, PREFIX
+    #             comparison: "EQUALS", # accepts EQUALS, PREFIX, NOT_EQUALS, PREFIX_NOT_EQUALS
     #           },
     #         ],
     #         malware_path: [
     #           {
     #             value: "NonEmptyString",
-    #             comparison: "EQUALS", # accepts EQUALS, PREFIX
+    #             comparison: "EQUALS", # accepts EQUALS, PREFIX, NOT_EQUALS, PREFIX_NOT_EQUALS
     #           },
     #         ],
     #         malware_state: [
     #           {
     #             value: "NonEmptyString",
-    #             comparison: "EQUALS", # accepts EQUALS, PREFIX
+    #             comparison: "EQUALS", # accepts EQUALS, PREFIX, NOT_EQUALS, PREFIX_NOT_EQUALS
     #           },
     #         ],
     #         network_direction: [
     #           {
     #             value: "NonEmptyString",
-    #             comparison: "EQUALS", # accepts EQUALS, PREFIX
+    #             comparison: "EQUALS", # accepts EQUALS, PREFIX, NOT_EQUALS, PREFIX_NOT_EQUALS
     #           },
     #         ],
     #         network_protocol: [
     #           {
     #             value: "NonEmptyString",
-    #             comparison: "EQUALS", # accepts EQUALS, PREFIX
+    #             comparison: "EQUALS", # accepts EQUALS, PREFIX, NOT_EQUALS, PREFIX_NOT_EQUALS
     #           },
     #         ],
     #         network_source_ip_v4: [
@@ -3810,13 +7050,13 @@ module Aws::SecurityHub
     #         network_source_domain: [
     #           {
     #             value: "NonEmptyString",
-    #             comparison: "EQUALS", # accepts EQUALS, PREFIX
+    #             comparison: "EQUALS", # accepts EQUALS, PREFIX, NOT_EQUALS, PREFIX_NOT_EQUALS
     #           },
     #         ],
     #         network_source_mac: [
     #           {
     #             value: "NonEmptyString",
-    #             comparison: "EQUALS", # accepts EQUALS, PREFIX
+    #             comparison: "EQUALS", # accepts EQUALS, PREFIX, NOT_EQUALS, PREFIX_NOT_EQUALS
     #           },
     #         ],
     #         network_destination_ip_v4: [
@@ -3839,19 +7079,19 @@ module Aws::SecurityHub
     #         network_destination_domain: [
     #           {
     #             value: "NonEmptyString",
-    #             comparison: "EQUALS", # accepts EQUALS, PREFIX
+    #             comparison: "EQUALS", # accepts EQUALS, PREFIX, NOT_EQUALS, PREFIX_NOT_EQUALS
     #           },
     #         ],
     #         process_name: [
     #           {
     #             value: "NonEmptyString",
-    #             comparison: "EQUALS", # accepts EQUALS, PREFIX
+    #             comparison: "EQUALS", # accepts EQUALS, PREFIX, NOT_EQUALS, PREFIX_NOT_EQUALS
     #           },
     #         ],
     #         process_path: [
     #           {
     #             value: "NonEmptyString",
-    #             comparison: "EQUALS", # accepts EQUALS, PREFIX
+    #             comparison: "EQUALS", # accepts EQUALS, PREFIX, NOT_EQUALS, PREFIX_NOT_EQUALS
     #           },
     #         ],
     #         process_pid: [
@@ -3891,19 +7131,19 @@ module Aws::SecurityHub
     #         threat_intel_indicator_type: [
     #           {
     #             value: "NonEmptyString",
-    #             comparison: "EQUALS", # accepts EQUALS, PREFIX
+    #             comparison: "EQUALS", # accepts EQUALS, PREFIX, NOT_EQUALS, PREFIX_NOT_EQUALS
     #           },
     #         ],
     #         threat_intel_indicator_value: [
     #           {
     #             value: "NonEmptyString",
-    #             comparison: "EQUALS", # accepts EQUALS, PREFIX
+    #             comparison: "EQUALS", # accepts EQUALS, PREFIX, NOT_EQUALS, PREFIX_NOT_EQUALS
     #           },
     #         ],
     #         threat_intel_indicator_category: [
     #           {
     #             value: "NonEmptyString",
-    #             comparison: "EQUALS", # accepts EQUALS, PREFIX
+    #             comparison: "EQUALS", # accepts EQUALS, PREFIX, NOT_EQUALS, PREFIX_NOT_EQUALS
     #           },
     #         ],
     #         threat_intel_indicator_last_observed_at: [
@@ -3919,56 +7159,56 @@ module Aws::SecurityHub
     #         threat_intel_indicator_source: [
     #           {
     #             value: "NonEmptyString",
-    #             comparison: "EQUALS", # accepts EQUALS, PREFIX
+    #             comparison: "EQUALS", # accepts EQUALS, PREFIX, NOT_EQUALS, PREFIX_NOT_EQUALS
     #           },
     #         ],
     #         threat_intel_indicator_source_url: [
     #           {
     #             value: "NonEmptyString",
-    #             comparison: "EQUALS", # accepts EQUALS, PREFIX
+    #             comparison: "EQUALS", # accepts EQUALS, PREFIX, NOT_EQUALS, PREFIX_NOT_EQUALS
     #           },
     #         ],
     #         resource_type: [
     #           {
     #             value: "NonEmptyString",
-    #             comparison: "EQUALS", # accepts EQUALS, PREFIX
+    #             comparison: "EQUALS", # accepts EQUALS, PREFIX, NOT_EQUALS, PREFIX_NOT_EQUALS
     #           },
     #         ],
     #         resource_id: [
     #           {
     #             value: "NonEmptyString",
-    #             comparison: "EQUALS", # accepts EQUALS, PREFIX
+    #             comparison: "EQUALS", # accepts EQUALS, PREFIX, NOT_EQUALS, PREFIX_NOT_EQUALS
     #           },
     #         ],
     #         resource_partition: [
     #           {
     #             value: "NonEmptyString",
-    #             comparison: "EQUALS", # accepts EQUALS, PREFIX
+    #             comparison: "EQUALS", # accepts EQUALS, PREFIX, NOT_EQUALS, PREFIX_NOT_EQUALS
     #           },
     #         ],
     #         resource_region: [
     #           {
     #             value: "NonEmptyString",
-    #             comparison: "EQUALS", # accepts EQUALS, PREFIX
+    #             comparison: "EQUALS", # accepts EQUALS, PREFIX, NOT_EQUALS, PREFIX_NOT_EQUALS
     #           },
     #         ],
     #         resource_tags: [
     #           {
     #             key: "NonEmptyString",
     #             value: "NonEmptyString",
-    #             comparison: "EQUALS", # accepts EQUALS
+    #             comparison: "EQUALS", # accepts EQUALS, NOT_EQUALS
     #           },
     #         ],
     #         resource_aws_ec2_instance_type: [
     #           {
     #             value: "NonEmptyString",
-    #             comparison: "EQUALS", # accepts EQUALS, PREFIX
+    #             comparison: "EQUALS", # accepts EQUALS, PREFIX, NOT_EQUALS, PREFIX_NOT_EQUALS
     #           },
     #         ],
     #         resource_aws_ec2_instance_image_id: [
     #           {
     #             value: "NonEmptyString",
-    #             comparison: "EQUALS", # accepts EQUALS, PREFIX
+    #             comparison: "EQUALS", # accepts EQUALS, PREFIX, NOT_EQUALS, PREFIX_NOT_EQUALS
     #           },
     #         ],
     #         resource_aws_ec2_instance_ip_v4_addresses: [
@@ -3984,25 +7224,25 @@ module Aws::SecurityHub
     #         resource_aws_ec2_instance_key_name: [
     #           {
     #             value: "NonEmptyString",
-    #             comparison: "EQUALS", # accepts EQUALS, PREFIX
+    #             comparison: "EQUALS", # accepts EQUALS, PREFIX, NOT_EQUALS, PREFIX_NOT_EQUALS
     #           },
     #         ],
     #         resource_aws_ec2_instance_iam_instance_profile_arn: [
     #           {
     #             value: "NonEmptyString",
-    #             comparison: "EQUALS", # accepts EQUALS, PREFIX
+    #             comparison: "EQUALS", # accepts EQUALS, PREFIX, NOT_EQUALS, PREFIX_NOT_EQUALS
     #           },
     #         ],
     #         resource_aws_ec2_instance_vpc_id: [
     #           {
     #             value: "NonEmptyString",
-    #             comparison: "EQUALS", # accepts EQUALS, PREFIX
+    #             comparison: "EQUALS", # accepts EQUALS, PREFIX, NOT_EQUALS, PREFIX_NOT_EQUALS
     #           },
     #         ],
     #         resource_aws_ec2_instance_subnet_id: [
     #           {
     #             value: "NonEmptyString",
-    #             comparison: "EQUALS", # accepts EQUALS, PREFIX
+    #             comparison: "EQUALS", # accepts EQUALS, PREFIX, NOT_EQUALS, PREFIX_NOT_EQUALS
     #           },
     #         ],
     #         resource_aws_ec2_instance_launched_at: [
@@ -4018,25 +7258,25 @@ module Aws::SecurityHub
     #         resource_aws_s3_bucket_owner_id: [
     #           {
     #             value: "NonEmptyString",
-    #             comparison: "EQUALS", # accepts EQUALS, PREFIX
+    #             comparison: "EQUALS", # accepts EQUALS, PREFIX, NOT_EQUALS, PREFIX_NOT_EQUALS
     #           },
     #         ],
     #         resource_aws_s3_bucket_owner_name: [
     #           {
     #             value: "NonEmptyString",
-    #             comparison: "EQUALS", # accepts EQUALS, PREFIX
+    #             comparison: "EQUALS", # accepts EQUALS, PREFIX, NOT_EQUALS, PREFIX_NOT_EQUALS
     #           },
     #         ],
     #         resource_aws_iam_access_key_user_name: [
     #           {
     #             value: "NonEmptyString",
-    #             comparison: "EQUALS", # accepts EQUALS, PREFIX
+    #             comparison: "EQUALS", # accepts EQUALS, PREFIX, NOT_EQUALS, PREFIX_NOT_EQUALS
     #           },
     #         ],
     #         resource_aws_iam_access_key_status: [
     #           {
     #             value: "NonEmptyString",
-    #             comparison: "EQUALS", # accepts EQUALS, PREFIX
+    #             comparison: "EQUALS", # accepts EQUALS, PREFIX, NOT_EQUALS, PREFIX_NOT_EQUALS
     #           },
     #         ],
     #         resource_aws_iam_access_key_created_at: [
@@ -4052,19 +7292,19 @@ module Aws::SecurityHub
     #         resource_container_name: [
     #           {
     #             value: "NonEmptyString",
-    #             comparison: "EQUALS", # accepts EQUALS, PREFIX
+    #             comparison: "EQUALS", # accepts EQUALS, PREFIX, NOT_EQUALS, PREFIX_NOT_EQUALS
     #           },
     #         ],
     #         resource_container_image_id: [
     #           {
     #             value: "NonEmptyString",
-    #             comparison: "EQUALS", # accepts EQUALS, PREFIX
+    #             comparison: "EQUALS", # accepts EQUALS, PREFIX, NOT_EQUALS, PREFIX_NOT_EQUALS
     #           },
     #         ],
     #         resource_container_image_name: [
     #           {
     #             value: "NonEmptyString",
-    #             comparison: "EQUALS", # accepts EQUALS, PREFIX
+    #             comparison: "EQUALS", # accepts EQUALS, PREFIX, NOT_EQUALS, PREFIX_NOT_EQUALS
     #           },
     #         ],
     #         resource_container_launched_at: [
@@ -4081,55 +7321,55 @@ module Aws::SecurityHub
     #           {
     #             key: "NonEmptyString",
     #             value: "NonEmptyString",
-    #             comparison: "EQUALS", # accepts EQUALS
+    #             comparison: "EQUALS", # accepts EQUALS, NOT_EQUALS
     #           },
     #         ],
     #         compliance_status: [
     #           {
     #             value: "NonEmptyString",
-    #             comparison: "EQUALS", # accepts EQUALS, PREFIX
+    #             comparison: "EQUALS", # accepts EQUALS, PREFIX, NOT_EQUALS, PREFIX_NOT_EQUALS
     #           },
     #         ],
     #         verification_state: [
     #           {
     #             value: "NonEmptyString",
-    #             comparison: "EQUALS", # accepts EQUALS, PREFIX
+    #             comparison: "EQUALS", # accepts EQUALS, PREFIX, NOT_EQUALS, PREFIX_NOT_EQUALS
     #           },
     #         ],
     #         workflow_state: [
     #           {
     #             value: "NonEmptyString",
-    #             comparison: "EQUALS", # accepts EQUALS, PREFIX
+    #             comparison: "EQUALS", # accepts EQUALS, PREFIX, NOT_EQUALS, PREFIX_NOT_EQUALS
     #           },
     #         ],
     #         workflow_status: [
     #           {
     #             value: "NonEmptyString",
-    #             comparison: "EQUALS", # accepts EQUALS, PREFIX
+    #             comparison: "EQUALS", # accepts EQUALS, PREFIX, NOT_EQUALS, PREFIX_NOT_EQUALS
     #           },
     #         ],
     #         record_state: [
     #           {
     #             value: "NonEmptyString",
-    #             comparison: "EQUALS", # accepts EQUALS, PREFIX
+    #             comparison: "EQUALS", # accepts EQUALS, PREFIX, NOT_EQUALS, PREFIX_NOT_EQUALS
     #           },
     #         ],
     #         related_findings_product_arn: [
     #           {
     #             value: "NonEmptyString",
-    #             comparison: "EQUALS", # accepts EQUALS, PREFIX
+    #             comparison: "EQUALS", # accepts EQUALS, PREFIX, NOT_EQUALS, PREFIX_NOT_EQUALS
     #           },
     #         ],
     #         related_findings_id: [
     #           {
     #             value: "NonEmptyString",
-    #             comparison: "EQUALS", # accepts EQUALS, PREFIX
+    #             comparison: "EQUALS", # accepts EQUALS, PREFIX, NOT_EQUALS, PREFIX_NOT_EQUALS
     #           },
     #         ],
     #         note_text: [
     #           {
     #             value: "NonEmptyString",
-    #             comparison: "EQUALS", # accepts EQUALS, PREFIX
+    #             comparison: "EQUALS", # accepts EQUALS, PREFIX, NOT_EQUALS, PREFIX_NOT_EQUALS
     #           },
     #         ],
     #         note_updated_at: [
@@ -4145,7 +7385,7 @@ module Aws::SecurityHub
     #         note_updated_by: [
     #           {
     #             value: "NonEmptyString",
-    #             comparison: "EQUALS", # accepts EQUALS, PREFIX
+    #             comparison: "EQUALS", # accepts EQUALS, PREFIX, NOT_EQUALS, PREFIX_NOT_EQUALS
     #           },
     #         ],
     #         keyword: [
@@ -5331,6 +8571,18 @@ module Aws::SecurityHub
     #                     dhcp_options_id: "NonEmptyString",
     #                     state: "NonEmptyString",
     #                   },
+    #                   aws_ec2_eip: {
+    #                     instance_id: "NonEmptyString",
+    #                     public_ip: "NonEmptyString",
+    #                     allocation_id: "NonEmptyString",
+    #                     association_id: "NonEmptyString",
+    #                     domain: "NonEmptyString",
+    #                     public_ipv_4_pool: "NonEmptyString",
+    #                     network_border_group: "NonEmptyString",
+    #                     network_interface_id: "NonEmptyString",
+    #                     network_interface_owner_id: "NonEmptyString",
+    #                     private_ip_address: "NonEmptyString",
+    #                   },
     #                   aws_elbv_2_load_balancer: {
     #                     availability_zones: [
     #                       {
@@ -5401,6 +8653,18 @@ module Aws::SecurityHub
     #                     server_side_encryption: "NonEmptyString",
     #                     ssekms_key_id: "NonEmptyString",
     #                   },
+    #                   aws_secrets_manager_secret: {
+    #                     rotation_rules: {
+    #                       automatically_after_days: 1,
+    #                     },
+    #                     rotation_occurred_within_frequency: false,
+    #                     kms_key_id: "NonEmptyString",
+    #                     rotation_enabled: false,
+    #                     rotation_lambda_arn: "NonEmptyString",
+    #                     deleted: false,
+    #                     name: "NonEmptyString",
+    #                     description: "NonEmptyString",
+    #                   },
     #                   aws_iam_access_key: {
     #                     user_name: "NonEmptyString",
     #                     status: "Active", # accepts Active, Inactive
@@ -5408,6 +8672,159 @@ module Aws::SecurityHub
     #                     principal_id: "NonEmptyString",
     #                     principal_type: "NonEmptyString",
     #                     principal_name: "NonEmptyString",
+    #                   },
+    #                   aws_iam_user: {
+    #                     attached_managed_policies: [
+    #                       {
+    #                         policy_name: "NonEmptyString",
+    #                         policy_arn: "NonEmptyString",
+    #                       },
+    #                     ],
+    #                     create_date: "NonEmptyString",
+    #                     group_list: ["NonEmptyString"],
+    #                     path: "NonEmptyString",
+    #                     permissions_boundary: {
+    #                       permissions_boundary_arn: "NonEmptyString",
+    #                       permissions_boundary_type: "NonEmptyString",
+    #                     },
+    #                     user_id: "NonEmptyString",
+    #                     user_name: "NonEmptyString",
+    #                     user_policy_list: [
+    #                       {
+    #                         policy_name: "NonEmptyString",
+    #                       },
+    #                     ],
+    #                   },
+    #                   aws_iam_policy: {
+    #                     attachment_count: 1,
+    #                     create_date: "NonEmptyString",
+    #                     default_version_id: "NonEmptyString",
+    #                     description: "NonEmptyString",
+    #                     is_attachable: false,
+    #                     path: "NonEmptyString",
+    #                     permissions_boundary_usage_count: 1,
+    #                     policy_id: "NonEmptyString",
+    #                     policy_name: "NonEmptyString",
+    #                     policy_version_list: [
+    #                       {
+    #                         version_id: "NonEmptyString",
+    #                         is_default_version: false,
+    #                         create_date: "NonEmptyString",
+    #                       },
+    #                     ],
+    #                     update_date: "NonEmptyString",
+    #                   },
+    #                   aws_dynamo_db_table: {
+    #                     attribute_definitions: [
+    #                       {
+    #                         attribute_name: "NonEmptyString",
+    #                         attribute_type: "NonEmptyString",
+    #                       },
+    #                     ],
+    #                     billing_mode_summary: {
+    #                       billing_mode: "NonEmptyString",
+    #                       last_update_to_pay_per_request_date_time: "NonEmptyString",
+    #                     },
+    #                     creation_date_time: "NonEmptyString",
+    #                     global_secondary_indexes: [
+    #                       {
+    #                         backfilling: false,
+    #                         index_arn: "NonEmptyString",
+    #                         index_name: "NonEmptyString",
+    #                         index_size_bytes: 1,
+    #                         index_status: "NonEmptyString",
+    #                         item_count: 1,
+    #                         key_schema: [
+    #                           {
+    #                             attribute_name: "NonEmptyString",
+    #                             key_type: "NonEmptyString",
+    #                           },
+    #                         ],
+    #                         projection: {
+    #                           non_key_attributes: ["NonEmptyString"],
+    #                           projection_type: "NonEmptyString",
+    #                         },
+    #                         provisioned_throughput: {
+    #                           last_decrease_date_time: "NonEmptyString",
+    #                           last_increase_date_time: "NonEmptyString",
+    #                           number_of_decreases_today: 1,
+    #                           read_capacity_units: 1,
+    #                           write_capacity_units: 1,
+    #                         },
+    #                       },
+    #                     ],
+    #                     global_table_version: "NonEmptyString",
+    #                     item_count: 1,
+    #                     key_schema: [
+    #                       {
+    #                         attribute_name: "NonEmptyString",
+    #                         key_type: "NonEmptyString",
+    #                       },
+    #                     ],
+    #                     latest_stream_arn: "NonEmptyString",
+    #                     latest_stream_label: "NonEmptyString",
+    #                     local_secondary_indexes: [
+    #                       {
+    #                         index_arn: "NonEmptyString",
+    #                         index_name: "NonEmptyString",
+    #                         key_schema: [
+    #                           {
+    #                             attribute_name: "NonEmptyString",
+    #                             key_type: "NonEmptyString",
+    #                           },
+    #                         ],
+    #                         projection: {
+    #                           non_key_attributes: ["NonEmptyString"],
+    #                           projection_type: "NonEmptyString",
+    #                         },
+    #                       },
+    #                     ],
+    #                     provisioned_throughput: {
+    #                       last_decrease_date_time: "NonEmptyString",
+    #                       last_increase_date_time: "NonEmptyString",
+    #                       number_of_decreases_today: 1,
+    #                       read_capacity_units: 1,
+    #                       write_capacity_units: 1,
+    #                     },
+    #                     replicas: [
+    #                       {
+    #                         global_secondary_indexes: [
+    #                           {
+    #                             index_name: "NonEmptyString",
+    #                             provisioned_throughput_override: {
+    #                               read_capacity_units: 1,
+    #                             },
+    #                           },
+    #                         ],
+    #                         kms_master_key_id: "NonEmptyString",
+    #                         provisioned_throughput_override: {
+    #                           read_capacity_units: 1,
+    #                         },
+    #                         region_name: "NonEmptyString",
+    #                         replica_status: "NonEmptyString",
+    #                         replica_status_description: "NonEmptyString",
+    #                       },
+    #                     ],
+    #                     restore_summary: {
+    #                       source_backup_arn: "NonEmptyString",
+    #                       source_table_arn: "NonEmptyString",
+    #                       restore_date_time: "NonEmptyString",
+    #                       restore_in_progress: false,
+    #                     },
+    #                     sse_description: {
+    #                       inaccessible_encryption_date_time: "NonEmptyString",
+    #                       status: "NonEmptyString",
+    #                       sse_type: "NonEmptyString",
+    #                       kms_master_key_arn: "NonEmptyString",
+    #                     },
+    #                     stream_specification: {
+    #                       stream_enabled: false,
+    #                       stream_view_type: "NonEmptyString",
+    #                     },
+    #                     table_id: "NonEmptyString",
+    #                     table_name: "NonEmptyString",
+    #                     table_size_bytes: 1,
+    #                     table_status: "NonEmptyString",
     #                   },
     #                   aws_iam_role: {
     #                     assume_role_policy_document: "AwsIamRoleAssumeRolePolicyDocument",
@@ -5424,6 +8841,7 @@ module Aws::SecurityHub
     #                     key_manager: "NonEmptyString",
     #                     key_state: "NonEmptyString",
     #                     origin: "NonEmptyString",
+    #                     description: "NonEmptyString",
     #                   },
     #                   aws_lambda_function: {
     #                     code: {
@@ -5511,6 +8929,116 @@ module Aws::SecurityHub
     #                         status: "NonEmptyString",
     #                       },
     #                     ],
+    #                     multi_az: false,
+    #                     enhanced_monitoring_resource_arn: "NonEmptyString",
+    #                     db_instance_status: "NonEmptyString",
+    #                     master_username: "NonEmptyString",
+    #                     allocated_storage: 1,
+    #                     preferred_backup_window: "NonEmptyString",
+    #                     backup_retention_period: 1,
+    #                     db_security_groups: ["NonEmptyString"],
+    #                     db_parameter_groups: [
+    #                       {
+    #                         db_parameter_group_name: "NonEmptyString",
+    #                         parameter_apply_status: "NonEmptyString",
+    #                       },
+    #                     ],
+    #                     availability_zone: "NonEmptyString",
+    #                     db_subnet_group: {
+    #                       db_subnet_group_name: "NonEmptyString",
+    #                       db_subnet_group_description: "NonEmptyString",
+    #                       vpc_id: "NonEmptyString",
+    #                       subnet_group_status: "NonEmptyString",
+    #                       subnets: [
+    #                         {
+    #                           subnet_identifier: "NonEmptyString",
+    #                           subnet_availability_zone: {
+    #                             name: "NonEmptyString",
+    #                           },
+    #                           subnet_status: "NonEmptyString",
+    #                         },
+    #                       ],
+    #                       db_subnet_group_arn: "NonEmptyString",
+    #                     },
+    #                     preferred_maintenance_window: "NonEmptyString",
+    #                     pending_modified_values: {
+    #                       db_instance_class: "NonEmptyString",
+    #                       allocated_storage: 1,
+    #                       master_user_password: "NonEmptyString",
+    #                       port: 1,
+    #                       backup_retention_period: 1,
+    #                       multi_az: false,
+    #                       engine_version: "NonEmptyString",
+    #                       license_model: "NonEmptyString",
+    #                       iops: 1,
+    #                       db_instance_identifier: "NonEmptyString",
+    #                       storage_type: "NonEmptyString",
+    #                       ca_certificate_identifier: "NonEmptyString",
+    #                       db_subnet_group_name: "NonEmptyString",
+    #                       pending_cloud_watch_logs_exports: {
+    #                         log_types_to_enable: ["NonEmptyString"],
+    #                         log_types_to_disable: ["NonEmptyString"],
+    #                       },
+    #                       processor_features: [
+    #                         {
+    #                           name: "NonEmptyString",
+    #                           value: "NonEmptyString",
+    #                         },
+    #                       ],
+    #                     },
+    #                     latest_restorable_time: "NonEmptyString",
+    #                     auto_minor_version_upgrade: false,
+    #                     read_replica_source_db_instance_identifier: "NonEmptyString",
+    #                     read_replica_db_instance_identifiers: ["NonEmptyString"],
+    #                     read_replica_db_cluster_identifiers: ["NonEmptyString"],
+    #                     license_model: "NonEmptyString",
+    #                     iops: 1,
+    #                     option_group_memberships: [
+    #                       {
+    #                         option_group_name: "NonEmptyString",
+    #                         status: "NonEmptyString",
+    #                       },
+    #                     ],
+    #                     character_set_name: "NonEmptyString",
+    #                     secondary_availability_zone: "NonEmptyString",
+    #                     status_infos: [
+    #                       {
+    #                         status_type: "NonEmptyString",
+    #                         normal: false,
+    #                         status: "NonEmptyString",
+    #                         message: "NonEmptyString",
+    #                       },
+    #                     ],
+    #                     storage_type: "NonEmptyString",
+    #                     domain_memberships: [
+    #                       {
+    #                         domain: "NonEmptyString",
+    #                         status: "NonEmptyString",
+    #                         fqdn: "NonEmptyString",
+    #                         iam_role_name: "NonEmptyString",
+    #                       },
+    #                     ],
+    #                     copy_tags_to_snapshot: false,
+    #                     monitoring_interval: 1,
+    #                     monitoring_role_arn: "NonEmptyString",
+    #                     promotion_tier: 1,
+    #                     timezone: "NonEmptyString",
+    #                     performance_insights_enabled: false,
+    #                     performance_insights_kms_key_id: "NonEmptyString",
+    #                     performance_insights_retention_period: 1,
+    #                     enabled_cloud_watch_logs_exports: ["NonEmptyString"],
+    #                     processor_features: [
+    #                       {
+    #                         name: "NonEmptyString",
+    #                         value: "NonEmptyString",
+    #                       },
+    #                     ],
+    #                     listener_endpoint: {
+    #                       address: "NonEmptyString",
+    #                       port: 1,
+    #                       hosted_zone_id: "NonEmptyString",
+    #                     },
+    #                     max_allocated_storage: 1,
     #                   },
     #                   aws_sns_topic: {
     #                     kms_master_key_id: "NonEmptyString",
@@ -5551,6 +9079,128 @@ module Aws::SecurityHub
     #                       },
     #                     ],
     #                     web_acl_id: "NonEmptyString",
+    #                   },
+    #                   aws_rds_db_snapshot: {
+    #                     db_snapshot_identifier: "NonEmptyString",
+    #                     db_instance_identifier: "NonEmptyString",
+    #                     snapshot_create_time: "NonEmptyString",
+    #                     engine: "NonEmptyString",
+    #                     allocated_storage: 1,
+    #                     status: "NonEmptyString",
+    #                     port: 1,
+    #                     availability_zone: "NonEmptyString",
+    #                     vpc_id: "NonEmptyString",
+    #                     instance_create_time: "NonEmptyString",
+    #                     master_username: "NonEmptyString",
+    #                     engine_version: "NonEmptyString",
+    #                     license_model: "NonEmptyString",
+    #                     snapshot_type: "NonEmptyString",
+    #                     iops: 1,
+    #                     option_group_name: "NonEmptyString",
+    #                     percent_progress: 1,
+    #                     source_region: "NonEmptyString",
+    #                     source_db_snapshot_identifier: "NonEmptyString",
+    #                     storage_type: "NonEmptyString",
+    #                     tde_credential_arn: "NonEmptyString",
+    #                     encrypted: false,
+    #                     kms_key_id: "NonEmptyString",
+    #                     timezone: "NonEmptyString",
+    #                     iam_database_authentication_enabled: false,
+    #                     processor_features: [
+    #                       {
+    #                         name: "NonEmptyString",
+    #                         value: "NonEmptyString",
+    #                       },
+    #                     ],
+    #                     dbi_resource_id: "NonEmptyString",
+    #                   },
+    #                   aws_rds_db_cluster_snapshot: {
+    #                     availability_zones: ["NonEmptyString"],
+    #                     snapshot_create_time: "NonEmptyString",
+    #                     engine: "NonEmptyString",
+    #                     allocated_storage: 1,
+    #                     status: "NonEmptyString",
+    #                     port: 1,
+    #                     vpc_id: "NonEmptyString",
+    #                     cluster_create_time: "NonEmptyString",
+    #                     master_username: "NonEmptyString",
+    #                     engine_version: "NonEmptyString",
+    #                     license_model: "NonEmptyString",
+    #                     snapshot_type: "NonEmptyString",
+    #                     percent_progress: 1,
+    #                     storage_encrypted: false,
+    #                     kms_key_id: "NonEmptyString",
+    #                     db_cluster_identifier: "NonEmptyString",
+    #                     db_cluster_snapshot_identifier: "NonEmptyString",
+    #                     iam_database_authentication_enabled: false,
+    #                   },
+    #                   aws_rds_db_cluster: {
+    #                     allocated_storage: 1,
+    #                     availability_zones: ["NonEmptyString"],
+    #                     backup_retention_period: 1,
+    #                     database_name: "NonEmptyString",
+    #                     status: "NonEmptyString",
+    #                     endpoint: "NonEmptyString",
+    #                     reader_endpoint: "NonEmptyString",
+    #                     custom_endpoints: ["NonEmptyString"],
+    #                     multi_az: false,
+    #                     engine: "NonEmptyString",
+    #                     engine_version: "NonEmptyString",
+    #                     port: 1,
+    #                     master_username: "NonEmptyString",
+    #                     preferred_backup_window: "NonEmptyString",
+    #                     preferred_maintenance_window: "NonEmptyString",
+    #                     read_replica_identifiers: ["NonEmptyString"],
+    #                     vpc_security_groups: [
+    #                       {
+    #                         vpc_security_group_id: "NonEmptyString",
+    #                         status: "NonEmptyString",
+    #                       },
+    #                     ],
+    #                     hosted_zone_id: "NonEmptyString",
+    #                     storage_encrypted: false,
+    #                     kms_key_id: "NonEmptyString",
+    #                     db_cluster_resource_id: "NonEmptyString",
+    #                     associated_roles: [
+    #                       {
+    #                         role_arn: "NonEmptyString",
+    #                         status: "NonEmptyString",
+    #                       },
+    #                     ],
+    #                     cluster_create_time: "NonEmptyString",
+    #                     enabled_cloud_watch_logs_exports: ["NonEmptyString"],
+    #                     engine_mode: "NonEmptyString",
+    #                     deletion_protection: false,
+    #                     http_endpoint_enabled: false,
+    #                     activity_stream_status: "NonEmptyString",
+    #                     copy_tags_to_snapshot: false,
+    #                     cross_account_clone: false,
+    #                     domain_memberships: [
+    #                       {
+    #                         domain: "NonEmptyString",
+    #                         status: "NonEmptyString",
+    #                         fqdn: "NonEmptyString",
+    #                         iam_role_name: "NonEmptyString",
+    #                       },
+    #                     ],
+    #                     db_cluster_parameter_group: "NonEmptyString",
+    #                     db_subnet_group: "NonEmptyString",
+    #                     db_cluster_option_group_memberships: [
+    #                       {
+    #                         db_cluster_option_group_name: "NonEmptyString",
+    #                         status: "NonEmptyString",
+    #                       },
+    #                     ],
+    #                     db_cluster_identifier: "NonEmptyString",
+    #                     db_cluster_members: [
+    #                       {
+    #                         is_cluster_writer: false,
+    #                         promotion_tier: 1,
+    #                         db_instance_identifier: "NonEmptyString",
+    #                         db_cluster_parameter_group_status: "NonEmptyString",
+    #                       },
+    #                     ],
+    #                     iam_database_authentication_enabled: false,
     #                   },
     #                   container: {
     #                     name: "NonEmptyString",
@@ -5966,7 +9616,15 @@ module Aws::SecurityHub
     #   @return [String]
     #
     # @!attribute [rw] launched_at
-    #   The date and time when the container started.
+    #   Indicates when the container started.
+    #
+    #   Uses the `date-time` format specified in [RFC 3339 section 5.6,
+    #   Internet Date/Time Format][1]. The value cannot contain spaces. For
+    #   example, `2020-03-22T13:22:13.933Z`.
+    #
+    #
+    #
+    #   [1]: https://tools.ietf.org/html/rfc3339#section-5.6
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/ContainerDetails AWS API Documentation
@@ -6032,31 +9690,31 @@ module Aws::SecurityHub
     #           product_arn: [
     #             {
     #               value: "NonEmptyString",
-    #               comparison: "EQUALS", # accepts EQUALS, PREFIX
+    #               comparison: "EQUALS", # accepts EQUALS, PREFIX, NOT_EQUALS, PREFIX_NOT_EQUALS
     #             },
     #           ],
     #           aws_account_id: [
     #             {
     #               value: "NonEmptyString",
-    #               comparison: "EQUALS", # accepts EQUALS, PREFIX
+    #               comparison: "EQUALS", # accepts EQUALS, PREFIX, NOT_EQUALS, PREFIX_NOT_EQUALS
     #             },
     #           ],
     #           id: [
     #             {
     #               value: "NonEmptyString",
-    #               comparison: "EQUALS", # accepts EQUALS, PREFIX
+    #               comparison: "EQUALS", # accepts EQUALS, PREFIX, NOT_EQUALS, PREFIX_NOT_EQUALS
     #             },
     #           ],
     #           generator_id: [
     #             {
     #               value: "NonEmptyString",
-    #               comparison: "EQUALS", # accepts EQUALS, PREFIX
+    #               comparison: "EQUALS", # accepts EQUALS, PREFIX, NOT_EQUALS, PREFIX_NOT_EQUALS
     #             },
     #           ],
     #           type: [
     #             {
     #               value: "NonEmptyString",
-    #               comparison: "EQUALS", # accepts EQUALS, PREFIX
+    #               comparison: "EQUALS", # accepts EQUALS, PREFIX, NOT_EQUALS, PREFIX_NOT_EQUALS
     #             },
     #           ],
     #           first_observed_at: [
@@ -6116,7 +9774,7 @@ module Aws::SecurityHub
     #           severity_label: [
     #             {
     #               value: "NonEmptyString",
-    #               comparison: "EQUALS", # accepts EQUALS, PREFIX
+    #               comparison: "EQUALS", # accepts EQUALS, PREFIX, NOT_EQUALS, PREFIX_NOT_EQUALS
     #             },
     #           ],
     #           confidence: [
@@ -6136,87 +9794,87 @@ module Aws::SecurityHub
     #           title: [
     #             {
     #               value: "NonEmptyString",
-    #               comparison: "EQUALS", # accepts EQUALS, PREFIX
+    #               comparison: "EQUALS", # accepts EQUALS, PREFIX, NOT_EQUALS, PREFIX_NOT_EQUALS
     #             },
     #           ],
     #           description: [
     #             {
     #               value: "NonEmptyString",
-    #               comparison: "EQUALS", # accepts EQUALS, PREFIX
+    #               comparison: "EQUALS", # accepts EQUALS, PREFIX, NOT_EQUALS, PREFIX_NOT_EQUALS
     #             },
     #           ],
     #           recommendation_text: [
     #             {
     #               value: "NonEmptyString",
-    #               comparison: "EQUALS", # accepts EQUALS, PREFIX
+    #               comparison: "EQUALS", # accepts EQUALS, PREFIX, NOT_EQUALS, PREFIX_NOT_EQUALS
     #             },
     #           ],
     #           source_url: [
     #             {
     #               value: "NonEmptyString",
-    #               comparison: "EQUALS", # accepts EQUALS, PREFIX
+    #               comparison: "EQUALS", # accepts EQUALS, PREFIX, NOT_EQUALS, PREFIX_NOT_EQUALS
     #             },
     #           ],
     #           product_fields: [
     #             {
     #               key: "NonEmptyString",
     #               value: "NonEmptyString",
-    #               comparison: "EQUALS", # accepts EQUALS
+    #               comparison: "EQUALS", # accepts EQUALS, NOT_EQUALS
     #             },
     #           ],
     #           product_name: [
     #             {
     #               value: "NonEmptyString",
-    #               comparison: "EQUALS", # accepts EQUALS, PREFIX
+    #               comparison: "EQUALS", # accepts EQUALS, PREFIX, NOT_EQUALS, PREFIX_NOT_EQUALS
     #             },
     #           ],
     #           company_name: [
     #             {
     #               value: "NonEmptyString",
-    #               comparison: "EQUALS", # accepts EQUALS, PREFIX
+    #               comparison: "EQUALS", # accepts EQUALS, PREFIX, NOT_EQUALS, PREFIX_NOT_EQUALS
     #             },
     #           ],
     #           user_defined_fields: [
     #             {
     #               key: "NonEmptyString",
     #               value: "NonEmptyString",
-    #               comparison: "EQUALS", # accepts EQUALS
+    #               comparison: "EQUALS", # accepts EQUALS, NOT_EQUALS
     #             },
     #           ],
     #           malware_name: [
     #             {
     #               value: "NonEmptyString",
-    #               comparison: "EQUALS", # accepts EQUALS, PREFIX
+    #               comparison: "EQUALS", # accepts EQUALS, PREFIX, NOT_EQUALS, PREFIX_NOT_EQUALS
     #             },
     #           ],
     #           malware_type: [
     #             {
     #               value: "NonEmptyString",
-    #               comparison: "EQUALS", # accepts EQUALS, PREFIX
+    #               comparison: "EQUALS", # accepts EQUALS, PREFIX, NOT_EQUALS, PREFIX_NOT_EQUALS
     #             },
     #           ],
     #           malware_path: [
     #             {
     #               value: "NonEmptyString",
-    #               comparison: "EQUALS", # accepts EQUALS, PREFIX
+    #               comparison: "EQUALS", # accepts EQUALS, PREFIX, NOT_EQUALS, PREFIX_NOT_EQUALS
     #             },
     #           ],
     #           malware_state: [
     #             {
     #               value: "NonEmptyString",
-    #               comparison: "EQUALS", # accepts EQUALS, PREFIX
+    #               comparison: "EQUALS", # accepts EQUALS, PREFIX, NOT_EQUALS, PREFIX_NOT_EQUALS
     #             },
     #           ],
     #           network_direction: [
     #             {
     #               value: "NonEmptyString",
-    #               comparison: "EQUALS", # accepts EQUALS, PREFIX
+    #               comparison: "EQUALS", # accepts EQUALS, PREFIX, NOT_EQUALS, PREFIX_NOT_EQUALS
     #             },
     #           ],
     #           network_protocol: [
     #             {
     #               value: "NonEmptyString",
-    #               comparison: "EQUALS", # accepts EQUALS, PREFIX
+    #               comparison: "EQUALS", # accepts EQUALS, PREFIX, NOT_EQUALS, PREFIX_NOT_EQUALS
     #             },
     #           ],
     #           network_source_ip_v4: [
@@ -6239,13 +9897,13 @@ module Aws::SecurityHub
     #           network_source_domain: [
     #             {
     #               value: "NonEmptyString",
-    #               comparison: "EQUALS", # accepts EQUALS, PREFIX
+    #               comparison: "EQUALS", # accepts EQUALS, PREFIX, NOT_EQUALS, PREFIX_NOT_EQUALS
     #             },
     #           ],
     #           network_source_mac: [
     #             {
     #               value: "NonEmptyString",
-    #               comparison: "EQUALS", # accepts EQUALS, PREFIX
+    #               comparison: "EQUALS", # accepts EQUALS, PREFIX, NOT_EQUALS, PREFIX_NOT_EQUALS
     #             },
     #           ],
     #           network_destination_ip_v4: [
@@ -6268,19 +9926,19 @@ module Aws::SecurityHub
     #           network_destination_domain: [
     #             {
     #               value: "NonEmptyString",
-    #               comparison: "EQUALS", # accepts EQUALS, PREFIX
+    #               comparison: "EQUALS", # accepts EQUALS, PREFIX, NOT_EQUALS, PREFIX_NOT_EQUALS
     #             },
     #           ],
     #           process_name: [
     #             {
     #               value: "NonEmptyString",
-    #               comparison: "EQUALS", # accepts EQUALS, PREFIX
+    #               comparison: "EQUALS", # accepts EQUALS, PREFIX, NOT_EQUALS, PREFIX_NOT_EQUALS
     #             },
     #           ],
     #           process_path: [
     #             {
     #               value: "NonEmptyString",
-    #               comparison: "EQUALS", # accepts EQUALS, PREFIX
+    #               comparison: "EQUALS", # accepts EQUALS, PREFIX, NOT_EQUALS, PREFIX_NOT_EQUALS
     #             },
     #           ],
     #           process_pid: [
@@ -6320,19 +9978,19 @@ module Aws::SecurityHub
     #           threat_intel_indicator_type: [
     #             {
     #               value: "NonEmptyString",
-    #               comparison: "EQUALS", # accepts EQUALS, PREFIX
+    #               comparison: "EQUALS", # accepts EQUALS, PREFIX, NOT_EQUALS, PREFIX_NOT_EQUALS
     #             },
     #           ],
     #           threat_intel_indicator_value: [
     #             {
     #               value: "NonEmptyString",
-    #               comparison: "EQUALS", # accepts EQUALS, PREFIX
+    #               comparison: "EQUALS", # accepts EQUALS, PREFIX, NOT_EQUALS, PREFIX_NOT_EQUALS
     #             },
     #           ],
     #           threat_intel_indicator_category: [
     #             {
     #               value: "NonEmptyString",
-    #               comparison: "EQUALS", # accepts EQUALS, PREFIX
+    #               comparison: "EQUALS", # accepts EQUALS, PREFIX, NOT_EQUALS, PREFIX_NOT_EQUALS
     #             },
     #           ],
     #           threat_intel_indicator_last_observed_at: [
@@ -6348,56 +10006,56 @@ module Aws::SecurityHub
     #           threat_intel_indicator_source: [
     #             {
     #               value: "NonEmptyString",
-    #               comparison: "EQUALS", # accepts EQUALS, PREFIX
+    #               comparison: "EQUALS", # accepts EQUALS, PREFIX, NOT_EQUALS, PREFIX_NOT_EQUALS
     #             },
     #           ],
     #           threat_intel_indicator_source_url: [
     #             {
     #               value: "NonEmptyString",
-    #               comparison: "EQUALS", # accepts EQUALS, PREFIX
+    #               comparison: "EQUALS", # accepts EQUALS, PREFIX, NOT_EQUALS, PREFIX_NOT_EQUALS
     #             },
     #           ],
     #           resource_type: [
     #             {
     #               value: "NonEmptyString",
-    #               comparison: "EQUALS", # accepts EQUALS, PREFIX
+    #               comparison: "EQUALS", # accepts EQUALS, PREFIX, NOT_EQUALS, PREFIX_NOT_EQUALS
     #             },
     #           ],
     #           resource_id: [
     #             {
     #               value: "NonEmptyString",
-    #               comparison: "EQUALS", # accepts EQUALS, PREFIX
+    #               comparison: "EQUALS", # accepts EQUALS, PREFIX, NOT_EQUALS, PREFIX_NOT_EQUALS
     #             },
     #           ],
     #           resource_partition: [
     #             {
     #               value: "NonEmptyString",
-    #               comparison: "EQUALS", # accepts EQUALS, PREFIX
+    #               comparison: "EQUALS", # accepts EQUALS, PREFIX, NOT_EQUALS, PREFIX_NOT_EQUALS
     #             },
     #           ],
     #           resource_region: [
     #             {
     #               value: "NonEmptyString",
-    #               comparison: "EQUALS", # accepts EQUALS, PREFIX
+    #               comparison: "EQUALS", # accepts EQUALS, PREFIX, NOT_EQUALS, PREFIX_NOT_EQUALS
     #             },
     #           ],
     #           resource_tags: [
     #             {
     #               key: "NonEmptyString",
     #               value: "NonEmptyString",
-    #               comparison: "EQUALS", # accepts EQUALS
+    #               comparison: "EQUALS", # accepts EQUALS, NOT_EQUALS
     #             },
     #           ],
     #           resource_aws_ec2_instance_type: [
     #             {
     #               value: "NonEmptyString",
-    #               comparison: "EQUALS", # accepts EQUALS, PREFIX
+    #               comparison: "EQUALS", # accepts EQUALS, PREFIX, NOT_EQUALS, PREFIX_NOT_EQUALS
     #             },
     #           ],
     #           resource_aws_ec2_instance_image_id: [
     #             {
     #               value: "NonEmptyString",
-    #               comparison: "EQUALS", # accepts EQUALS, PREFIX
+    #               comparison: "EQUALS", # accepts EQUALS, PREFIX, NOT_EQUALS, PREFIX_NOT_EQUALS
     #             },
     #           ],
     #           resource_aws_ec2_instance_ip_v4_addresses: [
@@ -6413,25 +10071,25 @@ module Aws::SecurityHub
     #           resource_aws_ec2_instance_key_name: [
     #             {
     #               value: "NonEmptyString",
-    #               comparison: "EQUALS", # accepts EQUALS, PREFIX
+    #               comparison: "EQUALS", # accepts EQUALS, PREFIX, NOT_EQUALS, PREFIX_NOT_EQUALS
     #             },
     #           ],
     #           resource_aws_ec2_instance_iam_instance_profile_arn: [
     #             {
     #               value: "NonEmptyString",
-    #               comparison: "EQUALS", # accepts EQUALS, PREFIX
+    #               comparison: "EQUALS", # accepts EQUALS, PREFIX, NOT_EQUALS, PREFIX_NOT_EQUALS
     #             },
     #           ],
     #           resource_aws_ec2_instance_vpc_id: [
     #             {
     #               value: "NonEmptyString",
-    #               comparison: "EQUALS", # accepts EQUALS, PREFIX
+    #               comparison: "EQUALS", # accepts EQUALS, PREFIX, NOT_EQUALS, PREFIX_NOT_EQUALS
     #             },
     #           ],
     #           resource_aws_ec2_instance_subnet_id: [
     #             {
     #               value: "NonEmptyString",
-    #               comparison: "EQUALS", # accepts EQUALS, PREFIX
+    #               comparison: "EQUALS", # accepts EQUALS, PREFIX, NOT_EQUALS, PREFIX_NOT_EQUALS
     #             },
     #           ],
     #           resource_aws_ec2_instance_launched_at: [
@@ -6447,25 +10105,25 @@ module Aws::SecurityHub
     #           resource_aws_s3_bucket_owner_id: [
     #             {
     #               value: "NonEmptyString",
-    #               comparison: "EQUALS", # accepts EQUALS, PREFIX
+    #               comparison: "EQUALS", # accepts EQUALS, PREFIX, NOT_EQUALS, PREFIX_NOT_EQUALS
     #             },
     #           ],
     #           resource_aws_s3_bucket_owner_name: [
     #             {
     #               value: "NonEmptyString",
-    #               comparison: "EQUALS", # accepts EQUALS, PREFIX
+    #               comparison: "EQUALS", # accepts EQUALS, PREFIX, NOT_EQUALS, PREFIX_NOT_EQUALS
     #             },
     #           ],
     #           resource_aws_iam_access_key_user_name: [
     #             {
     #               value: "NonEmptyString",
-    #               comparison: "EQUALS", # accepts EQUALS, PREFIX
+    #               comparison: "EQUALS", # accepts EQUALS, PREFIX, NOT_EQUALS, PREFIX_NOT_EQUALS
     #             },
     #           ],
     #           resource_aws_iam_access_key_status: [
     #             {
     #               value: "NonEmptyString",
-    #               comparison: "EQUALS", # accepts EQUALS, PREFIX
+    #               comparison: "EQUALS", # accepts EQUALS, PREFIX, NOT_EQUALS, PREFIX_NOT_EQUALS
     #             },
     #           ],
     #           resource_aws_iam_access_key_created_at: [
@@ -6481,19 +10139,19 @@ module Aws::SecurityHub
     #           resource_container_name: [
     #             {
     #               value: "NonEmptyString",
-    #               comparison: "EQUALS", # accepts EQUALS, PREFIX
+    #               comparison: "EQUALS", # accepts EQUALS, PREFIX, NOT_EQUALS, PREFIX_NOT_EQUALS
     #             },
     #           ],
     #           resource_container_image_id: [
     #             {
     #               value: "NonEmptyString",
-    #               comparison: "EQUALS", # accepts EQUALS, PREFIX
+    #               comparison: "EQUALS", # accepts EQUALS, PREFIX, NOT_EQUALS, PREFIX_NOT_EQUALS
     #             },
     #           ],
     #           resource_container_image_name: [
     #             {
     #               value: "NonEmptyString",
-    #               comparison: "EQUALS", # accepts EQUALS, PREFIX
+    #               comparison: "EQUALS", # accepts EQUALS, PREFIX, NOT_EQUALS, PREFIX_NOT_EQUALS
     #             },
     #           ],
     #           resource_container_launched_at: [
@@ -6510,55 +10168,55 @@ module Aws::SecurityHub
     #             {
     #               key: "NonEmptyString",
     #               value: "NonEmptyString",
-    #               comparison: "EQUALS", # accepts EQUALS
+    #               comparison: "EQUALS", # accepts EQUALS, NOT_EQUALS
     #             },
     #           ],
     #           compliance_status: [
     #             {
     #               value: "NonEmptyString",
-    #               comparison: "EQUALS", # accepts EQUALS, PREFIX
+    #               comparison: "EQUALS", # accepts EQUALS, PREFIX, NOT_EQUALS, PREFIX_NOT_EQUALS
     #             },
     #           ],
     #           verification_state: [
     #             {
     #               value: "NonEmptyString",
-    #               comparison: "EQUALS", # accepts EQUALS, PREFIX
+    #               comparison: "EQUALS", # accepts EQUALS, PREFIX, NOT_EQUALS, PREFIX_NOT_EQUALS
     #             },
     #           ],
     #           workflow_state: [
     #             {
     #               value: "NonEmptyString",
-    #               comparison: "EQUALS", # accepts EQUALS, PREFIX
+    #               comparison: "EQUALS", # accepts EQUALS, PREFIX, NOT_EQUALS, PREFIX_NOT_EQUALS
     #             },
     #           ],
     #           workflow_status: [
     #             {
     #               value: "NonEmptyString",
-    #               comparison: "EQUALS", # accepts EQUALS, PREFIX
+    #               comparison: "EQUALS", # accepts EQUALS, PREFIX, NOT_EQUALS, PREFIX_NOT_EQUALS
     #             },
     #           ],
     #           record_state: [
     #             {
     #               value: "NonEmptyString",
-    #               comparison: "EQUALS", # accepts EQUALS, PREFIX
+    #               comparison: "EQUALS", # accepts EQUALS, PREFIX, NOT_EQUALS, PREFIX_NOT_EQUALS
     #             },
     #           ],
     #           related_findings_product_arn: [
     #             {
     #               value: "NonEmptyString",
-    #               comparison: "EQUALS", # accepts EQUALS, PREFIX
+    #               comparison: "EQUALS", # accepts EQUALS, PREFIX, NOT_EQUALS, PREFIX_NOT_EQUALS
     #             },
     #           ],
     #           related_findings_id: [
     #             {
     #               value: "NonEmptyString",
-    #               comparison: "EQUALS", # accepts EQUALS, PREFIX
+    #               comparison: "EQUALS", # accepts EQUALS, PREFIX, NOT_EQUALS, PREFIX_NOT_EQUALS
     #             },
     #           ],
     #           note_text: [
     #             {
     #               value: "NonEmptyString",
-    #               comparison: "EQUALS", # accepts EQUALS, PREFIX
+    #               comparison: "EQUALS", # accepts EQUALS, PREFIX, NOT_EQUALS, PREFIX_NOT_EQUALS
     #             },
     #           ],
     #           note_updated_at: [
@@ -6574,7 +10232,7 @@ module Aws::SecurityHub
     #           note_updated_by: [
     #             {
     #               value: "NonEmptyString",
-    #               comparison: "EQUALS", # accepts EQUALS, PREFIX
+    #               comparison: "EQUALS", # accepts EQUALS, PREFIX, NOT_EQUALS, PREFIX_NOT_EQUALS
     #             },
     #           ],
     #           keyword: [
@@ -7373,31 +11031,31 @@ module Aws::SecurityHub
     #           product_arn: [
     #             {
     #               value: "NonEmptyString",
-    #               comparison: "EQUALS", # accepts EQUALS, PREFIX
+    #               comparison: "EQUALS", # accepts EQUALS, PREFIX, NOT_EQUALS, PREFIX_NOT_EQUALS
     #             },
     #           ],
     #           aws_account_id: [
     #             {
     #               value: "NonEmptyString",
-    #               comparison: "EQUALS", # accepts EQUALS, PREFIX
+    #               comparison: "EQUALS", # accepts EQUALS, PREFIX, NOT_EQUALS, PREFIX_NOT_EQUALS
     #             },
     #           ],
     #           id: [
     #             {
     #               value: "NonEmptyString",
-    #               comparison: "EQUALS", # accepts EQUALS, PREFIX
+    #               comparison: "EQUALS", # accepts EQUALS, PREFIX, NOT_EQUALS, PREFIX_NOT_EQUALS
     #             },
     #           ],
     #           generator_id: [
     #             {
     #               value: "NonEmptyString",
-    #               comparison: "EQUALS", # accepts EQUALS, PREFIX
+    #               comparison: "EQUALS", # accepts EQUALS, PREFIX, NOT_EQUALS, PREFIX_NOT_EQUALS
     #             },
     #           ],
     #           type: [
     #             {
     #               value: "NonEmptyString",
-    #               comparison: "EQUALS", # accepts EQUALS, PREFIX
+    #               comparison: "EQUALS", # accepts EQUALS, PREFIX, NOT_EQUALS, PREFIX_NOT_EQUALS
     #             },
     #           ],
     #           first_observed_at: [
@@ -7457,7 +11115,7 @@ module Aws::SecurityHub
     #           severity_label: [
     #             {
     #               value: "NonEmptyString",
-    #               comparison: "EQUALS", # accepts EQUALS, PREFIX
+    #               comparison: "EQUALS", # accepts EQUALS, PREFIX, NOT_EQUALS, PREFIX_NOT_EQUALS
     #             },
     #           ],
     #           confidence: [
@@ -7477,87 +11135,87 @@ module Aws::SecurityHub
     #           title: [
     #             {
     #               value: "NonEmptyString",
-    #               comparison: "EQUALS", # accepts EQUALS, PREFIX
+    #               comparison: "EQUALS", # accepts EQUALS, PREFIX, NOT_EQUALS, PREFIX_NOT_EQUALS
     #             },
     #           ],
     #           description: [
     #             {
     #               value: "NonEmptyString",
-    #               comparison: "EQUALS", # accepts EQUALS, PREFIX
+    #               comparison: "EQUALS", # accepts EQUALS, PREFIX, NOT_EQUALS, PREFIX_NOT_EQUALS
     #             },
     #           ],
     #           recommendation_text: [
     #             {
     #               value: "NonEmptyString",
-    #               comparison: "EQUALS", # accepts EQUALS, PREFIX
+    #               comparison: "EQUALS", # accepts EQUALS, PREFIX, NOT_EQUALS, PREFIX_NOT_EQUALS
     #             },
     #           ],
     #           source_url: [
     #             {
     #               value: "NonEmptyString",
-    #               comparison: "EQUALS", # accepts EQUALS, PREFIX
+    #               comparison: "EQUALS", # accepts EQUALS, PREFIX, NOT_EQUALS, PREFIX_NOT_EQUALS
     #             },
     #           ],
     #           product_fields: [
     #             {
     #               key: "NonEmptyString",
     #               value: "NonEmptyString",
-    #               comparison: "EQUALS", # accepts EQUALS
+    #               comparison: "EQUALS", # accepts EQUALS, NOT_EQUALS
     #             },
     #           ],
     #           product_name: [
     #             {
     #               value: "NonEmptyString",
-    #               comparison: "EQUALS", # accepts EQUALS, PREFIX
+    #               comparison: "EQUALS", # accepts EQUALS, PREFIX, NOT_EQUALS, PREFIX_NOT_EQUALS
     #             },
     #           ],
     #           company_name: [
     #             {
     #               value: "NonEmptyString",
-    #               comparison: "EQUALS", # accepts EQUALS, PREFIX
+    #               comparison: "EQUALS", # accepts EQUALS, PREFIX, NOT_EQUALS, PREFIX_NOT_EQUALS
     #             },
     #           ],
     #           user_defined_fields: [
     #             {
     #               key: "NonEmptyString",
     #               value: "NonEmptyString",
-    #               comparison: "EQUALS", # accepts EQUALS
+    #               comparison: "EQUALS", # accepts EQUALS, NOT_EQUALS
     #             },
     #           ],
     #           malware_name: [
     #             {
     #               value: "NonEmptyString",
-    #               comparison: "EQUALS", # accepts EQUALS, PREFIX
+    #               comparison: "EQUALS", # accepts EQUALS, PREFIX, NOT_EQUALS, PREFIX_NOT_EQUALS
     #             },
     #           ],
     #           malware_type: [
     #             {
     #               value: "NonEmptyString",
-    #               comparison: "EQUALS", # accepts EQUALS, PREFIX
+    #               comparison: "EQUALS", # accepts EQUALS, PREFIX, NOT_EQUALS, PREFIX_NOT_EQUALS
     #             },
     #           ],
     #           malware_path: [
     #             {
     #               value: "NonEmptyString",
-    #               comparison: "EQUALS", # accepts EQUALS, PREFIX
+    #               comparison: "EQUALS", # accepts EQUALS, PREFIX, NOT_EQUALS, PREFIX_NOT_EQUALS
     #             },
     #           ],
     #           malware_state: [
     #             {
     #               value: "NonEmptyString",
-    #               comparison: "EQUALS", # accepts EQUALS, PREFIX
+    #               comparison: "EQUALS", # accepts EQUALS, PREFIX, NOT_EQUALS, PREFIX_NOT_EQUALS
     #             },
     #           ],
     #           network_direction: [
     #             {
     #               value: "NonEmptyString",
-    #               comparison: "EQUALS", # accepts EQUALS, PREFIX
+    #               comparison: "EQUALS", # accepts EQUALS, PREFIX, NOT_EQUALS, PREFIX_NOT_EQUALS
     #             },
     #           ],
     #           network_protocol: [
     #             {
     #               value: "NonEmptyString",
-    #               comparison: "EQUALS", # accepts EQUALS, PREFIX
+    #               comparison: "EQUALS", # accepts EQUALS, PREFIX, NOT_EQUALS, PREFIX_NOT_EQUALS
     #             },
     #           ],
     #           network_source_ip_v4: [
@@ -7580,13 +11238,13 @@ module Aws::SecurityHub
     #           network_source_domain: [
     #             {
     #               value: "NonEmptyString",
-    #               comparison: "EQUALS", # accepts EQUALS, PREFIX
+    #               comparison: "EQUALS", # accepts EQUALS, PREFIX, NOT_EQUALS, PREFIX_NOT_EQUALS
     #             },
     #           ],
     #           network_source_mac: [
     #             {
     #               value: "NonEmptyString",
-    #               comparison: "EQUALS", # accepts EQUALS, PREFIX
+    #               comparison: "EQUALS", # accepts EQUALS, PREFIX, NOT_EQUALS, PREFIX_NOT_EQUALS
     #             },
     #           ],
     #           network_destination_ip_v4: [
@@ -7609,19 +11267,19 @@ module Aws::SecurityHub
     #           network_destination_domain: [
     #             {
     #               value: "NonEmptyString",
-    #               comparison: "EQUALS", # accepts EQUALS, PREFIX
+    #               comparison: "EQUALS", # accepts EQUALS, PREFIX, NOT_EQUALS, PREFIX_NOT_EQUALS
     #             },
     #           ],
     #           process_name: [
     #             {
     #               value: "NonEmptyString",
-    #               comparison: "EQUALS", # accepts EQUALS, PREFIX
+    #               comparison: "EQUALS", # accepts EQUALS, PREFIX, NOT_EQUALS, PREFIX_NOT_EQUALS
     #             },
     #           ],
     #           process_path: [
     #             {
     #               value: "NonEmptyString",
-    #               comparison: "EQUALS", # accepts EQUALS, PREFIX
+    #               comparison: "EQUALS", # accepts EQUALS, PREFIX, NOT_EQUALS, PREFIX_NOT_EQUALS
     #             },
     #           ],
     #           process_pid: [
@@ -7661,19 +11319,19 @@ module Aws::SecurityHub
     #           threat_intel_indicator_type: [
     #             {
     #               value: "NonEmptyString",
-    #               comparison: "EQUALS", # accepts EQUALS, PREFIX
+    #               comparison: "EQUALS", # accepts EQUALS, PREFIX, NOT_EQUALS, PREFIX_NOT_EQUALS
     #             },
     #           ],
     #           threat_intel_indicator_value: [
     #             {
     #               value: "NonEmptyString",
-    #               comparison: "EQUALS", # accepts EQUALS, PREFIX
+    #               comparison: "EQUALS", # accepts EQUALS, PREFIX, NOT_EQUALS, PREFIX_NOT_EQUALS
     #             },
     #           ],
     #           threat_intel_indicator_category: [
     #             {
     #               value: "NonEmptyString",
-    #               comparison: "EQUALS", # accepts EQUALS, PREFIX
+    #               comparison: "EQUALS", # accepts EQUALS, PREFIX, NOT_EQUALS, PREFIX_NOT_EQUALS
     #             },
     #           ],
     #           threat_intel_indicator_last_observed_at: [
@@ -7689,56 +11347,56 @@ module Aws::SecurityHub
     #           threat_intel_indicator_source: [
     #             {
     #               value: "NonEmptyString",
-    #               comparison: "EQUALS", # accepts EQUALS, PREFIX
+    #               comparison: "EQUALS", # accepts EQUALS, PREFIX, NOT_EQUALS, PREFIX_NOT_EQUALS
     #             },
     #           ],
     #           threat_intel_indicator_source_url: [
     #             {
     #               value: "NonEmptyString",
-    #               comparison: "EQUALS", # accepts EQUALS, PREFIX
+    #               comparison: "EQUALS", # accepts EQUALS, PREFIX, NOT_EQUALS, PREFIX_NOT_EQUALS
     #             },
     #           ],
     #           resource_type: [
     #             {
     #               value: "NonEmptyString",
-    #               comparison: "EQUALS", # accepts EQUALS, PREFIX
+    #               comparison: "EQUALS", # accepts EQUALS, PREFIX, NOT_EQUALS, PREFIX_NOT_EQUALS
     #             },
     #           ],
     #           resource_id: [
     #             {
     #               value: "NonEmptyString",
-    #               comparison: "EQUALS", # accepts EQUALS, PREFIX
+    #               comparison: "EQUALS", # accepts EQUALS, PREFIX, NOT_EQUALS, PREFIX_NOT_EQUALS
     #             },
     #           ],
     #           resource_partition: [
     #             {
     #               value: "NonEmptyString",
-    #               comparison: "EQUALS", # accepts EQUALS, PREFIX
+    #               comparison: "EQUALS", # accepts EQUALS, PREFIX, NOT_EQUALS, PREFIX_NOT_EQUALS
     #             },
     #           ],
     #           resource_region: [
     #             {
     #               value: "NonEmptyString",
-    #               comparison: "EQUALS", # accepts EQUALS, PREFIX
+    #               comparison: "EQUALS", # accepts EQUALS, PREFIX, NOT_EQUALS, PREFIX_NOT_EQUALS
     #             },
     #           ],
     #           resource_tags: [
     #             {
     #               key: "NonEmptyString",
     #               value: "NonEmptyString",
-    #               comparison: "EQUALS", # accepts EQUALS
+    #               comparison: "EQUALS", # accepts EQUALS, NOT_EQUALS
     #             },
     #           ],
     #           resource_aws_ec2_instance_type: [
     #             {
     #               value: "NonEmptyString",
-    #               comparison: "EQUALS", # accepts EQUALS, PREFIX
+    #               comparison: "EQUALS", # accepts EQUALS, PREFIX, NOT_EQUALS, PREFIX_NOT_EQUALS
     #             },
     #           ],
     #           resource_aws_ec2_instance_image_id: [
     #             {
     #               value: "NonEmptyString",
-    #               comparison: "EQUALS", # accepts EQUALS, PREFIX
+    #               comparison: "EQUALS", # accepts EQUALS, PREFIX, NOT_EQUALS, PREFIX_NOT_EQUALS
     #             },
     #           ],
     #           resource_aws_ec2_instance_ip_v4_addresses: [
@@ -7754,25 +11412,25 @@ module Aws::SecurityHub
     #           resource_aws_ec2_instance_key_name: [
     #             {
     #               value: "NonEmptyString",
-    #               comparison: "EQUALS", # accepts EQUALS, PREFIX
+    #               comparison: "EQUALS", # accepts EQUALS, PREFIX, NOT_EQUALS, PREFIX_NOT_EQUALS
     #             },
     #           ],
     #           resource_aws_ec2_instance_iam_instance_profile_arn: [
     #             {
     #               value: "NonEmptyString",
-    #               comparison: "EQUALS", # accepts EQUALS, PREFIX
+    #               comparison: "EQUALS", # accepts EQUALS, PREFIX, NOT_EQUALS, PREFIX_NOT_EQUALS
     #             },
     #           ],
     #           resource_aws_ec2_instance_vpc_id: [
     #             {
     #               value: "NonEmptyString",
-    #               comparison: "EQUALS", # accepts EQUALS, PREFIX
+    #               comparison: "EQUALS", # accepts EQUALS, PREFIX, NOT_EQUALS, PREFIX_NOT_EQUALS
     #             },
     #           ],
     #           resource_aws_ec2_instance_subnet_id: [
     #             {
     #               value: "NonEmptyString",
-    #               comparison: "EQUALS", # accepts EQUALS, PREFIX
+    #               comparison: "EQUALS", # accepts EQUALS, PREFIX, NOT_EQUALS, PREFIX_NOT_EQUALS
     #             },
     #           ],
     #           resource_aws_ec2_instance_launched_at: [
@@ -7788,25 +11446,25 @@ module Aws::SecurityHub
     #           resource_aws_s3_bucket_owner_id: [
     #             {
     #               value: "NonEmptyString",
-    #               comparison: "EQUALS", # accepts EQUALS, PREFIX
+    #               comparison: "EQUALS", # accepts EQUALS, PREFIX, NOT_EQUALS, PREFIX_NOT_EQUALS
     #             },
     #           ],
     #           resource_aws_s3_bucket_owner_name: [
     #             {
     #               value: "NonEmptyString",
-    #               comparison: "EQUALS", # accepts EQUALS, PREFIX
+    #               comparison: "EQUALS", # accepts EQUALS, PREFIX, NOT_EQUALS, PREFIX_NOT_EQUALS
     #             },
     #           ],
     #           resource_aws_iam_access_key_user_name: [
     #             {
     #               value: "NonEmptyString",
-    #               comparison: "EQUALS", # accepts EQUALS, PREFIX
+    #               comparison: "EQUALS", # accepts EQUALS, PREFIX, NOT_EQUALS, PREFIX_NOT_EQUALS
     #             },
     #           ],
     #           resource_aws_iam_access_key_status: [
     #             {
     #               value: "NonEmptyString",
-    #               comparison: "EQUALS", # accepts EQUALS, PREFIX
+    #               comparison: "EQUALS", # accepts EQUALS, PREFIX, NOT_EQUALS, PREFIX_NOT_EQUALS
     #             },
     #           ],
     #           resource_aws_iam_access_key_created_at: [
@@ -7822,19 +11480,19 @@ module Aws::SecurityHub
     #           resource_container_name: [
     #             {
     #               value: "NonEmptyString",
-    #               comparison: "EQUALS", # accepts EQUALS, PREFIX
+    #               comparison: "EQUALS", # accepts EQUALS, PREFIX, NOT_EQUALS, PREFIX_NOT_EQUALS
     #             },
     #           ],
     #           resource_container_image_id: [
     #             {
     #               value: "NonEmptyString",
-    #               comparison: "EQUALS", # accepts EQUALS, PREFIX
+    #               comparison: "EQUALS", # accepts EQUALS, PREFIX, NOT_EQUALS, PREFIX_NOT_EQUALS
     #             },
     #           ],
     #           resource_container_image_name: [
     #             {
     #               value: "NonEmptyString",
-    #               comparison: "EQUALS", # accepts EQUALS, PREFIX
+    #               comparison: "EQUALS", # accepts EQUALS, PREFIX, NOT_EQUALS, PREFIX_NOT_EQUALS
     #             },
     #           ],
     #           resource_container_launched_at: [
@@ -7851,55 +11509,55 @@ module Aws::SecurityHub
     #             {
     #               key: "NonEmptyString",
     #               value: "NonEmptyString",
-    #               comparison: "EQUALS", # accepts EQUALS
+    #               comparison: "EQUALS", # accepts EQUALS, NOT_EQUALS
     #             },
     #           ],
     #           compliance_status: [
     #             {
     #               value: "NonEmptyString",
-    #               comparison: "EQUALS", # accepts EQUALS, PREFIX
+    #               comparison: "EQUALS", # accepts EQUALS, PREFIX, NOT_EQUALS, PREFIX_NOT_EQUALS
     #             },
     #           ],
     #           verification_state: [
     #             {
     #               value: "NonEmptyString",
-    #               comparison: "EQUALS", # accepts EQUALS, PREFIX
+    #               comparison: "EQUALS", # accepts EQUALS, PREFIX, NOT_EQUALS, PREFIX_NOT_EQUALS
     #             },
     #           ],
     #           workflow_state: [
     #             {
     #               value: "NonEmptyString",
-    #               comparison: "EQUALS", # accepts EQUALS, PREFIX
+    #               comparison: "EQUALS", # accepts EQUALS, PREFIX, NOT_EQUALS, PREFIX_NOT_EQUALS
     #             },
     #           ],
     #           workflow_status: [
     #             {
     #               value: "NonEmptyString",
-    #               comparison: "EQUALS", # accepts EQUALS, PREFIX
+    #               comparison: "EQUALS", # accepts EQUALS, PREFIX, NOT_EQUALS, PREFIX_NOT_EQUALS
     #             },
     #           ],
     #           record_state: [
     #             {
     #               value: "NonEmptyString",
-    #               comparison: "EQUALS", # accepts EQUALS, PREFIX
+    #               comparison: "EQUALS", # accepts EQUALS, PREFIX, NOT_EQUALS, PREFIX_NOT_EQUALS
     #             },
     #           ],
     #           related_findings_product_arn: [
     #             {
     #               value: "NonEmptyString",
-    #               comparison: "EQUALS", # accepts EQUALS, PREFIX
+    #               comparison: "EQUALS", # accepts EQUALS, PREFIX, NOT_EQUALS, PREFIX_NOT_EQUALS
     #             },
     #           ],
     #           related_findings_id: [
     #             {
     #               value: "NonEmptyString",
-    #               comparison: "EQUALS", # accepts EQUALS, PREFIX
+    #               comparison: "EQUALS", # accepts EQUALS, PREFIX, NOT_EQUALS, PREFIX_NOT_EQUALS
     #             },
     #           ],
     #           note_text: [
     #             {
     #               value: "NonEmptyString",
-    #               comparison: "EQUALS", # accepts EQUALS, PREFIX
+    #               comparison: "EQUALS", # accepts EQUALS, PREFIX, NOT_EQUALS, PREFIX_NOT_EQUALS
     #             },
     #           ],
     #           note_updated_at: [
@@ -7915,7 +11573,7 @@ module Aws::SecurityHub
     #           note_updated_by: [
     #             {
     #               value: "NonEmptyString",
-    #               comparison: "EQUALS", # accepts EQUALS, PREFIX
+    #               comparison: "EQUALS", # accepts EQUALS, PREFIX, NOT_EQUALS, PREFIX_NOT_EQUALS
     #             },
     #           ],
     #           keyword: [
@@ -8734,7 +12392,8 @@ module Aws::SecurityHub
       include Aws::Structure
     end
 
-    # The map filter for querying findings.
+    # A map filter for querying findings. Each map filter provides the field
+    # to check, the value to look for, and the comparison operator.
     #
     # @note When making an API call, you may pass MapFilter
     #   data as a hash:
@@ -8742,20 +12401,44 @@ module Aws::SecurityHub
     #       {
     #         key: "NonEmptyString",
     #         value: "NonEmptyString",
-    #         comparison: "EQUALS", # accepts EQUALS
+    #         comparison: "EQUALS", # accepts EQUALS, NOT_EQUALS
     #       }
     #
     # @!attribute [rw] key
-    #   The key of the map filter.
+    #   The key of the map filter. For example, for `ResourceTags`, `Key`
+    #   identifies the name of the tag. For `UserDefinedFields`, `Key` is
+    #   the name of the field.
     #   @return [String]
     #
     # @!attribute [rw] value
-    #   The value for the key in the map filter.
+    #   The value for the key in the map filter. Filter values are case
+    #   sensitive. For example, one of the values for a tag called
+    #   `Department` might be `Security`. If you provide `security` as the
+    #   filter value, then there is no match.
     #   @return [String]
     #
     # @!attribute [rw] comparison
-    #   The condition to apply to a key value when querying for findings
+    #   The condition to apply to the key value when querying for findings
     #   with a map filter.
+    #
+    #   To search for values that exactly match the filter value, use
+    #   `EQUALS`. For example, for the `ResourceTags` field, the filter
+    #   `Department EQUALS Security` matches findings that have the value
+    #   `Security` for the tag `Department`.
+    #
+    #   To search for values other than the filter value, use `NOT_EQUALS`.
+    #   For example, for the `ResourceTags` field, the filter `Department
+    #   NOT_EQUALS Finance` matches findings that do not have the value
+    #   `Finance` for the tag `Department`.
+    #
+    #   `EQUALS` filters on the same field are joined by `OR`. A finding
+    #   matches if it matches any one of those filters.
+    #
+    #   `NOT_EQUALS` filters on the same field are joined by `AND`. A
+    #   finding matches only if it matches all of those filters.
+    #
+    #   You cannot have both an `EQUALS` filter and a `NOT_EQUALS` filter on
+    #   the same field.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/MapFilter AWS API Documentation
@@ -9092,6 +12775,14 @@ module Aws::SecurityHub
     #
     # @!attribute [rw] updated_at
     #   The timestamp of when the note was updated.
+    #
+    #   Uses the `date-time` format specified in [RFC 3339 section 5.6,
+    #   Internet Date/Time Format][1]. The value cannot contain spaces. For
+    #   example, `2020-03-22T13:22:13.933Z`.
+    #
+    #
+    #
+    #   [1]: https://tools.ietf.org/html/rfc3339#section-5.6
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/Note AWS API Documentation
@@ -9225,11 +12916,27 @@ module Aws::SecurityHub
     #   @return [Integer]
     #
     # @!attribute [rw] launched_at
-    #   The date/time that the process was launched.
+    #   Indicates when the process was launched.
+    #
+    #   Uses the `date-time` format specified in [RFC 3339 section 5.6,
+    #   Internet Date/Time Format][1]. The value cannot contain spaces. For
+    #   example, `2020-03-22T13:22:13.933Z`.
+    #
+    #
+    #
+    #   [1]: https://tools.ietf.org/html/rfc3339#section-5.6
     #   @return [String]
     #
     # @!attribute [rw] terminated_at
-    #   The date and time when the process was terminated.
+    #   Indicates when the process was terminated.
+    #
+    #   Uses the `date-time` format specified in [RFC 3339 section 5.6,
+    #   Internet Date/Time Format][1]. The value cannot contain spaces. For
+    #   example, `2020-03-22T13:22:13.933Z`.
+    #
+    #
+    #
+    #   [1]: https://tools.ietf.org/html/rfc3339#section-5.6
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/ProcessDetails AWS API Documentation
@@ -9591,6 +13298,18 @@ module Aws::SecurityHub
     #             dhcp_options_id: "NonEmptyString",
     #             state: "NonEmptyString",
     #           },
+    #           aws_ec2_eip: {
+    #             instance_id: "NonEmptyString",
+    #             public_ip: "NonEmptyString",
+    #             allocation_id: "NonEmptyString",
+    #             association_id: "NonEmptyString",
+    #             domain: "NonEmptyString",
+    #             public_ipv_4_pool: "NonEmptyString",
+    #             network_border_group: "NonEmptyString",
+    #             network_interface_id: "NonEmptyString",
+    #             network_interface_owner_id: "NonEmptyString",
+    #             private_ip_address: "NonEmptyString",
+    #           },
     #           aws_elbv_2_load_balancer: {
     #             availability_zones: [
     #               {
@@ -9661,6 +13380,18 @@ module Aws::SecurityHub
     #             server_side_encryption: "NonEmptyString",
     #             ssekms_key_id: "NonEmptyString",
     #           },
+    #           aws_secrets_manager_secret: {
+    #             rotation_rules: {
+    #               automatically_after_days: 1,
+    #             },
+    #             rotation_occurred_within_frequency: false,
+    #             kms_key_id: "NonEmptyString",
+    #             rotation_enabled: false,
+    #             rotation_lambda_arn: "NonEmptyString",
+    #             deleted: false,
+    #             name: "NonEmptyString",
+    #             description: "NonEmptyString",
+    #           },
     #           aws_iam_access_key: {
     #             user_name: "NonEmptyString",
     #             status: "Active", # accepts Active, Inactive
@@ -9668,6 +13399,159 @@ module Aws::SecurityHub
     #             principal_id: "NonEmptyString",
     #             principal_type: "NonEmptyString",
     #             principal_name: "NonEmptyString",
+    #           },
+    #           aws_iam_user: {
+    #             attached_managed_policies: [
+    #               {
+    #                 policy_name: "NonEmptyString",
+    #                 policy_arn: "NonEmptyString",
+    #               },
+    #             ],
+    #             create_date: "NonEmptyString",
+    #             group_list: ["NonEmptyString"],
+    #             path: "NonEmptyString",
+    #             permissions_boundary: {
+    #               permissions_boundary_arn: "NonEmptyString",
+    #               permissions_boundary_type: "NonEmptyString",
+    #             },
+    #             user_id: "NonEmptyString",
+    #             user_name: "NonEmptyString",
+    #             user_policy_list: [
+    #               {
+    #                 policy_name: "NonEmptyString",
+    #               },
+    #             ],
+    #           },
+    #           aws_iam_policy: {
+    #             attachment_count: 1,
+    #             create_date: "NonEmptyString",
+    #             default_version_id: "NonEmptyString",
+    #             description: "NonEmptyString",
+    #             is_attachable: false,
+    #             path: "NonEmptyString",
+    #             permissions_boundary_usage_count: 1,
+    #             policy_id: "NonEmptyString",
+    #             policy_name: "NonEmptyString",
+    #             policy_version_list: [
+    #               {
+    #                 version_id: "NonEmptyString",
+    #                 is_default_version: false,
+    #                 create_date: "NonEmptyString",
+    #               },
+    #             ],
+    #             update_date: "NonEmptyString",
+    #           },
+    #           aws_dynamo_db_table: {
+    #             attribute_definitions: [
+    #               {
+    #                 attribute_name: "NonEmptyString",
+    #                 attribute_type: "NonEmptyString",
+    #               },
+    #             ],
+    #             billing_mode_summary: {
+    #               billing_mode: "NonEmptyString",
+    #               last_update_to_pay_per_request_date_time: "NonEmptyString",
+    #             },
+    #             creation_date_time: "NonEmptyString",
+    #             global_secondary_indexes: [
+    #               {
+    #                 backfilling: false,
+    #                 index_arn: "NonEmptyString",
+    #                 index_name: "NonEmptyString",
+    #                 index_size_bytes: 1,
+    #                 index_status: "NonEmptyString",
+    #                 item_count: 1,
+    #                 key_schema: [
+    #                   {
+    #                     attribute_name: "NonEmptyString",
+    #                     key_type: "NonEmptyString",
+    #                   },
+    #                 ],
+    #                 projection: {
+    #                   non_key_attributes: ["NonEmptyString"],
+    #                   projection_type: "NonEmptyString",
+    #                 },
+    #                 provisioned_throughput: {
+    #                   last_decrease_date_time: "NonEmptyString",
+    #                   last_increase_date_time: "NonEmptyString",
+    #                   number_of_decreases_today: 1,
+    #                   read_capacity_units: 1,
+    #                   write_capacity_units: 1,
+    #                 },
+    #               },
+    #             ],
+    #             global_table_version: "NonEmptyString",
+    #             item_count: 1,
+    #             key_schema: [
+    #               {
+    #                 attribute_name: "NonEmptyString",
+    #                 key_type: "NonEmptyString",
+    #               },
+    #             ],
+    #             latest_stream_arn: "NonEmptyString",
+    #             latest_stream_label: "NonEmptyString",
+    #             local_secondary_indexes: [
+    #               {
+    #                 index_arn: "NonEmptyString",
+    #                 index_name: "NonEmptyString",
+    #                 key_schema: [
+    #                   {
+    #                     attribute_name: "NonEmptyString",
+    #                     key_type: "NonEmptyString",
+    #                   },
+    #                 ],
+    #                 projection: {
+    #                   non_key_attributes: ["NonEmptyString"],
+    #                   projection_type: "NonEmptyString",
+    #                 },
+    #               },
+    #             ],
+    #             provisioned_throughput: {
+    #               last_decrease_date_time: "NonEmptyString",
+    #               last_increase_date_time: "NonEmptyString",
+    #               number_of_decreases_today: 1,
+    #               read_capacity_units: 1,
+    #               write_capacity_units: 1,
+    #             },
+    #             replicas: [
+    #               {
+    #                 global_secondary_indexes: [
+    #                   {
+    #                     index_name: "NonEmptyString",
+    #                     provisioned_throughput_override: {
+    #                       read_capacity_units: 1,
+    #                     },
+    #                   },
+    #                 ],
+    #                 kms_master_key_id: "NonEmptyString",
+    #                 provisioned_throughput_override: {
+    #                   read_capacity_units: 1,
+    #                 },
+    #                 region_name: "NonEmptyString",
+    #                 replica_status: "NonEmptyString",
+    #                 replica_status_description: "NonEmptyString",
+    #               },
+    #             ],
+    #             restore_summary: {
+    #               source_backup_arn: "NonEmptyString",
+    #               source_table_arn: "NonEmptyString",
+    #               restore_date_time: "NonEmptyString",
+    #               restore_in_progress: false,
+    #             },
+    #             sse_description: {
+    #               inaccessible_encryption_date_time: "NonEmptyString",
+    #               status: "NonEmptyString",
+    #               sse_type: "NonEmptyString",
+    #               kms_master_key_arn: "NonEmptyString",
+    #             },
+    #             stream_specification: {
+    #               stream_enabled: false,
+    #               stream_view_type: "NonEmptyString",
+    #             },
+    #             table_id: "NonEmptyString",
+    #             table_name: "NonEmptyString",
+    #             table_size_bytes: 1,
+    #             table_status: "NonEmptyString",
     #           },
     #           aws_iam_role: {
     #             assume_role_policy_document: "AwsIamRoleAssumeRolePolicyDocument",
@@ -9684,6 +13568,7 @@ module Aws::SecurityHub
     #             key_manager: "NonEmptyString",
     #             key_state: "NonEmptyString",
     #             origin: "NonEmptyString",
+    #             description: "NonEmptyString",
     #           },
     #           aws_lambda_function: {
     #             code: {
@@ -9771,6 +13656,116 @@ module Aws::SecurityHub
     #                 status: "NonEmptyString",
     #               },
     #             ],
+    #             multi_az: false,
+    #             enhanced_monitoring_resource_arn: "NonEmptyString",
+    #             db_instance_status: "NonEmptyString",
+    #             master_username: "NonEmptyString",
+    #             allocated_storage: 1,
+    #             preferred_backup_window: "NonEmptyString",
+    #             backup_retention_period: 1,
+    #             db_security_groups: ["NonEmptyString"],
+    #             db_parameter_groups: [
+    #               {
+    #                 db_parameter_group_name: "NonEmptyString",
+    #                 parameter_apply_status: "NonEmptyString",
+    #               },
+    #             ],
+    #             availability_zone: "NonEmptyString",
+    #             db_subnet_group: {
+    #               db_subnet_group_name: "NonEmptyString",
+    #               db_subnet_group_description: "NonEmptyString",
+    #               vpc_id: "NonEmptyString",
+    #               subnet_group_status: "NonEmptyString",
+    #               subnets: [
+    #                 {
+    #                   subnet_identifier: "NonEmptyString",
+    #                   subnet_availability_zone: {
+    #                     name: "NonEmptyString",
+    #                   },
+    #                   subnet_status: "NonEmptyString",
+    #                 },
+    #               ],
+    #               db_subnet_group_arn: "NonEmptyString",
+    #             },
+    #             preferred_maintenance_window: "NonEmptyString",
+    #             pending_modified_values: {
+    #               db_instance_class: "NonEmptyString",
+    #               allocated_storage: 1,
+    #               master_user_password: "NonEmptyString",
+    #               port: 1,
+    #               backup_retention_period: 1,
+    #               multi_az: false,
+    #               engine_version: "NonEmptyString",
+    #               license_model: "NonEmptyString",
+    #               iops: 1,
+    #               db_instance_identifier: "NonEmptyString",
+    #               storage_type: "NonEmptyString",
+    #               ca_certificate_identifier: "NonEmptyString",
+    #               db_subnet_group_name: "NonEmptyString",
+    #               pending_cloud_watch_logs_exports: {
+    #                 log_types_to_enable: ["NonEmptyString"],
+    #                 log_types_to_disable: ["NonEmptyString"],
+    #               },
+    #               processor_features: [
+    #                 {
+    #                   name: "NonEmptyString",
+    #                   value: "NonEmptyString",
+    #                 },
+    #               ],
+    #             },
+    #             latest_restorable_time: "NonEmptyString",
+    #             auto_minor_version_upgrade: false,
+    #             read_replica_source_db_instance_identifier: "NonEmptyString",
+    #             read_replica_db_instance_identifiers: ["NonEmptyString"],
+    #             read_replica_db_cluster_identifiers: ["NonEmptyString"],
+    #             license_model: "NonEmptyString",
+    #             iops: 1,
+    #             option_group_memberships: [
+    #               {
+    #                 option_group_name: "NonEmptyString",
+    #                 status: "NonEmptyString",
+    #               },
+    #             ],
+    #             character_set_name: "NonEmptyString",
+    #             secondary_availability_zone: "NonEmptyString",
+    #             status_infos: [
+    #               {
+    #                 status_type: "NonEmptyString",
+    #                 normal: false,
+    #                 status: "NonEmptyString",
+    #                 message: "NonEmptyString",
+    #               },
+    #             ],
+    #             storage_type: "NonEmptyString",
+    #             domain_memberships: [
+    #               {
+    #                 domain: "NonEmptyString",
+    #                 status: "NonEmptyString",
+    #                 fqdn: "NonEmptyString",
+    #                 iam_role_name: "NonEmptyString",
+    #               },
+    #             ],
+    #             copy_tags_to_snapshot: false,
+    #             monitoring_interval: 1,
+    #             monitoring_role_arn: "NonEmptyString",
+    #             promotion_tier: 1,
+    #             timezone: "NonEmptyString",
+    #             performance_insights_enabled: false,
+    #             performance_insights_kms_key_id: "NonEmptyString",
+    #             performance_insights_retention_period: 1,
+    #             enabled_cloud_watch_logs_exports: ["NonEmptyString"],
+    #             processor_features: [
+    #               {
+    #                 name: "NonEmptyString",
+    #                 value: "NonEmptyString",
+    #               },
+    #             ],
+    #             listener_endpoint: {
+    #               address: "NonEmptyString",
+    #               port: 1,
+    #               hosted_zone_id: "NonEmptyString",
+    #             },
+    #             max_allocated_storage: 1,
     #           },
     #           aws_sns_topic: {
     #             kms_master_key_id: "NonEmptyString",
@@ -9811,6 +13806,128 @@ module Aws::SecurityHub
     #               },
     #             ],
     #             web_acl_id: "NonEmptyString",
+    #           },
+    #           aws_rds_db_snapshot: {
+    #             db_snapshot_identifier: "NonEmptyString",
+    #             db_instance_identifier: "NonEmptyString",
+    #             snapshot_create_time: "NonEmptyString",
+    #             engine: "NonEmptyString",
+    #             allocated_storage: 1,
+    #             status: "NonEmptyString",
+    #             port: 1,
+    #             availability_zone: "NonEmptyString",
+    #             vpc_id: "NonEmptyString",
+    #             instance_create_time: "NonEmptyString",
+    #             master_username: "NonEmptyString",
+    #             engine_version: "NonEmptyString",
+    #             license_model: "NonEmptyString",
+    #             snapshot_type: "NonEmptyString",
+    #             iops: 1,
+    #             option_group_name: "NonEmptyString",
+    #             percent_progress: 1,
+    #             source_region: "NonEmptyString",
+    #             source_db_snapshot_identifier: "NonEmptyString",
+    #             storage_type: "NonEmptyString",
+    #             tde_credential_arn: "NonEmptyString",
+    #             encrypted: false,
+    #             kms_key_id: "NonEmptyString",
+    #             timezone: "NonEmptyString",
+    #             iam_database_authentication_enabled: false,
+    #             processor_features: [
+    #               {
+    #                 name: "NonEmptyString",
+    #                 value: "NonEmptyString",
+    #               },
+    #             ],
+    #             dbi_resource_id: "NonEmptyString",
+    #           },
+    #           aws_rds_db_cluster_snapshot: {
+    #             availability_zones: ["NonEmptyString"],
+    #             snapshot_create_time: "NonEmptyString",
+    #             engine: "NonEmptyString",
+    #             allocated_storage: 1,
+    #             status: "NonEmptyString",
+    #             port: 1,
+    #             vpc_id: "NonEmptyString",
+    #             cluster_create_time: "NonEmptyString",
+    #             master_username: "NonEmptyString",
+    #             engine_version: "NonEmptyString",
+    #             license_model: "NonEmptyString",
+    #             snapshot_type: "NonEmptyString",
+    #             percent_progress: 1,
+    #             storage_encrypted: false,
+    #             kms_key_id: "NonEmptyString",
+    #             db_cluster_identifier: "NonEmptyString",
+    #             db_cluster_snapshot_identifier: "NonEmptyString",
+    #             iam_database_authentication_enabled: false,
+    #           },
+    #           aws_rds_db_cluster: {
+    #             allocated_storage: 1,
+    #             availability_zones: ["NonEmptyString"],
+    #             backup_retention_period: 1,
+    #             database_name: "NonEmptyString",
+    #             status: "NonEmptyString",
+    #             endpoint: "NonEmptyString",
+    #             reader_endpoint: "NonEmptyString",
+    #             custom_endpoints: ["NonEmptyString"],
+    #             multi_az: false,
+    #             engine: "NonEmptyString",
+    #             engine_version: "NonEmptyString",
+    #             port: 1,
+    #             master_username: "NonEmptyString",
+    #             preferred_backup_window: "NonEmptyString",
+    #             preferred_maintenance_window: "NonEmptyString",
+    #             read_replica_identifiers: ["NonEmptyString"],
+    #             vpc_security_groups: [
+    #               {
+    #                 vpc_security_group_id: "NonEmptyString",
+    #                 status: "NonEmptyString",
+    #               },
+    #             ],
+    #             hosted_zone_id: "NonEmptyString",
+    #             storage_encrypted: false,
+    #             kms_key_id: "NonEmptyString",
+    #             db_cluster_resource_id: "NonEmptyString",
+    #             associated_roles: [
+    #               {
+    #                 role_arn: "NonEmptyString",
+    #                 status: "NonEmptyString",
+    #               },
+    #             ],
+    #             cluster_create_time: "NonEmptyString",
+    #             enabled_cloud_watch_logs_exports: ["NonEmptyString"],
+    #             engine_mode: "NonEmptyString",
+    #             deletion_protection: false,
+    #             http_endpoint_enabled: false,
+    #             activity_stream_status: "NonEmptyString",
+    #             copy_tags_to_snapshot: false,
+    #             cross_account_clone: false,
+    #             domain_memberships: [
+    #               {
+    #                 domain: "NonEmptyString",
+    #                 status: "NonEmptyString",
+    #                 fqdn: "NonEmptyString",
+    #                 iam_role_name: "NonEmptyString",
+    #               },
+    #             ],
+    #             db_cluster_parameter_group: "NonEmptyString",
+    #             db_subnet_group: "NonEmptyString",
+    #             db_cluster_option_group_memberships: [
+    #               {
+    #                 db_cluster_option_group_name: "NonEmptyString",
+    #                 status: "NonEmptyString",
+    #               },
+    #             ],
+    #             db_cluster_identifier: "NonEmptyString",
+    #             db_cluster_members: [
+    #               {
+    #                 is_cluster_writer: false,
+    #                 promotion_tier: 1,
+    #                 db_instance_identifier: "NonEmptyString",
+    #                 db_cluster_parameter_group_status: "NonEmptyString",
+    #               },
+    #             ],
+    #             iam_database_authentication_enabled: false,
     #           },
     #           container: {
     #             name: "NonEmptyString",
@@ -10092,6 +14209,18 @@ module Aws::SecurityHub
     #           dhcp_options_id: "NonEmptyString",
     #           state: "NonEmptyString",
     #         },
+    #         aws_ec2_eip: {
+    #           instance_id: "NonEmptyString",
+    #           public_ip: "NonEmptyString",
+    #           allocation_id: "NonEmptyString",
+    #           association_id: "NonEmptyString",
+    #           domain: "NonEmptyString",
+    #           public_ipv_4_pool: "NonEmptyString",
+    #           network_border_group: "NonEmptyString",
+    #           network_interface_id: "NonEmptyString",
+    #           network_interface_owner_id: "NonEmptyString",
+    #           private_ip_address: "NonEmptyString",
+    #         },
     #         aws_elbv_2_load_balancer: {
     #           availability_zones: [
     #             {
@@ -10162,6 +14291,18 @@ module Aws::SecurityHub
     #           server_side_encryption: "NonEmptyString",
     #           ssekms_key_id: "NonEmptyString",
     #         },
+    #         aws_secrets_manager_secret: {
+    #           rotation_rules: {
+    #             automatically_after_days: 1,
+    #           },
+    #           rotation_occurred_within_frequency: false,
+    #           kms_key_id: "NonEmptyString",
+    #           rotation_enabled: false,
+    #           rotation_lambda_arn: "NonEmptyString",
+    #           deleted: false,
+    #           name: "NonEmptyString",
+    #           description: "NonEmptyString",
+    #         },
     #         aws_iam_access_key: {
     #           user_name: "NonEmptyString",
     #           status: "Active", # accepts Active, Inactive
@@ -10169,6 +14310,159 @@ module Aws::SecurityHub
     #           principal_id: "NonEmptyString",
     #           principal_type: "NonEmptyString",
     #           principal_name: "NonEmptyString",
+    #         },
+    #         aws_iam_user: {
+    #           attached_managed_policies: [
+    #             {
+    #               policy_name: "NonEmptyString",
+    #               policy_arn: "NonEmptyString",
+    #             },
+    #           ],
+    #           create_date: "NonEmptyString",
+    #           group_list: ["NonEmptyString"],
+    #           path: "NonEmptyString",
+    #           permissions_boundary: {
+    #             permissions_boundary_arn: "NonEmptyString",
+    #             permissions_boundary_type: "NonEmptyString",
+    #           },
+    #           user_id: "NonEmptyString",
+    #           user_name: "NonEmptyString",
+    #           user_policy_list: [
+    #             {
+    #               policy_name: "NonEmptyString",
+    #             },
+    #           ],
+    #         },
+    #         aws_iam_policy: {
+    #           attachment_count: 1,
+    #           create_date: "NonEmptyString",
+    #           default_version_id: "NonEmptyString",
+    #           description: "NonEmptyString",
+    #           is_attachable: false,
+    #           path: "NonEmptyString",
+    #           permissions_boundary_usage_count: 1,
+    #           policy_id: "NonEmptyString",
+    #           policy_name: "NonEmptyString",
+    #           policy_version_list: [
+    #             {
+    #               version_id: "NonEmptyString",
+    #               is_default_version: false,
+    #               create_date: "NonEmptyString",
+    #             },
+    #           ],
+    #           update_date: "NonEmptyString",
+    #         },
+    #         aws_dynamo_db_table: {
+    #           attribute_definitions: [
+    #             {
+    #               attribute_name: "NonEmptyString",
+    #               attribute_type: "NonEmptyString",
+    #             },
+    #           ],
+    #           billing_mode_summary: {
+    #             billing_mode: "NonEmptyString",
+    #             last_update_to_pay_per_request_date_time: "NonEmptyString",
+    #           },
+    #           creation_date_time: "NonEmptyString",
+    #           global_secondary_indexes: [
+    #             {
+    #               backfilling: false,
+    #               index_arn: "NonEmptyString",
+    #               index_name: "NonEmptyString",
+    #               index_size_bytes: 1,
+    #               index_status: "NonEmptyString",
+    #               item_count: 1,
+    #               key_schema: [
+    #                 {
+    #                   attribute_name: "NonEmptyString",
+    #                   key_type: "NonEmptyString",
+    #                 },
+    #               ],
+    #               projection: {
+    #                 non_key_attributes: ["NonEmptyString"],
+    #                 projection_type: "NonEmptyString",
+    #               },
+    #               provisioned_throughput: {
+    #                 last_decrease_date_time: "NonEmptyString",
+    #                 last_increase_date_time: "NonEmptyString",
+    #                 number_of_decreases_today: 1,
+    #                 read_capacity_units: 1,
+    #                 write_capacity_units: 1,
+    #               },
+    #             },
+    #           ],
+    #           global_table_version: "NonEmptyString",
+    #           item_count: 1,
+    #           key_schema: [
+    #             {
+    #               attribute_name: "NonEmptyString",
+    #               key_type: "NonEmptyString",
+    #             },
+    #           ],
+    #           latest_stream_arn: "NonEmptyString",
+    #           latest_stream_label: "NonEmptyString",
+    #           local_secondary_indexes: [
+    #             {
+    #               index_arn: "NonEmptyString",
+    #               index_name: "NonEmptyString",
+    #               key_schema: [
+    #                 {
+    #                   attribute_name: "NonEmptyString",
+    #                   key_type: "NonEmptyString",
+    #                 },
+    #               ],
+    #               projection: {
+    #                 non_key_attributes: ["NonEmptyString"],
+    #                 projection_type: "NonEmptyString",
+    #               },
+    #             },
+    #           ],
+    #           provisioned_throughput: {
+    #             last_decrease_date_time: "NonEmptyString",
+    #             last_increase_date_time: "NonEmptyString",
+    #             number_of_decreases_today: 1,
+    #             read_capacity_units: 1,
+    #             write_capacity_units: 1,
+    #           },
+    #           replicas: [
+    #             {
+    #               global_secondary_indexes: [
+    #                 {
+    #                   index_name: "NonEmptyString",
+    #                   provisioned_throughput_override: {
+    #                     read_capacity_units: 1,
+    #                   },
+    #                 },
+    #               ],
+    #               kms_master_key_id: "NonEmptyString",
+    #               provisioned_throughput_override: {
+    #                 read_capacity_units: 1,
+    #               },
+    #               region_name: "NonEmptyString",
+    #               replica_status: "NonEmptyString",
+    #               replica_status_description: "NonEmptyString",
+    #             },
+    #           ],
+    #           restore_summary: {
+    #             source_backup_arn: "NonEmptyString",
+    #             source_table_arn: "NonEmptyString",
+    #             restore_date_time: "NonEmptyString",
+    #             restore_in_progress: false,
+    #           },
+    #           sse_description: {
+    #             inaccessible_encryption_date_time: "NonEmptyString",
+    #             status: "NonEmptyString",
+    #             sse_type: "NonEmptyString",
+    #             kms_master_key_arn: "NonEmptyString",
+    #           },
+    #           stream_specification: {
+    #             stream_enabled: false,
+    #             stream_view_type: "NonEmptyString",
+    #           },
+    #           table_id: "NonEmptyString",
+    #           table_name: "NonEmptyString",
+    #           table_size_bytes: 1,
+    #           table_status: "NonEmptyString",
     #         },
     #         aws_iam_role: {
     #           assume_role_policy_document: "AwsIamRoleAssumeRolePolicyDocument",
@@ -10185,6 +14479,7 @@ module Aws::SecurityHub
     #           key_manager: "NonEmptyString",
     #           key_state: "NonEmptyString",
     #           origin: "NonEmptyString",
+    #           description: "NonEmptyString",
     #         },
     #         aws_lambda_function: {
     #           code: {
@@ -10272,6 +14567,116 @@ module Aws::SecurityHub
     #               status: "NonEmptyString",
     #             },
     #           ],
+    #           multi_az: false,
+    #           enhanced_monitoring_resource_arn: "NonEmptyString",
+    #           db_instance_status: "NonEmptyString",
+    #           master_username: "NonEmptyString",
+    #           allocated_storage: 1,
+    #           preferred_backup_window: "NonEmptyString",
+    #           backup_retention_period: 1,
+    #           db_security_groups: ["NonEmptyString"],
+    #           db_parameter_groups: [
+    #             {
+    #               db_parameter_group_name: "NonEmptyString",
+    #               parameter_apply_status: "NonEmptyString",
+    #             },
+    #           ],
+    #           availability_zone: "NonEmptyString",
+    #           db_subnet_group: {
+    #             db_subnet_group_name: "NonEmptyString",
+    #             db_subnet_group_description: "NonEmptyString",
+    #             vpc_id: "NonEmptyString",
+    #             subnet_group_status: "NonEmptyString",
+    #             subnets: [
+    #               {
+    #                 subnet_identifier: "NonEmptyString",
+    #                 subnet_availability_zone: {
+    #                   name: "NonEmptyString",
+    #                 },
+    #                 subnet_status: "NonEmptyString",
+    #               },
+    #             ],
+    #             db_subnet_group_arn: "NonEmptyString",
+    #           },
+    #           preferred_maintenance_window: "NonEmptyString",
+    #           pending_modified_values: {
+    #             db_instance_class: "NonEmptyString",
+    #             allocated_storage: 1,
+    #             master_user_password: "NonEmptyString",
+    #             port: 1,
+    #             backup_retention_period: 1,
+    #             multi_az: false,
+    #             engine_version: "NonEmptyString",
+    #             license_model: "NonEmptyString",
+    #             iops: 1,
+    #             db_instance_identifier: "NonEmptyString",
+    #             storage_type: "NonEmptyString",
+    #             ca_certificate_identifier: "NonEmptyString",
+    #             db_subnet_group_name: "NonEmptyString",
+    #             pending_cloud_watch_logs_exports: {
+    #               log_types_to_enable: ["NonEmptyString"],
+    #               log_types_to_disable: ["NonEmptyString"],
+    #             },
+    #             processor_features: [
+    #               {
+    #                 name: "NonEmptyString",
+    #                 value: "NonEmptyString",
+    #               },
+    #             ],
+    #           },
+    #           latest_restorable_time: "NonEmptyString",
+    #           auto_minor_version_upgrade: false,
+    #           read_replica_source_db_instance_identifier: "NonEmptyString",
+    #           read_replica_db_instance_identifiers: ["NonEmptyString"],
+    #           read_replica_db_cluster_identifiers: ["NonEmptyString"],
+    #           license_model: "NonEmptyString",
+    #           iops: 1,
+    #           option_group_memberships: [
+    #             {
+    #               option_group_name: "NonEmptyString",
+    #               status: "NonEmptyString",
+    #             },
+    #           ],
+    #           character_set_name: "NonEmptyString",
+    #           secondary_availability_zone: "NonEmptyString",
+    #           status_infos: [
+    #             {
+    #               status_type: "NonEmptyString",
+    #               normal: false,
+    #               status: "NonEmptyString",
+    #               message: "NonEmptyString",
+    #             },
+    #           ],
+    #           storage_type: "NonEmptyString",
+    #           domain_memberships: [
+    #             {
+    #               domain: "NonEmptyString",
+    #               status: "NonEmptyString",
+    #               fqdn: "NonEmptyString",
+    #               iam_role_name: "NonEmptyString",
+    #             },
+    #           ],
+    #           copy_tags_to_snapshot: false,
+    #           monitoring_interval: 1,
+    #           monitoring_role_arn: "NonEmptyString",
+    #           promotion_tier: 1,
+    #           timezone: "NonEmptyString",
+    #           performance_insights_enabled: false,
+    #           performance_insights_kms_key_id: "NonEmptyString",
+    #           performance_insights_retention_period: 1,
+    #           enabled_cloud_watch_logs_exports: ["NonEmptyString"],
+    #           processor_features: [
+    #             {
+    #               name: "NonEmptyString",
+    #               value: "NonEmptyString",
+    #             },
+    #           ],
+    #           listener_endpoint: {
+    #             address: "NonEmptyString",
+    #             port: 1,
+    #             hosted_zone_id: "NonEmptyString",
+    #           },
+    #           max_allocated_storage: 1,
     #         },
     #         aws_sns_topic: {
     #           kms_master_key_id: "NonEmptyString",
@@ -10312,6 +14717,128 @@ module Aws::SecurityHub
     #             },
     #           ],
     #           web_acl_id: "NonEmptyString",
+    #         },
+    #         aws_rds_db_snapshot: {
+    #           db_snapshot_identifier: "NonEmptyString",
+    #           db_instance_identifier: "NonEmptyString",
+    #           snapshot_create_time: "NonEmptyString",
+    #           engine: "NonEmptyString",
+    #           allocated_storage: 1,
+    #           status: "NonEmptyString",
+    #           port: 1,
+    #           availability_zone: "NonEmptyString",
+    #           vpc_id: "NonEmptyString",
+    #           instance_create_time: "NonEmptyString",
+    #           master_username: "NonEmptyString",
+    #           engine_version: "NonEmptyString",
+    #           license_model: "NonEmptyString",
+    #           snapshot_type: "NonEmptyString",
+    #           iops: 1,
+    #           option_group_name: "NonEmptyString",
+    #           percent_progress: 1,
+    #           source_region: "NonEmptyString",
+    #           source_db_snapshot_identifier: "NonEmptyString",
+    #           storage_type: "NonEmptyString",
+    #           tde_credential_arn: "NonEmptyString",
+    #           encrypted: false,
+    #           kms_key_id: "NonEmptyString",
+    #           timezone: "NonEmptyString",
+    #           iam_database_authentication_enabled: false,
+    #           processor_features: [
+    #             {
+    #               name: "NonEmptyString",
+    #               value: "NonEmptyString",
+    #             },
+    #           ],
+    #           dbi_resource_id: "NonEmptyString",
+    #         },
+    #         aws_rds_db_cluster_snapshot: {
+    #           availability_zones: ["NonEmptyString"],
+    #           snapshot_create_time: "NonEmptyString",
+    #           engine: "NonEmptyString",
+    #           allocated_storage: 1,
+    #           status: "NonEmptyString",
+    #           port: 1,
+    #           vpc_id: "NonEmptyString",
+    #           cluster_create_time: "NonEmptyString",
+    #           master_username: "NonEmptyString",
+    #           engine_version: "NonEmptyString",
+    #           license_model: "NonEmptyString",
+    #           snapshot_type: "NonEmptyString",
+    #           percent_progress: 1,
+    #           storage_encrypted: false,
+    #           kms_key_id: "NonEmptyString",
+    #           db_cluster_identifier: "NonEmptyString",
+    #           db_cluster_snapshot_identifier: "NonEmptyString",
+    #           iam_database_authentication_enabled: false,
+    #         },
+    #         aws_rds_db_cluster: {
+    #           allocated_storage: 1,
+    #           availability_zones: ["NonEmptyString"],
+    #           backup_retention_period: 1,
+    #           database_name: "NonEmptyString",
+    #           status: "NonEmptyString",
+    #           endpoint: "NonEmptyString",
+    #           reader_endpoint: "NonEmptyString",
+    #           custom_endpoints: ["NonEmptyString"],
+    #           multi_az: false,
+    #           engine: "NonEmptyString",
+    #           engine_version: "NonEmptyString",
+    #           port: 1,
+    #           master_username: "NonEmptyString",
+    #           preferred_backup_window: "NonEmptyString",
+    #           preferred_maintenance_window: "NonEmptyString",
+    #           read_replica_identifiers: ["NonEmptyString"],
+    #           vpc_security_groups: [
+    #             {
+    #               vpc_security_group_id: "NonEmptyString",
+    #               status: "NonEmptyString",
+    #             },
+    #           ],
+    #           hosted_zone_id: "NonEmptyString",
+    #           storage_encrypted: false,
+    #           kms_key_id: "NonEmptyString",
+    #           db_cluster_resource_id: "NonEmptyString",
+    #           associated_roles: [
+    #             {
+    #               role_arn: "NonEmptyString",
+    #               status: "NonEmptyString",
+    #             },
+    #           ],
+    #           cluster_create_time: "NonEmptyString",
+    #           enabled_cloud_watch_logs_exports: ["NonEmptyString"],
+    #           engine_mode: "NonEmptyString",
+    #           deletion_protection: false,
+    #           http_endpoint_enabled: false,
+    #           activity_stream_status: "NonEmptyString",
+    #           copy_tags_to_snapshot: false,
+    #           cross_account_clone: false,
+    #           domain_memberships: [
+    #             {
+    #               domain: "NonEmptyString",
+    #               status: "NonEmptyString",
+    #               fqdn: "NonEmptyString",
+    #               iam_role_name: "NonEmptyString",
+    #             },
+    #           ],
+    #           db_cluster_parameter_group: "NonEmptyString",
+    #           db_subnet_group: "NonEmptyString",
+    #           db_cluster_option_group_memberships: [
+    #             {
+    #               db_cluster_option_group_name: "NonEmptyString",
+    #               status: "NonEmptyString",
+    #             },
+    #           ],
+    #           db_cluster_identifier: "NonEmptyString",
+    #           db_cluster_members: [
+    #             {
+    #               is_cluster_writer: false,
+    #               promotion_tier: 1,
+    #               db_instance_identifier: "NonEmptyString",
+    #               db_cluster_parameter_group_status: "NonEmptyString",
+    #             },
+    #           ],
+    #           iam_database_authentication_enabled: false,
     #         },
     #         container: {
     #           name: "NonEmptyString",
@@ -10356,6 +14883,10 @@ module Aws::SecurityHub
     #   Details for an EC2 VPC.
     #   @return [Types::AwsEc2VpcDetails]
     #
+    # @!attribute [rw] aws_ec2_eip
+    #   Details about an Elastic IP address.
+    #   @return [Types::AwsEc2EipDetails]
+    #
     # @!attribute [rw] aws_elbv_2_load_balancer
     #   Details about a load balancer.
     #   @return [Types::AwsElbv2LoadBalancerDetails]
@@ -10372,9 +14903,25 @@ module Aws::SecurityHub
     #   Details about an Amazon S3 object related to a finding.
     #   @return [Types::AwsS3ObjectDetails]
     #
+    # @!attribute [rw] aws_secrets_manager_secret
+    #   Details about a Secrets Manager secret.
+    #   @return [Types::AwsSecretsManagerSecretDetails]
+    #
     # @!attribute [rw] aws_iam_access_key
     #   Details about an IAM access key related to a finding.
     #   @return [Types::AwsIamAccessKeyDetails]
+    #
+    # @!attribute [rw] aws_iam_user
+    #   Details about an IAM user.
+    #   @return [Types::AwsIamUserDetails]
+    #
+    # @!attribute [rw] aws_iam_policy
+    #   Details about an IAM permissions policy.
+    #   @return [Types::AwsIamPolicyDetails]
+    #
+    # @!attribute [rw] aws_dynamo_db_table
+    #   Details about a DynamoDB table.
+    #   @return [Types::AwsDynamoDbTableDetails]
     #
     # @!attribute [rw] aws_iam_role
     #   Details about an IAM role.
@@ -10393,7 +14940,7 @@ module Aws::SecurityHub
     #   @return [Types::AwsLambdaLayerVersionDetails]
     #
     # @!attribute [rw] aws_rds_db_instance
-    #   Details for an Amazon RDS database instance.
+    #   Details about an Amazon RDS database instance.
     #   @return [Types::AwsRdsDbInstanceDetails]
     #
     # @!attribute [rw] aws_sns_topic
@@ -10407,6 +14954,18 @@ module Aws::SecurityHub
     # @!attribute [rw] aws_waf_web_acl
     #   Details for a WAF WebACL.
     #   @return [Types::AwsWafWebAclDetails]
+    #
+    # @!attribute [rw] aws_rds_db_snapshot
+    #   Details about an Amazon RDS database snapshot.
+    #   @return [Types::AwsRdsDbSnapshotDetails]
+    #
+    # @!attribute [rw] aws_rds_db_cluster_snapshot
+    #   Details about an Amazon RDS database cluster snapshot.
+    #   @return [Types::AwsRdsDbClusterSnapshotDetails]
+    #
+    # @!attribute [rw] aws_rds_db_cluster
+    #   Details about an Amazon RDS database cluster.
+    #   @return [Types::AwsRdsDbClusterDetails]
     #
     # @!attribute [rw] container
     #   Details about a container resource related to a finding.
@@ -10437,11 +14996,16 @@ module Aws::SecurityHub
       :aws_ec2_security_group,
       :aws_ec2_volume,
       :aws_ec2_vpc,
+      :aws_ec2_eip,
       :aws_elbv_2_load_balancer,
       :aws_elasticsearch_domain,
       :aws_s3_bucket,
       :aws_s3_object,
+      :aws_secrets_manager_secret,
       :aws_iam_access_key,
+      :aws_iam_user,
+      :aws_iam_policy,
+      :aws_dynamo_db_table,
       :aws_iam_role,
       :aws_kms_key,
       :aws_lambda_function,
@@ -10450,6 +15014,9 @@ module Aws::SecurityHub
       :aws_sns_topic,
       :aws_sqs_queue,
       :aws_waf_web_acl,
+      :aws_rds_db_snapshot,
+      :aws_rds_db_cluster_snapshot,
+      :aws_rds_db_cluster,
       :container,
       :other)
       SENSITIVE = []
@@ -10924,16 +15491,85 @@ module Aws::SecurityHub
     #
     #       {
     #         value: "NonEmptyString",
-    #         comparison: "EQUALS", # accepts EQUALS, PREFIX
+    #         comparison: "EQUALS", # accepts EQUALS, PREFIX, NOT_EQUALS, PREFIX_NOT_EQUALS
     #       }
     #
     # @!attribute [rw] value
-    #   The string filter value.
+    #   The string filter value. Filter values are case sensitive. For
+    #   example, the product name for control-based findings is `Security
+    #   Hub`. If you provide `security hub` as the filter text, then there
+    #   is no match.
     #   @return [String]
     #
     # @!attribute [rw] comparison
-    #   The condition to be applied to a string value when querying for
-    #   findings.
+    #   The condition to apply to a string value when querying for findings.
+    #   To search for values that contain the filter criteria value, use one
+    #   of the following comparison operators:
+    #
+    #   * To search for values that exactly match the filter value, use
+    #     `EQUALS`.
+    #
+    #     For example, the filter `ResourceType EQUALS AwsEc2SecurityGroup`
+    #     only matches findings that have a resource type of
+    #     `AwsEc2SecurityGroup`.
+    #
+    #   * To search for values that start with the filter value, use
+    #     `PREFIX`.
+    #
+    #     For example, the filter `ResourceType PREFIX AwsIam` matches
+    #     findings that have a resource type that starts with `AwsIam`.
+    #     Findings with a resource type of `AwsIamPolicy`, `AwsIamRole`, or
+    #     `AwsIamUser` would all match.
+    #
+    #   `EQUALS` and `PREFIX` filters on the same field are joined by `OR`.
+    #   A finding matches if it matches any one of those filters.
+    #
+    #   To search for values that do not contain the filter criteria value,
+    #   use one of the following comparison operators:
+    #
+    #   * To search for values that do not exactly match the filter value,
+    #     use `NOT_EQUALS`.
+    #
+    #     For example, the filter `ResourceType NOT_EQUALS AwsIamPolicy`
+    #     matches findings that have a resource type other than
+    #     `AwsIamPolicy`.
+    #
+    #   * To search for values that do not start with the filter value, use
+    #     `PREFIX_NOT_EQUALS`.
+    #
+    #     For example, the filter `ResourceType PREFIX_NOT_EQUALS AwsIam`
+    #     matches findings that have a resource type that does not start
+    #     with `AwsIam`. Findings with a resource type of `AwsIamPolicy`,
+    #     `AwsIamRole`, or `AwsIamUser` would all be excluded from the
+    #     results.
+    #
+    #   `NOT_EQUALS` and `PREFIX_NOT_EQUALS` filters on the same field are
+    #   joined by `AND`. A finding matches only if it matches all of those
+    #   filters.
+    #
+    #   For filters on the same field, you cannot provide both an `EQUALS`
+    #   filter and a `NOT_EQUALS` or `PREFIX_NOT_EQUALS` filter. Combining
+    #   filters in this way always returns an error, even if the provided
+    #   filter values would return valid results.
+    #
+    #   You can combine `PREFIX` filters with `NOT_EQUALS` or
+    #   `PREFIX_NOT_EQUALS` filters for the same field. Security Hub first
+    #   processes the `PREFIX` filters, then the `NOT_EQUALS` or
+    #   `PREFIX_NOT_EQUALS` filters.
+    #
+    #   For example, for the following filter, Security Hub first identifies
+    #   findings that have resource types that start with either `AwsIAM` or
+    #   `AwsEc2`. It then excludes findings that have a resource type of
+    #   `AwsIamPolicy` and findings that have a resource type of
+    #   `AwsEc2NetworkInterface`.
+    #
+    #   * `ResourceType PREFIX AwsIam`
+    #
+    #   * `ResourceType PREFIX AwsEc2`
+    #
+    #   * `ResourceType NOT_EQUALS AwsIamPolicy`
+    #
+    #   * `ResourceType NOT_EQUALS AwsEc2NetworkInterface`
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/StringFilter AWS API Documentation
@@ -11003,8 +15639,16 @@ module Aws::SecurityHub
     #   @return [String]
     #
     # @!attribute [rw] last_observed_at
-    #   The date and time when the most recent instance of a threat
-    #   intelligence indicator was observed.
+    #   Indicates when the most recent instance of a threat intelligence
+    #   indicator was observed.
+    #
+    #   Uses the `date-time` format specified in [RFC 3339 section 5.6,
+    #   Internet Date/Time Format][1]. The value cannot contain spaces. For
+    #   example, `2020-03-22T13:22:13.933Z`.
+    #
+    #
+    #
+    #   [1]: https://tools.ietf.org/html/rfc3339#section-5.6
     #   @return [String]
     #
     # @!attribute [rw] source
@@ -11101,31 +15745,31 @@ module Aws::SecurityHub
     #           product_arn: [
     #             {
     #               value: "NonEmptyString",
-    #               comparison: "EQUALS", # accepts EQUALS, PREFIX
+    #               comparison: "EQUALS", # accepts EQUALS, PREFIX, NOT_EQUALS, PREFIX_NOT_EQUALS
     #             },
     #           ],
     #           aws_account_id: [
     #             {
     #               value: "NonEmptyString",
-    #               comparison: "EQUALS", # accepts EQUALS, PREFIX
+    #               comparison: "EQUALS", # accepts EQUALS, PREFIX, NOT_EQUALS, PREFIX_NOT_EQUALS
     #             },
     #           ],
     #           id: [
     #             {
     #               value: "NonEmptyString",
-    #               comparison: "EQUALS", # accepts EQUALS, PREFIX
+    #               comparison: "EQUALS", # accepts EQUALS, PREFIX, NOT_EQUALS, PREFIX_NOT_EQUALS
     #             },
     #           ],
     #           generator_id: [
     #             {
     #               value: "NonEmptyString",
-    #               comparison: "EQUALS", # accepts EQUALS, PREFIX
+    #               comparison: "EQUALS", # accepts EQUALS, PREFIX, NOT_EQUALS, PREFIX_NOT_EQUALS
     #             },
     #           ],
     #           type: [
     #             {
     #               value: "NonEmptyString",
-    #               comparison: "EQUALS", # accepts EQUALS, PREFIX
+    #               comparison: "EQUALS", # accepts EQUALS, PREFIX, NOT_EQUALS, PREFIX_NOT_EQUALS
     #             },
     #           ],
     #           first_observed_at: [
@@ -11185,7 +15829,7 @@ module Aws::SecurityHub
     #           severity_label: [
     #             {
     #               value: "NonEmptyString",
-    #               comparison: "EQUALS", # accepts EQUALS, PREFIX
+    #               comparison: "EQUALS", # accepts EQUALS, PREFIX, NOT_EQUALS, PREFIX_NOT_EQUALS
     #             },
     #           ],
     #           confidence: [
@@ -11205,87 +15849,87 @@ module Aws::SecurityHub
     #           title: [
     #             {
     #               value: "NonEmptyString",
-    #               comparison: "EQUALS", # accepts EQUALS, PREFIX
+    #               comparison: "EQUALS", # accepts EQUALS, PREFIX, NOT_EQUALS, PREFIX_NOT_EQUALS
     #             },
     #           ],
     #           description: [
     #             {
     #               value: "NonEmptyString",
-    #               comparison: "EQUALS", # accepts EQUALS, PREFIX
+    #               comparison: "EQUALS", # accepts EQUALS, PREFIX, NOT_EQUALS, PREFIX_NOT_EQUALS
     #             },
     #           ],
     #           recommendation_text: [
     #             {
     #               value: "NonEmptyString",
-    #               comparison: "EQUALS", # accepts EQUALS, PREFIX
+    #               comparison: "EQUALS", # accepts EQUALS, PREFIX, NOT_EQUALS, PREFIX_NOT_EQUALS
     #             },
     #           ],
     #           source_url: [
     #             {
     #               value: "NonEmptyString",
-    #               comparison: "EQUALS", # accepts EQUALS, PREFIX
+    #               comparison: "EQUALS", # accepts EQUALS, PREFIX, NOT_EQUALS, PREFIX_NOT_EQUALS
     #             },
     #           ],
     #           product_fields: [
     #             {
     #               key: "NonEmptyString",
     #               value: "NonEmptyString",
-    #               comparison: "EQUALS", # accepts EQUALS
+    #               comparison: "EQUALS", # accepts EQUALS, NOT_EQUALS
     #             },
     #           ],
     #           product_name: [
     #             {
     #               value: "NonEmptyString",
-    #               comparison: "EQUALS", # accepts EQUALS, PREFIX
+    #               comparison: "EQUALS", # accepts EQUALS, PREFIX, NOT_EQUALS, PREFIX_NOT_EQUALS
     #             },
     #           ],
     #           company_name: [
     #             {
     #               value: "NonEmptyString",
-    #               comparison: "EQUALS", # accepts EQUALS, PREFIX
+    #               comparison: "EQUALS", # accepts EQUALS, PREFIX, NOT_EQUALS, PREFIX_NOT_EQUALS
     #             },
     #           ],
     #           user_defined_fields: [
     #             {
     #               key: "NonEmptyString",
     #               value: "NonEmptyString",
-    #               comparison: "EQUALS", # accepts EQUALS
+    #               comparison: "EQUALS", # accepts EQUALS, NOT_EQUALS
     #             },
     #           ],
     #           malware_name: [
     #             {
     #               value: "NonEmptyString",
-    #               comparison: "EQUALS", # accepts EQUALS, PREFIX
+    #               comparison: "EQUALS", # accepts EQUALS, PREFIX, NOT_EQUALS, PREFIX_NOT_EQUALS
     #             },
     #           ],
     #           malware_type: [
     #             {
     #               value: "NonEmptyString",
-    #               comparison: "EQUALS", # accepts EQUALS, PREFIX
+    #               comparison: "EQUALS", # accepts EQUALS, PREFIX, NOT_EQUALS, PREFIX_NOT_EQUALS
     #             },
     #           ],
     #           malware_path: [
     #             {
     #               value: "NonEmptyString",
-    #               comparison: "EQUALS", # accepts EQUALS, PREFIX
+    #               comparison: "EQUALS", # accepts EQUALS, PREFIX, NOT_EQUALS, PREFIX_NOT_EQUALS
     #             },
     #           ],
     #           malware_state: [
     #             {
     #               value: "NonEmptyString",
-    #               comparison: "EQUALS", # accepts EQUALS, PREFIX
+    #               comparison: "EQUALS", # accepts EQUALS, PREFIX, NOT_EQUALS, PREFIX_NOT_EQUALS
     #             },
     #           ],
     #           network_direction: [
     #             {
     #               value: "NonEmptyString",
-    #               comparison: "EQUALS", # accepts EQUALS, PREFIX
+    #               comparison: "EQUALS", # accepts EQUALS, PREFIX, NOT_EQUALS, PREFIX_NOT_EQUALS
     #             },
     #           ],
     #           network_protocol: [
     #             {
     #               value: "NonEmptyString",
-    #               comparison: "EQUALS", # accepts EQUALS, PREFIX
+    #               comparison: "EQUALS", # accepts EQUALS, PREFIX, NOT_EQUALS, PREFIX_NOT_EQUALS
     #             },
     #           ],
     #           network_source_ip_v4: [
@@ -11308,13 +15952,13 @@ module Aws::SecurityHub
     #           network_source_domain: [
     #             {
     #               value: "NonEmptyString",
-    #               comparison: "EQUALS", # accepts EQUALS, PREFIX
+    #               comparison: "EQUALS", # accepts EQUALS, PREFIX, NOT_EQUALS, PREFIX_NOT_EQUALS
     #             },
     #           ],
     #           network_source_mac: [
     #             {
     #               value: "NonEmptyString",
-    #               comparison: "EQUALS", # accepts EQUALS, PREFIX
+    #               comparison: "EQUALS", # accepts EQUALS, PREFIX, NOT_EQUALS, PREFIX_NOT_EQUALS
     #             },
     #           ],
     #           network_destination_ip_v4: [
@@ -11337,19 +15981,19 @@ module Aws::SecurityHub
     #           network_destination_domain: [
     #             {
     #               value: "NonEmptyString",
-    #               comparison: "EQUALS", # accepts EQUALS, PREFIX
+    #               comparison: "EQUALS", # accepts EQUALS, PREFIX, NOT_EQUALS, PREFIX_NOT_EQUALS
     #             },
     #           ],
     #           process_name: [
     #             {
     #               value: "NonEmptyString",
-    #               comparison: "EQUALS", # accepts EQUALS, PREFIX
+    #               comparison: "EQUALS", # accepts EQUALS, PREFIX, NOT_EQUALS, PREFIX_NOT_EQUALS
     #             },
     #           ],
     #           process_path: [
     #             {
     #               value: "NonEmptyString",
-    #               comparison: "EQUALS", # accepts EQUALS, PREFIX
+    #               comparison: "EQUALS", # accepts EQUALS, PREFIX, NOT_EQUALS, PREFIX_NOT_EQUALS
     #             },
     #           ],
     #           process_pid: [
@@ -11389,19 +16033,19 @@ module Aws::SecurityHub
     #           threat_intel_indicator_type: [
     #             {
     #               value: "NonEmptyString",
-    #               comparison: "EQUALS", # accepts EQUALS, PREFIX
+    #               comparison: "EQUALS", # accepts EQUALS, PREFIX, NOT_EQUALS, PREFIX_NOT_EQUALS
     #             },
     #           ],
     #           threat_intel_indicator_value: [
     #             {
     #               value: "NonEmptyString",
-    #               comparison: "EQUALS", # accepts EQUALS, PREFIX
+    #               comparison: "EQUALS", # accepts EQUALS, PREFIX, NOT_EQUALS, PREFIX_NOT_EQUALS
     #             },
     #           ],
     #           threat_intel_indicator_category: [
     #             {
     #               value: "NonEmptyString",
-    #               comparison: "EQUALS", # accepts EQUALS, PREFIX
+    #               comparison: "EQUALS", # accepts EQUALS, PREFIX, NOT_EQUALS, PREFIX_NOT_EQUALS
     #             },
     #           ],
     #           threat_intel_indicator_last_observed_at: [
@@ -11417,56 +16061,56 @@ module Aws::SecurityHub
     #           threat_intel_indicator_source: [
     #             {
     #               value: "NonEmptyString",
-    #               comparison: "EQUALS", # accepts EQUALS, PREFIX
+    #               comparison: "EQUALS", # accepts EQUALS, PREFIX, NOT_EQUALS, PREFIX_NOT_EQUALS
     #             },
     #           ],
     #           threat_intel_indicator_source_url: [
     #             {
     #               value: "NonEmptyString",
-    #               comparison: "EQUALS", # accepts EQUALS, PREFIX
+    #               comparison: "EQUALS", # accepts EQUALS, PREFIX, NOT_EQUALS, PREFIX_NOT_EQUALS
     #             },
     #           ],
     #           resource_type: [
     #             {
     #               value: "NonEmptyString",
-    #               comparison: "EQUALS", # accepts EQUALS, PREFIX
+    #               comparison: "EQUALS", # accepts EQUALS, PREFIX, NOT_EQUALS, PREFIX_NOT_EQUALS
     #             },
     #           ],
     #           resource_id: [
     #             {
     #               value: "NonEmptyString",
-    #               comparison: "EQUALS", # accepts EQUALS, PREFIX
+    #               comparison: "EQUALS", # accepts EQUALS, PREFIX, NOT_EQUALS, PREFIX_NOT_EQUALS
     #             },
     #           ],
     #           resource_partition: [
     #             {
     #               value: "NonEmptyString",
-    #               comparison: "EQUALS", # accepts EQUALS, PREFIX
+    #               comparison: "EQUALS", # accepts EQUALS, PREFIX, NOT_EQUALS, PREFIX_NOT_EQUALS
     #             },
     #           ],
     #           resource_region: [
     #             {
     #               value: "NonEmptyString",
-    #               comparison: "EQUALS", # accepts EQUALS, PREFIX
+    #               comparison: "EQUALS", # accepts EQUALS, PREFIX, NOT_EQUALS, PREFIX_NOT_EQUALS
     #             },
     #           ],
     #           resource_tags: [
     #             {
     #               key: "NonEmptyString",
     #               value: "NonEmptyString",
-    #               comparison: "EQUALS", # accepts EQUALS
+    #               comparison: "EQUALS", # accepts EQUALS, NOT_EQUALS
     #             },
     #           ],
     #           resource_aws_ec2_instance_type: [
     #             {
     #               value: "NonEmptyString",
-    #               comparison: "EQUALS", # accepts EQUALS, PREFIX
+    #               comparison: "EQUALS", # accepts EQUALS, PREFIX, NOT_EQUALS, PREFIX_NOT_EQUALS
     #             },
     #           ],
     #           resource_aws_ec2_instance_image_id: [
     #             {
     #               value: "NonEmptyString",
-    #               comparison: "EQUALS", # accepts EQUALS, PREFIX
+    #               comparison: "EQUALS", # accepts EQUALS, PREFIX, NOT_EQUALS, PREFIX_NOT_EQUALS
     #             },
     #           ],
     #           resource_aws_ec2_instance_ip_v4_addresses: [
@@ -11482,25 +16126,25 @@ module Aws::SecurityHub
     #           resource_aws_ec2_instance_key_name: [
     #             {
     #               value: "NonEmptyString",
-    #               comparison: "EQUALS", # accepts EQUALS, PREFIX
+    #               comparison: "EQUALS", # accepts EQUALS, PREFIX, NOT_EQUALS, PREFIX_NOT_EQUALS
     #             },
     #           ],
     #           resource_aws_ec2_instance_iam_instance_profile_arn: [
     #             {
     #               value: "NonEmptyString",
-    #               comparison: "EQUALS", # accepts EQUALS, PREFIX
+    #               comparison: "EQUALS", # accepts EQUALS, PREFIX, NOT_EQUALS, PREFIX_NOT_EQUALS
     #             },
     #           ],
     #           resource_aws_ec2_instance_vpc_id: [
     #             {
     #               value: "NonEmptyString",
-    #               comparison: "EQUALS", # accepts EQUALS, PREFIX
+    #               comparison: "EQUALS", # accepts EQUALS, PREFIX, NOT_EQUALS, PREFIX_NOT_EQUALS
     #             },
     #           ],
     #           resource_aws_ec2_instance_subnet_id: [
     #             {
     #               value: "NonEmptyString",
-    #               comparison: "EQUALS", # accepts EQUALS, PREFIX
+    #               comparison: "EQUALS", # accepts EQUALS, PREFIX, NOT_EQUALS, PREFIX_NOT_EQUALS
     #             },
     #           ],
     #           resource_aws_ec2_instance_launched_at: [
@@ -11516,25 +16160,25 @@ module Aws::SecurityHub
     #           resource_aws_s3_bucket_owner_id: [
     #             {
     #               value: "NonEmptyString",
-    #               comparison: "EQUALS", # accepts EQUALS, PREFIX
+    #               comparison: "EQUALS", # accepts EQUALS, PREFIX, NOT_EQUALS, PREFIX_NOT_EQUALS
     #             },
     #           ],
     #           resource_aws_s3_bucket_owner_name: [
     #             {
     #               value: "NonEmptyString",
-    #               comparison: "EQUALS", # accepts EQUALS, PREFIX
+    #               comparison: "EQUALS", # accepts EQUALS, PREFIX, NOT_EQUALS, PREFIX_NOT_EQUALS
     #             },
     #           ],
     #           resource_aws_iam_access_key_user_name: [
     #             {
     #               value: "NonEmptyString",
-    #               comparison: "EQUALS", # accepts EQUALS, PREFIX
+    #               comparison: "EQUALS", # accepts EQUALS, PREFIX, NOT_EQUALS, PREFIX_NOT_EQUALS
     #             },
     #           ],
     #           resource_aws_iam_access_key_status: [
     #             {
     #               value: "NonEmptyString",
-    #               comparison: "EQUALS", # accepts EQUALS, PREFIX
+    #               comparison: "EQUALS", # accepts EQUALS, PREFIX, NOT_EQUALS, PREFIX_NOT_EQUALS
     #             },
     #           ],
     #           resource_aws_iam_access_key_created_at: [
@@ -11550,19 +16194,19 @@ module Aws::SecurityHub
     #           resource_container_name: [
     #             {
     #               value: "NonEmptyString",
-    #               comparison: "EQUALS", # accepts EQUALS, PREFIX
+    #               comparison: "EQUALS", # accepts EQUALS, PREFIX, NOT_EQUALS, PREFIX_NOT_EQUALS
     #             },
     #           ],
     #           resource_container_image_id: [
     #             {
     #               value: "NonEmptyString",
-    #               comparison: "EQUALS", # accepts EQUALS, PREFIX
+    #               comparison: "EQUALS", # accepts EQUALS, PREFIX, NOT_EQUALS, PREFIX_NOT_EQUALS
     #             },
     #           ],
     #           resource_container_image_name: [
     #             {
     #               value: "NonEmptyString",
-    #               comparison: "EQUALS", # accepts EQUALS, PREFIX
+    #               comparison: "EQUALS", # accepts EQUALS, PREFIX, NOT_EQUALS, PREFIX_NOT_EQUALS
     #             },
     #           ],
     #           resource_container_launched_at: [
@@ -11579,55 +16223,55 @@ module Aws::SecurityHub
     #             {
     #               key: "NonEmptyString",
     #               value: "NonEmptyString",
-    #               comparison: "EQUALS", # accepts EQUALS
+    #               comparison: "EQUALS", # accepts EQUALS, NOT_EQUALS
     #             },
     #           ],
     #           compliance_status: [
     #             {
     #               value: "NonEmptyString",
-    #               comparison: "EQUALS", # accepts EQUALS, PREFIX
+    #               comparison: "EQUALS", # accepts EQUALS, PREFIX, NOT_EQUALS, PREFIX_NOT_EQUALS
     #             },
     #           ],
     #           verification_state: [
     #             {
     #               value: "NonEmptyString",
-    #               comparison: "EQUALS", # accepts EQUALS, PREFIX
+    #               comparison: "EQUALS", # accepts EQUALS, PREFIX, NOT_EQUALS, PREFIX_NOT_EQUALS
     #             },
     #           ],
     #           workflow_state: [
     #             {
     #               value: "NonEmptyString",
-    #               comparison: "EQUALS", # accepts EQUALS, PREFIX
+    #               comparison: "EQUALS", # accepts EQUALS, PREFIX, NOT_EQUALS, PREFIX_NOT_EQUALS
     #             },
     #           ],
     #           workflow_status: [
     #             {
     #               value: "NonEmptyString",
-    #               comparison: "EQUALS", # accepts EQUALS, PREFIX
+    #               comparison: "EQUALS", # accepts EQUALS, PREFIX, NOT_EQUALS, PREFIX_NOT_EQUALS
     #             },
     #           ],
     #           record_state: [
     #             {
     #               value: "NonEmptyString",
-    #               comparison: "EQUALS", # accepts EQUALS, PREFIX
+    #               comparison: "EQUALS", # accepts EQUALS, PREFIX, NOT_EQUALS, PREFIX_NOT_EQUALS
     #             },
     #           ],
     #           related_findings_product_arn: [
     #             {
     #               value: "NonEmptyString",
-    #               comparison: "EQUALS", # accepts EQUALS, PREFIX
+    #               comparison: "EQUALS", # accepts EQUALS, PREFIX, NOT_EQUALS, PREFIX_NOT_EQUALS
     #             },
     #           ],
     #           related_findings_id: [
     #             {
     #               value: "NonEmptyString",
-    #               comparison: "EQUALS", # accepts EQUALS, PREFIX
+    #               comparison: "EQUALS", # accepts EQUALS, PREFIX, NOT_EQUALS, PREFIX_NOT_EQUALS
     #             },
     #           ],
     #           note_text: [
     #             {
     #               value: "NonEmptyString",
-    #               comparison: "EQUALS", # accepts EQUALS, PREFIX
+    #               comparison: "EQUALS", # accepts EQUALS, PREFIX, NOT_EQUALS, PREFIX_NOT_EQUALS
     #             },
     #           ],
     #           note_updated_at: [
@@ -11643,7 +16287,7 @@ module Aws::SecurityHub
     #           note_updated_by: [
     #             {
     #               value: "NonEmptyString",
-    #               comparison: "EQUALS", # accepts EQUALS, PREFIX
+    #               comparison: "EQUALS", # accepts EQUALS, PREFIX, NOT_EQUALS, PREFIX_NOT_EQUALS
     #             },
     #           ],
     #           keyword: [
@@ -11696,31 +16340,31 @@ module Aws::SecurityHub
     #           product_arn: [
     #             {
     #               value: "NonEmptyString",
-    #               comparison: "EQUALS", # accepts EQUALS, PREFIX
+    #               comparison: "EQUALS", # accepts EQUALS, PREFIX, NOT_EQUALS, PREFIX_NOT_EQUALS
     #             },
     #           ],
     #           aws_account_id: [
     #             {
     #               value: "NonEmptyString",
-    #               comparison: "EQUALS", # accepts EQUALS, PREFIX
+    #               comparison: "EQUALS", # accepts EQUALS, PREFIX, NOT_EQUALS, PREFIX_NOT_EQUALS
     #             },
     #           ],
     #           id: [
     #             {
     #               value: "NonEmptyString",
-    #               comparison: "EQUALS", # accepts EQUALS, PREFIX
+    #               comparison: "EQUALS", # accepts EQUALS, PREFIX, NOT_EQUALS, PREFIX_NOT_EQUALS
     #             },
     #           ],
     #           generator_id: [
     #             {
     #               value: "NonEmptyString",
-    #               comparison: "EQUALS", # accepts EQUALS, PREFIX
+    #               comparison: "EQUALS", # accepts EQUALS, PREFIX, NOT_EQUALS, PREFIX_NOT_EQUALS
     #             },
     #           ],
     #           type: [
     #             {
     #               value: "NonEmptyString",
-    #               comparison: "EQUALS", # accepts EQUALS, PREFIX
+    #               comparison: "EQUALS", # accepts EQUALS, PREFIX, NOT_EQUALS, PREFIX_NOT_EQUALS
     #             },
     #           ],
     #           first_observed_at: [
@@ -11780,7 +16424,7 @@ module Aws::SecurityHub
     #           severity_label: [
     #             {
     #               value: "NonEmptyString",
-    #               comparison: "EQUALS", # accepts EQUALS, PREFIX
+    #               comparison: "EQUALS", # accepts EQUALS, PREFIX, NOT_EQUALS, PREFIX_NOT_EQUALS
     #             },
     #           ],
     #           confidence: [
@@ -11800,87 +16444,87 @@ module Aws::SecurityHub
     #           title: [
     #             {
     #               value: "NonEmptyString",
-    #               comparison: "EQUALS", # accepts EQUALS, PREFIX
+    #               comparison: "EQUALS", # accepts EQUALS, PREFIX, NOT_EQUALS, PREFIX_NOT_EQUALS
     #             },
     #           ],
     #           description: [
     #             {
     #               value: "NonEmptyString",
-    #               comparison: "EQUALS", # accepts EQUALS, PREFIX
+    #               comparison: "EQUALS", # accepts EQUALS, PREFIX, NOT_EQUALS, PREFIX_NOT_EQUALS
     #             },
     #           ],
     #           recommendation_text: [
     #             {
     #               value: "NonEmptyString",
-    #               comparison: "EQUALS", # accepts EQUALS, PREFIX
+    #               comparison: "EQUALS", # accepts EQUALS, PREFIX, NOT_EQUALS, PREFIX_NOT_EQUALS
     #             },
     #           ],
     #           source_url: [
     #             {
     #               value: "NonEmptyString",
-    #               comparison: "EQUALS", # accepts EQUALS, PREFIX
+    #               comparison: "EQUALS", # accepts EQUALS, PREFIX, NOT_EQUALS, PREFIX_NOT_EQUALS
     #             },
     #           ],
     #           product_fields: [
     #             {
     #               key: "NonEmptyString",
     #               value: "NonEmptyString",
-    #               comparison: "EQUALS", # accepts EQUALS
+    #               comparison: "EQUALS", # accepts EQUALS, NOT_EQUALS
     #             },
     #           ],
     #           product_name: [
     #             {
     #               value: "NonEmptyString",
-    #               comparison: "EQUALS", # accepts EQUALS, PREFIX
+    #               comparison: "EQUALS", # accepts EQUALS, PREFIX, NOT_EQUALS, PREFIX_NOT_EQUALS
     #             },
     #           ],
     #           company_name: [
     #             {
     #               value: "NonEmptyString",
-    #               comparison: "EQUALS", # accepts EQUALS, PREFIX
+    #               comparison: "EQUALS", # accepts EQUALS, PREFIX, NOT_EQUALS, PREFIX_NOT_EQUALS
     #             },
     #           ],
     #           user_defined_fields: [
     #             {
     #               key: "NonEmptyString",
     #               value: "NonEmptyString",
-    #               comparison: "EQUALS", # accepts EQUALS
+    #               comparison: "EQUALS", # accepts EQUALS, NOT_EQUALS
     #             },
     #           ],
     #           malware_name: [
     #             {
     #               value: "NonEmptyString",
-    #               comparison: "EQUALS", # accepts EQUALS, PREFIX
+    #               comparison: "EQUALS", # accepts EQUALS, PREFIX, NOT_EQUALS, PREFIX_NOT_EQUALS
     #             },
     #           ],
     #           malware_type: [
     #             {
     #               value: "NonEmptyString",
-    #               comparison: "EQUALS", # accepts EQUALS, PREFIX
+    #               comparison: "EQUALS", # accepts EQUALS, PREFIX, NOT_EQUALS, PREFIX_NOT_EQUALS
     #             },
     #           ],
     #           malware_path: [
     #             {
     #               value: "NonEmptyString",
-    #               comparison: "EQUALS", # accepts EQUALS, PREFIX
+    #               comparison: "EQUALS", # accepts EQUALS, PREFIX, NOT_EQUALS, PREFIX_NOT_EQUALS
     #             },
     #           ],
     #           malware_state: [
     #             {
     #               value: "NonEmptyString",
-    #               comparison: "EQUALS", # accepts EQUALS, PREFIX
+    #               comparison: "EQUALS", # accepts EQUALS, PREFIX, NOT_EQUALS, PREFIX_NOT_EQUALS
     #             },
     #           ],
     #           network_direction: [
     #             {
     #               value: "NonEmptyString",
-    #               comparison: "EQUALS", # accepts EQUALS, PREFIX
+    #               comparison: "EQUALS", # accepts EQUALS, PREFIX, NOT_EQUALS, PREFIX_NOT_EQUALS
     #             },
     #           ],
     #           network_protocol: [
     #             {
     #               value: "NonEmptyString",
-    #               comparison: "EQUALS", # accepts EQUALS, PREFIX
+    #               comparison: "EQUALS", # accepts EQUALS, PREFIX, NOT_EQUALS, PREFIX_NOT_EQUALS
     #             },
     #           ],
     #           network_source_ip_v4: [
@@ -11903,13 +16547,13 @@ module Aws::SecurityHub
     #           network_source_domain: [
     #             {
     #               value: "NonEmptyString",
-    #               comparison: "EQUALS", # accepts EQUALS, PREFIX
+    #               comparison: "EQUALS", # accepts EQUALS, PREFIX, NOT_EQUALS, PREFIX_NOT_EQUALS
     #             },
     #           ],
     #           network_source_mac: [
     #             {
     #               value: "NonEmptyString",
-    #               comparison: "EQUALS", # accepts EQUALS, PREFIX
+    #               comparison: "EQUALS", # accepts EQUALS, PREFIX, NOT_EQUALS, PREFIX_NOT_EQUALS
     #             },
     #           ],
     #           network_destination_ip_v4: [
@@ -11932,19 +16576,19 @@ module Aws::SecurityHub
     #           network_destination_domain: [
     #             {
     #               value: "NonEmptyString",
-    #               comparison: "EQUALS", # accepts EQUALS, PREFIX
+    #               comparison: "EQUALS", # accepts EQUALS, PREFIX, NOT_EQUALS, PREFIX_NOT_EQUALS
     #             },
     #           ],
     #           process_name: [
     #             {
     #               value: "NonEmptyString",
-    #               comparison: "EQUALS", # accepts EQUALS, PREFIX
+    #               comparison: "EQUALS", # accepts EQUALS, PREFIX, NOT_EQUALS, PREFIX_NOT_EQUALS
     #             },
     #           ],
     #           process_path: [
     #             {
     #               value: "NonEmptyString",
-    #               comparison: "EQUALS", # accepts EQUALS, PREFIX
+    #               comparison: "EQUALS", # accepts EQUALS, PREFIX, NOT_EQUALS, PREFIX_NOT_EQUALS
     #             },
     #           ],
     #           process_pid: [
@@ -11984,19 +16628,19 @@ module Aws::SecurityHub
     #           threat_intel_indicator_type: [
     #             {
     #               value: "NonEmptyString",
-    #               comparison: "EQUALS", # accepts EQUALS, PREFIX
+    #               comparison: "EQUALS", # accepts EQUALS, PREFIX, NOT_EQUALS, PREFIX_NOT_EQUALS
     #             },
     #           ],
     #           threat_intel_indicator_value: [
     #             {
     #               value: "NonEmptyString",
-    #               comparison: "EQUALS", # accepts EQUALS, PREFIX
+    #               comparison: "EQUALS", # accepts EQUALS, PREFIX, NOT_EQUALS, PREFIX_NOT_EQUALS
     #             },
     #           ],
     #           threat_intel_indicator_category: [
     #             {
     #               value: "NonEmptyString",
-    #               comparison: "EQUALS", # accepts EQUALS, PREFIX
+    #               comparison: "EQUALS", # accepts EQUALS, PREFIX, NOT_EQUALS, PREFIX_NOT_EQUALS
     #             },
     #           ],
     #           threat_intel_indicator_last_observed_at: [
@@ -12012,56 +16656,56 @@ module Aws::SecurityHub
     #           threat_intel_indicator_source: [
     #             {
     #               value: "NonEmptyString",
-    #               comparison: "EQUALS", # accepts EQUALS, PREFIX
+    #               comparison: "EQUALS", # accepts EQUALS, PREFIX, NOT_EQUALS, PREFIX_NOT_EQUALS
     #             },
     #           ],
     #           threat_intel_indicator_source_url: [
     #             {
     #               value: "NonEmptyString",
-    #               comparison: "EQUALS", # accepts EQUALS, PREFIX
+    #               comparison: "EQUALS", # accepts EQUALS, PREFIX, NOT_EQUALS, PREFIX_NOT_EQUALS
     #             },
     #           ],
     #           resource_type: [
     #             {
     #               value: "NonEmptyString",
-    #               comparison: "EQUALS", # accepts EQUALS, PREFIX
+    #               comparison: "EQUALS", # accepts EQUALS, PREFIX, NOT_EQUALS, PREFIX_NOT_EQUALS
     #             },
     #           ],
     #           resource_id: [
     #             {
     #               value: "NonEmptyString",
-    #               comparison: "EQUALS", # accepts EQUALS, PREFIX
+    #               comparison: "EQUALS", # accepts EQUALS, PREFIX, NOT_EQUALS, PREFIX_NOT_EQUALS
     #             },
     #           ],
     #           resource_partition: [
     #             {
     #               value: "NonEmptyString",
-    #               comparison: "EQUALS", # accepts EQUALS, PREFIX
+    #               comparison: "EQUALS", # accepts EQUALS, PREFIX, NOT_EQUALS, PREFIX_NOT_EQUALS
     #             },
     #           ],
     #           resource_region: [
     #             {
     #               value: "NonEmptyString",
-    #               comparison: "EQUALS", # accepts EQUALS, PREFIX
+    #               comparison: "EQUALS", # accepts EQUALS, PREFIX, NOT_EQUALS, PREFIX_NOT_EQUALS
     #             },
     #           ],
     #           resource_tags: [
     #             {
     #               key: "NonEmptyString",
     #               value: "NonEmptyString",
-    #               comparison: "EQUALS", # accepts EQUALS
+    #               comparison: "EQUALS", # accepts EQUALS, NOT_EQUALS
     #             },
     #           ],
     #           resource_aws_ec2_instance_type: [
     #             {
     #               value: "NonEmptyString",
-    #               comparison: "EQUALS", # accepts EQUALS, PREFIX
+    #               comparison: "EQUALS", # accepts EQUALS, PREFIX, NOT_EQUALS, PREFIX_NOT_EQUALS
     #             },
     #           ],
     #           resource_aws_ec2_instance_image_id: [
     #             {
     #               value: "NonEmptyString",
-    #               comparison: "EQUALS", # accepts EQUALS, PREFIX
+    #               comparison: "EQUALS", # accepts EQUALS, PREFIX, NOT_EQUALS, PREFIX_NOT_EQUALS
     #             },
     #           ],
     #           resource_aws_ec2_instance_ip_v4_addresses: [
@@ -12077,25 +16721,25 @@ module Aws::SecurityHub
     #           resource_aws_ec2_instance_key_name: [
     #             {
     #               value: "NonEmptyString",
-    #               comparison: "EQUALS", # accepts EQUALS, PREFIX
+    #               comparison: "EQUALS", # accepts EQUALS, PREFIX, NOT_EQUALS, PREFIX_NOT_EQUALS
     #             },
     #           ],
     #           resource_aws_ec2_instance_iam_instance_profile_arn: [
     #             {
     #               value: "NonEmptyString",
-    #               comparison: "EQUALS", # accepts EQUALS, PREFIX
+    #               comparison: "EQUALS", # accepts EQUALS, PREFIX, NOT_EQUALS, PREFIX_NOT_EQUALS
     #             },
     #           ],
     #           resource_aws_ec2_instance_vpc_id: [
     #             {
     #               value: "NonEmptyString",
-    #               comparison: "EQUALS", # accepts EQUALS, PREFIX
+    #               comparison: "EQUALS", # accepts EQUALS, PREFIX, NOT_EQUALS, PREFIX_NOT_EQUALS
     #             },
     #           ],
     #           resource_aws_ec2_instance_subnet_id: [
     #             {
     #               value: "NonEmptyString",
-    #               comparison: "EQUALS", # accepts EQUALS, PREFIX
+    #               comparison: "EQUALS", # accepts EQUALS, PREFIX, NOT_EQUALS, PREFIX_NOT_EQUALS
     #             },
     #           ],
     #           resource_aws_ec2_instance_launched_at: [
@@ -12111,25 +16755,25 @@ module Aws::SecurityHub
     #           resource_aws_s3_bucket_owner_id: [
     #             {
     #               value: "NonEmptyString",
-    #               comparison: "EQUALS", # accepts EQUALS, PREFIX
+    #               comparison: "EQUALS", # accepts EQUALS, PREFIX, NOT_EQUALS, PREFIX_NOT_EQUALS
     #             },
     #           ],
     #           resource_aws_s3_bucket_owner_name: [
     #             {
     #               value: "NonEmptyString",
-    #               comparison: "EQUALS", # accepts EQUALS, PREFIX
+    #               comparison: "EQUALS", # accepts EQUALS, PREFIX, NOT_EQUALS, PREFIX_NOT_EQUALS
     #             },
     #           ],
     #           resource_aws_iam_access_key_user_name: [
     #             {
     #               value: "NonEmptyString",
-    #               comparison: "EQUALS", # accepts EQUALS, PREFIX
+    #               comparison: "EQUALS", # accepts EQUALS, PREFIX, NOT_EQUALS, PREFIX_NOT_EQUALS
     #             },
     #           ],
     #           resource_aws_iam_access_key_status: [
     #             {
     #               value: "NonEmptyString",
-    #               comparison: "EQUALS", # accepts EQUALS, PREFIX
+    #               comparison: "EQUALS", # accepts EQUALS, PREFIX, NOT_EQUALS, PREFIX_NOT_EQUALS
     #             },
     #           ],
     #           resource_aws_iam_access_key_created_at: [
@@ -12145,19 +16789,19 @@ module Aws::SecurityHub
     #           resource_container_name: [
     #             {
     #               value: "NonEmptyString",
-    #               comparison: "EQUALS", # accepts EQUALS, PREFIX
+    #               comparison: "EQUALS", # accepts EQUALS, PREFIX, NOT_EQUALS, PREFIX_NOT_EQUALS
     #             },
     #           ],
     #           resource_container_image_id: [
     #             {
     #               value: "NonEmptyString",
-    #               comparison: "EQUALS", # accepts EQUALS, PREFIX
+    #               comparison: "EQUALS", # accepts EQUALS, PREFIX, NOT_EQUALS, PREFIX_NOT_EQUALS
     #             },
     #           ],
     #           resource_container_image_name: [
     #             {
     #               value: "NonEmptyString",
-    #               comparison: "EQUALS", # accepts EQUALS, PREFIX
+    #               comparison: "EQUALS", # accepts EQUALS, PREFIX, NOT_EQUALS, PREFIX_NOT_EQUALS
     #             },
     #           ],
     #           resource_container_launched_at: [
@@ -12174,55 +16818,55 @@ module Aws::SecurityHub
     #             {
     #               key: "NonEmptyString",
     #               value: "NonEmptyString",
-    #               comparison: "EQUALS", # accepts EQUALS
+    #               comparison: "EQUALS", # accepts EQUALS, NOT_EQUALS
     #             },
     #           ],
     #           compliance_status: [
     #             {
     #               value: "NonEmptyString",
-    #               comparison: "EQUALS", # accepts EQUALS, PREFIX
+    #               comparison: "EQUALS", # accepts EQUALS, PREFIX, NOT_EQUALS, PREFIX_NOT_EQUALS
     #             },
     #           ],
     #           verification_state: [
     #             {
     #               value: "NonEmptyString",
-    #               comparison: "EQUALS", # accepts EQUALS, PREFIX
+    #               comparison: "EQUALS", # accepts EQUALS, PREFIX, NOT_EQUALS, PREFIX_NOT_EQUALS
     #             },
     #           ],
     #           workflow_state: [
     #             {
     #               value: "NonEmptyString",
-    #               comparison: "EQUALS", # accepts EQUALS, PREFIX
+    #               comparison: "EQUALS", # accepts EQUALS, PREFIX, NOT_EQUALS, PREFIX_NOT_EQUALS
     #             },
     #           ],
     #           workflow_status: [
     #             {
     #               value: "NonEmptyString",
-    #               comparison: "EQUALS", # accepts EQUALS, PREFIX
+    #               comparison: "EQUALS", # accepts EQUALS, PREFIX, NOT_EQUALS, PREFIX_NOT_EQUALS
     #             },
     #           ],
     #           record_state: [
     #             {
     #               value: "NonEmptyString",
-    #               comparison: "EQUALS", # accepts EQUALS, PREFIX
+    #               comparison: "EQUALS", # accepts EQUALS, PREFIX, NOT_EQUALS, PREFIX_NOT_EQUALS
     #             },
     #           ],
     #           related_findings_product_arn: [
     #             {
     #               value: "NonEmptyString",
-    #               comparison: "EQUALS", # accepts EQUALS, PREFIX
+    #               comparison: "EQUALS", # accepts EQUALS, PREFIX, NOT_EQUALS, PREFIX_NOT_EQUALS
     #             },
     #           ],
     #           related_findings_id: [
     #             {
     #               value: "NonEmptyString",
-    #               comparison: "EQUALS", # accepts EQUALS, PREFIX
+    #               comparison: "EQUALS", # accepts EQUALS, PREFIX, NOT_EQUALS, PREFIX_NOT_EQUALS
     #             },
     #           ],
     #           note_text: [
     #             {
     #               value: "NonEmptyString",
-    #               comparison: "EQUALS", # accepts EQUALS, PREFIX
+    #               comparison: "EQUALS", # accepts EQUALS, PREFIX, NOT_EQUALS, PREFIX_NOT_EQUALS
     #             },
     #           ],
     #           note_updated_at: [
@@ -12238,7 +16882,7 @@ module Aws::SecurityHub
     #           note_updated_by: [
     #             {
     #               value: "NonEmptyString",
-    #               comparison: "EQUALS", # accepts EQUALS, PREFIX
+    #               comparison: "EQUALS", # accepts EQUALS, PREFIX, NOT_EQUALS, PREFIX_NOT_EQUALS
     #             },
     #           ],
     #           keyword: [
@@ -12445,11 +17089,27 @@ module Aws::SecurityHub
     #   @return [String]
     #
     # @!attribute [rw] vendor_created_at
-    #   The datetime when the vulnerability advisory was created.
+    #   Indicates when the vulnerability advisory was created.
+    #
+    #   Uses the `date-time` format specified in [RFC 3339 section 5.6,
+    #   Internet Date/Time Format][1]. The value cannot contain spaces. For
+    #   example, `2020-03-22T13:22:13.933Z`.
+    #
+    #
+    #
+    #   [1]: https://tools.ietf.org/html/rfc3339#section-5.6
     #   @return [String]
     #
     # @!attribute [rw] vendor_updated_at
-    #   The datetime when the vulnerability advisory was last updated.
+    #   Indicates when the vulnerability advisory was last updated.
+    #
+    #   Uses the `date-time` format specified in [RFC 3339 section 5.6,
+    #   Internet Date/Time Format][1]. The value cannot contain spaces. For
+    #   example, `2020-03-22T13:22:13.933Z`.
+    #
+    #
+    #
+    #   [1]: https://tools.ietf.org/html/rfc3339#section-5.6
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/VulnerabilityVendor AWS API Documentation

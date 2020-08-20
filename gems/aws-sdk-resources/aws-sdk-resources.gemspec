@@ -118,6 +118,7 @@ Gem::Specification.new do |spec|
   spec.add_dependency('aws-sdk-honeycode', '~> 1')
   spec.add_dependency('aws-sdk-iam', '~> 1')
   spec.add_dependency('aws-sdk-ivs', '~> 1')
+  spec.add_dependency('aws-sdk-identitystore', '~> 1')
   spec.add_dependency('aws-sdk-imagebuilder', '~> 1')
   spec.add_dependency('aws-sdk-importexport', '~> 1')
   spec.add_dependency('aws-sdk-inspector', '~> 1')

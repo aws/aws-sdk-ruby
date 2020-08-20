@@ -3198,9 +3198,10 @@ module Aws::CognitoIdentityProvider
     #     allowed_o_auth_scopes: ["ScopeType"],
     #     allowed_o_auth_flows_user_pool_client: false,
     #     analytics_configuration: {
-    #       application_id: "HexStringType", # required
-    #       role_arn: "ArnType", # required
-    #       external_id: "StringType", # required
+    #       application_id: "HexStringType",
+    #       application_arn: "ArnType",
+    #       role_arn: "ArnType",
+    #       external_id: "StringType",
     #       user_data_shared: false,
     #     },
     #     prevent_user_existence_errors: "LEGACY", # accepts LEGACY, ENABLED
@@ -3239,6 +3240,7 @@ module Aws::CognitoIdentityProvider
     #   resp.user_pool_client.allowed_o_auth_scopes[0] #=> String
     #   resp.user_pool_client.allowed_o_auth_flows_user_pool_client #=> Boolean
     #   resp.user_pool_client.analytics_configuration.application_id #=> String
+    #   resp.user_pool_client.analytics_configuration.application_arn #=> String
     #   resp.user_pool_client.analytics_configuration.role_arn #=> String
     #   resp.user_pool_client.analytics_configuration.external_id #=> String
     #   resp.user_pool_client.analytics_configuration.user_data_shared #=> Boolean
@@ -3849,6 +3851,7 @@ module Aws::CognitoIdentityProvider
     #   resp.user_pool_client.allowed_o_auth_scopes[0] #=> String
     #   resp.user_pool_client.allowed_o_auth_flows_user_pool_client #=> Boolean
     #   resp.user_pool_client.analytics_configuration.application_id #=> String
+    #   resp.user_pool_client.analytics_configuration.application_arn #=> String
     #   resp.user_pool_client.analytics_configuration.role_arn #=> String
     #   resp.user_pool_client.analytics_configuration.external_id #=> String
     #   resp.user_pool_client.analytics_configuration.user_data_shared #=> Boolean
@@ -6735,9 +6738,10 @@ module Aws::CognitoIdentityProvider
     #     allowed_o_auth_scopes: ["ScopeType"],
     #     allowed_o_auth_flows_user_pool_client: false,
     #     analytics_configuration: {
-    #       application_id: "HexStringType", # required
-    #       role_arn: "ArnType", # required
-    #       external_id: "StringType", # required
+    #       application_id: "HexStringType",
+    #       application_arn: "ArnType",
+    #       role_arn: "ArnType",
+    #       external_id: "StringType",
     #       user_data_shared: false,
     #     },
     #     prevent_user_existence_errors: "LEGACY", # accepts LEGACY, ENABLED
@@ -6776,6 +6780,7 @@ module Aws::CognitoIdentityProvider
     #   resp.user_pool_client.allowed_o_auth_scopes[0] #=> String
     #   resp.user_pool_client.allowed_o_auth_flows_user_pool_client #=> Boolean
     #   resp.user_pool_client.analytics_configuration.application_id #=> String
+    #   resp.user_pool_client.analytics_configuration.application_arn #=> String
     #   resp.user_pool_client.analytics_configuration.role_arn #=> String
     #   resp.user_pool_client.analytics_configuration.external_id #=> String
     #   resp.user_pool_client.analytics_configuration.user_data_shared #=> Boolean
@@ -6962,7 +6967,7 @@ module Aws::CognitoIdentityProvider
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-cognitoidentityprovider'
-      context[:gem_version] = '1.43.0'
+      context[:gem_version] = '1.44.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

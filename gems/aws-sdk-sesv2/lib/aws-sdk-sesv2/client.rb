@@ -818,6 +818,45 @@ module Aws::SESV2
       req.send_request(options)
     end
 
+    # Creates an import job for a data destination.
+    #
+    # @option params [required, Types::ImportDestination] :import_destination
+    #   The destination for the import job.
+    #
+    # @option params [required, Types::ImportDataSource] :import_data_source
+    #   The data source for the import job.
+    #
+    # @return [Types::CreateImportJobResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateImportJobResponse#job_id #job_id} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_import_job({
+    #     import_destination: { # required
+    #       suppression_list_destination: { # required
+    #         suppression_list_import_action: "DELETE", # required, accepts DELETE, PUT
+    #       },
+    #     },
+    #     import_data_source: { # required
+    #       s3_url: "S3Url", # required
+    #       data_format: "CSV", # required, accepts CSV, JSON
+    #     },
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.job_id #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sesv2-2019-09-27/CreateImportJob AWS API Documentation
+    #
+    # @overload create_import_job(params = {})
+    # @param [Hash] params ({})
+    def create_import_job(params = {}, options = {})
+      req = build_request(:create_import_job, params)
+      req.send_request(options)
+    end
+
     # Delete an existing configuration set.
     #
     # *Configuration sets* are groups of rules that you can apply to the
@@ -1712,6 +1751,52 @@ module Aws::SESV2
       req.send_request(options)
     end
 
+    # Provides information about an import job.
+    #
+    # @option params [required, String] :job_id
+    #   The ID of the import job.
+    #
+    # @return [Types::GetImportJobResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetImportJobResponse#job_id #job_id} => String
+    #   * {Types::GetImportJobResponse#import_destination #import_destination} => Types::ImportDestination
+    #   * {Types::GetImportJobResponse#import_data_source #import_data_source} => Types::ImportDataSource
+    #   * {Types::GetImportJobResponse#failure_info #failure_info} => Types::FailureInfo
+    #   * {Types::GetImportJobResponse#job_status #job_status} => String
+    #   * {Types::GetImportJobResponse#created_timestamp #created_timestamp} => Time
+    #   * {Types::GetImportJobResponse#completed_timestamp #completed_timestamp} => Time
+    #   * {Types::GetImportJobResponse#processed_records_count #processed_records_count} => Integer
+    #   * {Types::GetImportJobResponse#failed_records_count #failed_records_count} => Integer
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_import_job({
+    #     job_id: "JobId", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.job_id #=> String
+    #   resp.import_destination.suppression_list_destination.suppression_list_import_action #=> String, one of "DELETE", "PUT"
+    #   resp.import_data_source.s3_url #=> String
+    #   resp.import_data_source.data_format #=> String, one of "CSV", "JSON"
+    #   resp.failure_info.failed_records_s3_url #=> String
+    #   resp.failure_info.error_message #=> String
+    #   resp.job_status #=> String, one of "CREATED", "PROCESSING", "COMPLETED", "FAILED"
+    #   resp.created_timestamp #=> Time
+    #   resp.completed_timestamp #=> Time
+    #   resp.processed_records_count #=> Integer
+    #   resp.failed_records_count #=> Integer
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sesv2-2019-09-27/GetImportJob AWS API Documentation
+    #
+    # @overload get_import_job(params = {})
+    # @param [Hash] params ({})
+    def get_import_job(params = {}, options = {})
+      req = build_request(:get_import_job, params)
+      req.send_request(options)
+    end
+
     # Retrieves information about a specific email address that's on the
     # suppression list for your account.
     #
@@ -2121,6 +2206,58 @@ module Aws::SESV2
     # @param [Hash] params ({})
     def list_email_templates(params = {}, options = {})
       req = build_request(:list_email_templates, params)
+      req.send_request(options)
+    end
+
+    # Lists all of the import jobs.
+    #
+    # @option params [String] :import_destination_type
+    #   The destination of the import job, which can be used to list import
+    #   jobs that have a certain `ImportDestinationType`.
+    #
+    # @option params [String] :next_token
+    #   A string token indicating that there might be additional import jobs
+    #   available to be listed. Copy this token to a subsequent call to
+    #   `ListImportJobs` with the same parameters to retrieve the next page of
+    #   import jobs.
+    #
+    # @option params [Integer] :page_size
+    #   Maximum number of import jobs to return at once. Use this parameter to
+    #   paginate results. If additional import jobs exist beyond the specified
+    #   limit, the `NextToken` element is sent in the response. Use the
+    #   `NextToken` value in subsequent requests to retrieve additional
+    #   addresses.
+    #
+    # @return [Types::ListImportJobsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListImportJobsResponse#import_jobs #import_jobs} => Array&lt;Types::ImportJobSummary&gt;
+    #   * {Types::ListImportJobsResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_import_jobs({
+    #     import_destination_type: "SUPPRESSION_LIST", # accepts SUPPRESSION_LIST
+    #     next_token: "NextToken",
+    #     page_size: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.import_jobs #=> Array
+    #   resp.import_jobs[0].job_id #=> String
+    #   resp.import_jobs[0].import_destination.suppression_list_destination.suppression_list_import_action #=> String, one of "DELETE", "PUT"
+    #   resp.import_jobs[0].job_status #=> String, one of "CREATED", "PROCESSING", "COMPLETED", "FAILED"
+    #   resp.import_jobs[0].created_timestamp #=> Time
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sesv2-2019-09-27/ListImportJobs AWS API Documentation
+    #
+    # @overload list_import_jobs(params = {})
+    # @param [Hash] params ({})
+    def list_import_jobs(params = {}, options = {})
+      req = build_request(:list_import_jobs, params)
       req.send_request(options)
     end
 
@@ -3554,7 +3691,7 @@ module Aws::SESV2
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-sesv2'
-      context[:gem_version] = '1.9.0'
+      context[:gem_version] = '1.10.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -62,11 +62,14 @@ module Aws::SESV2
     CreateEmailIdentityResponse = Shapes::StructureShape.new(name: 'CreateEmailIdentityResponse')
     CreateEmailTemplateRequest = Shapes::StructureShape.new(name: 'CreateEmailTemplateRequest')
     CreateEmailTemplateResponse = Shapes::StructureShape.new(name: 'CreateEmailTemplateResponse')
+    CreateImportJobRequest = Shapes::StructureShape.new(name: 'CreateImportJobRequest')
+    CreateImportJobResponse = Shapes::StructureShape.new(name: 'CreateImportJobResponse')
     CustomRedirectDomain = Shapes::StringShape.new(name: 'CustomRedirectDomain')
     CustomVerificationEmailTemplateMetadata = Shapes::StructureShape.new(name: 'CustomVerificationEmailTemplateMetadata')
     CustomVerificationEmailTemplatesList = Shapes::ListShape.new(name: 'CustomVerificationEmailTemplatesList')
     DailyVolume = Shapes::StructureShape.new(name: 'DailyVolume')
     DailyVolumes = Shapes::ListShape.new(name: 'DailyVolumes')
+    DataFormat = Shapes::StringShape.new(name: 'DataFormat')
     DedicatedIp = Shapes::StructureShape.new(name: 'DedicatedIp')
     DedicatedIpList = Shapes::ListShape.new(name: 'DedicatedIpList')
     DefaultDimensionValue = Shapes::StringShape.new(name: 'DefaultDimensionValue')
@@ -130,6 +133,9 @@ module Aws::SESV2
     EventDestinations = Shapes::ListShape.new(name: 'EventDestinations')
     EventType = Shapes::StringShape.new(name: 'EventType')
     EventTypes = Shapes::ListShape.new(name: 'EventTypes')
+    FailedRecordsCount = Shapes::IntegerShape.new(name: 'FailedRecordsCount')
+    FailedRecordsS3Url = Shapes::StringShape.new(name: 'FailedRecordsS3Url')
+    FailureInfo = Shapes::StructureShape.new(name: 'FailureInfo')
     FailureRedirectionURL = Shapes::StringShape.new(name: 'FailureRedirectionURL')
     FeedbackId = Shapes::StringShape.new(name: 'FeedbackId')
     GeneralEnforcementStatus = Shapes::StringShape.new(name: 'GeneralEnforcementStatus')
@@ -161,6 +167,8 @@ module Aws::SESV2
     GetEmailIdentityResponse = Shapes::StructureShape.new(name: 'GetEmailIdentityResponse')
     GetEmailTemplateRequest = Shapes::StructureShape.new(name: 'GetEmailTemplateRequest')
     GetEmailTemplateResponse = Shapes::StructureShape.new(name: 'GetEmailTemplateResponse')
+    GetImportJobRequest = Shapes::StructureShape.new(name: 'GetImportJobRequest')
+    GetImportJobResponse = Shapes::StructureShape.new(name: 'GetImportJobResponse')
     GetSuppressedDestinationRequest = Shapes::StructureShape.new(name: 'GetSuppressedDestinationRequest')
     GetSuppressedDestinationResponse = Shapes::StructureShape.new(name: 'GetSuppressedDestinationResponse')
     Identity = Shapes::StringShape.new(name: 'Identity')
@@ -168,6 +176,11 @@ module Aws::SESV2
     IdentityInfoList = Shapes::ListShape.new(name: 'IdentityInfoList')
     IdentityType = Shapes::StringShape.new(name: 'IdentityType')
     ImageUrl = Shapes::StringShape.new(name: 'ImageUrl')
+    ImportDataSource = Shapes::StructureShape.new(name: 'ImportDataSource')
+    ImportDestination = Shapes::StructureShape.new(name: 'ImportDestination')
+    ImportDestinationType = Shapes::StringShape.new(name: 'ImportDestinationType')
+    ImportJobSummary = Shapes::StructureShape.new(name: 'ImportJobSummary')
+    ImportJobSummaryList = Shapes::ListShape.new(name: 'ImportJobSummaryList')
     InboxPlacementTrackingOption = Shapes::StructureShape.new(name: 'InboxPlacementTrackingOption')
     InvalidNextTokenException = Shapes::StructureShape.new(name: 'InvalidNextTokenException')
     Ip = Shapes::StringShape.new(name: 'Ip')
@@ -176,6 +189,8 @@ module Aws::SESV2
     IspNameList = Shapes::ListShape.new(name: 'IspNameList')
     IspPlacement = Shapes::StructureShape.new(name: 'IspPlacement')
     IspPlacements = Shapes::ListShape.new(name: 'IspPlacements')
+    JobId = Shapes::StringShape.new(name: 'JobId')
+    JobStatus = Shapes::StringShape.new(name: 'JobStatus')
     KinesisFirehoseDestination = Shapes::StructureShape.new(name: 'KinesisFirehoseDestination')
     LastFreshStart = Shapes::TimestampShape.new(name: 'LastFreshStart')
     LimitExceededException = Shapes::StructureShape.new(name: 'LimitExceededException')
@@ -193,6 +208,8 @@ module Aws::SESV2
     ListEmailIdentitiesResponse = Shapes::StructureShape.new(name: 'ListEmailIdentitiesResponse')
     ListEmailTemplatesRequest = Shapes::StructureShape.new(name: 'ListEmailTemplatesRequest')
     ListEmailTemplatesResponse = Shapes::StructureShape.new(name: 'ListEmailTemplatesResponse')
+    ListImportJobsRequest = Shapes::StructureShape.new(name: 'ListImportJobsRequest')
+    ListImportJobsResponse = Shapes::StructureShape.new(name: 'ListImportJobsResponse')
     ListOfDedicatedIpPools = Shapes::ListShape.new(name: 'ListOfDedicatedIpPools')
     ListSuppressedDestinationsRequest = Shapes::StructureShape.new(name: 'ListSuppressedDestinationsRequest')
     ListSuppressedDestinationsResponse = Shapes::StructureShape.new(name: 'ListSuppressedDestinationsResponse')
@@ -227,6 +244,7 @@ module Aws::SESV2
     PolicyName = Shapes::StringShape.new(name: 'PolicyName')
     PoolName = Shapes::StringShape.new(name: 'PoolName')
     PrivateKey = Shapes::StringShape.new(name: 'PrivateKey')
+    ProcessedRecordsCount = Shapes::IntegerShape.new(name: 'ProcessedRecordsCount')
     PutAccountDedicatedIpWarmupAttributesRequest = Shapes::StructureShape.new(name: 'PutAccountDedicatedIpWarmupAttributesRequest')
     PutAccountDedicatedIpWarmupAttributesResponse = Shapes::StructureShape.new(name: 'PutAccountDedicatedIpWarmupAttributesResponse')
     PutAccountDetailsRequest = Shapes::StructureShape.new(name: 'PutAccountDetailsRequest')
@@ -272,6 +290,7 @@ module Aws::SESV2
     ReputationOptions = Shapes::StructureShape.new(name: 'ReputationOptions')
     ReviewDetails = Shapes::StructureShape.new(name: 'ReviewDetails')
     ReviewStatus = Shapes::StringShape.new(name: 'ReviewStatus')
+    S3Url = Shapes::StringShape.new(name: 'S3Url')
     Selector = Shapes::StringShape.new(name: 'Selector')
     SendBulkEmailRequest = Shapes::StructureShape.new(name: 'SendBulkEmailRequest')
     SendBulkEmailResponse = Shapes::StructureShape.new(name: 'SendBulkEmailResponse')
@@ -292,6 +311,8 @@ module Aws::SESV2
     SuppressedDestinationSummaries = Shapes::ListShape.new(name: 'SuppressedDestinationSummaries')
     SuppressedDestinationSummary = Shapes::StructureShape.new(name: 'SuppressedDestinationSummary')
     SuppressionAttributes = Shapes::StructureShape.new(name: 'SuppressionAttributes')
+    SuppressionListDestination = Shapes::StructureShape.new(name: 'SuppressionListDestination')
+    SuppressionListImportAction = Shapes::StringShape.new(name: 'SuppressionListImportAction')
     SuppressionListReason = Shapes::StringShape.new(name: 'SuppressionListReason')
     SuppressionListReasons = Shapes::ListShape.new(name: 'SuppressionListReasons')
     SuppressionOptions = Shapes::StructureShape.new(name: 'SuppressionOptions')
@@ -461,6 +482,13 @@ module Aws::SESV2
     CreateEmailTemplateRequest.struct_class = Types::CreateEmailTemplateRequest
 
     CreateEmailTemplateResponse.struct_class = Types::CreateEmailTemplateResponse
+
+    CreateImportJobRequest.add_member(:import_destination, Shapes::ShapeRef.new(shape: ImportDestination, required: true, location_name: "ImportDestination"))
+    CreateImportJobRequest.add_member(:import_data_source, Shapes::ShapeRef.new(shape: ImportDataSource, required: true, location_name: "ImportDataSource"))
+    CreateImportJobRequest.struct_class = Types::CreateImportJobRequest
+
+    CreateImportJobResponse.add_member(:job_id, Shapes::ShapeRef.new(shape: JobId, location_name: "JobId"))
+    CreateImportJobResponse.struct_class = Types::CreateImportJobResponse
 
     CustomVerificationEmailTemplateMetadata.add_member(:template_name, Shapes::ShapeRef.new(shape: EmailTemplateName, location_name: "TemplateName"))
     CustomVerificationEmailTemplateMetadata.add_member(:from_email_address, Shapes::ShapeRef.new(shape: EmailAddress, location_name: "FromEmailAddress"))
@@ -634,6 +662,10 @@ module Aws::SESV2
 
     EventTypes.member = Shapes::ShapeRef.new(shape: EventType)
 
+    FailureInfo.add_member(:failed_records_s3_url, Shapes::ShapeRef.new(shape: FailedRecordsS3Url, location_name: "FailedRecordsS3Url"))
+    FailureInfo.add_member(:error_message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "ErrorMessage"))
+    FailureInfo.struct_class = Types::FailureInfo
+
     GetAccountRequest.struct_class = Types::GetAccountRequest
 
     GetAccountResponse.add_member(:dedicated_ip_auto_warmup_enabled, Shapes::ShapeRef.new(shape: Enabled, location_name: "DedicatedIpAutoWarmupEnabled"))
@@ -754,6 +786,20 @@ module Aws::SESV2
     GetEmailTemplateResponse.add_member(:template_content, Shapes::ShapeRef.new(shape: EmailTemplateContent, required: true, location_name: "TemplateContent"))
     GetEmailTemplateResponse.struct_class = Types::GetEmailTemplateResponse
 
+    GetImportJobRequest.add_member(:job_id, Shapes::ShapeRef.new(shape: JobId, required: true, location: "uri", location_name: "JobId"))
+    GetImportJobRequest.struct_class = Types::GetImportJobRequest
+
+    GetImportJobResponse.add_member(:job_id, Shapes::ShapeRef.new(shape: JobId, location_name: "JobId"))
+    GetImportJobResponse.add_member(:import_destination, Shapes::ShapeRef.new(shape: ImportDestination, location_name: "ImportDestination"))
+    GetImportJobResponse.add_member(:import_data_source, Shapes::ShapeRef.new(shape: ImportDataSource, location_name: "ImportDataSource"))
+    GetImportJobResponse.add_member(:failure_info, Shapes::ShapeRef.new(shape: FailureInfo, location_name: "FailureInfo"))
+    GetImportJobResponse.add_member(:job_status, Shapes::ShapeRef.new(shape: JobStatus, location_name: "JobStatus"))
+    GetImportJobResponse.add_member(:created_timestamp, Shapes::ShapeRef.new(shape: Timestamp, location_name: "CreatedTimestamp"))
+    GetImportJobResponse.add_member(:completed_timestamp, Shapes::ShapeRef.new(shape: Timestamp, location_name: "CompletedTimestamp"))
+    GetImportJobResponse.add_member(:processed_records_count, Shapes::ShapeRef.new(shape: ProcessedRecordsCount, location_name: "ProcessedRecordsCount"))
+    GetImportJobResponse.add_member(:failed_records_count, Shapes::ShapeRef.new(shape: FailedRecordsCount, location_name: "FailedRecordsCount"))
+    GetImportJobResponse.struct_class = Types::GetImportJobResponse
+
     GetSuppressedDestinationRequest.add_member(:email_address, Shapes::ShapeRef.new(shape: EmailAddress, required: true, location: "uri", location_name: "EmailAddress"))
     GetSuppressedDestinationRequest.struct_class = Types::GetSuppressedDestinationRequest
 
@@ -766,6 +812,21 @@ module Aws::SESV2
     IdentityInfo.struct_class = Types::IdentityInfo
 
     IdentityInfoList.member = Shapes::ShapeRef.new(shape: IdentityInfo)
+
+    ImportDataSource.add_member(:s3_url, Shapes::ShapeRef.new(shape: S3Url, required: true, location_name: "S3Url"))
+    ImportDataSource.add_member(:data_format, Shapes::ShapeRef.new(shape: DataFormat, required: true, location_name: "DataFormat"))
+    ImportDataSource.struct_class = Types::ImportDataSource
+
+    ImportDestination.add_member(:suppression_list_destination, Shapes::ShapeRef.new(shape: SuppressionListDestination, required: true, location_name: "SuppressionListDestination"))
+    ImportDestination.struct_class = Types::ImportDestination
+
+    ImportJobSummary.add_member(:job_id, Shapes::ShapeRef.new(shape: JobId, location_name: "JobId"))
+    ImportJobSummary.add_member(:import_destination, Shapes::ShapeRef.new(shape: ImportDestination, location_name: "ImportDestination"))
+    ImportJobSummary.add_member(:job_status, Shapes::ShapeRef.new(shape: JobStatus, location_name: "JobStatus"))
+    ImportJobSummary.add_member(:created_timestamp, Shapes::ShapeRef.new(shape: Timestamp, location_name: "CreatedTimestamp"))
+    ImportJobSummary.struct_class = Types::ImportJobSummary
+
+    ImportJobSummaryList.member = Shapes::ShapeRef.new(shape: ImportJobSummary)
 
     InboxPlacementTrackingOption.add_member(:global, Shapes::ShapeRef.new(shape: Enabled, location_name: "Global"))
     InboxPlacementTrackingOption.add_member(:tracked_isps, Shapes::ShapeRef.new(shape: IspNameList, location_name: "TrackedIsps"))
@@ -847,6 +908,15 @@ module Aws::SESV2
     ListEmailTemplatesResponse.add_member(:templates_metadata, Shapes::ShapeRef.new(shape: EmailTemplateMetadataList, location_name: "TemplatesMetadata"))
     ListEmailTemplatesResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
     ListEmailTemplatesResponse.struct_class = Types::ListEmailTemplatesResponse
+
+    ListImportJobsRequest.add_member(:import_destination_type, Shapes::ShapeRef.new(shape: ImportDestinationType, location_name: "ImportDestinationType"))
+    ListImportJobsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location: "querystring", location_name: "NextToken"))
+    ListImportJobsRequest.add_member(:page_size, Shapes::ShapeRef.new(shape: MaxItems, location: "querystring", location_name: "PageSize"))
+    ListImportJobsRequest.struct_class = Types::ListImportJobsRequest
+
+    ListImportJobsResponse.add_member(:import_jobs, Shapes::ShapeRef.new(shape: ImportJobSummaryList, location_name: "ImportJobs"))
+    ListImportJobsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    ListImportJobsResponse.struct_class = Types::ListImportJobsResponse
 
     ListOfDedicatedIpPools.member = Shapes::ShapeRef.new(shape: PoolName)
 
@@ -1100,6 +1170,9 @@ module Aws::SESV2
     SuppressionAttributes.add_member(:suppressed_reasons, Shapes::ShapeRef.new(shape: SuppressionListReasons, location_name: "SuppressedReasons"))
     SuppressionAttributes.struct_class = Types::SuppressionAttributes
 
+    SuppressionListDestination.add_member(:suppression_list_import_action, Shapes::ShapeRef.new(shape: SuppressionListImportAction, required: true, location_name: "SuppressionListImportAction"))
+    SuppressionListDestination.struct_class = Types::SuppressionListDestination
+
     SuppressionListReasons.member = Shapes::ShapeRef.new(shape: SuppressionListReason)
 
     SuppressionOptions.add_member(:suppressed_reasons, Shapes::ShapeRef.new(shape: SuppressionListReasons, location_name: "SuppressedReasons"))
@@ -1303,6 +1376,17 @@ module Aws::SESV2
         o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
         o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
         o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
+      end)
+
+      api.add_operation(:create_import_job, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "CreateImportJob"
+        o.http_method = "POST"
+        o.http_request_uri = "/v2/email/import-jobs"
+        o.input = Shapes::ShapeRef.new(shape: CreateImportJobRequest)
+        o.output = Shapes::ShapeRef.new(shape: CreateImportJobResponse)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
       end)
 
       api.add_operation(:delete_configuration_set, Seahorse::Model::Operation.new.tap do |o|
@@ -1555,6 +1639,17 @@ module Aws::SESV2
         o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
       end)
 
+      api.add_operation(:get_import_job, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetImportJob"
+        o.http_method = "GET"
+        o.http_request_uri = "/v2/email/import-jobs/{JobId}"
+        o.input = Shapes::ShapeRef.new(shape: GetImportJobRequest)
+        o.output = Shapes::ShapeRef.new(shape: GetImportJobResponse)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
+      end)
+
       api.add_operation(:get_suppressed_destination, Seahorse::Model::Operation.new.tap do |o|
         o.name = "GetSuppressedDestination"
         o.http_method = "GET"
@@ -1670,6 +1765,22 @@ module Aws::SESV2
         o.http_request_uri = "/v2/email/templates"
         o.input = Shapes::ShapeRef.new(shape: ListEmailTemplatesRequest)
         o.output = Shapes::ShapeRef.new(shape: ListEmailTemplatesResponse)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "page_size",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
+      api.add_operation(:list_import_jobs, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListImportJobs"
+        o.http_method = "GET"
+        o.http_request_uri = "/v2/email/import-jobs"
+        o.input = Shapes::ShapeRef.new(shape: ListImportJobsRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListImportJobsResponse)
         o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
         o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
         o[:pager] = Aws::Pager.new(

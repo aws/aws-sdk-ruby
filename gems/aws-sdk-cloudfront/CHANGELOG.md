@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.36.1 (2020-08-19)
+------------------
+
+* Issue - Use Aws::Json for parsing instead of JSON
+
 1.36.0 (2020-07-30)
 ------------------
 

@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.31.0 (2020-08-18)
+------------------
+
+* Feature - New details for DynamoDB tables, Elastic IP addresses, IAM policies and users, RDS DB clusters and snapshots, and Secrets Manager secrets. Added details for AWS KMS keys and RDS DB instances.
+
 1.30.0 (2020-07-28)
 ------------------
 
