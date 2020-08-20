@@ -30,8 +30,8 @@ module Aws
 
     let(:cached_token) do
       {
-        'accessToken':  access_token,
-        'expiresAt': expiration
+        'accessToken' =>  access_token,
+        'expiresAt' => expiration
       }
     end
 
