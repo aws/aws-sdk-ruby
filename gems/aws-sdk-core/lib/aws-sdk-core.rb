@@ -18,10 +18,8 @@ require_relative 'aws-sdk-core/ecs_credentials'
 require_relative 'aws-sdk-core/instance_profile_credentials'
 require_relative 'aws-sdk-core/shared_credentials'
 require_relative 'aws-sdk-core/process_credentials'
-require_relative 'aws-sdk-core/sso_credentials'
 
 # client modules
-
 require_relative 'aws-sdk-core/client_stubs'
 require_relative 'aws-sdk-core/async_client_stubs'
 require_relative 'aws-sdk-core/eager_loader'
