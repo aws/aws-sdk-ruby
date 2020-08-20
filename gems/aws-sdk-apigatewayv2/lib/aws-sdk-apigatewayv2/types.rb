@@ -55,6 +55,12 @@ module Aws::ApiGatewayV2
     #   deployed API stage.
     #   @return [String]
     #
+    # @!attribute [rw] api_gateway_managed
+    #   Specifies whether an API is managed by API Gateway. You can't
+    #   update or delete a managed API by using API Gateway. A managed API
+    #   can be deleted only through the tooling or service that created it.
+    #   @return [Boolean]
+    #
     # @!attribute [rw] api_id
     #   The API ID.
     #   @return [String]
@@ -121,6 +127,7 @@ module Aws::ApiGatewayV2
     #
     class Api < Struct.new(
       :api_endpoint,
+      :api_gateway_managed,
       :api_id,
       :api_key_selection_expression,
       :cors_configuration,
@@ -710,6 +717,9 @@ module Aws::ApiGatewayV2
     # @!attribute [rw] api_endpoint
     #   @return [String]
     #
+    # @!attribute [rw] api_gateway_managed
+    #   @return [Boolean]
+    #
     # @!attribute [rw] api_id
     #   The identifier.
     #   @return [String]
@@ -775,6 +785,7 @@ module Aws::ApiGatewayV2
     #
     class CreateApiResponse < Struct.new(
       :api_endpoint,
+      :api_gateway_managed,
       :api_id,
       :api_key_selection_expression,
       :cors_configuration,
@@ -1253,6 +1264,16 @@ module Aws::ApiGatewayV2
     #   Specifies the integration's HTTP method type.
     #   @return [String]
     #
+    # @!attribute [rw] integration_subtype
+    #   Supported only for HTTP API AWS\_PROXY integrations. Specifies the
+    #   AWS service action to invoke. To learn more, see [Integration
+    #   subtype reference][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/apigateway/latest/developerguide/http-api-develop-integrations-aws-services-reference.html
+    #   @return [String]
+    #
     # @!attribute [rw] integration_type
     #   The integration type of an integration. One of the following:
     #
@@ -1262,10 +1283,9 @@ module Aws::ApiGatewayV2
     #   custom integration. With any other AWS service action, this is known
     #   as AWS integration. Supported only for WebSocket APIs.
     #
-    #   AWS\_PROXY: for integrating the route or method request with the
-    #   Lambda function-invoking action with the client request passed
-    #   through as-is. This integration is also referred to as Lambda proxy
-    #   integration.
+    #   AWS\_PROXY: for integrating the route or method request with a
+    #   Lambda function or other AWS service action. This integration is
+    #   also referred to as a Lambda proxy integration.
     #
     #   HTTP: for integrating the route or method request with an HTTP
     #   endpoint. This integration is also referred to as the HTTP custom
@@ -1324,16 +1344,26 @@ module Aws::ApiGatewayV2
     #   @return [String]
     #
     # @!attribute [rw] request_parameters
-    #   A key-value map specifying request parameters that are passed from
-    #   the method request to the backend. The key is an integration request
-    #   parameter name and the associated value is a method request
-    #   parameter value or static value that must be enclosed within single
-    #   quotes and pre-encoded as required by the backend. The method
-    #   request parameter value must match the pattern of
+    #   For WebSocket APIs, a key-value map specifying request parameters
+    #   that are passed from the method request to the backend. The key is
+    #   an integration request parameter name and the associated value is a
+    #   method request parameter value or static value that must be enclosed
+    #   within single quotes and pre-encoded as required by the backend. The
+    #   method request parameter value must match the pattern of
     #   method.request.*\\\{location\\}*.*\\\{name\\}* , where
     #   *\\\{location\\}* is querystring, path, or header; and *\\\{name\\}*
-    #   must be a valid and unique method request parameter name. Supported
-    #   only for WebSocket APIs.
+    #   must be a valid and unique method request parameter name.
+    #
+    #   For HTTP APIs, request parameters are a key-value map specifying
+    #   parameters that are passed to AWS\_PROXY integrations with a
+    #   specified integrationSubtype. You can provide static values, or map
+    #   request data, stage variables, or context variables that are
+    #   evaluated at runtime. To learn more, see [Working with AWS service
+    #   integrations for HTTP APIs][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/apigateway/latest/developerguide/http-api-develop-integrations-aws-services.html
     #   @return [Hash<String,String>]
     #
     # @!attribute [rw] request_templates
@@ -1368,6 +1398,7 @@ module Aws::ApiGatewayV2
       :credentials_arn,
       :description,
       :integration_method,
+      :integration_subtype,
       :integration_type,
       :integration_uri,
       :passthrough_behavior,
@@ -1392,6 +1423,7 @@ module Aws::ApiGatewayV2
     #         credentials_arn: "Arn",
     #         description: "StringWithLengthBetween0And1024",
     #         integration_method: "StringWithLengthBetween1And64",
+    #         integration_subtype: "StringWithLengthBetween1And128",
     #         integration_type: "AWS", # required, accepts AWS, HTTP, MOCK, HTTP_PROXY, AWS_PROXY
     #         integration_uri: "UriWithLengthBetween1And2048",
     #         passthrough_behavior: "WHEN_NO_MATCH", # accepts WHEN_NO_MATCH, NEVER, WHEN_NO_TEMPLATES
@@ -1435,6 +1467,10 @@ module Aws::ApiGatewayV2
     #
     # @!attribute [rw] integration_method
     #   A string with a length between \[1-64\].
+    #   @return [String]
+    #
+    # @!attribute [rw] integration_subtype
+    #   A string with a length between \[1-128\].
     #   @return [String]
     #
     # @!attribute [rw] integration_type
@@ -1502,6 +1538,7 @@ module Aws::ApiGatewayV2
       :credentials_arn,
       :description,
       :integration_method,
+      :integration_subtype,
       :integration_type,
       :integration_uri,
       :passthrough_behavior,
@@ -1554,6 +1591,10 @@ module Aws::ApiGatewayV2
     #
     #
     #   [1]: https://docs.aws.amazon.com/apigateway/latest/developerguide/apigateway-websocket-api-selection-expressions.html#apigateway-websocket-api-apikey-selection-expressions
+    #   @return [String]
+    #
+    # @!attribute [rw] integration_subtype
+    #   A string with a length between \[1-128\].
     #   @return [String]
     #
     # @!attribute [rw] integration_type
@@ -1623,6 +1664,7 @@ module Aws::ApiGatewayV2
       :integration_id,
       :integration_method,
       :integration_response_selection_expression,
+      :integration_subtype,
       :integration_type,
       :integration_uri,
       :passthrough_behavior,
@@ -3379,6 +3421,9 @@ module Aws::ApiGatewayV2
     # @!attribute [rw] api_endpoint
     #   @return [String]
     #
+    # @!attribute [rw] api_gateway_managed
+    #   @return [Boolean]
+    #
     # @!attribute [rw] api_id
     #   The identifier.
     #   @return [String]
@@ -3444,6 +3489,7 @@ module Aws::ApiGatewayV2
     #
     class GetApiResponse < Struct.new(
       :api_endpoint,
+      :api_gateway_managed,
       :api_id,
       :api_key_selection_expression,
       :cors_configuration,
@@ -3865,6 +3911,10 @@ module Aws::ApiGatewayV2
     #   [1]: https://docs.aws.amazon.com/apigateway/latest/developerguide/apigateway-websocket-api-selection-expressions.html#apigateway-websocket-api-apikey-selection-expressions
     #   @return [String]
     #
+    # @!attribute [rw] integration_subtype
+    #   A string with a length between \[1-128\].
+    #   @return [String]
+    #
     # @!attribute [rw] integration_type
     #   Represents an API method integration type.
     #   @return [String]
@@ -3932,6 +3982,7 @@ module Aws::ApiGatewayV2
       :integration_id,
       :integration_method,
       :integration_response_selection_expression,
+      :integration_subtype,
       :integration_type,
       :integration_uri,
       :passthrough_behavior,
@@ -4813,6 +4864,9 @@ module Aws::ApiGatewayV2
     # @!attribute [rw] api_endpoint
     #   @return [String]
     #
+    # @!attribute [rw] api_gateway_managed
+    #   @return [Boolean]
+    #
     # @!attribute [rw] api_id
     #   The identifier.
     #   @return [String]
@@ -4878,6 +4932,7 @@ module Aws::ApiGatewayV2
     #
     class ImportApiResponse < Struct.new(
       :api_endpoint,
+      :api_gateway_managed,
       :api_id,
       :api_key_selection_expression,
       :cors_configuration,
@@ -4964,6 +5019,16 @@ module Aws::ApiGatewayV2
     #   [1]: https://docs.aws.amazon.com/apigateway/latest/developerguide/apigateway-websocket-api-selection-expressions.html#apigateway-websocket-api-integration-response-selection-expressions
     #   @return [String]
     #
+    # @!attribute [rw] integration_subtype
+    #   Supported only for HTTP API AWS\_PROXY integrations. Specifies the
+    #   AWS service action to invoke. To learn more, see [Integration
+    #   subtype reference][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/apigateway/latest/developerguide/http-api-develop-integrations-aws-services-reference.html
+    #   @return [String]
+    #
     # @!attribute [rw] integration_type
     #   The integration type of an integration. One of the following:
     #
@@ -4973,10 +5038,9 @@ module Aws::ApiGatewayV2
     #   custom integration. With any other AWS service action, this is known
     #   as AWS integration. Supported only for WebSocket APIs.
     #
-    #   AWS\_PROXY: for integrating the route or method request with the
-    #   Lambda function-invoking action with the client request passed
-    #   through as-is. This integration is also referred to as Lambda proxy
-    #   integration.
+    #   AWS\_PROXY: for integrating the route or method request with a
+    #   Lambda function or other AWS service action. This integration is
+    #   also referred to as a Lambda proxy integration.
     #
     #   HTTP: for integrating the route or method request with an HTTP
     #   endpoint. This integration is also referred to as the HTTP custom
@@ -5034,16 +5098,26 @@ module Aws::ApiGatewayV2
     #   @return [String]
     #
     # @!attribute [rw] request_parameters
-    #   A key-value map specifying request parameters that are passed from
-    #   the method request to the backend. The key is an integration request
-    #   parameter name and the associated value is a method request
-    #   parameter value or static value that must be enclosed within single
-    #   quotes and pre-encoded as required by the backend. The method
-    #   request parameter value must match the pattern of
+    #   For WebSocket APIs, a key-value map specifying request parameters
+    #   that are passed from the method request to the backend. The key is
+    #   an integration request parameter name and the associated value is a
+    #   method request parameter value or static value that must be enclosed
+    #   within single quotes and pre-encoded as required by the backend. The
+    #   method request parameter value must match the pattern of
     #   method.request.*\\\{location\\}*.*\\\{name\\}* , where
     #   *\\\{location\\}* is querystring, path, or header; and *\\\{name\\}*
-    #   must be a valid and unique method request parameter name. Supported
-    #   only for WebSocket APIs.
+    #   must be a valid and unique method request parameter name.
+    #
+    #   For HTTP APIs, request parameters are a key-value map specifying
+    #   parameters that are passed to AWS\_PROXY integrations with a
+    #   specified integrationSubtype. You can provide static values, or map
+    #   request data, stage variables, or context variables that are
+    #   evaluated at runtime. To learn more, see [Working with AWS service
+    #   integrations for HTTP APIs][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/apigateway/latest/developerguide/http-api-develop-integrations-aws-services.html
     #   @return [Hash<String,String>]
     #
     # @!attribute [rw] request_templates
@@ -5082,6 +5156,7 @@ module Aws::ApiGatewayV2
       :integration_id,
       :integration_method,
       :integration_response_selection_expression,
+      :integration_subtype,
       :integration_type,
       :integration_uri,
       :passthrough_behavior,
@@ -5397,6 +5472,9 @@ module Aws::ApiGatewayV2
     # @!attribute [rw] api_endpoint
     #   @return [String]
     #
+    # @!attribute [rw] api_gateway_managed
+    #   @return [Boolean]
+    #
     # @!attribute [rw] api_id
     #   The identifier.
     #   @return [String]
@@ -5462,6 +5540,7 @@ module Aws::ApiGatewayV2
     #
     class ReimportApiResponse < Struct.new(
       :api_endpoint,
+      :api_gateway_managed,
       :api_id,
       :api_key_selection_expression,
       :cors_configuration,
@@ -6211,6 +6290,9 @@ module Aws::ApiGatewayV2
     # @!attribute [rw] api_endpoint
     #   @return [String]
     #
+    # @!attribute [rw] api_gateway_managed
+    #   @return [Boolean]
+    #
     # @!attribute [rw] api_id
     #   The identifier.
     #   @return [String]
@@ -6276,6 +6358,7 @@ module Aws::ApiGatewayV2
     #
     class UpdateApiResponse < Struct.new(
       :api_endpoint,
+      :api_gateway_managed,
       :api_id,
       :api_key_selection_expression,
       :cors_configuration,
@@ -6732,6 +6815,16 @@ module Aws::ApiGatewayV2
     #   Specifies the integration's HTTP method type.
     #   @return [String]
     #
+    # @!attribute [rw] integration_subtype
+    #   Supported only for HTTP API AWS\_PROXY integrations. Specifies the
+    #   AWS service action to invoke. To learn more, see [Integration
+    #   subtype reference][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/apigateway/latest/developerguide/http-api-develop-integrations-aws-services-reference.html
+    #   @return [String]
+    #
     # @!attribute [rw] integration_type
     #   The integration type of an integration. One of the following:
     #
@@ -6741,10 +6834,9 @@ module Aws::ApiGatewayV2
     #   custom integration. With any other AWS service action, this is known
     #   as AWS integration. Supported only for WebSocket APIs.
     #
-    #   AWS\_PROXY: for integrating the route or method request with the
-    #   Lambda function-invoking action with the client request passed
-    #   through as-is. This integration is also referred to as Lambda proxy
-    #   integration.
+    #   AWS\_PROXY: for integrating the route or method request with a
+    #   Lambda function or other AWS service action. This integration is
+    #   also referred to as a Lambda proxy integration.
     #
     #   HTTP: for integrating the route or method request with an HTTP
     #   endpoint. This integration is also referred to as the HTTP custom
@@ -6803,16 +6895,26 @@ module Aws::ApiGatewayV2
     #   @return [String]
     #
     # @!attribute [rw] request_parameters
-    #   A key-value map specifying request parameters that are passed from
-    #   the method request to the backend. The key is an integration request
-    #   parameter name and the associated value is a method request
-    #   parameter value or static value that must be enclosed within single
-    #   quotes and pre-encoded as required by the backend. The method
-    #   request parameter value must match the pattern of
+    #   For WebSocket APIs, a key-value map specifying request parameters
+    #   that are passed from the method request to the backend. The key is
+    #   an integration request parameter name and the associated value is a
+    #   method request parameter value or static value that must be enclosed
+    #   within single quotes and pre-encoded as required by the backend. The
+    #   method request parameter value must match the pattern of
     #   method.request.*\\\{location\\}*.*\\\{name\\}* , where
     #   *\\\{location\\}* is querystring, path, or header; and *\\\{name\\}*
-    #   must be a valid and unique method request parameter name. Supported
-    #   only for WebSocket APIs.
+    #   must be a valid and unique method request parameter name.
+    #
+    #   For HTTP APIs, request parameters are a key-value map specifying
+    #   parameters that are passed to AWS\_PROXY integrations with a
+    #   specified integrationSubtype. You can provide static values, or map
+    #   request data, stage variables, or context variables that are
+    #   evaluated at runtime. To learn more, see [Working with AWS service
+    #   integrations for HTTP APIs][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/apigateway/latest/developerguide/http-api-develop-integrations-aws-services.html
     #   @return [Hash<String,String>]
     #
     # @!attribute [rw] request_templates
@@ -6847,6 +6949,7 @@ module Aws::ApiGatewayV2
       :credentials_arn,
       :description,
       :integration_method,
+      :integration_subtype,
       :integration_type,
       :integration_uri,
       :passthrough_behavior,
@@ -6872,6 +6975,7 @@ module Aws::ApiGatewayV2
     #         description: "StringWithLengthBetween0And1024",
     #         integration_id: "__string", # required
     #         integration_method: "StringWithLengthBetween1And64",
+    #         integration_subtype: "StringWithLengthBetween1And128",
     #         integration_type: "AWS", # accepts AWS, HTTP, MOCK, HTTP_PROXY, AWS_PROXY
     #         integration_uri: "UriWithLengthBetween1And2048",
     #         passthrough_behavior: "WHEN_NO_MATCH", # accepts WHEN_NO_MATCH, NEVER, WHEN_NO_TEMPLATES
@@ -6918,6 +7022,10 @@ module Aws::ApiGatewayV2
     #
     # @!attribute [rw] integration_method
     #   A string with a length between \[1-64\].
+    #   @return [String]
+    #
+    # @!attribute [rw] integration_subtype
+    #   A string with a length between \[1-128\].
     #   @return [String]
     #
     # @!attribute [rw] integration_type
@@ -6986,6 +7094,7 @@ module Aws::ApiGatewayV2
       :description,
       :integration_id,
       :integration_method,
+      :integration_subtype,
       :integration_type,
       :integration_uri,
       :passthrough_behavior,
@@ -7038,6 +7147,10 @@ module Aws::ApiGatewayV2
     #
     #
     #   [1]: https://docs.aws.amazon.com/apigateway/latest/developerguide/apigateway-websocket-api-selection-expressions.html#apigateway-websocket-api-apikey-selection-expressions
+    #   @return [String]
+    #
+    # @!attribute [rw] integration_subtype
+    #   A string with a length between \[1-128\].
     #   @return [String]
     #
     # @!attribute [rw] integration_type
@@ -7107,6 +7220,7 @@ module Aws::ApiGatewayV2
       :integration_id,
       :integration_method,
       :integration_response_selection_expression,
+      :integration_subtype,
       :integration_type,
       :integration_uri,
       :passthrough_behavior,

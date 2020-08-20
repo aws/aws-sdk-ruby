@@ -282,6 +282,7 @@ module Aws::ApiGatewayV2
     AccessLogSettings.struct_class = Types::AccessLogSettings
 
     Api.add_member(:api_endpoint, Shapes::ShapeRef.new(shape: __string, location_name: "apiEndpoint"))
+    Api.add_member(:api_gateway_managed, Shapes::ShapeRef.new(shape: __boolean, location_name: "apiGatewayManaged"))
     Api.add_member(:api_id, Shapes::ShapeRef.new(shape: Id, location_name: "apiId"))
     Api.add_member(:api_key_selection_expression, Shapes::ShapeRef.new(shape: SelectionExpression, location_name: "apiKeySelectionExpression"))
     Api.add_member(:cors_configuration, Shapes::ShapeRef.new(shape: Cors, location_name: "corsConfiguration"))
@@ -394,6 +395,7 @@ module Aws::ApiGatewayV2
     CreateApiRequest.struct_class = Types::CreateApiRequest
 
     CreateApiResponse.add_member(:api_endpoint, Shapes::ShapeRef.new(shape: __string, location_name: "apiEndpoint"))
+    CreateApiResponse.add_member(:api_gateway_managed, Shapes::ShapeRef.new(shape: __boolean, location_name: "apiGatewayManaged"))
     CreateApiResponse.add_member(:api_id, Shapes::ShapeRef.new(shape: Id, location_name: "apiId"))
     CreateApiResponse.add_member(:api_key_selection_expression, Shapes::ShapeRef.new(shape: SelectionExpression, location_name: "apiKeySelectionExpression"))
     CreateApiResponse.add_member(:cors_configuration, Shapes::ShapeRef.new(shape: Cors, location_name: "corsConfiguration"))
@@ -480,6 +482,7 @@ module Aws::ApiGatewayV2
     CreateIntegrationInput.add_member(:credentials_arn, Shapes::ShapeRef.new(shape: Arn, location_name: "credentialsArn"))
     CreateIntegrationInput.add_member(:description, Shapes::ShapeRef.new(shape: StringWithLengthBetween0And1024, location_name: "description"))
     CreateIntegrationInput.add_member(:integration_method, Shapes::ShapeRef.new(shape: StringWithLengthBetween1And64, location_name: "integrationMethod"))
+    CreateIntegrationInput.add_member(:integration_subtype, Shapes::ShapeRef.new(shape: StringWithLengthBetween1And128, location_name: "integrationSubtype"))
     CreateIntegrationInput.add_member(:integration_type, Shapes::ShapeRef.new(shape: IntegrationType, required: true, location_name: "integrationType"))
     CreateIntegrationInput.add_member(:integration_uri, Shapes::ShapeRef.new(shape: UriWithLengthBetween1And2048, location_name: "integrationUri"))
     CreateIntegrationInput.add_member(:passthrough_behavior, Shapes::ShapeRef.new(shape: PassthroughBehavior, location_name: "passthroughBehavior"))
@@ -498,6 +501,7 @@ module Aws::ApiGatewayV2
     CreateIntegrationRequest.add_member(:credentials_arn, Shapes::ShapeRef.new(shape: Arn, location_name: "credentialsArn"))
     CreateIntegrationRequest.add_member(:description, Shapes::ShapeRef.new(shape: StringWithLengthBetween0And1024, location_name: "description"))
     CreateIntegrationRequest.add_member(:integration_method, Shapes::ShapeRef.new(shape: StringWithLengthBetween1And64, location_name: "integrationMethod"))
+    CreateIntegrationRequest.add_member(:integration_subtype, Shapes::ShapeRef.new(shape: StringWithLengthBetween1And128, location_name: "integrationSubtype"))
     CreateIntegrationRequest.add_member(:integration_type, Shapes::ShapeRef.new(shape: IntegrationType, required: true, location_name: "integrationType"))
     CreateIntegrationRequest.add_member(:integration_uri, Shapes::ShapeRef.new(shape: UriWithLengthBetween1And2048, location_name: "integrationUri"))
     CreateIntegrationRequest.add_member(:passthrough_behavior, Shapes::ShapeRef.new(shape: PassthroughBehavior, location_name: "passthroughBehavior"))
@@ -542,6 +546,7 @@ module Aws::ApiGatewayV2
     CreateIntegrationResult.add_member(:integration_id, Shapes::ShapeRef.new(shape: Id, location_name: "integrationId"))
     CreateIntegrationResult.add_member(:integration_method, Shapes::ShapeRef.new(shape: StringWithLengthBetween1And64, location_name: "integrationMethod"))
     CreateIntegrationResult.add_member(:integration_response_selection_expression, Shapes::ShapeRef.new(shape: SelectionExpression, location_name: "integrationResponseSelectionExpression"))
+    CreateIntegrationResult.add_member(:integration_subtype, Shapes::ShapeRef.new(shape: StringWithLengthBetween1And128, location_name: "integrationSubtype"))
     CreateIntegrationResult.add_member(:integration_type, Shapes::ShapeRef.new(shape: IntegrationType, location_name: "integrationType"))
     CreateIntegrationResult.add_member(:integration_uri, Shapes::ShapeRef.new(shape: UriWithLengthBetween1And2048, location_name: "integrationUri"))
     CreateIntegrationResult.add_member(:passthrough_behavior, Shapes::ShapeRef.new(shape: PassthroughBehavior, location_name: "passthroughBehavior"))
@@ -837,6 +842,7 @@ module Aws::ApiGatewayV2
     GetApiRequest.struct_class = Types::GetApiRequest
 
     GetApiResponse.add_member(:api_endpoint, Shapes::ShapeRef.new(shape: __string, location_name: "apiEndpoint"))
+    GetApiResponse.add_member(:api_gateway_managed, Shapes::ShapeRef.new(shape: __boolean, location_name: "apiGatewayManaged"))
     GetApiResponse.add_member(:api_id, Shapes::ShapeRef.new(shape: Id, location_name: "apiId"))
     GetApiResponse.add_member(:api_key_selection_expression, Shapes::ShapeRef.new(shape: SelectionExpression, location_name: "apiKeySelectionExpression"))
     GetApiResponse.add_member(:cors_configuration, Shapes::ShapeRef.new(shape: Cors, location_name: "corsConfiguration"))
@@ -958,6 +964,7 @@ module Aws::ApiGatewayV2
     GetIntegrationResult.add_member(:integration_id, Shapes::ShapeRef.new(shape: Id, location_name: "integrationId"))
     GetIntegrationResult.add_member(:integration_method, Shapes::ShapeRef.new(shape: StringWithLengthBetween1And64, location_name: "integrationMethod"))
     GetIntegrationResult.add_member(:integration_response_selection_expression, Shapes::ShapeRef.new(shape: SelectionExpression, location_name: "integrationResponseSelectionExpression"))
+    GetIntegrationResult.add_member(:integration_subtype, Shapes::ShapeRef.new(shape: StringWithLengthBetween1And128, location_name: "integrationSubtype"))
     GetIntegrationResult.add_member(:integration_type, Shapes::ShapeRef.new(shape: IntegrationType, location_name: "integrationType"))
     GetIntegrationResult.add_member(:integration_uri, Shapes::ShapeRef.new(shape: UriWithLengthBetween1And2048, location_name: "integrationUri"))
     GetIntegrationResult.add_member(:passthrough_behavior, Shapes::ShapeRef.new(shape: PassthroughBehavior, location_name: "passthroughBehavior"))
@@ -1123,6 +1130,7 @@ module Aws::ApiGatewayV2
     ImportApiRequest.struct_class = Types::ImportApiRequest
 
     ImportApiResponse.add_member(:api_endpoint, Shapes::ShapeRef.new(shape: __string, location_name: "apiEndpoint"))
+    ImportApiResponse.add_member(:api_gateway_managed, Shapes::ShapeRef.new(shape: __boolean, location_name: "apiGatewayManaged"))
     ImportApiResponse.add_member(:api_id, Shapes::ShapeRef.new(shape: Id, location_name: "apiId"))
     ImportApiResponse.add_member(:api_key_selection_expression, Shapes::ShapeRef.new(shape: SelectionExpression, location_name: "apiKeySelectionExpression"))
     ImportApiResponse.add_member(:cors_configuration, Shapes::ShapeRef.new(shape: Cors, location_name: "corsConfiguration"))
@@ -1147,6 +1155,7 @@ module Aws::ApiGatewayV2
     Integration.add_member(:integration_id, Shapes::ShapeRef.new(shape: Id, location_name: "integrationId"))
     Integration.add_member(:integration_method, Shapes::ShapeRef.new(shape: StringWithLengthBetween1And64, location_name: "integrationMethod"))
     Integration.add_member(:integration_response_selection_expression, Shapes::ShapeRef.new(shape: SelectionExpression, location_name: "integrationResponseSelectionExpression"))
+    Integration.add_member(:integration_subtype, Shapes::ShapeRef.new(shape: StringWithLengthBetween1And128, location_name: "integrationSubtype"))
     Integration.add_member(:integration_type, Shapes::ShapeRef.new(shape: IntegrationType, location_name: "integrationType"))
     Integration.add_member(:integration_uri, Shapes::ShapeRef.new(shape: UriWithLengthBetween1And2048, location_name: "integrationUri"))
     Integration.add_member(:passthrough_behavior, Shapes::ShapeRef.new(shape: PassthroughBehavior, location_name: "passthroughBehavior"))
@@ -1213,6 +1222,7 @@ module Aws::ApiGatewayV2
     ReimportApiRequest.struct_class = Types::ReimportApiRequest
 
     ReimportApiResponse.add_member(:api_endpoint, Shapes::ShapeRef.new(shape: __string, location_name: "apiEndpoint"))
+    ReimportApiResponse.add_member(:api_gateway_managed, Shapes::ShapeRef.new(shape: __boolean, location_name: "apiGatewayManaged"))
     ReimportApiResponse.add_member(:api_id, Shapes::ShapeRef.new(shape: Id, location_name: "apiId"))
     ReimportApiResponse.add_member(:api_key_selection_expression, Shapes::ShapeRef.new(shape: SelectionExpression, location_name: "apiKeySelectionExpression"))
     ReimportApiResponse.add_member(:cors_configuration, Shapes::ShapeRef.new(shape: Cors, location_name: "corsConfiguration"))
@@ -1377,6 +1387,7 @@ module Aws::ApiGatewayV2
     UpdateApiRequest.struct_class = Types::UpdateApiRequest
 
     UpdateApiResponse.add_member(:api_endpoint, Shapes::ShapeRef.new(shape: __string, location_name: "apiEndpoint"))
+    UpdateApiResponse.add_member(:api_gateway_managed, Shapes::ShapeRef.new(shape: __boolean, location_name: "apiGatewayManaged"))
     UpdateApiResponse.add_member(:api_id, Shapes::ShapeRef.new(shape: Id, location_name: "apiId"))
     UpdateApiResponse.add_member(:api_key_selection_expression, Shapes::ShapeRef.new(shape: SelectionExpression, location_name: "apiKeySelectionExpression"))
     UpdateApiResponse.add_member(:cors_configuration, Shapes::ShapeRef.new(shape: Cors, location_name: "corsConfiguration"))
@@ -1460,6 +1471,7 @@ module Aws::ApiGatewayV2
     UpdateIntegrationInput.add_member(:credentials_arn, Shapes::ShapeRef.new(shape: Arn, location_name: "credentialsArn"))
     UpdateIntegrationInput.add_member(:description, Shapes::ShapeRef.new(shape: StringWithLengthBetween0And1024, location_name: "description"))
     UpdateIntegrationInput.add_member(:integration_method, Shapes::ShapeRef.new(shape: StringWithLengthBetween1And64, location_name: "integrationMethod"))
+    UpdateIntegrationInput.add_member(:integration_subtype, Shapes::ShapeRef.new(shape: StringWithLengthBetween1And128, location_name: "integrationSubtype"))
     UpdateIntegrationInput.add_member(:integration_type, Shapes::ShapeRef.new(shape: IntegrationType, location_name: "integrationType"))
     UpdateIntegrationInput.add_member(:integration_uri, Shapes::ShapeRef.new(shape: UriWithLengthBetween1And2048, location_name: "integrationUri"))
     UpdateIntegrationInput.add_member(:passthrough_behavior, Shapes::ShapeRef.new(shape: PassthroughBehavior, location_name: "passthroughBehavior"))
@@ -1479,6 +1491,7 @@ module Aws::ApiGatewayV2
     UpdateIntegrationRequest.add_member(:description, Shapes::ShapeRef.new(shape: StringWithLengthBetween0And1024, location_name: "description"))
     UpdateIntegrationRequest.add_member(:integration_id, Shapes::ShapeRef.new(shape: __string, required: true, location: "uri", location_name: "integrationId"))
     UpdateIntegrationRequest.add_member(:integration_method, Shapes::ShapeRef.new(shape: StringWithLengthBetween1And64, location_name: "integrationMethod"))
+    UpdateIntegrationRequest.add_member(:integration_subtype, Shapes::ShapeRef.new(shape: StringWithLengthBetween1And128, location_name: "integrationSubtype"))
     UpdateIntegrationRequest.add_member(:integration_type, Shapes::ShapeRef.new(shape: IntegrationType, location_name: "integrationType"))
     UpdateIntegrationRequest.add_member(:integration_uri, Shapes::ShapeRef.new(shape: UriWithLengthBetween1And2048, location_name: "integrationUri"))
     UpdateIntegrationRequest.add_member(:passthrough_behavior, Shapes::ShapeRef.new(shape: PassthroughBehavior, location_name: "passthroughBehavior"))
@@ -1524,6 +1537,7 @@ module Aws::ApiGatewayV2
     UpdateIntegrationResult.add_member(:integration_id, Shapes::ShapeRef.new(shape: Id, location_name: "integrationId"))
     UpdateIntegrationResult.add_member(:integration_method, Shapes::ShapeRef.new(shape: StringWithLengthBetween1And64, location_name: "integrationMethod"))
     UpdateIntegrationResult.add_member(:integration_response_selection_expression, Shapes::ShapeRef.new(shape: SelectionExpression, location_name: "integrationResponseSelectionExpression"))
+    UpdateIntegrationResult.add_member(:integration_subtype, Shapes::ShapeRef.new(shape: StringWithLengthBetween1And128, location_name: "integrationSubtype"))
     UpdateIntegrationResult.add_member(:integration_type, Shapes::ShapeRef.new(shape: IntegrationType, location_name: "integrationType"))
     UpdateIntegrationResult.add_member(:integration_uri, Shapes::ShapeRef.new(shape: UriWithLengthBetween1And2048, location_name: "integrationUri"))
     UpdateIntegrationResult.add_member(:passthrough_behavior, Shapes::ShapeRef.new(shape: PassthroughBehavior, location_name: "passthroughBehavior"))

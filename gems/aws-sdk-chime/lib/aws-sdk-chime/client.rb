@@ -961,10 +961,11 @@ module Aws::Chime
     # @option params [String] :media_region
     #   The Region in which to create the meeting. Default: `us-east-1`.
     #
-    #   Available values: `ap-northeast-1`, `ap-southeast-1`,
-    #   `ap-southeast-2`, `ca-central-1`, `eu-central-1`, `eu-north-1`,
-    #   `eu-west-1`, `eu-west-2`, `eu-west-3`, `sa-east-1`, `us-east-1`,
-    #   `us-east-2`, `us-west-1`, `us-west-2`.
+    #   Available values: `af-south-1`, `ap-northeast-1`, `ap-northeast-2`,
+    #   `ap-south-1`, `ap-southeast-1`, `ap-southeast-2`, `ca-central-1`,
+    #   `eu-central-1`, `eu-north-1`, `eu-south-1`, `eu-west-1`, `eu-west-2`,
+    #   `eu-west-3`, `sa-east-1`, `us-east-1`, `us-east-2`, `us-west-1`,
+    #   `us-west-2`.
     #
     # @option params [Array<Types::Tag>] :tags
     #   The tag key-value pairs.
@@ -1045,10 +1046,11 @@ module Aws::Chime
     # @option params [String] :media_region
     #   The Region in which to create the meeting. Default: `us-east-1`.
     #
-    #   Available values: `ap-northeast-1`, `ap-southeast-1`,
-    #   `ap-southeast-2`, `ca-central-1`, `eu-central-1`, `eu-north-1`,
-    #   `eu-west-1`, `eu-west-2`, `eu-west-3`, `sa-east-1`, `us-east-1`,
-    #   `us-east-2`, `us-west-1`, `us-west-2`.
+    #   Available values: `af-south-1`, `ap-northeast-1`, `ap-northeast-2`,
+    #   `ap-south-1`, `ap-southeast-1`, `ap-southeast-2`, `ca-central-1`,
+    #   `eu-central-1`, `eu-north-1`, `eu-south-1`, `eu-west-1`, `eu-west-2`,
+    #   `eu-west-3`, `sa-east-1`, `us-east-1`, `us-east-2`, `us-west-1`,
+    #   `us-west-2`.
     #
     # @option params [Array<Types::Tag>] :tags
     #   The tag key-value pairs.
@@ -5227,7 +5229,7 @@ module Aws::Chime
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-chime'
-      context[:gem_version] = '1.33.0'
+      context[:gem_version] = '1.34.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 
