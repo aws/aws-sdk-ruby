@@ -39,3 +39,19 @@ task 'build:aws-sdk-sts' do
   writer = BuildTools::FileWriter.new(directory: "#{$GEMS_DIR}/aws-sdk-core/lib")
   writer.write_files(files)
 end
+
+# Aws::SSO is generated directly into the `aws-sdk-core` gem.
+# It is need to provide SSO Credentials.
+# Only building source, but not gemspecs, version file, etc.
+task 'build:aws-sdk-sso' do
+  sso = BuildTools::Services.service('sso')
+  sso.gem_dependencies.clear
+  generator = AwsSdkCodeGenerator::CodeBuilder.new(
+    aws_sdk_core_lib_path: $CORE_LIB,
+    service: sso,
+    client_examples: BuildTools.load_client_examples('sso'),
+    )
+  files = generator.source_files(prefix: 'aws-sdk-sso')
+  writer = BuildTools::FileWriter.new(directory: "#{$GEMS_DIR}/aws-sdk-core/lib")
+  writer.write_files(files)
+end
