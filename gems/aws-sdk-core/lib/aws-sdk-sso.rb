@@ -18,7 +18,7 @@ require_relative 'aws-sdk-sso/resource'
 require_relative 'aws-sdk-sso/customizations'
 
 # This module provides support for AWS Single Sign-On. This module is available in the
-# `aws-sdk-sso` gem.
+# `aws-sdk-core` gem.
 #
 # # Client
 #
@@ -47,6 +47,6 @@ require_relative 'aws-sdk-sso/customizations'
 # @service
 module Aws::SSO
 
-  GEM_VERSION = '1.7.0'
+  GEM_VERSION = '3.104.4'
 
 end

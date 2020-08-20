@@ -53,7 +53,8 @@ module Aws
 
     def mock_token_file(start_url, cached_token)
       start_url_sha1 = OpenSSL::Digest::SHA1.hexdigest(start_url.encode('utf-8'))
-      path = File.expand_path "~/.aws/sso/cache/#{start_url_sha1}.json"
+      allow(Dir).to receive(:home).and_return('HOME')
+      path = File.join(Dir.home, '.aws', 'sso', 'cache', "#{start_url_sha1}.json")
 
       allow(File).to receive(:read).with(path).and_return(
         JSON.dump(cached_token)

@@ -94,7 +94,10 @@ module Aws
 
     def sso_cache_file
       start_url_sha1 = OpenSSL::Digest::SHA1.hexdigest(@sso_start_url.encode('utf-8'))
-      File.expand_path "~/.aws/sso/cache/#{start_url_sha1}.json"
+      File.join(Dir.home, '.aws', 'sso', 'cache', "#{start_url_sha1}.json")
+    rescue ArgumentError
+      # Dir.home raises ArgumentError when ENV['home'] is not set
+      raise ArgumentError, "Unable to load sso_cache_file: ENV['HOME'] is not set."
     end
   end
 end

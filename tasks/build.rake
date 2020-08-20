@@ -45,7 +45,6 @@ end
 # Only building source, but not gemspecs, version file, etc.
 task 'build:aws-sdk-sso' do
   sso = BuildTools::Services.service('sso')
-
   generator = AwsSdkCodeGenerator::CodeBuilder.new(
     aws_sdk_core_lib_path: $CORE_LIB,
     service: sso,
