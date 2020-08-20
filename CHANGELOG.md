@@ -1,6 +1,12 @@
 Unreleased Changes
 ------------------
 
+* Feature - Aws::ApiGatewayV2 - Updated the API, and documentation for AmazonApiGatewayV2.
+
+* Feature - Aws::Chime - Updated the documentation for Amazon Chime.
+
+* Feature - Aws::FSx - Updated the documentation for Amazon FSx.
+
 2.11.570 (2020-08-19)
 ------------------
 
