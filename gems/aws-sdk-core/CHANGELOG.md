@@ -1,6 +1,8 @@
 Unreleased Changes
 ------------------
 
+* Feature - Add `SSOCredentials`.  Moved functionality from `aws-sdk-sso` into core.
+
 3.104.4 (2020-08-19)
 ------------------
 

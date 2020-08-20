@@ -86,9 +86,11 @@ require_relative 'aws-sdk-core/client_side_monitoring/publisher'
 require_relative 'aws-sdk-core/arn'
 require_relative 'aws-sdk-core/arn_parser'
 
-# aws-sdk-sts is vendored to support Aws::AssumeRoleCredentials
-
+# aws-sdk-sts is included to support Aws::AssumeRoleCredentials
 require 'aws-sdk-sts'
+
+# aws-sdk-sso is included to support Aws::SSOCredentials
+require 'aws-sdk-sso'
 
 module Aws
 
