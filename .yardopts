@@ -5,7 +5,5 @@
 --markup-provider rdiscount
 --hide-api private
 --plugin sitemap
---asset doc-src/images:images
 --exclude \/client_api.rb$
--e doc-src/plugins/service_tag.rb
-gems/**/lib/**/*.rb
+gems/aws-sdk-core/lib/**/*.rb gems/aws-sdk-dynamodb/lib/**/*.rb
