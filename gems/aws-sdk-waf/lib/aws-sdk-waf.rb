@@ -44,7 +44,7 @@ require_relative 'aws-sdk-waf/customizations'
 #
 # See {Errors} for more information.
 #
-# @service
+# @!group service
 module Aws::WAF
 
   GEM_VERSION = '1.33.0'

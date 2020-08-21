@@ -44,7 +44,7 @@ require_relative 'aws-sdk-robomaker/customizations'
 #
 # See {Errors} for more information.
 #
-# @service
+# @!group service
 module Aws::RoboMaker
 
   GEM_VERSION = '1.27.0'

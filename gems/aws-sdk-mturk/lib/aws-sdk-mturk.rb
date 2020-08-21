@@ -44,7 +44,7 @@ require_relative 'aws-sdk-mturk/customizations'
 #
 # See {Errors} for more information.
 #
-# @service
+# @!group service
 module Aws::MTurk
 
   GEM_VERSION = '1.24.0'

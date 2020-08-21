@@ -44,7 +44,7 @@ require_relative 'aws-sdk-shield/customizations'
 #
 # See {Errors} for more information.
 #
-# @service
+# @!group service
 module Aws::Shield
 
   GEM_VERSION = '1.29.0'

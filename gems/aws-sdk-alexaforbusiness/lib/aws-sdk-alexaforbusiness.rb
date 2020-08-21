@@ -44,7 +44,7 @@ require_relative 'aws-sdk-alexaforbusiness/customizations'
 #
 # See {Errors} for more information.
 #
-# @service
+# @!group service
 module Aws::AlexaForBusiness
 
   GEM_VERSION = '1.40.0'

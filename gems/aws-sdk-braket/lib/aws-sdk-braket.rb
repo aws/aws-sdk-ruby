@@ -44,7 +44,7 @@ require_relative 'aws-sdk-braket/customizations'
 #
 # See {Errors} for more information.
 #
-# @service
+# @!group service
 module Aws::Braket
 
   GEM_VERSION = '1.1.0'

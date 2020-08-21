@@ -44,7 +44,7 @@ require_relative 'aws-sdk-backup/customizations'
 #
 # See {Errors} for more information.
 #
-# @service
+# @!group service
 module Aws::Backup
 
   GEM_VERSION = '1.18.0'

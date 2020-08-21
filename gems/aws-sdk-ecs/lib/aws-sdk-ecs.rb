@@ -45,7 +45,7 @@ require_relative 'aws-sdk-ecs/customizations'
 #
 # See {Errors} for more information.
 #
-# @service
+# @!group service
 module Aws::ECS
 
   GEM_VERSION = '1.67.0'

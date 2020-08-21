@@ -45,7 +45,7 @@ require_relative 'aws-sdk-opsworkscm/customizations'
 #
 # See {Errors} for more information.
 #
-# @service
+# @!group service
 module Aws::OpsWorksCM
 
   GEM_VERSION = '1.37.0'
