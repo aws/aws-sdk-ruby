@@ -45,7 +45,7 @@ require_relative 'aws-sdk-ses/customizations'
 #
 # See {Errors} for more information.
 #
-# @service
+# @!group service
 module Aws::SES
 
   GEM_VERSION = '1.33.0'

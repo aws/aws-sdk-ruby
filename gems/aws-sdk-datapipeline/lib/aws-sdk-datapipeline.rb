@@ -44,7 +44,7 @@ require_relative 'aws-sdk-datapipeline/customizations'
 #
 # See {Errors} for more information.
 #
-# @service
+# @!group service
 module Aws::DataPipeline
 
   GEM_VERSION = '1.21.0'

@@ -44,7 +44,7 @@ require_relative 'aws-sdk-firehose/customizations'
 #
 # See {Errors} for more information.
 #
-# @service
+# @!group service
 module Aws::Firehose
 
   GEM_VERSION = '1.32.0'

@@ -44,7 +44,7 @@ require_relative 'aws-sdk-swf/customizations'
 #
 # See {Errors} for more information.
 #
-# @service
+# @!group service
 module Aws::SWF
 
   GEM_VERSION = '1.22.0'

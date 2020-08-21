@@ -45,7 +45,7 @@ require_relative 'aws-sdk-databasemigrationservice/customizations'
 #
 # See {Errors} for more information.
 #
-# @service
+# @!group service
 module Aws::DatabaseMigrationService
 
   GEM_VERSION = '1.39.0'

@@ -45,7 +45,7 @@ require_relative 'aws-sdk-signer/customizations'
 #
 # See {Errors} for more information.
 #
-# @service
+# @!group service
 module Aws::Signer
 
   GEM_VERSION = '1.23.0'

@@ -44,7 +44,7 @@ require_relative 'aws-sdk-iotdataplane/customizations'
 #
 # See {Errors} for more information.
 #
-# @service
+# @!group service
 module Aws::IoTDataPlane
 
   GEM_VERSION = '1.23.0'
