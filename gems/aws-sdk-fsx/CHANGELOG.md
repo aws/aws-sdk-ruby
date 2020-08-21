@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.28.0 (2020-08-20)
+------------------
+
+* Feature - Documentation updates for Amazon FSx
+
 1.27.0 (2020-08-12)
 ------------------
 

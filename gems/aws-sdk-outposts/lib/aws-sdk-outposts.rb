@@ -44,7 +44,7 @@ require_relative 'aws-sdk-outposts/customizations'
 #
 # See {Errors} for more information.
 #
-# @service
+# @!group service
 module Aws::Outposts
 
   GEM_VERSION = '1.7.0'

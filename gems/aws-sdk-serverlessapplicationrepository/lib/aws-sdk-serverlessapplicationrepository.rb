@@ -44,7 +44,7 @@ require_relative 'aws-sdk-serverlessapplicationrepository/customizations'
 #
 # See {Errors} for more information.
 #
-# @service
+# @!group service
 module Aws::ServerlessApplicationRepository
 
   GEM_VERSION = '1.29.0'

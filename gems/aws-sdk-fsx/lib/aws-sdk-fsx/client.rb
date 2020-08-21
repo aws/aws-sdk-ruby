@@ -85,13 +85,25 @@ module Aws::FSx
     #     * `Aws::Credentials` - Used for configuring static, non-refreshing
     #       credentials.
     #
-    #     * `Aws::InstanceProfileCredentials` - Used for loading credentials
-    #       from an EC2 IMDS on an EC2 instance.
-    #
     #     * `Aws::SharedCredentials` - Used for loading credentials from a
     #       shared file, such as `~/.aws/config`.
     #
     #     * `Aws::AssumeRoleCredentials` - Used when you need to assume a role.
+    #
+    #     * `Aws::AssumeRoleWebIdentityCredentials` - Used when you need to
+    #       assume a role after providing credentials via the web.
+    #
+    #     * `Aws::ProcessCredentials` - Used for loading credentials from a
+    #       process that outputs to stdout.
+    #
+    #     * `Aws::InstanceProfileCredentials` - Used for loading credentials
+    #       from an EC2 IMDS on an EC2 instance.
+    #
+    #     * `Aws::ECSCredentials` - Used for loading credentials from
+    #       instances running in ECS.
+    #
+    #     * `Aws::CognitoIdentityCredentials` - Used for loading credentials
+    #       from the Cognito Identity service.
     #
     #     When `:credentials` are not configured directly, the following
     #     locations will be searched for credentials:
@@ -101,10 +113,10 @@ module Aws::FSx
     #     * ENV['AWS_ACCESS_KEY_ID'], ENV['AWS_SECRET_ACCESS_KEY']
     #     * `~/.aws/credentials`
     #     * `~/.aws/config`
-    #     * EC2 IMDS instance profile - When used by default, the timeouts are
-    #       very aggressive. Construct and pass an instance of
-    #       `Aws::InstanceProfileCredentails` to enable retries and extended
-    #       timeouts.
+    #     * EC2/ECS IMDS instance profile - When used by default, the timeouts
+    #       are very aggressive. Construct and pass an instance of
+    #       `Aws::InstanceProfileCredentails` or `Aws::ECSCredentials` to
+    #       enable retries and extended timeouts.
     #
     #   @option options [required, String] :region
     #     The AWS region to connect to.  The configured `:region` is
@@ -371,7 +383,7 @@ module Aws::FSx
     #
     # * a Persistent deployment type
     #
-    # * is *not* linked to an Amazon S3 data respository.
+    # * is *not* linked to a data respository.
     #
     # For more information about backing up Amazon FSx for Lustre file
     # systems, see [Working with FSx for Lustre backups][1].
@@ -412,20 +424,20 @@ module Aws::FSx
     #   The ID of the file system to back up.
     #
     # @option params [String] :client_request_token
-    #   A string of up to 64 ASCII characters that Amazon FSx uses to ensure
-    #   idempotent creation. This string is automatically filled on your
-    #   behalf when you use the AWS Command Line Interface (AWS CLI) or an AWS
-    #   SDK.
+    #   (Optional) A string of up to 64 ASCII characters that Amazon FSx uses
+    #   to ensure idempotent creation. This string is automatically filled on
+    #   your behalf when you use the AWS Command Line Interface (AWS CLI) or
+    #   an AWS SDK.
     #
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.**
     #
     # @option params [Array<Types::Tag>] :tags
-    #   The tags to apply to the backup at backup creation. The key value of
-    #   the `Name` tag appears in the console as the backup name. If you have
-    #   set `CopyTagsToBackups` to true, and you specify one or more tags
-    #   using the `CreateBackup` action, no existing tags on the file system
-    #   are copied from the file system to the backup.
+    #   (Optional) The tags to apply to the backup at backup creation. The key
+    #   value of the `Name` tag appears in the console as the backup name. If
+    #   you have set `CopyTagsToBackups` to true, and you specify one or more
+    #   tags using the `CreateBackup` action, no existing file system tags are
+    #   copied from the file system to the backup.
     #
     # @return [Types::CreateBackupResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -737,11 +749,15 @@ module Aws::FSx
     #
     #   For Lustre file systems:
     #
-    #   * For `SCRATCH_2` and `PERSISTENT_1` deployment types, valid values
-    #     are 1.2, 2.4, and increments of 2.4 TiB.
+    #   * For `SCRATCH_2` and `PERSISTENT_1 SSD` deployment types, valid
+    #     values are 1200 GiB, 2400 GiB, and increments of 2400 GiB.
     #
-    #   * For `SCRATCH_1` deployment type, valid values are 1.2, 2.4, and
-    #     increments of 3.6 TiB.
+    #   * For `PERSISTENT HDD` file systems, valid values are increments of
+    #     6000 GiB for 12 MB/s/TiB file systems and increments of 1800 GiB for
+    #     40 MB/s/TiB file systems.
+    #
+    #   * For `SCRATCH_1` deployment type, valid values are 1200 GiB, 2400
+    #     GiB, and increments of 3600 GiB.
     #
     #   For Windows file systems:
     #
@@ -751,21 +767,24 @@ module Aws::FSx
     #     TiB).
     #
     # @option params [String] :storage_type
-    #   Sets the storage type for the Amazon FSx for Windows file system
-    #   you're creating. Valid values are `SSD` and `HDD`.
+    #   Sets the storage type for the file system you're creating. Valid
+    #   values are `SSD` and `HDD`.
     #
     #   * Set to `SSD` to use solid state drive storage. SSD is supported on
-    #     all Windows deployment types.
+    #     all Windows and Lustre deployment types.
     #
     #   * Set to `HDD` to use hard disk drive storage. HDD is supported on
-    #     `SINGLE_AZ_2` and `MULTI_AZ_1` Windows file system deployment types.
+    #     `SINGLE_AZ_2` and `MULTI_AZ_1` Windows file system deployment types,
+    #     and on `PERSISTENT` Lustre file system deployment types.
     #
     #   Default value is `SSD`. For more information, see [ Storage Type
-    #   Options][1] in the *Amazon FSx for Windows User Guide*.
+    #   Options][1] in the *Amazon FSx for Windows User Guide* and [Multiple
+    #   Storage Options][2] in the *Amazon FSx for Lustre User Guide*.
     #
     #
     #
     #   [1]: https://docs.aws.amazon.com/fsx/latest/WindowsGuide/optimize-fsx-costs.html#storage-type-options
+    #   [2]: https://docs.aws.amazon.com/fsx/latest/LustreGuide/what-is.html#storage-options
     #
     # @option params [required, Array<String>] :subnet_ids
     #   Specifies the IDs of the subnets that the file system will be
@@ -2293,7 +2312,7 @@ module Aws::FSx
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-fsx'
-      context[:gem_version] = '1.27.0'
+      context[:gem_version] = '1.28.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

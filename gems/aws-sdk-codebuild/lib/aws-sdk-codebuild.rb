@@ -44,7 +44,7 @@ require_relative 'aws-sdk-codebuild/customizations'
 #
 # See {Errors} for more information.
 #
-# @service
+# @!group service
 module Aws::CodeBuild
 
   GEM_VERSION = '1.59.0'

@@ -44,7 +44,7 @@ require_relative 'aws-sdk-codepipeline/customizations'
 #
 # See {Errors} for more information.
 #
-# @service
+# @!group service
 module Aws::CodePipeline
 
   GEM_VERSION = '1.34.0'

@@ -1013,10 +1013,11 @@ module Aws::Chime
     # @!attribute [rw] media_region
     #   The Region in which to create the meeting. Default: `us-east-1`.
     #
-    #   Available values: `ap-northeast-1`, `ap-southeast-1`,
-    #   `ap-southeast-2`, `ca-central-1`, `eu-central-1`, `eu-north-1`,
-    #   `eu-west-1`, `eu-west-2`, `eu-west-3`, `sa-east-1`, `us-east-1`,
-    #   `us-east-2`, `us-west-1`, `us-west-2`.
+    #   Available values: `af-south-1`, `ap-northeast-1`, `ap-northeast-2`,
+    #   `ap-south-1`, `ap-southeast-1`, `ap-southeast-2`, `ca-central-1`,
+    #   `eu-central-1`, `eu-north-1`, `eu-south-1`, `eu-west-1`,
+    #   `eu-west-2`, `eu-west-3`, `sa-east-1`, `us-east-1`, `us-east-2`,
+    #   `us-west-1`, `us-west-2`.
     #   @return [String]
     #
     # @!attribute [rw] tags
@@ -1104,10 +1105,11 @@ module Aws::Chime
     # @!attribute [rw] media_region
     #   The Region in which to create the meeting. Default: `us-east-1`.
     #
-    #   Available values: `ap-northeast-1`, `ap-southeast-1`,
-    #   `ap-southeast-2`, `ca-central-1`, `eu-central-1`, `eu-north-1`,
-    #   `eu-west-1`, `eu-west-2`, `eu-west-3`, `sa-east-1`, `us-east-1`,
-    #   `us-east-2`, `us-west-1`, `us-west-2`.
+    #   Available values: `af-south-1`, `ap-northeast-1`, `ap-northeast-2`,
+    #   `ap-south-1`, `ap-southeast-1`, `ap-southeast-2`, `ca-central-1`,
+    #   `eu-central-1`, `eu-north-1`, `eu-south-1`, `eu-west-1`,
+    #   `eu-west-2`, `eu-west-3`, `sa-east-1`, `us-east-1`, `us-east-2`,
+    #   `us-west-1`, `us-west-2`.
     #   @return [String]
     #
     # @!attribute [rw] tags
@@ -3854,10 +3856,10 @@ module Aws::Chime
     #
     # @!attribute [rw] media_region
     #   The Region in which to create the meeting. Available values:
-    #   `ap-northeast-1`, `ap-southeast-1`, `ap-southeast-2`,
-    #   `ca-central-1`, `eu-central-1`, `eu-north-1`, `eu-west-1`,
-    #   `eu-west-2`, `eu-west-3`, `sa-east-1`, `us-east-1`, `us-east-2`,
-    #   `us-west-1`, `us-west-2`.
+    #   `af-south-1`, `ap-northeast-1`, `ap-northeast-2`, `ap-south-1`,
+    #   `ap-southeast-1`, `ap-southeast-2`, `ca-central-1`, `eu-central-1`,
+    #   `eu-north-1`, `eu-south-1`, `eu-west-1`, `eu-west-2`, `eu-west-3`,
+    #   `sa-east-1`, `us-east-1`, `us-east-2`, `us-west-1`, `us-west-2`.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/Meeting AWS API Documentation

@@ -85,13 +85,25 @@ module Aws::ApiGatewayV2
     #     * `Aws::Credentials` - Used for configuring static, non-refreshing
     #       credentials.
     #
-    #     * `Aws::InstanceProfileCredentials` - Used for loading credentials
-    #       from an EC2 IMDS on an EC2 instance.
-    #
     #     * `Aws::SharedCredentials` - Used for loading credentials from a
     #       shared file, such as `~/.aws/config`.
     #
     #     * `Aws::AssumeRoleCredentials` - Used when you need to assume a role.
+    #
+    #     * `Aws::AssumeRoleWebIdentityCredentials` - Used when you need to
+    #       assume a role after providing credentials via the web.
+    #
+    #     * `Aws::ProcessCredentials` - Used for loading credentials from a
+    #       process that outputs to stdout.
+    #
+    #     * `Aws::InstanceProfileCredentials` - Used for loading credentials
+    #       from an EC2 IMDS on an EC2 instance.
+    #
+    #     * `Aws::ECSCredentials` - Used for loading credentials from
+    #       instances running in ECS.
+    #
+    #     * `Aws::CognitoIdentityCredentials` - Used for loading credentials
+    #       from the Cognito Identity service.
     #
     #     When `:credentials` are not configured directly, the following
     #     locations will be searched for credentials:
@@ -101,10 +113,10 @@ module Aws::ApiGatewayV2
     #     * ENV['AWS_ACCESS_KEY_ID'], ENV['AWS_SECRET_ACCESS_KEY']
     #     * `~/.aws/credentials`
     #     * `~/.aws/config`
-    #     * EC2 IMDS instance profile - When used by default, the timeouts are
-    #       very aggressive. Construct and pass an instance of
-    #       `Aws::InstanceProfileCredentails` to enable retries and extended
-    #       timeouts.
+    #     * EC2/ECS IMDS instance profile - When used by default, the timeouts
+    #       are very aggressive. Construct and pass an instance of
+    #       `Aws::InstanceProfileCredentails` or `Aws::ECSCredentials` to
+    #       enable retries and extended timeouts.
     #
     #   @option options [required, String] :region
     #     The AWS region to connect to.  The configured `:region` is
@@ -374,6 +386,7 @@ module Aws::ApiGatewayV2
     # @return [Types::CreateApiResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateApiResponse#api_endpoint #api_endpoint} => String
+    #   * {Types::CreateApiResponse#api_gateway_managed #api_gateway_managed} => Boolean
     #   * {Types::CreateApiResponse#api_id #api_id} => String
     #   * {Types::CreateApiResponse#api_key_selection_expression #api_key_selection_expression} => String
     #   * {Types::CreateApiResponse#cors_configuration #cors_configuration} => Types::Cors
@@ -417,6 +430,7 @@ module Aws::ApiGatewayV2
     # @example Response structure
     #
     #   resp.api_endpoint #=> String
+    #   resp.api_gateway_managed #=> Boolean
     #   resp.api_id #=> String
     #   resp.api_key_selection_expression #=> String
     #   resp.cors_configuration.allow_credentials #=> Boolean
@@ -726,6 +740,9 @@ module Aws::ApiGatewayV2
     # @option params [String] :integration_method
     #   A string with a length between \[1-64\].
     #
+    # @option params [String] :integration_subtype
+    #   A string with a length between \[1-128\].
+    #
     # @option params [required, String] :integration_type
     #   Represents an API method integration type.
     #
@@ -784,6 +801,7 @@ module Aws::ApiGatewayV2
     #   * {Types::CreateIntegrationResult#integration_id #integration_id} => String
     #   * {Types::CreateIntegrationResult#integration_method #integration_method} => String
     #   * {Types::CreateIntegrationResult#integration_response_selection_expression #integration_response_selection_expression} => String
+    #   * {Types::CreateIntegrationResult#integration_subtype #integration_subtype} => String
     #   * {Types::CreateIntegrationResult#integration_type #integration_type} => String
     #   * {Types::CreateIntegrationResult#integration_uri #integration_uri} => String
     #   * {Types::CreateIntegrationResult#passthrough_behavior #passthrough_behavior} => String
@@ -804,6 +822,7 @@ module Aws::ApiGatewayV2
     #     credentials_arn: "Arn",
     #     description: "StringWithLengthBetween0And1024",
     #     integration_method: "StringWithLengthBetween1And64",
+    #     integration_subtype: "StringWithLengthBetween1And128",
     #     integration_type: "AWS", # required, accepts AWS, HTTP, MOCK, HTTP_PROXY, AWS_PROXY
     #     integration_uri: "UriWithLengthBetween1And2048",
     #     passthrough_behavior: "WHEN_NO_MATCH", # accepts WHEN_NO_MATCH, NEVER, WHEN_NO_TEMPLATES
@@ -832,6 +851,7 @@ module Aws::ApiGatewayV2
     #   resp.integration_id #=> String
     #   resp.integration_method #=> String
     #   resp.integration_response_selection_expression #=> String
+    #   resp.integration_subtype #=> String
     #   resp.integration_type #=> String, one of "AWS", "HTTP", "MOCK", "HTTP_PROXY", "AWS_PROXY"
     #   resp.integration_uri #=> String
     #   resp.passthrough_behavior #=> String, one of "WHEN_NO_MATCH", "NEVER", "WHEN_NO_TEMPLATES"
@@ -1772,6 +1792,7 @@ module Aws::ApiGatewayV2
     # @return [Types::GetApiResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::GetApiResponse#api_endpoint #api_endpoint} => String
+    #   * {Types::GetApiResponse#api_gateway_managed #api_gateway_managed} => Boolean
     #   * {Types::GetApiResponse#api_id #api_id} => String
     #   * {Types::GetApiResponse#api_key_selection_expression #api_key_selection_expression} => String
     #   * {Types::GetApiResponse#cors_configuration #cors_configuration} => Types::Cors
@@ -1795,6 +1816,7 @@ module Aws::ApiGatewayV2
     # @example Response structure
     #
     #   resp.api_endpoint #=> String
+    #   resp.api_gateway_managed #=> Boolean
     #   resp.api_id #=> String
     #   resp.api_key_selection_expression #=> String
     #   resp.cors_configuration.allow_credentials #=> Boolean
@@ -1921,6 +1943,7 @@ module Aws::ApiGatewayV2
     #
     #   resp.items #=> Array
     #   resp.items[0].api_endpoint #=> String
+    #   resp.items[0].api_gateway_managed #=> Boolean
     #   resp.items[0].api_id #=> String
     #   resp.items[0].api_key_selection_expression #=> String
     #   resp.items[0].cors_configuration.allow_credentials #=> Boolean
@@ -2226,6 +2249,7 @@ module Aws::ApiGatewayV2
     #   * {Types::GetIntegrationResult#integration_id #integration_id} => String
     #   * {Types::GetIntegrationResult#integration_method #integration_method} => String
     #   * {Types::GetIntegrationResult#integration_response_selection_expression #integration_response_selection_expression} => String
+    #   * {Types::GetIntegrationResult#integration_subtype #integration_subtype} => String
     #   * {Types::GetIntegrationResult#integration_type #integration_type} => String
     #   * {Types::GetIntegrationResult#integration_uri #integration_uri} => String
     #   * {Types::GetIntegrationResult#passthrough_behavior #passthrough_behavior} => String
@@ -2254,6 +2278,7 @@ module Aws::ApiGatewayV2
     #   resp.integration_id #=> String
     #   resp.integration_method #=> String
     #   resp.integration_response_selection_expression #=> String
+    #   resp.integration_subtype #=> String
     #   resp.integration_type #=> String, one of "AWS", "HTTP", "MOCK", "HTTP_PROXY", "AWS_PROXY"
     #   resp.integration_uri #=> String
     #   resp.passthrough_behavior #=> String, one of "WHEN_NO_MATCH", "NEVER", "WHEN_NO_TEMPLATES"
@@ -2393,6 +2418,7 @@ module Aws::ApiGatewayV2
     #   resp.items[0].integration_id #=> String
     #   resp.items[0].integration_method #=> String
     #   resp.items[0].integration_response_selection_expression #=> String
+    #   resp.items[0].integration_subtype #=> String
     #   resp.items[0].integration_type #=> String, one of "AWS", "HTTP", "MOCK", "HTTP_PROXY", "AWS_PROXY"
     #   resp.items[0].integration_uri #=> String
     #   resp.items[0].passthrough_behavior #=> String, one of "WHEN_NO_MATCH", "NEVER", "WHEN_NO_TEMPLATES"
@@ -2951,6 +2977,7 @@ module Aws::ApiGatewayV2
     # @return [Types::ImportApiResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::ImportApiResponse#api_endpoint #api_endpoint} => String
+    #   * {Types::ImportApiResponse#api_gateway_managed #api_gateway_managed} => Boolean
     #   * {Types::ImportApiResponse#api_id #api_id} => String
     #   * {Types::ImportApiResponse#api_key_selection_expression #api_key_selection_expression} => String
     #   * {Types::ImportApiResponse#cors_configuration #cors_configuration} => Types::Cors
@@ -2976,6 +3003,7 @@ module Aws::ApiGatewayV2
     # @example Response structure
     #
     #   resp.api_endpoint #=> String
+    #   resp.api_gateway_managed #=> Boolean
     #   resp.api_id #=> String
     #   resp.api_key_selection_expression #=> String
     #   resp.cors_configuration.allow_credentials #=> Boolean
@@ -3022,6 +3050,7 @@ module Aws::ApiGatewayV2
     # @return [Types::ReimportApiResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::ReimportApiResponse#api_endpoint #api_endpoint} => String
+    #   * {Types::ReimportApiResponse#api_gateway_managed #api_gateway_managed} => Boolean
     #   * {Types::ReimportApiResponse#api_id #api_id} => String
     #   * {Types::ReimportApiResponse#api_key_selection_expression #api_key_selection_expression} => String
     #   * {Types::ReimportApiResponse#cors_configuration #cors_configuration} => Types::Cors
@@ -3048,6 +3077,7 @@ module Aws::ApiGatewayV2
     # @example Response structure
     #
     #   resp.api_endpoint #=> String
+    #   resp.api_gateway_managed #=> Boolean
     #   resp.api_id #=> String
     #   resp.api_key_selection_expression #=> String
     #   resp.cors_configuration.allow_credentials #=> Boolean
@@ -3186,6 +3216,7 @@ module Aws::ApiGatewayV2
     # @return [Types::UpdateApiResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::UpdateApiResponse#api_endpoint #api_endpoint} => String
+    #   * {Types::UpdateApiResponse#api_gateway_managed #api_gateway_managed} => Boolean
     #   * {Types::UpdateApiResponse#api_id #api_id} => String
     #   * {Types::UpdateApiResponse#api_key_selection_expression #api_key_selection_expression} => String
     #   * {Types::UpdateApiResponse#cors_configuration #cors_configuration} => Types::Cors
@@ -3226,6 +3257,7 @@ module Aws::ApiGatewayV2
     # @example Response structure
     #
     #   resp.api_endpoint #=> String
+    #   resp.api_gateway_managed #=> Boolean
     #   resp.api_id #=> String
     #   resp.api_key_selection_expression #=> String
     #   resp.cors_configuration.allow_credentials #=> Boolean
@@ -3535,6 +3567,9 @@ module Aws::ApiGatewayV2
     # @option params [String] :integration_method
     #   A string with a length between \[1-64\].
     #
+    # @option params [String] :integration_subtype
+    #   A string with a length between \[1-128\].
+    #
     # @option params [String] :integration_type
     #   Represents an API method integration type.
     #
@@ -3593,6 +3628,7 @@ module Aws::ApiGatewayV2
     #   * {Types::UpdateIntegrationResult#integration_id #integration_id} => String
     #   * {Types::UpdateIntegrationResult#integration_method #integration_method} => String
     #   * {Types::UpdateIntegrationResult#integration_response_selection_expression #integration_response_selection_expression} => String
+    #   * {Types::UpdateIntegrationResult#integration_subtype #integration_subtype} => String
     #   * {Types::UpdateIntegrationResult#integration_type #integration_type} => String
     #   * {Types::UpdateIntegrationResult#integration_uri #integration_uri} => String
     #   * {Types::UpdateIntegrationResult#passthrough_behavior #passthrough_behavior} => String
@@ -3614,6 +3650,7 @@ module Aws::ApiGatewayV2
     #     description: "StringWithLengthBetween0And1024",
     #     integration_id: "__string", # required
     #     integration_method: "StringWithLengthBetween1And64",
+    #     integration_subtype: "StringWithLengthBetween1And128",
     #     integration_type: "AWS", # accepts AWS, HTTP, MOCK, HTTP_PROXY, AWS_PROXY
     #     integration_uri: "UriWithLengthBetween1And2048",
     #     passthrough_behavior: "WHEN_NO_MATCH", # accepts WHEN_NO_MATCH, NEVER, WHEN_NO_TEMPLATES
@@ -3642,6 +3679,7 @@ module Aws::ApiGatewayV2
     #   resp.integration_id #=> String
     #   resp.integration_method #=> String
     #   resp.integration_response_selection_expression #=> String
+    #   resp.integration_subtype #=> String
     #   resp.integration_type #=> String, one of "AWS", "HTTP", "MOCK", "HTTP_PROXY", "AWS_PROXY"
     #   resp.integration_uri #=> String
     #   resp.passthrough_behavior #=> String, one of "WHEN_NO_MATCH", "NEVER", "WHEN_NO_TEMPLATES"
@@ -4188,7 +4226,7 @@ module Aws::ApiGatewayV2
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-apigatewayv2'
-      context[:gem_version] = '1.23.0'
+      context[:gem_version] = '1.24.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

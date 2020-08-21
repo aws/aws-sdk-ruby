@@ -44,7 +44,7 @@ require_relative 'aws-sdk-kinesisvideoarchivedmedia/customizations'
 #
 # See {Errors} for more information.
 #
-# @service
+# @!group service
 module Aws::KinesisVideoArchivedMedia
 
   GEM_VERSION = '1.26.0'

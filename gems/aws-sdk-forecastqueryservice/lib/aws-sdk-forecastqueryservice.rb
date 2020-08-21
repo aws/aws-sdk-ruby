@@ -44,7 +44,7 @@ require_relative 'aws-sdk-forecastqueryservice/customizations'
 #
 # See {Errors} for more information.
 #
-# @service
+# @!group service
 module Aws::ForecastQueryService
 
   GEM_VERSION = '1.7.0'

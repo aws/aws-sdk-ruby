@@ -45,7 +45,7 @@ require_relative 'aws-sdk-ecr/customizations'
 #
 # See {Errors} for more information.
 #
-# @service
+# @!group service
 module Aws::ECR
 
   GEM_VERSION = '1.36.0'

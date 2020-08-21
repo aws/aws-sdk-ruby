@@ -44,7 +44,7 @@ require_relative 'aws-sdk-codeguruprofiler/customizations'
 #
 # See {Errors} for more information.
 #
-# @service
+# @!group service
 module Aws::CodeGuruProfiler
 
   GEM_VERSION = '1.9.0'

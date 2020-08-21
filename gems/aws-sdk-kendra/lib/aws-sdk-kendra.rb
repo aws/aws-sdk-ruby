@@ -44,7 +44,7 @@ require_relative 'aws-sdk-kendra/customizations'
 #
 # See {Errors} for more information.
 #
-# @service
+# @!group service
 module Aws::Kendra
 
   GEM_VERSION = '1.9.0'
