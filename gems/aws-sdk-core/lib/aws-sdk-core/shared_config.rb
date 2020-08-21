@@ -103,6 +103,8 @@ module Aws
         credentials
       elsif (credentials = credentials_from_config(p, opts))
         credentials
+      elsif (credentials = credentials_from_sso(p, opts))
+        credentials
       end
     end
 
@@ -133,6 +135,13 @@ module Aws
           AssumeRoleWebIdentityCredentials.new(cfg)
         end
       end
+    end
+
+    # Attempts to load the credentials from shared config
+    def assume_sso_credentials(opts = {})
+      p = opts[:profile] || @profile_name
+      validate_profile_exists(p) if credentials_present?
+      credentials_from_sso(p, opts)
     end
 
     # Add an accessor method (similar to attr_reader) to return a configuration value
@@ -270,6 +279,21 @@ module Aws
     def credentials_from_config(profile, _opts)
       if @parsed_config && prof_config = @parsed_config[profile]
         credentials_from_profile(prof_config)
+      end
+    end
+
+    def credentials_from_sso(profile, _opts)
+      if @parsed_config && prof_config = @parsed_config[profile]
+        creds = {
+          sso_start_url: prof_config['sso_start_url'],
+          sso_region: prof_config['sso_region'],
+          sso_account_id: prof_config['sso_account_id'],
+          sso_role_name: prof_config['sso_role_name'] }
+        if creds.values.any?(&:nil?) || creds.values.any?(&:empty?)
+          nil
+        else
+          SSOCredentials.new(**creds)
+        end
       end
     end
 
