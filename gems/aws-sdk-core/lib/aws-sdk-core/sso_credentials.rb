@@ -35,7 +35,8 @@ module Aws
     def initialize(options = {})
       client_opts = {}
 
-      unless (missing_keys = SSO_REQUIRED_OPTS - options.keys).empty?
+      missing_keys = SSO_REQUIRED_OPTS.select { |k| options[k].nil? }
+      unless missing_keys.empty?
         raise ArgumentError, "Missing required keys: #{missing_keys}"
       end
 

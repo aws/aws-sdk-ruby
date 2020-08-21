@@ -75,7 +75,15 @@ module Aws
       end
 
       it 'raises an argument error when arguments are missing' do
-        expect { SSOCredentials.new }.to raise_error(ArgumentError)
+        expect { SSOCredentials.new }.to raise_error(
+          ArgumentError, /Missing required keys/
+        )
+      end
+
+      it 'raises an argument error when arguments are unset' do
+        expect do
+          SSOCredentials.new(sso_opts.merge(sso_region: nil))
+        end.to raise_error(ArgumentError, /Missing required keys/)
       end
 
       it 'sets the client when passed in and does not create a new one' do
