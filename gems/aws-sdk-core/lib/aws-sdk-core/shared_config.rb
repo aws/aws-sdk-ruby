@@ -3,6 +3,8 @@
 module Aws
   # @api private
   class SharedConfig
+    SSO_PROFILE_KEYS = %w[sso_start_url sso_region sso_account_id sso_role_name].freeze
+
     # @return [String]
     attr_reader :credentials_path
 
@@ -103,8 +105,6 @@ module Aws
         credentials
       elsif (credentials = credentials_from_config(p, opts))
         credentials
-      elsif (credentials = credentials_from_sso(p, opts))
-        credentials
       end
     end
 
@@ -137,11 +137,16 @@ module Aws
       end
     end
 
-    # Attempts to load the credentials from shared config
-    def assume_sso_credentials(opts = {})
+    # Attempts to load from shared config or shared credentials file.
+    # Will always attempt first to load from the shared credentials
+    # file, if present.
+    def sso_credentials_from_config(opts = {})
       p = opts[:profile] || @profile_name
-      validate_profile_exists(p) if credentials_present?
-      credentials_from_sso(p, opts)
+      credentials = sso_credentials_from_profile(@parsed_credentials, p)
+      if @parsed_config
+        credentials ||= sso_credentials_from_profile(@parsed_config, p)
+      end
+      credentials
     end
 
     # Add an accessor method (similar to attr_reader) to return a configuration value
@@ -282,18 +287,19 @@ module Aws
       end
     end
 
-    def credentials_from_sso(profile, _opts)
-      if @parsed_config && prof_config = @parsed_config[profile]
-        creds = {
+    # If any of the sso_ profile values are present, attempt to construct
+    # SSOCredentials
+    def sso_credentials_from_profile(cfg, profile)
+      if @parsed_config &&
+         (prof_config = cfg[profile]) &&
+         !(prof_config.keys & SSO_PROFILE_KEYS).empty?
+
+        SSOCredentials.new(
           sso_start_url: prof_config['sso_start_url'],
           sso_region: prof_config['sso_region'],
           sso_account_id: prof_config['sso_account_id'],
-          sso_role_name: prof_config['sso_role_name'] }
-        if creds.values.any?(&:nil?) || creds.values.any?(&:empty?)
-          nil
-        else
-          SSOCredentials.new(**creds)
-        end
+          sso_role_name: prof_config['sso_role_name']
+        )
       end
     end
 

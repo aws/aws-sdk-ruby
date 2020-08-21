@@ -22,13 +22,14 @@ module Aws
       [
         [:static_credentials, {}],
         [:static_profile_assume_role_web_identity_credentials, {}],
+        [:static_profile_sso_credentials, {}],
         [:static_profile_assume_role_credentials, {}],
         [:static_profile_credentials, {}],
         [:static_profile_process_credentials, {}],
         [:env_credentials, {}],
         [:assume_role_web_identity_credentials, {}],
-        [:assume_role_credentials, {}],
         [:sso_credentials, {}],
+        [:assume_role_credentials, {}],
         [:shared_credentials, {}],
         [:process_credentials, {}],
         [:instance_profile_credentials, {
@@ -54,6 +55,14 @@ module Aws
         Aws.shared_config.assume_role_web_identity_credentials_from_config(
           profile: options[:config].profile,
           region: options[:config].region
+        )
+      end
+    end
+
+    def static_profile_sso_credentials(options)
+      if Aws.shared_config.config_enabled? && options[:config] && options[:config].profile
+        Aws.shared_config.sso_credentials_from_config(
+          profile: options[:config].profile
         )
       end
     end
@@ -118,9 +127,11 @@ module Aws
 
     def sso_credentials(options)
       profile_name = determine_profile_name(options)
-      if Aws.shared_config.config_enabled? && !profile_name.nil?
-        Aws.shared_config.assume_sso_credentials(options.merge(profile: profile_name))
+      if Aws.shared_config.config_enabled?
+        Aws.shared_config.sso_credentials_from_config(profile: profile_name)
       end
+    rescue Errors::NoSuchProfileError
+      nil
     end
 
     def assume_role_credentials(options)
