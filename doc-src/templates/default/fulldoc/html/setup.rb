@@ -43,7 +43,7 @@ def class_list_children(children, tree, options = {})
       out << linkify(child, name)
       out << " &lt; #{child.superclass.name}" if child.is_a?(CodeObjects::ClassObject) && child.superclass
       if child.group == 'service'
-        if name.downcase == :sts
+        if name.downcase == :sts || name.downcase == :sso
           out << " (aws-sdk-core)"
         else
           out << " (aws-sdk-#{name.downcase})"
