@@ -299,7 +299,33 @@ module Aws
         end
 
         it 'supports :source_profile from sso credentials' do
-          # TODO: Implement
+          expect(SSOCredentials).to receive(:new).with(
+            sso_start_url: 'START_URL',
+            sso_region: 'us-east-1',
+            sso_account_id: 'SSO_ACCOUNT_ID',
+            sso_role_name: 'SSO_ROLE_NAME'
+          ).and_return(
+            double(
+              'SSOCreds',
+              set?: true,
+              credentials: Credentials.new('SSO_AKID', 'sak')
+            )
+          )
+
+          assume_role_stub(
+            'arn:aws:iam:123456789012:role/foo',
+            'SSO_AKID',
+            'AR_AKID',
+            'SECRET_AK',
+            'TOKEN'
+          )
+
+          client = ApiHelper.sample_rest_xml::Client.new(
+            profile: 'ar_sso_src', region: 'us-east-1'
+          )
+          expect(
+            client.config.credentials.credentials.access_key_id
+          ).to eq('AR_AKID')
         end
 
         it 'raises if credential_source is present but invalid' do

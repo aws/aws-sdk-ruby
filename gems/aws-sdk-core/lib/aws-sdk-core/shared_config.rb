@@ -251,6 +251,8 @@ module Aws
         provider.credentials if provider.credentials.set?
       elsif (provider = assume_role_process_credentials_from_config(profile))
         provider.credentials if provider.credentials.set?
+      elsif (provider = sso_credentials_from_config(profile: profile))
+        provider.credentials if provider.credentials.set?
       end
     end
 
