@@ -1,21 +1,25 @@
 # frozen_string_literal: true
 
-require 'set'
-
 module Aws
-  # An auto-refreshing credential provider
-  # assumes role via {Aws::SSO::Client#get_role_credentials}
-  # TODO: ADD DOCUMENTATION
+  # An auto-refreshing credential provider that works by assuming a
+  # role via {Aws::SSO::Client#get_role_credentials} using a cached access
+  # token.  This class does NOT implement the SSO login token flow - tokens
+  # must generated and refreshed separately by running `aws login` with the
+  # correct profile.
   #
-  #     sso_credentials = Aws::SSOCredentials.new(
-  #       client: Aws::SSO::Client.new(...),
-  #       TBD
-  #     )
+  # For more background on AWS SSO see the official
+  # [what is SSO](https://docs.aws.amazon.com/singlesignon/latest/userguide/what-is.html]
+  # page.
   #
-  #     ec2 = Aws::EC2::Client.new(credentials: sso_credentials)
+  # ## Refreshing Credentials from SSO
   #
-  # If you omit `:client` option, a new {STS::Client} object will be
-  # constructed.
+  # The `SSOCredentials` will auto-refresh the AWS credentials from SSO. In
+  # addition to AWS credentials expiring after a given amount of time, the
+  # access token generated and cached from `aws login` will also expire.
+  # Once this token expires, it will not be usable to refresh AWS credentials,
+  # and another token will be needed. The SDK does not manage refreshing of
+  # the token value, but this can be done by running `aws login` with the
+  # correct profile.
   class SSOCredentials
 
     include CredentialProvider
@@ -27,11 +31,23 @@ module Aws
     'expired or is otherwise invalid. To refresh this SSO session run '\
     'aws sso login with the corresponding profile.'.freeze
 
-    # @option options [required, String] :sso_account_id
-    # @option options [required, String] :sso_region
-    # @option options [required, String] :sso_role_name
-    # @option options [required, String] :sso_start_url
-    # @option options [SSO::Client] :client
+    # @option options [required, String] :sso_account_id The AWS account ID
+    #   that temporary AWS credentials will be resolved for
+    #
+    # @option options [required, String] :sso_region The AWS region where the
+    #   SSO directory for the given sso_start_url is hosted.
+    #
+    # @option options [required, String] :sso_role_name The corresponding
+    #   IAM role in the AWS account that temporary AWS credentials
+    #   will be resolved for.
+    #
+    # @option options [required, String] :sso_start_url The start URL is
+    #   provided by the SSO service via the console and is the URL used to
+    #   login to the SSO directory. This is also sometimes referred to as
+    #   the "User Portal URL"
+
+    # @option options [SSO::Client] :client Optional `SSO::Client`.  If not
+    #   provided, a client will be constructed.
     def initialize(options = {})
       client_opts = {}
 
@@ -60,6 +76,8 @@ module Aws
     # @return [STS::Client]
     attr_reader :client
 
+    private
+
     def read_cached_token
       cached_token = Json.load(File.read(sso_cache_file))
       # validation
@@ -74,8 +92,6 @@ module Aws
     rescue Aws::Json::ParseError, ArgumentError
       raise Errors::InvalidSSOCredentials, SSO_LOGIN_GUIDANCE
     end
-
-    private
 
     def refresh
       cached_token = read_cached_token
