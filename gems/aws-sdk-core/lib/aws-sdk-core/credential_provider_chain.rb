@@ -28,6 +28,7 @@ module Aws
         [:env_credentials, {}],
         [:assume_role_web_identity_credentials, {}],
         [:assume_role_credentials, {}],
+        [:sso_credentials, {}],
         [:shared_credentials, {}],
         [:process_credentials, {}],
         [:instance_profile_credentials, {
@@ -113,6 +114,13 @@ module Aws
       end
     rescue Errors::NoSuchProfileError
       nil
+    end
+
+    def sso_credentials(options)
+      profile_name = determine_profile_name(options)
+      if Aws.shared_config.config_enabled? && !profile_name.nil?
+        Aws.shared_config.assume_sso_credentials(options.merge(profile: profile_name))
+      end
     end
 
     def assume_role_credentials(options)
