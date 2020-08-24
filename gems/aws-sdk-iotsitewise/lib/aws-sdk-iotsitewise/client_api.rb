@@ -247,6 +247,7 @@ module Aws::IoTSiteWise
     Timestamps = Shapes::ListShape.new(name: 'Timestamps')
     TooManyTagsException = Shapes::StructureShape.new(name: 'TooManyTagsException')
     Transform = Shapes::StructureShape.new(name: 'Transform')
+    TraversalDirection = Shapes::StringShape.new(name: 'TraversalDirection')
     TumblingWindow = Shapes::StructureShape.new(name: 'TumblingWindow')
     UntagResourceRequest = Shapes::StructureShape.new(name: 'UntagResourceRequest')
     UntagResourceResponse = Shapes::StructureShape.new(name: 'UntagResourceResponse')
@@ -848,7 +849,8 @@ module Aws::IoTSiteWise
     ListAssetsResponse.struct_class = Types::ListAssetsResponse
 
     ListAssociatedAssetsRequest.add_member(:asset_id, Shapes::ShapeRef.new(shape: ID, required: true, location: "uri", location_name: "assetId"))
-    ListAssociatedAssetsRequest.add_member(:hierarchy_id, Shapes::ShapeRef.new(shape: ID, required: true, location: "querystring", location_name: "hierarchyId"))
+    ListAssociatedAssetsRequest.add_member(:hierarchy_id, Shapes::ShapeRef.new(shape: ID, location: "querystring", location_name: "hierarchyId"))
+    ListAssociatedAssetsRequest.add_member(:traversal_direction, Shapes::ShapeRef.new(shape: TraversalDirection, location: "querystring", location_name: "traversalDirection"))
     ListAssociatedAssetsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location: "querystring", location_name: "nextToken"))
     ListAssociatedAssetsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location: "querystring", location_name: "maxResults"))
     ListAssociatedAssetsRequest.struct_class = Types::ListAssociatedAssetsRequest
@@ -939,6 +941,7 @@ module Aws::IoTSiteWise
     PortalSummary.add_member(:creation_date, Shapes::ShapeRef.new(shape: Timestamp, location_name: "creationDate"))
     PortalSummary.add_member(:last_update_date, Shapes::ShapeRef.new(shape: Timestamp, location_name: "lastUpdateDate"))
     PortalSummary.add_member(:role_arn, Shapes::ShapeRef.new(shape: ARN, location_name: "roleArn"))
+    PortalSummary.add_member(:status, Shapes::ShapeRef.new(shape: PortalStatus, required: true, location_name: "status"))
     PortalSummary.struct_class = Types::PortalSummary
 
     ProjectResource.add_member(:id, Shapes::ShapeRef.new(shape: ID, required: true, location_name: "id"))

@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.25.0 (2020-08-24)
+------------------
+
+* Feature - Add UpdateConfiguration and DeleteConfiguration operations.
+
 1.24.0 (2020-07-30)
 ------------------
 

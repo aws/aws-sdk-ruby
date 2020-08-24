@@ -336,6 +336,8 @@ module Aws::EC2
     CreateTransitGatewayMulticastDomainResult = Shapes::StructureShape.new(name: 'CreateTransitGatewayMulticastDomainResult')
     CreateTransitGatewayPeeringAttachmentRequest = Shapes::StructureShape.new(name: 'CreateTransitGatewayPeeringAttachmentRequest')
     CreateTransitGatewayPeeringAttachmentResult = Shapes::StructureShape.new(name: 'CreateTransitGatewayPeeringAttachmentResult')
+    CreateTransitGatewayPrefixListReferenceRequest = Shapes::StructureShape.new(name: 'CreateTransitGatewayPrefixListReferenceRequest')
+    CreateTransitGatewayPrefixListReferenceResult = Shapes::StructureShape.new(name: 'CreateTransitGatewayPrefixListReferenceResult')
     CreateTransitGatewayRequest = Shapes::StructureShape.new(name: 'CreateTransitGatewayRequest')
     CreateTransitGatewayResult = Shapes::StructureShape.new(name: 'CreateTransitGatewayResult')
     CreateTransitGatewayRouteRequest = Shapes::StructureShape.new(name: 'CreateTransitGatewayRouteRequest')
@@ -452,6 +454,8 @@ module Aws::EC2
     DeleteTransitGatewayMulticastDomainResult = Shapes::StructureShape.new(name: 'DeleteTransitGatewayMulticastDomainResult')
     DeleteTransitGatewayPeeringAttachmentRequest = Shapes::StructureShape.new(name: 'DeleteTransitGatewayPeeringAttachmentRequest')
     DeleteTransitGatewayPeeringAttachmentResult = Shapes::StructureShape.new(name: 'DeleteTransitGatewayPeeringAttachmentResult')
+    DeleteTransitGatewayPrefixListReferenceRequest = Shapes::StructureShape.new(name: 'DeleteTransitGatewayPrefixListReferenceRequest')
+    DeleteTransitGatewayPrefixListReferenceResult = Shapes::StructureShape.new(name: 'DeleteTransitGatewayPrefixListReferenceResult')
     DeleteTransitGatewayRequest = Shapes::StructureShape.new(name: 'DeleteTransitGatewayRequest')
     DeleteTransitGatewayResult = Shapes::StructureShape.new(name: 'DeleteTransitGatewayResult')
     DeleteTransitGatewayRouteRequest = Shapes::StructureShape.new(name: 'DeleteTransitGatewayRouteRequest')
@@ -995,6 +999,8 @@ module Aws::EC2
     GetTransitGatewayAttachmentPropagationsResult = Shapes::StructureShape.new(name: 'GetTransitGatewayAttachmentPropagationsResult')
     GetTransitGatewayMulticastDomainAssociationsRequest = Shapes::StructureShape.new(name: 'GetTransitGatewayMulticastDomainAssociationsRequest')
     GetTransitGatewayMulticastDomainAssociationsResult = Shapes::StructureShape.new(name: 'GetTransitGatewayMulticastDomainAssociationsResult')
+    GetTransitGatewayPrefixListReferencesRequest = Shapes::StructureShape.new(name: 'GetTransitGatewayPrefixListReferencesRequest')
+    GetTransitGatewayPrefixListReferencesResult = Shapes::StructureShape.new(name: 'GetTransitGatewayPrefixListReferencesResult')
     GetTransitGatewayRouteTableAssociationsRequest = Shapes::StructureShape.new(name: 'GetTransitGatewayRouteTableAssociationsRequest')
     GetTransitGatewayRouteTableAssociationsResult = Shapes::StructureShape.new(name: 'GetTransitGatewayRouteTableAssociationsResult')
     GetTransitGatewayRouteTablePropagationsRequest = Shapes::StructureShape.new(name: 'GetTransitGatewayRouteTablePropagationsRequest')
@@ -1375,6 +1381,11 @@ module Aws::EC2
     ModifyTrafficMirrorFilterRuleResult = Shapes::StructureShape.new(name: 'ModifyTrafficMirrorFilterRuleResult')
     ModifyTrafficMirrorSessionRequest = Shapes::StructureShape.new(name: 'ModifyTrafficMirrorSessionRequest')
     ModifyTrafficMirrorSessionResult = Shapes::StructureShape.new(name: 'ModifyTrafficMirrorSessionResult')
+    ModifyTransitGatewayOptions = Shapes::StructureShape.new(name: 'ModifyTransitGatewayOptions')
+    ModifyTransitGatewayPrefixListReferenceRequest = Shapes::StructureShape.new(name: 'ModifyTransitGatewayPrefixListReferenceRequest')
+    ModifyTransitGatewayPrefixListReferenceResult = Shapes::StructureShape.new(name: 'ModifyTransitGatewayPrefixListReferenceResult')
+    ModifyTransitGatewayRequest = Shapes::StructureShape.new(name: 'ModifyTransitGatewayRequest')
+    ModifyTransitGatewayResult = Shapes::StructureShape.new(name: 'ModifyTransitGatewayResult')
     ModifyTransitGatewayVpcAttachmentRequest = Shapes::StructureShape.new(name: 'ModifyTransitGatewayVpcAttachmentRequest')
     ModifyTransitGatewayVpcAttachmentRequestOptions = Shapes::StructureShape.new(name: 'ModifyTransitGatewayVpcAttachmentRequestOptions')
     ModifyTransitGatewayVpcAttachmentResult = Shapes::StructureShape.new(name: 'ModifyTransitGatewayVpcAttachmentResult')
@@ -1920,6 +1931,10 @@ module Aws::EC2
     TransitGatewayOptions = Shapes::StructureShape.new(name: 'TransitGatewayOptions')
     TransitGatewayPeeringAttachment = Shapes::StructureShape.new(name: 'TransitGatewayPeeringAttachment')
     TransitGatewayPeeringAttachmentList = Shapes::ListShape.new(name: 'TransitGatewayPeeringAttachmentList')
+    TransitGatewayPrefixListAttachment = Shapes::StructureShape.new(name: 'TransitGatewayPrefixListAttachment')
+    TransitGatewayPrefixListReference = Shapes::StructureShape.new(name: 'TransitGatewayPrefixListReference')
+    TransitGatewayPrefixListReferenceSet = Shapes::ListShape.new(name: 'TransitGatewayPrefixListReferenceSet')
+    TransitGatewayPrefixListReferenceState = Shapes::StringShape.new(name: 'TransitGatewayPrefixListReferenceState')
     TransitGatewayPropagation = Shapes::StructureShape.new(name: 'TransitGatewayPropagation')
     TransitGatewayPropagationState = Shapes::StringShape.new(name: 'TransitGatewayPropagationState')
     TransitGatewayRequestOptions = Shapes::StructureShape.new(name: 'TransitGatewayRequestOptions')
@@ -3375,6 +3390,16 @@ module Aws::EC2
     CreateTransitGatewayPeeringAttachmentResult.add_member(:transit_gateway_peering_attachment, Shapes::ShapeRef.new(shape: TransitGatewayPeeringAttachment, location_name: "transitGatewayPeeringAttachment"))
     CreateTransitGatewayPeeringAttachmentResult.struct_class = Types::CreateTransitGatewayPeeringAttachmentResult
 
+    CreateTransitGatewayPrefixListReferenceRequest.add_member(:transit_gateway_route_table_id, Shapes::ShapeRef.new(shape: TransitGatewayRouteTableId, required: true, location_name: "TransitGatewayRouteTableId"))
+    CreateTransitGatewayPrefixListReferenceRequest.add_member(:prefix_list_id, Shapes::ShapeRef.new(shape: PrefixListResourceId, required: true, location_name: "PrefixListId"))
+    CreateTransitGatewayPrefixListReferenceRequest.add_member(:transit_gateway_attachment_id, Shapes::ShapeRef.new(shape: TransitGatewayAttachmentId, location_name: "TransitGatewayAttachmentId"))
+    CreateTransitGatewayPrefixListReferenceRequest.add_member(:blackhole, Shapes::ShapeRef.new(shape: Boolean, location_name: "Blackhole"))
+    CreateTransitGatewayPrefixListReferenceRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "DryRun"))
+    CreateTransitGatewayPrefixListReferenceRequest.struct_class = Types::CreateTransitGatewayPrefixListReferenceRequest
+
+    CreateTransitGatewayPrefixListReferenceResult.add_member(:transit_gateway_prefix_list_reference, Shapes::ShapeRef.new(shape: TransitGatewayPrefixListReference, location_name: "transitGatewayPrefixListReference"))
+    CreateTransitGatewayPrefixListReferenceResult.struct_class = Types::CreateTransitGatewayPrefixListReferenceResult
+
     CreateTransitGatewayRequest.add_member(:description, Shapes::ShapeRef.new(shape: String, location_name: "Description"))
     CreateTransitGatewayRequest.add_member(:options, Shapes::ShapeRef.new(shape: TransitGatewayRequestOptions, location_name: "Options"))
     CreateTransitGatewayRequest.add_member(:tag_specifications, Shapes::ShapeRef.new(shape: TagSpecificationList, location_name: "TagSpecification"))
@@ -3813,6 +3838,14 @@ module Aws::EC2
 
     DeleteTransitGatewayPeeringAttachmentResult.add_member(:transit_gateway_peering_attachment, Shapes::ShapeRef.new(shape: TransitGatewayPeeringAttachment, location_name: "transitGatewayPeeringAttachment"))
     DeleteTransitGatewayPeeringAttachmentResult.struct_class = Types::DeleteTransitGatewayPeeringAttachmentResult
+
+    DeleteTransitGatewayPrefixListReferenceRequest.add_member(:transit_gateway_route_table_id, Shapes::ShapeRef.new(shape: TransitGatewayRouteTableId, required: true, location_name: "TransitGatewayRouteTableId"))
+    DeleteTransitGatewayPrefixListReferenceRequest.add_member(:prefix_list_id, Shapes::ShapeRef.new(shape: PrefixListResourceId, required: true, location_name: "PrefixListId"))
+    DeleteTransitGatewayPrefixListReferenceRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "DryRun"))
+    DeleteTransitGatewayPrefixListReferenceRequest.struct_class = Types::DeleteTransitGatewayPrefixListReferenceRequest
+
+    DeleteTransitGatewayPrefixListReferenceResult.add_member(:transit_gateway_prefix_list_reference, Shapes::ShapeRef.new(shape: TransitGatewayPrefixListReference, location_name: "transitGatewayPrefixListReference"))
+    DeleteTransitGatewayPrefixListReferenceResult.struct_class = Types::DeleteTransitGatewayPrefixListReferenceResult
 
     DeleteTransitGatewayRequest.add_member(:transit_gateway_id, Shapes::ShapeRef.new(shape: TransitGatewayId, required: true, location_name: "TransitGatewayId"))
     DeleteTransitGatewayRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "DryRun"))
@@ -5989,6 +6022,17 @@ module Aws::EC2
     GetTransitGatewayMulticastDomainAssociationsResult.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "nextToken"))
     GetTransitGatewayMulticastDomainAssociationsResult.struct_class = Types::GetTransitGatewayMulticastDomainAssociationsResult
 
+    GetTransitGatewayPrefixListReferencesRequest.add_member(:transit_gateway_route_table_id, Shapes::ShapeRef.new(shape: TransitGatewayRouteTableId, required: true, location_name: "TransitGatewayRouteTableId"))
+    GetTransitGatewayPrefixListReferencesRequest.add_member(:filters, Shapes::ShapeRef.new(shape: FilterList, location_name: "Filter"))
+    GetTransitGatewayPrefixListReferencesRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: TransitGatewayMaxResults, location_name: "MaxResults"))
+    GetTransitGatewayPrefixListReferencesRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "NextToken"))
+    GetTransitGatewayPrefixListReferencesRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "DryRun"))
+    GetTransitGatewayPrefixListReferencesRequest.struct_class = Types::GetTransitGatewayPrefixListReferencesRequest
+
+    GetTransitGatewayPrefixListReferencesResult.add_member(:transit_gateway_prefix_list_references, Shapes::ShapeRef.new(shape: TransitGatewayPrefixListReferenceSet, location_name: "transitGatewayPrefixListReferenceSet"))
+    GetTransitGatewayPrefixListReferencesResult.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "nextToken"))
+    GetTransitGatewayPrefixListReferencesResult.struct_class = Types::GetTransitGatewayPrefixListReferencesResult
+
     GetTransitGatewayRouteTableAssociationsRequest.add_member(:transit_gateway_route_table_id, Shapes::ShapeRef.new(shape: TransitGatewayRouteTableId, required: true, location_name: "TransitGatewayRouteTableId"))
     GetTransitGatewayRouteTableAssociationsRequest.add_member(:filters, Shapes::ShapeRef.new(shape: FilterList, location_name: "Filter"))
     GetTransitGatewayRouteTableAssociationsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: TransitGatewayMaxResults, location_name: "MaxResults"))
@@ -7461,6 +7505,34 @@ module Aws::EC2
 
     ModifyTrafficMirrorSessionResult.add_member(:traffic_mirror_session, Shapes::ShapeRef.new(shape: TrafficMirrorSession, location_name: "trafficMirrorSession"))
     ModifyTrafficMirrorSessionResult.struct_class = Types::ModifyTrafficMirrorSessionResult
+
+    ModifyTransitGatewayOptions.add_member(:vpn_ecmp_support, Shapes::ShapeRef.new(shape: VpnEcmpSupportValue, location_name: "VpnEcmpSupport"))
+    ModifyTransitGatewayOptions.add_member(:dns_support, Shapes::ShapeRef.new(shape: DnsSupportValue, location_name: "DnsSupport"))
+    ModifyTransitGatewayOptions.add_member(:auto_accept_shared_attachments, Shapes::ShapeRef.new(shape: AutoAcceptSharedAttachmentsValue, location_name: "AutoAcceptSharedAttachments"))
+    ModifyTransitGatewayOptions.add_member(:default_route_table_association, Shapes::ShapeRef.new(shape: DefaultRouteTableAssociationValue, location_name: "DefaultRouteTableAssociation"))
+    ModifyTransitGatewayOptions.add_member(:association_default_route_table_id, Shapes::ShapeRef.new(shape: TransitGatewayRouteTableId, location_name: "AssociationDefaultRouteTableId"))
+    ModifyTransitGatewayOptions.add_member(:default_route_table_propagation, Shapes::ShapeRef.new(shape: DefaultRouteTablePropagationValue, location_name: "DefaultRouteTablePropagation"))
+    ModifyTransitGatewayOptions.add_member(:propagation_default_route_table_id, Shapes::ShapeRef.new(shape: TransitGatewayRouteTableId, location_name: "PropagationDefaultRouteTableId"))
+    ModifyTransitGatewayOptions.struct_class = Types::ModifyTransitGatewayOptions
+
+    ModifyTransitGatewayPrefixListReferenceRequest.add_member(:transit_gateway_route_table_id, Shapes::ShapeRef.new(shape: TransitGatewayRouteTableId, required: true, location_name: "TransitGatewayRouteTableId"))
+    ModifyTransitGatewayPrefixListReferenceRequest.add_member(:prefix_list_id, Shapes::ShapeRef.new(shape: PrefixListResourceId, required: true, location_name: "PrefixListId"))
+    ModifyTransitGatewayPrefixListReferenceRequest.add_member(:transit_gateway_attachment_id, Shapes::ShapeRef.new(shape: TransitGatewayAttachmentId, location_name: "TransitGatewayAttachmentId"))
+    ModifyTransitGatewayPrefixListReferenceRequest.add_member(:blackhole, Shapes::ShapeRef.new(shape: Boolean, location_name: "Blackhole"))
+    ModifyTransitGatewayPrefixListReferenceRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "DryRun"))
+    ModifyTransitGatewayPrefixListReferenceRequest.struct_class = Types::ModifyTransitGatewayPrefixListReferenceRequest
+
+    ModifyTransitGatewayPrefixListReferenceResult.add_member(:transit_gateway_prefix_list_reference, Shapes::ShapeRef.new(shape: TransitGatewayPrefixListReference, location_name: "transitGatewayPrefixListReference"))
+    ModifyTransitGatewayPrefixListReferenceResult.struct_class = Types::ModifyTransitGatewayPrefixListReferenceResult
+
+    ModifyTransitGatewayRequest.add_member(:transit_gateway_id, Shapes::ShapeRef.new(shape: TransitGatewayId, required: true, location_name: "TransitGatewayId"))
+    ModifyTransitGatewayRequest.add_member(:description, Shapes::ShapeRef.new(shape: String, location_name: "Description"))
+    ModifyTransitGatewayRequest.add_member(:options, Shapes::ShapeRef.new(shape: ModifyTransitGatewayOptions, location_name: "Options"))
+    ModifyTransitGatewayRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "DryRun"))
+    ModifyTransitGatewayRequest.struct_class = Types::ModifyTransitGatewayRequest
+
+    ModifyTransitGatewayResult.add_member(:transit_gateway, Shapes::ShapeRef.new(shape: TransitGateway, location_name: "transitGateway"))
+    ModifyTransitGatewayResult.struct_class = Types::ModifyTransitGatewayResult
 
     ModifyTransitGatewayVpcAttachmentRequest.add_member(:transit_gateway_attachment_id, Shapes::ShapeRef.new(shape: TransitGatewayAttachmentId, required: true, location_name: "TransitGatewayAttachmentId"))
     ModifyTransitGatewayVpcAttachmentRequest.add_member(:add_subnet_ids, Shapes::ShapeRef.new(shape: TransitGatewaySubnetIdList, location_name: "AddSubnetIds"))
@@ -9574,6 +9646,21 @@ module Aws::EC2
 
     TransitGatewayPeeringAttachmentList.member = Shapes::ShapeRef.new(shape: TransitGatewayPeeringAttachment, location_name: "item")
 
+    TransitGatewayPrefixListAttachment.add_member(:transit_gateway_attachment_id, Shapes::ShapeRef.new(shape: TransitGatewayAttachmentId, location_name: "transitGatewayAttachmentId"))
+    TransitGatewayPrefixListAttachment.add_member(:resource_type, Shapes::ShapeRef.new(shape: TransitGatewayAttachmentResourceType, location_name: "resourceType"))
+    TransitGatewayPrefixListAttachment.add_member(:resource_id, Shapes::ShapeRef.new(shape: String, location_name: "resourceId"))
+    TransitGatewayPrefixListAttachment.struct_class = Types::TransitGatewayPrefixListAttachment
+
+    TransitGatewayPrefixListReference.add_member(:transit_gateway_route_table_id, Shapes::ShapeRef.new(shape: TransitGatewayRouteTableId, location_name: "transitGatewayRouteTableId"))
+    TransitGatewayPrefixListReference.add_member(:prefix_list_id, Shapes::ShapeRef.new(shape: PrefixListResourceId, location_name: "prefixListId"))
+    TransitGatewayPrefixListReference.add_member(:prefix_list_owner_id, Shapes::ShapeRef.new(shape: String, location_name: "prefixListOwnerId"))
+    TransitGatewayPrefixListReference.add_member(:state, Shapes::ShapeRef.new(shape: TransitGatewayPrefixListReferenceState, location_name: "state"))
+    TransitGatewayPrefixListReference.add_member(:blackhole, Shapes::ShapeRef.new(shape: Boolean, location_name: "blackhole"))
+    TransitGatewayPrefixListReference.add_member(:transit_gateway_attachment, Shapes::ShapeRef.new(shape: TransitGatewayPrefixListAttachment, location_name: "transitGatewayAttachment"))
+    TransitGatewayPrefixListReference.struct_class = Types::TransitGatewayPrefixListReference
+
+    TransitGatewayPrefixListReferenceSet.member = Shapes::ShapeRef.new(shape: TransitGatewayPrefixListReference, location_name: "item")
+
     TransitGatewayPropagation.add_member(:transit_gateway_attachment_id, Shapes::ShapeRef.new(shape: TransitGatewayAttachmentId, location_name: "transitGatewayAttachmentId"))
     TransitGatewayPropagation.add_member(:resource_id, Shapes::ShapeRef.new(shape: String, location_name: "resourceId"))
     TransitGatewayPropagation.add_member(:resource_type, Shapes::ShapeRef.new(shape: TransitGatewayAttachmentResourceType, location_name: "resourceType"))
@@ -9591,6 +9678,7 @@ module Aws::EC2
     TransitGatewayRequestOptions.struct_class = Types::TransitGatewayRequestOptions
 
     TransitGatewayRoute.add_member(:destination_cidr_block, Shapes::ShapeRef.new(shape: String, location_name: "destinationCidrBlock"))
+    TransitGatewayRoute.add_member(:prefix_list_id, Shapes::ShapeRef.new(shape: PrefixListResourceId, location_name: "prefixListId"))
     TransitGatewayRoute.add_member(:transit_gateway_attachments, Shapes::ShapeRef.new(shape: TransitGatewayRouteAttachmentList, location_name: "transitGatewayAttachments"))
     TransitGatewayRoute.add_member(:type, Shapes::ShapeRef.new(shape: TransitGatewayRouteType, location_name: "type"))
     TransitGatewayRoute.add_member(:state, Shapes::ShapeRef.new(shape: TransitGatewayRouteState, location_name: "state"))
@@ -10782,6 +10870,14 @@ module Aws::EC2
         o.output = Shapes::ShapeRef.new(shape: CreateTransitGatewayPeeringAttachmentResult)
       end)
 
+      api.add_operation(:create_transit_gateway_prefix_list_reference, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "CreateTransitGatewayPrefixListReference"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: CreateTransitGatewayPrefixListReferenceRequest)
+        o.output = Shapes::ShapeRef.new(shape: CreateTransitGatewayPrefixListReferenceResult)
+      end)
+
       api.add_operation(:create_transit_gateway_route, Seahorse::Model::Operation.new.tap do |o|
         o.name = "CreateTransitGatewayRoute"
         o.http_method = "POST"
@@ -11172,6 +11268,14 @@ module Aws::EC2
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: DeleteTransitGatewayPeeringAttachmentRequest)
         o.output = Shapes::ShapeRef.new(shape: DeleteTransitGatewayPeeringAttachmentResult)
+      end)
+
+      api.add_operation(:delete_transit_gateway_prefix_list_reference, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DeleteTransitGatewayPrefixListReference"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DeleteTransitGatewayPrefixListReferenceRequest)
+        o.output = Shapes::ShapeRef.new(shape: DeleteTransitGatewayPrefixListReferenceResult)
       end)
 
       api.add_operation(:delete_transit_gateway_route, Seahorse::Model::Operation.new.tap do |o|
@@ -13121,6 +13225,20 @@ module Aws::EC2
         )
       end)
 
+      api.add_operation(:get_transit_gateway_prefix_list_references, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetTransitGatewayPrefixListReferences"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: GetTransitGatewayPrefixListReferencesRequest)
+        o.output = Shapes::ShapeRef.new(shape: GetTransitGatewayPrefixListReferencesResult)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
       api.add_operation(:get_transit_gateway_route_table_associations, Seahorse::Model::Operation.new.tap do |o|
         o.name = "GetTransitGatewayRouteTableAssociations"
         o.http_method = "POST"
@@ -13411,6 +13529,22 @@ module Aws::EC2
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: ModifyTrafficMirrorSessionRequest)
         o.output = Shapes::ShapeRef.new(shape: ModifyTrafficMirrorSessionResult)
+      end)
+
+      api.add_operation(:modify_transit_gateway, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ModifyTransitGateway"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: ModifyTransitGatewayRequest)
+        o.output = Shapes::ShapeRef.new(shape: ModifyTransitGatewayResult)
+      end)
+
+      api.add_operation(:modify_transit_gateway_prefix_list_reference, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ModifyTransitGatewayPrefixListReference"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: ModifyTransitGatewayPrefixListReferenceRequest)
+        o.output = Shapes::ShapeRef.new(shape: ModifyTransitGatewayPrefixListReferenceResult)
       end)
 
       api.add_operation(:modify_transit_gateway_vpc_attachment, Seahorse::Model::Operation.new.tap do |o|

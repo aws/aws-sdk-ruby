@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.29.0 (2020-08-24)
+------------------
+
+* Feature - AWS X-Ray now supports tagging on sampling rules and groups.
+
 1.28.0 (2020-06-23)
 ------------------
 

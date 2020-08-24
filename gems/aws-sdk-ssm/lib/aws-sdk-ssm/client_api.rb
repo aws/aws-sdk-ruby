@@ -501,7 +501,6 @@ module Aws::SSM
     InventoryAggregatorExpression = Shapes::StringShape.new(name: 'InventoryAggregatorExpression')
     InventoryAggregatorList = Shapes::ListShape.new(name: 'InventoryAggregatorList')
     InventoryAttributeDataType = Shapes::StringShape.new(name: 'InventoryAttributeDataType')
-    InventoryDeletionId = Shapes::StringShape.new(name: 'InventoryDeletionId')
     InventoryDeletionLastStatusMessage = Shapes::StringShape.new(name: 'InventoryDeletionLastStatusMessage')
     InventoryDeletionLastStatusUpdateTime = Shapes::TimestampShape.new(name: 'InventoryDeletionLastStatusUpdateTime')
     InventoryDeletionStartTime = Shapes::TimestampShape.new(name: 'InventoryDeletionStartTime')
@@ -1007,6 +1006,7 @@ module Aws::SSM
     TooManyUpdates = Shapes::StructureShape.new(name: 'TooManyUpdates')
     TotalCount = Shapes::IntegerShape.new(name: 'TotalCount')
     TotalSizeLimitExceededException = Shapes::StructureShape.new(name: 'TotalSizeLimitExceededException')
+    UUID = Shapes::StringShape.new(name: 'UUID')
     UnsupportedCalendarException = Shapes::StructureShape.new(name: 'UnsupportedCalendarException')
     UnsupportedFeatureRequiredException = Shapes::StructureShape.new(name: 'UnsupportedFeatureRequiredException')
     UnsupportedInventoryItemContextException = Shapes::StructureShape.new(name: 'UnsupportedInventoryItemContextException')
@@ -1614,10 +1614,10 @@ module Aws::SSM
     DeleteInventoryRequest.add_member(:type_name, Shapes::ShapeRef.new(shape: InventoryItemTypeName, required: true, location_name: "TypeName"))
     DeleteInventoryRequest.add_member(:schema_delete_option, Shapes::ShapeRef.new(shape: InventorySchemaDeleteOption, location_name: "SchemaDeleteOption"))
     DeleteInventoryRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: DryRun, location_name: "DryRun"))
-    DeleteInventoryRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "ClientToken", metadata: {"idempotencyToken"=>true}))
+    DeleteInventoryRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: UUID, location_name: "ClientToken", metadata: {"idempotencyToken"=>true}))
     DeleteInventoryRequest.struct_class = Types::DeleteInventoryRequest
 
-    DeleteInventoryResult.add_member(:deletion_id, Shapes::ShapeRef.new(shape: InventoryDeletionId, location_name: "DeletionId"))
+    DeleteInventoryResult.add_member(:deletion_id, Shapes::ShapeRef.new(shape: UUID, location_name: "DeletionId"))
     DeleteInventoryResult.add_member(:type_name, Shapes::ShapeRef.new(shape: InventoryItemTypeName, location_name: "TypeName"))
     DeleteInventoryResult.add_member(:deletion_summary, Shapes::ShapeRef.new(shape: InventoryDeletionSummary, location_name: "DeletionSummary"))
     DeleteInventoryResult.struct_class = Types::DeleteInventoryResult
@@ -1838,7 +1838,7 @@ module Aws::SSM
     DescribeInstancePatchesResult.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
     DescribeInstancePatchesResult.struct_class = Types::DescribeInstancePatchesResult
 
-    DescribeInventoryDeletionsRequest.add_member(:deletion_id, Shapes::ShapeRef.new(shape: InventoryDeletionId, location_name: "DeletionId"))
+    DescribeInventoryDeletionsRequest.add_member(:deletion_id, Shapes::ShapeRef.new(shape: UUID, location_name: "DeletionId"))
     DescribeInventoryDeletionsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
     DescribeInventoryDeletionsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location_name: "MaxResults", metadata: {"box"=>true}))
     DescribeInventoryDeletionsRequest.struct_class = Types::DescribeInventoryDeletionsRequest
@@ -2678,7 +2678,7 @@ module Aws::SSM
 
     InventoryAggregatorList.member = Shapes::ShapeRef.new(shape: InventoryAggregator)
 
-    InventoryDeletionStatusItem.add_member(:deletion_id, Shapes::ShapeRef.new(shape: InventoryDeletionId, location_name: "DeletionId"))
+    InventoryDeletionStatusItem.add_member(:deletion_id, Shapes::ShapeRef.new(shape: UUID, location_name: "DeletionId"))
     InventoryDeletionStatusItem.add_member(:type_name, Shapes::ShapeRef.new(shape: InventoryItemTypeName, location_name: "TypeName"))
     InventoryDeletionStatusItem.add_member(:deletion_start_time, Shapes::ShapeRef.new(shape: InventoryDeletionStartTime, location_name: "DeletionStartTime"))
     InventoryDeletionStatusItem.add_member(:last_status, Shapes::ShapeRef.new(shape: InventoryDeletionStatus, location_name: "LastStatus"))

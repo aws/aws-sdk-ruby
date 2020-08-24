@@ -338,7 +338,11 @@ module Aws::DatabaseMigrationService
     # instance, endpoint, security group, and migration task. These tags can
     # also be used with cost allocation reporting to track cost associated
     # with DMS resources, or used in a Condition statement in an IAM policy
-    # for DMS.
+    # for DMS. For more information, see [ `Tag` ][1] data type description.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/dms/latest/APIReference/API_Tag.html
     #
     # @option params [required, String] :resource_arn
     #   Identifies the AWS DMS resource to which tags should be added. The
@@ -500,7 +504,7 @@ module Aws::DatabaseMigrationService
     # @option params [required, String] :endpoint_identifier
     #   The database endpoint identifier. Identifiers must begin with a letter
     #   and must contain only ASCII letters, digits, and hyphens. They can't
-    #   end with a hyphen or contain two consecutive hyphens.
+    #   end with a hyphen, or contain two consecutive hyphens.
     #
     # @option params [required, String] :endpoint_type
     #   The type of endpoint. Valid values are `source` and `target`.
@@ -510,8 +514,8 @@ module Aws::DatabaseMigrationService
     #   `EndpointType` value, include `"mysql"`, `"oracle"`, `"postgres"`,
     #   `"mariadb"`, `"aurora"`, `"aurora-postgresql"`, `"redshift"`, `"s3"`,
     #   `"db2"`, `"azuredb"`, `"sybase"`, `"dynamodb"`, `"mongodb"`,
-    #   `"kinesis"`, `"kafka"`, `"elasticsearch"`, `"documentdb"`,
-    #   `"sqlserver"`, and `"neptune"`.
+    #   `"kinesis"`, `"kafka"`, `"elasticsearch"`, `"docdb"`, `"sqlserver"`,
+    #   and `"neptune"`.
     #
     # @option params [String] :username
     #   The user name to be used to log in to the endpoint database.
@@ -673,8 +677,8 @@ module Aws::DatabaseMigrationService
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Source.PostgreSQL.ConnectionAttrib
-    #   [2]: https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Target.PostgreSQL.ConnectionAttrib
+    #   [1]: https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Source.PostgreSQL.html
+    #   [2]: https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Target.PostgreSQL.html
     #
     # @option params [Types::MySQLSettings] :my_sql_settings
     #   Settings in JSON format for the source and target MySQL endpoint. For
@@ -686,8 +690,8 @@ module Aws::DatabaseMigrationService
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Source.MySQL.ConnectionAttrib
-    #   [2]: https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Target.MySQL.ConnectionAttrib
+    #   [1]: https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Source.MySQL.html
+    #   [2]: https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Target.MySQL.html
     #
     # @option params [Types::OracleSettings] :oracle_settings
     #   Settings in JSON format for the source and target Oracle endpoint. For
@@ -698,8 +702,8 @@ module Aws::DatabaseMigrationService
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Source.Oracle.ConnectionAttrib
-    #   [2]: https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Target.Oracle.ConnectionAttrib
+    #   [1]: https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Source.Oracle.html
+    #   [2]: https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Target.Oracle.html
     #
     # @option params [Types::SybaseSettings] :sybase_settings
     #   Settings in JSON format for the source and target SAP ASE endpoint.
@@ -710,8 +714,8 @@ module Aws::DatabaseMigrationService
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Source.SAP.ConnectionAttrib
-    #   [2]: https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Target.SAP.ConnectionAttrib
+    #   [1]: https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Source.SAP.html
+    #   [2]: https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Target.SAP.html
     #
     # @option params [Types::MicrosoftSQLServerSettings] :microsoft_sql_server_settings
     #   Settings in JSON format for the source and target Microsoft SQL Server
@@ -723,8 +727,8 @@ module Aws::DatabaseMigrationService
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Source.SQLServer.ConnectionAttrib
-    #   [2]: https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Target.SQLServer.ConnectionAttrib
+    #   [1]: https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Source.SQLServer.html
+    #   [2]: https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Target.SQLServer.html
     #
     # @option params [Types::IBMDb2Settings] :ibm_db_2_settings
     #   Settings in JSON format for the source IBM Db2 LUW endpoint. For
@@ -734,7 +738,7 @@ module Aws::DatabaseMigrationService
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Source.DB2.ConnectionAttrib
+    #   [1]: https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Source.DB2.html
     #
     # @return [Types::CreateEndpointResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -857,6 +861,7 @@ module Aws::DatabaseMigrationService
     #       partition_include_schema_table: false,
     #       include_table_alter_operations: false,
     #       include_control_details: false,
+    #       include_null_and_empty: false,
     #     },
     #     kafka_settings: {
     #       broker: "String",
@@ -867,6 +872,8 @@ module Aws::DatabaseMigrationService
     #       partition_include_schema_table: false,
     #       include_table_alter_operations: false,
     #       include_control_details: false,
+    #       message_max_bytes: 1,
+    #       include_null_and_empty: false,
     #     },
     #     elasticsearch_settings: {
     #       service_access_role_arn: "String", # required
@@ -1022,6 +1029,7 @@ module Aws::DatabaseMigrationService
     #   resp.endpoint.kinesis_settings.partition_include_schema_table #=> Boolean
     #   resp.endpoint.kinesis_settings.include_table_alter_operations #=> Boolean
     #   resp.endpoint.kinesis_settings.include_control_details #=> Boolean
+    #   resp.endpoint.kinesis_settings.include_null_and_empty #=> Boolean
     #   resp.endpoint.kafka_settings.broker #=> String
     #   resp.endpoint.kafka_settings.topic #=> String
     #   resp.endpoint.kafka_settings.message_format #=> String, one of "json", "json-unformatted"
@@ -1030,6 +1038,8 @@ module Aws::DatabaseMigrationService
     #   resp.endpoint.kafka_settings.partition_include_schema_table #=> Boolean
     #   resp.endpoint.kafka_settings.include_table_alter_operations #=> Boolean
     #   resp.endpoint.kafka_settings.include_control_details #=> Boolean
+    #   resp.endpoint.kafka_settings.message_max_bytes #=> Integer
+    #   resp.endpoint.kafka_settings.include_null_and_empty #=> Boolean
     #   resp.endpoint.elasticsearch_settings.service_access_role_arn #=> String
     #   resp.endpoint.elasticsearch_settings.endpoint_uri #=> String
     #   resp.endpoint.elasticsearch_settings.full_load_error_percentage #=> Integer
@@ -1231,8 +1241,8 @@ module Aws::DatabaseMigrationService
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Security.APIRole.html
-    # [2]: https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Security.IAMPermissions.html
+    # [1]: https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Security.html#CHAP_Security.APIRole
+    # [2]: https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Security.html#CHAP_Security.IAMPermissions
     #
     # @option params [required, String] :replication_instance_identifier
     #   The replication instance identifier. This parameter is stored as a
@@ -1299,6 +1309,10 @@ module Aws::DatabaseMigrationService
     #
     # @option params [String] :engine_version
     #   The engine version number of the replication instance.
+    #
+    #   If an engine version number is not specified when a replication
+    #   instance is created, the default is the latest engine version
+    #   available.
     #
     # @option params [Boolean] :auto_minor_version_upgrade
     #   A value that indicates whether minor engine upgrades are applied
@@ -1664,10 +1678,10 @@ module Aws::DatabaseMigrationService
     #   The value can be either server time or commit time.
     #
     #   Server time example: --cdc-stop-position
-    #   “server\_time:3018-02-09T12:12:12”
+    #   “server\_time:2018-02-09T12:12:12”
     #
     #   Commit time example: --cdc-stop-position “commit\_time:
-    #   3018-02-09T12:12:12 “
+    #   2018-02-09T12:12:12 “
     #
     # @option params [Array<Types::Tag>] :tags
     #   One or more tags to be assigned to the replication task.
@@ -2001,6 +2015,7 @@ module Aws::DatabaseMigrationService
     #   resp.endpoint.kinesis_settings.partition_include_schema_table #=> Boolean
     #   resp.endpoint.kinesis_settings.include_table_alter_operations #=> Boolean
     #   resp.endpoint.kinesis_settings.include_control_details #=> Boolean
+    #   resp.endpoint.kinesis_settings.include_null_and_empty #=> Boolean
     #   resp.endpoint.kafka_settings.broker #=> String
     #   resp.endpoint.kafka_settings.topic #=> String
     #   resp.endpoint.kafka_settings.message_format #=> String, one of "json", "json-unformatted"
@@ -2009,6 +2024,8 @@ module Aws::DatabaseMigrationService
     #   resp.endpoint.kafka_settings.partition_include_schema_table #=> Boolean
     #   resp.endpoint.kafka_settings.include_table_alter_operations #=> Boolean
     #   resp.endpoint.kafka_settings.include_control_details #=> Boolean
+    #   resp.endpoint.kafka_settings.message_max_bytes #=> Integer
+    #   resp.endpoint.kafka_settings.include_null_and_empty #=> Boolean
     #   resp.endpoint.elasticsearch_settings.service_access_role_arn #=> String
     #   resp.endpoint.elasticsearch_settings.endpoint_uri #=> String
     #   resp.endpoint.elasticsearch_settings.full_load_error_percentage #=> Integer
@@ -2989,6 +3006,7 @@ module Aws::DatabaseMigrationService
     #   resp.endpoints[0].kinesis_settings.partition_include_schema_table #=> Boolean
     #   resp.endpoints[0].kinesis_settings.include_table_alter_operations #=> Boolean
     #   resp.endpoints[0].kinesis_settings.include_control_details #=> Boolean
+    #   resp.endpoints[0].kinesis_settings.include_null_and_empty #=> Boolean
     #   resp.endpoints[0].kafka_settings.broker #=> String
     #   resp.endpoints[0].kafka_settings.topic #=> String
     #   resp.endpoints[0].kafka_settings.message_format #=> String, one of "json", "json-unformatted"
@@ -2997,6 +3015,8 @@ module Aws::DatabaseMigrationService
     #   resp.endpoints[0].kafka_settings.partition_include_schema_table #=> Boolean
     #   resp.endpoints[0].kafka_settings.include_table_alter_operations #=> Boolean
     #   resp.endpoints[0].kafka_settings.include_control_details #=> Boolean
+    #   resp.endpoints[0].kafka_settings.message_max_bytes #=> Integer
+    #   resp.endpoints[0].kafka_settings.include_null_and_empty #=> Boolean
     #   resp.endpoints[0].elasticsearch_settings.service_access_role_arn #=> String
     #   resp.endpoints[0].elasticsearch_settings.endpoint_uri #=> String
     #   resp.endpoints[0].elasticsearch_settings.full_load_error_percentage #=> Integer
@@ -4339,7 +4359,13 @@ module Aws::DatabaseMigrationService
       req.send_request(options)
     end
 
-    # Lists all tags for an AWS DMS resource.
+    # Lists all metadata tags attached to an AWS DMS resource, including
+    # replication instance, endpoint, security group, and migration task.
+    # For more information, see [ `Tag` ][1] data type description.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/dms/latest/APIReference/API_Tag.html
     #
     # @option params [required, String] :resource_arn
     #   The Amazon Resource Name (ARN) string that uniquely identifies the AWS
@@ -4711,6 +4737,7 @@ module Aws::DatabaseMigrationService
     #       partition_include_schema_table: false,
     #       include_table_alter_operations: false,
     #       include_control_details: false,
+    #       include_null_and_empty: false,
     #     },
     #     kafka_settings: {
     #       broker: "String",
@@ -4721,6 +4748,8 @@ module Aws::DatabaseMigrationService
     #       partition_include_schema_table: false,
     #       include_table_alter_operations: false,
     #       include_control_details: false,
+    #       message_max_bytes: 1,
+    #       include_null_and_empty: false,
     #     },
     #     elasticsearch_settings: {
     #       service_access_role_arn: "String", # required
@@ -4876,6 +4905,7 @@ module Aws::DatabaseMigrationService
     #   resp.endpoint.kinesis_settings.partition_include_schema_table #=> Boolean
     #   resp.endpoint.kinesis_settings.include_table_alter_operations #=> Boolean
     #   resp.endpoint.kinesis_settings.include_control_details #=> Boolean
+    #   resp.endpoint.kinesis_settings.include_null_and_empty #=> Boolean
     #   resp.endpoint.kafka_settings.broker #=> String
     #   resp.endpoint.kafka_settings.topic #=> String
     #   resp.endpoint.kafka_settings.message_format #=> String, one of "json", "json-unformatted"
@@ -4884,6 +4914,8 @@ module Aws::DatabaseMigrationService
     #   resp.endpoint.kafka_settings.partition_include_schema_table #=> Boolean
     #   resp.endpoint.kafka_settings.include_table_alter_operations #=> Boolean
     #   resp.endpoint.kafka_settings.include_control_details #=> Boolean
+    #   resp.endpoint.kafka_settings.message_max_bytes #=> Integer
+    #   resp.endpoint.kafka_settings.include_null_and_empty #=> Boolean
     #   resp.endpoint.elasticsearch_settings.service_access_role_arn #=> String
     #   resp.endpoint.elasticsearch_settings.endpoint_uri #=> String
     #   resp.endpoint.elasticsearch_settings.full_load_error_percentage #=> Integer
@@ -5087,6 +5119,9 @@ module Aws::DatabaseMigrationService
     #
     # @option params [String] :engine_version
     #   The engine version number of the replication instance.
+    #
+    #   When modifying a major engine version of an instance, also set
+    #   `AllowMajorVersionUpgrade` to `true`.
     #
     # @option params [Boolean] :allow_major_version_upgrade
     #   Indicates that major version upgrades are allowed. Changing this
@@ -5401,10 +5436,10 @@ module Aws::DatabaseMigrationService
     #   The value can be either server time or commit time.
     #
     #   Server time example: --cdc-stop-position
-    #   “server\_time:3018-02-09T12:12:12”
+    #   “server\_time:2018-02-09T12:12:12”
     #
     #   Commit time example: --cdc-stop-position “commit\_time:
-    #   3018-02-09T12:12:12 “
+    #   2018-02-09T12:12:12 “
     #
     # @option params [String] :task_data
     #   Supplemental information that the task requires to migrate the data
@@ -5650,7 +5685,13 @@ module Aws::DatabaseMigrationService
       req.send_request(options)
     end
 
-    # Removes metadata tags from a DMS resource.
+    # Removes metadata tags from an AWS DMS resource, including replication
+    # instance, endpoint, security group, and migration task. For more
+    # information, see [ `Tag` ][1] data type description.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/dms/latest/APIReference/API_Tag.html
     #
     # @option params [required, String] :resource_arn
     #   An AWS DMS resource from which you want to remove tag(s). The value
@@ -5747,10 +5788,10 @@ module Aws::DatabaseMigrationService
     #   The value can be either server time or commit time.
     #
     #   Server time example: --cdc-stop-position
-    #   “server\_time:3018-02-09T12:12:12”
+    #   “server\_time:2018-02-09T12:12:12”
     #
     #   Commit time example: --cdc-stop-position “commit\_time:
-    #   3018-02-09T12:12:12 “
+    #   2018-02-09T12:12:12 “
     #
     # @return [Types::StartReplicationTaskResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -6157,7 +6198,7 @@ module Aws::DatabaseMigrationService
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-databasemigrationservice'
-      context[:gem_version] = '1.39.0'
+      context[:gem_version] = '1.40.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

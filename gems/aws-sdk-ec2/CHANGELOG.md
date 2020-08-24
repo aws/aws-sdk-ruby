@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.189.0 (2020-08-24)
+------------------
+
+* Feature - This release enables customers to use VPC prefix lists in their transit gateway route tables, and it adds support for Provisioned IOPS SSD (io2) EBS volumes.
+
 1.188.0 (2020-08-14)
 ------------------
 

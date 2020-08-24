@@ -2297,7 +2297,7 @@ module Aws::EC2
     #           iops: 1,
     #           snapshot_id: "String",
     #           volume_size: 1,
-    #           volume_type: "standard", # accepts standard, io1, gp2, sc1, st1
+    #           volume_type: "standard", # accepts standard, io1, io2, gp2, sc1, st1
     #           kms_key_id: "String",
     #           encrypted: false,
     #         },
@@ -6152,7 +6152,7 @@ module Aws::EC2
     #               iops: 1,
     #               snapshot_id: "String",
     #               volume_size: 1,
-    #               volume_type: "standard", # accepts standard, io1, gp2, sc1, st1
+    #               volume_type: "standard", # accepts standard, io1, io2, gp2, sc1, st1
     #               kms_key_id: "String",
     #               encrypted: false,
     #             },
@@ -6421,7 +6421,7 @@ module Aws::EC2
     #                 kms_key_id: "KmsKeyId",
     #                 snapshot_id: "SnapshotId",
     #                 volume_size: 1,
-    #                 volume_type: "standard", # accepts standard, io1, gp2, sc1, st1
+    #                 volume_type: "standard", # accepts standard, io1, io2, gp2, sc1, st1
     #               },
     #               no_device: "String",
     #             },
@@ -6643,7 +6643,7 @@ module Aws::EC2
     #                 kms_key_id: "KmsKeyId",
     #                 snapshot_id: "SnapshotId",
     #                 volume_size: 1,
-    #                 volume_type: "standard", # accepts standard, io1, gp2, sc1, st1
+    #                 volume_type: "standard", # accepts standard, io1, io2, gp2, sc1, st1
     #               },
     #               no_device: "String",
     #             },
@@ -8822,6 +8822,64 @@ module Aws::EC2
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass CreateTransitGatewayPrefixListReferenceRequest
+    #   data as a hash:
+    #
+    #       {
+    #         transit_gateway_route_table_id: "TransitGatewayRouteTableId", # required
+    #         prefix_list_id: "PrefixListResourceId", # required
+    #         transit_gateway_attachment_id: "TransitGatewayAttachmentId",
+    #         blackhole: false,
+    #         dry_run: false,
+    #       }
+    #
+    # @!attribute [rw] transit_gateway_route_table_id
+    #   The ID of the transit gateway route table.
+    #   @return [String]
+    #
+    # @!attribute [rw] prefix_list_id
+    #   The ID of the prefix list that is used for destination matches.
+    #   @return [String]
+    #
+    # @!attribute [rw] transit_gateway_attachment_id
+    #   The ID of the attachment to which traffic is routed.
+    #   @return [String]
+    #
+    # @!attribute [rw] blackhole
+    #   Indicates whether to drop traffic that matches this route.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CreateTransitGatewayPrefixListReferenceRequest AWS API Documentation
+    #
+    class CreateTransitGatewayPrefixListReferenceRequest < Struct.new(
+      :transit_gateway_route_table_id,
+      :prefix_list_id,
+      :transit_gateway_attachment_id,
+      :blackhole,
+      :dry_run)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] transit_gateway_prefix_list_reference
+    #   Information about the prefix list reference.
+    #   @return [Types::TransitGatewayPrefixListReference]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CreateTransitGatewayPrefixListReferenceResult AWS API Documentation
+    #
+    class CreateTransitGatewayPrefixListReferenceResult < Struct.new(
+      :transit_gateway_prefix_list_reference)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass CreateTransitGatewayRequest
     #   data as a hash:
     #
@@ -9191,7 +9249,7 @@ module Aws::EC2
     #         outpost_arn: "String",
     #         size: 1,
     #         snapshot_id: "SnapshotId",
-    #         volume_type: "standard", # accepts standard, io1, gp2, sc1, st1
+    #         volume_type: "standard", # accepts standard, io1, io2, gp2, sc1, st1
     #         dry_run: false,
     #         tag_specifications: [
     #           {
@@ -9216,12 +9274,12 @@ module Aws::EC2
     #   setting the encryption state to `true` depends on the volume origin
     #   (new or from a snapshot), starting encryption state, ownership, and
     #   whether encryption by default is enabled. For more information, see
-    #   [Encryption by Default][1] in the *Amazon Elastic Compute Cloud User
+    #   [Encryption by default][1] in the *Amazon Elastic Compute Cloud User
     #   Guide*.
     #
     #   Encrypted Amazon EBS volumes must be attached to instances that
     #   support Amazon EBS encryption. For more information, see [Supported
-    #   Instance Types][2].
+    #   instance types][2].
     #
     #
     #
@@ -9230,15 +9288,16 @@ module Aws::EC2
     #   @return [Boolean]
     #
     # @!attribute [rw] iops
-    #   The number of I/O operations per second (IOPS) to provision for the
-    #   volume, with a maximum ratio of 50 IOPS/GiB. Range is 100 to 64,000
-    #   IOPS for volumes in most Regions. Maximum IOPS of 64,000 is
-    #   guaranteed only on [Nitro-based instances][1]. Other instance
-    #   families guarantee performance up to 32,000 IOPS. For more
-    #   information, see [Amazon EBS Volume Types][2] in the *Amazon Elastic
-    #   Compute Cloud User Guide*.
+    #   The number of I/O operations per second (IOPS) to provision for an
+    #   `io1` or `io2` volume, with a maximum ratio of 50 IOPS/GiB for
+    #   `io1`, and 500 IOPS/GiB for `io2`. Range is 100 to 64,000 IOPS for
+    #   volumes in most Regions. Maximum IOPS of 64,000 is guaranteed only
+    #   on [Nitro-based instances][1]. Other instance families guarantee
+    #   performance up to 32,000 IOPS. For more information, see [Amazon EBS
+    #   volume types][2] in the *Amazon Elastic Compute Cloud User Guide*.
     #
-    #   This parameter is valid only for Provisioned IOPS SSD (io1) volumes.
+    #   This parameter is valid only for Provisioned IOPS SSD (`io1` and
+    #   `io2`) volumes.
     #
     #
     #
@@ -9277,10 +9336,10 @@ module Aws::EC2
     #   The size of the volume, in GiBs. You must specify either a snapshot
     #   ID or a volume size.
     #
-    #   Constraints: 1-16,384 for `gp2`, 4-16,384 for `io1`, 500-16,384 for
-    #   `st1`, 500-16,384 for `sc1`, and 1-1,024 for `standard`. If you
-    #   specify a snapshot, the volume size must be equal to or larger than
-    #   the snapshot size.
+    #   Constraints: 1-16,384 for `gp2`, 4-16,384 for `io1` and `io2`,
+    #   500-16,384 for `st1`, 500-16,384 for `sc1`, and 1-1,024 for
+    #   `standard`. If you specify a snapshot, the volume size must be equal
+    #   to or larger than the snapshot size.
     #
     #   Default: If you're creating the volume from a snapshot and don't
     #   specify a volume size, the default is the snapshot size.
@@ -9292,9 +9351,9 @@ module Aws::EC2
     #   @return [String]
     #
     # @!attribute [rw] volume_type
-    #   The volume type. This can be `gp2` for General Purpose SSD, `io1`
-    #   for Provisioned IOPS SSD, `st1` for Throughput Optimized HDD, `sc1`
-    #   for Cold HDD, or `standard` for Magnetic volumes.
+    #   The volume type. This can be `gp2` for General Purpose SSD, `io1` or
+    #   `io2` for Provisioned IOPS SSD, `st1` for Throughput Optimized HDD,
+    #   `sc1` for Cold HDD, or `standard` for Magnetic volumes.
     #
     #   Default: `gp2`
     #   @return [String]
@@ -11716,6 +11775,52 @@ module Aws::EC2
     #
     class DeleteTransitGatewayPeeringAttachmentResult < Struct.new(
       :transit_gateway_peering_attachment)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass DeleteTransitGatewayPrefixListReferenceRequest
+    #   data as a hash:
+    #
+    #       {
+    #         transit_gateway_route_table_id: "TransitGatewayRouteTableId", # required
+    #         prefix_list_id: "PrefixListResourceId", # required
+    #         dry_run: false,
+    #       }
+    #
+    # @!attribute [rw] transit_gateway_route_table_id
+    #   The ID of the route table.
+    #   @return [String]
+    #
+    # @!attribute [rw] prefix_list_id
+    #   The ID of the prefix list.
+    #   @return [String]
+    #
+    # @!attribute [rw] dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DeleteTransitGatewayPrefixListReferenceRequest AWS API Documentation
+    #
+    class DeleteTransitGatewayPrefixListReferenceRequest < Struct.new(
+      :transit_gateway_route_table_id,
+      :prefix_list_id,
+      :dry_run)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] transit_gateway_prefix_list_reference
+    #   Information about the deleted prefix list reference.
+    #   @return [Types::TransitGatewayPrefixListReference]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DeleteTransitGatewayPrefixListReferenceResult AWS API Documentation
+    #
+    class DeleteTransitGatewayPrefixListReferenceResult < Struct.new(
+      :transit_gateway_prefix_list_reference)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -15426,7 +15531,7 @@ module Aws::EC2
     #     volume, in GiB.
     #
     #   * `block-device-mapping.volume-type` - The volume type of the EBS
-    #     volume (`gp2` \| `io1` \| `st1 `\| `sc1` \| `standard`).
+    #     volume (`gp2` \| `io1` \| `io2` \| `st1 `\| `sc1` \| `standard`).
     #
     #   * `block-device-mapping.encrypted` - A Boolean that indicates
     #     whether the EBS volume is encrypted.
@@ -20183,9 +20288,9 @@ module Aws::EC2
     #     volume, in GiB.
     #
     #   * `launch.block-device-mapping.volume-type` - The type of EBS
-    #     volume: `gp2` for General Purpose SSD, `io1` for Provisioned IOPS
-    #     SSD, `st1` for Throughput Optimized HDD, `sc1`for Cold HDD, or
-    #     `standard` for Magnetic.
+    #     volume: `gp2` for General Purpose SSD, `io1` or `io2` for
+    #     Provisioned IOPS SSD, `st1` for Throughput Optimized HDD, `sc1`for
+    #     Cold HDD, or `standard` for Magnetic.
     #
     #   * `launch.group-id` - The ID of the security group for the instance.
     #
@@ -21008,7 +21113,8 @@ module Aws::EC2
     #   * `resource-owner-id` - The ID of the AWS account that owns the
     #     resource.
     #
-    #   * `resource-type` - The resource type (`vpc` \| `vpn`).
+    #   * `resource-type` - The resource type (`vpc` \| `vpn` \|
+    #     `direct-connect-gateway` \| `tgw-peering`).
     #
     #   * `state` - The state of the attachment (`available` \| `deleted` \|
     #     `deleting` \| `failed` \| `modifying` \| `pendingAcceptance` \|
@@ -21719,7 +21825,7 @@ module Aws::EC2
     #   * `original-size` - The original size of the volume, in GiB.
     #
     #   * `original-volume-type` - The original volume type of the volume
-    #     (standard \| io1 \| gp2 \| sc1 \| st1).
+    #     (standard \| io1 \| io2 \| gp2 \| sc1 \| st1).
     #
     #   * `originalMultiAttachEnabled` - Indicates whether Multi-Attach
     #     support was enabled (true \| false).
@@ -21731,7 +21837,7 @@ module Aws::EC2
     #   * `target-size` - The target size of the volume, in GiB.
     #
     #   * `target-volume-type` - The target volume type of the volume
-    #     (standard \| io1 \| gp2 \| sc1 \| st1).
+    #     (standard \| io1 \| io2 \| gp2 \| sc1 \| st1).
     #
     #   * `targetMultiAttachEnabled` - Indicates whether Multi-Attach
     #     support is to be enabled (true \| false).
@@ -21830,7 +21936,7 @@ module Aws::EC2
     #
     #   * `snapshot-id` - The snapshot from which the volume was created.
     #
-    #   * `status` - The status of the volume (`creating` \| `available` \|
+    #   * `status` - The state of the volume (`creating` \| `available` \|
     #     `in-use` \| `deleting` \| `deleted` \| `error`).
     #
     #   * `tag`\:&lt;key&gt; - The key/value combination of a tag assigned
@@ -21846,9 +21952,9 @@ module Aws::EC2
     #   * `volume-id` - The volume ID.
     #
     #   * `volume-type` - The Amazon EBS volume type. This can be `gp2` for
-    #     General Purpose SSD, `io1` for Provisioned IOPS SSD, `st1` for
-    #     Throughput Optimized HDD, `sc1` for Cold HDD, or `standard` for
-    #     Magnetic volumes.
+    #     General Purpose SSD, `io1` or `io2` for Provisioned IOPS SSD,
+    #     `st1` for Throughput Optimized HDD, `sc1` for Cold HDD, or
+    #     `standard` for Magnetic volumes.
     #   @return [Array<Types::Filter>]
     #
     # @!attribute [rw] volume_ids
@@ -24278,7 +24384,7 @@ module Aws::EC2
     #         iops: 1,
     #         snapshot_id: "String",
     #         volume_size: 1,
-    #         volume_type: "standard", # accepts standard, io1, gp2, sc1, st1
+    #         volume_type: "standard", # accepts standard, io1, io2, gp2, sc1, st1
     #         kms_key_id: "String",
     #         encrypted: false,
     #       }
@@ -24295,23 +24401,23 @@ module Aws::EC2
     #
     # @!attribute [rw] iops
     #   The number of I/O operations per second (IOPS) that the volume
-    #   supports. For `io1` volumes, this represents the number of IOPS that
-    #   are provisioned for the volume. For `gp2` volumes, this represents
-    #   the baseline performance of the volume and the rate at which the
-    #   volume accumulates I/O credits for bursting. For more information,
-    #   see [Amazon EBS volume types][1] in the *Amazon Elastic Compute
-    #   Cloud User Guide*.
-    #
-    #   Constraints: Range is 100-16,000 IOPS for `gp2` volumes and 100 to
-    #   64,000 IOPS for `io1` volumes in most Regions. Maximum `io1` IOPS of
-    #   64,000 is guaranteed only on [Nitro-based instances][2]. Other
-    #   instance families guarantee performance up to 32,000 IOPS. For more
-    #   information, see [Amazon EBS Volume Types][1] in the *Amazon Elastic
+    #   supports. For `io1` and `io2` volumes, this represents the number of
+    #   IOPS that are provisioned for the volume. For `gp2` volumes, this
+    #   represents the baseline performance of the volume and the rate at
+    #   which the volume accumulates I/O credits for bursting. For more
+    #   information, see [Amazon EBS volume types][1] in the *Amazon Elastic
     #   Compute Cloud User Guide*.
     #
+    #   Constraints: Range is 100-16,000 IOPS for `gp2` volumes and 100 to
+    #   64,000 IOPS for `io1` and `io2` volumes in most Regions. Maximum
+    #   `io1` and `io2` IOPS of 64,000 is guaranteed only on [Nitro-based
+    #   instances][2]. Other instance families guarantee performance up to
+    #   32,000 IOPS. For more information, see [Amazon EBS Volume Types][1]
+    #   in the *Amazon Elastic Compute Cloud User Guide*.
+    #
     #   Condition: This parameter is required for requests to create `io1`
-    #   volumes; it is not used in requests to create `gp2`, `st1`, `sc1`,
-    #   or `standard` volumes.
+    #   and `io2` volumes; it is not used in requests to create `gp2`,
+    #   `st1`, `sc1`, or `standard` volumes.
     #
     #
     #
@@ -24330,16 +24436,16 @@ module Aws::EC2
     #   specify a volume size, the default is the snapshot size.
     #
     #   Constraints: 1-16384 for General Purpose SSD (`gp2`), 4-16384 for
-    #   Provisioned IOPS SSD (`io1`), 500-16384 for Throughput Optimized HDD
-    #   (`st1`), 500-16384 for Cold HDD (`sc1`), and 1-1024 for Magnetic
-    #   (`standard`) volumes. If you specify a snapshot, the volume size
-    #   must be equal to or larger than the snapshot size.
+    #   Provisioned IOPS SSD (`io1` and `io2`), 500-16384 for Throughput
+    #   Optimized HDD (`st1`), 500-16384 for Cold HDD (`sc1`), and 1-1024
+    #   for Magnetic (`standard`) volumes. If you specify a snapshot, the
+    #   volume size must be equal to or larger than the snapshot size.
     #   @return [Integer]
     #
     # @!attribute [rw] volume_type
-    #   The volume type. If you set the type to `io1`, you must also specify
-    #   the **Iops** parameter. If you set the type to `gp2`, `st1`, `sc1`,
-    #   or `standard`, you must omit the **Iops** parameter.
+    #   The volume type. If you set the type to `io1` or `io2`, you must
+    #   also specify the **Iops** parameter. If you set the type to `gp2`,
+    #   `st1`, `sc1`, or `standard`, you must omit the **Iops** parameter.
     #
     #   Default: `gp2`
     #   @return [String]
@@ -27736,6 +27842,97 @@ module Aws::EC2
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass GetTransitGatewayPrefixListReferencesRequest
+    #   data as a hash:
+    #
+    #       {
+    #         transit_gateway_route_table_id: "TransitGatewayRouteTableId", # required
+    #         filters: [
+    #           {
+    #             name: "String",
+    #             values: ["String"],
+    #           },
+    #         ],
+    #         max_results: 1,
+    #         next_token: "String",
+    #         dry_run: false,
+    #       }
+    #
+    # @!attribute [rw] transit_gateway_route_table_id
+    #   The ID of the transit gateway route table.
+    #   @return [String]
+    #
+    # @!attribute [rw] filters
+    #   One or more filters. The possible values are:
+    #
+    #   * `attachment.resource-id` - The ID of the resource for the
+    #     attachment.
+    #
+    #   * `attachment.resource-type` - The type of resource for the
+    #     attachment (`vpc` \| `vpn` \| `direct-connect-gateway` \|
+    #     `tgw-peering`).
+    #
+    #   * `attachment.transit-gateway-attachment-id` - The ID of the
+    #     attachment.
+    #
+    #   * `is-blackhole` - Whether traffic matching the route is blocked
+    #     (`true` \| `false`).
+    #
+    #   * `prefix-list-id` - The ID of the prefix list.
+    #
+    #   * `prefix-list-owner-id` - The ID of the owner of the prefix list.
+    #
+    #   * `state` - The state of the prefix list reference (`pending` \|
+    #     `available` \| `modifying` \| `deleting`).
+    #   @return [Array<Types::Filter>]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of results to return with a single call. To
+    #   retrieve the remaining results, make another call with the returned
+    #   `nextToken` value.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   The token for the next page of results.
+    #   @return [String]
+    #
+    # @!attribute [rw] dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/GetTransitGatewayPrefixListReferencesRequest AWS API Documentation
+    #
+    class GetTransitGatewayPrefixListReferencesRequest < Struct.new(
+      :transit_gateway_route_table_id,
+      :filters,
+      :max_results,
+      :next_token,
+      :dry_run)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] transit_gateway_prefix_list_references
+    #   Information about the prefix list references.
+    #   @return [Array<Types::TransitGatewayPrefixListReference>]
+    #
+    # @!attribute [rw] next_token
+    #   The token to use to retrieve the next page of results. This value is
+    #   `null` when there are no more results to return.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/GetTransitGatewayPrefixListReferencesResult AWS API Documentation
+    #
+    class GetTransitGatewayPrefixListReferencesResult < Struct.new(
+      :transit_gateway_prefix_list_references,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass GetTransitGatewayRouteTableAssociationsRequest
     #   data as a hash:
     #
@@ -27761,7 +27958,8 @@ module Aws::EC2
     #
     #   * `resource-id` - The ID of the resource.
     #
-    #   * `resource-type` - The resource type (`vpc` \| `vpn`).
+    #   * `resource-type` - The resource type (`vpc` \| `vpn` \|
+    #     `direct-connect-gateway` \| `tgw-peering`).
     #
     #   * `transit-gateway-attachment-id` - The ID of the attachment.
     #   @return [Array<Types::Filter>]
@@ -27838,7 +28036,8 @@ module Aws::EC2
     #
     #   * `resource-id` - The ID of the resource.
     #
-    #   * `resource-type` - The resource type (`vpc` \| `vpn`).
+    #   * `resource-type` - The resource type (`vpc` \| `vpn` \|
+    #     `direct-connect-gateway` \| `tgw-peering`).
     #
     #   * `transit-gateway-attachment-id` - The ID of the attachment.
     #   @return [Array<Types::Filter>]
@@ -32217,7 +32416,7 @@ module Aws::EC2
     #           kms_key_id: "KmsKeyId",
     #           snapshot_id: "SnapshotId",
     #           volume_size: 1,
-    #           volume_type: "standard", # accepts standard, io1, gp2, sc1, st1
+    #           volume_type: "standard", # accepts standard, io1, io2, gp2, sc1, st1
     #         },
     #         no_device: "String",
     #       }
@@ -32478,7 +32677,7 @@ module Aws::EC2
     #         kms_key_id: "KmsKeyId",
     #         snapshot_id: "SnapshotId",
     #         volume_size: 1,
-    #         volume_type: "standard", # accepts standard, io1, gp2, sc1, st1
+    #         volume_type: "standard", # accepts standard, io1, io2, gp2, sc1, st1
     #       }
     #
     # @!attribute [rw] encrypted
@@ -32493,22 +32692,21 @@ module Aws::EC2
     #   @return [Boolean]
     #
     # @!attribute [rw] iops
-    #   The number of I/O operations per second (IOPS) that the volume
-    #   supports. For io1, this represents the number of IOPS that are
-    #   provisioned for the volume. For gp2, this represents the baseline
-    #   performance of the volume and the rate at which the volume
-    #   accumulates I/O credits for bursting. For more information about
-    #   General Purpose SSD baseline performance, I/O credits, and bursting,
-    #   see [Amazon EBS Volume Types][1] in the *Amazon Elastic Compute
-    #   Cloud User Guide*.
+    #   The number of I/O operations per second (IOPS) to provision for an
+    #   `io1` or `io2` volume, with a maximum ratio of 50 IOPS/GiB for
+    #   `io1`, and 500 IOPS/GiB for `io2`. Range is 100 to 64,000 IOPS for
+    #   volumes in most Regions. Maximum IOPS of 64,000 is guaranteed only
+    #   on [Nitro-based instances][1]. Other instance families guarantee
+    #   performance up to 32,000 IOPS. For more information, see [Amazon EBS
+    #   Volume Types][2] in the *Amazon Elastic Compute Cloud User Guide*.
     #
-    #   Condition: This parameter is required for requests to create io1
-    #   volumes; it is not used in requests to create gp2, st1, sc1, or
-    #   standard volumes.
+    #   This parameter is valid only for Provisioned IOPS SSD (`io1` and
+    #   `io2`) volumes.
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EBSVolumeTypes.html
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/instance-types.html#ec2-nitro-instances
+    #   [2]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EBSVolumeTypes.html
     #   @return [Integer]
     #
     # @!attribute [rw] kms_key_id
@@ -36135,6 +36333,183 @@ module Aws::EC2
       include Aws::Structure
     end
 
+    # The transit gateway options.
+    #
+    # @note When making an API call, you may pass ModifyTransitGatewayOptions
+    #   data as a hash:
+    #
+    #       {
+    #         vpn_ecmp_support: "enable", # accepts enable, disable
+    #         dns_support: "enable", # accepts enable, disable
+    #         auto_accept_shared_attachments: "enable", # accepts enable, disable
+    #         default_route_table_association: "enable", # accepts enable, disable
+    #         association_default_route_table_id: "TransitGatewayRouteTableId",
+    #         default_route_table_propagation: "enable", # accepts enable, disable
+    #         propagation_default_route_table_id: "TransitGatewayRouteTableId",
+    #       }
+    #
+    # @!attribute [rw] vpn_ecmp_support
+    #   Enable or disable Equal Cost Multipath Protocol support.
+    #   @return [String]
+    #
+    # @!attribute [rw] dns_support
+    #   Enable or disable DNS support.
+    #   @return [String]
+    #
+    # @!attribute [rw] auto_accept_shared_attachments
+    #   Enable or disable automatic acceptance of attachment requests.
+    #   @return [String]
+    #
+    # @!attribute [rw] default_route_table_association
+    #   Enable or disable automatic association with the default association
+    #   route table.
+    #   @return [String]
+    #
+    # @!attribute [rw] association_default_route_table_id
+    #   The ID of the default association route table.
+    #   @return [String]
+    #
+    # @!attribute [rw] default_route_table_propagation
+    #   Enable or disable automatic propagation of routes to the default
+    #   propagation route table.
+    #   @return [String]
+    #
+    # @!attribute [rw] propagation_default_route_table_id
+    #   The ID of the default propagation route table.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ModifyTransitGatewayOptions AWS API Documentation
+    #
+    class ModifyTransitGatewayOptions < Struct.new(
+      :vpn_ecmp_support,
+      :dns_support,
+      :auto_accept_shared_attachments,
+      :default_route_table_association,
+      :association_default_route_table_id,
+      :default_route_table_propagation,
+      :propagation_default_route_table_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass ModifyTransitGatewayPrefixListReferenceRequest
+    #   data as a hash:
+    #
+    #       {
+    #         transit_gateway_route_table_id: "TransitGatewayRouteTableId", # required
+    #         prefix_list_id: "PrefixListResourceId", # required
+    #         transit_gateway_attachment_id: "TransitGatewayAttachmentId",
+    #         blackhole: false,
+    #         dry_run: false,
+    #       }
+    #
+    # @!attribute [rw] transit_gateway_route_table_id
+    #   The ID of the transit gateway route table.
+    #   @return [String]
+    #
+    # @!attribute [rw] prefix_list_id
+    #   The ID of the prefix list.
+    #   @return [String]
+    #
+    # @!attribute [rw] transit_gateway_attachment_id
+    #   The ID of the attachment to which traffic is routed.
+    #   @return [String]
+    #
+    # @!attribute [rw] blackhole
+    #   Indicates whether to drop traffic that matches this route.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ModifyTransitGatewayPrefixListReferenceRequest AWS API Documentation
+    #
+    class ModifyTransitGatewayPrefixListReferenceRequest < Struct.new(
+      :transit_gateway_route_table_id,
+      :prefix_list_id,
+      :transit_gateway_attachment_id,
+      :blackhole,
+      :dry_run)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] transit_gateway_prefix_list_reference
+    #   Information about the prefix list reference.
+    #   @return [Types::TransitGatewayPrefixListReference]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ModifyTransitGatewayPrefixListReferenceResult AWS API Documentation
+    #
+    class ModifyTransitGatewayPrefixListReferenceResult < Struct.new(
+      :transit_gateway_prefix_list_reference)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass ModifyTransitGatewayRequest
+    #   data as a hash:
+    #
+    #       {
+    #         transit_gateway_id: "TransitGatewayId", # required
+    #         description: "String",
+    #         options: {
+    #           vpn_ecmp_support: "enable", # accepts enable, disable
+    #           dns_support: "enable", # accepts enable, disable
+    #           auto_accept_shared_attachments: "enable", # accepts enable, disable
+    #           default_route_table_association: "enable", # accepts enable, disable
+    #           association_default_route_table_id: "TransitGatewayRouteTableId",
+    #           default_route_table_propagation: "enable", # accepts enable, disable
+    #           propagation_default_route_table_id: "TransitGatewayRouteTableId",
+    #         },
+    #         dry_run: false,
+    #       }
+    #
+    # @!attribute [rw] transit_gateway_id
+    #   The ID of the transit gateway.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   The description for the transit gateway.
+    #   @return [String]
+    #
+    # @!attribute [rw] options
+    #   The options to modify.
+    #   @return [Types::ModifyTransitGatewayOptions]
+    #
+    # @!attribute [rw] dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ModifyTransitGatewayRequest AWS API Documentation
+    #
+    class ModifyTransitGatewayRequest < Struct.new(
+      :transit_gateway_id,
+      :description,
+      :options,
+      :dry_run)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] transit_gateway
+    #   Describes a transit gateway.
+    #   @return [Types::TransitGateway]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ModifyTransitGatewayResult AWS API Documentation
+    #
+    class ModifyTransitGatewayResult < Struct.new(
+      :transit_gateway)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass ModifyTransitGatewayVpcAttachmentRequest
     #   data as a hash:
     #
@@ -36272,7 +36647,7 @@ module Aws::EC2
     #         dry_run: false,
     #         volume_id: "VolumeId", # required
     #         size: 1,
-    #         volume_type: "standard", # accepts standard, io1, gp2, sc1, st1
+    #         volume_type: "standard", # accepts standard, io1, io2, gp2, sc1, st1
     #         iops: 1,
     #       }
     #
@@ -36309,8 +36684,9 @@ module Aws::EC2
     # @!attribute [rw] iops
     #   The target IOPS rate of the volume.
     #
-    #   This is only valid for Provisioned IOPS SSD (`io1`) volumes. For
-    #   more information, see [Provisioned IOPS SSD (io1) Volumes][1].
+    #   This is only valid for Provisioned IOPS SSD (`io1` and `io2`)
+    #   volumes. For moreinformation, see [ Provisioned IOPS SSD (io1 and
+    #   io2) volumes][1].
     #
     #   Default: If no IOPS value is specified, the existing value is
     #   retained.
@@ -39690,7 +40066,7 @@ module Aws::EC2
     #               iops: 1,
     #               snapshot_id: "String",
     #               volume_size: 1,
-    #               volume_type: "standard", # accepts standard, io1, gp2, sc1, st1
+    #               volume_type: "standard", # accepts standard, io1, io2, gp2, sc1, st1
     #               kms_key_id: "String",
     #               encrypted: false,
     #             },
@@ -40803,7 +41179,7 @@ module Aws::EC2
     #               kms_key_id: "KmsKeyId",
     #               snapshot_id: "SnapshotId",
     #               volume_size: 1,
-    #               volume_type: "standard", # accepts standard, io1, gp2, sc1, st1
+    #               volume_type: "standard", # accepts standard, io1, io2, gp2, sc1, st1
     #             },
     #             no_device: "String",
     #           },
@@ -41188,7 +41564,7 @@ module Aws::EC2
     #                     iops: 1,
     #                     snapshot_id: "String",
     #                     volume_size: 1,
-    #                     volume_type: "standard", # accepts standard, io1, gp2, sc1, st1
+    #                     volume_type: "standard", # accepts standard, io1, io2, gp2, sc1, st1
     #                     kms_key_id: "String",
     #                     encrypted: false,
     #                   },
@@ -41377,7 +41753,7 @@ module Aws::EC2
     #                 iops: 1,
     #                 snapshot_id: "String",
     #                 volume_size: 1,
-    #                 volume_type: "standard", # accepts standard, io1, gp2, sc1, st1
+    #                 volume_type: "standard", # accepts standard, io1, io2, gp2, sc1, st1
     #                 kms_key_id: "String",
     #                 encrypted: false,
     #               },
@@ -41625,7 +42001,7 @@ module Aws::EC2
     #               iops: 1,
     #               snapshot_id: "String",
     #               volume_size: 1,
-    #               volume_type: "standard", # accepts standard, io1, gp2, sc1, st1
+    #               volume_type: "standard", # accepts standard, io1, io2, gp2, sc1, st1
     #               kms_key_id: "String",
     #               encrypted: false,
     #             },
@@ -43356,7 +43732,7 @@ module Aws::EC2
     #               iops: 1,
     #               snapshot_id: "String",
     #               volume_size: 1,
-    #               volume_type: "standard", # accepts standard, io1, gp2, sc1, st1
+    #               volume_type: "standard", # accepts standard, io1, io2, gp2, sc1, st1
     #               kms_key_id: "String",
     #               encrypted: false,
     #             },
@@ -44425,25 +44801,21 @@ module Aws::EC2
     #   @return [Boolean]
     #
     # @!attribute [rw] iops
-    #   The number of I/O operations per second (IOPS) that the volume
-    #   supports. For io1 volumes, this represents the number of IOPS that
-    #   are provisioned for the volume. For `gp2` volumes, this represents
-    #   the baseline performance of the volume and the rate at which the
-    #   volume accumulates I/O credits for bursting. For more information
-    #   about `gp2` baseline performance, I/O credits, and bursting, see
-    #   [Amazon EBS Volume Types][1] in the *Amazon Elastic Compute Cloud
-    #   User Guide*.
+    #   The number of I/O operations per second (IOPS) to provision for an
+    #   `io1` or `io2` volume, with a maximum ratio of 50 IOPS/GiB for
+    #   `io1`, and 500 IOPS/GiB for `io2`. Range is 100 to 64,000 IOPS for
+    #   volumes in most Regions. Maximum IOPS of 64,000 is guaranteed only
+    #   on [Nitro-based instances][1]. Other instance families guarantee
+    #   performance up to 32,000 IOPS. For more information, see [Amazon EBS
+    #   Volume Types][2] in the *Amazon Elastic Compute Cloud User Guide*.
     #
-    #   Constraint: Range is 100-20000 IOPS for `io1` volumes and 100-10000
-    #   IOPS for `gp2` volumes.
-    #
-    #   Condition: This parameter is required for requests to create
-    #   `io1`volumes; it is not used in requests to create `gp2`, `st1`,
-    #   `sc1`, or `standard` volumes.
+    #   This parameter is valid only for Provisioned IOPS SSD (`io1` and
+    #   `io2`) volumes.
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EBSVolumeTypes.html
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/instance-types.html#ec2-nitro-instances
+    #   [2]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EBSVolumeTypes.html
     #   @return [Integer]
     #
     # @!attribute [rw] snapshot_id
@@ -44458,7 +44830,7 @@ module Aws::EC2
     #   @return [Integer]
     #
     # @!attribute [rw] volume_type
-    #   The volume type. `gp2` for General Purpose SSD, `io1` for
+    #   The volume type. `gp2` for General Purpose SSD, `io1` or ` io2` for
     #   Provisioned IOPS SSD, Throughput Optimized HDD for `st1`, Cold HDD
     #   for `sc1`, or `standard` for Magnetic.
     #
@@ -45061,7 +45433,9 @@ module Aws::EC2
     #     attachment.
     #
     #   * `attachment.resource-type` - The attachment resource type (`vpc`
-    #     \| `vpn`).
+    #     \| `vpn` \| `direct-connect-gateway` \| `tgw-peering`).
+    #
+    #   * `prefix-list-id` - The ID of the prefix list.
     #
     #   * `route-search.exact-match` - The exact match of the specified
     #     filter.
@@ -45860,7 +46234,7 @@ module Aws::EC2
     #               iops: 1,
     #               snapshot_id: "String",
     #               volume_size: 1,
-    #               volume_type: "standard", # accepts standard, io1, gp2, sc1, st1
+    #               volume_type: "standard", # accepts standard, io1, io2, gp2, sc1, st1
     #               kms_key_id: "String",
     #               encrypted: false,
     #             },
@@ -46155,7 +46529,7 @@ module Aws::EC2
     #                   iops: 1,
     #                   snapshot_id: "String",
     #                   volume_size: 1,
-    #                   volume_type: "standard", # accepts standard, io1, gp2, sc1, st1
+    #                   volume_type: "standard", # accepts standard, io1, io2, gp2, sc1, st1
     #                   kms_key_id: "String",
     #                   encrypted: false,
     #                 },
@@ -48892,6 +49266,69 @@ module Aws::EC2
       include Aws::Structure
     end
 
+    # Describes a transit gateway prefix list attachment.
+    #
+    # @!attribute [rw] transit_gateway_attachment_id
+    #   The ID of the attachment.
+    #   @return [String]
+    #
+    # @!attribute [rw] resource_type
+    #   The resource type.
+    #   @return [String]
+    #
+    # @!attribute [rw] resource_id
+    #   The ID of the resource.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/TransitGatewayPrefixListAttachment AWS API Documentation
+    #
+    class TransitGatewayPrefixListAttachment < Struct.new(
+      :transit_gateway_attachment_id,
+      :resource_type,
+      :resource_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Describes a prefix list reference.
+    #
+    # @!attribute [rw] transit_gateway_route_table_id
+    #   The ID of the transit gateway route table.
+    #   @return [String]
+    #
+    # @!attribute [rw] prefix_list_id
+    #   The ID of the prefix list.
+    #   @return [String]
+    #
+    # @!attribute [rw] prefix_list_owner_id
+    #   The ID of the prefix list owner.
+    #   @return [String]
+    #
+    # @!attribute [rw] state
+    #   The state of the prefix list reference.
+    #   @return [String]
+    #
+    # @!attribute [rw] blackhole
+    #   Indicates whether traffic that matches this route is dropped.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] transit_gateway_attachment
+    #   Information about the transit gateway attachment.
+    #   @return [Types::TransitGatewayPrefixListAttachment]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/TransitGatewayPrefixListReference AWS API Documentation
+    #
+    class TransitGatewayPrefixListReference < Struct.new(
+      :transit_gateway_route_table_id,
+      :prefix_list_id,
+      :prefix_list_owner_id,
+      :state,
+      :blackhole,
+      :transit_gateway_attachment)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Describes route propagation.
     #
     # @!attribute [rw] transit_gateway_attachment_id
@@ -48995,6 +49432,10 @@ module Aws::EC2
     #   The CIDR block used for destination matches.
     #   @return [String]
     #
+    # @!attribute [rw] prefix_list_id
+    #   The ID of the prefix list used for destination matches.
+    #   @return [String]
+    #
     # @!attribute [rw] transit_gateway_attachments
     #   The attachments.
     #   @return [Array<Types::TransitGatewayRouteAttachment>]
@@ -49011,6 +49452,7 @@ module Aws::EC2
     #
     class TransitGatewayRoute < Struct.new(
       :destination_cidr_block,
+      :prefix_list_id,
       :transit_gateway_attachments,
       :type,
       :state)
@@ -50022,17 +50464,18 @@ module Aws::EC2
     #   number of IOPS that are provisioned for the volume. For General
     #   Purpose SSD volumes, this represents the baseline performance of the
     #   volume and the rate at which the volume accumulates I/O credits for
-    #   bursting. For more information, see [Amazon EBS Volume Types][1] in
+    #   bursting. For more information, see [Amazon EBS volume types][1] in
     #   the *Amazon Elastic Compute Cloud User Guide*.
     #
     #   Constraints: Range is 100-16,000 IOPS for `gp2` volumes and 100 to
-    #   64,000IOPS for `io1` volumes, in most Regions. The maximum IOPS for
-    #   `io1` of 64,000 is guaranteed only on [Nitro-based instances][2].
-    #   Other instance families guarantee performance up to 32,000 IOPS.
+    #   64,000 IOPS for `io1` and `io2` volumes, in most Regions. The
+    #   maximum IOPS for `io1` and `io2` of 64,000 is guaranteed only on
+    #   [Nitro-based instances][2]. Other instance families guarantee
+    #   performance up to 32,000 IOPS.
     #
     #   Condition: This parameter is required for requests to create `io1`
-    #   volumes; it is not used in requests to create `gp2`, `st1`, `sc1`,
-    #   or `standard` volumes.
+    #   and `io2` volumes; it is not used in requests to create `gp2`,
+    #   `st1`, `sc1`, or `standard` volumes.
     #
     #
     #
@@ -50045,9 +50488,9 @@ module Aws::EC2
     #   @return [Array<Types::Tag>]
     #
     # @!attribute [rw] volume_type
-    #   The volume type. This can be `gp2` for General Purpose SSD, `io1`
-    #   for Provisioned IOPS SSD, `st1` for Throughput Optimized HDD, `sc1`
-    #   for Cold HDD, or `standard` for Magnetic volumes.
+    #   The volume type. This can be `gp2` for General Purpose SSD, `io1` or
+    #   `io2` for Provisioned IOPS SSD, `st1` for Throughput Optimized HDD,
+    #   `sc1` for Cold HDD, or `standard` for Magnetic volumes.
     #   @return [String]
     #
     # @!attribute [rw] fast_restored

@@ -96,17 +96,18 @@ module Aws::EC2
     # of IOPS that are provisioned for the volume. For General Purpose SSD
     # volumes, this represents the baseline performance of the volume and
     # the rate at which the volume accumulates I/O credits for bursting. For
-    # more information, see [Amazon EBS Volume Types][1] in the *Amazon
+    # more information, see [Amazon EBS volume types][1] in the *Amazon
     # Elastic Compute Cloud User Guide*.
     #
     # Constraints: Range is 100-16,000 IOPS for `gp2` volumes and 100 to
-    # 64,000IOPS for `io1` volumes, in most Regions. The maximum IOPS for
-    # `io1` of 64,000 is guaranteed only on [Nitro-based instances][2].
-    # Other instance families guarantee performance up to 32,000 IOPS.
+    # 64,000 IOPS for `io1` and `io2` volumes, in most Regions. The maximum
+    # IOPS for `io1` and `io2` of 64,000 is guaranteed only on [Nitro-based
+    # instances][2]. Other instance families guarantee performance up to
+    # 32,000 IOPS.
     #
-    # Condition: This parameter is required for requests to create `io1`
-    # volumes; it is not used in requests to create `gp2`, `st1`, `sc1`, or
-    # `standard` volumes.
+    # Condition: This parameter is required for requests to create `io1` and
+    # `io2` volumes; it is not used in requests to create `gp2`, `st1`,
+    # `sc1`, or `standard` volumes.
     #
     #
     #
@@ -123,9 +124,9 @@ module Aws::EC2
       data[:tags]
     end
 
-    # The volume type. This can be `gp2` for General Purpose SSD, `io1` for
-    # Provisioned IOPS SSD, `st1` for Throughput Optimized HDD, `sc1` for
-    # Cold HDD, or `standard` for Magnetic volumes.
+    # The volume type. This can be `gp2` for General Purpose SSD, `io1` or
+    # `io2` for Provisioned IOPS SSD, `st1` for Throughput Optimized HDD,
+    # `sc1` for Cold HDD, or `standard` for Magnetic volumes.
     # @return [String]
     def volume_type
       data[:volume_type]

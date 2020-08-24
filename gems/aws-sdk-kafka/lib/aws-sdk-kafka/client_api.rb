@@ -32,6 +32,7 @@ module Aws::Kafka
     Configuration = Shapes::StructureShape.new(name: 'Configuration')
     ConfigurationInfo = Shapes::StructureShape.new(name: 'ConfigurationInfo')
     ConfigurationRevision = Shapes::StructureShape.new(name: 'ConfigurationRevision')
+    ConfigurationState = Shapes::StringShape.new(name: 'ConfigurationState')
     ConflictException = Shapes::StructureShape.new(name: 'ConflictException')
     CreateClusterRequest = Shapes::StructureShape.new(name: 'CreateClusterRequest')
     CreateClusterResponse = Shapes::StructureShape.new(name: 'CreateClusterResponse')
@@ -39,6 +40,8 @@ module Aws::Kafka
     CreateConfigurationResponse = Shapes::StructureShape.new(name: 'CreateConfigurationResponse')
     DeleteClusterRequest = Shapes::StructureShape.new(name: 'DeleteClusterRequest')
     DeleteClusterResponse = Shapes::StructureShape.new(name: 'DeleteClusterResponse')
+    DeleteConfigurationRequest = Shapes::StructureShape.new(name: 'DeleteConfigurationRequest')
+    DeleteConfigurationResponse = Shapes::StructureShape.new(name: 'DeleteConfigurationResponse')
     DescribeClusterOperationRequest = Shapes::StructureShape.new(name: 'DescribeClusterOperationRequest')
     DescribeClusterOperationResponse = Shapes::StructureShape.new(name: 'DescribeClusterOperationResponse')
     DescribeClusterRequest = Shapes::StructureShape.new(name: 'DescribeClusterRequest')
@@ -110,6 +113,8 @@ module Aws::Kafka
     UpdateClusterConfigurationResponse = Shapes::StructureShape.new(name: 'UpdateClusterConfigurationResponse')
     UpdateClusterKafkaVersionRequest = Shapes::StructureShape.new(name: 'UpdateClusterKafkaVersionRequest')
     UpdateClusterKafkaVersionResponse = Shapes::StructureShape.new(name: 'UpdateClusterKafkaVersionResponse')
+    UpdateConfigurationRequest = Shapes::StructureShape.new(name: 'UpdateConfigurationRequest')
+    UpdateConfigurationResponse = Shapes::StructureShape.new(name: 'UpdateConfigurationResponse')
     UpdateMonitoringRequest = Shapes::StructureShape.new(name: 'UpdateMonitoringRequest')
     UpdateMonitoringResponse = Shapes::StructureShape.new(name: 'UpdateMonitoringResponse')
     ZookeeperNodeInfo = Shapes::StructureShape.new(name: 'ZookeeperNodeInfo')
@@ -225,6 +230,7 @@ module Aws::Kafka
     Configuration.add_member(:kafka_versions, Shapes::ShapeRef.new(shape: __listOf__string, required: true, location_name: "kafkaVersions"))
     Configuration.add_member(:latest_revision, Shapes::ShapeRef.new(shape: ConfigurationRevision, required: true, location_name: "latestRevision"))
     Configuration.add_member(:name, Shapes::ShapeRef.new(shape: __string, required: true, location_name: "name"))
+    Configuration.add_member(:state, Shapes::ShapeRef.new(shape: ConfigurationState, required: true, location_name: "state"))
     Configuration.struct_class = Types::Configuration
 
     ConfigurationInfo.add_member(:arn, Shapes::ShapeRef.new(shape: __string, required: true, location_name: "arn"))
@@ -268,6 +274,7 @@ module Aws::Kafka
     CreateConfigurationResponse.add_member(:creation_time, Shapes::ShapeRef.new(shape: __timestampIso8601, location_name: "creationTime"))
     CreateConfigurationResponse.add_member(:latest_revision, Shapes::ShapeRef.new(shape: ConfigurationRevision, location_name: "latestRevision"))
     CreateConfigurationResponse.add_member(:name, Shapes::ShapeRef.new(shape: __string, location_name: "name"))
+    CreateConfigurationResponse.add_member(:state, Shapes::ShapeRef.new(shape: ConfigurationState, location_name: "state"))
     CreateConfigurationResponse.struct_class = Types::CreateConfigurationResponse
 
     DeleteClusterRequest.add_member(:cluster_arn, Shapes::ShapeRef.new(shape: __string, required: true, location: "uri", location_name: "clusterArn"))
@@ -277,6 +284,13 @@ module Aws::Kafka
     DeleteClusterResponse.add_member(:cluster_arn, Shapes::ShapeRef.new(shape: __string, location_name: "clusterArn"))
     DeleteClusterResponse.add_member(:state, Shapes::ShapeRef.new(shape: ClusterState, location_name: "state"))
     DeleteClusterResponse.struct_class = Types::DeleteClusterResponse
+
+    DeleteConfigurationRequest.add_member(:arn, Shapes::ShapeRef.new(shape: __string, required: true, location: "uri", location_name: "arn"))
+    DeleteConfigurationRequest.struct_class = Types::DeleteConfigurationRequest
+
+    DeleteConfigurationResponse.add_member(:arn, Shapes::ShapeRef.new(shape: __string, location_name: "arn"))
+    DeleteConfigurationResponse.add_member(:state, Shapes::ShapeRef.new(shape: ConfigurationState, location_name: "state"))
+    DeleteConfigurationResponse.struct_class = Types::DeleteConfigurationResponse
 
     DescribeClusterOperationRequest.add_member(:cluster_operation_arn, Shapes::ShapeRef.new(shape: __string, required: true, location: "uri", location_name: "clusterOperationArn"))
     DescribeClusterOperationRequest.struct_class = Types::DescribeClusterOperationRequest
@@ -299,6 +313,7 @@ module Aws::Kafka
     DescribeConfigurationResponse.add_member(:kafka_versions, Shapes::ShapeRef.new(shape: __listOf__string, location_name: "kafkaVersions"))
     DescribeConfigurationResponse.add_member(:latest_revision, Shapes::ShapeRef.new(shape: ConfigurationRevision, location_name: "latestRevision"))
     DescribeConfigurationResponse.add_member(:name, Shapes::ShapeRef.new(shape: __string, location_name: "name"))
+    DescribeConfigurationResponse.add_member(:state, Shapes::ShapeRef.new(shape: ConfigurationState, location_name: "state"))
     DescribeConfigurationResponse.struct_class = Types::DescribeConfigurationResponse
 
     DescribeConfigurationRevisionRequest.add_member(:arn, Shapes::ShapeRef.new(shape: __string, required: true, location: "uri", location_name: "arn"))
@@ -551,6 +566,15 @@ module Aws::Kafka
     UpdateClusterKafkaVersionResponse.add_member(:cluster_operation_arn, Shapes::ShapeRef.new(shape: __string, location_name: "clusterOperationArn"))
     UpdateClusterKafkaVersionResponse.struct_class = Types::UpdateClusterKafkaVersionResponse
 
+    UpdateConfigurationRequest.add_member(:arn, Shapes::ShapeRef.new(shape: __string, required: true, location: "uri", location_name: "arn"))
+    UpdateConfigurationRequest.add_member(:description, Shapes::ShapeRef.new(shape: __string, location_name: "description"))
+    UpdateConfigurationRequest.add_member(:server_properties, Shapes::ShapeRef.new(shape: __blob, required: true, location_name: "serverProperties"))
+    UpdateConfigurationRequest.struct_class = Types::UpdateConfigurationRequest
+
+    UpdateConfigurationResponse.add_member(:arn, Shapes::ShapeRef.new(shape: __string, location_name: "arn"))
+    UpdateConfigurationResponse.add_member(:latest_revision, Shapes::ShapeRef.new(shape: ConfigurationRevision, location_name: "latestRevision"))
+    UpdateConfigurationResponse.struct_class = Types::UpdateConfigurationResponse
+
     UpdateMonitoringRequest.add_member(:cluster_arn, Shapes::ShapeRef.new(shape: __string, required: true, location: "uri", location_name: "clusterArn"))
     UpdateMonitoringRequest.add_member(:current_version, Shapes::ShapeRef.new(shape: __string, required: true, location_name: "currentVersion"))
     UpdateMonitoringRequest.add_member(:enhanced_monitoring, Shapes::ShapeRef.new(shape: EnhancedMonitoring, location_name: "enhancedMonitoring"))
@@ -647,6 +671,18 @@ module Aws::Kafka
         o.http_request_uri = "/v1/clusters/{clusterArn}"
         o.input = Shapes::ShapeRef.new(shape: DeleteClusterRequest)
         o.output = Shapes::ShapeRef.new(shape: DeleteClusterResponse)
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerErrorException)
+        o.errors << Shapes::ShapeRef.new(shape: ForbiddenException)
+      end)
+
+      api.add_operation(:delete_configuration, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DeleteConfiguration"
+        o.http_method = "DELETE"
+        o.http_request_uri = "/v1/configurations/{arn}"
+        o.input = Shapes::ShapeRef.new(shape: DeleteConfigurationRequest)
+        o.output = Shapes::ShapeRef.new(shape: DeleteConfigurationResponse)
         o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerErrorException)
@@ -913,6 +949,19 @@ module Aws::Kafka
         o.http_request_uri = "/v1/clusters/{clusterArn}/nodes/storage"
         o.input = Shapes::ShapeRef.new(shape: UpdateBrokerStorageRequest)
         o.output = Shapes::ShapeRef.new(shape: UpdateBrokerStorageResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerErrorException)
+        o.errors << Shapes::ShapeRef.new(shape: ForbiddenException)
+      end)
+
+      api.add_operation(:update_configuration, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "UpdateConfiguration"
+        o.http_method = "PUT"
+        o.http_request_uri = "/v1/configurations/{arn}"
+        o.input = Shapes::ShapeRef.new(shape: UpdateConfigurationRequest)
+        o.output = Shapes::ShapeRef.new(shape: UpdateConfigurationResponse)
         o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
         o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
         o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException)

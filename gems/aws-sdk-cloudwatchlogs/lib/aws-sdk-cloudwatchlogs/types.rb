@@ -309,6 +309,13 @@ module Aws::CloudWatchLogs
     #       }
     #
     # @!attribute [rw] query_definition_id
+    #   The ID of the query definition that you want to delete. You can use
+    #   [DescribeQueryDefinitions][1] to retrieve the IDs of your saved
+    #   query definitions.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_DescribeQueryDefinitions.html
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/DeleteQueryDefinitionRequest AWS API Documentation
@@ -320,6 +327,8 @@ module Aws::CloudWatchLogs
     end
 
     # @!attribute [rw] success
+    #   A value of TRUE indicates that the operation succeeded. FALSE
+    #   indicates that the operation failed.
     #   @return [Boolean]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/DeleteQueryDefinitionResponse AWS API Documentation
@@ -539,6 +548,9 @@ module Aws::CloudWatchLogs
 
     # @!attribute [rw] log_groups
     #   The log groups.
+    #
+    #   If the `retentionInDays` value if not included for a log group, then
+    #   that log group is set to have its events never expire.
     #   @return [Array<Types::LogGroup>]
     #
     # @!attribute [rw] next_token
@@ -574,7 +586,7 @@ module Aws::CloudWatchLogs
     # @!attribute [rw] log_stream_name_prefix
     #   The prefix to match.
     #
-    #   If `orderBy` is `LastEventTime`,you cannot specify this parameter.
+    #   If `orderBy` is `LastEventTime`, you cannot specify this parameter.
     #   @return [String]
     #
     # @!attribute [rw] order_by
@@ -585,12 +597,12 @@ module Aws::CloudWatchLogs
     #   If you order the results by event time, you cannot specify the
     #   `logStreamNamePrefix` parameter.
     #
-    #   lastEventTimestamp represents the time of the most recent log event
-    #   in the log stream in CloudWatch Logs. This number is expressed as
-    #   the number of milliseconds after Jan 1, 1970 00:00:00 UTC.
-    #   lastEventTimeStamp updates on an eventual consistency basis. It
-    #   typically updates in less than an hour from ingestion, but may take
-    #   longer in some rare situations.
+    #   `lastEventTimeStamp` represents the time of the most recent log
+    #   event in the log stream in CloudWatch Logs. This number is expressed
+    #   as the number of milliseconds after Jan 1, 1970 00:00:00 UTC.
+    #   `lastEventTimeStamp` updates on an eventual consistency basis. It
+    #   typically updates in less than an hour from ingestion, but in rare
+    #   situations might take longer.
     #   @return [String]
     #
     # @!attribute [rw] descending
@@ -657,7 +669,9 @@ module Aws::CloudWatchLogs
     #   @return [String]
     #
     # @!attribute [rw] filter_name_prefix
-    #   The prefix to match.
+    #   The prefix to match. CloudWatch Logs uses the value you set here
+    #   only if you also include the `logGroupName` parameter in your
+    #   request.
     #   @return [String]
     #
     # @!attribute [rw] next_token
@@ -782,9 +796,13 @@ module Aws::CloudWatchLogs
     #       }
     #
     # @!attribute [rw] query_definition_name_prefix
+    #   Use this parameter to filter your results to only the query
+    #   definitions that have names that start with the prefix you specify.
     #   @return [String]
     #
     # @!attribute [rw] max_results
+    #   Limits the number of returned query definitions to the specified
+    #   number.
     #   @return [Integer]
     #
     # @!attribute [rw] next_token
@@ -803,6 +821,7 @@ module Aws::CloudWatchLogs
     end
 
     # @!attribute [rw] query_definitions
+    #   The list of query definitions that match your request.
     #   @return [Array<Types::QueryDefinition>]
     #
     # @!attribute [rw] next_token
@@ -930,8 +949,8 @@ module Aws::CloudWatchLogs
     #   @return [String]
     #
     # @!attribute [rw] target_arn
-    #   The Amazon Resource Name (ARN) of the physical target to where the
-    #   log events are delivered (for example, a Kinesis stream).
+    #   The Amazon Resource Name (ARN) of the physical target where the log
+    #   events are delivered (for example, a Kinesis stream).
     #   @return [String]
     #
     # @!attribute [rw] role_arn
@@ -1012,7 +1031,7 @@ module Aws::CloudWatchLogs
     #   @return [Integer]
     #
     # @!attribute [rw] destination
-    #   The name of Amazon S3 bucket to which the log data was exported.
+    #   The name of the S3 bucket to which the log data was exported.
     #   @return [String]
     #
     # @!attribute [rw] destination_prefix
@@ -1025,7 +1044,7 @@ module Aws::CloudWatchLogs
     #   @return [Types::ExportTaskStatus]
     #
     # @!attribute [rw] execution_info
-    #   Execution info about the export task.
+    #   Execution information about the export task.
     #   @return [Types::ExportTaskExecutionInfo]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/ExportTask AWS API Documentation
@@ -1125,6 +1144,9 @@ module Aws::CloudWatchLogs
     #   The start of the time range, expressed as the number of milliseconds
     #   after Jan 1, 1970 00:00:00 UTC. Events with a timestamp before this
     #   time are not returned.
+    #
+    #   If you omit `startTime` and `endTime` the most recent log events are
+    #   retrieved, to up 1 MB or 10,000 log events.
     #   @return [Integer]
     #
     # @!attribute [rw] end_time
@@ -1162,10 +1184,10 @@ module Aws::CloudWatchLogs
     #   first, then those in the next log stream, and so on. The default is
     #   false.
     #
-    #   **IMPORTANT:** Starting on June 17, 2019, this parameter will be
-    #   ignored and the value will be assumed to be true. The response from
-    #   this operation will always interleave events from multiple log
-    #   streams within a log group.
+    #   **Important:** Starting on June 17, 2019, this parameter is ignored
+    #   and the value is assumed to be true. The response from this
+    #   operation always interleaves events from multiple log streams within
+    #   a log group.
     #   @return [Boolean]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/FilterLogEventsRequest AWS API Documentation
@@ -1189,6 +1211,10 @@ module Aws::CloudWatchLogs
     #   @return [Array<Types::FilteredLogEvent>]
     #
     # @!attribute [rw] searched_log_streams
+    #   **IMPORTANT** Starting on May 15, 2020, this parameter will be
+    #   deprecated. This parameter will be an empty list after the
+    #   deprecation occurs.
+    #
     #   Indicates which log streams have been searched and whether each has
     #   been searched completely.
     #   @return [Array<Types::SearchedLogStream>]
@@ -1322,14 +1348,14 @@ module Aws::CloudWatchLogs
     # @!attribute [rw] next_forward_token
     #   The token for the next set of items in the forward direction. The
     #   token expires after 24 hours. If you have reached the end of the
-    #   stream, it will return the same token you passed in.
+    #   stream, it returns the same token you passed in.
     #   @return [String]
     #
     # @!attribute [rw] next_backward_token
     #   The token for the next set of items in the backward direction. The
-    #   token expires after 24 hours. This token will never be null. If you
-    #   have reached the end of the stream, it will return the same token
-    #   you passed in.
+    #   token expires after 24 hours. This token is never null. If you have
+    #   reached the end of the stream, it returns the same token you passed
+    #   in.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/GetLogEventsResponse AWS API Documentation
@@ -1452,7 +1478,8 @@ module Aws::CloudWatchLogs
     # @!attribute [rw] statistics
     #   Includes the number of log events scanned by the query, the number
     #   of log events that matched the query criteria, and the total number
-    #   of bytes in the log events that were scanned.
+    #   of bytes in the log events that were scanned. These values reflect
+    #   the full raw results of the query.
     #   @return [Types::QueryStatistics]
     #
     # @!attribute [rw] status
@@ -1461,7 +1488,7 @@ module Aws::CloudWatchLogs
     #   `Timeout`, and `Unknown`.
     #
     #   Queries time out after 15 minutes of execution. To avoid having your
-    #   queries time out, reduce the time range being searched, or partition
+    #   queries time out, reduce the time range being searched or partition
     #   your query into a number of queries.
     #   @return [String]
     #
@@ -1583,6 +1610,9 @@ module Aws::CloudWatchLogs
     #   The number of days to retain the log events in the specified log
     #   group. Possible values are: 1, 3, 5, 7, 14, 30, 60, 90, 120, 150,
     #   180, 365, 400, 545, 731, 1827, and 3653.
+    #
+    #   If you omit `retentionInDays` in a `PutRetentionPolicy` operation,
+    #   the events in the log group are always retained and never expire.
     #   @return [Integer]
     #
     # @!attribute [rw] metric_filter_count
@@ -1659,8 +1689,8 @@ module Aws::CloudWatchLogs
     #   CloudWatch Logs. This number is expressed as the number of
     #   milliseconds after Jan 1, 1970 00:00:00 UTC. The `lastEventTime`
     #   value updates on an eventual consistency basis. It typically updates
-    #   in less than an hour from ingestion, but may take longer in some
-    #   rare situations.
+    #   in less than an hour from ingestion, but in rare situations might
+    #   take longer.
     #   @return [Integer]
     #
     # @!attribute [rw] last_ingestion_time
@@ -1679,7 +1709,7 @@ module Aws::CloudWatchLogs
     # @!attribute [rw] stored_bytes
     #   The number of bytes stored.
     #
-    #   **IMPORTANT:**On June 17, 2019, this parameter was deprecated for
+    #   **Important:** On June 17, 2019, this parameter was deprecated for
     #   log streams, and is always reported as zero. This change applies
     #   only to log streams. The `storedBytes` parameter for log groups is
     #   not affected.
@@ -1702,7 +1732,7 @@ module Aws::CloudWatchLogs
 
     # The query string is not valid. Details about this error are displayed
     # in a `QueryCompileError` object. For more information, see
-    # [QueryCompileError][1]"/&gt;.
+    # [QueryCompileError][1].
     #
     # For more information about valid query syntax, see [CloudWatch Logs
     # Insights Query Syntax][2].
@@ -1734,7 +1764,7 @@ module Aws::CloudWatchLogs
     #
     # @!attribute [rw] filter_pattern
     #   A symbolic description of how CloudWatch Logs should interpret the
-    #   data in each log event. For example, a log event may contain
+    #   data in each log event. For example, a log event can contain
     #   timestamps, IP addresses, strings, and so on. You use the filter
     #   pattern to specify what to look for in the log event message.
     #   @return [String]
@@ -1882,7 +1912,8 @@ module Aws::CloudWatchLogs
     #
     # @!attribute [rw] access_policy
     #   An IAM policy document that authorizes cross-account users to
-    #   deliver their log events to the associated destination.
+    #   deliver their log events to the associated destination. This can be
+    #   up to 5120 bytes.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/PutDestinationPolicyRequest AWS API Documentation
@@ -1914,7 +1945,7 @@ module Aws::CloudWatchLogs
     #
     # @!attribute [rw] role_arn
     #   The ARN of an IAM role that grants CloudWatch Logs permissions to
-    #   call the Amazon Kinesis PutRecord operation on the destination
+    #   call the Amazon Kinesis `PutRecord` operation on the destination
     #   stream.
     #   @return [String]
     #
@@ -1973,7 +2004,7 @@ module Aws::CloudWatchLogs
     #   not require a sequence token. You can also get the sequence token
     #   using [DescribeLogStreams][1]. If you call `PutLogEvents` twice
     #   within a narrow time period using the same value for
-    #   `sequenceToken`, both calls may be successful, or one may be
+    #   `sequenceToken`, both calls might be successful or one might be
     #   rejected.
     #
     #
@@ -2066,15 +2097,47 @@ module Aws::CloudWatchLogs
     #       }
     #
     # @!attribute [rw] name
+    #   A name for the query definition. If you are saving a lot of query
+    #   definitions, we recommend that you name them so that you can easily
+    #   find the ones you want by using the first part of the name as a
+    #   filter in the `queryDefinitionNamePrefix` parameter of
+    #   [DescribeQueryDefinitions][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_DescribeQueryDefinitions.html
     #   @return [String]
     #
     # @!attribute [rw] query_definition_id
+    #   If you are updating a query definition, use this parameter to
+    #   specify the ID of the query definition that you want to update. You
+    #   can use [DescribeQueryDefinitions][1] to retrieve the IDs of your
+    #   saved query definitions.
+    #
+    #   If you are creating a query definition, do not specify this
+    #   parameter. CloudWatch generates a unique ID for the new query
+    #   definition and include it in the response to this operation.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_DescribeQueryDefinitions.html
     #   @return [String]
     #
     # @!attribute [rw] log_group_names
+    #   Use this parameter to include specific log groups as part of your
+    #   query definition.
+    #
+    #   If you are updating a query definition and you omit this parameter,
+    #   then the updated definition will contain no log groups.
     #   @return [Array<String>]
     #
     # @!attribute [rw] query_string
+    #   The query string to use for this definition. For more information,
+    #   see [CloudWatch Logs Insights Query Syntax][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/CWL_QuerySyntax.html
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/PutQueryDefinitionRequest AWS API Documentation
@@ -2089,6 +2152,7 @@ module Aws::CloudWatchLogs
     end
 
     # @!attribute [rw] query_definition_id
+    #   The ID of the query definition.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/PutQueryDefinitionResponse AWS API Documentation
@@ -2118,7 +2182,7 @@ module Aws::CloudWatchLogs
     #
     #   The following example creates a resource policy enabling the Route
     #   53 service to put DNS query logs in to the specified log group.
-    #   Replace "logArn" with the ARN of your CloudWatch Logs resource,
+    #   Replace `"logArn"` with the ARN of your CloudWatch Logs resource,
     #   such as a log group or log stream.
     #
     #   `\{ "Version": "2012-10-17", "Statement": [ \{ "Sid":
@@ -2164,6 +2228,9 @@ module Aws::CloudWatchLogs
     #   The number of days to retain the log events in the specified log
     #   group. Possible values are: 1, 3, 5, 7, 14, 30, 60, 90, 120, 150,
     #   180, 365, 400, 545, 731, 1827, and 3653.
+    #
+    #   If you omit `retentionInDays` in a `PutRetentionPolicy` operation,
+    #   the events in the log group are always retained and never expire.
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/PutRetentionPolicyRequest AWS API Documentation
@@ -2233,7 +2300,7 @@ module Aws::CloudWatchLogs
     #
     # @!attribute [rw] distribution
     #   The method used to distribute log data to the destination. By
-    #   default log data is grouped by log stream, but the grouping can be
+    #   default, log data is grouped by log stream, but the grouping can be
     #   set to random for a more even distribution. This property is only
     #   applicable when the destination is an Amazon Kinesis stream.
     #   @return [String]
@@ -2289,19 +2356,33 @@ module Aws::CloudWatchLogs
       include Aws::Structure
     end
 
+    # This structure contains details about a saved CloudWatch Logs Insights
+    # query definition.
+    #
     # @!attribute [rw] query_definition_id
+    #   The unique ID of the query definition.
     #   @return [String]
     #
     # @!attribute [rw] name
+    #   The name of the query definition.
     #   @return [String]
     #
     # @!attribute [rw] query_string
+    #   The query string to use for this definition. For more information,
+    #   see [CloudWatch Logs Insights Query Syntax][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/CWL_QuerySyntax.html
     #   @return [String]
     #
     # @!attribute [rw] last_modified
+    #   The date that the query definition was most recently modified.
     #   @return [Integer]
     #
     # @!attribute [rw] log_group_names
+    #   If this query definition contains a list of log groups that it is
+    #   limited to, that list appears here.
     #   @return [Array<String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/QueryDefinition AWS API Documentation
@@ -2581,8 +2662,8 @@ module Aws::CloudWatchLogs
     #       }
     #
     # @!attribute [rw] query_id
-    #   The ID number of the query to stop. If necessary, you can use
-    #   `DescribeQueries` to find this ID number.
+    #   The ID number of the query to stop. To find this ID number, use
+    #   `DescribeQueries`.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/StopQueryRequest AWS API Documentation
@@ -2617,7 +2698,7 @@ module Aws::CloudWatchLogs
     #
     # @!attribute [rw] filter_pattern
     #   A symbolic description of how CloudWatch Logs should interpret the
-    #   data in each log event. For example, a log event may contain
+    #   data in each log event. For example, a log event can contain
     #   timestamps, IP addresses, strings, and so on. You use the filter
     #   pattern to specify what to look for in the log event message.
     #   @return [String]
@@ -2690,7 +2771,7 @@ module Aws::CloudWatchLogs
     #
     # @!attribute [rw] filter_pattern
     #   A symbolic description of how CloudWatch Logs should interpret the
-    #   data in each log event. For example, a log event may contain
+    #   data in each log event. For example, a log event can contain
     #   timestamps, IP addresses, strings, and so on. You use the filter
     #   pattern to specify what to look for in the log event message.
     #   @return [String]

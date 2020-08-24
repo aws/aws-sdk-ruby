@@ -3696,12 +3696,12 @@ module Aws::SSM
     #         type_name: "InventoryItemTypeName", # required
     #         schema_delete_option: "DisableSchema", # accepts DisableSchema, DeleteSchema
     #         dry_run: false,
-    #         client_token: "ClientToken",
+    #         client_token: "UUID",
     #       }
     #
     # @!attribute [rw] type_name
     #   The name of the custom inventory type for which you want to delete
-    #   either all previously collected data, or the inventory type itself.
+    #   either all previously collected data or the inventory type itself.
     #   @return [String]
     #
     # @!attribute [rw] schema_delete_option
@@ -5084,7 +5084,7 @@ module Aws::SSM
     #   data as a hash:
     #
     #       {
-    #         deletion_id: "InventoryDeletionId",
+    #         deletion_id: "UUID",
     #         next_token: "NextToken",
     #         max_results: 1,
     #       }
@@ -13999,6 +13999,12 @@ module Aws::SSM
     #   The parameter value that you want to add to the system. Standard
     #   parameters have a value limit of 4 KB. Advanced parameters have a
     #   value limit of 8 KB.
+    #
+    #   <note markdown="1"> Parameters can't be referenced or nested in the values of other
+    #   parameters. You can't include `\{\{\}\}` or
+    #   `\{\{ssm:parameter-name\}\}` in a parameter value.
+    #
+    #    </note>
     #   @return [String]
     #
     # @!attribute [rw] type
