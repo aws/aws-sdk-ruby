@@ -4,7 +4,7 @@ Unreleased Changes
 1.7.0 (2020-09-01)
 ------------------
 
-* Feature - SSO has been moved into `aws-sdk-core` to support usage of SSOCredentials.
+* Feature - SSO has been moved into `aws-sdk-core` version 3.105 to support usage of SSOCredentials.
 
 1.6.0 (2020-06-23)
 ------------------
