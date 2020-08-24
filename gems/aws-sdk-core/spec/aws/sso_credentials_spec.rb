@@ -13,6 +13,7 @@ module Aws
     end
 
     let(:in_one_hour) { Time.now + 60 * 60 }
+    let(:one_hour_ago) { Time.now - 60 * 60 }
 
     let(:expiration) { in_one_hour }
 
@@ -86,6 +87,27 @@ module Aws
         end.to raise_error(ArgumentError, /Missing required keys/)
       end
 
+      it 'raises an InvalidSSOCredentials error when  token file is missing fields' do
+        mock_token_file(sso_start_url, {'accessToken' =>  access_token})
+
+        expect do
+          SSOCredentials.new(sso_opts)
+        end.to raise_error(Aws::Errors::InvalidSSOCredentials)
+      end
+
+      it 'raises an InvalidSSOCredentials error when token is expired' do
+        mock_token_file(sso_start_url,
+          {
+            'accessToken' =>  access_token,
+            'expiresAt' => one_hour_ago
+          }
+        )
+
+        expect do
+          SSOCredentials.new(sso_opts)
+        end.to raise_error(Aws::Errors::InvalidSSOCredentials)
+      end
+
       it 'sets the client when passed in and does not create a new one' do
         test_client = client # force construction
         expect(SSO::Client).not_to receive(:new)
@@ -96,67 +118,5 @@ module Aws
         expect(creds.client).to be(test_client)
       end
     end
-
-    # describe '#identity_id' do
-    #
-    #   it 'uses the identity_id when passed' do
-    #     expect(client).not_to receive(:get_id)
-    #
-    #     creds = CognitoIdentityCredentials.new(
-    #       client: client, identity_id: identity_id
-    #     )
-    #     expect(creds.identity_id).to eq(identity_id)
-    #   end
-    #
-    #   it 'gets identity_id from the identity_pool_id' do
-    #     expect(client).to receive(:get_id)
-    #                         .with(identity_pool_id: identity_pool_id)
-    #                         .and_return(double("getid", identity_id: identity_id))
-    #
-    #     creds = CognitoIdentityCredentials.new(
-    #       client: client, identity_pool_id: identity_pool_id
-    #     )
-    #
-    #     expect(creds.identity_id).to eq(identity_id)
-    #   end
-    # end
-    #
-    # describe '#refresh' do
-    #   it 'extracts credentials and expiration from the response' do
-    #     expect(client).to receive(:get_credentials_for_identity)
-    #                         .with(identity_id: identity_id, custom_role_arn: nil)
-    #                         .and_return(resp)
-    #
-    #     creds = CognitoIdentityCredentials.new(
-    #       client: client, identity_id: identity_id
-    #     )
-    #
-    #     expect(creds.credentials.access_key_id)
-    #       .to eq(cognito_creds.access_key_id)
-    #
-    #     expect(creds.credentials.secret_access_key)
-    #       .to eq(cognito_creds.secret_key)
-    #
-    #     expect(creds.expiration)
-    #       .to eq(cognito_creds.expiration)
-    #   end
-    #
-    #   it 'calls before_refresh with self' do
-    #     before_refresh_called = false
-    #     before_refresh = proc do |cred_provider|
-    #       before_refresh_called = true
-    #       expect(cred_provider).to be_instance_of(CognitoIdentityCredentials)
-    #     end
-    #
-    #     CognitoIdentityCredentials.new(
-    #       client: client,
-    #       identity_id: identity_id,
-    #       before_refresh: before_refresh
-    #     )
-    #
-    #     expect(before_refresh_called).to be(true)
-    #   end
-    # end
-
   end
 end

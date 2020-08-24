@@ -49,7 +49,6 @@ module Aws
     # @option options [SSO::Client] :client Optional `SSO::Client`.  If not
     #   provided, a client will be constructed.
     def initialize(options = {})
-      client_opts = {}
 
       missing_keys = SSO_REQUIRED_OPTS.select { |k| options[k].nil? }
       unless missing_keys.empty?
@@ -64,12 +63,9 @@ module Aws
       # validate we can read the token file
       read_cached_token
 
-      options.each_pair do |key, value|
-        client_opts[key] = value
-      end
-      client_opts[:region] = @sso_region
-      client_opts[:credentials] = nil
-      @client = client_opts[:client] || SSO::Client.new(client_opts)
+      options[:region] = @sso_region
+      options[:credentials] = nil
+      @client = options[:client] || SSO::Client.new(options)
       super
     end
 
