@@ -89,7 +89,7 @@ module Aws::EC2
     #           iops: 1,
     #           snapshot_id: "String",
     #           volume_size: 1,
-    #           volume_type: "standard", # accepts standard, io1, gp2, sc1, st1
+    #           volume_type: "standard", # accepts standard, io1, io2, gp2, sc1, st1
     #           kms_key_id: "String",
     #           encrypted: false,
     #         },
@@ -1123,7 +1123,7 @@ module Aws::EC2
     #     outpost_arn: "String",
     #     size: 1,
     #     snapshot_id: "SnapshotId",
-    #     volume_type: "standard", # accepts standard, io1, gp2, sc1, st1
+    #     volume_type: "standard", # accepts standard, io1, io2, gp2, sc1, st1
     #     dry_run: false,
     #     tag_specifications: [
     #       {
@@ -1146,26 +1146,28 @@ module Aws::EC2
     #   setting the encryption state to `true` depends on the volume origin
     #   (new or from a snapshot), starting encryption state, ownership, and
     #   whether encryption by default is enabled. For more information, see
-    #   [Encryption by Default][1] in the *Amazon Elastic Compute Cloud User
+    #   [Encryption by default][1] in the *Amazon Elastic Compute Cloud User
     #   Guide*.
     #
     #   Encrypted Amazon EBS volumes must be attached to instances that
     #   support Amazon EBS encryption. For more information, see [Supported
-    #   Instance Types][2].
+    #   instance types][2].
     #
     #
     #
     #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EBSEncryption.html#encryption-by-default
     #   [2]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EBSEncryption.html#EBSEncryption_supported_instances
     # @option options [Integer] :iops
-    #   The number of I/O operations per second (IOPS) to provision for the
-    #   volume, with a maximum ratio of 50 IOPS/GiB. Range is 100 to 64,000
-    #   IOPS for volumes in most Regions. Maximum IOPS of 64,000 is guaranteed
-    #   only on [Nitro-based instances][1]. Other instance families guarantee
+    #   The number of I/O operations per second (IOPS) to provision for an
+    #   `io1` or `io2` volume, with a maximum ratio of 50 IOPS/GiB for `io1`,
+    #   and 500 IOPS/GiB for `io2`. Range is 100 to 64,000 IOPS for volumes in
+    #   most Regions. Maximum IOPS of 64,000 is guaranteed only on
+    #   [Nitro-based instances][1]. Other instance families guarantee
     #   performance up to 32,000 IOPS. For more information, see [Amazon EBS
-    #   Volume Types][2] in the *Amazon Elastic Compute Cloud User Guide*.
+    #   volume types][2] in the *Amazon Elastic Compute Cloud User Guide*.
     #
-    #   This parameter is valid only for Provisioned IOPS SSD (io1) volumes.
+    #   This parameter is valid only for Provisioned IOPS SSD (`io1` and
+    #   `io2`) volumes.
     #
     #
     #
@@ -1198,10 +1200,10 @@ module Aws::EC2
     #   The size of the volume, in GiBs. You must specify either a snapshot ID
     #   or a volume size.
     #
-    #   Constraints: 1-16,384 for `gp2`, 4-16,384 for `io1`, 500-16,384 for
-    #   `st1`, 500-16,384 for `sc1`, and 1-1,024 for `standard`. If you
-    #   specify a snapshot, the volume size must be equal to or larger than
-    #   the snapshot size.
+    #   Constraints: 1-16,384 for `gp2`, 4-16,384 for `io1` and `io2`,
+    #   500-16,384 for `st1`, 500-16,384 for `sc1`, and 1-1,024 for
+    #   `standard`. If you specify a snapshot, the volume size must be equal
+    #   to or larger than the snapshot size.
     #
     #   Default: If you're creating the volume from a snapshot and don't
     #   specify a volume size, the default is the snapshot size.
@@ -1209,9 +1211,9 @@ module Aws::EC2
     #   The snapshot from which to create the volume. You must specify either
     #   a snapshot ID or a volume size.
     # @option options [String] :volume_type
-    #   The volume type. This can be `gp2` for General Purpose SSD, `io1` for
-    #   Provisioned IOPS SSD, `st1` for Throughput Optimized HDD, `sc1` for
-    #   Cold HDD, or `standard` for Magnetic volumes.
+    #   The volume type. This can be `gp2` for General Purpose SSD, `io1` or
+    #   `io2` for Provisioned IOPS SSD, `st1` for Throughput Optimized HDD,
+    #   `sc1` for Cold HDD, or `standard` for Magnetic volumes.
     #
     #   Default: `gp2`
     # @option options [Boolean] :dry_run
@@ -1445,7 +1447,7 @@ module Aws::EC2
     #           iops: 1,
     #           snapshot_id: "String",
     #           volume_size: 1,
-    #           volume_type: "standard", # accepts standard, io1, gp2, sc1, st1
+    #           volume_type: "standard", # accepts standard, io1, io2, gp2, sc1, st1
     #           kms_key_id: "String",
     #           encrypted: false,
     #         },
@@ -1733,7 +1735,7 @@ module Aws::EC2
     #     volume, in GiB.
     #
     #   * `block-device-mapping.volume-type` - The volume type of the EBS
-    #     volume (`gp2` \| `io1` \| `st1 `\| `sc1` \| `standard`).
+    #     volume (`gp2` \| `io1` \| `io2` \| `st1 `\| `sc1` \| `standard`).
     #
     #   * `block-device-mapping.encrypted` - A Boolean that indicates whether
     #     the EBS volume is encrypted.
@@ -3227,7 +3229,7 @@ module Aws::EC2
     #
     #   * `snapshot-id` - The snapshot from which the volume was created.
     #
-    #   * `status` - The status of the volume (`creating` \| `available` \|
+    #   * `status` - The state of the volume (`creating` \| `available` \|
     #     `in-use` \| `deleting` \| `deleted` \| `error`).
     #
     #   * `tag`\:&lt;key&gt; - The key/value combination of a tag assigned to
@@ -3243,8 +3245,8 @@ module Aws::EC2
     #   * `volume-id` - The volume ID.
     #
     #   * `volume-type` - The Amazon EBS volume type. This can be `gp2` for
-    #     General Purpose SSD, `io1` for Provisioned IOPS SSD, `st1` for
-    #     Throughput Optimized HDD, `sc1` for Cold HDD, or `standard` for
+    #     General Purpose SSD, `io1` or `io2` for Provisioned IOPS SSD, `st1`
+    #     for Throughput Optimized HDD, `sc1` for Cold HDD, or `standard` for
     #     Magnetic volumes.
     # @option options [Array<String>] :volume_ids
     #   The volume IDs.

@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.87.0 (2020-08-24)
+------------------
+
+* Feature - Add string length constraints to OpsDataAttributeName and OpsFilterValue.
+
 1.86.0 (2020-08-03)
 ------------------
 

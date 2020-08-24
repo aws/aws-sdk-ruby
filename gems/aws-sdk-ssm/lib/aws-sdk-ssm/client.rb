@@ -1783,13 +1783,13 @@ module Aws::SSM
       req.send_request(options)
     end
 
-    # Delete a custom inventory type, or the data associated with a custom
+    # Delete a custom inventory type or the data associated with a custom
     # Inventory type. Deleting a custom inventory type is also referred to
     # as deleting a custom inventory schema.
     #
     # @option params [required, String] :type_name
     #   The name of the custom inventory type for which you want to delete
-    #   either all previously collected data, or the inventory type itself.
+    #   either all previously collected data or the inventory type itself.
     #
     # @option params [String] :schema_delete_option
     #   Use the `SchemaDeleteOption` to delete a custom inventory type
@@ -1830,7 +1830,7 @@ module Aws::SSM
     #     type_name: "InventoryItemTypeName", # required
     #     schema_delete_option: "DisableSchema", # accepts DisableSchema, DeleteSchema
     #     dry_run: false,
-    #     client_token: "ClientToken",
+    #     client_token: "UUID",
     #   })
     #
     # @example Response structure
@@ -3258,7 +3258,7 @@ module Aws::SSM
     # @example Request syntax with placeholder values
     #
     #   resp = client.describe_inventory_deletions({
-    #     deletion_id: "InventoryDeletionId",
+    #     deletion_id: "UUID",
     #     next_token: "NextToken",
     #     max_results: 1,
     #   })
@@ -4488,6 +4488,12 @@ module Aws::SSM
     # next time that the Change Calendar state will transition. If you do
     # not specify a time, `GetCalendarState` assumes the current time.
     # Change Calendar entries have two possible states: `OPEN` or `CLOSED`.
+    #
+    # If you specify more than one calendar in a request, the command
+    # returns the status of `OPEN` only if all calendars in the request are
+    # open. If one or more calendars in the request are closed, the status
+    # returned is `CLOSED`.
+    #
     # For more information about Systems Manager Change Calendar, see [AWS
     # Systems Manager Change Calendar][1] in the *AWS Systems Manager User
     # Guide*.
@@ -7028,6 +7034,12 @@ module Aws::SSM
     #   The parameter value that you want to add to the system. Standard
     #   parameters have a value limit of 4 KB. Advanced parameters have a
     #   value limit of 8 KB.
+    #
+    #   <note markdown="1"> Parameters can't be referenced or nested in the values of other
+    #   parameters. You can't include `\{\{\}\}` or
+    #   `\{\{ssm:parameter-name\}\}` in a parameter value.
+    #
+    #    </note>
     #
     # @option params [String] :type
     #   The type of parameter that you want to add to the system.
@@ -9703,7 +9715,7 @@ module Aws::SSM
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-ssm'
-      context[:gem_version] = '1.86.0'
+      context[:gem_version] = '1.87.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

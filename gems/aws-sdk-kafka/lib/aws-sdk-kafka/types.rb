@@ -526,6 +526,10 @@ module Aws::Kafka
     #   match the regex "^\[0-9A-Za-z-\]+$".
     #   @return [String]
     #
+    # @!attribute [rw] state
+    #   The state of a configuration.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/kafka-2018-11-14/Configuration AWS API Documentation
     #
     class Configuration < Struct.new(
@@ -534,7 +538,8 @@ module Aws::Kafka
       :description,
       :kafka_versions,
       :latest_revision,
-      :name)
+      :name,
+      :state)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -826,13 +831,19 @@ module Aws::Kafka
     #   match the regex "^\[0-9A-Za-z-\]+$".
     #   @return [String]
     #
+    # @!attribute [rw] state
+    #   The state of the configuration. The possible states are ACTIVE,
+    #   DELETING and DELETE\_FAILED.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/kafka-2018-11-14/CreateConfigurationResponse AWS API Documentation
     #
     class CreateConfigurationResponse < Struct.new(
       :arn,
       :creation_time,
       :latest_revision,
-      :name)
+      :name,
+      :state)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -875,6 +886,47 @@ module Aws::Kafka
     #
     class DeleteClusterResponse < Struct.new(
       :cluster_arn,
+      :state)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Request body for DeleteConfiguration.
+    #
+    # @note When making an API call, you may pass DeleteConfigurationRequest
+    #   data as a hash:
+    #
+    #       {
+    #         arn: "__string", # required
+    #       }
+    #
+    # @!attribute [rw] arn
+    #   The Amazon Resource Name (ARN) of the configuration.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kafka-2018-11-14/DeleteConfigurationRequest AWS API Documentation
+    #
+    class DeleteConfigurationRequest < Struct.new(
+      :arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Response body for DeleteConfiguration.
+    #
+    # @!attribute [rw] arn
+    #   The Amazon Resource Name (ARN) of the configuration.
+    #   @return [String]
+    #
+    # @!attribute [rw] state
+    #   The state of the configuration. The possible states are ACTIVE,
+    #   DELETING and DELETE\_FAILED.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kafka-2018-11-14/DeleteConfigurationResponse AWS API Documentation
+    #
+    class DeleteConfigurationResponse < Struct.new(
+      :arn,
       :state)
       SENSITIVE = []
       include Aws::Structure
@@ -990,6 +1042,11 @@ module Aws::Kafka
     #   match the regex "^\[0-9A-Za-z-\]+$".
     #   @return [String]
     #
+    # @!attribute [rw] state
+    #   The state of the configuration. The possible states are ACTIVE,
+    #   DELETING and DELETE\_FAILED.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/kafka-2018-11-14/DescribeConfigurationResponse AWS API Documentation
     #
     class DescribeConfigurationResponse < Struct.new(
@@ -998,7 +1055,8 @@ module Aws::Kafka
       :description,
       :kafka_versions,
       :latest_revision,
-      :name)
+      :name,
+      :state)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2226,6 +2284,57 @@ module Aws::Kafka
     class UpdateClusterKafkaVersionResponse < Struct.new(
       :cluster_arn,
       :cluster_operation_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Request body for UpdateConfiguration.
+    #
+    # @note When making an API call, you may pass UpdateConfigurationRequest
+    #   data as a hash:
+    #
+    #       {
+    #         arn: "__string", # required
+    #         description: "__string",
+    #         server_properties: "data", # required
+    #       }
+    #
+    # @!attribute [rw] arn
+    #   The Amazon Resource Name (ARN) of the configuration.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   The description of the configuration.
+    #   @return [String]
+    #
+    # @!attribute [rw] server_properties
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kafka-2018-11-14/UpdateConfigurationRequest AWS API Documentation
+    #
+    class UpdateConfigurationRequest < Struct.new(
+      :arn,
+      :description,
+      :server_properties)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Response body for UpdateConfiguration.
+    #
+    # @!attribute [rw] arn
+    #   The Amazon Resource Name (ARN) of the configuration.
+    #   @return [String]
+    #
+    # @!attribute [rw] latest_revision
+    #   Latest revision of the configuration.
+    #   @return [Types::ConfigurationRevision]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kafka-2018-11-14/UpdateConfigurationResponse AWS API Documentation
+    #
+    class UpdateConfigurationResponse < Struct.new(
+      :arn,
+      :latest_revision)
       SENSITIVE = []
       include Aws::Structure
     end

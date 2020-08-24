@@ -1945,7 +1945,7 @@ module Aws::EC2
     # Encryption][1] in the *Amazon Elastic Compute Cloud User Guide*.
     #
     # After you attach an EBS volume, you must make it available. For more
-    # information, see [Making an EBS Volume Available For Use][2].
+    # information, see [Making an EBS volume available for use][2].
     #
     # If a volume has an AWS Marketplace product code:
     #
@@ -1960,7 +1960,7 @@ module Aws::EC2
     #   the product. For example, you can't detach a volume from a Windows
     #   instance and attach it to a Linux instance.
     #
-    # For more information, see [Attaching Amazon EBS Volumes][3] in the
+    # For more information, see [Attaching Amazon EBS volumes][3] in the
     # *Amazon Elastic Compute Cloud User Guide*.
     #
     #
@@ -3331,7 +3331,7 @@ module Aws::EC2
     # Snapshots created by copying another snapshot have an arbitrary volume
     # ID that should not be used for any purpose.
     #
-    # For more information, see [Copying an Amazon EBS Snapshot][1] in the
+    # For more information, see [Copying an Amazon EBS snapshot][1] in the
     # *Amazon Elastic Compute Cloud User Guide*.
     #
     #
@@ -5110,7 +5110,7 @@ module Aws::EC2
     #           iops: 1,
     #           snapshot_id: "String",
     #           volume_size: 1,
-    #           volume_type: "standard", # accepts standard, io1, gp2, sc1, st1
+    #           volume_type: "standard", # accepts standard, io1, io2, gp2, sc1, st1
     #           kms_key_id: "String",
     #           encrypted: false,
     #         },
@@ -5500,7 +5500,7 @@ module Aws::EC2
     #             kms_key_id: "KmsKeyId",
     #             snapshot_id: "SnapshotId",
     #             volume_size: 1,
-    #             volume_type: "standard", # accepts standard, io1, gp2, sc1, st1
+    #             volume_type: "standard", # accepts standard, io1, io2, gp2, sc1, st1
     #           },
     #           no_device: "String",
     #         },
@@ -5781,7 +5781,7 @@ module Aws::EC2
     #             kms_key_id: "KmsKeyId",
     #             snapshot_id: "SnapshotId",
     #             volume_size: 1,
-    #             volume_type: "standard", # accepts standard, io1, gp2, sc1, st1
+    #             volume_type: "standard", # accepts standard, io1, io2, gp2, sc1, st1
     #           },
     #           no_device: "String",
     #         },
@@ -5919,7 +5919,7 @@ module Aws::EC2
     #   resp.launch_template_version.launch_template_data.block_device_mappings[0].ebs.kms_key_id #=> String
     #   resp.launch_template_version.launch_template_data.block_device_mappings[0].ebs.snapshot_id #=> String
     #   resp.launch_template_version.launch_template_data.block_device_mappings[0].ebs.volume_size #=> Integer
-    #   resp.launch_template_version.launch_template_data.block_device_mappings[0].ebs.volume_type #=> String, one of "standard", "io1", "gp2", "sc1", "st1"
+    #   resp.launch_template_version.launch_template_data.block_device_mappings[0].ebs.volume_type #=> String, one of "standard", "io1", "io2", "gp2", "sc1", "st1"
     #   resp.launch_template_version.launch_template_data.block_device_mappings[0].no_device #=> String
     #   resp.launch_template_version.launch_template_data.network_interfaces #=> Array
     #   resp.launch_template_version.launch_template_data.network_interfaces[0].associate_carrier_ip_address #=> Boolean
@@ -7462,7 +7462,7 @@ module Aws::EC2
     # snapshots always remain protected.
     #
     # You can tag your snapshots during creation. For more information, see
-    # [Tagging Your Amazon EC2 Resources][1] in the *Amazon Elastic Compute
+    # [Tagging your Amazon EC2 resources][1] in the *Amazon Elastic Compute
     # Cloud User Guide*.
     #
     # For more information, see [Amazon Elastic Block Store][2] and [Amazon
@@ -8667,6 +8667,61 @@ module Aws::EC2
       req.send_request(options)
     end
 
+    # Creates a reference (route) to a prefix list in a specified transit
+    # gateway route table.
+    #
+    # @option params [required, String] :transit_gateway_route_table_id
+    #   The ID of the transit gateway route table.
+    #
+    # @option params [required, String] :prefix_list_id
+    #   The ID of the prefix list that is used for destination matches.
+    #
+    # @option params [String] :transit_gateway_attachment_id
+    #   The ID of the attachment to which traffic is routed.
+    #
+    # @option params [Boolean] :blackhole
+    #   Indicates whether to drop traffic that matches this route.
+    #
+    # @option params [Boolean] :dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #
+    # @return [Types::CreateTransitGatewayPrefixListReferenceResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateTransitGatewayPrefixListReferenceResult#transit_gateway_prefix_list_reference #transit_gateway_prefix_list_reference} => Types::TransitGatewayPrefixListReference
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_transit_gateway_prefix_list_reference({
+    #     transit_gateway_route_table_id: "TransitGatewayRouteTableId", # required
+    #     prefix_list_id: "PrefixListResourceId", # required
+    #     transit_gateway_attachment_id: "TransitGatewayAttachmentId",
+    #     blackhole: false,
+    #     dry_run: false,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.transit_gateway_prefix_list_reference.transit_gateway_route_table_id #=> String
+    #   resp.transit_gateway_prefix_list_reference.prefix_list_id #=> String
+    #   resp.transit_gateway_prefix_list_reference.prefix_list_owner_id #=> String
+    #   resp.transit_gateway_prefix_list_reference.state #=> String, one of "pending", "available", "modifying", "deleting"
+    #   resp.transit_gateway_prefix_list_reference.blackhole #=> Boolean
+    #   resp.transit_gateway_prefix_list_reference.transit_gateway_attachment.transit_gateway_attachment_id #=> String
+    #   resp.transit_gateway_prefix_list_reference.transit_gateway_attachment.resource_type #=> String, one of "vpc", "vpn", "direct-connect-gateway", "tgw-peering"
+    #   resp.transit_gateway_prefix_list_reference.transit_gateway_attachment.resource_id #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CreateTransitGatewayPrefixListReference AWS API Documentation
+    #
+    # @overload create_transit_gateway_prefix_list_reference(params = {})
+    # @param [Hash] params ({})
+    def create_transit_gateway_prefix_list_reference(params = {}, options = {})
+      req = build_request(:create_transit_gateway_prefix_list_reference, params)
+      req.send_request(options)
+    end
+
     # Creates a static route for the specified transit gateway route table.
     #
     # @option params [required, String] :destination_cidr_block
@@ -8705,6 +8760,7 @@ module Aws::EC2
     # @example Response structure
     #
     #   resp.route.destination_cidr_block #=> String
+    #   resp.route.prefix_list_id #=> String
     #   resp.route.transit_gateway_attachments #=> Array
     #   resp.route.transit_gateway_attachments[0].resource_id #=> String
     #   resp.route.transit_gateway_attachments[0].transit_gateway_attachment_id #=> String
@@ -8880,10 +8936,10 @@ module Aws::EC2
     # Elastic Compute Cloud User Guide*.
     #
     # You can tag your volumes during creation. For more information, see
-    # [Tagging Your Amazon EC2 Resources][3] in the *Amazon Elastic Compute
+    # [Tagging your Amazon EC2 resources][3] in the *Amazon Elastic Compute
     # Cloud User Guide*.
     #
-    # For more information, see [Creating an Amazon EBS Volume][4] in the
+    # For more information, see [Creating an Amazon EBS volume][4] in the
     # *Amazon Elastic Compute Cloud User Guide*.
     #
     #
@@ -8901,12 +8957,12 @@ module Aws::EC2
     #   setting the encryption state to `true` depends on the volume origin
     #   (new or from a snapshot), starting encryption state, ownership, and
     #   whether encryption by default is enabled. For more information, see
-    #   [Encryption by Default][1] in the *Amazon Elastic Compute Cloud User
+    #   [Encryption by default][1] in the *Amazon Elastic Compute Cloud User
     #   Guide*.
     #
     #   Encrypted Amazon EBS volumes must be attached to instances that
     #   support Amazon EBS encryption. For more information, see [Supported
-    #   Instance Types][2].
+    #   instance types][2].
     #
     #
     #
@@ -8914,14 +8970,16 @@ module Aws::EC2
     #   [2]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EBSEncryption.html#EBSEncryption_supported_instances
     #
     # @option params [Integer] :iops
-    #   The number of I/O operations per second (IOPS) to provision for the
-    #   volume, with a maximum ratio of 50 IOPS/GiB. Range is 100 to 64,000
-    #   IOPS for volumes in most Regions. Maximum IOPS of 64,000 is guaranteed
-    #   only on [Nitro-based instances][1]. Other instance families guarantee
+    #   The number of I/O operations per second (IOPS) to provision for an
+    #   `io1` or `io2` volume, with a maximum ratio of 50 IOPS/GiB for `io1`,
+    #   and 500 IOPS/GiB for `io2`. Range is 100 to 64,000 IOPS for volumes in
+    #   most Regions. Maximum IOPS of 64,000 is guaranteed only on
+    #   [Nitro-based instances][1]. Other instance families guarantee
     #   performance up to 32,000 IOPS. For more information, see [Amazon EBS
-    #   Volume Types][2] in the *Amazon Elastic Compute Cloud User Guide*.
+    #   volume types][2] in the *Amazon Elastic Compute Cloud User Guide*.
     #
-    #   This parameter is valid only for Provisioned IOPS SSD (io1) volumes.
+    #   This parameter is valid only for Provisioned IOPS SSD (`io1` and
+    #   `io2`) volumes.
     #
     #
     #
@@ -8957,10 +9015,10 @@ module Aws::EC2
     #   The size of the volume, in GiBs. You must specify either a snapshot ID
     #   or a volume size.
     #
-    #   Constraints: 1-16,384 for `gp2`, 4-16,384 for `io1`, 500-16,384 for
-    #   `st1`, 500-16,384 for `sc1`, and 1-1,024 for `standard`. If you
-    #   specify a snapshot, the volume size must be equal to or larger than
-    #   the snapshot size.
+    #   Constraints: 1-16,384 for `gp2`, 4-16,384 for `io1` and `io2`,
+    #   500-16,384 for `st1`, 500-16,384 for `sc1`, and 1-1,024 for
+    #   `standard`. If you specify a snapshot, the volume size must be equal
+    #   to or larger than the snapshot size.
     #
     #   Default: If you're creating the volume from a snapshot and don't
     #   specify a volume size, the default is the snapshot size.
@@ -8970,9 +9028,9 @@ module Aws::EC2
     #   a snapshot ID or a volume size.
     #
     # @option params [String] :volume_type
-    #   The volume type. This can be `gp2` for General Purpose SSD, `io1` for
-    #   Provisioned IOPS SSD, `st1` for Throughput Optimized HDD, `sc1` for
-    #   Cold HDD, or `standard` for Magnetic volumes.
+    #   The volume type. This can be `gp2` for General Purpose SSD, `io1` or
+    #   `io2` for Provisioned IOPS SSD, `st1` for Throughput Optimized HDD,
+    #   `sc1` for Cold HDD, or `standard` for Magnetic volumes.
     #
     #   Default: `gp2`
     #
@@ -9077,7 +9135,7 @@ module Aws::EC2
     #     outpost_arn: "String",
     #     size: 1,
     #     snapshot_id: "SnapshotId",
-    #     volume_type: "standard", # accepts standard, io1, gp2, sc1, st1
+    #     volume_type: "standard", # accepts standard, io1, io2, gp2, sc1, st1
     #     dry_run: false,
     #     tag_specifications: [
     #       {
@@ -9115,7 +9173,7 @@ module Aws::EC2
     #   resp.tags #=> Array
     #   resp.tags[0].key #=> String
     #   resp.tags[0].value #=> String
-    #   resp.volume_type #=> String, one of "standard", "io1", "gp2", "sc1", "st1"
+    #   resp.volume_type #=> String, one of "standard", "io1", "io2", "gp2", "sc1", "st1"
     #   resp.fast_restored #=> Boolean
     #   resp.multi_attach_enabled #=> Boolean
     #
@@ -11283,7 +11341,7 @@ module Aws::EC2
     # by a registered AMI. You must first de-register the AMI before you can
     # delete the snapshot.
     #
-    # For more information, see [Deleting an Amazon EBS Snapshot][1] in the
+    # For more information, see [Deleting an Amazon EBS snapshot][1] in the
     # *Amazon Elastic Compute Cloud User Guide*.
     #
     #
@@ -11764,6 +11822,53 @@ module Aws::EC2
       req.send_request(options)
     end
 
+    # Deletes a reference (route) to a prefix list in a specified transit
+    # gateway route table.
+    #
+    # @option params [required, String] :transit_gateway_route_table_id
+    #   The ID of the route table.
+    #
+    # @option params [required, String] :prefix_list_id
+    #   The ID of the prefix list.
+    #
+    # @option params [Boolean] :dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #
+    # @return [Types::DeleteTransitGatewayPrefixListReferenceResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DeleteTransitGatewayPrefixListReferenceResult#transit_gateway_prefix_list_reference #transit_gateway_prefix_list_reference} => Types::TransitGatewayPrefixListReference
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_transit_gateway_prefix_list_reference({
+    #     transit_gateway_route_table_id: "TransitGatewayRouteTableId", # required
+    #     prefix_list_id: "PrefixListResourceId", # required
+    #     dry_run: false,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.transit_gateway_prefix_list_reference.transit_gateway_route_table_id #=> String
+    #   resp.transit_gateway_prefix_list_reference.prefix_list_id #=> String
+    #   resp.transit_gateway_prefix_list_reference.prefix_list_owner_id #=> String
+    #   resp.transit_gateway_prefix_list_reference.state #=> String, one of "pending", "available", "modifying", "deleting"
+    #   resp.transit_gateway_prefix_list_reference.blackhole #=> Boolean
+    #   resp.transit_gateway_prefix_list_reference.transit_gateway_attachment.transit_gateway_attachment_id #=> String
+    #   resp.transit_gateway_prefix_list_reference.transit_gateway_attachment.resource_type #=> String, one of "vpc", "vpn", "direct-connect-gateway", "tgw-peering"
+    #   resp.transit_gateway_prefix_list_reference.transit_gateway_attachment.resource_id #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DeleteTransitGatewayPrefixListReference AWS API Documentation
+    #
+    # @overload delete_transit_gateway_prefix_list_reference(params = {})
+    # @param [Hash] params ({})
+    def delete_transit_gateway_prefix_list_reference(params = {}, options = {})
+      req = build_request(:delete_transit_gateway_prefix_list_reference, params)
+      req.send_request(options)
+    end
+
     # Deletes the specified route from the specified transit gateway route
     # table.
     #
@@ -11795,6 +11900,7 @@ module Aws::EC2
     # @example Response structure
     #
     #   resp.route.destination_cidr_block #=> String
+    #   resp.route.prefix_list_id #=> String
     #   resp.route.transit_gateway_attachments #=> Array
     #   resp.route.transit_gateway_attachments[0].resource_id #=> String
     #   resp.route.transit_gateway_attachments[0].transit_gateway_attachment_id #=> String
@@ -11908,7 +12014,7 @@ module Aws::EC2
     #
     # The volume can remain in the `deleting` state for several minutes.
     #
-    # For more information, see [Deleting an Amazon EBS Volume][1] in the
+    # For more information, see [Deleting an Amazon EBS volume][1] in the
     # *Amazon Elastic Compute Cloud User Guide*.
     #
     #
@@ -15842,7 +15948,7 @@ module Aws::EC2
     #   resp.block_device_mappings[0].ebs.iops #=> Integer
     #   resp.block_device_mappings[0].ebs.snapshot_id #=> String
     #   resp.block_device_mappings[0].ebs.volume_size #=> Integer
-    #   resp.block_device_mappings[0].ebs.volume_type #=> String, one of "standard", "io1", "gp2", "sc1", "st1"
+    #   resp.block_device_mappings[0].ebs.volume_type #=> String, one of "standard", "io1", "io2", "gp2", "sc1", "st1"
     #   resp.block_device_mappings[0].ebs.kms_key_id #=> String
     #   resp.block_device_mappings[0].ebs.encrypted #=> Boolean
     #   resp.block_device_mappings[0].no_device #=> String
@@ -15904,7 +16010,7 @@ module Aws::EC2
     #     volume, in GiB.
     #
     #   * `block-device-mapping.volume-type` - The volume type of the EBS
-    #     volume (`gp2` \| `io1` \| `st1 `\| `sc1` \| `standard`).
+    #     volume (`gp2` \| `io1` \| `io2` \| `st1 `\| `sc1` \| `standard`).
     #
     #   * `block-device-mapping.encrypted` - A Boolean that indicates whether
     #     the EBS volume is encrypted.
@@ -16082,7 +16188,7 @@ module Aws::EC2
     #   resp.images[0].block_device_mappings[0].ebs.iops #=> Integer
     #   resp.images[0].block_device_mappings[0].ebs.snapshot_id #=> String
     #   resp.images[0].block_device_mappings[0].ebs.volume_size #=> Integer
-    #   resp.images[0].block_device_mappings[0].ebs.volume_type #=> String, one of "standard", "io1", "gp2", "sc1", "st1"
+    #   resp.images[0].block_device_mappings[0].ebs.volume_type #=> String, one of "standard", "io1", "io2", "gp2", "sc1", "st1"
     #   resp.images[0].block_device_mappings[0].ebs.kms_key_id #=> String
     #   resp.images[0].block_device_mappings[0].ebs.encrypted #=> Boolean
     #   resp.images[0].block_device_mappings[0].no_device #=> String
@@ -18118,7 +18224,7 @@ module Aws::EC2
     #   resp.launch_template_versions[0].launch_template_data.block_device_mappings[0].ebs.kms_key_id #=> String
     #   resp.launch_template_versions[0].launch_template_data.block_device_mappings[0].ebs.snapshot_id #=> String
     #   resp.launch_template_versions[0].launch_template_data.block_device_mappings[0].ebs.volume_size #=> Integer
-    #   resp.launch_template_versions[0].launch_template_data.block_device_mappings[0].ebs.volume_type #=> String, one of "standard", "io1", "gp2", "sc1", "st1"
+    #   resp.launch_template_versions[0].launch_template_data.block_device_mappings[0].ebs.volume_type #=> String, one of "standard", "io1", "io2", "gp2", "sc1", "st1"
     #   resp.launch_template_versions[0].launch_template_data.block_device_mappings[0].no_device #=> String
     #   resp.launch_template_versions[0].launch_template_data.network_interfaces #=> Array
     #   resp.launch_template_versions[0].launch_template_data.network_interfaces[0].associate_carrier_ip_address #=> Boolean
@@ -22271,7 +22377,7 @@ module Aws::EC2
     #   resp.spot_fleet_request_configs[0].spot_fleet_request_config.launch_specifications[0].block_device_mappings[0].ebs.iops #=> Integer
     #   resp.spot_fleet_request_configs[0].spot_fleet_request_config.launch_specifications[0].block_device_mappings[0].ebs.snapshot_id #=> String
     #   resp.spot_fleet_request_configs[0].spot_fleet_request_config.launch_specifications[0].block_device_mappings[0].ebs.volume_size #=> Integer
-    #   resp.spot_fleet_request_configs[0].spot_fleet_request_config.launch_specifications[0].block_device_mappings[0].ebs.volume_type #=> String, one of "standard", "io1", "gp2", "sc1", "st1"
+    #   resp.spot_fleet_request_configs[0].spot_fleet_request_config.launch_specifications[0].block_device_mappings[0].ebs.volume_type #=> String, one of "standard", "io1", "io2", "gp2", "sc1", "st1"
     #   resp.spot_fleet_request_configs[0].spot_fleet_request_config.launch_specifications[0].block_device_mappings[0].ebs.kms_key_id #=> String
     #   resp.spot_fleet_request_configs[0].spot_fleet_request_config.launch_specifications[0].block_device_mappings[0].ebs.encrypted #=> Boolean
     #   resp.spot_fleet_request_configs[0].spot_fleet_request_config.launch_specifications[0].block_device_mappings[0].no_device #=> String
@@ -22416,9 +22522,9 @@ module Aws::EC2
     #     volume, in GiB.
     #
     #   * `launch.block-device-mapping.volume-type` - The type of EBS volume:
-    #     `gp2` for General Purpose SSD, `io1` for Provisioned IOPS SSD, `st1`
-    #     for Throughput Optimized HDD, `sc1`for Cold HDD, or `standard` for
-    #     Magnetic.
+    #     `gp2` for General Purpose SSD, `io1` or `io2` for Provisioned IOPS
+    #     SSD, `st1` for Throughput Optimized HDD, `sc1`for Cold HDD, or
+    #     `standard` for Magnetic.
     #
     #   * `launch.group-id` - The ID of the security group for the instance.
     #
@@ -22625,7 +22731,7 @@ module Aws::EC2
     #   resp.spot_instance_requests[0].launch_specification.block_device_mappings[0].ebs.iops #=> Integer
     #   resp.spot_instance_requests[0].launch_specification.block_device_mappings[0].ebs.snapshot_id #=> String
     #   resp.spot_instance_requests[0].launch_specification.block_device_mappings[0].ebs.volume_size #=> Integer
-    #   resp.spot_instance_requests[0].launch_specification.block_device_mappings[0].ebs.volume_type #=> String, one of "standard", "io1", "gp2", "sc1", "st1"
+    #   resp.spot_instance_requests[0].launch_specification.block_device_mappings[0].ebs.volume_type #=> String, one of "standard", "io1", "io2", "gp2", "sc1", "st1"
     #   resp.spot_instance_requests[0].launch_specification.block_device_mappings[0].ebs.kms_key_id #=> String
     #   resp.spot_instance_requests[0].launch_specification.block_device_mappings[0].ebs.encrypted #=> Boolean
     #   resp.spot_instance_requests[0].launch_specification.block_device_mappings[0].no_device #=> String
@@ -23517,7 +23623,8 @@ module Aws::EC2
     #   * `resource-owner-id` - The ID of the AWS account that owns the
     #     resource.
     #
-    #   * `resource-type` - The resource type (`vpc` \| `vpn`).
+    #   * `resource-type` - The resource type (`vpc` \| `vpn` \|
+    #     `direct-connect-gateway` \| `tgw-peering`).
     #
     #   * `state` - The state of the attachment (`available` \| `deleted` \|
     #     `deleting` \| `failed` \| `modifying` \| `pendingAcceptance` \|
@@ -24124,8 +24231,8 @@ module Aws::EC2
     # check fails, the overall status is `impaired`. If the status is
     # `insufficient-data`, then the checks may still be taking place on your
     # volume at the time. We recommend that you retry the request. For more
-    # information about volume status, see [Monitoring the Status of Your
-    # Volumes][1] in the *Amazon Elastic Compute Cloud User Guide*.
+    # information about volume status, see [Monitoring the status of your
+    # volumes][1] in the *Amazon Elastic Compute Cloud User Guide*.
     #
     # *Events*\: Reflect the cause of a volume status and may require you to
     # take action. For example, if your volume returns an `impaired` status,
@@ -24386,7 +24493,7 @@ module Aws::EC2
     #
     #   * `snapshot-id` - The snapshot from which the volume was created.
     #
-    #   * `status` - The status of the volume (`creating` \| `available` \|
+    #   * `status` - The state of the volume (`creating` \| `available` \|
     #     `in-use` \| `deleting` \| `deleted` \| `error`).
     #
     #   * `tag`\:&lt;key&gt; - The key/value combination of a tag assigned to
@@ -24402,8 +24509,8 @@ module Aws::EC2
     #   * `volume-id` - The volume ID.
     #
     #   * `volume-type` - The Amazon EBS volume type. This can be `gp2` for
-    #     General Purpose SSD, `io1` for Provisioned IOPS SSD, `st1` for
-    #     Throughput Optimized HDD, `sc1` for Cold HDD, or `standard` for
+    #     General Purpose SSD, `io1` or `io2` for Provisioned IOPS SSD, `st1`
+    #     for Throughput Optimized HDD, `sc1` for Cold HDD, or `standard` for
     #     Magnetic volumes.
     #
     # @option params [Array<String>] :volume_ids
@@ -24560,7 +24667,7 @@ module Aws::EC2
     #   resp.volumes[0].tags #=> Array
     #   resp.volumes[0].tags[0].key #=> String
     #   resp.volumes[0].tags[0].value #=> String
-    #   resp.volumes[0].volume_type #=> String, one of "standard", "io1", "gp2", "sc1", "st1"
+    #   resp.volumes[0].volume_type #=> String, one of "standard", "io1", "io2", "gp2", "sc1", "st1"
     #   resp.volumes[0].fast_restored #=> Boolean
     #   resp.volumes[0].multi_attach_enabled #=> Boolean
     #   resp.next_token #=> String
@@ -24591,7 +24698,7 @@ module Aws::EC2
     # You can also use CloudWatch Events to check the status of a
     # modification to an EBS volume. For information about CloudWatch
     # Events, see the [Amazon CloudWatch Events User Guide][1]. For more
-    # information, see [Monitoring Volume Modifications][2] in the *Amazon
+    # information, see [Monitoring volume modifications][2] in the *Amazon
     # Elastic Compute Cloud User Guide*.
     #
     #
@@ -24619,7 +24726,7 @@ module Aws::EC2
     #   * `original-size` - The original size of the volume, in GiB.
     #
     #   * `original-volume-type` - The original volume type of the volume
-    #     (standard \| io1 \| gp2 \| sc1 \| st1).
+    #     (standard \| io1 \| io2 \| gp2 \| sc1 \| st1).
     #
     #   * `originalMultiAttachEnabled` - Indicates whether Multi-Attach
     #     support was enabled (true \| false).
@@ -24631,7 +24738,7 @@ module Aws::EC2
     #   * `target-size` - The target size of the volume, in GiB.
     #
     #   * `target-volume-type` - The target volume type of the volume
-    #     (standard \| io1 \| gp2 \| sc1 \| st1).
+    #     (standard \| io1 \| io2 \| gp2 \| sc1 \| st1).
     #
     #   * `targetMultiAttachEnabled` - Indicates whether Multi-Attach support
     #     is to be enabled (true \| false).
@@ -24675,10 +24782,10 @@ module Aws::EC2
     #   resp.volumes_modifications[0].status_message #=> String
     #   resp.volumes_modifications[0].target_size #=> Integer
     #   resp.volumes_modifications[0].target_iops #=> Integer
-    #   resp.volumes_modifications[0].target_volume_type #=> String, one of "standard", "io1", "gp2", "sc1", "st1"
+    #   resp.volumes_modifications[0].target_volume_type #=> String, one of "standard", "io1", "io2", "gp2", "sc1", "st1"
     #   resp.volumes_modifications[0].original_size #=> Integer
     #   resp.volumes_modifications[0].original_iops #=> Integer
-    #   resp.volumes_modifications[0].original_volume_type #=> String, one of "standard", "io1", "gp2", "sc1", "st1"
+    #   resp.volumes_modifications[0].original_volume_type #=> String, one of "standard", "io1", "io2", "gp2", "sc1", "st1"
     #   resp.volumes_modifications[0].progress #=> Integer
     #   resp.volumes_modifications[0].start_time #=> Time
     #   resp.volumes_modifications[0].end_time #=> Time
@@ -26121,7 +26228,7 @@ module Aws::EC2
     # When a volume with an AWS Marketplace product code is detached from an
     # instance, the product code is no longer associated with the instance.
     #
-    # For more information, see [Detaching an Amazon EBS Volume][1] in the
+    # For more information, see [Detaching an Amazon EBS volume][1] in the
     # *Amazon Elastic Compute Cloud User Guide*.
     #
     #
@@ -26931,7 +27038,7 @@ module Aws::EC2
     #
     # After you enable encryption by default, you can no longer launch
     # instances using instance types that do not support encryption. For
-    # more information, see [Supported Instance Types][2].
+    # more information, see [Supported instance types][2].
     #
     #
     #
@@ -26975,7 +27082,7 @@ module Aws::EC2
     # restores, use DescribeFastSnapshotRestores. To disable fast snapshot
     # restores, use DisableFastSnapshotRestores.
     #
-    # For more information, see [Amazon EBS Fast Snapshot Restore][1] in the
+    # For more information, see [Amazon EBS fast snapshot restore][1] in the
     # *Amazon Elastic Compute Cloud User Guide*.
     #
     #
@@ -28193,7 +28300,7 @@ module Aws::EC2
     #   resp.launch_template_data.block_device_mappings[0].ebs.kms_key_id #=> String
     #   resp.launch_template_data.block_device_mappings[0].ebs.snapshot_id #=> String
     #   resp.launch_template_data.block_device_mappings[0].ebs.volume_size #=> Integer
-    #   resp.launch_template_data.block_device_mappings[0].ebs.volume_type #=> String, one of "standard", "io1", "gp2", "sc1", "st1"
+    #   resp.launch_template_data.block_device_mappings[0].ebs.volume_type #=> String, one of "standard", "io1", "io2", "gp2", "sc1", "st1"
     #   resp.launch_template_data.block_device_mappings[0].no_device #=> String
     #   resp.launch_template_data.network_interfaces #=> Array
     #   resp.launch_template_data.network_interfaces[0].associate_carrier_ip_address #=> Boolean
@@ -28672,6 +28779,92 @@ module Aws::EC2
       req.send_request(options)
     end
 
+    # Gets information about the prefix list references in a specified
+    # transit gateway route table.
+    #
+    # @option params [required, String] :transit_gateway_route_table_id
+    #   The ID of the transit gateway route table.
+    #
+    # @option params [Array<Types::Filter>] :filters
+    #   One or more filters. The possible values are:
+    #
+    #   * `attachment.resource-id` - The ID of the resource for the
+    #     attachment.
+    #
+    #   * `attachment.resource-type` - The type of resource for the attachment
+    #     (`vpc` \| `vpn` \| `direct-connect-gateway` \| `tgw-peering`).
+    #
+    #   * `attachment.transit-gateway-attachment-id` - The ID of the
+    #     attachment.
+    #
+    #   * `is-blackhole` - Whether traffic matching the route is blocked
+    #     (`true` \| `false`).
+    #
+    #   * `prefix-list-id` - The ID of the prefix list.
+    #
+    #   * `prefix-list-owner-id` - The ID of the owner of the prefix list.
+    #
+    #   * `state` - The state of the prefix list reference (`pending` \|
+    #     `available` \| `modifying` \| `deleting`).
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of results to return with a single call. To
+    #   retrieve the remaining results, make another call with the returned
+    #   `nextToken` value.
+    #
+    # @option params [String] :next_token
+    #   The token for the next page of results.
+    #
+    # @option params [Boolean] :dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #
+    # @return [Types::GetTransitGatewayPrefixListReferencesResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetTransitGatewayPrefixListReferencesResult#transit_gateway_prefix_list_references #transit_gateway_prefix_list_references} => Array&lt;Types::TransitGatewayPrefixListReference&gt;
+    #   * {Types::GetTransitGatewayPrefixListReferencesResult#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_transit_gateway_prefix_list_references({
+    #     transit_gateway_route_table_id: "TransitGatewayRouteTableId", # required
+    #     filters: [
+    #       {
+    #         name: "String",
+    #         values: ["String"],
+    #       },
+    #     ],
+    #     max_results: 1,
+    #     next_token: "String",
+    #     dry_run: false,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.transit_gateway_prefix_list_references #=> Array
+    #   resp.transit_gateway_prefix_list_references[0].transit_gateway_route_table_id #=> String
+    #   resp.transit_gateway_prefix_list_references[0].prefix_list_id #=> String
+    #   resp.transit_gateway_prefix_list_references[0].prefix_list_owner_id #=> String
+    #   resp.transit_gateway_prefix_list_references[0].state #=> String, one of "pending", "available", "modifying", "deleting"
+    #   resp.transit_gateway_prefix_list_references[0].blackhole #=> Boolean
+    #   resp.transit_gateway_prefix_list_references[0].transit_gateway_attachment.transit_gateway_attachment_id #=> String
+    #   resp.transit_gateway_prefix_list_references[0].transit_gateway_attachment.resource_type #=> String, one of "vpc", "vpn", "direct-connect-gateway", "tgw-peering"
+    #   resp.transit_gateway_prefix_list_references[0].transit_gateway_attachment.resource_id #=> String
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/GetTransitGatewayPrefixListReferences AWS API Documentation
+    #
+    # @overload get_transit_gateway_prefix_list_references(params = {})
+    # @param [Hash] params ({})
+    def get_transit_gateway_prefix_list_references(params = {}, options = {})
+      req = build_request(:get_transit_gateway_prefix_list_references, params)
+      req.send_request(options)
+    end
+
     # Gets information about the associations for the specified transit
     # gateway route table.
     #
@@ -28683,7 +28876,8 @@ module Aws::EC2
     #
     #   * `resource-id` - The ID of the resource.
     #
-    #   * `resource-type` - The resource type (`vpc` \| `vpn`).
+    #   * `resource-type` - The resource type (`vpc` \| `vpn` \|
+    #     `direct-connect-gateway` \| `tgw-peering`).
     #
     #   * `transit-gateway-attachment-id` - The ID of the attachment.
     #
@@ -28752,7 +28946,8 @@ module Aws::EC2
     #
     #   * `resource-id` - The ID of the resource.
     #
-    #   * `resource-type` - The resource type (`vpc` \| `vpn`).
+    #   * `resource-type` - The resource type (`vpc` \| `vpn` \|
+    #     `direct-connect-gateway` \| `tgw-peering`).
     #
     #   * `transit-gateway-attachment-id` - The ID of the attachment.
     #
@@ -31321,7 +31516,7 @@ module Aws::EC2
     # cannot be shared with other accounts.
     #
     # For more information about modifying snapshot permissions, see
-    # [Sharing Snapshots][1] in the *Amazon Elastic Compute Cloud User
+    # [Sharing snapshots][1] in the *Amazon Elastic Compute Cloud User
     # Guide*.
     #
     #
@@ -31890,6 +32085,132 @@ module Aws::EC2
       req.send_request(options)
     end
 
+    # Modifies the specified transit gateway. When you modify a transit
+    # gateway, the modified options are applied to new transit gateway
+    # attachments only. Your existing transit gateway attachments are not
+    # modified.
+    #
+    # @option params [required, String] :transit_gateway_id
+    #   The ID of the transit gateway.
+    #
+    # @option params [String] :description
+    #   The description for the transit gateway.
+    #
+    # @option params [Types::ModifyTransitGatewayOptions] :options
+    #   The options to modify.
+    #
+    # @option params [Boolean] :dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #
+    # @return [Types::ModifyTransitGatewayResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ModifyTransitGatewayResult#transit_gateway #transit_gateway} => Types::TransitGateway
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.modify_transit_gateway({
+    #     transit_gateway_id: "TransitGatewayId", # required
+    #     description: "String",
+    #     options: {
+    #       vpn_ecmp_support: "enable", # accepts enable, disable
+    #       dns_support: "enable", # accepts enable, disable
+    #       auto_accept_shared_attachments: "enable", # accepts enable, disable
+    #       default_route_table_association: "enable", # accepts enable, disable
+    #       association_default_route_table_id: "TransitGatewayRouteTableId",
+    #       default_route_table_propagation: "enable", # accepts enable, disable
+    #       propagation_default_route_table_id: "TransitGatewayRouteTableId",
+    #     },
+    #     dry_run: false,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.transit_gateway.transit_gateway_id #=> String
+    #   resp.transit_gateway.transit_gateway_arn #=> String
+    #   resp.transit_gateway.state #=> String, one of "pending", "available", "modifying", "deleting", "deleted"
+    #   resp.transit_gateway.owner_id #=> String
+    #   resp.transit_gateway.description #=> String
+    #   resp.transit_gateway.creation_time #=> Time
+    #   resp.transit_gateway.options.amazon_side_asn #=> Integer
+    #   resp.transit_gateway.options.auto_accept_shared_attachments #=> String, one of "enable", "disable"
+    #   resp.transit_gateway.options.default_route_table_association #=> String, one of "enable", "disable"
+    #   resp.transit_gateway.options.association_default_route_table_id #=> String
+    #   resp.transit_gateway.options.default_route_table_propagation #=> String, one of "enable", "disable"
+    #   resp.transit_gateway.options.propagation_default_route_table_id #=> String
+    #   resp.transit_gateway.options.vpn_ecmp_support #=> String, one of "enable", "disable"
+    #   resp.transit_gateway.options.dns_support #=> String, one of "enable", "disable"
+    #   resp.transit_gateway.options.multicast_support #=> String, one of "enable", "disable"
+    #   resp.transit_gateway.tags #=> Array
+    #   resp.transit_gateway.tags[0].key #=> String
+    #   resp.transit_gateway.tags[0].value #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ModifyTransitGateway AWS API Documentation
+    #
+    # @overload modify_transit_gateway(params = {})
+    # @param [Hash] params ({})
+    def modify_transit_gateway(params = {}, options = {})
+      req = build_request(:modify_transit_gateway, params)
+      req.send_request(options)
+    end
+
+    # Modifies a reference (route) to a prefix list in a specified transit
+    # gateway route table.
+    #
+    # @option params [required, String] :transit_gateway_route_table_id
+    #   The ID of the transit gateway route table.
+    #
+    # @option params [required, String] :prefix_list_id
+    #   The ID of the prefix list.
+    #
+    # @option params [String] :transit_gateway_attachment_id
+    #   The ID of the attachment to which traffic is routed.
+    #
+    # @option params [Boolean] :blackhole
+    #   Indicates whether to drop traffic that matches this route.
+    #
+    # @option params [Boolean] :dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #
+    # @return [Types::ModifyTransitGatewayPrefixListReferenceResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ModifyTransitGatewayPrefixListReferenceResult#transit_gateway_prefix_list_reference #transit_gateway_prefix_list_reference} => Types::TransitGatewayPrefixListReference
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.modify_transit_gateway_prefix_list_reference({
+    #     transit_gateway_route_table_id: "TransitGatewayRouteTableId", # required
+    #     prefix_list_id: "PrefixListResourceId", # required
+    #     transit_gateway_attachment_id: "TransitGatewayAttachmentId",
+    #     blackhole: false,
+    #     dry_run: false,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.transit_gateway_prefix_list_reference.transit_gateway_route_table_id #=> String
+    #   resp.transit_gateway_prefix_list_reference.prefix_list_id #=> String
+    #   resp.transit_gateway_prefix_list_reference.prefix_list_owner_id #=> String
+    #   resp.transit_gateway_prefix_list_reference.state #=> String, one of "pending", "available", "modifying", "deleting"
+    #   resp.transit_gateway_prefix_list_reference.blackhole #=> Boolean
+    #   resp.transit_gateway_prefix_list_reference.transit_gateway_attachment.transit_gateway_attachment_id #=> String
+    #   resp.transit_gateway_prefix_list_reference.transit_gateway_attachment.resource_type #=> String, one of "vpc", "vpn", "direct-connect-gateway", "tgw-peering"
+    #   resp.transit_gateway_prefix_list_reference.transit_gateway_attachment.resource_id #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ModifyTransitGatewayPrefixListReference AWS API Documentation
+    #
+    # @overload modify_transit_gateway_prefix_list_reference(params = {})
+    # @param [Hash] params ({})
+    def modify_transit_gateway_prefix_list_reference(params = {}, options = {})
+      req = build_request(:modify_transit_gateway_prefix_list_reference, params)
+      req.send_request(options)
+    end
+
     # Modifies the specified VPC attachment.
     #
     # @option params [required, String] :transit_gateway_attachment_id
@@ -31962,30 +32283,30 @@ module Aws::EC2
     # attached to a current-generation EC2 instance type, you may be able to
     # apply these changes without stopping the instance or detaching the
     # volume from it. For more information about modifying an EBS volume
-    # running Linux, see [Modifying the Size, IOPS, or Type of an EBS Volume
+    # running Linux, see [Modifying the size, IOPS, or type of an EBS volume
     # on Linux][1]. For more information about modifying an EBS volume
-    # running Windows, see [Modifying the Size, IOPS, or Type of an EBS
-    # Volume on Windows][2].
+    # running Windows, see [Modifying the size, IOPS, or type of an EBS
+    # volume on Windows][2].
     #
     # When you complete a resize operation on your volume, you need to
     # extend the volume's file-system size to take advantage of the new
     # storage capacity. For information about extending a Linux file system,
-    # see [Extending a Linux File System][3]. For information about
-    # extending a Windows file system, see [Extending a Windows File
-    # System][4].
+    # see [Extending a Linux file system][3]. For information about
+    # extending a Windows file system, see [Extending a Windows file
+    # system][4].
     #
     # You can use CloudWatch Events to check the status of a modification to
     # an EBS volume. For information about CloudWatch Events, see the
     # [Amazon CloudWatch Events User Guide][5]. You can also track the
     # status of a modification using DescribeVolumesModifications. For
     # information about tracking status changes using either method, see
-    # [Monitoring Volume Modifications][6].
+    # [Monitoring volume modifications][6].
     #
     # With previous-generation instance types, resizing an EBS volume may
     # require detaching and reattaching the volume or stopping and
     # restarting the instance. For more information, see [Modifying the
-    # Size, IOPS, or Type of an EBS Volume on Linux][1] and [Modifying the
-    # Size, IOPS, or Type of an EBS Volume on Windows][2].
+    # size, IOPS, or type of an EBS volume on Linux][1] and [Modifying the
+    # size, IOPS, or type of an EBS volume on Windows][2].
     #
     # If you reach the maximum volume modification rate per volume limit,
     # you will need to wait at least six hours before applying further
@@ -32029,8 +32350,9 @@ module Aws::EC2
     # @option params [Integer] :iops
     #   The target IOPS rate of the volume.
     #
-    #   This is only valid for Provisioned IOPS SSD (`io1`) volumes. For more
-    #   information, see [Provisioned IOPS SSD (io1) Volumes][1].
+    #   This is only valid for Provisioned IOPS SSD (`io1` and `io2`) volumes.
+    #   For moreinformation, see [ Provisioned IOPS SSD (io1 and io2)
+    #   volumes][1].
     #
     #   Default: If no IOPS value is specified, the existing value is
     #   retained.
@@ -32049,7 +32371,7 @@ module Aws::EC2
     #     dry_run: false,
     #     volume_id: "VolumeId", # required
     #     size: 1,
-    #     volume_type: "standard", # accepts standard, io1, gp2, sc1, st1
+    #     volume_type: "standard", # accepts standard, io1, io2, gp2, sc1, st1
     #     iops: 1,
     #   })
     #
@@ -32060,10 +32382,10 @@ module Aws::EC2
     #   resp.volume_modification.status_message #=> String
     #   resp.volume_modification.target_size #=> Integer
     #   resp.volume_modification.target_iops #=> Integer
-    #   resp.volume_modification.target_volume_type #=> String, one of "standard", "io1", "gp2", "sc1", "st1"
+    #   resp.volume_modification.target_volume_type #=> String, one of "standard", "io1", "io2", "gp2", "sc1", "st1"
     #   resp.volume_modification.original_size #=> Integer
     #   resp.volume_modification.original_iops #=> Integer
-    #   resp.volume_modification.original_volume_type #=> String, one of "standard", "io1", "gp2", "sc1", "st1"
+    #   resp.volume_modification.original_volume_type #=> String, one of "standard", "io1", "io2", "gp2", "sc1", "st1"
     #   resp.volume_modification.progress #=> Integer
     #   resp.volume_modification.start_time #=> Time
     #   resp.volume_modification.end_time #=> Time
@@ -33680,7 +34002,7 @@ module Aws::EC2
     #           iops: 1,
     #           snapshot_id: "String",
     #           volume_size: 1,
-    #           volume_type: "standard", # accepts standard, io1, gp2, sc1, st1
+    #           volume_type: "standard", # accepts standard, io1, io2, gp2, sc1, st1
     #           kms_key_id: "String",
     #           encrypted: false,
     #         },
@@ -34625,6 +34947,7 @@ module Aws::EC2
     # @example Response structure
     #
     #   resp.route.destination_cidr_block #=> String
+    #   resp.route.prefix_list_id #=> String
     #   resp.route.transit_gateway_attachments #=> Array
     #   resp.route.transit_gateway_attachments[0].resource_id #=> String
     #   resp.route.transit_gateway_attachments[0].transit_gateway_attachment_id #=> String
@@ -34951,7 +35274,7 @@ module Aws::EC2
     #                 iops: 1,
     #                 snapshot_id: "String",
     #                 volume_size: 1,
-    #                 volume_type: "standard", # accepts standard, io1, gp2, sc1, st1
+    #                 volume_type: "standard", # accepts standard, io1, io2, gp2, sc1, st1
     #                 kms_key_id: "String",
     #                 encrypted: false,
     #               },
@@ -35287,7 +35610,7 @@ module Aws::EC2
     #             iops: 1,
     #             snapshot_id: "String",
     #             volume_size: 1,
-    #             volume_type: "standard", # accepts standard, io1, gp2, sc1, st1
+    #             volume_type: "standard", # accepts standard, io1, io2, gp2, sc1, st1
     #             kms_key_id: "String",
     #             encrypted: false,
     #           },
@@ -35383,7 +35706,7 @@ module Aws::EC2
     #   resp.spot_instance_requests[0].launch_specification.block_device_mappings[0].ebs.iops #=> Integer
     #   resp.spot_instance_requests[0].launch_specification.block_device_mappings[0].ebs.snapshot_id #=> String
     #   resp.spot_instance_requests[0].launch_specification.block_device_mappings[0].ebs.volume_size #=> Integer
-    #   resp.spot_instance_requests[0].launch_specification.block_device_mappings[0].ebs.volume_type #=> String, one of "standard", "io1", "gp2", "sc1", "st1"
+    #   resp.spot_instance_requests[0].launch_specification.block_device_mappings[0].ebs.volume_type #=> String, one of "standard", "io1", "io2", "gp2", "sc1", "st1"
     #   resp.spot_instance_requests[0].launch_specification.block_device_mappings[0].ebs.kms_key_id #=> String
     #   resp.spot_instance_requests[0].launch_specification.block_device_mappings[0].ebs.encrypted #=> Boolean
     #   resp.spot_instance_requests[0].launch_specification.block_device_mappings[0].no_device #=> String
@@ -35679,7 +36002,7 @@ module Aws::EC2
     # Resets permission settings for the specified snapshot.
     #
     # For more information about modifying snapshot permissions, see
-    # [Sharing Snapshots][1] in the *Amazon Elastic Compute Cloud User
+    # [Sharing snapshots][1] in the *Amazon Elastic Compute Cloud User
     # Guide*.
     #
     #
@@ -36591,7 +36914,7 @@ module Aws::EC2
     #           iops: 1,
     #           snapshot_id: "String",
     #           volume_size: 1,
-    #           volume_type: "standard", # accepts standard, io1, gp2, sc1, st1
+    #           volume_type: "standard", # accepts standard, io1, io2, gp2, sc1, st1
     #           kms_key_id: "String",
     #           encrypted: false,
     #         },
@@ -37242,7 +37565,9 @@ module Aws::EC2
     #     attachment.
     #
     #   * `attachment.resource-type` - The attachment resource type (`vpc` \|
-    #     `vpn`).
+    #     `vpn` \| `direct-connect-gateway` \| `tgw-peering`).
+    #
+    #   * `prefix-list-id` - The ID of the prefix list.
     #
     #   * `route-search.exact-match` - The exact match of the specified
     #     filter.
@@ -37295,6 +37620,7 @@ module Aws::EC2
     #
     #   resp.routes #=> Array
     #   resp.routes[0].destination_cidr_block #=> String
+    #   resp.routes[0].prefix_list_id #=> String
     #   resp.routes[0].transit_gateway_attachments #=> Array
     #   resp.routes[0].transit_gateway_attachments[0].resource_id #=> String
     #   resp.routes[0].transit_gateway_attachments[0].transit_gateway_attachment_id #=> String
@@ -38218,7 +38544,7 @@ module Aws::EC2
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-ec2'
-      context[:gem_version] = '1.188.0'
+      context[:gem_version] = '1.189.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -384,7 +384,7 @@ module Aws::IoTSiteWise
     end
 
     # Contains current status information for an asset model. For more
-    # information, see [Asset and Model States][1] in the *AWS IoT SiteWise
+    # information, see [Asset and model states][1] in the *AWS IoT SiteWise
     # User Guide*.
     #
     #
@@ -468,7 +468,7 @@ module Aws::IoTSiteWise
     #   The property alias that identifies the property, such as an OPC-UA
     #   server data stream path (for example,
     #   `/company/windfarm/3/turbine/7/temperature`). For more information,
-    #   see [Mapping Industrial Data Streams to Asset Properties][1] in the
+    #   see [Mapping industrial data streams to asset properties][1] in the
     #   *AWS IoT SiteWise User Guide*.
     #
     #
@@ -478,7 +478,7 @@ module Aws::IoTSiteWise
     #
     # @!attribute [rw] notification
     #   The asset property's notification topic and state. For more
-    #   information, see [UpdateAssetProperty][1]
+    #   information, see [UpdateAssetProperty][1].
     #
     #
     #
@@ -544,7 +544,7 @@ module Aws::IoTSiteWise
     end
 
     # Contains information about the current status of an asset. For more
-    # information, see [Asset and Model States][1] in the *AWS IoT SiteWise
+    # information, see [Asset and model states][1] in the *AWS IoT SiteWise
     # User Guide*.
     #
     #
@@ -638,7 +638,7 @@ module Aws::IoTSiteWise
     #   The ID of a hierarchy in the parent asset's model. Hierarchies
     #   allow different groupings of assets to be formed that all come from
     #   the same asset model. For more information, see [Asset
-    #   Hierarchies][1] in the *AWS IoT SiteWise User Guide*.
+    #   hierarchies][1] in the *AWS IoT SiteWise User Guide*.
     #
     #
     #
@@ -739,7 +739,7 @@ module Aws::IoTSiteWise
     #   The default value of the asset model property attribute. All assets
     #   that you create from the asset model contain this attribute value.
     #   You can update an attribute's value after you create an asset. For
-    #   more information, see [Updating Attribute Values][1] in the *AWS IoT
+    #   more information, see [Updating attribute values][1] in the *AWS IoT
     #   SiteWise User Guide*.
     #
     #
@@ -1123,7 +1123,7 @@ module Aws::IoTSiteWise
     #
     # @!attribute [rw] asset_model_properties
     #   The property definitions of the asset model. For more information,
-    #   see [Asset Properties][1] in the *AWS IoT SiteWise User Guide*.
+    #   see [Asset properties][1] in the *AWS IoT SiteWise User Guide*.
     #
     #   You can specify up to 200 properties per asset model. For more
     #   information, see [Quotas][2] in the *AWS IoT SiteWise User Guide*.
@@ -1138,7 +1138,7 @@ module Aws::IoTSiteWise
     #   The hierarchy definitions of the asset model. Each hierarchy
     #   specifies an asset model whose assets can be children of any other
     #   assets created from this asset model. For more information, see
-    #   [Asset Hierarchies][1] in the *AWS IoT SiteWise User Guide*.
+    #   [Asset hierarchies][1] in the *AWS IoT SiteWise User Guide*.
     #
     #   You can specify up to 10 hierarchies per asset model. For more
     #   information, see [Quotas][2] in the *AWS IoT SiteWise User Guide*.
@@ -1311,7 +1311,7 @@ module Aws::IoTSiteWise
     #
     # @!attribute [rw] dashboard_definition
     #   The dashboard definition specified in a JSON literal. For detailed
-    #   information, see [Creating Dashboards (CLI)][1] in the *AWS IoT
+    #   information, see [Creating dashboards (CLI)][1] in the *AWS IoT
     #   SiteWise User Guide*.
     #
     #
@@ -2191,7 +2191,7 @@ module Aws::IoTSiteWise
     #
     # @!attribute [rw] dashboard_definition
     #   The dashboard's definition JSON literal. For detailed information,
-    #   see [Creating Dashboards (CLI)][1] in the *AWS IoT SiteWise User
+    #   see [Creating dashboards (CLI)][1] in the *AWS IoT SiteWise User
     #   Guide*.
     #
     #
@@ -2552,7 +2552,7 @@ module Aws::IoTSiteWise
     #   allow different groupings of assets to be formed that all come from
     #   the same asset model. You can use the hierarchy ID to identify the
     #   correct asset to disassociate. For more information, see [Asset
-    #   Hierarchies][1] in the *AWS IoT SiteWise User Guide*.
+    #   hierarchies][1] in the *AWS IoT SiteWise User Guide*.
     #
     #
     #
@@ -2745,7 +2745,7 @@ module Aws::IoTSiteWise
     #   The property alias that identifies the property, such as an OPC-UA
     #   server data stream path (for example,
     #   `/company/windfarm/3/turbine/7/temperature`). For more information,
-    #   see [Mapping Industrial Data Streams to Asset Properties][1] in the
+    #   see [Mapping industrial data streams to asset properties][1] in the
     #   *AWS IoT SiteWise User Guide*.
     #
     #
@@ -2777,6 +2777,8 @@ module Aws::IoTSiteWise
     #
     # @!attribute [rw] time_ordering
     #   The chronological sorting order of the requested information.
+    #
+    #   Default: `ASCENDING`
     #   @return [String]
     #
     # @!attribute [rw] next_token
@@ -2785,6 +2787,8 @@ module Aws::IoTSiteWise
     #
     # @!attribute [rw] max_results
     #   The maximum number of results to be returned per paginated request.
+    #
+    #   Default: 100
     #   @return [Integer]
     #
     class GetAssetPropertyAggregatesRequest < Struct.new(
@@ -2846,7 +2850,7 @@ module Aws::IoTSiteWise
     #   The property alias that identifies the property, such as an OPC-UA
     #   server data stream path (for example,
     #   `/company/windfarm/3/turbine/7/temperature`). For more information,
-    #   see [Mapping Industrial Data Streams to Asset Properties][1] in the
+    #   see [Mapping industrial data streams to asset properties][1] in the
     #   *AWS IoT SiteWise User Guide*.
     #
     #
@@ -2870,6 +2874,8 @@ module Aws::IoTSiteWise
     #
     # @!attribute [rw] time_ordering
     #   The chronological sorting order of the requested information.
+    #
+    #   Default: `ASCENDING`
     #   @return [String]
     #
     # @!attribute [rw] next_token
@@ -2878,6 +2884,8 @@ module Aws::IoTSiteWise
     #
     # @!attribute [rw] max_results
     #   The maximum number of results to be returned per paginated request.
+    #
+    #   Default: 100
     #   @return [Integer]
     #
     class GetAssetPropertyValueHistoryRequest < Struct.new(
@@ -2931,7 +2939,7 @@ module Aws::IoTSiteWise
     #   The property alias that identifies the property, such as an OPC-UA
     #   server data stream path (for example,
     #   `/company/windfarm/3/turbine/7/temperature`). For more information,
-    #   see [Mapping Industrial Data Streams to Asset Properties][1] in the
+    #   see [Mapping industrial data streams to asset properties][1] in the
     #   *AWS IoT SiteWise User Guide*.
     #
     #
@@ -3214,6 +3222,8 @@ module Aws::IoTSiteWise
     #
     # @!attribute [rw] max_results
     #   The maximum number of results to be returned per paginated request.
+    #
+    #   Default: 50
     #   @return [Integer]
     #
     class ListAccessPoliciesRequest < Struct.new(
@@ -3257,6 +3267,8 @@ module Aws::IoTSiteWise
     #
     # @!attribute [rw] max_results
     #   The maximum number of results to be returned per paginated request.
+    #
+    #   Default: 50
     #   @return [Integer]
     #
     class ListAssetModelsRequest < Struct.new(
@@ -3298,6 +3310,8 @@ module Aws::IoTSiteWise
     #
     # @!attribute [rw] max_results
     #   The maximum number of results to be returned per paginated request.
+    #
+    #   Default: 50
     #   @return [Integer]
     #
     # @!attribute [rw] asset_model_id
@@ -3307,13 +3321,15 @@ module Aws::IoTSiteWise
     #
     # @!attribute [rw] filter
     #   The filter for the requested list of assets. Choose one of the
-    #   following options. Defaults to `ALL`.
+    #   following options:
     #
     #   * `ALL` – The list includes all assets for a given asset model ID.
     #     The `assetModelId` parameter is required if you filter by `ALL`.
     #
     #   * `TOP_LEVEL` – The list includes only top-level assets in the asset
     #     hierarchy tree.
+    #
+    #   Default: `ALL`
     #   @return [String]
     #
     class ListAssetsRequest < Struct.new(
@@ -3346,21 +3362,23 @@ module Aws::IoTSiteWise
     #
     #       {
     #         asset_id: "ID", # required
-    #         hierarchy_id: "ID", # required
+    #         hierarchy_id: "ID",
+    #         traversal_direction: "PARENT", # accepts PARENT, CHILD
     #         next_token: "NextToken",
     #         max_results: 1,
     #       }
     #
     # @!attribute [rw] asset_id
-    #   The ID of the parent asset.
+    #   The ID of the asset to query.
     #   @return [String]
     #
     # @!attribute [rw] hierarchy_id
-    #   The hierarchy ID (of the parent asset model) whose associated assets
-    #   are returned. To find a hierarchy ID, use the [DescribeAsset][1] or
-    #   [DescribeAssetModel][2] actions.
+    #   The ID of the hierarchy by which child assets are associated to the
+    #   asset. To find a hierarchy ID, use the [DescribeAsset][1] or
+    #   [DescribeAssetModel][2] operations. This parameter is required if
+    #   you choose `CHILD` for `traversalDirection`.
     #
-    #   For more information, see [Asset Hierarchies][3] in the *AWS IoT
+    #   For more information, see [Asset hierarchies][3] in the *AWS IoT
     #   SiteWise User Guide*.
     #
     #
@@ -3370,17 +3388,33 @@ module Aws::IoTSiteWise
     #   [3]: https://docs.aws.amazon.com/iot-sitewise/latest/userguide/asset-hierarchies.html
     #   @return [String]
     #
+    # @!attribute [rw] traversal_direction
+    #   The direction to list associated assets. Choose one of the following
+    #   options:
+    #
+    #   * `CHILD` – The list includes all child assets associated to the
+    #     asset. The `hierarchyId` parameter is required if you choose
+    #     `CHILD`.
+    #
+    #   * `PARENT` – The list includes the asset's parent asset.
+    #
+    #   Default: `CHILD`
+    #   @return [String]
+    #
     # @!attribute [rw] next_token
     #   The token to be used for the next set of paginated results.
     #   @return [String]
     #
     # @!attribute [rw] max_results
     #   The maximum number of results to be returned per paginated request.
+    #
+    #   Default: 50
     #   @return [Integer]
     #
     class ListAssociatedAssetsRequest < Struct.new(
       :asset_id,
       :hierarchy_id,
+      :traversal_direction,
       :next_token,
       :max_results)
       SENSITIVE = []
@@ -3422,6 +3456,8 @@ module Aws::IoTSiteWise
     #
     # @!attribute [rw] max_results
     #   The maximum number of results to be returned per paginated request.
+    #
+    #   Default: 50
     #   @return [Integer]
     #
     class ListDashboardsRequest < Struct.new(
@@ -3462,6 +3498,8 @@ module Aws::IoTSiteWise
     #
     # @!attribute [rw] max_results
     #   The maximum number of results to be returned per paginated request.
+    #
+    #   Default: 50
     #   @return [Integer]
     #
     class ListGatewaysRequest < Struct.new(
@@ -3501,6 +3539,8 @@ module Aws::IoTSiteWise
     #
     # @!attribute [rw] max_results
     #   The maximum number of results to be returned per paginated request.
+    #
+    #   Default: 50
     #   @return [Integer]
     #
     class ListPortalsRequest < Struct.new(
@@ -3545,6 +3585,8 @@ module Aws::IoTSiteWise
     #
     # @!attribute [rw] max_results
     #   The maximum number of results to be returned per paginated request.
+    #
+    #   Default: 50
     #   @return [Integer]
     #
     class ListProjectAssetsRequest < Struct.new(
@@ -3591,6 +3633,8 @@ module Aws::IoTSiteWise
     #
     # @!attribute [rw] max_results
     #   The maximum number of results to be returned per paginated request.
+    #
+    #   Default: 50
     #   @return [Integer]
     #
     class ListProjectsRequest < Struct.new(
@@ -3869,6 +3913,10 @@ module Aws::IoTSiteWise
     #   [2]: https://docs.aws.amazon.com/iot-sitewise/latest/userguide/monitor-service-role.html
     #   @return [String]
     #
+    # @!attribute [rw] status
+    #   Contains information about the current status of a portal.
+    #   @return [Types::PortalStatus]
+    #
     class PortalSummary < Struct.new(
       :id,
       :name,
@@ -3876,7 +3924,8 @@ module Aws::IoTSiteWise
       :start_url,
       :creation_date,
       :last_update_date,
-      :role_arn)
+      :role_arn,
+      :status)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3946,7 +3995,7 @@ module Aws::IoTSiteWise
     #   The property alias that identifies the property, such as an OPC-UA
     #   server data stream path (for example,
     #   `/company/windfarm/3/turbine/7/temperature`). For more information,
-    #   see [Mapping Industrial Data Streams to Asset Properties][1] in the
+    #   see [Mapping industrial data streams to asset properties][1] in the
     #   *AWS IoT SiteWise User Guide*.
     #
     #
@@ -3956,7 +4005,7 @@ module Aws::IoTSiteWise
     #
     # @!attribute [rw] notification
     #   The asset property's notification topic and state. For more
-    #   information, see [UpdateAssetProperty][1]
+    #   information, see [UpdateAssetProperty][1].
     #
     #
     #
@@ -3991,7 +4040,7 @@ module Aws::IoTSiteWise
     # Contains asset property value notification information. When the
     # notification state is enabled, AWS IoT SiteWise publishes property
     # value updates to a unique MQTT topic. For more information, see
-    # [Interacting with Other Services][1] in the *AWS IoT SiteWise User
+    # [Interacting with other services][1] in the *AWS IoT SiteWise User
     # Guide*.
     #
     #
@@ -4145,7 +4194,7 @@ module Aws::IoTSiteWise
     #   The property alias that identifies the property, such as an OPC-UA
     #   server data stream path (for example,
     #   `/company/windfarm/3/turbine/7/temperature`). For more information,
-    #   see [Mapping Industrial Data Streams to Asset Properties][1] in the
+    #   see [Mapping industrial data streams to asset properties][1] in the
     #   *AWS IoT SiteWise User Guide*.
     #
     #
@@ -4622,7 +4671,7 @@ module Aws::IoTSiteWise
     #
     # @!attribute [rw] asset_model_properties
     #   The updated property definitions of the asset model. For more
-    #   information, see [Asset Properties][1] in the *AWS IoT SiteWise User
+    #   information, see [Asset properties][1] in the *AWS IoT SiteWise User
     #   Guide*.
     #
     #   You can specify up to 200 properties per asset model. For more
@@ -4638,7 +4687,7 @@ module Aws::IoTSiteWise
     #   The updated hierarchy definitions of the asset model. Each hierarchy
     #   specifies an asset model whose assets can be children of any other
     #   assets created from this asset model. For more information, see
-    #   [Asset Hierarchies][1] in the *AWS IoT SiteWise User Guide*.
+    #   [Asset hierarchies][1] in the *AWS IoT SiteWise User Guide*.
     #
     #   You can specify up to 10 hierarchies per asset model. For more
     #   information, see [Quotas][2] in the *AWS IoT SiteWise User Guide*.
@@ -4703,7 +4752,7 @@ module Aws::IoTSiteWise
     #   The property alias that identifies the property, such as an OPC-UA
     #   server data stream path (for example,
     #   `/company/windfarm/3/turbine/7/temperature`). For more information,
-    #   see [Mapping Industrial Data Streams to Asset Properties][1] in the
+    #   see [Mapping industrial data streams to asset properties][1] in the
     #   *AWS IoT SiteWise User Guide*.
     #
     #   If you omit this parameter, the alias is removed from the property.
@@ -4717,7 +4766,7 @@ module Aws::IoTSiteWise
     #   The MQTT notification state (enabled or disabled) for this asset
     #   property. When the notification state is enabled, AWS IoT SiteWise
     #   publishes property value updates to a unique MQTT topic. For more
-    #   information, see [Interacting with Other Services][1] in the *AWS
+    #   information, see [Interacting with other services][1] in the *AWS
     #   IoT SiteWise User Guide*.
     #
     #   If you omit this parameter, the notification state is set to
@@ -4817,7 +4866,7 @@ module Aws::IoTSiteWise
     #
     # @!attribute [rw] dashboard_definition
     #   The new dashboard definition, as specified in a JSON literal. For
-    #   detailed information, see [Creating Dashboards (CLI)][1] in the *AWS
+    #   detailed information, see [Creating dashboards (CLI)][1] in the *AWS
     #   IoT SiteWise User Guide*.
     #
     #
@@ -5107,7 +5156,7 @@ module Aws::IoTSiteWise
     #   several hierarchies using the same model and therefore the same
     #   `propertyId`. For example, you might have separately grouped assets
     #   that come from the same asset model. For more information, see
-    #   [Asset Hierarchies][1] in the *AWS IoT SiteWise User Guide*.
+    #   [Asset hierarchies][1] in the *AWS IoT SiteWise User Guide*.
     #
     #
     #

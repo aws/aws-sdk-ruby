@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.35.0 (2020-08-24)
+------------------
+
+* Feature - Documentation updates for CloudWatch Logs
+
 1.34.0 (2020-07-02)
 ------------------
 

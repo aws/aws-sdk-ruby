@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.8.0 (2020-08-24)
+------------------
+
+* Feature - Add traversalDirection to ListAssociatedAssetsRequest and add portal status to ListPortalsResponse
+
 1.7.0 (2020-07-06)
 ------------------
 

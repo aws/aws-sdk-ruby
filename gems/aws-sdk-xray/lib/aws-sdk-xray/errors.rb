@@ -28,8 +28,10 @@ module Aws::XRay
   #
   # ## Error Classes
   # * {InvalidRequestException}
+  # * {ResourceNotFoundException}
   # * {RuleLimitExceededException}
   # * {ThrottledException}
+  # * {TooManyTagsException}
   #
   # Additionally, error classes are dynamically generated for service errors based on the error code
   # if they are not defined above.
@@ -49,6 +51,26 @@ module Aws::XRay
       # @return [String]
       def message
         @message || @data[:message]
+      end
+    end
+
+    class ResourceNotFoundException < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::XRay::Types::ResourceNotFoundException] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+
+      # @return [String]
+      def message
+        @message || @data[:message]
+      end
+
+      # @return [String]
+      def resource_name
+        @data[:resource_name]
       end
     end
 
@@ -79,6 +101,26 @@ module Aws::XRay
       # @return [String]
       def message
         @message || @data[:message]
+      end
+    end
+
+    class TooManyTagsException < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::XRay::Types::TooManyTagsException] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+
+      # @return [String]
+      def message
+        @message || @data[:message]
+      end
+
+      # @return [String]
+      def resource_name
+        @data[:resource_name]
       end
     end
 

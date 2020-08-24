@@ -470,6 +470,7 @@ module Aws::Kafka
     #   * {Types::CreateConfigurationResponse#creation_time #creation_time} => Time
     #   * {Types::CreateConfigurationResponse#latest_revision #latest_revision} => Types::ConfigurationRevision
     #   * {Types::CreateConfigurationResponse#name #name} => String
+    #   * {Types::CreateConfigurationResponse#state #state} => String
     #
     # @example Request syntax with placeholder values
     #
@@ -488,6 +489,7 @@ module Aws::Kafka
     #   resp.latest_revision.description #=> String
     #   resp.latest_revision.revision #=> Integer
     #   resp.name #=> String
+    #   resp.state #=> String, one of "ACTIVE", "DELETING", "DELETE_FAILED"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/kafka-2018-11-14/CreateConfiguration AWS API Documentation
     #
@@ -528,6 +530,37 @@ module Aws::Kafka
     # @param [Hash] params ({})
     def delete_cluster(params = {}, options = {})
       req = build_request(:delete_cluster, params)
+      req.send_request(options)
+    end
+
+    # Deletes the specified MSK configuration. The configuration must be in
+    # the ACTIVE or DELETE\_FAILED state.
+    #
+    # @option params [required, String] :arn
+    #   The Amazon Resource Name (ARN) of the configuration.
+    #
+    # @return [Types::DeleteConfigurationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DeleteConfigurationResponse#arn #arn} => String
+    #   * {Types::DeleteConfigurationResponse#state #state} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_configuration({
+    #     arn: "__string", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.arn #=> String
+    #   resp.state #=> String, one of "ACTIVE", "DELETING", "DELETE_FAILED"
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kafka-2018-11-14/DeleteConfiguration AWS API Documentation
+    #
+    # @overload delete_configuration(params = {})
+    # @param [Hash] params ({})
+    def delete_configuration(params = {}, options = {})
+      req = build_request(:delete_configuration, params)
       req.send_request(options)
     end
 
@@ -677,6 +710,7 @@ module Aws::Kafka
     #   * {Types::DescribeConfigurationResponse#kafka_versions #kafka_versions} => Array&lt;String&gt;
     #   * {Types::DescribeConfigurationResponse#latest_revision #latest_revision} => Types::ConfigurationRevision
     #   * {Types::DescribeConfigurationResponse#name #name} => String
+    #   * {Types::DescribeConfigurationResponse#state #state} => String
     #
     # @example Request syntax with placeholder values
     #
@@ -695,6 +729,7 @@ module Aws::Kafka
     #   resp.latest_revision.description #=> String
     #   resp.latest_revision.revision #=> Integer
     #   resp.name #=> String
+    #   resp.state #=> String, one of "ACTIVE", "DELETING", "DELETE_FAILED"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/kafka-2018-11-14/DescribeConfiguration AWS API Documentation
     #
@@ -1031,6 +1066,7 @@ module Aws::Kafka
     #   resp.configurations[0].latest_revision.description #=> String
     #   resp.configurations[0].latest_revision.revision #=> Integer
     #   resp.configurations[0].name #=> String
+    #   resp.configurations[0].state #=> String, one of "ACTIVE", "DELETING", "DELETE_FAILED"
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/kafka-2018-11-14/ListConfigurations AWS API Documentation
@@ -1337,6 +1373,46 @@ module Aws::Kafka
       req.send_request(options)
     end
 
+    # Updates an existing MSK configuration. The configuration must be in
+    # the Active state.
+    #
+    # @option params [required, String] :arn
+    #   The Amazon Resource Name (ARN) of the configuration.
+    #
+    # @option params [String] :description
+    #   The description of the configuration.
+    #
+    # @option params [required, String, StringIO, File] :server_properties
+    #
+    # @return [Types::UpdateConfigurationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::UpdateConfigurationResponse#arn #arn} => String
+    #   * {Types::UpdateConfigurationResponse#latest_revision #latest_revision} => Types::ConfigurationRevision
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_configuration({
+    #     arn: "__string", # required
+    #     description: "__string",
+    #     server_properties: "data", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.arn #=> String
+    #   resp.latest_revision.creation_time #=> Time
+    #   resp.latest_revision.description #=> String
+    #   resp.latest_revision.revision #=> Integer
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kafka-2018-11-14/UpdateConfiguration AWS API Documentation
+    #
+    # @overload update_configuration(params = {})
+    # @param [Hash] params ({})
+    def update_configuration(params = {}, options = {})
+      req = build_request(:update_configuration, params)
+      req.send_request(options)
+    end
+
     # Updates the cluster with the configuration that is specified in the
     # request body.
     #
@@ -1510,7 +1586,7 @@ module Aws::Kafka
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-kafka'
-      context[:gem_version] = '1.24.0'
+      context[:gem_version] = '1.25.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 
