@@ -3,7 +3,7 @@
 require_relative './spec_helper'
 
 module Aws
-  module RDS
+  module Neptune
     describe Client do
       let(:client) do
         Client.new(
@@ -20,96 +20,6 @@ module Aws
 
       before do
         allow(Time).to receive(:now).and_return(time)
-      end
-
-      context '#copy_db_snapshot' do
-        let(:source_db_snapshot_identifier) do
-          "arn:aws:rds:#{source_region}:123456789012:snapshot:source-db-snapshot"
-        end
-        let(:target_db_snapshot_identifier) { 'target-db-snapshot' }
-
-        context 'no source_region and no pre_signed_url' do
-          it 'does not generate pre_signed_url' do
-            resp = client.copy_db_snapshot(
-              kms_key_id: kms_key_id,
-              source_db_snapshot_identifier: source_db_snapshot_identifier,
-              target_db_snapshot_identifier: target_db_snapshot_identifier
-            )
-            expect(resp.context.params[:pre_signed_url]).to be nil
-          end
-        end
-
-        context 'source_region and pre_signed_url' do
-          it 'uses provided pre_signed_url' do
-            resp = client.copy_db_snapshot(
-              pre_signed_url: 'pre_signed_url',
-              kms_key_id: kms_key_id,
-              source_db_snapshot_identifier: source_db_snapshot_identifier,
-              target_db_snapshot_identifier: target_db_snapshot_identifier
-            )
-            expect(resp.context.params[:pre_signed_url]).to be 'pre_signed_url'
-          end
-        end
-
-        context 'source_region and no pre_signed_url' do
-          it 'generates pre_signed_url' do
-            resp = client.copy_db_snapshot(
-              source_region: source_region,
-              kms_key_id: kms_key_id,
-              source_db_snapshot_identifier: source_db_snapshot_identifier,
-              target_db_snapshot_identifier: target_db_snapshot_identifier
-            )
-
-            expect(resp.context.params[:pre_signed_url]).to match(
-              /bb861ad9e7f34e184c1a5355a3e95b1b3fcecaa2e15be3c8f7d16fa7bb95ee59/
-            )
-          end
-        end
-      end
-
-      context 'create_db_instance_read_replica' do
-        let(:source_db_instance_identifier) do
-          "arn:aws:rds:#{source_region}:123456789012:db:source-db-instance"
-        end
-        let(:db_instance_identifier) { 'target-db-instance' }
-
-        context 'no source_region and no pre_signed_url' do
-          it 'does not generate pre_signed_url' do
-            resp = client.create_db_instance_read_replica(
-              kms_key_id: kms_key_id,
-              source_db_instance_identifier: source_db_instance_identifier,
-              db_instance_identifier: db_instance_identifier
-            )
-            expect(resp.context.params[:pre_signed_url]).to be nil
-          end
-        end
-
-        context 'source_region and pre_signed_url' do
-          it 'uses provided pre_signed_url' do
-            resp = client.create_db_instance_read_replica(
-              pre_signed_url: 'pre_signed_url',
-              kms_key_id: kms_key_id,
-              source_db_instance_identifier: source_db_instance_identifier,
-              db_instance_identifier: db_instance_identifier
-            )
-            expect(resp.context.params[:pre_signed_url]).to be 'pre_signed_url'
-          end
-        end
-
-        context 'source_region and no pre_signed_url' do
-          it 'generates pre_signed_url' do
-            resp = client.create_db_instance_read_replica(
-              source_region: source_region,
-              kms_key_id: kms_key_id,
-              source_db_instance_identifier: source_db_instance_identifier,
-              db_instance_identifier: db_instance_identifier
-            )
-
-            expect(resp.context.params[:pre_signed_url]).to match(
-              /74530787996bb82614e434da8a3f9d38ad785e2eb9121e2b538aeb16f6e27906/
-            )
-          end
-        end
       end
 
       context 'copy_db_cluster_snapshot' do

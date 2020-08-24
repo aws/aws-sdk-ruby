@@ -29,6 +29,7 @@ require 'aws-sdk-core/plugins/transfer_encoding.rb'
 require 'aws-sdk-core/plugins/http_checksum.rb'
 require 'aws-sdk-core/plugins/signature_v4.rb'
 require 'aws-sdk-core/plugins/protocols/query.rb'
+require 'aws-sdk-neptune/plugins/cross_region_copying.rb'
 
 Aws::Plugins::GlobalConfiguration.add_identifier(:neptune)
 
@@ -75,6 +76,7 @@ module Aws::Neptune
     add_plugin(Aws::Plugins::HttpChecksum)
     add_plugin(Aws::Plugins::SignatureV4)
     add_plugin(Aws::Plugins::Protocols::Query)
+    add_plugin(Aws::Neptune::Plugins::CrossRegionCopying)
 
     # @overload initialize(options)
     #   @param [Hash] options
