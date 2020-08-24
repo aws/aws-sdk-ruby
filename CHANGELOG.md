@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+2.11.572 (2020-08-24)
+------------------
+
 * Feature - Aws::DatabaseMigrationService - Updated the API, and documentation for AWS Database Migration Service.
 
 * Feature - Aws::EC2 - Updated the API, and documentation for Amazon Elastic Compute Cloud.
