@@ -18,9 +18,9 @@ require_relative 'aws-sdk-core/ecs_credentials'
 require_relative 'aws-sdk-core/instance_profile_credentials'
 require_relative 'aws-sdk-core/shared_credentials'
 require_relative 'aws-sdk-core/process_credentials'
+require_relative 'aws-sdk-core/sso_credentials'
 
 # client modules
-
 require_relative 'aws-sdk-core/client_stubs'
 require_relative 'aws-sdk-core/async_client_stubs'
 require_relative 'aws-sdk-core/eager_loader'
@@ -86,9 +86,11 @@ require_relative 'aws-sdk-core/client_side_monitoring/publisher'
 require_relative 'aws-sdk-core/arn'
 require_relative 'aws-sdk-core/arn_parser'
 
-# aws-sdk-sts is vendored to support Aws::AssumeRoleCredentials
-
+# aws-sdk-sts is included to support Aws::AssumeRoleCredentials
 require 'aws-sdk-sts'
+
+# aws-sdk-sso is included to support Aws::SSOCredentials
+require 'aws-sdk-sso'
 
 module Aws
 

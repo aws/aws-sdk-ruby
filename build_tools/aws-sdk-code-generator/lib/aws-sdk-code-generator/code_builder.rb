@@ -59,7 +59,7 @@ module AwsSdkCodeGenerator
           y.yield("#{prefix}/plugins/apig_endpoint.rb", apig_endpoint_class)
         end
         y.yield("#{prefix}.rb", service_module(prefix))
-        unless prefix == 'aws-sdk-sts'
+        unless %w[aws-sdk-sts aws-sdk-sso].include? prefix
           y.yield("#{prefix}/customizations.rb", '')
         end
         y.yield("#{prefix}/types.rb", types_module)
