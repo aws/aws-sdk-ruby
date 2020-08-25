@@ -42,12 +42,12 @@ module Aws
         context 'source_region and pre_signed_url' do
           it 'uses provided pre_signed_url' do
             resp = client.copy_db_snapshot(
-              pre_signed_url: 'pre_signed_url',
+              pre_signed_url: 'https://aws.com',
               kms_key_id: kms_key_id,
               source_db_snapshot_identifier: source_db_snapshot_identifier,
               target_db_snapshot_identifier: target_db_snapshot_identifier
             )
-            expect(resp.context.params[:pre_signed_url]).to be 'pre_signed_url'
+            expect(resp.context.params[:pre_signed_url]).to be 'https://aws.com'
           end
         end
 
@@ -59,6 +59,9 @@ module Aws
               source_db_snapshot_identifier: source_db_snapshot_identifier,
               target_db_snapshot_identifier: target_db_snapshot_identifier
             )
+
+            puts "local: https://rds.us-east-1.amazonaws.com?Action=CopyDBSnapshot&DestinationRegion=us-west-2&KmsKeyId=238f8ec9-420a-0690-8ec9-009f34fc3ef5&SourceDBSnapshotIdentifier=arn%3Aaws%3Ards%3Aus-east-1%3A123456789012%3Asnapshot%3Asource-db-snapshot&TargetDBSnapshotIdentifier=target-db-snapshot&Version=2014-10-31&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=akid%2F20200827%2Fus-east-1%2Frds%2Faws4_request&X-Amz-Date=20200827T070000Z&X-Amz-Expires=3600&X-Amz-SignedHeaders=host&X-Amz-Signature=bb861ad9e7f34e184c1a5355a3e95b1b3fcecaa2e15be3c8f7d16fa7bb95ee59"
+            puts "remote: #{resp.context.params[:pre_signed_url]}"
 
             expect(resp.context.params[:pre_signed_url]).to match(
               /bb861ad9e7f34e184c1a5355a3e95b1b3fcecaa2e15be3c8f7d16fa7bb95ee59/
@@ -87,12 +90,12 @@ module Aws
         context 'source_region and pre_signed_url' do
           it 'uses provided pre_signed_url' do
             resp = client.create_db_instance_read_replica(
-              pre_signed_url: 'pre_signed_url',
+              pre_signed_url: 'https://aws.com',
               kms_key_id: kms_key_id,
               source_db_instance_identifier: source_db_instance_identifier,
               db_instance_identifier: db_instance_identifier
             )
-            expect(resp.context.params[:pre_signed_url]).to be 'pre_signed_url'
+            expect(resp.context.params[:pre_signed_url]).to be 'https://aws.com'
           end
         end
 
@@ -132,12 +135,12 @@ module Aws
         context 'source_region and pre_signed_url' do
           it 'uses provided pre_signed_url' do
             resp = client.copy_db_cluster_snapshot(
-              pre_signed_url: 'pre_signed_url',
+              pre_signed_url: 'https://aws.com',
               kms_key_id: kms_key_id,
               source_db_cluster_snapshot_identifier: source_db_cluster_snapshot_identifier,
               target_db_cluster_snapshot_identifier: target_db_cluster_snapshot_identifier
             )
-            expect(resp.context.params[:pre_signed_url]).to be 'pre_signed_url'
+            expect(resp.context.params[:pre_signed_url]).to be 'https://aws.com'
           end
         end
 
@@ -175,12 +178,12 @@ module Aws
         context 'source_region and pre_signed_url' do
           it 'uses provided pre_signed_url' do
             resp = client.create_db_cluster(
-              pre_signed_url: 'pre_signed_url',
+              pre_signed_url: 'https://aws.com',
               kms_key_id: kms_key_id,
               db_cluster_identifier: db_cluster_identifier,
               engine: engine
             )
-            expect(resp.context.params[:pre_signed_url]).to be 'pre_signed_url'
+            expect(resp.context.params[:pre_signed_url]).to be 'https://aws.com'
           end
         end
 

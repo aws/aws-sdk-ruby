@@ -19,6 +19,7 @@ module Aws
             if params.is_a?(Hash) &&
                params[:source_region] && !params[:pre_signed_url]
               params[:pre_signed_url] = presigned_url(context, params)
+              # params[:destination_region] = context.config.region
             end
             @handler.call(context)
           end
@@ -58,8 +59,7 @@ module Aws
           Handler,
           step: :initialize,
           operations: [
-            :copy_db_cluster_snapshot,
-            :create_db_cluster
+            :copy_db_cluster_snapshot
           ]
         )
       end
