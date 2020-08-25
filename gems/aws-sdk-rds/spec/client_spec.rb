@@ -16,7 +16,7 @@ module Aws
       let(:kms_key_id) { '238f8ec9-420a-0690-8ec9-009f34fc3ef5' }
       let(:source_region) { 'us-east-1' }
 
-      let(:time) { Time.new(2020, 8, 27) }
+      let(:time) { Time.utc(2020, 8, 27) }
 
       before do
         allow(Time).to receive(:now).and_return(time)
@@ -60,11 +60,8 @@ module Aws
               target_db_snapshot_identifier: target_db_snapshot_identifier
             )
 
-            puts "local: https://rds.us-east-1.amazonaws.com?Action=CopyDBSnapshot&DestinationRegion=us-west-2&KmsKeyId=238f8ec9-420a-0690-8ec9-009f34fc3ef5&SourceDBSnapshotIdentifier=arn%3Aaws%3Ards%3Aus-east-1%3A123456789012%3Asnapshot%3Asource-db-snapshot&TargetDBSnapshotIdentifier=target-db-snapshot&Version=2014-10-31&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=akid%2F20200827%2Fus-east-1%2Frds%2Faws4_request&X-Amz-Date=20200827T070000Z&X-Amz-Expires=3600&X-Amz-SignedHeaders=host&X-Amz-Signature=bb861ad9e7f34e184c1a5355a3e95b1b3fcecaa2e15be3c8f7d16fa7bb95ee59"
-            puts "remote: #{resp.context.params[:pre_signed_url]}"
-
             expect(resp.context.params[:pre_signed_url]).to match(
-              /bb861ad9e7f34e184c1a5355a3e95b1b3fcecaa2e15be3c8f7d16fa7bb95ee59/
+              /afee7e7f55fcbce926a89482f01acb51e9dc1df0adb09ee172622a079b47ea71/
             )
           end
         end
@@ -109,7 +106,7 @@ module Aws
             )
 
             expect(resp.context.params[:pre_signed_url]).to match(
-              /74530787996bb82614e434da8a3f9d38ad785e2eb9121e2b538aeb16f6e27906/
+              /ddab9b46aa026dd36339e3f80c16c361f0e9e4f86368ee7e391dcdd45cb385e6/
             )
           end
         end
@@ -154,7 +151,7 @@ module Aws
             )
 
             expect(resp.context.params[:pre_signed_url]).to match(
-              /ca08ac86e163f21218ad006b78566bd8fc56e4b5601a320ffa42b78380891742/
+              /01eda84cb84ff1558373f4759aaf76aa4b7be8664241a58f6906ae842a0a9d74/
             )
           end
         end
@@ -197,7 +194,7 @@ module Aws
             )
 
             expect(resp.context.params[:pre_signed_url]).to match(
-              /ef8f88d5e107c9ac1b5b9c690da48cceedcb5a889b2267918adc2f22e7171582/
+              /48536d8dbf5bc3328b0adf618029ee6157936e72435b7829542ed22e040a6f85/
             )
           end
         end

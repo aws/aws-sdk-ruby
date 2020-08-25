@@ -16,7 +16,7 @@ module Aws
       let(:kms_key_id) { '238f8ec9-420a-0690-8ec9-009f34fc3ef5' }
       let(:source_region) { 'us-east-1' }
 
-      let(:time) { Time.new(2020, 8, 27) }
+      let(:time) { Time.utc(2020, 8, 27) }
 
       before do
         allow(Time).to receive(:now).and_return(time)
@@ -61,7 +61,7 @@ module Aws
             )
 
             expect(resp.context.params[:pre_signed_url]).to match(
-              /ca08ac86e163f21218ad006b78566bd8fc56e4b5601a320ffa42b78380891742/
+              /01eda84cb84ff1558373f4759aaf76aa4b7be8664241a58f6906ae842a0a9d74/
             )
           end
         end
