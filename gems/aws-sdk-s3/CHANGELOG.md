@@ -1,6 +1,8 @@
 Unreleased Changes
 ------------------
 
+* Issue - Fix `Aws::S3::PresignedPost` using the `use_accelerate_endpoint` option with Resource clients. (#2103)
+
 1.78.0 (2020-08-11)
 ------------------
 

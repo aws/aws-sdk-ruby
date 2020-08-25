@@ -22,6 +22,15 @@ module Aws
           post = bucket.presigned_post(key: 'foo')
           expect(post.url).to eq('http://bucket.foo.com')
         end
+
+        it 'applies the :use_accelerate_endpoint option' do
+          bucket = Bucket.new(
+            'bucket',
+            stub_responses: true
+          )
+          post = bucket.presigned_post(use_accelerate_endpoint: true)
+          expect(post.url).to eq('https://bucket.s3-accelerate.amazonaws.com')
+        end
       end
     end
   end

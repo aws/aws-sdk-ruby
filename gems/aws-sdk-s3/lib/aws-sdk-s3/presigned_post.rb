@@ -237,6 +237,7 @@ module Aws
         @bucket_region = bucket_region
         @bucket_name = bucket_name
         @accelerate = !!options.delete(:use_accelerate_endpoint)
+        options.delete(:url) if @accelerate # resource methods pass url
         @url = options.delete(:url) || bucket_url
         @fields = {}
         @key_set = false
