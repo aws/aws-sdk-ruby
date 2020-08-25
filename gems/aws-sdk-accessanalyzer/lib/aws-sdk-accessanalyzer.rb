@@ -47,6 +47,6 @@ require_relative 'aws-sdk-accessanalyzer/customizations'
 # @!group service
 module Aws::AccessAnalyzer
 
-  GEM_VERSION = '1.9.0'
+  GEM_VERSION = '1.10.0'
 
 end

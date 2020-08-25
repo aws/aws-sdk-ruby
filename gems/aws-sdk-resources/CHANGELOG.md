@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+3.79.0 (2020-08-25)
+------------------
+
+* Feature - Added a dependency on the new `aws-sdk-core` gem.
+
 3.78.0 (2020-08-18)
 ------------------
 

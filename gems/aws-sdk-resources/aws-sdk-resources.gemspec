@@ -208,7 +208,6 @@ Gem::Specification.new do |spec|
   spec.add_dependency('aws-sdk-sns', '~> 1')
   spec.add_dependency('aws-sdk-sqs', '~> 1')
   spec.add_dependency('aws-sdk-ssm', '~> 1')
-  spec.add_dependency('aws-sdk-sso', '~> 1')
   spec.add_dependency('aws-sdk-ssooidc', '~> 1')
   spec.add_dependency('aws-sdk-swf', '~> 1')
   spec.add_dependency('aws-sdk-sagemaker', '~> 1')

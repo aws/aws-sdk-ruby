@@ -47,6 +47,6 @@ require_relative 'aws-sdk-worklink/customizations'
 # @!group service
 module Aws::WorkLink
 
-  GEM_VERSION = '1.18.0'
+  GEM_VERSION = '1.19.0'
 
 end

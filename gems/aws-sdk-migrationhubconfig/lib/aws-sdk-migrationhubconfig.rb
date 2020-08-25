@@ -47,6 +47,6 @@ require_relative 'aws-sdk-migrationhubconfig/customizations'
 # @!group service
 module Aws::MigrationHubConfig
 
-  GEM_VERSION = '1.6.0'
+  GEM_VERSION = '1.7.0'
 
 end
