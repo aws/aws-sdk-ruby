@@ -49,7 +49,6 @@ module Aws
             signer.presign_url(
               http_method: 'GET',
               url: url,
-              body: '',
               expires_in: 3600
             ).to_s
           end
