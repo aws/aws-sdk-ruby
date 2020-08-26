@@ -35,7 +35,7 @@ module Aws
               source_db_snapshot_identifier: source_db_snapshot_identifier,
               target_db_snapshot_identifier: target_db_snapshot_identifier
             )
-            expect(resp.context.params[:pre_signed_url]).to be nil
+            expect(resp.context.params[:pre_signed_url]).to eq nil
           end
         end
 
@@ -47,7 +47,7 @@ module Aws
               source_db_snapshot_identifier: source_db_snapshot_identifier,
               target_db_snapshot_identifier: target_db_snapshot_identifier
             )
-            expect(resp.context.params[:pre_signed_url]).to be 'https://aws.com'
+            expect(resp.context.params[:pre_signed_url]).to eq 'https://aws.com'
           end
         end
 
@@ -80,7 +80,7 @@ module Aws
               source_db_instance_identifier: source_db_instance_identifier,
               db_instance_identifier: db_instance_identifier
             )
-            expect(resp.context.params[:pre_signed_url]).to be nil
+            expect(resp.context.params[:pre_signed_url]).to eq nil
           end
         end
 
@@ -92,7 +92,7 @@ module Aws
               source_db_instance_identifier: source_db_instance_identifier,
               db_instance_identifier: db_instance_identifier
             )
-            expect(resp.context.params[:pre_signed_url]).to be 'https://aws.com'
+            expect(resp.context.params[:pre_signed_url]).to eq 'https://aws.com'
           end
         end
 
@@ -125,7 +125,7 @@ module Aws
               source_db_cluster_snapshot_identifier: source_db_cluster_snapshot_identifier,
               target_db_cluster_snapshot_identifier: target_db_cluster_snapshot_identifier
             )
-            expect(resp.context.params[:pre_signed_url]).to be nil
+            expect(resp.context.params[:pre_signed_url]).to eq nil
           end
         end
 
@@ -137,7 +137,7 @@ module Aws
               source_db_cluster_snapshot_identifier: source_db_cluster_snapshot_identifier,
               target_db_cluster_snapshot_identifier: target_db_cluster_snapshot_identifier
             )
-            expect(resp.context.params[:pre_signed_url]).to be 'https://aws.com'
+            expect(resp.context.params[:pre_signed_url]).to eq 'https://aws.com'
           end
         end
 
@@ -168,7 +168,7 @@ module Aws
               db_cluster_identifier: db_cluster_identifier,
               engine: engine
             )
-            expect(resp.context.params[:pre_signed_url]).to be nil
+            expect(resp.context.params[:pre_signed_url]).to eq nil
           end
         end
 
@@ -180,7 +180,7 @@ module Aws
               db_cluster_identifier: db_cluster_identifier,
               engine: engine
             )
-            expect(resp.context.params[:pre_signed_url]).to be 'https://aws.com'
+            expect(resp.context.params[:pre_signed_url]).to eq 'https://aws.com'
           end
         end
 
