@@ -35,6 +35,7 @@ module Aws
     AppMesh
     AppStream
     AppSync
+    Appflow
     ApplicationAutoScaling
     ApplicationDiscoveryService
     ApplicationInsights

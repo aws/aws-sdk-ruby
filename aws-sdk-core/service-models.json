@@ -47,6 +47,10 @@
     "models": "appsync/2017-07-25",
     "endpoint": "appsync"
   },
+  "Appflow": {
+    "models": "appflow/2020-08-23",
+    "endpoint": "appflow"
+  },
   "ApplicationAutoScaling": {
     "models": "application-autoscaling/2016-02-06",
     "endpoint": "application-autoscaling"

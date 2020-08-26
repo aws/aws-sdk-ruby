@@ -318,8 +318,8 @@ to be backwards compatible.
 | AWS IoT Things Graph                                  | IoTThingsGraph                  | 2018-09-06  |
 | AWS Key Management Service                            | KMS                             | 2014-11-01  |
 | AWS Lake Formation                                    | LakeFormation                   | 2017-03-31  |
-| AWS Lambda                                            | Lambda                          | 2015-03-31  |
 | AWS Lambda                                            | LambdaPreview                   | 2014-11-11  |
+| AWS Lambda                                            | Lambda                          | 2015-03-31  |
 | AWS License Manager                                   | LicenseManager                  | 2018-08-01  |
 | AWS Marketplace Catalog Service                       | MarketplaceCatalog              | 2018-09-17  |
 | AWS Marketplace Commerce Analytics                    | MarketplaceCommerceAnalytics    | 2015-07-01  |
@@ -369,6 +369,7 @@ to be backwards compatible.
 | Amazon API Gateway                                    | APIGateway                      | 2015-07-09  |
 | Amazon AppConfig                                      | AppConfig                       | 2019-10-09  |
 | Amazon AppStream                                      | AppStream                       | 2016-12-01  |
+| Amazon Appflow                                        | Appflow                         | 2020-08-23  |
 | Amazon Athena                                         | Athena                          | 2017-05-18  |
 | Amazon Augmented AI Runtime                           | AugmentedAIRuntime              | 2019-11-07  |
 | Amazon Chime                                          | Chime                           | 2018-05-01  |
@@ -419,8 +420,8 @@ to be backwards compatible.
 | Amazon Inspector                                      | Inspector                       | 2016-02-16  |
 | Amazon Interactive Video Service                      | IVS                             | 2020-07-14  |
 | Amazon Kinesis                                        | Kinesis                         | 2013-12-02  |
-| Amazon Kinesis Analytics                              | KinesisAnalyticsV2              | 2018-05-23  |
 | Amazon Kinesis Analytics                              | KinesisAnalytics                | 2015-08-14  |
+| Amazon Kinesis Analytics                              | KinesisAnalyticsV2              | 2018-05-23  |
 | Amazon Kinesis Firehose                               | Firehose                        | 2015-08-04  |
 | Amazon Kinesis Video Signaling Channels               | KinesisVideoSignalingChannels   | 2019-12-04  |
 | Amazon Kinesis Video Streams                          | KinesisVideo                    | 2017-09-30  |
