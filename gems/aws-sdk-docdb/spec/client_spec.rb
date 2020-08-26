@@ -23,17 +23,18 @@ module Aws
       end
 
       context 'copy_db_cluster_snapshot' do
-        let(:source_db_cluster_snapshot_identifier) do
-          "arn:aws:rds:#{source_region}:123456789012:cluster-snapshot:source-db-cluster-snapshot"
+        let(:copy_db_cluster_snapshot_params) do
+          {
+            kms_key_id: kms_key_id,
+            source_db_cluster_snapshot_identifier: "arn:aws:rds:#{source_region}:123456789012:cluster-snapshot:source-db-cluster-snapshot",
+            target_db_cluster_snapshot_identifier: 'target-db-cluster-snapshot'
+          }
         end
-        let(:target_db_cluster_snapshot_identifier) { 'target-db-cluster-snapshot' }
 
         context 'no source_region and no pre_signed_url' do
           it 'does not generate pre_signed_url' do
             resp = client.copy_db_cluster_snapshot(
-              kms_key_id: kms_key_id,
-              source_db_cluster_snapshot_identifier: source_db_cluster_snapshot_identifier,
-              target_db_cluster_snapshot_identifier: target_db_cluster_snapshot_identifier
+              copy_db_cluster_snapshot_params
             )
             expect(resp.context.params[:pre_signed_url]).to eq nil
           end
@@ -42,10 +43,9 @@ module Aws
         context 'source_region and pre_signed_url' do
           it 'uses provided pre_signed_url' do
             resp = client.copy_db_cluster_snapshot(
-              pre_signed_url: 'https://aws.com',
-              kms_key_id: kms_key_id,
-              source_db_cluster_snapshot_identifier: source_db_cluster_snapshot_identifier,
-              target_db_cluster_snapshot_identifier: target_db_cluster_snapshot_identifier
+              copy_db_cluster_snapshot_params.merge(
+                pre_signed_url: 'https://aws.com'
+              )
             )
             expect(resp.context.params[:pre_signed_url]).to eq 'https://aws.com'
           end
@@ -54,10 +54,9 @@ module Aws
         context 'source_region and no pre_signed_url' do
           it 'generates pre_signed_url' do
             resp = client.copy_db_cluster_snapshot(
-              source_region: source_region,
-              kms_key_id: kms_key_id,
-              source_db_cluster_snapshot_identifier: source_db_cluster_snapshot_identifier,
-              target_db_cluster_snapshot_identifier: target_db_cluster_snapshot_identifier
+              copy_db_cluster_snapshot_params.merge(
+                source_region: source_region
+              )
             )
 
             expect(resp.context.params[:pre_signed_url]).to match(
@@ -68,17 +67,22 @@ module Aws
       end
 
       # context 'create_db_cluster' do
-      #   let(:db_cluster_identifier) { 'db-cluster' }
-      #   let(:engine) { 'aurora' }
+      #   let(:create_db_cluster_params) do
+      #     {
+      #       kms_key_id: kms_key_id,
+      #       storage_encrypted: true,
+      #       replication_source_identifier: "arn:aws:rds:#{source_region}:123456789012:cluster:source-db-cluster",
+      #       db_cluster_identifier: 'db-cluster',
+      #       engine: 'aurora',
+      #       master_username: 'username',
+      #       master_user_password: 'password'
+      #     }
+      #   end
       #
       #   context 'no source_region and no pre_signed_url' do
       #     it 'does not generate pre_signed_url' do
       #       resp = client.create_db_cluster(
-      #         kms_key_id: kms_key_id,
-      #         db_cluster_identifier: db_cluster_identifier,
-      #         engine: engine,
-      #         master_username: 'username',
-      #         master_user_password: 'password'
+      #         create_db_cluster_params
       #       )
       #       expect(resp.context.params[:pre_signed_url]).to eq nil
       #     end
@@ -87,12 +91,9 @@ module Aws
       #   context 'source_region and pre_signed_url' do
       #     it 'uses provided pre_signed_url' do
       #       resp = client.create_db_cluster(
-      #         pre_signed_url: 'https://aws.com',
-      #         kms_key_id: kms_key_id,
-      #         db_cluster_identifier: db_cluster_identifier,
-      #         engine: engine,
-      #         master_username: 'username',
-      #         master_user_password: 'password'
+      #         create_db_cluster_params.merge(
+      #           pre_signed_url: 'https://aws.com'
+      #         )
       #       )
       #       expect(resp.context.params[:pre_signed_url]).to eq 'https://aws.com'
       #     end
@@ -101,16 +102,13 @@ module Aws
       #   context 'source_region and no pre_signed_url' do
       #     it 'generates pre_signed_url' do
       #       resp = client.create_db_cluster(
-      #         source_region: source_region,
-      #         kms_key_id: kms_key_id,
-      #         db_cluster_identifier: db_cluster_identifier,
-      #         engine: engine,
-      #         master_username: 'username',
-      #         master_user_password: 'password'
+      #         create_db_cluster_params.merge(
+      #           source_region: source_region
+      #         )
       #       )
       #
       #       expect(resp.context.params[:pre_signed_url]).to match(
-      #         /asdf/
+      #         /123/
       #       )
       #     end
       #   end

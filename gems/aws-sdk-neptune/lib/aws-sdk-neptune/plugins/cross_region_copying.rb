@@ -5,8 +5,8 @@ require 'aws-sigv4'
 module Aws
   module Neptune
     module Plugins
-      # This plugin populates the `:pre_signed_url` request param for the
-      # CopyDBSnapshot API.
+      # This plugin populates the `:pre_signed_url` request param for APIs
+      # that support cross region copying.
       #
       # This parameter is required by RDS when copying an encrypted snapshot
       # across regions. This plugin will be skipped if the `:pre_signed_url`
