@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+3.80.0 (2020-08-26)
+------------------
+
+* Feature - Added a dependency on the new `aws-sdk-appflow` gem.
+
 3.79.0 (2020-08-25)
 ------------------
 

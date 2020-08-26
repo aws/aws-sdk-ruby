@@ -13,24 +13,35 @@ module Aws::Route53Resolver
 
     include Seahorse::Model
 
+    AccessDeniedException = Shapes::StructureShape.new(name: 'AccessDeniedException')
     AccountId = Shapes::StringShape.new(name: 'AccountId')
     Arn = Shapes::StringShape.new(name: 'Arn')
     AssociateResolverEndpointIpAddressRequest = Shapes::StructureShape.new(name: 'AssociateResolverEndpointIpAddressRequest')
     AssociateResolverEndpointIpAddressResponse = Shapes::StructureShape.new(name: 'AssociateResolverEndpointIpAddressResponse')
+    AssociateResolverQueryLogConfigRequest = Shapes::StructureShape.new(name: 'AssociateResolverQueryLogConfigRequest')
+    AssociateResolverQueryLogConfigResponse = Shapes::StructureShape.new(name: 'AssociateResolverQueryLogConfigResponse')
     AssociateResolverRuleRequest = Shapes::StructureShape.new(name: 'AssociateResolverRuleRequest')
     AssociateResolverRuleResponse = Shapes::StructureShape.new(name: 'AssociateResolverRuleResponse')
     Boolean = Shapes::BooleanShape.new(name: 'Boolean')
+    Count = Shapes::IntegerShape.new(name: 'Count')
     CreateResolverEndpointRequest = Shapes::StructureShape.new(name: 'CreateResolverEndpointRequest')
     CreateResolverEndpointResponse = Shapes::StructureShape.new(name: 'CreateResolverEndpointResponse')
+    CreateResolverQueryLogConfigRequest = Shapes::StructureShape.new(name: 'CreateResolverQueryLogConfigRequest')
+    CreateResolverQueryLogConfigResponse = Shapes::StructureShape.new(name: 'CreateResolverQueryLogConfigResponse')
     CreateResolverRuleRequest = Shapes::StructureShape.new(name: 'CreateResolverRuleRequest')
     CreateResolverRuleResponse = Shapes::StructureShape.new(name: 'CreateResolverRuleResponse')
     CreatorRequestId = Shapes::StringShape.new(name: 'CreatorRequestId')
     DeleteResolverEndpointRequest = Shapes::StructureShape.new(name: 'DeleteResolverEndpointRequest')
     DeleteResolverEndpointResponse = Shapes::StructureShape.new(name: 'DeleteResolverEndpointResponse')
+    DeleteResolverQueryLogConfigRequest = Shapes::StructureShape.new(name: 'DeleteResolverQueryLogConfigRequest')
+    DeleteResolverQueryLogConfigResponse = Shapes::StructureShape.new(name: 'DeleteResolverQueryLogConfigResponse')
     DeleteResolverRuleRequest = Shapes::StructureShape.new(name: 'DeleteResolverRuleRequest')
     DeleteResolverRuleResponse = Shapes::StructureShape.new(name: 'DeleteResolverRuleResponse')
+    DestinationArn = Shapes::StringShape.new(name: 'DestinationArn')
     DisassociateResolverEndpointIpAddressRequest = Shapes::StructureShape.new(name: 'DisassociateResolverEndpointIpAddressRequest')
     DisassociateResolverEndpointIpAddressResponse = Shapes::StructureShape.new(name: 'DisassociateResolverEndpointIpAddressResponse')
+    DisassociateResolverQueryLogConfigRequest = Shapes::StructureShape.new(name: 'DisassociateResolverQueryLogConfigRequest')
+    DisassociateResolverQueryLogConfigResponse = Shapes::StructureShape.new(name: 'DisassociateResolverQueryLogConfigResponse')
     DisassociateResolverRuleRequest = Shapes::StructureShape.new(name: 'DisassociateResolverRuleRequest')
     DisassociateResolverRuleResponse = Shapes::StructureShape.new(name: 'DisassociateResolverRuleResponse')
     DomainName = Shapes::StringShape.new(name: 'DomainName')
@@ -42,6 +53,12 @@ module Aws::Route53Resolver
     Filters = Shapes::ListShape.new(name: 'Filters')
     GetResolverEndpointRequest = Shapes::StructureShape.new(name: 'GetResolverEndpointRequest')
     GetResolverEndpointResponse = Shapes::StructureShape.new(name: 'GetResolverEndpointResponse')
+    GetResolverQueryLogConfigAssociationRequest = Shapes::StructureShape.new(name: 'GetResolverQueryLogConfigAssociationRequest')
+    GetResolverQueryLogConfigAssociationResponse = Shapes::StructureShape.new(name: 'GetResolverQueryLogConfigAssociationResponse')
+    GetResolverQueryLogConfigPolicyRequest = Shapes::StructureShape.new(name: 'GetResolverQueryLogConfigPolicyRequest')
+    GetResolverQueryLogConfigPolicyResponse = Shapes::StructureShape.new(name: 'GetResolverQueryLogConfigPolicyResponse')
+    GetResolverQueryLogConfigRequest = Shapes::StructureShape.new(name: 'GetResolverQueryLogConfigRequest')
+    GetResolverQueryLogConfigResponse = Shapes::StructureShape.new(name: 'GetResolverQueryLogConfigResponse')
     GetResolverRuleAssociationRequest = Shapes::StructureShape.new(name: 'GetResolverRuleAssociationRequest')
     GetResolverRuleAssociationResponse = Shapes::StructureShape.new(name: 'GetResolverRuleAssociationResponse')
     GetResolverRulePolicyRequest = Shapes::StructureShape.new(name: 'GetResolverRulePolicyRequest')
@@ -67,6 +84,10 @@ module Aws::Route53Resolver
     ListResolverEndpointIpAddressesResponse = Shapes::StructureShape.new(name: 'ListResolverEndpointIpAddressesResponse')
     ListResolverEndpointsRequest = Shapes::StructureShape.new(name: 'ListResolverEndpointsRequest')
     ListResolverEndpointsResponse = Shapes::StructureShape.new(name: 'ListResolverEndpointsResponse')
+    ListResolverQueryLogConfigAssociationsRequest = Shapes::StructureShape.new(name: 'ListResolverQueryLogConfigAssociationsRequest')
+    ListResolverQueryLogConfigAssociationsResponse = Shapes::StructureShape.new(name: 'ListResolverQueryLogConfigAssociationsResponse')
+    ListResolverQueryLogConfigsRequest = Shapes::StructureShape.new(name: 'ListResolverQueryLogConfigsRequest')
+    ListResolverQueryLogConfigsResponse = Shapes::StructureShape.new(name: 'ListResolverQueryLogConfigsResponse')
     ListResolverRuleAssociationsRequest = Shapes::StructureShape.new(name: 'ListResolverRuleAssociationsRequest')
     ListResolverRuleAssociationsResponse = Shapes::StructureShape.new(name: 'ListResolverRuleAssociationsResponse')
     ListResolverRulesRequest = Shapes::StructureShape.new(name: 'ListResolverRulesRequest')
@@ -77,12 +98,24 @@ module Aws::Route53Resolver
     Name = Shapes::StringShape.new(name: 'Name')
     NextToken = Shapes::StringShape.new(name: 'NextToken')
     Port = Shapes::IntegerShape.new(name: 'Port')
+    PutResolverQueryLogConfigPolicyRequest = Shapes::StructureShape.new(name: 'PutResolverQueryLogConfigPolicyRequest')
+    PutResolverQueryLogConfigPolicyResponse = Shapes::StructureShape.new(name: 'PutResolverQueryLogConfigPolicyResponse')
     PutResolverRulePolicyRequest = Shapes::StructureShape.new(name: 'PutResolverRulePolicyRequest')
     PutResolverRulePolicyResponse = Shapes::StructureShape.new(name: 'PutResolverRulePolicyResponse')
     ResolverEndpoint = Shapes::StructureShape.new(name: 'ResolverEndpoint')
     ResolverEndpointDirection = Shapes::StringShape.new(name: 'ResolverEndpointDirection')
     ResolverEndpointStatus = Shapes::StringShape.new(name: 'ResolverEndpointStatus')
     ResolverEndpoints = Shapes::ListShape.new(name: 'ResolverEndpoints')
+    ResolverQueryLogConfig = Shapes::StructureShape.new(name: 'ResolverQueryLogConfig')
+    ResolverQueryLogConfigAssociation = Shapes::StructureShape.new(name: 'ResolverQueryLogConfigAssociation')
+    ResolverQueryLogConfigAssociationError = Shapes::StringShape.new(name: 'ResolverQueryLogConfigAssociationError')
+    ResolverQueryLogConfigAssociationErrorMessage = Shapes::StringShape.new(name: 'ResolverQueryLogConfigAssociationErrorMessage')
+    ResolverQueryLogConfigAssociationList = Shapes::ListShape.new(name: 'ResolverQueryLogConfigAssociationList')
+    ResolverQueryLogConfigAssociationStatus = Shapes::StringShape.new(name: 'ResolverQueryLogConfigAssociationStatus')
+    ResolverQueryLogConfigList = Shapes::ListShape.new(name: 'ResolverQueryLogConfigList')
+    ResolverQueryLogConfigName = Shapes::StringShape.new(name: 'ResolverQueryLogConfigName')
+    ResolverQueryLogConfigPolicy = Shapes::StringShape.new(name: 'ResolverQueryLogConfigPolicy')
+    ResolverQueryLogConfigStatus = Shapes::StringShape.new(name: 'ResolverQueryLogConfigStatus')
     ResolverRule = Shapes::StructureShape.new(name: 'ResolverRule')
     ResolverRuleAssociation = Shapes::StructureShape.new(name: 'ResolverRuleAssociation')
     ResolverRuleAssociationStatus = Shapes::StringShape.new(name: 'ResolverRuleAssociationStatus')
@@ -100,6 +133,8 @@ module Aws::Route53Resolver
     RuleTypeOption = Shapes::StringShape.new(name: 'RuleTypeOption')
     SecurityGroupIds = Shapes::ListShape.new(name: 'SecurityGroupIds')
     ShareStatus = Shapes::StringShape.new(name: 'ShareStatus')
+    SortByKey = Shapes::StringShape.new(name: 'SortByKey')
+    SortOrder = Shapes::StringShape.new(name: 'SortOrder')
     StatusMessage = Shapes::StringShape.new(name: 'StatusMessage')
     String = Shapes::StringShape.new(name: 'String')
     SubnetId = Shapes::StringShape.new(name: 'SubnetId')
@@ -121,12 +156,22 @@ module Aws::Route53Resolver
     UpdateResolverRuleRequest = Shapes::StructureShape.new(name: 'UpdateResolverRuleRequest')
     UpdateResolverRuleResponse = Shapes::StructureShape.new(name: 'UpdateResolverRuleResponse')
 
+    AccessDeniedException.add_member(:message, Shapes::ShapeRef.new(shape: ExceptionMessage, location_name: "Message"))
+    AccessDeniedException.struct_class = Types::AccessDeniedException
+
     AssociateResolverEndpointIpAddressRequest.add_member(:resolver_endpoint_id, Shapes::ShapeRef.new(shape: ResourceId, required: true, location_name: "ResolverEndpointId"))
     AssociateResolverEndpointIpAddressRequest.add_member(:ip_address, Shapes::ShapeRef.new(shape: IpAddressUpdate, required: true, location_name: "IpAddress"))
     AssociateResolverEndpointIpAddressRequest.struct_class = Types::AssociateResolverEndpointIpAddressRequest
 
     AssociateResolverEndpointIpAddressResponse.add_member(:resolver_endpoint, Shapes::ShapeRef.new(shape: ResolverEndpoint, location_name: "ResolverEndpoint"))
     AssociateResolverEndpointIpAddressResponse.struct_class = Types::AssociateResolverEndpointIpAddressResponse
+
+    AssociateResolverQueryLogConfigRequest.add_member(:resolver_query_log_config_id, Shapes::ShapeRef.new(shape: ResourceId, required: true, location_name: "ResolverQueryLogConfigId"))
+    AssociateResolverQueryLogConfigRequest.add_member(:resource_id, Shapes::ShapeRef.new(shape: ResourceId, required: true, location_name: "ResourceId"))
+    AssociateResolverQueryLogConfigRequest.struct_class = Types::AssociateResolverQueryLogConfigRequest
+
+    AssociateResolverQueryLogConfigResponse.add_member(:resolver_query_log_config_association, Shapes::ShapeRef.new(shape: ResolverQueryLogConfigAssociation, location_name: "ResolverQueryLogConfigAssociation"))
+    AssociateResolverQueryLogConfigResponse.struct_class = Types::AssociateResolverQueryLogConfigResponse
 
     AssociateResolverRuleRequest.add_member(:resolver_rule_id, Shapes::ShapeRef.new(shape: ResourceId, required: true, location_name: "ResolverRuleId"))
     AssociateResolverRuleRequest.add_member(:name, Shapes::ShapeRef.new(shape: Name, location_name: "Name"))
@@ -147,6 +192,15 @@ module Aws::Route53Resolver
     CreateResolverEndpointResponse.add_member(:resolver_endpoint, Shapes::ShapeRef.new(shape: ResolverEndpoint, location_name: "ResolverEndpoint"))
     CreateResolverEndpointResponse.struct_class = Types::CreateResolverEndpointResponse
 
+    CreateResolverQueryLogConfigRequest.add_member(:name, Shapes::ShapeRef.new(shape: ResolverQueryLogConfigName, required: true, location_name: "Name"))
+    CreateResolverQueryLogConfigRequest.add_member(:destination_arn, Shapes::ShapeRef.new(shape: DestinationArn, required: true, location_name: "DestinationArn"))
+    CreateResolverQueryLogConfigRequest.add_member(:creator_request_id, Shapes::ShapeRef.new(shape: CreatorRequestId, required: true, location_name: "CreatorRequestId", metadata: {"idempotencyToken"=>true}))
+    CreateResolverQueryLogConfigRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "Tags", metadata: {"box"=>true}))
+    CreateResolverQueryLogConfigRequest.struct_class = Types::CreateResolverQueryLogConfigRequest
+
+    CreateResolverQueryLogConfigResponse.add_member(:resolver_query_log_config, Shapes::ShapeRef.new(shape: ResolverQueryLogConfig, location_name: "ResolverQueryLogConfig"))
+    CreateResolverQueryLogConfigResponse.struct_class = Types::CreateResolverQueryLogConfigResponse
+
     CreateResolverRuleRequest.add_member(:creator_request_id, Shapes::ShapeRef.new(shape: CreatorRequestId, required: true, location_name: "CreatorRequestId"))
     CreateResolverRuleRequest.add_member(:name, Shapes::ShapeRef.new(shape: Name, location_name: "Name"))
     CreateResolverRuleRequest.add_member(:rule_type, Shapes::ShapeRef.new(shape: RuleTypeOption, required: true, location_name: "RuleType"))
@@ -165,6 +219,12 @@ module Aws::Route53Resolver
     DeleteResolverEndpointResponse.add_member(:resolver_endpoint, Shapes::ShapeRef.new(shape: ResolverEndpoint, location_name: "ResolverEndpoint"))
     DeleteResolverEndpointResponse.struct_class = Types::DeleteResolverEndpointResponse
 
+    DeleteResolverQueryLogConfigRequest.add_member(:resolver_query_log_config_id, Shapes::ShapeRef.new(shape: ResourceId, required: true, location_name: "ResolverQueryLogConfigId"))
+    DeleteResolverQueryLogConfigRequest.struct_class = Types::DeleteResolverQueryLogConfigRequest
+
+    DeleteResolverQueryLogConfigResponse.add_member(:resolver_query_log_config, Shapes::ShapeRef.new(shape: ResolverQueryLogConfig, location_name: "ResolverQueryLogConfig"))
+    DeleteResolverQueryLogConfigResponse.struct_class = Types::DeleteResolverQueryLogConfigResponse
+
     DeleteResolverRuleRequest.add_member(:resolver_rule_id, Shapes::ShapeRef.new(shape: ResourceId, required: true, location_name: "ResolverRuleId"))
     DeleteResolverRuleRequest.struct_class = Types::DeleteResolverRuleRequest
 
@@ -177,6 +237,13 @@ module Aws::Route53Resolver
 
     DisassociateResolverEndpointIpAddressResponse.add_member(:resolver_endpoint, Shapes::ShapeRef.new(shape: ResolverEndpoint, location_name: "ResolverEndpoint"))
     DisassociateResolverEndpointIpAddressResponse.struct_class = Types::DisassociateResolverEndpointIpAddressResponse
+
+    DisassociateResolverQueryLogConfigRequest.add_member(:resolver_query_log_config_id, Shapes::ShapeRef.new(shape: ResourceId, required: true, location_name: "ResolverQueryLogConfigId"))
+    DisassociateResolverQueryLogConfigRequest.add_member(:resource_id, Shapes::ShapeRef.new(shape: ResourceId, required: true, location_name: "ResourceId"))
+    DisassociateResolverQueryLogConfigRequest.struct_class = Types::DisassociateResolverQueryLogConfigRequest
+
+    DisassociateResolverQueryLogConfigResponse.add_member(:resolver_query_log_config_association, Shapes::ShapeRef.new(shape: ResolverQueryLogConfigAssociation, location_name: "ResolverQueryLogConfigAssociation"))
+    DisassociateResolverQueryLogConfigResponse.struct_class = Types::DisassociateResolverQueryLogConfigResponse
 
     DisassociateResolverRuleRequest.add_member(:vpc_id, Shapes::ShapeRef.new(shape: ResourceId, required: true, location_name: "VPCId"))
     DisassociateResolverRuleRequest.add_member(:resolver_rule_id, Shapes::ShapeRef.new(shape: ResourceId, required: true, location_name: "ResolverRuleId"))
@@ -198,6 +265,24 @@ module Aws::Route53Resolver
 
     GetResolverEndpointResponse.add_member(:resolver_endpoint, Shapes::ShapeRef.new(shape: ResolverEndpoint, location_name: "ResolverEndpoint"))
     GetResolverEndpointResponse.struct_class = Types::GetResolverEndpointResponse
+
+    GetResolverQueryLogConfigAssociationRequest.add_member(:resolver_query_log_config_association_id, Shapes::ShapeRef.new(shape: ResourceId, required: true, location_name: "ResolverQueryLogConfigAssociationId"))
+    GetResolverQueryLogConfigAssociationRequest.struct_class = Types::GetResolverQueryLogConfigAssociationRequest
+
+    GetResolverQueryLogConfigAssociationResponse.add_member(:resolver_query_log_config_association, Shapes::ShapeRef.new(shape: ResolverQueryLogConfigAssociation, location_name: "ResolverQueryLogConfigAssociation"))
+    GetResolverQueryLogConfigAssociationResponse.struct_class = Types::GetResolverQueryLogConfigAssociationResponse
+
+    GetResolverQueryLogConfigPolicyRequest.add_member(:arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "Arn"))
+    GetResolverQueryLogConfigPolicyRequest.struct_class = Types::GetResolverQueryLogConfigPolicyRequest
+
+    GetResolverQueryLogConfigPolicyResponse.add_member(:resolver_query_log_config_policy, Shapes::ShapeRef.new(shape: ResolverQueryLogConfigPolicy, location_name: "ResolverQueryLogConfigPolicy"))
+    GetResolverQueryLogConfigPolicyResponse.struct_class = Types::GetResolverQueryLogConfigPolicyResponse
+
+    GetResolverQueryLogConfigRequest.add_member(:resolver_query_log_config_id, Shapes::ShapeRef.new(shape: ResourceId, required: true, location_name: "ResolverQueryLogConfigId"))
+    GetResolverQueryLogConfigRequest.struct_class = Types::GetResolverQueryLogConfigRequest
+
+    GetResolverQueryLogConfigResponse.add_member(:resolver_query_log_config, Shapes::ShapeRef.new(shape: ResolverQueryLogConfig, location_name: "ResolverQueryLogConfig"))
+    GetResolverQueryLogConfigResponse.struct_class = Types::GetResolverQueryLogConfigResponse
 
     GetResolverRuleAssociationRequest.add_member(:resolver_rule_association_id, Shapes::ShapeRef.new(shape: ResourceId, required: true, location_name: "ResolverRuleAssociationId"))
     GetResolverRuleAssociationRequest.struct_class = Types::GetResolverRuleAssociationRequest
@@ -282,6 +367,32 @@ module Aws::Route53Resolver
     ListResolverEndpointsResponse.add_member(:resolver_endpoints, Shapes::ShapeRef.new(shape: ResolverEndpoints, location_name: "ResolverEndpoints"))
     ListResolverEndpointsResponse.struct_class = Types::ListResolverEndpointsResponse
 
+    ListResolverQueryLogConfigAssociationsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location_name: "MaxResults"))
+    ListResolverQueryLogConfigAssociationsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    ListResolverQueryLogConfigAssociationsRequest.add_member(:filters, Shapes::ShapeRef.new(shape: Filters, location_name: "Filters"))
+    ListResolverQueryLogConfigAssociationsRequest.add_member(:sort_by, Shapes::ShapeRef.new(shape: SortByKey, location_name: "SortBy"))
+    ListResolverQueryLogConfigAssociationsRequest.add_member(:sort_order, Shapes::ShapeRef.new(shape: SortOrder, location_name: "SortOrder"))
+    ListResolverQueryLogConfigAssociationsRequest.struct_class = Types::ListResolverQueryLogConfigAssociationsRequest
+
+    ListResolverQueryLogConfigAssociationsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    ListResolverQueryLogConfigAssociationsResponse.add_member(:total_count, Shapes::ShapeRef.new(shape: Count, location_name: "TotalCount"))
+    ListResolverQueryLogConfigAssociationsResponse.add_member(:total_filtered_count, Shapes::ShapeRef.new(shape: Count, location_name: "TotalFilteredCount"))
+    ListResolverQueryLogConfigAssociationsResponse.add_member(:resolver_query_log_config_associations, Shapes::ShapeRef.new(shape: ResolverQueryLogConfigAssociationList, location_name: "ResolverQueryLogConfigAssociations"))
+    ListResolverQueryLogConfigAssociationsResponse.struct_class = Types::ListResolverQueryLogConfigAssociationsResponse
+
+    ListResolverQueryLogConfigsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location_name: "MaxResults", metadata: {"box"=>true}))
+    ListResolverQueryLogConfigsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken", metadata: {"box"=>true}))
+    ListResolverQueryLogConfigsRequest.add_member(:filters, Shapes::ShapeRef.new(shape: Filters, location_name: "Filters", metadata: {"box"=>true}))
+    ListResolverQueryLogConfigsRequest.add_member(:sort_by, Shapes::ShapeRef.new(shape: SortByKey, location_name: "SortBy"))
+    ListResolverQueryLogConfigsRequest.add_member(:sort_order, Shapes::ShapeRef.new(shape: SortOrder, location_name: "SortOrder"))
+    ListResolverQueryLogConfigsRequest.struct_class = Types::ListResolverQueryLogConfigsRequest
+
+    ListResolverQueryLogConfigsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    ListResolverQueryLogConfigsResponse.add_member(:total_count, Shapes::ShapeRef.new(shape: Count, location_name: "TotalCount"))
+    ListResolverQueryLogConfigsResponse.add_member(:total_filtered_count, Shapes::ShapeRef.new(shape: Count, location_name: "TotalFilteredCount"))
+    ListResolverQueryLogConfigsResponse.add_member(:resolver_query_log_configs, Shapes::ShapeRef.new(shape: ResolverQueryLogConfigList, location_name: "ResolverQueryLogConfigs"))
+    ListResolverQueryLogConfigsResponse.struct_class = Types::ListResolverQueryLogConfigsResponse
+
     ListResolverRuleAssociationsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location_name: "MaxResults", metadata: {"box"=>true}))
     ListResolverRuleAssociationsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken", metadata: {"box"=>true}))
     ListResolverRuleAssociationsRequest.add_member(:filters, Shapes::ShapeRef.new(shape: Filters, location_name: "Filters", metadata: {"box"=>true}))
@@ -311,6 +422,13 @@ module Aws::Route53Resolver
     ListTagsForResourceResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
     ListTagsForResourceResponse.struct_class = Types::ListTagsForResourceResponse
 
+    PutResolverQueryLogConfigPolicyRequest.add_member(:arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "Arn"))
+    PutResolverQueryLogConfigPolicyRequest.add_member(:resolver_query_log_config_policy, Shapes::ShapeRef.new(shape: ResolverQueryLogConfigPolicy, required: true, location_name: "ResolverQueryLogConfigPolicy"))
+    PutResolverQueryLogConfigPolicyRequest.struct_class = Types::PutResolverQueryLogConfigPolicyRequest
+
+    PutResolverQueryLogConfigPolicyResponse.add_member(:return_value, Shapes::ShapeRef.new(shape: Boolean, location_name: "ReturnValue"))
+    PutResolverQueryLogConfigPolicyResponse.struct_class = Types::PutResolverQueryLogConfigPolicyResponse
+
     PutResolverRulePolicyRequest.add_member(:arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "Arn"))
     PutResolverRulePolicyRequest.add_member(:resolver_rule_policy, Shapes::ShapeRef.new(shape: ResolverRulePolicy, required: true, location_name: "ResolverRulePolicy"))
     PutResolverRulePolicyRequest.struct_class = Types::PutResolverRulePolicyRequest
@@ -334,6 +452,31 @@ module Aws::Route53Resolver
 
     ResolverEndpoints.member = Shapes::ShapeRef.new(shape: ResolverEndpoint)
 
+    ResolverQueryLogConfig.add_member(:id, Shapes::ShapeRef.new(shape: ResourceId, location_name: "Id"))
+    ResolverQueryLogConfig.add_member(:owner_id, Shapes::ShapeRef.new(shape: AccountId, location_name: "OwnerId"))
+    ResolverQueryLogConfig.add_member(:status, Shapes::ShapeRef.new(shape: ResolverQueryLogConfigStatus, location_name: "Status"))
+    ResolverQueryLogConfig.add_member(:share_status, Shapes::ShapeRef.new(shape: ShareStatus, location_name: "ShareStatus"))
+    ResolverQueryLogConfig.add_member(:association_count, Shapes::ShapeRef.new(shape: Count, location_name: "AssociationCount"))
+    ResolverQueryLogConfig.add_member(:arn, Shapes::ShapeRef.new(shape: Arn, location_name: "Arn"))
+    ResolverQueryLogConfig.add_member(:name, Shapes::ShapeRef.new(shape: ResolverQueryLogConfigName, location_name: "Name"))
+    ResolverQueryLogConfig.add_member(:destination_arn, Shapes::ShapeRef.new(shape: DestinationArn, location_name: "DestinationArn"))
+    ResolverQueryLogConfig.add_member(:creator_request_id, Shapes::ShapeRef.new(shape: CreatorRequestId, location_name: "CreatorRequestId"))
+    ResolverQueryLogConfig.add_member(:creation_time, Shapes::ShapeRef.new(shape: Rfc3339TimeString, location_name: "CreationTime"))
+    ResolverQueryLogConfig.struct_class = Types::ResolverQueryLogConfig
+
+    ResolverQueryLogConfigAssociation.add_member(:id, Shapes::ShapeRef.new(shape: ResourceId, location_name: "Id"))
+    ResolverQueryLogConfigAssociation.add_member(:resolver_query_log_config_id, Shapes::ShapeRef.new(shape: ResourceId, location_name: "ResolverQueryLogConfigId"))
+    ResolverQueryLogConfigAssociation.add_member(:resource_id, Shapes::ShapeRef.new(shape: ResourceId, location_name: "ResourceId"))
+    ResolverQueryLogConfigAssociation.add_member(:status, Shapes::ShapeRef.new(shape: ResolverQueryLogConfigAssociationStatus, location_name: "Status"))
+    ResolverQueryLogConfigAssociation.add_member(:error, Shapes::ShapeRef.new(shape: ResolverQueryLogConfigAssociationError, location_name: "Error"))
+    ResolverQueryLogConfigAssociation.add_member(:error_message, Shapes::ShapeRef.new(shape: ResolverQueryLogConfigAssociationErrorMessage, location_name: "ErrorMessage"))
+    ResolverQueryLogConfigAssociation.add_member(:creation_time, Shapes::ShapeRef.new(shape: Rfc3339TimeString, location_name: "CreationTime"))
+    ResolverQueryLogConfigAssociation.struct_class = Types::ResolverQueryLogConfigAssociation
+
+    ResolverQueryLogConfigAssociationList.member = Shapes::ShapeRef.new(shape: ResolverQueryLogConfigAssociation)
+
+    ResolverQueryLogConfigList.member = Shapes::ShapeRef.new(shape: ResolverQueryLogConfig)
+
     ResolverRule.add_member(:id, Shapes::ShapeRef.new(shape: ResourceId, location_name: "Id"))
     ResolverRule.add_member(:creator_request_id, Shapes::ShapeRef.new(shape: CreatorRequestId, location_name: "CreatorRequestId"))
     ResolverRule.add_member(:arn, Shapes::ShapeRef.new(shape: Arn, location_name: "Arn"))
@@ -346,6 +489,8 @@ module Aws::Route53Resolver
     ResolverRule.add_member(:resolver_endpoint_id, Shapes::ShapeRef.new(shape: ResourceId, location_name: "ResolverEndpointId"))
     ResolverRule.add_member(:owner_id, Shapes::ShapeRef.new(shape: AccountId, location_name: "OwnerId"))
     ResolverRule.add_member(:share_status, Shapes::ShapeRef.new(shape: ShareStatus, location_name: "ShareStatus"))
+    ResolverRule.add_member(:creation_time, Shapes::ShapeRef.new(shape: Rfc3339TimeString, location_name: "CreationTime"))
+    ResolverRule.add_member(:modification_time, Shapes::ShapeRef.new(shape: Rfc3339TimeString, location_name: "ModificationTime"))
     ResolverRule.struct_class = Types::ResolverRule
 
     ResolverRuleAssociation.add_member(:id, Shapes::ShapeRef.new(shape: ResourceId, location_name: "Id"))
@@ -383,8 +528,8 @@ module Aws::Route53Resolver
 
     SecurityGroupIds.member = Shapes::ShapeRef.new(shape: ResourceId)
 
-    Tag.add_member(:key, Shapes::ShapeRef.new(shape: TagKey, location_name: "Key"))
-    Tag.add_member(:value, Shapes::ShapeRef.new(shape: TagValue, location_name: "Value"))
+    Tag.add_member(:key, Shapes::ShapeRef.new(shape: TagKey, required: true, location_name: "Key"))
+    Tag.add_member(:value, Shapes::ShapeRef.new(shape: TagValue, required: true, location_name: "Value"))
     Tag.struct_class = Types::Tag
 
     TagKeyList.member = Shapes::ShapeRef.new(shape: TagKey)
@@ -463,6 +608,22 @@ module Aws::Route53Resolver
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
       end)
 
+      api.add_operation(:associate_resolver_query_log_config, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "AssociateResolverQueryLogConfig"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: AssociateResolverQueryLogConfigRequest)
+        o.output = Shapes::ShapeRef.new(shape: AssociateResolverQueryLogConfigResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceExistsException)
+        o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServiceErrorException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+      end)
+
       api.add_operation(:associate_resolver_rule, Seahorse::Model::Operation.new.tap do |o|
         o.name = "AssociateResolverRule"
         o.http_method = "POST"
@@ -471,6 +632,7 @@ module Aws::Route53Resolver
         o.output = Shapes::ShapeRef.new(shape: AssociateResolverRuleResponse)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceUnavailableException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceExistsException)
@@ -491,6 +653,22 @@ module Aws::Route53Resolver
         o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServiceErrorException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+      end)
+
+      api.add_operation(:create_resolver_query_log_config, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "CreateResolverQueryLogConfig"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: CreateResolverQueryLogConfigRequest)
+        o.output = Shapes::ShapeRef.new(shape: CreateResolverQueryLogConfigResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceExistsException)
+        o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServiceErrorException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
       end)
 
       api.add_operation(:create_resolver_rule, Seahorse::Model::Operation.new.tap do |o|
@@ -522,6 +700,20 @@ module Aws::Route53Resolver
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
       end)
 
+      api.add_operation(:delete_resolver_query_log_config, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DeleteResolverQueryLogConfig"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DeleteResolverQueryLogConfigRequest)
+        o.output = Shapes::ShapeRef.new(shape: DeleteResolverQueryLogConfigResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServiceErrorException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+      end)
+
       api.add_operation(:delete_resolver_rule, Seahorse::Model::Operation.new.tap do |o|
         o.name = "DeleteResolverRule"
         o.http_method = "POST"
@@ -549,6 +741,20 @@ module Aws::Route53Resolver
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
       end)
 
+      api.add_operation(:disassociate_resolver_query_log_config, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DisassociateResolverQueryLogConfig"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DisassociateResolverQueryLogConfigRequest)
+        o.output = Shapes::ShapeRef.new(shape: DisassociateResolverQueryLogConfigResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServiceErrorException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+      end)
+
       api.add_operation(:disassociate_resolver_rule, Seahorse::Model::Operation.new.tap do |o|
         o.name = "DisassociateResolverRule"
         o.http_method = "POST"
@@ -571,6 +777,47 @@ module Aws::Route53Resolver
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServiceErrorException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+      end)
+
+      api.add_operation(:get_resolver_query_log_config, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetResolverQueryLogConfig"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: GetResolverQueryLogConfigRequest)
+        o.output = Shapes::ShapeRef.new(shape: GetResolverQueryLogConfigResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServiceErrorException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+      end)
+
+      api.add_operation(:get_resolver_query_log_config_association, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetResolverQueryLogConfigAssociation"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: GetResolverQueryLogConfigAssociationRequest)
+        o.output = Shapes::ShapeRef.new(shape: GetResolverQueryLogConfigAssociationResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServiceErrorException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+      end)
+
+      api.add_operation(:get_resolver_query_log_config_policy, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetResolverQueryLogConfigPolicy"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: GetResolverQueryLogConfigPolicyRequest)
+        o.output = Shapes::ShapeRef.new(shape: GetResolverQueryLogConfigPolicyResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: UnknownResourceException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServiceErrorException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
       end)
 
       api.add_operation(:get_resolver_rule, Seahorse::Model::Operation.new.tap do |o|
@@ -646,6 +893,46 @@ module Aws::Route53Resolver
         )
       end)
 
+      api.add_operation(:list_resolver_query_log_config_associations, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListResolverQueryLogConfigAssociations"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: ListResolverQueryLogConfigAssociationsRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListResolverQueryLogConfigAssociationsResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServiceErrorException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
+      api.add_operation(:list_resolver_query_log_configs, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListResolverQueryLogConfigs"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: ListResolverQueryLogConfigsRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListResolverQueryLogConfigsResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidNextTokenException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServiceErrorException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
       api.add_operation(:list_resolver_rule_associations, Seahorse::Model::Operation.new.tap do |o|
         o.name = "ListResolverRuleAssociations"
         o.http_method = "POST"
@@ -696,6 +983,26 @@ module Aws::Route53Resolver
         o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServiceErrorException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
+      api.add_operation(:put_resolver_query_log_config_policy, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "PutResolverQueryLogConfigPolicy"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: PutResolverQueryLogConfigPolicyRequest)
+        o.output = Shapes::ShapeRef.new(shape: PutResolverQueryLogConfigPolicyResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidPolicyDocument)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: UnknownResourceException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServiceErrorException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
       end)
 
       api.add_operation(:put_resolver_rule_policy, Seahorse::Model::Operation.new.tap do |o|
@@ -719,6 +1026,7 @@ module Aws::Route53Resolver
         o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidTagException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServiceErrorException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
@@ -732,6 +1040,7 @@ module Aws::Route53Resolver
         o.output = Shapes::ShapeRef.new(shape: UntagResourceResponse)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServiceErrorException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
       end)

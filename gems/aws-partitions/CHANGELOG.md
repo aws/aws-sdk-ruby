@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.360.0 (2020-08-26)
+------------------
+
+* Feature - Added support for enumerating regions for `Aws::Appflow`.
+
 1.359.0 (2020-08-24)
 ------------------
 

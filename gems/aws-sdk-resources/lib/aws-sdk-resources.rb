@@ -17,6 +17,7 @@ module Aws
   autoload :AppMesh, 'aws-sdk-appmesh'
   autoload :AppStream, 'aws-sdk-appstream'
   autoload :AppSync, 'aws-sdk-appsync'
+  autoload :Appflow, 'aws-sdk-appflow'
   autoload :ApplicationAutoScaling, 'aws-sdk-applicationautoscaling'
   autoload :ApplicationDiscoveryService, 'aws-sdk-applicationdiscoveryservice'
   autoload :ApplicationInsights, 'aws-sdk-applicationinsights'

@@ -38,6 +38,9 @@
   "AppSync": {
     "models": "appsync/2017-07-25"
   },
+  "Appflow": {
+    "models": "appflow/2020-08-23"
+  },
   "ApplicationAutoScaling": {
     "models": "application-autoscaling/2016-02-06",
     "partitionsKey": "application-autoscaling"

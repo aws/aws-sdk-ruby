@@ -235,6 +235,7 @@ module Aws
             'AppMesh' => 'appmesh',
             'AppStream' => 'appstream2',
             'AppSync' => 'appsync',
+            'Appflow' => 'appflow',
             'ApplicationAutoScaling' => 'application-autoscaling',
             'ApplicationDiscoveryService' => 'discovery',
             'ApplicationInsights' => 'applicationinsights',
